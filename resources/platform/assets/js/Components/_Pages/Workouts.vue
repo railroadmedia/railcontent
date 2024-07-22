@@ -110,15 +110,15 @@
 // TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
 import { ref } from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
-import Tooltip from '../Tooltip/Tooltip';
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import HeaderCarousel from '../HeaderCarousel/HeaderCarousel';
-import CatalogueCardContainer from '../Catalogue/CatalogueCardContainer';
-import CollectionWrapper from '../CollectionWrapper/CollectionWrapper';
-import InfoModal from "../Modal/InfoModal";
-import MuButton from '../Button/MuButton';
+import Tooltip from '@collections/Tooltip/Tooltip';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel';
+import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+import InfoModal from "@collections/Modal/InfoModal";
+import MuButton from '@units/Button/MuButton';
 
 const props = defineProps({
     breadcrumbLastLevelUrl: {

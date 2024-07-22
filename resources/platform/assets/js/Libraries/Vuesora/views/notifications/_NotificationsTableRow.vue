@@ -55,7 +55,7 @@
 </template>
 <script setup>
 import axios from 'axios';
-import { borderColor } from '../../../../Constants/brands';
+import { borderColor } from '@constants/brands';
 import { computed, onMounted } from 'vue';
 import { TrashIcon, EyeIcon, EyeOffIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid';
 

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import MusoraIcon from '../../../../Components/MusoraIcons/MusoraIcon.vue'
+import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue'
 
 const iconAllowList = {
   playlist: true,

@@ -87,7 +87,7 @@ import { DateTime } from 'luxon';
 import ContentModel from '../../assets/js/models/_model.js';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import ThemeClasses from '../../mixins/ThemeClasses';
-import DifficultyLabel from '../../../../Components/DifficultyLabel/DifficultyLabel'
+import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel'
 
 export default {
     name: 'ScheduleItem',

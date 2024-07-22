@@ -110,14 +110,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import { useUserStore } from "../../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { initRecharge, loginShopifyAppProxy, loginWithShopifyStorefront, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
-import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-import PageHeader from '../../PageHeader/PageHeader';
-import MuToggle from '../../FormInputs/MuToggle.vue';
-import PillNav from "../../PillNav/PillNav.vue";
-import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
-import MuButton from "../../Button/MuButton.vue";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import MuToggle from '@units/FormInputs/MuToggle.vue';
+import PillNav from "@collections/PillNav/PillNav.vue";
+import DeleteAccountModal from "@collections/Modal/DeleteAccountModal.vue";
+import MuButton from "@units/Button/MuButton.vue";
 
 const props = defineProps({
     storeIdentifier: String,

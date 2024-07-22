@@ -37,12 +37,12 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import useUserCatalogueEvents from "../../Hooks/useUserCatalogueEvents";
-import PageHeader from "../PageHeader/PageHeader";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import ContentInfo from "../ContentInfo/ContentInfo";
-import CompletionBonus from "../CompletionBonus/CompletionBonus";
-import CatalogueCard from "../Catalogue/CatalogueCard";
+import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
+import PageHeader from "@collections/PageHeader/PageHeader";
+import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
+import ContentInfo from "@collections/ContentInfo/ContentInfo";
+import CompletionBonus from "@collections/CompletionBonus/CompletionBonus";
+import CatalogueCard from "@collections/Catalogue/CatalogueCard";
 
 const props = defineProps({
     breadcrumbs: {

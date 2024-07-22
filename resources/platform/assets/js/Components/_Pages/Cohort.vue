@@ -324,10 +324,10 @@
 import { inject, ref, computed, onBeforeMount } from 'vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../Stores/user";
-import CohortDropdown from '../Dropdown/CohortDropdown';
-import VideoModal from '../Modal/VideoModal';
-import ModalRenderer from "../Modal/ModalRenderer";
+import { useUserStore } from "@stores/user";
+import CohortDropdown from '@collections/Dropdown/CohortDropdown';
+import VideoModal from '@collections/Modal/VideoModal';
+import ModalRenderer from "@collections/Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
 
 const userStore = useUserStore();

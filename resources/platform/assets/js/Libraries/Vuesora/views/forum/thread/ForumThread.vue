@@ -149,9 +149,9 @@ import ForumService from '../../../assets/js/Services/forums';
 import TextEditor from '../../../Components/TextEditor/TextEditor.vue';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import CommentLikesModal from '../../comments/_CommentLikesModal.vue';
-import PageHeader from '../../../../../Components/PageHeader/PageHeader.vue';
-import Breadcrumb from '../../../../../Components/Breadcrumb/Breadcrumb.vue';
-import { useUserStore } from "../../../../../Stores/user";
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -678,4 +678,4 @@ p iframe {
     max-width: 36px;
 }
 </style>
-../../../assets/js/Services/forums../../../../../Components/PageHeader/PageHeader.vue../../../../../Components/Breadcrumb/Breadcrumb.vue../../../../Components/Pagination.vue../../../../Components/TextEditor/TextEditor.vue
+../../../assets/js/Services/forums@collections/PageHeader/PageHeader.vue@collections/Breadcrumb/Breadcrumb.vue../../../../Components/Pagination.vue../../../../Components/TextEditor/TextEditor.vue

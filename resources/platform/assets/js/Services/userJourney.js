@@ -2,7 +2,7 @@
 
 // Add to existing imports
 import axios from 'axios';
-import { useUserStore } from "../Stores/user";
+import { useUserStore } from "@stores/user";
 
 export default {
     //-------------JOURNEYS--------------//

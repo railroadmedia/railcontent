@@ -17,7 +17,7 @@
 <script setup>
 import { ref, computed, watch, nextTick, inject, onMounted } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
-import ImageUploader from '../../../../Components/ImageUploader/ImageUploader.vue';
+import ImageUploader from '@collections/ImageUploader/ImageUploader.vue';
 
 const props = defineProps({
     height: {

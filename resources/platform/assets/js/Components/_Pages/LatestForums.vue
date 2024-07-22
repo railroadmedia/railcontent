@@ -27,9 +27,9 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import Breadcrumb from "../Breadcrumb/Breadcrumb.vue";
-import PageHeader from "../PageHeader/PageHeader.vue";
-import { useUserStore } from "../../Stores/user";
+import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
+import PageHeader from "@collections/PageHeader/PageHeader.vue";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia";
 
 const props = defineProps({
@@ -84,3 +84,4 @@ const headerData = computed(() => {
     };
 });
 </script>
+../_Collections/Breadcrumb/Breadcrumb.vue

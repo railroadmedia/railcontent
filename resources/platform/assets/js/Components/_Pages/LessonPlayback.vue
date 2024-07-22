@@ -167,22 +167,22 @@
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import YoutubePlayer from "../../Libraries/Vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
-import VideoButtons from "../VideoButtons/VideoButtons.vue";
-import VideoResources from "../../Libraries/Vuesora/Components/VideoResources/VideoResources.vue";
-import VideoComments from "../../Libraries/Vuesora/views/comments/Comments.vue";
-import ContentInfo from "../ContentInfo/ContentInfo.vue";
-import Intercom from "../../Libraries/Vuesora/assets/js/Services/intercom";
-import Helpscout from "../../Libraries/Vuesora/assets/js/Services/helpscout";
-import ProgressTracker from "../../Libraries/Vuesora/assets/js/classes/progress-tracker";
-import ContentService from "../../Libraries/Vuesora/assets/js/Services/content";
-import ContentProgress from "../ContentProgress/ContentProgress.vue";
-import RelatedLessonsToggle from "../RelatedLessons/RelatedLessonsToggle.vue";
-import RelatedLessons from "../RelatedLessons/RelatedLessons.vue";
-import LessonComplete from "../ContentProgress/LessonComplete.vue";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
+import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
+import VideoResources from "@vuesora/Components/VideoResources/VideoResources.vue";
+import VideoComments from "@vuesora/views/comments/Comments.vue";
+import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
+import Intercom from "@vuesora/assets/js/Services/intercom";
+import Helpscout from "@vuesora/assets/js/Services/helpscout";
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
+import ContentService from "@vuesora/assets/js/Services/content";
+import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
+import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
+import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
+import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
 
 const props = defineProps({
     thisLessonJson: {

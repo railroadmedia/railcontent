@@ -1,5 +1,5 @@
 import ContentService from '../assets/js/Services/content';
-import {useResetProgress} from "../../../Hooks/useResetProgress";
+import {useResetProgress} from "@hooks/useResetProgress";
 
 const getValue = (obj, key) => {
     const filtered = obj.filter((field) => {

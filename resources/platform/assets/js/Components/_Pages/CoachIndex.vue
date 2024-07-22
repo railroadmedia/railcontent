@@ -96,16 +96,16 @@
 <script setup>
 import { computed, onMounted } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../Stores/user";
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import PageHeader from '../PageHeader/PageHeader';
-import CoachEvent from "../../Libraries/Vuesora/Components/Coaches/CoachEvent";
-import StaticHeader from '../HeaderCarousel/StaticHeader';
-import HeaderCarousel from '../HeaderCarousel/HeaderCarousel';
-import MiniCatalogueSection from '../MiniCatalogueSection/MiniCatalogueSection';
-import UpcomingCoach from '../UpcomingCoach/UpcomingCoach';
-import ActiveCoach from '../ActiveCoach/ActiveCoach';
-import CollectionWrapper from '../CollectionWrapper/CollectionWrapper';
+import { useUserStore } from "@stores/user";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import CoachEvent from "@vuesora/Components/Coaches/CoachEvent";
+import StaticHeader from '@collections/HeaderCarousel/StaticHeader';
+import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
+import UpcomingCoach from '@collections/UpcomingCoach/UpcomingCoach';
+import ActiveCoach from '@collections/ActiveCoach/ActiveCoach';
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 
 const props = defineProps({
     activeCoaches: {
