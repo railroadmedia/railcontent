@@ -49,11 +49,11 @@ import Login from './Components/_Pages/Login.vue';
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
 import PageContainer from './Components/_Collections/PageContainer/PageContainer.vue';
-import CatalogueCardContainer from './Components/_CollectionsCatalogue/CatalogueCardContainer.vue';
+import CatalogueCardContainer from './Components/_Collections/Catalogue/CatalogueCardContainer.vue';
 import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './Components/_Collections/HeaderCarousel/StaticHeader.vue'
 import ResetPassForm from './Components/_Collections/ResetPassForm/ResetPassForm.vue';
-import MusoraIcon from './Components/_Collections/MusoraIcons/MusoraIcon.vue'
+import MusoraIcon from './Components/_Units/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './Components/_Collections/GearCarousel/GearCarousel.vue';
 import ContentInfo from './Components/_Collections/ContentInfo/ContentInfo';
 import CollectionWrapper from './Components/_Collections/CollectionWrapper/CollectionWrapper';
