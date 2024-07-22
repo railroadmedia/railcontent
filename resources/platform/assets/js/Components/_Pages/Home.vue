@@ -259,4 +259,3 @@
         singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
     }
 </script>
-@vuesora/Components/Coaches/CoachEvent.vue@vuesora/components/Coaches/CoachEvent.vue
