@@ -42,7 +42,7 @@
     />
 </template>
 <script setup>
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import CoachEvent from "@vuesora/Components/Coaches/CoachEvent";
