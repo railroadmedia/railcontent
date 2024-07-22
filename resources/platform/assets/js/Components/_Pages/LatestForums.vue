@@ -84,4 +84,3 @@ const headerData = computed(() => {
     };
 });
 </script>
-../_Collections/Breadcrumb/Breadcrumb.vue
