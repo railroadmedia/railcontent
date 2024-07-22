@@ -44,6 +44,7 @@ import Catalogue from './Components/_Pages/Catalogue/Catalogue';
 import Search from './Components/_Pages/Search';
 import PackOverview from './Components/_Pages/PackOverview';
 import PackOverviewBundles from './Components/_Pages/PackOverviewBundles';
+import Login from './Components/_Pages/Login.vue';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -51,7 +52,6 @@ import PageContainer from './Components/PageContainer/PageContainer.vue';
 import CatalogueCardContainer from './Components/Catalogue/CatalogueCardContainer.vue';
 import HeaderCarousel from './Components/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './Components/HeaderCarousel/StaticHeader.vue'
-import LoginForm from './Components/LoginForm/LoginForm.vue';
 import ResetPassForm from './Components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './Components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './Components/GearCarousel/GearCarousel.vue';
@@ -181,7 +181,6 @@ app.component('AppContainer', AppContainer)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
     .component('CoachEvent', CoachEvent)
-    .component('LoginForm', LoginForm)
     .component('ResetPassForm', ResetPassForm)
     .component('NotificationsTable', NotificationsTable)
     .component('MusoraIcon', MusoraIcon)
@@ -231,6 +230,8 @@ app.component('AppContainer', AppContainer)
     .component('Search', Search)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
+    .component('Login', Login)
+
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

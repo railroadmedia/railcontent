@@ -132,7 +132,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
 
-        // $schedule->command('user:sendAccountSetupEmail')->dailyAt('11:00'); //3am PST
+        $schedule->command('user:sendAccountSetupEmail')->dailyAt('11:00'); //3am PST
     }
 
     /**
