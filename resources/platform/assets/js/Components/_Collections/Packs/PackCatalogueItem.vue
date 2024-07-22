@@ -142,7 +142,7 @@ const props = defineProps({
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
-    if(isAdmin) return true;
+    if(isAdmin.value) return true;
 
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
 })

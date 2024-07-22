@@ -35,7 +35,6 @@
             title="lessons"
         />
     </div>
-
     <!-- Coach Footer -->
     <CoachFooter
         :coach-data="coachData"
@@ -131,9 +130,5 @@ const headerHeroImg = computed(() => {
 
 const fullName = computed(() => {
     return props.coachData.name;
-})
-
-onMounted(() => {
-    console.log('coach',props.coachData)
 })
 </script>
