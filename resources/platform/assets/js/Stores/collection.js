@@ -15,7 +15,7 @@ export const useCollectionStore = defineStore({
             fetching: false,
             filter: {
                 activeTab: '',
-                includedFields: [],
+                included_fields: [],
                 limit: 10,
                 params: {},
                 searchTerm: '',
@@ -68,18 +68,18 @@ export const useCollectionStore = defineStore({
         },
 
         updateIncludedFields(param) {
-            const itemIndex = this.filter.includedFields.findIndex(f => f === param);
+            const itemIndex = this.filter.included_fields.findIndex(f => f === param);
 
             if (itemIndex === -1) {
-                this.filter.includedFields.push(param);
+                this.filter.included_fields.push(param);
             } else {
-                this.filter.includedFields.splice(itemIndex, 1);
+                this.filter.included_fields.splice(itemIndex, 1);
             }
             this.trackFilter();
         },
 
         resetFilterFields() {
-            this.filter.includedFields = [];
+            this.filter.included_fields = [];
         },
 
         formattedTabs() {
@@ -100,7 +100,7 @@ export const useCollectionStore = defineStore({
                                 page: this.tabData[this.filter.activeTab].currentPage,
                                 sort: this.filter.sort,
                                 ...this.filter.params,
-                                included_fields: this.filter.includedFields,
+                                included_fields: this.filter.included_fields,
                                 count_filter_items: true,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
                                 ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
@@ -144,7 +144,7 @@ export const useCollectionStore = defineStore({
 
             //Get filters
             if (params.getAll('included_fields[]').length > 0) {
-                this.filter.includedFields = params.getAll('included_fields[]');
+                this.filter.included_fields = params.getAll('included_fields[]');
             }
 
             //GetProgress
@@ -265,8 +265,8 @@ export const useCollectionStore = defineStore({
             this.filter.searchTerm && url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
             url.searchParams.set('sort', this.filter.sort);
 
-            if (this.filter.includedFields.length > 0) {
-                this.filter.includedFields.map((field) => {
+            if (this.filter.included_fields.length > 0) {
+                this.filter.included_fields.map((field) => {
                     url.searchParams.append('included_fields[]', field);
                 })
             }
@@ -353,7 +353,7 @@ export const useCollectionStore = defineStore({
                 brand: userStore.brand,
                 section: userStore.journeySection,
                 progress: this.filter.progress,
-                filters: this.filter.includedFields,
+                filters: this.filter.included_fields,
             };
 
             userJourney.trackFilter({

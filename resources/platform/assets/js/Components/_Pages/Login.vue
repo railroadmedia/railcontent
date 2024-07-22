@@ -1,0 +1,322 @@
+<script setup>
+import { ref, onBeforeMount, computed } from "vue";
+import axios from "axios";
+import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
+import InputLabel from "../InputLabel/InputLabel.vue";
+import LoginButton from "../Button/LoginButton.vue";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
+import MuButton from "../Button/MuButton.vue";
+import NotificationToasts from "../../Libraries/Vuesora/Components/NotificationToasts/NotificationToasts.vue";
+
+import { useNotificationStore } from '../../Stores/notification';
+import { useUserStore } from "../../Stores/user";
+const userStore = useUserStore();
+const notification = useNotificationStore();
+
+const props = defineProps({
+  loginurl: {
+    type: String,
+  },
+  reseturl: {
+    type: String,
+  },
+  joinurl: {
+    type: String,
+  },
+  usecsrftoken: {
+    type: Boolean,
+  },
+  errors: {
+    type: Array,
+  },
+  hassessionstatus: {
+    type: Boolean,
+    default: false,
+  },
+  sessionstatus: {
+    type: String,
+    default: "",
+  },
+  orderNowUrl: {
+    type: String,
+    default: '',
+  },
+});
+
+const currentForm = ref("login-email");
+const emailError = ref('');
+const passwordError = ref('');
+const emailInput = ref('');
+const passwordInput = ref('');
+const isLoading = ref(false);
+const isPasswordVisible = ref(false);
+const isResendButtonDisabled = ref(false);
+
+const changeCurrentForm = (val) => {
+  currentForm.value = val;
+  emailError.value = '';
+  passwordError.value = '';
+};
+
+const handleEmailChange = (val) => {
+  emailError.value = '';
+  emailInput.value = val;
+};
+
+const handlePasswordChange = (val) => {
+  passwordError.value = '';
+  passwordInput.value = val;
+};
+
+const handleButtonClick = () => {
+  isLoading.value = true;
+  localStorage.setItem("lastEmailUsed", emailInput.value);
+
+  axios.post('/user-management-system/login', { email: emailInput.value, password: passwordInput.value })
+    .then((response) => {
+      if (response.status === 200) {
+        const redirectTo = new URLSearchParams(window.location.search).get('redirect_to');
+        if (redirectTo) {
+          window.location.href = redirectTo;
+        } else {
+          window.location.href = response.data.redirect_to;
+        }
+      }
+    })
+    .catch((e) => {
+      isLoading.value = false;
+      passwordError.value = "Wrong password. If you’ve forgotten your password, click on “Forgot Your Password?” below to reset it.";
+    });
+};
+
+const toggleSeePassword = () => {
+  isPasswordVisible.value = !isPasswordVisible.value;
+};
+
+const isButtonDisabled = computed(() => {
+  return !(emailInput && passwordInput && emailInput.value && passwordInput.value && !isLoading.value);
+});
+
+onBeforeMount(() => {
+  if (localStorage.getItem("lastEmailUsed") && props.errors?.length) {
+    emailInput.value = localStorage.getItem("lastEmailUsed");
+  }
+
+  let urlParams = new URLSearchParams(window.location.search);
+
+  if (urlParams.has('email')) {
+    emailInput.value = urlParams.get('email');
+  }
+
+});
+
+const showNotification = (payload) => {
+  notification.push(payload);
+};
+
+const validateEmail = () => {
+  emailError.value = '';
+  axios.post('/user-management-system/login/check-email', { email: emailInput.value })
+    .then((response) => {
+      if (response.data.is_setup) {
+        changeCurrentForm('login-password');
+      } else {
+        changeCurrentForm('setup');
+      }
+    })
+    .catch(() => {
+      emailError.value = "This account does not exist. If you believe this is an error, please contact support.";
+    });
+};
+
+const resendEmail = () => {
+  axios.post('/user-management-system/login/send-setup-email', { email: emailInput.value })
+    .then(() => {
+      isResendButtonDisabled.value = true;
+
+      showNotification({
+        icon: 'check',
+        text: 'We’ve sent the link to complete your account. Please check your email.'
+      });
+    })
+    .catch(() => {
+      showNotification({
+        icon: 'error',
+        text: 'There was an error processing this request, please try again later.'
+      });
+    });
+};
+</script>
+
+<template>
+  <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :isMembersArea="false" />
+    <img id="loginBgImg"
+      src="https://www.musora.com/musora-cdn/image/width=1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/musora/musora_login.jpg"
+      class="tw-absolute tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-w-full tw-h-full tw-z-10"
+      loading="lazy" onload="document.getElementById('loginBgImg').classList.remove('tw-opacity-0')">
+    <div
+      class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
+      <section id="logoContainer" class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center">
+        <img class="tw-w-full tw-max-w-[280px] tw-mb-6"
+          src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo">
+        <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span
+            class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span
+            class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
+      </section>
+
+      <div class="tw-flex tw-flex-col tw-w-full tw-px-4 tw-items-center">
+        <form v-if="currentForm === 'login-email'" id="loginEmailForm" class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-full
+        tw-max-w-[423px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-px-[30px]
+        tw-py-[40px]
+      ">
+          <ul v-if="emailError.length" class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
+            {{ emailError }}
+          </ul>
+          <ul v-if="hassessionstatus && sessionstatus"
+            class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none">
+            <li>{{ sessionstatus }}</li>
+          </ul>
+          <div class="tw-flex tw-flex-col tw-mb-[20px]">
+            <InputLabel :initialValue="emailInput" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+              :brand="userStore.brand" inputType="email" id="loginEmail" inputName="email" labelValue="Email Address"
+              placeholder="Enter your email..." :inputErrors="[]" @onChange="handleEmailChange"
+              @onEnter="validateEmail" />
+          </div>
+
+          <LoginButton :disabled="emailInput.length === 0" type="button" @on-button-click="validateEmail">
+            <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
+              <LoadingSpinner /> NEXT
+            </span>
+            <span v-if="!isLoading">NEXT</span>
+          </LoginButton>
+        </form>
+        <form v-if="currentForm === 'login-password'" id="loginPasswordForm" class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-full
+        tw-max-w-[423px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-px-[30px]
+        tw-py-[40px]
+      ">
+          <div v-if="passwordError && passwordError.length > 0" class="tw-flex tw-mb-3 tw-text-xs tw-text-pianote">
+            {{ passwordError }}
+          </div>
+          <ul v-if="hassessionstatus && sessionstatus"
+            class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none">
+            <li>{{ sessionstatus }}</li>
+          </ul>
+          <input type="hidden" name="email" :value="emailInput" />
+          <div class="tw-flex tw-flex-col tw-mb-[20px] tw-relative">
+            <InputLabel wrapperOverride="tw-text-[16px]" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+              :brand="userStore.brand" :inputType="isPasswordVisible ? 'text' : 'password'" id="loginPassword"
+              inputName="password" labelValue="Password" placeholder="Enter your password..." :inputErrors="[]"
+              @onChange="handlePasswordChange" @onEnter="handleButtonClick" :showCustomButton="true">
+              <template #custom-btn>
+                <button type="button"
+                  class="tw-w-[24px] tw-h-[24px] tw-absolute tw-flex tw-items-center tw-justify-center tw-right-3 tw-text-black"
+                  @click="toggleSeePassword">
+                  <EyeIcon class="tw-w-[24px] tw-h-[24px]" v-if="!isPasswordVisible" />
+                  <EyeOffIcon class="tw-w-[24px] tw-h-[24px]" v-if="isPasswordVisible" />
+                </button>
+              </template>
+            </InputLabel>
+          </div>
+
+          <LoginButton :disabled="isButtonDisabled" type="button" @on-button-click="handleButtonClick">
+            <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
+              <LoadingSpinner /> SIGNING IN
+            </span>
+            <span v-if="!isLoading">SIGN IN</span>
+          </LoginButton>
+
+          <button id="hidden-submit" type="submit" hidden>Submit</button>
+          <a id="resetToggle" class="text-center text-grey-3 noselect tw-text-[16px] tw-mt-[20px]"
+            @click="() => changeCurrentForm('reset')">Forgot your password?</a>
+        </form>
+        <section v-if="currentForm === 'reset'" id="resetForm" class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-full
+        tw-max-w-[423px]
+        tw-h-[369px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-px-[30px]
+        tw-py-[40px]
+      ">
+          <p class="text-grey-3 tw-mb-[20px]">
+            Please enter your email address and we will send you instructions to reset
+            your password.
+          </p>
+
+          <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
+            <slot v-if="usecsrftoken" name="csrf"></slot>
+            <div class="tw-flex tw-flex-col tw-mb-[20px]">
+              <InputLabel :initialValue="emailInput" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+                :brand="userStore.brand" inputType="email" id="resetEmail" inputName="email" labelValue="Email Address"
+                placeholder="Enter your email..." :inputErrors="[]" @onChange="handleEmailChange" />
+            </div>
+            <LoginButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
+          </form>
+
+          <a id="loginToggle" class="tw-text-center text-grey-3 noselect tw-pt-[20px]" @click="() => changeCurrentForm('login-email')">Back
+            to
+            Login</a>
+        </section>
+        <section v-if="currentForm === 'setup'" id="setupForm" class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-full
+        tw-max-w-[423px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-px-[30px]
+        tw-py-[40px]
+        tw-text-center
+      ">
+          <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] tw-mb-[30px]">You're almost there!</h2>
+          <p class="tw-mb-[30px]">
+            We’ve sent the link to complete your account to <strong>{{ emailInput }}</strong>
+            <br /><br />
+            Didn’t get it? Please check your spam or resend the email link to try again.
+          </p>
+          <MuButton styleType="secondary" class="tw-bg-[#081825] tw-border-[2px] tw-border-white hover:tw-bg-white tw-text-white hover:tw-text-[#081825]" :disabled="isResendButtonDisabled" @click="resendEmail">RESEND EMAIL
+          </MuButton>
+        </section>
+      </div>
+
+      <p v-if="currentForm === 'login-email'" class="tiny tw-text-center tw-py-[20px] tw-text-[16px]">
+        <span>Not a member yet?</span>
+        <br />
+        <a class="tw-text-white tw-font-extrabold tw-underline" :href="orderNowUrl">
+          Join the community here!
+        </a>
+      </p>
+    </div>
+  </div>
+</template>
+
+<style type="text/css">
+.loginEmail-label,
+.loginPassword-label {
+  font-weight: 700;
+  font-size: 16px;
+}
+</style>

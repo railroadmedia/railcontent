@@ -78,10 +78,19 @@ class AuthenticationController extends Controller
      */
     public function login(Request $request): JsonResponse
     {
-        ['email' => $email, 'password' => $password] = $request->validate([
-            'email' => 'required|email|exists:usora_users,email',
-            'password' => 'required|string',
-        ]);
+        try {
+            $request->validate([
+                'email' => 'required|email|exists:usora_users,email',
+                'password' => 'required|string',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Invalid credentials',
+            ], 401);
+        }
+
+        $email = $request->get('email');
+        $password = $request->get('password');
 
         $remember = config('user_management_system.force_remember', false) || (bool)$request->get('remember', false);
 
@@ -94,14 +103,16 @@ class AuthenticationController extends Controller
 
             $this->authenticated($user, $password);
 
-            return response()->json();
+            return response()->json([
+                'message' => 'success',
+                'redirect_to' => $request->get('redirect_to', '/' . brand()),
+            ]);
         }
 
         return response()->json([
             'message' => 'Invalid credentials',
         ], 401);
     }
-
 
     /*******************************************************************************************************************
      * Old web log in flow

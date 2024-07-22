@@ -3,9 +3,9 @@
     <div style="position: fixed; left: 0; width: 100vw; z-index: 10000; bottom: 40px;">
       <div class="tw-text-center tw-pb-6">
         <div class="lg:tw-flex">
-          <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
+          <div v-if="isMembersArea" class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
           <div class="lg:tw-flex-1 tw-flex tw-justify-center">
-            <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
+            <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-mx-auto" :class="isMembersArea ? 'lg:tw-pl-7 lg:tw-pr-9' : 'tw-px-9'">
               <div :class="`
                               tw-px-[16px]
                               tw-py-2
@@ -72,6 +72,10 @@ export default {
     icon: {
       type: String,
       default: () => "",
+    },
+    isMembersArea: {
+      type: Boolean,
+      default: () => true,
     },
     isError: {
       type: Boolean,

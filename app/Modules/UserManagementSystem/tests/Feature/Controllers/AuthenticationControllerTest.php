@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
 use App\Mail\Agnostic;
+use App\Modules\Brand\Services\BrandService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +117,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'email' => $email,
             'password' => Hash::make($password),
         ]);
@@ -132,6 +133,10 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $this->assertTrue(Auth::check());
         Event::assertDispatched(UserEvent::class);
         $response->assertOk();
+        $response->assertJson([
+            "message" => "success",
+            "redirect_to" => '/'.BrandService::getLastUsedBrand($user)
+        ]);
     }
 
     public function test_login_fails_for_invalid_password()
