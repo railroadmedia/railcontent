@@ -19,7 +19,7 @@ class SendAccountSetupEmail extends Command
                     $take,
                 );
             },
-            chunks: 100,
+            chunks: 12,
             queue: 'command'
         );
     }

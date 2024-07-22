@@ -1,284 +1,364 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-<head>
-    <!--[if gte mso 9]>
+<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+<head><title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--[if mso]>
     <xml>
-    <o:OfficeDocumentSettings>
-        <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-    </o:OfficeDocumentSettings>
-    </xml>
-    <![endif]-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="x-apple-disable-message-reformatting">
-    <!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
-    <title>Email Change Request</title>
-
-    <style type="text/css">
-        @media only screen and (min-width: 620px) {
-            .u-row {
-                width: 600px !important;
-            }
-            .u-row .u-col {
-                vertical-align: top;
-            }
-
-            .u-row .u-col-100 {
-                width: 600px !important;
-            }
-
+        <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+    </xml><![endif]-->
+    <title>Complete Your Account</title>
+    <style>
+        * {
+            box-sizing: border-box
         }
 
-        @media (max-width: 620px) {
-            .u-row-container {
-                max-width: 100% !important;
-                padding-left: 0px !important;
-                padding-right: 0px !important;
-            }
-            .u-row .u-col {
-                min-width: 320px !important;
-                max-width: 100% !important;
-                display: block !important;
-            }
-            .u-row {
-                width: calc(100% - 40px) !important;
-            }
-            .u-col {
-                width: 100% !important;
-            }
-            .u-col > div {
-                margin: 0 auto;
-            }
-        }
         body {
             margin: 0;
-            padding: 0;
+            padding: 0
         }
 
-        table,
-        tr,
-        td {
-            vertical-align: top;
-            border-collapse: collapse;
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: inherit !important
+        }
+
+        #MessageViewBody a {
+            color: inherit;
+            text-decoration: none
         }
 
         p {
-            margin: 0;
+            line-height: inherit
         }
 
-        .ie-container table,
-        .mso-container table {
-            table-layout: fixed;
+        .desktop_hide, .desktop_hide table {
+            mso-hide: all;
+            display: none;
+            max-height: 0;
+            overflow: hidden
         }
 
-        * {
-            line-height: inherit;
+        .image_block img + div {
+            display: none
         }
 
-        a[x-apple-data-detectors='true'] {
-            color: inherit !important;
-            text-decoration: none !important;
+        @media (max-width: 520px) {
+            .social_block.desktop_hide .social-table {
+                display: inline-block !important
+            }
+
+            .mobile_hide {
+                display: none
+            }
+
+            .row-content {
+                width: 100% !important
+            }
+
+            .stack .column {
+                width: 100%;
+                display: block
+            }
+
+            .mobile_hide {
+                min-height: 0;
+                max-height: 0;
+                max-width: 0;
+                overflow: hidden;
+                font-size: 0
+            }
+
+            .desktop_hide, .desktop_hide table {
+                display: table !important;
+                max-height: none !important
+            }
         }
-
-        /* hr {
-          border-color: #dedede;
-        } */
-
-        #urlframe {
-            background-color: #fafafa;
-            padding: 8px 10px;
-            border: 1px solid #dedede;
-            border-radius: 8px;
-        }
-
-        table, td { color: #000000; } #u_body a { color: #081825; text-decoration: underline; } @media (max-width: 480px) { #u_content_image_1 .v-src-width { width: auto !important; } #u_content_image_1 .v-src-max-width { max-width: 82% !important; } #u_content_text_2 .v-container-padding-padding { padding: 40px 20px 10px !important; } #u_content_text_8 .v-container-padding-padding { padding: 10px 20px !important; } #u_content_text_8 .v-text-align { text-align: justify !important; } #u_content_text_1 .v-container-padding-padding { padding: 10px 20px !important; } #u_content_text_1 .v-text-align { text-align: justify !important; } #u_content_text_9 .v-container-padding-padding { padding: 10px 20px !important; } #u_content_text_9 .v-text-align { text-align: justify !important; } }
     </style>
-
-
-
-    <!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
-
 </head>
-
-<body class="clean-body u_body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #e7e7e7;color: #000000">
-<!--[if IE]><div class="ie-container"><![endif]-->
-<!--[if mso]><div class="mso-container"><![endif]-->
-<table id="u_body" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #e7e7e7;width:100%" cellpadding="0" cellspacing="0">
+<body class="body" style="background-color:#fff;margin:0;padding:0;-webkit-text-size-adjust:none;text-size-adjust:none">
+<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation"
+       style="mso-table-lspace:0;mso-table-rspace:0;background-color:#fff">
     <tbody>
-    <tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-            <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #e7e7e7;"><![endif]-->
-
-
-            <div class="u-row-container" style="padding: 0px;background-color: #f6f6f6">
-                <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #f6f6f6;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
-                        <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: #f6f6f6;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #f6f6f6;"><![endif]-->
-
-                        <!--[if (mso)|(IE)]><td align="center" width="600" style="background-color: #ffffff;width: 600px;padding: 0px 0px 50px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
-                        <div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;padding: 50px 0px;">
-                            <div style="background-color: #ffffff;height: 100%;width: 100% !important;">
-                                <!--[if (!mso)&(!IE)]><!--><div style="height: 100%; padding: 0px 0px 50px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
-
-                                    <table id="u_content_image_1" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+    <tr>
+        <td>
+            <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0"
+                   role="presentation" style="mso-table-lspace:0;mso-table-rspace:0">
+                <tbody>
+                <tr>
+                    <td>
+                        <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0"
+                               role="presentation"
+                               style="mso-table-lspace:0;mso-table-rspace:0;color:#000;width:500px;margin:0 auto"
+                               width="500">
+                            <tbody>
+                            <tr>
+                                <td class="column column-1" width="100%"
+                                    style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                    <table class="image_block block-1" width="100%" border="0" cellpadding="20"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:80px 40px 80px 40px;background-color: #000c17;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                                    <tr>
-                                                        <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
-
-                                                            <img align="center" border="0" src="{{ $logo }}" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 70%;max-width: 220px;" width="220" class="v-src-width v-src-max-width"/>
-
-                                                        </td>
-                                                    </tr>
-                                                </table>
-
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table id="u_content_text_1" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:40px 10px 10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-size: 18px; line-height: 25.2px; font-family: 'Open Sans', sans-serif;">There’s one more thing…</p>
+                                            <td class="pad">
+                                                <div class="alignment" align="center" style="line-height:10px">
+                                                    <div style="max-width:175px"><a
+                                                            href="https://www.musora.com/members/" target="_blank"
+                                                            style="outline:none" tabindex="-1"><img
+                                                                src="https://drumeo-assets.s3.amazonaws.com/logos/musora-email-header.png"
+                                                                style="display:block;height:auto;border:0;width:100%"
+                                                                width="175" alt=" " title=" " height="auto"></a></div>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-
-                                    <table id="u_content_text_2" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                    <table class="divider_block block-2" width="100%" border="0" cellpadding="0"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        Before you go off exploring everything inside Musora with thousands of music lessons and practice tools. 🚀
-                                                    </p>
+                                            <td class="pad"
+                                                style="padding-bottom:15px;padding-left:10px;padding-right:10px">
+                                                <div class="alignment" align="center">
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                           role="presentation" width="100%"
+                                                           style="mso-table-lspace:0;mso-table-rspace:0">
+                                                        <tr>
+                                                            <td class="divider_inner"
+                                                                style="font-size:1px;line-height:1px;border-top:1px solid #dae3eb">
+                                                                <span>&#8202;</span></td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-                                    <table id="u_content_text_3" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0"
+                   role="presentation" style="mso-table-lspace:0;mso-table-rspace:0">
+                <tbody>
+                <tr>
+                    <td>
+                        <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0"
+                               role="presentation"
+                               style="mso-table-lspace:0;mso-table-rspace:0;color:#343446;width:500px;margin:0 auto"
+                               width="500">
+                            <tbody>
+                            <tr>
+                                <td class="column column-1" width="100%"
+                                    style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                    <table class="heading_block block-1" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        You just need to finish setting up your account:
-                                                    </p>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table id="u_content_text_4" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 14px; line-height: 25.6px;">
-                                                        <a href="{{ $setupAccountUrl }}"> Complete your account </a>
+                                            <td class="pad">
+                                                <div style="font-family:sans-serif">
+                                                    <div class
+                                                         style="font-size:12px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;mso-line-height-alt:18px;color:#404951;line-height:1.5">
+                                                        <p
+                                                            style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">
+                                                                <span style>
+                                                                    There’s one more thing…
+                                                                </span>
+                                                            </span>
+                                                        </p>
                                                     </div>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-
-                                    <table id="u_content_text_5" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                    <table class="text_block block-2" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        We promise it should only take 60 seconds. ⏱️
-                                                    </p>
+                                            <td class="pad">
+                                                <div style="font-family:sans-serif">
+                                                    <div class
+                                                         style="font-size:12px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;mso-line-height-alt:18px;color:#404951;line-height:1.5">
+                                                        <p
+                                                            style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">
+                                                                <span style>
+                                                                    Before you go off exploring everything inside Musora with thousands of music lessons and practice tools.<br><br>
+                                                                    You just need to finish setting up your account:
+                                                                </span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-                                    <table id="u_content_text_6" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                    <table class="button_block block-3" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        Once that’s done you can start improving your technique, building a practice routine, and playing more songs.
-                                                    </p>
-                                                </div>
-
+                                            <td class="pad">
+                                                <div class="alignment" align="center"><!--[if mso]>
+                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
+                                                                 xmlns:w="urn:schemas-microsoft-com:office:word"
+                                                                 href="https://www.musora.com/pianote/profile/settings/account"
+                                                                 style="height:42px;width:245px;v-text-anchor:middle;"
+                                                                 arcsize="143%" stroke="false" fillcolor="#000000">
+                                                        <w:anchorlock/>
+                                                        <v:textbox inset="0px,0px,0px,0px">
+                                                            <center dir="false"
+                                                                    style="color:#ffffff;font-family:Arial, sans-serif;font-size:16px">
+                                                    <![endif]-->
+                                                    <a href="{{ $setupAccountUrl }}"
+                                                       target="_blank"
+                                                       style="background-color:#000000;border-bottom:0px solid transparent;border-left:0px solid transparent;border-radius:60px;border-right:0px solid transparent;border-top:0px solid transparent;color:#ffffff;display:inline-block;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:16px;font-weight:400;mso-border-alt:none;padding-bottom:5px;padding-top:5px;text-align:center;text-decoration:none;width:auto;word-break:keep-all;">
+                                                        <span
+                                                            style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:normal;">
+                                                            <span style="word-break: break-word; line-height: 32px;">
+                                                                <strong>Complete Your Account</strong>
+                                                            </span>
+                                                        </span>
+                                                    </a>
+                                                    <!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-                                    <table id="u_content_text_7" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                    <table class="text_block block-4" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        See you soon!
-                                                    </p>
+                                            <td class="pad">
+                                                <div style="font-family:sans-serif">
+                                                    <div class
+                                                         style="font-size:12px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;mso-line-height-alt:18px;color:#404951;line-height:1.5">
+                                                        <p
+                                                            style="margin:0;font-size:14px;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">
+                                                                We promise it should only take 60 seconds.️
+                                                            </span>
+                                                        </p>
+                                                        <p style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:18px">
+                                                            &nbsp;
+                                                        </p>
+                                                        <p style="margin:0;font-size:14px;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">
+                                                                Once that’s done you can start improving your technique, building a practice routine, and playing more songs.
+                                                            </span>
+                                                        </p>
+                                                        <p style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:18px">
+                                                            &nbsp;</p>
+                                                        <p style="margin:0;font-size:14px;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">
+                                                                See you soon!
+                                                            </span>
+                                                        </p>
+                                                        <p style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:18px">
+                                                            &nbsp;
+                                                        </p>
+                                                        <p style="margin:0;font-size:14px;mso-line-height-alt:21px">
+                                                            <span style="font-size:14px;">- The Musora Team</span></p>
+                                                        <p style="margin:0;font-size:14px;text-align:left;mso-line-height-alt:18px">
+                                                            &nbsp;
+                                                        </p>
+                                                    </div>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-                                    <table id="u_content_text_8" style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                                        <tbody>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0"
+                   role="presentation" style="mso-table-lspace:0;mso-table-rspace:0">
+                <tbody>
+                <tr>
+                    <td>
+                        <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0"
+                               role="presentation"
+                               style="mso-table-lspace:0;mso-table-rspace:0;color:#000;width:500px;margin:0 auto"
+                               width="500">
+                            <tbody>
+                            <tr>
+                                <td class="column column-1" width="100%"
+                                    style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-top:15px;vertical-align:top;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                    <table class="social_block block-1" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0">
                                         <tr>
-                                            <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 40px;font-family:'Open Sans',sans-serif;" align="left">
-
-                                                <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        - The Musora Team
-                                                    </p>
+                                            <td class="pad">
+                                                <div class="alignment" align="center">
+                                                    <table class="social-table" width="156px" border="0" cellpadding="0"
+                                                           cellspacing="0" role="presentation"
+                                                           style="mso-table-lspace:0;mso-table-rspace:0;display:inline-block">
+                                                        <tr>
+                                                            <td style="padding:0 10px 0 10px"><a
+                                                                    href="https://www.facebook.com/groups/pianote/"
+                                                                    target="_blank"><img
+                                                                        src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/circle-gray/facebook@2x.png"
+                                                                        width="32" height="auto" alt="Facebook"
+                                                                        title="Facebook"
+                                                                        style="display:block;height:auto;border:0"></a>
+                                                            </td>
+                                                            <td style="padding:0 10px 0 10px"><a
+                                                                    href="https://www.instagram.com/pianoteofficial/"
+                                                                    target="_blank"><img
+                                                                        src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/circle-gray/instagram@2x.png"
+                                                                        width="32" height="auto" alt="Instagram"
+                                                                        title="Instagram"
+                                                                        style="display:block;height:auto;border:0"></a>
+                                                            </td>
+                                                            <td style="padding:0 10px 0 10px"><a
+                                                                    href="https://www.youtube.com/channel/UC_DmCvOP5Q_eBMRDvqqRXjg"
+                                                                    target="_blank">
+                                                                    <img
+                                                                        src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/circle-gray/youtube@2x.png"
+                                                                        width="32" height="auto" alt="YouTube"
+                                                                        title="YouTube"
+                                                                        style="display:block;height:auto;border:0"></a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
-
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
-                                    <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td><![endif]-->
-                        <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-
-
-            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                    <table class="text_block block-2" width="100%" border="0" cellpadding="10"
+                                           cellspacing="0" role="presentation"
+                                           style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word">
+                                        <tr>
+                                            <td class="pad">
+                                                <div style="font-family:sans-serif">
+                                                    <div class
+                                                         style="font-size:14px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;mso-line-height-alt:16.8px;color:#555;line-height:1.2">
+                                                        <p style="margin:0;text-align:center;mso-line-height-alt:16.8px">
+                                                            <span
+                                                                style="color:#a1a2b2;">© 2024 Musora Media</span><br><span
+                                                                style="color:#a1a2b2;">31265 Wheel Avenue, #107 Abbotsford, British Columbia, Canada</span>
+                                                        </p></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </td>
     </tr>
     </tbody>
-</table>
-<!--[if mso]></div><![endif]-->
-<!--[if IE]></div><![endif]-->
-</body>
-
+</table><!-- End --></body>
 </html>
