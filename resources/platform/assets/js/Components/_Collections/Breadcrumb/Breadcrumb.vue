@@ -29,7 +29,7 @@
 <script setup>
   import { computed } from 'vue';
   import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@stores/user';
+  import { useUserStore } from '../../../Stores/user';
 
   const userStore = useUserStore();
   const { brand } = storeToRefs(userStore);

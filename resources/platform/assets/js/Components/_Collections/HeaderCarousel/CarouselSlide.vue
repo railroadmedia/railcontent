@@ -1,8 +1,8 @@
 <script setup>
-import VideoModal from "@collections/Modal/VideoModal.vue";
+import VideoModal from "../Modal/VideoModal.vue";
 import { computed, ref } from "vue";
-import { useUserStore } from "@stores/user";
-import userJourney from "@services/userJourney";
+import { useUserStore } from "../../../Stores/user";
+import userJourney from "../../../Services/userJourney";
 
 const userStore = useUserStore();
 

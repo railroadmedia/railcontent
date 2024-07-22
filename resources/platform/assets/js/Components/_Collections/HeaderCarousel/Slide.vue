@@ -3,9 +3,9 @@ import { ArrowSmRightIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "@collections/Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
 import { onMounted, ref } from "vue";
-import {testCarousel} from "@constants/carousel_data";
+import {testCarousel} from "../../../Constants/carousel_data";
 const props = defineProps({
-  brand: {
+  brand: { 
     type: String,
     default: "",
   },
