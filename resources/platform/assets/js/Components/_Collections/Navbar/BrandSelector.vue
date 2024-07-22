@@ -97,4 +97,3 @@ onUpdated(() => {
         </button>
     </div>
 </template>
-@constants/brands.js

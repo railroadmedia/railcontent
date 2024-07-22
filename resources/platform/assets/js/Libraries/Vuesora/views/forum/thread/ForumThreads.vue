@@ -110,4 +110,3 @@ const headerData = computed(() => {
     };
 });
 </script>
-@collections/Breadcrumb/Breadcrumb.vue@collections/PageHeader/PageHeader.vue@collections/CollectionWrapper/CollectionWrapper.vue
