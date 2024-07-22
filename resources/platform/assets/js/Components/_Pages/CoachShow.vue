@@ -43,7 +43,7 @@
     />
 </template>
 <script setup>
-import {computed, onMounted} from "vue";
+import { computed } from "vue";
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import PageHeader from '../PageHeader/PageHeader';
 import CoachEvent from "../../Libraries/Vuesora/Components/Coaches/CoachEvent";
@@ -131,9 +131,5 @@ const headerHeroImg = computed(() => {
 
 const fullName = computed(() => {
     return props.coachData.name;
-})
-
-onMounted(() => {
-    console.log('coach',props.coachData)
 })
 </script>
