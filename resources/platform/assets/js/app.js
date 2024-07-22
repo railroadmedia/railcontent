@@ -49,8 +49,8 @@ import PackOverviewBundles from '@components/_Pages/PackOverviewBundles';
 import AppContainer from '@components/_Containers/AppContainer.vue';
 import PageContainer from '@collections/PageContainer/PageContainer.vue';
 import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
-import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
-import StaticHeader from './Components/_Collections/HeaderCarousel/StaticHeader.vue'
+import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue'
+import StaticHeader from '@collections/HeaderCarousel/StaticHeader.vue'
 import LoginForm from '@collections/LoginForm/LoginForm.vue';
 import ResetPassForm from '@collections/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue'
@@ -346,7 +346,7 @@ app.component('AppContainer', AppContainer)
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form-marketing" */
-            '../../../marketing/assets/js/vuesora/components/ContactEmailForm/ContactEmailForm.vue'
+            '@vuesora/Components/ContactEmailForm/ContactEmailForm.vue'
         )
     ))
 
@@ -367,7 +367,7 @@ app.component('AppContainer', AppContainer)
     .component('Onboarding', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "onboarding-component" */
-            './Components/_Collections/Onboarding/Onboarding.vue'
+            '@collections/Onboarding/Onboarding.vue'
         )
     ))
 
@@ -408,7 +408,7 @@ app.component('AppContainer', AppContainer)
     .component('Breadcrumb', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "breadcrumb" */
-            `./Components/_Collections/Breadcrumb/Breadcrumb.vue`
+            `@collections/Breadcrumb/Breadcrumb.vue`
         )
     ))
 
