@@ -47,9 +47,8 @@ class ContentService
     const STATUS_PUBLISHED = 'published';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_ARCHIVED = 'archived';
-
     const STATUS_DELETED = 'deleted';
-
+    const STATUS_UNLISTED = 'unlisted';
 
     public $idContentCache = [];
 
