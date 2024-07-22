@@ -200,7 +200,7 @@ const request_params = computed(() => {
         required_fields: props.requiredFields,
         included_fields: props.includedFields,
         required_user_states: props.requiredUserStates,
-        ...(includedTypes.value && { included_types: includedTypes.value }),
+        ...(addIncludedTypes.value && { included_types: includedTypes.value }),
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
         ...(isPack.value && { without_enrollment: props.withoutEnrollment }),
@@ -228,7 +228,11 @@ const includedTypes = computed(() => {
         }
     }
 
-    return types.length > 0 ? types : false;
+    return types;
+})
+
+const addIncludedTypes = computed(() => {
+    return includedTypes.value.length > 0;
 })
 
 //Collection type reactives
