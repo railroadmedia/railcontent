@@ -11,80 +11,80 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Profile from '@components/_Pages/Settings/Profile.vue';
-import LoginCredentials from '@components/_Pages/Settings/LoginCredentials.vue';
-import Payments from '@components/_Pages/Settings/Payments.vue';
-import NotificationSettings from '@components/_Pages/Settings/NotificationSettings.vue';
-import AccountDetails from '@components/_Pages/Settings/AccountDetails.vue';
-import Artists from '@components/_Pages/Artists.vue';
-import ChildCatalog from '@components/_Pages/ChildCatalog.vue';
-import Cohort from '@components/_Pages/Cohort';
-import Home from '@components/_Pages/Home.vue';
-import LessonHistory from '@components/_Pages/LessonHistory';
-import LessonPlayback from '@components/_Pages/LessonPlayback';
-import Playlist from '@components/_Pages/Playlist';
-import Playlists from '@components/_Pages/Playlists';
-import Referral from '@components/_Pages/Referral';
-import Schedule from '@components/_Pages/Schedule';
-import Songs from '@components/_Pages/Songs';
-import Stc from '@components/_Pages/STC';
-import CoachIndex from '@components/_Pages/CoachIndex';
-import Support from '@components/_Pages/Support';
-import Workouts from '@components/_Pages/Workouts';
-import WorkoutsPlayback from '@components/_Pages/WorkoutsPlayback';
-import Offline from '@components/_Pages/Live/Offline';
-import Online from '@components/_Pages/Live/Online';
-import CoachShow from '@components/_Pages/CoachShow';
-import InviteFriend from '@components/_Pages/InviteFriend';
-import StudentFocus from '@components/_Pages/StudentFocus';
-import Shows from '@components/_Pages/Shows';
-import Overview from '@components/_Pages/Overview';
-import GuitareoLessons from '@components/_Pages/GuitareoLessons';
-import Catalogue from '@components/_Pages/Catalogue/Catalogue';
-import Search from '@components/_Pages/Search';
-import PackOverview from '@components/_Pages/PackOverview';
-import PackOverviewBundles from '@components/_Pages/PackOverviewBundles';
-import Login from '@components/_Pages/Login.vue';
+import Profile from './Components/_Pages/Settings/Profile.vue';
+import LoginCredentials from './Components/_Pages/Settings/LoginCredentials.vue';
+import Payments from './Components/_Pages/Settings/Payments.vue';
+import NotificationSettings from './Components/_Pages/Settings/NotificationSettings.vue';
+import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
+import Artists from './Components/_Pages/Artists.vue';
+import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
+import Cohort from './Components/_Pages/Cohort';
+import Home from './Components/_Pages/Home.vue';
+import LessonHistory from './Components/_Pages/LessonHistory';
+import LessonPlayback from './Components/_Pages/LessonPlayback';
+import Playlist from './Components/_Pages/Playlist';
+import Playlists from './Components/_Pages/Playlists';
+import Referral from './Components/_Pages/Referral';
+import Schedule from './Components/_Pages/Schedule';
+import Songs from './Components/_Pages/Songs';
+import Stc from './Components/_Pages/STC';
+import CoachIndex from './Components/_Pages/CoachIndex';
+import Support from './Components/_Pages/Support';
+import Workouts from './Components/_Pages/Workouts';
+import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback';
+import Offline from './Components/_Pages/Live/Offline';
+import Online from './Components/_Pages/Live/Online';
+import CoachShow from './Components/_Pages/CoachShow';
+import InviteFriend from './Components/_Pages/InviteFriend';
+import StudentFocus from './Components/_Pages/StudentFocus';
+import Shows from './Components/_Pages/Shows';
+import Overview from './Components/_Pages/Overview';
+import GuitareoLessons from './Components/_Pages/GuitareoLessons';
+import Catalogue from './Components/_Pages/Catalogue/Catalogue';
+import Search from './Components/_Pages/Search';
+import PackOverview from './Components/_Pages/PackOverview';
+import PackOverviewBundles from './Components/_Pages/PackOverviewBundles';
+import Login from './Components/_Pages/Login.vue';
 
 //App Components
-import AppContainer from '@components/_Containers/AppContainer.vue';
-import PageContainer from '@collections/PageContainer/PageContainer.vue';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
-import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue'
-import StaticHeader from '@collections/HeaderCarousel/StaticHeader.vue'
-import ResetPassForm from '@collections/ResetPassForm/ResetPassForm.vue';
-import MusoraIcon from '@collections/MusoraIcons/MusoraIcon.vue'
-import GearCarousel from '@collections/GearCarousel/GearCarousel.vue';
-import ContentInfo from '@collections/ContentInfo/ContentInfo';
-import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
-import ChildCollectionPage from '@collections/CollectionPage/ChildCollectionPage';
-import PageHeader from '@collections/PageHeader/PageHeader'
-import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
-import DeleteAccountModal from '@collections/Modal/DeleteAccountModal';
+import AppContainer from './Components/_Containers/AppContainer.vue';
+import PageContainer from './Components/_Collections/PageContainer/PageContainer.vue';
+import CatalogueCardContainer from './Components/_CollectionsCatalogue/CatalogueCardContainer.vue';
+import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
+import StaticHeader from './Components/_Collections/HeaderCarousel/StaticHeader.vue'
+import ResetPassForm from './Components/_Collections/ResetPassForm/ResetPassForm.vue';
+import MusoraIcon from './Components/_Collections/MusoraIcons/MusoraIcon.vue'
+import GearCarousel from './Components/_Collections/GearCarousel/GearCarousel.vue';
+import ContentInfo from './Components/_Collections/ContentInfo/ContentInfo';
+import CollectionWrapper from './Components/_Collections/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './Components/_Collections/CollectionPage/ChildCollectionPage';
+import PageHeader from './Components/_Collections/PageHeader/PageHeader'
+import MiniCatalogueSection from './Components/_Collections/MiniCatalogueSection/MiniCatalogueSection';
+import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountModal';
 
 //Vuesora Assets
-import Forms from '@vuesora/assets/js/classes/forms';
-import ContentService from '@vuesora/assets/js/Services/content';
-import UserService from '@vuesora/assets/js/Services/user';
-import ProgressTracker from '@vuesora/assets/js/classes/progress-tracker';
+import Forms from './Libraries/Vuesora/assets/js/classes/forms';
+import ContentService from './Libraries/Vuesora/assets/js/Services/content';
+import UserService from './Libraries/Vuesora/assets/js/Services/user';
+import ProgressTracker from './Libraries/Vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
-import '@vuesora/assets/js/functions/navigation';
-import '@vuesora/assets/js/functions/user-events';
-import '@vuesora/assets/js/functions/dropdown';
-import '@vuesora/assets/js/functions/modal';
-import '@vuesora/assets/js/functions/accordion';
-import '@vuesora/assets/js/third-party/add-event-atc';
+import './Libraries/Vuesora/assets/js/functions/navigation';
+import './Libraries/Vuesora/assets/js/functions/user-events';
+import './Libraries/Vuesora/assets/js/functions/dropdown';
+import './Libraries/Vuesora/assets/js/functions/modal';
+import './Libraries/Vuesora/assets/js/functions/accordion';
+import './Libraries/Vuesora/assets/js/third-party/add-event-atc';
 
 //Vuesora Components
-import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
-import ContentCatalogue from '@vuesora/views/catalogues/ContentCatalogue.vue';
-import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
-import NotificationsTable from '@vuesora/views/notifications/NotificationsTable.vue';
-import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
-import ContentAssignment from '@vuesora/Components/ContentAssignment/ContentAssignment.vue';
-import LegacyLoops from '@vuesora/Components/LegacyLoops/LegacyLoops.vue';
-import VideoResources from '@vuesora/Components/VideoResources/VideoResources.vue';
+import CoachEvent from './Libraries/Vuesora/Components/Coaches/CoachEvent.vue';
+import ContentCatalogue from './Libraries/Vuesora/views/catalogues/ContentCatalogue.vue';
+import PlayAlongs from './Libraries/Vuesora/views/play-alongs/PlayAlongs.vue';
+import NotificationsTable from './Libraries/Vuesora/views/notifications/NotificationsTable.vue';
+import AssignmentsContainer from './Libraries/Vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentAssignment from './Libraries/Vuesora/Components/ContentAssignment/ContentAssignment.vue';
+import LegacyLoops from './Libraries/Vuesora/Components/LegacyLoops/LegacyLoops.vue';
+import VideoResources from './Libraries/Vuesora/Components/VideoResources/VideoResources.vue';
 
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
@@ -242,7 +242,7 @@ app.component('AppContainer', AppContainer)
     .component('MembershipUpdatePage', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "membership-update-page" */
-            `@collections/Membership/MembershipUpdatePage.vue`
+            `./Components/_Collections/Membership/MembershipUpdatePage.vue`
         )
     ))
 
@@ -256,28 +256,28 @@ app.component('AppContainer', AppContainer)
     .component('ReportUser', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "report-user" */
-            `@collections/ReportUser/ReportUser.vue`
+            `./Components/_Collections/ReportUser/ReportUser.vue`
         )
     ))
 
     .component('StudentReviewForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "student-review-form-iframe" */
-            '@collections/IFrames/StudentReviewForm.vue'
+            './Components/_Collections/IFrames/StudentReviewForm.vue'
         )
     ))
 
     .component('ContentSchedule', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "content-schedule-component" */
-            '@vuesora/views/schedule/Schedule.vue'
+            './Libraries/Vuesora/views/schedule/Schedule.vue'
         )
     ))
 
     .component('CommentsCatalogue', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "comments-catalogue-component" */
-            '@vuesora/views/comments/catalogue/CommentsCatalogue.vue'
+            './Libraries/Vuesora/views/comments/catalogue/CommentsCatalogue.vue'
         )
     ))
 
@@ -291,21 +291,21 @@ app.component('AppContainer', AppContainer)
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
-            '@vuesora/views/forum/ForumThreadsTable.vue'
+            './Libraries/Vuesora/views/forum/ForumThreadsTable.vue'
         )
     ))
 
     .component('ForumThread', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
-            '@vuesora/views/forum/thread/ForumThread.vue'
+            './Libraries/Vuesora/views/forum/thread/ForumThread.vue'
         )
     ))
 
     .component('ForumThreads', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
-            '@vuesora/views/forum/thread/ForumThreads.vue'
+            './Libraries/Vuesora/views/forum/thread/ForumThreads.vue'
         )
     ))
 
@@ -319,97 +319,97 @@ app.component('AppContainer', AppContainer)
     .component('TextEditor', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "text-editor-component" */
-            '@vuesora/Components/TextEditor/TextEditor.vue'
+            './Libraries/Vuesora/Components/TextEditor/TextEditor.vue'
         )
     ))
 
     .component('ContactMemberEmailForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-member-form" */
-            '@vuesora/Components/ContactMemberEmailForm/ContactMemberEmailForm.vue'
+            './Libraries/Vuesora/Components/ContactMemberEmailForm/ContactMemberEmailForm.vue'
         )
     ))
 
     .component('CartSidebar', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "cart-sidebar" */
-            '@vuesora/Components/CartSidebar/CartSidebar.vue'
+            './Libraries/Vuesora/Components/CartSidebar/CartSidebar.vue'
         )
     ))
 
     .component('NavCartButton', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "nav-cart-button" */
-            '@vuesora/Components/NavCartButton/NavCartButton.vue'
+            './Libraries/Vuesora/Components/NavCartButton/NavCartButton.vue'
         )
     ))
 
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form-marketing" */
-            '@vuesora/Components/ContactEmailForm/ContactEmailForm.vue'
+            '../../../marketing/assets/js/vuesora/components/ContactEmailForm/ContactEmailForm.vue'
         )
     ))
 
     .component('ContactEmailForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form" */
-            '@vuesora/Components/ContactEmailForm/ContactEmailForm.vue'
+            './Libraries/Vuesora/Components/ContactEmailForm/ContactEmailForm.vue'
         )
     ))
 
     .component('YoutubePlayer', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "youtube-player-component" */
-            '@vuesora/Components/YoutubePlayer/YoutubePlayer.vue'
+            './Libraries/Vuesora/Components/YoutubePlayer/YoutubePlayer.vue'
         )
     ))
 
     .component('Onboarding', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "onboarding-component" */
-            '@collections/Onboarding/Onboarding.vue'
+            './Components/_Collections/Onboarding/Onboarding.vue'
         )
     ))
 
     .component('VideoPlayer', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "video-player-component" */
-            '@vuesora/Components/VideoPlayer/VideoPlayer.vue'
+            './Libraries/Vuesora/Components/VideoPlayer/VideoPlayer.vue'
         )
     ))
 
     .component('VideoMediaElement', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "video-media-element-component" */
-            '@vuesora/Components/MediaElement/MediaElement.vue'
+            './Libraries/Vuesora/Components/MediaElement/MediaElement.vue'
         )
     ))
 
     .component('ImageCropper', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "image-cropper-component" */
-            '@vuesora/Components/ImageCropper/ImageCropper.vue'
+            './Libraries/Vuesora/Components/ImageCropper/ImageCropper.vue'
         )
     ))
 
     .component('Comments', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "comments-component" */
-            '@vuesora/views/comments/Comments.vue'
+            './Libraries/Vuesora/views/comments/Comments.vue'
         )
     ))
 
     .component('EmailForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "email-form-component" */
-            '@vuesora/Components/EmailForm/EmailForm.vue'
+            './Libraries/Vuesora/Components/EmailForm/EmailForm.vue'
         )
     ))
     .component('Breadcrumb', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "breadcrumb" */
-            `@collections/Breadcrumb/Breadcrumb.vue`
+            `./Components/_Collections/Breadcrumb/Breadcrumb.vue`
         )
     ))
 
