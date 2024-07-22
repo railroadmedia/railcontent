@@ -41,10 +41,10 @@
                         </div>
                     </template>
 
-                    <tempate v-if="endorsements">
+                    <template v-if="endorsements">
                         <h1 class="tw-text-2xl tw-uppercase tw-font-normal">Endorsements</h1>
                         <div class="tw-font-normal mt-1">{{ endorsements }}</div>
-                    </tempate>
+                    </template>
                 </div>
             </div>
         </div>
