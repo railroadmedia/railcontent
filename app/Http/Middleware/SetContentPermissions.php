@@ -34,7 +34,7 @@ class SetContentPermissions
                 );
             }
 
-            if (user()->isABasicMember()) {
+            if (!user()->isAdmin() && user()->isABasicMember()) {
                 ContentRepository::$allowsPullSongsContent = true;
             }
 
