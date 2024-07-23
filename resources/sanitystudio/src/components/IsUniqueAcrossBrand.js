@@ -6,7 +6,7 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     const client = getClient({ apiVersion: '2022-12-07' });
     let clean_id = document._id.replace(/^drafts\./, '')
     const params = {
-        type: 'song',
+        type: document._type,
         id: clean_id,
         draft_id: 'drafts.'+ clean_id,
         slug,
