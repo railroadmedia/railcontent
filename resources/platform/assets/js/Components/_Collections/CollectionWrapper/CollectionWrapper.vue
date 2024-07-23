@@ -363,7 +363,7 @@ const activeTabData = computed(() => {
 })
 
 const getSelectedFilters = computed(() => {
-    return filter.value.includedFields;
+    return filter.value.included_fields;
 })
 
 const getSelectedSort = computed(() => {
