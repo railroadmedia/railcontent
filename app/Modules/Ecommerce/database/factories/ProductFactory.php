@@ -56,6 +56,7 @@ class ProductFactory extends Factory
             'digital_access_time_interval_type' => null,
             'digital_access_type' => null,
             'digital_access_permission_names' => '[]',
+            'shopify_id' => fake()->numberBetween(1000000000000, 9999999999999),
         ];
     }
 

@@ -1,13 +1,15 @@
 <script setup>
 import {DateTime} from 'luxon';
 import {computed, onBeforeMount, reactive, ref} from 'vue';
+import { usePlatformStore } from '../../../../Stores/platform';
+import { usePlaylistsStore } from '@stores/playlists';
+import { contentTypes } from '../../../../utils';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
-import {usePlaylistsStore} from '@stores/playlists';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel.vue'
-import {contentTypes} from '../../../../utils';
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 
 //--------------Props--------------//
 const props = defineProps({
@@ -169,7 +171,12 @@ const duration_formatted = (seconds) => {
 const handleNoAccess = (e) => {
     if (props.lesson.need_access) {
         e.preventDefault
-        window.openplaylistmodal({ modalType: 'noAccess', data: props.lesson });
+        if(props.lesson.show_plus_upgrade_modal){
+            platformStore.openMembershipUpgradeModal();
+        } else {
+            window.openplaylistmodal({ modalType: 'noAccess', data: props.lesson });
+        }
+
     }
 }
 
@@ -188,6 +195,10 @@ const GetElementDistance = el => {
 const dropdownTriggerHandler = target => {
     GetElementDistance(event.target);
     state.dropdownOpen = !state.dropdownOpen;
+}
+
+const openUpgradeModal = () => {
+    platformStore.openMembershipUpgradeModal();
 }
 
 //-----------Lifecycle Methods-----------//
@@ -223,7 +234,7 @@ onBeforeMount(() => {
             <component :is="needAccess ? 'div' : 'a' "
                        :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
                        class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
-                       :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
+                       :class="[!cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
                        @click="handleNoAccess"
             >
                 <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-transition-opacity tw-text-sm"
@@ -235,12 +246,12 @@ onBeforeMount(() => {
                 </div>
                 <!-- Playlist thumbnail -->
                 <div
-                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[125px] tw-rounded tw-shrink-0 ">
-                    <!-- Image Conatiner -->
+                    class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[125px] tw-rounded tw-shrink-0 "
+                >
+                    <!-- Image Container -->
                     <div class="tw-relative tw-w-full tw-h-full" v-if="lessonThumbnail">
                         <img :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail"
-                            class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
-                            :class="{ '': needAccess }" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
+                            class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm" loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
                         <!-- Image Mask -->
                         <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                             <img class="tw-h-full tw-object-contain" :class="{ '': needAccess }"
@@ -272,6 +283,11 @@ onBeforeMount(() => {
                               :style="`width: ${lesson.progress_percent}%;`"
                         >
                         </span>
+                    </div>
+
+                    <!-- Lock Icon -->
+                    <div v-if="needAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
+                        <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                     </div>
                 </div>
 

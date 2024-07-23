@@ -64,6 +64,7 @@ return [
                 'published_on_in_timezone',
                 'bundle_count',
                 'difficulty_string',
+                'need_access',
             ],
             'coach_card_image',
             'coach_bottom_banner_image',
@@ -79,6 +80,7 @@ return [
             'challenge_state_text',
             'primary_cta_text',
             'challenge_state',
+            'need_access'
         ],
 
         'instructor' => [
@@ -112,6 +114,7 @@ return [
                 'published_on_in_timezone',
                 'bundle_count',
                 'difficulty_string',
+                'need_access',
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -143,6 +146,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'coach_card_image',
             'coach_bottom_banner_image',
@@ -187,6 +191,7 @@ return [
                 'parent_id',
                 'published_on_in_timezone',
                 'difficulty_string',
+                'need_access',
             ],
             'lessons_filter_options',
             'total_comments',
@@ -222,6 +227,7 @@ return [
             'google_product_id',
             'lesson_count',
             'child_count',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -240,7 +246,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'need_access',
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -260,6 +267,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -284,6 +292,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'next_bundle' => [
                 'id',
@@ -299,6 +308,7 @@ return [
             'thumbnail',
             'resources'
         ],
+
         'pack-bundle2' => [
             'id',
             'type',
@@ -313,6 +323,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -329,6 +340,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -347,6 +359,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
         ],
 
@@ -363,6 +376,7 @@ return [
             'user_progress',
             'difficulty_string',
             'instructors',
+            'need_access',
             'chapters',
             'related_lessons' => [
                 'id',
@@ -382,6 +396,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -399,6 +414,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -417,6 +433,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'lesson_count',
@@ -480,6 +497,7 @@ return [
             'is_liked_by_current_user',
             'like_count',
             'resources',
+            'need_access',
             'current_lesson' => [
                 'id',
                 'type',
@@ -491,6 +509,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -505,6 +524,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             '*fields.instructor',
             'coaches' => [
@@ -546,6 +566,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -567,6 +588,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -579,6 +601,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -597,6 +620,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -644,6 +668,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -665,6 +690,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -697,6 +723,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -756,6 +783,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -777,6 +805,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -795,6 +824,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'related_lessons' => [
                 'id',
@@ -809,6 +839,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -851,6 +882,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -879,6 +911,7 @@ return [
                 'lesson_count',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -900,6 +933,7 @@ return [
                 'data.thumbnail_url',
                 'fields.artist',
                 'fields.style',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -909,6 +943,7 @@ return [
             ],
             'route'
         ],
+
         'song-tutorial-children' => [
             'ranges',
             'id',
@@ -937,6 +972,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -965,6 +1001,7 @@ return [
                 'lesson_count',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -981,6 +1018,7 @@ return [
             'parent',
             'route'
         ],
+
         'song' => [
             'ranges',
             'id',
@@ -1011,6 +1049,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -1040,6 +1079,7 @@ return [
                 'fields.artist',
                 'fields.style',
                 'lesson_count',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -1061,6 +1101,7 @@ return [
                 'data.thumbnail_url',
                 'fields.artist',
                 'fields.style',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -1071,6 +1112,7 @@ return [
             'start_second',
             'end_second'
         ],
+
         'song-part' => [
             'ranges',
             'id',
@@ -1098,6 +1140,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -1124,6 +1167,7 @@ return [
                 'fields.artist',
                 '*fields.style',
                 'lesson_count',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -1139,7 +1183,6 @@ return [
             'artist',
             'route'
         ],
-
 
         'coach-stream' => [
             'id',
@@ -1169,6 +1212,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -1190,6 +1234,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -1353,6 +1398,7 @@ return [
             'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'bundles' => [
                 'fields.title',
                 'data.thumbnail_url',
@@ -1380,6 +1426,7 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+                'need_access',
             ],
             'lesson_count',
             'bundle_count',
@@ -1411,6 +1458,7 @@ return [
             'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'lessons' => [
                 'fields.title',
                 'data.thumbnail_url',
@@ -1421,6 +1469,7 @@ return [
                 'like_count',
                 'fields.video.fields.length_in_seconds',
                 'is_added_to_primary_playlist',
+                'need_access',
             ],
             "current_lesson_index",
             'lesson_count',
@@ -1440,6 +1489,7 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -1462,6 +1512,7 @@ return [
             'progress_percent',
             'difficulty_string',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -1480,6 +1531,7 @@ return [
                 'parent_id',
                 'difficulty_string',
                 'instructors',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -1497,6 +1549,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -1515,6 +1568,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -1601,6 +1655,7 @@ return [
             'data.description',
             'data.thumbnail_url',
             'published_on',
+            'need_access',
             'levels' => [
                 'id',
                 'mobile_app_url',
@@ -1641,6 +1696,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -1672,6 +1728,7 @@ return [
             'banner_button_url',
             'is_added_to_primary_playlist',
             'published_on',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -1685,6 +1742,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'courses' => [
                 'id',
@@ -1709,6 +1767,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -1744,6 +1803,7 @@ return [
             'level_position',
             'course_position',
             '*fields.instructor',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -1757,6 +1817,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'lessons' => [
                 'id',
@@ -1770,6 +1831,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -1791,6 +1853,7 @@ return [
             'fields.video.fields.vimeo_video_id',
             'fields.video.fields.youtube_video_id',
             'instructors',
+            'need_access',
             'instructor' => [
                 'id',
                 'fields.name',
@@ -1818,6 +1881,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -1838,6 +1902,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'assignments' => [
                 'id',
@@ -1866,6 +1931,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'total_comments',
             'comments',
@@ -1910,6 +1976,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -1933,6 +2000,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -1945,6 +2013,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -1963,6 +2032,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -2007,6 +2077,7 @@ return [
             'is_liked_by_current_user',
             'like_count',
             'resources',
+            'need_access',
             'current_lesson' => [
                 'id',
                 'type',
@@ -2018,6 +2089,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -2034,6 +2106,7 @@ return [
                 'data.thumbnail_url',
                 'difficulty_string',
                 'fields.difficulty',
+                'need_access',
             ],
             '*fields.instructor',
             'coaches' => [
@@ -2080,6 +2153,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -2091,6 +2165,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -2103,6 +2178,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2121,6 +2197,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -2167,6 +2244,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -2193,6 +2271,7 @@ return [
                 'instructors',
                 'difficulty_string',
                 'fields.difficulty',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -2205,6 +2284,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2223,6 +2303,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -2263,6 +2344,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -2286,6 +2368,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -2298,6 +2381,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2316,6 +2400,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -2345,6 +2430,7 @@ return [
                 'fields.video.fields.youtube_video_id',
                 'fields.video.fields.length_in_seconds',
                 'resources',
+                'need_access',
                 'assignments' => [
                     'id',
                     'xp',
@@ -2373,6 +2459,7 @@ return [
                     'fields.video.fields.length_in_seconds',
                     'is_liked_by_current_user',
                     'parent_id',
+                    'need_access',
                 ],
                 'next_lesson' => [
                     'fields.title',
@@ -2390,6 +2477,7 @@ return [
                     'fields.video.fields.length_in_seconds',
                     'is_liked_by_current_user',
                     'parent_id',
+                    'need_access',
                     'instructor' => [
                         'id',
                         'fields.name',
@@ -2408,6 +2496,7 @@ return [
                     'fields.title',
                     'fields.video.fields.length_in_seconds',
                     'data.thumbnail_url',
+                    'need_access',
                 ],
             ],
             '*fields.instructor',
@@ -2448,6 +2537,8 @@ return [
             'show_learning_paths_on_homepage',
             'subcription_date',
             'completed_workouts',
+            'subscriptionIntervalType',
+            'membership_level',
             'branches',
             'features',
             'show_onboarding',
@@ -2480,6 +2571,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -2501,6 +2593,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -2513,6 +2606,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2531,6 +2625,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -2554,6 +2649,7 @@ return [
             'started',
             'progress_percent',
             'user_progress',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -2566,11 +2662,13 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'data.guitar_chord_image_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
                 'id',
                 'type',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2582,6 +2680,7 @@ return [
                 'id',
                 'type',
                 'fields.title',
+                'need_access',
             ],
             'total_comments',
             'comments',
@@ -2631,6 +2730,7 @@ return [
             'started',
             'progress_percent',
             'user_progress',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -2649,6 +2749,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -2666,6 +2767,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2684,6 +2786,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -2719,6 +2822,7 @@ return [
             ],
             'resources',
         ],
+
         'podcasts' => [
             'id',
             'type',
@@ -2733,6 +2837,7 @@ return [
             'user_progress',
             '*fields.instructor',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -2751,6 +2856,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -2768,6 +2874,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2786,6 +2893,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -2820,6 +2928,7 @@ return [
                 'current_user_is_subscribed',
             ],
         ],
+
         'boot-camps' => [
             'id',
             'type',
@@ -2834,6 +2943,7 @@ return [
             'user_progress',
             '*fields.instructor',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -2852,6 +2962,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -2869,6 +2980,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -2887,6 +2999,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -2945,6 +3058,7 @@ return [
             'child_count',
             'course_position',
             '*fields.instructor',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -2958,6 +3072,7 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
                 'musora_api_mobile_app_url',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -2995,6 +3110,7 @@ return [
             'next_lesson_url',
             'nextLessonLengthInMinValue',
             'is_last_incomplete_lesson_from_course',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -3007,6 +3123,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'previous_lesson' => [
                 'id',
@@ -3020,6 +3137,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'current_course' => [
                 'id',
@@ -3077,6 +3195,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'comments',
             'total_comments',
@@ -3095,6 +3214,7 @@ return [
             ],
             'route'
         ],
+
         'recording' => [
             'id',
             'type',
@@ -3121,6 +3241,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -3143,6 +3264,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -3155,6 +3277,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -3173,6 +3296,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -3184,6 +3308,7 @@ return [
                 'current_user_is_subscribed',
             ],
         ],
+
         'routine' => [
             'id',
             'type',
@@ -3209,6 +3334,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -3221,6 +3347,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -3233,6 +3360,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -3251,6 +3379,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -3311,6 +3440,7 @@ return [
             'low_soundslice_slug',
             'set_start_end_time',
             'parent',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -3327,6 +3457,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'content_name',
             'playlist_item_name'
@@ -3358,6 +3489,7 @@ return [
                 'published_on_in_timezone',
                 'bundle_count',
                 'difficulty_string',
+                'need_access',
             ],
             'thumbnail_url',
             'lessons_filter_options',
@@ -3391,6 +3523,7 @@ return [
                 'published_on_in_timezone',
                 'bundle_count',
                 'difficulty_string',
+                'need_access',
             ],
             'thumbnail_url',
             'lessons_filter_options',
@@ -3447,7 +3580,8 @@ return [
             'end_second',
             'thumbnail_url',
             'user_playlist_item_id',
-            'user_playlist_item_position'
+            'user_playlist_item_position',
+            'need_access',
         ],
 
         'instructor' => [
@@ -3460,6 +3594,7 @@ return [
             'is_house_coach',
             'forum_thread_id',
             'forum_thread',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -3478,7 +3613,8 @@ return [
                 'is_liked_by_current_user',
                 'parent_id',
                 'published_on_in_timezone',
-                'bundle_count'
+                'bundle_count',
+                'need_access',
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -3510,6 +3646,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'coach_card_image',
             'coach_bottom_banner_image',
@@ -3552,7 +3689,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'need_access',
             ],
             'lessons_filter_options',
             'total_comments',
@@ -3588,6 +3726,7 @@ return [
             'google_product_id',
             'lesson_count',
             'child_count',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -3605,7 +3744,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'need_access',
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -3625,6 +3765,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -3649,6 +3790,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'next_bundle' => [
                 'id',
@@ -3664,6 +3806,7 @@ return [
             'thumbnail',
             'resources'
         ],
+
         'pack-bundle2' => [
             'id',
             'type',
@@ -3678,6 +3821,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -3695,6 +3839,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -3713,6 +3858,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
         ],
 
@@ -3729,6 +3875,7 @@ return [
             'user_progress',
             'instructors',
             'difficulty_string',
+            'need_access',
             'chapters',
             'related_lessons' => [
                 'id',
@@ -3748,6 +3895,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -3765,6 +3913,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -3783,6 +3932,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'lesson_count',
@@ -3857,6 +4007,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -3871,6 +4022,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             '*fields.instructor',
             'coaches' => [
@@ -3896,6 +4048,7 @@ return [
             'comments',
             'xp',
             'xp_bonus',
+            'need_access',
             'instructor' => [
                 'id',
                 'fields.name',
@@ -3933,6 +4086,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -3945,6 +4099,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -3963,6 +4118,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4009,6 +4165,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4030,6 +4187,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -4048,6 +4206,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'related_lessons' => [
                 'id',
@@ -4062,6 +4221,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4087,6 +4247,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'total_xp'
         ],
@@ -4121,6 +4282,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4142,6 +4304,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -4160,6 +4323,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'related_lessons' => [
                 'id',
@@ -4174,6 +4338,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4216,6 +4381,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4244,6 +4410,7 @@ return [
                 'lesson_count',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4265,6 +4432,7 @@ return [
                 'data.thumbnail_url',
                 'fields.artist',
                 'fields.style',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -4274,6 +4442,7 @@ return [
             ],
             'route'
         ],
+
         'song-tutorial-children' => [
             'ranges',
             'id',
@@ -4302,6 +4471,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4330,6 +4500,7 @@ return [
                 'lesson_count',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4346,6 +4517,7 @@ return [
             'parent',
             'route'
         ],
+
         'song' => [
             'ranges',
             'id',
@@ -4376,6 +4548,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4405,6 +4578,7 @@ return [
                 'fields.artist',
                 'fields.style',
                 'lesson_count',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4426,6 +4600,7 @@ return [
                 'data.thumbnail_url',
                 'fields.artist',
                 'fields.style',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -4436,6 +4611,7 @@ return [
             'start_second',
             'end_second'
         ],
+
         'song-part' => [
             'ranges',
             'id',
@@ -4463,6 +4639,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4489,6 +4666,7 @@ return [
                 'fields.artist',
                 '*fields.style',
                 'lesson_count',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4504,7 +4682,6 @@ return [
             'artist',
             'route'
         ],
-
 
         'coach-stream' => [
             'id',
@@ -4534,6 +4711,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -4555,6 +4733,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -4573,6 +4752,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'related_lessons' => [
                 'id',
@@ -4585,6 +4765,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -4716,6 +4897,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'bundles' => [
                 'fields.title',
                 'data.thumbnail_url',
@@ -4743,6 +4925,7 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -4771,6 +4954,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'need_access',
             'lessons' => [
                 'fields.title',
                 'data.thumbnail_url',
@@ -4781,6 +4965,7 @@ return [
                 'like_count',
                 'fields.video.fields.length_in_seconds',
                 'is_added_to_primary_playlist',
+                'need_access',
             ],
             "current_lesson_index",
             'lesson_count',
@@ -4800,6 +4985,7 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -4822,6 +5008,7 @@ return [
             'progress_percent',
             'difficulty_string',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -4840,6 +5027,7 @@ return [
                 'parent_id',
                 'difficulty_string',
                 'instructors',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -4857,6 +5045,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -4875,6 +5064,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -4960,6 +5150,7 @@ return [
             'data.description',
             'data.thumbnail_url',
             'published_on',
+            'need_access',
             'levels' => [
                 'id',
                 'mobile_app_url',
@@ -5000,6 +5191,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -5031,6 +5223,7 @@ return [
             'banner_button_url',
             'is_added_to_primary_playlist',
             'published_on',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -5044,6 +5237,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'courses' => [
                 'id',
@@ -5068,6 +5262,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -5103,6 +5298,7 @@ return [
             'level_position',
             'course_position',
             '*fields.instructor',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -5116,6 +5312,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'lessons' => [
                 'id',
@@ -5129,6 +5326,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'lesson_count',
             'child_count',
@@ -5164,6 +5362,7 @@ return [
             'user_progress',
             'progress_percent',
             'published_on',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -5177,6 +5376,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5197,6 +5397,7 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'need_access',
             ],
             'assignments' => [
                 'id',
@@ -5225,6 +5426,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+                'need_access',
             ],
             'total_comments',
             'comments',
@@ -5269,6 +5471,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -5292,6 +5495,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -5304,6 +5508,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5322,6 +5527,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -5361,6 +5567,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -5384,6 +5591,7 @@ return [
                 'data.thumbnail_url',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -5396,6 +5604,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5414,6 +5623,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -5443,6 +5653,7 @@ return [
                 'fields.video.fields.youtube_video_id',
                 'fields.video.fields.length_in_seconds',
                 'resources',
+                'need_access',
                 'assignments' => [
                     'id',
                     'xp',
@@ -5471,6 +5682,7 @@ return [
                     'fields.video.fields.length_in_seconds',
                     'is_liked_by_current_user',
                     'parent_id',
+                    'need_access',
                 ],
                 'next_lesson' => [
                     'fields.title',
@@ -5488,6 +5700,7 @@ return [
                     'fields.video.fields.length_in_seconds',
                     'is_liked_by_current_user',
                     'parent_id',
+                    'need_access',
                     'instructor' => [
                         'id',
                         'fields.name',
@@ -5506,6 +5719,7 @@ return [
                     'fields.title',
                     'fields.video.fields.length_in_seconds',
                     'data.thumbnail_url',
+                    'need_access',
                 ],
             ],
             '*fields.instructor',
@@ -5543,6 +5757,8 @@ return [
             'access_level',
             'is_enrolled_into_cohort',
             'completed_workouts',
+            'subscriptionIntervalType',
+            'membership_level',
             'branches',
             'features',
             'show_onboarding',
@@ -5575,6 +5791,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -5596,6 +5813,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -5608,6 +5826,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5626,6 +5845,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -5649,6 +5869,7 @@ return [
             'started',
             'progress_percent',
             'user_progress',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -5661,11 +5882,13 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'data.guitar_chord_image_url',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
                 'id',
                 'type',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5677,6 +5900,7 @@ return [
                 'id',
                 'type',
                 'fields.title',
+                'need_access',
             ],
             'total_comments',
             'comments',
@@ -5726,6 +5950,7 @@ return [
             'user_progress',
             '*fields.instructor',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -5744,6 +5969,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -5761,6 +5987,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5779,6 +6006,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -5813,6 +6041,7 @@ return [
                 'current_user_is_subscribed',
             ],
         ],
+
         'podcasts' => [
             'id',
             'type',
@@ -5827,6 +6056,7 @@ return [
             'user_progress',
             '*fields.instructor',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -5845,6 +6075,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -5862,6 +6093,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5880,6 +6112,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -5914,6 +6147,7 @@ return [
                 'current_user_is_subscribed',
             ],
         ],
+
         'boot-camps' => [
             'id',
             'type',
@@ -5928,6 +6162,7 @@ return [
             'user_progress',
             '*fields.instructor',
             'instructors',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -5946,6 +6181,7 @@ return [
                 'parent_id',
                 'instructors',
                 'difficulty_string',
+                'need_access',
             ],
             'next_lesson' => [
                 'fields.title',
@@ -5963,6 +6199,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -5981,6 +6218,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'parent',
             'next_content_type',
@@ -6039,6 +6277,7 @@ return [
             'child_count',
             'course_position',
             '*fields.instructor',
+            'need_access',
             'lessons' => [
                 'id',
                 'type',
@@ -6052,6 +6291,7 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
                 'musora_api_mobile_app_url',
+                'need_access',
             ],
             'coaches' => [
                 'id',
@@ -6089,6 +6329,7 @@ return [
             'next_lesson_url',
             'nextLessonLengthInMinValue',
             'is_last_incomplete_lesson_from_course',
+            'need_access',
             'next_lesson' => [
                 'id',
                 'type',
@@ -6101,6 +6342,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'previous_lesson' => [
                 'id',
@@ -6114,6 +6356,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'current_course' => [
                 'id',
@@ -6171,6 +6414,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'comments',
             'total_comments',
@@ -6189,6 +6433,7 @@ return [
             ],
             'route'
         ],
+
         'recording' => [
             'id',
             'type',
@@ -6215,6 +6460,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'assignments' => [
                 'id',
                 'xp',
@@ -6237,6 +6483,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -6249,6 +6496,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -6267,6 +6515,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -6278,6 +6527,7 @@ return [
                 'current_user_is_subscribed',
             ],
         ],
+
         'routine' => [
             'id',
             'type',
@@ -6303,6 +6553,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -6315,6 +6566,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'status',
+                'need_access',
             ],
             'next_lesson' => [
                 'id',
@@ -6327,6 +6579,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
                 'instructor' => [
                     'id',
                     'fields.name',
@@ -6345,6 +6598,7 @@ return [
                 'fields.title',
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
+                'need_access',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -6405,6 +6659,7 @@ return [
             'low_soundslice_slug',
             'set_start_end_time',
             'parent',
+            'need_access',
             'related_lessons' => [
                 'id',
                 'type',
@@ -6421,6 +6676,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'need_access',
             ],
             'content_name',
             'playlist_item_name'

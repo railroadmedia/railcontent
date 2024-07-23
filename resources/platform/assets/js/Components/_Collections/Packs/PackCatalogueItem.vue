@@ -2,7 +2,7 @@
     <div
         class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative tw-bg-white dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
     >
-        <a :href="packURL" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
+        <a :href="!noAccess ? packURL : null" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
@@ -22,13 +22,17 @@
                     :alt="`${title} logo`"
                 />
             </div>
-            <!-- Locked -->
-            <div v-if="!isReleased" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center tw-text-white">
+            <!-- Lock Icon -->
+            <div v-if="noAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
+                <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+            </div>
+            <!-- Unlreleased-->
+            <div v-else-if="!isReleased" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center tw-text-white">
                 {{ releaseDate }}
             </div>
             <!-- Arrow -->
             <div
-                v-if="isReleased"
+                v-else
                 class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px]"
                 :class="progressText === 'Completed' ? 'tw-flex' : 'tw-hidden group-hover:tw-flex'"
             >
@@ -43,10 +47,9 @@
                 <div class="tw-absolute tw-w-full tw-bottom-0 tw-left-0 tw-h-[6px] tw-bg-[#E7EFF6]"></div>
                 <div :class="`tw-absolute tw-left-0 tw-bottom-0 tw-h-[6px] tw-rounded-full tw-bg-${brand}`" :style="`width: ${progressPercent}%`"></div>
             </template>
-
         </a>
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
-            <a :href="packURL" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
+            <a :href="!noAccess ? packURL : null" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2">
                     <div v-if="showEnrollmentState" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
@@ -84,37 +87,37 @@
             <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
                 <!-- Add to playlist -->
                 <button
-                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-30 disabled:tw-pointer-events-none"
+                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-30 disabled:tw-pointer-events-none action"
                     :disabled="pack.lesson_count > 300"
                     :title="pack.lesson_count > 300 ? 'This pack has too many lessons.' : '' "
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7 action" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" class="action" />
                     </svg>
                 </button>
                 <!-- Reset -->
                 <button
-                    v-if="progressText === 'Completed'"
-                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]"
+                    v-if="progressText === 'Completed' && !noAccess"
+                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] action"
                     @click="handleResetProgress"
                 >
-                    <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
+                    <i class="fas fas fa-redo-alt fa-flip-horizontal action" aria-hidden="true"></i>
                 </button>
                 <div
-                    v-if="isReleased"
+                    v-if="!noAccess && isReleased"
                     class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0"
                 >
                     <!-- Action button  -->
-                    <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow" :class="progressButtonColor">
+                    <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow action" :class="progressButtonColor">
                         <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
 
                     </a>
                     <button
                         v-if="progressText === 'Completed'"
-                        class="tw-ml-[13px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-hidden tw-flex tw-justify-center tw-items-center tw-w-[30px] tw-h-[30px] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]"
+                        class="tw-ml-[13px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-hidden tw-flex tw-justify-center tw-items-center tw-w-[30px] tw-h-[30px] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] action"
                         @click="handleResetProgress"
                     >
-                        <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
+                        <i class="fas fas fa-redo-alt fa-flip-horizontal action" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -127,9 +130,12 @@ import { useUserStore } from '@stores/user';
 import { computed, ref } from "vue";
 import { DateTime } from 'luxon';
 import { useResetProgress } from "@hooks/useResetProgress";
+import { usePlatformStore } from "../../../Stores/platform";
 
 const userStore = useUserStore();
 const { brand, isAdmin } = storeToRefs(userStore);
+const platformStore = usePlatformStore();
+
 const { resetProgress } = useResetProgress();
 
 const props = defineProps({
@@ -137,6 +143,10 @@ const props = defineProps({
         type: Object,
         default: {},
     }
+})
+
+const noAccess = computed(() => {
+    return props.pack.need_access;
 })
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
@@ -254,6 +264,12 @@ const addToPlaylist = () => {
 
 const handleResetProgress = () => {
     resetProgress(props.pack.id, resetIcon, true);
+}
+
+const openUpgradeModal = (event) => {
+    if(noAccess && !event.target.classList.value.includes('action')){
+        platformStore.openMembershipUpgradeModal();
+    }
 }
 
 const logoStyle = computed(() => {

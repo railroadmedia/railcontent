@@ -8,10 +8,6 @@ import UserCatalogueEvents from "@vuesora/mixins/UserCatalogueEvents";
 // todo: calendar in progress, still need to find why the calendar buttons are not showing up
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
-    },
     bgImgUrl: {
         type: String,
         default: ''

@@ -56,7 +56,8 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
                     <th scope="row" class="tw-px-2 sm:tw-px-5 tw-py-2 tw-font-medium tw-whitespace-nowrap dark:text-white">
                         <div class="tw-flex tw-flex-row tw-w-full tw-h-full tw-items-center">
                             <div
-                                class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[58px] tw-w-[58px] tw-rounded tw-shrink-0">
+                                class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[58px] tw-w-[58px] tw-rounded tw-shrink-0"
+                            >
                                 <!-- Image Conatiner -->
                                 <div class="tw-relative tw-w-full tw-h-full" v-if="firstCol.thumb">
                                     <img :src="`https://musora.com/cdn-cgi/image/width=200/${firstCol.thumb}`"
@@ -88,6 +89,11 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
                                         </defs>
                                     </svg>
                                 </div>
+
+                                <!-- Lock Icon -->
+<!--                                <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">-->
+<!--                                    <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>-->
+<!--                                </div>-->
                             </div>
                             <div class="tw-ml-[10px]">
                                 <span class="tw-font-bold">{{ firstCol.content }}</span>

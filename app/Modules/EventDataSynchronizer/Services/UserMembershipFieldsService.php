@@ -47,18 +47,17 @@ class UserMembershipFieldsService
 
         $songsOnlyExpirationDate = $userAccessPermissions->getSongsOnlyExpirationDate();
 
-        $membershipLevel = null;
-        if ($plusMembershipExpirationDate > Carbon::now() ||
-            ($basicMembershipExpirationDate > Carbon::now() && $songsOnlyExpirationDate > Carbon::now())) {
-            $membershipLevel = 'plus';
-        } elseif ($basicMembershipExpirationDate > Carbon::now()) {
-            $membershipLevel = 'basic';
-        }
-
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
         $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
 
+        $membershipLevel = null;
+        if ($plusMembershipExpirationDate > Carbon::now() ||
+            ($basicMembershipExpirationDate > Carbon::now() && $songsOnlyExpirationDate > Carbon::now())) {
+            $membershipLevel = 'plus';
+        } elseif ($basicMembershipExpirationDate > Carbon::now() || $isLifetimeMember) {
+            $membershipLevel = 'basic';
+        }
 
         $isAMember = $membershipExpirationDate > Carbon::now();
 

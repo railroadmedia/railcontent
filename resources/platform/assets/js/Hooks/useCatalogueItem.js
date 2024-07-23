@@ -14,7 +14,7 @@ export default function useCatalogueItem(props) {
                 return false;
             }
 
-            return (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
+            return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
     });
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());

@@ -41,6 +41,7 @@ export const useUserStore = defineStore({
     userKeyboardBrands: (state) => state.user?.piano_gear_keyboard_brands,
     userSingingPhoto: (state) => state.user?.singing_gear_photo,
     userSingingSince: (state) => state.user?.singing_since_year,
+    userSubscriptionIntervalType: (state) => state.user?.subscription_interval_type,
     userMicBrands: (state) => state.user?.singing_gear_mic_brands,
     userGuitarPhoto: (state) => state.user?.guitar_gear_photo,
     userPlayingGuitarSince: (state) => state.user?.guitar_playing_since_year,

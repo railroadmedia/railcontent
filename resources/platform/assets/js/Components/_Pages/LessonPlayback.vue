@@ -11,8 +11,9 @@
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
-                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
-                        <template v-if="videoProps.videoId">
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
+                        <template v-else-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -73,20 +74,20 @@
                         </template>
                     </div>
 
-                    <VideoResources 
-                        :theme-color="videoResources.themeColor" 
+                    <VideoResources
+                        :theme-color="videoResources.themeColor"
                         :brand="videoResources.brand"
-                        :title="videoResources.title" 
+                        :title="videoResources.title"
                         :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :thumbnail-url="videoResources.thumbnailUrl"
                         :description="videoResources.description"
-                        :instructors="videoResources.instructors" 
+                        :instructors="videoResources.instructors"
                         :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" 
+                        :is-liked="videoResources.isLiked"
                         :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" 
+                        :is-added="videoResources.isAdded"
                         :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" 
+                        :user-id="videoResources.userId"
                         :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList"
                         :show-info-button="videoResources.showInfoButton"
@@ -94,6 +95,7 @@
                         :report-user-name="videoResources.reportUserName"
                         :report-logo="videoResources.reportLogo"
                         :difficulty="videoResources.difficulty"
+                        :no-access="noAccess"
                     />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
@@ -104,7 +106,7 @@
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
 
-                    <ContentProgress :brand="brand" :is-completed="lessonData.completed"
+                    <ContentProgress v-if="!noAccess" :brand="brand" :is-completed="lessonData.completed"
                         :progress="lessonData.progress_percent" :xp-amount="progressXp" :is-started="lessonData.progress_percent > 0"
                         :next-lesson-url="videoButtons.nextLessonUrl" :show-complete-button="true"
                         :content-id="videoProps.contentId" />
@@ -127,8 +129,11 @@
             />
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2"
-                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
+            <section
+                v-if="!noAccess"
+                class="tw-col-span-3 xl:tw-row-span-2"
+                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`"
+            >
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
@@ -183,6 +188,7 @@ import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
 import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
+import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 const props = defineProps({
     thisLessonJson: {
@@ -244,7 +250,7 @@ const props = defineProps({
     contentInstructors: {
         type: Array,
         default: []
-    }
+    },
 });
 
 const userStore = useUserStore();
@@ -355,4 +361,12 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+const noAccess = computed(() => {
+    return props.thisLessonJson?.data[0]?.need_access;
+})
+
+const thumbnailUrl = computed(() => {
+    return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
+})
 </script>

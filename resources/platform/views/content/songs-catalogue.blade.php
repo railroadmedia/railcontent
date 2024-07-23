@@ -14,6 +14,7 @@
         :list-lessons="{{ $listLessons }}"
         :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
         :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+        :show-upgrade-modal="{{ json_encode($showUpgradeModal) }}"
     >
     </songs>
 @endsection

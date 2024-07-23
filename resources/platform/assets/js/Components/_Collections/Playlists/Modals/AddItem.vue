@@ -413,7 +413,8 @@ onMounted(() => {
             </button>
         </div>
 
-        <Table @onActionClick="handleActionClick"
+        <Table
+            @onActionClick="handleActionClick"
             @onScroll="handleScroll"
             :classOverride="`tw-max-h-[150px] sm:tw-max-h-[260px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`"
             :class="{ 'tw-opacity-50 tw-pointer-events-none' : importAll && totalItems > 300 }"

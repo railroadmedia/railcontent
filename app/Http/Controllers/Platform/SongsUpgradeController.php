@@ -20,9 +20,7 @@ class SongsUpgradeController extends BaseController
     {
         $isLifetime = user()->isALifetimeMember();
         $currentTier = $this->upgradeService->getSubscriptionMembershipTier($isLifetime);
-        if (user()->hasSongsAccess($brand)) {
-            return redirect("/$brand/songs/");
-        }
+
         $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
         $showManageSongsButton = $isLifetime || $this->upgradeService->getCurrentSubscription() != null;
 

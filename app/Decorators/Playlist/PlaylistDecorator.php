@@ -3,6 +3,7 @@
 namespace App\Decorators\Playlist;
 
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
+use App\Modules\Content\Models\Content;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -123,11 +124,14 @@ class PlaylistDecorator extends ModeDecoratorBase
                 $playlists[$index]['uploaded_thumbnail'] = false;
                 $firstItem = $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlist['id']);
                 if (isset($firstItem)) {
+                    $oldStatuses = ContentRepository::$availableContentStatues;
+                    $oldFutureContent = ContentRepository::$pullFutureContent;
+                    $oldBypass = ContentRepository::$bypassPermissions;
+
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     ContentRepository::$pullFutureContent = true;
-                    $oldStatuses = ContentRepository::$availableContentStatues;
-                    $oldFutureContent = ContentRepository::$pullFutureContent;
+                    ContentRepository::$bypassPermissions = true;
 
                     ContentRepository::$availableContentStatues = [
                         ContentService::STATUS_PUBLISHED,
@@ -163,6 +167,7 @@ class PlaylistDecorator extends ModeDecoratorBase
 
                     ContentRepository::$availableContentStatues = $oldStatuses;
                     ContentRepository::$pullFutureContent = $oldFutureContent;
+                    ContentRepository::$bypassPermissions = $oldBypass;
                 }
             } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;

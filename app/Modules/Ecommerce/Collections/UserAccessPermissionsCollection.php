@@ -57,9 +57,9 @@ class UserAccessPermissionsCollection
         }
 
         if ($this->user->isAdmin() && (
-            is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
+                is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
                 || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions)
-        )) {
+            )) {
             return [Carbon::today(), Carbon::maxValue()];
         }
 
@@ -77,6 +77,9 @@ class UserAccessPermissionsCollection
             }
             if ($userAccessPermission->time_fixed) {
                 $fixedExpirationDate = Carbon::parse($userAccessPermission->time_fixed);
+                if ($fixedExpirationDate == $expirationDate) {
+                    $fixedExpirationDate = $expirationDate;
+                }
                 $userAccessPermission->actualStartTime = Carbon::today();
                 $userAccessPermission->actualExpirationTime = $fixedExpirationDate;
                 if ($fixedExpirationDate > $maxFixedExpirationDate) {
@@ -174,9 +177,12 @@ class UserAccessPermissionsCollection
         return $endDate;
     }
 
-    public function getBasicMembershipExpirationDate(): ?Carbon
+    public function getBasicMembershipExpirationDate($includeBuffer = true): ?Carbon
     {
-        list($startDate, $endDate) = $this->getActiveDates(self::MusoraBasicMembershipPermission);
+        list($startDate, $endDate) = $this->getActiveDates(
+            self::MusoraBasicMembershipPermission,
+            includeBuffer: $includeBuffer
+        );
         return $endDate;
     }
 
