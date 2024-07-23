@@ -253,6 +253,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
     ])
 
@@ -286,7 +287,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "Popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",

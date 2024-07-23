@@ -477,7 +477,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and play 600+ popular songs with <br class="lg:hidden">note-for-note transcriptions and digital tools.',
+        'subheader' => 'Practice and play 2500+ popular songs with <br class="lg:hidden">note-for-note transcriptions and digital tools.',
         'media' => 'drumeo/membership/homepage/2024/drumeo-songs.webp',
     ])
 
@@ -511,7 +511,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.webp",
-            "songs" => "popular songs.",
+            "songs" => "2500+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",

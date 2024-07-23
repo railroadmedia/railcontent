@@ -422,6 +422,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'musora/membership/homepage/2024/musora-songs.webp',
     ])
 
@@ -448,7 +449,7 @@
             "whiteBg" => true,
             "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
             "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-            "songs" => "Popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Learn piano, guitar, drums, & singing.",
             "thirdPoint" => "Unlimited personal support",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",

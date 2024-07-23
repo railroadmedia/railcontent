@@ -318,7 +318,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
+        'subheader' => 'Practice and sing 500+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'pianote/membership/homepage/2024/pianote-songs.webp',
     ])
 
@@ -354,7 +354,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-plus-logo-light.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png",
-            "songs" => "Popular songs.",
+            "songs" => "500+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",

@@ -249,6 +249,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and sing 500+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'guitareo/membership/homepage/2024/guitareo-songs.webp',
     ])
 
@@ -280,7 +281,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
-            "songs" => "Popular songs.",
+            "songs" => "500+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
