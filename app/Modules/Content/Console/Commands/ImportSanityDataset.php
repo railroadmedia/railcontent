@@ -11,8 +11,7 @@ use Illuminate\Console\Command;
 class ImportSanityDataset extends Command
 {
     protected $signature = 'sanity:import
-                            {source=production}
-                            {destination=staging}';
+                            {destination=development}';
     protected $description = 'Import dataset into the destination in Sanity from a ndjson file';
 
 
@@ -35,8 +34,11 @@ class ImportSanityDataset extends Command
         }
 
         $directory = 'resources/sanitystudio';
+        $filename1 = "instructors.ndjson";
         $filename = "workouts.ndjson";
-
+//        $coursePart = 'course-part';
+//        $resultCode = $this->runCliCommand('cd $directory && yarn sanity documents query "*[_type == "course-part" [0...50]._id" --apiVersion 2021-03-25 | groq "*" -o ndjson  ');
+//dd($resultCode);
         // import into the destination
         $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $filename $destination --replace");
         if ($resultCode !== self::SUCCESS) {
@@ -51,7 +53,7 @@ class ImportSanityDataset extends Command
     /**
      * Execute the given command in the CLI.
      */
-    private function runCliCommand(string $command): int
+    public function runCliCommand(string $command): int
     {
         $output = null;
         $resultCode = null;
