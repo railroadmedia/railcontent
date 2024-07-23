@@ -25,7 +25,8 @@ class ShowType extends BaseSanityModel
 {
     public function __construct(
         public string $name,
-        public string $title
+        public string $title,
+        public bool $withResources = false
     )
     {
         $instructorReference = new Reference([['type' => 'instructor']]);
@@ -56,8 +57,8 @@ class ShowType extends BaseSanityModel
         $genreReference = new Reference([['type' => 'genre']],  options: ['aiAssist'=>['embeddingsIndex' => 'genre-index']]);
         $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
         $lifestyleReference = new Reference([['type' => 'lifestyle']], options: ['disableNew' => false]);
-        $essentialReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
-        $creativityReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+        $essentialReference = new Reference([['type' => 'essential']], options: ['disableNew' => false]);
+        $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup  = new Group('openAI', 'OpenAI');
@@ -105,12 +106,26 @@ class ShowType extends BaseSanityModel
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
-            new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup),
+            new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup)
+        ];
+
+        if($this->withResources){
+            $resourceList = new ListObject(
+                fields: [new Field(FieldType::String, 'resource_name'),
+                            new Field(FieldType::URL, 'resource_url')],
+                previewItem: new ListItemPreview('resource_name', 'resource_url')
+            );
+            $fields = array_merge($fields,[
+                new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup)
+            ]);
+        }
+
+        $fields = array_merge($fields,[
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
-        ];
+        ]);
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);
     }

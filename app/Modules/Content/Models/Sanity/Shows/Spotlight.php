@@ -26,7 +26,7 @@ class Spotlight extends ShowType
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Spotlights');
+        parent::__construct(self::getName(), 'Spotlights', true);
     }
 
     public static function getName(): string
