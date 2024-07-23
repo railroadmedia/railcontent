@@ -40,7 +40,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         'name' => 'Classical Piano Pieces',
         'fullPrice' => floatval($productPrices['read-music-in-30-days-workbook']->price),
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),

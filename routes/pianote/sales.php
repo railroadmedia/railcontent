@@ -6,17 +6,14 @@ use App\Http\Controllers\Pianote\SalesController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-        Route::get('/', [SalesController::class, 'home']);
-        Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
+        Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/trial-month', [SalesController::class, 'homeMonth']);
-
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/posters-trial', [SalesController::class, 'trialPosters']);
         Route::get('/chords-trial', [SalesController::class, 'trial']);
         Route::get('/trial-songs', [SalesController::class, 'trialSongs']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
-
-        Route::get('/chord-secrets', [SalesController::class, 'chordSecrets']);
+        Route::get('/ultimate-lessons', [SalesController::class, 'ultimateLessons']);
         Route::get('/restart', [SalesController::class, 'restart'] );
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS']);
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);

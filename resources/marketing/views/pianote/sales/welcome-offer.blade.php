@@ -64,7 +64,7 @@
         'pointOne' => 'GREAT TEACHERS',
         'pointTwo' => 'VIDEO LESSONS',
         'pointThree' => 'FUN PRACTICE',
-        'pointFour' => '1000+ SONGS',
+        'pointFour' => 'POPULAR SONGS',
     ])
     <div class="sticky-trigger block"></div>
     <a href="#customize-anchor"

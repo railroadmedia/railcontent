@@ -323,7 +323,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo EarDrums",
         "fullPrice" => floatval($productPrices['drumeo-eardrums-black']->price),
         "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
@@ -729,12 +729,12 @@
                     <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>
                     <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.
                         <br><br>
-                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for 6000+ famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
+                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
                     </p>
                 </div>
                 <picture class="w-full sm:w-auto h-auto sm:h-96">
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo.webp">
-                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo-m.webp">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
+                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
                 </picture>
             </div>
         </div>
@@ -786,7 +786,7 @@
                         '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
                         '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
                         'Step-by-Step Lessons',
-                        '6000+ Song Breakdowns',
+                        'Song Breakdowns',
                         'Personalized Support',
                     ],
                 ])
@@ -798,6 +798,13 @@
         </div>
     </section>
 
+    <section class="py-6 md:py-10 text-center">
+        <p class="max-w-md px-4 md:px-2 leading-normal">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer</b><br>
+            Due to high demand, your EarDrums will ship <br class="hidden sm:inline">
+            within 2-4 business days of your order.
+        </p>
+    </section>
     <section class="text-center py-10" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 sm:px-4 mb-5 text-light-navy">

@@ -8,8 +8,8 @@
     <title>Pianote | Play your favorite songs.</title>
     <meta property="og:title" content="Pianote | Play your favorite songs.">
     <meta property="og:url" content="https://www.pianote.com/songs">
-    <meta name="description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta name="description" content="Note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:description" content="Note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
@@ -23,7 +23,7 @@
 
 @section('header', 'Play your favorite songs.')
 
-@section('desc', '1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.')
+@section('desc', 'Note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">

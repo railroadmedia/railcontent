@@ -4,8 +4,8 @@
     <title>Win a Casio Privia PX-S1100 | Pianote</title>
     <meta property="og:title" content="Win a Casio Privia PX-S1100 | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply start a trial to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply start a trial to secure your chance to win.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
@@ -145,7 +145,7 @@
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    One email entry per person.
+                    One entry per person.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>

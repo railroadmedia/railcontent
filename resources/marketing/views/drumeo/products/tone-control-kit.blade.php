@@ -304,7 +304,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Tone Control Kit",
         "fullPrice" => floatval($productPrices['tone-control-kit']->price),
         "price" => floatval($productPrices['tone-control-kit']->discounted_price),
@@ -450,7 +450,11 @@
                                 @if(floatval($productPrices['tone-control-kit']->price) > floatval($productPrices['tone-control-kit']->discounted_price))
                                     <s>${{ floatval($productPrices['tone-control-kit']->price) }}</s><br>
                                 @endif
-                                ${{ floatval($productPrices['tone-control-kit']->discounted_price) }}</td>
+                                @if(number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2) == intval(floatval($productPrices['tone-control-kit']->discounted_price)))
+                                    ${{  floatval($productPrices['tone-control-kit']->discounted_price)  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2)  }}
+                                @endif</td>
                         </tr>
                     </table>
                 </div>

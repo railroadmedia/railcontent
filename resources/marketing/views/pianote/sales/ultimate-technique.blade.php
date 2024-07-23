@@ -257,7 +257,7 @@
                                 lessons </li>
                             <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> World-class
                                 instructors</li>
-                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Officially
                                 licensed songs</li>
                             <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Detailed song
                                 tutorials</li>
@@ -380,7 +380,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/promos/may/feature-03.webp',
                         'title' => 'So it’s time to have some fun.',
                         'desc' =>
-                            'Keep access to the massive library of 1000+ songs and make the next 12 months the best of your piano-playing life. Put your new fingers to use by playing songs better than you thought possible.',
+                            'Keep access to the massive library of songs and make the next 12 months the best of your piano-playing life. Put your new fingers to use by playing songs better than you thought possible.',
                     ],
                     [
                         'position' => 'left',
@@ -533,7 +533,7 @@
                         $items = [
                             '90-Day Guarantee',
                             'Step-by-step lessons',
-                            '1000+ officially licensed songs',
+                            'Officially licensed songs',
                             'World-class instructors',
                             'Detailed song tutorials',
                             'Live support',
@@ -718,8 +718,4 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-06-11 0:00:00',
-        'promoVersion' => false,
-    ])
 @stop

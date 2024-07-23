@@ -92,7 +92,13 @@ class CohortPackController
         }
         $cohort->lists = $lists;
 
-        return view('content.cohort-template', [
+        if ($cohort['custom_cohort'] == true) {
+            $view = 'content.cohort-template-mk';
+        } else {
+            $view = 'content.cohort-template';
+        }
+
+        return view($view, [
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
             'registerButtonUrl' => $registerButtonUrl,
@@ -101,15 +107,6 @@ class CohortPackController
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
             'purchased' => $purchased
-        ]);
-    }
-    public function templateAlt(Request $request, $domain, $brand, $slug, $purchased = false)
-    {
-        return view('content.cohort-template-mk', [
-            'brand' => brand(),
-            'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
-            'purchased' => $purchased,
-            'singHarmony' => true
         ]);
     }
     public function purchased(Request $request, $domain, $brand, $slug)
