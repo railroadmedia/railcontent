@@ -1,5 +1,5 @@
 import { reactive, computed, toRefs } from 'vue';
-import Utils from '../Libraries/Vuesora/assets/js/helper-functions/utils.js';
+import Utils from '@vuesora/assets/js/helper-functions/utils.js';
 
 export default function useThemeClasses(props) {
     const state = reactive({

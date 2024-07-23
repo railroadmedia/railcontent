@@ -123,12 +123,12 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import PageHeader from '../PageHeader/PageHeader';
-import GuitareoPack from '../GuitareoPack/GuitareoPack';
-import MiniCatalogueSection from '../MiniCatalogueSection/MiniCatalogueSection.vue';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import GuitareoPack from '@collections/GuitareoPack/GuitareoPack';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
 const userStore = useUserStore();
 const { userId } = storeToRefs(userStore);

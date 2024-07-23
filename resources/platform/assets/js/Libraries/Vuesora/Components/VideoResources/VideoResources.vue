@@ -269,11 +269,11 @@ import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
 import ContentService from "../../assets/js/Services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
-import ModalRenderer from "../../../../Components/Modal/ModalRenderer.vue";
-import ReportModal from "../../../../Components/Modal/ReportModal";
+import ModalRenderer from "@collections/Modal/ModalRenderer.vue";
+import ReportModal from "@collections/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
-import DifficultyLabel from "../../../../Components/DifficultyLabel/DifficultyLabel.vue";
+import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 

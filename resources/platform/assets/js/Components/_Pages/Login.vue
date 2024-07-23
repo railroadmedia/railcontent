@@ -2,14 +2,14 @@
 import { ref, onBeforeMount, computed } from "vue";
 import axios from "axios";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
-import InputLabel from "../InputLabel/InputLabel.vue";
-import LoginButton from "../Button/LoginButton.vue";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
-import MuButton from "../Button/MuButton.vue";
-import NotificationToasts from "../../Libraries/Vuesora/Components/NotificationToasts/NotificationToasts.vue";
+import InputLabel from "@units/InputLabel/InputLabel.vue";
+import LoginButton from "@units/Button/LoginButton.vue";
+import LoadingSpinner from "@units/LoadingSpinner/LoadingSpinner.vue";
+import MuButton from "@units/Button/MuButton.vue";
+import NotificationToasts from "@vuesora/Components/NotificationToasts/NotificationToasts.vue";
 
-import { useNotificationStore } from '../../Stores/notification';
-import { useUserStore } from "../../Stores/user";
+import { useNotificationStore } from '@stores/notification';
+import { useUserStore } from "@stores/user";
 const userStore = useUserStore();
 const notification = useNotificationStore();
 

@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { reactive, computed, toRefs } from 'vue';
-import ContentHelpers from "../Libraries/Vuesora/assets/js/helper-functions/content.js";
-import ContentModel from '../Libraries/Vuesora/assets/js/models/_model.js';
-import { useUserStore } from "../Stores/user.js";
+import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
+import ContentModel from '@vuesora/assets/js/models/_model.js';
+import { useUserStore } from "@stores/user.js";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();

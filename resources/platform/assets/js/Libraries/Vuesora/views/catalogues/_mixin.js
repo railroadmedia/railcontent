@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents.js';
 import ContentModel from '../../assets/js/models/_model.js';
-import {useUserStore} from "../../../../Stores/user.js";
+import {useUserStore} from "@stores/user.js";
 
 export default {
     mixins: [UserCatalogueEvents],

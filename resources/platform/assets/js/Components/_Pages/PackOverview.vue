@@ -25,12 +25,12 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import PageHeader from "../PageHeader/PageHeader";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import CompletionBonus from "../CompletionBonus/CompletionBonus";
-import ListCatalogue from '../ListCatalogue/ListCatalogue';
+import PageHeader from "@collections/PageHeader/PageHeader";
+import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
+import CompletionBonus from "@collections/CompletionBonus/CompletionBonus";
+import ListCatalogue from '@collections/ListCatalogue/ListCatalogue';
 
 const props = defineProps({
     breadcrumbs: {

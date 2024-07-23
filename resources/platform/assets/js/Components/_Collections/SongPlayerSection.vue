@@ -139,12 +139,12 @@
 </template>
 <script setup>
     import { ref, onBeforeMount} from 'vue';
-    import ContentLessonActionButtons from '../../Libraries/Vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
-    import SoundSlice from "../../Components/SoundSlice/SoundSlice.vue"
-    import SoundSliceControls from "../../Components/SoundSlice/SoundSliceControls.vue";
-    import ContentService from "../../Libraries/Vuesora/assets/js/Services/content";
+    import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
+    import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
+    import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+    import ContentService from "@vuesora/assets/js/Services/content";
     import { storeToRefs } from 'pinia';
-    import { useUserStore } from '../../Stores/user';
+    import { useUserStore } from '@stores/user';
 
     const userStore = useUserStore();
     const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);

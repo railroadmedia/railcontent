@@ -255,8 +255,8 @@
 <script setup>
 import {computed, onMounted, onUnmounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
-import ModalRenderer from "../Modal/ModalRenderer";
+import { useUserStore } from "@stores/user";
+import ModalRenderer from "@collections/Modal/ModalRenderer";
 
 //icons
 import { XIcon, CheckIcon } from '@heroicons/vue/outline';

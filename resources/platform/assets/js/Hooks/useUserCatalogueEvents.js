@@ -1,4 +1,4 @@
-import ContentService from '../Libraries/Vuesora/assets/js/Services/content';
+import ContentService from '@vuesora/assets/js/Services/content';
 
 const getValue = (obj, key) => {
     const filtered = obj.filter((field) => {

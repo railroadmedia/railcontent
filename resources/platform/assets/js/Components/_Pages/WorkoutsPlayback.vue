@@ -196,24 +196,24 @@
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
 import { onMounted, ref, computed } from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-//import VideoMediaElement from "../../Libraries/Vuesora/Components/MediaElement/MediaElement.vue";
-//import VideoPlayer from "../../Libraries/Vuesora/Components/VideoPlayer/VideoPlayer.vue";
-import YoutubePlayer from "../../Libraries/Vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
-import VideoButtons from "../VideoButtons/VideoButtons.vue";
-import VideoResources from "../../Libraries/Vuesora/Components/VideoResources/VideoResources.vue";
-import VideoComments from "../../Libraries/Vuesora/views/comments/Comments.vue";
-import VideoChapters from "../VideoChapters/VideoChapters.vue";
-import ContentInfo from "../ContentInfo/ContentInfo.vue";
-import SoundSlice from "../SoundSlice/SoundSlice.vue";
-import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
-import CatalogueListElement from "../Catalogue/CatalogueListElement.vue";
-import Intercom from "../../Libraries/Vuesora/assets/js/Services/intercom";
-import Helpscout from "../../Libraries/Vuesora/assets/js/Services/helpscout";
-import ProgressTracker from "../../Libraries/Vuesora/assets/js/classes/progress-tracker";
-import ContentService from '../../Libraries/Vuesora/assets/js/Services/content';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+//import VideoMediaElement from "@vuesora/Components/MediaElement/MediaElement.vue";
+//import VideoPlayer from "@vuesora/Components/VideoPlayer/VideoPlayer.vue";
+import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
+import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
+import VideoResources from "@vuesora/Components/VideoResources/VideoResources.vue";
+import VideoComments from "@vuesora/views/comments/Comments.vue";
+import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
+import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
+import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
+import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import CatalogueListElement from "@collections/Catalogue/CatalogueListElement.vue";
+import Intercom from "@vuesora/assets/js/Services/intercom";
+import Helpscout from "@vuesora/assets/js/Services/helpscout";
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
+import ContentService from '@vuesora/assets/js/Services/content';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {

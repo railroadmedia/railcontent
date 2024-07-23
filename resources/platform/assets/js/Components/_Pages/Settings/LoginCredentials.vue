@@ -81,12 +81,12 @@
 <script setup>
     import { ref } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../Stores/user";
-    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-    import PageHeader from '../../PageHeader/PageHeader';
-    import PillNav from "../../PillNav/PillNav.vue";
-    import EditEmailModal from "../../Modal/EditEmailModal.vue";
-    import EditPasswordModal from "../../Modal/EditPasswordModal.vue";
+    import { useUserStore } from "@stores/user";
+    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+    import PageHeader from '@collections/PageHeader/PageHeader';
+    import PillNav from "@collections/PillNav/PillNav.vue";
+    import EditEmailModal from "@collections/Modal/EditEmailModal.vue";
+    import EditPasswordModal from "@collections/Modal/EditPasswordModal.vue";
 
     //Pinia
     const userStore = useUserStore();

@@ -35,7 +35,6 @@
             title="lessons"
         />
     </div>
-
     <!-- Coach Footer -->
     <CoachFooter
         :coach-data="coachData"
@@ -43,12 +42,12 @@
     />
 </template>
 <script setup>
-import { computed } from "vue";
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import PageHeader from '../PageHeader/PageHeader';
-import CoachEvent from "../../Libraries/Vuesora/Components/Coaches/CoachEvent";
-import CollectionWrapper from '../CollectionWrapper/CollectionWrapper';
-import CoachFooter from '../CoachFooter/CoachFooter';
+import {computed} from "vue";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import CoachEvent from "@vuesora/Components/Coaches/CoachEvent";
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+import CoachFooter from '@collections/CoachFooter/CoachFooter';
 
 const props = defineProps({
     breadcrumbs: {

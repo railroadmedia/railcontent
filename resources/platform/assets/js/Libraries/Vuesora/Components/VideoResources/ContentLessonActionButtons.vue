@@ -123,7 +123,7 @@
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import ContentService from '../../assets/js/Services/content';
-import ReportModal from "../../../../Components/Modal/ReportModal";
+import ReportModal from "@collections/Modal/ReportModal";
 import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
