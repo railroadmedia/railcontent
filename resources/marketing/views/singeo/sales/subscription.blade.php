@@ -311,20 +311,14 @@
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
                     'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
-                [
-                    'image' => 'marketing/singeo/membership/homepage/2024/Beautiful_harmonies_card.webp',
-                    'title' => 'Harmony',
-                    'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
-                ],
             ]
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/singeo/membership/homepage/webp-format/singeo-annual-2w-card.webp',
         'header' => 'Online singing lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
-        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
+        'subDescription' => 'Save 17% + get 1 bonus<br class="inline sm:hidden"> worth $19',
+        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
