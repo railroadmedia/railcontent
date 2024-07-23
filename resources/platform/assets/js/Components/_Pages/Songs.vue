@@ -24,10 +24,10 @@
 
 <script setup>
     import { computed } from 'vue';
-    import PageHeader from '../PageHeader/PageHeader.vue';
-    import MiniCatalogueSection from '../MiniCatalogueSection/MiniCatalogueSection.vue';
-    import CollectionWrapper from '../CollectionWrapper/CollectionWrapper.vue';
-    import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
+    import PageHeader from '@collections/PageHeader/PageHeader.vue';
+    import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+    import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 
     const props = defineProps({
         continueUrl: {

@@ -11,6 +11,7 @@ const path = require('path');
 module.exports = {
   stories: [
     "./Introduction.mdx",
+    "./Components.mdx",
     "./StyleGuide/**/*.mdx",
     "./Components/**/*.mdx",
     "../resources/platform/assets/js/**/*.stories.mdx",

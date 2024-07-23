@@ -67,11 +67,11 @@
     import { ref, onBeforeMount} from 'vue';
     import { fetchSongById } from '../../Services/songService';
     import { storeToRefs } from 'pinia';
-    import { useUserStore } from '../../Stores/user';
-    import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
+    import { useUserStore } from '@stores/user';
+    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
     import SongPlayerSection from '../_Collections/SongPlayerSection.vue'
-    import Comments from '../../Libraries/Vuesora/views/comments/Comments.vue'
-    import CatalogueListElement from '../Catalogue/CatalogueListElement';
+    import Comments from '@vuesora/views/comments/Comments.vue'
+    import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
 
     //Pinia Data
     const userStore = useUserStore();

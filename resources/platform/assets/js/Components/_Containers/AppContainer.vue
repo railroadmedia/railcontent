@@ -7,7 +7,7 @@
 </template>
 <script setup>
 import { watch, provide, onBeforeMount } from 'vue';
-import { useUserStore } from '../../Stores/user';
+import { useUserStore } from '@stores/user';
 import { toKebabCase } from '../../utils.js'; 
 
 const props = defineProps({

@@ -11,8 +11,8 @@
     </div>
 </template>
 <script>
-import CatalogueCard from '../../../../Components/Catalogue/CatalogueCard.vue';
-import CatalogueListElement from '../../../../Components/Catalogue/CatalogueListElement.vue';
+import CatalogueCard from '@collections/Catalogue/CatalogueCard.vue';
+import CatalogueListElement from '@collections/Catalogue/CatalogueListElement.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {

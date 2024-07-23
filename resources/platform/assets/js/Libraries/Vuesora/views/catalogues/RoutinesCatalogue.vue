@@ -19,7 +19,7 @@
 </template>
 <script>
 import CatalogueRoutineCard from './_CatalogueRoutineCard.vue';
-import SoundSlice from '../../../../Components/SoundSlice/SoundSlice.vue';
+import SoundSlice from '@collections/SoundSlice/SoundSlice.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {

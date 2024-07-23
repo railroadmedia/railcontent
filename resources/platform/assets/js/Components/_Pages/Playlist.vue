@@ -22,12 +22,12 @@
 
 <script setup>
 import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
 //Components
-import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import PlaylistHeader from '../Playlists/Playlist/PlaylistHeader';
-import PlaylistCatalog from '../Playlists/Playlist/PlaylistCatalog';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PlaylistHeader from '@collections/Playlists/Playlist/PlaylistHeader';
+import PlaylistCatalog from '@collections/Playlists/Playlist/PlaylistCatalog';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);

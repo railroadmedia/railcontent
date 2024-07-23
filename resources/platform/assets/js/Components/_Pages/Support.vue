@@ -92,8 +92,8 @@
 
 <script setup>
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
-import ContactMemberEmailForm from "../../Libraries/Vuesora/Components/ContactMemberEmailForm/ContactMemberEmailForm";
+import { useUserStore } from "@stores/user";
+import ContactMemberEmailForm from "@vuesora/Components/ContactMemberEmailForm/ContactMemberEmailForm";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);

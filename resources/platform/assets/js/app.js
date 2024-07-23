@@ -48,19 +48,19 @@ import Login from './Components/_Pages/Login.vue';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
-import PageContainer from './Components/PageContainer/PageContainer.vue';
-import CatalogueCardContainer from './Components/Catalogue/CatalogueCardContainer.vue';
-import HeaderCarousel from './Components/HeaderCarousel/HeaderCarousel.vue'
-import StaticHeader from './Components/HeaderCarousel/StaticHeader.vue'
-import ResetPassForm from './Components/ResetPassForm/ResetPassForm.vue';
-import MusoraIcon from './Components/MusoraIcons/MusoraIcon.vue'
-import GearCarousel from './Components/GearCarousel/GearCarousel.vue';
-import ContentInfo from './Components/ContentInfo/ContentInfo';
-import CollectionWrapper from './Components/CollectionWrapper/CollectionWrapper';
-import ChildCollectionPage from './Components/CollectionPage/ChildCollectionPage';
-import PageHeader from './Components/PageHeader/PageHeader'
-import MiniCatalogueSection from './Components/MiniCatalogueSection/MiniCatalogueSection';
-import DeleteAccountModal from './Components/Modal/DeleteAccountModal';
+import PageContainer from './Components/_Collections/PageContainer/PageContainer.vue';
+import CatalogueCardContainer from './Components/_Collections/Catalogue/CatalogueCardContainer.vue';
+import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
+import StaticHeader from './Components/_Collections/HeaderCarousel/StaticHeader.vue'
+import ResetPassForm from './Components/_Collections/ResetPassForm/ResetPassForm.vue';
+import MusoraIcon from './Components/_Units/MusoraIcons/MusoraIcon.vue'
+import GearCarousel from './Components/_Collections/GearCarousel/GearCarousel.vue';
+import ContentInfo from './Components/_Collections/ContentInfo/ContentInfo';
+import CollectionWrapper from './Components/_Collections/CollectionWrapper/CollectionWrapper';
+import ChildCollectionPage from './Components/_Collections/CollectionPage/ChildCollectionPage';
+import PageHeader from './Components/_Collections/PageHeader/PageHeader'
+import MiniCatalogueSection from './Components/_Collections/MiniCatalogueSection/MiniCatalogueSection';
+import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountModal';
 
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
@@ -242,7 +242,7 @@ app.component('AppContainer', AppContainer)
     .component('MembershipUpdatePage', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "membership-update-page" */
-            `./Components/Membership/MembershipUpdatePage.vue`
+            `./Components/_Collections/Membership/MembershipUpdatePage.vue`
         )
     ))
 
@@ -256,14 +256,14 @@ app.component('AppContainer', AppContainer)
     .component('ReportUser', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "report-user" */
-            `./Components/ReportUser/ReportUser.vue`
+            `./Components/_Collections/ReportUser/ReportUser.vue`
         )
     ))
 
     .component('StudentReviewForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "student-review-form-iframe" */
-            './Components/IFrames/StudentReviewForm.vue'
+            './Components/_Collections/IFrames/StudentReviewForm.vue'
         )
     ))
 
@@ -368,7 +368,7 @@ app.component('AppContainer', AppContainer)
     .component('Onboarding', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "onboarding-component" */
-            './Components/Onboarding/Onboarding.vue'
+            './Components/_Collections/Onboarding/Onboarding.vue'
         )
     ))
 
@@ -409,7 +409,7 @@ app.component('AppContainer', AppContainer)
     .component('Breadcrumb', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "breadcrumb" */
-            `./Components/Breadcrumb/Breadcrumb.vue`
+            `./Components/_Collections/Breadcrumb/Breadcrumb.vue`
         )
     ))
 

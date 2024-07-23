@@ -248,7 +248,7 @@
 import {computed, onMounted} from "vue";
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
-import DifficultyLabel from '../../../../Components/DifficultyLabel/DifficultyLabel';
+import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],

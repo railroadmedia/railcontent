@@ -101,11 +101,11 @@
 <script setup>
 import { computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../Stores/user";
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import PageHeader from '../PageHeader/PageHeader';
-import ListCatalogue from '../ListCatalogue/ListCatalogue'
-import CollectionWrapper from '../CollectionWrapper/CollectionWrapper';
+import { useUserStore } from "@stores/user";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import ListCatalogue from '@collections/ListCatalogue/ListCatalogue'
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 
 const props = defineProps({
     breadcrumbs: {
