@@ -2426,92 +2426,97 @@ class ContentService
         $params = [];
 
         foreach ($contentIds as $contentId) {
-            $contentRow = $contentRowsById[$contentId];
+            try {
+                $contentRow = $contentRowsById[$contentId];
 
-            if (!empty($contentRow)) {
-                // compile
-                $contentFieldRows = $contentsFieldRowsByContentId[$contentId] ?? collect();
-                $contentDataRows = $contentsDataRowsByContentId[$contentId] ?? collect();
+                if (!empty($contentRow)) {
+                    // compile
+                    $contentFieldRows = $contentsFieldRowsByContentId[$contentId] ?? collect();
+                    $contentDataRows = $contentsDataRowsByContentId[$contentId] ?? collect();
 
-                $jsonArray = $this->compileContentData($contentRow, $contentFieldRows, $contentDataRows);
+                    $jsonArray = $this->compileContentData($contentRow, $contentFieldRows, $contentDataRows);
 
-                // handle contents linked by fields
-                foreach ($linkedContentIds as $linkedContentId) {
-                    $linkedContentRow = $contentsFieldLinkedContentRowsById[$linkedContentId] ?? [];
-                    $linkedContentFieldRows = $contentsFieldRowsByContentId[$linkedContentId] ?? collect();
-                    $linkedContentDataRows = $contentsDataRowsByContentId[$linkedContentId] ?? collect();
+                    // handle contents linked by fields
+                    foreach ($linkedContentIds as $linkedContentId) {
+                        $linkedContentRow = $contentsFieldLinkedContentRowsById[$linkedContentId] ?? [];
+                        $linkedContentFieldRows = $contentsFieldRowsByContentId[$linkedContentId] ?? collect();
+                        $linkedContentDataRows = $contentsDataRowsByContentId[$linkedContentId] ?? collect();
 
-                    if (!empty($linkedContentRow)) {
-                        $subContentJsonArray = $this->compileContentData(
-                            $linkedContentRow,
-                            $linkedContentFieldRows,
-                            $linkedContentDataRows
-                        );
+                        if (!empty($linkedContentRow)) {
+                            $subContentJsonArray = $this->compileContentData(
+                                $linkedContentRow,
+                                $linkedContentFieldRows,
+                                $linkedContentDataRows
+                            );
 
-                        // substitute the field id with the compiled data
-                        foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
-                            if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) && !empty($subContentJsonArray)) {
-                                if (is_array($jsonArrayValue)) {
-                                    foreach ($jsonArrayValue as $jsonArraySubKey => $jsonArraySubValue) {
-                                        if ((integer)$jsonArraySubValue == $linkedContentRow['id'] &&
-                                            $jsonArraySubKey !== 'id') {
-                                            $jsonArray[$jsonArrayKey][$jsonArraySubKey] = $subContentJsonArray;
+                            // substitute the field id with the compiled data
+                            foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                                if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) && !empty($subContentJsonArray)) {
+                                    if (is_array($jsonArrayValue)) {
+                                        foreach ($jsonArrayValue as $jsonArraySubKey => $jsonArraySubValue) {
+                                            if ((integer)$jsonArraySubValue == $linkedContentRow['id'] &&
+                                                $jsonArraySubKey !== 'id') {
+                                                $jsonArray[$jsonArrayKey][$jsonArraySubKey] = $subContentJsonArray;
+                                            }
                                         }
+                                    } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
+                                        $jsonArray[$jsonArrayKey] = $subContentJsonArray;
                                     }
-                                } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
-                                    $jsonArray[$jsonArrayKey] = $subContentJsonArray;
-                                }
 
-                                // always set length in seconds on parent content data as well
-                                if (isset($subContentJsonArray['length_in_seconds'])) {
-                                    $jsonArray['length_in_seconds'] = $subContentJsonArray['length_in_seconds'];
+                                    // always set length in seconds on parent content data as well
+                                    if (isset($subContentJsonArray['length_in_seconds'])) {
+                                        $jsonArray['length_in_seconds'] = $subContentJsonArray['length_in_seconds'];
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                // add a few shorthand compiled keys for easy usage
-                // instructor_names
-                $instructorNames = [];
+                    // add a few shorthand compiled keys for easy usage
+                    // instructor_names
+                    $instructorNames = [];
 
-                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
-                    if ($jsonArrayKey == 'instructor') {
-                        if (is_array($jsonArrayValue) && empty($jsonArrayValue['id'])) {
-                            foreach ($jsonArrayValue as $jsonArraySubValue) {
-                                if (!empty($jsonArraySubValue['name'])) {
-                                    $instructorNames[] = $jsonArraySubValue['name'];
+                    foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                        if ($jsonArrayKey == 'instructor') {
+                            if (is_array($jsonArrayValue) && empty($jsonArrayValue['id'])) {
+                                foreach ($jsonArrayValue as $jsonArraySubValue) {
+                                    if (!empty($jsonArraySubValue['name'])) {
+                                        $instructorNames[] = $jsonArraySubValue['name'];
+                                    }
                                 }
-                            }
-                        } else {
-                            if (!empty($jsonArrayValue['name'])) {
-                                $instructorNames[] = $jsonArrayValue['name'];
+                            } else {
+                                if (!empty($jsonArrayValue['name'])) {
+                                    $instructorNames[] = $jsonArrayValue['name'];
+                                }
                             }
                         }
                     }
-                }
 
-                if (!empty($instructorNames)) {
-                    $jsonArray['instructor_names'] = $instructorNames;
-                }
+                    if (!empty($instructorNames)) {
+                        $jsonArray['instructor_names'] = $instructorNames;
+                    }
 
-                // remove compiled view data from json data
-                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
-                    if ($jsonArrayKey == 'compiled_view_data') {
-                        unset($jsonArray[$jsonArrayKey]);
+                    // remove compiled view data from json data
+                    foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                        if ($jsonArrayKey == 'compiled_view_data') {
+                            unset($jsonArray[$jsonArrayKey]);
+                        }
+                    }
+
+                    // save
+                    if (!empty($jsonArray)) {
+                        $cases[] = "WHEN {$contentId} then ?";
+                        $params[] = json_encode($jsonArray);
+                        $ids[] = $contentId;
+                    } elseif (!empty($contentRow->compiled_view_data)) {
+                        $cases[] = "WHEN {$contentId} then ?";
+                        $params[] = null;
+                        $ids[] = $contentId;
                     }
                 }
-
-                // save
-                if (!empty($jsonArray)) {
-                    $cases[] = "WHEN {$contentId} then ?";
-                    $params[] = json_encode($jsonArray);
-                    $ids[] = $contentId;
-                } elseif (!empty($contentRow->compiled_view_data)) {
-                    $cases[] = "WHEN {$contentId} then ?";
-                    $params[] = null;
-                    $ids[] = $contentId;
-                }
+            } catch (\Exception $exception) {
+                error_log("Unable to rebuild compiled content  for $contentId");
+                error_log($exception);
             }
         }
 
