@@ -31,4 +31,9 @@ class ContentLifestyle extends Model
     {
         return $this->belongsTo(Content::class, 'content_id');
     }
+
+    public static function getName(): string
+    {
+        return 'lifestyle';
+    }
 }
