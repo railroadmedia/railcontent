@@ -39,7 +39,8 @@ class AuthenticationController extends Controller
         /** @var User $user */
         $user = User::firstWhere('email', $email);
 
-        if (!$user->isAccountSetup()) {
+        if ($user->doesRequirePasswordUpdate()) {
+            Auth::logout(); // make sure there are no active sessions
             $this->userAuthenticationService->sendSetupAccountEmail($user);
 
             return response()->json([
