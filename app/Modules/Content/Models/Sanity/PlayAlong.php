@@ -21,7 +21,7 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class PlayAlong extends BaseSanityModel
+class PlayAlong extends BaseSanityContentTypeModel
 {
     public function __construct()
     {
@@ -43,7 +43,14 @@ class PlayAlong extends BaseSanityModel
                     ]
         );
         $genreReference = new Reference([['type' => 'genre']],  options: ['aiAssist'=>['embeddingsIndex' => 'genre-index']]);
-
+        $resourceList = new ListObject(
+            fields: [new Field(FieldType::String, 'resource_name'),
+                        new Field(FieldType::URL, 'resource_url')],
+            previewItem: new ListItemPreview('resource_name', 'resource_url')
+        );
+        $bpmList = new ListObject(
+            fields: [new Field(FieldType::Number, 'BPM')]
+        );
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup  = new Group('openAI', 'OpenAI');
@@ -84,11 +91,22 @@ class PlayAlong extends BaseSanityModel
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup),
+
+            new Field(FieldType::Array, 'bpm', 'BPM', of: $bpmList,group:$detailsGroup),
+            new Field(FieldType::URL, 'mp3_no_drums_no_click_url', group: $detailsGroup),
+            new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', group: $detailsGroup),
+            new Field(FieldType::URL, 'mp3_no_drums_yes_click_url', group: $detailsGroup),
+            new Field(FieldType::URL, 'mp3_yes_drums_yes_click_url', group: $detailsGroup),
+            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList,group:$detailsGroup),
+
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ];
+
+//        $defaultFields = $this->getCommonFields($detailsGroup, includeDescription: false);
+//        $fields = array_merge($defaultFields, $fields);
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct(self::getName(), 'Play Alongs', fields: $fields, preview: $preview, groups: $groups);
     }

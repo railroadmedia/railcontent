@@ -87,7 +87,7 @@ class CoursePart extends BaseSanityModel
             new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group: $detailsGroup),
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
-
+            new Field(FieldType::Number, 'sort', 'Episode Number', validation: "rule => rule.min(0)", group: $detailsGroup),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference,group:$detailsGroup),
             new Field(FieldType::Array, 'essential', 'Essentials', '', of: $essentialReference,group:$detailsGroup),
             new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference,group:$detailsGroup),

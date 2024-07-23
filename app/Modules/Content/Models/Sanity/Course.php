@@ -24,10 +24,11 @@ class Course extends BaseSanityModel
 {
     public function __construct()
     {
+        $childReference = new Reference([['type' => 'course-part']],options: ['rox_fied' => "document.title"]);
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $instructorReference = new Reference([['type' => 'instructor']]);
-        $childReference = new Reference([['type' => 'course-part']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $blockList = new Block();
         $resourceList = new ListObject(
             fields: [new Field(FieldType::String, 'resource_name'),
@@ -60,6 +61,7 @@ class Course extends BaseSanityModel
             new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)",group:$detailsGroup),
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true",group:$detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
+            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference,group:$detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys',group:$detailsGroup),
