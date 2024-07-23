@@ -27,9 +27,9 @@
 
 <script setup>
 import { computed } from "vue";
-import Breadcrumb from "../../../../../Components/Breadcrumb/Breadcrumb.vue";
-import PageHeader from "../../../../../Components/PageHeader/PageHeader.vue";
-import CollectionWrapper from "../../../../../Components/CollectionWrapper/CollectionWrapper.vue";
+import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
+import PageHeader from "@collections/PageHeader/PageHeader.vue";
+import CollectionWrapper from "@collections/CollectionWrapper/CollectionWrapper.vue";
 
 const props = defineProps({
     discussionTitle: String,
@@ -110,4 +110,3 @@ const headerData = computed(() => {
     };
 });
 </script>
-../../../../../Components/Breadcrumb/Breadcrumb.vue../../../../../Components/PageHeader/PageHeader.vue../../../../../Components/CollectionWrapper/CollectionWrapper.vue

@@ -15,9 +15,9 @@
 import { computed } from 'vue';
 
 //Components
-import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import PlaylistCollectionCatalog from '../Playlists/PlaylistCollection/PlaylistCollectionCatalog';
-import PageHeader from '../PageHeader/PageHeader.vue';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PlaylistCollectionCatalog from '@collections/Playlists/PlaylistCollection/PlaylistCollectionCatalog';
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
 
 const props = defineProps({
     playlists: {

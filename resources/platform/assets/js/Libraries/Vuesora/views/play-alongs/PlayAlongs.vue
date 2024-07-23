@@ -64,7 +64,7 @@
 import * as QueryString from 'query-string';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ContentService from '../../assets/js/Services/content';
-import userJourney from '../../../../Services/userJourney.js';
+import userJourney from '@services/userJourney';
 import PlayAlongsListItem from './PlayAlongsListItem.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import PlayAlongsPlayer from './PlayAlongsPlayer.vue';
@@ -74,13 +74,13 @@ import ThemeClasses from '../../mixins/ThemeClasses';
 import PlayAlongsFilters from './PlayAlongsFilters.vue';
 import Pagination from '../../Components/Pagination.vue';
 import LoadingAnimation from '../../Components/LoadingAnimation/LoadingAnimation.vue';
-import CollectionFilterWrapper from '../../../../Components/Filter/CollectionFilterWrapper';
+import CollectionFilterWrapper from '@collections/Filter/CollectionFilterWrapper';
 import ProgressTracker from "../../assets/js/classes/progress-tracker";
-import InputLabel from "../../../../Components/InputLabel/InputLabel.vue";
-import { bgColor, textColor } from "../../../../Constants/brands";
-import { useFilterValues } from "../../../../Hooks/useFilterValues";
-import { useUserStore } from '../../../../Stores/user.js';
-import MusoraIcon from '../../../../Components/MusoraIcons/MusoraIcon.vue';
+import InputLabel from "@units/InputLabel/InputLabel.vue";
+import { bgColor, textColor } from "@constants/brands";
+import { useFilterValues } from "@hooks/useFilterValues";
+import { useUserStore } from '@stores/user.js';
+import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 const { getFilterValues } = useFilterValues();
 
 

@@ -40,7 +40,7 @@
   
   <script setup>
   import { computed } from 'vue';
-  import { useUserStore } from "../../Stores/user";
+  import { useUserStore } from "@stores/user";
   
   const props = defineProps({
     lessonTypes: {

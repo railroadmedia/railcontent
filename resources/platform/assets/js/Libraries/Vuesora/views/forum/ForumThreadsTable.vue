@@ -118,7 +118,7 @@ import ForumSearchResult from './_ForumSearchResult.vue';
 import Pagination from '../../Components/Pagination.vue';
 import ClearableFilter from '../../Components/ClearableFilter.vue';
 import ForumService from '../../assets/js/Services/forums';
-import {useUserStore} from "../../../../Stores/user";
+import {useUserStore} from "@stores/user";
 import {storeToRefs} from "pinia/dist/pinia";
 
 export default {
