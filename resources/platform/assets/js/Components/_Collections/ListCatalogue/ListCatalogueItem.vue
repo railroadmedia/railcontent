@@ -1,29 +1,32 @@
 <template>
     <a class="
-      tw-flex
-      tw-flex-row
-      tw-relative
-      tw-text-[#3F3F46]
-      dark:tw-text-[#9EC0DC]
-      tw-border-b
-      tw-border-[#E4E4E7]
-      dark:tw-border-[#223457]
-      tw-no-underline
-    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="renderLink && isReleased ? item.url : null">
+          tw-flex
+          tw-flex-row
+          tw-relative
+          tw-text-[#3F3F46]
+          dark:tw-text-[#9EC0DC]
+          tw-border-b
+          tw-border-[#E4E4E7]
+          dark:tw-border-[#223457]
+          tw-no-underline
+        "
+       :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
+       :href="renderLink && isReleased ? item.url : null"
+       @click="openUpgradeModal"
+    >
 
         <!-- LESSON NUMBERS -->
         <div v-if="showNumbers" class="
-        tw-flex
-        tw-flex-col
-        tw-text-[#00101D]
-        dark:tw-text-white
-        align-left
-        tw-justify-center
-        number-col
-        title
-        hide-xs-only
-      ">
+            tw-flex
+            tw-flex-col
+            tw-text-[#00101D]
+            dark:tw-text-white
+            align-left
+            tw-justify-center
+            number-col
+            title
+            hide-xs-only
+        ">
             {{ lesson_number }}
         </div>
 
@@ -49,13 +52,14 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
                     >
-            <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
-              {{ releaseDate }}
-            </p>
-          </span>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <i v-else class="fas" :class="thumbnailIcon"></i>
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                          {{ releaseDate }}
+                        </p>
+                    </span>
                 </div>
             </div>
         </div>
@@ -63,12 +67,12 @@
         <div v-if="showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center avatar-col">
             <div class="thumb-wrap rounded" style="border-radius: 50%">
                 <div class="thumb-img corners-10 square rounded" :style="'background-image:url( ' + thumbnail + ' );'">
-          <span class="thumb-hover rounded flex-center" style="border-radius: 50%">
-            <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
-              {{ releaseDate }}
-            </p>
-          </span>
+                  <span class="thumb-hover rounded flex-center" style="border-radius: 50%">
+                    <i class="fas" :class="thumbnailIcon"></i>
+                    <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
+                      {{ releaseDate }}
+                    </p>
+                  </span>
                 </div>
             </div>
         </div>
@@ -105,19 +109,19 @@
             </p>
 
             <p v-if="!is_search" class="
-          tw-text-xs
-          font-compressed
-          tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
-          tw-uppercase
-          xl:tw-hidden
-          tw-flex
-          tw-flex-wrap
-          sm:tw-flex-nowrap
-        " :class="`${overview ? 'tw-mt-4' : ''}`">
-        <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
-          <span v-if="i > 0" class="bullet">-</span>
-          {{ column_data }}
-        </span>
+              tw-text-xs
+              font-compressed
+              tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
+              tw-uppercase
+              xl:tw-hidden
+              tw-flex
+              tw-flex-wrap
+              sm:tw-flex-nowrap
+            " :class="`${overview ? 'tw-mt-4' : ''}`">
+            <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
+              <span v-if="i > 0" class="bullet">-</span>
+              {{ column_data }}
+            </span>
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
@@ -247,13 +251,13 @@
 <script setup>
 import {computed, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
 import useCatalogueItem from "@hooks/useCatalogueItem";
 import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
-
 
 const props = defineProps({
     brand: {
@@ -343,6 +347,7 @@ const props = defineProps({
 })
 
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
 const {
     noAccess,
@@ -444,6 +449,10 @@ const thumbnailColumnClass = computed(() => {
 
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
+}
+
+const openUpgradeModal = () => {
+    noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
 </script>

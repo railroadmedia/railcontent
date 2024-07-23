@@ -103,10 +103,6 @@ class ContentPagesController extends BaseController
             return $this->guitareoLessonsPage($request, $domain, $brand);
         }
 
-        if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
-
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
@@ -223,7 +219,6 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
             $songArtists = $this->contentService->getArtists();
             $artists = count($songArtists ?? []);
-
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : json_encode(['data' => []]),
@@ -239,6 +234,7 @@ class ContentPagesController extends BaseController
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
+                'showUpgradeModal' => !user()->hasSongsAccess($brand),
             ]);
         } else {
             $breadcrumbs = [
@@ -265,9 +261,6 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
-        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -434,9 +427,6 @@ class ContentPagesController extends BaseController
         $secondSlug,
         $secondId
     ) {
-        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         $originalContentStatuses = ContentRepository::$availableContentStatues;

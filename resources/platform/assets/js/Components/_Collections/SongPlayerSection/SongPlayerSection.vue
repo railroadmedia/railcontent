@@ -2,28 +2,31 @@
     <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
         <div v-if="!isLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
             <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
-                <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]">
-                    <!-- Song Image Background -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
-                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm"
-                        loading="lazy"
-                        onload="this.classList.remove('tw-opacity-0')"
-                    >
-                    <!-- Song Image -->
-                    <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-cover tw-opacity-0"
-                            :src="thumbnailUrl"
-                            :alt="`${songTitle} album cover`"
+                <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-relative">
+                    <MembershipUpgradeSongCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
+                    <template v-else>
+                        <!-- Song Image Background -->
+                        <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
+                            class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm"
                             loading="lazy"
                             onload="this.classList.remove('tw-opacity-0')"
-                        />
-                    </div>
-                    <div class="tw-z-10 tw-flex tw-items-center tw-justify-center tw-w-[80px] tw-h-[80px] thumb-title rounded ba-white-2 hover-border-drumeo">
-                        <button @click="openFull"
-                            class="square heading rounded pointer text-white hover-text-drumeo shadow-md tw-w-[80px] tw-h-[80px]">
-                            <i class="fas fa-play absolute-center tw-ml-[2px]"></i>
-                        </button>
-                    </div>
+                        >
+                        <!-- Song Image -->
+                        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                            <img class="tw-h-full tw-object-cover tw-opacity-0"
+                                :src="thumbnailUrl"
+                                :alt="`${songTitle} album cover`"
+                                loading="lazy"
+                                onload="this.classList.remove('tw-opacity-0')"
+                            />
+                        </div>
+                        <div class="tw-z-10 tw-flex tw-items-center tw-justify-center tw-w-[80px] tw-h-[80px] thumb-title rounded ba-white-2 hover-border-drumeo">
+                            <button @click="openFull"
+                                class="square heading rounded pointer text-white hover-text-drumeo shadow-md tw-w-[80px] tw-h-[80px]">
+                                <i class="fas fa-play absolute-center tw-ml-[2px]"></i>
+                            </button>
+                        </div>
+                    </template>
                 </div>
             </div>
             <!-- Song Details -->
@@ -37,8 +40,9 @@
                     </p>
                     <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
                         <button v-if="hasInstrumentless" style="padding: 0 24px;"
-                            @click="openInstrumentless"
-                            :class="`tw-h-[50px] tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3`">
+                            @click="openInstrumentless" :disabled="noAccess"
+                            :class="`tw-h-[50px] tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3`"
+                        >
                             <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -49,13 +53,13 @@
                             {{ getInstrumentlessLabel() }}
                         </button>
 
-                        <button style="padding: 0 24px;" @click="openFull"
+                        <button style="padding: 0 24px;" @click="openFull" :disabled="noAccess"
                             :class="`tw-h-[50px] tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3`">
                             <i class="fas fa-play tw-mr-2 tw-text-base"></i>
                             PLAY FULL TRACK
                         </button>
 
-                        <button style="padding: 0 24px;"
+                        <button style="padding: 0 24px;" :disabled="noAccess"
                             :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${brand} tw-text-white dark:tw-bg-${brand} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                             data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                             @click="markSongAsComplete">
@@ -70,6 +74,7 @@
                         </button>
                     </div>
                     <ContentLessonActionButtons
+                        v-if="!noAccess"
                         :brand="brand"
                         :title="songTitle"
                         :description="songArtist"
@@ -138,117 +143,118 @@
     </div>
 </template>
 <script setup>
-    import { ref, onBeforeMount} from 'vue';
-    import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
-    import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
-    import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-    import ContentService from "@vuesora/assets/js/Services/content";
-    import { storeToRefs } from 'pinia';
-    import { useUserStore } from '@stores/user';
+import { ref, onBeforeMount} from 'vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@stores/user';
+import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
+import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
+import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import ContentService from "@vuesora/assets/js/Services/content";
+import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
 
-    const userStore = useUserStore();
-    const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
+const userStore = useUserStore();
+const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
 
-    const props = defineProps({
-        isLoading: Boolean,
-        contentId: Number,
-        resources: Array,
-        thumbnailUrl: String,
-        songTitle: String,
-        songArtist: String,
-        songAlbum: String,
-        songMeta: String,
-        isLiked: Boolean,
-        isAdded: Boolean,
-        assignments: Array,
-        hasInstrumentless: Boolean,
-        lessonProgress: [Number, String],
-        likeCount: [Number, String],
-        reportLogo: String,
-    });
+const props = defineProps({
+    isLoading: Boolean,
+    contentId: Number,
+    resources: Array,
+    thumbnailUrl: String,
+    songTitle: String,
+    songArtist: String,
+    songAlbum: String,
+    songMeta: String,
+    isLiked: Boolean,
+    isAdded: Boolean,
+    assignments: Array,
+    hasInstrumentless: Boolean,
+    lessonProgress: [Number, String],
+    likeCount: [Number, String],
+    reportLogo: String,
+    noAccess: Boolean,
+});
 
-    const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
-    const openSoundslice = ref(null);
-    const lessonProgressRef = ref(props.lessonProgress);
+const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
+const openSoundslice = ref(null);
+const lessonProgressRef = ref(props.lessonProgress);
 
-    const openInstrumentless = () => {
-        openSoundslice.value = 'instrumentless';
-    };
+const openInstrumentless = () => {
+    openSoundslice.value = 'instrumentless';
+};
 
-    const openFull = () => {
-        openSoundslice.value = 'full';
-    };
+const openFull = () => {
+    openSoundslice.value = 'full';
+};
 
-    const markSongAsComplete = () => {
-        if (lessonProgressRef.value === '100') {
-            window.showconfirmationmodal({
-                title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
-                subtitle: 'This cannot be undone.',
-                callbacks: {
-                    submit: () => {
-                        lessonProgressRef.value = null;
-                        ContentService.resetContentProgress(props.contentId)
-                            .then((resolved) => {
-                                if (resolved) {
-                                    window.shownotification({
-                                        icon: 'check',
-                                        text: `Removed! Your progress has been reset.`
-                                    })
-                                    lessonProgressRef.value = null;
-                                }
-                            }).catch(() => {
-                                lessonProgressRef.value = '100';
+const markSongAsComplete = () => {
+    if (lessonProgressRef.value === '100') {
+        window.showconfirmationmodal({
+            title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+            subtitle: 'This cannot be undone.',
+            callbacks: {
+                submit: () => {
+                    lessonProgressRef.value = null;
+                    ContentService.resetContentProgress(props.contentId)
+                        .then((resolved) => {
+                            if (resolved) {
                                 window.shownotification({
-                                    icon: 'error',
-                                    text: 'Woops! Something wrong happened, please try again later.'
+                                    icon: 'check',
+                                    text: `Removed! Your progress has been reset.`
                                 })
-                            });
-                    },
+                                lessonProgressRef.value = null;
+                            }
+                        }).catch(() => {
+                            lessonProgressRef.value = '100';
+                            window.shownotification({
+                                icon: 'error',
+                                text: 'Woops! Something wrong happened, please try again later.'
+                            })
+                        });
                 },
-            });
-        } else {
-            lessonProgressRef.value = '100';
-            ContentService.markContentAsComplete(props.contentId).then(() => {
-                window.shownotification({
-                    icon: 'check',
-                    text: `You completed this song!`
-                })
-                lessonProgressRef.value = '100';
-            }).catch(() => {
-                lessonProgressRef.value = null;
-                window.shownotification({
-                    icon: 'error',
-                    text: 'Woops! Something wrong happened, please try again later.'
-                })
+            },
+        });
+    } else {
+        lessonProgressRef.value = '100';
+        ContentService.markContentAsComplete(props.contentId).then(() => {
+            window.shownotification({
+                icon: 'check',
+                text: `You completed this song!`
             })
-        }
-    };
+            lessonProgressRef.value = '100';
+        }).catch(() => {
+            lessonProgressRef.value = null;
+            window.shownotification({
+                icon: 'error',
+                text: 'Woops! Something wrong happened, please try again later.'
+            })
+        })
+    }
+};
 
-    const getInstrumentlessLabel = () => {
-        return ({
-            drumeo: 'PLAY DRUMLESS TRACK',
-            singeo: 'PLAY VOICELESS TRACK',
-            guitareo: 'PLAY GUITARLESS TRACK',
-            pianote: 'PLAY PIANOLESS TRACK'
-        }[brand.value]);
-    };
+const getInstrumentlessLabel = () => {
+    return ({
+        drumeo: 'PLAY DRUMLESS TRACK',
+        singeo: 'PLAY VOICELESS TRACK',
+        guitareo: 'PLAY GUITARLESS TRACK',
+        pianote: 'PLAY PIANOLESS TRACK'
+    }[brand.value]);
+};
 
-    const getBrandSpecificParams = () => {
-        return ({
-            drumeo: '&show_chords=0',
-            singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
-            guitareo: '',
-            pianote: '&show_chords=1'
-        }[brand.value]);
-    };
+const getBrandSpecificParams = () => {
+    return ({
+        drumeo: '&show_chords=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
+        guitareo: '',
+        pianote: '&show_chords=1'
+    }[brand.value]);
+};
 
-    const handleCloseSoundslice = () => {
-        openSoundslice.value = null;
+const handleCloseSoundslice = () => {
+    openSoundslice.value = null;
 
-        document.body.classList.remove('no-scroll', 'dim-sidebar');
+    document.body.classList.remove('no-scroll', 'dim-sidebar');
 
-        Helpscout.showWidget();
-        Intercom.showWidget();
-    };
-
+    Helpscout.showWidget();
+    Intercom.showWidget();
+};
 </script>

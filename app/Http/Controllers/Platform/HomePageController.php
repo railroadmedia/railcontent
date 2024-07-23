@@ -369,7 +369,6 @@ class HomePageController extends BaseController
                 }
             }
         }
-
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
@@ -908,15 +907,6 @@ class HomePageController extends BaseController
         }
 
         return $parsedTypes;
-    }
-
-    public function testemail(Request $request)
-    {
-        $host = $request->host();
-        Mail::raw('Hello World!', function ($msg) use ($host) {
-            $msg->to('robert@musora.com')
-                ->subject("Test Email: $host");
-        });
     }
 
     public function redirect30day()

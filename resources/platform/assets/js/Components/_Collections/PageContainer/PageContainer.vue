@@ -5,15 +5,17 @@ import { useNotificationStore } from '@stores/notification';
 import { useConfirmationStore } from '@stores/confirmation';
 import { usePlaylistsStore } from '@stores/playlists';
 import { usePageContainerStore } from '@stores/pageContainer';
+import SpriteSheet from "@units/MusoraIcons/SpriteSheet.vue";
+import { setEndpointPrefix } from "../../../utils";
+import { usePlatformStore} from "../../../Stores/platform";
+
 import NotificationToasts from '@vuesora/Components/NotificationToasts/NotificationToasts.vue';
 import Navbar from "../Navbar/Navbar.vue";
 import ConfirmationModal from "@collections/Modal/ConfirmationModal.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "@collections/Footer/Footer.vue";
-// import { useRouter, useRoute } from "vue-router";
-import SpriteSheet from "@units/MusoraIcons/SpriteSheet.vue";
-import { setEndpointPrefix } from "../../../utils"
 import PlaylistsModal from "@collections/Playlists/Modals/PlaylistsModal.vue";
+import MembershipUpgradeModal from '../Modal/MembershipUpgradeModal';
 
 const props = defineProps({
   isMobileAppWebView: {
@@ -60,6 +62,8 @@ const pageContainerStore = usePageContainerStore();
 const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
+const { membershipUpgradeModal } = storeToRefs(platformStore);
 const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 
 const isDarkModeSelected = ref(false);
@@ -230,7 +234,7 @@ onUpdated(() => {
       :title="confirmation.title" :subtitle="confirmation.subtitle" :submitLabel="confirmation.submitLabel"
       :hideCancel="confirmation.hideCancel" @onCancel="handleCloseConfirmationModal" @onSubmit="handleSubmit" />
     <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key"
-      v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
+      v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps" />
 
     <Navbar v-if="!isOnboarding && !isMobileAppWebView" :forceSidebarHidden="forceSidebarHidden" :has-notifications="hasNotifications"
       :isSidebarHidden="pageContainerStore.isSidebarHidden" :isDarkModeSelected="isDarkModeSelected" :show-recommendation="showRecommendation"
@@ -266,7 +270,8 @@ onUpdated(() => {
         </h2>
 
         <!-- Content -->
-        <section class="tw-w-full">
+        <section class="tw-w-full tw-flex-1 tw-relative">
+          <MembershipUpgradeModal v-if="membershipUpgradeModal.open" />
           <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 

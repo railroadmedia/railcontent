@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Platform\AdminController;
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
-use App\Http\Controllers\Platform\InactiveMemberController;
-use App\Http\Controllers\Platform\WorkoutsPageController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
+use App\Http\Controllers\Platform\InactiveMemberController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\MailController;
@@ -17,10 +17,10 @@ use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\RedirectController;
 use App\Http\Controllers\Platform\ReferralPagesController;
-use App\Http\Controllers\Platform\SongsUpgradeController;
-use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\STCController;
+use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
+use App\Http\Controllers\Platform\WorkoutsPageController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
@@ -347,11 +347,6 @@ Route::domain('{musoraDomain}')
                         ]
                     )
                     ->name('platform.content.first-level');
-
-                Route::get(
-                    '/{brand}/songs-upgrade',
-                    [SongsUpgradeController::class, 'index']
-                )->name('platform.songs-upgrade');
 
                 Route::get(
                     '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
@@ -967,7 +962,9 @@ Route::domain('{musoraDomain}')
     });
 
 
-Route::middleware(['web_authenticated'])
+Route::middleware(['web_authenticated', 'web_authenticated_admin'])
+    ->prefix('admin/testing')
     ->group(function () {
-        Route::get('/test/email', [HomePageController::class, 'testemail']);
+        Route::get('/email', [AdminController::class, 'testEmail']);
+        Route::get('/user/create', [AdminController::class, 'createUser']);
     });

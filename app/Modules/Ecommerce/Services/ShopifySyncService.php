@@ -141,7 +141,7 @@ class ShopifySyncService
         float $totalPrice,
         ?float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency,
+        ?string $currency = null,
         ?string $notes = null,
         ?array $tags = null
     ): void {
@@ -199,7 +199,7 @@ class ShopifySyncService
         string $amount,
         Carbon $processedAt,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency,
+        ?string $currency = null,
     ): void {
         $paymentData =
             [
@@ -269,7 +269,7 @@ class ShopifySyncService
         float $totalPrice,
         float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency,
+        ?string $currency = null,
         ?string $note = null,
         ?array $tags = null
     ): array {

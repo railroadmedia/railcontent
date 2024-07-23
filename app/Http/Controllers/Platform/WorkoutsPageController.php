@@ -74,7 +74,7 @@ class WorkoutsPageController extends BaseController
         $lessons->transform(function ($lesson) {
             $lesson = collect($lesson);
 
-            return $lesson->only(['id', 'slug', 'type', 'fields', 'data', 'url', 'published_on', 'instructors'])
+            return $lesson->only(['id', 'slug', 'type', 'fields', 'data', 'url', 'published_on', 'instructors', 'need_access'])
                 ->toArray();
         });
         $startedListLessons = (new ContentFilterResultsEntity(['results' => $lessons->values()]))->toResponseRawJson();
@@ -82,7 +82,6 @@ class WorkoutsPageController extends BaseController
 
         CarouselService::$workoutsPage = true;
         $carousel = $this->carouselService->getCarouselSlides();
-
         return view('pages.workouts', [
                                         "listLessons" => $workouts->toResponseRawJson(),
                                         "startedLessons" => $startedListLessons,

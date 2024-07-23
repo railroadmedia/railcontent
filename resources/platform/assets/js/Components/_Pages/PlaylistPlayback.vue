@@ -22,6 +22,7 @@ import YoutubePlayer from '@vuesora/Components/YoutubePlayer/YoutubePlayer.vue';
 import Intercom from '@vuesora/assets/js/Services/intercom';
 import Helpscout from '@vuesora/assets/js/Services/helpscout';
 import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
+import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -312,6 +313,10 @@ const needAccessMessage = computed(() => {
     return activeItem.need_access_message;
 })
 
+const showUpgradeCover = computed(() => {
+    return activeItem.show_plus_upgrade_modal;
+})
+
 const formattedChapters = computed(() => {
     if (props.videoChapters?.length) {
         return props.videoChapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
@@ -400,54 +405,60 @@ const seekToChapter = (time) => {
             <!--Video Wrapper -->
             <div class="tw-col-span-3 tw-w-full"
                 :class="playlistsStore.playerExpanded ? '2xl:tw-col-span-3' : '2xl:tw-col-span-2'">
+                <div class="tw-aspect-video tw-relative" v-if="needAccess && showUpgradeCover">
+                    <MembershipUpgradeVideoCover :thumbnail-url="thumbnailUrl" />
+                </div>
                 <!-- Content Unavailable -->
-                <ContentUnavailable v-if="!isReleased || needAccess" @goToNext="handleGoToNext"
+                <ContentUnavailable v-else-if="!isReleased || (needAccess && !showUpgradeCover)" @goToNext="handleGoToNext"
                     :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
                     :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
-                    :message="needAccessMessage" />
-                <!-- Soundslice Player -->
-                <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && isReleased"
-                    class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
-                    :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
-                    <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                        :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
-                </div>
-                <!-- Video Players -->
-                <div v-if="isReleased && !needAccess" class="p-lg-only lean tw-relative">
-                    <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
-                        <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
-                            :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
-                            :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
-                            :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
-                            @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
+                    :message="needAccessMessage" :brand="brand" />
+                <div v-else class="tw-relative">
+
+                    <!-- Soundslice Player -->
+                    <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine')"
+                        class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4 tw-relative"
+                        :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
+                        <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
                     </div>
-                    <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
-                        id="lessonVideoWrap">
-                        <transition v-if="useLegacyVideoPlayer" appear name="fade">
-                            <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
-                                :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
-                                :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
-                                :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
-                                :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
-                                :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
-                                @pause="handleVideoPause" @ended="handleGoToNext">
-                                <div :class="`widescreen title tw-text-${brand}`">
-                                    <i class="fas fa-spinner fa-spin absolute-center"></i>
-                                </div>
-                            </VideoMediaElement>
-                        </transition>
-                        <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance" :start-second="startSecond" :end-second="endSecond"
-                                :theme-color="brand" :brand="brand" :poster="videoPosterImageUrl"
-                                :sources="videoMediaSources" :ranges="songRanges" :ranges-video-ids="rangesVideoIds"
-                                :show-range-buttons="true" :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
-                                :current-second="currentSecond" :content-id="contentId" :user-id="userId"
-                                :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
-                                :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
-                                <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                            </VideoPlayer>
-                        </transition>
+                    <!-- Video Players -->
+                    <div class="p-lg-only lean tw-relative">
+                        <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
+                            <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
+                                :start-second="startSecond" :end-second="endSecond" :seek-to-time="seekToTime"
+                                :total-duration="totalDuration" :video-length="videoLength" :progress-state="progressState"
+                                :content-id="contentId" :use-intersection-observer="true" :theme-color="brand"
+                                @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext" />
+                        </div>
+                        <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
+                            id="lessonVideoWrap">
+                            <transition v-if="useLegacyVideoPlayer" appear name="fade">
+                                <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
+                                    :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
+                                    :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
+                                    :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
+                                    :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
+                                    :check-for-timecode="true" :seek-to-time="seekToTime" @playing="handleVideoPlay"
+                                    @pause="handleVideoPause" @ended="handleGoToNext">
+                                    <div :class="`widescreen title tw-text-${brand}`">
+                                        <i class="fas fa-spinner fa-spin absolute-center"></i>
+                                    </div>
+                                </VideoMediaElement>
+                            </transition>
+                            <transition v-else appear name="fade">
+                                <VideoPlayer ref="mediaElementVueInstance" :start-second="startSecond" :end-second="endSecond"
+                                    :theme-color="brand" :brand="brand" :poster="videoPosterImageUrl"
+                                    :sources="videoMediaSources" :ranges="songRanges" :ranges-video-ids="rangesVideoIds"
+                                    :show-range-buttons="true" :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
+                                    :current-second="currentSecond" :content-id="contentId" :user-id="userId"
+                                    :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
+                                    :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
+                                    :seek-to-time="seekToTime" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                    <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
+                                </VideoPlayer>
+                            </transition>
+                        </div>
                     </div>
                 </div>
                 <!-- Video Resources -->
@@ -460,14 +471,15 @@ const seekToChapter = (time) => {
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
-                        :report-user-name="userName" :artist="artist"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
+                        :report-user-name="userName" :artist="artist" :no-access="needAccess"
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
+                    />
 
                     <!-- Info Section -->
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="showVideoChapters" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="!needAccess && showVideoChapters" :chapters="formattedChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
@@ -502,7 +514,7 @@ const seekToChapter = (time) => {
             </div>
 
             <!-- Assignments and Comments Wrapper -->
-            <div class="tw-col-span-3 2xl:tw-col-span-2" :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''">
+            <div v-if="!needAccess" class="tw-col-span-3 2xl:tw-col-span-2" :class="playlistsStore.playerExpanded ? 'lg:tw-hidden' : ''">
                 <!-- Assignments Section -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div

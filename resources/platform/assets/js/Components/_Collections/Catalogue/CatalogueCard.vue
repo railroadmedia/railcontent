@@ -11,9 +11,10 @@
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
-                        :class="[
-        item.type === 'song' ? 'tw-blur-sm' : ''
-    ]" loading="lazy" onload="this.classList.remove('tw-opacity-0')">
+                        :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
+                         loading="lazy"
+                         onload="this.classList.remove('tw-opacity-0')"
+                    >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
@@ -38,9 +39,10 @@
 
                     <!-- EVERYTHING ELSE -->
                     <div v-else
-                        class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
-                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased },]">
-                        <i class="fas" :class="thumbnailIcon"></i>
+                        class="tw-absolute tw-flex tw-flex-col tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
+                        :class="[{ 'tw-bg-[rgba(0,12,23,0.85)]': noAccess}, { 'tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30': isReleased && !noAccess },]">
+                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <i v-else class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
                         </p>
@@ -139,9 +141,11 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 import userJourney from '@services/userJourney';
+import { usePlatformStore } from "../../../Stores/platform";
 
 //Pinia Stores
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
 const { brand } = storeToRefs(userStore);
 
 const props = defineProps({
@@ -358,18 +362,23 @@ onUnmounted(() => {
 const emit = defineEmits(['addToList', 'progressReset']);
 
 const handleClick = (event) => {
-    if (isReleased.value && renderLink.value && !props.forceNoLinks && props.trackingSection && props.trackingSection.length) {
+    if (noAccess.value) {
         event.preventDefault();
+        platformStore.openMembershipUpgradeModal();
+    } else {
+        if (isReleased.value && renderLink.value && !props.forceNoLinks && props.trackingSection && props.trackingSection.length) {
+            event.preventDefault();
 
-        userJourney.trackHomeContentClick({
-            payload: {
-                contentId: props.item.id,
-                brand: brand.value,
-                section: props.trackingSection,
-            }
-        }).finally(() => {
-            window.location.href = props.item.url;
-        });
+            userJourney.trackHomeContentClick({
+                payload: {
+                    contentId: props.item.id,
+                    brand: brand.value,
+                    section: props.trackingSection,
+                }
+            }).finally(() => {
+                window.location.href = props.item.url;
+            });
+        }
     }
 }
 </script>

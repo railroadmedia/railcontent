@@ -25,6 +25,10 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
+                <div v-if="showUpgrade" class="tw-px-0 md:tw-px-6 tw-mt-6">
+                    <MembershipUpgradeBanner />
+                </div>
+
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
                     <div class="tw-flex tw-flex-col tw-grow">
 
@@ -108,7 +112,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import { initRecharge, loginShopifyAppProxy, loginWithShopifyStorefront, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
@@ -118,6 +122,7 @@ import MuToggle from '@units/FormInputs/MuToggle.vue';
 import PillNav from "@collections/PillNav/PillNav.vue";
 import DeleteAccountModal from "@collections/Modal/DeleteAccountModal.vue";
 import MuButton from "@units/Button/MuButton.vue";
+import MembershipUpgradeBanner from "../../_Collections/MembershipUpgradeBanner/MembershipUpgradeBanner";
 
 const props = defineProps({
     storeIdentifier: String,
@@ -178,6 +183,10 @@ const customerDetails = ref(null);
 const formData = ref({
     use_legacy_video_player: useLegacyVideoPlayer.value || false
 });
+
+const showUpgrade = computed(() => {
+    return userMembershipLevel.value === 'basic';
+})
 
 const initializeRecharge = async () => {
     await initRecharge({

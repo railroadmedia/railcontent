@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Jobs\WebhookJob;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
+use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedSubscriptionManagerJob;
 use App\Modules\Ecommerce\Jobs\Shopify\RefundCreatedJob;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
@@ -26,7 +27,9 @@ class ShopifyWebHookController extends Controller
             $processedAt = $request->get('processed_at');
 
             if ($this->isImportedOrder($processedAt)) {
-                Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring.");
+                Log::debug(
+                    "Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring."
+                );
                 return response()->json();
             }
 
@@ -52,7 +55,9 @@ class ShopifyWebHookController extends Controller
             $processedAt = $request->get('processed_at');
 
             if ($this->isImportedOrder($processedAt)) {
-                Log::debug("Shopify order created webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring.");
+                Log::debug(
+                    "Shopify order created webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring."
+                );
                 return response()->json();
             }
 
@@ -62,7 +67,8 @@ class ShopifyWebHookController extends Controller
             $children = [
                 new AddOrderTags(new Order(json_decode(json_encode($contents), false))),
                 new OrderCreatedEventTrackingJob($contents),
-                new OrderCreatedUpdateLastTrialDataJob($contents)
+                new OrderCreatedUpdateLastTrialDataJob($contents),
+                new OrderCreatedSubscriptionManagerJob($contents)
             ];
             dispatch(new WebhookJob('Shopify-order-created', $id, $contents, $children));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -95,7 +101,7 @@ class ShopifyWebHookController extends Controller
     /**
      * Is this webhook request for an Order that was imported into Shopify?
      *
-     * @param  string|null  $processedAt
+     * @param string|null $processedAt
      * @return bool
      */
     private function isImportedOrder(?string $processedAt): bool
@@ -113,10 +119,12 @@ class ShopifyWebHookController extends Controller
 
     private function getWebhookIdentifierOrGUID(Request $request)
     {
-        return $request->header('x-shopify-webhook-id') ?? $request->header('X-Shopify-Webhook-Id') ?? uniqid('generated-');
+        return $request->header('x-shopify-webhook-id') ?? $request->header('X-Shopify-Webhook-Id') ?? uniqid(
+            'generated-'
+        );
     }
 
-    public function productUpdated(Request $request)
+    public function productUpdated(Request $request): JsonResponse
     {
         try {
             $id = $this->getWebhookIdentifierOrGUID($request);

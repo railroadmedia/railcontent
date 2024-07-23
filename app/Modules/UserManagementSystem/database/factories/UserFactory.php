@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Factories;
 
+use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
@@ -102,6 +103,7 @@ class UserFactory extends Factory
             'membership_level' => null,
             'is_drumeo_lifetime_member' => 0,
             'needs_logout' => false,
+            'shopify_id' => fake()->numberBetween(1000000000000, 9999999999999),
         ];
     }
 
@@ -128,5 +130,28 @@ class UserFactory extends Factory
             $array['user_id'] = $user->id;
             UserProduct::factory()->create($array);
         });
+    }
+
+    public static function createLifetimeMember(array $attributes = []): User
+    {
+        $attributes = array_merge($attributes, [
+            'is_lifetime_member' => '1',
+            'membership_expiration_date' => Carbon::maxValue(),
+            'membership_level' => MembershipLevel::Basic->value
+        ]);
+        return User::factory()->create($attributes);
+    }
+
+    public static function createMember(
+        MembershipLevel $membershipLevel,
+        Carbon $membershipExpirationDate,
+        array $attributes = []
+    ): User {
+        $attributes = array_merge($attributes, [
+            'is_lifetime_member' => '0',
+            'membership_expiration_date' => $membershipExpirationDate,
+            'membership_level' => $membershipLevel->value
+        ]);
+        return User::factory()->create($attributes);
     }
 }

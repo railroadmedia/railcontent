@@ -4,7 +4,11 @@
         <!-- Thumbnail Image -->
         <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
             class="tw-flex-none tw-h-[78px] tw-w-[144px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
+            <div v-if="noAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
+                <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+            </div>
             <div
+                v-else
                 class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[78px] tw-w-[144px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
                 <i class="fas" :class="thumbnailIcon"></i>
                 <p v-if="!isReleased" class="tw-text-sm tw-text-white tw-font-bold">
@@ -57,15 +61,16 @@
 <script setup>
 import { computed } from 'vue';
 import { PlusIcon } from '@heroicons/vue/outline';
-import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
+import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
+import { usePlatformStore } from "../../../Stores/platform";
 
 //Pinia Stores
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-
 
 const props = defineProps({
     item: {
@@ -112,6 +117,7 @@ const {
     renderLink,
     isReleased,
     releaseDate,
+    noAccess,
 } = useCatalogueItem({ ...props, brand: brand.value });
 
 const mappedData = computed(() => {
@@ -128,7 +134,10 @@ const mappedData = computed(() => {
 const emit = defineEmits(['addToList', 'progressReset']);
 
 const handleClick = (event) => {
-    if (renderLink.value && props.trackingSection && props.trackingSection.length) {
+    if(noAccess.value){
+        event.preventDefault();
+        platformStore.openMembershipUpgradeModal();
+    } else if (renderLink.value && props.trackingSection && props.trackingSection.length) {
         event.preventDefault();
 
         userJourney.trackHomeContentClick({

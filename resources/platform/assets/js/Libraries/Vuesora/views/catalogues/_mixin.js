@@ -117,7 +117,7 @@ export default {
                 return false;
             }
 
-            return (this.lockUnowned && this.item.is_owned === false) || (this.lockUnowned && !this.isReleased);
+            return this.item.need_access || (this.lockUnowned && this.item.is_owned === false) || (this.lockUnowned && !this.isReleased);
         },
 
         datePublshedOn() {
