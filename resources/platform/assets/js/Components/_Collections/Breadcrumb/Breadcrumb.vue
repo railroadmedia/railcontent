@@ -63,4 +63,3 @@
     };
   });
 </script>
-@stores/user
