@@ -253,11 +253,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'header' => 'Sing your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
         'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
-        'brandName' => 'Singeo',
-        'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
 
     @php
@@ -324,7 +320,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br>Guided Practice Sessions. <br> Vocal coaches and support.',
+        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>

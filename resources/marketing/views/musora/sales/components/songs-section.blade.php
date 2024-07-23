@@ -2,7 +2,13 @@
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
     <div class="container max-w-5xl mx-auto">
         <h2 class="leading-tight"><strong>Play your favorite songs.</strong></h2>
-        <p class="leading-tight mt-3 sm:mt-4">You’ll have all the tools you need to make sure you never miss a beat.</p>
+        <p class="leading-tight mt-3 sm:mt-4">
+            @if(!empty($subheader))
+                {!! $subheader !!}
+            @else
+                You’ll have all the tools you need to make sure you never miss a beat.
+            @endif
+        </p>
 
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mt-8 sm:my-10">
             <div class="max-w-sm sm:max-w-full"
@@ -48,5 +54,8 @@
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
+        @if(empty($promoVersion))
+            <p class="opacity-60 text-sm mt-5"><em>Songs included with {{ ucfirst($theme) }}+<br class="sm:hidden"> and only available in-browser.</em></p>
+        @endif
     </div>
 </section>

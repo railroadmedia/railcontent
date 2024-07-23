@@ -233,17 +233,17 @@ $singeo = [
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/find-tempo-icon.svg",
             "title" => "Find the perfect tempo.",
-            "desc" => "Slow down any section of a song to  hear the cadence and intricacies.",
+            "desc" => "Slow down any section of a song to hear the cadence and intricacies. ",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/loop-icon.svg",
-            "title" => "Loop the hard parts.",
-            "desc" => "Working on the chorus? Simply create  a loop to sing it over and over!",
+            "title" => "Simplify the tricky parts.",
+            "desc" => "Working on the chorus? Simply create a loop to sing it over and over!",
         ],
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/device-icon.svg",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-metronome.svg",
+            "title" => "Improve your timing. ",
+            "desc" => "Use the built-in metronome – your new best friend to get the timing just right.",
         ],
     ],
     "testimonials" => [
