@@ -34,9 +34,9 @@ class Workout extends BaseSanityModel
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),
                         new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
-                        new Field(FieldType::URL, 'chapter_thumbnail_url')
+                        new Field(FieldType::Image, 'chapter_thumbnail_url')
                     ],
-            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
+            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode','chapter_thumbnail_url')
         );
         $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
 
@@ -70,7 +70,10 @@ class Workout extends BaseSanityModel
             new Field(
                 FieldType::Object, 'video', fields: $video->fields,
             group:$detailsGroup),
-            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys',group:$detailsGroup),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
+            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
+
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail',group:$detailsGroup),
             new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true",group:$detailsGroup), //web_url_path
