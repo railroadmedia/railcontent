@@ -169,4 +169,28 @@ class PermissionService
 
         return $this->permissionRepository->delete($id) > 0;
     }
+
+    public static function getMemberShipPermissionIds() : array
+    {
+        // 1 - Drumeo Edge
+        // 77 - Pianote Membership
+        // 73 - Singeo Membership
+        // 52 - Guitareo Membership
+        return [1, 52, 73, 77,];
+    }
+
+    public static function getLifetimeMembershipPermissionIds() : array
+    {
+        // 78 Drumeo Lifetime
+        // 88 Pianote Lifetime
+        // 89 Guitareo Lifetime
+        // Singeo Lifetime
+        return [78, 88, 89, 90];
+    }
+
+    public static function getMusoraMemberShipIds(): array
+    {
+        return [91, 92];
+    }
+
 }

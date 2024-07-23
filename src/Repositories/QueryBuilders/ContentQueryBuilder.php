@@ -7,9 +7,11 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Models\Content;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\PermissionService;
 
 class ContentQueryBuilder extends QueryBuilder
 {
@@ -630,13 +632,12 @@ class ContentQueryBuilder extends QueryBuilder
         // A member for any brand should get access to all brands membership content.
         // If the contents' permission id is any member one and the users permission id is any member one, show all with
         // the membership content.
-        //
-        // 1 - Drumeo Edge
-        // 77 - Pianote Membership
-        // 73 - Singeo Membership
-        // 52 - Guitareo Membership
 
-        $membershipPermissionIds = [1, 52, 73, 77,];
+        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
+        $user = user();
+        if (ContentRepository::$allowsPullSongsContent && ($user?->isABasicMember() ?? false)) {
+            $membershipPermissionIds = array_merge($membershipPermissionIds, PermissionService::getMusoraMemberShipIds());
+        }
 
         $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
@@ -654,7 +655,7 @@ class ContentQueryBuilder extends QueryBuilder
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
-                            ->where('user_id', auth()->id() ?? null)
+                            ->where('user_id', auth()->id())
                             ->where(function (Builder $builder) use ($membershipPermissionIds) {
                                 return $builder
                                     ->whereRaw(
@@ -699,7 +700,8 @@ class ContentQueryBuilder extends QueryBuilder
                 }
                 return $newBuilder;
             });
-
+        // I think we
+        //$this->addSelect()
         return $this;
     }
 
