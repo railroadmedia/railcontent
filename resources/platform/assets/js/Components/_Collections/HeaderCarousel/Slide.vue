@@ -1,6 +1,6 @@
 <script setup>
 import { ArrowSmRightIcon } from "@heroicons/vue/solid";
-import ModalRenderer from "@collections/Modal/ModalRenderer";
+import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
 import { onMounted, ref } from "vue";
 import {testCarousel} from "../../../Constants/carousel_data";
