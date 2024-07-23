@@ -21,7 +21,6 @@ use Avo;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -29,7 +28,6 @@ use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
-use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
@@ -629,7 +627,8 @@ class HomePageController extends BaseController
     {
         ContentRepository::$availableContentStatues = ['published'];
         ContentRepository::$pullFutureContent = false;
-
+        $previousAllowPullSongsContent = ContentRepository::$allowsPullSongsContent;
+        ContentRepository::$allowsPullSongsContent = false;
         $contents = $this->contentService->getFiltered(
             1,
             6,
@@ -647,7 +646,7 @@ class HomePageController extends BaseController
         );
 
         ContentRepository::$pullFutureContent = true;
-
+        ContentRepository::$allowsPullSongsContent = $previousAllowPullSongsContent;
         return $contents;
     }
 
