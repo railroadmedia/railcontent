@@ -110,7 +110,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             )
         );
         $groupedPermissions = $contentPermissionRows->groupBy('content_id');
-
+        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
             foreach ($content['resources'] ?? [] as $resource) {
@@ -159,19 +160,22 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $contentPermissionIds
             ));
 
+
             $message = '';
-            if (!empty($needLifetime)) {
-                $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
-            } elseif (!empty($needMusoraBasic)) {
-                $message = 'This lesson is part of our <b>Musora Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
-            } elseif (!empty($needMusoraPlus)) {
-                $contentsOfType[$contentIndex]['need_access'] = true;
-                // PackOnly users should not see our special modal
-                $contentsOfType[$contentIndex]['show_plus_upgrade_modal'] = !(user()?->isPackOnlyOwner() ?? true);
-                $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
+            if ($contentPermissionIds && empty(array_intersect($userPermissionIds, $contentPermissionIds))) {
+                if (!empty($needLifetime)) {
+                    $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                } elseif (!empty($needMusoraBasic)) {
+                    $message = 'This lesson is part of our <b>Musora Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                } elseif (!empty($needMusoraPlus)) {
+                    $contentsOfType[$contentIndex]['need_access'] = true;
+                    // PackOnly users should not see our special modal
+                    $contentsOfType[$contentIndex]['show_plus_upgrade_modal'] = !(user()?->isPackOnlyOwner() ?? true);
+                    $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                }
             }
 
             if ($contentsOfType[$contentIndex]['need_access']) {
