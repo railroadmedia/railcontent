@@ -438,19 +438,19 @@
 <script setup>
     import { watch, ref, onBeforeMount } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../Stores/user";
-    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-    import PageHeader from '../../PageHeader/PageHeader';
-    import PillNav from "../../PillNav/PillNav.vue";
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import EditDisplayNameModal from "../../Modal/EditDisplayNameModal.vue";
-    import EditSignatureModal from "../../Modal/EditSignatureModal.vue";
-    import ImageUploader from "../../ImageUploader/ImageUploader.vue";
-    import EditAboutYouModal from "../../Modal/EditAboutYouModal.vue";
-    import EditDrumGearModal from "../../Modal/EditDrumGearModal.vue";
-    import EditPianoGearModal from "../../Modal/EditPianoGearModal.vue";
-    import EditGuitarGearModal from "../../Modal/EditGuitarGearModal.vue";
-    import EditSingingGearModal from "../../Modal/EditSingingGearModal.vue";
+    import { useUserStore } from "@stores/user";
+    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+    import PageHeader from '@collections/PageHeader/PageHeader';
+    import PillNav from "@collections/PillNav/PillNav.vue";
+    import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
+    import EditDisplayNameModal from "@collections/Modal/EditDisplayNameModal.vue";
+    import EditSignatureModal from "@collections/Modal/EditSignatureModal.vue";
+    import ImageUploader from "@collections/ImageUploader/ImageUploader.vue";
+    import EditAboutYouModal from "@collections/Modal/EditAboutYouModal.vue";
+    import EditDrumGearModal from "@collections/Modal/EditDrumGearModal.vue";
+    import EditPianoGearModal from "@collections/Modal/EditPianoGearModal.vue";
+    import EditGuitarGearModal from "@collections/Modal/EditGuitarGearModal.vue";
+    import EditSingingGearModal from "@collections/Modal/EditSingingGearModal.vue";
 
     //Pinia
     const userStore = useUserStore();

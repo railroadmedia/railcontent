@@ -9,34 +9,37 @@ use App\Console\Commands\AssignUnassignedHelpScoutCustomersToMentors;
 use App\Console\Commands\CheckCommentsUrl;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
+use App\Console\Commands\DelistStudentReviewAndFocus;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\GenerateWeeklyMembershipStats;
+use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
-use App\Console\Commands\RemoveRailTrackerData;
-use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
-use App\Console\Commands\RepairUserProgressOn30DD;
-use App\Console\Commands\RepairUserProgressOnNPPSH;
-use App\Console\Commands\SeedUserProgress;
-use App\Console\Commands\SoftDeleteOldGuitareoSongs;
-use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
+use App\Console\Commands\RemoveRailTrackerData;
+use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairGuitareoPDFs;
+use App\Console\Commands\RepairUserProgressOn30DD;
+use App\Console\Commands\RepairUserProgressOnNPPSH;
 use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\SeedUserProgress;
+use App\Console\Commands\SoftDeleteOldGuitareoSongs;
+use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\SyncShopifyProductInventoryToProductsTable;
 use App\Console\Commands\SyncUsersToCIO;
 use App\Console\Commands\TestLessonsDescriptionUrls;
-use App\Console\Commands\MembershipFieldsSync;
-use App\Console\Commands\UpdateRoutinesFebruary2023;
-use App\Console\Commands\VaporEnvManager;
+use App\Console\Commands\UpdatePermissionsForCopyright;
 use App\Console\Commands\UpdateRoutines;
+use App\Console\Commands\UpdateRoutinesFebruary2023;
+use App\Console\Commands\UpdateStatusForCopyRightContent;
+use App\Console\Commands\VaporEnvManager;
 use App\Modules\UserManagementSystem\Console\Commands\SendAccountSetupEmail;
 use App\Modules\UserManagementSystem\Console\Commands\SetUserNeedsLogout;
 use Illuminate\Console\Scheduling\Schedule;
@@ -64,6 +67,9 @@ class Kernel extends ConsoleKernel
         CreateSongsDecember2022::class,
         RepairUserProgressStartedOn::class,
         RepairGuitareoPDFs::class,
+        DelistStudentReviewAndFocus::class,
+        UpdateStatusForCopyRightContent::class,
+        UpdatePermissionsForCopyright::class,
         AssignSongsPermissionsToContent::class,
         AssignSongsPermissionsToProducts::class,
         AssignSongsPermissionsToAllUsers::class,
@@ -132,7 +138,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
 
-        // $schedule->command('user:sendAccountSetupEmail')->dailyAt('11:00'); //3am PST
+        $schedule->command('user:sendAccountSetupEmail')->dailyAt('21:00'); //1pm PST
     }
 
     /**

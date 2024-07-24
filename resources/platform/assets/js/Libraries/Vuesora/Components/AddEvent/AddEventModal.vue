@@ -79,8 +79,8 @@
 import UtilsHelpers from "../../assets/js/helper-functions/utils.js";
 import AddEventDropdown from "./AddEventDropdown.vue";
 import ThemeClasses from "../../mixins/ThemeClasses";
-import InfoModal from "../../../../Components/Modal/InfoModal.vue";
-import ModalRenderer from "../../../../Components/Modal/ModalRenderer.vue";
+import InfoModal from "@collections/Modal/InfoModal.vue";
+import ModalRenderer from "@collections/Modal/ModalRenderer.vue";
 
 export default {
   name: "AddEventModal",

@@ -120,7 +120,7 @@
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentSchedule from "../../views/schedule/Schedule.vue";
 import { DateTime } from "luxon";
-import { useUserStore } from "../../../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 
 export default {

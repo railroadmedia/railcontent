@@ -188,7 +188,7 @@
            ],
            [
                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
-               'title' => '1000+ Songs',
+               'title' => 'Popular Songs',
                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
            ],
            [
@@ -202,7 +202,7 @@
     @foreach ($errors->all() as $error)
         <p class="bg-pianote text-white py-4 w-full text-center">{{ $error }}</p>
     @endforeach
-    
+
     <header class="sm:px-6 pb-10 sm:py-14 lg:py-20 bg-[#f6f8fc]">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -224,7 +224,7 @@
                             for 30 days.
                         </h1>
                         <h6 class="leading-snug mt-4 mb-4 sm:mb-2">
-                            Learn a musical instrument faster with step-by-step lessons, thousands of songs, and unlimited personal support — for all skill levels. <b>Unlock drums, piano, singing, and guitar lessons today with your Musora 30-Day Access Pass.</b>
+                            Learn a musical instrument faster with step-by-step lessons, popular songs, and unlimited personal support — for all skill levels. <b>Unlock drums, piano, singing, and guitar lessons today with your Musora 30-Day Access Pass.</b>
                         </h6>
 
                         <div class="flex flex-wrap items-center justify-center sm:justify-center mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs mx-auto lg:mx-0">

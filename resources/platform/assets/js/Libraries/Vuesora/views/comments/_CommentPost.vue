@@ -192,7 +192,7 @@ import { DateTime } from 'luxon';
 import CommentService from '../../assets/js/Services/comments';
 import TextEditor from '../../Components/TextEditor/TextEditor.vue';
 import CommentReply from './_CommentReply.vue';
-import MusoraIcon from '../../../../Components/MusoraIcons/MusoraIcon.vue'
+import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue'
 import Utils from '../../assets/js/classes/utils';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";

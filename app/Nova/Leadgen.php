@@ -77,6 +77,8 @@ class Leadgen extends Resource
                         $brand = 'Guitareo';
                     } elseif($brandId === "4") {
                         $brand = 'Singeo';
+                    } elseif($brandId === "5") {
+                        $brand = 'Musora';
                     }
 
                     return '/'.$brand.'/Lead-gens/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
@@ -113,6 +115,8 @@ class Leadgen extends Resource
                         $brand = 'Guitareo';
                     } elseif($brandId === "4") {
                         $brand = 'Singeo';
+                    } elseif($brandId === "5") {
+                        $brand = 'Musora';
                     }
 
                     return '/'.$brand.'/Lead-gens/Logos/'.$request->uuid.'-'.$request->file('logo')->getClientOriginalName();
@@ -143,6 +147,8 @@ class Leadgen extends Resource
                         $brand = 'Guitareo';
                     } elseif($brandId === "4") {
                         $brand = 'Singeo';
+                    } elseif($brandId === "5") {
+                        $brand = 'Musora';
                     }
 
                     return '/'.$brand.'/Lead-gens/Background-images/'.$request->uuid.'-'.$request->file('bg_img')->getClientOriginalName();

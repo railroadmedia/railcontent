@@ -10,8 +10,10 @@
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
-                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
-                        <template v-if="videoProps.videoId">
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="videoProps.thumbnailUrl" />
+
+                        <template v-else-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
@@ -84,91 +86,38 @@
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName" :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo" :lesson="{ completed: videoButtons.isCompleted }"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" :difficulty="videoResources.difficulty" />
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" :difficulty="videoResources.difficulty" :no-access="noAccess"
+                    />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="formattedChapters.length" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="!noAccess && formattedChapters.length" :chapters="formattedChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" :brand="brand" :prev-label="videoButtons.prevLabel"
                         :next-label="videoButtons.nextLabel" :has-qa-video="videoButtons.hasQAVideo" />
                 </div>
-                <!-- Close Expanded View -->
-                <div class="xl:tw-ml-[10px] xl:tw-pt-6 xl:tw-pr-4 tw-transition-all tw-overflow-hidden tw-shrink-0 tw-hidden"
-                    :class="{ 'xl:tw-inline-block': !isRelatedSectionOpen }">
-                    <button @click="isRelatedSectionOpen = !isRelatedSectionOpen"
-                        class="tw-text-black dark:tw-text-white tw-group">
-                        <!-- Expand Icon outlined -->
-                        <svg class="tw-border tw-border-black dark:tw-border-white tw-rounded-full tw-rotate-180 group-hover:tw-hidden"
-                            width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M24.7125 20.2017C25.0958 19.8124 25.0958 19.1876 24.7125 18.7983L19.2958 13.2983C18.9083 12.9048 18.2751 12.9 17.8816 13.2875C17.4882 13.675 17.4833 14.3082 17.8709 14.7017L21.6116 18.5L11 18.5C10.4477 18.5 10 18.9477 10 19.5C10 20.0523 10.4477 20.5 11 20.5L21.6116 20.5L17.8708 24.2983C17.4833 24.6918 17.4882 25.325 17.8816 25.7125C18.2751 26.1 18.9083 26.0952 19.2958 25.7017L24.7125 20.2017Z"
-                                fill="currentColor" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M27.5498 11C27.1356 11 26.7998 11.3358 26.7998 11.75L26.7998 26.75C26.7998 27.1642 27.1356 27.5 27.5498 27.5C27.964 27.5 28.2998 27.1642 28.2998 26.75L28.2998 11.75C28.2998 11.3358 27.964 11 27.5498 11Z"
-                                fill="currentColor" />
-                        </svg>
-                        <!-- Expand Icon filled -->
-                        <svg class="tw-rotate-180 tw-hidden group-hover:tw-block" width="38" height="38" viewBox="0 0 38 38"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M38 19C38 8.50659 29.4934 0 19 0C8.50659 0 0 8.50659 0 19C0 29.4934 8.50659 38 19 38C29.4934 38 38 29.4934 38 19ZM24.7125 18.7983L19.2958 13.2983C18.9083 12.9048 18.2751 12.9 17.8816 13.2875C17.4882 13.675 17.4833 14.3082 17.8708 14.7017L21.6116 18.5H11C10.4477 18.5 10 18.9477 10 19.5C10 20.0523 10.4477 20.5 11 20.5H21.6116L17.8708 24.2983C17.4833 24.6918 17.4882 25.325 17.8816 25.7125C18.2751 26.1 18.9083 26.0952 19.2958 25.7017L24.7125 20.2017C25.0958 19.8124 25.0958 19.1876 24.7125 18.7983ZM26.8 11.75C26.8 11.3358 27.1358 11 27.55 11C27.9643 11 28.3 11.3358 28.3 11.75V26.75C28.3 27.1642 27.9643 27.5 27.55 27.5C27.1358 27.5 26.8 27.1642 26.8 26.75V11.75Z"
-                                fill="currentColor" />
-                        </svg>
-                    </button>
-                </div>
+                <!-- Related Lessons Toggle -->
+                <RelatedLessonsToggle
+                    v-if="relatedLessons.data && relatedLessons.data.length > 0"
+                    :relatedLessons="relatedLessons"
+                    :isRelatedSectionOpen="isRelatedSectionOpen"
+                    v-model:isRelatedSectionOpen="isRelatedSectionOpen"
+                />
             </section>
 
             <!--Related Section -->
-            <aside
-                class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
-                :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
-                <div class="tw-flex tw-w-full">
-                    <div
-                        class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
-                        <header class="tw-flex tw-flex-col">
-                            <div
-                                class="tw-bg-white dark:tw-bg-[#081825] tw-pt-[24px] tw-pb-[16px] tw-flex tw-justify-between tw-px-[18px]">
-                                <h3 class="tw-text-xl tw-font-bold tw-font-open-sans dark:tw-text-white">Related Workouts
-                                </h3>
-                                <button @click="isRelatedSectionOpen = !isRelatedSectionOpen"
-                                    class="tw-text-black dark:tw-text-white tw-hidden xl:tw-inline-block">
-                                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M27.55 11.5L27.55 26.5" stroke="currentColor" stroke-width="1.5"
-                                            stroke-linecap="round" />
-                                        <path d="M17.1334 24.5L22.55 19M22.55 19L17.1334 13.5M22.55 19L9.55005 19"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                </button>
-                                <button class="tw-z-10 lg:tw-hidden" @click="isRelatedSectionCollapsed = !isRelatedSectionCollapsed">
-                                    <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] tw-w-[35px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
-                                         :class="!isRelatedSectionCollapsed && 'tw-rotate-180'">
-                                        <i class="fas fa-chevron-down"></i>
-                                    </div>
-                                </button>
-                            </div>
-                        </header>
-                        <!-- Cards -->
-                        <section
-                            class="tw-w-full tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block"
-                            :class="isRelatedSectionCollapsed ? 'tw-hidden' : 'tw-flex'"
-                        >
-                            <div v-for="(item, i) in relatedLessons.data " :key="i"
-                                class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
-                                <CatalogueListElement :item="item" :content-type="item.type" :brand="brand" />
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </aside>
+            <RelatedLessons
+                v-if="relatedLessons.data && relatedLessons.data.length > 0"
+                :isRelatedSectionOpen="isRelatedSectionOpen"
+                :relatedLessons="relatedLessons"
+                v-model:isRelatedSectionOpen="isRelatedSectionOpen"
+            />
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'xl:tw-mr-[64px]'">
+            <section v-if="!noAccess" class="tw-col-span-3 xl:tw-row-span-2" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'xl:tw-mr-[64px]'">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
@@ -204,24 +153,25 @@
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
 import { onMounted, ref, computed } from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-//import VideoMediaElement from "../../Libraries/Vuesora/Components/MediaElement/MediaElement.vue";
-//import VideoPlayer from "../../Libraries/Vuesora/Components/VideoPlayer/VideoPlayer.vue";
-import YoutubePlayer from "../../Libraries/Vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
-import VideoButtons from "../VideoButtons/VideoButtons.vue";
-import VideoResources from "../../Libraries/Vuesora/Components/VideoResources/VideoResources.vue";
-import VideoComments from "../../Libraries/Vuesora/views/comments/Comments.vue";
-import VideoChapters from "../VideoChapters/VideoChapters.vue";
-import ContentInfo from "../ContentInfo/ContentInfo.vue";
-import SoundSlice from "../SoundSlice/SoundSlice.vue";
-import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
-import CatalogueListElement from "../Catalogue/CatalogueListElement.vue";
-import Intercom from "../../Libraries/Vuesora/assets/js/Services/intercom";
-import Helpscout from "../../Libraries/Vuesora/assets/js/Services/helpscout";
-import ProgressTracker from "../../Libraries/Vuesora/assets/js/classes/progress-tracker";
-import ContentService from '../../Libraries/Vuesora/assets/js/Services/content';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+//import VideoMediaElement from "@vuesora/Components/MediaElement/MediaElement.vue";
+//import VideoPlayer from "@vuesora/Components/VideoPlayer/VideoPlayer.vue";
+import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
+import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
+import VideoResources from "@vuesora/Components/VideoResources/VideoResources.vue";
+import VideoComments from "@vuesora/views/comments/Comments.vue";
+import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
+import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
+import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
+import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import CatalogueListElement from "@collections/Catalogue/CatalogueListElement.vue";
+import Intercom from "@vuesora/assets/js/Services/intercom";
+import Helpscout from "@vuesora/assets/js/Services/helpscout";
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
+import ContentService from '@vuesora/assets/js/Services/content';
+import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {
@@ -410,4 +360,8 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+const noAccess = computed(() => {
+    return props.videoProps.need_access;
+})
 </script>

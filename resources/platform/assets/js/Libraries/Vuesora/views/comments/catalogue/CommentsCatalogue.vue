@@ -423,7 +423,7 @@ import CommentLikesModal from '../_CommentLikesModal.vue';
 import CommentMixin from '../_mixin';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import {storeToRefs} from 'pinia';
-import {useUserStore} from "../../../../../Stores/user";
+import {useUserStore} from "@stores/user";
 
 const userStore = useUserStore();
 const {userDisplayName} = storeToRefs(userStore);

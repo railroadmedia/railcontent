@@ -135,8 +135,8 @@ import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
-import { textColor } from '../../../../Constants/brands'
-import MuButton from '../../../../Components/Button/MuButton';
+import MuButton from '../../../../Components/_Units/Button/MuButton';
+import { textColor } from '@constants/brands'
 
 export default {
     name: 'Comments',

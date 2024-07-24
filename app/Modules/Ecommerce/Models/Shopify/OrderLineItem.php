@@ -9,6 +9,7 @@ class OrderLineItem
     public string $gid;
     public int $id;
     public string $sku;
+    public int $quantity;
     public ?Product $product = null;
     public Order $order;
 
@@ -19,6 +20,7 @@ class OrderLineItem
         $this->gid = $graphGLResponse->id;
         $this->id = str_replace('gid://shopify/LineItem/', '', $graphGLResponse->id);
         $this->sku = $graphGLResponse->sku;
+        $this->quantity = $graphGLResponse->quantity;
         $this->order = $order;
     }
 

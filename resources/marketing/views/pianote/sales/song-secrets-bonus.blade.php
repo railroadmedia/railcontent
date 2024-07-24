@@ -174,7 +174,7 @@
                         <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Step-by-step lessons </li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> World-class instructors</li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Officially licensed songs</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
                             <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 11 FREE Bonuses</li>
@@ -445,7 +445,7 @@
                         <td><i class="fas fa-times"></i></td>
                     </tr>
                     <tr>
-                        <td>1000+ songs</td>
+                        <td>Popular songs</td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-times"></i></td>
                     </tr>

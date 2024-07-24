@@ -8,8 +8,8 @@
     <title>Singeo | Sing your favorite songs. </title>
     <meta property="og:title" content="Singeo | Sing your favorite songs. ">
     <meta property="og:url" content="https://www.singeo.com/method">
-    <meta name="description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta name="description" content="Popular song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:description" content="Popular song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
@@ -23,7 +23,7 @@
 
 @section('header', 'Sing your favorite songs. ')
 
-@section('desc', '1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.')
+@section('desc', 'Popular song breakdowns for every style, era, and skill level with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">

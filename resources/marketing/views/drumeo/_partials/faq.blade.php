@@ -6,7 +6,7 @@
         ],
         [
         "title" => "What is Drumeo?",
-        "desc" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 6000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
+        "desc" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, popular songs transcribed note-for-note, and a supportive global community of students and teachers. ',
         ],
         [
         "title" => "Is Drumeo good for beginners?",
@@ -14,7 +14,7 @@
         ],
         [
         "title" => "Does Drumeo have anything for advanced drummers?",
-        "desc" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for thousands of songs and practical playback tools, so you can take on any new challenge with confidence. ',
+        "desc" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for popular songs and practical playback tools, so you can take on any new challenge with confidence. ',
         ],
         [
         "title" => "Am I too old to learn the drums?",

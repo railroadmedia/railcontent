@@ -201,8 +201,10 @@
         }
         else {
              $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1';
-             $discountedPrice = $productPrices['pianote-book-bag']->discounted_price;
-        }
+             $discountedPrice = number_format(floatval($productPrices['pianote-book-bag']->discounted_price), 2) == intval(floatval($productPrices['pianote-book-bag']->discounted_price))
+                ? floatval($productPrices['pianote-book-bag']->discounted_price)
+                : number_format(floatval($productPrices['pianote-book-bag']->discounted_price), 2);
+                }
     @endphp
 @stop
 
@@ -217,6 +219,12 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('_partials.components.shop.promo-banner-3', [
+        "name" => "Pianote BookBag",
+        "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
+        "price" => $discountedPrice,
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -225,13 +233,13 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-bookbag-logo-white.svg"><br>
                 <h6 class="py-4 sm:py-6 px-4">A handcrafted premium leather satchel for your music books, laptop, and life.</h6>
                 <h3 class="leading-tight">
-                    @if (floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
+                    @if (floatval($productPrices['pianote-book-bag']->price) > $discountedPrice)
                         <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
-                        <strong>${{ floatval($discountedPrice) }}</strong>
+                        <strong>${{ $discountedPrice }}</strong>
                         <span class="text-xl">(Save
-                            {{ round(100 - 100 * (floatval($discountedPrice) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
+                            {{ round(100 - 100 * $discountedPrice / floatval($productPrices['pianote-book-bag']->price)) }}%)</span>
                     @else
-                        <strong>Only ${{ floatval($discountedPrice) }}</strong>
+                        <strong>Only ${{ $discountedPrice }}</strong>
                     @endif
                 </h3>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
@@ -537,10 +545,10 @@
                     <tr style="background-color:transparent!important;">
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-black">
-                            @if(floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
+                            @if(floatval($productPrices['pianote-book-bag']->price) > $discountedPrice)
                                 <s class="opacity-40">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
                             @endif
-                            <strong>${{ floatval($discountedPrice) }}</strong>
+                            <strong>${{ $discountedPrice }}</strong>
                         </td>
                         <td class="rounded-b-xl"><strong>$349</strong></td>
                         <td class="rounded-b-xl"><strong>$448</strong></td>
@@ -593,9 +601,9 @@
                     </a>
                 </div>
             </div>
-            @if(empty($membersVersion))
-                <a href="/" class="text-center text-xs italic pt-4"><h6><u>Or get your bag FREE with a Pianote Membership</u></h6></a>
-            @endif
+{{--            @if(empty($membersVersion))--}}
+{{--                <a href="/" class="text-center text-xs italic pt-4"><h6><u>Or get your bag FREE with a Pianote Membership</u></h6></a>--}}
+{{--            @endif--}}
         </div>
 
     </section>

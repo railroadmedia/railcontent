@@ -118,17 +118,6 @@
             background-color:#1B2434!important;
             color:#fff!important;
         }
-
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #8300E9!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
-        }
     </style>
 @stop
 
@@ -214,7 +203,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -226,7 +215,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @endif
     @hasSection('promo-banner')
@@ -266,7 +255,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Sing your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/membership/homepage/webp-format/device.webp',
+        'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
@@ -301,7 +290,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "1000+ popular songs.",
+            "songs" => "Popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
@@ -341,7 +330,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
+        'header' => 'Unlimited singing lessons.<br>Guided Practice Sessions. <br> Vocal coaches and support.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
@@ -380,6 +369,5 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 @stop

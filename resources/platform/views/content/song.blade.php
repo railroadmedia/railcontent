@@ -8,9 +8,9 @@
 
     {{-- Session Token for Railtracker progress tracking --}}
     {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
-    {{-- 
+    {{--
         "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
-        "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100, 
+        "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
     --}}
 
     @php
@@ -47,6 +47,7 @@
         :assignments="{{ json_encode($formattedAssignments) }}"
         :related-lessons="{{ $relatedLessons }}"
         :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
+        :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
     ></song>
 
 @endsection

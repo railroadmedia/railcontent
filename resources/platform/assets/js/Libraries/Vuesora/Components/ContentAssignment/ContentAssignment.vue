@@ -130,9 +130,9 @@ import Utils from '../../assets/js/classes/utils';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
-import { bgColor, textColor } from "../../../../Constants/brands";
-import SoundSlice from '../../../../Components/SoundSlice/SoundSlice.vue'
-import SoundSliceControls from '../../../../Components/SoundSlice/SoundSliceControls.vue';
+import { bgColor, textColor } from "@constants/brands";
+import SoundSlice from '@collections/SoundSlice/SoundSlice.vue'
+import SoundSliceControls from '@collections/SoundSlice/SoundSliceControls.vue';
 
 export default {
     name: 'ContentAssignment',

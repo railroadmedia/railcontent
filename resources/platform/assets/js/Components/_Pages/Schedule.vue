@@ -37,9 +37,9 @@
 <script setup>
 import { computed } from 'vue';
 import { storeToRefs } from "pinia";
-import { useUserStore } from "../../Stores/user";
-import ContentSchedule from '../../Libraries/Vuesora/views/schedule/Schedule';
-import PageHeader from '../PageHeader/PageHeader.vue';
+import { useUserStore } from "@stores/user";
+import ContentSchedule from '@vuesora/views/schedule/Schedule';
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);

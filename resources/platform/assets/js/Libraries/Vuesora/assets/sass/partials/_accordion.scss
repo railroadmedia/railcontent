@@ -16,11 +16,12 @@
     }
 
     .meta-data-col {
-       @include xSmallOnly {
-         display:none;
-       }
-
-      flex:0 0 100px;
+      @include xSmallOnly {
+        display:none;
+      }
+      & {
+        flex:0 0 100px;
+      }
     }
 
     .arrow-col {

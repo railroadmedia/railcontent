@@ -101,7 +101,7 @@
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
                         'fa-icon' => 'fa-music',
                         'title' => 'Play your favorite songs.',
-                        'desc' => 'Get 1000+ note-for-note song breakdowns for every style, era, and skill level.',
+                        'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',

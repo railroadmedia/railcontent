@@ -17,18 +17,23 @@
                         :style="'background-image:url( https://www.musora.com/musora-cdn/image/width=300,quality=95/' + mappedData.thumbnail + ' );'"
                     >
                         <div class="lesson-progress overflow">
-                            <span
-                                class="progress"
-                                :class="themeBgClass"
-                                :style="'width:' + progress_percent + '%'"
-                            ></span>
-                        </div>
+	                        <span
+	                            class="progress"
+	                            :class="themeBgClass"
+	                            :style="'width:' + progress_percent + '%'"
+	                        ></span>
+                    	</div>
 
-                        <span class="thumb-hover flex-center">
-                            <i
-                                class="fas fa-play"
-                            ></i>
-                        </span>
+	                    <!-- Lock Icon -->
+	                    <div v-if="noAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
+	                        <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+	                    </div>
+
+	                    <span v-else class="thumb-hover flex-center">
+	                        <i
+	                            class="fas fa-play"
+	                        ></i>
+	                    </span>
                     </div>
                 </div>
             </div>
@@ -150,46 +155,47 @@
             </button>
         </div>
 
-        <!-- VIEW LESSON VIDEO -->
-        <div
-            v-if="showUserActions"
-            class="tw-hidden sm:tw-flex flex-column icon-col tw-items-center"
-        >
-            <a
-                :href="item.url"
-                class="body tw-inline-flex no-decoration tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB] tw-h-full tw-items-center"
-                title="Watch Lesson Video"
-                @click.stop
-            >
-                <svg width="35" height="35" class="tw-h-9 tw-w-9" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21.875 14.5833L28.5145 11.2636C29.4841 10.7788 30.625 11.4839 30.625 12.568V22.432C30.625 23.5161 29.4841 24.2212 28.5145 23.7364L21.875 20.4167M7.29167 26.25H18.9583C20.5692 26.25 21.875 24.9442 21.875 23.3333V11.6667C21.875 10.0558 20.5692 8.75 18.9583 8.75H7.29167C5.68084 8.75 4.375 10.0558 4.375 11.6667V23.3333C4.375 24.9442 5.68084 26.25 7.29167 26.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-        </div>
-
-        <!-- MARK AS COMPLETE -->
-        <div
-            v-if="showUserActions"
-            class="tw-hidden sm:tw-flex flex-column icon-col align-v-center"
-        >
-            <div
-                class="body tw-h-full tw-items-center tw-inline-flex"
-                @click.stop.prevent="markAsComplete"
-            >
-                <i
-                    class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
-                    :class="markedAsCompletedClasses"
-                    :title="isCompleted ? 'Restart Progress' : 'Mark as Complete'"
-                ></i>
+        <template v-if="noAccess">
+            <div class="tw-hidden sm:tw-flex flex-column icon-col align-v-center">
+                <i class="fas fa-lock tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"></i>
             </div>
-        </div>
+        </template>
+        <template v-else-if="showUserActions">
+            <!-- VIEW LESSON VIDEO -->
+            <div class="tw-hidden sm:tw-flex flex-column icon-col tw-items-center">
+                <a
+                    :href="item.url"
+                    class="body tw-inline-flex no-decoration tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB] tw-h-full tw-items-center"
+                    title="Watch Lesson Video"
+                    @click.stop
+                >
+                    <svg width="35" height="35" class="tw-h-9 tw-w-9" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.875 14.5833L28.5145 11.2636C29.4841 10.7788 30.625 11.4839 30.625 12.568V22.432C30.625 23.5161 29.4841 24.2212 28.5145 23.7364L21.875 20.4167M7.29167 26.25H18.9583C20.5692 26.25 21.875 24.9442 21.875 23.3333V11.6667C21.875 10.0558 20.5692 8.75 18.9583 8.75H7.29167C5.68084 8.75 4.375 10.0558 4.375 11.6667V23.3333C4.375 24.9442 5.68084 26.25 7.29167 26.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- MARK AS COMPLETE -->
+            <div class="tw-hidden sm:tw-flex flex-column icon-col align-v-center">
+                <div
+                    class="body tw-h-full tw-items-center tw-inline-flex"
+                    @click.stop.prevent="markAsComplete"
+                >
+                    <i
+                        class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                        :class="markedAsCompletedClasses"
+                        :title="isCompleted ? 'Restart Progress' : 'Mark as Complete'"
+                    ></i>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
 <script>
 import CatalogueMixin from '../catalogues/_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
-import DifficultyLabel from '../../../../Components/DifficultyLabel/DifficultyLabel';
+import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 
 export default {
     name: 'PlayAlongsListItem',

@@ -23,7 +23,7 @@
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
+        'header' => 'Unlimited singing lessons.<br>Guided Practice Sessions. <br> Vocal coaches and support.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>

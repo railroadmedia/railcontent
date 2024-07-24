@@ -48,7 +48,7 @@
                             <span style="text-transform:uppercase; display:inline-block;"><s>${{ $bonus['price'] }}</s> <strong class="text-[#FFAC00]">FREE</strong></span><br>
                             <em>
                                 @if(!empty($bonus['shipping']))
-                                    Free Shipping
+                                    Free Bonus
                                 @else
                                     Online Access
                                 @endif

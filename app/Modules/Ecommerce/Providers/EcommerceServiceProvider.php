@@ -45,7 +45,8 @@ class EcommerceServiceProvider extends EventServiceProvider
         Route::middleware([])
             ->group(__DIR__ . '/../routes/routes.php')
             ->group(__DIR__ . '/../routes/shopify.php')
-            ->group(__DIR__ . '/../routes/recharge.php');
+            ->group(__DIR__ . '/../routes/recharge.php')
+            ->group(__DIR__ . '/../routes/subscriptions.php');
     }
 
     /**

@@ -11,8 +11,9 @@
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
-                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
-                        <template v-if="videoProps.videoId">
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
+                        <template v-else-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -94,6 +95,7 @@
                         :report-user-name="videoResources.reportUserName"
                         :report-logo="videoResources.reportLogo"
                         :difficulty="videoResources.difficulty"
+                        :no-access="noAccess"
                     />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
@@ -104,7 +106,7 @@
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
 
-                    <ContentProgress :brand="brand" :is-completed="lessonData.completed"
+                    <ContentProgress v-if="!noAccess" :brand="brand" :is-completed="lessonData.completed"
                         :progress="lessonData.progress_percent" :xp-amount="progressXp" :is-started="lessonData.progress_percent > 0"
                         :next-lesson-url="videoButtons.nextLessonUrl" :show-complete-button="true"
                         :content-id="videoProps.contentId" />
@@ -127,8 +129,11 @@
             />
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2"
-                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
+            <section
+                v-if="!noAccess"
+                class="tw-col-span-3 xl:tw-row-span-2"
+                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`"
+            >
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
@@ -166,22 +171,23 @@
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 
-import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import YoutubePlayer from "../../Libraries/Vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
-import VideoButtons from "../VideoButtons/VideoButtons.vue";
-import VideoResources from "../../Libraries/Vuesora/Components/VideoResources/VideoResources.vue";
-import VideoComments from "../../Libraries/Vuesora/views/comments/Comments.vue";
-import ContentInfo from "../ContentInfo/ContentInfo.vue";
-import Intercom from "../../Libraries/Vuesora/assets/js/Services/intercom";
-import Helpscout from "../../Libraries/Vuesora/assets/js/Services/helpscout";
-import ProgressTracker from "../../Libraries/Vuesora/assets/js/classes/progress-tracker";
-import ContentService from "../../Libraries/Vuesora/assets/js/Services/content";
-import ContentProgress from "../ContentProgress/ContentProgress.vue";
-import RelatedLessonsToggle from "../RelatedLessons/RelatedLessonsToggle.vue";
-import RelatedLessons from "../RelatedLessons/RelatedLessons.vue";
-import LessonComplete from "../ContentProgress/LessonComplete.vue";
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
+import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
+import VideoResources from "@vuesora/Components/VideoResources/VideoResources.vue";
+import VideoComments from "@vuesora/views/comments/Comments.vue";
+import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
+import Intercom from "@vuesora/assets/js/Services/intercom";
+import Helpscout from "@vuesora/assets/js/Services/helpscout";
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
+import ContentService from "@vuesora/assets/js/Services/content";
+import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
+import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
+import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
+import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
+import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 const props = defineProps({
     thisLessonJson: {
@@ -243,7 +249,7 @@ const props = defineProps({
     contentInstructors: {
         type: Array,
         default: []
-    }
+    },
 });
 
 const userStore = useUserStore();
@@ -354,4 +360,12 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+const noAccess = computed(() => {
+    return props.thisLessonJson?.data[0]?.need_access;
+})
+
+const thumbnailUrl = computed(() => {
+    return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
+})
 </script>

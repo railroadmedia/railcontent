@@ -22,8 +22,8 @@
     </div>
 </template>
 <script setup>
-    import CollectionWrapper from '../CollectionWrapper/CollectionWrapper.vue';
-    import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
+    import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 
     const props = defineProps({
         firstLevelUrl: String,

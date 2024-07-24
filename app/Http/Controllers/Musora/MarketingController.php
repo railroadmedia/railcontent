@@ -55,6 +55,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.6-reasons', ['theme' => 'musora', 'version' => 'singing']);
     }
+    public function thankYou()
+    {
+        return view('musora.lead-gen.thank-you', ['theme' => 'musora']);
+    }
     public function moderators()
     {
         return view('musora.pages.moderators', ['theme' => 'musora']);

@@ -6,13 +6,13 @@ use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\ModeDecoratorBase as AppModeDecoratorBase;
 use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -22,7 +22,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -40,7 +39,6 @@ use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Decorators\Content\ModeDecoratorBase as AppModeDecoratorBase;
 
 class ContentPagesController extends BaseController
 {
@@ -105,10 +103,6 @@ class ContentPagesController extends BaseController
             return $this->guitareoLessonsPage($request, $domain, $brand);
         }
 
-        if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
-
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
@@ -122,6 +116,7 @@ class ContentPagesController extends BaseController
         // Admin users have access to drafts
         if (user()->isAdmin() || user()->permission_level === 'administrator') {
             ContentRepository::$availableContentStatues[] = ContentService::STATUS_DRAFT;
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_UNLISTED;
         }
 
         if (empty($lessonType) || empty($catalogueMeta)) {
@@ -224,7 +219,6 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
             $songArtists = $this->contentService->getArtists();
             $artists = count($songArtists ?? []);
-
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : json_encode(['data' => []]),
@@ -240,6 +234,7 @@ class ContentPagesController extends BaseController
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
+                'showUpgradeModal' => !user()->hasSongsAccess($brand),
             ]);
         } else {
             $breadcrumbs = [
@@ -266,9 +261,6 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
-        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -277,7 +269,7 @@ class ContentPagesController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
 
         if (user()->isAdmin()) {
             array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
@@ -287,15 +279,9 @@ class ContentPagesController extends BaseController
         $classicalMethodPackJson = null;
 
         $firstLevelContent = $this->contentService->getById($firstId);
-
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
         }
-
-        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
-            $firstLevelContent['id'],
-            auth()->id()
-        );
 
         if ($primaryPage == 'songs') {
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
@@ -313,30 +299,6 @@ class ContentPagesController extends BaseController
                 $firstId
             );
         }
-
-        $childrenContent = $firstLevelContent['units'] ?? $this->contentService->getByParentId(
-            $firstLevelContent['id']
-        );
-
-        $childrenContentResultsEntity = new ContentFilterResultsEntity(['results' => $childrenContent]);
-        $childrenLabel = config('railcontent.children_name_mapping')[brand()][$firstLevelContent['type']] ?? 'lessons';
-        $infoData["$childrenLabel"] = count($childrenContentResultsEntity->results());
-
-        $infoData['xp'] = $firstLevelContent->fetch('total_xp', 0);
-
-        $nextLessonUrl = $nextContentForUser['url'] ?? '';
-        $nextLessonJson = $nextContentForUser ?? null;
-
-        if (!empty($nextLessonJson)) {
-            $nextLessonJson =
-                (new ContentFilterResultsEntity(
-                    ['results' => [$nextLessonJson], 'total_results' => 1]
-                ))->toResponseRawJson();
-        } else {
-            $nextLessonJson = '';
-        }
-
-        $xpBonus = $firstLevelContent->fetch('xp_bonus', 0);
 
         if ($primaryPage == "method") {
             switch (brand()) {
@@ -381,6 +343,39 @@ class ContentPagesController extends BaseController
                 "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => 'courses']),
             ];
         }
+        if (!user()->isAdmin()) {
+            ContentRepository::$availableContentStatues = array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_UNLISTED]);
+        }
+
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $firstLevelContent['id'],
+            auth()->id()
+        );
+
+        $childrenContent = $firstLevelContent['units'] ?? $this->contentService->getByParentId(
+            $firstLevelContent['id']
+        );
+
+        $childrenContentResultsEntity = new ContentFilterResultsEntity(['results' => $childrenContent]);
+        $childrenLabel = config('railcontent.children_name_mapping')[brand()][$firstLevelContent['type']] ?? 'lessons';
+        $infoData["$childrenLabel"] = count($childrenContentResultsEntity->results());
+
+        $infoData['xp'] = $firstLevelContent->fetch('total_xp', 0);
+
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
+        $nextLessonJson = $nextContentForUser ?? null;
+
+        if (!empty($nextLessonJson)) {
+            $nextLessonJson =
+                (new ContentFilterResultsEntity(
+                    ['results' => [$nextLessonJson], 'total_results' => 1]
+                ))->toResponseRawJson();
+        } else {
+            $nextLessonJson = '';
+        }
+
+        $xpBonus = $firstLevelContent->fetch('xp_bonus', 0);
+
 
         // attach the trailer video from vimeo
         $firstLevelContent =
@@ -432,17 +427,15 @@ class ContentPagesController extends BaseController
         $secondSlug,
         $secondId
     ) {
-        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->route('platform.songs-upgrade');
-        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
         $secondContent = $this->contentService->getById($secondId);
-
         throw_if(empty($secondContent), new NotFoundHttpException());
 
         if (in_array($secondContent['type'], ContentTypes::singularContentTypes())) {
+            ContentRepository::$availableContentStatues = $originalContentStatuses;
             return $this->videoLessonPage(
                 $request,
                 $domain,
@@ -458,14 +451,14 @@ class ContentPagesController extends BaseController
         $firstContent = $this->contentService->getById($firstId);
 
         throw_if(empty($firstContent), new NotFoundHttpException());
-
         if ((empty($secondContent['published_on']) ||
                 Carbon::parse($secondContent['published_on']) > Carbon::now() ||
-                $secondContent['status'] != 'published') && !(user()->isAdmin())) {
+            ($secondContent['status'] != 'published' && $secondContent['status'] != 'unlisted')) && !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
         // get courses for this level
+        ContentRepository::$availableContentStatues = $originalContentStatuses;
         $courses = $this->contentService->getByParentId($secondContent['id']);
         $secondContentResultsEntity = new ContentFilterResultsEntity(['results' => $courses]);
 
@@ -541,11 +534,13 @@ class ContentPagesController extends BaseController
         $thirdId,
     ) {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
         $thirdContent = $this->contentService->getById($thirdId);
         throw_if(empty($thirdContent), new NotFoundHttpException());
 
         if (in_array($thirdContent['type'], ContentTypes::singularContentTypes())) {
+            ContentRepository::$availableContentStatues = $originalContentStatuses;
             return $this->videoLessonPage(
                 $request,
                 $domain,
@@ -568,7 +563,7 @@ class ContentPagesController extends BaseController
 
         if ((empty($thirdContent['published_on']) ||
                 Carbon::parse($thirdContent['published_on']) > Carbon::now() ||
-                $thirdContent['status'] != 'published') && !(user()->isAdmin())) {
+            ($thirdContent['status'] != 'published' && $thirdContent['status'] != 'unlisted')) && !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
@@ -685,11 +680,18 @@ class ContentPagesController extends BaseController
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ContentUserWatchPositionDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
+
+        if (user()->isAdmin()) {
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_DRAFT);
+        }
 
         $this->contentService->idContentCache = [];
 
         $firstContent = $this->contentService->getById($firstId);
-
         throw_if(empty($firstContent), new NotFoundHttpException());
 
         $contentToRenderAsLesson = $firstContent;
@@ -726,19 +728,13 @@ class ContentPagesController extends BaseController
                 Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
                 !in_array(
                     $contentToRenderAsLesson['status'],
-                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]
+                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,  ContentService::STATUS_UNLISTED]
                 )) &&
             !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
 
-        if (user()->isAdmin()) {
-            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
-            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_DRAFT);
-        }
 
         if (empty($contentToRenderAsLesson)) {
             throw new NotFoundHttpException();
@@ -758,6 +754,7 @@ class ContentPagesController extends BaseController
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         if (($contentToRenderAsLesson['type'] == 'learning-path-lesson')) {
+            ContentRepository::$availableContentStatues = $originalContentStatuses;
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
             $learningPath = \Arr::last($contentToRenderAsLesson->getParentContentData());
             $nextPrevLessons = $this->methodService->getNextAndPreviousLessons(
@@ -827,6 +824,10 @@ class ContentPagesController extends BaseController
         $matched = false;
 
         foreach ($parentChildren as $parentChildIndex => $parentChild) {
+            if ($parentChild['status'] == ContentService::STATUS_UNLISTED ) {
+                unset($parentChildren[$parentChildIndex]);
+                continue;
+            }
             $matched = $parentChild['id'] == $contentToRenderAsLesson['id'];
             if (!$matched && (count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
                 $parentChildrenTrimmed[] = $parentChild;
@@ -950,7 +951,7 @@ class ContentPagesController extends BaseController
     public function drumeoSongPage(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
         ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
 
         ContentRepository::$pullFutureContent = user()->isAdmin();
 

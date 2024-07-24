@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Learn Songs Faster",
         "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
         "price" => floatval($productPrices['learn-songs-faster-pack']->discounted_price),

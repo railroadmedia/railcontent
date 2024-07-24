@@ -14,7 +14,6 @@ class Prices
     public static $drumeoPlayAlongs = 300;
     public static $drumeoSongs = 6000;
     public static $drumeoCourses = 260;
-    public static $singeoSongs = 130;
 
     // social media counts
     public static $drumeoYoutubeSubsc = 3740000;

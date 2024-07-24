@@ -6,7 +6,7 @@
         ],
         [
             "title" => "What is Pianote?",
-            "desc" => 'Pianote is an online platform that offers an organized piano lesson curriculum, artist courses on popular topics, 1000+ songs transcribed note-for-note, and a supportive global community of students and teachers.',
+            "desc" => 'Pianote is an online platform that offers an organized piano lesson curriculum, artist courses on popular topics, songs transcribed note-for-note, and a supportive global community of students and teachers.',
         ],
         [
             "title" => "Is Pianote good for beginners?",
@@ -14,7 +14,7 @@
         ],
         [
             "title" => "Does Pianote have anything for advanced pianists?",
-            "desc" => 'Pianote is the perfect companion for advanced pianists, giving you access to artist courses so you can gain insights and inspiration from professionals. Plus, you’ll get note-for-note sheet music for thousands of songs and practical playback tools, so you can take on any new challenge with confidence.',
+            "desc" => 'Pianote is the perfect companion for advanced pianists, giving you access to artist courses so you can gain insights and inspiration from professionals. Plus, you’ll get note-for-note sheet music for popular songs and practical playback tools, so you can take on any new challenge with confidence.',
         ],
         [
             "title" => "Am I too old to learn piano?",

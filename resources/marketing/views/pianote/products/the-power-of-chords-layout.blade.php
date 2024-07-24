@@ -569,60 +569,7 @@
             <h6 class="mt-2 leading-normal">
                 Simple steps to transform your <br class="md:hidden">understanding of music.
             </h6>
-            {{--<div class="flex flex-wrap items-end justify-center 2-full my-7 sm:my-10">--}}
-                {{--<div class="max-w-xs sm:max-w-full w-full md:w-1/2 px-2 md:px-3 relative">--}}
-                    {{--<p  class="w-full px-4 pt-2 pb-4 -mb-3 bg-guitareo text-black rounded-t-2xl bg-pianote text-white">--}}
-                            {{--<strong>LAUNCH SPECIAL</strong>--}}
-                    {{--</p>--}}
-                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
-                        {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
-                            {{--<h5 class="leading-none mb-3">Power Of Chords</h5>--}}
-                            {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<s style="color:#BBBBBF;">${{ floatval($productPrices['the-power-of-chords']->price) }}</s>--}}
-                                {{--<strong>${{ $productPrice }}</strong></h1>--}}
-                            {{--<p class="text-sm my-4">--}}
-                                {{--<em>Save {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}% for a limited time.</em>--}}
-                            {{--</p>--}}
-                            {{--<div class="mt-4 join smaller w-full transition-opacity duration-300 group-hover:opacity-80"--}}
-                                    {{--style="max-width: 230px;">Get Started--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10"--}}
-                             {{--style="background: #F8FBFF;">--}}
-                            {{--<p class="mb-1"><strong class="font-extrabold">WHAT'S INCLUDED</strong></p>--}}
-                            {{--<p class="mb-1">Lifetime access to The Power of Chords</p>--}}
-                            {{--<p class="mb-1">Chords & Scales Book (FREE shipping)</p>--}}
-                            {{--<p class="hidden md:block">&nbsp;</p>--}}
-                            {{--<p class="hidden md:block">&nbsp;</p>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-                {{--<div class="max-w-xs sm:max-w-full w-full md:w-1/2 px-2 md:px-3 relative">--}}
-                    {{--<p  class="w-full px-4 pt-2 pb-4 -mb-3 bg-guitareo text-white rounded-t-2xl"--}}
-                        {{--style="background: #FFAE00;">--}}
-                            {{--<strong>LIMITED TIME PIANOTE DEAL</strong>--}}
-                    {{--</p>--}}
-                    {{--<a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 border border-gray-300 group">--}}
-                        {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
-                            {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
-                            {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<strong>${{ Prices::$plusSubscriptionAnnual }}</strong>--}}
-                            {{--</h1><p class="inline-block">/yr</p>--}}
-                            {{--<p class="text-coaches text-sm my-4"><em>Annual Pianote Membership included.</em></p>--}}
-                            {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80"--}}
-                                    {{--style="max-width: 230px; background: #FFAE00;">Get Started--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #F8FBFF; ">--}}
-                            {{--<p class="mb-1"><strong class="font-extrabold">WHAT'S INCLUDED</strong></p>--}}
-                            {{--<p class="mb-1">Annual Pianote Membership</p>--}}
-                            {{--<p class="mb-1">Lifetime access to The Power of Chords</p>--}}
-                            {{--<p class="mb-1">Lifetime access to 500 Songs in 5 Days</p>--}}
-                            {{--<p>Chords & Scales Book (FREE shipping)</p>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            
 
             <a class="join w-full my-5 sm:my-7" href="@yield('order-link')" >Get Started</a>
             <h6 class="leading-tight text-center mb-1 md:mb-2">

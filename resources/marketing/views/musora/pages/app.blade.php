@@ -7,8 +7,8 @@
     <title>Musora App | Musora</title>
     <meta property="og:title" content="Musora App | Musora">
 
-    <meta name="description" content="Unlimited music lessons. The world’s best teachers. Thousands of popular songs.">
-    <meta property="og:description" content="Unlimited music lessons. The world’s best teachers. Thousands of popular songs.">
+    <meta name="description" content="Unlimited music lessons. The world’s best teachers. Popular songs.">
+    <meta property="og:description" content="Unlimited music lessons. The world’s best teachers. Popular songs.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/app-page/share-image-musora-app.jpg">
@@ -39,7 +39,7 @@ bg-gradient-to-b from-white to-gray-200
                     </p>
                     <h3 class="leading-normal">
                         <strong>
-                        Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.
+                        Unlimited music lessons.<br>Guided Practice Sessions. <br> The world’s best teachers.
                         </strong>
                     </h3>
                     <ul class="text-center lg:text-left pt-5">

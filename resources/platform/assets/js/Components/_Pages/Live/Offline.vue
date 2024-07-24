@@ -36,11 +36,11 @@
     </div>
 </template>
 <script setup>
-import { useUserStore } from "../../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-import PageHeader from '../../PageHeader/PageHeader';
-import ContentSchedule from '../../../Libraries/Vuesora/views/schedule/Schedule';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import ContentSchedule from '@vuesora/views/schedule/Schedule';
 import { computed } from "vue";
 
 const props = defineProps({

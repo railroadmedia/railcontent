@@ -23,6 +23,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
+    @include('_partials.components.shop.promo-banner-3', [
+        "name" => "Prestige Flamed Maple Metronome",
+        "fullPrice" => floatval($productPrices['maelzel-metronome']->price),
+        "price" => floatval($productPrices['maelzel-metronome']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @if(strpos(url()->full(), 'thankyou'))
         <div class="py-5 sm:py-7 px-6 text-center bg-green-400">

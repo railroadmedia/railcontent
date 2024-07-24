@@ -84,8 +84,8 @@
 <script setup>
 import { computed, inject, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../Stores/user";
-import ModalRenderer from "../Modal/ModalRenderer";
+import { useUserStore } from "@stores/user";
+import ModalRenderer from "@collections/Modal/ModalRenderer";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
