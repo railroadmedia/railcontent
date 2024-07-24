@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab8c5fe0b95861ca0c02261d348e2b6f",
+    "content-hash": "bdf185fb3a6266611892a0c49d83abce",
     "packages": [
         {
             "name": "amphp/amp",
@@ -4597,16 +4597,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.9.1",
+            "version": "7.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "a629e5b69db96eb4939c1b34114130077dd4c6fc"
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a629e5b69db96eb4939c1b34114130077dd4c6fc",
-                "reference": "a629e5b69db96eb4939c1b34114130077dd4c6fc",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d281ed313b989f213357e3be1a179f02196ac99b",
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b",
                 "shasum": ""
             },
             "require": {
@@ -4703,7 +4703,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.9.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9.2"
             },
             "funding": [
                 {
@@ -4719,7 +4719,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-19T16:19:57+00:00"
+            "time": "2024-07-24T11:22:20+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -10097,16 +10097,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.73",
+            "version": "dev-BE-256",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "255826f3185cb0f2e4ef1b8c30f79a4dac610621"
+                "reference": "59e487e08adc2aac20553dde5cdf080c60639b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/255826f3185cb0f2e4ef1b8c30f79a4dac610621",
-                "reference": "255826f3185cb0f2e4ef1b8c30f79a4dac610621",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/59e487e08adc2aac20553dde5cdf080c60639b07",
+                "reference": "59e487e08adc2aac20553dde5cdf080c60639b07",
                 "shasum": ""
             },
             "require": {
@@ -10136,9 +10136,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.73"
+                "source": "https://github.com/railroadmedia/musora-api/tree/BE-256"
             },
-            "time": "2024-07-23T16:17:48+00:00"
+            "time": "2024-07-24T09:14:32+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -17681,16 +17681,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.30.2",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "f5a9699a1001e15de1aa5e7cb5c9f50a3f63f887"
+                "reference": "48d89608a3bb5be763c9bb87121d31e7da27c1cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/f5a9699a1001e15de1aa5e7cb5c9f50a3f63f887",
-                "reference": "f5a9699a1001e15de1aa5e7cb5c9f50a3f63f887",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/48d89608a3bb5be763c9bb87121d31e7da27c1cb",
+                "reference": "48d89608a3bb5be763c9bb87121d31e7da27c1cb",
                 "shasum": ""
             },
             "require": {
@@ -17740,7 +17740,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-07-05T16:01:51+00:00"
+            "time": "2024-07-22T14:36:50+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -20426,11 +20426,18 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
+        },
+        {
+            "package": "railroad/musora-api",
+            "version": "dev-BE-256",
+            "alias": "v3.1.73",
+            "alias_normalized": "3.1.73.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20
+        "railroad/doctrine-array-hydrator": 20,
+        "railroad/musora-api": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
