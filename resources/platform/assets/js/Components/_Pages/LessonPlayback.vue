@@ -130,10 +130,18 @@
 
             <!-- Lesson Content Wrapper -->
             <section
-                v-if="!noAccess"
-                class="tw-col-span-3 xl:tw-row-span-2"
-                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`"
-            >
+            	v-if="!noAccess"
+            	class="tw-col-span-3 xl:tw-row-span-2"
+                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
+                <!-- Chapters -->
+                <VideoChapters
+                    v-if="formattedChapters.length"
+                    :chapters="formattedChapters"
+                    @open-slice="openSlice"
+                    @seek-to-chapter="seekToChapter"
+                />
+
+                <!-- Assignments -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
@@ -173,7 +181,6 @@
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
-
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
@@ -188,7 +195,8 @@ import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
 import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
-import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
+import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 const props = defineProps({
     thisLessonJson: {
@@ -274,7 +282,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.videoProps.chapters?.length) {
+    if (props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
