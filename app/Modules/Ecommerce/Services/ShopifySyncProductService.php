@@ -33,7 +33,13 @@ class ShopifySyncProductService
 
         foreach ($productShopify["variants"] as $variant) {
             try {
-                $product = $products[$variant["sku"]] ?? $productIdLookup[$variant['id']] ?? new Product();
+                if (app()->isProduction()) {
+                    $product = $productIdLookup[$variant['id']] ?? new Product();
+                } else {
+                    //Ids are different in staging so we'll use sku.
+                    //This causes issue on production if you copy a product and use the same sku.
+                    $product = $products[$variant["sku"]] ?? new Product();
+                }
                 if (!$variant['sku']) {
                     continue;
                 }
