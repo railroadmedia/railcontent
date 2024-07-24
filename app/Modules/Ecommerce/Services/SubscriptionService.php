@@ -7,7 +7,7 @@ use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -29,14 +29,29 @@ class SubscriptionService
         $this->userService = $userService;
     }
 
-    public function getFirstSubscriptionBrand(int $userId, array $brands): string
+    /**
+     * @throws \Exception
+     */
+    public function getActiveSubscription(User $user): ?Subscription
     {
-        $result = Subscription::query()
-            ->whereIn('brand', $brands)
-            ->fromUser($userId)
-            ->orderBy('created_at')
-            ->first('brand');
-        return $result['brand'] ?? '';
+        $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+        $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
+            /** @var Subscription $subscription */
+            return $subscription->product?->isRecurringMembershipProduct() ?? false;
+        });
+
+        $activeMembershipSubscriptions = $membershipSubscriptions->filter(function ($subscription) {
+            /** @var Subscription $subscription */
+            return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
+        });
+        $mostRecentActiveSubscription = $subscriptions->sortByDesc('createdAt')->first();
+
+        return $mostRecentActiveSubscription;
+    }
+
+    public function updateSubscriptionProduct(Subscription $subscription, $shopifyVariantId)
+    {
+        $this->recharge->updateSubscriptionProduct($subscription, $shopifyVariantId);
     }
 
     public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions)
@@ -59,7 +74,7 @@ class SubscriptionService
 
         $subscriptions->each(function ($subscription) use ($productLookup, $productIdsLookup) {
             /** @var Product $product */
-            /** @var \App\Modules\Ecommerce\Models\Recharge\Subscription $subscription */
+            /** @var Subscription $subscription */
             $product = $productLookup[$subscription->sku] ?? $productIdsLookup[$subscription->shopifyVariantId] ?? null;
             if (!$product) {
                 Log::warning(
@@ -71,19 +86,19 @@ class SubscriptionService
         });
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
-            /** @var \App\Modules\Ecommerce\Models\Recharge\Subscription $subscription */
+            /** @var Subscription $subscription */
             return $subscription->product?->isRecurringMembershipProduct() ?? false;
         });
 
         $activeMembershipSubscriptions = $membershipSubscriptions->filter(function ($subscription) {
-            /** @var \App\Modules\Ecommerce\Models\Recharge\Subscription $subscription */
+            /** @var Subscription $subscription */
             return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
         });
 
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
 
         $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
-        /** @var \App\Modules\Ecommerce\Models\Recharge\Subscription $mostRecentActiveSubscription */
+        /** @var Subscription $mostRecentActiveSubscription */
         if ($isLifetimeMember) {
             foreach ($activeMembershipSubscriptions as $activeMembershipSubscription) {
                 $this->recharge->cancelSubscription($activeMembershipSubscription, 'Lifetime Member');
@@ -131,88 +146,19 @@ class SubscriptionService
         if (!$isLifetimeMember && $mostRecentActiveSubscription) {
             $user->has_recharge_subscription = true;
             $user->recharge_renewal_date = $mostRecentActiveSubscription->nextChargeScheduledAt;
+            $user->recharge_interval = $mostRecentActiveSubscription->product?->digital_access_time_interval_type;
         } else {
             $user->has_recharge_subscription = false;
             $user->recharge_renewal_date = null;
+            $user->recharge_interval = null;
         }
         $user->save();
         return $membershipSubscriptions;
     }
 
-    /**
-     * @param $userId
-     * @param $expiresDate
-     * @param $musoraProduct
-     * @param string $type
-     * @param $purchasedAtMs
-     * @param null $unsubscribeAtMs
-     * @return Subscription
-     */
-    public function createSubscription(
-        $userId,
-        $expiresDate,
-        $musoraProduct,
-        string $type,
-        $purchasedAtMs,
-        $unsubscribeAtMs = null
-    ) {
-        $musoraSubscription = new Subscription();
-        $musoraSubscription->user_id = $userId;
-        $musoraSubscription->is_active = Carbon::createFromTimestampMs($expiresDate) > Carbon::now();
-        $musoraSubscription->paid_until = Carbon::createFromTimestampMs($expiresDate);
-        $musoraSubscription->apple_expiration_date = Carbon::createFromTimestampMs($expiresDate);
-        $musoraSubscription->product_id = $musoraProduct->id;
-        $musoraSubscription->brand = $musoraProduct->brand;
-        $musoraSubscription->type = $type . '_subscription';
-        $musoraSubscription->start_date = Carbon::createFromTimestampMs($purchasedAtMs);
-        $musoraSubscription->created_at = Carbon::now();
-        $musoraSubscription->total_cycles_paid = 1;
-        $musoraSubscription->stopped = false;
-        $musoraSubscription->renewal_attempt = 0;
-        $musoraSubscription->total_price = $musoraProduct->price;
-        $musoraSubscription->canceled_on = null;
-        $musoraSubscription->currency = config('ecommerce.default_currency');
-        $musoraSubscription->interval_type = $musoraProduct->subscription_interval_type;
-        $musoraSubscription->interval_count = $musoraProduct->subscription_interval_count;
-
-        if ($unsubscribeAtMs) {
-            $musoraSubscription->canceled_on = Carbon::createFromTimestampMs($unsubscribeAtMs);
-        }
-        $musoraSubscription->save();
-
-        return $musoraSubscription;
-    }
-
-    /**
-     * @param Subscription $musoraSubscription
-     * @param $expiresDate
-     * @param null $unsubscribeDate
-     * @param null $cancelReason
-     * @return Subscription
-     */
-    public function updateSubscription(
-        Subscription $musoraSubscription,
-        $expiresDate,
-        $unsubscribeDate = null,
-        $cancelReason = null
-    ) {
-        $musoraSubscription->is_active = Carbon::createFromTimestampMs($expiresDate) > Carbon::now();
-        $musoraSubscription->paid_until = Carbon::createFromTimestampMs($expiresDate);
-        $musoraSubscription->apple_expiration_date = Carbon::createFromTimestampMs($expiresDate);
-
-        $musoraSubscription->canceled_on = null;
-        $musoraSubscription->cancellation_reason = null;
-
-        if ($unsubscribeDate || $cancelReason) {
-            $musoraSubscription->canceled_on = ($unsubscribeDate) ? Carbon::createFromTimestampMs(
-                $unsubscribeDate
-            ) : null;
-            $musoraSubscription->cancellation_reason = $cancelReason;
-        }
-
-        $musoraSubscription->save();
-
-        return $musoraSubscription;
+    public function createTestSubscription(User $user, Product $product, Carbon $nextChargeScheduledAt)
+    {
+        $this->recharge->createTestSubscription($user, $product, $nextChargeScheduledAt);
     }
 
     public function cancelAllSubscriptions(User $user, string $reason): void

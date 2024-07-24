@@ -920,7 +920,7 @@
                     </h3>
                     <p class="mb-10" style="color:#879097;">
                         And gain access to unlimited drum lessons,<br class="hidden sm:inline">
-                        3200+ song breakdowns, and ongoing support.
+                        song breakdowns, and ongoing support.
                     </p>
                     <div class="relative">
                         <a href="/#customize-anchor" target="_blank" class="join blue uppercase w-full sm:w-2/3 md:w-3/4">count me in</a>

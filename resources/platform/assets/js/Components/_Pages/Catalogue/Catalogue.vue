@@ -72,12 +72,12 @@
   import { computed } from 'vue';
   import { getHeaderData } from './headerData';
   
-  import Breadcrumb from '../../Breadcrumb/Breadcrumb.vue';
-  import PageHeader from '../../PageHeader/PageHeader.vue';
-  import CatalogueCardContainer from '../../Catalogue/CatalogueCardContainer.vue';
-  import PlayAlongs from '../../../Libraries/Vuesora/views/play-alongs/PlayAlongs.vue';
-  import CollectionWrapper from '../../CollectionWrapper/CollectionWrapper.vue';
-  import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
+  import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+  import PageHeader from '@collections/PageHeader/PageHeader.vue';
+  import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
+  import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
+  import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+  import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
   
   const props = defineProps({
     hasStartedLessons: Boolean,

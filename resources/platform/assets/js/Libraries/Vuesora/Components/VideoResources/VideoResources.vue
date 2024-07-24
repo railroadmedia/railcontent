@@ -15,7 +15,7 @@
                 </div>
             </div>
             <!-- Video CTAs -->
-            <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
+            <div v-if="!noAccess" id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
 
                 <div v-if="showLeftArrow" class="left-arrow tw-pl-2 tw-pr-6 tw-sticky tw-h-[34px] tw-top-1 tw-left-0 sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleLeftArrow"><i class="fas fa-chevron-left dark:tw-text-white tw-text-[#18181B]"></i></div>
                 <div v-if="showRightArrow" class="right-arrow tw-pl-6 tw-pr-2 tw-sticky tw-h-[34px] tw-top-1 tw-left-[calc(100%-36px)] sm:tw-hidden tw-flex tw-items-center tw-z-50 -tw-mr-[42px]" @click="handleRightArrow"><i class="fas fa-chevron-right dark:tw-text-white tw-text-[#18181B] "></i></div>
@@ -269,11 +269,11 @@ import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
 import ContentService from "../../assets/js/Services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
-import ModalRenderer from "../../../../Components/Modal/ModalRenderer.vue";
-import ReportModal from "../../../../Components/Modal/ReportModal";
+import ModalRenderer from "@collections/Modal/ModalRenderer.vue";
+import ReportModal from "@collections/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
-import DifficultyLabel from "../../../../Components/DifficultyLabel/DifficultyLabel.vue";
+import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 
@@ -409,9 +409,15 @@ export default {
             type: String,
             default: '',
         },
+
         artist: {
             type: String,
             default: null,
+        },
+
+        noAccess: {
+            type: Boolean,
+            default: false,
         },
     },
 

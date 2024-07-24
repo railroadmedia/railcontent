@@ -13,8 +13,8 @@
     <title>Musora | Musicians start here. </title>
     <meta property="og:title" content="Musora | Musicians start here. ">
 
-    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
-    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
+    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
+    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">

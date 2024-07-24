@@ -21,7 +21,7 @@
         "cartVersion" => true
     ])
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Faster Fingers",
         "fullPrice" => floatval($productPrices['faster-fingers']->price),
         "price" => floatval($productPrices['faster-fingers']->discounted_price),
@@ -43,7 +43,13 @@
             <p class="breakdown">
                 @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['faster-fingers']->discounted_price), 2) == intval(floatval($productPrices['faster-fingers']->discounted_price)))
+                                ${{  floatval($productPrices['faster-fingers']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['faster-fingers']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>
                 @endif
@@ -72,7 +78,13 @@
                         class="hidden-xs hidden-sm"> Step-By-Step Training Pack.<br class="hidden-xs hidden-md hidden-lg">
                 <strong>You WILL Get Faster!</strong></h1>
             @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
-                <h3 class="text-red"><em><s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}</s> - JUST ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</em></h3>
+                <h3 class="text-red"><em><s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}</s> - JUST
+                        @if(number_format(floatval($productPrices['faster-fingers']->discounted_price), 2) == intval(floatval($productPrices['faster-fingers']->discounted_price)))
+                            ${{  floatval($productPrices['faster-fingers']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['faster-fingers']->discounted_price), 2)  }}
+                        @endif
+                    </em></h3>
             @else
                 <h3 class="text-red"><em>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</em></h3>
             @endif
@@ -384,7 +396,13 @@
             <p class="breakdown">
                 @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['faster-fingers']->discounted_price), 2) == intval(floatval($productPrices['faster-fingers']->discounted_price)))
+                                ${{  floatval($productPrices['faster-fingers']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['faster-fingers']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>
                 @endif

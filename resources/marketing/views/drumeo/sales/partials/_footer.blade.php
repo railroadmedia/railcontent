@@ -53,9 +53,9 @@
                 <p>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/" aria-label="The Drumeo Beat">The Drumeo Beat</a><br>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/rudiments/" aria-label="40 Drum Rudiments">40 Drum Rudiments</a><br>
-                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/100-songs/" aria-label="100 Free Drum Songs">100 Free Drum Songs</a><br>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/free-playalongs/" aria-label="9 Free Play-Alongs">9 Free Play-Alongs</a><br>
-                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/videos/" aria-label="Video Drum Lessons">Video Drum Lessons</a>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/videos/" aria-label="Video Drum Lessons">Video Drum Lessons</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/getting-started/" aria-label="Getting Started">Getting Started</a>
                 </p>
             </div>
             <div class="footer-link-wrap">
@@ -98,4 +98,4 @@
     </div>
 </footer>
 @include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
-@include("drumeo.lead-gen.partials.everflow-product-tracker")
+@include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.drumeo.production.providers.everflow.brand_id')])

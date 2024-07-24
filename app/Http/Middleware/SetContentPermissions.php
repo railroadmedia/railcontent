@@ -27,7 +27,6 @@ class SetContentPermissions
             ConfigService::$availableBrands = Arr::wrap([brand()]);
 
             if (user()->isAMember()) {
-                ContentRepository::$bypassPermissions = false;
 
                 ContentRepository::$pullFutureContent = (bool)$request->get(
                     'include_future',
@@ -35,11 +34,14 @@ class SetContentPermissions
                 );
             }
 
+            if (!user()->isAdmin() && user()->isABasicMember()) {
+                ContentRepository::$allowsPullSongsContent = true;
+            }
+
             if (user()->isAdmin()) {
 
                 // admins can see drafts, archived lessons, and future content by default
                 ContentRepository::$bypassPermissions = true;
-
                 // if there is a 'scheduled' content, but from a past date, the admins ca still see the content's page, but they will not see it catalogue's content list
                 ContentRepository::$getFutureScheduledContentOnly = false;
 
@@ -50,6 +52,7 @@ class SetContentPermissions
                         ContentService::STATUS_DRAFT,
                         ContentService::STATUS_SCHEDULED,
                         ContentService::STATUS_ARCHIVED,
+                        ContentService::STATUS_UNLISTED,
                     ]
                 );
 
@@ -68,7 +71,6 @@ class SetContentPermissions
                 );
             }
         }
-
         return $next($request);
     }
 }

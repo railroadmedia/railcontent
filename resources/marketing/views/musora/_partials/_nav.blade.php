@@ -1,6 +1,6 @@
 <nav id="nav" class="top-bar row expanded @if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif">
     <div class="logo">
-        <a aria-label="Musora Home" 
+        <a aria-label="Musora Home"
             @if(!empty($logoUrl))
                 href="{{ $logoUrl }}"
             @else
@@ -51,7 +51,7 @@
                 <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+{{--                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>--}}
                 </div>
                 <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-drumeo" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
@@ -77,7 +77,7 @@
                 @else
                     Join<span class="show-for-medium"> Drumeo</span>
                 @endif
-                
+
             </a>
         </div>
         <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
@@ -106,9 +106,9 @@
                 <a href="https://www.musora.com/method" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-method">
                     Method
                 </a>
-                <a href="https://www.musora.com/songs" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-songs">
-                    Songs
-                </a>
+{{--                <a href="https://www.musora.com/songs" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-songs">--}}
+{{--                    Songs--}}
+{{--                </a>--}}
             </div>
         </div>
         <div class="page-link parent flex flex-col flex-wrap body text-black align-v-center" data-remain-open="instruments" x-data="{ dropdown_648b9503bc982: false }">

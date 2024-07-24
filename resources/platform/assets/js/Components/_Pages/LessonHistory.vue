@@ -23,9 +23,9 @@
     </div>
 </template>
 <script setup>
-import CollectionWrapper from "../CollectionWrapper/CollectionWrapper";
-import PageHeader from "../PageHeader/PageHeader.vue";
-import Breadcrumb from "../Breadcrumb/Breadcrumb.vue";
+import CollectionWrapper from "@collections/CollectionWrapper/CollectionWrapper";
+import PageHeader from "@collections/PageHeader/PageHeader.vue";
+import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 
 const props = defineProps({
     collectionType: {

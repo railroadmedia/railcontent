@@ -184,19 +184,19 @@
         <div class="container mx-auto relative z-50 max-w-4xl">
             <h3 class="leading-tight" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
             <h6 class="leading-tight mt-3 mb-5 md:mb-7 lg:mb-10 text-musora uppercase">
-                @if($stock > 0)
-                    Only
-                        <span x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>
-                    left
-                @else
-                    &nbsp;
-                @endif
+{{--                @if($stock > 0)--}}
+{{--                    Only--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>--}}
+{{--                    left--}}
+{{--                @else--}}
+{{--                    &nbsp;--}}
+{{--                @endif--}}
             </h6>
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">
@@ -280,7 +280,7 @@
                             <strong class="text-musora">FREE</strong></span><br>
                             <em>
                                 @if(!empty($bonus['shipping']))
-                                    Free Shipping
+                                    Free Bonus
                                 @else
                                     Online Access
                                 @endif
@@ -313,7 +313,7 @@
             ],
             [
                 "title" => "What content is included with my Lifetime Membership? Are songs included?",
-                "desc" => 'As a Drumeo Lifetime Member, you get access to all original Musora content for life and our entire library of 6000+ drum transcriptions. That’s all our courses, the Method, Live lessons, Student Reviews, and Songs.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions for our other instruments (Piano, Guitar, Vocals).<br><br>If all you want to play is drums, then you have everything. But if you’re interested in learning songs for other instruments, there is a small fee for ongoing access because these songs are licensed. <br><br>We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>But again, this does NOT apply to drum transcriptions.',
+                "desc" => 'As a Drumeo Lifetime Member, you get access to all original Musora content for life and our entire library of drum transcriptions. That’s all our courses, the Method, Live lessons, Student Reviews, and Songs.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions for our other instruments (Piano, Guitar, Vocals).<br><br>If all you want to play is drums, then you have everything. But if you’re interested in learning songs for other instruments, there is a small fee for ongoing access because these songs are licensed. <br><br>We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>But again, this does NOT apply to drum transcriptions.',
             ],
         ]
     @endphp
@@ -363,10 +363,6 @@
         'styles' => 'pb-[177%] sm:pb-[66vh] bg-white',
     ])
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-03-16 00:00:00',
-        'promoVersion' => false
-    ])
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

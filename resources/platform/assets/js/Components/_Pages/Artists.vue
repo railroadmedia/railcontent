@@ -18,7 +18,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import PageHeader from '../PageHeader/PageHeader.vue';
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
 
 const props = defineProps({
     artists: Array

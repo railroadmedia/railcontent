@@ -58,12 +58,12 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import { useUserStore } from "../../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-import LiveEmbed from '../../LiveEmbed/LiveEmbed';
-import ContentAssignment from '../../../Libraries/Vuesora/Components/ContentAssignment/ContentAssignment';
-import ContentSchedule from '../../../Libraries/Vuesora/views/schedule/Schedule';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import LiveEmbed from '@collections/LiveEmbed/LiveEmbed';
+import ContentAssignment from '@vuesora/Components/ContentAssignment/ContentAssignment';
+import ContentSchedule from '@vuesora/views/schedule/Schedule';
 
 const props = defineProps({
     apiKey: {

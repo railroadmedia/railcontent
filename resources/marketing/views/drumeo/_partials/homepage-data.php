@@ -264,35 +264,17 @@ $drumeo = [
     "workouts" => ["https://i.vimeocdn.com/video/1768362015-3ecb7c06c2936cc71622cc11344fb791715f25b786d43857f87d923f6a09522b-d_500.jpg"],
     "songItems" => [
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/5000-songs-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
-            "title" => "6000+ popular songs.",
-            "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
-        ],
-        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/speed-ultra.mp4",
             "title" => "Find the perfect tempo.",
             "desc" => "Slow down or speed up any section of a song to hear every note.",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/loop-ultra.mp4",
             "title" => "Loop the trouble spots.",
             "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
         ],
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumless-feature2.webp",
-            "title" => "Remove the drums.",
-            "desc" => "Magically remove the original drums to make each song uniquely yours.",
-        ],
-        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/devices-feature2.webp",
             "title" => "Take your songs anywhere.",
             "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
         ],

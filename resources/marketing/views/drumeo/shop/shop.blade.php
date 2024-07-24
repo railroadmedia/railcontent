@@ -24,18 +24,62 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
-        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/543x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
-        'logoStyles' => 'h-6 sm:h-8 mb-1',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp',
+        'isShop' => true,
     ])
-{{--    'logoStyles' => 'h-12 sm:h-20 pb-3 sm:pb-4',--}}
 
     @include('_partials.components.shop.index-filters', [
         "all" => true
     ])
 
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        @php
+            $bundles = [
+
+                    [
+                        'slug' => '/practice-anywhere',
+                        'desc' => 'Annual Drumeo membership + <br class="lg:hidden"> $385.95 in free bonuses!',
+                        'visible' => 1,
+                        'price' => 240,
+                        'discountedPrice' => 200,
+                        'bgColor' => 'background: linear-gradient(45deg, #3418E1, #FF005C)',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle2.webp',
+                    ],
+                    [
+                        'slug' => '/drumshop/5-for-3-bundle',
+                        'desc' => '5 years of Drumeo for the <br class="lg:hidden"> price of 3 + $150 gift card!',
+                        'visible' => 1,
+                        'price' => 1200,
+                        'discountedPrice' => 720,
+                        'imgStyle' => 'py-3 lg:py-4',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/logo.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-bundle2.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
+                    ],
+
+                [
+                    'slug' => '/drumshop/kit',
+                    'desc' => 'Drumeo E-Kit +<br class="lg:hidden"> $506.95 in free bonuses!',
+                    'full' => true,
+                    'visible' => 1,
+                    'price' => 499,
+                    'discountedPrice' => 499,
+                    'imgStyle' => 'sm:hidden',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-logo-horizontal.webp',
+                    'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-spread.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2-m.png',
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Summer Bundles',
+        ])
+
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
@@ -49,14 +93,14 @@
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,
@@ -95,15 +139,16 @@
                 </div>
             </div>
         </section>
+
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
-                     "discounted_price" => 240,
-                        "href" => "/",
+                    "badge" => "Most Popular",
+                     "discounted_price" => 200,
+                        "href" => "/practice-anywhere",
                      "instructor" => "Award-Winning Membership",
                      "price" => 240,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",

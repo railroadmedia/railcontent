@@ -10,7 +10,9 @@
       dark:tw-border-[#223457]
       tw-no-underline
     " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-    :href="renderLink && isReleased ? item.url : null">
+    :href="renderLink && isReleased ? item.url : null"
+     @click="openUpgradeModal"
+  >
 
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
@@ -50,9 +52,10 @@
 
           <span
               class="thumb-hover flex-center"
-              :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+              :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,12,23,0.85)]' : !isReleased || noAccess }"
           >
-            <i class="fas" :class="thumbnailIcon"></i>
+            <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+            <i v-else class="fas" :class="thumbnailIcon"></i>
             <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
               {{ releaseDate }}
             </p>
@@ -248,7 +251,8 @@
 import {computed, onMounted} from "vue";
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
-import DifficultyLabel from '../../../../Components/DifficultyLabel/DifficultyLabel';
+import { usePlatformStore } from "../../../../Stores/platform";
+import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],
@@ -340,6 +344,12 @@ export default {
       }
 
       return this.index;
+    },
+
+    openUpgradeModal(){
+        const platformStore = usePlatformStore();
+
+        this.noAccess && platformStore.openMembershipUpgradeModal();
     },
   },
   beforeDestroy() {

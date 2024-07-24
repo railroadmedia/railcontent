@@ -42,7 +42,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "6000+ popular songs.",
+        "songs" => "popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -59,14 +59,14 @@
         "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
         "secondPoint" => "200+ courses with legendary teachers",
         "thirdPoint" => "Go beyond drums with lessons for piano, guitar, and singing.",
-        "fifthPoint" => "Thousands of songs transcribed w/ playback tools for all instruments.",
+        "fifthPoint" => "Popular songs transcribed w/ playback tools for all instruments.",
 
     ])
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-white.webp",
-            "songs" => "6000+ popular songs.",
+            "songs" => "popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",

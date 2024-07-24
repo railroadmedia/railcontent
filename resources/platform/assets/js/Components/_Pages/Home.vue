@@ -139,18 +139,18 @@
 
 <script setup>
     import { computed, onMounted, ref } from 'vue';
-    import CohortBanner from '@components/CohortBanner/CohortBanner.vue';
+    import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
-    import HeaderCarousel from '@components/HeaderCarousel/HeaderCarousel.vue';
-    import HomepageCatalog from '@components/HomepageCatalog/HomepageCatalog.vue';
-    import LearningPathContainer from '@components/LearningPaths/LearningPathContainer.vue';
-    import ListSection from '@components/ListSection/ListSection.vue';
-    import MiniCatalogueSection from '@components/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import MusoraIcon from '@components/MusoraIcons/MusoraIcon.vue';
-    import PopularConversations from '@components/PopularConversations/PopularConversations.vue';
-    import StaticHeader from  '@components/HeaderCarousel/StaticHeader.vue';
-    import StatsSection from '@components/StatsSection/StatsSection.vue';
-    import TriggerBanner from '@components/Onboarding/TriggerBanner.vue';
+    import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
+    import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
+    import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
+    import ListSection from '@collections/ListSection/ListSection.vue';
+    import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+    import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
+    import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
+    import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
+    import StatsSection from '@collections/StatsSection/StatsSection.vue';
+    import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
 
@@ -259,4 +259,3 @@
         singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
     }
 </script>
-../../Libraries/Vuesora/Components/Coaches/CoachEvent.vue../../Libraries/Vuesora/components/Coaches/CoachEvent.vue

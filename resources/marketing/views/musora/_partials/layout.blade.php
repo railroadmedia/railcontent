@@ -10,9 +10,6 @@
             "lessons" => [
                 "url" => get_musora_brand_base_url().'/method',
             ],
-            "songs" => [
-                "url" => get_musora_brand_base_url().'/songs',
-            ],
             "Instruments" => [
                 "iconClass" => "fas fa-piano-keyboard",
                 "children" => [
@@ -59,9 +56,6 @@
                 "children" => [
                     "Method" => [
                         "url" => get_musora_brand_base_url().'/method',
-                    ],
-                    "Songs" => [
-                        "url" => get_musora_brand_base_url().'/songs',
                     ],
                 ],
             ],

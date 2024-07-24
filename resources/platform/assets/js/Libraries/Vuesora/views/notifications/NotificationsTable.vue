@@ -24,11 +24,11 @@ import { onMounted, ref, computed } from 'vue';
 import { EyeIcon, CogIcon } from '@heroicons/vue/outline';
 import * as QueryString from 'query-string';
 import NotificationsTableRow from './_NotificationsTableRow.vue';
-import PageHeader from '../../../../Components/PageHeader/PageHeader.vue';
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import Pagination from '../../Components/Pagination.vue';
 import UserService from '../../assets/js/Services/user';
-import MusoraIcon from '../../../../Components/MusoraIcons/MusoraIcon.vue';
-import Breadcrumb from '../../../../Components/ContentInfo/Breadcrumb.vue';
+import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
+import Breadcrumb from '@collections/ContentInfo/Breadcrumb.vue';
 
 const props = defineProps({
     brand: {

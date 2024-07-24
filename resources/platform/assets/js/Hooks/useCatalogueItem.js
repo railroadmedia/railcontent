@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { reactive, computed, toRefs } from 'vue';
-import ContentHelpers from "../Libraries/Vuesora/assets/js/helper-functions/content.js";
-import ContentModel from '../Libraries/Vuesora/assets/js/models/_model.js';
-import { useUserStore } from "../Stores/user.js";
+import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
+import ContentModel from '@vuesora/assets/js/models/_model.js';
+import { useUserStore } from "@stores/user.js";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
@@ -14,7 +14,7 @@ export default function useCatalogueItem(props) {
                 return false;
             }
 
-            return (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
+            return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
     });
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());

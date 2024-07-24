@@ -30,9 +30,9 @@
     </div>
 </template>
 <script setup>
-import { useUserStore } from "../../Stores/user";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import ContentCatalogue from "../../Libraries/Vuesora/views/catalogues/ContentCatalogue";
+import ContentCatalogue from "@vuesora/views/catalogues/ContentCatalogue";
 
 const props = defineProps({
     includedTypes: {

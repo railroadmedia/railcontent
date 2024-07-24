@@ -36,12 +36,11 @@
         }
 
         .join.smaller.outline.red:hover {
-            background: lighten(#F61A30, 10%);
+            background:#f53347;
         }
 
         .join.smaller:focus {
-            background: #F61A30;
-            filter: brightness(120%);
+            background: #f53347;
         }
 
         .join i {
@@ -135,13 +134,17 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
+    @include('_partials.components.shop.promo-banner-3', [
+        "name" => "30-Day To Better Technique",
+        "fullPrice" => floatval($productPrices['30-days-to-better-technique']->price),
+        "price" => floatval($productPrices['30-days-to-better-technique']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @php
-
         $buttonLink = '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1';
-        $buttonText = 'GET STARTED';
+        $fullPrice = floatval($productPrices['30-days-to-better-technique']->discounted_price);
         $price = floatval($productPrices['30-days-to-better-technique']->price);
-
     @endphp
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
@@ -160,34 +163,22 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                         &nbsp;Watch Trailer
                     </div>
-                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 anchor-slide" href="{{ $buttonLink }}"
-                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">{{$buttonText}}</a>
-                    <!-- <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a> -->
+                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="{{ $buttonLink }}">GET STARTED</a>
                 </div>
-                <h5 class="text-pianote"><strong>Only ${{$price}} </strong></h5>
-
+                <h5>Only
+                    @if($price > $fullPrice)
+                        <s class="opacity-50">${{ $price }}</s>
+                        <strong>${{ $fullPrice }}</strong>
+                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                    @else
+                        <strong>${{ $fullPrice }}</strong>
+                    @endif
+                </h5>
             </div>
-            {{--            <div class="uppercase text-sm text-pianote py-4">--}}
-            {{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
-            {{--                    <strong>--}}
-            {{--                        <span x-cloak x-show="timeLeft > 0">--}}
-            {{--                            Enrollment closes in--}}
-            {{--                            <br>--}}
-            {{--                                <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>--}}
-            {{--                                <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>--}}
-            {{--                                <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>--}}
-            {{--                                <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>--}}
-            {{--                        </span>--}}
-            {{--                        <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>--}}
-            {{--                    </strong>--}}
-            {{--                </span>--}}
-            {{--            </div>--}}
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
             src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
-
-
     </header>
 
     @php
@@ -594,8 +585,17 @@
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results
                 </h4>
             </div>
-            <a href="{{ $buttonLink }}"  class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mt-12 sm:mb-0 hover:bg-red-500" x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">{{$buttonText}}</a><br>
-            <h5 class="text-black block py-2 md:py-4 mb-10 lg:mb-14"><strong>Only ${{$price}} </strong></h5>
+            <a href="{{ $buttonLink }}"  class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mt-12 sm:mb-0 hover:bg-red-500">GET STARTED</a><br>
+            <h5 class="text-black block py-2 md:py-4 mb-10 lg:mb-14">
+                Only
+                @if($price > $fullPrice)
+                    <s class="opacity-50">${{ $price }}</s>
+                    <strong>${{ $fullPrice }}</strong>
+                    <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                @else
+                    <strong>${{ $fullPrice }}</strong>
+                @endif
+            </h5>
 
         </div>
     </section>
@@ -644,8 +644,15 @@
                     <i class="fas fa-check text-pianote mr-1 ml-3"></i> 90-Day Money Back Guarantee
                 </div>
             </div>
-            <a href="{{ $buttonLink }}" class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mb-0 hover:bg-red-500" x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">{{$buttonText}}</a><br>
-            <h5 class="text-black block py-2 md:py-4"><strong>Only ${{$price}}</strong></h5>
+            <a href="{{ $buttonLink }}" class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mb-0 hover:bg-red-500">GET STARTED</a><br>
+            <h5 class="text-black block py-2 md:py-4">Only
+                @if($price > $fullPrice)
+                    <s class="opacity-50">${{ $price }}</s>
+                    <strong>${{ $fullPrice }}</strong>
+                    <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                @else
+                    <strong>${{ $fullPrice }}</strong>
+                @endif</h5>
         </div>
     </section>
 
@@ -833,10 +840,6 @@
         'name' => 'trailer',
         'video' => '928599834',
         'vimeo' => true,
-    ])
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-05-06 00:00:00',
-        'promoVersion' => false,
     ])
 
     @include('pianote.sales.partials._footer')

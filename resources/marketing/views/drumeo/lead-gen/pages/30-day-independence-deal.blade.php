@@ -274,7 +274,7 @@
             <div class="mx-3 md:mx-0">
                 <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4 w-full" style="max-width: 700px; background-color:#0D1627;">
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Step-by-step lessons building on what you learned in 30-Day Independence</li>
-                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 6000+ popular songs you can play with your new skills</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to popular songs you can play with your new skills</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> An Advanced Independence follow-up course with El Estepario Siberiano (NEW)</li>
                 <li class="flex items-start     "><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Lifetime access to learn tasty linear chops on the drums with 30-Day Chops</li>
@@ -322,7 +322,7 @@
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                         <p class="mt-2">
-                            Easy access to 6000+ famous drum songs with play-along tools.
+                            Easy access to famous drum songs with play-along tools.
                         </p>
                     </div>
                 </div>

@@ -36,7 +36,7 @@
         </div>
     @endif
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "The Drummer's Toolbox",
         "fullPrice" => floatval($productPrices['the-drummers-toolbox-book']->price),
         "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),

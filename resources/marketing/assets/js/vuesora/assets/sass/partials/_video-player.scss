@@ -63,7 +63,9 @@
 }
 
 @mixin playerInactive(){
-  cursor: none;
+  & {
+    cursor: none;
+  }
 
   .player-controls {
     transform:translateY(100%);

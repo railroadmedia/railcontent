@@ -16,7 +16,7 @@
             <div class="text-center lg:text-left w-full lg:w-auto flex-shrink-0 flex-col flex items-center lg:items-start">
                 <img class="h-6 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora_logo.webp">
                 <h6 class="uppercase  text-musora inline-block mb-2"><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
-                <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
+                <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br>Guided Practice Sessions. <br> The world’s best teachers.</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
 
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>

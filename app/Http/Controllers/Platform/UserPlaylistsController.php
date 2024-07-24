@@ -185,7 +185,8 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
                 ContentService::STATUS_SCHEDULED,
-                ContentService::STATUS_ARCHIVED
+                ContentService::STATUS_ARCHIVED,
+                ContentService::STATUS_UNLISTED
             ];
             ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
@@ -217,6 +218,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
                 $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
+                $playlistItems[$index]['show_plus_upgrade_modal'] = $item['show_plus_upgrade_modal'] ?? false;
 
                 $playlistItems[$index]['duration'] = $item['length_in_seconds'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
@@ -285,7 +287,8 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
             ContentService::STATUS_ARCHIVED,
-            ContentService::STATUS_DRAFT
+            ContentService::STATUS_DRAFT,
+            ContentService::STATUS_UNLISTED
         ];
         ContentRepository::$pullFutureContent = true;
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -346,6 +349,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
             $otherItems[$index]['need_access'] = $item['need_access'] ?? false;
             $otherItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
+            $otherItems[$index]['show_plus_upgrade_modal'] = $item['show_plus_upgrade_modal'] ?? false;
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $otherItems[$index]['route'] = $item['route'] ?? '';
             $otherItems[$index]['instructors'] = $item['instructors'] ?? null;
@@ -391,6 +395,7 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_low_routine'] = $initialItem['is_low_routine'] ?? false;
         $playlistItem['need_access'] = $initialItem['need_access'] ?? false;
         $playlistItem['need_access_message'] = $initialItem['need_access_message'] ?? false;
+        $playlistItem['show_plus_upgrade_modal'] = $initialItem['show_plus_upgrade_modal'] ?? false;
         $playlistItem['content_name'] = $initialItem['content_name'] ?? false;
         $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
@@ -469,7 +474,6 @@ class UserPlaylistsController extends BaseController
             "lessonType" => $playlistItem['type'],
             "playlistItems" => $playlistLessons,
             "relatedLesson" => $relatedLesson,
-            "relatedLessons" => $relatedLesson,
             'positionInPlaylist' => $position,
             "nextPlaylistItemUrl" => $nextPlaylistItem['url'] ?? '',
             "previousPlaylistItemUrl" => $previousPlaylistItem['url'] ?? '',

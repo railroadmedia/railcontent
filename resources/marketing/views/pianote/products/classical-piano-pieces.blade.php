@@ -8,7 +8,7 @@
     <meta property="og:description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> 
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
 
     @include('_partials.layout._fonts')
@@ -84,10 +84,18 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+
+@php
+    $discountedPrice =number_format(floatval($productPrices['classical-piano-pieces']->discounted_price), 2) == intval(floatval($productPrices['classical-piano-pieces']->discounted_price))
+        ? floatval($productPrices['classical-piano-pieces']->discounted_price)
+        : number_format(floatval($productPrices['classical-piano-pieces']->discounted_price), 2);
+@endphp
+
+
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Classical Piano Pieces",
         "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
-        "price" => floatval($productPrices['classical-piano-pieces']->discounted_price),
+        "price" => $discountedPrice,
         "noBreadcrumb" => true
     ])
     <header class="text-white px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top bg-no-repeat" style="background-color:#0e1623;">
@@ -98,11 +106,11 @@
                         src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
                     <h4 class="mb-4 sm:mb-6">
-                        @if(floatval($productPrices['classical-piano-pieces']->price) > floatval($productPrices['classical-piano-pieces']->discounted_price))
+                        @if(floatval($productPrices['classical-piano-pieces']->price) > $discountedPrice)
                             <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['classical-piano-pieces']->price) }}</s>
-                            <strong>${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['classical-piano-pieces']->discounted_price) / floatval($productPrices['classical-piano-pieces']->price)))) }}%)
+                            <strong>${{ $discountedPrice }}</strong> <br> (SAVE {{ round(100 - (100 * ($discountedPrice / floatval($productPrices['classical-piano-pieces']->price)))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
                         </h4>
                     <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>
@@ -298,11 +306,11 @@
                         src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
                     <h4 class="mb-4 sm:mb-6">
-                        @if(floatval($productPrices['classical-piano-pieces']->price) > floatval($productPrices['classical-piano-pieces']->discounted_price))
+                        @if(floatval($productPrices['classical-piano-pieces']->price) > $discountedPrice)
                             <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['classical-piano-pieces']->price) }}</s>
-                            <strong>${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['classical-piano-pieces']->discounted_price) / floatval($productPrices['classical-piano-pieces']->price)))) }}%)
+                            <strong>${{ $discountedPrice }}</strong> <br> (SAVE {{ round(100 - (100 * ($discountedPrice / floatval($productPrices['classical-piano-pieces']->price)))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPrice }}</strong>
                         @endif
                     </h4>
                     <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1" class="join medium w-full">GET YOUR COPY &raquo;</a>

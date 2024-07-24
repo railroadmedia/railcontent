@@ -41,7 +41,7 @@
 
 @section('content')
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => "Four Weeks To Better Drum Fills",
                 "fullPrice" => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
                 "price" => floatval($price),

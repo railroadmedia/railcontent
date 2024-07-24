@@ -32,11 +32,11 @@ class AccessCodeServiceTest extends TestCase
         $this->assertDatabaseHas(
             AccessCode::class,
             [
-            'id' => $accessCode->id,
-            'brand' => $product->brand,
-            'product_ids' => serialize([$product->id]),
-            'source' => 'foo-bar'
-        ]
+                'id' => $accessCode->id,
+                'brand' => $product->brand,
+                'product_ids' => serialize([$product->id]),
+                'source' => 'foo-bar'
+            ]
         );
         $this->assertNotNull($accessCode->code);
         $this->assertFalse($accessCode->is_claimed);
@@ -48,7 +48,9 @@ class AccessCodeServiceTest extends TestCase
 
         $product = Product::factory()->create();
         $accessCode = AccessCodeFactory::createAccessCode($product);
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'shopify_id' => null //hack to skip subscription check
+        ]);
 
         Log::shouldReceive("info")
             ->once()
