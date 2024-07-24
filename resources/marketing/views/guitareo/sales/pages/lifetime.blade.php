@@ -185,20 +185,15 @@
                 'description' => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons. Inside, you'll find guided lessons on anything you want to learn on the guitar — such as the fundamentals, gear and tone, playing styles for genres, and more.",
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-system.png',
             ],
-            [
-                'price' => floatval($productPrices['rhythm-and-groove']->price),
-                'description' => "Start grooving to rhythms on the guitar that you can throw into any song. Your teacher Sami Ghawi will show you how to change the feel of your music and get an audience moving to the beat.",
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/rhythm_groove_cart.jpg',
-            ],
         ];
     @endphp
     @php
         if(!empty($upgradeVersion)) {
-            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
         } else {
-            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
         };
     @endphp
 
