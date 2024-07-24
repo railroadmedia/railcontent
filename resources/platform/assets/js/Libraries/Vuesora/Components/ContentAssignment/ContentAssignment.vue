@@ -34,8 +34,10 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
-
+                <div
+                    class="flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full"
+                    :class="soundsliceSlug ? 'tw-grid tw-grid-cols-2 tw-gap-2 sm:tw-gap-0 sm:tw-flex' : 'tw-flex'"
+                >
                     <button id="open-exercise-button" v-if="soundsliceSlug"
                         class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
                         @click="openExercise">
