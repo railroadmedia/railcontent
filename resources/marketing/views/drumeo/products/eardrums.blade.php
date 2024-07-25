@@ -757,7 +757,7 @@
                     'firstDealSub' => 'Just the IEMs',
                     'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
                     'firstButtonText' => 'SELECT',
-                    'firstDealExtra' => "One-time payment. Free shipping.",
+                    'firstDealExtra' => "One-time payment.",
                     'whiteBg' => 'false',
                     'firstExtraBonuses' => [
                         '<strong>1 Pair of EarDrum IEMs</strong>',

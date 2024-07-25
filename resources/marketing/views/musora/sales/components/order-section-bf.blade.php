@@ -123,7 +123,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
         </p>
     </div>
 @endforeach --}}
-    
+
 @foreach ($products as $productItem)
     <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if (!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
         x-data="{
@@ -192,7 +192,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
             </span><br>
             <em>
                 @if (!empty(boolval($productItem['bundle_free_shipping'])))
-                    Free Shipping
+                    Free Bonus
                 @else
                     Online Access
                 @endif
