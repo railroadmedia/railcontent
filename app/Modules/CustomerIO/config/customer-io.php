@@ -406,6 +406,21 @@ return [
                     'pianote',
                 ],
             ],
+            'Technique Essentials' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_technique-essentials',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
             'Chord Hacks' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
