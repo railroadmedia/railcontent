@@ -255,7 +255,7 @@
 <!-- hero section-->
 {{--@if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))--}}
 {{--    <a class="flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">--}}
-{{--        --}}{{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+{{--        --}}{{--        <img class="h-8 sm:h-10 mr-4" src="https://www.musora.com/musora-cdn/image/width=300,quality=90/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
 {{--        <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>--}}
 {{--        <p class="inline-block text-xs mx-0 leading-tight">--}}
 {{--            Alesis Nitro Max E-Kits are back!<br> Get yours before they're gone!--}}
