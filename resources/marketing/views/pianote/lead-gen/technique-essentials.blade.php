@@ -1,4 +1,6 @@
-@extends('pianote.lead-gen.lead-gen-layout-tw')
+@extends('pianote.lead-gen.lead-gen-layout-tw', [
+    'appTailwind' => true
+])
 
 @section('meta')
     @parent
@@ -22,10 +24,10 @@
             max-width: 500px;
         }
         .ajax-form input,
-        .ajax-form button { 
+        .ajax-form button {
             height: 50px;
         }
-        .ajax-form input { 
+        .ajax-form input {
            font-size: 18px;
         }
     </style>
@@ -47,14 +49,14 @@
                     <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;">
                         <img class="absolute inset-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/header.webp" alt="Jordan Rudess" fetchpriority="high" />
                     </div>
-                    <div class="md:pt-4 md:pl-4"> 
+                    <div class="md:pt-4 md:pl-4">
                         <p class="hidden lg:inline">
                         <i class="fas fa-check text-pianote"></i> Build stronger fingers <br>
                         <i class="fas fa-check text-pianote"></i> Improve your coordination<br>
                         <i class="fas fa-check text-pianote"></i> Play piano faster</p>
-                    </div> 
+                    </div>
 
-                    
+
                     <div class="flex inline lg:hidden">
                         <p class="w-1/3 leading-tight"> <i class="fas fa-check text-pianote"></i><br> Build <br> stronger fingers</p>
                         <p class="w-1/3 leading-tight"> <i class="fas fa-check text-pianote"></i><br> Improve <br> your coordination</p>
@@ -64,7 +66,7 @@
                     <div class="mt-6 sm:mt-5 lg:mt-10">
                         @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Essentials - Web Form", 
+                        "formId" => "Pianote - Engagement - Trigger - Essentials - Web Form",
                         "formName" => 'Essentials',
                         "nameInput" => true,
                             "buttonText" => "GET STARTED FOR FREE",
@@ -129,23 +131,23 @@
     </section>
 
     <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano-bg.webp');">
-        <div class="container mx-auto max-w-3xl">  
+        <div class="container mx-auto max-w-3xl">
             <h3 class="leading-tight px-4"><strong>Practice WITH Jordan Rudess</strong></h3>
             <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 px-4">
-                You don’t get better by watching videos. That’s why each lesson is a “practice-along” lesson where you’ll play WITH Jordan. 
+                You don’t get better by watching videos. That’s why each lesson is a “practice-along” lesson where you’ll play WITH Jordan.
                 Play alongside him and do what he does as he guides you through the lesson. It’s the best way to stay motivated and see results. <br><br>
                 And hey, you can say you’ve played with Dream Theater’s Jordan Rudess!
 
             </p>
         </div>
-       
-        <div class="relative cursor-pointer autoplay-video relative">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <div class="absolute top-0 flex items-center justify-center">
+
+        <div class="relative">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <div class="cursor-pointer autoplay-video absolute top-0 left-1/2 w-[85%] sm:w-[44%] pb-[63%] sm:pb-[33%] transform -translate-x-1/2 sm:ml-1 lg:ml-2 mt-3 xl:mt-4">
                 <video
-                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/technique-essentials/demo.mp4"
-                    muted="" autoplay="" loop="" playsinline="" class="w-11/12 md:w-6/12 z-10 rounded-xl"></video>
+                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/technique-essentials/demo2.mp4"
+                    muted="" autoplay="" loop="" playsinline="" class="inset-0 absolute w-full h-full z-10 rounded-xl object-cover"></video>
             </div>
         </div>
         <div class="flex flex-col items-center justify-center py-3"
@@ -173,7 +175,7 @@
             <p class="mb-4"><strong>He’s sharing those secrets with you.</strong></p>
             <p class="mb-4">Jordan honed his piano technique under the supervision of some of the greatest piano teachers at Juilliard. And now…</p>
             <p><strong>He’s sharing those secrets with you.</strong></p>
-            
+
         </div>
     </div>
     <div class="container mx-auto max-w-2xl py-4 px-4 md:px-6 pb-10">
@@ -184,22 +186,22 @@
     </div>
 </section>
 
-   
+
 
     <div id="final" class="anchor"></div>
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#000000">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center md:text-left w-full md:w-1/2 sm:pl-5">
-                <img class="h-20 lg:h-32 mb-4 sm:mb-2 lg:mb-3 md:pl-4 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" 
+                <img class="h-20 lg:h-32 mb-4 sm:mb-2 lg:mb-3 md:pl-4 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/logo.webp" alt="logo">
-                    <div class="md:pt-4 md:pl-4"> 
+                    <div class="md:pt-4 md:pl-4">
                         <p class="hidden md:inline text-white">
                         <i class="fas fa-check text-pianote"></i> Build stronger fingers <br>
                         <i class="fas fa-check text-pianote"></i> Improve your coordination<br>
                         <i class="fas fa-check text-pianote"></i> Play piano faster</p>
-                    </div> 
+                    </div>
 
-                    
+
                     <div class="flex inline md:hidden text-white">
                         <p class="w-1/3 leading-tight"> <i class="fas fa-check text-pianote"></i><br> Build <br> stronger fingers</p>
                         <p class="w-1/3 leading-tight"> <i class="fas fa-check text-pianote"></i><br> Improve <br> your coordination</p>
@@ -208,7 +210,7 @@
                 <div class="max-w-md md:max-w-auto mx-auto md:mx-0 mt-6 sm:mt-5 lg:mt-10">
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Essentials - Web Form2", 
+                        "formId" => "Pianote - Engagement - Trigger - Essentials - Web Form2",
                         "formName" => 'Essentials',
                         "nameInput" => true,
                             "buttonText" => "GET STARTED FOR FREE",
@@ -220,7 +222,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-4xl lg:max-w-6xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"  
+                <img class="max-w-2xl md:max-w-4xl lg:max-w-6xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/bottom-collage.webp" alt="collage">
             </div>
         </div>
