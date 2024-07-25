@@ -24,7 +24,7 @@
                         <img class="h-16 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/hand-technique/logo_center.png" alt="hand technique logo">
                     </picture>
 
-                    <img class="md:hidden object-cover h-full w-full rounded-lg mb-6 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/hand-technique/intro_m.jpg" alt="intro image">
+                    <img class="md:hidden object-cover h-full w-full rounded-lg mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=90/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/hand-technique/intro_m.jpg" alt="intro image">
 
                     <h3 class="font-extrabold leading-tight">
                         Learn drumming's 3 hand techniques in this FREE series.
