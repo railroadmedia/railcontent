@@ -1,0 +1,94 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Stores/Introduction" />
+
+# Stores
+
+## Overview
+
+In our Vue application, we use Pinia as our state management system to manage the state of various components. The Stores directory contains Pinia stores that hold and manage the state for different parts of our application.
+
+## What is Pinia?
+
+Pinia is a state management library for Vue that provides a more intuitive and type-safe way to manage state compared to its predecessor, Vuex. Pinia is designed to be simpler and more modular, making it easier to scale and maintain your application's state.
+
+### Benefits of Pinia
+
+- **Simplicity**: Pinia's API is straightforward and easy to learn, reducing the complexity of managing state.
+- **Type Safety**: Pinia offers built-in support for TypeScript, providing better type safety and autocompletion.
+- **Modular**: Pinia encourages modularity, allowing you to split your state management logic into smaller, more manageable pieces.
+- **DevTools Integration**: Pinia integrates seamlessly with Vue DevTools, making it easier to debug and inspect your application's state.
+
+## Usage
+
+Pinia stores are used to manage state across different components in our application. By centralizing state management, we can ensure consistency and make it easier to share state between components.
+
+### Example: Playlist Store
+
+One of the stores in our application is the Playlist Store. This store manages the state for playlists, including the list of playlists, the active playlist, and various loading states.
+
+Here's a brief overview of the Playlist Store:
+
+```javascript
+// stores/playlistStore.js
+import { defineStore } from 'pinia';
+
+export const usePlaylistStore = defineStore('playlist', {
+  state: () => {
+    return {
+      playlists: [], // For Collection Page
+      sidebarPlaylists: [],
+      lessons: [], // For Detail Page
+      pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
+      activePlaylist: {}, // Playlist a user is currently viewing
+      modalOpen: {
+        modalType: null,
+      },
+      playerExpanded: false,
+      pageHasPlaylistCatalog: false,
+      loadingPlaylists: false,
+      loadingLessons: false,
+      sortingPlaylist: false,
+      loadingPinnedPlaylists: false,
+      filterOptions: [],
+      playlistsQuantity: 0,
+      resultsPage: 1
+    };
+  },
+  actions: {
+    // Define your actions here
+  },
+  getters: {
+    // Define your getters here
+  }
+});
+```
+
+## How to Use a Pinia Store
+
+To use a Pinia store in your component, you first need to import and initialize the store. Then, you can access the state, actions, and getters defined in the store.
+
+### Example Usage in a Vue Component
+
+```html
+<template>
+  <div>
+    <h2>Playlists</h2>
+    <ul>
+      <li v-for="playlist in playlists" :key="playlist.id">{{ playlist.title }}</li>
+    </ul>
+  </div>
+</template>
+
+<script setup>
+    import { usePlaylistStore } from '@/stores/playlistStore';
+
+    const playlistStore = usePlaylistStore();
+    const { playlists } = playlistStore;
+</script>
+```
+
+## Conclusion
+
+The Stores directory is a crucial part of our Vue application, leveraging Pinia to manage state across various components. Pinia's simplicity, modularity, and type safety make it an excellent choice for state management, helping us maintain a clean and efficient codebase.
+

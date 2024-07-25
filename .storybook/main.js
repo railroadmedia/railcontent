@@ -14,6 +14,11 @@ module.exports = {
     "./Components.mdx",
     "./StyleGuide/**/*.mdx",
     "./Components/**/*.mdx",
+    "./Constants/**/*.mdx",
+    "./Hooks/**/*.mdx",
+    "./Libraries/**/*.mdx",
+    "./Services/**/*.mdx",
+    "./Stores/**/*.mdx",
     "../resources/platform/assets/js/**/*.stories.mdx",
     "../resources/platform/assets/js/**/*.stories.@(js|jsx|ts|tsx)"
   ],
