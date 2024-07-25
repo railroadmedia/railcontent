@@ -35,7 +35,7 @@
         "railroad/lead-tracker": "^3.0",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
-        "railroad/musora-api": "dev-BE-256 as v3.1.73",
+        "railroad/musora-api": "v3.1.*",
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
