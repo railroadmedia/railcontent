@@ -24,6 +24,17 @@
         .ajax-form input {
            font-size: 18px;
         }
+
+        #coach-bg {
+            background-position: center;
+            background-size: cover;
+        }
+
+        @media (min-width: 1220px) {
+            #coach-bg {
+                background-size: contain;
+            }
+        }
     </style>
 @endsection
 
@@ -158,10 +169,10 @@
         </div>
     </section>
 
-    <section class="bg-cover lg:bg-contain bg-center w-full pt-10" style="background-repeat: no-repeat; background-color: #EAE4DD; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/coach-bg.webp');">
+    <section id="coach-bg" class="w-full lg:pt-10" style="background-repeat: no-repeat; background-color: #EAE4DD; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/coach-bg.webp');">
         <div class="container mx-auto max-w-5xl flex flex-col justify-center items-center text-center px-4">
             <div class="max-w-2xl mt-10 md:mt-20 px-6">
-                <h2 class="text-4xl md:text-5xl font-bebas tracking-wide pt-60">JORDAN RUDESS</h2>
+                <h2 class="text-4xl md:text-5xl font-bebas tracking-wide pt-60 lg:pt-34">JORDAN RUDESS</h2>
                 <p class="mb-2">Jordan Rudess is best known as the extraordinary keyboardist for the platinum-selling, GRAMMY Award-winning progressive rock band, Dream Theater.</p>
                 <p class="mb-2">As a classical child prodigy, Jordan was admitted to the prestigious Juilliard School of Music when he was just 9 years old.</p>
                 <p class="mb-2">His piano playing is renowned for its virtuosity, speed, and of course… <strong>technique.</strong></p>
