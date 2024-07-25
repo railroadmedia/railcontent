@@ -173,6 +173,21 @@
             </section>
         </div>
         <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson" :next-lesson-json="nextLessonJson" />
+
+        <!-- Chapter Soundslice -->
+        <transition name="show-from-bottom">
+            <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
+                <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                            :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
+                            :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                    <template v-slot:soundsliceControls>
+                        <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"
+                                            :disable-prev="true" @onClose="handleCloseSoundslice" />
+                    </template>
+                </SoundSlice>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -197,6 +212,8 @@ import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
 import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
 import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
+import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 
 const props = defineProps({
     thisLessonJson: {
@@ -282,7 +299,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.videoProps.chapters?.length > 0) {
+    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
