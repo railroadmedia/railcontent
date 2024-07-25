@@ -143,8 +143,8 @@
 
         <div class="relative">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <div class="cursor-pointer autoplay-video absolute top-0 left-1/2 w-[85%] sm:w-[44%] pb-[63%] sm:pb-[33%] transform -translate-x-1/2 sm:ml-1 lg:ml-2 mt-3 xl:mt-4">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2750x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/piano2.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <div class="cursor-pointer autoplay-video absolute top-0 left-1/2 w-[85%] sm:w-[44%] pb-[63%] sm:pb-[33%] transform -translate-x-1/2 mt-3 xl:mt-4">
                 <video
                     src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/technique-essentials/demo2.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="inset-0 absolute w-full h-full z-10 rounded-xl object-cover"></video>
