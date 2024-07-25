@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Constants/Introduction" />
+
+# Constants 
+
+## Overview
+
+The Constants directory in our Vue application includes static JSON data that is used throughout the application. Static data is data that does not change, such as navigation links or brand colors. Additionally, we may use static data to 'seed' components for demo purposes.
+
+## What is Static Data?
+
+Static data refers to data that remains constant and does not change over time. Examples of static data include:
+
+- **Navigation Links**: Links used in the application's navigation bar.
+- **Brand Colors**: Color codes that represent the brand's identity.
+- **Icon Sets**: Sets of icons used throughout the application.
+- **Configuration Settings**: Settings that are predefined and do not change during runtime.
+
+## Usage
+
+Static data is essential for maintaining consistency across the application. By centralizing this data in the Constants directory, we ensure that it is easily accessible and manageable.
+
+### Example: Navigation Links
+
+A common use case for static data is navigation links. Here's an example of a JSON file that defines navigation links:
+
+```json
+// constants/navigationLinks.json
+{
+  "home": {
+    "name": "Home",
+    "url": "/"
+  },
+  "about": {
+    "name": "About Us",
+    "url": "/about"
+  },
+  "contact": {
+    "name": "Contact",
+    "url": "/contact"
+  }
+}
+```
+
+### Example: Brand Colors
+
+Another use case is brand colors. Here's an example of a JSON file that defines brand colors:
+
+```json
+// constants/brandColors.json
+{
+  "primary": "#FF5733",
+  "secondary": "#33FF57",
+  "accent": "#3357FF"
+}
+```
+
+## Seeding Components for Demo Purposes
+
+In addition to being used for static data, the Constants directory can also be used to seed components with initial data for demo purposes. This is useful for Storybook stories, unit tests, and development.
+
+### Example: Seeding a Component
+
+Here's an example of how you can seed a component with initial data from the Constants directory:
+
+```js
+<template>
+  <Navigation :links="navigationLinks" />
+</template>
+
+<script>
+import navigationLinks from '@/constants/navigationLinks.json';
+
+export default {
+  data() {
+    return {
+      navigationLinks
+    };
+  }
+};
+</script>
+```
+
+## Conclusion
+
+The Constants directory is a vital part of our Vue application, providing a centralized place for static data. This data is used to ensure consistency across the application and can also be used to seed components for demo purposes. By keeping our static data organized and easily accessible, we can maintain a clean and efficient codebase.
