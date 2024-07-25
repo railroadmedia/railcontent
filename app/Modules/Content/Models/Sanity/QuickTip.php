@@ -121,6 +121,6 @@ class QuickTip extends BaseSanityModel
 
     public static function getName(): string
     {
-        return 'quick-tip';
+        return 'quick-tips';
     }
 }

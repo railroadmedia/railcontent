@@ -48,9 +48,7 @@ class PlayAlong extends BaseSanityContentTypeModel
                         new Field(FieldType::URL, 'resource_url')],
             previewItem: new ListItemPreview('resource_name', 'resource_url')
         );
-        $bpmList = new ListObject(
-            fields: [new Field(FieldType::Number, 'BPM')]
-        );
+        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup  = new Group('openAI', 'OpenAI');
@@ -85,6 +83,7 @@ class PlayAlong extends BaseSanityContentTypeModel
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference,group:$detailsGroup),
+            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference,group:$detailsGroup),
 
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
@@ -92,7 +91,8 @@ class PlayAlong extends BaseSanityContentTypeModel
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup),
 
-            new Field(FieldType::Array, 'bpm', 'BPM', of: $bpmList,group:$detailsGroup),
+            new Field(FieldType::Number, 'BPM',group:$detailsGroup),
+
             new Field(FieldType::URL, 'mp3_no_drums_no_click_url', group: $detailsGroup),
             new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', group: $detailsGroup),
             new Field(FieldType::URL, 'mp3_no_drums_yes_click_url', group: $detailsGroup),

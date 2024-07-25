@@ -39,6 +39,7 @@ class Workout extends BaseSanityModel
             previewItem: new ListItemPreview('chapter_description', 'chapter_timecode','chapter_thumbnail_url')
         );
         $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
+        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup = new Group('openAI', 'OpenAI');
@@ -55,6 +56,7 @@ class Workout extends BaseSanityModel
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput',group:$detailsGroup),
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference,group:$detailsGroup),
             new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference,group:$detailsGroup),
+            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference,group:$detailsGroup),
             new Field(
                 FieldType::Number,
                 'difficulty',

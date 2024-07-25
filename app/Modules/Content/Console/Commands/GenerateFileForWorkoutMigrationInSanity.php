@@ -26,7 +26,14 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
     protected $description = 'GenerateFileForWorkoutMigrationInSanity';
 
     protected $difficultyMapping = ['All', 'Novice', 'Beginner', 'Beginner', 'Intermediate', 'Intermediate', 'Advanced', 'Advanced', 'Expert', 'Expert','Expert'];
-
+protected $contentTypeToSanityTypeMapping= [
+'boot-camps'=> 'boot-camp',
+    'backstage-secrets' => 'backstage-secret',
+    'student-collaborations' => 'student-collaboration',
+    'podcasts' => 'podcast',
+    'solos' => 'solo'
+   // 'drum-fest-international-2022' =>
+];
     public function handle():int
     {
         $contentType = $this->argument('type');
@@ -117,16 +124,18 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
         $results = Content::with('data','fields')->where('railcontent_content.type', '=', $contentType)
             ->where('railcontent_content.status', '!=', 'deleted')
             ->where('railcontent_content.brand', '=', $this->argument('brand'))
-           // ->where('railcontent_content.id','=',190417)
-            ->whereNotIn('railcontent_content.id',[402037,30437, 206255])->get();
+            //->where('railcontent_content.id','=',198099)
+            ->whereNotIn('railcontent_content.id',[402037,30437, 206255, 375281])->get();
 
         $songs = [];
         foreach($results as $result) {
-            $id = $contentType.'_'.$result->id;
+            $type = isset($this->contentTypeToSanityTypeMapping[$result->type])?$this->contentTypeToSanityTypeMapping[$result->type]: $result->type;
+            $id = $type.'_'.$result->id;
             $difficulty = (int)$result->difficulty;
+                     //   dd($this->contentTypeToSanityTypeMapping, isset($this->contentTypeToSanityTypeMapping[$result->type]), $type);
             $songs[$id] = [
                 '_id' => $id,
-                '_type' => $result->type,
+                '_type' => $type,
                 'title' => $result->title,
                 'sort' => (int)($result->sort ?? 0),
                 'slug' =>   ['_type' => 'slug',
@@ -148,28 +157,58 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
             }
             $resources = [];
             $chapters = [];
+            $notImportedData = [];
             foreach($result->data as $datum) {
+                $imported = false;
                 if($datum['key'] == 'thumbnail_url' && $datum['value'] != ''){
                     $songs[$id]['thumbnail'] = ['_type' => 'image',
                                 '_sanityAsset' => 'image@'.$datum['value']
                 ];
+                    $imported = true;
                 }
                 if($datum['key'] == 'resource_name'){
                     $resources[$datum['position']]['resource_name'] = $datum['value'];
+                    $imported = true;
                 }
                 if($datum['key'] == 'resource_url'){
                     $resources[$datum['position']]['resource_url'] = $datum['value'];
+                    $imported = true;
                 }
                 if($datum['key'] == 'chapter_timecode'){
                     $chapters[$datum['position']]['chapter_timecode'] = $datum['value'];
+                    $imported = true;
                 }
                 if($datum['key'] == 'chapter_description'){
                     $chapters[$datum['position']]['chapter_description'] = $datum['value'];
+                    $imported = true;
                 }
                 if($datum['key'] == 'chapter_thumbnail_url'){
                     $chapters[$datum['position']]['chapter_thumbnail_url'] = $datum['value'];
+                    $imported = true;
                 }
+                if($datum['key'] == 'mp3_yes_drums_yes_click_url'){
+                    $songs[$id]['mp3_yes_drums_yes_click_url'] = $datum['value'];
+                    $imported = true;
+                }
+                if($datum['key'] == 'mp3_yes_drums_no_click_url'){
+                    $songs[$id]['mp3_yes_drums_no_click_url'] = $datum['value'];
+                    $imported = true;
+                }
+                if($datum['key'] == 'mp3_no_drums_yes_click_url'){
+                    $songs[$id]['mp3_no_drums_yes_click_url'] = $datum['value'];
+                    $imported = true;
+                }
+                if($datum['key'] == 'mp3_no_drums_no_click_url'){
+                    $songs[$id]['mp3_no_drums_no_click_url'] = $datum['value'];
+                    $imported = true;
+                }
+                if($datum['key'] == 'sheet_music_thumbnail_url'){
+                    $songs[$id]['sheet_music_thumbnail_url'] = $datum['value'];
+                    $imported = true;
+                }
+
                 if($datum['key'] == 'description'){
+                    $imported = true;
 //                    $songs[$id]['description'][] = ['_type' => 'block',
 //                        "style"=> "normal",
 //                                                  'children' => [
@@ -178,6 +217,15 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
 //                                                      'text'=>$datum['value']]
 //                    ];
                 }
+                if(!$imported && (!in_array($datum['key'],['original_thumbnail_url','header_image_url','learning_path_description',
+                        'sbt_video_url','sbt_image_url','sheet_music_image_url',
+                        'mp3_click_url','mp3_non_click_url',
+                        'gear']))){
+                    $notImportedData[] = $datum['key'];
+                }
+            }
+            if(!empty($notImportedData)) {
+                dd($notImportedData);
             }
            // dd($result->fields);
             $songs[$id]['show_in_new_feed'] = false;
@@ -186,29 +234,79 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
             $lifestyleContent = [];
             $creativityContent = [];
             $contentExtraData = [];
+            $notImportedFields = [];
+
             foreach($result->fields as $field) {
+                $imported = false;
                 if($field['key'] == 'soundslice_slug'){
                     $songs[$id]['soundslice_slug'] = $field['value'];
+                    $imported = true;
                 }
                 if($field['key'] == 'show_in_new_feed'){
                     $songs[$id]['show_in_new_feed'] = ($field['value'] == 1);
+                    $imported = true;
                 }
                 if($field['key'] == 'is_featured'){
                     $songs[$id]['is_featured'] = ($field['value'] == 1);
+                    $imported = true;
                 }
                 if($field['key'] == 'hide_from_recsys'){
                     $songs[$id]['hide_from_recsys'] = ($field['value'] == 1);
+                    $imported = true;
                 }
 
                 if(array_key_exists($field['key'], $extraModels) || ($field['key'] == 'essentials')){
                     $contentExtraData[$field['key']][] = $field['value'];
+                    $imported = true;
                 }
                 if(($field['key'] == 'essentials')){
                     $contentExtraData['essential'][] = $field['value'];
+                    $imported = true;
                 }
-
+                if($field['key'] == 'artist'){
+                    $songs[$id]['artist'] = $field['value'] ;
+                    $imported = true;
+                }
+                if($field['key'] == 'bpm'){
+                    $songs[$id]['bpm'] = $field['value'] ;
+                    $imported = true;
+                }
+                if($field['key'] == 'gear'){
+                    $songs[$id]['gear'] = $field['value'] ;
+                    $imported = true;
+                }
+                if($field['key'] == 'low_soundslice_slug'){
+                    $songs[$id]['low_soundslice_slug'] = $field['value'] ;
+                    $imported = true;
+                }
+                if($field['key'] == 'high_soundslice_slug'){
+                    $songs[$id]['high_soundslice_slug'] = $field['value'] ;
+                    $imported = true;
+                }
+                if($field['key'] == 'video'){
+                    $video = Content::query()->where('railcontent_content.id', '=', $field['value'])->first();
+                    if($video) {
+                        $songs[$id]['video']['type']        = $video['type'];
+                        $songs[$id]['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
+                        $songs[$id]['length_in_second']     = (int)$video['length_in_seconds'];
+                    }
+                    $imported = true;
+                }
+                //
+                //TODO: home_staff_pick_rating ?
+if(!$imported && (!in_array($field['key'],['title','instructor','difficulty','tag','style','legacy_wordpress_post_id','xp','total_xp',
+        'staff_pick_rating','home_staff_pick_rating',
+        'sbt_exercise_number','sbt_bpm','exercise_id','live_event_start_time','live_event_end_time','live_event_youtube_id','slow_bpm','fast_bpm',
+        'live_stream_feed_type',
+        'qna_video',
+        'playlist'
+        ]))){
+    $notImportedFields[] = $field['key'];
+}
             }
-
+            if(!empty($notImportedFields)) {
+                dd($notImportedFields);
+            }
             foreach($resources as $resource) {
                 if(isset($resource['resource_name']) && isset($resource['resource_url'])) {
                     $songs[$id]["resource"][] = [
@@ -261,33 +359,37 @@ class GenerateFileForWorkoutMigrationInSanity extends ImportSanityDataset
                     }
                 }
             }
-            $contentInstructors = ContentInstructor::with('instructor')->where('content_id', '=', $result->id)->get();
+            $contentInstructors = ContentInstructor::with('instructor')->select('instructor_id')->where('content_id', '=', $result->id)->groupBy('instructor_id')->get();
             foreach ($contentInstructors as $contentInstructor) {
-                $name =  preg_replace('/[^a-zA-Z0-9_]/', '', $contentInstructor->instructor->name);
-                if(isset($instructors['instructor_'.strtolower($name)])) {
-                    $songs[$id]["instructor"][] = [
-                        "_type" => "reference",
-                        "_ref"  => 'instructor_'.strtolower($name),
-                        "_weak" => false
-                    ];
+                if($contentInstructor->instructor) {
+                    $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentInstructor->instructor->name);
+                    if (isset($instructors['instructor_' . strtolower($name)])) {
+                        $songs[$id]["instructor"][] = [
+                            "_type" => "reference",
+                            "_ref"  => 'instructor_' . strtolower($name),
+                            "_weak" => false
+                        ];
+                    }
                 }
             }
 
             $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->get();
             foreach($contentHierarchy as $hierarchy){
-                if($hierarchy->child->type != 'assignment' && $hierarchy->child->status == 'published') {
-                    $songs[$id]["child"][] = [
-                        "_type" => "reference",
-                        "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
-                        "_weak" => false
-                    ];
-                }else{
-                    $songs[$id]["assignment"][] = [
-                        'assignment_title' => $hierarchy->child->title,
-                        'assignment_soundslice'  => $hierarchy->child->soundslice_slug,
-                        'assignment_description' =>'',
-                        'assignment_sheet_music_image' => ''
-                    ];
+                if($hierarchy->child) {
+                    if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status == 'published') {
+                        $songs[$id]["child"][] = [
+                            "_type" => "reference",
+                            "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
+                            "_weak" => false
+                        ];
+                    } else {
+                        $songs[$id]["assignment"][] = [
+                            'assignment_title'             => $hierarchy->child->title,
+                            'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
+                            'assignment_description'       => '',
+                            'assignment_sheet_music_image' => ''
+                        ];
+                    }
                 }
                // dd($hierarchy->child->type, $hierarchy->child->title, $hierarchy->child->id);
             }

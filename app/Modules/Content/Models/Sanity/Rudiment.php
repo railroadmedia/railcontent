@@ -96,6 +96,8 @@ class Rudiment extends BaseSanityModel
             new Field(FieldType::Array, 'lifestyle', 'Lifestyle', '', of: $lifestyleReference,group:$detailsGroup),
 
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
+            new Field(FieldType::URL, 'sheet_music_thumbnail_url','sheet_music_thumbnail_url', group: $detailsGroup),
+            new Field(FieldType::String, 'gear', 'Gear', group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),

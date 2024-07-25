@@ -7,6 +7,6 @@ namespace App\Modules\Content\Models\Sanity\Enums;
  */
 enum VideoType: string
 {
-    case Vimeo = 'vimeo';
-    case Youtube = 'youtube';
+    case Vimeo = 'vimeo-video';
+    case Youtube = 'youtube-video';
 }

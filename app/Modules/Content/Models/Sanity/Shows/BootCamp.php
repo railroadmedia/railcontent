@@ -26,7 +26,7 @@ class BootCamp extends ShowType
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Boot Camps');
+        parent::__construct(self::getName(), 'Boot Camps', true);
     }
     public static function getName(): string
     {
