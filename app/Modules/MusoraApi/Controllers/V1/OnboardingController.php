@@ -4,6 +4,7 @@ namespace App\Modules\MusoraApi\Controllers\V1;
 
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Carbon\Carbon;
@@ -156,31 +157,33 @@ class OnboardingController extends Controller
     public function experience(Request $request): Response|Application|ResponseFactory
     {
         ['experience_level' => $experienceLevel, 'brand' => $brand] = $request->validate([
-            'experience_level' => 'integer|required|max:3',
+            'experience_level' => 'integer|required|max:4',
             'brand' => 'required',
         ]);
 
         OnboardingExperience::where(['brand' => $brand, 'user_id' => user()->id])
             ->delete();
+
+
         OnboardingExperience::create(
             ['experience_level' => $experienceLevel, 'brand' => $brand, 'user_id' => user()->id]
         );
 
+        $skillLevel = OnboardingSkillLevelEnum::from($experienceLevel)->name;
+
         $onboardingAnswerHistory = new OnboardingAnswerHistory();
         $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_EXPERIENCE;
-        $onboardingAnswerHistory->setExperienceLevelAnswer($experienceLevel);
+        $onboardingAnswerHistory->onboarding_answer = $skillLevel;
         $onboardingAnswerHistory->brand = $brand;
         $onboardingAnswerHistory->user_id = user()->id;
         $onboardingAnswerHistory->save();
 
-        dispatch(
-            (new CustomerIoSyncUserByUserId(
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
                 user(),
-                [$brand . '_onboarding_experience_level' => strval($experienceLevel)]
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(30)
-            )
+                [$brand . '_onboarding_skill_level' => $skillLevel],
+            ),
+            30
         );
 
         Avo::onboarding_experience_step_completed(
@@ -260,9 +263,9 @@ class OnboardingController extends Controller
 
         $experience =
             OnboardingExperience::query()
-                ->select('experience_level')
-                ->where(['brand' => $brand, 'user_id' => user()->id])
-                ->first();
+            ->select('experience_level')
+            ->where(['brand' => $brand, 'user_id' => user()->id])
+            ->first();
 
         $response = [
             'gears' => OnboardingGear::query()
