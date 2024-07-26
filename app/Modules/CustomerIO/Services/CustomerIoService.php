@@ -310,7 +310,7 @@ class CustomerIoService
     ): ?Customer {
         // TP-29 NOTE: if account is about to sync to a prospect workspace and forceSync flag is false, don't sync
         if (!$this->shouldSyncProfileToProspectWorkspace($accountName, $lookupEmail) && !$forceSync) {
-            Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $lookupEmail);
+            // Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $lookupEmail);
             return null;
         }
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -397,7 +397,7 @@ class CustomerIoService
     ): ?Customer {
         // TP-29 NOTE: if account is about to sync to a prospect workspace and forceSync flag is false, don't sync
         if (!$this->shouldSyncProfileToProspectWorkspace($accountName, $userEmail) && !$forceSync) {
-            Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $userEmail);
+            // Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $userEmail);
             return null;
         }
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -835,9 +835,7 @@ class CustomerIoService
     ): bool|Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
-        /**
-         * @var $customer Customer
-         */
+        /** @var Customer $primaryCustomer */
         $primaryCustomer = Customer::query()->where(
             [
                 'uuid' => $primaryCustomerId,
@@ -847,9 +845,7 @@ class CustomerIoService
             ]
         )->first();
 
-        /**
-         * @var $customer Customer
-         */
+        /** @var Customer $secondaryCustomer */
         $secondaryCustomer = Customer::query()->where(
             [
                 'uuid' => $secondaryCustomerId,
