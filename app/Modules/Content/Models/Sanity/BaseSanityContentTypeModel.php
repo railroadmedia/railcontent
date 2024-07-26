@@ -15,7 +15,7 @@ use Modules\Content\Models\Sanity\Structure\BrandField;
  */
 abstract class BaseSanityContentTypeModel extends BaseSanityModel
 {
-    protected function getCommonFields(Group $group, bool $includeLicense=true, bool $includeDescription=true) : array
+    protected function getCommonFields(Group $group, bool $includeLicense = true, bool $includeDescription = true): array
     {
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
         $licenseReference = new Reference([['type' => 'license']], options: ['disableNew' => false]);
@@ -50,7 +50,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
         return $defaultFields;
     }
 
-    protected function getDefaultPreview() : ListItemPreview
+    protected function getDefaultPreview(): ListItemPreview
     {
         return new ListItemPreview('title', 'brand', 'thumbnail');
     }

@@ -4,7 +4,7 @@ namespace App\Modules\Content\Models\Sanity\Shows;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Enums\VideoType;
-use App\Modules\Content\Models\Sanity\ShowType;
+use App\Modules\Content\Models\Sanity\LessonTemplate;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
@@ -22,7 +22,7 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class StudentCollaboration extends ShowType
+class StudentCollaboration extends LessonTemplate
 {
     public function __construct()
     {

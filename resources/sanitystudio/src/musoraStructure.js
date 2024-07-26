@@ -28,7 +28,7 @@ export const musoraStructure = async (S, context) => {
 
         // Add divider if 'artist' item exists
         if (artistIndex !== -1) {
-            // Add Drumeo Shows list item
+            // Add Shows list item
             items.splice(artistIndex, 0,
                 S.listItem()
                     .title('Shows')

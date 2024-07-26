@@ -24,7 +24,7 @@ class Course extends BaseSanityModel
 {
     public function __construct()
     {
-        $childReference = new Reference([['type' => 'course-part']],options: ['rox_fied' => "document.title"]);
+        $childReference = new Reference([['type' => 'course-part']], options: ['rox_fied' => "document.title"]);
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -35,6 +35,10 @@ class Course extends BaseSanityModel
                         new Field(FieldType::URL, 'resource_url')],
             previewItem: new ListItemPreview('resource_name', 'resource_url')
         );
+        $lifestyleReference = new Reference([['type' => 'lifestyle']], options: ['disableNew' => false]);
+        $essentialReference = new Reference([['type' => 'essential']], options: ['disableNew' => false]);
+        $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
+        $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup = new Group('openAI', 'OpenAI');
@@ -44,35 +48,40 @@ class Course extends BaseSanityModel
         ];
 
         $fields = [
-            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()",group:$detailsGroup),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique'=>'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,", group:$detailsGroup),
+            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group:$detailsGroup),
+            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique' => 'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,", group:$detailsGroup),
             new BrandField($detailsGroup),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
-            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput',group:$detailsGroup),
-            new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference,group:$detailsGroup),
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group:$detailsGroup),
+            new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group:$detailsGroup),
             new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
             new Field(
                 FieldType::Number,
                 'difficulty',
                 validation: "rule => rule.min(0).max(10)",
-                inputComponent: 'DifficultyInput',group:$detailsGroup
+                inputComponent: 'DifficultyInput',
+                group:$detailsGroup
             ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true",group:$detailsGroup),
-            new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)",group:$detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true",group:$detailsGroup),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group:$detailsGroup),
+            new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group:$detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
-            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference,group:$detailsGroup),
-            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
-            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
-            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys',group:$detailsGroup),
+            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'essential', 'Essentials', '', of: $essentialReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'theory', 'Theory', '', of: $theoryReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'lifestyle', 'Lifestyle', '', of: $lifestyleReference, group:$detailsGroup),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
             new Field(FieldType::Number, 'child_count', 'Child count', group:$detailsGroup),
-            new Field(FieldType::Image, 'thumbnail', 'Thumbnail',group:$detailsGroup),
-            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList,group:$detailsGroup),
-            new Field(FieldType::Array, 'child', 'Lessons', '', of: $childReference,group:$detailsGroup),
-            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true",group:$detailsGroup), //web_url_path
-            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true",group:$detailsGroup),
-            new Field(FieldType::String, 'language', 'Language', hidden: "true",group:$detailsGroup),
-            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true",group:$detailsGroup), //web_url_path
+            new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
+            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
+            new Field(FieldType::Array, 'child', 'Lessons', '', of: $childReference, group:$detailsGroup),
+            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group:$detailsGroup), //web_url_path
+            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group:$detailsGroup),
+            new Field(FieldType::String, 'language', 'Language', hidden: "true", group:$detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group:$detailsGroup), //web_url_path
         ];
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct(self::getName(), 'Course', fields: $fields, preview: $preview, groups: $groups);

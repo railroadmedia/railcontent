@@ -35,7 +35,7 @@ class ChallengePart extends BaseSanityModel
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),
                         new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
-                        new Field(FieldType::URL, 'chapter_thumbnail_url')
+                        new Field(FieldType::Image, 'chapter_thumbnail_url')
                         ],
             previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
         );
@@ -50,8 +50,8 @@ class ChallengePart extends BaseSanityModel
         $fields  = [
             new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group: $detailsGroup),
             new Field(
-                         FieldType::Slug,
-                         'slug',
+                FieldType::Slug,
+                'slug',
                 options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
                 hidden:  "({document}) => !document?.title,",
                 group:   $detailsGroup
@@ -61,10 +61,11 @@ class ChallengePart extends BaseSanityModel
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
             new Field(
-                                FieldType::Number,
-                                'difficulty',
+                FieldType::Number,
+                'difficulty',
                 validation:     "rule => rule.min(0).max(10)",
-                inputComponent: 'DifficultyInput', group: $detailsGroup
+                inputComponent: 'DifficultyInput',
+                group: $detailsGroup
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group: $detailsGroup),
@@ -72,9 +73,12 @@ class ChallengePart extends BaseSanityModel
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
             new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
+            new Field(FieldType::Number, 'length_in_second', group: $detailsGroup),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
-            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
+            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList, group:$detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup), //web_url_path
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),

@@ -4,6 +4,11 @@ namespace App\Modules\Content\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\Sanity\CoachStream;
+use App\Modules\Content\Models\Sanity\Foundation;
+use App\Modules\Content\Models\Sanity\Method;
+use App\Modules\Content\Models\Sanity\Pack;
+use App\Modules\Content\Models\Sanity\SemesterPack;
 use App\Modules\Content\Models\Sanity\Shows\Archive;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Shows\BackstageSecret;
@@ -108,8 +113,13 @@ class SanityStudioCMSController extends BaseController
             (new ExploringBeats())->toArray(),
             (new Sonor())->toArray(),
             (new StudentReview())->toArray(),
-            (new SongTutorial())->toArray(),
             (new Routine())->toArray(),
+            (new CoachStream())->toArray(),
+            (new SemesterPack())->toArray(),
+            (new Pack())->toArray(),
+            (new Method())->toArray(),
+            (new SongTutorial())->toArray(),
+            (new Foundation())->toArray(),
             (new Archive())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
@@ -225,10 +235,10 @@ class SanityStudioCMSController extends BaseController
                 ->first();
 
             return $content;
-        }elseif ($request->get('_type') === 'permission'){
+        } elseif ($request->get('_type') === 'permission') {
             $permissionService = app()->make(PermissionService::class);
             $permission = $permissionService->getByName($request->get('name'));
-            if(!$permission){
+            if(!$permission) {
                 $permission = $permissionService->create($request->get('name'), $request->get('brand'));
             }
             return $permission;
