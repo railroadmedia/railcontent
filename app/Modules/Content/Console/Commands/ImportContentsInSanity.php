@@ -21,7 +21,7 @@ use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
 
-class ImportContentsInSanity extends ImportSanityDataset
+class ImportContentsInSanity extends \Illuminate\Console\Command
 {
     protected $signature = 'sanity:import-content {destination=development} {clean=false} {brand=drumeo} {type=all} {delete=false}';
     protected $description = 'Import Contents from DB in Sanity';
@@ -647,5 +647,22 @@ class ImportContentsInSanity extends ImportSanityDataset
         }
 
         return $artists;
+    }
+
+    /**
+     * Execute the given command in the CLI.
+     */
+    private function runCliCommand(string $command): int
+    {
+        $output = null;
+        $resultCode = null;
+
+        exec($command, $output, $resultCode);
+
+        foreach ($output as $line) {
+            $this->info($line);
+        }
+
+        return $resultCode;
     }
 }
