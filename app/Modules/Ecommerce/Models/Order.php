@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
+use App\Modules\Ecommerce\Models\Shopify\ShopifyOrderFix;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
@@ -99,6 +101,11 @@ class Order extends Model
     public function billingAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'billing_address_id');
+    }
+
+    public function shopifyOrderFix(): MorphOne
+    {
+        return $this->morphOne(ShopifyOrderFix::class, 'ecommerce_modelable');
     }
 
     /**

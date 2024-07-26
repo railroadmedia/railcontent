@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
-    @if(!empty($singHarmony))
-        <h1>Hello World</h1>
+    @if($cohort['slug'] == '30-day-double-bass')
+        @include('marketing.drumeo.products.30-day-double-bass', [
+            'platformVersion' => true
+        ])
     @endif
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection

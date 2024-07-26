@@ -68,12 +68,35 @@ return [
         'brand' => 'musora',
         'musora' => [
             'The Playlist - Musora Newsletter' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
                 'events' => [
                     'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Free Music Lessons For Life' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
                 ],
             ],
         ],
@@ -136,6 +159,15 @@ return [
                 'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_hand-technique',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Double Bass 101' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_double-bass-101',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',

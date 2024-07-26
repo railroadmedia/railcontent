@@ -28,18 +28,27 @@ class ShopifySyncProductService
     public function sync(array $productShopify): void
     {
         $skus = \Arr::pluck($productShopify['variants'], 'sku');
-        $products = $this->productService->getProductsBySkus($skus)->keyBy('sku');
+        $products = $this->productService->getProductsBySkus($skus);
+        $productsSkuLookup = $products->keyBy('sku');
+        $productIdLookup = $products->keyBy('shopify_id');
 
         foreach ($productShopify["variants"] as $variant) {
             try {
-                $product = $products[$variant["sku"]] ?? new Product();
+                if (app()->isProduction()) {
+                    $product = $productIdLookup[$variant['id']] ?? new Product();
+                } else {
+                    //Ids are different in staging so we'll use sku.
+                    //This causes issue on production if you copy a product and use the same sku.
+                    $product = $productsSkuLookup[$variant["sku"]] ?? new Product();
+                }
                 if (!$variant['sku']) {
                     continue;
                 }
                 $product->sku = $variant['sku'];
                 $product->description = $productShopify['body_html'];
                 $product->active = $productShopify['status'] == 'active' ? 1 : 0;
-                $product->deleted_at = $productShopify['status'] == 'archived' ? Carbon::now()->toDateTimeString() : null;
+                $product->deleted_at = $productShopify['status'] == 'archived' ?
+                    Carbon::now()->toDateTimeString() : null;
                 $product->brand = lcfirst($productShopify['vendor']);
                 $product->type = lcfirst($productShopify['product_type']);
                 $product->is_physical = $variant['requires_shipping'] ? 1 : 0;
@@ -47,7 +56,8 @@ class ShopifySyncProductService
                 //Shopify variants are stored as multiple products in MWP so we need to create a unique name here
                 $variantName = ($variant['requires_shipping'] && $variant['option1'] != "Default Title") ? $variant['option1'] : '';
                 $product->name = $variantName ? ($productShopify['title'] . ' - ' . $variantName) : $productShopify['title'];
-                $product->thumbnail_url = !(empty(\Arr::last($productShopify['images']))) ? \Arr::last($productShopify['images'])['src'] : '';
+                $product->thumbnail_url = !(empty(\Arr::last($productShopify['images']))) ?
+                    \Arr::last($productShopify['images'])['src'] : '';
                 $product->shopify_id = $variant['id'];
                 $product->stock = $variant['inventory_quantity'];
 

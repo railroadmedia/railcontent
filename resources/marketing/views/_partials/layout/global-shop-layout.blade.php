@@ -36,26 +36,21 @@
 
     @yield('body')
 
-    @component('_partials.components.modal', ['name' => 'shippingModal'])
-        @slot('content')
-            <div class="max-w-2xl mx-auto">
-                <div class="info-wrap shipping-info bg-white py-5 px-4 md:px-10 rounded-xl">
-                    <p>
-                        <strong class="font-extrabold">Free Shipping Over $150</strong> <br>
-                        Spend over $150 and you'll unlock free worldwide shipping on any order (e-kit excluded).
-                    </p>
-                </div>
-            </div>
-        @endslot
-    @endcomponent
 @endsection
 
+
 @section('layout-scripts')
+
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-08-01 00:00:00',
+            'promoVersion' => true
+        ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    {{-- Platform --}}
+    <!-- {{-- Platform --}}-->
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
@@ -203,4 +198,5 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
 @endsection

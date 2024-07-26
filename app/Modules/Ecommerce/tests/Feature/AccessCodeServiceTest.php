@@ -49,7 +49,9 @@ class AccessCodeServiceTest extends TestCase
 
         $product = Product::factory()->create();
         $accessCode = AccessCodeFactory::createAccessCode($product);
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'shopify_id' => null //hack to skip subscription check
+        ]);
 
         Log::shouldReceive("info")
             ->once()

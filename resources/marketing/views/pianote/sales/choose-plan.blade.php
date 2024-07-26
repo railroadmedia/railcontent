@@ -44,7 +44,7 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-            "songs" => "1000+ popular songs.",
+            "songs" => "500+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",
@@ -62,13 +62,13 @@
             "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo.png",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
-            "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+            "fifthPoint" => "Songs transcribed w/ playback tools for all instruments.",
         ])
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-            "songs" => "1000+ popular songs.",
+            "songs" => "500+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",

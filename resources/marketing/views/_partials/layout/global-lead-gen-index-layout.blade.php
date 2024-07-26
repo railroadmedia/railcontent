@@ -80,7 +80,7 @@
                 'gsotd' => true,
                 'header' => 'Start playing your favorite songs',
                 'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
-                'benefits' => ['6000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'benefits' => ['Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
                 'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
                 'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
             ])
@@ -88,7 +88,7 @@
             @include('drumeo.lead-gen.partials.free-trial', [
                 'header' => 'Test your speed out with real music.',
                 'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
-                'benefits' => ['6000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'benefits' => ['Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
                 'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
                 'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
             ])

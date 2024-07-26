@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Gateways;
 
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Customer;
 use App\Modules\Ecommerce\Models\Recharge\PaymentMethod;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
@@ -13,6 +14,7 @@ use Google\Service\Monitoring\Custom;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Models\User;
 
 class RechargeGateway
 {
@@ -175,10 +177,12 @@ class RechargeGateway
             }
 
             if (isset($returnInfo['HTTP_CODE']) && (strpos(
-                $returnInfo['HTTP_CODE'],
-                'HTTP/1.1 429 TOO MANY REQUESTS'
-            ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
-                Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 1)');
+                        $returnInfo['HTTP_CODE'],
+                        'HTTP/1.1 429 TOO MANY REQUESTS'
+                    ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
+                Log::warning(
+                    '[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 1)'
+                );
                 sleep($sleepTime);
                 $retry = true;
                 continue;
@@ -201,9 +205,9 @@ class RechargeGateway
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 400 BAD REQUEST') > -1) {
                 if (isset($result->errors) && isset($result->errors->UNEXPECTED_VARIANT_ERROR_TYPE)) {
                     if (strpos(
-                        $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
-                        'Shopify returned 429 rate limit regarding this call'
-                    ) > -1) {
+                            $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
+                            'Shopify returned 429 rate limit regarding this call'
+                        ) > -1) {
                         Log::info('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (Shopify 429)');
                         sleep($sleepTime);
                         $retry = true;
@@ -221,7 +225,9 @@ class RechargeGateway
                 }
 
                 if (stripos($returnError['msg'], 'The requested URL returned error: 429 TOO MANY REQUESTS') !== false) {
-                    Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 2)');
+                    Log::warning(
+                        '[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 2)'
+                    );
                     sleep($sleepTime);
                     $retry = true;
                     continue;
@@ -269,7 +275,7 @@ class RechargeGateway
     /**
      * Get the profile URL for the given Recharge customer ID
      *
-     * @param  int  $customerId
+     * @param int $customerId
      * @return string
      * @throws Exception
      */
@@ -310,7 +316,7 @@ class RechargeGateway
         }
 
         // transform into our model
-        $customers->transform(fn ($customerData) => new Customer($customerData));
+        $customers->transform(fn($customerData) => new Customer($customerData));
 
         // in case there are multiple customers with that shopify id, we should log it for investigation
         if ($customers->count() > 1) {
@@ -355,8 +361,8 @@ class RechargeGateway
             )->payment_methods ?? []
         );
 
-        return $data->filter(fn ($p) => $p->default)
-            ->transform(fn ($data) => new PaymentMethod($data))
+        return $data->filter(fn($p) => $p->default)
+            ->transform(fn($data) => new PaymentMethod($data))
             ->first();
     }
 
@@ -433,20 +439,123 @@ class RechargeGateway
         $subscription->createdAt = Carbon::now();
     }
 
+    public function createTestCustomer(User $user)
+    {
+        if (app()->isProduction()) {
+            throw new \Exception("Not for production use");
+        }
+        $response = $this->call(
+            'POST',
+            "/customers",
+            [
+                'email' => $user->email,
+                //'external_customer_id' => ['ecommerce' => "$user->shopify_id"],
+                // 'shopify_customer_id' => $user->shopify_id,
+                'first_name' => 'Test',
+                'last_name' => 'Test',
+                "billing_address1" => "3030 Nebraska Avenue",
+                "billing_city" => "Los Angeles",
+                "billing_country" => "United States",
+                "billing_first_name" => "Mike",
+                "billing_last_name" => "Flynn",
+                "billing_phone" => "3103843698",
+                "billing_province" => "California",
+                "billing_zip" => "90404",
+                "stripe_customer_token" => "Customer_payment_token"
+            ],
+            apiVersion: self::API_VERSION_2021_01
+        );
+        return $response->customer->id;
+    }
+
+    public function createTestAddress(User $user, int $customerId)
+    {
+        if (app()->isProduction()) {
+            throw new \Exception("Not for production use");
+        }
+        $response = $this->call(
+            'POST',
+            "/addresses",
+            [
+                'customer_id' => $customerId,
+                'address1' => '123 Test Street',
+                'city' => 'Los Angeles',
+                'first_name' => 'Test',
+                'last_name' => 'Test',
+                'phone' => '',
+                'zip' => '90404',
+                'province' => 'California',
+                'country' => 'US'
+            ],
+            apiVersion: self::API_VERSION_2021_01
+        );
+        return $response->address->id;
+    }
+
+    public function createTestSubscription(User $user, Product $product, Carbon $nextChargeScheduledAt): void
+    {
+        if (app()->isProduction()) {
+            throw new \Exception("Not for production use");
+        }
+        $customerId = $this->createTestCustomer($user);
+
+        $addressId = $this->createTestAddress($user, $customerId);
+
+        switch ($product->digital_access_time_interval_type) {
+            case 'day':
+                $unitFrequency = $product->digital_access_time_interval_length;
+                $unitType = 'day';
+                break;
+            case 'month':
+                $unitFrequency = $product->digital_access_time_interval_length;
+                $unitType = 'month';
+                break;
+            case 'year':
+                $unitFrequency = $product->digital_access_time_interval_length * 12;
+                $unitType = 'month';
+                break;
+            default:
+                throw new \Exception("Unsupported digital access interval type");
+        }
+
+        $result = $this->call(
+            'POST',
+            "/subscriptions",
+            [
+                'customer_id' => $customerId,
+                'address_id' => $addressId,
+                'next_charge_scheduled_at' => $nextChargeScheduledAt->isoFormat('YYYY-MM-DD'),
+                'order_interval_frequency' => $unitFrequency,
+                'order_interval_unit' => $unitType,
+                'charge_interval_frequency' => $unitFrequency,
+                'charge_interval_unit_type' => $unitType,
+                //'external_variant_id' => $product->shopify_id,
+                'shopify_variant_id' => $product->shopify_id,
+                'quantity' => 1,
+            ],
+            apiVersion: self::API_VERSION_2021_01
+        );
+    }
+
     /**
      * Get all subscriptions with the given status that were
      * created within the date range between createdAtMin and createdAtMax.
      *
-     * @param  string  $status
-     * @param  CarbonInterface  $createdAtMin
-     * @param  CarbonInterface  $createdAtMax
-     * @param  int  $limit
+     * @param string $status
+     * @param CarbonInterface $createdAtMin
+     * @param CarbonInterface $createdAtMax
+     * @param int $limit
      *
      * @return Collection
      * @throws Exception
      */
-    public function getSubscriptionsByStatus(string $status, CarbonInterface $createdAtMin, CarbonInterface $createdAtMax, int $limit = 250): Collection
-    {
+    public
+    function getSubscriptionsByStatus(
+        string $status,
+        CarbonInterface $createdAtMin,
+        CarbonInterface $createdAtMax,
+        int $limit = 250
+    ): Collection {
         // ensure that the status is one that Recharge supports. Refer to https://developer.rechargepayments.com/2021-11/subscriptions/subscriptions_object
         $validStatuses = ['active', 'cancelled', 'expired'];
         if (!in_array($status, $validStatuses)) {
@@ -473,8 +582,11 @@ class RechargeGateway
         }
     }
 
-    public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void
-    {
+    public
+    function updateSubscriptionNextChargeDate(
+        $subscription,
+        Carbon $nextChargeDate
+    ): void {
         $this->call(
             'POST',
             "/subscriptions/$subscription->id/set_next_charge_date",
@@ -482,11 +594,28 @@ class RechargeGateway
         );
     }
 
+    public function updateSubscriptionProduct($subscription, $shopifyVariantId): void
+    {
+        if ($subscription->shopifyVariantId == $shopifyVariantId) {
+            return;
+        }
+        $result = $this->call(
+            'PUT',
+            "/subscriptions/$subscription->id",
+            [
+                'shopify_variant_id' => $shopifyVariantId,
+            ],
+            apiVersion: self::API_VERSION_2021_01
+        );
+    }
+
     /**
      * @throws Exception
      */
-    public function createWebhook(array $data): array
-    {
+    public
+    function createWebhook(
+        array $data
+    ): array {
         $response = $this->call(
             'POST',
             "/webhooks",
@@ -505,7 +634,8 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public function getWebhooks(): array
+    public
+    function getWebhooks(): array
     {
         $response = $this->call(
             'GET',
@@ -518,8 +648,10 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public function deleteWebhook($id): void
-    {
+    public
+    function deleteWebhook(
+        $id
+    ): void {
         $this->call(
             'DELETE',
             "/webhooks/$id",

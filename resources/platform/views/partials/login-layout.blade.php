@@ -30,6 +30,8 @@
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
         {!! \App\Analytics\Tracker::bodyTop() !!}
+        {{-- Notifications Container --}}
+        <div id="notifications-container tw-dark"></div>
 
         <!-- Modal Container -->
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>

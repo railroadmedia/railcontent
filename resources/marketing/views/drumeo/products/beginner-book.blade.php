@@ -19,7 +19,7 @@
 @stop
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "The Best Beginner Drum Book",
         "fullPrice" => floatval($productPrices['BeginnerBook']->price),
         "price" => floatval($productPrices['BeginnerBook']->discounted_price),

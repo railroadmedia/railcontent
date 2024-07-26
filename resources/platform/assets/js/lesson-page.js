@@ -1,8 +1,8 @@
 // import axios from 'axios';
 // import Vue from 'vue';
-// import MediaElement from 'vue/vuesora/src/components/MediaElement';
-// import VideoPlayer from 'vue/vuesora/src/components/VideoPlayer';
-// import Chat from '@musora/chatsora/src/components/Chat';
+// import MediaElement from 'vue/Libraries/Vuesora/src/Components/MediaElement';
+// import VideoPlayer from 'vue/Libraries/Vuesora/src/Components/VideoPlayer';
+// import Chat from '@musora/chatsora/src/Components/Chat';
 
 // Vue.use(VideoPlayer);
 // Vue.use(MediaElement);

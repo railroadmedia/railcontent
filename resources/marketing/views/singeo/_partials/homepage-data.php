@@ -26,7 +26,7 @@ $singeo = [
         ],
         [
             'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg',
-            'title' => '1000+ Songs',
+            'title' => 'Popular Songs',
             'desc' => 'Sing your favorite<br class="hidden sm:inline"> from every style & era.',
         ],
         [
@@ -231,38 +231,19 @@ $singeo = [
     ],
     "songItems" => [
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/songs-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
-            "title" => "1000+ popular songs.",
-            "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
-        ],
-        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/find-tempo-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/loop2.mp4",
             "title" => "Find the perfect tempo.",
-            "desc" => "Slow down any section of a song to  hear the cadence and intricacies.",
+            "desc" => "Slow down any section of a song to hear the cadence and intricacies. ",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/loop-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature-ultra.mp4",
-            "title" => "Loop the hard parts.",
-            "desc" => "Working on the chorus? Simply create  a loop to sing it over and over!",
+            "title" => "Simplify the tricky parts.",
+            "desc" => "Working on the chorus? Simply create a loop to sing it over and over!",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2024/singeo-metronome.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/membership/homepage/2024/metronome-feature-ultra.mp4",
-            'title' => 'Improve your timing.',
-            'desc' => 'Use the built-in-metronome – your new best friend for difficult sections.  ',
-        ],
-        [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/device-icon.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/devices-feature2.webp",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "title" => "Improve your timing. ",
+            "desc" => "Use the built-in metronome – your new best friend to get the timing just right.",
         ],
     ],
     "testimonials" => [

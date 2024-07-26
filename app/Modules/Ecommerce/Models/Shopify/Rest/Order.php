@@ -2,9 +2,14 @@
 
 namespace App\Modules\Ecommerce\Models\Shopify\Rest;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Order as EcommerceOrder;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
+use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Signifly\Shopify\REST\Resources\MetafieldResource;
@@ -29,6 +34,7 @@ class Order
     public float $totalDiscount;
     public float $totalTax;
     public float $totalPrice;
+    public ?string $currencyCode;
     public float $totalShipping;
     public array $discountCodes;
     public string $email;
@@ -72,6 +78,7 @@ class Order
         $this->totalShipping = floatval($shopifyOrderData->total_shipping_price_set->shop_money->amount);
         $this->totalTax = floatval($shopifyOrderData->total_tax);
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
+        $this->currencyCode = $shopifyOrderData->total_price_set->shop_money->currency_code;
         $this->sourceName = $shopifyOrderData->source_name;
         $this->note = $shopifyOrderData->note;
         $this->_metafields = collect();
@@ -128,5 +135,40 @@ class Order
             /** @var OrderLineItem $lineItem */
             return $lineItem->isMembership();
         });
+    }
+
+    /**
+     * Get the ecommerce Order or SubscriptionPayment model that's associated with this Shopify Order.
+     *
+     * @return EcommerceOrder|SubscriptionPayment
+     * @throws ModelNotFoundException
+     */
+    public function getEcommerceModel(): EcommerceOrder|SubscriptionPayment
+    {
+        // get the metafield entry with our model
+        $metafields = $this->getMetafields();
+        /** @var MetaField $modelIdMetafield */
+        $modelIdMetafield = $metafields->filter(function (MetaField $metaField) {
+            return $metaField->key === ShopifyMetafieldKey::Id->value
+                && (in_array($metaField->namespace, [ShopifyMetafieldNamespace::Model_Orders->value, ShopifyMetafieldNamespace::Model_SubscriptionPayments->value]));
+        })->first();
+
+        if ($modelIdMetafield) {
+            return match ($modelIdMetafield->namespace) {
+                ShopifyMetafieldNamespace::Model_Orders->value => EcommerceOrder::findOrFail($modelIdMetafield->value),
+                ShopifyMetafieldNamespace::Model_SubscriptionPayments->value => SubscriptionPayment::findOrFail($modelIdMetafield->value),
+            };
+        } else {
+            // we don't have the metafield record for some reason, so try to find our record with this ID
+            $ecommerceModel = EcommerceOrder::firstWhere('shopify_id', $this->id);
+            if ($ecommerceModel) {
+                return $ecommerceModel;
+            }
+            $ecommerceModel = SubscriptionPayment::firstWhere('shopify_id', $this->id);
+            if ($ecommerceModel) {
+                return $ecommerceModel;
+            }
+        }
+        throw new ModelNotFoundException("No ecommerce model found for Shopify Order {$this->id}");
     }
 }

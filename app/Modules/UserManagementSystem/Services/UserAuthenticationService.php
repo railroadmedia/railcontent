@@ -30,14 +30,13 @@ class UserAuthenticationService
         $mailToStudent = new Agnostic();
         $mailToStudent->to($user->email);
         $mailToStudent->from('team@musora.com', 'Musora');
-        $mailToStudent->subject('One more step 👇️');
+        $mailToStudent->subject('One more step');
         $mailToStudent->view('emails.account-setup');
         $mailToStudent->with([
             'setupAccountUrl' => route('user_management_system.create-account-page', [
                 'email' => $user->email,
                 'verification_token' => $token
             ]),
-            'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
         ]);
 
         if ($queue) {

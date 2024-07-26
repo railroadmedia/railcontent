@@ -9,6 +9,12 @@
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+
+    <style>
+        .splide__arrow.pianote svg {
+            fill:#F61A30 !important;
+        }
+    </style>
 @endsection
 
 @section('x-data')
@@ -22,17 +28,49 @@
 @endsection
 
 @section('body')
+
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!',
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
-        'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
-        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp',
+        'isShop' => true,
     ])
 
 
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
     @include('_partials.components.shop.index-filters')
 
-    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+            @php
+                $bundles = [
+                    [
+                        'slug' => '/ultimate-lessons',
+                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $441 in free bonuses!',
+                        'bonusValue' => '$641 in total value',
+                        'visible' => 1,
+                        'price' => 240,
+                        'discountedPrice' => 180,
+                        'bgColor' => 'background: linear-gradient(45deg, #4B41BC, #8032FF)',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ulimate-lessons-bundle2.webp',
+                    ],
+                    [
+                        'slug' => '/shop/5-for-3-bundle',
+                        'desc' => '5 years of Pianote for the<br class="lg:hidden"> price of 3 + $150 gift card!',
+                        'bonusValue' => '$1350 in total value',
+                        'visible' => 1,
+                        'price' => 1200,
+                        'discountedPrice' => 720,
+                        'imgStyle' => 'py-3 lg:py-4',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-logo-horizontal.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-bundle.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
+                    ],
+                ];
+            @endphp
+            @include('_partials.layout.holiday.bundle-tiles', [
+                "header" => 'Summer Bundles',
+            ])
+
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
@@ -41,19 +79,19 @@
                 init() {
                     new Splide(this.$refs.splide, {
                         classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                arrow: 'splide__arrow pianote bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
                                 prev: 'hidden',
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,
@@ -98,11 +136,11 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
+                    "badge" => "Most Popular",
                       "price" => 240,
-                        "href" => "/",
+                        "href" => "/ultimate-lessons",
                      "instructor" => "Unlimited Piano Lessons",
-                      "discounted_price" => 240,
+                      "discounted_price" => 180,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
                       'soldOut' => false,

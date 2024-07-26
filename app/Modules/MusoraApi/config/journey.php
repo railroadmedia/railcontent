@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Validation\Rule;
-
 return [
     'v5' => [
         'schema' => [
@@ -47,6 +45,13 @@ return [
             'homepage-section-see-all-clicked' => [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
+            ],
+            'recommended-content-served' => [
+                'brand' => ['required', 'string'],
+                'navigation_section' => ['required', 'string'],
+                'recommended_content' => ['required', 'array'],
+                'recommended_content.*.id' => ['required', 'integer'],
+                'recommended_content.*.position' => ['required', 'integer'],
             ],
         ]
     ],

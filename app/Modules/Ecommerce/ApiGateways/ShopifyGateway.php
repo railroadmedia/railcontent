@@ -87,6 +87,7 @@ class ShopifyGateway
                                 nodes {
                                     id
                                     sku
+                                    quantity
                                 }
                             }
                             totalPriceSet {

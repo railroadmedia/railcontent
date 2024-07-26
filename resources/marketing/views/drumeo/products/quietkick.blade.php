@@ -7,7 +7,7 @@
     <meta property="og:description" content="Improve your kick foot anywhere.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
     @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
@@ -73,7 +73,13 @@
 
     </style>
 
-    @php $memberPrice = floatval($productPrices['quietkick']->discounted_price) @endphp
+    @php
+        if(number_format(floatval($productPrices['quietkick']->discounted_price), 2) == intval(floatval($productPrices['quietkick']->discounted_price))) {
+            $memberPrice = floatval($productPrices['quietkick']->discounted_price);
+        } else {
+            $memberPrice = number_format(floatval($productPrices['quietkick']->discounted_price), 2);
+        }
+    @endphp
 @stop
 
 
@@ -81,7 +87,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => "QuietKick",
                 "fullPrice" => floatval($productPrices['quietkick']->price),
                 "price" => $memberPrice,
@@ -339,7 +345,7 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "Will it ship internationally?",
-                "desc" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
+                "desc" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
                 ])
             </div>
         </div>

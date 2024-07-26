@@ -40,6 +40,8 @@ class EventTrackingServiceTest extends TestCase
         $subscriptionData->sku = $product->sku;
         $subscriptionData->shopify_variant_id = $product->shopify_variant_id;
         $subscriptionData->next_charge_scheduled_at = now()->addMonthsNoOverflow(4)->timestamp;
+        $subscriptionData->order_interval_frequency = 1;
+        $subscriptionData->order_interval_unit = 'month';
         $subscriptionData->created_at = now()->subMonthNoOverflow(10)->timestamp;
         $subscriptionData->updated_at = now()->timestamp;
 

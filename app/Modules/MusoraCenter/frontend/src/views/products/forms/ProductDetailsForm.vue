@@ -183,12 +183,6 @@
 <!--                ></v-text-field>-->
 
 <!--                <v-divider class="mt-5 mb-5"></v-divider>-->
-                <v-text-field
-                    v-model="$_product_shopify_id"
-                    label="Shopify Id"
-                    :color="brandColor"
-                    :required="false"
-                ></v-text-field>
                 <v-select
                     v-model="$_digital_access_permission_names"
                     label="Permission names"
@@ -770,12 +764,6 @@ export default {
                     key: 'digital_membership_access_expiration_date',
                     value: val,
                 });
-            },
-        },
-        $_product_shopify_id: {
-            cache: false,
-            get() {
-                return this.thisProduct.attributes.shopify_id || '';
             },
         },
 

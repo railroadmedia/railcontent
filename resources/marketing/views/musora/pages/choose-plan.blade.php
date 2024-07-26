@@ -7,8 +7,8 @@
     <title>Musora | Musicians start here. </title>
     <meta property="og:title" content="Musora | Musicians start here. ">
 
-    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
-    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
+    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
+    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
@@ -60,7 +60,7 @@
             "whiteBg" => true,
             "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
             "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-            "songs" => "Thousands of popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Learn piano, guitar, drums, & singing.",
             "thirdPoint" => "Unlimited personal support.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
@@ -76,7 +76,7 @@
         @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-        "songs" => "Thousands of popular songs.",
+        "songs" => "300+ popular songs.",
         "firstPoint" => "Learn piano, guitar, drums, & singing.",
         "thirdPoint" => "Unlimited personal support.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,

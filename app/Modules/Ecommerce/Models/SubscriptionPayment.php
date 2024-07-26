@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
+use App\Modules\Ecommerce\Models\Shopify\ShopifyOrderFix;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * Class SubscriptionPayment
@@ -65,6 +67,11 @@ class SubscriptionPayment extends Model
             "payment_id",
             "payment_id"
         );
+    }
+
+    public function shopifyOrderFix(): MorphOne
+    {
+        return $this->morphOne(ShopifyOrderFix::class, 'ecommerce_modelable');
     }
 
     /**

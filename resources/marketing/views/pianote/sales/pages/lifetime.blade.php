@@ -114,22 +114,22 @@
         <div class="container mx-auto">
             <h1 class="leading-tight"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="uppercase text-xl md:text-2xl text-white py-4 mb-3 sm:mb-4">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    <span>
-                        ENDS IN
-                        <strong class="text-bold">
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                    <span>--}}
+{{--                        ENDS IN--}}
+{{--                        <strong class="text-bold">--}}
 
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                        </strong>
-                    </span>
-                </span>
+{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span--}}
+{{--                                    x-text="dayText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span--}}
+{{--                                    x-text="hourText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span--}}
+{{--                                    x-text="minuteText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span--}}
+{{--                                    x-text="secondText"></span></span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                </span>--}}
 
             </div>
             <div class="w-full mx-auto mb-2 sm:mb-3">
@@ -508,7 +508,7 @@
                             <strong class="text-musora">FREE</strong></span><br>
                             <em>
                                 @if(!empty($bonus['shipping']))
-                                    Free Shipping
+                                    Free Bonus
                                 @else
                                     Online Access
                                 @endif
@@ -539,7 +539,7 @@
             ],
             [
                 "title" => "What content is included with my Lifetime Membership? Are songs included?",
-                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to thousands of officially licensed song transcriptions for the price of one songbook a year.',
+                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to officially licensed song transcriptions for the price of one songbook a year.',
             ],
         ]
     @endphp
@@ -575,10 +575,6 @@
         </div>
     </section>
 
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-04-01 00:00:00',
-        'promoVersion' => false,
-    ])
 
     @include('pianote.sales.partials._footer')
 

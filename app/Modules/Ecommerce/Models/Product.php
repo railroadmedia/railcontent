@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
+use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -127,6 +128,15 @@ class Product extends Model
     protected $guarded = [
         'id'
     ];
+
+    public static function getDigitalAccessType(MembershipLevel $membershipLevel): DigitalAccessType
+    {
+        return match ($membershipLevel) {
+            MembershipLevel::Plus => DigitalAccessType::Plus,
+            MembershipLevel::Basic => DigitalAccessType::Basic,
+            default => throw new Exception("Membership level '$membershipLevel->value' not handled")
+        };
+    }
 
     protected static function newFactory(): ProductFactory
     {

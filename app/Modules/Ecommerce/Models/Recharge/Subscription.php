@@ -20,6 +20,8 @@ class Subscription
     public string $status;
     public ?string $sku;
     public ?Carbon $nextChargeScheduledAt;
+    public ?int $orderIntervalFrequency;
+    public ?string $orderIntervalUnit;
 
     public function __construct($subscriptionData)
     {
@@ -35,6 +37,8 @@ class Subscription
         $this->nextChargeScheduledAt = $subscriptionData->next_charge_scheduled_at ? Carbon::parse($subscriptionData->next_charge_scheduled_at) : null;
         $this->shopifyVariantId = $subscriptionData->shopify_variant_id ?? null;
         $this->updatedAt = $subscriptionData->updated_at ? Carbon::parse($subscriptionData->updated_at) : null;
+        $this->orderIntervalFrequency = $subscriptionData->order_interval_frequency;
+        $this->orderIntervalUnit = $subscriptionData->order_interval_unit;
     }
 
     public function setProduct(Product $product): void

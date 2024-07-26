@@ -99,7 +99,7 @@
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
                         'fa-icon' => 'fa-music',
                         'title' => 'Play your favorite songs.',
-                        'desc' => 'Get 1000+ note-for-note song breakdowns for every style, era, and skill level.',
+                        'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
@@ -229,7 +229,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
         "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-        "songs" => "1000+ popular songs.",
+        "songs" => "500+ popular songs.",
         "firstPoint" => "Unlimited piano lessons.",
         "thirdPoint" => "Direct access to real teachers.",
         "fifthPoint" => "Lesson access for singing, guitar, and drums.",

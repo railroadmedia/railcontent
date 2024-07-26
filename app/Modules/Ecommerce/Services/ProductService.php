@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Enums\Interval;
+use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Models\Product;
 use Illuminate\Support\Collection;
@@ -66,5 +68,19 @@ class ProductService
             ->whereIn('type', Product::DIGITAL_PRODUCT_TYPES)
             ->where('digital_access_type', Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS)
             ->get();
+    }
+
+    public function getMembershipProduct(
+        string $brand,
+        DigitalAccessType $digitalAccessType,
+        Interval $digitalAccessTimeIntervalType
+    ): ?Product {
+        return Product::query()
+            ->where('type', Product::TYPE_DIGITAL_SUBSCRIPTION)
+            ->where('brand', $brand)
+            ->where('digital_access_type', $digitalAccessType->value)
+            ->where('interval', $digitalAccessTimeIntervalType->value)
+            ->whereRaw("sku NOT LIKE '%trial%'")
+            ->orderBy('id', 'desc')->first();
     }
 }

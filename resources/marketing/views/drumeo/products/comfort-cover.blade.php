@@ -162,7 +162,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Comfort Cover",
         "fullPrice" => floatval($productPrices['comfort-cover']->price),
         "price" => floatval($productPrices['comfort-cover']->discounted_price),

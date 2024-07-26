@@ -177,7 +177,7 @@
                 ],
                 [
                     'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/songs-icon.svg',
-                    'title' => '6000+ Songs',
+                    'title' => 'Popular Songs',
                     'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
                 ],
                 [
@@ -226,7 +226,7 @@
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
                         <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/may/songs.webp')"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-drumeo inline-block mb-1"></i><br><strong>6000+ Popular Songs</strong></h4>
+                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-drumeo inline-block mb-1"></i><br><strong>Popular Songs</strong></h4>
                             <p class="leading-normal">
                                 Note-for-note breakdowns with the ability to slow things down, loop sections and use a metronome.
                             </p>
@@ -321,7 +321,7 @@
                     <h3 class="leading-tight mt-4 sm:mt-5"><strong>Rejoin Drumeo and get your first year half price!</strong></h3>
                     <p class="leading-tight my-3 sm:my-4 text-sm">
                         <i class="fas fa-check text-musora mr-1"></i> Unlimited drum lessons<br class="sm:hidden">
-                        <i class="fas fa-check text-musora mr-1 ml-3"></i>6000+ song breakdowns<br class="sm:hidden">
+                        <i class="fas fa-check text-musora mr-1 ml-3"></i>Song breakdowns<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Legendary teachers<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Step-by-step courses<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Playalongs in every style</p>

@@ -37,7 +37,7 @@
             <img class="h-16 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <i class="fas fa-play play-button mt-56 sm:mt-80 mb-5 sm:mb-24 lg:mb-28 autoplay-video" data-open="trailer"></i>
             <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
-            <a class="join my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>
+{{--            <a class="join my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>--}}
             <h3>
                 @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
                     <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
@@ -253,7 +253,7 @@
             <img class="h-14 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <h3 class="leading-normal my-6 sm:my-8"><strong>Get grooving on guitar</strong><br class="hidden sm:inline"> with fun rhythms you can add to any song.</h3>
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
-            <a class="join my-2 md:my-3 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>
+{{--            <a class="join my-2 md:my-3 w-full max-w-xl" href="/ecommerce/add-to-cart?products[rhythm-and-groove]=1">Start Your Course</a>--}}
             <h3>
                 @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
                     <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>

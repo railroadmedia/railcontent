@@ -16,7 +16,11 @@
         @yield('share-image')
     @else
         <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+        @if(request()->is('practice-anywhere'))
+            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-share-image-new.jpg">
+        @else
+            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+        @endif
     @endif
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -117,17 +121,6 @@
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
-        }
-
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #0b76db!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
         }
     </style>
     <style>
@@ -313,7 +306,13 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($promoVersion))
+    @if(!empty($shopNav))
+        @include("drumeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "scrollToJoin" => true,
+            "cartVersion" => true
+        ])
+    @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
@@ -326,7 +325,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-your-trial-month',
         ])
-
     @else
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -336,6 +334,14 @@
         ])
     @endif
 
+    @if(!empty($bfVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
+            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
+            'vimeo' => '885338636',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        ])
+    @endif
 
     @hasSection('top-bar')
         @yield('top-bar')
@@ -390,48 +396,48 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @elseif(!empty($promoPage))
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
             'noCheck' => true,
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @elseif(!empty($keyPage))
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
             'noCheck' => true,
             'header' => 'Unlimited<br> drum lessons +<br>  a <span class="relative inline-block">free drum key<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @else
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
             'promoThumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo2.webp',
             'promoThumbM' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/header-thumb-promo-m2.webp',
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         ])
     @endif
     @endif
@@ -470,7 +476,10 @@
         $songItems = $drumeo['songItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section')
+    @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and play 1500+ popular songs with <br class="lg:hidden">note-for-note transcriptions and digital tools.',
+        'media' => 'drumeo/membership/homepage/2024/drumeo-songs.webp',
+    ])
 
     @php
         $testimonials = $drumeo['testimonials'];
@@ -502,7 +511,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.webp",
-            "songs" => "6000+ popular songs.",
+            "songs" => "1500+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -556,7 +565,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
-        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 6000+ popular songs.',
+        'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
@@ -594,7 +603,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop
