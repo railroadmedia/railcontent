@@ -267,6 +267,7 @@ export default {
     },
     methods: {
         markAsComplete() {
+            this.closeDropdown();
             this.$emit('markAsComplete', this.item.id);
         },
         toggleDropdown(){
