@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Enums\RecommenderSection;
+use Railroad\Railcontent\Models\Content;
 
-enum AccessMethod: string {
+enum AccessMethod: string
+{
     case PDO = 'PDO';
     case DB = 'DB';
     case HUGGINGFACE = 'HUGGINGFACE';
@@ -20,6 +22,8 @@ class RecommendationService
 {
 
     public AccessMethod $defaultAccessMethod;
+
+    private array $invalidConfigurations;
     private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
@@ -32,7 +36,7 @@ class RecommendationService
         ];
     }
 
-    public function getFilteredRecommendations($userID, $brand, array $sections=[], bool $useFastImplementation=false): array
+    public function getFilteredRecommendations($userID, $brand, array $sections = [], bool $useFastImplementation = false): array
     {
         // Single section state where we call the faster implementation
         if ($useFastImplementation && count($sections) == 1) {
@@ -87,7 +91,7 @@ class RecommendationService
     private function requestData($data, AccessMethod $accessMethod = null)
     {
         $accessMethod ??= $this->defaultAccessMethod;
-        $returnData = match($accessMethod) {
+        $returnData = match ($accessMethod) {
             AccessMethod::HUGGINGFACE => $this->postToHuggingFaceWithRetry($data),
             AccessMethod::PDO => throw new InvalidArgumentException('RecSys PDO Connection not supported'),
             AccessMethod::DB => $this->pullFromDataBase($data),
@@ -105,7 +109,7 @@ class RecommendationService
         }
         $userID = $data['user_ids'][0];
         $recommendations = [$userID => []];
-        foreach($data['section'] as $section) {
+        foreach ($data['section'] as $section) {
             if (!$this->hasNoResults($data['brand'], $section)) {
                 $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
             }
@@ -113,21 +117,22 @@ class RecommendationService
         return $recommendations;
     }
 
-    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit=20)
+    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
     {
-        $tableName = strtolower('recommendations_' . $brand . '_' . $section);
+        $tableName = $this->getTableName($brand, $section);
         $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get()->pluck('content_id');
         if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
-            if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))){
-                $coldStartTableName = strtolower('recommendations_' . $brand . '_' . $section . '_beginner_items');
+            if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))) {
+                $coldStartTableName = $this->getTableName($brand, $section, true);
                 $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id');
             }
         }
         return $recommendations->toArray();
     }
 
-    private function postToHuggingFaceWithRetry($data) {
+    private function postToHuggingFaceWithRetry($data)
+    {
         $url = config('railcontent.recsys.url');
         $authToken = config('railcontent.recsys.token');
         $timeout = 12;
@@ -150,8 +155,7 @@ class RecommendationService
         }
 
         $content = $response->json();
-        if ($status != 200)
-        {
+        if ($status != 200) {
             Log::warning("HuggingFace return an unexpected response with code: $status");
             $msg = print_r($content, true);
             Log::warning("HuggingFace: Content returned: $msg");
@@ -160,76 +164,119 @@ class RecommendationService
         return $content;
     }
 
-// The following code includes functionality using a direct PDO connection to the snowflake db instead of through a web api.
-// This was commented out to avoid importing unnecessary libraries, but may need to be ressurected for performance later.
-// 1. Check the railenvironment branch: dev/amcneill20240102_MT-805_recommender_v2 for the updated docker file that will work on the local development environment
-// 2. update config/app.php to include LaravelPdoOdbc\ODBCServiceProvider::class
-// 3. Update this file with usings and uncommend below:
-//    use Exception;
-//    use Illuminate\Database\DatabaseManager;
-//    use PDO;
-// THe following instructions are for implementing this on the production and staging environments (ie: not rrr.sh local)
-// 4. In order the pdo_snowflake.so file needs to be built for each environment (laravelphp/vapour:php81) Instructions here. https://github.com/snowflakedb/pdo_snowflake?tab=readme-ov-file#building-the-driver-on-linux-and-macos
-// 4.1 Adrian: I will be honest, I'm not 100% sure how to do this through AWS Lambda. Instructions online indicated that you would install the equivalent docker locally, then ssh in, run the instructions and copy the .so file out.
-// This is what I did for the local environments, but you can't ssh onto a lamba instance, soooo.
-// 5. Update musora-web-platform/X.docker files to copy .so file and cacert.pem files to container
-//#COPY ./pdo_snowflake.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/pdo_snowflake.so
-//#COPY ./cacert.pem /opt/docker/etc/php/fpm/cacert.pem
-// 6. Update the vapor-php.ini  files to include the extension and cacert reference:
-//extension=pdo_snowflake
-//pdo_snowflake.cacert=/opt/docker/etc/php/fpm/cacert.pem
+    public function getModuleSourceFromContent(int $userID, Content $content): ?array
+    {
+        if ($this->defaultAccessMethod != AccessMethod::DB) {
+            return [];
+        }
+        $type = str_replace('-', '_', $content->type);
+        if (is_null(RecommenderSection::tryFrom(strtoupper($type))) || $this->hasNoResults($content->brand, strtoupper($type))) {
+            return [];
+        }
+        $brand = $content->brand;
+        $moduleSource = [];
 
-//    private function getFilteredRecommendationsUsingPDO($userID, $brand, RecommenderSection $section) : array
-//    {
-//        $connection = $this->databaseManager->connection('snowflake_pdo');
-//        $query = "CALL RECSYS.RECOMMENDATIONS.GET_FILTERED_RECOMMENDATIONS('$userID', '$brand', '$section->value')";
-//        try {
-//            $result = $connection->select($query);
-//            $contentIDs = json_decode($result[0]->GET_FILTERED_RECOMMENDATIONS);
-//        } catch (Exception $e) {
-//            error_log($e);
-//            $contentIDs = [];
-//        }
-//        return $contentIDs;
-//    }
-//
-//    public function getBulkFilterRecommendations($userIDs, $brand, RecommenderSection $section) : array
-//    {
-//
-//        $connection = $this->databaseManager->connection('snowflake_pdo');
-//        $content = [];
-//        $idString = implode(',', $userIDs);
-//        $query = "CALL RECSYS.RECOMMENDATIONS.GET_BATCH_FILTERED_RECOMMENDATIONS([$idString], '$brand', '$section->value')";
-//        try {
-//            $result = $connection->select($query);
-//            $content = json_decode($result[0]->GET_BATCH_FILTERED_RECOMMENDATIONS);
-//        } catch (Exception $e) {
-//            error_log($e);
-//        }
-//        return $content;
-//    }
-//
-//    private function getFilteredRecommendationsUsingDBHandler($userID, $brand, RecommenderSection $section) : array
-//    {
-//        $databaseHandler = $this->createConnection();
-//        $results = [];
-//        $query = "CALL RECSYS.RECOMMENDATIONS.GET_FILTERED_RECOMMENDATIONS('$userID', '$brand', '$section->value')";
-//        $statementHandler = $databaseHandler->query($query);
-//        while ($row = $statementHandler->fetch(PDO::FETCH_NUM)) {
-//            $results = json_decode($row[0]);
-//        }
-//        return $results;
-//    }
-//
-//    private function createConnection() : PDO
-//    {
-//        $account = env('DB_SNOWFLAKE_ACCOUNT');
-//        $user = env('DB_SNOWFLAKE_USER_NAME');
-//        $password = env('DB_SNOWFLAKE_PASSWORD');
-//        $dbh = new PDO("snowflake:account=$account", $user, $password);
-//        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//        return $dbh;
-//    }
+        $table = $this->getTableName($brand, $type);
+        $beginnerTable = $this->getTableName($brand, $type, true);
+
+        $recommendation = DB::table($table)
+            ->where('user_id', $userID)
+            ->where('content_id', $content->id)
+            ->first();
+
+        if ($recommendation) {
+            $moduleSource = json_decode($recommendation->module_source, associative: true)['module_source'];
+        } else {
+            $beginnerRecommendation = DB::table($beginnerTable)
+                ->where('content_id', $content->id)
+                ->exists();
+
+            if (!$beginnerRecommendation) {
+                Log::error(self::class . ': Content not found in beginner tables', ['content_id' => $content->id]);
+                return null;
+            }
+            $moduleSource[] = 'popular_beginner';
+        }
+
+        return $moduleSource;
+    }
+
+    private function getTableName(string $brand, string $section, bool $isBeginner = false)
+    {
+        $baseName = strtolower('recommendations_' . $brand . '_' . $section);
+        return $isBeginner ? $baseName . '_beginner_items' : $baseName;
+    }
+
+    // The following code includes functionality using a direct PDO connection to the snowflake db instead of through a web api.
+    // This was commented out to avoid importing unnecessary libraries, but may need to be ressurected for performance later.
+    // 1. Check the railenvironment branch: dev/amcneill20240102_MT-805_recommender_v2 for the updated docker file that will work on the local development environment
+    // 2. update config/app.php to include LaravelPdoOdbc\ODBCServiceProvider::class
+    // 3. Update this file with usings and uncommend below:
+    //    use Exception;
+    //    use Illuminate\Database\DatabaseManager;
+    //    use PDO;
+    // THe following instructions are for implementing this on the production and staging environments (ie: not rrr.sh local)
+    // 4. In order the pdo_snowflake.so file needs to be built for each environment (laravelphp/vapour:php81) Instructions here. https://github.com/snowflakedb/pdo_snowflake?tab=readme-ov-file#building-the-driver-on-linux-and-macos
+    // 4.1 Adrian: I will be honest, I'm not 100% sure how to do this through AWS Lambda. Instructions online indicated that you would install the equivalent docker locally, then ssh in, run the instructions and copy the .so file out.
+    // This is what I did for the local environments, but you can't ssh onto a lamba instance, soooo.
+    // 5. Update musora-web-platform/X.docker files to copy .so file and cacert.pem files to container
+    //#COPY ./pdo_snowflake.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/pdo_snowflake.so
+    //#COPY ./cacert.pem /opt/docker/etc/php/fpm/cacert.pem
+    // 6. Update the vapor-php.ini  files to include the extension and cacert reference:
+    //extension=pdo_snowflake
+    //pdo_snowflake.cacert=/opt/docker/etc/php/fpm/cacert.pem
+
+    //    private function getFilteredRecommendationsUsingPDO($userID, $brand, RecommenderSection $section) : array
+    //    {
+    //        $connection = $this->databaseManager->connection('snowflake_pdo');
+    //        $query = "CALL RECSYS.RECOMMENDATIONS.GET_FILTERED_RECOMMENDATIONS('$userID', '$brand', '$section->value')";
+    //        try {
+    //            $result = $connection->select($query);
+    //            $contentIDs = json_decode($result[0]->GET_FILTERED_RECOMMENDATIONS);
+    //        } catch (Exception $e) {
+    //            error_log($e);
+    //            $contentIDs = [];
+    //        }
+    //        return $contentIDs;
+    //    }
+    //
+    //    public function getBulkFilterRecommendations($userIDs, $brand, RecommenderSection $section) : array
+    //    {
+    //
+    //        $connection = $this->databaseManager->connection('snowflake_pdo');
+    //        $content = [];
+    //        $idString = implode(',', $userIDs);
+    //        $query = "CALL RECSYS.RECOMMENDATIONS.GET_BATCH_FILTERED_RECOMMENDATIONS([$idString], '$brand', '$section->value')";
+    //        try {
+    //            $result = $connection->select($query);
+    //            $content = json_decode($result[0]->GET_BATCH_FILTERED_RECOMMENDATIONS);
+    //        } catch (Exception $e) {
+    //            error_log($e);
+    //        }
+    //        return $content;
+    //    }
+    //
+    //    private function getFilteredRecommendationsUsingDBHandler($userID, $brand, RecommenderSection $section) : array
+    //    {
+    //        $databaseHandler = $this->createConnection();
+    //        $results = [];
+    //        $query = "CALL RECSYS.RECOMMENDATIONS.GET_FILTERED_RECOMMENDATIONS('$userID', '$brand', '$section->value')";
+    //        $statementHandler = $databaseHandler->query($query);
+    //        while ($row = $statementHandler->fetch(PDO::FETCH_NUM)) {
+    //            $results = json_decode($row[0]);
+    //        }
+    //        return $results;
+    //    }
+    //
+    //    private function createConnection() : PDO
+    //    {
+    //        $account = env('DB_SNOWFLAKE_ACCOUNT');
+    //        $user = env('DB_SNOWFLAKE_USER_NAME');
+    //        $password = env('DB_SNOWFLAKE_PASSWORD');
+    //        $dbh = new PDO("snowflake:account=$account", $user, $password);
+    //        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //        return $dbh;
+    //    }
 
 
 }

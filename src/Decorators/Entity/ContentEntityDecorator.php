@@ -2,11 +2,12 @@
 
 namespace Railroad\Railcontent\Decorators\Entity;
 
-use Railroad\Railcontent\Decorators\DecoratorInterface;
+use App\Decorators\Content\TypeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Support\Collection;
 
-class ContentEntityDecorator implements DecoratorInterface
+class ContentEntityDecorator extends TypeDecoratorBase
 {
     public function decorate(Collection $contentResults)
     {
@@ -45,5 +46,25 @@ class ContentEntityDecorator implements DecoratorInterface
         }
 
         return new Collection($entities);
+    }
+
+    private function setUserHasAccess($contentIds) : void
+    {
+
+        $contentPermissionRows = collect(
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                $contentIds,
+                [])
+        );
+        $groupedPermissions = $contentPermissionRows->groupBy('content_id');
+        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
+        $membershipPermissionIds = [1, 52, 73, 77,];
+        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
+            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+        }
+
+
+
     }
 }

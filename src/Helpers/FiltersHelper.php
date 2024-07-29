@@ -142,7 +142,7 @@ class FiltersHelper
         }
 
         // Process 'title' filter
-        if ($request->has('title')) {
+        if ($request->filled('title')) {
             self::processTitleFilter($request->get('title'));
         }
     }

@@ -4,11 +4,21 @@ namespace Railroad\Railcontent\Transformers;
 
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+use Railroad\Railcontent\Services\PermissionService;
 
 class ContentCompiledColumnTransformer
 {
     public static bool $useCompiledColumnForServingData = true;
     public static bool $avoidDuplicates = false;
+
+
+    public function __construct(
+        private UserPermissionsRepository $userPermissionsRepository,
+        private ContentPermissionRepository $contentPermissionRepository
+    )
+    {}
 
     /**
      * @param array|null $contentRows
@@ -30,8 +40,32 @@ class ContentCompiledColumnTransformer
         $fieldKeys = config('railcontent.compiled_column_mapping_field_keys', []);
         $subContentFieldKeys = config('railcontent.compiled_column_mapping_sub_content_field_keys', []);
 
+
+        $contentIds = Arr::pluck($contentRows, 'id');
+        $contentPermissionRows = collect(
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                $contentIds,
+                []));
+        $groupedPermissions = $contentPermissionRows->groupBy('content_id');
+        $userExists = (user() ?? false);
+        $userPermissions = $userExists ? $this->userPermissionsRepository->getUserPermissions(user()->id, true) : [];
+        $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
+        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
+        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
+            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+        }
+
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
+            $contentPermissions = $groupedPermissions->get($contentRow['id']);
+            $contentPermissionIds = $contentPermissions?->pluck('id')->toArray() ?? [];
+            $needAccess = !$userExists || (!(user()?->isAdmin() ?? false) && count($contentPermissionIds) != 0 && empty(
+                    array_intersect(
+                        $userPermissionIds,
+                        $contentPermissionIds
+                    )));
+            $contentRows[$contentRowIndex]['need_access'] = $needAccess;
+
 
             if (!is_array($contentRow)) {
                 continue;

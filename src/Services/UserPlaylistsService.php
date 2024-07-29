@@ -270,6 +270,7 @@ class UserPlaylistsService
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
             ContentService::STATUS_ARCHIVED,
+            ContentService::STATUS_UNLISTED,
         ];
 
         ContentRepository::$pullFutureContent = true;
