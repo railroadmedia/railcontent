@@ -57,7 +57,7 @@
                 v-click-outside="closeDropdown">
                 <li>
                     <button
-                        class="tw-flex tw-w-full tw-items-center tw-px-2 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap"
+                        class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap"
                         @click="addToList"
                     >
                         <PlusIcon class="tw-h-[10px] tw-w-[10px] dark:tw-text-white tw-mr-2" /> Add
@@ -65,7 +65,7 @@
                 </li>
                 <li>
                     <button
-                        class="tw-flex tw-w-full tw-items-center tw-px-2 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap"
+                        class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap"
                         @click="resetProgress"
                     >
                         <svg class="tw-mr-2" width="10" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
