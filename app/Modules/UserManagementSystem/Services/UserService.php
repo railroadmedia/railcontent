@@ -3,6 +3,9 @@
 namespace App\Modules\UserManagementSystem\Services;
 
 use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
+use App\Modules\Ecommerce\Jobs\Recharge\RechargeDeleteUser;
+use App\Modules\Ecommerce\Jobs\RevenueCat\RevenuecatDeleteUser;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -125,15 +128,14 @@ class UserService
 
         $user->save();
 
-        //delete RevenueCat account if exists
-        if($user->revenuecat_origin_app_user_id) {
-            try {
-                $this->revenueCatApiGateway->deleteAccount($user->revenuecat_origin_app_user_id);
-            } catch (\Exception $e) {
-                Log::error("Failed to delete Revenuecat account for user $user->id");
-                Log::error($e);
-            }
-        }
+        //delete Revenuecat user
+        dispatch_sync(new RevenuecatDeleteUser($user));
+
+        //delete Customer Io user
+        dispatch_sync(new CustomerIoDeleteUser($user->id));
+
+        //delete Recharge user
+        dispatch_sync(new RechargeDeleteUser($user));
 
         return $user;
     }

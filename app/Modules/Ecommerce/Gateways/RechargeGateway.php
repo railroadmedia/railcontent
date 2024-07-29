@@ -657,4 +657,13 @@ class RechargeGateway
             "/webhooks/$id",
         );
     }
+
+    public function deleteCustomer(int $rechargeCustomerId): void
+    {
+        try {
+            $this->call('DELETE', '/customers/' . $rechargeCustomerId);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+    }
 }
