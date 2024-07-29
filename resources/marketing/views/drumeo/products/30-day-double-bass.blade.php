@@ -273,7 +273,11 @@
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
                         alt="30-Day Independence Logo">
                     @php
-                        $lines = ['Unlock Your Limbs', 'Improve Your Coordination', 'Boost Your Independence'];
+                        $lines = [
+                            'Learn Double Kick',
+                            'Improve Your Technique',
+                            'Play Heavy Breakdowns'
+                            ];
                     @endphp
 
                     <h2 class="rotater-text overflow-hidden">
@@ -289,7 +293,7 @@
                     <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
-                                class="inline lg:hidden">starting May 6th.</strong></h6>
+                                class="inline lg:hidden">starting September 2nd.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
@@ -311,18 +315,13 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn<br> By
                             Doing</p>
                     </div>
-                    @if (session()->has('success-message'))
-                        <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for
-                                30-Day Independence.<br class="hidden md:inline"> Check your email for the details.</strong>
-                        </p>
-                    @endif
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             {{--                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN WAITLIST</span>--}}
                             <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
-                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Registration is FREE for
+                                <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">Registration is FREE for
                                     Drumeo Members.</a>
                             </p>
                         </div>
@@ -350,7 +349,7 @@
                 class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5 text-2xl"><strong>May 6th</strong></h4>
+                    <h4 class="px-3 lg:px-5 text-2xl"><strong>September 2nd</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
                     <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
@@ -373,7 +372,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> May 6th to<br class="hidden md:inline"> June 3rd</span>
+                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 30th</span>
                         </p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
@@ -385,7 +384,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Improve your 4-way <br>  coordination</span>
+                            <span class="text-sm">Play beginner double <br> bass beats & fills.</span>
                         </p>
                     </div>
                 </div>
@@ -408,7 +407,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/practice.webp',
                         'title' => 'Know exactly what to practice.',
                         'desc' =>
-                            'Independence can be the most frustrating skill to develop on the drums. 30-Day Independence starts slow and builds your coordination over 30 days with daily practice. Just play along with Estepario and build new pathways in your brain.',
+                            'Double Bass pushes you both physically and mentally – it’s easy to get frustrated and give up. That’s why 30-Day Double Bass starts slow and builds your muscles and coordination over 30 days with daily practice. ',
                     ],
                     [
                         'position' => 'right',
@@ -416,7 +415,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Independence is designed to fit any schedule. You only need 10 minutes per day to improve your 4-way coordination.',
+                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Double Bass fits any schedule. You only need 10-minutes per day to build your endurance and coordination.',
                     ],
                     [
                         'position' => 'left',
@@ -424,7 +423,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/music.webp',
                         'title' => 'Play with real music.',
                         'desc' =>
-                            'No more painfully dry exercises set to MIDI playalongs. 30-Day Independence includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song for you to untangle your limbs.',
+                            'No more painfully dry exercises set to MIDI playalongs. 30-Day Double Bass includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song to develop smooth, even feet on the drums.',
                     ],
                     [
                         'position' => 'right',
@@ -432,7 +431,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/q%26a.webp',
                         'title' => 'Live support from REAL teachers.',
                         'desc' =>
-                            'Each week you’ll have a 60-minute live lesson with Estepario Siberiano. Ask questions, get feedback, and connect with other students. Grab a cup of coffee and hang with your drum teacher? Yes please.',
+                            'Each week you’ll have a 60-minute live lesson with 66Samus. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
                     ],
                     [
                         'position' => 'left',
@@ -440,7 +439,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/lifetime.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
-                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
+                            'You can access ALL playalongs, charts, and lessons from 30-Day Double Bass for life. That means you can return to your favorite double kick workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
             @endphp
@@ -521,33 +520,33 @@
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the
                             way.</strong></h3>
                     <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your
-                        lessons, you can ask your instructor at each week’s LIVE Q&A event. El Estepario will be there to
+                        lessons, you can ask your instructor at each week’s LIVE Q&A event. 66Samus will be there to
                         help you through any sticking points and keep you motivated to complete the full course.</h6>
                     <div class="text-center sm:text-left">
-                        <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>JOIN El Estepario LIVE: <i
+                        <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>JOIN 66Samus LIVE: <i
                                     class="fas fa-arrow-down text-drumeo mx-2 inline lg:hidden"></i> <i
                                     class="fas fa-arrow-right text-drumeo mx-2 hidden lg:inline"></i></strong></h6><br
                             class="inline lg:hidden">
 
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>MAY</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">11</strong></p>
+                                <strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">8</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>MAY</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">18</strong></p>
+                                <strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">15</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>MAY</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
+                                <strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">22</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>JUN</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">3</strong></p>
+                                <strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">29</strong></p>
                         </div>
                     </div>
                 </div>
@@ -561,30 +560,30 @@
                     class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
-                    alt="30-Day Independence Logo"> <strong>...is designed for:</strong></h2>
+                    alt="30-Day Independence Logo"> <strong> is designed for:</strong></h2>
 
             @php
                 $drummers = [
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/intermediate.webp',
-                        'title' => 'Intermediate Drummers',
+                        'title' => 'Beginner Double Pedal Players.',
                         'description' =>
-                            '30-Day Independence will help you take your drumming to the next level by pushing your 4-way coordination. This is the key to unlocking your creativity on the drums.',
+                            'Always wanted to play rock and metal songs? 30-Day Double Bass will help you learn the basic coordination and stamina you need to play 8th and 16th note kick patterns to REAL music.',
+                    ],
+                    [
+                        'image' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-independence/beginner.webp',
+                        'title' => 'Intermediate Drummers.',
+                        'description' =>
+                            'So you can play The Beatles and Nirvana but really want to explore the world of Van Halen, Mötley Crüe and Metallica. 30-Day Double Bass starts you down the path of rock & metal on the drums. ',
                     ],
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/advanced.webp',
                         'title' => 'Advanced Drummers',
                         'description' =>
-                            'You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Independence will boost your 4-way coordination that will help you play new styles, create your own drum parts, and play everything easier. ',
-                    ],
-                    [
-                        'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-independence/beginner.webp',
-                        'title' => 'Ambitious Beginners',
-                        'description' =>
-                            'Maybe you’re fairly early in your drumming journey but are ready for a challenge. You might struggle to complete 30-Day Independence but you’re welcome to give it a try. ',
+                            ' If you’re solid on a single pedal but looking for a new challenge, 30-Day Double Bass will open up a new world of music to you. By the end, you’ll be playing new grooves & fills on your feet with control and musicality.',
                     ],
                 ];
             @endphp
