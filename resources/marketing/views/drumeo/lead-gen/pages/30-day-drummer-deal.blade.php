@@ -328,7 +328,7 @@
                     <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg"></div>
                     <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                         <img class="h-8 icon imgfilter-coaches lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
-                        <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
+                        <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
                         <p class="mt-2">
                             Personalized support for ALL your drumming questions.
                         </p>

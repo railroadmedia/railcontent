@@ -20,19 +20,18 @@ class SubscriptionCancelledEventTrackingJob extends WebhookChildJob
     {
         $subscription = $this->contents['subscription'];
         $email = $subscription['email'];
-        Log::debug("Shopify customer email: $email");
 
         /** @var User $user */
         $user = User::query()->where('email', '=', $email)->first();
         if (!$user) {
-            Log::debug("User not found for email: $email");
+            Log::error("User not found for email: $email");
             return;
         }
 
         /** @var Product $product */
         $product = Product::query()->where('sku', '=', $subscription['sku'])->first();
         if (!$product) {
-            Log::debug("Product not found for sku: " . $subscription['sku']);
+            Log::error("Product not found for sku: " . $subscription['sku']);
             return;
         }
 

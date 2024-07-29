@@ -846,9 +846,7 @@
                         <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your hands!</strong></h3>
                         <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
-                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
-                            (with
-                            free shipping). <br><br>
+                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE. <br><br>
                             This 74-page book has every exercise used in the course PLUS a reference guide, practice notes
                             for
                             each day, and a ton of bonus sight-reading exercises.  <br><br>
@@ -1121,9 +1119,9 @@
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&locked=true"
                         @else
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         @endif
                         >
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">

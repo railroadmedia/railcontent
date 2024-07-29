@@ -66,6 +66,7 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
             resolve: {
                 alias: {
                     '@components': path.resolve(__dirname, './assets/js/Components'),
+                    '@libraries': path.resolve(__dirname, './assets/js/Libraries'),
                     '@stores': path.resolve(__dirname, './assets/js/Stores'),
                     '@constants': path.resolve(__dirname, './assets/js/Constants'),
                     '@services': path.resolve(__dirname, './assets/js/Services'),

@@ -38,7 +38,7 @@
 
             @if($bundle['bundle_free_shipping'])
                 <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">
-                    FREE SHIPPING
+                    FREE BONUS
                 </span>
             @endif
 

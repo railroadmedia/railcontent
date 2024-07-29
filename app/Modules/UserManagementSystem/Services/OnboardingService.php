@@ -6,6 +6,7 @@ use App\Modules\Brand\Enums\Brand;
 use Exception;
 use Modules\UserManagementSystem\Events\OnboardingInstrumentUpdated;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
+use Modules\UserManagementSystem\Models\OnboardingExperience;
 
 class OnboardingService
 {

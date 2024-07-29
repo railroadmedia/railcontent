@@ -757,7 +757,7 @@
                     'firstDealSub' => 'Just the IEMs',
                     'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
                     'firstButtonText' => 'SELECT',
-                    'firstDealExtra' => "One-time payment. Free shipping.",
+                    'firstDealExtra' => "One-time payment.",
                     'whiteBg' => 'false',
                     'firstExtraBonuses' => [
                         '<strong>1 Pair of EarDrum IEMs</strong>',
@@ -781,7 +781,7 @@
                     'secondDealExtra' => "with annual Membership of $240/yr.",
                     'secondButtonText' => 'SELECT',
                     'secondDealLink' =>
-                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&promo-code=eardrums-shipping&locked=true',
+                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
                     'secondExtraBonuses' => [
                         '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
                         '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',

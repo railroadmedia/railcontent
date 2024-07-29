@@ -52,7 +52,8 @@ class UserMembershipFieldsService
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
 
         $membershipLevel = null;
-        if ($plusMembershipExpirationDate > Carbon::now() ||
+        if ($user->isAdmin() ||
+            $plusMembershipExpirationDate > Carbon::now() ||
             ($basicMembershipExpirationDate > Carbon::now() && $songsOnlyExpirationDate > Carbon::now())) {
             $membershipLevel = 'plus';
         } elseif ($basicMembershipExpirationDate > Carbon::now() || $isLifetimeMember) {

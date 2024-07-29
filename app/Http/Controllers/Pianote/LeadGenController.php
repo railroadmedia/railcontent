@@ -309,6 +309,13 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function techniqueEssentials(Request $request, $domain, $page = null, $lesson = null)
+    {
+        
+        return view('pianote.lead-gen.technique-essentials', ['recaptchaKey' => config('recaptcha.key')]);
+       
+    }
+
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
         $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
