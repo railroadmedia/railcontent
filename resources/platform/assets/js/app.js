@@ -49,6 +49,7 @@ import Login from './Components/_Pages/Login.vue';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
+import PageLoader from './Components/_Containers/PageLoader.vue'
 import PageContainer from './Components/_Collections/PageContainer/PageContainer.vue';
 import CatalogueCardContainer from './Components/_Collections/Catalogue/CatalogueCardContainer.vue';
 import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
@@ -177,6 +178,7 @@ app.config.productionTip = false;
 //Register Global Components
 
 app.component('AppContainer', AppContainer)
+    .component('PageLoader', PageLoader)
     .component('PageContainer', PageContainer)
     .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
