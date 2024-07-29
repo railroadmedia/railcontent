@@ -96,7 +96,30 @@
 
         <!-- Else Show Skeleton Loader -->
         <div v-else>
-
+            <section class="tw-mb-1 tw-animate-pulse tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+                <div class="tw-flex tw-flex-col sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+                    <!-- Thumb Skeleton -->
+                    <div class="tw-flex tw-flex-shrink-0 tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px] 2xl:tw-w-screen tw-rounded-[10px] tw-bg-ui-skeleton"></div>
+                </div>
+                <div class="tw-flex flex-column tw-w-full">
+                    <!-- Title Skeletons -->
+                    <div class="tw-h-[32px] tw-flex tw-w-1/2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    <div class="tw-h-[28px] tw-mt-[.625rem] tw-mb-3 tw-flex tw-w-1/3 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    <!-- Button Skeletons -->
+                    <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
+                        <div class="tw-h-[50px] tw-min-w-[170px] tw-flex tw-rounded-full tw-bg-ui-skeleton tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3"></div>
+                        <div v-if="hasInstrumentless" class="tw-h-[50px] tw-min-w-[170px] tw-flex tw-rounded-full tw-bg-ui-skeleton tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3"></div>
+                        <div class="tw-h-[50px] tw-min-w-[145px] tw-flex tw-rounded-full tw-bg-ui-skeleton"></div>
+                    </div>
+                    <!-- Pill Buttons -->
+                    <div class="tw-flex tw-flex-wrap tw-items-start tw-my-2">
+                        <div class="tw-w-[52px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                        <div class="tw-w-[34px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-ui-skeleton"></div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- Soundslice Modals -->
