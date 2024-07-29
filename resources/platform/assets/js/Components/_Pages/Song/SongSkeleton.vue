@@ -1,7 +1,7 @@
 <template>
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8">
         <!-- Breadcrumbs -->
-        <Breadcrumb :breadcrumbs="[{ title: 'songs', url: `/${brand}/songs` },{ title: songTitle }]"/>
+        <Breadcrumb :is-loading="true"/>
 
         <div id="lessonInfo"
              class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] 2xl:tw-grid-rows-[370px_auto_auto] tw-w-full tw-mx-auto tw-mt-3 tw-flex-col tw-gap-4"
@@ -22,7 +22,7 @@
                 <section class="tw-flex tw-flex-col tw-flex-wrap">
                     <div v-for="i in 7" :key="i"
                          class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57]">
-                        <CatalogueListElement :is-loading="true" />
+                        <SongCardSkeleton :is-loading="true" />
                     </div>
                 </section>
             </div>
@@ -37,6 +37,8 @@
 </template>
 <script setup>
     import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
+    import SongCardSkeleton from '@collections/Cards/List/SongCard/SongCardSkeleton';
+    import Comments from '@vuesora/views/comments/Comments.vue'
 
     const props = defineProps({
         isLoading: Boolean,
