@@ -20,7 +20,7 @@
                 </div>
 
                 <section class="tw-flex tw-flex-col tw-flex-wrap">
-                    <div v-for="(item, i) in relatedLessons.data" :key="i"
+                    <div v-for="i in 7" :key="i"
                          class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57]">
                         <CatalogueListElement :is-loading="true" />
                     </div>
