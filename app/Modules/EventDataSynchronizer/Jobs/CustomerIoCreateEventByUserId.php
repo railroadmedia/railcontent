@@ -5,8 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use Illuminate\Support\Facades\Log;
-use Modules\UserManagementSystem\Events\User\UserCreated;
 use Throwable;
 
 class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
@@ -101,7 +99,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
-            if ($this->accountName !== $accountNameToSyncAllBrand) {
+            if ($this->accountName !== $accountNameToSyncAllBrand && $this->accountName !== 'musora_prospects') {
                 $customerIoService->createEventForUserId(
                     $user->id,
                     $accountNameToSyncAllBrand,
