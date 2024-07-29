@@ -239,19 +239,6 @@
         </div>
     </div>
 
-    @component('_partials.components.modal', ['name' => 'shippingModal'])
-        @slot('content')
-            <div class="max-w-2xl mx-auto">
-                <div class="info-wrap shipping-info bg-white py-5 px-4 md:px-10 rounded-xl">
-                    <p>
-                        <strong class="font-extrabold">Free Shipping Over $150</strong> <br>
-                        Spend over $150 and you'll unlock free worldwide shipping on any order (e-kit excluded).
-                    </p>
-                </div>
-            </div>
-        @endslot
-    @endcomponent
-
     @component('_partials.components.modal', ['name' => 'orderModal'])
         @slot('content')
             <div class="max-w-2xl mx-auto">

@@ -27,13 +27,13 @@ class SubscriptionPausedEventTrackingJob extends WebhookChildJob
         /** @var User $user */
         $user = User::query()->where('shopify_id', '=', $shopifyId)->first();
         if (!$user) {
-            Log::debug("User not found for shopify_id: $shopifyId");
+            Log::error("User not found for shopify_id: $shopifyId");
             return;
         }
 
         $product = Product::query()->where('sku', '=', $subscription->sku)->first();
         if (!$product) {
-            Log::debug("Product not found for sku: " . $subscription->sku);
+            Log::error("Product not found for sku: " . $subscription->sku);
             return;
         }
         $subscription->setProduct($product);

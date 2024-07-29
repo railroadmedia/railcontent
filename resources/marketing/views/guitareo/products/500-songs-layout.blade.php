@@ -79,7 +79,7 @@
             <br><i class="fas fa-play play-vimeo play-button" data-open="trailer"></i>
             <h2>Build The Knowledge & Skills To Play<br>
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
-            <a class="join" href="@yield('order-link')" @yield('product-json')>Get Started &raquo;</a>
+{{--            <a class="join" href="@yield('order-link')" @yield('product-json')>Get Started &raquo;</a>--}}
             <p class="breakdown">
                 @if(floatval($productPrices['500-songs-in-5-days-guitareo']->price) > $productPrice)
                     <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days-guitareo']->price) }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days-guitareo']->price)))) }}%)
@@ -309,7 +309,7 @@
             <h2>Build The Knowledge & Skills To Play<br>
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
 
-            <a href="@yield('order-link')" class="join tracking-normal my-2 md:my-4" @yield('product-json')>Get Started &raquo;</a>
+{{--            <a href="@yield('order-link')" class="join tracking-normal my-2 md:my-4" @yield('product-json')>Get Started &raquo;</a>--}}
             <p class="breakdown">
                 @if(floatval($productPrices['500-songs-in-5-days-guitareo']->price) > $productPrice)
                     <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days-guitareo']->price) }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days-guitareo']->price)))) }}%)

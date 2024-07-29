@@ -135,7 +135,7 @@
                                 <br>
                                 <em>
                                     @if(!empty($bonus['shipping']))
-                                        Free Shipping
+                                        Free Bonus
                                     @else
                                         Online Access
                                     @endif

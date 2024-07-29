@@ -846,9 +846,7 @@
                         <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your hands!</strong></h3>
                         <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
-                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
-                            (with
-                            free shipping). <br><br>
+                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE. <br><br>
                             This 74-page book has every exercise used in the course PLUS a reference guide, practice notes
                             for
                             each day, and a ton of bonus sight-reading exercises.  <br><br>

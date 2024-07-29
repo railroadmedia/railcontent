@@ -99,8 +99,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { PlusIcon } from '@heroicons/vue/outline';
-import { storeToRefs } from 'pinia';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
+import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
 import { usePlatformStore } from "../../../Stores/platform";

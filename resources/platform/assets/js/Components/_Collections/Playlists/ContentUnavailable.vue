@@ -5,7 +5,6 @@ import { LockClosedIcon, ClockIcon } from '@heroicons/vue/outline';
 import AddEventModal from '@vuesora/Components/AddEvent/AddEventModal.vue';
 import UserCatalogueEvents from "@vuesora/mixins/UserCatalogueEvents";
 
-
 // todo: calendar in progress, still need to find why the calendar buttons are not showing up
 
 const props = defineProps({

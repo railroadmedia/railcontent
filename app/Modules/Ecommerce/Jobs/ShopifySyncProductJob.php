@@ -13,7 +13,6 @@ class ShopifySyncProductJob extends WebhookChildJob
     public function __construct(
         array $data
     ) {
-
         $this->data = $data;
     }
 

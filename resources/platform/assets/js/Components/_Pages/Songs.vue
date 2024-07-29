@@ -33,6 +33,7 @@ import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogu
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 
+
 const props = defineProps({
     continueUrl: {
         type: String,

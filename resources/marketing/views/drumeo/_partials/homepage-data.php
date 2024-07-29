@@ -266,17 +266,17 @@ $drumeo = [
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/tempo-icon.svg",
             "title" => "Find the perfect tempo.",
-            "desc" => "Slow down or speed up any section of a song to hear every note.",
+            "desc" => "Slow down any section of a song to practice at your own pace.",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/loop-icon.svg",
             "title" => "Loop the trouble spots.",
-            "desc" => "No more pausing and rewinding that tricky fill. Loop it over and over again!",
+            "desc" => "Create practice loops to play-through those difficult parts over and over.",
         ],
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/filters:quality(95)/marketing/drumeo/membership/homepage/2023/devices-icon.svg",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/no-drums-icon.svg",
+            "title" => "Remove the drums.",
+            "desc" => "Magically remove the original drums to make each song uniquely yours. ",
         ],
     ],
     "testimonials" => [

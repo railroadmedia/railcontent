@@ -246,17 +246,17 @@ $guitareo = [
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/tempo-icon.svg",
             "title" => "Find the perfect tempo.",
-            "desc" => "Slow down any section of a song to make those tricky bars easier.",
+            "desc" => "Slow down any section of a song to practice at your own pace. ",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/loop-icon.svg",
-            "title" => "Loop the trouble spots.",
-            "desc" => "Create practice loops to play-through  those difficult parts over and over.   ",
+            "title" => "Simplify the tricky parts.",
+            "desc" => "Create practice loops to play-through those difficult parts over and over.",
         ],
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/devices-icon.svg",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "icon" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/guitareo/membership/homepage/2023/timing-icon.svg",
+            "title" => "Improve your timing.",
+            "desc" => "Use the built-in metronome – your new best friend to get the timing just right.",
         ],
     ],
     "testimonials" => [

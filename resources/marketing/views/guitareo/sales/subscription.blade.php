@@ -249,6 +249,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and sing 500+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'guitareo/membership/homepage/2024/guitareo-songs.webp',
     ])
 
@@ -280,7 +281,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
-            "songs" => "Popular songs.",
+            "songs" => "500+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
@@ -308,26 +309,20 @@
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
                     'price' => floatval($productPrices['guitar-quest']->price),
                 ],
-                [
-                    'image' => 'marketing/guitareo/membership/homepage/2024/rhythm_groove_cart.webp',
-                    'title' => 'Rhythm & Groove',
-                    'description' => 'Go beyond simple strumming on the guitar.',
-                    'price' => floatval($productPrices['rhythm-and-groove']->price),
-                ],
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
         'header' => 'Online guitar lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
+        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-        'header' => 'Unlimited guitar lessons.<br>Guided Practice Sessions. <br> Direct access to real teachers.',
+        'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>

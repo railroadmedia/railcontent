@@ -169,21 +169,16 @@
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
                     'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/promos/october/Beautiful_harmonies_card.jpg',
-                    'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
-                ],
         ];
     @endphp
 
     @php
         if(!empty($upgradeVersion)) {
-            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
         } else {
-            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[singeo-lifetime-membership-access-3-pay]=1&products[musora-access-1-year]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
         };
     @endphp
 
@@ -271,7 +266,7 @@
                             <strong class="text-musora">FREE</strong></span><br>
                             <em>
                                 @if(!empty($bonus['shipping']))
-                                    Free Shipping
+                                    Free Bonus
                                 @else
                                     Online Access
                                 @endif

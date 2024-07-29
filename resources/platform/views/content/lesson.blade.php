@@ -310,6 +310,9 @@
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
         :this-lesson-json="{{ $thisLessonJson }}"
         :next-lesson-json="{{ !empty($nextChild) ? $nextLessonJson : null }}"
+        @if(!empty($lessonContent->fetch('soundslice_slug')))
+            :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+        @endif
     >
     </lesson-playback>
 @endsection
