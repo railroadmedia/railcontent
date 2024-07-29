@@ -8,25 +8,7 @@
         >
             <!-- Song Player Section -->
             <div class="tw-col-span-3 tw-w-full 2xl:tw-col-span-2 tw-row-span-1">
-                <SongPlayerSection
-                    :is-loading="isLoading"
-                    :contentId="contentId"
-                    :resources="resources"
-                    :thumbnailUrl="thumbnailUrl"
-                    :songTitle= "songTitle"
-                    :songArtist= "songArtist"
-                    :songAlbum= "songAlbum"
-                    :songMeta= "songMeta"
-                    :relatedLessons= "relatedLessons"
-                    :isLiked= "isLiked"
-                    :isAdded= "isAdded"
-                    :assignments= "assignments"
-                    :hasInstrumentless= "hasInstrumentless"
-                    :lessonProgress= "lessonProgress"
-                    :likeCount= "likeCount"
-                    :report-logo="reportLogo"
-                    :no-access="noAccess"
-                />
+                <SongPlayerSection :is-loading="true" />
             </div>
             <!-- Related Lessons -->
             <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1 2xl:tw-row-span-3">
@@ -39,31 +21,24 @@
 
                 <section class="tw-flex tw-flex-col tw-flex-wrap">
                     <div v-for="(item, i) in relatedLessons.data" :key="i"
-                         class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57] tw-inline">
-                        <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
+                         class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57]">
+                        <CatalogueListElement :is-loading="true" />
                     </div>
                 </section>
             </div>
 
             <!-- Comments Section -->
             <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
-                <Comments
-                    :is-loading="isLoading"
-                    :brand="brand"
-                    :theme-color="brand"
-                    :content-id="contentId"
-                    :user-id="userId"
-                    :user-name="userDisplayName"
-                    :user-avatar="userProfilePictureUrl"
-                    :user-xp="userXP"
-                    :user-access-level="userAccessLevel"
-                    :is-admin="isAdmin"
-                />
+                <Comments :is-loading="true" />
             </div>
 
         </div>
     </div>
 </template>
 <script setup>
+    import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
 
+    const props = defineProps({
+        isLoading: Boolean,
+    })
 </script>

@@ -70,7 +70,7 @@
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '@stores/user';
     import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
-    import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue'
+    import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
     import Comments from '@vuesora/views/comments/Comments.vue'
     import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
 
