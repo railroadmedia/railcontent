@@ -260,4 +260,59 @@ class RevenueCatApiGateway
             ->getContents();
     }
 
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function deleteAccount(
+        $userId
+    ) {
+        $ch = curl_init();
+
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'https://api.revenuecat.com/v1/subscribers/'.$userId
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        $headers = [];
+        $headers[] = 'Authorization: Bearer '.config('ecommerce.revenuecat_secret_key');
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Accept: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $apiResponse = curl_exec($ch);
+
+
+        if (curl_errno($ch)) {
+            Log::debug(
+                'Error in delete account API '.
+                ' for '.
+                $userId.
+                ' on Revenuecat   ::: '.curl_error($ch)
+            );
+            throw new Exception('RevenueCat DELETE ACCOUNT API call failed: '.curl_error($ch));
+        }
+
+        Log::debug(
+            'RevenueCat DELETE ACCOUNT API response: '.var_export($apiResponse, true)
+        );
+
+        $result = json_decode($apiResponse);
+
+        // empty result means success for some reason...
+        if (!empty($result) && (!isset($result->deleted) || !$result->deleted)) {
+            Log::debug(
+                'RevenueCat DELETE ACCOUNT API call failed: '.curl_error($ch).' - '.var_export($result, true)
+            );
+        }
+
+        curl_close($ch);
+
+        return $result;
+    }
+
 }

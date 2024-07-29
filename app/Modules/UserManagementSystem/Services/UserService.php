@@ -2,13 +2,15 @@
 
 namespace App\Modules\UserManagementSystem\Services;
 
+use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 
 class UserService
 {
-    public function __construct()
+    public function __construct(private RevenueCatApiGateway $revenueCatApiGateway)
     {
     }
 
@@ -122,6 +124,16 @@ class UserService
                 ->toDateTimeString();
 
         $user->save();
+
+        //delete RevenueCat account if exists
+        if($user->revenuecat_origin_app_user_id) {
+            try {
+                $this->revenueCatApiGateway->deleteAccount($user->revenuecat_origin_app_user_id);
+            } catch (\Exception $e) {
+                Log::error("Failed to delete Revenuecat account for user $user->id");
+                Log::error($e);
+            }
+        }
 
         return $user;
     }
