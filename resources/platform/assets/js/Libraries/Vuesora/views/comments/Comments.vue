@@ -172,17 +172,17 @@ export default {
             sortOptions: [
                 {
                     value: '-like_count',
-                    name: 'Popular',
+                    name: 'Most Popular',
                     icon: 'sort-popularity',
                 },
                 {
                     value: '-created_on',
-                    name: 'Latest',
+                    name: 'Latest First',
                     icon: 'sort-down',
                 },
                 {
                     value: 'created_on',
-                    name: 'Oldest',
+                    name: 'Oldest First',
                     icon: 'sort-up',
                 },
                 {
