@@ -27,6 +27,7 @@ import Playlists from './Components/_Pages/Playlists';
 import Referral from './Components/_Pages/Referral';
 import Schedule from './Components/_Pages/Schedule';
 import Songs from './Components/_Pages/Songs';
+import SongSkeleton from './Components/_Pages/Song/SongSkeleton.vue';
 import Stc from './Components/_Pages/STC';
 import CoachIndex from './Components/_Pages/CoachIndex';
 import Support from './Components/_Pages/Support';
@@ -200,6 +201,7 @@ app.component('AppContainer', AppContainer)
     .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
+    .component('SongSkeleton', SongSkeleton)
     .component('Artists', Artists)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
@@ -249,7 +251,7 @@ app.component('AppContainer', AppContainer)
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */
-            `./Components/_Pages/Song.vue`
+            `./Components/_Pages/Song/Song.vue`
         )
     ))
 
