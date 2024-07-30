@@ -75,7 +75,7 @@
 {!! \App\Analytics\Tracker::bodyTop() !!}
 <p><strong>You're Almost There!</strong></p>
 <h2>Check your email</h2>
-<p><em>You should receive an email from team@musora.com within 10 minutes.
+<p><em>You should receive an email from hello@musora.com within 10 minutes.
         <br class="hidden md:inline"> If you don’t, then check your spam folder or re-enter your email address again.</em>
 </p>
 {!! \App\Analytics\Tracker::bodyBottom() !!}

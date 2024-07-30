@@ -101,7 +101,7 @@
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoButtons :has-branded-color="true" :prev-lesson-url="videoButtons.prevLessonUrl"
+                    <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" :brand="brand"
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
@@ -147,16 +147,15 @@
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <assignments-container :lesson-data="lessonData" :assignments="assignments" :brand="brand"
-                            :user-id="videoResources.userId">
-                        </assignments-container>
+                        <AssignmentsContainer :lesson-data="lessonData" :assignments="assignments" :brand="brand"
+                            :user-id="videoResources.userId" />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
