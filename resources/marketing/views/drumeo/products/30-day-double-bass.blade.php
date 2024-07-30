@@ -2,12 +2,12 @@
 
 @section('global-head')
     @parent
-    <title>30-Day Independence | Drumeo</title>
-    <meta property="og:title" content="30-Day Independence | Drumeo">
+    <title>30-Day Double Bass With 66Samus | Drumeo</title>
+    <meta property="og:title" content="30-Day Double Bass With 66Samus | Drumeo">
     <meta name="description" content="Improve your coordination with daily guided workouts.">
     <meta property="og:description" content="Unlock your creativity and speed around the drums.">
     <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-independence/share-image.jpg"
+        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-double-bass/share-image.jpg"
         style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
@@ -250,19 +250,11 @@
         'cartVersion' => true,
     ])
     @include('_partials.components.shop.promo-banner', [
-        'name' => '30-Day Independence',
+        'name' => '30-Day Double Bass With 66Samus',
         'fullPrice' => floatval($productPrices['30-day-independence']->price),
         'price' => floatval($productPrices['30-day-independence']->discounted_price),
         'noBreadcrumb' => true,
     ])
-    @php
-        if(!empty($products['quietpad-estepario']->getStockAvailability()) && $products['quietpad-estepario']->getStockAvailability() > 250) {
-            $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
-        }
-        else {
-            $stock = 'a limited amount';
-        }
-    @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
         <div class="container max-w-5xl mx-auto">
@@ -270,8 +262,8 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
-                        alt="30-Day Independence Logo">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                        alt="30-Day Double Bass With 66Samus Logo">
                     @php
                         $lines = [
                             'Learn Double Kick',
@@ -296,7 +288,7 @@
                                 class="inline lg:hidden">starting September 2nd.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
-                        style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
+                        style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailerM = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
                         </div>
@@ -329,7 +321,7 @@
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                                 loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                                alt="Image of joined student profiles in 30-Day Independence">
+                                alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
                             <p class="inline-block leading-tight text-sm align-middle">Join
                                 {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
                         </div>
@@ -337,7 +329,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
@@ -404,7 +396,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/practice.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/know-exactly.webp',
                         'title' => 'Know exactly what to practice.',
                         'desc' =>
                             'Double Bass pushes you both physically and mentally – it’s easy to get frustrated and give up. That’s why 30-Day Double Bass starts slow and builds your muscles and coordination over 30 days with daily practice. ',
@@ -412,7 +404,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/schedule.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
                             'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Double Bass fits any schedule. You only need 10-minutes per day to build your endurance and coordination.',
@@ -420,7 +412,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/music.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/play.webp',
                         'title' => 'Play with real music.',
                         'desc' =>
                             'No more painfully dry exercises set to MIDI playalongs. 30-Day Double Bass includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song to develop smooth, even feet on the drums.',
@@ -428,7 +420,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/q%26a.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/live-support.webp',
                         'title' => 'Live support from REAL teachers.',
                         'desc' =>
                             'Each week you’ll have a 60-minute live lesson with 66Samus. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
@@ -436,7 +428,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/lifetime.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/lifetime-access.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
                             'You can access ALL playalongs, charts, and lessons from 30-Day Double Bass for life. That means you can return to your favorite double kick workouts over and over – plus, it means you can work at your own pace.',
@@ -483,8 +475,8 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
                 <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
-                    alt="30-Day Independence Logo">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    alt="30-Day Double Bass With 66Samus Logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>
@@ -500,7 +492,7 @@
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
+                alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
                 {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
@@ -514,8 +506,8 @@
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/screen.webp"
-                    alt="Mobile Screen with 30-Day Independence">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/screen.webp"
+                    alt="Mobile Screen with 30-Day Double Bass With 66Samus">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the
                             way.</strong></h3>
@@ -559,28 +551,28 @@
             <h2 class="mb-6 sm:mb-10 lg:mb-14"><img
                     class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
-                    alt="30-Day Independence Logo"> <strong> is designed for:</strong></h2>
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    alt="30-Day Double Bass With 66Samus Logo"> <strong> is designed for:</strong></h2>
 
             @php
                 $drummers = [
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/intermediate.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/beginner.webp',
                         'title' => 'Beginner Double Pedal Players.',
                         'description' =>
                             'Always wanted to play rock and metal songs? 30-Day Double Bass will help you learn the basic coordination and stamina you need to play 8th and 16th note kick patterns to REAL music.',
                     ],
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-independence/beginner.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-double-bass/intermediate.webp',
                         'title' => 'Intermediate Drummers.',
                         'description' =>
                             'So you can play The Beatles and Nirvana but really want to explore the world of Van Halen, Mötley Crüe and Metallica. 30-Day Double Bass starts you down the path of rock & metal on the drums. ',
                     ],
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/advanced.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/advanced.webp',
                         'title' => 'Advanced Drummers',
                         'description' =>
                             ' If you’re solid on a single pedal but looking for a new challenge, 30-Day Double Bass will open up a new world of music to you. By the end, you’ll be playing new grooves & fills on your feet with control and musicality.',
@@ -621,7 +613,7 @@
                         <td></td>
                         <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-white.webp"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-white.webp"
                                 alt="30 day drummer logo"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong>
                         </td>
@@ -685,9 +677,9 @@
                 <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/coach-image.webp">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/coach-image.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp"
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
@@ -740,19 +732,30 @@
 
     <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
         <div class="container max-w-5xl mx-auto">
-            No pedal? No problem.
-            <p class="leading-tight">The right tools are essential to your craft.
-            <br><br>
-            That’s why we’ve partnered with Pearl to bring you the highest-rated beginner double bass pedal bundled with 30-Day Double Bass.
-                <br><br>
-            The Pearl P932 Demonator has premium-quality features at an entry-level price point:</p>
-            <ul>
-                <li><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
-                <li><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
-                <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
-            </ul>
-            <p>Here’s what people are saying about the Pearl Demonator Double Pedal:</p>
+            <div class="flex justify-center items-center">
+                <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/pearl-demonator.png">
+                <div class="sm:pl-4">
+                    <h3><strong>Join with the most popular double pedal.</strong></h3>
+                    <p class="leading-tight">The right tools are essential to your craft.
+                    <br><br>
+                    That’s why we’ve partnered with Pearl to bring you the highest-rated beginner double bass pedal bundled with 30-Day Double Bass.
+                        <br><br>
+                    The Pearl P932 Demonator has premium-quality features at an entry-level price point:</p>
+                    <ul>
+                        <li><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
+                        <li><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
+                        <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
+                    </ul>
 
+                    <div class="flex">
+                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
+                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
+                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
+                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -767,7 +770,7 @@
                 alt="guarantee badge">
             <div class="flex justify-center items-center">
                 <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/guarantee-students.webp">
                 <div class="sm:pr-8">
                     <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                             guaranteed.</strong></h2>
@@ -789,8 +792,8 @@
         <div class="container mx-auto relative z-50 text-center">
             <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
-                alt="30 day independence logo">
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                alt="30 day Double Bass With 66Samus logo">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + 4 Live Q&A
                     Sessions</strong></h2>
 
@@ -818,14 +821,14 @@
             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
+                alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}
                 drummers who<br class="sm:hidden"> have already registered.</p>
 
             @include('drumeo.products.partials._promo-cards', [
-                'firstDeal' => '30-Day Independence',
+                'firstDeal' => '30-Day Double Bass With 66Samus',
                 'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-01.webp',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/bundle-01.webp',
                 'firstImageHeight' => 'h-36 lg:h-40',
                 'firstDealPrice' => 97,
                 'firstDealSub' => 'Just the course + 2 bonuses worth $42.95',
@@ -834,7 +837,7 @@
                 'firstDealExtra' => "One-time payment",
                 'whiteBg' => 'false',
                 'firstExtraBonuses' => [
-                    '<strong>30-Day Independence</strong>',
+                    '<strong>30-Day Double Bass With 66Samus</strong>',
                     '<strong>Free</strong> Drumeo 5A Drumsticks',
                     '<strong>Free</strong> 1-month Drumeo Access',
                 ],
@@ -842,7 +845,7 @@
                 'topBadge' => 'MOST POPULAR',
                 'secondDeal' => 'Unlimited Lessons',
                 'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-02.webp',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/bundle-02.webp',
                 'secondImageHeight' => 'h-36 lg:h-40',
                 'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $258.94",
                 'secondDealPrice' => '20/mo',
@@ -850,7 +853,7 @@
                     '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
                 'secondExtraBonuses' => [
                     '<strong>Annual Drumeo Membership</strong>',
-                    '<strong>Free 30-Day Independence</strong>',
+                    '<strong>Free 30-Day Double Bass With 66Samus</strong>',
                     '<strong>Free</strong> Drumeo QuietPad',
                     '<strong>Free</strong> Drumeo PadStand',
                     '<strong>Free</strong> Drumeo 5A Drumsticks',
@@ -860,7 +863,7 @@
                 'secondDealExtra' => "Billed annually at $240/yr.",
             ])
 
-            <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Independence ($97).</u></a>
+            <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Double Bass With 66Samus ($97).</u></a>
         </div>
     </section>
     <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
