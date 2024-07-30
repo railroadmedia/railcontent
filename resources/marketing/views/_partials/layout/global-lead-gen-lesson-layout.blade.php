@@ -128,7 +128,15 @@
                                 $resourceName = 'zipURL';
                             }
                         @endphp
-
+                        @if($leadgen->slug == 'piano-technique-essentials/lessons')
+                            @include('_partials.components.leadgen-assignment', [
+                                "title" => $assignment->title,
+                                'subTitle' => $assignment->subtitle,
+                                $resourceName => $assignment->src,
+                                'soundslice' => $assignment->soundslice,
+                                'num' => $key+1,
+                            ])
+                        @else
                         @include('_partials.components.leadgen-assignment-resources', [
                             "title" => $assignment->title,
                             'subTitle' => $assignment->subtitle,
@@ -136,6 +144,7 @@
                             'soundslice' => $assignment->soundslice,
                             'num' => $key+1,
                         ])
+                        @endif
                     @endforeach
                 </div>
             </div>
