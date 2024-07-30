@@ -73,7 +73,7 @@ class ChallengePart extends BaseSanityModel
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
             new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
-            new Field(FieldType::Number, 'length_in_second', group: $detailsGroup),
+            new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),

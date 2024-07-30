@@ -41,6 +41,7 @@ class Workout extends BaseSanityModel
         );
         $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup = new Group('openAI', 'OpenAI');
@@ -58,6 +59,7 @@ class Workout extends BaseSanityModel
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group:$detailsGroup),
             new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference, group:$detailsGroup),
             new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
             new Field(
                 FieldType::Number,
                 'difficulty',
@@ -77,6 +79,7 @@ class Workout extends BaseSanityModel
                 fields: $video->fields,
                 group:$detailsGroup
             ),
+            new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),

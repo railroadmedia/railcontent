@@ -87,7 +87,7 @@ class PlayAlong extends BaseSanityContentTypeModel
             new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
 
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
-            new Field(FieldType::Number, 'length_in_second', group: $detailsGroup),
+            new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
