@@ -17,7 +17,7 @@ class CoursePart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Course Part');
+        parent::__construct(self::getName(), 'Course Part', withResources: true);
     }
 
     public static function getName(): string
