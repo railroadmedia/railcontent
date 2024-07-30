@@ -5,12 +5,12 @@
 @endphp
 
 <div @if(!empty($soundslice)) id="{{ $soundslice }}" @endif
-class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif" x-data="{ open: {{ $num == 1 ? 'true' : 'false' }} }" @click="open = !open">
+class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif" x-data="{ open: {{ $num == 1 ? 'true' : 'false' }}, completed: false }">
     <div class="w-full flex flex-col sm:flex-row sm:justify-between">
         <div class="flex flex-row w-full items-center md:w-1/2"> 
             @if(!empty($soundslice))
             <!-- Dropdown button -->
-            <div  class="border-2 rounded-full border-gray-600 cursor-pointer flex justify-center items-center w-10 p-0.5">
+            <div  class="border-2 rounded-full border-gray-600 cursor-pointer flex justify-center items-center w-10 p-0.5"  @click="open = !open">
                 <i :class="{'fa-angle-down': !open, 'fa-angle-up': open}" class="fa-light fa-fw transition-all duration-300 text-2xl text-gray-600"></i>
             </div>
             
@@ -48,7 +48,11 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
             <button class="w-full smaller join border-black border-2 mt-3 block text-center bg-white text-black mx-2" x-on:click="soundsliceModal{{$num}} = true">
                 PRACTICE
             </button>
-            <button class="w-full smaller join border-{{$theme}} border-2 mt-3 block text-center cursor-none bg-white text-{{$theme}} mx-2 complete-button {{ ($songInAnHourProgress->$soundslice ?? null) == 'completed' ? 'active' : '' }}" data-content-id="{{ $soundslice }}">
+          <button 
+                class="w-full smaller join border-{{$theme}} border-2 mt-3 block text-center cursor-none bg-white text-{{$theme}} mx-2" 
+                x-data="{ completed: false }" 
+                :class="{ 'bg-{{$theme}} text-white': completed, 'bg-white text-{{$theme}}': !completed }" 
+                @click="completed = !completed">
                 COMPLETE
             </button>
             @endif
@@ -57,9 +61,16 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
     </div>
 
     <!-- Dropdown soundslice -->
-        <div x-show="open" @click.away="open = false" class="mt-2 text-center">
-           <iframe class="w-full md:w-1/2" src="https://www.soundslice.com/scores/{{$soundslice}}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0" frameborder="0" allowfullscreen allow="autoplay" title="{{ $soundslice }}"></iframe>
-        </div>
+<div x-show="open" @click="open = false" class="mt-2 text-center">
+    <iframe 
+        class="w-full md:w-1/2" 
+        src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0' }}"
+        frameborder="0" 
+        allowfullscreen 
+        allow="autoplay" 
+        title="{{ $soundslice }}">
+    </iframe>
+</div>
   
 
     @if(!empty($pdfURL) || !empty($mp3URL) || !empty($imgURL))
