@@ -39,6 +39,7 @@ class Course extends BaseSanityModel
         $essentialReference = new Reference([['type' => 'essential']], options: ['disableNew' => false]);
         $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
         $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup = new Group('openAI', 'OpenAI');
@@ -71,6 +72,7 @@ class Course extends BaseSanityModel
             new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference, group:$detailsGroup),
             new Field(FieldType::Array, 'theory', 'Theory', '', of: $theoryReference, group:$detailsGroup),
             new Field(FieldType::Array, 'lifestyle', 'Lifestyle', '', of: $lifestyleReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
