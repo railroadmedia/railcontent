@@ -9,10 +9,11 @@
             'progressState' => $lessonContent->fetch('progress_state'),
             'contentId' => $lessonContent->fetch('id'),
             'useIntersectionObserver' => true,
-            'videoId' => $lessonContent->fetch('fields.video.fields.youtube_video_id'),
             'videoType' => 'youtube',
             'useLegacyPlayer' => false,
             'chapters' => $lessonContent['chapters'] ?? [],
+            'need_access' => $lessonContent->fetch('need_access'),
+            'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
         ];
     } elseif (user()->use_legacy_video_player ?? false || $agent->isSamsung()) {
         $videoProps = [
@@ -31,10 +32,10 @@
             'likeCount' => $lessonContent['like_count'] ?? 0,
             'isLiked' => $lessonContent['is_liked_by_current_user'] ?? false,
             'checkForTimecode' => true,
-            'videoId' => $lessonContent->fetch('fields.video.fields.vimeo_video_id'),
             'videoType' => 'vimeo',
             'useLegacyPlayer' => true,
             'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
+            'need_access' => $lessonContent->fetch('need_access'),
         ];
     } elseif (!empty($lessonContent->fetch('fields.video.fields.vimeo_video_id'))) {
         $videoProps = [
@@ -63,6 +64,7 @@
             'hlsManifestUrl' => $lessonContent['hlsManifestUrl'] ?? '',
             'chapters' => $lessonContent['chapters'] ?? [],
             'totalDuration' => $lessonContent->fetch('fields.video.fields.length_in_seconds', 0),
+            'need_access' => $lessonContent->fetch('need_access'),
         ];
     } else {
         $videoProps = [];

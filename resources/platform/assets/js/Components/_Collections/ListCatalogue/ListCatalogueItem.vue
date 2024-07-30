@@ -1,29 +1,32 @@
 <template>
     <a class="
-      tw-flex
-      tw-flex-row
-      tw-relative
-      tw-text-[#3F3F46]
-      dark:tw-text-[#9EC0DC]
-      tw-border-b
-      tw-border-[#E4E4E7]
-      dark:tw-border-[#223457]
-      tw-no-underline
-    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="renderLink && isReleased ? item.url : null">
+          tw-flex
+          tw-flex-row
+          tw-relative
+          tw-text-[#3F3F46]
+          dark:tw-text-[#9EC0DC]
+          tw-border-b
+          tw-border-[#E4E4E7]
+          dark:tw-border-[#223457]
+          tw-no-underline
+        "
+       :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
+       :href="renderLink && isReleased ? item.url : null"
+       @click="openUpgradeModal"
+    >
 
         <!-- LESSON NUMBERS -->
         <div v-if="showNumbers" class="
-        tw-flex
-        tw-flex-col
-        tw-text-[#00101D]
-        dark:tw-text-white
-        align-left
-        tw-justify-center
-        number-col
-        title
-        hide-xs-only
-      ">
+            tw-flex
+            tw-flex-col
+            tw-text-[#00101D]
+            dark:tw-text-white
+            align-left
+            tw-justify-center
+            number-col
+            title
+            hide-xs-only
+        ">
             {{ lesson_number }}
         </div>
 
@@ -49,13 +52,14 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
                     >
-            <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
-              {{ releaseDate }}
-            </p>
-          </span>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <i v-else class="fas" :class="thumbnailIcon"></i>
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                          {{ releaseDate }}
+                        </p>
+                    </span>
                 </div>
             </div>
         </div>
@@ -63,19 +67,18 @@
         <div v-if="showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center avatar-col">
             <div class="thumb-wrap rounded" style="border-radius: 50%">
                 <div class="thumb-img corners-10 square rounded" :style="'background-image:url( ' + thumbnail + ' );'">
-          <span class="thumb-hover rounded flex-center" style="border-radius: 50%">
-            <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
-              {{ releaseDate }}
-            </p>
-          </span>
+                  <span class="thumb-hover rounded flex-center" style="border-radius: 50%">
+                    <i class="fas" :class="thumbnailIcon"></i>
+                    <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
+                      {{ releaseDate }}
+                    </p>
+                  </span>
                 </div>
             </div>
         </div>
 
         <!-- TITLES AND COLUMN DATA (on mobile) -->
-        <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column tw-flex-grow overflow">
-
+        <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column tw-flex-grow overflow" :class="{ 'tw-pl-[10px] sm:tw-px-[30px]': isNextLesson }">
             <!-- Is New -->
             <div v-if="isBranchPath"
                  class="tw-font-bebas-neue tw-tracking-tighter tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-pianote tw-p-1 tw-rounded"
@@ -85,13 +88,13 @@
 
             <p v-if="!isCoach"
                class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
-          overview ? 'dense' : 'font-compressed',
-        ]">
+              overview ? 'dense' : 'font-compressed',
+            ]">
                 {{ mappedData.color_title }}
             </p>
 
             <p class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
-               :class="overview ? 'heading' : 'tw-text-sm'">
+               :class="[overview ? 'heading' : 'tw-text-sm', { 'tw-text-[13px] sm:tw-text-2xl lg:tw-text-[28px] xl:tw-text-[32px]': isNextLesson }]">
                 {{ mappedData.black_title }}
             </p>
 
@@ -100,24 +103,31 @@
                 {{ mappedData.grey_title }}
             </p>
 
-            <p v-if="overview && mappedData.description" class="tw-text-base text-grey-6 dark:tw-text-white mb-1 m-xs-only"
-               v-html="mappedData.description">
+            <p
+                v-if="overview && mappedData.description"
+                class="tw-text-base text-grey-6 dark:tw-text-white mb-1 m-xs-only"
+                :class="{ 'tw-hidden sm:tw-block': isNextLesson }"
+                v-html="mappedData.description">
             </p>
 
-            <p v-if="!is_search" class="
-          tw-text-xs
-          font-compressed
-          tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
-          tw-uppercase
-          xl:tw-hidden
-          tw-flex
-          tw-flex-wrap
-          sm:tw-flex-nowrap
-        " :class="`${overview ? 'tw-mt-4' : ''}`">
-        <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
-          <span v-if="i > 0" class="bullet">-</span>
-          {{ column_data }}
-        </span>
+            <p
+                v-if="!is_search"
+                class="
+                  tw-text-xs
+                  font-compressed
+                  tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
+                  tw-uppercase
+                  xl:tw-hidden
+                  tw-flex
+                  tw-flex-wrap
+                  sm:tw-flex-nowrap
+                "
+                :class="[`${overview && !isNextLesson ? 'tw-mt-4' : ''}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
+            >
+                <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
+                  <span v-if="i > 0" class="bullet">-</span>
+                  {{ column_data }}
+                </span>
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
@@ -135,17 +145,22 @@
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
         <template v-if="!is_search">
-            <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
-          tw-hidden
-          xl:tw-flex
-          tw-uppercase
-          tw-items-center
-          tw-justify-center
-          sm:tw-w-[110px] xl:tw-flex-shrink-0
-          tw-text-center
-          tw-text-xs
-          font-compressed
-        " :data-test="column_data">
+            <div
+                v-for="(column_data, i) in mappedData.column_data"
+                :key="`${item.id}-mappedData-${i}`"
+                class="
+                  tw-hidden
+                  xl:tw-flex
+                  tw-uppercase
+                  tw-items-center
+                  tw-justify-center
+                  sm:tw-w-[110px] xl:tw-flex-shrink-0
+                  tw-text-center
+                  tw-text-xs
+                  font-compressed
+                "
+                :data-test="column_data"
+            >
                 {{ column_data }}
             </div>
         </template>
@@ -166,28 +181,28 @@
                 {{ mappedData.column_data[0] }}
             </div>
             <div v-if="item.type !== 'song'" class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          sm:tw-w-[110px] xl:tw-flex-shrink-0
-          tw-text-center
-          tw-text-xs
-        ">
+              tw-hidden
+              sm:tw-flex
+              tw-flex-col
+              tw-uppercase
+              tw-justify-center
+              sm:tw-w-[110px] xl:tw-flex-shrink-0
+              tw-text-center
+              tw-text-xs
+            ">
                 {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
             </div>
             <div class="
-          tw-hidden
-          sm:tw-flex
-          tw-flex-col
-          tw-uppercase
-          tw-justify-center
-          sm:tw-w-[110px] xl:tw-flex-shrink-0
-          text-center
-          tw-text-xs
-          hide-sm-down
-        ">
+              tw-hidden
+              sm:tw-flex
+              tw-flex-col
+              tw-uppercase
+              tw-justify-center
+              sm:tw-w-[110px] xl:tw-flex-shrink-0
+              text-center
+              tw-text-xs
+              hide-sm-down
+            ">
                 {{ releaseDate }}
             </div>
         </template>
@@ -228,17 +243,19 @@
 
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
-                <i v-if="item.started || item.completed"
-                   class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]" :class="[
-            item.completed ? completedIcon : 'fa-adjust',
-            themeTextClass,
-          ]"></i>
+                <i
+                    v-if="item.started || item.completed"
+                   class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
+                   :class="[
+                            item.completed ? completedIcon : 'fa-adjust',
+                            themeTextClass,
+                    ]"></i>
 
                 <i v-else class="fas flex-center rounded" :class="[
-          ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
-          isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'
-        ]
-        "></i>
+                      ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
+                      isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'
+                    ]
+                "></i>
             </div>
         </div>
     </a>
@@ -247,13 +264,13 @@
 <script setup>
 import {computed, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
 import useCatalogueItem from "@hooks/useCatalogueItem";
 import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
-
 
 const props = defineProps({
     brand: {
@@ -340,9 +357,14 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    isNextLesson: {
+        type: Boolean,
+        default: () => false,
+    },
 })
 
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
 const {
     noAccess,
@@ -382,12 +404,10 @@ const class_object = computed(() => {
     return {
         active: props.active,
         completed: props.item.completed,
-        "content-overview": props.overview,
-        "pv-2": props.overview,
-        "content-table-row": !props.overview,
-        "pv-1": !props.overview,
+        "content-overview pv-2": props.overview,
+        "content-table-row pv-1": !props.overview,
+        'tw-flex-nowrap': props.isNextLesson,
         "no-access": noAccess.value,
-        "wrap-on-mobile": false,
         compact: props.compactLayout,
         "start-learning-path":
             props.contentTypeOverride === "learning-path-part",
@@ -433,8 +453,9 @@ const showStudentReviewThumbsAsAvatar = computed(() => {
 
 const thumbnailColumnClass = computed(() => {
     return {
-        "large-thumbnail": props.overview,
+        "large-thumbnail": props.overview && !props.isNextLesson,
         "tw-w-[110px] sm:tw-w-[142px]": !props.overview,
+        "tw-w-[115px] sm:tw-w-[220px] lg:tw-w-[280px]": props.isNextLesson,
         active: props.active,
         "background-cards tw-mt-3":
             props.item.type === "learning-path" ||
@@ -444,6 +465,10 @@ const thumbnailColumnClass = computed(() => {
 
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
+}
+
+const openUpgradeModal = () => {
+    noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
 </script>

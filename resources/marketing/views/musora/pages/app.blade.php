@@ -39,7 +39,7 @@ bg-gradient-to-b from-white to-gray-200
                     </p>
                     <h3 class="leading-normal">
                         <strong>
-                        Unlimited music lessons.<br>Guided Practice Sessions. <br> The world’s best teachers.
+                        Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.
                         </strong>
                     </h3>
                     <ul class="text-center lg:text-left pt-5">

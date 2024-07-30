@@ -4,10 +4,13 @@
         :class="wrapperClasses">
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
-            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
+            <a
+            	:href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
                 item.type === 'song' ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
-            ]">
+            	]"
+            	@click="openUpgradeModal"
+            >
                 <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]"
                     :class="item.type === 'song' ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
@@ -44,9 +47,10 @@
                     <div
                         v-else
                         class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
-                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased },]"
+                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased && !noAccess },]"
                     >
-                        <i class="fas" :class="thumbnailIcon"></i>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <i v-else class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
                         </p>
@@ -56,11 +60,14 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a :href="renderLink  && !forceNoLinks ? item.url : null"
-                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1">
+                    <a
+                        :href="renderLink  && !forceNoLinks ? item.url : null"
+                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1"
+                        @click="openUpgradeModal"
+                    >
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
-                            <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                            <h4 class="tw-text-[13px] sm:tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
                                 {{ mappedData.black_title }}
                             </h4>
@@ -69,24 +76,22 @@
                                 class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
                             >{{  mappedData.description.replace(/<[^>]+>/g, '') }}</p>
                             <!-- Content -->
-                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
+                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC]"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
-                                <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                                <div v-if="contentCreator && contentCreator !== ''">
                                     <span>{{ contentCreator }}</span>
                                 </div>
+                                <!-- Difficulty Label -->
+                                <span v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
+                                    <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                                 textCase="capitalize" />
+                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                                </span>
+                                    <span class="tw-mb-0.5">
+                                    {{ contentTypeString }}
+                                </span>
                             </h6>
                         </div>
-                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
-                            <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                    textCase="capitalize" />
-                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
-                            </span>
-                            <span class="tw-mb-0.5">
-                                {{ contentTypeString }}
-                            </span>
-                        </p>
                     </a>
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
@@ -140,13 +145,14 @@ import Dropdown from './Dropdown';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 import { contentTypes } from "../../../utils";
 import { storeToRefs } from 'pinia';
+import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from '@stores/user';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 
 //Pinia Stores
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-
+const platformStore = usePlatformStore();
 
 const props = defineProps({
     wrapperClassOverride: {
@@ -341,6 +347,11 @@ const handleAddToList = () => {
     const { black_title: name, description, thumbnail_url } = mappedData.value;
     window.openplaylistmodal({ modalType: 'addItem', content: { content_id: id, type, name, description, thumbnail_url } })
 };
+
+const openUpgradeModal = () => {
+    noAccess.value && platformStore.openMembershipUpgradeModal();
+}
+
 
 onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);

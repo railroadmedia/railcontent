@@ -25,6 +25,7 @@
                     :lessonProgress= "lessonProgress"
                     :likeCount= "likeCount"
                     :report-logo="reportLogo"
+                    :no-access="noAccess"
                 />
             </div>
             <!-- Related Lessons -->
@@ -45,7 +46,7 @@
             </div>
 
             <!-- Comments Section -->
-            <div class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
+            <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
                 <Comments
                     :is-loading="isLoading"
                     :brand="brand"
@@ -69,7 +70,7 @@
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '@stores/user';
     import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
-    import SongPlayerSection from '../_Collections/SongPlayerSection.vue'
+    import SongPlayerSection from '../_Collections/SongPlayerSection/SongPlayerSection.vue'
     import Comments from '@vuesora/views/comments/Comments.vue'
     import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
 
@@ -90,6 +91,7 @@
         songMeta: String,
         contentId: Number,
         isLiked: Boolean,
+        noAccess: Boolean,
         hasInstrumentless: Boolean,
         isAdded: Boolean,
         lessonProgress: [Number, String],

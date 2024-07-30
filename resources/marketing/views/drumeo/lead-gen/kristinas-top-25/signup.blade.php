@@ -1,6 +1,7 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
+    <meta name="robots" content="noindex">
     <title>25 Top Drum Songs With Kristina Rybalchenko | Drumeo</title>
     <meta property="og:title" content="25 Top Drum Songs With Kristina Rybalchenko | Drumeo">
     <meta name="description" content="Learn to play 25 of Kristina’s favorite drum covers.">
@@ -95,89 +96,89 @@
         </div>
     </section>
 
-    <div class="relative h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000318 calc(50% + 1px));"></div>
-    <section class="text-center text-white px-5 sm:px-6 py-8 sm:py-12 lg:py-20" style="background-color:#0c1524;">
-        <div class="container max-w-4xl mx-auto">
-            <h2><strong>Learn the easy way</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3">
-                Drumeo’s playalong tools help you hear all the instruments, visualize<br class="hidden sm:inline">
-                every note, and loop a section until you have it nailed. </p>
+{{--    <div class="relative h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000318 calc(50% + 1px));"></div>--}}
+{{--    <section class="text-center text-white px-5 sm:px-6 py-8 sm:py-12 lg:py-20" style="background-color:#0c1524;">--}}
+{{--        <div class="container max-w-4xl mx-auto">--}}
+{{--            <h2><strong>Learn the easy way</strong></h2>--}}
+{{--            <p class="leading-tight mt-2 sm:mt-3">--}}
+{{--                Drumeo’s playalong tools help you hear all the instruments, visualize<br class="hidden sm:inline">--}}
+{{--                every note, and loop a section until you have it nailed. </p>--}}
 
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-                <div style="padding-bottom: 62.4%; background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>
-            </div>
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
-                <div class="flex flex-wrap">
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>{{ Prices::$drumeoSongs }}+ popular songs.</strong></p>
-                                <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill level.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>Find the perfect tempo.</strong></p>
-                                <p class="text-sm">Slow down or speed up any section of a song to hear every note.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>Loop the trouble spots.</strong></p>
-                                <p class="text-sm">No more pausing and rewinding that tricky fill. Loop it over and over again!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>Remove the drums.</strong></p>
-                                <p class="text-sm">Magically remove the original drums to make each song uniquely yours.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>Play it right the first time.</strong></p>
-                                <p class="text-sm">Get perfect notation and learn to play accurately from the get-go.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                        <div class="flex sm:inline-block">
-                            <div class="w-14 sm:w-full flex-shrink-0">
-                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg" class="h-6 sm:h-10">
-                            </div>
-                            <div class="text-left sm:text-center">
-                                <p class="mb-1 sm:my-2"><strong>Take your songs anywhere.</strong></p>
-                                <p class="text-sm">Accessible on any device, or printable,so you can play any song, any time.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">--}}
+{{--                <div style="padding-bottom: 62.4%; background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>--}}
+{{--            </div>--}}
+{{--            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">--}}
+{{--                <div class="flex flex-wrap">--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>{{ Prices::$drumeoSongs }}+ popular songs.</strong></p>--}}
+{{--                                <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill level.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>Find the perfect tempo.</strong></p>--}}
+{{--                                <p class="text-sm">Slow down or speed up any section of a song to hear every note.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>Loop the trouble spots.</strong></p>--}}
+{{--                                <p class="text-sm">No more pausing and rewinding that tricky fill. Loop it over and over again!</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>Remove the drums.</strong></p>--}}
+{{--                                <p class="text-sm">Magically remove the original drums to make each song uniquely yours.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>Play it right the first time.</strong></p>--}}
+{{--                                <p class="text-sm">Get perfect notation and learn to play accurately from the get-go.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">--}}
+{{--                        <div class="flex sm:inline-block">--}}
+{{--                            <div class="w-14 sm:w-full flex-shrink-0">--}}
+{{--                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg" class="h-6 sm:h-10">--}}
+{{--                            </div>--}}
+{{--                            <div class="text-left sm:text-center">--}}
+{{--                                <p class="mb-1 sm:my-2"><strong>Take your songs anywhere.</strong></p>--}}
+{{--                                <p class="text-sm">Accessible on any device, or printable,so you can play any song, any time.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "white",

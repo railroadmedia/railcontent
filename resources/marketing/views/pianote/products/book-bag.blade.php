@@ -590,7 +590,7 @@
                                     <strong>$249</strong>
                                 @endif
                             </h3>
-                            <p class="text-sm mb-5"><em>One-time payment. Free shipping.</em></p>
+                            <p class="text-sm mb-5"><em>One-time payment.</em></p>
                             <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">GET STARTED</div>
                         </div>
                         <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">

@@ -11,8 +11,9 @@
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
-                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED]">
-                        <template v-if="videoProps.videoId">
+                    <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
+                        <template v-else-if="videoProps.videoId">
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -73,20 +74,20 @@
                         </template>
                     </div>
 
-                    <VideoResources 
-                        :theme-color="videoResources.themeColor" 
+                    <VideoResources
+                        :theme-color="videoResources.themeColor"
                         :brand="videoResources.brand"
-                        :title="videoResources.title" 
+                        :title="videoResources.title"
                         :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :thumbnail-url="videoResources.thumbnailUrl"
                         :description="videoResources.description"
-                        :instructors="videoResources.instructors" 
+                        :instructors="videoResources.instructors"
                         :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" 
+                        :is-liked="videoResources.isLiked"
                         :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" 
+                        :is-added="videoResources.isAdded"
                         :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" 
+                        :user-id="videoResources.userId"
                         :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList"
                         :show-info-button="videoResources.showInfoButton"
@@ -94,17 +95,18 @@
                         :report-user-name="videoResources.reportUserName"
                         :report-logo="videoResources.reportLogo"
                         :difficulty="videoResources.difficulty"
+                        :no-access="noAccess"
                     />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoButtons :has-branded-color="true" :prev-lesson-url="videoButtons.prevLessonUrl"
+                    <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" :brand="brand"
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
 
-                    <ContentProgress :brand="brand" :is-completed="lessonData.completed"
+                    <ContentProgress v-if="!noAccess" :brand="brand" :is-completed="lessonData.completed"
                         :progress="lessonData.progress_percent" :xp-amount="progressXp" :is-started="lessonData.progress_percent > 0"
                         :next-lesson-url="videoButtons.nextLessonUrl" :show-complete-button="true"
                         :content-id="videoProps.contentId" />
@@ -127,23 +129,33 @@
             />
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2"
+            <section
+            	v-if="!noAccess"
+            	class="tw-col-span-3 xl:tw-row-span-2"
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
+                <!-- Chapters -->
+                <VideoChapters
+                    v-if="formattedChapters.length"
+                    :chapters="formattedChapters"
+                    @open-slice="openSlice"
+                    @seek-to-chapter="seekToChapter"
+                />
+
+                <!-- Assignments -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <assignments-container :lesson-data="lessonData" :assignments="assignments" :brand="brand"
-                            :user-id="videoResources.userId">
-                        </assignments-container>
+                        <AssignmentsContainer :lesson-data="lessonData" :assignments="assignments" :brand="brand"
+                            :user-id="videoResources.userId" />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
@@ -160,6 +172,21 @@
             </section>
         </div>
         <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson" :next-lesson-json="nextLessonJson" />
+
+        <!-- Chapter Soundslice -->
+        <transition name="show-from-bottom">
+            <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
+                <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                            :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
+                            :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                    <template v-slot:soundsliceControls>
+                        <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"
+                                            :disable-prev="true" @onClose="handleCloseSoundslice" />
+                    </template>
+                </SoundSlice>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -168,7 +195,6 @@
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
-
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
@@ -183,6 +209,10 @@ import ContentProgress from "@collections/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "@collections/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "@collections/RelatedLessons/RelatedLessons.vue";
 import LessonComplete from "@collections/ContentProgress/LessonComplete.vue";
+import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
+import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
+import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 
 const props = defineProps({
     thisLessonJson: {
@@ -244,7 +274,7 @@ const props = defineProps({
     contentInstructors: {
         type: Array,
         default: []
-    }
+    },
 });
 
 const userStore = useUserStore();
@@ -268,7 +298,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.videoProps.chapters?.length) {
+    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
@@ -355,4 +385,12 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+const noAccess = computed(() => {
+    return props.thisLessonJson?.data[0]?.need_access;
+})
+
+const thumbnailUrl = computed(() => {
+    return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
+})
 </script>

@@ -2,12 +2,13 @@
 
 namespace App\Decorators\Content;
 
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Support\Collection;
 
 class PlaylistItemDecorator extends TypeDecoratorBase
@@ -108,9 +109,9 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 \Arr::pluck($contentsOfType, 'type')
             )
         );
-        $grupedPermissions = $contentPermissionRows->groupBy('content_id');
+        $groupedPermissions = $contentPermissionRows->groupBy('content_id');
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-
+        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
             foreach ($content['resources'] ?? [] as $resource) {
@@ -143,60 +144,51 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 'playlistItemId' => $content['user_playlist_item_id'],
             ]);
 
-            $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
-            $membershipPermissionIds = [1, 52, 73, 77,];
-            if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-                $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-            }
+            /** @var Collection<ContentPermissions> $contentPermissions */
+            $contentPermissions = $groupedPermissions->get($content['id']);
+            $contentPermissionIds = $contentPermissions?->pluck('id')->toArray() ?? [];
+            $needLifetime = ($contentPermissions?->containsOneItem() ?? false) &&
+                !empty(array_intersect(PermissionService::getLifetimeMembershipPermissionIds(), $contentPermissionIds));
 
-            $contentsOfType[$contentIndex]['need_access'] = empty(
-                array_intersect(
-                    $userPermissionIds,
-                    (isset($grupedPermissions[$content['id']])) ?
-                        $grupedPermissions[$content['id']]->pluck('permission_id')
-                            ->toArray() : []
-                )
-            ) && (isset($grupedPermissions[$content['id']]));
+            $needMusoraBasic = !empty(array_intersect(
+                [UserAccessPermissionsCollection::MusoraBasicMembershipPermission],
+                $contentPermissionIds
+            ));
 
-            $needLifetime = (count($grupedPermissions[$content['id']] ?? []) == 1) && array_intersect(
-                [
-                        'Drumeo Lifetime Member',
-                        'Pianote Lifetime Member',
-                        'Guitareo Lifetime Member',
-                        'Singeo Lifetime Member',
-                    ],
-                (isset($grupedPermissions[$content['id']])) ?
-                        $grupedPermissions[$content['id']]->pluck('name')
-                            ->toArray() : []
-            );
-            $needMusoraBasic = array_intersect(
-                ['Musora Basic Membership'],
-                (isset($grupedPermissions[$content['id']])) ?
-                    $grupedPermissions[$content['id']]->pluck('name')
-                        ->toArray() : []
-            );
+            $needMusoraPlus = !empty(array_intersect(
+                [UserAccessPermissionsCollection::MusoraPlusMembershipPermission],
+                $contentPermissionIds
+            ));
+
 
             $message = '';
-            if (!empty($needLifetime)) {
-                $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
-            } elseif (!empty($needMusoraBasic)) {
-                $message = 'This lesson is part of our <b>Musora Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
-            } elseif ($content['type'] == 'song' && !user()->hasSongsAccess($content['brand'])) {
-                $contentsOfType[$contentIndex]['need_access'] = true;
-                $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
-                self::$noAccessMessages[$content['id']] = $message;
+            if ($contentPermissionIds && empty(array_intersect($userPermissionIds, $contentPermissionIds))) {
+                if (!empty($needLifetime)) {
+                    $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                } elseif (!empty($needMusoraBasic)) {
+                    $message = 'This lesson is part of our <b>Musora Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                } elseif (!empty($needMusoraPlus)) {
+                    $contentsOfType[$contentIndex]['need_access'] = true;
+                    // PackOnly users should not see our special modal
+                    $contentsOfType[$contentIndex]['show_plus_upgrade_modal'] = !(user()?->isPackOnlyOwner() ?? true);
+                    $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
+                    self::$noAccessMessages[$content['id']] = $message;
+                }
             }
 
             if ($contentsOfType[$contentIndex]['need_access']) {
                 $contentsOfType[$contentIndex]['need_access_message'] = $message;
             }
 
-            if(ContentRepository::$bypassPermissions === true) {
-                $contentsOfType[$contentIndex]['need_access'] = false;
-                $contentsOfType[$contentIndex]['need_access_message'] = '';
-            }
+            // TODO this is a really unusual hack. I'm going to remove it for now but we may need it back
+            // See: https://musoraworkspace.slack.com/archives/C02L6GWEASV/p1719955897179159
+            // This hack is necessary for some later behaviour whyyyyyy?
+//            if(ContentRepository::$bypassPermissions === true) {
+//                $contentsOfType[$contentIndex]['need_access'] = false;
+//                $contentsOfType[$contentIndex]['need_access_message'] = '';
+//            }
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
                     error_log($content['user_playlist_item_extra_data']);
@@ -347,21 +339,13 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             $contentsOfType[$contentIndex]['fields'] =
                                 array_merge($content['fields'] ?? [], self::$parents[$childId]['fields'] ?? []);
 
-                            $contentsOfType[$contentIndex]['need_access'] = empty(
-                                array_intersect(
-                                    $userPermissionIds,
-                                    (isset($grupedPermissions[self::$parents[$childId]['id']])) ?
-                                        $grupedPermissions[self::$parents[$childId]['id']]->pluck('permission_id')
-                                            ->toArray() : []
-                                )
-                            ) && (isset($grupedPermissions[self::$parents[$childId]['id']]));
                             if ($contentsOfType[$contentIndex]['need_access']) {
                                 $contentsOfType[$contentIndex]['need_access_message'] =
                                     self::$noAccessMessages[self::$parents[$childId]['id']] ?? '';
                             }
                         }
                     }
-                    $childId = $parent->id;
+                    $childId = ($parent instanceof \stdClass) ? $parent->id : $parent['id'];
                 }
             }
 

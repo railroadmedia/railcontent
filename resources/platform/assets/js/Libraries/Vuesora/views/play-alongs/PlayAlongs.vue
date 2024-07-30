@@ -21,7 +21,7 @@
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
                 @addToList="addToListEventHandler" @markAsComplete="completedEventHandler"
-                @click.native="updateTrack(item)" />
+                @update-track="updateTrack" />
         </div>
         <div v-if="content.length === 0" class="flex flex-row pa-2">
             <div class="flex flex-column">
@@ -413,24 +413,26 @@ export default {
             }
         },
         updateTrack(item) {
-            if (this.activeItem != null && item.id === this.activeItem.id) {
-                this.playPause();
-            } else {
-                if (this.trackProgress) {
-                    this.progressTracker.stop();
-                    // When a user switches the track we send their practice time and reset
-                    // the window unload event for the next track incase that's the last
-                    // one they play
-                    // - Curtis, Oct 2019
-                    if (this.activeItem != null) {
-                        this.sendProgressTracking();
+            if(!item.need_access){
+                if (this.activeItem != null && item.id === this.activeItem.id) {
+                    this.playPause();
+                } else {
+                    if (this.trackProgress) {
+                        this.progressTracker.stop();
+                        // When a user switches the track we send their practice time and reset
+                        // the window unload event for the next track incase that's the last
+                        // one they play
+                        // - Curtis, Oct 2019
+                        if (this.activeItem != null) {
+                            this.sendProgressTracking();
+                        }
+                        this.updateNavigatorBeacon();
+                        this.$nextTick(() => { this.progressTracker.reset(); });
                     }
-                    this.updateNavigatorBeacon();
-                    this.$nextTick(() => { this.progressTracker.reset(); });
-                }
-                this.playTrack(item);
-                if (this.loop) {
-                    this.resetAnchors();
+                    this.playTrack(item);
+                    if (this.loop) {
+                        this.resetAnchors();
+                    }
                 }
             }
         },

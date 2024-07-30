@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Modules\UserManagementSystem\Services\TestingService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Mail;
+use Redirect;
 use Vimeo\Vimeo;
 
 class AdminController extends Controller
 {
+
+    private TestingService $testingService;
+
+    public function __construct(TestingService $testingService)
+    {
+        $this->testingService = $testingService;
+    }
+
     public function vimeoData(Request $request)
     {
         $ids = explode(',', $request->get('ids'));
@@ -42,6 +53,23 @@ class AdminController extends Controller
             }
         }
         return $sourceDownloadLink;
+    }
+
+    public function testEmail(Request $request)
+    {
+        $host = $request->host();
+        Mail::raw('Hello World!', function ($msg) use ($host) {
+            $msg->to('robert@musora.com')
+                ->subject("Test Email: $host");
+        });
+    }
+
+    public function createUser(Request $request)
+    {
+        $productId = $request->get('productId');
+        $createdAt = $request->get("createdAt");
+        $user = $this->testingService->createTestUser($productId, $createdAt);
+        return Redirect::to("musora-center#/users/$user->id");
     }
 
 

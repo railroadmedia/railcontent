@@ -422,6 +422,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
+        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'musora/membership/homepage/2024/musora-songs.webp',
     ])
 
@@ -448,7 +449,7 @@
             "whiteBg" => true,
             "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
             "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-            "songs" => "Popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Learn piano, guitar, drums, & singing.",
             "thirdPoint" => "Unlimited personal support",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
@@ -462,7 +463,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-        'header' => 'Unlimited music lessons.<br>Guided Practice Sessions. <br> The world’s best teachers.',
+        'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',

@@ -253,11 +253,8 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'header' => 'Sing your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
+        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
         'media' => 'singeo/membership/homepage/2024/singeo-songs.webp',
-        'brandName' => 'Singeo',
-        'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
 
     @php
@@ -290,7 +287,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "Popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
@@ -311,26 +308,20 @@
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
                     'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
-                [
-                    'image' => 'marketing/singeo/membership/homepage/2024/Beautiful_harmonies_card.webp',
-                    'title' => 'Harmony',
-                    'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
-                ],
             ]
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/singeo/membership/homepage/webp-format/singeo-annual-2w-card.webp',
         'header' => 'Online singing lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
-        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
+        'subDescription' => 'Save 17% + get 1 bonus<br class="inline sm:hidden"> worth $19',
+        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br>Guided Practice Sessions. <br> Vocal coaches and support.',
+        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>

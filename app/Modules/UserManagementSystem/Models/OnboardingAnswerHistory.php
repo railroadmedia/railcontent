@@ -2,7 +2,9 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,34 +49,20 @@ class OnboardingAnswerHistory extends Model
     public const QUESTION_INSTRUMENT = 'instrument';
     public const QUESTION_COACH = 'coach';
 
-    public const EXPERIENCE_ONE = 'Level 1';
-    public const EXPERIENCE_TWO = 'Level 2-3';
-    public const EXPERIENCE_THREE = 'Level 4-6';
-    public const EXPERIENCE_FOUR = 'Level 7-10';
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [ 'user_id', 'brand', 'onboarding_question', 'onboarding_answer', 'coach_name'];
+    protected $fillable = ['user_id', 'brand', 'onboarding_question', 'onboarding_answer', 'coach_name'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function setExperienceLevelAnswer(string $onboardingAnswer)
+    public function setExperienceLevelAnswer(int $onboardingAnswer)
     {
-        if ($onboardingAnswer == '0') {
-            $this->onboarding_answer = self::EXPERIENCE_ONE;
-        } elseif ($onboardingAnswer == '1') {
-            $this->onboarding_answer = self::EXPERIENCE_TWO;
-        } elseif ($onboardingAnswer == '2') {
-            $this->onboarding_answer = self::EXPERIENCE_THREE;
-        } elseif ($onboardingAnswer == '3') {
-            $this->onboarding_answer = self::EXPERIENCE_FOUR;
-        }
+        $this->onboarding_answer = OnboardingSkillLevelEnum::from($onboardingAnswer)->name;
     }
 }

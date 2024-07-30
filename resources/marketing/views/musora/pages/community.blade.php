@@ -450,7 +450,7 @@
 
     @include('musora.sales.components.order-section-collage', [
     'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-    'header' => 'Unlimited music lessons.<br>Guided Practice Sessions. <br> The world’s best teachers.',
+    'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',

@@ -77,7 +77,7 @@
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { computed } from "vue";
-import Chat from '../../../Libraries/Chatsora/Components/Chat/Chat';
+import Chat from '@libraries/Chatsora/Components/Chat/Chat';
 
 const props = defineProps({
     apiKey: {

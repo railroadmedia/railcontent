@@ -69,7 +69,7 @@
     <div class="sticky-trigger block"></div>
     <a href="#customize-anchor"
         class="promo-banner flex text-white items-center justify-center -mt-12 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://www.musora.com/musora-cdn/image/width=300,quality=90/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas mx-0 pr-3">SAVE 25% ON YOUR FIRST YEAR</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
 

@@ -19,12 +19,11 @@ class ChargeFailedEventTrackingJob extends WebhookChildJob
     {
         $charge = $this->contents['charge'];
         $email = $charge['email'];
-        Log::debug("Shopify customer email: $email");
 
         /** @var User $user */
         $user = User::query()->where('email', '=', $email)->first();
         if (!$user) {
-            Log::debug("User not found for email: $email");
+            Log::error("User not found for email: $email");
             return;
         }
 
@@ -32,7 +31,7 @@ class ChargeFailedEventTrackingJob extends WebhookChildJob
         /** @var Product $product */
         $product = Product::query()->where('sku', '=', $sku)->first();
         if (!$product) {
-            Log::debug("Product not found for sku: " . $sku);
+            Log::error("Product not found for sku: " . $sku);
             return;
         }
 

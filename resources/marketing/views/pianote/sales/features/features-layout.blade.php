@@ -23,7 +23,7 @@
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
-        'header' => 'Unlimited piano lessons.<br>Guided Practice Sessions. <br> Direct access to real teachers.',
+        'header' => 'Unlimited piano lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>

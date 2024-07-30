@@ -1,16 +1,16 @@
 <template>
-    <ul v-if="showPills" class="tw-flex tw-flex-wrap tw-gap-4 tw-text-sm tw-mb-2 xl:tw-mb-0 lg:tw-sticky lg:tw-top-0 lg:tw-z-30 dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-py-3 xl:tw-py-5">
-        <li class="tw-flex tw-items-center tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold" v-for="pill in pills">
+    <ul v-if="showPills" class="tw-flex tw-flex-wrap tw-gap-2 sm:tw-gap-4 tw-text-xs sm:tw-text-sm tw-mb-2 xl:tw-mb-0 lg:tw-sticky lg:tw-top-0 lg:tw-z-30 dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-py-3 xl:tw-py-5">
+        <li class="tw-flex tw-items-center tw-p-1.5 sm:tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold" v-for="pill in pills">
             {{ pill.item.key }}
             <button class="tw-text-[#000C17] dark:tw-text-white">
-                <XIcon class="tw-h-[20px] tw-w-[20px] tw-ml-1" @click="handleCancel(`${pill.category},${pill.item.value}`)" />
+                <XIcon class="tw-h-[12px] sm:tw-h-[20px] tw-w-[12px] sm:tw-w-[20px] tw-ml-1" @click="handleCancel(`${pill.category},${pill.item.value}`)" />
             </button>
         </li>
 
-        <li class="tw-flex tw-items-center tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold tw-uppercase">
+        <li class="tw-flex tw-items-center tw-p-1.5 sm:tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold tw-uppercase">
             Clear all
             <button class="tw-text-[#000C17] dark:tw-text-white">
-                <XIcon class="tw-h-[20px] tw-w-[20px] tw-ml-1" @click="handleClearFilters" />
+                <XIcon class="tw-h-[12px] sm:tw-h-[20px] tw-w-[12px] sm:tw-w-[20px] tw-ml-1" @click="handleClearFilters" />
             </button>
         </li>
     </ul>

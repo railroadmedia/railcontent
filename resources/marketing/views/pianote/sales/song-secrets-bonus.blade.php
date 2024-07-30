@@ -541,7 +541,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$39</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -746,7 +746,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -787,7 +787,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -828,7 +828,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -869,7 +869,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -910,7 +910,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>
@@ -951,7 +951,7 @@ That’s the Play Better Guarantee™.',
 <s class="opacity-40">$6.5</s>
 <strong class="text-musora">FREE</strong></span><br>
                             <em>
-                                Free Shipping
+                                Free Bonus
                             </em>
                         </p>
                     </div>

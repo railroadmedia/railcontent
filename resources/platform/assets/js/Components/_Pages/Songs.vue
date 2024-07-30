@@ -15,72 +15,89 @@
             <div :class="`dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
                 <transition appear name="fade">
                     <CollectionWrapper :preLoadedContent="listLessons" collectionType="song" :tabs="tabs"
-                        :filterableValues="filterableValues" />
+                        :filterableValues="filterableValues" :infinite-scroll="!membershipUpgradeModal.disableClose" />
                 </transition>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>
-    import { computed } from 'vue';
-    import PageHeader from '@collections/PageHeader/PageHeader.vue';
-    import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
-    import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import { computed, onBeforeMount } from 'vue';
+import { usePlatformStore } from "../../Stores/platform";
+import { storeToRefs } from "pinia";
 
-    const props = defineProps({
-        continueUrl: {
-            type: String,
-            default: '#'
-        },
-        allArtistsUrl: {
-            type: String,
-            default: '#'
-        },
-        artistsNumber: {
-            type: Number,
-            default: 0
-        },
-        songsNumber: {
-            type: Number,
-            default: 0
-        },
-        startedContent: {
-            type: [Object, String],
-            default: () => ({
-                data: []
-            })
-        },
-        listLessons: {
-            type: Object,
-            default: () => ({
-                data: []
-            })
-        },
-        filterableValues: {
-            type: Array,
-            default: () => ([]),
-        },
-        tabs: {
-            type: Array,
-            default: () => ([]),
-        }
-    });
+import PageHeader from '@collections/PageHeader/PageHeader.vue';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 
-    const ctaConfig = computed(() => {
-        return [
-            {
-                type: 'SongRequest'
-            },
-        ];
-    });
 
-    const headerInfoData = computed(() => {
-        return {
-            type: 'Link',
-            text: `See all ${props.artistsNumber} artists`,
-            url: props.allArtistsUrl
-        }
-    })
+const props = defineProps({
+    continueUrl: {
+        type: String,
+        default: '#'
+    },
+    allArtistsUrl: {
+        type: String,
+        default: '#'
+    },
+    artistsNumber: {
+        type: Number,
+        default: 0
+    },
+    songsNumber: {
+        type: Number,
+        default: 0
+    },
+    startedContent: {
+        type: [Object, String],
+        default: () => ({
+            data: []
+        })
+    },
+    listLessons: {
+        type: Object,
+        default: () => ({
+            data: []
+        })
+    },
+    filterableValues: {
+        type: Array,
+        default: () => ([]),
+    },
+    tabs: {
+        type: Array,
+        default: () => ([]),
+    },
+    showUpgradeModal: {
+        type: Boolean,
+        default: false
+    }
+});
+
+const platformStore = usePlatformStore();
+const { membershipUpgradeModal } = storeToRefs(platformStore);
+
+const ctaConfig = computed(() => {
+    return [
+        {
+            type: 'SongRequest'
+        },
+    ];
+});
+
+const headerInfoData = computed(() => {
+    return {
+        type: 'Link',
+        text: `See all ${props.artistsNumber} artists`,
+        url: props.allArtistsUrl
+    }
+})
+
+onBeforeMount(() => {
+    props.showUpgradeModal && platformStore.openMembershipUpgradeModal();
+    props.showUpgradeModal && platformStore.disableCloseMembershipUpgradeModal();
+})
 </script>

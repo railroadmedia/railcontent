@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Product;
@@ -21,6 +22,7 @@ class EventTrackingService
 {
     public function __construct(
         private readonly ShopifySyncService $shopifySyncService,
+        private readonly CustomerIoService $customerIoService
     ) {
     }
 
@@ -46,12 +48,29 @@ class EventTrackingService
             3
         );
 
+
         if ($brand !== 'musora') {
             dispatchWithDelay(
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     $brand,
                     $brand . "_user_order",
+                    $data,
+                    null,
+                    Carbon::parse($order['processed_at'])->timestamp
+                ),
+                3
+            );
+        }
+
+        // NOTE: BE-248 sync to musora prospects workspace if user is a musora prospect
+        $customer = $this->customerIoService->getCustomerByEmail('musora_prospects', $user->email);
+        if ($customer) {
+            dispatchWithDelay(
+                new CustomerIoCreateEventByUserId(
+                    $user->id,
+                    'musora_prospects',
+                    'musora_user_order',
                     $data,
                     null,
                     Carbon::parse($order['processed_at'])->timestamp

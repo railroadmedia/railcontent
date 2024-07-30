@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify\Traits;
 
+use App\Modules\UserManagementSystem\Console\Commands\CreateUser;
+use App\Modules\UserManagementSystem\Services\TestingService;
 use Illuminate\Support\Str;
 
 trait HandlesMaskedEmailAddress
@@ -12,7 +14,7 @@ trait HandlesMaskedEmailAddress
     /**
      * Get the unmasked value of the given email address from Shopify
      *
-     * @param  string  $email
+     * @param string $email
      * @return string
      */
     protected function getEmailFromShopify(string $email): string
@@ -41,14 +43,26 @@ trait HandlesMaskedEmailAddress
     /**
      * Get the masked value of the given email address, to send to Shopify
      *
-     * @param  string  $email
+     * @param string $email
      * @return string
      */
     protected function getEmailForShopify(string $email): string
     {
-        if ($this->getIsUsingMask()) {
-            return $email.$this->fakeSuffix;
+        if ($this->getIsUsingMask() && !$this->ignoreEmailRegex($email)) {
+            return $email . $this->fakeSuffix;
         }
         return $email;
+    }
+
+    private function ignoreEmailRegex(string $email): bool
+    {
+        if (str_starts_with($email, TestingService::EmailPrefix) && str_ends_with(
+                $email,
+                TestingService::EmailPostfix
+            )) {
+            return true;
+        }
+
+        return false;
     }
 }

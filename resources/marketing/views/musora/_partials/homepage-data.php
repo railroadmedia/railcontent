@@ -482,19 +482,19 @@ $musora = [
             ],
     "songItems" => [
         [
+            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg",
+            "title" => "Isolate your instrument.",
+            "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play. ",
+        ],
+        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
-            "title" => "Simplify the tricky parts.",
-            "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
+            'title' => 'Simplify the tricky parts.',
+            'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control. ',
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
-            'title' => 'Improve your timing.',
-            'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
-        ],
-        [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "title" => "Improve your timing. ",
+            "desc" => "Use the built-in metronome – your new best friend to get the timing just right.",
         ],
     ],
     "testimonials" => [

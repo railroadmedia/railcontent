@@ -238,7 +238,8 @@ class UserAccessPermissionsService
                         $source,
                         $hash,
                         $lineItem->product,
-                        $status
+                        $status,
+                        quantity: $lineItem->quantity
                     );
                     if ($accessPermission == null) {
                         continue;
@@ -564,13 +565,14 @@ class UserAccessPermissionsService
         ?int $days = null,
         ?int $months = null,
         ?Carbon $fixed = null,
-        ?bool $isLifeTime = null
+        ?bool $isLifeTime = null,
+        int $quantity = 1,
     ): ?UserAccessPermission {
         if (!isset($days)) {
-            $days = $product?->getMembershipTimeDays() ?? 0;
+            $days = $product?->getMembershipTimeDays() * $quantity ?? 0;
         }
         if (!isset($months)) {
-            $months = $product?->getMembershipTimeMonths() ?? 0;
+            $months = $product?->getMembershipTimeMonths() * $quantity ?? 0;
         }
         if (!isset($isLifeTime)) {
             $isLifeTime = $product?->isLifeTime() ?? false;
@@ -699,5 +701,29 @@ class UserAccessPermissionsService
                 ->first()->id ?? null;
         $nPackOwners = $this->getNumberPermissionOwners($permissionID);
         return $nPackOwners;
+    }
+
+    public function ensurePermissionAccessUntil(
+        ?User $user,
+        int $permissionId,
+        Carbon $accessUntilDateTime
+    ): void {
+        $existingAccessPermissionsLookup = $this->getExistingUserAccessLookup($user->id);
+        $source = UserAccessPermissionsSourceEnum::Manual;
+        $hash = sha1("$permissionId.$accessUntilDateTime->timestamp");
+        if ($existingAccessPermissionsLookup["$source->value.$hash"] ?? null) {
+            return;
+        }
+        $this->createUserAccessPermission(
+            $user,
+            $permissionId,
+            Carbon::now(),
+            $source,
+            $hash,
+            null,
+            UserAccessPermissionsStatusEnum::Active,
+            fixed: $accessUntilDateTime,
+        );
+        $this->handleUserPermissionsUpdatedEvent($user);
     }
 }

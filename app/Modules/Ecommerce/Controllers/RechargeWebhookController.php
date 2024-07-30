@@ -80,8 +80,8 @@ class RechargeWebhookController extends Controller
     {
         try {
             Log::info('Recharge payment method updated webhook received');
-            Log::debug(print_r($request->all(), true));
-            Log::debug($request->headers);
+            // Log::debug(print_r($request->all(), true));
+            // Log::debug($request->headers);
 
             $id = $this->getWebhookIdentifierOrGUID($request);
             $contents = $request->all();

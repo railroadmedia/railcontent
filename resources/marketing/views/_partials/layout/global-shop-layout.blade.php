@@ -27,7 +27,6 @@
 
 @section('body-data')
     x-data="{
-        shippingModal: false,
         @yield('x-data')
     }"
 @endsection
