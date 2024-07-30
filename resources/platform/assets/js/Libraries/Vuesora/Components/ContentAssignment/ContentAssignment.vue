@@ -34,8 +34,10 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
-
+                <div
+                    class="flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full"
+                    :class="soundsliceSlug ? 'tw-grid tw-grid-cols-2 tw-gap-2 sm:tw-gap-0 sm:tw-flex' : 'tw-flex'"
+                >
                     <button id="open-exercise-button" v-if="soundsliceSlug"
                         class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
                         @click="openExercise">
@@ -43,7 +45,7 @@
                     </button>
 
                     <button class="tw-w-full md:tw-w-[250px] md:tw-mr-2 tw-mb-2 md:tw-mb-0"
-                        :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
+                        :class="isComplete ? `tw-btn-primary tw-bg-[#00101D] dark:tw-bg-white tw-text-white dark:tw-text-[#00101D]` : `tw-btn-secondary tw-text-[#00101D] dark:tw-text-white`"
                         :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
@@ -61,7 +63,7 @@
         <transition name="slide-down-fade">
             <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
                 <div v-show="$_description.length > 0" class="flex flex-row tw-pb-6">
-                    <div class="body tw-text-[#00101D] dark:tw-text-white" v-html="$_description">
+                    <div class="body tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-base" v-html="$_description">
                     </div>
                 </div>
                 <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">

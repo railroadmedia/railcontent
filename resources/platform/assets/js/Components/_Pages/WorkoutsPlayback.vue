@@ -241,6 +241,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(false);
+const isRelatedSectionCollapsed = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
