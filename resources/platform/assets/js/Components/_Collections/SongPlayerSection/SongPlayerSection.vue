@@ -197,7 +197,7 @@ const props = defineProps({
     noAccess: Boolean,
 });
 
-const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
+const soundsliceObject = ref(props.assignments?.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const lessonProgressRef = ref(props.lessonProgress);
 

@@ -31,23 +31,35 @@
         }
     @endphp
 
-    <song
-        thumbnail-url="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
-        song-title="{{ $lessonContent->fetch('fields.title') }}"
-        song-artist="{{ $lessonContent->fetch('fields.artist') }}"
-        song-album="{{ $lessonContent->fetch('fields.album') }}"
-        song-meta="{{ implode(', ', $lessonContent->fetch('*fields.style.value', [])) }}"
-        :has-instrumentless="{{ json_encode(boolval($lessonContent->fetch('instrumentless'))) }}"
-        lesson-progress="{{ $lessonContent->fetch('progress_percent', 0) }}"
-        :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-        :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
-        :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-        :content-id="{{ $lessonContent->fetch('id') }}"
-        :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-        :assignments="{{ json_encode($formattedAssignments) }}"
-        :related-lessons="{{ $relatedLessons }}"
-        :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
-        :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
-    ></song>
+    <page-loader 
+        page="song"
+    >
+        <template #loading>
+            <song-skeleton></song-skeleton>
+        </template>
+        <template #error>
+            <h1 class="tw-text-white">There was an error loading this page</h1>
+        </template>
+        <template #page="{ pageData }">
+            <song
+                thumbnail-url="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
+                song-title="{{ $lessonContent->fetch('fields.title') }}"
+                song-artist="{{ $lessonContent->fetch('fields.artist') }}"
+                song-album="{{ $lessonContent->fetch('fields.album') }}"
+                song-meta="{{ implode(', ', $lessonContent->fetch('*fields.style.value', [])) }}"
+                :has-instrumentless="{{ json_encode(boolval($lessonContent->fetch('instrumentless'))) }}"
+                lesson-progress="{{ $lessonContent->fetch('progress_percent', 0) }}"
+                :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
+                :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
+                :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
+                :content-id="{{ $lessonContent->fetch('id') }}"
+                :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
+                :assignments="{{ json_encode($formattedAssignments) }}"
+                :related-lessons="{{ $relatedLessons }}"
+                :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
+                :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
+            ></song>
+        </template>
+    </page-loader>
 
 @endsection
