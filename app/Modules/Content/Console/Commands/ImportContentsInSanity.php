@@ -53,7 +53,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'creativity' => ContentCreativity::class,
             'theory' => ContentTheory::class,
             'topic' => ContentTopic::class,
-            'genre' => ContentGenre::class,
+            'genre' => ContentStyle::class,
             'gear' => ContentGears::class,
         ];
         $permissions = $this->getPermissions();
@@ -155,7 +155,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 'published_on'     => $result->published_on,
                 'show_in_new_feed' => $result->show_in_new_feed == 1,
                 "web_url_path"     => '/' . $result->brand . '/' . $contentType . '/' . $result->slug . '/' . $result->id,
-                "popularity"       => $result->popularity
+                "popularity"       => $result->popularity,
+                'child_count'=> $result->child_count
             ];
             if($result->sort != 0) {
                 $songs[$id]['sort'] = $result->sort;
@@ -316,7 +317,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     if ($video) {
                         $songs[$id]['video']['type']        = $video['type'];
                         $songs[$id]['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
-                        $songs[$id]['length_in_second']     = (int)$video['length_in_seconds'];
+                        $songs[$id]['length_in_seconds']     = (int)$video['length_in_seconds'];
                     }
                     $imported = true;
                 }
@@ -404,6 +405,21 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     }
                 }
             }
+
+            $contentGenres = ContentStyle::query()->where('content_id', '=', $result->id)->get();
+            foreach ($contentGenres as $contentGenre) {
+                $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
+               // if(isset($genre['genre_'.strtolower($name)])) {
+               // $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
+                if (isset($extraData['genre']['genre_' . strtolower($name)])) {
+                    $songs[$id]["genre"][] = [
+                        "_type" => "reference",
+                        "_ref"  => 'genre_' . strtolower($name),
+                        "_weak" => false
+                    ];
+                }
+            }
+
             $contentInstructors = ContentInstructor::with('instructor')->select('instructor_id')->where('content_id', '=', $result->id)->groupBy('instructor_id')->get();
             foreach ($contentInstructors as $contentInstructor) {
                 if ($contentInstructor->instructor) {
