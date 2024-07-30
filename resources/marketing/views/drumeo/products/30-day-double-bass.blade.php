@@ -698,15 +698,14 @@
                 <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
                     style="background-color:#00101d;">
                     <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
-                    <h2 class="text-center sm:text-left"><strong>El Estepario Siberiano</strong></h2>
-                    <h6 class="leading-normal mt-4 lg:mt-6">Estepario Siberiano has pushed the boundaries of drumming.
+                    <h2 class="text-center sm:text-left"><strong>Samus Paulicelli<br> (aka 66Samus)</strong></h2>
+                    <h6 class="leading-normal mt-4 lg:mt-6">66Samus is the hero the metal community deserves.
                         <br><br>
-                        He’s inspired millions of people with his dedication, talent, and innovation. He’s created viral
-                        videos performing complex 4-way patterns with control. And he always applies these patterns in a
-                        musical context.
+                        His world-class double bass work and infectious sense of humor have inspired millions of drummers and garnered +200 million views on his YouTube Channel. And more than entertainment, Samus is a renowned educator.
                         <br><br>
-                        Estepario is the perfect teacher to help you improve your drum set independence so you can unlock
-                        your creativity on the kit.
+                        His beginner double bass videos have become go-to resources for drummers of all levels looking to learn drumming’s most coveted skill.
+                        <br><br>
+                        You’re in good <s class="opacity-70">feet</s> hands with 66Samus.
                     </h6>
                     <div class="flex justify-between text-center mt-7 lg:mt-10">
                         <div class="">
@@ -714,28 +713,46 @@
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
                                 alt="tiktok icon">
-                            <h3 class="mt-2"><strong>4M</strong></h3>
+                            <h3 class="mt-2"><strong>463K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
-                        </div>
-                        <div class="">
-                            <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
-                                alt="youtube icon">
-                            <h3 class="mt-2"><strong>810M</strong></h3>
-                            <p class="uppercase opacity-70 text-sm">views</p>
                         </div>
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
                                 alt="insta icon">
-                            <h3 class="mt-2"><strong>4M</strong></h3>
+                            <h3 class="mt-2"><strong>368K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
+                        </div>
+                        <div class="">
+                            <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
+                                alt="youtube icon">
+                            <h3 class="mt-2"><strong>218M</strong></h3>
+                            <p class="uppercase opacity-70 text-sm">views</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
+        <div class="container max-w-5xl mx-auto">
+            No pedal? No problem.
+            <p class="leading-tight">The right tools are essential to your craft.
+            <br><br>
+            That’s why we’ve partnered with Pearl to bring you the highest-rated beginner double bass pedal bundled with 30-Day Double Bass.
+                <br><br>
+            The Pearl P932 Demonator has premium-quality features at an entry-level price point:</p>
+            <ul>
+                <li><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
+                <li><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
+                <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
+            </ul>
+            <p>Here’s what people are saying about the Pearl Demonator Double Pedal:</p>
+
         </div>
     </section>
 
@@ -748,17 +765,22 @@
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
-                    guaranteed.</strong></h2>
+            <div class="flex justify-center items-center">
+                <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png">
+                <div class="sm:pr-8">
+                    <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
+                            guaranteed.</strong></h2>
 
-            <h6 class="leading-normal">30-Day Independence is a NEW way to learn the drums – and for less than a month of
-                private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
-                <br><br>
-                We think it’ll be your favorite drum course ever –
-                <br><br>
-                So even though it’s only a month, you’ll get three full months to go through everything and make sure it was
-                right for you. If not, just contact our friendly support team for a full refund.
-            </h6>
+                    <h6 class="leading-normal">30-Day Double Bass is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
+                        <br><br>
+                        We think it’ll be your favorite drum course ever –
+                        <br><br>
+                        So even though it’s only a month, you’ll get three full months to go through everything and make sure it was right for you. If not, just contact our friendly support team for a full refund.
+                    </h6>
+                </div>
+
+            </div>
         </div>
     </section>
     <div id="final" class="anchor"></div>
