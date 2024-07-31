@@ -25,7 +25,8 @@ const props = defineProps({
 });
 
 const alphabeticallyGroupedArtists = (artists) => {
-    const grouped = artists.reduce((acc, artist) => {
+
+    const grouped = artists.sort((a, b) => a.name.localeCompare(b.name)).reduce((acc, artist) => {
         const firstChar = artist.name.charAt(0).toUpperCase();
         const letter = firstChar.match(/[A-Z]/) ? firstChar : '#';
         if (!acc[letter]) {
