@@ -253,6 +253,7 @@ class RailcontentV2DataSyncingService
         }
 
         $this->contentService->fillParentContentDataColumnForContentIds($contentIds);
+        $this->contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
     }
 
     /**
