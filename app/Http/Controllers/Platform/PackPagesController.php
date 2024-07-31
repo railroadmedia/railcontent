@@ -334,7 +334,7 @@ class PackPagesController extends Controller
 
         foreach ($parentChildren as $index => $parentChild) {
             if ($parentChild['id'] == $packBundleLessonId) {
-                $lesson = $parentChild;
+                $lesson = clone $parentChild;
             }
             if ($parentChild['status'] == ContentService::STATUS_UNLISTED && $parentChild['id'] != $packBundleLessonId) {
                 unset($parentChildren[$index]);

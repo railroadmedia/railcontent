@@ -36,7 +36,6 @@ Route::domain('{musoraDomain}')
         Route::get('playlists', [MarketingController::class, 'playlists']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
-        Route::get('playlists', [MarketingController::class, 'playlists']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
         Route::get('method', [MarketingController::class, 'method']);
         Route::get('songs', [MarketingController::class, 'songs']);
@@ -44,6 +43,7 @@ Route::domain('{musoraDomain}')
         Route::get('choose-plan', [MarketingController::class, 'choosePlan']);
         Route::get('choose-your-trial-month', [MarketingController::class, 'choosePlanMonth']);
         Route::get('thank-you', [MarketingController::class, 'thankYou']);
+        Route::get('the-playlist', [MarketingController::class, 'thePlaylist']);
 
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
