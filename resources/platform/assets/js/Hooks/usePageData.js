@@ -12,7 +12,7 @@ export function usePageData(props) {
     const fields = [
         '_id',
         'title',
-        'thumbnail_url',
+        '"thumbnail_url": thumbnail.asset->url', 
         'style',
         'artist',
         'album',
@@ -26,7 +26,6 @@ export function usePageData(props) {
 
     //Methods
     const fetchPageData = async () => {
-        console.log('props.contentId', contentId)
         try {
             const response = await fetchSongById(contentId, fields);
             data.value = await response;

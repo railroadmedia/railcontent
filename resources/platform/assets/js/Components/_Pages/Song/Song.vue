@@ -84,6 +84,10 @@
 
     //Props
     const props = defineProps({
+        pageData: {
+            type: Object,
+            required: true,
+        },
         thumbnailUrl: String,
         songTitle: String,
         songArtist: String,
@@ -102,32 +106,7 @@
         reportLogo: String,
     });
 
-    onBeforeMount( ()=> {
-        //FETCH SONG BY ID
-
-        // const documentId = props.contentId;
-        // const fields = [
-        //     '_id',
-        //     'title',
-        //     'thumbnail_url',
-        //     'style',
-        //     'artist',
-        //     'album',
-        //     'lesson-progress',
-        //     'like_count',
-        //     'is_liked_by_current_user',
-        //     'is_added_to_primary_playlist',
-        //     'instrumentless',
-        //     '"soundslice_slug": assignments[0]{soundsliceSlug}',
-        //     'resources[]{resource_url, resource_name}',
-        // ];
-        // try {
-        //     isLoading.value = true;
-        //     song.value = fetchSongById(documentId, fields);
-        // } catch (error) {
-        //     console.error('Error fetching song:', error);
-        // } finally {
-        //     isLoading.value = false;
-        // }
+    onBeforeMount(()=> {
+        console.log('pageData', props.pageData)
     })
 </script>

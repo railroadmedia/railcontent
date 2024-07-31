@@ -33,7 +33,7 @@
         </template>
         <template #page="{ pageData }">
             <song
-                thumbnail-url="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
+                :thumbnail-url="pageData?.thumbnail_url"
                 song-title="{{ $lessonContent->fetch('fields.title') }}"
                 song-artist="{{ $lessonContent->fetch('fields.artist') }}"
                 song-album="{{ $lessonContent->fetch('fields.album') }}"
