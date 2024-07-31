@@ -1119,9 +1119,9 @@
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&locked=true"
                         @else
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         @endif
                         >
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">

@@ -63,7 +63,7 @@
             <template v-if="continueData.data.length">
                 <section class="dark:tw-text-white tw-mb-4">
                     <!-- Section Title -->
-                    <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
+                    <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between">
                         <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             <h3 class="tw-font-bold tw-text-xl md:tw-text-2xl">Continue</h3>
                         </a>
@@ -74,16 +74,14 @@
                             See All
                         </a>
                     </div>
-                    <div class="tw-px-4 lg:tw-px-0">
-                        <transition appear name="fade">
-                            <CatalogueCardContainer
-                                :is-mini-view="true"
-                                :pre-loaded-content="continueData.data"
-                                :show-dropdown="true"
-                                :no-skeleton="true"
-                            />
-                        </transition>
-                    </div>
+                    <transition appear name="fade">
+                        <CatalogueCardContainer
+                            :is-mini-view="true"
+                            :pre-loaded-content="continueData.data"
+                            :show-dropdown="true"
+                            :no-skeleton="true"
+                        />
+                    </transition>
                 </section>
             </template>
         </section>
