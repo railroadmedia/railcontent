@@ -5,8 +5,12 @@
 @endsection
 
 @section('content')
-    <artists
-        :artists="{{ json_encode($artists) }}"
-    >
-    </artists>
+    <page-loader page="artists">
+        <template #loading>
+        </template>
+        <template #page="{ pageData }">
+            <artists :artists="pageData"></artists>
+        </template>
+    </page-loader>
+
 @endsection
