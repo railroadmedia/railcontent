@@ -1,6 +1,6 @@
 <template>
-    <div class="tw-w-full">
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-[30px]">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-mb-[30px]">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Account' } ]"/>
             <PageHeader
@@ -22,92 +22,85 @@
         <!-- Page Pills -->
         <PillNav :pills="accountPages"/>
 
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
-            <!-- Page Content -->
-            <div class="tw-flex tw-flex-col tw-grow">
-                <div v-if="showUpgrade" class="tw-px-0 md:tw-px-6 tw-mt-6">
-                    <MembershipUpgradeBanner />
-                </div>
-
-                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
-                    <div class="tw-flex tw-flex-col tw-grow">
-
-                        <!-- Membership Access -->
-                        <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-6">
-                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                <h2 class="tw-font-bold tw-text-xl dark:tw-text-white tw-mb-3">Your Membership Access</h2>
-                            </div>
-                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                <div class="tw-flex tw-flex-col">
-                                    <p class="tw-capitalize"><span class="tw-font-bold">{{ userMembershipLevel }}</span> Membership</p>
-                                    <template v-if="userMembershipLevel !== 'lifetime' && !isLifetimeMember">
-                                        <p v-if="userMembershipLevel === 'plus' || userMembershipLevel === 'basic'">
-                                            Valid Until: {{ userMembershipExpirationFormatted }}
-                                        </p>
-                                    </template>
-                                    <p v-else>Never Expires</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- User Packs -->
-                        <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
-                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                <h2 class="tw-font-bold tw-text-xl dark:tw-text-white">Your Other Products</h2>
-                            </div>
-                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                <div class="tw-flex tw-flex-col">
-                                    <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
-                                        <li v-for="(product, i) in userPacks" :key="i">{{ product }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recharge iFrame -->
-                        <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
-                            <iframe id="rcPortal"
-                                    :src="portalUrl"
-                                    width="100%"
-                                    height="850px"
-                            ></iframe>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Legacy Media Player -->
-                <div class="tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">
-                        Would you like to use our legacy video player?
-                    </h3>
-                    <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
-                        Our video player may have compatibility issues with older devices and operating systems. We recommend
-                        switching to our legacy video player if you are experiencing playback issues.
-                    </p>
-                    <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
-                        <MuToggle
-                            :brand="brand"
-                            v-model="formData.use_legacy_video_player"
-                            :disabled="formProcessing"
-                            id="useLegacyPlayer"
-                            input-label="Use legacy video player."
-                            name="use_legacy_video_player"
-                            @change="submitUserForm"
-                        />
-                    </form>
-                </div>
-
-                <!-- Delete Account UI -->
-                <section class="tw-w-full tw-px-0 md:tw-px-6 tw-py-6">
-                    <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
-                        Delete Account
-                    </h3>
-                    <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
-                    <MuButton @click="modalOpen = true">Delete Account</MuButton>
-                </section>
-                <DeleteAccountModal v-if="modalOpen" @onCloseModal="modalOpen = false"/>
-            </div>
+        <!-- Page Content -->
+        <div v-if="showUpgrade" class="tw-mt-[30px]">
+            <MembershipUpgradeBanner />
         </div>
+
+        <section class="tw-flex tw-flex-col tw-mt-[30px]">
+            <!-- Membership Access -->
+            <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-[30px]">
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <h2 class="tw-font-bold tw-text-xl dark:tw-text-white tw-mb-3">Your Membership Access</h2>
+                </div>
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <div class="tw-flex tw-flex-col">
+                        <p class="tw-capitalize"><span class="tw-font-bold">{{ userMembershipLevel }}</span> Membership</p>
+                        <template v-if="userMembershipLevel !== 'lifetime' && !isLifetimeMember">
+                            <p v-if="userMembershipLevel === 'plus' || userMembershipLevel === 'basic'">
+                                Valid Until: {{ userMembershipExpirationFormatted }}
+                            </p>
+                        </template>
+                        <p v-else>Never Expires</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Packs -->
+            <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <h2 class="tw-font-bold tw-text-xl dark:tw-text-white">Your Other Products</h2>
+                </div>
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <div class="tw-flex tw-flex-col">
+                        <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
+                            <li v-for="(product, i) in userPacks" :key="i">{{ product }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recharge iFrame -->
+            <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
+                <iframe id="rcPortal"
+                        :src="portalUrl"
+                        width="100%"
+                        height="850px"
+                ></iframe>
+            </div>
+        </section>
+
+        <!-- Legacy Media Player -->
+        <div class="tw-py-[30px] tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+            <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">
+                Would you like to use our legacy video player?
+            </h3>
+            <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
+                Our video player may have compatibility issues with older devices and operating systems. We recommend
+                switching to our legacy video player if you are experiencing playback issues.
+            </p>
+            <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
+                <MuToggle
+                    :brand="brand"
+                    v-model="formData.use_legacy_video_player"
+                    :disabled="formProcessing"
+                    id="useLegacyPlayer"
+                    input-label="Use legacy video player."
+                    name="use_legacy_video_player"
+                    @change="submitUserForm"
+                />
+            </form>
+        </div>
+
+        <!-- Delete Account UI -->
+        <section class="tw-my-[30px]">
+            <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
+                Delete Account
+            </h3>
+            <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
+            <MuButton @click="modalOpen = true">Delete Account</MuButton>
+        </section>
+        <DeleteAccountModal v-if="modalOpen" @onCloseModal="modalOpen = false"/>
     </div>
 </template>
 

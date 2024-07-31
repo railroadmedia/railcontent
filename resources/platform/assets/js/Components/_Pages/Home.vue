@@ -78,12 +78,10 @@
             :my-list-url="`/${brand}/playlists`"
         />
 
-        <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
-            <!-- Live section -->
-            <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
-        </div>
+        <!-- Live section -->
+        <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
+            :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
+            :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
 
         <!-- Upcoming section -->
         <MiniCatalogueSection
