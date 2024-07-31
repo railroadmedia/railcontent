@@ -130,7 +130,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             ->where('railcontent_content.status', '!=', 'deleted')
             ->where('railcontent_content.brand', '=', $this->argument('brand'))
             //->where('railcontent_content.id','=',198099)
-            ->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281])->get();
+            ->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875])->get();
 
         $songs = [];
         foreach ($results as $result) {
@@ -155,11 +155,13 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 'published_on'     => $result->published_on,
                 'show_in_new_feed' => $result->show_in_new_feed == 1,
                 "web_url_path"     => '/' . $result->brand . '/' . $contentType . '/' . $result->slug . '/' . $result->id,
-                "popularity"       => $result->popularity,
-                'child_count'=> $result->child_count
+                "popularity"       => $result->popularity
             ];
             if($result->sort != 0) {
                 $songs[$id]['sort'] = $result->sort;
+            }
+            if($result->child_count != 0) {
+                $songs[$id]['child_count'] = $result->child_count;
             }
             if (isset($this->difficultyMapping[$difficulty])) {
                 $songs[$id]["difficulty_string"] = $this->difficultyMapping[$difficulty];
