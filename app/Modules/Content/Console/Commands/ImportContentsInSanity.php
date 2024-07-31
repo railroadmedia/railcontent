@@ -445,7 +445,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                             "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
                             "_weak" => false
                         ];
-                    } else {
+                    } elseif ($hierarchy->child->type == 'assignment') {
+                        unset($songs[$id]['child_count']);
                         $songs[$id]["assignment"][] = [
                             'assignment_title'             => $hierarchy->child->title,
                             'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
@@ -455,6 +456,18 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     }
                 }
             }
+//            $contentHierarchyForChild = ContentHierarchy::with('parent')->where('child_id', '=', $result->id)->get();
+//            foreach ($contentHierarchyForChild as $hierarchy) {
+//                if ($hierarchy->parent) {
+//                    if ($hierarchy->parent->status == 'published') {
+//                        $songs[$id]["parent"] = [
+//                            "_type" => "reference",
+//                            "_ref"  => $hierarchy->parent->type . '_' . $hierarchy->parent->id,
+//                            "_weak" => true
+//                        ];
+//                    }
+//                }
+//            }
         }
         $directory = resource_path() . '/sanitystudio';
         if ($deleteOldDocuments == "true") {
