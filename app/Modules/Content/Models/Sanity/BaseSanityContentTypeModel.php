@@ -45,7 +45,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
             $defaultFields[] = new Field(FieldType::Array, 'license', 'License Information', of: $licenseReference, group:$group);
         }
         if ($includeDescription) {
-            new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group);
+            $defaultFields[] = new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group);
         }
         return $defaultFields;
     }
