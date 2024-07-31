@@ -6,13 +6,6 @@
 
 @section('content')
 
-    {{-- Session Token for Railtracker progress tracking --}}
-    {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
-    {{--
-        "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
-        "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
-    --}}
-
     @php
         $formattedAssignments = [];
         foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
@@ -33,12 +26,10 @@
 
     <page-loader 
         page="song"
+        :content-id="{{ $lessonContent->fetch('id') }}"
     >
         <template #loading>
             <song-skeleton></song-skeleton>
-        </template>
-        <template #error>
-            <h1 class="tw-text-white">There was an error loading this page</h1>
         </template>
         <template #page="{ pageData }">
             <song

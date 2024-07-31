@@ -28,9 +28,7 @@
             </div>
 
             <!-- Comments Section -->
-            <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
-                <Comments :is-loading="true" />
-            </div>
+            <CommentSkeleton />
 
         </div>
     </div>
@@ -38,7 +36,7 @@
 <script setup>
     import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
     import SongCardSkeleton from '@collections/Cards/List/SongCard/SongCardSkeleton';
-    import Comments from '@vuesora/views/comments/Comments.vue'
+    import CommentSkeleton from '@collections/SkeletonLoader/CommentSkeleton.vue'
 
     const props = defineProps({
         isLoading: Boolean,
