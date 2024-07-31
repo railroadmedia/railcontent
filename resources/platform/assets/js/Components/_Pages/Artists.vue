@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full">
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8  tw-pb-8">
             <Breadcrumb :breadcrumbs="[{ title: 'Songs', url: 'songs'  },{ title: 'Artists' }]" />
             <PageHeader title="Artists" />
             <h1 class="tw-py-4 md:tw-py-8 tw-text-2xl tw-font-bold dark:tw-text-white">{{ numberOfArtists }} Artists</h1>
