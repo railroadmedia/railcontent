@@ -5,7 +5,7 @@
 @endphp
 
 <div @if(!empty($soundslice)) id="{{ $soundslice }}" @endif
-class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif" x-data="{ open: {{ $num == 1 ? 'true' : 'false' }}, completed: false }">
+class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif" x-data="{ open: {{ $num == 1 ? 'true' : 'false' }} }">
     <div class="w-full flex flex-col sm:flex-row sm:justify-between">
         <div class="flex flex-row w-full items-center md:w-1/2"> 
             @if(!empty($soundslice))
@@ -32,45 +32,46 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
         <div class="w-full pt-4 md:pt-0 sm:w-1/2 md:w-5/12 flex flex-col md:flex-row">
         @if(!empty($pdfURL) || !empty($mp3URL) || !empty($imgURL))
             @if(!empty($vimeo))
-            <button class="w-full smaller join border-black border mt-3 block mx-auto text-center bg-white text-black" data-open="{{ $vimeo }}Modal">
+            <button class="w-full smaller join border-black border block mx-auto text-center bg-white text-black" data-open="{{ $vimeo }}Modal">
                 PRACTICE
             </button>
                 <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" data-open="{{ $vimeo }}Modal"></i>
             @endif
             @if(!empty($soundslice))
-            <button class="smaller join border-black border mt-3 block mx-auto text-center bg-white text-black" x-on:click="soundsliceModal{{$num}} = true">
+            <button class="smaller join border-black border block mx-auto text-center bg-white text-black" x-on:click="soundsliceModal{{$num}} = true">
                 PRACTICE
             </button>
             @endif
             <i class="fa-light fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
         @else
             @if(!empty($soundslice))
-            <button class="w-full smaller join border-black border-2 mt-3 block text-center bg-white text-black mx-2" x-on:click="soundsliceModal{{$num}} = true">
+            <button class="w-full smaller join border-black border-2 block text-center bg-white text-black m-2" x-on:click="soundsliceModal{{$num}} = true" style="padding:13px 5%">
                 PRACTICE
             </button>
           <button 
-                class="w-full smaller join border-{{$theme}} border-2 mt-3 block text-center cursor-none bg-white text-{{$theme}} mx-2" 
+                class="w-full smaller join border-{{$theme}} border-2 block text-center cursor-pointer bg-white text-{{$theme}} m-2" 
                 x-data="{ completed: false }" 
                 :class="{ 'bg-{{$theme}} text-white': completed, 'bg-white text-{{$theme}}': !completed }" 
-                @click="completed = !completed">
+                @click="completed = !completed" style="padding:13px 5%">
                 COMPLETE
             </button>
             @endif
         @endif 
         </div>  
+        
     </div>
 
-    <!-- Dropdown soundslice -->
-<div x-show="open" @click="open = false" class="mt-2 text-center">
-    <iframe 
-        class="w-full md:w-1/2" 
-        src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0' }}"
-        frameborder="0" 
-        allowfullscreen 
-        allow="autoplay" 
-        title="{{ $soundslice }}">
-    </iframe>
-</div>
+        <!-- Dropdown soundslice -->
+    <div x-show="open" @click="open = false" class="mt-2 text-center h-80">
+        <iframe 
+            class="w-full h-full" 
+            src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0' }}"
+            frameborder="0" 
+            allowfullscreen 
+            allow="autoplay" 
+            title="{{ $soundslice }}">
+        </iframe>
+    </div>
   
 
     @if(!empty($pdfURL) || !empty($mp3URL) || !empty($imgURL))
