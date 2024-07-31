@@ -2,7 +2,9 @@
 
 namespace App\Modules\Content\Models\Sanity;
 
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
  * Defines the schema structure for a Rudiment document type in Sanity.
@@ -17,7 +19,13 @@ class Rudiment extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Rudiments', withSheetMusicThumb: true, withGear: true, withResources: true);
+        parent::__construct(self::getName(), 'Rudiments',  withResources: true);
+
+        $detailsGroup = new Group('editorFields', 'Details', true);
+        $this->addFields([
+                             new Field(FieldType::URL, 'sheet_music_thumbnail_url', 'sheet_music_thumbnail_url', group: $detailsGroup),
+                             new Field(FieldType::String, 'gear', 'Instrument', group: $detailsGroup)
+                         ]);
     }
 
 

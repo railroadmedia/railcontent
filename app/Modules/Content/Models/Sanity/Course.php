@@ -24,8 +24,7 @@ class Course extends BaseSanityModel
 {
     public function __construct()
     {
-        $childReference = new Reference([['type' => 'course-part']], options: ['rox_fied' => "document.title"]);
-        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+        $childReference = new Reference([['type' => 'course-part']]);
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);

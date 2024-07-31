@@ -13,6 +13,7 @@ import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import 
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
+import ResolveParentReference from './components/ResolveParentReference';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
 import { musoraStructure } from './musoraStructure';
@@ -26,7 +27,8 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
-    OpenAiInput: OpenAiInput
+    OpenAiInput: OpenAiInput,
+    ResolveParentReference: ResolveParentReference
 };
 
 const icons = {

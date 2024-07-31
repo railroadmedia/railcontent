@@ -21,14 +21,12 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class LessonTemplate extends BaseSanityModel
+abstract class LessonTemplate extends BaseSanityModel
 {
     public function __construct(
         public string $name,
         public string $title,
-        public bool $withResources = false,
-        public bool $withSheetMusicThumb = false,
-        public bool $withGear = false
+        public bool $withResources = false
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -123,18 +121,6 @@ class LessonTemplate extends BaseSanityModel
             ]);
         }
 
-        if($this->withSheetMusicThumb) {
-            $fields = array_merge($fields, [
-                new Field(FieldType::URL, 'sheet_music_thumbnail_url', 'sheet_music_thumbnail_url', group: $detailsGroup)
-            ]);
-        }
-
-        if($this->withGear) {
-            $fields = array_merge($fields, [
-                new Field(FieldType::String, 'gear', 'Gear', group: $detailsGroup)
-            ]);
-
-        }
         $fields = array_merge($fields, [
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
@@ -145,8 +131,10 @@ class LessonTemplate extends BaseSanityModel
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);
     }
 
-    public static function getName(): string
+    protected function addFields(array $fields): void
     {
-        // TODO: Implement getName() method.
+        foreach ($fields as $field) {
+            $this->fields[] = $field;
+        }
     }
 }
