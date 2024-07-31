@@ -7,7 +7,7 @@
         <slot name="page" :pageData="data"></slot>
       </div>
     </div>
-</template>  
+</template>
 <script setup>
     import { ref, onMounted } from 'vue';
     import { usePageData } from '@hooks/usePageData';
@@ -16,7 +16,7 @@
 
     const userStore = useUserStore();
     const { brand, userId, token } = storeToRefs(userStore);
-    
+
     const props = defineProps({
         page: {
             type: String,
@@ -25,10 +25,9 @@
         },
         contentId: {
             type: String,
-            required: true,
+            required: false,
         },
     });
-    
+
     const { data, error, isLoading } = usePageData(props, brand.value, userId.value, token.value);
 </script>
-  

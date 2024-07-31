@@ -1,6 +1,6 @@
 // hooks/usePageData.js
 import { ref } from 'vue';
-import { fetchSongById, fetchRelatedSongs, fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/songService';
+import { fetchSongById, fetchRelatedSongs, fetchCurrentSongComplete, fetchAllCompletedStates, fetchArtists } from '@services/songService';
 
 export function usePageData(props, brand, userId, token) {
   const data = ref(null);
@@ -9,7 +9,7 @@ export function usePageData(props, brand, userId, token) {
   const contentId = props.contentId;
 
   // Methods
-  const fetchPageData = async () => {
+  const fetchSongsPageData = async () => {
     try {
       // Fetch the main song data, related songs, and current song completion status in parallel
       const [songResponse, relatedSongsResponse, currentSongCompleteResponse] = await Promise.all([
@@ -61,7 +61,22 @@ export function usePageData(props, brand, userId, token) {
     }
   };
 
-  fetchPageData();
+    const fetchArtistPageData = async () => {
+        const result = await fetchArtists(brand);
+        if (result){
+            data.value = result;
+            isLoading.value = false;
+        }
+    }
+
+
+  switch(props.page){
+      case 'songs': fetchSongsPageData();
+      break;
+      case 'artists': fetchArtistPageData();
+      break;
+  }
+
 
   return { data, error, isLoading };
 }

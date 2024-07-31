@@ -7,8 +7,8 @@
             <div class="tw-mx-auto tw-columns-xs">
                 <ul class="tw-list-disc tw-list-inside dark:tw-text-white tw-mb-1" v-for="(group, letter) in groupedArtists" :key="letter">
                     <h2 class="tw-font-bold tw-text-xl">{{ letter }}</h2>
-                    <li v-for="artist in group" :key="artist.url" class="tw-m-2">
-                        <a :href="artist.url" class="tw-text-[#00101D] dark:tw-text-white hover:tw-underline">{{ artist.name }}</a>
+                    <li v-for="artist in group" :key="artist.name" class="tw-m-2">
+                        <a :href="getURL(artist)" class="tw-text-[#00101D] dark:tw-text-white hover:tw-underline">{{ artist.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -26,7 +26,8 @@ const props = defineProps({
 
 const alphabeticallyGroupedArtists = (artists) => {
     const grouped = artists.reduce((acc, artist) => {
-        const letter = artist.name[0].match(/\d/) ? '#' : artist.name[0].toUpperCase();
+        const firstChar = artist.name.charAt(0).toUpperCase();
+        const letter = firstChar.match(/[A-Z]/) ? firstChar : '#';
         if (!acc[letter]) {
             acc[letter] = [];
         }
@@ -37,10 +38,15 @@ const alphabeticallyGroupedArtists = (artists) => {
     Object.keys(grouped).forEach(letter => {
         grouped[letter].sort((a, b) => a.name.localeCompare(b.name));
     });
-
     return grouped;
 };
 
+const getURL = (artist) => {
+    return encodeURI('artists/' + artist.name + '?included_fields[]=type,Song');
+}
+
 const groupedArtists = computed(() => alphabeticallyGroupedArtists(props.artists));
 const numberOfArtists = computed(() => props.artists.length);
+
+
 </script>
