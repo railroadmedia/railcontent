@@ -1551,7 +1551,7 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        //-------------------------------------------
+        //--------------------------------------------------
         // singeo
         [
             'path' => '/customer-io/submit-email-form-rc',
@@ -1762,6 +1762,25 @@ return [
             'method' => 'post',
             'form_name' => 'Blog Signup',
             'brand' => 'singeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        //--------------------------------------------------
+        // musora
+        [
+            'path' => '/customer-io/submit-email-form-rc',
+            'method' => 'post',
+            'form_name' => 'The Playlist - Musora Newsletter',
+            'brand' => 'musora',
 
             'input_data_map' => [
                 'email' => 'email',
