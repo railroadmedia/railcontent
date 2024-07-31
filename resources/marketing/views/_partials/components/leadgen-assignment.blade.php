@@ -27,8 +27,22 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
             <div class="pl-3 sm:pl-4 max-w-2xl max-w-2xl mr-auto">
                 <p class="flex-grow"><strong>{!! $title !!}</strong></p>
             </div>
+            
         </div>
-       
+        <!-- Dropdown soundslice mobile-->
+        <div class="sm:hidden"> 
+                <div x-show="open" @click="open = false" class="h-80 w-full">
+                <iframe 
+                    class="w-full h-full" 
+                    src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0' }}"
+                    frameborder="0" 
+                    allowfullscreen 
+                    allow="autoplay" 
+                    title="{{ $soundslice }}">
+                </iframe>
+            </div>
+        </div>
+
         <div class="w-full pt-4 md:pt-0 sm:w-1/2 md:w-5/12 flex flex-col md:flex-row">
         @if(!empty($pdfURL) || !empty($mp3URL) || !empty($imgURL))
             @if(!empty($vimeo))
@@ -45,11 +59,11 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
             <i class="fa-light fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
         @else
             @if(!empty($soundslice))
-            <button class="w-full smaller join border-black border-2 block text-center bg-white text-black m-2" x-on:click="soundsliceModal{{$num}} = true" style="padding:13px 5%">
+            <button class="w-full smaller join border-black border block text-center bg-white text-black m-2" x-on:click="soundsliceModal{{$num}} = true" style="padding:13px 5%">
                 PRACTICE
             </button>
           <button 
-                class="w-full smaller join border-{{$theme}} border-2 block text-center cursor-pointer bg-white text-{{$theme}} m-2" 
+                class="w-full smaller join border-{{$theme}} border block text-center cursor-pointer bg-white text-{{$theme}} m-2" 
                 x-data="{ completed: false }" 
                 :class="{ 'bg-{{$theme}} text-white': completed, 'bg-white text-{{$theme}}': !completed }" 
                 @click="completed = !completed" style="padding:13px 5%">
@@ -60,19 +74,19 @@ class="assignment-row border-gray-100 border-t-2 py-4 sm:px-3 @if(!empty($defaul
         </div>  
         
     </div>
-
-        <!-- Dropdown soundslice -->
-    <div x-show="open" @click="open = false" class="mt-2 text-center h-80">
-        <iframe 
-            class="w-full h-full" 
-            src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0' }}"
-            frameborder="0" 
-            allowfullscreen 
-            allow="autoplay" 
-            title="{{ $soundslice }}">
-        </iframe>
+    <div class="hidden sm:block"> 
+            <!-- Dropdown soundslice -->
+        <div x-show="open" @click="open = false" class="mt-2 text-center h-80 w-full">
+            <iframe 
+                class="w-full h-full" 
+                src="{{ 'https://www.soundslice.com/slices/' . $soundslice . '/embed/?api=1&scroll_type=2&branding=0' }}"
+                frameborder="0" 
+                allowfullscreen 
+                allow="autoplay" 
+                title="{{ $soundslice }}">
+            </iframe>
+        </div>
     </div>
-  
 
     @if(!empty($pdfURL) || !empty($mp3URL) || !empty($imgURL))
         <div class="w-full dropdown px-2 invisible opacity-0 h-auto max-h-0 overflow-hidden transition-all duration-300">
