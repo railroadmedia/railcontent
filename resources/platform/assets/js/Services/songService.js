@@ -6,10 +6,17 @@ const version = '2021-06-07'; // API version
 
 
 // Fetch a Song by ID
-export async function fetchSongById(documentId, fields) {
-  if (!Array.isArray(fields)) {
-    throw new Error('fields must be an array');
-  }
+export async function fetchSongById(documentId) {
+  const fields = [
+    'title',
+    '"thumbnail_url": thumbnail.asset->url', 
+    '"style": genre[0]->name',
+    '"artist": artist->name',
+    'album',
+    'instrumentless',
+    'soundslice',
+    '"resources": resource[]{resource_url, resource_name}',
+  ];
 
   const query = `
     *[_type == "song" && railcontent_id == ${documentId}]{
@@ -77,29 +84,64 @@ export async function fetchArtists(brand) {
 export async function fetchRelatedSongs(brand, songId) {
   const query = `
     *[_type == "song" && railcontent_id == ${songId}]{
-      ...,
-      "relatedLessons": array::unique([
-        ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.artist->_id)]{
-          _id, 
-          title, 
-          railcontent_id, 
-          web_url_path, 
-          difficulty, 
-          difficulty_string,
-          "thumb": thumbnail.asset->url, 
-          "length": soundslice[0].soundslice_length_in_second, 
-          artist->
+      "data": array::unique([
+          ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.artist->_id)]{
+          "type": _type, 
+          "id": railcontent_id, 
+          "url": web_url_path, 
+          "published_on": published_on,
+          status,
+          "fields": [
+            {
+              "key": "title",
+              "value": title
+            },
+            {
+              "key": "artist",
+              "value": artist->name
+            },
+            {
+              "key": "difficulty",
+              "value": difficulty           
+            },
+            {
+              "key": "length_in_seconds",
+              "value": soundslice[0].soundslice_length_in_second
+            }
+          ],
+          "data": [{
+            "key": "thumbnail_url",
+            "value": thumbnail.asset->url
+          }]
         }[0...10]),
-        ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.genre[]->_id)]{
-          _id, 
-          title, 
-          railcontent_id, 
-          web_url_path, 
-          difficulty, 
-          difficulty_string,
-          "thumb": thumbnail.asset->url, 
-          "length": soundslice[0].soundslice_length_in_second, 
-          artist->
+          ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.genre[]->_id)]{
+          "type": _type, 
+          "id": railcontent_id, 
+          "url": web_url_path, 
+          "published_on": published_on,
+          status,
+          "fields": [
+            {
+              "key": "title",
+              "value": title
+            },
+            {
+              "key": "artist",
+              "value": artist->name
+            },
+            {
+              "key": "difficulty",
+              "value": difficulty           
+            },
+            {
+              "key": "length_in_seconds",
+              "value": soundslice[0].soundslice_length_in_second
+            }
+          ],
+          "data": [{
+            "key": "thumbnail_url",
+            "value": thumbnail.asset->url
+          }]
         }[0...10])
       ])[0...10]
     }
@@ -108,7 +150,7 @@ export async function fetchRelatedSongs(brand, songId) {
   //console.log("Generated GROQ Query:", query);
 
   const encodedQuery = encodeURIComponent(query);
-  const url = `https://${projectId}.api.sanity.io/v${version}/data/query/${dataset}?query=${encodedQuery}`;
+  const url = `https://${projectId}.apicdn.sanity.io/v${version}/data/query/${dataset}?query=${encodedQuery}`;
 
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -355,6 +397,51 @@ export async function fetchSongsInProgress(userId, brand, token) {
       return result;
     } else {
       console.log('result not json')
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+}
+
+//SONG IS COMPLETED BY CURRENT USER
+export async function fetchCurrentSongComplete(userId, content_id, token) {
+  const url = `/content/user_progress/${userId}?content_ids[]=${content_id}`;
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-CSRF-TOKEN': token
+  };
+  
+  try {
+    const response = await fetch(url, { headers });
+    const result = await response.json();
+    if(result){
+      return result[userId];
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+}
+
+//SONG IS COMPLETED BY CURRENT USER
+export async function fetchAllCompletedStates(userId, contentIds, token) {
+  const url = `/content/user_progress/${userId}?${contentIds.map(id => `content_ids[]=${id}`).join('&')}`;
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-CSRF-TOKEN': token
+  };
+
+  try {
+    const response = await fetch(url, { headers });
+    const result = await response.json();
+    if(result){
+      console.log('Completion states:', result);
+      return result;
+    } else {
+      console.log('result not json');
     }
   } catch (error) {
     console.error('Fetch error:', error);

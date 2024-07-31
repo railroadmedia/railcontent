@@ -9,6 +9,4 @@
         :artists="{{ json_encode($artists) }}"
     >
     </artists>
-
-
 @endsection

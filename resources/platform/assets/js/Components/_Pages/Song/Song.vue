@@ -38,7 +38,7 @@
                 </div>
 
                 <section class="tw-flex tw-flex-col tw-flex-wrap">
-                    <div v-for="(item, i) in relatedLessons.data" :key="i"
+                    <div v-for="(item, i) in relatedLessons" :key="i"
                          class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57] tw-inline">
                         <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
                     </div>
@@ -65,8 +65,7 @@
     </div>
 </template>
 <script setup>
-    import { ref, onBeforeMount} from 'vue';
-    import { fetchSongById } from '@services/songService';
+    import { ref, onBeforeMount } from 'vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '@stores/user';
     import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
@@ -74,20 +73,16 @@
     import Comments from '@vuesora/views/comments/Comments.vue'
     import CatalogueListElement from '@collections/Catalogue/CatalogueListElement';
 
-    //Pinia Data
+    // Pinia Data
     const userStore = useUserStore();
     const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin } = storeToRefs(userStore);
 
-    //Refs
+    // Refs
     const isLoading = ref(false);
     const song = ref(null);
 
-    //Props
+    // Props
     const props = defineProps({
-        pageData: {
-            type: Object,
-            required: true,
-        },
         thumbnailUrl: String,
         songTitle: String,
         songArtist: String,
@@ -102,11 +97,11 @@
         likeCount: [Number, String],
         assignments: Array,
         resources: Array,
-        relatedLessons: Object,
+        relatedLessons: Array,
         reportLogo: String,
     });
 
-    onBeforeMount(()=> {
-        console.log('pageData', props.pageData)
-    })
+    onBeforeMount(() => {
+        //console.log('Received lessonProgress prop:', props.lessonProgress);
+    });
 </script>
