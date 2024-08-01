@@ -474,7 +474,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF7FF">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0" loading="lazy"
+                <img class="h-24 sm:h-28 lg:h-36 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
                     alt="30-Day Double Bass With 66Samus Logo">
@@ -731,12 +731,12 @@
         </div>
     </section>
 
-    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
+    <section class="text-center text-white px-5 sm:px-4 lg:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
         <div class="container max-w-6xl mx-auto mb-24 sm:mb-36 lg:mb-48">
-            <div class="flex justify-center items-center">
-                <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start lg:items-center">
+                <img class="h-56 lg:h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/pearl-demonator.png">
-                <div class="sm:pl-4 lg:pl-7 sm:order-1 text-left">
+                <div class="sm:pl-6 lg:pl-7 sm:order-1 text-left">
                     <h3 class="leading-tight mb-4"><strong>Join with the most popular double pedal.</strong></h3>
                     <p class="leading-tight mb-4">The right tools are essential to your craft.
                     <br><br>
@@ -749,11 +749,11 @@
                         <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
                     </ul>
 
-                    <div class="w-full flex justify-between mt-4 sm:mt-6">
-                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
-                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
-                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
-                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
+                    <div class="w-full flex flex-wrap sm:flex-nowrap justify-between mt-4 sm:mt-6">
+                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
+                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
+                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
+                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
                     </div>
                 </div>
             </div>
@@ -769,10 +769,10 @@
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
-            <div class="flex justify-center items-center">
-                <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+            <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
+                <img class="h-48 sm:h-64 lg:h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/810x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/guarantee-students.webp">
-                <div class="sm:pr-8 sm:text-left">
+                <div class="mt-4 sm:mt-0 sm:pr-8 sm:text-left">
                     <h3 class="leading-tight mb-4 sm:mb-6"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                             guaranteed.</strong></h3>
 
