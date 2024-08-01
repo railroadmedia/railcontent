@@ -359,7 +359,7 @@ onMounted(() => {
 });
 
 onBeforeMount(()=> {
-    //console.log('item', props.item)
+    console.log('item', props.item)
 })
 
 onUnmounted(() => {

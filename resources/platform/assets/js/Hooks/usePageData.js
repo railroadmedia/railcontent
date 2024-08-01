@@ -27,7 +27,7 @@ export function usePageData(props, brand, userId, token) {
 
             if (currentSongCompleteResponse) {
                 data.value.completed = currentSongCompleteResponse.state !== "not started";
-                data.value.lesson_progress = currentSongCompleteResponse.percent.toString(); // For Song Player Section
+                data.value.progress_percent = currentSongCompleteResponse.percent.toString(); // For Song Player Section
             }
 
             // Fetch completion states for related lessons
