@@ -21,10 +21,14 @@ import { computed } from 'vue';
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 
 const props = defineProps({
-    artists: Array
+    artists: {
+        type: Array, 
+        default: []
+    }
 });
 
 const alphabeticallyGroupedArtists = (artists) => {
+    if (!artists) return;
 
     const grouped = artists.sort((a, b) => a.name.localeCompare(b.name)).reduce((acc, artist) => {
         const firstChar = artist.name.charAt(0).toUpperCase();
@@ -47,7 +51,6 @@ const getURL = (artist) => {
 }
 
 const groupedArtists = computed(() => alphabeticallyGroupedArtists(props.artists));
-const numberOfArtists = computed(() => props.artists.length);
-
+const numberOfArtists = computed(() => props.artists?.length);
 
 </script>

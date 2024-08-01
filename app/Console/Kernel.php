@@ -159,6 +159,7 @@ class Kernel extends ConsoleKernel
         $this->load(app_path('Modules/Ecommerce/Console/Commands'));
         $this->load(app_path('Modules/UserManagementSystem/Console/Commands'));
         $this->load(app_path('Modules/Content/Console/Commands'));
+        $this->load(app_path('Modules/Content/Console/Commands/Data'));
         $this->load(app_path('Modules/EventTracking/Console/Commands'));
 
         // TODO: uncomment when the console route file exists

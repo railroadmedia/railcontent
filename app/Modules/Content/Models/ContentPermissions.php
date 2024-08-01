@@ -19,4 +19,8 @@ class ContentPermissions extends Model
     protected $table = 'railcontent_content_permissions';
     public $timestamps = false;
 
+    public function permissions()
+    {
+        return $this->belongsTo(Permission::class, 'permission_id');
+    }
 }

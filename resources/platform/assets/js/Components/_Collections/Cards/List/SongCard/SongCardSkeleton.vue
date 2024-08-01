@@ -33,8 +33,4 @@
     </div>
 </template>
 <script setup>
-    //Props
-    const props = defineProps( ()=> {
-        isLoading: Boolean
-    })
 </script>
