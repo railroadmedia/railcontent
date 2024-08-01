@@ -747,13 +747,11 @@
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
             @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
                 @include('drumeo.products.partials._promo-cards', [
-                    'firstBadge' => 'SAVE 34%',
                     'firstDeal' => 'Drumeo<br> EarDrums',
                     'firstDealImage' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
                     'firstImageHeight' => 'h-28 lg:h-32',
-                    'firstDealDiscount' => 149,
-                    'firstDealPrice' => 99,
+                    'firstDealPrice' => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                     'firstDealSub' => 'Just the IEMs',
                     'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
                     'firstButtonText' => 'SELECT',
