@@ -138,7 +138,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
+import { computed, onUnmounted, reactive, onMounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -357,10 +357,6 @@ onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });
-
-onBeforeMount(()=> {
-    console.log('item', props.item)
-})
 
 onUnmounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);

@@ -22,7 +22,7 @@
                 <section class="tw-flex tw-flex-col tw-flex-wrap">
                     <div v-for="i in 7" :key="i"
                          class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57]">
-                        <SongCardSkeleton :is-loading="true" />
+                        <SongCardSkeleton />
                     </div>
                 </section>
             </div>
@@ -37,8 +37,4 @@
     import SongPlayerSection from '@collections/SongPlayerSection/SongPlayerSection.vue';
     import SongCardSkeleton from '@collections/Cards/List/SongCard/SongCardSkeleton';
     import CommentSkeleton from '@collections/SkeletonLoader/CommentSkeleton.vue'
-
-    const props = defineProps({
-        isLoading: Boolean,
-    })
 </script>

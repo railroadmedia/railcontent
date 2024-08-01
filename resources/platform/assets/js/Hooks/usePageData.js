@@ -1,66 +1,24 @@
 // hooks/usePageData.js
 import { ref } from 'vue';
-import { fetchSongById, fetchRelatedSongs, fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/songService';
+import { useSongPageData } from './pages/useSongPageData';
 
-export function usePageData(props, brand, userId, token) {
-    const data = ref(null);
-    const error = ref(null);
-    const isLoading = ref(true);
-    const contentId = props.contentId;
+export async function usePageData(props, brand, userId, token) {
+  const data = ref(null);
+  const error = ref(null);
+  const isLoading = ref(true);
 
-    // Methods
-    const fetchPageData = async () => {
-        try {
-            // Fetch the main song data, related songs, and current song completion status in parallel
-            const [songResponse, relatedSongsResponse, currentSongCompleteResponse] = await Promise.all([
-                fetchSongById(contentId),
-                fetchRelatedSongs(brand, contentId),
-                fetchCurrentSongComplete(userId, contentId, token)
-            ]);
+  if (props.page === 'song') {
+    const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand, userId, token);
 
-            // Combine the responses
-            data.value = songResponse;
+    data.value = songData.value;
+    error.value = songError.value;
+    isLoading.value = songLoading.value;
+  } else {
+    // Add logic for other pages here if needed
+    isLoading.value = false;
+  }
 
-            if (relatedSongsResponse) {
-                data.value.relatedLessons = relatedSongsResponse.data;
-            }
+  //console.log('Page data:', data.value);
 
-            if (currentSongCompleteResponse) {
-                data.value.completed = currentSongCompleteResponse.state !== "not started";
-                data.value.progress_percent = currentSongCompleteResponse.percent.toString(); // For Song Player Section
-            }
-
-            // Fetch completion states for related lessons
-            if (data.value.relatedLessons) {
-                const relatedLessonIds = data.value.relatedLessons.map(lesson => lesson.id);
-                const relatedLessonsCompletionStates = await fetchAllCompletedStates(userId, relatedLessonIds, token);
-                if (relatedLessonsCompletionStates) {
-                    //console.log('relatedLessonsCompletionStates', relatedLessonsCompletionStates)
-                    data.value.relatedLessons = data.value.relatedLessons.map(lesson => {
-                        const lessonCompletionState = relatedLessonsCompletionStates[lesson.id];
-                        if (lessonCompletionState) {
-                            return {
-                                ...lesson,
-                                completed: lessonCompletionState.state !== "not started",
-                                lesson_progress: lessonCompletionState.percent.toString()
-                            };
-                        }
-                        return lesson;
-                    });
-                } else {
-                    console.log('no related lessons')
-                }
-            }
-        } catch (err) {
-            error.value = err;
-        } finally {
-            isLoading.value = false;
-        }
-
-        console.log('data', data.value)
-    };
-
-    fetchPageData();
-
-    return { data, error, isLoading };
+  return { data, error, isLoading };
 }

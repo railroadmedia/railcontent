@@ -9,7 +9,6 @@
             <!-- Song Player Section -->
             <div class="tw-col-span-3 tw-w-full 2xl:tw-col-span-2 tw-row-span-1">
                 <SongPlayerSection
-                    :is-loading="isLoading"
                     :contentId="contentId"
                     :resources="resources"
                     :thumbnailUrl="thumbnailUrl"
@@ -48,7 +47,6 @@
             <!-- Comments Section -->
             <div v-if="!noAccess" class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
                 <Comments
-                    :is-loading="isLoading"
                     :brand="brand"
                     :theme-color="brand"
                     :content-id="contentId"
@@ -76,10 +74,6 @@
     // Pinia Data
     const userStore = useUserStore();
     const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin } = storeToRefs(userStore);
-
-    // Refs
-    const isLoading = ref(false);
-    const song = ref(null);
 
     // Props
     const props = defineProps({

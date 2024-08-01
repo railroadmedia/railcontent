@@ -60,7 +60,10 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
             },
             plugins: [
                 new webpack.DefinePlugin({
-                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL),
+                    "__VUE_PROD_DEVTOOLS__": JSON.stringify(false),
+                    "__VUE_OPTIONS_API__": JSON.stringify(true),
+                    "__VUE_PROD_HYDRATION_MISMATCH_DETAILS__": JSON.stringify(false)
                 })
             ],
             resolve: {

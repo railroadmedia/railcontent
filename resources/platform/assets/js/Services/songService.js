@@ -23,7 +23,7 @@ export async function fetchSongById(documentId) {
       ${fields.join(', ')}
     }`;
 
-  console.log("Generated GROQ Query:", query);
+  //console.log("Generated GROQ Query:", query);
 
   const encodedQuery = encodeURIComponent(query);
   const url = `https://${projectId}.apicdn.sanity.io/v${version}/data/query/${dataset}?query=${encodedQuery}`;
@@ -290,7 +290,7 @@ export async function fetchAllSongs(brand, page = 1, limit = 10, searchTerm = ""
     `;
   }
 
-  console.log("Generated GROQ Query:", groupQuery);
+  //console.log("Generated GROQ Query:", groupQuery);
 
   const encodedQuery = encodeURIComponent(groupQuery);
   const url = `https://${projectId}.api.sanity.io/v${version}/data/query/${dataset}?query=${encodedQuery}`;
@@ -440,7 +440,6 @@ export async function fetchAllCompletedStates(userId, contentIds, token) {
     const response = await fetch(url, { headers });
     const result = await response.json();
     if(result){
-      console.log('Completion states:', result);
       return result;
     } else {
       console.log('result not json');
