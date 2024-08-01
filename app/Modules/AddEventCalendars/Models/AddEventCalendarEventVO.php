@@ -229,14 +229,11 @@ class AddEventCalendarEventVO
 
             $addEventDescriptionPrepend = 'Click this link to access the live stream: <br> ' . $liveUrl;
 
-            $addEventDescriptionAppend = 'Can\'t make it to the live stream? No problem! You can find it in our ' .
-                'archives 2-3 business days after the event through this link: <br> ' . $url;
-
             if (empty($this->internalDescription)) {
-                return $addEventDescriptionPrepend . ' <br><br> ' . $addEventDescriptionAppend;
+                return $addEventDescriptionPrepend;
             }
 
-            return $addEventDescriptionPrepend . ' <br> ' . $this->internalDescription . ' <br> ' . $addEventDescriptionAppend;
+            return $addEventDescriptionPrepend . ' <br> ' . $this->internalDescription;
         }
 
         if (empty($this->internalDescription)) {
