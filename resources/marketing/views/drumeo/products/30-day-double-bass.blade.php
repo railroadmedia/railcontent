@@ -204,6 +204,9 @@
             }
         }
 
+        .timeline-container::after {
+            top: 30px;
+        }
         @media (min-width: 768px) {
             .timeline-container .timeline:after {
                 left: 50% !important;
@@ -344,19 +347,16 @@
                     <h4 class="px-3 lg:px-5 text-2xl"><strong>September 2nd</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                        <strong>
+                        Enrollment closes in
+                        <span x-data="timer()" x-init="countdown()">
                             <span x-cloak x-show="timeLeft > 0">
-                                Enrollment closes in
-                                <br>
                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                             </span>
                             <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
-                        </strong>
-                    </span>
+                        </span>
                     </p>
                 </div>
                 <div
@@ -388,7 +388,7 @@
 
 
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
+    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             @php
@@ -468,6 +468,7 @@
                 @endforeach
             </div>
         </div>
+        <h1 class="leading-none -mt-6 lg:-mt-8 mb-10"><i class="fal fa-angle-down text-drumeo hidden md:block"></i></h1>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF7FF">
@@ -731,28 +732,28 @@
     </section>
 
     <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
-        <div class="container max-w-5xl mx-auto">
+        <div class="container max-w-6xl mx-auto mb-24 sm:mb-36 lg:mb-48">
             <div class="flex justify-center items-center">
-                <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
+                <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/pearl-demonator.png">
-                <div class="sm:pl-4">
-                    <h3><strong>Join with the most popular double pedal.</strong></h3>
-                    <p class="leading-tight">The right tools are essential to your craft.
+                <div class="sm:pl-4 lg:pl-7 sm:order-1 text-left">
+                    <h3 class="leading-tight mb-4"><strong>Join with the most popular double pedal.</strong></h3>
+                    <p class="leading-tight mb-4">The right tools are essential to your craft.
                     <br><br>
                     That’s why we’ve partnered with Pearl to bring you the highest-rated beginner double bass pedal bundled with 30-Day Double Bass.
                         <br><br>
                     The Pearl P932 Demonator has premium-quality features at an entry-level price point:</p>
-                    <ul>
+                    <ul class="list-disc ml-6">
                         <li><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
                         <li><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
                         <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
                     </ul>
 
-                    <div class="flex">
-                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
-                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
-                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
-                        <img class="h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
+                    <div class="w-full flex justify-between mt-4 sm:mt-6">
+                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
+                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
+                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
+                        <img class="h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
                     </div>
                 </div>
             </div>
@@ -763,24 +764,24 @@
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
     </div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
+        <div class="container max-w-5xl mx-auto">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 mb-6 sm:mb-8 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
             <div class="flex justify-center items-center">
                 <img class="h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/guarantee-students.webp">
-                <div class="sm:pr-8">
-                    <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
-                            guaranteed.</strong></h2>
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/810x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/guarantee-students.webp">
+                <div class="sm:pr-8 sm:text-left">
+                    <h3 class="leading-tight mb-4 sm:mb-6"><strong>Your favorite drum<br class="inline sm:hidden"> course,
+                            guaranteed.</strong></h3>
 
-                    <h6 class="leading-normal">30-Day Double Bass is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
+                    <p class="leading-normal">30-Day Double Bass is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your speed, control, and creativity.
                         <br><br>
                         We think it’ll be your favorite drum course ever –
                         <br><br>
                         So even though it’s only a month, you’ll get three full months to go through everything and make sure it was right for you. If not, just contact our friendly support team for a full refund.
-                    </h6>
+                    </p>
                 </div>
 
             </div>
@@ -871,56 +872,14 @@
             <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
         </p>
     </section>
-
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Do I need to attend the lessons live?',
-                    'desc' =>
-                        'The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are optional. Plus, you’ll be sent a recording so you can watch anytime.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'title' => 'What if I’m going to miss a day (or two, or more)?',
-                    'desc' =>
-                        'That’s totally fine. The course is meant to be flexible – there are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session to catch up.',
-                    'num' => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'title' => 'How much time per week will this course require?',
-                    'desc' =>
-                        '30-Day Independence gives you guided daily coordination workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.',
-                    'num' => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'title' => 'Does it work on acoustic AND electronic drums?',
-                    'desc' =>
-                        'Yes. 30-Day Independence is built for the intermediate-to-advanced drummer looking to improve their skills. You can complete all of Estepario’s exercises on either acoustic or electronic and see the full effects on your playing.',
-                    'num' => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'title' => 'Is this a continuation of 30-Day Drummer?',
-                    'desc' =>
-                        'Not exactly. 30-Day Drummer was our first-ever thirty day cohort designed to help beginners establish a solid groove. 30-Day Independence challenges your coordination around the kit.',
-                    'num' => '?',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'title' => 'What devices can I access the course on?',
-                    'desc' =>
-                        '30-Day Independence is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase online.',
-                    'num' => '?',
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
+    <section class="text-center py-10 text-white" style="background: #00101D;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
+                <p>Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.
-                </p>
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
