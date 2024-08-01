@@ -429,6 +429,8 @@ export async function fetchCurrentSongComplete(userId, content_id, token) {
 export async function fetchAllCompletedStates(userId, contentIds, token) {
   const url = `/content/user_progress/${userId}?${contentIds.map(id => `content_ids[]=${id}`).join('&')}`;
 
+  // console.log(url)
+
   const headers = {
     'Content-Type': 'application/json',
     'X-CSRF-TOKEN': token
