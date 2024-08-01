@@ -1,24 +1,29 @@
 // hooks/usePageData.js
 import { ref } from 'vue';
 import { useSongPageData } from './pages/useSongPageData';
+import { useArtistPageData } from './pages/useArtistPageData';
 
 export async function usePageData(props, brand, userId, token) {
-  const data = ref(null);
-  const error = ref(null);
-  const isLoading = ref(true);
+    const data = ref(null);
+    const error = ref(null);
+    const isLoading = ref(true);
 
-  if (props.page === 'song') {
-    const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand, userId, token);
+    if (props.page === 'song') {
+        const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand, userId, token);
+        data.value = songData.value;
+        error.value = songError.value;
+        isLoading.value = songLoading.value;
+    } else if (props.page === 'artists') {
+        const { data: artistData, error: artistError, isLoading: artistLoading } = await useArtistPageData(brand);
+        data.value = artistData.value;
+        error.value = artistError.value;
+        isLoading.value = artistLoading.value;
+    } else {
+        // Add logic for other pages here if needed
+        isLoading.value = false;
+    }
 
-    data.value = songData.value;
-    error.value = songError.value;
-    isLoading.value = songLoading.value;
-  } else {
-    // Add logic for other pages here if needed
-    isLoading.value = false;
-  }
+    //console.log('Page data:', data.value);
 
-  //console.log('Page data:', data.value);
-
-  return { data, error, isLoading };
+    return { data, error, isLoading };
 }

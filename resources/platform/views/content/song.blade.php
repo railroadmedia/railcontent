@@ -24,8 +24,8 @@
         }
     @endphp
 
-    <page-loader 
-        page="song"
+    <page-loader
+        page="songs"
         :content-id="{{ json_encode($lessonContent->fetch('id')) }}"
     >
         <template #loading>
