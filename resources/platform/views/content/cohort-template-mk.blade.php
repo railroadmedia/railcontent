@@ -6,7 +6,7 @@
 
 @section('content')
     @if($cohort['slug'] == '30-day-double-bass')
-        @include('marketing.drumeo.products.30-day-double-bass', [
+        @include('drumeo.products.30-day-double-bass', [
             'platformVersion' => true
         ])
     @endif
