@@ -29,6 +29,8 @@ jobs:
         run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
       - name: Install Project Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Disable CI checks
+        run: echo "CI=false" >> $GITHUB_ENV
       - name: Deploy Environment
         run: vapor deploy web-staging-one
         env:

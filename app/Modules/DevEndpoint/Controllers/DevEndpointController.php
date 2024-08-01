@@ -2,6 +2,7 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+<<<<<<< HEAD
 use App\Jobs\UpdatePermissionsJob;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\UserPermission;
@@ -15,6 +16,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
+=======
+use Google\Exception;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Modules\Content\ApiGateways\SanityGateway;
+>>>>>>> feature/sanity-studio-cms
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
@@ -22,7 +30,10 @@ use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RecommendationService;
+<<<<<<< HEAD
 use Railroad\Railcontent\Services\UserPermissionsService;
+=======
+>>>>>>> feature/sanity-studio-cms
 
 class DevEndpointController extends Controller
 {
@@ -65,6 +76,7 @@ class DevEndpointController extends Controller
         dd("hello from the playground");
     }
 
+<<<<<<< HEAD
 
     private function setUserToBasic($userID, $interval=null)
     {
@@ -224,14 +236,35 @@ class DevEndpointController extends Controller
     private function musoraDB()
     {
         return DB::connection(config('railcontent.database_connection_name'))->query();
+=======
+    private function testSanity()
+    {
+        $client = new SanityGateway();
+        $songId = 'drafts.ae22572b-6219-4d8f-ba6e-aaa86c29036a'; // Head like a hole
+        $licenceId = 'drafts.044f865a-5e1d-4477-aa8a-7cc783acc903'; // Let it Be (test license
+        $publisherId = 'drafts.9b7840ff-a2ff-4a85-bab3-589d94bda677'; //Disney on development
+        $updatedDoc = $client->patchSetSingle('044f865a-5e1d-4477-aa8a-7cc783acc903', ['mlc' => 'new mlc2']);
+        $updatedDoc = $client->patchSetSingle($songId, ['popularity' => 200]);
+        $updatedDoc = $client->patchSetSingle($publisherId, ['name'  => 'Disney2']);
+        $updatedDoc = $client->patchAppend($publisherId, 'child', [['name' => 'bananas']]);
+        $updatedDoc = $client->patchAppendReferences($songId, 'license', [$licenceId]);
+        $patches = [
+            $licenceId => ['mlc' => 'new aoesntuhmlc2'],
+            'drafts.854eb313-c415-4c87-82d0-6569dc15be3b' => ['name' => 'WBNAAAAAA'],
+        ];
+        $updatedDoc = $client->patchSetMany($patches);
+        return $updatedDoc;
+>>>>>>> feature/sanity-studio-cms
     }
 
     private function testAPIEndpoints()
     {
-        $inputs = array_map(function ($endpoint) {return $endpoint->value;}, APIEndPoint::cases());
+        $inputs = array_map(function ($endpoint) {
+            return $endpoint->value;
+        }, APIEndPoint::cases());
         $callback = function ($endpoint) {
             $this->recommendationService->APIEndPoint = $endpoint;
-            $userIDs = [579297,648632, 149869, 150909, 152882];
+            $userIDs = [579297, 648632, 149869, 150909, 152882];
             $randomize = false;
             $userID = $randomize ? $userIDs[0] : $userIDs[array_rand($userIDs, 1)];
             return $this->recommendationService->getFilteredRecommendations($userID, "drumeo", RecommenderSection::Song);
@@ -286,9 +319,9 @@ class DevEndpointController extends Controller
     private function timeEvent($callback, $inputs, $numAttempts = 1, $delay = 1, $transposeResults = true)
     {
         $timeResults = [];
-        foreach(array_keys($inputs) as $key) {
+        foreach (array_keys($inputs) as $key) {
             $input = $inputs[$key];
-            if($transposeResults) {
+            if ($transposeResults) {
                 $timeResults[$key] = [
                     'time' => [],
                     'result' => [],
@@ -296,7 +329,7 @@ class DevEndpointController extends Controller
             } else {
                 $timeResults[$key] = [];
             }
-            for($i = 0; $i < $numAttempts; $i++) {
+            for ($i = 0; $i < $numAttempts; $i++) {
                 $start = microtime(true);
                 try {
                     $result = $callback($input);

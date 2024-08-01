@@ -1818,7 +1818,8 @@ return [
             'branches',
             'features',
             'show_onboarding',
-            'last_used_brand'
+            'last_used_brand',
+            'active_permissions_ids'
         ],
     ],
     'brand_logo_path_for_email' => [

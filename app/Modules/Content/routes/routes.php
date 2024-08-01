@@ -7,12 +7,17 @@ Route::prefix('content')
     ->middleware('web_or_api_authenticated')
     ->group(function () {
         Route::get(
-            'is_liked_by_user/{content}/{user?}',
+            'is_liked_by_user/{user?}',
             [ContentMetadataController::class, 'isLikedByUser']
         )->name('content.is_liked_by_user');
 
         Route::get(
-            'user_progress/{content}/{user?}',
+            'user_progress/{user?}',
             [ContentMetadataController::class, 'userProgress']
         )->name('content.user_progress');
+
+        Route::get(
+            'in_progress/{user?}',
+            [ContentMetadataController::class, 'inProgressForUser']
+        )->name('content.in_progress');
     });
