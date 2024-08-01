@@ -23,10 +23,7 @@ const props = defineProps({
         required: true,
         default: {}
     },
-    contentId: {
-        type: Number,
-        required: true,
-    },
+    contentId: Number,
 });
 
 // Initialize reactive state
