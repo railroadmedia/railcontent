@@ -20,7 +20,7 @@
         <input v-model="contentInterface" type="hidden" :name="fieldKey">
         <TinyEditor 
             v-model="contentInterface"
-            tinymce-script-src="/platform/js/tinymce/tinymce.min.js"
+            :tinymce-script-src="tinymcePath"
             :init="initObject" 
             :placeholder="placeholder" 
         />
@@ -31,6 +31,13 @@
 import { ref, computed, watch, nextTick, inject, onMounted } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
 import ImageUploader from '@collections/ImageUploader/ImageUploader.vue';
+import { usePlatformStore } from "@stores/platform";
+import {storeToRefs} from "pinia/dist/pinia";
+
+//Pinia Stores
+const platformStore = usePlatformStore();
+const { tinymcePath } = storeToRefs(platformStore);
+
 
 const props = defineProps({
     height: {
