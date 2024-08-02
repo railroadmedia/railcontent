@@ -22,22 +22,14 @@ class CatalogMetadata extends BaseSanityModel
 {
     public function __construct()
     {
-        $resourceList = new ListArrayElement(
-//            fields: [new Field(FieldType::String, 'search_in')]
-        );
         $fields = [
             new Field(FieldType::String, 'catalog_type', validation: "(rule) => rule.required()"),
             new BrandField(),
-            new Field(FieldType::String, 'general_groq_start'),
-            new Field(FieldType::String, 'general_groq_end'),
-            new Field(FieldType::String, 'groq_results'),
-            new Field(FieldType::Array, 'groq_search_fields',  of: $resourceList),
-            new Field(FieldType::String, 'groq'),
+            new Field(FieldType::String, 'groq_results',title:'Fields that should be returned:'),
+            new Field(FieldType::Array, 'groq_search_fields', title:'Search in fields:', of: new ListArrayElement()),
             new Field(FieldType::String, 'meta_data_groq'),
             new Field(FieldType::String, 'modal_text'),
             new Field(FieldType::String, 'sort_by'),
-            //sortBy
-
         ];
         parent::__construct(self::getName(), 'Catalog Metadata', $fields);
     }
