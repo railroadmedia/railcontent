@@ -2109,6 +2109,8 @@ class ContentService
         $params = [];
 
         foreach ($contentIds as $contentId) {
+            $cases[] = "WHEN {$contentId} then ?";
+            $ids[] = $contentId;
             $hierarchyData =
                 $hierarchyRows->where('rch1_child_id', $contentId)
                     ->first();
@@ -2161,16 +2163,9 @@ class ContentService
                 }
 
                 // save
-
-                if (!empty($parentContentDataForDatabase)) {
-                    $cases[] = "WHEN {$contentId} then ?";
-                    $params[] = json_encode($parentContentDataForDatabase);
-                    $ids[] = $contentId;
-                } elseif (!empty($contentRow->parent_content_data)) {
-                    $cases[] = "WHEN {$contentId} then ?";
-                    $params[] = null;
-                    $ids[] = $contentId;
-                }
+                $params[] = !empty($parentContentDataForDatabase) ? json_encode($parentContentDataForDatabase) : null;
+            } else {
+                $params[] = null;
             }
         }
 
