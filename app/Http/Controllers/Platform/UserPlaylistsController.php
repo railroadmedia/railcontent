@@ -324,18 +324,24 @@ class UserPlaylistsController extends BaseController
         ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
+        $publishedItems = $playlistItems;
+       if(!user()->isAdmin()) {
+           $publishedItems =
+               $playlistItems->where('status', '!=', 'draft');
+       }
         ContentRepository::$bypassPermissions = $initialByPassPermissions;
 
         $playlistItem =
-            $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
-                ->first();
+            $publishedItems->where('user_playlist_item_id', '=', $playlistItemId);
 
-        $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
-        $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
+        $position = $playlistItem->keys()->first();
+        $playlistItem = $playlistItem->first();
+        $nextPlaylistItem = $publishedItems->getMatchOffset($playlistItem, 1);
+        $previousPlaylistItem = $publishedItems->getMatchOffset($playlistItem, -1);
         $content['user_playlist_item_position'] = $position;
 
         $otherItems = [];
-        foreach ($playlistItems as $index => $item) {
+        foreach ($publishedItems as $index => $item) {
             $otherItems[$index]['url'] = $item['url'] ?? '';
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
