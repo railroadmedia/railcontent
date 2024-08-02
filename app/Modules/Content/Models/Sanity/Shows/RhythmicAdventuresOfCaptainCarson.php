@@ -14,7 +14,7 @@ use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
- * Defines the schema structure for a Rhytms From Another Planet document type in Sanity.
+ * Defines the schema structure for a Rhythmic Adventures Of Captain Carson document type in Sanity.
  *
  * @property string       $type
  * @property string       $name
@@ -22,14 +22,15 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class RhytmsFromAnotherPlanet extends LessonTemplate
+class RhythmicAdventuresOfCaptainCarson extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Rhytms From Another Planet');
+        parent::__construct(self::getName(), 'Rhythmic Adventures Of Captain Carson');
     }
+
     public static function getName(): string
     {
-        return 'rhytms-from-another-planet';
+        return 'rhythmic-adventures-of-captain-carson';
     }
 }

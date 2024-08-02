@@ -14,7 +14,7 @@ use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
- * Defines the schema structure for a Student Review document type in Sanity.
+ * Defines the schema structure for a Rhythms From Another Planet document type in Sanity.
  *
  * @property string       $type
  * @property string       $name
@@ -22,14 +22,14 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class StudentReview extends LessonTemplate
+class RhythmsFromAnotherPlanet extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Student Reviews');
+        parent::__construct(self::getName(), 'Rhythms From Another Planet', withResources: true);
     }
     public static function getName(): string
     {
-        return 'student-review';
+        return 'rhythms-from-another-planet';
     }
 }
