@@ -92,6 +92,7 @@ const computedToolbar = computed(() => {
 });
 
 const initObject = computed(() => ({
+    license_key: 'gpl',
     autoresize_min_height: props.height,
     body_class: `${isDarkModeSelected.value ? 'tw-dark' : ''}`,
     toolbar: computedToolbar.value,
