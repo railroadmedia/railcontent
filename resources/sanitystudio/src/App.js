@@ -13,8 +13,10 @@ import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import 
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
+import ResolveParentReference from './components/ResolveParentReference';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
+import { musoraStructure } from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
 import {media} from 'sanity-plugin-media'
 
@@ -25,7 +27,8 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
-    OpenAiInput: OpenAiInput
+    OpenAiInput: OpenAiInput,
+    ResolveParentReference: ResolveParentReference
 };
 
 const icons = {
@@ -95,7 +98,9 @@ function App() {
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
-                      structureTool({ defaultDocumentNode }),
+                      structureTool({
+                          structure: musoraStructure,
+                          defaultDocumentNode: defaultDocumentNode }),
                       visionTool(),
                       media(),
                       assist(),

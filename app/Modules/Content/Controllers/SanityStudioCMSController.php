@@ -4,12 +4,60 @@ namespace App\Modules\Content\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\Sanity\CoachStream;
+use App\Modules\Content\Models\Sanity\Foundation;
+use App\Modules\Content\Models\Sanity\Method;
+use App\Modules\Content\Models\Sanity\Pack;
+use App\Modules\Content\Models\Sanity\SemesterPack;
+use App\Modules\Content\Models\Sanity\Shows\Archive;
 use App\Modules\Content\Models\Sanity\Artist;
+use App\Modules\Content\Models\Sanity\Shows\BackstageSecret;
+use App\Modules\Content\Models\Sanity\Shows\BehindTheScenes;
+use App\Modules\Content\Models\Sanity\Shows\BootCamp;
+use App\Modules\Content\Models\Sanity\Challenge;
+use App\Modules\Content\Models\Sanity\ChallengePart;
+use App\Modules\Content\Models\Sanity\Shows\Challenges;
+use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\CoursePart;
+use App\Modules\Content\Models\Sanity\Creativity;
+use App\Modules\Content\Models\Sanity\Shows\Diy;
+use App\Modules\Content\Models\Sanity\Shows\DrumFestInternational2022;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
+use App\Modules\Content\Models\Sanity\Shows\ExploringBeats;
+use App\Modules\Content\Models\Sanity\Shows\GearGuide;
 use App\Modules\Content\Models\Sanity\Genre;
+use App\Modules\Content\Models\Sanity\Shows\InRhythm;
+use App\Modules\Content\Models\Sanity\Instructor;
+use App\Modules\Content\Models\Sanity\Lifestyle;
+use App\Modules\Content\Models\Sanity\Shows\Live;
+use App\Modules\Content\Models\Sanity\Shows\OnTheRoad;
+use App\Modules\Content\Models\Sanity\Shows\Performance;
 use App\Modules\Content\Models\Sanity\Permission;
+use App\Modules\Content\Models\Sanity\PlayAlong;
+use App\Modules\Content\Models\Sanity\Shows\Podcast;
+use App\Modules\Content\Models\Sanity\Shows\QuestionAndAnswer;
+use App\Modules\Content\Models\Sanity\QuickTip;
+use App\Modules\Content\Models\Sanity\Shows\RhytmicAdventuresOfCaptainCarson;
+use App\Modules\Content\Models\Sanity\Routine;
+use App\Modules\Content\Models\Sanity\Rudiment;
+use App\Modules\Content\Models\Sanity\Shows\Solo;
 use App\Modules\Content\Models\Sanity\Song;
+use App\Modules\Content\Models\Sanity\Essential;
+use App\Modules\Content\Models\Sanity\SongTutorial;
+use App\Modules\Content\Models\Sanity\Shows\Sonor;
+use App\Modules\Content\Models\Sanity\Shows\Spotlight;
+use App\Modules\Content\Models\Sanity\Shows\StudentCollaboration;
+use App\Modules\Content\Models\Sanity\StudentFocus;
+use App\Modules\Content\Models\Sanity\Shows\StudentReview;
+use App\Modules\Content\Models\Sanity\Shows\StudyTheGreats;
+use App\Modules\Content\Models\Sanity\Shows\Tama;
+use App\Modules\Content\Models\Sanity\Shows\TheHistoryOfElectronicDrums;
+use App\Modules\Content\Models\Sanity\Shows\RhytmsFromAnotherPlanet;
+use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
+use App\Modules\Content\Models\Sanity\Theory;
+use App\Modules\Content\Models\Sanity\Topic;
 use App\Modules\Content\Models\Sanity\Venue;
+use App\Modules\Content\Models\Sanity\Workout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,10 +78,58 @@ class SanityStudioCMSController extends BaseController
 
         // publishing workspace
         $types = [
+            (new Challenge())->toArray(),
+            (new ChallengePart())->toArray(),
+            (new Workout())->toArray(),
             (new Song())->toArray(),
+            (new Course())->toArray(),
+            (new CoursePart())->toArray(),
+            (new QuickTip())->toArray(),
+            (new BootCamp())->toArray(),
+            (new StudentFocus())->toArray(),
+            (new PlayAlong())->toArray(),
+            (new Rudiment())->toArray(),
+            (new DrumFestInternational2022())->toArray(),
+            (new Spotlight())->toArray(),
+            (new TheHistoryOfElectronicDrums())->toArray(),
+            (new BackstageSecret())->toArray(),
+            (new QuestionAndAnswer())->toArray(),
+            (new StudentCollaboration())->toArray(),
+            (new Live())->toArray(),
+            (new Podcast())->toArray(),
+            (new Solo())->toArray(),
+            (new GearGuide())->toArray(),
+            (new Performance())->toArray(),
+            (new InRhythm())->toArray(),
+            (new Challenges())->toArray(),
+            (new OnTheRoad())->toArray(),
+            (new Diy())->toArray(),
+            (new RhytmicAdventuresOfCaptainCarson())->toArray(),
+            (new StudyTheGreats())->toArray(),
+            (new RhytmsFromAnotherPlanet())->toArray(),
+            (new Tama())->toArray(),
+            (new PaisteCymbals())->toArray(),
+            (new BehindTheScenes())->toArray(),
+            (new ExploringBeats())->toArray(),
+            (new Sonor())->toArray(),
+            (new StudentReview())->toArray(),
+            (new Routine())->toArray(),
+            (new CoachStream())->toArray(),
+            (new SemesterPack())->toArray(),
+            (new Pack())->toArray(),
+            (new Method())->toArray(),
+            (new SongTutorial())->toArray(),
+            (new Foundation())->toArray(),
+            (new Archive())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
             (new Permission())->toArray(),
+            (new Topic())->toArray(),
+            (new Essential())->toArray(),
+            (new Creativity())->toArray(),
+            (new Theory())->toArray(),
+            (new Lifestyle())->toArray(),
+            (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),
         ];
@@ -139,10 +235,10 @@ class SanityStudioCMSController extends BaseController
                 ->first();
 
             return $content;
-        }elseif ($request->get('_type') === 'permission'){
+        } elseif ($request->get('_type') === 'permission') {
             $permissionService = app()->make(PermissionService::class);
             $permission = $permissionService->getByName($request->get('name'));
-            if(!$permission){
+            if(!$permission) {
                 $permission = $permissionService->create($request->get('name'), $request->get('brand'));
             }
             return $permission;

@@ -23,7 +23,7 @@ class GenerateFileForSongMigrationInSanity extends Command
     {
         $permissionsRailcontent = Permission::query()->get();
         $permissions = [];
-        foreach ($permissionsRailcontent as $permission){
+        foreach ($permissionsRailcontent as $permission) {
             $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $permission->name);
             $id = 'permission_'.strtolower($name);
             $permissions[$id] = [
@@ -43,12 +43,12 @@ class GenerateFileForSongMigrationInSanity extends Command
 
 
         $genreData = ContentStyle::query()
-            ->leftJoin('genre', 'genre.name', '=','railcontent_content_styles.style')
+            ->leftJoin('genre', 'genre.name', '=', 'railcontent_content_styles.style')
             ->selectRaw('distinct(railcontent_content_styles.style) as name, "genre" as type,
             COALESCE(genre.head_shot_picture_url, "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bf73168e-0d5f-476c-e819-d5c6ebb29900/public")
             AS thumbnail_url')->get();
         $genre = [];
-        foreach ($genreData as $genreDatum){
+        foreach ($genreData as $genreDatum) {
             $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $genreDatum->name);
 
             $id = 'genre_'.strtolower($name);
@@ -56,7 +56,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                 '_id' => $id,
                 'name' => $genreDatum->name,
                 '_type' => $genreDatum->type,
-                'thumbnail_url' => ['_type' =>'image',
+                'thumbnail_url' => ['_type' => 'image',
                                     '_sanityAsset' => 'image@'.$genreDatum->thumbnail_url
                 ],
             ];
@@ -69,13 +69,13 @@ class GenerateFileForSongMigrationInSanity extends Command
         }
 
         $artistsData = Content::query()
-            ->leftJoin('artists', 'artists.name', '=','railcontent_content.artist')
-            ->where('railcontent_content.type','=', 'song')
+            ->leftJoin('artists', 'artists.name', '=', 'railcontent_content.artist')
+            ->where('railcontent_content.type', '=', 'song')
             ->selectRaw('distinct(railcontent_content.artist) as name, "artist" as type,
             COALESCE(artists.head_shot_picture_url, "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bf73168e-0d5f-476c-e819-d5c6ebb29900/public")
             AS thumbnail_url')->get();
         $artists = [];
-        foreach ($artistsData as $artistsDatum){
+        foreach ($artistsData as $artistsDatum) {
             $name =  preg_replace('/[^a-zA-Z0-9_]/', '', $artistsDatum->name);
             $id = 'artist_'.strtolower($name);
             $cleaned_name = preg_replace('/[é]/u', 'e', $artistsDatum->name);
@@ -83,7 +83,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                 '_id' => $id,
                 'name' => preg_replace('/[^a-zA-Z0-9_ \-&.\'()\/ +!,]/', '', $cleaned_name),
                 '_type' => $artistsDatum->type,
-                'thumbnail_url' => ['_type' =>'image',
+                'thumbnail_url' => ['_type' => 'image',
                                     '_sanityAsset' => 'image@'.$artistsDatum->thumbnail_url
                 ],
             ];
@@ -110,16 +110,16 @@ class GenerateFileForSongMigrationInSanity extends Command
                 '=',
                 'thumbnail_url'
             )
-            ->where('railcontent_content.type','=', 'song')
-            ->where('railcontent_content.status','!=', 'deleted')
-            ->where('railcontent_content.brand','=', $this->argument('brand'))
+            ->where('railcontent_content.type', '=', 'song')
+            ->where('railcontent_content.status', '!=', 'deleted')
+            ->where('railcontent_content.brand', '=', $this->argument('brand'))
             // ->where('railcontent_content.id','=',407287)
             ->selectRaw('railcontent_content.*, f.value as soundslice, d.value as thumb')->get();
         $songs = [];
         //   dd($results);
-        foreach($results as $result){
-            if(in_array($result->id,[270443, 318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
-                382879, 391008, 391160, 401415, 378258, 381186])){
+        foreach($results as $result) {
+            if(in_array($result->id, [270443, 318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
+                382879, 391008, 391160, 401415, 378258, 381186])) {
                 continue;
             }
 
@@ -132,11 +132,11 @@ class GenerateFileForSongMigrationInSanity extends Command
                 '_id' => $id,
                 '_type' => $result->type,
                 'title' => $result->title,
-                'slug' =>   ['_type' =>'slug',
+                'slug' =>   ['_type' => 'slug',
                              'current' => $result->slug
                 ],
                 'brand' => $result->brand,
-                'difficulty'=> $difficulty,
+                'difficulty' => $difficulty,
                 'railcontent_id' => $result->id,
                 'language' => 'en-US',
                 'album' => $album,
@@ -148,22 +148,22 @@ class GenerateFileForSongMigrationInSanity extends Command
                 'published_on' => $result->published_on,
                 'instrumentless' => $result->instrumentless == 1,
                 'show_in_new_feed' => $result->show_in_new_feed == 1,
-                'thumbnail' => ['_type' =>'image',
+                'thumbnail' => ['_type' => 'image',
                                 '_sanityAsset' => 'image@'.$result->thumb
                 ],
                 'soundslice' => [
                     [
                         'soundslice_title' => $result->title,
-                        'soundslice_slug'=>$result->soundslice,
-                        'soundslice_length_in_second'=> (int) $result->length_in_seconds]
+                        'soundslice_slug' => $result->soundslice,
+                        'soundslice_length_in_second' => (int) $result->length_in_seconds]
                 ],
                 "web_url_path" => '/'.$result->brand.'/songs/'. $result->slug.'/'. $result->id,
                 "popularity" => $result->popularity
             ];
-            if(isset($this->difficultyMapping[$difficulty])){
+            if(isset($this->difficultyMapping[$difficulty])) {
                 $songs[$id]["difficulty_string"] = $this->difficultyMapping[$difficulty];
             }
-            if(isset($artists['artist_'.strtolower($artistName)])){
+            if(isset($artists['artist_'.strtolower($artistName)])) {
                 $songs[$id]["artist"] = [
                     "_type" => "reference",
                     "_ref" => 'artist_'.strtolower($artistName), // Replace with the actual artist ID
@@ -171,7 +171,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                 ];
             }
 
-            $genreC = ContentStyle::query()->where('content_id','=',$result->id)->get();
+            $genreC = ContentStyle::query()->where('content_id', '=', $result->id)->get();
             foreach ($genreC as $genreDatum) {
                 $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $genreDatum->style);
                 if(isset($genre['genre_'.strtolower($name)])) {
@@ -185,10 +185,10 @@ class GenerateFileForSongMigrationInSanity extends Command
 
             $contentData = ContentData::query()->where('content_id', '=', $result->id)->whereIn('key', ['resource_name', 'resource_url'])->get();
             $resources = [];
-            foreach($contentData as $datum){
+            foreach($contentData as $datum) {
                 $resources[$datum->position][$datum->key] = $datum->value;
             }
-            foreach($resources as $resource){
+            foreach($resources as $resource) {
                 if(isset($resource['resource_name']) && isset($resource['resource_url'])) {
                     $songs[$id]["resource"][] = [
                         'resource_name' => $resource['resource_name'],
@@ -197,7 +197,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                 }
             }
 
-            $contentPermissions = ContentPermissions::with('permissions')->where('content_id','=',$result->id)->get();
+            $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id)->get();
 
             foreach ($contentPermissions as $contentPermission) {
                 $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $contentPermission->permissions->name);
@@ -214,7 +214,7 @@ class GenerateFileForSongMigrationInSanity extends Command
         $filename = resource_path() . '/sanitystudio/songs.ndjson';
 
         foreach ($songs as $result) {
-            $newline = json_encode($result,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) . "\n";
+            $newline = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
             file_put_contents($filename, $newline, FILE_APPEND);
         }
     }

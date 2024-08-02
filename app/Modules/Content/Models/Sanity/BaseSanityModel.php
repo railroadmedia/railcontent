@@ -13,7 +13,7 @@ abstract class BaseSanityModel
 {
     public string $type = 'document';
 
-    const RULE_REQUIRED = "(rule) => rule.required()";
+    public const RULE_REQUIRED = "(rule) => rule.required()";
 
     /**
      * @param  array<Field>  $fields
