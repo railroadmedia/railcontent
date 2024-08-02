@@ -37,7 +37,7 @@ use App\Modules\Content\Models\Sanity\PlayAlong;
 use App\Modules\Content\Models\Sanity\Shows\Podcast;
 use App\Modules\Content\Models\Sanity\Shows\QuestionAndAnswer;
 use App\Modules\Content\Models\Sanity\QuickTip;
-use App\Modules\Content\Models\Sanity\Shows\RhytmicAdventuresOfCaptainCarson;
+use App\Modules\Content\Models\Sanity\Shows\RhythmicAdventuresOfCaptainCarson;
 use App\Modules\Content\Models\Sanity\Routine;
 use App\Modules\Content\Models\Sanity\Rudiment;
 use App\Modules\Content\Models\Sanity\Shows\Solo;
@@ -48,11 +48,10 @@ use App\Modules\Content\Models\Sanity\Shows\Sonor;
 use App\Modules\Content\Models\Sanity\Shows\Spotlight;
 use App\Modules\Content\Models\Sanity\Shows\StudentCollaboration;
 use App\Modules\Content\Models\Sanity\StudentFocus;
-use App\Modules\Content\Models\Sanity\Shows\StudentReview;
 use App\Modules\Content\Models\Sanity\Shows\StudyTheGreats;
 use App\Modules\Content\Models\Sanity\Shows\Tama;
 use App\Modules\Content\Models\Sanity\Shows\TheHistoryOfElectronicDrums;
-use App\Modules\Content\Models\Sanity\Shows\RhytmsFromAnotherPlanet;
+use App\Modules\Content\Models\Sanity\Shows\RhythmsFromAnotherPlanet;
 use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
 use App\Modules\Content\Models\Sanity\Theory;
 use App\Modules\Content\Models\Sanity\Topic;
@@ -104,15 +103,14 @@ class SanityStudioCMSController extends BaseController
             (new Challenges())->toArray(),
             (new OnTheRoad())->toArray(),
             (new Diy())->toArray(),
-            (new RhytmicAdventuresOfCaptainCarson())->toArray(),
+            (new RhythmicAdventuresOfCaptainCarson())->toArray(),
             (new StudyTheGreats())->toArray(),
-            (new RhytmsFromAnotherPlanet())->toArray(),
+            (new RhythmsFromAnotherPlanet())->toArray(),
             (new Tama())->toArray(),
             (new PaisteCymbals())->toArray(),
             (new BehindTheScenes())->toArray(),
             (new ExploringBeats())->toArray(),
             (new Sonor())->toArray(),
-            (new StudentReview())->toArray(),
             (new Routine())->toArray(),
             (new CoachStream())->toArray(),
             (new SemesterPack())->toArray(),

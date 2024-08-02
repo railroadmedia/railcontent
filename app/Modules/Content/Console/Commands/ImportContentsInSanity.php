@@ -36,10 +36,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         'gear-guides' => 'gear-guide',
         'performances' => 'performance',
         'diy-drum-experiments' => 'diy-drum-experiment',
-        'rhythmic-adventures-of-captain-carson' => 'rhytmic-adventures-of-captain-carson',
         'tama-drums' => 'tama',
         'sonor-drums' => 'sonor',
-        'student-review' => 'student-review'
     ];
     public function handle(): int
     {
@@ -71,7 +69,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 ['course-part','course','workout','student-focus','play-along','rudiment',
                     //'routine',
                     'challenge-part','challenge','rhythms-from-another-planet',
-                    //'student-reviews'
                     ],
                 config('railcontent.showTypes')[$this->argument('brand')]
             );
