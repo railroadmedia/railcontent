@@ -146,11 +146,6 @@ $promoLink2 = '/ecommerce/add-to-cart?products[drumeo_access_5-years-3-payments]
     @include("drumeo.sales.partials._footer")
 @endsection
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-08-01 00:00:00',
-        'promoVersion' => true
-    ])
-
 @section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
