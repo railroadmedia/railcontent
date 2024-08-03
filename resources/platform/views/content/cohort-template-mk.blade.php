@@ -195,5 +195,13 @@
             ])
         </div>
     @endif
+<CohortMarketing
+    :cohort="{{ json_encode($cohort) }}"
+    :register-url="{{ json_encode($registerButtonUrl) }}"
+    :n-pack-owners="{{ json_encode(number_format($nPackOwners ?? 0)) }}"
+    :dropdowns="{{ json_encode($cohort->dropdowns) }}"
+    :has-product="{{ json_encode($hasProduct) }}"
+></CohortMarketing>
+
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
