@@ -1,5 +1,5 @@
 <template>
-    <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4">
+    <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
             <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
                 <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="history.back()">
@@ -139,7 +139,7 @@
         </div>
     </header>
 
-    <section class="tw-bg-white tw-py-7">
+    <section class="tw-bg-white tw-py-7" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
             <!--  Body title  -->
             <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['body_title'] }}</h3>
@@ -148,7 +148,7 @@
         </div>
     </section>
 
-    <section class="tw-bg-[#F1F7FE] tw-py-7 ">
+    <section class="tw-bg-[#F1F7FE] tw-py-7 " v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
             <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="openTrailer = true">
                 <!--  Body Image  -->
@@ -353,6 +353,10 @@ const props = defineProps({
     registerUrl: {
         type: String,
         default: ''
+    },
+    isCustom: {
+        type: Boolean,
+        default: false,
     },
 })
 

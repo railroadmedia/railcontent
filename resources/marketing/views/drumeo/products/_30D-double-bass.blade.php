@@ -52,25 +52,12 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            @if(empty($platformVersion))
-                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
+                            <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
+                            <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
                                 <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
-                                    <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
                                         Registration is FREE for Drumeo Members.
-                                    </a>
                                 </p>
-                            @else
-                                <!--  Enrolled Buttons  -->
-                                @if ($isEnrolled)
-                                    <div class="tw-w-full tw-text-center">
-                                        <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
-                                        <a href="{{ $cohort['course_url'] }}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
-                                    </div>
-                                @else
-                                    <!--  Enroll now Button  -->
-                                    <button onclick="enroll()" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
-                                @endif
-                            @endif
+                            </a>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -99,8 +86,8 @@
                     <h4 class="px-3 lg:px-5 text-2xl"><strong>September 2nd</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
+                        Enrollment closes in
                         @if(empty($platformVersion))
-                            Enrollment closes in
                             <span class="text-drumeo" x-data="timer()" x-init="countdown()">
                                 <span x-cloak x-show="timeLeft > 0">
                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -110,6 +97,14 @@
                                 </span>
                                 <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
                             </span>
+                        @else
+                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-09-02 00:00:00" data-promo-version="false">
+                                <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
+                                <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
+                                <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>
+                                <span id="seconds" class="hidden"><span id="secondValue"></span> <span id="secondText"></span></span>
+                            </span>
+                            <span id="expired" class="hidden">A Limited Time!</span>
                         @endif
                     </p>
                 </div>
@@ -239,16 +234,14 @@
                 </h4>
             </div>
 
-            @if(empty($platformVersion))
-                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+            <a href="#final" class="join drumeo medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
 
-                <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                    alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
-                <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
-                    {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
-            @endif
+            <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                alt="Image of joined student profiles in 30-Day Double Bass With 66Samus">
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
+                {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
@@ -554,140 +547,76 @@
     </section>
     @endif
     <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
-        style="background-color:#eff7ff;">
-        <div class="container mx-auto max-w-6xl relative z-50 text-center">
-            <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
-                alt="30 day Double Bass With 66Samus logo">
-            <h3 class="leading-tight mt-2 sm:mt-4"><strong>Boost your speed,<br class="sm:hidden"> control, and creativity.</strong></h3>
-            <p class="leading-normal my-3 my-4">
-                <i class="fas fa-check text-drumeo ml-3"></i> 20 Guided Workouts<br class="sm:hidden">
-                <i class="fas fa-check text-drumeo ml-3"></i> 4 Live Q&A Sessions<br class="lg:hidden">
-                @if(empty($platformVersion))
-                <i class="fas fa-check text-drumeo ml-3"></i> 90-Day Money Back Guarantee<br class="sm:hidden">
-                @endif
-                <i class="fas fa-check text-drumeo ml-3"></i> Lifetime Course Access
-            </p>
-            <h6 class="leading-normal mb-4 text-drumeo uppercase">
-                @if(empty($platformVersion))
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    Enrollment closes in
-                    <strong>
-                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                    </strong>
-                </span>
-                @endif
-            </h6>
 
-            @if(empty($platformVersion))
-            <div class="flex flex-wrap items-start justify-center mx-auto my-6 sm:my-10">
-                @include('drumeo.products.partials._order-card', [
-                    'threeWide' => true,
-                    'badge' => 'FREE QuietKick: <s class="opacity-80">100</s> ' . $products['drumeo_access_5-years']->getPublicStockCount() . ' left!',
-                    'header' => 'Course<br> Only',
-                    'subheader' => '30-Day Double Bass<br> + 2 Bonuses Worth $109',
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
-                    'imageHeight' => 'h-28 lg:h-36',
-                    'price' => '$97',
-                    'specialText' => "One time payment.",
-                    'cta' => 'ENROLL NOW',
-                    'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                    'bonuses' => [
-                        '<strong>30-Day Double Bass</strong>',
-                        '<strong>FREE</strong> Double QuietKick',
-                        '<strong>FREE</strong> 1-month Drumeo Access',
-                    ],
-                ])
-                @include('drumeo.products.partials._order-card', [
-                    'threeWide' => true,
-                    'highlightBorder' => true,
-                    'badge' => 'Best Deal',
-                    'header' => 'Course +<br> Unlimited Lessons',
-                    'subheader' => '30-Day Double Bass<br> + Drumeo & 3 Bonuses',
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course.png',
-                    'imageHeight' => 'h-28 lg:h-36',
-                    'price' => '$240',
-                    'specialText' => "Renews annually at $240.",
-                    'cta' => 'ENROLL NOW',
-                    'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
-                    'bonuses' => [
-                        '<strong>30-Day Double Bass</strong>',
-                        '<strong>Drumeo Annual Membership</strong>',
-                        '<strong>FREE</strong> Double QuietKick',
-                        '<strong>FREE</strong> 30-Day Chops',
-                        '<strong>FREE</strong> 30-Day Independence',
-                    ],
-                ])
-                @include('drumeo.products.partials._order-card', [
-                    'threeWide' => true,
-                    'badge' => 'Double Pedal',
-                    'header' => 'Course + Pedal +<br> Unlimited Lessons',
-                    'subheader' => '30-Day Double Bass + Double Pedal<br> + Drumeo & 3 Bonuses',
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
-                    'imageHeight' => 'h-28 lg:h-36',
-                    'fullPrice' => '$999',
-                    'price' => '$499',
-                    'specialText' => "Renews annually at $240.",
-                    'cta' => 'GET EVERYTHING',
-                    'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
-                    'bonuses' => [
-                        '<strong>30-Day Double Bass</strong>',
-                        '<strong>Drumeo Annual Membership</strong>',
-                        '<strong>Pearl Demonator Double Pedal</strong>',
-                        '<strong>FREE</strong> Double QuietKick',
-                        '<strong>FREE</strong> 30-Day Chops',
-                        '<strong>FREE</strong> 30-Day Independence',
-                    ],
-                ])
+    @if(empty($platformVersion))
+        <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
+            style="background-color:#eff7ff;">
+            <div class="container mx-auto max-w-6xl relative z-50 text-center">
+                <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    alt="30 day Double Bass With 66Samus logo">
+                <h3 class="leading-tight mt-2 sm:mt-4"><strong>Boost your speed,<br class="sm:hidden"> control, and creativity.</strong></h3>
+                <p class="leading-normal my-3 my-4">
+                    <i class="fas fa-check text-drumeo ml-3"></i> 20 Guided Workouts<br class="sm:hidden">
+                    <i class="fas fa-check text-drumeo ml-3"></i> 4 Live Q&A Sessions<br class="lg:hidden">
+                    @if(empty($platformVersion))
+                    <i class="fas fa-check text-drumeo ml-3"></i> 90-Day Money Back Guarantee<br class="sm:hidden">
+                    @endif
+                    <i class="fas fa-check text-drumeo ml-3"></i> Lifetime Course Access
+                </p>
+                <h6 class="leading-normal mb-4 text-drumeo uppercase">
+                    @if(empty($platformVersion))
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                        Enrollment closes in
+                        <strong>
+                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
+                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
+                        </strong>
+                    </span>
+                    @endif
+                </h6>
+
+                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
+                        @include('drumeo.products.partials._order-card', [
+                            'header' => '30-Day Double Bass',
+                            'specialText' => 'For Drumeo Members',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
+                            'imageHeight' => 'h-28 lg:h-36',
+                            'fullPrice' => '$97',
+                            'price' => 'FREE',
+                            'cta' => 'ENROLL NOW',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                        ])
+                        @include('drumeo.products.partials._order-card', [
+                            'badge' => 'Double Pedal Bundle',
+                            'header' => 'Course + Double Pedal',
+                            'specialText' => 'Exclusive Member Deal',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
+                            'imageHeight' => 'h-28 lg:h-36',
+                            'fullPrice' => '$505',
+                            'price' => '$349',
+                            'cta' => 'ENROLL NOW',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'bonuses' => [
+                                '<strong>30-Day Double Bass</strong>',
+                                '<strong>Pearl Demonator Double Pedal</strong>',
+                                '<strong>FREE</strong> Double QuietKick',
+                            ],
+                        ])
+                    </div>
+
             </div>
-
-            <a class="inline-block" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true"><u class="text-drumeo">
-                    Don’t want a free bonus?<br class="lg:hidden"> Click here to get just digital access to 30-Day Double Bass ($97).
-                </u></a>
-            @else
-                <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
-                    @include('drumeo.products.partials._order-card', [
-                        'header' => '30-Day Double Bass',
-                        'specialText' => 'For Drumeo Members',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
-                        'imageHeight' => 'h-28 lg:h-36',
-                        'fullPrice' => '$97',
-                        'price' => 'FREE',
-                        'cta' => 'ENROLL NOW',
-                        'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                    ])
-                    @include('drumeo.products.partials._order-card', [
-                        'badge' => 'Double Pedal Bundle',
-                        'header' => 'Course + Double Pedal',
-                        'specialText' => 'Exclusive Member Deal',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
-                        'imageHeight' => 'h-28 lg:h-36',
-                        'fullPrice' => '$505',
-                        'price' => '$349',
-                        'cta' => 'ENROLL NOW',
-                        'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
-                        'bonuses' => [
-                            '<strong>30-Day Double Bass</strong>',
-                            '<strong>Pearl Demonator Double Pedal</strong>',
-                            '<strong>FREE</strong> Double QuietKick',
-                        ],
-                    ])
-                </div>
-            @endif
-        </div>
-    </section>
-    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
-        <p class="max-w-3xl px-4 md:px-2 leading-loose">
-            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
-        </p>
-    </section>
-    <section class="text-center py-10 text-white" style="background: #00101D;">
+        </section>
+        <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+            <p class="max-w-3xl px-4 md:px-2 leading-loose">
+                <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+            </p>
+        </section>
+        <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5">
                 <p>Call us toll-free at
@@ -703,7 +632,7 @@
             </div>
         </div>
     </section>
-
+    @endif
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
         'video' => '931212517',
