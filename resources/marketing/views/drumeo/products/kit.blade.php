@@ -209,7 +209,7 @@
     @php
      if(!empty($membersVersion)) {
           $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
-          $fullPrice = 499;
+          $fullPrice = 599;
      }
      else {
           $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=_ALESISKIT&locked=true';
@@ -647,8 +647,8 @@
         <section class="px-4 sm:px-6 py-10">
         <div class="container max-w-5xl mx-auto relative z-50">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
-                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
-                    Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
+                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA</strong><br>
+                    Your Drumeo E-Kit will ship for free anywhere in the United States. </p>
 
                 <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
                     We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.

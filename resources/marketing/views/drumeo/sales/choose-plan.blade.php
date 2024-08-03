@@ -51,6 +51,15 @@
         "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
         "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
+    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
+    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+        <div class="bg-black text-white px-5 py-7 sm:py-10">
+            <h6 class="leading-tight text-center">
+                No credit card? Email <u>support@drumeo.com</u> to be manually <br class="hidden sm:inline">
+                entered to start a trial for the drum set giveaway.
+            </h6>
+        </div>
+    @endif
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
     ])
