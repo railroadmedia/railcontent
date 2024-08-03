@@ -19,7 +19,6 @@ import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
-import CohortMarketing from './Components/_Pages/CohortMarketing.vue';
 import Home from './Components/_Pages/Home.vue';
 import LessonHistory from './Components/_Pages/LessonHistory';
 import LessonPlayback from './Components/_Pages/LessonPlayback';
@@ -211,7 +210,6 @@ app.component('AppContainer', AppContainer)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
-    .component('CohortMarketing', CohortMarketing)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)

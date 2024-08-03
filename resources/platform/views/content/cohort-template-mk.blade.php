@@ -13,7 +13,7 @@
             text-transform: uppercase;
             background: #0c1524;
             border-radius: 50px;
-            color: #fff;
+            color: #fff!important;
             padding: 17px 7%;
             outline: none;
             cursor: pointer;
@@ -33,18 +33,11 @@
             background:#14233d;
             box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
         }
-        .join.green {
-            background: #10d05f;
+        .join.drumeo {
+            background:#0b76db;
         }
-        .join.green:hover, .join.green:focus {
-            background: #25ee78;
-        }
-        .join.white {
-            background: #fff;
-            color: #000;
-        }
-        .join.white:hover, .join.white:focus {
-            background: #eee;
+        .join.drumeo:hover {
+            background:#0c84f5;
         }
         .join.sold-out {
             background: #777;
@@ -62,128 +55,84 @@
                 padding:11px 30px;
             }
         }
-        .join.smaller.outline {
-            padding: 8px 28px 6px;
-            font-size: 16px;
-        }
-        @media (min-width: 768px) {
-            .join.smaller.outline {
-                font-size: 18px;
-                padding: 10px 28px 8px;
-            }
-        }
-        .join.coaches {
-            background-color: #fe9f13;
-            color: #000;
-        }
-        .join.coaches:hover, .join.coaches:focus {
-            background: #feb446;
-            color: #000;
-        }
-        .join.promo {
-            background: #ffac00;
-            color: #000;
-        }
-        .join.promo:hover, .join.promo:focus {
-            background: #ffbd33;
-            color: #000;
-        }
-        .join.outline {
-            background: transparent;
-            outline-style: none !important;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 6px 12px;
-        }
-        @media (min-width: 768px) {
-            .join.outline {
-                border-width: 2px;
-                padding: 11px 30px;
-            }
-        }
-        .join.outline:hover, .join.outline:focus {
-            background: #fff;
-            color: #000;
-        }
-        .join.outline.light-navy {
-            border-color: #a1afc9;
-            color: #a1afc9;
-        }
-        .join.outline.light-navy:hover, .join.outline.light-navy:focus {
-            background: #a1afc9;
-            color: #000;
-        }
-        .join.outline.method, .join.outline.pianote {
-            border-color: #f61a30;
-            color: #f61a30;
-        }
-        .join.outline.method:hover, .join.outline.pianote:hover, .join.outline.method:focus, .join.outline.pianote:focus {
-            background: #f61a30;
-            color: #fff;
-        }
-        .join.outline.songs {
-            border-color: #17d1fa;
-            color: #17d1fa;
-        }
-        .join.outline.songs:hover, .join.outline.songs:focus {
-            background: #17d1fa;
-            color: #fff;
-        }
-        .join.outline.coaches {
-            border-color: #fe9f13;
-            color: #fe9f13;
-        }
-        .join.outline.coaches:hover, .join.outline.coaches:focus {
-            background: #fe9f13;
-            color: #fff;
-        }
-        .join.outline.promo {
-            border-color: #ffac00;
-            color: #ffac00;
-        }
-        .join.outline.promo:hover, .join.outline.promo:focus {
-            background: #ffac00;
-            color: #fff;
-        }
-
-        .text-musora {
-            color: #0c1524;
-            -webkit-text-fill-color: #0c1524 !important;
-        }
-
-        .text-musora-gold {
-            color: #FFAE00!important;
-        }
-
-        .bg-musora {
-            background:#0c1524 !important;
-        }
-        .border-musora {
-            border-color:#0c1524!important;
-        }
-        .border-musora-gold {
-            border-color:#FFAE00!important;
-        }
-        .border-musora::before {
-            content:none!important;
-        }
-        .bg-musora-gold {
-            background:#FFAE00 !important;
-        }
     </style>
+@endsection
 
+@section('layout-scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            function startCountdown() {
+                const countdownElement = document.getElementById('countdown');
+                const endTimeString = countdownElement.getAttribute('data-countdown-date');
+                const promoVersion = countdownElement.getAttribute('data-promo-version') === 'true';
 
-    @php
-        $isEnrolled = $hasProduct;
-        $token = csrf_token();
-        $cohortStartDate = \Carbon\Carbon::parse($cohort['cohort_start_date']);
-        $cohortEndDate = \Carbon\Carbon::parse($cohort['cohort_end_date']);
-        $enrollmentEndDate = \Carbon\Carbon::parse($cohort['enrollment_end_date']);
-    @endphp
+                const endTime = new Date(endTimeString).getTime();
+                const expiredElement = document.getElementById('expired');
+                const dayElement = document.getElementById('days');
+                const hourElement = document.getElementById('hours');
+                const minuteElement = document.getElementById('minutes');
+                const secondElement = document.getElementById('seconds');
+
+                const dayValue = document.getElementById('dayValue');
+                const hourValue = document.getElementById('hourValue');
+                const minuteValue = document.getElementById('minuteValue');
+                const secondValue = document.getElementById('secondValue');
+
+                const dayText = document.getElementById('dayText');
+                const hourText = document.getElementById('hourText');
+                const minuteText = document.getElementById('minuteText');
+                const secondText = document.getElementById('secondText');
+
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const timeLeft = endTime - now;
+
+                    if (timeLeft <= 0) {
+                        countdownElement.classList.add('hidden');
+                        expiredElement.classList.remove('hidden');
+                        return;
+                    }
+
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    dayElement.classList.toggle('hidden', days <= 0);
+                    hourElement.classList.toggle('hidden', hours <= 0);
+                    minuteElement.classList.toggle('hidden', minutes <= 0);
+                    secondElement.classList.toggle('hidden', seconds <= 0);
+
+                    dayValue.textContent = days;
+                    hourValue.textContent = hours;
+                    minuteValue.textContent = minutes;
+                    secondValue.textContent = seconds;
+
+                    if (promoVersion) {
+                        dayText.textContent = 'DAYS';
+                        hourText.textContent = 'HRS';
+                        minuteText.textContent = 'MIN';
+                        secondText.textContent = 'SEC';
+                    } else {
+                        dayText.textContent = days === 1 ? ' day ' : ' days ';
+                        hourText.textContent = hours === 1 ? ' hour ' : ' hours ';
+                        minuteText.textContent = minutes === 1 ? ' minute ' : ' minutes ';
+                        secondText.textContent = seconds === 1 ? ' second' : ' seconds';
+                    }
+                }
+
+                setInterval(updateCountdown, 1000);
+                updateCountdown();
+            }
+
+            // Start the countdown on page load
+            startCountdown();
+        });
+    </script>
 @endsection
 
 @section('meta')
-    <title>Cohort Enrollment | Musora</title>
+    <title>Challenge Enrollment | Musora</title>
 @endsection
 
 @section('content')
@@ -195,13 +144,14 @@
             ])
         </div>
     @endif
-<CohortMarketing
-    :cohort="{{ json_encode($cohort) }}"
-    :register-url="{{ json_encode($registerButtonUrl) }}"
-    :n-pack-owners="{{ json_encode(number_format($nPackOwners ?? 0)) }}"
-    :dropdowns="{{ json_encode($cohort->dropdowns) }}"
-    :has-product="{{ json_encode($hasProduct) }}"
-></CohortMarketing>
+    <Cohort
+        :cohort="{{ json_encode($cohort) }}"
+        :register-url="{{ json_encode($registerButtonUrl) }}"
+        :n-pack-owners="{{ json_encode(number_format($nPackOwners ?? 0)) }}"
+        :dropdowns="{{ json_encode($cohort->dropdowns) }}"
+        :has-product="{{ json_encode($hasProduct) }}"
+        :is-custom="true"
+    ></Cohort>
 
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
