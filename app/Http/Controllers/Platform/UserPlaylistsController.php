@@ -181,7 +181,9 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$bypassPermissions = true;
             $oldStatuses = ContentRepository::$availableContentStatues;
             $oldFutureContent = ContentRepository::$pullFutureContent;
-            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
+            if(is_array(ContentRepository::$availableContentStatues)) {
+                array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
+            }
             ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
 
