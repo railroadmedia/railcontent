@@ -320,12 +320,12 @@ class UserPlaylistsController extends BaseController
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
         $publishedItems = $playlistItems;
-       if(!user()->isAdmin()) {
-           $publishedItems =
-               $playlistItems
-                   ->where('status', '!=', ContentService::STATUS_DRAFT)
-                   ->where('need_access', '!=', 'true');
-       }
+        if(!user()->isAdmin()) {
+            $publishedItems =
+                $playlistItems
+                    ->where('status', '!=', ContentService::STATUS_DRAFT)
+                    ->where('need_access', '!=', 'true');
+        }
         ContentRepository::$bypassPermissions = $initialByPassPermissions;
         $playlist['duration'] = $publishedItems->sum('length_in_seconds');
 
