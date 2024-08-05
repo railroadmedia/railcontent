@@ -330,6 +330,7 @@ class UserPlaylistsController extends BaseController
 
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId);
+        throw_if(($playlistItem->isEmpty()), new NotFoundHttpException());
 
         $position = $playlistItem->keys()->first() + 1;
         $playlistItem = $playlistItem->first();
