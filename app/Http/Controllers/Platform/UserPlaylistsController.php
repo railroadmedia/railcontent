@@ -181,13 +181,7 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$bypassPermissions = true;
             $oldStatuses = ContentRepository::$availableContentStatues;
             $oldFutureContent = ContentRepository::$pullFutureContent;
-
-            ContentRepository::$availableContentStatues = [
-                ContentService::STATUS_PUBLISHED,
-                ContentService::STATUS_SCHEDULED,
-                ContentService::STATUS_ARCHIVED,
-                ContentService::STATUS_UNLISTED
-            ];
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
             ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
 
@@ -249,6 +243,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
                 $playlistItems[$index]['difficulty'] = $item['difficulty'] ?? false;
             }
+            $playlist['duration'] = $items->sum('length_in_seconds');
         }
 
         $items = new ContentFilterResultsEntity([
@@ -327,14 +322,17 @@ class UserPlaylistsController extends BaseController
         $publishedItems = $playlistItems;
        if(!user()->isAdmin()) {
            $publishedItems =
-               $playlistItems->where('status', '!=', 'draft');
+               $playlistItems
+                   ->where('status', '!=', ContentService::STATUS_DRAFT)
+                   ->where('need_access', '!=', 'true');
        }
         ContentRepository::$bypassPermissions = $initialByPassPermissions;
+        $playlist['duration'] = $publishedItems->sum('length_in_seconds');
 
         $playlistItem =
             $publishedItems->where('user_playlist_item_id', '=', $playlistItemId);
 
-        $position = $playlistItem->keys()->first();
+        $position = $playlistItem->keys()->first() + 1;
         $playlistItem = $playlistItem->first();
         $nextPlaylistItem = $publishedItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $publishedItems->getMatchOffset($playlistItem, -1);
