@@ -5,9 +5,14 @@ namespace App\Modules\MusoraApi\Services\V5;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\MusoraApi\Jobs\ContentServedEventTrackingJob;
 use Avo;
+use Railroad\Railcontent\Services\RecommendationService;
 
 class RecSysJourneyService
 {
+    public function __construct(private readonly RecommendationService $recommendationService)
+    {
+    }
+
     public function trackHomepageContentClicked(array $props): void
     {
         Avo::homepage_content_clicked(
@@ -38,6 +43,10 @@ class RecSysJourneyService
     public function trackRecommendedContentServed(array $props): void
     {
         $user = user();
-        dispatchWithDelay(new ContentServedEventTrackingJob($props, $user), 5);
+        ContentServedEventTrackingJob::dispatchAfterResponse(
+            $props,
+            $user,
+            AvoHelper::defaultEventProperties([], $user)
+        );
     }
 }

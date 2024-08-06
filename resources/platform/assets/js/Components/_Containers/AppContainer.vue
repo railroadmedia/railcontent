@@ -8,6 +8,7 @@
 <script setup>
 import { watch, provide, onBeforeMount } from 'vue';
 import { useUserStore } from '@stores/user';
+import { usePlatformStore } from '@stores/platform'
 import { toKebabCase } from '../../utils.js'; 
 
 const props = defineProps({
@@ -29,6 +30,9 @@ const props = defineProps({
   userCompletedAccount: {
     type: Boolean,
     default: false,
+  },
+  tinymcePath: {
+    type: String,
   }
 
 });
@@ -37,11 +41,19 @@ onBeforeMount(() => {
   provide('csrf_token', props.csrf_token);
 });
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
 
 watch(
   () => props.user,
   (user) => {
     userStore.setUser(user);
+  },
+  { immediate: true }
+);
+watch(
+  () => props.tinymcePath,
+  (path) => {
+    platformStore.setTinymcePath(path);
   },
   { immediate: true }
 );

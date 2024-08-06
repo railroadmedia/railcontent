@@ -130,9 +130,9 @@
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
 
-                <a class="sm:mx-0.5 w-full sm:w-56 join smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
-                    href="#customize-anchor" aria-label="Customize anchor"
-                >GET STARTED</a>
+{{--                <a class="sm:mx-0.5 w-full sm:w-56 join smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"--}}
+{{--                    href="#customize-anchor" aria-label="Customize anchor"--}}
+{{--                >GET STARTED</a>--}}
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline white smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             </div>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
@@ -340,14 +340,14 @@
                 </h2>
                  <p class="mb-4 sm:mb-6"><strong class="text-musora">Save {{$savePercentage}}%</strong> for your first year. Renews at $240/yr.</p>
 
-                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                    GET STARTED
-                </a>
+{{--                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">--}}
+{{--                    GET STARTED--}}
+{{--                </a>--}}
                 <br>
-                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership"
-                    href="{{ $buttonLink2 }}"
-                >
-                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
+{{--                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership"--}}
+{{--                    href="{{ $buttonLink2 }}"--}}
+{{--                >--}}
+{{--                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>--}}
             </div>
         </section>
     </div>

@@ -15,11 +15,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        @if(request()->is('ultimate-lessons'))
-            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/the-ultimate-lessons-share-image-new.jpg ">
-        @else
-            <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
-        @endif
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
     @endif
 
     @include('_partials.layout._fonts')
@@ -179,15 +175,6 @@
 {{--                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp">--}}
 {{--            </picture>--}}
 {{--        </section>--}}
-    @endif
-    @if(!empty($bfVersion))
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp')",
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
-        'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
-        'vimeo' => '885338636',
-        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
-    ])
     @endif
 
     @php
@@ -412,7 +399,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/pianote/membership/homepage/2023/pianote-collage.png',
+        'image' => 'marketing/pianote/membership/homepage/2024/collage.webp',
         ])
 
     @endif
