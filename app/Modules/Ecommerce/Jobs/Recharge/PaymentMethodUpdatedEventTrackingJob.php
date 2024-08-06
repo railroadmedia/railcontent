@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Jobs\Recharge;
 
 use App\Jobs\WebhookChildJob;
+use App\Modules\Ecommerce\Enums\PaymentType;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Services\EventTrackingService;
 use Illuminate\Support\Facades\Log;
@@ -26,6 +27,9 @@ class PaymentMethodUpdatedEventTrackingJob extends WebhookChildJob
         }
 
         $paymentMethod = $rechargeGateway->getCustomerDefaultPaymentMethod($customerId);
-        $eventTrackingService->trackPaymentMethodExpiryDate($user, $paymentMethod);
+
+        if ($paymentMethod->paymentType === PaymentType::CreditCard) {
+            $eventTrackingService->trackPaymentMethodExpiryDate($user, $paymentMethod);
+        }
     }
 }
