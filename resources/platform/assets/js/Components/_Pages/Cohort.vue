@@ -174,7 +174,7 @@
     </section>
 
 
-    <section id="final" v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
+    <section id="final" v-if="cohort['is_product'] && !isCustom" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
         <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
@@ -205,11 +205,24 @@
     <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <!--  Bottom title  -->
-            <h3 class="tw-font-extrabold tw-text-center">{{ cohort['bottom_title'] }}</h3>
-            <!--  Bottom description  -->
-            <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
-
+            <div class="tw-text-center">
+                <!--  Logo  -->
+                <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
+                <!--  Bottom title  -->
+                <h3 class="tw-font-extrabold ">{{ cohort['bottom_title'] }}</h3>
+                <p class="uppercase tw-mt-4"
+                    :class="`tw-text-${brand}`">
+                    <!-- Countdown -->
+                    <template v-if="countdownText">
+                        Enrollment closes in <span class="tw-font-black">{{ countdownText }}</span>
+                    </template>
+                    <template v-else>
+                        <span class="tw-text-pianote">Enrollment closed</span>
+                    </template>
+                </p>
+                <!--  Bottom description  -->
+                <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
+            </div>
             <template v-if="cohort['is_product']">
                 <div v-if="!isEnrolled && !hasEnded" >
                     <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
