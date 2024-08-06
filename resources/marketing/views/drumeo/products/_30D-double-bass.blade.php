@@ -84,7 +84,7 @@
                     <h4 class="px-3 lg:px-5 text-2xl"><strong>September 2nd</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="lg:hidden">
+                        Enrollment closes in <br class="lg:hidden">
                         @if(empty($platformVersion))
                             <span class="text-drumeo" x-data="timer()" x-init="countdown()">
                                 <span x-cloak x-show="timeLeft > 0">
@@ -96,7 +96,7 @@
                                 <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
                             </span>
                         @else
-                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-09-02 00:00:00" data-promo-version="false">
+                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-09-02 00:00:00">
                                 <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
                                 <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
                                 <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>

@@ -76,28 +76,21 @@
 
 @section('layout-scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             function startCountdown() {
                 const countdownElement = document.getElementById('countdown');
-                const endTimeString = countdownElement.getAttribute('data-countdown-date');
-                const promoVersion = countdownElement.getAttribute('data-promo-version') === 'true';
-
-                const endTime = new Date(endTimeString).getTime();
+                const endTime = new Date(countdownElement.getAttribute('data-countdown-date')).getTime();
                 const expiredElement = document.getElementById('expired');
-                const dayElement = document.getElementById('days');
-                const hourElement = document.getElementById('hours');
-                const minuteElement = document.getElementById('minutes');
-                const secondElement = document.getElementById('seconds');
+                const units = ['days', 'hours', 'minutes', 'seconds'];
+                const timeElements = {};
+                const valueElements = {};
+                const textElements = {};
 
-                const dayValue = document.getElementById('dayValue');
-                const hourValue = document.getElementById('hourValue');
-                const minuteValue = document.getElementById('minuteValue');
-                const secondValue = document.getElementById('secondValue');
-
-                const dayText = document.getElementById('dayText');
-                const hourText = document.getElementById('hourText');
-                const minuteText = document.getElementById('minuteText');
-                const secondText = document.getElementById('secondText');
+                units.forEach(unit => {
+                    timeElements[unit] = document.getElementById(unit);
+                    valueElements[unit] = document.getElementById(`${unit.slice(0, -1)}Value`);
+                    textElements[unit] = document.getElementById(`${unit.slice(0, -1)}Text`);
+                });
 
                 function updateCountdown() {
                     const now = new Date().getTime();
@@ -109,31 +102,24 @@
                         return;
                     }
 
-                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    const timeValues = {
+                        days: Math.floor(timeLeft / (1000 * 60 * 60 * 24)),
+                        hours: Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        minutes: Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)),
+                        seconds: Math.floor((timeLeft % (1000 * 60)) / 1000)
+                    };
 
-                    dayElement.classList.toggle('hidden', days <= 0);
-                    hourElement.classList.toggle('hidden', hours <= 0);
-                    minuteElement.classList.toggle('hidden', minutes <= 0);
-                    secondElement.classList.toggle('hidden', seconds <= 0);
-
-                    dayValue.textContent = days;
-                    hourValue.textContent = hours;
-                    minuteValue.textContent = minutes;
-                    secondValue.textContent = seconds;
-
-                    if (promoVersion) {
-                        dayText.textContent = 'DAYS';
-                        hourText.textContent = 'HRS';
-                        minuteText.textContent = 'MIN';
-                        secondText.textContent = 'SEC';
+                    if (timeValues.days > 6) {
+                        units.slice(1).forEach(unit => timeElements[unit].classList.add('hidden'));
+                        timeElements.days.classList.remove('hidden');
+                        valueElements.days.textContent = timeValues.days;
+                        textElements.days.textContent = timeValues.days === 1 ? ' day ' : ' days ';
                     } else {
-                        dayText.textContent = days === 1 ? ' day ' : ' days ';
-                        hourText.textContent = hours === 1 ? ' hour ' : ' hours ';
-                        minuteText.textContent = minutes === 1 ? ' minute ' : ' minutes ';
-                        secondText.textContent = seconds === 1 ? ' second' : ' seconds';
+                        units.forEach(unit => {
+                            timeElements[unit].classList.toggle('hidden', timeValues[unit] <= 0 && unit !== 'seconds');
+                            valueElements[unit].textContent = timeValues[unit];
+                            textElements[unit].textContent = timeValues[unit] === 1 ? ` ${unit.slice(0, -1)} ` : ` ${unit} `;
+                        });
                     }
                 }
 
@@ -141,7 +127,6 @@
                 updateCountdown();
             }
 
-            // Start the countdown on page load
             startCountdown();
         });
     </script>
