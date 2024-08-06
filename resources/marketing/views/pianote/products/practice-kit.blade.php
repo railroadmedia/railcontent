@@ -3,7 +3,7 @@
 @section('global-head')
     @parent
     <title>Practice Kit | Pianote</title>
-    <meta property="og:title" content="Companion Book | Pianote">
+    <meta property="og:title" content="Practice Kit | Pianote">
     <meta name="description" content="Essential tools to maximize your practice time and improve your playing.">
     <meta property="og:description" content="Essential tools to maximize your practice time and improve your playing.">
     <meta property="og:image"
