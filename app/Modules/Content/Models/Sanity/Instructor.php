@@ -21,6 +21,8 @@ class Instructor extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
             new Field(FieldType::Image, 'thumbnail_url'),
+            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
+            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
         ];
         parent::__construct(self::getName(), 'Instructor', $fields);
     }
