@@ -151,11 +151,14 @@
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
+    import { fetchWorkouts, fetchNewReleases } from '@services/homePageService';
 
     //Pinia Stores
     const userStore = useUserStore();
     const { brand, userCompletedAccount } = storeToRefs(userStore);
 
+    const test = fetchWorkouts(brand.value);
+    const test2 = fetchNewReleases(brand.value);
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
