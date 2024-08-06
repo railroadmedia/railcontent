@@ -3,7 +3,9 @@
 namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Enums\FilterType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\StringListItem;
 
 /**
  * Defines the schema structure for a Topic document type in Sanity.
@@ -20,6 +22,13 @@ class Topic extends BaseSanityModel
     {
         $fields = [
             new Field(FieldType::String, 'name'),
+            new Field(
+                FieldType::Array,
+                'filter_types',
+                description: 'Content types for which this topic will be a filter option',
+                of: new StringListItem(),
+                options: ['list' => FilterType::Topic->filterOptions()]
+            ),
         ];
         parent::__construct(self::getName(), 'Topic', $fields);
     }

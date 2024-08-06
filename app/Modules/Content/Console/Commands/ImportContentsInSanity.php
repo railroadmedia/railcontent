@@ -11,6 +11,25 @@ use App\Modules\Content\Models\ContentPermissions;
 use App\Modules\Content\Models\ContentStyle;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Models\Permission;
+use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\Enums\FilterType;
+use App\Modules\Content\Models\Sanity\Instructor;
+use App\Modules\Content\Models\Sanity\PlayAlong;
+use App\Modules\Content\Models\Sanity\QuickTip;
+use App\Modules\Content\Models\Sanity\Rudiment;
+use App\Modules\Content\Models\Sanity\Shows\Archive;
+use App\Modules\Content\Models\Sanity\Shows\BootCamp;
+use App\Modules\Content\Models\Sanity\Shows\Challenges;
+use App\Modules\Content\Models\Sanity\Shows\GearGuide;
+use App\Modules\Content\Models\Sanity\Shows\Live;
+use App\Modules\Content\Models\Sanity\Shows\Performance;
+use App\Modules\Content\Models\Sanity\Shows\Podcast;
+use App\Modules\Content\Models\Sanity\Shows\QuestionAndAnswer;
+use App\Modules\Content\Models\Sanity\Shows\Solo;
+use App\Modules\Content\Models\Sanity\Shows\Spotlight;
+use App\Modules\Content\Models\Sanity\Song;
+use App\Modules\Content\Models\Sanity\SongTutorial;
+use App\Modules\Content\Models\Sanity\StudentFocus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Modules\Content\Models\ContentCreativity;
@@ -56,8 +75,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         ];
         $permissions = $this->getPermissions();
 
-        $genre = $this->getGenre();
-
         $artists = $this->getArtists();
 
         $instructors = $this->getInstructors();
@@ -81,7 +98,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         //import  related models
         if($this->argument('clean') == 'true') {
             $directory = resource_path() . '/sanitystudio';
-            $related = ['permissions.ndjson','instructors.ndjson'];
+            $related = ['permissions.ndjson','instructors.ndjson','artists.ndjson'];
             foreach ($extraModels as $index => $extraModel) {
                 $related[] = $index.'.ndjson';
             }
@@ -151,7 +168,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 'total_xp'         => (int)$result->total_xp,
                 'published_on'     => $result->published_on,
                 'show_in_new_feed' => $result->show_in_new_feed == 1,
-                "web_url_path"     => '/' . $result->brand . '/' . $contentType . '/' . $result->slug . '/' . $result->id,
+                "web_url_path"     => $result->web_url_path ?? ('/' . $result->brand . '/' . $contentType . '/' . $result->slug . '/' . $result->id),
                 "popularity"       => $result->popularity
             ];
             if($result->sort != 0) {
@@ -392,14 +409,16 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             }
             if (!empty($contentExtraData)) {
                 foreach ($contentExtraData as $index => $contentExtra) {
-                    foreach ($contentExtra as $contentExtraDatum) {
-                        $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentExtraDatum);
-                        if (isset($extraData[$index][$index . '_' . strtolower($name)])) {
-                            $songs[$id]["$index"][] = [
-                                "_type" => "reference",
-                                "_ref"  => $index . '_' . strtolower($name),
-                                "_weak" => false
-                            ];
+                    if(strtolower($index) != 'gear') {
+                        foreach ($contentExtra as $contentExtraDatum) {
+                            $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentExtraDatum);
+                            if (isset($extraData[$index][$index . '_' . strtolower($name)])) {
+                                $songs[$id]["$index"][] = [
+                                    "_type" => "reference",
+                                    "_ref"  => $index . '_' . strtolower($name),
+                                    "_weak" => false
+                                ];
+                            }
                         }
                     }
                 }
@@ -408,8 +427,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $contentGenres = ContentStyle::query()->where('content_id', '=', $result->id)->get();
             foreach ($contentGenres as $contentGenre) {
                 $name =  preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
-               // if(isset($genre['genre_'.strtolower($name)])) {
-               // $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
+                // if(isset($genre['genre_'.strtolower($name)])) {
+                // $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
                 if (isset($extraData['genre']['genre_' . strtolower($name)])) {
                     $songs[$id]["genre"][] = [
                         "_type" => "reference",
@@ -453,18 +472,18 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     }
                 }
             }
-//            $contentHierarchyForChild = ContentHierarchy::with('parent')->where('child_id', '=', $result->id)->get();
-//            foreach ($contentHierarchyForChild as $hierarchy) {
-//                if ($hierarchy->parent) {
-//                    if ($hierarchy->parent->status == 'published') {
-//                        $songs[$id]["parent"] = [
-//                            "_type" => "reference",
-//                            "_ref"  => $hierarchy->parent->type . '_' . $hierarchy->parent->id,
-//                            "_weak" => true
-//                        ];
-//                    }
-//                }
-//            }
+            //            $contentHierarchyForChild = ContentHierarchy::with('parent')->where('child_id', '=', $result->id)->get();
+            //            foreach ($contentHierarchyForChild as $hierarchy) {
+            //                if ($hierarchy->parent) {
+            //                    if ($hierarchy->parent->status == 'published') {
+            //                        $songs[$id]["parent"] = [
+            //                            "_type" => "reference",
+            //                            "_ref"  => $hierarchy->parent->type . '_' . $hierarchy->parent->id,
+            //                            "_weak" => true
+            //                        ];
+            //                    }
+            //                }
+            //            }
         }
         $directory = resource_path() . '/sanitystudio';
         if ($deleteOldDocuments == "true") {
@@ -548,7 +567,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $instructors[$id] = [
                 '_id'   => $id,
                 'name'  => $instructorDatum->name,
-                '_type' => $instructorDatum->type
+                '_type' => $instructorDatum->type,
+                'railcontent_id' => $instructorDatum->id,
+                'web_url_path' => $instructorDatum->web_url_path
             ];
             if ($thumb != '') {
                 $instructors[$id]['thumbnail_url'] = [
@@ -577,8 +598,15 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         foreach ($extraModels as $index => $extraModel) {
             $model = new $extraModel();
 
-            $allData           = $model::query()
-                ->get();
+            $allData           = $model::query();
+            if($index == 'genre') {
+                $allData = $allData->leftJoin('genre', 'genre.name', '=', 'railcontent_content_styles.style')->selectRaw(
+                    'railcontent_content_styles.*,
+            COALESCE(genre.head_shot_picture_url, "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bf73168e-0d5f-476c-e819-d5c6ebb29900/public")
+            AS thumbnail_url'
+                );
+            }
+            $allData = $allData->get();
             $extraData[$index] = [];
             foreach ($allData as $datum) {
                 $columnName = $model->getName();
@@ -588,8 +616,15 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $extraData[$index][$id] = [
                     '_id'   => $id,
                     'name'  => $datum->$columnName,
-                    '_type' => $index
+                    '_type' => $index,
+                    'filter_types' => FilterType::from($index)->filterOptions()
                 ];
+                if($index == 'genre') {
+                    $extraData[$index][$id]['thumbnail_url'] = [
+                        '_type'        => 'image',
+                        '_sanityAsset' => 'image@' . $datum->thumbnail_url
+                    ];
+                }
             }
             $filename = resource_path() . '/sanitystudio/' . $index . '.ndjson';
             foreach ($extraData[$index] as $result) {
@@ -599,43 +634,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }
 
         return $extraData;
-    }
-
-    /**
-     * @return array
-     */
-    private function getGenre(): array
-    {
-        $genreData = ContentStyle::query()
-            ->leftJoin('genre', 'genre.name', '=', 'railcontent_content_styles.style')
-            ->selectRaw(
-                'distinct(railcontent_content_styles.style) as name, "genre" as type,
-            COALESCE(genre.head_shot_picture_url, "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bf73168e-0d5f-476c-e819-d5c6ebb29900/public")
-            AS thumbnail_url'
-            )->get();
-        $genre     = [];
-        foreach ($genreData as $genreDatum) {
-            $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $genreDatum->name);
-
-            $id         = 'genre_' . strtolower($name);
-            $genre[$id] = [
-                '_id'           => $id,
-                'name'          => $genreDatum->name,
-                '_type'         => $genreDatum->type,
-                'thumbnail_url' => [
-                    '_type'        => 'image',
-                    '_sanityAsset' => 'image@' . $genreDatum->thumbnail_url
-                ],
-            ];
-        }
-
-        $filename = resource_path() . '/sanitystudio/genre.ndjson';
-        foreach ($genre as $result) {
-            $newline = json_encode($result) . "\n";
-            file_put_contents($filename, $newline, FILE_APPEND);
-        }
-
-        return $genre;
     }
 
     /**

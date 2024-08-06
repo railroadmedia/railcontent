@@ -108,9 +108,9 @@ function App() {
                         embeddingsIndexDashboard()
                     ],
                     document: {
-                        actions: (prev) =>
+                        actions: (prev, context) =>
                             prev.map((previousAction) =>
-                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken) : previousAction
+                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
                             ),
                     },
                     schema: {

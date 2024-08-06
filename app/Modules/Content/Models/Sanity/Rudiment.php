@@ -19,7 +19,7 @@ class Rudiment extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Rudiments',  withResources: true);
+        parent::__construct(self::getName(), 'Rudiments', withResources: true);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([

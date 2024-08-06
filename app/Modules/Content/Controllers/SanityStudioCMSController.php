@@ -199,7 +199,7 @@ class SanityStudioCMSController extends BaseController
     {
         if($request->get('_type') == 'song') {
             $content = Content::query()
-                ->where('type', '=', 'song')
+                ->where('type', '=', $request->get('_type'))
                 ->where('slug', '=', $request->get('slug')['current'])
                 ->first();
 
@@ -228,7 +228,7 @@ class SanityStudioCMSController extends BaseController
             event(new ContentCreated($content->id));
 
             $content = Content::query()
-                ->where('type', '=', 'song')
+                ->where('type', '=', $request->get('_type'))
                 ->where('slug', '=', $request->get('slug')['current'])
                 ->first();
 
