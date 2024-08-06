@@ -6,6 +6,11 @@
             <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 tw-animate-pulse">
                 <!-- Banner -->
                 <div class="tw-block tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-mt-[16px] tw-mb-[30px] tw-bg-ui-skeleton"></div>
+
+                <!-- lesson mini catalogs -->
+                <mini-catalog-skeleton v-for="n in 3" :key="n"></mini-catalog-skeleton>
+
+
             </div>
             
         </div>
@@ -17,7 +22,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-//import SkeletonLoader from '@components/SkeletonLoader.vue'; // hypothetical skeleton loader component
+import MiniCatalogSkeleton from '@collections/Catalogue/MiniCatalogSkeleton.vue';
 
 const data = ref(null);
 const error = ref(null);
