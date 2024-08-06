@@ -4,6 +4,7 @@ namespace App\Modules\Content\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\Sanity\CatalogMetadata;
 use App\Modules\Content\Models\Sanity\CoachStream;
 use App\Modules\Content\Models\Sanity\Foundation;
 use App\Modules\Content\Models\Sanity\Method;
@@ -130,6 +131,7 @@ class SanityStudioCMSController extends BaseController
             (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),
+            (new CatalogMetadata())->toArray(),
         ];
 
         $publishing = [
