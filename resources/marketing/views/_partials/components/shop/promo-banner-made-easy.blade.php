@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     @endif
-                    <button class="join smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 text-xs" href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" style="width:180px;">ENROLL NOW</button>
+                    <button class="join vue-add-to-cart smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 text-xs" href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"  data-product-json='{"piano-technique-made-easy": 1}' style="width:180px;">ENROLL NOW</button>
                 </div>
             </div>
         </div>
