@@ -1888,22 +1888,8 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
-     */
     public function artists(Request $request)
     {
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
-        ContentRepository::$pullFutureContent = true;
-        ContentRepository::$getFutureScheduledContentOnly = false;
-
-        $artists = $this->contentService->getArtists();
-
-        return view('content.artists', [
-            'artists' => $artists,
-            'numberOfArtists' => count($artists),
-        ]);
+        return view('content.artists');
     }
 }

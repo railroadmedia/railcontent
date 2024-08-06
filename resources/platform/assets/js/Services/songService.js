@@ -1,7 +1,7 @@
 // Sanity.io Service
 const token = 'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ';
 const projectId = '4032r8py'; // Your project ID
-const dataset = 'production'; // Your dataset name
+const dataset = 'staging'; // Your dataset name
 const version = '2021-06-07'; // API version
 
 
@@ -9,7 +9,7 @@ const version = '2021-06-07'; // API version
 export async function fetchSongById(documentId) {
   const fields = [
     'title',
-    '"thumbnail_url": thumbnail.asset->url', 
+    '"thumbnail_url": thumbnail.asset->url',
     '"style": genre[0]->name',
     '"artist": artist->name',
     'album',
@@ -86,9 +86,9 @@ export async function fetchRelatedSongs(brand, songId) {
     *[_type == "song" && railcontent_id == ${songId}]{
       "data": array::unique([
           ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.artist->_id)]{
-          "type": _type, 
-          "id": railcontent_id, 
-          "url": web_url_path, 
+          "type": _type,
+          "id": railcontent_id,
+          "url": web_url_path,
           "published_on": published_on,
           status,
           "fields": [
@@ -102,7 +102,7 @@ export async function fetchRelatedSongs(brand, songId) {
             },
             {
               "key": "difficulty",
-              "value": difficulty           
+              "value": difficulty
             },
             {
               "key": "length_in_seconds",
@@ -115,9 +115,9 @@ export async function fetchRelatedSongs(brand, songId) {
           }]
         }[0...10]),
           ...(*[_type == "song" && brand == "${brand}" && railcontent_id != ${songId} && references(^.genre[]->_id)]{
-          "type": _type, 
-          "id": railcontent_id, 
-          "url": web_url_path, 
+          "type": _type,
+          "id": railcontent_id,
+          "url": web_url_path,
           "published_on": published_on,
           status,
           "fields": [
@@ -131,7 +131,7 @@ export async function fetchRelatedSongs(brand, songId) {
             },
             {
               "key": "difficulty",
-              "value": difficulty           
+              "value": difficulty
             },
             {
               "key": "length_in_seconds",
@@ -223,13 +223,13 @@ export async function fetchAllSongs(brand, page = 1, limit = 10, searchTerm = ""
       {
         "total": count(*[_type == 'artist' && count(*[_type == 'song' && brand == '${brand}' && ^._id == artist._ref ]._id) > 0]),
         "entity": *[_type == 'artist' && count(*[_type == 'song' && brand == '${brand}' && ^._id == artist._ref ]._id) > 0]
-          { 
-            'id': _id, 
-            'type': _type, 
-            name, 
-            'head_shot_picture_url': thumbnail_url.asset->url, 
+          {
+            'id': _id,
+            'type': _type,
+            name,
+            'head_shot_picture_url': thumbnail_url.asset->url,
             'all_lessons_count': count(*[_type == 'song' && brand == '${brand}' && ^._id == artist._ref ]._id),
-            'lessons': *[_type == 'song' && brand == '${brand}' && ^._id == artist._ref ]{ 
+            'lessons': *[_type == 'song' && brand == '${brand}' && ^._id == artist._ref ]{
               railcontent_id,
               title,
               "image": thumbnail.asset->url,
@@ -248,15 +248,15 @@ export async function fetchAllSongs(brand, page = 1, limit = 10, searchTerm = ""
     groupQuery = `
       {
         "total": count(*[_type == 'genre'  && count(*[_type == 'song' && brand == '${brand}' && ^._id in genre[]._ref ]._id) > 0]),
-        "entity": 
+        "entity":
           *[_type == 'genre'  && count(*[_type == 'song' && brand == '${brand}' && ^._id in genre[]._ref ]._id)>0]
-          { 
-            'id': _id, 
-            'type': _type, 
-            name, 
+          {
+            'id': _id,
+            'type': _type,
+            name,
             'head_shot_picture_url': thumbnail_url.asset->url,
             'all_lessons_count': count(*[_type == 'song' && brand == '${brand}' && ^._id in genre[]._ref ]._id),
-            'lessons': *[_type == 'song' && brand == '${brand}' && ^._id in genre[]._ref ]{ 
+            'lessons': *[_type == 'song' && brand == '${brand}' && ^._id in genre[]._ref ]{
               railcontent_id,
               title,
               "image": thumbnail.asset->url,
@@ -388,7 +388,7 @@ export async function fetchSongsInProgress(userId, brand, token) {
     'Content-Type': 'application/json',
     'X-CSRF-TOKEN': token
   };
-  
+
   try {
     const response = await fetch(url, { headers });
     const result = await response.json();
@@ -412,7 +412,7 @@ export async function fetchCurrentSongComplete(userId, content_id, token) {
     'Content-Type': 'application/json',
     'X-CSRF-TOKEN': token
   };
-  
+
   try {
     const response = await fetch(url, { headers });
     const result = await response.json();

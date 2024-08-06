@@ -16,7 +16,8 @@ import LoginCredentials from './Components/_Pages/Settings/LoginCredentials.vue'
 import Payments from './Components/_Pages/Settings/Payments.vue';
 import NotificationSettings from './Components/_Pages/Settings/NotificationSettings.vue';
 import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
-import Artists from './Components/_Pages/Artists.vue';
+import Artists from './Components/_Pages/Artists/Artists.vue';
+import ArtistsSkeleton from './Components/_Pages/Artists/ArtistsSkeleton.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
 import Home from './Components/_Pages/Home/Home.vue';
@@ -207,6 +208,7 @@ app.component('AppContainer', AppContainer)
     .component('Songs', Songs)
     .component('SongSkeleton', SongSkeleton)
     .component('Artists', Artists)
+    .component('ArtistsSkeleton', ArtistsSkeleton)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)

@@ -8,7 +8,6 @@
         </div>
     </div>
 </template>
-
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import { usePageData } from '@hooks/usePageData';
@@ -24,10 +23,7 @@ const props = defineProps({
         required: true,
         default: {}
     },
-    contentId: {
-        type: Number,
-        required: true,
-    },
+    contentId: Number,
 });
 
 // Initialize reactive state
