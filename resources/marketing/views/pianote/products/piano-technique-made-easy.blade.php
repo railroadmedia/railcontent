@@ -641,10 +641,12 @@
         </div>
     </section>
 
-      
-
     @include('pianote.sales.partials._footer')
-
+    
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-08-12 00:00:00',
+        'promoVersion' => true
+    ])
         
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
