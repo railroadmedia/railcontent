@@ -173,7 +173,7 @@ import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
 import ContentService from '@vuesora/assets/js/Services/content';
 import RelatedLessonsToggle from '@collections/RelatedLessons/RelatedLessonsToggle';
 import RelatedLessons from '@collections/RelatedLessons/RelatedLessons';
-import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {

@@ -7,9 +7,6 @@
 @section('content')
 
     <home-page-loader>
-        <template #loading>
-            <song-skeleton></song-skeleton>
-        </template>
         <template #page="{ pageData }">
             <home
                 :is-pack-only="false"
