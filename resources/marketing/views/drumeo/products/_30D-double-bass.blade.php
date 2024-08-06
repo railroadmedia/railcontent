@@ -622,7 +622,7 @@
                             'price' => '$97',
                             'specialText' => "One time payment.",
                             'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
                                 '<strong>FREE</strong> Double QuietKick',
@@ -640,7 +640,7 @@
                             'price' => '$240',
                             'specialText' => "Renews annually at $240.",
                             'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
                                 '<strong>Drumeo Annual Membership</strong>',
@@ -656,11 +656,11 @@
                             'subheader' => '30-Day Double Bass + Double Pedal<br> + Drumeo & 3 Bonuses',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
                             'imageHeight' => 'h-28 lg:h-36',
-                            'fullPrice' => '$999',
+                            'fullPrice' => '$1020',
                             'price' => '$499',
                             'specialText' => "Renews annually at $240.",
                             'cta' => 'GET EVERYTHING',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&promo-code=pearl-annual-bundle&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
                                 '<strong>Drumeo Annual Membership</strong>',
