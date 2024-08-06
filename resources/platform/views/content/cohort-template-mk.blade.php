@@ -7,6 +7,15 @@
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
 
     <style>
+        .timeline-container::after {
+            top: 30px;
+        }
+        @media (min-width: 768px) {
+            .timeline-container .timeline:after {
+                left: 50% !important;
+            }
+        }
+
         .join {
             display: inline-block;
             font: 500 22px/1em 'Bebas Neue', sans-serif;
