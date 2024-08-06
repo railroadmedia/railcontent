@@ -27,7 +27,7 @@
 @yield('global-body')
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-08-01 00:00:00',
+        'countdownDate' => '2024-08-12 00:00:00',
         'promoVersion' => true
     ])
 

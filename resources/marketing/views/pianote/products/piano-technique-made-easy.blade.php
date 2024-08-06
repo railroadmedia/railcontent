@@ -16,18 +16,25 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/ptme.css') }}">
 @stop
 
+<style>
+.text-musora {
+    color: #ffae00;
+}
+</style>
+
 @section('global-body')
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-made-easy', [
         "name" => "Piano Technique Made Easy",
         "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
         "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
-        "noBreadcrumb" => true
+        "noBreadcrumb" => true,
+        "isFixed"  => true,
     ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/header.jpg);">
-        <div class="container">
+        <div class="container" style="padding-top: 110px;">
             <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
@@ -36,17 +43,37 @@
                 class="join vue-add-to-cart"
                 href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 data-product-json='{"piano-technique-made-easy": 1}'
-            >Get Started &raquo;</a>
+            >ENROLL NOW &raquo;</a>
 
-            <p class="breakdown">
-                @if(floatval($productPrices['piano-technique-made-easy']->price) > floatval($productPrices['piano-technique-made-easy']->discounted_price))
-                    <s>NORMALLY ${{ floatval($productPrices['piano-technique-made-easy']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
-                @else
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>
-                @endif
-{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
-                    <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s> 
+        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong> 
+        (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
+        </h3>
+
+        <div class="pt-4">
+            <span x-cloak x-data="timer()" x-init="countdown()">
+                <div class="text-musora">
+                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>                    
+                    <strong class="text-bold">
+                        <span x-cloak x-show="timeLeft > 0 && day > 0">
+                            <span x-text="day"></span>
+                            <span x-text="dayText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0 && hour > 0">
+                            <span x-text="hour"></span>
+                            <span x-text="hourText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0">
+                            <span x-text="minute"></span>
+                            <span x-text="minuteText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0">
+                            <span x-text="second"></span>
+                            <span x-text="secondText"></span>
+                        </span>
+                    </strong>
+                </div>
+            </span>
         </div>
     </header>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
@@ -57,7 +84,7 @@
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/466355774?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">Get Started</a>
+                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">ENROLL NOW</a>
             </div>
         </div>
     </div>
@@ -390,7 +417,7 @@
                     <br><br>
                     And I’m here to help guide you through every step of the journey.
                     <br><br>
-                    So let’s get started!
+                    So let’s ENROLL NOW!
 
 
                     <br><br>
@@ -436,7 +463,7 @@
     <section class="smarter-practice text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/smarter-practice-background.jpg">
         <div class="container">
             <h2><strong>Smarter Practice. Faster Results.</strong></h2>
-            <div class="flex text-left">
+            <div class="flex flex-col md:flex-row text-left">
                 <div class="song-demo-wrap autoplay-video lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/soundslice-demo-image.jpg"
                         data-toggle="modal" data-target="#songSlice">
                     <div class="text-arrow">
@@ -446,7 +473,7 @@
                     <i class="fas fa-play"></i>
                 </div>
 
-                <p>Part of the reason technique is seen as such a difficult thing to practice is that it’s hard to know HOW to practice.
+                <p class="pb-2 md:pb-0">Part of the reason technique is seen as such a difficult thing to practice is that it’s hard to know HOW to practice.
                     <br><br> Maybe you play a couple of scales at the start of your practice and think:
                     <br><br> “That’s my technique practice done.”
                     <br><br> And then you wonder why you’re not seeing better results from your practice.
@@ -564,16 +591,38 @@
                 href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"piano-technique-made-easy": 1}'
-            >Get Started &raquo;</a>
+            >ENROLL NOW &raquo;</a>
             <p class="breakdown">
-                @if(floatval($productPrices['piano-technique-made-easy']->price) > floatval($productPrices['piano-technique-made-easy']->discounted_price))
-                    <s>NORMALLY ${{ floatval($productPrices['piano-technique-made-easy']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
-                @else
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>
-                @endif
-{{--                <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a>--}}
-                    <br> <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
+        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s> 
+        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong> 
+        (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
+        </h3>
+
+        <div class="pt-4">
+            <span x-cloak x-data="timer()" x-init="countdown()">
+                <div class="text-musora">
+                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>                    
+                    <strong class="text-bold">
+                        <span x-cloak x-show="timeLeft > 0 && day > 0">
+                            <span x-text="day"></span>
+                            <span x-text="dayText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0 && hour > 0">
+                            <span x-text="hour"></span>
+                            <span x-text="hourText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0">
+                            <span x-text="minute"></span>
+                            <span x-text="minuteText"></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft > 0">
+                            <span x-text="second"></span>
+                            <span x-text="secondText"></span>
+                        </span>
+                    </strong>
+                </div>
+            </span>
+        </div>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>
@@ -592,27 +641,36 @@
         </div>
     </section>
 
+      
+
     @include('pianote.sales.partials._footer')
+
+        
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $('.lazy').Lazy({
-                threshold: 600
-            });
 
-            var stickyBook = $(".five-skills .sticky-pic");
+    
+    
+    
+<script>
+    $(document).ready(function () {
+        $('.lazy').Lazy({
+            threshold: 600
+        });
+
+        var stickyBook = $(".five-skills .sticky-pic");
             $(window).scroll(function () {
-                var stickToTop = $(".sticky-trigger").offset().top - 60;
-                var unstick = $(".unstick-trigger").offset().top;
+            var stickToTop = $(".sticky-trigger").offset().top - 60;
+            var unstick = $(".unstick-trigger").offset().top;
                 if ($(this).scrollTop() > (stickToTop) && $(this).scrollTop() < (unstick)) {
-                    stickyBook.addClass('active');
-                } else {
-                    stickyBook.removeClass('active');
-                }
+                stickyBook.addClass('active');
+            } else {
+                stickyBook.removeClass('active');
+            }
             });
 
             //sub nav sticky function
@@ -620,7 +678,7 @@
             var navigationLinks = $(".topic-link");
 
             $(window).scroll(function () {
-                var header = $(".subnav-shim").offset().top;
+            var header = $(".subnav-shim").offset().top;
                 var knowledge = $('#knowledge').offset().top - 50;
                 var scales = $('#scales').offset().top - 150;
                 var chords = $('#chords').offset().top - 150;
@@ -629,13 +687,13 @@
                 var scaleThumbs = $('.every-scale').offset().top - 150;
 
                 if ($(this).scrollTop() > (header - 50)) {
-                    navigation.addClass('stick-to-top');
-                    navigationLinks.removeClass('active');
-                    $(".topic-link.features").addClass('active');
-                } else {
-                    navigationLinks.removeClass('active');
-                    navigation.removeClass('stick-to-top');
-                }
+                navigation.addClass('stick-to-top');
+                navigationLinks.removeClass('active');
+                $(".topic-link.features").addClass('active');
+            } else {
+                navigationLinks.removeClass('active');
+                navigation.removeClass('stick-to-top');
+            }
 
                 if ($(this).scrollTop() > knowledge && $(this).scrollTop() < scales) {
                     navigationLinks.removeClass('active');
@@ -655,7 +713,7 @@
                 if ($(this).scrollTop() > arpeggios && $(this).scrollTop() < songs) {
                     navigationLinks.removeClass('active');
                     $(".topic-link.arpeggios").addClass('active');
-                }
+        }
 
                 if ($(this).scrollTop() > songs && $(this).scrollTop() < scaleThumbs) {
                     navigationLinks.removeClass('active');
@@ -666,10 +724,10 @@
                     navigationLinks.removeClass('active');
                     navigation.removeClass('stick-to-top');
                 }
-            });
-
         });
-    </script>
+
+    });
+</script>
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
