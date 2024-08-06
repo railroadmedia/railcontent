@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Enums\PaymentType;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Product;
@@ -223,7 +224,7 @@ class EventTrackingService
     public function trackPaymentMethodExpiryDate(User $user, ?PaymentMethod $paymentMethod): void
     {
         $expiryDate = null;
-        if ($paymentMethod != null) {
+        if ($paymentMethod != null && $paymentMethod->paymentType === PaymentType::CreditCard) {
             $year = $paymentMethod->paymentDetails->exp_year;
             $month = $paymentMethod->paymentDetails->exp_month;
             $expiryDate = Carbon::now()->setYear($year)->setMonth($month)->endOfMonth()->timestamp;
