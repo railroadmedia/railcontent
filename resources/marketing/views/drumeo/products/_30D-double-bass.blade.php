@@ -29,11 +29,10 @@
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
                                 class="inline lg:hidden">starting September 2nd.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative inline-block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailerM = true;">
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
-                        </div>
+{{--                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>--}}
                     </div>
 
                     <p class="hidden lg:inline">
@@ -73,8 +72,7 @@
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
                         style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailer = true;">
-                        <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
-                                class="fas fa-play"></i> Watch Trailer</div>
+{{--                        <div class="join white smaller absolute --}}{{-- bottom-1 --}}{{-- bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>--}}
                     </div>
                 </div>
             </div>
@@ -86,7 +84,7 @@
                     <h4 class="px-3 lg:px-5 text-2xl"><strong>September 2nd</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in
+                        Enrollment closes in<br class="lg:hidden">
                         @if(empty($platformVersion))
                             <span class="text-drumeo" x-data="timer()" x-init="countdown()">
                                 <span x-cloak x-show="timeLeft > 0">
@@ -110,22 +108,22 @@
                 </div>
                 <div
                     class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
-                    <div class="flex md:inline-block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
                             <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 30th</span>
                         </p>
                     </div>
-                    <div class="flex md:inline-block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
                             <span class="text-sm">10 minutes/day<br class="hidden md:inline"> for 30 days.</span>
                         </p>
                     </div>
-                    <div class="flex md:inline-block w-full md:w-auto px-4 md:px-3 justify-center">
+                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play beginner double <br> bass beats & fills.</span>
+                            <span class="text-sm">Play beginner double <br class="hidden md:inline"> bass beats & fills.</span>
                         </p>
                     </div>
                 </div>
@@ -139,6 +137,7 @@
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             @php
+            if (empty($platformVersion)) {
                 $gettings = [
                     [
                         'position' => 'left',
@@ -154,7 +153,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Double Bass fits any schedule. You only need 10-minutes per day to build your endurance and coordination.',
+                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Double Bass fits any schedule. You only need 10 minutes per day to build your endurance and coordination.',
                     ],
                     [
                         'position' => 'left',
@@ -181,6 +180,36 @@
                             'You can access ALL playalongs, charts, and lessons from 30-Day Double Bass for life. That means you can return to your favorite double kick workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
+            }
+            else {
+                $gettings = [
+                    [
+                        'position' => 'left',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/know-exactly.webp',
+                        'title' => 'Know exactly what to practice.',
+                        'desc' =>
+                            'Double Bass pushes you both physically and mentally – it’s easy to get frustrated and give up. That’s why 30-Day Double Bass starts slow and builds your muscles and coordination over 30 days with daily practice. ',
+                    ],
+                    [
+                        'position' => 'right',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/schedule.webp',
+                        'title' => 'Fits any schedule.',
+                        'desc' =>
+                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Double Bass fits any schedule. You only need 10 minutes per day to build your endurance and coordination.',
+                    ],
+                    [
+                        'position' => 'left',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/live-support.webp',
+                        'title' => 'Live support from REAL teachers.',
+                        'desc' =>
+                            'Each week you’ll have a 60-minute live lesson with 66Samus. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
+                    ],
+                ];
+
+            }
             @endphp
             <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
                 @foreach ($gettings as $key => $getting)
@@ -197,7 +226,7 @@
                         </div>
                     @else
                         <div
-                            class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
+                            class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if(!$loop->last) mb-16 md:mb-20 @else md:mb-0 @endif">
                             @if (empty($getting['special']))
                                 <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
                                     onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
@@ -215,7 +244,7 @@
                 @endforeach
             </div>
         </div>
-        <h1 class="leading-none -mt-6 lg:-mt-8 mb-10"><i class="fal fa-angle-down text-drumeo hidden md:inline-block"></i></h1>
+        <h1 class="leading-none -mt-6 lg:-mt-7 mb-10"><i class="fal fa-angle-down text-drumeo hidden md:inline-block"></i></h1>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF7FF">
@@ -229,8 +258,10 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Flexible weekly schedule<br>
-                    <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
-                    <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results
+                    @if(empty($platformVersion))
+                        <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
+                        <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results
+                    @endif
                 </h4>
             </div>
 
@@ -582,31 +613,64 @@
 
                     <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
                         @include('drumeo.products.partials._order-card', [
-                            'header' => '30-Day Double Bass',
-                            'specialText' => 'For Drumeo Members',
+                            'threeWide' => true,
+                            'badge' => 'FREE QuietKick: <s class="opacity-80">100</s> ' . $products['drumeo_access_5-years']->getPublicStockCount() . ' left!',
+                            'header' => 'Course<br> Only',
+                            'subheader' => '30-Day Double Bass<br> + 2 Bonuses Worth $109',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
                             'imageHeight' => 'h-28 lg:h-36',
-                            'fullPrice' => '$97',
-                            'price' => 'FREE',
+                            'price' => '$97',
+                            'specialText' => "One time payment.",
                             'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                        ])
-                        @include('drumeo.products.partials._order-card', [
-                            'badge' => 'Double Pedal Bundle',
-                            'header' => 'Course + Double Pedal',
-                            'specialText' => 'Exclusive Member Deal',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
-                            'imageHeight' => 'h-28 lg:h-36',
-                            'fullPrice' => '$505',
-                            'price' => '$349',
-                            'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-YEAR]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
-                                '<strong>Pearl Demonator Double Pedal</strong>',
                                 '<strong>FREE</strong> Double QuietKick',
+                                '<strong>FREE</strong> 1-month Drumeo Access',
                             ],
                         ])
+                        @include('drumeo.products.partials._order-card', [
+                            'threeWide' => true,
+                            'highlightBorder' => true,
+                            'badge' => 'Best Deal',
+                            'header' => 'Course +<br> Unlimited Lessons',
+                            'subheader' => '30-Day Double Bass<br> + Drumeo & 3 Bonuses',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course.png',
+                            'imageHeight' => 'h-28 lg:h-36',
+                            'price' => '$240',
+                            'specialText' => "Renews annually at $240.",
+                            'cta' => 'ENROLL NOW',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'bonuses' => [
+                                '<strong>30-Day Double Bass</strong>',
+                                '<strong>Drumeo Annual Membership</strong>',
+                                '<strong>FREE</strong> Double QuietKick',
+                                '<strong>FREE</strong> 30-Day Chops',
+                                '<strong>FREE</strong> 30-Day Independence',
+                            ],
+                        ])
+                        @include('drumeo.products.partials._order-card', [
+                            'threeWide' => true,
+                            'badge' => 'Double Pedal',
+                            'header' => 'Course + Pedal +<br> Unlimited Lessons',
+                            'subheader' => '30-Day Double Bass + Double Pedal<br> + Drumeo & 3 Bonuses',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
+                            'imageHeight' => 'h-28 lg:h-36',
+                            'fullPrice' => '$1020',
+                            'price' => '$499',
+                            'specialText' => "Renews annually at $240.",
+                            'cta' => 'GET EVERYTHING',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[pearl-demonator]=1&products[quietkick-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&promo-code=pearl-annual-bundle&locked=true',
+                            'bonuses' => [
+                                '<strong>30-Day Double Bass</strong>',
+                                '<strong>Drumeo Annual Membership</strong>',
+                                '<strong>Pearl Demonator Double Pedal</strong>',
+                                '<strong>FREE</strong> Double QuietKick',
+                                '<strong>FREE</strong> 30-Day Chops',
+                                '<strong>FREE</strong> 30-Day Independence',
+                            ],
+                        ])
+
                     </div>
 
             </div>
