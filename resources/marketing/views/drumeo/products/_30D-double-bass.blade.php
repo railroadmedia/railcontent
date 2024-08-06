@@ -32,8 +32,7 @@
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailerM = true;">
-                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
-                        </div>
+{{--                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>--}}
                     </div>
 
                     <p class="hidden lg:inline">
@@ -73,8 +72,7 @@
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
                         style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
                         x-on:click="trailer = true;">
-                        <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
-                                class="fas fa-play"></i> Watch Trailer</div>
+{{--                        <div class="join white smaller absolute --}}{{-- bottom-1 --}}{{-- bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>--}}
                     </div>
                 </div>
             </div>

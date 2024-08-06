@@ -48,6 +48,13 @@
         .join.drumeo:hover {
             background:#0c84f5;
         }
+        .join.white {
+            background:#fff;
+            color:#000!important;
+        }
+        .join.white:hover {
+            background:#eee;
+        }
         .join.sold-out {
             background: #777;
         }
