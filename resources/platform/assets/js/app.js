@@ -19,7 +19,8 @@ import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
-import Home from './Components/_Pages/Home.vue';
+import Home from './Components/_Pages/Home/Home.vue';
+import HomePageLoader from './Components/_Pages/Home/HomePageLoader.vue';
 import LessonHistory from './Components/_Pages/LessonHistory';
 import LessonPlayback from './Components/_Pages/LessonPlayback';
 import Playlist from './Components/_Pages/Playlist';
@@ -181,6 +182,7 @@ app.component('AppContainer', AppContainer)
     .component('PageLoader', PageLoader)
     .component('PageContainer', PageContainer)
     .component('Home', Home)
+    .component('HomePageLoader', HomePageLoader)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
     .component('CoachEvent', CoachEvent)
