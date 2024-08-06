@@ -127,7 +127,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-01.webp',
                         'desc' =>
                             'It’s one of the hardest things for new piano players. But you can remember the names of the notes without messy stickers with this handy Piano Key Overlay. Simply place the strip on the piano and start playing. Then, remove it once you’ve learned the notes.',
-                        'alt' => 'Piano player reading sheet music',
+                        'alt' => 'Piano Key Overlay',
                         'title' => 'Remember the note names.',
                     ],
                     [
@@ -135,7 +135,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
                         'desc' =>
                             'You need to write on your music. Finger numbers, note names, reminders about how to play a certain passage. Inside the PracticeKit you’ll find pencils, erasers, a highlighter PLUS clear sticky notes so you can mark up your music without ruining the score.',
-                        'alt' => 'Read Music in 30 Days Workbook',
+                        'alt' => 'Practice Kit',
                         'title' => 'Tools to write and remember.',
                     ],
                     [
@@ -143,7 +143,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-03.webp',
                         'desc' =>
                             'The PracticeKit comes fully-loaded, but it also has room to add the Pianote Chords & Scales Book and the Little Book Bundle. Customize your Kit with added resources to make a truly personalized practice experience.',
-                        'alt' => 'Piano and Reading Music Book',
+                        'alt' => 'PracticeKit case',
                         'title' => 'Room for your practice books.',
                     ],
                 ];
@@ -198,12 +198,12 @@
                     </li>
                 @endforeach
             </ul>
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.png"> 
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.webp"> 
         </div>
 
         <div class="hidden md:block"> 
             <picture>
-                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.png">
+                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.webp">
                 <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.png" alt="Pianotr Practice Kit">
             </picture>
         
