@@ -746,50 +746,52 @@
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/logo-black.png"><br>
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
             @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                @include('drumeo.products.partials._promo-cards', [
-                    'firstBadge' => 'SAVE 34%',
-                    'firstDeal' => 'Drumeo<br> EarDrums',
-                    'firstDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
-                    'firstImageHeight' => 'h-28 lg:h-32',
-                    'firstDealDiscount' => 149,
-                    'firstDealPrice' => 99,
-                    'firstDealSub' => 'Just the IEMs',
-                    'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                    'firstButtonText' => 'SELECT',
-                    'firstDealExtra' => "One-time payment.",
-                    'whiteBg' => 'false',
-                    'firstExtraBonuses' => [
-                        '<strong>1 Pair of EarDrum IEMs</strong>',
-                        '<strong>30 Days Of Drumeo</strong>',
-                        'Single-layer Silicone Eartips (S/M/L)',
-                        'Triple-layer Silicone Eartips (S/M/L)',
-                        'Memory Foam Eartips (S/M/L)',
-                        'Drumeo Miniature Road Case',
-                        '2 Black Braided Cables',
-                        'Cleaning Brush',
-                        'Clothing Clip',
-                        '¼” Adapter',
-                    ],
-
-                    'secondBadge' => 'LAUNCH SPECIAL',
-                    'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
-                    'secondDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                    'secondImageHeight' => 'h-28 lg:h-32',
-                    'secondDealPrice' => 'Free EarDrums',
-                    'secondDealExtra' => "with annual Membership of $240/yr.",
-                    'secondButtonText' => 'SELECT',
-                    'secondDealLink' =>
-                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
-                    'secondExtraBonuses' => [
-                        '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
-                        '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
-                        'Step-by-Step Lessons',
-                        'Song Breakdowns',
-                        'Personalized Support',
-                    ],
-                ])
+                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
+                    @include('drumeo.products.partials._order-card', [
+                        'firstOnMobile' => true,
+                        'highlightBorder' => true,
+                        'badge' => 'LAUNCH SPECIAL',
+                        'header' => 'EarDrums + 1 Year<br> Drumeo Membership',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'price' => 'Free EarDrums',
+                        'specialText' => "with annual Membership of $240/yr.",
+                        'cta' => 'SELECT',
+                        'link' =>
+                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
+                        'bonuses' => [
+                            '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
+                            '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
+                            'Step-by-Step Lessons',
+                            'Song Breakdowns',
+                            'Personalized Support',
+                        ],
+                    ])
+                    @include('drumeo.products.partials._order-card', [
+                        'header' => 'Drumeo<br> EarDrums',
+                        'image' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
+                        'price' => '$' . floatval($productPrices['drumeo-eardrums-black']->discounted_price),
+                        'specialText' => 'Just the IEMs',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                        'cta' => 'SELECT',
+                        'specialText' => "One-time payment.",
+                        'bonuses' => [
+                            '<strong>1 Pair of EarDrum IEMs</strong>',
+                            '<strong>30 Days Of Drumeo</strong>',
+                            'Single-layer Silicone Eartips (S/M/L)',
+                            'Triple-layer Silicone Eartips (S/M/L)',
+                            'Memory Foam Eartips (S/M/L)',
+                            'Drumeo Miniature Road Case',
+                            '2 Black Braided Cables',
+                            'Cleaning Brush',
+                            'Clothing Clip',
+                            '¼” Adapter',
+                        ],
+                    ])
+                </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
             @endif

@@ -183,6 +183,21 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
+    public function thirtyDayDoubleBass()
+    {
+        $productId = 844;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-double-bass', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
     public function thirtyDayIndependenceDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
