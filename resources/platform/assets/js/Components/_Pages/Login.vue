@@ -7,6 +7,7 @@ import LoginButton from "@units/Button/LoginButton.vue";
 import LoadingSpinner from "@units/LoadingSpinner/LoadingSpinner.vue";
 import MuButton from "@units/Button/MuButton.vue";
 import NotificationToasts from "@vuesora/Components/NotificationToasts/NotificationToasts.vue";
+import { brandUrl as brandLogos } from "@constants/brands";
 
 import { useNotificationStore } from '@stores/notification';
 import { useUserStore } from "@stores/user";
@@ -151,32 +152,27 @@ const resendEmail = () => {
 <template>
   <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
     <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :isMembersArea="false" />
-    <img id="loginBgImg"
-      src="https://www.musora.com/musora-cdn/image/width=1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/musora/musora_login.jpg"
-      class="tw-absolute tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-w-full tw-h-full tw-z-10"
-      loading="lazy" onload="document.getElementById('loginBgImg').classList.remove('tw-opacity-0')">
     <div
       class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
-      <section id="logoContainer" class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center">
-        <img class="tw-w-full tw-max-w-[280px] tw-mb-6"
+      <section id="logoContainer" class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center tw-px-[20px]">
+        <img class="tw-w-full tw-max-w-[130px] md:tw-max-w-[240px] tw-mb-6"
           src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo">
-        <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span
-            class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span
-            class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
+          <p class="tw-text-[14px] tw-leading-[21px] tw-text-[#9EC0DC]">The ultimate music lessons experience</p>
+        <p class="tw-flex tw-h-[18px] tw-w-full tw-justify-center tw-mt-[4px]">
+          <img class="tw-h-[15px] tw-mr-[9px] tw-self-start" :src="brandLogos.drumeo" alt="Drumeo Logo" />
+          <img class="tw-h-[15px] tw-mr-[9px] tw-self-center" :src="brandLogos.pianote" alt="Pianote Logo" />
+          <img class="tw-h-[16px] tw-mr-[9px] tw-self-end" :src="brandLogos.guitareo" alt="Guitareo Logo" />
+          <img class="tw-h-[16px] tw-self-end" :src="brandLogos.singeo" alt="Singeo Logo" />
+        </p>
       </section>
 
-      <div class="tw-flex tw-flex-col tw-w-full tw-px-4 tw-items-center">
+      <div class="tw-flex tw-flex-col tw-w-full tw-px-[20px] tw-items-center">
         <form v-if="currentForm === 'login-email'" id="loginEmailForm" class="
         tw-flex
         tw-flex-col
-        tw-bg-[#081825]/[90]
         tw-rounded-xl
         tw-w-full
         tw-max-w-[423px]
-        tw-border-[1px]
-        tw-border-[#445F74]
-        tw-px-[30px]
-        tw-py-[40px]
       ">
           <ul v-if="emailError.length" class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
             {{ emailError }}
@@ -202,14 +198,9 @@ const resendEmail = () => {
         <form v-if="currentForm === 'login-password'" id="loginPasswordForm" class="
         tw-flex
         tw-flex-col
-        tw-bg-[#081825]/[90]
         tw-rounded-xl
         tw-w-full
         tw-max-w-[423px]
-        tw-border-[1px]
-        tw-border-[#445F74]
-        tw-px-[30px]
-        tw-py-[40px]
       ">
           <div v-if="passwordError && passwordError.length > 0" class="tw-flex tw-mb-3 tw-text-xs tw-text-pianote">
             {{ passwordError }}
@@ -249,15 +240,10 @@ const resendEmail = () => {
         <section v-if="currentForm === 'reset'" id="resetForm" class="
         tw-flex
         tw-flex-col
-        tw-bg-[#081825]/[90]
         tw-rounded-xl
         tw-w-full
         tw-max-w-[423px]
         tw-h-[369px]
-        tw-border-[1px]
-        tw-border-[#445F74]
-        tw-px-[30px]
-        tw-py-[40px]
       ">
           <p class="text-grey-3 tw-mb-[20px]">
             Please enter your email address and we will send you instructions to reset
@@ -281,14 +267,9 @@ const resendEmail = () => {
         <section v-if="currentForm === 'setup'" id="setupForm" class="
         tw-flex
         tw-flex-col
-        tw-bg-[#081825]/[90]
         tw-rounded-xl
         tw-w-full
         tw-max-w-[423px]
-        tw-border-[1px]
-        tw-border-[#445F74]
-        tw-px-[30px]
-        tw-py-[40px]
         tw-text-center
       ">
           <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] tw-mb-[30px]">You're almost there!</h2>
