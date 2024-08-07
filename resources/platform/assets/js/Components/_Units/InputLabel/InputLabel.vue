@@ -93,7 +93,8 @@ const emit = defineEmits(["onChange", "onFocus", "onEnter"]);
 const onClear = (e) => {
   e.preventDefault();
   emit("onChange", '');
-  emit("onEnter", '');
+  // hmm, weird
+  //emit("onEnter", '');
   maskedValue.value = '';
 };
 
@@ -103,7 +104,7 @@ const onEnter = (e) => {
 };
 
 const getBaseInputStyles = () => `
-    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-black dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
+    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-black dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[15px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
   `
 
 onUpdated(() => {
@@ -119,7 +120,7 @@ onBeforeMount(()=> {
   <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride ? wrapperOverride : ''
   }`">
     <label v-if="labelValue" :for="id"
-      :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
+      :class="`tw-text-sm tw-px-[15px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
         labelValue
       }}</label>
     <div class="tw-flex tw-relative">
@@ -141,7 +142,7 @@ onBeforeMount(()=> {
       />
       <div v-if="showClearButton"
         :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
-        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[20px] tw-z-10" @click="onClear">
+        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[20px] tw-z-10" @click="onClear" type="reset">
           <XIcon class="tw-h-full tw-w-full dark:tw-text-white" />
         </button>
       </div>

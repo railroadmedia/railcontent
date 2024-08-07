@@ -151,13 +151,15 @@ const resendEmail = () => {
 
 <template>
   <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :isMembersArea="false" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError"
+      :isMembersArea="false" />
     <div
-      class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
-      <section id="logoContainer" class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center tw-px-[20px]">
-        <img class="tw-w-full tw-max-w-[130px] md:tw-max-w-[240px] tw-mb-6"
+      class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20 tw-px-[20px]">
+      <section id="logoContainer"
+        class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center tw-border-[#223F57] tw-border-b-[1px] tw-pb-[40px]">
+        <img class="tw-w-full tw-max-w-[130px] md:tw-max-w-[240px] tw-mb-[15px]"
           src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo">
-          <p class="tw-text-[14px] tw-leading-[21px] tw-text-[#9EC0DC]">The ultimate music lessons experience</p>
+        <p class="tw-text-[14px] tw-leading-[21px] tw-text-[#9EC0DC]">The ultimate music lessons experience</p>
         <p class="tw-flex tw-h-[18px] tw-w-full tw-justify-center tw-mt-[4px]">
           <img class="tw-h-[15px] tw-mr-[9px] tw-self-start" :src="brandLogos.drumeo" alt="Drumeo Logo" />
           <img class="tw-h-[15px] tw-mr-[9px] tw-self-center" :src="brandLogos.pianote" alt="Pianote Logo" />
@@ -166,7 +168,7 @@ const resendEmail = () => {
         </p>
       </section>
 
-      <div class="tw-flex tw-flex-col tw-w-full tw-px-[20px] tw-items-center">
+      <div class="tw-flex tw-flex-col tw-w-full tw-items-center">
         <form v-if="currentForm === 'login-email'" id="loginEmailForm" class="
         tw-flex
         tw-flex-col
@@ -174,6 +176,9 @@ const resendEmail = () => {
         tw-w-full
         tw-max-w-[423px]
       ">
+          <h2 class="tw-text-[24px] tw-leading-[36px] tw-w-full tw-text-center tw-pt-[40px] tw-pb-[30px]">
+            Sign in
+          </h2>
           <ul v-if="emailError.length" class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
             {{ emailError }}
           </ul>
@@ -182,10 +187,12 @@ const resendEmail = () => {
             <li>{{ sessionstatus }}</li>
           </ul>
           <div class="tw-flex tw-flex-col tw-mb-[20px]">
-            <InputLabel :initialValue="emailInput" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
-              :brand="userStore.brand" inputType="email" id="loginEmail" inputName="email" labelValue="Email Address"
+            <InputLabel :initialValue="emailInput"
+              inputOverride="tw-w-full tw-h-[40px] tw-text-[#00101D] tw-text-[14px] tw-leading-[21px]"
+              :brand="userStore.brand" inputType="email" id="loginEmail" inputName="email" labelValue="Email address"
               placeholder="Enter your email..." :inputErrors="[]" @onChange="handleEmailChange"
-              @onEnter="validateEmail" />
+              labelOverride="tw-font-normal" clearButtonOverride="tw-text-black" @onEnter="validateEmail"
+              :showClearButton="true" />
           </div>
 
           <LoginButton :disabled="emailInput.length === 0" type="button" @on-button-click="validateEmail">
@@ -194,6 +201,18 @@ const resendEmail = () => {
             </span>
             <span v-if="!isLoading">NEXT</span>
           </LoginButton>
+          <div class="tw-flex tw-w-full tw-items-center tw-my-[40px]">
+            <hr class="tw-flex-1 tw-border-[#223F57] tw-grow" />
+            <span class="tw-mx-[10px] tw-grow-0 tw-text-[#9EC0DC] tw-text-[12px] tw-leading-[18px]">OR</span>
+            <hr class="tw-flex-1 tw-border-[#223F57] tw-grow" />
+          </div>
+          <p class="tw-text-center tw-text-[14px] tw-leading-[21px]">
+            <span class="tw-text-[#9EC0DC]">Not a member yet?</span>
+            <br />
+            <a class="tw-text-white tw-text-[14px] tw-leading-[21px]" :href="orderNowUrl">
+              Join the community here!
+            </a>
+          </p>
         </form>
         <form v-if="currentForm === 'login-password'" id="loginPasswordForm" class="
         tw-flex
@@ -202,6 +221,12 @@ const resendEmail = () => {
         tw-w-full
         tw-max-w-[423px]
       ">
+          <h2 class="tw-text-[24px] tw-leading-[36px] tw-w-full tw-text-center tw-pt-[40px]">
+            Welcome back!
+          </h2>
+          <p class="tw-w-full tw-text-center tw-text-[14px] tw-leading-[21px] tw-pb-[30px] tw-pt-[10px] tw-text-[#9EC0DC]">
+            <span>{{ emailInput }}</span><span>&nbsp;|&nbsp;</span><a class="tw-text-white tw-text-[14px] tw-leading-[21px]" @click="changeCurrentForm('login-email')">Change</a>
+          </p>
           <div v-if="passwordError && passwordError.length > 0" class="tw-flex tw-mb-3 tw-text-xs tw-text-pianote">
             {{ passwordError }}
           </div>
@@ -211,10 +236,12 @@ const resendEmail = () => {
           </ul>
           <input type="hidden" name="email" :value="emailInput" />
           <div class="tw-flex tw-flex-col tw-mb-[20px] tw-relative">
-            <InputLabel wrapperOverride="tw-text-[16px]" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+            <InputLabel wrapperOverride="tw-text-[16px]"
+              inputOverride="tw-w-full tw-h-[40px] tw-text-[#00101D] tw-text-[14px] tw-leading-[21px]"
               :brand="userStore.brand" :inputType="isPasswordVisible ? 'text' : 'password'" id="loginPassword"
               inputName="password" labelValue="Password" placeholder="Enter your password..." :inputErrors="[]"
-              @onChange="handlePasswordChange" @onEnter="handleButtonClick" :showCustomButton="true">
+              @onChange="handlePasswordChange" @onEnter="handleButtonClick" :showCustomButton="true"
+              labelOverride="tw-font-normal" clearButtonOverride="tw-text-black">
               <template #custom-btn>
                 <button type="button"
                   class="tw-w-[24px] tw-h-[24px] tw-absolute tw-flex tw-items-center tw-justify-center tw-right-3 tw-text-black"
@@ -234,7 +261,8 @@ const resendEmail = () => {
           </LoginButton>
 
           <button id="hidden-submit" type="submit" hidden>Submit</button>
-          <a id="resetToggle" class="text-center text-grey-3 noselect tw-text-[16px] tw-mt-[20px]"
+
+          <a class="tw-text-center tw-text-white tw-text-[14px] tw-leading-[21px] tw-mt-[40px]"
             @click="() => changeCurrentForm('reset')">Forgot your password?</a>
         </form>
         <section v-if="currentForm === 'reset'" id="resetForm" class="
@@ -245,22 +273,27 @@ const resendEmail = () => {
         tw-max-w-[423px]
         tw-h-[369px]
       ">
-          <p class="text-grey-3 tw-mb-[20px]">
-            Please enter your email address and we will send you instructions to reset
-            your password.
+          <h2 class="tw-text-[24px] tw-leading-[36px] tw-w-full tw-text-center tw-pt-[40px]">
+            Forgot your password?
+          </h2>
+          <p class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-text-center tw-text-white tw-pt-[10px] tw-mb-[30px]">
+            Enter your email address and we will send you instructions to reset your password.
           </p>
 
           <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
             <slot v-if="usecsrftoken" name="csrf"></slot>
             <div class="tw-flex tw-flex-col tw-mb-[20px]">
-              <InputLabel :initialValue="emailInput" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
-                :brand="userStore.brand" inputType="email" id="resetEmail" inputName="email" labelValue="Email Address"
-                placeholder="Enter your email..." :inputErrors="[]" @onChange="handleEmailChange" />
+              <InputLabel :initialValue="emailInput"
+                inputOverride="tw-w-full tw-h-[40px] tw-text-[#00101D] tw-text-[14px] tw-leading-[21px]"
+                :brand="userStore.brand" inputType="email" id="resetEmail" inputName="email" labelValue="Email"
+                placeholder="Enter your email..." :inputErrors="[]" @onChange="handleEmailChange"
+                labelOverride="tw-font-normal" clearButtonOverride="tw-text-black" />
             </div>
             <LoginButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
           </form>
 
-          <a id="loginToggle" class="tw-text-center text-grey-3 noselect tw-pt-[20px]" @click="() => changeCurrentForm('login-email')">Back
+          <a id="loginToggle" class="tw-text-[14px] tw-leading-[21px] tw-text-center tw-text-white tw-pt-[40px]"
+            @click="() => changeCurrentForm('login-email')">Back
             to
             Login</a>
         </section>
@@ -278,18 +311,12 @@ const resendEmail = () => {
             <br /><br />
             Didn’t get it? Please check your spam or resend the email link to try again.
           </p>
-          <MuButton styleType="secondary" class="tw-bg-[#081825] tw-border-[2px] tw-border-white hover:tw-bg-white tw-text-white hover:tw-text-[#081825]" :disabled="isResendButtonDisabled" @click="resendEmail">RESEND EMAIL
+          <MuButton styleType="secondary"
+            class="tw-bg-[#081825] tw-border-[2px] tw-border-white hover:tw-bg-white tw-text-white hover:tw-text-[#081825]"
+            :disabled="isResendButtonDisabled" @click="resendEmail">RESEND EMAIL
           </MuButton>
         </section>
       </div>
-
-      <p v-if="currentForm === 'login-email'" class="tiny tw-text-center tw-py-[20px] tw-text-[16px]">
-        <span>Not a member yet?</span>
-        <br />
-        <a class="tw-text-white tw-font-extrabold tw-underline" :href="orderNowUrl">
-          Join the community here!
-        </a>
-      </p>
     </div>
   </div>
 </template>
