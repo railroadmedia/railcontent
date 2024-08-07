@@ -31,7 +31,8 @@
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
-                        x-on:click="trailer = true;">
+                            x-on:click="trailer = true;"
+                    >
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -71,7 +72,8 @@
                 <div class="w-full sm:w-5/12 hidden sm:inline-block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
                         style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
-                        x-on:click="trailer = true;">
+                            x-on:click="trailer = true;"
+                    >
                         <div class="join white smaller absolute  bottom-1  bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -697,15 +699,16 @@
         </div>
     </section>
     @endif
-    @include('_partials.components.video-modal', [
-        'name' => 'trailer',
-        'video' => '995963955',
-        'vimeo' => true,
-    ])
-
-    @include('_partials.components.video-modal',[
-        'name' => 'trailerM',
-        'video' => '931214479',
-        'vimeo' => true,
-            'styles' => 'pb-[177%] bg-white',
-    ])
+    @if(empty($platformVersion))
+        @include('_partials.components.video-modal', [
+            'name' => 'trailer',
+            'video' => '995963955',
+            'vimeo' => true,
+        ])
+    @else
+        @include('_partials.components.video-modal', [
+            'name' => 'trailer',
+            'video' => '995994882',
+            'vimeo' => true,
+        ])
+    @endif
