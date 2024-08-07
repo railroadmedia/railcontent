@@ -23,5 +23,7 @@
         </div>
     </div>
 </div>
-<div class="promo-banner-shim"></div>
+<div class="promo-banner-shim bg-cover bg-top"
+    style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp');"
+></div>
 

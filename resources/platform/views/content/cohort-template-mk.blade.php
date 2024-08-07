@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
 
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>     <!-- Alpine Plugin -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
+
     <style>
         .timeline-container::after {
             top: 30px;
@@ -134,6 +138,13 @@
 
 @section('meta')
     <title>Challenge Enrollment | Musora</title>
+@endsection
+
+@section('body-data')
+    x-data ="{
+    trailer : false,
+    trailerM: false,
+    }"
 @endsection
 
 @section('content')
