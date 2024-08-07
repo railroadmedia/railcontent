@@ -57,7 +57,7 @@ class Challenge extends BaseSanityModel
             new Field(FieldType::String, 'genre_ai', 'Genre AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
             new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
-            new Field(FieldType::Number, 'child_count', 'Child count', hidden: "({document}) => !document?.soundslice", readOnly: "true", group:$detailsGroup),
+            new Field(FieldType::Number, 'child_count', 'Child count', hidden: "true", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
             new Field(FieldType::Image, 'pack_logo', 'Pack Logo', group:$detailsGroup),
             new Field(FieldType::Image, 'dark_logo', 'Dark Logo', group:$detailsGroup),

@@ -75,7 +75,7 @@ class Course extends BaseSanityModel
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
-            new Field(FieldType::Number, 'child_count', 'Child count', group:$detailsGroup),
+            new Field(FieldType::Number, 'child_count', 'Child count', group:$detailsGroup, hidden: "true"),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
             new Field(FieldType::Array, 'child', 'Lessons', '', of: $childReference, group:$detailsGroup),
