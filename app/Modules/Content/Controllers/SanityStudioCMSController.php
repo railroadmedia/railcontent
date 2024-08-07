@@ -199,11 +199,25 @@ class SanityStudioCMSController extends BaseController
 
     public function getLastContent(Request $request): array|Content
     {
-        if($request->get('_type') == 'song') {
-            $content = Content::query()
-                ->where('type', '=', $request->get('_type'))
-                ->where('slug', '=', $request->get('slug')['current'])
-                ->first();
+        if ($request->get('_type') === 'permission') {
+            $permissionService = app()->make(PermissionService::class);
+            $permission = $permissionService->getByName($request->get('name'));
+            if(!$permission) {
+                $permission = $permissionService->create($request->get('name'), $request->get('brand'));
+            }
+            return $permission;
+        }else {
+            if($request->has('railcontent_id')){
+                $content = Content::query()
+                    ->where('type', '=', $request->get('_type'))
+                    ->where('id', '=', $request->get('railcontent_id'))
+                    ->first();
+            }else {
+                $content = Content::query()
+                    ->where('type', '=', $request->get('_type'))
+                    ->where('slug', '=', $request->get('slug')['current'])
+                    ->first();
+            }
 
             if (!$content) {
                 $content             = new Content();
@@ -219,6 +233,7 @@ class SanityStudioCMSController extends BaseController
 
             $content->status = 'published';
             $content->brand  = $request->get('brand');
+            $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
             $content->setTitle($request->get('title'));
             $content->setDifficulty($request->get('difficulty'));
             $content->setXP($request->get('xp'));
@@ -229,19 +244,12 @@ class SanityStudioCMSController extends BaseController
 
             event(new ContentCreated($content->id));
 
+            //need to pull again content for the web_url_path
             $content = Content::query()
-                ->where('type', '=', $request->get('_type'))
-                ->where('slug', '=', $request->get('slug')['current'])
+                ->where('id', '=',$content->id)
                 ->first();
 
             return $content;
-        } elseif ($request->get('_type') === 'permission') {
-            $permissionService = app()->make(PermissionService::class);
-            $permission = $permissionService->getByName($request->get('name'));
-            if(!$permission) {
-                $permission = $permissionService->create($request->get('name'), $request->get('brand'));
-            }
-            return $permission;
         }
     }
 }
