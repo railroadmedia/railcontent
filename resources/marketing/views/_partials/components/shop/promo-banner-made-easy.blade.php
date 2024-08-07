@@ -6,11 +6,9 @@
 </style>
  <div class="big-promo-banner w-full text-white text-center lg:text-left relative py-2 bg-cover bg-top shadow-lg @if(!empty($isFixed)) z-[60] sticky top-[40px] md:top-[56px] @endif"
      style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp'); position: fixed">
-   <div class="container max-w-5xl mx-auto px-3">
-        <div class="flex flex-col sm:flex-row items-center justify-between">
-            <h4 class="text-white uppercase font-semibold tracking-wide"><strong>Final sale</strong></h4>
-            <div class="flex flex-col sm:flex-row items-center justify-between w-full lg:w-auto">
-                <p class="text-center sm:text-left mx-auto sm:mx-0 my-2 sm:my-0">
+   <div class="container max-w-6xl mx-auto px-3 flex flex-row justify-between items-center">
+   <div class="w-2/3 sm:w-3/4"> 
+            <h4 class="text-center sm:text-left mx-auto sm:mx-0 my-2 sm:my-0 uppercase"><strong>
                     @if(!empty($price))
                         @if(round(100 - (100 * ($price / $fullPrice))) > 1)
                             Save <strong>{{ round(100 - (100 * ($price / $fullPrice))) }}%</strong> on {{ $name }}
@@ -18,57 +16,17 @@
                             {!!  $specialText  !!}
                         @endif
                     @endif
-                </p>
-                <div class="flex flex-row justify-center items-center">
-                    @if(empty($noCountdown))
-                        <div class="mx-auto px-4" x-data="timer()" x-init="countdown()" x-cloak>
-                            <div class="flex text-center mx-auto sm:mx-0">
-                                <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">
-                                    <div class="text-2xl sm:text-3xl font-extrabold" x-text="day"></div>
-                                    <div class="text-sm font-bold text-yellow-400" x-text="dayText"></div>
-                                </div>
-                                <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && hour > 0">
-                                    <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour"></div>
-                                    <div class="text-sm font-bold text-yellow-400" x-text="hourText"></div>
-                                </div>
-                                <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">
-                                    <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute"></div>
-                                    <div class="text-sm font-bold text-yellow-400" x-text="minuteText"></div>
-                                </div>
-                                <div x-show="timeLeft > 0">
-                                    <div class="text-2xl sm:text-3xl font-extrabold" x-text="second"></div>
-                                    <div class="text-sm font-bold text-yellow-400" x-text="secondText"></div>
-                                </div>
-                                <span class="text-base md:text-xl font-bold text-yellow-400" x-show="timeLeft < 0">A Limited Time Left!</span>
-                            </div>
-                        </div>
-                    @endif
-                    <button class="join vue-add-to-cart smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"  data-product-json='{"piano-technique-made-easy": 1}' style="width:180px;">GET STARTED</button>
-                </div>
-            </div>
+                    </strong>
+            </h4>
+   </div> 
+
+    <div class="w-1/3 sm:w-1/4 text-right">
+        <button class="join vue-add-to-cart smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 max-w-[180px]" href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"  data-product-json='{"piano-technique-made-easy": 1}'>GET STARTED</button>
+    </div>
+         
+            {{-- <h4 class="text-white uppercase font-semibold tracking-wide"><strong>Final sale</strong></h4> --}}
         </div>
     </div>
 </div>
 <div class="promo-banner-shim"></div>
-{{--@if(!empty($noBreadcrumb))--}}
-{{--    <div class="promo-banner text-center text-white w-full block fixed bg-cover bg-center" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp');">--}}
-{{--        <div class="noise-wrap">--}}
-{{--            <div class="row container mx-auto">--}}
-{{--                <div class="text text-left">--}}
-{{--                    @include($theme.'._partials.holiday-logo',[--}}
-{{--                        'styles' => 'logo'--}}
-{{--                    ])--}}
-{{--                    <p>--}}
-{{--                        @if(!empty($price))--}}
-{{--                            @if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}
-{{--                                <strong>Save <span class="text-promo">{{ round(100 - (100 * ($price / $fullPrice))) }}%</span> on<br> {{ $name }}</strong>--}}
-{{--                            @elseif(!empty($specialText))--}}
-{{--                                {!! $specialText !!}--}}
-{{--                            @endif--}}
-{{--                        @endif--}}
-{{--                    </p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--@endif--}}
+
