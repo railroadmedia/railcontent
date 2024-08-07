@@ -24,33 +24,13 @@
         }
     @endphp
 
-    <page-loader
-        page="songs"
+    <song
+        :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
+        :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
+        :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
         :content-id="{{ json_encode($lessonContent->fetch('id')) }}"
-    >
-        <template #loading>
-            <song-skeleton></song-skeleton>
-        </template>
-        <template #page="{ pageData }">
-            <song
-                :thumbnail-url="pageData?.thumbnail_url"
-                :song-title="pageData?.title"
-                :song-artist="pageData?.artist"
-                :song-album="pageData?.album"
-                :song-meta="pageData?.style"
-                :has-instrumentless="pageData?.instrumentless"
-                :lesson-progress="pageData?.lesson_progress"
-                :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-                :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
-                :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-                :content-id="{{ json_encode($lessonContent->fetch('id')) }}"
-                :resources="pageData?.resources"
-                :assignments="pageData?.soundslice"
-                :related-lessons="pageData?.relatedLessons"
-                :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
-                :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
-            ></song>
-        </template>
-    </page-loader>
+        :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
+        :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
+    ></song>
 
 @endsection
