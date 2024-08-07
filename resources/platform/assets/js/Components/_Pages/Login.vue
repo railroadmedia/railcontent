@@ -9,6 +9,8 @@ import MuButton from "@units/Button/MuButton.vue";
 import NotificationToasts from "@vuesora/Components/NotificationToasts/NotificationToasts.vue";
 import { brandUrl as brandLogos } from "@constants/brands";
 
+// TODO: SPLIT INTO STEP COMPONENTS
+
 import { useNotificationStore } from '@stores/notification';
 import { useUserStore } from "@stores/user";
 const userStore = useUserStore();
