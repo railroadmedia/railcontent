@@ -2,11 +2,15 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * App\Modules\Content\Models\Content
@@ -27,12 +31,50 @@ class ContentUserProgress extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function content(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'content_id');
+    }
+
     public static function isCompletedByUser(int $contentId, int $userId): bool
     {
         return self::where('content_id', $contentId)
         ->where('user_id', $userId)
         ->where('state', ProgressState::Completed->value)
         ->exists();
+    }
+
+    /**
+     * Scope a query to only include records that are not complete.
+     */
+    public function scopeIncomplete(Builder $query): Builder
+    {
+        return $query->whereNot('state', ProgressState::Completed->value);
+    }
+
+    /**
+     * Scope a query to only include progress for content of a given type.
+     */
+    public function scopeOfContentType(Builder $query, string $type): Builder
+    {
+        return $query->whereHas('content', function ($query) use ($type) {
+            $query->where('type', $type);
+        });
+    }
+
+    /**
+     * Scope a query to only include progress for content with a given brand.
+     */
+    public function scopeOfContentBrand(Builder $query, Brand $brand): Builder
+    {
+        return $query->whereHas('content', function ($query) use ($brand) {
+            $query->where('brand', $brand->value);
+        });
     }
 
     /**

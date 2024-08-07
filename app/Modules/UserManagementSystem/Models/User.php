@@ -5,6 +5,7 @@ namespace Modules\UserManagementSystem\Models;
 use App\Enums\Interval;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
@@ -370,6 +371,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(Customer::class, 'user_id');
     }
 
+    public function progress(): HasMany
+    {
+        return $this->hasMany(ContentUserProgress::class, 'user_id');
+    }
 
     public function getNotificationSetting(string $brand, string $settingName): bool
     {
