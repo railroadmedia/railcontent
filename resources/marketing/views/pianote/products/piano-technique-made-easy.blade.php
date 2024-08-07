@@ -34,7 +34,7 @@
         "isFixed"  => true,
     ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/header.jpg);">
-        <div class="container" style="padding-top: 110px;">
+        <div class="container">
             <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
@@ -46,7 +46,7 @@
             >GET STARTED &raquo;</a>
 
         <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>
-        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
+        <strong>${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
         (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
         </h3>
 
@@ -595,7 +595,7 @@
             >GET STARTED &raquo;</a>
             <p class="breakdown">
         <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>
-        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
+        <strong>${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
         (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
         </h3>
 
