@@ -211,9 +211,9 @@
             $infoPops = [
                 ['top' => '75%', 'left' => '15%', 'tip' => 'PracticeKit case'],
                 ['top' => '80%', 'left' => '75%', 'tip' => '2 Mechanical Pencils'],
-                ['top' => '90%', 'left' => '83%', 'tip' => 'Mechanical Eraser'],
+                ['top' => '90%', 'left' => '83%', 'tip' => 'TwoTone Highlighter'],
                 ['top' => '90%', 'left' => '40%', 'tip' => 'Set of Colored Pencils with Sharpener'],
-                ['top' => '74%', 'left' => '75%', 'tip' => 'TwoTone Highlighter'],
+                ['top' => '74%', 'left' => '75%', 'tip' => 'Mechanical Eraser'],
                 ['top' => '27%', 'left' => '73%', 'tip' => 'Piano Key Overlay'],
                 ['top' => '60%', 'left' => '67%', 'tip' => 'Set of Piano Paperclips'],
                 ['top' => '60%', 'left' => '75%', 'tip' => 'Package of Clear Sticky Notes'],
