@@ -28,8 +28,8 @@
     ])
     @include('_partials.components.shop.promo-banner-made-easy', [
         "name" => "Piano Technique Made Easy",
-        "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
-        "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
+        "fullPrice" => 120,
+        "price" => 19,
         "noBreadcrumb" => true,
         "isFixed"  => true,
     ])
