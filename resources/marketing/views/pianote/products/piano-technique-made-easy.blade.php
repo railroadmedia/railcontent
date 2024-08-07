@@ -43,17 +43,17 @@
                 class="join vue-add-to-cart"
                 href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 data-product-json='{"piano-technique-made-easy": 1}'
-            >ENROLL NOW &raquo;</a>
+            >GET STARTED &raquo;</a>
 
-        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s> 
-        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong> 
+        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>
+        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
         (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
         </h3>
 
         <div class="pt-4">
             <span x-cloak x-data="timer()" x-init="countdown()">
                 <div class="text-musora">
-                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>                    
+                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>
                     <strong class="text-bold">
                         <span x-cloak x-show="timeLeft > 0 && day > 0">
                             <span x-text="day"></span>
@@ -75,6 +75,7 @@
                 </div>
             </span>
         </div>
+        </div>
     </header>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
         <i class="close stop-play fas fa-times" data-dismiss="modal" aria-label="Close"></i>
@@ -84,7 +85,7 @@
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/466355774?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">ENROLL NOW</a>
+                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">GET STARTED</a>
             </div>
         </div>
     </div>
@@ -417,7 +418,7 @@
                     <br><br>
                     And I’m here to help guide you through every step of the journey.
                     <br><br>
-                    So let’s ENROLL NOW!
+                    So let’s get started!
 
 
                     <br><br>
@@ -591,17 +592,17 @@
                 href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"
                 class="join vue-add-to-cart"
                 data-product-json='{"piano-technique-made-easy": 1}'
-            >ENROLL NOW &raquo;</a>
+            >GET STARTED &raquo;</a>
             <p class="breakdown">
-        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s> 
-        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong> 
+        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>
+        <strong>{{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>
         (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
         </h3>
 
         <div class="pt-4">
             <span x-cloak x-data="timer()" x-init="countdown()">
                 <div class="text-musora">
-                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>                    
+                    <h4 x-cloak x-show="timeLeft > 0"> FINAL OFFER - COURSE CLOSES <span class="text-red-500"> FOREVER </span>IN </h4>
                     <strong class="text-bold">
                         <span x-cloak x-show="timeLeft > 0 && day > 0">
                             <span x-text="day"></span>
@@ -642,12 +643,12 @@
     </section>
 
     @include('pianote.sales.partials._footer')
-    
+
     @include('_partials.components.countdown',[
         'countdownDate' => '2024-08-12 00:00:00',
         'promoVersion' => true
     ])
-        
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -655,9 +656,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
 
-    
-    
-    
+
+
+
 <script>
     $(document).ready(function () {
         $('.lazy').Lazy({
