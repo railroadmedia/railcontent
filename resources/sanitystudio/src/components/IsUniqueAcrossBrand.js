@@ -5,7 +5,7 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     const { document, getClient } = context;
     const client = getClient({ apiVersion: '2022-12-07' });
     let clean_id = document._id.replace(/^drafts\./, '')
-    console.log('roxana slug unique :::: ',document);
+    console.log('roxana slug unique verification :::: ');
     const params = {
         type: document._type,
         id: clean_id,
