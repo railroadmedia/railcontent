@@ -268,13 +268,79 @@ export async function fetchWorkouts(brand) {
           difficulty_string,
           web_url_path,
           published_on
-        }`
+        } | order(published_on desc)[0...5]`
     return fetchSanity(query);
 }
 
 export async function fetchNewReleases(brand) {
     //TODO: inject content type based on brand
     const query = `*[_type in ['song', 'live', 'workout'] && brand == '${brand}'] | order(releaseDate desc) [0...5] {
+          railcontent_id,
+          title,
+          "image": thumbnail.asset->url,
+          "artist_name": artist->name,
+          artist,
+          difficulty,
+          difficulty_string,
+          web_url_path,
+          published_on
+        } | order(published_on desc)[0...5]`
+    return fetchSanity(query);
+}
+
+export async function fetchUpcomingEvents(brand) {
+    const liveTypes = {
+        'drumeo': ["drum-fest-international-2022", "spotlight", "the-history-of-electronic-drums", "backstage-secrets", "quick-tips", "question-and-answer", "student-collaborations", "live-streams", "live", "podcasts", "solos", "boot-camps", "gear-guides", "performances", "in-rhythm", "challenges", "on-the-road", "diy-drum-experiments", "rhythmic-adventures-of-captain-carson", "study-the-greats", "rhythms-from-another-planet", "tama-drums", "paiste-cymbals", "behind-the-scenes", "exploring-beats", "sonor-drums", "student-focus", "coach-stream", "live", "question-and-answer", "student-review", "boot-camps", "recording", "pack-bundle-lesson"],
+        'pianote': ["student-review", "student-reviews", "question-and-answer", "student-focus", "coach-stream", "live", "question-and-answer", "student-review", "boot-camps", "recording", "pack-bundle-lesson"],
+        'guitareo': ["student-review", "student-reviews", "question-and-answer", "archives", "recording", "student-focus", "coach-stream", "live", "question-and-answer", "student-review", "boot-camps", "recording", "pack-bundle-lesson"],
+        'singeo': ["student-review", "student-reviews", "question-and-answer", "student-focus", "coach-stream", "live", "question-and-answer", "student-review", "boot-camps", "recording", "pack-bundle-lesson"]
+    };
+    const typesString = arrayJoinWithQuotes(liveTypes[brand] ?? liveTypes['singeo']);
+
+    //TODO: status = 'scheduled'  is this handled in sanity?
+    const now = getSanityDate(new Date());
+    const query = `*[_type in [${typesString}] && brand == '${brand}' && published_on > '${now}']{
+          railcontent_id,
+          title,
+          "image": thumbnail.asset->url,
+          "artist_name": artist->name,
+          artist,
+          difficulty,
+          difficulty_string,
+          web_url_path,
+          published_on
+        } | order(published_on asc)[0...5]`;
+    return fetchSanity(query);
+}
+
+function arrayJoinWithQuotes(array, delimiter = ',') {
+    const wrapped = array.map(value => `'${value}'`);
+    return wrapped.join(delimiter)
+}
+
+function getSanityDate(date) {
+    return date.toISOString();
+}
+
+
+export async function fetchByRailContentId(id) {
+    const query = `*[railcontent_id = ${id}]{
+          railcontent_id,
+          title,
+          "image": thumbnail.asset->url,
+          "artist_name": artist->name,
+          artist,
+          difficulty,
+          difficulty_string,
+          web_url_path,
+          published_on
+        }`
+    return fetchSanity(query);
+}
+
+export async function fetchByRailContentIds(ids) {
+    const idsString = ids.join(',');
+    const query = `*[railcontent_id in [${idsString}]]{
           railcontent_id,
           title,
           "image": thumbnail.asset->url,

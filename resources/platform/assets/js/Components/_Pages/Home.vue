@@ -151,7 +151,7 @@
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
-    import { fetchWorkouts, fetchNewReleases } from '@services/homePageService';
+    import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents } from '@services/sanityQueryService';
 
     //Pinia Stores
     const userStore = useUserStore();
@@ -159,6 +159,7 @@
 
     const test = fetchWorkouts(brand.value);
     const test2 = fetchNewReleases(brand.value);
+    const test3 = fetchUpcomingEvents(brand.value);
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
