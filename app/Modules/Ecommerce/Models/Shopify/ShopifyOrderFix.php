@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Models\Shopify;
 
 use App\Modules\Ecommerce\Models\Payment;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,5 +46,47 @@ class ShopifyOrderFix extends Model
     public function ecommerceModelable(): MorphTo
     {
         return $this->morphTo(__FUNCTION__, 'ecommerce_modelable_type', 'ecommerce_modelable_id');
+    }
+
+    /**
+     * Query scope to get ShopifyOrderFixes that need to be synced with Shopify, for the given constraints.
+     */
+    public function scopeToSyncWithShopify(
+        Builder $query,
+        ?int $startingId = null,
+        ?int $endingId = null,
+        ?bool $matchedOnly = null,
+        ?bool $replacedOnly = null,
+        ?Carbon $startProcessedAt = null,
+        ?Carbon $endProcessedAt = null
+    ): void {
+        $query
+            ->where('status', self::STATUS_EVALUATED)
+            ->when(
+                !is_null($startingId) && !is_null($endingId),
+                function (Builder $q) use ($startingId, $endingId) {
+                    return $q->whereBetween("id", [$startingId, $endingId]);
+                },
+                function (Builder $q) use ($startingId) {
+                    return $q->when(!is_null($startingId), function (Builder $q) use ($startingId) {
+                        return $q->where("id", ">=", $startingId);
+                    });
+                },
+            )
+            ->when($matchedOnly, function (Builder $q) {
+                return $q->where('action_taken', self::ACTION_MATCHED);
+            })
+            ->when($replacedOnly, function (Builder $q) {
+                return $q->where('action_taken', self::ACTION_REPLACED);
+            })
+            ->when(
+                !is_null($startProcessedAt) && !is_null($endProcessedAt),
+                function (Builder $q) use ($startProcessedAt, $endProcessedAt) {
+                    return $q->whereBetween(
+                        'processed_at',
+                        [$startProcessedAt->toDateTimeString(), $endProcessedAt->toDateTimeString()]
+                    );
+                }
+            );
     }
 }
