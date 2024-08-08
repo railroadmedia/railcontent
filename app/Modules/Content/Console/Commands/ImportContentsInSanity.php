@@ -235,13 +235,17 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
                 if ($datum['key'] == 'description') {
                     $imported = true;
-                    //                    $songs[$id]['description'][] = ['_type' => 'block',
-                    //                        "style"=> "normal",
-                    //                                                  'children' => [
-                    //                                                      '_type' => 'span',
-                    //                                                      "marks"=> [],
-                    //                                                      'text'=>$datum['value']]
-                    //                    ];
+                    $songs[$id]['description'][] = [
+                        '_type' => 'block',
+                        'style' => 'normal',
+                        'markDefs'=> [],
+                        'children' => [
+                            [
+                                '_type' => 'span',
+                                "marks"=> [],
+                                'text'=>$datum['value']]
+                        ]
+                    ];
                 }
                 //TODO: Check with Chris if all the data should be ignored
                 if (!$imported && (!in_array($datum['key'], [
