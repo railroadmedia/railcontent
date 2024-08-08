@@ -136,6 +136,7 @@
                 <!-- Chapters -->
                 <VideoChapters
                     v-if="formattedChapters.length"
+                    :hide-action-buttons="!soundsliceSlug"
                     :chapters="formattedChapters"
                     @open-slice="openSlice"
                     @seek-to-chapter="seekToChapter"
@@ -298,7 +299,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
+    if (props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
