@@ -127,6 +127,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $trial_expiration_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $primary_brand
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()

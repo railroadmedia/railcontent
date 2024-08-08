@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Controllers;
 
 use App\Jobs\WebhookJob;
+use App\Modules\Ecommerce\Jobs\AssignPrimaryBrandJob;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedSubscriptionManagerJob;
 use App\Modules\Ecommerce\Jobs\Shopify\RefundCreatedJob;
@@ -68,7 +69,8 @@ class ShopifyWebHookController extends Controller
                 new AddOrderTags(new Order(json_decode(json_encode($contents), false))),
                 new OrderCreatedEventTrackingJob($contents),
                 new OrderCreatedUpdateLastTrialDataJob($contents),
-                new OrderCreatedSubscriptionManagerJob($contents)
+                new OrderCreatedSubscriptionManagerJob($contents),
+                new AssignPrimaryBrandJob($contents),
             ];
             dispatch(new WebhookJob('Shopify-order-created', $id, $contents, $children));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
