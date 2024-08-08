@@ -1820,6 +1820,7 @@ return [
             'show_onboarding',
             'last_used_brand',
             'active_permissions_ids'
+            'primary_brand'
         ],
     ],
     'brand_logo_path_for_email' => [

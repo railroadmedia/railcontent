@@ -2,7 +2,8 @@
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <template v-if="!isLoading">
             <!-- Learning Paths -->
-            <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
+            <LearningPathContainer v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
+            <NewLearningPathContainer v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
 
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
@@ -145,6 +146,7 @@
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
+    import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
     import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
@@ -206,6 +208,7 @@
         },
         workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
+        trialSectionRedesign: { type: Boolean, default: false },
     });
 
     const showTriggerBanner = computed(() => {

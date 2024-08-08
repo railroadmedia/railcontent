@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -21,30 +22,16 @@ use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    private CalendarService $calendarService;
-    private ContentService $contentService;
-    private RevenueCatService $revenueCatService;
-    private SubscriptionService $subscriptionService;
-    private UserService $userService;
-    private CommentService $commentService;
-    private PostRepository $postRepository;
-
     public function __construct(
-        CalendarService $calendarService,
-        ContentService $contentService,
-        RevenueCatService $revenueCatService,
-        SubscriptionService $subscriptionService,
-        UserService $userService,
-        CommentService $commentService,
-        PostRepository $postRepository
+        private CalendarService $calendarService,
+        private ContentService $contentService,
+        private RevenueCatService $revenueCatService,
+        private SubscriptionService $subscriptionService,
+        private UserService $userService,
+        private CommentService $commentService,
+        private PostRepository $postRepository,
+        private LearningPathsService $learningPathsService
     ) {
-        $this->calendarService = $calendarService;
-        $this->contentService = $contentService;
-        $this->revenueCatService = $revenueCatService;
-        $this->subscriptionService = $subscriptionService;
-        $this->userService = $userService;
-        $this->commentService = $commentService;
-        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User
@@ -97,6 +84,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
             'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
+            'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
         ];
     }
 
@@ -134,17 +123,6 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
 
         $brand = brand();
-        $showLearningPathsOnHomepage = false;
-        $hideSection = $brand . '_trial_section_hide';
-
-        if ($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
-            $hasExperienceLevels =  count(
-                user()->onboardingExperience->filter(function ($item) use ($brand) {
-                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                })
-            ) > 0;
-            $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
-        }
 
         $completedWorkouts = $this->contentService->countByTypesRecentUserProgressState(
             ['workout'],
@@ -166,11 +144,13 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
-            'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
+            'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths($brand),
+            'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(brand()),
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
             'features' => $this->getAccessibleFeatures(),
             'active_permissions_ids' => $user->getActivePermissionsIds()
+            'primary_brand' => $user->primary_brand
         ], $extraData);
     }
 

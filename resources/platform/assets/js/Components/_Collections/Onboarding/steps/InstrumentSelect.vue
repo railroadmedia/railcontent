@@ -4,7 +4,6 @@ import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
 import InstrumentCardContent from "../../SquaredCard/InstrumentCardContent.vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import StepWrapper from "../StepWrapper.vue";
-import StepHeader from "../StepHeader.vue";
 
 import { brandUrl, bgImgCard } from "@constants/brands";
 import { saveInstrumentHistoryData } from "../services";
@@ -18,26 +17,29 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  currentStep: {
+    type: Number,
+  },
 });
-const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
+const emit = defineEmits(["onChangeStep", "onCheckStep", "onInstrumentSelect","onResetSkipAndHiddenSteps"]);
 
 function onInstrumentSelection(instrument) {
+  emit("onResetSkipAndHiddenSteps");
   saveInstrumentHistoryData({
     instrument: instrument,
   }).catch(error => { console.error(error) });
-  emit("onChangeInfo", { ...props.info, user: props.info.user, instrument });
-  emit("onCheckStep", 1, true);
-  emit("onChangeStep", 2);
+  emit("onInstrumentSelect", instrument);
+  emit("onCheckStep", props.currentStep, true);
+  emit("onChangeStep", props.currentStep + 1);
 }
 function goBack() {
-  emit('onChangeStep', 0);
+  emit('onChangeStep', props.currentStep - 1);
 }
 </script>
 
 <template>
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false" @on-header-go-back="goBack" :headerProps="{
     title: 'What instrument would you like to learn?',
-    subtitle: 'Want to learn more than one instument? You can change your instrument at any time in your profile or by using the instrument selector in the navigation.',
     hideBackButton: false,
     hideCloseButton: !props.steps[1].checked,
   }">
@@ -68,7 +70,7 @@ function goBack() {
       </div>
     </template>
     <template v-slot:footer>
-      <ProgressBar :brand="brand" :currentStep="1" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
     </template>
   </StepWrapper>
 </template>
