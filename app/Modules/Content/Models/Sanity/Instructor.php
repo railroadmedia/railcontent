@@ -4,7 +4,9 @@ namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use Modules\Content\Models\Sanity\Structure\Block;
+use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListArrayElement;
 
 /**
@@ -21,6 +23,7 @@ class Instructor extends BaseSanityModel
     public function __construct()
     {
         $fields = [
+            new BrandField(),
             new Field(FieldType::String, 'name'),
             new Field(FieldType::Image, 'thumbnail_url'),
             new Field(FieldType::Boolean, 'is_coach', 'Is this person a coach that should be listed in the coaches list?'),
@@ -43,10 +46,9 @@ class Instructor extends BaseSanityModel
 
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
-
-
         ];
-        parent::__construct(self::getName(), 'Instructor', $fields);
+        $preview = new ListItemPreview('name', 'brand', 'thumbnail');
+        parent::__construct(self::getName(), 'Instructor', $fields,  preview: $preview);
     }
 
     public static function getName(): string

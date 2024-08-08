@@ -446,10 +446,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             foreach ($contentInstructors as $contentInstructor) {
                 if ($contentInstructor->instructor) {
                     $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentInstructor->instructor->name);
-                    if (isset($instructors['instructor_' . strtolower($name)])) {
+                    if (isset($instructors['instructor_' . strtolower($name).'_'.$contentInstructor->instructor->id])) {
                         $songs[$id]["instructor"][] = [
                             "_type" => "reference",
-                            "_ref"  => 'instructor_' . strtolower($name),
+                            "_ref"  => 'instructor_' . strtolower($name).'_'.$contentInstructor->instructor->id,
                             "_weak" => false
                         ];
                     }
@@ -551,30 +551,75 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
      */
     private function getInstructors(): array
     {
-        $instructorsData = Content::with('data')
+        $instructorsData = Content::with('data', 'fields')
             ->where('type', '=', 'instructor')
             ->where('railcontent_content.status', '=', 'published')
+            ->whereNotIn('id',[404505, 389348, 395073])
             ->get();
 
         $instructors = [];
         foreach ($instructorsData as $instructorDatum) {
             $name = preg_replace('/[^a-zA-Z0-9_]/', '', $instructorDatum->name);
 
-            $id    = 'instructor_' . strtolower($name);
-            $thumb = '';
-            foreach ($instructorDatum['data'] as $info) {
-                if ($info['key'] == 'head_shot_picture_url') {
-                    $thumb = $info['value'];
-                }
-            }
+            $id    = 'instructor_' . strtolower($name).'_'.$instructorDatum->id;
 
             $instructors[$id] = [
                 '_id'   => $id,
                 'name'  => $instructorDatum->name,
                 '_type' => $instructorDatum->type,
+                'brand' => $instructorDatum->brand,
                 'railcontent_id' => $instructorDatum->id,
                 'web_url_path' => $instructorDatum->web_url_path
             ];
+
+            $thumb = '';
+            foreach ($instructorDatum['data'] as $info) {
+                if ($info['key'] == 'head_shot_picture_url') {
+                    $thumb = $info['value'];
+                }
+                if(in_array($info['key'], ['coach_card_image','coach_featured_image','coach_top_banner_image','coach_bottom_banner_image'])  &&  $info['value'] != ''){
+                    $instructors[$id][$info['key']] = [
+                        '_type'        => 'image',
+                        '_sanityAsset' => 'image@' . $info['value']
+                    ];
+                }
+                if (in_array($info['key'], ['short_bio','long_bio'])) {
+                    $instructors[$id][$info['key']][] =  [
+                        '_type' => 'block',
+                        'style' => 'normal',
+                        'markDefs'=> [],
+                        'children' => [
+                            [
+                                '_type' => 'span',
+                                "marks"=> [],
+                                'text'=>$info['value']]
+                        ]
+                    ];
+                }
+                if ($info['key'] == 'focus_text') {
+                    $instructors[$id]['focus_text'] = $info['value'];
+                }
+            }
+            if ($thumb != '') {
+                $instructors[$id]['thumbnail_url'] = [
+                    '_type'        => 'image',
+                    '_sanityAsset' => 'image@' . $thumb
+                ];
+            }
+            foreach ($instructorDatum['fields'] as $info) {
+                if (in_array($info['key'], ['is_coach','is_active','is_hose_coach','is_featured','is_coach_of_the_month'])) {
+                    $instructors[$id][$info['key']] = ($info['value'] == 1);
+                }
+                if (in_array($info['key'], ['bands','endorsements'])) {
+                    $instructors[$id][$info['key']] = $info['value'] ;
+                }
+                if (in_array($info['key'], ['associated_user_id','forum_thread_id'])) {
+                    $instructors[$id][$info['key']] = (int)$info['value'] ;
+                }
+                if (in_array($info['key'], ['focus'])) {
+                    $instructors[$id][$info['key']][] = $info['value'] ;
+                }
+            }
             if ($thumb != '') {
                 $instructors[$id]['thumbnail_url'] = [
                     '_type'        => 'image',
