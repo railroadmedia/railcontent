@@ -45,25 +45,30 @@
 {{--                <br><br>--}}
 {{--                Choose a song below:--}}
 {{--            </p>--}}
-            <h2 class="leading-normal my-40 sm:my-40"><strong>
-                    Due to a licensing issue we have had to remove the 100 songs from this page. We apologize for the inconvenience.
-                </strong></h2>
+            <h4 class="leading-normal my-40 sm:my-40"><strong>
+                This resource is no longer available.
+                </strong><br>
+
+                We're overhauling Drumeo's Songs experience and have to temporarily deactivate features. As a result, the 100 Songs resource is no longer available. We know this can throw off your practice routine and we apologize for any inconvenience.
+                <br>
+                Keep crushing it on the drums 💪
+            </h4>
 
 {{--            @include('drumeo.lead-gen.100-songs._songs')--}}
 
         </div>
     </section>
-{{--    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">--}}
-{{--        <div class="container mx-auto">--}}
-{{--            <div class="w-full px-2 md:px-3 text-center">--}}
-{{--                <h1><strong>Keep the party going.</strong></h1>--}}
-{{--                <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3">--}}
-{{--                    Get {{ Prices::$drumeoSongs }}+ songs & world-class drum lessons inside <br class="hidden md:inline">--}}
-{{--                    Drumeo. Click below to try a free trial.</h4>--}}
-{{--                <a class="join" href="/choose-plan">Free Trial &raquo;</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
+        <div class="container mx-auto">
+            <div class="w-full px-2 md:px-3 text-center">
+                <h1><strong>Keep the party going.</strong></h1>
+                <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3">
+                    Get {{ Prices::$drumeoSongs }}+ songs & world-class drum lessons inside <br class="hidden md:inline">
+                    Drumeo. Click below to try a free trial.</h4>
+                <a class="join" href="/choose-plan">Free Trial &raquo;</a>
+            </div>
+        </div>
+    </section>
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
