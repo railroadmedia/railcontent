@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Ecommerce\database\factories\PaymentFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -94,5 +95,14 @@ class Payment extends Model
                 // return an empty HasMany by using an impossible condition
                 $q->whereRaw('1 = 0');
             });
+    }
+
+    protected function totalPaidAfterRefund(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => floatval(
+                max($attributes['total_paid'] - $attributes['total_refunded'], 0)
+            ),
+        );
     }
 }
