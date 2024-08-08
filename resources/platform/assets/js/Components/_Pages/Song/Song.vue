@@ -101,6 +101,5 @@
         const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
         data.value = songData.value;
         plaformStore.setLoadingState(songLoading.value);
-        console.log(songLoading.value)
     });
 </script>

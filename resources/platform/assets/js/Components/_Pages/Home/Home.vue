@@ -1,142 +1,145 @@
 <template>
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
-        <!-- Learning Paths -->
-        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
+        <template v-if="!isLoading">
+            <!-- Learning Paths -->
+            <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
 
-        <!-- Onboarding banner -->
-        <TriggerBanner v-if="showTriggerBanner" />
+            <!-- Onboarding banner -->
+            <TriggerBanner v-if="showTriggerBanner" />
 
-        <!-- Join Header: Pack Only -->
-        <StaticHeader
-            v-if="isPackOnlyBoolean"
-            title="JOIN THE COMMUNITY"
-            cta-text="UPGRADE YOUR MEMBERSHIP"
-            description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
-            :cta-url="upgradeMembershipUrl"
-            img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
-            class="tw-mt-4 tw-mb-8"
-        />
-        <!-- Header carousel -->
-        <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
-        <!-- Cohort banner -->
-        <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
+            <!-- Join Header: Pack Only -->
+            <StaticHeader
+                v-if="isPackOnlyBoolean"
+                title="JOIN THE COMMUNITY"
+                cta-text="UPGRADE YOUR MEMBERSHIP"
+                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+                :cta-url="upgradeMembershipUrl"
+                img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
+                class="tw-mt-4 tw-mb-8"
+            />
+            <!-- Header carousel -->
+            <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
+            <!-- Cohort banner -->
+            <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
-        <!-- Continue section -->
-        <MiniCatalogueSection
-            v-if="startedContent.data.length"
-            title="Continue"
-            seeAllAriaLabel="See All Lessons In Progress"
-            :seeAllUrl="continueUrl"
-            :preLoadedContent="startedContent.data"
-            :isMiniView="true"
-            :show-dropdown="true"
-            :use-ref-data="true"
-            trackingSection="continue"
-        />
-
-        <!-- Recommended section -->
-        <MiniCatalogueSection
-            v-if="recommends.length > 0"
-            title="Inspired By Your Activity"
-            seeAllAriaLabel="See All Content"
-            :seeAllUrl="recommendedContentUrl"
-            :preLoadedContent="recommends"
-            trackingSection="recommended"
-        >
-            <template #icon>
-                <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
-                    <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
-                </button>
-            </template>
-        </MiniCatalogueSection>
-
-        <!-- Workouts section -->
-        <MiniCatalogueSection
-            v-if="workoutsContent.data.length"
-            title="Workouts"
-            seeAllAriaLabel="See All Workouts"
-            :seeAllUrl="workoutsContentUrl"
-            :preLoadedContent="workoutsContent.data"
-            trackingSection="workouts"
-        />
-
-        <!-- New section -->
-        <MiniCatalogueSection
-            v-if="newContent.data"
-            title="New Releases"
-            seeAllAriaLabel="See All New Releases"
-            :seeAllUrl="newContentUrl"
-            :preLoadedContent="newContent.data"
-            trackingSection="new"
-        />
-
-        <!-- Playlist section -->
-        <ListSection
-            v-if="usersList.length"
-            :newContentUrl="newContentUrl"
-            :usersList="usersList"
-            :my-list-url="`/${brand}/playlists`"
-        />
-
-        <!-- Live section -->
-        <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-            :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-            :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
-
-        <!-- Upcoming section -->
-        <MiniCatalogueSection
-            v-if="hasUpcomingEvents"
-            title="Upcoming Events"
-            seeAllAriaLabel="See All Upcoming Events"
-            :seeAllUrl="upcomingUrl"
-            :force-no-links="true"
-            :preLoadedContent="upcomingEvents.data"
-            trackingSection="upcoming-events"
-        />
-
-
-        <template v-if="isPackOnlyBoolean">
-            <!-- Your Courses section : Packs Only -->
-            <HomepageCatalog
-                v-if="courseDataObject.data.length"
-                collection-type="course"
-                title="Your Courses"
-                see-all-label="See All Courses"
-                :see-all-url="`${brand}/courses`"
-                :pre-loaded-content="courseDataObject"
+            <!-- Continue section -->
+            <MiniCatalogueSection
+                v-if="startedContent.data.length"
+                title="Continue"
+                seeAllAriaLabel="See All Lessons In Progress"
+                :seeAllUrl="continueUrl"
+                :preLoadedContent="startedContent.data"
+                :isMiniView="true"
+                :show-dropdown="true"
+                :use-ref-data="true"
+                trackingSection="continue"
             />
 
-            <!-- Your Packs section : Packs Only -->
-            <HomepageCatalog
-                v-if="packData.length"
-                collection-type="pack"
-                title="Your Training Packs"
-                see-all-label="See All Packs"
-                :see-all-url="`${brand}/packs`"
-                :pre-loaded-content="packDataObject"
+            <!-- Recommended section -->
+            <MiniCatalogueSection
+                v-if="recommends.length > 0"
+                title="Inspired By Your Activity"
+                seeAllAriaLabel="See All Content"
+                :seeAllUrl="recommendedContentUrl"
+                :preLoadedContent="recommends"
+                trackingSection="recommended"
+            >
+                <template #icon>
+                    <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
+                        <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
+                    </button>
+                </template>
+            </MiniCatalogueSection>
+
+            <!-- Workouts section -->
+            <MiniCatalogueSection
+                v-if="workoutsContent.data.length"
+                title="Workouts"
+                seeAllAriaLabel="See All Workouts"
+                :seeAllUrl="workoutsContentUrl"
+                :preLoadedContent="workoutsContent.data"
+                trackingSection="workouts"
+            />
+
+            <!-- New section -->
+            <MiniCatalogueSection
+                v-if="newContent.data"
+                title="New Releases"
+                seeAllAriaLabel="See All New Releases"
+                :seeAllUrl="newContentUrl"
+                :preLoadedContent="newContent.data"
+                trackingSection="new"
+            />
+
+            <!-- Playlist section -->
+            <ListSection
+                v-if="usersList.length"
+                :newContentUrl="newContentUrl"
+                :usersList="usersList"
+                :my-list-url="`/${brand}/playlists`"
+            />
+
+            <!-- Live section -->
+            <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
+                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
+                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
+
+            <!-- Upcoming section -->
+            <MiniCatalogueSection
+                v-if="hasUpcomingEvents"
+                title="Upcoming Events"
+                seeAllAriaLabel="See All Upcoming Events"
+                :seeAllUrl="upcomingUrl"
+                :force-no-links="true"
+                :preLoadedContent="upcomingEvents.data"
+                trackingSection="upcoming-events"
+            />
+
+
+            <template v-if="isPackOnlyBoolean">
+                <!-- Your Courses section : Packs Only -->
+                <HomepageCatalog
+                    v-if="courseDataObject.data.length"
+                    collection-type="course"
+                    title="Your Courses"
+                    see-all-label="See All Courses"
+                    :see-all-url="`${brand}/courses`"
+                    :pre-loaded-content="courseDataObject"
+                />
+
+                <!-- Your Packs section : Packs Only -->
+                <HomepageCatalog
+                    v-if="packData.length"
+                    collection-type="pack"
+                    title="Your Training Packs"
+                    see-all-label="See All Packs"
+                    :see-all-url="`${brand}/packs`"
+                    :pre-loaded-content="packDataObject"
+                />
+            </template>
+
+            <!-- Popular Conversation : Packs Only -->
+            <PopularConversations
+                v-if="isPackOnlyBoolean && conversationData.length"
+                :posts="conversationData"
+                class="tw-mb-8"
+            />
+
+            <!-- Stats section -->
+            <StatsSection
+                v-if="!isPackOnlyBoolean"
+                :accountUrl="accountUrl"
+                :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
+                :nextLearningPathLevel="nextLearningPathLevel"
+                :userMetrics="userMetrics"
             />
         </template>
-
-        <!-- Popular Conversation : Packs Only -->
-        <PopularConversations
-            v-if="isPackOnlyBoolean && conversationData.length"
-            :posts="conversationData"
-            class="tw-mb-8"
-        />
-
-        <!-- Stats section -->
-        <StatsSection
-            v-if="!isPackOnlyBoolean"
-            :accountUrl="accountUrl"
-            :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
-            :nextLearningPathLevel="nextLearningPathLevel"
-            :userMetrics="userMetrics"
-        />
+        <HomePageSkeleton v-else />
     </div>
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onBeforeMount, onMounted, ref } from 'vue';
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
@@ -150,16 +153,16 @@
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import { useUserStore } from "@stores/user";
+    import { usePlatformStore } from '@stores/platform';
     import {storeToRefs} from "pinia/dist/pinia";
-    import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents } from '@services/sanityQueryService';
+    import HomePageSkeleton from "./HomePageSkeleton";
 
     //Pinia Stores
     const userStore = useUserStore();
     const { brand, userCompletedAccount } = storeToRefs(userStore);
+    const plaformStore = usePlatformStore();
+    const { isLoading } = storeToRefs(plaformStore)
 
-    const test = fetchWorkouts(brand.value);
-    const test2 = fetchNewReleases(brand.value);
-    const test3 = fetchUpcomingEvents(brand.value);
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
@@ -225,6 +228,8 @@
 
     const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
     const recSysPage = ref(1);
+    const data = ref(null);
+    const error = ref(null);
 
     const openPlaylistModal = () => {
         window.openplaylistmodal({
@@ -248,16 +253,37 @@
         recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
     }
 
-    onMounted(() => {
-        if (window.location.href.includes('create-playlist-window')) {
-            openPlaylistModal();
-        }
-    });
-
     const recommendationLinks = {
         drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
         pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
         guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
         singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
     }
+
+    onMounted(() => {
+        if (window.location.href.includes('create-playlist-window')) {
+            openPlaylistModal();
+        }
+    });
+
+    onBeforeMount( ()=> {
+        const fetchData = async () => {
+            try {
+                // Simulate a loading state with a timeout
+                await new Promise(resolve => setTimeout(resolve, 0));
+                
+                // Placeholder data to simulate fetched data
+                data.value = {
+                    title: 'Home Page',
+                    content: 'This is the home page content.'
+                };
+            } catch (err) {
+                error.value = err;
+            } finally {
+                plaformStore.setLoadingState(false);
+            }
+        };
+
+        fetchData();
+    })
 </script>
