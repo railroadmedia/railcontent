@@ -313,8 +313,9 @@ class HomePageController extends BaseController
         }
 
         $trialSection = [];
+        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
+        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
 
         if ($showOldTrialSection) {
             $trialSection = $this->learningPathsService->getLearningPaths();
