@@ -160,8 +160,8 @@
     //Pinia Stores
     const userStore = useUserStore();
     const { brand, userCompletedAccount } = storeToRefs(userStore);
-    const plaformStore = usePlatformStore();
-    const { isLoading } = storeToRefs(plaformStore)
+    const platformStore = usePlatformStore();
+    const { isLoading } = storeToRefs(platformStore)
 
     const props = defineProps({
         accountUrl: { type: String, default: '' },
@@ -280,7 +280,7 @@
             } catch (err) {
                 error.value = err;
             } finally {
-                plaformStore.setLoadingState(false);
+                platformStore.setLoadingState(false);
             }
         };
 

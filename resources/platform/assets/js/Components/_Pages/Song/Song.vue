@@ -63,7 +63,7 @@
             </div>
         </template>
         <!-- Show Skeleton Loader -->
-        <song-skeleton v-else></song-skeleton>
+        <SongSkeleton v-else />
     </div>
 </template>
 <script setup>
@@ -80,9 +80,9 @@
 
     // Pinia Data
     const userStore = useUserStore();
-    const plaformStore = usePlatformStore();
+    const platformStore = usePlatformStore();
     const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin, token } = storeToRefs(userStore);
-    const { isLoading } = storeToRefs(plaformStore)
+    const { isLoading } = storeToRefs(platformStore)
 
     // Refs 
     const data = ref(null);
@@ -100,6 +100,6 @@
     onBeforeMount( async () => {
         const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
         data.value = songData.value;
-        plaformStore.setLoadingState(songLoading.value);
+        platformStore.setLoadingState(songLoading.value);
     });
 </script>

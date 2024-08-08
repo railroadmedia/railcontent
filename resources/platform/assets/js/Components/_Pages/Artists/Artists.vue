@@ -30,9 +30,9 @@
 
     // Pinia Data
     const userStore = useUserStore();
-    const plaformStore = usePlatformStore();
+    const platformStore = usePlatformStore();
     const { brand } = storeToRefs(userStore);
-    const { isLoading } = storeToRefs(plaformStore)
+    const { isLoading } = storeToRefs(platformStore)
 
     //Refs
     const data = ref(null);
@@ -66,6 +66,6 @@
     onBeforeMount( async () => {
         const { data: artistData, error: artistError, isLoading: artistLoading } = await useArtistPageData(brand.value);
         data.value = artistData.value;
-        isLoading.value = artistLoading.value;
+        platformStore.setLoadingState(artistLoading.value);
     })
 </script>
