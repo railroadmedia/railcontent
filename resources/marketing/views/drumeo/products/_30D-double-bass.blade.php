@@ -52,12 +52,16 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
-                            <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
-                                <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
+                            @if(!empty($hasProduct) && $hasProduct == 'true')
+                                <a class="join sold-out medium w-full anchor-slide">YOURE ENROLLED!</a>
+                            @else
+                                <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
+                                <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
+                                    <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                         Registration is FREE for Drumeo Members.
-                                </p>
-                            </a>
+                                    </p>
+                                </a>
+                            @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -113,7 +117,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 30th</span>
+                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 29th</span>
                         </p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
@@ -267,8 +271,11 @@
                 </h4>
             </div>
 
-            <a href="#final" class="join drumeo medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
-
+            @if(!empty($hasProduct) && $hasProduct == 'true')
+                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
+            @else
+                <a href="#final" class="join drumeo medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+            @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"

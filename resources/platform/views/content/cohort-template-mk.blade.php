@@ -148,11 +148,13 @@
 @endsection
 
 @section('content')
+
     @if($cohort['slug'] == '30-day-double-bass')
         <div class="bg-white text-black">
             @include('drumeo.products._30D-double-bass', [
                 'theme' => 'drumeo',
-                'platformVersion' => true
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
             ])
         </div>
     @endif

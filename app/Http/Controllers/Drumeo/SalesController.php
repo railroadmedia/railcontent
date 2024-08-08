@@ -185,7 +185,7 @@ class SalesController extends BaseController
     }
     public function thirtyDayDoubleBass()
     {
-        $productId = 844;
+        $productId = 930;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
