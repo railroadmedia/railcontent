@@ -52,8 +52,8 @@ function handleUploadError() {
           tw-flex
           tw-h-[100px]
           tw-w-[100px]
-          xl:tw-h-[150px]
-          xl:tw-w-[150px]
+          xl:tw-h-[152px]
+          xl:tw-w-[152px]
           tw-items-center
           tw-justify-center
           tw-overflow-hidden

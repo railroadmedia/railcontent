@@ -44,7 +44,7 @@ class AccessCodeServiceTest extends TestCase
 
     public function test_claim()
     {
-        Queue::fake();//ignore customerIO jobs
+        Queue::fake(); //ignore customerIO jobs
 
         $product = Product::factory()->create();
         $accessCode = AccessCodeFactory::createAccessCode($product);
@@ -67,5 +67,10 @@ class AccessCodeServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->accessCodeService->claimByUserId($accessCode->code, $user->id);
+
+        $this->assertDatabaseHas('usora_users', [
+            'id' => $user->id,
+            'primary_brand' => $accessCode->brand
+        ]);
     }
 }
