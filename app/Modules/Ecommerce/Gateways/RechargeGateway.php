@@ -47,7 +47,7 @@ class RechargeGateway
         // Setup options
         $defaults = [
             'charset' => 'UTF-8',
-            'headers' => array(),
+            'headers' => [],
             'fail_on_error' => false,
             'return_array' => false,
             'all_data' => false,
@@ -96,7 +96,7 @@ class RechargeGateway
         }
         $ch = $this->ch;
 
-        $curlOpts = array(
+        $curlOpts = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $url,
             CURLOPT_HTTPHEADER => $headers,
@@ -108,7 +108,7 @@ class RechargeGateway
             CURLOPT_HEADER => 1,
             CURLOPT_NOSIGNAL => 0,
             CURLOPT_TIMEOUT_MS => 30000,
-        );
+        ];
 
         if (!$data || $curlOpts[CURLOPT_CUSTOMREQUEST] === 'GET') {
             $curlOpts[CURLOPT_POSTFIELDS] = '';

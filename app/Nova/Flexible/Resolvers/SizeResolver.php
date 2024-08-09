@@ -54,7 +54,7 @@ class SizeResolver implements ResolverInterface
                 ];
             });
 
-            $sizeIds = array();
+            $sizeIds = [];
 
             foreach($sizes as $size) {
                 if(!is_null($size['size_id'])) {

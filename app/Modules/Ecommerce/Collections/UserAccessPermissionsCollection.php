@@ -125,7 +125,7 @@ class UserAccessPermissionsCollection
         if ($expirationDate > Carbon::maxValue()) {
             $expirationDate = Carbon::maxValue();
         }
-        return array($startDate, $expirationDate);
+        return [$startDate, $expirationDate];
     }
 
     public function getMembershipExpirationDate($includeBuffer = true, $ignoreSources = []): ?Carbon

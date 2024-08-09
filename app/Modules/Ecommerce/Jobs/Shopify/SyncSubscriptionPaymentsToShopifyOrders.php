@@ -499,7 +499,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our subscription payment id, etc
             "metafields" =>
-                array(
+                [
                     [
                         "key" => ShopifyMetafieldKey::Id->value,
                         "value" => (string)$subscriptionPayment->id,
@@ -518,7 +518,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                         "type" => ShopifyMetafieldTypes::single_line_text_field->value,
                         "namespace" => ShopifyMetafieldNamespace::Musora->value
                     ]
-                )
+                ]
         ];
 
         // record a note that this was migrated from the old system, including the subscription payment ID, and put it first
@@ -629,7 +629,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         }
 
         // Shopify expects an array of line items so nest our data inside another array
-        $orderData["line_items"] = array($lineItem);
+        $orderData["line_items"] = [$lineItem];
 
         return $orderData;
     }

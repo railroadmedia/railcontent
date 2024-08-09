@@ -186,7 +186,7 @@ class Product extends Model
     protected function slug(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => str_replace(array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'), '', $value),
+            get: fn ($value) => str_replace(['Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'], '', $value),
         );
     }
 

@@ -4,7 +4,7 @@
  * html_purifier_settings.settings.default array is passed directly in to HTMLPurifier_Config->loadArray()
  */
 
-return array(
+return [
     // brand
     'brand' => 'musora',
 
@@ -123,4 +123,4 @@ return array(
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
     ],
-);
+];

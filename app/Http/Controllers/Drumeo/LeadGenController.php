@@ -72,22 +72,22 @@ class LeadGenController extends BaseController
             case 'ty-monthly':
                 return view('drumeo.lead-gen.getting-started.ty-monthly', ['theme' => 'drumeo', 'month' => true]);
             case '10-practice':
-                $currentLesson = (object) array(
+                $currentLesson = (object) [
                     'title' => 'Building Your Practice Routine',
                     'video_src' => '//player.vimeo.com/video/98739417',
                     'assets' => [
-                        (object) array(
+                        (object) [
                             'title' => 'All Course PDFs',
                             'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
                             'soundslice' => ''
-                        ),
-                        (object) array(
+                        ],
+                        (object) [
                             'title' => 'Developing a Practice Routine',
                             'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
                             'soundslice' => ''
-                        ),
+                        ],
                     ],
-                );
+                ];
 
                 $lessons = LeadgenLesson::where([['leadgen_id', 9], ['one_off', 0]])->get();
                 $currentLessonIndex = 10;
