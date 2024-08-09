@@ -55,7 +55,7 @@ class Leadgen extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('title')->required()->rules('required'),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required()->rules('required'),

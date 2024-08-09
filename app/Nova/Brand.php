@@ -44,9 +44,9 @@ class Brand extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name'),
-            HasMany::make('Lessons', 'lessons', 'App\Nova\Lesson'),
-            HasMany::make('Accessories', 'accessories', 'App\Nova\Accessory'),
-            HasMany::make('Clothing', 'clothing', 'App\Nova\Clothing'),
+            HasMany::make('Lessons', 'lessons', \App\Nova\Lesson::class),
+            HasMany::make('Accessories', 'accessories', \App\Nova\Accessory::class),
+            HasMany::make('Clothing', 'clothing', \App\Nova\Clothing::class),
         ];
     }
 

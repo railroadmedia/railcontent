@@ -39,7 +39,7 @@ class Bundle extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundles')->first()->id),
             Text::make('Name')->required()->sortable(),
             Boolean::make('Sales Page Visible?', 'sales_page_visible')->default(true)->hideFromIndex(),

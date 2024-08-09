@@ -56,7 +56,7 @@ class Carousel extends Resource
         return [
             ID::make()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Text::make('Name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
             Boolean::make('Show on Homepage?', 'show_on_homepage')->hideFromIndex()->default(true),
             Boolean::make('Show on Workouts?', 'show_on_workouts')->hideFromIndex()->default(true),

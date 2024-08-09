@@ -56,7 +56,7 @@ class TrialSection extends Resource
         return [
             ID::make()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
             Text::make('Subtitle')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
             Text::make('Tagline')->hideFromIndex()->sortable(),
