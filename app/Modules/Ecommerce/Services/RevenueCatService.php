@@ -134,7 +134,7 @@ class RevenueCatService
      * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = []): ?User
+    public function getUser($value, $appUserId, $createIfNotExists = false, $aliases = []): ?User
     {
         if (empty($aliases)) {
             $aliases = [$appUserId];

@@ -174,7 +174,7 @@ class RevenueCatApiGateway
      */
     public function purchase(
         $receipt,
-        $productId = null,
+        $productId,
         $platform,
         $localPrice = null,
         $currency = null,
