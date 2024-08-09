@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
-class WebhookTest extends TestCase
+final class WebhookTest extends TestCase
 {
     public function test_create_and_run_webhook_job(): void
     {

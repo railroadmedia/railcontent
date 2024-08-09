@@ -8,7 +8,7 @@ use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Tests\TestCase;
 
-class CanSaveWithoutUpdatedAtTest extends TestCase
+final class CanSaveWithoutUpdatedAtTest extends TestCase
 {
     protected Product $usesTrait;
     protected ShopifySync $doesntUseTrait;
