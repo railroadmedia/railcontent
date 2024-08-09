@@ -6,7 +6,25 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
-    ->withProviders()
+    ->withProviders([
+        \Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+        \Railroad\Response\Providers\ResponseServiceProvider::class,
+        \Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
+        \Railroad\Usora\Providers\UsoraServiceProvider::class,
+        \Railroad\Railforums\Providers\ForumServiceProvider::class,
+        \Railroad\Permissions\Providers\PermissionsServiceProvider::class,
+        \Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
+        \Railroad\Railnotifications\NotificationsServiceProvider::class,
+        \Railroad\Points\Providers\PointsServiceProvider::class,
+        \Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
+        \Railroad\Railanalytics\AnalyticsServiceProvider::class,
+        \Railroad\Location\Providers\LocationServiceProvider::class,
+        \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
+        \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
+        \Jenssegers\Agent\AgentServiceProvider::class,
+        \Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
+        \Venturecraft\Revisionable\RevisionableServiceProvider::class,
+    ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         // api: __DIR__.'/../routes/api.php',
