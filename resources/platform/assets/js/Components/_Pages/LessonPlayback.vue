@@ -12,8 +12,11 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover  -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -196,6 +199,7 @@
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
+import { DateTime } from 'luxon';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
@@ -214,6 +218,7 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     thisLessonJson: {
@@ -394,4 +399,9 @@ const noAccess = computed(() => {
 const thumbnailUrl = computed(() => {
     return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
 })
+
+const showDraftLabel = computed(() => {
+    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
+})
+
 </script>
