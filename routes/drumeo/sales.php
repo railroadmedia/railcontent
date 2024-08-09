@@ -89,7 +89,8 @@ Route::domain('{drumeoDomain}')
 
 
         Route::get('/estepario', [SalesController::class, 'estepario']);
-        Route::prefix('a')->group(function () {
+        Route::prefix('a')->group(
+            function () {
                 Route::get('/{page?}', SalesController::class . '@a')
                     ->whereIn('page', [
                         '66samus',
@@ -114,14 +115,16 @@ Route::domain('{drumeoDomain}')
                     ]);
             }
         );
-        Route::prefix('ambassador')->group(function () {
+        Route::prefix('ambassador')->group(
+            function () {
                 Route::get('/{page?}', SalesController::class . '@ambassador')
                     ->whereIn('page', [
                         'cobus'
                     ]);
             }
         );
-        Route::prefix('affiliate')->group(function () {
+        Route::prefix('affiliate')->group(
+            function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
                         '66samus',

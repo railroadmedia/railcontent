@@ -36,28 +36,32 @@ Route::domain('{pianoteDomain}')
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
         Route::get('/technique-essentials', [LeadGenController::class, 'techniqueEssentials']);
 
-        Route::prefix('piano-complete-beginners-bootcamp')->group(function () {
+        Route::prefix('piano-complete-beginners-bootcamp')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@beginnerBootcamp')
                     ->whereIn('page', [
                         null, 'zoom'
                     ]);
             }
         );
-        Route::prefix('perfect-practice-bootcamp')->group(function () {
+        Route::prefix('perfect-practice-bootcamp')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@practiceBootcamp')
                     ->whereIn('page', [
                         null, 'zoom'
                     ]);
             }
         );
-        Route::prefix('chord-hacks')->group(function () {
+        Route::prefix('chord-hacks')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@chordHacks')
                     ->whereIn('page', [
                         null, 'thank-you', 'ty-annual', 'ty-monthly'
                     ]);
             }
         );
-        Route::prefix('blues-piano-bootcamp')->group(function () {
+        Route::prefix('blues-piano-bootcamp')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@bluesPianoBootcamp')
                     ->whereIn('page', [
                         null, 'thank-you', 'ty-annual', 'ty-monthly'
@@ -65,14 +69,16 @@ Route::domain('{pianoteDomain}')
             }
         );
 
-        Route::prefix('method')->group(function () {
+        Route::prefix('method')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@method')
                     ->whereIn('page', [
                         'why-people-fail', 'play-a-song', 'guarantee-success'
                     ]);
             }
         );
-        Route::prefix('getting-started')->group(function () {
+        Route::prefix('getting-started')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@gstd')
                     ->whereIn('page', [
                         null, 'thank-you', 'ty-annual', 'ty-monthly'
@@ -80,7 +86,8 @@ Route::domain('{pianoteDomain}')
             }
         );
         Route::get('/sight-reading-made-simple', [LeadGenController::class, 'sightReading']);
-        Route::prefix('learn-songs')->group(function () {
+        Route::prefix('learn-songs')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@learnSongs')
                     ->whereIn('page', [
                         null, 'thank-you',
@@ -89,7 +96,8 @@ Route::domain('{pianoteDomain}')
         );
         Route::get('/christmas-carols', [LeadGenController::class, 'carols']);
         Route::get('/classical-piano', [LeadGenController::class, 'classicalPiano']);
-        Route::prefix('50-chord-charts')->group(function () {
+        Route::prefix('50-chord-charts')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@chordCharts')
                     ->whereIn('page', [
                         null, 'unlocked'
@@ -99,7 +107,8 @@ Route::domain('{pianoteDomain}')
         Route::get('/piano-in-5-days', [LeadGenController::class, 'fiveDays']);
         Route::get('/start-here', [LeadGenController::class, 'startHere']);
         Route::get('/7-days-to-sight-reading', [LeadGenController::class, 'sevenDaysSightReading']);
-        Route::prefix('personality-quiz')->group(function () {
+        Route::prefix('personality-quiz')->group(
+            function () {
                 Route::get('/{page?}', LeadGenController::class . '@personalityQuiz')
                     ->whereIn('page', [
                         null, 'result-1', 'result-2', 'result-3', 'result-4', 'academic', 'entertainer', 'explorer', 'scientist'

@@ -7,7 +7,8 @@ use App\Http\Controllers\Singeo\SalesController;
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-        Route::prefix('shop')->group(function () {
+        Route::prefix('shop')->group(
+            function () {
                 Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
                 Route::get('/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
                 Route::get('/singing-straw', [SalesController::class, 'singingStraw']);

@@ -26,14 +26,16 @@ Route::domain('{pianoteDomain}')
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
         Route::get('/a/davidbennett', [SalesController::class, 'davidbennett']);
-        Route::prefix('affiliate')->group(function () {
+        Route::prefix('affiliate')->group(
+            function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
                         'asobergirlsguide', 'keyboardkraze', 'pianodreamers'
                     ]);
             }
         );
-        Route::prefix('a')->group(function () {
+        Route::prefix('a')->group(
+            function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
                         'leviclay'

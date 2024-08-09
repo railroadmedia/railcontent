@@ -6,7 +6,8 @@ use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
 
-Route::prefix(config('user_management_system.route_prefix'))->group(function () {
+Route::prefix(config('user_management_system.route_prefix'))->group(
+    function () {
         /*
          * Account Creation
          */

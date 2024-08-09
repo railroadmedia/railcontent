@@ -5,7 +5,8 @@ use App\Modules\Mentor\Controllers;
 use Modules\Mentor\Controllers\HelpScoutMentorController;
 use Modules\Mentor\Controllers\MentorController;
 
-Route::prefix(config('mentor.route_prefix'))->middleware('web_or_api_authenticated', 'musora-center-admin')->group(function () {
+Route::prefix(config('mentor.route_prefix'))->middleware('web_or_api_authenticated', 'musora-center-admin')->group(
+    function () {
         Route::get('/getMentorIdByStudent/{userId}/', [MentorController::class, 'getMentorIdByStudent']);
         Route::get('/getMentors', [MentorController::class, 'getMentors']);
         //Todo:Change to patch once musora runs on MWP domain
@@ -17,7 +18,8 @@ Route::prefix(config('mentor.route_prefix'))->middleware('web_or_api_authenticat
     }
 );
 
-Route::prefix(config('mentor.route_prefix'))->group(function () {
+Route::prefix(config('mentor.route_prefix'))->group(
+    function () {
         Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
     }
 );
