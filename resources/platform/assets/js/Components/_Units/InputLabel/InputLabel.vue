@@ -104,7 +104,7 @@ const onEnter = (e) => {
 };
 
 const getBaseInputStyles = () => `
-    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-black dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[15px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none'}
+    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-black dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[15px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none active:tw-outline-none tw-ring-transparent'}
   `
 
 onUpdated(() => {
@@ -117,7 +117,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride ? wrapperOverride : ''
+  <div :class="`input-wrapper tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride ? wrapperOverride : ''
     }`">
     <label v-if="labelValue" :for="id"
       :class="`tw-text-sm tw-px-[15px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
@@ -127,7 +127,7 @@ onBeforeMount(() => {
       <input v-model="maskedValue" v-on:keypress.enter.prevent="onEnter" :data-maska="maskaConfig.dataMaska"
         :data-maska-tokens="maskaConfig.maskaTokens" :placeholder="placeholder" :id="id" :class="[getBaseInputStyles(),
   `${inputOverride ? inputOverride : ''}`,
-  { '!tw-border-red-500 dark:!tw-border-red-500': error },
+  { '!tw-border-[#DC2626] dark:!tw-border-[#DC2626] tw-border-[1px] tw-bg-[#FECACA] focus:tw-outline-none focus:tw-ring-[#FECACA]': error || inputErrors.length },
   { 'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20': disabled },
   ]" :name="inputName" :type="inputType" :disabled="disabled" autocomplete="off"
         @focus="() => emit('onFocus')" />

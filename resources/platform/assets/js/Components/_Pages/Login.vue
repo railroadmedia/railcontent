@@ -4,14 +4,12 @@ import axios from "axios";
 import NotificationToasts from "@vuesora/Components/NotificationToasts/NotificationToasts.vue";
 import EmailForm from "./Login/EmailForm.vue";
 import PasswordForm from "./Login/PasswordForm.vue";
+import EmailConfirmation from "./Login/EmailConfirmation.vue";
 import ResetForm from "./Login/ResetForm.vue";
-import SetupForm from "./Login/SetupForm.vue";
 import { brandUrl as brandLogos } from "@constants/brands";
-
-// TODO: SPLIT INTO STEP COMPONENTS
-
 import { useNotificationStore } from '@stores/notification';
 import { useUserStore } from "@stores/user";
+
 const userStore = useUserStore();
 const notification = useNotificationStore();
 
@@ -53,6 +51,9 @@ const passwordInput = ref('');
 const isLoading = ref(false);
 const isPasswordVisible = ref(false);
 const isResendButtonDisabled = ref(false);
+const confirmationTitle = ref('');
+const confirmationDescription = ref('');
+const endpointUrl = ref('');
 
 const changeCurrentForm = (val) => {
   currentForm.value = val;
@@ -65,8 +66,21 @@ const handleEmailChange = (val) => {
 };
 
 const handlePasswordChange = (val) => {
-  passwordError.value = '';
   passwordInput.value = val;
+};
+
+const changeConfirmationScreen = (confirmationType) => {
+  if(confirmationType === 'reset') {
+    confirmationTitle.value = 'Password reset link sent!';
+    confirmationDescription.value = 'We’ve sent the link to reset your password';
+    endpointUrl.value = props.reseturl;
+    changeCurrentForm('email-confirm');
+  } else if (confirmationType === 'setup') {
+    confirmationTitle.value = 'You’re almost there!';
+    confirmationDescription.value = 'We’ve sent the link to complete your account';
+    endpointUrl.value = '/user-management-system/login/send-setup-email';
+    sendSetupEmail();
+  }
 };
 
 const handleButtonClick = () => {
@@ -116,8 +130,11 @@ const showNotification = (payload) => {
 };
 
 const validateEmail = () => {
+  //todo remove comment and put confirmation screen where it should
   emailError.value = '';
-  axios.post('/user-management-system/login/check-email', { email: emailInput.value })
+
+  changeConfirmationScreen('setup');
+  /* axios.post('/user-management-system/login/check-email', { email: emailInput.value })
     .then((response) => {
       if (response.data.is_setup) {
         changeCurrentForm('login-password');
@@ -129,14 +146,13 @@ const validateEmail = () => {
       console.log('error');
       emailError.value = "We can't find your account. Click below to join!";
       console.log(emailError.value);
-    });
+    }); */
 };
 
-const resendEmail = () => {
+const sendSetupEmail = () => {
   axios.post('/user-management-system/login/send-setup-email', { email: emailInput.value })
     .then(() => {
-      isResendButtonDisabled.value = true;
-
+      changeCurrentForm('email-confirm');
       showNotification({
         icon: 'check',
         text: 'We’ve sent the link to complete your account. Please check your email.'
@@ -157,7 +173,7 @@ const resendEmail = () => {
       :isMembersArea="false" />
     <div
       class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20 tw-px-[20px]">
-      <section id="logoContainer"
+      <section v-if="currentForm !== 'email-confirm' && currentForm !== 'setup'" id="logoContainer"
         class="tw-w-full tw-flex-col tw-flex tw-items-center tw-text-center tw-border-[#223F57] tw-border-b-[1px] tw-pb-[40px] tw-max-w-[400px]">
         <img class="tw-w-full tw-max-w-[130px] md:tw-max-w-[240px] tw-mb-[15px]"
           src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo">
@@ -181,10 +197,11 @@ const resendEmail = () => {
           :isButtonDisabled="isButtonDisabled" @password-change="handlePasswordChange" @button-click="handleButtonClick"
           @toggle-password="toggleSeePassword" @change-form="changeCurrentForm" />
         <ResetForm v-if="currentForm === 'reset'" :emailInput="emailInput" :reseturl="reseturl"
-          :usecsrftoken="usecsrftoken" :userStore="userStore" @email-change="handleEmailChange"
+          :usecsrftoken="usecsrftoken" :userStore="userStore" @email-change="handleEmailChange" @change-confirmation-screen="changeConfirmationScreen"
           @change-form="changeCurrentForm" />
-        <SetupForm v-if="currentForm === 'setup'" :emailInput="emailInput"
-          :isResendButtonDisabled="isResendButtonDisabled" @resend-email="resendEmail" />
+        <EmailConfirmation v-if="currentForm === 'email-confirm'" :emailInput="emailInput" :endpointUrl="endpointUrl"
+          :usecsrftoken="usecsrftoken" :userStore="userStore" :confirmationTitle="confirmationTitle" :confirmationDescription="confirmationDescription"
+          @change-form="changeCurrentForm" />
       </div>
     </div>
   </div>

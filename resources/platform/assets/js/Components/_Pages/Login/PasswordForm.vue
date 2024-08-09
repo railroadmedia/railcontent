@@ -7,9 +7,6 @@
                 class="tw-text-white tw-text-[14px] tw-leading-[21px]"
                 @click="() => emit('change-form', 'login-email')">Change</a>
         </p>
-        <div v-if="passwordError && passwordError.length > 0" class="tw-flex tw-mb-3 tw-text-xs tw-text-pianote">
-            {{ passwordError }}
-        </div>
         <ul v-if="hassessionstatus && sessionstatus"
             class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none">
             <li>{{ sessionstatus }}</li>
@@ -19,7 +16,7 @@
             <InputLabel wrapperOverride="tw-text-[16px]"
                 inputOverride="tw-w-full tw-h-[40px] tw-text-[#00101D] tw-text-[14px] tw-leading-[21px]"
                 :brand="userStore.brand" :inputType="isPasswordVisible ? 'text' : 'password'" id="loginPassword"
-                inputName="password" labelValue="Password" placeholder="Enter your password..." :inputErrors="[]"
+                inputName="password" labelValue="Password" placeholder="Enter your password..." :inputErrors="passwordError"
                 @onChange="handlePasswordChange" @onEnter="handleButtonClick" :showCustomButton="true"
                 labelOverride="tw-font-normal" clearButtonOverride="tw-text-black">
                 <template #custom-btn>
@@ -52,7 +49,7 @@ import LoadingSpinner from "@units/LoadingSpinner/LoadingSpinner.vue";
 
 const props = defineProps({
     emailInput: String,
-    passwordError: Array,
+    passwordError: String,
     hassessionstatus: Boolean,
     sessionstatus: String,
     userStore: Object,
