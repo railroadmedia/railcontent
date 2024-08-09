@@ -279,12 +279,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
     protected $guard_name = 'user-management-system';
-    protected $casts = [
-        'brand_method_levels' => 'json',
-        'brand_total_xp' => 'json',
-        'brand_minutes_practiced' => 'json',
-        'needs_logout' => 'bool'
-    ];
 
     /**
      * @var string
@@ -349,6 +343,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->connection = config('user_management_system.database_connection_name');
 
         parent::__construct($attributes);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'brand_method_levels' => 'json',
+            'brand_total_xp' => 'json',
+            'brand_minutes_practiced' => 'json',
+            'needs_logout' => 'bool'
+        ];
     }
 
     public function mentorStudent(): HasOne

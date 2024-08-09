@@ -126,13 +126,6 @@ class Product extends Model
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
 
-    protected $casts = [
-        'sales_page_start_date' => 'datetime',
-        'sales_page_end_date' => 'datetime',
-        'shop_card_start_date' => 'datetime',
-        'shop_card_end_date' => 'datetime',
-    ];
-
     protected $revisionForceDeleteEnabled = true;
 
     public function brand(): BelongsTo
@@ -239,4 +232,14 @@ class Product extends Model
     protected $guarded = [
         'id'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'sales_page_start_date' => 'datetime',
+            'sales_page_end_date' => 'datetime',
+            'shop_card_start_date' => 'datetime',
+            'shop_card_end_date' => 'datetime',
+        ];
+    }
 }

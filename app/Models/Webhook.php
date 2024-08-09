@@ -23,10 +23,13 @@ class Webhook extends Model
         'id'
     ];
 
-    protected $casts = [
-        'job_details' => 'array',
-        'contents' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'job_details' => 'array',
+            'contents' => 'array',
+        ];
+    }
 
     /**
      * @return bool - flag to indicate if self + children jobs have been processed, or if the job crashed during construction for any reason

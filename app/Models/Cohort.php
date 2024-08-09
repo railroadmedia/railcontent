@@ -22,19 +22,6 @@ class Cohort extends Model
 {
     use HasFactory;
 
-    //    use RevisionableTrait;
-
-    //
-    //    protected $with = ["brand", "productType"];
-
-    //    protected $revisionForceDeleteEnabled = true;
-    protected $casts = [
-        'enrollment_start_date' => 'datetime',
-        'enrollment_end_date' => 'datetime',
-        'cohort_start_date' => 'datetime',
-        'cohort_end_date' => 'datetime',
-    ];
-
     /**
      * Prepare a date for array / JSON serialization.
      */
@@ -138,4 +125,19 @@ class Cohort extends Model
     protected $guarded = [
         'id'
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'enrollment_start_date' => 'datetime',
+            'enrollment_end_date' => 'datetime',
+            'cohort_start_date' => 'datetime',
+            'cohort_end_date' => 'datetime',
+        ];
+    }
 }

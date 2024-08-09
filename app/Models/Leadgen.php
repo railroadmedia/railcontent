@@ -15,10 +15,13 @@ class Leadgen extends Model
         'id'
     ];
 
-    protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'datetime',
+            'end_date' => 'datetime',
+        ];
+    }
 
     public function brand(): BelongsTo
     {

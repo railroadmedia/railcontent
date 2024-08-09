@@ -37,9 +37,12 @@ class RememberToken extends Model
     use HasFactory;
     protected $table = 'usora_remember_tokens';
 
-    protected $casts = [
-        'expires_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'expires_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {

@@ -37,21 +37,6 @@ class WeeklyUserStatistic extends Model
     protected $table = 'weekly_user_statistics';
     public $timestamps = false;
 
-    protected $casts = [
-        'week' => 'datetime',
-        'user_id' => 'int',
-        'count_of_content_starts_drumeo' => 'int',
-        'count_of_content_starts_pianote' => 'int',
-        'count_of_content_starts_guitareo' => 'int',
-        'count_of_content_starts_singeo' => 'int',
-        'count_of_content_starts_basseo' => 'int',
-        'count_of_content_starts_musora' => 'int',
-        'in_trial_period' => 'bool',
-        'active' => 'bool',
-        'expired' => 'bool',
-        'generated_at' => 'datetime'
-    ];
-
     protected $fillable = [
         'week',
         'user_id',
@@ -70,4 +55,22 @@ class WeeklyUserStatistic extends Model
         'expired',
         'generated_at'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'week' => 'datetime',
+            'user_id' => 'int',
+            'count_of_content_starts_drumeo' => 'int',
+            'count_of_content_starts_pianote' => 'int',
+            'count_of_content_starts_guitareo' => 'int',
+            'count_of_content_starts_singeo' => 'int',
+            'count_of_content_starts_basseo' => 'int',
+            'count_of_content_starts_musora' => 'int',
+            'in_trial_period' => 'bool',
+            'active' => 'bool',
+            'expired' => 'bool',
+            'generated_at' => 'datetime'
+        ];
+    }
 }
