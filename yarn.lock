@@ -14375,10 +14375,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-sanity-services@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "musora-sanity-services@npm:1.0.4"
-  checksum: 10c0/ff173259047d6252df701bc2af4a15a01129a906d4fb3a56c9cbabd16e229fa433f65227f9b5a28802001c2f5416dbae9772cf1bbdee2a261c18e2c401d03bdd
+"musora-sanity-services@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "musora-sanity-services@npm:1.0.5"
+  checksum: 10c0/1d39fdcf05cc1c1616a6f3e6c111e140c3a451cd49da73add0ccb751a47cedf6bcc8ddd5b9607b6e887a03b9c9fe96b89e9c949941f57fce490ba265ea7fc6bb
   languageName: node
   linkType: hard
 
@@ -17132,7 +17132,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-sanity-services: "npm:^1.0.4"
+    musora-sanity-services: "npm:^1.0.5"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
