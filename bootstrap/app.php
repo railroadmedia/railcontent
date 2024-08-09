@@ -4,6 +4,8 @@ use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Log;
+use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
@@ -147,5 +149,19 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->renderable(function (Throwable $e) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'trace' => ' File::' . $e->getFile() . ' Line::' . $e->getLine(),
+                ], 500);
+            }
+        });
+
+        $exceptions->reportable(function (Throwable $e) {
+            if ($e instanceof MusoraAPIException) {
+                return false;
+            }
+            Log::info(request()->url());
+        });
     })->create();
