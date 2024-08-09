@@ -86,12 +86,6 @@ class AccessCodeService
         $accessCode->updated_at = Carbon::now();
         $accessCode->save();
 
-        $user->primary_brand = $accessCode->brand !== 'musora'
-            ? $accessCode->brand
-            : $user->primary_brand;
-
-        $user->save();
-
         event(new AccessCodeClaimed($accessCode, $user, $context));
 
         Log::info('Access code claimed', [

@@ -20,7 +20,7 @@
         :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
-        @if(count($hotForumTopics) > 0)
+        @if(count($hotForumTopics) > 0) 
             :conversation-data="{{ json_encode($hotForumTopics) }}"
         @endif
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
@@ -41,7 +41,6 @@
         youtube-id="{{ $youtubeId }}"
         :learning-paths="{{ json_encode($trialSection) }}"
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
-        :trial-section-redesign="{{ $trialSectionRedesign }}"
     ></home>
 
     @include('partials._railanalytics-brand-tracking-iframe')

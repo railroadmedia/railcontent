@@ -155,7 +155,6 @@
                 'email' => !empty(user()) ? user()->email : null,
                 'brand' => $brand,
                 'mobileAppWebView' => true,
-                'hideInMobile' => $hideHelpscoutInMobile ?? false,
             ])
         @endif
 

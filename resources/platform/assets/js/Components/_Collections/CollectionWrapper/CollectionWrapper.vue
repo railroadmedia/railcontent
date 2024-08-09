@@ -10,7 +10,7 @@
             <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
-                <CoachCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
+                <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
                 <SongCardContainer
                     v-else-if="isSong"
@@ -49,7 +49,7 @@ import ListCatalogue from "@collections/ListCatalogue/ListCatalogue";
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
 import SongCardContainer from "@collections/Catalogue/SongCardContainer";
 import RoutinesCatalogue from "@collections/Catalogue/RoutineCatalogue";
-import CoachCatalogue from "@collections/Catalogue/CoachCatalogue";
+import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";

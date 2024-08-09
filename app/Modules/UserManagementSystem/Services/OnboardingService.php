@@ -6,6 +6,7 @@ use App\Modules\Brand\Enums\Brand;
 use Exception;
 use Modules\UserManagementSystem\Events\OnboardingInstrumentUpdated;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
+use Modules\UserManagementSystem\Models\OnboardingExperience;
 
 class OnboardingService
 {
@@ -51,21 +52,5 @@ class OnboardingService
                 return Brand::Guitareo->value;
         }
         throw new Exception("Unable to determine brand from instrument onboarding answer '$instrument'");
-    }
-
-
-    public function getInstrumentFromBrand(string $brand): string
-    {
-        switch ($brand) {
-            case Brand::Drumeo->value:
-                return 'drums';
-            case Brand::Pianote->value:
-                return 'piano';
-            case Brand::Singeo->value:
-                return 'singing';
-            case Brand::Guitareo->value:
-                return 'guitar';
-        }
-        throw new Exception("Unable to determine instrument onboarding answer from brand '$brand'");
     }
 }
