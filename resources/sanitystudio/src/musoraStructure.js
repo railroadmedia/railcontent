@@ -10,7 +10,7 @@ export const musoraStructure = async (S, context) => {
             'on-the-road', 'live', 'podcast', 'performance', 'rhythmic-adventures-of-captain-carson', 'solo', 'gear-guide', 'challenges','question-and-answer',
             'archive', 'boot-camp'
         ];
-        const extra = ['challenge-part', 'course-part', 'media.tag', 'assist.instruction.context'];
+        const extra = ['challenge-part', 'course-part','semester-pack-lesson', 'media.tag', 'assist.instruction.context'];
         //'topic', 'essential', 'creativity', 'lifestyle', 'theory',
         const hiddenCategories = uniqueCategories.concat(extra);
 
