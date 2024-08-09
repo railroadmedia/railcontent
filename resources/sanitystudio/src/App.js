@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
 import {RobotIcon, RocketIcon, CogIcon} from '@sanity/icons'
-import { Studio, defineConfig } from 'sanity';
+import { Studio, defineConfig, isDev } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import {assist} from '@sanity/assist';
@@ -18,7 +18,7 @@ import {CreateImprovedAction} from './actions/actions'; // Import the custom com
 import { defaultDocumentNode } from './defaultDocumentNode';
 import { musoraStructure } from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
-import {media} from 'sanity-plugin-media'
+import {media} from 'sanity-plugin-media';
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -97,16 +97,19 @@ function App() {
                     name: config.name,
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
-                    plugins: [
-                      structureTool({
-                          structure: musoraStructure,
-                          defaultDocumentNode: defaultDocumentNode }),
-                      visionTool(),
-                      media(),
-                      assist(),
-                      embeddingsIndexReferenceInput(),
-                        embeddingsIndexDashboard()
-                    ],
+                    plugins: isDev
+                                 ? [ structureTool({
+                            structure: musoraStructure,
+                            defaultDocumentNode: defaultDocumentNode }),
+
+                            visionTool(),
+                            media(),
+                            assist(),
+                            embeddingsIndexReferenceInput(),
+                            embeddingsIndexDashboard()]
+                                 : [structureTool({
+                            structure: musoraStructure,
+                            defaultDocumentNode: defaultDocumentNode })],
                     document: {
                         actions: (prev, context) =>
                             prev.map((previousAction) =>
