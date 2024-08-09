@@ -15,7 +15,7 @@ class LiveEventDecorator extends TypeDecoratorBase
      * @param Collection $contents
      * @return Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->whereIn('type', config('railcontent.liveContentTypes', []));
 

@@ -67,7 +67,7 @@ class CoachPagesController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|Factory|Application|View
      * @throws \Exception
      */
-    public function coaches(Request $request)
+    public function coaches(Request $request): View
     {
         $previousStatuses = ContentRepository::$availableContentStatues;
         $previousPullFutureContent = ContentRepository::$pullFutureContent;
@@ -241,7 +241,7 @@ class CoachPagesController extends Controller
      * @param $coachSlug
      * @return Factory|Application|View
      */
-    public function show(Request $request, $domain, $brand, $coachSlug, $coachId)
+    public function show(Request $request, $domain, $brand, $coachSlug, $coachId): View
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -360,7 +360,7 @@ class CoachPagesController extends Controller
      * @param bool $redirectToFirstChild
      * @return Factory|Application|RedirectResponse|View
      */
-    public function stream(Request $request, $domain, $brand, $coachSlug, $streamSlug, $streamId)
+    public function stream(Request $request, $domain, $brand, $coachSlug, $streamSlug, $streamId): View
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];

@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Exception;
 
 class UserFriendlyException extends Exception
@@ -11,7 +13,7 @@ class UserFriendlyException extends Exception
      *
      * @return bool|null
      */
-    public function report()
+    public function report(): ?bool
     {
         return false;
     }
@@ -22,7 +24,7 @@ class UserFriendlyException extends Exception
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function render($request)
+    public function render(Request $request): Response
     {
         return response()->json([
             'friendlyMessage' => $this->getMessage()

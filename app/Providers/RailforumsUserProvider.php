@@ -167,7 +167,7 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $reportedUsers
      * @return ForumUser
      */
-    private function forumUserFromUserModel(User $userModel, $reportedUsers = [])
+    private function forumUserFromUserModel(User $userModel, array $reportedUsers = []): ForumUser
     {
         return new ForumUser(
             $userModel->id,

@@ -37,7 +37,7 @@ class PackService
      * @return PackCollection
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getPacksForHome(User $user)
+    public function getPacksForHome(User $user): PackCollection
     {
         Decorator::$typeDecoratorsEnabled = true;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;

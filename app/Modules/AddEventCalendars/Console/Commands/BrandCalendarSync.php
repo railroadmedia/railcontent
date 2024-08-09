@@ -54,7 +54,7 @@ class BrandCalendarSync extends Command
      * @return void
      * @throws Exception
      */
-    private function syncInstructors($brand)
+    private function syncInstructors($brand): void
     {
         // Next we can pull all events for all calendars scheduled in the future (past a specified date).
         // https://www.addevent.com/documentation/calendar-api#anchor-calendar-all-events
@@ -290,7 +290,7 @@ class BrandCalendarSync extends Command
      * @return void
      * @throws Exception
      */
-    private function syncCoachCalendarEvents($brand, $coaches)
+    private function syncCoachCalendarEvents($brand, $coaches): void
     {
         $this->info('');
         $this->info('# Synchronizing events in coach calendars');
@@ -344,7 +344,7 @@ class BrandCalendarSync extends Command
      * @return void
      * @throws Exception
      */
-    private function syncTypeSpecificAndOverview($brand)
+    private function syncTypeSpecificAndOverview($brand): void
     {
         $allContent = [];
 
@@ -430,7 +430,7 @@ class BrandCalendarSync extends Command
      *
      * Only for development
      */
-    private function constrainCoachesToOnlyThoseWithContentReleasesComingUp(&$coaches, $brand)
+    private function constrainCoachesToOnlyThoseWithContentReleasesComingUp(&$coaches, $brand): void
     {
         if (app()->environment() != 'local') {
             return;

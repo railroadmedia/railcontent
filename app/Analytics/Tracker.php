@@ -92,7 +92,7 @@ class Tracker
      * @param $arguments
      * @return string
      */
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic($name, $arguments): string
     {
         return call_user_func_array([TrackerBase::class, $name], $arguments);
     }
@@ -100,7 +100,7 @@ class Tracker
     /**
      * @return array
      */
-    private static function products()
+    private static function products(): array
     {
         if (empty(self::$productCache)) {
             self::$productCache = cache()->remember(

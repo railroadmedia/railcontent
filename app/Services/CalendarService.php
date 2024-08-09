@@ -43,7 +43,7 @@ class CalendarService
      * @return array
      * @throws \Exception
      */
-    public static function getTimezoneList()
+    public static function getTimezoneList(): array
     {
         $formattedTimeZones = [];
         $allZones = DateTimeZone::listIdentifiers();

@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Notifications;
 
+use Closure;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -27,7 +28,7 @@ class EmailChange extends Notification
      * @param  string $token
      * @return void
      */
-    public function __construct($token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }
@@ -64,7 +65,7 @@ class EmailChange extends Notification
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage()
+    protected function buildMailMessage(): MailMessage
     {
         return (new MailMessage())
             ->subject('Musora Account Email Change Link')
@@ -91,7 +92,7 @@ class EmailChange extends Notification
      * @param  \Closure $callback
      * @return void
      */
-    public static function toMailUsing($callback)
+    public static function toMailUsing(Closure $callback): void
     {
         static::$toMailCallback = $callback;
     }

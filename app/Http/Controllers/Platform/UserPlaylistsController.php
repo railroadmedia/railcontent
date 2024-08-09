@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
 
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
@@ -85,7 +87,7 @@ class UserPlaylistsController extends BaseController
         $this->playlistService = $playlistService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
@@ -151,7 +153,7 @@ class UserPlaylistsController extends BaseController
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Throwable
      */
-    public function playlist(Request $request, $domain, $brand, $playlistId)
+    public function playlist(Request $request, $domain, $brand, $playlistId): View
     {
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
@@ -278,7 +280,7 @@ class UserPlaylistsController extends BaseController
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Throwable
      */
-    public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId)
+    public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId): View
     {
         $oldStatuses = ContentRepository::$availableContentStatues;
         $oldFutureContent = ContentRepository::$pullFutureContent;
@@ -488,7 +490,7 @@ class UserPlaylistsController extends BaseController
      * @param $playlistId
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
      */
-    public function playback(Request $request, $domain, $brand, $playlistId)
+    public function playback(Request $request, $domain, $brand, $playlistId): RedirectResponse
     {
         $item = $this->playlistService->getPlaylistNextItem($playlistId);
 

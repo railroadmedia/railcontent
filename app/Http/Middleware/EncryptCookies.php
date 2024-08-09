@@ -21,7 +21,7 @@ class EncryptCookies extends Middleware
      * @param  string  $name
      * @return bool
      */
-    public function isDisabled($name)
+    public function isDisabled(string $name): bool
     {
         if (Str::contains($name, '_last_used_brand')) {
             return true;

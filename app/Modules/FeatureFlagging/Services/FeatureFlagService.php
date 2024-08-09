@@ -39,7 +39,7 @@ class FeatureFlagService
      * @param array $attributesToUpdate - value array of columns to update. Array values will be transformed to comma separated strings
      * @return void
      */
-    public function editFeature(int $id, array $attributesToUpdate)
+    public function editFeature(int $id, array $attributesToUpdate): void
     {
         $this->throwIfInvalidUpdate($attributesToUpdate, 'Feature');
         $attributesToUpdate = $this->convertArrayParamsToString($attributesToUpdate);

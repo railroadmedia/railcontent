@@ -85,7 +85,7 @@ class AddEventCalendarEventVO
         $liveEventEndTime,
         $liveStreamFeedType,
         $description
-    ) {
+    ): void {
         $this->internalBrand = $brand;
         $this->internalTypeOrSlug = $typeOrSlug;
         $this->internalId = $id;
@@ -263,7 +263,7 @@ class AddEventCalendarEventVO
      * @return Carbon
      * @throws \Exception
      */
-    public function getEndTimeToSync()
+    public function getEndTimeToSync(): Carbon
     {
         if (($this->internalLiveEventEndTime != 'Invalid date') && !empty($this->internalLiveEventEndTime)) {
             return Carbon::parse($this->internalLiveEventEndTime);

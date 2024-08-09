@@ -267,7 +267,7 @@ class ShopifyAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function clearCart($cartId)
+    public function clearCart($cartId): bool
     {
         $shopifyCartData = $this->getCart($cartId);
 
@@ -545,7 +545,7 @@ class ShopifyAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductVariantIdsFromSKUs(array $productSKUs)
+    public function getProductVariantIdsFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -616,7 +616,7 @@ class ShopifyAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductInventoryCountFromSKUs(array $productSKUs)
+    public function getProductInventoryCountFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -674,7 +674,7 @@ class ShopifyAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductsVariantsWithSellingPlansFromSKUs(array $productSKUs)
+    public function getProductsVariantsWithSellingPlansFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -756,7 +756,7 @@ class ShopifyAPIService
      * @param null $redirectToUrl
      * @return string
      */
-    public function generateMultipassToken($userEmail, $redirectToUrl = null)
+    public function generateMultipassToken($userEmail, $redirectToUrl = null): string
     {
         $customerDataHash = ['email' => $userEmail];
 

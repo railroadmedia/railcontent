@@ -162,7 +162,7 @@ class LiveStreamEventService
      * @param false $withBuffer
      * @return bool
      */
-    public function currentlyLive($withBuffer = false)
+    public function currentlyLive(bool $withBuffer = false): bool
     {
         $liveEvent = $this->getCurrentOrNextLiveEvent();
 
@@ -198,7 +198,7 @@ class LiveStreamEventService
      *
      * @return null|string
      */
-    public function getCurrentOrNextYoutubeEventId($brand = null)
+    public function getCurrentOrNextYoutubeEventId($brand = null): ?string
     {
         // temp hack because of api limit
         //        return 'WY14xLIeBbc';

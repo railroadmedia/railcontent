@@ -233,7 +233,7 @@ class MigrateMissingPlaylistsItems extends Command
         ?string $brand,
         ?string $userId,
         $playlist
-    ) {
+    ): int {
         $playlistItems =
             UserPlaylistContent::query()
                 ->where('user_playlist_id', $playlist->id)

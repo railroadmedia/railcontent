@@ -24,7 +24,7 @@ class LiveStreamEventAttended
      * @param  integer  $contentId
      * @param  string  $dateTimeString
      */
-    public function __construct($userId, $contentId, $dateTimeString)
+    public function __construct(int $userId, int $contentId, string $dateTimeString)
     {
         $this->userId = $userId;
         $this->contentId = $contentId;
@@ -34,7 +34,7 @@ class LiveStreamEventAttended
     /**
      * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -42,7 +42,7 @@ class LiveStreamEventAttended
     /**
      * @return int
      */
-    public function getContentId()
+    public function getContentId(): int
     {
         return $this->contentId;
     }
@@ -50,7 +50,7 @@ class LiveStreamEventAttended
     /**
      * @return string
      */
-    public function getDateTimeString()
+    public function getDateTimeString(): string
     {
         return $this->dateTimeString;
     }

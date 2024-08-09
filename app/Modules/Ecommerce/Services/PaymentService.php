@@ -25,7 +25,7 @@ class PaymentService
         $type,
         $purchasedAt,
         $transactionId
-    ) {
+    ): Payment {
         $payment = Payment::where('external_id', $transactionId)
             ->where('external_provider', $type)->first();
         if (!$payment) {

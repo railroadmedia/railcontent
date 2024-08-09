@@ -11,7 +11,7 @@ class SaasquatchException extends ReferralException
      *
      * @param string $message
      */
-    public function __construct($message, $code = 503)
+    public function __construct(string $message, $code = 503)
     {
         $this->message = $message;
         $this->title = 'Saasquatch Exception';

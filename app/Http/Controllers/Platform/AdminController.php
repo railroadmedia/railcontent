@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Modules\UserManagementSystem\Services\TestingService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,7 +20,7 @@ class AdminController extends Controller
         $this->testingService = $testingService;
     }
 
-    public function vimeoData(Request $request)
+    public function vimeoData(Request $request): View
     {
         $ids = explode(',', $request->get('ids'));
 
@@ -63,7 +65,7 @@ class AdminController extends Controller
         });
     }
 
-    public function createUser(Request $request)
+    public function createUser(Request $request): RedirectResponse
     {
         $productId = $request->get('productId');
         $createdAt = $request->get("createdAt");

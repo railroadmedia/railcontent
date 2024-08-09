@@ -13,7 +13,7 @@ class CohortDropdownPreset extends Preset
      *
      * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(CohortDropdownResolver::class);
         $field->button('Add a dropdown');

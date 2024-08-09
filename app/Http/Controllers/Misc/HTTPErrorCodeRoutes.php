@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Misc;
 
+use Illuminate\Http\Response;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class HTTPErrorCodeRoutes extends BaseController
 {
-    public function notFound404(Request $request)
+    public function notFound404(Request $request): Response
     {
         return response()->view('errors.404', [], 404);
     }

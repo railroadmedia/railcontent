@@ -214,7 +214,7 @@ class FeatureFlagManager implements FeatureFlagsContract
      * @param array|string $allow_filter
      * @return bool
      */
-    public static function isValidFilter(array|string|null $allow_filter)
+    public static function isValidFilter(array|string|null $allow_filter): bool
     {
         $validFilters = ['admin', 'musora'];
         $filters = is_array($allow_filter) ? $allow_filter : explode(',', $allow_filter);

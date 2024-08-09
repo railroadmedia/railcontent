@@ -44,7 +44,7 @@ class LeadgenLessonLayout extends Layout
      *
      * @return array
      */
-    public function fields()
+    public function fields(): array
     {
         $uuid  = Str::uuid();
 

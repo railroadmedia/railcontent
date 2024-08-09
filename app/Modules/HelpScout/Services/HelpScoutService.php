@@ -24,10 +24,10 @@ class HelpScoutService extends HelpScoutServiceBase
      * @throws Exception
      */
     public function createCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
+        int $userId,
+        string $firstName,
+        string $lastName,
+        array $email,
         $attributes
     ) {
         $customer = new Customer();
@@ -79,12 +79,12 @@ class HelpScoutService extends HelpScoutServiceBase
      * @throws Exception
      */
     public function updateCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys
     ) {
         $customer = $this->getCustomerById($userId);
 
@@ -142,12 +142,12 @@ class HelpScoutService extends HelpScoutServiceBase
      * @throws Exception
      */
     public function createOrUpdateCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys
     ) {
         /**
          * @var $localCustomer LocalCustomer
@@ -177,12 +177,12 @@ class HelpScoutService extends HelpScoutServiceBase
      * @throws Exception
      */
     public function syncExistingCustomer(
-        $userId,
-        $firstName,
-        $lastName,
-        $email,
-        $attributes,
-        $brandsAttributesKeys,
+        int $userId,
+        string $firstName,
+        string $lastName,
+        string $email,
+        array $attributes,
+        array $brandsAttributesKeys,
         Customer $customer
     ) {
         $emails = $customer->getEmails()->toArray();
@@ -245,7 +245,7 @@ class HelpScoutService extends HelpScoutServiceBase
      *
      * @throws Exception
      */
-    public function getCustomerById($userId): Customer
+    public function getCustomerById(int $userId): Customer
     {
         /**
          * @var $localCustomer LocalCustomer

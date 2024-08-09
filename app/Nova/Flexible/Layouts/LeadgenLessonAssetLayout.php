@@ -27,7 +27,7 @@ class LeadgenLessonAssetLayout extends Layout
      *
      * @return array
      */
-    public function fields()
+    public function fields(): array
     {
         return [
             // Define the layout's fields.

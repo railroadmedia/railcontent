@@ -2,6 +2,8 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
+use Whitecube\NovaFlexibleContent\Layouts\Collection;
+use Illuminate\Support\Collection;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
@@ -17,7 +19,7 @@ class LeadgenLessonAssetResolver implements ResolverInterface
      * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
      * @return \Illuminate\Support\Collection
      */
-    public function get($resource, $attribute, $layouts)
+    public function get($resource, string $attribute, Collection $layouts): Collection
     {
         $assets = [];
         if(!empty($resource['meta_desc'])) {
@@ -64,7 +66,7 @@ class LeadgenLessonAssetResolver implements ResolverInterface
      * @param  \Illuminate\Support\Collection $groups
      * @return string
      */
-    public function set($model, $attribute, $groups)
+    public function set($model, string $attribute, Collection $groups): string
     {
         $assets = $groups->map(function ($group, $index) {
             return [

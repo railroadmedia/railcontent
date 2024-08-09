@@ -2,6 +2,7 @@
 
 namespace App\Nova\Filters;
 
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -22,7 +23,7 @@ class Brand extends Filter
      * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function apply(NovaRequest $request, $query, $value)
+    public function apply(NovaRequest $request, Builder $query, $value): Builder
     {
         $brand_id = \App\Models\Brand::where('name', $value)->firstOrFail()->id;
 
@@ -35,7 +36,7 @@ class Brand extends Filter
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function options(NovaRequest $request)
+    public function options(NovaRequest $request): array
     {
         $brands = \App\Models\Brand::get();
         $brands = $brands->mapWithKeys(function ($item) {

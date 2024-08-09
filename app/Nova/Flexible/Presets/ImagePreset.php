@@ -13,7 +13,7 @@ class ImagePreset extends Preset
      *
      * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(ImageResolver::class);
         $field->button('Add an image');

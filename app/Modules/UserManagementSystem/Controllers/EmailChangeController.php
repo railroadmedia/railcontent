@@ -45,7 +45,7 @@ class EmailChangeController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function request(Request $request)
+    public function request(Request $request): RedirectResponse
     {
         $isJson = request()->expectsJson();
         try {
@@ -153,7 +153,7 @@ class EmailChangeController extends Controller
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function confirm(Request $request)
+    public function confirm(Request $request): RedirectResponse
     {
         try {
             $validationRules = ['code' => 'bail|required|string'];
@@ -235,7 +235,7 @@ class EmailChangeController extends Controller
      * @return string
      */
     public function createNewToken(
-        $hash
+        string $hash
     ) {
         return hash_hmac('sha256', Str::random(40), $hash);
     }

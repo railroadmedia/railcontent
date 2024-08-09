@@ -31,13 +31,13 @@ class HelpScoutSyncService
      * @return array
      */
     public function getUsersAttributesById(
-        $userId,
-        $firstName,
-        $displayName,
-        $country,
-        $city,
-        $phoneNumber,
-        $timezone
+        int $userId,
+        ?string $firstName,
+        ?string $displayName,
+        ?string $country,
+        ?string $city,
+        ?string $phoneNumber,
+        ?string $timezone
     ): array {
         $musoraProfileAttributes = [
             'musora_profile_preferred-name' => !empty($firstName) ? $firstName : $displayName,

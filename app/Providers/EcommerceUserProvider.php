@@ -227,7 +227,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
      * @param  integer  $userId
      * @return array
      */
-    public function getBrandsUserIsAMemberOf($userId)
+    public function getBrandsUserIsAMemberOf(int $userId): array
     {
         if (isset($this->brandsUserIsAMemberOfCache[$userId])) {
             return $this->brandsUserIsAMemberOfCache[$userId];

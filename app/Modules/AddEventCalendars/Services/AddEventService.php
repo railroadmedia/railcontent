@@ -336,7 +336,7 @@ class AddEventService
      * @return bool
      * @throws Exception
      */
-    public function timesMatch($event, $startDate, $endDate = null)
+    public function timesMatch($event, $startDate, $endDate = null): bool
     {
         // clear trailing seconds from time (ex: '2022-01-12 10:00:13' to '2022-01-12 10:00') but validate first
         if (!is_string($startDate)) {

@@ -279,7 +279,7 @@ class PopulateNewRolesAndPermissionsTables extends Command
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [];
     }
@@ -289,7 +289,7 @@ class PopulateNewRolesAndPermissionsTables extends Command
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [];
     }

@@ -51,12 +51,12 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
      * @param integer|null $eventTimestamp
      */
     public function __construct(
-        $userId,
-        $accountName,
-        $eventName,
-        $eventData = [],
-        $eventType = null,
-        $eventTimestamp = null
+        int $userId,
+        string $accountName,
+        string $eventName,
+        array $eventData = [],
+        ?string $eventType = null,
+        ?int $eventTimestamp = null
     ) {
         $this->userId = $userId;
         $this->accountName = $accountName;

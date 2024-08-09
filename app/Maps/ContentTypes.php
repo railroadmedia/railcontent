@@ -7,7 +7,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function searchableContentTypes()
+    public static function searchableContentTypes(): array
     {
         $types = array_unique(
             array_merge(
@@ -24,7 +24,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function userListContentTypes()
+    public static function userListContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -38,7 +38,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function liveContentTypes()
+    public static function liveContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -52,7 +52,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function contentReleaseContentTypes()
+    public static function contentReleaseContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -66,7 +66,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function catalogueContentTypes()
+    public static function catalogueContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -77,7 +77,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function mapContentThemeColor($type)
+    public static function mapContentThemeColor($type): array
     {
         $contentTypeMap = [];
 
@@ -95,7 +95,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function countedCompletedContentTypes()
+    public static function countedCompletedContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -106,7 +106,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function ourPicksContentTypes()
+    public static function ourPicksContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -117,7 +117,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function newContentTypes()
+    public static function newContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -128,7 +128,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function inProgressContentTypes()
+    public static function inProgressContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -139,7 +139,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function dashboardInProgressContentTypes()
+    public static function dashboardInProgressContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -150,7 +150,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function userProgressListContentTypes()
+    public static function userProgressListContentTypes(): array
     {
         return array_merge(
             array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
@@ -161,7 +161,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function singularContentTypes()
+    public static function singularContentTypes(): array
     {
         return array_merge(
             config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
@@ -172,7 +172,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function contentTypesWithChildren()
+    public static function contentTypesWithChildren(): array
     {
         return config('railcontent.contentTypesWithChildren', []);
     }
@@ -180,7 +180,7 @@ class ContentTypes
     /**
      * @return array
      */
-    public static function contentTypesWithSingularParent()
+    public static function contentTypesWithSingularParent(): array
     {
         return config('railcontent.contentTypesWithSingularParent', []);
     }

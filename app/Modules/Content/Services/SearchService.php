@@ -119,7 +119,7 @@ class SearchService
      * @param array $content
      * @return string
      */
-    private function prepareIndexesValues($type, $content): string
+    private function prepareIndexesValues(string $type, array $content): string
     {
         $searchIndexValues = ConfigService::$searchIndexValues;
         $configSearchIndexValues = $searchIndexValues[$type];

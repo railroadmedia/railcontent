@@ -414,7 +414,7 @@ class CreateSongsDecember2022 extends Command
      * @param array $values
      * @return object
      */
-    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = [])
+    private function updateOrInsertAndGetFirst($table, array $attributes, array $values = []): object
     {
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
         return $this->getFirst($table, $attributes);
@@ -425,7 +425,7 @@ class CreateSongsDecember2022 extends Command
      * @param array $values
      * @return object
      */
-    private function getFirst($table, array $attributes)
+    private function getFirst($table, array $attributes): object
     {
         return $this->musoraDB()->from($table)->where($attributes)->get()->first();
     }

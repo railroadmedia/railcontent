@@ -74,7 +74,7 @@ class ProductAccessMap
     /**
      * @return array
      */
-    public static function trialMembershipProductIds()
+    public static function trialMembershipProductIds(): array
     {
 
         return self::getProductIdsBySku(
@@ -117,7 +117,7 @@ class ProductAccessMap
      * @param int $numberOfMonthsAgo
      * @return boolean
      */
-    public static function hasClaimedRetentionOfferWithin(User $user, $numberOfMonthsAgo = 6)
+    public static function hasClaimedRetentionOfferWithin(User $user, int $numberOfMonthsAgo = 6): bool
     {
         if (isset(self::$hasClaimedRetentionOfferWithinCache[$numberOfMonthsAgo])) {
             return self::$hasClaimedRetentionOfferWithinCache[$numberOfMonthsAgo];
@@ -194,7 +194,7 @@ class ProductAccessMap
      * @param $skus
      * @return array
      */
-    public static function getProductIdsBySku($skus)
+    public static function getProductIdsBySku($skus): array
     {
         $products = self::getAllProductIdsKeyedBySku();
 

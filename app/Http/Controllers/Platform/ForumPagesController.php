@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Carbon\Carbon;
@@ -78,7 +81,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showCategories(Request $request, $domain, $brand)
+    public function showCategories(Request $request, $domain, $brand): View
     {
         $amount = $request->get('amount', 20);
         $page = $request->get('page', 1);
@@ -235,7 +238,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showCategoryThreads(Request $request, $domain, $brand, $categorySlug, $categoryId)
+    public function showCategoryThreads(Request $request, $domain, $brand, $categorySlug, $categoryId): View
     {
         $category = $this->categoryRepository->read($categoryId);
         if (!$category) {
@@ -384,7 +387,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showAllLatestThreads(Request $request, $domain, $brand)
+    public function showAllLatestThreads(Request $request, $domain, $brand): View
     {
         $amount = $request->get('amount', UserForumThreadJsonController::AMOUNT);
         $page = $request->get('page', UserForumThreadJsonController::PAGE);
@@ -435,7 +438,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showThreadPosts(Request $request, $domain, $brand, $categorySlug, $categoryId, $threadSlug, $id)
+    public function showThreadPosts(Request $request, $domain, $brand, $categorySlug, $categoryId, $threadSlug, $id): View
     {
         $amount = $request->get('amount', 15);
         $page = $request->get('page', 1);
@@ -574,7 +577,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getSearchResultsJson(Request $request, $domain, $brand)
+    public function getSearchResultsJson(Request $request, $domain, $brand): JsonResponse
     {
         $term = trim($request->get('term', null));
 
@@ -654,7 +657,7 @@ class ForumPagesController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showCreateThreadForm(Request $request, $domain, $brand)
+    public function showCreateThreadForm(Request $request, $domain, $brand): View
     {
         $categories = $this->categoryRepository->getDecoratedCategories();
 
@@ -677,7 +680,7 @@ class ForumPagesController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showUpdateThreadForm(Request $request, $domain, $brand, $id)
+    public function showUpdateThreadForm(Request $request, $domain, $brand, $id): View
     {
         $thread = $this->threadRepository->read($id);
         $categories = $this->categoryRepository->getDecoratedCategories();
@@ -709,7 +712,7 @@ class ForumPagesController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showCreateCategoryForm(Request $request, $domain, $brand)
+    public function showCreateCategoryForm(Request $request, $domain, $brand): View
     {
         return view(
             'forums.create-forum',
@@ -723,7 +726,7 @@ class ForumPagesController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showUpdateCategoryForm(Request $request, $domain, $brand, $id)
+    public function showUpdateCategoryForm(Request $request, $domain, $brand, $id): View
     {
         $forum = $this->categoryRepository->read($id);
 
@@ -752,7 +755,7 @@ class ForumPagesController extends Controller
      * @param $postId
      * @return \Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function jumpToPost(Request $request, $domain, $brand, $postId)
+    public function jumpToPost(Request $request, $domain, $brand, $postId): RedirectResponse
     {
         $post = $this->postRepository->read($postId);
 
@@ -800,7 +803,7 @@ class ForumPagesController extends Controller
      * @param $threadId
      * @return \Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function jumpToThread(Request $request, $domain, $brand, $threadId)
+    public function jumpToThread(Request $request, $domain, $brand, $threadId): RedirectResponse
     {
         $thread = $this->threadRepository->read($threadId);
         if (!$thread) {

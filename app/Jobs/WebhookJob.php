@@ -114,7 +114,7 @@ class WebhookJob implements ShouldQueue
     /**
      * @return int - number of children jobs
      */
-    public function countChildren()
+    public function countChildren(): int
     {
         return count($this->children);
     }

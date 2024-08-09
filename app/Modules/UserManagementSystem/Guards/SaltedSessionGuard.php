@@ -51,7 +51,7 @@ class SaltedSessionGuard extends SessionGuard
      *
      * @return void
      */
-    public function logout()
+    public function logout(): void
     {
         $user = $this->user();
 
@@ -129,7 +129,7 @@ class SaltedSessionGuard extends SessionGuard
      * @param AuthenticatableContract|User $user
      * @param bool $remember
      */
-    public function login(AuthenticatableContract|User $user, $remember = false)
+    public function login(AuthenticatableContract|User $user, bool $remember = false)
     {
         $this->updateSession($user->getAuthIdentifier());
 
@@ -155,7 +155,7 @@ class SaltedSessionGuard extends SessionGuard
      * @param AuthenticatableContract|User $user
      * @return void
      */
-    protected function createAndQueueRememberToken(AuthenticatableContract|User $user)
+    protected function createAndQueueRememberToken(AuthenticatableContract|User $user): void
     {
         $this->provider->updateRememberToken($user, Str::random(60));
     }

@@ -366,7 +366,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
     /**
      * @return ConnectionInterface
      */
-    private function railcontentDB()
+    private function railcontentDB(): ConnectionInterface
     {
         return DB::connection(config('railcontent.database_connection_name'));
     }

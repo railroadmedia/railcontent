@@ -13,7 +13,7 @@ class BenefitPreset extends Preset
      *
      * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(BenefitResolver::class);
         $field->button('Add a benefit');

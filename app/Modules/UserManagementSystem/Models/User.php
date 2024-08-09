@@ -404,7 +404,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string
      */
-    public function getMethodLevel()
+    public function getMethodLevel(): string
     {
         $brand = brand();
 
@@ -418,7 +418,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return integer
      */
-    public function getBrandTotalXp()
+    public function getBrandTotalXp(): int
     {
         $brand = brand();
 
@@ -432,7 +432,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return integer
      */
-    public function getBrandMinutesPracticed()
+    public function getBrandMinutesPracticed(): int
     {
         $brand = brand();
 
@@ -516,7 +516,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string
      */
-    public function getDashboardUrl()
+    public function getDashboardUrl(): string
     {
         return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
@@ -579,7 +579,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
@@ -587,7 +587,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isAMember()
+    public function isAMember(): bool
     {
         return $this->isALifetimeMember() ||
             (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
@@ -596,7 +596,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isALifetimeMember($brand = null)
+    public function isALifetimeMember($brand = null): bool
     {
         // todo: may need to account for brand here in the future
 
@@ -640,7 +640,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return string
      */
-    public function getAuthIdentifierName()
+    public function getAuthIdentifierName(): string
     {
         return 'id';
     }
@@ -660,7 +660,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return string
      */
-    public function getAuthPassword()
+    public function getAuthPassword(): string
     {
         return $this->password;
     }
@@ -670,7 +670,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return string
      */
-    public function getRememberTokenName()
+    public function getRememberTokenName(): string
     {
         return 'remember_token';
     }
@@ -678,7 +678,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string
      */
-    public function getRememberToken()
+    public function getRememberToken(): string
     {
         return $this->currentRememberToken;
     }
@@ -686,7 +686,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @param string $value
      */
-    public function setRememberToken($value)
+    public function setRememberToken(string $value)
     {
         $this->currentRememberToken = $value;
     }
@@ -695,7 +695,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      * @param $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $class = ResetPassword::class;
 
@@ -711,7 +711,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return string
      */
-    public function getEmailForPasswordReset()
+    public function getEmailForPasswordReset(): string
     {
         return $this->email;
     }
@@ -719,7 +719,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string
      */
-    public function getSessionSalt()
+    public function getSessionSalt(): string
     {
         return $this->sessionSalt;
     }
@@ -727,7 +727,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @param string $sessionSalt
      */
-    public function setSessionSalt($sessionSalt)
+    public function setSessionSalt(string $sessionSalt)
     {
         $this->sessionSalt = $sessionSalt;
     }
@@ -744,7 +744,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      * @param string $password
      * @param bool $hash
      */
-    public function setPassword($password, $hash = true)
+    public function setPassword(string $password, bool $hash = true)
     {
         $this->password = $hash ? $this->getHashedPassword($password) : $password;
     }
@@ -782,7 +782,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isPackOwner()
+    public function isPackOwner(): bool
     {
         return $this->is_pack_owner;
     }
@@ -790,7 +790,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isPackOnlyOwner()
+    public function isPackOnlyOwner(): bool
     {
         return $this->isPackOwner() && !$this->isAMember();
     }
@@ -798,7 +798,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isAnExpiredMember()
+    public function isAnExpiredMember(): bool
     {
         return
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
@@ -831,7 +831,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isNotLifetimeOrAnnualMember()
+    public function isNotLifetimeOrAnnualMember(): bool
     {
         $annualSubscription = false;
         foreach ($this->subscriptions as $subscription) {

@@ -51,7 +51,7 @@ class UpdatePaymentMethodRequest extends FormRequest
     /**
      * @return Validator
      */
-    public function getValidatorInstance()
+    public function getValidatorInstance(): Validator
     {
         // if this request is from a paypal redirect we must merge in the old input
         if (!empty($this->get('token'))) {

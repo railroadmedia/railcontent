@@ -11,7 +11,7 @@ class DefaultDifficultyDecorator extends ModeDecoratorBase
      * @param Collection $contents
      * @return Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         foreach ($contents as $contentIndex => $content) {
             if (!empty($content['user_id'])) {

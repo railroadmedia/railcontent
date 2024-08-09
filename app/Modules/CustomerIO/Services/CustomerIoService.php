@@ -29,7 +29,7 @@ class CustomerIoService
      * @return Customer
      * @throws Exception
      */
-    public function getCustomerById($accountName, $id, $includeExternalAttributes = true)
+    public function getCustomerById(string $accountName, string $id, bool $includeExternalAttributes = true): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -76,7 +76,7 @@ class CustomerIoService
      * @return Customer
      * @throws Exception
      */
-    public function getCustomerByUserId($accountName, $userId)
+    public function getCustomerByUserId(string $accountName, string $userId): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -126,7 +126,7 @@ class CustomerIoService
      * @return Customer
      * @throws Exception
      */
-    public function getCustomerEventsByUserId($accountName, $userId, $limit = 25, $amountToSkip = 0)
+    public function getCustomerEventsByUserId(string $accountName, string $userId, int $limit = 25, int $amountToSkip = 0): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -170,10 +170,10 @@ class CustomerIoService
     public function createCustomer(
         $email,
         $accountName,
-        $customAttributes = [],
-        $id = null,
-        $userId = null,
-        $createdAtTimestamp = null
+        array $customAttributes = [],
+        ?string $id = null,
+        ?int $userId = null,
+        ?int $createdAtTimestamp = null
     ) {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -244,10 +244,10 @@ class CustomerIoService
     public function updateCustomer(
         Customer $customer,
         $accountName,
-        $customAttributes = [],
+        array $customAttributes = [],
         $email = null,
-        $userId = null,
-        $createdAtTimestamp = null
+        ?int $userId = null,
+        ?int $createdAtTimestamp = null
     ) {
         $accountConfigData = $this->getAccountConfigData($accountName);
         $oldCustomer = clone $customer;
@@ -559,10 +559,10 @@ class CustomerIoService
         $email,
         $accountName,
         $eventName,
-        $eventData = [],
+        array $eventData = [],
         $eventType = null,
         $createdAtTimestamp = null
-    ) {
+    ): bool {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         $this->customerIoApiGateway->createEvent(
@@ -589,13 +589,13 @@ class CustomerIoService
      * @throws Exception
      */
     public function createEventForEmailOrId(
-        $email,
-        $uuid,
-        $accountName,
-        $eventName,
+        ?string $email,
+        ?string $uuid,
+        string $accountName,
+        string $eventName,
         $eventType = null,
         $createdAtTimestamp = null
-    ) {
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         if (!empty($uuid)) {
@@ -661,13 +661,13 @@ class CustomerIoService
      * @throws Exception
      */
     public function createEventForUserId(
-        $userId,
-        $accountName,
-        $eventName,
-        $eventData = [],
-        $eventType = null,
-        $createdAtTimestamp = null
-    ) {
+        int $userId,
+        string $accountName,
+        string $eventName,
+        array $eventData = [],
+        ?string $eventType = null,
+        ?int $createdAtTimestamp = null
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -715,11 +715,11 @@ class CustomerIoService
      * @throws Exception
      */
     public function sendTransactionalEmail(
-        $accountName,
+        string $accountName,
         $customerIoTransactionalMessageId,
         $customerEmail,
         $messageDataArray = []
-    ) {
+    ): bool {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -757,7 +757,7 @@ class CustomerIoService
      * @return array
      * @throws Exception
      */
-    public function getAccountConfigData($accountName)
+    public function getAccountConfigData($accountName): array
     {
         $accountConfig = config('customer-io.accounts')[$accountName] ?? [];
 
@@ -789,7 +789,7 @@ class CustomerIoService
         $accountName,
         $deviceData,
         $createdAtTimestamp = null
-    ) {
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**

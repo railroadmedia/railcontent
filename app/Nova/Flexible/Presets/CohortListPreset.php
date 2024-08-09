@@ -15,7 +15,7 @@ class CohortListPreset extends Preset
      *
      * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(CohortListResolver::class);
         $field->button('Add an item');

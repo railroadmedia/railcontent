@@ -123,8 +123,8 @@ class RevenueCatApiGateway
         $platform,
         $localPrice = null,
         $currency = null,
-        $app = 'Musora'
-    ) {
+        string $app = 'Musora'
+    ): string {
         $client = new \GuzzleHttp\Client();
         $userId = $user->getId();
         $bod = [
@@ -178,10 +178,10 @@ class RevenueCatApiGateway
         $platform,
         $localPrice = null,
         $currency = null,
-        $app = 'Musora',
+        string $app = 'Musora',
         $userEmail = null,
         $userId = null
-    ) {
+    ): string {
         $client = new \GuzzleHttp\Client();
 
         $bod = [
@@ -227,7 +227,7 @@ class RevenueCatApiGateway
      * @param string $app
      * @return string
      */
-    public function updateSubscriberAttribute($userId, $attributes, $platform, $app = 'Musora')
+    public function updateSubscriberAttribute($userId, $attributes, $platform, string $app = 'Musora'): string
     {
         $client = new \GuzzleHttp\Client();
         $att = [];

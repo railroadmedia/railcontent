@@ -28,7 +28,7 @@ class SetLastUsedBrand
      * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // web requests
         if (!empty(user()) && in_array($request->segment(1), config('brands'))) {

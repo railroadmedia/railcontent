@@ -2,6 +2,7 @@
 
 namespace App\Modules\MusoraCenter\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Usora\Entities\User;
@@ -23,7 +24,7 @@ class MusoraCenterSPAController extends Controller
         $this->permissionService = $permissionService;
     }
 
-    public function show()
+    public function show(): View
     {
         $user = user();
         $userIsSuperAdmin = $this->permissionService->is($user->id, 'super_administrator');

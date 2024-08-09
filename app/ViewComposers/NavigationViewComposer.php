@@ -33,7 +33,7 @@ class NavigationViewComposer
      * @param  View  $view
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         if (!empty(self::$viewDataCache)) {
             return self::$viewDataCache;

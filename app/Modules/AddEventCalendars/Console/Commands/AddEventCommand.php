@@ -258,7 +258,7 @@ class AddEventCommand extends Command
     /**
      * @return void
      */
-    private function getInfo()
+    private function getInfo(): void
     {
         try {
             $calendars = $this->addEventService->getCalendars();
@@ -320,7 +320,7 @@ class AddEventCommand extends Command
     /**
      * @return void
      */
-    private function listEventsInCalendar()
+    private function listEventsInCalendar(): void
     {
         $calendars = [];
         $events = [];
@@ -425,7 +425,7 @@ class AddEventCommand extends Command
     /**
      * @return void
      */
-    private function deleteAllCalendars()
+    private function deleteAllCalendars(): void
     {
         dd('manually disabled for safety reasons');
 
@@ -955,7 +955,7 @@ class AddEventCommand extends Command
      * @param $msgStart
      * @return void
      */
-    private function hardNo($msgStart)
+    private function hardNo($msgStart): void
     {
         $this->info('');
         $this->info(

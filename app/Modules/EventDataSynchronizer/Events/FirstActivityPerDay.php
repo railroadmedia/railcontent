@@ -34,7 +34,7 @@ class FirstActivityPerDay
     /**
      * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -42,7 +42,7 @@ class FirstActivityPerDay
     /**
      * @return string
      */
-    public function getBrands()
+    public function getBrands(): string
     {
         return $this->brands;
     }
@@ -50,7 +50,7 @@ class FirstActivityPerDay
     /**
      * @return string
      */
-    public function getDateTimeString()
+    public function getDateTimeString(): string
     {
         return $this->dateTimeString;
     }

@@ -24,7 +24,7 @@ class Secrets
      *
      * @return array
      */
-    public static function addToEnvironment($path, $parameters, $file)
+    public static function addToEnvironment(string $path, ?array $parameters, string $file): array
     {
         if (!$parameters && file_exists($file)) {
             $parameters = require $file;
@@ -43,7 +43,7 @@ class Secrets
      *
      * @return array
      */
-    public static function all($path, array $parameters = [])
+    public static function all(string $path, array $parameters = []): array
     {
         if (empty($parameters)) {
             return [];
@@ -75,7 +75,7 @@ class Secrets
      *
      * @return array
      */
-    protected static function parseSecrets(array $secrets)
+    protected static function parseSecrets(array $secrets): array
     {
         return collect($secrets)->mapWithKeys(function ($secret) {
             $segments = explode('/', $secret['Name']);

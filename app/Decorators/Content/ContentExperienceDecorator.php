@@ -14,7 +14,7 @@ class ContentExperienceDecorator extends TypeDecoratorBase
      * @param Collection $contents
      * @return Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM || self::$skip) {
             return $contents;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Singeo;
 
+use Illuminate\View\View;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-    public function beginnerBootcamp(Request $request, $domain, $page = null)
+    public function beginnerBootcamp(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -23,7 +24,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function harmonyBootcamp(Request $request, $domain, $page = null)
+    public function harmonyBootcamp(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -35,7 +36,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function holidayKaraoke(Request $request, $domain, $page = null)
+    public function holidayKaraoke(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -47,12 +48,12 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function improveAnyVoice()
+    public function improveAnyVoice(): View
     {
         return view('singeo.lead-gen.improve-any-voice.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function liveBootcamp(Request $request, $domain, $page = null)
+    public function liveBootcamp(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -64,7 +65,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function stopHatingVoice()
+    public function stopHatingVoice(): View
     {
         return view('singeo.lead-gen.stop-hating-your-voice.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }

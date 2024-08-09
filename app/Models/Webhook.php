@@ -99,7 +99,7 @@ class Webhook extends Model
      * @param $job
      * @return string : job identifier
      */
-    public function setWebhookJobInfo($job)
+    public function setWebhookJobInfo($job): string
     {
         $shortName = class_basename($job);
         $job->webhookJobInfo = ['parent_id' => $this->id, 'name' => $shortName];

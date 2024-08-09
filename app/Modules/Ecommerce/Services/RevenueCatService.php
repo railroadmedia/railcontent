@@ -51,7 +51,7 @@ class RevenueCatService
      * @return User|null
      * @throws \Exception
      */
-    public function syncSubscriber($revenueCatOriginalAppUserId, $email = null, $forceCreateNewUser = false)
+    public function syncSubscriber($revenueCatOriginalAppUserId, $email = null, bool $forceCreateNewUser = false): ?User
     {
         $user = $this->getUser(
             $email,
@@ -134,7 +134,7 @@ class RevenueCatService
      * @param array $aliases
      * @return User|null
      */
-    public function getUser($value, $appUserId, $createIfNotExists = false, $aliases = []): ?User
+    public function getUser($value, $appUserId, bool $createIfNotExists = false, array $aliases = []): ?User
     {
         if (empty($aliases)) {
             $aliases = [$appUserId];
@@ -181,8 +181,8 @@ class RevenueCatService
         $userId,
         $productIdentifier,
         $platform,
-        $app = 'Musora'
-    ) {
+        string $app = 'Musora'
+    ): string {
         Log::debug(
             'Call revoke API ' .
                 $productIdentifier .

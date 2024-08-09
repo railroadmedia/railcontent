@@ -10,7 +10,7 @@ class RudimentDecorator extends TypeDecoratorBase
      * @param Collection $contents
      * @return Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         // todo: impliment changes
 

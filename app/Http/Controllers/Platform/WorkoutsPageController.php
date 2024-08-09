@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
 use Google\Service\Gmail\Filter;
@@ -92,7 +93,7 @@ class WorkoutsPageController extends BaseController
                                     ]);
     }
 
-    public function showChallengesPage(Request $request, $domain, $brand)
+    public function showChallengesPage(Request $request, $domain, $brand): View
     {
         ContentRepository::$pullFutureContent = true;
         $lessonType = 'challenge';
@@ -131,7 +132,7 @@ class WorkoutsPageController extends BaseController
         ]);
     }
 
-    public function showWorkoutPage(Request $request, $domain, $brand, $slug, $id)
+    public function showWorkoutPage(Request $request, $domain, $brand, $slug, $id): View
     {
         $contentToRenderAsLesson = $this->contentService->getById($id);
         $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();

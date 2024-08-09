@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Services\CalendarService;
@@ -60,7 +61,7 @@ class LivePageController extends BaseController
         $this->permissionService = $permissionService;
     }
 
-    public function chat(Request $request, $domain, $brand)
+    public function chat(Request $request, $domain, $brand): View
     {
         $userRoleAdmin = user()->isAdmin();
         $chatChannelName = config('railchat.drumeo.chat_channel_name');

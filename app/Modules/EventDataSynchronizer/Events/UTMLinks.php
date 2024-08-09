@@ -70,7 +70,7 @@ class UTMLinks
     /**
      * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -78,7 +78,7 @@ class UTMLinks
     /**
      * @return string
      */
-    public function getBrand()
+    public function getBrand(): string
     {
         return $this->brand;
     }
@@ -86,7 +86,7 @@ class UTMLinks
     /**
      * @return string
      */
-    public function getDateTimeString()
+    public function getDateTimeString(): string
     {
         return $this->dateTimeString;
     }

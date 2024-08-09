@@ -292,7 +292,7 @@ class UserController extends Controller
      * @param Request $request
      * @param integer $id
      */
-    public function read(Request $request, $id)
+    public function read(Request $request, int $id)
     {
         //$this->authorize('show-users');
         $user = User::findOrFail($id);
@@ -328,7 +328,7 @@ class UserController extends Controller
      * @param Request $request
      * @param integer $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $isJson = request()->expectsJson();
 
@@ -410,7 +410,7 @@ class UserController extends Controller
      * @param Request $request
      * @param integer $id
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, int $id)
     {
         $isJson = request()->expectsJson();
 
@@ -494,7 +494,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function getLogInAsUserURL(Request $request, $userId)
+    public function getLogInAsUserURL(Request $request, $userId): JsonResponse
     {
         if (!user()->isAdmin()) {
             throw new UnauthorizedException();
@@ -524,7 +524,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function isDisplayNameUnique(Request $request)
+    public function isDisplayNameUnique(Request $request): JsonResponse
     {
         $validator = validator($request->all(), [
             'display_name' => 'required',
@@ -550,7 +550,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function isEmailUnique(Request $request)
+    public function isEmailUnique(Request $request): JsonResponse
     {
         $validator = validator($request->all(), [
             'email' => 'required|email',
@@ -575,7 +575,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function report($id, Request $request)
+    public function report($id, Request $request): JsonResponse
     {
         $user = User::find($id);
         if (!$user) {
@@ -634,7 +634,7 @@ class UserController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function blockUser($id)
+    public function blockUser($id): JsonResponse
     {
         $user = User::find($id);
         if (!$user) {
@@ -660,7 +660,7 @@ class UserController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function unblockUser($id)
+    public function unblockUser($id): JsonResponse
     {
         $user = User::find($id);
         if (!$user) {
@@ -683,7 +683,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function getBlockedUsers(Request $request)
+    public function getBlockedUsers(Request $request): JsonResponse
     {
         $currentUser = user();
         $limit = $request->get('limit', 2);
@@ -718,7 +718,7 @@ class UserController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function isReportedUser($id)
+    public function isReportedUser($id): JsonResponse
     {
         $currentUser = user();
         $reported =

@@ -15,7 +15,7 @@ class UserPolicy
      * @param  User  $user
      * @return bool
      */
-    public function uploadFiles(User $user)
+    public function uploadFiles(User $user): bool
     {
         return true;
     }

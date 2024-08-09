@@ -123,7 +123,7 @@ class AuthenticationController extends Controller
      * @return JsonResponse|RedirectResponse
      * @throws AuthenticationException
      */
-    public function loginCookie(Request $request)
+    public function loginCookie(Request $request): RedirectResponse
     {
         try {
             $validationRules = [
@@ -181,7 +181,7 @@ class AuthenticationController extends Controller
      * @param Request $request
      * @return JsonResponse|RedirectResponse
      */
-    public function loginGeneratedKey(Request $request)
+    public function loginGeneratedKey(Request $request): RedirectResponse
     {
         // auth logic is not inside middleware AuthenticateViaKeyIfAvailable
 
@@ -203,7 +203,7 @@ class AuthenticationController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function checkForAuthThenRedirectBackWithAuthKey(Request $request)
+    public function checkForAuthThenRedirectBackWithAuthKey(Request $request): RedirectResponse
     {
         $redirectToUrl = strtok($request->get('redirect_to'), '?');
 
@@ -227,7 +227,7 @@ class AuthenticationController extends Controller
      * @return JsonResponse|RedirectResponse
      * @throws AuthenticationException
      */
-    public function loginToken(Request $request)
+    public function loginToken(Request $request): JsonResponse
     {
         try {
             $validationRules = [
@@ -291,7 +291,7 @@ class AuthenticationController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function logoutCookie(Request $request)
+    public function logoutCookie(Request $request): RedirectResponse
     {
         $user = auth()->user();
 
@@ -308,7 +308,7 @@ class AuthenticationController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function logoutToken(Request $request)
+    public function logoutToken(Request $request): JsonResponse
     {
         $user = auth()->user();
 
@@ -330,7 +330,7 @@ class AuthenticationController extends Controller
      * @param $userId
      * @return RedirectResponse
      */
-    public function loginAsUser(Request $request, $userId)
+    public function loginAsUser(Request $request, $userId): RedirectResponse
     {
         $this->authorize('login_as_users');
 

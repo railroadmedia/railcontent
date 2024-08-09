@@ -29,7 +29,7 @@ class UserEvent
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -37,7 +37,7 @@ class UserEvent
     /**
      * @return string
      */
-    public function getEventType()
+    public function getEventType(): string
     {
         return $this->eventType;
     }

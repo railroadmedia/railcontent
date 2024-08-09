@@ -67,7 +67,7 @@ class PackPagesController extends Controller
         $this->cohortService = $cohortService;
     }
 
-    public function index(Request $request, $domain, $brand)
+    public function index(Request $request, $domain, $brand): View
     {
         ContentRepository::$countFilterOptionItems = true;
         ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
@@ -181,7 +181,7 @@ class PackPagesController extends Controller
         $packId,
         $packBundleSlug,
         $packBundleId
-    ) {
+    ): View {
         ContentRepository::$pullFutureContent = true;
 
         Decorator::$typeDecoratorsEnabled = false;
@@ -300,7 +300,7 @@ class PackPagesController extends Controller
         $packBundleId,
         $packBundleLessonSlug,
         $packBundleLessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -427,7 +427,7 @@ class PackPagesController extends Controller
         $bundleSlug,
         $lessonSlug,
         $lessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
@@ -534,7 +534,7 @@ class PackPagesController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function start(Request $request, $id)
+    public function start(Request $request, $id): RedirectResponse
     {
         $learningPath = $this->contentService->getById($id);
 
@@ -557,7 +557,7 @@ class PackPagesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function jumpToNextLesson(Request $request, $id)
+    public function jumpToNextLesson(Request $request, $id): RedirectResponse
     {
         $pack = $this->contentService->getById($id);
 
@@ -592,7 +592,7 @@ class PackPagesController extends Controller
         $packId,
         $semesterPackLessonSlug,
         $semesterPackLessonId
-    ) {
+    ): View {
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,

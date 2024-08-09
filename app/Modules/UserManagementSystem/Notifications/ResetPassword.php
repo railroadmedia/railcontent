@@ -14,7 +14,7 @@ class ResetPassword extends ResetPasswordBase
      * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
@@ -29,7 +29,7 @@ class ResetPassword extends ResetPasswordBase
      * @param string $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url)
+    protected function buildMailMessage(string $url): MailMessage
     {
         $user = User::where('email', request('email'))->first();
 
