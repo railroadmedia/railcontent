@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
 import {RobotIcon, RocketIcon, CogIcon} from '@sanity/icons'
-import { Studio, defineConfig, isDev } from 'sanity';
+import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import {assist} from '@sanity/assist';
@@ -97,19 +97,16 @@ function App() {
                     name: config.name,
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
-                    plugins: isDev
-                                 ? [ structureTool({
+                    plugins: [
+                        structureTool({
                             structure: musoraStructure,
                             defaultDocumentNode: defaultDocumentNode }),
-
-                            visionTool(),
-                            media(),
-                            assist(),
-                            embeddingsIndexReferenceInput(),
-                            embeddingsIndexDashboard()]
-                                 : [structureTool({
-                            structure: musoraStructure,
-                            defaultDocumentNode: defaultDocumentNode })],
+                        visionTool(),
+                        media(),
+                        assist(),
+                        embeddingsIndexReferenceInput(),
+                        embeddingsIndexDashboard()
+                    ],
                     document: {
                         actions: (prev, context) =>
                             prev.map((previousAction) =>
