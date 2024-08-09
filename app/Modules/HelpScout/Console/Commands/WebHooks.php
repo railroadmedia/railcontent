@@ -22,7 +22,7 @@ class WebHooks extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info("\nGetting web hooks");
         $webHooks = $this->helpScoutWebHookService->getWebHooks();

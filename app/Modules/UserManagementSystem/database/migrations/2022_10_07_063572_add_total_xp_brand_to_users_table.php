@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->json('brand_total_xp')->after('brand_method_levels')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('brand_total_xp');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Closure;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class RedirectIfMobileRequest
      * @param Closure $next
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         if ($request->expectsJson()) {
             $route = null;

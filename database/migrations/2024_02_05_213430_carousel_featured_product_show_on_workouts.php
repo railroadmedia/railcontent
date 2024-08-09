@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('carousels', function (Blueprint $table) {
             $table->boolean('show_on_workouts')->default(false);
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('carousels', function (Blueprint $table) {
             $table->dropColumn('show_on_workouts');

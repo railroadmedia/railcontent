@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         // SQLite doesn't allow us to add a NOT NULL column with default value NULL, which is fixed in 2023_11_04_222532_permissions_fixed.php
         if (Schema::getConnection()->getDriverName() !== "sqlite") {
@@ -29,7 +29,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
             $table->dropColumn('time_minutes');

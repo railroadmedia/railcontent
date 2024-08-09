@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,7 +43,7 @@ class FirebaseToken extends Model
     protected $fillable = [ 'type','token', 'user_id', 'brand'];
     public $timestamps = false;
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -33,7 +33,7 @@ class RepairUserProgressOnNPPSH extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): void
     {
         $this->info("RepairUserProgressOnNPPSH command starts now \n");
 

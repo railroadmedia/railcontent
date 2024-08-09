@@ -42,7 +42,7 @@ class TestLessonsDescriptionUrls extends Command
         DatabaseManager $databaseManager,
         ContentService $contentService,
         OldPlatformLinksDecorator $oldPlatformLinksDecorator
-    ) {
+    ): int {
         ContentRepository::$bypassPermissions = true;
         //        $allDecoratorsForContent = [
         //            OldPlatformLinksDecorator::class

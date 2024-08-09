@@ -29,7 +29,7 @@ class PopulateNewRolesAndPermissionsTables extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         print_r("##### PopulateNewRolesAndPermissionsTables command starts now ######\n");
 

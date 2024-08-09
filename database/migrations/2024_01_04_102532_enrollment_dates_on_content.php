@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('railcontent_content', function (Blueprint $table) {
             $table->dateTime('enrollment_start_time')->nullable()->after('like_count')->index();
@@ -23,7 +23,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('railcontent_content', function (Blueprint $table) {
             $table->dropColumn('enrollment_start_time');

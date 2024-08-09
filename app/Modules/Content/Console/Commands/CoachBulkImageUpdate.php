@@ -21,7 +21,7 @@ class CoachBulkImageUpdate extends Command
 
     public function handle(
         ContentService $contentService
-    ) {
+    ): void {
         $startIndex = $this->argument('startIndex');
         $endIndex = $this->argument('endIndex');
 

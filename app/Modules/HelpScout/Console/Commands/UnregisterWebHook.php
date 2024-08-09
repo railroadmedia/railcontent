@@ -22,7 +22,7 @@ class UnregisterWebHook extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $url = $this->argument('url');
 

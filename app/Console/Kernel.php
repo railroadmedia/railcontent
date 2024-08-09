@@ -101,7 +101,7 @@ class Kernel extends ConsoleKernel
      * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         //All times are in UTC
         $schedule->command('ProcessTrackings')->everyMinute();
@@ -146,7 +146,7 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
 

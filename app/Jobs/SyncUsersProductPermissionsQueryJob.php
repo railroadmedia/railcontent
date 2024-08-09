@@ -31,7 +31,7 @@ class SyncUsersProductPermissionsQueryJob implements ShouldQueue
     }
 
 
-    public function handle(UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener)
+    public function handle(UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener): void
     {
         Log::info(
             'SyncUsersProductPermissionsQueryJob ID: ' . $this->job->getJobId() .

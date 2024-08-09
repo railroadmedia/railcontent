@@ -24,7 +24,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->subscriptionUpgradeService = $this->app->make(SubscriptionUpgradeService::class);
     }
 
-    public function test_upgrade_subscription_product_month()
+    public function test_upgrade_subscription_product_month(): void
     {
         $user = UserFactory::createMember(MembershipLevel::Basic, Carbon::now()->addDays(20));
         Product::factory()->create(['sku' => SubscriptionUpgradeService::MonthlySongsAddOnSKU]);
@@ -34,7 +34,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->assertEquals(0, $productInfo['quantity']);
     }
 
-    public function test_upgrade_subscription_product_year()
+    public function test_upgrade_subscription_product_year(): void
     {
         $user = UserFactory::createMember(MembershipLevel::Basic, Carbon::now()->addMonths(7)->addDays(5));
         Product::factory()->create(['sku' => SubscriptionUpgradeService::MonthlySongsAddOnSKU]);
@@ -44,7 +44,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->assertEquals(7, $productInfo['quantity']);
     }
 
-    public function test_upgrade_subscription_product_more_than_year()
+    public function test_upgrade_subscription_product_more_than_year(): void
     {
         $user = UserFactory::createMember(MembershipLevel::Basic, Carbon::now()->addMonths(25));
         Product::factory()->create(['sku' => SubscriptionUpgradeService::MonthlySongsAddOnSKU]);
@@ -54,7 +54,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->assertEquals(12, $productInfo['quantity']);
     }
 
-    public function test_upgrade_subscription_product_lifetime()
+    public function test_upgrade_subscription_product_lifetime(): void
     {
         $user = UserFactory::createLifetimeMember();
         Product::factory()->create(['sku' => SubscriptionUpgradeService::LifetimeSongAddOnSKU]);
@@ -64,7 +64,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->assertEquals(1, $productInfo['quantity']);
     }
 
-    public function test_upgrade_subscription_month()
+    public function test_upgrade_subscription_month(): void
     {
         $user = UserFactory::createMember(MembershipLevel::Basic, Carbon::now()->addDays(20));
         $product = ProductFactory::createSubscriptionProduct('musora', DigitalAccessType::Basic, Interval::Month, 10);
@@ -91,7 +91,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $upgradeSubscriptionService->upgradeSubscription($user);
     }
 
-    public function test_upgrade_subscription_year()
+    public function test_upgrade_subscription_year(): void
     {
         $user = UserFactory::createMember(MembershipLevel::Basic, Carbon::now()->addMonths(7)->addDays(5));
         $product = ProductFactory::createSubscriptionProduct('musora', DigitalAccessType::Basic, Interval::Year, 10);
@@ -118,7 +118,7 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $upgradeSubscriptionService->upgradeSubscription($user);
     }
 
-    public function test_upgrade_subscription_lifetime()
+    public function test_upgrade_subscription_lifetime(): void
     {
         $user = UserFactory::createLifetimeMember();
         $product = ProductFactory::createSubscriptionProduct('musora', DigitalAccessType::Basic, Interval::Month, 10);

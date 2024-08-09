@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::connection(config('customer-io.database_connection_name'))
             ->create(
@@ -38,7 +38,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::connection(config('customer-io.database_connection_name'))->dropIfExists('customer_io_customers');
     }

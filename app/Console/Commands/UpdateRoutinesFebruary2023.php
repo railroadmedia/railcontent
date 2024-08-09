@@ -29,7 +29,7 @@ class UpdateRoutinesFebruary2023 extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Starting UpdateRoutinesFebruary2023.');
         Log::info('Starting UpdateRoutinesFebruary2023.');

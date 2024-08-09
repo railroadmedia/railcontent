@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $request = Request::instance();
 
@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         if (!$this->app->environment('production')) {
             Mail::alwaysTo('musora-dev-test-5632c3@inbox.mailtrap.io');

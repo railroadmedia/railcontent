@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    public function up()
+    public function up(): void
     {
         // SQLite won't allow you to add a not null column without a default value, to an existing table
         if (Schema::getConnection()->getDriverName() === "sqlite") {
@@ -42,7 +42,7 @@ return new class () extends Migration {
         }
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('cohorts', function (Blueprint $table) {
             $table->dropColumn('content_id');

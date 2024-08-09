@@ -13,7 +13,7 @@ class ImportSongsDuration extends Command
     protected $signature = 'ImportSongsDuration {brand=drumeo} {calculateduration=0} {startIndex=0}';
     protected $description = 'Import songs duration from csv file';
 
-    public function handle()
+    public function handle(): void
     {
         $startIndex = $this->argument('startIndex');
         $brand = $this->argument('brand');

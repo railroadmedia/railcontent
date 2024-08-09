@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->string('revenuecat_origin_app_user_id')->after('is_lifetime_member')->nullable()->index();
@@ -28,7 +28,7 @@ ORDER BY `ecommerce_subscriptions`.`id` DESC);");
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('revenuecat_origin_app_user_id');

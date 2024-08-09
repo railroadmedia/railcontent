@@ -30,7 +30,7 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): int
     {
         $connection = $databaseManager->connection(config('railcontent.database_connection_name'));
 

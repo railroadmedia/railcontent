@@ -2,6 +2,7 @@
 
 namespace App\Modules\Mentor\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Mentor\database\factories\MentorFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,7 +43,7 @@ class Mentor extends Model
 
     protected $table = 'mentors';
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

@@ -15,7 +15,7 @@ class ProductOwnerUserFieldResyncTool extends Command
     protected $description = 'ProductOwnerUserFieldResyncTool';
     protected $signature = 'customerio:syncByOwner {productId}';
 
-    public function handle()
+    public function handle(): void
     {
         $productId = $this->argument("productId");
         $product = Product::find($productId);

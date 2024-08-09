@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
             $table->dateTime('time_fixed')->nullable()->after('time_lifetime');
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
             $table->dropColumn('time_fixed');

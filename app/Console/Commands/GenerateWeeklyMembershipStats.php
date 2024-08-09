@@ -36,7 +36,7 @@ class GenerateWeeklyMembershipStats extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info(
             "*** DO NOT calculate and save the current week, that can throw off the data. Always calculate starting at least 1 week in to the past. ***"

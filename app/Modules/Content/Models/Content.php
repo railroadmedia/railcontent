@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Modules\Content\Builders\ContentBuilder;
 use App\Modules\Content\database\factories\ContentFactory;
 use Carbon\Carbon;
@@ -217,12 +218,12 @@ class Content extends Model
         return new ContentBuilder($query);
     }
 
-    public function fields()
+    public function fields(): HasMany
     {
         return $this->hasMany(ContentField::class, 'content_id');
     }
 
-    public function data()
+    public function data(): HasMany
     {
         return $this->hasMany(ContentData::class, 'content_id');
     }

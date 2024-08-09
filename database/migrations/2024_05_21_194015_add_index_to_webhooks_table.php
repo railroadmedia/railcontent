@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('webhooks', function (Blueprint $table) {
             $table->index(['source', 'source_id']);
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('webhooks', function (Blueprint $table) {
             $table->dropIndex(['source', 'source_id']);

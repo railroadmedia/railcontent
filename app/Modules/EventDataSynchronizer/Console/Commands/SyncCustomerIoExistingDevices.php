@@ -39,7 +39,7 @@ class SyncCustomerIoExistingDevices extends Command
     public function handle(
         DatabaseManager $databaseManager,
         CustomerIoSyncEventListener $customerIoSyncEventListener
-    ) {
+    ): void {
         $tStart = time();
 
         $usoraConnection = $databaseManager->connection(config('usora.database_connection_name'));

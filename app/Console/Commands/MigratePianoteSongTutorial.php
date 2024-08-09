@@ -35,7 +35,7 @@ class MigratePianoteSongTutorial extends Command
         DatabaseManager $databaseManager,
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService
-    ) {
+    ): void {
         $this->info("MigratePianoteSongTutorial command starts now \n");
 
         $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));

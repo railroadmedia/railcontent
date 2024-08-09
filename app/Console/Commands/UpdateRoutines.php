@@ -178,7 +178,7 @@ class UpdateRoutines extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Starting UpdateRoutines.');
         Log::info('Starting UpdateRoutines.');

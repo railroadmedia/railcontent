@@ -28,7 +28,7 @@ class RunMWPPhaseOneLaunchMigrations extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Starting RunMWPPhaseOneLaunchMigrations.');
         Log::info('Starting RunMWPPhaseOneLaunchMigrations.');

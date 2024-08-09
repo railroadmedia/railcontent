@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->boolean('requires_password_update')->default(false);
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('requires_password_update');

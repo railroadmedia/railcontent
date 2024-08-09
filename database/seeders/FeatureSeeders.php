@@ -15,7 +15,7 @@ class FeatureSeeders extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $features = [
             [

@@ -29,7 +29,7 @@ class FinishedCommandJob implements ShouldQueue
         $this->timeStart = microtime(true);
     }
 
-    public function handle()
+    public function handle(): void
     {
         $diff = microtime(true) - $this->timeStart;
         $sec = intval($diff);

@@ -20,7 +20,7 @@ class CheckSongMembershipAccess extends Command
     public function handle(
         UserAccessPermissionsService $accessPermissionsService,
         UserService $userService
-    ) {
+    ): void {
         $users = User::query()
             ->whereHas('userAccessPermissions', function (Builder $query) {
                 $query->where('permission_id', UserAccessPermissionsCollection::SongsOnlyMembershipPermission);

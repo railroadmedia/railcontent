@@ -36,7 +36,7 @@ class IsDrumeoLifetimeUserFieldResyncTool extends Command
      */
     public function handle(
         DatabaseManager $databaseManager
-    ) {
+    ): int {
         $databaseManager->connection(config('ecommerce.database_connection_name'))
             ->disableQueryLog();
 

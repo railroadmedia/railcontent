@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Http\Request;
 use Throwable;
@@ -15,7 +16,7 @@ class ClearLegacyMusoraCookies
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // if there are duplicates of these, delete them all for the wildcard domain .musora.com or musora.com
         // laravel_session

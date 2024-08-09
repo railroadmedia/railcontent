@@ -15,7 +15,7 @@ class BFUpdates extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         //DRUMEO
         Product::where('brand_id', 1)->where('name', 'Rock Drumming Masterclass')->update(['discounted_price' => 79]);

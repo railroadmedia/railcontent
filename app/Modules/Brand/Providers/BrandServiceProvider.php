@@ -31,7 +31,7 @@ class BrandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // publish config file
         $this->mergeConfigFrom(
@@ -48,7 +48,7 @@ class BrandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
     }

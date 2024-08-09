@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->boolean('has_recharge_subscription')
@@ -27,7 +27,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('user', function (Blueprint $table) {
             $table->dropColumn('has_recharge_subscription');

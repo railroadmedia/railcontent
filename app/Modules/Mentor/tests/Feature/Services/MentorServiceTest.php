@@ -48,7 +48,7 @@ class MentorServiceTest extends TestCase
         ]);
     }
 
-    public function test_assign_mentor()
+    public function test_assign_mentor(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -59,7 +59,7 @@ class MentorServiceTest extends TestCase
         $this->assertHasMentor($user, $mentor);
     }
 
-    public function test_mentor_student_count()
+    public function test_mentor_student_count(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -79,7 +79,7 @@ class MentorServiceTest extends TestCase
     }
 
     /** @var User $user */
-    public function test_delete_mentor()
+    public function test_delete_mentor(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -102,7 +102,7 @@ class MentorServiceTest extends TestCase
         $this->assertMentorCount($mentor2, 2, 2);
     }
 
-    public function test_recalculate_mentor_totals()
+    public function test_recalculate_mentor_totals(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -121,7 +121,7 @@ class MentorServiceTest extends TestCase
         $this->assertMentorCount($mentor, 4, 6);
     }
 
-    public function test_update_mentor_student()
+    public function test_update_mentor_student(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -138,7 +138,7 @@ class MentorServiceTest extends TestCase
         $this->assertHasMentor($user, null);
     }
 
-    public function test_update_mentor()
+    public function test_update_mentor(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
@@ -150,7 +150,7 @@ class MentorServiceTest extends TestCase
         ]);
     }
 
-    public function test_reassign_random()
+    public function test_reassign_random(): void
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);

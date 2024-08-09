@@ -33,7 +33,7 @@ class PlaylistsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $contents = [
             'drumeo' => [313436, 374878, 23731, 23722, 23687],

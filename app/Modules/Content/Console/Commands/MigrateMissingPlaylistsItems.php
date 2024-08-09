@@ -41,7 +41,7 @@ class MigrateMissingPlaylistsItems extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();

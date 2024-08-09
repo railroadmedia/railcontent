@@ -30,7 +30,7 @@ class AssignUserRole extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $user = User::query()->findOrFail($this->argument('userId'));
 

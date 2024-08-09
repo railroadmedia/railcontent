@@ -61,7 +61,7 @@ class WebhookJob implements ShouldQueue
      * Dispatches all children jobs or default or provided queue
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         if ($this->alreadyRun) {
             return;

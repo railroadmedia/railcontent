@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         $brands = ['drumeo', 'singeo', 'guitareo', 'pianote'];
 
@@ -73,7 +73,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         $brands = ['drumeo', 'singeo', 'guitareo', 'pianote'];
         $sections = ['quick_tips', 'course', 'song', 'workout'];

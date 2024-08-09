@@ -27,7 +27,7 @@ class Filters20242 extends Command
 
     public function handle(
         ContentService $contentService
-    ) {
+    ): void {
         $startIndex = 0;
         $endIndex = -1;
         $brand = $this->argument('brand');

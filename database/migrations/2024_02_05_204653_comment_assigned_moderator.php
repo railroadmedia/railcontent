@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('railcontent_comments', function (Blueprint $table) {
             $table->integer('assigned_moderator_id')->after('user_id')->nullable();
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('railcontent_comments', function (Blueprint $table) {
             $table->dropColumn('assigned_moderator_id');

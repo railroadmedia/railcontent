@@ -606,7 +606,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Collection|RememberToken[]|HasMany
      */
-    public function rememberTokens()
+    public function rememberTokens(): HasMany
     {
         return $this->hasMany(RememberToken::class, 'user_id');
     }
@@ -614,7 +614,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Collection|FirebaseToken[]|HasMany
      */
-    public function firebaseTokens()
+    public function firebaseTokens(): HasMany
     {
         return $this->hasMany(FirebaseToken::class, 'user_id');
     }
@@ -622,7 +622,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Collection|EmailChange[]|HasMany
      */
-    public function emailChanges()
+    public function emailChanges(): HasMany
     {
         return $this->hasMany(EmailChange::class, 'user_id');
     }
@@ -630,7 +630,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Collection|PasswordReset[]|HasMany
      */
-    public function passwordResets()
+    public function passwordResets(): HasMany
     {
         return $this->hasMany(PasswordReset::class, 'email', 'email');
     }
@@ -754,27 +754,27 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return Hash::make($password);
     }
 
-    public function onboardingGear()
+    public function onboardingGear(): HasMany
     {
         return $this->hasMany(OnboardingGear::class);
     }
 
-    public function onboardingTopics()
+    public function onboardingTopics(): HasMany
     {
         return $this->hasMany(OnboardingTopic::class);
     }
 
-    public function onboardingGenres()
+    public function onboardingGenres(): HasMany
     {
         return $this->hasMany(OnboardingGenre::class);
     }
 
-    public function onboardingExperience()
+    public function onboardingExperience(): HasMany
     {
         return $this->hasMany(OnboardingExperience::class);
     }
 
-    public function onboardingGoals()
+    public function onboardingGoals(): HasMany
     {
         return $this->hasMany(OnboardingGoals::class);
     }
@@ -1004,7 +1004,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         );
     }
 
-    public function isEnrolledIntoCohort($cohortPermissionsIds = [])
+    public function isEnrolledIntoCohort($cohortPermissionsIds = []): HasMany
     {
         if (empty($cohortPermissionsIds)) {
             $cohortPermissionsIds = config('railcontent.cohort_permission_ids', []);

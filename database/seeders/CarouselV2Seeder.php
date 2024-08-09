@@ -14,7 +14,7 @@ class CarouselV2Seeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Carousel::query()->update(['visible' => 0]);
 

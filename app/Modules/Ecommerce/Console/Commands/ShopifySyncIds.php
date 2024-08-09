@@ -11,7 +11,7 @@ class ShopifySyncIds extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncIDs {startPageIndex=0}';
 
-    public function handle(Shopify $shopify)
+    public function handle(Shopify $shopify): void
     {
         $this->withExecutionTime(function () use ($shopify) {
             $startPageIndex = intval($this->argument('startPageIndex'));

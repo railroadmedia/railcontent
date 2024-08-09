@@ -13,7 +13,7 @@ class CanSaveWithoutUpdatedAtTest extends TestCase
     protected Product $usesTrait;
     protected ShopifySync $doesntUseTrait;
 
-    public function test_class_without_trait_save_does_update_field()
+    public function test_class_without_trait_save_does_update_field(): void
     {
         $this->doesntUseTrait = ShopifySync::create([
             "resource" => ShopifySync::RESOURCE_CUSTOMER,
@@ -28,7 +28,7 @@ class CanSaveWithoutUpdatedAtTest extends TestCase
         $this->assertNotEquals($updated_at, $this->doesntUseTrait->updated_at);
     }
 
-    public function test_normal_save_does_update_field()
+    public function test_normal_save_does_update_field(): void
     {
         $this->usesTrait = Product::factory()->create();
         $this->assertContains(CanSaveWithoutUpdatedAt::class, class_uses($this->usesTrait));
@@ -40,7 +40,7 @@ class CanSaveWithoutUpdatedAtTest extends TestCase
         $this->assertNotEquals($updated_at, $this->usesTrait->updated_at);
     }
 
-    public function test_can_save_without_updated_at_does_not_update_field()
+    public function test_can_save_without_updated_at_does_not_update_field(): void
     {
         $this->usesTrait = Product::factory()->create();
         $this->assertContains(CanSaveWithoutUpdatedAt::class, class_uses($this->usesTrait));

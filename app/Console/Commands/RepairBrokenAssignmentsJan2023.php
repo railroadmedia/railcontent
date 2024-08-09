@@ -26,7 +26,7 @@ class RepairBrokenAssignmentsJan2023 extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $this->info('###### Starting RepairBrokenAssignmentsJan2023...  ######');
 

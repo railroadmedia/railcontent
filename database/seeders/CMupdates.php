@@ -15,7 +15,7 @@ class CMUpdates extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         //BUNDLE UPDATES
         $bundles = [

@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('features_features', function (Blueprint $table) {
             $table->string('block_filter')->after('allow_filter')->nullable();
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('features_features', function (Blueprint $table) {
             $table->dropColumn('block_filter');

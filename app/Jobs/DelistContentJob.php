@@ -31,7 +31,7 @@ class DelistContentJob implements ShouldQueue
     }
 
 
-    public function handle(ContentService $contentService, RailcontentV2DataSyncingService $dataSyncingService)
+    public function handle(ContentService $contentService, RailcontentV2DataSyncingService $dataSyncingService): void
     {
         ContentRepository::$bypassPermissions = true;
         ContentRepository::$pullFutureContent = true;

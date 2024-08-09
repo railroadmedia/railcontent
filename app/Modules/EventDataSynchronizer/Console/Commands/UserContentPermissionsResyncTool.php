@@ -38,7 +38,7 @@ class UserContentPermissionsResyncTool extends Command
     public function handle(
         DatabaseManager $databaseManager,
         UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener
-    ) {
+    ): void {
         $brand = $this->option('brand');
         $ecommerceConnection = $databaseManager->connection(config('ecommerce.database_connection_name'));
 

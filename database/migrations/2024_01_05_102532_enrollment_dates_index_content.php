@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('railcontent_content', function (Blueprint $table) {
             $table->index(['type', 'status', 'brand','enrollment_end_time'], 't_s_b_e');
@@ -22,7 +22,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('railcontent_content', function (Blueprint $table) {
             $table->dropIndex('t_s_b_e');

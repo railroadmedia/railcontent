@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class WebhookTest extends TestCase
 {
-    public function test_create_and_run_webhook_job()
+    public function test_create_and_run_webhook_job(): void
     {
         $source_id = $this->faker->unique()->word();
         $this->assertDatabaseMissing(
@@ -45,7 +45,7 @@ class WebhookTest extends TestCase
         $this->assertTrue($webhookData->allComplete());
     }
 
-    public function test_create_delayed_children()
+    public function test_create_delayed_children(): void
     {
         $source_id = $this->faker->unique()->word();
         $this->assertDatabaseMissing(
@@ -69,7 +69,7 @@ class WebhookTest extends TestCase
         $this->assertGreaterThanOrEqual($afterDispatch, $beforeDispatch + 2, "$beforeDispatch $afterDispatch");
     }
 
-    public function test_creating_invalid_delayed()
+    public function test_creating_invalid_delayed(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $source_id = $this->faker->unique()->word();
@@ -90,7 +90,7 @@ class WebhookTest extends TestCase
         );
     }
 
-    public function test_child_job_failing_causes_parent_failure()
+    public function test_child_job_failing_causes_parent_failure(): void
     {
         $source_id = $this->faker->unique()->word();
         $this->assertDatabaseMissing(
@@ -116,7 +116,7 @@ class WebhookTest extends TestCase
         $this->assertFalse($webhookData->allComplete());
     }
 
-    public function test_only_valid_childen_allowed()
+    public function test_only_valid_childen_allowed(): void
     {
         $source_id = $this->faker->unique()->word();
         $this->assertDatabaseMissing(
@@ -142,7 +142,7 @@ class WebhookTest extends TestCase
         );
     }
 
-    public function test_queue_parameter_correctly_sets_queue()
+    public function test_queue_parameter_correctly_sets_queue(): void
     {
         $source_id = $this->faker->unique()->word();
         $queue_name = $this->faker->unique()->word();

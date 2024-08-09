@@ -35,7 +35,7 @@ class PopulateUserMinutesPracticedPerBrand extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager, UserMetricsService $userMetricsService)
+    public function handle(DatabaseManager $databaseManager, UserMetricsService $userMetricsService): void
     {
         $this->info("PopulateUserMinutesPracticedPerBrand command starts now \n");
 

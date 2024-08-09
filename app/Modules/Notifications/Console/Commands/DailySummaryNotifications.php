@@ -11,7 +11,7 @@ class DailySummaryNotifications extends Command
     protected $signature = 'notifications:dailySummary';
     protected $description = 'DailySummaryNotifications';
 
-    public function handle()
+    public function handle(): void
     {
         $startDate = Carbon::now()->subDay();
         $this->runChainQuery(function (int $skip, int $take) use ($startDate) {

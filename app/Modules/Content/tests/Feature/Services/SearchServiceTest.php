@@ -17,7 +17,7 @@ class SearchServiceTest extends TestCase
         $this->searchService = app(SearchService::class);
     }
 
-    public function test_rebuildSearchIndexes()
+    public function test_rebuildSearchIndexes(): void
     {
         /** @var Instructor $instructor */
         $instructor = Instructor::factory()->create();

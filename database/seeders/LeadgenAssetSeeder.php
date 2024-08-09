@@ -16,7 +16,7 @@ class LeadgenAssetSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $leadgens = [
            [

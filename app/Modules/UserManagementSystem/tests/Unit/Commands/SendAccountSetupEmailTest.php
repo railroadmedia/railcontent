@@ -33,7 +33,7 @@ class SendAccountSetupEmailTest extends TestCase
             ]);
     }
 
-    public function test_dispatched_finds_users_to_notify_and_ignores_new_users()
+    public function test_dispatched_finds_users_to_notify_and_ignores_new_users(): void
     {
         Log::shouldReceive("info");
 
@@ -43,7 +43,7 @@ class SendAccountSetupEmailTest extends TestCase
         $this->assertOnlyValidUsersSelected($this->usersToReceiveNotification);
     }
 
-    public function test_dispatched_finds_users_to_notify_with_new_users_after_one_day()
+    public function test_dispatched_finds_users_to_notify_with_new_users_after_one_day(): void
     {
         Log::shouldReceive("info");
         $recentUser = User::factory()
@@ -61,7 +61,7 @@ class SendAccountSetupEmailTest extends TestCase
         $this->assertOnlyValidUsersSelected(Collection::make([$recentUser]));
     }
 
-    public function test_dispatched_finds_users_to_notify_without_user_who_updated_password()
+    public function test_dispatched_finds_users_to_notify_without_user_who_updated_password(): void
     {
         Log::shouldReceive("info");
 
@@ -75,7 +75,7 @@ class SendAccountSetupEmailTest extends TestCase
         $this->assertOnlyValidUsersSelected($this->usersToReceiveNotification);
     }
 
-    public function test_not_dispatched_when_no_users_to_notify()
+    public function test_not_dispatched_when_no_users_to_notify(): void
     {
         Log::shouldReceive("info");
 

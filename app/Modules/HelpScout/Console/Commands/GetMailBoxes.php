@@ -23,7 +23,7 @@ class GetMailBoxes extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info("\nGetting mail boxes");
         $mailBoxes = $this->helpScoutService->getMailBoxes();

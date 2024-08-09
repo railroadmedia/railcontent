@@ -15,7 +15,7 @@ class AuthenticationServiceProvider extends ServiceProvider
      * @return void
      * @throws BindingResolutionException
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app['auth']->provider(
             'user-management-system',
@@ -55,7 +55,7 @@ class AuthenticationServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
     }
 }

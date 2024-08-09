@@ -41,7 +41,7 @@ class GenerateAccessCodes extends Command
      * @return mixed
      * @throws NonUniqueResultException
      */
-    public function handle(ProductService $productService)
+    public function handle(ProductService $productService): int
     {
         $source = $this->getSource();
 

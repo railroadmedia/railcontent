@@ -39,7 +39,7 @@ class CreateSongs24Jan2023 extends Command
      *
      * @return mixed
      */
-    public function handle(ContentRepository $contentRepository)
+    public function handle(ContentRepository $contentRepository): void
     {
         $this->info('Starting CreateSongs24Jan2023...');
         $csv = array_map(function ($v) {return str_getcsv($v, ",");}, file(base_path('csv_songs_imports/Jan 18th - Songs Import - Import.csv')));

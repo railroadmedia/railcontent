@@ -14,7 +14,7 @@ class SaleRevertSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         //        all shirts
         Product::where('product_type_id', 4)->update(['discounted_price' => 35]);

@@ -14,7 +14,7 @@ class ContentUpdatePopularity extends Command
 
     protected $description = 'Updates the content popularity column';
 
-    public function handle()
+    public function handle(): void
     {
         $this->withExecutionTime(function () {
             $this->updatePopularity();

@@ -28,7 +28,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->commands(
             [
@@ -81,7 +81,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Laravel auth integration
         $this->app->register(AuthenticationServiceProvider::class);

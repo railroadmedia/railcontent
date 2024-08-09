@@ -15,7 +15,7 @@ class UpdatePaymentMethodRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class UpdatePaymentMethodRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'method_type' => 'required|max:255|in:paypal,credit_card',

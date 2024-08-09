@@ -17,7 +17,7 @@ class RemoveTemporarySongsAccessForLifetimeMembersJanuary2023 extends Command
 
     public function handle(
         DatabaseManager $databaseManager,
-    ) {
+    ): int {
         $this->info('Starting');
 
         $connection = $databaseManager->connection('musora_laravel_mysql');
