@@ -40,6 +40,11 @@ return [
             'driver' => 'user-management-system',
             'provider' => 'user-management-system',
         ],
+
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -59,17 +64,22 @@ return [
     |
     */
 
-        'providers' => [
+    'providers' => [
             'user-management-system' => [
                 'driver' => 'user-management-system',
                 'model' => \Modules\UserManagementSystem\Models\User::class,
             ],
 
-            // 'users' => [
-            //     'driver' => 'database',
-            //     'table' => 'users',
-            // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -80,9 +90,13 @@ return [
     | than one user table or model in the application and you want to have
     | separate password reset settings based on the specific user types.
     |
-    | The expire time is the number of minutes that the reset token should be
+    | The expiry time is the number of minutes that each reset token will be
     | considered valid. This security feature keeps tokens short-lived so
     | they have less time to be guessed. You may change this as needed.
+    |
+    | The throttle setting is the number of seconds a user must wait before
+    | generating more password reset tokens. This prevents the user from
+    | quickly generating a very large amount of password reset tokens.
     |
     */
 
