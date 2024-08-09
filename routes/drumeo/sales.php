@@ -6,10 +6,7 @@ use App\Http\Controllers\Drumeo\SalesController;
 Route::domain('{drumeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-        Route::get('/referral-join', [
-            'as' => 'referral.invite-a-friend-landing',
-            'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
-        ]);
+        Route::get('/referral-join', \App\Http\Controllers\Musora\ReferralJoinController::class . '@join')->name('referral.invite-a-friend-landing');
         Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
@@ -92,9 +89,7 @@ Route::domain('{drumeoDomain}')
 
 
         Route::get('/estepario', [SalesController::class, 'estepario']);
-        Route::group(
-            ['prefix' => 'a' ],
-            function () {
+        Route::prefix('a')->group(function () {
                 Route::get('/{page?}', SalesController::class . '@a')
                     ->whereIn('page', [
                         '66samus',
@@ -119,18 +114,14 @@ Route::domain('{drumeoDomain}')
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'ambassador' ],
-            function () {
+        Route::prefix('ambassador')->group(function () {
                 Route::get('/{page?}', SalesController::class . '@ambassador')
                     ->whereIn('page', [
                         'cobus'
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'affiliate' ],
-            function () {
+        Route::prefix('affiliate')->group(function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
                         '66samus',

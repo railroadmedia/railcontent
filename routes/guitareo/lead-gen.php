@@ -19,27 +19,21 @@ Route::domain('{guitareoDomain}')
         Route::get('/recitals', [LeadGenController::class, 'recitals']);
         Route::get('/fretboard-cheatsheet', [LeadGenController::class, 'fretboardcheatsheet']);
 
-        Route::group(
-            ['prefix' => 'back-to-basics'],
-            function () {
+        Route::prefix('back-to-basics')->group(function () {
                 Route::get('/{page?}', LeadGenController::class . '@backToBasics')
                     ->whereIn('page', [
                         null, 'zoom'
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'clean-up-chords'],
-            function () {
+        Route::prefix('clean-up-chords')->group(function () {
                 Route::get('/{page?}', LeadGenController::class . '@cleanUpChords')
                     ->whereIn('page', [
                         null, 'zoom'
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'song-in-an-hour'],
-            function () {
+        Route::prefix('song-in-an-hour')->group(function () {
                 Route::get('/{page?}', LeadGenController::class . '@songInAnHour')
                     ->whereIn('page', [
                         null, 'thank-you', 'success', 'writing-a-melody', 'next-steps'
@@ -55,9 +49,7 @@ Route::domain('{guitareoDomain}')
         );
         Route::get('/free-acoustic-guitar-lessons', [LeadGenController::class, 'fagl']);
         Route::get('/free-electric-guitar-lessons', [LeadGenController::class, 'fegl']);
-        Route::group(
-            ['prefix' => 'chords-for-hit-songs'],
-            function () {
+        Route::prefix('chords-for-hit-songs')->group(function () {
                 Route::get('/{page?}/', LeadGenController::class . '@hitSongs')
                     ->whereIn('page', [
                         null, 'thank-you',
@@ -67,9 +59,7 @@ Route::domain('{guitareoDomain}')
         Route::get('/guitar-tricks', [LeadGenController::class, 'tricks']);
         Route::get('/solo-in-an-hour', [LeadGenController::class, 'soloInAnHour']);
         Route::get('/acoustic-guitar-jumpstart', [LeadGenController::class, 'jumpstart']);
-        Route::group(
-            ['prefix' => 'starter-kit'],
-            function () {
+        Route::prefix('starter-kit')->group(function () {
                 Route::get('/{page?}/{lesson?}', LeadGenController::class . '@starterKit')
                     ->whereIn('page', [null, 'lessons'])
                     ->whereIn('lesson', [null, 'using-a-tuner', 'whats-next']);
@@ -80,9 +70,7 @@ Route::domain('{guitareoDomain}')
             }
         );
 
-        Route::group(
-            ['prefix' => 'toolbox'],
-            function () {
+        Route::prefix('toolbox')->group(function () {
                 Route::get('/{page?}', LeadGenController::class . '@toolbox')
                     ->whereIn('page', [null, 'lessons']);
                 Route::get('/lessons/{page?}', LeadGenController::class . '@toolboxPages')

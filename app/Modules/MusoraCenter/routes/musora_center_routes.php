@@ -2,19 +2,9 @@
 
 // content management
 Route::get(
-    '/content-redirect/{id}',
-    [
-        'as' => 'content.redirect.id',
-        'uses' => \App\Modules\MusoraCenter\Controllers\ContentRedirectController::class . '@redirectToId'
-    ]
-);
+    '/content-redirect/{id}', \App\Modules\MusoraCenter\Controllers\ContentRedirectController::class . '@redirectToId')->name('content.redirect.id');
 
-Route::group(
-    [
-        'prefix' => 'content',
-        'middleware' => ['auth', 'admin-only']
-    ],
-    function () {
+Route::prefix('content')->middleware('auth', 'admin-only')->group(function () {
         //        Route::get(
         //            '/',
         //            [
@@ -24,73 +14,33 @@ Route::group(
         //        );
 
         Route::get(
-            '/videos',
-            [
-                'as' => 'content.videos',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@videos'
-            ]
-        );
+            '/videos', \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@videos')->name('content.videos');
 
         Route::get(
-            '/{brand}',
-            [
-                'as' => 'content.brand',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@brand'
-            ]
-        );
+            '/{brand}', \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@brand')->name('content.brand');
 
         Route::get(
-            '/{brand}/{type}',
-            [
-                'as' => 'content.brand.type',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@type'
-            ]
-        );
+            '/{brand}/{type}', \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@type')->name('content.brand.type');
 
         Route::get(
-            '/{brand}/{type}/store',
-            [
-                'as' => 'content.brand.type.store',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@store'
-            ]
-        );
+            '/{brand}/{type}/store', \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@store')->name('content.brand.type.store');
 
         Route::get(
-            '/{brand}/{type}/edit/{id}',
-            [
-                'as' => 'content.brand.type.edit',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@edit'
-            ]
-        );
+            '/{brand}/{type}/edit/{id}', \App\Modules\MusoraCenter\Controllers\MusoraCenterContentController::class . '@edit')->name('content.brand.type.edit');
     }
 );
 
 // main SPA
-Route::group(
-    [
-        'prefix' => 'musora-center',
-        'middleware' => ['web_or_api_authenticated', 'musora-center-admin']
-    ],
-    function () {
+Route::prefix('musora-center')->middleware('web_or_api_authenticated', 'musora-center-admin')->group(function () {
         Route::get(
-            '/',
-            [
-                'as' => 'musora-center.home',
-                'uses' => \App\Modules\MusoraCenter\Controllers\MusoraCenterSPAController::class . '@show'
-            ]
-        );
+            '/', \App\Modules\MusoraCenter\Controllers\MusoraCenterSPAController::class . '@show')->name('musora-center.home');
     }
 );
 
 
 // invoice
 Route::get(
-    '/invoice/{paymentId}',
-    [
-        'as' => 'invoice.show',
-        'uses' => \App\Modules\MusoraCenter\Controllers\InvoiceController::class . '@show'
-    ]
-);
+    '/invoice/{paymentId}', \App\Modules\MusoraCenter\Controllers\InvoiceController::class . '@show')->name('invoice.show');
 
 // http options
 Route::options('/{any}', function () {
