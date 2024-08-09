@@ -40,12 +40,12 @@ class FeatureFlagFunctionalTest extends TestCase
     public function test_invalid_branch_throws_exception()
     {
         $this->expectException(\InvalidArgumentException::class);
-        FeatureFlagging::branch($this->faker->unique()->word);
+        FeatureFlagging::branch($this->faker->unique()->word());
     }
 
     public function test_invalid_feature_returns_true()
     {
-        $this->assertTrue(FeatureFlagging::accessible($this->faker->unique()->word));
+        $this->assertTrue(FeatureFlagging::accessible($this->faker->unique()->word()));
     }
 
     public function test_branch_returns_branch_content()
@@ -120,7 +120,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_block_filter_admin()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->word);
+        $feature = $this->ffService->addFeature($this->faker->unique()->word());
         $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertTrue($isAccessible);
@@ -132,7 +132,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_block_list_younger_than()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->word);
+        $feature = $this->ffService->addFeature($this->faker->unique()->word());
         $user = User::factory()->create(['created_at' => Carbon::now()->addDays(-2)]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertTrue($isAccessible);
@@ -259,7 +259,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $now = Carbon::now();
         $tomorrow = $now->addDay();
         $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
-        $allowed1 = $this->ffService->addFeature($this->faker->unique()->word);
+        $allowed1 = $this->ffService->addFeature($this->faker->unique()->word());
         $notAllowed1 = $this->ffService->addFeature($this->getRandomName(), active_at: $tomorrow);
         $allowed2 = $this->ffService->addFeature($this->getRandomName(), active_at: $tomorrow, userid_list: [$user->id]);
         $allFeatures = FeatureFlagging::allowedFeatures($user);

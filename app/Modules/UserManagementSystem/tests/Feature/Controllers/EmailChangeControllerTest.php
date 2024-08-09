@@ -22,17 +22,17 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         Event::fake();
         Notification::fake();
 
-        $password = $this->faker->word;
+        $password = $this->faker->word();
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($password),
-            'display_name' => $this->faker->word
+            'display_name' => $this->faker->word()
         ]);
 
         $user->save();
 
         auth()->onceUsingId($user->id);
-        $newEmail = $this->faker->email;
+        $newEmail = $this->faker->email();
         $this->assertNotEquals($newEmail, $user->email);
 
         $response = $this->call(
@@ -85,7 +85,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
     //    public function test_request_validation_fail()
     //    {
     //        $user = User::factory()->create([
-    //            'email' => $this->faker->email,
+    //            'email' => $this->faker->email(),
     //            'password' => $this->faker->words(3, true),
     //        ]);
     //
@@ -118,7 +118,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => $this->faker->words(3, true),
         ]);
         auth()->login($user);
@@ -165,7 +165,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => $this->faker->words(3, true),
         ]);
         auth()->login($user);

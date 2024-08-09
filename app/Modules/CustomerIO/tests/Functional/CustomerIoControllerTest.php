@@ -33,9 +33,9 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_submit_email_form_success_form_redirect()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $formName = 'Example Form Name';
-        $redirectUrl = $this->faker->url;
+        $redirectUrl = $this->faker->url();
 
         $response = $this->post('customer-io/submit-email-form', ['email' => $email, 'form_name' => $formName, 'success_redirect' => $redirectUrl]);
 
@@ -45,7 +45,7 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -80,7 +80,7 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id_not_found_in_database()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -91,13 +91,13 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id_found_in_database_but_not_from_api()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $customer = new Customer();
         $customer->generateUUID();
-        $customer->email = $this->faker->email;
+        $customer->email = $this->faker->email();
         $customer->workspace_name = $accountConfigData['workspace_name'];
         $customer->workspace_id = $accountConfigData['workspace_id'];
         $customer->site_id = $accountConfigData['site_id'];
@@ -111,7 +111,7 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_create_customer_without_attributes_or_existing_id_or_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -160,7 +160,7 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_create_customer_with_attributes_and_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $createdAt = Carbon::now()->subDays(1)->timestamp;
@@ -238,7 +238,7 @@ class CustomerIoControllerTest extends CustomerIoTestCase
 
     public function test_create_customer_with_user_id_and_attributes_and_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();

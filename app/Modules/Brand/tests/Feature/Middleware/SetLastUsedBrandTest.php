@@ -27,7 +27,7 @@ class SetLastUsedBrandTest extends TestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

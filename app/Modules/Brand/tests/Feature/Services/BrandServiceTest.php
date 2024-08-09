@@ -25,7 +25,7 @@ class BrandServiceTest extends TestCase
 
     public function test_set_last_used_brand_empty()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -62,7 +62,7 @@ class BrandServiceTest extends TestCase
 
     public function test_set_last_used_brand_unchanged()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -91,7 +91,7 @@ class BrandServiceTest extends TestCase
 
     public function test_set_last_used_brand_change()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

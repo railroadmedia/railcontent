@@ -21,7 +21,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 {
     public function test_check_email_account_exists()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
 
         User::factory()->create([
             'email' => $email,
@@ -45,7 +45,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_check_email_doesnt_exist()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
 
         $response = $this->post(
             route('user_management_system.login.check-email'),
@@ -57,7 +57,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_check_email_needs_setup()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
 
         User::factory()->create([
             'email' => $email,
@@ -91,7 +91,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_send_account_setup_email()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
 
         User::factory()->create([
             'email' => $email,
@@ -114,7 +114,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_login()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -142,7 +142,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     public function test_login_fails_for_invalid_password()
     {
         $this->assertFalse(Auth::check());
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         User::factory()->create([
@@ -228,7 +228,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
         $device = 'test_device';
 
@@ -295,7 +295,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -324,9 +324,9 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
-        $redirectUrl = $this->faker->url;
+        $redirectUrl = $this->faker->url();
 
         $user = User::factory()->create([
             'email' => $email,
@@ -353,7 +353,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -396,7 +396,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -423,7 +423,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -451,7 +451,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
         $redirectUrl = 'https://www.domain.com/order';
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -497,7 +497,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -527,7 +527,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
@@ -555,7 +555,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

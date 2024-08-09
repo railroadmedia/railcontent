@@ -134,7 +134,7 @@ class PaymentServiceTest extends TestCase
         if ($externalProvider === Payment::EXTERNAL_PROVIDER_APPLE) {
             AppleReceipt::create([
                 'brand' => 'musora',
-                'receipt' => $this->faker->text,
+                'receipt' => $this->faker->text(),
                 'request_type' => AppleReceipt::MOBILE_APP_REQUEST_TYPE,
                 'valid' => 1,
                 'transaction_id' => $payment->external_id,
@@ -146,7 +146,7 @@ class PaymentServiceTest extends TestCase
                 'brand' => 'musora',
                 'package_name' => 'com.musoraapp',
                 'product_id' => $subscriptionPayment->subscription->product_id,
-                'purchase_token' => $this->faker->text,
+                'purchase_token' => $this->faker->text(),
                 'request_type' => GoogleReceipt::MOBILE_APP_REQUEST_TYPE,
                 'notification_type' => GoogleReceipt::GOOGLE_RENEWAL_NOTIFICATION_TYPE,
                 'valid' => 1,

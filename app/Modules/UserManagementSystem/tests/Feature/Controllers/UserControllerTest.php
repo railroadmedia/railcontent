@@ -27,7 +27,7 @@ class UserControllerTest extends UserManagementSystemTestCase
 
     //    public function test_create()
     //    {
-    //        $email = $this->faker->email;
+    //        $email = $this->faker->email();
     //        $password = $this->faker->words(3, true);
     //        $device = 'test_device';
     //
@@ -80,7 +80,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         $userId = 1;
         $user = User::factory()->create([
             'id' => $userId,
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
         ]);
 
@@ -113,7 +113,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         $userId = 1;
 
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
         ]);
 
@@ -147,7 +147,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         $userId = 1;
 
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
         ]);
 
@@ -172,7 +172,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
         ]);
 
@@ -182,7 +182,7 @@ class UserControllerTest extends UserManagementSystemTestCase
 
         $userData = [
             'display_name' => $this->faker->words(4, true),
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => '12345678',
         ];
 
@@ -216,7 +216,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         $this->markTestSkipped("this test fails to run");
         $userData = [
             'display_name' => $this->faker->words(4, true),
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => '12345678',
         ];
 
@@ -245,7 +245,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
         ]);
 
@@ -255,7 +255,7 @@ class UserControllerTest extends UserManagementSystemTestCase
 
         $userData = [
             'display_name' => $this->faker->words(4, true),
-            'email' => $this->faker->email,
+            'email' => $this->faker->email(),
             'password' => '12345678',
         ];
 

@@ -18,7 +18,7 @@ class PasswordControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test. Throws ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
         $newPassword = $this->faker->words(3, true);
 

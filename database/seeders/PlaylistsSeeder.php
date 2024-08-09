@@ -48,9 +48,9 @@ class PlaylistsSeeder extends Seeder
                                                             'user_id' => $userId,
                                                             'type' => 'user-playlist',
                                                             'brand' => $brand,
-                                                            'name' => $this->faker->word,
-                                                            'description' => $this->faker->paragraph,
-                                                            'thumbnail_url' => $this->faker->imageUrl,
+                                                            'name' => $this->faker->word(),
+                                                            'description' => $this->faker->paragraph(),
+                                                            'thumbnail_url' => $this->faker->imageUrl(),
                                                             'category' => 'Jazz',
                                                             'private' => true,
                                                             'created_at' => Carbon::now()

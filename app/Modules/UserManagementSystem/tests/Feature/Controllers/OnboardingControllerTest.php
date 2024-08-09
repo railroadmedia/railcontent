@@ -15,7 +15,7 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     {
         parent::setUp();
 
-        $this->fakeEmail = $this->faker->email;
+        $this->fakeEmail = $this->faker->email();
         $user = User::factory()->create([
             'email' => $this->fakeEmail,
             'password' => "12345678",
@@ -58,7 +58,7 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $fakeData = [$this->faker->word, $this->faker->word];
+        $fakeData = [$this->faker->word(), $this->faker->word()];
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-gears',
@@ -110,7 +110,7 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $fakeData = [$this->faker->word, $this->faker->word];
+        $fakeData = [$this->faker->word(), $this->faker->word()];
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-topics',
@@ -163,7 +163,7 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $fakeData = [$this->faker->word, $this->faker->word];
+        $fakeData = [$this->faker->word(), $this->faker->word()];
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-genres',

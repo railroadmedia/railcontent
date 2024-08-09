@@ -32,7 +32,7 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
      */
     private function createUser(bool $needsLogout): User
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([
