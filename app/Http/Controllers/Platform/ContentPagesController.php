@@ -824,7 +824,7 @@ class ContentPagesController extends BaseController
         $matched = false;
 
         foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ($parentChild['status'] == ContentService::STATUS_UNLISTED ) {
+            if ($parentChild['status'] == ContentService::STATUS_UNLISTED) {
                 unset($parentChildren[$parentChildIndex]);
                 continue;
             }

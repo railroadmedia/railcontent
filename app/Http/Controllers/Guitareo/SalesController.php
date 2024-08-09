@@ -149,7 +149,7 @@ class SalesController extends BaseController
 
     public function thirtyDaysToBetterStrumming()
     {
-//        $productId = 741;
+        //        $productId = 741;
         $productId = 846;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);

@@ -37,7 +37,7 @@ class UpdatePermissionsJob implements ShouldQueue
         ContentRepository::$pullFutureContent = true;
         $count = count($this->contentIds);
         $idMin = $this->contentIds[0];
-        $idMax = $this->contentIds[$count -1];
+        $idMax = $this->contentIds[$count - 1];
         Log::info(
             'Starting UpdatePermissionsJob ID: ' . $this->job->getJobId() .
             ' -- adding permission '.  $this->permissionId . ' sync for ' . count($this->contentIds) .
@@ -58,7 +58,8 @@ class UpdatePermissionsJob implements ShouldQueue
 
         Log::info(
             'Finished UpdatePermissionsJob ID: ' . $this->job->getJobId() .
-            ' -- for count ' . $count);
+            ' -- for count ' . $count
+        );
     }
 
 

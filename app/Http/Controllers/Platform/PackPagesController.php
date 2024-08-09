@@ -620,7 +620,7 @@ class PackPagesController extends Controller
 
         $parentChildren = $this->contentService->getByParentId($pack['id']);
 
-        foreach ($parentChildren as $parentChildIndex=>$parentChild) {
+        foreach ($parentChildren as $parentChildIndex => $parentChild) {
             if ($parentChild['id'] == $semesterPackLessonId) {
                 $lesson = $parentChild;
             }

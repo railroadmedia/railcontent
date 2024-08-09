@@ -11,7 +11,6 @@ use Vimeo\Vimeo;
 
 class AdminController extends Controller
 {
-
     private TestingService $testingService;
 
     public function __construct(TestingService $testingService)

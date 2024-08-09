@@ -117,7 +117,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             foreach ($content['resources'] ?? [] as $resource) {
                 $resources[$resource['resource_url']] = $resource;
             }
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1') {
                 $contentsOfType[$contentIndex]['item_type'] = $content['type'];
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
@@ -185,10 +185,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             // TODO this is a really unusual hack. I'm going to remove it for now but we may need it back
             // See: https://musoraworkspace.slack.com/archives/C02L6GWEASV/p1719955897179159
             // This hack is necessary for some later behaviour whyyyyyy?
-//            if(ContentRepository::$bypassPermissions === true) {
-//                $contentsOfType[$contentIndex]['need_access'] = false;
-//                $contentsOfType[$contentIndex]['need_access_message'] = '';
-//            }
+            //            if(ContentRepository::$bypassPermissions === true) {
+            //                $contentsOfType[$contentIndex]['need_access'] = false;
+            //                $contentsOfType[$contentIndex]['need_access_message'] = '';
+            //            }
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
                     error_log($content['user_playlist_item_extra_data']);

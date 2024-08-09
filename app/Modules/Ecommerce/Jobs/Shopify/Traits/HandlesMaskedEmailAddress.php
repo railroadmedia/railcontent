@@ -57,9 +57,9 @@ trait HandlesMaskedEmailAddress
     private function ignoreEmailRegex(string $email): bool
     {
         if (str_starts_with($email, TestingService::EmailPrefix) && str_ends_with(
-                $email,
-                TestingService::EmailPostfix
-            )) {
+            $email,
+            TestingService::EmailPostfix
+        )) {
             return true;
         }
 

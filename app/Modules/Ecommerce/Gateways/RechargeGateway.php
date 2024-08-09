@@ -177,9 +177,9 @@ class RechargeGateway
             }
 
             if (isset($returnInfo['HTTP_CODE']) && (strpos(
-                        $returnInfo['HTTP_CODE'],
-                        'HTTP/1.1 429 TOO MANY REQUESTS'
-                    ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
+                $returnInfo['HTTP_CODE'],
+                'HTTP/1.1 429 TOO MANY REQUESTS'
+            ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
                 Log::warning(
                     '[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 1)'
                 );
@@ -205,9 +205,9 @@ class RechargeGateway
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 400 BAD REQUEST') > -1) {
                 if (isset($result->errors) && isset($result->errors->UNEXPECTED_VARIANT_ERROR_TYPE)) {
                     if (strpos(
-                            $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
-                            'Shopify returned 429 rate limit regarding this call'
-                        ) > -1) {
+                        $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
+                        'Shopify returned 429 rate limit regarding this call'
+                    ) > -1) {
                         Log::info('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (Shopify 429)');
                         sleep($sleepTime);
                         $retry = true;
@@ -316,7 +316,7 @@ class RechargeGateway
         }
 
         // transform into our model
-        $customers->transform(fn($customerData) => new Customer($customerData));
+        $customers->transform(fn ($customerData) => new Customer($customerData));
 
         // in case there are multiple customers with that shopify id, we should log it for investigation
         if ($customers->count() > 1) {
@@ -361,8 +361,8 @@ class RechargeGateway
             )->payment_methods ?? []
         );
 
-        return $data->filter(fn($p) => $p->default)
-            ->transform(fn($data) => new PaymentMethod($data))
+        return $data->filter(fn ($p) => $p->default)
+            ->transform(fn ($data) => new PaymentMethod($data))
             ->first();
     }
 
@@ -549,8 +549,7 @@ class RechargeGateway
      * @return Collection
      * @throws Exception
      */
-    public
-    function getSubscriptionsByStatus(
+    public function getSubscriptionsByStatus(
         string $status,
         CarbonInterface $createdAtMin,
         CarbonInterface $createdAtMax,
@@ -582,8 +581,7 @@ class RechargeGateway
         }
     }
 
-    public
-    function updateSubscriptionNextChargeDate(
+    public function updateSubscriptionNextChargeDate(
         $subscription,
         Carbon $nextChargeDate
     ): void {
@@ -612,8 +610,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function createWebhook(
+    public function createWebhook(
         array $data
     ): array {
         $response = $this->call(
@@ -634,8 +631,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function getWebhooks(): array
+    public function getWebhooks(): array
     {
         $response = $this->call(
             'GET',
@@ -648,8 +644,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function deleteWebhook(
+    public function deleteWebhook(
         $id
     ): void {
         $this->call(

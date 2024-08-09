@@ -311,9 +311,9 @@ class LeadGenController extends BaseController
 
     public function techniqueEssentials(Request $request, $domain, $page = null, $lesson = null)
     {
-        
+
         return view('pianote.lead-gen.technique-essentials', ['recaptchaKey' => config('recaptcha.key')]);
-       
+
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)

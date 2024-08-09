@@ -29,8 +29,8 @@ class CheckSongMembershipAccess extends Command
             ->with('userAccessPermissions')
             ->get();
 
-       $shouldUpdate = [];
-       foreach ($users as $user) {
+        $shouldUpdate = [];
+        foreach ($users as $user) {
             $shouldModify = true;
             $userIdOrEmail = $user->id;
             foreach ($user->userAccessPermissions as $userPermission) {

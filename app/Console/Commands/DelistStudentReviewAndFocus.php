@@ -39,7 +39,7 @@ class DelistStudentReviewAndFocus extends Command
         $this->musoraDB()->from('railcontent_content')
             ->whereIn('type', ['student-review', 'student-focus'])
             //->whereNot('status', '=', 'unlisted')
-            ->chunkById($chunkSize, function (Collection $contentRows) use (&$count, $chunkSize)  {
+            ->chunkById($chunkSize, function (Collection $contentRows) use (&$count, $chunkSize) {
                 $count += $contentRows->count();
                 $ids = $contentRows->pluck('id')->toArray();
                 dispatch(new DelistContentJob($ids, ContentService::STATUS_UNLISTED));

@@ -37,7 +37,7 @@ class DelistContentJob implements ShouldQueue
         ContentRepository::$pullFutureContent = true;
         $count = count($this->contentIdsToDelist);
         $idMin = $this->contentIdsToDelist[0];
-        $idMax = $this->contentIdsToDelist[$count -1];
+        $idMax = $this->contentIdsToDelist[$count - 1];
         Log::info(
             'Starting DelistContentJob ID: ' . $this->job->getJobId() .
             ' -- starting sync for ' . count($this->contentIdsToDelist) .

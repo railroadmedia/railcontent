@@ -231,7 +231,6 @@ class GenerateWeeklyMembershipStats extends Command
                                     ',',
                                     $allUserIdsInChunk->toArray()
                                 ) . ')',
-
                             )
                             ->whereIn('railcontent_content.brand', $brands)
                             ->where(function (Builder $builder) use ($dateIncrement, $dateIncrementEndOfWeek) {
@@ -255,7 +254,7 @@ class GenerateWeeklyMembershipStats extends Command
                             })
                             ->groupBy(['railcontent_user_content_progress.user_id', 'brand']);
 
-//                        $this->info($usersProgressRowsGroupedByUserId->toSql());
+                        //                        $this->info($usersProgressRowsGroupedByUserId->toSql());
 
                         $usersProgressRowsGroupedByUserId = $usersProgressRowsGroupedByUserId->get()->groupBy(
                             'user_id'
@@ -445,9 +444,9 @@ GROUP BY user_id
                                 }
                             }
 
-//                            if ($weeklyMembershipStatsRow['access_frequency'] == 'other') {
-//                                var_dump($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? []);
-//                            }
+                            //                            if ($weeklyMembershipStatsRow['access_frequency'] == 'other') {
+                            //                                var_dump($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? []);
+                            //                            }
 
                             // active
                             $weeklyMembershipStatsRow['active'] = false;

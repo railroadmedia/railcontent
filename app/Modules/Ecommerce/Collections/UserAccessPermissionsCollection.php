@@ -57,9 +57,9 @@ class UserAccessPermissionsCollection
         }
 
         if ($this->user->isAdmin() && (
-                is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
+            is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
                 || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions)
-            )) {
+        )) {
             return [Carbon::today(), Carbon::maxValue()];
         }
 
