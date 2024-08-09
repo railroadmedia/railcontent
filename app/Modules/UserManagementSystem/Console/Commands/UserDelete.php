@@ -265,9 +265,6 @@ class UserDelete extends Command
 
     /**
      * Execute the command
-     *
-     * @param DatabaseManager $databaseManager
-     * @return void
      */
     public function handle(DatabaseManager $databaseManager): void
     {
@@ -396,9 +393,6 @@ class UserDelete extends Command
 
     /**
      * Delete the users from CustomerIO, using their provided IDs
-     *
-     * @param array $userIds
-     * @return void
      */
     protected function deleteFromCustomerIo(array $userIds): void
     {
@@ -414,11 +408,6 @@ class UserDelete extends Command
 
     /**
      * Delete the users from all our defined tables, using their provided IDs
-     *
-     * @param array $batchUserIds
-     * @param int $batchIndex
-     * @param int $batchTotal
-     * @return void
      */
     protected function deleteFromDatabase(array $batchUserIds, int $batchIndex, int $batchTotal): void
     {

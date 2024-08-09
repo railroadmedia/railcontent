@@ -51,7 +51,6 @@ class BrandCalendarSync extends Command
     // =================================================================================================================
 
     /**
-     * @return void
      * @throws Exception
      */
     private function syncInstructors($brand): void
@@ -80,7 +79,6 @@ class BrandCalendarSync extends Command
 
     /**
      * @param $brand
-     * @return Collection
      */
     private function coaches($brand): Collection
     {
@@ -115,10 +113,6 @@ class BrandCalendarSync extends Command
         return $coaches;
     }
 
-    /**
-     * @param Collection $coaches
-     * @return bool
-     */
     private function syncCoachCalendars(Collection $coaches): bool
     {
         $calendarVOs = [];
@@ -287,7 +281,6 @@ class BrandCalendarSync extends Command
     /**
      * @param $brand
      * @param $coaches
-     * @return void
      * @throws Exception
      */
     private function syncCoachCalendarEvents($brand, $coaches): void
@@ -341,7 +334,6 @@ class BrandCalendarSync extends Command
 
     /**
      * @param $brand
-     * @return void
      * @throws Exception
      */
     private function syncTypeSpecificAndOverview($brand): void
@@ -380,7 +372,6 @@ class BrandCalendarSync extends Command
      * @param $brand
      * @param $type
      * @param $futureOnly
-     * @return array
      */
     private function getContentByContentType($brand, $type): array
     {

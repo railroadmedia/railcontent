@@ -30,8 +30,6 @@ class HandlesMaskedEmailAddressTest extends BaseTestCase
 
     /**
      * Set the environment to production
-     *
-     * @return void
      */
     private function setProductionApp(): void
     {

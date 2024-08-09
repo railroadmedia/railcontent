@@ -43,7 +43,6 @@ class CohortPackController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $slug
@@ -124,9 +123,6 @@ class CohortPackController
     }
 
     /**
-     * @param string $sku
-     * @param string $successMessage
-     * @param Request $request
      * @return JsonResponse|RedirectResponse
      * @throws ORMException
      * @throws Throwable

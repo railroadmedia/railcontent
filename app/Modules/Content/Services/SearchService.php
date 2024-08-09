@@ -114,10 +114,6 @@ class SearchService
     }
 
     /** Prepare search indexes based on config settings
-     *
-     * @param string $type
-     * @param array $content
-     * @return string
      */
     private function prepareIndexesValues(string $type, array $content): string
     {

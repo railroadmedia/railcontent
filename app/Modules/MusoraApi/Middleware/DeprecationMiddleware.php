@@ -11,7 +11,6 @@ class DeprecationMiddleware
 {
     /**
      * @param $request
-     * @param Closure $next
      * @param $deprecatedAt
      * @return Response|JsonResponse
      */

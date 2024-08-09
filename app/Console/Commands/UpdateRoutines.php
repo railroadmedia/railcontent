@@ -175,8 +175,6 @@ class UpdateRoutines extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(): int
     {
@@ -349,11 +347,6 @@ class UpdateRoutines extends Command
         return true;
     }
 
-    /**
-     * @param array $attributes
-     * @param array $values
-     * @return object
-     */
     private function updateOrInsertAndGetFirst($table, array $attributes, array $values = []): object
     {
         $this->musoraDB()
@@ -364,9 +357,7 @@ class UpdateRoutines extends Command
     }
 
     /**
-     * @param array $attributes
      * @param array $values
-     * @return object
      */
     private function getFirst($table, array $attributes): object
     {

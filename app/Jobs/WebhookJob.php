@@ -59,7 +59,6 @@ class WebhookJob implements ShouldQueue
     /**
      * ShouldQueue implementation of handle()
      * Dispatches all children jobs or default or provided queue
-     * @return void
      */
     public function handle(): void
     {

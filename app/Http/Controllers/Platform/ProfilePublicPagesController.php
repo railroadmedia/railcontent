@@ -21,9 +21,6 @@ class ProfilePublicPagesController extends BaseController
 
     /**
      * UserDashboardController constructor.
-     *
-     * @param  UserContentProgressService  $userContentProgressService
-     * @param  ContentService  $contentService
      */
     public function __construct(
         UserContentProgressService $userContentProgressService,
@@ -119,9 +116,6 @@ class ProfilePublicPagesController extends BaseController
         );
     }
 
-    /**
-     * @return array
-     */
     private function getUserMetrics(User $user): array
     {
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics($user->id);

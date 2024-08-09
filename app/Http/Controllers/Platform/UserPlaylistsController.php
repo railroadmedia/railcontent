@@ -48,19 +48,6 @@ class UserPlaylistsController extends BaseController
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
 
-    /**
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param ContentService $contentService
-     * @param ContentPermissionRepository $contentPermissionRepository
-     * @param UserPermissionsRepository $userPermissionsRepository
-     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
-     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
-     * @param RoutingDecorator $routingDecorator
-     * @param ResourceDecorator $resourceDecorator
-     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
-     * @param ContentLastEngagedService $contentLastEngagedService
-     * @param PlaylistService $playlistService
-     */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
@@ -145,7 +132,6 @@ class UserPlaylistsController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $playlistId
@@ -270,7 +256,6 @@ class UserPlaylistsController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $playlistId
@@ -484,7 +469,6 @@ class UserPlaylistsController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $playlistId

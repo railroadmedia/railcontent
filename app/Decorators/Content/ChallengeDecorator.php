@@ -7,10 +7,6 @@ use Railroad\Railcontent\Support\Collection;
 
 class ChallengeDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'challenge');

@@ -12,8 +12,6 @@ class UpdatePaymentMethodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -22,8 +20,6 @@ class UpdatePaymentMethodRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -48,9 +44,6 @@ class UpdatePaymentMethodRequest extends FormRequest
         return $rules;
     }
 
-    /**
-     * @return Validator
-     */
     public function getValidatorInstance(): Validator
     {
         // if this request is from a paypal redirect we must merge in the old input
@@ -66,8 +59,6 @@ class UpdatePaymentMethodRequest extends FormRequest
     }
 
     /** Get the failed validation response in json format
-     *
-     * @param Validator $validator
      */
     protected function failedValidation(Validator $validator)
     {

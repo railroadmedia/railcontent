@@ -13,8 +13,6 @@ class ReferralException extends Exception
 
     /**
      * ReferralException constructor.
-     *
-     * @param string $message
      */
     public function __construct(string $message, $code = 500)
     {
@@ -23,9 +21,6 @@ class ReferralException extends Exception
         $this->code = $code;
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function render(): JsonResponse
     {
         return response()->json(

@@ -52,9 +52,6 @@ class ShopifyCancelService
 
     /**
      * Cancel all fulfillments in Shopify, in the given fulfillments data retrieved from Shopify through getOrder
-     *
-     * @param array $fulfillmentsData
-     * @return void
      */
     private function cancelFulfillments(array $fulfillmentsData): void
     {

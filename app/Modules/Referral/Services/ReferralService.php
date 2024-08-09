@@ -18,8 +18,6 @@ class ReferralService
 
     /**
      * ReferralService constructor.
-     *
-     * @param  SaasquatchService  $saasquatchService
      */
     public function __construct(SaasquatchService $saasquatchService)
     {
@@ -31,21 +29,13 @@ class ReferralService
         return config('referral.referrals_per_user');
     }
 
-    /**
-     * @param  Referrer  $referrer
-     *
-     * @return bool
-     */
     public function canRefer(Referrer $referrer): bool
     {
         return $referrer->referrals_performed < $this->getReferralsPerUser();
     }
 
     /**
-     * @param  int  $userId
-     * @param  string  $referralProgramId
      *
-     * @return Referrer
      *
      * @throws Exception
      */
@@ -65,12 +55,6 @@ class ReferralService
         return $referrer;
     }
 
-    /**
-     * @param  int  $userId
-     * @param  string  $referralProgramId
-     * @param  string $brand
-     * @return Referrer
-     */
     public function getOrCreateReferrer(int $userId, string $referralProgramId, string $brand): Referrer
     {
         $referrer = $this->getReferrer($userId, $referralProgramId, $brand);
@@ -82,8 +66,6 @@ class ReferralService
     }
 
     /**
-     * @param  int  $userId
-     * @return Referrer
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws Throwable

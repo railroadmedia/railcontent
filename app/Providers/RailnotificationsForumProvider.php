@@ -33,10 +33,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
 
     /**
      * RailforumProvider constructor.
-     * @param PostRepository $postRepository
-     * @param ThreadRepository $threadRepository
-     * @param ThreadFollowRepository $threadFollowRepository
-     * @param PostLikeRepository $postLikeRepository
      */
     public function __construct(
         PostRepository $postRepository,
@@ -51,7 +47,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     }
 
     /**
-     * @param int $postId
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
     public function getPostById(int $postId)
@@ -71,7 +66,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     }
 
     /**
-     * @param int $threadId
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
     public function getThreadById(int $threadId)
@@ -90,7 +84,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
 
     /**
      * @param $threadId
-     * @return \Illuminate\Support\Collection
      */
     public function getAllPostIdsInThread($threadId): Collection
     {

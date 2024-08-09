@@ -32,7 +32,6 @@ class OnboardingController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function onboardingStarted(Request $request): Response|Application|ResponseFactory
@@ -43,7 +42,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function gears(Request $request): Response|Application|ResponseFactory
@@ -77,7 +75,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function topics(Request $request): Response|Application|ResponseFactory
@@ -115,7 +112,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function genres(Request $request): Response|Application|ResponseFactory
@@ -150,7 +146,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      * @throws \Throwable
      */
@@ -198,7 +193,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      * @throws \Throwable
      */
@@ -249,7 +243,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function getUserOnboardingInformation(Request $request): Response|Application|ResponseFactory
@@ -291,7 +284,6 @@ class OnboardingController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function aboutStepCompleted(Request $request): Response|Application|ResponseFactory
@@ -311,7 +303,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function skipAccountSetup(Request $request): Response|Application|ResponseFactory
@@ -337,7 +328,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      * @throws Exception
      */
@@ -372,7 +362,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @return Response|Application|ResponseFactory
      */
     public function saveOnboardingHistoryForCoach(Request $request): Response|Application|ResponseFactory

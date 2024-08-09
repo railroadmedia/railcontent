@@ -23,9 +23,6 @@ class CustomerIoService
     }
 
     /**
-     * @param User $user
-     * @param array $customAttributes
-     * @return void
      * @throws Throwable
      */
     public function updateUserAttributes(User $user, array $customAttributes = []): void
@@ -41,10 +38,6 @@ class CustomerIoService
             });
     }
 
-    /**
-     * @param User $user
-     * @return Collection
-     */
     public function getUserProfiles(User $user): Collection
     {
         return Customer::query()
@@ -104,11 +97,6 @@ class CustomerIoService
         );
     }
 
-    /**
-     * @param User $user
-     * @param string $brand
-     * @param array $data
-     */
     public function syncChargeFailedAttributes(User $user, string $brand, array $data): void
     {
         $attributes = [];

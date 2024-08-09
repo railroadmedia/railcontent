@@ -31,25 +31,16 @@ class FirstActivityPerDay
         $this->dateTimeString = $dateTimeString;
     }
 
-    /**
-     * @return int
-     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
-    /**
-     * @return string
-     */
     public function getBrands(): string
     {
         return $this->brands;
     }
 
-    /**
-     * @return string
-     */
     public function getDateTimeString(): string
     {
         return $this->dateTimeString;

@@ -16,7 +16,6 @@ class MusoraCenterSPAController extends Controller
 
     /**
      * SinglePageController constructor.
-     * @param PermissionService $permissionService
      */
     public function __construct(
         PermissionService $permissionService,

@@ -38,49 +38,31 @@ class SaasquatchUser
         $this->brand = $brand;
     }
 
-    /**
-     * @return int
-     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
-    /**
-     * @return string
-     */
     public function getReferralProgramId(): string
     {
         return $this->referralProgramId[$this->brand];
     }
 
-    /**
-     * @return string
-     */
     public function getReferralCode(): string
     {
         return $this->referralCode;
     }
 
-    /**
-     * @return string
-     */
     public function getReferralLink(): string
     {
         return $this->referralLink;
     }
 
-    /**
-     * @return string
-     */
     public function getBrand(): string
     {
         return $this->brand;
     }
 
-    /**
-     * @param string $brand
-     */
     public function setBrand(string $brand): void
     {
         $this->brand = $brand;

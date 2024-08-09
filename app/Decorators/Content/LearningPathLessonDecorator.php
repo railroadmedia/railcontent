@@ -9,8 +9,6 @@ class LearningPathLessonDecorator extends TypeDecoratorBase
 {
     /**
      * @param Collection|Content[] $contents
-     *
-     * @return Collection
      */
     public function decorate(Collection $contents): Collection
     {

@@ -139,11 +139,6 @@ class UserMembershipFieldsService
      * state of the users membership exactly.
      *
      * @param $userId
-     * @param bool $isLifetime
-     * @param bool $isAMember
-     * @param Carbon|null $membershipExpirationDate
-     * @param bool $ownsPacks
-     * @return string
      */
     public function getAccessLevelName(
         $userId,
@@ -190,7 +185,6 @@ class UserMembershipFieldsService
 
     /**
      * @param $userId
-     * @return bool
      */
     public function isHouseCoach($userId, array $associatedCoaches = null): bool
     {
@@ -206,7 +200,6 @@ class UserMembershipFieldsService
 
     /**
      * @param $userId
-     * @return bool
      */
     public function isCoach($userId, array $associatedCoaches = null): bool
     {
@@ -217,9 +210,6 @@ class UserMembershipFieldsService
         return !empty($associatedCoaches) && array_key_exists($userId, $associatedCoaches);
     }
 
-    /**
-     * @return array
-     */
     public function getCoaches(): array
     {
         $associatedUsers = [];

@@ -15,11 +15,6 @@ use HelpScout\Api\Entity\PagedCollection;
 class HelpScoutService extends HelpScoutServiceBase
 {
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $email
      *
      * @throws Exception
      */
@@ -69,12 +64,6 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @throws Exception
      */
@@ -132,12 +121,6 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @throws Exception
      */
@@ -166,13 +149,6 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
-     * @param Customer $customer
      *
      * @throws Exception
      */
@@ -239,9 +215,7 @@ class HelpScoutService extends HelpScoutServiceBase
     }
 
     /**
-     * @param int $userId
      *
-     * @return Customer
      *
      * @throws Exception
      */
@@ -261,18 +235,12 @@ class HelpScoutService extends HelpScoutServiceBase
         return $customer;
     }
 
-    /**
-     * @return PagedCollection
-     */
     public function getCustomersPage(): PagedCollection
     {
         return $this->client->customers()->list();
     }
 
     /**
-     * @param Customer $customer
-     * @param array $attributes
-     * @param array $brandsAttributesKeys
      *
      * @return PropertyOperation[]|array
      *

@@ -19,11 +19,6 @@ class RevenueCatService
     private ShopifySyncService $shopifySyncService;
     private CustomerIoService $customerIoService;
 
-    /**
-     * @param RevenueCatApiGateway $revenueCatApiGateway
-     * @param ShopifySyncService $shopifySyncService
-     * @param CustomerIoService $customerIoService
-     */
     public function __construct(
         RevenueCatApiGateway $revenueCatApiGateway,
         ShopifySyncService $shopifySyncService,
@@ -48,7 +43,6 @@ class RevenueCatService
      * @param $revenueCatOriginalAppUserId
      * @param null $email
      * @param false $forceCreateNewUser
-     * @return User|null
      * @throws \Exception
      */
     public function syncSubscriber($revenueCatOriginalAppUserId, $email = null, bool $forceCreateNewUser = false): ?User
@@ -131,8 +125,6 @@ class RevenueCatService
      * @param null $value
      * @param $appUserId
      * @param false $createIfNotExists
-     * @param array $aliases
-     * @return User|null
      */
     public function getUser($value, $appUserId, bool $createIfNotExists = false, array $aliases = []): ?User
     {
@@ -174,8 +166,6 @@ class RevenueCatService
      * @param $userId
      * @param $productIdentifier
      * @param $platform
-     * @param string $app
-     * @return string
      */
     public function revoke(
         $userId,
@@ -247,10 +237,7 @@ class RevenueCatService
     }
 
     /**
-     * @param string $type
      * @param $event
-     * @param mixed $productId
-     * @return Collection
      */
     public function getMusoraProducts(string $type, $event, mixed $productId): Collection
     {

@@ -23,10 +23,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $id
-     * @param bool $includeExternalAttributes
-     * @return Customer
      * @throws Exception
      */
     public function getCustomerById(string $accountName, string $id, bool $includeExternalAttributes = true): Customer
@@ -70,10 +66,7 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $userId
      * @param bool $includeExternalAttributes
-     * @return Customer
      * @throws Exception
      */
     public function getCustomerByUserId(string $accountName, string $userId): Customer
@@ -119,11 +112,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $userId
-     * @param int $limit
-     * @param int $amountToSkip
-     * @return Customer
      * @throws Exception
      */
     public function getCustomerEventsByUserId(string $accountName, string $userId, int $limit = 25, int $amountToSkip = 0): Customer
@@ -160,10 +148,6 @@ class CustomerIoService
      *
      * @param $email
      * @param $accountName
-     * @param array $customAttributes
-     * @param string|null $id
-     * @param integer|null $userId
-     * @param integer|null $createdAtTimestamp
      * @throws Exception
      * @throws Throwable
      */
@@ -234,10 +218,7 @@ class CustomerIoService
      *
      * @param $uuid
      * @param $accountName
-     * @param array $customAttributes
      * @param null $email
-     * @param integer|null $userId
-     * @param integer|null $createdAtTimestamp
      * @return mixed
      * @throws Exception
      */
@@ -352,10 +333,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param Customer $oldCustomer
-     * @param Customer $newCustomer
-     * @return void
      * @throws Exception
      */
     public function updateCustomerIdentifier(
@@ -471,9 +448,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $email
-     * @param string $formNameToProcess
-     * @param array $requestParams
      * @return array|void
      * @throws Exception
      */
@@ -549,10 +523,8 @@ class CustomerIoService
      * @param $uuid
      * @param $accountName
      * @param $eventName
-     * @param array $eventData
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return bool
      * @throws Exception
      */
     public function createEvent(
@@ -579,13 +551,8 @@ class CustomerIoService
     }
 
     /**
-     * @param string|null $email
-     * @param string|null $uuid
-     * @param string $accountName
-     * @param string $eventName
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function createEventForEmailOrId(
@@ -651,13 +618,6 @@ class CustomerIoService
     }
 
     /**
-     * @param integer $userId
-     * @param string $accountName
-     * @param string $eventName
-     * @param array $eventData
-     * @param string|null $eventType
-     * @param integer|null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function createEventForUserId(
@@ -704,14 +664,12 @@ class CustomerIoService
 
     /**
      * @param string $uuid
-     * @param string $accountName
      * @param string $eventName
      * @param $customerIoTransactionalMessageId
      * @param $customerEmail
      * @param $customerId
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return bool
      * @throws Exception
      */
     public function sendTransactionalEmail(
@@ -754,7 +712,6 @@ class CustomerIoService
 
     /**
      * @param $accountName
-     * @return array
      * @throws Exception
      */
     public function getAccountConfigData($accountName): array
@@ -781,7 +738,6 @@ class CustomerIoService
      * @param $accountName
      * @param $deviceData
      * @param null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function syncDeviceForUserId(
@@ -822,9 +778,6 @@ class CustomerIoService
     /**
      * Note, secondary customer row is always hard-deleted. It's not soft deleted.
      *
-     * @param string $accountName
-     * @param string $primaryCustomerId
-     * @param string $secondaryCustomerId
      * @return false|Customer
      * @throws Exception
      */

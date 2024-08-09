@@ -252,9 +252,6 @@ class NavigationService
         return [];
     }
 
-    /**
-     * @return string
-     */
     public static function getSidebarSectionsJson(): string
     {
         return json_encode(self::getSidebarSections());
@@ -281,9 +278,6 @@ class NavigationService
         ];
     }
 
-    /**
-     * @return string
-     */
     public static function getUserDropDownLinksJson(): string
     {
         return json_encode(self::getUserDropDownLinks());

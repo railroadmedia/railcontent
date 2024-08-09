@@ -26,9 +26,6 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
 
     /**
      * Create a new user, setting their needs_logout attribute as required.
-     *
-     * @param  bool  $needsLogout
-     * @return User
      */
     private function createUser(bool $needsLogout): User
     {

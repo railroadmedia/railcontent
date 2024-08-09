@@ -30,8 +30,6 @@ class EmailChangeController extends Controller
 
     /**
      * EmailChangeController constructor.
-     *
-     * @param Hasher $hasher
      */
     public function __construct(
         Hasher $hasher,
@@ -41,9 +39,6 @@ class EmailChangeController extends Controller
 
     /**
      * Perform an email change request action.
-     *
-     * @param Request $request
-     * @return RedirectResponse
      */
     public function request(Request $request): RedirectResponse
     {
@@ -149,8 +144,6 @@ class EmailChangeController extends Controller
     /**
      * Perform an email change confirmation action.
      * @bodyParam code required
-     * @param Request $request
-     * @return RedirectResponse
      * @throws ValidationException
      */
     public function confirm(Request $request): RedirectResponse
@@ -231,7 +224,6 @@ class EmailChangeController extends Controller
      * Generates a token
      * Similar with Illuminate\Auth\Passwords\DatabaseTokenRepository::createNewToken
      *
-     * @param string $hash
      * @return string
      */
     public function createNewToken(

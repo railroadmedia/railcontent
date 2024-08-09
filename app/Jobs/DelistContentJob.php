@@ -23,9 +23,6 @@ class DelistContentJob implements ShouldQueue
     use Batchable;
 
 
-    /**
-     * @param array $contentIdsToDelist
-     */
     public function __construct(private array $contentIdsToDelist, private string $status)
     {
     }
@@ -54,8 +51,6 @@ class DelistContentJob implements ShouldQueue
 
     /**
      * The job failed to process.
-     *
-     * @param Throwable $exception
      */
     public function failed(
         Throwable $exception

@@ -6,10 +6,6 @@ use Railroad\Railcontent\Support\Collection;
 
 class RudimentDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         // todo: impliment changes

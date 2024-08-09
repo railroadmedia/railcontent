@@ -22,9 +22,6 @@ class SyncUsersProductPermissionsQueryJob implements ShouldQueue
 
     private array $userIdsToSync;
 
-    /**
-     * @param array $userIdsToSync
-     */
     public function __construct(array $userIdsToSync)
     {
         $this->userIdsToSync = $userIdsToSync;

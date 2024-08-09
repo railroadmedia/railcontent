@@ -175,7 +175,6 @@ class Filters20242 extends Command
     }
 
     /**
-     * @param string|null $contentId
      * @param \Illuminate\Database\Eloquent\Model|\App\Modules\Content\Builders\ContentBuilder|object $content
      */
     private function prepareDatabase(

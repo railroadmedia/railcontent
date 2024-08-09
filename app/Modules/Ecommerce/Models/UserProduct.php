@@ -59,9 +59,6 @@ class UserProduct extends Model
         return $query->where('user_id', '=', $userId);
     }
 
-    /**
-     * @return Product
-     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

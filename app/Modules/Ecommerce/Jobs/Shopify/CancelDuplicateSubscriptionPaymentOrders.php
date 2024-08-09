@@ -71,11 +71,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     /**
      * Execute the job
-     *
-     * @param  Shopify  $shopify
-     * @param  UserAccessPermissionsService  $userAccessPermissionsService
-     * @param  ContentPermissionsService  $contentPermissionsService
-     * @return void
      */
     public function handle(
         Shopify $shopify,
@@ -135,8 +130,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
     /**
      * Cancel any duplicate orders in Shopify for payments in this job.
      * This will cancel any fulfillments, refund any payments, and then finally cancel the order.
-     *
-     * @return void
      */
     private function cancelDuplicateOrders(): void
     {
@@ -257,9 +250,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     /**
      * Get the extra subscription payments with the given payment id
-     *
-     * @param  int  $paymentId
-     * @return EloquentCollection
      */
     private function getExtraSubscriptionPayments(int $paymentId): EloquentCollection
     {
@@ -274,11 +264,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     /**
      * Cancel all fulfillments in Shopify, in the given fulfillments data retrieved from Shopify through getOrder
-     *
-     * @param  array  $fulfillmentsData
-     * @param  int  $shopifyOrderId
-     * @param  int  $paymentId
-     * @return void
      */
     private function cancelFulfillments(array $fulfillmentsData, int $shopifyOrderId, int $paymentId): void
     {
@@ -325,12 +310,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     /**
      * Go through the refund process for all payments on the given Shopify Order
-     *
-     * @param  array  $orderData
-     * @param  int  $orderShopifyId
-     * @param  int  $paymentId
-     * @param  int  $subscriptionPaymentId
-     * @return void
      */
     private function refundPayments(
         array $orderData,
@@ -418,10 +397,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     /**
      * Find the User Access Permissions related to the given Shopify Order and delete each entry
-     *
-     * @param  SubscriptionPayment  $subscriptionPayment
-     * @param  array  $shopifyOrderAttributes
-     * @return void
      */
     private function deleteUserAccessPermissions(
         SubscriptionPayment $subscriptionPayment,
@@ -488,7 +463,6 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
     /**
      * Delete the Shopify Order
      *
-     * @param  int  $shopifyOrderId
      * @return bool whether the order was deleted
      */
     private function deleteOrder(int $shopifyOrderId): bool

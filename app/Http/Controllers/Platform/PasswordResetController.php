@@ -10,8 +10,6 @@ class PasswordResetController extends BaseController
 {
     /**
      * Show the application's reset password form.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function showResetForm(Request $request): View
     {

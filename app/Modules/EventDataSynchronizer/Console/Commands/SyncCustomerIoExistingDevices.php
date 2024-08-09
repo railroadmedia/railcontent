@@ -33,8 +33,6 @@ class SyncCustomerIoExistingDevices extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
@@ -90,8 +88,6 @@ class SyncCustomerIoExistingDevices extends Command
 
     /**
      * Get the console command arguments.
-     *
-     * @return array
      */
     protected function getArguments(): array
     {
@@ -100,8 +96,6 @@ class SyncCustomerIoExistingDevices extends Command
 
     /**
      * Get the console command options.
-     *
-     * @return array
      */
     protected function getOptions(): array
     {

@@ -17,7 +17,6 @@ class RoutingDecorator extends TypeDecoratorBase
     private static $parents = [];
 
     /**
-     * @param Collection $contents
      * @return mixed|Collection
      */
     public function decorate(Collection $contents)

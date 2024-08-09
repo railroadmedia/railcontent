@@ -6,8 +6,6 @@ class NotFoundException extends ReferralException
 {
     /**
      * NotFoundException constructor.
-     *
-     * @param string $message
      */
     public function __construct(string $message, $code = 404)
     {

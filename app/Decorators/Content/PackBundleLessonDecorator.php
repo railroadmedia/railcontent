@@ -6,10 +6,6 @@ use Railroad\Railcontent\Support\Collection;
 
 class PackBundleLessonDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'pack-bundle-lesson');

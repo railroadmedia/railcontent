@@ -11,8 +11,6 @@ class FeaturePreset extends Preset
 {
     /**
      * Execute the preset configuration
-     *
-     * @return void
      */
 
 

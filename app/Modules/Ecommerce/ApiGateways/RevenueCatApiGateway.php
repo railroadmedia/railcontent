@@ -113,8 +113,6 @@ class RevenueCatApiGateway
      * @param $platform
      * @param null $localPrice
      * @param null $currency
-     * @param string $app
-     * @return string
      */
     public function sendRequest(
         $receipt,
@@ -167,10 +165,8 @@ class RevenueCatApiGateway
      * @param $platform
      * @param null $localPrice
      * @param null $currency
-     * @param string $app
      * @param null $userEmail
      * @param null $userId
-     * @return string
      */
     public function purchase(
         $receipt,
@@ -224,8 +220,6 @@ class RevenueCatApiGateway
      * @param $userId
      * @param $attributes
      * @param $platform
-     * @param string $app
-     * @return string
      */
     public function updateSubscriberAttribute($userId, $attributes, $platform, string $app = 'Musora'): string
     {

@@ -321,11 +321,6 @@ class RevenueCatController extends Controller
         return response()->json();
     }
 
-    /**
-     * @param float $price
-     * @param float $taxPercentage
-     * @return float|null
-     */
     private function calculateTaxAmount(float $price, float $taxPercentage): ?float
     {
         if (!$taxPercentage) {
@@ -337,8 +332,6 @@ class RevenueCatController extends Controller
 
     /**
      * @param $appUserId
-     * @param string $productId
-     * @return mixed
      * @throws \Exception
      */
     private function getCurrentRevenueCatSubscription($appUserId, string $productId): mixed
@@ -353,8 +346,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param User $user
-     * @param string $type
      * @param $musoraProducts
      * @return Subscription|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
      */
@@ -414,8 +405,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function signupRevenuecat(Request $request): JsonResponse
@@ -437,8 +426,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function purchaseIOS(Request $request): JsonResponse
@@ -530,8 +517,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function purchaseGoogle(Request $request): JsonResponse
@@ -622,7 +607,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\JsonResponse|void
      * @throws \Exception
      */
@@ -690,8 +674,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function restoreIOS(Request $request): JsonResponse
@@ -757,11 +739,6 @@ class RevenueCatController extends Controller
         }
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     *
-     */
     public function signupIOS(Request $request): JsonResponse
     {
         Log::info('Attempting to apple signup for receipt: ' . $request->get('receipt'));
@@ -798,10 +775,6 @@ class RevenueCatController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function signupGoogle(Request $request): JsonResponse
     {
         Log::info('Attempting to google signup  ');
@@ -885,7 +858,6 @@ class RevenueCatController extends Controller
     /**
      * @param $entitlements
      * @param $subscriptions
-     * @return \Illuminate\Http\JsonResponse
      */
     private function checkSignupRestrictions(
         $entitlements,

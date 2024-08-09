@@ -67,25 +67,16 @@ class UTMLinks
         $this->utmMedium = $utmMedium;
     }
 
-    /**
-     * @return int
-     */
     public function getUserId(): int
     {
         return $this->userId;
     }
 
-    /**
-     * @return string
-     */
     public function getBrand(): string
     {
         return $this->brand;
     }
 
-    /**
-     * @return string
-     */
     public function getDateTimeString(): string
     {
         return $this->dateTimeString;

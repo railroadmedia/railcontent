@@ -18,8 +18,6 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
 
     /**
      * RedirectToUPController constructor.
-     *
-     * @param ContentService $contentService
      */
     public function __construct(
         ContentService $contentService

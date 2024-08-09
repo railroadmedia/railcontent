@@ -17,9 +17,6 @@ class EncryptCookies extends Middleware
 
     /**
      * We need custom functionality to include any cookie that looks like user_X_last_used_brand
-     *
-     * @param  string  $name
-     * @return bool
      */
     public function isDisabled(string $name): bool
     {

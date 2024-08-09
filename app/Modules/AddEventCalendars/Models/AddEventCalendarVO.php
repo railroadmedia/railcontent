@@ -95,9 +95,6 @@ class AddEventCalendarVO
         $this->internalContentDescription = $internalContentDescription;
     }
 
-    /**
-     * @return string
-     */
     public function getExternalId(): string
     {
         return $this->externalId;
@@ -105,7 +102,6 @@ class AddEventCalendarVO
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string|null
      */
     public function getExternalCustomDataArray(): ?string
     {
@@ -114,7 +110,6 @@ class AddEventCalendarVO
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string|null
      */
     public function getExternalSyncId(): ?string
     {
@@ -123,24 +118,17 @@ class AddEventCalendarVO
 
     /**
      * The syncId is used to figure out which internal content id or data correlates to which calendar from the API.
-     * @return string
      */
     public function getInternalSyncId(): string
     {
         return self::generateSyncId($this->internalContentId, $this->internalContentBrand, $this->internalContentType);
     }
 
-    /**
-     * @return string
-     */
     public function getTitleToSync(): string
     {
         return ucwords($this->internalContentBrand) . ' - ' . $this->internalContentTitle;
     }
 
-    /**
-     * @return string
-     */
     public function getDescriptionToSync(): string
     {
         // todo: prepend this with a link to the content catalogue page, with something like this:
@@ -161,9 +149,6 @@ class AddEventCalendarVO
         return $this->internalContentDescription;
     }
 
-    /**
-     * @return array
-     */
     public function getCustomDataArrayToSync(): array
     {
         return [
@@ -174,17 +159,11 @@ class AddEventCalendarVO
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function apiCreateRequired(): bool
     {
         return empty($this->externalId);
     }
 
-    /**
-     * @return bool
-     */
     public function apiUpdateRequired(): bool
     {
         return ($this->getTitleToSync()) != $this->externalTitle ||
@@ -193,7 +172,6 @@ class AddEventCalendarVO
 
     /**
      * Should only be true if the getExternalCustomDataArray matches the passed in args but the internal content id is null? TBD
-     * @return bool
      */
     public function apiDeleteRequired(): bool
     {
@@ -204,7 +182,6 @@ class AddEventCalendarVO
      * @param $contentId
      * @param $contentBrand
      * @param $contentType
-     * @return string
      */
     public static function generateSyncId($contentId, $contentBrand, $contentType): string
     {

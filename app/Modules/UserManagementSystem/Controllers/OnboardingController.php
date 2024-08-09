@@ -32,10 +32,6 @@ class OnboardingController extends Controller
         $this->middleware('deprecated:2023-10-16');
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function gears(Request $request): Response
     {
         $request->validate(['data' => 'required']);
@@ -64,10 +60,6 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function topics(Request $request): Response
     {
         $request->validate([
@@ -98,10 +90,6 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function genres(Request $request): Response
     {
         $request->validate([
@@ -131,10 +119,6 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function experience(Request $request): Response
     {
         $request->validate([
@@ -167,7 +151,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @throws \Throwable
      */
     public function goals(Request $request): Response
@@ -202,10 +185,6 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function getUserOnboardingInformation(Request $request): Response
     {
         try {
@@ -246,10 +225,6 @@ class OnboardingController extends Controller
         return response(null, 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function skipAccountSetup(Request $request): Response
     {
         $request->validate([
@@ -276,7 +251,6 @@ class OnboardingController extends Controller
 
     /**
      *
-     * @param Request $request
      * @throws \Exception
      */
     public function saveOnboardingHistoryForInstrument(Request $request): Response
@@ -298,10 +272,6 @@ class OnboardingController extends Controller
         return response("History data for instrument has been saved.", 200);
     }
 
-    /**
-     *
-     * @param Request $request
-     */
     public function saveOnboardingHistoryForCoach(Request $request): Response
     {
         try {

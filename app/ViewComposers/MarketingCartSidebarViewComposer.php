@@ -15,8 +15,6 @@ class MarketingCartSidebarViewComposer
 
     /**
      * SalesNavComposer constructor.
-     *
-     * @param CartService $cartService
      */
     public function __construct(CartService $cartService)
     {
@@ -25,9 +23,6 @@ class MarketingCartSidebarViewComposer
 
     /**
      * Add cart data to all sales pages
-     *
-     * @param  View  $view
-     * @return void
      */
     public function compose(View $view): void
     {

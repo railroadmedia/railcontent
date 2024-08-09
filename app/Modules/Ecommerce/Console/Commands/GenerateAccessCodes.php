@@ -38,7 +38,6 @@ class GenerateAccessCodes extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws NonUniqueResultException
      */
     public function handle(ProductService $productService): int

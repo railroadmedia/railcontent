@@ -20,10 +20,6 @@ class WorkoutsPageController extends BaseController
     private CarouselService $carouselService;
     private UserContentProgressService $userContentProgressService;
 
-    /**
-     * @param ContentService $contentService
-     * @param CarouselService $carouselService
-     */
     public function __construct(
         ContentService $contentService,
         CarouselService $carouselService,

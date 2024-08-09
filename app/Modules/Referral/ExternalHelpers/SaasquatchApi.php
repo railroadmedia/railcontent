@@ -39,9 +39,7 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
@@ -62,9 +60,7 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -83,10 +79,7 @@ class SaasquatchApi
 
 
     /**
-     * @param  int  $userId
-     * @param  string  $brand
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -103,9 +96,7 @@ class SaasquatchApi
 
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -136,7 +127,6 @@ class SaasquatchApi
     }
 
     /**
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
@@ -151,7 +141,6 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -167,9 +156,7 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
@@ -193,7 +180,6 @@ class SaasquatchApi
     /**
      * @param $userId
      * @param $referralCode
-     * @return object
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
@@ -209,12 +195,7 @@ class SaasquatchApi
     }
 
     /**
-     * @param  string  $method
-     * @param  string  $path
-     * @param  array  $requestJsonBody
-     * @param  string  $requestBody
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException

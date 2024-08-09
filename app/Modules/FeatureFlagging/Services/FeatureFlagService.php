@@ -18,7 +18,6 @@ class FeatureFlagService
      * @param array|string|null $allow_filter - Array or comma separated values for different pass-filters to apply to this feature
      * @param array|string|null $block_filter - Array or comma separated values for different block-filters to apply to this feature
      * @param array|string|null $userid_list -- Array or comma separated values for user ids
-     * @return Feature
      */
     public function addFeature(string $name, string $active_at = null, string $description = null, array|string $allow_filter = null, array|string $block_filter = null, array|string $userid_list = null): Feature
     {
@@ -37,7 +36,6 @@ class FeatureFlagService
     /**
      * @param int $id - Id of the feature to update
      * @param array $attributesToUpdate - value array of columns to update. Array values will be transformed to comma separated strings
-     * @return void
      */
     public function editFeature(int $id, array $attributesToUpdate): void
     {
@@ -55,7 +53,6 @@ class FeatureFlagService
      * @param string $name - Human readable name of Experiment
      * @param string|null $default_value - default string value to return if no branch selected, or experiment is disabled
      * @param bool $enabled - Toggle if experiment should use default values, or branch
-     * @return Experiment
      */
     public function addExperiment(string $name, string $default_value = null, bool $enabled = true): Experiment
     {

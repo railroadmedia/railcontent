@@ -11,10 +11,6 @@ class LiveEventDecorator extends TypeDecoratorBase
     public static $skip = false;
     public const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
 
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->whereIn('type', config('railcontent.liveContentTypes', []));

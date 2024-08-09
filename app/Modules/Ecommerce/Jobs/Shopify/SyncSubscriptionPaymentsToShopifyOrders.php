@@ -91,8 +91,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Create a ShopifySync log, if we're executing
-     *
-     * @return ShopifySync|null
      */
     protected function createSyncLogIfExecuting(): ?ShopifySync
     {
@@ -120,10 +118,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Execute the console command.
-     *
-     * @param  Shopify  $shopify
-     * @param  TaxService  $taxService
-     * @return void
      */
     public function handle(
         Shopify $shopify,
@@ -197,7 +191,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
      * Perform the sync action on each subscription payment in the collection
      *
      * @param  Collection<SubscriptionPayment>  $subscriptionPayments
-     * @return void
      */
     private function loopSync(Collection $subscriptionPayments): void
     {
@@ -235,7 +228,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Sync the syncSubscriptionPayment up to Shopify as an order
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
      * @return bool whether the order was synced or not
      */
     private function syncSubscriptionPayment(SubscriptionPayment $subscriptionPayment): bool
@@ -422,8 +414,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param  SubscriptionPayment  $subscriptionPayment
-     * @return array
      * @throws Exception
      */
     private function createOrderData(SubscriptionPayment $subscriptionPayment): array
@@ -636,9 +626,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Get the value to use for the given payment's source
-     *
-     * @param  Payment  $payment
-     * @return ShopifyPaymentSourceEnum
      */
     private function getPaymentSourceMetafieldValue(Payment $payment): ShopifyPaymentSourceEnum
     {
@@ -652,9 +639,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Build the array of the taxes data for the subscription's line item
      *
-     * @param  Subscription  $subscription
-     * @param  Address|null  $address
-     * @return array
      * @throws Exception
      */
     protected function getTaxesData(Subscription $subscription, ?Address $address): array
@@ -694,9 +678,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Get the payment for this SubscriptionPayment, and send the data to Shopify to create a payment transaction,
      * recording the result's shopify_id
-     *
-     * @param  SubscriptionPayment  $subscriptionPayment
-     * @return void
      */
     private function sendPaymentsToShopify(SubscriptionPayment $subscriptionPayment): void
     {
@@ -769,9 +750,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Get the Fulfillment Order Resource from Shopify, for the given Shopify Order ID
-     *
-     * @param  int  $orderShopifyId
-     * @return ApiResource|null
      */
     private function getFulfillmentOrderResource(int $orderShopifyId): ?ApiResource
     {
@@ -791,9 +769,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
     /**
      * Handle fulfilling an order item in Shopify for a digital product.
      *
-     * @param  int  $fulfillmentOrderId
-     * @param  int  $fulfillmentOrderLineItemId
-     * @param  int  $quantity
      * @return array<array> array of result arrays
      */
     private function fulfillDigitalProduct(
@@ -837,8 +812,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Print out the results in an Info log
-     *
-     * @return void
      */
     protected function printResults(): void
     {
@@ -891,9 +864,6 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
 
     /**
      * Finish the sync log and store the Shopify IDs
-     *
-     * @param  Collection  $shopifyIds
-     * @return void
      */
     protected function finishSyncLogIfExecuting(Collection $shopifyIds): void
     {

@@ -17,7 +17,6 @@ class PlaylistItemDecorator extends TypeDecoratorBase
     private static $noAccessMessages = [];
 
     /**
-     * @param Collection $contents
      * @return mixed|Collection
      */
     public function decorate(Collection $contents)
@@ -363,9 +362,6 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         return $this->mergeDecorated($contents, $contentsOfType);
     }
 
-    /**
-     * @return ConnectionInterface
-     */
     private function railcontentDB(): ConnectionInterface
     {
         return DB::connection(config('railcontent.database_connection_name'));

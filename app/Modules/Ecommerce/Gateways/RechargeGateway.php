@@ -275,8 +275,6 @@ class RechargeGateway
     /**
      * Get the profile URL for the given Recharge customer ID
      *
-     * @param int $customerId
-     * @return string
      * @throws Exception
      */
     public function getCustomerProfile(int $customerId): string
@@ -289,9 +287,6 @@ class RechargeGateway
 
     /**
      * Get the customer from Recharge, for the given Shopify ID
-     *
-     * @param int $shopifyCustomerId
-     * @return Customer|null
      */
     public function getRechargeCustomer(int $shopifyCustomerId): ?Customer
     {
@@ -347,8 +342,6 @@ class RechargeGateway
     /**
      * Gets the default payment method for a Recharge customer
      *
-     * @param int $rechargeCustomerId
-     * @return null|PaymentMethod
      * @throws Exception
      */
     public function getCustomerDefaultPaymentMethod(int $rechargeCustomerId): ?PaymentMethod
@@ -369,7 +362,6 @@ class RechargeGateway
     /**
      * Update the customer in Recharge, identified by the given Shopify ID, with the given array of values
      *
-     * @param int $shopifyCustomerId
      * @param array $updateValues the key-value array of data to update. e.g. ["email" => "foo@bar.baz", "first_name" => "Foo"]
      * @return bool success or fail in updating all given values
      * @throws Exception
@@ -541,12 +533,7 @@ class RechargeGateway
      * Get all subscriptions with the given status that were
      * created within the date range between createdAtMin and createdAtMax.
      *
-     * @param string $status
-     * @param CarbonInterface $createdAtMin
-     * @param CarbonInterface $createdAtMax
-     * @param int $limit
      *
-     * @return Collection
      * @throws Exception
      */
     public function getSubscriptionsByStatus(

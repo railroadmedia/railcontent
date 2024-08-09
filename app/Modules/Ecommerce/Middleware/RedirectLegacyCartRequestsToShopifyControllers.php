@@ -118,7 +118,6 @@ class RedirectLegacyCartRequestsToShopifyControllers
 
     /**
      * Removes subdomain from url if it exists: converts 'www.musora.com' to 'musora.com'
-     * @return string
      */
     private function getHostDomainFromFullDomain($hostWithSubdomain): string
     {

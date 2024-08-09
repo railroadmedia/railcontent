@@ -48,8 +48,6 @@ class Webhook extends Model
 
     /**
      * Process any WebhookJob or WebhookChildJob objects to update the Webhook.job_detail
-     * @param JobProcessed $event
-     * @return void
      */
     public static function updateJobDetailsIfWebhookJob(JobProcessed $event): void
     {
@@ -69,7 +67,6 @@ class Webhook extends Model
      * This has an unfortunate race condition built in that I (Adrian) didn't know how to get around. Locks don't work like I'm used to
      * @param string $name - name of Job
      * @param bool $set - value to set job_details entry to
-     * @return void
      */
     private function setAndSaveJobDetails(string $name, bool $set): void
     {

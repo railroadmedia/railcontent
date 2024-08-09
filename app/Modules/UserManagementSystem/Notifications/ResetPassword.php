@@ -12,7 +12,6 @@ class ResetPassword extends ResetPasswordBase
      * Build the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable): MailMessage
     {
@@ -25,9 +24,6 @@ class ResetPassword extends ResetPasswordBase
 
     /**
      * Get the reset password notification mail message for the given URL.
-     *
-     * @param string $url
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     protected function buildMailMessage(string $url): MailMessage
     {

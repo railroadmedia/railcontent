@@ -12,7 +12,6 @@ class AuthenticationServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      *
-     * @return void
      * @throws BindingResolutionException
      */
     public function boot(): void
@@ -52,8 +51,6 @@ class AuthenticationServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {

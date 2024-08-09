@@ -36,8 +36,6 @@ class SalesController extends BaseController
 
     /**
      * MarketingController constructor.
-     *
-     * @param  AccessCodeService $accessCodeService
      */
     public function __construct(
         AccessCodeService $accessCodeService

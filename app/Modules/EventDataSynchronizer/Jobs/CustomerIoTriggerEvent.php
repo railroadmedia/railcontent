@@ -60,7 +60,6 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
      * @throws \Throwable
      */
     public function handle(
@@ -81,8 +80,6 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

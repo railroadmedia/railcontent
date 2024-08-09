@@ -41,8 +41,6 @@ class SyncProductsToShopifyDispatcher extends Command
     /**
      * Execute the console command.
      *
-     * @param  Shopify  $shopify
-     * @return int
      * @throws Throwable
      */
     public function handle(
@@ -162,8 +160,6 @@ class SyncProductsToShopifyDispatcher extends Command
 
     /**
      * Get the date and time that products were last synced up to Shopify
-     *
-     * @return Carbon
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
@@ -178,8 +174,6 @@ class SyncProductsToShopifyDispatcher extends Command
 
     /**
      * Get the optional override of when this entity was last synced to Shopify
-     *
-     * @return Carbon|null
      */
     protected function getLastSyncAtOverride(): null|Carbon
     {

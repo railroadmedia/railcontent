@@ -394,9 +394,7 @@ class HomePageController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $brand
-     * @return string
      */
     public function homePackOnly(Request $request, $brand): View
     {
@@ -430,8 +428,6 @@ class HomePageController extends BaseController
 
     /**
      * singeo only
-     *
-     * @return ContentFilterResultsEntity
      */
     private function getCoursesContent(): ContentFilterResultsEntity
     {
@@ -459,9 +455,6 @@ class HomePageController extends BaseController
         ))->toResponseRawJson();
     }
 
-    /**
-     * @return array
-     */
     private function getHotForumTopics(): array
     {
         PostRepository::$blockedUserIds =
@@ -547,9 +540,6 @@ class HomePageController extends BaseController
         ];
     }
 
-    /**
-     * @return array
-     */
     private function getUserMetrics(): array
     {
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics(user()->id);
@@ -578,9 +568,6 @@ class HomePageController extends BaseController
         ];
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     private function getAllRecommentations(): ContentFilterResultsEntity
     {
         return $this->contentService->getRecommendedContent(
@@ -590,9 +577,6 @@ class HomePageController extends BaseController
         );
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     private function getNewContents(): ContentFilterResultsEntity
     {
         ContentRepository::$availableContentStatues = ['published'];
@@ -621,9 +605,6 @@ class HomePageController extends BaseController
     }
 
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     private function getWorkoutsContents(): ContentFilterResultsEntity
     {
         $oldFutureContent = ContentRepository::$pullFutureContent;
@@ -645,9 +626,6 @@ class HomePageController extends BaseController
         return $workouts;
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     public function getUsersStartedContent(): ContentFilterResultsEntity
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
@@ -665,9 +643,6 @@ class HomePageController extends BaseController
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     public function getUsersList(): ContentFilterResultsEntity
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(

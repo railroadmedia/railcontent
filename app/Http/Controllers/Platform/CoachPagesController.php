@@ -47,8 +47,6 @@ class CoachPagesController extends Controller
 
     /**
      * CourseController constructor.
-     *
-     * @param ContentService $contentService
      */
     public function __construct(
         ContentService $contentService,
@@ -63,7 +61,6 @@ class CoachPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|Factory|Application|View
      * @throws \Exception
      */
@@ -237,7 +234,6 @@ class CoachPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $coachSlug
      * @return Factory|Application|View
      */
@@ -354,7 +350,6 @@ class CoachPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $lessonType
      * @param $lessonId
      * @param bool $redirectToFirstChild

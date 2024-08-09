@@ -56,16 +56,6 @@ class ContentPagesController extends BaseController
     private ArtistService $artistService;
     private GenreService $genreService;
 
-    /**
-     * @param ContentService $contentService
-     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
-     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
-     * @param RailcontentURLProvider $railcontentURLProvider
-     * @param FullTextSearchService $fullTextSearchService
-     * @param CalendarService $calendarService
-     * @param ContentFollowsService $contentFollowsService
-     * @param ResourceDecorator $resourceDecorator
-     */
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
@@ -1287,9 +1277,6 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
     private function getUsersStartedRoutinesContent(): ContentFilterResultsEntity
     {
         $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
@@ -1309,9 +1296,7 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $contentId
-     * @return RedirectResponse
      */
     public function jumpToContentId(
         Request $request,
@@ -1399,9 +1384,7 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $contentId
-     * @return RedirectResponse
      */
     public function jumpToContinueContent(
         Request $request,
@@ -1431,7 +1414,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -1471,7 +1453,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function newLessonsPage(Request $request): View
@@ -1515,7 +1496,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Mixed
      */
     public function recommendedLessons(Request $request)
@@ -1600,7 +1580,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return mixed|Collection|null
      */
     private function getListLessionsFromRequest(Request $request)
@@ -1628,10 +1607,6 @@ class ContentPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\View
-     */
     public function schedule(Request $request): View
     {
         $fullTimezoneString = $this->calendarService->getTimezone($request);
@@ -1689,7 +1664,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function subscribedContent(Request $request): View
@@ -1734,7 +1708,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $contentId
@@ -1890,7 +1863,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function artists(Request $request): View

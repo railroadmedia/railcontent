@@ -6,11 +6,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class HelpScoutSyncService
 {
-    /**
-     * @param User $user
-     *
-     * @return array
-     */
     public function getUsersAttributes(User $user): array
     {
         return array_merge(
@@ -19,17 +14,6 @@ class HelpScoutSyncService
         );
     }
 
-    /**
-     * @param int $userId
-     * @param string|null $firstName
-     * @param string|null $displayName
-     * @param string|null $country
-     * @param string|null $city
-     * @param string|null $phoneNumber
-     * @param string|null $timezone
-     *
-     * @return array
-     */
     public function getUsersAttributesById(
         int $userId,
         ?string $firstName,
@@ -53,11 +37,6 @@ class HelpScoutSyncService
         );
     }
 
-    /**
-     * @param User $user
-     *
-     * @return array
-     */
     public function getUsersMusoraProfileAttributes(User $user): array
     {
         return [
@@ -71,8 +50,6 @@ class HelpScoutSyncService
 
     /**
      * @param User $user
-     *
-     * @return array
      */
     public function getUsersMembershipAttributes(int $userId): array
     {
@@ -271,9 +248,6 @@ class HelpScoutSyncService
         return $attributes;
     }
 
-    /**
-     * @return array
-     */
     public function getBrandsMembershipAttributesKeys(): array
     {
         $brands = config('event-data-synchronizer.help_scout_sync_brands', []);

@@ -24,8 +24,6 @@ class SetLastUsedBrand
     /**
      * NOTE: this must be set to run AFTER all auth middleware.
      *
-     * @param Request $request
-     * @param Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

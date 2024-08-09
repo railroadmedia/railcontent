@@ -126,9 +126,6 @@ class AddOrderTags extends WebhookChildJob
     /**
      * Check if the given order is a trial start.
      * If the order item was for zero dollars and for a trial membership product, it's a Trial Start.
-     *
-     * @param  Order  $order
-     * @return bool
      */
     private function isTrialStart(Order $order): bool
     {
@@ -153,8 +150,6 @@ class AddOrderTags extends WebhookChildJob
      * Any membership order item for more than zero dollars after that first one
      * (within the first [trialConversionDayLimit] days) is a trial conversion,
      * assuming that first trial order exists.
-     *
-     * @return bool
      */
     protected function isTrialConversion(): bool
     {
@@ -205,9 +200,6 @@ class AddOrderTags extends WebhookChildJob
      * Check if this is a membership renewal order.
      *
      * Any membership subscription payment after the first trial payment.
-     *
-     * @param  bool  $isImportedInitialOrder
-     * @return bool
      */
     protected function isMembershipRenewal(bool $isImportedInitialOrder): bool
     {
@@ -307,9 +299,6 @@ class AddOrderTags extends WebhookChildJob
      * Check if this is an initial order.
      * An initial order is defined as an order that was placed by the customer (or by support) via a deliberate action,
      * i.e. not automated.
-     *
-     * @param  bool  $isMembershipRenewal
-     * @return bool
      */
     protected function isInitialOrder(bool $isMembershipRenewal): bool
     {
@@ -347,8 +336,6 @@ class AddOrderTags extends WebhookChildJob
 
     /**
      * Apply all new tags that are to be added to or removed from this order.
-     *
-     * @return void
      */
     protected function applyTags(): void
     {
@@ -446,9 +433,6 @@ class AddOrderTags extends WebhookChildJob
      *      Initial Order
      *      Membership Renewal
      * If one does have more than one of these tags, we should remove the excess based on the priority order above.
-     *
-     * @param  Collection  $tags
-     * @return Collection
      */
     protected function sanitizeTags(Collection $tags): Collection
     {

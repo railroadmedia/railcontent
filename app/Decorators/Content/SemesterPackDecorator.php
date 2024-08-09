@@ -8,10 +8,6 @@ use Railroad\Railcontent\Support\Collection;
 class SemesterPackDecorator extends TypeDecoratorBase
 {
     public static $skip = false;
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         // url

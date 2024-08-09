@@ -25,7 +25,6 @@ class EmailChange extends Notification
     /**
      * Create a notification instance.
      *
-     * @param  string $token
      * @return void
      */
     public function __construct(string $token)
@@ -48,7 +47,6 @@ class EmailChange extends Notification
      * Build the mail representation of the notification.
      *
      * @param  mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable): MailMessage
     {
@@ -62,8 +60,6 @@ class EmailChange extends Notification
 
     /**
      * Get the reset password notification mail message for the given URL.
-     *
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     protected function buildMailMessage(): MailMessage
     {
@@ -88,9 +84,6 @@ class EmailChange extends Notification
 
     /**
      * Set a callback that should be used when building the notification mail message.
-     *
-     * @param  \Closure $callback
-     * @return void
      */
     public static function toMailUsing(Closure $callback): void
     {

@@ -8,8 +8,6 @@ class SaasquatchException extends ReferralException
 
     /**
      * SaasquatchException constructor.
-     *
-     * @param string $message
      */
     public function __construct(string $message, $code = 503)
     {

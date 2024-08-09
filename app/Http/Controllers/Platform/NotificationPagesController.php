@@ -11,9 +11,6 @@ class NotificationPagesController extends BaseController
 {
     private NotificationService $notificationService;
 
-    /**
-     * @param  NotificationService  $notificationService
-     */
     public function __construct(NotificationService $notificationService)
     {
         $this->notificationService = $notificationService;

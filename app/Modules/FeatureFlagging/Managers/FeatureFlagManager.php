@@ -100,7 +100,6 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     /**
      * @param Collection<Branch> $branches
-     * @param User|null $user
      * @return \Closure|mixed|null
      */
     private function selectBranch(Collection $branches, ?User $user)
@@ -212,7 +211,6 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     /**
      * @param array|string $allow_filter
-     * @return bool
      */
     public static function isValidFilter(array|string|null $allow_filter): bool
     {

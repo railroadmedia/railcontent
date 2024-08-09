@@ -53,12 +53,6 @@ class ForumPagesController extends Controller
     private $categoryRepository;
 
     /**
-     * @param ThreadRepository $threadRepository
-     * @param ThreadReadRepository $threadReadRepository
-     * @param PostRepository $postRepository
-     * @param SearchIndexRepository $searchIndexRepository
-     * @param UserRepository $userRepository
-     * @param CategoryRepository $categoryRepository
      * @param ContentService $contentService
      */
     public function __construct(
@@ -78,7 +72,6 @@ class ForumPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function showCategories(Request $request, $domain, $brand): View
@@ -235,7 +228,6 @@ class ForumPagesController extends Controller
     /**
      * @param $categorySlug
      * @param $categoryId
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function showCategoryThreads(Request $request, $domain, $brand, $categorySlug, $categoryId): View
@@ -384,7 +376,6 @@ class ForumPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function showAllLatestThreads(Request $request, $domain, $brand): View
@@ -435,7 +426,6 @@ class ForumPagesController extends Controller
      * @param $categoryId
      * @param $threadSlug
      * @param $id
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function showThreadPosts(Request $request, $domain, $brand, $categorySlug, $categoryId, $threadSlug, $id): View
@@ -573,10 +563,6 @@ class ForumPagesController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function getSearchResultsJson(Request $request, $domain, $brand): JsonResponse
     {
         $term = trim($request->get('term', null));
@@ -676,7 +662,6 @@ class ForumPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
@@ -751,7 +736,6 @@ class ForumPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $postId
      * @return \Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

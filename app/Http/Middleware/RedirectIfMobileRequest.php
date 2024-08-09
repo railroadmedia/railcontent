@@ -10,11 +10,6 @@ use Illuminate\Support\Arr;
 
 class RedirectIfMobileRequest
 {
-    /**
-     * @param Request $request
-     * @param Closure $next
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
-     */
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->expectsJson()) {

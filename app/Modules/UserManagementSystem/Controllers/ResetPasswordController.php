@@ -26,9 +26,6 @@ class ResetPasswordController extends Controller
 
     /**
      * Reset the given user's password.
-     *
-     * @param Request $request
-     * @return RedirectResponse
      */
     public function resetPasswordWithToken(Request $request): RedirectResponse
     {
@@ -136,8 +133,6 @@ class ResetPasswordController extends Controller
 
     /**
      * Get the broker to be used during password reset.
-     *
-     * @return PasswordBroker
      */
     public function broker(): PasswordBroker
     {

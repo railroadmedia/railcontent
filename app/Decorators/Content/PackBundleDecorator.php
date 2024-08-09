@@ -9,10 +9,6 @@ class PackBundleDecorator extends TypeDecoratorBase
 {
     public static $skip = false;
 
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
     public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'pack-bundle');

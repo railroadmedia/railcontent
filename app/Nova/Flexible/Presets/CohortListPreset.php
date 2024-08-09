@@ -12,8 +12,6 @@ class CohortListPreset extends Preset
 {
     /**
      * Execute the preset configuration
-     *
-     * @return void
      */
     public function handle(Flexible $field): void
     {

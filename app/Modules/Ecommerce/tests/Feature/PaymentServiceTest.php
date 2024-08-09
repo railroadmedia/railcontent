@@ -27,11 +27,6 @@ class PaymentServiceTest extends TestCase
     /**
      * Helper function to create an order with a valid payment using the specified external provider for each
      * amount given
-     *
-     * @param  string|null  $externalProvider
-     * @param  string  $currency
-     * @param  float  ...$amounts
-     * @return Order
      */
     private function createOrder(?string $externalProvider, string $currency, float ...$amounts): Order
     {
@@ -114,11 +109,6 @@ class PaymentServiceTest extends TestCase
     /**
      * Helper function to create a subscription payment with a valid payment in the given amount,
      * using the specified external provider
-     *
-     * @param  string|null  $externalProvider
-     * @param  string  $currency
-     * @param  float  $amount
-     * @return SubscriptionPayment
      */
     private function createSubscriptionPayment(
         ?string $externalProvider,

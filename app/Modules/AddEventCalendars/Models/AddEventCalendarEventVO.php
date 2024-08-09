@@ -73,7 +73,6 @@ class AddEventCalendarEventVO
      * @param $liveEventStartTime
      * @param $liveStreamFeedType
      * @param $description
-     * @return void
      */
     public function setInternalData(
         $brand,
@@ -244,7 +243,6 @@ class AddEventCalendarEventVO
     }
 
     /**
-     * @return Carbon
      * @throws \Exception
      */
     public function getStartTimeToSync(): Carbon
@@ -260,7 +258,6 @@ class AddEventCalendarEventVO
     }
 
     /**
-     * @return Carbon
      * @throws \Exception
      */
     public function getEndTimeToSync(): Carbon

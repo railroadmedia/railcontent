@@ -32,9 +32,6 @@ class HelpScoutUpdateUser implements ShouldQueue
     }
 
     /**
-     * @param  HelpScoutSyncService $helpScoutSyncService
-     * @param  HelpScoutService $helpScoutService
-     * @param  UserService $userService
      *
      * @throws \Throwable
      */
@@ -64,8 +61,6 @@ class HelpScoutUpdateUser implements ShouldQueue
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

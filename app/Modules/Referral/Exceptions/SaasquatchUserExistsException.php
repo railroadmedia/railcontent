@@ -6,8 +6,6 @@ class SaasquatchUserExistsException extends ReferralException
 {
     /**
      * SaasquatchUserExistsException constructor.
-     *
-     * @param string $message
      */
     public function __construct(string $message = 'User already exists', $code = 400)
     {

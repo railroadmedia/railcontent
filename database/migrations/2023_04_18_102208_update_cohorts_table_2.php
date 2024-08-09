@@ -54,8 +54,6 @@ return new class () extends Migration {
 
     /**
      * Run the migrations (separated out for SQLite support)
-     *
-     * @return void
      */
     private function upSqlite(): void
     {

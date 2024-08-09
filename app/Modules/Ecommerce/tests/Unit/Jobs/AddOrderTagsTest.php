@@ -900,7 +900,6 @@ class AddOrderTagsTest extends TestCase
 
     /**
      * Create the
-     * @return void
      * @throws Exception
      */
     private function seedDrumeoMemberships(): void

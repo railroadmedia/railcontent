@@ -111,9 +111,6 @@ class ProfileSettingsPagesController extends BaseController
     private ShopifyAPIService $shopifyAPIService;
     private UserAccessPermissionsService $userAccessPermissionsService;
 
-    /**
-     * @param NotificationSettingsService $notificationSettingsService
-     */
     public function __construct(
         NotificationSettingsService $notificationSettingsService,
         UserSignaturesRepository $userSignaturesRepository,
@@ -155,7 +152,6 @@ class ProfileSettingsPagesController extends BaseController
     // ------------------------------------------ "top-level" public methods -------------------------------------------
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
@@ -172,7 +168,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
@@ -190,7 +185,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
@@ -216,7 +210,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View
      * @throws Throwable
      * @throws ProductNotActiveException
@@ -239,7 +232,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $userId
@@ -292,7 +284,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @return Application|Factory|View
@@ -336,7 +327,6 @@ class ProfileSettingsPagesController extends BaseController
     // -------------------------- private method used by each "top-level" public method above --------------------------
 
     /**
-     * @param string $section
      * @return array|array[]
      */
     private function settingSections(string $section = 'profile')
@@ -393,7 +383,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @return RedirectResponse
      * @throws ORMException
      * @throws Throwable
      */
@@ -506,7 +495,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View|RedirectResponse
      */
     public function submitCancelReason(Request $request)
@@ -595,10 +583,6 @@ class ProfileSettingsPagesController extends BaseController
         return $this->returnRedirect(false);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function acceptPauseOffer(Request $request): RedirectResponse
     {
         $pauseLengthDays = (int)$request->get('pause-length');
@@ -705,10 +689,6 @@ class ProfileSettingsPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function acceptStudentPlanOffer(Request $request): RedirectResponse
     {
         try {
@@ -729,8 +709,6 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
-     * @return RedirectResponse
      * @throws Throwable
      */
     public function acceptSwitchToMonthly(Request $request): RedirectResponse
@@ -893,10 +871,6 @@ class ProfileSettingsPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function acceptGratisAccess(Request $request): RedirectResponse
     {
         $ecommerceUser = $this->userProvider->getCurrentUser();
@@ -953,19 +927,11 @@ class ProfileSettingsPagesController extends BaseController
         return $this->returnRedirect(false);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function declineOfferProceedWithCancel(Request $request): RedirectResponse
     {
         return $this->cancel($request);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function sendHelpEmail(Request $request): RedirectResponse
     {
         try {
@@ -1003,10 +969,6 @@ class ProfileSettingsPagesController extends BaseController
 
     // ---------------------------------- private methods supporting cancellation-ui -----------------------------------
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     private function cancel(Request $request): RedirectResponse
     {
         try {
@@ -1174,7 +1136,6 @@ class ProfileSettingsPagesController extends BaseController
 
     /**
      * @param $userId
-     * @return array
      * @throws ORMException
      */
     private function subscriptionInfo($userId): array
@@ -1218,10 +1179,7 @@ class ProfileSettingsPagesController extends BaseController
     }
 
     /**
-     * @param bool $success
      * @param null $msg
-     * @param string $route
-     * @return RedirectResponse
      */
     private function returnRedirect(
         bool $success = true,
@@ -1240,7 +1198,6 @@ class ProfileSettingsPagesController extends BaseController
 
     /**
      * @param $subscriptionToUpdate
-     * @param string $carbonMethodName
      * @param string|int $carbonMethodParamValue
      * @return Subscription|boolean
      */

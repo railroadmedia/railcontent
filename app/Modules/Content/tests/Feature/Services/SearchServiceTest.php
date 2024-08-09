@@ -44,9 +44,6 @@ class SearchServiceTest extends TestCase
 
     /**
      * Format the string value(s), in the manner done by the SearchService
-     *
-     * @param  string  ...$values
-     * @return string
      */
     private function format(string ...$values): string
     {

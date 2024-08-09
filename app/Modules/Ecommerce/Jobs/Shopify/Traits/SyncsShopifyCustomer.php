@@ -25,10 +25,6 @@ trait SyncsShopifyCustomer
      * create a staged upload with Shopify, send the file to Shopify, and add the
      * next job to poll for the results.
      *
-     * @param array $data
-     * @param ShopifySync|null $shopifySync
-     * @param string $resourceType
-     * @return void
      * @throws Exception
      */
     protected function syncData(array $data, ?ShopifySync $shopifySync, string $resourceType): void
@@ -133,7 +129,6 @@ trait SyncsShopifyCustomer
      * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept for GraphQL
      *
      * @param Collection<Address> $addresses
-     * @return Collection
      */
     protected function cleanUpAddresses(Collection $addresses): Collection
     {
@@ -172,7 +167,6 @@ trait SyncsShopifyCustomer
      * the REST API
      *
      * @param Collection<Address> $addresses
-     * @return Collection
      */
     protected function cleanUpAddressesForRest(Collection $addresses): Collection
     {
@@ -212,9 +206,6 @@ trait SyncsShopifyCustomer
     /**
      * We only want to use certain addresses, and want them ordered to start with the most recent,
      * so filter then sort, and return the addresses.
-     *
-     * @param  Collection  $addresses
-     * @return Collection
      */
     private function filterAndSortAddressesToClean(Collection $addresses): Collection
     {
@@ -231,9 +222,6 @@ trait SyncsShopifyCustomer
 
     /**
      * Get the E.164 formatted phone number for the given user
-     *
-     * @param User $user
-     * @return string|null
      */
     protected function getPhoneNumberForUser(User $user): ?string
     {
@@ -271,7 +259,6 @@ trait SyncsShopifyCustomer
      * Get the E.164 formatted phone number for the collection of customers
      *
      * @param Collection<Customer> $customers
-     * @return string|null
      */
     private function getPhoneNumberForCustomer(Collection $customers): ?string
     {
@@ -312,7 +299,6 @@ trait SyncsShopifyCustomer
      * @author https://www.php.net/manual/en/locale.getdisplayregion.php#119895
      *
      * @param $countryName
-     * @return string|null
      */
     protected function countryNameToISO3166($countryName): ?string
     {
@@ -334,8 +320,6 @@ trait SyncsShopifyCustomer
      * returning the first non-null value retrieved.
      *
      * @param Collection<Customer> $customers
-     * @param string $attributeFunction
-     * @return string|null
      */
     private function getCustomerValueFor(Collection $customers, string $attributeFunction): ?string
     {
@@ -352,7 +336,6 @@ trait SyncsShopifyCustomer
     /**
      * Create the .jsonl file for the given user or customer data
      *
-     * @param string $data
      * @return string the name of the file created
      * @throws Exception
      */
@@ -376,8 +359,6 @@ trait SyncsShopifyCustomer
     /**
      * Get the file's content from storage
      *
-     * @param string $filename
-     * @return string
      * @throws Exception
      */
     protected function getStoredFile(string $filename): string
@@ -405,9 +386,6 @@ trait SyncsShopifyCustomer
 
     /**
      * Get the GraphQL query to perform the bulk operation
-     *
-     * @param string $stagedUploadPath
-     * @return string
      */
     protected function getBulkOperationQuery(string $stagedUploadPath): string
     {
@@ -435,8 +413,6 @@ trait SyncsShopifyCustomer
      * Get the string to pass as the mutation.
      * Use the string to request Shopify return the customer's id, email, metafields, and addresses,
      * as well as returning any errors when attempting the customerCreate mutation.
-     *
-     * @return string
      */
     protected function getMutationString(): string
     {
@@ -464,7 +440,6 @@ trait SyncsShopifyCustomer
      * same email address, and store the shopify_id to link them to the Shopify customer.
      * Use the Shopify customer's addresses to set the shopify_id for our user/customer's addresses as well.
      *
-     * @param  string  $email
      * @return Collection notices for any failures
      */
     protected function linkExistingCustomer(string $email): Collection
@@ -552,8 +527,6 @@ trait SyncsShopifyCustomer
 
     /**
      * The Address Repository used to interact with the Ecommerce Address entities
-     *
-     * @return AddressRepository
      */
     abstract protected function getAddressRepository(): AddressRepository;
 }

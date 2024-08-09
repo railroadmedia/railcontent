@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 class LearningController extends Controller
 {
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function hideLearningPaths(Request $request): Response

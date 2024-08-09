@@ -115,8 +115,6 @@ class ParseBulkOperationResultsForCustomers implements ShouldQueue
     /**
      * Find the customers with the matching email address, and update them  with the Shopify ID from the customer data.
      *
-     * @param object $customerData
-     * @return void
      * @throws Exception
      */
     protected function updateCustomersWithShopifyId(object $customerData): void
@@ -204,9 +202,6 @@ class ParseBulkOperationResultsForCustomers implements ShouldQueue
     /**
      * Handle any errors that are returned in the response data
      *
-     * @param object $responseData
-     * @param int $lineNumber
-     * @return void
      * @throws Exception
      */
     protected function handleErrors(object $responseData, int $lineNumber): void
@@ -251,9 +246,6 @@ class ParseBulkOperationResultsForCustomers implements ShouldQueue
     /**
      * Get the value of the given attribute for the user in our source file at the given line number
      *
-     * @param int $lineNumber
-     * @param string $attribute
-     * @return mixed
      * @throws Exception
      */
     protected function getUserValueFromSourceFile(int $lineNumber, string $attribute): mixed
@@ -265,7 +257,6 @@ class ParseBulkOperationResultsForCustomers implements ShouldQueue
     /**
      * Get the array of customers data from the source file
      *
-     * @return array
      * @throws Exception
      */
     protected function getSourceFileCustomers(): array

@@ -20,8 +20,6 @@ trait SyncsToShopify
 
     /**
      * Perform the sync action up to Shopify, with this class' type of resource
-     *
-     * @return int
      */
     protected function sync(): int
     {
@@ -46,8 +44,6 @@ trait SyncsToShopify
 
     /**
      * Print applicable info messages to the screen, set by the run's options
-     *
-     * @return void
      */
     protected function notifyStartupStatus(): void
     {
@@ -69,29 +65,21 @@ trait SyncsToShopify
 
     /**
      * Are we running in simulation mode?
-     *
-     * @return bool
      */
     abstract protected function getIsSimulation(): bool;
 
     /**
      * Are we doing a fresh sync of everything?
-     *
-     * @return bool
      */
     abstract protected function getIsFresh(): bool;
 
     /**
      * Get the name of the type of resource being synced to Shopify
-     *
-     * @return string
      */
     abstract protected function getSyncResource(): string;
 
     /**
      * Create a log for this sync
-     *
-     * @return void
      */
     protected function createSyncLogIfExecuting(): void
     {
@@ -108,15 +96,11 @@ trait SyncsToShopify
      *
      * @param  bool  $simulate  if this is a simulation, or a real execution
      * @param  bool  $fresh  perform a fresh sync, or only new and updated
-     * @return Collection
      */
     abstract protected function syncResource(bool $simulate, bool $fresh): Collection;
 
     /**
      * Finish the sync log and store the Shopify IDs
-     *
-     * @param  Collection  $shopifyIds
-     * @return void
      */
     protected function finishSyncLogIfExecuting(Collection $shopifyIds): void
     {
@@ -131,11 +115,7 @@ trait SyncsToShopify
     /**
      * Get all ecommerce entities of this resource that need to be synced
      *
-     * @param  bool  $fresh
-     * @param  int|null  $startAtId
-     * @param  int|null  $endAtId
      * @param  RepositoryBase|EntityRepository|null  $repository  - optional override of the repository to query
-     * @return Collection
      */
     protected function getEcommerceEntities(
         bool $fresh,
@@ -194,8 +174,6 @@ trait SyncsToShopify
 
     /**
      * Get the date and time that this resource was last synced up to Shopify
-     *
-     * @return Carbon
      */
     protected function getDateTimeOfLastSync(): Carbon
     {
@@ -210,23 +188,16 @@ trait SyncsToShopify
 
     /**
      * Get the optional override of when this entity was last synced to Shopify
-     *
-     * @return Carbon|null
      */
     abstract protected function getLastSyncAtOverride(): null|Carbon;
 
     /**
      * Add any additional query scopes
-     *
-     * @param  QueryBuilder  $queryBuilder
-     * @return void
      */
     abstract protected function addAdditionalScope(QueryBuilder &$queryBuilder): void;
 
     /**
      * Get the optional limit to the number of entities to sync
-     *
-     * @return int|null
      */
     abstract protected function getLimit(): ?int;
 }

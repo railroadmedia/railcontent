@@ -55,13 +55,6 @@ class OrderController extends Controller
 
     /**
      * OrderController constructor.
-     *
-     * @param AddressRepository $addressRepository
-     * @param CartAddressService $cartAddressService
-     * @param CartService $cartService
-     * @param PaymentMethodRepository $paymentMethodRepository
-     * @param UserProviderInterface $userProvider
-     * @param OrderRepository $orderRepository
      */
     public function __construct(
         AddressRepository $addressRepository,

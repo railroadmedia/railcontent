@@ -20,8 +20,6 @@ class UserMetricsService
 
     /**
      * UserMetricsService constructor.
-     *
-     * @param  DatabaseManager  $databaseManager
      */
     public function __construct(DatabaseManager $databaseManager)
     {
@@ -49,8 +47,6 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
     private function getDaysAsMember($userId): int
     {
@@ -118,8 +114,6 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
     private function getTotalForumLikes($userId): int
     {
@@ -132,8 +126,6 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return int
      */
     private function getTotalCommentLikes($userId): int
     {
@@ -148,8 +140,6 @@ class UserMetricsService
 
     /**
      * @param $userId
-     *
-     * @return integer
      */
     public function getTotalMinutesPracticed($userId, $assignmentTypeIds = []): int
     {

@@ -30,11 +30,9 @@ class PackService
     }
 
     /**
-     * @param User $user
      *
      * @param bool $getAll
      *
-     * @return PackCollection
      * @throws \Doctrine\ORM\ORMException
      */
     public function getPacksForHome(User $user): PackCollection

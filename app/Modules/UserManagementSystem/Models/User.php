@@ -342,7 +342,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
 
     /**
-     * @param array $attributes
      * @return void
      */
     public function __construct(array $attributes = [])
@@ -385,25 +384,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->notificationSettingsLookup->getSetting($brand, $settingName);
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return int
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getMethodLevel(): string
     {
         $brand = brand();
@@ -415,9 +405,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return '1.1';
     }
 
-    /**
-     * @return integer
-     */
     public function getBrandTotalXp(): int
     {
         $brand = brand();
@@ -429,9 +416,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 0;
     }
 
-    /**
-     * @return integer
-     */
     public function getBrandMinutesPracticed(): int
     {
         $brand = brand();
@@ -443,9 +427,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 0;
     }
 
-    /**
-     * @return Attribute
-     */
     public function profilePictureUrl($usingCDN = true): Attribute
     {
         return Attribute::make(
@@ -467,8 +448,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * Values: pack, member, lifetime, coach, house-coach, team
-     *
-     * @return Attribute
      */
     public function accessLevel(): Attribute
     {
@@ -487,9 +466,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         );
     }
 
-    /**
-     * @return Attribute
-     */
     public function timezone(): Attribute
     {
         return Attribute::make(
@@ -513,25 +489,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         );
     }
 
-    /**
-     * @return string
-     */
     public function getDashboardUrl(): string
     {
         return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
 
-    /**
-     * @return string | null
-     */
     public function subscriptionIntervalType(): string | null
     {
         return $this->recharge_interval;
     }
 
-    /**
-     * @return int
-     */
     public function totalXp(): int
     {
         return !empty($this->total_xp) ? $this->total_xp : 0;
@@ -576,26 +543,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         };
     }
 
-    /**
-     * @return bool
-     */
     public function isAdmin(): bool
     {
         return $this->permission_level == self::PERMISSION_LEVEL_ADMIN;
     }
 
-    /**
-     * @return bool
-     */
     public function isAMember(): bool
     {
         return $this->isALifetimeMember() ||
             (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
     }
 
-    /**
-     * @return bool
-     */
     public function isALifetimeMember($brand = null): bool
     {
         // todo: may need to account for brand here in the future
@@ -637,8 +595,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * Get the name of the unique identifier for the user.
-     *
-     * @return string
      */
     public function getAuthIdentifierName(): string
     {
@@ -657,8 +613,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * Get the password for the user.
-     *
-     * @return string
      */
     public function getAuthPassword(): string
     {
@@ -667,25 +621,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * Get the column name for the "remember me" token.
-     *
-     * @return string
      */
     public function getRememberTokenName(): string
     {
         return 'remember_token';
     }
 
-    /**
-     * @return string
-     */
     public function getRememberToken(): string
     {
         return $this->currentRememberToken;
     }
 
-    /**
-     * @param string $value
-     */
     public function setRememberToken(string $value)
     {
         $this->currentRememberToken = $value;
@@ -693,7 +639,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * @param $token
-     * @return void
      */
     public function sendPasswordResetNotification($token): void
     {
@@ -708,25 +653,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     /**
      * Get the e-mail address where password reset links are sent.
-     *
-     * @return string
      */
     public function getEmailForPasswordReset(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getSessionSalt(): string
     {
         return $this->sessionSalt;
     }
 
-    /**
-     * @param string $sessionSalt
-     */
     public function setSessionSalt(string $sessionSalt)
     {
         $this->sessionSalt = $sessionSalt;
@@ -740,10 +677,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return UserFactory::new();
     }
 
-    /**
-     * @param string $password
-     * @param bool $hash
-     */
     public function setPassword(string $password, bool $hash = true)
     {
         $this->password = $hash ? $this->getHashedPassword($password) : $password;
@@ -779,25 +712,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingGoals::class);
     }
 
-    /**
-     * @return bool
-     */
     public function isPackOwner(): bool
     {
         return $this->is_pack_owner;
     }
 
-    /**
-     * @return bool
-     */
     public function isPackOnlyOwner(): bool
     {
         return $this->isPackOwner() && !$this->isAMember();
     }
 
-    /**
-     * @return bool
-     */
     public function isAnExpiredMember(): bool
     {
         return
@@ -828,9 +752,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             );
     }
 
-    /**
-     * @return bool
-     */
     public function isNotLifetimeOrAnnualMember(): bool
     {
         $annualSubscription = false;
@@ -987,9 +908,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(Content::class, 'associated_user_id');
     }
 
-    /**
-     * @return Attribute
-     */
     public function isCoach(): Attribute
     {
         return Attribute::make(

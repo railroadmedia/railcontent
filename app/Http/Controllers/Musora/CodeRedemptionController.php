@@ -13,9 +13,6 @@ class CodeRedemptionController extends BaseController
 {
     private AccessCodeService $accessCodeService;
 
-    /**
-     * @param AccessCodeService $accessCodeService
-     */
     public function __construct(AccessCodeService $accessCodeService)
     {
         $this->accessCodeService = $accessCodeService;

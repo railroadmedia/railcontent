@@ -43,12 +43,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
 
     /**
      * CustomerIoCreateEventByUserId constructor.
-     * @param integer $userId
-     * @param string $accountName
-     * @param string $eventName
-     * @param array $eventData
-     * @param string|null $eventType
-     * @param integer|null $eventTimestamp
      */
     public function __construct(
         int $userId,
@@ -67,7 +61,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     }
 
     /**
-     * @param CustomerIoService $customerIoService
      * @throws \Throwable
      */
     public function handle(
@@ -137,7 +130,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param Throwable $exception
      * @param $user
      */
     public function failed(Throwable $exception)

@@ -98,7 +98,6 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|RedirectResponse|View|NotFoundHttpException
      */
@@ -169,7 +168,6 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @return Factory|View|NotFoundHttpException
      */
@@ -284,11 +282,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function packBundleLesson(
         Request $request,
@@ -415,11 +411,9 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $packSlug
      * @param $lessonSlug
      * @param $lessonId
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function bundleLesson(
         Request $request,
@@ -530,9 +524,7 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return RedirectResponse
      */
     public function start(Request $request, $id): RedirectResponse
     {
@@ -553,9 +545,7 @@ class PackPagesController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function jumpToNextLesson(Request $request, $id): RedirectResponse
     {

@@ -21,8 +21,6 @@ class SaasquatchService
 
     /**
      * SaasquatchService constructor.
-     *
-     * @param  SaasquatchApi  $saasquatchApi
      */
     public function __construct(
         SaasquatchApi $saasquatchApi
@@ -32,9 +30,7 @@ class SaasquatchService
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return SaasquatchUser|null
      *
      * @throws ReferralException
      * @throws SaasquatchException
@@ -52,9 +48,7 @@ class SaasquatchService
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return SaasquatchUser
      *
      * @throws ReferralException
      * @throws SaasquatchException
@@ -73,7 +67,6 @@ class SaasquatchService
     /**
      * @param $userId
      * @param $referralCode
-     * @return bool
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
@@ -88,11 +81,6 @@ class SaasquatchService
         return true;
     }
 
-    /**
-     * @param  object  $userData
-     *
-     * @return SaasquatchUser
-     */
     public function hydrateSaasquatchUser(object $userData, $brand): SaasquatchUser
     {
 

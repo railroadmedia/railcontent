@@ -90,16 +90,12 @@ class Tracker
     /**
      * @param $name
      * @param $arguments
-     * @return string
      */
     public static function __callStatic($name, $arguments): string
     {
         return call_user_func_array([TrackerBase::class, $name], $arguments);
     }
 
-    /**
-     * @return array
-     */
     private static function products(): array
     {
         if (empty(self::$productCache)) {

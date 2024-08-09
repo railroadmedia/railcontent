@@ -8,8 +8,6 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
@@ -25,8 +23,6 @@ ORDER BY `ecommerce_subscriptions`.`id` DESC);");
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

@@ -160,7 +160,6 @@ class LiveStreamEventService
 
     /**
      * @param false $withBuffer
-     * @return bool
      */
     public function currentlyLive(bool $withBuffer = false): bool
     {
@@ -195,8 +194,6 @@ class LiveStreamEventService
      * oauth client creds. If you need a new refresh token you have to generate one using the oauth playground.
      * Each brand uses its own refresh token. https://developers.google.com/oauthplayground/
      * https://www.youtube.com/watch?v=EpikwQWR3tQ
-     *
-     * @return null|string
      */
     public function getCurrentOrNextYoutubeEventId($brand = null): ?string
     {

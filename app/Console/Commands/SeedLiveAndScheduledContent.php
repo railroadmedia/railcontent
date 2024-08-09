@@ -27,8 +27,6 @@ class SeedLiveAndScheduledContent extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(ContentService $contentService): int
     {

@@ -16,7 +16,6 @@ class ForgotPasswordController extends Controller
     /**
      * Send a reset link to the given user.
      *
-     * @param Request $request
      * @return RedirectResponse|JsonResponse
      */
     public function sendResetLinkEmail(Request $request)
@@ -64,8 +63,6 @@ class ForgotPasswordController extends Controller
 
     /**
      * Get the broker to be used during password reset.
-     *
-     * @return PasswordBroker
      */
     public function broker(): PasswordBroker
     {

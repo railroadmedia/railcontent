@@ -257,7 +257,6 @@ class PostUrlsDecorator
 
     /**
      * @param $matches
-     * @return array
      */
     private function getUrls($matches): array
     {

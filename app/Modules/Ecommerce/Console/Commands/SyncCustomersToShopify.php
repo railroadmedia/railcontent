@@ -74,12 +74,6 @@ class SyncCustomersToShopify extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param  Shopify  $shopify
-     * @param  CustomerRepository  $customerRepository
-     * @param  AddressRepository  $addressRepository
-     * @param  EcommerceEntityManager  $entityManager
-     * @return int
      */
     public function handle(
         Shopify $shopify,
@@ -124,10 +118,6 @@ class SyncCustomersToShopify extends Command
 
     /**
      * Sync the customers up to Shopify
-     *
-     * @param  Collection  $customers
-     * @param  int  $batchSize
-     * @return void
      */
     private function syncCustomers(Collection $customers, int $batchSize): void
     {
@@ -287,8 +277,6 @@ class SyncCustomersToShopify extends Command
      * Create the data to post to Shopify to create a Customer from our collection of grouped Customers
      *
      * @param  Collection<Customer>  $customers
-     * @param  string  $email
-     * @return array
      */
     private function createCustomerDataForCustomers(Collection $customers, string $email): array
     {
@@ -308,8 +296,6 @@ class SyncCustomersToShopify extends Command
      * returning the first non-null value retrieved.
      *
      * @param  Collection<Customer>  $customers
-     * @param  string  $attributeFunction
-     * @return string|null
      */
     private function getCustomerValueFor(Collection $customers, string $attributeFunction): ?string
     {
@@ -334,13 +320,6 @@ class SyncCustomersToShopify extends Command
     /**
      * Send the data to Shopify to create or update a customer. Allowing up to 2 attempts, so that we can retry
      * after certain validation failures.
-     *
-     * @param  string  $customerEmail
-     * @param  array  $postData
-     * @param  bool  $isCreating
-     * @param  Collection  $customersCollection
-     * @param  int  $attemptNumber
-     * @return CustomerResource|null
      */
     private function sendDataToShopify(
         string $customerEmail,
@@ -450,7 +429,6 @@ class SyncCustomersToShopify extends Command
      * Get all addresses for this collection of customers, then format it to meet Shopify's expectation
      *
      * @param  Collection<Customer>  $customers
-     * @return Collection
      */
     private function createAddressesDataForCustomers(Collection $customers): Collection
     {
@@ -478,8 +456,6 @@ class SyncCustomersToShopify extends Command
      * format those to meet Shopify's expectations.
      *
      * @param  Collection<Customer>  $customers
-     * @param  int  $shopifyCustomerId
-     * @return Collection
      */
     private function updateAddressesDataForCustomers(Collection $customers, int $shopifyCustomerId): Collection
     {
