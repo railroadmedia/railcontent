@@ -1,6 +1,11 @@
 // hooks/useSongPageData.js
 import { ref } from 'vue';
-import { fetchSongById, fetchRelatedSongs, fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/songService';
+import { fetchSongById, fetchRelatedSongs } from 'musora-sanity-services';
+import { fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/userService';
+import { usePlatformStore } from '@stores/platform';
+
+//Pinia Stores
+const platformStore = usePlatformStore();
 
 export async function useSongPageData(contentId, brand, userId, token) {
   const data = ref(null);
@@ -9,8 +14,8 @@ export async function useSongPageData(contentId, brand, userId, token) {
 
   try {
     const [songResponse, relatedSongsResponse, currentSongCompleteResponse] = await Promise.all([
-      fetchSongById(contentId),
-      fetchRelatedSongs(brand, contentId),
+      fetchSongById(platformStore.sanityConfig, contentId),
+      fetchRelatedSongs(platformStore.sanityConfig, brand, contentId),
       fetchCurrentSongComplete(userId, contentId, token)
     ]);
 

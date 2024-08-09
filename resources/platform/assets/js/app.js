@@ -167,6 +167,7 @@ const app = createApp({
         }
     }
 });
+const pinia = createPinia();
 
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
@@ -451,7 +452,6 @@ app.directive('teleport-first', {
     }
 });
 
-const pinia = createPinia();
 // app.use(router);
 
 app.use(VueAxios, axios);

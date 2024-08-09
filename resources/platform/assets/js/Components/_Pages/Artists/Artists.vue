@@ -32,7 +32,7 @@
     const userStore = useUserStore();
     const platformStore = usePlatformStore();
     const { brand } = storeToRefs(userStore);
-    const { isLoading } = storeToRefs(platformStore)
+    const { isLoading, sanityConfig } = storeToRefs(platformStore)
 
     //Refs
     const data = ref(null);
@@ -64,7 +64,7 @@
     const numberOfArtists = computed(() => data.value?.length);
 
     onBeforeMount( async () => {
-        const { data: artistData, error: artistError, isLoading: artistLoading } = await useArtistPageData(brand.value);
+        const { data: artistData, error: artistError, isLoading: artistLoading } = await useArtistPageData(sanityConfig.value, brand.value);
         data.value = artistData.value;
         platformStore.setLoadingState(artistLoading.value);
     })
