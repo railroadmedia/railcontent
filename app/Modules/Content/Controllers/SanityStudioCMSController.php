@@ -10,6 +10,7 @@ use App\Modules\Content\Models\Sanity\Foundation;
 use App\Modules\Content\Models\Sanity\Method;
 use App\Modules\Content\Models\Sanity\Pack;
 use App\Modules\Content\Models\Sanity\SemesterPack;
+use App\Modules\Content\Models\Sanity\SemesterPackLesson;
 use App\Modules\Content\Models\Sanity\Shows\Archive;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Shows\BackstageSecret;
@@ -115,6 +116,7 @@ class SanityStudioCMSController extends BaseController
             (new Routine())->toArray(),
             (new CoachStream())->toArray(),
             (new SemesterPack())->toArray(),
+            (new SemesterPackLesson())->toArray(),
             (new Pack())->toArray(),
             (new Method())->toArray(),
             (new SongTutorial())->toArray(),
