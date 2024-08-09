@@ -35,7 +35,7 @@
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
+        <env name="CACHE_STORE" value="array"/>
         <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
         <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql_sqlite_testing"/>
         <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
