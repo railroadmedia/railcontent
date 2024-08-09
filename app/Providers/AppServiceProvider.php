@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Webhook;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
 use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
@@ -12,20 +13,30 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
-use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as ArrayHydratorUserProviderInterface;
+use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
+use Railroad\MusoraApi\Contracts\ChatProviderInterface;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
+use Railroad\MusoraApi\Contracts\UserProviderInterface as MusoraUserProviderInterface;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
-use Railroad\MusoraApi\Contracts\ProductProviderInterface;
-use Railroad\MusoraApi\Contracts\UserProviderInterface as MusoraUserProviderInterface;
-use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
-use Railroad\MusoraApi\Contracts\ChatProviderInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * The path to the "home" route for your application.
+     *
+     * This is used by Laravel authentication to redirect users after login.
+     *
+     * @var string
+     */
+    public const HOME = '/';
+
     /**
      * Register any application services.
      */
@@ -167,6 +178,69 @@ class AppServiceProvider extends ServiceProvider
 
         Queue::after(function (JobProcessed $event) {
             Webhook::updateJobDetailsIfWebhookJob($event);
+        });
+
+        $this->bootRoute();
+    }
+
+    public function bootRoute(): void
+    {
+        $subDomain = current(explode('.', request()->getHost()));
+        //dd($subDomain);
+        /*
+         * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
+         */
+        Route::pattern('musoraDomain', '(.*musora\.com)');
+        Route::pattern('drumeoDomain', '(.*drumeo\.com)');
+        Route::pattern('pianoteDomain', '(.*pianote\.com)');
+        Route::pattern('guitareoDomain', '(.*guitareo\.com)');
+        Route::pattern('singeoDomain', '(.*singeo\.com)');
+
+        URL::defaults(['musoraDomain' => !empty($subDomain) ? $subDomain . '.musora.com' : 'musora.com']);
+        URL::defaults(['drumeoDomain' => !empty($subDomain) ? $subDomain . '.drumeo.com' : 'drumeo.com']);
+        URL::defaults(['pianoteDomain' => !empty($subDomain) ? $subDomain . '.pianote.com' : 'pianote.com']);
+        URL::defaults(['guitareoDomain' => !empty($subDomain) ? $subDomain . '.guitareo.com' : 'guitareo.com']);
+        URL::defaults(['singeoDomain' => !empty($subDomain) ? $subDomain . '.singeo.com' : 'singeo.com']);
+        URL::defaults(['brand' => 'musora']);
+
+
+
+        $this->routes(function () {
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
+            Route::group([], base_path('routes/routes.php')); // not actually needed
+            Route::group([], base_path('routes/misc/manifest_files_routes.php'));
+            Route::group([], base_path('routes/misc/mobile_app_store_api_keys_json_routes.php'));
+            Route::group([], base_path('routes/misc/sitemap_routes.php'));
+            Route::group([], base_path('routes/platform/platform_pages_routes.php'));
+            Route::group([], base_path('routes/misc/admin_routes.php'));
+
+            Route::group([], base_path('routes/musora/marketing/order-form.php'));
+            Route::group([], base_path('routes/musora/marketing/login.php'));
+            Route::group([], base_path('routes/musora/marketing/product.php'));
+            Route::group([], base_path('routes/musora/marketing/other.php'));
+            Route::group([], base_path('routes/musora/marketing/cohort-packs.php'));
+            Route::group([], base_path('routes/musora/platform/home.php'));
+            Route::group([], base_path('routes/musora/platform/search.php'));
+
+
+            Route::group([], base_path('routes/drumeo/sales.php'));
+            Route::group([], base_path('routes/drumeo/shop.php'));
+            Route::group([], base_path('routes/drumeo/lead-gen.php'));
+
+            Route::group([], base_path('routes/guitareo/sales.php'));
+            Route::group([], base_path('routes/guitareo/shop.php'));
+            Route::group([], base_path('routes/guitareo/lead-gen.php'));
+
+            Route::group([], base_path('routes/pianote/sales.php'));
+            Route::group([], base_path('routes/pianote/shop.php'));
+            Route::group([], base_path('routes/pianote/lead-gen.php'));
+
+            Route::group([], base_path('routes/singeo/sales.php'));
+            Route::group([], base_path('routes/singeo/shop.php'));
+            Route::group([], base_path('routes/singeo/lead-gen.php'));
+
+            Route::group([], base_path('routes/misc/http_error_code_routes.php'));
+
         });
     }
 }
