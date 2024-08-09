@@ -45,6 +45,7 @@
         <server name="DB_MYSQL_DRIVER" value="pdo_sqlite"/>
         <server name="DB_MYSQL_IN_MEMORY" value="true"/>
         <server name="MAIL_MAILER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
