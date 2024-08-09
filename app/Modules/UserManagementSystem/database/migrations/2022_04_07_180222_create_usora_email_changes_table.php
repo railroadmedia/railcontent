@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsoraEmailChangesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -35,4 +35,4 @@ class CreateUsoraEmailChangesTable extends Migration
     {
         Schema::dropIfExists('usora_email_changes');
     }
-}
+};
