@@ -3,6 +3,7 @@ import VideoModal from "../Modal/VideoModal.vue";
 import { computed, ref } from "vue";
 import { useUserStore } from "../../../Stores/user";
 import userJourney from "../../../Services/userJourney";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const userStore = useUserStore();
 
@@ -159,9 +160,7 @@ const handleCtaClick = (event, url) => {
       `">
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-relative">
       <!-- Draft Label -->
-      <div v-if="isDraft"
-        class="tw-text-white tw-absolute tw-right-2 md:tw-right-6 tw-top-2 md:tw-top-6 tw-z-50 tw-font-extrabold tw-text-xl tw-rounded-xl tw-bg-red-700 tw-px-6 tw-py-1">
-        DRAFT</div>
+      <DraftLabel v-if="isDraft" />
 
       <!-- Background Image -->
       <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
