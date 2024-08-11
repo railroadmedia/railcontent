@@ -1,14 +1,14 @@
 // hooks/useArtistPageData.js
 import { ref } from 'vue';
-import { fetchArtists } from 'musora-sanity-services';
+import { fetchArtists } from 'musora-content-services';
 
-export async function useArtistPageData(config, brand) {
+export async function useArtistPageData(brand) {
   const data = ref(null);
   const error = ref(null);
   const isLoading = ref(true);
 
   try {
-    const result = await fetchArtists(config, brand);
+    const result = await fetchArtists(brand);
     if (result) {
       data.value = result;
     } else {
