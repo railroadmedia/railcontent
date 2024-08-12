@@ -104,7 +104,7 @@
     </div>
 </template>
 <script setup>
-import {computed, onMounted} from "vue";
+import {computed, onMounted, onBeforeMount} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from '@stores/platform';
@@ -115,6 +115,10 @@ import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper'
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 
 const props = defineProps({
+    contentType: {
+        type: String, 
+        required: true,
+    },
     breadcrumbs: {
         type: Array,
         default: () => [],
@@ -238,5 +242,9 @@ onMounted(() => {
     setTimeout(() => {
         platformStore.setLoadingState(false);
     }, 2000)
+});
+
+onBeforeMount( () => {
+    //console.log('content type', props.contentType);
 })
 </script>
