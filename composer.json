@@ -34,7 +34,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "railroad/doctrine-array-hydrator": "dev-temp-fix-inflector as v2.0.2",
         "railroad/ecommerce": "5.0.*",
-        "railroad/lead-tracker": "^3.0",
+        "railroad/lead-tracker": "v4.0.x-dev",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "v3.1.*",
