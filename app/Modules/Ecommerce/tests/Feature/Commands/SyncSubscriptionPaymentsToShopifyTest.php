@@ -20,7 +20,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
 
     protected Carbon $launchDate;
 
-    public function test_dispatcher_finds_subscriptions_to_sync()
+    public function test_dispatcher_finds_subscriptions_to_sync(): void
     {
         // we don't want to run the jobs
         Queue::fake();
@@ -58,7 +58,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
             ->create();
     }
 
-    public function test_dispatcher_uses_the_limit()
+    public function test_dispatcher_uses_the_limit(): void
     {
         Queue::fake();
 
@@ -76,7 +76,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
         });
     }
 
-    public function test_dispatcher_uses_startingId()
+    public function test_dispatcher_uses_startingId(): void
     {
         Queue::fake();
 
@@ -99,7 +99,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
         });
     }
 
-    public function test_dispatcher_uses_date_ranges()
+    public function test_dispatcher_uses_date_ranges(): void
     {
         Queue::fake();
 
@@ -160,7 +160,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
         });
     }
 
-    public function test_dispatcher_uses_fresh()
+    public function test_dispatcher_uses_fresh(): void
     {
         Queue::fake();
 
@@ -193,7 +193,7 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
     /**
      * @throws \ReflectionException
      */
-    public function test_manager_adds_a_job_for_each_batch()
+    public function test_manager_adds_a_job_for_each_batch(): void
     {
         // batch size is 25, so making 60 should create 3 batches
         $beforeLaunch = $this->createSubscriptionPayments(60, true);

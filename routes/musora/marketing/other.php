@@ -5,7 +5,7 @@ use App\Http\Controllers\Musora\MarketingController;
 use App\Http\Controllers\Musora\ReferralJoinController;
 
 use App\Http\Controllers\Musora\SalesController;
-use App\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('{musoraDomain}')

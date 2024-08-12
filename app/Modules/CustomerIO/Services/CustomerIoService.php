@@ -23,13 +23,9 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $id
-     * @param bool $includeExternalAttributes
-     * @return Customer
      * @throws Exception
      */
-    public function getCustomerById($accountName, $id, $includeExternalAttributes = true)
+    public function getCustomerById(string $accountName, string $id, bool $includeExternalAttributes = true): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -70,13 +66,10 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $userId
      * @param bool $includeExternalAttributes
-     * @return Customer
      * @throws Exception
      */
-    public function getCustomerByUserId($accountName, $userId)
+    public function getCustomerByUserId(string $accountName, string $userId): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -119,14 +112,9 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param string $userId
-     * @param int $limit
-     * @param int $amountToSkip
-     * @return Customer
      * @throws Exception
      */
-    public function getCustomerEventsByUserId($accountName, $userId, $limit = 25, $amountToSkip = 0)
+    public function getCustomerEventsByUserId(string $accountName, string $userId, int $limit = 25, int $amountToSkip = 0): Customer
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -160,20 +148,16 @@ class CustomerIoService
      *
      * @param $email
      * @param $accountName
-     * @param array $customAttributes
-     * @param string|null $id
-     * @param integer|null $userId
-     * @param integer|null $createdAtTimestamp
      * @throws Exception
      * @throws Throwable
      */
     public function createCustomer(
         $email,
         $accountName,
-        $customAttributes = [],
-        $id = null,
-        $userId = null,
-        $createdAtTimestamp = null
+        array $customAttributes = [],
+        ?string $id = null,
+        ?int $userId = null,
+        ?int $createdAtTimestamp = null
     ) {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -234,20 +218,17 @@ class CustomerIoService
      *
      * @param $uuid
      * @param $accountName
-     * @param array $customAttributes
      * @param null $email
-     * @param integer|null $userId
-     * @param integer|null $createdAtTimestamp
      * @return mixed
      * @throws Exception
      */
     public function updateCustomer(
         Customer $customer,
         $accountName,
-        $customAttributes = [],
+        array $customAttributes = [],
         $email = null,
-        $userId = null,
-        $createdAtTimestamp = null
+        ?int $userId = null,
+        ?int $createdAtTimestamp = null
     ) {
         $accountConfigData = $this->getAccountConfigData($accountName);
         $oldCustomer = clone $customer;
@@ -352,10 +333,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $accountName
-     * @param Customer $oldCustomer
-     * @param Customer $newCustomer
-     * @return void
      * @throws Exception
      */
     public function updateCustomerIdentifier(
@@ -471,9 +448,6 @@ class CustomerIoService
     }
 
     /**
-     * @param string $email
-     * @param string $formNameToProcess
-     * @param array $requestParams
      * @return array|void
      * @throws Exception
      */
@@ -549,20 +523,18 @@ class CustomerIoService
      * @param $uuid
      * @param $accountName
      * @param $eventName
-     * @param array $eventData
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return bool
      * @throws Exception
      */
     public function createEvent(
         $email,
         $accountName,
         $eventName,
-        $eventData = [],
+        array $eventData = [],
         $eventType = null,
         $createdAtTimestamp = null
-    ) {
+    ): bool {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         $this->customerIoApiGateway->createEvent(
@@ -579,23 +551,18 @@ class CustomerIoService
     }
 
     /**
-     * @param string|null $email
-     * @param string|null $uuid
-     * @param string $accountName
-     * @param string $eventName
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function createEventForEmailOrId(
-        $email,
-        $uuid,
-        $accountName,
-        $eventName,
+        ?string $email,
+        ?string $uuid,
+        string $accountName,
+        string $eventName,
         $eventType = null,
         $createdAtTimestamp = null
-    ) {
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         if (!empty($uuid)) {
@@ -651,23 +618,16 @@ class CustomerIoService
     }
 
     /**
-     * @param integer $userId
-     * @param string $accountName
-     * @param string $eventName
-     * @param array $eventData
-     * @param string|null $eventType
-     * @param integer|null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function createEventForUserId(
-        $userId,
-        $accountName,
-        $eventName,
-        $eventData = [],
-        $eventType = null,
-        $createdAtTimestamp = null
-    ) {
+        int $userId,
+        string $accountName,
+        string $eventName,
+        array $eventData = [],
+        ?string $eventType = null,
+        ?int $createdAtTimestamp = null
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -704,22 +664,20 @@ class CustomerIoService
 
     /**
      * @param string $uuid
-     * @param string $accountName
      * @param string $eventName
      * @param $customerIoTransactionalMessageId
      * @param $customerEmail
      * @param $customerId
      * @param null $eventType
      * @param null $createdAtTimestamp
-     * @return bool
      * @throws Exception
      */
     public function sendTransactionalEmail(
-        $accountName,
+        string $accountName,
         $customerIoTransactionalMessageId,
         $customerEmail,
         $messageDataArray = []
-    ) {
+    ): bool {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -754,10 +712,9 @@ class CustomerIoService
 
     /**
      * @param $accountName
-     * @return array
      * @throws Exception
      */
-    public function getAccountConfigData($accountName)
+    public function getAccountConfigData($accountName): array
     {
         $accountConfig = config('customer-io.accounts')[$accountName] ?? [];
 
@@ -781,7 +738,6 @@ class CustomerIoService
      * @param $accountName
      * @param $deviceData
      * @param null $createdAtTimestamp
-     * @return Customer
      * @throws Exception
      */
     public function syncDeviceForUserId(
@@ -789,7 +745,7 @@ class CustomerIoService
         $accountName,
         $deviceData,
         $createdAtTimestamp = null
-    ) {
+    ): Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -822,9 +778,6 @@ class CustomerIoService
     /**
      * Note, secondary customer row is always hard-deleted. It's not soft deleted.
      *
-     * @param string $accountName
-     * @param string $primaryCustomerId
-     * @param string $secondaryCustomerId
      * @return false|Customer
      * @throws Exception
      */

@@ -54,10 +54,6 @@ class FiltersJourneyService
         );
     }
 
-    /**
-     * @param array|null $props
-     * @return array
-     */
     public function parseFilters(?array $props): array
     {
         $props = $props ?? [];
@@ -84,10 +80,6 @@ class FiltersJourneyService
         return $filters;
     }
 
-    /**
-     * @param string|null $sort
-     * @return string
-     */
     public function parseSort(?string $sort): string
     {
         return match ($sort) {

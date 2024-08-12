@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (Schema::hasTable('railtracker4_requests')) {
             Schema::table('railtracker4_requests', function (Blueprint $table) {
@@ -100,10 +98,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         //
     }

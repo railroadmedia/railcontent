@@ -80,7 +80,6 @@ class ContentUserProgress extends Model
     /**
      * Get the state of the progress for the content and user provided.
      *
-     * @return object{state: ProgressState, percent: int}
      * @throws Exception
      */
     public static function getState(int $contentId, int $userId): object

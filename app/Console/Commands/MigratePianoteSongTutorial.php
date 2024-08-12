@@ -28,14 +28,12 @@ class MigratePianoteSongTutorial extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService
-    ) {
+    ): void {
         $this->info("MigratePianoteSongTutorial command starts now \n");
 
         $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));

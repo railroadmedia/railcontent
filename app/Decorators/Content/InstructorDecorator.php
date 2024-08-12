@@ -15,9 +15,6 @@ class InstructorDecorator extends ModeDecoratorBase
 
     private static $cache = [];
 
-    /**
-     * @param ContentFollowsService $contentFollowsService
-     */
     public function __construct(
         ContentFollowsService $contentFollowsService
     ) {

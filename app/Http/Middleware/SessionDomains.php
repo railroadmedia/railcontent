@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use App\Modules\Brand\Enums\Brand;
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
@@ -11,12 +12,8 @@ class SessionDomains
 {
     /**
      * Handle an incoming request.
-     *
-     * @param Request $request
-     * @param Closure $next
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         $domainRootName = explode('.', $request->getHost())[1] ?? null;
 

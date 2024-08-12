@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class CalendarService
 {
     /**
-     * @param  Request  $request
      * @return mixed|string|null
      */
     public function getTimezone(Request $request)
@@ -40,10 +39,9 @@ class CalendarService
     }
 
     /**
-     * @return array
      * @throws \Exception
      */
-    public static function getTimezoneList()
+    public static function getTimezoneList(): array
     {
         $formattedTimeZones = [];
         $allZones = DateTimeZone::listIdentifiers();

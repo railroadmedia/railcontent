@@ -6,11 +6,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class SongsDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'song-tutorial');
 

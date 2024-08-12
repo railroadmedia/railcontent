@@ -30,10 +30,8 @@ class PopulateUserTotalXpPerBrand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): void
     {
         $this->info("PopulateUserTotalXpPerBrand command starts now \n");
 

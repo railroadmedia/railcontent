@@ -51,7 +51,7 @@ class Clothing extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Select::make('Product Type', 'product_type_id')->options([
                 $types->where('name', 'Misc')->first()->id => 'Misc',
                 $types->where('name', 'Shirts')->first()->id => 'Shirts',

@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('ecommerce_subscriptions', function (Blueprint $table) {
             $table->string('legacy_payment_method_id')->nullable()->after('payment_method_id');
@@ -19,10 +17,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('ecommerce_subscriptions', function (Blueprint $table) {
             $table->dropColumn('legacy_payment_method_id');

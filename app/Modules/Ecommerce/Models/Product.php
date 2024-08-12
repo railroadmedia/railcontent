@@ -219,8 +219,6 @@ class Product extends Model
     /**
      * Get the total number of days that a membership is for, regardless of the interval type.
      * e.g. 1 year = 365 days, 3 months = 90 days, etc
-     *
-     * @return int|null
      */
     public function getMembershipTimeAsTotalDays(): ?int
     {
@@ -281,9 +279,6 @@ class Product extends Model
         );
     }
 
-    /**
-     * @return int
-     */
     public function getStockAvailability(): int
     {
         if ($this->min_stock_level === null || $this->stock === null) {
@@ -448,9 +443,6 @@ class Product extends Model
 
     /**
      * Get the sku of the full product corresponding to the given trial product's sku
-     *
-     * @param  Product  $product
-     * @return string|null
      */
     public static function trialToFullProductSkuMap(self $product): ?string
     {

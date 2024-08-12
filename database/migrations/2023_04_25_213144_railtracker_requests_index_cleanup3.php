@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         // when testing, we don't have these other connections
         if (!app()->environment('testing')) {
@@ -62,10 +60,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         //
     }

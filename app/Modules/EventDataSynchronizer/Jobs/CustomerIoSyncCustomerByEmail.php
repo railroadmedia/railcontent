@@ -27,7 +27,6 @@ class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob
      * CustomerIoSyncCustomerByEmail constructor.
      * @param $emailAddress
      * @param $brand
-     * @param  array  $attributesToSync
      */
     public function __construct($emailAddress, $brand, array $attributesToSync = [])
     {
@@ -37,7 +36,6 @@ class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob
     }
 
     /**
-     * @param  CustomerIoService  $customerIoService
      * @throws Throwable
      */
     public function handle(CustomerIoService $customerIoService)
@@ -70,8 +68,6 @@ class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

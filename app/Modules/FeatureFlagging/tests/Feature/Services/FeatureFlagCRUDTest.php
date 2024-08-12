@@ -23,7 +23,7 @@ class FeatureFlagCRUDTest extends TestCase
 
     }
 
-    public function test_crud_feature()
+    public function test_crud_feature(): void
     {
         $name = $this->getRandomName();
         $this->artisan("featureFlag:addFeature '$name'")
@@ -56,7 +56,7 @@ class FeatureFlagCRUDTest extends TestCase
         );
     }
 
-    public function test_create_userid_list_different_formats()
+    public function test_create_userid_list_different_formats(): void
     {
         // add and edit allow for different formats of userids, as a mixed array or as comma separated string
         $feature = $this->ffService->addFeature(
@@ -84,7 +84,7 @@ class FeatureFlagCRUDTest extends TestCase
         $this->assertEquals($feature->userid_list, $userListString);
     }
 
-    public function test_crud_branches()
+    public function test_crud_branches(): void
     {
         $experiment = $this->ffService->addExperiment(
             $this->getRandomName(),
@@ -124,7 +124,7 @@ class FeatureFlagCRUDTest extends TestCase
                 'name' => $branch1->name]);
     }
 
-    public function test_invalid_branch()
+    public function test_invalid_branch(): void
     {
         $this->expectNotToPerformAssertions();
         $experiment = $this->ffService->addExperiment(
@@ -168,7 +168,7 @@ class FeatureFlagCRUDTest extends TestCase
         );
     }
 
-    public function test_crud_experiment()
+    public function test_crud_experiment(): void
     {
         $experiment = $this->ffService->addExperiment(
             $this->getRandomName(),
@@ -228,7 +228,7 @@ class FeatureFlagCRUDTest extends TestCase
             'branch_id' => $branch1->id]);
     }
 
-    public function test_add_remove_users_from_branch()
+    public function test_add_remove_users_from_branch(): void
     {
         $experiment = $this->ffService->addExperiment(
             $this->getRandomName(),
@@ -255,7 +255,7 @@ class FeatureFlagCRUDTest extends TestCase
         $this->assertEquals($branch1->userid_list, '1,2,5');
     }
 
-    public function test_add_remove_users_from_feature()
+    public function test_add_remove_users_from_feature(): void
     {
         $name = $this->getRandomName();
         $this->artisan("featureFlag:addFeature '$name'")

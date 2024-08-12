@@ -102,9 +102,6 @@ class ShopifyWebHookController extends Controller
 
     /**
      * Is this webhook request for an Order that was imported into Shopify?
-     *
-     * @param string|null $processedAt
-     * @return bool
      */
     private function isImportedOrder(?string $processedAt): bool
     {

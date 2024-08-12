@@ -7,11 +7,11 @@ Route::as('musora-api.')
     ->prefix('/musora-api')
     ->middleware('web_or_api_authenticated')
     ->group(function () {
-        Route::group(['prefix' => '/v1'], function () {
+        Route::prefix('/v1')->group(function () {
             Route::post('/trial-section-dismiss', [LearningControllerV1::class, 'hideLearningPaths'])
                 ->name('learning.paths.dismiss');
         });
-        Route::group(['prefix' => '/v2'], function () {
+        Route::prefix('/v2')->group(function () {
             Route::get('/homepage-learning-paths', [LearningControllerV2::class, 'getLearningPaths'])
                 ->name('homepage.learning-paths');
         });

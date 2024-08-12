@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guitareo;
 
+use Illuminate\View\View;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use Carbon\Carbon;
@@ -11,48 +12,48 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-    public function thankyou()
+    public function thankyou(): View
     {
         return view('guitareo.lead-gen.pages.thank-you');
     }
-    public function welcomeparty()
+    public function welcomeparty(): View
     {
         return view('guitareo.lead-gen.pages.welcome-party');
     }
-    public function welcomepartycarlos()
+    public function welcomepartycarlos(): View
     {
         return view('guitareo.lead-gen.pages.welcome-party-carlos');
     }
-    public function confirming()
+    public function confirming(): View
     {
         return view('guitareo.lead-gen.pages.confirming');
     }
-    public function subscribed()
+    public function subscribed(): View
     {
         return view('guitareo.lead-gen.pages.subscribed');
     }
-    public function preferences()
+    public function preferences(): View
     {
         return view('guitareo.lead-gen.pages.preferences');
     }
-    public function weeklyemail()
+    public function weeklyemail(): View
     {
         return view('guitareo.lead-gen.pages.weekly-email', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    public function weeklyemail2()
+    public function weeklyemail2(): View
     {
         return view('guitareo.lead-gen.pages.weekly-email-2', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    public function recitals()
+    public function recitals(): View
     {
         return view('guitareo.lead-gen.pages.recitals');
     }
-    public function fretboardcheatsheet()
+    public function fretboardcheatsheet(): View
     {
         return view('guitareo.lead-gen.pages.fretboard-cheatsheet', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function backToBasics(Request $request, $domain, $page = null)
+    public function backToBasics(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -64,7 +65,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function cleanUpChords(Request $request, $domain, $page = null)
+    public function cleanUpChords(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -76,7 +77,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function songInAnHour(Request $request, $domain, $page = null, $lesson = null)
+    public function songInAnHour(Request $request, $domain, $page = null, $lesson = null): View
     {
         switch ($page) {
             case null:
@@ -105,17 +106,17 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function fagl()
+    public function fagl(): View
     {
         return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function fegl()
+    public function fegl(): View
     {
         return view('guitareo.lead-gen.free-electric-guitar-lessons.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function hitSongs(Request $request, $domain, $page = null, $lesson = null)
+    public function hitSongs(Request $request, $domain, $page = null, $lesson = null): View
     {
         switch ($page) {
             case null:
@@ -127,22 +128,22 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function tricks()
+    public function tricks(): View
     {
         return view('guitareo.lead-gen.guitar-tricks.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function soloInAnHour()
+    public function soloInAnHour(): View
     {
         return view('guitareo.lead-gen.solo-in-an-hour.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function jumpstart()
+    public function jumpstart(): View
     {
         return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function starterKit(Request $request, $domain, $page = null, $lesson = null, $num = null)
+    public function starterKit(Request $request, $domain, $page = null, $lesson = null, $num = null): View
     {
         switch ($page) {
             case null:
@@ -158,7 +159,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function starterKitPages(Request $request, $domain, $page = null)
+    public function starterKitPages(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case 'fundamentals':
@@ -174,7 +175,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function strumming(Request $request, $domain, $num = null)
+    public function strumming(Request $request, $domain, $num = null): View
     {
         switch ($num) {
             case null:
@@ -186,7 +187,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolbox(Request $request, $domain, $page = null)
+    public function toolbox(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -198,7 +199,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxPages(Request $request, $domain, $page = null)
+    public function toolboxPages(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case 'changing-chords-smoothly':
@@ -224,7 +225,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function soloingPentatonic(Request $request, $domain, $num = null)
+    public function soloingPentatonic(Request $request, $domain, $num = null): View
     {
         switch ($num) {
             case null:

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class SetUserNeedsLogoutTest extends TestCase
 {
-    public function test_fails_when_invalid_id()
+    public function test_fails_when_invalid_id(): void
     {
         $users = User::factory()->count(5)->create();
 
@@ -21,7 +21,7 @@ class SetUserNeedsLogoutTest extends TestCase
             ->assertFailed();
     }
 
-    public function test_sets_needs_logout_for_all_users()
+    public function test_sets_needs_logout_for_all_users(): void
     {
         $users = User::factory()->count(5)->create();
 

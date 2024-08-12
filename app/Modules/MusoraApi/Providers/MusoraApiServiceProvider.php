@@ -11,8 +11,6 @@ class MusoraApiServiceProvider extends ServiceProvider
 {
     /**
      * ApiServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -21,8 +19,6 @@ class MusoraApiServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -41,8 +37,6 @@ class MusoraApiServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {

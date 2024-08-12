@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    public function up()
+    public function up(): void
     {
         // SQLite doesn't support multiple calls to dropColumn / renameColumn in a single modification
         if (Schema::getConnection()->getDriverName() === "sqlite") {
@@ -40,7 +40,7 @@ return new class () extends Migration {
         }
     }
 
-    public function down()
+    public function down(): void
     {
         if (Schema::getConnection()->getDriverName() === "sqlite") {
             $this->downSqlite();
@@ -56,8 +56,6 @@ return new class () extends Migration {
 
     /**
      * Run the migrations (separated out for SQLite support)
-     *
-     * @return void
      */
     private function upSqlite(): void
     {
@@ -75,8 +73,6 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations (separated out for SQLite support)
-     *
-     * @return void
      */
     public function downSqlite(): void
     {

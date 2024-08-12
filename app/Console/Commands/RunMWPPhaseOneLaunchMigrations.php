@@ -25,10 +25,8 @@ class RunMWPPhaseOneLaunchMigrations extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Starting RunMWPPhaseOneLaunchMigrations.');
         Log::info('Starting RunMWPPhaseOneLaunchMigrations.');

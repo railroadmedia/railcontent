@@ -13,7 +13,7 @@ class PredefinedPlaylists extends Command
     protected $signature = 'predefinedPlaylists {startIndex=0} {endIndex=-1}';
     protected $description = 'Create pre-defined playlists';
 
-    public function handle()
+    public function handle(): void
     {
         $startIndex = $this->argument('startIndex');
         $endIndex = $this->argument('endIndex');

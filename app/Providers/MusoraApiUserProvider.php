@@ -199,12 +199,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return $this->getCurrentUser();
     }
 
-    /**
-     * @param string|null $iosToken
-     * @param string|null $androidToken
-     * @return User|null
-     */
-    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
+    public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken): ?User
     {
         $firebaseToken = [
             'type' => ($iosToken) ? 'ios' : 'android',
@@ -220,8 +215,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param string $deviceType
-     * @param int $reviewCount
      * @return mixed|\Modules\UserManagementSystem\Models\User|null
      */
     public function setReviewDataForCurrentUser(string $deviceType, int $reviewCount)
@@ -326,18 +319,12 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    /**
-     * @return array
-     */
-    public function getAllBranchInformation()
+    public function getAllBranchInformation(): array
     {
         return FeatureFlagging::allBranches(user());
     }
 
-    /**
-     * @return array
-     */
-    public function getAccessibleFeatures()
+    public function getAccessibleFeatures(): array
     {
         return FeatureFlagging::allowedFeatures(user());
     }

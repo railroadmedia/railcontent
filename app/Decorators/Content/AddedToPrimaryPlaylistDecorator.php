@@ -21,10 +21,6 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
 
     public static $skip = false;
 
-    /**
-     * @param  UserPlaylistContentRepository  $userPlaylistContentRepository
-     * @param  UserPlaylistsRepository  $userPlaylistsRepository
-     */
     public function __construct(
         UserPlaylistContentRepository $userPlaylistContentRepository,
         UserPlaylistsRepository $userPlaylistsRepository
@@ -34,7 +30,6 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
     }
 
     /**
-     * @param  Collection  $contents
      * @return mixed
      */
     public function decorate(Collection $contents)

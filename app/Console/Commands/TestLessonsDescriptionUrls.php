@@ -35,14 +35,12 @@ class TestLessonsDescriptionUrls extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
         ContentService $contentService,
         OldPlatformLinksDecorator $oldPlatformLinksDecorator
-    ) {
+    ): int {
         ContentRepository::$bypassPermissions = true;
         //        $allDecoratorsForContent = [
         //            OldPlatformLinksDecorator::class

@@ -66,7 +66,7 @@ class DevEndpointController extends Controller
     }
 
 
-    private function setUserToBasic($userID, $interval=null)
+    private function setUserToBasic($userID, $interval = null)
     {
         $user = User::whereId($userID)->first();
         #$a = $user->subscriptionIntervalType();
@@ -96,7 +96,7 @@ class DevEndpointController extends Controller
         $results = [];
         $minID = 723817;
         $maxID = 724827;
-        for ($id = $minID; $id <= $maxID; $id++){
+        for ($id = $minID; $id <= $maxID; $id++) {
             $user = User::whereId($id)->first();
             if ($user) {
                 $results[$id]['subMethod'] = $user->getSubscriptionMethod();
@@ -118,7 +118,7 @@ class DevEndpointController extends Controller
         }
         $this->contentPermissionService->create($contentID, null, UserAccessPermissionsCollection::MusoraPlusMembershipPermission, 'musora');
         return "Permissions updated for $contentID";
-	}
+    }
 
     private function saveJson()
     {

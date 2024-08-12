@@ -24,10 +24,8 @@ class UpdateContentVimeoVideoId extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle(ContentService $contentService)
+    public function handle(ContentService $contentService): int
     {
         $simulate = $this->option("execute") == false;
         if ($simulate) {

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Content\Models\Permission;
 use App\Modules\Ecommerce\database\factories\UserAccessPermissionsFactory;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
@@ -43,7 +44,7 @@ class UserAccessPermission extends Model
         return UserAccessPermissionsFactory::new();
     }
 
-    public function permission()
+    public function permission(): BelongsTo
     {
         return $this->belongsTo(Permission::class);
     }

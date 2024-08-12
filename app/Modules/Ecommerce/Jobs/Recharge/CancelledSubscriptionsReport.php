@@ -24,12 +24,6 @@ class CancelledSubscriptionsReport implements ShouldQueue
 
     protected const TIMEOUT = 840;
 
-    /**
-     * @param  Carbon  $createdAtMin
-     * @param  Carbon  $createdAtMax
-     * @param  array  $to
-     * @param  array|null  $cc
-     */
     public function __construct(
         protected Carbon $createdAtMin,
         protected Carbon $createdAtMax,

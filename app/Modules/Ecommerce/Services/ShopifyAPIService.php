@@ -189,8 +189,6 @@ class ShopifyAPIService
 
     /**
      * @param array $productVariantIdsToAddToCart // ex: [ 'variant_id_1' => ['quantity' => 1, 'sellingPlanId' => 123], 'variant_id_2' => ['quantity' => 1, 'sellingPlanId' => 123] ]
-     * @param array $discountCodesToAddToCard
-     * @return array
      * @throws MissingArgumentException
      * @throws HttpRequestException
      * @throws Exception
@@ -267,7 +265,7 @@ class ShopifyAPIService
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function clearCart($cartId)
+    public function clearCart($cartId): bool
     {
         $shopifyCartData = $this->getCart($cartId);
 
@@ -297,9 +295,6 @@ class ShopifyAPIService
 
     /**
      * @param $cartId
-     * @param array $productVariantIdsAndSellingPlanIdsToAddToCart
-     * @param array $discountCodesToApply
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
@@ -381,7 +376,6 @@ class ShopifyAPIService
      * @param $cartId
      * @param $merchandiseLineItemId
      * @param $newQuantity
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
@@ -442,7 +436,6 @@ class ShopifyAPIService
     /**
      * @param $cartId
      * @param $merchandiseLineItemId
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
@@ -497,7 +490,6 @@ class ShopifyAPIService
     /**
      * @param $cartId
      * @param array $productVariantIdsToAddToCart
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      * @throws Exception
@@ -540,12 +532,10 @@ class ShopifyAPIService
      * This accepts either Shopify product SKUs or product variant SKUs. It always returns the underlying
      * product Shopify product variant id (not the product ID).
      *
-     * @param array $productSKUs
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductVariantIdsFromSKUs(array $productSKUs)
+    public function getProductVariantIdsFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -611,12 +601,10 @@ class ShopifyAPIService
      * This accepts either Shopify product SKUs or product variant SKUs. It always returns the underlying
      * product Shopify product variant id (not the product ID).
      *
-     * @param array $productSKUs
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductInventoryCountFromSKUs(array $productSKUs)
+    public function getProductInventoryCountFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -669,12 +657,10 @@ class ShopifyAPIService
     /**
      * This accepts either Shopify product SKUs or product variant SKUs.
      *
-     * @param array $productSKUs
-     * @return array
      * @throws HttpRequestException
      * @throws MissingArgumentException
      */
-    public function getProductsVariantsWithSellingPlansFromSKUs(array $productSKUs)
+    public function getProductsVariantsWithSellingPlansFromSKUs(array $productSKUs): array
     {
         $productSKUsQueryStrings = [];
 
@@ -754,9 +740,8 @@ class ShopifyAPIService
      *
      * @param $userEmail
      * @param null $redirectToUrl
-     * @return string
      */
-    public function generateMultipassToken($userEmail, $redirectToUrl = null)
+    public function generateMultipassToken($userEmail, $redirectToUrl = null): string
     {
         $customerDataHash = ['email' => $userEmail];
 

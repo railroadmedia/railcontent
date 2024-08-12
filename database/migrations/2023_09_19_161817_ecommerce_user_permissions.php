@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    public function up()
+    public function up(): void
     {
         if (Schema::getConnection()->getDriverName() === "sqlite") {
             // SQLite doesn't allow us to modify the enum options later, so this is the complete setup of the source
@@ -48,7 +48,7 @@ return new class () extends Migration {
     }
 
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('user_access_permissions');
     }

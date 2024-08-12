@@ -15,7 +15,7 @@ class PaymentServiceTest extends TestCase
 {
     private PaymentService $paymentService;
 
-    public function test_returns_total_paid_for_order()
+    public function test_returns_total_paid_for_order(): void
     {
         $amount = 999.0;
         // create a basic order that doesn't use an external provider
@@ -27,11 +27,6 @@ class PaymentServiceTest extends TestCase
     /**
      * Helper function to create an order with a valid payment using the specified external provider for each
      * amount given
-     *
-     * @param  string|null  $externalProvider
-     * @param  string  $currency
-     * @param  float  ...$amounts
-     * @return Order
      */
     private function createOrder(?string $externalProvider, string $currency, float ...$amounts): Order
     {
@@ -44,7 +39,7 @@ class PaymentServiceTest extends TestCase
         return Order::factory()->hasAttached($payments, ['created_at' => now()])->create();
     }
 
-    public function test_returns_total_paid_in_usd_for_order_in_another_currency()
+    public function test_returns_total_paid_in_usd_for_order_in_another_currency(): void
     {
         $amount = 100.0;
         // create a basic order that doesn't use an external provider
@@ -60,7 +55,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals(74.02, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_order_with_multiple_payments()
+    public function test_returns_total_paid_for_order_with_multiple_payments(): void
     {
         $amount1 = 100.0;
         $amount2 = 555.0;
@@ -71,7 +66,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount1 + $amount2 + $amount3, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_subscription_payment()
+    public function test_returns_total_paid_for_subscription_payment(): void
     {
         $amount = 999.0;
         // create a basic subscription payment that doesn't use an external provider
@@ -80,7 +75,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_subscription_payment_with_refund()
+    public function test_returns_total_paid_for_subscription_payment_with_refund(): void
     {
         $paid = 999.0;
         $refunded = 100.0;
@@ -96,7 +91,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals(899.0, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_subscription_payment_with_over_refund()
+    public function test_returns_total_paid_for_subscription_payment_with_over_refund(): void
     {
         $paid = 999.0;
         $refunded = 1000.0;
@@ -114,11 +109,6 @@ class PaymentServiceTest extends TestCase
     /**
      * Helper function to create a subscription payment with a valid payment in the given amount,
      * using the specified external provider
-     *
-     * @param  string|null  $externalProvider
-     * @param  string  $currency
-     * @param  float  $amount
-     * @return SubscriptionPayment
      */
     private function createSubscriptionPayment(
         ?string $externalProvider,
@@ -134,7 +124,7 @@ class PaymentServiceTest extends TestCase
         if ($externalProvider === Payment::EXTERNAL_PROVIDER_APPLE) {
             AppleReceipt::create([
                 'brand' => 'musora',
-                'receipt' => $this->faker->text,
+                'receipt' => $this->faker->text(),
                 'request_type' => AppleReceipt::MOBILE_APP_REQUEST_TYPE,
                 'valid' => 1,
                 'transaction_id' => $payment->external_id,
@@ -146,7 +136,7 @@ class PaymentServiceTest extends TestCase
                 'brand' => 'musora',
                 'package_name' => 'com.musoraapp',
                 'product_id' => $subscriptionPayment->subscription->product_id,
-                'purchase_token' => $this->faker->text,
+                'purchase_token' => $this->faker->text(),
                 'request_type' => GoogleReceipt::MOBILE_APP_REQUEST_TYPE,
                 'notification_type' => GoogleReceipt::GOOGLE_RENEWAL_NOTIFICATION_TYPE,
                 'valid' => 1,
@@ -159,7 +149,7 @@ class PaymentServiceTest extends TestCase
         return $subscriptionPayment;
     }
 
-    public function test_returns_total_paid_for_stripe()
+    public function test_returns_total_paid_for_stripe(): void
     {
         $amount = 999.0;
         // create a basic subscription payment that doesn't use an external provider
@@ -168,7 +158,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_paypal()
+    public function test_returns_total_paid_for_paypal(): void
     {
         $amount = 999.0;
         // create a basic subscription payment that doesn't use an external provider
@@ -177,7 +167,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_apple()
+    public function test_returns_total_paid_for_apple(): void
     {
         $amount = 999.0;
         // create a basic subscription payment that doesn't use an external provider
@@ -186,7 +176,7 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount, $totalAmount);
     }
 
-    public function test_returns_total_paid_for_google()
+    public function test_returns_total_paid_for_google(): void
     {
         $amount = 999.0;
         // create a basic subscription payment that doesn't use an external provider
@@ -198,7 +188,7 @@ class PaymentServiceTest extends TestCase
     /**
      * @throws RequestException
      */
-    public function test_get_converted_currency_amount_throws_exception_for_invalid_original_currency()
+    public function test_get_converted_currency_amount_throws_exception_for_invalid_original_currency(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->paymentService->getConvertedCurrencyAmount(1.0, 'xyz', now(), 'usd');
@@ -207,7 +197,7 @@ class PaymentServiceTest extends TestCase
     /**
      * @throws RequestException
      */
-    public function test_get_converted_currency_amount_throws_exception_for_invalid_desired_currency()
+    public function test_get_converted_currency_amount_throws_exception_for_invalid_desired_currency(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->paymentService->getConvertedCurrencyAmount(1.0, 'usd', now(), 'xyz');
@@ -216,7 +206,7 @@ class PaymentServiceTest extends TestCase
     /**
      * @throws RequestException
      */
-    public function test_get_converted_currency_amount_throws_exception_for_failure()
+    public function test_get_converted_currency_amount_throws_exception_for_failure(): void
     {
         Http::fake([
             // fake the call to exchangerate-api.com
@@ -231,7 +221,7 @@ class PaymentServiceTest extends TestCase
     /**
      * @throws RequestException
      */
-    public function test_get_converted_currency_amount_throws_exception_for_missing_desired_currency()
+    public function test_get_converted_currency_amount_throws_exception_for_missing_desired_currency(): void
     {
         Http::fake([
             // fake the call to exchangerate-api.com
@@ -247,7 +237,7 @@ class PaymentServiceTest extends TestCase
     /**
      * @throws RequestException
      */
-    public function test_get_converted_currency_amount_returns_converted_amount()
+    public function test_get_converted_currency_amount_returns_converted_amount(): void
     {
         Http::fake([
             // fake the call to exchangerate-api.com

@@ -13,7 +13,6 @@ class CustomerCreated
 
     /**
      * CustomerCreated constructor.
-     * @param  Customer  $customer
      */
     public function __construct(Customer $customer)
     {

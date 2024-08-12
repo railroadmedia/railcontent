@@ -21,8 +21,6 @@ class MusoraCenterAdmin
 
     /**
      * Authentication constructor.
-     *
-     * @param PermissionService $permissionService
      */
     public function __construct(PermissionService $permissionService, EcommerceEntityManager $ecommerceEntityManager)
     {
@@ -33,8 +31,6 @@ class MusoraCenterAdmin
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

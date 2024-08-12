@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -17,7 +18,7 @@ class MusoraCenterContentController extends Controller
         $this->contentService = $contentService;
     }
 
-    public function showPreview($domain, $brand, $contentId)
+    public function showPreview($domain, $brand, $contentId): RedirectResponse
     {
         ConfigService::$availableBrands = [$brand];
         ContentRepository::$pullFutureContent = true;

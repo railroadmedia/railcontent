@@ -20,10 +20,8 @@ class SyncShopifyProductInventoryToProductsTable extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(ShopifyAPIService $shopifyAPIService)
+    public function handle(ShopifyAPIService $shopifyAPIService): int
     {
         $this->info('Starting SyncShopifyProductInventoryToProductsTable.');
 

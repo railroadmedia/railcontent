@@ -8,9 +8,6 @@ trait LogsShopify
 {
     /**
      * Log the given info message
-     *
-     * @param string $infoMessage
-     * @return void
      */
     protected function logInfo(string $infoMessage): void
     {
@@ -19,9 +16,6 @@ trait LogsShopify
 
     /**
      * Log the given debug message
-     *
-     * @param string $debugMessage
-     * @return void
      */
     protected function logDebug(string $debugMessage): void
     {
@@ -30,9 +24,6 @@ trait LogsShopify
 
     /**
      * Log the given warning message
-     *
-     * @param string $warningMessage
-     * @return void
      */
     protected function logWarning(string $warningMessage): void
     {
@@ -41,9 +32,6 @@ trait LogsShopify
 
     /**
      * Log the given error message
-     *
-     * @param string $errorMessage
-     * @return void
      */
     protected function logError(string $errorMessage): void
     {
@@ -52,8 +40,6 @@ trait LogsShopify
 
     /**
      * Get the name of the class that called this job - useful for logging
-     *
-     * @return string
      */
     abstract protected function getClassName(): string;
 }

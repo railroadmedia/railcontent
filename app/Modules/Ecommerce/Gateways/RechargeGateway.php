@@ -47,7 +47,7 @@ class RechargeGateway
         // Setup options
         $defaults = [
             'charset' => 'UTF-8',
-            'headers' => array(),
+            'headers' => [],
             'fail_on_error' => false,
             'return_array' => false,
             'all_data' => false,
@@ -96,7 +96,7 @@ class RechargeGateway
         }
         $ch = $this->ch;
 
-        $curlOpts = array(
+        $curlOpts = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $url,
             CURLOPT_HTTPHEADER => $headers,
@@ -108,7 +108,7 @@ class RechargeGateway
             CURLOPT_HEADER => 1,
             CURLOPT_NOSIGNAL => 0,
             CURLOPT_TIMEOUT_MS => 30000,
-        );
+        ];
 
         if (!$data || $curlOpts[CURLOPT_CUSTOMREQUEST] === 'GET') {
             $curlOpts[CURLOPT_POSTFIELDS] = '';
@@ -177,9 +177,9 @@ class RechargeGateway
             }
 
             if (isset($returnInfo['HTTP_CODE']) && (strpos(
-                        $returnInfo['HTTP_CODE'],
-                        'HTTP/1.1 429 TOO MANY REQUESTS'
-                    ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
+                $returnInfo['HTTP_CODE'],
+                'HTTP/1.1 429 TOO MANY REQUESTS'
+            ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
                 Log::warning(
                     '[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 1)'
                 );
@@ -205,9 +205,9 @@ class RechargeGateway
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 400 BAD REQUEST') > -1) {
                 if (isset($result->errors) && isset($result->errors->UNEXPECTED_VARIANT_ERROR_TYPE)) {
                     if (strpos(
-                            $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
-                            'Shopify returned 429 rate limit regarding this call'
-                        ) > -1) {
+                        $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
+                        'Shopify returned 429 rate limit regarding this call'
+                    ) > -1) {
                         Log::info('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (Shopify 429)');
                         sleep($sleepTime);
                         $retry = true;
@@ -275,8 +275,6 @@ class RechargeGateway
     /**
      * Get the profile URL for the given Recharge customer ID
      *
-     * @param int $customerId
-     * @return string
      * @throws Exception
      */
     public function getCustomerProfile(int $customerId): string
@@ -289,9 +287,6 @@ class RechargeGateway
 
     /**
      * Get the customer from Recharge, for the given Shopify ID
-     *
-     * @param int $shopifyCustomerId
-     * @return Customer|null
      */
     public function getRechargeCustomer(int $shopifyCustomerId): ?Customer
     {
@@ -316,7 +311,7 @@ class RechargeGateway
         }
 
         // transform into our model
-        $customers->transform(fn($customerData) => new Customer($customerData));
+        $customers->transform(fn ($customerData) => new Customer($customerData));
 
         // in case there are multiple customers with that shopify id, we should log it for investigation
         if ($customers->count() > 1) {
@@ -347,8 +342,6 @@ class RechargeGateway
     /**
      * Gets the default payment method for a Recharge customer
      *
-     * @param int $rechargeCustomerId
-     * @return null|PaymentMethod
      * @throws Exception
      */
     public function getCustomerDefaultPaymentMethod(int $rechargeCustomerId): ?PaymentMethod
@@ -361,15 +354,14 @@ class RechargeGateway
             )->payment_methods ?? []
         );
 
-        return $data->filter(fn($p) => $p->default)
-            ->transform(fn($data) => new PaymentMethod($data))
+        return $data->filter(fn ($p) => $p->default)
+            ->transform(fn ($data) => new PaymentMethod($data))
             ->first();
     }
 
     /**
      * Update the customer in Recharge, identified by the given Shopify ID, with the given array of values
      *
-     * @param int $shopifyCustomerId
      * @param array $updateValues the key-value array of data to update. e.g. ["email" => "foo@bar.baz", "first_name" => "Foo"]
      * @return bool success or fail in updating all given values
      * @throws Exception
@@ -541,16 +533,10 @@ class RechargeGateway
      * Get all subscriptions with the given status that were
      * created within the date range between createdAtMin and createdAtMax.
      *
-     * @param string $status
-     * @param CarbonInterface $createdAtMin
-     * @param CarbonInterface $createdAtMax
-     * @param int $limit
      *
-     * @return Collection
      * @throws Exception
      */
-    public
-    function getSubscriptionsByStatus(
+    public function getSubscriptionsByStatus(
         string $status,
         CarbonInterface $createdAtMin,
         CarbonInterface $createdAtMax,
@@ -582,8 +568,7 @@ class RechargeGateway
         }
     }
 
-    public
-    function updateSubscriptionNextChargeDate(
+    public function updateSubscriptionNextChargeDate(
         $subscription,
         Carbon $nextChargeDate
     ): void {
@@ -612,8 +597,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function createWebhook(
+    public function createWebhook(
         array $data
     ): array {
         $response = $this->call(
@@ -634,8 +618,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function getWebhooks(): array
+    public function getWebhooks(): array
     {
         $response = $this->call(
             'GET',
@@ -648,8 +631,7 @@ class RechargeGateway
     /**
      * @throws Exception
      */
-    public
-    function deleteWebhook(
+    public function deleteWebhook(
         $id
     ): void {
         $this->call(

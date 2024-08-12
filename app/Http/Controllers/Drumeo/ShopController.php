@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Drumeo;
 
+use Illuminate\View\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -80,7 +81,7 @@ class ShopController extends BaseController
         return view('drumeo.shop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
 
-    public function products(Request $request, $domain, $page = null)
+    public function products(Request $request, $domain, $page = null): View
     {
         return view('drumeo.products.'.$page, ['theme' => 'drumeo']);
 

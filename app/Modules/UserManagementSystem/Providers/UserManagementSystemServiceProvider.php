@@ -15,8 +15,6 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 {
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -25,10 +23,8 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->commands(
             [
@@ -78,10 +74,8 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Laravel auth integration
         $this->app->register(AuthenticationServiceProvider::class);

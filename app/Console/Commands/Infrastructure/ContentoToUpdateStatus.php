@@ -4,7 +4,7 @@ namespace App\Console\Commands\Infrastructure;
 
 class ContentoToUpdateStatus
 {
-    const DELIST = [
+    public const DELIST = [
         225339,
         225919,
         225921,
@@ -87,7 +87,7 @@ class ContentoToUpdateStatus
         409066,
     ];
 
-    const DRAFT = [
+    public const DRAFT = [
         13796,
         13945,
         19307,

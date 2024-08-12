@@ -25,7 +25,7 @@ class BrandCalendarSync extends Command
         AddEventService $addEventService,
         ContentService $contentService,
         CalendarSyncService $calendarSyncService
-    ) {
+    ): void {
         $this->addEventService = $addEventService;
         $this->contentService = $contentService;
         $this->calendarSyncService = $calendarSyncService;
@@ -51,10 +51,9 @@ class BrandCalendarSync extends Command
     // =================================================================================================================
 
     /**
-     * @return void
      * @throws Exception
      */
-    private function syncInstructors($brand)
+    private function syncInstructors($brand): void
     {
         // Next we can pull all events for all calendars scheduled in the future (past a specified date).
         // https://www.addevent.com/documentation/calendar-api#anchor-calendar-all-events
@@ -80,7 +79,6 @@ class BrandCalendarSync extends Command
 
     /**
      * @param $brand
-     * @return Collection
      */
     private function coaches($brand): Collection
     {
@@ -115,10 +113,6 @@ class BrandCalendarSync extends Command
         return $coaches;
     }
 
-    /**
-     * @param Collection $coaches
-     * @return bool
-     */
     private function syncCoachCalendars(Collection $coaches): bool
     {
         $calendarVOs = [];
@@ -287,10 +281,9 @@ class BrandCalendarSync extends Command
     /**
      * @param $brand
      * @param $coaches
-     * @return void
      * @throws Exception
      */
-    private function syncCoachCalendarEvents($brand, $coaches)
+    private function syncCoachCalendarEvents($brand, $coaches): void
     {
         $this->info('');
         $this->info('# Synchronizing events in coach calendars');
@@ -341,10 +334,9 @@ class BrandCalendarSync extends Command
 
     /**
      * @param $brand
-     * @return void
      * @throws Exception
      */
-    private function syncTypeSpecificAndOverview($brand)
+    private function syncTypeSpecificAndOverview($brand): void
     {
         $allContent = [];
 
@@ -380,7 +372,6 @@ class BrandCalendarSync extends Command
      * @param $brand
      * @param $type
      * @param $futureOnly
-     * @return array
      */
     private function getContentByContentType($brand, $type): array
     {
@@ -430,7 +421,7 @@ class BrandCalendarSync extends Command
      *
      * Only for development
      */
-    private function constrainCoachesToOnlyThoseWithContentReleasesComingUp(&$coaches, $brand)
+    private function constrainCoachesToOnlyThoseWithContentReleasesComingUp(&$coaches, $brand): void
     {
         if (app()->environment() != 'local') {
             return;

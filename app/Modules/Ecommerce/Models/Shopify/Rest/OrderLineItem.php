@@ -42,7 +42,6 @@ class OrderLineItem
      * Calculate the discount applied to this order line item
      *
      * @param $shopifyLineItemData
-     * @return float
      */
     private function calculateDiscount($shopifyLineItemData): float
     {
@@ -57,8 +56,6 @@ class OrderLineItem
 
     /**
      * Get if this line item is for a trial
-     *
-     * @return bool
      */
     public function isTrial(): bool
     {
@@ -67,8 +64,6 @@ class OrderLineItem
 
     /**
      * Get if this line item is for a membership
-     *
-     * @return bool
      */
     public function isMembership(): bool
     {

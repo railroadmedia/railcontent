@@ -12,10 +12,6 @@ class EngageContentEventListener
     private ContentLastEngagedService $contentLastEngagedService;
     private UserPlaylistsService $userPlaylistService;
 
-    /**
-     * @param ContentLastEngagedService $contentLastEngagedService
-     * @param UserPlaylistsService $userPlaylistService
-     */
     public function __construct(ContentLastEngagedService $contentLastEngagedService, UserPlaylistsService $userPlaylistService)
     {
         $this->contentLastEngagedService = $contentLastEngagedService;

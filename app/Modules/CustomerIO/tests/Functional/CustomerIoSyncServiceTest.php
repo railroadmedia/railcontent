@@ -105,8 +105,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
 
     /**
      * Create a user who is not a lifetime member
-     *
-     * @return User
      */
     private function createUser(): User
     {
@@ -119,10 +117,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
 
     /**
      * Create a non-lifetime product and a subscription to it for the given user
-     *
-     * @param User $user
-     * @param string|null $brand
-     * @return Product
      */
     private function createProductForUser(User $user, ?string $brand = self::ROOT_BRAND): Product
     {
@@ -156,10 +150,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
     /**
      * Create a lifetime membership product for the specified brand.
      * If a user is provided, it will automatically be linked to the user.
-     *
-     * @param User|null $user
-     * @param string|null $brand
-     * @return Product
      */
     private function createLifetimeProduct(?User $user = null, ?string $brand = self::ROOT_BRAND): Product
     {
@@ -194,9 +184,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
     /**
      * Get the user's membership access attributes from the CustomerIO sync service, and return only those that are
      * for brand lifetime memberships
-     *
-     * @param User $user
-     * @return Collection
      */
     private function getLifetimeMembershipAccessAttributes(User $user): Collection
     {
@@ -209,9 +196,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
 
     /**
      * Filter the collection of lifetime membership attributes and return only those that are true
-     *
-     * @param Collection $lifetimeAccessAttributes
-     * @return Collection
      */
     private function getTrueLifetimeMembershipAccessAttributes(Collection $lifetimeAccessAttributes): Collection
     {
@@ -223,10 +207,6 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
     /**
      * Get the user's custom attributes from the CustomerIO sync service, and return only those that are
      * for brand _membership_latest-access-product-id
-     *
-     * @param User $user
-     * @param array $brands
-     * @return Collection
      */
     private function getMembershipLatestAccessProductIdAttributes(User $user, array $brands): Collection
     {

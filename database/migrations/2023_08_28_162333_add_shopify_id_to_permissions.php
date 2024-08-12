@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('railcontent_permissions', function (Blueprint $table) {
             // we store our permissions in Shopify as metaobjects, which have a string guid instead of the usual integer
@@ -20,10 +18,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('railcontent_permissions', function (Blueprint $table) {
             $table->dropColumn('shopify_id');

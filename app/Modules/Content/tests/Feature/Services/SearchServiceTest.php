@@ -17,7 +17,7 @@ class SearchServiceTest extends TestCase
         $this->searchService = app(SearchService::class);
     }
 
-    public function test_rebuildSearchIndexes()
+    public function test_rebuildSearchIndexes(): void
     {
         /** @var Instructor $instructor */
         $instructor = Instructor::factory()->create();
@@ -44,9 +44,6 @@ class SearchServiceTest extends TestCase
 
     /**
      * Format the string value(s), in the manner done by the SearchService
-     *
-     * @param  string  ...$values
-     * @return string
      */
     private function format(string ...$values): string
     {

@@ -27,10 +27,8 @@ class SeedLiveAndScheduledContent extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle(ContentService $contentService)
+    public function handle(ContentService $contentService): int
     {
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
 

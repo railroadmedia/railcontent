@@ -31,7 +31,6 @@ class SaltedSessionGuard extends SessionGuard
     }
 
     /**
-     * @param AuthenticatableContract $user
      * @param $rememberTokenValue
      */
     public function setRememberToken(AuthenticatableContract $user, $rememberTokenValue)
@@ -48,10 +47,8 @@ class SaltedSessionGuard extends SessionGuard
 
     /**
      * Copied from laravel SessionGuard
-     *
-     * @return void
      */
-    public function logout()
+    public function logout(): void
     {
         $user = $this->user();
 
@@ -127,9 +124,8 @@ class SaltedSessionGuard extends SessionGuard
 
     /**
      * @param AuthenticatableContract|User $user
-     * @param bool $remember
      */
-    public function login(AuthenticatableContract|User $user, $remember = false)
+    public function login(AuthenticatableContract|User $user, bool $remember = false)
     {
         $this->updateSession($user->getAuthIdentifier());
 
@@ -153,9 +149,8 @@ class SaltedSessionGuard extends SessionGuard
      * Create a new "remember me" token for the user if one doesn't already exist.
      *
      * @param AuthenticatableContract|User $user
-     * @return void
      */
-    protected function createAndQueueRememberToken(AuthenticatableContract|User $user)
+    protected function createAndQueueRememberToken(AuthenticatableContract|User $user): void
     {
         $this->provider->updateRememberToken($user, Str::random(60));
     }

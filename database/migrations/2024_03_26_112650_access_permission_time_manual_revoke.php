@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
             $table->boolean('manually_revoked')->default(false)->after('revoked_at');
@@ -19,10 +17,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
             $table->dropColumn('manually_revoked');

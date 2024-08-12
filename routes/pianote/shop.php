@@ -8,8 +8,7 @@ use App\Http\Controllers\Pianote\LeadGenController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-        Route::group(
-            ['prefix' => 'shop' ],
+        Route::prefix('shop')->group(
             function () {
                 Route::get('/30-days-to-better-technique', [SalesController::class, 'betterTechnique']);
                 Route::get('/500-songs', [SalesController::class, 'songs500']);

@@ -1,55 +1,167 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
-|
-*/
+use App\Providers\AppServiceProvider;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Log;
+use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withProviders([
+        \Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+        \Railroad\Response\Providers\ResponseServiceProvider::class,
+        \Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
+        \Railroad\Usora\Providers\UsoraServiceProvider::class,
+        \Railroad\Railforums\Providers\ForumServiceProvider::class,
+        \Railroad\Permissions\Providers\PermissionsServiceProvider::class,
+        \Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
+        \Railroad\Railnotifications\NotificationsServiceProvider::class,
+        \Railroad\Points\Providers\PointsServiceProvider::class,
+        \Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
+        \Railroad\Railanalytics\AnalyticsServiceProvider::class,
+        \Railroad\Location\Providers\LocationServiceProvider::class,
+        \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
+        \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
+        \Jenssegers\Agent\AgentServiceProvider::class,
+        \Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
+        \Venturecraft\Revisionable\RevisionableServiceProvider::class,
+    ])
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        // api: __DIR__.'/../routes/api.php',
+        commands: __DIR__.'/../routes/console.php',
+        // channels: __DIR__.'/../routes/channels.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectGuestsTo(fn () => route('login'));
+        $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
-/*
-|--------------------------------------------------------------------------
-| Bind Important Interfaces
-|--------------------------------------------------------------------------
-|
-| Next, we need to bind some important interfaces into the container so
-| we will be able to resolve them when needed. The kernels serve the
-| incoming requests to this application from both the web and CLI.
-|
-*/
+        $middleware->encryptCookies(except: [
+        ]);
+        $middleware->validateCsrfTokens(except: [
+            '/user-management-system/login/token',
+            '/user-management-system/login/cookie',
+            '/railtracker/media-playback-session',
+            '/customer-io/*',
+            '*/songs',
+            '/ecommerce/access-codes*',
+            '/ecommerce/user-access-permission*',
+            '/ecommerce/revenuecat/webhook/notification',
+            '/ecommerce/shopify/webhook/*',
+            '/ecommerce/recharge/webhook/*',
+        ]);
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
-);
+        $middleware->append(\App\Http\Middleware\SessionDomains::class);
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
-);
+        $middleware->group('web_public', [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Http\Middleware\SetContentPermissions::class,
+            \App\Http\Middleware\RedirectIfMobileRequest::class,
+            \Railroad\LeadTracker\Middleware\LeadTrackerMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
+            \App\Http\Middleware\LoggingContextMiddleware::class,
+        ]);
 
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
+        $middleware->group('web_authenticated', [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Http\Middleware\SetContentPermissions::class,
+            \App\Http\Middleware\RedirectIfMobileRequest::class,
+            \Railroad\LeadTracker\Middleware\LeadTrackerMiddleware::class,
+            \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
+            \App\Http\Middleware\LoggingContextMiddleware::class,
+            \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+        ]);
 
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
+        $middleware->group('web_member_only', [
+            \App\Http\Middleware\ExpiredMemberRedirect::class,
+        ]);
 
-return $app;
+        $middleware->group('api_public', [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Http\Middleware\SetContentPermissions::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
+            \App\Http\Middleware\LoggingContextMiddleware::class,
+        ]);
+
+        $middleware->group('api_authenticated', [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Http\Middleware\SetContentPermissions::class,
+            \Railroad\MusoraApi\Middleware\BrandMiddleware::class,
+            \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
+            \App\Http\Middleware\LoggingContextMiddleware::class,
+            \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
+        ]);
+
+        $middleware->group('web_or_api_public', [
+            \App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic::class,
+        ]);
+
+        $middleware->group('web_or_api_authenticated', [
+            \App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated::class,
+        ]);
+
+        $middleware->group('web_authenticated_admin', [
+            \App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin::class,
+        ]);
+
+        $middleware->replace(\Illuminate\Http\Middleware\TrustProxies::class, \App\Http\Middleware\TrustProxies::class);
+
+        $middleware->alias([
+            'cors' => \App\Http\Middleware\Cors::class,
+            'deprecated' => \App\Modules\MusoraApi\Middleware\DeprecationMiddleware::class,
+            'musora-center-admin' => \App\Modules\MusoraCenter\Middleware\MusoraCenterAdmin::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->renderable(function (Throwable $e) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'trace' => ' File::' . $e->getFile() . ' Line::' . $e->getLine(),
+                ], 500);
+            }
+        });
+
+        $exceptions->reportable(function (Throwable $e) {
+            if ($e instanceof MusoraAPIException) {
+                return false;
+            }
+            Log::info(request()->url());
+        });
+    })->create();

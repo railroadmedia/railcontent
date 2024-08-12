@@ -37,7 +37,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -78,7 +78,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_get_customer_by_user_id()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $userId = rand();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
@@ -121,7 +121,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id_not_found_in_database()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -132,13 +132,13 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_get_customer_by_id_found_in_database_but_not_from_api()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $customer = new Customer();
         $customer->generateUUID();
-        $customer->email = $this->faker->email;
+        $customer->email = $this->faker->email();
         $customer->workspace_name = $accountConfigData['workspace_name'];
         $customer->workspace_id = $accountConfigData['workspace_id'];
         $customer->site_id = $accountConfigData['site_id'];
@@ -152,7 +152,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_customer_without_attributes_or_existing_id_or_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
@@ -212,7 +212,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_customer_with_attributes_and_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $createdAt =
@@ -303,7 +303,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_customer_with_user_id_and_attributes_and_created_at()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();
@@ -398,7 +398,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_or_update_customer_create()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();
@@ -493,7 +493,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_or_update_customer_update()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();
@@ -612,7 +612,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_process_form()
     {
         $this->markTestSkipped("Broken test - needs updates for form to process");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         //TODO: there is no form called "Example Form Name". Should we add one???
         $formName = 'Example Form Name';
         $accountConfigData = $this->customerIoService->getAccountConfigData('musora');
@@ -694,7 +694,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_event_all_data()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $eventName = 'my_event_1';
         $eventType = 'my_event_type_1';
@@ -733,7 +733,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_sync_user_device()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $createdAt =
             Carbon::now()
@@ -774,8 +774,8 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_merge_customers()
     {
         $accountName = 'musora';
-        $email1 = $this->faker->email;
-        $email2 = $this->faker->email;
+        $email1 = $this->faker->email();
+        $email2 = $this->faker->email();
         $createdAt1 =
             Carbon::now()
             ->subDays(2)->timestamp;
@@ -836,8 +836,8 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $accountName = 'musora';
         // CIO now uses email as IDs as well, so we need two different emails,
         // otherwise CIO will just update the primaryCustomer attributes
-        $email1 = $this->faker->email;
-        $email2 = $this->faker->email;
+        $email1 = $this->faker->email();
+        $email2 = $this->faker->email();
         $createdAt1 =
             Carbon::now()
             ->subDays(1)->timestamp;
@@ -911,7 +911,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_merge_customers_failed_missing_from_db()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $createdAt1 =
             Carbon::now()
             ->subDays(2)->timestamp;
@@ -957,7 +957,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_create_event_for_email_or_id()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        $email = $this->faker->email();
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -983,7 +983,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_create_event_for_user_id()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $userId = rand();
 
         $createdCustomer = $this->customerIoService->createCustomer(
@@ -1014,7 +1014,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     {
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $userId = rand();
 
         $createdCustomer = $this->customerIoService->createCustomer(
@@ -1063,7 +1063,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
     public function test_get_customer_events_by_user_id()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $userId = rand();
 
         $createdCustomer = $this->customerIoService->createCustomer(
@@ -1098,7 +1098,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_or_update_customer_create_prospect_workspace()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora_prospects';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();
@@ -1156,7 +1156,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
     public function test_create_or_update_customer_update_not_sync_prospect_workspace()
     {
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $userId = rand();

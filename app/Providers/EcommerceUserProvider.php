@@ -49,10 +49,6 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         $this->inflector = InflectorFactory::create()->build();
     }
 
-    /**
-     * @param  int  $id
-     * @return EcommerceUser|null
-     */
     public function getUserById(int $id): ?EcommerceUser
     {
         if (!empty(user()) && user()->id == $id) {
@@ -72,27 +68,16 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         return $this->userIdCache[$id] ?? null;
     }
 
-    /**
-     * @param  array  $ids
-     * @return array
-     */
     public function getUsersByIds(array $ids): array
     {
         return User::query()->whereIn('id', $ids)->get()->toArray();
     }
 
-    /**
-     * @param  EcommerceUser  $user
-     * @return int
-     */
     public function getUserId(EcommerceUser $user): int
     {
         return $user->getId();
     }
 
-    /**
-     * @return User|null
-     */
     public function getCurrentUser(): ?EcommerceUser
     {
         if (!user()) {
@@ -102,17 +87,11 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         return new EcommerceUser(user()->id, user()->email);
     }
 
-    /**
-     * @return int|null
-     */
     public function getCurrentUserId(): ?int
     {
         return user()->id ?? null;
     }
 
-    /**
-     * @return TransformerAbstract
-     */
     public function getUserTransformer(): TransformerAbstract
     {
         return new UserTransformer();
@@ -120,8 +99,6 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
 
     /**
      * @param $entity
-     * @param  string  $relationName
-     * @param  array  $data
      */
     public function hydrateTransDomain($entity, string $relationName, array $data): void
     {
@@ -139,19 +116,12 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         // else some exception should be thrown
     }
 
-    /**
-     * @param  string  $resourceType
-     * @return bool
-     */
     public function isTransient(string $resourceType): bool
     {
         return $resourceType !== self::RESOURCE_TYPE;
     }
 
     /**
-     * @param  string  $email
-     * @param  string  $password
-     * @return User|null
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -170,9 +140,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     }
 
     /**
-     * @param  string  $email
      *
-     * @return bool
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -182,21 +150,11 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         return User::query()->where('email', $email)->count() > 0;
     }
 
-    /**
-     * @param  string  $email
-     * @param  string  $password
-     *
-     * @return bool
-     */
     public function checkCredentials(string $email, string $password): bool
     {
         return auth()->validate(['email' => $email, 'password' => $password]);
     }
 
-    /**
-     * @param  EcommerceUser  $user
-     * @return string
-     */
     public function getUserAuthToken(EcommerceUser $user): string
     {
         $user = User::query()->find($user->getId());
@@ -206,10 +164,6 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         return $token->plainTextToken;
     }
 
-    /**
-     * @param  string  $email
-     * @return EcommerceUser|null
-     */
     public function getUserByEmail(string $email): ?EcommerceUser
     {
         $user = User::query()->where('email', $email)->first();
@@ -223,11 +177,8 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
 
     /**
      * Returns a list of brands that the user is currently a member of.
-     *
-     * @param  integer  $userId
-     * @return array
      */
-    public function getBrandsUserIsAMemberOf($userId)
+    public function getBrandsUserIsAMemberOf(int $userId): array
     {
         if (isset($this->brandsUserIsAMemberOfCache[$userId])) {
             return $this->brandsUserIsAMemberOfCache[$userId];

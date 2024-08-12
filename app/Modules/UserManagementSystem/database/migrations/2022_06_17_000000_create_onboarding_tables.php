@@ -4,14 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnboardingTables extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (!Schema::hasTable('onboarding_gears')) {
             Schema::create('onboarding_gears', function (Blueprint $table) {
@@ -57,14 +54,12 @@ class CreateOnboardingTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('onboarding_gears');
         Schema::dropIfExists('onboarding_topics');
         Schema::dropIfExists('onboarding_genres');
         Schema::dropIfExists('onboarding_experience');
     }
-}
+};

@@ -35,7 +35,7 @@ class Cohort extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            BelongsTo::make('Brand', 'brand', \App\Nova\Brand::class)->sortable(),
             Text::make('slug')->required()->rules('required'),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Cohort Title', 'cohort_title')

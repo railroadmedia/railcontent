@@ -20,7 +20,7 @@ class CheckSongMembershipAccess extends Command
     public function handle(
         UserAccessPermissionsService $accessPermissionsService,
         UserService $userService
-    ) {
+    ): void {
         $users = User::query()
             ->whereHas('userAccessPermissions', function (Builder $query) {
                 $query->where('permission_id', UserAccessPermissionsCollection::SongsOnlyMembershipPermission);
@@ -29,8 +29,8 @@ class CheckSongMembershipAccess extends Command
             ->with('userAccessPermissions')
             ->get();
 
-       $shouldUpdate = [];
-       foreach ($users as $user) {
+        $shouldUpdate = [];
+        foreach ($users as $user) {
             $shouldModify = true;
             $userIdOrEmail = $user->id;
             foreach ($user->userAccessPermissions as $userPermission) {

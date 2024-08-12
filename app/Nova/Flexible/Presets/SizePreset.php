@@ -10,10 +10,8 @@ class SizePreset extends Preset
 {
     /**
      * Execute the preset configuration
-     *
-     * @return void
      */
-    public function handle(Flexible $field)
+    public function handle(Flexible $field): void
     {
         $field->resolver(SizeResolver::class);
         $field->button('Add a size');

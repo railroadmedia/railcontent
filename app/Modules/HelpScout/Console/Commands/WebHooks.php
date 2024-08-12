@@ -19,10 +19,8 @@ class WebHooks extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info("\nGetting web hooks");
         $webHooks = $this->helpScoutWebHookService->getWebHooks();

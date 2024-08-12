@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Jobs\WebhookJob;
 use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
@@ -41,7 +42,7 @@ class RevenueCatController extends Controller
     ) {
     }
 
-    public function processNotification(Request $request)
+    public function processNotification(Request $request): JsonResponse
     {
         Log::debug('Processing RevenueCatController processNotification');
         Log::debug(var_export($request->all(), true));
@@ -320,11 +321,6 @@ class RevenueCatController extends Controller
         return response()->json();
     }
 
-    /**
-     * @param float $price
-     * @param float $taxPercentage
-     * @return float|null
-     */
     private function calculateTaxAmount(float $price, float $taxPercentage): ?float
     {
         if (!$taxPercentage) {
@@ -336,8 +332,6 @@ class RevenueCatController extends Controller
 
     /**
      * @param $appUserId
-     * @param string $productId
-     * @return mixed
      * @throws \Exception
      */
     private function getCurrentRevenueCatSubscription($appUserId, string $productId): mixed
@@ -352,8 +346,6 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param User $user
-     * @param string $type
      * @param $musoraProducts
      * @return Subscription|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
      */
@@ -373,7 +365,7 @@ class RevenueCatController extends Controller
         return $musoraSubscription;
     }
 
-    public function syncSubscriber(Request $request)
+    public function syncSubscriber(Request $request): JsonResponse
     {
         $user = $this->revenueCatService->syncSubscriber($request->get('original_app_user_id'), $request->get('email'));
         $revenueCatSubscriber = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
@@ -413,11 +405,9 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function signupRevenuecat(Request $request)
+    public function signupRevenuecat(Request $request): JsonResponse
     {
         $user = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
 
@@ -436,11 +426,9 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function purchaseIOS(Request $request)
+    public function purchaseIOS(Request $request): JsonResponse
     {
         Log::debug('Redirect ecommerce purchase IOS to RevenueCat API:::' . $request->input('data.attributes.email'));
         Log::debug(var_export($request->all(), true));
@@ -529,11 +517,9 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function purchaseGoogle(Request $request)
+    public function purchaseGoogle(Request $request): JsonResponse
     {
         Log::debug('Redirect ecommerce purchase Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
@@ -621,11 +607,10 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\JsonResponse|void
      * @throws \Exception
      */
-    public function restoreGoogle(Request $request)
+    public function restoreGoogle(Request $request): JsonResponse
     {
         Log::debug('Redirect ecommerce restore Google to RevenueCat API');
         Log::debug(var_export($request->all(), true));
@@ -689,11 +674,9 @@ class RevenueCatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function restoreIOS(Request $request)
+    public function restoreIOS(Request $request): JsonResponse
     {
         Log::debug('Redirect ecommerce restore IOS to RevenueCat API');
         Log::debug(var_export($request->all(), true));
@@ -756,12 +739,7 @@ class RevenueCatController extends Controller
         }
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     *
-     */
-    public function signupIOS(Request $request)
+    public function signupIOS(Request $request): JsonResponse
     {
         Log::info('Attempting to apple signup for receipt: ' . $request->get('receipt'));
         $receipt = $request->get('receipt', []);
@@ -797,11 +775,7 @@ class RevenueCatController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function signupGoogle(Request $request)
+    public function signupGoogle(Request $request): JsonResponse
     {
         Log::info('Attempting to google signup  ');
         $receipt = $request->get('purchases', []);
@@ -884,7 +858,6 @@ class RevenueCatController extends Controller
     /**
      * @param $entitlements
      * @param $subscriptions
-     * @return \Illuminate\Http\JsonResponse
      */
     private function checkSignupRestrictions(
         $entitlements,

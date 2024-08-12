@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         // SQLite has some unique needs
         if (Schema::getConnection()->getDriverName() === "sqlite") {
@@ -36,10 +34,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         if (Schema::getConnection()->getDriverName() === "sqlite") {
             $this->downSqlite();
@@ -63,8 +59,6 @@ return new class () extends Migration {
 
     /**
      * Run the migrations (separated out for SQLite support)
-     *
-     * @return void
      */
     private function upSqlite(): void
     {
@@ -104,8 +98,6 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations (separated out for SQLite support)
-     *
-     * @return void
      */
     public function downSqlite(): void
     {

@@ -2,6 +2,8 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
+use Whitecube\NovaFlexibleContent\Layouts\Collection;
+use Illuminate\Support\Collection;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
@@ -16,7 +18,7 @@ class ImageResolver implements ResolverInterface
      * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
      * @return Illuminate\Support\Collection
      */
-    public function get($resource, $attribute, $layouts)
+    public function get($resource, string $attribute, Collection $layouts): Collection
     {
         $images = $resource->images()->get();
 
@@ -46,7 +48,7 @@ class ImageResolver implements ResolverInterface
      * @param  Illuminate\Support\Collection $groups
      * @return string
      */
-    public function set($model, $attribute, $groups)
+    public function set($model, string $attribute, Collection $groups): string
     {
         $class = get_class($model);
 

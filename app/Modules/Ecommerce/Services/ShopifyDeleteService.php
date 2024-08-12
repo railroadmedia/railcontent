@@ -44,10 +44,6 @@ class ShopifyDeleteService
 
     /**
      * Find the User Access Permissions related to the given Shopify Order and delete each entry
-     *
-     * @param SubscriptionPayment $subscriptionPayment
-     * @param array $shopifyOrderAttributes
-     * @return void
      */
     private function deleteUserAccessPermissions(
         SubscriptionPayment $subscriptionPayment,
@@ -89,7 +85,6 @@ class ShopifyDeleteService
     /**
      * Delete the Shopify Order
      *
-     * @param int $shopifyOrderId
      * @return bool whether the order was deleted
      */
     public function deleteOrder(int $shopifyOrderId): bool

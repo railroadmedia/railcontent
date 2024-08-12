@@ -54,7 +54,7 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
     {
         // TODO fix this test
         $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         User::factory()->create([

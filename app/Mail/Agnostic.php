@@ -16,30 +16,24 @@ class Agnostic extends Mailable
 
     /**
      * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope();
     }
 
     /**
      * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
+    public function content(): Content
     {
         return new Content();
     }
 
     /**
      * Get the attachments for the message.
-     *
-     * @return array
      */
-    public function attachments()
+    public function attachments(): array
     {
         return [];
     }

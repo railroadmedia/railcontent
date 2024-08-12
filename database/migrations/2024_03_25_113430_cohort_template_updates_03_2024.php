@@ -7,10 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('cohorts', function (Blueprint $table) {
             $table->boolean('is_product')->default(false);
@@ -30,10 +28,8 @@ return new class () extends Migration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('cohorts', function (Blueprint $table) {
             $table->dropColumn('is_product');

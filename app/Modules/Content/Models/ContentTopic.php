@@ -2,6 +2,7 @@
 
 namespace Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -26,7 +27,7 @@ class ContentTopic extends Model
     protected $table = 'railcontent_content_topics';
     public $timestamps = false;
 
-    public function content()
+    public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class, 'content_id');
     }

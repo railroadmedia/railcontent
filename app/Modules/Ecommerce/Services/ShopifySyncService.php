@@ -234,10 +234,6 @@ class ShopifySyncService
 
     /**
      * Checks if there's an order for a specific processed date
-     *
-     * @param int|null $shopifyCustomerId
-     * @param Carbon $processedAt
-     * @return bool
      */
     public function doesOrderExist(?int $shopifyCustomerId, Carbon $processedAt, int $processedDateRangeMinutes = 1440): bool
     {
@@ -251,14 +247,7 @@ class ShopifySyncService
     /**
      * Create the data to post to Shopify to create an Order
      *
-     * @param int $customerShopifyId
-     * @param string $email
      * @param int[] $productIds
-     * @param string $brand
-     * @param Carbon $processedAt
-     * @param float $totalPrice
-     * @param float $tax
-     * @return array
      */
     private function createOrderData(
         int $customerShopifyId,
@@ -316,8 +305,6 @@ class ShopifySyncService
      * Create the data required for all Order Items of the Order
      *
      * @param int[] $productIds
-     * @param float $price
-     * @return array
      */
     private function createOrderItems(array $productIds, float $price): array
     {
@@ -360,10 +347,6 @@ class ShopifySyncService
         throw new Exception("User not found for shopify customer id $shopifyCustomerId");
     }
 
-    /**
-     * @param int $shopifyCustomerId
-     * @return Collection
-     */
     public function getOwnedProducts(int $shopifyCustomerId): Collection
     {
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
@@ -401,9 +384,6 @@ class ShopifySyncService
     /**
      * Post to Shopify to mark the given Fulfillment for the given Shopify Order, as delivered
      *
-     * @param  int  $shopifyOrderId
-     * @param  int  $fulfillmentId
-     * @return void
      * @throws ValidationException
      * @throws Exception
      */

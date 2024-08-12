@@ -26,7 +26,7 @@ return [
                 "Improve piano technique",
                 "Learn piano theory",
                 "Explore techniques, genres, and styles"
-              ]              
+              ]
         ],
         'guitareo' => [
             'gears' => ['Acoustic Guitar', 'Electric Guitar'],
