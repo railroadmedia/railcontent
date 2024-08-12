@@ -3,7 +3,7 @@ import VideoModal from "../Modal/VideoModal.vue";
 import { computed, ref } from "vue";
 import { useUserStore } from "../../../Stores/user";
 import userJourney from "../../../Services/userJourney";
-import DraftLabel from '@units/DraftLabel/DraftLabel';
+import DraftLabel from '../../_Units/DraftLabel/DraftLabel';
 
 const userStore = useUserStore();
 
