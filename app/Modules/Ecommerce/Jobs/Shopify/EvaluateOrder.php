@@ -54,9 +54,18 @@ class EvaluateOrder implements ShouldQueue
         try {
             $ecommerceModel = $this->order->getEcommerceModel();
             $this->handleRateLimit();
-            $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
-            $action = $this->getActionToTake($truePaymentAmount);
-            $note = null;
+
+            // some orders were partially- or fully refunded after launch, so we'll treat those as matched
+            if (in_array($this->order->financialStatus, ['partially_refunded', 'refunded'])) {
+                $truePaymentAmount = $this->order->currentTotalPrice;
+                $action = ShopifyOrderFix::ACTION_MATCHED;
+                $note = sprintf('Order was %s in Shopify post-launch. Treating as matched.', Str::replace('_', ' ', $this->order->financialStatus));
+            } else {
+                $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
+                $action = $this->getActionToTake($truePaymentAmount);
+                $note = null;
+            }
+
         } catch (Exception $e) {
             // DEV NOTE: after running this in production, we would occasionally get a 503 response code from Shopify
             // (seemingly when attempting to get the metafields). This just means that Shopify's server is temporarily
