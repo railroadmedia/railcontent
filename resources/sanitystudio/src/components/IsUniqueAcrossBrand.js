@@ -5,7 +5,7 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     const { document, getClient } = context;
     const client = getClient({ apiVersion: '2022-12-07' });
     let clean_id = document._id.replace(/^drafts\./, '')
-    console.log('roxana slug unique verification :::: ');
+    console.log('roxana slug unique verification :::: ', document);
     const params = {
         type: document._type,
         id: clean_id,
@@ -14,14 +14,18 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     };
     // Construct the query based on the presence of the brand field
     let query = `*[_type == $type && slug.current == $slug && !(_id in [$id, $draft_id])]`;
-    if (document.parent) {
-        params.parent = document.parent._ref;
-        query = `*[_type == $type && parent._ref == $parent && slug.current == $slug && !(_id in [$id, $draft_id])]`;
+    if (document._type == "semester-pack-lesson") {
+        params.type = 'semester-pack';
+        query = `*[_type == $type && ($id in child[]._ref)  && $slug in child[]->slug.current && !(child[]->_id in [$id, $draft_id])]`;
+       // console.log('semester-pack-lesson ------ roxana IsUniqueAcrossBrand',  query, params);
     } else if (document.brand) {
         params.brand = document.brand;
         query = `*[_type == $type && brand == $brand && slug.current == $slug && !(_id in [$id, $draft_id])]`;
     }
     const documents = await client.fetch(query, params);
+    if (document._type == "semester-pack-lesson") {
+        console.log('roxana IsUniqueAcrossBrand', documents, query, params);
+    }
     // Returns true if no documents are found, false otherwise
     return documents.length === 0;
 };
