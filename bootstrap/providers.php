@@ -18,5 +18,4 @@ return [
     App\Modules\FeatureFlagging\Providers\FeatureFlaggingServiceProvider::class,
     App\Providers\AppServiceProvider::class,
     App\Providers\NovaServiceProvider::class,
-    App\Providers\VaporUiServiceProvider::class,
 ];

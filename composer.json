@@ -30,7 +30,6 @@
         "laravel/tinker": "^2.9",
         "laravel/vapor-cli": "^1.63",
         "laravel/vapor-core": "^2.36",
-        "laravel/vapor-ui": "^1.7",
         "league/flysystem-aws-s3-v3": "^3.0",
         "railroad/doctrine-array-hydrator": "dev-temp-fix-inflector as v2.0.2",
         "railroad/ecommerce": "5.0.*",
