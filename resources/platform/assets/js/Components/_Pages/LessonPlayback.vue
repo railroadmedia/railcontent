@@ -401,7 +401,7 @@ const thumbnailUrl = computed(() => {
 })
 
 const showDraftLabel = computed(() => {
-    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
+    return !noAccess.value && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
 })
 
 </script>
