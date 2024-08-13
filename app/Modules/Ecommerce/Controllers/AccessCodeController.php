@@ -37,9 +37,7 @@ class AccessCodeController extends Controller
             )) {
                 $user = $this->userService->getByEmailOrNull($request->get('email'));
             } else {
-                return $request->wantsJson()
-                    ? response()->json(['error' => 'Invalid Credentials'], status: 401)
-                    : redirect()->back()->withInput()->withErrors(['Invalid credentials.']);
+                return response()->json(['errors' => ['email' => 'Invalid Credentials']], status: 401);
             }
         } else {
             $user = $this->userService->createUser($request->get('email'), $request->get('password'));
@@ -48,15 +46,13 @@ class AccessCodeController extends Controller
         $rawAccessCode = $request->get('access_code');
 
         try {
-            $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
+            $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
         } catch (Throwable $e) {
-            $message = [
-                'access-code-claimed-success' => false,
-                'access-code-claimed-message' => $e->getMessage(),
-            ];
-            return $request->wantsJson()
-                ? response()->json($message, 400)
-                : redirect()->back()->withInput()->withErrors($message);
+            return response()->json([
+                'errors' => [
+                    'access_code' => $e->getMessage(),
+                ]
+            ], 400);
         }
 
         $this->userAuthenticationService->login($user);
@@ -66,15 +62,6 @@ class AccessCodeController extends Controller
             'access-code-claimed-message' => 'Your access code has been claimed successfully!',
         ];
 
-        if ($request->wantsJson()) {
-            return response()->json($message);
-        } else {
-            $redirectRoute =
-                (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
-                    $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
-            return $request->has('redirect')
-                ? redirect()->away($request->get('redirect'))->with($message)
-                : redirect()->to('/' . $redirectRoute)->with($message);
-        }
+        return response()->json($message);
     }
 }

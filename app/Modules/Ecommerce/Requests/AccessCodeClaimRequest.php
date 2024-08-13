@@ -47,7 +47,7 @@ class AccessCodeClaimRequest extends FormRequest
                 config('ecommerce.database_connection_name') .
                 '.' .
                 'ecommerce_access_codes' .
-                ',code,is_claimed,0',
+                ',code',
             'credentials_type' => 'required|in:new,existing',
             'context' => 'string|nullable',
         ];
@@ -90,13 +90,9 @@ class AccessCodeClaimRequest extends FormRequest
 
     protected function failedValidation(Validator $validator): void
     {
-        if ($this->wantsJson()) {
-            throw new HttpResponseException(response()->json([
-                'errors' => $validator->errors(),
-                'status' => true
-            ], 422));
-        }
-
-        parent::failedValidation($validator);
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors(),
+            'status' => true
+        ], 422));
     }
 }

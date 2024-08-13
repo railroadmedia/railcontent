@@ -67,7 +67,10 @@ class AccessCodeService
 
         if ($accessCode->is_claimed) {
             // Can't claim a code that's already claimed
-            throw new Exception("Access code already claimed");
+            if ($accessCode->claimer_id === $user->id) {
+                throw new Exception("This code has already been redeemed to your account");
+            }
+            throw new Exception("This code has already been redeemed");
         }
 
         $productIds = $this->getAccessCodeProducts($accessCode);
