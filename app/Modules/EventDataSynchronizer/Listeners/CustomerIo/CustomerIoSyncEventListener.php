@@ -713,8 +713,8 @@ class CustomerIoSyncEventListener
         $accessCode = $accessCodeClaimed->getAccessCode();
         $brand = $accessCode->brand;
 
-        dispatch(
-            (new CustomerIoCreateEventByUserId(
+        dispatchWithDelay(
+            new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->id,
                 $brand,
                 'musora_membership_non_recurring_access_added',
@@ -731,11 +731,11 @@ class CustomerIoSyncEventListener
                 ],
                 null,
                 Carbon::now()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(3)
-            )
+            ),
+            3
         );
+
+        dispatchWithDelay(new CustomerIoSyncUserByUserId($accessCodeClaimed->getUser(), ['primary_brand' => $brand]), 3);
     }
 
     // CMT-77 August Referral Contest

@@ -41,5 +41,5 @@ export const saveCoachHistoryData = ({coachName, coachId}) => {
 }
 
 export const saveGoals = ({goals, brand}) => {
-    return axios.post(`/musora-api/v1/onboarding/goals`, {goals, brand});
+    return axios.post(`/musora-api/v5/onboarding/goals`, {goals, brand});
 };

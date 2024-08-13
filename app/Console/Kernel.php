@@ -42,6 +42,7 @@ use App\Console\Commands\UpdateStatusForCopyRightContent;
 use App\Console\Commands\VaporEnvManager;
 use App\Modules\UserManagementSystem\Console\Commands\SendAccountSetupEmail;
 use App\Modules\UserManagementSystem\Console\Commands\SetUserNeedsLogout;
+use App\Modules\UserManagementSystem\Console\Commands\SyncPrimaryBrand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -93,6 +94,7 @@ class Kernel extends ConsoleKernel
         CheckCommentsUrl::class,
         SendAccountSetupEmail::class,
         GenerateWeeklyMembershipStats::class,
+        SyncPrimaryBrand::class
     ];
 
     /**

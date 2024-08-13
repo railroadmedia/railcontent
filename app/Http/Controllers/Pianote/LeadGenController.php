@@ -126,6 +126,10 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.awards', ['theme' => 'pianote']);
     }
+    public function primaResources()
+    {
+        return view('pianote.lead-gen.prima-resources', ['theme' => 'pianote']);
+    }
     public function osmoseGiveaway()
     {
         return view('pianote.lead-gen.osmose-giveaway', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
@@ -307,6 +311,13 @@ class LeadGenController extends BaseController
         }
 
         throw new NotFoundHttpException();
+    }
+
+    public function techniqueEssentials(Request $request, $domain, $page = null, $lesson = null)
+    {
+
+        return view('pianote.lead-gen.technique-essentials', ['recaptchaKey' => config('recaptcha.key')]);
+
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)

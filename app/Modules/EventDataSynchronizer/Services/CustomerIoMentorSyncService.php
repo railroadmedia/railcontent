@@ -22,7 +22,7 @@ class CustomerIoMentorSyncService
         }
         $data = [];
         $data['assigned_mentor_email'] = $mentorUser?->email ?? '';
-        $data['primary_brand'] = $primaryBrand ?? '';
+        $data['mentors_primary_brand'] = $primaryBrand ?? '';
         return $data;
     }
 }

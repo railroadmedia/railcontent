@@ -36,7 +36,6 @@
 
 @section('body-data')
     x-data="{
-        shippingModal: false,
         orderModal: false,
         filter: 'type',
     }"

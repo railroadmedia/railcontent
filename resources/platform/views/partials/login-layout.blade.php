@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        {!! \App\Analytics\Tracker::headTop() !!}
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
-        @yield('meta')
 
-        @include('partials.third-party.inspectlet-tracking-script')
+<head>
+    {!! \App\Analytics\Tracker::headTop() !!}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    @yield('meta')
 
-        {{-- Icons --}}
-        <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-        <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
+    @include('partials.third-party.inspectlet-tracking-script')
 
-        {{-- Fonts --}}
-        @include('partials._fonts')
+    {{-- Icons --}}
+    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
-        {{-- Favicons --}}
-        @include('partials._favicons')
+    {{-- Fonts --}}
+    @include('partials._fonts')
 
-        {{-- Styles --}}
-        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+    {{-- Favicons --}}
+    @include('partials._favicons')
 
-        @yield('styles')
-        {!! \App\Analytics\Tracker::trackPageView() !!}
-        {!! \App\Analytics\Tracker::headBottom() !!}
+    {{-- Styles --}}
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
 
-    </head>
+    @yield('styles')
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+    {!! \App\Analytics\Tracker::headBottom() !!}
 
-    <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
-        {!! \App\Analytics\Tracker::bodyTop() !!}
-        {{-- Notifications Container --}}
-        <div id="notifications-container tw-dark"></div>
+</head>
 
-        <!-- Modal Container -->
-        <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+<body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
+    {!! \App\Analytics\Tracker::bodyTop() !!}
+    {{-- Notifications Container --}}
+    <div id="notifications-container tw-dark"></div>
 
-        <!-- Confirmation Modal Container -->
-        <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+    <!-- Modal Container -->
+    <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
-        <!-- App Container -->
-        <div id="app" class="flex-1">
-            <app-container
-                :vue-router="false"
-                brand="{{ $brand }}"
-            >
+    <!-- Confirmation Modal Container -->
+    <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
-                @yield('content')
+    <!-- App Container -->
+    <div id="app" class="flex-1">
+        <app-container :vue-router="false" brand="{{ $brand }}">
 
-            </app-container>
-        </div>
+            @yield('content')
 
-        <!-- Scripts -->
-        @yield('layout-scripts')
-        <script src="{{ mix('platform/js/manifest.js') }}"></script>
-        <script src="{{ mix('platform/js/vendor.js') }}"></script>
-        <script src="{{ mix('platform/js/app.js') }}"></script>
-        @yield('inject-components')
+        </app-container>
+    </div>
 
-        {{-- Helpscout Beacon --}}
-        @include('partials.third-party.helpscout-tracking-beacon-script', ['email' => !empty(user()) ? user()->email : null])
+    <!-- Scripts -->
+    @yield('layout-scripts')
+    <script src="{{ mix('platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('platform/js/app.js') }}"></script>
+    @yield('inject-components')
 
-         {!! \App\Analytics\Tracker::bodyBottom() !!}
-    </body>
+    {{-- Helpscout Beacon --}}
+    @include('partials.third-party.helpscout-tracking-beacon-script', [
+        'email' => !empty(user()) ? user()->email : null,
+    ])
+
+    {!! \App\Analytics\Tracker::bodyBottom() !!}
+</body>
+
 </html>

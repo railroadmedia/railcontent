@@ -466,7 +466,7 @@ class CustomerIoApiGateway
             };
         } catch (Exception $e) {
             Log::error('CustomerIoApiGateway::executeRequest: exception while reaching: ' . $url . ' - ' . $e->getMessage());
-            Log::debug(print_r($e->getTrace(), true));
+            // Log::debug(print_r($e->getTrace(), true));
             throw $e;
         }
 

@@ -23,6 +23,7 @@
                 :show-reset-progress="showResetProgress"
                 :destroy-on-list-removal="destroyOnListRemoval"
                 :compact-layout="compactLayout"
+                :is-next-lesson="isNextLesson"
             />
 
             <div id="branch-paths" :key="'branch' + item.id" v-if="branchPathIndex === i && branchPathContent.data" >
@@ -51,6 +52,7 @@
                     :reset-progress="showResetProgress"
                     :destroy-on-list-removal="destroyOnListRemoval"
                     :compact-layout="compactLayout"
+                    :is-next-lesson="isNextLesson"
                 />
             </div>
         </template>
@@ -148,6 +150,10 @@ const props = defineProps({
     branchPathContent: {
         type: Object,
         default: () => ({}),
-    }
+    },
+    isNextLesson: {
+        type: Boolean,
+        default: () => false,
+    },
 })
 </script>

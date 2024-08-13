@@ -1,7 +1,8 @@
 <template>
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <!-- Learning Paths -->
-        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
+        <LearningPathContainer v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
+        <NewLearningPathContainer v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
 
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
@@ -78,12 +79,10 @@
             :my-list-url="`/${brand}/playlists`"
         />
 
-        <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
-            <!-- Live section -->
-            <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
-        </div>
+        <!-- Live section -->
+        <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
+            :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
+            :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
 
         <!-- Upcoming section -->
         <MiniCatalogueSection
@@ -144,6 +143,7 @@
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
+    import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
     import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
@@ -201,6 +201,7 @@
         },
         workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
+        trialSectionRedesign: { type: Boolean, default: false },
     });
 
     const showTriggerBanner = computed(() => {

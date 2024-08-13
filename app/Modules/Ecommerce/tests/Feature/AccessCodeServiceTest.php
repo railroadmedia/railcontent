@@ -68,5 +68,10 @@ class AccessCodeServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->accessCodeService->claimByUserId($accessCode->code, $user->id);
+
+        $this->assertDatabaseHas('usora_users', [
+            'id' => $user->id,
+            'primary_brand' => $accessCode->brand
+        ]);
     }
 }

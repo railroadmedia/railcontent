@@ -3,7 +3,6 @@ import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
-import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
 import { getMultiSelectOptions } from "../utils";
@@ -24,7 +23,10 @@ const props = defineProps({
   },
   stepName: {
     type: String,
-  }
+  },
+  currentStep: {
+    type: Number,
+  },
 });
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
@@ -55,19 +57,19 @@ const handleNextStep = () => {
   saveGenres({
     data,
     brand: props.brand
-  }).then(() => {
-    emit('onChangeStep', 5);
-    emit('onCheckStep', 4, true);
   }).catch(() => {
     window.shownotification({
       icon: 'error',
       text: 'There was an error saving your genre preferences, please try again later.'
     });
   });
+
+  emit("onCheckStep", props.currentStep, true);
+  emit("onChangeStep", props.currentStep + 1);
 };
 
 function goBack() {
-  emit('onChangeStep', 3);
+  emit('onChangeStep', props.currentStep - 1);
 }
 
 const isNextButtonDisabled = () => {
@@ -78,7 +80,6 @@ const isNextButtonDisabled = () => {
 
 const headerProps = {
   title: "Great. What kind of songs are you into these days?",
-  subtitle: "You can select more than one genre and change your settings in your profile at any time.",
 };
 </script>
 
@@ -97,7 +98,7 @@ const headerProps = {
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
-      <ProgressBar :brand="brand" :currentStep="4" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
       <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0" />

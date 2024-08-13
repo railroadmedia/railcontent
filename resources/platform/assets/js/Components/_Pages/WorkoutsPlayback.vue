@@ -11,9 +11,12 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="videoProps.thumbnailUrl" />
-
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
+
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
@@ -151,9 +154,10 @@
 
 <script setup>
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
-import { onMounted, ref, computed } from "vue";
+import {ref, computed, onMounted} from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
+import {DateTime} from "luxon";
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 //import VideoMediaElement from "@vuesora/Components/MediaElement/MediaElement.vue";
@@ -166,7 +170,6 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import CatalogueListElement from "@collections/Catalogue/CatalogueListElement.vue";
 import Intercom from "@vuesora/assets/js/Services/intercom";
 import Helpscout from "@vuesora/assets/js/Services/helpscout";
 import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
@@ -174,6 +177,7 @@ import ContentService from '@vuesora/assets/js/Services/content';
 import RelatedLessonsToggle from '@collections/RelatedLessons/RelatedLessonsToggle';
 import RelatedLessons from '@collections/RelatedLessons/RelatedLessons';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {
@@ -231,7 +235,11 @@ const props = defineProps({
     contentInstructors: {
         type: Array,
         default: []
-    }
+    },
+    lessonData: {
+        type: [Array, Object],
+        default: () => []
+    },
 });
 
 const userStore = useUserStore();
@@ -241,6 +249,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(false);
+const isRelatedSectionCollapsed = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -364,5 +373,9 @@ const handleCloseSoundslice = () => {
 
 const noAccess = computed(() => {
     return props.videoProps.need_access;
+})
+
+const showDraftLabel = computed(() => {
+    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
 })
 </script>

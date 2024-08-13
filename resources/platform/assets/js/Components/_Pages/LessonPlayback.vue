@@ -12,8 +12,11 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover  -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -101,7 +104,7 @@
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoButtons :has-branded-color="true" :prev-lesson-url="videoButtons.prevLessonUrl"
+                    <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" :brand="brand"
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
@@ -136,6 +139,7 @@
                 <!-- Chapters -->
                 <VideoChapters
                     v-if="formattedChapters.length"
+                    :hide-action-buttons="!soundsliceSlug"
                     :chapters="formattedChapters"
                     @open-slice="openSlice"
                     @seek-to-chapter="seekToChapter"
@@ -147,16 +151,15 @@
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <assignments-container :lesson-data="lessonData" :assignments="assignments" :brand="brand"
-                            :user-id="videoResources.userId">
-                        </assignments-container>
+                        <AssignmentsContainer :lesson-data="lessonData" :assignments="assignments" :brand="brand"
+                            :user-id="videoResources.userId" />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
@@ -196,6 +199,7 @@
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
+import { DateTime } from 'luxon';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
@@ -214,6 +218,7 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     thisLessonJson: {
@@ -299,7 +304,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
+    if (props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
@@ -394,4 +399,9 @@ const noAccess = computed(() => {
 const thumbnailUrl = computed(() => {
     return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
 })
+
+const showDraftLabel = computed(() => {
+    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
+})
+
 </script>

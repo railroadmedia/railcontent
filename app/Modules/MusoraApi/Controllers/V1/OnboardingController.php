@@ -189,7 +189,7 @@ class OnboardingController extends Controller
         Avo::onboarding_experience_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
-                'experience_level' => strval($experienceLevel),
+                'experience_level' => $onboardingAnswerHistory->onboarding_answer,
             ])
         );
 
@@ -351,11 +351,21 @@ class OnboardingController extends Controller
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
+
+        $brand = $this->onboardingService->getBrandFromInstrument($instrument);
+
         Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
-                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
+                'brand' => $brand
+
             ])
         );
+
+        $user = user();
+        $user->primary_brand = $brand;
+        $user->save();
+
+        dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
 
         return response("History data for instrument has been saved.", 200);
     }
