@@ -30,7 +30,8 @@ class ChallengePart extends LessonTemplate
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
                              new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
-                             new Field(FieldType::Reference, name: 'parent', title: 'Parent', to: 'challenge', group:$detailsGroup)
+                             new Field(FieldType::Reference, name: 'parent', title: 'Parent', to: 'challenge', group:$detailsGroup),
+                             new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'challenge'),
                          ]);
     }
 
