@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
+use Modules\Content\Models\Sanity\Structure\Image;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
@@ -28,7 +29,7 @@ class SemesterPack extends BaseSanityModel
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
-        $blockList = new Block();
+        $blockList = [new Block(), new Image()];
         $resourceList = new ListObject(
             fields: [new Field(FieldType::String, 'resource_name'),
                         new Field(FieldType::URL, 'resource_url')],
