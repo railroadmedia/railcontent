@@ -667,8 +667,7 @@
 
         .every-scale {
             z-index:2;
-            color:#fff;
-            background:#000c17;
+            background:#fff;
             padding:40px 0;
             position:relative
         }
@@ -698,12 +697,12 @@
         .every-scale p {
             text-align:left;
             max-width:500px;
-            margin:10px auto 25px
+            margin:10px auto 15px
         }
 
         @media (width >= 768px) {
             .every-scale p {
-                margin:20px auto 40px
+                margin:20px auto 0
             }
         }
 
@@ -1116,8 +1115,7 @@
         }
 
         .benefits {
-            color:#fff;
-            background:#000c17;
+            background:#fff;
             padding:30px 0
         }
 
@@ -1228,9 +1226,8 @@
         }
 
         .student-testimonials {
-            color:#fff;
-            background:#001220;
-            padding:30px 0
+            padding:30px 0;
+            background:#f6f8fc;
         }
 
         @media (width >= 768px) {
@@ -1595,11 +1592,9 @@
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-{{--            <a--}}
-{{--                class="join vue-add-to-cart"--}}
-{{--                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"--}}
-{{--                data-product-json='{"piano-technique-made-easy": 1}'--}}
-{{--            >GET STARTED &raquo;</a>--}}
+            <a class="join" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
+
+        <h3 class="text-white">Available with a Pianote membership.</h3>
 
 {{--        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>--}}
 {{--        <strong>${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>--}}
@@ -1640,8 +1635,6 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/466355774?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
-                {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
-{{--                <a href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1" class="join">GET STARTED</a>--}}
             </div>
         </div>
     </div>
@@ -2126,30 +2119,22 @@
             </div>
         </div>
     </section>
-    <section class="guarantee">
-        <div class="container">
-            <img class="lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png"
-                    alt="90-Day Money-Back Guarantee">
-            <h2><strong>The Best Results Guaranteed. <br> <span class="text-red">With NO Risk.</span></strong></h2>
-            <p>Many courses offer a short guarantee - some only offer 14 days.
-                <br><br> But you know it takes longer than that to figure out if something’s working. And a short guarantee only guarantees that you won’t be able to try EVERYTHING before deciding if it’s worth your hard-earned money.
-                <br><br> That’s why you’ll have 90 days to try Piano Technique Made Easy.
-                <br><br> That’s 3 full months to test the course, put in the work, and see the results. Then, and only then, do you have to decide if it’s worth it.
-            </p>
-        </div>
-    </section>
     <section class="final text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/order-background.jpg">
         <div class="container">
             <img class="logo lazy"
                     data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo">
             <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
+            <a class="join" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
 {{--            <a--}}
 {{--                href="/ecommerce/add-to-cart?products[piano-technique-made-easy]=1"--}}
 {{--                class="join vue-add-to-cart"--}}
 {{--                data-product-json='{"piano-technique-made-easy": 1}'--}}
 {{--            >GET STARTED &raquo;</a>--}}
-            <p class="breakdown">
+<br>
+<br>
+        <h3 class="text-white">Available with a Pianote membership.</h3>
+
 {{--        <h3 class="text-white"> <s class="opacity-60">${{ floatval($productPrices['piano-technique-made-easy']->price) }}</s>--}}
 {{--        <strong>${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</strong>--}}
 {{--        (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)--}}
@@ -2180,24 +2165,25 @@
 {{--                </div>--}}
 {{--            </span>--}}
 {{--        </div>--}}
-
-            <div class="credit-cards col-xs-12">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-discover"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fab fa-cc-paypal"></i>
-                <br> <br>
-            </div>
-            <div class="col-xs-12 questions">
-                <p><strong>Any questions?</strong><br class="hidden-lg hidden-md hidden-sm"> Call us toll-free at <a
-                            href="tel:+18004398921">1-800-439-8921</a> <br
-                            class="hidden-lg hidden-md hidden-sm"> or directly at <a
-                            href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
         </div>
     </section>
 
+    <section class="text-center py-10" style="background: #f6f8fc;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
+                <p>Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+            </div>
+        </div>
+    </section>
     @include('pianote.sales.partials._footer')
 
     @include('_partials.components.countdown',[
