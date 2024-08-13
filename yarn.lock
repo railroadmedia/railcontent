@@ -2198,6 +2198,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jsdoc/salty@npm:^0.2.1":
+  version: 0.2.8
+  resolution: "@jsdoc/salty@npm:0.2.8"
+  dependencies:
+    lodash: "npm:^4.17.21"
+  checksum: 10c0/ace2a0ef346e49e9573623544939e1b07906c2775d1027113e10666997c9a50397059b3212e233a053f9d8a118818b847f1690177017b1126408d9bcc7054938
+  languageName: node
+  linkType: hard
+
 "@juggle/resize-observer@npm:^3.3.1":
   version: 3.4.0
   resolution: "@juggle/resize-observer@npm:3.4.0"
@@ -9134,6 +9143,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"docdash@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "docdash@npm:2.0.2"
+  dependencies:
+    "@jsdoc/salty": "npm:^0.2.1"
+  checksum: 10c0/c1bd2e6b29babb3232f26ac28aba61e653cbacd61d44e736ea76152201b93e941e4293e79fbeef58c5603b7b71768bb2d9f67eb7aee3f14e982a05acb326ff9d
+  languageName: node
+  linkType: hard
+
 "doctrine@npm:^3.0.0":
   version: 3.0.0
   resolution: "doctrine@npm:3.0.0"
@@ -14375,10 +14393,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "musora-content-services@npm:1.0.7"
-  checksum: 10c0/69fc7a833276d095b34f2aa98d2136f51cf77f00690795e7434478f07988f1850f533ac332b2d16285204103f7ae11a255b593a6122e13c2b43ce085f3097331
+"musora-content-services@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "musora-content-services@npm:1.0.12"
+  dependencies:
+    docdash: "npm:^2.0.2"
+  checksum: 10c0/32faeac867b5886ca27014528b8b6bdd5373377a810408d7282f69f6f89188f51c33a43578f1f7dcd382bc1035587e1ea7727a70cf4187608a6c38a5f8fd44db
   languageName: node
   linkType: hard
 
@@ -17132,7 +17152,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-content-services: "npm:^1.0.7"
+    musora-content-services: "npm:^1.0.12"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"

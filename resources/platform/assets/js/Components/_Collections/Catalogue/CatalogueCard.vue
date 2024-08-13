@@ -9,7 +9,7 @@
                 <div
                     class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${itemThumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
                          loading="lazy"
@@ -18,8 +18,8 @@
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail"
-                            :alt="mappedData.black_title" />
+                        <img class="tw-h-full tw-object-cover" :src="itemThumbnail"
+                            :alt="itemTitle" />
                     </div>
 
                     <!-- Thumbnail Badge -->
@@ -58,7 +58,7 @@
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                                {{ mappedData.black_title }}
+                                {{ itemTitle }}
                             </h4>
                             <!-- Video Description -->
                             <p v-if="mappedData.show_description"
@@ -111,7 +111,7 @@
                             :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
                             <DotsHorizontalIcon v-if="showDropdown" class="tw-h-[24px] tw-w-[24px]" />
                             <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -122,7 +122,7 @@
                         <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
                             :position="state.dropdownPosition"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
+                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
                             @progressReset="$emit('progressReset', { content_id: item.id })" />
                     </div>
                 </div>
@@ -275,7 +275,7 @@ const registrationUrl = computed(() => {
 })
 
 const duration = computed(() => {
-    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let time = props.item.fields?.find(field => field.key === 'length_in_seconds')?.value || '';
     let hours = Math.floor(time / 3600);
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
@@ -326,6 +326,15 @@ const mappedData = computed(() => {
 
     return contentModel.value.card
 });
+
+//New Values
+const itemThumbnail = computed( () => {
+    return props.item.image ?? mappedData.value.thumbnail;
+}) 
+
+const itemTitle = computed( () => {
+    return props.item.title ?? mappedData.value.black_title;
+})
 
 
 const wrapperClasses = computed(() => {

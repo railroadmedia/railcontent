@@ -53,11 +53,11 @@
 
             <!-- Workouts section -->
             <MiniCatalogueSection
-                v-if="workoutsContent.data.length"
+                v-if="data.workouts.length"
                 title="Workouts"
                 seeAllAriaLabel="See All Workouts"
-                :seeAllUrl="workoutsContentUrl"
-                :preLoadedContent="workoutsContent.data"
+                :seeAllUrl="`${brand}/workouts`"
+                :preLoadedContent="data.workouts"
                 trackingSection="workouts"
             />
 
@@ -156,13 +156,15 @@
     import { usePlatformStore } from '@stores/platform';
     import {storeToRefs} from "pinia/dist/pinia";
     import HomePageSkeleton from "./HomePageSkeleton";
+    import { useHomePageData } from '@hooks/pages/useHomePageData';
 
     //Pinia Stores
     const userStore = useUserStore();
-    const { brand, userCompletedAccount } = storeToRefs(userStore);
+    const { brand, userId, token, userCompletedAccount } = storeToRefs(userStore);
     const platformStore = usePlatformStore();
     const { isLoading } = storeToRefs(platformStore)
 
+    //Props
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
@@ -198,16 +200,10 @@
         upgradeMembershipUrl: { type: String, default: '' },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
-        workoutsContent: {
-            type: Object,
-            default: () => ({
-                data: []
-            })
-        },
-        workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
     });
 
+    //Computed
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
         return userCompletedAccount.value;
@@ -226,11 +222,21 @@
         return { data: [...props.packData] };
     })
 
+    //Refs
     const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
     const recSysPage = ref(1);
     const data = ref(null);
     const error = ref(null);
 
+    //Constant
+    const recommendationLinks = {
+        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
+        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
+        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
+        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
+    }
+
+    //Methods
     const openPlaylistModal = () => {
         window.openplaylistmodal({
             modalType: 'create',
@@ -253,37 +259,17 @@
         recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
     }
 
-    const recommendationLinks = {
-        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-    }
-
+    //Lifecycles
     onMounted(() => {
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
     });
 
-    onBeforeMount( ()=> {
-        const fetchData = async () => {
-            try {
-                // Simulate a loading state with a timeout
-                await new Promise(resolve => setTimeout(resolve, 0));
-                
-                // Placeholder data to simulate fetched data
-                data.value = {
-                    title: 'Home Page',
-                    content: 'This is the home page content.'
-                };
-            } catch (err) {
-                error.value = err;
-            } finally {
-                platformStore.setLoadingState(false);
-            }
-        };
-
-        fetchData();
-    })
+    onBeforeMount( async () => {
+        const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
+        data.value = homeData.value;
+        console.log('DATA', data.value)
+        platformStore.setLoadingState(homeLoading.value);
+    });
 </script>
