@@ -37,7 +37,7 @@ class AccessCodeController extends Controller
             )) {
                 $user = $this->userService->getByEmailOrNull($request->get('email'));
             } else {
-                return response()->json(['errors' => ['email' => 'Invalid Credentials']], status: 401);
+                return response()->json(['errors' => ['email' => ['Invalid Credentials']]], status: 401);
             }
         } else {
             $user = $this->userService->createUser($request->get('email'), $request->get('password'));
@@ -50,7 +50,7 @@ class AccessCodeController extends Controller
         } catch (Throwable $e) {
             return response()->json([
                 'errors' => [
-                    'access_code' => $e->getMessage(),
+                    'access_code' => [$e->getMessage()],
                 ]
             ], 400);
         }
