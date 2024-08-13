@@ -23,7 +23,7 @@
         <p class="mx-auto mb-7">
             Rated 4.8/5 based on <strong class="font-black">
                 @if($theme == 'drumeo')
-                    {{ number_format(1958) }}
+                    {{ number_format(2023) }}
                 @else
                     {{ number_format(Prices::$reviews) }}
                 @endif
