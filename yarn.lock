@@ -14393,12 +14393,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "musora-content-services@npm:1.0.12"
+"musora-content-services@npm:^1.0.16":
+  version: 1.0.16
+  resolution: "musora-content-services@npm:1.0.16"
   dependencies:
     docdash: "npm:^2.0.2"
-  checksum: 10c0/32faeac867b5886ca27014528b8b6bdd5373377a810408d7282f69f6f89188f51c33a43578f1f7dcd382bc1035587e1ea7727a70cf4187608a6c38a5f8fd44db
+  checksum: 10c0/8b804bdfdee5c70e645cbe8c9536b0b0d5941ebc7bfe671b36da5b0ffc31152fed36cea72bc5bb8b532f048ab234acc3fc90da49446a7ae60de3d96a9ecaf3cd
   languageName: node
   linkType: hard
 
@@ -17152,7 +17152,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-content-services: "npm:^1.0.12"
+    musora-content-services: "npm:^1.0.16"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"

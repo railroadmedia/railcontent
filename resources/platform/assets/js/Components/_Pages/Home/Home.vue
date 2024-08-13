@@ -61,20 +61,19 @@
                 trackingSection="workouts"
             />
 
-            <!-- New section -->
+            <!-- New Releases -->
             <MiniCatalogueSection
-                v-if="newContent.data"
+                v-if="data.newReleases.length"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
-                :seeAllUrl="newContentUrl"
-                :preLoadedContent="newContent.data"
+                :seeAllUrl="`${brand}/lessons/all`"
+                :preLoadedContent="data.newReleases"
                 trackingSection="new"
             />
 
             <!-- Playlist section -->
             <ListSection
                 v-if="usersList.length"
-                :newContentUrl="newContentUrl"
                 :usersList="usersList"
                 :my-list-url="`/${brand}/playlists`"
             />
@@ -86,15 +85,14 @@
 
             <!-- Upcoming section -->
             <MiniCatalogueSection
-                v-if="hasUpcomingEvents"
+                v-if="data.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
-                :seeAllUrl="upcomingUrl"
+                :seeAllUrl="`${brand}/live`"
                 :force-no-links="true"
-                :preLoadedContent="upcomingEvents.data"
+                :preLoadedContent="data.upcomingEvents"
                 trackingSection="upcoming-events"
             />
-
 
             <template v-if="isPackOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->
@@ -177,12 +175,8 @@
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
-        hasStartedLessons: { type: Boolean, default: false },
-        hasUpcomingEvents: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
-        newContent: { type: Object, default: () => ({}) },
-        newContentUrl: { type: String, default: '' },
         nextLearningPathLevel: { type: String, default: '' },
         nextLearningPathProgressPercent: { type: Number, default: 0 },
         packData: { type: Array, default: () => ([]) },
@@ -195,8 +189,6 @@
             })
         },
         timeCutoffMinutes: { type: Number, default: 0 },
-        upcomingEvents: { type: Object, default: () => ({}) },
-        upcomingUrl: { type: String, default: '' },
         upgradeMembershipUrl: { type: String, default: '' },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
