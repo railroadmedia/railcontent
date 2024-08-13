@@ -79,9 +79,17 @@
             />
 
             <!-- Live section -->
-            <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
+            <CoachEvent 
+                v-if="data.liveEvent" 
+                class="tw-mb-6" 
+                :preloadedContent="data.liveEvent" 
+                :currentDateString="currentDate"
+                :subscriptionCalendarId="calendarId" 
+                :youtubeEventId="youtubeId" 
+                :timeCutoffMinutes="timeCutoffMinutes"
+                :eventCoachProfileUrl="eventCoachProfileUrl" 
+                trackingSection="live" 
+            />
 
             <!-- Upcoming section -->
             <MiniCatalogueSection
@@ -167,7 +175,6 @@
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
         carousel: { type: Array, default: () => ([]) },
-        coachEvent: { type: Object, default: () => null },
         cohortBanner: { type: Array, default: () => ([]) },
         courseData: { type: Object, default: () => ({}) },
         continueUrl: { type: String, default: '' },
@@ -182,17 +189,17 @@
         packData: { type: Array, default: () => ([]) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         recommendedContentUrl: { type: String, default: '' },
+        timeCutoffMinutes: { type: Number, default: 0 },
+        upgradeMembershipUrl: { type: String, default: '' },
+        usersList: { type: Object, default: () => ({}) },
+        userMetrics: { type: Object, default: () => ({}) },
+        youtubeId: { type: String, default: '' },
         startedContent: {
             type: Object,
             default: () => ({
                 data: []
             })
         },
-        timeCutoffMinutes: { type: Number, default: 0 },
-        upgradeMembershipUrl: { type: String, default: '' },
-        usersList: { type: Object, default: () => ({}) },
-        userMetrics: { type: Object, default: () => ({}) },
-        youtubeId: { type: String, default: '' },
     });
 
     //Computed

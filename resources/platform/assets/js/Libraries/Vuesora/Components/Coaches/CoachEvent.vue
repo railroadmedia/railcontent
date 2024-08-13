@@ -1,17 +1,11 @@
 <template>
-  <div
-    class="tw-mb-[30px] tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
-    v-if="content && $_hours <= 48">
+  <div v-if="content && $_hours <= 48" class="tw-mb-[30px] tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]">
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex">
         <div class="tw-relative">
-          <img class="tw-rounded-lg tw-w-full" :src="'https://www.musora.com/musora-cdn/image/fit=cover,width=320,height=180,quality=95/' +
-      (content.thumbnail_url
-        ? content.thumbnail_url
-        : instructors[0].head_shot_picture_url)
-      " />
+          <img class="tw-rounded-lg tw-w-full" :src="`https://www.musora.com/musora-cdn/image/fit=cover,width=320,height=180,quality=95/${content.image}`" />
         </div>
       </a>
 
@@ -58,16 +52,16 @@
 
           <!-- Coaches -->
           <div class="tw-flex">
-            <div class="tw-inline-flex" v-for="(coach, i) in instructors" :key="i">
+            <div class="tw-inline-flex" v-for="(coach, i) in content.artists" :key="i">
               <a @click="(e) => handleClick(e, `${brand}/coaches/${coach.slug}`)" :href="`${brand}/coaches/${coach.slug}`" class="tw-no-underline tw-mr-1.5 tw-block">
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
-                  <span class="tw-mr-1">{{ coach.name.split(" ")[0] }}</span>
-                  <span class="tw-font-bold tw-mr-1">{{ coach.name.split(" ")[1] }}</span>
+                  <span class="tw-mr-1">{{ coach.split(" ")[0] }}</span>
+                  <span class="tw-font-bold tw-mr-1">{{ coach.split(" ")[1] }}</span>
                   <!-- Optional third name -->
-                  <span class="tw-font-bold">{{ coach.name.split(" ")[2] }}</span>
+                  <span class="tw-font-bold">{{ coach.split(" ")[2] }}</span>
                 </h4>
               </a>
-              <span v-if="i + 1 < instructors.length"
+              <span v-if="i + 1 < content.artists.length"
                 class="tw-leading-none tw-font-bold dark:tw-text-white tw-text-lg tw-mr-1.5">&</span>
             </div>
           </div>
@@ -75,10 +69,7 @@
         </div>
 
         <!-- Buttons -->
-        <div class="
-            tw-flex tw-flex-col tw-justify-center tw-mt-3
-            sm:tw-mt-0 sm:tw-ml-auto
-          ">
+        <div class="tw-flex tw-flex-col tw-justify-center tw-mt-3 sm:tw-mt-0 sm:tw-ml-auto">
           <div v-if="eventIsLive || showWatch">
             <div class="tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
@@ -117,7 +108,6 @@
 </template>
 
 <script>
-import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentSchedule from "../../views/schedule/Schedule.vue";
 import { DateTime } from "luxon";
 import { useUserStore } from "@stores/user";
@@ -173,13 +163,11 @@ export default {
     };
   },
   mounted() {
-    if (this.preloadedContent?.data[0]) {
-      this.content = ContentHelpers.flattenContentObject(
-        this.preloadedContent.data[0],
-        true
-      );
+
+    if (this.preloadedContent) {
+      this.content = this.preloadedContent;
       this.instructors = this.content.instructor;
-      this.startTime = DateTime.fromSQL(this.content.live_event_start_time, {
+      this.startTime = DateTime.fromSQL(this.content.published_on, {
         zone: "UTC",
       });
       this.startDate = new Date(this.startTime);
@@ -308,7 +296,7 @@ export default {
     },
 
     addToPlaylist() {
-      const { title, id, description, thumbnail_url } = this.content;
+      const { title, id, description, image } = this.content;
 
       window.openplaylistmodal({
         modalType: 'addItem', brand: this.brand, content: {
@@ -316,7 +304,7 @@ export default {
           brand: this.brand,
           name: title,
           description,
-          thumbnail_url
+          thumbnail_url: image
         }
       });
     },

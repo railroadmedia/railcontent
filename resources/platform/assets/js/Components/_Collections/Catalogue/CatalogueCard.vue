@@ -75,9 +75,12 @@
                         </div>
                         <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="itemDifficulty" class="tw-flex tw-items-center">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="itemDifficulty"
-                                    textCase="capitalize" />
+                            <span v-if="itemDifficulty || itemDifficulty === 0" class="tw-flex tw-items-center">
+                                <DifficultyLabel 
+                                    class="tw-text-xs" 
+                                    :difficultyValue="itemDifficulty"
+                                    textCase="capitalize" 
+                                />
                                 <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             </span>
                             <span>
@@ -130,7 +133,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
