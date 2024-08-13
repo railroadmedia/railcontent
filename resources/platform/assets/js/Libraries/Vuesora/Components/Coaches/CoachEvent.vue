@@ -1,5 +1,5 @@
 <template>
-  <div v-if="content && $_hours <= 48" class="tw-mb-[30px] tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]">
+  <div v-if="isVisible" class="tw-mb-[30px] tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]">
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`"
@@ -112,6 +112,7 @@ import ContentSchedule from "../../views/schedule/Schedule.vue";
 import { DateTime } from "luxon";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
+import userJourney from '@services/userJourney';
 
 export default {
   components: {
@@ -147,7 +148,6 @@ export default {
   data() {
     return {
       content: null,
-      instructors: null,
       currentDate: DateTime.fromSQL(this.currentDateString, { zone: "UTC" }),
       counterValue: 0,
       eventIsLive: false,
@@ -160,27 +160,80 @@ export default {
       startMonth: "",
       formattedTime: "",
       showSubscribePopup: false,
+      counterInterval: null,
     };
   },
   mounted() {
-
     if (this.preloadedContent) {
       this.content = this.preloadedContent;
-      this.instructors = this.content.instructor;
-      this.startTime = DateTime.fromSQL(this.content.published_on, {
-        zone: "UTC",
-      });
+      this.startTime = DateTime.fromSQL(this.content.published_on, { zone: "UTC" });
       this.startDate = new Date(this.startTime);
-      this.startWeekday = this.startDate.toLocaleString("en-US", {
-        weekday: "long",
-      });
-      this.startMonth = this.startDate.toLocaleString("en-US", {
-        month: "long",
-      });
+      this.startWeekday = this.startDate.toLocaleString("en-US", { weekday: "long" });
+      this.startMonth = this.startDate.toLocaleString("en-US", { month: "long" });
       this.startDay = this.startDate.getDate();
-      this.formattedTime =
-        this.startDate.toLocaleTimeString([], { timeStyle: "short" }) + "";
+      this.formattedTime = this.startDate.toLocaleTimeString([], { timeStyle: "short" });
 
+      this.checkIfLive();
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.counterInterval);
+  },
+  computed: {
+    isVisible() {
+      return this.content && this.counterValue > 0 && this.counterValue / 3600 <= 48;
+    },
+    $_hours() {
+      return this.padTwoDigits(Math.max(0, Math.floor(this.counterValue / 3600)));
+    },
+    $_minutes() {
+      const hours = Math.floor(this.counterValue / 3600);
+      const secondsForMinutes = this.counterValue - hours * 3600;
+      return this.padTwoDigits(Math.max(0, Math.floor(secondsForMinutes / 60)));
+    },
+    $_seconds() {
+      const hours = Math.floor(this.counterValue / 3600);
+      const secondsForMinutes = this.counterValue - hours * 3600;
+      const minutes = Math.floor(secondsForMinutes / 60);
+      return this.padTwoDigits(Math.max(0, secondsForMinutes - minutes * 60));
+    },
+    brand() {
+      const userStore = useUserStore();
+      const { brand } = storeToRefs(userStore);
+      return brand.value;
+    },
+    token() {
+      const userStore = useUserStore();
+      const { token } = storeToRefs(userStore);
+      return token.value;
+    },
+    brandBGColor() {
+      return "tw-bg-" + this.brand;
+    },
+    brandHoverColor() {
+      return "hover:tw-bg-" + this.brand + "-600";
+    },
+    brandBorderColor() {
+      return "tw-border-" + this.brand;
+    },
+    brandTextColor() {
+      return "tw-text-" + this.brand;
+    },
+  },
+  methods: {
+    startCounter() {
+      this.$nextTick(() => {
+        this.counterInterval = setInterval(() => {
+          this.counterValue -= 1;
+          if (this.counterValue <= 0) {
+            this.setLiveState();
+            clearInterval(this.counterInterval);
+          }
+        }, 1000);
+      });
+    },
+
+    checkIfLive() {
       if (this.startTime < this.currentDate) {
         this.setLiveState();
       } else {
@@ -201,79 +254,12 @@ export default {
 
         this.startCounter();
       }
-    }
-  },
-  computed: {
-    $_hours() {
-      return this.padTwoDigits(Math.floor(this.counterValue / 3600));
-    },
-    $_minutes() {
-      let hours = Math.floor(this.counterValue / 3600);
-      let secondsForMinutes = this.counterValue - hours * 3600;
-
-      return this.padTwoDigits(Math.floor(secondsForMinutes / 60));
-    },
-    $_seconds() {
-      let hours = Math.floor(this.counterValue / 3600);
-      let secondsForMinutes = this.counterValue - hours * 3600;
-      let minutes = Math.floor(secondsForMinutes / 60);
-
-      return this.padTwoDigits(secondsForMinutes - minutes * 60);
-    },
-    $_iframeSource() {
-      return `https://www.youtube.com/embed/${this.youtubeEventId}?rel=0&autoplay=1&playsinline=1&modestthemeColoring=1`;
-    },
-    is_added: {
-      cache: false,
-      get() {
-        return this.content.is_added_to_primary_playlist;
-      },
-    },
-    brand() {
-      const userStore = useUserStore();
-      const { brand } = storeToRefs(userStore)
-
-      return brand.value;
-    },
-    token() {
-      const userStore = useUserStore();
-      const { token } = storeToRefs(userStore)
-
-      return token.value;
-    },
-    brandBGColor() {
-      return "tw-bg-" + this.brand;
-    },
-    brandHoverColor() {
-      return "hover:tw-bg-" + this.brand + "-600";
-    },
-    brandBorderColor() {
-      return "tw-border-" + this.brand;
-    },
-    brandTextColor() {
-      return "tw-text-" + this.brand;
-    },
-  },
-  methods: {
-    startCounter() {
-      this.$nextTick(() => {
-        const interval = setInterval(
-          function () {
-            this.counterValue -= 1;
-            if (this.counterValue <= 0) {
-              this.setLiveState();
-              clearInterval(interval);
-            }
-          }.bind(this),
-          1000
-        );
-      });
     },
 
     handleClick(event, url) {
+      event.preventDefault();
+      
       if (this.trackingSection && this.trackingSection.length) {
-        event.preventDefault();
-
         userJourney.trackHomeContentClick({
           token: this.token,
           payload: {
@@ -284,15 +270,13 @@ export default {
         }).finally(() => {
           window.location.href = url;
         });
+      } else {
+        window.location.href = url;
       }
     },
 
     padTwoDigits(number) {
-      if (number < 100) {
-        return ("0" + number).slice(-2);
-      } else {
-        return number;
-      }
+      return ("0" + number).slice(-2);
     },
 
     addToPlaylist() {
@@ -319,17 +303,25 @@ export default {
     },
 
     showNotificationToast({ icon, text, error }) {
-      if (error) {
-        window.shownotification({
-          isError: true
-        })
-      } else {
-        window.shownotification({
-          icon,
-          text
-        });
-      }
+      window.shownotification({
+        icon,
+        text,
+        isError: !!error
+      });
     },
   },
+  watch: {
+    currentDateString(newVal) {
+      this.currentDate = DateTime.fromSQL(newVal, { zone: "UTC" });
+      this.checkIfLive();
+    },
+    preloadedContent(newContent) {
+      if (newContent) {
+        this.content = newContent;
+        this.startTime = DateTime.fromSQL(this.content.published_on, { zone: "UTC" });
+        this.checkIfLive();
+      }
+    }
+  }
 };
 </script>
