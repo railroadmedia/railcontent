@@ -151,6 +151,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
             $id         = $type . '_' . $result->id;
             $difficulty = (int)$result->difficulty;
+            $parentType = [
+                'course-part' => 'course',
+                'challenge-part'=> 'challenge',
+                'semester-pack-lesson' => 'semester-pack'
+            ];
 
             $songs[$id] = [
                 '_id'              => $id,
@@ -177,6 +182,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             if($result->child_count != 0) {
                 $songs[$id]['child_count'] = $result->child_count;
             }
+            if(isset($parentType[$type])) {
+                $songs[$id]['parent_type'] = $parentType[$type];
+            }
             if (isset($this->difficultyMapping[$difficulty])) {
                 $songs[$id]["difficulty_string"] = $this->difficultyMapping[$difficulty];
             }
@@ -187,6 +195,13 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $imported = false;
                 if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '') {
                     $songs[$id]['thumbnail'] = [
+                        '_type'        => 'image',
+                        '_sanityAsset' => 'image@' . $datum['value']
+                    ];
+                    $imported                = true;
+                }
+                if(in_array($datum['key'], ['logo_image_url','dark_mode_logo_url','light_mode_logo_url'])  &&  $datum['value'] != ''){
+                    $songs[$id][$datum['key']] = [
                         '_type'        => 'image',
                         '_sanityAsset' => 'image@' . $datum['value']
                     ];
@@ -259,9 +274,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'mp3_non_click_url',
                         'gear',
                         'captions',
-                        'logo_image_url',
-                        'light_mode_logo_url',
-                        'dark_mode_logo_url'
+                        'sales_url',
+                        'registration_url'
                     ]))) {
                     $notImportedData[] = $datum['key'];
                 }
@@ -332,6 +346,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $songs[$id]['enrollment_end_time'] = $field['value'];
                     $imported                           = true;
                 }
+                if ($field['key'] == 'registration_url') {
+                    $songs[$id]['registration_url'] = $field['value'];
+                    $imported                           = true;
+                }
+
                 if ($field['key'] == 'video') {
                     $video = Content::query()->where('railcontent_content.id', '=', $field['value'])->first();
                     if ($video) {
@@ -364,7 +383,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'fast_bpm',
                         'live_stream_feed_type',
                         'qna_video',
-                        'playlist'
+                        'playlist',
+                        'instructors',
+                        'week'
                     ]))) {
                     $notImportedFields[] = $field['key'];
                 }

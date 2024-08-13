@@ -77,6 +77,9 @@ class SemesterPack extends BaseSanityModel
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
             new Field(FieldType::Number, 'child_count', 'Child count', group:$detailsGroup, hidden: "true"),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
+            new Field(FieldType::Image, 'logo_image_url', 'Pack Logo', group:$detailsGroup),
+            new Field(FieldType::Image, 'dark_mode_logo_url', 'Dark Logo', group:$detailsGroup),
+            new Field(FieldType::Image, 'light_mode_logo_url', 'Light Logo', group:$detailsGroup),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
             new Field(FieldType::Array, 'child', 'Lessons', '', of: $childReference, group:$detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group:$detailsGroup), //web_url_path

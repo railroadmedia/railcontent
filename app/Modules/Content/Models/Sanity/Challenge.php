@@ -7,6 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 
 /**
@@ -26,6 +27,9 @@ class Challenge extends BaseSanityModel
         $instructorReference = new Reference([['type' => 'instructor']]);
         $childReference = new Reference([['type' => 'challenge-part']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
+        $blockList = new Block();
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup = new Group('openAI', 'OpenAI');
@@ -41,8 +45,10 @@ class Challenge extends BaseSanityModel
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
             new Field(FieldType::Datetime, 'enrollment_start_time', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
             new Field(FieldType::Datetime, 'enrollment_end_time', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
+            new Field(FieldType::URL, 'registration_url', group:$detailsGroup),
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group:$detailsGroup),
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
             new Field(
                 FieldType::Number,
                 'difficulty',
@@ -55,13 +61,18 @@ class Challenge extends BaseSanityModel
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::String, 'genre_ai', 'Genre AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
-            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
+
             new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference, group:$detailsGroup),
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
             new Field(FieldType::Number, 'child_count', 'Child count', hidden: "true", readOnly: "true", group:$detailsGroup),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
-            new Field(FieldType::Image, 'pack_logo', 'Pack Logo', group:$detailsGroup),
-            new Field(FieldType::Image, 'dark_logo', 'Dark Logo', group:$detailsGroup),
-            new Field(FieldType::Image, 'light_logo', 'Light Logo', group:$detailsGroup),
+            new Field(FieldType::Image, 'logo_image_url', 'Pack Logo', group:$detailsGroup),
+            new Field(FieldType::Image, 'dark_mode_logo_url', 'Dark Logo', group:$detailsGroup),
+            new Field(FieldType::Image, 'light_mode_logo_url', 'Light Logo', group:$detailsGroup),
             new Field(FieldType::Array, 'child', 'Lessons', '', of: $childReference, group:$detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group:$detailsGroup), //web_url_path
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group:$detailsGroup),
