@@ -1,13 +1,11 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/hailey-benedict.webp';
-$bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/lisa-witt.webp';
-$bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/tony-lindsay.webp';
-$bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/darcy-d.webp';
-$bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/julia-ziegler.webp';
-$bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/chris-johnson.webp';
-$bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/shelea.webp';
-$bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles/cate-canning.webp';
-$singeo = [
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/shelea.webp';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/susana-williams.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/julia-ziegler.webp';
+    $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/raymond-salgado.webp';
+    $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/lisa-witt.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/bubbles-new/darcy-d.webp';
+    $singeo = [
 
     'youtube' => '139,000',
     'facebook' => '23,000',
@@ -99,12 +97,12 @@ $singeo = [
         ],
         [
             "big" => true,
-            'image' => 'marketing/singeo/membership/homepage/2024/world-class-teachers.webp',
+            'image' => 'marketing/singeo/membership/homepage/2024/world-class-teachers-new.webp',
             'title' => 'World-Class Teachers',
-            'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
+            'desc' => 'Gain insights from vocal coaches-new, Grammy-Award winners, and chart-topping performers.',
             'lessonInfo' => [
                 [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/world-class-teachers.webp',
+                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/singeo/membership/homepage/2024/world-class-teachers-new.webp',
                 ],
             ]
         ],
@@ -120,41 +118,41 @@ $singeo = [
         ],
     ],
     "buttons" => [
-        'Expression', 'Technique', 'Performance'
+        'Essentials', 'Technique', 'Performance'
     ],
     "courses" => [
         [
             'title' => 'Express your voice',
             'images' => [
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/find-your-true-voice.webp',
-                    'title' => 'Find Your<br> True Voice',
-                    'instructor' => 'Sheléa',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-01.webp',
+                    'title' => 'Sing Better In<br> 30 Days',
+                    'instructor' => 'Lisa Witt',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/The-power-of-movement.webp',
-                    'title' => 'The Power<br> of Movement ',
-                    'instructor' => 'Chris Johnson',
-                ],
-                [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/singing-with-soul.webp',
-                    'title' => 'Singing<br> With Soul',
-                    'instructor' => 'Tony Lindsay',
-                ],
-                [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/define-your-singing.webp',
-                    'title' => 'Define Your<br> Singing',
-                    'instructor' => 'Cate Canning',
-                ],
-                [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/the-science-of-singing-better.webp',
-                    'title' => 'The Science of<br> Singing Better',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-02.webp',
+                    'title' => 'The Science <br> of Singing Better ',
                     'instructor' => 'Darcy D',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/get-your-voice-heard-online.webp',
-                    'title' => 'Get Your Voice<br> Heard Online',
-                    'instructor' => 'Hailey Benedict',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-03.webp',
+                    'title' => '5-Day<br> Vocal Essentials',
+                    'instructor' => 'Susana Williams',
+                ],
+                [
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-04.webp',
+                    'title' => 'Develop Your<br> High Range',
+                    'instructor' => 'Raymond Salgado',
+                ],
+                [
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-05.webp',
+                    'title' => 'Stop Hating <br> Your Voice',
+                    'instructor' => 'Lisa Witt',
+                ],
+                [
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/essentials-06.webp',
+                    'title' => 'Ear Training<br> For Singers',
+                    'instructor' => 'Susana Williams',
                 ]
             ]
         ],
@@ -162,34 +160,34 @@ $singeo = [
             'title' => 'Add essential techniqes',
             'images' => [
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/singing-with-vibrato.webp',
-                    'title' => 'Sing With<br> Vibrato',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-01.webp',
+                    'title' => 'Singing With<br> Dynamics',
                     'instructor' => 'Lisa Witt',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/hit-the-high-notes.webp',
-                    'title' => 'Hit The <br>High Notes',
-                    'instructor' => 'Lisa Witt',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-02.webp',
+                    'title' => 'Vowel <br>Agility',
+                    'instructor' => 'Raymond Salgado',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/beautiful-harmonies.webp',
-                    'title' => 'Beautiful<br> Harmonies',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-03.webp',
+                    'title' => 'Transition<br> Workouts',
+                    'instructor' => 'Darcy D',
+                ],
+                [
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-04.webp',
+                    'title' => 'High Notes<br> & Hooks',
+                    'instructor' => 'Patrick Gavigan',
+                ],
+                [
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-05.webp',
+                    'title' => 'Unlock <br> Your Vibrato',
                     'instructor' => 'Julia Ziegler',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/how-to-sing-a-duet.webp',
-                    'title' => 'How To Sing<br> A Duet',
-                    'instructor' => 'Tony Lindsay & Lisa Witt',
-                ],
-                [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/singing-runs.webp',
-                    'title' => 'Singing<br> Runs',
-                    'instructor' => 'Lisa Witt',
-                ],
-                [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/increase-your-vocal-range.webp',
-                    'title' => 'Increase Your<br> Vocal Range',
-                    'instructor' => 'Lisa Witt',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/technique-06.webp',
+                    'title' => 'Singing<br> In Intervals',
+                    'instructor' => 'Susana Williams',
                 ],
             ]
         ],
@@ -197,34 +195,34 @@ $singeo = [
             'title' => 'Songwriting & performance',
             'images' => [
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/singing-starter-kit.webp',
-                    'title' => 'Singing <br>Starter Kit',
-                    'instructor' => 'Lisa Witt',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-01.webp',
+                    'title' => 'How To Find <br>Your True Voice',
+                    'instructor' => 'Shelea',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/start-writing-songs.webp',
-                    'title' => 'Start Writing<br> Songs',
-                    'instructor' => 'Cate Canning',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-02.webp',
+                    'title' => 'Sing<br> With Power',
+                    'instructor' => 'Susana Williams',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/composing-lyrics.webp',
-                    'title' => 'Composing<br> Lyrics',
-                    'instructor' => 'Tony Lindsay',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-03.webp',
+                    'title' => 'Vocal<br> Endurance',
+                    'instructor' => 'Patrick Gavigan',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/songwriting-for-singers.webp',
-                    'title' => 'Songwriting <br>For Singers',
-                    'instructor' => 'Hailey Benedict',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-04.webp',
+                    'title' => 'Sing <br>With Expression',
+                    'instructor' => 'Susana Williams',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/how-your-voice-works.webp',
-                    'title' => 'How Your <br>Voice Works',
-                    'instructor' => 'Darcy D',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-05.webp',
+                    'title' => 'Vocal <br>Riff Patterns',
+                    'instructor' => 'Raymond Salgado',
                 ],
                 [
-                    'img' => 'marketing/singeo/membership/homepage/2024/coaches/how-to-record-your-voice.webp',
-                    'title' => 'How To Record<br> Your Voice',
-                    'instructor' => 'Cate Canning',
+                    'img' => 'marketing/singeo/membership/homepage/2024/coaches-new/performance-06.webp',
+                    'title' => 'Sing<br> With Groove',
+                    'instructor' => 'Susana Williams',
                 ],
             ]
         ],

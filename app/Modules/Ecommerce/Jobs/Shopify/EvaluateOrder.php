@@ -53,9 +53,18 @@ class EvaluateOrder implements ShouldQueue
         try {
             $ecommerceModel = $this->order->getEcommerceModel();
             $this->handleRateLimit();
-            $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
-            $action = $this->getActionToTake($truePaymentAmount);
-            $note = null;
+
+            // some orders were partially- or fully refunded after launch, so we'll treat those as matched
+            if (in_array($this->order->financialStatus, ['partially_refunded', 'refunded'])) {
+                $truePaymentAmount = $this->order->currentTotalPrice;
+                $action = ShopifyOrderFix::ACTION_MATCHED;
+                $note = sprintf('Order was %s in Shopify post-launch. Treating as matched.', Str::replace('_', ' ', $this->order->financialStatus));
+            } else {
+                $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
+                $action = $this->getActionToTake($truePaymentAmount);
+                $note = null;
+            }
+
         } catch (Exception $e) {
             Log::error(sprintf('%s: %s', $this->getClassName(), $e->getMessage()));
             $truePaymentAmount = 0;

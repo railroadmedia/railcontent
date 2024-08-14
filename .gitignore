@@ -153,3 +153,4 @@ reports/*
 .php-cs-fixer.cache
 
 php-cs-fixer-results.txt
+.codebuddy
