@@ -20,9 +20,9 @@ class Prices
     public static $drumeoFacebookLikes = 1200000;
     public static $drumeoInstagramFollowers = 1900000;
 
-    public static $pianoteYoutubeSubsc = 1730000;
+    public static $pianoteYoutubeSubsc = 1820000;
     public static $pianoteFacebookLikes = 435000;
-    public static $pianoteInstagramFollowers = 298000;
+    public static $pianoteInstagramFollowers = 302000;
 
     public static $guitareoYoutubeSubsc = 1080000;
     public static $guitareoFacebookLikes = 330000;
