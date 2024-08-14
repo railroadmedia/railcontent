@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -14,26 +15,16 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ContentFollowsService
 {
-    /**
-     * @var ContentFollowsRepository
-     */
-    private $contentFollowsRepository;
-
-    /**
-     * @var ContentService
-     */
-    private $contentService;
 
     /**
      * @param ContentFollowsRepository $contentFollowsRepository
      * @param ContentService $contentService
      */
     public function __construct(
-        ContentFollowsRepository $contentFollowsRepository,
-        ContentService $contentService
+        private ContentFollowsRepository $contentFollowsRepository,
+        private ContentService $contentService,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentFollowsRepository = $contentFollowsRepository;
-        $this->contentService = $contentService;
     }
 
     /**
@@ -145,7 +136,7 @@ class ContentFollowsService
             ContentRepository::$pullFutureContent = false;
             ContentRepository::$availableContentStatues =
                 (!empty($statuses)) ? $statuses : [ContentService::STATUS_PUBLISHED];
-
+            //TODO ADRIAN move to sanitygateway
             $contentData = $this->contentService->getFiltered(
                 $page,
                 $limit,
