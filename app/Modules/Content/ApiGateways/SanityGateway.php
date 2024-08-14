@@ -124,8 +124,8 @@ class SanityGateway
             $documents[$key]['id'] = $document['railcontent_id'];
             $documents[$key]['slug'] = $document['slug']['current'];
             $documents[$key]['url'] = $document['web_url_path'];
-            $documents[$key]['fields'] = $this->mapSanityFields($document);
-            $documents[$key]['data'] = $this->mapSanityData($document);
+            //$documents[$key]['fields'] = $this->mapSanityFields($document);
+            //$documents[$key]['data'] = $this->mapSanityData($document);
         }
         return $documents;
     }
@@ -152,29 +152,29 @@ class SanityGateway
         return $fields;
     }
 
-    private function mapSanityData($document)
-    {
-        // needs to exist, but no data
-        return [];
-        $contentId = $document['railcontent_id'];
-        $dataToGenerate = [
-            'original_thumbnail_url' => 'thumbnail',
-        ];
-        foreach($dataToGenerate as $dataKey => $sanityKey) {
-            $data[] = $this->generateData($document[$sanityKey], $dataKey, $contentId);
-        }
-        return $data;
-    }
-
-    private function generateData($value, $key, $contentId)
-    {
-        return [
-            'key' => $key,
-            'value' => $value,
-            'position' => 0, //TODO what?
-            'type' => 'string',
-            'content_id' => $contentId,
-            'id' => md5($contentId.$key),
-        ];
-    }
+//    private function mapSanityData($document)
+//    {
+//        // needs to exist, but no data
+//        return [];
+//        $contentId = $document['railcontent_id'];
+//        $dataToGenerate = [
+//            'original_thumbnail_url' => 'thumbnail',
+//        ];
+//        foreach($dataToGenerate as $dataKey => $sanityKey) {
+//            $data[] = $this->generateData($document[$sanityKey], $dataKey, $contentId);
+//        }
+//        return $data;
+//    }
+//
+//    private function generateData($value, $key, $contentId)
+//    {
+//        return [
+//            'key' => $key,
+//            'value' => $value,
+//            'position' => 0, //TODO what?
+//            'type' => 'string',
+//            'content_id' => $contentId,
+//            'id' => md5($contentId.$key),
+//        ];
+//    }
 }
