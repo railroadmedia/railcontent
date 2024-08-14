@@ -61,4 +61,6 @@ Route::domain('{pianoteDomain}')
 
         Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'])
             ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+        Route::get('/easy-chords-trial', [SalesController::class, 'easyChordsTrial']);
     });
