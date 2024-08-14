@@ -102,17 +102,19 @@ class SanityGateway
     {
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
+        // see musora-content-services index.js for the fields required for this
         $query ="*[railcontent_id in [${idsString}]]{
           railcontent_id,
           title,
           'image': thumbnail.asset->url,
           'thumbnail': thumbnail.asset->url,
-          'artist': artist->name,
+          'artist': select(artist->name != null => artist->name, instructor[0]->name),
           difficulty,
           difficulty_string,
           web_url_path,
           published_on,
           'type': _type,
+          progress_percent,
           brand,
           slug,
         }";
@@ -130,6 +132,8 @@ class SanityGateway
 
     private function mapSanityFields($document)
     {
+        // fields needs to exist, but no longer needs actual data
+        return [];
         $fieldsToDuplicate = ['artist', 'difficulty', 'instructor'];
         $fields = [];
         foreach($fieldsToDuplicate as $index => $toDuplicate) {
@@ -150,6 +154,8 @@ class SanityGateway
 
     private function mapSanityData($document)
     {
+        // needs to exist, but no data
+        return [];
         $contentId = $document['railcontent_id'];
         $dataToGenerate = [
             'original_thumbnail_url' => 'thumbnail',

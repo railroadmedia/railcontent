@@ -42,7 +42,7 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "2.1.*",
+        "railroad/railcontent": "dev-feature/amcneill20240731_incorrect_urls_BE-251 as 2.1.89",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",

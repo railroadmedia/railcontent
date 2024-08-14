@@ -1,28 +1,15 @@
 require('./bootstrap');
 
-import { createApp, defineAsyncComponent } from 'vue';
+import {createApp, defineAsyncComponent} from 'vue';
 
 //Libraries
 import axios from 'axios'
-import { vMaska } from "maska"
+import {vMaska} from "maska"
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
-import { createPinia } from 'pinia';
-import { initializeSanityService } from 'musora-content-services';
-
-// Configuration object
-const config = {
-    token:'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
-    projectId:'4032r8py',
-    dataset:'staging', 
-    version:'2021-06-07',
-    debug: false,
-};
-
-// Initialize the service with the configuration
-initializeSanityService(config);
-
+import {createPinia} from 'pinia';
+import {initializeService} from 'musora-content-services';
 //App Pages
 import Profile from './Components/_Pages/Settings/Profile.vue';
 import LoginCredentials from './Components/_Pages/Settings/LoginCredentials.vue';
@@ -80,7 +67,6 @@ import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountMod
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
 import ContentService from './Libraries/Vuesora/assets/js/Services/content';
-import UserService from './Libraries/Vuesora/assets/js/Services/user';
 import ProgressTracker from './Libraries/Vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -104,6 +90,19 @@ import VideoResources from './Libraries/Vuesora/Components/VideoResources/VideoR
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
 import Chatsora from './Libraries/Chatsora/Components/index';
+
+// Configuration object
+const config = {
+    token:'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
+    projectId:'4032r8py',
+    dataset:'staging',
+    version:'2021-06-07',
+    debug: false,
+};
+
+// Initialize the service with the configuration
+initializeService(config);
+
 const eventBus = mitt();
 
 axios.defaults.withCredentials = true;

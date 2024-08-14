@@ -7,6 +7,7 @@ use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\LearningPathsService;
@@ -39,19 +40,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
 {
-    private ContentService $contentService;
-    private ContentFollowsService $contentFollowService;
-    private LiveStreamEventService $liveStreamEventService;
-    private UserMetricsService $userMetricsService;
-    private UserPlaylistsService $userPlaylistsService;
-    private PackService $packService;
-    private DatabaseManager $databaseManager;
-    private UserContentProgressService $userContentProgressService;
-    private CarouselService $carouselService;
-    private CohortService $cohortService;
-    private LearningPathsService $learningPathsService;
-    private UserAccessPermissionsService $userAccessPermissionsService;
-
     /**
      * @param ContentService $contentService
      * @param ContentFollowsService $contentFollowsService
@@ -67,33 +55,21 @@ class HomePageController extends BaseController
      *
      */
     public function __construct(
-        ContentService $contentService,
-        ContentFollowsService $contentFollowsService,
-        LiveStreamEventService $liveStreamEventService,
-        UserMetricsService $userMetricsService,
-        UserPlaylistsService $userPlaylistsService,
-        PackService $packService,
-        DatabaseManager $databaseManager,
-        UserContentProgressService $userContentProgressService,
-        CarouselService $carouselService,
-        CohortService $cohortService,
-        OnboardingService $onboardingService,
-        LearningPathsService $learningPathsService,
-        UserAccessPermissionsService $userAccessPermissionsService
+        private ContentService $contentService,
+        private ContentFollowsService $contentFollowsService,
+        private LiveStreamEventService $liveStreamEventService,
+        private UserMetricsService $userMetricsService,
+        private UserPlaylistsService $userPlaylistsService,
+        private PackService $packService,
+        private DatabaseManager $databaseManager,
+        private UserContentProgressService $userContentProgressService,
+        private CarouselService $carouselService,
+        private CohortService $cohortService,
+        private OnboardingService $onboardingService,
+        private LearningPathsService $learningPathsService,
+        private UserAccessPermissionsService $userAccessPermissionsService,
+        private SanityGateway $sanityGateway,
     ) {
-        $this->contentService = $contentService;
-        $this->contentFollowService = $contentFollowsService;
-        $this->liveStreamEventService = $liveStreamEventService;
-        $this->userMetricsService = $userMetricsService;
-        $this->userPlaylistsService = $userPlaylistsService;
-        $this->packService = $packService;
-        $this->databaseManager = $databaseManager;
-        $this->userContentProgressService = $userContentProgressService;
-        $this->carouselService = $carouselService;
-        $this->cohortService = $cohortService;
-        $this->onboardingService = $onboardingService;
-        $this->learningPathsService = $learningPathsService;
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     public function homeRedirect()
@@ -184,7 +160,7 @@ class HomePageController extends BaseController
 
         $userMetrics = $this->getUserMetrics();
 
-        $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
+        $followedLessons = $this->contentFollowsService->getLessonsForFollowedCoaches(
             brand(),
             array_merge(
                 config('railcontent.coachContentTypes', []),
@@ -681,7 +657,7 @@ class HomePageController extends BaseController
     public function getUsersStartedContent()
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
-
+        //TODO ADRIAN this needs to be handled differently as this is uses join on the railcontent_content table
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
             auth()->id(),
             $contentTypes,
@@ -690,7 +666,8 @@ class HomePageController extends BaseController
             'desc',
             8
         );
-        $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
+        $ids = array_column($startedProgressRows, 'content_id');
+        $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
 
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
