@@ -398,23 +398,23 @@
                                 "desc" => "Don’t just follow along. Get guided lessons from REAL teachers.",
                                 ],
                                 [
-                                "icon" => "fa-gauge",
-                                "title" => "Slow It Down",
+                                "icon" => "fa-rectangle-vertical-history",
+                                "title" => "Huge Library",
                                 "desc" => "From classical to pop, you’ll find your favorites here.",
                                 ],
                                 [
-                                "icon" => "fa-comment-dollar",
-                                "title" => "No Extra Fees",
+                                "icon" => "fa-gauge",
+                                "title" => "Slow It Down",
                                 "desc" => "Change the tempo. Practice at YOUR pace. See amazing results.",
-                                ],
-                                [
-                                "icon" => "fa-rectangle-vertical-history",
-                                "title" => "Huge Library",
-                                "desc" => "Stuck on a section? Loop it over and over until you’ve got it.",
                                 ],
                                 [
                                 "icon" => "fa-arrows-repeat",
                                 "title" => "Loop It Back",
+                                "desc" => "Stuck on a section? Loop it over and over until you’ve got it.",
+                                ],
+                                [
+                                "icon" => "fa-comment-dollar",
+                                "title" => "No Extra Fees",
                                 "desc" => "Some platforms charge you per song. Not us. It’s all included.",
                                 ],
                                 [
