@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Content\ApiGateways;
+namespace App\Modules\Content\ApiGateways;
 
 use Sanity\Client as SanityClient;
 
@@ -92,5 +92,83 @@ class SanityGateway
     public function getDocument(string $id)
     {
         return $this->sanity->getDocument($id);
+    }
+
+    /**
+     * @param array $ids - railcontent.id values
+     * @return mixed|string - matching documents
+     */
+    public function getByRailContentIds(array $ids)
+    {
+        $gateway = new SanityGateway();
+        $idsString = implode(',', $ids);
+        $query ="*[railcontent_id in [${idsString}]]{
+          railcontent_id,
+          title,
+          'image': thumbnail.asset->url,
+          'thumbnail': thumbnail.asset->url,
+          'artist': artist->name,
+          difficulty,
+          difficulty_string,
+          web_url_path,
+          published_on,
+          'type': _type,
+          brand,
+          slug,
+        }";
+        $documents = $gateway->sanity->fetch($query);
+        // The following are used to format similar to RailContent, these are a stopgap measure
+        foreach($documents as $key => $document) {
+            $documents[$key]['id'] = $document['railcontent_id'];
+            $documents[$key]['slug'] = $document['slug']['current'];
+            $documents[$key]['url'] = $document['web_url_path'];
+            $documents[$key]['fields'] = $this->mapSanityFields($document);
+            $documents[$key]['data'] = $this->mapSanityData($document);
+        }
+        return $documents;
+    }
+
+    private function mapSanityFields($document)
+    {
+        $fieldsToDuplicate = ['artist', 'difficulty', 'instructor'];
+        $fields = [];
+        foreach($fieldsToDuplicate as $index => $toDuplicate) {
+            if ($document[$toDuplicate] ?? false) {
+                // TODO not sure about null checking here, but I don't think we should duplicate null fields
+                $fields[] = [
+                    'key' => $toDuplicate,
+                    'value' => $document[$toDuplicate],
+                    'position' => $index,
+                    'type' => 'string',
+                    'content_id' => $document['railcontent_id'],
+                    'id' => md5("{$document['railcontent_id']}".$toDuplicate),
+                ];
+            }
+        }
+        return $fields;
+    }
+
+    private function mapSanityData($document)
+    {
+        $contentId = $document['railcontent_id'];
+        $dataToGenerate = [
+            'original_thumbnail_url' => 'thumbnail',
+        ];
+        foreach($dataToGenerate as $dataKey => $sanityKey) {
+            $data[] = $this->generateData($document[$sanityKey], $dataKey, $contentId);
+        }
+        return $data;
+    }
+
+    private function generateData($value, $key, $contentId)
+    {
+        return [
+            'key' => $key,
+            'value' => $value,
+            'position' => 0, //TODO what?
+            'type' => 'string',
+            'content_id' => $contentId,
+            'id' => md5($contentId.$key),
+        ];
     }
 }
