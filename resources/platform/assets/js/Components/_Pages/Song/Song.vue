@@ -17,7 +17,6 @@
                         :songArtist= "data.artist"
                         :songAlbum= "data.album"
                         :songMeta= "data.style"
-                        :relatedLessons= "relatedLessons"
                         :assignments= "data.soundslice"
                         :hasInstrumentless="data.instrumentless"
                         :lessonProgress= "data.lesson_progress"

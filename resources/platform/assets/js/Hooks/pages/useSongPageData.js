@@ -1,7 +1,7 @@
 // hooks/useSongPageData.js
 import { ref } from 'vue';
 import { fetchSongById, fetchRelatedSongs } from 'musora-content-services';
-import { fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/userService';
+import { fetchCurrentSongComplete, fetchAllCompletedStates } from 'musora-content-services';
 
 export async function useSongPageData(contentId, brand, userId, token) {
   const data = ref(null);

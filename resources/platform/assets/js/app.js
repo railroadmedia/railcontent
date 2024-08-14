@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-import { createApp, defineAsyncComponent } from 'vue';
+import { createApp, nextTick, defineAsyncComponent } from 'vue';
 
 //Libraries
 import axios from 'axios'
@@ -9,19 +9,7 @@ import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
-import { initializeSanityService } from 'musora-content-services';
-
-// Configuration object
-const config = {
-    token:'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
-    projectId:'4032r8py',
-    dataset:'staging', 
-    version:'2021-06-07',
-    debug: false,
-};
-
-// Initialize the service with the configuration
-initializeSanityService(config);
+import { initializeService } from 'musora-content-services';
 
 //App Pages
 import Profile from './Components/_Pages/Settings/Profile.vue';
@@ -180,7 +168,36 @@ const app = createApp({
         }
     }
 });
+
+//Instantiate Pinia
 const pinia = createPinia();
+app.use(pinia);
+
+// Pinia Data
+import { useUserStore } from '@stores/user';
+
+nextTick(() => {
+    const userStore = useUserStore(pinia);
+
+    // Configuration object
+    const config = {
+        sanityConfig: {
+            token: 'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
+            projectId: '4032r8py',
+            dataset: 'staging',
+            version: '2021-06-07',
+            debug: false,
+            useCachedAPI: true
+        },
+        railcontentConfig: {
+            token: userStore.token,
+            userId: userStore.userId
+        }
+    };
+
+    // Initialize the service with the configuration
+    initializeService(config);
+});
 
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
@@ -190,7 +207,6 @@ app.config.globalProperties.eventBus = eventBus;
 app.config.productionTip = false;
 
 //Register Global Components
-
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
     .component('Home', Home)
@@ -470,8 +486,6 @@ app.directive('teleport-first', {
 app.use(VueAxios, axios);
 app.use(Chatsora);
 
-
-app.use(pinia);
 app.mount('#app');
 
 app.config.globalProperties.$showNotification = {
