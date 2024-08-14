@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Enums\PaymentType;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Product;
@@ -21,6 +23,7 @@ class EventTrackingService
 {
     public function __construct(
         private readonly ShopifySyncService $shopifySyncService,
+        private readonly CustomerIoService $customerIoService
     ) {
     }
 
@@ -46,12 +49,29 @@ class EventTrackingService
             3
         );
 
+
         if ($brand !== 'musora') {
             dispatchWithDelay(
                 new CustomerIoCreateEventByUserId(
                     $user->id,
                     $brand,
                     $brand . "_user_order",
+                    $data,
+                    null,
+                    Carbon::parse($order['processed_at'])->timestamp
+                ),
+                3
+            );
+        }
+
+        // NOTE: BE-248 sync to musora prospects workspace if user is a musora prospect
+        $customer = $this->customerIoService->getCustomerByEmail('musora_prospects', $user->email);
+        if ($customer) {
+            dispatchWithDelay(
+                new CustomerIoCreateEventByUserId(
+                    $user->id,
+                    'musora_prospects',
+                    'musora_user_order',
                     $data,
                     null,
                     Carbon::parse($order['processed_at'])->timestamp
@@ -204,7 +224,7 @@ class EventTrackingService
     public function trackPaymentMethodExpiryDate(User $user, ?PaymentMethod $paymentMethod): void
     {
         $expiryDate = null;
-        if ($paymentMethod != null) {
+        if ($paymentMethod != null && $paymentMethod->paymentType === PaymentType::CreditCard) {
             $year = $paymentMethod->paymentDetails->exp_year;
             $month = $paymentMethod->paymentDetails->exp_month;
             $expiryDate = Carbon::now()->setYear($year)->setMonth($month)->endOfMonth()->timestamp;
@@ -277,6 +297,19 @@ class EventTrackingService
             'musora_retention_failed-billing_membership_subscription-renewal-attempts' => $chargeAttemps,
             $brand . '_retention_failed-billing_membership_subscription-renewal-attempts' => $chargeAttemps
         ];
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
+
+    public function handleSubscriptionExpired(User $user, string $brand): void
+    {
+        $attributes = [];
+        $attributes[$brand . '_membership_status'] = 'expired';
 
         dispatch(
             (new CustomerIoSyncUserByUserId($user, $attributes))->delay(

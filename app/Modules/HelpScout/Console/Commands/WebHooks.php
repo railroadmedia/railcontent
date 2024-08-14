@@ -27,8 +27,8 @@ class WebHooks extends Command
         $this->info("\nGetting web hooks");
         $webHooks = $this->helpScoutWebHookService->getWebHooks();
         $webHooks->each(function ($webHook) {
-            $this->info(print_r($webHook));
-            $this->info("r mwp artisan helpscout:unregister ${webHook['url']}");
+            $this->info(print_r($webHook, true));
+            $this->info("r mwp artisan helpscout:unregister {$webHook['url']}");
         });
         if($webHooks->count() == 0) {
             $this->info("\nNo web hooks found");

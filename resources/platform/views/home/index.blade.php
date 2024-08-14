@@ -43,6 +43,6 @@
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
     ></home>
 
-@include('partials._railanalytics-brand-tracking-iframe')
+    @include('partials._railanalytics-brand-tracking-iframe')
 
 @endsection

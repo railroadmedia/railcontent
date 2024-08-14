@@ -4,8 +4,8 @@
     <title>Win a Yamaha Stage Custom Drum Set | Drumeo</title>
     <meta property="og:title" content="Win a Yamaha Stage Custom Drum Set | Drumeo">
 
-    <meta name="description" content="Want a free drum set? Simply enter your email address before May 30th to secure your chance to win.">
-    <meta property="og:description" content="Want a free drum set? Simply enter your email address before May 30th to secure your chance to win.">
+    <meta name="description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
+    <meta property="og:description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -37,14 +37,24 @@
                 <div class="w-full sm:w-7/12 mx-auto sm:px-5 lg:pl-0 text-center sm:text-left px-4 sm:px-0">
                     <img class="hidden sm:inline-block h-28 lg:h-32 mb-3 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="logo">
                     <p class="mb-4">
-                        Want a free drum set? Simply enter your email address before <span class="text-white font-extrabold">May 30th</span> to secure your chance to win.
+                        Always wanted to play drums? Ready for a kit upgrade?
+                        <br><br>
+                        We’re giving away a fully-loaded Yamaha Stage Custom drum kit (with cymbals & hardware). And all you have to enter is take a week of free drum lessons.
+                        <br><br>
+                        Simply start a FREE 7-day trial of Drumeo between <span class="text-white font-extrabold">August 6-15</span> and you’ll be automatically entered to win.
                     </p>
 
                     <p class="hidden sm:inline-block mb-3 text-sm">
-                        <i class="fas fa-check text-drumeo"></i> No age restrictions.<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> No purchase necessary.<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> No location restrictions.</p>
-
+                        <i class="fas fa-check text-drumeo"></i> No purchase necessary<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> Cancel anytime<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> Worldwide entry</p>
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens Aug 6th</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+                        <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+                    @else
+                        <span class="join sold-out smaller w-full">this offer has now ended</span>
+                    @endif
 {{--                    @include("drumeo.lead-gen.partials.sign-up-form", [--}}
 {{--                        "recaptchaKey" => $recaptchaKey,--}}
 {{--                        "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",--}}
@@ -132,7 +142,7 @@
                         <br><br>
                         It's made for playing, creating, and connecting with music on another level. That's why, along with grabbing a free drum set, you'll also score a WHOLE YEAR of drumming lessons from Drumeo.
                         <br><br>
-                        You’ll have step-by-step lessons to help you go from a beginner to playing anything you want. Plus, you’ll have a library of {{ Prices::$drumeoSongs }}+ popular songs to play along with and personalized support every step of the way.
+                        You’ll have step-by-step lessons to help you go from a beginner to playing anything you want.
                         <br><br>
                         And even if you don’t land the big prize (but you probably will, right?), you still have a chance to win unlimited drum lessons for a year.
                         <br><br>
@@ -178,17 +188,21 @@
                 </div>
             </div>
             <div class="inline-block italic bg-musora rounded-xl text-black py-4 px-6">
-                <h6><strong><em>The winner will be announced during a LIVE event on May 30th!</em></strong></h6>
+                <h6><strong><em>The winner will be announced during a LIVE event on August 17th!</em></strong></h6>
             </div>
         </div>
     </section>
 
     <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">
         <div class="container mx-auto max-w-3xl">
-            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
-            <p>We want the winner to be someone who really wants and will use this free drum set. After all, that’s what it’s for. So getting an email address lets us know you’re a real person!
+            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to<br class="inline sm:hidden"> start a trial?</strong></h3>
+            <p>We’re on a mission to help people start and STAY playing the drums.
                 <br><br>
-                On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome drum lessons, and we’d love to show you.” Don’t worry. We won’t send you spam or share your email address with anybody else. You’ll get free ongoing lessons and some special offers. And if you don’t like our emails, you can unsubscribe anytime.
+                And we want the winner of this drum set to be someone who’s serious about using the kit. By starting a trial, you’re showing us that you’re actively looking to learn and improve on the drums.
+                <br><br>
+                On top of that, we want to show you the awesome lessons we have inside Drumeo. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.
+                <br><br>
+                And hey, if you like it, we hope you’ll stick around.
             </p>
         </div>
     </section>
@@ -196,7 +210,13 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/order-bg.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
-
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
+                <span class="join sold-out smaller w-full">Opens Aug 6th</span>
+            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+                <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+            @else
+                <span class="join sold-out smaller w-full">this offer has now ended</span>
+            @endif
 {{--            @include("drumeo.lead-gen.partials.sign-up-form", [--}}
 {{--                "recaptchaKey" => $recaptchaKey,--}}
 {{--                "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",--}}

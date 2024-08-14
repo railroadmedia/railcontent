@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\ApiGateways\SanityGateway;
 use Railroad\Railcontent\Enums\RecommenderSection;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
+use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RecommendationService;
 
 class DevEndpointController extends Controller
@@ -22,11 +25,25 @@ class DevEndpointController extends Controller
     public function __construct(
         private RecommendationService $recommendationService,
         private ContentService $contentService,
+        private PermissionService $permissionService,
+        private ContentPermissionService $contentPermissionService,
+        private ContentPermissionRepository $contentPermissionRepository,
+        private UserPermissionsService $userPermissionsService,
+        private SubscriptionService $subscriptionService,
+        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
     }
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+        $userId = $request->query('userid', false);
+        if ($userId) {
+            return $this->setUserToBasic($userId, $request->query('interval', null));
+        }
+        if ($arg1) {
+            return $this->updatePermissions($arg1);
+        }
+
         $results = [
             'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'drumeo'),
             'singeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'singeo'),

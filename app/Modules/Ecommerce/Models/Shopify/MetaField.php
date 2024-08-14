@@ -15,15 +15,15 @@ class MetaField
     public string $namespace;
 
     public function __construct(
-        ShopifyMetafieldKey $key,
+        string|ShopifyMetafieldKey $key,
         string $value,
         ShopifyMetafieldTypes $type,
-        ShopifyMetafieldNamespace $namespace
+        string|ShopifyMetafieldNamespace $namespace
     ) {
-        $this->key = $key->value;
+        $this->key = is_string($key) ? $key : $key->value;
         $this->value = $value;
         $this->type = $type->value;
-        $this->namespace = $namespace->value;
+        $this->namespace = is_string($namespace) ? $namespace : $namespace->value;
     }
 
     /**

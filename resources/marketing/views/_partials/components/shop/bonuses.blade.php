@@ -1,6 +1,6 @@
 @foreach ($product->bundles as $key => $bundle)
 
-    <div class="flex mb-5 sm:mb-8 sm:items-start lg:items-center">
+    <div class="flex flex-col sm:flex-row mb-5 sm:mb-8 sm:items-start lg:items-center">
         <div class="relative overflow-hidden w-52 mb-4 sm:mb-0 mr-5 mx-0 flex-shrink-0">
             <div class="w-full overflow-hidden rounded-lg relative bg-cover bg-top border border-gray-300"
                 style="padding-bottom: 100%;
@@ -38,7 +38,7 @@
 
             @if($bundle['bundle_free_shipping'])
                 <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">
-                    FREE SHIPPING
+                    FREE BONUS
                 </span>
             @endif
 

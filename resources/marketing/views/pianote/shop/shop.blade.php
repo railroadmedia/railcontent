@@ -9,6 +9,12 @@
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+
+    <style>
+        .splide__arrow.pianote svg {
+            fill:#F61A30 !important;
+        }
+    </style>
 @endsection
 
 @section('x-data')
@@ -30,9 +36,10 @@
     ])
 
 
-    @include('_partials.components.shop.index-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+    @include('_partials.components.shop.index-filters')
+
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
@@ -41,19 +48,19 @@
                 init() {
                     new Splide(this.$refs.splide, {
                         classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                arrow: 'splide__arrow pianote bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
                                 prev: 'hidden',
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,
@@ -100,12 +107,12 @@
                 @include('_partials.components.shop.product-card', [
                     "badge" => "7-Day Free Trial",
                       "price" => 240,
-                        "href" => "/",
                      "instructor" => "Unlimited Piano Lessons",
                       "discounted_price" => 240,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
                       'soldOut' => false,
+                        "href" => "/",
                  ])
 
                 @foreach($lessons as $key => $lesson)

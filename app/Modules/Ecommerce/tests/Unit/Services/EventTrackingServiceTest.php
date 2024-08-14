@@ -40,21 +40,22 @@ class EventTrackingServiceTest extends TestCase
         $subscriptionData->sku = $product->sku;
         $subscriptionData->shopify_variant_id = $product->shopify_variant_id;
         $subscriptionData->next_charge_scheduled_at = now()->addMonthsNoOverflow(4)->timestamp;
+        $subscriptionData->order_interval_frequency = 1;
+        $subscriptionData->order_interval_unit = 'month';
         $subscriptionData->created_at = now()->subMonthNoOverflow(10)->timestamp;
         $subscriptionData->updated_at = now()->timestamp;
 
         $subscription = new Subscription($subscriptionData);
         $subscription->setProduct($product);
 
-        // $this->markTestIncomplete('This test has not been implemented yet.');
-
         Queue::fake();
 
         $this->eventTrackingService->handleSubscriptionPaused($subscription, $user);
 
         Queue::assertPushed(CustomerIoSyncUserByUserId::class, function ($job) use ($user, $subscription) {
-            return
-                $this->getReflectionProperty($job, 'user')->id === $user->id &&
+            /** @var User $jobUser */
+            $jobUser = $this->getReflectionProperty($job, 'user');
+            return $jobUser->id === $user->id &&
                 $this->getReflectionProperty($job, 'data')[$subscription->product->brand . '_subscription_paused_until'] === $subscription->nextChargeScheduledAt->timestamp;
         });
 
@@ -64,6 +65,23 @@ class EventTrackingServiceTest extends TestCase
                 $this->getReflectionProperty($job, 'eventData')['paused_until'] === $subscription->nextChargeScheduledAt->timestamp &&
                 $this->getReflectionProperty($job, 'eventData')['duration_in_months'] === $subscription->nextChargeScheduledAt->diffInMonths($user->membership_expiration_date) &&
                 $this->getReflectionProperty($job, 'eventName') === 'musora_user_subscription_paused';
+        });
+    }
+
+    public function test_handle_subscription_expired()
+    {
+        $user = User::factory()->create(['membership_expiration_date' => now()->subMonthsNoOverflow(2)]);
+        $product = Product::factory()->create();
+
+        Queue::fake();
+
+        $this->eventTrackingService->handleSubscriptionExpired($user, $product->brand);
+
+        Queue::assertPushed(CustomerIoSyncUserByUserId::class, function ($job) use ($user, $product) {
+            /** @var User $jobUser */
+            $jobUser = $this->getReflectionProperty($job, 'user');
+            return $jobUser->id === $user->id &&
+                $this->getReflectionProperty($job, 'data')[$product->brand . '_membership_status'] === 'expired';
         });
     }
 }

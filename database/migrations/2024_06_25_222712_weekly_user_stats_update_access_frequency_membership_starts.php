@@ -49,6 +49,7 @@ return new class () extends Migration {
 
         Schema::table('weekly_user_statistics', function (Blueprint $table) {
             $table->enum('access_frequency', ['monthly', 'yearly', 'lifetime', 'other', 'trial'])
+                ->default('other')
                 ->after('access_type')
                 ->index();
 

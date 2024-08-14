@@ -3,6 +3,7 @@
 namespace App\Modules\FeatureFlagging\tests\Feature\Services;
 
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
+use App\Modules\FeatureFlagging\Managers\FeatureFlagManager;
 use Illuminate\Support\Carbon;
 use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 use Modules\UserManagementSystem\Models\User;
@@ -17,7 +18,7 @@ class FeatureFlagFunctionalTest extends TestCase
         parent::setUp();
 
         $this->ffService = app(FeatureFlagService::class);
-
+        $this->ffManager = app(FeatureFlagManager::class);
         $this->experiment = $this->ffService->addExperiment(
             $this->getRandomName(),
             default_value: $this->faker->unique()->words(2, true)
@@ -36,18 +37,18 @@ class FeatureFlagFunctionalTest extends TestCase
         );
     }
 
-    public function test_invalid_branch()
+    public function test_invalid_branch_throws_exception()
     {
         $this->expectException(\InvalidArgumentException::class);
         FeatureFlagging::branch($this->faker->unique()->word);
     }
 
-    public function test_invalid_feature()
+    public function test_invalid_feature_returns_true()
     {
         $this->assertTrue(FeatureFlagging::accessible($this->faker->unique()->word));
     }
 
-    public function test_branch()
+    public function test_branch_returns_branch_content()
     {
         // Branch technically run on probability, so it's not strictly possible to ensure this test doesn't pass by accident :D
         // We do what we can. In this case, we set the probability of a given branch to 100% to ensure it gets selected
@@ -66,7 +67,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertEquals($content2, $this->branch2->content);
     }
 
-    public function test_feature_no_user()
+    public function test_feature_no_user_checks_active_at_value()
     {
         $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $isAccessible = FeatureFlagging::accessible($feature->name);
@@ -77,7 +78,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertTrue($isAccessible);
     }
 
-    public function test_feature_inaccessible()
+    public function test_feature_inaccessible_returns_false()
     {
         $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $user = User::factory()->create();
@@ -85,7 +86,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertFalse($isAccessible);
     }
 
-    public function test_feature_accessible()
+    public function test_feature_accessible_retuns_true()
     {
         $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(-1));
         $user = User::factory()->create();
@@ -161,7 +162,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertFalse($isAccessible);
     }
 
-    public function test_experiment_disabled()
+    public function test_experiment_disabled_returns_default()
     {
         $experiment = $this->ffService->addExperiment(
             $this->getRandomName(),
@@ -212,7 +213,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertEquals($content, $this->branch2->content);
     }
 
-    public function test_branch_repeat_user()
+    public function test_branch_repeat_user_returns_same_value()
     {
         // calling branch with the same user should return the same branch every time.
         $this->ffService->editBranch($this->branch1->id, ['weight' => 1]);
@@ -253,7 +254,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertEquals($allBranches[$this->experiment->name], $this->branch1->content);
     }
 
-    public function test_all_features()
+    public function test_all_features_returns_array()
     {
         $now = Carbon::now();
         $tomorrow = $now->addDay();
@@ -279,6 +280,43 @@ class FeatureFlagFunctionalTest extends TestCase
         }
         $userBlocked = User::factory()->create();
         $this->assertFalse(FeatureFlagging::accessible($musoraFeature->name, $userBlocked));
+    }
+
+    public function test_first_touch_false()
+    {
+        $experimentName = __FUNCTION__;
+        $branchName1 = $experimentName . '1';
+        $branchName2 = $experimentName . '2';
+        $user1 = User::factory()->create();
+        $experiment = $this->ffService->addExperiment($experimentName);
+        $branch1 = $this->ffService->addBranch($branchName1, $branchName1, $experiment->id, weight: 10);
+        $branch2 = $this->ffService->addBranch($branchName2, $branchName2, $experiment->id, weight: 10);
+
+        $this->assertDatabaseMissing(
+            'features_tracking',
+            [
+                'user_id' => $user1->id,
+                'experiment_id' => $experiment->id,
+            ]
+        );
+        FeatureFlagging::branch($experimentName, $user1, handleFirstTouch: false);
+        $this->assertDatabaseHas(
+            'features_tracking',
+            [
+                'user_id' => $user1->id,
+                'experiment_id' => $experiment->id,
+                'is_first_touch_handled' => 0
+            ]
+        );
+        FeatureFlagging::branch($experimentName, $user1);
+        $this->assertDatabaseHas(
+            'features_tracking',
+            [
+                'user_id' => $user1->id,
+                'experiment_id' => $experiment->id,
+                'is_first_touch_handled' => 1
+            ]
+        );
     }
 
 }

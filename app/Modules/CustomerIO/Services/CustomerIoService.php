@@ -14,24 +14,11 @@ use Throwable;
 
 class CustomerIoService
 {
-    /**
-     * @var CustomerIoApiGateway
-     */
-    public $customerIoApiGateway;
+    private string $userIdCustomFieldName;
 
-    /**
-     * @var string
-     */
-    private $userIdCustomFieldName;
-
-    /**
-     * CustomerIoService constructor.
-     *
-     * @param CustomerIoApiGateway $customerIoApiGateway
-     */
-    public function __construct(CustomerIoApiGateway $customerIoApiGateway)
-    {
-        $this->customerIoApiGateway = $customerIoApiGateway;
+    public function __construct(
+        private CustomerIoApiGateway $customerIoApiGateway,
+    ) {
         $this->userIdCustomFieldName = config('customer-io.customer_attribute_name_for_user_id', 'user_id');
     }
 
@@ -95,7 +82,7 @@ class CustomerIoService
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
-         * @var $customer Customer
+         * @var Customer $customer
          */
         $customer =
             Customer::query()
@@ -106,6 +93,27 @@ class CustomerIoService
                 'site_id' => $accountConfigData['site_id'],
             ])
             ->firstOrFail();
+
+        return $customer;
+    }
+
+    public function getCustomerByEmail(string $accountName, string $email): ?Customer
+    {
+        // customer.io account/workspace details
+        $accountConfigData = $this->getAccountConfigData($accountName);
+
+        /**
+         * @var Customer|null $customer
+         */
+        $customer =
+            Customer::query()
+            ->where([
+                'email' => $email,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         return $customer;
     }
@@ -290,22 +298,21 @@ class CustomerIoService
      * Looks up the customer based on the $email and $accountName config data. If none exists, this creates a new one,
      * otherwise it updates the existing customer in the database and via the API.
      *
-     * @param $lookupEmail
-     * @param $accountName
-     * @param array $customAttributes
-     * @param integer|null $userId
-     * @param integer|null $createdAtTimestamp
-     * @return mixed
-     * @throws Exception
      * @throws Throwable
      */
     public function createOrUpdateCustomerByEmail(
-        $lookupEmail,
-        $accountName,
-        $customAttributes = [],
-        $userId = null,
-        $createdAtTimestamp = null
-    ) {
+        string $lookupEmail,
+        string $accountName,
+        ?array $customAttributes = [],
+        ?int $userId = null,
+        ?int $createdAtTimestamp = null,
+        ?bool $forceSync = false
+    ): ?Customer {
+        // TP-29 NOTE: if account is about to sync to a prospect workspace and forceSync flag is false, don't sync
+        if (!$this->shouldSyncProfileToProspectWorkspace($accountName, $lookupEmail) && !$forceSync) {
+            // Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $lookupEmail);
+            return null;
+        }
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -378,22 +385,21 @@ class CustomerIoService
      *
      * If a new email is passed it will be updated in customer.io via the api
      *
-     * @param integer|null $userId
-     * @param $accountName
-     * @param string $userEmail
-     * @param array $customAttributes
-     * @param integer|null $createdAtTimestamp
-     * @return mixed
-     * @throws Exception
      * @throws Throwable
      */
     public function createOrUpdateCustomerByUserId(
-        $userId,
-        $accountName,
-        $userEmail,
-        $customAttributes = [],
-        $createdAtTimestamp = null
-    ) {
+        int $userId,
+        string $accountName,
+        string $userEmail,
+        ?array $customAttributes = [],
+        ?int $createdAtTimestamp = null,
+        ?bool $forceSync = false
+    ): ?Customer {
+        // TP-29 NOTE: if account is about to sync to a prospect workspace and forceSync flag is false, don't sync
+        if (!$this->shouldSyncProfileToProspectWorkspace($accountName, $userEmail) && !$forceSync) {
+            // Log::debug('Customer not a prospect, not syncing to customer.io. Email: ' . $userEmail);
+            return null;
+        }
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /** @var Customer $customer */
@@ -473,7 +479,8 @@ class CustomerIoService
      */
     public function processForm(string $email, string $formNameToProcess, array $requestParams): array
     {
-        $allConfiguredForms = config('customer-io.forms.' . config('customer-io.brand'), []);
+        $brand = config('customer-io.forms.brand');
+        $allConfiguredForms = config('customer-io.forms.' . $brand, []);
 
         $customers = [];
 
@@ -514,7 +521,11 @@ class CustomerIoService
                     sleep(1);
 
                     foreach ($formConfig['events'] as $eventName) {
-                        $eventData = [];
+                        $eventData = [
+                            'timestamp' => Carbon::now()->timestamp,
+                            'brand' => $brand,
+                            'form_name' => $formName,
+                        ];
                         foreach (config('customer-io.forms_events_UTM_parameters', []) as $param => $dataKey) {
                             $eventData[$dataKey] = $requestParams[$param] ?? null;
                         }
@@ -824,9 +835,7 @@ class CustomerIoService
     ): bool|Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
-        /**
-         * @var $customer Customer
-         */
+        /** @var Customer $primaryCustomer */
         $primaryCustomer = Customer::query()->where(
             [
                 'uuid' => $primaryCustomerId,
@@ -836,9 +845,7 @@ class CustomerIoService
             ]
         )->first();
 
-        /**
-         * @var $customer Customer
-         */
+        /** @var Customer $secondaryCustomer */
         $secondaryCustomer = Customer::query()->where(
             [
                 'uuid' => $secondaryCustomerId,
@@ -892,5 +899,15 @@ class CustomerIoService
         $secondaryCustomer->forceDelete();
 
         return $primaryCustomer;
+    }
+
+    public function shouldSyncProfileToProspectWorkspace(string $accountName, string $email): bool
+    {
+        $isProspectWorkspace = in_array($accountName, config('event-data-synchronizer.customer_io_account_name_prospect_workspaces'));
+
+        // TP-29 NOTE: if account name is musora_prospects and user is not a prospect in that workspace, don't sync
+        return $isProspectWorkspace
+            ? !is_null($this->getCustomerByEmail($accountName, $email))
+            : true;
     }
 }

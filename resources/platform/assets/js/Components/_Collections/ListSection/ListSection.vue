@@ -1,0 +1,60 @@
+<template>
+    <section class="tw-flex tw-flex-row tw-mb-[30px]">
+        <div class="tw-flex tw-flex-col tw-grow tw-w-full">
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                <a @click="handleSeeAllClick" :href="myListUrl"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Playlists</h2>
+                </a>
+                <a @click="handleSeeAllClick" :href="myListUrl" aria-label="See All Playlists"
+                    class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    See All
+                </a>
+            </div>
+            <PlaylistCollectionCatalog :mini-catalog="true"
+                :playlist-count="usersList.length" :playlists="usersList" trackingSection="playlists" />
+
+        </div>
+    </section>
+</template>
+
+<script setup>
+import PlaylistCollectionCatalog from '@collections/Playlists/PlaylistCollection/PlaylistCollectionCatalog.vue';
+import { useUserStore } from '@stores/user';
+import userJourney from '@services/userJourney';
+
+const userStore = useUserStore();
+
+const props = defineProps({
+    myListUrl: {
+        type: String,
+        default: ''
+    },
+    contentEndpoint: {
+        type: String,
+        default: '/railcontent/content'
+    },
+    usersList: {
+        type: Array,
+        default: []
+    }
+});
+
+
+const handleSeeAllClick = (event) => {
+  if (props.myListUrl) {
+    event.preventDefault();
+
+    userJourney.trackHomeSeeAll({
+      token: userStore.token,
+      payload: {
+        brand: userStore.brand,
+        section: 'playlists',
+      }
+    }).finally(() => {
+      window.location.href = props.myListUrl;
+    });
+  }
+};
+</script>

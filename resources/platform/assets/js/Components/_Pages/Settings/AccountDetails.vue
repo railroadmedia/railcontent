@@ -1,0 +1,222 @@
+<template>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-mb-[30px]">
+            <!-- Header -->
+            <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Account' } ]"/>
+            <PageHeader
+                page-type="settings"
+                :title="userDisplayName"
+                :hero-img="userProfilePictureUrl"
+                :info-data="[`Musora Member Since ${ userCreatedYear }`]"
+                :ctas="[{
+                    type: 'PageHeaderPrimaryCta',
+                    props: {
+                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
+                        url: `/onboarding?brand=${brand}`,
+                        showAllAlways: true,
+                    }
+                }]"
+            />
+        </div>
+
+        <!-- Page Pills -->
+        <PillNav :pills="accountPages"/>
+
+        <!-- Page Content -->
+        <div v-if="showUpgrade" class="tw-mt-[30px]">
+            <MembershipUpgradeBanner />
+        </div>
+
+        <section class="tw-flex tw-flex-col tw-mt-[30px]">
+            <!-- Membership Access -->
+            <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-[30px]">
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <h2 class="tw-font-bold tw-text-xl dark:tw-text-white tw-mb-3">Your Membership Access</h2>
+                </div>
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <div class="tw-flex tw-flex-col">
+                        <p class="tw-capitalize"><span class="tw-font-bold">{{ userMembershipLevel }}</span> Membership</p>
+                        <template v-if="userMembershipLevel !== 'lifetime' && !isLifetimeMember">
+                            <p v-if="userMembershipLevel === 'plus' || userMembershipLevel === 'basic'">
+                                Valid Until: {{ userMembershipExpirationFormatted }}
+                            </p>
+                        </template>
+                        <p v-else>Never Expires</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Packs -->
+            <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <h2 class="tw-font-bold tw-text-xl dark:tw-text-white">Your Other Products</h2>
+                </div>
+                <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                    <div class="tw-flex tw-flex-col">
+                        <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
+                            <li v-for="(product, i) in userPacks" :key="i">{{ product }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recharge iFrame -->
+            <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
+                <iframe id="rcPortal"
+                        :src="portalUrl"
+                        width="100%"
+                        height="850px"
+                ></iframe>
+            </div>
+        </section>
+
+        <!-- Legacy Media Player -->
+        <div class="tw-py-[30px] tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+            <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">
+                Would you like to use our legacy video player?
+            </h3>
+            <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
+                Our video player may have compatibility issues with older devices and operating systems. We recommend
+                switching to our legacy video player if you are experiencing playback issues.
+            </p>
+            <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
+                <MuToggle
+                    :brand="brand"
+                    v-model="formData.use_legacy_video_player"
+                    :disabled="formProcessing"
+                    id="useLegacyPlayer"
+                    input-label="Use legacy video player."
+                    name="use_legacy_video_player"
+                    @change="submitUserForm"
+                />
+            </form>
+        </div>
+
+        <!-- Delete Account UI -->
+        <section class="tw-my-[30px]">
+            <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
+                Delete Account
+            </h3>
+            <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
+            <MuButton @click="modalOpen = true">Delete Account</MuButton>
+        </section>
+        <DeleteAccountModal v-if="modalOpen" @onCloseModal="modalOpen = false"/>
+    </div>
+</template>
+
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@stores/user";
+import { initRecharge, loginShopifyAppProxy, loginWithShopifyStorefront, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import MuToggle from '@units/FormInputs/MuToggle.vue';
+import PillNav from "@collections/PillNav/PillNav.vue";
+import DeleteAccountModal from "@collections/Modal/DeleteAccountModal.vue";
+import MuButton from "@units/Button/MuButton.vue";
+import MembershipUpgradeBanner from "../../_Collections/MembershipUpgradeBanner/MembershipUpgradeBanner";
+
+const props = defineProps({
+    storeIdentifier: String,
+    rechargeStorefrontAccessToken: String,
+    storefrontAccessToken: String,
+    customerAccessToken: String,
+    userPacks: {
+        type: Array,
+        default: []
+    }
+});
+
+// Pinia
+const userStore = useUserStore();
+const {
+    brand,
+    userId,
+    userDisplayName,
+    userProfilePictureUrl,
+    userCreatedYear,
+    userCompletedAccount,
+    userMembershipLevel,
+    isLifetimeMember,
+    userMembershipExpirationFormatted,
+    useLegacyVideoPlayer,
+} = storeToRefs(userStore);
+
+// Refs
+const accountPages = ref([
+    {
+        name: 'Profile',
+        url: `/${brand.value}/profile/${userId.value}/settings/profile`,
+    },
+    {
+        name: 'Login Credentials',
+        url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
+    },
+    {
+        name: 'Payments',
+        url: `/${brand.value}/profile/${userId.value}/settings/payments`,
+    },
+    {
+        name: 'Notification Settings',
+        url: `/${brand.value}/profile/${userId.value}/settings/notifications`,
+    },
+    {
+        name: 'Account Details',
+        url: `/${brand.value}/profile/settings/account`,
+        isActive: true,
+    }
+]);
+
+const showIframe = ref(true);
+const formProcessing = ref(false);
+const modalOpen = ref(false);
+const portalUrl = ref('');
+const customerDetails = ref(null);
+const formData = ref({
+    use_legacy_video_player: useLegacyVideoPlayer.value || false
+});
+
+const showUpgrade = computed(() => {
+    return userMembershipLevel.value === 'basic';
+})
+
+const initializeRecharge = async () => {
+    await initRecharge({
+        storeIdentifier: props.storeIdentifier,
+        storefrontAccessToken: props.rechargeStorefrontAccessToken,
+        loginRetryFn: async() => {
+            return await loginShopifyAppProxy();
+        }
+    })
+
+    const session = await loginWithShopifyStorefront(props.storefrontAccessToken, props.customerAccessToken);
+
+    try {
+        const portal = await getCustomerPortalAccess(session);
+        document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
+    } catch {
+        showIframe.value = false;
+    }
+};
+
+const submitUserForm = async () => {
+    formProcessing.value = true;
+    try {
+        await userStore.updateProfile(formData.value);
+        formProcessing.value = false;
+        // Notify user of successful update
+        window.shownotification({
+            icon: 'check',
+            text: 'Legacy Player option saved successfully!',
+        });
+    } catch (error) {
+        console.error("Failed to update the legacy video preference:", error.message);
+        formProcessing.value = false;
+    }
+};
+
+onMounted(() => {
+    initializeRecharge();
+});
+</script>

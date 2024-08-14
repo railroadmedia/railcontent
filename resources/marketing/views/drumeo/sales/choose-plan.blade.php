@@ -42,7 +42,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "6000+ popular songs.",
+        "songs" => "1500+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -51,6 +51,15 @@
         "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
         "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
+    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
+    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+        <div class="bg-black text-white px-5 py-7 sm:py-10">
+            <h6 class="leading-tight text-center">
+                No credit card? Email <u>support@drumeo.com</u> to be manually <br class="hidden sm:inline">
+                entered to start a trial for the drum set giveaway.
+            </h6>
+        </div>
+    @endif
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
     ])
@@ -59,14 +68,14 @@
         "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
         "secondPoint" => "200+ courses with legendary teachers",
         "thirdPoint" => "Go beyond drums with lessons for piano, guitar, and singing.",
-        "fifthPoint" => "Thousands of songs transcribed w/ playback tools for all instruments.",
+        "fifthPoint" => "Popular songs transcribed w/ playback tools for all instruments.",
 
     ])
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2023/drumeoplus_logo.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/logo-white.webp",
-            "songs" => "6000+ popular songs.",
+            "songs" => "1500+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",

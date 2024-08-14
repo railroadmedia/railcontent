@@ -1,0 +1,96 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Libraries/Introduction" />
+
+# Libraries
+
+## Overview
+
+The Libraries directory in our Vue application contains various libraries that we use to enhance our platform. These libraries provide additional functionality and helper classes that simplify the development process and improve the maintainability of our codebase.
+
+## Libraries
+
+We have three different libraries in our Libraries directory:
+
+1. **Vuesora**: For legacy Vue components.
+2. **Chatsora**: A chat component using Vue and Node.js.
+3. **Stylesora**: A Tailwind CSS helper class library for our application.
+
+### Vuesora
+
+**Vuesora** is a library that contains legacy Vue components used in our application. These components are part of the older codebase but are still essential for certain functionalities.
+
+#### Key Features:
+- Provides backward compatibility with legacy components.
+- Ensures smooth integration with the newer parts of the application.
+- Helps in maintaining and updating older components without rewriting them from scratch.
+
+#### Example Usage:
+```javascript
+// Importing a legacy component from Vuesora
+import LegacyComponent from 'vuesora/components/LegacyComponent.vue';
+
+export default {
+  components: {
+    LegacyComponent
+  }
+};
+```
+
+## Chatsora
+**Chatsora** is a chat component library built using Vue and Node.js. It provides real-time chat functionality for our application.
+
+#### Key Features:
+- Real-time messaging using WebSockets.
+- User authentication and management.
+- Scalable and efficient chat system.
+
+#### Example Usage:
+```javascript
+// Importing the chat component from Chatsora
+import ChatComponent from 'chatsora/components/ChatComponent.vue';
+
+export default {
+  components: {
+    ChatComponent
+  }
+};
+```
+
+## Stylesora
+Stylesora is a Tailwind CSS helper class library that provides utility classes for our application. It simplifies the styling process by offering predefined classes that can be used throughout the application.
+
+#### Key Features:
+- Predefined Tailwind CSS utility classes.
+- Consistent styling across the application.
+- Easy to use and integrate with existing components.
+
+#### Example Usage:
+```javascript
+// tailwind.config.js
+const stylesoraTheme = require('../platform/assets/js/Libraries/Stylesora/theme');
+const plugin = require('tailwindcss/plugin');
+
+module.exports = {
+  important: true,
+  mode: 'jit',
+  prefix: "tw-",
+  darkMode: "class",
+  theme: {
+    extend: {
+      fontFamily: stylesoraTheme.fontFamily,
+      fontSize: stylesoraTheme.fontSize,
+    },
+  },
+  plugins: [
+    //Stylesora's Base Styles
+    require("../platform/assets/js/Libraries/Stylesora/base")(),
+    //Stylesora's Attributes
+    require("../platform/assets/js/Libraries/Stylesora/attributes")(),
+    //Stylesora's Utility Classes
+    require("../platform/assets/js/Libraries/Stylesora/utilities/")(),
+    //Stylesora's Component Styles
+    require("../platform/assets/js/Libraries/Stylesora/components/")(),
+  ],
+}
+```

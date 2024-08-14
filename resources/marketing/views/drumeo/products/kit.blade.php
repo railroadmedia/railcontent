@@ -209,10 +209,10 @@
     @php
      if(!empty($membersVersion)) {
           $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
-          $fullPrice = 499;
+          $fullPrice = 599;
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=_ALESISKIT&locked=true';
           $fullPrice = 1005.95;
      }
     @endphp
@@ -235,6 +235,13 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Drumeo E-Kit",
+        "specialText" => "Get <strong>$506.95</strong> in free bonuses with the E-Kit.",
+        "fullPrice" => floatval($productPrices['alesis-ekit']->price),
+        "price" => floatval($productPrices['alesis-ekit']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @if(strpos(url()->full(), 'thankyou'))
         <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
@@ -246,15 +253,15 @@
     @endif
 
 <!-- hero section-->
-@if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-    <a class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
-        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
-        <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>
-        <p class="inline-block text-xs mx-0 leading-tight">
-            Alesis Nitro Max E-Kits are back!<br> Get yours before they're gone!
-        </p>
-    </a>
-@endif
+{{--@if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))--}}
+{{--    <a class="flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">--}}
+{{--        --}}{{--        <img class="h-8 sm:h-10 mr-4" src="https://www.musora.com/musora-cdn/image/width=300,quality=90/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+{{--        <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>--}}
+{{--        <p class="inline-block text-xs mx-0 leading-tight">--}}
+{{--            Alesis Nitro Max E-Kits are back!<br> Get yours before they're gone!--}}
+{{--        </p>--}}
+{{--    </a>--}}
+{{--@endif--}}
 <header class="text-white relative overflow-hidden z-20"
     style="height:700px;background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -640,8 +647,8 @@
         <section class="px-4 sm:px-6 py-10">
         <div class="container max-w-5xl mx-auto relative z-50">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
-                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
-                    Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
+                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA</strong><br>
+                    Your Drumeo E-Kit will ship for free anywhere in the United States. </p>
 
                 <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
                     We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.

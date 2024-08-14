@@ -44,36 +44,37 @@ class SendAccountSetupEmailJob extends BatchQueryJob
             ->where('created_at', '>', now()->subDays(2));
     }
 
-    public function handleItem($user): void
+    public function handleItem($item): void
     {
-        /** @var User $user */
+        /** @var User $item */
         try {
-            $token = md5($user->email . config('shopify.multipass.account_creation_secret_key'));
+            $token = md5($item->email . config('shopify.multipass.account_creation_secret_key'));
 
             $mailToStudent = new Agnostic();
-            $mailToStudent->to($user->email);
+            $mailToStudent->to($item->email);
             $mailToStudent->from('team@musora.com', 'Musora');
-            $mailToStudent->subject('Ready to explore Musora? 🚀');
+            $mailToStudent->subject('Ready to explore Musora?');
             $mailToStudent->view('emails.account-setup-follow-up');
             $mailToStudent->with([
                 'setupAccountUrl' => route('user_management_system.create-account-page', [
-                    'email' => $user->email,
+                    'email' => $item->email,
                     'verification_token' => $token
                 ]),
-                'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
             ]);
 
             Mail::queue($mailToStudent);
         } catch (Throwable $ex) {
-            Log::error('Error sending email for ' . $user->email);
+            Log::error('Error sending email for ' . $item->email);
             Log::error($ex);
         }
     }
 
-    public function handleAllItems($users): bool
+    public function handleAllItems($items): bool
     {
-        foreach ($users as $user) {
-            $this->handleItem($user);
+        foreach ($items as $item) {
+            $this->handleItem($item);
+            // so it doesn't overload SES
+            sleep(1);
         }
         return true;
     }

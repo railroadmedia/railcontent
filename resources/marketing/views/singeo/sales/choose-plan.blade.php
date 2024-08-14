@@ -44,7 +44,7 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg",
-            "songs" => "1000+ popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
@@ -61,13 +61,13 @@
             "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-black.png",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond singing with lessons for guitar, piano, and drums.",
-            "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+            "fifthPoint" => "Songs transcribed w/ playback tools for all instruments.",
         ])
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg",
-            "songs" => "1000+ popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",

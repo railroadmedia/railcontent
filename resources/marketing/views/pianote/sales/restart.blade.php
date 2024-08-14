@@ -144,7 +144,7 @@
                             <img class="h-24 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1360x0/filters:quality(95)/marketing/pianote/promos/may/winback-header.webp">
                             <h1 class="rotater-text my-4 lg:my-5"><strong>Save 50% On <br class="inline sm:hidden"> Your First Year</strong></h1>
                             <h6 class="leading-normal mb-4 sm:mb-2">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Pianote.<br>
-                                <strong class="text-musora"><em>Only available until May 31st.
+                                <strong class="text-musora"><em>Only available until June 30th.<br>
 
 {{--                                                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
@@ -186,7 +186,7 @@
                 ],
                 [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-icon.svg',
-                    'title' => '1000+ Songs',
+                    'title' => 'Popular Songs',
                     'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
                 ],
                 [
@@ -235,7 +235,7 @@
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
                         <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/may/songs.webp')"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-pianote inline-block mb-1"></i><br><strong>1000+ Popular Songs</strong></h4>
+                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-pianote inline-block mb-1"></i><br><strong>Popular Songs</strong></h4>
                             <p class="leading-normal">
                                 Note-for-note breakdowns with the ability to slow things down, loop sections and use a metronome.
                             </p>
@@ -290,7 +290,7 @@
                     </div>
                     <br>
                     <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Pianote</span> Membership<br class="hidden sm:inline">  today and save 50%.</strong></h3>
-                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until May 31st.
+                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.<br>
 {{--                                <span x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
 {{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
@@ -318,7 +318,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
         @include('_partials.components.countdown',[
-        'countdownDate' => '2024-06-01 00:00:00',
+        'countdownDate' => '2024-07-01 00:00:00',
         'promoVersion' => false
         ])
 @stop

@@ -12,40 +12,194 @@ $musora = [
 
     "packs" => [
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+            'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> All',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                ],
+            ]
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+            'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
+                ],
+            ]
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+            'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/4-Way-Coordination.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Musical-Exercises.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rock-Drumming.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rudiments-Patterns.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songs-Breakdown.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Creative-Mindset.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Writing-Drum-Parts.webp",
+                ],
+            ]
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+            'title' => '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Add-Power-To-Your-Playing.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Finding-Your-Musical-Lanes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythm-Groove.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Shred-Guitar.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Solo-In-An-Hour.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Song-Anatomy.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-Cheat-Codes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Unlock-Your-Creativity.webp",
+                ],
+            ]
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+            'title' => '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Beautiful-Harmonies.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Defining-Yourself.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Find-Your-True-Voice.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Hit-The-High-Notes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Singing-With-Soul.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-For-Singers.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Power-Of-Movement.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Science.webp",
+                ],
+            ]
         ],
     ],
     "gridItems" => [
@@ -327,39 +481,20 @@ $musora = [
                 ],
             ],
     "songItems" => [
-
-        [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/popular-song-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
-            "title" => "1000+ popular songs.",
-            "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
-        ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/isolate-icon.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/pianoless-feature.webp",
-            "title" => "Ditch the distractions.",
-            "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play.",
+            "title" => "Isolate your instrument.",
+            "desc" => "Isolate the piano, guitar, or drums so you always know exactly what to play. ",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/loop-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/loop-ultra.mp4",
-            "title" => "Simplify the tricky parts.",
-            "desc" => "Learn songs faster with perfect notation, practice loops, and tempo control.",
+            'title' => 'Simplify the tricky parts.',
+            'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control. ',
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/metronome-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/metronome-ultra.mp4",
-            'title' => 'Improve your timing.',
-            'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
-        ],
-        [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/musora/membership/homepage/2023/devices-icon.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/musora/membership/homepage/2024/devices-feature.webp",
-            "title" => "Take your songs anywhere.",
-            "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
+            "title" => "Improve your timing. ",
+            "desc" => "Use the built-in metronome – your new best friend to get the timing just right.",
         ],
     ],
     "testimonials" => [
@@ -419,7 +554,7 @@ $musora = [
             'animation' => 'animation: breathing 6s infinite; animation-delay: 2s;'
         ],
         [
-            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.webp',
+            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04a.jpg',
             'animation' => 'animation: breathing 6s infinite; animation-delay: 4s;'
         ],
         [
@@ -501,6 +636,41 @@ $musora = [
         [
             'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.webp',
             'animation' => ''
+        ],
+    ],
+
+    "testimonialsVideo" => [
+        [
+            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Claudio-Sanchez-thumb-m.webp",
+            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/claudio-sunchez.jpg",
+            "name" => "Claudio Sanchez",
+            "location" => "California, USA",
+            "video" => "877648411",
+            "title" => "I’ve always wanted to<br class='hidden sm:inline'> play in front of a crowd.",
+        ],
+        [
+            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
+            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/darli-brazil.jpg",
+            "name" => "Darli Brazil",
+            "location" => "California, USA",
+            "video" => "878027528",
+            "title" => "Everything about it is<br class='hidden sm:inline'> a positive experience.",
+        ],
+        [
+            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
+            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/gabriel-queija.jpg",
+            "name" => "Gabriel Queija",
+            "location" => "Canada",
+            "video" => "877591404",
+            "title" => "...great teachers, great<br class='hidden sm:inline'> courses, great everything!",
+        ],
+        [
+            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
+            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/tonia-hotz.jpg",
+            "name" => "Tonya Hotz",
+            "location" => "Arizona, USA",
+            "video" => "882979587",
+            "title" => "It’s even better than<br class='hidden sm:inline'> I’d hoped it would be.",
         ],
     ],
 ]

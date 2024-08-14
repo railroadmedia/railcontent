@@ -10,8 +10,8 @@
     <title>Musora | Musicians start here. </title>
     <meta property="og:title" content="Musora | Musicians start here. ">
 
-    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
-    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
+    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
+    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, popular songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
@@ -166,14 +166,25 @@
             opacity:1 !important;
         }
 
+
         @media (min-width:768px) {
             .splide__pagination__page {
                 margin:3px 6px !important;
             }
         }
 
+        @media (max-width: 767px) {
+            ul.splide__pagination li:nth-child(n+7) {
+                display: none;
+            }
+        }
+
         .splide__arrow svg {
             fill:#FFAE00 !important;
+        }
+
+        .splide__arrow--prev.testimonial-arrow--prev svg {
+            fill: #FFFFFF !important;
         }
 
         .dot {
@@ -194,6 +205,7 @@
             .full-line {
                 bottom:0;
             }
+
         }
         .join.musora {
             background-color:#FFAE00;
@@ -231,17 +243,6 @@
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
-        }
-
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #FFAE00!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
         }
 
         @-webkit-keyframes breathing {
@@ -309,13 +310,14 @@
             }
         }
 
-
         .rotater-text span {
             animation: move 25s infinite;
             background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -337,11 +339,10 @@
 
 @section('layout-body')
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#101921;">
-
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
-            <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play 1000s of songs.</h5>
+            <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play your favorite songs.</h5>
             <div class="mx-auto my-5 sm:my-7">
                 <a class="w-full sm:w-96 join smaller musora-gold mb-3 @if(!empty($promoVersion)) anchor-slide @endif"
                     @if(!empty($promoVersion))
@@ -394,8 +395,8 @@
         $packs = $musora['packs'];
     @endphp
     @include('musora.sales.components.packs-section', [
-        'header' => 'Learn from the best teachers.',
-        'desc' => 'Get unlimited access to lessons for guitar, piano, drums, and singing.',
+        'header' => 'Learn from the<br class="sm:hidden"> best teachers.',
+        'desc' => 'Get unlimited access to lessons for<br class="sm:hidden">  guitar, piano, drums, and singing.',
     ])
 
     @php
@@ -412,7 +413,7 @@
     @endphp
 
     @include('musora.sales.components.workouts-section', [
-        'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card.webp',
+        'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card2.jpg',
     ])
 
 
@@ -421,13 +422,14 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
+        'subheader' => 'Practice and sing 300+ popular songs with note-for-note sheet music and digital tools.',
+        'media' => 'musora/membership/homepage/2024/musora-songs.webp',
     ])
 
     @php
-        $testimonials = $musora['testimonials'];
+        $testimonials = $musora['testimonialsVideo'];
     @endphp
-    @include('musora.sales.components.testimonials-section', [
+    @include('musora.sales.components.testimonials-section-video', [
         'header' => 'Where musical<br class="hidden sm:inline"> dreams come true.',
     ])
 
@@ -447,7 +449,7 @@
             "whiteBg" => true,
             "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
             "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-            "songs" => "Thousands of popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Learn piano, guitar, drums, & singing.",
             "thirdPoint" => "Unlimited personal support",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
@@ -461,7 +463,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-        'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
+        'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
@@ -507,7 +509,7 @@
         'vimeo' => true,
     ])
 
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

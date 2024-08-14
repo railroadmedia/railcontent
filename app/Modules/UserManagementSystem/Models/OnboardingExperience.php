@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
@@ -35,12 +36,18 @@ class OnboardingExperience extends Model
 
     protected $table = 'onboarding_experience';
 
+    public const EXPERIENCE_ONE = 'New';
+    public const EXPERIENCE_TWO = 'Beginner';
+    public const EXPERIENCE_THREE = 'Intermediate';
+    public const EXPERIENCE_FOUR = 'Advanced';
+    public const EXPERIENCE_FIVE = 'Expert';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [ 'experience_level', 'user_id', 'brand'];
+    protected $fillable = ['experience_level', 'user_id', 'brand'];
 
     public function user()
     {

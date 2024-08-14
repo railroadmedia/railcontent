@@ -491,41 +491,6 @@
 {{--            </h6>--}}
 
             <span class="join sold-out medium  align-middle mt-7">ENROLLMENT CLOSED</span>
-
-{{--            @include('drumeo.products.partials._promo-cards', [--}}
-{{--                'firstDeal' => '30 Days To <br>Better Strumming',--}}
-{{--                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course.webp',--}}
-{{--                'firstImageHeight' => 'h-36 lg:h-44',--}}
-{{--                'firstDealPrice' => 97,--}}
-{{--                'firstDealSub' => 'Just the course',--}}
-{{--                'firstDealLink' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',--}}
-{{--                'firstButtonText' => 'ENROLL NOW',--}}
-{{--                'firstDealExtra' => "One-time payment",--}}
-{{--                'whiteBg' => 'false',--}}
-{{--                'firstExtraBonuses' => [--}}
-{{--                    '20 Guided Play-Along Lessons',--}}
-{{--                    'Lifetime Course Access',--}}
-{{--                    '90-Day Money Back Guarantee',--}}
-{{--                ],--}}
-
-{{--                'topBadge' => 'MOST POPULAR',--}}
-{{--                'secondDeal' => 'Unlimited<br> Lessons',--}}
-{{--                'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course-bundle2.webp',--}}
-{{--                'secondImageHeight' => 'h-36 lg:h-44',--}}
-{{--                'secondDealSub' => "1 Year Of Guitareo + 3 Bonuses Worth $341",--}}
-{{--                'secondDealPrice' => '20</strong>/mo<strong>',--}}
-{{--                'secondDealLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',--}}
-{{--                'secondExtraBonuses' => [--}}
-{{--                    '<strong class="font-black">1 year of Unlimited Lessons</strong>',--}}
-{{--                    '<strong class="font-black">Lifetime Access to 30 Days To Better Strumming</strong>',--}}
-{{--                    '<strong class="font-black">Lifetime Access to Rhythm & Groove</strong>',--}}
-{{--                    '<strong class="font-black">Lifetime Access to Guitar Quest</strong>',--}}
-{{--                    'Lessons for the Guitar, Piano, Drums & Singing',--}}
-{{--                    '90-Day Money Back Guarantee',--}}
-{{--                ],--}}
-{{--                'secondButtonText' => 'GET EVERYTHING',--}}
-{{--                'secondDealExtra' => "Billed annually at $240/yr.",--}}
-{{--            ])--}}
         </div>
     </section>
 
@@ -648,10 +613,6 @@
         'name' => 'trailer',
         'video' => '943429100',
         'vimeo' => true,
-    ])
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-06-03 00:00:00',
-        'promoVersion' => false,
     ])
 
     @include('guitareo.sales.partials._footer')

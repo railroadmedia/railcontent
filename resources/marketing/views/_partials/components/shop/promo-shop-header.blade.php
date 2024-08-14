@@ -1,10 +1,5 @@
 <header class="text-white text-center relative z-10 overflow-hidden px-5 sm:px-6 py-6 sm:py-12 lg:py-16" style="background-color:#141535;">
     <div class="container mx-auto relative z-30 max-w-2xl">
-{{--            <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">--}}
-{{--                @include($theme.'._partials.holiday-logo', [--}}
-{{--                    'styles' => 'h-10 sm:h-14 mx-auto'--}}
-{{--                ])--}}
-{{--            </a>--}}
         @if($theme === 'drumeo')
             @if(!empty($logo))
                 <img src="{{ $logo }}" alt="Drumeo" class=" @if(!empty($logoStyles)) {{ $logoStyles }} @endif mx-auto">
@@ -27,5 +22,4 @@
     </div>
     <div class="inset-0 inline-block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $bg }}');"></div>
     <div class="inset-0 hidden sm:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/{{ $bg }}');"></div>
-{{--    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>--}}
 </header>

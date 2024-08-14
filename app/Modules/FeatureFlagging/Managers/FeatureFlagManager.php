@@ -4,6 +4,7 @@ namespace App\Modules\FeatureFlagging\Managers;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Contracts\FeatureFlagsContract;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\FeatureFlagging\Models\Branch;
 use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Models\Feature;
@@ -66,7 +67,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return Carbon::parse($feature->active_at)->isPast();
     }
 
-    public function branch(string $experimentName, User $user = null): string
+    public function branch(string $experimentName, User $user = null, bool $handleFirstTouch = true): string
     {
         $experiment = $this->getExperiment($experimentName);
         if (!$experiment) {
@@ -89,6 +90,9 @@ class FeatureFlagManager implements FeatureFlagsContract
             if ($branch) {
                 $this->trackBranchSelectedEvent($branch, $experiment, $user);
             }
+        }
+        if ($handleFirstTouch) {
+            $this->handleFirstTouchOnExperiment($branch, $experiment, $user);
         }
         return $branch?->content ?? $experiment->default_value ?? '';
     }
@@ -220,25 +224,39 @@ class FeatureFlagManager implements FeatureFlagsContract
         return true;
     }
 
-    private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): bool
+    private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): void
     {
-
         Tracking::create([
             'user_id' => $user?->id,
             'experiment_id' => $experiment->id,
             'branch_id' => $branch->id,
-            'anonymous_user_id' => $anonymous_user_id
+            'anonymous_user_id' => $anonymous_user_id,
+            'is_first_touch_handled' => false
         ]);
+    }
+
+    private function handleFirstTouchOnExperiment(?Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): void
+    {
+        if (is_null($branch)) {
+            return;
+        }
+        $tracking = Tracking::where(['user_id' => $user?->id, 'experiment_id' => $experiment->id])->first();
+        if (is_null($tracking) || $tracking->is_first_touch_handled) {
+            return;
+        }
+
+        $tracking->is_first_touch_handled = true;
+        $tracking->save();
         try {
             Avo::experimentation_branch_assigned(
                 AvoHelper::defaultEventProperties(
                     [
-                    'experiment_id' => $experiment->id,
-                    'experiment_name' => $experiment->name,
-                    'branch_id' => $branch->id,
-                    'branch_name' => $branch->name,
-                    'anonymous_user_id' => $anonymous_user_id
-                ],
+                        'experiment_id' => $experiment->id,
+                        'experiment_name' => $experiment->name,
+                        'branch_id' => $branch->id,
+                        'branch_name' => $branch->name,
+                        'anonymous_user_id' => $anonymous_user_id
+                    ],
                     $user
                 )
             );
@@ -246,7 +264,6 @@ class FeatureFlagManager implements FeatureFlagsContract
             // Do not block user flow if event tracking fails
             Log::error($e->getMessage());
         }
-        return true;
     }
 
     private function getAssignedBranch(Experiment $experiment, ?User $user): Branch | null

@@ -29,11 +29,11 @@
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/543x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
         'logoStyles' => 'h-6 sm:h-8 mb-1',
     ])
-{{--    'logoStyles' => 'h-12 sm:h-20 pb-3 sm:pb-4',--}}
 
     @include('_partials.components.shop.index-filters', [
         "all" => true
     ])
+
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
@@ -49,14 +49,14 @@
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,
@@ -95,6 +95,7 @@
                 </div>
             </div>
         </section>
+
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
@@ -102,13 +103,13 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
                     "badge" => "7-Day Free Trial",
-                     "discounted_price" => 240,
-                        "href" => "/",
-                     "instructor" => "Award-Winning Membership",
                      "price" => 240,
+                     "instructor" => "Award-Winning Membership",
+                     "discounted_price" => 240,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
                      "title" => "Drumeo Membership",
                      'soldOut' => false,
+                        "href" => "/",
                 ])
                 @foreach($lessons as $key => $item)
                     @include('_partials.components.shop.product-card', [

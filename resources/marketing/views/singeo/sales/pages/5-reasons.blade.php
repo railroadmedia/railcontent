@@ -182,7 +182,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "1000+ popular songs.",
+            "songs" => "300+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",

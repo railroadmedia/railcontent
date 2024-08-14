@@ -63,7 +63,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                     "name" => "New Drummers Start Here",
                     "fullPrice" => floatval($productPrices['new-drummers-start-here']->price),
                     "price" => floatval($productPrices['new-drummers-start-here']->discounted_price),
@@ -78,7 +78,12 @@
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
                     @if(floatval($productPrices['new-drummers-start-here']->price) > floatval($productPrices['new-drummers-start-here']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['new-drummers-start-here']->price) }}</s> @endif
-                    ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}</strong></h4>
+                    @if(number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2) == intval(floatval($productPrices['new-drummers-start-here']->discounted_price)))
+                        ${{  floatval($productPrices['new-drummers-start-here']->discounted_price)  }}
+                    @else
+                        ${{  number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2)  }}
+                    @endif
+                </strong></h4>
             <a class="join ndsh" href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
@@ -534,7 +539,11 @@
                             @if(floatval($productPrices['new-drummers-start-here']->discounted_price) == 0)
                                 FREE
                             @else
-                                ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}
+                                @if(number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2) == intval(floatval($productPrices['new-drummers-start-here']->discounted_price)))
+                                    ${{  floatval($productPrices['new-drummers-start-here']->discounted_price)  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2)  }}
+                                @endif
                             @endif
                         </td>
                         <td>${{ Prices::$plusSubscriptionAnnual }}/yr</td>
@@ -581,7 +590,13 @@
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-10 md:mb-14"><strong>ONLY
                     @if(floatval($productPrices['new-drummers-start-here']->price) > floatval($productPrices['new-drummers-start-here']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['new-drummers-start-here']->price) }}</s> @endif
-                    ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}</strong></h4>
+
+                    @if(number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2) == intval(floatval($productPrices['new-drummers-start-here']->discounted_price)))
+                        ${{  floatval($productPrices['new-drummers-start-here']->discounted_price)  }}
+                    @else
+                        ${{  number_format(floatval($productPrices['new-drummers-start-here']->discounted_price), 2)  }}
+                    @endif
+                </strong></h4>
 
             <a href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
 

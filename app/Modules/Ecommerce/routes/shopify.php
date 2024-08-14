@@ -21,23 +21,21 @@ Route::prefix('ecommerce/shopify')
                 Route::post('refunds/create', [ShopifyWebHookController::class, 'refundCreated'])
                     ->name('shopify.webhook.refund.create');
 
-                Route::post(
-                    'product/update',
-                    ShopifyWebHookController::class . '@productUpdated'
-                )->name('shopify.webhook.product.update');
+                Route::post('product/update', [ShopifyWebHookController::class, 'productUpdated'])
+                    ->name('shopify.webhook.product.update');
             });
 
         Route::prefix('cart')
             ->group(function () {
                 Route::get(
                     'add-to-cart',
-                    ShopifyCartAPIController::class.'@createOrAddToCart'
+                    ShopifyCartAPIController::class . '@createOrAddToCart'
                 );
             });
 
         Route::get(
             'shopify-thank-you-page-account-creation-link-js-file',
-            ShopifyCartAPIController::class.'@serveShopifyCartCustomizationScriptTagFile'
+            ShopifyCartAPIController::class . '@serveShopifyCartCustomizationScriptTagFile'
         );
 
         Route::get(

@@ -17,7 +17,6 @@
             'progressState' => $lessonContent->fetch('progress_state'),
             'contentId' => $lessonContent->fetch('id'),
             'useIntersectionObserver' => true,
-            'videoId' => $lessonContent->fetch('fields.video.fields.youtube_video_id'),
             'videoType' => 'youtube',
             'useLegacyPlayer' => false,
             'chapters' => $lessonContent['chapters'] ?? [],
@@ -39,7 +38,6 @@
             'likeCount' => $lessonContent['like_count'] ?? 0,
             'isLiked' => $lessonContent['is_liked_by_current_user'] ?? false,
             'checkForTimecode' => true,
-            'videoId' => $lessonContent->fetch('fields.video.fields.vimeo_video_id'),
             'videoType' => 'vimeo',
             'useLegacyPlayer' => true,
             'thumbnailUrl' => $lessonContent->fetch('data.thumbnail_url'),
@@ -78,7 +76,6 @@
     } else {
         $videoProps = [];
     }
-
     $videoResources = [
         'themeColor' => $brand,
         'brand' => $brand,
@@ -105,7 +102,7 @@
         'reportLogo' => config('mailora.' . $brand . '.logo-link'),
         'difficulty' => $lessonContent->fetch('difficulty'),
     ];
-
+    $videoProps['need_access'] = $lessonContent->fetch('need_access') ?? false;
     $videoButtons = [
         'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
         'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
@@ -313,6 +310,9 @@
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
         :this-lesson-json="{{ $thisLessonJson }}"
         :next-lesson-json="{{ !empty($nextChild) ? $nextLessonJson : null }}"
+        @if(!empty($lessonContent->fetch('soundslice_slug')))
+            :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+        @endif
     >
     </lesson-playback>
 @endsection

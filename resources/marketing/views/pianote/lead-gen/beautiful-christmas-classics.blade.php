@@ -1,4 +1,6 @@
-@extends('pianote.lead-gen.lead-gen-layout-tw')
+@extends('pianote.lead-gen.lead-gen-layout-tw', [
+    'appTailwind' => true,
+])
 
 @section('meta')
     @parent
@@ -13,8 +15,33 @@
 
 @section('head')
     @parent
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
+
+        .splide__pagination__page.is-active {
+            background: #01050F;
+            transform: none !important;
+        }
+
+        .splide__pagination__page {
+            margin: 3px 10px !important;
+            opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .splide__pagination__page {
+                margin: 3px 6px !important;
+            }
+        }
+
+        .splide__arrow svg {
+            fill: #f61a30 !important;
+        }
+        .splide__slide.is-active .active-bg {
+            background-color:#1B2434!important;
+            color:#fff!important;
+        }
         .ajax-form button {
             background:linear-gradient(to bottom, #01c474, #008e54)!important;
         }
@@ -25,6 +52,10 @@
             max-width: 500px;
         }
     </style>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 @endsection
 
 @section('body-data')
@@ -140,7 +171,111 @@
         </div>
     </section>
     <section class="text-center relative px-5 py-10 sm:py-14" style="background: #f6f8fc;">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-6xl mx-auto">
+            <div
+                x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            classes: {
+                                    arrow: 'splide__arrow bg-white opacity-100 top-1/2 transform -translate-y-1/2 shadow-lg h-11 w-11',
+                                    prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
+                                    next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                    pagination: 'splide__pagination hidden md:flex -bottom-10',
+                            },
+                            perMove: 1,
+                            type: 'loop',
+                            padding: '5rem',
+                            focus: 0,
+                            autoplay: true,
+                            pauseOnHover: true,
+                            pauseOnFocus: true,
+                            interval: 5000,
+                            lazyLoad: 'nearby',
+                            breakpoints: {
+                                1020: {
+                                    padding: '2.5rem',
+                                },
+                                767: {
+                                    padding: '1.5rem',
+                                },
+                                620: {
+                                    drag   : 'free',
+                                    snap   : false,
+                                },
+                            },
+                        }
+                        ).mount()
+                    },
+                }"
+            >
+                <section x-ref="splide" class="splide mb-12 sm:mb-20">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            @php
+                                $testimonials = [
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/colleen.jpg",
+                                        "name" => "Colleen Smith",
+                                        "location" => "Mount Gambier, Australia",
+                                        "title" => "Absolutely awesome, Kevin. So perfectly demonstrated and at a <strong>perfect pace for we beginners.</strong> Thank you so much :) 👏❤️",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/deedee.png",
+                                        "name" => "Deedee Harmse",
+                                        "location" => "Alabama, USA",
+                                        "title" => "Thank you Lisa for all you put into this lesson. It is a BIG help to be able to watch your fingers. I love this carol and <strong>your teaching has made it easier for my old fingers to play.</strong> One of my best blessings this year is you, Kevin, and all the Pianote family. Practicing to get better with each lesson.",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/kristine.jpg",
+                                        "name" => "Kristine Tonks",
+                                        "location" => "Edmonton, Canada",
+                                        "title" => "Thank you so much for putting this pack together. I now have three new songs I can somewhat confidently play – maybe a fourth if I don’t give up. <strong>This has been a really fun experience.</strong>",
+                                    ],
+                                ]
+                            @endphp
+                            @foreach ($testimonials as $index => $testimonial)
+                                <li class="splide__slide flex px-1">
+                                    <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
+                                        @if($index % 2 == 0 && isset($bgSplide))
+                                            style="background: {{ $bgSplide }};"
+                                        @else
+                                            style="background-color:#0C1524;"
+                                        @endif
+                                    >
+                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center relative h-56 sm:h-80 lg:h-[32rem]"
+                                            @if(!empty($testimonial['video']))
+                                                x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                                            @endif
+                                        >
+                                            <img
+                                                data-splide-lazy="{{$testimonial['image']}}"
+                                                alt="{{ $testimonial['name'] }}"
+                                                class="object-cover w-full h-full rounded-xl overflow-hidden"
+                                                @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
+                                            >
+                                        </picture>
+                                        <div class="flex flex-col justify-evenly text-left sm:pl-8 sm:py-5">
+                                            <h4 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h4>
+                                            <div class="flex items-center">
+                                                <div class="">
+                                                    <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
+                                                    @if(!empty($testimonial['location']))
+                                                        <p class="leading-tight mx-0 text-pianote"><em>{{ $testimonial['location'] }}</em></p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    <section class="text-center relative px-5 py-10 sm:py-14">
+        <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap items-start">
                 @php
                     $features = [
@@ -162,9 +297,9 @@
                     ];
                 @endphp
                 @foreach ($features as $feature)
-                    <div class="w-full md:w-1/3 px-3 mb-8 md:mb-0">
-                        <img class="h-7 sm:h-8" src="{{ $feature['icon'] }}" alt="help-icon">
-                        <h6 class="my-3 leading-tight"><strong>{{ $feature['headLine'] }}</strong></h6>
+                    <div class="w-full md:w-1/3 px-3 mb-7 md:mb-0">
+                        <img class="h-10 sm:h-12" src="{{ $feature['icon'] }}" alt="help-icon">
+                        <h5 class="mt-3 sm:mt-5 mb-2 leading-tight"><strong>{{ $feature['headLine'] }}</strong></h5>
                         <p>{!! $feature['desc'] !!}</p>
                     </div>
                 @endforeach
@@ -177,7 +312,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mt-14">
                 <div class="w-full sm:w-1/2 px-4 mb-20 sm:mb-0">
                     <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#fff;">
-                        <img class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        <img class="absolute top-0 right-0 transform -translate-y-1/2 w-36 sm:w-40 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/lisa-profile.jpg">
                         <p class="leading-tight text-pianote mt-8">MEET YOUR TEACHER</p>
                         <h3 class="leading-tight mt-1 mb-2"><strong>Lisa Witt</strong></h3>
@@ -192,7 +327,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 px-4">
                     <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#fff;">
-                        <img class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        <img class="absolute top-0 right-0 transform -translate-y-1/2 w-36 sm:w-40 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/lead-gen/beautiful-christmas-classics/kevin-profile.jpg">
                         <p class="leading-tight text-pianote mt-8">MEET YOUR TEACHER</p>
                         <h3 class="leading-tight mt-1 mb-2"><strong>Kevin Castro</strong></h3>

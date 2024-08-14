@@ -1,55 +1,32 @@
-<section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-8 sm:py-8" style="background:linear-gradient(to bottom, #111630, #010101)">
-    <div class="container mx-auto relative z-30 @if(!empty($bfVersion)) max-w-3xl @else max-w-2xl @endif">
+<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-6 sm:pb-12 bg-cover bg-top"
 
-        @if(!empty($bfVersion))
+    style="background-image:@if(!empty($bg)) {{ $bg }} @else url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp') @endif ;
+">
+    <div class="container mx-auto relative z-30 max-w-lg">
+        @if($theme === 'drumeo')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
-                @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-8 sm:h-10 mx-auto'
-                ])
+                <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo-text-only.webp">
             </a>
-            <h3 class="leading-tight my-4"><strong>{!! $text2 !!}</strong></h3>
-                <div class="w-full mx-auto my-8">
-                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        @if(!empty($vimeo))
-                            <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/{{ $vimeo }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                        @elseif(!empty($image))
-                            <img class="absolute inset-0 w-full h-full" src="{{ $image }}">
-                        @endif
-                    </div>
-                </div>
-
-            <h3 class="leading-tight mb-3"><strong>$240</strong></h3>
-            <a class="join promo w-full max-w-xl mx-auto" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
-            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
-                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                </a>
-                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
-            </div>
-        @else
+            <img class="h-80 absolute right-0 top-0 hidden sm:block translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
+        @elseif($theme === 'pianote')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
-                @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-14 sm:h-16 lg:h-20 mx-auto'
-                ])
+                <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
             </a>
-            <h5 class="leading-tight my-4"><strong>{!! $text !!}</strong></h5>
+            <img class="h-80 absolute right-0 top-0 hidden sm:block translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
+        @endif
+            <h5 class="leading-tight my-4 uppercase">{!! $text !!}</h5>
 
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-4">
-                <a class="w-full sm:w-1/2 join smaller outline promo sm:order-2" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>
+                <a class="w-full sm:w-1/2 join smaller sm:order-2 bg-[#FFD600] text-black" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP NOW &raquo;</a>
 
-                <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">
-                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>
-                </div>
+{{--                <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">--}}
+{{--                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>--}}
+{{--                </div>--}}
             </div>
-        @endif
 
         @if(session()->has('error'))
             <h5 class="leading-tight my-2"><strong class="text-musora">{{ session()->get('error') }}</strong></h5>
         @endif
     </div>
-    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>
+{{--    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>--}}
 </section>

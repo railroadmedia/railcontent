@@ -6,7 +6,7 @@
     <meta property="og:title" content="Drumeo EarDrums">
     <meta name="description" content="Protect your ears + play your favorite songs.">
     <meta property="og:description" content="Protect your ears + play your favorite songs.">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/share-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -323,7 +323,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo EarDrums",
         "fullPrice" => floatval($productPrices['drumeo-eardrums-black']->price),
         "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
@@ -729,12 +729,12 @@
                     <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>
                     <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.
                         <br><br>
-                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for 6000+ famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
+                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
                     </p>
                 </div>
                 <picture class="w-full sm:w-auto h-auto sm:h-96">
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo.webp">
-                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo-m.webp">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
+                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
                 </picture>
             </div>
         </div>
@@ -746,50 +746,52 @@
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/logo-black.png"><br>
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
             @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
-                @include('drumeo.products.partials._promo-cards', [
-                    'firstBadge' => 'SAVE 34%',
-                    'firstDeal' => 'Drumeo<br> EarDrums',
-                    'firstDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
-                    'firstImageHeight' => 'h-28 lg:h-32',
-                    'firstDealDiscount' => 149,
-                    'firstDealPrice' => 99,
-                    'firstDealSub' => 'Just the IEMs',
-                    'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                    'firstButtonText' => 'SELECT',
-                    'firstDealExtra' => "One-time payment. Free shipping.",
-                    'whiteBg' => 'false',
-                    'firstExtraBonuses' => [
-                        '<strong>1 Pair of EarDrum IEMs</strong>',
-                        '<strong>30 Days Of Drumeo</strong>',
-                        'Single-layer Silicone Eartips (S/M/L)',
-                        'Triple-layer Silicone Eartips (S/M/L)',
-                        'Memory Foam Eartips (S/M/L)',
-                        'Drumeo Miniature Road Case',
-                        '2 Black Braided Cables',
-                        'Cleaning Brush',
-                        'Clothing Clip',
-                        '¼” Adapter',
-                    ],
-
-                    'secondBadge' => 'LAUNCH SPECIAL',
-                    'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
-                    'secondDealImage' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                    'secondImageHeight' => 'h-28 lg:h-32',
-                    'secondDealPrice' => 'Free EarDrums',
-                    'secondDealExtra' => "with annual Membership of $240/yr.",
-                    'secondButtonText' => 'SELECT',
-                    'secondDealLink' =>
-                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&promo-code=eardrums-shipping&locked=true',
-                    'secondExtraBonuses' => [
-                        '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
-                        '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
-                        'Step-by-Step Lessons',
-                        '6000+ Song Breakdowns',
-                        'Personalized Support',
-                    ],
-                ])
+                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
+                    @include('drumeo.products.partials._order-card', [
+                        'firstOnMobile' => true,
+                        'highlightBorder' => true,
+                        'badge' => 'LAUNCH SPECIAL',
+                        'header' => 'EarDrums + 1 Year<br> Drumeo Membership',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'price' => 'Free EarDrums',
+                        'specialText' => "with annual Membership of $240/yr.",
+                        'cta' => 'SELECT',
+                        'link' =>
+                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
+                        'bonuses' => [
+                            '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
+                            '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
+                            'Step-by-Step Lessons',
+                            'Song Breakdowns',
+                            'Personalized Support',
+                        ],
+                    ])
+                    @include('drumeo.products.partials._order-card', [
+                        'header' => 'Drumeo<br> EarDrums',
+                        'image' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
+                        'price' => '$' . floatval($productPrices['drumeo-eardrums-black']->discounted_price),
+                        'specialText' => 'Just the IEMs',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                        'cta' => 'SELECT',
+                        'specialText' => "One-time payment.",
+                        'bonuses' => [
+                            '<strong>1 Pair of EarDrum IEMs</strong>',
+                            '<strong>30 Days Of Drumeo</strong>',
+                            'Single-layer Silicone Eartips (S/M/L)',
+                            'Triple-layer Silicone Eartips (S/M/L)',
+                            'Memory Foam Eartips (S/M/L)',
+                            'Drumeo Miniature Road Case',
+                            '2 Black Braided Cables',
+                            'Cleaning Brush',
+                            'Clothing Clip',
+                            '¼” Adapter',
+                        ],
+                    ])
+                </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
             @endif
@@ -798,6 +800,13 @@
         </div>
     </section>
 
+    <section class="py-6 md:py-10 text-center">
+        <p class="max-w-md px-4 md:px-2 leading-normal">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer</b><br>
+            Due to high demand, your EarDrums will ship <br class="hidden sm:inline">
+            within 2-4 business days of your order.
+        </p>
+    </section>
     <section class="text-center py-10" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 sm:px-4 mb-5 text-light-navy">

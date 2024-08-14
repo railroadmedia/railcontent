@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true']);
     }
     public function homeMonth()
     {
@@ -74,9 +74,9 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
-    public function drumMonth()
+    public function practiceAnywhere()
     {
-        return view('drumeo.sales.drum-month', ['theme' => 'drumeo', 'promoVersion' => true, 'promoPage' => 'true', ]);
+        return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
     public function restart()
     {
@@ -183,6 +183,21 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
+    public function thirtyDayDoubleBass()
+    {
+        $productId = 844;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-double-bass', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
     public function thirtyDayIndependenceDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
@@ -256,7 +271,7 @@ class SalesController extends BaseController
             'newAccount' => $isNewAccount,
             'accessCodeArray' => $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ];
-        return view('drumeo.pages.redeem.redeem-page', $data);
+        return view('drumeo.pages.alesis', $data);
     }
 
     public function alesisNitro(Request $request)
@@ -267,6 +282,16 @@ class SalesController extends BaseController
     public function alesisNitroExisting(Request $request)
     {
         return $this->handleRedeemRequest($request, 'alesisNitro', false);
+    }
+
+    public function alesisNitroPro(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisNitroPro', true);
+    }
+
+    public function alesisNitroProExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisNitroPro', false);
     }
 
     public function alesisStrata(Request $request)
@@ -371,6 +396,11 @@ class SalesController extends BaseController
     public function easyRudimentsPlaylist()
     {
         return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
+    }
+
+    public function fiveforthreeBundle()
+    {
+        return view('drumeo.products.5-for-3-bundle', ['theme' => 'drumeo']);
     }
 
     public function vote()

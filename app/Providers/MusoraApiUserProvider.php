@@ -81,6 +81,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         return [
             'user' => $userArray,
+            'subscriptionIntervalType' => $user->subscriptionIntervalType(),
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,

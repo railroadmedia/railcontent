@@ -1,4 +1,4 @@
-<section class="clearfix w-full text-center mx-auto sm:px-5 py-4 sm:pb-2 sm:pt-8">
+<section class="clearfix w-full text-center mx-auto sm:px-5 py-4 sm:pb-6 sm:pt-8">
     <div class="container mx-auto">
         <div class="sm:flex items-center justify-between">
             <div class="text-left whitespace-nowrap overflow-x-scroll sm:overflow-x-auto mb-4 sm:mb-0">

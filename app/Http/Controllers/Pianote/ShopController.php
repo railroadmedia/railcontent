@@ -44,7 +44,7 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
-        $featured = $products->whereIn('id', [208, 210, 197, 206]);
+        $featured = $products->whereIn('id', [262, 210, 197, 113]);
 
         return view('pianote.shop.shop', [
             'lessons' => $lessons,

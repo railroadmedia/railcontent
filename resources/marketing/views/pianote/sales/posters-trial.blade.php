@@ -70,7 +70,7 @@
     <div class="sticky-trigger block"></div>
     <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true"
         class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
-        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://www.musora.com/musora-cdn/image/width=300,quality=90/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
             Get <strong>2 free posters</strong> when you try

@@ -3,6 +3,7 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -427,13 +428,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $url
-     * @param string $method
-     * @param string $authToken
-     * @param string $authStrategy
-     * @param array|null $headers
-     * @param array|null $dataArray
-     * @return array
      * @throws Exception
      */
     public function executeRequest(
@@ -448,7 +442,21 @@ class CustomerIoApiGateway
 
         $body = json_encode($dataArray);
         try {
-            $request = Http::withHeaders($headers)->withToken($authToken, $authStrategy);
+            $request = Http::withHeaders($headers)
+                ->withToken($authToken, $authStrategy)
+                ->retry(
+                    times: 5,
+                    sleepMilliseconds: 1000,
+                    when: function (Exception $exception) {
+                        // NOTE: Retry all failures except 404, since in this case 404 will mean a resource was not found
+                        if ($exception instanceof RequestException && $exception->response->status() === 404) {
+                            return false;
+                        }
+
+                        return true;
+                    },
+                    throw: false,
+                );
 
             $result = match ($method) {
                 'GET' => $request->accept('application/json')->get($url),
@@ -457,29 +465,17 @@ class CustomerIoApiGateway
                 'DELETE' => $request->delete($url)
             };
         } catch (Exception $e) {
-            Log::error(
-                'CustomerIoApiGateway::executeRequest: exception while reaching: ' . $url
-                    . ' - ' . $e->getMessage()
-                    . ' - Request payload: ' . $body
-            );
-            Log::debug(print_r($e->getTrace(), true));
+            Log::error('CustomerIoApiGateway::executeRequest: exception while reaching: ' . $url . ' - ' . $e->getMessage());
+            // Log::debug(print_r($e->getTrace(), true));
             throw $e;
         }
 
         $response = $result->json();
 
         if (!$result->ok()) {
-            Log::error(
-                'CustomerIoApiGateway::executeRequest() api call failed: ' . $url
-                    . ' - ' . $result->reason()
-                    . ' - Result: ' . var_export($result->json(), true)
-                    . ' - Request data: ' . $body,
-            );
+            Log::error('CustomerIoApiGateway::executeRequest() api call failed: ' . $url . ' - ' . $result->reason());
             throw new Exception(
-                'CustomerIoApiGateway::executeRequest() api call failed: ' . $url
-                    . ' - ' . $result->reason()
-                    . ' - Result: ' . var_export($result->json(), true)
-                    . ' - Request data: ' . $body,
+                'CustomerIoApiGateway::executeRequest() api call failed: ' . $url . ' - ' . $result->reason(),
                 $result->status()
             );
         }

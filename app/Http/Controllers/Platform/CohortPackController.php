@@ -92,7 +92,13 @@ class CohortPackController
         }
         $cohort->lists = $lists;
 
-        return view('content.cohort-template', [
+        if ($cohort['custom_cohort'] == true) {
+            $view = 'content.cohort-template-mk';
+        } else {
+            $view = 'content.cohort-template';
+        }
+
+        return view($view, [
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
             'registerButtonUrl' => $registerButtonUrl,
@@ -100,10 +106,10 @@ class CohortPackController
             'cohort' => $cohort,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
-            'purchased' => $purchased
+            'purchased' => $purchased,
+            'recaptchaKey' => config('recaptcha.key'),
         ]);
     }
-
     public function purchased(Request $request, $domain, $brand, $slug)
     {
         return $this->template($request, $domain, $brand, $slug, purchased: true);

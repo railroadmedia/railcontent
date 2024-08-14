@@ -30,6 +30,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Railroad\Ecommerce\Entities\Structures\Address as AddressStructure;
 use Railroad\Ecommerce\Services\TaxService;
+use Signifly\Shopify\Exceptions\TooManyRequestsException;
 use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\Shopify;
@@ -68,6 +69,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
      * @var int
      */
     public $timeout = 840;
+    public $tries = 5;
     protected Shopify $shopify;
     protected TaxService $taxService;
     protected Collection $shopifyIds;
@@ -167,7 +169,17 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
         $this->logInfo(sprintf("%s: %s", $this->getClassName(), $infoString));
 
         $subscriptionPayments->chunkById($batchSize, function (Collection $orderChunk) use (&$jobs) {
-            $this->loopSync($orderChunk);
+            try {
+                $this->loopSync($orderChunk);
+            } catch (TooManyRequestsException $exception) {
+                if (app()->environment('local')) {
+                    $this->logWarning('Too many requests. Sleeping for 10s...');
+                    sleep(10);
+                    $this->release();
+                } else {
+                    throw $exception;
+                }
+            }
         });
         $this->printResults();
         $this->finishSyncLogIfExecuting($this->shopifyIds);

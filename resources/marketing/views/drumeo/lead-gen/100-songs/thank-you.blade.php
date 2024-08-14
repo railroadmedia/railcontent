@@ -101,7 +101,7 @@
             @endcomponent
 
             @component('drumeo.lead-gen.100-songs._banner', [
-                'title' => '6000+ songs',
+                'title' => 'popular songs',
                 'subtitle' => ' Play the songs you love.',
                 'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
                 'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
@@ -222,7 +222,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "6000+ popular songs.",
+        "songs" => "1500+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",

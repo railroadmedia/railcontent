@@ -23,7 +23,7 @@
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-        'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
+        'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>

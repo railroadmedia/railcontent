@@ -171,11 +171,6 @@
                     'shipping' => true,
             ],
             [
-                'price' => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
-                'description' => "Master the five pillars of the acoustic guitar and build a rock-solid foundation to play the songs you love in this organized 26-week course. You'll have fun playing the guitar by applying everything you learn to real music.",
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/acoustic-guitar-made-easy.png',
-            ],
-            [
                 'price' => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
                 'description' => 'Take a crystal-clear path to gain total guitar confidence in playing the music you love. This 26-week plan provides a complete foundation for you to achieve guitar techniques, giving you the freedom to explore the guitar neck and improvise on the spot.',
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-technique-made-easy.png',
@@ -190,20 +185,15 @@
                 'description' => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons. Inside, you'll find guided lessons on anything you want to learn on the guitar — such as the fundamentals, gear and tone, playing styles for genres, and more.",
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-system.png',
             ],
-            [
-                'price' => floatval($productPrices['rhythm-and-groove']->price),
-                'description' => "Start grooving to rhythms on the guitar that you can throw into any song. Your teacher Sami Ghawi will show you how to change the feel of your music and get an audience moving to the beat.",
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/rhythm_groove_cart.jpg',
-            ],
         ];
     @endphp
     @php
         if(!empty($upgradeVersion)) {
-            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
         } else {
-            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[GUITAREO-LIFETIME-MEMBERSHIP-3-pay]=1&products[musora-access-1-year]=1&products[chords-scales-poster]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[GUITAR-SYSTEM]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true&promo-code=FREE-W-LIFETIME-849';
         };
     @endphp
 
@@ -291,7 +281,7 @@
                             <strong class="text-musora">FREE</strong></span><br>
                             <em>
                                 @if(!empty($bonus['shipping']))
-                                    Free Shipping
+                                    Free Bonus
                                 @else
                                     Online Access
                                 @endif
@@ -318,7 +308,7 @@
             ],
             [
                 "title" => "What content is included with my Lifetime Membership? Are songs included?",
-                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to thousands of officially licensed song transcriptions for the price of one songbook a year.',
+                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to officially licensed song transcriptions for the price of one songbook a year.',
             ],
         ]
     @endphp

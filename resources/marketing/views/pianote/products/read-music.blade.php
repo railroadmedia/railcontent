@@ -278,7 +278,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         'name' => 'Read Music in 30 Days',
         'fullPrice' => floatval($productPrices['read-music-in-30-days']->price),
         'price' => floatval($productPrices['read-music-in-30-days']->discounted_price),
@@ -369,7 +369,7 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a href="#final" class="@if($startDateCourse < Carbon\Carbon::now()) sold-out @endif join bg-pianote medium w-full anchor-slide">@if($startDateCourse < Carbon\Carbon::now()) ENROLLMENT CLOSED @endif ENROLL NOW </a>
+                            <a href="#final" class="@if($startDateCourse > Carbon\Carbon::now()) sold-out @else bg-pianote @endif join medium w-full anchor-slide">@if($startDateCourse > Carbon\Carbon::now()) ENROLLMENT CLOSED @else ENROLL NOW @endif</a>
                         </div>
                         <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -614,7 +614,7 @@
 
         {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10" @click="waitlistModal = true;">JOIN WAITLIST</span> --}}
 
-        @if ($startDateCourse < Carbon\Carbon::now())
+        @if ($startDateCourse > Carbon\Carbon::now())
             <span class="join sold-out medium w-full max-w-xs align-middle my-10">ENROLLMENT CLOSED</span>
         @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle my-10 anchor-slide">ENROLL NOW</span>
@@ -846,9 +846,7 @@
                         <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your hands!</strong></h3>
                         <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
-                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
-                            (with
-                            free shipping). <br><br>
+                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE. <br><br>
                             This 74-page book has every exercise used in the course PLUS a reference guide, practice notes
                             for
                             each day, and a ton of bonus sight-reading exercises.  <br><br>
@@ -1033,7 +1031,7 @@
         </div>
         <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
 
-        @if ($startDateCourse < Carbon\Carbon::now())
+        @if ($startDateCourse > Carbon\Carbon::now())
             <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
         @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle anchor-slide">ENROLL NOW</span>
@@ -1109,14 +1107,21 @@
                         </div>
                     @endforeach
                 </div>
+                @if ($startDateCourse > Carbon\Carbon::now())
+                    <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
+                @endif
 
             </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
+
+            @if ($startDateCourse > Carbon\Carbon::now())
+
+            @else
+                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&locked=true"
                         @else
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         @endif
                         >
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
@@ -1143,7 +1148,7 @@
                         <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>
                     </div>
                     <h3 class="leading-tight"><strong>Join Pianote</strong></h3>
-                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and 1000+ popular songs!</p>
+                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and popular songs!</p>
                     <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
                     <p class="inline-block text-xs">(Includes $364 in free bonuses)</p><br>
                     <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
@@ -1164,6 +1169,7 @@
                     </p>
                 </a>
             </div>
+            @endif
         </div>
     </section>
 

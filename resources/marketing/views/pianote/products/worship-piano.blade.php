@@ -19,7 +19,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
                     "name" => "Worship Piano",
                     "fullPrice" => floatval($productPrices['worship-piano']->price),
                     "price" => floatval($productPrices['worship-piano']->discounted_price),
@@ -45,7 +45,13 @@
             <p class="breakdown">
                 @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['worship-piano']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['worship-piano']->discounted_price), 2) == intval(floatval($productPrices['worship-piano']->discounted_price)))
+                                ${{  floatval($productPrices['worship-piano']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['worship-piano']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif
@@ -621,7 +627,13 @@
             <p class="breakdown">
                 @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['worship-piano']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['worship-piano']->discounted_price), 2) == intval(floatval($productPrices['worship-piano']->discounted_price)))
+                                ${{  floatval($productPrices['worship-piano']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['worship-piano']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif

@@ -18,6 +18,13 @@ return [
 
     // customer.io accounts configuration
     'accounts' => [
+        'musora_prospects' => [
+            'track_api_key' => env('MUSORA_PROSPECTS_CUSTOMER_IO_TRACK_API_KEY'),
+            'app_api_key' => env('MUSORA_PROSPECTS_CUSTOMER_IO_APP_API_KEY'),
+            'workspace_name' => env('MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_NAME'),
+            'workspace_id' => env('MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_ID'),
+            'site_id' => env('MUSORA_PROSPECTS_CUSTOMER_IO_SITE_ID'),
+        ],
         'musora' => [
             'track_api_key' => env('MUSORA_CUSTOMER_IO_TRACK_API_KEY'),
             'app_api_key' => env('MUSORA_CUSTOMER_IO_APP_API_KEY'),
@@ -57,6 +64,42 @@ return [
 
     // form names and configuration
     'forms' => [
+        // NOTE: brand changes dynamically based on the current domain
+        'brand' => 'musora',
+        'musora' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Free Music Lessons For Life' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
+                ],
+            ],
+        ],
         'drumeo' => [
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
@@ -116,6 +159,15 @@ return [
                 'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_hand-technique',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Double Bass 101' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_double-bass-101',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
@@ -325,7 +377,7 @@ return [
                     'drumeo',
                 ],
             ],
-            'Eardrums Waitlist' => [
+            'EarDrums Waitlist' => [
                 'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_eardrums2-waitlist',
@@ -352,6 +404,21 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'Technique Essentials' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_technique-essentials',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Chord Hacks' => [

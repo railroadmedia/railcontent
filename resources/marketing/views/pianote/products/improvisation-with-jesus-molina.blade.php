@@ -68,7 +68,7 @@
     "cartVersion" => true,
     ])
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Improvisation & Musical Freedom",
         "fullPrice" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
         "price" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price),
@@ -286,7 +286,7 @@
     {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/method-thumbs.jpg"></div>--}}
     {{--<div class="px-4 lg:px-6 py-5 lg:py-7">--}}
     {{--<img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">--}}
-    {{--<img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">--}}
+    {{--<img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">--}}
     {{--<h4 class="leading-tight my-3"><strong>Motivation <br class="hidden md:inline"> & Support</strong></h4>--}}
     {{--<p class="leading-normal text-light-navy">From the big stage straight to your living room – you’ll get weekly live events, lessons, and personal feedback from incredible artists as they guide and support you every step of the way on your piano journey. </p>--}}
     {{--</div>--}}
@@ -295,7 +295,7 @@
     {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/coaches-thumbs.jpg"></div>--}}
     {{--<div class=" px-4 lg:px-6 py-5 lg:py-7">--}}
     {{--<i class="text-4xl align-middle fa-light fa-piano text-pianote"></i>--}}
-    {{--<img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">--}}
+    {{--<img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">--}}
     {{--<h4 class="leading-tight my-3"><strong>Step-By-Step<br class="hidden md:inline"> Curriculum</strong></h4>--}}
     {{--<p class="leading-normal text-light-navy">Build your foundation on the piano with a perfectly structured curriculum that will teach you all the skills you need to start playing beautiful music. This is your guide to musical freedom on the piano, perfect for beginners and intermediates.</p>--}}
     {{--</div>--}}
@@ -304,7 +304,7 @@
     {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/songs-thumbs.jpg"></div>--}}
     {{--<div class="px-4 lg:px-6 py-5 lg:py-7">--}}
     {{--<i class="text-4xl align-middle icon-songs text-songs"></i>--}}
-    {{--<img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">--}}
+    {{--<img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">--}}
     {{--<h4 class="leading-tight my-3"><strong>Play Your <br class="hidden md:inline">  Favorite Songs</strong></h4>--}}
     {{--<p class="leading-normal text-light-navy">Nothing is better than playing real music! 100s of detailed song tutorials will teach you how to play popular music from all eras, styles, and genres. Practice along to backing tracks and download the sheet music for every song.</p>--}}
     {{--</div>--}}
@@ -477,7 +477,14 @@
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
                     <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Logo.png" alt="Improvisation logo">
-                    <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price) }}</s>--> <span class="text-pianote">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price) }}</span></strong></h4>
+                    <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price) }}</s>-->
+                            <span class="text-pianote">
+                                @if(number_format(floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price), 2) == intval(floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price)))
+                                    ${{  floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price)  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price), 2)  }}
+                                @endif
+                            </span></strong></h4>
                     <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Get Jesús Molina’s entire course for less than the cost of a single in-person piano lesson.</em></p>
                     <div class="w-full mx-auto sm:mx-0">
                         <p class="text-sm leading-relaxed">

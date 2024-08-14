@@ -3,11 +3,16 @@
 namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\MusoraApi\Jobs\ContentServedEventTrackingJob;
 use Avo;
-use Illuminate\Http\Request;
+use Railroad\Railcontent\Services\RecommendationService;
 
 class RecSysJourneyService
 {
+    public function __construct(private readonly RecommendationService $recommendationService)
+    {
+    }
+
     public function trackHomepageContentClicked(array $props): void
     {
         Avo::homepage_content_clicked(
@@ -32,6 +37,16 @@ class RecSysJourneyService
                 ],
                 user()
             )
+        );
+    }
+
+    public function trackRecommendedContentServed(array $props): void
+    {
+        $user = user();
+        ContentServedEventTrackingJob::dispatchAfterResponse(
+            $props,
+            $user,
+            AvoHelper::defaultEventProperties([], $user)
         );
     }
 }

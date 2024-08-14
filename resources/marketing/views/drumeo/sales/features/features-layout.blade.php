@@ -23,12 +23,12 @@
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
-        'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 6000+ popular songs',
+        'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
-        'image' => '/marketing/drumeo/membership/homepage/2023/drumeo-collage.png',
+        'image' => '/marketing/drumeo/membership/homepage/2024/collage.webp',
     ])
 
     @include('musora.sales.components.app-section', [

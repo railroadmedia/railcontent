@@ -4,13 +4,10 @@ namespace App\Console\Commands\Infrastructure;
 
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Throwable;
 
 /**
  * Base Job class for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
@@ -22,6 +19,8 @@ abstract class BatchQueryJobByIds extends BatchQueryJob
     use Queueable;
     use SerializesModels;
     use Batchable;
+
+    protected array $ids;
 
     public function init(int $skip, int $take)
     {

@@ -110,7 +110,7 @@
         "whiteBg" => true,
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-        "songs" => "Thousands of popular songs.",
+        "songs" => "300+ popular songs.",
         "firstPoint" => "Learn piano, guitar, drums, & singing.",
         "thirdPoint" => "Unlimited personal support",
         "plusAnnualLink" => "/ecommerce/shopify/cart/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,

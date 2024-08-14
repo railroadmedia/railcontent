@@ -2,9 +2,6 @@
 
 namespace App\Modules\Ecommerce\Enums;
 
-/**
- * Based on shopify order statuses
- */
 enum UserAccessPermissionsSourceEnum: string
 {
     case Manual = 'manual';
@@ -14,5 +11,4 @@ enum UserAccessPermissionsSourceEnum: string
     case Apple = 'apple';
     case Google = 'google';
     case Migration = 'migration';
-
 }

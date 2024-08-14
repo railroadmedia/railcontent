@@ -1,7 +1,7 @@
 // Vuesora
-@import '../js/vue/vuesora/assets/sass/app.scss';
+@import '../js/Libraries/Vuesora/assets/sass/app.scss';
 // Chatsora
-@import '../js/vue/Libraries/Chatsora/assets/sass/app.scss';
+@import '../js/Libraries/Chatsora/assets/sass/app.scss';
 
 /* Tailwind CSS */
 @tailwind base;
@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 /* Tailwind base style overrides */
-.body, .post-body { 
+.body, .post-body {
     a:visited {
         color: rgb(11, 118, 219);
     }
@@ -37,8 +37,10 @@
         --color-ui-page: #F9F9F9;
         --color-ui-navigation: #FFFFFF;
         --color-ui-border: #C5C5C7;
-        --color-ui-button-bg: #000000;
-        --color-ui-button-text: #FFFFFF;
+        --color-ui-skeleton: #E4E4E7;
+        --color-ui-button-1: #000000;
+        --color-ui-button-2: #FFFFFF;
+        --color-ui-button-3: #FFFFFF;
     }
 
     //Dark Mode Variant
@@ -62,7 +64,9 @@
         --color-ui-page: #000C17;
         --color-ui-navigation: #081825;
         --color-ui-border: #223F57;
-        --color-ui-button-bg: #FFFFFF;
-        --color-ui-button-text: #000000;
+        --color-ui-skeleton: #002039;
+        --color-ui-button-1: #FFFFFF;
+        --color-ui-button-2: #00101D;
+        --color-ui-button-3: #000000;
     }
 }

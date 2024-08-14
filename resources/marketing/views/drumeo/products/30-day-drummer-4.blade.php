@@ -226,7 +226,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => "30-Day Drummer",
                 "fullPrice" => floatval($productPrices['30-day-drummer-4']->price),
                 "price" => floatval($productPrices['30-day-drummer-4']->discounted_price),
@@ -1060,10 +1060,6 @@
 
     @include("drumeo.sales.partials._footer")
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-02-26 00:00:00',
-        'promoVersion' => false
-    ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

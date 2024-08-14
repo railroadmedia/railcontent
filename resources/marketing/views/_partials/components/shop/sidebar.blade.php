@@ -18,18 +18,25 @@
                 <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block @if(!empty($invert)) filter invert @endif" src="{{ $logo }}" alt="Product logo">
             @endif
 
+
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
-                <h1 class="text-center text-3xl uppercase md:text-4xl">
-                    <s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
-                    <strong class="font-black text-{{ $theme }}">
-                        @if(number_format($price, 2) == intval($price))
-                            $<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span>
-                        @else
-                            $<span class="chosen-variant-price-float">{{  number_format($price, 2)  }}</span>
-                        @endif
-                    </strong>
-                </h1>
+            <h1 class="text-center text-3xl uppercase md:text-4xl">
+                <s class="opacity-40 text-3xl">${{ floatVal($fullPrice) }}</s>
+                <strong class="font-black text-{{ $theme }}">
+                    @if(number_format($price, 2) == intval($price))
+                        $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span>
+                    @else
+                        $<span class="chosen-variant-price-float">{{ number_format($price, 2) }}</span>
+                    @endif
+                </strong>
+            </h1>
+
+            @if($category === 'bundles' && $product->slug != 'little-book-bundle')
+                <p class="text-sm text-black rounded-lg px-2 leading-none py-1 block opacity-40">${{ round($fullPrice - $price) }} <em> in FREE BONUSES </em></p>
+            @else
                 <p class="text-sm font-black text-black rounded-lg px-2 leading-none py-1 inline-block bg-musora">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
+            @endif
+
             @elseif(isset($price))
                 <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif
@@ -96,9 +103,12 @@
                 @endif
             @endif
                 <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
-                    @if(!empty($freeShipping))
-                        <i class="fas fa-truck text-{{ $theme }}"></i> <strong class="text-{{ $theme }}">FREE SHIPPING!</strong><br>
-                    @endif
+{{--                    @if(!empty($freeShipping) && $category !== 'bundles') --}}
+{{--                        <i class="fas fa-truck text-{{ $theme }}"></i> <strong class="text-{{ $theme }}">FREE SHIPPING!</strong><br>--}}
+{{--                    @endif--}}
+{{--                    @if(!empty($freeShipping) && $category === 'bundles') --}}
+{{--                       <strong class="text-black opacity-40">FREE SHIPPING!</strong><br>--}}
+{{--                    @endif--}}
                     You can also order by phone toll-free at<br class="hidden sm:inline">
                     <a href="tel:+18004398921" class="text-{{ $theme }}">1-800-439-8921</a> or directly at
                     <a href="tel:+16048557605" class="text-{{ $theme }}">1-604-855-7605</a>. </p>
@@ -110,7 +120,7 @@
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png';
                     }
                     elseif($theme === 'pianote'){
-                        echo 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png';
+                        echo 'https://d21q7xesnoiieh.cloudfront.net/marketing/pianote/promos/summer-sale/pianote-money-back.jpg';
                     }
                     elseif($theme === 'guitareo'){
                         echo 'https://d122ay5chh2hr5.cloudfront.net/sales/2021/guarantee-badge.png';

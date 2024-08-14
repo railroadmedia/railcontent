@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Collections\PackCollection;
-use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
-use App\Decorators\Content\ContentExperienceDecorator;
-use App\Decorators\Content\PackDecorator;
-use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\ContentLikesDecorator;
 use App\Modules\Content\Services\CohortService;
 use App\Services\PackService;
@@ -17,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Railroad\Railcontent\Decorators\Decorator;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Helpers\FiltersHelper;
@@ -114,13 +109,14 @@ class PackPagesController extends Controller
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
             abort(404);
         }
-
+        ContentRepository::$availableContentStatues = $originalContentStatuses;
         $packBundles = $this->contentService->getByParentId($pack['id']);
 
         $collectionForDecoration = new Collection();
@@ -191,7 +187,8 @@ class PackPagesController extends Controller
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
@@ -209,7 +206,7 @@ class PackPagesController extends Controller
         if (empty($thisPackBundle)) {
             abort(404);
         }
-
+        ContentRepository::$availableContentStatues = $originalContentStatuses;
         $lessons = $this->contentService->getByParentId($thisPackBundle['id']);
 
         $collectionForDecoration = new Collection();
@@ -310,10 +307,11 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_UNLISTED,];
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -334,9 +332,12 @@ class PackPagesController extends Controller
 
         $parentChildren = $this->contentService->getByParentId($thisPackBundle['id']);
 
-        foreach ($parentChildren as $parentChild) {
+        foreach ($parentChildren as $index => $parentChild) {
             if ($parentChild['id'] == $packBundleLessonId) {
-                $lesson = $parentChild;
+                $lesson = clone $parentChild;
+            }
+            if ($parentChild['status'] == ContentService::STATUS_UNLISTED && $parentChild['id'] != $packBundleLessonId) {
+                unset($parentChildren[$index]);
             }
             $parentChild['url'] = url()->route(
                 'platform.packs.third-level',
@@ -433,6 +434,7 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =
@@ -597,10 +599,11 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,ContentService::STATUS_UNLISTED];
         }
 
         Decorator::$typeDecoratorsEnabled = false;
@@ -617,9 +620,12 @@ class PackPagesController extends Controller
 
         $parentChildren = $this->contentService->getByParentId($pack['id']);
 
-        foreach ($parentChildren as $parentChild) {
+        foreach ($parentChildren as $parentChildIndex=>$parentChild) {
             if ($parentChild['id'] == $semesterPackLessonId) {
                 $lesson = $parentChild;
+            }
+            if ($parentChild['status'] == ContentService::STATUS_UNLISTED && $parentChild['id'] != $semesterPackLessonId) {
+                unset($parentChildren[$parentChildIndex]);
             }
         }
 

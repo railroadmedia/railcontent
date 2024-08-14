@@ -608,7 +608,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
-                'thumbnailUrl' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,h_500,q_auto:good/https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/0b67bd7f-220f-41f3-1797-8c6883a00a00/public',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/0b67bd7f-220f-41f3-1797-8c6883a00a00/width=500,height=500,quality=95,fit=cover',
                 'name' => 'Spotlight',
                 'shortname' => 'Spotlight',
                 'icon' => 'icon-shows',
@@ -997,7 +997,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'backstage-secrets' => [
-                'thumbnailUrl' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,h_500,q_auto:good/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
+                'thumbnailUrl' => 'https://www.musora.com/musora-cdn/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
                 'name' => 'Backstage Secrets',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',
@@ -1008,7 +1008,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'the-history-of-electronic-drums' => [
-                'thumbnailUrl' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,h_500,q_auto:good/https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/31847ba4-02d4-4c6a-4507-32b40284a000/public',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/31847ba4-02d4-4c6a-4507-32b40284a000/width=500,height=500,quality=95,fit=cover',
                 'name' => 'The History Of Electronic Drums',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',
@@ -3056,7 +3056,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113],
     'difficulty_map' =>
         [
             '1' => 'Introductory',
