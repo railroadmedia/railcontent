@@ -154,10 +154,9 @@
 
 <script setup>
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
-import {ref, computed, onMounted} from "vue";
+import {ref, computed} from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
-import {DateTime} from "luxon";
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 //import VideoMediaElement from "@vuesora/Components/MediaElement/MediaElement.vue";
@@ -376,6 +375,6 @@ const noAccess = computed(() => {
 })
 
 const showDraftLabel = computed(() => {
-    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
+    return props.lessonData.status === 'draft';
 })
 </script>

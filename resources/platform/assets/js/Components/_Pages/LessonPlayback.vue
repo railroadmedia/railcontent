@@ -199,7 +199,6 @@
 import { ref, computed, reactive } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
-import { DateTime } from 'luxon';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import YoutubePlayer from "@vuesora/Components/YoutubePlayer/YoutubePlayer.vue";
 import VideoButtons from "@collections/VideoButtons/VideoButtons.vue";
@@ -401,7 +400,6 @@ const thumbnailUrl = computed(() => {
 })
 
 const showDraftLabel = computed(() => {
-    return !noAccess && Date.now() > DateTime.fromSQL(props.lessonData.published_on, { zone: 'UTC' }).toFormat('x');
+    return props.lessonData.status === 'draft';
 })
-
 </script>
