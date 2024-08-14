@@ -562,7 +562,7 @@
                 </h2>
                 <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
 
-                    <a class="join" href="#customize-anchor" aria-label="Customize anchor">GET STARTED</a>
+                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
                 <br>
                 <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
                 <div style="font-size:0px">
