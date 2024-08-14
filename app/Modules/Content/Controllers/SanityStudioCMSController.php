@@ -9,6 +9,9 @@ use App\Modules\Content\Models\Sanity\CoachStream;
 use App\Modules\Content\Models\Sanity\Foundation;
 use App\Modules\Content\Models\Sanity\Method;
 use App\Modules\Content\Models\Sanity\Pack;
+use App\Modules\Content\Models\Sanity\PackBundle;
+use App\Modules\Content\Models\Sanity\PackBundleLesson;
+use App\Modules\Content\Models\Sanity\PlayAlongPart;
 use App\Modules\Content\Models\Sanity\SemesterPack;
 use App\Modules\Content\Models\Sanity\SemesterPackLesson;
 use App\Modules\Content\Models\Sanity\Shows\Archive;
@@ -49,6 +52,7 @@ use App\Modules\Content\Models\Sanity\SongTutorial;
 use App\Modules\Content\Models\Sanity\Shows\Sonor;
 use App\Modules\Content\Models\Sanity\Shows\Spotlight;
 use App\Modules\Content\Models\Sanity\Shows\StudentCollaboration;
+use App\Modules\Content\Models\Sanity\SongTutorialChildren;
 use App\Modules\Content\Models\Sanity\StudentFocus;
 use App\Modules\Content\Models\Sanity\Shows\StudyTheGreats;
 use App\Modules\Content\Models\Sanity\Shows\Tama;
@@ -89,6 +93,7 @@ class SanityStudioCMSController extends BaseController
             (new BootCamp())->toArray(),
             (new StudentFocus())->toArray(),
             (new PlayAlong())->toArray(),
+            (new PlayAlongPart())->toArray(),
             (new Rudiment())->toArray(),
             (new DrumFestInternational2022())->toArray(),
             (new Spotlight())->toArray(),
@@ -118,8 +123,11 @@ class SanityStudioCMSController extends BaseController
             (new SemesterPack())->toArray(),
             (new SemesterPackLesson())->toArray(),
             (new Pack())->toArray(),
+            (new PackBundle())->toArray(),
+            (new PackBundleLesson())->toArray(),
             (new Method())->toArray(),
             (new SongTutorial())->toArray(),
+            (new SongTutorialChildren())->toArray(),
             (new Foundation())->toArray(),
             (new Archive())->toArray(),
             (new Artist())->toArray(),
@@ -208,13 +216,13 @@ class SanityStudioCMSController extends BaseController
                 $permission = $permissionService->create($request->get('name'), $request->get('brand'));
             }
             return $permission;
-        }else {
-            if($request->has('railcontent_id')){
+        } else {
+            if($request->has('railcontent_id')) {
                 $content = Content::query()
                     ->where('type', '=', $request->get('_type'))
                     ->where('id', '=', $request->get('railcontent_id'))
                     ->first();
-            }else {
+            } else {
                 $content = Content::query()
                     ->where('type', '=', $request->get('_type'))
                     ->where('slug', '=', $request->get('slug')['current'])
@@ -248,7 +256,7 @@ class SanityStudioCMSController extends BaseController
 
             //need to pull again content for the web_url_path
             $content = Content::query()
-                ->where('id', '=',$content->id)
+                ->where('id', '=', $content->id)
                 ->first();
 
             return $content;

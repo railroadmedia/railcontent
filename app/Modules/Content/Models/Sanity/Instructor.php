@@ -48,7 +48,7 @@ class Instructor extends BaseSanityModel
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
         ];
         $preview = new ListItemPreview('name', 'brand', 'thumbnail');
-        parent::__construct(self::getName(), 'Instructor', $fields,  preview: $preview);
+        parent::__construct(self::getName(), 'Instructor', $fields, preview: $preview);
     }
 
     public static function getName(): string

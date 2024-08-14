@@ -7,7 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
- * Defines the schema structure for a Challenge part document type in Sanity.
+ * Defines the schema structure for a Song tutorial children document type in Sanity.
  *
  * @property string       $type
  * @property string       $name
@@ -15,22 +15,19 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class ChallengePart extends LessonTemplate
+class SongTutorialChildren extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Challenge Part');
-
-        // Add the reference to the parent course
+        parent::__construct(self::getName(), 'Song Tutorial Children', withResources: true);
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
-                             new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
-                             new Field(FieldType::Reference, name: 'parent', title: 'Parent', to: 'challenge', group:$detailsGroup, inputComponent: 'ResolveParentReference')
-                         ]);
+                             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
+        ]);
     }
 
     public static function getName(): string
     {
-        return 'challenge-part';
+        return 'song-tutorial-children';
     }
 }
