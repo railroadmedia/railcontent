@@ -314,7 +314,8 @@ class FixEvaluatedOrders extends BatchQueryJobByIds
                     // e.g. 50 / (50+125+100) * 255 = 46.36
                     // e.g. 125 / (50+125+100) * 255 = 115.91
                     // e.g. 100 / (50+125+100) * 255 = 92.73
-                    $weightedCost = $orderItemFinalPrice / $totalPriceAmount * $fix->true_payment_amount;
+                    $portionOfTotal = $totalPriceAmount * $fix->true_payment_amount;
+                    $weightedCost = $portionOfTotal > 0 ? $orderItemFinalPrice / $portionOfTotal : 0;
                     $newTotal += $weightedCost;
                     // Log::debug(
                     //     sprintf(
