@@ -27,6 +27,8 @@
                             </button>
                         </div>
                     </template>
+                    <!-- Draft Label -->
+                    <DraftLabel v-if="showDraft" />
                 </div>
             </div>
             <!-- Song Details -->
@@ -151,6 +153,7 @@ import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -172,6 +175,10 @@ const props = defineProps({
     likeCount: [Number, String],
     reportLogo: String,
     noAccess: Boolean,
+    showDraft: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
