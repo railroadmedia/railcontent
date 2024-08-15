@@ -25,7 +25,7 @@ class SyncPrimaryBrand extends Command
             ->whereNull('primary_brand')
             ->select('id')
             ->orderBy('id')
-            ->chunkById(500, function (Collection $users) use (&$jobs) {
+            ->chunkById(200, function (Collection $users) use (&$jobs) {
                 $jobs[] = new SyncPrimaryBrandJob($users->first()->id, $users->last()->id);
             });
         $startAt = now();

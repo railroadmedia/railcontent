@@ -26,6 +26,7 @@
                     :likeCount= "likeCount"
                     :report-logo="reportLogo"
                     :no-access="noAccess"
+                    :show-draft="showDraft"
                 />
             </div>
             <!-- Related Lessons -->
@@ -65,7 +66,7 @@
     </div>
 </template>
 <script setup>
-    import { ref, onBeforeMount} from 'vue';
+import {ref, onBeforeMount, computed} from 'vue';
     import { fetchSongById } from '../../Services/songService';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '@stores/user';
@@ -100,7 +101,12 @@
         resources: Array,
         relatedLessons: Object,
         reportLogo: String,
+        lessonContent: Object,
     });
+
+    const showDraft = computed(() => {
+        return props.lessonContent.status === 'draft';
+    })
 
     onBeforeMount( ()=> {
         //FETCH SONG BY ID

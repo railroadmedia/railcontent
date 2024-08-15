@@ -2,6 +2,7 @@
 
 namespace Modules\Ecommerce\tests\Unit\Controllers;
 
+use App\Jobs\WebhookJob;
 use App\Models\Webhook;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
@@ -11,7 +12,6 @@ use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Tests\BaseTestCase;
 use Tests\TestCase;
 
 class ShopifyWebhookControllerTest extends TestCase
@@ -202,7 +202,7 @@ class ShopifyWebhookControllerTest extends TestCase
             [ 'source_id' => $id,
             ]
         );
-        Bus::fake();
+        Bus::fake(WebhookJob::class);
 
         $response = $this->postJson(
             route('shopify.webhook.order.create'),
@@ -225,7 +225,7 @@ class ShopifyWebhookControllerTest extends TestCase
         //unset both as the json is case sensative, but the webhook itself is not
         unset($json['headers']['X-Shopify-Webhook-Id']);
         unset($json['headers']['x-shopify-webhook-id']);
-        Bus::fake();
+        Bus::fake(WebhookJob::class);
         $preWebhooks = count(Webhook::where('source_id', 'like', 'generated%')->get());
         $response = $this->postJson(
             route('shopify.webhook.order.create'),
