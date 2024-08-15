@@ -58,7 +58,7 @@
           :pre-loaded-content="listLessons"
           :statuses="statuses"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :tabs="catalogueMeta.tabs || []"
+          :tabs="tabData"
           :multiple-types="isAllContent"
           :is-all-content="isAllContent"
           :hide-filter-icon="lessonType === 'routine'"
@@ -69,15 +69,17 @@
   </template>
 
   <script setup>
-  import { computed } from 'vue';
+  import { computed, onBeforeMount } from 'vue';
   import { getHeaderData } from './headerData';
+  import { getTabData } from './tabData';
+  import { usePlatformStore } from "@stores/platform";
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
   import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
-  import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
+
   const props = defineProps({
     hasStartedLessons: Boolean,
     lessonType: String,
@@ -94,7 +96,10 @@
     isAllContent: Boolean,
     includedTypes: Array,
     showInProgress: Boolean,
+    catalogueType: String,
   });
+
+  const platformStore = usePlatformStore();
 
   const recommendedProps = computed(() => {
     const recommended = {};
@@ -115,4 +120,16 @@
     guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
     singeo: 'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
   };
+
+  const tabData = computed(() => {
+      return getTabData(props.catalogueType);
+  })
+
+  onBeforeMount(() => {
+      setTimeout(() => {
+          platformStore.setLoadingState(false);
+      }, 5000)
+
+      // console.log(props.catalogueMeta)
+  })
   </script>

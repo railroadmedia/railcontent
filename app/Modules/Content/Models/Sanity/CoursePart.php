@@ -21,7 +21,6 @@ class CoursePart extends LessonTemplate
     {
         parent::__construct(self::getName(), 'Course Part', withResources: true);
 
-        // Add the reference to the parent course
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
                              new Field(FieldType::Reference, name: 'parent', title: 'Parent', hidden: "false", to: 'course', group:$detailsGroup, inputComponent: 'ResolveParentReference')
