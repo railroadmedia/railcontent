@@ -227,7 +227,9 @@ class FixEvaluatedOrders extends BatchQueryJobByIds
         $cloneOrderData['customer'] = ['id' => $originalOrderData->customer->id];
         $cloneOrderData['email'] = $originalOrderData->email;
         $cloneOrderData['processed_at'] = $originalOrderData->processedAt->toIso8601String();
-        $cloneOrderData['tags'] = implode(', ', $originalOrderData->tags);
+        if ($originalOrderData->tags) {
+            $cloneOrderData['tags'] = implode(', ', $originalOrderData->tags);
+        }
         $cloneOrderData['note'] = $originalOrderData->note;
 
         if ($originalOrderData->billingAddress) {
