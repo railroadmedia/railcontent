@@ -11,7 +11,7 @@
                 "url" => get_musora_brand_base_url().'/method',
             ],
             "Instruments" => [
-                "iconClass" => "fas fa-piano-keyboard",
+                "iconClass" => "fad fa-piano-keyboard",
                 "children" => [
                     "piano" => [
                         "url" => get_legacy_brand_base_url("pianote"),
@@ -44,15 +44,15 @@
         ],
         "links" => [
             "Member Login" => [
-                "iconClass" => "fas fa-sign-in",
+                "iconClass" => "fad fa-sign-in",
                 "url" => get_musora_brand_base_url() . '/login',
             ],
             "Home" => [
-                "iconClass" => "fas fa-home",
+                "iconClass" => "fad fa-home",
                 "url" => "/",
             ],
             "Features" => [
-                "iconClass" => "fas fa-star",
+                "iconClass" => "fad fa-star",
                 "children" => [
                     "Method" => [
                         "url" => get_musora_brand_base_url().'/method',
@@ -60,7 +60,7 @@
                 ],
             ],
             "Instruments" => [
-                "iconClass" => "fas fa-piano-keyboard",
+                "iconClass" => "fad fa-piano-keyboard",
                 "children" => [
                     "Piano" => [
                         "url" => get_legacy_brand_base_url("pianote"),
@@ -77,27 +77,31 @@
                 ],
             ],
             "Pricing" => [
-                "iconClass" => "fas fa-money-bill-wave",
+                "iconClass" => "fad fa-money-bill-wave",
                 "url" => get_musora_brand_base_url().'/choose-plan',
             ],
             "Contact" => [
-                "iconClass" => "fas fa-phone",
+                "iconClass" => "fad fa-phone",
                 "url" => get_musora_brand_base_url().'/contact',
             ],
+            "The Playlist" => [
+                "iconClass" => "fad fa-album-collection",
+                "url" => 'https://lp.musora.com/playlists',
+            ],
             "Careers" => [
-                "iconClass" => "fas fa-users",
+                "iconClass" => "fad fa-users",
                 "url" => '/careers',
             ],
             "About" => [
-                "iconClass" => "fas fa-question",
+                "iconClass" => "fad fa-circle-question",
                 "url" => '/about',
             ],
             "Ambassador Program" => [
-                "iconClass" => "fas fa-comment-dollar",
+                "iconClass" => "fad fa-comment-dollar",
                 "url" => '/ambassador',
             ],
             "Brand Guides" => [
-                "iconClass" => "fas fa-pencil-paintbrush",
+                "iconClass" => "fad fa-pencil-paintbrush",
                 "url" => '/brand',
             ],
         ],

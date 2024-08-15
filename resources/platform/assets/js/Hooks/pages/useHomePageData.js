@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents, fetchLiveEvent } from 'musora-content-services';
 
-export async function useHomePageData(brand, userId, token) {
+export async function useHomePageData(brand) {
   const data = ref(null);
   const error = ref(null);
   const isLoading = ref(true);
