@@ -1,58 +1,33 @@
-// hooks/useSongPageData.js
+// hooks/useHomePageData.js
 import { ref } from 'vue';
-import { fetchSongById, fetchRelatedSongs } from 'musora-content-services';
-import { fetchCurrentSongComplete, fetchAllCompletedStates } from '@services/userService';
-import { usePlatformStore } from '@stores/platform';
+import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents, fetchLiveEvent } from 'musora-content-services';
 
-//Pinia Stores
-const platformStore = usePlatformStore();
-
-export async function useSongPageData(contentId, brand, userId, token) {
+export async function useHomePageData(brand) {
   const data = ref(null);
   const error = ref(null);
   const isLoading = ref(true);
 
   try {
-    const [songResponse, relatedSongsResponse, currentSongCompleteResponse] = await Promise.all([
-      fetchSongById(platformStore.sanityConfig, contentId),
-      fetchRelatedSongs(platformStore.sanityConfig, brand, contentId),
-      fetchCurrentSongComplete(userId, contentId, token)
+    //TODO: Add lessons in progress /content/in_progress/397822?brand=drumeo&content_type=all ??
+    const [workoutsResponse, newReleasesResponse, upcomingEventsResponse, liveEventResponse] = await Promise.all([
+      fetchWorkouts(brand),
+      fetchNewReleases(brand),
+      fetchUpcomingEvents(brand),
+      fetchLiveEvent(brand)
     ]);
 
-    data.value = songResponse;
+    data.value = {
+      workouts: workoutsResponse || [],
+      newReleases: newReleasesResponse || [],
+      upcomingEvents: upcomingEventsResponse || [],
+      liveEvent: liveEventResponse || [],
+    };
 
-    if (relatedSongsResponse) {
-      data.value.relatedLessons = relatedSongsResponse.data;
-    }
-
-    if (currentSongCompleteResponse) {
-      data.value.completed = currentSongCompleteResponse.state !== "not started";
-      data.value.progress_percent = currentSongCompleteResponse.percent.toString();
-    }
-
-    if (data.value.relatedLessons) {
-      const relatedLessonIds = data.value.relatedLessons.map(lesson => lesson.id);
-      const relatedLessonsCompletionStates = await fetchAllCompletedStates(userId, relatedLessonIds, token);
-      if (relatedLessonsCompletionStates) {
-        data.value.relatedLessons = data.value.relatedLessons.map(lesson => {
-          const lessonCompletionState = relatedLessonsCompletionStates[lesson.id];
-          if (lessonCompletionState) {
-            return {
-              ...lesson,
-              completed: lessonCompletionState.state !== "not started",
-              lesson_progress: lessonCompletionState.percent.toString()
-            };
-          }
-          return lesson;
-        });
-      }
-    }
   } catch (err) {
     error.value = err;
   } finally {
     isLoading.value = false;
   }
 
-  //console.log('Song data:', data.value);
   return { data, error, isLoading };
 }

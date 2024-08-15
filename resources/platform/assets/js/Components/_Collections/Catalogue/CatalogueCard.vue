@@ -4,12 +4,12 @@
     ]">
         <div class="tw-flex tw-flex-col">
             <!-- Thumbnail Section -->
-            <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
+            <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? itemUrl : null"
                 class="tw-no-underline tw-flex tw-flex-col" :class="item.type + '-thumbnail'">
                 <div
                     class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${itemThumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
                          loading="lazy"
@@ -18,8 +18,8 @@
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail"
-                            :alt="mappedData.black_title" />
+                        <img class="tw-h-full tw-object-cover" :src="itemThumbnail"
+                            :alt="itemTitle" />
                     </div>
 
                     <!-- Thumbnail Badge -->
@@ -52,19 +52,19 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+                    <a @click="handleClick" :href="renderLink && !forceNoLinks ? itemUrl : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
-                                {{ mappedData.black_title }}
+                                {{ itemTitle }}
                             </h4>
                             <!-- Video Description -->
-                            <p v-if="mappedData.show_description"
+                            <!-- <p v-if="mappedData.show_description"
                                 class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">
                                 {{ mappedData.description.replace(/<[^>]+>/g, '') }}
-                            </p>
+                            </p> -->
                             <!-- Content -->
                             <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
@@ -73,12 +73,14 @@
                                 </div>
                             </h6>
                         </div>
-                        <p
-                            class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                    textCase="capitalize" />
+                            <span v-if="itemDifficulty || itemDifficulty === 0" class="tw-flex tw-items-center">
+                                <DifficultyLabel 
+                                    class="tw-text-xs" 
+                                    :difficultyValue="itemDifficulty"
+                                    textCase="capitalize" 
+                                />
                                 <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             </span>
                             <span>
@@ -111,7 +113,7 @@
                             :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: itemThumbnail })">
                             <DotsHorizontalIcon v-if="showDropdown" class="tw-h-[24px] tw-w-[24px]" />
                             <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -122,7 +124,7 @@
                         <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
                             :position="state.dropdownPosition"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
+                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: itemThumbnail })"
                             @progressReset="$emit('progressReset', { content_id: item.id })" />
                     </div>
                 </div>
@@ -131,7 +133,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -275,7 +277,12 @@ const registrationUrl = computed(() => {
 })
 
 const duration = computed(() => {
-    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let time;
+    if (props.item.fields) { 
+        time = props.item.fields?.find(field => field.key === 'length_in_seconds')?.value; 
+    } else {
+        time = props.item.length_in_seconds ?? 0;
+    }
     let hours = Math.floor(time / 3600);
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
@@ -311,9 +318,11 @@ const contentCreator = computed(() => {
             return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
         }
         return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+    } else if (props.item.artist_name) {
+        return props.item.artist_name;
+    } else {
+        return '';
     }
-    return '';
-
 })
 
 const mappedData = computed(() => {
@@ -327,6 +336,19 @@ const mappedData = computed(() => {
     return contentModel.value.card
 });
 
+//New Sanity Values
+const itemThumbnail = computed( () => {
+    return props.item.image ?? mappedData.value.thumbnail;
+}) 
+const itemTitle = computed( () => {
+    return props.item.title ?? mappedData.value.black_title;
+})
+const itemDifficulty = computed( () => {
+    return props.item.difficulty ?? mappedData.value.difficulty;
+})
+const itemUrl = computed( ()=> {
+    return props.item.web_url_path ?? props.item.url;
+})
 
 const wrapperClasses = computed(() => {
     const defaultWrapperClasses = 'tw-flex tw-flex-col tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0 tw-w-[267px]';
@@ -348,6 +370,12 @@ const closeDropdownOnScroll = () => {
         state.dropdownOpen = false;
     }
 };
+
+const getPublishedOn = (item) => {
+    const dt = DateTime.fromSQL(item.published_on, { zone: 'utc' });
+    return dt.setZone('America/Los_Angeles').toFormat('LLL dd, yyyy');
+}
+
 
 onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
@@ -376,7 +404,7 @@ const handleClick = (event) => {
                     section: props.trackingSection,
                 }
             }).finally(() => {
-                window.location.href = props.item.url;
+                window.location.href = itemUrl.value;
             });
         }
     }
