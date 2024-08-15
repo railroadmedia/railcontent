@@ -1480,7 +1480,7 @@ class ContentPagesController extends BaseController
         $adminMessage = null;
 
         return view('content.catalogue', [
-            "catalogueType" => $catalogName,
+            "catalogueType" => '',
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
             'isAllContent' => true,
@@ -1568,7 +1568,7 @@ class ContentPagesController extends BaseController
 
         $adminMessage = null;
         return view('content.catalogue', [
-            "catalogueType" => $catalogName,
+            "catalogueType" => '',
             "adminMessage" => $adminMessage,
             "catalogueMeta" => $catalogueMeta,
             "hasStartedLessons" => false,
@@ -1695,7 +1695,7 @@ class ContentPagesController extends BaseController
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['subscribed'] ?? [];
 
         return view('content.catalogue', [
-            "catalogueType" => $catalogName,
+            "catalogueType" => '',
             "hasStartedLessons" => false,
             'isAllContent' => true,
             "listLessons" => $followedLessons->toResponseRawJson(),
