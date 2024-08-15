@@ -123,7 +123,6 @@ const class_object = computed(() => {
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
-        "no-access": noAccess.value,
         compact: props.compactLayout,
         "start-learning-path":
             props.contentTypeOverride === "learning-path-part",

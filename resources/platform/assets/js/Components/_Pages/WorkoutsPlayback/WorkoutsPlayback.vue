@@ -154,9 +154,9 @@
 
 <script setup>
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
-import {ref, computed} from "vue";
-import { storeToRefs } from 'pinia';
-import { useUserStore } from "@stores/user";
+import {computed, ref} from "vue";
+import {storeToRefs} from 'pinia';
+import {useUserStore} from "@stores/user";
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 //import VideoMediaElement from "@vuesora/Components/MediaElement/MediaElement.vue";

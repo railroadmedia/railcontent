@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col lg:tw-flex-row tw-w-full tw-justify-between" :class="{ 'tw-mb-5': !hasPills}">
+    <div v-if="!isLoading" class="tw-flex tw-flex-col lg:tw-flex-row tw-w-full tw-justify-between">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 xl:tw-mb-0">
             <!-- Filter Tabs -->
             <FilterTabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
@@ -30,14 +30,18 @@
             </div>
         </div>
     </div>
+    <SkeletonFilterControls v-else />
 </template>
 
 <script setup>
 import {computed, ref} from 'vue';
+import {storeToRefs} from "pinia/dist/pinia";
+import {usePlatformStore} from "@stores/platform";
 import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
 import FilterTabs from './FilterTabs.vue';
 import FilterSearch from './FilterSearch.vue';
 import FilterSortDropdown from './FilterSortDropdown.vue';
+import SkeletonFilterControls from '@collections/SkeletonLoader/SkeletonFilterControls';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 
 const props = defineProps({
@@ -97,6 +101,9 @@ const props = defineProps({
 
 const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchSubmit']);
 const showDropdown = ref(false);
+
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 // the following refs will be replaced by pinia state
 const selectedSort = ref('');
