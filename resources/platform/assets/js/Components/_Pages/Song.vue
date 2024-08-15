@@ -109,7 +109,6 @@ import {ref, onBeforeMount, computed} from 'vue';
     })
 
     onBeforeMount( ()=> {
-        console.log(props.lessonContent)
         //FETCH SONG BY ID
 
         // const documentId = props.contentId;
