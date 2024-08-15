@@ -126,56 +126,14 @@ class SanityGateway
             $documents[$key]['id'] = $document['railcontent_id'];
             $documents[$key]['url'] = $document['web_url_path'];
             $documents[$key]['fields'] = $this->mapSanityFields($document);
-            //$documents[$key]['data'] = $this->mapSanityData($document);
         }
         return $documents;
     }
 
     private function mapSanityFields($document)
     {
-        // fields needs to exist, but no longer needs actual data
+        // fields needs to exist for decorators to work, but no longer needs actual data
+        // eventually this should be removed.
         return [];
-        $fieldsToDuplicate = ['artist', 'difficulty', 'instructor'];
-        $fields = [];
-        foreach($fieldsToDuplicate as $index => $toDuplicate) {
-            if ($document[$toDuplicate] ?? false) {
-                // TODO not sure about null checking here, but I don't think we should duplicate null fields
-                $fields[] = [
-                    'key' => $toDuplicate,
-                    'value' => $document[$toDuplicate],
-                    'position' => $index,
-                    'type' => 'string',
-                    'content_id' => $document['railcontent_id'],
-                    'id' => md5("{$document['railcontent_id']}".$toDuplicate),
-                ];
-            }
-        }
-        return $fields;
     }
-
-//    private function mapSanityData($document)
-//    {
-//        // needs to exist, but no data
-//        return [];
-//        $contentId = $document['railcontent_id'];
-//        $dataToGenerate = [
-//            'original_thumbnail_url' => 'thumbnail',
-//        ];
-//        foreach($dataToGenerate as $dataKey => $sanityKey) {
-//            $data[] = $this->generateData($document[$sanityKey], $dataKey, $contentId);
-//        }
-//        return $data;
-//    }
-//
-//    private function generateData($value, $key, $contentId)
-//    {
-//        return [
-//            'key' => $key,
-//            'value' => $value,
-//            'position' => 0, //TODO what?
-//            'type' => 'string',
-//            'content_id' => $contentId,
-//            'id' => md5($contentId.$key),
-//        ];
-//    }
 }

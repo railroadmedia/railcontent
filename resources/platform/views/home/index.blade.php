@@ -19,12 +19,10 @@
         :exists-cohort-banner="{{ $existsCohortBanner ? 'true' : 'false' }}"
         :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
-        :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
-        @if(count($hotForumTopics) > 0) 
+        @if(count($hotForumTopics) > 0)
             :conversation-data="{{ json_encode($hotForumTopics) }}"
         @endif
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
-        :new-content="{{ $newContentJson }}"
         new-content-url="{{ url()->route('platform.new-lessons') }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
@@ -32,11 +30,8 @@
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
         :started-content="{{ $startedContentJson }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-        :upcoming-events="{{ $upcomingEvents }}"
-        upcoming-url="{{ '/'.$brand.'/live' }}"
         :users-list="{{ json_encode($usersList->results())  }}"
         :user-metrics="{{ json_encode($userMetrics) }}"A
-        :workouts-content="{{ $workoutsContentJson }}"
         workouts-content-url="{{ url()->route('platform.workouts') }}"
         youtube-id="{{ $youtubeId }}"
         :learning-paths="{{ json_encode($trialSection) }}"

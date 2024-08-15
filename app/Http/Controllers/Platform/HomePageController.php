@@ -131,26 +131,11 @@ class HomePageController extends BaseController
 
         $usersList = $this->getUsersList();
 
-        $upcomingEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            ContentTypes::liveContentTypes(),
-            ContentService::STATUS_SCHEDULED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>',
-            'published_on',
-            'asc',
-            [],
-            6
-        );
-
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
 
         $hotForumTopics = $this->getHotForumTopics();
 
-        $newContent = $this->getNewContents();
-
-        $workoutsContent = $this->getWorkoutsContents();
         if(FeatureFlagging::accessible('recsys', user())) {
             $recommendedContent = $this->getAllRecommentations();
         } else {
@@ -169,23 +154,6 @@ class HomePageController extends BaseController
             [],
             1,
             4
-        );
-
-        $subscribedCoaches = $this->contentService->getFiltered(
-            1,
-            6,
-            '-published_on',
-            ['instructor'],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false,
-            true
         );
 
         // coaches live
@@ -208,12 +176,8 @@ class HomePageController extends BaseController
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
-        $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
-        $collectionForDecoration = $collectionForDecoration->merge($workoutsContent->results());
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
@@ -245,23 +209,7 @@ class HomePageController extends BaseController
 
         $hasGoals = user()->onboardingGoals ? true : false;
 
-        $hasStartedMethod = $methodContent['started'];
-        $hasCompletedMethod = $methodContent['completed'];
-
-        $nextLearningPathLevel = user()->getMethodLevel();
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
-
-        $upcomingEventsCount = $upcomingEvents->count();
-        $upcomingEvents = $upcomingEvents->sort(function ($a, $b) {
-            return strtotime($a->fetch('fields.live_event_start_time')) -
-                strtotime($b->fetch('fields.live_event_start_time'));
-        })
-            ->slice(0, 4)
-            ->values();
-        $upcomingEvents = new ContentFilterResultsEntity([
-            'results' => $upcomingEvents,
-            'total_results' => $upcomingEventsCount,
-        ]);
 
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
@@ -355,39 +303,23 @@ class HomePageController extends BaseController
             'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
-            "followedLessons" => $followedLessons->toResponseRawJson(),
-            "hasCompletedMethod" => $hasCompletedMethod,
             "hasExperience" => $hasExperience,
-            "hasfollowedLessons" => count($subscribedCoaches->results()) > 0 && count($followedLessons->results()) > 0,
             "hasGear" => $hasGear,
             "hasGenres" => $hasGenres,
             "hasGoals" => $hasGoals,
             "hasRecommendations" => count($recommendedContent->results()) > 0,
             "hasStartedLessons" => count($followedLessons->results()) > 0,
-            "hasStartedMethod" => $hasStartedMethod,
-            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
             "hasTopics" => $hasTopics,
-            "hasUpcomingEvents" => $upcomingEvents->totalResults() > 0,
             "hotForumTopics" => $hotForumTopics,
-            "methodUrl" => ($hasCompletedMethod) ?
-                url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]) :
-                url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
-            "newContentJson" => $newContent->toResponseRawJson(),
-            "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
             "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "subscribedCoaches" => $subscribedCoaches,
-            "subscribedCoachesJson" => $subscribedCoaches->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
             "trialSection" => $trialSection,
-            "upcomingEvents" => $upcomingEvents->toResponseRawJson(),
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "youtubeId" => $youtubeId ?? null,
-            'trialSection' => $trialSection,
         ]);
     }
 
