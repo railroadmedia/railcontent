@@ -7,7 +7,6 @@ use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -59,7 +58,7 @@ class ContentMetadataController extends Controller
     {
         $validated = $request->validate(
             [
-                'content_type' => 'required|string',
+                'content_type' => 'nullable|string',
                 'brand' => ['nullable',  new Enum(Brand::class)],
                 'user' => 'nullable'
             ]
@@ -70,7 +69,7 @@ class ContentMetadataController extends Controller
             $user = user();
         }
 
-        $type = $validated['content_type'];
+        $type = $validated['content_type'] ?? null;
         $brandValue = $validated['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
@@ -79,10 +78,8 @@ class ContentMetadataController extends Controller
 
         $inProgress = $user->progress()
             ->incomplete()
-            ->ofContentType($type)
-            ->when(!is_null($brand), function (Builder $q) use ($brand) {
-                return $q->ofContentBrand($brand);
-            })
+            ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
+            ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
             ->pluck('content_id');
 
         return response()->json([ProgressState::Started->value => $inProgress]);
