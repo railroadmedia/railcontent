@@ -53,48 +53,54 @@
 
             <!-- Workouts section -->
             <MiniCatalogueSection
-                v-if="workoutsContent.data.length"
+                v-if="data.workouts.length"
                 title="Workouts"
                 seeAllAriaLabel="See All Workouts"
-                :seeAllUrl="workoutsContentUrl"
-                :preLoadedContent="workoutsContent.data"
+                :seeAllUrl="`${brand}/workouts`"
+                :preLoadedContent="data.workouts"
                 trackingSection="workouts"
             />
 
-            <!-- New section -->
+            <!-- New Releases -->
             <MiniCatalogueSection
-                v-if="newContent.data"
+                v-if="data.newReleases.length"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
-                :seeAllUrl="newContentUrl"
-                :preLoadedContent="newContent.data"
+                :seeAllUrl="`${brand}/lessons/all`"
+                :preLoadedContent="data.newReleases"
                 trackingSection="new"
             />
 
             <!-- Playlist section -->
             <ListSection
                 v-if="usersList.length"
-                :newContentUrl="newContentUrl"
                 :usersList="usersList"
                 :my-list-url="`/${brand}/playlists`"
             />
 
             <!-- Live section -->
-            <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
+            <CoachEvent 
+                v-if="data.liveEvent" 
+                class="tw-mb-6" 
+                :preloadedContent="data.liveEvent" 
+                :currentDateString="currentDate"
+                :subscriptionCalendarId="calendarId" 
+                :youtubeEventId="youtubeId" 
+                :timeCutoffMinutes="timeCutoffMinutes"
+                :eventCoachProfileUrl="eventCoachProfileUrl" 
+                trackingSection="live" 
+            />
 
             <!-- Upcoming section -->
             <MiniCatalogueSection
-                v-if="hasUpcomingEvents"
+                v-if="data.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
-                :seeAllUrl="upcomingUrl"
+                :seeAllUrl="`${brand}/live`"
                 :force-no-links="true"
-                :preLoadedContent="upcomingEvents.data"
+                :preLoadedContent="data.upcomingEvents"
                 trackingSection="upcoming-events"
             />
-
 
             <template v-if="isPackOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->
@@ -156,18 +162,19 @@
     import { usePlatformStore } from '@stores/platform';
     import {storeToRefs} from "pinia/dist/pinia";
     import HomePageSkeleton from "./HomePageSkeleton";
+    import { useHomePageData } from '@hooks/pages/useHomePageData';
 
     //Pinia Stores
     const userStore = useUserStore();
-    const { brand, userCompletedAccount } = storeToRefs(userStore);
+    const { brand, userId, token, userCompletedAccount } = storeToRefs(userStore);
     const platformStore = usePlatformStore();
     const { isLoading } = storeToRefs(platformStore)
 
+    //Props
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
         carousel: { type: Array, default: () => ([]) },
-        coachEvent: { type: Object, default: () => null },
         cohortBanner: { type: Array, default: () => ([]) },
         courseData: { type: Object, default: () => ({}) },
         continueUrl: { type: String, default: '' },
@@ -175,39 +182,27 @@
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
-        hasStartedLessons: { type: Boolean, default: false },
-        hasUpcomingEvents: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
-        newContent: { type: Object, default: () => ({}) },
-        newContentUrl: { type: String, default: '' },
         nextLearningPathLevel: { type: String, default: '' },
         nextLearningPathProgressPercent: { type: Number, default: 0 },
         packData: { type: Array, default: () => ([]) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         recommendedContentUrl: { type: String, default: '' },
+        timeCutoffMinutes: { type: Number, default: 0 },
+        upgradeMembershipUrl: { type: String, default: '' },
+        usersList: { type: Object, default: () => ({}) },
+        userMetrics: { type: Object, default: () => ({}) },
+        youtubeId: { type: String, default: '' },
         startedContent: {
             type: Object,
             default: () => ({
                 data: []
             })
         },
-        timeCutoffMinutes: { type: Number, default: 0 },
-        upcomingEvents: { type: Object, default: () => ({}) },
-        upcomingUrl: { type: String, default: '' },
-        upgradeMembershipUrl: { type: String, default: '' },
-        usersList: { type: Object, default: () => ({}) },
-        userMetrics: { type: Object, default: () => ({}) },
-        workoutsContent: {
-            type: Object,
-            default: () => ({
-                data: []
-            })
-        },
-        workoutsContentUrl: { type: String, default: '' },
-        youtubeId: { type: String, default: '' },
     });
 
+    //Computed
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
         return userCompletedAccount.value;
@@ -226,11 +221,21 @@
         return { data: [...props.packData] };
     })
 
+    //Refs
     const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
     const recSysPage = ref(1);
     const data = ref(null);
     const error = ref(null);
 
+    //Constant
+    const recommendationLinks = {
+        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
+        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
+        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
+        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
+    }
+
+    //Methods
     const openPlaylistModal = () => {
         window.openplaylistmodal({
             modalType: 'create',
@@ -253,37 +258,17 @@
         recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
     }
 
-    const recommendationLinks = {
-        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-    }
-
+    //Lifecycles
     onMounted(() => {
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
     });
 
-    onBeforeMount( ()=> {
-        const fetchData = async () => {
-            try {
-                // Simulate a loading state with a timeout
-                await new Promise(resolve => setTimeout(resolve, 0));
-                
-                // Placeholder data to simulate fetched data
-                data.value = {
-                    title: 'Home Page',
-                    content: 'This is the home page content.'
-                };
-            } catch (err) {
-                error.value = err;
-            } finally {
-                platformStore.setLoadingState(false);
-            }
-        };
-
-        fetchData();
-    })
+    onBeforeMount( async () => {
+        const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
+        data.value = homeData.value;
+        console.log('DATA', data.value)
+        platformStore.setLoadingState(homeLoading.value);
+    });
 </script>
