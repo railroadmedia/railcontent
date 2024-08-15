@@ -86,26 +86,30 @@
                 <div x-ref="splide" class="splide mb-10">
                     <div class="splide__track">
                         <ul class="splide__list items-start">
+                            {{--Boston
+                                Chicago
+                                New York
+                                Vegas--}}
                             <li class="splide__slide px-2">
-                                <a href="">
+                                <a href="https://www.ticketmaster.com/promo/0h4pq7">
                                     <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
 {{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="">
+                                <a href="https://www.ticketmaster.com/promo/3h9jow">
                                     <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
 {{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="">
+                                <a href="https://www.ticketmaster.com/promo/ellnle">
                                     <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
 {{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="">
+                                <a href="https://luxor.mgmresorts.com/redirect/show-offer-id/EntOffer_558265">
                                     <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
 {{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
                                 </a>

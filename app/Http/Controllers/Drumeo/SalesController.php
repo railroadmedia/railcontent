@@ -78,6 +78,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
+    public function welcomeBackDiscount()
+    {
+        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
     public function restart()
     {
         return view('drumeo.sales.restart', ['theme' => 'drumeo']);
