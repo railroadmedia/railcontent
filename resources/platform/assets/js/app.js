@@ -1,10 +1,10 @@
 require('./bootstrap');
 
-import { createApp, defineAsyncComponent } from 'vue';
+import {createApp, defineAsyncComponent} from 'vue';
 
 //Libraries
 import axios from 'axios'
-import { vMaska } from "maska"
+import {vMaska} from "maska"
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
@@ -87,7 +87,6 @@ import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountMod
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
 import ContentService from './Libraries/Vuesora/assets/js/Services/content';
-import UserService from './Libraries/Vuesora/assets/js/Services/user';
 import ProgressTracker from './Libraries/Vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions

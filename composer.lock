@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35178a7c5ad1b1bad7217f4c7741f3ae",
+    "content-hash": "73799fa4a20b1d9675f8f0317564946b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10331,16 +10331,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.92",
+            "version": "dev-feature/amcneill20240731_incorrect_urls_BE-251",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "632a706f8969aba0b65ed61df4eaca764bd50811"
+                "reference": "a427bcdfc27e947414481a7d4ac928484c210334"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/632a706f8969aba0b65ed61df4eaca764bd50811",
-                "reference": "632a706f8969aba0b65ed61df4eaca764bd50811",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a427bcdfc27e947414481a7d4ac928484c210334",
+                "reference": "a427bcdfc27e947414481a7d4ac928484c210334",
                 "shasum": ""
             },
             "require": {
@@ -10395,9 +10395,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.92"
+                "source": "https://github.com/railroadmedia/railcontent/tree/feature/amcneill20240731_incorrect_urls_BE-251"
             },
-            "time": "2024-08-02T15:31:00+00:00"
+            "time": "2024-08-14T22:38:50+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -20480,11 +20480,18 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-feature/amcneill20240731_incorrect_urls_BE-251",
+            "alias": "2.1.89",
+            "alias_normalized": "2.1.89.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20
+        "railroad/doctrine-array-hydrator": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
