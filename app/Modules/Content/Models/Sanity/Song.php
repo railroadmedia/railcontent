@@ -56,7 +56,7 @@ class Song extends BaseSanityContentTypeModel
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
             new Field(FieldType::Array, 'soundslice', 'Soundslice', of: $soundsliceList, inputComponent: 'ArrayInput', group:$detailsGroup),
-            new Field(FieldType::Number, 'child_count', 'Child count', hidden: "({document}) => !document?.soundslice", readOnly: "true", group:$detailsGroup),
+            new Field(FieldType::Number, 'child_count', 'Child count', hidden: "true", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group:$detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group:$detailsGroup), //web_url_path

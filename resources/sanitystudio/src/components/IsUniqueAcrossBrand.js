@@ -5,15 +5,19 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     const { document, getClient } = context;
     const client = getClient({ apiVersion: '2022-12-07' });
     let clean_id = document._id.replace(/^drafts\./, '')
+    console.log('roxana slug unique verification :::: ');
     const params = {
-        type: 'song',
+        type: document._type,
         id: clean_id,
         draft_id: 'drafts.'+ clean_id,
         slug,
     };
     // Construct the query based on the presence of the brand field
     let query = `*[_type == $type && slug.current == $slug && !(_id in [$id, $draft_id])]`;
-    if (document.brand) {
+    if (document.parent) {
+        params.parent = document.parent._ref;
+        query = `*[_type == $type && parent._ref == $parent && slug.current == $slug && !(_id in [$id, $draft_id])]`;
+    } else if (document.brand) {
         params.brand = document.brand;
         query = `*[_type == $type && brand == $brand && slug.current == $slug && !(_id in [$id, $draft_id])]`;
     }

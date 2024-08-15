@@ -13,10 +13,12 @@ import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import 
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
+import ResolveParentReference from './components/ResolveParentReference';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
+import { musoraStructure } from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
-import {media} from 'sanity-plugin-media'
+import {media} from 'sanity-plugin-media';
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -25,7 +27,8 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
-    OpenAiInput: OpenAiInput
+    OpenAiInput: OpenAiInput,
+    ResolveParentReference: ResolveParentReference
 };
 
 const icons = {
@@ -95,17 +98,19 @@ function App() {
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
-                      structureTool({ defaultDocumentNode }),
-                      visionTool(),
-                      media(),
-                      assist(),
-                      embeddingsIndexReferenceInput(),
+                        structureTool({
+                            structure: musoraStructure,
+                            defaultDocumentNode: defaultDocumentNode }),
+                        visionTool(),
+                        media(),
+                        assist(),
+                        embeddingsIndexReferenceInput(),
                         embeddingsIndexDashboard()
                     ],
                     document: {
-                        actions: (prev) =>
+                        actions: (prev, context) =>
                             prev.map((previousAction) =>
-                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken) : previousAction
+                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
                             ),
                     },
                     schema: {

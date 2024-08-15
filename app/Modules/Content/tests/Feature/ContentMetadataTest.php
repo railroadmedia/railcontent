@@ -239,12 +239,11 @@ class ContentMetadataTest extends TestCase
     public function test_in_progress_content_returns_correct_value_for_songs()
     {
         Content::factory()->count(10)->create();
-        $this->createContentWithProgress(5, 2);
-        $incompleteContentIds = ContentUserProgress::where('user_id', $this->user->id)
-            ->where('state', ProgressState::Started->value)
-            ->pluck('content_id');
+        $incompleteContentIds = $this->createContentWithProgress(5, 2)->get('started');
+        $this->createContentWithProgress(5, 2, type: 'workout');
+
         $expectedJson = [
-            ProgressState::Started->value => $incompleteContentIds->toArray()
+            ProgressState::Started->value => $incompleteContentIds
         ];
 
         $response = $this->getJson(
@@ -272,6 +271,26 @@ class ContentMetadataTest extends TestCase
         $response->assertJson($expectedJson);
     }
 
+    public function test_in_progress_content_returns_correct_value_for_all_content_types()
+    {
+        Content::factory()->count(10)->create();
+        $this->createContentWithProgress(5, 3);
+        $this->createContentWithProgress(4, 1, type: 'workout');
+        $this->createContentWithProgress(10, 6, type: 'challenge');
+        $incompleteContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
     public function test_in_progress_content_returns_error_for_invalid_brand()
     {
         $response = $this->getJson(
@@ -281,11 +300,11 @@ class ContentMetadataTest extends TestCase
         $this->assertStringContainsString('The selected brand is invalid', $response->getContent());
     }
 
-    private function createContentWithProgress(int $startedCount = 0, int $completedCount = 0, ?Brand $brand = Brand::Drumeo): Collection
+    private function createContentWithProgress(int $startedCount = 0, int $completedCount = 0, ?Brand $brand = Brand::Drumeo, ?string $type = 'song'): Collection
     {
         $results = collect();
         if ($startedCount) {
-            $startedContents = Content::factory(['brand' => $brand->value])->count($startedCount)->create();
+            $startedContents = Content::factory(['brand' => $brand->value, 'type' => $type])->count($startedCount)->create();
             $startedContents->each(function (Content $content) {
                 $progress = $this->createContentProgress($content, false);
                 $progress->progress_percent = 25;
@@ -294,7 +313,7 @@ class ContentMetadataTest extends TestCase
             $results->put('started', $startedContents->pluck('id')->toArray());
         }
         if ($completedCount) {
-            $completedContents = Content::factory(['brand' => $brand->value])->count($completedCount)->create();
+            $completedContents = Content::factory(['brand' => $brand->value, 'type' => $type])->count($completedCount)->create();
             $completedContents->each(function (Content $content) {
                 $this->createContentProgress($content, true);
             });
