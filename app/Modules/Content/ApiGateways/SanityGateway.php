@@ -100,9 +100,10 @@ class SanityGateway
      */
     public function getByRailContentIds(array $ids)
     {
+
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
-        // see musora-content-services index.js for the fields required for this
+        // see musora-content-services sanity.js for the fields and format we need to replicate
         $query ="*[railcontent_id in [${idsString}]]{
           railcontent_id,
           title,
@@ -115,16 +116,16 @@ class SanityGateway
           published_on,
           'type': _type,
           progress_percent,
+          length_in_seconds,
           brand,
-          slug,
+          'slug' : slug.current,
         }";
         $documents = $gateway->sanity->fetch($query);
         // The following are used to format similar to RailContent, these are a stopgap measure
         foreach($documents as $key => $document) {
             $documents[$key]['id'] = $document['railcontent_id'];
-            $documents[$key]['slug'] = $document['slug']['current'];
             $documents[$key]['url'] = $document['web_url_path'];
-            //$documents[$key]['fields'] = $this->mapSanityFields($document);
+            $documents[$key]['fields'] = $this->mapSanityFields($document);
             //$documents[$key]['data'] = $this->mapSanityData($document);
         }
         return $documents;
