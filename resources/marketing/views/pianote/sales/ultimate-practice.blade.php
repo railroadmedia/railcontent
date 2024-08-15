@@ -125,6 +125,7 @@
 @section('body-data')
     x-data ='{
     demoVid : false,
+    stepTwo : false,
     lazyLoad: false,
     videoLoaded: false,
     }'
@@ -302,8 +303,13 @@
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="uppercase text-pianote"><strong>Step 2</strong></h5>
                 <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!</p>
-                <div class="w-full relative aspect-16:9">
-                    <iframe class="absolute w-full h-full rounded-xl overflow-hidden" src="//player.vimeo.com/video/802011057" frameborder="0" allowfullscreen allow="autoplay" title="pianote-video"></iframe>
+                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                    x-on:click="stepTwo = true;">
+                    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                        x-ref="playToLearnVideo"
+                        x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                        x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                        data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/promos/august/step2.mp4" type="video/mp4" autoplay muted loop playsinline></video>
                 </div>
             </div>
 
@@ -448,63 +454,114 @@
                 <br><br>
             You could be wasting your time.
                 <br><br>
-            That’s why when you join Pianote this month, you’ll get the Ultimate Practice Bundle (valued at $421) to help you make the most of your practice time and get the best results.
+            That’s why when you join Pianote this month, you’ll get the Ultimate Practice Bundle (valued at $380) to help you make the most of your practice time and get the best results.
                 <br><br>
                 <em><strong>Take a look at your bonuses… Join today and you’ll get all of these.</strong></em></p>
+
+            @php
+                $bonuses = [
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
+                        'description' => "Level up your skills with Pianote - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
+                        'price' => '240',
+                        'customText' => '$200',
+                        'customSubText' => 'true'
+                    ],
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-card.webp',
+                        'description' => 'You’ll find a Piano Key Overlay so you can remember all the note names, pencils, erasers, sticky notes, highlighters, and more.',
+                        'price' => floatval($productPrices['practice-kit']->price),
+                        'shipping' => true,
+                    ],
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practice-planner-card.webp',
+                        'description' => 'Outline your week and then stick to it. It’s that simple.',
+                        'price' => floatval($productPrices['pianote-practice-planner']->price),
+                        'shipping' => true,
+                    ],
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-card.webp',
+                        'description' => 'Upgrade your practice space and master your music theory with this gorgeous poster bundle.',
+                        'price' => floatval($productPrices['music-theory-posters']->price),
+                        'shipping' => true,
+                    ],
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-card.webp',
+                        'description' => 'Every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.',
+                        'price' => floatval($productPrices['digital-chords-scales-guide']->price),
+                    ],
+                    [
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-card.webp',
+                        'description' => 'Learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.',
+                        'price' => floatval($productPrices['read-music-in-30-days']->price),
+                    ],
+                    [
+                        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
+                        'description' => 'This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day.',
+                        'price' => floatval($productPrices['new-piano-players-start-here']->price),
+                    ],
+                ]
+            @endphp
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:flex items-center mb-12 lg:mb-16">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/practicekit.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-m.webp">
                     </div>
                     <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-logo.webp">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-logo.webp">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[1]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">The quality of your practice will determine the quality of your playing. And this kit is LOADED with tools to help you get the most out of your valuable practice time. You’ll find a Piano Key Overlay so you can remember all the note names, pencils, erasers, sticky notes, highlighters, and more.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12 lg:mb-16">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden bg-white border border-gray-400" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/planner.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/planner-m.webp">
                     </div>
                     <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/pianote-planner-logo.webp">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/pianote-planner-logo.webp">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[2]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Fail to plan, and plan to fail. The Pianote Practice Planner is your “secret weapon” to making progress on the keys. Outline your week and then stick to it. It’s that simple. And you can work with a Pianote Mentor to create a plan that fits your goals.</p>
 
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12 lg:mb-16">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-posters.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-posters-m.webp">
                     </div>
                     <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[3]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12 lg:mb-16">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden bg-white border border-gray-400" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-digital.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-digital-m.webp">
                     </div>
                     <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-digital-logo2.png">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-digital-logo2.png">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[4]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">This is your digital encyclopedia of piano chords & scales. Inside this 174-page e-book, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear. And it’s all arranged by key, so it’s super easy to navigate.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12 lg:mb-16">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-bg.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-bg-m.webp">
                     </div>
                     <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-logo.webp">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-logo.webp">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[5]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Have you always wanted to read music, but struggled to learn? This 30-day challenge will de-mystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.</p>
 
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/august/NPPSH-bg.webp">
+                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/NPPSH-bg-m.webp">
                     </div>
                     <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
+                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[6]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
                         <p class="leading-normal">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
                     </div>
                 </div>
@@ -566,50 +623,6 @@
                 <br>
                 <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
                 <div style="font-size:0px">
-                    @php
-                        $bonuses = [
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
-                                'description' => "Level up your skills with Pianote - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
-                                'price' => '240',
-                                'customText' => '$200',
-                                'customSubText' => 'true'
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-card.webp',
-                                'description' => 'You’ll find a Piano Key Overlay so you can remember all the note names, pencils, erasers, sticky notes, highlighters, and more.',
-                                'price' => floatval($productPrices['practice-kit']->price),
-                                'shipping' => true,
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practice-planner-card.webp',
-                                'description' => 'Outline your week and then stick to it. It’s that simple.',
-                                'price' => floatval($productPrices['pianote-practice-planner']->price),
-                                'shipping' => true,
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-card.webp',
-                                'description' => 'Upgrade your practice space and master your music theory with this gorgeous poster bundle.',
-                                'price' => floatval($productPrices['music-theory-posters']->price),
-                                'shipping' => true,
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-card.webp',
-                                'description' => 'Every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.',
-                                'price' => floatval($productPrices['digital-chords-scales-guide']->price),
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-card.webp',
-                                'description' => 'Learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.',
-                                'price' => floatval($productPrices['read-music-in-30-days']->price),
-                            ],
-                            [
-                                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                                'description' => 'This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day.',
-                                'price' => floatval($productPrices['new-piano-players-start-here']->price),
-                            ],
-                        ]
-                    @endphp
                     @foreach($bonuses as $bonus)
                         <div
                             class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
@@ -724,7 +737,12 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'demoVid',
-        'video' => '770796137',
+        'video' => '998782491',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'stepTwo',
+        'video' => '802011057',
         'vimeo' => true,
     ])
 
