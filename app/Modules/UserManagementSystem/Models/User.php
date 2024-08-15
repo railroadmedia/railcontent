@@ -523,7 +523,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string | null
      */
-    public function subscriptionIntervalType() : string | null
+    public function subscriptionIntervalType(): string | null
     {
         return $this->recharge_interval;
     }
@@ -778,6 +778,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingGoals::class);
     }
 
+    public function onboardingAnswerHistory()
+    {
+        return $this->hasMany(OnboardingAnswerHistory::class);
+    }
+
     /**
      * @return bool
      */
@@ -1009,9 +1014,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             $cohortPermissionsIds = config('railcontent.cohort_permission_ids', []);
         }
         return $this->hasMany(
-                UserAccessPermission::class,
-                "user_id"
-            )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
+            UserAccessPermission::class,
+            "user_id"
+        )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
     }
 
     public function isMusoraAccount(): bool
@@ -1035,23 +1040,23 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function hasCompletedOnboarding(): bool
     {
         $hasExperience = $this->onboardingExperience->contains(
-            fn(OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
+            fn (OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
         );
 
         $hasGear = $this->onboardingGear->contains(
-            fn(OnboardingGear $gear) => $gear->brand == $this->last_used_brand
+            fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
         );
 
         $hasTopics = $this->onboardingTopics->contains(
-            fn(OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
+            fn (OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
         );
 
         $hasGenres = $this->onboardingGenres->contains(
-            fn(OnboardingGenre $genres) => $genres->brand == $this->last_used_brand
+            fn (OnboardingGenre $genres) => $genres->brand == $this->last_used_brand
         );
 
         $hasGoals = $this->onboardingGoals->contains(
-            fn(OnboardingGoals $goals) => $goals->brand == $this->last_used_brand
+            fn (OnboardingGoals $goals) => $goals->brand == $this->last_used_brand
         );
 
         return $hasExperience && $hasGear && $hasTopics && $hasGenres && $hasGoals;

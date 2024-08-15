@@ -171,8 +171,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     self::$noAccessMessages[$content['id']] = $message;
                 } elseif (!empty($needMusoraPlus)) {
                     $contentsOfType[$contentIndex]['need_access'] = true;
-                    // PackOnly users should not see our special modal
-                    $contentsOfType[$contentIndex]['show_plus_upgrade_modal'] = !(user()?->isPackOnlyOwner() ?? true);
+                    // Expired Members or PackOnly users should not see the upgrade modal
+                    // This situation should only arise when users access public playlists
+                    $user = user();
+                    $showModal = $user && !($user->isPackOnlyOwner() || $user->isAnExpiredMember());
+                    $contentsOfType[$contentIndex]['show_plus_upgrade_modal'] = $showModal;
                     $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
                     self::$noAccessMessages[$content['id']] = $message;
                 }

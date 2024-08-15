@@ -79,16 +79,17 @@
                          music + handy playback tools for <s class="opacity-50">40</s> <strong class="text-coaches">100</strong><br>
                          of drumming’s biggest songs FREE.
                     </h6>
-                    <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
-                            "recaptchaKey" => $recaptchaKey,
-                            "formName" => '40 Songs',
-                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
-                            "buttonText" => "Get It Now ",
-                            "redirectURL" => "/100-songs/thank-you/",
-                            "stacked" => true
-                        ])
-                    </div>
+                    <span class="join sold-out smaller">Temporarily Closed</span>
+{{--                    <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">--}}
+{{--                        @include("drumeo.lead-gen.partials.sign-up-form", [--}}
+{{--                            "recaptchaKey" => $recaptchaKey,--}}
+{{--                            "formName" => '40 Songs',--}}
+{{--                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",--}}
+{{--                            "buttonText" => "Get It Now ",--}}
+{{--                            "redirectURL" => "/100-songs/thank-you/",--}}
+{{--                            "stacked" => true--}}
+{{--                        ])--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
@@ -219,13 +220,14 @@
                     <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",
-                        "buttonText" => "Get It Now ",
-                        "formName" => '40 Songs',
-                        "redirectURL" => "/100-songs/thank-you/",
-                    ])
+                    <span class="join sold-out smaller">Temporarily Closed</span>
+{{--                    @include("drumeo.lead-gen.partials.sign-up-form", [--}}
+{{--                        "recaptchaKey" => $recaptchaKey,--}}
+{{--                        "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",--}}
+{{--                        "buttonText" => "Get It Now ",--}}
+{{--                        "formName" => '40 Songs',--}}
+{{--                        "redirectURL" => "/100-songs/thank-you/",--}}
+{{--                    ])--}}
                 </div>
             </div>
         </div>

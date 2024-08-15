@@ -56,11 +56,11 @@ body {
     }
 
     &.smaller {
-        padding: 13px 7%;
-        font-size: 17px;
+        padding: 12px 7%;
+        font-size: 14px;
         @include tablet {
-            font-size: 19px;
-            padding: 15px 7%;
+            font-size: 17px;
+            padding: 12px 7%;
         }
     }
 }
@@ -160,6 +160,8 @@ button {
 
 [type=reset], [type=submit], button, html [type=button] {
     -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
 }
 
 .text-red {
@@ -390,9 +392,9 @@ button {
 
         &.active {
             position: fixed;
-            top: 40px;
+            top: 80px;
             @include tablet {
-                top: 56px;
+                top: 112px;
             }
         }
     }
@@ -433,7 +435,7 @@ button {
 
         &.stick-to-top {
             @include tablet {
-                top: 56px;
+                top: 112px;
                 background: #05060b;
                 box-shadow: 0 0 30px 15px #05060b;
                 position: fixed;

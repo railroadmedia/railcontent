@@ -29,6 +29,7 @@ class Order
     public ?string $name;
     public ?int $orderNumber;
     public Carbon $createdAt;
+    public string $financialStatus;
     public string $currency;
     public float $subtotalPrice;
     public float $totalDiscount;
@@ -61,6 +62,7 @@ class Order
         $this->createdAt = Carbon::parse($shopifyOrderData->created_at);
         $this->processedAt = $shopifyOrderData->processed_at ? Carbon::parse($shopifyOrderData->processed_at) : null;
 
+        $this->financialStatus = $shopifyOrderData->financial_status;
         $this->discountCodes = $shopifyOrderData->discount_codes;
         $this->email = $shopifyOrderData->email;
 
