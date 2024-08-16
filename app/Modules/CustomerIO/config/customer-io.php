@@ -68,18 +68,12 @@ return [
         'brand' => 'musora',
         'musora' => [
             'The Playlist - Musora Newsletter' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
-                ],
-                'attributes' => [
-                    'first_name' => 'First Name',
-                    'email' => 'Email'
                 ],
             ],
             'Free Music Lessons For Life' => [
