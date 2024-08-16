@@ -4,6 +4,7 @@ namespace Modules\Ecommerce\tests\Unit\Controllers;
 
 use App\Jobs\WebhookJob;
 use App\Models\Webhook;
+use App\Modules\Ecommerce\Jobs\AssignPrimaryBrandJob;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
@@ -147,7 +148,8 @@ class ShopifyWebhookControllerTest extends TestCase
         Bus::fake([
             AddOrderTags::class,
             OrderCreatedEventTrackingJob::class,
-            OrderCreatedUpdateLastTrialDataJob::class
+            OrderCreatedUpdateLastTrialDataJob::class,
+            AssignPrimaryBrandJob::class
             ]);
         $response = $this->postJson(
             route('shopify.webhook.order.create'),
