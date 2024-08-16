@@ -93,7 +93,7 @@
                             You’ve done the hard part -- starting! Now keep the momentum going and try Easy Chords <strong>FREE.</strong>
                         </p>
                     </div>
-                    <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">GET STARTED FOR FREE</a>
+                    <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">START FREE FOR 7 DAYS</a>
                 </div>
                 
             </div>
@@ -188,7 +188,7 @@
                 </div>
             @endforeach
 
-            <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">GET STARTED FOR FREE</a>
+            <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">START FREE FOR 7 DAYS</a>
         </div>
     </section>
 
@@ -266,7 +266,7 @@
                     </div>
                 </div>
             </div>
-            <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote mt-2 lg:mt-6" href="/choose-plan">GET STARTED FOR FREE</a>
+            <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote mt-2 lg:mt-6" href="/choose-plan">START FREE FOR 7 DAYS</a>
         </div>
     </section>
 
@@ -320,6 +320,7 @@
                             perPage: 1.5,
                             arrows: true,
                             snap: false,
+                            pagination: false,
                         },
                     },
                 }).mount();
@@ -334,45 +335,55 @@
             <div x-ref="splide" class="splide mb-28 md:mb-20" id="special">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        @php
-                            $sectionItems = [
+                       @php
+                            $packs = [
                                 [
-                                    'img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/4865370e-ea95-4a36-8b40-82aa0f64fb02-30TBT-cart.jpg',
-                                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/easy-chords-trial/30-days-technique-logo-white.svg',
-                                    'size' => 'h-20',
-                                    'title' => 'Jordan Rudess',
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
                                 ],
                                 [
-                                    'img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png',
-                                    'size' => 'h-24',
-                                    'title' => 'Kevin Castro',
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
                                 ],
                                 [
-                                    'img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/a3ed13cb-8cae-402a-84ea-4e24ad448fee-NPPSH_cart.jpg',
-                                    'logo' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnail-logos/cf09c65f-b5a9-4e5f-acd9-8124b63e72be-SVG-red-highlight-1675374984.png',
-                                    'size' => 'h-16',
-                                    'title' => 'Lisa Witt',
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
                                 ],
                                 [
-                                    'img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/e675c7b7-3bb4-4a8a-90a7-04bfee060ac2-RMI30D-cart.jpg',
-                                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/easy-chords-trial/read-music-white-logo.svg',
-                                    'size' => 'h-20',
-                                    'title' => 'Lisa Witt',
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
+                                ],
+                                [
+                                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
                                 ],
                             ];
                         @endphp
-                        @foreach ($sectionItems as $index => $item)
-                            <li class="splide__slide flex min-h-[390px]">
-                                <div class="flex flex-wrap items-start w-full mb-5 sm:mb-8 relative px-2 pt-2 pb-5 rounded-xl bg-cover bg-top"
-                                    style="background-image: url('{{ $item['img'] }}');">
-                                    <div
-                                        class="absolute bottom-0 left-0 right-0 px-3 sm:px-4 pb-4 sm:pb-6 flex items-end rounded-b-xl">
-                                        <div class="flex flex-wrap w-full justify-center">
-                                            <img class="{!! $item['size'] !!}" src="{!! $item['logo'] !!}">
-                                            <p class="leading-tight w-full text-white pt-4">{{ $item['title'] }}</p>
-                                        </div>
-                                    </div>
+                        @foreach ($packs as $image)
+                            <li class="splide__slide flex flex-col items-center justify-start px-1">
+                                <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
+                                    <picture>
+                                        <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
+                                        <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
+                                        <img
+                                            class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
+                                            data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
+                                            onload="this.classList.remove('opacity-0');"
+                                        />
+                                    </picture>
                                 </div>
                             </li>
                         @endforeach
@@ -487,7 +498,7 @@
                     You’ve done the hard part -- starting! <br>
                     Now keep the momentum going and try <br class="md:hidden"> Easy Chords <strong>FREE.</strong>
                 </p>
-                <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">GET STARTED FOR FREE</a>
+                <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">START FREE FOR 7 DAYS</a>
             </div>
         </div>
     </section>
