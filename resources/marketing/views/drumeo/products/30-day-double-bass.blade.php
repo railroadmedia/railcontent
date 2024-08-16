@@ -32,6 +32,7 @@
 @section('body-data')
     x-data ="{
     trailer : false,
+    trailerM : false,
     }"
 @endsection
 
