@@ -257,6 +257,7 @@ class FixEvaluatedOrders extends BatchQueryJobByIds
         $newTotal = 0.0;
         $totalPriceAmount = $fix->orderTotalAmount;
         $hasOnlyOneLineItem = $originalOrderData->lineItems->count() === 1;
+        $lastLineItemId = $originalOrderData->lineItems->last()->id;
         $model = $fix->ecommerceModelable;
         foreach ($originalOrderData->lineItems as $lineItem) {
             // Use $originalOrder’s line_items to copy most data:
@@ -308,9 +309,10 @@ class FixEvaluatedOrders extends BatchQueryJobByIds
                 // Get the total amount for all ecommerce_order_items for the Order ($totalPriceAmount)
                 // e.g. $50, $125, $100 = $275
                 // Calculate the weighted cost for this line item
-                if (end($originalOrderData->lineItems) == $lineItem) {
+
+                if ($lastLineItemId == $lineItem->id) {
                     // be careful of rounding errors; offset the final item as necessary to make sure the totals match
-                    $weightedCost = $newTotal - $fix->true_payment_amount;
+                    $weightedCost = $fix->true_payment_amount - $newTotal;
                 } else {
                     // Use the ecommerce_order_items' final_price as a portion of the ecommerce order total, multiplied by $fix->true_payment_amount’s total:
                     // e.g. 50 / (50+125+100) * 255 = 46.36
@@ -318,21 +320,42 @@ class FixEvaluatedOrders extends BatchQueryJobByIds
                     // e.g. 100 / (50+125+100) * 255 = 92.73
                     $orderItemPortionOfEcommerceTotal = $totalPriceAmount > 0 ? $orderItemFinalPrice / $totalPriceAmount : 0;
                     $weightedCost = $orderItemPortionOfEcommerceTotal * $fix->true_payment_amount;
-                    $newTotal += $weightedCost;
-                    // Log::debug(
-                    //     sprintf(
-                    //         'Order Item %s original price: %s. Weighted price: %s',
-                    //         $orderItemId,
-                    //         $orderItemFinalPrice,
-                    //         $weightedCost
-                    //     )
-                    // );
                 }
             }
+            // set the weighted cost per unit
+            $weightedCost = round($weightedCost / $lineItem->quantity, 2);
+
+            // keep track of it in the new total, so we can make sure it all matches when done
+            $newTotal += ($weightedCost * $lineItem->quantity);
+            // Log::debug(
+            //     sprintf(
+            //         'Order Item %s original price: %s. Weighted price: %s',
+            //         $orderItemId,
+            //         $orderItemFinalPrice,
+            //         $weightedCost
+            //     )
+            // );
+
             $lineItemData['price'] = number_format($weightedCost, 2, '.', '');
             $lineItems[] = $lineItemData;
         }
-        // Log::debug(sprintf('Line Item costs: %s', implode(', ', Arr::pluck($lineItems, 'price'))));
+
+        // be careful of rounding errors
+        // if the new total is not the same as the true payment amount,
+        // we need to find a line item with only quantity of one and adjust the price
+        if ($newTotal != $fix->true_payment_amount) {
+            $diff = round($fix->true_payment_amount - $newTotal, 2);
+            foreach ($lineItems as &$lineItemEntry) {
+                if ($lineItemEntry['quantity'] === 1) {
+                    $adjustedPrice = floatval($lineItemEntry['price']) + $diff;
+                    $lineItemEntry['price'] = number_format($adjustedPrice, 2, '.', '');
+                    // exit the loop so we only match once
+                    break;
+                }
+            }
+            unset($lineItemEntry);
+        }
+
         $cloneOrderData['line_items'] = $lineItems;
 
         if ($this->simulate) {
