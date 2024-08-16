@@ -31,6 +31,7 @@
         :content-id="{{ json_encode($lessonContent->fetch('id')) }}"
         :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
         :no-access="{{ json_encode($lessonContent->fetch('need_access')) }}"
+        :lesson-content="{{ json_encode($lessonContent) }}"
     ></song>
 
 @endsection

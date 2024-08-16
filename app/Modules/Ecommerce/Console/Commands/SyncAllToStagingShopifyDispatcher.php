@@ -32,6 +32,7 @@ class SyncAllToStagingShopifyDispatcher extends Command
     protected $signature = 'shopify:sync-all-staging
                             {startCreatedAt : The ISO 8601 date time for all ecommerce_orders and ecommerce_subscription_payments to get where the created_at is at or after. e.g. 2023-01-01T00:00:00+00:00}
                             {endCreatedAt : The ISO 8601 date time for all ecommerce_orders and ecommerce_subscription_payments to get where the created_at is at or before. e.g. 2023-01-31T23:59:59+00:00}
+                            {--no-confirm : (Optional) Skip confirmation. This is required in Vapor.}
                             {--include-products : (Optional) Include the sync of the required products before anything else. Not recommended if your store already has products.}
                             {--all-products : (Optional) Include the sync of all products before anything else. Not recommended if your store already has products.}';
 
@@ -67,12 +68,13 @@ class SyncAllToStagingShopifyDispatcher extends Command
             return self::FAILURE;
         }
 
+        $noConfirm = $this->option("no-confirm");
         $syncProducts = $this->option("include-products");
         $syncAllProducts = $this->option("all-products");
 
         $dateRangeDays = $endCreatedAt->diffInDays($startCreatedAt);
         if ($dateRangeDays > 30) {
-            if (!$this->confirm("Using all orders and subscription payments for a $dateRangeDays day period. Do you wish to continue?")) {
+            if (!$noConfirm && !$this->confirm("Using all orders and subscription payments for a $dateRangeDays day period. Do you wish to continue?")) {
                 $this->warn('cancelled');
                 return self::INVALID;
             }
@@ -115,7 +117,7 @@ class SyncAllToStagingShopifyDispatcher extends Command
         $userIds = $orderUserIds->merge($spUserIds)->unique()->sort()->values();
 
         // confirm before proceeding
-        if (!$this->confirm(sprintf(
+        if (!$noConfirm && !$this->confirm(sprintf(
             'This will sync %s products, %s users, %s orders, and %s subscription payments. Do you wish to continue?',
             $productIds->count(),
             $userIds->count(),

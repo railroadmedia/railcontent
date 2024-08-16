@@ -29,7 +29,6 @@ class Order
     public ?string $name;
     public ?int $orderNumber;
     public Carbon $createdAt;
-    public string $financialStatus;
     public string $currency;
     public float $subtotalPrice;
     public float $totalDiscount;
@@ -41,10 +40,16 @@ class Order
     public string $email;
     public array $tags;
     public ?string $sourceName;
+    public string $financialStatus;
+    public ?string $fulfillmentStatus;
     public ?Carbon $processedAt;
     public ?Customer $customer;
+    public ?Address $billingAddress;
+    public ?Address $shippingAddress;
     /** @var Collection<OrderLineItem> $lineItems */
     public Collection $lineItems;
+    /** @var Collection<Fulfillment> $fulfillments */
+    public Collection $fulfillments;
     public ?string $note;
     /** @var Collection<MetaField> */
     private Collection $_metafields;
@@ -68,9 +73,17 @@ class Order
 
         $this->customer = $shopifyOrderData->customer ? new Customer($shopifyOrderData->customer) : null;
 
+        $this->billingAddress = $shopifyOrderData->billing_address ? new Address($shopifyOrderData->billing_address) : null;
+        $this->shippingAddress = $shopifyOrderData->shipping_address ? new Address($shopifyOrderData->shipping_address) : null;
+
         $this->lineItems = collect($shopifyOrderData->line_items)->map(function ($item) {
             return new OrderLineItem($item);
         });
+
+        $this->fulfillments = empty($shopifyOrderData->fulfillments) ? collect() :
+            collect($shopifyOrderData->fulfillments)->map(function ($fulfillment) {
+                return new Fulfillment($fulfillment);
+            });
 
         $this->tags = empty($shopifyOrderData->tags) ? [] : array_map('trim', explode(',', $shopifyOrderData->tags));
 
@@ -82,6 +95,8 @@ class Order
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
         $this->currencyCode = $shopifyOrderData->total_price_set->shop_money->currency_code;
         $this->sourceName = $shopifyOrderData->source_name;
+        $this->financialStatus = $shopifyOrderData->financial_status;
+        $this->fulfillmentStatus = $shopifyOrderData->fulfillment_status;
         $this->note = $shopifyOrderData->note;
         $this->_metafields = collect();
     }
