@@ -5,15 +5,15 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta property="og:url" content="https://www.drumeo.com/">
+    <title>Rejoin Drumeo and save on your membership.</title>
+    <meta property="og:title" content="Rejoin Drumeo and save on your membership.">
+    <meta property="og:url" content="https://www.drumeo.com/welcome-back-discount">
 
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <meta name="description" content="Save $60/year + 2 bonuses worth $254!">
+    <meta property="og:description" content="Save $60/year + 2 bonuses worth $254!">
 
-        <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+    <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -83,33 +83,6 @@
             fill: #0B76DB !important;
         }
 
-        .bubble:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border: 5px solid transparent;
-            border-top-color: black;
-            border-bottom: 0;
-            margin-left: -5px;
-            margin-bottom: -5px;
-        }
-
-        @if(!empty($trialVersion))
-            .option-buttons.active {
-            border-color:#0b76db!important;
-            background-color:#0c2949!important;
-        }
-        .option-buttons.active .radio-check {
-            border-color:#0b76db!important;
-            background-color:#0b76db!important;
-        }
-        .option-buttons.active .radio-check i {
-            display:block!important;
-        }
-        @endif
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
@@ -119,12 +92,7 @@
 
 @section('body-data')
     x-data ='{
-    soundslice : false,
-    waitlist: false,
-    trailer : false,
     lazyLoad: false,
-    videoLoaded: false,
-    keyTrailer : false,
     }'
 @endsection
 
@@ -134,14 +102,8 @@
         "scrollToJoin" => true,
         "hideMenu" => true,
     ])
-
-    @php
-        $originalPrice = 240;
-        $discountedPrice = 200;
-        $savePercentage = round((($originalPrice - $discountedPrice) / $originalPrice) * 100);
-    @endphp
     <header class="text-center px-5 sm:px-6 py-16 sm:py-24 lg:py-32 relative overflow-hidden text-white bg-cover bg-center"
-        style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/august/header-bg.webp');">
+        style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/header.webp');">
         <div class="container max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl leading-none sm:leading-none lg:leading-none uppercase">
                 <strong class="relative inline-block">EVERYTHING
@@ -180,10 +142,10 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[60%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-06.webp" media="(min-width: 640px)">
-                                <img x-ref="image" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-06.webp" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-06.webp" alt="Handy Practice Tools" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1.webp" alt="Handy Practice Tools" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
                             </picture>
-                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>1</strong></h5>
                                 <div class="pl-3">
                                     <h5 class="leading-tight"><strong>Unlimited Access</strong></h5>
@@ -195,10 +157,10 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[80%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-04.webp" media="(min-width: 640px)">
-                                <img x-ref="image" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-04.webp" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-04.webp" alt="Step-By-Step Clarity" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3.webp" alt="Step-By-Step Clarity" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
                             </picture>
-                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>3</strong></h5>
                                 <div class="pl-3">
                                     <h5 class="leading-tight"><strong>Be First To Know</strong></h5>
@@ -212,10 +174,10 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[80%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-02.webp" media="(min-width: 640px)">
-                                <img x-ref="image" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-02.webp" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-02.webp" alt="World-Class Teachers" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2.webp" alt="World-Class Teachers" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
                             </picture>
-                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>2</strong></h5>
                                 <div class="pl-3">
                                     <h5 class="leading-tight"><strong>VIP Treatment</strong></h5>
@@ -227,10 +189,10 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[60%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-07.webp" media="(min-width: 640px)">
-                                <img x-ref="image" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-07.webp" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-07.webp" alt="Powered By Humans" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4.webp" alt="Powered By Humans" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
                             </picture>
-                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>4</strong></h5>
                                 <div class="pl-3">
                                     <h5 class="leading-tight"><strong>24/7 Personal Support</strong></h5>
@@ -243,11 +205,11 @@
                 <div class="flex flex-wrap items-start w-full sm:px-3" x-data="{ open: false }">
                     <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true">
                         <picture>
-                            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp">
-                            <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x770/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp">
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x470/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp" alt="Any Instrument, Any Time" class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl transition-opacity" style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/5.webp">
+                            <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x770/filters:quality(95)/marketing/drumeo/membership/welcome-offer/5.webp">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x470/filters:quality(95)/marketing/drumeo/membership/welcome-offer/5.webp" alt="Any Instrument, Any Time" class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl transition-opacity" style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
                         </picture>
-                        <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                        <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start">
                             <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>5</strong></h5>
                             <div class="pl-3">
                                 <h5 class="leading-tight"><strong>Learn New Instruments</strong></h5>
@@ -261,39 +223,37 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="leading-tight font-black mb-8">Drumeo Membership Special Pricing</h2>
-            <p class="leading-tight mb-8">Get one year of unlimited drum lessons, including:</p>
+            <h2 class="leading-tight font-black">Drumeo Membership Special Pricing</h2>
+            <p class="leading-tight mt-2 mb-6">Get one year of unlimited drum lessons, including:</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div class="">
-                    <img src="path/to/guided-lessons-image.png" alt="Guided Lessons" class="w-full rounded-xl mb-4">
-                    <h4><i class="text-{{$theme}} fal fa-video mb-4"></i></h4>
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1guided.webp" alt="Guided Lessons" class="w-full rounded-xl mb-4">
+                    <h4><i class="text-{{$theme}} fal fa-video mb-2"></i></h4>
                     <h5 class="font-black mb-2">Guided Lessons</h5>
-                    <p class="leading-tight">Step-by-step lessons and practice alongs so you can play along with your teacher in real time.</p>
+                    <p class="leading-normal">Step-by-step lessons and practice alongs so you can play along with your teacher in real time.</p>
                 </div>
                 <div class="">
-                    <img src="path/to/songs-image.png" alt="Songs" class="w-full rounded-xl mb-4">
-                    <h4><i class="text-{{$theme}} fal fa-music mb-4"></i></h4>
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2songs.webp" alt="Songs" class="w-full rounded-xl mb-4">
+                    <h4><i class="text-{{$theme}} fal fa-music mb-2"></i></h4>
                     <h5 class="font-black mb-2">Songs</h5>
-                    <p class="leading-tight">Note-for-note breakdowns with the ability to slow things down, loop sections, and use a metronome.</p>
+                    <p class="leading-normal">Note-for-note breakdowns with the ability to slow things down, loop sections, and use a metronome.</p>
                 </div>
                 <div class="">
-                    <img src="path/to/real-teachers-image.png" alt="Real Teachers" class="w-full rounded-xl mb-4">
-                    <h4><i class="text-{{$theme}} fal fa-users mb-4"></i></h4>
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3real-teachers.webp" alt="Real Teachers" class="w-full rounded-xl mb-4">
+                    <h4><i class="text-{{$theme}} fal fa-users mb-2"></i></h4>
                     <h5 class="font-black mb-2">Real Teachers</h5>
-                    <p class="leading-tight">Your favorite drummers and teachers will share their tips, cheer you along, and help you learn by drumming!</p>
+                    <p class="leading-normal">Your favorite drummers and teachers will share their tips, cheer you along, and help you learn by drumming!</p>
                 </div>
                 <div class="">
-                    <img src="path/to/supportive-mentors-image.png" alt="Supportive Mentors" class="w-full rounded-xl mb-4">
-                    <h4><i class="text-{{$theme}} fal fa-handshake-angle mb-4"></i></h4>
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4mentors.webp" alt="Supportive Mentors" class="w-full rounded-xl mb-4">
+                    <h4><i class="text-{{$theme}} fal fa-handshake-angle mb-2"></i></h4>
                     <h5 class="font-black mb-2">Supportive Mentors</h5>
-                    <p class="leading-tight">Ask your most pressing music questions, personalized practice plans & feedback on your playing!</p>
+                    <p class="leading-normal">Ask your most pressing music questions, personalized practice plans & feedback on your playing!</p>
                 </div>
             </div>
         </div>
     </section>
-
-
     @php
         $testimonials = $drumeo['testimonials'];
         $youtube = convertNumber(Prices::$drumeoYoutubeSubsc);
@@ -315,31 +275,31 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="font-black mb-8">Drum lessons for all skill levels</h2>
-            <p class="leading-tight mb-8">Whatever your level, Drumeo will help you reach your goals.</p>
+            <h2 class="leading-tight font-black">Drum lessons for all skill levels</h2>
+            <p class="leading-tight mt-2 mb-6">Whatever your level, Drumeo will help you reach your goals.</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-left">
                 <div class="">
-                    <img src="path/to/aspiring-drummer-image.png" alt="Aspiring Drummer" class="w-full rounded-xl mb-4">
-                    <p class="leading-tight">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1aspiring.webp" alt="Aspiring Drummer" class="w-full rounded-xl mb-4">
+                    <p class="leading-normal">
                         If you're an <strong>aspiring drummer with no experience</strong> but eager to learn the drums, we’ll start you off with the basics (even if you don’t own a drum set yet!).
                     </p>
                 </div>
                 <div class="">
-                    <img src="path/to/beginner-drummer-image.png" alt="Beginner Drummer" class="w-full rounded-xl mb-4">
-                    <p class="leading-tight">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2beginner.webp" alt="Beginner Drummer" class="w-full rounded-xl mb-4">
+                    <p class="leading-normal">
                         If you're a <strong>beginner drummer</strong> who wants to improve, our guided workouts, fun challenges, and step-by-step method will fast-track your playing.
                     </p>
                 </div>
                 <div class="">
-                    <img src="path/to/intermediate-drummer-image.png" alt="Intermediate Drummer" class="w-full rounded-xl mb-4">
-                    <p class="leading-tight">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3intermediate.webp" alt="Intermediate Drummer" class="w-full rounded-xl mb-4">
+                    <p class="leading-normal">
                         If you're an <strong>intermediate drummer</strong> who practices & performs regularly but needs something to fit your busy schedule, we have tons of challenging content that will test your skills.
                     </p>
                 </div>
                 <div class="">
-                    <img src="path/to/expert-drummer-image.png" alt="Expert Drummer" class="w-full rounded-xl mb-4">
-                    <p class="leading-tight">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4expert.webp" alt="Expert Drummer" class="w-full rounded-xl mb-4">
+                    <p class="leading-normal">
                         If you're an <strong>expert drummer</strong> who wants to learn from some of the best in the world, we’ll make you sweat with workouts from world-renowned drummers and a song library full of complex grooves.
                     </p>
                 </div>
@@ -353,27 +313,26 @@
     <section class="text-center  text-white  px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#000;" x-data="{ plusMembershipSelected: true }">
         <div class="container max-w-6xl mx-auto">
             <h2 class="leading-tight mb-5"><strong>Rejoin Drumeo and save<br> on your membership.</strong></h2>
-
             <div id="plusOptions" class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto" x-bind:class="{ 'hidden': !plusMembershipSelected }">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                     <a href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true&promo-code=welcomeMonth" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2  border-white " aria-label="Monthly Plan">
                         <div class="bg-white px-3 py-5 md:py-7">
-                            <h2 class="mb-2 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
+                            <h2 class="mb-1"><strong>Monthly</strong></h2>
                             <p class="leading-tight text-sm"><em>No bonuses.</em></p>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h4 class="inline-block leading-tight"><strong>$15/month</strong></h4>
+                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/monthly.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
+                            <h3 class="inline-block leading-tight"><strong>$15</strong></h3><p class="inline-block leading-tight">/per month</p>
                             <p class="text-sm"><em>For your first 6 months, then $30/month.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
                         </div>
                     </a>
                 </div>
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo" aria-label="Plan">
+                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=welcome-back" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo" aria-label="Plan">
                         <div class="bg-white px-3 py-6 md:py-9">
-                            <h2 class="mb-2 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
+                            <h2 class="mb-1"><strong>Annual</strong></h2>
                             <p class="leading-tight text-sm"><em>+ 2 Bonuses Worth $254</em></p>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h4 class="inline-block leading-tight"><s>$240</s> <strong>$180</strong></h4>
+                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/annual2.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
+                            <h3 class="inline-block leading-tight"><s class="opacity-50">$240</s> <strong>$180</strong></h3>
                             <p class="text-sm"><em>For your first year, then $240/yr.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
                             <p class="text-sm mb-1.5"><strong>FREE</strong> 30-Day Chops</p>
@@ -382,20 +341,11 @@
                     </a>
                 </div>
             </div>
-
-
             <p><em>All prices listed in USD.</em></p>
         </div>
     </section>
 
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '898623255',
-        'vimeo' => true,
-    ])
-    @include("drumeo.sales.partials._footer", [
-        "minimal" => true
-    ])
+    @include("drumeo.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
