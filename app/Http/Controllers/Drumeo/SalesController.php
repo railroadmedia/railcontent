@@ -80,7 +80,7 @@ class SalesController extends BaseController
     }
     public function welcomeBackDiscount()
     {
-        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
     }
     public function restart()
     {
