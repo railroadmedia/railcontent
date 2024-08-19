@@ -181,13 +181,9 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$bypassPermissions = true;
             $oldStatuses = ContentRepository::$availableContentStatues;
             $oldFutureContent = ContentRepository::$pullFutureContent;
-
-            ContentRepository::$availableContentStatues = [
-                ContentService::STATUS_PUBLISHED,
-                ContentService::STATUS_SCHEDULED,
-                ContentService::STATUS_ARCHIVED,
-                ContentService::STATUS_UNLISTED
-            ];
+            if(is_array(ContentRepository::$availableContentStatues)) {
+                array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
+            }
             ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
 
@@ -249,6 +245,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
                 $playlistItems[$index]['difficulty'] = $item['difficulty'] ?? false;
             }
+            $playlist['duration'] = $items->sum('length_in_seconds');
         }
 
         $items = new ContentFilterResultsEntity([
@@ -324,12 +321,21 @@ class UserPlaylistsController extends BaseController
         ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
+        if(!user()->isAdmin()) {
+            $playlistItems =
+                $playlistItems
+                    ->where('status', '!=', ContentService::STATUS_DRAFT)
+                    ->where('need_access', '!=', 'true');
+        }
         ContentRepository::$bypassPermissions = $initialByPassPermissions;
+        $playlist['duration'] = $playlistItems->sum('length_in_seconds');
 
         $playlistItem =
-            $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
-                ->first();
+            $playlistItems->where('user_playlist_item_id', '=', $playlistItemId);
+        throw_if(($playlistItem->isEmpty()), new NotFoundHttpException());
 
+        $position = $playlistItem->keys()->first() + 1;
+        $playlistItem = $playlistItem->first();
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
         $content['user_playlist_item_position'] = $position;
