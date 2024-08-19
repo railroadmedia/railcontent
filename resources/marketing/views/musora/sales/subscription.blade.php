@@ -327,10 +327,6 @@
 @section('body-data')
     x-data ='{
         brand: "pianote",
-        drumeoSoundslice: false,
-        pianoteSoundslice: false,
-        guitareoSoundslice: false,
-        singeoSoundslice: false,
         trailer: false,
         lazyLoad: false,
         videoLoaded: false,
@@ -343,8 +339,8 @@
             @yield('spotify-banner')
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
             <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play your favorite songs.</h5>
-            <div class="mx-auto my-5 sm:my-7">
-                <a class="w-full sm:w-96 join smaller musora-gold mb-3 @if(!empty($promoVersion)) anchor-slide @endif"
+            <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 my-5 sm:my-7">
+                <a class="sm:mx-0.5 w-full sm:w-56 join musora-gold smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                     @if(!empty($promoVersion))
                         href="#customize-anchor"
                     aria-label="Customize anchor"
@@ -368,28 +364,18 @@
                         7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                     @endif
                 </a>
-                <p class="opacity-80 text-sm leading-normal">
-                    @if(!empty($promoVersion) && empty($trialVersion))
-                    @elseif(!empty($month))
-                        Your first 30 days are free, then just $20/month.
-                    @else
-                        Your first 7 days are free, then just $20/month.
-                    @endif
-                </p>
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline white smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             </div>
             <div class="flex justify-center">
-                            <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
-                            <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
-                            <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
-                            <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
-                        </div>
+                <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
+                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
+                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
+                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
+            </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
-{{--                <img class="object-cover object-center w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/header.jpg">--}}
-        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
-            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
-        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
-            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
+        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
+        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
     </header>
     @php
         $packs = $musora['packs'];
@@ -480,32 +466,8 @@
     @include('musora._partials._faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'drumeoSoundslice',
-        'video' => '23rlc',
-        'soundslice' => true,
-    ])
-
-    @include('_partials.components.video-modal',[
-        'name' => 'pianoteSoundslice',
-        'video' => '4JGlc',
-        'soundslice' => true,
-    ])
-
-    @include('_partials.components.video-modal',[
-        'name' => 'guitareoSoundslice',
-        'video' => 'NXGlc',
-        'soundslice' => true,
-    ])
-
-    @include('_partials.components.video-modal',[
-        'name' => 'singeoSoundslice',
-        'video' => 'PTGlc',
-        'soundslice' => true,
-    ])
-
-    @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314424',
+        'video' => 'TODO',
         'vimeo' => true,
     ])
 
