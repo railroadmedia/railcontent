@@ -121,7 +121,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 29th</span>
+                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 30th</span>
                         </p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
@@ -459,7 +459,7 @@
                     <tr>
                         <td>Investment</td>
                         <td class="rounded-b-xl">
-                            <strong>${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong><br>
+                            <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong><br>
                             <span class="text-xs">Single Payment</span></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
                                     Lesson</span></td>
@@ -685,7 +685,8 @@
                         ])
 
                     </div>
-
+                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true">
+                <p><u><em><strong>Don't want any physical bonuses?</strong> <br class="hidden sm:inline"> Click here to  join 30-Day Double Bass only.</em></u></p></a>
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
