@@ -145,7 +145,7 @@
 
     <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your foot speed &<br> endurance on the drums.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your foot speed &<br> control on the drums.</strong></h2>
             @php
             if (empty($platformVersion)) {
                 $gettings = [
