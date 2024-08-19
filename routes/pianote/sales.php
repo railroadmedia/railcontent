@@ -13,7 +13,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/chords-trial', [SalesController::class, 'trial']);
         Route::get('/trial-songs', [SalesController::class, 'trialSongs']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
-        Route::get('/ultimate-lessons', [SalesController::class, 'ultimateLessons']);
+        Route::get('/ultimate-practice', [SalesController::class, 'ultimatepractice']);
         Route::get('/restart', [SalesController::class, 'restart'] );
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS']);
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);
@@ -61,4 +61,6 @@ Route::domain('{pianoteDomain}')
 
         Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'])
             ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+        Route::get('/easy-chords-trial', [SalesController::class, 'easyChordsTrial']);
     });

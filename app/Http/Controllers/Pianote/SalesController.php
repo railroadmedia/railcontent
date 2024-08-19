@@ -46,9 +46,9 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function ultimateLessons()
+    public function ultimatepractice()
     {
-        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+        return view('pianote.sales.ultimate-practice', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
     public function promoEG()
     {
@@ -448,5 +448,10 @@ class SalesController extends BaseController
     public function practiceKit()
     {
         return view('pianote.products.practice-kit', ['theme' => 'pianote']);
+    }
+
+    public function easyChordsTrial()
+    {
+        return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
     }
 }
