@@ -64,7 +64,7 @@ class CustomerIoService
         $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchased_at_ms'])->timestamp;
 
         $attributes = [];
-        if ($brand !== 'musora') {
+        if (in_array($brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
             $attributes['primary_brand'] = $brand;
         }
         $attributes[$brand . '_membership_status'] = $subscriptionStatus;
