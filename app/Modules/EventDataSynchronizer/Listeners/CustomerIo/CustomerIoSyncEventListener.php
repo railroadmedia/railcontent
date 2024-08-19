@@ -735,7 +735,9 @@ class CustomerIoSyncEventListener
             3
         );
 
-        dispatchWithDelay(new CustomerIoSyncUserByUserId($accessCodeClaimed->getUser(), ['primary_brand' => $brand]), 3);
+        if (in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
+            dispatchWithDelay(new CustomerIoSyncUserByUserId($accessCodeClaimed->getUser(), ['primary_brand' => $brand]), 3);
+        }
     }
 
     // CMT-77 August Referral Contest

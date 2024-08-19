@@ -86,7 +86,7 @@ class AccessCodeService
         $accessCode->updated_at = Carbon::now();
         $accessCode->save();
 
-        $user->primary_brand = $accessCode->brand !== 'musora'
+        $user->primary_brand = in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
             ? $accessCode->brand
             : $user->primary_brand;
 

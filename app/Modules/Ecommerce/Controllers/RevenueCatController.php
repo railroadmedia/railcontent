@@ -131,7 +131,7 @@ class RevenueCatController extends Controller
                         null //defaults to USD
                     );
 
-                    $user->primary_brand = $musoraProduct->brand !== 'musora'
+                    $user->primary_brand = in_array($musoraProduct->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
                         ? $musoraProduct->brand
                         : null;
 
