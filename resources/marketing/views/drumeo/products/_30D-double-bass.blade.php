@@ -459,7 +459,7 @@
                     <tr>
                         <td>Investment</td>
                         <td class="rounded-b-xl">
-                            <strong>${{ floatval($productPrices['30-day-double-bass']->discounted_price) }}</strong><br>
+                            <strong>$97</strong><br>
                             <span class="text-xs">Single Payment</span></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
                                     Lesson</span></td>
