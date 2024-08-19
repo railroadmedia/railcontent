@@ -58,6 +58,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
+    public function welcomeBackDiscount()
+    {
+        return view('pianote.sales.welcome-back-discount', ['theme' => 'pianote']);
+    }
     public function trial()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
