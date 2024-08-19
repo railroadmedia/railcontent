@@ -50,6 +50,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  infoMessage: {
+    type: String,
+    default: '',
+  },
   showClearButton: {
     type: Boolean,
     default: false,
@@ -144,6 +148,9 @@ onBeforeMount(() => {
     </div>
     <div v-if="inputErrors.length" class="tw-w-full tw-flex tw-text-[12px] tw-leading-[18px] tw-text-[#DC2626] tw-text-center tw-mt-[5px] tw-justify-center">
       <ExclamationCircleIcon class="tw-mr-[5px] tw-w-[16px] tw-h-[16px]" />{{ inputErrors }}
+    </div>
+    <div v-if="infoMessage && infoMessage.length && !inputErrors.length" class="tw-w-full tw-text-[12px] tw-leading-[18px] tw-text-[#9EC0DC] tw-mt-[5px] tw-ml-[13px]">
+      {{ infoMessage }}
     </div>
   </div>
 </template>

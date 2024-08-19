@@ -133,20 +133,19 @@ const validateEmail = () => {
   //todo remove comment and put confirmation screen where it should
   emailError.value = '';
 
-  changeConfirmationScreen('setup');
-  /* axios.post('/user-management-system/login/check-email', { email: emailInput.value })
+  axios.post('/user-management-system/login/check-email', { email: emailInput.value })
     .then((response) => {
       if (response.data.is_setup) {
         changeCurrentForm('login-password');
       } else {
-        changeCurrentForm('setup');
+        changeConfirmationScreen('setup');
       }
     })
     .catch(() => {
       console.log('error');
       emailError.value = "We can't find your account. Click below to join!";
       console.log(emailError.value);
-    }); */
+    });
 };
 
 const sendSetupEmail = () => {
