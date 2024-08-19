@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -21,8 +20,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentJsonControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     /**
      * @var ContentRepository
      */

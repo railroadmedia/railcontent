@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
@@ -11,8 +10,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     /**
      * @var ContentFactory
      */

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -13,8 +12,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentFieldControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     /**
      * @var ContentFieldService
      */

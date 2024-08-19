@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -14,8 +13,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     protected $classBeingTested;
     /**
      * @var ContentFactory

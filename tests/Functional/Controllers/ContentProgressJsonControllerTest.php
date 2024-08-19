@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -13,8 +12,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     /**
      * @var ContentRepository
      */

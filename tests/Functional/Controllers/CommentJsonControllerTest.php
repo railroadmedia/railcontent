@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\CommentService;
@@ -13,8 +12,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentJsonControllerTest extends RailcontentTestCase
 {
-    use ArraySubsetAsserts;
-
     /**
      * @var ContentFactory
      */

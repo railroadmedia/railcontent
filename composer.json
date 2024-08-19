@@ -13,7 +13,7 @@
     "php": "^8.2",
     "laravel/framework": "^11.9",
     "guzzlehttp/guzzle": "^7.2",
-    "doctrine/dbal": "^4.0",
+    "doctrine/dbal": "^3.0",
     "ramsey/uuid": "^4.3",
     "aws/aws-sdk-php": "^3.0.0",
     "league/flysystem": "^3.0",
