@@ -45,10 +45,10 @@
             <br /><br />
             Didn’t get it? Please check your spam or resend the email link to try again.
         </p>
-        <button :disabled="isEmailSent"
+        <button type="button" :disabled="isEmailSent"
             class="tw-w-full tw-btn-secondary tw-border-[white] tw-bg-[#00101D] tw-text-thite tw-h-[40px] tw-text-[16px] tw-leading-[24px] tw-mt-[48px] tw-p-[8px]"
-            @click="handleButtonClick">
-            RESEND EMAIL
+            @click="() => handleEmailSend(false)">
+            RESEND EMAIL {{ isEmailSent ? formattedTimer : '' }}
         </button>
         <a id="loginToggle" class="tw-text-[14px] tw-leading-[21px] tw-text-center tw-text-white tw-pt-[30px]"
             @click="() => emit('change-form', 'login-email')">Close</a>
@@ -56,12 +56,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
     emailInput: String,
-    endopointUrl: String,
+    endpointUrl: String,
     usecsrftoken: Boolean,
     userStore: Object,
     confirmationTitle: String,
@@ -70,16 +70,43 @@ const props = defineProps({
 
 const isEmailSent = ref(false);
 
-const emit = defineEmits(['email-change', 'change-form']);
+const emit = defineEmits(['change-form', 'show-notification']);
 
-function handleButtonClick(e) {
-    e.preventDefault();
+function handleEmailSend(withoutTimer = false) {
     axios.post(props.endpointUrl, { email: props.emailInput })
         .then(() => {
-            isEmailSent.value = true;
+            if (!withoutTimer) {
+                isEmailSent.value = true;
+
+                const timer = 30;
+                let time = timer;
+
+                const interval = setInterval(() => {
+                    time--;
+                    const minutes = Math.floor(time / 60);
+                    const seconds = time % 60;
+                    formattedTimer.value = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (time <= 0) {
+                        clearInterval(interval);
+                        isEmailSent.value = false;
+                        formattedTimer.value = '00:30';
+                    }
+                }, 1000);
+            }
+            emit('show-notification', {
+                icon: 'check',
+                text: 'Email sent. Please check your inbox.'
+            });
         })
         .catch((e) => {
             console.log('Error sending email', e);
         });
 }
+
+const formattedTimer = ref('00:30');
+
+onMounted(() => {
+    handleEmailSend(true);
+});
 </script>

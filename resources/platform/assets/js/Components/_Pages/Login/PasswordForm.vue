@@ -37,7 +37,7 @@
         </LoginButton>
         <button id="hidden-submit" type="submit" hidden>Submit</button>
         <a class="tw-text-center tw-text-white tw-text-[14px] tw-leading-[21px] tw-mt-[40px]"
-            @click="() => emit('change-form', 'reset')">Forgot your password?</a>
+            @click="() => emit('change-confirmation-screen', 'reset')">Forgot your password?</a>
     </form>
 </template>
 

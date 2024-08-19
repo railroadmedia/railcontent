@@ -70,7 +70,7 @@ const handlePasswordChange = (val) => {
 };
 
 const changeConfirmationScreen = (confirmationType) => {
-  if(confirmationType === 'reset') {
+  if (confirmationType === 'reset') {
     confirmationTitle.value = 'Password reset link sent!';
     confirmationDescription.value = 'We’ve sent the link to reset your password';
     endpointUrl.value = props.reseturl;
@@ -186,21 +186,21 @@ const sendSetupEmail = () => {
       </section>
 
       <div class="tw-flex tw-flex-col tw-w-full tw-items-center">
-        <EmailForm v-if="currentForm === 'login-email'" :emailError="emailError"
-          :hassessionstatus="hassessionstatus" :sessionstatus="sessionstatus" :emailInput="emailInput"
-          :userStore="userStore" :isLoading="isLoading" :orderNowUrl="orderNowUrl" @email-change="handleEmailChange"
-          @validate-email="validateEmail" />
-        <PasswordForm v-if="currentForm === 'login-password'" :emailInput="emailInput"
-          :passwordError="passwordError" :hassessionstatus="hassessionstatus" :sessionstatus="sessionstatus"
-          :userStore="userStore" :isPasswordVisible="isPasswordVisible" :isLoading="isLoading"
-          :isButtonDisabled="isButtonDisabled" @password-change="handlePasswordChange" @button-click="handleButtonClick"
-          @toggle-password="toggleSeePassword" @change-form="changeCurrentForm" />
+        <EmailForm v-if="currentForm === 'login-email'" :emailError="emailError" :hassessionstatus="hassessionstatus"
+          :sessionstatus="sessionstatus" :emailInput="emailInput" :userStore="userStore" :isLoading="isLoading"
+          :orderNowUrl="orderNowUrl" @email-change="handleEmailChange" @validate-email="validateEmail" />
+        <PasswordForm v-if="currentForm === 'login-password'" :emailInput="emailInput" :passwordError="passwordError"
+          :hassessionstatus="hassessionstatus" :sessionstatus="sessionstatus" :userStore="userStore"
+          :isPasswordVisible="isPasswordVisible" :isLoading="isLoading" :isButtonDisabled="isButtonDisabled"
+          @password-change="handlePasswordChange" @button-click="handleButtonClick"
+          @change-confirmation-screen="changeConfirmationScreen" @toggle-password="toggleSeePassword"
+          @change-form="changeCurrentForm" />
         <ResetForm v-if="currentForm === 'reset'" :emailInput="emailInput" :reseturl="reseturl"
-          :usecsrftoken="usecsrftoken" :userStore="userStore" @email-change="handleEmailChange" @change-confirmation-screen="changeConfirmationScreen"
-          @change-form="changeCurrentForm" />
+          :usecsrftoken="usecsrftoken" :userStore="userStore" @email-change="handleEmailChange"
+          @change-confirmation-screen="changeConfirmationScreen" @change-form="changeCurrentForm" />
         <EmailConfirmation v-if="currentForm === 'email-confirm'" :emailInput="emailInput" :endpointUrl="endpointUrl"
-          :usecsrftoken="usecsrftoken" :userStore="userStore" :confirmationTitle="confirmationTitle" :confirmationDescription="confirmationDescription"
-          @change-form="changeCurrentForm" />
+          :usecsrftoken="usecsrftoken" :userStore="userStore" :confirmationTitle="confirmationTitle"
+          :confirmationDescription="confirmationDescription" @change-form="changeCurrentForm" @show-notification="showNotification" />
       </div>
     </div>
   </div>
