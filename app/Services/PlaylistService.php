@@ -66,7 +66,7 @@ class PlaylistService
                         ->first() ?? $items->first();
                 $nextItem           = $nextIncompleteItem['user_playlist_item_id'] ?? null;
             }
-        }else{
+        } else {
             $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlistId, [], 1, 1);
 
             $nextItem = $playlistItems->first() ? $playlistItems->first()['user_playlist_item_id'] : null;
