@@ -42,6 +42,7 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "@units/InputLabel/InputLabel.vue";
 import LoginButton from "@units/Button/LoginButton.vue";
@@ -71,4 +72,8 @@ function handleButtonClick() {
 function toggleSeePassword() {
     emit('toggle-password');
 }
+
+onMounted(() => {
+    document.getElementById('loginPassword').focus();
+});
 </script>

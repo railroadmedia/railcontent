@@ -21,6 +21,7 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import axios from 'axios';
 import InputLabel from "@units/InputLabel/InputLabel.vue";
 import LoginButton from "@units/Button/LoginButton.vue";
@@ -48,4 +49,8 @@ function handleButtonClick(e) {
             console.log('Error sending email', e);
         });
 }
+
+onMounted(() => {
+    document.getElementById('resetEmail').focus();
+});
 </script>

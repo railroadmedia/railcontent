@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "@units/InputLabel/InputLabel.vue";
 import LoginButton from "@units/Button/LoginButton.vue";
@@ -71,6 +71,10 @@ const constantTexts = {
     ctaLoadingText: 'CREATING ACCOUNT...',
   },
 };
+
+onMounted(() => {
+    document.getElementById('newPassword').focus();
+});
 </script>
 
 <template>

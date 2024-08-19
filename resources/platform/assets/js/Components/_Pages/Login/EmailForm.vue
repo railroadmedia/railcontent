@@ -33,6 +33,7 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import InputLabel from "@units/InputLabel/InputLabel.vue";
 import LoginButton from "@units/Button/LoginButton.vue";
 import LoadingSpinner from "@units/LoadingSpinner/LoadingSpinner.vue";
@@ -56,4 +57,8 @@ function handleEmailChange(value) {
 function validateEmail() {
     emit('validate-email');
 }
+
+onMounted(() => {
+    document.getElementById('loginEmail').focus();
+});
 </script>
