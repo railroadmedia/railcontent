@@ -5,20 +5,19 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Rejoin Drumeo and save on your membership.</title>
-    <meta property="og:title" content="Rejoin Drumeo and save on your membership.">
-    <meta property="og:url" content="https://www.drumeo.com/welcome-back-discount">
+    <title>Rejoin Pianote and save on your membership.</title>
+    <meta property="og:title" content="Rejoin Pianote and save on your membership.">
+    <meta property="og:url" content="https://www.pianote.com/welcome-back-discount">
 
     <meta name="description" content="Save $60/year + 2 bonuses worth $254!">
     <meta property="og:description" content="Save $60/year + 2 bonuses worth $254!">
 
-    <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .tool:after, .tool:before {
@@ -80,9 +79,36 @@
         }
 
         .splide__arrow svg {
-            fill: #0B76DB !important;
+            fill: #f61a30 !important;
         }
 
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -5px;
+            margin-bottom: -5px;
+        }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+            border-color:#f61a30!important;
+            background-color:#4a0c12 !important;
+        }
+        .option-buttons.active .radio-check {
+            border-color:#f61a30!important;
+            background-color:#f61a30!important;
+        }
+        .option-buttons.active .radio-check i {
+            display:block!important;
+        }
+        @endif
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
@@ -97,7 +123,7 @@
 @endsection
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav", [
+    @include("pianote.sales.partials._nav", [
         "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "hideMenu" => true,
