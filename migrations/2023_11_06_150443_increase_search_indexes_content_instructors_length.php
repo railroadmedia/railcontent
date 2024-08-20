@@ -13,12 +13,14 @@ class IncreaseSearchIndexesContentInstructorsLength extends Migration
      */
     public function up()
     {
-        Schema::connection(config('railcontent.database_connection_name'))->table(
-            config('railcontent.table_prefix') . 'search_indexes',
-            function (Blueprint $table) {
-                $table->string('content_instructors', 128)->change();
-            }
-        );
+        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
+            Schema::connection(config('railcontent.database_connection_name'))->table(
+                config('railcontent.table_prefix') . 'search_indexes',
+                function (Blueprint $table) {
+                    $table->string('content_instructors', 128)->change();
+                }
+            );
+        }
     }
 
 
@@ -30,11 +32,13 @@ class IncreaseSearchIndexesContentInstructorsLength extends Migration
      */
     public function down()
     {
-        Schema::connection(config('railcontent.database_connection_name'))->table(
-            config('railcontent.table_prefix') . 'search_indexes',
-            function (Blueprint $table) {
-                $table->string('content_instructors', 64)->change();
-            }
-        );
+        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
+            Schema::connection(config('railcontent.database_connection_name'))->table(
+                config('railcontent.table_prefix') . 'search_indexes',
+                function (Blueprint $table) {
+                    $table->string('content_instructors', 64)->change();
+                }
+            );
+        }
     }
 }

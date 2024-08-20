@@ -132,11 +132,6 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
 
-        $this->elasticService = $this->app->make(ElasticService::class);
-        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name', 'content'));
-
-        $this->elasticService->createContentIndex();
-
         Carbon::setTestNow(Carbon::now());
 
         //call the ContentPermissionsMiddleware
