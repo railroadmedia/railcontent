@@ -44,7 +44,6 @@
                     <h6 class="leading-normal my-4 sm:my-6">
                         The 15 Rudiments You Actually Need To<br class="sm:hidden">
                         Know (And How To Learn Them Quickly)</h6>
-                    <h6 class="leading-normal text-musora">LAUNCH SPECIAL</h6>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['easy-rudiments-book']->price) > floatval($productPrices['easy-rudiments-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['easy-rudiments-book']->price) }}</s>
@@ -194,7 +193,6 @@
                     <h6 class="leading-normal my-4 sm:my-6">
                         The 15 Rudiments You Actually Need To<br class="sm:hidden">
                         Know (And How To Learn Them Quickly)</h6>
-                    <h6 class="leading-normal text-musora">LAUNCH SPECIAL</h6>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['easy-rudiments-book']->price) > floatval($productPrices['easy-rudiments-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['easy-rudiments-book']->price) }}</s>
