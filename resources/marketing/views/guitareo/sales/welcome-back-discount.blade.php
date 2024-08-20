@@ -1,24 +1,23 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/guitareo/_partials/homepage-data.php'));
 @endphp
 
-@extends('drumeo._partials.global-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('global-head')
     <title>Rejoin {{ ucfirst($theme) }} and save on your membership.</title>
     <meta property="og:title" content="Rejoin {{ ucfirst($theme) }} and save on your membership.">
-    <meta property="og:url" content="https://www.drumeo.com/welcome-back-discount">
+    <meta property="og:url" content="https://www.guitareo.com/welcome-back-discount">
 
-    <meta name="description" content="Save $60/year + 2 bonuses worth $254!">
-    <meta property="og:description" content="Save $60/year + 2 bonuses worth $254!">
+    <meta name="description" content="Save $60/year + free bonus worth $97!">
+    <meta property="og:description" content="Save $60/year + free bonus worth $97">
 
-    <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/share-image-guitareo.webp"/>
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .tool:after, .tool:before {
@@ -80,9 +79,40 @@
         }
 
         .splide__arrow svg {
-            fill: #0B76DB !important;
+            fill: #00c9ac !important;
         }
 
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -5px;
+            margin-bottom: -5px;
+        }
+
+        .header-slide-btn {
+            display: none !important;
+        }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+            border-color:#00c9ac!important;
+            background-color:#0c4a41 !important;
+        }
+        .option-buttons.active .radio-check {
+            border-color:#00c9ac!important;
+            background-color:#00c9ac!important;
+        }
+        .option-buttons.active .radio-check i {
+            display:block!important;
+        }
+        @endif
         .splide__slide.is-active .active-bg {
             background-color:#1B2434!important;
             color:#fff!important;
@@ -97,31 +127,31 @@
 @endsection
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav", [
+    @include("guitareo.sales.partials._nav", [
         "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "hideMenu" => true,
     ])
     <header class="text-center px-5 sm:px-6 py-16 sm:py-24 lg:py-32 relative overflow-hidden text-white bg-cover bg-center"
-        style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/header.webp');">
+        style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/header.webp');">
         <div class="container max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl leading-none sm:leading-none lg:leading-none uppercase">
-                <strong class="relative inline-block">EVERYTHING
-                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#0b76db" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#0b76db" stroke-width="3" stroke-linecap="round"></path></svg>
+                <strong class="relative inline-block">THE NEW WAY
+                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#00c9ac" stroke-width="3" stroke-linecap="round"></path></svg>
                 </strong>
-                YOU NEED <br class="hidden sm:inline">
-                TO LEARN THE DRUMS.
+                TO <br class="hidden sm:inline">
+                LEARN GUITAR.
             </h1>
             <h6 class="font-bold my-5 sm:my-6"><em>Reach your musical goals with {{ ucfirst($theme) }}.</em></h6>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
                 <i class="fas fa-check text-{{ $theme }}"></i> Song Breakdowns
-                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> Unlimited Drum Lessons
+                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> Unlimited Guitar Lessons
                 <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> Legendary Instructors
                 <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> 24/7 Support
             </p>
 
-            <a class="join {{ $theme }} smaller sm:w-5/12 mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">SEE YOUR DEAL</a>
+            <a class="join smaller sm:w-5/12 mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">SEE YOUR DEAL</a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -142,8 +172,8 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[60%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1.webp" media="(min-width: 640px)">
-                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1.webp" alt="Handy Practice Tools" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/1.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/1.webp" alt="Handy Practice Tools" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
                             </picture>
                             <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>1</strong></h5>
@@ -157,14 +187,14 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[80%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3.webp" media="(min-width: 640px)">
-                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3.webp" alt="Step-By-Step Clarity" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/3.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/3.webp" alt="Step-By-Step Clarity" class="w-full h-full object-cover rounded-xl transition-opacity" onload="this.classList.remove('opacity-0')">
                             </picture>
                             <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>3</strong></h5>
                                 <div class="pl-3">
                                     <h5 class="leading-tight"><strong>Be First To Know</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">Get free access to all our latest drum challenges.</p>
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">Get free access to all our latest guitar challenges.</p>
                                 </div>
                             </div>
                         </div>
@@ -174,8 +204,8 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] sm:pb-[80%] overflow-hidden text-white relative w-full rounded-xl opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2.webp" media="(min-width: 640px)">
-                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2.webp" alt="World-Class Teachers" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/2.webp" media="(min-width: 640px)">
+                                <img x-ref="image" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/2.webp" alt="World-Class Teachers" class="w-full h-full object-cover rounded-xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
                             </picture>
                             <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start">
                                 <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>2</strong></h5>
@@ -213,7 +243,7 @@
                             <h5 class="rounded-full border-2 border-{{$theme}} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>5</strong></h5>
                             <div class="pl-3">
                                 <h5 class="leading-tight"><strong>Learn New Instruments</strong></h5>
-                                <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">Taking a break from drums? Try Piano, Guitar, or Singing lessons anytime.</p>
+                                <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">Taking a break on the guitar? Try Drums, Piano, or Singing lessons anytime.</p>
                             </div>
                         </div>
                     </div>
@@ -224,29 +254,29 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
             <h2 class="leading-tight font-black">{{ ucfirst($theme) }} Membership Special Pricing</h2>
-            <p class="leading-tight mt-2 mb-6">Get one year of unlimited drum lessons, including:</p>
+            <p class="leading-tight mt-2 mb-6">Get one year of unlimited guitar lessons, including:</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1guided.webp" alt="Guided Lessons" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/1guided.webp" alt="Guided Lessons" class="w-full rounded-xl mb-4">
                     <h4><i class="text-{{$theme}} fal fa-video mb-2"></i></h4>
                     <h5 class="font-black mb-2">Guided Lessons</h5>
-                    <p class="leading-normal">Step-by-step lessons and practice alongs so you can play along with your teacher in real time.</p>
+                    <p class="leading-normal">Step-by-step lessons and practice alongs so you can strum along with your teacher in real time.</p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2songs.webp" alt="Songs" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/2songs.webp" alt="Songs" class="w-full rounded-xl mb-4">
                     <h4><i class="text-{{$theme}} fal fa-music mb-2"></i></h4>
                     <h5 class="font-black mb-2">Songs</h5>
                     <p class="leading-normal">Note-for-note breakdowns with the ability to slow things down, loop sections, and use a metronome.</p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3real-teachers.webp" alt="Real Teachers" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/3real-teachers.webp" alt="Real Teachers" class="w-full rounded-xl mb-4">
                     <h4><i class="text-{{$theme}} fal fa-users mb-2"></i></h4>
                     <h5 class="font-black mb-2">Real Teachers</h5>
-                    <p class="leading-normal">Your favorite drummers and teachers will share their tips, cheer you along, and help you learn by drumming!</p>
+                    <p class="leading-normal">Your favorite teachers will share their tips, cheer you along, and help you learn by playing!</p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4mentors.webp" alt="Supportive Mentors" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/4mentors.webp" alt="Supportive Mentors" class="w-full rounded-xl mb-4">
                     <h4><i class="text-{{$theme}} fal fa-handshake-angle mb-2"></i></h4>
                     <h5 class="font-black mb-2">Supportive Mentors</h5>
                     <p class="leading-normal">Ask your most pressing music questions, personalized practice plans & feedback on your playing!</p>
@@ -255,52 +285,52 @@
         </div>
     </section>
     @php
-        $testimonials = $drumeo['testimonials'];
-        $youtube = convertNumber(Prices::$drumeoYoutubeSubsc);
-        $facebook = convertNumber(Prices::$drumeoFacebookLikes);
-        $instagram = convertNumber(Prices::$drumeoInstagramFollowers);
+        $testimonials = $guitareo['testimonials'];
+        $youtube = number_format(Prices::$guitareoYoutubeSubsc);
+        $facebook = number_format(Prices::$guitareoFacebookLikes);
+        $instagram = number_format(Prices::$guitareoInstagramFollowers);
     @endphp
 
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'drummers',
-        'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'facebookLink' => 'https://facebook.com/drumeo/',
-        'instagramLink' => 'https://instagram.com/drumeoofficial/',
+        'header' => 'guitarists',
+        'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
+        'facebookLink' => 'https://facebook.com/guitareoofficial/',
+        'instagramLink' => 'https://instagram.com/guitareoofficial/',
     ])
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
+        'badge' => 'marketing/guitareo/membership/homepage/2024/guitareo-guarantee.webp',
         'header' => '<strong>Happy “Welcome Back” Guarantee</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'More than anything we want to make sure you have a POSITIVE experience developing new skills and gaining confidence when you rejoin Drumeo. Which is why you’ll have 90 days risk-free to try everything again and make sure you love it. ',
+        'desc' => 'More than anything we want to make sure you have a POSITIVE experience developing new skills and gaining confidence when you rejoin Guitareo. Which is why you’ll have 90 days risk-free to try everything again and make sure you love it. ',
     ])
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="leading-tight font-black">Drum lessons for all skill levels</h2>
-            <p class="leading-tight mt-2 mb-6">Whatever your level, {{ ucfirst($theme) }} will help you reach your goals.</p>
+            <h2 class="leading-tight font-black">Guitar lessons for all skill levels</h2>
+            <p class="leading-tight mt-2 mb-6">Whatever your level, {{ ucfirst($theme) }} can support you.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-left">
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/1aspiring.webp" alt="Aspiring Drummer" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/1aspiring.webp" alt="Aspiring Student" class="w-full rounded-xl mb-4">
                     <p class="leading-normal">
-                        If you're an <strong>aspiring drummer with no experience</strong> but eager to learn the drums, we’ll start you off with the basics (even if you don’t own a drum set yet!).
+                        If you're an <strong>aspiring guitarist with no experience</strong> but eager to learn, we’ll start you off with basic chords and strumming patterns.
                     </p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/2beginner.webp" alt="Beginner Drummer" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/2beginner.webp" alt="Beginner Student" class="w-full rounded-xl mb-4">
                     <p class="leading-normal">
-                        If you're a <strong>beginner drummer</strong> who wants to improve, our guided workouts, fun challenges, and step-by-step method will fast-track your playing.
+                        If you're a <strong>beginner guitarist</strong> who wants to improve, our guided workouts, fun challenges, and step-by-step method will fast-track your playing.
                     </p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/3intermediate.webp" alt="Intermediate Drummer" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/3intermediate.webp" alt="Intermediate Student" class="w-full rounded-xl mb-4">
                     <p class="leading-normal">
-                        If you're an <strong>intermediate drummer</strong> who practices & performs regularly but needs something to fit your busy schedule, we have tons of challenging content that will test your skills.
+                        If you're an <strong>intermediate guitarist</strong> who practices & performs regularly but needs something to fit your busy schedule, we have tons of challenging content that will test your skills.
                     </p>
                 </div>
                 <div class="">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/4expert.webp" alt="Expert Drummer" class="w-full rounded-xl mb-4">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/4expert.webp" alt="Expert Student" class="w-full rounded-xl mb-4">
                     <p class="leading-normal">
-                        If you're an <strong>expert drummer</strong> who wants to learn from some of the best in the world, we’ll make you sweat with workouts from world-renowned drummers and a song library full of complex grooves.
+                        If you're an <strong>expert guitarist</strong> who wants to learn from some of the best in the world, we’ll give you calluses with lessons from expert guitarists and a song library full of complex riffs & chords.
                     </p>
                 </div>
             </div>
@@ -315,11 +345,11 @@
             <h2 class="leading-tight mb-5"><strong>Rejoin {{ ucfirst($theme) }} and save<br> on your membership.</strong></h2>
             <div id="plusOptions" class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto" x-bind:class="{ 'hidden': !plusMembershipSelected }">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true&promo-code=welcomeMonth" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2  border-white " aria-label="Monthly Plan">
+                    <a href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&locked=true&promo-code=welcomeMonth" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2  border-white " aria-label="Monthly Plan">
                         <div class="bg-white px-3 py-5 md:py-7">
                             <h2 class="mb-1"><strong>Monthly</strong></h2>
                             <p class="leading-tight text-sm"><em>No bonuses.</em></p>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/monthly.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
+                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/monthly.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
                             <h3 class="inline-block leading-tight"><strong>$15</strong></h3><p class="inline-block leading-tight">/per month</p>
                             <p class="text-sm"><em>For your first 6 months, then $30/month.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
@@ -327,16 +357,15 @@
                     </a>
                 </div>
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=welcome-back" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo" aria-label="Plan">
+                    <a href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&locked=true&promo-code=welcome-back" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{$theme}}" aria-label="Plan">
                         <div class="bg-white px-3 py-6 md:py-9">
                             <h2 class="mb-1"><strong>Annual</strong></h2>
-                            <p class="leading-tight text-sm"><em>+ 2 Bonuses Worth $254</em></p>
-                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/annual2.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
+                            <p class="leading-tight text-sm"><em>+ Free Bonus Worth $97</em></p>
+                            <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/guitareo/membership/welcome-back/annually.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
                             <h3 class="inline-block leading-tight"><s class="opacity-50">$240</s> <strong>$180</strong></h3>
                             <p class="text-sm"><em>For your first year, then $240/yr.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
-                            <p class="text-sm mb-1.5"><strong>FREE</strong> 30-Day Chops</p>
-                            <p class="text-sm"><strong>FREE</strong> 30-Day Drummer</p>
+                            <p class="text-sm"><strong>FREE</strong> 30 Days To Better Strumming</p>
                         </div>
                     </a>
                 </div>
@@ -345,7 +374,7 @@
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer")
+    @include("guitareo.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

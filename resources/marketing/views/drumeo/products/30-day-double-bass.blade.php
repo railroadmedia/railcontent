@@ -4,11 +4,11 @@
     @parent
     <title>30-Day Double Bass With 66Samus | Drumeo</title>
     <meta property="og:title" content="30-Day Double Bass With 66Samus | Drumeo">
-    <meta name="description" content="Improve your coordination with daily guided workouts.">
-    <meta property="og:description" content="Unlock your creativity and speed around the drums.">
-    <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-double-bass/share-image.jpg"
-        style="display: none;">
+
+    <meta name="description" content="Unlock your foot speed & control on the drums.">
+    <meta property="og:description" content="Unlock your foot speed & control on the drums.">
+
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-double-bass/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -32,6 +32,7 @@
 @section('body-data')
     x-data ="{
     trailer : false,
+    trailerM : false,
     }"
 @endsection
 

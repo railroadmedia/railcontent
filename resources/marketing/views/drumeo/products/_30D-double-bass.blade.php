@@ -31,7 +31,11 @@
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
+                        @if(empty($platformVersion))
+                            x-on:click="trailerM = true;"
+                        @else
                             x-on:click="trailer = true;"
+                        @endif
                     >
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -117,7 +121,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 29th</span>
+                            <span class="text-sm"> September 2nd to<br class="hidden md:inline"> September 30th</span>
                         </p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
@@ -141,7 +145,7 @@
 
     <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your foot speed &<br> control on the drums.</strong></h2>
             @php
             if (empty($platformVersion)) {
                 $gettings = [
@@ -455,7 +459,7 @@
                     <tr>
                         <td>Investment</td>
                         <td class="rounded-b-xl">
-                            <strong>${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong><br>
+                            <strong>$97</strong><br>
                             <span class="text-xs">Single Payment</span></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
                                     Lesson</span></td>
@@ -529,29 +533,29 @@
     </section>
 
     @if(empty($platformVersion))
-    <section class="text-center text-white px-5 sm:px-4 lg:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
-        <div class="container max-w-6xl mx-auto mb-24 sm:mb-36 lg:mb-48">
+    <section class="text-center text-white px-5 sm:px-4 lg:px-6 py-12 sm:py-16 lg:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #063F75 100%);">
+        <div class="container max-w-5xl mx-auto mb-10 sm:mb-20 lg:mb-32">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-start lg:items-center">
                 <img class="h-56 lg:h-96 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/pearl-demonator.png">
-                <div class="sm:pl-6 lg:pl-7 sm:order-1 text-left">
-                    <h3 class="leading-tight mb-4"><strong>Join with the most popular double pedal.</strong></h3>
-                    <p class="leading-tight mb-4">The right tools are essential to your craft.
+                <div class="mt-5 sm:mt-0 sm:pl-6 lg:pl-7 sm:order-1 text-left">
+                    <h3 class="leading-tight mb-4"><strong>No pedal? No problem.</strong></h3>
+                    <p class="leading-tight mb-5">The right tools are essential to your craft.
                     <br><br>
                     That’s why we’ve partnered with Pearl to bring you the highest-rated beginner double bass pedal bundled with 30-Day Double Bass.
                         <br><br>
                     The Pearl P932 Demonator has premium-quality features at an entry-level price point:</p>
                     <ul class="list-disc ml-6">
-                        <li><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
-                        <li><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
-                        <li><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
+                        <li class="leading-tight mb-3"><strong>Single-chain drive</strong> for a lightweight, responsive action so you can develop speed and control in your playing.</li>
+                        <li class="leading-tight mb-3"><strong>A longer footboard</strong> gives you more room to experiment with different techniques and find what works best for you.</li>
+                        <li class="leading-tight"><strong>Interchangeable cam</strong> and <strong>adjustable beater angle</strong> let you find the perfect settings for a natural feel and response.</li>
                     </ul>
 
-                    <div class="w-full flex flex-wrap sm:flex-nowrap justify-between mt-4 sm:mt-6">
-                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
-                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
-                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
-                        <img class="h-10 lg:h-12 m-3 sm:m-0 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
+                    <div class="w-full flex justify-between mt-6 sm:mt-7">
+                        <img class="h-7 sm:h-10 lg:h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/sweetwater.webp">
+                        <img class="h-7 sm:h-10 lg:h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/thomann.webp">
+                        <img class="h-7 sm:h-10 lg:h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/amazon.webp">
+                        <img class="h-7 sm:h-10 lg:h-12 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/long-mcquade.webp">
                     </div>
                 </div>
             </div>
@@ -623,7 +627,7 @@
                     <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
                         @include('drumeo.products.partials._order-card', [
                             'threeWide' => true,
-                            'badge' => 'FREE QuietKick: <s class="opacity-80">100</s> ' . $products['drumeo_access_5-years']->getPublicStockCount() . ' left!',
+                            'badge' => 'FREE QuietKick: <s class="opacity-80">100</s> 98 left!',
                             'header' => 'Course<br> Only',
                             'subheader' => '30-Day Double Bass<br> + 2 Bonuses Worth $109',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
@@ -681,7 +685,8 @@
                         ])
 
                     </div>
-
+                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true">
+                <p><u><em><strong>Don't want any physical bonuses?</strong> <br class="hidden sm:inline"> Click here to  join 30-Day Double Bass only.</em></u></p></a>
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
@@ -707,6 +712,12 @@
     </section>
     @endif
     @if(empty($platformVersion))
+        @include('_partials.components.video-modal', [
+            'name' => 'trailerM',
+            'video' => '999638868',
+            'vimeo' => true,
+            'styles' => 'pb-[177%] bg-white',
+        ])
         @include('_partials.components.video-modal', [
             'name' => 'trailer',
             'video' => '995963955',
