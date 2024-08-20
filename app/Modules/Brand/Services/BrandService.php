@@ -44,7 +44,7 @@ class BrandService
         }
     }
 
-    public static function getLastUsedBrand(User $user = null): string
+    public static function getLastUsedBrand(User $user = null): string|null
     {
         if (!empty(self::$currentBrand)) {
             return self::$currentBrand;

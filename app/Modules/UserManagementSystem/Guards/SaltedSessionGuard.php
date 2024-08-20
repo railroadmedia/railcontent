@@ -125,7 +125,7 @@ class SaltedSessionGuard extends SessionGuard
     /**
      * @param AuthenticatableContract|User $user
      */
-    public function login(AuthenticatableContract|User $user, bool $remember = false)
+    public function login(AuthenticatableContract $user, $remember = false)
     {
         $this->updateSession($user->getAuthIdentifier());
 

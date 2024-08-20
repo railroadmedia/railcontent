@@ -10,10 +10,10 @@ return [
     ],
 
     'providers' => [
-            'user-management-system' => [
-                'driver' => 'user-management-system',
-                'model' => \Modules\UserManagementSystem\Models\User::class,
-            ],
+        'user-management-system' => [
+            'driver' => 'user-management-system',
+            'model' => \Modules\UserManagementSystem\Models\User::class,
+        ],
     ],
 
     'passwords' => [
@@ -25,4 +25,7 @@ return [
         ],
     ],
 
+    'defaults' => [
+        'guard' => 'user-management-system',
+    ],
 ];

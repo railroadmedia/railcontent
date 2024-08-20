@@ -631,12 +631,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 'remember_token';
     }
 
-    public function getRememberToken(): string
+    public function getRememberToken(): string|null
     {
         return $this->currentRememberToken;
     }
 
-    public function setRememberToken(string $value)
+    public function setRememberToken($value)
     {
         $this->currentRememberToken = $value;
     }
@@ -992,5 +992,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'membership_level' => $this->membership_level,
             'membership_expiration_date' => $this->membership_expiration_date
         ];
+    }
+
+    public function getAuthPasswordName()
+    {
+        return 'password';
     }
 }

@@ -49,7 +49,7 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     /**
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
-    public function getPostById(int $postId)
+    public function getPostById($postId)
     {
         $postEntity = $this->postRepository->read($postId);
 
@@ -68,7 +68,7 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     /**
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
-    public function getThreadById(int $threadId)
+    public function getThreadById($threadId)
     {
         return $this->threadRepository->read($threadId);
     }

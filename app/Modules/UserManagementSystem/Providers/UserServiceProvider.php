@@ -60,7 +60,7 @@ class UserServiceProvider extends EloquentUserProvider
     /**
      * @param mixed $identifier
      */
-    public function retrieveByToken($identifier, string $token): ?User
+    public function retrieveByToken($identifier, $token): ?User
     {
         $user = $this->retrieveById($identifier);
 
@@ -83,7 +83,7 @@ class UserServiceProvider extends EloquentUserProvider
     /**
      * @param Authenticatable|User $user
      */
-    public function updateRememberToken(Authenticatable|User $user, string $token): bool
+    public function updateRememberToken(Authenticatable $user, $token): bool
     {
         $rememberToken = new RememberToken();
 

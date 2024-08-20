@@ -96,11 +96,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SessionDomains::class);
 
         $middleware->group('web_public', [
-            \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
@@ -114,11 +112,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->group('web_authenticated', [
-            \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
@@ -139,7 +135,6 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->group('api_public', [
-            \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -153,7 +148,6 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->group('api_authenticated', [
-            \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
