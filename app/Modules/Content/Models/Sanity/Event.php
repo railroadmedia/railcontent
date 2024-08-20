@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 
 /**
  * Defines the schema structure for a Event document type in Sanity.
@@ -34,7 +35,7 @@ class Event extends BaseSanityModel
                 'slug',
                 group:$detailsGroup,
                 options:['source' => 'name'],
-                validation: "(rule) => rule.required().error(`This event needs a slug so we can sell tickets.`)",
+                validation: [new Required(errorMessage: 'This event needs a slug so we can sell tickets.')],
             ),
             new Field(FieldType::String, 'eventType', group:$detailsGroup, options:['list' => ['in-person', 'virtual'],
                 'layout' => 'radio']),
@@ -45,14 +46,14 @@ class Event extends BaseSanityModel
                 'venue',
                 to:'venue',
                 group:$detailsGroup,
-                validation: "(rule) =>
-        rule.custom((value, context) => {
-          if (value && context?.document?.eventType === 'virtual') {
-            return 'Only in-person events can have a venue'
-          }
-
-          return true
-        })",
+                //         validation: "(rule) =>
+                // rule.custom((value, context) => {
+                //   if (value && context?.document?.eventType === 'virtual') {
+                //     return 'Only in-person events can have a venue'
+                //   }
+                //
+                //   return true
+                // })",
                 readOnly: "({value, document}) => !value && document?.eventType === 'virtual'"
             ),
             new Field(FieldType::Reference, 'headline', to:'artist', group:$detailsGroup),

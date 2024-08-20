@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
@@ -30,7 +31,7 @@ class Method extends BaseSanityModel
         $blockList = new Block();
         $video               = new ListObject(
             fields: [
-                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: "(rule) => rule.required()"),
+                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
                         new Field(FieldType::String, 'external_id')
                     ],
         );
@@ -64,7 +65,7 @@ class Method extends BaseSanityModel
         ];
 
         $fields  = [
-            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group: $detailsGroup),
+            new Field(FieldType::String, 'title', validation: [new Required()], group: $detailsGroup),
             new Field(
                 FieldType::Slug,
                 'slug',

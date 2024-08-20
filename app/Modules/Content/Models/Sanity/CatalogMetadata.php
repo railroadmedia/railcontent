@@ -4,10 +4,9 @@ namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
-use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListArrayElement;
-use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * Defines the schema structure for a Catalogue Metadata document type in Sanity.
@@ -23,7 +22,7 @@ class CatalogMetadata extends BaseSanityModel
     public function __construct()
     {
         $fields = [
-            new Field(FieldType::String, 'catalog_type', validation: "(rule) => rule.required()"),
+            new Field(FieldType::String, 'catalog_type', validation: [new Required()]),
             new BrandField(),
             new Field(FieldType::String, 'groq_results', title:'Fields that should be returned:'),
             new Field(FieldType::Array, 'groq_search_fields', title:'Search in fields:', of: new ListArrayElement()),

@@ -8,6 +8,9 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
@@ -30,7 +33,7 @@ class PlayAlong extends BaseSanityContentTypeModel
         $blockList = new Block();
         $video               = new ListObject(
             fields: [
-                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: "(rule) => rule.required()"),
+                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
                         new Field(FieldType::String, 'external_id')
                     ],
         );
@@ -58,7 +61,7 @@ class PlayAlong extends BaseSanityContentTypeModel
         ];
 
         $fields  = [
-            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group: $detailsGroup),
+            new Field(FieldType::String, 'title', validation: [new Required()], group: $detailsGroup),
             new Field(
                 FieldType::Slug,
                 'slug',
@@ -74,12 +77,12 @@ class PlayAlong extends BaseSanityContentTypeModel
             new Field(
                 FieldType::Number,
                 'difficulty',
-                validation:     "rule => rule.min(0).max(10)",
+                validation:     [new Min(0), new Max(10)],
                 inputComponent: 'DifficultyInput',
                 group: $detailsGroup
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
-            new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group: $detailsGroup),
+            new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 

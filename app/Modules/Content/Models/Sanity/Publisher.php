@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
@@ -26,8 +27,8 @@ class Publisher extends BaseSanityModel
         );
 
         $fields = [
-            new Field(FieldType::String, 'name', validation: BaseSanityModel::RULE_REQUIRED),
-            new Field(FieldType::Array, 'child', "Children", of: $childrenList, validation: BaseSanityModel::RULE_REQUIRED),
+            new Field(FieldType::String, 'name', validation: [new Required()]),
+            new Field(FieldType::Array, 'child', "Children", of: $childrenList, validation: [new Required()]),
         ];
         $isAdmin = user()?->isAdmin() ?? false;
         $isAdmin = true;

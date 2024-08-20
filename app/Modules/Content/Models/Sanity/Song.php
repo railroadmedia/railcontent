@@ -7,6 +7,9 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
+use Carbon\Carbon;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
@@ -45,7 +48,7 @@ class Song extends BaseSanityContentTypeModel
         $defaultFields = $this->getCommonFields($detailsGroup, includeDescription: false);
 
         $fields = [
-            new Field(FieldType::Number, 'released', 'Year Released', validation: "rule => rule.min(0).max(new Date().getFullYear())", group:$detailsGroup),
+            new Field(FieldType::Number, 'released', 'Year Released', group: $detailsGroup, validation: [new Min(0), new Max(Carbon::today()->year)]),
             new Field(FieldType::String, 'released_year_ai', 'Year Released AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::String, 'genre_ai', 'Genre AI', inputComponent: 'OpenAiInput', group:$openAIGroup),

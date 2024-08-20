@@ -4,61 +4,63 @@ namespace App\Modules\Content\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\CatalogMetadata;
+use App\Modules\Content\Models\Sanity\Challenge;
+use App\Modules\Content\Models\Sanity\ChallengePart;
 use App\Modules\Content\Models\Sanity\CoachStream;
+use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\CoursePart;
+use App\Modules\Content\Models\Sanity\Creativity;
+use App\Modules\Content\Models\Sanity\Enums\Workspace;
+use App\Modules\Content\Models\Sanity\Essential;
 use App\Modules\Content\Models\Sanity\Foundation;
+use App\Modules\Content\Models\Sanity\Genre;
+use App\Modules\Content\Models\Sanity\Instructor;
+use App\Modules\Content\Models\Sanity\License;
+use App\Modules\Content\Models\Sanity\Lifestyle;
 use App\Modules\Content\Models\Sanity\Method;
 use App\Modules\Content\Models\Sanity\Pack;
 use App\Modules\Content\Models\Sanity\PackBundle;
 use App\Modules\Content\Models\Sanity\PackBundleLesson;
+use App\Modules\Content\Models\Sanity\Permission;
+use App\Modules\Content\Models\Sanity\PlayAlong;
 use App\Modules\Content\Models\Sanity\PlayAlongPart;
+use App\Modules\Content\Models\Sanity\Publisher;
+use App\Modules\Content\Models\Sanity\QuickTip;
+use App\Modules\Content\Models\Sanity\Routine;
+use App\Modules\Content\Models\Sanity\Rudiment;
 use App\Modules\Content\Models\Sanity\SemesterPack;
 use App\Modules\Content\Models\Sanity\SemesterPackLesson;
 use App\Modules\Content\Models\Sanity\Shows\Archive;
-use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Shows\BackstageSecret;
 use App\Modules\Content\Models\Sanity\Shows\BehindTheScenes;
 use App\Modules\Content\Models\Sanity\Shows\BootCamp;
-use App\Modules\Content\Models\Sanity\Challenge;
-use App\Modules\Content\Models\Sanity\ChallengePart;
 use App\Modules\Content\Models\Sanity\Shows\Challenges;
-use App\Modules\Content\Models\Sanity\Course;
-use App\Modules\Content\Models\Sanity\CoursePart;
-use App\Modules\Content\Models\Sanity\Creativity;
 use App\Modules\Content\Models\Sanity\Shows\Diy;
 use App\Modules\Content\Models\Sanity\Shows\DrumFestInternational2022;
-use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Shows\ExploringBeats;
 use App\Modules\Content\Models\Sanity\Shows\GearGuide;
-use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Shows\InRhythm;
-use App\Modules\Content\Models\Sanity\Instructor;
-use App\Modules\Content\Models\Sanity\Lifestyle;
 use App\Modules\Content\Models\Sanity\Shows\Live;
 use App\Modules\Content\Models\Sanity\Shows\OnTheRoad;
+use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
 use App\Modules\Content\Models\Sanity\Shows\Performance;
-use App\Modules\Content\Models\Sanity\Permission;
-use App\Modules\Content\Models\Sanity\PlayAlong;
 use App\Modules\Content\Models\Sanity\Shows\Podcast;
 use App\Modules\Content\Models\Sanity\Shows\QuestionAndAnswer;
-use App\Modules\Content\Models\Sanity\QuickTip;
 use App\Modules\Content\Models\Sanity\Shows\RhythmicAdventuresOfCaptainCarson;
-use App\Modules\Content\Models\Sanity\Routine;
-use App\Modules\Content\Models\Sanity\Rudiment;
+use App\Modules\Content\Models\Sanity\Shows\RhythmsFromAnotherPlanet;
 use App\Modules\Content\Models\Sanity\Shows\Solo;
-use App\Modules\Content\Models\Sanity\Song;
-use App\Modules\Content\Models\Sanity\Essential;
-use App\Modules\Content\Models\Sanity\SongTutorial;
 use App\Modules\Content\Models\Sanity\Shows\Sonor;
 use App\Modules\Content\Models\Sanity\Shows\Spotlight;
 use App\Modules\Content\Models\Sanity\Shows\StudentCollaboration;
-use App\Modules\Content\Models\Sanity\SongTutorialChildren;
-use App\Modules\Content\Models\Sanity\StudentFocus;
 use App\Modules\Content\Models\Sanity\Shows\StudyTheGreats;
 use App\Modules\Content\Models\Sanity\Shows\Tama;
 use App\Modules\Content\Models\Sanity\Shows\TheHistoryOfElectronicDrums;
-use App\Modules\Content\Models\Sanity\Shows\RhythmsFromAnotherPlanet;
-use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
+use App\Modules\Content\Models\Sanity\Song;
+use App\Modules\Content\Models\Sanity\SongTutorial;
+use App\Modules\Content\Models\Sanity\SongTutorialChildren;
+use App\Modules\Content\Models\Sanity\StudentFocus;
 use App\Modules\Content\Models\Sanity\Theory;
 use App\Modules\Content\Models\Sanity\Topic;
 use App\Modules\Content\Models\Sanity\Venue;
@@ -66,8 +68,6 @@ use App\Modules\Content\Models\Sanity\Workout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Modules\Content\Models\Sanity\License;
-use App\Modules\Content\Models\Sanity\Publisher;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\PermissionService;
 
@@ -172,8 +172,8 @@ class SanityStudioCMSController extends BaseController
         ];
 
         $workspaces = [
-            $marketing,
-            $publishing
+            $publishing,
+            $marketing
         ];
 
         return response()->view(
