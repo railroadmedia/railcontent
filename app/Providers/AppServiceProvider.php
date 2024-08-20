@@ -188,15 +188,6 @@ class AppServiceProvider extends ServiceProvider
     public function bootRoute(): void
     {
         $subDomain = current(explode('.', request()->getHost()));
-        //dd($subDomain);
-        /*
-         * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
-         */
-        Route::pattern('musoraDomain', '(.*musora\.com)');
-        Route::pattern('drumeoDomain', '(.*drumeo\.com)');
-        Route::pattern('pianoteDomain', '(.*pianote\.com)');
-        Route::pattern('guitareoDomain', '(.*guitareo\.com)');
-        Route::pattern('singeoDomain', '(.*singeo\.com)');
 
         URL::defaults(['musoraDomain' => !empty($subDomain) ? $subDomain . '.musora.com' : 'musora.com']);
         URL::defaults(['drumeoDomain' => !empty($subDomain) ? $subDomain . '.drumeo.com' : 'drumeo.com']);
@@ -204,41 +195,5 @@ class AppServiceProvider extends ServiceProvider
         URL::defaults(['guitareoDomain' => !empty($subDomain) ? $subDomain . '.guitareo.com' : 'guitareo.com']);
         URL::defaults(['singeoDomain' => !empty($subDomain) ? $subDomain . '.singeo.com' : 'singeo.com']);
         URL::defaults(['brand' => 'musora']);
-
-
-        Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
-        Route::group([], base_path('routes/routes.php')); // not actually needed
-        Route::group([], base_path('routes/misc/manifest_files_routes.php'));
-        Route::group([], base_path('routes/misc/mobile_app_store_api_keys_json_routes.php'));
-        Route::group([], base_path('routes/misc/sitemap_routes.php'));
-        Route::group([], base_path('routes/platform/platform_pages_routes.php'));
-        Route::group([], base_path('routes/misc/admin_routes.php'));
-
-        Route::group([], base_path('routes/musora/marketing/order-form.php'));
-        Route::group([], base_path('routes/musora/marketing/login.php'));
-        Route::group([], base_path('routes/musora/marketing/product.php'));
-        Route::group([], base_path('routes/musora/marketing/other.php'));
-        Route::group([], base_path('routes/musora/marketing/cohort-packs.php'));
-        Route::group([], base_path('routes/musora/platform/home.php'));
-        Route::group([], base_path('routes/musora/platform/search.php'));
-
-
-        Route::group([], base_path('routes/drumeo/sales.php'));
-        Route::group([], base_path('routes/drumeo/shop.php'));
-        Route::group([], base_path('routes/drumeo/lead-gen.php'));
-
-        Route::group([], base_path('routes/guitareo/sales.php'));
-        Route::group([], base_path('routes/guitareo/shop.php'));
-        Route::group([], base_path('routes/guitareo/lead-gen.php'));
-
-        Route::group([], base_path('routes/pianote/sales.php'));
-        Route::group([], base_path('routes/pianote/shop.php'));
-        Route::group([], base_path('routes/pianote/lead-gen.php'));
-
-        Route::group([], base_path('routes/singeo/sales.php'));
-        Route::group([], base_path('routes/singeo/shop.php'));
-        Route::group([], base_path('routes/singeo/lead-gen.php'));
-
-        Route::group([], base_path('routes/misc/http_error_code_routes.php'));
     }
 }

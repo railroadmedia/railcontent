@@ -11,8 +11,13 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $sm = Schema::getConnection()->getDoctrineSchemaManager();
-            $indexesFound = $sm->listTableIndexes('usora_users');
+            // Get all the indexes on the table
+            $indexes = DB::select("SHOW INDEXES FROM usora_users");
+
+            // Convert the result to an associative array for easier handling
+            $indexesFound = collect($indexes)->groupBy('Key_name')->map(function ($item) {
+                return collect($item)->pluck('Column_name')->toArray();
+            })->toArray();
 
             $toRemove = [
                 'usora_users_access_level_index',
