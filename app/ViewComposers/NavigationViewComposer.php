@@ -33,7 +33,7 @@ class NavigationViewComposer
     public function compose(View $view): void
     {
         if (!empty(self::$viewDataCache)) {
-            return self::$viewDataCache;
+            return;
         }
 
         $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;

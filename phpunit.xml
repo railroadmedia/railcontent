@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         colors="true"
->
-    <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-            <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Unit</directory>
-            <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Unit</directory>
-            <directory suffix="Test.php">./app/Modules/MusoraApi/tests/V5/Unit</directory>
-            <directory suffix="Test.php">./app/Modules/EventTracking/tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./app/Modules/Brand/tests/Feature</directory>
-            <directory suffix="Test.php">./app/Modules/Mentor/tests/Feature</directory>
-            <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Feature</directory>
-            <directory suffix="Test.php">./app/Modules/Content/tests/Feature</directory>
-            <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Feature</directory>
-            <directory suffix="Test.php">./app/Modules/FeatureFlagging/tests/Feature</directory>
-        </testsuite>
-    </testsuites>
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./app</directory>
-        </include>
-        <exclude>
-            <directory>./app/Modules/Content/views</directory>
-            <directory>./app/Modules/HelpScout/views</directory>
-            <directory>./app/Modules/MusoraCenter</directory>
-            <directory>./app/Modules/UserManagementSystem/views/emails</directory>
-        </exclude>
-    </coverage>
-    <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_STORE" value="array"/>
-        <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql_sqlite_testing"/>
-        <env name="DB_MYSQL_DRIVER" value="pdo_sqlite"/>
-        <env name="DB_MYSQL_IN_MEMORY" value="true"/>
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="PULSE_ENABLED" value="false"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
-        <env name="APP_URL" value="https://testing.musora.com"/>
-    </php>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+      <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Unit</directory>
+      <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Unit</directory>
+      <directory suffix="Test.php">./app/Modules/MusoraApi/tests/V5/Unit</directory>
+      <directory suffix="Test.php">./app/Modules/EventTracking/tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">./app/Modules/Brand/tests/Feature</directory>
+      <directory suffix="Test.php">./app/Modules/Mentor/tests/Feature</directory>
+      <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Feature</directory>
+      <directory suffix="Test.php">./app/Modules/Content/tests/Feature</directory>
+      <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Feature</directory>
+      <directory suffix="Test.php">./app/Modules/FeatureFlagging/tests/Feature</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql_sqlite_testing"/>
+    <env name="DB_MYSQL_DRIVER" value="pdo_sqlite"/>
+    <env name="DB_MYSQL_IN_MEMORY" value="true"/>
+    <env name="MAIL_MAILER" value="array"/>
+    <env name="PULSE_ENABLED" value="false"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
+    <env name="APP_URL" value="https://testing.musora.com"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+    <exclude>
+      <directory>./app/Modules/Content/views</directory>
+      <directory>./app/Modules/HelpScout/views</directory>
+      <directory>./app/Modules/MusoraCenter</directory>
+      <directory>./app/Modules/UserManagementSystem/views/emails</directory>
+    </exclude>
+  </source>
 </phpunit>

@@ -2,22 +2,12 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use Whitecube\NovaFlexibleContent\Layouts\Collection;
-use Illuminate\Support\Collection;
 use App\Models\Feature;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class FeatureResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
-    public function get($resource, string $attribute, Collection $layouts): Collection
+    public function get($resource, $attribute, $layouts)
     {
         $features = $resource->features()->get();
 
@@ -35,19 +25,11 @@ class FeatureResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, string $attribute, Collection $groups): string
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
+        $class::saved(function ($resource) use ($groups) {
             $features = $groups->map(function ($group, $index) {
                 return [
                     'desc' => $group->getAttributes()['desc'],
@@ -78,7 +60,7 @@ class FeatureResolver implements ResolverInterface
                     $updatedIds[] = $feature['id'];
                 } elseif(!empty($feature['desc'])) {
                     $addFeature = new Feature();
-                    $addFeature->product_id = $model['id'];
+                    $addFeature->product_id = $resource['id'];
                     $addFeature->desc = $feature['desc'];
                     $addFeature->order_number = $feature['order_number'];
                     $addFeature->save();
@@ -88,7 +70,7 @@ class FeatureResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)) {
-                $deleteIds = Feature::where('product_id', '=', $model['id'])
+                $deleteIds = Feature::where('product_id', '=', $resource['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }
         });

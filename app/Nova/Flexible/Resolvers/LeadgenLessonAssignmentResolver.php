@@ -2,24 +2,13 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use Whitecube\NovaFlexibleContent\Layouts\Collection;
-use Illuminate\Support\Collection;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAssignment;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
-use Illuminate\Support\Facades\Storage;
 
 class LeadgenLessonAssignmentResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return \Illuminate\Support\Collection
-     */
-    public function get($resource, string $attribute, Collection $layouts): Collection
+    public function get($resource, $attribute, $layouts)
     {
         $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
         if(!$lesson) {
@@ -48,15 +37,7 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  \Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, string $attribute, Collection $groups): string
+    public function set($resource, $attribute, $groups)
     {
 
         $assignments = $groups->map(function ($group, $index) {
@@ -73,7 +54,7 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
             //insert
             if(is_null($assignment['id'])) {
                 $addAssignment = new LeadgenLessonAssignment();
-                $addAssignment->leadgen_lesson_id = $model->id;
+                $addAssignment->leadgen_lesson_id = $resource->id;
                 $addAssignment->title = $assignment['title'];
                 $addAssignment->subtitle = $assignment['subtitle'];
                 $addAssignment->src = $assignment['src'];
@@ -107,6 +88,6 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
         }
 
         //delete
-        $deleteAssignments = LeadgenLessonAssignment::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+        $deleteAssignments = LeadgenLessonAssignment::where('leadgen_lesson_id', $resource['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
     }
 }

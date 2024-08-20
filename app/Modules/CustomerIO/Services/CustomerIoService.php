@@ -114,7 +114,7 @@ class CustomerIoService
     /**
      * @throws Exception
      */
-    public function getCustomerEventsByUserId(string $accountName, string $userId, int $limit = 25, int $amountToSkip = 0): Customer
+    public function getCustomerEventsByUserId(string $accountName, string $userId, int $limit = 25, int $amountToSkip = 0): array
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -745,7 +745,7 @@ class CustomerIoService
         $accountName,
         $deviceData,
         $createdAtTimestamp = null
-    ): Customer {
+    ): Customer|null {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -772,7 +772,7 @@ class CustomerIoService
             return $customer;
         }
 
-        return;
+        return null;
     }
 
     /**

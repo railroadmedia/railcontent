@@ -2,8 +2,6 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use Whitecube\NovaFlexibleContent\Layouts\Collection;
-use Illuminate\Support\Collection;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
 use Illuminate\Support\Facades\Storage;
@@ -11,15 +9,7 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class LeadgenLessonResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return \Illuminate\Support\Collection
-     */
-    public function get($resource, string $attribute, Collection $layouts): Collection
+    public function get($resource, $attribute, $layouts)
     {
         $lessons = $resource->lessons()->get();
 
@@ -49,20 +39,12 @@ class LeadgenLessonResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  \Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, string $attribute, Collection $groups): string
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
-            $lessons = $groups->map(function ($group, $index) use ($model) {
+        $class::saved(function ($resource) use ($groups) {
+            $lessons = $groups->map(function ($group, $index) use ($resource) {
                 return [
                     'title' => $group->getAttributes()['title'],
                     'caption' => $group->getAttributes()['caption'],
@@ -85,7 +67,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     }
 
                     $addLesson = new LeadgenLesson();
-                    $addLesson->leadgen_id = $model['id'];
+                    $addLesson->leadgen_id = $resource['id'];
                     $addLesson->title = $lesson['title'];
                     $addLesson->caption = $lesson['caption'];
                     $addLesson->desc = $lesson['desc'];
@@ -145,7 +127,7 @@ class LeadgenLessonResolver implements ResolverInterface
             }
 
             //delete items
-            $deleteLessons = LeadgenLesson::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
+            $deleteLessons = LeadgenLesson::where('leadgen_id', $resource['id'])->whereNotIn('id', $updatedIds ?? []);
             if(count($deleteLessons->get()) > 0) {
                 foreach($deleteLessons->get() as $id) {
                     Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/', '', $id->thumbnail));

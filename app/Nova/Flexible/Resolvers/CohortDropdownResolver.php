@@ -2,22 +2,12 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use Whitecube\NovaFlexibleContent\Layouts\Collection;
-use Illuminate\Support\Collection;
 use App\Models\CohortDropdown;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class CohortDropdownResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return \Illuminate\Support\Collection
-     */
-    public function get($resource, string $attribute, Collection $layouts): Collection
+    public function get($resource, $attribute, $layouts)
     {
         $dropdowns = $resource->dropdowns()->get();
 
@@ -36,19 +26,11 @@ class CohortDropdownResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  \Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, string $attribute, Collection $groups): string
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
+        $class::saved(function ($resource) use ($groups) {
             $dropdowns = $groups->map(function ($group, $index) {
                 return [
                     'title' => $group->getAttributes()['title'],
@@ -75,7 +57,7 @@ class CohortDropdownResolver implements ResolverInterface
                     $updatedIds[] = $dropdown['id'];
                 } else {
                     $addDropdown = new CohortDropdown();
-                    $addDropdown->cohort_id = $model['id'];
+                    $addDropdown->cohort_id = $resource['id'];
                     $addDropdown->title = $dropdown['title'];
                     $addDropdown->description = $dropdown['description'];
                     $addDropdown->save();
@@ -85,7 +67,7 @@ class CohortDropdownResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)) {
-                $deleteIds = CohortDropdown::where('cohort_id', '=', $model['id'])
+                $deleteIds = CohortDropdown::where('cohort_id', '=', $resource['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }
         });

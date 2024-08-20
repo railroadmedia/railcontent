@@ -2,8 +2,6 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use Whitecube\NovaFlexibleContent\Layouts\Collection;
-use Illuminate\Support\Collection;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
@@ -11,15 +9,7 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class LeadgenLessonAssetResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return \Illuminate\Support\Collection
-     */
-    public function get($resource, string $attribute, Collection $layouts): Collection
+    public function get($resource, $attribute, $layouts)
     {
         $assets = [];
         if(!empty($resource['meta_desc'])) {
@@ -58,15 +48,7 @@ class LeadgenLessonAssetResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  \Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, string $attribute, Collection $groups): string
+    public function set($resource, $attribute, $groups)
     {
         $assets = $groups->map(function ($group, $index) {
             return [
@@ -79,10 +61,10 @@ class LeadgenLessonAssetResolver implements ResolverInterface
 
         foreach($assets as $asset) {
             //insert
-            if(is_null($asset['id']) && !is_null(empty($model['id']))) {
+            if(is_null($asset['id']) && !is_null(empty($resource['id']))) {
                 $addAsset = new LeadgenLessonAsset();
-                $addAsset->leadgen_id = !empty($model['meta_desc']) ? $model['id'] : null;
-                $addAsset->leadgen_lesson_id = empty($model['meta_desc']) ? $model['id'] : null;
+                $addAsset->leadgen_id = !empty($resource['meta_desc']) ? $resource['id'] : null;
+                $addAsset->leadgen_lesson_id = empty($resource['meta_desc']) ? $resource['id'] : null;
                 $addAsset->title = $asset['title'];
                 $addAsset->src = $asset['src'];
                 $addAsset->soundslice = $asset['soundslice'];
@@ -111,10 +93,10 @@ class LeadgenLessonAssetResolver implements ResolverInterface
         }
 
         //delete
-        if(!empty($model['brand_id'])) {
-            $deleteAssets = LeadgenLessonAsset::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+        if(!empty($resource['brand_id'])) {
+            $deleteAssets = LeadgenLessonAsset::where('leadgen_id', $resource['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
         } else {
-            $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+            $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $resource['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
         }
     }
 }
