@@ -27,6 +27,7 @@ abstract class ParentTemplate extends BaseSanityModel
         public string $name,
         public string $title,
         public string|bool $childType = false,
+        public ?string $childName = null,
         public bool $withResources = false,
         public bool $withLogos = false,
         public bool $withEnrollment = false,
@@ -98,7 +99,7 @@ abstract class ParentTemplate extends BaseSanityModel
         if($this->childType) {
             $childReference = new Reference([['type' => $this->childType]]);
             $fields = array_merge($fields, [
-                new Field(FieldType::Array, 'child', 'Lessons', of: $childReference, group:$detailsGroup)
+                new Field(FieldType::Array, 'child', ($this->childName ?? 'Lessons'), of: $childReference, group:$detailsGroup)
             ]);
         }
         if($this->withLogos) {
