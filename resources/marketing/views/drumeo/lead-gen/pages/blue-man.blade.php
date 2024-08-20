@@ -7,7 +7,7 @@
     <meta name="description" content="SAVE 30% on tickets in 4 US cities">
     <meta property="og:description" content="SAVE 30% on tickets in 4 US cities">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/image.webp" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -26,21 +26,19 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <section class="py-12 sm:py-14 lg:py-20 px-4 text-center" style="background: linear-gradient(0deg, #FFF2D4, #3EC8FF);">
+    <section class="py-12 sm:py-14 lg:py-20 px-4 text-center text-white bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/header-bg.webp');">
         <div class="container max-w-5xl mx-auto">
-            <img style="height:500px;" src="https://placehold.co/630x500/EEE/31343C">
-{{--            <img style="height:550px;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp">--}}
+            <img class="mx-auto w-full max-w-lg" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1260x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/header.webp">
             <p class="uppercase leading-tight text-drumeo tracking-widest mt-7">Exclusive drumeo member offer</p>
-            <h2 class="leading-tight font-black my-2">SAVE 30% on tickets in 4 US cities</h2>
-            <p class="leading-tight mb-7">Available August 26 to October 29.</p>
+            <h2 class="leading-tight font-black my-2"><span class="text-drumeo">SAVE 30%</span> on tickets in 4 US cities</h2>
+            <p class="leading-tight mb-5">Available August 20 to October 29.</p>
             <a class="anchor-slide join drumeo smaller" href="#final">Select Your City</a>
         </div>
     </section>
     <section class="px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <img class="w-full sm:w-auto h-auto sm:h-96 sm:rounded-xl" src="https://placehold.co/580x600/EEE/31343C">
-{{--                <img class="w-full sm:w-auto h-auto sm:h-96 sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp">--}}
+                <img class="w-full sm:w-auto h-auto sm:h-96 sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1160x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/image.webp">
                 <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-10 mt-7 sm:mt-0 sm:order-1">
                     <h3 class="leading-tight mb-4"><strong>Drums, world-class performances, the color blue…</strong></h3>
                     <p class="leading-normal">The Blue Man Group and Drumeo have too much in common to NOT combine forces. 
@@ -56,8 +54,8 @@
         </div>
     </section>
     <div id="final" class="anchor"></div>
-    <section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFF8EB;">
-        <div class="max-w-5xl mx-auto">
+    <section class="py-10 sm:py-14 lg:py-20 text-white" style="background-color:#030A25;">
+        <div class="max-w-6xl mx-auto">
             <h2 class="text-center mb-7 sm:mb-10"><strong>Select a city to see your show</strong></h2>
             <div
                 x-data="{
@@ -83,35 +81,27 @@
                     },
                 }"
             >
-                <div x-ref="splide" class="splide mb-10">
+                <div x-ref="splide" class="splide mb-10 sm:px-16">
                     <div class="splide__track">
                         <ul class="splide__list items-start">
-                            {{--Boston
-                                Chicago
-                                New York
-                                Vegas--}}
                             <li class="splide__slide px-2">
-                                <a href="https://www.ticketmaster.com/promo/0h4pq7">
-                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
-{{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
+                                <a target="_blank" class="hover:opacity-70 transition-opacity" href="https://www.ticketmaster.com/promo/0h4pq7">
+                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/boston.webp" alt="city" />
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="https://www.ticketmaster.com/promo/3h9jow">
-                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
-{{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
+                                <a target="_blank" class="hover:opacity-70 transition-opacity" href="https://www.ticketmaster.com/promo/3h9jow">
+                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/chicago.webp" alt="city" />
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="https://www.ticketmaster.com/promo/ellnle">
-                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
-{{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
+                                <a target="_blank" class="hover:opacity-70 transition-opacity" href="https://www.ticketmaster.com/promo/ellnle">
+                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/new-york.webp" alt="city" />
                                 </a>
                             </li>
                             <li class="splide__slide px-2">
-                                <a href="https://luxor.mgmresorts.com/redirect/show-offer-id/EntOffer_558265">
-                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://placehold.co/450x450/EEE/31343C" alt="city" />
-{{--                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/header.webp" alt="city" />--}}
+                                <a target="_blank" class="hover:opacity-70 transition-opacity" href="https://luxor.mgmresorts.com/redirect/show-offer-id/EntOffer_558265">
+                                    <img class="rounded-xl transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/las-vegas.webp" alt="city" />
                                 </a>
                             </li>
                         </ul>
