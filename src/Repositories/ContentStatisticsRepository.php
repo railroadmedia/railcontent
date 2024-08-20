@@ -739,30 +739,30 @@ EOT;
                                 $query->select($alias . '.content_id')
                                     ->from(ConfigService::$tableContentFields . ' AS ' . $alias)
                                     ->where(
-                                        DB::raw('LOWER(' . $alias . '.`key`)'),
+                                        rawQuery('LOWER(' . $alias . '.`key`)'),
                                         $key
                                     )
                                     ->whereIn(
-                                        DB::raw($alias . '.`value`'),
+                                        rawQuery($alias . '.`value`'),
                                         function($query) use ($value, $subAlias, $subJoinAlias) {
                                             $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->from(rawQuery(ConfigService::$tableContentFields . ' AS ' . $subAlias))
                                                 ->leftJoin(
-                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    DB::raw($subJoinAlias . '.id'),
-                                                    DB::raw($subAlias . '.content_id')
+                                                    rawQuery(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    rawQuery($subJoinAlias . '.id'),
+                                                    rawQuery($subAlias . '.content_id')
                                                 )
                                                 ->where(
-                                                    DB::raw($subAlias . '.`key`'),
+                                                    rawQuery($subAlias . '.`key`'),
                                                     'name'
                                                 )
                                                 ->where(
-                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    rawQuery('LOWER(' . $subAlias . '.`value`)'),
                                                     'LIKE',
                                                     '%' . $value . '%'
                                                 )
                                                 ->where(
-                                                    DB::raw($subJoinAlias . '.type'),
+                                                    rawQuery($subJoinAlias . '.type'),
                                                     'instructor'
                                                 );
                                         }
@@ -774,11 +774,11 @@ EOT;
                                             $query->select('content_id')
                                                 ->from(ConfigService::$tableContentFields)
                                                 ->where(
-                                                    DB::raw('LOWER(`key`)'),
+                                                    rawQuery('LOWER(`key`)'),
                                                     $key
                                                 )
                                                 ->where(
-                                                    DB::raw('LOWER(`value`)'),
+                                                    rawQuery('LOWER(`value`)'),
                                                     'LIKE',
                                                     '%' . $value . '%'
                                                 );
@@ -793,30 +793,30 @@ EOT;
                                 $subQuery = DB::table(ConfigService::$tableContentFields)
                                     ->select('content_id')
                                     ->where(
-                                        DB::raw('LOWER(`key`)'),
+                                        rawQuery('LOWER(`key`)'),
                                         $key
                                     )
                                     ->whereIn(
                                         'value',
                                         function($query) use ($value, $subAlias, $subJoinAlias) {
                                             $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->from(rawQuery(ConfigService::$tableContentFields . ' AS ' . $subAlias))
                                                 ->leftJoin(
-                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    DB::raw($subJoinAlias . '.id'),
-                                                    DB::raw($subAlias . '.content_id')
+                                                    rawQuery(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    rawQuery($subJoinAlias . '.id'),
+                                                    rawQuery($subAlias . '.content_id')
                                                 )
                                                 ->where(
-                                                    DB::raw($subAlias . '.`key`'),
+                                                    rawQuery($subAlias . '.`key`'),
                                                     'name'
                                                 )
                                                 ->where(
-                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    rawQuery('LOWER(' . $subAlias . '.`value`)'),
                                                     'LIKE',
                                                     '%' . $value . '%'
                                                 )
                                                 ->where(
-                                                    DB::raw($subJoinAlias . '.type'),
+                                                    rawQuery($subJoinAlias . '.type'),
                                                     'instructor'
                                                 );
                                         }
@@ -833,11 +833,11 @@ EOT;
                                 $subQuery = DB::table(ConfigService::$tableContentFields)
                                     ->select('content_id')
                                     ->where(
-                                        DB::raw('LOWER(`key`)'),
+                                        rawQuery('LOWER(`key`)'),
                                         $key
                                     )
                                     ->where(
-                                        DB::raw('LOWER(`value`)'),
+                                        rawQuery('LOWER(`value`)'),
                                         'LIKE',
                                         '%' . $value . '%'
                                     );

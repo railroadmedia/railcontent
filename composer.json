@@ -39,7 +39,10 @@
     ],
     "psr-4": {
       "Railroad\\Railcontent\\": "src"
-    }
+    },
+    "files": [
+      "src/Helpers/railcontent_helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

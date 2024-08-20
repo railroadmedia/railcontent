@@ -44,11 +44,11 @@ class ContentQueryBuilder extends QueryBuilder
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {
-            $this->addSelect([DB::raw('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
+            $this->addSelect([rawQuery('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
         }
 
         if ($orderBy && $orderBy == 'progress') {
-            $this->addSelect([DB::raw(ConfigService::$tableUserContentProgress.'.updated_on ')]);
+            $this->addSelect([rawQuery(ConfigService::$tableUserContentProgress.'.updated_on ')]);
         }
 
         return $this;
@@ -325,7 +325,7 @@ class ContentQueryBuilder extends QueryBuilder
                         $builder->where(
                             $tableName.'.state',
                             '=',
-                            DB::raw(
+                            rawQuery(
                                 DB::connection()
                                     ->getPdo()
                                     ->quote($requiredUserState['state'])
@@ -385,7 +385,7 @@ class ContentQueryBuilder extends QueryBuilder
                     $builder->orWhere(
                         ConfigService::$tableUserContentProgress.'.state',
                         '=',
-                        DB::raw(
+                        rawQuery(
                             DB::connection()
                                 ->getPdo()
                                 ->quote($includedUserState['state'])
@@ -430,7 +430,7 @@ class ContentQueryBuilder extends QueryBuilder
                             'railcontent_content.' . $requiredFieldGroup['name'],
                             $requiredFieldGroup['operator'],
                             is_numeric($requiredFieldGroup['value']) ?
-                                DB::raw($requiredFieldGroup['value']) : DB::raw(
+                                rawQuery($requiredFieldGroup['value']) : rawQuery(
                                 DB::connection()
                                     ->getPdo()
                                     ->quote($requiredFieldGroup['value'])
@@ -458,8 +458,8 @@ class ContentQueryBuilder extends QueryBuilder
                                 '.' .
                                 $requiredFieldGroup['associated_table']['column'],
                                 $requiredFieldGroup['operator'],
-                                is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
-                                    DB::raw(
+                                is_numeric($requiredFieldGroup['value']) ? rawQuery($requiredFieldGroup['value']) :
+                                    rawQuery(
                                         DB::connection()
                                             ->getPdo()
                                             ->quote($requiredFieldGroup['value'])
@@ -519,7 +519,7 @@ class ContentQueryBuilder extends QueryBuilder
                             $builder->orwhere(
                                 'railcontent_content'.'.'.$field['name'],
                                 $field['operator'],
-                                is_numeric($field['value']) ? DB::raw($field['value']) : DB::raw(
+                                is_numeric($field['value']) ? rawQuery($field['value']) : rawQuery(
                                     DB::connection()
                                         ->getPdo()
                                         ->quote($field['value'])
@@ -539,7 +539,7 @@ class ContentQueryBuilder extends QueryBuilder
                                 $builder->orwhere(
                                     $field['associated_table']['alias'].$i.'.'.$field['associated_table']['column'],
                                     $field['operator'],
-                                    is_numeric($value) ? DB::raw($value) : DB::raw(
+                                    is_numeric($value) ? rawQuery($value) : rawQuery(
                                         DB::connection()
                                             ->getPdo()
                                             ->quote($value)
@@ -569,7 +569,7 @@ class ContentQueryBuilder extends QueryBuilder
                         'railcontent_content.'.$includedFieldDataGrouped[0]['name'],
                         $includedFieldDataGrouped[0]['operator'],
                         is_numeric($includedFieldDataGrouped[0]['value']) ?
-                            DB::raw($includedFieldDataGrouped[0]['value']) : DB::raw(
+                            rawQuery($includedFieldDataGrouped[0]['value']) : rawQuery(
                             DB::connection()
                                 ->getPdo()
                                 ->quote($includedFieldDataGrouped[0]['value'])
@@ -596,7 +596,7 @@ class ContentQueryBuilder extends QueryBuilder
                                 $includedFieldData['associated_table']['alias'] .
                                 '.' .
                                 $includedFieldData['associated_table']['column'],
-                                [DB::raw($includedFieldData['min']), DB::raw($includedFieldData['max'])]
+                                [rawQuery($includedFieldData['min']), rawQuery($includedFieldData['max'])]
                             );
                         }else {
                             $builder->orwhere(
@@ -604,8 +604,8 @@ class ContentQueryBuilder extends QueryBuilder
                                 '.'.
                                 $includedFieldData['associated_table']['column'],
                                 $includedFieldData['operator'],
-                                is_numeric($includedFieldData['value']) ? DB::raw($includedFieldData['value']) :
-                                    DB::raw(
+                                is_numeric($includedFieldData['value']) ? rawQuery($includedFieldData['value']) :
+                                    rawQuery(
                                         DB::connection()
                                             ->getPdo()
                                             ->quote($includedFieldData['value'])
@@ -764,7 +764,7 @@ class ContentQueryBuilder extends QueryBuilder
                     );
             });
             $this->orderByRaw(
-                DB::raw(
+                rawQuery(
                     implode(', ', $orderByColumns).' '.$orderDirection
                 )
             );
@@ -778,14 +778,14 @@ class ContentQueryBuilder extends QueryBuilder
             });
 
             $this->orderByRaw(
-                DB::raw(
+                rawQuery(
                     implode(', ', $orderByColumns).' '.$orderDirection
                 )
             );
             $this->groupBy(ConfigService::$tableContent.'.id');
         } else {
             $this->orderByRaw(
-                DB::raw(
+                rawQuery(
                     implode(', ', $orderByColumns).' '.$orderDirection.', '.ConfigService::$tableContent.'.id'.' '.$orderDirection
                 )
             );
@@ -878,7 +878,7 @@ class ContentQueryBuilder extends QueryBuilder
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as id'),
-                                 DB::raw(
+                                 rawQuery(
                                      "(
             GROUP_CONCAT(
             ".ConfigService::$tableContent.".id
@@ -911,7 +911,7 @@ class ContentQueryBuilder extends QueryBuilder
        $this->addSelect([
                              $this->raw($alias.'.'.$field.' as grouped_by_field'),
                              $this->raw($alias.'.'.$field.' as id'),
-                             DB::raw(
+                             rawQuery(
                                  "( 
            GROUP_CONCAT(
             ".$alias.".content_id      
@@ -967,7 +967,7 @@ class ContentQueryBuilder extends QueryBuilder
                     ->where(
                         'railcontent_content_statistics.start_interval',
                         '>=',
-                        DB::raw('DATE_SUB(NOW(), INTERVAL 3 MONTH)')
+                        rawQuery('DATE_SUB(NOW(), INTERVAL 3 MONTH)')
                     );
             })->orderByRaw($column . ' ' . $direction);
         }else{

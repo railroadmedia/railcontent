@@ -251,7 +251,7 @@ class UserPlaylistsRepository extends RepositoryBase
                             ->on(
                                 'c.position',
                                 '=',
-                                \DB::raw(
+                                rawQuery(
                                     '(select min(position) from '.
                                     config('railcontent.table_prefix').
                                     'user_playlist_content'.

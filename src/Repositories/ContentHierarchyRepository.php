@@ -53,7 +53,7 @@ class ContentHierarchyRepository extends RepositoryBase
                         '=',
                         ConfigService::$tableContentHierarchy.'.child_id'
                     );
-                    $join->on('railcontent_user_content_progress.user_id', '=', DB::raw($userId));
+                    $join->on('railcontent_user_content_progress.user_id', '=', rawQuery($userId));
                 }
             )
             ->whereIn('parent_id', $parentIds)
