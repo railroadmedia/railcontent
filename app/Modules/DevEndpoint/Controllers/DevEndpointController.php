@@ -14,6 +14,7 @@ use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RecommendationService;
+use Railroad\Railcontent\Support\Collection;
 
 class DevEndpointController extends Controller
 {
@@ -28,21 +29,13 @@ class DevEndpointController extends Controller
         private PermissionService $permissionService,
         private ContentPermissionService $contentPermissionService,
         private ContentPermissionRepository $contentPermissionRepository,
-        private UserPermissionsService $userPermissionsService,
-        private SubscriptionService $subscriptionService,
-        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
     }
 
     public function handleRequest(Request $request, $arg1 = null)
     {
-        $userId = $request->query('userid', false);
-        if ($userId) {
-            return $this->setUserToBasic($userId, $request->query('interval', null));
-        }
-        if ($arg1) {
-            return $this->updatePermissions($arg1);
-        }
+        return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
+        return $this->testCollection();
 
         $results = [
             'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'drumeo'),
@@ -56,9 +49,24 @@ class DevEndpointController extends Controller
         dd("hello from the playground");
     }
 
+    private function testCollection()
+    {
+        $collection = new Collection([['key1' => ['child1' => 'heelo']]]);// new Collection([['key1' => ['hello'], ['key1' =>['goodby']]]]);
+        //$collection2 = new Collection([['key1' => 'hello', ['key1' => 'goodby']);
+        foreach($collection as $index => $content) {
+            $t = $collection[$index]['key1'];
+            $t[] = 'hello2';
+            $collection[$index]['key1'] = $t;//[] = 'new value';
+        }
+        return true;
+    }
+
     private function testSanity()
     {
         $client = new SanityGateway();
+        return $client->getChildrenByRailcontentID(206303);
+        $documents = $client->getByRailContentIds([206303], includeParents: true);
+        return 'eehhh';
         $songId = 'drafts.ae22572b-6219-4d8f-ba6e-aaa86c29036a'; // Head like a hole
         $licenceId = 'drafts.044f865a-5e1d-4477-aa8a-7cc783acc903'; // Let it Be (test license
         $publisherId = 'drafts.9b7840ff-a2ff-4a85-bab3-589d94bda677'; //Disney on development

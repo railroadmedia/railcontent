@@ -67,6 +67,7 @@ import Search from './Components/_Pages/Search';
 import PackOverview from './Components/_Pages/PackOverview/PackOverview';
 import PackOverviewBundles from './Components/_Pages/PackOverviewBundles/PackOverviewBundles';
 import Login from './Components/_Pages/Login.vue';
+import DevEndpoint from "./Components/_Pages/DevEndpoint.vue";
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -255,6 +256,7 @@ app.component('AppContainer', AppContainer)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
+    .component('DevEndpoint', DevEndpoint)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
