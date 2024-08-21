@@ -7,6 +7,7 @@ use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
@@ -1075,4 +1076,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'membership_expiration_date' => $this->membership_expiration_date
         ];
     }
+    public function getActivePermissionsIds()
+    {
+        $userAccessPermissions = $this->userAccessPermissions()->getResults();
+        $userAccessPermissionsCollection = new UserAccessPermissionsCollection($this, $userAccessPermissions);
+        return array_values($userAccessPermissionsCollection->getActivePermissionIds());
+    }
+
 }
