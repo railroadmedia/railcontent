@@ -500,7 +500,7 @@
         <div class="container mx-auto max-w-5xl">
             <h2 class="mb-16 md:mb-12 text-black font-playfair"><strong>See how the Pianote BookBag <br class="sm:hidden">  compares. </strong></h2>
             <div class="relative">
-                <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}"  class="w-full mx-auto border-separate comparison eardrums earbuds">
                     <tbody style="background-color:transparent!important;">
                     <tr style="background-color:transparent!important;">
