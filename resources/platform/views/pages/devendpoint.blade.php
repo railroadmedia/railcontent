@@ -13,8 +13,10 @@
             window.railcontentConfig = {};
         </script>
         <div id="app" class="flex-1">
-            <dev-endpoint>
-            </dev-endpoint>
+            <dev-endpoint
+                results="{{ $results }}"
+                json_results="{{json_encode($json_results)}}"
+            ></dev-endpoint>
         </div>
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>

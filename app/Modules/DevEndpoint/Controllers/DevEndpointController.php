@@ -34,7 +34,7 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
-        return view("pages.devendpoint", ['results' => 'text here', 'user' => user()]);
+        return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
         return $this->testCollection();
 
         $results = [
