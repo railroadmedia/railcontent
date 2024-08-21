@@ -92,6 +92,7 @@ import VideoResources from './Libraries/Vuesora/Components/VideoResources/VideoR
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
 import Chatsora from './Libraries/Chatsora/Components/index';
 
+
 // Configuration object
 const config = {
     sanityConfig: {
