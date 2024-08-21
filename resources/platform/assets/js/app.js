@@ -30,8 +30,6 @@ const config = {
 // Initialize the service with the configuration
 initializeService(config);
 
-import {createPinia} from 'pinia';
-import {initializeService} from 'musora-content-services';
 //App Pages
 import Profile from './Components/_Pages/Settings/Profile.vue';
 import LoginCredentials from './Components/_Pages/Settings/LoginCredentials.vue';
@@ -113,27 +111,6 @@ import VideoResources from './Libraries/Vuesora/Components/VideoResources/VideoR
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
 import Chatsora from './Libraries/Chatsora/Components/index';
-
-
-// Configuration object
-const config = {
-    sanityConfig: {
-        token:'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
-        projectId:'4032r8py',
-        dataset:'staging',
-        version:'2021-06-07',
-        debug: false,
-        useCachedAPI: true
-      },
-      railcontentConfig: {
-        token: window.railcontentConfig.token,
-        userId:  window.railcontentConfig.userId,
-      }
-};
-
-// Initialize the service with the configuration
-initializeService(config);
-
 const eventBus = mitt();
 
 axios.defaults.withCredentials = true;
