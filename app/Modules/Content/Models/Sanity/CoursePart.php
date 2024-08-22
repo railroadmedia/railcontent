@@ -23,7 +23,7 @@ class CoursePart extends LessonTemplate
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
-                             new Field(FieldType::Reference, name: 'parent', title: 'Parent', hidden: "false", to: 'course', group:$detailsGroup, inputComponent: 'ResolveParentReference')
+                             new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'course'),
                          ]);
     }
 
