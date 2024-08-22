@@ -36,11 +36,11 @@ class EmailChange extends Notification
      * Get the notification's channels.
      *
      * @param  mixed $notifiable
-     * @return array|string
+     * @return array
      */
     public function via($notifiable): array
     {
-        return config('user_management_system.email_change_notification_channel');
+        return [config('user_management_system.email_change_notification_channel')];
     }
 
     /**

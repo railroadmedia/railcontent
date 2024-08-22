@@ -2,17 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class DynamicWebOrAppMiddlewareGroupsAuthenticated
 {
-    /**
-     * Handle an incoming request.
-     */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         if (!empty(request()->bearerToken())) {
             $classes = app('router')->getMiddlewareGroups()['api_authenticated'] ?? [];

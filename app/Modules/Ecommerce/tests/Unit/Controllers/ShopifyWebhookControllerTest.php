@@ -11,7 +11,6 @@ use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Tests\BaseTestCase;
 use Tests\TestCase;
 
 class ShopifyWebhookControllerTest extends TestCase

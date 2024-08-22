@@ -700,6 +700,10 @@ class UserController extends Controller
     {
         $isJson = request()->expectsJson();
 
+        if (auth()->id() !== (int) $id) {
+            $this->authorize('delete-users');
+        }
+
         $user = User::find($id);
         $userId = $user['id'];
 

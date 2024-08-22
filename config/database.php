@@ -5,12 +5,6 @@ use Illuminate\Support\Str;
 return [
 
     'connections' => [
-        'musora_laravel_mysql_sqlite_testing' => [
-            'driver'   => 'sqlite',
-            'database' => database_path('testing.sqlite'),
-            'prefix'   => '',
-        ],
-
         'musora_laravel_mysql' => [
             'driver' => 'mysql',
             'read' => [

@@ -4,10 +4,10 @@ namespace App\Modules\Ecommerce\tests\Unit\Jobs\Traits;
 
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use ReflectionException;
-use Tests\BaseTestCase;
+use Tests\TestCase;
 use Tests\traits\CreatesReflectionMethod;
 
-class HandlesMaskedEmailAddressTest extends BaseTestCase
+class HandlesMaskedEmailAddressTest extends TestCase
 {
     use CreatesReflectionMethod;
 

@@ -25,8 +25,6 @@ class SetLastUsedBrandTest extends TestCase
 
     public function test_brand_is_set(): void
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 

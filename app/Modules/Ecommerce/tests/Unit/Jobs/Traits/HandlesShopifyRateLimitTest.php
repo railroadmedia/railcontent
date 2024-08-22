@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use ReflectionException;
 use Signifly\Shopify\Shopify;
-use Tests\BaseTestCase;
+use Tests\TestCase;
 use Tests\traits\CreatesReflectionMethod;
 
-class HandlesShopifyRateLimitTest extends BaseTestCase
+class HandlesShopifyRateLimitTest extends TestCase
 {
     use CreatesReflectionMethod;
 

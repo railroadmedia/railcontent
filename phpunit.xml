@@ -21,14 +21,13 @@
     <env name="APP_ENV" value="testing"/>
     <env name="BCRYPT_ROUNDS" value="4"/>
     <env name="CACHE_STORE" value="array"/>
-    <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql_sqlite_testing"/>
-    <env name="DB_MYSQL_DRIVER" value="pdo_sqlite"/>
-    <env name="DB_MYSQL_IN_MEMORY" value="true"/>
+    <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql"/>
+    <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql"/>
+    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="mysql8"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="mysql8"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql"/>
+    <env name="DB_MYSQL_DRIVER" value="pdo_mysql"/>
     <env name="MAIL_MAILER" value="array"/>
     <env name="PULSE_ENABLED" value="false"/>
     <env name="QUEUE_CONNECTION" value="sync"/>

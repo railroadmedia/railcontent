@@ -71,17 +71,14 @@ class UserControllerTest extends UserManagementSystemTestCase
     ////        $this->assertEmpty(auth()->id());
     //    }
 
-
-
     public function test_user_delete_with_permission()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $userId = 1;
         $user = User::factory()->create([
             'id' => $userId,
             'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
+            'shopify_id' => null,
         ]);
 
         $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'delete-users']);
@@ -94,56 +91,81 @@ class UserControllerTest extends UserManagementSystemTestCase
             config('user_management_system.route_prefix') . '/user/delete/' . $userId
         );
 
+        $this->assertEquals(302, $response->getStatusCode());
 
-        // assert the user was not removed from the db
-        $this->assertDatabaseMissing(
-            'usora_users',
-            [
-                'id' => $userId,
-            ]
-        );
-    }
-
-
-
-    public function test_user_delete_without_permission()
-    {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
-        $userId = 1;
-
-        $user = User::factory()->create([
-            'email' => $this->faker->email(),
-            'password' => Hash::make($this->faker->words(3, true)),
-        ]);
-
-        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'create-users']);
-        $user->givePermissionTo($permission);
-
-        auth()->login($user);
-
-        $response = $this->call(
-            'DELETE',
-            config('user_management_system.route_prefix') . '/user/delete/' . $userId
-        );
-
-        // assert the response code is not found
-        $this->assertEquals(403, $response->getStatusCode());
-
-        // assert the user was not removed from the db
+        // assert the user was not fully deleted, but our special soft-delete logic was applied
         $this->assertDatabaseHas(
             'usora_users',
             [
                 'id' => $userId,
             ]
         );
+        $this->assertStringContainsString('deleted', $user->refresh()->email);
     }
 
+    public function test_user_delete_self()
+    {
+        $user = User::factory()->create([
+            'email' => $this->faker->email(),
+            'password' => Hash::make($this->faker->words(3, true)),
+            'shopify_id' => null,
+        ]);
+
+        auth()->login($user);
+
+        $response = $this->call(
+            'DELETE',
+            config('user_management_system.route_prefix') . '/user/delete/' . $user->id
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        // assert the user was not fully deleted, but our special soft-delete logic was applied
+        $this->assertDatabaseHas(
+            'usora_users',
+            [
+                'id' => $user->id,
+            ]
+        );
+        $this->assertStringContainsString('deleted', $user->refresh()->email);
+    }
+
+    public function test_user_delete_without_permission()
+    {
+        $user1 = User::factory()->create([
+            'email' => $this->faker->email(),
+            'password' => Hash::make($this->faker->words(3, true)),
+            'shopify_id' => null,
+        ]);
+
+        $user2 = User::factory()->create([
+            'email' => $this->faker->email(),
+            'password' => Hash::make($this->faker->words(3, true)),
+            'shopify_id' => null,
+        ]);
+
+        auth()->login($user2);
+
+        $response = $this->call(
+            'DELETE',
+            config('user_management_system.route_prefix') . '/user/delete/' . $user1->id
+        );
+
+        // assert the response code is not found
+        $this->assertEquals(403, $response->getStatusCode());
+
+        // assert the user was not fully deleted and that our special soft-delete logic was NOT applied
+        $this->assertDatabaseHas(
+            'usora_users',
+            [
+                'id' => $user1->id,
+            ]
+        );
+        $this->assertStringNotContainsString('deleted', $user1->refresh()->email);
+    }
 
     public function test_user_update_validation_fail()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $userId = 1;
 
         $user = User::factory()->create([
@@ -165,12 +187,8 @@ class UserControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(403, $response->getStatusCode());
     }
 
-
-
     public function test_users_store_with_permission()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
             'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
@@ -208,12 +226,8 @@ class UserControllerTest extends UserManagementSystemTestCase
         $response->assertSessionHas('success', true);
     }
 
-
-
     public function test_users_store_without_login()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $userData = [
             'display_name' => $this->faker->words(4, true),
             'email' => $this->faker->email(),
@@ -239,11 +253,8 @@ class UserControllerTest extends UserManagementSystemTestCase
         $this->assertFalse(auth()->attempt(['email' => $userData['email'], 'password' => $userData['password']]));
     }
 
-
     public function test_users_store_without_permission()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
             'email' => $this->faker->email(),
             'password' => Hash::make($this->faker->words(3, true)),
@@ -278,11 +289,8 @@ class UserControllerTest extends UserManagementSystemTestCase
         $this->assertFalse(auth()->attempt(['email' => $userData['email'], 'password' => $userData['password']]));
     }
 
-
     public function test_users_store_validation_fail()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $response = $this->call(
             'PUT',
             config('user_management_system.route_prefix') . '/user/store/',

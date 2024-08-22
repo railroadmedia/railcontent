@@ -2,11 +2,13 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
@@ -17,8 +19,6 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
     // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     public function test_request()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         Event::fake();
         Notification::fake();
 
@@ -115,8 +115,6 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
     public function test_confirmation()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
             'email' => $this->faker->email(),
             'password' => $this->faker->words(3, true),
@@ -135,11 +133,15 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
         $emailChange->save();
 
+        Event::fake();
+
         $response = $this->call(
             'GET',
             config('user_management_system.route_prefix') . '/email-change/confirm',
             ['code' => $myToken]
         );
+
+        Event::assertDispatched(UserUpdated::class);
 
         // assert the new email was saved in users table
         $this->assertDatabaseHas(
@@ -162,8 +164,6 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
     public function test_confirmation_validation_fail()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $user = User::factory()->create([
             'email' => $this->faker->email(),
             'password' => $this->faker->words(3, true),

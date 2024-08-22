@@ -6,10 +6,10 @@ use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use ReflectionException;
-use Tests\BaseTestCase;
+use Tests\TestCase;
 use Tests\traits\CreatesReflectionMethod;
 
-class LogsShopifyTest extends BaseTestCase
+class LogsShopifyTest extends TestCase
 {
     use CreatesReflectionMethod;
 

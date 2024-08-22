@@ -27,5 +27,6 @@ return [
 
     'defaults' => [
         'guard' => 'user-management-system',
+        'passwords' => 'users',
     ],
 ];
