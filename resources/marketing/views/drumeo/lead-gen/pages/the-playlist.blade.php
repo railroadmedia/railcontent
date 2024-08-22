@@ -110,9 +110,16 @@
 <body class="h-screen bg-musora-black text-white ">
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
-<section class="text-center flex items-center h-full w-full px-3 sm:px-4">
+<section class="text-center flex items-center h-full w-full px-2 sm:px-4">
     <div class="w-full max-w-4xl mx-auto">
-        <h5 class="leading-normal mb-3 md:mb-4">Artist-curated playlists & interviews delivered to your inbox each month.</h5>
+        <h1 class="font-bebas font-bold leading-none text-4xl sm:text-5xl">
+            <span class="hidden sm:inline">Get a new playlist & interview <br>delivered to your inbox every month!</span>
+            <span class="inline sm:hidden">Get a New Playlist &  <br> Interview every Month!</span>
+        </h1>
+        <h5 class="leading-normal mb-3 md:mb-4 opacity-70">
+            <span class="hidden sm:inline">And subscribe to enter a monthly draw for the chance<br> to win a $1000 gift card for new music gear!</span>
+            <span class="inline sm:hidden">+ Subscribe for a chance to win a $1000 <br>music gear gift card in our monthly draw!</span>
+        </h5>
         @include("drumeo.lead-gen.partials.sign-up-form", [
             "recaptchaKey" => $recaptchaKey,
             "formName" => 'The Playlist - Musora Newsletter',
