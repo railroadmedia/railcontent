@@ -345,8 +345,8 @@
                         <div class="bg-white px-3 py-5 md:py-7">
                             <h2 class=""><strong>Monthly</strong></h2>
                             <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/singeo/membership/welcome-back/monthly.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h3 class="inline-block leading-tight"><strong>$15</strong></h3><p class="inline-block leading-tight">/per month</p>
-                            <p class="text-sm"><em>For your first 6 months, then $30/month.</em></p>
+                            <h3 class="inline-block leading-tight"><s class="opacity-50">$30</s> <strong>$15</strong></h3>
+                            <p class="text-sm"><em>For your first month, then $30/month.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
                         </div>
                     </a>
