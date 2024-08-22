@@ -178,7 +178,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     /**
      * Returns a list of brands that the user is currently a member of.
      */
-    public function getBrandsUserIsAMemberOf(int $userId): array
+    public function getBrandsUserIsAMemberOf($userId): array
     {
         if (isset($this->brandsUserIsAMemberOfCache[$userId])) {
             return $this->brandsUserIsAMemberOfCache[$userId];

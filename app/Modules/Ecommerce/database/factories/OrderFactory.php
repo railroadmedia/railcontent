@@ -25,7 +25,6 @@ class OrderFactory extends Factory
         $shippingDue = 0.00;
         $taxesDue = round(($productDue + $shippingDue) * $this->taxRate, 2);
 
-        var_dump($productDue + $shippingDue + $taxesDue);
         return [
             'total_due' => $productDue + $shippingDue + $taxesDue,
             'product_due' => $productDue,
