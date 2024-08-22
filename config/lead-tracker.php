@@ -1780,7 +1780,7 @@ return [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
             'form_name' => 'The Playlist - Musora Newsletter',
-            'brand' => 'musora',
+            'brand' => 'drumeo',
 
             'input_data_map' => [
                 'email' => 'email',

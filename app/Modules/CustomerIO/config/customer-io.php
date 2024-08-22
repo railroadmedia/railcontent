@@ -67,15 +67,6 @@ return [
         // NOTE: brand changes dynamically based on the current domain
         'brand' => 'musora',
         'musora' => [
-            'The Playlist - Musora Newsletter' => [
-                'custom_attributes' => [],
-                'events' => [
-                    'Prospect Signed Up',
-                ],
-                'accounts_to_sync' => [
-                    'musora_prospects',
-                ],
-            ],
             'Free Music Lessons For Life' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
@@ -95,6 +86,15 @@ return [
             ],
         ],
         'drumeo' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
                 'events' => [
