@@ -365,7 +365,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             //->where('railcontent_content.id','=',198099)
             ->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875, 257259, 268071, 268094, 268097,268122,
                 23313, 23393, 23395, 29663,
-                410145, 331419])->get();
+                410145, 331419, 350720, 331265])->get();
 
         $songs = [];
         foreach ($results as $result) {
