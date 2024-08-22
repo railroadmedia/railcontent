@@ -17,21 +17,6 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     patch.execute([{ set: { child_count: props.draft.child.length } }]);
                 }
 
-                // Set parent reference for each child
-//                 if (props.draft.child && Array.isArray(props.draft.child)) {
-//                     let clean_id = props.id.replace(/^drafts\./, '')
-//                     for (const child of props.draft.child) {
-//                         console.log('roxana child::::', child,' parent::::', clean_id);
-//                         patch.execute([{ set: { parent: { _type: 'reference', _ref: clean_id } } }], child._id)
-//                             .then(response => {
-//                                 console.log('Parent reference set for child:', child._id, response);
-//                             })
-//                             .catch(error => {
-//                                 console.error('Error setting parent reference for child:', child._id, error);
-//                             });
-//                     }
-//                 }
-
                 // Fetch data from the external service
                 fetch(url, {
                     method: 'POST',

@@ -24,7 +24,6 @@ class SemesterPackLesson extends LessonTemplate
         // Add the reference to the parent course
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
-                             new Field(FieldType::Reference, name: 'parent', title: 'Parent', hidden: "false", to: 'semester-pack', group:$detailsGroup),
                              new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'semester-pack'),
                          ]);
     }
