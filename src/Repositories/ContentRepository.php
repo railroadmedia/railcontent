@@ -1496,9 +1496,6 @@ class ContentRepository extends RepositoryBase
                         ->getToArray();
             } else {
                 //Group by content's column: artist
-                $temp = $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
-                    ->directPaginate($this->page, $this->limit)
-                    ->orderGroupedContentsBy($this->orderBy, $this->orderDirection, ConfigService::$tableContent . '.id', $this->groupByFields['field']);
                 $contentRows =
                     $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
                         ->directPaginate($this->page, $this->limit)
