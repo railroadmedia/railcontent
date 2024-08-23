@@ -722,7 +722,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 }
             }
 
-            $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->get();
+            $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position','asc')->get();
             foreach ($contentHierarchy as $hierarchy) {
                 if ($hierarchy->child) {
                     if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status == 'published') {
@@ -737,7 +737,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                             'assignment_title'             => $hierarchy->child->title,
                             'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
                             'assignment_description'       => '',
-                            'assignment_sheet_music_image' => ''
+                            'assignment_sheet_music_image' => '',
+                            'railcontent_id'  => $hierarchy->child->id,
                         ];
                     }
                 }

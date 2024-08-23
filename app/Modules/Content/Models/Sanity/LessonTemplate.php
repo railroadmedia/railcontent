@@ -54,7 +54,8 @@ abstract class LessonTemplate extends BaseSanityModel
             fields: [new Field(FieldType::String, 'assignment_title'),
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
-                        new Field(FieldType::URL, 'assignment_sheet_music_image')
+                        new Field(FieldType::URL, 'assignment_sheet_music_image'),
+                        new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                     ]
         );
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
