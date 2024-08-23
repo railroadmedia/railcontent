@@ -2,26 +2,22 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
-use Illuminate\Database\Query\Builder;
+use App\Modules\Content\ApiGateways\SanityGateway;
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\PlaylistItemTransformer;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
-
-    private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
-
     /**
      * @param ContentCompiledColumnTransformer $contentCompiledColumnTransformer
+     * @param SanityGateway $sanityGateway
      */
     public function __construct(
-        ContentCompiledColumnTransformer $contentCompiledColumnTransformer
+        private ContentCompiledColumnTransformer $contentCompiledColumnTransformer,
+        private SanityGateway $sanityGateway,
     ) {
         parent::__construct();
-
-        $this->contentCompiledColumnTransformer = $contentCompiledColumnTransformer;
     }
 
     /**
@@ -49,58 +45,54 @@ class UserPlaylistContentRepository extends RepositoryBase
         $page = 1,
         $sort = "position"
     ) {
-        $query =
-            $this->query()
-                ->select(
-                    config('railcontent.table_prefix').'content.*',
-                    config('railcontent.table_prefix').'user_playlist_content.start_second',
-                    config('railcontent.table_prefix').'user_playlist_content.content_name',
-                    config('railcontent.table_prefix').'user_playlist_content.playlist_item_name',
-                    config('railcontent.table_prefix').'user_playlist_content.end_second',
-                    config('railcontent.table_prefix').'user_playlist_content.position as user_playlist_item_position',
-                    config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id',
-                    config('railcontent.table_prefix').
-                    'user_playlist_content.user_playlist_id as user_playlist_id',
-                    config('railcontent.table_prefix').
-                    'user_playlist_content.extra_data as user_playlist_item_extra_data'
-                )
-                ->join(
-                    config('railcontent.table_prefix').'content',
-                    config('railcontent.table_prefix').'user_playlist_content.content_id',
-                    '=',
-                    config('railcontent.table_prefix').'content.id'
-                )
-                ->where('user_playlist_id', $playlistId);
-        if (!empty($contentType)) {
-            $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
+        $allItems = $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->orderBy('position', 'asc')
+            ->get()->toArray();
+        $ids = \Arr::pluck($allItems, 'content_id');
+        $contentRows = $this->sanityGateway->getByRailContentIds($ids);
+        foreach($contentRows as $index => $contentRow) {
+            foreach($allItems as $row) {
+                if ($row['content_id'] == $contentRow['id']) {
+                    $contentRows[$index]['user_playlist_item_id'] = $row['id'];
+                    $contentRows[$index]['user_playlist_item_position'] = $row['position'];
+                    $contentRows[$index]['user_playlist_item_extra_data'] = $row['extra_data'];
+                    $fieldsToCopy = ['start_second', 'content_name', 'playlist_item_name', 'end_second', 'user_playlist_id'];
+                    foreach($fieldsToCopy as $fieldToCopy) {
+                        $contentRows[$index][$fieldToCopy] = $row[$fieldToCopy];
+                    }
+                    break;
+                }
+            }
         }
-
-        if (is_array(ContentRepository::$availableContentStatues)) {
-            $query->whereIn(
-                config('railcontent.table_prefix').'content.status',
-                ContentRepository::$availableContentStatues
-            );
-        }
-
-
-
-        $orderByColumn = trim($sort, '-');
-        if ($orderByColumn == 'random') {
-            $query = $query->inRandomOrder();
-            $limit = null;
-
-        } else {
-            $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
-        }
-
-        if ($limit) {
-            $query->limit($limit)
-                ->skip(($page - 1) * $limit);
-        }
-
-        $contentRows =
-            $query->get()
-                ->toArray();
+//        if (!empty($contentType)) {
+//            $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
+//        }
+//
+//        if (is_array(ContentRepository::$availableContentStatues)) {
+//            $query->whereIn(
+//                config('railcontent.table_prefix').'content.status',
+//                ContentRepository::$availableContentStatues
+//            );
+//        }
+//
+//        $orderByColumn = trim($sort, '-');
+//        if ($orderByColumn == 'random') {
+//            $query = $query->inRandomOrder();
+//            $limit = null;
+//
+//        } else {
+//            $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
+//        }
+//
+//        if ($limit) {
+//            $query->limit($limit)
+//                ->skip(($page - 1) * $limit);
+//        }
+//
+//        $contentRows =
+//            $query->get()
+//                ->toArray();
         if (!empty($contentRows)) {
             return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
         }
@@ -218,8 +210,8 @@ class UserPlaylistContentRepository extends RepositoryBase
         $dataCount =
             $this->query()
                 ->where([
-                            'user_playlist_id' => $userPlaylistId,
-                        ])
+                    'user_playlist_id' => $userPlaylistId,
+                ])
                 ->count();
 
         $data['position'] = $this->recalculatePosition(
@@ -340,10 +332,10 @@ class UserPlaylistContentRepository extends RepositoryBase
             $this->query()
                 ->where('user_playlist_id', $existingLink['user_playlist_id'])
                 ->where(
-            $positionColumnPrefix.'position',
-            '>',
-            $existingLink[$positionColumnPrefix."position"]
-        )->decrement($positionColumnPrefix.'position');
+                    $positionColumnPrefix.'position',
+                    '>',
+                    $existingLink[$positionColumnPrefix."position"]
+                )->decrement($positionColumnPrefix.'position');
 
         $deleted =
             $this->query()
@@ -395,7 +387,7 @@ class UserPlaylistContentRepository extends RepositoryBase
                 ->whereIn('user_playlist_id', $playlistIds)
                 ->where('user_id', '=', auth()->id())
                 ->where('state', 'LIKE','completed')
-        ->groupBy('user_playlist_id');
+                ->groupBy('user_playlist_id');
 
         $results = $query->get()->toArray();
 
