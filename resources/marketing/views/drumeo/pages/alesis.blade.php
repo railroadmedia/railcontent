@@ -235,10 +235,19 @@
                     : 'Click here to redeem on a new account.';
             @endphp
 
-            <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+            <div class="redeem-switcher rounded-xl py-4 bg-[#E3E8EC]" x-data="{
+                        membershipLink: '{{ $membershipLink }}',
+                        init() {
+                            const params = new URLSearchParams(window.location.search);
+                            const code = params.get('code');
+                            if (code && !this.membershipLink.includes(`code=${code}`)) {
+                                this.membershipLink += (this.membershipLink.includes('?') ? '&' : '?') + `code=${code}`;
+                            }
+                        }
+                    }" x-init="init()">
                 <strong>{{ $isNewAccount ? 'Existing Member?' : 'Not already a member?' }}</strong>
                 <br>
-                <a class="text-drumeo underline" href="{{ $membershipLink }}">{{ $membershipMessage }}</a>
+                <a :href="membershipLink" class="text-drumeo underline">{{ $membershipMessage }}</a>
                 <br>
                 <em>(The form below is only for {{ $isNewAccount ? 'new accounts' : 'existing members' }})</em>
             </div>
@@ -247,8 +256,11 @@
                 <br>
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
-
-            @include('musora.pages.redeem._redeem-form', ['existing' => !$isNewAccount])
+            @include('musora.pages.redeem._redeem-form', [
+                'existing' => !$isNewAccount,
+                'buttonText' => 'Click To Redeem &raquo;',
+                'buttonColor' => 'bg-drumeo text-white',
+            ])
 
             <br>
             @if(!$newAccount)
@@ -266,21 +278,8 @@
 
     @include("drumeo.sales.partials._footer")
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.code-input').bind('paste', function (e) {
-                var value = e.originalEvent.clipboardData.getData('text');
-                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                for (var i = 0; i < chunks.length; i++) {
-                    $('.code-input').eq(i).val(chunks[i]);
-                }
-            }).bind('input', function (e) {
-                if ($(this).val().length == 4) {
-                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                }
-            });
-        });
-    </script>
+    @include('_partials.components.forms.redeem-form-script', [
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
+        'existingMember' => !$newAccount,
+    ])
 @endsection
