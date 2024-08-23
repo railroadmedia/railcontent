@@ -34,7 +34,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
-                    <a :href="item.url"
+                    <component :is="isReleased ? 'a' : 'div' " :href="item.url"
                         class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
@@ -56,7 +56,7 @@
                                     textCase="capitalize" />
                             </span>
                         </p>
-                    </a>
+                    </component>
                 </div>
                 <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-pt-1 lg:tw-pt-2 tw-items-start tw-relative sm:tw-justify-end tw-shrink-0">
