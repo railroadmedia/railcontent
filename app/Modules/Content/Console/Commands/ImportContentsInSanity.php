@@ -16,6 +16,7 @@ use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
+use Railroad\Railcontent\Helpers\ContentHelper;
 
 class ImportContentsInSanity extends \Illuminate\Console\Command
 {
@@ -362,10 +363,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $results = Content::with('data', 'fields')->where('railcontent_content.type', '=', $contentType)
             ->where('railcontent_content.status', '!=', 'deleted')
             ->where('railcontent_content.brand', '=', $this->argument('brand'))
-            //->where('railcontent_content.id','=',198099)
+           // ->where('railcontent_content.id','=',18920)
             ->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875, 257259, 268071, 268094, 268097,268122,
                 23313, 23393, 23395, 29663,
-                410145, 331419, 350720, 331265])->get();
+                410145, 331419, 350720, 331265, 268090])->get();
 
         $songs = [];
         foreach ($results as $result) {
@@ -736,8 +737,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         $songs[$id]["assignment"][] = [
                             'assignment_title'             => $hierarchy->child->title,
                             'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
-                            'assignment_description'       => '',
-                            'assignment_sheet_music_image' => '',
+                            'assignment_description'       => $hierarchy->child->data->where('key','=','description')->first()['value'] ?? '',
+                            'assignment_sheet_music_image' => $hierarchy->child->data->where('key','=','sheet_music_image_url')->first()['value'] ?? '',
                             'railcontent_id'  => $hierarchy->child->id,
                         ];
                     }

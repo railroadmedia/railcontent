@@ -37,6 +37,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                         console.log('Custom action response:', data);
                         patch.execute([{ set: { railcontent_id: data.id } }]);
                         patch.execute([{ set: { web_url_path: data.web_url_path } }]);
+                        patch.execute([{set: {assignment: data.assignment}}]);
                     })
                     .catch(error => {
                         console.error('Error fetching data in publish action:', error);

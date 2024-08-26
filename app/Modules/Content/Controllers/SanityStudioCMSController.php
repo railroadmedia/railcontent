@@ -249,6 +249,7 @@ class SanityStudioCMSController extends BaseController
             $content->setXP($request->get('xp'));
             $content->setReleased($request->get('released'));
             $content->setAlbum($request->get('album'));
+            $assignments = $content->setAssignments($request->get('assignment'));
 
             $content->save();
 
@@ -258,6 +259,7 @@ class SanityStudioCMSController extends BaseController
             $content = Content::query()
                 ->where('id', '=', $content->id)
                 ->first();
+            $content['assignment'] = $assignments;
 
             return $content;
         }
