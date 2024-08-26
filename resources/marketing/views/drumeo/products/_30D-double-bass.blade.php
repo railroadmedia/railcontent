@@ -683,8 +683,9 @@
                         ])
 
                     </div>
-{{--                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true">--}}
-{{--                <p><u><em><strong>Don't want any physical bonuses?</strong> <br class="hidden sm:inline"> Click here to  join 30-Day Double Bass only.</em></u></p></a>--}}
+
+                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true">
+                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Drumeo<br class="hidden sm:inline"> and get 30-Day Double Bass with no physical bonuses.</em></u></p></a>
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
