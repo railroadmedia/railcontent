@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
@@ -13,6 +14,7 @@ use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -50,18 +52,6 @@ use Throwable;
 
 class CustomerIoSyncEventListener
 {
-    private UserService $userService;
-
-    private CommentRepository $commentRepository;
-
-    private ThreadRepository $threadRepository;
-
-    private PostRepository $postRepository;
-
-    private CategoryRepository $categoryRepository;
-
-    private ContentService $contentService;
-
     /**
      * @var bool
      */
@@ -70,24 +60,18 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
-    private ProductService $productService;
 
     public function __construct(
-        UserService $userService,
-        CommentRepository $commentRepository,
-        CategoryRepository $categoryRepository,
-        ThreadRepository $threadRepository,
-        PostRepository $postRepository,
-        ContentService $contentService,
-        ProductService $productService
+        private UserService $userService,
+        private CommentRepository $commentRepository,
+        private CategoryRepository $categoryRepository,
+        private ThreadRepository $threadRepository,
+        private PostRepository $postRepository,
+        private ContentService $contentService,
+        private ProductService $productService,
+        private CustomerIoService $customerIoService,
+        private UserAccessPermissionsService $userAccessPermissionsService
     ) {
-        $this->userService = $userService;
-        $this->commentRepository = $commentRepository;
-        $this->categoryRepository = $categoryRepository;
-        $this->threadRepository = $threadRepository;
-        $this->postRepository = $postRepository;
-        $this->contentService = $contentService;
-        $this->productService = $productService;
     }
 
     /**
@@ -139,6 +123,16 @@ class CustomerIoSyncEventListener
                 $userUpdated->getNewUser()->id,
                 self::$alreadyQueuedUserIds
             )) {
+                if ($userUpdated->getNewUser()->email != $userUpdated->getOldUser()->email) {
+                    /**
+                     * NOTE: As page views are tracked in Customer.io, this event needs to be handled synchronously to avoid conflicts
+                     * in Customer.io profiles. That's why it doesn't dispatch an event
+                     */
+                    $this->customerIoService->handleUserEmailChanged(
+                        oldEmail: $userUpdated->getOldUser()->email,
+                        newEmail: $userUpdated->getNewUser()->email
+                    );
+                }
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->delay(
                         Carbon::now()

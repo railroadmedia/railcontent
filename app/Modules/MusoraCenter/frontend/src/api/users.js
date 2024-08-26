@@ -1,9 +1,8 @@
-import axios from 'axios';
-import moment from 'moment';
-import ErrorHandler from './error-handler';
+import axios from "axios";
+import moment from "moment";
+import ErrorHandler from "./error-handler";
 
 export default {
-
     /**
      * Get a list for all users
      *
@@ -14,21 +13,17 @@ export default {
      * @param {string} search_term
      * @returns {Promise} - resolved promise with the response object
      */
-    getUsers({
-        limit = 20,
-        page = 1,
-        sort = 'email',
-        search_term = '',
-    }) {
-        return axios.get('/user-management-system/user/index', {
-            params: {
-                limit,
-                page,
-                sort,
-                search_term,
-            },
-        })
-            .then(response => response)
+    getUsers({ limit = 20, page = 1, sort = "email", search_term = "" }) {
+        return axios
+            .get("/user-management-system/user/index", {
+                params: {
+                    limit,
+                    page,
+                    sort,
+                    search_term,
+                },
+            })
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -39,8 +34,9 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     getUserById(id) {
-        return axios.get(`/user-management-system/user/show/${id}`)
-            .then(response => response)
+        return axios
+            .get(`/user-management-system/user/show/${id}`)
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -51,12 +47,13 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     addNewUser(attributes = {}) {
-        return axios.put('/usora/json-api/user/store', {
-            data: {
-                attributes,
-            },
-        })
-            .then(response => response)
+        return axios
+            .put("/usora/json-api/user/store", {
+                data: {
+                    attributes,
+                },
+            })
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -68,13 +65,14 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     setUserAttributes(id, attributes = {}) {
-        return axios.patch(`/usora/json-api/user/update/${id}`, {
-            data: {
-                attributes,
-            },
-        })
-            .then(response => ({ response }))
-            .catch(error => ({ error: { ...error.response.data } }));
+        return axios
+            .patch(`/musora-center/api/users/${id}`, {
+                data: {
+                    attributes,
+                },
+            })
+            .then((response) => ({ response }))
+            .catch((error) => ({ error: { ...error.response.data } }));
     },
 
     /**
@@ -85,8 +83,9 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     renewSubscription(subscription_id) {
-        return axios.post(`/subscription-renew/${subscription_id}`)
-            .then(response => response)
+        return axios
+            .post(`/subscription-renew/${subscription_id}`)
+            .then((response) => response)
             .catch((error) => {
                 ErrorHandler.push(error);
                 return error.response;
@@ -100,17 +99,15 @@ export default {
      * @param {boolean} only_active - Flag to pull only active permissions
      * @returns {Promise} - resolved promise with the response object
      */
-    getUserPermissions({
-        user_id,
-        only_active = false,
-    }) {
-        return axios.get('/railcontent/user-permission', {
-            params: {
-                user_id,
-                only_active,
-            },
-        })
-            .then(response => response)
+    getUserPermissions({ user_id, only_active = false }) {
+        return axios
+            .get("/railcontent/user-permission", {
+                params: {
+                    user_id,
+                    only_active,
+                },
+            })
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -128,12 +125,14 @@ export default {
         id,
         user_id,
         permission_id,
-        start_date = moment(moment.now()).format('Y-M-D'),
+        start_date = moment(moment.now()).format("Y-M-D"),
         expiration_date,
     }) {
         return axios({
-            method: id ? 'patch' : 'put',
-            url: id ? `/railcontent/user-permission/${id}` : '/railcontent/user-permission',
+            method: id ? "patch" : "put",
+            url: id
+                ? `/railcontent/user-permission/${id}`
+                : "/railcontent/user-permission",
             data: {
                 id,
                 user_id,
@@ -142,7 +141,7 @@ export default {
                 expiration_date,
             },
         })
-            .then(response => response)
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -159,22 +158,23 @@ export default {
     getCustomers({
         page = 1,
         limit = 20,
-        order_by_column = 'email',
-        order_by_direction = 'asc',
-        term = '',
-        brands = ['drumeo', 'pianote', 'guitareo'],
+        order_by_column = "email",
+        order_by_direction = "asc",
+        term = "",
+        brands = ["drumeo", "pianote", "guitareo"],
     }) {
-        return axios.get('/ecommerce/customers', {
-            params: {
-                page,
-                limit,
-                order_by_column,
-                order_by_direction,
-                term,
-                brands,
-            },
-        })
-            .then(response => response)
+        return axios
+            .get("/ecommerce/customers", {
+                params: {
+                    page,
+                    limit,
+                    order_by_column,
+                    order_by_direction,
+                    term,
+                    brands,
+                },
+            })
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -185,21 +185,23 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     getCustomerById(id) {
-        return axios.get(`/ecommerce/customer/${id}`)
-            .then(response => response)
+        return axios
+            .get(`/ecommerce/customer/${id}`)
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
     setCustomerNote(id, note) {
-        return axios.patch(`/ecommerce/customer/${id}`, {
-            data: {
-                type: 'customer',
-                attributes: {
-                    note,
+        return axios
+            .patch(`/ecommerce/customer/${id}`, {
+                data: {
+                    type: "customer",
+                    attributes: {
+                        note,
+                    },
                 },
-            },
-        })
-            .then(response => response)
+            })
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -210,8 +212,9 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     getUserRoles(userId) {
-        return axios.get(`/permissions/user-role/${userId}`)
-            .then(response => response)
+        return axios
+            .get(`/permissions/user-role/${userId}`)
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 
@@ -229,26 +232,20 @@ export default {
 
         if (addRoles.length) {
             requests.push(
-                axios.put(
-                    '/permissions/user-roles',
-                    {
-                        'user_id': userId,
-                        'roles': addRoles
-                    }
-                )
+                axios.put("/permissions/user-roles", {
+                    user_id: userId,
+                    roles: addRoles,
+                })
             );
         }
 
         if (removeRolesIds.length) {
             requests.push(
-                axios.delete(
-                    '/permissions/user-roles',
-                    {
-                        data: {
-                            'roles': removeRolesIds
-                        }
-                    }
-                )
+                axios.delete("/permissions/user-roles", {
+                    data: {
+                        roles: removeRolesIds,
+                    },
+                })
             );
         }
 
@@ -267,7 +264,7 @@ export default {
     deleteUser(id) {
         return axios
             .delete(`/user-management-system/user/delete/${id}`)
-            .then(response => response)
+            .then((response) => response)
             .catch(ErrorHandler.push);
     },
 };
