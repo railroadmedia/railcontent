@@ -19,7 +19,7 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
             $exercises = [];
 
             // process sbt data
-            foreach ($content['fields'] as $contentField) {
+            foreach ($content['fields'] ?? [] as $contentField) {
                 if ($contentField['key'] == 'sbt_exercise_number') {
                     $position = $contentField['position'];
 
@@ -35,7 +35,7 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
             $bdsExercises = [];
 
             // process sbt data
-            foreach ($content['data'] as $contentDatum) {
+            foreach ($content['data'] ?? [] as $contentDatum) {
                 if ($contentDatum['key'] == 'smart_beat_fast_bpm_mp3_url') {
                     $position = $contentDatum['position'];
 
@@ -54,7 +54,7 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
             $ds2Exercises = [];
 
             // process sbt data
-            foreach ($content['fields'] as $contentField) {
+            foreach ($content['fields'] ?? [] as $contentField) {
                 if ($contentField['key'] == 'sbt_exercise_number') {
                     $position = $contentField['position'];
 
@@ -67,7 +67,7 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
             }
 
             $contentsOfType[$contentIndex]['ds2Stbs'] = $ds2Exercises;
-            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
+            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'] ?? 0;
         }
         return $this->mergeDecorated($contents, $contentsOfType);
 

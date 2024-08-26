@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "496eafcc833f44680ddb1a7380ffeeb1",
+    "content-hash": "9c0191c5575f9367546dfd431552707b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1052,16 +1052,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.320.7",
+            "version": "3.320.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "702b9955160d2dacdf2cdf4d4476fcf95eae1aaf"
+                "reference": "c833a686c339eec17aac712f2788406798de5f37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/702b9955160d2dacdf2cdf4d4476fcf95eae1aaf",
-                "reference": "702b9955160d2dacdf2cdf4d4476fcf95eae1aaf",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c833a686c339eec17aac712f2788406798de5f37",
+                "reference": "c833a686c339eec17aac712f2788406798de5f37",
                 "shasum": ""
             },
             "require": {
@@ -1144,9 +1144,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.320.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.320.8"
             },
-            "time": "2024-08-23T18:13:50+00:00"
+            "time": "2024-08-26T18:08:08+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4036,16 +4036,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.41.0",
+            "version": "v1.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "1043ea18fe7f5dfbf5b208ce3ee6d6b6ab8cb038"
+                "reference": "0c25599a91530b5847f129b271c536f75a7563f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/1043ea18fe7f5dfbf5b208ce3ee6d6b6ab8cb038",
-                "reference": "1043ea18fe7f5dfbf5b208ce3ee6d6b6ab8cb038",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/0c25599a91530b5847f129b271c536f75a7563f5",
+                "reference": "0c25599a91530b5847f129b271c536f75a7563f5",
                 "shasum": ""
             },
             "require": {
@@ -4090,9 +4090,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.41.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.42.0"
             },
-            "time": "2024-07-10T15:21:07+00:00"
+            "time": "2024-08-26T18:33:48+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -11515,6 +11515,52 @@
                 "source": "https://github.com/rudderlabs/rudder-php-sdk/tree/v2.1.0"
             },
             "time": "2023-12-04T11:20:59+00:00"
+        },
+        {
+            "name": "sanity/sanity-php",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sanity-io/sanity-php.git",
+                "reference": "e5a7b8e199acf3666cb7f42cafc0d18417ee2efd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sanity-io/sanity-php/zipball/e5a7b8e199acf3666cb7f42cafc0d18417ee2efd",
+                "reference": "e5a7b8e199acf3666cb7f42cafc0d18417ee2efd",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2|^7.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^2.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sanity\\": "lib/",
+                    "SanityTest\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sanity.io",
+                    "email": "hello@sanity.io"
+                }
+            ],
+            "description": "PHP library for the Sanity API",
+            "support": {
+                "issues": "https://github.com/sanity-io/sanity-php/issues",
+                "source": "https://github.com/sanity-io/sanity-php/tree/v1.5.2"
+            },
+            "time": "2024-01-27T19:49:08+00:00"
         },
         {
             "name": "sentry/sentry",
