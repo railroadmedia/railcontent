@@ -4,6 +4,7 @@ export const usePlatformStore = defineStore({
     id: 'platform',
     state: () => ({
         tinymcePath: '', 
+        isLoading: true,
         membershipUpgradeModal: {
             open: false,
             disableClose: false,
@@ -12,6 +13,9 @@ export const usePlatformStore = defineStore({
     actions: {
         setTinymcePath (path) {
             this.tinymcePath = path;
+        },
+        setLoadingState (val) {
+            this.isLoading = val;
         },
         openMembershipUpgradeModal() {
             this.membershipUpgradeModal.open = true;

@@ -5,6 +5,7 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
+import StepHeader from "../StepHeader.vue";
 import { saveDisplayName, checkDisplayName, aboutStepCompleted } from '../services';
 
 const props = defineProps({
@@ -14,14 +15,8 @@ const props = defineProps({
   steps: {
     type: Array,
   },
-  skipSteps: {
-    type: Array,
-  },
   info: {
     type: Object,
-  },
-  currentStep: {
-    type: Number,
   },
 });
 
@@ -38,24 +33,14 @@ const onInputChange = (value) => {
 
 const handleSkipStep = () => {
   aboutStepCompleted({ skipped: true });
-  emit("onCheckStep", props.currentStep, true);
-  emit("onChangeStep", props.currentStep + 1);
+  emit('onChangeStep', 1);
+  emit('onCheckStep', 0, true);
 };
 
 const goToNextStep = () => {
   aboutStepCompleted({ skipped: false });
+  emit('onChangeStep', 1);
   emit('onCheckStep', 0, true);
-
-  if (props.skipSteps.includes(1) && !props.skipSteps.includes(2)) {
-    emit('onCheckStep', 1, true);
-    emit('onChangeStep', 2);
-  } else if (props.skipSteps.includes(1) && props.skipSteps.includes(2)) {
-    emit('onCheckStep', 1, true);
-    emit('onCheckStep', 2, true);
-    emit('onChangeStep', 3);
-  } else {
-    emit('onChangeStep', 1);
-  }
 };
 
 const handleNextStep = () => {
@@ -106,8 +91,8 @@ const handleImageUpload = (newImgUrl) => {
 };
 
 const headerProps = {
-  title: 'Your musical journey is personalized to you.',
-  subtitle: 'Tell us about yourself! You can always update this in your account later.',
+  title: 'Just a few quick questions to set up your account',
+  subtitle: 'Your musical journey is personalized to you. Tell us a little bit about yourself so that we can get it right.',
   hideBackButton: true,
   hideCloseButton: true,
 };
@@ -119,8 +104,8 @@ const headerProps = {
       <div class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
         <AvatarUpload @onImageUpload="handleImageUpload" :imgUrl="info.user.userProfilePictureUrl"
           @onError="handleError" />
-        <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center tw-mt-[40px] tw-mb-[80px]" :initialValue="info.user.name"
-          labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[322px] tw-h-[40px]"
+        <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center" :initialValue="info.user.name"
+          labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
           @onChange="onInputChange" :showClearButton="true" />
         <ul v-if="nameErrors.length > 0" class="tw-flex tw-flex-col tw-mt-3 tw-text-xs text-error list-style-none">
           <li v-for="(error, i) in nameErrors" v-bind:key="i + 'error'">
@@ -133,7 +118,7 @@ const headerProps = {
       <Button :brand="brand" @onButtonClick="handleNextStep"
         :isDisabled="!info.user.userProfilePictureUrl.length && !info.user.name.length"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
-      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      <ProgressBar :brand="brand" :currentStep="0" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleNextStep"
         :isDisabled="!info.user.userProfilePictureUrl.length && !info.user.name.length"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>

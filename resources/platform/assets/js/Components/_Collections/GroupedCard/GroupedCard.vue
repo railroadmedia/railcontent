@@ -1,6 +1,6 @@
 <template>
     <!--  Instructor Thumbnail Loader -->
-    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" />
+    <SkeletonLoader v-if="collectionStoreLoading || isLoading" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
         <a :href="item.url"
@@ -34,6 +34,7 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useCollectionStore } from "@stores/collection";
+import { usePlatformStore } from "@stores/platform";
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
 import SkeletonLoader from '@collections/SkeletonLoader/SkeletonLoader.vue';
 import SongCardContainer from "@collections/Catalogue/SongCardContainer.vue";
@@ -67,7 +68,11 @@ const props = defineProps({
 })
 
 const collectionStore = useCollectionStore();
+const platformStore = usePlatformStore();
+
 const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
+const { isLoading } = storeToRefs(platformStore);
+
 const parsedData = computed(() => {
     return props.item;
 })
@@ -78,10 +83,6 @@ const name = computed(() => {
 
 const thumb = computed(() => {
     return props.item.data.find(data => data.key === 'head_shot_picture_url')?.value || '';
-})
-
-const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value;
 })
 
 const isWorkout = computed(() => {

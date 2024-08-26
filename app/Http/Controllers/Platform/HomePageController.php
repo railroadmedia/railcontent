@@ -7,7 +7,9 @@ use Illuminate\View\View;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\LearningPathsService;
@@ -22,7 +24,6 @@ use Avo;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -41,6 +42,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
 {
+    /**
+     * @param ContentService $contentService
+     * @param ContentFollowsService $contentFollowsService
+     * @param LiveStreamEventService $liveStreamEventService
+     * @param UserMetricsService $userMetricsService
+     * @param UserPlaylistsService $userPlaylistsService
+     * @param PackService $packService
+     * @param DatabaseManager $databaseManager
+     * @param UserContentProgressService $userContentProgressService
+     * @param CarouselService $carouselService
+     * @param CohortService $cohortService
+     * @param OnboardingService $onboardingService
+     *
+     */
     public function __construct(
         private ContentService $contentService,
         private ContentFollowsService $contentFollowsService,
@@ -54,7 +69,8 @@ class HomePageController extends BaseController
         private CohortService $cohortService,
         private OnboardingService $onboardingService,
         private LearningPathsService $learningPathsService,
-        private UserAccessPermissionsService $userAccessPermissionsService
+        private UserAccessPermissionsService $userAccessPermissionsService,
+        private SanityGateway $sanityGateway,
     ) {
     }
 
@@ -117,27 +133,12 @@ class HomePageController extends BaseController
 
         $usersList = $this->getUsersList();
 
-        $upcomingEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            ContentTypes::liveContentTypes(),
-            ContentService::STATUS_SCHEDULED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>',
-            'published_on',
-            'asc',
-            [],
-            6
-        );
-
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
 
         $hotForumTopics = $this->getHotForumTopics();
 
-        $newContent = $this->getNewContents();
-
-        $workoutsContent = $this->getWorkoutsContents();
-        if (FeatureFlagging::accessible('recsys', user())) {
+        if(FeatureFlagging::accessible('recsys', user())) {
             $recommendedContent = $this->getAllRecommentations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
@@ -157,28 +158,11 @@ class HomePageController extends BaseController
             4
         );
 
-        $subscribedCoaches = $this->contentService->getFiltered(
-            1,
-            6,
-            '-published_on',
-            ['instructor'],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false,
-            true
-        );
-
         // coaches live
         $themeColor = 'drumeo';
         $currentDate =
             Carbon::now()
-            ->toDateTimeString();
+                ->toDateTimeString();
 
         if (config('railcontent.webUpcomingEventPriorMinutes')) {
             LiveStreamEventService::$upcomingPriorMinutes = config('railcontent.webUpcomingEventPriorMinutes');
@@ -194,12 +178,8 @@ class HomePageController extends BaseController
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
-        $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
-        $collectionForDecoration = $collectionForDecoration->merge($workoutsContent->results());
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
@@ -231,23 +211,7 @@ class HomePageController extends BaseController
 
         $hasGoals = user()->onboardingGoals ? true : false;
 
-        $hasStartedMethod = $methodContent['started'];
-        $hasCompletedMethod = $methodContent['completed'];
-
-        $nextLearningPathLevel = user()->getMethodLevel();
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
-
-        $upcomingEventsCount = $upcomingEvents->count();
-        $upcomingEvents = $upcomingEvents->sort(function ($a, $b) {
-            return strtotime($a->fetch('fields.live_event_start_time')) -
-                strtotime($b->fetch('fields.live_event_start_time'));
-        })
-            ->slice(0, 4)
-            ->values();
-        $upcomingEvents = new ContentFilterResultsEntity([
-            'results' => $upcomingEvents,
-            'total_results' => $upcomingEventsCount,
-        ]);
 
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
@@ -270,7 +234,23 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
+        $shouldShowTrialSection = false;
         $brand = brand();
+        $hideSection = $brand . '_trial_section_hide';
+
+        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels = count(
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+
+            $shouldShowTrialSection = ($hasExperienceLevels) ? true : false;
+        }
+        $trialSection = [];
+        if ($shouldShowTrialSection) {
+            $trialSection = $this->learningPathsService->getLearningPaths();
+        }
 
         $cohortBanner = [];
         $activeCohort = $this->cohortService->getActiveCohort();
@@ -313,20 +293,6 @@ class HomePageController extends BaseController
                 }
             }
         }
-
-        $trialSection = [];
-        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
-        $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
-
-        if ($showOldTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        }
-
-        if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths();
-        }
-
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
@@ -336,61 +302,34 @@ class HomePageController extends BaseController
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
+            'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
-            "followedLessons" => $followedLessons->toResponseRawJson(),
-            "hasCompletedMethod" => $hasCompletedMethod,
             "hasExperience" => $hasExperience,
-            "hasfollowedLessons" => count($subscribedCoaches->results()) > 0 && count($followedLessons->results()) > 0,
             "hasGear" => $hasGear,
             "hasGenres" => $hasGenres,
             "hasGoals" => $hasGoals,
             "hasRecommendations" => count($recommendedContent->results()) > 0,
             "hasStartedLessons" => count($followedLessons->results()) > 0,
-            "hasStartedMethod" => $hasStartedMethod,
-            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
             "hasTopics" => $hasTopics,
-            "hasUpcomingEvents" => $upcomingEvents->totalResults() > 0,
             "hotForumTopics" => $hotForumTopics,
-            "methodUrl" => ($hasCompletedMethod) ?
-                url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]) :
-                url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
-            "newContentJson" => $newContent->toResponseRawJson(),
-            "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
             "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "subscribedCoaches" => $subscribedCoaches,
-            "subscribedCoachesJson" => $subscribedCoaches->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
-            "upcomingEvents" => $upcomingEvents->toResponseRawJson(),
+            "trialSection" => $trialSection,
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "youtubeId" => $youtubeId ?? null,
-            "displayTrialSection" => $showNewTrialSection || $showOldTrialSection,
-            "trialSectionRedesign" => $showNewTrialSection,
-            "trialSection" => $trialSection,
         ]);
     }
 
-    public function onboarding(Request $request): View
+
+    public function onboarding(Request $request)
     {
-        $newUser = !$this->onboardingService->getBrand(user()->id);
-        $user = User::whereId(Auth::id())->firstOrFail();
-
-        if ($user->primary_brand) {
-            $this->onboardingService->saveInstrument(
-                $this->onboardingService->getInstrumentFromBrand($user->primary_brand)
-            );
-        }
-
         Avo::onboarding_started(AvoHelper::defaultEventProperties());
-
-        return view('home.onboarding', [
-            'newUser' => $newUser,
-        ]);
+        return view('home.onboarding');
     }
 
     /**
@@ -399,6 +338,7 @@ class HomePageController extends BaseController
     public function homePackOnly(Request $request, $brand): View
     {
         $packs = $this->packService->getPacksForHome(user());
+        ;
         $hotForumTopics = $this->getHotForumTopics();
         $member = user();
 
@@ -459,33 +399,33 @@ class HomePageController extends BaseController
     {
         PostRepository::$blockedUserIds =
             BlockedUser::where('blocker_id', '=', user()->id)
-            ->get()
-            ->pluck('user_id')
-            ->toArray();
+                ->get()
+                ->pluck('user_id')
+                ->toArray();
 
         // latest forum posts
         $forumPosts =
             $this->databaseManager->connection(config('railforums.database_connection_name'))
-            ->table('forum_threads')
-            ->select(['forum_posts.*', 'forum_threads.title'])
-            ->join('forum_posts', 'forum_threads.last_post_id', '=', 'forum_posts.id')
-            ->limit(6)
-            ->whereNull('forum_posts.deleted_at')
-            ->whereNull('forum_threads.deleted_at')
-            ->where('forum_posts.state', 'published')
-            ->whereNotIn('forum_posts.author_id', PostRepository::$blockedUserIds)
-            ->orderBy('forum_threads.last_post_id', 'desc')
-            ->get();
+                ->table('forum_threads')
+                ->select(['forum_posts.*', 'forum_threads.title'])
+                ->join('forum_posts', 'forum_threads.last_post_id', '=', 'forum_posts.id')
+                ->limit(6)
+                ->whereNull('forum_posts.deleted_at')
+                ->whereNull('forum_threads.deleted_at')
+                ->where('forum_posts.state', 'published')
+                ->whereNotIn('forum_posts.author_id', PostRepository::$blockedUserIds)
+                ->orderBy('forum_threads.last_post_id', 'desc')
+                ->get();
 
         $usersIndexed =
             User::query()
-            ->whereIn(
-                'id',
-                $forumPosts->pluck('author_id')
-                    ->toArray()
-            )
-            ->get()
-            ->keyBy('id');
+                ->whereIn(
+                    'id',
+                    $forumPosts->pluck('author_id')
+                        ->toArray()
+                )
+                ->get()
+                ->keyBy('id');
 
         foreach ($forumPosts as $forumPostIndex => $forumPost) {
             if (isset($usersIndexed[$forumPost->author_id])) {
@@ -629,7 +569,7 @@ class HomePageController extends BaseController
     public function getUsersStartedContent(): ContentFilterResultsEntity
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
-
+        //TODO ADRIAN this needs to be handled differently as this is uses join on the railcontent_content table
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
             auth()->id(),
             $contentTypes,
@@ -638,7 +578,8 @@ class HomePageController extends BaseController
             'desc',
             8
         );
-        $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
+        $ids = array_column($startedProgressRows, 'content_id');
+        $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
 
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }

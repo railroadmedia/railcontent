@@ -2535,7 +2535,6 @@ return [
             'login_as_users',
             'is_enrolled_into_cohort',
             'show_learning_paths_on_homepage',
-            'show_new_learning_paths',
             'subcription_date',
             'completed_workouts',
             'subscriptionIntervalType',
@@ -2544,7 +2543,7 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'primary_brand'
+            'active_permissions_ids'
         ],
 
         'quick-tips' => [
@@ -5765,7 +5764,7 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'primary_brand'
+            'active_permissions_ids'
         ],
 
         'quick-tips' => [

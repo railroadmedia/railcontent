@@ -23,8 +23,10 @@ class MusoraApiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // publish config file
-        $this->mergeConfigFrom(__DIR__ . '/../config/journey.php', 'journeys');
-        $this->mergeConfigFrom(__DIR__ . '/../config/learning.php', 'learning');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/journey.php',
+            'journeys'
+        );
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/onboarding.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/referral.php');

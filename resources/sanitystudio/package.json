@@ -1,0 +1,61 @@
+{
+  "name": "sanitystudio",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@sanity/assist": "^3.0.4",
+    "@sanity/client": "^6.19.1",
+    "@sanity/embeddings-index-cli": "^1.0.10",
+    "@sanity/embeddings-index-ui": "^1.1.8",
+    "@sanity/icons": "^3.2.0",
+    "@sanity/vision": "^3.45.0",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.4.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "sanity": "^3.45.0",
+    "sanity-plugin-iframe-pane": "^3.1.6",
+    "sanity-plugin-media": "^2.2.5",
+    "styled-components": "^6.1.11",
+    "web-vitals": "^2.1.4"
+  },
+  "homepage": "/sanity/",
+  "scripts": {
+    "start": "react-scripts start",
+    "build:cra": "react-scripts build",
+    "build": "npx mix --mix-config=webpack.mix.sanity.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "sanity": "./sanity.sh"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@sanity/cli": "^3.47.1",
+    "laravel-mix": "^6.0.43",
+    "laravel-vapor": "^0.7.1",
+    "postcss": "^8.4.38"
+  }
+}

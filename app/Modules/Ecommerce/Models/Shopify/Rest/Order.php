@@ -34,18 +34,22 @@ class Order
     public float $totalDiscount;
     public float $totalTax;
     public float $totalPrice;
-    /** @var float the total price; reflecting order edits, returns, and refunds */
-    public float $currentTotalPrice;
     public ?string $currencyCode;
     public float $totalShipping;
     public array $discountCodes;
     public string $email;
     public array $tags;
     public ?string $sourceName;
+    public string $financialStatus;
+    public ?string $fulfillmentStatus;
     public ?Carbon $processedAt;
     public ?Customer $customer;
+    public ?Address $billingAddress;
+    public ?Address $shippingAddress;
     /** @var Collection<OrderLineItem> $lineItems */
     public Collection $lineItems;
+    /** @var Collection<Fulfillment> $fulfillments */
+    public Collection $fulfillments;
     public ?string $note;
     /** @var Collection<MetaField> */
     private Collection $_metafields;
@@ -63,14 +67,23 @@ class Order
         $this->createdAt = Carbon::parse($shopifyOrderData->created_at);
         $this->processedAt = $shopifyOrderData->processed_at ? Carbon::parse($shopifyOrderData->processed_at) : null;
 
+        $this->financialStatus = $shopifyOrderData->financial_status;
         $this->discountCodes = $shopifyOrderData->discount_codes;
         $this->email = $shopifyOrderData->email;
 
         $this->customer = $shopifyOrderData->customer ? new Customer($shopifyOrderData->customer) : null;
 
+        $this->billingAddress = $shopifyOrderData->billing_address ? new Address($shopifyOrderData->billing_address) : null;
+        $this->shippingAddress = $shopifyOrderData->shipping_address ? new Address($shopifyOrderData->shipping_address) : null;
+
         $this->lineItems = collect($shopifyOrderData->line_items)->map(function ($item) {
             return new OrderLineItem($item);
         });
+
+        $this->fulfillments = empty($shopifyOrderData->fulfillments) ? collect() :
+            collect($shopifyOrderData->fulfillments)->map(function ($fulfillment) {
+                return new Fulfillment($fulfillment);
+            });
 
         $this->tags = empty($shopifyOrderData->tags) ? [] : array_map('trim', explode(',', $shopifyOrderData->tags));
 
@@ -78,14 +91,12 @@ class Order
         $this->subtotalPrice = floatval($shopifyOrderData->subtotal_price);
         $this->totalDiscount = floatval($shopifyOrderData->total_discounts);
         $this->totalShipping = floatval($shopifyOrderData->total_shipping_price_set->shop_money->amount);
-        // total_tax is unreliable, so build it up from the tax_lines
-        $this->totalTax = collect($shopifyOrderData->tax_lines)->sum(function ($item) {
-            return floatval($item->price);
-        });
+        $this->totalTax = floatval($shopifyOrderData->total_tax);
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
-        $this->currentTotalPrice = floatval($shopifyOrderData->current_total_price);
         $this->currencyCode = $shopifyOrderData->total_price_set->shop_money->currency_code;
         $this->sourceName = $shopifyOrderData->source_name;
+        $this->financialStatus = $shopifyOrderData->financial_status;
+        $this->fulfillmentStatus = $shopifyOrderData->fulfillment_status;
         $this->note = $shopifyOrderData->note;
         $this->_metafields = collect();
     }

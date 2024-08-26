@@ -446,4 +446,9 @@ class SalesController extends BaseController
     {
         return view('pianote.products.read-music-book', ['theme' => 'pianote']);
     }
+
+    public function practiceKit()
+    {
+        return view('pianote.products.practice-kit', ['theme' => 'pianote']);
+    }
 }

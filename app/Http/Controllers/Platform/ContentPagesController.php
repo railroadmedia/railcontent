@@ -234,6 +234,7 @@ class ContentPagesController extends BaseController
                 ],
             ];
             return view('content.catalogue', [
+                "catalogueType" => $catalogName,
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $startedListLessons,
                 "hasStartedLessons" => $hasStartedLessons,
@@ -405,6 +406,7 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
+            'contentType' => $firstLevelContent['type']
         ]);
     }
 
@@ -509,6 +511,7 @@ class ContentPagesController extends BaseController
             'xpAmount' => $secondContent->fetch('total_xp'),
             'displayItemAsOverview' => $secondContent['type'] === 'learning-path-level' &&
                 in_array(brand(), ['drumeo', 'pianote']),
+            'contentType' => $secondContent['type']
         ]);
     }
 
@@ -617,6 +620,7 @@ class ContentPagesController extends BaseController
             'xpBonus' => $thirdContent->fetch('xp'),
             'xpAmount' => $thirdContent->fetch('total_xp'),
             'displayItemAsOverview' => false,
+            'contentType' => $thirdContent['type']
         ]);
     }
 
@@ -913,6 +917,7 @@ class ContentPagesController extends BaseController
                 "firstContent" => $firstContent,
                 "rangesVideoIds" => $rangesVideoIds,
                 "adminMessage" => $adminMessage,
+
             ]);
         }
 
@@ -1475,6 +1480,7 @@ class ContentPagesController extends BaseController
         $adminMessage = null;
 
         return view('content.catalogue', [
+            "catalogueType" => $catalogName,
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
             'isAllContent' => true,
@@ -1562,6 +1568,7 @@ class ContentPagesController extends BaseController
 
         $adminMessage = null;
         return view('content.catalogue', [
+            "catalogueType" => $catalogName,
             "adminMessage" => $adminMessage,
             "catalogueMeta" => $catalogueMeta,
             "hasStartedLessons" => false,
@@ -1688,6 +1695,7 @@ class ContentPagesController extends BaseController
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['subscribed'] ?? [];
 
         return view('content.catalogue', [
+            "catalogueType" => $catalogName,
             "hasStartedLessons" => false,
             'isAllContent' => true,
             "listLessons" => $followedLessons->toResponseRawJson(),
@@ -1862,21 +1870,8 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
-     */
-    public function artists(Request $request): View
+    public function artists(Request $request)
     {
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
-        ContentRepository::$pullFutureContent = true;
-        ContentRepository::$getFutureScheduledContentOnly = false;
-
-        $artists = $this->contentService->getArtists();
-
-        return view('content.artists', [
-            'artists' => $artists,
-            'numberOfArtists' => count($artists),
-        ]);
+        return view('content.artists');
     }
 }

@@ -210,6 +210,7 @@ class Content extends Model
         'genre' => 'string',
         'released' => 'string',
         'length_in_seconds' => 'integer',
+        'album' => 'string',
 
     ];
 
@@ -759,6 +760,13 @@ class Content extends Model
     {
         if ($value) {
             $this->setField('length_in_seconds', $value);
+        }
+    }
+
+    public function setAlbum($value)
+    {
+        if ($value) {
+            $this->setField('album', $value);
         }
     }
 }

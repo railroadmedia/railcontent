@@ -95,10 +95,10 @@ return [
         'guitareo' => []
     ],
     'forum_rules_post_id' => [
-        'drumeo' => 337724,
-        'guitareo' => 44705,
-        'singeo' => 42098,
-        'pianote' => 112873
+        'drumeo' => 350741,
+        'guitareo' => 45843,
+        'singeo' => 48899,
+        'pianote' => 129215
     ],
     'decorators' => [
         'posts' => [

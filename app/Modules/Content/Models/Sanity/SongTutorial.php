@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Modules\Content\Models\Sanity;
+
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Enums\VideoType;
+use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Reference;
+use Modules\Content\Models\Sanity\Structure\Block;
+use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListObject;
+
+/**
+ * Defines the schema structure for a Song Tutorial document type in Sanity.
+ *
+ * @property string       $type
+ * @property string       $name
+ * @property string       $title
+ * @property ?string      $icon
+ * @property array<Field> $fields
+ */
+class SongTutorial extends ParentTemplate
+{
+    public function __construct()
+    {
+        parent::__construct(self::getName(), 'Song Tutorial', childType: 'song-tutorial-children', withResources: true);
+
+        $detailsGroup = new Group('editorFields', 'Details', true);
+        $this->addFields([
+                             new Field(FieldType::String, 'song_name', group: $detailsGroup),
+                             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
+                   ]);
+    }
+
+    public static function getName(): string
+    {
+        return 'song-tutorial';
+    }
+}

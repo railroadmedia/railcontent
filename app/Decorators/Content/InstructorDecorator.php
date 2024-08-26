@@ -33,7 +33,7 @@ class InstructorDecorator extends ModeDecoratorBase
             foreach ($contents as $contentIndex => $content) {
                 if ($content instanceof ContentEntity) {
                     $contents[$contentIndex]['instructors'] = [];
-                    foreach ($content['fields'] as $field) {
+                    foreach ($content['fields'] ?? [] as $field) {
                         if ($field['key'] === 'instructor') {
                             $coachName = $field['value']->fetch('fields.name');
 

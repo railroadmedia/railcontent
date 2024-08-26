@@ -1,7 +1,6 @@
 <template>
     <div class="flex flex-column">
-
-        <template v-for="(item, i) in content" :key="'list' + item.id">
+        <template v-if="!isLoading && !collectionStoreLoading" v-for="(item, i) in content" :key="'list' + item.id">
             <CatalogueListItem
                 :index="item.week || i + 1"
                 :item="item"
@@ -56,10 +55,17 @@
                 />
             </div>
         </template>
+        <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i" />
     </div>
 </template>
 <script setup>
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
+import { useCollectionStore } from "@stores/collection";
+
 import CatalogueListItem from "./ListCatalogueItem";
+import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
+
 
 const props = defineProps({
     content: {
@@ -156,4 +162,10 @@ const props = defineProps({
         default: () => false,
     },
 })
+
+const platformStore = usePlatformStore();
+const collectionStore = useCollectionStore();
+
+const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
+const { isLoading } = storeToRefs(platformStore);
 </script>

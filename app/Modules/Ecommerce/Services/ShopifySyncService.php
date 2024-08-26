@@ -449,19 +449,4 @@ class ShopifySyncService
 
         return $paymentSourceEnum;
     }
-
-    public function getBrandFromOrder(array $order): string
-    {
-        $brand = $order[ShopifyMetafieldNamespace::Musora->value . '.' . ShopifyMetafieldKey::Brand->value] ?? null;
-        if ($brand) {
-            return strtolower($brand);
-        }
-
-        collect($order['line_items'])->each(function ($lineItem) {
-            $product = Product::where('sku', $lineItem['sku'])->first() ?? null;
-            return $product;
-        })->filter(fn (Product $product) => $product->isMembershipProduct())->first()?->brand ?? 'musora';
-
-        return strtolower($brand);
-    }
 }

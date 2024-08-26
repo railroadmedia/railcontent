@@ -47,37 +47,40 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .sourceMaps()
     .version();
 
-mix.webpackConfig(webpack => {
-    return {
-        stats: {
-            children: true
-        },
-        // target: ['web', 'es5'],
-        output: {
-            publicPath: ASSET_URL,
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ],
-        resolve: {
-            alias: {
-                '@components': path.resolve(__dirname, './assets/js/Components'),
-                '@libraries': path.resolve(__dirname, './assets/js/Libraries'),
-                '@stores': path.resolve(__dirname, './assets/js/Stores'),
-                '@constants': path.resolve(__dirname, './assets/js/Constants'),
-                '@services': path.resolve(__dirname, './assets/js/Services'),
-                '@hooks': path.resolve(__dirname, './assets/js/Hooks'),
-                //Components
-                '@units': path.resolve(__dirname, './assets/js/Components/_Units'),
-                '@collections': path.resolve(__dirname, './assets/js/Components/_Collections'),
-                '@pages': path.resolve(__dirname, './assets/js/Components/_Pages'),
-                //Libraries
-                '@vuesora': path.resolve(__dirname, './assets/js/Libraries/Vuesora'),
+    mix.webpackConfig(webpack => {
+        return {
+            stats: {
+                children: true
+            },
+            // target: ['web', 'es5'],
+            output: {
+                publicPath: ASSET_URL,
+            },
+            plugins: [
+                new webpack.DefinePlugin({
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL),
+                    "__VUE_PROD_DEVTOOLS__": JSON.stringify(false),
+                    "__VUE_OPTIONS_API__": JSON.stringify(true),
+                    "__VUE_PROD_HYDRATION_MISMATCH_DETAILS__": JSON.stringify(false)
+                })
+            ],
+            resolve: {
+                alias: {
+                    '@components': path.resolve(__dirname, './assets/js/Components'),
+                    '@libraries': path.resolve(__dirname, './assets/js/Libraries'),
+                    '@stores': path.resolve(__dirname, './assets/js/Stores'),
+                    '@constants': path.resolve(__dirname, './assets/js/Constants'),
+                    '@services': path.resolve(__dirname, './assets/js/Services'),
+                    '@hooks': path.resolve(__dirname, './assets/js/Hooks'),
+                    //Components
+                    '@units': path.resolve(__dirname, './assets/js/Components/_Units'),
+                    '@collections': path.resolve(__dirname, './assets/js/Components/_Collections'),
+                    '@pages': path.resolve(__dirname, './assets/js/Components/_Pages'),
+                    //Libraries
+                    '@vuesora': path.resolve(__dirname, './assets/js/Libraries/Vuesora'),
+                }
             }
         }
-    };
-});
+    });
 
 module.exports = mix;

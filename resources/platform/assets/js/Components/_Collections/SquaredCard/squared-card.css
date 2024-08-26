@@ -38,10 +38,6 @@
     background: rgba(239, 68, 68, 0.35);
 }
 
-.SquaredCard__overlay--orange:hover,.SquaredCard__overlay--orange.SquaredCard__overlay--active  {
-    background: rgba(240, 99, 20, 0.35);
-}
-
 .SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {
     background: rgba(59, 130, 246, 0.35);
 }

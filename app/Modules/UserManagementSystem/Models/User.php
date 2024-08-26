@@ -7,6 +7,7 @@ use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
@@ -127,7 +128,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $trial_expiration_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string|null $primary_brand
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -498,6 +498,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
 
+    /**
+     * @return string | null
+     */
     public function subscriptionIntervalType(): string | null
     {
         return $this->recharge_interval;
@@ -714,6 +717,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function onboardingGoals(): HasMany
     {
         return $this->hasMany(OnboardingGoals::class);
+    }
+
+    public function onboardingAnswerHistory(): HasMany
+    {
+        return $this->hasMany(OnboardingAnswerHistory::class);
     }
 
     public function isPackOwner(): bool
@@ -999,4 +1007,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return 'password';
     }
+    
+    public function getActivePermissionsIds()
+    {
+        $userAccessPermissions = $this->userAccessPermissions()->getResults();
+        $userAccessPermissionsCollection = new UserAccessPermissionsCollection($this, $userAccessPermissions);
+        return array_values($userAccessPermissionsCollection->getActivePermissionIds());
+    }
+
 }

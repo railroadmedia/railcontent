@@ -10,13 +10,12 @@ export default {
     "bgColor",
     "defaultBorderColor",
     "url",
-    "tabIndex",
-    "isLevelCard"
+    "tabIndex"
   ],
   emits: ["onSelect"],
   setup(props) {
     const getBorderColor = (type) => {
-      if (["drumeo", "guitareo", "singeo", "pianote", "red", "blue", "green", "yellow", "orange"].includes(type)) {
+      if (["drumeo", "guitareo", "singeo", "pianote", "red", "blue", "green", "yellow"].includes(type)) {
         return borderColor[type];
       } else {
         return "tw-border-[#7E9AB1]";
@@ -29,8 +28,7 @@ export default {
 
 <template>
   <button v-if="!url" :tabindex="tabIndex || 0"
-    class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0"
-    :class="isLevelCard ? 'tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px] xl:tw-h-[225px] xl:tw-w-[198px]' : 'tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]'"
+    class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0 tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]"
     :style="{
       background: backgroundUrl ? `url(${backgroundUrl})` : bgColor,
       backgroundSize: 'cover',

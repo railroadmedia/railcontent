@@ -57,9 +57,6 @@ class CustomerIoService
         $purchaseTimestamp = Carbon::createFromTimestampMs($event['purchased_at_ms'])->timestamp;
 
         $attributes = [];
-        if ($brand !== 'musora') {
-            $attributes['primary_brand'] = $brand;
-        }
         $attributes[$brand . '_membership_status'] = $subscriptionStatus;
         $attributes[$brand . '_membership_subscription_type'] = $product->subscription_interval_count . "_" . $product->subscription_interval_type;
         $attributes[$brand . '_membership_subscription_renewal-date'] = $expirationTimestamp;

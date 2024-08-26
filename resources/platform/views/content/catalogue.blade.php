@@ -7,7 +7,7 @@
 @php
     $askQuestionRecipient = config('mailora.' . $brand . '.ask-question-recipient');
     $emailLogoLink = config('mailora.' . $brand . '.logo-link');
-    if (isset($startedLessons)) {   
+    if (isset($startedLessons)) {
         $decodedStartedLessons = json_decode($startedLessons);
         $formattedStartedLessons = json_encode(isset($decodedStartedLessons) && isset($decodedStartedLessons->data) ? $decodedStartedLessons->data : []);
     }
@@ -16,6 +16,7 @@
 @section('content')
     <div id="app">
         <catalogue
+            catalogue-type="{{ $catalogueType }}"
             :has-started-lessons="{{ json_encode($hasStartedLessons) }}"
             :lesson-type="{{ json_encode($lessonType) }}"
             :brand="{{ json_encode($brand) }}"

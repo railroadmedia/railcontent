@@ -16,7 +16,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Signifly\Shopify\Shopify;
 
 class EvaluateOrder implements ShouldQueue
@@ -54,36 +53,36 @@ class EvaluateOrder implements ShouldQueue
         try {
             $ecommerceModel = $this->order->getEcommerceModel();
             $this->handleRateLimit();
-            $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
-            $action = $this->getActionToTake($truePaymentAmount);
-            $note = null;
-        } catch (Exception $e) {
-            // DEV NOTE: after running this in production, we would occasionally get a 503 response code from Shopify
-            // (seemingly when attempting to get the metafields). This just means that Shopify's server is temporarily
-            // unavailable and we should retry. So check for that, and retry if it happens.
-            if (Str::startsWith($e->getMessage(), 'HTTP request returned status code 503')) {
-                Log::debug(sprintf('%s: %s', $this->getClassName(), $e->getMessage()));
-                $this->release(1);
-                return;
+
+            // some orders were partially- or fully refunded after launch, so we'll treat those as matched
+            if (in_array($this->order->financialStatus, ['partially_refunded', 'refunded'])) {
+                $truePaymentAmount = $this->order->currentTotalPrice;
+                $action = ShopifyOrderFix::ACTION_MATCHED;
+                $note = sprintf('Order was %s in Shopify post-launch. Treating as matched.', Str::replace('_', ' ', $this->order->financialStatus));
             } else {
-                Log::error(sprintf('%s: %s', $this->getClassName(), $e->getMessage()));
-                $truePaymentAmount = 0;
-                $action = ShopifyOrderFix::ACTION_FAILURE;
-                $ecommerceModel = null;
-                $note = $e->getMessage();
+                $truePaymentAmount = $this->paymentService->getTotalPaid($ecommerceModel);
+                $action = $this->getActionToTake($truePaymentAmount);
+                $note = null;
             }
+
+        } catch (Exception $e) {
+            Log::error(sprintf('%s: %s', $this->getClassName(), $e->getMessage()));
+            $truePaymentAmount = 0;
+            $action = ShopifyOrderFix::ACTION_FAILURE;
+            $ecommerceModel = null;
+            $note = $e->getMessage();
         }
 
         $fix = new ShopifyOrderFix([
             'original_shopify_order_id' => $this->order->id,
-            'shopify_order_price' => $this->order->currentTotalPrice,
+            'shopify_order_price' => $this->order->totalPrice,
             'shopify_order_currency' => $this->order->currency,
             'true_payment_amount' => $truePaymentAmount,
             'action_taken' => $action,
             'status' => ShopifyOrderFix::STATUS_EVALUATED,
             'notes' => $note,
             'processed_at' => $this->order->processedAt,
-            'order_total_usd' => $action === ShopifyOrderFix::ACTION_MATCHED ? $this->order->currentTotalPrice : $truePaymentAmount,
+            'order_total_usd' => $action === ShopifyOrderFix::ACTION_MATCHED ? $this->order->totalPrice : $truePaymentAmount,
         ]);
         if ($ecommerceModel) {
             $fix->ecommerceModelable()->associate($ecommerceModel);
@@ -110,7 +109,7 @@ class EvaluateOrder implements ShouldQueue
         // allow for a 2% variance
         $acceptableDiff = $truePaymentAmount * 0.02;
 
-        if (abs($this->order->currentTotalPrice - $truePaymentAmount) > $acceptableDiff) {
+        if (abs($this->order->totalPrice - $truePaymentAmount) > $acceptableDiff) {
             return ShopifyOrderFix::ACTION_REPLACED;
         }
         return ShopifyOrderFix::ACTION_MATCHED;

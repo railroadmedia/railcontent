@@ -24,4 +24,9 @@ class ContentHierarchy extends Model
     {
         return $this->belongsTo(Content::class, 'child_id');
     }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'parent_id');
+    }
 }

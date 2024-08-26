@@ -8,12 +8,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onBeforeMount } from 'vue';
 
 const props = defineProps({
     difficultyValue: {
-        type: String,
-        required: true
+        type: [String, Number],
+        required: true,
+        default: 0
     },
     textCase: {
         type: String,
@@ -93,4 +94,5 @@ const formattedDifficulty = computed(() => {
             return difficultyText.value;
     }
 });
+
 </script>

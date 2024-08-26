@@ -24,10 +24,7 @@ const props = defineProps({
   },
   stepName: {
     type: String,
-  },
-  currentStep: {
-    type: Number,
-  },
+  }
 });
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
@@ -46,7 +43,7 @@ function handleMultiSelection(selection) {
 }
 
 function goBack() {
-  emit('onChangeStep', props.currentStep - 1);
+  emit('onChangeStep', 4);
 }
 
 const isNextButtonDisabled = () => {
@@ -70,18 +67,19 @@ const handleNextStep = () => {
   saveTopics({
     data,
     brand: props.brand
+  }).then(() => {
+    emit('onChangeStep', 6);
+    emit('onCheckStep', 5, true);
   }).catch(() => {
     window.shownotification({
       icon: 'error',
       text: 'There was an error saving your topics preferences, please try again later.'
     });
   });
- 
-  emit("onCheckStep", props.currentStep, true);
-  emit("onChangeStep", props.currentStep + 1);
 };
 const headerProps = {
   title: 'Okay, and what topics would you like to study?',
+  subtitle: 'You can select more than one topic and change your settings in your profile at any time.',
   hideBackButton: false,
   hideCloseButton: true,
 };
@@ -103,7 +101,7 @@ const headerProps = {
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
               classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next
       </Button>
-      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
+      <ProgressBar :brand="brand" :currentStep="5" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
               classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next
       </Button>

@@ -138,6 +138,9 @@
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
+            window.railcontentConfig = {};
+            window.railcontentConfig.token = "{{ csrf_token() }}";
+            window.railcontentConfig.userId = "{{  json_encode($userData['id']) }}";
         </script>
 
         {{-- Customer.io --}}
@@ -155,7 +158,6 @@
                 'email' => !empty(user()) ? user()->email : null,
                 'brand' => $brand,
                 'mobileAppWebView' => true,
-                'hideInMobile' => $hideHelpscoutInMobile ?? false,
             ])
         @endif
 

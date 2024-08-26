@@ -3,10 +3,11 @@ import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "@units/Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
+import SkipStep from "../SkipStep.vue";
 import Branding from "../Branding.vue";
 import { getMultiSelectOptions } from "../utils";
 import { saveGoals } from "../services";
-import MultiSelect from "../../MultiSelect/MultiSelect.vue";
+import SingleChoicePills from "../../SingleChoicePills/SingleChoicePills.vue";
 
 const props = defineProps({
   brand: {
@@ -23,10 +24,7 @@ const props = defineProps({
   },
   stepName: {
     type: String
-  },
-  currentStep: {
-    type: Number,
-  },
+  }
 });
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
@@ -36,14 +34,14 @@ const options = getMultiSelectOptions({
   ...props
 });
 
-const currentSelection = ref(props.info.goals[props.brand]);
+const currentSelection = ref(props.info.goals[brand]);
 
 function handleSelect(selection) {
   currentSelection.value = selection;
 }
 
 function goBack() {
-  emit('onChangeStep', props.currentStep - 1);
+  emit('onChangeStep', 4);
 }
 
 const isNextButtonDisabled = () => {
@@ -56,18 +54,10 @@ const isNextButtonDisabled = () => {
 };
 
 const handleRedirect = () => {
-  const data = [];
-
   emit("onChangeInfo", { ...props.info, goals: { ...props.info.goals, [props.brand]: currentSelection.value } });
 
-  Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
-    if (isChecked) {
-      data.push(type);
-    }
-  })
-
   saveGoals({
-    goals: data,
+    goals: currentSelection.value,
     brand: props.brand
   }).then(() => {
     window.location.href = '/members';
@@ -80,7 +70,8 @@ const handleRedirect = () => {
 };
 
 const headerProps = {
-  title: "Before we finish, let's select your goals!",
+  title: "Great, now let’s set some goals!",
+  subtitle: "Select the goal that describes your aspirations the most.",
   hideCloseButton: true,
 };
 </script>
@@ -94,20 +85,20 @@ const headerProps = {
         tw-justify-between
         xl:tw-justify-center
         tw-px-[18px]
-        lg:tw-pb-[80px]
       ">
-        <MultiSelect :bigOption="true" :options="options" :initialSelection="currentSelection" @onChangeSelection="handleSelect">
-        </MultiSelect>
+        <SingleChoicePills :options="options" :selectedOption="currentSelection" @onSelect="handleSelect">
+        </SingleChoicePills>
       </div>
     </template>
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">GET STARTED
+        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account
       </Button>
-      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      <ProgressBar :brand="brand" :currentStep="6" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">GET STARTED
+        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account
       </Button>
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0" />
       <Branding :brand="brand" :showInstrumentBrand="true" classOverride="tw-pt-[12px]" />
     </template>
   </StepWrapper>

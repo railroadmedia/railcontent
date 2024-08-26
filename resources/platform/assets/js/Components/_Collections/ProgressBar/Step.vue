@@ -22,9 +22,6 @@ const props = defineProps({
     },
     isBarBranded: {
         type: Boolean
-    },
-    currentStepDisplayNumber: {
-        type: Number
     }
 })
 const emit = defineEmits(['navigateToStep'])
@@ -52,7 +49,7 @@ const emit = defineEmits(['navigateToStep'])
                         v-if="stepType === 'number'"
                         :class="`md:${bgColor[brand]} tw-bg-white tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold`"
                     >
-                        <span class="tw-hidden md:tw-inline">{{ currentStepDisplayNumber }}</span>
+                        <span class="tw-hidden md:tw-inline">{{ currentStep + 1 }}</span>
                     </div>
                 </div>
                 <div

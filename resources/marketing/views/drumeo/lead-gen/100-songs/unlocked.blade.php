@@ -28,26 +28,33 @@
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
     <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
-            <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoSongs }}+ more songs + world-class drum lessons <br>
+            <div class="text-center inline-block align-middle hover:opacity-90 transition-opacity duration-300">
+                <p class="inline-block align-middle mx-auto text-sm leading-tight">Get {{ Prices::$drumeoSongs }}+ more songs + world-class drum lessons <br>
                     inside Drumeo. Click for a FREE trial.</p>
             </div>
         </div>
     </a>
 
-    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
-        <div class="container mx-auto">
-            <h3 class="mb-4 md:mb-5">
-                <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>
-            </h3>
-            <p class="leading-normal mb-6 md:mb-12 lg:mb-16 max-w-2xl">
-                Say hello to your free charts! Click below to get started playing your favorite songs. You’ll notice a handy player that scrolls along with the music in real time and lets you loop, add/remove metronome, and slow down any part you want.
-                <br><br>
-                Choose a song below:
-            </p>
+    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-6" style="background:linear-gradient(135deg, #2b062e, #1b1b3f, #000e29)">
+        <div class="container mx-auto max-w-3xl">
+{{--            <h3 class="mb-4 md:mb-5">--}}
+{{--                <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>--}}
+{{--            </h3>--}}
+{{--            <p class="leading-normal mb-6 md:mb-12 lg:mb-16 max-w-2xl">--}}
+{{--                Say hello to your free charts! Click below to get started playing your favorite songs. You’ll notice a handy player that scrolls along with the music in real time and lets you loop, add/remove metronome, and slow down any part you want.--}}
+{{--                <br><br>--}}
+{{--                Choose a song below:--}}
+{{--            </p>--}}
+            <h4 class="leading-normal my-40 sm:my-40"><strong>
+                This resource is no longer available.
+                </strong><br>
 
-            @include('drumeo.lead-gen.100-songs._songs')
+                We're overhauling Drumeo's Songs experience and have to temporarily deactivate features. As a result, the 100 Songs resource is no longer available. We know this can throw off your practice routine and we apologize for any inconvenience.
+                <br>
+                Keep crushing it on the drums 💪
+            </h4>
+
+{{--            @include('drumeo.lead-gen.100-songs._songs')--}}
 
         </div>
     </section>
