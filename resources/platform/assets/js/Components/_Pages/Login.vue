@@ -203,6 +203,9 @@ const sendSetupEmail = () => {
           :confirmationDescription="confirmationDescription" @change-form="changeCurrentForm" @show-notification="showNotification" />
       </div>
     </div>
+    <div v-if="currentForm === 'login-email'" class="tw-bg-[#00101D] md:tw-bg-transparent tw-absolute tw-z-40 tw-bottom-0 tw-w-full tw-text-center tw-justify-center tw-items-center tw-pt-[20px] tw-pb-[40px]">
+        <a href="/contact" class="tw-text-[#9EC0DC] md:tw-text-white tw-text-[14px] tw-leading-[21px]">Get support</a>
+      </div>
   </div>
 </template>
 
