@@ -9,11 +9,11 @@
             <InputLabel :initialValue="emailInput"
                 inputOverride="tw-w-full tw-h-[40px] tw-text-[#00101D] tw-text-[14px] tw-leading-[21px]"
                 :brand="userStore.brand" inputType="email" id="loginEmail" inputName="email" labelValue="Email address"
-                placeholder="Enter your email..." :inputErrors="emailError" @onChange="handleEmailChange"
+                placeholder="Enter your email..." :inputErrors="inputErrors" @onChange="handleEmailChange"
                 labelOverride="tw-font-normal" clearButtonOverride="tw-text-black" @onEnter="validateEmail"
                 :showClearButton="true" />
         </div>
-        <LoginButton :disabled="emailInput.length === 0" type="button" @on-button-click="validateEmail">
+        <LoginButton :disabled="emailInput.length === 0 || !isValidEmail(emailInput)" type="button" @on-button-click="validateEmail">
             <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
                 <LoadingSpinner /> NEXT
             </span>
@@ -47,6 +47,20 @@ const props = defineProps({
     isLoading: Boolean,
     orderNowUrl: String
 });
+
+import { computed } from "vue";
+
+const inputErrors = computed(() => {
+    if (props.emailInput && !isValidEmail(props.emailInput)) {
+        return "The email must be a valid email address";
+    }
+    return props.emailError;
+});
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 const emit = defineEmits(['email-change', 'validate-email']);
 

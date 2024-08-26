@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "@units/InputLabel/InputLabel.vue";
 import LoginButton from "@units/Button/LoginButton.vue";
@@ -16,8 +16,8 @@ const props = defineProps({
     default: false,
   },
   errors: {
-    type: Array,
-    default: [],
+    type: String,
+    default: '',
   },
   token: {
     type: String,
@@ -35,14 +35,28 @@ const props = defineProps({
 
 const passwordInput = ref('');
 const confirmPasswordInput = ref('');
+const passwordErrors = ref('');
+const confirmPasswordErrors = ref('');
 const isLoading = ref(false);
 const isPasswordVisible = ref(false);
 
 const handleConfirmPasswordChange = (val) => {
+  if (val.length < 8 && val.length > 0) {
+    confirmPasswordErrors.value = 'The password must be at least 8 characters';
+  } else if (val !== passwordInput.value) {
+    confirmPasswordErrors.value = 'Must match the new password';
+  } else {
+    confirmPasswordErrors.value = '';
+  }
   confirmPasswordInput.value = val;
 };
 
 const handlePasswordChange = (val) => {
+  if (val.length < 8 && val.length > 0) {
+    passwordErrors.value = 'The password must be at least 8 characters';
+  }  else {
+    passwordErrors.value = '';
+  }
   passwordInput.value = val;
 };
 
@@ -54,6 +68,10 @@ const handleButtonClick = (e) => {
 const toggleSeePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
+
+const isButtonDisabled = computed(() => {
+  return passwordInput.value.length === 0 || confirmPasswordInput.value.length === 0 || passwordInput.value !== confirmPasswordInput.value || isLoading.value;
+});
 
 const constantTexts = {
   reset: {
@@ -96,11 +114,6 @@ onMounted(() => {
 
       <section class="tw-flex tw-flex-col tw-w-full tw-items-center tw-w-full tw-max-w-[400px]">
         <form method="post" :action="submiturl" class="tw-flex tw-flex-col tw-py-[40px] tw-w-full">
-          <ul v-if="errors.length > 0" class="tw-flex tw-flex-col tw-mb-3 text-error list-style-none tw-px-[13px]">
-            <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
-              {{ error }}
-            </li>
-          </ul>
           <slot v-if="usecsrftoken" name="csrf"></slot>
           <input type="hidden" :name="formType === 'create' ? 'verification_token' : 'token'" :value="token">
           <input type="hidden" name="email" :value="email">
@@ -108,7 +121,7 @@ onMounted(() => {
             <h2 class="tw-text-[24px] tw-leading-[36px] tw-font-bold tw-w-full tw-text-center tw-pb-[10px]">{{ constantTexts[formType].formTitle }}
             </h2>
             <p class="tw-px-[13px] tw-text-[16px] tw-leading-[24px] tw-mb-[30px] tw-text-center">{{ constantTexts[formType].descriptionFirst }} <strong>{{ email }}.</strong> {{ constantTexts[formType].descriptionLast }}</p>
-            <InputLabel infoMessage="Minimum of 8 characters" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+            <InputLabel :inputErrors="passwordErrors" infoMessage="Minimum of 8 characters" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
               :inputType="isPasswordVisible ? 'text' : 'password'" id="newPassword" inputName="password"
               labelValue="Password" placeholder="Enter your password..."
               @onChange="handlePasswordChange" :showCustomButton="true">
@@ -123,7 +136,7 @@ onMounted(() => {
             </InputLabel>
           </div>
           <div class="tw-flex tw-flex-col tw-mb-[20px] tw-relative">
-            <InputLabel infoMessage="Must match the new password" wrapperOverride="tw-text-[16px]" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
+            <InputLabel :inputErrors="confirmPasswordErrors" infoMessage="Must match the new password" wrapperOverride="tw-text-[16px]" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
               :inputType="isPasswordVisible ? 'text' : 'password'" id="confirmNewPassword"
               inputName="password_confirmation" labelValue="Confirm password"
               placeholder="Confirm your password..." @onChange="handleConfirmPasswordChange"
@@ -139,7 +152,7 @@ onMounted(() => {
             </InputLabel>
           </div>
 
-          <LoginButton :disabled="!confirmPasswordInput.length || isLoading" type="button"
+          <LoginButton :disabled="isButtonDisabled" type="button"
             @on-button-click="handleButtonClick">
             <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
               <LoadingSpinner /> {{ constantTexts[formType].ctaLoadingText }}

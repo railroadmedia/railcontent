@@ -62,6 +62,9 @@ const changeCurrentForm = (val) => {
 };
 
 const handleEmailChange = (val) => {
+  if (Math.abs(val.length - emailInput.value.length) > 0) {
+    emailError.value = '';
+  }
   emailInput.value = val;
 };
 

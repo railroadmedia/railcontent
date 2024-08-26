@@ -93,11 +93,11 @@ function handleEmailSend(withoutTimer = false) {
                         formattedTimer.value = '00:30';
                     }
                 }, 1000);
+                emit('show-notification', {
+                    icon: 'check',
+                    text: 'Email sent. Please check your inbox.'
+                });
             }
-            emit('show-notification', {
-                icon: 'check',
-                text: 'Email sent. Please check your inbox.'
-            });
         })
         .catch((e) => {
             console.log('Error sending email', e);
