@@ -134,7 +134,7 @@
 @section('global-body')
     @php
         $originalPrice = 240;
-        $discountedPrice = 200;
+        $discountedPrice = 150;
     @endphp
 
     @include("pianote.sales.partials._nav", [
@@ -464,7 +464,7 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&redirect=/order&promo-code=special&locked=true';
+            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&redirect=/order&promo-code=back-to-school&locked=true';
     @endphp
     <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6">
