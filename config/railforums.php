@@ -50,11 +50,6 @@ return [
 
     // middleware
     'controller_middleware' => [
-        \Illuminate\Cookie\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
