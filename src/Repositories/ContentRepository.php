@@ -752,15 +752,13 @@ class ContentRepository extends RepositoryBase
         $subquery['subqueryOne'] =
             $this->query()
                 ->selectRaw(
-                    rawQuery(
-                        'ROW_NUMBER() OVER (order by railcontent_content.'.
-                        $orderColumn.
-                        ' '.
-                        $direction.
-                        ', railcontent_content.id '.
-                        $direction.
-                        ') AS rowNumber'
-                    )
+                    'ROW_NUMBER() OVER (order by railcontent_content.' .
+                    $orderColumn .
+                    ' ' .
+                    $direction .
+                    ', railcontent_content.id ' .
+                    $direction .
+                    ') AS rowNumber'
                 )
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
@@ -770,7 +768,7 @@ class ContentRepository extends RepositoryBase
 
         $subquery['subqueryTwo'] =
             $this->query()
-                ->selectRaw(rawQuery('rowNumber'))
+                ->selectRaw('rowNumber')
                 ->fromSub($subquery['subqueryOne'], 'sub')
                 ->where('id', $contentId)
                 ->get()
@@ -2977,7 +2975,7 @@ class ContentRepository extends RepositoryBase
                 ->groupBy('railcontent_content.id');
         }
 
-        return $contentRows->count(rawQuery('DISTINCT '.ConfigService::$tableContent.'.id'));
+        return $contentRows->count(DB::raw('DISTINCT '.ConfigService::$tableContent.'.id'));
     }
 
     private function getFilterOptionsWithCounting($selectedFilterCategories)

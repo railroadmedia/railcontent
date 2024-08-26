@@ -44,11 +44,11 @@ class ContentQueryBuilder extends QueryBuilder
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {
-            $this->addSelect([rawQuery('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
+            $this->addSelect([DB::raw('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
         }
 
         if ($orderBy && $orderBy == 'progress') {
-            $this->addSelect([rawQuery(ConfigService::$tableUserContentProgress.'.updated_on ')]);
+            $this->addSelect([DB::raw(ConfigService::$tableUserContentProgress.'.updated_on ')]);
         }
 
         return $this;
@@ -763,11 +763,7 @@ class ContentQueryBuilder extends QueryBuilder
                         )
                     );
             });
-            $this->orderByRaw(
-                rawQuery(
-                    implode(', ', $orderByColumns).' '.$orderDirection
-                )
-            );
+            $this->orderByRaw(implode(', ', $orderByColumns).' '.$orderDirection);
         } elseif ($orderBy == 'content_likes') {
             $this->leftJoin(ConfigService::$tableContentLikes, function (JoinClause $joinClause) {
                 $joinClause->on(
@@ -777,18 +773,10 @@ class ContentQueryBuilder extends QueryBuilder
                 );
             });
 
-            $this->orderByRaw(
-                rawQuery(
-                    implode(', ', $orderByColumns).' '.$orderDirection
-                )
-            );
+            $this->orderByRaw(implode(', ', $orderByColumns).' '.$orderDirection);
             $this->groupBy(ConfigService::$tableContent.'.id');
         } else {
-            $this->orderByRaw(
-                rawQuery(
-                    implode(', ', $orderByColumns).' '.$orderDirection.', '.ConfigService::$tableContent.'.id'.' '.$orderDirection
-                )
-            );
+            $this->orderByRaw(implode(', ', $orderByColumns).' '.$orderDirection.', '.ConfigService::$tableContent.'.id'.' '.$orderDirection);
         }
 
         return $this;
@@ -875,10 +863,10 @@ class ContentQueryBuilder extends QueryBuilder
         if ($isTableContent) {
             $field = $groupBy['field'];
             $this->addSelect([
-                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
-                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
-                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as id'),
-                                 rawQuery(
+                                 DB::raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
+                                 DB::raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
+                                 DB::raw(ConfigService::$tableContent.'.'.$field.' as id'),
+                                 DB::raw(
                                      "(
             GROUP_CONCAT(
             ".ConfigService::$tableContent.".id
@@ -908,16 +896,16 @@ class ContentQueryBuilder extends QueryBuilder
               $joinExists = true;
             }
         }
-       $this->addSelect([
-                             $this->raw($alias.'.'.$field.' as grouped_by_field'),
-                             $this->raw($alias.'.'.$field.' as id'),
-                             rawQuery(
-                                 "( 
+        $this->addSelect([
+            $this->raw($alias . '.' . $field . ' as grouped_by_field'),
+            $this->raw($alias . '.' . $field . ' as id'),
+            DB::raw(
+                "( 
            GROUP_CONCAT(
-            ".$alias.".content_id      
+            " . $alias . ".content_id      
         ) ) as lessons_grouped_by_field"
-                             ),
-                         ]);
+            ),
+        ]);
         
         if(!$joinExists) {
             $this->

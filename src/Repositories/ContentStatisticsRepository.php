@@ -746,11 +746,11 @@ EOT;
                                         rawQuery($alias . '.`value`'),
                                         function($query) use ($value, $subAlias, $subJoinAlias) {
                                             $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(rawQuery(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
                                                 ->leftJoin(
                                                     rawQuery(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    rawQuery($subJoinAlias . '.id'),
-                                                    rawQuery($subAlias . '.content_id')
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
                                                 )
                                                 ->where(
                                                     rawQuery($subAlias . '.`key`'),
@@ -800,11 +800,11 @@ EOT;
                                         'value',
                                         function($query) use ($value, $subAlias, $subJoinAlias) {
                                             $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(rawQuery(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
                                                 ->leftJoin(
                                                     rawQuery(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    rawQuery($subJoinAlias . '.id'),
-                                                    rawQuery($subAlias . '.content_id')
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
                                                 )
                                                 ->where(
                                                     rawQuery($subAlias . '.`key`'),

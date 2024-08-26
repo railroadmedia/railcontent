@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 
 class UserPlaylistsRepository extends RepositoryBase
 {
@@ -251,7 +252,7 @@ class UserPlaylistsRepository extends RepositoryBase
                             ->on(
                                 'c.position',
                                 '=',
-                                rawQuery(
+                                DB::raw(
                                     '(select min(position) from '.
                                     config('railcontent.table_prefix').
                                     'user_playlist_content'.

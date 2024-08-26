@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -80,25 +81,21 @@ abstract class RepositoryBase
         $this->databaseManager = app('db');
 
         if (empty(self::$connectionMask)) {
-            /**
-             * @var $realConnection Connection
-             */
-            $realConnection = app('db')->connection(config('railcontent.database_connection_name'));
+            $realConnection = DB::connection(config('railcontent.database_connection_name'));
             $realConfig = $realConnection->getConfig();
 
-            $realConfig['name'] = config('railcontent.connection_mask_prefix').$realConfig['name'];
+            $realConfig['name'] = config('railcontent.connection_mask_prefix') . $realConfig['name'];
 
-            $maskConnection = new Connection(
-                $realConnection->getPdo(),
-                $realConnection->getDatabaseName(),
-                $realConnection->getTablePrefix(),
-                $realConfig
-            );
+            // Create a new connection configuration
+            config(["database.connections.{$realConfig['name']}" => $realConfig]);
 
-            if (!empty($realConnection->getSchemaGrammar())) {
+            // Create the new connection
+            $maskConnection = DB::connection($realConfig['name']);
+
+            // Copy over any custom configurations
+            if ($realConnection->getSchemaGrammar()) {
                 $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
             }
-
             $maskConnection->setQueryGrammar($realConnection->getQueryGrammar());
             $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
             $maskConnection->setPostProcessor($realConnection->getPostProcessor());

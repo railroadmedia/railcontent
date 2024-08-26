@@ -27,10 +27,10 @@ class FullTextSearchQueryBuilder extends QueryBuilder
                 ConfigService::$tableSearchIndexes . '.low_value as low_value',
                 ConfigService::$tableSearchIndexes . '.created_at as created_at',
                 ConfigService::$tableSearchIndexes . '.content_status as content_status',
-                rawQuery("( (MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 18 * (UNIX_TIMESTAMP(content_published_on) / 1000000000)) + MATCH (medium_value) AGAINST (\"'$term'\") * 2 + MATCH (low_value) AGAINST (\"'$term'\")) as score"),
-                rawQuery(" MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 18 * (UNIX_TIMESTAMP(content_published_on) / 1000000000) AS high_score"),
-                rawQuery(" MATCH (medium_value) AGAINST (\"'$term'\") * 2 AS medium_score"),
-                rawQuery(" MATCH (low_value) AGAINST (\"'$term'\") AS low_score")
+                DB::raw("( (MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 18 * (UNIX_TIMESTAMP(content_published_on) / 1000000000)) + MATCH (medium_value) AGAINST (\"'$term'\") * 2 + MATCH (low_value) AGAINST (\"'$term'\")) as score"),
+                DB::raw(" MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 18 * (UNIX_TIMESTAMP(content_published_on) / 1000000000) AS high_score"),
+                DB::raw(" MATCH (medium_value) AGAINST (\"'$term'\") * 2 AS medium_score"),
+                DB::raw(" MATCH (low_value) AGAINST (\"'$term'\") AS low_score")
             ]
         );
 
