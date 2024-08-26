@@ -130,6 +130,11 @@ class RevenueCatController extends Controller
                             : ShopifyPaymentSourceEnum::Google,
                         null //defaults to USD
                     );
+
+                    $user->primary_brand = in_array($musoraProduct->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
+                        ? $musoraProduct->brand
+                        : null;
+
                     $this->setUserSubscription($user, $type);
                     $this->customerIoService->updateCustomerIoAttributesFromRevenueCat(
                         $user,

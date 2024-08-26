@@ -69,7 +69,6 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
         try {
             $customerIoService->createEventForEmailOrId(
                 $this->customerEmail,
-                $this->customerId,
                 $this->accountName,
                 $this->eventName,
                 $this->eventType
@@ -87,12 +86,12 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
     public function failed(Throwable $exception)
     {
         error_log(
-            'Error on CustomerIoTriggerEvent job trying send an email from customer.io. '.
-            '$customerId='.$this->customerId.' - '.
-            '$customerEmail='.$this->customerEmail.' - '.
-            '$accountName='.$this->accountName.' - '.
-            '$eventName='.$this->eventName.' - '.
-            '$eventType='.$this->eventType.' - '
+            'Error on CustomerIoTriggerEvent job trying send an email from customer.io. ' .
+                '$customerId=' . $this->customerId . ' - ' .
+                '$customerEmail=' . $this->customerEmail . ' - ' .
+                '$accountName=' . $this->accountName . ' - ' .
+                '$eventName=' . $this->eventName . ' - ' .
+                '$eventType=' . $this->eventType . ' - '
         );
 
         error_log($exception);

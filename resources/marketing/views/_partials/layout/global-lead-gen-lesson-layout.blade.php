@@ -128,7 +128,15 @@
                                 $resourceName = 'zipURL';
                             }
                         @endphp
-
+                        @if($leadgen->slug == 'technique-essentials/lessons')
+                            @include('_partials.components.leadgen-assignment', [
+                                "title" => $assignment->title,
+                                'subTitle' => $assignment->subtitle,
+                                $resourceName => $assignment->src,
+                                'soundslice' => $assignment->soundslice,
+                                'num' => $key+1,
+                            ])
+                        @else
                         @include('_partials.components.leadgen-assignment-resources', [
                             "title" => $assignment->title,
                             'subTitle' => $assignment->subtitle,
@@ -136,6 +144,7 @@
                             'soundslice' => $assignment->soundslice,
                             'num' => $key+1,
                         ])
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -240,7 +249,7 @@
         ])
     @endif
 
-     @if($theme === 'pianote' && $leadgen->slug == 'piano-technique-essentials/lessons')
+     @if($theme === 'pianote' && $leadgen->slug == 'technique-essentials/lessons')
         @include('drumeo.lead-gen.partials._learn-more', [
             'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/sign-up-bg.webp',
             'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/pianote/lead-gen/technique-essentials/30DTBT-logo-light.webp',

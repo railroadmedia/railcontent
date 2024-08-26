@@ -2,12 +2,16 @@
 
 namespace App\Modules\Content\Controllers;
 
-use App\Modules\Content\Models\Content;
+use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Requests\ContentMetadataRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rules\Enum;
 use Modules\UserManagementSystem\Models\User;
 
 class ContentMetadataController extends Controller
@@ -16,43 +20,71 @@ class ContentMetadataController extends Controller
     {
     }
 
-    public function isLikedByUser(Request $request, Content $content, ?User $user = null): JsonResponse
+    public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
         if (is_null($user)) {
             $user = user();
         }
 
-        // @codeCoverageIgnoreStart
-        // safety catch
-        if (!$user) {
-            return response()->json(['error' => 'Invalid UserId or No Authenticated User'], 404);
+        $contentIds = $request->query('content_ids', []);
+        $results = [];
+        foreach ($contentIds as $contentId) {
+            $results[$contentId] = ContentLike::isContentLikedByUser($contentId, $user->id);
         }
-        // @codeCoverageIgnoreEnd
-
-        $liked = ContentLike::isContentLikedByUser($content->id, $user->id);
-        return response()->json([$content->id => $liked]);
+        return response()->json($results);
     }
 
-    public function userProgress(Request $request, Content $content, ?User $user = null): JsonResponse
+    public function userProgress(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
         if (is_null($user)) {
             $user = user();
         }
 
-        // @codeCoverageIgnoreStart
-        // safety catch
-        if (!$user) {
-            return response()->json(['error' => 'Invalid UserId or No Authenticated User'], 404);
-        }
-        // @codeCoverageIgnoreEnd
-
         try {
-            $progressState = ContentUserProgress::getState($content->id, $user->id);
-            return response()->json([$content->id => $progressState->toArray()]);
+            $contentIds = $request->query('content_ids', []);
+            $results = [];
+            foreach ($contentIds as $contentId) {
+                $progressState = ContentUserProgress::getState($contentId, $user->id);
+                $results[$contentId] = $progressState->toArray();
+            }
+            return response()->json($results);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
+    }
+
+    public function inProgressForUser(Request $request, ?User $user = null): JsonResponse
+    {
+        $validated = $request->validate(
+            [
+                'content_type' => 'required|string',
+                'brand' => ['nullable',  new Enum(Brand::class)],
+                'user' => 'nullable'
+            ]
+        );
+
+        // if the user ID isn't provided, grab the user from the session
+        if (is_null($user)) {
+            $user = user();
+        }
+
+        $type = $validated['content_type'];
+        $brandValue = $validated['brand'] ?? null;
+        $brand = null;
+        if ($brandValue) {
+            $brand = Brand::from($brandValue);
+        }
+
+        $inProgress = $user->progress()
+            ->incomplete()
+            ->ofContentType($type)
+            ->when(!is_null($brand), function (Builder $q) use ($brand) {
+                return $q->ofContentBrand($brand);
+            })
+            ->pluck('content_id');
+
+        return response()->json([ProgressState::Started->value => $inProgress]);
     }
 }

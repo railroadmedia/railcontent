@@ -31,6 +31,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         ]);
     });
     Route::get('/double-bass-101', [LeadGenController::class, 'doubleBass101']);
+    Route::get('/blue-man', [LeadGenController::class, 'blueMan']);
     Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
     Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
     Route::get('/grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);

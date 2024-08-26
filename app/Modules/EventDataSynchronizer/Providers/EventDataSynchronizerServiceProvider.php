@@ -62,8 +62,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             HelpScoutEventListener::class . '@handleUserCreated',
         ],
         UserUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserUpdated',
-            HelpScoutEventListener::class . '@handleUserUpdated',
+            [CustomerIoSyncEventListener::class, 'handleUserUpdated'],
+            [HelpScoutEventListener::class, 'handleUserUpdated'],
         ],
         UserAccessPermissionsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
@@ -102,7 +102,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             CustomerIoSyncEventListener::class . '@handleFirstActivityPerDay',
         ],
         UTMLinks::class => [
-//            CustomerIoSyncEventListener::class . '@handleUTMLinks',
+            //            CustomerIoSyncEventListener::class . '@handleUTMLinks',
         ],
         MobileAppLogin::class => [
             CustomerIoSyncEventListener::class . '@handleMobileAppLogin',

@@ -67,7 +67,10 @@ class AccessCodeService
 
         if ($accessCode->is_claimed) {
             // Can't claim a code that's already claimed
-            throw new Exception("Access code already claimed");
+            if ($accessCode->claimer_id === $user->id) {
+                throw new Exception("This code has already been redeemed to your account");
+            }
+            throw new Exception("This code has already been redeemed");
         }
 
         $productIds = $this->getAccessCodeProducts($accessCode);
@@ -85,6 +88,12 @@ class AccessCodeService
         $accessCode->claimed_on = Carbon::now();
         $accessCode->updated_at = Carbon::now();
         $accessCode->save();
+
+        $user->primary_brand = in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
+            ? $accessCode->brand
+            : $user->primary_brand;
+
+        $user->save();
 
         event(new AccessCodeClaimed($accessCode, $user, $context));
 

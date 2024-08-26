@@ -106,7 +106,8 @@ class CohortPackController
             'cohort' => $cohort,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
-            'purchased' => $purchased
+            'purchased' => $purchased,
+            'recaptchaKey' => config('recaptcha.key'),
         ]);
     }
     public function purchased(Request $request, $domain, $brand, $slug)

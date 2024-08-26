@@ -78,6 +78,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
+    public function welcomeBackDiscount()
+    {
+        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
+    }
     public function restart()
     {
         return view('drumeo.sales.restart', ['theme' => 'drumeo']);
@@ -177,6 +181,21 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-independence', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    public function thirtyDayDoubleBass()
+    {
+        $productId = 930;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-double-bass', [
             'recaptchaKey' => config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',

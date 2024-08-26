@@ -12,8 +12,11 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover  -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
@@ -136,6 +139,7 @@
                 <!-- Chapters -->
                 <VideoChapters
                     v-if="formattedChapters.length"
+                    :hide-action-buttons="!soundsliceSlug"
                     :chapters="formattedChapters"
                     @open-slice="openSlice"
                     @seek-to-chapter="seekToChapter"
@@ -213,6 +217,7 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     thisLessonJson: {
@@ -298,7 +303,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
+    if (props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
@@ -392,5 +397,9 @@ const noAccess = computed(() => {
 
 const thumbnailUrl = computed(() => {
     return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
+})
+
+const showDraftLabel = computed(() => {
+    return props.lessonData.status === 'draft';
 })
 </script>

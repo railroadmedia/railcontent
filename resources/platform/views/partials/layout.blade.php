@@ -96,6 +96,7 @@
                     :user-completed-account="{{ json_encode($showCompleteYourAccountButton) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
+                    tinymce-path="{{ mix('platform/js/tinymce/tinymce.min.js') }}"
                 >
                     <page-container
                         :is-mobile-app-web-view="{{ json_encode($isMobileAppWebView) }}"
@@ -154,6 +155,7 @@
                 'email' => !empty(user()) ? user()->email : null,
                 'brand' => $brand,
                 'mobileAppWebView' => true,
+                'hideInMobile' => $hideHelpscoutInMobile ?? false,
             ])
         @endif
 
@@ -175,8 +177,6 @@
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
         </script>
-
-
 
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
