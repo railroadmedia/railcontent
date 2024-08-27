@@ -246,6 +246,22 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function gstdp(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page) {
+            case null:
+                return view('pianote.lead-gen.getting-started-on-the-piano.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
+            case 'thank-you':
+                return view('pianote.lead-gen.getting-started-on-the-piano.thank-you', ['theme' => 'pianote', 'month' => true]);
+            case 'ty-annual':
+                return view('pianote.lead-gen.chord-hacks.ty-annual');
+            case 'ty-monthly':
+                return view('pianote.lead-gen.chord-hacks.ty-monthly');
+        }
+
+        throw new NotFoundHttpException();
+    }
+
     public function sightReading()
     {
         return view('pianote.lead-gen.sight-reading-made-simple', ['recaptchaKey' => config('recaptcha.key')]);
