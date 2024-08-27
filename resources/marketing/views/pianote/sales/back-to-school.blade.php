@@ -148,11 +148,11 @@
             <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
             <br>
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
-                <strong class="relative inline-block">EVERYTHING
+                <strong class="relative inline-block">SAVE $90
                     <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
                 </strong>
-                YOU NEED <br class="hidden sm:inline">
-                TO LEARN PIANO.
+                WITH THE  <br class="hidden sm:inline">
+                BACK TO SCHOOL SALE!
             </h1>
             <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
                 <i class="fas fa-check text-pianote"></i> Play-Along Lessons
@@ -473,11 +473,11 @@
                 <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
                 <br>
                 <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
-                    <strong class="relative inline-block">EVERYTHING
+                    <strong class="relative inline-block">SAVE $90
                         <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
                     </strong>
-                    YOU NEED <br class="hidden sm:inline">
-                    TO LEARN PIANO.
+                    WITH THE  <br class="hidden sm:inline">
+                    BACK TO SCHOOL SALE!
                 </h1>
                 <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
                     <i class="fas fa-check text-pianote"></i> Play-Along Lessons
