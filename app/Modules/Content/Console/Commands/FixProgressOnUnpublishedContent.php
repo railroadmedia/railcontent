@@ -12,7 +12,7 @@ class FixProgressOnUnpublishedContent extends Command
     protected $signature = 'content:fixProgressOnUnpublishedContent {--delete}';
     protected $description = 'Removed user progress on unpublished content';
 
-    public function handle()
+    public function handle(): void
     {
         $ignoreSlugs = ['1044-benny-goodman-sing-sing-sing'];
         $query = DB::table('railcontent_user_content_progress as p')

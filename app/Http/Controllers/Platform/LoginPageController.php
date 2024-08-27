@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Modules\Ecommerce\Controllers\ShopifyCartAPIController;
 use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
@@ -89,7 +90,7 @@ class LoginPageController extends BaseController
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }
 
-    public function showResetForm(Request $request)
+    public function showResetForm(Request $request): View
     {
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }

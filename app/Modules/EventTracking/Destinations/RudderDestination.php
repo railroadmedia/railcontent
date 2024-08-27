@@ -15,13 +15,13 @@ class RudderDestination
         $key = env('RUDDERSTACK_WRITE_KEY');
         if ($key) {
             try {
-                Rudder::init($key, array(
+                Rudder::init($key, [
                     "data_plane_url" => "https://musoraalearg.dataplane.rudderstack.com",
                     "consumer" => "lib_curl",
                     "debug" => !app()->isProduction(),
                     "max_queue_size" => 10000,
                     "flush_at" => 100
-                ));
+                ]);
             } catch (\Exception $e) {
                 Log::error("Rudderstack init failed: " . $e->getMessage());
                 $this->enabled = false;
@@ -44,11 +44,11 @@ class RudderDestination
             return;
         }
 
-        Rudder::track(array(
+        Rudder::track([
             "userId" => $user_id,
             "event" => $name,
             "properties" => $properties
-        ));
+        ]);
     }
 
     /**

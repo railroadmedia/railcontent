@@ -17,7 +17,7 @@ class WebUrlPathTest extends TestCase
 
     }
 
-    public function test_first_tier_web_url_resolves()
+    public function test_first_tier_web_url_resolves(): void
     {
         $brand = 'pianote';
         $parentContent = Content::factory()->create([

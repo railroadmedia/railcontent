@@ -7,11 +7,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class CourseDecorator extends TypeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     * @return Collection
-     */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         // url
         $contentsOfType = $contents->where('type', 'course');

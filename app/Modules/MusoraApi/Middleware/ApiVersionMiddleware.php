@@ -9,10 +9,7 @@ class ApiVersionMiddleware
 {
     /**
      *
-     * @param Request $request
-     * @param Closure $next
      * @param $guard
-     * @return mixed
      */
     public function handle(Request $request, Closure $next, $guard): mixed
     {

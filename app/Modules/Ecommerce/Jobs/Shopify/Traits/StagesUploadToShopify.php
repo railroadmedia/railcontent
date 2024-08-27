@@ -27,8 +27,6 @@ trait StagesUploadToShopify
      * Returns the applicable key/value pairs of data from the response, that can be used to push the file to the
      * expected staged area.
      *
-     * @param string $filename
-     * @return array
      * @throws Exception
      */
     protected function createStagedUpload(string $filename): array
@@ -91,7 +89,6 @@ trait StagesUploadToShopify
 
     /**
      * The Shopify connection used to interact with Shopify
-     * @return Shopify
      */
     abstract protected function getShopify(): Shopify;
 }

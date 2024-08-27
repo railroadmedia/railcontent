@@ -7,14 +7,6 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class BenefitResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
     public function get($resource, $attribute, $layouts)
     {
         $benefits = $resource->benefits()->get();
@@ -23,7 +15,7 @@ class BenefitResolver implements ResolverInterface
             $layout = $layouts->find('benefit-layout');
 
             if(!$layout) {
-                return;
+                return null;
             }
 
             return $layout->duplicateAndHydrate($benefit->id, [
@@ -35,19 +27,11 @@ class BenefitResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, $attribute, $groups)
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
+        $class::saved(function ($resource) use ($groups) {
             $benefits = $groups->map(function ($group, $index) {
                 return [
                     'icon' => $group->getAttributes()['icon'],
@@ -59,18 +43,18 @@ class BenefitResolver implements ResolverInterface
             });
 
             //update and insert items
-            foreach($benefits as $benefit) {
-                if(!is_null($benefit['id'])) {
+            foreach ($benefits as $benefit) {
+                if (!is_null($benefit['id'])) {
                     $dbBenefit = Benefit::find($benefit['id']);
 
-                    if(empty($benefit['desc'])) {
+                    if (empty($benefit['desc'])) {
                         $dbBenefit->delete();
                     } else {
-                        if($dbBenefit->desc !== $benefit['desc']) {
+                        if ($dbBenefit->desc !== $benefit['desc']) {
                             $dbBenefit->desc = $benefit['desc'];
                         }
 
-                        if($dbBenefit->order_number !== $benefit['order_number']) {
+                        if ($dbBenefit->order_number !== $benefit['order_number']) {
                             $dbBenefit->order_number = $benefit['order_number'];
                         }
 
@@ -78,9 +62,9 @@ class BenefitResolver implements ResolverInterface
                     }
 
                     $updatedIds[] = $benefit['id'];
-                } elseif(!empty($benefit['desc'])) {
+                } elseif (!empty($benefit['desc'])) {
                     $addBenefit = new Benefit();
-                    $addBenefit->product_id = $model['id'];
+                    $addBenefit->product_id = $resource['id'];
                     $addBenefit->icon = $benefit['icon'];
                     $addBenefit->heading = $benefit['heading'];
                     $addBenefit->desc = $benefit['desc'];
@@ -91,8 +75,8 @@ class BenefitResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)) {
-                $deleteIds = Benefit::where('product_id', '=', $model['id'])
+            if (isset($updatedIds)) {
+                $deleteIds = Benefit::where('product_id', '=', $resource['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }
         });

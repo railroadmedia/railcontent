@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -123,62 +126,55 @@ class Product extends Model
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
 
-    protected $casts = [
-        'sales_page_start_date' => 'datetime',
-        'sales_page_end_date' => 'datetime',
-        'shop_card_start_date' => 'datetime',
-        'shop_card_end_date' => 'datetime',
-    ];
-
     protected $revisionForceDeleteEnabled = true;
 
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-    public function productType()
+    public function productType(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'product_type_id');
     }
 
-    public function features()
+    public function features(): HasMany
     {
         return $this->hasMany(Feature::class)->orderBy('order_number');
     }
 
-    public function specs()
+    public function specs(): HasMany
     {
         return $this->hasMany(Spec::class)->orderBy('order_number');
     }
 
-    public function benefits()
+    public function benefits(): HasMany
     {
         return $this->hasMany(Benefit::class);
     }
 
-    public function sizes()
+    public function sizes(): HasManyThrough
     {
         return $this->hasManyThrough(Size::class, ProductSize::class, 'product_id', 'id', 'id', 'size_id')
                     ->addSelect(['product_sizes.id', 'sizes.name', 'sizes.id as sizeId', 'sizes.code'])->orderBy('sizeId');
     }
 
-    public function product_size()
+    public function product_size(): HasMany
     {
         return $this->hasMany(ProductSize::class);
     }
 
-    public function images()
+    public function images(): HasMany
     {
         return $this->hasMany(Image::class)->orderBy('order_number');
     }
 
-    public function bundles()
+    public function bundles(): HasManyThrough
     {
         return $this->hasManyThrough(Product::class, Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'bundles.lifetime_access', 'products.bundle_img', 'products.thumbnail', 'products.thumbnail_logo', 'products.bundle_desc', 'products.bundle_free_shipping', 'products.price', 'bundles.free_bonus'])->orderBy('order_number');
     }
 
-    public function sizeChart()
+    public function sizeChart(): BelongsTo
     {
         return $this->belongsTo(SizeChart::class, 'size_chart_id');
     }
@@ -186,7 +182,7 @@ class Product extends Model
     protected function slug(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => str_replace(array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'), '', $value),
+            get: fn ($value) => str_replace(['Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'], '', $value),
         );
     }
 
@@ -236,4 +232,14 @@ class Product extends Model
     protected $guarded = [
         'id'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'sales_page_start_date' => 'datetime',
+            'sales_page_end_date' => 'datetime',
+            'shop_card_start_date' => 'datetime',
+            'shop_card_end_date' => 'datetime',
+        ];
+    }
 }

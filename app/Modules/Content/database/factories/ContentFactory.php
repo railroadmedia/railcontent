@@ -16,7 +16,7 @@ class ContentFactory extends Factory
 
     public function definition(): array
     {
-        $title = implode(' ', $this->faker->words);
+        $title = implode(' ', $this->faker->words());
         $brand = 'drumeo';
         return [
             'slug' => ContentHelper::slugify($title),

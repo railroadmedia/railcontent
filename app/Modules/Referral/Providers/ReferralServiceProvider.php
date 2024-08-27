@@ -8,10 +8,8 @@ class ReferralServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
         $this->mergeConfigFrom(
@@ -24,10 +22,8 @@ class ReferralServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
     }
 }

@@ -10,7 +10,7 @@ class RecentRequestStats extends Command
     protected $description = 'Provides recent request data on hits and request duration';
 
 
-    public function handle()
+    public function handle(): void
     {
         $this->info("$this->name");
 

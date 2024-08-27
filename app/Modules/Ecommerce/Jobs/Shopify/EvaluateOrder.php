@@ -117,9 +117,6 @@ class EvaluateOrder implements ShouldQueue
 
     /**
      * Add extra logging in case of job failure
-     *
-     * @param  Exception  $exception
-     * @return void
      */
     public function failed(Exception $exception): void
     {

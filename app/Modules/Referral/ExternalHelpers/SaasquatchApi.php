@@ -39,15 +39,13 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws SaasquatchUserExistsException
      */
-    public function createUser($userId)
+    public function createUser(int $userId): object
     {
         $method = 'POST';
         $pathFormat = '/api/v1/%s/open/account/%s/user/%s?fields=';
@@ -62,15 +60,13 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
      */
-    public function getUser($userId)
+    public function getUser(int $userId): object
     {
         $method = 'GET';
         $pathFormat = '/api/v1/%s/open/account/%s/user/%s?fields=';
@@ -83,10 +79,7 @@ class SaasquatchApi
 
 
     /**
-     * @param  int  $userId
-     * @param  string  $brand
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -94,7 +87,7 @@ class SaasquatchApi
      *
      * @description : https://docs.saasquatch.com/api/methods#get_shareurls
      */
-    public function getShareUrlsFromUser($userId, $brand)
+    public function getShareUrlsFromUser(int $userId, string $brand): object
     {
         $pathFormat = "/api/v1/%s/open/account/%s/user/%s/shareurls?programId=%s";
         $path = sprintf($pathFormat, $this->saasquatchTenantAlias, $userId, $userId, $this->saasquatchReferralProgramId[$brand]);
@@ -103,9 +96,7 @@ class SaasquatchApi
 
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
@@ -114,7 +105,7 @@ class SaasquatchApi
      * @description : https://docs.saasquatch.com/api/methods#open_user_upsert
      * @description : https://docs.saasquatch.com/graphql/reference
      */
-    public function upsertUserUsingGraphqlAPI($userId)
+    public function upsertUserUsingGraphqlAPI(int $userId): object
     {
         $path = sprintf("api/v1/%s/graphql", $this->saasquatchTenantAlias);
 
@@ -136,12 +127,11 @@ class SaasquatchApi
     }
 
     /**
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
      */
-    public function getUsers()
+    public function getUsers(): object
     {
         $method = 'GET';
         $pathFormat = '/api/v1/%s/users';
@@ -151,13 +141,12 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
      */
-    public function removeUser($userId)
+    public function removeUser(int $userId)
     {
         $method = 'DELETE';
         $pathFormat = '/api/v1/%s/open/account/%s/user/%s';
@@ -167,15 +156,13 @@ class SaasquatchApi
     }
 
     /**
-     * @param  int  $userId
      *
-     * @return object
      *
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws SaasquatchUserExistsException
      */
-    public function updateUser($userId)
+    public function updateUser(int $userId): object
     {
         $method = 'PUT';
         $pathFormat = '/api/v1/%s/open/account/%s/user/%s?fields=';
@@ -193,13 +180,12 @@ class SaasquatchApi
     /**
      * @param $userId
      * @param $referralCode
-     * @return object
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws SaasquatchUserExistsException
      */
-    public function applyReferralCode($userId, $referralCode)
+    public function applyReferralCode($userId, $referralCode): object
     {
         $method = 'POST';
         $pathFormat = '/api/v1/%s/open/code/%s/account/%s/user/%s?fields=';
@@ -209,19 +195,14 @@ class SaasquatchApi
     }
 
     /**
-     * @param  string  $method
-     * @param  string  $path
-     * @param  array  $requestJsonBody
-     * @param  string  $requestBody
      *
-     * @return object
      *
      * @throws NotFoundException
      * @throws ReferralException
      * @throws SaasquatchException
      * @throws SaasquatchUserExistsException
      */
-    public function sendRequest($method, $path, $requestJsonBody = null, $requestBody = null)
+    public function sendRequest(string $method, string $path, array $requestJsonBody = null, string $requestBody = null): object
     {
         $requestData = [RequestOptions::AUTH => ['', $this->saasquatchApiKey]];
 

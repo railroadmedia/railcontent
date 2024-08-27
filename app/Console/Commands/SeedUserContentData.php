@@ -475,15 +475,13 @@ class SeedUserContentData extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(
         ContentRepository $contentRepository,
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
         UserPlaylistsService $userPlaylistsService
-    ) {
+    ): int {
         $user = User::query()->where('email', $this->argument('userEmail'))->firstOrFail();
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Collection;
 use Railroad\Railforums\Repositories\PostLikeRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadFollowRepository;
@@ -32,10 +33,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
 
     /**
      * RailforumProvider constructor.
-     * @param PostRepository $postRepository
-     * @param ThreadRepository $threadRepository
-     * @param ThreadFollowRepository $threadFollowRepository
-     * @param PostLikeRepository $postLikeRepository
      */
     public function __construct(
         PostRepository $postRepository,
@@ -50,7 +47,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     }
 
     /**
-     * @param int $postId
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
     public function getPostById($postId)
@@ -70,7 +66,6 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     }
 
     /**
-     * @param int $threadId
      * @return array|\Railroad\Resora\Entities\Entity|null
      */
     public function getThreadById($threadId)
@@ -89,9 +84,8 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
 
     /**
      * @param $threadId
-     * @return \Illuminate\Support\Collection
      */
-    public function getAllPostIdsInThread($threadId)
+    public function getAllPostIdsInThread($threadId): Collection
     {
         return $this->postRepository->getAllPostIdsInThread($threadId);
     }

@@ -58,7 +58,7 @@ class AccessCodeControllerTest extends TestCase
         );
 
         $response->assertStatus(500);
-        $this->assertEquals('The email must be a valid email address.', $response->baseResponse->original['message']);
+        $this->assertEquals('The email field must be a valid email address.', $response->baseResponse->original['message']);
     }
 
     public function test_access_code_claim_with_existing_user_and_valid_email(): void
@@ -129,6 +129,6 @@ class AccessCodeControllerTest extends TestCase
         );
 
         $response->assertStatus(500);
-        $this->assertEquals('The user email must be a valid email address.', $response->baseResponse->original['message']);
+        $this->assertEquals('The email field must be a valid email address.', $response->baseResponse->original['message']);
     }
 }

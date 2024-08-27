@@ -23,21 +23,18 @@ class DelistContentJob implements ShouldQueue
     use Batchable;
 
 
-    /**
-     * @param array $contentIdsToDelist
-     */
     public function __construct(private array $contentIdsToDelist, private string $status)
     {
     }
 
 
-    public function handle(ContentService $contentService, RailcontentV2DataSyncingService $dataSyncingService)
+    public function handle(ContentService $contentService, RailcontentV2DataSyncingService $dataSyncingService): void
     {
         ContentRepository::$bypassPermissions = true;
         ContentRepository::$pullFutureContent = true;
         $count = count($this->contentIdsToDelist);
         $idMin = $this->contentIdsToDelist[0];
-        $idMax = $this->contentIdsToDelist[$count -1];
+        $idMax = $this->contentIdsToDelist[$count - 1];
         Log::info(
             'Starting DelistContentJob ID: ' . $this->job->getJobId() .
             ' -- starting sync for ' . count($this->contentIdsToDelist) .
@@ -54,8 +51,6 @@ class DelistContentJob implements ShouldQueue
 
     /**
      * The job failed to process.
-     *
-     * @param Throwable $exception
      */
     public function failed(
         Throwable $exception

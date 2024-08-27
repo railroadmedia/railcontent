@@ -31,7 +31,7 @@ class SongDuration extends Command
      * @return false|void
      * @throws \Throwable
      */
-    public function handle()
+    public function handle(): int
     {
         $start = microtime(true);
         $brand = $this->argument('brand');

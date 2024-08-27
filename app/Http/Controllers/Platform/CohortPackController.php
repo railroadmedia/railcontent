@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
@@ -42,13 +43,12 @@ class CohortPackController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function template(Request $request, $domain, $brand, $slug, $purchased = false)
+    public function template(Request $request, $domain, $brand, $slug, $purchased = false): View
     {
         $cohort = $this->cohortService->getCohort($slug);
         if (!$cohort) {
@@ -123,9 +123,6 @@ class CohortPackController
     }
 
     /**
-     * @param string $sku
-     * @param string $successMessage
-     * @param Request $request
      * @return JsonResponse|RedirectResponse
      * @throws ORMException
      * @throws Throwable

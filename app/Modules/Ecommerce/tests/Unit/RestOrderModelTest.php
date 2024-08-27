@@ -20,7 +20,7 @@ class RestOrderModelTest extends TestCase
 
     protected string $baseShopifyUrl;
 
-    public function test_retrieves_linked_order_by_metafield()
+    public function test_retrieves_linked_order_by_metafield(): void
     {
         // create a few extra orders first
         EcommerceOrder::factory()->count(4)->create();
@@ -66,7 +66,7 @@ class RestOrderModelTest extends TestCase
         $this->assertEquals($order->id, $orderData->getEcommerceModel()->id);
     }
 
-    public function test_retrieves_linked_order_by_shopify_id()
+    public function test_retrieves_linked_order_by_shopify_id(): void
     {
         // create a few extra orders first
         EcommerceOrder::factory()->count(4)->create();
@@ -98,7 +98,7 @@ class RestOrderModelTest extends TestCase
         $this->assertEquals($order->id, $orderData->getEcommerceModel()->id);
     }
 
-    public function test_throws_exception_for_invalid_order_id_metafield()
+    public function test_throws_exception_for_invalid_order_id_metafield(): void
     {
         // the order id from the resource file
         $orderId = 5670966231334;
@@ -143,7 +143,7 @@ class RestOrderModelTest extends TestCase
         $orderData->getEcommerceModel();
     }
 
-    public function test_retrieves_linked_subscription_payment_by_metafield()
+    public function test_retrieves_linked_subscription_payment_by_metafield(): void
     {
         // create a few extra subscription payments first
         SubscriptionPayment::factory()->count(5)->create();
@@ -195,7 +195,7 @@ class RestOrderModelTest extends TestCase
         $this->assertEquals($subscriptionPayment->id, $orderData->getEcommerceModel()->id);
     }
 
-    public function test_retrieves_linked_subscription_payment_by_shopify_id()
+    public function test_retrieves_linked_subscription_payment_by_shopify_id(): void
     {
         // create a few extra subscription payments first
         SubscriptionPayment::factory()->count(5)->create();
@@ -233,7 +233,7 @@ class RestOrderModelTest extends TestCase
         $this->assertEquals($subscriptionPayment->id, $orderData->getEcommerceModel()->id);
     }
 
-    public function test_throws_exception_for_invalid_subscription_payment_id_metafield()
+    public function test_throws_exception_for_invalid_subscription_payment_id_metafield(): void
     {
         // the order id from the resource file
         $orderId = 5670966231334;
@@ -285,7 +285,7 @@ class RestOrderModelTest extends TestCase
     }
 
 
-    public function test_throws_exception_when_no_metafield_or_shopify_id()
+    public function test_throws_exception_when_no_metafield_or_shopify_id(): void
     {
         // the order id from the resource file
         $orderId = 5670966231334;

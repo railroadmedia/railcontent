@@ -7,9 +7,6 @@ use Railroad\Resora\Entities\Entity;
 
 class ArtistDecorator extends ModeDecoratorBase
 {
-    /**
-     * @param Collection $contents
-     */
     public function decorate(Collection $contents)
     {
         $artists = $contents->toArray();

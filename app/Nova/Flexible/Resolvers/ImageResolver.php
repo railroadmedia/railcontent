@@ -8,14 +8,6 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class ImageResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
     public function get($resource, $attribute, $layouts)
     {
         $images = $resource->images()->get();
@@ -38,20 +30,12 @@ class ImageResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, $attribute, $groups)
+    public function set($resource, $attribute, $groups)
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
-            $images = $groups->map(function ($group, $index) use ($model) {
+        $class::saved(function ($resource) use ($groups) {
+            $images = $groups->map(function ($group, $index) use ($resource) {
                 return [
                     'path' => !empty($group->getAttributes()['path_text']) ? $group->getAttributes()['path_text'] : $group->getAttributes()['path_file'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
@@ -84,7 +68,7 @@ class ImageResolver implements ResolverInterface
 
                     $addImg = new Image();
                     $addImg->path = $image['path'];
-                    $addImg->product_id = $model['id'];
+                    $addImg->product_id = $resource['id'];
                     $addImg->order_number = $image['order_number'];
                     $addImg->save();
 
@@ -93,7 +77,7 @@ class ImageResolver implements ResolverInterface
             }
 
             //delete items
-            $imgs = Image::where('product_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
+            $imgs = Image::where('product_id', $resource['id'])->whereNotIn('id', $updatedIds ?? []);
             if(count($imgs->get()) > 0) {
                 foreach($imgs->get() as $img) {
                     Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/', '', $img->path));

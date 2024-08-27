@@ -252,10 +252,7 @@ class NavigationService
         return [];
     }
 
-    /**
-     * @return string
-     */
-    public static function getSidebarSectionsJson()
+    public static function getSidebarSectionsJson(): string
     {
         return json_encode(self::getSidebarSections());
     }
@@ -263,7 +260,7 @@ class NavigationService
     /**
      * @return string[]
      */
-    public static function getUserDropDownLinks()
+    public static function getUserDropDownLinks(): array
     {
         if (empty(user())) {
             return [];
@@ -281,10 +278,7 @@ class NavigationService
         ];
     }
 
-    /**
-     * @return string
-     */
-    public static function getUserDropDownLinksJson()
+    public static function getUserDropDownLinksJson(): string
     {
         return json_encode(self::getUserDropDownLinks());
     }

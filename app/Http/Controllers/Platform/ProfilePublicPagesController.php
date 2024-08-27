@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Services\UserMetricsService;
@@ -20,9 +21,6 @@ class ProfilePublicPagesController extends BaseController
 
     /**
      * UserDashboardController constructor.
-     *
-     * @param  UserContentProgressService  $userContentProgressService
-     * @param  ContentService  $contentService
      */
     public function __construct(
         UserContentProgressService $userContentProgressService,
@@ -34,7 +32,7 @@ class ProfilePublicPagesController extends BaseController
         $this->userMetricsService = $userMetricsService;
     }
 
-    public function dashboard(Request $request, $domain, $brand, $userId)
+    public function dashboard(Request $request, $domain, $brand, $userId): View
     {
         if (!empty($userId)) {
             $user = User::query()->findOrFail($userId);
@@ -118,10 +116,7 @@ class ProfilePublicPagesController extends BaseController
         );
     }
 
-    /**
-     * @return array
-     */
-    private function getUserMetrics(User $user)
+    private function getUserMetrics(User $user): array
     {
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics($user->id);
 

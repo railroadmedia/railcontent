@@ -3,11 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // note: these endpoints support web or json requests
-Route::group(
-    [
-        'prefix' => config('referral.route_prefix'),
-        'middleware' => config('referral.route_middleware_logged_in_groups'),
-    ],
+Route::prefix(config('referral.route_prefix'))->middleware(config('referral.route_middleware_logged_in_groups'))->group(
     function () {
         Route::post(
             '/email-invite',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
@@ -55,16 +56,6 @@ class ContentPagesController extends BaseController
     private ArtistService $artistService;
     private GenreService $genreService;
 
-    /**
-     * @param ContentService $contentService
-     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
-     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
-     * @param RailcontentURLProvider $railcontentURLProvider
-     * @param FullTextSearchService $fullTextSearchService
-     * @param CalendarService $calendarService
-     * @param ContentFollowsService $contentFollowsService
-     * @param ResourceDecorator $resourceDecorator
-     */
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
@@ -679,7 +670,7 @@ class ContentPagesController extends BaseController
         $thirdId = null,
         $fourthSlug = null,
         $fourthId = null
-    ) {
+    ): View {
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
@@ -828,7 +819,7 @@ class ContentPagesController extends BaseController
         $matched = false;
 
         foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ($parentChild['status'] == ContentService::STATUS_UNLISTED ) {
+            if ($parentChild['status'] == ContentService::STATUS_UNLISTED) {
                 unset($parentChildren[$parentChildIndex]);
                 continue;
             }
@@ -953,7 +944,7 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    public function drumeoSongPage(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
+    public function drumeoSongPage(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId): View
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
@@ -1100,7 +1091,7 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    public function guitareoLessonsPage(Request $request, $domain, $brand)
+    public function guitareoLessonsPage(Request $request, $domain, $brand): View
     {
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
@@ -1234,7 +1225,7 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    public function shows(Request $request, $domain, $brand)
+    public function shows(Request $request, $domain, $brand): View
     {
         $showsViewData = DrumeoShowDataMapper::cards();
 
@@ -1291,10 +1282,7 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    private function getUsersStartedRoutinesContent()
+    private function getUsersStartedRoutinesContent(): ContentFilterResultsEntity
     {
         $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
             ['routine'],
@@ -1313,15 +1301,13 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $contentId
-     * @return RedirectResponse
      */
     public function jumpToContentId(
         Request $request,
         $domain,
         $contentId
-    ) {
+    ): RedirectResponse {
         $contentRow =
             DB::connection(config('railcontent.database_connection_name'))
                 ->table('railcontent_content')
@@ -1403,15 +1389,13 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $contentId
-     * @return RedirectResponse
      */
     public function jumpToContinueContent(
         Request $request,
         $domain,
         $contentId
-    ) {
+    ): RedirectResponse {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $nextContent = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
@@ -1435,11 +1419,10 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function search(Request $request)
+    public function search(Request $request): View
     {
         ContentRepository::$availableContentStatues =
             $request->get('statuses', ContentRepository::$availableContentStatues);
@@ -1475,10 +1458,9 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function newLessonsPage(Request $request)
+    public function newLessonsPage(Request $request): View
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
@@ -1520,7 +1502,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return Mixed
      */
     public function recommendedLessons(Request $request)
@@ -1606,7 +1587,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return mixed|Collection|null
      */
     private function getListLessionsFromRequest(Request $request)
@@ -1634,11 +1614,7 @@ class ContentPagesController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function schedule(Request $request)
+    public function schedule(Request $request): View
     {
         $fullTimezoneString = $this->calendarService->getTimezone($request);
 
@@ -1695,10 +1671,9 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function subscribedContent(Request $request)
+    public function subscribedContent(Request $request): View
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MINIMUM;
@@ -1741,7 +1716,6 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $domain
      * @param $brand
      * @param $contentId
@@ -1755,7 +1729,7 @@ class ContentPagesController extends BaseController
         $brand,
         $contentId,
         $commentId
-    ) {
+    ): RedirectResponse {
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
@@ -1789,7 +1763,7 @@ class ContentPagesController extends BaseController
         return null;
     }
 
-    public function artistSongs($route, Request $request, $brand, $artistSlug)
+    public function artistSongs($route, Request $request, $brand, $artistSlug): View
     {
         $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
@@ -1840,7 +1814,7 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    public function genreContentByType($slug, Request $request, $brand, $genre, $contentTypeName)
+    public function genreContentByType($slug, Request $request, $brand, $genre, $contentTypeName): View
     {
         $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];

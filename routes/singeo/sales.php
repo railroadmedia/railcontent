@@ -47,8 +47,7 @@ Route::domain('{singeoDomain}')
         Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount']);
         Route::get('/lifetime-members-masterclass', [SalesController::class, 'lifetimeMasterclass']);
 
-        Route::group(
-            ['prefix' => 'beginner-vocal-bootcamp'],
+        Route::prefix('beginner-vocal-bootcamp')->group(
             function () {
                 Route::get('/{page?}', LeadGenController::class . '@beginnerBootcamp')
                     ->whereIn('page', [
@@ -56,8 +55,7 @@ Route::domain('{singeoDomain}')
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'holiday-karaoke'],
+        Route::prefix('holiday-karaoke')->group(
             function () {
                 Route::get('/{page?}', LeadGenController::class . '@holidayKaraoke')
                     ->whereIn('page', [
@@ -66,8 +64,7 @@ Route::domain('{singeoDomain}')
             }
         );
         Route::get('/improve-any-voice', [LeadGenController::class, 'improveAnyVoice']);
-        Route::group(
-            ['prefix' => 'live-vocal-bootcamp'],
+        Route::prefix('live-vocal-bootcamp')->group(
             function () {
                 Route::get('/{page?}', LeadGenController::class . '@liveBootcamp')
                     ->whereIn('page', [

@@ -12,7 +12,7 @@ class RecalculateMentorTotals extends Command
 
     protected $description = 'Recalculates each mentor totals';
 
-    public function handle(MentorService $mentorService)
+    public function handle(MentorService $mentorService): void
     {
         $this->info("Recalculate Mentor Totals");
 

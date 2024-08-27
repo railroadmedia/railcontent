@@ -14,10 +14,6 @@ trait SyncsAddressData
      * the matching shopify_id stored. Compare Shopify's address data and our own, and if there's a difference,
      * record it in the running $addressData collection.
      *
-     * @param  int  $shopifyCustomerId
-     * @param  Collection  $shopifyAddresses
-     * @param  Collection  $checkedLocalAddressIds
-     * @param  Collection  $addressData
      * @return Collection  notices for any addresses that failed
      */
     protected function addDataForUpdatedAddresses(
@@ -111,12 +107,6 @@ trait SyncsAddressData
     /**
      * Go through the given local address data and identify any that are not yet in Shopify's addresses. If any
      * are identified, record them in the running $addressData collection.
-     *
-     * @param  Collection  $allLocalAddressData
-     * @param  Collection  $shopifyAddresses
-     * @param  Collection  $checkedLocalAddressIds
-     * @param  Collection  $addressData
-     * @return void
      */
     protected function addDataForNewAddresses(
         Collection $allLocalAddressData,
@@ -166,9 +156,6 @@ trait SyncsAddressData
      * Send the given collection of address data to Shopify, to create or update accordingly,
      * recording the resulting shopify id on each
      *
-     * @param  Collection  $addressesData
-     * @param  int  $shopifyCustomerId
-     * @param  Collection  $shopifyIds
      * @return Collection notices for any errors
      */
     protected function sendAddressDataToShopify(Collection $addressesData, int $shopifyCustomerId, Collection &$shopifyIds): Collection

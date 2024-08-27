@@ -15,10 +15,13 @@ class ShopifySync extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'shopify_ids' => 'array',
-        'finished_at' => 'datetime'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'shopify_ids' => 'array',
+            'finished_at' => 'datetime'
+        ];
+    }
 
     /**
      * Scope a query to get only the latest sync to finish.

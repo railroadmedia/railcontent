@@ -18,8 +18,6 @@ class BrandServiceProvider extends ServiceProvider
 
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -28,10 +26,8 @@ class BrandServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // publish config file
         $this->mergeConfigFrom(
@@ -45,10 +41,8 @@ class BrandServiceProvider extends ServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
     }

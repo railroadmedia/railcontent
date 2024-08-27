@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use App\Maps\ContentTypes;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -29,7 +30,7 @@ class LegacyResourcesController extends Controller
         $this->fullTextSearchService = $fullTextSearchService;
     }
 
-    public function show()
+    public function show(): View
     {
         $sections = [
             [
@@ -78,7 +79,7 @@ class LegacyResourcesController extends Controller
     /*
         * Pass search string as value of "term" query string param to get search instead.
         */
-    public function archive(Request $request)
+    public function archive(Request $request): View
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 20);
@@ -109,7 +110,7 @@ class LegacyResourcesController extends Controller
         return $results;
     }
 
-    public function loops()
+    public function loops(): View
     {
         $bassLoops = [
             "3/4 Jazz" => [

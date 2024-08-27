@@ -23,10 +23,8 @@ class FeatureLayout extends Layout
 
     /**
      * Get the fields displayed by the layout.
-     *
-     * @return array
      */
-    public function fields()
+    public function fields(): array
     {
         return [
             Text::make('Description', 'desc')->required()->rules('required'),

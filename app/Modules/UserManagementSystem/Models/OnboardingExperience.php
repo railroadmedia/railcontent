@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,7 +50,7 @@ class OnboardingExperience extends Model
      */
     protected $fillable = ['experience_level', 'user_id', 'brand'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

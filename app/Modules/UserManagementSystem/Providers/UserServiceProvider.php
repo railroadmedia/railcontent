@@ -20,7 +20,6 @@ class UserServiceProvider extends EloquentUserProvider
     protected array $internalIdentifierCache = [];
 
     /**
-     * @param Hasher $hasher
      * @return void
      */
     public function __construct(Hasher $hasher)
@@ -30,10 +29,7 @@ class UserServiceProvider extends EloquentUserProvider
         parent::__construct($hasher, null);
     }
 
-    /**
-     * @return User
-     */
-    public function createModel()
+    public function createModel(): User
     {
         return new User();
     }
@@ -42,9 +38,8 @@ class UserServiceProvider extends EloquentUserProvider
      * Retrieve a user by their unique identifier.
      *
      * @param  mixed  $identifier
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function retrieveById($identifier)
+    public function retrieveById($identifier): ?Authenticatable
     {
 
         if (empty($this->internalIdentifierCache[$identifier])) {
@@ -64,10 +59,8 @@ class UserServiceProvider extends EloquentUserProvider
 
     /**
      * @param mixed $identifier
-     * @param string $token
-     * @return null|User
      */
-    public function retrieveByToken($identifier, $token)
+    public function retrieveByToken($identifier, $token): ?User
     {
         $user = $this->retrieveById($identifier);
 
@@ -89,10 +82,8 @@ class UserServiceProvider extends EloquentUserProvider
 
     /**
      * @param Authenticatable|User $user
-     * @param string $token
-     * @return bool
      */
-    public function updateRememberToken(Authenticatable|User $user, $token)
+    public function updateRememberToken(Authenticatable $user, $token): bool
     {
         $rememberToken = new RememberToken();
 
@@ -117,12 +108,7 @@ class UserServiceProvider extends EloquentUserProvider
         RememberToken::query()->where(['token' => $token, 'user_id' => $userId])->delete();
     }
 
-    /**
-     * @param Authenticatable $user
-     * @param string $salt
-     * @return bool
-     */
-    public function updateSessionSalt(Authenticatable $user, $salt)
+    public function updateSessionSalt(Authenticatable $user, string $salt): bool
     {
         // NOTE: session salt is no longer used for anything
 
@@ -130,7 +116,6 @@ class UserServiceProvider extends EloquentUserProvider
     }
 
     /**
-     * @param array $credentials
      * @return Authenticatable|User|null
      */
     public function retrieveByCredentials(array $credentials)
@@ -150,12 +135,7 @@ class UserServiceProvider extends EloquentUserProvider
         return User::query()->where($getByAttributes)->first();
     }
 
-    /**
-     * @param Authenticatable $user
-     * @param array $credentials
-     * @return bool
-     */
-    public function validateCredentials(Authenticatable $user, array $credentials)
+    public function validateCredentials(Authenticatable $user, array $credentials): bool
     {
         $plain = $credentials['password'];
 

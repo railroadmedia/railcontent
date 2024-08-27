@@ -27,7 +27,7 @@ class AddOrderTagsTest extends TestCase
 
     protected string $baseShopifyUrl;
 
-    public function test_adds_initial_order_tag_for_manual_source()
+    public function test_adds_initial_order_tag_for_manual_source(): void
     {
         // the order id from the resource file
         $orderId = 5655911268646;
@@ -77,7 +77,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_initial_order_tag_for_revenuecat_initial_purchase()
+    public function test_adds_initial_order_tag_for_revenuecat_initial_purchase(): void
     {
         // the order id from the resource file
         $orderId = 5733522800934;
@@ -130,7 +130,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_does_not_add_initial_order_tag_for_revenuecat_renewal()
+    public function test_does_not_add_initial_order_tag_for_revenuecat_renewal(): void
     {
         // the order id from the resource file
         $orderId = 5732685316390;
@@ -189,7 +189,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_skips_initial_order_tag_if_already_present()
+    public function test_skips_initial_order_tag_if_already_present(): void
     {
         // the order id from the resource file
         $orderId = 5655911268646;
@@ -238,7 +238,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_does_not_add_initial_order_tag_for_subscription_contract()
+    public function test_does_not_add_initial_order_tag_for_subscription_contract(): void
     {
         $orderId = 5739903844644;
         $path = Storage::disk("ecommerce_test_resources")->path(
@@ -283,7 +283,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_trial_start_order_tag()
+    public function test_adds_trial_start_order_tag(): void
     {
         // the order id from the resource file
         $orderId = 5670901547302;
@@ -335,7 +335,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_trial_start_when_discount_is_on_discount_allocations()
+    public function test_adds_trial_start_when_discount_is_on_discount_allocations(): void
     {
         // the order id from the resource file
         $orderId = 5716409221396;
@@ -393,7 +393,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_trial_conversion_order_tag()
+    public function test_adds_trial_conversion_order_tag(): void
     {
         // the order id from the resource file
         $orderId = 5670966231334;
@@ -445,7 +445,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_membership_renewal_order_tag()
+    public function test_adds_membership_renewal_order_tag(): void
     {
         // the order id from the resource file
         $orderId = 5671228244262;
@@ -501,7 +501,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_does_not_add_membership_renewal_order_tag_when_trumped_by_initial_order()
+    public function test_does_not_add_membership_renewal_order_tag_when_trumped_by_initial_order(): void
     {
         // the order id from the resource file
         $orderId = 5671228244262;
@@ -555,7 +555,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_membership_renewal_order_tag_and_removes_initial_order_for_subscription_payments()
+    public function test_adds_membership_renewal_order_tag_and_removes_initial_order_for_subscription_payments(): void
     {
         $subscriptionPayment = SubscriptionPayment::factory()->create();
         // the order id from the resource file
@@ -655,7 +655,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_adds_initial_order_for_subscription_payments_with_linked_order()
+    public function test_adds_initial_order_for_subscription_payments_with_linked_order(): void
     {
         // create an order and link the subscription payment via the order's payments
         $product = Product::firstWhere('sku', 'DLM-1-month');
@@ -744,7 +744,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_handles_order_with_no_customer()
+    public function test_handles_order_with_no_customer(): void
     {
         // the order id from the resource file
         $orderId = 5760283541780;
@@ -789,7 +789,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_handles_recharge_subscription()
+    public function test_handles_recharge_subscription(): void
     {
         // the order id from the resource file
         $orderId = 5710284521748;
@@ -838,7 +838,7 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
-    public function test_handles_recharge_subscription_after_delay()
+    public function test_handles_recharge_subscription_after_delay(): void
     {
         // this test case has the subscription that was renewed 3 weeks late
         // (payments failed and were re-attempted one week later, repeating until successful on the 3rd week)
@@ -900,7 +900,6 @@ class AddOrderTagsTest extends TestCase
 
     /**
      * Create the
-     * @return void
      * @throws Exception
      */
     private function seedDrumeoMemberships(): void

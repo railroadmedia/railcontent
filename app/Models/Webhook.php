@@ -23,10 +23,13 @@ class Webhook extends Model
         'id'
     ];
 
-    protected $casts = [
-        'job_details' => 'array',
-        'contents' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'job_details' => 'array',
+            'contents' => 'array',
+        ];
+    }
 
     /**
      * @return bool - flag to indicate if self + children jobs have been processed, or if the job crashed during construction for any reason
@@ -48,8 +51,6 @@ class Webhook extends Model
 
     /**
      * Process any WebhookJob or WebhookChildJob objects to update the Webhook.job_detail
-     * @param JobProcessed $event
-     * @return void
      */
     public static function updateJobDetailsIfWebhookJob(JobProcessed $event): void
     {
@@ -69,7 +70,6 @@ class Webhook extends Model
      * This has an unfortunate race condition built in that I (Adrian) didn't know how to get around. Locks don't work like I'm used to
      * @param string $name - name of Job
      * @param bool $set - value to set job_details entry to
-     * @return void
      */
     private function setAndSaveJobDetails(string $name, bool $set): void
     {
@@ -99,7 +99,7 @@ class Webhook extends Model
      * @param $job
      * @return string : job identifier
      */
-    public function setWebhookJobInfo($job)
+    public function setWebhookJobInfo($job): string
     {
         $shortName = class_basename($job);
         $job->webhookJobInfo = ['parent_id' => $this->id, 'name' => $shortName];

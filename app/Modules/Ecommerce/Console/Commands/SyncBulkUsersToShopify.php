@@ -26,8 +26,6 @@ class SyncBulkUsersToShopify extends Command
 
     /**
      * Is this sync running for real?
-     *
-     * @return bool
      */
     protected function getIsExecuting(): bool
     {
@@ -36,8 +34,6 @@ class SyncBulkUsersToShopify extends Command
 
     /**
      * Get the optional limit to the number of users to sync
-     *
-     * @return int|null
      */
     protected function getLimit(): ?int
     {
@@ -46,8 +42,6 @@ class SyncBulkUsersToShopify extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(): int
     {

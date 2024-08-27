@@ -11,10 +11,8 @@ class CarouselSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $carousels = [
             [

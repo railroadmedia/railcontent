@@ -89,8 +89,6 @@ class EvaluateOrderJobManager implements ShouldQueue
     /**
      * Get the applicable order data from Shopify
      *
-     * @param  string|null  $endCursor
-     * @return Collection
      * @throws Exception
      */
     private function getOrderIds(?string $endCursor): Collection

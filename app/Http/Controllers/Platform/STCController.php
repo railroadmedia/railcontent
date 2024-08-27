@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Railroad\Location\Services\CountryListService;
 
 class STCController extends Controller
 {
-    public function memberSTC()
+    public function memberSTC(): View
     {
         $ages = [
             ['value' => '18 or Below'],

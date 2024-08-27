@@ -10,7 +10,7 @@ class BatchCancel extends Command
     protected $signature = 'batch:cancel {batchID}';
     protected $description = 'Cancel batched jobs';
 
-    public function handle()
+    public function handle(): void
     {
         $batchId = $this->argument('batchID');
         $this->info("Cancelling batch '$batchId'");

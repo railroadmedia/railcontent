@@ -25,9 +25,6 @@ class MigrateMissingPlaylistsItems extends Command
 
     private DatabaseManager $databaseManager;
 
-    /**
-     * @param DatabaseManager $databaseManager
-     */
     public function __construct(
         DatabaseManager $databaseManager
     ) {
@@ -38,10 +35,8 @@ class MigrateMissingPlaylistsItems extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
@@ -222,18 +217,15 @@ class MigrateMissingPlaylistsItems extends Command
      * @param \Illuminate\Database\Eloquent\Collection|array $playlistItems
      * @param mixed $lesson
      * @param int $playlistItemsCount
-     * @param string|null $brand
-     * @param string|null $userId
      * @param \Illuminate\Database\Eloquent\Model|object|\Illuminate\Database\Eloquent\Builder|UserPlaylist $playlist
      * @param int $added
-     * @return int
      */
     private function addLessonToPlaylist(
         $lessonId,
         ?string $brand,
         ?string $userId,
         $playlist
-    ) {
+    ): int {
         $playlistItems =
             UserPlaylistContent::query()
                 ->where('user_playlist_id', $playlist->id)

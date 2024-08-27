@@ -33,13 +33,11 @@ class SyncCustomerIoExistingDevices extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
         CustomerIoSyncEventListener $customerIoSyncEventListener
-    ) {
+    ): void {
         $tStart = time();
 
         $usoraConnection = $databaseManager->connection(config('usora.database_connection_name'));
@@ -90,20 +88,16 @@ class SyncCustomerIoExistingDevices extends Command
 
     /**
      * Get the console command arguments.
-     *
-     * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [];
     }
 
     /**
      * Get the console command options.
-     *
-     * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [];
     }

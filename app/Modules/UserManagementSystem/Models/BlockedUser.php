@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,12 +39,12 @@ class BlockedUser extends Model
     protected $fillable = ['user_id', 'blocker_id','created_on'];
     public $timestamps = false;
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function blocker()
+    public function blocker(): BelongsTo
     {
         return $this->belongsTo(User::class, 'blocker_id');
     }

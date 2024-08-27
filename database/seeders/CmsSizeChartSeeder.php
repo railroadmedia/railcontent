@@ -10,10 +10,8 @@ class CmsSizeChartSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         //
         $charts = [

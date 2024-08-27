@@ -35,9 +35,6 @@ class SynchUsoraHelpscout implements ShouldQueue
     }
 
     /**
-     * @param  DatabaseManager $databaseManager
-     * @param  HelpScoutSyncService $helpScoutSyncService
-     * @param  HelpScoutService $helpScoutService
      *
      * @throws \Throwable
      */

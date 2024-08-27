@@ -8,14 +8,6 @@ use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class SizeResolver implements ResolverInterface
 {
-    /**
-     * get the field's value
-     *
-     * @param  mixed  $resource
-     * @param  string $attribute
-     * @param  Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
-     * @return Illuminate\Support\Collection
-     */
     public function get($resource, $attribute, $layouts)
     {
         $sizes = $resource->sizes()->get();
@@ -34,27 +26,19 @@ class SizeResolver implements ResolverInterface
         })->filter();
     }
 
-    /**
-     * Set the field's value
-     *
-     * @param  mixed  $model
-     * @param  string $attribute
-     * @param  Illuminate\Support\Collection $groups
-     * @return string
-     */
-    public function set($model, $attribute, $groups)
+    public function set($resource, $attribute, $groups): string
     {
-        $class = get_class($model);
+        $class = get_class($resource);
 
-        $class::saved(function ($model) use ($groups) {
-            $sizes = $groups->map(function ($group, $index) use ($model) {
+        $class::saved(function ($resource) use ($groups) {
+            $sizes = $groups->map(function ($group, $index) use ($resource) {
                 return [
                     'size_id' => is_null($group->getAttributes()['size']) ? null : Size::firstWhere('name', $group->getAttributes()['size'])->id,
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
 
-            $sizeIds = array();
+            $sizeIds = [];
 
             foreach($sizes as $size) {
                 if(!is_null($size['size_id'])) {
@@ -75,7 +59,7 @@ class SizeResolver implements ResolverInterface
                         $updatedIds[] = $size['id'];
                     } else {
                         $addSize = new ProductSize();
-                        $addSize->product_id = $model['id'];
+                        $addSize->product_id = $resource['id'];
                         $addSize->size_id = $size['size_id'];
                         $addSize->save();
 
@@ -85,7 +69,7 @@ class SizeResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)) {
-                $deleteIds = ProductSize::where("product_id", '=', $model['id'])
+                $deleteIds = ProductSize::where("product_id", '=', $resource['id'])
                     ->whereNotIn('id', $updatedIds)->select('id')->get();
 
                 ProductSize::destroy($deleteIds);

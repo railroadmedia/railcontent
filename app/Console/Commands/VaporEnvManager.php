@@ -33,12 +33,8 @@ class VaporEnvManager extends Command
 
     /**
      * Execute the command.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         Helpers::app()->instance('input', $this->input = $input);
         Helpers::app()->instance('output', $this->output = $output);
@@ -48,10 +44,8 @@ class VaporEnvManager extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $environmentName = $this->argument('environment');
         $pushOrPull = $this->argument('pushOrPull');

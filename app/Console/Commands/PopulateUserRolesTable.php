@@ -28,10 +28,8 @@ class PopulateUserRolesTable extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): void
     {
         print_r("##### PopulateUserRolesTable command starts now ######\n");
 

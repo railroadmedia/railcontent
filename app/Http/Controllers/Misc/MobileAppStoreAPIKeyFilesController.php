@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Misc;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 
 class MobileAppStoreAPIKeyFilesController extends BaseController
 {
-    public function drumeoGooglePlayAPIJSONFile()
+    public function drumeoGooglePlayAPIJSONFile(): Response
     {
         $json = file_get_contents(base_path('drumeo-google-play-api.json'));
 
@@ -15,7 +16,7 @@ class MobileAppStoreAPIKeyFilesController extends BaseController
             ->header('Content-Type', 'application/json');
     }
 
-    public function pianoteGooglePlayAPIJSONFile()
+    public function pianoteGooglePlayAPIJSONFile(): Response
     {
         $json = file_get_contents(base_path('pianote-google-play-api.json'));
 

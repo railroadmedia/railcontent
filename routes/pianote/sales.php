@@ -14,7 +14,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial-songs', [SalesController::class, 'trialSongs']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
         Route::get('/ultimate-lessons', [SalesController::class, 'ultimateLessons']);
-        Route::get('/restart', [SalesController::class, 'restart'] );
+        Route::get('/restart', [SalesController::class, 'restart']);
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS']);
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
@@ -26,8 +26,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
         Route::get('/a/davidbennett', [SalesController::class, 'davidbennett']);
-        Route::group(
-            ['prefix' => 'affiliate' ],
+        Route::prefix('affiliate')->group(
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
@@ -35,8 +34,7 @@ Route::domain('{pianoteDomain}')
                     ]);
             }
         );
-        Route::group(
-            ['prefix' => 'a' ],
+        Route::prefix('a')->group(
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
@@ -60,5 +58,5 @@ Route::domain('{pianoteDomain}')
         Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
 
         Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'])
-            ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+            ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
     });

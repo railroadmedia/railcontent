@@ -46,11 +46,9 @@ class AccessCodeService
      * extends $accessCode associated subscriptions
      * adds user products
      *
-     * @param string $code
      * @param ?int $userId
      *
      * @param null $context
-     * @return AccessCode
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -149,7 +147,6 @@ class AccessCodeService
      * Into: fcbd - 53d4 - b41b - 3264 - 249a - 713e
      *
      * @param $code
-     * @return string
      */
     public function hyphenateCode($code): string
     {
@@ -160,7 +157,6 @@ class AccessCodeService
      * @param string|null $code
      * Into: Check if access code exists; if it exists, split the access code into 6 parts and return it as an array;
      *     if not, return null
-     * @return ?array
      */
     public function checkAndSplitAccessCode(?string $code): ?array
     {

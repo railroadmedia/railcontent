@@ -15,9 +15,6 @@ class ReferralController extends Controller
 {
     private ReferralService $referralService;
 
-    /**
-     * @param  ReferralService  $referralService
-     */
     public function __construct(
         ReferralService $referralService,
     ) {
@@ -25,7 +22,6 @@ class ReferralController extends Controller
     }
 
     /**
-     * @param  EmailInviteRequest  $request
      *
      * @return JsonResponse|RedirectResponse
      */

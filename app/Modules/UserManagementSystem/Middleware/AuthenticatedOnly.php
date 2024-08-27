@@ -13,11 +13,9 @@ class AuthenticatedOnly
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
-     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // try token auth first
         if (!empty($request->bearerToken())) {

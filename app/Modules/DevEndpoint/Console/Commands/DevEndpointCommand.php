@@ -17,7 +17,7 @@ class DevEndpointCommand extends Command
     public function handle(
         ShopifyAPIService $shopifyAPIService,
         //RecommendationService $recommenderService,
-    ) {
+    ): void {
         $configValue1 = config('devendpoint.config1');
         $this->info("hello people $configValue1");
         $this->info('goodbye people');

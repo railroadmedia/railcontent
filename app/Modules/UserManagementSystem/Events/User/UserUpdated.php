@@ -18,9 +18,6 @@ class UserUpdated
 
     /**
      * Create a new event instance.
-     *
-     * @param User $newUser
-     * @param User $oldUser
      */
     public function __construct(User $newUser, User $oldUser)
     {
@@ -28,17 +25,11 @@ class UserUpdated
         $this->oldUser = $oldUser;
     }
 
-    /**
-     * @return User
-     */
     public function getNewUser(): User
     {
         return $this->newUser;
     }
 
-    /**
-     * @return User
-     */
     public function getOldUser(): User
     {
         return $this->oldUser;

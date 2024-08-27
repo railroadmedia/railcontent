@@ -13,10 +13,6 @@ class RailnotificationsContentProvider implements ContentProviderInterface
     private ContentService $contentService;
     private CommentService $commentService;
 
-    /**
-     * @param ContentService $contentService
-     * @param CommentService $commentService
-     */
     public function __construct(ContentService $contentService, CommentService $commentService)
     {
         $this->contentService = $contentService;

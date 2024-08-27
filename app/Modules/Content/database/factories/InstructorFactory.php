@@ -13,14 +13,14 @@ class InstructorFactory extends ContentFactory
 
     public function definition(): array
     {
-        $name = $this->faker->name;
+        $name = $this->faker->name();
         $brand = 'drumeo';
         return [
             'slug' => ContentHelper::slugify($name),
             'type' => 'instructor',
-            'name' => $this->faker->name,
-            'endorsements' => implode(' ', $this->faker->words),
-            'bands' => implode(' ', $this->faker->words),
+            'name' => $this->faker->name(),
+            'endorsements' => implode(' ', $this->faker->words()),
+            'bands' => implode(' ', $this->faker->words()),
             'sort' => 0,
             'status' => ContentService::STATUS_PUBLISHED,
             'brand' => $brand,

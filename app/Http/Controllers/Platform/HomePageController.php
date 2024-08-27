@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
@@ -72,27 +74,27 @@ class HomePageController extends BaseController
     ) {
     }
 
-    public function homeRedirect()
+    public function homeRedirect(): RedirectResponse
     {
         return redirect()->route('platform.home', ['brand' => brand()]);
     }
 
-    public function profileRedirect()
+    public function profileRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/dashboard");
     }
 
-    public function paymentSettingsRedirect()
+    public function paymentSettingsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/settings/payments");
     }
 
-    public function notificationsRedirect()
+    public function notificationsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/notifications");
     }
 
-    public function notificationSettingsRedirect()
+    public function notificationSettingsRedirect(): RedirectResponse
     {
         return redirect("/" . brand() . "/profile/" . user()->id . "/settings/notifications");
     }
@@ -331,11 +333,9 @@ class HomePageController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $brand
-     * @return string
      */
-    public function homePackOnly(Request $request, $brand)
+    public function homePackOnly(Request $request, $brand): View
     {
         $packs = $this->packService->getPacksForHome(user());
         ;
@@ -368,10 +368,8 @@ class HomePageController extends BaseController
 
     /**
      * singeo only
-     *
-     * @return ContentFilterResultsEntity
      */
-    private function getCoursesContent()
+    private function getCoursesContent(): ContentFilterResultsEntity
     {
         ContentRepository::$availableContentStatues = ['published'];
         ContentRepository::$pullFutureContent = false;
@@ -397,10 +395,7 @@ class HomePageController extends BaseController
         ))->toResponseRawJson();
     }
 
-    /**
-     * @return array
-     */
-    private function getHotForumTopics()
+    private function getHotForumTopics(): array
     {
         PostRepository::$blockedUserIds =
             BlockedUser::where('blocker_id', '=', user()->id)
@@ -485,10 +480,7 @@ class HomePageController extends BaseController
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function getUserMetrics()
+    private function getUserMetrics(): array
     {
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics(user()->id);
 
@@ -516,10 +508,7 @@ class HomePageController extends BaseController
         ];
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    private function getAllRecommentations()
+    private function getAllRecommentations(): ContentFilterResultsEntity
     {
         return $this->contentService->getRecommendedContent(
             user()->id,
@@ -528,10 +517,7 @@ class HomePageController extends BaseController
         );
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    private function getNewContents()
+    private function getNewContents(): ContentFilterResultsEntity
     {
         ContentRepository::$availableContentStatues = ['published'];
         ContentRepository::$pullFutureContent = false;
@@ -559,10 +545,7 @@ class HomePageController extends BaseController
     }
 
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    private function getWorkoutsContents()
+    private function getWorkoutsContents(): ContentFilterResultsEntity
     {
         $oldFutureContent = ContentRepository::$pullFutureContent;
         ContentRepository::$pullFutureContent = false;
@@ -583,10 +566,7 @@ class HomePageController extends BaseController
         return $workouts;
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    public function getUsersStartedContent()
+    public function getUsersStartedContent(): ContentFilterResultsEntity
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
         //TODO ADRIAN this needs to be handled differently as this is uses join on the railcontent_content table
@@ -604,10 +584,7 @@ class HomePageController extends BaseController
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    public function getUsersList()
+    public function getUsersList(): ContentFilterResultsEntity
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
@@ -817,7 +794,7 @@ class HomePageController extends BaseController
         return $parsedTypes;
     }
 
-    public function redirect30day()
+    public function redirect30day(): View
     {
         return view('pages.redirect30day');
     }

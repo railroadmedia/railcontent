@@ -27,10 +27,8 @@ class MigrateCoachesToInstructors extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): int
     {
         $this->info('Starting MigrateCoachesToInstructors.');
         Log::info('Starting MigrateCoachesToInstructors.');

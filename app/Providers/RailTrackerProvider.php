@@ -9,9 +9,6 @@ class RailTrackerProvider implements RailTrackerProviderInterface
 {
     private MediaPlaybackTracker $mediaPlaybackTracker;
 
-    /**
-     * @param MediaPlaybackTracker $mediaPlaybackTracker
-     */
     public function __construct(MediaPlaybackTracker $mediaPlaybackTracker)
     {
         $this->mediaPlaybackTracker = $mediaPlaybackTracker;

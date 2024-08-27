@@ -9,10 +9,8 @@ class LearningPathLessonDecorator extends TypeDecoratorBase
 {
     /**
      * @param Collection|Content[] $contents
-     *
-     * @return Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'learning-path-lesson');
 

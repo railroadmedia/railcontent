@@ -98,7 +98,6 @@ class PaymentMethodUpdateController extends Controller
     }
 
     /**
-     * @param UpdatePaymentMethodRequest $request
      * @return RedirectResponse|JsonResponse|Fractal
      * @throws PaymentFailedException
      */
