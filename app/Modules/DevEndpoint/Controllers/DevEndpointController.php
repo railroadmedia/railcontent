@@ -2,6 +2,7 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+use App\Modules\Content\Models\Content;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+        $instructorsData = Content::with('data', 'fields')
+            ->where('type', '=', 'instructor')
+            ->where('railcontent_content.status', '=', 'published')
+            ->whereNotIn('id', [404505, 389348, 395073])
+            ->get();
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
         return $this->testCollection();
 

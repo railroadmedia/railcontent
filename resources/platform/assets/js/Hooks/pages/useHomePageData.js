@@ -15,15 +15,14 @@ export async function useHomePageData(brand) {
       fetchUpcomingEvents(brand),
       fetchLiveEvent(brand)
     ]);
-
     data.value = {
       workouts: workoutsResponse || [],
       newReleases: newReleasesResponse || [],
       upcomingEvents: upcomingEventsResponse || [],
       liveEvent: liveEventResponse || [],
     };
-
   } catch (err) {
+      console.log(err);
     error.value = err;
   } finally {
     isLoading.value = false;

@@ -79,16 +79,14 @@
             />
 
             <!-- Live section -->
-            <CoachEvent 
-                v-if="data.liveEvent" 
-                class="tw-mb-6" 
-                :preloadedContent="data.liveEvent" 
+            <CoachEvent
+                v-if="data.liveEvent"
+                class="tw-mb-6"
+                :preloadedContent="data.liveEvent"
                 :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" 
-                :youtubeEventId="youtubeId" 
+                :youtubeEventId="youtubeId"
                 :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" 
-                trackingSection="live" 
+                trackingSection="live"
             />
 
             <!-- Upcoming section -->
@@ -180,7 +178,6 @@
         continueUrl: { type: String, default: '' },
         conversationData: { type: Array, default: () => ([]) },
         currentDate: { type: String, default: '' },
-        eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },

@@ -1,7 +1,7 @@
 <script setup>
-import {fetchByRailContentId} from 'musora-content-services';
-
-fetchByRailContentId(368453).then(a => console.log('did we do it?', a));
+import {fetchByRailContentId, fetchMethods, fetchMethod, fetchLiveEvent} from 'musora-content-services';
+fetchLiveEvent('drumeo').then(a => console.log('fuck yeaa', a));
+//fetchMethod('drumeo', 'drumeo-method').then(a => console.log('did we do it?', a));
 
 const props = defineProps({
     results: { type: String, default: '' },

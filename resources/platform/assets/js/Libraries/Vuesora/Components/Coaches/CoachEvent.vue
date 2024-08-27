@@ -98,7 +98,7 @@
               <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
             </button>
 
-            <content-schedule :subscription-calendar-id="subscriptionCalendarId" :theme-color="brand" :brand="brand"
+            <content-schedule :subscription-calendar-id="content.calendar_id" :theme-color="brand" :brand="brand"
               :toggleSubscribePopup="toggleSubscribePopup" v-if="showSubscribePopup"></content-schedule>
           </div>
         </div>
@@ -125,10 +125,6 @@ export default {
       default: () => ({}),
     },
     currentDateString: {
-      type: String,
-      default: () => "",
-    },
-    subscriptionCalendarId: {
       type: String,
       default: () => "",
     },
@@ -163,8 +159,12 @@ export default {
       counterInterval: null,
     };
   },
-  mounted() {
+  beforeMount() {
+      console.log('beforeMount', this.preloadedContent);
+  },
+    mounted() {
     if (this.preloadedContent) {
+
       this.content = this.preloadedContent;
       this.startTime = DateTime.fromSQL(this.content.published_on, { zone: "UTC" });
       this.startDate = new Date(this.startTime);
@@ -172,7 +172,7 @@ export default {
       this.startMonth = this.startDate.toLocaleString("en-US", { month: "long" });
       this.startDay = this.startDate.getDate();
       this.formattedTime = this.startDate.toLocaleTimeString([], { timeStyle: "short" });
-
+        console.log('mounted', this.preloadedContent);
       this.checkIfLive();
     }
   },
@@ -181,7 +181,7 @@ export default {
   },
   computed: {
     isVisible() {
-      return this.content && this.counterValue > 0 && this.counterValue / 3600 <= 48;
+      return this.content; // && this.counterValue > 0 && this.counterValue / 3600 <= 48;
     },
     $_hours() {
       return this.padTwoDigits(Math.max(0, Math.floor(this.counterValue / 3600)));
@@ -258,7 +258,7 @@ export default {
 
     handleClick(event, url) {
       event.preventDefault();
-      
+
       if (this.trackingSection && this.trackingSection.length) {
         userJourney.trackHomeContentClick({
           token: this.token,
