@@ -478,6 +478,21 @@ return [
                     'pianote',
                 ],
             ],
+            'Getting Started On The Piano v3' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started-v3',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
             'Sight Reading Made Simple' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
