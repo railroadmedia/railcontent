@@ -71,7 +71,7 @@
                     <br><br>
                     <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
                     <br><br>
-                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/getting-started"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
+                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/getting-started-on-the-piano"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
                     <br><br>
                 We’ll see you in Lesson 1!!</p>
 
