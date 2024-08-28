@@ -62,7 +62,7 @@
                 <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
                     <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
                     <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">
-                        <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/848153207?h=3e568a6e89" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                        <iframe class="fixed inset-0 h-full w-full absolute" src="https://player.vimeo.com/progressive_redirect/playback/1003820309/rendition/540p/file.mp4?loc=external&signature=d7f568ec0cb1e2814bcb74e8b52ba93dc44e83aa60fabdd89aba69117fe3c83e" frameborder="0" allowfullscreen title="intro-video"></iframe>
                     </div>
                 </div>
                 <p class="mt-8 max-w-lg">Here’s what you need to do now:
