@@ -92,6 +92,15 @@ Route::domain('{pianoteDomain}')
                     ]);
             }
         );
+        Route::group(
+            ['prefix' => 'getting-started-on-the-piano'],
+            function () {
+                Route::get('/{page?}', LeadGenController::class . '@gstdp')
+                    ->whereIn('page', [
+                        null, 'thank-you', 'ty-annual', 'ty-monthly'
+                    ]);
+            }
+        );
         Route::get('/sight-reading-made-simple', [LeadGenController::class, 'sightReading']);
         Route::group(
             ['prefix' => 'learn-songs'],

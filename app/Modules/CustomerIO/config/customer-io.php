@@ -478,7 +478,7 @@ return [
                     'pianote',
                 ],
             ],
-            'Getting Started On The Piano v3' => [
+            'Getting Started On The Piano V3' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
                 ],

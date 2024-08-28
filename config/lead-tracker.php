@@ -668,7 +668,7 @@ return [
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
-            'form_name' => 'Getting Started On The Piano v3',
+            'form_name' => 'Getting Started On The Piano V3',
             'brand' => 'pianote',
 
             'input_data_map' => [
