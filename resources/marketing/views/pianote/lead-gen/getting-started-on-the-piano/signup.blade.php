@@ -119,6 +119,8 @@
 @endsection
 
 @section('page-body')
+
+
     <header class="px-5 sm:px-6 pt-10 sm:pt-14 pb-20 md:pb-24 lg:py-20" style="background:#f1f7fe;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -180,9 +182,9 @@
                     <div class="mt-3">
                         @include('pianote._partials.sign-up-form', [
                             'recaptchaKey' => $recaptchaKey,
-                            'formId' => 'Pianote - Engagement - Trigger - GSOTP - Web Form2',
+                            'formId' => 'Pianote - Engagement - Trigger - GSOTPV3 - Web Form',
                             'nameInput' => true,
-                            'formName' => 'Getting Started On The Piano',
+                            'formName' => 'Getting Started On The Piano V3',
                             'buttonText' => 'Get started for free',
                             'stacked' => true,
                             'inputBorder' => '1px solid #7A8491',
@@ -213,7 +215,7 @@
                 'Find yourself searching for "private piano lessons near me," only to realize they\'re way <strong>too expensive.</strong>',
                 '<strong>Struggle to fit lessons into your hectic schedule.</strong> It’s hard to find a time that works for both the instructor and yourself.',
                 'FINALLY, you sign up for some private lessons, only to find them too <strong>rigid and boring,</strong> leaving you unmotivated.',
-                '“Should I try another teacher? But that’s a <strong>big investment</strong> for a hobby I might not even enjoy... Maybe piano just isn’t for me.”'
+                '“Should I try another teacher? But that’s a <strong>big investment</strong> for a hobby I might not even enjoy... Maybe the piano just isn’t for me.”'
             ]
         ];
     @endphp
@@ -242,7 +244,7 @@
                             [
                                 'icon' => 'fa-trophy',
                                 'text' => 'Result',
-                                'highlight' => 'Play your first popular chord progression'
+                                'highlight' => 'Play your first song'
                             ]
                         ];
                     @endphp
@@ -278,16 +280,16 @@
     </section>
 
     <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">
-        <div class="container mx-auto max-w-3xl">
+        <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="flex justify-center items-center w-full sm:w-auto"> 
+                <div class="flex justify-center items-center w-full md:w-1/2 sm:w-auto"> 
                     <picture class="w-full px-4 sm:w-auto h-auto sm:h-96 order-0 sm:order-none flex justify-center items-center">
                         <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/designed.webp">
                         <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/pianote/lead-gen/getting-started/designed.webp" alt="Person playing piano">                
                     </picture>
                 </div>
 
-                <div class="px-6 sm:pr-0 sm:pl-7 mb-7 sm:mb-0 sm:order-1">
+                <div class="px-6 sm:pr-0 sm:pl-7 mb-7 sm:mb-0 w-full md:w-1/2 sm:order-1">
                     <h4 class="leading-tight my-4 tracking-tight"><strong>Designed for Absolute Beginners</strong></h4>
                     <p class="leading-normal pb-4 md:pb-6">
                         The hardest part of playing the piano is not reading complicated sheet music or playing as fast as you physically can.
@@ -296,7 +298,7 @@
                         <br><br>
                         Getting Started on the Piano is carefully structured as slow, 1-on-1 play-along sessions you can easily follow. We’ll show you EXACTLY what to do, helping you build confidence as you progress.
                     </p>
-                    <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote anchor-slide" href="#final">GET STARTED FOR FREE</a>
+                    <a class="join smaller w-full sm:max-w-[350px] bg-pianote anchor-slide" href="#final">GET STARTED FOR FREE</a>
                 </div>
             </div>
         </div>
@@ -497,12 +499,12 @@
                 @endphp
 
                 @foreach ($features as $feature)
-                    <div class="w-full sm:w-1/3 px-4 mb-8 sm:mb-0 text-center flex flex-col items-center">
+                    <div class="w-full sm:w-1/3 px-2 mb-8 sm:mb-0 text-center flex flex-col items-center">
                         <div class="mb-4 rounded-full border-2 border-black w-16 h-16 flex items-center justify-center">
                             <i class="{{ $feature['icon'] }} text-3xl text-pianote"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2">{{ $feature['title'] }}</h3>
-                        <p class="text-gray-600">{{ $feature['desc'] }}</p>
+                        <p class="text-gray-600 tracking-tight">{{ $feature['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -531,7 +533,7 @@
                 'name' => 'Steve Wilson',
                 'location' => 'Arizona, USA',
                 'title' => 'I\'ve learned that it doesn\'t have to be such a huge time commitment to really start',
-                'description' => 'I\'ve learned that it doesn\'t have to be such a huge time commitment to really start to learn it because I\'m doing this for me. I\'m not doing this as a course. I\'m not doing this because somebody else wants me to learn it. This is finally for me and something I want to do for myself. <br><br> I tried some piano books and I tried some of the courses that you, where you can plug a piano into an iPad and then try to play along with it. That didn\'t very work very well for me. But when I saw Lisa teaching basic chords and making music from that, that was very inspiring.',
+                'description' => 'I\'ve learned that it doesn\'t have to be such a huge time commitment to really start to learn it because I\'m doing this for me. I\'m not doing this as a course. I\'m not doing this because somebody else wants me to learn it. This is finally for me and something I want to do for myself. <br><br> I tried some piano books and I tried some of the courses, where you can plug a piano into an iPad and then try to play along with it. That didn\'t very work very well for me. But when I saw Lisa teaching basic chords and making music from that, that was very inspiring.',
             ],
            [
                 'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/janet.webp',
@@ -635,9 +637,9 @@
                     <div class="mt-3">
                         @include('pianote._partials.sign-up-form', [
                             'recaptchaKey' => $recaptchaKey,
-                            'formId' => 'Pianote - Engagement - Trigger - GSOTP - Web Form',
+                            'formId' => 'Pianote - Engagement - Trigger - GSOTPV3 - Web Form2',
                             'nameInput' => true,
-                            'formName' => 'Getting Started On The Piano',
+                            'formName' => 'Getting Started On The Piano V3',
                             'buttonText' => 'Get started for free',
                             'stacked' => true,
                             'inputBorder' => '1px solid #7A8491',
