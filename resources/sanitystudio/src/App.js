@@ -100,18 +100,22 @@ function App() {
                             defaultDocumentNode: defaultDocumentNode }),
                         media(),
                         assist(),
+                        visionTool(),
+                        embeddingsIndexReferenceInput(),
+                        embeddingsIndexDashboard(),
                     ],
-                    tools: (prev, {currentUser}) => {
-                        if (currentUser.roles.find((r) => r.name === 'administrator' || r.name === 'developer')) {
-                            return [
-                                ...prev,
-                                {name: 'vision', title: 'Vision', component: visionTool},
-                                {name: 'embeddings', title: 'Embeddings', component: embeddingsIndexReferenceInput},
-                                {name: 'embeddings-dashboard', title: 'Embeddings Dashboard', component: embeddingsIndexDashboard},
-                            ]
-                        }
-                        return prev;
-                    },
+                    // TODO Removed with upgrade to PHP 8.3 React doesn't like the object return
+                    // tools: (prev, {currentUser}) => {
+                    //     if (currentUser.roles.find((r) => r.name === 'administrator' || r.name === 'developer')) {
+                    //         return [
+                    //             ...prev,
+                    //             {name: 'vision', title: 'Vision', component: visionTool},
+                    //             {name: 'embeddings', title: 'Embeddings', component: embeddingsIndexReferenceInput},
+                    //             {name: 'embeddings-dashboard', title: 'Embeddings Dashboard', component: embeddingsIndexDashboard},
+                    //         ]
+                    //     }
+                    //     return prev;
+                    // },
                     document: {
                         actions: (prev, context) =>
                             prev.map((previousAction) =>
