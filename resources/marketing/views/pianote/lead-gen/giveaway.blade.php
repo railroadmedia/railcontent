@@ -1,13 +1,13 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Win a Casio Privia PX-S1100 | Pianote</title>
-    <meta property="og:title" content="Win a Casio Privia PX-S1100 | Pianote">
+    <title>Win a Roland FP-30X Digital Piano | Pianote</title>
+    <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply start a trial to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply start a trial to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address before September 13th to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address before September 13th to secure your chance to win.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._tailwindcdn')
@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <style>
         header {
-            background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-bg-m.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');
         }
 
         @media (min-width:768px) {
             header {
-                background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header.jpg');
             }
         }
 
@@ -32,33 +32,31 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <header class="px-5 sm:px-6 py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
+    <header class="py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
-            <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="mx-auto text-center lg:text-left px-4 sm:px-0">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-4/12 lg:w-4/12 md:order-1 flex justify-center items-center mt-20 sm:mt-0">
+
+                </div>
+                <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 lg:pl-0 text-center md:text-left px-4 sm:px-0">
                     <div class="sm:px-3">
-                        <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" alt="logo">
-                        <img class="h-52 sm:hidden mt-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
-                        <p class="mx-0 my-4" style="max-width: 450px;">
-                            At Pianote, it’s our mission to help everyone play this beautiful instrument. So we’re giving away TWO Casio Privia Digital Pianos!
-                            <br><br>
-                            Simply start a FREE 7-day trial of Pianote from now until July 11th and you’ll automatically be entered to win.
+                        <img class="h-36 md:h-40 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
+
+                        <p class="mx-0 my-4" style="color:#D0E2E7; max-width: 450px;">
+                            At Pianote, it’s our mission to help everyone play this beautiful instrument. Simply start a free 7-day trial of Pianote from now until <span class="text-white font-extrabold">September 12th</span> and you’ll automatically be entered to win a Roland FP-30X Digital Piano.
                         </p>
+
                         <p class="mt-3 mb-6 text-sm">
                             <i class="fas fa-check-circle text-pianote"></i> No purchase necessary.<br class="lg:hidden">
                             <i class="fas fa-check-circle text-pianote lg:ml-2"></i> Cancel anytime.</p>
-
                     </div>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens September 6th</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 13, 8, 0, 0, 'America/Vancouver'))
                         <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif
-                </div>
-                <div class="hidden sm:block flex-shrink-0">
-                    <img class="h-72 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
                 </div>
             </div>
         </div>
@@ -66,139 +64,132 @@
 
     <section class="px-4 md:px-6 py-12 md:py-20">
         <div class="max-w-md md:max-w-4xl mx-auto">
-            <div class="md:flex md:flex-wrap">
+            <div class="md:flex md:flex-wrap md:items-center mb-6 md:mb-20">
                 <div class="w-full mb-4 md:mb-8 text-center">
-                    <h2 class="font-extrabold leading-normal mb-2" style="color:#2A2F34;">
-                        Good Things Come in Red Packages
-                    </h2>
-                    <h6 class="leading-tight"><strong><em>
-                                A stunning piano sound, expressive touch, and powerful<br class="hidden sm:inline">
-                                speakers make this the perfect home piano.</em></strong></h6>
+                    <h4 class="font-extrabold leading-normal" style="color:#2A2F34;">
+                        Compact size. Premium Performance.
+                    </h4>
+                    <p><em>Go beyond the basics with this beautiful at-home digital piano. With authentic <br class="hidden lg:inline-block">
+                            touch sensitivity, the FP-30X offers big performance in a little package.</em></p>
 
                 </div>
                 <div class="md:w-7/12 md:pr-7">
-                    <img class="lazyload md:hidden rounded-xl mb-6" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/collage-m.png" alt="intro image">
+                    <img class="md:hidden rounded-xl mb-6" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro-m.jpg" alt="intro image">
                     <p>
-                        <strong>Picture it…</strong>
+                        This is not your beginner piano.
                         <br><br>
-                        You sit down to play your new Casio digital piano and as you touch the keys, your fingers feel the weighted hammer action that has been designed to mirror a grand piano. Action like this means you can play expressively and dynamically.
+                        The beautiful Roland FP-30X delivers exceptional performance and easily outshines other instruments in its class. Roland’s unrivaled sound and feel deliver an authentic piano experience for maximum expression, providing a solid foundation for proper learning and the detailed articulation and response that experienced players demand.
                         <br><br>
-                        But it’s the sound that takes your breath away.
+                        The advanced SuperNATURAL Piano engine combined with the premium touch of the Ivory Feel keys found in high-end home pianos will have you coming back to the piano again and again, always with a smile.
                         <br><br>
-                        Casio has painstakingly modeled the piano sound from a German concert grand piano. You’ll even hear the dampers lifting from the strings as you press the sustain pedal.
+                        And all this performance comes wrapped in a compact case that will fit any living situation while being light enough to move easily when needed.
                         <br><br>
-                        And that sound will fill your space thanks to powerful speakers that feature a strengthened diaphragm for cleaner high-end and an improved inner structure to handle the deep, rich bass notes.
-                        <br><br>
-                        This piano features Bluetooth MIDI connectivity and is lightweight and portable so you can take it wherever the music takes you.
-                        <br><br>
-                        The Casio Privia PX-S1100 retails for $699.99 USD. But it can be yours for <strong>FREE</strong>.
-                        <br><br>
-                        <em class="opacity-60">* Stand not included</em>
+                        The Roland FP-30X retails for $699. But it can be yours for FREE.
                     </p>
                 </div>
                 <div class="w-5/12 justify-center pl-8">
-                    <img class="rounded-xl lazyload hidden md:inline-block" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/collage.png" alt="intro image">
+                    <img class="rounded-xl hidden md:inline-block" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro.jpg" alt="intro image">
                 </div>
+            </div>
+
+            <picture>
+                <source media="(min-width:768px)" srcset="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg">
+                <img class="rounded-xl mb-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg" alt="gallery feature">
+            </picture>
+
+            <img class="hidden md:inline-block rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
+
+            <div class="md:hidden">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
+                <img class="rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
             </div>
         </div>
     </section>
 
-    <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
-        <div class="max-w-md md:max-w-5xl mx-auto md:flex md:items-center">
-            <div class="md:pr-8 text-center md:text-left mb-6 md:mb-0 flex-shrink-0">
-                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes2.webp" alt="ui image">
+    <section class="py-20 px-4 md:px-6" style="background:#FFF7F7;">
+        <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center">
+            <div class="md:order-1 md:w-5/12 md:pl-12 text-center md:text-left mb-6 md:mb-0">
+                <img class="h-96" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/ui.png" alt="ui image">
             </div>
-            <div class="lg:pl-6">
+            <div class="md:w-7/12 lg:pr-6">
                 <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
-                    More Prizes.<br>
-                    More Chances to Win…
+                    You’ve won a piano. <br>
+                    Now learn how to play it…
                 </h4>
                 <p class="leading-normal" style="color:#2A2F34;">
-                    We know you want this piano.
-                    <br><br>
-                    That’s why we’re giving away TWO of them. And each comes with a year of unlimited lessons from Pianote.
-                    <br><br>
-                    But a beautiful digital piano is not the only prize.
-                    <br><br>
-                    You could also win one of TWO Pianote BookBag Bundles. You’ll get a hand-crafted premium leather satchel full of music books. Play timeless classical pieces or your favorite Christmas Carols.
-                    <br><br>
-                    And finally, you could win one of two Annual Pianote Memberships.
+                    A piano is not a piece of furniture. <br><br>
+                    It’s designed to be played, enjoyed, treasured, and used for life. That’s why, as well as getting a free piano, you’ll also get a FREE YEAR of piano lessons from Pianote! <br><br>
+                    Step-by-step lessons from REAL teachers to guarantee your progress. Play your favorite songs, get support and feedback on your journey, and connect with the best online community of piano players around. <br><br>
+                    It’s all included with your prize. <br><br>
+                    But that’s not all…
+                </p>
+                <h4 class="font-extrabold my-4" style="color:#2A2F34;">More than one chance to win!</h4>
+                <p class="leading-normal" style="color:#2A2F34;">
+                    Because even if you don't win the main prize (but you probably will, right?), you might snag one of 5 annual Pianote memberships as our runner-up prizes.
                 </p>
             </div>
         </div>
     </section>
 
     {{-- diagonal line --}}
-    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #F1EFED calc(50% + 1px));"></div>
-    <section class="pb-20 px-5 md:px-6" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
-        <div class="max-w-md md:max-w-3xl mx-auto text-center">
-            <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
-                <path d="M41.1853 6.17994C45.1417 2.22302 50.5047 0 56.1023 0H93.9075C99.5051 0 104.868 2.22302 108.824 6.17994L143.816 41.1862C147.773 45.1425 150 50.5055 150 56.103V93.908C150 99.5055 147.773 104.868 143.816 108.825L108.824 143.816C104.868 147.773 99.5051 150 93.9075 150H56.1023C50.5047 150 45.1417 147.773 41.1853 143.816L6.17879 108.825C2.22301 104.868 0 99.5055 0 93.908V56.103C0 50.5055 2.22301 45.1425 6.17879 41.1862L41.1853 6.17994ZM67.9714 44.2633V77.0862C67.9714 81.2477 71.1071 84.1197 75.0049 84.1197C78.9026 84.1197 82.0384 81.2477 82.0384 77.0862V44.2633C82.0384 40.6294 78.9026 37.2298 75.0049 37.2298C71.1071 37.2298 67.9714 40.6294 67.9714 44.2633ZM75.0049 93.4977C69.8177 93.4977 65.6268 97.9522 65.6268 102.876C65.6268 108.327 69.8177 112.254 75.0049 112.254C80.1921 112.254 84.383 108.327 84.383 102.876C84.383 97.9522 80.1921 93.4977 75.0049 93.4977Z" fill="#FFAE00"/>
-            </svg>
+    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFF7F7 calc(50% + 1px));"></div>
+    <section class="pb-20 px-5 md:px-6" style="background: #010C15;">
+        <div class="max-w-md sm:max-w-3xl mx-auto text-center">
+            <img class="h-28 relative z-10 mb-12" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/caution_icon.svg" alt="caution icon">
             <h3 class="text-white font-extrabold leading-normal">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12" style="color:#D0E2E7;">
                 <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     Start a Free 7-Day Trial of Pianote to enter.
                 </div>
                 <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     One entry per person.
                 </div>
                 <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     No purchase necessary. Cancel anytime.
                 </div>
                 <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     No shipping fees (VAT may apply).
                 </div>
             </div>
-            <div class="inline-block italic text-black py-4 px-6 bg-musora">
-                The winner will be announced {{--during a LIVE event--}} on <strong>July 11th</strong>!
+            <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
+                The winner will be announced during a LIVE event on September 13th!
             </div>
         </div>
     </section>
 
-    <section class="flex items-center text-center px-6 sm:px-6 pt-8 sm:pt-12 pb-20 md:pb-24">
-        <div class="container mx-auto max-w-3xl">
-            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to start a trial?</strong></h3>
+    <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
+        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/piano_qa.png" alt="piano icon" />
+        <div class="container mx-auto max-w-3xl px-6 sm:px-4 py-8 md:py-10 lg:py-12">
+            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
             <p>
-                We want the winner to be someone who really wants and will use this free piano. After all, that’s what it’s for. Starting a trial lets us know you’re serious about the piano.
-                <br><br>
-                On top of that, we want to show you the awesome lessons we have inside Pianote. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.
-                <br><br>
-                And hey, if you like it, we hope you’ll stick around.
+                We want the winner to be someone who really wants and will use this free piano. After all, that’s what it’s for. So getting an email address lets us know you’re a real person! <br><br>
+                On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome piano lessons, and we’d love to show you.” Don’t worry. We won’t send you spam or share your email address with anybody else. You’ll get free ongoing piano lessons and some special offers. And if you don’t like our emails, you can unsubscribe anytime.
             </p>
         </div>
+        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/email_qa.png" alt="email icon" />
     </section>
 
-    <section class="text-center pb-8 md:pb-12 lg:pb-14 px-5 md:px-7" style="background-color:#F1EFED;">
-        <div class="mx-auto max-w-md md:max-w-3xl">
-            <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="w-full sm:w-auto sm:order-1 flex-shrink-0">
-                    <img class="h-64 sm:h-80 lg:h-96 -mt-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/order-image.png" alt="title image">
-                </div>
-                <div class="mx-auto text-center lg:text-left px-4 sm:px-0 pt-4 md:pt-10">
-                    <div class="sm:px-3">
-                        <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" alt="logo">
-                        <h4 class="font-black mx-0 my-4" style="max-width: 450px;">
-                            Win a Casio Privia<br class="hidden sm:inline">
-                            PX-S1100 Digital Piano
-                        </h4>
-                    </div>
+    <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover"
+        style='background-image:url("https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg");'>
+        <div class="mx-auto max-w-md md:max-w-2xl">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-6" src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
 
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
-                        <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
-                    @else
-                        <span class="join sold-out smaller w-full">this offer has now ended</span>
-                    @endif
-                </div>
-            </div>
+
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))
+                <span class="join sold-out smaller w-full">Opens September 6th</span>
+            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 13, 8, 0, 0, 'America/Vancouver'))
+                <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
+            @else
+                <span class="join sold-out smaller w-full">this offer has now ended</span>
+            @endif
         </div>
     </section>
 
@@ -208,7 +199,5 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @endsection
 
