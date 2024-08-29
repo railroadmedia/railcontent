@@ -41,7 +41,7 @@
                 <img class="w-full sm:w-auto h-auto sm:h-96 sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1160x0/filters:quality(95)/marketing/drumeo/lead-gen/blue-man/image.webp">
                 <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-10 mt-7 sm:mt-0 sm:order-1">
                     <h3 class="leading-tight mb-4"><strong>Drums, world-class performances, the color blue…</strong></h3>
-                    <p class="leading-normal">The Blue Man Group and Drumeo have too much in common to NOT combine forces. 
+                    <p class="leading-normal">Blue Man Group and Drumeo have too much in common to NOT combine forces.
                         <br><br>
                         That’s why we’re teaming up to offer Drumeo Members (that’s you) an exclusive discount to attend Blue Man Group shows in 4 US cities. 
                         <br><br>

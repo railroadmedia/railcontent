@@ -57,7 +57,7 @@
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             @if(!empty($hasProduct) && $hasProduct == 'true')
-                                <a class="join sold-out medium w-full anchor-slide">YOURE ENROLLED!</a>
+                                <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                             @else
                                 <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
@@ -143,7 +143,7 @@
         </div>
     </header>
 
-    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background-color:#FFFFFF;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your foot speed &<br> control on the drums.</strong></h2>
             @php
@@ -254,7 +254,7 @@
                 @endforeach
             </div>
         </div>
-        <h1 class="leading-none -mt-6 lg:-mt-7 mb-10"><i class="fal fa-angle-down text-drumeo hidden md:inline-block"></i></h1>
+        <h1 class="leading-none sm:-mt-6 lg:-mt-7 hidden md:inline-block"><i class="fal fa-angle-down text-drumeo"></i></h1>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF7FF">
@@ -405,7 +405,7 @@
     }"
                 >
                 <p
-                    class="inline sm:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower">
+                    class="inline sm:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2">
                     <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
 
                 <table :class="getClass()"
@@ -627,18 +627,16 @@
                     <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
                         @include('drumeo.products.partials._order-card', [
                             'threeWide' => true,
-                            'badge' => 'FREE QuietKick: <s class="opacity-80">100</s> 98 left!',
                             'header' => 'Course<br> Only',
-                            'subheader' => '30-Day Double Bass<br> + 2 Bonuses Worth $109',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-only2.png',
-                            'imageHeight' => 'h-28 lg:h-36',
+                            'subheader' => '30-Day Double Bass<br> + Free Bonus Worth $30',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-no-pedal.png',
+                            'imageHeight' => 'h-32 md:h-40',
                             'price' => '$97',
                             'specialText' => "One time payment.",
                             'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[quietkick-double-bass]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
-                                '<strong>FREE</strong> Double QuietKick',
                                 '<strong>FREE</strong> 1-month Drumeo Access',
                             ],
                         ])
@@ -649,7 +647,7 @@
                             'header' => 'Course +<br> Unlimited Lessons',
                             'subheader' => '30-Day Double Bass<br> + Drumeo & 3 Bonuses',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course.png',
-                            'imageHeight' => 'h-28 lg:h-36',
+                            'imageHeight' => 'h-32 md:h-40',
                             'price' => '$240',
                             'specialText' => "Renews annually at $240.",
                             'cta' => 'ENROLL NOW',
@@ -668,7 +666,7 @@
                             'header' => 'Course + Pedal +<br> Unlimited Lessons',
                             'subheader' => '30-Day Double Bass + Double Pedal<br> + Drumeo & 3 Bonuses',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/demonator.png',
-                            'imageHeight' => 'h-28 lg:h-36',
+                            'imageHeight' => 'h-32 md:h-40',
                             'fullPrice' => '$1020',
                             'price' => '$499',
                             'specialText' => "Renews annually at $240.",
@@ -685,8 +683,9 @@
                         ])
 
                     </div>
-                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true">
-                <p><u><em><strong>Don't want any physical bonuses?</strong> <br class="hidden sm:inline"> Click here to  join 30-Day Double Bass only.</em></u></p></a>
+
+                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-double-bass]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true">
+                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Drumeo<br class="hidden sm:inline"> and get 30-Day Double Bass with no physical bonuses.</em></u></p></a>
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">

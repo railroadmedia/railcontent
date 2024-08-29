@@ -68,12 +68,18 @@ return [
         'brand' => 'musora',
         'musora' => [
             'The Playlist - Musora Newsletter' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
                 'events' => [
                     'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Free Music Lessons For Life' => [
@@ -95,6 +101,15 @@ return [
             ],
         ],
         'drumeo' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -454,6 +469,15 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Getting Started On The Piano - Facebook' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Getting Started On The Piano V3' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
@@ -467,15 +491,6 @@ return [
                 'attributes' => [
                     'first_name' => 'First Name',
                     'email' => 'Email'
-                ],
-            ],
-            'Getting Started On The Piano - Facebook' => [
-                'custom_attributes' => [],
-                'events' => [
-                    'pianote_prospect_getting-started',
-                ],
-                'accounts_to_sync' => [
-                    'pianote',
                 ],
             ],
             'Sight Reading Made Simple' => [

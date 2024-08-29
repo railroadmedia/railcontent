@@ -40,6 +40,9 @@ Route::domain('{drumeoDomain}')
         Route::get('/awards/', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
 
+        Route::get('/guitarcenter/redeem', [SalesController::class, 'guitarcenterRedeem']);
+        Route::get('/guitarcenter/redeem/existing', [SalesController::class, 'guitarcenterRedeemExisting']);
+
         Route::get('/alesis', [SalesController::class, 'alesisNitro']);
         Route::get('/alesis/existing', [SalesController::class, 'alesisNitroExisting']);
         Route::get('/alesis-strata', [SalesController::class, 'alesisStrata']);
@@ -54,6 +57,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
         Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
+        Route::get('/guitarcenter', [SalesController::class, 'guitarcenter']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/trial2', [SalesController::class, 'trial']);

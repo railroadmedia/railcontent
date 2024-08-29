@@ -78,6 +78,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
+    public function guitarcenter()
+    {
+        return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
     public function welcomeBackDiscount()
     {
         return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
@@ -267,6 +271,24 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.pages.sonor');
     }
+
+
+
+    public function guitarcenterRedeem(Request $request)
+    {
+        return view('drumeo.pages.guitarcenter', [
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function guitarcenterRedeemExisting(Request $request)
+    {
+        return view('drumeo.pages.guitarcenter', [
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
 
     public function handleRedeemRequest(Request $request, $productType, $isNewAccount)
     {
