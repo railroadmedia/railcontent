@@ -1019,8 +1019,8 @@ class ContentService
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED];
         $removed = $this->getFiltered(
-            page: 1,
-            limit: 50,
+            page: $page,
+            limit: $limit,
             requiredFields: ["quarter_removed,$nextPrev->previousQuarter,'',="],
         );
         ContentRepository::$availableContentStatues = $prevStatus;
@@ -1043,8 +1043,8 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
         ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED, ContentService::STATUS_PUBLISHED];
         $comingSoon = $this->getFiltered(
-            page: 1,
-            limit: 50,
+            page: $page,
+            limit: $limit,
             requiredFields: ["quarter_published,$nextPrev->nextQuarter,'',="],
         );
         ContentRepository::$availableContentStatues = $prevStatus;
