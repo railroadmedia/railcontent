@@ -24,10 +24,6 @@ class PlaylistDecorator extends ModeDecoratorBase
 
     public static $skip = false;
 
-    /**
-     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
-     * @param UserPlaylistsService $userPlaylistsService
-     */
     public function __construct(
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         UserPlaylistsService $userPlaylistsService,

@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\Models\Sanity;
 
-use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 
@@ -19,13 +18,7 @@ class SemesterPackLesson extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Semester Pack Lesson', withResources: true);
-
-        // Add the reference to the parent course
-        $detailsGroup = new Group('editorFields', 'Details', true);
-        $this->addFields([
-                             new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'semester-pack'),
-                         ]);
+        parent::__construct(self::getName(), 'Semester Pack Lesson', withResources: true, parentType: 'semester-pack');
     }
 
     public static function getName(): string

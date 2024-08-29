@@ -9,7 +9,7 @@ class SyncCalendarData extends Command
 {
     protected $signature = 'addevent:syncCalendarData';
 
-    public function handle(CalendarSyncService $calendarSyncService)
+    public function handle(CalendarSyncService $calendarSyncService): void
     {
         $this->withExecutionTime(function () use ($calendarSyncService) {
             $calendarSyncService->syncCalendarData();

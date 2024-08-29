@@ -9,7 +9,7 @@ class SyncPoints extends Command
 {
     protected $signature = 'points:sync';
 
-    public function handle()
+    public function handle(): void
     {
         $this->runChainQuery(function (int $skip, int $take) {
             return new SyncPointsJob($skip, $take);

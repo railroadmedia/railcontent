@@ -33,7 +33,6 @@ class CancelDuplicateSubscriptionPaymentOrdersInShopifyDispatcher extends Comman
     /**
      * Execute the console command.
      *
-     * @return int
      * @throws Throwable
      */
     public function handle(): int

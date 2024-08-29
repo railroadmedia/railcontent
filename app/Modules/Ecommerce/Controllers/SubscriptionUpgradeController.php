@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Enums\Interval;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Services\SubscriptionUpgradeService;
@@ -21,7 +22,7 @@ class SubscriptionUpgradeController extends Controller
     /**
      * @throws Exception
      */
-    public function upgrade()
+    public function upgrade(): JsonResponse
     {
         $purchaseInfo = $this->subscriptionUpgradeService->getUpgradeProductInfo(user());
         $sku = $purchaseInfo['sku'];

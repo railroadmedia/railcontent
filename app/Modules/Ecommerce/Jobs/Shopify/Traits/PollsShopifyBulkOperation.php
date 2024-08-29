@@ -24,7 +24,6 @@ trait PollsShopifyBulkOperation
     /**
      * Poll Shopify for our bulk operation and return the applicable data in the form of a ShopifyPollResponse
      *
-     * @return ShopifyPollResponse
      * @throws Exception
      */
     protected function pollShopify(): ShopifyPollResponse
@@ -85,8 +84,6 @@ trait PollsShopifyBulkOperation
 
     /** Cancel this bulk operation in Shopify
      * @see https://shopify.dev/docs/api/usage/bulk-operations/imports#cancel-an-operation
-     *
-     * @return bool
      */
     protected function cancelShopifyOperation(): bool
     {
@@ -112,10 +109,6 @@ trait PollsShopifyBulkOperation
 
     /**
      * Download the file from Shopify at the given url, and save it in our storage
-     *
-     * @param string $saveAs
-     * @param string $url
-     * @return bool
      */
     protected function downloadFile(string $saveAs, string $url): bool
     {
@@ -129,8 +122,6 @@ trait PollsShopifyBulkOperation
 
     /**
      * Get the name of the class that called this job - useful for logging and exception messages
-     *
-     * @return string
      */
     abstract protected function getClassName(): string;
 }

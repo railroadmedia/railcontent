@@ -24,9 +24,6 @@ class CohortPackController
     }
 
     /**
-     * @param string $sku
-     * @param string $successMessage
-     * @return RedirectResponse
      * @throws ORMException
      * @throws Throwable
      */

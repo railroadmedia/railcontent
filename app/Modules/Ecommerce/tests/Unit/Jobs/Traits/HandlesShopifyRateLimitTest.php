@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use ReflectionException;
 use Signifly\Shopify\Shopify;
-use Tests\BaseTestCase;
+use Tests\TestCase;
 use Tests\traits\CreatesReflectionMethod;
 
-class HandlesShopifyRateLimitTest extends BaseTestCase
+class HandlesShopifyRateLimitTest extends TestCase
 {
     use CreatesReflectionMethod;
 
@@ -88,10 +88,6 @@ class HandlesShopifyRateLimitTest extends BaseTestCase
     /**
      * Use Faked HTTP calls to replicate receiving a response from Shopify with the given rate limit values
      * in its header
-     *
-     * @param  int  $count
-     * @param  int  $limit
-     * @return void
      */
     private function setUpShopifyResponseHeader(int $count, int $limit): void
     {
@@ -237,8 +233,6 @@ class HandlesShopifyRateLimitTraitJob
 
     /**
      * Unique function for this class, so we can access the Shopify client
-     *
-     * @return Shopify
      */
     public function getShopify(): Shopify
     {
@@ -271,9 +265,6 @@ class HandlesShopifyRateLimitTraitJob
 
     /**
      * Unique function for this class, so we can test different scenarios with simulation on/off
-     *
-     * @param  bool  $isSimulation
-     * @return void
      */
     public function setIsSimulation(bool $isSimulation): void
     {

@@ -14,8 +14,6 @@ trait ExecutesShopifyGraphQlQuery
     /**
      * Execute the query with Shopify
      *
-     * @param  string  $gql
-     * @return mixed
      * @throws Exception
      */
     public function executeQuery(string $gql): mixed
@@ -53,15 +51,11 @@ trait ExecutesShopifyGraphQlQuery
 
     /**
      * Get the Shopify connection to use.
-     *
-     * @return Shopify
      */
     abstract protected function getShopifyConnection(): Shopify;
 
     /**
      * Check the GraphQL rate limit. If we're going to exceed the limit, log it and sleep.
-     *
-     * @return void
      */
     protected function handleRateLimitBefore(): void
     {

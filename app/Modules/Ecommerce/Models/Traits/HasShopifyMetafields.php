@@ -15,7 +15,6 @@ trait HasShopifyMetafields
     /**
      * Get any metafields for this model that are not already in Shopify
      *
-     * @return array
      * @throws Exception
      */
     public function getNewMetafieldsForShopify(): array
@@ -47,7 +46,6 @@ trait HasShopifyMetafields
     /**
      * Query Shopify for the metafields for this model.
      *
-     * @return Collection
      * @throws Exception
      */
     protected function getMetafieldsFromShopify(): Collection

@@ -77,10 +77,6 @@ class CustomerIoSyncService
     /**
      * Attribute list:
      * BRAND_subscribed_coaches => 'ID123_FNAME_LNAME, ID1234_FNAME2_LNAME2, etc'
-     *
-     * @param User $user
-     * @param array $brands
-     * @return array
      */
     public function getUsersContentFollowAttributes(User $user, array $brands = []): array
     {

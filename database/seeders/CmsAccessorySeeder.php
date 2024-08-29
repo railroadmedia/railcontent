@@ -2029,10 +2029,8 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $products = self::C;
 

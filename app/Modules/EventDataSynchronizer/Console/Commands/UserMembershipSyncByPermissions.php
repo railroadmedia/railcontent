@@ -15,7 +15,7 @@ class UserMembershipSyncByPermissions extends Command
         {--syncCustomerIO=0 : sync customer io data}
     ';
 
-    public function handle()
+    public function handle(): void
     {
         $customQuery = $this->option('customQuery');
         $customQueryParameter = $this->option('customQueryParameter');

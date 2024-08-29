@@ -19,14 +19,13 @@ class PaymentService
      * @param $type
      * @param $purchasedAt
      * @param $transactionId
-     * @return Payment
      */
     public function create(
         $subscription,
         $type,
         $purchasedAt,
         $transactionId
-    ) {
+    ): Payment {
         $payment = Payment::where('external_id', $transactionId)
             ->where('external_provider', $type)->first();
         if (!$payment) {
@@ -63,7 +62,6 @@ class PaymentService
      * using the payments' source of truth
      *
      * @param  Order|SubscriptionPayment  $model
-     * @return float
      * @throws Exception
      */
     public function getTotalPaid(Order|SubscriptionPayment $model): float
@@ -89,8 +87,6 @@ class PaymentService
     /**
      * Get the total USD amount paid for the given payment, that was made with Stripe
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForStripe(Payment $payment): float
@@ -112,10 +108,6 @@ class PaymentService
     }
 
     /**
-     * @param  float  $amount
-     * @param  string  $currency
-     * @param  Carbon  $date
-     * @return float
      * @throws Exception
      */
     private function getAsUsd(float $amount, string $currency, Carbon $date): float
@@ -182,9 +174,6 @@ class PaymentService
 
     /**
      * Check if the current code is a valid ISO 4217 currency code
-     *
-     * @param  string  $code
-     * @return bool
      */
     private function isValidCurrencyCode(string $code): bool
     {
@@ -197,8 +186,6 @@ class PaymentService
     /**
      * Get the total USD amount paid for the given payment, that was made with PayPal
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForPayPal(Payment $payment): float
@@ -222,8 +209,6 @@ class PaymentService
     /**
      * Get the total USD amount paid for the given payment, that was made with Apple
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForApple(Payment $payment): float
@@ -256,8 +241,6 @@ class PaymentService
     /**
      * Get the total USD amount paid for the given payment, that was made with Google
      *
-     * @param  Payment  $payment
-     * @return float
      * @throws Exception
      */
     private function getPaymentAmountForGoogle(Payment $payment): float
@@ -321,7 +304,6 @@ class PaymentService
     /**
      * Get the payment amount for a payment that doesn't use an external service.
      *
-     * @param  Payment  $payment
      * @return float the float value of the payment in USD
      * @throws Exception
      */

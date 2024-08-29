@@ -141,10 +141,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -176,10 +174,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
     }

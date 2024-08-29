@@ -4,14 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTrialSectionHideAttributesToUsersTable extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->boolean('singeo_trial_section_hide')->after('singeo_onboarding_skip_setup')->default(false);
@@ -23,10 +20,8 @@ class AddTrialSectionHideAttributesToUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('drumeo_trial_section_hide');
@@ -36,4 +31,4 @@ class AddTrialSectionHideAttributesToUsersTable extends Migration
         });
     }
 
-}
+};

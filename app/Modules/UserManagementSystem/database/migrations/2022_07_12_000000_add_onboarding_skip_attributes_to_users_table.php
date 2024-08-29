@@ -4,14 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOnboardingSkipAttributesToUsersTable extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->boolean('singeo_onboarding_skip_setup')->after('drums_playing_since_year')->default(false);
@@ -23,10 +20,8 @@ class AddOnboardingSkipAttributesToUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('usora_users', function (Blueprint $table) {
             $table->dropColumn('drumeo_onboarding_skip_setup');
@@ -36,4 +31,4 @@ class AddOnboardingSkipAttributesToUsersTable extends Migration
         });
     }
 
-}
+};

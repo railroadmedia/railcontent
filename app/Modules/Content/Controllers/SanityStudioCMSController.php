@@ -20,6 +20,9 @@ use App\Modules\Content\Models\Sanity\Instructor;
 use App\Modules\Content\Models\Sanity\License;
 use App\Modules\Content\Models\Sanity\Lifestyle;
 use App\Modules\Content\Models\Sanity\Method;
+use App\Modules\Content\Models\Sanity\MethodCourse;
+use App\Modules\Content\Models\Sanity\MethodLesson;
+use App\Modules\Content\Models\Sanity\MethodLevel;
 use App\Modules\Content\Models\Sanity\Pack;
 use App\Modules\Content\Models\Sanity\PackBundle;
 use App\Modules\Content\Models\Sanity\PackBundleLesson;
@@ -63,6 +66,8 @@ use App\Modules\Content\Models\Sanity\SongTutorialChildren;
 use App\Modules\Content\Models\Sanity\StudentFocus;
 use App\Modules\Content\Models\Sanity\Theory;
 use App\Modules\Content\Models\Sanity\Topic;
+use App\Modules\Content\Models\Sanity\Unit;
+use App\Modules\Content\Models\Sanity\UnitPart;
 use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
 use Carbon\Carbon;
@@ -126,9 +131,14 @@ class SanityStudioCMSController extends BaseController
             (new PackBundle())->toArray(),
             (new PackBundleLesson())->toArray(),
             (new Method())->toArray(),
+            (new MethodLevel())->toArray(),
+            (new MethodCourse())->toArray(),
+            (new MethodLesson())->toArray(),
             (new SongTutorial())->toArray(),
             (new SongTutorialChildren())->toArray(),
             (new Foundation())->toArray(),
+            (new Unit())->toArray(),
+            (new UnitPart())->toArray(),
             (new Archive())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),

@@ -25,7 +25,7 @@ class HelpScoutMentorControllerTest extends TestCase
         Event::fake();
     }
 
-    public function test_helpscout_conversation_created_webhook()
+    public function test_helpscout_conversation_created_webhook(): void
     {
         $brand = 'drumeo';
         $mentor = Mentor::factory()->create(['supported_brands' => $brand]);

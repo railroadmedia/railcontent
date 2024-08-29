@@ -26,7 +26,7 @@ class SyncHelpScoutAsync extends Command
         parent::__construct();
     }
 
-    public function handle()
+    public function handle(): void
     {
         $userId = $this->argument('user');
 

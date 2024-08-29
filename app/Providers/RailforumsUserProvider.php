@@ -34,7 +34,6 @@ class RailforumsUserProvider implements UserProviderInterface
 
     /**
      * @param $userId
-     * @return ?ForumUser
      */
     public function getUser($userId): ?ForumUser
     {
@@ -54,7 +53,6 @@ class RailforumsUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param array $userIds
      * @return array|ForumUser[]
      */
     public function getUsersByIds(array $userIds): array
@@ -80,10 +78,6 @@ class RailforumsUserProvider implements UserProviderInterface
         return $forumUsers;
     }
 
-    /**
-     * @param array $userIds
-     * @return array
-     */
     public function getUsersAccessLevel(array $userIds): array
     {
         $userRows =
@@ -102,10 +96,6 @@ class RailforumsUserProvider implements UserProviderInterface
         return $accessLevels;
     }
 
-    /**
-     * @param array $userIds
-     * @return array
-     */
     public function getUsersXPAndRank(array $userIds): array
     {
         /**
@@ -127,10 +117,6 @@ class RailforumsUserProvider implements UserProviderInterface
         return $xp;
     }
 
-    /**
-     * @param array $userIds
-     * @return array
-     */
     public function getAssociatedCoaches(array $userIds): array
     {
         $includedFields = [];
@@ -162,12 +148,7 @@ class RailforumsUserProvider implements UserProviderInterface
         return $associatedUsers;
     }
 
-    /**
-     * @param User $userModel
-     * @param array $reportedUsers
-     * @return ForumUser
-     */
-    private function forumUserFromUserModel(User $userModel, $reportedUsers = [])
+    private function forumUserFromUserModel(User $userModel, array $reportedUsers = []): ForumUser
     {
         return new ForumUser(
             $userModel->id,
@@ -183,9 +164,6 @@ class RailforumsUserProvider implements UserProviderInterface
         );
     }
 
-    /**
-     * @return array|null
-     */
     public function getBlockedUsers(): ?array
     {
         return BlockedUser::where('blocker_id', '=', user()->id)

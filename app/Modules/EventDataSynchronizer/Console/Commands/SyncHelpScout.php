@@ -40,7 +40,7 @@ class SyncHelpScout extends Command
         DatabaseManager $databaseManager,
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService
-    ) {
+    ): void {
         $this->info('Starting SyncHelpScout.');
 
         $usoraConnection = $databaseManager->connection(config('usora.database_connection_name'));

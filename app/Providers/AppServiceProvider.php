@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Webhook;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
 use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
@@ -12,26 +13,35 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
-use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
+use Modules\UserManagementSystem\Providers\UserServiceProvider;
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as ArrayHydratorUserProviderInterface;
+use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
+use Railroad\MusoraApi\Contracts\ChatProviderInterface;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
+use Railroad\MusoraApi\Contracts\UserProviderInterface as MusoraUserProviderInterface;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
-use Railroad\MusoraApi\Contracts\ProductProviderInterface;
-use Railroad\MusoraApi\Contracts\UserProviderInterface as MusoraUserProviderInterface;
-use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
-use Railroad\MusoraApi\Contracts\ChatProviderInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The path to the "home" route for your application.
      *
-     * @return void
+     * This is used by Laravel authentication to redirect users after login.
+     *
+     * @var string
      */
-    public function register()
+    public const HOME = '/';
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
     {
         $request = Request::instance();
 
@@ -52,10 +62,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         if (!$this->app->environment('production')) {
             Mail::alwaysTo('musora-dev-test-5632c3@inbox.mailtrap.io');
@@ -166,11 +174,27 @@ class AppServiceProvider extends ServiceProvider
         // handle host forwarding (ngrok, etc)
         if (app()->environment('local', 'development') && isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
             // without this, we get errors for the manifest (and probably other things) because of CORS and the different domains with ngrok and the app
-            $this->app['url']->forceRootUrl($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.$_SERVER['HTTP_X_FORWARDED_HOST']);
+            $this->app['url']->forceRootUrl(
+                $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['HTTP_X_FORWARDED_HOST']
+            );
         }
 
         Queue::after(function (JobProcessed $event) {
             Webhook::updateJobDetailsIfWebhookJob($event);
         });
+
+        $this->bootRoute();
+    }
+
+    public function bootRoute(): void
+    {
+        $subDomain = current(explode('.', request()->getHost()));
+
+        URL::defaults(['musoraDomain' => !empty($subDomain) ? $subDomain . '.musora.com' : 'musora.com']);
+        URL::defaults(['drumeoDomain' => !empty($subDomain) ? $subDomain . '.drumeo.com' : 'drumeo.com']);
+        URL::defaults(['pianoteDomain' => !empty($subDomain) ? $subDomain . '.pianote.com' : 'pianote.com']);
+        URL::defaults(['guitareoDomain' => !empty($subDomain) ? $subDomain . '.guitareo.com' : 'guitareo.com']);
+        URL::defaults(['singeoDomain' => !empty($subDomain) ? $subDomain . '.singeo.com' : 'singeo.com']);
+        URL::defaults(['brand' => 'musora']);
     }
 }

@@ -10,7 +10,7 @@ export const musoraStructure = async (S, context) => {
             'on-the-road', 'live', 'podcast', 'performance', 'rhythmic-adventures-of-captain-carson', 'solo', 'gear-guide', 'challenges','question-and-answer',
             'archive', 'boot-camp'
         ];
-        const extra = ['challenge-part', 'course-part','semester-pack-lesson','song-tutorial-children','pack-bundle-lesson','pack-bundle', 'media.tag', 'assist.instruction.context'];
+        const extra = ['challenge-part','foundation','learning-path','learning-path-level','learning-path-course','learning-path-lesson','course-part','unit','unit-part','semester-pack-lesson','song-tutorial-children','pack-bundle-lesson','pack-bundle', 'media.tag', 'assist.instruction.context'];
         //'topic', 'essential', 'creativity', 'lifestyle', 'theory',
         const hiddenCategories = uniqueCategories.concat(extra);
 
@@ -20,7 +20,6 @@ export const musoraStructure = async (S, context) => {
         const showsTypeItems = S.documentTypeListItems()
             .filter(listItem => uniqueCategories.includes(listItem.getId()));
 
-        console.log('roxana showsTypeItems',showsTypeItems);
         // Find the index of the 'artist' item
         const artistIndex = docTypeItems.findIndex(item => item.getId() === 'artist');
 
@@ -31,6 +30,33 @@ export const musoraStructure = async (S, context) => {
         if (artistIndex !== -1) {
             // Add Shows list item
             items.splice(artistIndex, 0,
+                S.listItem()
+                    .title("Methods")
+                    .id("method")
+                    .child(
+                        S.documentList()
+                            .title('Methods')
+                            .filter('_type == "learning-path" && railcontent_id in $railcontentId')
+                            .params({ railcontentId:  [241247, 276693, 333652, 308514]})
+                    ),
+                S.listItem()
+                    .title("Foundation 2019")
+                    .id("foundation")
+                    .child(
+                        S.document()
+                            .title('Foundation')
+                            .documentId("foundation")
+                            .schemaType("foundation")
+                    ),
+                S.listItem()
+                    .title("Old Learning Paths")
+                    .id("learning-path")
+                    .child(
+                        S.documentList()
+                            .title('Old Learning Paths')
+                            .filter('_type == "learning-path" && !(railcontent_id in $railcontentId)')
+                            .params({ railcontentId:  [241247, 276693, 333652, 308514]})
+                    ),
                 S.listItem()
                     .title('Shows')
                     .child(() =>
@@ -52,7 +78,7 @@ export const musoraStructure = async (S, context) => {
                     )
             );
 
-            items.splice((artistIndex+1), 0, S.divider());
+            items.splice((artistIndex+4), 0, S.divider());
         }
 
         return S.list()

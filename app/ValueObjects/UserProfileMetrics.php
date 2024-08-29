@@ -31,14 +31,8 @@ class UserProfileMetrics
 
     /**
      * UserProfileMetrics constructor.
-     *
-     * @param  integer  $xp
-     * @param  integer  $daysAsMember
-     * @param  integer  $commentLikes
-     * @param  integer  $minutesPracticed
-     * @param  integer  $forumPostLikes
      */
-    public function __construct($xp, $daysAsMember, $commentLikes, $minutesPracticed, $forumPostLikes)
+    public function __construct(int $xp, int $daysAsMember, int $commentLikes, int $minutesPracticed, int $forumPostLikes)
     {
         $this->xp = $xp;
         $this->daysAsMember = $daysAsMember;
@@ -47,41 +41,26 @@ class UserProfileMetrics
         $this->forumPostLikes = $forumPostLikes;
     }
 
-    /**
-     * @return int
-     */
-    public function getXp()
+    public function getXp(): int
     {
         return $this->xp;
     }
 
-    /**
-     * @return int
-     */
-    public function getDaysAsMember()
+    public function getDaysAsMember(): int
     {
         return $this->daysAsMember;
     }
 
-    /**
-     * @return int
-     */
-    public function getCommentLikes()
+    public function getCommentLikes(): int
     {
         return $this->commentLikes;
     }
 
-    /**
-     * @return int
-     */
-    public function getMinutesPracticed()
+    public function getMinutesPracticed(): int
     {
         return $this->minutesPracticed;
     }
 
-    /**
-     * @return int
-     */
     public function getForumPostLikes(): int
     {
         return $this->forumPostLikes;

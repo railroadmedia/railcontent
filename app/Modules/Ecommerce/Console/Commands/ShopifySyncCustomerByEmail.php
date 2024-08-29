@@ -9,7 +9,7 @@ class ShopifySyncCustomerByEmail extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncCustomerByEmail {email}';
 
-    public function handle(ShopifySyncService $shopifySyncService)
+    public function handle(ShopifySyncService $shopifySyncService): void
     {
         $email = $this->argument('email');
         $shopifySyncService->syncCustomerByEmail($email);

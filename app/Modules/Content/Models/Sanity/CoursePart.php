@@ -2,9 +2,7 @@
 
 namespace App\Modules\Content\Models\Sanity;
 
-use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
-use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
  * Defines the schema structure for a Course part document type in Sanity.
@@ -19,12 +17,7 @@ class CoursePart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Course Part', withResources: true);
-
-        $detailsGroup = new Group('editorFields', 'Details', true);
-        $this->addFields([
-                             new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'course'),
-                         ]);
+        parent::__construct(self::getName(), 'Course Part', withResources: true, parentType: 'course');
     }
 
     public static function getName(): string

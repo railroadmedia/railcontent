@@ -4,7 +4,7 @@
  * html_purifier_settings.settings.default array is passed directly in to HTMLPurifier_Config->loadArray()
  */
 
-return array(
+return [
     // brand
     'brand' => 'musora',
 
@@ -50,11 +50,6 @@ return array(
 
     // middleware
     'controller_middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
@@ -115,7 +110,7 @@ return array(
         \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -123,4 +118,4 @@ return array(
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
     ],
-);
+];

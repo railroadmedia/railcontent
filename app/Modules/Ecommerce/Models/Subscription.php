@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Ecommerce\database\factories\SubscriptionFactory;
 use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use Carbon\Carbon;
@@ -128,27 +129,27 @@ class Subscription extends Model
         return $query->where('canceled_on', 'is', null);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function customer()
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    public function order()
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
 
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function paymentMethod()
+    public function paymentMethod(): BelongsTo
     {
         return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }

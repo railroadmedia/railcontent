@@ -16,8 +16,6 @@ class MusoraApiChatProvider implements ChatProviderInterface
 
     /**
      * MusoraApiChatProvider constructor.
-     *
-     * @param RailchatService $railchatService
      */
     public function __construct(RailchatService $railchatService)
     {

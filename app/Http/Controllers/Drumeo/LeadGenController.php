@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Drumeo;
 
+use Illuminate\View\View;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-    public function oneHundredSongs(Request $request, $domain, $page = null)
+    public function oneHundredSongs(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -28,7 +29,7 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
-    public function kristinasTop25(Request $request, $domain, $page = null)
+    public function kristinasTop25(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -40,27 +41,27 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function coop3rdrumm3r()
+    public function coop3rdrumm3r(): View
     {
         return view('drumeo.lead-gen.coop3rdrumm3r.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function drumSetMaintenance()
+    public function drumSetMaintenance(): View
     {
         return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function dtmeTestimonials(Request $request, $domain, $page = null)
+    public function dtmeTestimonials(Request $request, $domain, $page = null): View
     {
         return view('drumeo.products.dtme-testimonials');
     }
 
-    public function gavinsGrooves()
+    public function gavinsGrooves(): View
     {
         return view('drumeo.lead-gen.courses.full.gavins-grooves.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function gstd(Request $request, $domain, $page = null)
+    public function gstd(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -72,22 +73,22 @@ class LeadGenController extends BaseController
             case 'ty-monthly':
                 return view('drumeo.lead-gen.getting-started.ty-monthly', ['theme' => 'drumeo', 'month' => true]);
             case '10-practice':
-                $currentLesson = (object) array(
+                $currentLesson = (object) [
                     'title' => 'Building Your Practice Routine',
                     'video_src' => '//player.vimeo.com/video/98739417',
                     'assets' => [
-                        (object) array(
+                        (object) [
                             'title' => 'All Course PDFs',
                             'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
                             'soundslice' => ''
-                        ),
-                        (object) array(
+                        ],
+                        (object) [
                             'title' => 'Developing a Practice Routine',
                             'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
                             'soundslice' => ''
-                        ),
+                        ],
                     ],
-                );
+                ];
 
                 $lessons = LeadgenLesson::where([['leadgen_id', 9], ['one_off', 0]])->get();
                 $currentLessonIndex = 10;
@@ -108,7 +109,7 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
-    public function faster(Request $request, $domain, $page = null)
+    public function faster(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -124,22 +125,22 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function freePlayalongs(Request $request, $domain, $prefix = null, $page = null)
+    public function freePlayalongs(Request $request, $domain, $prefix = null, $page = null): View
     {
         return view('drumeo.lead-gen.free-playalongs.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function metalPlayalongs()
+    public function metalPlayalongs(): View
     {
         return view('drumeo.lead-gen.metal-playalongs.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function doubleBass101()
+    public function doubleBass101(): View
     {
         return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
+    public function johnGrooves(Request $request, $domain, $prefix = null, $page = null): View
     {
         if(is_null($prefix) && is_null($page)) {
             return view('drumeo.lead-gen.grooves-of-john-bonham.signup', ['recaptchaKey' => config('recaptcha.key')]);
@@ -155,42 +156,42 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function handTechnique()
+    public function handTechnique(): View
     {
         return view('drumeo.lead-gen.hand-technique.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function linearDrumming()
+    public function linearDrumming(): View
     {
         return view('drumeo.lead-gen.linear-drumming.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function jacksonGrooves()
+    public function jacksonGrooves(): View
     {
         return view('drumeo.lead-gen.courses.full.michael-jackson-grooves.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function mustKnowGrooves()
+    public function mustKnowGrooves(): View
     {
         return view('drumeo.lead-gen.courses.full.must-know-grooves.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function rockDrumming()
+    public function rockDrumming(): View
     {
         return view('drumeo.products.rdm-testimonials');
     }
 
-    public function subdivision()
+    public function subdivision(): View
     {
         return view('drumeo.lead-gen.courses.full.subdivision-challenge.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function sucherman()
+    public function sucherman(): View
     {
         return view('drumeo.lead-gen.courses.full.sucherman-sound.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function toolbox(Request $request, $domain, $page = null)
+    public function toolbox(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case null:
@@ -202,7 +203,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxIndexs(Request $request, $domain, $page = null)
+    public function toolboxIndexs(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case 'gsotd':
@@ -218,7 +219,7 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxRest(Request $request, $domain, $page = null)
+    public function toolboxRest(Request $request, $domain, $page = null): View
     {
         switch ($page) {
             case 'mcsa':
@@ -234,14 +235,14 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function shows(Request $request, $domain, $page = null)
+    public function shows(Request $request, $domain, $page = null): View
     {
         return view('drumeo.lead-gen.shows.'.$page);
 
         throw new NotFoundHttpException();
     }
 
-    public function pages(Request $request, $domain, $page = null)
+    public function pages(Request $request, $domain, $page = null): View
     {
         if(str_contains($page, 'blog')) {
             return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey' => config('recaptcha.key')]);
@@ -252,35 +253,35 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function druminarCBTTD()
+    public function druminarCBTTD(): View
     {
         return view('drumeo.lead-gen.webinar.coming-back-to-the-drums');
     }
 
-    public function druminarEvent()
+    public function druminarEvent(): View
     {
         return view('drumeo.lead-gen.webinar.event');
     }
 
-    public function teachDrums()
+    public function teachDrums(): View
     {
         return view('drumeo.lead-gen.pages.teach-drums');
     }
 
-    public function teachBeginner()
+    public function teachBeginner(): View
     {
         return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
     }
 
-    public function win()
+    public function win(): View
     {
         return view('drumeo.lead-gen.pages.win', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    public function weeklyEmail()
+    public function weeklyEmail(): View
     {
         return view('drumeo.lead-gen.blog-forms.weekly-email', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    public function weeklyMail()
+    public function weeklyMail(): View
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail', ['recaptchaKey' => config('recaptcha.key')]);
     }

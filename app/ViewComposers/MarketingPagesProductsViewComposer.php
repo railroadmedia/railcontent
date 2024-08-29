@@ -24,11 +24,8 @@ class MarketingPagesProductsViewComposer
 
     /**
      * Add cart data to all sales pages
-     *
-     * @param  View  $view
-     * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         if (!is_null(self::$viewDataCache)) {
             $view->with(self::$viewDataCache);

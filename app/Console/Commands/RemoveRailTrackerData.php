@@ -9,7 +9,7 @@ class RemoveRailTrackerData extends Command
 {
     protected $signature = 'RemoveRailTrackerData {n}';
 
-    public function handle()
+    public function handle(): void
     {
         $n = $this->argument("n");
         $jobs = [];

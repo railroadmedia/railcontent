@@ -18,8 +18,6 @@ class CustomerIoBaseJob implements ShouldQueue
 
     /**
      * The job failed to process.
-     *
-     * @param  Throwable  $exception
      */
     public function failed(Throwable $exception)
     {

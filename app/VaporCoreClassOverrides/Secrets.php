@@ -17,14 +17,8 @@ class Secrets
 {
     /**
      * Add all of the secret parameters at the given path to the environment.
-     *
-     * @param string     $path
-     * @param array|null $parameters
-     * @param string     $file
-     *
-     * @return array
      */
-    public static function addToEnvironment($path, $parameters, $file)
+    public static function addToEnvironment(string $path, ?array $parameters, string $file): array
     {
         if (!$parameters && file_exists($file)) {
             $parameters = require $file;
@@ -37,13 +31,8 @@ class Secrets
 
     /**
      * Get all of the secret parameters (AWS SSM) at the given path.
-     *
-     * @param string $path
-     * @param array  $parameters
-     *
-     * @return array
      */
-    public static function all($path, array $parameters = [])
+    public static function all(string $path, array $parameters = []): array
     {
         if (empty($parameters)) {
             return [];
@@ -70,12 +59,8 @@ class Secrets
 
     /**
      * Parse the secret names and values into an array.
-     *
-     * @param array $secrets
-     *
-     * @return array
      */
-    protected static function parseSecrets(array $secrets)
+    protected static function parseSecrets(array $secrets): array
     {
         return collect($secrets)->mapWithKeys(function ($secret) {
             $segments = explode('/', $secret['Name']);

@@ -77,10 +77,7 @@ Route::prefix(config('ecommerce.route_prefix'))
     });
 
 if (config('ecommerce.revenuecat_only') == true) {
-    Route::group([
-        'prefix' => config('ecommerce.mobile_app'),
-        'middleware' => config('ecommerce.route_middleware_mobile_app_receipt_validation_groups'),
-    ], function () {
+    Route::prefix(config('ecommerce.mobile_app'))->middleware(config('ecommerce.route_middleware_mobile_app_receipt_validation_groups'))->group(function () {
         //'middleware' => config('ecommerce.route_middleware_mobile_app_receipt_validation_groups'),
         Route::post(
             '/apple/verify-receipt-and-process-payment',

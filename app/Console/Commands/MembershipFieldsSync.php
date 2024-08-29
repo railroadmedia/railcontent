@@ -19,7 +19,7 @@ class MembershipFieldsSync extends Command
     public function handle(
         DatabaseManager $databaseManager,
         UserMembershipFieldsService $userMembershipFieldsService
-    ) {
+    ): int {
         // ----------------------------------------------------------------
         // this matters
         // ----------------------------------------------------------------

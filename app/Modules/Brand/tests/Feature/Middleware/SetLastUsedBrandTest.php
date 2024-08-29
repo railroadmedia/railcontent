@@ -23,11 +23,9 @@ class SetLastUsedBrandTest extends TestCase
         )->middleware(['web_or_api_authenticated', SetLastUsedBrand::class]);
     }
 
-    public function test_brand_is_set()
+    public function test_brand_is_set(): void
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         $user = User::factory()->create([

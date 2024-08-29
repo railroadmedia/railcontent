@@ -6,9 +6,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class AvoHelper
 {
-    /**
-     * @return string
-     */
     public static function getRequestPlatform(?string $userAgent = ''): string
     {
         $userAgent = strtolower($userAgent);
@@ -24,9 +21,6 @@ class AvoHelper
         return 'web';
     }
 
-    /**
-     * @return string
-     */
     public static function getRequestOS(?string $userAgent = ''): string
     {
         $userAgent = strtolower($userAgent);
@@ -45,10 +39,6 @@ class AvoHelper
         return 'web';
     }
 
-    /**
-     * @param array $properties
-     * @return array
-     */
     public static function defaultEventProperties(array $properties = [], User $user = null): array
     {
         $userAgent = request()?->userAgent();

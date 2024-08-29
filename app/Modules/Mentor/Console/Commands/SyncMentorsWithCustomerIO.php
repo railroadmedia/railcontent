@@ -10,7 +10,7 @@ class SyncMentorsWithCustomerIO extends Command
     protected $signature = 'mentors:sync {mentorUserId?}';
     protected $description = 'Resyncs all assigned mentors on customerIO';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info("Sync mentor students with customerIO");
         $mentorUserId = $this->argument("mentorUserId");

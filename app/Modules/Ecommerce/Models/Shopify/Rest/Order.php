@@ -103,7 +103,6 @@ class Order
 
     /**
      * @param  bool  $refresh  get a fresh copy of the Metafields from Shopify
-     * @return Collection
      */
     public function getMetafields(bool $refresh = false): Collection
     {
@@ -130,8 +129,6 @@ class Order
 
     /**
      * Get if this order is for a trial
-     *
-     * @return bool
      */
     public function isTrialOrder(): bool
     {
@@ -143,8 +140,6 @@ class Order
 
     /**
      * Get if this order is for a membership
-     *
-     * @return bool
      */
     public function isMembershipOrder(): bool
     {

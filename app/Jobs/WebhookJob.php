@@ -59,9 +59,8 @@ class WebhookJob implements ShouldQueue
     /**
      * ShouldQueue implementation of handle()
      * Dispatches all children jobs or default or provided queue
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         if ($this->alreadyRun) {
             return;
@@ -114,7 +113,7 @@ class WebhookJob implements ShouldQueue
     /**
      * @return int - number of children jobs
      */
-    public function countChildren()
+    public function countChildren(): int
     {
         return count($this->children);
     }

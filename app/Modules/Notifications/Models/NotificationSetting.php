@@ -2,6 +2,7 @@
 
 namespace App\Modules\Notifications\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Modules\UserManagementSystem\Models\User;
@@ -47,7 +48,7 @@ class NotificationSetting extends Model
     public const SEND_WEEKLY = 'notify_weekly_update';
     public const NOTIFICATIONS_FREQUENCY = 'notifications_summary_frequency_minutes';
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

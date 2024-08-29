@@ -15,11 +15,6 @@ class PlaylistService
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
 
-    /**
-     * @param ContentLastEngagedService $contentLastEngagedService
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param ContentService $contentService
-     */
     public function __construct(
         ContentLastEngagedService $contentLastEngagedService,
         UserPlaylistsService $userPlaylistsService,

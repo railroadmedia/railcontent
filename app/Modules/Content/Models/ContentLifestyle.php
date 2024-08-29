@@ -2,6 +2,7 @@
 
 namespace Modules\Content\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Modules\Content\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +28,7 @@ class ContentLifestyle extends Model
     protected $table = 'railcontent_content_lifestyle';
     public $timestamps = false;
 
-    public function content()
+    public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class, 'content_id');
     }

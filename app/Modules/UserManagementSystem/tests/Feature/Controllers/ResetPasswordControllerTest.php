@@ -17,8 +17,6 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
     // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     public function test_reset_password_validation_failed()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/password/reset-password-with-token'
@@ -29,8 +27,6 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_reset_password_invalid_token()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $hashKey = Str::random(40);
         $password = Str::random(12);
 
@@ -52,9 +48,7 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_reset_password_email_notification_and_reset_with_token()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
-        $email = $this->faker->email;
+        $email = $this->faker->email();
         $password = $this->faker->words(3, true);
 
         User::factory()->create([

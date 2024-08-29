@@ -128,7 +128,6 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
      * Check for any Customers with the User's email address, that have already been synced to Shopify.
      * Log an error if the User has synced Customer(s).
      *
-     * @param User $user
      * @param Collection<Customer> $userCustomers
      * @return bool true if the User or any related Customers does not have any record in Shopify
      */
@@ -157,9 +156,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
      * DEV NOTE: we don't bother looking at the user's customers because our system doesn't allow for
      * new Customers to be made after a User already exists with the same email address.
      *
-     * @param User $user
      * @param Collection<Customer> $userCustomers
-     * @return array
      */
     protected function createCustomerData(User $user, Collection $userCustomers): array
     {
@@ -182,9 +179,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     /**
      * Get all addresses for this user and its customers, then format it to meet Shopify's expectation
      *
-     * @param User $user
      * @param Collection<Customer> $customers
-     * @return Collection
      */
     protected function createAddressesData(User $user, Collection $customers): Collection
     {

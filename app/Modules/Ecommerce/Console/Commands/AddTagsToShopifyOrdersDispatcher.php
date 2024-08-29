@@ -35,7 +35,6 @@ class AddTagsToShopifyOrdersDispatcher extends Command
     /**
      * Execute the console command.
      *
-     * @return int
      * @throws Throwable
      */
     public function handle(): int

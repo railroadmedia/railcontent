@@ -37,7 +37,6 @@ class ShopifyCustomerService
      * otherwise create a new customer in Shopify, with the requisite data for the
      * given user.
      *
-     * @param  User  $user
      * @return int|null the Shopify customer's ID
      */
     public function updateOrCreateShopifyCustomer(User $user): ?int
@@ -106,9 +105,6 @@ class ShopifyCustomerService
 
     /**
      * Get all customers with the same email address as the given user
-     *
-     * @param User $user
-     * @return Collection
      */
     private function getCustomersForUser(User $user): Collection
     {
@@ -129,10 +125,6 @@ class ShopifyCustomerService
      *
      * DEV NOTE: we don't bother looking at the user's customers because our system doesn't allow for
      * new Customers to be made after a User already exists with the same email address.
-     *
-     * @param User $user
-     * @param bool $isCreating
-     * @return array
      */
     private function createCustomerDataForUser(User $user, bool $isCreating): array
     {

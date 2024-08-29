@@ -27,7 +27,7 @@ class Filters20242 extends Command
 
     public function handle(
         ContentService $contentService
-    ) {
+    ): void {
         $startIndex = 0;
         $endIndex = -1;
         $brand = $this->argument('brand');
@@ -175,7 +175,6 @@ class Filters20242 extends Command
     }
 
     /**
-     * @param string|null $contentId
      * @param \Illuminate\Database\Eloquent\Model|\App\Modules\Content\Builders\ContentBuilder|object $content
      */
     private function prepareDatabase(

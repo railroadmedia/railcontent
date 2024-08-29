@@ -24,7 +24,6 @@ trait HandlesShopifyRateLimit
      * This needs to be called before any `$this->>shopify->___` calls that you want to protect.
      *
      * @param  bool  $forceUsage to handle the rate limit, even if running a simulation
-     * @return void
      */
     protected function handleRateLimit(bool $forceUsage = false): void
     {
@@ -71,15 +70,11 @@ trait HandlesShopifyRateLimit
 
     /**
      * Are we running in simulation mode?
-     *
-     * @return bool
      */
     abstract protected function getIsSimulation(): bool;
 
     /**
      * Get the threshold of what we'll allow the rate limit to get within
-     *
-     * @return int
      */
     protected function getRateLimitThreshold(): int
     {
@@ -88,8 +83,6 @@ trait HandlesShopifyRateLimit
 
     /**
      * Get the number of seconds that we'll sleep for when we hit the rate limit threshold
-     *
-     * @return int
      */
     protected function getRateLimitSleepTime(): int
     {

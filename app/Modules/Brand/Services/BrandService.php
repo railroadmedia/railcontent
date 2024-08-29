@@ -12,11 +12,9 @@ class BrandService
     public static $currentBrand = null;
 
     /**
-     * @param User $user
      * @param $brand
-     * @return void
      */
-    public function setLastUsedBrand(User $user, Brand $brand)
+    public function setLastUsedBrand(User $user, Brand $brand): void
     {
         $brandString = $brand->value;
 
@@ -46,11 +44,7 @@ class BrandService
         }
     }
 
-    /**
-     * @param User|null $user
-     * @return string
-     */
-    public static function getLastUsedBrand(User $user = null)
+    public static function getLastUsedBrand(User $user = null): string|null
     {
         if (!empty(self::$currentBrand)) {
             return self::$currentBrand;

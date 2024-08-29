@@ -13,7 +13,7 @@ use Modules\UserManagementSystem\Models\User;
 
 class CmsPlaylistContentSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $count = 100;
         $userId = 519690;

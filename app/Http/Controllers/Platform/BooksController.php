@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -30,7 +31,7 @@ class BooksController extends Controller
         $this->contentService = $contentService;
     }
 
-    public function resources()
+    public function resources(): View
     {
         $chapterThumbs = [
             'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/level-1.jpg',
@@ -52,7 +53,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function chapter($domain, $brand, $chapterNumber)
+    public function chapter($domain, $brand, $chapterNumber): View
     {
         $thisChapter = $this->getChapterData($chapterNumber);
 
@@ -517,7 +518,7 @@ class BooksController extends Controller
         return $foundations['units'][$levelNumber - 1]['lessons'] ?? [];
     }
 
-    public function bestBeginner(Request $request)
+    public function bestBeginner(Request $request): View
     {
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
 
@@ -631,7 +632,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function bestBeginnerPlayAlongs()
+    public function bestBeginnerPlayAlongs(): View
     {
         ContentRepository::$bypassPermissions = true;
 
@@ -650,7 +651,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function drummersToolbox(Request $request)
+    public function drummersToolbox(Request $request): View
     {
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
 
@@ -724,7 +725,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function drummersToolboxChapter($domain, $brand, $chapterNumber, Request $request)
+    public function drummersToolboxChapter($domain, $brand, $chapterNumber, Request $request): View
     {
         ContentRepository::$bypassPermissions = true;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;

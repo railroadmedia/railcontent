@@ -27,13 +27,11 @@ class MigrateOldGuitareoDeletedSongs extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle(
         DatabaseManager $databaseManager,
         ContentService $contentService
-    ) {
+    ): void {
         $this->info("MigrateOldGuitareoDeletedSongs command starts now \n");
 
         $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));

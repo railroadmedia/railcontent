@@ -4,18 +4,11 @@ namespace App\Modules\MusoraApi\Middleware;
 
 use Carbon\Carbon;
 use Closure;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class DeprecationMiddleware
 {
-    /**
-     * @param $request
-     * @param Closure $next
-     * @param $deprecatedAt
-     * @return Response|JsonResponse
-     */
-    public function handle($request, Closure $next, $deprecatedAt): Response|JsonResponse
+    public function handle($request, Closure $next, $deprecatedAt)
     {
         /** @var Response $response */
         $response = $next($request);

@@ -24,7 +24,7 @@ class MusoraSync extends Command
         AddEventService $addEventService,
         ContentService $contentService,
         CalendarSyncService $calendarSyncService,
-    ) {
+    ): void {
         $this->addEventService = $addEventService;
         $this->contentService = $contentService;
         $this->calendarSyncService = $calendarSyncService;

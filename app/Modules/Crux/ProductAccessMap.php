@@ -71,10 +71,7 @@ class ProductAccessMap
         return null;
     }
 
-    /**
-     * @return array
-     */
-    public static function trialMembershipProductIds()
+    public static function trialMembershipProductIds(): array
     {
 
         return self::getProductIdsBySku(
@@ -113,11 +110,8 @@ class ProductAccessMap
     /**
      * If the user has claimed a retention offer in the last X months, return true, otherwise return false.
      * We use this to prevent people from abusing claiming a free month over and over.
-     *
-     * @param int $numberOfMonthsAgo
-     * @return boolean
      */
-    public static function hasClaimedRetentionOfferWithin(User $user, $numberOfMonthsAgo = 6)
+    public static function hasClaimedRetentionOfferWithin(User $user, int $numberOfMonthsAgo = 6): bool
     {
         if (isset(self::$hasClaimedRetentionOfferWithinCache[$numberOfMonthsAgo])) {
             return self::$hasClaimedRetentionOfferWithinCache[$numberOfMonthsAgo];
@@ -192,9 +186,8 @@ class ProductAccessMap
 
     /**
      * @param $skus
-     * @return array
      */
-    public static function getProductIdsBySku($skus)
+    public static function getProductIdsBySku($skus): array
     {
         $products = self::getAllProductIdsKeyedBySku();
 

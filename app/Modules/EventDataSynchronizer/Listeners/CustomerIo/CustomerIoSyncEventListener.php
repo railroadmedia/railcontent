@@ -90,9 +90,6 @@ class CustomerIoSyncEventListener
         $this->productService = $productService;
     }
 
-    /**
-     * @param UserCreated $userCreated
-     */
     public function handleUserCreated(UserCreated $userCreated)
     {
         if (self::$disable) {
@@ -123,9 +120,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param UserUpdated $userUpdated
-     */
     public function handleUserUpdated(UserUpdated $userUpdated)
     {
         if (self::$disable) {
@@ -185,9 +179,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param CommentLiked $commentLiked
-     */
     public function handleCommentLiked(CommentLiked $commentLiked)
     {
         if (self::$disable) {
@@ -223,9 +214,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param CommentCreated $commentCreated
-     */
     public function handleCommentCreated(CommentCreated $commentCreated)
     {
         if (self::$disable) {
@@ -261,9 +249,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param ThreadCreated $threadCreated
-     */
     public function handleForumsThreadCreated(ThreadCreated $threadCreated)
     {
         if (self::$disable) {
@@ -301,9 +286,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param PostCreated $postCreated
-     */
     public function handleForumsPostCreated(PostCreated $postCreated)
     {
         if (self::$disable) {
@@ -345,9 +327,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param UserContentProgressSaved $userContentProgressSaved
-     */
     public function handleUserContentProgressSaved(UserContentProgressSaved $userContentProgressSaved)
     {
         if (self::$disable) {
@@ -429,9 +408,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param LiveStreamEventAttended $liveStreamEventAttended
-     */
     public function handleLiveLessonAttended(LiveStreamEventAttended $liveStreamEventAttended)
     {
         if (self::$disable) {
@@ -468,9 +444,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param FirstActivityPerDay $activityEvent
-     */
     public function handleFirstActivityPerDay(FirstActivityPerDay $activityEvent)
     {
         if (self::$disable) {
@@ -532,9 +505,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param UTMLinks $UTMLinks
-     */
     public function handleUTMLinks(UTMLinks $UTMLinks)
     {
         if (self::$disable) {
@@ -574,9 +544,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param EmailInvite $emailInvite
-     */
     public function handleReferralInvite(EmailInvite $emailInvite)
     {
         if (self::$disable) {
@@ -638,9 +605,6 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param MobileAppLogin $mobileAppLogin
-     */
     public function handleMobileAppLogin(MobileAppLogin $mobileAppLogin)
     {
         if (self::$disable) {
@@ -740,9 +704,6 @@ class CustomerIoSyncEventListener
 
     // CMT-77 August Referral Contest
 
-    /**
-     * @param ReferralClaimed $referralClaimed
-     */
     public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed)
     {
         $referrer = $referralClaimed->getReferrer();
@@ -769,9 +730,6 @@ class CustomerIoSyncEventListener
         );
     }
 
-    /**
-     * @param ReferralClaimed $referralClaimed
-     */
     public function handleReferralClaimed(ReferralClaimed $referralClaimed)
     {
         $referrer = $referralClaimed->getReferrer();

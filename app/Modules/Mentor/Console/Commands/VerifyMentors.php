@@ -14,7 +14,7 @@ class VerifyMentors extends Command
     protected $signature = 'mentors:verify {userId=0}';
     protected $description = 'Ensures all active students have mentors and recalculates mentor totals';
 
-    public function handle(UserService $userService, MentorService $mentorService)
+    public function handle(UserService $userService, MentorService $mentorService): void
     {
         $this->info("Processing $this->name");
         $timeStart = microtime(true);

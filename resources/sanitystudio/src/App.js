@@ -1,12 +1,11 @@
 // src/App.js
-import React, { useEffect, useState } from 'react';
-import {RobotIcon, RocketIcon, CogIcon} from '@sanity/icons'
-import { Studio, defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
-import { visionTool } from '@sanity/vision';
+import React, {useEffect, useState} from 'react';
+import {RobotIcon, RocketIcon} from '@sanity/icons'
+import {defineConfig, Studio} from 'sanity';
+import {structureTool} from 'sanity/structure';
+import {visionTool} from '@sanity/vision';
 import {assist} from '@sanity/assist';
-import {embeddingsIndexReferenceInput} from '@sanity/embeddings-index-ui'
-import {embeddingsIndexDashboard} from '@sanity/embeddings-index-ui'
+import {embeddingsIndexDashboard, embeddingsIndexReferenceInput} from '@sanity/embeddings-index-ui'
 
 import DifficultyInput from './components/DifficultyInput'; // Import the custom component
 import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
@@ -14,10 +13,10 @@ import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import th
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
-import { defaultDocumentNode } from './defaultDocumentNode';
-import { musoraStructure } from './musoraStructure';
+import {defaultDocumentNode} from './defaultDocumentNode';
+import {musoraStructure} from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
-import {media} from 'sanity-plugin-media';
+import {media} from 'sanity-plugin-media'; // You can add more custom components here as needed
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -86,6 +85,12 @@ const mapComponents = (fields) => {
 
 function App() {
     const [config, setConfigs] = useState(null);
+    // Define the singleton document types
+    const singletonTypes = new Set([ 'foundation']);
+
+    // Define the actions that should be available for singleton documents
+    const singletonActions = new Set(["publish", "discardChanges", "restore"]);
+
 
     useEffect(() => {
         const loadConfigs = () => {
@@ -99,25 +104,43 @@ function App() {
                         structureTool({
                             structure: musoraStructure,
                             defaultDocumentNode: defaultDocumentNode }),
-                        visionTool(),
                         media(),
                         assist(),
+                        visionTool(),
                         embeddingsIndexReferenceInput(),
-                        embeddingsIndexDashboard()
+                        embeddingsIndexDashboard(),
                     ],
-                    document: {
-                        actions: (prev, context) =>
-                            prev.map((previousAction) =>
-                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
-                            ),
-                    },
+                    // TODO Removed with upgrade to PHP 8.3 React doesn't like the object return
+                    // tools: (prev, {currentUser}) => {
+                    //     if (currentUser.roles.find((r) => r.name === 'administrator' || r.name === 'developer')) {
+                    //         return [
+                    //             ...prev,
+                    //             {name: 'vision', title: 'Vision', component: visionTool},
+                    //             {name: 'embeddings', title: 'Embeddings', component: embeddingsIndexReferenceInput},
+                    //             {name: 'embeddings-dashboard', title: 'Embeddings Dashboard', component: embeddingsIndexDashboard},
+                    //         ]
+                    //     }
+                    //     return prev;
+                    // },
                     schema: {
                         types: config.schema.types.map((type) => {
                             return {
                                 ...type,
                                 fields: mapComponents(type.fields)
                             };
-                        })
+                        }),
+                        templates: (templates) =>
+                                       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+                    },
+                    document: {
+                        // For singleton types, filter out actions that are not explicitly included
+                        // in the `singletonActions` list defined above
+                        actions: (input, context) =>
+                                     singletonTypes.has(context.schemaType)
+                                         ? input.filter(({ action }) => action && singletonActions.has(action))
+                                         : input.map((previousAction) =>
+                                             previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
+                                         ),
                     },
                     form: {
                         components: {

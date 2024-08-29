@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,19 +22,6 @@ class Cohort extends Model
 {
     use HasFactory;
 
-    //    use RevisionableTrait;
-
-    //
-    //    protected $with = ["brand", "productType"];
-
-    //    protected $revisionForceDeleteEnabled = true;
-    protected $casts = [
-        'enrollment_start_date' => 'datetime',
-        'enrollment_end_date' => 'datetime',
-        'cohort_start_date' => 'datetime',
-        'cohort_end_date' => 'datetime',
-    ];
-
     /**
      * Prepare a date for array / JSON serialization.
      */
@@ -41,17 +30,17 @@ class Cohort extends Model
         return $date->format('Y-m-d H:d:i');
     }
 
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-    public function dropdowns()
+    public function dropdowns(): HasMany
     {
         return $this->hasMany(CohortDropdown::class);
     }
 
-    public function lists()
+    public function lists(): HasMany
     {
         return $this->hasMany(CohortList::class);
     }
@@ -136,4 +125,19 @@ class Cohort extends Model
     protected $guarded = [
         'id'
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'enrollment_start_date' => 'datetime',
+            'enrollment_end_date' => 'datetime',
+            'cohort_start_date' => 'datetime',
+            'cohort_end_date' => 'datetime',
+        ];
+    }
 }

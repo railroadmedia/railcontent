@@ -19,13 +19,12 @@ class ChallengePart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Challenge Part');
+        parent::__construct(self::getName(), 'Challenge Part', parentType: 'challenge');
 
         // Add the reference to the parent course
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
                              new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
-                             new Field(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group:$detailsGroup, initialValue: 'challenge'),
                          ]);
     }
 

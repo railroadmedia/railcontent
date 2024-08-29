@@ -26,8 +26,6 @@ class EcommerceServiceProvider extends EventServiceProvider
 
     /**
      * UsoraServiceProvider constructor.
-     *
-     * @param Application $application
      */
     public function __construct(Application $application)
     {
@@ -36,8 +34,6 @@ class EcommerceServiceProvider extends EventServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -51,8 +47,6 @@ class EcommerceServiceProvider extends EventServiceProvider
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
     public function register(): void
     {
