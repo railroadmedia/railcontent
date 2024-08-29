@@ -20,7 +20,7 @@ class Brand extends Filter
      *
      * @param  mixed  $value
      */
-    public function apply(NovaRequest $request, Builder $query, $value): Builder
+    public function apply(NovaRequest $request, $query, $value): Builder
     {
         $brand_id = \App\Models\Brand::where('name', $value)->firstOrFail()->id;
 
@@ -37,6 +37,6 @@ class Brand extends Filter
             return [$item['name'] => $item['name']];
         });
 
-        return $brands;
+        return $brands->toArray();
     }
 }
