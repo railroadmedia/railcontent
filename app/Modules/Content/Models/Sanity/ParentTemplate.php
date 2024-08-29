@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Enums\VideoType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
@@ -13,6 +14,7 @@ use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
+use Modules\Content\Models\Sanity\Structure\ParentTypeField;
 use Modules\Content\Models\Sanity\Structure\StatusField;
 
 /**
@@ -34,6 +36,8 @@ abstract class ParentTemplate extends BaseSanityModel
         public bool $withResources = false,
         public bool $withLogos = false,
         public bool $withEnrollment = false,
+        public bool $withTrailer = false,
+        public ?string $parentType = null,
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -78,7 +82,19 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
-];
+        ];
+        if($this->withTrailer) {
+            $video               = new ListObject(
+                fields: [
+                            new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
+                            new Field(FieldType::String, 'external_id')
+                        ],
+            );
+            $fields = array_merge($fields, [
+                new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
+                new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
+            ]);
+        }
         if($this->withEnrollment) {
             $fields = array_merge($fields, [
             new Field(FieldType::Datetime, 'enrollment_start_time', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
@@ -102,7 +118,7 @@ abstract class ParentTemplate extends BaseSanityModel
         if($this->childType) {
             $childReference = new Reference([['type' => $this->childType]]);
             $fields = array_merge($fields, [
-                new Field(FieldType::Array, 'child', ($this->childName ?? 'Lessons'), of: $childReference, group:$detailsGroup)
+                new Field(FieldType::Array, 'child', ($this->childName ?? 'Lessons'), of: $childReference, group:$detailsGroup),
             ]);
         }
         if($this->withLogos) {
@@ -129,6 +145,9 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ]);
+        if($this->parentType) {
+            $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+        }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);
     }

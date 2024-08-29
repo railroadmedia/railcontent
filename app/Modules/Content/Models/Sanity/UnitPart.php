@@ -6,7 +6,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
- * Defines the schema structure for a Semester pack lesson document type in Sanity.
+ * Defines the schema structure for a Foundation lesson document type in Sanity.
  *
  * @property string       $type
  * @property string       $name
@@ -14,15 +14,15 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class SemesterPackLesson extends LessonTemplate
+class UnitPart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Semester Pack Lesson', withResources: true, parentType: 'semester-pack');
+        parent::__construct(self::getName(), 'Lesson', withResources: true, parentType: 'unit');
     }
 
     public static function getName(): string
     {
-        return 'semester-pack-lesson';
+        return 'unit-part';
     }
 }

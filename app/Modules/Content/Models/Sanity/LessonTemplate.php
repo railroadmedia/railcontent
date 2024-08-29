@@ -14,6 +14,7 @@ use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
+use Modules\Content\Models\Sanity\Structure\ParentTypeField;
 use Modules\Content\Models\Sanity\Structure\StatusField;
 
 /**
@@ -31,7 +32,8 @@ abstract class LessonTemplate extends BaseSanityModel
         public string $name,
         public string $title,
         public bool $withResources = false,
-        public bool $withLiveEvent = false
+        public bool $withLiveEvent = false,
+        public ?string $parentType = null,
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -142,6 +144,9 @@ abstract class LessonTemplate extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ]);
+        if($this->parentType) {
+            $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+        }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);
     }

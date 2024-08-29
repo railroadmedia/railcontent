@@ -25,7 +25,7 @@ class Pack extends ParentTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Packs', childType: 'pack-bundle', childName: 'Pack Bundles',  withResources: true, withLogos: true, withEnrollment: true);
+        parent::__construct(self::getName(), 'Packs', childType: 'pack-bundle', childName: 'Pack Bundles', withResources: true, withLogos: true, withEnrollment: true);
     }
 
     public static function getName(): string

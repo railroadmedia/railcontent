@@ -85,6 +85,12 @@ const mapComponents = (fields) => {
 
 function App() {
     const [config, setConfigs] = useState(null);
+    // Define the singleton document types
+    const singletonTypes = new Set([ 'foundation']);
+
+    // Define the actions that should be available for singleton documents
+    const singletonActions = new Set(["publish", "discardChanges", "restore"]);
+
 
     useEffect(() => {
         const loadConfigs = () => {
@@ -116,19 +122,25 @@ function App() {
                     //     }
                     //     return prev;
                     // },
-                    document: {
-                        actions: (prev, context) =>
-                            prev.map((previousAction) =>
-                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
-                            ),
-                    },
                     schema: {
                         types: config.schema.types.map((type) => {
                             return {
                                 ...type,
                                 fields: mapComponents(type.fields)
                             };
-                        })
+                        }),
+                        templates: (templates) =>
+                                       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+                    },
+                    document: {
+                        // For singleton types, filter out actions that are not explicitly included
+                        // in the `singletonActions` list defined above
+                        actions: (input, context) =>
+                                     singletonTypes.has(context.schemaType)
+                                         ? input.filter(({ action }) => action && singletonActions.has(action))
+                                         : input.map((previousAction) =>
+                                             previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
+                                         ),
                     },
                     form: {
                         components: {

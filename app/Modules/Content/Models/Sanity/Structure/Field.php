@@ -43,6 +43,7 @@ class Field
         public ?array $validation = [],
         public ?string $inputComponent = null,
         public ?array $fields = null,
+        public ?array $insertMenu = null,
     ) {
 
     }
@@ -81,6 +82,9 @@ class Field
         }
         if (!is_null($this->options)) {
             $optional['options'] = $this->options;
+        }
+        if (!is_null($this->insertMenu)) {
+            $optional['insertMenu'] = $this->insertMenu;
         }
         if ($this->group) {
             if (is_array($this->group)) {

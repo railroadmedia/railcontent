@@ -20,7 +20,7 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 
 class ImportContentsInSanity extends \Illuminate\Console\Command
 {
-    protected $signature = 'sanity:import-content {destination=development} {clean=false} {brand=drumeo} {type=all} {delete=false}';
+    protected $signature = 'sanity:import-content {destination=development} {clean=false} {brand=drumeo} {type=all} {delete=false} {--id}';
 
     protected $description = 'Import Contents from DB in Sanity';
 
@@ -112,7 +112,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         foreach ($contentTypes as $cType) {
             $this->info(" ---- Start $cType migration. ----");
-            $this->importData($cType, $extraModels, $permissions, $extraData, $instructors, $deleteOldDocuments, $destination, $artists);
+            $railcontentId = $this->hasArgument('id') ? $this->argument('id') : null;
+            $this->importData($cType, $extraModels, $permissions, $extraData, $instructors, $deleteOldDocuments, $destination, $artists, $railcontentId);
         }
 
         return 1;
@@ -358,25 +359,40 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         array $instructors,
         bool|array|string|null $deleteOldDocuments,
         $destination,
-        array $artists
+        array $artists,
+        int|null $railcontentId
     ): void {
         $results = Content::with('data', 'fields')->where('railcontent_content.type', '=', $contentType)
             ->where('railcontent_content.status', '!=', 'deleted')
-            ->where('railcontent_content.brand', '=', $this->argument('brand'))
-           // ->where('railcontent_content.id','=',18920)
-            ->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875, 257259, 268071, 268094, 268097,268122,
+            ->where('railcontent_content.brand', '=', $this->argument('brand'));
+
+        if($railcontentId) {
+            $results = $results->where('railcontent_content.id', '=', $railcontentId);
+        }
+
+        $results = $results->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875, 257259, 268071, 268094, 268097,268122,
                 23313, 23393, 23395, 29663,
                 410145, 331419, 350720, 331265, 268090])->get();
 
         $songs = [];
         foreach ($results as $result) {
             $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
+
             $id         = $type . '_' . $result->id;
+            if($result->id == 215952) {
+                $id = 'foundation';
+                $type = 'foundation';
+            }
             $difficulty = (int)$result->difficulty;
             $parentType = [
                 'course-part'          => 'course',
                 'challenge-part'       => 'challenge',
-                'semester-pack-lesson' => 'semester-pack'
+                'semester-pack-lesson' => 'semester-pack',
+                'learning-path-lesson' => 'learning-path-course',
+                'learning-path-course' => 'learning-path-level',
+                'learning-path-level'  => 'learning-path',
+                'unit-part' => 'unit',
+                'unit' => 'learning-path'
             ];
 
             $songs[$id] = [
@@ -515,7 +531,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'extended_description',
                         'summary',
                         'extended_description_subtitle',
-                        'gs_legacy_vimeo'
+                        'gs_legacy_vimeo',
+                        'rev_caption_order_uri',
+                        'mobile_banner_url',
+                        'tablet_banner_url',
+                        'web_banner_url',
+                        'background_image_url',
+                        //foundation unit-part
+                        'song_title',
+                        'song_slow_bpm',
+                        'song_fast_bpm',
+                        'mp3_no_piano_no_click_slow_bpm_url',
+                        'mp3_no_piano_no_click_fast_bpm_url',
+                        'mp3_no_piano_yes_click_slow_bpm_url',
+                        'mp3_no_piano_yes_click_fast_bpm_url',
+                        'mp3_yes_piano_no_click_slow_bpm_url',
+                        'mp3_yes_piano_no_click_fast_bpm_url',
+                        'mp3_yes_piano_yes_click_slow_bpm_url',
+                        'mp3_yes_piano_yes_click_fast_bpm_url',
+                        //unit
+                        'header_background_image_url',
                     ]))) {
                     $notImportedData[] = $datum['key'];
                 }
@@ -549,7 +584,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                                  'live_event_start_time',
                                  'live_event_end_time',
                                  'live_event_youtube_id',
-                        'soundslice_slug'
+                        'soundslice_slug',
                              ]
                 ) && $field['value'] != '') {
                     $songs[$id][$field['key']] = $field['value'];
@@ -631,8 +666,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'exercise-book-pages',
                         'cd-tracks',
                         'student_id',
-                        'soundslice_slug'
-                        //'name'
+                        'soundslice_slug',
+                        'related_lesson',
+                        'difficulty_range',
+                        //Foundation unit part
+                        'includes_song',
                     ]))) {
                     $notImportedFields[] = $field['key'];
                 }
