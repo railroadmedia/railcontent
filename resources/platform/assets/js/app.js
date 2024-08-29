@@ -47,6 +47,7 @@ import PackOverviewBundles from './Components/_Pages/PackOverviewBundles';
 import Login from './Components/_Pages/Login.vue';
 import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
 import DrummersToolbox from './Components/_Pages/DrummersToolbox';
+import sfsr from './Components/_Pages/SFSR/SFSR';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -233,6 +234,7 @@ app.component('AppContainer', AppContainer)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
+    .component('sfsr', sfsr)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
