@@ -218,6 +218,16 @@ class ContentPagesController extends BaseController
         if ($lessonType === 'routine') {
             $hasStartedLessons = false;
         }
+
+        if(($contentTypeName === 'student-focus' || $contentTypeName === 'student-reviews') && !user()->isAdmin()) {
+            return view('content.sf-sr', [
+                'pageData' => [
+                    'name' => $catalogueMeta['name'],
+                    'type' => $contentTypeName,
+                ],
+            ]);
+        }
+
         if ($contentTypeName == 'songs') {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
