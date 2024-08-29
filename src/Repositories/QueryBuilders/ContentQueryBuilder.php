@@ -33,6 +33,8 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent . '.instrument as instrument',
                 ConfigService::$tableContent . '.instrumentless as instrumentless',
                 ConfigService::$tableContent . '.length_in_seconds as length_in_seconds',
+                ConfigService::$tableContent . '.quarter_published as length_in_seconds',
+                ConfigService::$tableContent . '.quarter_removed as length_in_seconds',
             ]
         );
 
