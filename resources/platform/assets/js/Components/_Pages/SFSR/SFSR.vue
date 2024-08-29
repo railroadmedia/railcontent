@@ -80,11 +80,10 @@ const { brand } = storeToRefs(userStore);
 const modalType = ref('');
 
 const headerDescription = computed(() => {
-    if (brand.value === 'pianote' || brand.value === 'guitareo') {
+    if (brand.value === 'drumeo') {
         return "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
-    } else if (brand.value === 'singeo') {
-        return "Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
     }
+
     return '';
 });
 
