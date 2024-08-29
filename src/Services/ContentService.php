@@ -1005,6 +1005,83 @@ class ContentService
     }
 
     /**
+     * Return content that's marked as removed for the previous quarter
+     *
+     * @param int $page
+     * @param int $limit
+     * @return mixed|Collection|null
+     */
+    public function getPreviousQuarterRemoved(int $page=1, int $limit=10)
+    {
+        $nextPrev = $this->getNextAndPreviousQuarterDates();
+        $prevStatus = ContentRepository::$availableContentStatues;
+        $prevPullFuture = ContentRepository::$pullFutureContent;
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED];
+        $removed = $this->getFiltered(
+            page: 1,
+            limit: 50,
+            requiredFields: ["quarter_removed,$nextPrev->previousQuarter,'',="],
+        );
+        ContentRepository::$availableContentStatues = $prevStatus;
+        ContentRepository::$pullFutureContent = $prevPullFuture;
+        return $removed;
+    }
+
+    /**
+     * Return content that's marked as being returned in the next quarter
+     *
+     * @param int $page
+     * @param int $limit
+     * @return mixed|Collection|null
+     */
+    public function getNextQuarterComingSoon(int $page=1, int $limit=10)
+    {
+        $nextPrev = $this->getNextAndPreviousQuarterDates();
+        $prevStatus = ContentRepository::$availableContentStatues;
+        $prevPullFuture = ContentRepository::$pullFutureContent;
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED, ContentService::STATUS_PUBLISHED];
+        $comingSoon = $this->getFiltered(
+            page: 1,
+            limit: 50,
+            requiredFields: ["quarter_published,$nextPrev->nextQuarter,'',="],
+        );
+        ContentRepository::$availableContentStatues = $prevStatus;
+        ContentRepository::$pullFutureContent = $prevPullFuture;
+        return $comingSoon;
+    }
+
+
+    private function getNextAndPreviousQuarterDates()
+    {
+        $january = 1;
+        $april = 4;
+        $july = 7;
+        $october = 10;
+        $month = (int)date('m');
+        $year = (int)date('Y');
+        if ($month < $april) {
+            $nextQuarter = "$year-$april-1";
+            $previousQuarter = "$year-$january-1";
+        } else if ($month < $july) {
+            $nextQuarter = "$year-$july-1";
+            $previousQuarter = "$year-$april-1";
+        } else if ($month < $october) {
+            $nextQuarter = "$year-$october-1";
+            $previousQuarter = "$year-$july-1";
+        } else {
+            $previousQuarter = "$year-$october-1";
+            $year++;
+            $nextQuarter = "$year-$january-1";
+        }
+        return new class($nextQuarter, $previousQuarter) {
+            function __construct(public string $nextQuarter, public string $previousQuarter)
+            {}
+        };
+    }
+
+    /**
      *  Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
