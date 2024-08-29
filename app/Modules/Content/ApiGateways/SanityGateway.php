@@ -130,11 +130,6 @@ class SanityGateway
         return $documents;
     }
 
-    public function getCurrentEventAndMetaData()
-    {
-        return [];
-    }
-
     private function mapSanityFields($document)
     {
         // fields needs to exist for decorators to work, but no longer needs actual data
