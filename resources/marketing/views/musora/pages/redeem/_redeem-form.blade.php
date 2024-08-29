@@ -46,10 +46,10 @@
         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
     @endif
     @if(!empty($guitarcenter))
-        <div class="flex items-center mt-3 mb-2">
-            <input id="terms" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-            <p class="help-message mb-0">By clicking here, I state that I have read and understood the
-            <a href="/terms-and-conditions" class="text-blue-600 hover:underline">terms and conditions</a>.</p>
+        <div class="flex items-center mt-5 mb-2">
+            <input id="terms" x-ref="termsCheckbox" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-2" required>
+            <p class="help-message px-0 mb-0">By clicking here, I state that I have read and understood the
+            <a @click="tos = true;" class="text-blue-600 cursor-pointer"><u>terms and conditions</u></a>.</p>
         </div>
     @endif
     @include('_partials.components.forms.redeem-form-buttons', [
