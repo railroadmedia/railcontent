@@ -1160,7 +1160,8 @@ class ContentRepository extends RepositoryBase
             $contents[$contentRow['id']]['instrument'] = $contentRow['instrument'];
             $contents[$contentRow['id']]['instrumentless'] = $contentRow['instrumentless'];
             $contents[$contentRow['id']]['length_in_seconds'] = $contentRow['length_in_seconds'] ?? null;
-            $contents[$contentRow['id']]['published_on'] = $contentRow['published_on'];
+            $contents[$contentRow['id']]['quarter_published'] = $contentRow['quarter_published'];
+            $contents[$contentRow['id']]['quarter_removed'] = $contentRow['quarter_removed'];
             $contents[$contentRow['id']]['created_on'] = $contentRow['created_on'];
             $contents[$contentRow['id']]['archived_on'] = $contentRow['archived_on'];
             $contents[$contentRow['id']]['parent_id'] = $contentRow['parent_id'] ?? null;
