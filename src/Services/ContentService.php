@@ -1053,7 +1053,7 @@ class ContentService
     }
 
 
-    private function getNextAndPreviousQuarterDates()
+    public function getNextAndPreviousQuarterDates()
     {
         $january = 1;
         $april = 4;
