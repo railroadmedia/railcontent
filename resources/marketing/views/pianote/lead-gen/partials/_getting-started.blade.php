@@ -4,10 +4,10 @@
             <img src="{{ $logo }}" alt="Logo" class="@if(!empty($logoStyle)) {{ $logoStyle }} @endif">
         @endif
         @if(!empty($header))
-            <h3 class="mb-4 mt-2 leading-none"><strong>{!! $header !!}</strong></h3>
+            <h2 class="mt-2 leading-none"><strong>{!! $header !!}</strong></h2>
         @endif
         @if(!empty($subheader))
-            <h1 class="mb-4 leading-none"><strong>{!! $subheader !!}</strong></h1>
+            <h2 class="mb-4 leading-none"><strong>{!! $subheader !!}</strong></h2>
         @endif
         @if(!empty($text))
             <p class="my-4">{!! $text !!}</p>

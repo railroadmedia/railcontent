@@ -269,7 +269,7 @@
             'subheader' => 'Now take the next step',
             'text'=> '<strong>Get a free 30-day trial to the Pianote membership</strong> and enjoy access to<br class="hidden sm:block">unlimited piano lessons, guided practices, personalized feedback, and more.',
             'btnLink' => '/trial-month',
-            'btnText' => 'LEARN MORE',
+            'btnText' => 'START YOUR FREE TRIAL',
             'logoStyle' => 'h-7 md:h-8',
         ])
     @endif
