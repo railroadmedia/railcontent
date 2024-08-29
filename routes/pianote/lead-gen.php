@@ -32,6 +32,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/beautiful-christmas-classics', [LeadGenController::class, 'beautifulChristmasClassics']);
         Route::get('/digital-chords-scales-guide', [LeadGenController::class, 'digitalChordsAndScales']);
         Route::get('/casio-giveaway', [LeadGenController::class, 'giveaway']);
+        Route::get('/giveaway', [LeadGenController::class, 'giveawayAlt']);
         Route::get('/awards', [LeadGenController::class, 'awards']);
         Route::get('/prima-resources', [LeadGenController::class, 'primaResources']);
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
