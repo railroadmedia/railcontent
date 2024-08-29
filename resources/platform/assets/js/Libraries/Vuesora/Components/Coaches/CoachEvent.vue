@@ -52,7 +52,7 @@
 
           <!-- Coaches -->
           <div class="tw-flex">
-            <div class="tw-inline-flex" v-for="(coach, i) in content.artists" :key="i">
+            <div class="tw-inline-flex" v-for="(coach, i) in content.instructors" :key="i">
               <a @click="(e) => handleClick(e, `${brand}/coaches/${coach.slug}`)" :href="`${brand}/coaches/${coach.slug}`" class="tw-no-underline tw-mr-1.5 tw-block">
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.split(" ")[0] }}</span>
@@ -61,7 +61,7 @@
                   <span class="tw-font-bold">{{ coach.split(" ")[2] }}</span>
                 </h4>
               </a>
-              <span v-if="i + 1 < content.artists.length"
+              <span v-if="i + 1 < content.instructors.length"
                 class="tw-leading-none tw-font-bold dark:tw-text-white tw-text-lg tw-mr-1.5">&</span>
             </div>
           </div>
