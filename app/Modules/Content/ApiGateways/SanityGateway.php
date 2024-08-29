@@ -136,5 +136,4 @@ class SanityGateway
         // eventually this should be removed.
         return [];
     }
-
 }

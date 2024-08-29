@@ -2,7 +2,6 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
-use App\Modules\Content\Models\Content;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
