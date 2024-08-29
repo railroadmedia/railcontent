@@ -252,7 +252,7 @@
                             @elseif(!empty($thomann))
                                 href="/thomann/existing"
                             @elseif(!empty($guitarcenter))
-                                href="/guitarcenter/redeem/existing"
+                                href="/guitarcenter/existing"
                             @else
                                 href="/redeem/existing"
                             @endif
@@ -282,7 +282,7 @@
                             @elseif(!empty($thomann))
                                 href="/thomann"
                             @elseif(!empty($guitarcenter))
-                                href="/guitarcenter/redeem/"
+                                href="/guitarcenter"
                             @else
                                 href="/redeem"
                             @endif>Click here to redeem on a new account.</a>
