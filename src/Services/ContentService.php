@@ -1062,18 +1062,18 @@ class ContentService
         $month = (int)date('m');
         $year = (int)date('Y');
         if ($month < $april) {
-            $nextQuarter = "$year-$april-1";
-            $previousQuarter = "$year-$january-1";
+            $nextQuarter = "$year-0$april-01";
+            $previousQuarter = "$year-0$january-01";
         } else if ($month < $july) {
-            $nextQuarter = "$year-$july-1";
-            $previousQuarter = "$year-$april-1";
+            $nextQuarter = "$year-0$july-01";
+            $previousQuarter = "$year-0$april-01";
         } else if ($month < $october) {
-            $nextQuarter = "$year-$october-1";
-            $previousQuarter = "$year-$july-1";
+            $nextQuarter = "$year-$october-01";
+            $previousQuarter = "$year-0$july-01";
         } else {
-            $previousQuarter = "$year-$october-1";
+            $previousQuarter = "$year-$october-01";
             $year++;
-            $nextQuarter = "$year-$january-1";
+            $nextQuarter = "$year-0$january-01";
         }
         return new class($nextQuarter, $previousQuarter) {
             function __construct(public string $nextQuarter, public string $previousQuarter)
