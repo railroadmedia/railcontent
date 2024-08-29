@@ -1005,13 +1005,13 @@ class ContentService
     }
 
     /**
-     * Return content that's marked as removed for the previous quarter
+     * Return content that's marked as removed for the next quarter
      *
      * @param int $page
      * @param int $limit
      * @return mixed|Collection|null
      */
-    public function getPreviousQuarterRemoved(int $page=1, int $limit=10)
+    public function getNextQuarterRemoved(int $page=1, int $limit=10)
     {
         $nextPrev = $this->getNextAndPreviousQuarterDates();
         $prevStatus = ContentRepository::$availableContentStatues;
@@ -1021,7 +1021,7 @@ class ContentService
         $removed = $this->getFiltered(
             page: $page,
             limit: $limit,
-            requiredFields: ["quarter_removed,$nextPrev->previousQuarter,'',="],
+            requiredFields: ["quarter_removed,$nextPrev->nextQuarter,'',="],
         );
         ContentRepository::$availableContentStatues = $prevStatus;
         ContentRepository::$pullFutureContent = $prevPullFuture;
@@ -1035,21 +1035,21 @@ class ContentService
      * @param int $limit
      * @return mixed|Collection|null
      */
-    public function getNextQuarterComingSoon(int $page=1, int $limit=10)
+    public function getNextQuarterReturning(int $page=1, int $limit=10)
     {
         $nextPrev = $this->getNextAndPreviousQuarterDates();
         $prevStatus = ContentRepository::$availableContentStatues;
         $prevPullFuture = ContentRepository::$pullFutureContent;
         ContentRepository::$pullFutureContent = true;
-        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED, ContentService::STATUS_PUBLISHED];
-        $comingSoon = $this->getFiltered(
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED];
+        $returning = $this->getFiltered(
             page: $page,
             limit: $limit,
             requiredFields: ["quarter_published,$nextPrev->nextQuarter,'',="],
         );
         ContentRepository::$availableContentStatues = $prevStatus;
         ContentRepository::$pullFutureContent = $prevPullFuture;
-        return $comingSoon;
+        return $returning;
     }
 
 
