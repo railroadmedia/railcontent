@@ -40,9 +40,6 @@ Route::domain('{drumeoDomain}')
         Route::get('/awards/', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
 
-        Route::get('/guitarcenter/redeem', [SalesController::class, 'guitarcenterRedeem']);
-        Route::get('/guitarcenter/redeem/existing', [SalesController::class, 'guitarcenterRedeemExisting']);
-
         Route::get('/alesis', [SalesController::class, 'alesisNitro']);
         Route::get('/alesis/existing', [SalesController::class, 'alesisNitroExisting']);
         Route::get('/alesis-strata', [SalesController::class, 'alesisStrata']);

@@ -273,23 +273,6 @@ class SalesController extends BaseController
     }
 
 
-
-    public function guitarcenterRedeem(Request $request)
-    {
-        return view('drumeo.pages.guitarcenter', [
-            'newAccount' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
-    }
-    public function guitarcenterRedeemExisting(Request $request)
-    {
-        return view('drumeo.pages.guitarcenter', [
-            'newAccount' => false,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
-    }
-
-
     public function handleRedeemRequest(Request $request, $productType, $isNewAccount)
     {
         $data = [

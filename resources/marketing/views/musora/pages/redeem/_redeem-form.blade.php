@@ -28,26 +28,32 @@
         <p class="input-describer">Email Address</p>
         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}" x-bind:disabled="loading">
         <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
+
         <p class="input-describer">Password (min. 8 characters)</p>
         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="" x-bind:disabled="loading">
         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
+
         <p class="input-describer">Confirm Password</p>
         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="" x-bind:disabled="loading">
         <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
-        @include('_partials.components.forms.redeem-form-buttons', [
-            'buttonText' => $buttonText,
-            'buttonColor' => $buttonColor,
-        ])
     @else
         <p class="input-describer">Email</p>
         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email/Username" value="{{-- Input::old('user_email') --}}" x-bind:disabled="loading">
         <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
+
         <p class="input-describer">Password</p>
         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password" value="" x-bind:disabled="loading">
         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
-        @include('_partials.components.forms.redeem-form-buttons', [
-            'buttonText' => $buttonText,
-            'buttonColor' => $buttonColor,
-        ])
     @endif
+    @if(!empty($guitarcenter))
+        <div class="flex items-center mt-3 mb-2">
+            <input id="terms" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+            <p class="help-message mb-0">By clicking here, I state that I have read and understood the
+            <a href="/terms-and-conditions" class="text-blue-600 hover:underline">terms and conditions</a>.</p>
+        </div>
+    @endif
+    @include('_partials.components.forms.redeem-form-buttons', [
+        'buttonText' => $buttonText,
+        'buttonColor' => $buttonColor,
+    ])
 </form>

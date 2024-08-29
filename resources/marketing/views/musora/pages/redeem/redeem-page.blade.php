@@ -197,6 +197,15 @@
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
+            @elseif(!empty($guitarcenter))
+                <div class="mb-2 align-middle flex items-center justify-center w-full">
+                    <img class="inline-block h-6 sm:h-8 lg:h-9 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/thomann-white.png"
+                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
+                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
+                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+                <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
             @elseif(!empty($spotify))
                 <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -223,6 +232,8 @@
                                 href="/redeem-spotify/existing"
                             @elseif(!empty($thomann))
                                 href="/thomann/existing"
+                            @elseif(!empty($guitarcenter))
+                                href="/guitarcenter/existing"
                             @else
                                 href="/redeem/existing"
                             @endif
@@ -251,6 +262,8 @@
                                 href="/redeem-spotify"
                             @elseif(!empty($thomann))
                                 href="/thomann"
+                            @elseif(!empty($guitarcenter))
+                                href="/guitarcenter"
                             @else
                                 href="/redeem"
                             @endif>Click here to redeem on a new account.</a>
