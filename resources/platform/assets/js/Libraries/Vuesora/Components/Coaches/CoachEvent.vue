@@ -159,12 +159,8 @@ export default {
       counterInterval: null,
     };
   },
-  beforeMount() {
-      console.log('beforeMount', this.preloadedContent);
-  },
     mounted() {
     if (this.preloadedContent) {
-
       this.content = this.preloadedContent;
       this.startTime = DateTime.fromSQL(this.content.published_on, { zone: "UTC" });
       this.startDate = new Date(this.startTime);
@@ -172,7 +168,6 @@ export default {
       this.startMonth = this.startDate.toLocaleString("en-US", { month: "long" });
       this.startDay = this.startDate.getDate();
       this.formattedTime = this.startDate.toLocaleTimeString([], { timeStyle: "short" });
-        console.log('mounted', this.preloadedContent);
       this.checkIfLive();
     }
   },
