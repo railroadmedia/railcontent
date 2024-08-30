@@ -70,6 +70,7 @@ class ContentRepository extends RepositoryBase
 
     private $page;
     private $limit;
+    private $relatedContentLimit = 10;
     private $orderBy;
     private $orderDirection;
     private $typesToInclude = [];
@@ -1386,7 +1387,8 @@ class ContentRepository extends RepositoryBase
         array $requiredParentIds,
         $getFutureContentOnly = false,
         $getFollowedContentOnly = false,
-        $getFutureScheduledContentOnly = false
+        $getFutureScheduledContentOnly = false,
+        ?int $relatedContentLimit = null,
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1405,6 +1407,7 @@ class ContentRepository extends RepositoryBase
         $this->includedFields = [];
         $this->requiredUserStates = [];
         $this->includedUserStates = [];
+        $this->relatedContentLimit = $relatedContentLimit ?? $this->relatedContentLimit;
 
         return $this;
     }
@@ -1445,9 +1448,10 @@ class ContentRepository extends RepositoryBase
                 $contentRows = $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
 
                 $contentRows = $this->contentCompiledColumnTransformer->transformLessons(
-                        $contentRows,
-                        $dataLookup
-                    ) ?? [];
+                    $contentRows,
+                    $dataLookup,
+                    $this->relatedContentLimit
+                ) ?? [];
 
                 return $contentRows;
             }
@@ -1472,7 +1476,7 @@ class ContentRepository extends RepositoryBase
                     ' as grouped_by_field,
                     m.'.
                     $this->groupByFields['associated_table']['column'].
-                    ' as id,	
+                    ' as id,
 	                COUNT( DISTINCT(lessons.content_id)) AS lessonsCount,
 	                GROUP_CONCAT(lessons.content_id) as lessons_grouped_by_field, '.
                     ' "'.
@@ -1497,12 +1501,14 @@ class ContentRepository extends RepositoryBase
                         ->directPaginate($this->page, $this->limit)
                         ->orderGroupedContentsBy($this->orderBy, $this->orderDirection, ConfigService::$tableContent . '.id', $this->groupByFields['field'])
                         ->getToArray();
+                $i = 0;
+
             }
 
             $contentIds = $this->getGroupByContentIds($contentRows);
             $dataLookup = $this->getContentLookupByIds($contentIds);
 
-            return $this->contentCompiledColumnTransformer->transformLessons($contentRows, $dataLookup) ?? [];
+            return $this->contentCompiledColumnTransformer->transformLessons($contentRows, $dataLookup, $this->relatedContentLimit) ?? [];
         }
 
         $subQuery =
@@ -2027,8 +2033,8 @@ class ContentRepository extends RepositoryBase
         $query =
             $this->query()
                 ->addSelect([
-                                ConfigService::$tableContent.'.id as id',
-                            ]);
+                    ConfigService::$tableContent.'.id as id',
+                ]);
 
         $rows =
             $query->restrictByUserAccess()
@@ -2185,10 +2191,10 @@ class ContentRepository extends RepositoryBase
         $instructors =
             $this->query()
                 ->select([
-                             config('railcontent.table_prefix').'content_instructors'.'.content_id',
-                             config('railcontent.table_prefix').'content_instructors'.'.instructor_id as field_value',
-                             config('railcontent.table_prefix').'content'.'.*',
-                         ])
+                    config('railcontent.table_prefix').'content_instructors'.'.content_id',
+                    config('railcontent.table_prefix').'content_instructors'.'.instructor_id as field_value',
+                    config('railcontent.table_prefix').'content'.'.*',
+                ])
                 ->leftJoin(
                     config('railcontent.table_prefix').'content_instructors',
                     config('railcontent.table_prefix').'content'.'.id',
@@ -2239,9 +2245,9 @@ class ContentRepository extends RepositoryBase
         $videos =
             $this->query()
                 ->select([
-                             'video'.'.*',
-                             config('railcontent.table_prefix').'content.id as content_id',
-                         ])
+                    'video'.'.*',
+                    config('railcontent.table_prefix').'content.id as content_id',
+                ])
                 ->leftJoin(
                     config('railcontent.table_prefix').'content as video',
                     config('railcontent.table_prefix').'content'.'.video',
@@ -2304,9 +2310,9 @@ class ContentRepository extends RepositoryBase
             $styles =
                 $this->query()
                     ->select([
-                                 config('railcontent.table_prefix').'content_styles'.'.style as field_value',
-                                 config('railcontent.table_prefix').'content'.'.id',
-                             ])
+                        config('railcontent.table_prefix').'content_styles'.'.style as field_value',
+                        config('railcontent.table_prefix').'content'.'.id',
+                    ])
                     ->join(
                         config('railcontent.table_prefix').'content_styles',
                         config('railcontent.table_prefix').'content'.'.id',
@@ -2324,9 +2330,9 @@ class ContentRepository extends RepositoryBase
             $bpm =
                 $this->query()
                     ->select([
-                                 config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
-                                 config('railcontent.table_prefix').'content'.'.id',
-                             ])
+                        config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
+                        config('railcontent.table_prefix').'content'.'.id',
+                    ])
                     ->join(
                         config('railcontent.table_prefix').'content_bpm',
                         config('railcontent.table_prefix').'content'.'.id',
@@ -2344,9 +2350,9 @@ class ContentRepository extends RepositoryBase
             $topics =
                 $this->query()
                     ->select([
-                                 config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
-                                 config('railcontent.table_prefix').'content'.'.id',
-                             ])
+                        config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
+                        config('railcontent.table_prefix').'content'.'.id',
+                    ])
                     ->join(
                         config('railcontent.table_prefix').'content_topics',
                         config('railcontent.table_prefix').'content'.'.id',
@@ -2364,9 +2370,9 @@ class ContentRepository extends RepositoryBase
             $tags =
                 $this->query()
                     ->select([
-                                 config('railcontent.table_prefix').'content_tags'.'.tag as field_value',
-                                 config('railcontent.table_prefix').'content'.'.id',
-                             ])
+                        config('railcontent.table_prefix').'content_tags'.'.tag as field_value',
+                        config('railcontent.table_prefix').'content'.'.id',
+                    ])
                     ->join(
                         config('railcontent.table_prefix').'content_tags',
                         config('railcontent.table_prefix').'content'.'.id',
@@ -2536,17 +2542,17 @@ class ContentRepository extends RepositoryBase
 
         if (self::$pullFilterResultsOptionsAndCount) {
             $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                    'data',
-                    'instructor',
-                    'style',
-                    'topic',
-                    'focus',
-                    'bpm',
-                    'video',
-                    'original_video',
-                    'high_video',
-                    'low_video',
-                ];
+                'data',
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+                'video',
+                'original_video',
+                'high_video',
+                'low_video',
+            ];
         }
 
         // we always need the related data
@@ -2611,18 +2617,18 @@ class ContentRepository extends RepositoryBase
         }
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'instructor',
-                'genre',
-                'topic',
-                'focus',
-                'bpm',
-                'essentials',
-                'theory',
-                'creativity',
-                'lifestyle',
-                'type',
-                'gear',
-            ];
+            'instructor',
+            'genre',
+            'topic',
+            'focus',
+            'bpm',
+            'essentials',
+            'theory',
+            'creativity',
+            'lifestyle',
+            'type',
+            'gear',
+        ];
 
         $filterOptions = array_unique($filterOptions);
 
@@ -3029,7 +3035,7 @@ class ContentRepository extends RepositoryBase
 
             $db = DB::table($filterOptionTableName.' as m');
             $db->selectRaw(
-                'm.'.$filterOptionColumnName.' as grouped_by_value,	
+                'm.'.$filterOptionColumnName.' as grouped_by_value,
 	COUNT( DISTINCT(lessons.id)) AS lessonsCount'
             );
             $rq =
@@ -3166,18 +3172,18 @@ class ContentRepository extends RepositoryBase
         }
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'instructor',
-                'genre',
-                'topic',
-                'focus',
-                'bpm',
-                'essentials',
-                'theory',
-                'creativity',
-                'lifestyle',
-                'type',
-                'gear',
-            ];
+            'instructor',
+            'genre',
+            'topic',
+            'focus',
+            'bpm',
+            'essentials',
+            'theory',
+            'creativity',
+            'lifestyle',
+            'type',
+            'gear',
+        ];
 
         $filterOptions = array_unique($filterOptions);
 

@@ -68,10 +68,11 @@ class ContentJsonController extends Controller
         FiltersHelper::prepareFiltersFields();
 
         $contentTypes = $request->get('included_types', []);
+        $defaultLimit = ContentJsonController::getDefaultLimit($contentTypes, brand(), $request->get('tabs', []), 10);
 
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 10),
+            $request->get('limit', $defaultLimit),
             $request->get('sort', '-published_on'),
             $contentTypes,
             $request->get('slug_hierarchy', []),
@@ -86,6 +87,7 @@ class ContentJsonController extends Controller
             $request->get('only_subscribed', false),
             FiltersHelper::$futureScheduledContentOnly,
             FiltersHelper::$groupBy ?? null,
+            relatedContentLimit: $request->get('limit', $defaultLimit)
         );
 
         $filters = $contentData['filter_options'];
@@ -120,6 +122,50 @@ class ContentJsonController extends Controller
         ]);
     }
 
+    private static function checkContentLimitForWorkoutsTabs(array $contentTypes, $tabs, int $defaultCount) : int
+    {
+        if (in_array('workout', $contentTypes) && $tabs) {
+            foreach ($tabs as $tab) {
+                if (str_contains($tab, 'length_')) {
+                    return 20;
+                }
+            }
+        }
+        return $defaultCount;
+    }
+
+    public static function getDefaultLimit(array $contentTypes, string $brand, ?array $tabs, int $defaultCount) : int
+    {
+        $defaultCount = FiltersHelper::$groupBy ? ContentJsonController::getContentLimitForGroupBy($contentTypes, $brand, $defaultCount) : $defaultCount;
+        $defaultCount = ContentJsonController::checkContentLimitForWorkoutsTabs($contentTypes, $tabs, $defaultCount);
+        return $defaultCount;
+    }
+
+    private static function getContentLimitForGroupBy(array $contentTypes, string $brand, int $defaultCount): int
+    {
+        $slightlyHigherCount = 20;
+        $contentTypes = array_map('strtolower', $contentTypes);
+        if ($brand == 'pianote' && (
+                in_array('podcasts', $contentTypes) ||
+                in_array('boot-camps', $contentTypes) ||
+                in_array('song-tutorial', $contentTypes))) {
+            return $slightlyHigherCount;
+        } else if ($brand == 'guitareo' && in_array('recording', $contentTypes)) {
+            return $slightlyHigherCount; //archives
+        } else if (in_array('routine', $contentTypes)) {
+            return 12;
+        } else{
+            $needleContentTypes = ['song', 'workout', 'course', 'quick-tips', 'student-focus'];
+            foreach ($needleContentTypes as $needle) {
+                if (in_array($needle, $contentTypes)) {
+                    return $slightlyHigherCount;
+                }
+            }
+
+        }
+        return $defaultCount;
+    }
+
     /**
      * @param Request $request
      * @return JsonPaginatedResponse
@@ -131,8 +177,10 @@ class ContentJsonController extends Controller
         FiltersHelper::prepareFiltersFields();
 
         $brand = $request->get('brand', brand());
-        $pageSize = $request->get('limit', 5);
+
         $filter = FiltersHelper::$filter ?? '';
+        $defaultPageSize = $filter ? 20 : 10;
+        $pageSize = $request->get('limit', $defaultPageSize);
         $page = $request->get('page', 1);
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],
@@ -153,7 +201,7 @@ class ContentJsonController extends Controller
                 array_filter($groupBySections, function ($key) {
                     return $key != 'Songs You Might Like';
                 },
-                             ARRAY_FILTER_USE_KEY);
+                    ARRAY_FILTER_USE_KEY);
 
             $sections = array_values(
                 array_filter($sections, function ($section) {

@@ -52,7 +52,7 @@ class ContentService
 
     public $idContentCache = [];
 
-        /**
+    /**
      * @param ContentRepository $contentRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
@@ -123,7 +123,7 @@ class ContentService
     {
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
-        
+
         if ($useCaching) {
             $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
                 '-',
@@ -1118,7 +1118,8 @@ class ContentService
         $pullPagination = true,
         $getFollowedContentOnly = false,
         $getFutureScheduledContentOnly = false,
-        $groupBy = null
+        $groupBy = null,
+        $relatedContentLimit = null,
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -1162,7 +1163,8 @@ class ContentService
                 $requiredParentIds,
                 $getFutureContentOnly,
                 $getFollowedContentOnly,
-                $getFutureScheduledContentOnly
+                $getFutureScheduledContentOnly,
+                $relatedContentLimit,
             );
 
             foreach ($requiredFields as $requiredField) {
