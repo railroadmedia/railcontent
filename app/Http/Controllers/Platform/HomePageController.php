@@ -164,19 +164,12 @@ class HomePageController extends BaseController
             Carbon::now()
                 ->toDateTimeString();
 
-        if (config('railcontent.webUpcomingEventPriorMinutes')) {
-            LiveStreamEventService::$upcomingPriorMinutes = config('railcontent.webUpcomingEventPriorMinutes');
-        }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
-        $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
         $collectionForDecoration = new RailcontentCollection();
         $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
-        if (!empty($currentEvent)) {
-            $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
-        }
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
@@ -212,25 +205,7 @@ class HomePageController extends BaseController
         $hasGoals = user()->onboardingGoals ? true : false;
 
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
-
-        if ($currentEvent) {
-            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
-            $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
-            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
-            if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
-                $eventCoachUrl = url()->route('platform.content.first-level', [
-                    'brand' => brand(),
-                    'primaryPage' => 'coaches',
-                    'firstContentSlug' => $eventCoachSlug,
-                    'firstContentId' => $eventCoachId,
-                ]);
-                $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
-                    'fields.instructor.slug'
-                )] ?? config('addevent.uniquekeys.brand-overview');
-            } else {
-                $currentEvent = null;
-            }
-        }
+        $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
 
         $carousel = $this->carouselService->getCarouselSlides();
 
@@ -297,11 +272,9 @@ class HomePageController extends BaseController
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
             "carousel" => $carousel,
-            "coachEvent" => content_to_json([$currentEvent]),
             "cohortBanner" => json_encode($cohortBanner),
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
-            "currentEvent" => $currentEvent,
             'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),

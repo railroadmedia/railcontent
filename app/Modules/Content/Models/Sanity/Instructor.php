@@ -46,6 +46,7 @@ class Instructor extends BaseSanityModel
 
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
+            new Field(FieldType::String, 'calendar_id', 'Subscription CalendarID'),
         ];
         $preview = new ListItemPreview('name', 'brand', 'thumbnail');
         parent::__construct(self::getName(), 'Instructor', $fields, preview: $preview);
