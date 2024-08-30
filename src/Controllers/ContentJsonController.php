@@ -194,6 +194,7 @@ class ContentJsonController extends Controller
 
         return reply()->json($newSongs['results'], [
             'transformer' => DataTransformer::class,
+            'totalResults' => $newSongs['total_results'],
         ]);
     }
 
@@ -209,6 +210,7 @@ class ContentJsonController extends Controller
         );
         return reply()->json($removed['results'], [
             'transformer' => DataTransformer::class,
+            'totalResults' => $removed['total_results'],
         ]);
     }
 
@@ -224,6 +226,7 @@ class ContentJsonController extends Controller
         );
         return reply()->json($comingSoon['results'], [
             'transformer' => DataTransformer::class,
+            'totalResults' => $comingSoon['total_results'],
         ]);
     }
 
