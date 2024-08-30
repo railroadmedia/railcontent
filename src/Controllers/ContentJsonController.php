@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -173,6 +174,56 @@ class ContentJsonController extends Controller
             'transformer' => DataTransformer::class,
             'totalResults' => $contentData['total_results'],
             'filterOptions' => $contentData['filter_options'],
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonPaginatedResponse
+     */
+    public function getComingSoon(Request $request)
+    {
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+        $newSongs = $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+            "published_on",
+            includedTypes: ['song'],
+            getFutureContentOnly: true,
+        );
+
+        return reply()->json($newSongs['results'], [
+            'transformer' => DataTransformer::class,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonPaginatedResponse
+    */
+    public function getLeaving(Request $request)
+    {
+        $removed = $this->contentService->getNextQuarterRemoved(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+        );
+        return reply()->json($removed['results'], [
+            'transformer' => DataTransformer::class,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonPaginatedResponse
+     */
+    public function getReturning(Request $request)
+    {
+        $comingSoon = $this->contentService->getNextQuarterReturning(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+        );
+        return reply()->json($comingSoon['results'], [
+            'transformer' => DataTransformer::class,
         ]);
     }
 
