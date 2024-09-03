@@ -462,4 +462,26 @@ class SalesController extends BaseController
     {
         return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
     }
+
+    public function classicalPianoCollection()
+    {
+        $productId = 1044;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('pianote.products.classical-piano-collection', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
+    public function classicalPianoCollectionMembership()
+    {
+        return view('pianote.sales.classical-piano-collection-membership', [
+            'theme' => 'pianote',
+        ]);
+    }
 }
