@@ -67,6 +67,21 @@ return [
         // NOTE: brand changes dynamically based on the current domain
         'brand' => 'musora',
         'musora' => [
+            'Today in Music History' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
             'The Playlist - Musora Newsletter' => [
                 'custom_attributes' => [],
                 'events' => [
