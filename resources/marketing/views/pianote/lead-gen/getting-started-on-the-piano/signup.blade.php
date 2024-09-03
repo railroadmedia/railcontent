@@ -21,7 +21,7 @@
         }
          .join.smaller.sticky-button {
             font-size:16px;
-            padding:14px 25px;
+            padding:12px 25px;
         }
 
         input {
@@ -122,14 +122,13 @@
     </style>
 @endsection
 
+@section('page-body')
 <div class="px-2 sm:px-0 w-full z-[60] sticky top-[40px] md:top-[56px] py-2" style="background: rgba(2, 8, 21, 0.93);">
     <div class="sm:pr-10 md:pr-20 flex items-center justify-center md:justify-end">
         <a class="join smaller sticky-button w-11/12 sm:max-w-[200px] anchor-slide top-0" href="#course" style="background:transparent;">Course Outline</a>
         <a class="join smaller sticky-button w-11/12 sm:max-w-[240px] bg-pianote anchor-slide" href="#final">Get Started</a>
     </div>
 </div>
-
-@section('page-body')
     <header class="px-5 sm:px-6 pt-10 sm:pt-14 pb-20 md:pb-24 lg:py-20" style="background:#f1f7fe;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
