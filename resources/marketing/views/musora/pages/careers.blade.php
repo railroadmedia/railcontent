@@ -321,7 +321,7 @@
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">5</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
-                        Reference checks (we ask for three professional references) - these are collected earlier on but are only used if the candidate is in the final stages of the hiring process.
+                        Reference checks (we ask for three professional references, including at least one former manager) - references will be checked prior to an offer being made.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
@@ -333,7 +333,7 @@
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">7</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
-                        If you make it to the final stage, the Talent Acquisition Team will contact you and tell you a bit about a Granted program we’ve piloted to see if you’re eligible for a grant.
+                        If you make it to the final stage, the Talent Acquisition Team will contact you to let you know that we are extending an offer and to see when you can start.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10">

@@ -118,6 +118,10 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.casio-giveaway', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
+    public function giveawayAlt()
+    {
+        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
+    }
     public function digitalChordsAndScales()
     {
         return view('pianote.lead-gen.digital-chords-scales-guide', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
@@ -237,6 +241,22 @@ class LeadGenController extends BaseController
                 return view('pianote.lead-gen.getting-started.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
             case 'thank-you':
                 return view('pianote.lead-gen.getting-started.thank-you', ['theme' => 'pianote', 'month' => true]);
+            case 'ty-annual':
+                return view('pianote.lead-gen.chord-hacks.ty-annual');
+            case 'ty-monthly':
+                return view('pianote.lead-gen.chord-hacks.ty-monthly');
+        }
+
+        throw new NotFoundHttpException();
+    }
+
+    public function gstdp(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page) {
+            case null:
+                return view('pianote.lead-gen.getting-started-on-the-piano.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
+            case 'thank-you':
+                return view('pianote.lead-gen.getting-started-on-the-piano.thank-you', ['theme' => 'pianote', 'month' => true]);
             case 'ty-annual':
                 return view('pianote.lead-gen.chord-hacks.ty-annual');
             case 'ty-monthly':

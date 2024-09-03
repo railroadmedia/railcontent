@@ -737,7 +737,7 @@
 
             <div class="relative">
                 <p
-                    class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower text-black">
+                    class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2 text-black">
                     <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong>
                 </p>
                 <table id="comparison-table"

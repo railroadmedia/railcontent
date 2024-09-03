@@ -39,7 +39,7 @@
                         "url" => "/chord-hacks",
                     ],
                     "Getting Started On The Piano"=> [
-                        "url" => "/getting-started",
+                        "url" => "/getting-started-on-the-piano",
                     ],
                     "Sight Reading Made Simple"=> [
                         "url" => "/sight-reading-made-simple",
