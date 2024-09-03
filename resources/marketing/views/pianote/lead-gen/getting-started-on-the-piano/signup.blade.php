@@ -19,6 +19,10 @@
             font-size:18px;
             padding:16px 25px;
         }
+         .join.smaller.sticky-button {
+            font-size:16px;
+            padding:14px 25px;
+        }
 
         input {
             color:#8D8D8D !important;
@@ -118,9 +122,14 @@
     </style>
 @endsection
 
+<div class="px-2 sm:px-0 w-full z-[60] sticky top-[40px] md:top-[56px] py-2" style="background: rgba(2, 8, 21, 0.93);">
+    <div class="sm:pr-10 md:pr-20 flex items-center justify-center md:justify-end">
+        <a class="join smaller sticky-button w-11/12 sm:max-w-[200px] anchor-slide top-0" href="#course" style="background:transparent;">Course Outline</a>
+        <a class="join smaller sticky-button w-11/12 sm:max-w-[240px] bg-pianote anchor-slide" href="#final">Get Started</a>
+    </div>
+</div>
+
 @section('page-body')
-
-
     <header class="px-5 sm:px-6 pt-10 sm:pt-14 pb-20 md:pb-24 lg:py-20" style="background:#f1f7fe;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -332,7 +341,8 @@
                 <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/tablet.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/tablet.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
-        </div>   
+        </div>  
+        <div id="course"></div> 
     </section>
 
     <section class="text-center pb-4">
@@ -357,7 +367,7 @@
                     [
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/thumb-03.webp',
                         'title' => 'Lesson 3',
-                        'subtitle' => 'Learn Your First Popular Chord Progression',
+                        'subtitle' => 'Learn Your First Chord Progression',
                         'desc' => 'You\'re playing real music now! In this lesson, learn one of the most popular chord progressions in modern music. This beginner-friendly progression is your ticket to playing hundreds of beloved classics like "Can\'t Help Falling in Love" by Elvis Presley and "Let It Be" by The Beatles.',
                     ],
                     [
