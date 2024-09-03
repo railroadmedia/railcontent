@@ -12,15 +12,14 @@
     }">
 
     <div class="container mx-auto max-w-6xl mb-12">
-        <h2 class="font-lexend uppercase leading-none"><strong>
-                @if($theme != 'musora')
-                    Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
-                @else
-                    {!! $header !!}
-                @endif
+        <h2 class="leading-none"><strong>
+                    @if (!empty($header))
+                        {!! $header !!}
+                    @endif
             </strong></h2>
-        <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
-        <p class="mx-auto mb-7">
+        <p class="mx-auto my-5">
+                <img alt="star ratings" class="h-7 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/stars.svg">
+
             Rated 4.8/5 based on <strong class="font-black">
                 @if($theme == 'drumeo')
                     {{ number_format(2023) }}
@@ -84,7 +83,7 @@
                         <ul class="splide__list">
                         @foreach ($testimonials as $index => $testimonial)
                                 <li class="splide__slide flex px-1">
-                                    <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
+                                    <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300"
                                     @if($index % 2 == 0 && isset($bgSplide))
                                         style="background: {{ $bgSplide }};"
                                     @else

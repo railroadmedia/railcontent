@@ -1,17 +1,15 @@
 <div id="testimonials" class="anchor"></div>
 <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5"
-    @isset($bgColor)
+    @if (!empty($bgColor))
         style="background: {{ $bgColor }};"
-    @else
-        style="background:linear-gradient(to bottom, #fff, #F6F8FC);"
-    @endisset
+    @endif
     x-data="{
         @foreach ($testimonials as $testimonial)
             {{ str_replace(' ', '', $testimonial['name']) }} : false, @endforeach
     }">
 
     <div class="container mx-auto max-w-6xl mb-12">
-        <h2 class="font-lexend uppercase leading-none"><strong>
+        <h2 class="font-lexend uppercase leading-none" @isset($headerBgColor) style="background: {{ $headerBgColor }};" @endisset><strong>
                 @if ($theme != 'musora')
                     Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
                 @else
@@ -21,7 +19,7 @@
         <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy"
             onload="this.classList.remove('opacity-0')"
             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
-        <p class="mx-auto mb-7">
+        <p class="mx-auto mb-7" @isset($subheaderBgColor) style="background: {{ $subheaderBgColor }};" @endisset>
             Rated 4.8/5 based on <strong class="font-black">
                 @if ($theme == 'drumeo')
                     {{ number_format(2023) }}
@@ -98,7 +96,7 @@
                         @foreach ($testimonials as $index => $testimonial)
                         <li class="splide__slide flex min-h-[290px] md:min-h-[390px]">
                             <div class="flex flex-wrap items-start w-full mb-5 sm:mb-8 relative px-2 pt-2 pb-5 rounded-xl bg-cover bg-top"
-                                style="background-image: url('{{ $testimonial['avatar'] }}');"
+                                style="background-image: url('{{ $testimonial['avatar'] }}'); @isset($splideCardBgColor) background-color: {{ $splideCardBgColor }}; @endisset"
                                 @if (!empty($testimonial['video']))
                                     x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;"
                                 @endif
@@ -144,4 +142,3 @@
         @endif
     @endforeach
 </section>
-

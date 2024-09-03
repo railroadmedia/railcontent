@@ -40,6 +40,8 @@ Route::domain('{pianoteDomain}')
                 Route::get('/read-music', [SalesController::class, 'readMusic']);
                 Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
                 Route::get('/practice-kit', [SalesController::class, 'practiceKit']);
+                Route::get('/classical-piano-collection', [SalesController::class, 'classicalPianoCollection']);
+                Route::get('/classical-piano-collection-membership', [SalesController::class, 'classicalPianoCollectionMembership']);
             }
         );
 
