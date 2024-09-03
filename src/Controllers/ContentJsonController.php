@@ -145,10 +145,8 @@ class ContentJsonController extends Controller
     {
         $slightlyHigherCount = 20;
         $contentTypes = array_map('strtolower', $contentTypes);
-        if ($brand == 'pianote' && (
-                in_array('podcasts', $contentTypes) ||
-                in_array('boot-camps', $contentTypes) ||
-                in_array('song-tutorial', $contentTypes))) {
+        $needleContentTypes = ['podcasts', 'boot-camps', 'song-tutorial'];
+        if ($brand == 'pianote' && array_intersect($needleContentTypes, $contentTypes)) {
             return $slightlyHigherCount;
         } else if ($brand == 'guitareo' && in_array('recording', $contentTypes)) {
             return $slightlyHigherCount; //archives
@@ -156,12 +154,9 @@ class ContentJsonController extends Controller
             return 12;
         } else{
             $needleContentTypes = ['song', 'workout', 'course', 'quick-tips', 'student-focus'];
-            foreach ($needleContentTypes as $needle) {
-                if (in_array($needle, $contentTypes)) {
-                    return $slightlyHigherCount;
-                }
+            if (array_intersect($needleContentTypes, $contentTypes)) {
+                return $slightlyHigherCount;
             }
-
         }
         return $defaultCount;
     }
