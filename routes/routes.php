@@ -50,6 +50,11 @@ Route::group(
                 )->name('content.get-by-parent-id');
 
                 Route::get(
+                    '/content/vimeo-data/{vimeoId}',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getVimeoData'
+                )->name('content.vimeo-data');
+
+                Route::get(
                     '/content/child/{childId}/{type}',
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByChildIdWhereType'
                 )->name('content.get-by-child-id');

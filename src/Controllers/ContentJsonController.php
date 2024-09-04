@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidationFactory;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Enums\RecommenderSection;
@@ -24,35 +25,19 @@ use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentJsonController extends Controller
 {
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * @var ValidationFactory
-     */
-    private $validationFactory;
-
-    /**
-     * @var UserPlaylistsService
-     */
-    private $userPlaylistsService;
 
     /**
      * @param ContentService $contentService
      * @param ValidationFactory $validationFactory
      * @param UserPlaylistsService $userPlaylistsService
+     * @param ProductProviderInterface $productProvider
      */
     public function __construct(
-        ContentService $contentService,
-        ValidationFactory $validationFactory,
-        UserPlaylistsService $userPlaylistsService
+        private ContentService $contentService,
+        private ValidationFactory $validationFactory,
+        private UserPlaylistsService $userPlaylistsService,
+        private ProductProviderInterface $productProvider,
     ) {
-        $this->contentService = $contentService;
-        $this->validationFactory = $validationFactory;
-        $this->userPlaylistsService = $userPlaylistsService;
-
         $this->middleware(ConfigService::$controllerMiddleware);
     }
 
@@ -542,5 +527,20 @@ class ContentJsonController extends Controller
     public function countLessonsAndAssignments($contentId)
     {
         return $this->contentService->countLessonsAndAssignments($contentId);
+    }
+
+    /**
+     * @param $vimeoId
+     * @return array
+     */
+    public function getVimeoData($vimeoId)
+    {
+        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
+        $response = [
+            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
+            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
+            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+        return reply()->json($response);
     }
 }
