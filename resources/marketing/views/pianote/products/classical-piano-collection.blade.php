@@ -119,7 +119,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-   
+
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
@@ -144,7 +144,7 @@
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
             src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
     </header>
-    
+
     @php
         $items = [
             '5 FULL-LENGTH <br class="hidden md:block lg:hidden">TUTORIALS',
@@ -191,7 +191,7 @@
         ];
     @endphp
     <section class="px-4 py-10 sm:py-14 lg:py-20 text-black bg-white">
-        <div class="max-w-2xl mx-auto text-center"> 
+        <div class="max-w-2xl mx-auto text-center">
             <h2 class="mb-7 playfair leading-none">Do you wish you could <br><strong>play these beautiful pieces?</strong></h2>
             <p class="mb-4 sm:mb-10">From Chopin to Beethoven, these five classical piano pieces are timeless. Just imagine what it would <strong><em>feel like</em></strong> to play them -- rather than just listen to them.</p>
         </div>
@@ -273,7 +273,7 @@
     @endphp
     <section class="text-center px-x py-10 sm:pt-16" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/bg.webp'); background-size: cover; background-position: center;">
         <div class="container max-w-4xl mx-auto">
-            <div class="max-w-2xl mx-auto text-center mb-4"> 
+            <div class="max-w-2xl mx-auto text-center mb-4">
                 <h2 class="playfair text-3xl">We’re making Classical <br class="inline sm:hidden"> — <strong> Accessible </strong></h2>
                 <p class="leading-normal my-2 sm:mb-8">
                     Classical piano has a reputation. It can seem snobby, even elitist. The Classical Piano Collection takes away the pretense and makes classical piano accessible. <br><br>
@@ -315,10 +315,10 @@
         </div>
     </section>
 
-   
+
     <section class="teacher-section px-4 sm:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="trailer=true">
         <h1 class="text-white text-center pb-96 playfair leading-snug tracking-none font-normal px-4 pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
-       
+
         <div class="container mx-auto max-w-4xl relative text-left pt-92 md:pt-96">
             <div class="pb-28 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
                 <div class="">
@@ -349,8 +349,8 @@
             </div>
         </div>
     </section>
-     
-    
+
+
     @php
         $teachers = [
             [
@@ -410,9 +410,9 @@
 
     @php
         $logo = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/guarantee.svg';
-        $guaranteeText = "You want to play beautiful classical piano. And if that doesn’t happen… 
+        $guaranteeText = "You want to play beautiful classical piano. And if that doesn’t happen…
         <br><br>You shouldn’t have to pay.
-        <br><br> We’re committed to giving you the best lessons and support to play these beautiful songs. But we know it takes time. That’s why you’ll have 90 days to try the lessons risk-free. 
+        <br><br> We’re committed to giving you the best lessons and support to play these beautiful songs. But we know it takes time. That’s why you’ll have 90 days to try the lessons risk-free.
         <br><br>If you’re not playing “Moonlight Sonata” or “Für Elise” (or at least making progress), email support@pianote.com within 90 days for a FULL refund.";
         $guaranteeHeader = "<strong>The Play Beautiful <br class='inline sm:hidden'> Guarantee</strong>";
     @endphp
@@ -421,7 +421,7 @@
 
     <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color: #111729; border: 1px solid #111729;">
         <div class="container max-w-5xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" 
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0"
                 src="{{ $logo }}" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="max-w-2xl mx-auto mt-6">
                 <h3 class="my-4 sm:my-6 lg:my-8">{!! $guaranteeHeader !!}</h3>
@@ -465,7 +465,7 @@
             ]
         ];
     @endphp
-    
+
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background-color:#F6F5F4;" id="final">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
@@ -480,7 +480,7 @@
                         @endforeach
                     </div>
                 </div>
-    
+
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
@@ -495,7 +495,7 @@
                         @endif
                         <p class="inline-block text-xs text-black tracking-tighter">One time payment.</p><br>
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">get started</div>
-    
+
                         <div class="text-xs text-pianote">
                             <span x-cloak x-data="timer()" x-init="countdown()">
                                 <strong>Discount ends in:</strong>
@@ -515,7 +515,7 @@
                             @endforeach
                         </p>
                     </a>
-                    <a href="/shop/classical-piano-collection-membership"
+                    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[classical-piano-pieces]=1&products[taktell-piccolo-metronome]=1&redirect=/order&locked=true"
                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 lg:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-xs mb-2 px-4 tracking-wider text-black">LAUNCH MEMBERSHIP SPECIAL</p>
                         <h3 class="text-black"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
@@ -555,10 +555,12 @@
                         </p>
                     </a>
                 </div>
+                <a role="link" class="inline-block mx-auto mt-5 sm:mt-7 text-black" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&redirect=/order&locked=true">
+                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> <br class="hidden sm:inline"> Click here to just grab your digital lesson bundle.</em></u></p></a>
             </div>
         </div>
     </section>
-   
+
 
     @include('_partials.components.video-modal', [
         'name' => 'Bach',
@@ -587,7 +589,7 @@
     ])
 
        <!-- TODO:Add correct date -->
-    @include('_partials.components.countdown', [    
+    @include('_partials.components.countdown', [
         'countdownDate' => '2024-09-30 00:00:00',
         'promoVersion' => false
     ])
