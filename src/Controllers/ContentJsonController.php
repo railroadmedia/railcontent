@@ -541,6 +541,6 @@ class ContentJsonController extends Controller
             'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
             'length_in_seconds' => $content['length_in_seconds'] ?? 0,
         ];
-        return reply()->json($response);
+        return $response;
     }
 }
