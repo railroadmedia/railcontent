@@ -100,6 +100,7 @@
 
         .join {
             font-size: 1.4rem;
+            padding:18px 5%;
         }
     
         @if(!empty($trialVersion))
@@ -227,101 +228,145 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-5">
                 <h5 class="uppercase text-pianote"><strong>Step 1</strong></h5>
-                <p class="py-5 tracking-tight leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
+                <p class="py-5 tracking-tight leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br class="hidden md:block"> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
-                       x-data="{
-                        init() {
-                            new Splide(this.$refs.splide, {
-                                classes: {
-                                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                    prev: 'splide__arrow--prev your-class-prev hidden', 
-                                    next: 'splide__arrow--next your-class-next -right-1',
-                                    pagination: 'splide__pagination flex -bottom-10',
-                                },
-                                padding: '3rem',
-                                perPage: 4,
-                                perMove: 1,
-                                type: 'slide', 
-                                start: 0, 
-                                focus: 0,
-                                interval: 2000,
-                                lazyLoad: 'nearby',
-                                breakpoints: {
-                                    1020: {
-                                        padding: '2rem',
+                        x-data="{
+                            init() {
+                                new Splide(this.$refs.splide, {
+                                    classes: {
+                                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                        prev: 'splide__arrow--prev your-class-prev hidden',
+                                        next: 'splide__arrow--next your-class-next -right-1',
+                                        pagination: 'splide__pagination flex -bottom-10',
                                     },
-                                    768: {
-                                        padding: '3rem',
-                                        perPage: 3,
-                                        drag: 'free',
-                                        snap: false,
+                                    padding: '3rem',
+                                    perPage: 4,
+                                    perMove: 1,
+                                    type: 'slide',
+                                    start: 0,
+                                    focus: 0,
+                                    interval: 2000,
+                                    lazyLoad: 'nearby',
+                                    breakpoints: {
+                                        1020: {
+                                            padding: '2rem',
+                                        },
+                                        768: {
+                                            padding: '3rem',
+                                            perPage: 3,
+                                            drag: 'free',
+                                            snap: false,
+                                        },
+                                        620: {
+                                            padding: '1rem',
+                                            perPage: 2,
+                                            arrows: false,
+                                        },
                                     },
-                                    620: {
-                                        padding: '1rem',
-                                        perPage: 2,
-                                        arrows: false,
-                                    },
-                                },
-                            }).mount()
-                        },
-                    }"
-                >
+                                }).mount()
+                            },
+                        }"
+                    >
                         <div x-ref="splide" class="splide mb-20 sm:mb-10">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
                                         $packs = [
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/cpc.jpg",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/cpc-logo.png",
+                                                "h" => "11",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/EC.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/EC-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Kevin Castro",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Jordan Rudess",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Jemma Heigis",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Kevin Castro",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LOI.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LI-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Justin Stanton",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Devid Bennett",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Ben Dunnill",
                                             ],
-                                        ]
+                                        ];
                                     @endphp
-                                    @foreach ($packs as $image)
+                                    @foreach ($packs as $pack)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
                                                 <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
+                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$pack['image']}}">
                                                     <img
                                                         class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}"
                                                         onload="this.classList.remove('opacity-0');"
                                                     />
                                                 </picture>
+                                                <div class="absolute bottom-0 left-0 w-full text-white p-2 flex flex-col items-center">
+                                                    @if (!empty($pack['logo']))
+                                                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $pack['logo'] }}" @if (!empty($pack['name'])) alt="{{ $pack['name'] }} @endif" class="h-{{ $pack['h'] }} mb-1">
+                                                    @endif
+                                                    @if (!empty($pack['name']))
+                                                        <span class="text-xs py-1">{{ $pack['name'] }}</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </li>
                                     @endforeach
@@ -331,8 +376,7 @@
                     </div>
                 </div>
             </div>
-
-                        <h4 class="leading-tight text-pianote my-4">
+            <h4 class="leading-tight text-pianote my-4">
                 <i class="fas fa-arrow-down"></i>
             </h4>
             
@@ -443,13 +487,13 @@
           
             </div>
         </div>
-        <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
+                <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
             @foreach ($gettings as $key => $getting)
-                <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }">
-                    <button class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl" @click="open = !open">
-                       <strong> <span x-show="!open" class="text-2xl py-2">{!! $getting['title'] !!} {!! $getting['value'] !!}</strong>
+                <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }" @click="open = !open">
+                    <div class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl">
+                        <strong><span x-show="!open" class="text-2xl py-2">{!! $getting['title'] !!} {!! $getting['value'] !!}</strong>
                         <span x-show="!open" x-text="open ? '-' : '+'" class="text-2xl"></span></span>
-                    </button>
+                    </div>
                     <div x-show="open" class="p-4 bg-white">
                         <img class="rounded-lg mb-4" loading="lazy" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                         <span x-show="open" class="text-2xl"><strong>{!! $getting['title'] !!} {!! $getting['value'] !!}</strong></span>
@@ -459,16 +503,16 @@
             @endforeach
         </div>
           <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="#final">claim your bonuses</a>
-            <div class="container mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
+            <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
              <p class="text-xs">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
             <a class="underline cursor-pointer text-xs" href="">Click here to choose that option.</a>
     </section>
 
-    <section class="px-5 sm:px-6 pt-12 sm:pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
+    <section class="px-5 sm:px-6 pt-10 md::pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
         <div class="container max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row gap-8">
-                <div class="flex flex-col justify-center text-black pb-12 lg:pb-16 w-full md:w-2/3 lg:w-1/2">
-                    <div class="text-2xl font-bold md:text-4xl">
+                <div class="flex flex-col justify-center text-black pb-4 md:pb-10 lg:pb-16 w-full md:w-5/12 text-left sm:text-center md:text-left">
+                    <div class="text-2xl font-bold md:text-3xl">
                         <strong>
                             And we’re <br class="block sm:hidden">
                             <div class="inline-block bg-pianote uppercase text-white px-2 rounded">LIVE</div> <br class="hidden md:block lg:hidden"> in 3, 2, 1…
@@ -485,7 +529,7 @@
                     </p>
                     <a class="anchor-slide join w-full sm:max-w-[440px] bg-pianote mx-auto md:mx-0" href="#final">GET STARTED</a>
                 </div>
-                <div class="w-full md:w-2/3 lg:w-1/2 flex items-end">
+                <div class="w-full sm:w-1/2 md:w-7/12 flex items-end mx-auto">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/kevin-lisa-live.png" alt="Kevin and Lisa" class="object-cover">
                 </div>
             </div>
