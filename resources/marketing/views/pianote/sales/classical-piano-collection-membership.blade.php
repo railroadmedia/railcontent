@@ -273,56 +273,80 @@
                                     @php
                                         $packs = [
                                             [
-                                                "image" => "marketing/pianote/products/classical-piano-collection/classical-piano-collection-card.png",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/cpc.jpg",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/cpc-logo.png",
+                                                "h" => "11",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/EC.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/EC-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
-                                             [
+                                            [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101-logo.webp",
+                                                "h" => "12",
+                                                "name" => "Lisa Witt",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Kevin Castro",
                                             ],
-                                             [
+                                            [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Jordan Rudess",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Jemma Heigis",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Kevin Castro",
                                             ],
-                                             [
+                                            [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LOI.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LI-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Justin Stanton",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Devid Bennett",
                                             ],
                                             [
                                                 "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT.webp",
                                                 "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT-logo.webp",
+                                                "h" => "16",
+                                                "name" => "Ben Dunnill",
                                             ],
-                                            
                                         ];
                                     @endphp
-                                     @foreach ($packs as $pack)
+                                    @foreach ($packs as $pack)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
                                                 <picture>
@@ -336,10 +360,10 @@
                                                 </picture>
                                                 <div class="absolute bottom-0 left-0 w-full text-white p-2 flex flex-col items-center">
                                                     @if (!empty($pack['logo']))
-                                                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $pack['logo'] }}" @if (!empty($pack['name'])) alt="{{ $pack['name'] }} @endif logo" class="h-12 mb-1">
+                                                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $pack['logo'] }}" @if (!empty($pack['name'])) alt="{{ $pack['name'] }} @endif" class="h-{{ $pack['h'] }} mb-1">
                                                     @endif
                                                     @if (!empty($pack['name']))
-                                                        <span>{{ $pack['name'] }}</span>
+                                                        <span class="text-xs py-1">{{ $pack['name'] }}</span>
                                                     @endif
                                                 </div>
                                             </div>
