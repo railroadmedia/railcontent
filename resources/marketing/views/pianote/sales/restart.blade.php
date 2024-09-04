@@ -143,20 +143,26 @@
                         <div class="px-5 sm:px-0">
                             <img class="h-24 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1360x0/filters:quality(95)/marketing/pianote/promos/may/winback-header.webp">
                             <h1 class="rotater-text my-4 lg:my-5"><strong>Save 50% On <br class="inline sm:hidden"> Your First Year</strong></h1>
-                            <h6 class="leading-normal mb-4 sm:mb-2">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Pianote.<br>
-                                <strong class="text-musora"><em>Only available until June 30th.<br>
+                            <h6 class="leading-normal">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Pianote.<br>
+                                <strong class="text-musora"><em>Only available until September 30th.<br>
+                                        <span x-cloak x-data="timer()" x-init="countdown()">
+                                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                         </span>
+                                        left!</em></strong></h6>
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 mx-auto sm:max-w-xs">
 
-{{--                                                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                                                                 </span>--}}
-{{--                                        left!--}}
-                                    </em></strong></h6>
-                            <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 mx-auto sm:max-w-xs">
-{{--                                <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>--}}
+                                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
+                                    <span class="w-full join smaller sold-out mb-2">Opens September 12th</span>
+                                @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
+                                    <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>
+                                @else
+                                    <span class="w-full join smaller sold-out mb-2">this offer has now ended</span>
+                                @endif
+
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                                     <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #ba0b51;color: #ffac00;"></i>
@@ -290,22 +296,27 @@
                     </div>
                     <br>
                     <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Pianote</span> Membership<br class="hidden sm:inline">  today and save 50%.</strong></h3>
-                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.<br>
-{{--                                <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                                                                 </span>--}}
-{{--                                left!--}}
+                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until September 30th.<br>
+                                <span x-cloak x-data="timer()" x-init="countdown()">
+                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                                                 </span>
+                                left!
                             </em></strong></p>
 
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
-{{--                <a class="join green" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">GET Started »</a>--}}
-                <a class="join sold-out" >THIS OFFER HAS NOW ENDED</a>
+                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
+                    <span class="join sold-out">Opens September 12th</span>
+                @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
+                    <a class="join green" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&promo-code=restart">GET Started »</a>
+                @else
+                    <span class="join sold-out">this offer has now ended</span>
+                @endif
             </div>
         </section>
 
@@ -318,7 +329,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
         @include('_partials.components.countdown',[
-        'countdownDate' => '2024-07-01 00:00:00',
+        'countdownDate' => '2024-10-01 00:00:00',
         'promoVersion' => false
         ])
 @stop
