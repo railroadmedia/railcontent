@@ -267,70 +267,87 @@
                         },
                     }"
                 >
-                        <div x-ref="splide" class="splide mb-20 sm:mb-10">
+                                                <div x-ref="splide" class="splide mb-20 sm:mb-10">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
                                         $packs = [
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/classical-piano-collection-card.png",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/NPPSH-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/EC.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/EC-logo.webp",
+                                            ],
+                                             [
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/RMI30D-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/LHA101-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DBP-logo.webp",
+                                            ],
+                                             [
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/30DTBT-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LPS-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L251-logo.webp",
+                                            ],
+                                             [
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LOI.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LI-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5L1564-logo.webp",
                                             ],
                                             [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
+                                                "image" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT.webp",
+                                                "logo" => "marketing/pianote/products/classical-piano-collection/pack-section/5LRT-logo.webp",
                                             ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
-                                            ],
-                                        ]
+                                            
+                                        ];
                                     @endphp
-                                    @foreach ($packs as $image)
+                                     @foreach ($packs as $pack)
                                         <li class="splide__slide flex flex-col items-center justify-start px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
                                                 <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
+                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$pack['image']}}">
                                                     <img
                                                         class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}"
                                                         onload="this.classList.remove('opacity-0');"
                                                     />
                                                 </picture>
+                                                <div class="absolute bottom-0 left-0 w-full text-white p-2 flex flex-col items-center">
+                                                    @if (!empty($pack['logo']))
+                                                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $pack['logo'] }}" @if (!empty($pack['name'])) alt="{{ $pack['name'] }} @endif logo" class="h-12 mb-1">
+                                                    @endif
+                                                    @if (!empty($pack['name']))
+                                                        <span>{{ $pack['name'] }}</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
                         <h4 class="leading-tight text-pianote my-4">
                 <i class="fas fa-arrow-down"></i>
