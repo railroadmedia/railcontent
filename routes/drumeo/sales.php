@@ -55,6 +55,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
         Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
         Route::get('/guitarcenter', [SalesController::class, 'guitarcenter']);
+        Route::get('/GuitarCenter', [SalesController::class, 'guitarcenter']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/trial2', [SalesController::class, 'trial']);
