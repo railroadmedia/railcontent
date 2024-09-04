@@ -96,9 +96,9 @@
         background-size: cover;
         }
 
-        @media (max-width: 649px) {
+        @media (max-width: 789px) {
             .teacher-section {
-                background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/demo-bg-mobile.webp') no-repeat center;
+                background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/demo-bg-m-cut.png') no-repeat center;
                 background-size: cover;
             }
         }
@@ -156,7 +156,7 @@
     <section class="bg-black text-white px-2 sm:p-2 md:px-10">
         <div class="container max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 py-4 md:py-0 md:gap-4">
             @foreach ($items as $item)
-                <div class="flex flex-col items-center justify-center uppercase text-center lg:py-6">
+                <div class="flex flex-col items-center justify-center uppercase text-center py-2 lg:py-6">
                     <p class="text-xs md:text-sm tracking-tight py-2 sm:py-0 flex items-center justify-center">
                         <i class="fa fa-check text-pianote mr-2"></i> {!! $item !!}
                     </p>
@@ -218,6 +218,10 @@
                                     perPage: 2.5,
                                 },
                                 560: {
+                                    perPage: 1.5,
+                                    focus: 2,
+                                },
+                                 420: {
                                     perPage: 1,
                                 },
                             },
@@ -316,12 +320,12 @@
     </section>
 
 
-    <section class="teacher-section px-4 sm:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="trailer=true">
+    <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="trailer=true">
         <h1 class="text-white text-center pb-96 playfair leading-snug tracking-none font-normal px-4 pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
 
-        <div class="container mx-auto max-w-4xl relative text-left pt-92 md:px-10">
-            <div class="pb-28 md:pb-10 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
-                <div class="">
+        <div class="container mx-auto max-w-4xl relative text-left pt-96 md:pt-80 md:px-10">
+            <div class="pb-10 sm:pb-28 md:pb-10 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
+                <div class="leading-relaxed text-base px-4 sm:px-0">
                     <p class="mb-4">
                         You know the drill.
                     </p>
@@ -335,7 +339,7 @@
                        Imagine how much faster you would improve if your teacher was sitting next to you while you practiced.
                     </p>
                 </div>
-                <div class="">
+                <div class="leading-relaxed text-base px-4 sm:px-0">
                     <p class="mb-4">
                        <strong>That’s what you’ll get with the Classical Piano Collection.</strong>
                     </p>
