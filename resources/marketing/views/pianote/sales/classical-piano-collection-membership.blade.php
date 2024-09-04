@@ -459,15 +459,15 @@
             @endforeach
         </div>
           <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="#final">claim your bonuses</a>
-            <div class="container mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
+            <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
              <p class="text-xs">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
             <a class="underline cursor-pointer text-xs" href="">Click here to choose that option.</a>
     </section>
 
-    <section class="px-5 sm:px-6 pt-12 sm:pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
+    <section class="px-5 sm:px-6 pt-10 md::pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
         <div class="container max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row gap-8">
-                <div class="flex flex-col justify-center text-black pb-12 lg:pb-16 w-full md:w-2/3 lg:w-1/2">
+                <div class="flex flex-col justify-center text-black pb-4 md:pb-10 lg:pb-16 w-full md:w-5/12 text-left sm:text-center md:text-left">
                     <div class="text-2xl font-bold md:text-4xl">
                         <strong>
                             And we’re <br class="block sm:hidden">
@@ -485,7 +485,7 @@
                     </p>
                     <a class="anchor-slide join w-full sm:max-w-[440px] bg-pianote mx-auto md:mx-0" href="#final">GET STARTED</a>
                 </div>
-                <div class="w-full md:w-2/3 lg:w-1/2 flex items-end">
+                <div class="w-full sm:w-1/2 md:w-7/12 flex items-end mx-auto">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/kevin-lisa-live.png" alt="Kevin and Lisa" class="object-cover">
                 </div>
             </div>
