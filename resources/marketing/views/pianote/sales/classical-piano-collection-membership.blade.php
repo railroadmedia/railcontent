@@ -100,6 +100,7 @@
 
         .join {
             font-size: 1.4rem;
+            padding:18px 5%;
         }
     
         @if(!empty($trialVersion))
@@ -227,47 +228,47 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-5">
                 <h5 class="uppercase text-pianote"><strong>Step 1</strong></h5>
-                <p class="py-5 tracking-tight leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
+                <p class="py-5 tracking-tight leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br class="hidden md:block"> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
-                       x-data="{
-                        init() {
-                            new Splide(this.$refs.splide, {
-                                classes: {
-                                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                    prev: 'splide__arrow--prev your-class-prev hidden', 
-                                    next: 'splide__arrow--next your-class-next -right-1',
-                                    pagination: 'splide__pagination flex -bottom-10',
-                                },
-                                padding: '3rem',
-                                perPage: 4,
-                                perMove: 1,
-                                type: 'slide', 
-                                start: 0, 
-                                focus: 0,
-                                interval: 2000,
-                                lazyLoad: 'nearby',
-                                breakpoints: {
-                                    1020: {
-                                        padding: '2rem',
+                        x-data="{
+                            init() {
+                                new Splide(this.$refs.splide, {
+                                    classes: {
+                                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                        prev: 'splide__arrow--prev your-class-prev hidden',
+                                        next: 'splide__arrow--next your-class-next -right-1',
+                                        pagination: 'splide__pagination flex -bottom-10',
                                     },
-                                    768: {
-                                        padding: '3rem',
-                                        perPage: 3,
-                                        drag: 'free',
-                                        snap: false,
+                                    padding: '3rem',
+                                    perPage: 4,
+                                    perMove: 1,
+                                    type: 'slide',
+                                    start: 0,
+                                    focus: 0,
+                                    interval: 2000,
+                                    lazyLoad: 'nearby',
+                                    breakpoints: {
+                                        1020: {
+                                            padding: '2rem',
+                                        },
+                                        768: {
+                                            padding: '3rem',
+                                            perPage: 3,
+                                            drag: 'free',
+                                            snap: false,
+                                        },
+                                        620: {
+                                            padding: '1rem',
+                                            perPage: 2,
+                                            arrows: false,
+                                        },
                                     },
-                                    620: {
-                                        padding: '1rem',
-                                        perPage: 2,
-                                        arrows: false,
-                                    },
-                                },
-                            }).mount()
-                        },
-                    }"
-                >
-                                                <div x-ref="splide" class="splide mb-20 sm:mb-10">
+                                }).mount()
+                            },
+                        }"
+                    >
+                        <div x-ref="splide" class="splide mb-20 sm:mb-10">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
@@ -372,8 +373,10 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <h4 class="leading-tight text-pianote my-4">
+                    </div>
+                </div>
+            </div>
+            <h4 class="leading-tight text-pianote my-4">
                 <i class="fas fa-arrow-down"></i>
             </h4>
             
@@ -484,13 +487,13 @@
           
             </div>
         </div>
-        <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
+                <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
             @foreach ($gettings as $key => $getting)
-                <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }">
-                    <button class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl" @click="open = !open">
-                       <strong> <span x-show="!open" class="text-2xl py-2">{!! $getting['title'] !!} {!! $getting['value'] !!}</strong>
+                <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }" @click="open = !open">
+                    <div class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl">
+                        <strong><span x-show="!open" class="text-2xl py-2">{!! $getting['title'] !!} {!! $getting['value'] !!}</strong>
                         <span x-show="!open" x-text="open ? '-' : '+'" class="text-2xl"></span></span>
-                    </button>
+                    </div>
                     <div x-show="open" class="p-4 bg-white">
                         <img class="rounded-lg mb-4" loading="lazy" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                         <span x-show="open" class="text-2xl"><strong>{!! $getting['title'] !!} {!! $getting['value'] !!}</strong></span>
@@ -509,7 +512,7 @@
         <div class="container max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="flex flex-col justify-center text-black pb-4 md:pb-10 lg:pb-16 w-full md:w-5/12 text-left sm:text-center md:text-left">
-                    <div class="text-2xl font-bold md:text-4xl">
+                    <div class="text-2xl font-bold md:text-3xl">
                         <strong>
                             And we’re <br class="block sm:hidden">
                             <div class="inline-block bg-pianote uppercase text-white px-2 rounded">LIVE</div> <br class="hidden md:block lg:hidden"> in 3, 2, 1…
