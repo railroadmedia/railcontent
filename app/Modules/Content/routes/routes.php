@@ -22,7 +22,7 @@ Route::prefix('content')
         )->name('content.in_progress');
 
         Route::get(
-            '{contentId}/user_data/',
+            '{contentId}/user_data/{user?}',
             [ContentMetadataController::class, 'getContentPageUserData']
         )->name('content.user_data');
     });

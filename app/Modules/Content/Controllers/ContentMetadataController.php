@@ -86,12 +86,12 @@ class ContentMetadataController extends Controller
         return response()->json([ProgressState::Started->value => $inProgress]);
     }
 
-    public function getContentPageUserData(int $contentId): array
+    public function getContentPageUserData(int $contentId, ?User $user = null): array
     {
-        $userId = user()->id;
-        $isLiked = ContentLike::isContentLikedByUser($contentId, $userId);
+        //$userId = user()->id;
+        $isLiked = ContentLike::isContentLikedByUser($contentId, $user->id);
         $likedCount = ContentLike::getContentLikedCount($contentId);
-        $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $userId);
+        $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
         return [
             'isLiked' =>$isLiked ,
             'likeCount' => $likedCount,
