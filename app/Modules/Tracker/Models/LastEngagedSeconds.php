@@ -17,4 +17,11 @@ class LastEngagedSeconds extends Model
 {
     protected $table = 'railtracker_content_last_engaged_seconds';
     protected $primaryKey = 'id';
+
+    public static function getResumeTimeSeconds(int $contentId, int $userId): int
+    {
+        return LastEngagedSeconds::query()
+            ->where('user_id', '=', $userId)
+            ->where('content_id', $contentId)->first()?->resume_time_seconds ?? 0;
+    }
 }
