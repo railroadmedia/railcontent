@@ -96,7 +96,7 @@
         background-size: cover;
         }
 
-        @media (max-width: 789px) {
+        @media (max-width: 780px) {
             .teacher-section {
                 background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/demo-bg-m-cut.png') no-repeat center;
                 background-size: cover;
@@ -124,7 +124,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <h3 class="tracking-wide leading-none">The</h3>
-                <h1 class="italic playfair text-6xl leading-none">Classical Piano</h1>
+                <h1 class="italic playfair text-5xl md:text-6xl leading-none">Classical Piano</h1>
                 <h4 class="tracking-widest uppercase">Collection</h4>
                 <h6 class="italic pt-2">Play The Most Beautiful Piano Music In The <br class="block md:hidden"> World With Step-By-Step Tutorials</h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
@@ -153,11 +153,11 @@
             'LIFETIME <br class="hidden md:block lg:hidden">ACCESS'
         ];
     @endphp
-    <section class="bg-black text-white px-2 sm:p-2 md:px-10">
-        <div class="container max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 py-4 md:py-0 md:gap-4">
+    <section class="bg-black text-white px-2 md:py-2 md:px-10">
+        <div class="container max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 py-4 md:py-0 md:gap-4">
             @foreach ($items as $item)
-                <div class="flex flex-col items-center justify-center uppercase text-center py-2 lg:py-6">
-                    <p class="text-xs md:text-sm tracking-tight py-2 sm:py-0 flex items-center justify-center">
+                <div class="flex flex-col items-left justify-center uppercase text-center py-2 lg:py-5">
+                    <p class="text-xs md:text-sm tracking-tighter flex items-center justify-center">
                         <i class="fa fa-check text-pianote mr-2"></i> {!! $item !!}
                     </p>
                 </div>
@@ -275,7 +275,7 @@
             ],
         ];
     @endphp
-    <section class="text-center px-x py-10 sm:pt-16" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/bg.webp'); background-size: cover; background-position: center;">
+        <section class="text-center px-x py-10 sm:py-16" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/bg.webp'); background-size: cover; background-position: center;">
         <div class="container max-w-4xl mx-auto">
             <div class="max-w-2xl mx-auto text-center mb-4">
                 <h2 class="playfair text-3xl">We’re making Classical <br class="inline sm:hidden"> — <strong> Accessible </strong></h2>
@@ -284,7 +284,7 @@
                     It doesn’t take months or years of lessons before you can play beautiful pieces like these. We’ve taken the fear and formality out of learning classical music.
                 </p>
             </div>
-            <div class="max-w-4xl mx-auto px-4 py-7">
+            <div class="max-w-4xl mx-auto px-4 pt-7">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
@@ -300,7 +300,7 @@
                             @endif
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== count($gettings) - 1) mb-16 md:mb-20 @else md:mb-10 @endif">
                             @if (!empty($getting['special']))
                                 <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
                                 </video>
@@ -323,8 +323,8 @@
     <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="trailer=true">
         <h1 class="text-white text-center pb-96 playfair leading-snug tracking-none font-normal px-4 pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
 
-        <div class="container mx-auto max-w-4xl relative text-left pt-96 md:pt-80 md:px-10">
-            <div class="pb-10 sm:pb-28 md:pb-10 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
+        <div class="container mx-auto max-w-5xl relative text-left pt-96 md:pt-84 lg:pt-80 md:px-10">
+            <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
                 <div class="leading-relaxed text-base px-4 sm:px-0">
                     <p class="mb-4">
                         You know the drill.
@@ -387,7 +387,7 @@
     <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(to bottom, #f2efed, #FFF);">
         <div class="container max-w-6xl mx-auto pb-16">
             <div class="container max-w-2xl mx-auto">
-                <h3 class="text-center playfair">Meet your <br> <strong>friendly piano teachers.</strong></h3>
+                <h2 class="text-center playfair leading-none pb-4">Meet your <br> <strong>friendly piano teachers.</strong></h2>
                 <p class="mb-24">With decades of experience teaching classical piano, you’ll know you’re in safe hands.</p>
             </div>
 
@@ -402,7 +402,7 @@
                         </div>
                         <br>
                         <h5 class="playfair pb-2"><strong> {!! $teacher['name'] !!}</strong></h5>
-                        <p class="text-xs lg:text-base leading-tight">
+                        <p class="text-xs lg:text-base">
                             {!! $teacher['description'] !!}
                         </p>
                     </div>
@@ -410,7 +410,6 @@
             </div>
         </div>
     </section>
-
 
     @php
         $logo = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/guarantee.svg';
@@ -469,7 +468,6 @@
             ]
         ];
     @endphp
-
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background-color:#F6F5F4;" id="final">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
