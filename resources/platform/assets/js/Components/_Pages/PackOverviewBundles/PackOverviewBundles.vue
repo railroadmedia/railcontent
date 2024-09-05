@@ -3,37 +3,37 @@
         <Breadcrumb :breadcrumbs="breadcrumbs" :class-override="breadcrumbClassOverride" />
 
         <PageHeader
-            :page-type="headerPageType"
-            title="Pack"
-            :hero-img="headerHeroImg"
-            :dark-mode-logo="headerDarkModeLogo"
-            :light-mode-logo="headerLightModeLogo"
-            :progress="headerProgress"
-            :info-data="headerInfoData"
-            :ctas="headerCtas"
-            :description="headerDescription"
+            :page-type="header?.type"
+            :title="header?.title"
+            :hero-img="header?.image"
+            :dark-mode-logo="header?.darkLogo"
+            :light-mode-logo="header?.lightLogo"
+            :progress="header?.progress"
+            :info-data="header?.infoData"
+            :ctas="header?.ctas"
+            :description="header?.description"
         />
 
         <template v-if="!isLoading">
             <div class="tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-pb-[30px]">
                 <div class="tw-my-[30px]">
-                    <h1 class="tw-text-[30px] tw-font-bold dark:tw-text-white tw-capitalize">{{ packTitle }}</h1>
+                    <h1 class="tw-text-[30px] tw-font-bold dark:tw-text-white tw-capitalize">{{ data.title }}</h1>
                 </div>
 
                 <div class="flex-wrap tw-flex md:tw-grid md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 md:tw-gap-3 ">
                     <CatalogueCard
-                        v-for="item in childContent.data"
+                        v-for="item in data.children"
                         :key="'pack grid' + item.id"
                         :item="item"
-                        :content-type="item.type"
+                        :content-type="data.type"
                         :show-my-list-action="true"
                         wrapperClassOverride="tw-w-full"
                         @addToList="addToList"
                     />
                 </div>
             </div>
-
-            <CompletionBonus :xp-bonus="xpBonus" />
+            <!-- TODO: Completion Bonus XP does not exist in data -->
+            <CompletionBonus :xp-bonus="xpBonus" /> 
         </template>
 
         <div v-else class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 tw-gap-3 tw-my-[30px]">
@@ -42,7 +42,7 @@
     </div>
 </template>
 <script setup>
-import {computed, onMounted} from "vue";
+import {ref, onMounted} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
@@ -51,6 +51,7 @@ import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 import CompletionBonus from "@collections/CompletionBonus/CompletionBonus";
 import CatalogueCard from "@collections/Catalogue/CatalogueCard";
 import SkeletonCard from '@collections/SkeletonLoader/SkeletonCard.vue';
+import { usePackPageData } from '@hooks/pages/usePackPageData';
 
 const props = defineProps({
     breadcrumbs: {
@@ -60,26 +61,6 @@ const props = defineProps({
     breadcrumbClassOverride: {
         type: String,
         default: "",
-    },
-    childContent: {
-        type: Object,
-        default: () => ({}),
-    },
-    headerCtas: {
-        type: Array,
-        default: () => [],
-    },
-    headerInfoData: {
-        type: Array,
-        default: () => [],
-    },
-    headerPageType: {
-        type: String,
-        default: "pack",
-    },
-    headerProgress: {
-        type: [Number, String],
-        default: 0,
     },
     pack: {
         type: Object,
@@ -96,29 +77,16 @@ const { isLoading } = storeToRefs(platformStore);
 
 const { addToList } = useUserCatalogueEvents({ ...props });
 
-const headerHeroImg = computed(() => {
-    return props.pack.data?.find((p) => p.key === 'header_image_url')?.value;
-})
+//Refs
+const data = ref(null);
+const header = ref(null)
 
-const headerDarkModeLogo = computed(() => {
-    return props.pack.data?.find((p) => p.key === 'dark_mode_logo_url')?.value;
-})
-
-const headerLightModeLogo = computed(() => {
-    return props.pack.data?.find((p) => p.key === 'light_mode_logo_url')?.value;
-})
-
-const headerDescription = computed(() => {
-    return props.pack.data?.find((p) => p.key === 'description')?.value || '';
-})
-
-const packTitle = computed(() => {
-    return props.pack.fields?.find((p) => p.key === 'title')?.value || '';
-})
-
-onMounted(() => {
-    setTimeout(() => {
-        platformStore.setLoadingState(false);
-    }, 2000)
+onMounted( async () => {
+    const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-bundle');
+        data.value = PackData.value;
+        //Header Data
+        header.value = PackData.value.header;
+        
+        platformStore.setLoadingState(PackLoading.value);
 })
 </script>

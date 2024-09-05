@@ -2,7 +2,7 @@
     <div
         class="tw-group tw-flex tw-items-center tw-py-[4px] tw-px-[9px] sm:tw-px-[17px] tw-h-[79px] sm:tw-h-[99px] tw-relative tw-w-[274px] sm:tw-w-[377px] lg:tw-w-auto tw-shrink-0 tw-border-[1px] tw-border-[#CBCBCD80] hover:tw-shadow-[0_4px_4px_0px_rgba(0,0,0,0.1)] dark:tw-border-none tw-bg-white dark:tw-bg-[#0020398C] hover:tw-bg-[rgba(255,255,255,0.8)] dark:hover:tw-bg-[#002039] tw-rounded-[10px]">
         <!-- Thumbnail Image -->
-        <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+        <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.web_url_path : null"
             class="tw-flex-none tw-h-[58px] sm:tw-h-[78px] tw-w-[109px] sm:tw-w-[144px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
             <div v-if="noAccess" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center">
                 <musora-icon class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
@@ -15,28 +15,28 @@
                     {{ releaseDate }}
                 </p>
             </div>
-            <img :src="mappedData.thumbnail" :alt="`${mappedData.color_title} thumbnail`"
+            <img :src="item.image" :alt="`${item.artist_name} thumbnail`"
                 class="tw-transition-opacity tw-h-[58px] sm:tw-h-[78px] tw-w-[109px] sm:tw-w-[144px] tw-rounded-[5px] tw-opacity-0"
                 :class="item.type === 'song' ? 'tw-blur-sm' : ''" loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')">
             <div v-if="item.type === 'song'"
                 class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
-                <img class="tw-h-[70px]" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
+                <img class="tw-h-[70px]" :src="item.image" :alt="item.title" />
             </div>
         </a>
 
         <!-- Instructor Name and Title -->
-        <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+        <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.web_url_path : null"
             class="tw-flex tw-flex-col tw-justify-start tw-flex-grow tw-ml-[9px] tw-font-open-sans tw-h-[58px] sm:tw-h-[78px] tw-overflow-hidden">
             <!-- Title -->
             <div
                 class="tw-text-[#00101D] dark:tw-text-white tw-text-[13px] sm:tw-text-[14px] tw-line-clamp-2 tw-font-[700] tw-leading-[21px]">
-                {{ mappedData.black_title }}
+                {{ item.title }}
             </div>
             <!-- Instructor Name -->
             <div
                 class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[11px] sm:tw-text-[12px] tw-uppercase tw-truncate tw-leading-[18px] tw-pt-[5px]">
-                {{ mappedData.color_title }}
+                {{ item.artist_name }}
             </div>
         </a>
 
@@ -97,7 +97,8 @@
     </div>
 </template>
 <script setup>
-import { computed, ref } from 'vue';
+
+import { computed, ref, onBeforeMount } from 'vue';
 import { PlusIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
@@ -108,7 +109,7 @@ import { usePlatformStore } from "../../../Stores/platform";
 //Pinia Stores
 const platformStore = usePlatformStore();
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const { userId, brand } = storeToRefs(userStore);
 
 const props = defineProps({
     item: {
@@ -118,10 +119,6 @@ const props = defineProps({
     contentType: {
         type: String,
         default: '' // Default empty string
-    },
-    userId: {
-        type: String,
-        default: ''
     },
     isAdmin: {
         type: Boolean,
@@ -149,6 +146,7 @@ const props = defineProps({
     },
 });
 
+//TODO: test how useCatalogueItem is affected by new props.item from BE....
 const {
     contentModel,
     thumbnailIcon,
@@ -161,13 +159,6 @@ const {
 const showDropdown = ref(false);
 
 const mappedData = computed(() => {
-    let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
-    }
-
-    contentModel.value.card.difficulty = difficultyValue;
-
     return contentModel.value.card
 });
 
@@ -187,7 +178,7 @@ const handleClick = (event) => {
                 section: props.trackingSection,
             }
         }).finally(() => {
-            window.location.href = props.item.url;
+            window.location.href = props.item.web_url_path;
         });
     }
 }
@@ -203,11 +194,15 @@ const closeDropdown = () => {
 const addToList = () => {
     showDropdown.value = false;
 
-    emit('addToList', { content_id: props.item.id, type: props.item.type, name: mappedData.value.black_title, description: mappedData.value.description, thumbnail_url: mappedData.value.thumbnail })
+    emit('addToList', { content_id: props.item.id, type: props.item.type, name: props.item.title, description: '', thumbnail_url: props.item.image })
 }
 
 const resetProgress = () => {
     showDropdown.value = false;
     emit('progressReset', { content_id: props.item.id });
 }
+
+onBeforeMount(()=> {
+    console.log('MiniCatalogueCard data:', props.item)
+})
 </script>

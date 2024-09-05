@@ -16,15 +16,16 @@
             </template>
         </CollectionFilterWrapper>
         <div class="tw-flex tw-flex-col tw-grow">
-            <PlayAlongsListItem v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
+            <SkeletonListCatalogueItem v-if="isPageLoading" v-for="i in 8" :key="i" />
+
+            <PlayAlongsListItem v-else-if="content.length > 0" v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
                 :index="i + 1" :item="item" :brand="brand"
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
                 @addToList="addToListEventHandler" @markAsComplete="completedEventHandler"
                 @update-track="updateTrack" />
-        </div>
-        <div v-if="content.length === 0" class="flex flex-row pa-2">
-            <div class="flex flex-column">
+
+            <div v-else-if="content.length === 0" class="flex flex-column dark:tw-text-white">
                 <p class="body mb-2">
                     We're sorry, no results were found using those filters.
                     Try removing a filter to broaden your search.
@@ -80,9 +81,12 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "@constants/brands";
 import { useFilterValues } from "@hooks/useFilterValues";
 import { useUserStore } from '@stores/user.js';
-import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
-const { getFilterValues } = useFilterValues();
+import { fetchAll } from 'musora-content-services';
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
+import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 
+const { getFilterValues } = useFilterValues();
 
 export default {
     name: 'PlayAlongs',
@@ -94,6 +98,7 @@ export default {
         Pagination,
         InputLabel,
         CollectionFilterWrapper,
+        SkeletonListCatalogueItem,
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
     inject: {
@@ -150,7 +155,7 @@ export default {
     data() {
         return {
             searchTerm: null,
-            content: this.preLoadedContent.data,
+            content: [],
             loading: false,
             currentPlaybackRate: 1,
             currentVolume: 1,
@@ -158,7 +163,7 @@ export default {
             limit: 20,
             sort: '-published_on',
             progress: '',
-            totalResults: this.preLoadedContent.meta.totalResults,
+            totalResults: 0,
             filterOptions: [],
             isKeyboardControlsEnabled: false,
             selectedFilters: [],
@@ -231,9 +236,18 @@ export default {
                 { key: `allPlayAlongs`, value: `All Play-Alongs` },
             ];
         },
+        isPageLoading(){
+            const platformStore = usePlatformStore();
+            const { isLoading } = storeToRefs(platformStore);
+
+            return isLoading.value;
+        },
     },
-    beforeMount() {
-        this.filterOptions = getFilterValues(this.preLoadedContent.meta.filterOptions);
+    async beforeMount() {
+        const platformStore = usePlatformStore();
+
+        await this.getContent(false, false);
+        platformStore.setLoadingState(false);
     },
     mounted() {
         this.audioPlayer = this.$refs.audioPlayer;
@@ -296,31 +310,48 @@ export default {
                 payload
             })
         },
-        getContent(resetPlaylist) {
-            this.loading = true;
-            return ContentService.getContent({
-                ...this.filterQueryObject,
-                brand: this.brand,
-                included_types: ['play-along'],
-                statuses: ['published'],
-                include_future: 0,
-                only_from_my_list: this.showFavoritesOnly,
-                title: this.searchTerm,
+        async getContent(resetPlaylist, showLoading = true) {
+            if(showLoading) this.loading = true;
+
+            const data = await fetchAll(this.brand, 'play-along', {
+                page: this.page,
+                limit: this.limit,
+                searchTerm: this.searchTerm,
+                sort: this.sort,
             })
-                .then((response) => {
-                    if (response) {
-                        this.content = response.data.data;
-                        this.page = response.data.meta.page;
-                        this.totalResults = response.data.meta.totalResults;
-                        this.filterOptions = getFilterValues(response.data.meta.filterOptions);
-                        this.$nextTick(() => {
-                            this.loading = false;
-                            if (resetPlaylist) {
-                                this.generateRandomPlaylist();
-                            }
-                        });
-                    }
-                });
+
+            this.content = data.entity
+            this.totalResults = data.total;
+            this.$nextTick(() => {
+                this.loading = false;
+                if (resetPlaylist) {
+                    this.generateRandomPlaylist();
+                }
+            });
+
+            // return ContentService.getContent({
+            //     ...this.filterQueryObject,
+            //     brand: this.brand,
+            //     included_types: ['play-along'],
+            //     statuses: ['published'],
+            //     include_future: 0,
+            //     only_from_my_list: this.showFavoritesOnly,
+            //     title: this.searchTerm,
+            // })
+            //     .then((response) => {
+            //         if (response) {
+            //             this.content = response.data.data;
+            //             this.page = response.data.meta.page;
+            //             this.totalResults = response.data.meta.totalResults;
+            //             this.filterOptions = getFilterValues(response.data.meta.filterOptions);
+            //             this.$nextTick(() => {
+            //                 this.loading = false;
+            //                 if (resetPlaylist) {
+            //                     this.generateRandomPlaylist();
+            //                 }
+            //             });
+            //         }
+            //     });
         },
         updateContent(resetPlaylist = false) {
             this.trackFilters();
@@ -330,31 +361,6 @@ export default {
                 this.playedContent = [];
                 return this.getContent(resetPlaylist);
             });
-        },
-        searchContent() {
-            this.loading = true;
-            return ContentService.search({
-                ...this.filterQueryObject,
-                title: this.searchTerm,
-                brand: this.brand,
-                included_types: ['play-along'],
-                statuses: ['published'],
-                include_future: 0,
-            })
-                .then((response) => {
-                    if (response) {
-                        this.content = response.data.data;
-                        this.page = response.data.meta.page;
-                        this.totalResults = response.data.meta.totalResults;
-                        this.filterOptions = getFilterValues(response.data.meta.filterOptions);
-                    }
-                }).catch((e) => {
-                    console.log('ERROR', e);
-                }).finally(() => {
-                    this.$nextTick(() => {
-                        this.loading = false;
-                    });
-                });
         },
         parseBpmOptions(options) {
             const acceptedBpmOptions = [
@@ -420,7 +426,7 @@ export default {
                     if (this.trackProgress) {
                         this.progressTracker.stop();
                         // When a user switches the track we send their practice time and reset
-                        // the window unload event for the next track incase that's the last
+                        // the window unload event for the next track in case that's the last
                         // one they play
                         // - Curtis, Oct 2019
                         if (this.activeItem != null) {
@@ -451,14 +457,13 @@ export default {
                 brand: this.brand,
                 post: item,
             });
+
             this.switchTrack(false);
             this.audioPlayer.play();
         },
         switchTrack(resume) {
             const { currentTime } = this;
-            const trackUrl = this.activeItem.getPostDatum(
-                `mp3_${this.drums ? 'yes' : 'no'}_drums_${this.metronome ? 'yes' : 'no'}_click_url`,
-            );
+            const trackUrl = this.activeItem.post[`mp3_${this.drums ? 'yes' : 'no'}_drums_${this.metronome ? 'yes' : 'no'}_click_url`];
             this.updateSource(trackUrl, resume, currentTime);
             if (!resume) {
                 this.$nextTick(() => {
@@ -665,7 +670,7 @@ export default {
         },
         handleTriggerSearch(value) {
             this.searchTerm = value;
-            return this.searchContent();
+            return this.getContent();
         },
         handleContentSort(value) {
             this.sort = value;

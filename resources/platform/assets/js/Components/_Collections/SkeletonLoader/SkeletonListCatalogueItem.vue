@@ -68,14 +68,13 @@
         </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div v-if="displayUserInteractions"
-             class="flex tw-flex-col icon-col tw-justify-center" :class="is_search ? '' : 'hide-xs-only'">
+        <div class="flex tw-flex-col icon-col tw-justify-center">
             <div class="tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-full tw-w-7 tw-h-7"></div>
         </div>
 
 
         <!-- PROGRESS INDICATOR OR LOCK ICON -->
-        <div class="flex tw-flex-col icon-col tw-justify-center" :class="is_search || overview ? 'hide-xs-only' : ''">
+        <div class="flex tw-flex-col icon-col tw-justify-center" :class="overview ? 'hide-xs-only' : ''">
             <div class="tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-full tw-w-7 tw-h-7"></div>
         </div>
     </div>

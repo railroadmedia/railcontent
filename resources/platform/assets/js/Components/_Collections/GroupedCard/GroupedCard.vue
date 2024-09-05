@@ -78,11 +78,11 @@ const parsedData = computed(() => {
 })
 
 const name = computed(() => {
-    return props.item.fields.find(field => field.key === 'name')?.value || '';
+    return props.item.name || '';
 })
 
 const thumb = computed(() => {
-    return props.item.data.find(data => data.key === 'head_shot_picture_url')?.value || '';
+    return props.item.head_shot_picture_url || '';
 })
 
 const isWorkout = computed(() => {

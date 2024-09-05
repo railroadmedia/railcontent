@@ -81,7 +81,7 @@
                 <div class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">{{ artistName }}</div>
                 <!-- Info -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
-                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
+                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
@@ -172,13 +172,11 @@ const logo = computed(() => {
 })
 
 const title = computed(() => {
-    const text = props.pack.data && props.pack.fields.find((d) => d.key === 'title');
-    return text && text.value;
+    return props.pack.title;
 })
 
 const description = computed(() => {
-    const text = props.pack.data && props.pack.data.find((d) => d.key === 'description');
-    return text && text.value;
+    return props.pack.description;
 })
 
 const progressPercent = computed(() => {
@@ -220,7 +218,7 @@ const packURL = computed(() => {
     } else if(showEnrollmentState.value){
         return props.pack.primary_cta_url;
     } else {
-        return props.pack.url;
+        return props.pack.web_url_path;
     }
 })
 

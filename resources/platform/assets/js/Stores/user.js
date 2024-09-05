@@ -77,6 +77,22 @@ export const useUserStore = defineStore({
       } else {
         return new Date().getFullYear();
       }
+    },
+    userNeedsAccess: (getters) => {
+      return (contentType, userProductIDs) => {
+        //If User is an admin
+        if(getters.isAdmin) {
+          return false;
+        }
+        //If user is not a member
+        if( getters.isUserAMember ) {
+          return true; 
+        }
+        //Lifetime or Plus
+        if(!getters.isLifetimeMember || getters.userMembershipLevel !== 'plus') {
+          return true;
+        }
+      }
     }
   },
   actions: {

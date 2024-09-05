@@ -17,12 +17,23 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item"
-                        :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
-                        @progressReset="handleProgressReset" :show-dropdown="showDropdown"
-                        :trackingSection="trackingSection" />
+                    <MiniCatalogueCard 
+                        v-for="item in getData" 
+                        :key="'grid' + item.id" 
+                        :item="item"
+                        :content-type="item.type" 
+                        :user-id="userId" 
+                        :is-admin="isAdmin" 
+                        :lock-unowned="lockUnowned"
+                        :force-wide-thumbs="forceWideThumbs" 
+                        :content-type-override="contentTypeOverride"
+                        :show-my-list-action="showMyListAction" 
+                        :force-no-links="forceNoLinks" 
+                        :show-dropdown="showDropdown"
+                        :trackingSection="trackingSection" 
+                        @addToList="addToList"
+                        @progressReset="handleProgressReset" 
+                    />
                 </template>
                 <template v-else>
                     <CatalogueListElement v-if="showListElement" v-for="item in getData"

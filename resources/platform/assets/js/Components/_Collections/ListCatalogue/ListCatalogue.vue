@@ -1,17 +1,14 @@
 <template>
     <div class="flex flex-column">
-        <template v-if="!isLoading && !collectionStoreLoading" v-for="(item, i) in content" :key="'list' + item.id">
+        <template v-if="!isLoading && !collectionStoreLoading">
             <CatalogueListItem
+                v-for="(item, i) in content"
+                :key="'list' + item.id"
                 :index="item.week || i + 1"
                 :item="item"
                 :is-coach="isCoach"
                 :content-type="item.type"
-                :brand="brand"
-                :theme-color="themeColor"
-                :use-theme-color="useThemeColor"
                 :overview="displayItemsAsOverview"
-                :user-id="userId"
-                :is-admin="isAdmin"
                 :display-user-interactions="displayUserInteractions"
                 :content-type-override="contentTypeOverride"
                 :show-numbers="showNumbers"
@@ -25,22 +22,16 @@
                 :is-next-lesson="isNextLesson"
             />
 
-            <div id="branch-paths" :key="'branch' + item.id" v-if="branchPathIndex === i && branchPathContent.data" >
+            <div id="branch-paths" v-if="branchPathContent.data" >
                 <!-- Method Paths -->
                 <CatalogueListItem
                     v-for="(branchItem, j) in branchPathContent.data"
                     :key="'branch' + branchItem.id"
                     :index="branchItem.week || j + 1"
                     :item="branchItem"
-                    :is-coach="isCoach"
                     :is-branch-path="true"
-                    :content-type="branchItem.type"
-                    :brand="brand"
-                    :theme-color="themeColor"
-                    :use-theme-color="useThemeColor"
+                    content-type="learning-path-branch"
                     :overview="displayItemsAsOverview"
-                    :user-id="userId"
-                    :is-admin="isAdmin"
                     :display-user-interactions="displayUserInteractions"
                     :content-type-override="contentTypeOverride"
                     :show-numbers="showNumbers"
@@ -66,35 +57,14 @@ import { useCollectionStore } from "@stores/collection";
 import CatalogueListItem from "./ListCatalogueItem";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 
-
 const props = defineProps({
     content: {
         type: Array,
         default: () => [],
     },
-    themeColor: {
-        type: String,
-        default: () => 'drumeo',
-    },
-    useThemeColor: {
-        type: Boolean,
-        default: () => true,
-    },
     isCoach: {
         type: Boolean,
         default: () => false,
-    },
-    userId: {
-        type: String,
-        default: () => '',
-    },
-    isAdmin: {
-        type: Boolean,
-        default: () => false,
-    },
-    brand: {
-        type: String,
-        default: () => 'drumeo',
     },
     cardType: {
         type: String,

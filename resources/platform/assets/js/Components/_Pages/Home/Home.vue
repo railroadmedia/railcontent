@@ -17,8 +17,10 @@
                 img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
                 class="tw-mt-4 tw-mb-8"
             />
+
             <!-- Header carousel -->
             <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
+            
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
@@ -53,7 +55,7 @@
 
             <!-- Workouts section -->
             <MiniCatalogueSection
-                v-if="data.workouts.length"
+                v-if="data?.workouts?.length"
                 title="Workouts"
                 seeAllAriaLabel="See All Workouts"
                 :seeAllUrl="`${brand}/workouts`"
@@ -63,7 +65,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                v-if="data.newReleases.length"
+                v-if="data?.newReleases.length"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -79,19 +81,21 @@
             />
 
             <!-- Live section -->
-            <CoachEvent
-                v-if="data.liveEvent"
-                class="tw-mb-6"
-                :preloadedContent="data.liveEvent"
+            <CoachEvent 
+                v-if="coachEvent" 
+                class="tw-mb-6" 
+                :preloadedContent="coachEvent" 
                 :currentDateString="currentDate"
-                :youtubeEventId="youtubeId"
+                :subscriptionCalendarId="calendarId" 
+                :youtubeEventId="youtubeId" 
                 :timeCutoffMinutes="timeCutoffMinutes"
-                trackingSection="live"
+                :eventCoachProfileUrl="eventCoachProfileUrl" 
+                trackingSection="live" 
             />
 
             <!-- Upcoming section -->
             <MiniCatalogueSection
-                v-if="data.upcomingEvents.length"
+                v-if="data?.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
                 :seeAllUrl="`${brand}/live`"
@@ -166,18 +170,20 @@
     const userStore = useUserStore();
     const { brand, userId, token, userCompletedAccount } = storeToRefs(userStore);
     const platformStore = usePlatformStore();
-    const { isLoading } = storeToRefs(platformStore)
+    const { isLoading } = storeToRefs(platformStore);
 
     //Props
     const props = defineProps({
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
         carousel: { type: Array, default: () => ([]) },
+        coachEvent: { type: Object, default: () => null },
         cohortBanner: { type: Array, default: () => ([]) },
         courseData: { type: Object, default: () => ({}) },
         continueUrl: { type: String, default: '' },
         conversationData: { type: Array, default: () => ([]) },
         currentDate: { type: String, default: '' },
+        eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },

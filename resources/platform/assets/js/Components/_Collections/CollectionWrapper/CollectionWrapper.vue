@@ -422,21 +422,21 @@ const handleTabChange = (tab) => {
 }
 
 onBeforeMount(() => {
-    collectionStore.setDefaults({
-        isCoach: isCoach.value,
-        content: props.preLoadedContent,
-        filter: {
-            params: { ...request_params.value },
-            [isThreads.value || isCoach.value ? 'term' : 'title']: '',
-            sort: props.defaultSort,
-        },
-        tabData: getTabData.value,
-        tabOptions: tabOptionData.value,
-        endpoint: props.endpoint,
-        searchEndpointUrl: props.searchEndpointUrl,
-        sortOptions: props.sortOptions,
-    })
-    collectionStore.getURLParams();
+    // collectionStore.setDefaults({
+    //     isCoach: isCoach.value,
+    //     content: props.preLoadedContent,
+    //     filter: {
+    //         params: { ...request_params.value },
+    //         [isThreads.value || isCoach.value ? 'term' : 'title']: '',
+    //         sort: props.defaultSort,
+    //     },
+    //     tabData: getTabData.value,
+    //     tabOptions: tabOptionData.value,
+    //     endpoint: props.endpoint,
+    //     searchEndpointUrl: props.searchEndpointUrl,
+    //     sortOptions: props.sortOptions,
+    // })
+    // collectionStore.getURLParams();
 })
 
 onMounted(() => {

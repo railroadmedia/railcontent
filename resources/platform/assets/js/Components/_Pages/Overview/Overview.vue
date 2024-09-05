@@ -1,23 +1,27 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <Breadcrumb :breadcrumbs="breadcrumbs" />
+        
         <PageHeader
+            :title="header.title"
+            :description="header.description"
+            :info-data="header.infoData"
+            :hero-img="headerData.heroImg"
+            :progress="headerData.progress"
+            :progress-label-text="headerData.progressLabelText"
+            :content-id="headerData.contendId"
             :page-type="pageType"
-            :icon-name="headerIconName"
-            :title="headerTitle"
-            :description="headerDescription"
-            :hero-img="headerHeroImg"
-            :progress="headerProgress"
-            :progress-label-text="headerProgressLabelText"
-            :content-id="headerContendId"
-            :info-data="headerInfoData"
-            :ctas="headerCtas"
-            :dark-mode-logo="headerDarkModeLogo"
-            :light-mode-logo="headerLightModeLogo"
+            :icon-name="headerData.iconName"
+            :ctas="headerData.ctas"
+            :dark-mode-logo="headerData.darkModeLogo"
+            :light-mode-logo="headerData.lightModeLogo"
         />
 
+
         <template v-if="!isLoading">
-            <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
+            
+            <!-- BACK-END NOT IMPLEMENTED -->
+            <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
                 <div class="tw-w-full tw-p-4 tw-pb-0">
                     <div class="tw-flex tw-flex-col">
                         <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
@@ -27,7 +31,6 @@
                         <div class="flex flex-row remove-borders">
                             <transition appear name="fade">
                                 <ListCatalogue
-                                    :theme-color="brand"
                                     :content="nextLesson.data"
                                     :display-items-as-overview="true"
                                     :lock-unowned="true"
@@ -39,16 +42,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="tw-flex tw-flex-col tw-my-[30px]">
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :theme-color="brand"
-                            :user-id="userId"
-                            :use-theme-color="true"
-                            :content="childContent.data"
+                            :content="data"
+                            :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
                             :lock-unowned="!isAdmin"
@@ -98,13 +99,12 @@
                 title="Songs"
             />
         </template>
-<!--        <SkeletonListCatalogueItem v-else v-for="n in 4" :key="n" content-type="learning-path-level" :overview="true" /> -->
-<!--        <SkeletonListCatalogueItem v-else v-for="n in 6" :key="n" content-type="learning-path-course" :overview="true" />-->
-<!--        <SkeletonListCatalogueItem v-else v-for="n in 6" :key="n" content-type="learning-path-lesson" :show-numbers="true" />-->
+
+        <SkeletonListCatalogueItem v-else v-for="n in 6" :key="n" :content-type="contentType" :overview="showOverview" :show-numbers="showNumbers" />
     </div>
 </template>
 <script setup>
-import {computed, onMounted, onBeforeMount} from "vue";
+import {computed, ref, onBeforeMount} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from '@stores/platform';
@@ -113,10 +113,11 @@ import PageHeader from '@collections/PageHeader/PageHeader';
 import ListCatalogue from '@collections/ListCatalogue/ListCatalogue'
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
+import { useOverviewPageData } from '@hooks/pages/useOverviewPageData';
 
 const props = defineProps({
     contentType: {
-        type: String, 
+        type: String,
         required: true,
     },
     breadcrumbs: {
@@ -151,10 +152,6 @@ const props = defineProps({
         type: Object,
         default: () => {},
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
     nextLesson: {
         type: Object,
         default: () => {},
@@ -175,10 +172,6 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    userId: {
-        type: String,
-        default: '',
-    },
     xpBonus: {
         type: Number,
         default: 0,
@@ -189,62 +182,57 @@ const props = defineProps({
     },
 })
 
+//Pinia
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
-const { brand } = storeToRefs(userStore);
+const { userId, isAdmin, brand } = storeToRefs(userStore);
 const { isLoading } = storeToRefs(platformStore);
 
-const headerIconName = computed(() => {
-    return props.headerData.iconName;
+//Refs
+const data = ref(null);
+const header = ref({
+    title: "",
+    description: "",
+    infoData: []
+})
+const error = ref(null);
+
+//Computed
+const showOverview = computed(() => {
+    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course';
+})
+const showNumbers = computed(() => {
+    return props.contentType === 'learning-path-lesson';
+})
+const useSanityData = computed(() => {
+    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson';
 })
 
-const headerTitle = computed(() => {
-    return props.headerData.title;
-})
-
-const headerDescription = computed(() => {
-    return props.headerData.description;
-})
-
-const headerHeroImg = computed(() => {
-    return props.headerData.heroImg;
-})
-
-const headerProgress = computed(() => {
-    return props.headerData.progress;
-})
-
-const headerProgressLabelText = computed(() => {
-    return props.headerData.progressLabelText;
-})
-
-const headerContendId = computed(() => {
-    return props.headerData.contentId;
-})
-
-const headerInfoData = computed(() => {
-    return props.headerData.infoData;
-})
-
-const headerCtas = computed(() => {
-    return props.headerData.ctas;
-})
-
-const headerDarkModeLogo = computed(() => {
-    return props.headerData.darkModeLogo;
-})
-
-const headerLightModeLogo = computed(() => {
-    return props.headerData.lightModeLogo;
-})
-
-onMounted(() => {
-    setTimeout(() => {
-        platformStore.setLoadingState(false);
-    }, 2000)
-});
-
-onBeforeMount( () => {
-    //console.log('content type', props.contentType);
+onBeforeMount( async () => {
+    // console.log('childContent', props.childContent.data);
+    console.log('Overview content type is ', props.contentType);
+    if( useSanityData ) {
+        //console.log('sanity content is: ', props.contentType);
+        const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
+            data.value = props.contentType === 'learning-path-level' ? OverviewData.value.levels : OverviewData.value.children;
+            console.log('data', data.value)
+            header.value.title = OverviewData.value.title;
+            header.value.description = OverviewData.value.description;
+            if(props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson') {
+                header.value.infoData = [
+                    `${OverviewData.value.child_count} Course`,
+                    `${OverviewData.value.xp} XP`
+                ]
+            } else {
+                header.value.infoData = props.headerData.infoData; //Default
+            }
+            platformStore.setLoadingState(OverviewLoading.value);
+    } else {
+        //console.log('content type is ', props.contentType);
+        data.value = props.childContent.data; //Default
+        setTimeout(() => {
+            platformStore.setLoadingState(false);
+        }, 2000)
+    }
 })
 </script>

@@ -14,7 +14,7 @@
             <!-- Song Results -->
             <div :class="`dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
                 <transition appear name="fade">
-                    <CollectionWrapper :preLoadedContent="listLessons" collectionType="song" :tabs="tabs"
+                    <CollectionWrapper collectionType="song" :tab-options="tabData"
                         :filterableValues="filterableValues" :infinite-scroll="!membershipUpgradeModal.disableClose" />
                 </transition>
             </div>
@@ -25,13 +25,15 @@
 
 <script setup>
 import { computed, onBeforeMount } from 'vue';
-import { usePlatformStore } from "../../Stores/platform";
+import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia";
+import { getTabData } from './tabData';
 
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
+import {useCollectionStore} from "@stores/collection";
 
 
 const props = defineProps({
@@ -77,6 +79,7 @@ const props = defineProps({
     }
 });
 
+const collectionStore = useCollectionStore();
 const platformStore = usePlatformStore();
 const { membershipUpgradeModal } = storeToRefs(platformStore);
 
@@ -96,8 +99,23 @@ const headerInfoData = computed(() => {
     }
 })
 
+const tabData = computed(() => {
+    console.log(getTabData())
+    return getTabData();
+})
+
 onBeforeMount(() => {
-    props.showUpgradeModal && platformStore.openMembershipUpgradeModal();
-    props.showUpgradeModal && platformStore.disableCloseMembershipUpgradeModal();
+    if(props.showUpgradeModal){
+        props.showUpgradeModal && platformStore.openMembershipUpgradeModal();
+        props.showUpgradeModal && platformStore.disableCloseMembershipUpgradeModal();
+    } else {
+        collectionStore.setDefaults({
+            tabOptions: tabData.value,
+            filter: {
+                sort: '-published_on'
+            },
+            queryType: 'song',
+        });
+    }
 })
 </script>

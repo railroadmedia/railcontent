@@ -254,7 +254,7 @@
 @section('content')
     <overview
         :breadcrumbs="{{ json_encode($breadcrumbs) }}"
-        content-type="{{ json_encode($contentType) }}"
+        :content-type="{{ json_encode($contentType) }}"
         :header-data="{{ json_encode($headerDataObj) }}"
         page-type="{{ $parentContent->fetch('type') }}"
         @if(!empty($nextLessonJson))

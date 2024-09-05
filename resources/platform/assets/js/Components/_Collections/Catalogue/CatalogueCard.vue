@@ -61,10 +61,10 @@
                                 {{ itemTitle }}
                             </h4>
                             <!-- Video Description -->
-                            <!-- <p v-if="mappedData.show_description"
-                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">
-                                {{ mappedData.description.replace(/<[^>]+>/g, '') }}
-                            </p> -->
+                            <p v-if="mappedData.show_description"
+                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
+                                v-html="item.description ?? mappedData.description"
+                            ></p>
                             <!-- Content -->
                             <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
@@ -260,6 +260,8 @@ const handleShowDropdown = (className) => {
 const contentTypeString = computed(() => {
     if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
         return contentTypes[contentModel.value.post.type].singular
+    } else if (props.item.type) {
+        return props.item.type;
     }
     return '';
 })

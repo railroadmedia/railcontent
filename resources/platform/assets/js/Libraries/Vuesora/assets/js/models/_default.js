@@ -3,7 +3,6 @@ import ContentHelpers from "../helper-functions/content.js";
 
 export default class ContentModel {
     constructor({ brand = 'drumeo', post }) {
-        //console.log('contentmodel post', post)
         this.brand = brand;
         this.post = post;
         this.id = post.id;
@@ -14,7 +13,7 @@ export default class ContentModel {
             color_title: this.postInstructor || this.postType,
             content_type: this.getTypeWithIcon(),
             black_title: this.getPostField('title'),
-            description: this.getPostDatum('description'),
+            description: this.post.description,
             sheet_music: null,
             grey_title: ContentModel.mapDifficulty(this.post),
         };
@@ -22,8 +21,8 @@ export default class ContentModel {
         this.list = {
             thumbnail: this.getPostThumbnail(),
             color_title: this.postInstructor,
-            black_title: this.getPostField('title'),
-            description: this.getPostDatum('description'),
+            black_title: this.post.title,
+            description: this.post.description,
             sheet_music: null,
             column_data: [
                 this.getPostDuration(),
@@ -37,7 +36,7 @@ export default class ContentModel {
             black_title: this.getPostField('title'),
             column_data: [
                 this.postInstructor,
-                ContentModel.mapDifficulty(post),
+                ContentModel.mapDifficulty(this.post),
             ],
         };
     }
@@ -49,9 +48,9 @@ export default class ContentModel {
     }
 
     getPostFieldMulti(key) {
-        const postFields = this.post.fields.filter(field => field.key === key);
+        const postFields = this.post.fields?.filter(field => field.key === key) || '';
 
-        return postFields.length ? postFields.map(field => field.value) : [];
+        return postFields.length ? postFields.map(field => field.value) : '';
     }
 
     getPostDatum(key) {
@@ -61,17 +60,17 @@ export default class ContentModel {
     }
 
     get postInstructor() {
-        const instructor = this.getPostField('instructor');
+        const instructor = this.getPostField('instructor') || this.post.instructors;
 
-        if (typeof instructor === 'object' && instructor != null) {
-            return instructor.fields.find(field => field.key === 'name').value;
+        if(Array.isArray(instructor)){
+            return instructor.join(', ');
         }
 
-        return '';
+        return [];
     }
 
     getInstructors() {
-        const instructors = this.getPostFieldMulti('instructor');
+        const instructors = this.post.instructors;
         let mappedInstructors;
 
         if (instructors.length) {
@@ -102,6 +101,11 @@ export default class ContentModel {
 
             const parsedDuration = Math.round(Duration.fromMillis((duration * 1000)).as('minutes'));
 
+            return `${parsedDuration} mins`;
+        } else if (this.post?.length_in_seconds) {
+            const duration = this.post?.length_in_seconds;
+
+            const parsedDuration = Math.round(Duration.fromMillis((duration * 1000)).as('minutes'));
             return `${parsedDuration} mins`;
         }
 
@@ -146,8 +150,8 @@ export default class ContentModel {
             guitareo: 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo_fallback_thumb.jpg',
             singeo: 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo_fallback_thumb.jpg',
         };
-        const originalThumb = this.getPostDatum('original_thumbnail_url');
-        let thumb = originalThumb === '' ? this.getPostDatum('thumbnail_url') : originalThumb;
+
+        let thumb = this.post.image;
 
         if (this.postType === 'learning-path' && this.brand === 'drumeo') {
             thumb = this.getPostDatum('background_image_url');
@@ -157,7 +161,7 @@ export default class ContentModel {
             thumb = this.getPostDatum('guitar_chord_image_url');
         }
 
-        return thumb !== '' ? thumb : defaults[this.brand];
+        return thumb || defaults[this.brand];
     }
 
     getPostLogoImage() {
@@ -166,8 +170,7 @@ export default class ContentModel {
     }
 
     static mapDifficulty(post) {
-        const difficultyField = post?.fields?.find(field => field.key === 'difficulty');
-        const difficulty = difficultyField ? difficultyField.value : null;
+        const difficulty = post.difficulty;
 
         if (!difficulty) {
             return '';

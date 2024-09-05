@@ -10,8 +10,8 @@ export default class CourseContentModel extends ContentModel {
         this.card.color_title = this.postInstructor;
 
         this.list.column_data = [
-            ContentModel.mapDifficulty(this.post),
             this.postChildLessonCount,
+            this.getPostDuration(),
             this.postPublisedOn,
         ];
 
@@ -22,7 +22,6 @@ export default class CourseContentModel extends ContentModel {
             this.list.color_title = null;
             this.list.column_data = [
                 this.postInstructor,
-                ContentModel.mapDifficulty(this.post),
                 this.postChildLessonCount,
                 this.postPublisedOn,
             ];

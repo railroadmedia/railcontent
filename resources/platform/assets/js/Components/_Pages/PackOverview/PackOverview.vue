@@ -3,18 +3,18 @@
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         <PageHeader
             :page-type="headerPageType"
-            title="Pack"
-            :hero-img="headerHeroImg"
-            :dark-mode-logo="headerDarkModeLogo"
-            :light-mode-logo="headerLightModeLogo"
-            :progress="headerProgress"
-            :info-data="headerInfoData"
-            :ctas="headerCtas"
-            :description="headerDescription"
+            :title="header?.title"
+            :hero-img="header?.image"
+            :dark-mode-logo="header?.darkLogo"
+            :light-mode-logo="header?.lightLogo"
+            :progress="header?.progress"
+            :info-data="header?.infoData"
+            :ctas="header?.ctas"
+            :description="header?.description"
         />
         <div class="tw-my-4">
             <ListCatalogue
-                :content="childContent.data"
+                :content="data?.children"
                 :user-id="userId"
                 :is-admin="isAdmin"
                 :show-numbers="true"
@@ -24,13 +24,15 @@
     </div>
 </template>
 <script setup>
-import { computed } from "vue";
+import { ref, onMounted } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
 import PageHeader from "@collections/PageHeader/PageHeader";
 import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 import CompletionBonus from "@collections/CompletionBonus/CompletionBonus";
 import ListCatalogue from '@collections/ListCatalogue/ListCatalogue';
+import { usePackPageData } from '@hooks/pages/usePackPageData';
 
 const props = defineProps({
     breadcrumbs: {
@@ -75,22 +77,25 @@ const props = defineProps({
     },
 })
 
+//User
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+//Platform
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
-const headerHeroImg = computed(() => {
-    return props.pack.data.find((p) => p.key === 'header_image_url')?.value;
-})
+//Refs
+const data = ref(null);
+const header = ref(null)
 
-const headerDarkModeLogo = computed(() => {
-    return props.pack.data.find((p) => p.key === 'dark_mode_logo_url')?.value;
-})
+onMounted( async () => {
+    //console.log(props.headerCtas)
+    //console.log(props.headerPageType)
+    const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-overview');
+        data.value = PackData.value;
+        //Header Data
+        header.value = PackData.value.header;
 
-const headerLightModeLogo = computed(() => {
-    return props.pack.data.find((p) => p.key === 'light_mode_logo_url')?.value;
-})
-
-const headerDescription = computed(() => {
-    return props.pack.data.find((p) => p.key === 'description')?.value || '';
+        platformStore.setLoadingState(PackLoading.value);
 })
 </script>

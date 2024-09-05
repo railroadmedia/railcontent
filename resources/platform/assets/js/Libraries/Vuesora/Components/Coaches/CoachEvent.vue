@@ -52,7 +52,7 @@
 
           <!-- Coaches -->
           <div class="tw-flex">
-            <div class="tw-inline-flex" v-for="(coach, i) in content.instructors" :key="i">
+            <div class="tw-inline-flex" v-for="(coach, i) in content.artists" :key="i">
               <a @click="(e) => handleClick(e, `${brand}/coaches/${coach.slug}`)" :href="`${brand}/coaches/${coach.slug}`" class="tw-no-underline tw-mr-1.5 tw-block">
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.split(" ")[0] }}</span>
@@ -61,7 +61,7 @@
                   <span class="tw-font-bold">{{ coach.split(" ")[2] }}</span>
                 </h4>
               </a>
-              <span v-if="i + 1 < content.instructors.length"
+              <span v-if="i + 1 < content.artists.length"
                 class="tw-leading-none tw-font-bold dark:tw-text-white tw-text-lg tw-mr-1.5">&</span>
             </div>
           </div>
@@ -98,7 +98,7 @@
               <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
             </button>
 
-            <content-schedule :subscription-calendar-id="content.calendar_id" :theme-color="brand" :brand="brand"
+            <content-schedule :subscription-calendar-id="subscriptionCalendarId" :theme-color="brand" :brand="brand"
               :toggleSubscribePopup="toggleSubscribePopup" v-if="showSubscribePopup"></content-schedule>
           </div>
         </div>
@@ -125,6 +125,10 @@ export default {
       default: () => ({}),
     },
     currentDateString: {
+      type: String,
+      default: () => "",
+    },
+    subscriptionCalendarId: {
       type: String,
       default: () => "",
     },
@@ -159,7 +163,7 @@ export default {
       counterInterval: null,
     };
   },
-    mounted() {
+  mounted() {
     if (this.preloadedContent) {
       this.content = this.preloadedContent;
       this.startTime = DateTime.fromSQL(this.content.published_on, { zone: "UTC" });
@@ -168,6 +172,7 @@ export default {
       this.startMonth = this.startDate.toLocaleString("en-US", { month: "long" });
       this.startDay = this.startDate.getDate();
       this.formattedTime = this.startDate.toLocaleTimeString([], { timeStyle: "short" });
+
       this.checkIfLive();
     }
   },
@@ -176,7 +181,7 @@ export default {
   },
   computed: {
     isVisible() {
-      return this.content; // && this.counterValue > 0 && this.counterValue / 3600 <= 48;
+      return this.content && this.counterValue > 0 && this.counterValue / 3600 <= 48;
     },
     $_hours() {
       return this.padTwoDigits(Math.max(0, Math.floor(this.counterValue / 3600)));
@@ -253,7 +258,7 @@ export default {
 
     handleClick(event, url) {
       event.preventDefault();
-
+      
       if (this.trackingSection && this.trackingSection.length) {
         userJourney.trackHomeContentClick({
           token: this.token,

@@ -1,8 +1,9 @@
-import axios from "axios";
 import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
+import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
+import { fetchAll } from 'musora-content-services';
 
 const { getFilterValues } = useFilterValues();
 
@@ -25,12 +26,13 @@ export const useCollectionStore = defineStore({
             filterColumns: [],
             isCoach: false,
             loading: false,
-            searchEndpointUrl: '',
             searching: false, //for threads page
             sortOptions: [],
             tabData: {},
+            tabOptions: [],
             totalPages: 0,
             totalResults: 0,
+            queryType: '',
         }
     },
     actions: {
@@ -59,14 +61,6 @@ export const useCollectionStore = defineStore({
             this.getData();
         },
 
-        coachEndpoint() {
-            return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
-        },
-
-        getEndpoint() {
-            return this.isCoach ? this.coachEndpoint() : ((this.filter.searchTerm && this.searchEndpointUrl) ? this.searchEndpointUrl : this.endpoint);
-        },
-
         updateIncludedFields(param) {
             const itemIndex = this.filter.included_fields.findIndex(f => f === param);
 
@@ -89,24 +83,33 @@ export const useCollectionStore = defineStore({
         async fetchData() {
             const userStore = useUserStore();
             try {
+                // const response = await axios
+                //     .get(
+                //         this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
+                //         {
+                //             params: {
+                //                 brand: userStore.brand,
+                //                 limit: this.filter.limit,
+                //                 page: this.tabData[this.filter.activeTab].currentPage,
+                //                 sort: this.filter.sort,
+                //                 ...this.filter.params,
+                //                 included_fields: this.filter.included_fields,
+                //                 count_filter_items: true,
+                //                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
+                //                 ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
+                //                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
+                //             },
+                //         })
+                // return response;
 
-                const response = await axios
-                    .get(
-                        this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
-                        {
-                            params: {
-                                brand: userStore.brand,
-                                limit: this.filter.limit,
-                                page: this.tabData[this.filter.activeTab].currentPage,
-                                sort: this.filter.sort,
-                                ...this.filter.params,
-                                included_fields: this.filter.included_fields,
-                                count_filter_items: true,
-                                ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
-                                ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
-                                ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
-                            },
-                        })
+                const response = await fetchAll(userStore.brand, this.queryType, {
+                    page: this.tabData[this.filter.activeTab].currentPage,
+                    searchTerm: this.filter.searchTerm,
+                    sort: this.filter.sort,
+                    groupBy: this.getGroupBy(),
+                    includedFields: this.getIncludedFields(),
+                })
+
                 return response;
             } catch (e) {
                 console.error(e);
@@ -129,8 +132,52 @@ export const useCollectionStore = defineStore({
             this.fetching = false;
         },
 
+        getGroupBy(){
+            if(this.tabData[this.filter.activeTab].groupByView){
+                return this.tabData[this.filter.activeTab].key;
+            }
+
+            return '';
+        },
+
+        getIncludedFields(){
+            if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
+                return [this.tabData[this.filter.activeTab].key]
+            }else {
+                return []
+            }
+        },
+
+        getSortOptions() {
+            if (this.tabData[this.filter.activeTab].groupByView) {
+                return [
+                    { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                    { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+                ];
+            } else {
+                return this.sortOptions;
+            }
+        },
+
         getURLParams() {
             const params = new URLSearchParams(window.location.search);
+
+            //Get active tab
+            let tabParams = params.getAll('tabs[]');
+
+            //Set active tab from URL
+            if(tabParams && tabParams.length > 0){
+                const activeTab = this.tabOptions.find((tab) => {
+                    if(Array.isArray(tab.key)){
+                        return JSON.stringify(tab.key) === JSON.stringify(tabParams);
+                    } else {
+                        return tab.key === tabParams[0];
+                    }
+                })
+
+                this.filter.activeTab = activeTab.value;
+                this.tabData[this.filter.activeTab] = { ...activeTab };
+            }
 
             //Get search params
             if (params.get('term')) {
@@ -150,17 +197,6 @@ export const useCollectionStore = defineStore({
             //GetProgress
             if (params.getAll('included_user_states[]').length > 0) {
                 this.filter.progress = params.getAll('included_user_states[]')[0];
-            }
-        },
-
-        getSortOptions() {
-            if (this.tabData[this.filter.activeTab].groupByView) {
-                return [
-                    { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-                    { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-                ];
-            } else {
-                return this.sortOptions;
             }
         },
 
@@ -186,14 +222,13 @@ export const useCollectionStore = defineStore({
         setData(response, replace) {
             if (response) {
                 if (replace) {
-                    this.data = [...response.data.data];
+                    this.data = [...response.entity];
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-                        response.data.meta.totalResults / this.filter.limit
+                        response.total / this.filter.limit
                     );
-                    this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
+                    // this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
-                    this.data = [...this.data, ...response.data.data];
-                    this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+                    this.data = [...this.data, ...response.entity];
                 }
             }
 
@@ -205,16 +240,9 @@ export const useCollectionStore = defineStore({
             this.loading = false;
         },
 
-        setDefaults(defaults) {
+        async setDefaults(defaults) {
             if (defaults.isCoach) {
                 this.isCoach = defaults.isCoach;
-            }
-
-            if (defaults.content) {
-                this.data = defaults.content?.data || [];
-                if (defaults.content.meta?.filterOptions) {
-                    this.filterColumns = getFilterValues(defaults.content.meta.filterOptions);
-                }
             }
 
             if (defaults.filter) {
@@ -225,37 +253,30 @@ export const useCollectionStore = defineStore({
                 this.endpoint = defaults.endpoint;
             }
 
-            if (defaults.searchEndpointUrl) {
-                this.searchEndpointUrl = defaults.searchEndpointUrl;
-            }
-
             if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
                 this.sortOptions = defaults.sortOptions;
             }
 
             //Set active tab
             if (defaults.tabOptions) {
-                const params = new URLSearchParams(window.location.search);
-                let tabParams = params.getAll('tabs[]');
+                this.tabOptions = defaults.tabOptions;
 
-                //Set active tab from URL
-                if(tabParams && tabParams.length > 0){
-                    const activeTab = defaults.tabOptions.find((tab) => {
-                        if(Array.isArray(tab.key)){
-                            return JSON.stringify(tab.key) === JSON.stringify(tabParams);
-                        } else {
-                            return tab.key === tabParams[0];
-                        }
-                    })
+                //Set active tab as first tab from tabOptions
+                this.filter.activeTab = defaults.tabOptions[0].value;
+                this.tabData[this.filter.activeTab] = { ...defaults.tabOptions[0] };
+            }
 
-                    this.filter.activeTab = activeTab.value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
+            if(defaults.queryType){
+                this.queryType = defaults.queryType;
+            }
 
-                    //Set active tab as first tab from tabOptions
-                } else {
-                    this.filter.activeTab = defaults.tabOptions[0].value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
-                }
+            this.getURLParams();
+
+            if(!defaults.noFetchOnLoad){
+                await this.getData();
+
+                const platformStore = usePlatformStore();
+                platformStore.setLoadingState(false);
             }
         },
 

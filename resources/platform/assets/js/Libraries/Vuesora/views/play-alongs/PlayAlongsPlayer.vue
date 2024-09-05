@@ -279,7 +279,7 @@ export default {
         },
 
         noSidebar: {
-            type: Boolean, 
+            type: Boolean,
             default: () => false,
         },
 
@@ -371,15 +371,15 @@ export default {
         },
 
         $_title() {
-            return this.activeItem ? this.activeItem.getPostField('title') : '';
+            return this.activeItem ? this.activeItem.post.title : '';
         },
 
         $_style() {
-            return this.activeItem ? this.activeItem.getPostFieldMulti('style').join(', ') : '';
+            return this.activeItem && this.activeItem.post.style ? this.activeItem.post.style.join(', ') : '';
         },
 
         $_bpm() {
-            return this.activeItem ? this.activeItem.getPostField('bpm') : '';
+            return this.activeItem ? this.activeItem.post.bpm : '';
         },
 
         durationOffsetStyles() {

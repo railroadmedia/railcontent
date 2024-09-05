@@ -1,7 +1,7 @@
 // hooks/useSongPageData.js
 import { ref } from 'vue';
 import { fetchSongById, fetchRelatedSongs } from 'musora-content-services';
-import { fetchCurrentSongComplete, fetchAllCompletedStates } from 'musora-content-services';
+import { fetchCompletedState, fetchAllCompletedStates } from 'musora-content-services';
 
 export async function useSongPageData(contentId, brand, userId, token) {
   const data = ref(null);
@@ -12,7 +12,7 @@ export async function useSongPageData(contentId, brand, userId, token) {
     const [songResponse, relatedSongsResponse, currentSongCompleteResponse] = await Promise.all([
       fetchSongById(contentId),
       fetchRelatedSongs(brand, contentId),
-      fetchCurrentSongComplete(userId, contentId, token)
+      fetchCompletedState(contentId)
     ]);
 
     data.value = songResponse;

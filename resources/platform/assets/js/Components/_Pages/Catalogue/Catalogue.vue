@@ -44,8 +44,6 @@
           :brand="brand"
           :pre-loaded-content="listLessons"
           :session-token="sessionToken"
-          @play="handlePlayAlongsPlay"
-          @pause="handlePlayAlongsPause"
         />
         <CollectionWrapper
           v-else
@@ -55,35 +53,36 @@
           :filterable-values="catalogueMeta.allowableFilters"
           :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
           :included-types="includedTypes"
-          :pre-loaded-content="listLessons"
           :statuses="statuses"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :tabs="tabData"
           :multiple-types="isAllContent"
           :is-all-content="isAllContent"
           :hide-filter-icon="lessonType === 'routine'"
           :hide-controls="lessonType === 'Recommendation'"
+          :tab-options="tabData"
         />
       </div>
     </div>
   </template>
 
   <script setup>
-  import { computed, onBeforeMount } from 'vue';
+  import { computed, onBeforeMount, ref } from 'vue';
   import { getHeaderData } from './headerData';
   import { getTabData } from './tabData';
   import { usePlatformStore } from "@stores/platform";
+  import { storeToRefs } from "pinia/dist/pinia";
+  import { useCollectionStore } from "@stores/collection";
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
   import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+  import {useUserStore} from "@stores/user";
 
   const props = defineProps({
     hasStartedLessons: Boolean,
     lessonType: String,
-    brand: String,
     catalogueMeta: Object,
     startedLessons: Array,
     breadcrumbs: Array,
@@ -99,7 +98,13 @@
     catalogueType: String,
   });
 
+  const collectionStore = useCollectionStore();
   const platformStore = usePlatformStore();
+  const userStore = useUserStore();
+  const { isLoading } = storeToRefs(platformStore);
+  const { brand } = storeToRefs(userStore);
+
+  const onLoadData = ref([]);
 
   const recommendedProps = computed(() => {
     const recommended = {};
@@ -111,7 +116,7 @@
   });
 
   const headerData = computed(() => {
-    return getHeaderData(props.catalogueMeta, props.brand, props.askQuestionRecipient, props.emailLogoLink, props.lessonType);
+    return getHeaderData(props.catalogueMeta, brand.value, props.askQuestionRecipient, props.emailLogoLink, props.lessonType);
   });
 
   const recommendationLinks = {
@@ -122,14 +127,17 @@
   };
 
   const tabData = computed(() => {
-      return getTabData(props.catalogueType);
+      return getTabData(props.catalogueType, props.catalogueMeta.shortname || props.catalogueMeta.name);
   })
 
-  onBeforeMount(() => {
-      setTimeout(() => {
-          platformStore.setLoadingState(false);
-      }, 5000)
-
-      // console.log(props.catalogueMeta)
+  onBeforeMount(async() => {
+      collectionStore.setDefaults({
+          tabOptions: tabData.value,
+          filter: {
+              sort: '-published_on'
+          },
+          queryType: props.lessonType,
+          ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && {noFetchOnLoad: true})
+      });
   })
   </script>

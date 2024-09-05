@@ -7,15 +7,6 @@
             Coming May 6th For Non-Enrolled Members!
         </div>
         <slot v-else></slot>
-
-        <transition name="show-from-bottom">
-            <div v-show="loading" id="loadingDialog" class="flex flex-row align-center">
-                <div class="loading-spinner corners-10 shadow pa tw-flex tw-justify-center tw-items-center bg-white">
-                    <i class="fas fa-spinner fa-spin text-black"></i>
-                    <p class="tw-font-bold tw-text-md text-black tw-ml-3">Loading Please Wait...</p>
-                </div>
-            </div>
-        </transition>
     </div>
 </template>
 

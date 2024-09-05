@@ -1,83 +1,81 @@
-export const getTabData = (type) => {
+export const getTabData = (type, title) => {
     switch(type){
         case 'courses':
             return [
                 {
-                    name: 'Courses',
-                    short_name: 'COURSES',
-                    value: [''],
+                    value: 'Courses',
+                    groupByView: false,
+                    key: '',
                 },
                 {
-                    name: 'Instructors',
-                    short_name: 'INSTRUCTORS',
-                    is_group_by: true,
-                    value: ['instructor'],
+                    value: 'Instructors',
+                    groupByView: true,
+                    key: 'instructor',
                 },
                 {
-                    name: 'Genres',
-                    short_name: 'Genres',
-                    is_group_by: true,
-                    value: ['style'],
+                    value: 'Genres',
+                    groupByView: true,
+                    key: 'genre',
                 },
             ];
 
         case 'play-alongs':
             return [
                 {
-                    name: 'All Play Alongs',
-                    short_name: 'ALL',
-                    value: [''],
+                    value: 'All Play Alongs',
+                    groupByView: false,
+                    key: '',
                 }
             ];
 
         case 'routines':
             return [
                 {
-                    name: 'All Routines',
-                    short_name: 'ALL ROUTINES',
-                    value: [''],
+                    value: 'All Routines',
+                    groupByView: false,
+                    key: '',
                 }
             ];
 
         case 'spotlight':
             return [
                 {
-                    name: 'All Spotlights',
-                    short_name: 'ALL',
-                    value: [''],
+                    value: 'All Spotlights',
+                    groupByView: false,
+                    key: '',
                 }
             ];
 
         case 'rudiments':
             return [
                 {
-                    name: 'All',
-                    short_name: 'ALL',
-                    value: [''],
+                    value: 'All',
+                    groupByView: false,
+                    key: '',
                 },
                 {
-                    name: 'Drags',
-                    short_name: 'DRAGS',
+                    value: 'Drags',
+                    groupByView: false,
                     is_required_field: true,
-                    value: ['topic,drags,string,='],
+                    key: 'topic[0]->name,Drags',
                 },
                 {
-                    name: 'Flams',
-                    short_name: 'FLAMS',
+                    value: 'Flams',
+                    groupByView: false,
                     is_required_field: true,
-                    value: ['topic,flams,string,='],
+                    key: 'topic[0]->name,Flams',
                 },
                 {
-                    name: 'Paradiddles',
-                    short_name: 'PARADIDDLES',
+                    value: 'Paradiddles',
+                    groupByView: false,
                     is_required_field: true,
-                    value: ['topic,paradiddles,string,='],
+                    key: 'topic[0]->name,Paradiddles',
                 },
                 {
-                    name: 'Rolls',
-                    short_name: 'ROLLS',
+                    value: 'Rolls',
+                    groupByView: false,
                     is_required_field: true,
-                    value: ['topic,rolls,string,='],
+                    key: 'topic[0]->name,Rolls',
                 },
             ];
 
@@ -93,24 +91,27 @@ export const getTabData = (type) => {
         case 'solos':
             return [
                 {
-                    name: 'Lessons',
-                    short_name: 'LESSONS',
-                    value: [''],
+                    value: 'Lessons',
+                    groupByView: false,
+                    key: '',
                 },
                 {
-                    name: 'Instructors',
-                    short_name: 'INSTRUCTORS',
-                    is_group_by: true,
-                    value: ['instructor'],
+                    value: 'Instructors',
+                    groupByView: true,
+                    key: 'instructor',
                 },
                 {
-                    name: 'Genres',
-                    short_name: 'Genres',
-                    is_group_by: true,
-                    value: ['style'],
+                    value: 'Genres',
+                    groupByView: true,
+                    key: 'genre',
                 },
             ];
             break;
+
+        default:
+            return [
+                { key: ``, value: `All ${title}` }
+            ]
     }
 }
 

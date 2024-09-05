@@ -47,7 +47,7 @@ import Playlist from './Components/_Pages/Playlist';
 import Playlists from './Components/_Pages/Playlists';
 import Referral from './Components/_Pages/Referral';
 import Schedule from './Components/_Pages/Schedule';
-import Songs from './Components/_Pages/Songs';
+import Songs from './Components/_Pages/Songs/Songs';
 import SongSkeleton from './Components/_Pages/Song/SongSkeleton.vue';
 import Stc from './Components/_Pages/STC';
 import CoachIndex from './Components/_Pages/CoachIndex';
@@ -64,10 +64,12 @@ import Overview from './Components/_Pages/Overview/Overview';
 import GuitareoLessons from './Components/_Pages/GuitareoLessons/GuitareoLessons';
 import Catalogue from './Components/_Pages/Catalogue/Catalogue';
 import Search from './Components/_Pages/Search';
+import PackIndex from './Components/_Pages/PackIndex/PackIndex';
 import PackOverview from './Components/_Pages/PackOverview/PackOverview';
 import PackOverviewBundles from './Components/_Pages/PackOverviewBundles/PackOverviewBundles';
 import Login from './Components/_Pages/Login.vue';
-import DevEndpoint from "./Components/_Pages/DevEndpoint.vue";
+import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
+import DrummersToolbox from './Components/_Pages/DrummersToolbox';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -253,10 +255,10 @@ app.component('AppContainer', AppContainer)
     .component('GuitareoLessons', GuitareoLessons)
     .component('Catalogue', Catalogue)
     .component('Search', Search)
+    .component('PackIndex', PackIndex)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
-    .component('DevEndpoint', DevEndpoint)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -264,6 +266,8 @@ app.component('AppContainer', AppContainer)
             `./Components/_Pages/PlaylistPlayback.vue`
         )
     ))
+    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
+    .component('DrummersToolbox', DrummersToolbox)
 
     .component('MembershipUpdatePage', defineAsyncComponent(() =>
         import(

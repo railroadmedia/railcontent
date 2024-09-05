@@ -54,7 +54,7 @@
         <!-- Scripts -->
         @yield('layout-scripts')
         <script>
-            window.railcontentConfig = {};
+            window.railcontentConfig = {}; 
         </script>
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>

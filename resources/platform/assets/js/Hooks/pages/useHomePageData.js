@@ -1,6 +1,6 @@
 // hooks/useHomePageData.js
 import { ref } from 'vue';
-import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents, fetchLiveEvent } from 'musora-content-services';
+import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents} from 'musora-content-services';
 
 export async function useHomePageData(brand) {
   const data = ref(null);
@@ -9,24 +9,25 @@ export async function useHomePageData(brand) {
 
   try {
     //TODO: Add lessons in progress /content/in_progress/397822?brand=drumeo&content_type=all ??
-    const [workoutsResponse, newReleasesResponse, upcomingEventsResponse, liveEventResponse] = await Promise.all([
+    const [workoutsResponse, newReleasesResponse, upcomingEventsResponse] = await Promise.all([
       fetchWorkouts(brand),
       fetchNewReleases(brand),
       fetchUpcomingEvents(brand),
-      fetchLiveEvent(brand)
     ]);
+
     data.value = {
       workouts: workoutsResponse || [],
       newReleases: newReleasesResponse || [],
       upcomingEvents: upcomingEventsResponse || [],
-      liveEvent: liveEventResponse || [],
     };
+
   } catch (err) {
-      console.log(err);
     error.value = err;
   } finally {
     isLoading.value = false;
   }
+
+  console.log(data.value)
 
   return { data, error, isLoading };
 }

@@ -10,7 +10,6 @@ export default class ShowContentModel extends ContentModel {
         this.card.color_title = this.postInstructor;
 
         this.list.column_data = [
-            ContentModel.mapDifficulty(this.post),
             this.getPostDuration(),
             this.postPublisedOn,
         ];
