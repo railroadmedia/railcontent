@@ -19,7 +19,7 @@ class AssignPrimaryBrandJob extends WebhookChildJob
         $user = $shopifySyncService->getOrCreateUser($this->contents['customer']['id'], $this->contents['customer']['email']);
         $brand = $eventTrackingService->getBrandFromOrder($this->contents);
 
-        if ($brand !== 'musora') {
+        if (in_array($brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
             $user->primary_brand = $brand;
             $user->save();
 

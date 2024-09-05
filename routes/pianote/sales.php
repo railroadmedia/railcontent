@@ -13,20 +13,23 @@ Route::domain('{pianoteDomain}')
         Route::get('/chords-trial', [SalesController::class, 'trial']);
         Route::get('/trial-songs', [SalesController::class, 'trialSongs']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
-        Route::get('/ultimate-lessons', [SalesController::class, 'ultimateLessons']);
-        Route::get('/restart', [SalesController::class, 'restart']);
+        Route::get('/ultimate-practice', [SalesController::class, 'ultimatepractice']);
+        Route::get('/back-to-school', [SalesController::class, 'backToSchool']);
+        Route::get('/restart', [SalesController::class, 'restart'] );
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS']);
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
         Route::get('/welcome-offer', [SalesController::class, 'promoWO']);
+        Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/student-only', [SalesController::class, 'promo']);
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
         Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
         Route::get('/a/davidbennett', [SalesController::class, 'davidbennett']);
-        Route::prefix('affiliate')->group(
+        Route::group(
+            ['prefix' => 'affiliate' ],
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
@@ -34,7 +37,8 @@ Route::domain('{pianoteDomain}')
                     ]);
             }
         );
-        Route::prefix('a')->group(
+        Route::group(
+            ['prefix' => 'a' ],
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
@@ -58,5 +62,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
 
         Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'])
-            ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
+            ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+        Route::get('/easy-chords-trial', [SalesController::class, 'easyChordsTrial']);
     });

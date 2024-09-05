@@ -117,7 +117,7 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-items-center tw-justify-center tw-w-full">
+        <div class="tw-flex tw-items-center tw-justify-end tw-w-full">
             <MuButton :is-link="true" :href="ctaUrl" variant="secondary">{{ ctaText }}</MuButton>
         </div>
     </div>

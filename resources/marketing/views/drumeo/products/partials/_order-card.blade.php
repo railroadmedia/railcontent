@@ -22,10 +22,13 @@
                 role="button" tabindex="0" aria-label="{{ $cta }}"> {{$cta}} </span>
         </div>
         @if(!empty($bonuses))
-            <div class="px-4 lg:px-6 pb-7 bg-white text-center">
-                @foreach($bonuses as $bonus)
-                    <p class="text-center leading-tight text-sm mb-1.5">{!! $bonus !!}</p>
-                @endforeach
+            <div class="px-4 lg:px-6 pb-7 bg-white">
+                <div class="text-center inline-block mx-auto">
+                    @foreach($bonuses as $bonus)
+                        <p class="text-left w-auto leading-tight text-sm mb-1.5">{!! $bonus !!}</p>
+                    @endforeach
+
+                </div>
             </div>
         @endif
     </a>

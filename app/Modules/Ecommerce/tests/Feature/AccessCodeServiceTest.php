@@ -38,6 +38,7 @@ class AccessCodeServiceTest extends TestCase
                 'source' => 'foo-bar'
             ]
         );
+
         $this->assertNotNull($accessCode->code);
         $this->assertFalse($accessCode->is_claimed);
     }

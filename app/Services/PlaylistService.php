@@ -31,21 +31,18 @@ class PlaylistService
      */
     public function getPlaylistNextItem($playlistId)
     {
-        $userPlaylist = $this->userPlaylistsService->getPlaylist($playlistId);
         $lastEngagedContent =
             $this->contentLastEngagedService->getLastEngagedContentForPlaylistId(user()->id, $playlistId);
-
-        $nextItem = null;
         if ($lastEngagedContent) {
-            $nextItem = $lastEngagedContent->content_id;
+            $nextItem     = $lastEngagedContent->content_id;
             $playlistItem = $this->userPlaylistsService->getPlaylistItemById($nextItem);
             if ($playlistItem) {
-                $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
-                $initialByPassPermissions = ContentRepository::$bypassPermissions;
+                $page                                 = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
+                $initialByPassPermissions             = ContentRepository::$bypassPermissions;
                 ContentRepository::$bypassPermissions = true;
-                ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+                ModeDecoratorBase::$decorationMode    = DecoratorInterface::DECORATION_MODE_MAXIMUM;
                 array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
-                $playlistItems =
+                $playlistItems                        =
                     $this->userPlaylistsService->getUserPlaylistContents(
                         $playlistItem['user_playlist_id'],
                         [],
@@ -53,19 +50,21 @@ class PlaylistService
                         $page
                     );
                 ContentRepository::$bypassPermissions = $initialByPassPermissions;
-                $playlistItem =
+                $playlistItem                         =
                     $playlistItems->where('user_playlist_item_id', '=', $nextItem)
                         ->first();
             }
             if (!$playlistItem || ($playlistItem['completed'] == true)) {
-                $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId);
+                $items              = $this->userPlaylistsService->getUserPlaylistContents($playlistId);
                 $nextIncompleteItem =
                     $items->where('completed', false)
                         ->first() ?? $items->first();
-                $nextItem = $nextIncompleteItem['user_playlist_item_id'] ?? null;
+                $nextItem           = $nextIncompleteItem['user_playlist_item_id'] ?? null;
             }
-        } elseif (isset($userPlaylist['user_playlist_item_id'])) {
-            $nextItem = $userPlaylist['user_playlist_item_id'];
+        } else {
+            $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlistId, [], 1, 1);
+
+            $nextItem = $playlistItems->first() ? $playlistItems->first()['user_playlist_item_id'] : null;
         }
 
         return $nextItem;

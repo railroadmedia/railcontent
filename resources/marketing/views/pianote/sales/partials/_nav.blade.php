@@ -183,7 +183,7 @@
             ])
             @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Piano",
-                "linkUrl" => "/getting-started",
+                "linkUrl" => "/getting-started-on-the-piano",
                 "linkIcon" => ''
             ])
             @include('drumeo.sales.partials._nav-link', [

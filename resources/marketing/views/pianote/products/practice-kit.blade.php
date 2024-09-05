@@ -79,13 +79,34 @@
             opacity: 1;
             display: block;
         }
+        .join.outlined.black {
+            color: black;
+            border: 2px solid black;
+        }
+
+        .join.medium.outlined {
+            padding: 12px 7%;
+            background-color: rgb(18, 18, 6, 0);
+        }
+
+        .join.medium.outlined:hover {
+            background-color: black;
+            color: #FFFFFF;
+        }
     </style>
 @stop()
+
+@section('body-data')
+    x-data="{
+    trailer: false,
+    }"
+@endsection
 
 @section('global-body')
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
+    
    
     <header class="px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F1F7FE;">
         <div class="container max-w-4xl mx-auto">
@@ -109,8 +130,9 @@
                                 ${{ floatval($productPrices['practice-kit']->discounted_price) }}</strong>
                         @endif
                     </h2>
-                    <a href="/ecommerce/add-to-cart?products[practice-kit]=1"
-                        class="join medium w-full">GET YOUR KIT</a>
+                    <div class="flex flex-col"> <a href="/ecommerce/add-to-cart?products[practice-kit]=1"
+                        class="join medium w-full m-1">GET YOUR KIT</a>
+                    <a class="join medium outlined black w-full m-1" @click="trailer = true;">WATCH THE TRAILER</a></div>
                 </div>
             </div>
         </div>
@@ -263,6 +285,12 @@
             </div>
         </div>
     </section>
+
+     @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '1002072203',
+        'vimeo' => true,
+    ])
 
     @include('pianote.sales.partials._footer')
 

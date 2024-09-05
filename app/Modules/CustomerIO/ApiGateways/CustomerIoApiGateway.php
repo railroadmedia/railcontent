@@ -19,19 +19,16 @@ class CustomerIoApiGateway
     public function addOrUpdateCustomer(
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
-        string $emailAddress,
-        ?string $customerId,
+        string $email,
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $emailAddress;
+        $url = 'https://track.customer.io/api/v1/customers/' . $email;
         $method = 'PUT';
 
         $dataArray = $attributes;
 
-        if (!empty($customerId)) {
-            $dataArray['id'] = $customerId;
-        }
+        $dataArray['email'] = $email;
 
         if (!empty($createdAtTimestamp)) {
             $dataArray['created_at'] = $createdAtTimestamp;
@@ -70,7 +67,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param array|null $eventData // key value pairs
      * @throws Exception
      */
     public function createEvent(
@@ -149,7 +145,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoAppApiKey ,
      * @throws Exception
      */
     public function sendTransactionalEmail(
@@ -307,13 +302,13 @@ class CustomerIoApiGateway
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
         int $segmentId,
-        array $customerIds,
+        array $customerEmails,
     ): void {
-        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id';
+        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=email';
         $method = 'POST';
 
         $dataArray = [
-            'ids' => array_values($customerIds),
+            'ids' => array_values($customerEmails),
         ];
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
@@ -356,6 +351,9 @@ class CustomerIoApiGateway
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function unsuppressEmail(
         string $customerIoSiteId,
         string $customerIoTrackApiKey,

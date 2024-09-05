@@ -87,7 +87,7 @@ class OnboardingController extends Controller
         OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])
             ->delete();
 
-        $topicList = [];
+        $topics = [];
         foreach ($data as $topic) {
             $onboardingTopic = new OnboardingTopic(['topic' => $topic, 'brand' => $brand, 'user_id' => user()->id]);
             $onboardingTopic->save();
@@ -98,13 +98,23 @@ class OnboardingController extends Controller
                 'user_id' => user()->id,
             ]);
             $onboardingAnswerHistory->save();
-            $topicList[] = $topic;
+            $topics[] = $topic;
         }
+
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
+                user(),
+                [
+                    $brand . '_onboarding_topics' => $topics,
+                ]
+            ),
+            30
+        );
 
         Avo::onboarding_topics_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
-                'topic_list' => $topicList,
+                'topic_list' => $topics,
             ])
         );
         return response(json_encode(user()), 200);
@@ -134,6 +144,16 @@ class OnboardingController extends Controller
             ]);
             $genres[] = $genre;
         }
+
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
+                user(),
+                [
+                    $brand . '_onboarding_genres' => $genres,
+                ]
+            ),
+            30
+        );
 
         Avo::onboarding_genres_step_completed(
             AvoHelper::defaultEventProperties([

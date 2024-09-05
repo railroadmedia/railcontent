@@ -12,10 +12,7 @@ class CustomerIoController extends Controller
 {
     use ValidatesRequests;
 
-    /**
-     * @var CustomerIoService
-     */
-    private $customerIoService;
+    private CustomerIoService $customerIoService;
 
     public function __construct(CustomerIoService $customerIoService)
     {
