@@ -51,8 +51,8 @@
                         <p
                             class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                            <span v-if="difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                                <DifficultyLabel class="tw-text-xs" :difficultyValue="difficulty"
                                     textCase="capitalize" />
                             </span>
                         </p>
@@ -116,20 +116,14 @@ const {
 } = useCatalogueItem({ ...props, brand: brand.value, contentTypeOverride: 'song' });
 
 const artistName = computed(() => {
-    if (contentModel.value.post.fields) {
-        return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
-    }
-    return '';
+    return props.item.artist_name || '';
 })
 
+const difficulty = computed(() => {
+    return props.item.difficulty_string;
+});
+
 const mappedData = computed(() => {
-    let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
-    }
-
-    contentModel.value.card.difficulty = difficultyValue;
-
     return contentModel.value.card
 });
 

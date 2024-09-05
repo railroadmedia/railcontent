@@ -12,7 +12,7 @@ export default class ContentModel {
             logo_image: this.getPostLogoImage(),
             color_title: this.postInstructor || this.postType,
             content_type: this.getTypeWithIcon(),
-            black_title: this.getPostField('title'),
+            black_title: this.getPostField('title') || this.post.title,
             description: this.post.description,
             sheet_music: null,
             grey_title: ContentModel.mapDifficulty(this.post),
