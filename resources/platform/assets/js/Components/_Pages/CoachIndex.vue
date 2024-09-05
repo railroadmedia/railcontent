@@ -84,7 +84,6 @@
             :filterable-values="collectionFilterableValues"
             :included-types="collectionIncludedTypes"
             :limit="collectionLimit"
-            :pre-loaded-content="collectionData"
             :required-fields="collectionRequiredFields"
             :statuses="collectionStatuses"
             :tab-options="collectionTabOptions"
@@ -94,7 +93,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
@@ -106,6 +105,7 @@ import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogu
 import UpcomingCoach from '@collections/UpcomingCoach/UpcomingCoach';
 import ActiveCoach from '@collections/ActiveCoach/ActiveCoach';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+import {useCollectionStore} from "@stores/collection";
 
 const props = defineProps({
     activeCoaches: {
@@ -216,6 +216,7 @@ const props = defineProps({
     },
 })
 
+const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
@@ -241,6 +242,26 @@ const formattedFeaturedCoaches = computed(() => {
     })
 })
 
-onMounted(() => {
+const tabData = [
+    {
+        value: 'All Coaches',
+        groupByView: false,
+        key: '',
+    },
+    {
+        value: 'Subscribed Coaches',
+        groupByView: false,
+        key: '',
+    },
+];
+
+onBeforeMount(() => {
+    collectionStore.setDefaults({
+        tabOptions: tabData,
+        filter: {
+            sort: 'slug'
+        },
+        queryType: 'instructor',
+    });
 })
 </script>
