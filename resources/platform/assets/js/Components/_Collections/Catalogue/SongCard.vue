@@ -7,7 +7,7 @@
         ]">
         <div class="tw-flex tw-items-center" :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
             <!-- Thumbnail Section -->
-            <component :is="isReleased ? 'a' : 'div' " :href="item.url" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
+            <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
                 { 'tw-w-full': isGroupedView },
                 { 'tw-w-[90px] sm:tw-w-full tw-flex-shrink-0': !isGroupedView },
             ]">
@@ -34,7 +34,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
-                    <component :is="isReleased ? 'a' : 'div' " :href="item.url"
+                    <component :is="isReleased ? 'a' : 'div' " :href="item.web_url_path"
                         class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
