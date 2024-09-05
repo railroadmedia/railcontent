@@ -35,7 +35,6 @@ import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback';
 import Offline from './Components/_Pages/Live/Offline';
 import Online from './Components/_Pages/Live/Online';
 import CoachShow from './Components/_Pages/CoachShow';
-import InviteFriend from './Components/_Pages/InviteFriend';
 import StudentFocus from './Components/_Pages/StudentFocus';
 import Shows from './Components/_Pages/Shows';
 import Overview from './Components/_Pages/Overview';
@@ -222,7 +221,6 @@ app.component('AppContainer', AppContainer)
     .component('Payments', Payments)
     .component('NotificationSettings', NotificationSettings)
     .component('AccountDetails', AccountDetails)
-    .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)

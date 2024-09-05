@@ -47,15 +47,15 @@ class ReferralPagesController extends BaseController
             Log::error($e->getMessage());
         }
 
-        return view(
-            'referral.invite-friend',
-            [
-                'userReferralCode' => $referrer->referral_code,
-                'referralsPerUser' => $referralsPerUser,
-                'userReferralsPerformed' => $referrer->referrals_performed,
-                'userReferralLink' => $referrer->referral_link,
-                'canRefer' => $this->referralService->canRefer($referrer),
-            ]
-        );
+        // return view(
+        //     'referral.invite-friend',
+        //     [
+        //         'userReferralCode' => $referrer->referral_code,
+        //         'referralsPerUser' => $referralsPerUser,
+        //         'userReferralsPerformed' => $referrer->referrals_performed,
+        //         'userReferralLink' => $referrer->referral_link,
+        //         'canRefer' => $this->referralService->canRefer($referrer),
+        //     ]
+        // );
     }
 }
