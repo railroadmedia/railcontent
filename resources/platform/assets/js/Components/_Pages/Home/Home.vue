@@ -20,7 +20,7 @@
 
             <!-- Header carousel -->
             <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
-            
+
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
@@ -81,16 +81,14 @@
             />
 
             <!-- Live section -->
-            <CoachEvent 
-                v-if="coachEvent" 
-                class="tw-mb-6" 
-                :preloadedContent="coachEvent" 
+            <CoachEvent
+                v-if="coachEvent"
+                class="tw-mb-6"
+                :preloadedContent="coachEvent"
                 :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" 
-                :youtubeEventId="youtubeId" 
+                :youtubeEventId="youtubeId"
                 :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" 
-                trackingSection="live" 
+                trackingSection="live"
             />
 
             <!-- Upcoming section -->
