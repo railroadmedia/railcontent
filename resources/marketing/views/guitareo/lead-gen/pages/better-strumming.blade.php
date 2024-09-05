@@ -76,60 +76,101 @@
     </style>
 @endsection
 
+@section('body-data')
+    x-data="{
+    kickOff: false,
+    lazyLoad: false,
+    }"
+@endsection
+
 @section('body')
-    @php
+    <section x-data="{ visible: false }" x-intersect.once="visible = true;" class="m-0 text-white" style="background: #111729;">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal py-6 md:py-8">
+            <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
+                <div class="aspect-16:9 cursor-pointer rounded-xl my-7 autoplay-video overflow-hidden w-full relative"
+                    x-on:click="kickOff = true;" role="button">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                    <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
+                        alt="Thumbnail for tutorial video"/>
+                </div>
+                <div class="mt-4 md:py-4">
+                    <h5 class="leading-tight"><strong>Strum With Confidence In Just 30 Days</strong></h5>
+                    <p class="mt-4">
+                        <span>30 Days To Better Strumming is the perfect course for beginner &amp; intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years. </span>
+                    </p>
+                </div>
+            </div>
 
-        $features = [
-            [
-                'title' => 'Course Kick-Off',
-                'posterImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/new-piano-players/kick-off-new-players.jpg',
-                'videoId' => 797858259,
-            ],
+            <div class="text-black md:w-1/3">
+                <div class="relative">
+                    <div x-data="{ isOpen: [] }">
 
-        ];
-        $lessons = [
-            [
-            'title' => 'Quick-Start Guide To The Piano',
-            'description' => "Before we begin, we'll show you the note names and how to sit at the piano correctly. You've got this!"
-            ],
-            [
-            'title' => 'Your First Chord Progression',
-            'description' => "In week 1, you'll learn your first chord progression from start to finish and build your confidence through 1 lesson, 5 workouts, and a pre-recorded Q&A."
-            ],
-            [
-            'title' => 'Build Real Chords',
-            'description' => "In week 2, you'll learn triads and different hand movements needed to build real chords with 1 lesson, 5 workouts, and a pre-recorded Q&A. "
-            ],
-            [
-            'title' => 'Create Beautiful Patterns',
-            'description' => "In week 3, you'll learn about quarter notes and half notes and use them to create patterns through 1 lesson, 5 workouts, and a pre-recorded Q&A. "
-            ],
-            [
-            'title' => 'Play Your First Song!',
-            'description' => "In week 4, you'll pull together everything you've learned and add a few sprinkles of fancy leading into playing a song on your own!"
-            ],
-        ];
-    @endphp
+                        @php
+                            $lessons = [
+                                [
+                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-02.webp',
+                                    'weekNum' => 'WEEK 1',
+                                    'title' => 'Get Into The Groove',
+                                    'excerpt' => 'todo',
+                                    'description' => 'Build the foundations to set you up for strumming success! In week 1, you will learn to get confident with constant strumming, miss notes, eighth note variations, playing the campfire strum pattern, using your foot to keep time, and using muted strums vs open chords. ',
 
+                                ],
+                                [
+                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-03.webp',
+                                    'weekNum' => 'WEEK 2',
+                                    'title' => 'Push The Beat',
+                                    'excerpt' => 'todo',
+                                    'description' => 'It’s time to learn to push your beats, meet the rock n’ roll, and too many ands & reggae strumming patterns. Play alongside Kent, and you will lock in within no time. ',
 
-    @include('drumeo.products.partials.evergreen._lessons', [
-        'title' => ' ',
-        'description' => "<strong>Strum With Confidence In Just 30 Days</strong><br><br>30 Days To Better Strumming is the perfect course for beginner & intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years.",
-        'features' => $features,
-        'lessonTitle' => ' ',
-        'instructor' => ' ',
-        'course' => ' ',
-        'lessons' => $lessons
-    ])
+                                ],
+                                [
+                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-04.webp',
+                                    'weekNum' => 'Week 3',
+                                    'title' => 'Get Creative',
+                                    'excerpt' => 'todo',
+                                    'description' => 'Let’s get dynamic! Join Kent as he walks you through dynamics, accents, 332 pattern, palm mutes & split strums. These techniques will transform your playing for years to come.',
+
+                                ],
+                                [
+                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-05.webp',
+                                    'weekNum' => 'Week 4',
+                                    'title' => 'Put It All Together',
+                                    'excerpt' => 'todo',
+                                    'description' => 'Three weeks down, one to go! This is where you’ll take a moment to see how far you’ve come and add the icing on the cake. You’ll begin utilizing sixteenth notes, the gallop strum, the smack strum, and the Jim N Jack, and create your strum patterns. ',
+
+                                ],
+                            ];
+                        @endphp
+                        @foreach ($lessons as $lesson)
+                            <div x-data="{ open: false }" class="rounded-lg bg-white shadow mb-1.5">
+                                <button class="rounded-lg flex w-full items-center justify-between px-4 py-3.5" style="background: #eff7ff;" x-on:click="open = !open;">
+                                    <p class="mx-0 truncate">{{ $lesson['title'] }}</p>
+                                    <div class="ml-auto text-{{ $brand }} cursor-pointer">
+                                        <i class="fas fa-angle-down transform transition-all duration-300" x-bind:class="{ 'rotate-180': open }"></i>
+                                    </div>
+                                </button>
+                                <div x-cloak class="transition-all duration-200 overflow-hidden" x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
+                                    <p class="px-4 pb-4 bg-blue-50 rounded-lg leading-tight text-xs">{{ $lesson['description'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="absolute h-5 bottom-0 left-0 right-0 z-10 hidden" style="background: linear-gradient(to bottom, transparent, #00101d);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F2F8FF;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp">
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/platform-header.png">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/platform-header.png"
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
@@ -244,4 +285,9 @@
             </div>
         </div>
     </section>
+    @include('_partials.components.video-modal', [
+        'name' => 'kickOff',
+        'video' => '944222905',
+        'vimeo' => true,
+    ])
 @endsection
