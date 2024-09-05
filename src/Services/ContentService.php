@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ContentUserProgress;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -81,6 +82,7 @@ class ContentService
         private DatabaseManager $databaseManager,
         private ContentVideoRepository $contentVideoRepository,
         private RecommendationService $recommendationService,
+        private SanityGateway $sanityGateway,
     ) {
     }
 
@@ -304,12 +306,12 @@ class ContentService
     {
         if ($isGroupedBy) {
             foreach($recommendations['recommendations'] as $index => $groupedBy) {
-                $recommendations['recommendations'][$index]['lessons'] = $this->getByIds($groupedBy['lessons']);
+                $recommendations['recommendations'][$index]['lessons'] = $this->sanityGateway->getByRailContentIds($groupedBy['lessons']);
             }
             $content = $recommendations['recommendations'];
             $content = Decorator::decorate($content, 'group');
         } else {
-            $content = $this->getByIds($recommendations['recommendations']);
+            $content = $this->sanityGateway->getByRailContentIds($recommendations['recommendations']);
         }
         $filterOptions = [
             "type" => ["Recommendation"],
