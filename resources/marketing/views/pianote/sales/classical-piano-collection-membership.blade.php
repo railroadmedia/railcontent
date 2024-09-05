@@ -152,14 +152,14 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
             <br>
-            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
+            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none uppercase">
                START PLAYING BEAUTIFUL<br>
                PIANO <strong class="relative inline-block"> IN JUST 10 MINUTES  </strong><br class="hidden sm:inline">
-                <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-5" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+                <svg class="absolute left-0 lg:left-10 right-0 bottom-0 w-full h-3 sm:h-5" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
             </h1>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
-                <i class="fas fa-check text-pianote"></i>  Step-by-step lessons
-                <i class="fas fa-check lg:ml-5 text-pianote"></i>Practice with <strong>real</strong> teachers
+                <i class="fas fa-check text-pianote"></i> Step-by-step lessons
+                <i class="fas fa-check lg:ml-5 text-pianote"></i> Practice with <strong>real</strong> teachers
                 <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-pianote"></i> Personal support
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular songs
@@ -170,11 +170,11 @@
                     <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true">GET STARTED</a>
                 <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
-                        &nbsp;Watch Trailer
+                        &nbsp;Watch The Trailer
                     </div>
                     <div class="w-full sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
-                        &nbsp;Watch Trailer
+                        &nbsp;Watch The Trailer
                     </div>
             </div>
             
@@ -194,7 +194,7 @@
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/classical-method.webp',
                             'title' => 'The Classical Method',
-                            'desc' => 'Go beyond individual pieces. <br> The Classical Method is a 5-level curriculum taught by professional pianist Victoria Theodore (Beyoncé, Stevie Wonder).',
+                            'desc' => 'Go beyond individual pieces. <br> The Classical Method is a 5-level curriculum taught by professional pianist Victoria Theodore (Beyoncé, Stevie Wonder).',
                         ],
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/30-day-challenges.webp',
@@ -204,7 +204,7 @@
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/favorite-songs.webp',
                             'title' => 'Your Favorite Songs',
-                            'desc' => 'Why do you learn the piano? </br>To play songs!<br> Explore our library of popular songs and learn your favorite today.',
+                            'desc' => 'Why do you learn the piano? <br>To play songs!<br> Explore our library of popular songs and learn your favorite today.',
                         ],
                     ];
                 @endphp
@@ -222,7 +222,7 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative overflow-hidden " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-16 lg:pt-20 lg:pb-10 relative overflow-hidden " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
         <div class="container max-w-3xl mx-auto relative z-20">
             <h2 class="leading-tight mb-4">Play <strong>beautiful piano in <br> just 10 minutes.</strong></h2>
 
@@ -406,15 +406,18 @@
                 <i class="fas fa-arrow-down"></i>
             </h4>
             
-            <h5 class="uppercase text-pianote">
-                <strong>Step 3</strong>
-            </h5>
-            <p class="py-5 tracking-tight leading-normal px-6">
-                <strong>Hear the result.</strong> The most important part of learning piano is building a daily habit. By practicing just a little bit each day, you’ll hear the results sooner (so will everyone else!).
-            </p>
-            
-            <div class="container max-w-5xl mx-auto pb-4">
-                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
+          <div class="bg-white rounded-xl border border-gray p-4 sm:p-5 relative overflow-visible mb-6 md:mb-10">
+                <h5 class="uppercase text-pianote">
+                    <strong>Step 3</strong>
+                </h5>
+                <p class="py-5 tracking-tight leading-normal">
+                    <strong>Hear the result.</strong> The most important part of learning piano is building a daily habit. By practicing just a little bit each day, you’ll hear the results sooner (so will everyone else!).
+                </p>
+
+                <div class="relative w-full">
+                    <img class="max-w-[100%] md:max-w-[120%] -mx-10 h-auto object-cover" 
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
+                </div>
             </div>
             
             <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="#final">GET STARTED</a>
@@ -449,8 +452,7 @@
         <div class="container max-w-4xl mx-auto hidden md:block">
             <div class="max-w-2xl mx-auto text-center mb-4"> 
                 <h2 class="playfair text-3xl">Free bonuses to <br class="inline sm:hidden"><strong> help you play better. </strong></h2>
-                <p class="leading-normal my-2 sm:mb-8">Improve your timing and expand your repertoire with these FREE gifts. <br><br>
-                    It doesn’t take months or years of lessons before you can play beautiful pieces like these.  <br class="inline sm:hidden">We’ve taken the fear and formality out of learning classical music.
+                <p class="leading-normal my-2 sm:mb-8">Improve your timing and expand your repertoire with these FREE gifts. 
                 </p>
             </div>
             <div class="max-w-4xl mx-auto px-4 pt-7">
@@ -595,7 +597,7 @@
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-4 leading-none sm:leading-none lg:leading-none uppercase">
                 START PLAYING BEAUTIFUL<br>
                 PIANO <strong class="relative inline-block">IN JUST 10 MINUTES</strong>
-                <svg class="absolute left-10 md:left-24 right-0 bottom-0 w-full h-3 sm:h-4 md:h-5 lg:h-6" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);">
+                <svg class="absolute left-10 md:left-20 right-0 bottom-0 w-full h-3 sm:h-4 md:h-5 lg:h-6" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);">
                     <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path>
                     <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path>
                 </svg>
@@ -678,7 +680,7 @@
     ])
      @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '928599834',
+        'video' => '785314388',
         'vimeo' => true,
     ])
 

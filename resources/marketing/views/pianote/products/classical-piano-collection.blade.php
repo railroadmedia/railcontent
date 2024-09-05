@@ -96,7 +96,7 @@
         background-size: cover;
         }
 
-        @media (max-width: 780px) {
+        @media (max-width: 743px) {
             .teacher-section {
                 background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/demo-bg-m-cut.png') no-repeat center;
                 background-size: cover;
@@ -111,7 +111,9 @@
     BeethovenElise: false,
     BeethovenSonata: false,
     Chopin: false,
+    Satie: false,
     trailer: false,
+    demo: false,
     }"
 @endsection
 
@@ -128,15 +130,15 @@
                 <h4 class="tracking-widest uppercase">Collection</h4>
                 <h6 class="italic pt-2">Play The Most Beautiful Piano Music In The <br class="block md:hidden"> World With Step-By-Step Tutorials</h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
+                    <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 anchor-slide" href="#final">GET STARTED</a>
+                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
-                        &nbsp;Watch Trailer
+                        &nbsp;Watch The Trailer
                     </div>
                     <div class="w-full sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
-                        &nbsp;Watch Trailer
+                        &nbsp;Watch The Trailer
                     </div>
-                    <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500 anchor-slide" href="#final">GET STARTED</a>
                 </div>
             </div>
         </div>
@@ -187,6 +189,11 @@
             'id' => 'Chopin',
             'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/prelude-in-e-minor.webp',
             'alt' => 'Chopin'
+        ],
+        [
+            'id' => 'Satie',
+            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/gymnopedie.webp',
+            'alt' => 'Satie'
         ]
         ];
     @endphp
@@ -284,7 +291,7 @@
                     It doesn’t take months or years of lessons before you can play beautiful pieces like these. We’ve taken the fear and formality out of learning classical music.
                 </p>
             </div>
-            <div class="max-w-4xl mx-auto px-4 pt-7">
+            <div class="max-w-4xl mx-auto px-4 pt-7 pb-6 md:pb-0">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
@@ -320,12 +327,12 @@
     </section>
 
 
-    <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="trailer=true">
-        <h1 class="text-white text-center pb-96 playfair leading-snug tracking-none font-normal px-4 pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
+    <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="demo=true">
+        <h1 class="text-white text-center pb-80 sm:pb-96 playfair leading-snug tracking-none font-normal md:px-4 pt-4 md:pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
 
-        <div class="container mx-auto max-w-5xl relative text-left pt-96 md:pt-84 lg:pt-80 md:px-10">
-            <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12">
-                <div class="leading-relaxed text-base px-4 sm:px-0">
+        <div class="container mx-auto max-w-5xl relative text-left pt-[16rem] md:pt-84 lg:pt-80 md:px-10">
+            <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12 leading-relaxed text-xs sm:text-base">
+                <div class="md:px-4 sm:px-0">
                     <p class="mb-4">
                         You know the drill.
                     </p>
@@ -339,7 +346,7 @@
                        Imagine how much faster you would improve if your teacher was sitting next to you while you practiced.
                     </p>
                 </div>
-                <div class="leading-relaxed text-base px-4 sm:px-0">
+                <div class="md:px-4 sm:px-0">
                     <p class="mb-4">
                        <strong>That’s what you’ll get with the Classical Piano Collection.</strong>
                     </p>
@@ -585,8 +592,18 @@
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
-        'name' => 'trailer',
+        'name' => 'Satie',
         'video' => '928599834',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal', [
+        'name' => 'trailer',
+        'video' => '785314388',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal', [
+        'name' => 'demo',
+        'video' => '785314388',
         'vimeo' => true,
     ])
 
