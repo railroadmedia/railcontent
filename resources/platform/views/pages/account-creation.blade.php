@@ -11,7 +11,7 @@
         :email="{{ json_encode($email) }}"
         :token="{{ json_encode($verificationToken) }}"
         :submiturl="{{ json_encode(url()->route('user_management_system.create-account-submit')) }}"
-        formType="create"
+        form-type="create"
     >
         <template #csrf>{{ csrf_field() }}</template>
     </reset-pass-form>
