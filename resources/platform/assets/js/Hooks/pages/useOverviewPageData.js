@@ -1,6 +1,6 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchMethod, fetchMethodChildren } from 'musora-content-services';
+import { fetchMethod, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 
 export async function useOverviewPageData(contentType) {
@@ -23,6 +23,18 @@ export async function useOverviewPageData(contentType) {
                 data.value = result;
             } else {
                 throw new Error('Failed to fetch method');
+            }
+        }
+        //Foundations....
+        else if (contentType === "unit") {
+            const result = await fetchFoundation('foundations-2019');
+            if(result) {
+                //Add Method Level Position
+                result.units = result.units.map((unit, index) => ({
+                    ...unit,
+                    position: index + 1 
+                }));
+                data.value = result;
             }
         }
         //Method Level Courses

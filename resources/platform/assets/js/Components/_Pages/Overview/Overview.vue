@@ -199,7 +199,7 @@ const error = ref(null);
 
 //Computed
 const showOverview = computed(() => {
-    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course';
+    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course'  || props.contentType === 'unit';
 })
 const showNumbers = computed(() => {
     return props.contentType === 'learning-path-lesson';
@@ -214,7 +214,10 @@ onBeforeMount( async () => {
     if( useSanityData ) {
         //console.log('sanity content is: ', props.contentType);
         const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
-            data.value = props.contentType === 'learning-path-level' ? OverviewData.value.levels : OverviewData.value.children;
+            if(props.contentType === 'learning-path-level') { data.value = OverviewData.value.levels; }
+            else if(props.contentType === 'unit') { data.value = OverviewData.value.units; }
+            else { data.value = OverviewData.value.child; }
+
             console.log('data', data.value)
             header.value.title = OverviewData.value.title;
             header.value.description = OverviewData.value.description;

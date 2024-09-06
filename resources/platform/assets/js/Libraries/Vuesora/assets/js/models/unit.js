@@ -12,7 +12,7 @@ export default class UnitContentModel extends ContentModel {
         this.list.thumb_title = this.levelNumber;
         this.list.thumb_logo = this.getThumbLogo();
         this.list.color_title = null;
-        this.list.grey_title = `with ${this.parseInstructors()}`;
+        this.list.grey_title = `with ${this.getInstructors()}`;
         this.list.column_data = [
             ContentModel.mapDifficulty(this.post),
             this.postChildLessonCount,
@@ -26,5 +26,10 @@ export default class UnitContentModel extends ContentModel {
 
     getThumbLogo() {
         return 'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/foundations-logo-white.png';
+    }
+
+    getInstructors() {
+        const instructors = this.post.instructor?.map(instructor => instructor.name);
+        return instructors?.join(', ');
     }
 }
