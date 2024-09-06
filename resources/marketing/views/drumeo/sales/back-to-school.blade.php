@@ -154,7 +154,7 @@
         style="background: linear-gradient(68deg, #07233E 0%, #0C1524 100%);">
         <div class="container mx-auto relative z-50  max-w-5xl ">
             <div class="w-full px-4 md:px-0 mb-6">
-                <img class="h-24 sm:h-40" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/september/bts-logo-white.png">
+                <img class="h-24 sm:h-40" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/september/bts-logo-white.svg">
                 <br>
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Get 1 year of unlimited drum lessons<br class="hidden sm:inline"> + lifetime access to all 30-day courses.</strong></h3>
             </div>
