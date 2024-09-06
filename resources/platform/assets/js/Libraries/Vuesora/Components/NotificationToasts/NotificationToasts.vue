@@ -12,6 +12,7 @@
                               tw-w-4/6 lg:tw-w-full
                               tw-justify-self-center
                               tw-mx-auto
+                              tw-w-auto
                               tw-rounded-md
                               tw-drop-shadow-md
                               dark:tw-text-black
@@ -85,7 +86,7 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    duration: {
+    slideDuration: {
       type: Number,
       default: 500
     },
