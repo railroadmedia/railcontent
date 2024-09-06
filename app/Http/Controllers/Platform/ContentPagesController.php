@@ -420,7 +420,7 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
-            'contentType' => $firstLevelContent['type']
+            'contentType' => ($childrenContent->isNotEmpty())?$childrenContent->first()->fetch('type'):null
         ]);
     }
 
@@ -525,7 +525,7 @@ class ContentPagesController extends BaseController
             'xpAmount' => $secondContent->fetch('total_xp'),
             'displayItemAsOverview' => $secondContent['type'] === 'learning-path-level' &&
                 in_array(brand(), ['drumeo', 'pianote']),
-            'contentType' => $secondContent['type']
+            'contentType' => ($courses->isNotEmpty())?$courses->first()->fetch('type'):null
         ]);
     }
 
@@ -634,7 +634,7 @@ class ContentPagesController extends BaseController
             'xpBonus' => $thirdContent->fetch('xp'),
             'xpAmount' => $thirdContent->fetch('total_xp'),
             'displayItemAsOverview' => false,
-            'contentType' => $thirdContent['type']
+            'contentType' => ($courses->isNotEmpty())?$courses->first()->fetch('type'):null
         ]);
     }
 
