@@ -145,7 +145,7 @@
                                      </span>
                                     left!</em></strong></h6>
                             <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 mx-auto sm:max-w-xs">
-                                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
+                                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))
                                     <span class="w-full join smaller sold-out mb-2">Opens September 12th</span>
                                 @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
                                     <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>
@@ -344,7 +344,7 @@
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
 
-                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 12, 0, 0, 0, 'America/Vancouver'))
+                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))
                     <span class="join sold-out">Opens September 12th</span>
                 @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
                     <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">GET Started »</a>
