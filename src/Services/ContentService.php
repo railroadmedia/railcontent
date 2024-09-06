@@ -1041,7 +1041,7 @@ class ContentService
         $prevStatus = ContentRepository::$availableContentStatues;
         $prevPullFuture = ContentRepository::$pullFutureContent;
         ContentRepository::$pullFutureContent = true;
-        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED];
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_DRAFT];
         $returning = $this->getFiltered(
             page: $page,
             limit: $limit,
