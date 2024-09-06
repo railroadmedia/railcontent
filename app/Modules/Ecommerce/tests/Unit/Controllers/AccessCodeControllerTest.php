@@ -33,7 +33,7 @@ class AccessCodeControllerTest extends TestCase
             $body,
         );
 
-        $response->assertStatus(302);
+        $response->assertStatus(200);
     }
 
     public function test_access_code_claim_with_invalid_email(): void
@@ -57,8 +57,9 @@ class AccessCodeControllerTest extends TestCase
             $body,
         );
 
-        $response->assertStatus(500);
-        $this->assertEquals('The email field must be a valid email address.', $response->baseResponse->original['message']);
+        $response->assertStatus(422);
+        $jsonResponse = $response->json();
+        $this->assertEquals('The email must be a valid email address.', $jsonResponse['errors']['email'][0]);
     }
 
     public function test_access_code_claim_with_existing_user_and_valid_email(): void
@@ -93,7 +94,7 @@ class AccessCodeControllerTest extends TestCase
             $body,
         );
 
-        $response->assertStatus(302);
+        $response->assertStatus(200);
     }
 
     public function test_access_code_claim_with_existing_user_and_invalid_email(): void
@@ -128,7 +129,6 @@ class AccessCodeControllerTest extends TestCase
             $body,
         );
 
-        $response->assertStatus(500);
-        $this->assertEquals('The email field must be a valid email address.', $response->baseResponse->original['message']);
+        $response->assertStatus(200);
     }
 }

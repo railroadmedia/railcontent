@@ -465,7 +465,7 @@
             <h3 class="leading-tight"><strong>Getting started has<br class="inline md:hidden"> never been easier.</strong></h3>
             <h6 class="mt-3 md:mt-5 lg:mt-7 mb-7 lg:mb-10 leading-relaxed text-blue"><em>Or more affordable.</em></h6>
             <div class="relative w-full mx-auto" style="max-width:1150px;">
-                <p class="leading-tight text-xs absolute top-0 right-0 -mt-8 w-1/4 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <p class="leading-none text-xs absolute top-0 right-0 -mt-8 w-1/4 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table class="compare-table select-none">
                     <tbody>
                     <tr style="background-color:transparent!important;">

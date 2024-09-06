@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
@@ -13,6 +14,7 @@ use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
 use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -50,18 +52,6 @@ use Throwable;
 
 class CustomerIoSyncEventListener
 {
-    private UserService $userService;
-
-    private CommentRepository $commentRepository;
-
-    private ThreadRepository $threadRepository;
-
-    private PostRepository $postRepository;
-
-    private CategoryRepository $categoryRepository;
-
-    private ContentService $contentService;
-
     /**
      * @var bool
      */
@@ -70,26 +60,23 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
-    private ProductService $productService;
 
     public function __construct(
-        UserService $userService,
-        CommentRepository $commentRepository,
-        CategoryRepository $categoryRepository,
-        ThreadRepository $threadRepository,
-        PostRepository $postRepository,
-        ContentService $contentService,
-        ProductService $productService
+        private UserService $userService,
+        private CommentRepository $commentRepository,
+        private CategoryRepository $categoryRepository,
+        private ThreadRepository $threadRepository,
+        private PostRepository $postRepository,
+        private ContentService $contentService,
+        private ProductService $productService,
+        private CustomerIoService $customerIoService,
+        private UserAccessPermissionsService $userAccessPermissionsService
     ) {
-        $this->userService = $userService;
-        $this->commentRepository = $commentRepository;
-        $this->categoryRepository = $categoryRepository;
-        $this->threadRepository = $threadRepository;
-        $this->postRepository = $postRepository;
-        $this->contentService = $contentService;
-        $this->productService = $productService;
     }
 
+    /**
+     * @param UserCreated $userCreated
+     */
     public function handleUserCreated(UserCreated $userCreated)
     {
         if (self::$disable) {
@@ -120,6 +107,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param UserUpdated $userUpdated
+     */
     public function handleUserUpdated(UserUpdated $userUpdated)
     {
         if (self::$disable) {
@@ -133,6 +123,16 @@ class CustomerIoSyncEventListener
                 $userUpdated->getNewUser()->id,
                 self::$alreadyQueuedUserIds
             )) {
+                if ($userUpdated->getNewUser()->email != $userUpdated->getOldUser()->email) {
+                    /**
+                     * NOTE: As page views are tracked in Customer.io, this event needs to be handled synchronously to avoid conflicts
+                     * in Customer.io profiles. That's why it doesn't dispatch an event
+                     */
+                    $this->customerIoService->handleUserEmailChanged(
+                        oldEmail: $userUpdated->getOldUser()->email,
+                        newEmail: $userUpdated->getNewUser()->email
+                    );
+                }
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->delay(
                         Carbon::now()
@@ -179,6 +179,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param CommentLiked $commentLiked
+     */
     public function handleCommentLiked(CommentLiked $commentLiked)
     {
         if (self::$disable) {
@@ -214,6 +217,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param CommentCreated $commentCreated
+     */
     public function handleCommentCreated(CommentCreated $commentCreated)
     {
         if (self::$disable) {
@@ -249,6 +255,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param ThreadCreated $threadCreated
+     */
     public function handleForumsThreadCreated(ThreadCreated $threadCreated)
     {
         if (self::$disable) {
@@ -286,6 +295,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param PostCreated $postCreated
+     */
     public function handleForumsPostCreated(PostCreated $postCreated)
     {
         if (self::$disable) {
@@ -327,6 +339,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param UserContentProgressSaved $userContentProgressSaved
+     */
     public function handleUserContentProgressSaved(UserContentProgressSaved $userContentProgressSaved)
     {
         if (self::$disable) {
@@ -408,6 +423,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param LiveStreamEventAttended $liveStreamEventAttended
+     */
     public function handleLiveLessonAttended(LiveStreamEventAttended $liveStreamEventAttended)
     {
         if (self::$disable) {
@@ -444,6 +462,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param FirstActivityPerDay $activityEvent
+     */
     public function handleFirstActivityPerDay(FirstActivityPerDay $activityEvent)
     {
         if (self::$disable) {
@@ -505,6 +526,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param UTMLinks $UTMLinks
+     */
     public function handleUTMLinks(UTMLinks $UTMLinks)
     {
         if (self::$disable) {
@@ -544,6 +568,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param EmailInvite $emailInvite
+     */
     public function handleReferralInvite(EmailInvite $emailInvite)
     {
         if (self::$disable) {
@@ -605,6 +632,9 @@ class CustomerIoSyncEventListener
         }
     }
 
+    /**
+     * @param MobileAppLogin $mobileAppLogin
+     */
     public function handleMobileAppLogin(MobileAppLogin $mobileAppLogin)
     {
         if (self::$disable) {
@@ -677,8 +707,8 @@ class CustomerIoSyncEventListener
         $accessCode = $accessCodeClaimed->getAccessCode();
         $brand = $accessCode->brand;
 
-        dispatch(
-            (new CustomerIoCreateEventByUserId(
+        dispatchWithDelay(
+            new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->id,
                 $brand,
                 'musora_membership_non_recurring_access_added',
@@ -695,15 +725,20 @@ class CustomerIoSyncEventListener
                 ],
                 null,
                 Carbon::now()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(3)
-            )
+            ),
+            3
         );
+
+        if (in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))) {
+            dispatchWithDelay(new CustomerIoSyncUserByUserId($accessCodeClaimed->getUser(), ['primary_brand' => $brand]), 3);
+        }
     }
 
     // CMT-77 August Referral Contest
 
+    /**
+     * @param ReferralClaimed $referralClaimed
+     */
     public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed)
     {
         $referrer = $referralClaimed->getReferrer();
@@ -730,6 +765,9 @@ class CustomerIoSyncEventListener
         );
     }
 
+    /**
+     * @param ReferralClaimed $referralClaimed
+     */
     public function handleReferralClaimed(ReferralClaimed $referralClaimed)
     {
         $referrer = $referralClaimed->getReferrer();

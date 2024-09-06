@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Pianote;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
 use App\Modules\Ecommerce\Services\AccessCodeService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
@@ -27,265 +25,273 @@ class SalesController extends BaseController
     }
 
 
-    public function home(): View
+    public function home()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', ]);
     }
 
-    public function homeBF(): View
+    public function homeBF()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true']);
     }
-    public function homeMonth(): View
+    public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
     }
-    public function promo(): View
+    public function promo()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'promoPage' => 'true']);
     }
-    public function restart(): View
+    public function restart()
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function ultimateLessons(): View
+    public function ultimatepractice()
     {
-        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+        return view('pianote.sales.ultimate-practice', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
-    public function promoEG(): View
+    public function backToSchool()
+    {
+        return view('pianote.sales.back-to-school', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
+    public function promoEG()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
-    public function promoWO(): View
+    public function promoWO()
     {
         return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
-    public function trial(): View
+    public function welcomeBackDiscount()
+    {
+        return view('pianote.sales.welcome-back-discount', ['theme' => 'pianote']);
+    }
+    public function trial()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
-    public function trialSongs(): View
+    public function trialSongs()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true', 'songsVersion' => 'true']);
     }
-    public function trialBeginner(): View
+    public function trialBeginner()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true', 'beginnerVersion' => 'true']);
     }
 
-    public function trialPosters(): View
+    public function trialPosters()
     {
         return view('pianote.sales.posters-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
-    public function trialChords(): View
+    public function trialChords()
     {
         return view('pianote.sales.chords-trial', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
-    public function promoSS(): View
+    public function promoSS()
     {
         return view('pianote.sales.song-secrets-bonus', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
-    public function promoUT(): View
+    public function promoUT()
     {
         return view('pianote.sales.ultimate-technique', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
-    public function choosePlan(): View
+    public function choosePlan()
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
-    public function choosePlanMonth(Request $request): View
+    public function choosePlanMonth(Request $request)
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
-    public function about(): View
+    public function about()
     {
         return view('pianote.sales.pages.about', ['theme' => 'pianote']);
     }
 
-    public function app(): View
+    public function app()
     {
         return view('pianote.sales.pages.app', ['theme' => 'pianote']);
     }
 
-    public function cookie(): View
+    public function cookie()
     {
         return view('pianote.sales.pages.cookie', ['theme' => 'pianote']);
     }
 
-    public function terms(): View
+    public function terms()
     {
         return view('pianote.sales.pages.terms', ['theme' => 'pianote']);
     }
 
-    public function privacy(): View
+    public function privacy()
     {
         return view('pianote.sales.pages.privacy', ['theme' => 'pianote']);
     }
 
-    public function songs(): View
+    public function songs()
     {
         return view('pianote.sales.features.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
     }
 
-    public function method(): View
+    public function method()
     {
         return view('pianote.sales.features.method', [ 'theme' => 'pianote', 'page' => 'method']);
     }
 
-    public function coaches(): View
+    public function coaches()
     {
         return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
-    public function davidbennett(): View
+    public function davidbennett()
     {
         return view('pianote.sales.affiliates.davidbennett', ['theme' => 'pianote', 'month' => true]);
     }
 
-    public function affiliates(Request $request, $domain, $page = null): View
+    public function affiliates(Request $request, $domain, $page = null)
     {
         return view('pianote.sales.affiliates.'.$page, ['theme' => 'pianote', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
-    public function products(Request $request, $domain, $page = null): View
+    public function products(Request $request, $domain, $page = null)
     {
         return view('pianote.products.'.$page);
 
         throw new NotFoundHttpException();
     }
 
-    public function fasterfingers(): View
+    public function fasterfingers()
     {
         return view('pianote.products.faster-fingers', ['theme' => 'pianote']);
     }
 
-    public function worshippiano(): View
+    public function worshippiano()
     {
         return view('pianote.products.worship-piano', ['theme' => 'pianote']);
     }
 
-    public function pianotechniquemadeeasy(): View
+    public function pianotechniquemadeeasy()
     {
         return view('pianote.products.piano-technique-made-easy', ['theme' => 'pianote']);
     }
 
-    public function destupefyyourlefthand(): View
+    public function destupefyyourlefthand()
     {
         return view('pianote.products.destupefy-your-left-hand', ['theme' => 'pianote']);
     }
 
-    public function playbeautifulpiano(): View
+    public function playbeautifulpiano()
     {
         return view('pianote.products.play-beautiful-piano', ['theme' => 'pianote']);
     }
 
-    public function beginnerclassicalpiano(): View
+    public function beginnerclassicalpiano()
     {
         return view('pianote.products.beginner-classical-piano', ['theme' => 'pianote']);
     }
 
-    public function beautifulBeginnerBundle(): View
+    public function beautifulBeginnerBundle()
     {
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
-    public function lifetime(): View
+    public function lifetime()
     {
         return view('pianote.sales.pages.lifetime', [ 'theme' => 'pianote' ]);
     }
 
-    public function lifetimeDiscount(): View
+    public function lifetimeDiscount()
     {
         return view('pianote.sales.pages.lifetime', [ 'theme' => 'pianote', 'upgradeVersion' => true  ]);
     }
 
-    public function lisarecommends(): View
+    public function lisarecommends()
     {
         return view('pianote.pages.lisa-recommends', ['theme' => 'pianote']);
     }
 
-    public function welcomeparty(): View
+    public function welcomeparty()
     {
         return view('pianote.lead-gen.welcome-party', ['theme' => 'pianote']);
     }
 
-    public function jesusMolina(): View
+    public function jesusMolina()
     {
         return view('pianote.products.improvisation-with-jesus-molina', ['theme' => 'pianote']);
     }
 
-    public function roland(): View
+    public function roland()
     {
         return view('pianote.sales.pages.roland', ['theme' => 'pianote']);
     }
 
-    public function songs500(): View
+    public function songs500()
     {
         return view('pianote.products.500-songs', ['theme' => 'pianote']);
     }
 
-    public function PowerOfChords(): View
+    public function PowerOfChords()
     {
         return view('pianote.products.the-power-of-chords', ['theme' => 'pianote']);
     }
 
-    public function PowerOfChordsGiveaway(): View
+    public function PowerOfChordsGiveaway()
     {
         return view('pianote.products.the-power-of-chords-giveaway', ['theme' => 'pianote']);
     }
 
-    public function concertHeadphones(): View
+    public function concertHeadphones()
     {
         return view('pianote.products.concert-headphones', ['theme' => 'pianote']);
     }
 
-    public function concertHeadphonesMember(): View
+    public function concertHeadphonesMember()
     {
         return view('pianote.products.concert-headphones', ['memberVersion' => true]);
     }
 
-    public function foundations(): View
+    public function foundations()
     {
         return view('pianote.products.foundation-books', ['theme' => 'pianote']);
     }
-    public function classicalPianoPieces(): View
+    public function classicalPianoPieces()
     {
         return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
     }
-    public function metronome(): View
+    public function metronome()
     {
         return view('pianote.products.metronome', ['theme' => 'pianote']);
     }
-    public function metronomePrestige(): View
+    public function metronomePrestige()
     {
         return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
-    public function christmasSongbook(): View
+    public function christmasSongbook()
     {
         return view('pianote.products.christmas-songbook', ['theme' => 'pianote']);
     }
-    public function christmasSongbookMembers(): View
+    public function christmasSongbookMembers()
     {
         return view('pianote.products.christmas-songbook', ['theme' => 'pianote', 'membersVersion' => true]);
     }
-    public function bookBag(): View
+    public function bookBag()
     {
         return view('pianote.products.book-bag', ['theme' => 'pianote']);
     }
-    public function bookBagMembers(): View
+    public function bookBagMembers()
     {
         return view('pianote.products.book-bag', ['theme' => 'pianote', 'membersVersion' => true]);
     }
 
-    public function fiveforthreeBundle(): View
+    public function fiveforthreeBundle()
     {
         return view('pianote.products.5-for-3-bundle', ['theme' => 'pianote']);
     }
 
-    public function newPianoPlayers(): View
+    public function newPianoPlayers()
     {
         $productId = 517;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -300,7 +306,7 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
-    public function easyChords(): View
+    public function easyChords()
     {
         $productId = 734;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -315,7 +321,7 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
-    public function thirtyDayBluesPiano(): View
+    public function thirtyDayBluesPiano()
     {
         $productId = 740;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -333,7 +339,7 @@ class SalesController extends BaseController
 
     // 408 is the 3 month access code product
     // 2 is the customer.io email ID from their system
-    public function claimRoland90DaysAccess(Request $request): JsonResponse
+    public function claimRoland90DaysAccess(Request $request)
     {
         // Validate email before proceeding
 
@@ -410,7 +416,7 @@ class SalesController extends BaseController
     }
 
 
-    public function betterTechnique(): View
+    public function betterTechnique()
     {
         $productId = 843;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -426,7 +432,7 @@ class SalesController extends BaseController
         ]);
     }
 
-    public function readMusic(): View
+    public function readMusic()
     {
         $productId = 851;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -442,7 +448,7 @@ class SalesController extends BaseController
         ]);
     }
 
-    public function readMusicBook(): View
+    public function readMusicBook()
     {
         return view('pianote.products.read-music-book', ['theme' => 'pianote']);
     }
@@ -450,5 +456,10 @@ class SalesController extends BaseController
     public function practiceKit()
     {
         return view('pianote.products.practice-kit', ['theme' => 'pianote']);
+    }
+
+    public function easyChordsTrial()
+    {
+        return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
     }
 }

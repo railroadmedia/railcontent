@@ -1,34 +1,14 @@
 require('./bootstrap');
 
-import {createApp, defineAsyncComponent} from 'vue';
+import { createApp, defineAsyncComponent } from 'vue';
 
 //Libraries
 import axios from 'axios'
-import {vMaska} from "maska"
+import { vMaska } from "maska"
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
-import { initializeService } from 'musora-content-services';
-
-// Configuration object
-const config = {
-    sanityConfig: {
-        token:'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
-        projectId:'4032r8py',
-        dataset:'staging',
-        version:'2021-06-07',
-        debug: false,
-        useCachedAPI: true
-      },
-      railcontentConfig: {
-        token: window.railcontentConfig.token,
-        userId:  window.railcontentConfig.userId,
-      }
-};
-
-// Initialize the service with the configuration
-initializeService(config);
 
 //App Pages
 import Profile from './Components/_Pages/Settings/Profile.vue';
@@ -37,7 +17,6 @@ import Payments from './Components/_Pages/Settings/Payments.vue';
 import NotificationSettings from './Components/_Pages/Settings/NotificationSettings.vue';
 import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists/Artists.vue';
-import ArtistsSkeleton from './Components/_Pages/Artists/ArtistsSkeleton.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
 import Home from './Components/_Pages/Home/Home.vue';
@@ -48,7 +27,6 @@ import Playlists from './Components/_Pages/Playlists';
 import Referral from './Components/_Pages/Referral';
 import Schedule from './Components/_Pages/Schedule';
 import Songs from './Components/_Pages/Songs/Songs';
-import SongSkeleton from './Components/_Pages/Song/SongSkeleton.vue';
 import Stc from './Components/_Pages/STC';
 import CoachIndex from './Components/_Pages/CoachIndex';
 import Support from './Components/_Pages/Support';
@@ -67,14 +45,14 @@ import Search from './Components/_Pages/Search';
 import PackIndex from './Components/_Pages/PackIndex/PackIndex';
 import PackOverview from './Components/_Pages/PackOverview/PackOverview';
 import PackOverviewBundles from './Components/_Pages/PackOverviewBundles/PackOverviewBundles';
+import DrummersToolbox from './Components/_Pages/DrummersToolbox';
 import Login from './Components/_Pages/Login.vue';
 import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
-import DrummersToolbox from './Components/_Pages/DrummersToolbox';
+import sfsr from './Components/_Pages/SFSR/SFSR';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
 import PageContainer from './Components/_Collections/PageContainer/PageContainer.vue';
-import CatalogueCardContainer from './Components/_Collections/Catalogue/CatalogueCardContainer.vue';
 import HeaderCarousel from './Components/_Collections/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './Components/_Collections/HeaderCarousel/StaticHeader.vue'
 import ResetPassForm from './Components/_Collections/ResetPassForm/ResetPassForm.vue';
@@ -90,6 +68,7 @@ import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountMod
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
 import ContentService from './Libraries/Vuesora/assets/js/Services/content';
+import UserService from './Libraries/Vuesora/assets/js/Services/user';
 import ProgressTracker from './Libraries/Vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -189,7 +168,6 @@ const app = createApp({
         }
     }
 });
-const pinia = createPinia();
 
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
@@ -216,7 +194,6 @@ app.component('AppContainer', AppContainer)
     .component('VideoResources', VideoResources)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
-    .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
@@ -225,9 +202,7 @@ app.component('AppContainer', AppContainer)
     .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
-    .component('SongSkeleton', SongSkeleton)
     .component('Artists', Artists)
-    .component('ArtistsSkeleton', ArtistsSkeleton)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)
@@ -259,6 +234,7 @@ app.component('AppContainer', AppContainer)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
+    .component('sfsr', sfsr)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -477,6 +453,7 @@ app.directive('teleport-first', {
     }
 });
 
+const pinia = createPinia();
 // app.use(router);
 
 app.use(VueAxios, axios);

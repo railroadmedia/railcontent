@@ -1860,7 +1860,6 @@ CREATE TABLE `personal_access_tokens` (
   `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -4655,4 +4654,3 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (464,'2024_07_08_16
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (465,'2024_07_10_225437_usora_users_index_cleanup',176);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (466,'2024_07_19_212338_add_artists_table',176);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (467,'2024_07_22_170914_cohort_custom_template_toggle',176);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (468,'2024_08_09_000000_add_expires_at_to_personal_access_tokens_table',176);

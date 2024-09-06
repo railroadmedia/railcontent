@@ -683,7 +683,7 @@
             <h6 class="leading-normal mb-11">For less than the cost of monthly private lessons<br class="hidden sm:inline"> you’ll get a 30 day program to transform your drumming.</h6>
 
             <div class="relative">
-                <p class="inline sm:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <p class="inline sm:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
                     <tbody>
                     <tr style="background-color:transparent!important;">

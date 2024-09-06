@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Guitareo;
 
-use Illuminate\View\View;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -10,121 +9,126 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
-    public function home(): View
+    public function home()
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
     }
 
-    public function homeMonth(): View
+    public function homeMonth()
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'month' => true]);
     }
 
-    public function trial(): View
+    public function trial()
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
 
-    public function promo(): View
+    public function promo()
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);
     }
 
-    public function choosePlan(): View
+    public function welcomeBackDiscount()
+    {
+        return view('guitareo.sales.welcome-back-discount', ['theme' => 'guitareo']);
+    }
+
+    public function choosePlan()
     {
         return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
     }
 
-    public function choosePlanMonth(Request $request): View
+    public function choosePlanMonth(Request $request)
     {
         return view('guitareo.sales.choose-plan', ['theme' => 'guitareo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
-    public function asobergirlsguide(): View
+    public function asobergirlsguide()
     {
         return view('guitareo.sales.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
     }
 
-    public function cookie(): View
+    public function cookie()
     {
         return view('guitareo.sales.pages.cookie');
     }
 
-    public function terms(): View
+    public function terms()
     {
         return view('guitareo.sales.pages.terms');
     }
 
-    public function privacy(): View
+    public function privacy()
     {
         return view('guitareo.sales.pages.privacy');
     }
 
-    public function lifetime(): View
+    public function lifetime()
     {
         return view('guitareo.shop.pages.lifetime-bundle', [ 'theme' => 'guitareo' ]);
     }
-    public function salesLifetime(): View
+    public function salesLifetime()
     {
         return view('guitareo.sales.pages.lifetime', ['theme' => 'guitareo']);
     }
-    public function lifetimeDiscount(): View
+    public function lifetimeDiscount()
     {
         return view('guitareo.sales.pages.lifetime', ['theme' => 'guitareo', 'upgradeVersion' => true]);
     }
 
 
-    public function welcome(): View
+    public function welcome()
     {
         return view('guitareo.sales.pages.welcome-1');
     }
 
-    public function welcome2(): View
+    public function welcome2()
     {
         return view('guitareo.sales.pages.welcome-2');
     }
 
-    public function welcome3(): View
+    public function welcome3()
     {
         return view('guitareo.sales.pages.welcome-3');
     }
 
-    public function aylarecommends(): View
+    public function aylarecommends()
     {
         return view('guitareo.pages.ayla-recommends');
     }
 
-    public function survivalkitinstructions(): View
+    public function survivalkitinstructions()
     {
         return view('guitareo.pages.survival-kit-instructions');
     }
 
-    public function songs500(): View
+    public function songs500()
     {
         return view('guitareo.products.500-songs', [ 'theme' => 'guitareo' ]);
     }
 
-    public function acousticGuitarMadeEasy(): View
+    public function acousticGuitarMadeEasy()
     {
         return view('guitareo.products.acoustic-guitar-made-easy', [ 'theme' => 'guitareo' ]);
     }
 
-    public function guitarQuest(): View
+    public function guitarQuest()
     {
         return view('guitareo.products.guitar-quest', [ 'theme' => 'guitareo' ]);
     }
 
-    public function guitarQuestDiscount(): View
+    public function guitarQuestDiscount()
     {
         return view('guitareo.products.guitar-quest-discount', [ 'theme' => 'guitareo' ]);
     }
 
-    public function guitarQuestDiscountTricks(): View
+    public function guitarQuestDiscountTricks()
     {
         return view('guitareo.products.guitar-quest-discount-tricks', [ 'theme' => 'guitareo' ]);
     }
 
-    public function guitarQuestTestimonials(): View
+    public function guitarQuestTestimonials()
     {
         return view('guitareo.pages.guitar-quest-testimonials', [ 'theme' => 'guitareo' ]);
     }
@@ -138,19 +142,19 @@ class SalesController extends BaseController
         return view('guitareo.products.guitar-system', [ 'theme' => 'guitareo' ]);
     }
 
-    public function guitarTechniqueMadeEasy(): View
+    public function guitarTechniqueMadeEasy()
     {
         return view('guitareo.products.guitar-technique-made-easy', [ 'theme' => 'guitareo' ]);
     }
 
-    public function rhythmAndGroove(): View
+    public function rhythmAndGroove()
     {
         return view('guitareo.products.rhythm-and-groove', [ 'theme' => 'guitareo' ]);
     }
 
-    public function thirtyDaysToBetterStrumming(): View
+    public function thirtyDaysToBetterStrumming()
     {
-        //        $productId = 741;
+//        $productId = 741;
         $productId = 846;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
@@ -165,24 +169,24 @@ class SalesController extends BaseController
         ]);
     }
 
-    public function products(Request $request, $domain, $page = null): View
+    public function products(Request $request, $domain, $page = null)
     {
         return view('guitareo.products.' . $page, [ 'theme' => 'guitareo' ]);
 
         throw new NotFoundHttpException();
     }
 
-    public function songs(): View
+    public function songs()
     {
         return view('guitareo.sales.features.songs', ['theme' => 'guitareo', 'page' => 'songs']);
     }
 
-    public function coaches(): View
+    public function coaches()
     {
         return view('guitareo.sales.features.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
     }
 
-    public function method(): View
+    public function method()
     {
         return view('guitareo.sales.features.method', ['theme' => 'guitareo', 'page' => 'method']);
     }

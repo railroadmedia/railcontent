@@ -37,41 +37,40 @@
       </div>
     </div>
   </template>
-  
+
   <script setup>
   import { computed } from 'vue';
   import { useUserStore } from "@stores/user";
-  
+
   const props = defineProps({
     lessonTypes: {
       type: Array,
       required: true
     }
   });
-  
+
   const userStore = useUserStore();
-  
+
   const baseUrl = computed(() => {
     return `${window.location.origin}/${userStore.brand}/`;
   });
-  
+
   const removeOpacity = (event) => {
     event.target.classList.remove('tw-opacity-0');
   };
-  
+
   const headerDescription = computed(() => {
     if (userStore.brand === 'pianote' || userStore.brand === 'guitareo') {
-      return "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+      return "Submit your playing for personalized and direct feedback, or look at the Q&A archive to see what challenges our instructors have already addressed.";
     } else if (userStore.brand === 'singeo') {
-      return "Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+      return "Submit your singing for personalized and direct feedback, or look at the Q&A archive to see what challenges our instructors have already addressed.";
     }
     return '';
   });
-  
+
   const breadcrumbs = [
     {
       title: 'Student Focus',
     },
   ];
   </script>
-  

@@ -1052,16 +1052,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.4",
+            "version": "3.321.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "986326efde1d0598ec9fc1b185716550be8ef522"
+                "reference": "8cd434985ca76335c5de9d5cf76f42c380252dd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/986326efde1d0598ec9fc1b185716550be8ef522",
-                "reference": "986326efde1d0598ec9fc1b185716550be8ef522",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8cd434985ca76335c5de9d5cf76f42c380252dd2",
+                "reference": "8cd434985ca76335c5de9d5cf76f42c380252dd2",
                 "shasum": ""
             },
             "require": {
@@ -1144,9 +1144,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.5"
             },
-            "time": "2024-09-04T18:09:31+00:00"
+            "time": "2024-09-05T18:04:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -9924,16 +9924,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v6.0.0",
+            "version": "v6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "5742c994449b985045b8c65908f1a3ca1202bc88"
+                "reference": "a9303116bb5d699e1841699db25b5642e46752af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/5742c994449b985045b8c65908f1a3ca1202bc88",
-                "reference": "5742c994449b985045b8c65908f1a3ca1202bc88",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a9303116bb5d699e1841699db25b5642e46752af",
+                "reference": "a9303116bb5d699e1841699db25b5642e46752af",
                 "shasum": ""
             },
             "require": {
@@ -9972,22 +9972,22 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v6.0.0"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v6.0.1"
             },
-            "time": "2024-08-19T20:55:52+00:00"
+            "time": "2024-09-05T19:26:45+00:00"
         },
         {
             "name": "railroad/lead-tracker",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/lead-tracker.git",
-                "reference": "0bb14d5eaa9d707d2e041698118b9f502a0cbb37"
+                "reference": "2021bbe560253e3de840ababc6acf62bc02a3e4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/0bb14d5eaa9d707d2e041698118b9f502a0cbb37",
-                "reference": "0bb14d5eaa9d707d2e041698118b9f502a0cbb37",
+                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/2021bbe560253e3de840ababc6acf62bc02a3e4e",
+                "reference": "2021bbe560253e3de840ababc6acf62bc02a3e4e",
                 "shasum": ""
             },
             "require": {
@@ -10024,22 +10024,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/lead-tracker/issues",
-                "source": "https://github.com/railroadmedia/lead-tracker/tree/v4.0.1"
+                "source": "https://github.com/railroadmedia/lead-tracker/tree/v4.0.2"
             },
-            "time": "2024-08-20T18:16:06+00:00"
+            "time": "2024-09-05T19:26:26+00:00"
         },
         {
             "name": "railroad/location",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/location.git",
-                "reference": "61865249cb30af624d8af62d053100291d3921ae"
+                "reference": "d3e1d56acd4be154691b6b67ac6a87059b500e44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/location/zipball/61865249cb30af624d8af62d053100291d3921ae",
-                "reference": "61865249cb30af624d8af62d053100291d3921ae",
+                "url": "https://api.github.com/repos/railroadmedia/location/zipball/d3e1d56acd4be154691b6b67ac6a87059b500e44",
+                "reference": "d3e1d56acd4be154691b6b67ac6a87059b500e44",
                 "shasum": ""
             },
             "require": {
@@ -10065,9 +10065,9 @@
             "description": "Location service",
             "support": {
                 "issues": "https://github.com/railroadmedia/location/issues",
-                "source": "https://github.com/railroadmedia/location/tree/v4.0.0"
+                "source": "https://github.com/railroadmedia/location/tree/v4.0.1"
             },
-            "time": "2024-08-12T17:52:25+00:00"
+            "time": "2024-09-05T19:27:48+00:00"
         },
         {
             "name": "railroad/mailora",
@@ -10128,16 +10128,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d6acf17b0e4c1381a8ddb6fbeda2dc8f449c41f1"
+                "reference": "e94b6613ee80c3525ebd3627f7fd45c05f6d8280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d6acf17b0e4c1381a8ddb6fbeda2dc8f449c41f1",
-                "reference": "d6acf17b0e4c1381a8ddb6fbeda2dc8f449c41f1",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e94b6613ee80c3525ebd3627f7fd45c05f6d8280",
+                "reference": "e94b6613ee80c3525ebd3627f7fd45c05f6d8280",
                 "shasum": ""
             },
             "require": {
@@ -10166,9 +10166,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v4.0.0"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v4.0.1"
             },
-            "time": "2024-08-20T18:14:33+00:00"
+            "time": "2024-09-05T19:29:09+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10221,16 +10221,16 @@
         },
         {
             "name": "railroad/points",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/points.git",
-                "reference": "8d8980d5beb8bc8ff178c5bddd56cd2cb5274211"
+                "reference": "67a25a84719f6bd71e81367f654940f00d74b146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/points/zipball/8d8980d5beb8bc8ff178c5bddd56cd2cb5274211",
-                "reference": "8d8980d5beb8bc8ff178c5bddd56cd2cb5274211",
+                "url": "https://api.github.com/repos/railroadmedia/points/zipball/67a25a84719f6bd71e81367f654940f00d74b146",
+                "reference": "67a25a84719f6bd71e81367f654940f00d74b146",
                 "shasum": ""
             },
             "require": {
@@ -10262,22 +10262,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/points/issues",
-                "source": "https://github.com/railroadmedia/points/tree/v2.0.0"
+                "source": "https://github.com/railroadmedia/points/tree/v2.0.1"
             },
-            "time": "2024-08-12T18:30:54+00:00"
+            "time": "2024-09-05T19:30:15+00:00"
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "81a0da6151c3ecf51f939f62d6dd53c8e163425d"
+                "reference": "d5bef05877a0cd34fbd4409bd5801aa752b7761e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/81a0da6151c3ecf51f939f62d6dd53c8e163425d",
-                "reference": "81a0da6151c3ecf51f939f62d6dd53c8e163425d",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/d5bef05877a0cd34fbd4409bd5801aa752b7761e",
+                "reference": "d5bef05877a0cd34fbd4409bd5801aa752b7761e",
                 "shasum": ""
             },
             "require": {
@@ -10298,22 +10298,22 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v4.0.0"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v4.0.1"
             },
-            "time": "2024-08-12T18:34:31+00:00"
+            "time": "2024-09-05T19:31:22+00:00"
         },
         {
             "name": "railroad/railchat",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railchat.git",
-                "reference": "5dbd288faed775e8625344823c055967528656c5"
+                "reference": "db275711c5bc1971a420d4daf2bede415d689379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railchat/zipball/5dbd288faed775e8625344823c055967528656c5",
-                "reference": "5dbd288faed775e8625344823c055967528656c5",
+                "url": "https://api.github.com/repos/railroadmedia/railchat/zipball/db275711c5bc1971a420d4daf2bede415d689379",
+                "reference": "db275711c5bc1971a420d4daf2bede415d689379",
                 "shasum": ""
             },
             "require": {
@@ -10338,9 +10338,9 @@
             "description": "Wrapper package to integrate getstream/stream-php library into railroad platforms",
             "support": {
                 "issues": "https://github.com/railroadmedia/railchat/issues",
-                "source": "https://github.com/railroadmedia/railchat/tree/v3.0.0"
+                "source": "https://github.com/railroadmedia/railchat/tree/v3.0.1"
             },
-            "time": "2024-08-12T20:22:05+00:00"
+            "time": "2024-09-05T19:34:14+00:00"
         },
         {
             "name": "railroad/railcontent",
@@ -10410,16 +10410,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "c2301bff30ac99b3463a54ed27b1d91bd86857ee"
+                "reference": "616f6bbd4f857aa6303b928d300080d7f96e9a65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/c2301bff30ac99b3463a54ed27b1d91bd86857ee",
-                "reference": "c2301bff30ac99b3463a54ed27b1d91bd86857ee",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/616f6bbd4f857aa6303b928d300080d7f96e9a65",
+                "reference": "616f6bbd4f857aa6303b928d300080d7f96e9a65",
                 "shasum": ""
             },
             "require": {
@@ -10451,22 +10451,22 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v3.0.1"
+                "source": "https://github.com/railroadmedia/railforums/tree/v3.0.2"
             },
-            "time": "2024-08-26T17:36:48+00:00"
+            "time": "2024-09-05T19:34:50+00:00"
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "bb4918c490b7010e3388e16a458472ed5e84137f"
+                "reference": "5de73708c516387bf537a1380fb47853a6805a07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/bb4918c490b7010e3388e16a458472ed5e84137f",
-                "reference": "bb4918c490b7010e3388e16a458472ed5e84137f",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/5de73708c516387bf537a1380fb47853a6805a07",
+                "reference": "5de73708c516387bf537a1380fb47853a6805a07",
                 "shasum": ""
             },
             "require": {
@@ -10501,22 +10501,22 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.1"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.2"
             },
-            "time": "2024-08-20T18:20:55+00:00"
+            "time": "2024-09-05T19:35:39+00:00"
         },
         {
             "name": "railroad/railtracker",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "c31780e97e630e735d1ba3a9ccd470f0fae67995"
+                "reference": "97606ffca4efde808660e0b0439bdd38d8db60de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/c31780e97e630e735d1ba3a9ccd470f0fae67995",
-                "reference": "c31780e97e630e735d1ba3a9ccd470f0fae67995",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/97606ffca4efde808660e0b0439bdd38d8db60de",
+                "reference": "97606ffca4efde808660e0b0439bdd38d8db60de",
                 "shasum": ""
             },
             "require": {
@@ -10557,22 +10557,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v5.0.0"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v5.0.1"
             },
-            "time": "2024-08-16T17:54:42+00:00"
+            "time": "2024-09-05T19:36:30+00:00"
         },
         {
             "name": "railroad/referral",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/referral.git",
-                "reference": "c1baf5cf1f4a19770a72a946955b495a80c93165"
+                "reference": "d4212450f99ab905fc55051ec77f5ed25c20411c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/c1baf5cf1f4a19770a72a946955b495a80c93165",
-                "reference": "c1baf5cf1f4a19770a72a946955b495a80c93165",
+                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/d4212450f99ab905fc55051ec77f5ed25c20411c",
+                "reference": "d4212450f99ab905fc55051ec77f5ed25c20411c",
                 "shasum": ""
             },
             "require": {
@@ -10598,9 +10598,9 @@
             "description": "Musora referral package",
             "support": {
                 "issues": "https://github.com/railroadmedia/referral/issues",
-                "source": "https://github.com/railroadmedia/referral/tree/v4.0.0"
+                "source": "https://github.com/railroadmedia/referral/tree/v4.0.1"
             },
-            "time": "2024-08-19T21:02:21+00:00"
+            "time": "2024-09-05T19:37:16+00:00"
         },
         {
             "name": "railroad/remotestorage",
@@ -10733,16 +10733,16 @@
         },
         {
             "name": "railroad/usora",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/usora.git",
-                "reference": "cf0d76f54e6fb58be65dfcdb9b25106c78219a27"
+                "reference": "91438be7f96f814cb98bfa0f0a6fe92de4524226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/usora/zipball/cf0d76f54e6fb58be65dfcdb9b25106c78219a27",
-                "reference": "cf0d76f54e6fb58be65dfcdb9b25106c78219a27",
+                "url": "https://api.github.com/repos/railroadmedia/usora/zipball/91438be7f96f814cb98bfa0f0a6fe92de4524226",
+                "reference": "91438be7f96f814cb98bfa0f0a6fe92de4524226",
                 "shasum": ""
             },
             "require": {
@@ -10785,9 +10785,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/usora/issues",
-                "source": "https://github.com/railroadmedia/usora/tree/v4.0.0"
+                "source": "https://github.com/railroadmedia/usora/tree/v4.0.1"
             },
-            "time": "2024-08-19T20:58:12+00:00"
+            "time": "2024-09-05T19:37:59+00:00"
         },
         {
             "name": "railroadmedia/helpscout-api-php",

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Drumeo;
 
-use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Modules\Ecommerce\Services\AccessCodeService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
@@ -36,6 +35,8 @@ class SalesController extends BaseController
 
     /**
      * MarketingController constructor.
+     *
+     * @param  AccessCodeService $accessCodeService
      */
     public function __construct(
         AccessCodeService $accessCodeService
@@ -44,84 +45,92 @@ class SalesController extends BaseController
 
     }
 
-    public function home(): View
+    public function home()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo']);
 
     }
-    public function homeBF(): View
+    public function homeBF()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true']);
     }
-    public function homeMonth(): View
+    public function homeMonth()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'month' => true]);
     }
-    public function trial(): View
+    public function trial()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
-    public function trialKey(): View
+    public function trialKey()
     {
         return view('drumeo.sales.trial-key', ['theme' => 'drumeo', 'promoVersion' => true, 'keyPage' => true, 'trialVersion' => true ]);
     }
-    public function trialBeginner(): View
+    public function trialBeginner()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);
     }
-    public function promo(): View
+    public function promo()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
-    public function practiceAnywhere(): View
+    public function practiceAnywhere()
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
-    public function restart(): View
+    public function guitarcenter()
+    {
+        return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
+    public function welcomeBackDiscount()
+    {
+        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
+    }
+    public function restart()
     {
         return view('drumeo.sales.restart', ['theme' => 'drumeo']);
     }
-    public function promoEG(): View
+    public function promoEG()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
-    public function choosePlanVDF(): View
+    public function choosePlanVDF()
     {
         return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
     }
-    public function choosePlan(): View
+    public function choosePlan()
     {
         return view('drumeo.sales.choose-plan', ['theme' => 'drumeo']);
     }
-    public function choosePlanMonth(Request $request): View
+    public function choosePlanMonth(Request $request)
     {
         return view('drumeo.sales.choose-plan', ['theme' => 'drumeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
-    public function method(): View
+    public function method()
     {
         return view('drumeo.sales.features.method', ['theme' => 'drumeo', 'page' => 'method']);
     }
-    public function songs(): View
+    public function songs()
     {
         return view('drumeo.sales.features.songs', ['theme' => 'drumeo', 'page' => 'songs']);
     }
-    public function coaches(): View
+    public function coaches()
     {
         return view('drumeo.sales.features.coaches', ['theme' => 'drumeo', 'page' => 'coaches']);
     }
-    public function salesUpgrade(): View
+    public function salesUpgrade()
     {
         return view('drumeo.sales.pages.upgrade-offer', ['theme' => 'drumeo']);
     }
-    public function salesLifetime(): View
+    public function salesLifetime()
     {
         return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo']);
     }
-    public function lifetimeDiscount(): View
+    public function lifetimeDiscount()
     {
         return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo', 'upgradeVersion' => true]);
     }
-    public function thirtyDayDrummer(): View
+    public function thirtyDayDrummer()
     {
         $productId = 833;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -136,7 +145,7 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-    public function thirtyDayDrummerEG(): View
+    public function thirtyDayDrummerEG()
     {
         $productId = 741;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -151,7 +160,7 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-    public function thirtyDayChops(): View
+    public function thirtyDayChops()
     {
         $productId = 733;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -167,7 +176,7 @@ class SalesController extends BaseController
         ]);
     }
 
-    public function thirtyDayIndependence(): View
+    public function thirtyDayIndependence()
     {
         $productId = 844;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -182,7 +191,7 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-    public function thirtyDayDoubleBass(): View
+    public function thirtyDayDoubleBass()
     {
         $productId = 930;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
@@ -197,73 +206,74 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-    public function thirtyDayIndependenceDeal(): View
+    public function thirtyDayIndependenceDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
     }
 
-    public function thirtyDayDrummerDeal(): View
+    public function thirtyDayDrummerDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);
     }
 
-    public function impact(): View
+    public function impact()
     {
         return view('drumeo.sales.pages.impact');
     }
 
-    public function about(): View
+    public function about()
     {
         return view('drumeo.sales.pages.about');
     }
 
-    public function privacy(): View
+    public function privacy()
     {
         return view('drumeo.sales.pages.privacy');
     }
 
-    public function terms(): View
+    public function terms()
     {
         return view('drumeo.sales.pages.terms');
     }
 
-    public function cookie(): View
+    public function cookie()
     {
         return view('drumeo.sales.pages.cookie');
     }
 
-    public function app(): View
+    public function app()
     {
         return view('drumeo.sales.pages.app');
     }
 
-    public function kids(): View
+    public function kids()
     {
         return view('drumeo.sales.pages.kids');
     }
 
-    public function songDemo(): View
+    public function songDemo()
     {
         return view('drumeo.sales.pages.song-demo');
     }
 
-    public function tomSawyer(): View
+    public function tomSawyer()
     {
         return view('drumeo.sales.pages.tom-sawyer');
     }
 
-    public function awards(): View
+    public function awards()
     {
         return view('drumeo.lead-gen.pages.awards');
     }
 
 
-    public function sonor(): View
+    public function sonor()
     {
         return view('drumeo.sales.pages.sonor');
     }
 
-    public function handleRedeemRequest(Request $request, $productType, $isNewAccount): View
+
+    public function handleRedeemRequest(Request $request, $productType, $isNewAccount)
     {
         $data = [
             $productType => true,
@@ -323,86 +333,86 @@ class SalesController extends BaseController
         return $this->handleRedeemRequest($request, 'alesisStrataCore', false);
     }
 
-    public function coachTrial(Request $request, $domain, $pageC = null): View
+    public function coachTrial(Request $request, $domain, $pageC = null)
     {
         return view('drumeo.sales.affiliate.coaches.'.$pageC, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
-    public function trialPages(Request $request, $domain, $pageT = null): View
+    public function trialPages(Request $request, $domain, $pageT = null)
     {
         return view('drumeo.sales.trials.'.$pageT, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
-    public function estepario(): View
+    public function estepario()
     {
         return view('drumeo.sales.affiliate.estepario', ['theme' => 'drumeo', 'month' => true]);
     }
 
-    public function a(Request $request, $domain, $page = null): View
+    public function a(Request $request, $domain, $page = null)
     {
         return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
-    public function affiliates(Request $request, $domain, $page = null): View
+    public function affiliates(Request $request, $domain, $page = null)
     {
         return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
-    public function ambassador(Request $request, $domain, $page = null): View
+    public function ambassador(Request $request, $domain, $page = null)
     {
         return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
-    public function eardrums(): View
+    public function eardrums()
     {
         return view('drumeo.products.eardrums', ['theme' => 'drumeo', 'recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function kit(): View
+    public function kit()
     {
         return view('drumeo.products.kit', ['theme' => 'drumeo', 'recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function kitLifetime(): View
+    public function kitLifetime()
     {
         return view('drumeo.products.kit', ['theme' => 'drumeo', 'membersVersion' => true, 'recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function pro(): View
+    public function pro()
     {
         return view('drumeo.products.pro');
     }
 
-    public function jaredRecommends(): View
+    public function jaredRecommends()
     {
         return view('drumeo.pages.jared-recommends');
     }
 
-    public function giftCard(): View
+    public function giftCard()
     {
         return view('drumeo.products.gift-card', ['theme' => 'drumeo']);
     }
 
-    public function easyRudimentsPlaylist(): View
+    public function easyRudimentsPlaylist()
     {
         return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
     }
 
-    public function fiveforthreeBundle(): View
+    public function fiveforthreeBundle()
     {
         return view('drumeo.products.5-for-3-bundle', ['theme' => 'drumeo']);
     }
 
-    public function vote(): View
+    public function vote()
     {
         return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }

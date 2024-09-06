@@ -4,7 +4,6 @@ namespace Modules\UserManagementSystem\Controllers;
 
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Validation\Rule;
-use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\RedirectResponse;
@@ -17,24 +16,17 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\EmailChangeRequest;
-use Modules\UserManagementSystem\Notifications\EmailChange as EmailChangeNotification;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 
 class EmailChangeController extends Controller
 {
     use ValidatesRequests;
 
     /**
-     * @var Hasher
-     */
-    private $hasher;
-
-    /**
      * EmailChangeController constructor.
      */
-    public function __construct(
-        Hasher $hasher,
-    ) {
-        $this->hasher = $hasher;
+    public function __construct(private Hasher $hasher)
+    {
     }
 
     /**
@@ -134,11 +126,11 @@ class EmailChangeController extends Controller
 
         return $request->has('redirect') ?
             redirect()
-                ->away($request->get('redirect'))
-                ->with($message) :
+            ->away($request->get('redirect'))
+            ->with($message) :
             redirect()
-                ->back()
-                ->with($message);
+            ->back()
+            ->with($message);
     }
 
     /**
@@ -177,22 +169,23 @@ class EmailChangeController extends Controller
             return redirect()->back()->withErrors(['error-message' => 'Token is invalid']);
         }
 
-        if (Carbon::parse(
-            $emailChange->updated_at
+        if (
+            Carbon::parse(
+                $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
-        ) <
+            ) <
             Carbon::now()
-                ->subHours(config('user_management_system.email_change_token_ttl'))) {
+            ->subHours(config('user_management_system.email_change_token_ttl'))
+        ) {
             // todo: error message does not appear
             return redirect()
                 ->back()
                 ->withErrors(['error-message' => 'Your email reset code has expired.']);
-
         }
 
         $user = User::find($emailChange->user_id);
 
-        $oldUser = clone($user);
+        $oldUser = clone ($user);
 
         $user->email = $emailChange->email;
         $user->save();
@@ -208,16 +201,16 @@ class EmailChangeController extends Controller
 
         return $request->has('redirect_to') ?
             redirect()
-                ->away($request->get('redirect'))
-                ->with($message) :
+            ->away($request->get('redirect'))
+            ->with($message) :
             redirect()
-                ->to(
-                    route('platform.profile.settings.login-credentials', [
-                        'userId' => $user->id,
-                        'brand' => $emailChange->brand
-                    ])
-                )
-                ->with($message);
+            ->to(
+                route('platform.profile.settings.login-credentials', [
+                    'userId' => $user->id,
+                    'brand' => $emailChange->brand
+                ])
+            )
+            ->with($message);
     }
 
     /**

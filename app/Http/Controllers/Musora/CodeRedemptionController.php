@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Musora;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Modules\Ecommerce\Services\AccessCodeService;
 use Illuminate\Http\Request;
@@ -13,17 +11,20 @@ class CodeRedemptionController extends BaseController
 {
     private AccessCodeService $accessCodeService;
 
+    /**
+     * @param AccessCodeService $accessCodeService
+     */
     public function __construct(AccessCodeService $accessCodeService)
     {
         $this->accessCodeService = $accessCodeService;
     }
 
-    public function powerPack(): View
+    public function powerPack()
     {
         return view('drumeo.sales.trials.power-pack');
     }
 
-    public function hitLikeAGirlSubmission(Request $request): RedirectResponse
+    public function hitLikeAGirlSubmission(Request $request)
     {
         $code = false;
 
@@ -88,7 +89,7 @@ class CodeRedemptionController extends BaseController
             ->with(['success' => 'Your code has been sent to your email!']);
     }
 
-    public function renderNewAccountRedeemPage(Request $request): View
+    public function renderNewAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
@@ -97,7 +98,7 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function friends(Request $request): View
+    public function friends(Request $request)
     {
         return view('musora.pages.redeem.friends', [
             'newAccount' => true,
@@ -106,7 +107,7 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function friends2(Request $request): View
+    public function friends2(Request $request)
     {
         return view('musora.pages.redeem.friends', [
             'newAccount' => true,
@@ -116,7 +117,7 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderNewAccountThomannRedeemPage(Request $request): View
+    public function renderNewAccountThomannRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
@@ -126,7 +127,7 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderNewAccountThomann90RedeemPage(Request $request): View
+    public function renderNewAccountThomann90RedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
@@ -137,7 +138,7 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderExistingAccountThomannRedeemPage(Request $request): View
+    public function renderExistingAccountThomannRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
@@ -147,7 +148,27 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderExistingAccountRedeemPage(Request $request): View
+    public function renderNewAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
@@ -156,52 +177,52 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function sweetwaterRedeemNewDrumeo(): View
+    public function sweetwaterRedeemNewDrumeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'drumeo']);
     }
-    public function sweetwaterRedeemExistingDrumeo(): View
+    public function sweetwaterRedeemExistingDrumeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'drumeo']);
     }
 
-    public function sweetwaterRedeemNewPianote(): View
+    public function sweetwaterRedeemNewPianote()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'pianote']);
     }
-    public function sweetwaterRedeemExistingPianote(): View
+    public function sweetwaterRedeemExistingPianote()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'pianote']);
     }
 
-    public function sweetwaterRedeemNewGuitareo(): View
+    public function sweetwaterRedeemNewGuitareo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'guitareo']);
     }
-    public function sweetwaterRedeemExistingGuitareo(): View
+    public function sweetwaterRedeemExistingGuitareo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
     }
 
-    public function sweetwaterRedeemNewSingeo(): View
+    public function sweetwaterRedeemNewSingeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'singeo']);
     }
-    public function sweetwaterRedeemExistingSingeo(): View
+    public function sweetwaterRedeemExistingSingeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'singeo']);
     }
 
-    public function sweetwaterRedeemNewMusora(): View
+    public function sweetwaterRedeemNewMusora()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'musora']);
     }
-    public function sweetwaterRedeemExistingMusora(): View
+    public function sweetwaterRedeemExistingMusora()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
     }
 
-    public function spotifyRedeemNewMusora(Request $request): View
+    public function spotifyRedeemNewMusora(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
@@ -210,7 +231,7 @@ class CodeRedemptionController extends BaseController
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
-    public function spotifyRedeemExistingMusora(Request $request): View
+    public function spotifyRedeemExistingMusora(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
@@ -220,17 +241,17 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function roland(): View
+    public function roland()
     {
         return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);
     }
 
-    public function sonor(): View
+    public function sonor()
     {
         return view('drumeo.sales.trials.sonor', ['redirectUrl' => get_musora_brand_base_url() . '/drumeo']);
     }
 
-    public function showPianoteRedeemPageForNewUsers(): View
+    public function showPianoteRedeemPageForNewUsers()
     {
         return view(
             'musora.pages.redeem.redeem-page-pianote',
@@ -238,7 +259,7 @@ class CodeRedemptionController extends BaseController
         );
     }
 
-    public function showPianoteRedeemPageForExistingUsers(): View
+    public function showPianoteRedeemPageForExistingUsers()
     {
         return view(
             'musora.pages.redeem.redeem-page-pianote',

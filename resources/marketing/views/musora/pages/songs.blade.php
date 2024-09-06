@@ -907,7 +907,7 @@
 
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
+        'image' => 'marketing/musora/membership/homepage/2024/devices3.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])

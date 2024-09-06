@@ -97,6 +97,7 @@ class ContentPagesController extends BaseController
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
+
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -104,17 +105,9 @@ class ContentPagesController extends BaseController
         // make sure we only show scheduled content if it is set in the future
         $futureScheduledContentOnly = true;
 
-        // Admin users have access to drafts
-        if (user()->isAdmin() || user()->permission_level === 'administrator') {
-            ContentRepository::$availableContentStatues[] = ContentService::STATUS_DRAFT;
-            ContentRepository::$availableContentStatues[] = ContentService::STATUS_UNLISTED;
-        }
-
         if (empty($lessonType) || empty($catalogueMeta)) {
             throw new NotFoundHttpException();
         }
-
-        ContentRepository::$pullFutureContent = false;
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
 
@@ -123,6 +116,17 @@ class ContentPagesController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
         FiltersHelper::prepareFiltersFields();
+        // DEV NOTE: prepareFiltersFields resets the $pullFutureContent setting, so make sure to set it for this user afterwards
+        // Admin users have access to drafts and scheduled content
+        if (user()->isAdmin() || user()->permission_level === 'administrator') {
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_DRAFT;
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_UNLISTED;
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_SCHEDULED;
+            ContentRepository::$pullFutureContent = true;
+        } else {
+            // non-admin users can't get content that's published in the future
+            ContentRepository::$pullFutureContent = false;
+        }
 
         if ($contentTypeName == 'songs') {
             $listLessons = $this->contentService->getFiltered(
@@ -205,6 +209,16 @@ class ContentPagesController extends BaseController
         if ($lessonType === 'routine') {
             $hasStartedLessons = false;
         }
+
+        if(($contentTypeName === 'student-focus' || $contentTypeName === 'student-reviews') && !user()->isAdmin()) {
+            return view('content.sf-sr', [
+                'pageData' => [
+                    'name' => $catalogueMeta['name'],
+                    'type' => $contentTypeName,
+                ],
+            ]);
+        }
+
         if ($contentTypeName == 'songs') {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];

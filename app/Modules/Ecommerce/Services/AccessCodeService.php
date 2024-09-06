@@ -46,9 +46,11 @@ class AccessCodeService
      * extends $accessCode associated subscriptions
      * adds user products
      *
+     * @param string $code
      * @param ?int $userId
      *
      * @param null $context
+     * @return AccessCode
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -65,7 +67,10 @@ class AccessCodeService
 
         if ($accessCode->is_claimed) {
             // Can't claim a code that's already claimed
-            throw new Exception("Access code already claimed");
+            if ($accessCode->claimer_id === $user->id) {
+                throw new Exception("This code has already been redeemed to your account");
+            }
+            throw new Exception("This code has already been redeemed");
         }
 
         $productIds = $this->getAccessCodeProducts($accessCode);
@@ -83,6 +88,12 @@ class AccessCodeService
         $accessCode->claimed_on = Carbon::now();
         $accessCode->updated_at = Carbon::now();
         $accessCode->save();
+
+        $user->primary_brand = in_array($accessCode->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
+            ? $accessCode->brand
+            : $user->primary_brand;
+
+        $user->save();
 
         event(new AccessCodeClaimed($accessCode, $user, $context));
 
@@ -147,6 +158,7 @@ class AccessCodeService
      * Into: fcbd - 53d4 - b41b - 3264 - 249a - 713e
      *
      * @param $code
+     * @return string
      */
     public function hyphenateCode($code): string
     {
@@ -157,6 +169,7 @@ class AccessCodeService
      * @param string|null $code
      * Into: Check if access code exists; if it exists, split the access code into 6 parts and return it as an array;
      *     if not, return null
+     * @return ?array
      */
     public function checkAndSplitAccessCode(?string $code): ?array
     {
