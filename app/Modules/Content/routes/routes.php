@@ -20,4 +20,9 @@ Route::prefix('content')
             'in_progress/{user?}',
             [ContentMetadataController::class, 'inProgressForUser']
         )->name('content.in_progress');
+
+        Route::get(
+            '{contentId}/user_data/{user?}',
+            [ContentMetadataController::class, 'getContentPageUserData']
+        )->name('content.user_data');
     });

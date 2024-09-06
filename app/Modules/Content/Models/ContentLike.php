@@ -31,4 +31,9 @@ class ContentLike extends Model
         return ContentLike::where(['content_id' => $contentId, 'user_id' => $userId])
             ->exists();
     }
+
+    public static function getContentLikedCount(int $contentId): int
+    {
+        return ContentLike::where(['content_id' => $contentId])->count();
+    }
 }

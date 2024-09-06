@@ -7,6 +7,7 @@ use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
+use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -59,7 +60,7 @@ class ContentMetadataController extends Controller
         $validated = $request->validate(
             [
                 'content_type' => 'nullable|string',
-                'brand' => ['nullable',  new Enum(Brand::class)],
+                'brand' => ['nullable', new Enum(Brand::class)],
                 'user' => 'nullable'
             ]
         );
@@ -78,10 +79,24 @@ class ContentMetadataController extends Controller
 
         $inProgress = $user->progress()
             ->incomplete()
-            ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
-            ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+            ->when(!is_null($type), fn($query) => $query->ofContentType($type))
+            ->when(!is_null($brand), fn($query) => $query->ofContentBrand($brand))
             ->pluck('content_id');
 
         return response()->json([ProgressState::Started->value => $inProgress]);
+    }
+
+    public function getContentPageUserData(int $contentId, ?User $user = null): array
+    {
+        //$userId = user()->id;
+        $isLiked = ContentLike::isContentLikedByUser($contentId, $user->id);
+        $likedCount = ContentLike::getContentLikedCount($contentId);
+        $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
+        return [
+            'isLiked' =>$isLiked ,
+            'likeCount' => $likedCount,
+            'isAdded' => false,
+            'currentSecond' => $currentSecond
+        ];
     }
 }
