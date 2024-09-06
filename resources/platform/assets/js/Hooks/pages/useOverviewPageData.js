@@ -38,7 +38,7 @@ export async function useOverviewPageData(contentType) {
             }
         }
         //Method Level Courses
-        else if(contentType === "learning-path-course" || contentType === "learning-path-lesson") {
+        else {
             //console.log('childId', childContentId())
             const result = await fetchMethodChildren(childContentId());
             if (result) {   

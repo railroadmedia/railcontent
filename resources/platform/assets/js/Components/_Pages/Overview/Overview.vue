@@ -202,40 +202,29 @@ const showOverview = computed(() => {
     return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course'  || props.contentType === 'unit';
 })
 const showNumbers = computed(() => {
-    return props.contentType === 'learning-path-lesson';
-})
-const useSanityData = computed(() => {
-    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson';
+    return props.contentType === 'learning-path-lesson' || props.contentType === 'unit-part';
 })
 
 onBeforeMount( async () => {
-    // console.log('childContent', props.childContent.data);
-    console.log('Overview content type is ', props.contentType);
-    if( useSanityData ) {
-        //console.log('sanity content is: ', props.contentType);
-        const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
-            if(props.contentType === 'learning-path-level') { data.value = OverviewData.value.levels; }
-            else if(props.contentType === 'unit') { data.value = OverviewData.value.units; }
-            else { data.value = OverviewData.value.child; }
+    //console.log('sanity content is: ', props.contentType);
+    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
+        if(props.contentType === 'learning-path-level') { data.value = OverviewData.value.levels; }
+        else if(props.contentType === 'unit') { data.value = OverviewData.value.units; }
+        else if(props.contentType === 'unit-part') { data.value = OverviewData.value.children; }
+        else { data.value = OverviewData.value.child; }
 
-            console.log('data', data.value)
-            header.value.title = OverviewData.value.title;
-            header.value.description = OverviewData.value.description;
-            if(props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson') {
-                header.value.infoData = [
-                    `${OverviewData.value.child_count} Course`,
-                    `${OverviewData.value.xp} XP`
-                ]
-            } else {
-                header.value.infoData = props.headerData.infoData; //Default
-            }
-            platformStore.setLoadingState(OverviewLoading.value);
-    } else {
-        //console.log('content type is ', props.contentType);
-        data.value = props.childContent.data; //Default
-        setTimeout(() => {
-            platformStore.setLoadingState(false);
-        }, 2000)
-    }
+        console.log('data', data.value)
+        header.value.title = OverviewData.value.title;
+        header.value.description = OverviewData.value.description;
+        if(props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson') {
+            header.value.infoData = [
+                `${OverviewData.value.child_count} Course`,
+                `${OverviewData.value.xp} XP`
+            ]
+        } else {
+            header.value.infoData = props.headerData.infoData; //Default
+        }
+        platformStore.setLoadingState(OverviewLoading.value);
+
 })
 </script>
