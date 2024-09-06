@@ -35,7 +35,6 @@ import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import {useCollectionStore} from "@stores/collection";
 
-
 const props = defineProps({
     continueUrl: {
         type: String,
@@ -100,7 +99,6 @@ const headerInfoData = computed(() => {
 })
 
 const tabData = computed(() => {
-    console.log(getTabData())
     return getTabData();
 })
 
