@@ -188,7 +188,7 @@
 <h5><strong>Success!</strong></h5>
 <h1 class="text-pianote my-4"><i class="fas fa-check"></i> </h1>
 <p><em>You'll be notified when The "Classical Piano Collection" becomes available.</em></p>
-<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/image.png" alt="Classical Piano Collection" class="rounded-xl w-full md:w-1/2 mx-auto my-4">
+<img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/thumbnail.jpg" alt="Classical Piano Collection" class="rounded-xl w-full md:w-1/2 mx-auto my-4">
 
 <br><a class="my-2 mx-1 join" href="https://www.musora.com/pianote">Members Area &raquo;</a>
 </body>
