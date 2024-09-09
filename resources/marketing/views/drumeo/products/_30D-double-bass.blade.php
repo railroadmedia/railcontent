@@ -745,7 +745,7 @@
     @else
         @include('_partials.components.video-modal', [
             'name' => 'trailer',
-            'video' => '995994882',
-            'vimeo' => true,
+            'video' => $cohort['cohort_trailer'],
+            'styles' => 'aspect-16:9',
         ])
     @endif
