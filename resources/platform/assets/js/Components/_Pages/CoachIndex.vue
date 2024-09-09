@@ -11,6 +11,7 @@
             :description="headerDescription"
         />
 
+        <!-- Need to integrate with MCS -->
         <!-- Coach Event -->
         <CoachEvent
             v-if="hasCoachEvent"
@@ -51,6 +52,7 @@
             </div>
         </div>
 
+        <!-- Need to integrate with MCS -->
         <!-- Latest Featured Lessons -->
         <div class="tw-mb-[30px]">
             <MiniCatalogueSection
@@ -58,6 +60,7 @@
                 :pre-loaded-content="latestLessons"
             />
         </div>
+        <!-- Need to integrate with MCS -->
         <!-- From Subscribed Coaches -->
         <div v-if="followedLessons.length" class="tw-mb-[30px]">
             <MiniCatalogueSection
@@ -68,6 +71,7 @@
             />
         </div>
 
+        <!-- Need to integrate with MCS -->
         <!-- Upcoming Coaches -->
         <UpcomingCoach
             v-if="hasUpcomingCoaches"
@@ -252,9 +256,11 @@ const tabData = [
 ];
 
 onBeforeMount(async() => {
+    //Needs to be updated when BE figures out the subscribed feature
     const coaches = await getActiveCoaches();
     activeCoaches.value = coaches;
 
+    //Needs to be updated when BE figures out the subscribed feature
     collectionStore.setDefaults({
         tabOptions: tabData,
         filter: {
