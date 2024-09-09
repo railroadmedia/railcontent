@@ -75,7 +75,7 @@
         />
 
         <ActiveCoach
-            v-if="hasActiveCoaches"
+            v-if="activeCoaches.length"
             :active-coaches="activeCoaches"
         />
 
@@ -93,9 +93,12 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeMount } from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
+import { useCollectionStore } from "@stores/collection";
+import { getActiveCoaches } from "@hooks/pages/useCoachIndexPageData";
+
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import CoachEvent from "@vuesora/Components/Coaches/CoachEvent";
@@ -105,13 +108,8 @@ import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogu
 import UpcomingCoach from '@collections/UpcomingCoach/UpcomingCoach';
 import ActiveCoach from '@collections/ActiveCoach/ActiveCoach';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
-import {useCollectionStore} from "@stores/collection";
 
 const props = defineProps({
-    activeCoaches: {
-        type: Array,
-        default: () => [],
-    },
     breadcrumbs: {
         type: Array,
         default: () => [],
@@ -170,10 +168,6 @@ const props = defineProps({
         type: Object,
         default: {},
     },
-    hasActiveCoaches: {
-        type: Boolean,
-        default: () => false,
-    },
     hasFeaturedCoaches: {
         type: Boolean,
         default: () => false,
@@ -220,6 +214,8 @@ const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
+const activeCoaches = ref([]);
+
 const hasCoachEvent = computed(() => {
     return Object.keys(props.coachEvent.data).length > 0;
 })
@@ -255,7 +251,10 @@ const tabData = [
     },
 ];
 
-onBeforeMount(() => {
+onBeforeMount(async() => {
+    const coaches = await getActiveCoaches();
+    activeCoaches.value = coaches;
+
     collectionStore.setDefaults({
         tabOptions: tabData,
         filter: {
