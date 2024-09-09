@@ -528,19 +528,4 @@ class ContentJsonController extends Controller
     {
         return $this->contentService->countLessonsAndAssignments($contentId);
     }
-
-    /**
-     * @param $vimeoId
-     * @return array
-     */
-    public function getVimeoData($vimeoId)
-    {
-        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
-        $response = [
-            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
-            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
-            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
-        ];
-        return $response;
-    }
 }
