@@ -112,6 +112,7 @@
 @section('body-data')
     x-data="{
     kickOff: false,
+    unlock: false,
     lazyLoad: false,
     }"
 @endsection
@@ -242,11 +243,13 @@
                             ];
                         @endphp
                         @foreach ($lessons as $index => $lesson)
-                            <div class="w-full flex items-center px-3 py-3 mb-2" style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};">
-                                <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-16 rounded-lg mr-4">
+                            <div class="w-full flex items-center px-3 py-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
+                                style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
+                                @click="unlock = true;">
+                                <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 rounded-lg mr-4">
                                 <div class="flex flex-col">
-                                    <span class="text-guitareo font-bold text-xs uppercase mb-1">FREE</span>
-                                    <p class="text-white font-semibold text-sm">{{ $lesson['title'] }}</p>
+                                    <span class="text-guitareo font-bold text-xs uppercase">FREE</span>
+                                    <p class="leading-tight text-white font-semibold text-sm">{{ $lesson['title'] }}</p>
                                 </div>
                             </div>
 
@@ -254,8 +257,8 @@
                     </div>
                     <div class="absolute h-10 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #000);"></div>
                 </div>
-                <a href="/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true" class="w-full join smaller guitareo mb-3">GET FULL ACCESS FOR FREE</a>
-                <a href="/shop/30-days-to-better-strumming" class="w-full join smaller white outline" style="outline: 0px;">BUY THE COURSE</a>
+                <a href="/choose-plan" class="w-full join smaller guitareo mb-3">GET FULL ACCESS FOR FREE</a>
+                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline" style="outline: 0px;">BUY THE COURSE</a>
             </div>
             </div>
         </div>
@@ -386,6 +389,16 @@
     @include('_partials.components.video-modal', [
         'name' => 'kickOff',
         'video' => '944222905',
+        'button' => '<div class="w-full mt-4 text-center"><a class="join guitareo" href="/choose-plan">GET FULL ACCESS FOR FREE</a></div>',
         'vimeo' => true,
     ])
+    @component('_partials.components.modal', ['name' => 'unlock'])
+        @slot('content')
+            <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center">
+                <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
+                <h3 class="leading-tight my-4"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
+                <a class="join guitareo smaller" href="/choose-plan">GET FULL ACCESS FOR FREE</a>
+            </div>
+        @endslot
+    @endcomponent
 @endsection
