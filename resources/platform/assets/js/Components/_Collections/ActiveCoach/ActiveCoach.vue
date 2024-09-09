@@ -62,7 +62,7 @@ const props = defineProps({
 })
 
 const cardImage = (coach) => {
-    return `https://www.musora.com/musora-cdn/image/width=300,quality=95/${coach.data.find(c => c.key === 'coach_card_image').value}`
+    return `https://www.musora.com/musora-cdn/image/width=300,quality=95/${coach.coach_card_image}`
 }
 
 const fullName = (coach) => {
@@ -78,6 +78,6 @@ const lastName = (coach) => {
 }
 
 const title = (coach) =>{
-    return coach.data.find(c => c.key === 'focus_text').value;
+    return coach.focus_text;
 }
 </script>
