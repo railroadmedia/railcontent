@@ -247,7 +247,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 ];
             }
             foreach ($instructorDatum['fields'] as $info) {
-                if (in_array($info['key'], ['is_coach', 'is_active', 'is_hose_coach', 'is_featured', 'is_coach_of_the_month'])) {
+                if (in_array($info['key'], ['is_coach', 'is_active', 'is_house_coach', 'is_featured', 'is_coach_of_the_month'])) {
                     $instructors[$id][$info['key']] = ($info['value'] == 1);
                 }
                 if (in_array($info['key'], ['bands', 'endorsements'])) {
