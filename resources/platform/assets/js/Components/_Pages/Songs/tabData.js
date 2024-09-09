@@ -8,12 +8,12 @@ export const getTabData = () => {
         {
             value: 'Artists',
             groupByView: true,
-            key: 'artist',
+            key: ['artist'],
         },
         {
             value: 'Genres',
             groupByView: true,
-            key: 'genre',
+            key: ['genre'],
         },
     ];
 }

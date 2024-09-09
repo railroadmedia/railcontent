@@ -102,6 +102,7 @@ export const useCollectionStore = defineStore({
                 //         })
                 // return response;
 
+
                 const response = await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
@@ -134,7 +135,7 @@ export const useCollectionStore = defineStore({
 
         getGroupBy(){
             if(this.tabData[this.filter.activeTab].groupByView){
-                return this.tabData[this.filter.activeTab].key;
+                return this.tabData[this.filter.activeTab].key[0];
             }
 
             return '';
@@ -142,7 +143,7 @@ export const useCollectionStore = defineStore({
 
         getIncludedFields(){
             if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
-                return [this.tabData[this.filter.activeTab].key]
+                return [...this.tabData[this.filter.activeTab].key]
             }else {
                 return []
             }
