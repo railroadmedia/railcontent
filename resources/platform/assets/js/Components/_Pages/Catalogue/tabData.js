@@ -10,12 +10,12 @@ export const getTabData = (type, title) => {
                 {
                     value: 'Instructors',
                     groupByView: true,
-                    key: 'instructor',
+                    key: ['instructor'],
                 },
                 {
                     value: 'Genres',
                     groupByView: true,
-                    key: 'genre',
+                    key: ['genre'],
                 },
             ];
 
@@ -57,25 +57,25 @@ export const getTabData = (type, title) => {
                     value: 'Drags',
                     groupByView: false,
                     is_required_field: true,
-                    key: 'topic[0]->name,Drags',
+                    key: ['topic[0]->name,Drags'],
                 },
                 {
                     value: 'Flams',
                     groupByView: false,
                     is_required_field: true,
-                    key: 'topic[0]->name,Flams',
+                    key: ['topic[0]->name,Flams'],
                 },
                 {
                     value: 'Paradiddles',
                     groupByView: false,
                     is_required_field: true,
-                    key: 'topic[0]->name,Paradiddles',
+                    key: ['topic[0]->name,Paradiddles'],
                 },
                 {
                     value: 'Rolls',
                     groupByView: false,
                     is_required_field: true,
-                    key: 'topic[0]->name,Rolls',
+                    key: ['topic[0]->name,Rolls'],
                 },
             ];
 
@@ -98,12 +98,12 @@ export const getTabData = (type, title) => {
                 {
                     value: 'Instructors',
                     groupByView: true,
-                    key: 'instructor',
+                    key: ['instructor'],
                 },
                 {
                     value: 'Genres',
                     groupByView: true,
-                    key: 'genre',
+                    key: ['genre'],
                 },
             ];
             break;
