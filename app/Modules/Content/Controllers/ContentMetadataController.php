@@ -7,11 +7,11 @@ use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
+use App\Modules\Content\Requests\ContentProgressMetadataRequest;
+use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\Rules\Enum;
 use Modules\UserManagementSystem\Models\User;
 
 class ContentMetadataController extends Controller
@@ -23,9 +23,7 @@ class ContentMetadataController extends Controller
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
         $contentIds = $request->query('content_ids', []);
         $results = [];
@@ -38,9 +36,7 @@ class ContentMetadataController extends Controller
     public function userProgress(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
         try {
             $contentIds = $request->query('content_ids', []);
@@ -50,40 +46,59 @@ class ContentMetadataController extends Controller
                 $results[$contentId] = $progressState->toArray();
             }
             return response()->json($results);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
 
-    public function inProgressForUser(Request $request, ?User $user = null): JsonResponse
+    public function inProgressForUser(ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
     {
-        $validated = $request->validate(
-            [
-                'content_type' => 'nullable|string',
-                'brand' => ['nullable', new Enum(Brand::class)],
-                'user' => 'nullable'
-            ]
-        );
+        return $this->contentWithProgressForUser(ProgressState::Started, $request, $user);
+    }
 
+    public function completedByUser(ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
+    {
+        return $this->contentWithProgressForUser(ProgressState::Completed, $request, $user);
+    }
+
+    /**
+     * Retrieve the data for content with a progress state for the user
+     *
+     * @param  ProgressState  $progressState
+     * @param  ContentProgressMetadataRequest  $request
+     * @param  User|null  $user
+     * @return JsonResponse
+     */
+    private function contentWithProgressForUser(ProgressState $progressState, ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
+    {
         // if the user ID isn't provided, grab the user from the session
-        if (is_null($user)) {
-            $user = user();
-        }
+        $user = $user ?? user();
 
-        $type = $validated['content_type'] ?? null;
-        $brandValue = $validated['brand'] ?? null;
+        $type = $request['content_type'] ?? null;
+        $brandValue = $request['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
             $brand = Brand::from($brandValue);
         }
+        $limit = $request['limit'] ?? null;
+        $page = $request['page'] ?? null;
 
-        $inProgress = $user->progress()
-            ->incomplete()
-            ->when(!is_null($type), fn($query) => $query->ofContentType($type))
-            ->when(!is_null($brand), fn($query) => $query->ofContentBrand($brand))
+        $results =
+            $user->progress()
+            ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
+            ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
+            ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
+            ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+            ->when(
+                !is_null($page),
+                // when we're using pagination, we need to apply the limit to the page
+                fn ($query) => $query->forPage($page, $limit),
+                // otherwise, apply the limit to the whole query (if it's there)
+                fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+            )
             ->pluck('content_id');
 
-        return response()->json([ProgressState::Started->value => $inProgress]);
+        return response()->json([$progressState->value => $results]);
     }
 
     public function getContentPageUserData(int $contentId, ?User $user = null): array
@@ -93,7 +108,7 @@ class ContentMetadataController extends Controller
         $likedCount = ContentLike::getContentLikedCount($contentId);
         $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
         return [
-            'isLiked' =>$isLiked ,
+            'isLiked' => $isLiked ,
             'likeCount' => $likedCount,
             'isAdded' => false,
             'currentSecond' => $currentSecond
