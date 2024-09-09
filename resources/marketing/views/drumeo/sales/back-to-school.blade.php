@@ -272,7 +272,7 @@
                                     @elseif(!empty($bonus['customSubText']))
                                         Save {{$savePercentage}}%
                                     @else
-                                        Online Access
+                                        Lifetime Access
                                     @endif
                                 </em>
                             </span>
