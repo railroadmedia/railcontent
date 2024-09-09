@@ -57,7 +57,7 @@
         <div class="tw-mb-[30px]">
             <MiniCatalogueSection
                 title="Latest Featured Lessons"
-                :pre-loaded-content="latestLessons"
+                :pre-loaded-content="featuredLessons"
             />
         </div>
         <!-- Need to integrate with MCS -->
@@ -102,6 +102,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { useCollectionStore } from "@stores/collection";
 import { getActiveCoaches } from "@hooks/pages/useCoachIndexPageData";
+import { fetchByReference } from 'musora-content-services';
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
@@ -200,10 +201,6 @@ const props = defineProps({
         type: String,
         default: () => "",
     },
-    latestLessons: {
-        type: Array,
-        default: () => [],
-    },
     coachEventYoutubeEventId: {
         type: String,
         default: () => "",
@@ -219,6 +216,7 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const activeCoaches = ref([]);
+const featuredLessons = ref([]);
 
 const hasCoachEvent = computed(() => {
     return Object.keys(props.coachEvent.data).length > 0;
@@ -256,6 +254,9 @@ const tabData = [
 ];
 
 onBeforeMount(async() => {
+    const featured = await fetchByReference(brand.value, { includedFields: ['is_featured']});
+    featuredLessons.value = featured.entity;
+
     //Needs to be updated when BE figures out the subscribed feature
     const coaches = await getActiveCoaches();
     activeCoaches.value = coaches;
