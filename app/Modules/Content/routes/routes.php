@@ -30,4 +30,9 @@ Route::prefix('content')
             '{contentId}/user_data/{user?}',
             [ContentMetadataController::class, 'getContentPageUserData']
         )->name('content.user_data');
+
+        Route::get(
+            'vimeo-data/{vimeo_id}',
+            [ContentMetadataController::class, 'getVimeoData']
+        )->name('content.vimeo-data');
     });

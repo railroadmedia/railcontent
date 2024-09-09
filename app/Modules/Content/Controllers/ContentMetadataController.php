@@ -13,10 +13,11 @@ use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 
 class ContentMetadataController extends Controller
 {
-    public function __construct()
+    public function __construct(private ProductProviderInterface $productProvider)
     {
     }
 
@@ -113,5 +114,20 @@ class ContentMetadataController extends Controller
             'isAdded' => false,
             'currentSecond' => $currentSecond
         ];
+    }
+
+    /**
+     * @param $vimeoId
+     * @return array
+     */
+    public function getVimeoData($vimeoId)
+    {
+        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
+        $response = [
+            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
+            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
+            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+        return $response;
     }
 }
