@@ -98,6 +98,8 @@
        .teacher-section {
         background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/demo-bg-new.webp') no-repeat center;
         background-size: cover;
+           max-width: 1780px;
+           margin: 0 auto;
         }
 
         @media (max-width: 743px) {
@@ -331,9 +333,9 @@
         </div>
     </section>
 
-
-    <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="demo=true">
-        <h1 class="text-white text-center pb-80 sm:pb-96 playfair leading-snug font-normal md:px-4 pt-4 md:pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
+<div style="background-color:#161924;">
+    <section class="teacher-section px-4 sm:px-6 pt-4 lg:pt-16 xl:pt-20 overflow-hidden relative text-white text-center cursor-pointer" @click="demo=true">
+        <h1 class="text-white text-center pb-80 sm:pb-96 playfair leading-snug font-normal md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
 
         <div class="container mx-auto max-w-5xl relative text-left pt-[16rem] md:pt-84 lg:pt-80 md:px-10">
             <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12 leading-relaxed text-sm sm:text-base">
@@ -365,7 +367,7 @@
             </div>
         </div>
     </section>
-
+</div>
 
     @php
         $teachers = [
