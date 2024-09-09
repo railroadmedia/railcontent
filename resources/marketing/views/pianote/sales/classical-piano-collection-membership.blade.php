@@ -102,7 +102,7 @@
             font-size: 1.4rem;
             padding:18px 5%;
         }
-    
+
         @if(!empty($trialVersion))
             .option-buttons.active {
                 border-color: #f61a30 !important;
@@ -116,7 +116,7 @@
                 display: block !important;
             }
         @endif
-    
+
         .splide__slide.is-active .active-bg {
             background-color: #1B2434 !important;
             color: #fff !important;
@@ -153,20 +153,24 @@
             <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
             <br>
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none uppercase">
-               START PLAYING BEAUTIFUL<br>
-               PIANO <strong class="relative inline-block"> IN JUST 10 MINUTES  </strong><br class="hidden sm:inline">
-                <svg class="absolute left-0 lg:left-10 right-0 bottom-0 w-full h-3 sm:h-5" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+               START PLAYING<br class="sm:hidden"> BEAUTIFUL<br class="hidden md:inline">
+               PIANO
+                <strong class="relative inline-block">IN JUST 10 MINUTES
+                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+                </strong>
             </h1>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
                 <i class="fas fa-check text-pianote"></i> Step-by-step lessons
+                <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-pianote"></i> Practice with <strong>real</strong> teachers
                 <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-pianote"></i> Personal support
+                <br class="sm:hidden">
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular songs
             </p>
 
            <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                    
+
                     <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true">GET STARTED</a>
                 <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
@@ -177,7 +181,7 @@
                         &nbsp;Watch The Trailer
                     </div>
             </div>
-            
+
         </div>
     </header>
 
@@ -185,37 +189,39 @@
         <div class="container max-w-4xl mx-auto">
         <div class="container mx-auto max-w-3xl">
          <h2 class="pb-4">Learn classical piano… <br class="block md:hidden"><strong>and so much more.</strong></h2>
-            <p class="mb-8 md:mb-10">With a Pianote Membership, you’ll get LIFETIME access to The Classical Piano Collection. But you’ll also get access to EVERYTHING else.</p>
+            <p class="mb-8 md:mb-10">
+                With a Pianote Membership, you’ll get LIFETIME access to The Classical Piano Collection. <br class="hidden sm:inline">
+                But you’ll also get access to EVERYTHING else.</p>
         </div>
-           
+
             <div class="flex flex-wrap sm:flex-nowrap justify-center">
                 @php
                     $features = [
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/classical-method.webp',
                             'title' => 'The Classical Method',
-                            'desc' => 'Go beyond individual pieces. <br> The Classical Method is a 5-level curriculum taught by professional pianist Victoria Theodore (Beyoncé, Stevie Wonder).',
+                            'desc' => 'Go beyond individual pieces.  The Classical Method is a 5-level curriculum taught by professional pianist Victoria Theodore (Beyoncé, Stevie Wonder).',
                         ],
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/30-day-challenges.webp',
                             'title' => '30-Day Challenges',
-                            'desc' => 'Play beautiful piano in 10 minutes.<br> Try any one of our 30-day challenges and practice WITH a real teacher.',
+                            'desc' => 'Play beautiful piano in 10 minutes. Try any one of our 30-day challenges and practice WITH a real teacher.',
                         ],
                         [
                             'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/favorite-songs.webp',
                             'title' => 'Your Favorite Songs',
-                            'desc' => 'Why do you learn the piano? <br>To play songs!<br> Explore our library of popular songs and learn your favorite today.',
+                            'desc' => 'Why do you learn the piano? To play songs! Explore our library of popular songs and learn your favorite today.',
                         ],
                     ];
                 @endphp
-    
+
                 @foreach ($features as $feature)
                     <div class="w-full sm:w-1/3 px-4 mb-8 sm:mb-0 text-center flex flex-col items-center">
                         <div class="mb-4 w-full flex items-center justify-center">
-                            <img src="{{ $feature['img'] }}" alt="{{ $feature['title'] }}" class="w-full h-full object-contain rounded-xl">
+                            <img src="{{ $feature['img'] }}" alt="{{ $feature['title'] }}" class="w-full h-full object-contain rounded-xl border border-gray-200">
                         </div>
-                        <h3 class="text-xl font-semibold">{{ $feature['title'] }}</h3>
-                        <p class="text-xs tracking-tight leading-loose">{!! $feature['desc'] !!}</p>
+                        <h3 class="text-xl font-black">{{ $feature['title'] }}</h3>
+                        <p class="text-sm leading-normal">{!! $feature['desc'] !!}</p>
                     </div>
                 @endforeach
             </div>
@@ -228,7 +234,7 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-5">
                 <h5 class="uppercase text-pianote"><strong>Step 1</strong></h5>
-                <p class="py-5 tracking-tight leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br class="hidden md:block"> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
+                <p class="py-5 leading-normal"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation.<br class="hidden md:block"> Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -364,7 +370,7 @@
                                                         <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $pack['logo'] }}" @if (!empty($pack['name'])) alt="{{ $pack['name'] }} @endif" class="h-{{ $pack['h'] }} mb-1">
                                                     @endif
                                                     @if (!empty($pack['name']))
-                                                        <span class="text-xs py-1">{{ $pack['name'] }}</span>
+                                                        <span class="text-sm py-1">{{ $pack['name'] }}</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -379,12 +385,12 @@
             <h4 class="leading-tight text-pianote my-4">
                 <i class="fas fa-arrow-down"></i>
             </h4>
-            
+
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-5">
                 <h5 class="uppercase text-pianote">
                     <strong>Step 2</strong>
                 </h5>
-                <p class="py-5 tracking-tight leading-normal">
+                <p class="py-5 leading-normal">
                     <strong>Press play and follow along.</strong> It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!
                 </p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="stepTwo = true;">
@@ -401,26 +407,27 @@
                     </video>
                 </div>
             </div>
-            
+
             <h4 class="leading-tight text-pianote my-4">
                 <i class="fas fa-arrow-down"></i>
             </h4>
-            
+
           <div class="bg-white rounded-xl border border-gray p-4 sm:p-5 relative overflow-visible mb-6 md:mb-10">
                 <h5 class="uppercase text-pianote">
                     <strong>Step 3</strong>
                 </h5>
-                <p class="py-5 tracking-tight leading-normal">
+                <p class="py-5 leading-normal">
                     <strong>Hear the result.</strong> The most important part of learning piano is building a daily habit. By practicing just a little bit each day, you’ll hear the results sooner (so will everyone else!).
                 </p>
 
                 <div class="relative w-full">
-                    <img class="max-w-[100%] md:max-w-[120%] -mx-10 h-auto object-cover" 
+                    <img class="max-w-[100%] md:max-w-[120%] -mx-10 h-auto object-cover"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
                 </div>
             </div>
-            
-            <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="#final">GET STARTED</a>
+
+            <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#final">GET STARTED</a>
+        </div>
     </section>
 
     @php
@@ -430,29 +437,29 @@
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/classical-piano-collection.webp',
                 'title' => 'The Classical Piano Collection',
                 'value' => '<br>($127 Value)',
-                'desc' => 'You’ll get LIFETIME access to the Classical Piano Collection.<br class="block md:hidden">Play beautiful masterpieces and participate in the world of classical piano.<br class="block md:hidden"> Even if you choose not to renew your Pianote membership, it’s yours to keep forever.',
+                'desc' => 'You’ll get LIFETIME access to the Classical Piano Collection.<br><br>Play beautiful masterpieces and participate in the world of classical piano.<br><br> Even if you choose not to renew your Pianote membership, it’s yours to keep forever.',
             ],
             [
                 'position' => 'right',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/metronome.webp',
                 'title' => 'The Pianote Metronome ',
                  'value' => '<br>($79 Value)',
-                'desc' => 'A metronome is the essential practice tool, especially for classical piano. <br class="block md:hidden"> Improve your timing, rhythm, and feel with this beautiful handmade metronome by Wittner. <br class="block md:hidden">Lightweight and compact, this metronome ranges from 40-208bpm with precision timing so it always stays on beat.',
+                'desc' => 'A metronome is the essential practice tool, especially for classical piano. <br><br> Improve your timing, rhythm, and feel with this beautiful handmade metronome by Wittner. <br><br>Lightweight and compact, this metronome ranges from 40-208bpm with precision timing so it always stays on beat.',
             ],
             [
                 'position' => 'left',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/membership/classical-piano-pieces.webp',
                 'title' => 'The Most Beautiful Classical <br> Piano Pieces',
                  'value' => '($49 Value)',
-                'desc' => 'This book contains timeless classics you’ll want to play over and over again.<br class="block md:hidden"> Pieces from Bach, Beethoven, Chopin, and Debussy.<br class="block md:hidden"> And each piece is presented in original and simplified arrangements, so it’s perfect for beginners as well as experienced pianists.',
+                'desc' => 'This book contains timeless classics you’ll want to play over and over again.<br><br> Pieces from Bach, Beethoven, Chopin, and Debussy.<br><br> And each piece is presented in original and simplified arrangements, so it’s perfect for beginners as well as experienced pianists.',
             ]
         ];
     @endphp
     <section class="text-center px-x py-10 sm:pt-16 bg-white">
         <div class="container max-w-4xl mx-auto hidden md:block">
-            <div class="max-w-2xl mx-auto text-center mb-4"> 
+            <div class="max-w-2xl mx-auto text-center mb-4">
                 <h2 class="playfair text-3xl">Free bonuses to <br class="inline sm:hidden"><strong> help you play better. </strong></h2>
-                <p class="leading-normal my-2 sm:mb-8">Improve your timing and expand your repertoire with these FREE gifts. 
+                <p class="leading-normal my-2 sm:mb-8">Improve your timing and expand your repertoire with these FREE gifts.
                 </p>
             </div>
             <div class="max-w-4xl mx-auto px-4 pt-7">
@@ -486,44 +493,48 @@
                     @endif
                 @endforeach
             </div>
-          
+
             </div>
         </div>
                 <div class="container max-w-4xl px-4 mx-auto text-left md:hidden pb-10">
             @foreach ($gettings as $key => $getting)
                 <div class="mb-4" x-data="{ open: {{ $key === 0 ? 'true' : 'false' }} }" @click="open = !open">
                     <div class="w-full text-left flex justify-between items-center p-4 bg-gradient-to-b from-[#F4F0EB] to-white rounded-xl">
-                        <strong><span x-show="!open" class="text-2xl py-2">{!! $getting['title'] !!} {!! $getting['value'] !!}</strong>
-                        <span x-show="!open" x-text="open ? '-' : '+'" class="text-2xl"></span></span>
+                            <div x-show="!open" class="py-2">
+                        <h3><strong>
+                            {!! $getting['title'] !!} {!! $getting['value'] !!}
+                        </strong></h3>
+                        <h3 x-show="!open" x-text="open ? '-' : '+'"></h3>
+                            </div>
                     </div>
                     <div x-show="open" class="p-4 bg-white">
                         <img class="rounded-lg mb-4" loading="lazy" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                        <span x-show="open" class="text-2xl"><strong>{!! $getting['title'] !!} {!! $getting['value'] !!}</strong></span>
-                        <p class="leading-loose pt-2">{!! $getting['desc'] !!}</p>
+                        <h3 x-show="open"><strong>{!! $getting['title'] !!} {!! $getting['value'] !!}</strong></h3>
+                        <p class="leading-tight pt-2">{!! $getting['desc'] !!}</p>
                     </div>
                 </div>
             @endforeach
         </div>
-          <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="#final">claim your bonuses</a>
+          <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#final">claim your bonuses</a>
             <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
-             <p class="text-xs">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-            <a class="underline cursor-pointer text-xs" href="">Click here to choose that option.</a>
+             <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
+            <a class="underline cursor-pointer text-sm" href="">Click here to choose that option.</a>
     </section>
 
     <section class="px-5 sm:px-6 pt-10 md::pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
         <div class="container max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="flex flex-col justify-center text-black pb-4 md:pb-10 lg:pb-16 w-full md:w-5/12 text-left sm:text-center md:text-left">
-                    <div class="text-2xl font-bold md:text-3xl">
+                    <h3 class="font-black">
                         <strong>
                             And we’re <br class="block sm:hidden">
                             <div class="inline-block bg-pianote uppercase text-white px-2 rounded">LIVE</div> <br class="hidden md:block lg:hidden"> in 3, 2, 1…
                         </strong>
-                    </div>
+                    </h3>
                     <p class="italic font-black py-2"></p>
                     <p class="mb-6 md:leading-tight lg:leading-normal">
                         <strong><em>Weekly live lessons with REAL teachers to become a better piano player.</em><br><br>
-                        It’s what makes Pianote different.</strong><br><br> 
+                        It’s what makes Pianote different.</strong><br><br>
                         At Pianote, we know the value of having access to a REAL piano teacher. <br><br>
                         That’s why you’ll get weekly live lessons as a Pianote member. <br><br>
                         Improve your technique, boost your theory knowledge, or just get an answer to that burning question. <br><br>
@@ -557,11 +568,11 @@
         'header' => '<strong>Test-drive your lessons for 90 days.</strong><br> Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
     ])
-  
-  
+
+
 
     @php
-    
+
         $bonuses = [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
@@ -595,19 +606,20 @@
             <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
             <br>
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-4 leading-none sm:leading-none lg:leading-none uppercase">
-                START PLAYING BEAUTIFUL<br>
-                PIANO <strong class="relative inline-block">IN JUST 10 MINUTES</strong>
-                <svg class="absolute left-10 md:left-20 right-0 bottom-0 w-full h-3 sm:h-4 md:h-5 lg:h-6" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);">
-                    <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path>
-                    <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path>
-                </svg>
+                START PLAYING<br class="sm:hidden"> BEAUTIFUL<br class="hidden md:inline">
+                PIANO
+                <strong class="relative inline-block">IN JUST 10 MINUTES
+                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+                </strong>
             </h1>
-            <h4 class="mb-8 mt-2 md:mt-4 tracking-normal leading-normal hidden md:block">Join Pianote and get unlimited lessons, personal support, and 3 FREE bonuses.</h4>
+            <h4 class="mb-8 mt-2 md:mt-4 leading-normal hidden md:block">Join Pianote and get unlimited lessons, personal support, and 3 FREE bonuses.</h4>
             <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
                 <i class="fas fa-check text-pianote"></i> Step-by-step lessons
+                <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-pianote"></i> Practice with <strong>real</strong> teachers
                 <br class="sm:hidden">
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Personal support 
+                <i class="fas fa-check lg:ml-5 text-pianote"></i> Personal support
+                <br class="sm:hidden">
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
             </p>
 
@@ -657,12 +669,12 @@
                 <s class="text-black opacity-40">${{ (floatval($originalPrice)) }}</s>
                 <span class="text-black">${{ (floatval($discountedPrice)) }}</strong>/yr</span>
             </h3>
-            <a class="anchor-slide join w-11/12 sm:max-w-[440px] bg-pianote" href="{{ $buttonLink }}">GET STARTED</a>
+            <a class="anchor-slide join w-3/4 bg-pianote" href="{{ $buttonLink }}">GET STARTED</a>
             <br>
 
-            <div class="container mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
-                <p class="text-xs">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-                <a class="underline cursor-pointer text-xs" href="{{ $buttonLink2 }}">Click here to choose that option.</a>
+            <div class="container mx-auto max-w-xl text-black pt-4 lg:pt-6 leading-none">
+                <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
+                <a class="underline cursor-pointer text-sm" href="{{ $buttonLink2 }}">Click here to choose that option.</a>
             </div>
         </div>
     </section>

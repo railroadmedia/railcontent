@@ -12,6 +12,7 @@
     @include('_partials.layout._fonts')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -58,6 +59,9 @@
         .splide__arrow svg {
         fill: #F61A30;
         font-size: 0.9rem;
+        }
+        .splide__arrow--prev {
+            left: 2em;
         }
         .splide__arrow--next {
             right: 2em;
@@ -156,10 +160,10 @@
         ];
     @endphp
     <section class="bg-black text-white px-2 md:py-2 md:px-10">
-        <div class="container max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 py-4 md:py-0 md:gap-4">
+        <div class="container max-w-4xl mx-auto flex flex-wrap sm:flex-nowrap sm:justify-between py-4 md:py-0">
             @foreach ($items as $item)
-                <div class="flex flex-col items-left justify-center uppercase text-center py-2 lg:py-5">
-                    <p class="text-xs md:text-sm tracking-tighter flex items-center justify-center">
+                <div class="w-full sm:w-auto flex flex-col items-left justify-center uppercase text-center py-2 lg:py-5">
+                    <p class="text-sm flex items-center justify-center">
                         <i class="fa fa-check text-pianote mr-2"></i> {!! $item !!}
                     </p>
                 </div>
@@ -210,7 +214,7 @@
                         new Splide(this.$refs.splide, {
                             classes: {
                                 arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-xl h-12 w-12',
-                                prev: 'hidden',
+                                prev: 'splide__arrow--prev hidden sm:flex mb-16',
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'splide__pagination -bottom-10',
                             },
@@ -241,8 +245,9 @@
                         <ul class="splide__list items-start">
                             @foreach ($autors as $autor)
                                 <li class="splide__slide px-2">
-                                    <a class="hover:opacity-70 transition-opacity hover:scale-105 transform" @click="{{ $autor['id'] }} = true;">
+                                    <a class="hover:opacity-70 transition-opacity hover:scale-105 transform relative" @click="{{ $autor['id'] }} = true;">
                                         <img class="rounded-xl transition-opacity opacity-0 object-cover bg-center" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $autor['src'] }}" alt="{{ $autor['alt'] }}" />
+                                        <i class="fas fa-play absolute bottom-0 right-0 m-3 text-white text-xl px-3 py-1.5  bg-pianote rounded-full" style="text-indent: 2px;"></i>
                                     </a>
                                 </li>
                             @endforeach
@@ -328,10 +333,10 @@
 
 
     <section class="teacher-section px-4 lg:pt-10 overflow-hidden relative text-white text-center cursor-pointer" @click="demo=true">
-        <h1 class="text-white text-center pb-80 sm:pb-96 playfair leading-snug tracking-none font-normal md:px-4 pt-4 md:pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
+        <h1 class="text-white text-center pb-80 sm:pb-96 playfair leading-snug font-normal md:px-4 pt-4 md:pt-10 md:mb-10">Like having a <br><strong>private teacher on call — 24/7</strong></h1>
 
         <div class="container mx-auto max-w-5xl relative text-left pt-[16rem] md:pt-84 lg:pt-80 md:px-10">
-            <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12 leading-relaxed text-xs sm:text-base">
+            <div class="pb-10 sm:pb-24 md:pb-12 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-12 leading-relaxed text-sm sm:text-base">
                 <div class="md:px-4 sm:px-0">
                     <p class="mb-4">
                         You know the drill.
@@ -409,7 +414,7 @@
                         </div>
                         <br>
                         <h5 class="playfair pb-2"><strong> {!! $teacher['name'] !!}</strong></h5>
-                        <p class="text-xs lg:text-base">
+                        <p class="text-sm lg:text-base">
                             {!! $teacher['description'] !!}
                         </p>
                     </div>
@@ -443,7 +448,7 @@
 
     @php
         $courseDetails = [
-            'title' => 'XX Guided Play-Along Lessons.<br>Original & Simplified Arrangements.<br>Practice With Real Teachers.<br>Lifetime Access.',
+            'title' => '32 Guided Play-Along Lessons.<br>Original & Simplified Arrangements.<br>Practice With Real Teachers.<br>Lifetime Access.',
             'features' => [
                 'Play 5 beautiful piano masterpieces.',
                 'Downloadable sheet music for each arrangement.',
@@ -485,7 +490,7 @@
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 text-black"><strong>{!! $courseDetails['title'] !!}</strong></h4>
                     <div class="w-full mx-auto sm:mx-0">
                         @foreach ($courseDetails['features'] as $feature)
-                            <p class="tracking-tight mb-2 sm:mb-3 text-black"><i class="fas fa-check text-xl text-{{$theme}} mr-1"></i> {{ $feature }}</p>
+                            <p class="mb-2 sm:mb-3 text-black"><i class="fas fa-check text-xl text-{{$theme}} mr-1"></i> {{ $feature }}</p>
                         @endforeach
                     </div>
                 </div>
@@ -493,8 +498,8 @@
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
-                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-xs mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
-                        <h3 class="text-black"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
+                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
+                        <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
@@ -502,14 +507,14 @@
                             <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @endif
-                        <p class="inline-block text-xs text-black tracking-tighter">One time payment.</p><br>
+                        <p class="inline-block text-sm text-black">One time payment.</p><br>
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">get started</div>
 
-                        <div class="text-xs text-pianote">
+                        <div class="text-sm text-pianote">
                             <span x-cloak x-data="timer()" x-init="countdown()">
                                 <strong>Discount ends in:</strong>
                                 <br>
-                                <span class="uppercase text-black tracking-tight font-thin">
+                                <span class="uppercase text-black font-thin">
                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
@@ -518,16 +523,16 @@
                             </span>
                         </div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose tracking-tighter text-sm text-black"><strong>Key Features</strong><br>
+                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
                                 <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
                             @endforeach
                         </p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[classical-piano-pieces]=1&products[taktell-piccolo-metronome]=1&redirect=/order&locked=true"
+                    <a href="/shop/classical-piano-collection-membership"
                        class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 lg:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
-                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-xs mb-2 px-4 tracking-wider text-black">LAUNCH MEMBERSHIP SPECIAL</p>
-                        <h3 class="text-black"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
+                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">LAUNCH MEMBERSHIP SPECIAL</p>
+                        <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
                         @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
@@ -535,7 +540,7 @@
                             <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
                         @endif
-                        <p class="inline-block text-xs tracking-tighter text-black">(Includes $255 in free bonuses)</p><br>
+                        <p class="inline-block text-sm text-black">(Includes $255 in free bonuses)</p><br>
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">learn more</div>
                         <ul class="list-disc ml-6 text-black">
                             @if (!empty($courseDetails['membershipSpecial']['bonusItems']))
@@ -544,11 +549,11 @@
                                 @endforeach
                             @endif
                         </ul>
-                        <div class="text-xs text-pianote">
+                        <div class="text-sm text-pianote">
                             <span x-cloak x-data="timer()" x-init="countdown()">
                                 <strong>Offer ends in:</strong>
                                 <br>
-                                <span class="uppercase text-black tracking-tight font-thin">
+                                <span class="uppercase text-black font-thin">
                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
@@ -557,43 +562,40 @@
                             </span>
                         </div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose tracking-tighter text-sm text-black"><strong>Key Features</strong><br>
+                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)
                                 <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
                             @endforeach
                         </p>
                     </a>
                 </div>
-                <a role="link" class="inline-block mx-auto mt-5 sm:mt-7 text-black" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&redirect=/order&locked=true">
-                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> <br class="hidden sm:inline"> Click here to just grab your digital lesson bundle.</em></u></p></a>
             </div>
         </div>
     </section>
 
-
     @include('_partials.components.video-modal', [
         'name' => 'Bach',
-        'video' => '928599834',
+        'video' => '1007115728',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'BeethovenElise',
-        'video' => '928599834',
+        'video' => '1007115798',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'BeethovenSonata',
-        'video' => '928599834',
+        'video' => '1007115405',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'Chopin',
-        'video' => '928599834',
+        'video' => '1007115186',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'Satie',
-        'video' => '928599834',
+        'video' => '1007115855',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
@@ -603,7 +605,7 @@
     ])
     @include('_partials.components.video-modal', [
         'name' => 'demo',
-        'video' => '785314388',
+        'video' => '1007790486',
         'vimeo' => true,
     ])
 
