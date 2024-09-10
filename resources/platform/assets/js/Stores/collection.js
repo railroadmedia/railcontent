@@ -91,15 +91,17 @@ export const useCollectionStore = defineStore({
             const userStore = useUserStore();
 
             const endpoints = {
-                'coachLessons': await fetchCoachLessons(userStore.brand, this.getContentId(), {
-                    page: this.tabData[this.filter.activeTab].currentPage,
-                    sort: this.filter.sort,
-                    limit: this.filter.limit,
-                })
+                'coachLessons': async() => {
+                    return await fetchCoachLessons(userStore.brand, this.getContentId(), {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        sort: this.filter.sort,
+                        limit: this.filter.limit,
+                    })
+                }
             }
 
             if(endpoints[type]){
-                return endpoints[type];
+                return await endpoints[type]();
             } else {
                 return await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
