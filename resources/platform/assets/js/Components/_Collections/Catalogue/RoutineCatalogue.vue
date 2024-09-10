@@ -56,7 +56,6 @@ const showRoutineSoundSlice = ({ soundSliceSlug, title, routineId }) => {
     state.soundSliceSlug = soundSliceSlug;
     state.routineTitle = title;
     state.routineId = routineId;
-    console.log('open')
 }
 
 const soundSliceClosed = () => {
