@@ -138,8 +138,6 @@
     @php
         $originalPrice = 495;
         $discountedPrice = 240;
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true';
-        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true';
     @endphp
 
     @include("pianote.sales.partials._nav", [
@@ -518,7 +516,7 @@
           <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#final">claim your bonuses</a>
             <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
              <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-            <a class="underline cursor-pointer text-sm" href="">Click here to choose that option.</a>
+            <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>
     </section>
 
     <section class="px-5 sm:px-6 pt-10 md::pt-16 lg:pt-20 relative text-white" style="background-color:#F4F0EB;">
@@ -669,12 +667,11 @@
                 <s class="text-black opacity-40">${{ (floatval($originalPrice)) }}</s>
                 <span class="text-black">${{ (floatval($discountedPrice)) }}</strong>/yr</span>
             </h3>
-            <a class="anchor-slide join w-3/4 bg-pianote" href="{{ $buttonLink }}">GET STARTED</a>
+            <a class="join w-3/4 bg-pianote" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true">GET STARTED</a>
             <br>
-
             <div class="container mx-auto max-w-xl text-black pt-4 lg:pt-6 leading-none">
                 <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
-                <a class="underline cursor-pointer text-sm" href="{{ $buttonLink2 }}">Click here to choose that option.</a>
+                <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>
             </div>
         </div>
     </section>

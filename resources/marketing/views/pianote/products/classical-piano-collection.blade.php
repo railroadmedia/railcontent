@@ -454,7 +454,6 @@
             'features' => [
                 'Play 5 beautiful piano masterpieces.',
                 'Downloadable sheet music for each arrangement.',
-                'Join ' . number_format($nPackOwners ?? 0) . ' piano players who have already registered.',
                 'Choose your best option to get started.',
             ],
             'courseOnly' => [
