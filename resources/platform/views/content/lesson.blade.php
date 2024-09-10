@@ -218,10 +218,12 @@
             $contentBreadCrumb->pages = $pages;
             $contentBreadCrumb->breadcrumbClassOverride = 'tw-px-4 md:tw-px-8 tw-max-w-[1703px]';
         } else {
-            $pages[] = (object) [
+            $packParent = (object) [
                 'title' => $parent->fetch('fields.title'),
                 'url' => $parent->fetch('url'),
             ];
+            array_splice($pages, -1, 0, [$packParent]);
+
             $contentBreadCrumb->pages = $pages;
             $contentBreadCrumb->breadcrumbClassOverride = $breadcrumbClassOverride ?? '';
         }
