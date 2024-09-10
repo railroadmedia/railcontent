@@ -13,6 +13,7 @@ use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListArrayElement;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 use Modules\Content\Models\Sanity\Structure\ParentTypeField;
 use Modules\Content\Models\Sanity\Structure\StatusField;
@@ -41,8 +42,17 @@ abstract class LessonTemplate extends BaseSanityModel
         $video               = new ListObject(
             fields: [
                         new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
-                        new Field(FieldType::String, 'external_id')
-                    ],
+                        new Field(FieldType::String, 'external_id'),
+                        new Field(FieldType::String, 'hlsManifestUrl'),
+                       // new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListArrayElement()),
+                        new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
+                            fields: [
+new Field(FieldType::String, 'vimeo_key'),
+new Field(FieldType::String, 'file'),
+new Field(FieldType::Number, 'height'),
+new Field(FieldType::Number, 'width')]
+                        ), ),
+                    ],previewItem: new ListItemPreview('height', 'width'),
         );
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),

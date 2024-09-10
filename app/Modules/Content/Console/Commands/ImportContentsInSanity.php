@@ -2,6 +2,8 @@
 
 namespace App\Modules\Content\Console\Commands;
 
+use App\Decorators\Content\VimeoTrailerDecorator;
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentInstructor;
@@ -16,7 +18,9 @@ use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 
 class ImportContentsInSanity extends \Illuminate\Console\Command
 {
@@ -109,11 +113,13 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 }
             }
         }
+        $vimeoVideoSourcesDecorator = app()->make(VimeoTrailerDecorator::class);
+        $railcontentURLProvider = app()->make(RailcontentURLProviderInterface::class);
 
         foreach ($contentTypes as $cType) {
             $this->info(" ---- Start $cType migration. ----");
             $railcontentId = $this->hasArgument('id') ? $this->argument('id') : null;
-            $this->importData($cType, $extraModels, $permissions, $extraData, $instructors, $deleteOldDocuments, $destination, $artists, $railcontentId);
+            $this->importData($cType, $extraModels, $permissions, $extraData, $instructors, $deleteOldDocuments, $destination, $artists, $railcontentId, $vimeoVideoSourcesDecorator, $railcontentURLProvider);
         }
 
         return 1;
@@ -360,7 +366,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         bool|array|string|null $deleteOldDocuments,
         $destination,
         array $artists,
-        int|null $railcontentId
+        int|null $railcontentId,
+        $vimeoVideoSourcesDecorator,
+        $railcontentURLProvider
     ): void {
         $results = Content::with('data', 'fields')->where('railcontent_content.type', '=', $contentType)
             ->where('railcontent_content.status', '!=', 'deleted')
@@ -412,9 +420,25 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 'total_xp'         => (int)$result->total_xp,
                 'published_on'     => $result->published_on,
                 'show_in_new_feed' => $result->show_in_new_feed == 1,
-                "web_url_path"     => $result->web_url_path ?? ('/' . $result->brand . '/' . $contentType . '/' . $result->slug . '/' . $result->id),
+                "web_url_path"     => $result->web_url_path,
                 "popularity"       => $result->popularity
             ];
+            if(!$result->web_url_path){
+
+               // dd($result->toArray());
+                $contentURLs =
+                    $railcontentURLProvider->getContentURLs(
+                        $result->id,
+                        $result->slug,
+                        $contentType,
+                        new ContentEntity($result->toArray())
+                    );
+
+                if (!empty($contentURLs)) {
+                    $songs[$id]['web_url_path'] = $contentURLs->getWebURLPath();
+                }
+                //dd($songs[$id]);
+            }
             if ($result->sort != 0) {
                 $songs[$id]['sort'] = $result->sort;
             }
@@ -627,13 +651,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $songs[$id]['gear'] = $field['value'];
                     $imported           = true;
                 }
-
+                $vimeoImported = true;
                 if ($field['key'] == 'video') {
-                    $video = Content::query()->where('railcontent_content.id', '=', $field['value'])->first();
+                    $video = Content::with('fields')->where('railcontent_content.id', '=', $field['value'])->first();
                     if ($video) {
                         $songs[$id]['video']['type']        = $video['type'];
                         $songs[$id]['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
                         $songs[$id]['length_in_seconds']    = (int)$video['length_in_seconds'];
+                        if($video['type'] == 'vimeo-video' && $songs[$id]['video']['external_id'] != null && !($vimeoImported)){
+
+                            //get vimeo data
+
+                            $video = $vimeoVideoSourcesDecorator->decorate($songs[$id]['video']['external_id']);
+                            $songs[$id]['video']['hlsManifestUrl'] = $video['hlsManifestUrl'];
+                            $songs[$id]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
+                            //$songs[$id]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
+                            //dd($songs[$id]);
+//                            $songs[$id]['video']['hlsManifestUrl'] = $video['hlsManifestUrl'];
+//                            $songs[$id]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
+//$vimeoImported = false;
+                        }
                     }
                     $imported = true;
                 }
