@@ -8,7 +8,7 @@
             title="Coaches"
             icon-name="whistle"
             class="tw-mb-[30px]"
-            :description="headerDescription"
+            :description="headerDescriptions[brand]"
         />
 
         <!-- Need to integrate with MCS -->
@@ -73,26 +73,11 @@
 
         <!-- Need to integrate with MCS -->
         <!-- Upcoming Coaches -->
-        <UpcomingCoach
-            v-if="hasUpcomingCoaches"
-            :upcoming-coaches="upcomingCoaches"
-        />
+        <UpcomingCoach v-if="hasUpcomingCoaches" :upcoming-coaches="upcomingCoaches" />
 
-        <ActiveCoach
-            :active-coaches="activeCoaches"
-        />
+        <ActiveCoach :active-coaches="activeCoaches"/>
 
-        <CollectionWrapper
-            :collection-type="collectionType"
-            :filterable-values="collectionFilterableValues"
-            :included-types="collectionIncludedTypes"
-            :limit="collectionLimit"
-            :required-fields="collectionRequiredFields"
-            :statuses="collectionStatuses"
-            :tab-options="collectionTabOptions"
-            :default-sort="collectionDefaultSort"
-            :show-reset-progress="collectionShowResetProgress"
-        />
+        <CollectionWrapper collection-type="coach" :tab-options="tabData" />
     </div>
 </template>
 <script setup>
@@ -115,51 +100,9 @@ import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper'
 import {usePlatformStore} from "@stores/platform";
 
 const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        default: () => [],
-    },
     coachEvent: {
         type: Object,
         default: () => ({}),
-    },
-    collectionData:{
-        type: Object,
-        default: () => ({}),
-    },
-    collectionDefaultSort: {
-        type: String,
-        default: '-published_on',
-    },
-    collectionFilterableValues: {
-        type: Array,
-        default: () => [],
-    },
-    collectionIncludedTypes: {
-        default: '',
-    },
-    collectionLimit:{
-        type: [Number, Boolean],
-        default: () => 10,
-    },
-    collectionRequiredFields: {
-        type: Array,
-        default: () => [],
-    },
-    collectionShowResetProgress: {
-        type: Boolean,
-        default: () => false,
-    },
-    collectionStatuses: {
-        type: Array,
-        default: () => ["published"],
-    },
-    collectionTabOptions: {
-        type: Array,
-        default: () => [],
-    },
-    collectionType: {
-        default: '',
     },
     coachEventCurrentDateString: {
         type: String,
@@ -185,10 +128,6 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    headerDescription: {
-        type: String,
-        default: '',
-    },
     coachEventSubscriptionCalendarId: {
         type: String,
         default: () => "",
@@ -213,8 +152,9 @@ const props = defineProps({
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
 const platformStore = usePlatformStore();
+
+const { brand } = storeToRefs(userStore);
 const { isLoading } = storeToRefs(platformStore);
 
 const activeCoaches = ref([]);
@@ -225,11 +165,11 @@ const hasCoachEvent = computed(() => {
 })
 
 const featuredCoachLength = computed(() => {
-    return props.featuredCoaches.results?.length;
+    return props.featuredCoaches?.results?.length;
 })
 
 const formattedFeaturedCoaches = computed(() => {
-    return props.featuredCoaches.results?.map((coach) => {
+    return props.featuredCoaches?.results?.map((coach) => {
         return {
             ...coach,
             title: coach.fields.find(c=>c.key === 'name').value,
@@ -241,6 +181,12 @@ const formattedFeaturedCoaches = computed(() => {
         }
     })
 })
+
+const breadcrumbs = [
+    {
+        title: 'Coaches'
+    }
+];
 
 const tabData = [
     {
@@ -254,6 +200,13 @@ const tabData = [
         key: '',
     },
 ];
+
+const headerDescriptions = {
+    drumeo: 'Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!',
+    pianote: 'Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!',
+    guitareo: 'Tackle your next guitar goal with bite-sized courses from many of the world\'s best guitarists.',
+    singeo: 'Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!',
+}
 
 onBeforeMount(async() => {
     const featured = await fetchByReference(brand.value, { includedFields: ['is_featured']});

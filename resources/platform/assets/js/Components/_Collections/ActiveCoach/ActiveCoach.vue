@@ -11,7 +11,7 @@
         <!-- Active Coaches -->
         <div class="tw-my-3">
             <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-3">
-                <a v-for="coach in activeCoaches" :href="coach['url']"
+                <a v-for="coach in activeCoaches" :href="coach.web_url_path"
                    class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                     <!-- Coach Image -->
