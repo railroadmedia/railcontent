@@ -120,10 +120,6 @@ const props = defineProps({
         type: String,
         default: '' // Default empty string
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
     lockUnowned: {
         type: Boolean,
         default: false

@@ -42,21 +42,13 @@
           content-endpoint="/railcontent/content"
           :theme-color="brand"
           :brand="brand"
-          :pre-loaded-content="listLessons"
           :session-token="sessionToken"
         />
         <CollectionWrapper
           v-else
           v-bind="recommendedProps"
-          :brand="brand"
           :collection-type="lessonType"
-          :filterable-values="catalogueMeta.allowableFilters"
-          :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
-          :included-types="includedTypes"
-          :statuses="statuses"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :multiple-types="isAllContent"
-          :is-all-content="isAllContent"
           :hide-filter-icon="lessonType === 'routine'"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
@@ -72,13 +64,13 @@
   import { usePlatformStore } from "@stores/platform";
   import { storeToRefs } from "pinia/dist/pinia";
   import { useCollectionStore } from "@stores/collection";
+  import { useUserStore } from "@stores/user";
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
   import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
-  import {useUserStore} from "@stores/user";
 
   const props = defineProps({
     hasStartedLessons: Boolean,
@@ -86,14 +78,9 @@
     catalogueMeta: Object,
     startedLessons: Array,
     breadcrumbs: Array,
-    listLessons: Object,
     sessionToken: String,
     askQuestionRecipient: String,
     emailLogoLink: String,
-    includeFutureScheduledContentOnly: Boolean,
-    statuses: Array,
-    isAllContent: Boolean,
-    includedTypes: Array,
     showInProgress: Boolean,
     catalogueType: String,
   });
@@ -137,7 +124,7 @@
               sort: '-published_on'
           },
           queryType: props.lessonType,
-          ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && {noFetchOnLoad: true})
+          ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
       });
   })
   </script>

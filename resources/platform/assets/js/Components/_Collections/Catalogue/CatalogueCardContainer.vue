@@ -17,22 +17,21 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard 
-                        v-for="item in getData" 
-                        :key="'grid' + item.id" 
+                    <MiniCatalogueCard
+                        v-for="item in getData"
+                        :key="'grid' + item.id"
                         :item="item"
-                        :content-type="item.type" 
-                        :user-id="userId" 
-                        :is-admin="isAdmin" 
+                        :content-type="item.type"
+                        :user-id="userId"
                         :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs" 
+                        :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction" 
-                        :force-no-links="forceNoLinks" 
+                        :show-my-list-action="showMyListAction"
+                        :force-no-links="forceNoLinks"
                         :show-dropdown="showDropdown"
-                        :trackingSection="trackingSection" 
+                        :trackingSection="trackingSection"
                         @addToList="addToList"
-                        @progressReset="handleProgressReset" 
+                        @progressReset="handleProgressReset"
                     />
                 </template>
                 <template v-else>
@@ -104,10 +103,6 @@ const props = defineProps({
     userId: {
         type: String,
         default: () => '',
-    },
-    isAdmin: {
-        type: Boolean,
-        default: () => false,
     },
     noWrap: {
         type: Boolean,
