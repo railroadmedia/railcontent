@@ -79,7 +79,6 @@
         />
 
         <ActiveCoach
-            v-if="activeCoaches.length"
             :active-coaches="activeCoaches"
         />
 
@@ -113,6 +112,7 @@ import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogu
 import UpcomingCoach from '@collections/UpcomingCoach/UpcomingCoach';
 import ActiveCoach from '@collections/ActiveCoach/ActiveCoach';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+import {usePlatformStore} from "@stores/platform";
 
 const props = defineProps({
     breadcrumbs: {
@@ -214,6 +214,8 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const activeCoaches = ref([]);
 const featuredLessons = ref([]);

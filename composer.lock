@@ -1052,16 +1052,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.6",
+            "version": "3.321.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58"
+                "reference": "c64ee32d80ec2ab5d8d6a0b77297c2d69602ef3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
-                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c64ee32d80ec2ab5d8d6a0b77297c2d69602ef3b",
+                "reference": "c64ee32d80ec2ab5d8d6a0b77297c2d69602ef3b",
                 "shasum": ""
             },
             "require": {
@@ -1144,9 +1144,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.7"
             },
-            "time": "2024-09-06T18:06:38+00:00"
+            "time": "2024-09-09T18:09:23+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10351,16 +10351,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.7",
+            "version": "v3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "68bce6badbbb9f32d7ce4c1e7e4f9bdc53ba917b"
+                "reference": "879bbe86d49f9f040ee23717b6ecc8764fa2f8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/68bce6badbbb9f32d7ce4c1e7e4f9bdc53ba917b",
-                "reference": "68bce6badbbb9f32d7ce4c1e7e4f9bdc53ba917b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/879bbe86d49f9f040ee23717b6ecc8764fa2f8dc",
+                "reference": "879bbe86d49f9f040ee23717b6ecc8764fa2f8dc",
                 "shasum": ""
             },
             "require": {
@@ -10411,9 +10411,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.8"
             },
-            "time": "2024-09-05T20:37:04+00:00"
+            "time": "2024-09-09T17:59:53+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -12109,16 +12109,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "4.8.2",
+            "version": "4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "1732519693ac738cbc9cb21fdd00446c7a6a46e6"
+                "reference": "1b7c105deddcb1331f245cccddd5b6f397213a86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/1732519693ac738cbc9cb21fdd00446c7a6a46e6",
-                "reference": "1732519693ac738cbc9cb21fdd00446c7a6a46e6",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/1b7c105deddcb1331f245cccddd5b6f397213a86",
+                "reference": "1b7c105deddcb1331f245cccddd5b6f397213a86",
                 "shasum": ""
             },
             "require": {
@@ -12181,7 +12181,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/4.8.2"
+                "source": "https://github.com/spatie/laravel-data/tree/4.9.0"
             },
             "funding": [
                 {
@@ -12189,7 +12189,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-30T13:53:18+00:00"
+            "time": "2024-09-10T13:25:26+00:00"
         },
         {
             "name": "spatie/laravel-fractal",

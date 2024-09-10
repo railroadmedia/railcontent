@@ -1,5 +1,7 @@
 <template>
-    <div class="tw-my-[30px]">
+    <SkeletonActiveCoach v-if="isLoading" />
+
+    <div v-else class="tw-my-[30px]">
         <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
             <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
                 Active Coaches
@@ -54,12 +56,19 @@
     </div>
 </template>
 <script setup>
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
+import SkeletonActiveCoach from '@collections/SkeletonLoader/SkeletonActiveCoach';
+
 const props = defineProps({
     activeCoaches: {
         type: Array,
         default: () => [],
     }
 })
+
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const cardImage = (coach) => {
     return `https://www.musora.com/musora-cdn/image/width=300,quality=95/${coach.coach_card_image}`
