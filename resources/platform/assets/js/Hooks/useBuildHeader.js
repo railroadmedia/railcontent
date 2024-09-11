@@ -1,7 +1,7 @@
 // hooks/useBuildHeader.js
-import { computed } from 'vue';
+import { ref } from 'vue';
 
-export function useBuildHeader(contentType, progressPercent) {
+export function useBuildHeader(contentType, result, progressPercent) {
     const buildHeader = (result) => {
         const header = {
             type: contentType,
@@ -11,22 +11,62 @@ export function useBuildHeader(contentType, progressPercent) {
             progress: progressPercent,
         };
 
-        if(contentType !== 'learning-path-level' && contentType !== 'unit') {
+        if (contentType !== 'learning-path-level' && contentType !== 'unit') {
             header.infoData = [
-                `${result.child_count} ${contentType === 'learning-path-course' ? 'Courses' : 'Lessons'}`,
-                `${result.total_xp || result.xp } XP`
+                `${result.child_count} ${contentType === 'pack-bundle' ? 'Packs' : 'Lessons'}`,
+                `${result.total_xp} XP`
             ];
+        }
+
+        // Add additional custom fields based on contentType if needed
+        if (contentType === 'pack') {
+            header.thumbnail = result.thumbnail;
+            header.image = result.image;
+            header.darkLogo = result.light_logo;
+            header.lightLogo = result.dark_logo;
         }
 
         return header;
     };
 
-    return { buildHeader };
-}
+    // Helper function to build CTA buttons based on result
+    const buildHeaderCTA = (result) => {
+        const ctas = [];
+        const primaryButton = {
+            type: "PageHeaderPrimaryCta",
+            props: {
+                faIconClass: "fa-play",
+                isPrimary: true,
+                text: progressPercent === 0 ? "Start" :
+                      progressPercent === 100 ? "Restart" : "Continue",
+                url: result.web_url_path
+            }
+        };
+        ctas.push(primaryButton);
 
-// Helper function to build CTA buttons based on progress
-const buildHeaderCTA = (method) => {
-    const ctas = [];
-    // Placeholder for now
-    return ctas;
+        if (progressPercent !== 0) {
+            const resetButton = {
+                type: "ResetProgressCta",
+                props: {
+                    contentId: result.id,
+                    progress: progressPercent
+                }
+            };
+            ctas.push(resetButton); 
+        }
+
+        if (result.resources) {
+            const resourceButton = {
+                type: "DownloadResourcesCta",
+                props: {
+                    resources: result.resources,
+                }
+            };
+            ctas.push(resourceButton);
+        }
+
+        return ctas;
+    };
+
+    return { buildHeader };
 }

@@ -11,6 +11,7 @@
             :info-data="header?.infoData"
             :ctas="header?.ctas"
             :description="header?.description"
+            :is-loading="isLoading"
         />
         <div class="tw-my-4">
             <ListCatalogue
