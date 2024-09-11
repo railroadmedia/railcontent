@@ -53,20 +53,20 @@
             </section>
 
             <!-- Completed Lessons -->
-<!--            <MiniCatalogueSection-->
-<!--                title="Completed Lessons"-->
-<!--                see-all-url="/{{ $brand }}/lesson-history/completed"-->
-<!--                seeAllAriaLabel="See All Completed Lessons"-->
-<!--                :pre-loaded-content="{{ json_encode(json_decode($completedProgressContents)->data) }}"-->
-<!--            />-->
+            <MiniCatalogueSection
+                title="Completed Lessons"
+                :see-all-url="`/${brand}/lesson-history/completed`"
+                seeAllAriaLabel="See All Completed Lessons"
+                :pre-loaded-content="completedContents"
+            />
 
             <!-- Started Lessons -->
-<!--            <MiniCatalogueSection-->
-<!--                title="Started Lessons"-->
-<!--                see-all-url="/{{ $brand }}/lesson-history/in-progress"-->
-<!--                seeAllAriaLabel="See All Started Lessons"-->
-<!--                :pre-loaded-content="{{ json_encode(json_decode($startedProgressContents)->data) }}"-->
-<!--            />-->
+            <MiniCatalogueSection
+                title="Started Lessons"
+                :see-all-url="`/${brand}/lesson-history/in-progress`"
+                seeAllAriaLabel="See All Started Lessons"
+                :pre-loaded-content="startedContents"
+            />
 
             <!-- About You -->
             <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap tw-pt-[24px] tw-mb-[30px]" dusk="about-user">
@@ -118,10 +118,10 @@
     </div>
 </template>
 <script setup>
-import { computed, inject, onBeforeMount } from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
-import { fetchContentInProgress } from 'musora-content-services';
+import { fetchContentInProgress, fetchCompletedContent } from 'musora-content-services';
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
 import PageHeader from '@collections/PageHeader/PageHeader';
@@ -159,7 +159,8 @@ const props = defineProps({
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
-const token = inject('csrf_token');
+const startedContents = ref([]);
+const completedContents = ref([]);
 
 const metrics = computed(() => {
     const keys = Object.keys(props.userMetrics);
@@ -183,8 +184,9 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const inProgress = await fetchContentInProgress('all', brand.value);
-        console.log(inProgress);
+        const started = await fetchContentInProgress('all', brand.value);
+        const completed = await fetchCompletedContent('all', brand.value);
+        console.log(started, completed)
     }
 
     fetchData();
