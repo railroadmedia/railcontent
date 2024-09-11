@@ -3,18 +3,16 @@
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         
         <PageHeader
-            :title="header.title"
-            :description="header.description"
-            :info-data="header.infoData"
-            :hero-img="headerData.heroImg"
-            :progress="headerData.progress"
-            :progress-label-text="headerData.progressLabelText"
-            :content-id="headerData.contendId"
-            :page-type="pageType"
-            :icon-name="headerData.iconName"
-            :ctas="headerData.ctas"
-            :dark-mode-logo="headerData.darkModeLogo"
-            :light-mode-logo="headerData.lightModeLogo"
+            :title="header?.title"
+            :description="header?.description"
+            :content-id="header?.contentId"
+            :page-type="header?.type"
+            :progress="headerData?.progress"
+
+            :info-data="header?.infoData"
+            :progress-label-text="headerData?.progressLabelText"
+            :icon-name="headerData?.iconName"
+            :ctas="headerData?.ctas"
         />
 
 
@@ -48,7 +46,7 @@
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :content="data"
+                            :content="OverviewChildData"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -190,11 +188,7 @@ const { isLoading } = storeToRefs(platformStore);
 
 //Refs
 const data = ref(null);
-const header = ref({
-    title: "",
-    description: "",
-    infoData: []
-})
+const header = ref(null);
 const error = ref(null);
 
 //Computed
@@ -204,26 +198,23 @@ const showOverview = computed(() => {
 const showNumbers = computed(() => {
     return props.contentType === 'learning-path-lesson' || props.contentType === 'unit-part';
 })
+const OverviewChildData = computed( () => {
+    if(props.contentType === 'learning-path-level') return data.value.levels;
+    if(props.contentType === 'unit') return data.value.units; 
+    if(props.contentType === 'unit-part') return data.value.children;
+    return data.value.child; 
+})
 
 onBeforeMount( async () => {
+    console.log('headerData', props.headerData.ctas)
     //console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
-        if(props.contentType === 'learning-path-level') { data.value = OverviewData.value.levels; }
-        else if(props.contentType === 'unit') { data.value = OverviewData.value.units; }
-        else if(props.contentType === 'unit-part') { data.value = OverviewData.value.children; }
-        else { data.value = OverviewData.value.child; }
+        data.value = OverviewData.value;
 
-        console.log('data', data.value)
-        header.value.title = OverviewData.value.title;
-        header.value.description = OverviewData.value.description;
-        if(props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson') {
-            header.value.infoData = [
-                `${OverviewData.value.child_count} Course`,
-                `${OverviewData.value.xp} XP`
-            ]
-        } else {
-            header.value.infoData = props.headerData.infoData; //Default
-        }
+        //Header Data
+        header.value = OverviewData.value.header;
+
+        console.log('my data', data.value)    
         platformStore.setLoadingState(OverviewLoading.value);
 
 })
