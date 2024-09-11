@@ -13,7 +13,7 @@ export async function useOverviewPageData(contentType) {
 
     try {
         //Method Levels
-        if(contentType === "learning-path-level" || contentType === "learning-pack") {
+        if(contentType === "learning-path-level") {
             console.log('hello')
             const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
             if (result) {   

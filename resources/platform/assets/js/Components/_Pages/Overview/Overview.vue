@@ -7,7 +7,7 @@
             :description="header?.description"
             :content-id="header?.contentId"
             :page-type="header?.type"
-            :progress="headerData?.progress"
+            :progress="header?.progress"
 
             :info-data="header?.infoData"
             :progress-label-text="headerData?.progressLabelText"
@@ -201,11 +201,11 @@ const showNumbers = computed(() => {
 const OverviewChildData = computed( () => {
     if(props.contentType === 'learning-path-level') return data.value.levels;
     if(props.contentType === 'unit') return data.value.units; 
-    if(props.contentType === 'unit-part') return data.value.children;
-    return data.value.child; 
+    return data.value.children; 
 })
 
 onBeforeMount( async () => {
+    console.log('content type is', props.contentType)
     console.log('headerData', props.headerData.ctas)
     //console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
