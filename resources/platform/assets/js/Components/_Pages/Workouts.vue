@@ -92,7 +92,7 @@
             :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
             :pre-loaded-content="workoutData"
             :statuses="statuses"
-            :tabs="tabs"
+            :tab-options="tabData"
             :is-admin="isAdmin"
         />
     </div>
@@ -106,9 +106,10 @@
 
 <script setup>
 // TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
+import { useCollectionStore } from "@stores/collection";
 
 import Tooltip from '@collections/Tooltip/Tooltip';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
@@ -159,12 +160,9 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    tabs: {
-        type: Array,
-        default: () => [],
-    },
 });
 
+const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
@@ -199,4 +197,45 @@ const infoText = {
         content: 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
     },
 }
+
+const tabData = [
+    {
+        value : "All",
+        groupByView: false,
+        key: ""
+    },
+    {
+        value : "5 Minutes",
+        groupByView: false,
+        key: ["length_in_seconds < 450"]
+    },
+    {
+        value : "10 Minutes",
+        groupByView: false,
+        key: [
+            "length_in_seconds > 451",
+            "length_in_seconds < 751"
+        ]
+    },
+    {
+        value : "15+ Minutes",
+        groupByView: false,
+        key: ["length_in_seconds > 750"]
+    },
+    {
+        value: "Instructors",
+        groupByView: true,
+        key: ["instructor"]
+    }
+]
+
+onBeforeMount(() => {
+    collectionStore.setDefaults({
+        tabOptions: tabData,
+        filter: {
+            sort: '-published_on'
+        },
+        queryType: 'workout',
+    });
+})
 </script>

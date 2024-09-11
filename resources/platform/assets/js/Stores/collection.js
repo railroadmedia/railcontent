@@ -3,7 +3,7 @@ import { useUserStore } from "./user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons } from 'musora-content-services';
 
 const { getFilterValues } = useFilterValues();
 
@@ -17,7 +17,7 @@ export const useCollectionStore = defineStore({
             filter: {
                 activeTab: '',
                 included_fields: [],
-                limit: 10,
+                limit: 20,
                 params: {},
                 searchTerm: '',
                 sort: '',
@@ -33,6 +33,7 @@ export const useCollectionStore = defineStore({
             totalPages: 0,
             totalResults: 0,
             queryType: '',
+            fetchType: '',
         }
     },
     actions: {
@@ -80,8 +81,39 @@ export const useCollectionStore = defineStore({
             return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
         },
 
-        async fetchData() {
+        getContentId (){
+            const pathname = window.location.pathname;
+            const match = pathname.match(/\/(\d+)\/?$/);
+            return match ? match[1] : null;
+        },
+
+        async getEndpoint(type){
             const userStore = useUserStore();
+
+            const endpoints = {
+                'coachLessons': async() => {
+                    return await fetchCoachLessons(userStore.brand, this.getContentId(), {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        sort: this.filter.sort,
+                        limit: this.filter.limit,
+                    })
+                }
+            }
+
+            if(endpoints[type]){
+                return await endpoints[type]();
+            } else {
+                return await fetchAll(userStore.brand, this.queryType, {
+                    page: this.tabData[this.filter.activeTab].currentPage,
+                    searchTerm: this.filter.searchTerm,
+                    sort: this.filter.sort,
+                    groupBy: this.getGroupBy(),
+                    includedFields: this.getIncludedFields(),
+                })
+            }
+        },
+
+        async fetchData() {
             try {
                 // const response = await axios
                 //     .get(
@@ -102,13 +134,7 @@ export const useCollectionStore = defineStore({
                 //         })
                 // return response;
 
-                const response = await fetchAll(userStore.brand, this.queryType, {
-                    page: this.tabData[this.filter.activeTab].currentPage,
-                    searchTerm: this.filter.searchTerm,
-                    sort: this.filter.sort,
-                    groupBy: this.getGroupBy(),
-                    includedFields: this.getIncludedFields(),
-                })
+                const response = this.getEndpoint(this.fetchType);
 
                 return response;
             } catch (e) {
@@ -134,7 +160,7 @@ export const useCollectionStore = defineStore({
 
         getGroupBy(){
             if(this.tabData[this.filter.activeTab].groupByView){
-                return this.tabData[this.filter.activeTab].key;
+                return this.tabData[this.filter.activeTab].key[0];
             }
 
             return '';
@@ -142,7 +168,7 @@ export const useCollectionStore = defineStore({
 
         getIncludedFields(){
             if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
-                return [this.tabData[this.filter.activeTab].key]
+                return [...this.tabData[this.filter.activeTab].key]
             }else {
                 return []
             }
@@ -268,6 +294,10 @@ export const useCollectionStore = defineStore({
 
             if(defaults.queryType){
                 this.queryType = defaults.queryType;
+            }
+
+            if(defaults.fetchType){
+                this.fetchType = defaults.fetchType;
             }
 
             this.getURLParams();

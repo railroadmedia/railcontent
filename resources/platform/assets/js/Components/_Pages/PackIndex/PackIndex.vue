@@ -39,7 +39,6 @@ const headerDescription = computed(() => {
 })
 
 onBeforeMount(() => {
-    console.log('PackIndex Page')
     collectionStore.setDefaults({
         tabOptions: tabData,
         filter: {

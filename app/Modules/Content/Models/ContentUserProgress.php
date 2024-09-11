@@ -58,6 +58,14 @@ class ContentUserProgress extends Model
     }
 
     /**
+     * Scope a query to only include records that are complete.
+     */
+    public function scopeComplete(Builder $query): Builder
+    {
+        return $query->where('state', ProgressState::Completed->value);
+    }
+
+    /**
      * Scope a query to only include progress for content of a given type.
      */
     public function scopeOfContentType(Builder $query, string $type): Builder
