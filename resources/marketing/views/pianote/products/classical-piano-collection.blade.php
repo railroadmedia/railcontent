@@ -150,7 +150,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
-            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
+            src="https://player.vimeo.com/progressive_redirect/playback/1008560135/rendition/1080p/file.mp4?loc=external&signature=a1fb6249ee2ae8c40a2524eb56695fe9f5d4f6d612131d619128b9d27127a8dc"></video>
     </header>
 
     @php
@@ -601,7 +601,7 @@
     ])
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '785314388',
+        'video' => '1008560089',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal', [
