@@ -2,63 +2,56 @@
 import { ref } from 'vue';
 import { fetchCompletedState, fetchMethod, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
+import { useBuildHeader } from '@hooks/useBuildHeader';
 
 export async function useOverviewPageData(contentType) {
     const userStore = useUserStore();
-
+    
     const data = ref(null);
     const error = ref(null);
     const isLoading = ref(true);
-    const progressPercent = getProgressPercent();
+
+    const contentId = getContentId();
+    const progressPercent = await getProgressPercent(contentId); // Await the progress percent
+
+    // Initialize the buildHeader hook
+    const { buildHeader } = useBuildHeader(contentType, progressPercent);
 
     try {
-        //Method Levels
-        if(contentType === "learning-path-level") {
-            console.log('hello')
+        if (contentType === "learning-path-level") {
+            console.log('hello');
             const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
-            if (result) {   
-                //Add Method Level Position
+            if (result) {
                 result.levels = result.levels.map((level, index) => ({
                     ...level,
                     position: index + 1 
                 }));
                 data.value = result;
-
-                //Header
-                data.value.header = {
-                    type: contentType,
-                    title: result.title,
-                    description: result.description,
-                    id: result.contentId,
-                    progress: progressPercent,
-                };
+                data.value.header = buildHeader(result); // Use the hook to build header
             } else {
                 throw new Error('Failed to fetch method');
             }
-        }
-        //Foundations....
-        else if (contentType === "unit") {
+        } else if (contentType === "unit") {
             const result = await fetchFoundation('foundations-2019');
-            if(result) {
-                //Add Method Level Position
+            if (result) {
                 result.units = result.units.map((unit, index) => ({
                     ...unit,
                     position: index + 1 
                 }));
                 data.value = result;
+                data.value.header = buildHeader(result); // Use the hook to build header
+            } else {
+                throw new Error('Failed to fetch foundation');
             }
-        }
-        //Method Level Courses
-        else {
-            //console.log('childId', childContentId())
-            const result = await fetchMethodChildren(childContentId());
-            if (result) {   
-                //console.log('result', result[0])
+        } else {
+            const result = await fetchMethodChildren(contentId);
+            if (result) {
                 data.value = result[0];
+                data.value.header = buildHeader(result[0]); // Use the hook to build header
+            } else {
+                throw new Error('Failed to fetch method children');
             }
         }
-
-
     } catch (err) {
         error.value = err;
     } finally {
@@ -66,99 +59,6 @@ export async function useOverviewPageData(contentType) {
     }
 
     return { data, error, isLoading };
-}
-
-//Methods
-const childContentId = () => {
-    //Get content id for url
-    const pathname = window.location.pathname;
-    // Use a regular expression to match the last number in the path
-    const match = pathname.match(/\/(\d+)\/?$/);
-    if (match) {
-        // The last number will be in match[1]
-        const lastNumber = match[1];
-        //console.log(lastNumber)
-        return lastNumber; // Output: 241248 (example)
-    } else {
-        console.log('No number found');
-    }
-}
-
-const buildHeader = (contentType, result) => {
-    let header = {
-        type: contentType,
-        title: result.title,
-        description: result.description,
-        // infoData: [
-        //     `${result.child_count} ${contentType === 'pack-bundle' ? 'Packs' : 'Lessons'}`,
-        //     `${result.total_xp} XP`
-        // ],
-        thumbnail: result.thumbnail,
-        image: result.image,
-        darkLogo: result.light_logo,
-        lightLogo: result.dark_logo,
-        ctas: buildHeaderCTA(result),
-        progress: progressPercent, 
-    }
-
-    return header;
-}
-
-// Helper function to build CTA buttons based on progress
-const buildHeaderCTA = (method) => {
-    const progressPercent = getProgressPercent();
-
-    const ctas = [];
-
-    // const primaryButton = {
-    //     type: "PageHeaderPrimaryCta",
-    //     props: {
-    //         faIconClass: "fa-play",
-    //         isPrimary: true,
-    //         text: progressPercent === 0 ? "Start" :
-    //               progressPercent === 100 ? "Restart" : "Continue",
-    //         url: method.web_url_path
-    //     }
-    // };
-    // ctas.push(primaryButton);
-
-    if(contentType === "learning-path-level") {
-        const previewLessonCta = {
-            castTitle: "The Drumeo Method",
-            contentId: method.id,
-            nextLessonUrl: "https://dev.musora.com:8443/drumeo/method/drumeo-method/241247/getting-started-on-the-drums/241248/gear/241249/the-gear-in-front-of-you/241250",
-            poster: "https://i.vimeocdn.com/video/843279057-358419152f59d5352707c1c85a75724753c93c76973108da1181f0038ca10b7d-d_1280x720?r=pad",
-            //sources: [{…}, {…}, {…}, {…}, {…}, {…}, {…}],
-            videoId: "382231267"
-        }
-    }
-
-    //Reset Button
-    if(contentType !== "learning-path-level" || contentType !== "unit"){
-        if(progressPercent !== 0) {
-            const resetButton = {
-                type: "ResetProgressCta",
-                props: {
-                    contentId: method.id,
-                    progress: progressPercent
-                }
-            };
-            ctas.push(resetButton); 
-        }
-    }
-
-
-    //Resource Buttons
-    if(method.resources) {
-        const resourceButton = {
-            type: "DownloadResourcesCta",
-            props: {
-                resources: method.resources,
-            }
-        };
-        ctas.push(resourceButton);
-    }
-    return ctas;
 }
 
 // Helper function to get content ID from URL
@@ -169,18 +69,14 @@ const getContentId = () => {
 }
 
 // Function to fetch progress percent and update state
-const getProgressPercent = () => {
-    const id = getContentId();
+const getProgressPercent = async (id) => {
+    if (!id) return 0; // Return 0 if no ID is found
 
-    fetchCompletedState(id)
-        .then(completedState => {
-            if (completedState) {
-                return completedState.percent;
-            }
-        })
-        .catch(error => {
-            // Handle any errors that occurred during the fetch
-            console.error('Error fetching completed state:', error);
-        });
+    try {
+        const completedState = await fetchCompletedState(id);
+        return completedState ? completedState.percent : 0;
+    } catch (error) {
+        console.error('Error fetching completed state:', error);
         return 0;
+    }
 }

@@ -80,6 +80,7 @@ const props = defineProps({
   darkModeLogo: String,
   lightModeLogo: String,
   progressLabelText: String,
+  isLoading: Boolean, 
   progress: {
     type: [Number, String],
     default: null,

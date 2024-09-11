@@ -8,8 +8,8 @@
             :content-id="header?.contentId"
             :page-type="header?.type"
             :progress="header?.progress"
-
             :info-data="header?.infoData"
+            :is-loading="!isLoading"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
