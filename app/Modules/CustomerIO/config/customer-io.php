@@ -67,13 +67,34 @@ return [
         // NOTE: brand changes dynamically based on the current domain
         'brand' => 'musora',
         'musora' => [
-            'The Playlist - Musora Newsletter' => [
-                'custom_attributes' => [],
+            'Today in Music History' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
                 'events' => [
                     'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                ],
+            ],
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Free Music Lessons For Life' => [
@@ -95,6 +116,15 @@ return [
             ],
         ],
         'drumeo' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -461,6 +491,21 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+            ],
+            'Getting Started On The Piano V3' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started-v3',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Sight Reading Made Simple' => [

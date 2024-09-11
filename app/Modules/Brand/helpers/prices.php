@@ -16,9 +16,9 @@ class Prices
     public static $drumeoCourses = 260;
 
     // social media counts
-    public static $drumeoYoutubeSubsc = 3740000;
+    public static $drumeoYoutubeSubsc = 4030000;
     public static $drumeoFacebookLikes = 1200000;
-    public static $drumeoInstagramFollowers = 1900000;
+    public static $drumeoInstagramFollowers = 2000000;
 
     public static $pianoteYoutubeSubsc = 1820000;
     public static $pianoteFacebookLikes = 435000;

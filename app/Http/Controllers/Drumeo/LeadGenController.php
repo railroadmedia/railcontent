@@ -289,6 +289,10 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail', ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function thePlaylist()
+    {
+        return view('drumeo.lead-gen.pages.the-playlist', ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {

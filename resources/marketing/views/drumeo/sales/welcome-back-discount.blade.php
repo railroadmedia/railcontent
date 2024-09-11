@@ -5,8 +5,8 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Rejoin Drumeo and save on your membership.</title>
-    <meta property="og:title" content="Rejoin Drumeo and save on your membership.">
+    <title>Rejoin {{ ucfirst($theme) }} and save on your membership.</title>
+    <meta property="og:title" content="Rejoin {{ ucfirst($theme) }} and save on your membership.">
     <meta property="og:url" content="https://www.drumeo.com/welcome-back-discount">
 
     <meta name="description" content="Save $60/year + 2 bonuses worth $254!">
@@ -112,7 +112,7 @@
                 YOU NEED <br class="hidden sm:inline">
                 TO LEARN THE DRUMS.
             </h1>
-            <h6 class="font-bold my-5 sm:my-6"><em>Reach your musical goals with Drumeo.</em></h6>
+            <h6 class="font-bold my-5 sm:my-6"><em>Reach your musical goals with {{ ucfirst($theme) }}.</em></h6>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
                 <i class="fas fa-check text-{{ $theme }}"></i> Song Breakdowns
                 <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> Unlimited Drum Lessons
@@ -223,7 +223,7 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="leading-tight font-black">Drumeo Membership Special Pricing</h2>
+            <h2 class="leading-tight font-black">{{ ucfirst($theme) }} Membership Special Pricing</h2>
             <p class="leading-tight mt-2 mb-6">Get one year of unlimited drum lessons, including:</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
@@ -276,7 +276,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
             <h2 class="leading-tight font-black">Drum lessons for all skill levels</h2>
-            <p class="leading-tight mt-2 mb-6">Whatever your level, Drumeo will help you reach your goals.</p>
+            <p class="leading-tight mt-2 mb-6">Whatever your level, {{ ucfirst($theme) }} will help you reach your goals.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-left">
                 <div class="">
@@ -312,7 +312,7 @@
     <div id="order" class="anchor"></div>
     <section class="text-center  text-white  px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#000;" x-data="{ plusMembershipSelected: true }">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="leading-tight mb-5"><strong>Rejoin Drumeo and save<br> on your membership.</strong></h2>
+            <h2 class="leading-tight mb-5"><strong>Rejoin {{ ucfirst($theme) }} and save<br> on your membership.</strong></h2>
             <div id="plusOptions" class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto" x-bind:class="{ 'hidden': !plusMembershipSelected }">
                 <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                     <a href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true&promo-code=welcomeMonth" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2  border-white " aria-label="Monthly Plan">
@@ -320,8 +320,8 @@
                             <h2 class="mb-1"><strong>Monthly</strong></h2>
                             <p class="leading-tight text-sm"><em>No bonuses.</em></p>
                             <img class="my-3 sm:my-4 h-28 lg:h-32 rounded-md transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/membership/welcome-offer/monthly.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image"><br>
-                            <h3 class="inline-block leading-tight"><strong>$15</strong></h3><p class="inline-block leading-tight">/per month</p>
-                            <p class="text-sm"><em>For your first 6 months, then $30/month.</em></p>
+                            <h3 class="inline-block leading-tight"><s class="opacity-50">$30</s> <strong>$15</strong></h3>
+                            <p class="text-sm"><em>For your first month, then $30/month.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">GET STARTED  </div>
                         </div>
                     </a>

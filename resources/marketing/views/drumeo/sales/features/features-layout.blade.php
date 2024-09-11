@@ -32,7 +32,7 @@
     ])
 
     @include('musora.sales.components.app-section', [
-        'image' => 'marketing/drumeo/membership/homepage/2023/devices.png',
+        'image' => 'marketing/drumeo/membership/homepage/webp-format/devices.webp',
         'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])

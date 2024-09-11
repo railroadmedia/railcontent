@@ -261,6 +261,19 @@
         ])
     @endif
 
+    @if($theme === 'pianote' && $leadgen->slug == 'getting-started-on-the-piano/lessons')
+        @include('pianote.lead-gen.partials._getting-started', [
+            'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/CTA-bg.webp',
+            'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
+            'header' => 'You\'ve started your piano journey<br>',
+            'subheader' => 'Now take the next step',
+            'text'=> '<strong>Get a free 30-day trial to the Pianote membership</strong> and enjoy access to<br class="hidden sm:block">unlimited piano lessons, guided practices, personalized feedback, and more.',
+            'btnLink' => '/trial-month',
+            'btnText' => 'START YOUR FREE TRIAL',
+            'logoStyle' => 'h-7 md:h-8',
+        ])
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>

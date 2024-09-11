@@ -14,6 +14,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/confirming', [LeadGenController::class, 'confirming']);
         Route::get('/subscribed', [LeadGenController::class, 'subscribed']);
         Route::get('/preferences', [LeadGenController::class, 'preferences']);
+        Route::get('/tcpcpreferences', [LeadGenController::class, 'tcpcpreferences']);
         Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
         Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
         Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
@@ -32,6 +33,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/beautiful-christmas-classics', [LeadGenController::class, 'beautifulChristmasClassics']);
         Route::get('/digital-chords-scales-guide', [LeadGenController::class, 'digitalChordsAndScales']);
         Route::get('/casio-giveaway', [LeadGenController::class, 'giveaway']);
+        Route::get('/giveaway', [LeadGenController::class, 'giveawayAlt']);
         Route::get('/awards', [LeadGenController::class, 'awards']);
         Route::get('/prima-resources', [LeadGenController::class, 'primaResources']);
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
@@ -87,6 +89,15 @@ Route::domain('{pianoteDomain}')
             ['prefix' => 'getting-started'],
             function () {
                 Route::get('/{page?}', LeadGenController::class . '@gstd')
+                    ->whereIn('page', [
+                        null, 'thank-you', 'ty-annual', 'ty-monthly'
+                    ]);
+            }
+        );
+        Route::group(
+            ['prefix' => 'getting-started-on-the-piano'],
+            function () {
+                Route::get('/{page?}', LeadGenController::class . '@gstdp')
                     ->whereIn('page', [
                         null, 'thank-you', 'ty-annual', 'ty-monthly'
                     ]);

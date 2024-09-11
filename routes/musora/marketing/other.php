@@ -43,7 +43,6 @@ Route::domain('{musoraDomain}')
         Route::get('choose-plan', [MarketingController::class, 'choosePlan']);
         Route::get('choose-your-trial-month', [MarketingController::class, 'choosePlanMonth']);
         Route::get('thank-you', [MarketingController::class, 'thankYou']);
-        Route::get('the-playlist', [MarketingController::class, 'thePlaylist']);
 
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
@@ -54,6 +53,8 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
+        Route::get('guitarcenter', [CodeRedemptionController::class, 'renderNewAccountGuitarcenterRedeemPage']);
+        Route::get('guitarcenter/existing', [CodeRedemptionController::class, 'renderExistingAccountGuitarcenterRedeemPage']);
 
         Route::get('drumeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewDrumeo']);
         Route::get('drumeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingDrumeo']);
