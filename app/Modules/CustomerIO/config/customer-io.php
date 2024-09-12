@@ -197,6 +197,15 @@ return [
                     'drumeo',
                 ],
             ],
+            'Jazz Drumming 101' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_jazz-drumming-101',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             'Getting Started On The Drums' => [
                 'custom_attributes' => [],
                 'events' => [

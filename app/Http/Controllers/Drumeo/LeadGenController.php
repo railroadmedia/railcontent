@@ -138,6 +138,11 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
+    
+    public function jazzDrumming101()
+    {
+        return view('drumeo.lead-gen.pages.jazz-drumming-101', ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function blueMan()
     {
