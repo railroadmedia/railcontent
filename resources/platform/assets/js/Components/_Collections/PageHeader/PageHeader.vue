@@ -1,7 +1,30 @@
 <template>
   <PageHeaderLayout>
+
     <template #top-left>
+
+      <template v-if="isLoading">
+        <div class="tw-animate-pulse tw-flex tw-items-center">
+          <!-- Icon or Image -->
+          <div v-if="iconName" class="tw-bg-ui-skeleton tw-h-[35px] tw-w-[35px] tw-rounded-full tw-mr-2"></div>
+          <!-- Title and Info -->
+          <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
+            <div class="tw-h-full tw-flex tw-flex-col tw-items-start">
+              <div class="tw-flex">
+                <div class="tw-bg-ui-skeleton tw-h-[35px] tw-w-[270px] tw-rounded-full tw-flex tw-justify-center tw-items-center"></div>
+              </div>
+              <div v-if="infoData" class="tw-flex">
+                <div class="tw-flex tw-items-center sm:tw-mt-1">
+                  <div class="tw-bg-ui-skeleton tw-h-[24px] tw-w-[124px] tw-rounded-full tw-flex tw-justify-center tw-items-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+
       <PageHeaderHero
+        v-else
         :pageType="pageType"
         :iconName="iconName"
         :title="title"
@@ -54,6 +77,7 @@
         </template>
       </PageHeaderProgressBar>
     </template>
+
   </PageHeaderLayout>
 </template>
 
@@ -85,7 +109,10 @@ const props = defineProps({
     type: [Number, String],
     default: null,
   },
-  infoData: Object,
+  infoData: {
+    type: [Object, String],
+    default: [],
+  },
   ctas: Array,
   description: String,
 });

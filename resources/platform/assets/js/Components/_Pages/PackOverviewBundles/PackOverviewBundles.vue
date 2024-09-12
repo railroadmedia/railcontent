@@ -12,6 +12,7 @@
             :info-data="header?.infoData"
             :ctas="header?.ctas"
             :description="header?.description"
+            :is-loading="isLoading"
         />
 
         <template v-if="!isLoading">
