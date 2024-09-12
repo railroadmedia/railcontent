@@ -121,13 +121,15 @@
 import { computed, ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
-import { fetchContentInProgress, fetchCompletedContent } from 'musora-content-services';
+import { usePlatformStore } from "@stores/platform";
+import { fetchContentInProgress, fetchCompletedContent, fetchByRailContentIds } from 'musora-content-services';
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
 import UserMetric from '@collections/UserMetric/UserMetric';
 import GearCarousel from '@collections/GearCarousel/GearCarousel';
+
 
 const props = defineProps({
     headerData: {
@@ -156,6 +158,7 @@ const props = defineProps({
     },
 })
 
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
@@ -184,9 +187,17 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const started = await fetchContentInProgress('all', brand.value);
-        const completed = await fetchCompletedContent('all', brand.value);
-        console.log(started, completed)
+        const startedIds = await fetchContentInProgress('all', brand.value);
+        const completedIds = await fetchCompletedContent('all', brand.value);
+
+        const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
+        const started = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+        const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id));
+
+        startedContents.value = started;
+        completedContents.value = completed;
+
+        platformStore.setLoadingState(false);
     }
 
     fetchData();
