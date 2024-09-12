@@ -3,7 +3,7 @@
     <SkeletonLoader v-if="collectionStoreLoading || isLoading" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
-        <a :href="item.url"
+        <a :href="item.web_url_path"
             class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline"
             style="text-underline-offset: 6px;">
             <img v-if="thumb" class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]"
@@ -17,7 +17,7 @@
 
             </div>
         </a>
-        <a :href="item.url"
+        <a :href="item.web_url_path"
             class="tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue xl:tw-text-lg hover:tw-underline"
             style="text-underline-offset: 6px;">
             See All
