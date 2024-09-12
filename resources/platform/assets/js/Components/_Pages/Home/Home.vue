@@ -269,7 +269,6 @@
     onBeforeMount( async () => {
         const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
         data.value = homeData.value;
-        console.log('DATA', data.value)
         platformStore.setLoadingState(homeLoading.value);
     });
 </script>

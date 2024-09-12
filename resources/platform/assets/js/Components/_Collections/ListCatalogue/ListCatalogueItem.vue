@@ -11,7 +11,7 @@
           tw-no-underline
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="renderLink && isReleased ? item.web_url_path : null"
+       :href="renderLink && isReleased ? item.url : null"
        @click="openUpgradeModal"
     >
 

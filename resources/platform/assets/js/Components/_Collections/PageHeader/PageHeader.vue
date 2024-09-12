@@ -7,9 +7,11 @@
         <div class="tw-animate-pulse tw-flex tw-items-center">
           <!-- Icon or Image -->
           <div v-if="iconName" class="tw-bg-ui-skeleton tw-h-[35px] tw-w-[35px] tw-rounded-full tw-mr-2"></div>
+          <!-- Image -->
+          <div v-if="heroImg" class="tw-bg-ui-skeleton tw-rounded-full tw-flex-none tw-h-[80px] tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] sm:tw-h-[150px] sm:tw-max-h-[150px] tw-flex tw-flex-col tw-mr-5"></div>
           <!-- Title and Info -->
           <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
-            <div class="tw-h-full tw-flex tw-flex-col tw-items-start">
+            <div class="tw-h-full tw-flex tw-flex-col tw-items-start tw-justify-center">
               <div class="tw-flex">
                 <div class="tw-bg-ui-skeleton tw-h-[35px] tw-w-[270px] tw-rounded-full tw-flex tw-justify-center tw-items-center"></div>
               </div>
