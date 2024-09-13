@@ -87,7 +87,7 @@
             color:#000;
         }
         .lessons-list::-webkit-scrollbar {
-            width: 6px; /* Adjust the width of the scrollbar */
+            width: 6px; 
         }
 
         /* The track (background) of the scrollbar */
@@ -112,6 +112,11 @@
 @section('body-data')
     x-data="{
     kickOff: false,
+    gearTips: false,
+    chordShapes: false,
+    getIntoTheGroove: false,
+    learningToMiss: false,
+    addInTheBridge: false,
     unlock: false,
     lazyLoad: false,
     }"
@@ -147,26 +152,32 @@
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Course Kickoff-1715065477.jpg',
                                     'title' => 'Course Kick-Off',
+                                    'name' => 'kickOff',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Gear Tips-1715065538.jpg',
                                     'title' => 'Gear Tips',
+                                    'name' => 'gearTips',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
                                     'title' => 'Chord Shapes For The Challenge',
+                                    'name' => 'chordShapes',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
                                     'title' => 'Day 1 — Get Into The Groove',
+                                    'name' => 'getIntoTheGroove',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
                                     'title' => 'Day 2 — Learning To Miss',
+                                    'name' => 'learningToMiss',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
                                     'title' => 'Day 3 — Add In The Bridge',
+                                    'name' => 'addInTheBridge',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
@@ -245,20 +256,21 @@
                         @foreach ($lessons as $index => $lesson)
                             <div class="w-full flex items-center px-3 py-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
                                 style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
-                                @click="unlock = true;">
+                                @click="{{ isset($lesson['name']) ? $lesson['name'] : 'unlock' }} = true;">
                                 <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 rounded-lg mr-4">
                                 <div class="flex flex-col">
-                                    <span class="text-guitareo font-bold text-xs uppercase">FREE</span>
+                                    @if ($index < 6)
+                                        <span class="text-guitareo font-bold text-xs uppercase">FREE</span>
+                                    @endif
                                     <p class="leading-tight text-white font-semibold text-sm">{{ $lesson['title'] }}</p>
                                 </div>
                             </div>
-
                         @endforeach
                     </div>
                     <div class="absolute h-10 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #000);"></div>
                 </div>
-                <a href="/choose-plan" class="w-full join smaller guitareo mb-3">GET FULL ACCESS FOR FREE</a>
-                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline" style="outline: 0px;">BUY THE COURSE</a>
+                <a href="/shop/30-days-to-better-strumming" class="w-full join smaller guitareo mb-3 text-base lg:text-xl">GET FULL ACCESS FOR FREE</a>
+                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline text-base lg:text-xl" style="outline: 0px;">BUY THE COURSE</a>
             </div>
             </div>
         </div>
@@ -299,8 +311,8 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="/favicons/guitareo/apple-touch-icon.png"
-                                alt="youtube icon">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)//marketing/guitareo/products/30-days-to-better-strumming/guitareo-logo.svg"
+                                alt="guitareo icon">
                             <h3 class="mt-2"><strong>3.5K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Students</p>
                         </div>
@@ -386,18 +398,32 @@
             </div>
         </div>
     </section>
-    @include('_partials.components.video-modal', [
-        'name' => 'kickOff',
-        'video' => '944222905',
-        'button' => '<div class="w-full mt-4 text-center"><a class="join guitareo" href="/choose-plan">GET FULL ACCESS FOR FREE</a></div>',
-        'vimeo' => true,
-    ])
+    
+    @php
+        $videos = [
+            ['name' => 'kickOff', 'video' => '944222905'],
+            ['name' => 'gearTips', 'video' => '944223382'],
+            ['name' => 'chordShapes', 'video' => '944223156'],
+            ['name' => 'getIntoTheGroove', 'video' => '944945269'],
+            ['name' => 'learningToMiss', 'video' => '944235965'],
+            ['name' => 'addInTheBridge', 'video' => '944236131'],
+        ];
+    @endphp
+    
+    @foreach ($videos as $video)
+        @include('_partials.components.video-modal', [
+            'name' => $video['name'],
+            'video' => $video['video'],
+            'button' => '<div class="w-full mt-4 text-center"><a class="join guitareo" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a></div>',
+            'vimeo' => true,
+        ])
+    @endforeach
     @component('_partials.components.modal', ['name' => 'unlock'])
         @slot('content')
             <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center">
                 <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
                 <h3 class="leading-tight my-4"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
-                <a class="join guitareo smaller" href="/choose-plan">GET FULL ACCESS FOR FREE</a>
+                <a class="join guitareo smaller" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a>
             </div>
         @endslot
     @endcomponent
