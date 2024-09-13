@@ -246,6 +246,8 @@ class ContentJsonController extends Controller
                     'instrument' => '',
                     'instrumentless' => '',
                     'length_in_seconds' => '',
+                    'quarter_published' => '',
+                    'quarter_removed' => '',
                 ])
         );
 
