@@ -65,7 +65,7 @@ class BrandService
         $cacheValue = Cache::get($cacheKey);
         $databaseValue = $user->last_used_brand;
         /**
-         * NOTE: set primary_brand unless it doesn´t exist. This will make sure pack-only users will
+         * NOTE: use primary_brand unless it doesn´t exist. This will make sure pack-only users will
          * be redirected to the correct brand.
          */
         $default = $user->primary_brand ?? 'drumeo';
