@@ -150,9 +150,7 @@
                     </p>
                 </div>
             </div>
-           
-           <!-- Video Modal -->
-            <div 
+           <div 
                 x-show="showVideoModal" 
                 x-on:keydown.escape.prevent.stop="showVideoModal = false; pauseVideo();" 
                 class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" 
@@ -175,6 +173,17 @@
                         </div>
                         <a class="w-full sm:w-2/3 md:max-w-[320px] join guitareo smaller mt-4 sm:pr-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
                         <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller white outline my-2" x-show="showVideoModal" @click="nextLesson()">Next Lesson</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="end-of-lessons-modal" class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" role="dialog" aria-modal="true">
+                <div class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;" @click="document.getElementById('end-of-lessons-modal').style.display = 'none'; resetModal();"></div>
+                <div class="relative min-h-screen flex items-center justify-center px-4" style="z-index: 1006;" @click="document.getElementById('end-of-lessons-modal').style.display = 'none'; resetModal();">
+                    <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center" @click.stop>
+                        <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
+                        <h3 class="leading-tight my-4"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
+                        <a class="join guitareo smaller" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a>
                     </div>
                 </div>
             </div>
@@ -475,7 +484,6 @@
 @endsection
 
 <script src="https://player.vimeo.com/api/player.js"></script>
-
 <script>
 const videoIds = [
     '944222905',
@@ -519,6 +527,8 @@ function playVideo() {
         currentIndex++;
         if (currentIndex < videoIds.length) {
             initializePlayer(videoIds[currentIndex]);
+        } else {
+            showEndOfLessonsModal();
         }
     });
 }
@@ -540,9 +550,28 @@ function nextLesson() {
     currentIndex++;
     if (currentIndex < videoIds.length) {
         initializePlayer(videoIds[currentIndex]);
+        showVideoModal(); 
     } else {
-        console.log('No more lessons available.');
+        showEndOfLessonsModal();
     }
 }
 
+function showVideoModal() {
+    document.querySelector('[x-show="showVideoModal"]').style.display = 'block';
+}
+
+function showEndOfLessonsModal() {
+    document.getElementById('end-of-lessons-modal').style.display = 'block';
+    pauseVideo(); 
+    document.querySelector('[x-show="showVideoModal"]').style.display = 'none'; 
+}
+
+function resetModal() {
+    document.getElementById('end-of-lessons-modal').style.display = 'none';
+    document.querySelector('[x-show="showVideoModal"]').style.display = 'block'; 
+}
+
+document.getElementById('end-of-lessons-modal').addEventListener('click', function() {
+    resetModal();
+});
 </script>
