@@ -112,72 +112,112 @@
 @section('body-data')
     x-data="{
     kickOff: false,
-    gearTips: false,
-    chordShapes: false,
-    getIntoTheGroove: false,
-    learningToMiss: false,
-    addInTheBridge: false,
     unlock: false,
     lazyLoad: false,
     }"
 @endsection
 
 @section('body')
-    <section x-data="{ visible: false }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-6 md:py-8" style="background: #111729;">
-        <div class="container max-w-5xl mx-auto">
-            <img alt="30 Days To Better Strumming Logo" class="h-14 sm:h-20 mx-auto mb-3 sm:mb-5"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png">
-            <div class="md:flex">
+<section x-data="{ visible: false, showVideoModal: false, videoId: null, currentVideoIndex: 0 }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-6 md:py-8" style="background: #111729;">
+    <div class="container max-w-5xl mx-auto">
+        <img 
+            alt="30 Days To Better Strumming Logo" 
+            class="h-14 sm:h-20 mx-auto mb-3 sm:mb-5"
+            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"
+        >
+        <div class="md:flex">
             <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0 text-left">
-                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                    x-on:click="kickOff = true;" role="button">
+                <div 
+                    class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                    x-on:click="kickOff = true;" 
+                    role="button"
+                >
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                    <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
-                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                    <img 
+                        class="absolute inset-0 overflow-hidden object-cover w-full h-full z-0 opacity-0 transition-opacity"
+                        loading="lazy" 
+                        onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
-                        alt="Thumbnail for tutorial video"/>
+                        alt="Thumbnail for tutorial video"
+                    />
                 </div>
                 <div class="mt-4">
                     <h5 class="leading-tight"><strong>Strum With Confidence In Just 30 Days</strong></h5>
                     <p class="mt-4">
-                        <span>30 Days To Better Strumming is the perfect course for beginner &amp; intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years. </span>
+                        <span>
+                            30 Days To Better Strumming is the perfect course for beginner &amp; intermediate guitarists who have ever felt stuck in their rhythm playing. Get step-by-step guidance to break through barriers and learn techniques that will stick with you for years.
+                        </span>
                     </p>
                 </div>
             </div>
+           
+           <!-- Video Modal -->
+            <div 
+                x-show="showVideoModal" 
+                x-on:keydown.escape.prevent.stop="showVideoModal = false; pauseVideo();" 
+                class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" 
+                role="dialog" 
+                aria-modal="true"
+            >
+                <div x-show="showVideoModal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;" @click="showVideoModal = false; pauseVideo();"></div>
+
+                <div 
+                    x-show="showVideoModal" 
+                    x-transition 
+                    class="relative min-h-screen flex items-center justify-center px-4" 
+                    style="z-index: 1006;" 
+                    @click="showVideoModal = false; pauseVideo();"
+                >
+                    <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl" @click="showVideoModal = false; pauseVideo();"></i>
+                    <div x-on:click.stop class="relative w-full max-w-6xl overflow-hidden rounded-xl">
+                        <div class="relative w-full" style="padding-top: 56.25%;">
+                            <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div> 
+                        </div>
+                        <a class="join guitareo smaller mt-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-black md:w-1/3 text-left">
                 <div class="relative h-96 mb-5 rounded-xl overflow-hidden">
                     <div class="overflow-y-auto h-full lessons-list">
                         @php
-                            $lessons = [
+                           $lessons = [
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Course Kickoff-1715065477.jpg',
                                     'title' => 'Course Kick-Off',
                                     'name' => 'kickOff',
+                                    'videoId' => '944222905',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Gear Tips-1715065538.jpg',
                                     'title' => 'Gear Tips',
                                     'name' => 'gearTips',
+                                    'videoId' => '944223382',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
                                     'title' => 'Chord Shapes For The Challenge',
                                     'name' => 'chordShapes',
+                                    'videoId' => '944223156',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
                                     'title' => 'Day 1 — Get Into The Groove',
                                     'name' => 'getIntoTheGroove',
+                                    'videoId' => '944945269',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
                                     'title' => 'Day 2 — Learning To Miss',
                                     'name' => 'learningToMiss',
+                                    'videoId' => '944235965',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
                                     'title' => 'Day 3 — Add In The Bridge',
                                     'name' => 'addInTheBridge',
+                                    'videoId' => '944236131',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
@@ -256,7 +296,16 @@
                         @foreach ($lessons as $index => $lesson)
                             <div class="w-full flex items-center px-3 py-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
                                 style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
-                                @click="{{ isset($lesson['name']) ? $lesson['name'] : 'unlock' }} = true;">
+                                @click="
+                                    @if (isset($lesson['videoId']))
+                                        currentVideoIndex = {{ $index }}; 
+                                        videoId = '{{ $lesson['videoId'] }}'; 
+                                        showVideoModal = true; 
+                                        loadAndPlayVideo(videoId, currentVideoIndex);
+                                    @else
+                                        unlock = true;
+                                    @endif
+                                ">
                                 <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 rounded-lg mr-4">
                                 <div class="flex flex-col">
                                     @if ($index < 6)
@@ -402,11 +451,6 @@
     @php
         $videos = [
             ['name' => 'kickOff', 'video' => '944222905'],
-            ['name' => 'gearTips', 'video' => '944223382'],
-            ['name' => 'chordShapes', 'video' => '944223156'],
-            ['name' => 'getIntoTheGroove', 'video' => '944945269'],
-            ['name' => 'learningToMiss', 'video' => '944235965'],
-            ['name' => 'addInTheBridge', 'video' => '944236131'],
         ];
     @endphp
     
@@ -428,3 +472,56 @@
         @endslot
     @endcomponent
 @endsection
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script>
+    const videoIds = [
+        '944222905',
+        '944223382',
+        '944223156',
+        '944945269',
+        '944235965',
+        '944236131'
+    ];
+
+    let player;
+
+    function loadAndPlayVideo(videoId, startIndex) {
+        const options = {
+            id: videoId,
+            loop: false,
+            width: '100%',
+            responsive: true 
+        };
+
+      
+        if (player) {
+            player.loadVideo(videoId).then(function() {
+                player.play();
+            }).catch(function(error) {
+                console.error('Error loading video:', error);
+            });
+        } else {
+          
+            player = new Vimeo.Player('vimeo-player', options);
+            player.play();
+
+          
+            player.on('ended', function() {
+                startIndex++;
+                if (startIndex < videoIds.length) {
+                    loadAndPlayVideo(videoIds[startIndex], startIndex);
+                }
+            });
+        }
+    }
+
+    function pauseVideo() {
+        if (player) {
+            player.pause().catch(function(error) {
+                console.error('Error pausing video:', error);
+            });
+        }
+    }
+</script>
