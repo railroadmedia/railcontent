@@ -326,7 +326,7 @@
                             'subheader' => '& more with a membership',
                             'price' => '7 Day Free Trial',
                             'button_text' => 'TRY IT FOR FREE NOW',
-                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase',
+                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase stramming',
                             'border_class' => 'border-black',
                             'link' => '/choose-plan', 
                             'description' => [
@@ -341,7 +341,7 @@
                             'header' => 'Just the course',
                             'price' => '$97',
                             'button_text' => 'buy now',
-                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase',
+                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase stramming',
                             'border_class' => 'border-guitareo',
                             'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1', 
                             'description' => [
