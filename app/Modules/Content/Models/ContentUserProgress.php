@@ -44,9 +44,9 @@ class ContentUserProgress extends Model
     public static function isCompletedByUser(int $contentId, int $userId): bool
     {
         return self::where('content_id', $contentId)
-        ->where('user_id', $userId)
-        ->where('state', ProgressState::Completed->value)
-        ->exists();
+            ->where('user_id', $userId)
+            ->where('state', ProgressState::Completed->value)
+            ->exists();
     }
 
     /**
@@ -98,12 +98,14 @@ class ContentUserProgress extends Model
             ->get();
 
         if ($progressCollection->count() > 1) {
-            throw new Exception(sprintf(
-                'Multiple %s found for Content %s and User %s',
-                class_basename(__CLASS__),
-                $contentId,
-                $userId
-            ));
+            throw new Exception(
+                sprintf(
+                    'Multiple %s found for Content %s and User %s',
+                    class_basename(__CLASS__),
+                    $contentId,
+                    $userId
+                )
+            );
         }
 
         return new class ($progressCollection) {
@@ -129,5 +131,10 @@ class ContentUserProgress extends Model
                 ];
             }
         };
+    }
+
+    public static function getAllProgressDataByUser(int $userId): \Illuminate\Support\Collection
+    {
+        return self::query()->where('user_id', $userId)->get();
     }
 }
