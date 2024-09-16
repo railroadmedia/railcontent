@@ -476,52 +476,63 @@
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 <script>
-    const videoIds = [
-        '944222905',
-        '944223382',
-        '944223156',
-        '944945269',
-        '944235965',
-        '944236131'
-    ];
+const videoIds = [
+    '944222905',
+    '944223382',
+    '944223156',
+    '944945269',
+    '944235965',
+    '944236131'
+];
 
-    let player;
+let player;
+let currentIndex = 0;
 
-    function loadAndPlayVideo(videoId, startIndex) {
-        const options = {
-            id: videoId,
-            loop: false,
-            width: '100%',
-            responsive: true 
-        };
+function initializePlayer(videoId) {
+    const options = {
+        id: videoId,
+        loop: false,
+        width: '100%',
+        responsive: true 
+    };
 
-      
-        if (player) {
-            player.loadVideo(videoId).then(function() {
-                player.play();
-            }).catch(function(error) {
-                console.error('Error loading video:', error);
-            });
-        } else {
-          
+    if (player) {
+        player.destroy().then(() => {
             player = new Vimeo.Player('vimeo-player', options);
-            player.play();
-
-          
-            player.on('ended', function() {
-                startIndex++;
-                if (startIndex < videoIds.length) {
-                    loadAndPlayVideo(videoIds[startIndex], startIndex);
-                }
-            });
-        }
+            playVideo();
+        }).catch(error => {
+            console.error('Error destroying player:', error);
+        });
+    } else {
+        player = new Vimeo.Player('vimeo-player', options);
+        playVideo();
     }
+}
 
-    function pauseVideo() {
-        if (player) {
-            player.pause().catch(function(error) {
-                console.error('Error pausing video:', error);
-            });
+function playVideo() {
+    player.play().catch(error => {
+        console.error('Error playing video:', error);
+    });
+
+    player.on('ended', function() {
+        currentIndex++;
+        if (currentIndex < videoIds.length) {
+            initializePlayer(videoIds[currentIndex]);
         }
+    });
+}
+
+function loadAndPlayVideo(videoId, startIndex) {
+    currentIndex = startIndex;
+    initializePlayer(videoId);
+}
+
+function pauseVideo() {
+    if (player) {
+        player.pause().catch(error => {
+            console.error('Error pausing video:', error);
+        });
     }
+}
+
 </script>
