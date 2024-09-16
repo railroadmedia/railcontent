@@ -168,7 +168,7 @@
                     style="z-index: 1006;" 
                     @click="showVideoModal = false; pauseVideo();"
                 >
-                    <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl" @click="showVideoModal = false; pauseVideo();"></i>
+                    <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl z-150" @click="showVideoModal = false; pauseVideo();"></i>
                     <div x-on:click.stop class="relative w-full max-w-6xl overflow-hidden rounded-xl">
                         <div class="relative w-full" style="padding-top: 56.25%;">
                             <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div> 
