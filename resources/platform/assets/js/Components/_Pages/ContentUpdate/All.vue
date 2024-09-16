@@ -3,7 +3,7 @@
         <Breadcrumb :breadcrumbs />
 
         <PageHeader
-            :title="`Content Updates, New, Returning & Leaving - ${month}`"
+            :title="`Content Updates: New, Returning & Leaving - ${month}`"
         />
 
         <div class="tw-mt-[30px]">
