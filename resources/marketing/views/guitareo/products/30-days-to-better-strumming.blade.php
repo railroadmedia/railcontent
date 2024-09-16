@@ -315,7 +315,7 @@
         <div id="final" class="anchor"></div>
         <div class="max-w-3xl mx-auto"> 
             <h2 class="leading-tight"><strong>Try It For Free or Buy It Now</strong></h2>
-            <p class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</p>
+            <h6 class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</h6>
         </div>
         <div class="max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto">
             <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-4 md:space-y-0 md:space-x-4">
@@ -355,18 +355,18 @@
 
                 @foreach($cards as $index => $card)
                     <div class="w-full sm:w-1/2 px-2 md:px-3 relative">
-                        <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:p-6 {{ $card['border_class'] }}">
-                            <h5 class="text-xl md:text-2xl leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h5>
+                        <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:py-6 px-4 {{ $card['border_class'] }}">
+                            <h3 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h3>
                             @if(!empty($card['subheader']))
                                 <p class="text-xl"><strong>{{ $card['subheader'] }}</strong></p>
                             @endif                            
                             @if(!empty($card['price']))
-                                <h4 class="py-4 {{ $index === 1 ? 'text-3xl' : 'text-2xl' }}"><strong>{{ $card['price'] }}</strong></h4>
+                                <h3 class="py-4 lg:py-6"><strong>{{ $card['price'] }}</strong></h3>
                             @endif
                             <a href="{{ $card['link'] }}" class="{{ $card['button_class'] }}">{{ $card['button_text'] }}</a>
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-4 md:mt-6">
                                 @foreach($card['description'] as $desc)
-                                    <p class="text-xs leading-normal pb-1">{!! $desc !!}</p>
+                                    <p class="text-sm leading-normal pb-2">{!! $desc !!}</p>
                                 @endforeach
                             </div>
                         </div>
