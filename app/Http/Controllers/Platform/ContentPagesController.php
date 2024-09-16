@@ -22,6 +22,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -37,6 +39,7 @@ use Railroad\Railcontent\Services\GenreService;
 use Railroad\Railcontent\Services\MethodService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -120,7 +123,7 @@ class ContentPagesController extends BaseController
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
 
-        $defaultPage = $lessonType === 'routine' ? 12 : 10;
+
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
@@ -137,10 +140,11 @@ class ContentPagesController extends BaseController
             ContentRepository::$pullFutureContent = false;
         }
 
+        $defaultLimit = ContentJsonController::getDefaultLimit([$lessonType], brand(), $request->get('tabs', []), 20);
         if ($contentTypeName == 'songs') {
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
-                $request->get('limit', $defaultPage),
+                $request->get('limit', $defaultLimit),
                 $sortOverride ?? $request->get('sort', '-popularity'),
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
@@ -154,13 +158,14 @@ class ContentPagesController extends BaseController
                 true,
                 false,
                 false,
-                FiltersHelper::$groupBy ?? false
+                FiltersHelper::$groupBy ?? false,
+                relatedContentLimit: $request->get('limit', $defaultLimit),
             );
         } else {
             ContentRepository::$pullFutureContent = true;
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
-                $request->get('limit', $defaultPage),
+                $request->get('limit', $defaultLimit),
                 $sortOverride ?? $request->get('sort', '-published_on'),
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
@@ -174,7 +179,8 @@ class ContentPagesController extends BaseController
                 true,
                 false,
                 $futureScheduledContentOnly,
-                FiltersHelper::$groupBy ?? false
+                FiltersHelper::$groupBy ?? false,
+                relatedContentLimit: $request->get('limit', $defaultLimit),
             );
         }
 
@@ -205,7 +211,7 @@ class ContentPagesController extends BaseController
             [$lessonType],
             auth()->id(),
             'started',
-            6,
+            $defaultLimit,
             0
         );
 
@@ -1143,7 +1149,7 @@ class ContentPagesController extends BaseController
 
         $newCourses = $this->contentService->getFiltered(
             1,
-            10,
+            20,
             '-published_on',
             ['course'],
             [],
@@ -1157,7 +1163,7 @@ class ContentPagesController extends BaseController
 
         $newQuickTips = $this->contentService->getFiltered(
             1,
-            10,
+            20,
             '-published_on',
             ['quick-tips'],
             [],
@@ -1542,8 +1548,10 @@ class ContentPagesController extends BaseController
         FiltersHelper::prepareFiltersFields();
 
         $brand = $request->get('brand', brand());
-        $pageSize = $request->get('limit', 10);
+
         $filter = FiltersHelper::$filter ?? '';
+        $defaultPageSize = $filter ? 20 : 10;
+        $pageSize = $request->get('limit', $defaultPageSize);
         $page = $request->get('page', 1);
         $sections = match(strtolower($filter)) {
             'songs', 'song' => [RecommenderSection::Song],
@@ -1665,6 +1673,107 @@ class ContentPagesController extends BaseController
             "timezones" => $timezones,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function comingSoon(Request $request)
+    {
+        ContentRepository::$getFutureContentOnly = true;
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED, ContentService::STATUS_PUBLISHED];
+        $content = $this->contentService->getFiltered(
+            page: $request->get('page', 1),
+            limit: $request->get('limit', 20),
+            orderByAndDirection: 'published_on',
+            includedTypes: ['song'],
+            getFutureContentOnly: true,
+        );
+        Decorator::decorate($content, 'content');
+        return view('content.schedule-coming-soon', [
+            "comingSoon" => $content->toResponseRawJson(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function leaving(Request $request)
+    {
+        $removed = $this->contentService->getNextQuarterRemoved(
+            page: $request->get('page', 1),
+            limit: $request->get('limit', 20),
+        );
+        Decorator::decorate($removed, 'content');
+        return view('content.schedule-leaving', [
+            "leaving" => $removed->toResponseRawJson(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function returning(Request $request)
+    {
+        $returning = $this->contentService->getNextQuarterReturning(
+            page: $request->get('page', 1),
+            limit: $request->get('limit', 20),
+        );
+        Decorator::decorate($returning, 'content');
+        return view('content.schedule-returning', [
+            "returning" => $returning->toResponseRawJson(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function allContentUpdates(Request $request)
+    {
+        $nextQuarter = $this->contentService->getNextAndPreviousQuarterDates()->nextQuarter;
+        $monthName = DateTime::createFromFormat('Y-m-d', $nextQuarter)->format('F');
+        $limit = $request->get('limit', 20);
+        $page = $request->get('page', 1);
+        $removed = $this->contentService->getNextQuarterRemoved(
+            page: $page,
+            limit: $limit,
+        );
+        $returning = $this->contentService->getNextQuarterReturning(
+            page: $page,
+            limit: $limit,
+        );
+        ContentRepository::$getFutureContentOnly = true;
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_UNLISTED, ContentService::STATUS_PUBLISHED];
+        $newSongs = $this->contentService->getFiltered(
+            page: $page,
+            limit: $limit,
+            orderByAndDirection: 'published_on',
+            includedTypes: ['song'],
+            getFutureContentOnly: true,
+        );
+        $collectionForDecoration = new RailcontentCollection();
+        $collectionForDecoration = $collectionForDecoration->merge($newSongs);
+        $collectionForDecoration = $collectionForDecoration->merge($returning);
+        $collectionForDecoration = $collectionForDecoration->merge($removed);
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
+
+        return view('content.schedule-all-content', [
+            'comingSoon' => $newSongs->toResponseRawJson(),
+            'leaving' => $removed->toResponseRawJson(),
+            'returning' => $returning->toResponseRawJson(),
+            'month' => ucfirst($monthName),
+        ]);
+    }
+
+
 
     private function getTimezoneList()
     {

@@ -2778,6 +2778,8 @@ return [
         'archived_on' => 'archived_on',
         'instrument' => 'instrument',
         'instrumentless' => 'instrumentless',
+        'quarter_published' => 'quarter_published',
+        'quarter_removed' => 'quarter_removed',
     ],
     'content_hierarchy' => [
         'drumeo' => [

@@ -31,25 +31,18 @@
             :preLoadedContent="startedContent.data"
             :isMiniView="true"
             :show-dropdown="true"
-            :use-ref-data="true"
             trackingSection="continue"
         />
 
         <!-- Recommended section -->
         <MiniCatalogueSection
-            v-if="recommends.length > 0"
+            v-if="recommendedContent.data > 0"
             title="Inspired By Your Activity"
             seeAllAriaLabel="See All Content"
             :seeAllUrl="recommendedContentUrl"
-            :preLoadedContent="recommends"
+            :preLoadedContent="recommendedContent"
             trackingSection="recommended"
-        >
-            <template #icon>
-                <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
-                    <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
-                </button>
-            </template>
-        </MiniCatalogueSection>
+        />
 
         <!-- Workouts section -->
         <MiniCatalogueSection
@@ -75,7 +68,7 @@
         <ListSection
             v-if="usersList.length"
             :newContentUrl="newContentUrl"
-            :usersList="usersList"
+            :usersList="playlistsStore.playlists"
             :my-list-url="`/${brand}/playlists`"
         />
 
@@ -137,7 +130,11 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, onBeforeMount } from 'vue';
+    import { useUserStore } from "@stores/user";
+    import { storeToRefs } from "pinia/dist/pinia";
+    import { usePlaylistsStore } from "@stores/playlists";
+
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
@@ -151,12 +148,6 @@
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
-    import { useUserStore } from "@stores/user";
-    import {storeToRefs} from "pinia/dist/pinia";
-
-    //Pinia Stores
-    const userStore = useUserStore();
-    const { brand, userCompletedAccount } = storeToRefs(userStore);
 
     const props = defineProps({
         accountUrl: { type: String, default: '' },
@@ -204,6 +195,11 @@
         trialSectionRedesign: { type: Boolean, default: false },
     });
 
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+    const userStore = useUserStore();
+    const { brand, userCompletedAccount } = storeToRefs(userStore);
+
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
         return userCompletedAccount.value;
@@ -222,8 +218,6 @@
         return { data: [...props.packData] };
     })
 
-    const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
-    const recSysPage = ref(1);
 
     const openPlaylistModal = () => {
         window.openplaylistmodal({
@@ -238,14 +232,9 @@
         });
     };
 
-    const shuffleRecommends = () => {
-        if(Math.ceil(props.recommendedContent.data.length / 5) === recSysPage.value){
-            recSysPage.value = 1;
-        } else {
-            recSysPage.value = recSysPage.value + 1;
-        }
-        recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
-    }
+    onBeforeMount(() => {
+        playlistsStore.playlists = props.usersList;
+    })
 
     onMounted(() => {
         if (window.location.href.includes('create-playlist-window')) {
