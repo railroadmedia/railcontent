@@ -263,6 +263,19 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}/schedule', [ContentPagesController::class, 'schedule'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.schedule');
+                Route::get('/{brand}/content-updates/coming-soon', [ContentPagesController::class, 'comingSoon'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.coming-soon');
+                Route::get('/{brand}/content-updates/leaving', [ContentPagesController::class, 'leaving'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.leaving');
+                Route::get('/{brand}/content-updates/returning', [ContentPagesController::class, 'returning'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.returning');
+                Route::get('/{brand}/content-updates', [ContentPagesController::class, 'allContentUpdates'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates');
+
 
                 /*
                  * Specific Sub-Content Hierarchy Pages

@@ -16,7 +16,7 @@ export const useCollectionStore = defineStore({
             filter: {
                 activeTab: '',
                 included_fields: [],
-                limit: 10,
+                limit: 20,
                 params: {},
                 searchTerm: '',
                 sort: '',
@@ -193,7 +193,9 @@ export const useCollectionStore = defineStore({
                     this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.data.data];
-                    this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+                    if(response?.data?.meta?.totalResults){
+                        this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+                    }
                 }
             }
 

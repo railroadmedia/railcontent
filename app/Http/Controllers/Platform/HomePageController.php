@@ -37,8 +37,32 @@ use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
 class HomePageController extends BaseController
 {
+    private const DEFAULT_CONTENT_COUNT = 20;
+    private const STARTED_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const RECSYS_CONTENT_COUNT = 50;
+    private const WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const PLAYLISTS_COUNTENT_COUNT = 24;
+    private const UPCOMING_EVENTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+
+
+    /**
+     * @param ContentService $contentService
+     * @param ContentFollowsService $contentFollowsService
+     * @param LiveStreamEventService $liveStreamEventService
+     * @param UserMetricsService $userMetricsService
+     * @param UserPlaylistsService $userPlaylistsService
+     * @param PackService $packService
+     * @param DatabaseManager $databaseManager
+     * @param UserContentProgressService $userContentProgressService
+     * @param CarouselService $carouselService
+     * @param CohortService $cohortService
+     * @param OnboardingService $onboardingService
+     *
+     */
     public function __construct(
         private ContentService $contentService,
         private ContentFollowsService $contentFollowsService,
@@ -113,7 +137,7 @@ class HomePageController extends BaseController
 
         $startedLessons = $this->getUsersStartedContent();
 
-        $usersList = $this->getUsersList();
+        $usersList = $this->getUsersPlaylist();
 
         $upcomingEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
             ContentTypes::liveContentTypes(),
@@ -124,7 +148,7 @@ class HomePageController extends BaseController
             'published_on',
             'asc',
             [],
-            6
+            self::UPCOMING_EVENTS_CONTENT_COUNT
         );
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
@@ -136,7 +160,7 @@ class HomePageController extends BaseController
 
         $workoutsContent = $this->getWorkoutsContents();
         if (FeatureFlagging::accessible('recsys', user())) {
-            $recommendedContent = $this->getAllRecommentations();
+            $recommendedContent = $this->getAllRecommendations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
         }
@@ -579,12 +603,12 @@ class HomePageController extends BaseController
     /**
      * @return ContentFilterResultsEntity
      */
-    private function getAllRecommentations()
+    private function getAllRecommendations()
     {
         return $this->contentService->getRecommendedContent(
             user()->id,
             brand(),
-            pageSize: 50,
+            pageSize: self::RECSYS_CONTENT_COUNT,
         );
     }
 
@@ -599,7 +623,7 @@ class HomePageController extends BaseController
         ContentRepository::$allowsPullSongsContent = false;
         $contents = $this->contentService->getFiltered(
             1,
-            6,
+            self::NEW_RELEASES_CONTENT_COUNT,
             '-published_on',
             ContentTypes::newContentTypes(),
             [],
@@ -628,7 +652,7 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = false;
         $workouts = $this->contentService->getFiltered(
             1,
-            10,
+            self::WORKOUTS_CONTENT_COUNT,
             '-published_on',
             ['workout'],
             [],
@@ -656,7 +680,7 @@ class HomePageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            8
+            self::STARTED_CONTENT_COUNT
         );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
@@ -666,13 +690,13 @@ class HomePageController extends BaseController
     /**
      * @return ContentFilterResultsEntity
      */
-    public function getUsersList()
+    public function getUsersPlaylist()
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
             'user-playlist',
             brand(),
-            12
+            self::PLAYLISTS_COUNTENT_COUNT
         );
 
         $results = new ContentFilterResultsEntity(['results' => $playlists]);
@@ -687,7 +711,7 @@ class HomePageController extends BaseController
     {
         $songs = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['song'],
             [],
@@ -713,7 +737,7 @@ class HomePageController extends BaseController
     {
         $courses = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['course'],
             [],
@@ -743,7 +767,7 @@ class HomePageController extends BaseController
         // Pull 20 of the most recent shows
         $recentShows = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             $allShowTypes,
             [],
@@ -800,7 +824,7 @@ class HomePageController extends BaseController
     {
         $staffPicks = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ContentTypes::ourPicksContentTypes(),
             [],
