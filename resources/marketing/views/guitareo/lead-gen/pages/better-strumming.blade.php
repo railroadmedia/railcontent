@@ -173,7 +173,8 @@
                         <div class="relative w-full" style="padding-top: 56.25%;">
                             <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div> 
                         </div>
-                        <a class="join guitareo smaller mt-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
+                        <a class="w-full sm:w-2/3 md:max-w-[320px] join guitareo smaller mt-4 sm:pr-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
+                        <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller white outline my-2" x-show="showVideoModal" @click="nextLesson()">Next Lesson</a>
                     </div>
                 </div>
             </div>
@@ -532,6 +533,15 @@ function pauseVideo() {
         player.pause().catch(error => {
             console.error('Error pausing video:', error);
         });
+    }
+}
+
+function nextLesson() {
+    currentIndex++;
+    if (currentIndex < videoIds.length) {
+        initializePlayer(videoIds[currentIndex]);
+    } else {
+        console.log('No more lessons available.');
     }
 }
 
