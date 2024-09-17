@@ -32,7 +32,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     });
     Route::get('/double-bass-101', [LeadGenController::class, 'doubleBass101']);
     Route::get('/jazz-drumming-101', [LeadGenController::class, 'jazzDrumming101']);
-    Route::get('/better-doubles', [LeadGenController::class, 'betterDoubles']);
+    Route::get('/better-doubles-in-10-days', [LeadGenController::class, 'betterDoubles']);
     Route::get('/blue-man', [LeadGenController::class, 'blueMan']);
     Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
     Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
