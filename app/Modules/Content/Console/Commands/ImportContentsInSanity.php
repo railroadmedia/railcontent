@@ -82,7 +82,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     'play-along-part',
                     'play-along',
                     'rudiment',
-                    //'routine',
                     'challenge-part',
                     'challenge',
                     'rhythms-from-another-planet',
@@ -373,522 +372,23 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $vimeoVideoSourcesDecorator,
         $railcontentURLProvider
     ): void {
-        $results = Content::with('data', 'fields')->where('railcontent_content.type', '=', $contentType)
-            ->where('railcontent_content.status', '!=', 'deleted')
-            ->where('railcontent_content.brand', '=', $this->argument('brand'));
+        $results = $this->getContentResults($contentType, $railcontentId);
 
-        if($railcontentId) {
-            $results = $results->where('railcontent_content.id', '=', $railcontentId);
-        }
-
-        $results = $results->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875,   268094,
-                23313, 23393, 23395, 29663,
-                410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078, 264279])
-            ->orderBy('id','asc')->get();
-
-        $songs = [];
         $vimeoVideos = [];
-        foreach ($results as $result) {
-            $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
+        $sanityDocuments = $this->mapContentToSanityFormat($results, $extraModels, $extraData, $artists, $permissions, $instructors, $railcontentURLProvider, $vimeoVideos);
 
-            $id         = $type . '_' . $result->id;
-            if($result->id == 215952) {
-                $id = 'foundation';
-                $type = 'foundation';
-            }
-            $difficulty = (int)$result->difficulty;
-            $parentType = [
-                'course-part'          => 'course',
-                'challenge-part'       => 'challenge',
-                'semester-pack-lesson' => 'semester-pack',
-                'learning-path-lesson' => 'learning-path-course',
-                'learning-path-course' => 'learning-path-level',
-                'learning-path-level'  => 'learning-path',
-                'unit-part' => 'unit',
-                'unit' => 'learning-path'
-            ];
-
-            $songs[$id] = [
-                '_id'              => $id,
-                '_type'            => $type,
-                'title'            => $result->title,
-                'status'            => $result->status,
-                'slug'             => [
-                    '_type'   => 'slug',
-                    'current' => $result->slug
-                ],
-                'brand'            => $result->brand,
-                'difficulty'       => $difficulty,
-                'railcontent_id'   => $result->id,
-                'language'         => 'en-US',
-                'xp'               => (int)$result->xp,
-                'total_xp'         => (int)$result->total_xp,
-                'published_on'     => $result->published_on,
-                'show_in_new_feed' => $result->show_in_new_feed == 1,
-                "web_url_path"     => $result->web_url_path,
-                "popularity"       => $result->popularity
-            ];
-            if(!$result->web_url_path){
-
-               // dd($result->toArray());
-                $contentURLs =
-                    $railcontentURLProvider->getContentURLs(
-                        $result->id,
-                        $result->slug,
-                        $contentType,
-                        new ContentEntity($result->toArray())
-                    );
-
-                if (!empty($contentURLs)) {
-                    $songs[$id]['web_url_path'] = $contentURLs->getWebURLPath();
-                }
-                //dd($songs[$id]);
-            }
-            if ($result->sort != 0) {
-                $songs[$id]['sort'] = $result->sort;
-            }
-            if ($result->child_count != 0) {
-                $songs[$id]['child_count'] = $result->child_count;
-            }
-            if (isset($parentType[$type])) {
-                $songs[$id]['parent_type'] = $parentType[$type];
-            }
-            if (isset($this->difficultyMapping[$difficulty])) {
-                $songs[$id]["difficulty_string"] = $this->difficultyMapping[$difficulty];
-            }
-            $resources       = [];
-            $chapters        = [];
-            $notImportedData = [];
-            $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,382827,391008,382879,391160,
-                399638,                404279, 404299, 401415, 270443,
-                318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
-                382879, 391008, 391160, 401415, 378258, 381186];
-            foreach ($result->data as $datum) {
-                $imported = false;
-                if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
-                    $songs[$id]['thumbnail'] = [
-                        '_type'        => 'image',
-                        '_sanityAsset' => 'image@' . $datum['value']
-                    ];
-                    $imported                = true;
-                }elseif(in_array($datum['content_id'], $contentWithWrongImage)){
-                    $imported                = true;
-                }
-                if (in_array($datum['key'], ['logo_image_url', 'dark_mode_logo_url', 'light_mode_logo_url']) && $datum['value'] != '') {
-                    $songs[$id][$datum['key']] = [
-                        '_type'        => 'image',
-                        '_sanityAsset' => 'image@' . $datum['value']
-                    ];
-                    $imported                  = true;
-                }
-                if ($datum['key'] == 'resource_name') {
-                    $resources[$datum['position']]['resource_name'] = $datum['value'];
-                    $imported                                       = true;
-                }
-                if ($datum['key'] == 'resource_url') {
-                    $resources[$datum['position']]['resource_url'] = $datum['value'];
-                    $imported                                      = true;
-                }
-                if ($datum['key'] == 'chapter_timecode') {
-                    $chapters[$datum['position']]['chapter_timecode'] = $datum['value'];
-                    $imported                                         = true;
-                }
-                if ($datum['key'] == 'chapter_description') {
-                    $chapters[$datum['position']]['chapter_description'] = $datum['value'];
-                    $imported                                            = true;
-                }
-                if ($datum['key'] == 'chapter_thumbnail_url') {
-                    $chapters[$datum['position']]['chapter_thumbnail_url'] = $datum['value'];
-                    $imported                                              = true;
-                }
-                if ($datum['key'] == 'mp3_yes_drums_yes_click_url') {
-                    $songs[$id]['mp3_yes_drums_yes_click_url'] = $datum['value'];
-                    $imported                                  = true;
-                }
-                if ($datum['key'] == 'mp3_yes_drums_no_click_url') {
-                    $songs[$id]['mp3_yes_drums_no_click_url'] = $datum['value'];
-                    $imported                                 = true;
-                }
-                if ($datum['key'] == 'mp3_no_drums_yes_click_url') {
-                    $songs[$id]['mp3_no_drums_yes_click_url'] = $datum['value'];
-                    $imported                                 = true;
-                }
-                if ($datum['key'] == 'mp3_no_drums_no_click_url') {
-                    $songs[$id]['mp3_no_drums_no_click_url'] = $datum['value'];
-                    $imported                                = true;
-                }
-                if ($datum['key'] == 'sheet_music_thumbnail_url') {
-                    $songs[$id]['sheet_music_thumbnail_url'] = $datum['value'];
-                    $imported                                = true;
-                }
-
-                if ($datum['key'] == 'description' && $type != 'song') {
-                    $imported                    = true;
-                    $songs[$id]['description'][] = [
-                        '_type'    => 'block',
-                        'style'    => 'normal',
-                        'markDefs' => [],
-                        'children' => [
-                            [
-                                '_type' => 'span',
-                                "marks" => [],
-                                'text'  => $datum['value']
-                            ]
-                        ]
-                    ];
-                }
-                //TODO: Check with Chris if all the data should be ignored
-                if (!$imported && (!in_array($datum['key'], [
-                        'original_thumbnail_url',
-                        'header_image_url',
-                        'learning_path_description',
-                        'sbt_video_url',
-                        'sbt_image_url',
-                        'sheet_music_image_url',
-                        'mp3_click_url',
-                        'mp3_non_click_url',
-                        'gear',
-                        'captions',
-                        'sales_url',
-                        'registration_url',
-                        'smart_beat_slow_bpm_mp3_url',
-                        'smart_beat_sheet_music_image_url',
-                        'smart_beat_fast_bpm_mp3_url',
-                        'sbt_fast_mp3_url',
-                        'sbt_slow_mp3_url',
-                        'pack_resources',
-                        'mp3_url',
-                        'mp3_name',
-                        'pdf_url',
-                        'pdf_name',
-                        'zip_url',
-                        'zip_name',
-                        'extended_description',
-                        'summary',
-                        'extended_description_subtitle',
-                        'gs_legacy_vimeo',
-                        'rev_caption_order_uri',
-                        'mobile_banner_url',
-                        'tablet_banner_url',
-                        'web_banner_url',
-                        'background_image_url',
-                        //foundation unit-part
-                        'song_title',
-                        'song_slow_bpm',
-                        'song_fast_bpm',
-                        'mp3_no_piano_no_click_slow_bpm_url',
-                        'mp3_no_piano_no_click_fast_bpm_url',
-                        'mp3_no_piano_yes_click_slow_bpm_url',
-                        'mp3_no_piano_yes_click_fast_bpm_url',
-                        'mp3_yes_piano_no_click_slow_bpm_url',
-                        'mp3_yes_piano_no_click_fast_bpm_url',
-                        'mp3_yes_piano_yes_click_slow_bpm_url',
-                        'mp3_yes_piano_yes_click_fast_bpm_url',
-                        //unit
-                        'header_background_image_url',
-                        'description'
-                    ]))) {
-                    $notImportedData[] = $datum['key'];
-                }
-            }
-            if (!empty($notImportedData)) {
-                dd($notImportedData);
-            }
-
-            $songs[$id]['show_in_new_feed'] = false;
-            $songs[$id]['is_featured']      = false;
-            $songs[$id]['hide_from_recsys'] = false;
-
-            $contentExtraData  = [];
-            $notImportedFields = [];
-
-            foreach ($result->fields as $field) {
-                $imported = false;
-                if (in_array(
-                    $field['key'],
-                    [
-                                 'soundslice_slug',
-                                 'name',
-                                 'bpm',
-                                 'gear',
-                                 'low_soundslice_slug',
-                                 'high_soundslice_slug',
-                                 'registration_url',
-                                 'song_name',
-                                 'enrollment_start_time',
-                                 'enrollment_end_time',
-                                 'live_event_start_time',
-                                 'live_event_end_time',
-                                 'live_event_youtube_id',
-                        'soundslice_slug',
-                             ]
-                ) && $field['value'] != '') {
-                    $songs[$id][$field['key']] = $field['value'];
-                    $imported                  = true;
-                }
-                if ($field['key'] == 'artist') {
-                    $artistName = preg_replace('/[^a-zA-Z0-9_]/', '', $field['value']);
-                    if (isset($artists['artist_' . strtolower($artistName)])) {
-                        $songs[$id]["artist"] = [
-                            "_type" => "reference",
-                            "_ref"  => 'artist_' . strtolower($artistName),
-                            "_weak" => false
-                        ];
-                    }
-                    $imported = true;
-                }
-
-                if ($field['key'] == 'show_in_new_feed') {
-                    $songs[$id]['show_in_new_feed'] = ($field['value'] == 1);
-                    $imported                       = true;
-                }
-                if ($field['key'] == 'is_featured') {
-                    $songs[$id]['is_featured'] = ($field['value'] == 1);
-                    $imported                  = true;
-                }
-                if ($field['key'] == 'hide_from_recsys') {
-                    $songs[$id]['hide_from_recsys'] = ($field['value'] == 1);
-                    $imported                       = true;
-                }
-
-                if (array_key_exists($field['key'], $extraModels) || ($field['key'] == 'essentials')) {
-                    $contentExtraData[$field['key']][] = $field['value'];
-                    $imported                          = true;
-                }
-                if (($field['key'] == 'essentials')) {
-                    $contentExtraData['essential'][] = $field['value'];
-                    $imported                        = true;
-                }
-                if ($field['key'] == 'gear') {
-                    $songs[$id]['gear'] = $field['value'];
-                    $imported           = true;
-                }
-                if ($field['key'] == 'length_in_seconds' && $type != 'song') {
-                    $songs[$id]['length_in_seconds'] = $field['value'];
-                    $imported           = true;
-                }
-                if ($field['key'] == 'transcriber_name') {
-                    $transcriber =  preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
-                    $songs[$id]['transcriber_name'] = $transcriber;
-                    $imported           = true;
-                }
-                if ($field['key'] == 'released') {
-                    $songs[$id]['released'] = (int) $field['value'];
-                    $imported           = true;
-                }
-                if ($field['key'] == 'album') {
-                    $songs[$id]['album'] = preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
-                    $imported           = true;
-                }
-
-                if ($field['key'] == 'video') {
-                    $video = Content::with('fields')->where('railcontent_content.id', '=', $field['value'])->first();
-                    if ($video) {
-                        $songs[$id]['video']['type']        = $video['type'];
-                        $songs[$id]['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
-                        if($songs[$id]['video']['external_id'] == null){
-                            $this->info('vimeo_external_id is missing');
-                            foreach($video['fields'] as $videoField){
-                                if($videoField['key'] == 'vimeo_video_id'){
-                                    $songs[$id]['video']['external_id'] = $videoField['value'];
-                                }
-                            }
-                        }
-                        $songs[$id]['length_in_seconds']    = (int)$video['length_in_seconds'];
-                        if($video['type'] == 'vimeo-video' && ($songs[$id]['video']['external_id'] != null)){
-                            $vimeoData = Vimeo::query()->where('external_id','=',$songs[$id]['video']['external_id'])->first();
-                            if($vimeoData){
-                                $songs[$id]['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
-                                $songs[$id]['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
-                                $songs[$id]['length_in_seconds'] = $vimeoData['length_in_seconds'] ?? $songs[$id]['length_in_seconds'];
-                            }
-                        $vimeoVideos[$id] =  $songs[$id]['video']['external_id'];
-                        }
-                    }
-                    $imported = true;
-                }
-
-                //TODO: Check with Chris if all the fields should be ignored
-                if (!$imported && (!in_array($field['key'], [
-                        'title',
-                        'instructor',
-                        'difficulty',
-                        'tag',
-                        'style',
-                        'legacy_wordpress_post_id',
-                        'xp',
-                        'total_xp',
-                        'staff_pick_rating',
-                        'home_staff_pick_rating',
-                        'sbt_exercise_number',
-                        'sbt_bpm',
-                        'exercise_id',
-                        'slow_bpm',
-                        'fast_bpm',
-                        'live_stream_feed_type',
-                        'qna_video',
-                        'playlist',
-                        'instructors',
-                        'week',
-                      //  'released',
-                      //  'album',
-                        'legacy_id',
-                        'exercise-book-pages',
-                        'cd-tracks',
-                        'student_id',
-                        'soundslice_slug',
-                        'related_lesson',
-                        'difficulty_range',
-                        //Foundation unit part
-                        'includes_song',
-                        'length_in_seconds'
-                    ]))) {
-                    $notImportedFields[] = $field['key'];
-                }
-            }
-            if (!empty($notImportedFields)) {
-
-                dd($notImportedFields);
-            }
-            foreach ($resources as $resource) {
-                if (isset($resource['resource_name']) && isset($resource['resource_url'])) {
-                    $songs[$id]["resource"][] = [
-                        'resource_name' => $resource['resource_name'],
-                        'resource_url'  => $resource['resource_url']
-                    ];
-                }
-            }
-
-            foreach ($chapters as $chapter) {
-                if (isset($chapter['chapter_thumbnail_url']) && $chapter['chapter_thumbnail_url'] != '') {
-                    $songs[$id]["chapter"][] =
-                        [
-                            'chapter_timecode'      => (int)($chapter['chapter_timecode'] ?? 0),
-                            'chapter_description'   => $chapter['chapter_description'],
-                            'chapter_thumbnail_url' => [
-                                '_type'        => 'image',
-                                '_sanityAsset' => 'image@' . $chapter['chapter_thumbnail_url']
-                            ]
-                        ];
-                } else {
-                    $songs[$id]["chapter"][] = [
-                        'chapter_timecode'    => (int)($chapter['chapter_timecode'] ?? 0),
-                        'chapter_description' => $chapter['chapter_description'] ?? '',
-                    ];
-                }
-            }
-
-            $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id)->get();
-            foreach ($contentPermissions as $contentPermission) {
-                $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentPermission->permissions->name);
-                if (isset($permissions['permission_' . strtolower($name)])) {
-                    $songs[$id]["permission"][] = [
-                        "_type" => "reference",
-                        "_ref"  => 'permission_' . strtolower($name),
-                        "_weak" => false
-                    ];
-                }
-            }
-            if (!empty($contentExtraData)) {
-                foreach ($contentExtraData as $index => $contentExtra) {
-                    if (strtolower($index) != 'gear') {
-                        foreach ($contentExtra as $contentExtraDatum) {
-                            $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentExtraDatum);
-                            if (isset($extraData[$index][$index . '_' . strtolower($name)])) {
-                                $songs[$id]["$index"][] = [
-                                    "_type" => "reference",
-                                    "_ref"  => $index . '_' . strtolower($name),
-                                    "_weak" => false
-                                ];
-                            }
-                        }
-                    }
-                }
-            }
-
-            $contentGenres = ContentStyle::query()->where('content_id', '=', $result->id)->get();
-            foreach ($contentGenres as $contentGenre) {
-                $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
-                if (isset($extraData['genre']['genre_' . strtolower($name)])) {
-                    $songs[$id]["genre"][] = [
-                        "_type" => "reference",
-                        "_ref"  => 'genre_' . strtolower($name),
-                        "_weak" => false
-                    ];
-                }
-            }
-
-            $contentInstructors = ContentInstructor::with('instructor')->select('instructor_id')->where('content_id', '=', $result->id)->groupBy('instructor_id')->get();
-            foreach ($contentInstructors as $contentInstructor) {
-                if ($contentInstructor->instructor) {
-                    $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentInstructor->instructor->name);
-                    if (isset($instructors['instructor_' . strtolower($name) . '_' . $contentInstructor->instructor->id])) {
-                        $songs[$id]["instructor"][] = [
-                            "_type" => "reference",
-                            "_ref"  => 'instructor_' . strtolower($name) . '_' . $contentInstructor->instructor->id,
-                            "_weak" => false
-                        ];
-                    }
-                }
-            }
-
-            $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position','asc')->get();
-            foreach ($contentHierarchy as $hierarchy) {
-                if ($hierarchy->child) {
-                    if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status != 'deleted') {
-                        $songs[$id]["child"][] = [
-                            "_type" => "reference",
-                            "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
-                            "_weak" => false
-                        ];
-                    } elseif ($hierarchy->child->type == 'assignment' && $type == 'song') {
-                    $songs[$id]["soundslice"][] = [
-                        'soundslice_title'             => $hierarchy->child->title,
-                        'soundslice_slug'        => $hierarchy->child->soundslice_slug,
-                        'soundslice_length_in_second'       => (isset($songs[$id]['length_in_seconds']))?(int)$songs[$id]['length_in_seconds'] : 0,
-
-                    ];
-                } elseif ($hierarchy->child->type == 'assignment') {
-                        unset($songs[$id]['child_count']);
-                        $songs[$id]["assignment"][] = [
-                            'assignment_title'             => $hierarchy->child->title,
-                            'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
-                            'assignment_description'       => $hierarchy->child->data->where('key','=','description')->first()['value'] ?? '',
-                            'assignment_sheet_music_image' => $hierarchy->child->data->where('key','=','sheet_music_image_url')->first()['value'] ?? '',
-                            'railcontent_id'  => $hierarchy->child->id,
-                        ];
-                    }
-                }
-            }
-        }
         $directory = resource_path() . '/sanitystudio';
         if ($deleteOldDocuments == "true") {
-            $ids        = implode(' ', array_keys($songs));
+            $ids        = implode(' ', array_keys($sanityDocuments));
             $resultCode = $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=development " . $ids);
         }
-        $filename2 = $directory . '/contents.ndjson';
-        if($this->option('vimeoRefresh')) {
-            $this->info('Start vimeo data pull for '.count($vimeoVideos).' videos');
-            foreach ($vimeoVideos as $contentIndex => $externalId) {
-                $video = $vimeoVideoSourcesDecorator->decorate($externalId);
-                if($video) {
-                    Vimeo::updateOrInsert(
-                        ['external_id' => $externalId],
-                        [
-                            'video_poster_image_url'   => $video['video_poster_image_url'],
-                            'video_playback_endpoints' => json_encode($video['video_playback_endpoints']),
-                            'hlsManifestUrl'           => $video['hlsManifestUrl'],
-                            'length_in_seconds'        => $video['length_in_seconds']
-                        ]
-                    );
-                    $songs[$contentIndex]['video']['hlsManifestUrl']           = $video['hlsManifestUrl'];
-                    $songs[$contentIndex]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
-                    $songs[$contentIndex]['length_in_seconds']                 = $video['length_in_seconds'] ?? $songs[$contentIndex]['length_in_seconds'];
-                }
-            }
-            $this->info('Finish vimeo data pull');
+
+        if($this->option('vimeoRefresh')){
+            $this->syncVimeoData($vimeoVideos, $vimeoVideoSourcesDecorator, $sanityDocuments);
         }
-        foreach ($songs as $result) {
+
+        $filename2 = $directory . '/contents.ndjson';
+        foreach ($sanityDocuments as $result) {
             $newline = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
             file_put_contents($filename2, $newline, FILE_APPEND);
         }
@@ -909,5 +409,622 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $this->info('Generated file deleted from local storage.');
             }
         }
+    }
+
+    /**
+     * @param mixed  $result
+     * @param array  $extraData
+     * @param array  $songs
+     * @param string $id
+     * @return array
+     */
+    private function handleGenre(mixed $result, array $extraData, array &$songs, string $id): array
+    {
+        $contentGenres = ContentStyle::query()->where('content_id', '=', $result->id)->get();
+        foreach ($contentGenres as $contentGenre) {
+            $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
+            if (isset($extraData['genre']['genre_' . strtolower($name)])) {
+                $songs["genre"][] = [
+                    "_type" => "reference",
+                    "_ref"  => 'genre_' . strtolower($name),
+                    "_weak" => false
+                ];
+            }
+        }
+
+        return $songs;
+    }
+
+    /**
+     * @param mixed  $result
+     * @param array  $instructors
+     * @param array  $songs
+     * @param string $id
+     * @return array
+     */
+    private function handleInstructors(mixed $result, array $instructors, array &$songs, string $id): array
+    {
+        $contentInstructors = ContentInstructor::with('instructor')->select('instructor_id')->where('content_id', '=', $result->id)->groupBy('instructor_id')->get();
+        foreach ($contentInstructors as $contentInstructor) {
+            if ($contentInstructor->instructor) {
+                $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentInstructor->instructor->name);
+                if (isset($instructors['instructor_' . strtolower($name) . '_' . $contentInstructor->instructor->id])) {
+                    $songs["instructor"][] = [
+                        "_type" => "reference",
+                        "_ref"  => 'instructor_' . strtolower($name) . '_' . $contentInstructor->instructor->id,
+                        "_weak" => false
+                    ];
+                }
+            }
+        }
+
+        return $songs;
+    }
+
+    /**
+     * @param mixed  $result
+     * @param array  $permissions
+     * @param array  $songs
+     * @param string $id
+     * @return array
+     */
+    private function handlePermissions(mixed $result, array $permissions, array &$songs, string $id): array
+    {
+        $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id)->get();
+        foreach ($contentPermissions as $contentPermission) {
+            $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentPermission->permissions->name);
+            if (isset($permissions['permission_' . strtolower($name)])) {
+                $songs["permission"][] = [
+                    "_type" => "reference",
+                    "_ref"  => 'permission_' . strtolower($name),
+                    "_weak" => false
+                ];
+            }
+        }
+
+        return $songs;
+    }
+
+    /**
+     * @param array  $contentExtraData
+     * @param array  $extraData
+     * @param array  $songs
+     * @param string $id
+     * @return array[]
+     */
+    private function handleExtraData(array $contentExtraData, array $extraData, array &$songs, string $id): array
+    {
+        if (!empty($contentExtraData)) {
+            foreach ($contentExtraData as $index => $contentExtra) {
+                if (strtolower($index) != 'gear') {
+                    foreach ($contentExtra as $contentExtraDatum) {
+                        $name = preg_replace('/[^a-zA-Z0-9_]/', '', $contentExtraDatum);
+                        if (isset($extraData[$index][$index . '_' . strtolower($name)])) {
+                            $songs["$index"][] = [
+                                "_type" => "reference",
+                                "_ref"  => $index . '_' . strtolower($name),
+                                "_weak" => false
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        return $songs;
+    }
+
+    /**
+     * @param array  $chapters
+     * @param array  $songs
+     * @param string $id
+     * @return array
+     */
+    private function handleContentChapters(array $chapters, array &$songs, string $id): array
+    {
+        foreach ($chapters as $chapter) {
+            if (isset($chapter['chapter_thumbnail_url']) && $chapter['chapter_thumbnail_url'] != '') {
+                $songs["chapter"][] =
+                    [
+                        'chapter_timecode'      => (int)($chapter['chapter_timecode'] ?? 0),
+                        'chapter_description'   => $chapter['chapter_description'],
+                        'chapter_thumbnail_url' => [
+                            '_type'        => 'image',
+                            '_sanityAsset' => 'image@' . $chapter['chapter_thumbnail_url']
+                        ]
+                    ];
+            } else {
+                $songs["chapter"][] = [
+                    'chapter_timecode'    => (int)($chapter['chapter_timecode'] ?? 0),
+                    'chapter_description' => $chapter['chapter_description'] ?? '',
+                ];
+            }
+        }
+
+        return $songs;
+    }
+
+    /**
+     * @param mixed  $result
+     * @param array  $songs
+     * @param string $id
+     * @param mixed  $type
+     * @return array
+     */
+    private function handleChildren(mixed $result, array &$songs, string $id, mixed $type): array
+    {
+        $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position', 'asc')->get();
+        foreach ($contentHierarchy as $hierarchy) {
+            if ($hierarchy->child) {
+                if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status != 'deleted') {
+                    $songs["child"][] = [
+                        "_type" => "reference",
+                        "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
+                        "_weak" => false
+                    ];
+                } elseif ($hierarchy->child->type == 'assignment' && $type == 'song') {
+                    $songs["soundslice"][] = [
+                        'soundslice_title'            => $hierarchy->child->title,
+                        'soundslice_slug'             => $hierarchy->child->soundslice_slug,
+                        'soundslice_length_in_second' => (isset($songs['length_in_seconds'])) ? (int)$songs['length_in_seconds'] : 0,
+
+                    ];
+                } elseif ($hierarchy->child->type == 'assignment') {
+                    unset($songs['child_count']);
+                    $songs["assignment"][] = [
+                        'assignment_title'             => $hierarchy->child->title,
+                        'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
+                        'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
+                        'assignment_sheet_music_image' => $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->first()['value'] ?? '',
+                        'railcontent_id'               => $hierarchy->child->id,
+                    ];
+                }
+            }
+        }
+
+        return $songs;
+    }
+
+    private function getContentResults($contentType, $railcontentId)
+    {
+        $query = Content::with('data', 'fields')
+            ->where('railcontent_content.type', '=', $contentType)
+            ->where('railcontent_content.status', '!=', 'deleted')
+            ->where('railcontent_content.brand', '=', $this->argument('brand'));
+
+        if ($railcontentId) {
+            $query->where('railcontent_content.id', '=', $railcontentId);
+        }
+
+        return $query->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875,   268094,
+            23313, 23393, 23395, 29663,
+            410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078, 264279])
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    private function mapContentToSanityFormat($results, $extraModels, $extraData, $artists, $permissions, $instructors, $railcontentURLProvider, &$vimeoVideos)
+    {
+        $contents = [];
+        foreach ($results as $result) {
+            $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
+
+            $id         = $type . '_' . $result->id;
+            if($result->id == 215952) {
+                $id = 'foundation';
+                $type = 'foundation';
+            }
+            $contents[$id] = $this->transformContent($result, $extraModels, $extraData, $artists, $railcontentURLProvider, $id, $type, $permissions, $instructors, $vimeoVideos);
+        }
+
+        return $contents;
+    }
+
+    private function transformContent($result, $extraModels, $extraData, $artists, $railcontentURLProvider, $id, $type, $permissions, $instructors, &$vimeoVideos)
+    {
+        $difficulty = (int)$result->difficulty;
+        $parentType = [
+            'course-part'          => 'course',
+            'challenge-part'       => 'challenge',
+            'semester-pack-lesson' => 'semester-pack',
+            'learning-path-lesson' => 'learning-path-course',
+            'learning-path-course' => 'learning-path-level',
+            'learning-path-level'  => 'learning-path',
+            'unit-part' => 'unit',
+            'unit' => 'learning-path',
+            'pack-bundle-lesson' => 'pack-bundle',
+            'pack-bundle' => 'pack',
+            'song-tutorial-children' => 'song-tutorial',
+            'play-along-part' => 'play-along'
+        ];
+
+        $sanityDocuments = [
+            '_id'              => $id,
+            '_type'            => $type,
+            'title'            => $result->title,
+            'status'            => $result->status,
+            'slug'             => [
+                '_type'   => 'slug',
+                'current' => $result->slug
+            ],
+            'brand'            => $result->brand,
+            'difficulty'       => $difficulty,
+            'railcontent_id'   => $result->id,
+            'language'         => 'en-US',
+            'xp'               => (int)$result->xp,
+            'total_xp'         => (int)$result->total_xp,
+            'published_on'     => $result->published_on,
+            'show_in_new_feed' => $result->show_in_new_feed == 1,
+            "web_url_path"     => $result->web_url_path,
+            "popularity"       => $result->popularity
+        ];
+        if(!$result->web_url_path){
+            $contentURLs =
+                $railcontentURLProvider->getContentURLs(
+                    $result->id,
+                    $result->slug,
+                    $result->type,
+                    new ContentEntity($result->toArray())
+                );
+
+            if (!empty($contentURLs)) {
+                $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
+            }
+            //dd($songs[$id]);
+        }
+        if ($result->sort != 0) {
+            $sanityDocuments['sort'] = $result->sort;
+        }
+        if ($result->child_count != 0) {
+            $sanityDocuments['child_count'] = $result->child_count;
+        }
+        if (isset($parentType[$type])) {
+            $sanityDocuments['parent_type'] = $parentType[$type];
+        }
+        if (isset($this->difficultyMapping[$difficulty])) {
+            $sanityDocuments["difficulty_string"] = $this->difficultyMapping[$difficulty];
+        }
+        $resources       = [];
+        $chapters        = [];
+        $notImportedData = [];
+        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,382827,391008,382879,391160,
+            399638,                404279, 404299, 401415, 270443,
+            318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
+            382879, 391008, 391160, 401415, 378258, 381186];
+        foreach ($result->data as $datum) {
+            $imported = false;
+            if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
+                $sanityDocuments['thumbnail'] = [
+                    '_type'        => 'image',
+                    '_sanityAsset' => 'image@' . $datum['value']
+                ];
+                $imported                = true;
+            }elseif(in_array($datum['content_id'], $contentWithWrongImage)){
+                $imported                = true;
+            }
+            if (in_array($datum['key'], ['logo_image_url', 'dark_mode_logo_url', 'light_mode_logo_url']) && $datum['value'] != '') {
+                $sanityDocuments[$datum['key']] = [
+                    '_type'        => 'image',
+                    '_sanityAsset' => 'image@' . $datum['value']
+                ];
+                $imported                  = true;
+            }
+            if ($datum['key'] == 'resource_name') {
+                $resources[$datum['position']]['resource_name'] = $datum['value'];
+                $imported                                       = true;
+            }
+            if ($datum['key'] == 'resource_url') {
+                $resources[$datum['position']]['resource_url'] = $datum['value'];
+                $imported                                      = true;
+            }
+            if ($datum['key'] == 'chapter_timecode') {
+                $chapters[$datum['position']]['chapter_timecode'] = $datum['value'];
+                $imported                                         = true;
+            }
+            if ($datum['key'] == 'chapter_description') {
+                $chapters[$datum['position']]['chapter_description'] = $datum['value'];
+                $imported                                            = true;
+            }
+            if ($datum['key'] == 'chapter_thumbnail_url') {
+                $chapters[$datum['position']]['chapter_thumbnail_url'] = $datum['value'];
+                $imported                                              = true;
+            }
+            if ($datum['key'] == 'mp3_yes_drums_yes_click_url') {
+                $sanityDocuments['mp3_yes_drums_yes_click_url'] = $datum['value'];
+                $imported                                  = true;
+            }
+            if ($datum['key'] == 'mp3_yes_drums_no_click_url') {
+                $sanityDocuments['mp3_yes_drums_no_click_url'] = $datum['value'];
+                $imported                                 = true;
+            }
+            if ($datum['key'] == 'mp3_no_drums_yes_click_url') {
+                $sanityDocuments['mp3_no_drums_yes_click_url'] = $datum['value'];
+                $imported                                 = true;
+            }
+            if ($datum['key'] == 'mp3_no_drums_no_click_url') {
+                $sanityDocuments['mp3_no_drums_no_click_url'] = $datum['value'];
+                $imported                                = true;
+            }
+            if ($datum['key'] == 'sheet_music_thumbnail_url') {
+                $sanityDocuments['sheet_music_thumbnail_url'] = $datum['value'];
+                $imported                                = true;
+            }
+
+            if ($datum['key'] == 'description' && $type != 'song') {
+                $imported                    = true;
+                $sanityDocuments['description'][] = [
+                    '_type'    => 'block',
+                    'style'    => 'normal',
+                    'markDefs' => [],
+                    'children' => [
+                        [
+                            '_type' => 'span',
+                            "marks" => [],
+                            'text'  => $datum['value']
+                        ]
+                    ]
+                ];
+            }
+            //TODO: Check with Chris if all the data should be ignored
+            if (!$imported && (!in_array($datum['key'], [
+                    'original_thumbnail_url',
+                    'header_image_url',
+                    'learning_path_description',
+                    'sbt_video_url',
+                    'sbt_image_url',
+                    'sheet_music_image_url',
+                    'mp3_click_url',
+                    'mp3_non_click_url',
+                    'gear',
+                    'captions',
+                    'sales_url',
+                    'registration_url',
+                    'smart_beat_slow_bpm_mp3_url',
+                    'smart_beat_sheet_music_image_url',
+                    'smart_beat_fast_bpm_mp3_url',
+                    'sbt_fast_mp3_url',
+                    'sbt_slow_mp3_url',
+                    'pack_resources',
+                    'mp3_url',
+                    'mp3_name',
+                    'pdf_url',
+                    'pdf_name',
+                    'zip_url',
+                    'zip_name',
+                    'extended_description',
+                    'summary',
+                    'extended_description_subtitle',
+                    'gs_legacy_vimeo',
+                    'rev_caption_order_uri',
+                    'mobile_banner_url',
+                    'tablet_banner_url',
+                    'web_banner_url',
+                    'background_image_url',
+                    //foundation unit-part
+                    'song_title',
+                    'song_slow_bpm',
+                    'song_fast_bpm',
+                    'mp3_no_piano_no_click_slow_bpm_url',
+                    'mp3_no_piano_no_click_fast_bpm_url',
+                    'mp3_no_piano_yes_click_slow_bpm_url',
+                    'mp3_no_piano_yes_click_fast_bpm_url',
+                    'mp3_yes_piano_no_click_slow_bpm_url',
+                    'mp3_yes_piano_no_click_fast_bpm_url',
+                    'mp3_yes_piano_yes_click_slow_bpm_url',
+                    'mp3_yes_piano_yes_click_fast_bpm_url',
+                    //unit
+                    'header_background_image_url',
+                    'description'
+                ]))) {
+                $notImportedData[] = $datum['key'];
+            }
+        }
+        if (!empty($notImportedData)) {
+            dd($notImportedData);
+        }
+
+        $sanityDocuments['show_in_new_feed'] = false;
+        $sanityDocuments['is_featured']      = false;
+        $sanityDocuments['hide_from_recsys'] = false;
+
+        $contentExtraData  = [];
+        $notImportedFields = [];
+
+        foreach ($result->fields as $field) {
+            $imported = false;
+            if (in_array(
+                    $field['key'],
+                    [
+                        'soundslice_slug',
+                        'name',
+                        'bpm',
+                        'gear',
+                        'low_soundslice_slug',
+                        'high_soundslice_slug',
+                        'registration_url',
+                        'song_name',
+                        'enrollment_start_time',
+                        'enrollment_end_time',
+                        'live_event_start_time',
+                        'live_event_end_time',
+                        'live_event_youtube_id',
+                        'soundslice_slug',
+                    ]
+                ) && $field['value'] != '') {
+                $sanityDocuments[$field['key']] = $field['value'];
+                $imported                  = true;
+            }
+            if ($field['key'] == 'artist') {
+                $artistName = preg_replace('/[^a-zA-Z0-9_]/', '', $field['value']);
+                if (isset($artists['artist_' . strtolower($artistName)])) {
+                    $sanityDocuments["artist"] = [
+                        "_type" => "reference",
+                        "_ref"  => 'artist_' . strtolower($artistName),
+                        "_weak" => false
+                    ];
+                }
+                $imported = true;
+            }
+
+            if ($field['key'] == 'show_in_new_feed') {
+                $sanityDocuments['show_in_new_feed'] = ($field['value'] == 1);
+                $imported                       = true;
+            }
+            if ($field['key'] == 'is_featured') {
+                $sanityDocuments['is_featured'] = ($field['value'] == 1);
+                $imported                  = true;
+            }
+            if ($field['key'] == 'hide_from_recsys') {
+                $sanityDocuments['hide_from_recsys'] = ($field['value'] == 1);
+                $imported                       = true;
+            }
+
+            if (array_key_exists($field['key'], $extraModels) || ($field['key'] == 'essentials')) {
+                $contentExtraData[$field['key']][] = $field['value'];
+                $imported                          = true;
+            }
+            if (($field['key'] == 'essentials')) {
+                $contentExtraData['essential'][] = $field['value'];
+                $imported                        = true;
+            }
+            if ($field['key'] == 'gear') {
+                $sanityDocuments['gear'] = $field['value'];
+                $imported           = true;
+            }
+            if ($field['key'] == 'length_in_seconds' && $type != 'song') {
+                $sanityDocuments['length_in_seconds'] = $field['value'];
+                $imported           = true;
+            }
+            if ($field['key'] == 'transcriber_name') {
+                $transcriber =  preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
+                $sanityDocuments['transcriber_name'] = $transcriber;
+                $imported           = true;
+            }
+            if ($field['key'] == 'released') {
+                $sanityDocuments['released'] = (int) $field['value'];
+                $imported           = true;
+            }
+            if ($field['key'] == 'album') {
+                $sanityDocuments['album'] = preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
+                $imported           = true;
+            }
+
+            if ($field['key'] == 'video') {
+                $video = Content::with('fields')->where('railcontent_content.id', '=', $field['value'])->first();
+                if ($video) {
+                    $sanityDocuments['video']['type']        = $video['type'];
+                    $sanityDocuments['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
+                    if($sanityDocuments['video']['external_id'] == null){
+                        $this->info('vimeo_external_id is missing');
+                        foreach($video['fields'] as $videoField){
+                            if($videoField['key'] == 'vimeo_video_id'){
+                                $sanityDocuments['video']['external_id'] = $videoField['value'];
+                            }
+                        }
+                    }
+                    $sanityDocuments['length_in_seconds']    = (int)$video['length_in_seconds'];
+                    if($video['type'] == 'vimeo-video' && ($sanityDocuments['video']['external_id'] != null)){
+                        $vimeoData = Vimeo::query()->where('external_id','=',$sanityDocuments['video']['external_id'])->first();
+                        if($vimeoData){
+                            $sanityDocuments['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
+                            $sanityDocuments['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
+                            $sanityDocuments['length_in_seconds'] = $vimeoData['length_in_seconds'] ?? $sanityDocuments['length_in_seconds'];
+                        }
+                        $vimeoVideos[$id] =  $sanityDocuments['video']['external_id'];
+                    }
+                }
+                $imported = true;
+            }
+
+            //TODO: Check with Chris if all the fields should be ignored
+            if (!$imported && (!in_array($field['key'], [
+                    'title',
+                    'instructor',
+                    'difficulty',
+                    'tag',
+                    'style',
+                    'legacy_wordpress_post_id',
+                    'xp',
+                    'total_xp',
+                    'staff_pick_rating',
+                    'home_staff_pick_rating',
+                    'sbt_exercise_number',
+                    'sbt_bpm',
+                    'exercise_id',
+                    'slow_bpm',
+                    'fast_bpm',
+                    'live_stream_feed_type',
+                    'qna_video',
+                    'playlist',
+                    'instructors',
+                    'week',
+                    //  'released',
+                    //  'album',
+                    'legacy_id',
+                    'exercise-book-pages',
+                    'cd-tracks',
+                    'student_id',
+                    'soundslice_slug',
+                    'related_lesson',
+                    'difficulty_range',
+                    //Foundation unit part
+                    'includes_song',
+                    'length_in_seconds'
+                ]))) {
+                $notImportedFields[] = $field['key'];
+            }
+        }
+        if (!empty($notImportedFields)) {
+
+            dd($notImportedFields);
+        }
+        foreach ($resources as $resource) {
+            if (isset($resource['resource_name']) && isset($resource['resource_url'])) {
+                $sanityDocuments["resource"][] = [
+                    'resource_name' => $resource['resource_name'],
+                    'resource_url'  => $resource['resource_url']
+                ];
+            }
+        }
+
+        $this->handleContentChapters($chapters, $sanityDocuments, $id);
+        $this->handlePermissions($result, $permissions, $sanityDocuments, $id);
+        $this->handleExtraData($contentExtraData, $extraData, $sanityDocuments, $id);
+        $this->handleGenre($result, $extraData, $sanityDocuments, $id);
+        $this->handleInstructors($result, $instructors, $sanityDocuments, $id);
+        $this->handleChildren($result, $sanityDocuments, $id, $type);
+
+        return $sanityDocuments;
+    }
+
+    /**
+     * @param array $vimeoVideos
+     * @param       $vimeoVideoSourcesDecorator
+     * @param array $sanityDocuments
+     * @return array
+     */
+    private function syncVimeoData(array $vimeoVideos, $vimeoVideoSourcesDecorator, array &$sanityDocuments): array
+    {
+        $this->info('Start vimeo data pull for ' . count($vimeoVideos) . ' videos');
+        foreach ($vimeoVideos as $contentIndex => $externalId) {
+            $video = $vimeoVideoSourcesDecorator->decorate($externalId);
+            if ($video) {
+                Vimeo::updateOrInsert(
+                    ['external_id' => $externalId],
+                    [
+                        'video_poster_image_url'   => $video['video_poster_image_url'],
+                        'video_playback_endpoints' => json_encode($video['video_playback_endpoints']),
+                        'hlsManifestUrl'           => $video['hlsManifestUrl'],
+                        'length_in_seconds'        => $video['length_in_seconds']
+                    ]
+                );
+                $sanityDocuments[$contentIndex]['video']['hlsManifestUrl']           = $video['hlsManifestUrl'];
+                $sanityDocuments[$contentIndex]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
+                $sanityDocuments[$contentIndex]['length_in_seconds']                 = $video['length_in_seconds'] ?? $sanityDocuments[$contentIndex]['length_in_seconds'];
+            }
+        }
+        $this->info('Finish vimeo data pull');
+
+        return $sanityDocuments;
     }
 }
