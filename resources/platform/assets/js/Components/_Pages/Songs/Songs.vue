@@ -6,9 +6,17 @@
             <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" :ctas="ctaConfig" />
 
             <!-- Continue section -->
-            <div v-if="startedContent?.data?.length" class="tw-mt-[33px]">
-                <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="`/${brand}/lesson-history/in-progress`"
-                    :preLoadedContent="startedContent.data" :isMiniView="true" :show-dropdown="true" />
+            <div v-if="continueSection.length" class="tw-mt-[33px]">
+                <MiniCatalogueSection
+                    title="Continue"
+                    seeAllAriaLabel="See All Songs In Progress"
+                    :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+                    :preLoadedContent="continueSection"
+                    :isMiniView="true"
+                    :show-dropdown="true"
+                    :use-ref-data="true"
+                    trackingSection="continue"
+                />
             </div>
 
             <!-- Song Results -->
@@ -19,7 +27,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
@@ -29,7 +36,7 @@ import { storeToRefs } from "pinia";
 import { getTabData } from './tabData';
 import { useCollectionStore } from "@stores/collection";
 import { useUserStore } from "@stores/user";
-import { fetchSongArtistCount, fetchSongCount } from 'musora-content-services';
+import { fetchSongArtistCount, fetchSongCount, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
@@ -62,6 +69,7 @@ const { brand } = storeToRefs(userStore);
 const { membershipUpgradeModal } = storeToRefs(platformStore);
 
 const artistCount = ref(0);
+const continueSection = ref([]); // Ref for storing started lessons
 
 const ctaConfig = computed(() => {
     return [
@@ -84,20 +92,34 @@ const tabData = computed(() => {
 })
 
 onBeforeMount(async() => {
-    if(props.showUpgradeModal){
-        props.showUpgradeModal && platformStore.openMembershipUpgradeModal();
-        props.showUpgradeModal && platformStore.disableCloseMembershipUpgradeModal();
-    } else {
-        const artists = await fetchSongArtistCount(brand.value);
-        artistCount.value = artists;
+    try {
+        if (props.showUpgradeModal) {
+            platformStore.openMembershipUpgradeModal();
+            platformStore.disableCloseMembershipUpgradeModal();
+        } else {
+            // Fetch song artist count
+            const artists = await fetchSongArtistCount(brand.value);
+            artistCount.value = artists;
 
-        collectionStore.setDefaults({
-            tabOptions: tabData.value,
-            filter: {
-                sort: '-published_on'
-            },
-            queryType: 'song',
-        });
+            // Fetch started content (in-progress lessons)
+            const startedIds = await fetchContentInProgress('song', brand.value);
+            const lessons = await fetchByRailContentIds(startedIds.started);
+            const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+
+            // Set the continue section with started lessons
+            continueSection.value = startedLessons;
+
+            // Set default collection store values
+            collectionStore.setDefaults({
+                tabOptions: tabData.value,
+                filter: {
+                    sort: '-published_on'
+                },
+                queryType: 'song',
+            });
+        }
+    } catch (error) {
+        console.error('Error in onBeforeMount:', error);
     }
-})
+});
 </script>

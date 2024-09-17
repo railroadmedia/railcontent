@@ -26,11 +26,11 @@
 
             <!-- Continue section -->
             <MiniCatalogueSection
-                v-if="startedContent.data.length"
+                v-if="data?.continueSection.length"
                 title="Continue"
                 seeAllAriaLabel="See All Lessons In Progress"
-                :seeAllUrl="continueUrl"
-                :preLoadedContent="startedContent.data"
+                :seeAllUrl="`/${brand}/lesson-history/in-progress`"
+                :preLoadedContent="data?.continueSection"
                 :isMiniView="true"
                 :show-dropdown="true"
                 :use-ref-data="true"
