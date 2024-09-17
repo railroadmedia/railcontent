@@ -52,7 +52,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
+                    <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
