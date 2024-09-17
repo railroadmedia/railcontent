@@ -44,7 +44,6 @@ abstract class LessonTemplate extends BaseSanityModel
                         new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
                         new Field(FieldType::String, 'external_id'),
                         new Field(FieldType::String, 'hlsManifestUrl'),
-                       // new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListArrayElement()),
                         new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
                             fields: [
 new Field(FieldType::String, 'vimeo_key'),
@@ -52,7 +51,8 @@ new Field(FieldType::String, 'file'),
 new Field(FieldType::Number, 'height'),
 new Field(FieldType::Number, 'width')]
                         ), ),
-                    ],previewItem: new ListItemPreview('height', 'width'),
+                    ],
+            previewItem: new ListItemPreview('height', 'width'),
         );
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),
@@ -111,7 +111,7 @@ new Field(FieldType::Number, 'width')]
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 ];
-        if($this->withLiveEvent) {
+        if ($this->withLiveEvent) {
             $fields = array_merge($fields, [
                 new Field(FieldType::String, 'live_event_youtube_id', 'Live Event Youtube ID (if set, this always overrides automatic embed)', group: $detailsGroup),
                 new Field(FieldType::Datetime, 'live_event_start_time', title: 'Live Event Start Time', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
@@ -137,7 +137,7 @@ new Field(FieldType::Number, 'width')]
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup)
         ]);
 
-        if($this->withResources) {
+        if ($this->withResources) {
             $resourceList = new ListObject(
                 fields: [new Field(FieldType::String, 'resource_name'),
                             new Field(FieldType::URL, 'resource_url')],
@@ -154,7 +154,7 @@ new Field(FieldType::Number, 'width')]
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ]);
-        if($this->parentType) {
+        if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
         }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
