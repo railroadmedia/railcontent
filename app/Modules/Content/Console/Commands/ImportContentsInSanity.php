@@ -3,7 +3,6 @@
 namespace App\Modules\Content\Console\Commands;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
-use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentInstructor;
@@ -11,9 +10,7 @@ use App\Modules\Content\Models\ContentPermissions;
 use App\Modules\Content\Models\ContentStyle;
 use App\Modules\Content\Models\Permission;
 use App\Modules\Content\Models\Sanity\Enums\FilterType;
-use App\Modules\Content\Models\Video;
 use App\Modules\Content\Models\Vimeo;
-use Illuminate\Database\Eloquent\Collection;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
 use Modules\Content\Models\ContentGears;
@@ -21,7 +18,6 @@ use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
 use Railroad\Railcontent\Entities\ContentEntity;
-use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 
 class ImportContentsInSanity extends \Illuminate\Console\Command
@@ -51,7 +47,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $deleteOldDocuments = $this->argument('delete');
         $destination        = $this->argument('destination');
         $deleteSanityDocumentId = $this->hasOption('deleteSanityDocumentId') ? $this->option('deleteSanityDocumentId') : null;
-        if ($deleteSanityDocumentId) {
+        if($deleteSanityDocumentId){
             $directory = resource_path() . '/sanitystudio';
             $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=".$destination." " . $deleteSanityDocumentId);
         }
@@ -381,14 +377,14 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             ->where('railcontent_content.status', '!=', 'deleted')
             ->where('railcontent_content.brand', '=', $this->argument('brand'));
 
-        if ($railcontentId) {
+        if($railcontentId) {
             $results = $results->where('railcontent_content.id', '=', $railcontentId);
         }
 
         $results = $results->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875,   268094,
                 23313, 23393, 23395, 29663,
                 410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078, 264279])
-            ->orderBy('id', 'asc')->get();
+            ->orderBy('id','asc')->get();
 
         $songs = [];
         $vimeoVideos = [];
@@ -396,7 +392,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
 
             $id         = $type . '_' . $result->id;
-            if ($result->id == 215952) {
+            if($result->id == 215952) {
                 $id = 'foundation';
                 $type = 'foundation';
             }
@@ -432,9 +428,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 "web_url_path"     => $result->web_url_path,
                 "popularity"       => $result->popularity
             ];
-            if (!$result->web_url_path) {
+            if(!$result->web_url_path){
 
-                // dd($result->toArray());
+               // dd($result->toArray());
                 $contentURLs =
                     $railcontentURLProvider->getContentURLs(
                         $result->id,
@@ -475,7 +471,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         '_sanityAsset' => 'image@' . $datum['value']
                     ];
                     $imported                = true;
-                } elseif (in_array($datum['content_id'], $contentWithWrongImage)) {
+                }elseif(in_array($datum['content_id'], $contentWithWrongImage)){
                     $imported                = true;
                 }
                 if (in_array($datum['key'], ['logo_image_url', 'dark_mode_logo_url', 'light_mode_logo_url']) && $datum['value'] != '') {
@@ -690,23 +686,23 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     if ($video) {
                         $songs[$id]['video']['type']        = $video['type'];
                         $songs[$id]['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
-                        if ($songs[$id]['video']['external_id'] == null) {
+                        if($songs[$id]['video']['external_id'] == null){
                             $this->info('vimeo_external_id is missing');
-                            foreach ($video['fields'] as $videoField) {
-                                if ($videoField['key'] == 'vimeo_video_id') {
+                            foreach($video['fields'] as $videoField){
+                                if($videoField['key'] == 'vimeo_video_id'){
                                     $songs[$id]['video']['external_id'] = $videoField['value'];
                                 }
                             }
                         }
                         $songs[$id]['length_in_seconds']    = (int)$video['length_in_seconds'];
-                        if ($video['type'] == 'vimeo-video' && ($songs[$id]['video']['external_id'] != null)) {
-                            $vimeoData = Vimeo::query()->where('external_id', '=', $songs[$id]['video']['external_id'])->first();
-                            if ($vimeoData) {
+                        if($video['type'] == 'vimeo-video' && ($songs[$id]['video']['external_id'] != null)){
+                            $vimeoData = Vimeo::query()->where('external_id','=',$songs[$id]['video']['external_id'])->first();
+                            if($vimeoData){
                                 $songs[$id]['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
                                 $songs[$id]['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
                                 $songs[$id]['length_in_seconds'] = $vimeoData['length_in_seconds'] ?? $songs[$id]['length_in_seconds'];
                             }
-                            $vimeoVideos[$id] =  $songs[$id]['video']['external_id'];
+                        $vimeoVideos[$id] =  $songs[$id]['video']['external_id'];
                         }
                     }
                     $imported = true;
@@ -836,7 +832,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 }
             }
 
-            $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position', 'asc')->get();
+            $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position','asc')->get();
             foreach ($contentHierarchy as $hierarchy) {
                 if ($hierarchy->child) {
                     if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status != 'deleted') {
@@ -846,19 +842,19 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                             "_weak" => false
                         ];
                     } elseif ($hierarchy->child->type == 'assignment' && $type == 'song') {
-                        $songs[$id]["soundslice"][] = [
-                            'soundslice_title'             => $hierarchy->child->title,
-                            'soundslice_slug'        => $hierarchy->child->soundslice_slug,
-                            'soundslice_length_in_second'       => (isset($songs[$id]['length_in_seconds'])) ? (int)$songs[$id]['length_in_seconds'] : 0,
+                    $songs[$id]["soundslice"][] = [
+                        'soundslice_title'             => $hierarchy->child->title,
+                        'soundslice_slug'        => $hierarchy->child->soundslice_slug,
+                        'soundslice_length_in_second'       => (isset($songs[$id]['length_in_seconds']))?(int)$songs[$id]['length_in_seconds'] : 0,
 
-                        ];
-                    } elseif ($hierarchy->child->type == 'assignment') {
+                    ];
+                } elseif ($hierarchy->child->type == 'assignment') {
                         unset($songs[$id]['child_count']);
                         $songs[$id]["assignment"][] = [
                             'assignment_title'             => $hierarchy->child->title,
                             'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
-                            'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
-                            'assignment_sheet_music_image' => $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->first()['value'] ?? '',
+                            'assignment_description'       => $hierarchy->child->data->where('key','=','description')->first()['value'] ?? '',
+                            'assignment_sheet_music_image' => $hierarchy->child->data->where('key','=','sheet_music_image_url')->first()['value'] ?? '',
                             'railcontent_id'  => $hierarchy->child->id,
                         ];
                     }
@@ -871,11 +867,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $resultCode = $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=development " . $ids);
         }
         $filename2 = $directory . '/contents.ndjson';
-        if ($this->option('vimeoRefresh')) {
+        if($this->option('vimeoRefresh')) {
             $this->info('Start vimeo data pull for '.count($vimeoVideos).' videos');
             foreach ($vimeoVideos as $contentIndex => $externalId) {
                 $video = $vimeoVideoSourcesDecorator->decorate($externalId);
-                if ($video) {
+                if($video) {
                     Vimeo::updateOrInsert(
                         ['external_id' => $externalId],
                         [
