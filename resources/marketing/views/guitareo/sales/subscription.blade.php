@@ -297,17 +297,11 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'marketing/guitareo/membership/homepage/2024/survival-kit-shop.webp',
-                    'title' => 'The Guitarist’s Survival Kit',
-                    'description' => 'Get the gear essentials to start sounding better on the guitar.',
-                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
+                    'image' => 'marketing/guitareo/products/30-days-to-better-strumming/30DTBS-cart.jpg',
+                    'title' => '30 Days To Better Strumming',
+                    'description' => 'Strum with confidence in just 30 days.',
+                    'price' => 97,
                     'shipping' => 'true'
-                ],
-                [
-                    'image' => 'marketing/guitareo/membership/homepage/2024/gq.webp',
-                    'title' => 'GuitarQuest',
-                    'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
-                    'price' => floatval($productPrices['guitar-quest']->price),
                 ],
             ]
         @endphp
@@ -316,8 +310,7 @@
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
