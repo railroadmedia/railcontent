@@ -36,7 +36,7 @@
 
         <!-- Recommended section -->
         <MiniCatalogueSection
-            v-if="recommendedContent.data > 0"
+            v-if="recommendedContent.data.length"
             title="Inspired By Your Activity"
             seeAllAriaLabel="See All Content"
             :seeAllUrl="recommendedContentUrl"
