@@ -162,7 +162,8 @@
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
             </p>
 
-            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET STARTED</a>
+            <a class="join smaller sold-out mb-2 sm:mb-0" aria-label="Customize anchor">SOLD OUT</a>
+{{--            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET STARTED</a>--}}
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -619,101 +620,98 @@
                 </h2>
                 <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
 
-                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
+{{--                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>--}}
                 <br>
-                <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
-                <div style="font-size:0px">
-                    @foreach($bonuses as $bonus)
-                        <div
-                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
-                            x-data="{
-                        flipped: false,
-                    }"
-                            x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    "
-                        >
-                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
-                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                    <div
-                                        x-ref="front"
-                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
-                                        @if(!empty($bonus['badge']))
-                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
-                                        @endif
-                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
-                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                            x-intersect.once="lazyLoad = true">
-                                            <picture class="absolute inset-0 w-full h-full object-cover">
-                                                <img src="{{ $bonus['image'] }}"
-                                                    alt="Bonus Image"
-                                                    class="w-full h-full object-cover opacity-0 transition-opacity"
-                                                    loading="lazy"
-                                                    onload="this.classList.remove('opacity-0')">
-                                            </picture>
-                                        </div>
-                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                            <i class="fas fa-arrow-right text-4xl"></i><br>
-                                            <p class="text-sm"><strong>DETAILS</strong></p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        x-ref="back"
-                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
-                                        style="backface-visibility: hidden;"
-                                    >
-                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>--}}
+{{--                <div style="font-size:0px">--}}
+{{--                    @foreach($bonuses as $bonus)--}}
+{{--                        <div--}}
+{{--                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"--}}
+{{--                            x-data="{--}}
+{{--                        flipped: false,--}}
+{{--                    }"--}}
+{{--                            x-on:click="--}}
+{{--                        flipped = !flipped;--}}
+{{--                        if(flipped){--}}
+{{--                            $refs.front.classList.add('rotate-y-180');--}}
+{{--                            $refs.back.classList.remove('-rotate-y-180');--}}
+{{--                            $refs.back.classList.add('rotate-y-0');--}}
+{{--                        }--}}
+{{--                        else {--}}
+{{--                            $refs.front.classList.remove('rotate-y-180');--}}
+{{--                            $refs.back.classList.add('-rotate-y-180');--}}
+{{--                            $refs.back.classList.remove('rotate-y-0');--}}
+{{--                        }--}}
+{{--                    "--}}
+{{--                        >--}}
+{{--                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">--}}
+{{--                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
+{{--                                    <div--}}
+{{--                                        x-ref="front"--}}
+{{--                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"--}}
+{{--                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">--}}
+{{--                                        @if(!empty($bonus['badge']))--}}
+{{--                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>--}}
+{{--                                        @endif--}}
+{{--                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"--}}
+{{--                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"--}}
+{{--                                            x-intersect.once="lazyLoad = true">--}}
+{{--                                            <picture class="absolute inset-0 w-full h-full object-cover">--}}
+{{--                                                <img src="{{ $bonus['image'] }}"--}}
+{{--                                                    alt="Bonus Image"--}}
+{{--                                                    class="w-full h-full object-cover opacity-0 transition-opacity"--}}
+{{--                                                    loading="lazy"--}}
+{{--                                                    onload="this.classList.remove('opacity-0')">--}}
+{{--                                            </picture>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">--}}
+{{--                                            <i class="fas fa-arrow-right text-4xl"></i><br>--}}
+{{--                                            <p class="text-sm"><strong>DETAILS</strong></p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div--}}
+{{--                                        x-ref="back"--}}
+{{--                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"--}}
+{{--                                        style="backface-visibility: hidden;"--}}
+{{--                                    >--}}
+{{--                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">--}}
+{{--                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <p class="w-full leading-normal mt-2">
-                                <span style="display:inline-block;">
-                            @if(!empty($bonus['price']))
-                                        <s class="opacity-40">${{ $bonus['price'] }}</s>
-                                    @endif
-                                    @if(!empty($bonus['customText']))
-                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>
-                                    @else
-                                        <strong class="text-pianote">FREE</strong>
-                                    @endif
-                                <br>
-                                <em>
-                                    @if(!empty($bonus['shipping']))
-                                        Free Bonus
-                                    @elseif(!empty($bonus['customSubText']))
-                                        Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%
-                                    @else
-                                        Online Access
-                                    @endif
-                                </em>
-                            </span>
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
+{{--                            <p class="w-full leading-normal mt-2">--}}
+{{--                                <span style="display:inline-block;">--}}
+{{--                            @if(!empty($bonus['price']))--}}
+{{--                                        <s class="opacity-40">${{ $bonus['price'] }}</s>--}}
+{{--                                    @endif--}}
+{{--                                    @if(!empty($bonus['customText']))--}}
+{{--                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>--}}
+{{--                                    @else--}}
+{{--                                        <strong class="text-pianote">FREE</strong>--}}
+{{--                                    @endif--}}
+{{--                                <br>--}}
+{{--                                <em>--}}
+{{--                                    @if(!empty($bonus['shipping']))--}}
+{{--                                        Free Bonus--}}
+{{--                                    @elseif(!empty($bonus['customSubText']))--}}
+{{--                                        Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%--}}
+{{--                                    @else--}}
+{{--                                        Online Access--}}
+{{--                                    @endif--}}
+{{--                                </em>--}}
+{{--                            </span>--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
 
-                                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                                    GET STARTED
-                                </a>
+                                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" >SOLD OUT</a>
+{{--                                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>--}}
                 <br>
-                                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership"
-                                    href="{{ $buttonLink2 }}"
-                                >
-                                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>
+{{--                                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">--}}
+{{--                                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>--}}
             </div>
         </section>
     </div>

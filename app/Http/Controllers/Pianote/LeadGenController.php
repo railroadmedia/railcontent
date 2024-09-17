@@ -400,4 +400,9 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
+
+    public function tcpcpreferences()
+    {
+        return view('pianote.lead-gen.tcpcpreferences');
+    }
 }
