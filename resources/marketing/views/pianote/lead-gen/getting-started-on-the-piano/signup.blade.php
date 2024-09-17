@@ -1,4 +1,7 @@
-@extends('pianote.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
+@extends('pianote.lead-gen.lead-gen-layout-tw',[
+    'appTailwind' => true,
+    'hideMenu' => true,
+    ])
 
 @section('meta')
     @parent
@@ -41,7 +44,7 @@
                 padding:16px 30px;
             }
         }
-        
+
         .poppins-font {
             font-family: 'Poppins', sans-serif;
         }
@@ -100,7 +103,7 @@
         /* column-oriented masonry layout */
         .masonry {
             column-count: 1;
-            column-gap: 1.5rem; 
+            column-gap: 1.5rem;
         }
 
         @media (min-width: 640px) {
@@ -111,12 +114,12 @@
 
         @media (min-width: 1024px) {
             .masonry {
-                column-count: 3; 
+                column-count: 3;
             }
         }
 
         .masonry-item {
-            break-inside: avoid; 
+            break-inside: avoid;
             margin-bottom: 1rem;
         }
     </style>
@@ -262,7 +265,7 @@
                             @foreach ($items as $index => $item)
                                 <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 {{ $index < count($items) - 1 ? 'border-r border-gray-300' : '' }}">
                                     <i class="far fa-fw mr-3 sm:mr-0 {{ $item['icon'] }} text-pianote text-2xl"></i>
-                                    <div class="flex flex-col items-left"> 
+                                    <div class="flex flex-col items-left">
                                     <p class="leading-tight mx-0 pb-1">{{ $item['text'] }}</p>
                                     <p><strong class="text-xs lg:text-base font-black px-1 md:px-2">{!! $item['highlight'] !!}</strong></p>
                                     </div>
@@ -290,10 +293,10 @@
     <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="flex justify-center items-center w-full md:w-1/2 sm:w-auto"> 
+                <div class="flex justify-center items-center w-full md:w-1/2 sm:w-auto">
                     <picture class="w-full px-4 sm:w-auto h-auto sm:h-96 order-0 sm:order-none flex justify-center items-center">
                         <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/designed.webp">
-                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/pianote/lead-gen/getting-started/designed.webp" alt="Person playing piano">                
+                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/pianote/lead-gen/getting-started/designed.webp" alt="Person playing piano">
                     </picture>
                 </div>
 
@@ -340,8 +343,8 @@
                 <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/tablet.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/tablet.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
-        </div>  
-        <div id="course"></div> 
+        </div>
+        <div id="course"></div>
     </section>
 
     <section class="text-center pb-4">
@@ -558,7 +561,7 @@
                 'title' => 'Lisa is the perfect teacher',
                 'description' => 'Lisa is the perfect teacher. Her hands-on teaching approach is invaluable to my learning and helps me make progress more easily.',
             ],
-           
+
             [
                 'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/marcel.webp',
                 'name' => 'Marcel Robichaud',
@@ -662,10 +665,10 @@
                     </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl lg:max-w-5xl opacity-0" 
-                        loading="lazy" 
+                <img class="max-w-2xl lg:max-w-5xl opacity-0"
+                        loading="lazy"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/collage.webp" loading="lazy"
-                        onload="this.classList.remove('opacity-0')" alt="collage">            
+                        onload="this.classList.remove('opacity-0')" alt="collage">
             </div>
         </div>
     </section>
