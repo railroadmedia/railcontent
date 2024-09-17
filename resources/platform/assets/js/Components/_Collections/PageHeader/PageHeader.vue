@@ -54,7 +54,7 @@
       </div>
     </template>
     <template #bottom-full>
-      <div class="tw-flex tw-items-center"
+      <div v-if="!isLoading" class="tw-flex tw-items-center"
         :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : ''">
         <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : 'tw-hidden'">
           <PageHeaderCta v-bind="primaryCtaProps" />

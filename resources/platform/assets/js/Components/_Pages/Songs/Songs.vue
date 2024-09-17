@@ -3,7 +3,14 @@
         <div class="">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
-            <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" :ctas="ctaConfig" />
+            <PageHeader 
+                pageType="songs" 
+                title="Songs" 
+                iconName="headphones" 
+                :infoData="headerInfoData" 
+                :ctas="ctaConfig" 
+                :is-loading="isLoading"
+            />
 
             <!-- Continue section -->
             <div v-if="continueSection.length" class="tw-mt-[33px]">
@@ -69,6 +76,7 @@ const { brand } = storeToRefs(userStore);
 const { membershipUpgradeModal } = storeToRefs(platformStore);
 
 const artistCount = ref(0);
+const isLoading = ref(false);
 const continueSection = ref([]); // Ref for storing started lessons
 
 const ctaConfig = computed(() => {
@@ -92,6 +100,7 @@ const tabData = computed(() => {
 })
 
 onBeforeMount(async() => {
+    isLoading.value = true;
     try {
         if (props.showUpgradeModal) {
             platformStore.openMembershipUpgradeModal();
@@ -120,6 +129,8 @@ onBeforeMount(async() => {
         }
     } catch (error) {
         console.error('Error in onBeforeMount:', error);
+    } finally {
+        isLoading.value = false;
     }
 });
 </script>

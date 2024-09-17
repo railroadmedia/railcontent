@@ -2,12 +2,13 @@
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 ">
         <Breadcrumb :breadcrumbs="[{ title: 'Workouts' }]"/>
     </div>
+
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6">
+
         <section v-if="carouselData.length">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-start">
                     <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Featured Challenges</a>
-<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314424?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <div class="tw-hidden lg:tw-block">
                         <Tooltip position="right">
                             <template v-slot:trigger>
@@ -24,7 +25,6 @@
                     <div class="tw-relative lg:tw-hidden">
                         <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px]"></musora-icon>
                     </div>
-
                 </div>
                 <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     See All <span class="tw-hidden sm:tw-inline">Challenges</span>
@@ -40,7 +40,6 @@
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-start">
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
-<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <div class="tw-hidden lg:tw-block">
                         <Tooltip position="right">
                             <template v-slot:trigger>
@@ -60,42 +59,35 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <template v-if="continueData.data.length">
-                <section class="dark:tw-text-white tw-mb-4">
-                    <!-- Section Title -->
-                    <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between">
-                        <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h3 class="tw-font-bold tw-text-xl md:tw-text-2xl">Continue</h3>
-                        </a>
-                        <a :href="`/${brand}/lesson-history/in-progress`"
-                           aria-label="See All Subscribed Lessons"
-                           class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                        >
-                            See All
-                        </a>
-                    </div>
-                    <transition appear name="fade">
-                        <CatalogueCardContainer
-                            :is-mini-view="true"
-                            :pre-loaded-content="continueData.data"
-                            :show-dropdown="true"
-                            :no-skeleton="true"
-                        />
-                    </transition>
-                </section>
-            </template>
+            
+            <!-- Continue section -->
+            <div v-if="continueSection.length">
+                <MiniCatalogueSection
+                    title="Continue"
+                    seeAllAriaLabel="See All Workouts In Progress"
+                    :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+                    :preLoadedContent="continueSection"
+                    :isMiniView="true"
+                    :show-dropdown="true"
+                    :use-ref-data="true"
+                    trackingSection="continue"
+                />
+            </div>
         </section>
+        
         <br>
+        
         <CollectionWrapper
             :collection-type="collectionType"
             :filterable-values="filterableValues"
-            :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
+            :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
             :pre-loaded-content="workoutData"
             :statuses="statuses"
             :tab-options="tabData"
             :is-admin="isAdmin"
         />
     </div>
+
     <InfoModal v-if="modalType" :self-contained="true" :title="infoText[modalType].title" @onClose="closeModal" class-override="tw-max-w-[600px] tw-w-full">
         <p class="tw-mb-4 dark:tw-text-white">{{ infoText[modalType].content }}</p>
         <div class="tw-flex tw-justify-end">
@@ -105,16 +97,16 @@
 </template>
 
 <script setup>
-// TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
 import { onBeforeMount, ref } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
 import { useCollectionStore } from "@stores/collection";
+import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
 import Tooltip from '@collections/Tooltip/Tooltip';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import InfoModal from "@collections/Modal/InfoModal";
 import MuButton from '@units/Button/MuButton';
@@ -167,18 +159,9 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const modalType = ref(false);
-// const videoModalOpen = ref(false);
-// const videoSrc = ref('');
-//
-// const openVideo = (src) => {
-//     videoSrc.value = src;
-//     videoModalOpen.value = true;
-// }
-//
-// const closeVideo = () => {
-//     videoModalOpen.value = false;
-// }
-//
+const isLoading = ref(true); // Loading state ref
+const continueSection = ref([]); // Ref for storing started lessons
+
 const openModal = (type) => {
     modalType.value = type;
 }
@@ -229,13 +212,29 @@ const tabData = [
     }
 ]
 
-onBeforeMount(() => {
-    collectionStore.setDefaults({
-        tabOptions: tabData,
-        filter: {
-            sort: '-published_on'
-        },
-        queryType: 'workout',
-    });
-})
+onBeforeMount(async () => {
+    isLoading.value = true;
+    try {
+        // Fetch started content (in-progress workouts)
+        const startedIds = await fetchContentInProgress('workout', brand.value);
+        const lessons = await fetchByRailContentIds(startedIds.started);
+        const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+
+        // Set the continue section with started workouts
+        continueSection.value = startedLessons;
+
+        // Set default collection store values
+        collectionStore.setDefaults({
+            tabOptions: tabData,
+            filter: {
+                sort: '-published_on'
+            },
+            queryType: 'workout',
+        });
+    } catch (error) {
+        console.error('Error fetching continue section data:', error);
+    } finally {
+        isLoading.value = false;
+    }
+});
 </script>
