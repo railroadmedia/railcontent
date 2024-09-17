@@ -201,16 +201,16 @@ const OverviewChildData = computed( () => {
 })
 
 onBeforeMount( async () => {
-    console.log('content type is', props.contentType)
-    console.log('headerData', props.headerData.ctas)
-    //console.log('sanity content is: ', props.contentType);
+    // console.log('content type is', props.contentType)
+    // console.log('headerData', props.headerData.ctas)
+    // console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
         data.value = OverviewData.value;
 
         //Header Data
         header.value = OverviewData.value.header;
 
-        console.log('my data', data.value)    
+        //console.log('my data', data.value)    
         platformStore.setLoadingState(OverviewLoading.value);
 
 })

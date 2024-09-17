@@ -53,15 +53,15 @@
                 </template>
             </MiniCatalogueSection>
 
-            <!-- Workouts section -->
-            <MiniCatalogueSection
+            <!-- Workouts section - REMOVING -->
+            <!-- <MiniCatalogueSection
                 v-if="data?.workouts?.length"
                 title="Workouts"
                 seeAllAriaLabel="See All Workouts"
                 :seeAllUrl="`${brand}/workouts`"
                 :preLoadedContent="data.workouts"
                 trackingSection="workouts"
-            />
+            /> -->
 
             <!-- New Releases -->
             <MiniCatalogueSection
@@ -91,8 +91,8 @@
                 trackingSection="live"
             />
 
-            <!-- Upcoming section -->
-            <MiniCatalogueSection
+            <!-- Upcoming section - REMOVING -->
+            <!-- <MiniCatalogueSection
                 v-if="data?.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
@@ -100,7 +100,7 @@
                 :force-no-links="true"
                 :preLoadedContent="data.upcomingEvents"
                 trackingSection="upcoming-events"
-            />
+            /> -->
 
             <template v-if="isPackOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->

@@ -1,6 +1,6 @@
 // hooks/useHomePageData.js
 import { ref } from 'vue';
-import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents } from 'musora-content-services';
+import { fetchNewReleases } from 'musora-content-services';
 
 export async function useHomePageData(brand) {
   const data = ref(null);
@@ -8,16 +8,12 @@ export async function useHomePageData(brand) {
   const isLoading = ref(true);
 
   try {
-    const [workoutsResponse, newReleasesResponse, upcomingEventsResponse] = await Promise.all([
-      fetchWorkouts(brand),
+    const [newReleasesResponse] = await Promise.all([
       fetchNewReleases(brand),
-      fetchUpcomingEvents(brand),
     ]);
   
     data.value = {
-      workouts: workoutsResponse || [],
       newReleases: newReleasesResponse || [],
-      upcomingEvents: upcomingEventsResponse || [],
     };
   } catch (err) {
     console.error('Error fetching data:', err);
