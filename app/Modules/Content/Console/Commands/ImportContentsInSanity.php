@@ -387,7 +387,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         $results = $results->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875,   268094,
                 23313, 23393, 23395, 29663,
-                410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078])
+                410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078, 264279])
             ->orderBy('id','asc')->get();
 
         $songs = [];
@@ -463,7 +463,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $resources       = [];
             $chapters        = [];
             $notImportedData = [];
-            $contentWithWrongImage = [268071, 268097, 268122];
+            $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,382827,391008,382879,391160,
+                399638,                404279, 404299, 401415, 270443,
+                318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
+                382879, 391008, 391160, 401415, 378258, 381186];
             foreach ($result->data as $datum) {
                 $imported = false;
                 if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
@@ -523,7 +526,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $imported                                = true;
                 }
 
-                if ($datum['key'] == 'description') {
+                if ($datum['key'] == 'description' && $type != 'song') {
                     $imported                    = true;
                     $songs[$id]['description'][] = [
                         '_type'    => 'block',
@@ -587,6 +590,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'mp3_yes_piano_yes_click_fast_bpm_url',
                         //unit
                         'header_background_image_url',
+                        'description'
                     ]))) {
                     $notImportedData[] = $datum['key'];
                 }
@@ -663,6 +667,23 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $songs[$id]['gear'] = $field['value'];
                     $imported           = true;
                 }
+                if ($field['key'] == 'length_in_seconds' && $type != 'song') {
+                    $songs[$id]['length_in_seconds'] = $field['value'];
+                    $imported           = true;
+                }
+                if ($field['key'] == 'transcriber_name') {
+                    $transcriber =  preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
+                    $songs[$id]['transcriber_name'] = $transcriber;
+                    $imported           = true;
+                }
+                if ($field['key'] == 'released') {
+                    $songs[$id]['released'] = (int) $field['value'];
+                    $imported           = true;
+                }
+                if ($field['key'] == 'album') {
+                    $songs[$id]['album'] = preg_replace('/[^a-zA-Z0-9_]/', ' ', $field['value']);
+                    $imported           = true;
+                }
 
                 if ($field['key'] == 'video') {
                     $video = Content::with('fields')->where('railcontent_content.id', '=', $field['value'])->first();
@@ -713,8 +734,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'playlist',
                         'instructors',
                         'week',
-                        'released',
-                        'album',
+                      //  'released',
+                      //  'album',
                         'legacy_id',
                         'exercise-book-pages',
                         'cd-tracks',
@@ -724,6 +745,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'difficulty_range',
                         //Foundation unit part
                         'includes_song',
+                        'length_in_seconds'
                     ]))) {
                     $notImportedFields[] = $field['key'];
                 }
@@ -823,7 +845,14 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                             "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
                             "_weak" => false
                         ];
-                    } elseif ($hierarchy->child->type == 'assignment') {
+                    } elseif ($hierarchy->child->type == 'assignment' && $type == 'song') {
+                    $songs[$id]["soundslice"][] = [
+                        'soundslice_title'             => $hierarchy->child->title,
+                        'soundslice_slug'        => $hierarchy->child->soundslice_slug,
+                        'soundslice_length_in_second'       => (isset($songs[$id]['length_in_seconds']))?(int)$songs[$id]['length_in_seconds'] : 0,
+
+                    ];
+                } elseif ($hierarchy->child->type == 'assignment') {
                         unset($songs[$id]['child_count']);
                         $songs[$id]["assignment"][] = [
                             'assignment_title'             => $hierarchy->child->title,
