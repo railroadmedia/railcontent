@@ -209,10 +209,10 @@ return [
             'Better Doubles In 10 Days' => [
                 'custom_attributes' => [],
                 'events' => [
-                    'Prospect Signed Up',
+                    'drumeo_prospect_better-doubles',
                 ],
                 'accounts_to_sync' => [
-                    'musora_prospects',
+                    'musora',
                 ],
             ],
             'Getting Started On The Drums' => [
