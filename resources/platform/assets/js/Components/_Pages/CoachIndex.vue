@@ -52,22 +52,11 @@
             </div>
         </div>
 
-        <!-- Need to integrate with MCS -->
         <!-- Latest Featured Lessons -->
         <div class="tw-mb-[30px]">
             <MiniCatalogueSection
                 title="Latest Featured Lessons"
                 :pre-loaded-content="featuredLessons"
-            />
-        </div>
-        <!-- Need to integrate with MCS -->
-        <!-- From Subscribed Coaches -->
-        <div v-if="followedLessons.length" class="tw-mb-[30px]">
-            <MiniCatalogueSection
-                title="From Subscribed Coaches"
-                :see-all-url="`/${brand}/lessons/subscribed`"
-                seeAllAriaLabel="See All From Subscribed Coaches"
-                :pre-loaded-content="followedLessons"
             />
         </div>
 
@@ -191,11 +180,6 @@ const breadcrumbs = [
 const tabData = [
     {
         value: 'All Coaches',
-        groupByView: false,
-        key: '',
-    },
-    {
-        value: 'Subscribed Coaches',
         groupByView: false,
         key: '',
     },
