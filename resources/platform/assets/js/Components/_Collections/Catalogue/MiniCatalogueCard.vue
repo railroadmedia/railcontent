@@ -98,7 +98,7 @@
 </template>
 <script setup>
 
-import { computed, ref, onBeforeMount } from 'vue';
+import { computed, ref } from 'vue';
 import { PlusIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
@@ -197,8 +197,4 @@ const resetProgress = () => {
     showDropdown.value = false;
     emit('progressReset', { content_id: props.item.id });
 }
-
-onBeforeMount(()=> {
-    console.log('MiniCatalogueCard data:', props.item)
-})
 </script>

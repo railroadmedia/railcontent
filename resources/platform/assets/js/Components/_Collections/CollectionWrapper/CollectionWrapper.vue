@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onMounted } from "vue";
+import { computed } from "vue";
 import { useCollectionStore } from "@stores/collection";
 import {storeToRefs} from "pinia";
 import { useUserStore } from "@stores/user";
@@ -320,8 +320,4 @@ const handleSortChange = (item) => {
 const handleTabChange = (tab) => {
     collectionStore.switchTab(tab);
 }
-
-onMounted( ()=> {
-    console.log('data', data.value)
-})
 </script>
