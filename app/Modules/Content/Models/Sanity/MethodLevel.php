@@ -33,7 +33,8 @@ class MethodLevel extends ParentTemplate
 
         // Define child references
         $coursesChildReference = new Reference([['type' => "learning-path-course"],['type' => "learning-path-lesson"]]);
-        $this->addFields([
+        $this->addFields(
+            [
                              new Field(
                                  FieldType::Array,
                                  'child',
@@ -42,7 +43,7 @@ class MethodLevel extends ParentTemplate
                                  of: $coursesChildReference,
                              ),
                          ],
-                         );
+        );
     }
 
     public static function getName(): string

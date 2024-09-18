@@ -50,7 +50,7 @@ abstract class BaseSanityModel
                 return $field->toArray();
             }, $this->fields)
         ];
-        if($this->preview) {
+        if ($this->preview) {
             $required['preview'] = $this->preview->toArray();
         }
         $optional = [];

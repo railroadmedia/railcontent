@@ -26,10 +26,10 @@ class Archive extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Archives - WIP');
+        parent::__construct(self::getName(), 'Archives');
     }
     public static function getName(): string
     {
-        return 'archive';
+        return 'recording';
     }
 }
