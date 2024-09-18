@@ -27,7 +27,7 @@
             tw-m-0
           "
           :style="
-            'background-image:url( ' + instructor.coach_card_image + ' );'
+            'background-image:url( ' + getCoachImage(instructor) + ' );'
           "
         >
           <div
@@ -154,9 +154,11 @@ export default {
       instructorList: [],
     };
   },
+
   mounted() {
     this.instructorList = [...this.instructors];
   },
+
   methods: {
     showNotificationToast({ icon, text, error }) {
       if (error) {
@@ -221,6 +223,10 @@ export default {
 
     goToCoachProfile(url) {
       window.location.href = `${url}`
+    },
+
+    getCoachImage(instructor){
+        return instructor.coach_card_image || instructor.data?.find(o => o.key === 'coach_card_image')?.value;
     }
   },
 };
