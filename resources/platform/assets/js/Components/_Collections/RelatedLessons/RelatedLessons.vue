@@ -2,7 +2,10 @@
     <aside
       class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
       :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
-      <div class="tw-flex tw-w-full">
+
+      <SkeletonRelatedLessons v-if="isLoading" />
+
+      <div v-else class="tw-flex tw-w-full">
         <div
           class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
           <header class="tw-flex tw-flex-col">
@@ -42,7 +45,10 @@
 
 <script setup>
 import { ref } from 'vue';
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
 import CatalogueListElement from '@collections/Catalogue/CatalogueListElement.vue';
+import SkeletonRelatedLessons from '@collections/SkeletonLoader/SkeletonRelatedLessons';
 
 const props = defineProps({
 isRelatedSectionOpen: {
@@ -54,6 +60,9 @@ relatedLessons: {
   required: true
 },
 });
+
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const isCollapsed = ref(false);
 
