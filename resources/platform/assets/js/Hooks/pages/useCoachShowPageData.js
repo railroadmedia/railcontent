@@ -1,5 +1,6 @@
-import {fetchAll, fetchCoachLessons} from 'musora-content-services';
+import { fetchAll } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
+import { getContentId } from '@hooks/utils';
 
 export async function useCoachShowPageData() {
     const userStore = useUserStore();
@@ -45,10 +46,4 @@ const getBreadcrumbs = (name) => {
             title: name,
         }
     ];
-}
-
-const getContentId = () => {
-    const pathname = window.location.pathname;
-    const match = pathname.match(/\/(\d+)\/?$/);
-    return match ? match[1] : null;
 }
