@@ -110,7 +110,7 @@
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoData?.chapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="!noAccess && !isLoading && videoData.chapters?.length" :chapters="videoData.chapters" @open-slice="openSlice"
+                    <VideoChapters :chapters="videoData.chapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
@@ -425,7 +425,7 @@ onBeforeMount(async() => {
     // const lessons = await fetchNextPreviousLesson(contentId);
 
     //More TODOs
-    // fetch related lessons, comments, 
+    // fetch related lessons, comments,
 
     platformStore.setLoadingState(false);
 })

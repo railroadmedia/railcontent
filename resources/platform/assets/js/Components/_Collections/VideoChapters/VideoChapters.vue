@@ -1,7 +1,7 @@
 <template>
   <SkeletonChapters v-if="isLoading" />
 
-  <div v-else class="tw-flex tw-flex-col">
+  <div v-else-if="chapters.length" class="tw-flex tw-flex-col">
       <div class="tw-flex tw-justify-between tw-items-center tw-mb-[30px]">
           <h3 class="tw-text-2xl tw-leading-[30px] tw-font-bold dark:tw-text-white">Chapters:</h3>
           <button class="btn collapse-square"
