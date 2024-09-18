@@ -99,18 +99,18 @@
                         :report-user-email="userEmail" :report-user-name="userDisplayName" report-recipient="support+question-and-answer@drumeo.com"
                         :difficulty="videoData.difficulty"
                         :is-liked="likeData?.isLiked" :like-count="likeData?.likeCount" :is-completed="isCompleted"
-                        :report-logo="videoResources.reportLogo"
-                         :no-access="noAccess"
-                        :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
-
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent" @on-complete-content="completeContent"
+
+                        :report-logo="videoResources.reportLogo"
+                        :no-access="noAccess"
+                        :show-add-to-list="videoResources.showAddToList" :show-info-button="videoResources.showInfoButton"
                     />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoData?.chapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="!noAccess && videoData.chapters?.length" :chapters="videoData.chapters" @open-slice="openSlice"
+                    <VideoChapters v-if="!noAccess && !isLoading && videoData.chapters?.length" :chapters="videoData.chapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
@@ -423,6 +423,9 @@ onBeforeMount(async() => {
 
     // Not implemented yet in MCS
     // const lessons = await fetchNextPreviousLesson(contentId);
+
+    //More TODOs
+    // fetch related lessons, comments, 
 
     platformStore.setLoadingState(false);
 })
