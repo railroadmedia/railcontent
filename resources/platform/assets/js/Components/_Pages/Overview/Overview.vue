@@ -9,12 +9,11 @@
             :page-type="header?.type"
             :progress="header?.progress"
             :info-data="header?.infoData"
-            :is-loading="!isLoading"
+            :is-loading="isLoading"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
         />
-
 
         <template v-if="!isLoading">
             
@@ -73,15 +72,12 @@
                 <!-- Pianote Foundations -->
                 <a v-if="showPianoteFoundations" href="/pianote/method/foundations-2019/215952"
                    class="flex flex-row no-decoration hover-bg-grey-7 dark:hover:tw-bg-[#002039] tw-relative text-grey-3 hover-text-black content-overview pv-2">
-
                     <div class="flex flex-column">
                         <p class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
                     </div>
-
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
                         10 Levels
                     </div>
-
                     <div class="flex flex-column icon-col align-v-center hide-xs-only">
                         <div class="body">
                             <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] rounded fa-play-circle"></i>
@@ -205,16 +201,16 @@ const OverviewChildData = computed( () => {
 })
 
 onBeforeMount( async () => {
-    console.log('content type is', props.contentType)
-    console.log('headerData', props.headerData.ctas)
-    //console.log('sanity content is: ', props.contentType);
+    // console.log('content type is', props.contentType)
+    // console.log('headerData', props.headerData.ctas)
+    // console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
         data.value = OverviewData.value;
 
         //Header Data
         header.value = OverviewData.value.header;
 
-        console.log('my data', data.value)    
+        //console.log('my data', data.value)    
         platformStore.setLoadingState(OverviewLoading.value);
 
 })

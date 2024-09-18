@@ -1,6 +1,6 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchMethod, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
+import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -19,7 +19,6 @@ export async function useOverviewPageData(contentType) {
 
     try {
         if (contentType === "learning-path-level") {
-            console.log('hello');
             const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
             if (result) {
                 result.levels = result.levels.map((level, index) => ({
@@ -44,6 +43,7 @@ export async function useOverviewPageData(contentType) {
                 throw new Error('Failed to fetch foundation');
             }
         } else {
+            //This also works for course-part pages
             const result = await fetchMethodChildren(contentId);
             if (result) {
                 data.value = result[0];

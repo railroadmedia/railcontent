@@ -13,27 +13,19 @@
         :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
       />
 
-      <template v-if="showInProgress">
-        <div class="tw-flex tw-items-center tw-mt-[30px] tw-mb-4 tw-w-full tw-justify-between">
-          <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-            <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Continue</h2>
-          </a>
-          <a :href="`/${brand}/lesson-history/in-progress`"
-             aria-label="See All Subscribed Lessons"
-             class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-            See All
-          </a>
-        </div>
-        <transition appear name="fade">
-          <CatalogueCardContainer
-            :theme-color="brand"
-            catalogue-type="grid"
-            no-results-message="Looks like you haven't started any lessons. Once you watch a video, it will show up here for you to access later."
-            :pre-loaded-content="startedLessons"
-            :no-skeleton="true"
-          />
-        </transition>
-      </template>
+      <!-- Continue section -->
+      <div v-if="continueSection.length" class="tw-mt-[30px]">
+        <MiniCatalogueSection
+            title="Continue"
+            seeAllAriaLabel="See All Lessons In Progress"
+            :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+            :preLoadedContent="continueSection"
+            :isMiniView="true"
+            :show-dropdown="true"
+            :use-ref-data="true"
+            trackingSection="continue"
+        />
+      </div>
 
       <div class="tw-mt-[30px]">
         <PlayAlongs
@@ -68,9 +60,9 @@
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
-  import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+  import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
   const props = defineProps({
     hasStartedLessons: Boolean,
@@ -92,6 +84,7 @@
   const { brand } = storeToRefs(userStore);
 
   const onLoadData = ref([]);
+  const continueSection = ref([]);
 
   const recommendedProps = computed(() => {
     const recommended = {};
@@ -118,13 +111,26 @@
   })
 
   onBeforeMount(async() => {
+    try {
+      // Fetch started content (in-progress workouts)
+      const startedIds = await fetchContentInProgress(props.lessonType, brand.value);
+      const lessons = await fetchByRailContentIds(startedIds.started);
+      const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+
+      // Set the continue section with started workouts
+      continueSection.value = startedLessons;
+
+      // Set default collection store values
       collectionStore.setDefaults({
-          tabOptions: tabData.value,
-          filter: {
-              sort: '-published_on'
-          },
-          queryType: props.lessonType,
-          ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
+        tabOptions: tabData.value,
+        filter: {
+            sort: '-published_on'
+        },
+        queryType: props.lessonType,
+        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
       });
+    } catch (error) {
+        console.error('Error fetching continue section data:', error);
+    }
   })
   </script>

@@ -170,7 +170,6 @@ class HomePageController extends BaseController
 
         $collectionForDecoration = new RailcontentCollection();
         $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
-        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
 

@@ -131,7 +131,7 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
@@ -151,7 +151,7 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
