@@ -246,7 +246,9 @@ class ContentService
                 $zippered = zipperMerge($toZipper);
                 $numGroups += 1;
                 $totalCount += count($zippered);
+                $zippered = $this->contentRepository->getByIds($zippered);
                 $zippered = $this->paginateRecommendations($zippered, $pageSize, $page);
+                $zippered = Decorator::decorate($zippered, 'group');
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
                     'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
@@ -274,6 +276,7 @@ class ContentService
         } else {
             $recommendations = zipperMerge($recommendations);
             $totalCount = count($recommendations);
+            $recommendations = $this->contentRepository->getByIds($recommendations);
             $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
             return [
                 'recommendations' => $recommendations,
@@ -302,21 +305,12 @@ class ContentService
 
     private function getContentFilterResultsFromRecommendations($recommendations, $isGroupedBy)
     {
-        if ($isGroupedBy) {
-            foreach($recommendations['recommendations'] as $index => $groupedBy) {
-                $recommendations['recommendations'][$index]['lessons'] = $this->getByIds($groupedBy['lessons']);
-            }
-            $content = $recommendations['recommendations'];
-            $content = Decorator::decorate($content, 'group');
-        } else {
-            $content = $this->getByIds($recommendations['recommendations']);
-        }
         $filterOptions = [
             "type" => ["Recommendation"],
         ];
 
         return (new ContentFilterResultsEntity([
-            'results' => $content,
+            'results' => $recommendations['recommendations'],
             'filter_options' => $filterOptions,
             'total_results' => $recommendations['totalCount'],
             'total_lessons' => $recommendations['totalLessons'] //TODO this needs to be updated for groupBy
