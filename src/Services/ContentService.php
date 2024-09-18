@@ -248,10 +248,11 @@ class ContentService
                 $totalCount += count($zippered);
                 $zippered = $this->contentRepository->getByIds($zippered);
                 $zippered = $this->paginateRecommendations($zippered, $pageSize, $page);
+                $servedIds = $zippered->pluck('id')->toArray();
                 $zippered = Decorator::decorate($zippered, 'group');
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
-                    'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
+                    'lessons_grouped_by_field' => implode(',', $servedIds),
                     'type' => 'recommended',
                     'recommended' => $index,
                     'id' => $index,
