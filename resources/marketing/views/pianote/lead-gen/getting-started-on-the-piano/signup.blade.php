@@ -1,6 +1,8 @@
 @extends('pianote.lead-gen.lead-gen-layout-tw',[
     'appTailwind' => true,
+    'subscriptionVersion' => true,
     'hideMenu' => true,
+    'scrollToJoin' => true,
     ])
 
 @section('meta')
@@ -126,12 +128,12 @@
 @endsection
 
 @section('page-body')
-<div class="px-2 sm:px-0 w-full z-[60] sticky top-[40px] md:top-[56px] py-2" style="background: rgba(2, 8, 21, 0.93);">
+{{-- <div class="px-2 sm:px-0 w-full z-[60] sticky top-[40px] md:top-[56px] py-2" style="background: rgba(2, 8, 21, 0.93);">
     <div class="sm:pr-10 md:pr-20 flex items-center justify-center md:justify-end">
         <a class="join smaller sticky-button w-11/12 sm:max-w-[200px] anchor-slide top-0" href="#course" style="background:transparent;">Course Outline</a>
         <a class="join smaller sticky-button w-11/12 sm:max-w-[240px] bg-pianote anchor-slide" href="#final">Get Started</a>
     </div>
-</div>
+</div> --}}
     <header class="px-5 sm:px-6 pt-10 sm:pt-14 pb-20 md:pb-24 lg:py-20" style="background:#f1f7fe;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -309,7 +311,7 @@
                         <br><br>
                         Getting Started on the Piano is carefully structured as slow, 1-on-1 play-along sessions you can easily follow. We’ll show you EXACTLY what to do, helping you build confidence as you progress.
                     </p>
-                    <a class="join smaller w-full sm:max-w-[350px] bg-pianote anchor-slide" href="#final">GET STARTED FOR FREE</a>
+                    <a class="join smaller w-full sm:max-w-[350px] bg-pianote anchor-slide" href="#customize-anchor">GET STARTED FOR FREE</a>
                 </div>
             </div>
         </div>
@@ -404,7 +406,7 @@
                 @endforeach
             </div>
         </div>
-        <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="#final">GET STARTED FOR FREE</a>
+        <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="#customize-anchor">GET STARTED FOR FREE</a>
     </section>
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
@@ -523,7 +525,6 @@
         </div>
     </section>
 
-
         @php
         $testimonials = [
             [
@@ -600,7 +601,7 @@
         </div>
     </section>
 
-    <div id="final" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="text-center customize px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#EFF7FF;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center md:text-left w-full md:w-1/2 sm:pl-5 lg:pl-0">
