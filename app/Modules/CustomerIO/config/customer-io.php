@@ -122,7 +122,7 @@ return [
                     'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
-                    'musora_prospects',
+                    'musora_prospects', 
                 ],
             ],
             'Kristinas Top 25' => [
@@ -209,10 +209,10 @@ return [
             'Better Doubles In 10 Days' => [
                 'custom_attributes' => [],
                 'events' => [
-                    'drumeo_prospect_better-doubles',
+                    'Prospect Signed Up',
                 ],
                 'accounts_to_sync' => [
-                    'drumeo',
+                    'musora_prospects',
                 ],
             ],
             'Getting Started On The Drums' => [
