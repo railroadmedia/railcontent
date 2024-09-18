@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
+    <div class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2 tw-w-full">
         <div class="tw-flex tw-flex-col tw-flex-grow comments-container tw-w-full lg:tw-mb-6 tw-animate-pulse">
             <!-- Title Section -->
             <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap tw-py-6 tw-items-center">
