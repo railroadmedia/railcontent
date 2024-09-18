@@ -27,7 +27,7 @@
             tw-m-0
           "
           :style="
-            'background-image:url( ' + instructor.coach_profile_image + ' );'
+            'background-image:url( ' + instructor.coach_card_image + ' );'
           "
         >
           <div
@@ -52,7 +52,7 @@
             </svg>
           </div>
           <div
-            v-on:click="goToCoachProfile(instructor.url)"
+            v-on:click="goToCoachProfile(instructor.web_url_path)"
             class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500 tw-border-2"
           ></div>
         </div>
@@ -69,7 +69,7 @@
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer tw-z-10">
+        <h4 v-on:click="goToCoachProfile(instructor.web_url_path)" class="tw-cursor-pointer tw-z-10">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
