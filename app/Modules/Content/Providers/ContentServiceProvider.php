@@ -29,6 +29,7 @@ class ContentServiceProvider extends ServiceProvider
 
         ContentField::observe(ContentFieldObserver::class);
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**
