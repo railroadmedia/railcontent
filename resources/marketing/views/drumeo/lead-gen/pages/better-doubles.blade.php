@@ -57,6 +57,7 @@ input#sign-up-email {
                     'stacked' => true,
                     "redirectURL" => "/thankyou",
                     "recaptchaKey" => $recaptchaKey,
+                    "minimalForm" => true,
                     
                 ])
                 </div>
