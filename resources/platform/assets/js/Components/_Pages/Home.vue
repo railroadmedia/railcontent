@@ -35,14 +35,14 @@
         />
 
         <!-- Recommended section -->
-<!--        <MiniCatalogueSection-->
-<!--            v-if="recommendedContent.data.length"-->
-<!--            title="Inspired By Your Activity"-->
-<!--            seeAllAriaLabel="See All Content"-->
-<!--            :seeAllUrl="recommendedContentUrl"-->
-<!--            :preLoadedContent="recommendedContent"-->
-<!--            trackingSection="recommended"-->
-<!--        />-->
+        <MiniCatalogueSection
+            v-if="recommendedContent.data.length"
+            title="Inspired By Your Activity"
+            seeAllAriaLabel="See All Content"
+            :seeAllUrl="recommendedContentUrl"
+            :preLoadedContent="recommendedContent.data"
+            trackingSection="recommended"
+        />
 
         <!-- Workouts section -->
         <MiniCatalogueSection
