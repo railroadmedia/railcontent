@@ -14508,7 +14508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.0.101":
+"musora-content-services@npm:^1.0.102":
   version: 1.0.102
   resolution: "musora-content-services@npm:1.0.102"
   dependencies:
@@ -17279,7 +17279,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-content-services: "npm:^1.0.101"
+    musora-content-services: "npm:^1.0.102"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
