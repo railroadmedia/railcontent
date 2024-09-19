@@ -4238,8 +4238,8 @@ __metadata:
   linkType: hard
 
 "@rechargeapps/storefront-client@npm:^1.18.3":
-  version: 1.22.3
-  resolution: "@rechargeapps/storefront-client@npm:1.22.3"
+  version: 1.23.0
+  resolution: "@rechargeapps/storefront-client@npm:1.23.0"
   dependencies:
     isomorphic-fetch: "npm:3.0.0"
     js-xdr: "npm:1.3.0"
@@ -4247,7 +4247,7 @@ __metadata:
     lodash.partial: "npm:4.2.1"
     nanoid: "npm:3.3.7"
     qs: "npm:6.11.2"
-  checksum: 10c0/b0192fd2b27f5fde654968b631c6f4273f901136ec80d9a9f98784dbb2ab5c811f4e0ddf7cf934806674847ead31cf03e81c9658ce6b5ba1913d215a92d395f8
+  checksum: 10c0/d73012500726bda5579892d31b56d22272c8aebb6e64558445c95db2cb8347b2a30d340ff2adc63ab924467e718649616fddbfb927a887e631a4f300ab4e5382
   languageName: node
   linkType: hard
 
@@ -7826,9 +7826,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001646":
-  version: 1.0.30001660
-  resolution: "caniuse-lite@npm:1.0.30001660"
-  checksum: 10c0/d28900b56c597176d515c3175ca75c454f2d30cb2c09a44d7bdb009bb0c4d8a2557905adb77642889bbe9feb85fbfe9d974c8b8e53521fb4b50ee16ab246104e
+  version: 1.0.30001662
+  resolution: "caniuse-lite@npm:1.0.30001662"
+  checksum: 10c0/4af44610db30b9e63443d984be9d48ab93eef584609b3e87201c10972b9daff0b52674e3ed01f7b7b240460763428a3aa8ef7328d14b76ed31ed464203677007
   languageName: node
   linkType: hard
 
@@ -14508,16 +14508,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.0.101":
-  version: 1.0.102
-  resolution: "musora-content-services@npm:1.0.102"
+"musora-content-services@npm:^1.0.105":
+  version: 1.0.105
+  resolution: "musora-content-services@npm:1.0.105"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/c2d7cafa16e87fb3b061ff43eff9ea5bbf072d22cd06d5f9b90a798d529d0e56f2c3dd89fd79b00bbe78f6d95ece673d6db3488189326057d230d2da79ed9aca
+  checksum: 10c0/c7700b7e49168a5f224092aea2a8d01c4ca47ba992df0558236363e8d5bec70214bcd0c28614115e2a12b4ae97b487ba648ff12fef3cd50538ff233727481a0e
   languageName: node
   linkType: hard
 
@@ -17279,7 +17279,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-content-services: "npm:^1.0.101"
+    musora-content-services: "npm:^1.0.105"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
