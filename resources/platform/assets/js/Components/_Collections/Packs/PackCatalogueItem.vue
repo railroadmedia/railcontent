@@ -161,11 +161,6 @@ const releaseDate = computed(() => {
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
 })
 
-const logo = computed(() => {
-    const url = props.pack.data && props.pack.data.find((d) => d.key === 'logo_image_url');
-    return url && url.value;
-})
-
 const title = computed(() => {
     return props.pack.title;
 })
@@ -276,6 +271,6 @@ const logoStyle = computed(() => {
 })
 
 onBeforeMount( () => {
-    console.log('props.pack', props.pack)
+    //console.log('props.pack', props.pack)
 })
 </script>
