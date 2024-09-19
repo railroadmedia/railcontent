@@ -57,6 +57,7 @@
   import { storeToRefs } from "pinia/dist/pinia";
   import { useCollectionStore } from "@stores/collection";
   import { useUserStore } from "@stores/user";
+  import { queryTypeConverter} from "@pages/Catalogue/queryTypeConverter";
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
@@ -111,6 +112,8 @@
   })
 
   onBeforeMount(async() => {
+    console.log(props.lessonType)
+
     try {
       // Fetch started content (in-progress workouts)
       const startedIds = await fetchContentInProgress(props.lessonType, brand.value);
@@ -126,7 +129,7 @@
         filter: {
             sort: '-published_on'
         },
-        queryType: props.lessonType,
+        queryType: queryTypeConverter(props.lessonType),
         ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
       });
     } catch (error) {
