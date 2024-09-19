@@ -71,7 +71,7 @@ class Field
             $optional['to'] = ['type' => $this->to];
         }
         if (!empty($this->of)) {
-            if(!is_array($this->of)) {
+            if (!is_array($this->of)) {
                 $optional['of'] = [$this->of];
             } else {
                 $optional['of'] = $this->of;

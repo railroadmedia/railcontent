@@ -35,21 +35,6 @@
         <span class="tw-mt-1">HOUSE</span>
       </div>
     </div>
-
-    <!-- Subscribe To Coach -->
-    <button
-      class="tw-btn-primary tw-btn-small tw-h-6 tw-w-6 tw-p-0 tw-absolute tw-right-1 tw-top-1 tw-transitoin-all group-hover:tw-rotate-[15deg] tw-origin-center"
-      :title="item.current_user_is_subscribed ? 'Unsubscribe From Coach' : 'Subscribe to Coach'"
-      :class="
-        item.current_user_is_subscribed
-          ? 'tw-bg-yellow-500'
-          : 'tw-bg-[#00101d] tw-opacity-40'
-      "
-      @click.prevent="updateCoachSubscription(item.id)"
-    >
-      <i class="fas fa-bell tw-text-base"></i>
-    </button>
-
   </a>
 </template>
 <script>

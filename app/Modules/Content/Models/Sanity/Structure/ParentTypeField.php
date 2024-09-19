@@ -17,7 +17,8 @@ class ParentTypeField extends Field
      * @param  string $initialValue
      * @param Group|array<Group>|null $group
      */
-    public function __construct(string $initialValue, Group|array|null $group = null,) {
+    public function __construct(string $initialValue, Group|array|null $group = null)
+    {
         parent::__construct(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group: $group, initialValue: $initialValue);
     }
 

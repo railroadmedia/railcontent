@@ -222,12 +222,12 @@ class SanityStudioCMSController extends BaseController
         if ($request->get('_type') === 'permission') {
             $permissionService = app()->make(PermissionService::class);
             $permission = $permissionService->getByName($request->get('name'));
-            if(!$permission) {
+            if (!$permission) {
                 $permission = $permissionService->create($request->get('name'), $request->get('brand'));
             }
             return $permission;
         } else {
-            if($request->has('railcontent_id')) {
+            if ($request->has('railcontent_id')) {
                 $content = Content::query()
                     ->where('type', '=', $request->get('_type'))
                     ->where('id', '=', $request->get('railcontent_id'))
