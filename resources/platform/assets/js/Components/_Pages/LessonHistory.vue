@@ -6,56 +6,46 @@
             iconName="bookmark"
             title="Lesson History"
         ></PageHeader>
-        
+
         <div class="tw-mt-[30px]">
             <CollectionWrapper
-                :collection-type="collectionType"
-                :hide-controls="false"
-                :hide-search="hideSearch"
-                :hide-sort-icon="hideSortIcon"
-                :included-types="includedTypes"
+                collection-type="history"
                 :multiple-types="true"
-                :pre-loaded-content="preLoadedContent"
-                :show-reset-progress="showResetProgress"
-                :tab-options="tabOptions"
+                :show-reset-progress="true"
+                :tab-options="tabData"
             />
         </div>
     </div>
 </template>
 <script setup>
+import { onBeforeMount } from "vue";
+import { useCollectionStore } from "@stores/collection";
 import CollectionWrapper from "@collections/CollectionWrapper/CollectionWrapper";
 import PageHeader from "@collections/PageHeader/PageHeader.vue";
 import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 
-const props = defineProps({
-    collectionType: {
-        type: String,
-        default: () => '',
-    },
-    hideSearch: {
-        type: Boolean,
-        default: false,
-    },
-    hideSortIcon: {
-        type: Boolean,
-        default: false,
-    },
-    includedTypes: {
-        type: Array,
-        default: () => [],
-    },
-    preLoadedContent: {
-        type: Object,
-        default: () => {},
-    },
-    showResetProgress: {
-        type: Boolean,
-        default: false,
-    },
-    tabOptions: {
-        type: Array,
-        default: () => [],
-    },
+const collectionStore = useCollectionStore();
 
+const tabData = [
+    {
+        value: 'In Progress',
+        groupByView: false,
+        key: 'inProgress',
+    },
+    {
+        value: 'Completed',
+        groupByView: false,
+        key: 'completed',
+    },
+];
+
+onBeforeMount(() => {
+    collectionStore.setDefaults({
+        tabOptions: tabData,
+        filter: {
+            sort: '-published_on'
+        },
+        fetchType: 'lessonHistory',
+    });
 })
 </script>
