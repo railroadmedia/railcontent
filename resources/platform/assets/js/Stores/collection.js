@@ -4,6 +4,7 @@ import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
 import { fetchAll, fetchCoachLessons } from 'musora-content-services';
+import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 
 const { getFilterValues } = useFilterValues();
 
@@ -98,7 +99,13 @@ export const useCollectionStore = defineStore({
                         limit: this.filter.limit,
                         searchTerm: this.filter.searchTerm,
                     })
-                }
+                },
+                'lessonHistory': await useLessonHistoryPageData(this.tabData[this.filter.activeTab].key, {
+                    page: this.tabData[this.filter.activeTab].currentPage,
+                    limit: this.filter.limit,
+                    sort: this.filter.sort,
+                    searchTerm: this.filter.searchTerm,
+                }),
             }
 
             if(endpoints[type]){
@@ -108,6 +115,7 @@ export const useCollectionStore = defineStore({
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
                     sort: this.filter.sort,
+                    limit: this.filter.limit,
                     groupBy: this.getGroupBy(),
                     includedFields: this.getIncludedFields(),
                 })
@@ -135,7 +143,8 @@ export const useCollectionStore = defineStore({
                 //         })
                 // return response;
 
-                const response = this.getEndpoint(this.fetchType);
+                const response = await this.getEndpoint(this.fetchType);
+                console.log(response)
 
                 return response;
             } catch (e) {
