@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <div class="tw-flex tw-items-start tw-justify-between tw-mb-4 tw-flex-wrap">
+    <SkeletonVideoResources v-if="isPageLoading" />
 
+    <div v-else>
+        <div class="tw-flex tw-items-start tw-justify-between tw-mb-4 tw-flex-wrap">
             <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
                 <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
@@ -61,13 +62,13 @@
                 <div class="flex flex-column resource-button tw-pr-2">
                     <button
                         class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
-                        :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
-                        :title="hasLiked ? 'Unlike' : 'Like'"
+                        :class="isLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
+                        :title="isLiked ? 'Unlike' : 'Like'"
                         @click="likeContent"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
-                            <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mr-1" />
-                            {{ totalLikes }}
+                            <musora-icon :icon-name="isLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mr-1" />
+                            {{ likeCount }}
                         </div>
                     </button>
                 </div>
@@ -107,16 +108,16 @@
                         @click="handleCompleteLesson"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
-                            <musora-icon :icon-name="completed ? 'circle-check-filled' : 'circle-check'" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" :class="completed ? 'tw-text-[#16A34A]' : ''" />
+                            <musora-icon :icon-name="isCompleted ? 'circle-check-filled' : 'circle-check'" class="tw-w-6 tw-h-6 tw-mr-1 tw-transition-all" :class="isCompleted ? 'tw-text-[#16A34A]' : ''" />
                             <span>
-                                {{ completed ? "Completed" : "Complete" }}
+                                {{ isCompleted ? "Completed" : "Complete" }}
                             </span>
                         </div>
                     </button>
                 </div>
 
                 <!-- Resources Button -->
-                <div v-if="resources.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
+                <div v-if="resources?.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
                     <button
                         class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Download Resources"
@@ -165,7 +166,7 @@
                         v-click-outside="clickOutSideDropdown"
                     >
                         <!-- Resources -->
-                        <li v-if="resources.length > 0 && !showResourceButton()" class="tw-group tw-relative">
+                        <li v-if="resources?.length > 0 && !showResourceButton()" class="tw-group tw-relative">
                             <button
                                 class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm"
                             >
@@ -237,13 +238,13 @@
 
                         <div class="form-group mb-2">
                             <div class="flex flex-row form-group align-v-center">
-                <span class="toggle-input mr-1">
-                  <input id="includeTimecode" v-model="useTimecode" type="checkbox" readonly />
+                                <span class="toggle-input mr-1">
+                                  <input id="includeTimecode" v-model="useTimecode" type="checkbox" readonly />
 
-                  <span class="toggle">
-                    <span class="handle"></span>
-                  </span>
-                </span>
+                                  <span class="toggle">
+                                    <span class="handle"></span>
+                                  </span>
+                                </span>
 
                                 <label for="includeTimecode" class="toggle-label pointer dense uppercase font-bold tiny">
                                     Start at Current Time
@@ -265,6 +266,8 @@
 
 <script>
 // TODO: REFACTOR THE MODAL OF THIS COMPONENT!
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
 import ContentService from "../../assets/js/Services/content";
@@ -276,6 +279,7 @@ import { FlagIcon } from "@heroicons/vue/outline";
 import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
+import SkeletonVideoResources from '@collections/SkeletonLoader/SkeletonVideoResources';
 
 export default {
     name: "VideoResources",
@@ -287,6 +291,7 @@ export default {
         FlagIcon,
         DifficultyLabel,
         DotSeparator,
+        SkeletonVideoResources,
     },
     mixins: [ThemeClasses],
     props: {
@@ -320,22 +325,12 @@ export default {
             default: () => "",
         },
 
-        parentTitle: {
-            type: String,
-            default: () => null,
-        },
-
         instructors: {
             type: Array,
             default: () => [],
         },
 
         isLiked: {
-            type: Boolean,
-            default: () => false,
-        },
-
-        isAdded: {
             type: Boolean,
             default: () => false,
         },
@@ -390,9 +385,9 @@ export default {
             default: {},
         },
 
-        lesson: {
-            type: Object,
-            default: {},
+        isCompleted: {
+            type: Boolean,
+            default: () => false,
         },
 
         reportLogo: {
@@ -424,13 +419,9 @@ export default {
     data() {
         return {
             resourceDropdown: false,
-            hasLiked: this.isLiked,
-            totalLikes: this.likeCount,
-            hasAdded: this.isAdded,
             useTimecode: true,
             showShareModal: false,
             showReportModal: false,
-            completed: this.lesson.completed,
             openInfo: false,
             showMore: false,
             showLeftArrow: false,
@@ -455,6 +446,12 @@ export default {
                 return this.artist;
             }
             return this.instructors.length > 0 ? this.instructors[0].name : this.brand.toUpperCase();
+        },
+        isPageLoading(){
+            const platformStore = usePlatformStore();
+            const { isLoading } = storeToRefs(platformStore);
+
+            return isLoading.value;
         }
     },
     mounted() {
@@ -486,16 +483,10 @@ export default {
             this.showShareModal = !this.showShareModal;
         },
         likeContent() {
-            this.hasLiked = !this.hasLiked;
-
-            if (this.hasLiked) {
-                this.totalLikes += 1;
-            } else {
-                this.totalLikes -= 1;
-            }
+            this.$emit('onLikeContent');
 
             ContentService.likeContentById({
-                is_liked: this.hasLiked,
+                is_liked: !this.isLiked,
                 content_id: this.contentId,
                 user_id: this.userId,
             });
@@ -516,7 +507,7 @@ export default {
 
         handleCompleteLesson() {
             //Send Request
-            if (this.completed) {
+            if (this.isCompleted) {
                 ContentService.resetContentProgress(this.contentId)
                     .then((resolved) => {
                         if (resolved) {
@@ -533,7 +524,7 @@ export default {
                 });
             } else {
                 ContentService.markContentAsComplete(this.contentId).then(() => {
-                    if (this.completed) {
+                    if (this.isCompleted) {
                         window.shownotification({
                             icon: 'check',
                             text: `You've completed this lesson!`
@@ -548,7 +539,7 @@ export default {
 
             }
 
-            this.completed = !this.completed;
+            this.$emit('onCompleteContent');
         },
 
         getResourceIcon(resource) {

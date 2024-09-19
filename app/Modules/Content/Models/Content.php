@@ -776,12 +776,13 @@ class Content extends Model
         }
     }
 
-    public function setAssignments($value){
-        if(is_array($value)){
-            foreach ($value as $index=>$assignmentData){
-                if (isset($assignmentData['railcontent_id'])){
+    public function setAssignments($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $index => $assignmentData) {
+                if (isset($assignmentData['railcontent_id'])) {
                     $assignment = Content::where('id', '=', $assignmentData['railcontent_id'])->get();
-                    if($assignment->isEmpty()){
+                    if ($assignment->isEmpty()) {
                         $assignment = new Content();
                         $assignment->title = $assignmentData['assignment_title'];
                         $assignment->type = 'assignment';
@@ -796,7 +797,7 @@ class Content extends Model
                         $assignment->setDescription($assignmentData['assignment_description']);
                         $assignment->setParentId($this->id);
                     }
-                }else{
+                } else {
                     $assignment = new Content();
                     $assignment->title = $assignmentData['assignment_title'];
                     $assignment->type = 'assignment';
@@ -807,7 +808,7 @@ class Content extends Model
                     $assignment->brand      = $this->brand;
                     $assignment->soundslice_slug = $assignmentData['assignment_soundslice'];
                     $assignment->save();
-$value[$index]['railcontent_id'] = $assignment->id;
+                    $value[$index]['railcontent_id'] = $assignment->id;
                     $assignment->setParentId($this->id);
                     $assignment->setDescription($assignmentData['assignment_description']);
                 }

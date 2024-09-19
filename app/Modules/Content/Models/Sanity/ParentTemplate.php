@@ -83,7 +83,7 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
         ];
-        if($this->withTrailer) {
+        if ($this->withTrailer) {
             $video               = new ListObject(
                 fields: [
                             new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
@@ -95,7 +95,7 @@ abstract class ParentTemplate extends BaseSanityModel
                 new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
             ]);
         }
-        if($this->withEnrollment) {
+        if ($this->withEnrollment) {
             $fields = array_merge($fields, [
             new Field(FieldType::Datetime, 'enrollment_start_time', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
                              new Field(FieldType::Datetime, 'enrollment_end_time', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
@@ -115,20 +115,20 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Number, 'child_count', 'Child count', group:$detailsGroup, hidden: "true"),
         ]);
-        if($this->childType) {
+        if ($this->childType) {
             $childReference = new Reference([['type' => $this->childType]]);
             $fields = array_merge($fields, [
                 new Field(FieldType::Array, 'child', ($this->childName ?? 'Lessons'), of: $childReference, group:$detailsGroup),
             ]);
         }
-        if($this->withLogos) {
+        if ($this->withLogos) {
             $fields = array_merge($fields, [
             new Field(FieldType::Image, 'logo_image_url', 'Pack Logo', group:$detailsGroup),
                                      new Field(FieldType::Image, 'dark_mode_logo_url', 'Dark Logo', group:$detailsGroup),
                                      new Field(FieldType::Image, 'light_mode_logo_url', 'Light Logo', group:$detailsGroup)
                 ]);
         }
-        if($this->withResources) {
+        if ($this->withResources) {
             $resourceList = new ListObject(
                 fields: [new Field(FieldType::String, 'resource_name'),
                             new Field(FieldType::URL, 'resource_url')],
@@ -145,7 +145,7 @@ abstract class ParentTemplate extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ]);
-        if($this->parentType) {
+        if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
         }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');

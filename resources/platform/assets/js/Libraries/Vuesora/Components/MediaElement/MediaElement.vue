@@ -177,14 +177,6 @@ export default {
             type: String,
             default: null,
         },
-        isLiked: {
-            type: Boolean,
-            default: false,
-        },
-        likeCount: {
-            type: [Number, String],
-            default: 0,
-        },
         chapters: {
             type: Array,
             default: [],

@@ -26,16 +26,24 @@
       </button>
     </div>
   </template>
-  
+
   <script setup>
+  import { storeToRefs } from "pinia/dist/pinia";
+  import { usePlatformStore } from "@stores/platform";
+
   const props = defineProps({
     relatedLessons: Object,
     isRelatedSectionOpen: Boolean
   });
-  
+
+  const platformStore = usePlatformStore();
+  const { isLoading } = storeToRefs(platformStore);
+
   const emit = defineEmits(['update:isRelatedSectionOpen']);
-  
+
   const toggleRelatedSection = () => {
-    emit('update:isRelatedSectionOpen', !props.isRelatedSectionOpen);
+    if(!isLoading.value){
+        emit('update:isRelatedSectionOpen', !props.isRelatedSectionOpen);
+    }
   };
   </script>
