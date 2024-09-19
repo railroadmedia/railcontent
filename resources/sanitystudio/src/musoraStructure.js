@@ -8,7 +8,7 @@ export const musoraStructure = async (S, context) => {
             'backstage-secret', 'sonor', 'tama', 'drum-fest-international-2022', 'diy-drum-experiment', 'in-rhythm', 'spotlight', 'the-history-of-electronic-drums',
             'student-collaboration', 'behind-the-scenes', 'rhythms-from-another-planet', 'study-the-greats', 'exploring-beats', 'paiste-cymbals',
             'on-the-road', 'live', 'podcast', 'performance', 'rhythmic-adventures-of-captain-carson', 'solo', 'gear-guide', 'challenges','question-and-answer',
-            'archive', 'boot-camp'
+            'archive', 'boot-camp','recording'
         ];
         const extra = ['challenge-part','foundation','learning-path','learning-path-level','learning-path-course','learning-path-lesson','course-part','unit','unit-part','semester-pack-lesson','song-tutorial-children','pack-bundle-lesson','pack-bundle', 'media.tag', 'assist.instruction.context'];
         //'topic', 'essential', 'creativity', 'lifestyle', 'theory',

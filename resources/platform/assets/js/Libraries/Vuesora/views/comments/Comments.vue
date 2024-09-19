@@ -1,5 +1,7 @@
 <template>
-    <div id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full lg:tw-mb-6">
+    <CommentSkeleton v-if="isPageLoading" />
+
+    <div v-else id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full lg:tw-mb-6">
         <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap tw-py-6 tw-items-center">
             <div class="tw-w-full tw-flex-wrap tw-text-[#00101D] dark:tw-text-white tw-flex tw-items-center">
                 <!-- Preview Cards -->
@@ -126,6 +128,8 @@
 </template>
 <script>
 import axios from 'axios';
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
 import * as QueryString from 'query-string';
 import TextEditor from '../../Components/TextEditor/TextEditor.vue';
 import CommentService from '../../assets/js/Services/comments';
@@ -137,6 +141,7 @@ import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import MuButton from '../../../../Components/_Units/Button/MuButton';
 import { textColor } from '@constants/brands'
+import CommentSkeleton from '@collections/SkeletonLoader/CommentSkeleton';
 
 export default {
     name: 'Comments',
@@ -145,6 +150,7 @@ export default {
         'comment-post': CommentPost,
         'comment-likes-modal': CommentLikesModal,
         'MuButton': MuButton,
+        'CommentSkeleton': CommentSkeleton,
         // 'wysiwyg-editor': WYSIWYGEditor,
     },
     mixins: [ThemeClasses, CommentMixin],
@@ -262,6 +268,13 @@ export default {
 
         sortIcon() {
             return this.sortOptions.find(option => option.value === this.sortOption).icon;
+        },
+
+        isPageLoading(){
+            const platformStore = usePlatformStore();
+            const { isLoading } = storeToRefs(platformStore);
+
+            return isLoading.value;
         },
     },
     mounted() {

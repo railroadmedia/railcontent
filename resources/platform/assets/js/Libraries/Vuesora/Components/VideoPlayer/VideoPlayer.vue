@@ -1067,7 +1067,7 @@ const currentTimeInSeconds = computed({
         return currentTime.value;
     },
 });
-  
+
 const endCallback = () => {
     const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
     const isInPlaybackMode = window.location.href.includes('playlist-item');
@@ -1340,4 +1340,3 @@ const {
             :ranges="Object.keys(ranges)" @setRange="setRange"></PlayerRanges>
     </div>
 </template>
-../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js../../assets/js/Services/content.js./player-utils.js./chromecast.js../../assets/js/Services/intercom.js../../assets/js/Services/helpscout.js
