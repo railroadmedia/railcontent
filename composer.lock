@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ea294862af900598937ed4f62535bff",
+    "content-hash": "62476939e6027caa5706f52501c77c55",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10353,16 +10353,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.8",
+            "version": "dev-defaultLimit",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "879bbe86d49f9f040ee23717b6ecc8764fa2f8dc"
+                "reference": "5b4651f2e118b938d51027b0753dba67880e793e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/879bbe86d49f9f040ee23717b6ecc8764fa2f8dc",
-                "reference": "879bbe86d49f9f040ee23717b6ecc8764fa2f8dc",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5b4651f2e118b938d51027b0753dba67880e793e",
+                "reference": "5b4651f2e118b938d51027b0753dba67880e793e",
                 "shasum": ""
             },
             "require": {
@@ -10413,9 +10413,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.8"
+                "source": "https://github.com/railroadmedia/railcontent/tree/defaultLimit"
             },
-            "time": "2024-09-09T17:59:53+00:00"
+            "time": "2024-09-20T19:08:43+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -20000,9 +20000,17 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-defaultLimit",
+            "alias": "v3.0.8",
+            "alias_normalized": "3.0.8.0"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "railroad/railcontent": 20,
         "signifly/laravel-shopify": 20
     },
     "prefer-stable": true,
