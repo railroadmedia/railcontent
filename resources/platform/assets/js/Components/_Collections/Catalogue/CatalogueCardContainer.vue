@@ -156,6 +156,10 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    isMiniCatalogue: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits(['onProgressReset'])
@@ -183,7 +187,7 @@ const showListElement = computed(() => {
 });
 
 const skeletonCardCount = computed(() => {
-    return showGroupBy.value ? 5 : 12;
+    return showGroupBy.value || props.isMiniCatalogue ? 5 : 12;
 })
 
 const showGroupBy = computed(() => {

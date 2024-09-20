@@ -27,6 +27,7 @@
                         :show-dropdown="showDropdown"
                         :tracking-section="trackingSection"
                         :page="page"
+                        :is-mini-catalogue="true"
                         @on-progress-reset="resetProgress"
                     />
                 </transition>
