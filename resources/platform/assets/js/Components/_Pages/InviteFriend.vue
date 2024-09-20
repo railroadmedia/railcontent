@@ -20,7 +20,26 @@
                         v-if="canRefer"
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto"
                     >
-                        <form id="invite-email-form" name="invite-email-form" @submit.prevent="sendPass">
+                        <form id="MusoraEngagementTriggerReferWebForm" accept-charset="UTF-8" method="POST"
+                            action="/customer-io/submit-email-form-rc" class="ajax-form clearfix mx-auto">
+                            <input type="hidden" name="form_name" value="Musora Referral">
+                            <input name="inf_form_xid" type="hidden" value="MusoraEngagementTriggerReferWebForm">
+                            <input name="success_redirect" type="hidden" value="TODO">
+                            <input type="hidden" name="timestamp" value="{{ Carbon\Carbon::now() }}">
+                            <input type="hidden" name="brand" value="{{$brand}}">
+                            <div class="w-full px-2 sm:px-3 float-left ">
+                                <input id="sign-up-email" class="w-full" name="email" type="email" placeholder="Their Email" required="">
+                            </div>
+                            <div class="w-full px-2 sm:px-3 float-left ">
+                                <button class="submit g-recaptcha hover:opacity-80 bg-{{$brand}}" type="submit"
+                                    data-sitekey="{{$recaptchaKey}}"
+                                    data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
+                                    data-action='submit'>
+                                    Send Invite
+                            </button>
+                            </div>
+                        </form>
+<!--                        <form id="invite-email-form" name="invite-email-form" @submit.prevent="sendPass">
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
                                    for="email"><strong>Invite via email</strong></label>
                             <div
@@ -38,7 +57,7 @@
                                        :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52`"
                                        value="Send 30-day trial" onclick="sendPass(event)" />
                             </div>
-                        </form>
+                        </form>-->
                     </div>
                 </div>
             </div>

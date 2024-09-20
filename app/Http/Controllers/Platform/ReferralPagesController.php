@@ -41,6 +41,7 @@ class ReferralPagesController extends BaseController
         return view(
             'referral.invite-friend',
             [
+                'recaptchaKey' => config('recaptcha.key'),
                 'userReferralCode' => $referrer->referral_code,
                 'referralsPerUser' => $referralsPerUser,
                 'userReferralsPerformed' => $referrer->referrals_performed,
