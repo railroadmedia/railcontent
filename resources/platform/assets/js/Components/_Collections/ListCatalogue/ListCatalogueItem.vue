@@ -117,12 +117,11 @@
                   font-compressed
                   tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
                   tw-uppercase
-                  xl:tw-hidden
                   tw-flex
                   tw-flex-wrap
                   sm:tw-flex-nowrap
                 "
-                :class="[`${overview && !isNextLesson ? 'tw-mt-4' : ''}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
+                :class="[`${overview && !isNextLesson ? 'tw-mt-4 2xl:tw-hidden' : 'xl:tw-hidden'}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
             >
                 <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
                   <span v-if="i > 0" class="bullet">-</span>
@@ -141,7 +140,11 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+        <DifficultyLabel 
+            v-if="mappedData.difficulty" 
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+            :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
+        />
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
         <template v-if="!is_search">
@@ -150,7 +153,6 @@
                 :key="`${item.id}-mappedData-${i}`"
                 class="
                   tw-hidden
-                  xl:tw-flex
                   tw-uppercase
                   tw-items-center
                   tw-justify-center
@@ -159,6 +161,7 @@
                   tw-text-xs
                   font-compressed
                 "
+                :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
                 :data-test="column_data"
             >
                 {{ column_data }}
