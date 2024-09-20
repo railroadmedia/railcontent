@@ -117,7 +117,7 @@
 
     try {
       // Fetch started content (in-progress workouts)
-      const startedIds = await fetchContentInProgress(props.lessonType, brand.value);
+      const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
       const lessons = await fetchByRailContentIds(startedIds.started);
       const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
 

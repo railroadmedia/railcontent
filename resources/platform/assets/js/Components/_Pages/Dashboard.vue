@@ -187,12 +187,14 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const startedIds = await fetchContentInProgress('all', brand.value);
-        const completedIds = await fetchCompletedContent('all', brand.value);
+        const [startedIds, completedIds] = await Promise.all([
+            fetchContentInProgress('all', brand.value),
+            fetchCompletedContent('all', brand.value)
+        ]);
 
         const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
-        const started = lessons.filter(lesson => startedIds.started.includes(lesson.id));
-        const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id));
+        const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
+        const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
 
         startedContents.value = started;
         completedContents.value = completed;
