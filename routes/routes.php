@@ -64,6 +64,21 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
                 )->name('content.show');
 
+                Route::get(
+                    '/content-updates/coming-soon',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getComingSoon'
+                )->name('content-updates.coming-soon');
+
+                Route::get(
+                    '/content-updates/leaving',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getLeaving'
+                )->name('content-updates.leaving');
+
+                Route::get(
+                    '/content-updates/returning',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getReturning'
+                )->name('content-updates.returning');
+
                 // content statistics
                 Route::get(
                     '/content-statistics/individual/{id}',

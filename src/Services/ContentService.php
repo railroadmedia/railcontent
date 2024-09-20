@@ -53,7 +53,7 @@ class ContentService
 
     public $idContentCache = [];
 
-        /**
+    /**
      * @param ContentRepository $contentRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
@@ -125,7 +125,7 @@ class ContentService
     {
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
-        
+
         if ($useCaching) {
             $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
                 '-',
@@ -1007,6 +1007,83 @@ class ContentService
     }
 
     /**
+     * Return content that's marked as removed for the next quarter
+     *
+     * @param int $page
+     * @param int $limit
+     * @return mixed|Collection|null
+     */
+    public function getNextQuarterRemoved(int $page=1, int $limit=10)
+    {
+        $nextPrev = $this->getNextAndPreviousQuarterDates();
+        $prevStatus = ContentRepository::$availableContentStatues;
+        $prevPullFuture = ContentRepository::$pullFutureContent;
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+        $removed = $this->getFiltered(
+            page: $page,
+            limit: $limit,
+            requiredFields: ["quarter_removed,$nextPrev->nextQuarter,'',="],
+        );
+        ContentRepository::$availableContentStatues = $prevStatus;
+        ContentRepository::$pullFutureContent = $prevPullFuture;
+        return $removed;
+    }
+
+    /**
+     * Return content that's marked as being returned in the next quarter
+     *
+     * @param int $page
+     * @param int $limit
+     * @return mixed|Collection|null
+     */
+    public function getNextQuarterReturning(int $page=1, int $limit=10)
+    {
+        $nextPrev = $this->getNextAndPreviousQuarterDates();
+        $prevStatus = ContentRepository::$availableContentStatues;
+        $prevPullFuture = ContentRepository::$pullFutureContent;
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_DRAFT];
+        $returning = $this->getFiltered(
+            page: $page,
+            limit: $limit,
+            requiredFields: ["quarter_published,$nextPrev->nextQuarter,'',="],
+        );
+        ContentRepository::$availableContentStatues = $prevStatus;
+        ContentRepository::$pullFutureContent = $prevPullFuture;
+        return $returning;
+    }
+
+
+    public function getNextAndPreviousQuarterDates()
+    {
+        $january = 1;
+        $april = 4;
+        $july = 7;
+        $october = 10;
+        $month = (int)date('m');
+        $year = (int)date('Y');
+        if ($month < $april) {
+            $nextQuarter = "$year-0$april-01";
+            $previousQuarter = "$year-0$january-01";
+        } else if ($month < $july) {
+            $nextQuarter = "$year-0$july-01";
+            $previousQuarter = "$year-0$april-01";
+        } else if ($month < $october) {
+            $nextQuarter = "$year-$october-01";
+            $previousQuarter = "$year-0$july-01";
+        } else {
+            $previousQuarter = "$year-$october-01";
+            $year++;
+            $nextQuarter = "$year-0$january-01";
+        }
+        return new class($nextQuarter, $previousQuarter) {
+            function __construct(public string $nextQuarter, public string $previousQuarter)
+            {}
+        };
+    }
+
+    /**
      *  Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
@@ -1043,7 +1120,8 @@ class ContentService
         $pullPagination = true,
         $getFollowedContentOnly = false,
         $getFutureScheduledContentOnly = false,
-        $groupBy = null
+        $groupBy = null,
+        $relatedContentLimit = null,
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -1087,7 +1165,8 @@ class ContentService
                 $requiredParentIds,
                 $getFutureContentOnly,
                 $getFollowedContentOnly,
-                $getFutureScheduledContentOnly
+                $getFutureScheduledContentOnly,
+                $relatedContentLimit,
             );
 
             foreach ($requiredFields as $requiredField) {
