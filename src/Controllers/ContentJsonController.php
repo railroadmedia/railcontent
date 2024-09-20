@@ -104,6 +104,44 @@ class ContentJsonController extends Controller
         ]);
     }
 
+    public static function getDefaultLimit(array $contentTypes, string $brand, ?array $tabs, int $defaultCount) : int
+    {
+        $defaultCount = FiltersHelper::$groupBy ? ContentJsonController::getContentLimitForGroupBy($contentTypes, $brand, $defaultCount) : $defaultCount;
+        return ContentJsonController::checkContentLimitForWorkoutsTabs($contentTypes, $tabs, $defaultCount);
+    }
+
+    private static function checkContentLimitForWorkoutsTabs(array $contentTypes, $tabs, int $defaultCount) : int
+    {
+        if (in_array('workout', $contentTypes) && $tabs) {
+            foreach ($tabs as $tab) {
+                if (str_contains($tab, 'length_')) {
+                    return 20;
+                }
+            }
+        }
+        return $defaultCount;
+    }
+
+    private static function getContentLimitForGroupBy(array $contentTypes, string $brand, int $defaultCount): int
+    {
+        $slightlyHigherCount = 20;
+        $contentTypes = array_map('strtolower', $contentTypes);
+        $needleContentTypes = ['podcasts', 'boot-camps', 'song-tutorial'];
+        if ($brand == 'pianote' && array_intersect($needleContentTypes, $contentTypes)) {
+            return $slightlyHigherCount;
+        } else if ($brand == 'guitareo' && in_array('recording', $contentTypes)) {
+            return $slightlyHigherCount; //archives
+        } else if (in_array('routine', $contentTypes)) {
+            return 12;
+        } else{
+            $needleContentTypes = ['song', 'workout', 'course', 'quick-tips', 'student-focus'];
+            if (array_intersect($needleContentTypes, $contentTypes)) {
+                return $slightlyHigherCount;
+            }
+        }
+        return $defaultCount;
+    }
+
     /**
      * @param Request $request
      * @return JsonPaginatedResponse
