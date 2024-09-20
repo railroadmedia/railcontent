@@ -750,7 +750,7 @@
                     @include('drumeo.products.partials._order-card', [
                         'firstOnMobile' => true,
                         'highlightBorder' => true,
-                        'badge' => 'LAUNCH SPECIAL',
+                        'badge' => 'BEST DEAL',
                         'header' => 'EarDrums + 1 Year<br> Drumeo Membership',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
                         'imageHeight' => 'h-28 lg:h-32',

@@ -51,6 +51,10 @@ class LeadGenController extends BaseController
     {
         return view('guitareo.lead-gen.pages.fretboard-cheatsheet', ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function betterStrumming()
+    {
+        return view('guitareo.lead-gen.pages.better-strumming', ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function backToBasics(Request $request, $domain, $page = null)
     {

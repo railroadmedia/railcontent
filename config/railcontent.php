@@ -2778,6 +2778,8 @@ return [
         'archived_on' => 'archived_on',
         'instrument' => 'instrument',
         'instrumentless' => 'instrumentless',
+        'quarter_published' => 'quarter_published',
+        'quarter_removed' => 'quarter_removed',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -3056,7 +3058,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113,115,116],
     'difficulty_map' =>
         [
             '1' => 'Introductory',

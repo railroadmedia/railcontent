@@ -75,8 +75,7 @@
                 padding:11px 30px;
             }
         }
-    </style>
-    <style>
+
 
         [placeholder]:focus::-webkit-input-placeholder {
             color:transparent
@@ -271,6 +270,20 @@
             }
         }
     </style>
+    <style>
+        .join.guitareo {
+            background:#00C9AC;
+        }
+        .join.guitareo:hover {
+            background:#00e3c1;
+        }
+        .timeline-container.guitareo:after {
+            background-color: #00C9AC;
+        }
+        .timeline-container.guitareo .timeline:after {
+            background-color: #00C9AC;
+        }
+    </style>
 @endsection
 
 @section('layout-scripts')
@@ -349,6 +362,14 @@
         <div class="bg-white text-black">
             @include('drumeo.products._30D-double-bass', [
                 'theme' => 'drumeo',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        </div>
+    @elseif($cohort['slug'] == 'electric-guitarists-start-here')
+        <div class="bg-white text-black">
+            @include('guitareo.products._electric-guitarists-start-here', [
+                'theme' => 'guitareo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])

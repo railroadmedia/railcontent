@@ -20,6 +20,7 @@ use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
+use App\Console\Commands\QuarterlyUpdateContent;
 use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairGuitareoPDFs;
@@ -94,7 +95,8 @@ class Kernel extends ConsoleKernel
         CheckCommentsUrl::class,
         SendAccountSetupEmail::class,
         GenerateWeeklyMembershipStats::class,
-        SyncPrimaryBrand::class
+        SyncPrimaryBrand::class,
+        QuarterlyUpdateContent::class,
     ];
 
     /**
@@ -141,6 +143,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
 
         $schedule->command('user:sendAccountSetupEmail')->dailyAt('21:00'); //1pm PST
+
+        $schedule->command('content:QuarterlyUpdateContent')->quarterly();
     }
 
     /**
