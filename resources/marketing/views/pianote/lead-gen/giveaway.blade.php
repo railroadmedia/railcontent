@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">

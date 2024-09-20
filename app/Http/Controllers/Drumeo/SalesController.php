@@ -78,6 +78,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
+    public function backToSchool()
+    {
+        return view('drumeo.sales.back-to-school', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
     public function guitarcenter()
     {
         return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);

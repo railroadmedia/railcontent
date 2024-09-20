@@ -18,6 +18,7 @@ Route::domain('{guitareoDomain}')
         Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
         Route::get('/recitals', [LeadGenController::class, 'recitals']);
         Route::get('/fretboard-cheatsheet', [LeadGenController::class, 'fretboardcheatsheet']);
+        Route::get('/better-strumming', [LeadGenController::class, 'betterStrumming']);
 
         Route::prefix('back-to-basics')->group(
             function () {

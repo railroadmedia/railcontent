@@ -57,8 +57,8 @@
                         Congratulations! <br class="hidden sm:inline">
                         Check your inbox for your FREE lessons.</strong></h3>
                 <p class="leading-normal mt-2 mb-8">
-                    Before you get started, here’s a <br class="inline sm:hidden">
-                    message Lisa!</p>
+                    Before you get started, here’s<br class="inline sm:hidden">
+                    a message from Lisa!</p>
                 <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
                     <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
                     <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">

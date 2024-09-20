@@ -13,27 +13,15 @@
         :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
       />
 
-      <template v-if="showInProgress">
-        <div class="tw-flex tw-items-center tw-mt-[30px] tw-mb-4 tw-w-full tw-justify-between">
-          <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-            <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Continue</h2>
-          </a>
-          <a :href="`/${brand}/lesson-history/in-progress`"
-             aria-label="See All Subscribed Lessons"
-             class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-            See All
-          </a>
-        </div>
-        <transition appear name="fade">
-          <CatalogueCardContainer
-            :theme-color="brand"
-            catalogue-type="grid"
-            no-results-message="Looks like you haven't started any lessons. Once you watch a video, it will show up here for you to access later."
-            :pre-loaded-content="startedLessons"
-            :no-skeleton="true"
+      <div v-if="showInProgress" class="tw-mt-[30px]">
+          <MiniCatalogueSection
+              title="Continue"
+              seeAllAriaLabel="See All Lessons in Progress"
+              :seeAllUrl="`/${brand}/lesson-history/in-progress`"
+              :preLoadedContent="startedLessons"
+              :isMiniView="true"
           />
-        </transition>
-      </template>
+      </div>
 
       <div class="tw-mt-[30px]">
         <PlayAlongs
@@ -79,6 +67,7 @@
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
   import {useUserStore} from "@stores/user";
+  import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
     hasStartedLessons: Boolean,

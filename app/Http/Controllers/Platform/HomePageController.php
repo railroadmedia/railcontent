@@ -40,8 +40,21 @@ use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
 class HomePageController extends BaseController
 {
+<<<<<<< HEAD
+=======
+    private const DEFAULT_CONTENT_COUNT = 20;
+    private const STARTED_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const RECSYS_CONTENT_COUNT = 50;
+    private const WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const PLAYLISTS_COUNTENT_COUNT = 24;
+    private const UPCOMING_EVENTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+
+
+>>>>>>> main
     /**
      * @param ContentService $contentService
      * @param ContentFollowsService $contentFollowsService
@@ -131,15 +144,38 @@ class HomePageController extends BaseController
 
         $startedLessons = $this->getUsersStartedContent();
 
-        $usersList = $this->getUsersList();
+        $usersList = $this->getUsersPlaylist();
 
+<<<<<<< HEAD
+=======
+        $upcomingEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            ContentTypes::liveContentTypes(),
+            ContentService::STATUS_SCHEDULED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>',
+            'published_on',
+            'asc',
+            [],
+            self::UPCOMING_EVENTS_CONTENT_COUNT
+        );
+
+>>>>>>> main
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
 
         $hotForumTopics = $this->getHotForumTopics();
 
+<<<<<<< HEAD
         if(FeatureFlagging::accessible('recsys', user())) {
             $recommendedContent = $this->getAllRecommentations();
+=======
+        $newContent = $this->getNewContents();
+
+        $workoutsContent = $this->getWorkoutsContents();
+        if (FeatureFlagging::accessible('recsys', user())) {
+            $recommendedContent = $this->getAllRecommendations();
+>>>>>>> main
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
         }
@@ -481,12 +517,19 @@ class HomePageController extends BaseController
         ];
     }
 
+<<<<<<< HEAD
     private function getAllRecommentations(): ContentFilterResultsEntity
+=======
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getAllRecommendations()
+>>>>>>> main
     {
         return $this->contentService->getRecommendedContent(
             user()->id,
             brand(),
-            pageSize: 50,
+            pageSize: self::RECSYS_CONTENT_COUNT,
         );
     }
 
@@ -498,7 +541,7 @@ class HomePageController extends BaseController
         ContentRepository::$allowsPullSongsContent = false;
         $contents = $this->contentService->getFiltered(
             1,
-            6,
+            self::NEW_RELEASES_CONTENT_COUNT,
             '-published_on',
             ContentTypes::newContentTypes(),
             [],
@@ -524,7 +567,7 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = false;
         $workouts = $this->contentService->getFiltered(
             1,
-            10,
+            self::WORKOUTS_CONTENT_COUNT,
             '-published_on',
             ['workout'],
             [],
@@ -549,7 +592,7 @@ class HomePageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            8
+            self::STARTED_CONTENT_COUNT
         );
         $ids = array_column($startedProgressRows, 'content_id');
         $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
@@ -557,13 +600,20 @@ class HomePageController extends BaseController
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
+<<<<<<< HEAD
     public function getUsersList(): ContentFilterResultsEntity
+=======
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    public function getUsersPlaylist()
+>>>>>>> main
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
             'user-playlist',
             brand(),
-            12
+            self::PLAYLISTS_COUNTENT_COUNT
         );
 
         $results = new ContentFilterResultsEntity(['results' => $playlists]);
@@ -578,7 +628,7 @@ class HomePageController extends BaseController
     {
         $songs = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['song'],
             [],
@@ -604,7 +654,7 @@ class HomePageController extends BaseController
     {
         $courses = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['course'],
             [],
@@ -634,7 +684,7 @@ class HomePageController extends BaseController
         // Pull 20 of the most recent shows
         $recentShows = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             $allShowTypes,
             [],
@@ -691,7 +741,7 @@ class HomePageController extends BaseController
     {
         $staffPicks = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ContentTypes::ourPicksContentTypes(),
             [],

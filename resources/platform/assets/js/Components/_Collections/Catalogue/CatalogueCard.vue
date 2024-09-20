@@ -40,19 +40,19 @@
                     <!-- EVERYTHING ELSE -->
                     <div v-else
                         class="tw-absolute tw-flex tw-flex-col tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
-                        :class="[{ 'tw-bg-[rgba(0,12,23,0.85)]': noAccess}, { 'tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30': isReleased && !noAccess },]">
-                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
-                        <i v-else class="fas" :class="thumbnailIcon"></i>
+                        :class="[{ 'tw-bg-[rgba(0,12,23,0.85)]': noAccess || !isReleased }, { 'tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30': isReleased && !noAccess },]">
+                        <i v-if="(!isReleased && noAccess) || !noAccess" class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
                         </p>
+                        <musora-icon v-else-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                     </div>
                 </div>
             </a>
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a @click="handleClick" :href="renderLink && !forceNoLinks ? itemUrl : null"
+                    <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
@@ -392,7 +392,7 @@ onUnmounted(() => {
 const emit = defineEmits(['addToList', 'progressReset']);
 
 const handleClick = (event) => {
-    if (noAccess.value) {
+    if (isReleased.value && noAccess.value) {
         event.preventDefault();
         platformStore.openMembershipUpgradeModal();
     } else {

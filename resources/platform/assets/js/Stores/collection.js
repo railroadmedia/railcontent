@@ -17,7 +17,7 @@ export const useCollectionStore = defineStore({
             filter: {
                 activeTab: '',
                 included_fields: [],
-                limit: 10,
+                limit: 20,
                 params: {},
                 searchTerm: '',
                 sort: '',

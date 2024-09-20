@@ -80,7 +80,9 @@ return [
             'challenge_state_text',
             'primary_cta_text',
             'challenge_state',
-            'need_access'
+            'need_access',
+            'quarter_published',
+            'quarter_removed',
         ],
 
         'instructor' => [
@@ -3583,6 +3585,8 @@ return [
             'user_playlist_item_id',
             'user_playlist_item_position',
             'need_access',
+            'quarter_published',
+            'quarter_removed',
         ],
 
         'instructor' => [

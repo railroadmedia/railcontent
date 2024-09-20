@@ -275,7 +275,7 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
-                        LAUNCH SPECIAL
+{{--                        LAUNCH SPECIAL--}}
                     </p>
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h6 class="leading-none mb-3 md:mb-8">Concert Series Headphones</h6>

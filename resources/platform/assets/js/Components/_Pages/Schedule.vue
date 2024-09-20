@@ -9,12 +9,13 @@
             <div class="tw-flex tw-flex-col tw-py-[30px]">
                 <div id="scheduleHeader"
                     class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
-                    <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
+                    <a :href="`/${brand}/content-updates`" class="tw-flex tw-mb-3 tw-mr-auto tw-text-[#00101D] dark:tw-text-white hover:tw-border-b">
                         <h1
-                            class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
+                            class="heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
                             Scheduled Releases
                         </h1>
-                    </div>
+                        <ChevronRightIcon class="tw-w-8" />
+                    </a>
                     <div class="tw-flex tw-flex-col">
                         <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
                             data-open-modal="scheduleAddToCalendarModal">
@@ -40,6 +41,7 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import ContentSchedule from '@vuesora/views/schedule/Schedule';
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
+import { ChevronRightIcon } from "@heroicons/vue/solid";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
