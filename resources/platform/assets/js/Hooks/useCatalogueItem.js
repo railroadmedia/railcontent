@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { reactive, computed, toRefs } from 'vue';
+import { computed } from 'vue';
 import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
 import { useUserStore } from "@stores/user.js";
@@ -17,15 +17,26 @@ export default function useCatalogueItem(props) {
             return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
     });
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
+    const dateQuarterPublishedOn = computed(() => DateTime.fromSQL(props.item.quarter_published, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());
     const isReleased = computed(() => {
             if (userStore.isAdmin) {
                 return true;
             }
 
-            return dateNow.value > datePublshedOn.value;
+            if(props.item.quarter_published && props.item.status === 'draft'){
+                return dateNow.value > dateQuarterPublishedOn.value;
+            } else {
+                return dateNow.value > datePublshedOn.value;
+            }
         });
-    const releaseDate = computed(() => DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy'));
+    const releaseDate = computed(() => {
+        if(props.item.quarter_published){
+            return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
+        } else {
+            return DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy');
+        }
+    });
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
     const thumbnailIcon = computed(() => {
             const contentWithHierarchy = {
@@ -36,13 +47,13 @@ export default function useCatalogueItem(props) {
                 singeo: ['course', 'learning-path', 'pack', 'chord-and-scale'],
             };
 
+            if (!isReleased.value) {
+                return 'fa-clock';
+            }
+
             if (noAccess.value) {
                 if (props.lockUnowned && props.item.is_owned === false) {
                     return 'fa-lock';
-                }
-
-                if (!isReleased.value) {
-                    return 'fa-clock';
                 }
             }
 

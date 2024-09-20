@@ -58,7 +58,11 @@ class BrandService
         $cookieValue = request()->cookie($cacheKey);
         $cacheValue = Cache::get($cacheKey);
         $databaseValue = $user->last_used_brand;
-        $default = 'drumeo'; // todo: this should go to onboarding
+        /**
+         * NOTE: use primary_brand unless it doesn´t exist. This will make sure pack-only users will
+         * be redirected to the correct brand.
+         */
+        $default = $user->primary_brand ?? 'drumeo';
 
         // check in cookie first
         if (!empty($cookieValue) && in_array($cookieValue, config('brands'))) {

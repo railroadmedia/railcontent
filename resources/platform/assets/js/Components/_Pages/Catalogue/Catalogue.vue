@@ -13,18 +13,18 @@
         :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
       />
 
+
       <!-- Continue section -->
       <div v-if="continueSection.length" class="tw-mt-[30px]">
-        <MiniCatalogueSection
-            title="Continue"
-            seeAllAriaLabel="See All Lessons In Progress"
-            :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
-            :preLoadedContent="continueSection"
-            :isMiniView="true"
-            :show-dropdown="true"
-            :use-ref-data="true"
-            trackingSection="continue"
-        />
+          <MiniCatalogueSection
+              title="Continue"
+              seeAllAriaLabel="See All Lessons in Progress"
+              :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+              :preLoadedContent="startedLessons"
+              :isMiniView="true"
+              :show-dropdown="true"
+              trackingSection="continue"
+          />
       </div>
 
       <div class="tw-mt-[30px]">
@@ -64,6 +64,7 @@
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
   import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
+  import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
     hasStartedLessons: Boolean,

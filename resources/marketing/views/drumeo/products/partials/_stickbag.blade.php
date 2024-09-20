@@ -71,7 +71,8 @@
                     <br><br>
                     If you’re the collector type, you’re on the right page.
                     <br><br>
-                    Scroll down to check out the Limited Edition StickBag. For launch, we’ve ONLY made these available to you and your fellow Lifetime Members.
+                    Scroll down to check out the Limited Edition StickBag.
+{{--                    For launch, we’ve ONLY made these available to you and your fellow Lifetime Members.--}}
                     <br><br>
                     I hope it helps you pack like a pro.
                 </p>
@@ -684,52 +685,50 @@
                         </a>
                     </div>
 
-                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
-                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                        <a
-                                @if(!empty($memberVersion))
-                                    href="/ecommerce/add-to-cart?locked=true&products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6"
-                                @else
-                                    href="/promo-bag"
-                                @endif
-                                class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
-                            <div class="bg-white px-3 py-6 md:py-9">
-                                <h4 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h4>
-                                <img class="h-24 transition-opacity opacity-0"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/lessons-stickbag-option.png"
-                                        alt="learn playing image"
-                                >
-                                <br>
-                                <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>
-                                <p class="text-sm"><em>
-                                        @if(!empty($memberVersion))
-                                            with annual Membership renewal
-                                        @else
-                                            with annual Drumeo Membership
-                                        @endif
-                                    </em></p>
-                                <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">
-                                    @if(!empty($memberVersion))
-                                        renew membership
-                                    @else
-                                        learn more
-                                    @endif
-                                </div>
-                                <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
-                                <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
-                                <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
-                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
-                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
-                                <p class="text-sm mb-1.5">1 Premium Drum Key</p>
-                                <p class="text-sm">6 Pairs Of 5A Drumsticks</p>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
+{{--                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">--}}
+{{--                        <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">--}}
+{{--                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >BEST DEAL</p>--}}
+{{--                        <a--}}
+{{--                                @if(!empty($memberVersion))--}}
+{{--                                    href="/ecommerce/add-to-cart?locked=true&products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6"--}}
+{{--                                @else--}}
+{{--                                    href="/promo-bag"--}}
+{{--                                @endif--}}
+{{--                                class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">--}}
+{{--                            <div class="bg-white px-3 py-6 md:py-9">--}}
+{{--                                <h4 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h4>--}}
+{{--                                <img class="h-24 transition-opacity opacity-0"--}}
+{{--                                        loading="lazy"--}}
+{{--                                        onload="this.classList.remove('opacity-0')"--}}
+{{--                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/lessons-stickbag-option.png"--}}
+{{--                                        alt="learn playing image"--}}
+{{--                                >--}}
+{{--                                <br>--}}
+{{--                                <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>--}}
+{{--                                <p class="text-sm"><em>--}}
+{{--                                        @if(!empty($memberVersion))--}}
+{{--                                            with annual Membership renewal--}}
+{{--                                        @else--}}
+{{--                                            with annual Drumeo Membership--}}
+{{--                                        @endif--}}
+{{--                                    </em></p>--}}
+{{--                                <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">--}}
+{{--                                    @if(!empty($memberVersion))--}}
+{{--                                        renew membership--}}
+{{--                                    @else--}}
+{{--                                        learn more--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>--}}
+{{--                                <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>--}}
+{{--                                <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>--}}
+{{--                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>--}}
+{{--                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>--}}
+{{--                                <p class="text-sm mb-1.5">1 Premium Drum Key</p>--}}
+{{--                                <p class="text-sm">6 Pairs Of 5A Drumsticks</p>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>

@@ -71,6 +71,10 @@ import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
 import sfsr from './Components/_Pages/SFSR/SFSR';
 import Dashboard from './Components/_Pages/Dashboard';
 import DevEndpoint from './Components/_Pages/DevEndpoint';
+import AllContentUpdates from './Components/_Pages/ContentUpdate/All';
+import ReturningContentUpdates from './Components/_Pages/ContentUpdate/Returning';
+import ComingSoonContentUpdates from './Components/_Pages/ContentUpdate/ComingSoon';
+import LeavingContentUpdates from './Components/_Pages/ContentUpdate/Leaving';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -259,6 +263,10 @@ app.component('AppContainer', AppContainer)
     .component('sfsr', sfsr)
     .component('Dashboard', Dashboard)
     .component('DevEndpoint', DevEndpoint)
+    .component('AllContentUpdates', AllContentUpdates)
+    .component('ReturningContentUpdates', ReturningContentUpdates)
+    .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
+    .component('LeavingContentUpdates', LeavingContentUpdates)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

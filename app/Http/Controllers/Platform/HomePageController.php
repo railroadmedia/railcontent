@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Platform;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Services\CarouselService;
@@ -22,8 +19,11 @@ use App\Services\PackService;
 use App\Services\UserMetricsService;
 use Avo;
 use Carbon\Carbon;
+use Doctrine\ORM\ORMException;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -42,35 +42,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
 {
-    /**
-     * @param ContentService $contentService
-     * @param ContentFollowsService $contentFollowsService
-     * @param LiveStreamEventService $liveStreamEventService
-     * @param UserMetricsService $userMetricsService
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param PackService $packService
-     * @param DatabaseManager $databaseManager
-     * @param UserContentProgressService $userContentProgressService
-     * @param CarouselService $carouselService
-     * @param CohortService $cohortService
-     * @param OnboardingService $onboardingService
-     *
-     */
+    private const int DEFAULT_CONTENT_COUNT = 20;
+    private const int STARTED_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const int RECSYS_CONTENT_COUNT = 50;
+    private const int WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const int NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+    private const int PLAYLISTS_COUNTENT_COUNT = 24;
+    private const int UPCOMING_EVENTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
+
     public function __construct(
-        private ContentService $contentService,
-        private ContentFollowsService $contentFollowsService,
-        private LiveStreamEventService $liveStreamEventService,
-        private UserMetricsService $userMetricsService,
-        private UserPlaylistsService $userPlaylistsService,
-        private PackService $packService,
-        private DatabaseManager $databaseManager,
-        private UserContentProgressService $userContentProgressService,
-        private CarouselService $carouselService,
-        private CohortService $cohortService,
-        private OnboardingService $onboardingService,
-        private LearningPathsService $learningPathsService,
-        private UserAccessPermissionsService $userAccessPermissionsService,
-        private SanityGateway $sanityGateway,
+        private readonly ContentService $contentService,
+        private readonly ContentFollowsService $contentFollowsService,
+        private readonly LiveStreamEventService $liveStreamEventService,
+        private readonly UserMetricsService $userMetricsService,
+        private readonly UserPlaylistsService $userPlaylistsService,
+        private readonly PackService $packService,
+        private readonly DatabaseManager $databaseManager,
+        private readonly UserContentProgressService $userContentProgressService,
+        private readonly CarouselService $carouselService,
+        private readonly CohortService $cohortService,
+        private readonly OnboardingService $onboardingService,
+        private readonly LearningPathsService $learningPathsService,
+        private readonly UserAccessPermissionsService $userAccessPermissionsService,
+        private readonly SanityGateway $sanityGateway,
     ) {
     }
 
@@ -131,19 +125,18 @@ class HomePageController extends BaseController
 
         $startedLessons = $this->getUsersStartedContent();
 
-        $usersList = $this->getUsersList();
+        $usersList = $this->getUsersPlaylist();
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
 
         $hotForumTopics = $this->getHotForumTopics();
 
-        if(FeatureFlagging::accessible('recsys', user())) {
-            $recommendedContent = $this->getAllRecommentations();
+        if (FeatureFlagging::accessible('recsys', user())) {
+            $recommendedContent = $this->getAllRecommendations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
         }
-
 
         $userMetrics = $this->getUserMetrics();
 
@@ -164,12 +157,20 @@ class HomePageController extends BaseController
             Carbon::now()
                 ->toDateTimeString();
 
+        if (config('railcontent.webUpcomingEventPriorMinutes')) {
+            LiveStreamEventService::$upcomingPriorMinutes = config('railcontent.webUpcomingEventPriorMinutes');
+        }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
+        $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
         $collectionForDecoration = new RailcontentCollection();
         $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
+        if (!empty($currentEvent)) {
+            $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
+        }
+        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
 
@@ -204,7 +205,25 @@ class HomePageController extends BaseController
         $hasGoals = user()->onboardingGoals ? true : false;
 
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
-        $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
+
+        if ($currentEvent) {
+            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
+            $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
+            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
+            if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
+                $eventCoachUrl = url()->route('platform.content.first-level', [
+                    'brand' => brand(),
+                    'primaryPage' => 'coaches',
+                    'firstContentSlug' => $eventCoachSlug,
+                    'firstContentId' => $eventCoachId,
+                ]);
+                $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
+                    'fields.instructor.slug'
+                )] ?? config('addevent.uniquekeys.brand-overview');
+            } else {
+                $currentEvent = null;
+            }
+        }
 
         $carousel = $this->carouselService->getCarouselSlides();
 
@@ -219,7 +238,7 @@ class HomePageController extends BaseController
                 })
             ) > 0;
 
-            $shouldShowTrialSection = ($hasExperienceLevels) ? true : false;
+            $shouldShowTrialSection = $hasExperienceLevels;
         }
         $trialSection = [];
         if ($shouldShowTrialSection) {
@@ -267,13 +286,16 @@ class HomePageController extends BaseController
                 }
             }
         }
+
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
             "carousel" => $carousel,
+            "coachEvent" => content_to_json([$currentEvent]),
             "cohortBanner" => json_encode($cohortBanner),
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
+            "currentEvent" => $currentEvent,
             'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
@@ -297,20 +319,19 @@ class HomePageController extends BaseController
         ]);
     }
 
-
     public function onboarding(Request $request)
     {
         Avo::onboarding_started(AvoHelper::defaultEventProperties());
+
         return view('home.onboarding');
     }
 
     /**
-     * @param $brand
+     * @throws ORMException
      */
     public function homePackOnly(Request $request, $brand): View
     {
         $packs = $this->packService->getPacksForHome(user());
-        ;
         $hotForumTopics = $this->getHotForumTopics();
         $member = user();
 
@@ -341,7 +362,7 @@ class HomePageController extends BaseController
     /**
      * singeo only
      */
-    private function getCoursesContent(): ContentFilterResultsEntity
+    private function getCoursesContent(): string
     {
         ContentRepository::$availableContentStatues = ['published'];
         ContentRepository::$pullFutureContent = false;
@@ -420,7 +441,7 @@ class HomePageController extends BaseController
         return $forumPosts->toArray();
     }
 
-    private function getPlayAlongStyles()
+    private function getPlayAlongStyles(): array
     {
         return [
             [
@@ -480,12 +501,12 @@ class HomePageController extends BaseController
         ];
     }
 
-    private function getAllRecommentations(): ContentFilterResultsEntity
+    private function getAllRecommendations(): ContentFilterResultsEntity
     {
         return $this->contentService->getRecommendedContent(
             user()->id,
             brand(),
-            pageSize: 50,
+            pageSize: self::RECSYS_CONTENT_COUNT,
         );
     }
 
@@ -497,7 +518,7 @@ class HomePageController extends BaseController
         ContentRepository::$allowsPullSongsContent = false;
         $contents = $this->contentService->getFiltered(
             1,
-            6,
+            self::NEW_RELEASES_CONTENT_COUNT,
             '-published_on',
             ContentTypes::newContentTypes(),
             [],
@@ -523,7 +544,7 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = false;
         $workouts = $this->contentService->getFiltered(
             1,
-            10,
+            self::WORKOUTS_CONTENT_COUNT,
             '-published_on',
             ['workout'],
             [],
@@ -538,6 +559,9 @@ class HomePageController extends BaseController
         return $workouts;
     }
 
+    /**
+     * @return ContentFilterResultsEntity
+     */
     public function getUsersStartedContent(): ContentFilterResultsEntity
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
@@ -548,7 +572,7 @@ class HomePageController extends BaseController
             'started',
             'updated_on',
             'desc',
-            8
+            self::STARTED_CONTENT_COUNT
         );
         $ids = array_column($startedProgressRows, 'content_id');
         $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
@@ -556,18 +580,19 @@ class HomePageController extends BaseController
         return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
-    public function getUsersList(): ContentFilterResultsEntity
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    public function getUsersPlaylist(): ContentFilterResultsEntity
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
             'user-playlist',
             brand(),
-            12
+            self::PLAYLISTS_COUNTENT_COUNT
         );
 
-        $results = new ContentFilterResultsEntity(['results' => $playlists]);
-
-        return $results;
+        return new ContentFilterResultsEntity(['results' => $playlists]);
     }
 
     /**
@@ -577,7 +602,7 @@ class HomePageController extends BaseController
     {
         $songs = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['song'],
             [],
@@ -603,7 +628,7 @@ class HomePageController extends BaseController
     {
         $courses = $this->contentService->getFiltered(
             1,
-            6,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ['course'],
             [],
@@ -633,7 +658,7 @@ class HomePageController extends BaseController
         // Pull 20 of the most recent shows
         $recentShows = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             $allShowTypes,
             [],
@@ -690,7 +715,7 @@ class HomePageController extends BaseController
     {
         $staffPicks = $this->contentService->getFiltered(
             1,
-            20,
+            self::DEFAULT_CONTENT_COUNT,
             '-published_on',
             ContentTypes::ourPicksContentTypes(),
             [],

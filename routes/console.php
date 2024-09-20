@@ -47,3 +47,4 @@ Schedule::command('ecommerce:report-cancelled-subscriptions celina@drumeo.com --
 Schedule::command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
 
 Schedule::command('user:sendAccountSetupEmail')->dailyAt('21:00'); //1pm PST
+Schedule::command('content:QuarterlyUpdateContent')->quarterly();
