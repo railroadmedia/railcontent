@@ -26,7 +26,6 @@ class ReferralPagesController extends BaseController
             config('referral.saasquatch_referral_program_id.' . $brand),
             $brand
         );
-        $referralsPerUser = $this->referralService->getReferralsPerUser();
         try {
             Avo::referral_page_viewed(
                 AvoHelper::defaultEventProperties(
@@ -42,9 +41,6 @@ class ReferralPagesController extends BaseController
             'referral.invite-friend',
             [
                 'userReferralCode' => $referrer->referral_code,
-                'referralsPerUser' => $referralsPerUser,
-                'userReferralsPerformed' => $referrer->referrals_performed,
-                'userReferralLink' => $referrer->referral_link,
                 'canRefer' => $this->referralService->canRefer($referrer),
             ]
         );

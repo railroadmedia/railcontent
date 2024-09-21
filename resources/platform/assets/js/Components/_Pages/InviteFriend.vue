@@ -72,23 +72,7 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    emailInviteUrl: {
-        type: String,
-        default: '',
-    },
     inviteUrl: {
-        type: String,
-        default: '',
-    },
-    linkCopyUrl: {
-        type: String,
-        default: '',
-    },
-    referralsPerUser: {
-        type: Number,
-        default: 0,
-    },
-    userReferralLink: {
         type: String,
         default: '',
     },
@@ -105,31 +89,8 @@ const cardImg = computed(() => {
     }
     return imgs[brand.value];
 })
-const footerLineOne = computed(() => {
-    return props.canRefer ? '30-Day Trials are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
-})
-const footerLineTwo = computed(() => {
-    return props.canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
-})
 const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
-const copyLink = () => {
-    navigator.clipboard.writeText(props.userReferralLink);
-    window.shownotification({
-        icon: 'fa-file-import',
-        text: `Link copied to clipboard.`
-    });
-    fetch(props.linkCopyUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            _token: token,
-            brand: brand.value
-        }),
-    });
 }
 const sendPass = (event) => {
     emailError.value = false;
