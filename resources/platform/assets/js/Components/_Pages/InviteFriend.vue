@@ -21,13 +21,13 @@
                     >
                         <form id="MusoraEngagementTriggerReferWebForm" accept-charset="UTF-8" method="POST"
                             action="/customer-io/submit-email-form-rc" class="ajax-form clearfix mx-auto">
-                            
+                            <!-- Hidden Fields -->
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
                             <input type="hidden" name="success_redirect" value="TODO">
                             <input type="hidden" name="timestamp" value="{{ Carbon\Carbon::now() }}">
                             <input type="hidden" name="brand" value="{{$brand}}">
-                            
+                            <!-- Form Inputs -->
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
