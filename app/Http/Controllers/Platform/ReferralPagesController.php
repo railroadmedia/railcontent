@@ -40,6 +40,7 @@ class ReferralPagesController extends BaseController
         return view(
             'referral.invite-friend',
             [
+                'recaptchaKey' => config('recaptcha.key'),
                 'userReferralCode' => $referrer->referral_code,
                 'canRefer' => $this->referralService->canRefer($referrer),
             ]

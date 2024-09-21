@@ -114,6 +114,23 @@ return [
                     'preferred_instrument' => 'Preferred Instrument'
                 ],
             ],
+            'Musora Referral' => [
+                'custom_attributes' => [
+                    'brand' => 'nullable|string',
+                    'timestamp' => 'nullable|string',
+                ],
+                'events' => [
+                    '30day-trial-referral',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'brand' => 'Brand',
+                    'timestamp' => 'Timestamp',
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [
