@@ -16,48 +16,39 @@
                             </div>
                         </div>
                     </div>
-                    <div
-                        v-if="canRefer"
+                    <div v-if="canRefer"
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto"
                     >
                         <form id="MusoraEngagementTriggerReferWebForm" accept-charset="UTF-8" method="POST"
                             action="/customer-io/submit-email-form-rc" class="ajax-form clearfix mx-auto">
+                            
                             <input type="hidden" name="form_name" value="Musora Referral">
-                            <input name="inf_form_xid" type="hidden" value="MusoraEngagementTriggerReferWebForm">
-                            <input name="success_redirect" type="hidden" value="TODO">
+                            <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
+                            <input type="hidden" name="success_redirect" value="TODO">
                             <input type="hidden" name="timestamp" value="{{ Carbon\Carbon::now() }}">
                             <input type="hidden" name="brand" value="{{$brand}}">
-                            <div class="w-full px-2 sm:px-3 float-left ">
-                                <input id="sign-up-email" class="w-full" name="email" type="email" placeholder="Their Email" required="">
-                            </div>
-                            <div class="w-full px-2 sm:px-3 float-left ">
-                                <button class="submit g-recaptcha hover:opacity-80 bg-{{$brand}}" type="submit"
+                            
+                            <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
+                                <strong>Invite via email</strong>
+                            </label>
+                            <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
+                                <input id="sign-up-email" 
+                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border" 
+                                    name="email" 
+                                    type="email" 
+                                    placeholder="Email address..." 
+                                    required=""
+                                />
+                                <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52" 
+                                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
+                                    type="submit"
                                     data-sitekey="{{$recaptchaKey}}"
                                     data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
                                     data-action='submit'>
                                     Send Invite
-                            </button>
+                                </button>
                             </div>
                         </form>
-<!--                        <form id="invite-email-form" name="invite-email-form" @submit.prevent="sendPass">
-                            <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
-                                   for="email"><strong>Invite via email</strong></label>
-                            <div
-                                class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
-                                <input type="hidden"  name="_token" class="sort-input" id="_token"
-                                       :value="token" />
-                                <input type="hidden" name="brand" class="sort-input"
-                                       :value="brand" id="brand" />
-                                <input
-                                    v-model="invitee"
-                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
-                                    :class="{ 'tw-bg-red-200': emailError }"
-                                    type="email" id="email" name="email" placeholder="Email address...">
-                                <input name="button" type="submit" id="button"
-                                       :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52`"
-                                       value="Send 30-day trial" onclick="sendPass(event)" />
-                            </div>
-                        </form>-->
                     </div>
                 </div>
             </div>
