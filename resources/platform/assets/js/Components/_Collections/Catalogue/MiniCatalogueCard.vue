@@ -41,7 +41,7 @@
         </a>
 
         <!-- Action Button -->
-        <div class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px]">
+        <div class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px] dark:tw-text-white">
             <button class="sm:tw-hidden" @click="toggleDropdown">
                 <svg class="" width="21" height="21" viewBox="0 0 25 25" fill="none"
                      xmlns="http://www.w3.org/2000/svg">

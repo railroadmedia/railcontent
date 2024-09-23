@@ -13,9 +13,8 @@
         :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
       />
 
-
       <!-- Continue section -->
-      <div v-if="continueSection.length" class="tw-mt-[30px]">
+      <div v-if="!isLoading && continueSection.length" class="tw-mt-[30px]">
           <MiniCatalogueSection
               title="Continue"
               seeAllAriaLabel="See All Lessons in Progress"
@@ -117,10 +116,9 @@
       // Fetch started content (in-progress workouts)
       const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
       const lessons = await fetchByRailContentIds(startedIds.started);
-      const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
 
       // Set the continue section with started workouts
-      continueSection.value = startedLessons;
+      continueSection.value = lessons;
 
       console.log('started',continueSection.value);
 

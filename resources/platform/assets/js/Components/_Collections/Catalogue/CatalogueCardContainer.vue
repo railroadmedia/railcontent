@@ -4,7 +4,7 @@
             :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
                     tw-no-scrollbar
-                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-rows-2 tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
+                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
                     ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap ' : ''}
                     ${!isMiniView && willScroll && (!isLoading && !collectionStoreLoading) ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
@@ -180,8 +180,13 @@ const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const miniViewRowStyles = computed(() => {
     if(props.page === 1){
-        return 'lg:tw-grid-rows-none';
+        if(props.preLoadedContent.length === 1){
+            return 'lg:tw-grid-rows-none';
+        }
+        return 'tw-grid-rows-2 lg:tw-grid-rows-none';
     }
+
+    return 'tw-grid-rows-2';
 })
 
 const breakToListView = computed(() => {
