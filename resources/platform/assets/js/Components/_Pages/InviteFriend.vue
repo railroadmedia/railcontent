@@ -43,7 +43,7 @@
                                     :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                     type="submit"
                                     :data-sitekey="recaptchaKey"
-                                    data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
+                                    :data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
                                     data-action='submit'>
                                     Send Invite
                                 </button>
@@ -54,7 +54,7 @@
             </div>
         </section>
     </div>
-    <ModalRenderer v-if="isModalOpen">
+    <!-- <ModalRenderer v-if="isModalOpen">
         <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
             <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
                 <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love of music!</div>
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-    </ModalRenderer>
+    </ModalRenderer> -->
 </template>
 <script setup>
 import { computed, inject, ref } from "vue";
@@ -96,9 +96,13 @@ const props = defineProps({
         default: '',  
     }
 })
+
+//Refs
 const emailError = ref(false);
 const invitee = ref('');
 const isModalOpen = ref(false);
+
+//Computed
 const cardImg = computed(() => {
     const imgs = {
         drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
@@ -108,39 +112,58 @@ const cardImg = computed(() => {
     }
     return imgs[brand.value];
 })
-const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-const sendPass = (event) => {
-    emailError.value = false;
-    const form = event.target;
-    let token = form._token.value;
-    let brand = form.brand.value;
-    let email = form.email.value;
-    const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    let data = {
-        _token: token,
-        brand,
-        email,
-    };
-    if(email.match(emailFormat)){
-        fetch(props.inviteUrl, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-        .then((res) => {
-            isModalOpen.value = true;
-        })
-    }
-    else {
-        emailError.value = true;
+
+//Methods
+const recaptchaSubmitMusoraEngagementTriggerReferWebForm = (token) => {
+    const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const userEmail = document.getElementById('MusoraEngagementTriggerReferWebForm').querySelector('input[type=email]');
+
+    if(userEmail.value.match(emailFormat)){
+        document.getElementById("MusoraEngagementTriggerReferWebForm").submit();
+        dataLayer.push({
+            "event": "gtm.formSubmit",
+            "formId": "MusoraEngagementTriggerReferWebForm",
+            "formSuccess": true
+        });
+        emailSignUpConversionTrackerForImpactProvider();
+    } else {
+        userEmail.classList.add('bg-red-200');
     }
 }
-const closeModal = () => {
-    isModalOpen.value = false;
-    invitee.value = '';
-}
+
+// const capitalize = (string) => {
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+// }
+// const sendPass = (event) => {
+//     emailError.value = false;
+//     const form = event.target;
+//     let token = form._token.value;
+//     let brand = form.brand.value;
+//     let email = form.email.value;
+//     const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//     let data = {
+//         _token: token,
+//         brand,
+//         email,
+//     };
+//     if(email.match(emailFormat)){
+//         fetch(props.inviteUrl, {
+//             method: 'POST',
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(data),
+//         })
+//         .then((res) => {
+//             isModalOpen.value = true;
+//         })
+//     }
+//     else {
+//         emailError.value = true;
+//     }
+// }
+// const closeModal = () => {
+//     isModalOpen.value = false;
+//     invitee.value = '';
+// }
 </script>
