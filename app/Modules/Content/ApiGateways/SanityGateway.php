@@ -126,6 +126,7 @@ class SanityGateway
             $documents[$key]['id'] = $document['railcontent_id'];
             $documents[$key]['url'] = $document['web_url_path'];
             $documents[$key]['fields'] = $this->mapSanityFields($document);
+            $documents[$key]['data'] = $this->mapSanityFields($document);
         }
         return $documents;
     }

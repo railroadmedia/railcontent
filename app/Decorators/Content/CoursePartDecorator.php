@@ -9,7 +9,6 @@ class CoursePartDecorator extends TypeDecoratorBase
     public function decorate(Collection $contents): Collection
     {
         $contentsOfType = $contents->where('type', 'course-part');
-
         if ($contentsOfType->isEmpty()) {
             return $contents;
         }
