@@ -1888,7 +1888,7 @@ class ContentPagesController extends BaseController
 
     public function artistSongs($route, Request $request, $brand, $artistSlug): View
     {
-        $artist = urldecode($artistSlug);
+        $artist = ($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
         $types = ['song', 'song-tutorial'];
@@ -1905,11 +1905,7 @@ class ContentPagesController extends BaseController
             $request->get('included_user_states', []),
         );
 
-        if ($initialContent->totalResults() === 0) {
-            throw new NotFoundHttpException();
-        }
-
-        $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
+        $artistName = '';
         $pluralContentType = Str::plural('song');
 
         $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
@@ -1946,50 +1942,25 @@ class ContentPagesController extends BaseController
         $availableTypes =
             (in_array($lessonType, ['quick-tips', 'boot-camps'])) ? ['quick-tips', 'boot-camps'] : [$lessonType];
 
-        $initialContent = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 12),
-            $request->get('sort', '-popularity'),
-            $availableTypes,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            ['style,'.$genre],
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', []),
-            true,
-            false,
-            true,
-            false,
-            true
-        );
-
-        if ($initialContent->totalResults() === 0) {
-            throw new NotFoundHttpException();
-        }
-
         $contentTitle = ucwords($genre.' - '.$contentTypeName);
-        $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
         $genreData = $this->genreService->getByName($genre);
         $thumb =
             $genreData['head_shot_picture_url']
             ??
             config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
-        unset($initialContent['filter_options']['genre']);
 
         return view('content.child-collection', [
-            'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => $lessonType,
             'allowedTypes' => $availableTypes,
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,
-            'contentSubtitle' => $contentSubtitle,
+            'contentSubtitle' => '',
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
-            'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
+            'pluralContentType' =>'',
         ]);
     }
 
