@@ -82,7 +82,7 @@ const changeConfirmationScreen = (confirmationType) => {
     confirmationTitle.value = 'You’re almost there!';
     confirmationDescription.value = 'We’ve sent the link to complete your account';
     endpointUrl.value = '/user-management-system/login/send-setup-email';
-    sendSetupEmail();
+    changeCurrentForm('email-confirm');
   }
 };
 
@@ -141,6 +141,7 @@ const validateEmail = () => {
       if (response.data.is_setup) {
         changeCurrentForm('login-password');
       } else {
+        console.log('setup');
         changeConfirmationScreen('setup');
       }
     })
@@ -148,23 +149,6 @@ const validateEmail = () => {
       console.log('error');
       emailError.value = "We can't find your account. Click below to join!";
       console.log(emailError.value);
-    });
-};
-
-const sendSetupEmail = () => {
-  axios.post('/user-management-system/login/send-setup-email', { email: emailInput.value })
-    .then(() => {
-      changeCurrentForm('email-confirm');
-      showNotification({
-        icon: 'check',
-        text: 'We’ve sent the link to complete your account. Please check your email.'
-      });
-    })
-    .catch(() => {
-      showNotification({
-        icon: 'error',
-        text: 'There was an error processing this request, please try again later.'
-      });
     });
 };
 </script>
@@ -201,7 +185,7 @@ const sendSetupEmail = () => {
         <ResetForm v-if="currentForm === 'reset'" :emailInput="emailInput" :reseturl="reseturl"
           :usecsrftoken="usecsrftoken" :userStore="userStore" @email-change="handleEmailChange"
           @change-confirmation-screen="changeConfirmationScreen" @change-form="changeCurrentForm" />
-        <EmailConfirmation v-if="currentForm === 'email-confirm'" :emailInput="emailInput" :endpointUrl="endpointUrl"
+        <EmailConfirmation v-if="currentForm === 'email-confirm'" :confirmationType="confirmationType" :emailInput="emailInput" :endpointUrl="endpointUrl"
           :usecsrftoken="usecsrftoken" :userStore="userStore" :confirmationTitle="confirmationTitle"
           :confirmationDescription="confirmationDescription" @change-form="changeCurrentForm" @show-notification="showNotification" />
       </div>
