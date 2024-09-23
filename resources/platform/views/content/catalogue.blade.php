@@ -17,10 +17,8 @@
     <div id="app">
         <catalogue
             catalogue-type="{{ $catalogueType }}"
-            :has-started-lessons="{{ json_encode($hasStartedLessons) }}"
             :lesson-type="{{ json_encode($lessonType) }}"
             :catalogue-meta="{{ json_encode($catalogueMeta) }}"
-            :started-lessons="{{ $hasStartedLessons ? $formattedStartedLessons : '[]' }}"
             :breadcrumbs="{{ json_encode($breadcrumbs) }}"
             :session-token="{{ json_encode(railtracker_session_token()) }}"
             ask-question-recipient="{{ $askQuestionRecipient }}"

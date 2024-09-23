@@ -20,7 +20,7 @@
               title="Continue"
               seeAllAriaLabel="See All Lessons in Progress"
               :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
-              :preLoadedContent="startedLessons"
+              :preLoadedContent="continueSection"
               :isMiniView="true"
               :show-dropdown="true"
               trackingSection="continue"
@@ -67,10 +67,8 @@
   import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
-    hasStartedLessons: Boolean,
     lessonType: String,
     catalogueMeta: Object,
-    startedLessons: Array,
     breadcrumbs: Array,
     sessionToken: String,
     askQuestionRecipient: String,
@@ -123,6 +121,8 @@
 
       // Set the continue section with started workouts
       continueSection.value = startedLessons;
+
+      console.log('started',continueSection.value);
 
       // Set default collection store values
       collectionStore.setDefaults({

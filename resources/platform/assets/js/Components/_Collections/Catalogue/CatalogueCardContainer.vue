@@ -178,6 +178,12 @@ const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collect
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
+const miniViewRowStyles = computed(() => {
+    if(props.page === 1){
+        return 'lg:tw-grid-rows-none';
+    }
+})
+
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value || isCoachShow.value);
 })
