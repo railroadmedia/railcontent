@@ -50,6 +50,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if($deleteSanityDocumentId){
             $directory = resource_path() . '/sanitystudio';
             $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=".$destination." " . $deleteSanityDocumentId);
+            return true;
         }
 
         $extraModels = [
@@ -923,6 +924,14 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         }
                     }
                     $sanityDocuments['length_in_seconds']    = (int)$video['length_in_seconds'];
+                    if( ($video['type'] != 'vimeo-video') && $sanityDocuments['length_in_seconds'] == 0){
+                        foreach($video['fields'] as $videoField){
+                            if($videoField['key'] == 'length_in_seconds'){
+                                $sanityDocuments['length_in_seconds'] = $videoField['value'];
+                            }
+                        }
+                    }
+
                     if($video['type'] == 'vimeo-video' && ($sanityDocuments['video']['external_id'] != null)){
                         $vimeoData = Vimeo::query()->where('external_id','=',$sanityDocuments['video']['external_id'])->first();
                         if($vimeoData){
