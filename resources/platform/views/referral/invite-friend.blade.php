@@ -29,5 +29,7 @@
     <invite-friend
         :can-refer="{{ json_encode($canRefer) }}"
         invite-url="{{ url()->route('referral.email-invite') }}"
+        timestamp="{{ Carbon\Carbon::now() }}"
+        recaptcha-key="{{$recaptchaKey}}"
     ></invite-friend>
 @endsection

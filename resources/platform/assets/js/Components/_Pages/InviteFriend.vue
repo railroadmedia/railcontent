@@ -25,8 +25,8 @@
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
                             <input type="hidden" name="success_redirect" value="TODO">
-                            <input type="hidden" name="timestamp" value="{{ Carbon\Carbon::now() }}">
-                            <input type="hidden" name="brand" value="{{$brand}}">
+                            <input type="hidden" name="timestamp" :value="timestamp">
+                            <input type="hidden" name="brand" :value="brand">
                             <!-- Form Inputs -->
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
@@ -42,7 +42,7 @@
                                 <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52" 
                                     :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                     type="submit"
-                                    data-sitekey="{{$recaptchaKey}}"
+                                    :data-sitekey="recaptchaKey"
                                     data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
                                     data-action='submit'>
                                     Send Invite
@@ -74,6 +74,7 @@ import { computed, inject, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import ModalRenderer from "@collections/Modal/ModalRenderer";
+import { timestamp } from "@vueuse/core";
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 const token = inject('csrf_token');
@@ -86,6 +87,14 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    timestamp: {
+        type: String,
+        default: '',  
+    },
+    recaptchaKey: {
+        type: String,
+        default: '',  
+    }
 })
 const emailError = ref(false);
 const invitee = ref('');
