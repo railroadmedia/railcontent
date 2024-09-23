@@ -79,7 +79,7 @@ const isNextButtonDisabled = () => {
 };
 
 const headerProps = {
-  title: "Great. What kind of songs are you into these days?",
+  title: "Great. What kinds of songs are you into these days?",
 };
 </script>
 
