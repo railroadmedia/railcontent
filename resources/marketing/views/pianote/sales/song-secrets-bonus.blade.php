@@ -148,7 +148,8 @@
     @endif
 
     @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount'
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=song-secrets'
     @endphp
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
@@ -981,8 +982,11 @@ That’s the Play Better Guarantee™.',
                 <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     CLAIM YOUR OFFER
                 </a>
+
+
                 <br>
-                <a class="inline-block opacity-70 mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&amp;redirect=%2Forder"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">$30/month. (no bonuses)</em></u></p></a>
+                <p class="text-sm">If Shipping or Tax is an issue, choose the DIGITAL-ONLY version and pay just $150 for your first year (no physical bonuses).</p>
+                <a class="underline cursor-pointer text-sm" href="{{ $buttonLink2 }}">Click here to claim your offer.</a>
             </div>
         </section>
     </div>

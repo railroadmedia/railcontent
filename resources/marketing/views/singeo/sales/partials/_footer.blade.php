@@ -54,7 +54,7 @@
                 <a href="/shop/singing-starter-kit">Singing Starter Kit</a><br>
                 <a href="/shop/poster-vowels">Vowel Practice Poster</a><br>
                 <a href="/shop/shirt-retro">Singeo T-Shirt</a><br>
-                <a href="/shop/tumbler-doremi">Do-Ti-La-So Tumbler</a></p>
+                <a href="/shop/tumbler-doremi">Do-Re-Mi Tumbler</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>

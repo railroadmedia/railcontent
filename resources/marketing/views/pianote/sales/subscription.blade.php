@@ -358,29 +358,18 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => 'true'
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
+                    'title' => 'Easy Chords',
+                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                    'price' => floatval($productPrices['easy-chords']->price),
                 ],
                 [
-                'image' => 'marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'marketing/pianote/membership/homepage/2024/piano-riffs-and-fills.webp',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'marketing/pianote/membership/homepage/2024/faster-fingers.webp',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                    'title' => '30-Day Blues',
+                    'description' => 'Learn the Blues in just 30 days',
+                    'price' => floatval($productPrices['30-day-blues-piano']->price),
                 ],
             ]
         @endphp
@@ -388,8 +377,7 @@
         'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
         'header' => 'Online piano lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues]=1&redirect=/order&locked=true&promo-code=special',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
