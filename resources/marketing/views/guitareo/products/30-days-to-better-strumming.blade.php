@@ -67,16 +67,16 @@
             transform: translate(-50%, 0);
             z-index: 0;
             left: 0;
-            display: none; 
+            display: none;
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container::after {
                 bottom: 0;
-                display: inline-block; 
+                display: inline-block;
             }
         }
-        
+
         .timeline-container .timeline::after {
             content: '';
             position: absolute;
@@ -88,16 +88,16 @@
             border-radius: 50%;
             z-index: 1;
             left: -16px;
-            display: none; 
+            display: none;
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container .timeline::after {
                 left: 50%;
-                display: inline-block; 
+                display: inline-block;
             }
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container::after, .timeline::after {
                 left: 50%;
@@ -124,7 +124,9 @@
 
 @section('global-body')
     @include('guitareo.sales.partials._nav', [
-        'cartVersion' => true,
+        "subscriptionVersion" => true,
+        "trialVersion" => true,
+        "joinUrl" => '/choose-plan',
     ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
@@ -149,7 +151,7 @@
                     <a class="w-full max-w-[300px] sm:w-5/12 join smaller text-white my-2 sm:m-2 anchor-slide" href="#final">START FOR FREE</a>
                     {{-- <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a> --}}
                 </div>
-                {{-- 
+                {{--
                 <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
                     <strong x-cloak x-data="timer()" x-init="countdown()">
                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -167,7 +169,7 @@
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4">
         </video>
     </header>
-    
+
     <section class="bg-black text-white py-4 sm:py-7 sm:px-6 text-center">
         <div class="container max-w-4xl mx-auto flex flex-wrap md:flex-center justify-center ">
             @php
@@ -313,7 +315,7 @@
 
     <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(to bottom, #EFF3F5, #EFF3F500);">
         <div id="final" class="anchor"></div>
-        <div class="max-w-3xl mx-auto"> 
+        <div class="max-w-3xl mx-auto">
             <h2 class="leading-tight"><strong>Try It For Free or Buy It Now</strong></h2>
             <h6 class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</h6>
         </div>
@@ -328,7 +330,7 @@
                             'button_text' => 'TRY IT FOR FREE NOW',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase stramming',
                             'border_class' => 'border-black',
-                            'link' => '/choose-plan', 
+                            'link' => '/choose-plan',
                             'description' => [
                                 '<strong>Unlimited access to all features and lessons across guitar, piano, drums & singing.</strong>',
                                 '<strong>Note-for-note breakdowns of 300+ popular songs.</strong>',
@@ -343,7 +345,7 @@
                             'button_text' => 'buy now',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase stramming',
                             'border_class' => 'border-guitareo',
-                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1', 
+                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
                             'description' => [
                                 '20 guided play-along lessons.',
                                 'Lifetime access.',
@@ -359,7 +361,7 @@
                             <h3 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h3>
                             @if(!empty($card['subheader']))
                                 <p class="text-xl"><strong>{{ $card['subheader'] }}</strong></p>
-                            @endif                            
+                            @endif
                             @if(!empty($card['price']))
                                 <h3 class="py-4 lg:py-6"><strong>{{ $card['price'] }}</strong></h3>
                             @endif
