@@ -10,13 +10,8 @@
         :collection-name="{{ json_encode($collectionName) }}"
         :collection-avatar="{{ json_encode($thumbnail_url) }}"
         :content-type="{{ json_encode($contentType) }}"
-        :included-types="{{ json_encode($allowedTypes ?? $contentType) }}"
-        :plural-content-type="{{ json_encode($pluralContentType) }}"
         :content-name="{{ json_encode($contentName) }}"
         :go-back-url="{{ json_encode($goBackUrl) }}"
-        :filterable-values="{{ json_encode($filterableValues) }}"
-        :limit="{{ 12 }}"
-        :required-fields="{{ json_encode($requiredFields) }}"
     >
     </child-collection-page>
 @endsection

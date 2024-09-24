@@ -1905,7 +1905,7 @@ class ContentPagesController extends BaseController
             $request->get('included_user_states', []),
         );
 
-        $artistName = '';
+        $artistName = $artistSlug;
         $pluralContentType = Str::plural('song');
 
         $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
