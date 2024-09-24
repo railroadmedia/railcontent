@@ -26,6 +26,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'learn-songs-faster',
             'new-drummers',
             'padstand',
+            'practice-pad-full',
             'quietpad',
             'quietkick',
             'rock-drumming-masterclass',
