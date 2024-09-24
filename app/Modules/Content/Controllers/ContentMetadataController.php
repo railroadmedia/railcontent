@@ -142,6 +142,18 @@ class ContentMetadataController extends Controller
         return $response;
     }
 
+    public function getContentUserDataAll(): array
+    {
+        $user = user();
+        $data = $this->buildUserContentData($user->id);
+        $wrappedData = $this->dataVersionService->wrapDataArrayWithVersion(
+            UserDataVersionKeyEnum::Content,
+            $data,
+            $user->id
+        );
+        return $wrappedData;
+    }
+
     private function buildUserContentData(int $userId): array
     {
         $allLikedContent = ContentLike::getAllContentLikedByUser($userId);
