@@ -377,7 +377,7 @@
         'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
         'header' => 'Online piano lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues]=1&redirect=/order&locked=true&promo-code=special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
