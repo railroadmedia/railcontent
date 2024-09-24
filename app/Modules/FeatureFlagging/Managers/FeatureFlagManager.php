@@ -182,6 +182,8 @@ class FeatureFlagManager implements FeatureFlagsContract
             $filter == 'musora' => $user->isMusoraAccount(),
             str_starts_with($filter, 'older_than') => $this->doesUserMatchAgeThanFilter($filter, $user, true),
             str_starts_with($filter, 'younger_than') => $this->doesUserMatchAgeThanFilter($filter, $user, false),
+            str_starts_with($filter, 'created_after') => $this->doesUserMatchCreated($filter, $user),
+            str_starts_with($filter, 'created_before') => $this->doesUserMatchCreated($filter, $user, true),
             default => false
         };
         return $isMatch;
@@ -210,6 +212,28 @@ class FeatureFlagManager implements FeatureFlagsContract
         }
     }
 
+
+    /**
+     * Handles the case of users created after a certain date in the format yyyy_mm_dd
+     * Example: created_after_2024_10_21
+     */
+    public function doesUserMatchCreated(string $filter, User $user, bool $before = false): bool
+    {
+        $sections = explode('_', $filter);
+        if (count($sections) != 5) {
+            return false;
+        }
+        $year = intval($sections[2]);
+        $month = intval($sections[3]);
+        $day = intval($sections[4]);
+        $date = Carbon::create($year, $month, $day)->startOfDay();
+        $createdDate = $user->created_at->startOfDay();
+
+        return $before
+            ? $createdDate->lessThan($date)
+            : $createdDate->greaterThanOrEqualTo($date);
+    }
+
     /**
      * @param array|string $allow_filter
      * @return bool
@@ -221,12 +245,20 @@ class FeatureFlagManager implements FeatureFlagsContract
         foreach ($filters as $filter) {
             if (
                 !in_array($filter, $validFilters)
-                && !str_starts_with($filter, 'older_than')
+                && !self::isValidCreatedDateFilter($filter)
             ) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static function isValidCreatedDateFilter(string $filter): bool
+    {
+        return count(array_filter(
+            ['older_than', 'younger_than', 'created_after', 'created_before'],
+            fn ($validFilter) => str_starts_with($filter, $validFilter)
+        )) > 0;
     }
 
     private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): void

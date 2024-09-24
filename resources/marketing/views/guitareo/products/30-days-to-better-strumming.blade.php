@@ -67,16 +67,16 @@
             transform: translate(-50%, 0);
             z-index: 0;
             left: 0;
-            display: none; 
+            display: none;
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container::after {
                 bottom: 0;
-                display: inline-block; 
+                display: inline-block;
             }
         }
-        
+
         .timeline-container .timeline::after {
             content: '';
             position: absolute;
@@ -88,16 +88,16 @@
             border-radius: 50%;
             z-index: 1;
             left: -16px;
-            display: none; 
+            display: none;
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container .timeline::after {
                 left: 50%;
-                display: inline-block; 
+                display: inline-block;
             }
         }
-        
+
         @media (min-width: 768px) {
             .timeline-container::after, .timeline::after {
                 left: 50%;
@@ -124,7 +124,9 @@
 
 @section('global-body')
     @include('guitareo.sales.partials._nav', [
-        'cartVersion' => true,
+        "subscriptionVersion" => true,
+        "trialVersion" => true,
+        "joinUrl" => '/choose-plan-strumming',
     ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
@@ -146,10 +148,10 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                         &nbsp;Watch Trailer
                     </div>
-                    <a class="w-full max-w-[300px] sm:w-5/12 join smaller text-white my-2 sm:m-2 anchor-slide" href="#final">START FOR FREE</a>
+                    <a class="w-full max-w-[300px] sm:w-5/12 join smaller text-white my-2 sm:m-2" href="/choose-plan-strumming">START FOR FREE</a>
                     {{-- <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a> --}}
                 </div>
-                {{-- 
+                {{--
                 <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
                     <strong x-cloak x-data="timer()" x-init="countdown()">
                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -167,7 +169,7 @@
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4">
         </video>
     </header>
-    
+
     <section class="bg-black text-white py-4 sm:py-7 sm:px-6 text-center">
         <div class="container max-w-4xl mx-auto flex flex-wrap md:flex-center justify-center ">
             @php
@@ -300,24 +302,15 @@
             </div>
         </div>
         <h1 class="leading-none sm:-mt-8 sm:mb-8 text-5xl hidden md:block"><i class="fal fa-angle-down text-guitareo"></i></h1>
-{{--        <div class="flex justify-center py-4">--}}
-{{--            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 anchor-slide" href="#final">ENROLL NOW</a>--}}
-{{--        </div>--}}
-{{--        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
-{{--            loading="lazy" onload="this.classList.remove('opacity-0')"--}}
-{{--            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
-{{--            alt="Image of joined student profiles">--}}
-{{--        <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
-{{--            {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
     </section>
 
     <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(to bottom, #EFF3F5, #EFF3F500);">
         <div id="final" class="anchor"></div>
-        <div class="max-w-3xl mx-auto"> 
+        <div class="max-w-3xl mx-auto">
             <h2 class="leading-tight"><strong>Try It For Free or Buy It Now</strong></h2>
             <h6 class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</h6>
         </div>
-        <div class="max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto">
+        <div class="max-w-xs sm:max-w-3xl mx-auto">
             <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-4 md:space-y-0 md:space-x-4">
                 @php
                     $cards = [
@@ -328,11 +321,11 @@
                             'button_text' => 'TRY IT FOR FREE NOW',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase stramming',
                             'border_class' => 'border-black',
-                            'link' => '/choose-plan', 
+                            'link' => '/choose-plan-strumming',
                             'description' => [
-                                '<strong>Unlimited access to all features and lessons across guitar, piano, drums & singing.</strong>',
-                                '<strong>Note-for-note breakdowns of 300+ popular songs.</strong>',
-                                'Join a community of over 90,000 other students.',
+                                '<strong>Unlimited access to all features and lessons<br> across guitar, piano, drums & singing.</strong>',
+                                '<strong>Note-for-note breakdowns of 300+ popular<br> songs.</strong>',
+                                'Join a community of 90,000+ other students.',
                                 '90-day money back guarantee.',
                                 'Cancel anytime.'
                             ]
@@ -343,30 +336,30 @@
                             'button_text' => 'buy now',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase stramming',
                             'border_class' => 'border-guitareo',
-                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1', 
+                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
                             'description' => [
+                                '90-day money-back guarantee.',
                                 '20 guided play-along lessons.',
-                                'Lifetime access.',
-                                '90-day money-back guarantee.'
+                                'Lifetime access.'
                             ]
                         ]
                     ];
                 @endphp
 
                 @foreach($cards as $index => $card)
-                    <div class="w-full sm:w-1/2 px-2 md:px-3 relative">
+                    <div class="w-full sm:w-1/2 px-1 relative">
                         <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:py-6 px-4 {{ $card['border_class'] }}">
                             <h3 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h3>
                             @if(!empty($card['subheader']))
-                                <p class="text-xl"><strong>{{ $card['subheader'] }}</strong></p>
-                            @endif                            
+                                <p class="-mb-3"><strong>{{ $card['subheader'] }}</strong></p>
+                            @endif
                             @if(!empty($card['price']))
                                 <h3 class="py-4 lg:py-6"><strong>{{ $card['price'] }}</strong></h3>
                             @endif
                             <a href="{{ $card['link'] }}" class="{{ $card['button_class'] }}">{{ $card['button_text'] }}</a>
-                            <div class="text-center mt-4 md:mt-6">
+                            <div class="text-left mt-4 md:mt-6 inline-block mx-auto">
                                 @foreach($card['description'] as $desc)
-                                    <p class="text-sm leading-normal pb-2">{!! $desc !!}</p>
+                                    <p class="text-sm leading-tight mb-3">{!! $desc !!}</p>
                                 @endforeach
                             </div>
                         </div>
@@ -479,7 +472,7 @@
                     <i class="fas fa-check-circle text-guitareo mr-1 md:mr-3"></i> 90-Day Money Back Guarantee
                 </h4>
             </div>
-           <a href="#final" class="join smaller w-full max-w-[300px] mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide strumming">START FOR FREE</a><br>
+           <a href="/choose-plan-strumming" class="join smaller w-full max-w-[300px] mt-6 sm:mt-12 mb-3 sm:mb-5 strumming">START FOR FREE</a><br>
             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -518,7 +511,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="#final" class="join smaller w-full max-w-[300px] mb-3 sm:mb-5 anchor-slide strumming">START FOR FREE</a><br>
+                <a href="/choose-plan-strumming" class="join smaller w-full max-w-[300px] mb-3 sm:mb-5 strumming">START FOR FREE</a><br>
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                     loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -569,7 +562,7 @@
 {{--                </span>--}}
 {{--            </h6>--}}
 
-            <span class="join smaller w-full max-w-[300px] align-middle mt-7 anchor-slide strumming" href="#final">START FOR FREE</span>
+            <a class="join smaller w-full max-w-[300px] align-middle mt-7 strumming" href="/choose-plan-strumming">START FOR FREE</a>
         </div>
     </section>
 

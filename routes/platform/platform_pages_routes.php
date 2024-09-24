@@ -177,6 +177,7 @@ Route::domain('{musoraDomain}')
                         'rudiments',
                         'song-tutorials',
                         'drum-fest-international-2022',
+                        'odd-times',
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -356,7 +357,8 @@ Route::domain('{musoraDomain}')
                             'play-alongs',
                             'song-tutorials',
                             'drum-fest-international-2022',
-                            'workouts'
+                            'workouts',
+                            'odd-times',
                         ]
                     )
                     ->name('platform.content.first-level');

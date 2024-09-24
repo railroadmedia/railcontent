@@ -207,6 +207,10 @@ if(!function_exists('parse_lesson_type_readable')) {
             case 'boot-camps':
                 $parsedType = 'Bootcamps';
                 break;
+            case 'odd-times':
+                $plural = false;
+                $parsedType = 'Odd Times With Aaron Edgar';
+                break;
             default:
                 $parsedType = $type;
                 break;

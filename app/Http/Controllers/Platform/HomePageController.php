@@ -37,7 +37,6 @@ use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 class HomePageController extends BaseController
 {
     private const DEFAULT_CONTENT_COUNT = 20;
@@ -349,6 +348,8 @@ class HomePageController extends BaseController
             $trialSection = $this->learningPathsService->getNewLearningPaths();
         }
 
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
@@ -394,6 +395,8 @@ class HomePageController extends BaseController
             "displayTrialSection" => $showNewTrialSection || $showOldTrialSection,
             "trialSectionRedesign" => $showNewTrialSection,
             "trialSection" => $trialSection,
+            "isFirstAccess" => user()->isFirstAccess(),
+            "homepageV2" => $homepageV2,
         ]);
     }
 

@@ -32,7 +32,7 @@ class OnboardingController extends Controller
         OnboardingGoals::where(['brand' => $brand, 'user_id' => user()->id])
             ->delete();
 
-        foreach ($goals as $goal) {
+        foreach ($goals as $key => $goal) {
             OnboardingGoals::create(
                 ['goals' => $goal, 'brand' => $brand, 'user_id' => user()->id]
             );

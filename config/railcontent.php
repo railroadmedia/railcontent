@@ -67,6 +67,7 @@ return [
         'song-tutorial-children',
         'workout',
         'challenge-part',
+        'odd-times'
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -1162,6 +1163,14 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+            ],
+            'odd-times' => [
+                'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1bf6fc7a-d1a5-4934-d322-b9f6da454000/public',
+                'name' => 'Odd Times With Aaron Edgar',
+                'shortname' => 'Episodes',
+                'icon' => 'icon-shows',
+                'allowableFilters' => [],
+                'sortBy' => 'sort',
             ],
         ],
         'pianote' => [
@@ -2345,6 +2354,7 @@ return [
      */
     'showTypes' => [
         'drumeo' => [
+            'odd-times',
             'drum-fest-international-2022',
             'spotlight',
             'the-history-of-electronic-drums',
@@ -3058,7 +3068,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113,115,116],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112,113,115,116,117],
     'difficulty_map' =>
         [
             '1' => 'Introductory',

@@ -1819,7 +1819,9 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'primary_brand'
+            'primary_brand',
+            'homepage_v2',
+            'is_first_access',
         ],
     ],
     'brand_logo_path_for_email' => [
