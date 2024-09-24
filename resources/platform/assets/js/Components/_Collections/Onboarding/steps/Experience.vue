@@ -83,6 +83,7 @@ function goBack() {
 
 const stepHeaderProps = {
   title: "What skill level best describes you?",
+  hideCloseButton: true,
 };
 </script>
 
