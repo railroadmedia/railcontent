@@ -125,9 +125,6 @@
       // Set default collection store values
       collectionStore.setDefaults({
         tabOptions: tabData.value,
-        filter: {
-            sort: '-published_on'
-        },
         queryType: queryTypeConverter(props.lessonType),
         ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
       });
