@@ -35,4 +35,19 @@ Route::prefix('content')
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
+
+        Route::get(
+            '/user_data_all',
+            [ContentMetadataController::class, 'getContentUserDataAll']
+        )->name('content.user_data_all');
+
+        Route::post(
+            '/{contentId}/like',
+            [ContentMetadataController::class, 'likeContent']
+        )->name('content.like');
+
+        Route::post(
+            '/{contentId}/unlike',
+            [ContentMetadataController::class, 'unLikeContent']
+        )->name('content.unlike');
     });
