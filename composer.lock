@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f5a0506a435990944949c367f49a0c7",
+    "content-hash": "6b926ce3b58603a521b617d782ccf218",
     "packages": [
         {
             "name": "amphp/amp",
@@ -11820,12 +11820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/signifly/laravel-shopify.git",
-                "reference": "5467603977facb4468650fb71abb5191789c99c7"
+                "reference": "9a2496f1240748c40774eef685c32a24656a62a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/signifly/laravel-shopify/zipball/5467603977facb4468650fb71abb5191789c99c7",
-                "reference": "5467603977facb4468650fb71abb5191789c99c7",
+                "url": "https://api.github.com/repos/signifly/laravel-shopify/zipball/9a2496f1240748c40774eef685c32a24656a62a7",
+                "reference": "9a2496f1240748c40774eef685c32a24656a62a7",
                 "shasum": ""
             },
             "require": {
@@ -11834,7 +11834,7 @@
                 "illuminate/http": "^8.0|^9.0|^10.0|^11.0",
                 "illuminate/routing": "^8.0|^9.0|^10.0|^11.0",
                 "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
-                "php": "^7.4|^8.0"
+                "php": "^7.4|^8.3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
@@ -11876,7 +11876,7 @@
                 "issues": "https://github.com/signifly/laravel-shopify/issues",
                 "source": "https://github.com/signifly/laravel-shopify/tree/master"
             },
-            "time": "2024-04-17T07:10:17+00:00"
+            "time": "2024-09-22T17:20:58+00:00"
         },
         {
             "name": "sokil/php-isocodes",
