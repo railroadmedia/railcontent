@@ -5,6 +5,7 @@ import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
 import { fetchAll, fetchCoachLessons } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
+import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
 const { getFilterValues } = useFilterValues();
 
@@ -21,7 +22,7 @@ export const useCollectionStore = defineStore({
                 limit: 20,
                 params: {},
                 searchTerm: '',
-                sort: '',
+                sort: '-published_on',
                 progress: '',
             },
             filterColumns: [],
@@ -33,8 +34,9 @@ export const useCollectionStore = defineStore({
             tabOptions: [],
             totalPages: 0,
             totalResults: 0,
-            queryType: '',
+            collectionType: '',
             fetchType: '',
+            queryType: '',
         }
     },
     actions: {
@@ -100,12 +102,22 @@ export const useCollectionStore = defineStore({
                         searchTerm: this.filter.searchTerm,
                     })
                 },
-                'lessonHistory': await useLessonHistoryPageData(this.tabData[this.filter.activeTab].key, {
-                    page: this.tabData[this.filter.activeTab].currentPage,
-                    limit: this.filter.limit,
-                    sort: this.filter.sort,
-                    searchTerm: this.filter.searchTerm,
-                }),
+                'lessonHistory': async() => {
+                    return  await useLessonHistoryPageData(this.tabData[this.filter.activeTab].key, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+                'childCollection': async() => {
+                    return await useChildCollectionPageData(this.collectionType, this.queryType, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
             }
 
             if(endpoints[type]){
@@ -166,6 +178,8 @@ export const useCollectionStore = defineStore({
             this.setData(response, replace);
             this.setURLParams();
             this.fetching = false;
+
+            return response;
         },
 
         getGroupBy(){
@@ -310,14 +324,25 @@ export const useCollectionStore = defineStore({
                 this.fetchType = defaults.fetchType;
             }
 
+            if(defaults.collectionType){
+                this.collectionType = defaults.collectionType;
+            }
+
             this.getURLParams();
 
             if(!defaults.noFetchOnLoad){
-                await this.getData();
+                const data = await this.getData();
 
                 const platformStore = usePlatformStore();
                 platformStore.setLoadingState(false);
+
+                if(this.fetchType === 'childCollection'){
+                    console.log('childCollection', data)
+                    return data;
+                }
             }
+
+
         },
 
         setURLParams() {
