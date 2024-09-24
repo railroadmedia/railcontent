@@ -59,23 +59,23 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            
+
             <!-- Continue section -->
             <div v-if="continueSection.length" class="tw-mt-[30px]">
                 <MiniCatalogueSection
                     title="Continue"
                     seeAllAriaLabel="See All Workouts In Progress"
                     :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
-                    :pre-loaded-content="continueData.data"
+                    :pre-loaded-content="continueSection"
                     :isMiniView="true"
                     :show-dropdown="true"
                     trackingSection="continue"
                 />
             </div>
         </section>
-        
+
         <br>
-        
+
         <CollectionWrapper
             :collection-type="collectionType"
             :filterable-values="filterableValues"
@@ -215,12 +215,11 @@ onBeforeMount(async () => {
     isLoading.value = true;
     try {
         // Fetch started content (in-progress workouts)
-        const startedIds = await fetchContentInProgress('workout', brand.value);
+        const startedIds = await fetchContentInProgress('workout', brand.value, { limit: 20 });
         const lessons = await fetchByRailContentIds(startedIds.started);
-        const startedLessons = lessons.filter(lesson => startedIds.started.includes(lesson.id));
 
         // Set the continue section with started workouts
-        continueSection.value = startedLessons;
+        continueSection.value = lessons;
 
         // Set default collection store values
         collectionStore.setDefaults({
