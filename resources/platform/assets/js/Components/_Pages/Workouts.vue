@@ -77,10 +77,9 @@
         <br>
 
         <CollectionWrapper
-            :collection-type="collectionType"
+            collection-type="workout"
             :filterable-values="filterableValues"
             :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
-            :pre-loaded-content="workoutData"
             :statuses="statuses"
             :tab-options="tabData"
             :is-admin="isAdmin"
@@ -111,25 +110,9 @@ import InfoModal from "@collections/Modal/InfoModal";
 import MuButton from '@units/Button/MuButton';
 
 const props = defineProps({
-    breadcrumbLastLevelUrl: {
-        type: String,
-        default: ''
-    },
-    breadcrumbLevelTitle: {
-        type: String,
-        default: ''
-    },
     carouselData: {
         type: Array,
         default: () => []
-    },
-    continueData: {
-        type: [Array, Object],
-        default: () => []
-    },
-    workoutData: {
-        type: [Array, Object],
-        default: () => [],
     },
     collectionType: {
         type: String,
@@ -212,6 +195,8 @@ const tabData = [
 ]
 
 onBeforeMount(async () => {
+    console.log(props.collectionType)
+
     isLoading.value = true;
     try {
         // Fetch started content (in-progress workouts)
