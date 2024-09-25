@@ -163,7 +163,6 @@ Route::domain('{musoraDomain}')
                         'gear-guides',
                         'performances',
                         'in-rhythm',
-                        'challenges',
                         'on-the-road',
                         'diy-drum-experiments',
                         'rhythmic-adventures-of-captain-carson',
@@ -180,32 +179,9 @@ Route::domain('{musoraDomain}')
                     ])
                     ->name('platform.content-type-catalog');
 
-
-                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
+                Route::get('/{brand}/challenges', [ContentPagesController::class, 'challenges'])
                     ->whereIn('brand', all_brands())
-                    ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
-
+                    ->name('platform.challenges');
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
