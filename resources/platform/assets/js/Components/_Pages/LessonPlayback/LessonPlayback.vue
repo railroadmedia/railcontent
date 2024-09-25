@@ -459,13 +459,10 @@ const showDraftLabel = computed(() => {
 })
 
 onBeforeMount(async() => {
-    console.log('original',  props.videoProps)
-
     const contentId = getContentId();
 
     const data = await fetchLessonContent(contentId);
     videoData.value = data;
-    console.log(data)
 
     const like = await axios.get(`/content/${contentId}/user_data/${userId.value}`);
     likeData.value = like?.data;
@@ -473,10 +470,7 @@ onBeforeMount(async() => {
     const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`);
     isCompleted.value = completed?.data[contentId]?.state === 'completed';
 
-    // Not implemented yet in MCS
     // const lessons = await fetchNextPreviousLesson(contentId);
-
-    //More TODOs
     // fetch related lessons, comments,
 
     platformStore.setLoadingState(false);
