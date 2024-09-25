@@ -32,18 +32,18 @@
                                 <strong>Invite via email</strong>
                             </label>
                             <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
-                                <input id="sign-up-email" 
-                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border" 
-                                    name="email" 
-                                    type="email" 
-                                    placeholder="Email address..." 
+                                <input id="sign-up-email"
+                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Email address..."
                                     required=""
                                 />
-                                <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52" 
+                                <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                     type="submit"
                                     :data-sitekey="recaptchaKey"
-                                    :data-callback='recaptchaSubmitMusoraEngagementTriggerReferWebForm'
+                                    @click.prevent="recaptchaSubmitMusoraEngagementTriggerReferWebForm"
                                     data-action='submit'>
                                     Send Invite
                                 </button>
@@ -54,27 +54,15 @@
             </div>
         </section>
     </div>
-    <!-- <ModalRenderer v-if="isModalOpen">
-        <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
-            <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-                <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love of music!</div>
-                <p class="tw-mt-3 tw-mb-5 tw-max-w-md tw-mx-auto">
-                    You've successfully sent <span id="modalEmail"></span>
-                    <br class="tw-hidden sm:tw-inline-block"> a 30-Day {{ capitalize(brand) }} Trial to {{ invitee }}.
-                </p>
-                <div>
-                    <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</button>
-                </div>
-            </div>
-        </div>
-    </ModalRenderer> -->
 </template>
+
 <script setup>
 import { computed, inject, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
-import ModalRenderer from "@collections/Modal/ModalRenderer";
-import { timestamp } from "@vueuse/core";
+import sha1 from 'sha1'; // Ensure these are installed via npm
+import md5 from 'md5';
+
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 const token = inject('csrf_token');
@@ -89,20 +77,21 @@ const props = defineProps({
     },
     timestamp: {
         type: String,
-        default: '',  
+        default: '',
     },
     recaptchaKey: {
         type: String,
-        default: '',  
+        default: '',
     }
 })
 
-//Refs
+// Refs
 const emailError = ref(false);
 const invitee = ref('');
 const isModalOpen = ref(false);
+const signUpEmail = ref('');
 
-//Computed
+// Computed
 const cardImg = computed(() => {
     const imgs = {
         drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
@@ -113,12 +102,32 @@ const cardImg = computed(() => {
     return imgs[brand.value];
 })
 
-//Methods
+// Methods
+const getSignUpActionTrackerId = (environment) => {
+    return (environment === 'production')
+        ? "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}"
+        : "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}";
+}
+
+const emailSignUpConversionTrackerForImpactProvider = () => {
+    const email = signUpEmail.value;
+    const hashedEmail = sha1(email);
+    const hashedOrderId = md5('drumeo_'.concat(email));
+
+    ire('trackConversion', getSignUpActionTrackerId(process.env.VUE_APP_ENV), {
+        orderId: hashedOrderId,
+        customerId: hashedOrderId,
+        customerEmail: hashedEmail
+    }, {
+        verifySiteDefinitionMatch: true
+    });
+}
+
 const recaptchaSubmitMusoraEngagementTriggerReferWebForm = (token) => {
     const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const userEmail = document.getElementById('MusoraEngagementTriggerReferWebForm').querySelector('input[type=email]');
 
-    if(userEmail.value.match(emailFormat)){
+    if (userEmail.value.match(emailFormat)) {
         document.getElementById("MusoraEngagementTriggerReferWebForm").submit();
         dataLayer.push({
             "event": "gtm.formSubmit",
@@ -130,40 +139,4 @@ const recaptchaSubmitMusoraEngagementTriggerReferWebForm = (token) => {
         userEmail.classList.add('bg-red-200');
     }
 }
-
-// const capitalize = (string) => {
-//     return string.charAt(0).toUpperCase() + string.slice(1);
-// }
-// const sendPass = (event) => {
-//     emailError.value = false;
-//     const form = event.target;
-//     let token = form._token.value;
-//     let brand = form.brand.value;
-//     let email = form.email.value;
-//     const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-//     let data = {
-//         _token: token,
-//         brand,
-//         email,
-//     };
-//     if(email.match(emailFormat)){
-//         fetch(props.inviteUrl, {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(data),
-//         })
-//         .then((res) => {
-//             isModalOpen.value = true;
-//         })
-//     }
-//     else {
-//         emailError.value = true;
-//     }
-// }
-// const closeModal = () => {
-//     isModalOpen.value = false;
-//     invitee.value = '';
-// }
 </script>

@@ -17,29 +17,3 @@
         recaptcha-key="{{$recaptchaKey}}"
     ></invite-friend>
 @endsection
-
-@section('layout-scripts')
-    <script>
-        function getSignUpActionTrackerId(environment) {
-            return (environment == 'production') ?
-                "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}" :
-                "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}";
-        }
-
-        function emailSignUpConversionTrackerForImpactProvider() {
-            var email = document.getElementById('sign-up-email').value;
-            var hashedEmail = sha1(email);
-            var hashedOrderId = md5('drumeo_'.concat(email))
-
-            ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
-                    orderId: hashedOrderId,
-                    customerId: hashedOrderId,
-                    customerEmail: hashedEmail
-                },
-                {
-                    verifySiteDefinitionMatch:true
-                }
-            );
-        }
-    </script>
-@endsection
