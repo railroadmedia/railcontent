@@ -1968,4 +1968,11 @@ class ContentPagesController extends BaseController
     {
         return view('content.artists');
     }
+
+    public function challenges(Request $request, $brand)
+    {
+        return view('content.challenges',[
+            'brand' => $brand,
+        ]);
+    }
 }
