@@ -728,12 +728,18 @@ return [
                 ],
             ],
             'FP30 Giveaway' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
                 'events' => [
                     'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Pianote Awards Giveaway' => [
