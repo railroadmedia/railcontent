@@ -343,10 +343,12 @@ const props = defineProps({
     },
 });
 
+//Pinia
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
 const { userId, brand } = storeToRefs(userStore);
+
 let hasBeenPlayed = false;
 let progressTracker;
 
@@ -448,10 +450,6 @@ const handleCloseSoundslice = () => {
 
 const noAccess = computed(() => {
     return props.thisLessonJson?.data[0]?.need_access;
-})
-
-const thumbnailUrl = computed(() => {
-    return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
 })
 
 const showDraftLabel = computed(() => {
