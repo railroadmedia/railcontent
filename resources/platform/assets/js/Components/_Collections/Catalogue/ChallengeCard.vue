@@ -1,6 +1,6 @@
 <template>
-    <div class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs " :class="widthStyles">
-        <div class="tw-rounded-[0.5px] sm:tw-rounded-md tw-overflow-hidden tw-border tw-border-primary-7 tw-relative">
+    <a class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs" :class="widthStyles">
+        <div class="tw-rounded-[0.5px] sm:tw-rounded-md lg:tw-rounded-lg tw-overflow-hidden tw-border tw-border-primary-7 tw-relative tw-group">
             <!-- Card Image -->
             <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://www.musora.com/musora-cdn/image/width=300,quality=95/https://cdn.musora.com/image/fetch/c_fill,w_660,h_960,q_auto:good/https://d1923uyy6spedc.cloudfront.net/coaches-2022/drumeo/Domino-Santantonio-HEAD.jpg" />
             <!-- Community Icon -->
@@ -18,18 +18,25 @@
             <div class="tw-flex tw-justify-center tw-absolute tw-left-0 tw-bottom-0 tw-w-full">
                 <div :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">September 1 - 31</div>
             </div>
+            <!-- Completed Icon -->
+            <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
+                <musora-icon icon-name="circle-check-filled" class="tw-text-white tw-w-12 sm:tw-w-16 lg:tw-w-20 tw-h-12 sm:tw-h-16 lg:tw-h-20" />
+            </div>
+            <!-- Overlay -->
+            <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/40 tw-hidden group-hover:tw-block"></div>
         </div>
         <div class="tw-my-[7px] tw-uppercase">
             El Estepario Siberiano
         </div>
         <DifficultyLabel />
-    </div>
+    </a>
 </template>
 <script setup>
 import { computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
+import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 
 const props = defineProps({
     isGroupedView: {
