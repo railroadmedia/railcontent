@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -52,6 +52,7 @@ import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";
+import ChallengeCardContainer from '@collections/Catalogue/ChallengeCardContainer';
 
 const props = defineProps({
     collectionType: {
@@ -144,6 +145,7 @@ const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, 
 const { brand } = storeToRefs(userStore);
 
 //Collection type reactives
+
 const isRecommendation = computed(() => {
     return props.collectionType === 'Recommendation';
 })
