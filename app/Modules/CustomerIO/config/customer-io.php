@@ -115,12 +115,12 @@ return [
                 ],
             ],
             'Musora Referral' => [
-                'custom_attributes' => [
-                    'brand' => 'nullable|string',
-                    'timestamp' => 'nullable|string',
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     '30day-trial-referral',
+                ],
+                'custom_event_attributes' => [
+                    'referrer' => 'required|string',
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',

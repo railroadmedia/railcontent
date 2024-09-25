@@ -456,8 +456,16 @@ class CustomerIoService
                             'brand' => $brand,
                             'form_name' => $formName,
                         ];
+
                         foreach (config('customer-io.forms_events_UTM_parameters', []) as $param => $dataKey) {
                             $eventData[$dataKey] = $requestParams[$param] ?? null;
+                        }
+
+                        $customEventAttributes = array_keys($formConfig['custom_event_attributes']);
+                        foreach ($requestParams as $param => $value) {
+                            if (in_array($param, $customEventAttributes)) {
+                                $eventData[$param] = $value;
+                            }
                         }
 
                         $this->createEvent($customer->email, $accountName, $eventName, array_filter($eventData));
