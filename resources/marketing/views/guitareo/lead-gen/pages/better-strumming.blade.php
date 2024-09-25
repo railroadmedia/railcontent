@@ -87,7 +87,7 @@
             color:#000;
         }
         .lessons-list::-webkit-scrollbar {
-            width: 6px; 
+            width: 6px;
         }
 
         /* The track (background) of the scrollbar */
@@ -120,22 +120,22 @@
 @section('body')
 <section x-data="{ visible: false, showVideoModal: false, videoId: null, currentVideoIndex: 0 }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-6 md:py-8" style="background: #111729;">
     <div class="container max-w-5xl mx-auto">
-        <img 
-            alt="30 Days To Better Strumming Logo" 
+        <img
+            alt="30 Days To Better Strumming Logo"
             class="h-14 sm:h-20 mx-auto mb-3 sm:mb-5"
             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"
         >
         <div class="md:flex">
             <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0 text-left">
-                <div 
+                <div
                     class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                    x-on:click="kickOff = true;" 
                     role="button"
+                    @click="currentVideoIndex = 0; videoId = '944222905'; showVideoModal = true; loadAndPlayVideo(videoId, currentVideoIndex);"
                 >
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                    <img 
+                    <img
                         class="absolute inset-0 overflow-hidden object-cover w-full h-full z-0 opacity-0 transition-opacity"
-                        loading="lazy" 
+                        loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
                         alt="Thumbnail for tutorial video"
@@ -150,26 +150,26 @@
                     </p>
                 </div>
             </div>
-           <div 
-                x-show="showVideoModal" 
-                x-on:keydown.escape.prevent.stop="showVideoModal = false; pauseVideo();" 
-                class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;" 
-                role="dialog" 
+           <div
+                x-show="showVideoModal"
+                x-on:keydown.escape.prevent.stop="showVideoModal = false; pauseVideo();"
+                class="fixed inset-0 overflow-y-auto" style="display: none; z-index: 2147483002;"
+                role="dialog"
                 aria-modal="true"
             >
                 <div x-show="showVideoModal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;" @click="showVideoModal = false; pauseVideo();"></div>
 
-                <div 
-                    x-show="showVideoModal" 
-                    x-transition 
-                    class="relative min-h-screen flex items-center justify-center px-4" 
-                    style="z-index: 1006;" 
+                <div
+                    x-show="showVideoModal"
+                    x-transition
+                    class="relative min-h-screen flex items-center justify-center px-4"
+                    style="z-index: 1006;"
                     @click="showVideoModal = false; pauseVideo();"
                 >
                     <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl z-150" @click="showVideoModal = false; pauseVideo();"></i>
                     <div x-on:click.stop class="relative w-full max-w-6xl overflow-hidden rounded-xl">
                         <div class="relative w-full" style="padding-top: 56.25%;">
-                            <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div> 
+                            <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div>
                         </div>
                         <a class="w-full sm:w-2/3 md:max-w-[320px] join guitareo smaller mt-4 sm:pr-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
                         <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller white outline my-2" x-show="showVideoModal" @click="nextLesson()">Next Lesson</a>
@@ -308,9 +308,9 @@
                                 style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
                                 @click="
                                     @if (isset($lesson['videoId']))
-                                        currentVideoIndex = {{ $index }}; 
-                                        videoId = '{{ $lesson['videoId'] }}'; 
-                                        showVideoModal = true; 
+                                        currentVideoIndex = {{ $index }};
+                                        videoId = '{{ $lesson['videoId'] }}';
+                                        showVideoModal = true;
                                         loadAndPlayVideo(videoId, currentVideoIndex);
                                     @else
                                         unlock = true;
@@ -457,13 +457,13 @@
             </div>
         </div>
     </section>
-    
+
     @php
         $videos = [
             ['name' => 'kickOff', 'video' => '944222905'],
         ];
     @endphp
-    
+
     @foreach ($videos as $video)
         @include('_partials.components.video-modal', [
             'name' => $video['name'],
@@ -496,7 +496,7 @@
                 id: videoId,
                 loop: false,
                 width: '100%',
-                responsive: true 
+                responsive: true
             };
 
             if (player) {
@@ -544,7 +544,7 @@
             currentIndex++;
             if (currentIndex < videoIds.length) {
                 initializePlayer(videoIds[currentIndex]);
-                showVideoModal(); 
+                showVideoModal();
             } else {
                 showEndOfLessonsModal();
             }
@@ -556,13 +556,13 @@
 
         function showEndOfLessonsModal() {
             document.getElementById('end-of-lessons-modal').style.display = 'block';
-            pauseVideo(); 
-            document.querySelector('[x-show="showVideoModal"]').style.display = 'none'; 
+            pauseVideo();
+            document.querySelector('[x-show="showVideoModal"]').style.display = 'none';
         }
 
         function resetModal() {
             document.getElementById('end-of-lessons-modal').style.display = 'none';
-            document.querySelector('[x-show="showVideoModal"]').style.display = 'block'; 
+            document.querySelector('[x-show="showVideoModal"]').style.display = 'block';
         }
 
         document.getElementById('end-of-lessons-modal').addEventListener('click', function() {
