@@ -3,14 +3,8 @@
 namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
-use App\Modules\Content\Models\Sanity\Enums\VideoType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
-use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
-use App\Modules\Content\Models\Sanity\Structure\Reference;
-use Modules\Content\Models\Sanity\Structure\Block;
-use Modules\Content\Models\Sanity\Structure\BrandField;
-use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * Defines the schema structure for a Song Tutorial document type in Sanity.
@@ -31,6 +25,7 @@ class SongTutorial extends ParentTemplate
         $this->addFields([
                              new Field(FieldType::String, 'song_name', group: $detailsGroup),
                              new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
+                             new Field(FieldType::Number, 'length_in_seconds','Duration', group: $detailsGroup)
                    ]);
     }
 

@@ -3,7 +3,6 @@
 namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Structure\Field;
-use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
  * Defines the schema structure for a Foundation unit document type in Sanity.
