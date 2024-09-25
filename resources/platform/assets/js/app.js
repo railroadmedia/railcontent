@@ -75,6 +75,7 @@ import AllContentUpdates from './Components/_Pages/ContentUpdate/All';
 import ReturningContentUpdates from './Components/_Pages/ContentUpdate/Returning';
 import ComingSoonContentUpdates from './Components/_Pages/ContentUpdate/ComingSoon';
 import LeavingContentUpdates from './Components/_Pages/ContentUpdate/Leaving';
+import Challenges from './Components/_Pages/Challenges/Challenges';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -267,6 +268,7 @@ app.component('AppContainer', AppContainer)
     .component('ReturningContentUpdates', ReturningContentUpdates)
     .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
     .component('LeavingContentUpdates', LeavingContentUpdates)
+    .component('Challenges', Challenges)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
