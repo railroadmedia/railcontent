@@ -461,7 +461,7 @@ class CustomerIoService
                             $eventData[$dataKey] = $requestParams[$param] ?? null;
                         }
 
-                        $customEventAttributes = array_keys($formConfig['custom_event_attributes']);
+                        $customEventAttributes = array_keys($formConfig['custom_event_attributes'] ?? []);
                         foreach ($requestParams as $param => $value) {
                             if (in_array($param, $customEventAttributes)) {
                                 $eventData[$param] = $value;
