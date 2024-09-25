@@ -19,6 +19,7 @@ class CustomerIoFormRequest extends FormRequest
         $allConfiguredFormNames = array_keys($forms);
 
         $customAttributeRules = $forms[$this->input('form_name')]['custom_attributes'] ?? [];
+        $customEventAttributes = $forms[$this->input('form_name')]['custom_event_attributes'] ?? [];
 
         $rules = array_merge([
             'email' => 'required|email',
@@ -26,7 +27,7 @@ class CustomerIoFormRequest extends FormRequest
             'g-recaptcha-response' => [Rule::requiredIf(function () {
                 return $this->route()->getName() === 'customer-io.submit-email-form-rc';
             }), new ReCaptcha()]
-        ], $customAttributeRules);
+        ], $customAttributeRules, $customEventAttributes);
 
         return $rules;
     }
