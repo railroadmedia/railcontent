@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isLoading" class="tw-flex tw-flex-col lg:tw-flex-row tw-w-full tw-justify-between">
+    <div v-if="!isLoading" class="tw-flex tw-w-full tw-justify-between" :class="rowStyles">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 xl:tw-mb-0">
             <!-- Filter Tabs -->
             <FilterTabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
@@ -130,6 +130,12 @@ const sortIcon = () => {
 
 const hasPills = computed(() => {
     return props.selectedFilters && Object.keys(props.selectedFilters).length > 0;
+})
+
+const rowStyles = computed(() => {
+    if(!props.hideSearch){
+        return 'tw-flex-col lg:tw-flex-row tw-overflow-x-auto';
+    }
 })
 </script>
 
