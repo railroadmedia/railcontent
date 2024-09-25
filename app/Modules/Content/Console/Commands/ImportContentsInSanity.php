@@ -555,9 +555,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
     private function handleChildren(mixed $result, array &$songs, string $id, mixed $type): array
     {
         $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position', 'asc')->get();
+        $duration = 0;
         foreach ($contentHierarchy as $hierarchy) {
             if ($hierarchy->child) {
                 if ($hierarchy->child->type != 'assignment' && $hierarchy->child->status != 'deleted') {
+                    $duration += (int)$hierarchy->child->length_in_seconds;
                     $songs["child"][] = [
                         "_type" => "reference",
                         "_ref"  => $hierarchy->child->type . '_' . $hierarchy->child->id,
@@ -582,6 +584,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 }
             }
         }
+
+        $songs['length_in_seconds'] = $duration;
 
         return $songs;
     }
