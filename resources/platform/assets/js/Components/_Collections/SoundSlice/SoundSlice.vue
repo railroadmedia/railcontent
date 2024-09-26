@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, onBeforeMount, onBeforeUnmount, reactive, ref} from 'vue';
+import { onMounted, onBeforeMount, onBeforeUnmount, reactive, ref, computed } from 'vue';
 import LoadingAnimation from '@vuesora/Components/LoadingAnimation/LoadingAnimation.vue';
 import ProgressTracker from '@vuesora/assets/js/classes/progress-tracker';
 import ContentService from "@vuesora/assets/js/Services/content";
+import userJourney from "@services/userJourney";
 
 //Props
 const props = defineProps({
@@ -65,11 +66,14 @@ const endTime = ref(30); //get end time depending on user settings
 const ssiframe = ref(null);
 const progressTrackerEventListener = ref(null);
 const ssURL = ref(`https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&recording_idx=2&top_controls=1&u=${props.userId}${props.additionalParams}`);
+const currentTimeRef = ref(0);
+const seekingStart = ref(false);
+const isPlayingEventDisabled = ref(false);
 
 //Static 
 let progressTracker = new ProgressTracker(); //????
-let intervalId = null;
-
+let heartbeatTimer = 0;
+let syncInterval = null;
 
 //Reactive Objs
 const globalSettings = reactive({
@@ -82,14 +86,36 @@ const uniqueSettings = reactive({
     audioSource: null,
 });
 
+
+// computed
+
+const trackingPayload = () => {
+    return {
+        brand: props.themeColor,
+        content_id: props.contentId,
+        position_seconds: Math.round(currentTimeRef.value),
+        video_player: "soundslice",
+        video_length_seconds: Math.round(endTime.value),
+        soundslice_slug: props.soundsliceSlug,
+    };
+};
+
 /**********************  
     Methods
 **********************/
 const handlePlay = (event) => {
-    playEventsRan.value ++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
-    
+    playEventsRan.value++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
+
+    //User Journey Track Play
+    if (!hasBeenPlayed.value) {
+        userJourney.trackVideo({ payload: trackingPayload(), type: 'started' });
+        queueTrackPlayInterval();
+    } else if (playEventsRan.value > 2) {
+        trackPlay();
+    }
+
     //Start Counter
-    if(playEventsRan.value > 1) {
+    if (playEventsRan.value > 1) {
         ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
     }
     //Update Content Service
@@ -106,8 +132,8 @@ const handlePlay = (event) => {
 }
 
 const handlePause = () => {
+    ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
     progressTracker.stop();
-    stopCounter();
 }
 
 const sendProgressTracking = () => {
@@ -129,35 +155,49 @@ const spacebarToPlayPause = (event) => {
     }
 };
 
-//Counter
-const startCounter = (currentTime) => {
-    intervalId = setInterval( ()=> {
-        if ( currentTime < endTime.value ) {
-            currentTime ++;
-            //SET Current Time
-            saveCurrentTime(currentTime);
-        } else {
-            clearInterval(intervalId);
-        }
-    }, 1000)                 
-}
-const stopCounter = () => {
-    clearInterval(intervalId);
-}
-
 //DEBOUNCE
 const debounce = (cb, delay = 1000) => {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         clearTimeout(timeout);
-        timeout = setTimeout( ()=> {
+        timeout = setTimeout(() => {
             cb(...args)
         }, delay)
-    }; 
+    };
 }
 
+const trackPause = () => {
+    if (seekingStart.value) {
+        seekingStart.value = false;
+    } else {
+        userJourney.trackVideo({ payload: trackingPayload(), type: 'paused' });
+    }
+    clearInterval(syncInterval);
+    syncInterval = null;
+    heartbeatTimer = 0;
+};
+
+const queueTrackPlayInterval = () => {
+    if (!syncInterval) {
+        ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
+        syncInterval = setInterval(() => {
+            ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
+            if (heartbeatTimer % 15 === 0 && !isPlayingEventDisabled.value) {
+                userJourney.trackVideo({ payload: trackingPayload(), type: 'playing' });
+            }
+            heartbeatTimer++;
+        }, 1000);
+    }
+};
+
+const trackPlay = () => {
+    userJourney.trackVideo({ payload: trackingPayload(), type: 'resumed' });
+
+    queueTrackPlayInterval();
+};
+
 //SET Volume
-const saveVolume = debounce(function(val){
+const saveVolume = debounce(function (val) {
     localStorage.setItem("ssVolume", val);
 }, 250);
 //SET Layout
@@ -165,7 +205,7 @@ const saveLayout = (val) => {
     localStorage.setItem("ssLayout", val);
 };
 //SET Zoom
-const saveZoom = debounce(function(val){
+const saveZoom = debounce(function (val) {
     //localStorage.setItem("ssZoom", val);
 }, 250);
 //SET Audio Source 
@@ -174,7 +214,8 @@ const saveAudioSource = (val) => {
 };
 //SET Current Time
 const saveCurrentTime = (val) => {
-    localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, val);
+    localStorage.setItem(`${props.soundsliceSlug}_currentTime`, val);
+    currentTimeRef.value = val;
 }
 
 //listen For Soundslice Events....
@@ -184,14 +225,14 @@ const handleSoundsliceEvent = (event) => {
         switch (cmd.method) {
             //GLOBAL SETTINGS
             case 'ssPlayerReady':
-                break 
+                break
             case 'ssNotationLoaded':
                 //Get Duration
                 ssiframe.value.contentWindow.postMessage(`{"method": "getDuration" }`, 'https://www.soundslice.com');
-                
+
                 //Set Volume
                 ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
-                
+
                 //Set Zoom
                 //ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
                 //Set Audio Source
@@ -201,12 +242,12 @@ const handleSoundsliceEvent = (event) => {
 
                 //Get Current Time
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
-                
+
                 //Set Loop
-                if(props.loop) {
+                if (props.loop) {
                     ssiframe.value.contentWindow.postMessage(`{"method": "setLoop", "arg": [${props.startTime}, ${props.endTime}] }`, 'https://www.soundslice.com');
                 }
-                
+
                 //Done
                 isLoading.value = false;
                 break
@@ -215,9 +256,12 @@ const handleSoundsliceEvent = (event) => {
                 break
             case 'ssSeek':
                 //SET Current Time
-                saveCurrentTime( Math.floor(cmd.arg) );
+                if (Math.floor(cmd.arg) === Math.floor(uniqueSettings.time)) {
+                    seekingStart.value = true;
+                }
+                saveCurrentTime(Math.floor(cmd.arg));
                 break;
-            case 'ssVolumeChange': 
+            case 'ssVolumeChange':
                 ssiframe.value.contentWindow.postMessage('{"method": "getVolume"}', 'https://www.soundslice.com');
                 break;
             case 'ssVolume':
@@ -231,18 +275,20 @@ const handleSoundsliceEvent = (event) => {
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
-                //Start Counter
-                if(isPlaying.value && uniqueSettings.audioSource !== "0") startCounter(Math.floor(cmd.arg));
+                saveCurrentTime(Math.floor(cmd.arg));
+                // We make sure we track the exact pause time at any speed and that the pause event is only sent once
+                if (!isPlaying.value && syncInterval !== null && Math.floor(cmd.arg) < endTime.value) {
+                    trackPause();
+                }
                 break
             case 'ssAudioSourceChanged':
-                stopCounter();
                 saveAudioSource(cmd.arg)
                 break;
             //PLAYBACK SETTINGS
             case 'ssPlay':
                 isPlaying.value = true;
+                saveCurrentTime(Math.floor(cmd.arg));
                 handlePlay(event);
-                if(isPlaying.value && uniqueSettings.audioSource === "0") startCounter(Math.floor(cmd.arg));
                 break;
             case 'ssPause':
                 isPlaying.value = false;
@@ -267,29 +313,51 @@ const handleSoundsliceEvent = (event) => {
     }
 };
 
+const requestWakeLock = async () => {
+    if ('wakeLock' in navigator) {
+        try {
+            await navigator.wakeLock.request('screen');
+        } catch (err) {
+            console.error('Wake Lock request failed:', err);
+        }
+    } else {
+        console.log('Wake Lock API not supported in this browser');
+    }
+};
+
+const handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible') {
+        isPlayingEventDisabled.value = false;
+    } else {
+        isPlayingEventDisabled.value = true;
+    }
+};
+
 /**********************  
     Lifecycle Hooks
 **********************/
-onBeforeMount(()=> {
+onBeforeMount(() => {
+    requestWakeLock();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     let url = new URL(ssURL.value);
     let params = new URLSearchParams(url.search);
 
     //GET Volume
-    if(localStorage.getItem("ssVolume")) {
+    if (localStorage.getItem("ssVolume")) {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
+
     //GET Current Time
-    if(!props.forceStartTime) {
-        if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`) ) {
-            uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
-        }
-    } else {
+    if (localStorage.getItem(`${props.soundsliceSlug}_currentTime`)) {
+        uniqueSettings.time = localStorage.getItem(`${props.soundsliceSlug}_currentTime`);
+    }
+    else {
         uniqueSettings.time = props.startTime;
     }
 
 
     //GET Layout
-    if(localStorage.getItem("ssLayout")) {
+    if (localStorage.getItem("ssLayout")) {
         globalSettings.layout = localStorage.getItem("ssLayout");
         params.set('layout', globalSettings.layout);
         url.search = params.toString();
@@ -316,6 +384,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
     progressTracker.sendAsync({
         mediaId: props.contentId,
         mediaType: 'assignment',
@@ -334,12 +403,8 @@ onBeforeUnmount(() => {
             <slot name="soundsliceControls"></slot>
             <div class="flex flex-row grow">
                 <div id="soundslice-container" class="flex flex-column relative">
-                    <iframe 
-                        ref="ssiframe"
-                        id="ssEmbed"
-                        :src="ssURL"
-                        frameBorder="0" allowfullscreen
-                    ></iframe>
+                    <iframe ref="ssiframe" id="ssEmbed" :src="ssURL" frameBorder="0" allowfullscreen
+                        allow="screen-wake-lock"></iframe>
                 </div>
             </div>
         </div>

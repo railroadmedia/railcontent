@@ -548,7 +548,7 @@ const seekToChapter = (time) => {
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                     <SoundSlice :user-id="userId" :theme-color="brand"
                         :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                        :soundslice-slug="soundsliceSlug" :contentId="contentId" :force-start-time="true"
+                        :soundslice-slug="soundsliceSlug" :contentId="contentId" 
                         :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                         <template v-slot:soundsliceControls>
                             <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"
