@@ -24,10 +24,9 @@ class MentorServiceTest extends TestCase
 
     public function createMentor(string $brand): Mentor
     {
-        $mentor = Mentor::factory()->create([
+        return Mentor::factory()->create([
             'supported_brands' => $brand
         ]);
-        return $mentor;
     }
 
 
@@ -64,9 +63,8 @@ class MentorServiceTest extends TestCase
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
 
-
         //create 3 users, 2 active, 1 not
-        $user = User::factory()->create();
+        $user = User::factory()->withoutActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         $user2 = User::factory()->hasActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
@@ -84,7 +82,7 @@ class MentorServiceTest extends TestCase
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
         //create 3 users, 2 active, 1 not
-        $this->mentorService->assignMentorByBrand(User::factory()->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->withoutActiveMembership()->create()->id, $brand);
         $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(100)->create()->id, $brand);
         $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(140)->create()->id, $brand);
         $user = User::factory()->hasActiveMembership(160)->create();
@@ -160,7 +158,7 @@ class MentorServiceTest extends TestCase
         $user2 = User::factory()->hasActiveMembership(100)->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
 
-        $user3 = User::factory()->create();
+        $user3 = User::factory()->withoutActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user3->id, $brand);
 
         $this->assertMentorCount($mentor, 2, 3);

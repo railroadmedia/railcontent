@@ -11,7 +11,11 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('personal_access_tokens', function (Blueprint $table) {
-            $table->timestamp('expires_at')->nullable()->after('last_used_at');
+            // DEV NOTE: this column is in the musora_laravel_mysql-schema, but wasn't yet in some DBs,
+            // so only apply if necessary
+            if (!Schema::hasColumn('personal_access_tokens', 'expires_at')) {
+                $table->timestamp('expires_at')->nullable()->after('last_used_at');
+            }
         });
     }
 

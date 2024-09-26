@@ -135,6 +135,15 @@ class UserFactory extends Factory
         });
     }
 
+    public function withoutActiveMembership(): UserFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'membership_expiration_date' => null
+            ];
+        });
+    }
+
     public function hasSubscription(array $array = []): UserFactory
     {
         return $this->afterCreating(function (User $user) use ($array) {

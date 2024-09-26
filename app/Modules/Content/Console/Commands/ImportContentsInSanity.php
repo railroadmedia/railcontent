@@ -48,7 +48,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $deleteOldDocuments = $this->argument('delete');
         $destination        = $this->argument('destination');
         $deleteSanityDocumentId = $this->hasOption('deleteSanityDocumentId') ? $this->option('deleteSanityDocumentId') : null;
-        if($deleteSanityDocumentId){
+        if ($deleteSanityDocumentId) {
             $directory = resource_path() . '/sanitystudio';
             $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=".$destination." " . $deleteSanityDocumentId);
             return true;
@@ -392,7 +392,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $resultCode = $this->runCliCommand("cd $directory && yarn sanity documents delete --dataset=development " . $ids);
         }
 
-        if($this->option('vimeoRefresh')){
+        if ($this->option('vimeoRefresh')) {
             $this->syncVimeoData($vimeoVideos, $vimeoVideoSourcesDecorator, $sanityDocuments);
         }
 
@@ -624,7 +624,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $type       = isset($this->contentTypeToSanityTypeMapping[$result->type]) ? $this->contentTypeToSanityTypeMapping[$result->type] : $result->type;
 
             $id         = $type . '_' . $result->id;
-            if($result->id == 215952) {
+            if ($result->id == 215952) {
                 $id = 'foundation';
                 $type = 'foundation';
             }
@@ -672,7 +672,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             "web_url_path"     => $result->web_url_path,
             "popularity"       => $result->popularity
         ];
-        if(!$result->web_url_path){
+        if (!$result->web_url_path) {
             $contentURLs =
                 $railcontentURLProvider->getContentURLs(
                     $result->id,
@@ -713,7 +713,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     '_sanityAsset' => 'image@' . $datum['value']
                 ];
                 $imported                = true;
-            }elseif(in_array($datum['content_id'], $contentWithWrongImage)){
+            } elseif (in_array($datum['content_id'], $contentWithWrongImage)) {
                 $imported                = true;
             }
             if (in_array($datum['key'], ['logo_image_url', 'dark_mode_logo_url', 'light_mode_logo_url']) && $datum['value'] != '') {
@@ -847,8 +847,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         foreach ($result->fields as $field) {
             $imported = false;
             if (in_array(
-                    $field['key'],
-                    [
+                $field['key'],
+                [
                         'soundslice_slug',
                         'name',
                         'gear',
@@ -863,7 +863,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'live_event_youtube_id',
                         'soundslice_slug',
                     ]
-                ) && $field['value'] != '') {
+            ) && $field['value'] != '') {
                 $sanityDocuments[$field['key']] = $field['value'];
                 $imported                  = true;
             }
@@ -927,26 +927,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 if ($video) {
                     $sanityDocuments['video']['type']        = $video['type'];
                     $sanityDocuments['video']['external_id'] = ($video['type'] == 'vimeo-video') ? $video['vimeo_video_id'] : $video['youtube_video_id'];
-                    if($sanityDocuments['video']['external_id'] == null){
+                    if ($sanityDocuments['video']['external_id'] == null) {
                         $this->info('vimeo_external_id is missing');
-                        foreach($video['fields'] as $videoField){
-                            if($videoField['key'] == 'vimeo_video_id'){
+                        foreach ($video['fields'] as $videoField) {
+                            if ($videoField['key'] == 'vimeo_video_id') {
                                 $sanityDocuments['video']['external_id'] = $videoField['value'];
                             }
                         }
                     }
                     $sanityDocuments['length_in_seconds']    = (int)$video['length_in_seconds'];
-                    if( ($video['type'] != 'vimeo-video') && $sanityDocuments['length_in_seconds'] == 0){
-                        foreach($video['fields'] as $videoField){
-                            if($videoField['key'] == 'length_in_seconds'){
+                    if (($video['type'] != 'vimeo-video') && $sanityDocuments['length_in_seconds'] == 0) {
+                        foreach ($video['fields'] as $videoField) {
+                            if ($videoField['key'] == 'length_in_seconds') {
                                 $sanityDocuments['length_in_seconds'] = $videoField['value'];
                             }
                         }
                     }
 
-                    if($video['type'] == 'vimeo-video' && ($sanityDocuments['video']['external_id'] != null)){
-                        $vimeoData = Vimeo::query()->where('external_id','=',$sanityDocuments['video']['external_id'])->first();
-                        if($vimeoData){
+                    if ($video['type'] == 'vimeo-video' && ($sanityDocuments['video']['external_id'] != null)) {
+                        $vimeoData = Vimeo::query()->where('external_id', '=', $sanityDocuments['video']['external_id'])->first();
+                        if ($vimeoData) {
                             $sanityDocuments['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
                             $sanityDocuments['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
                             $sanityDocuments['length_in_seconds'] = $vimeoData['length_in_seconds'] ?? $sanityDocuments['length_in_seconds'];

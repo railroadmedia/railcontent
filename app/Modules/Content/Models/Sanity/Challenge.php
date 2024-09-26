@@ -34,7 +34,7 @@ class Challenge extends ParentTemplate
                                  group: $detailsGroup,
                                  of: $childReference,
                              ),
-                             new Field(FieldType::Number, 'length_in_seconds','Duration', group: $detailsGroup)
+                             new Field(FieldType::Number, 'length_in_seconds', 'Duration', group: $detailsGroup)
                          ]);
     }
 
