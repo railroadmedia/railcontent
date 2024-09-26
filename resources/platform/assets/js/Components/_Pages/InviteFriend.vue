@@ -12,39 +12,33 @@
                                 <div class="relative">
                                     <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl" :src="cardImg" :alt="`${brand} guest card`">
                                 </div>
-                                <div class="tw-text-sm tw-italic justify-center tw-mt-2">Starting at $20/month thereafter (billed annually). Cancel anytime.</div>
+                                <div class="tw-text-sm tw-italic justify-center tw-mt-2">
+                                    Starting at $20/month thereafter (billed annually). Cancel anytime.
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div v-if="canRefer"
-                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto"
-                    >
+                    <div v-if="canRefer" class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
                         <form id="MusoraEngagementTriggerReferWebForm" accept-charset="UTF-8" method="POST"
-                            action="/customer-io/submit-email-form-rc" class="ajax-form clearfix mx-auto">
-                            <!-- Hidden Fields -->
+                              action="/customer-io/submit-email-form" class="ajax-form clearfix mx-auto">
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
-                            <input type="hidden" name="success_redirect" value="TODO">
-                            <input type="hidden" name="timestamp" :value="timestamp">
-                            <input type="hidden" name="brand" :value="brand">
-                            <!-- Form Inputs -->
+                            <input type="hidden" name="success_redirect" value="">
+                            <!-- Tracking Inputs -->
+                            <div v-html="trackingInputsHtml"></div>
+                            
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
                             <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input id="sign-up-email"
-                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Email address..."
-                                    required=""
-                                />
+                                       class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
+                                       name="email" type="email" placeholder="Email address..." required="">
                                 <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
-                                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
-                                    type="submit"
-                                    :data-sitekey="recaptchaKey"
-                                    @click.prevent="recaptchaSubmitMusoraEngagementTriggerReferWebForm"
-                                    data-action='submit'>
+                                        :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" type="submit"
+                                        :data-sitekey="recaptchaKey"
+                                        :data-callback="'recaptchaSubmitMusoraEngagementTriggerReferWebForm'"
+                                        data-action='submit'>
                                     Send Invite
                                 </button>
                             </div>
@@ -57,15 +51,12 @@
 </template>
 
 <script setup>
-import { computed, inject, ref } from "vue";
-import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "@stores/user";
-import sha1 from 'sha1'; // Ensure these are installed via npm
-import md5 from 'md5';
+import { computed, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@stores/user';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-const token = inject('csrf_token');
 const props = defineProps({
     canRefer: {
         type: Boolean,
@@ -75,67 +66,43 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    timestamp: {
-        type: String,
-        default: '',
-    },
     recaptchaKey: {
         type: String,
-        default: '',
-    }
-})
+        default: process.env.VUE_APP_RECAPTCHA_KEY,
+    },
+    trackingInputsHtml: {
+        type: String,
+        required: true,
+    },
+});
 
-// Refs
-const emailError = ref(false);
-const invitee = ref('');
-const isModalOpen = ref(false);
-const signUpEmail = ref('');
-
-// Computed
 const cardImg = computed(() => {
     const imgs = {
         drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
         pianote: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-30-day-free-trial.png',
         guitareo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-30-day-free-trial.png',
         singeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-30-day-free-trial.png',
-    }
+    };
     return imgs[brand.value];
-})
+});
 
-// Methods
-const getSignUpActionTrackerId = (environment) => {
-    return (environment === 'production')
-        ? "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}"
-        : "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}";
-}
-
-const emailSignUpConversionTrackerForImpactProvider = () => {
-    const email = signUpEmail.value;
-    const hashedEmail = sha1(email);
-    const hashedOrderId = md5('drumeo_'.concat(email));
-
-    ire('trackConversion', getSignUpActionTrackerId(process.env.VUE_APP_ENV), {
-        orderId: hashedOrderId,
-        customerId: hashedOrderId,
-        customerEmail: hashedEmail
-    }, {
-        verifySiteDefinitionMatch: true
-    });
-}
-
-const recaptchaSubmitMusoraEngagementTriggerReferWebForm = (token) => {
+function recaptchaSubmitMusoraEngagementTriggerReferWebForm(token) {
     const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const userEmail = document.getElementById('MusoraEngagementTriggerReferWebForm').querySelector('input[type=email]');
 
     if (userEmail.value.match(emailFormat)) {
+        console.log('Email format is valid:', userEmail.value);
+        console.log('Submitting form...');
         document.getElementById("MusoraEngagementTriggerReferWebForm").submit();
+        console.log('Form submitted');
         dataLayer.push({
             "event": "gtm.formSubmit",
             "formId": "MusoraEngagementTriggerReferWebForm",
             "formSuccess": true
         });
-        emailSignUpConversionTrackerForImpactProvider();
+        console.log('Data layer event pushed');
     } else {
+        console.log('Email format is invalid:', userEmail.value);
         userEmail.classList.add('bg-red-200');
     }
 }
