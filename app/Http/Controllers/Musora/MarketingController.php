@@ -18,6 +18,7 @@ class MarketingController extends BaseController
     {
         return view('musora.sales.trial', [
             'theme' => 'musora',
+            'commercialHeader' => true,
             'promoVersion' => true,
             'trialVersion' => true,
             'scrollToJoin' => true,
