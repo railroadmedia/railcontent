@@ -140,7 +140,7 @@
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
+                    :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" 
                     :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"

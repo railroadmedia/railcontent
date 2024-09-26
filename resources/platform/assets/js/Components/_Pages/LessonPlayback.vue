@@ -21,7 +21,7 @@
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
                                     :brand="brand" :theme-color="brand" :video-length="videoProps.videoLength"
-                                    :progress-state="videoProps.progressState" :content-id="videoProps.id"
+                                    :progress-state="videoProps.progressState" :content-id="videoProps.contentId"
                                     :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
@@ -34,7 +34,7 @@
                                     :brand="videoProps.brand" :theme-color="videoProps.brand"
                                     :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :content-id="videoProps.contentId" :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                     :chapters="videoProps.chapters" :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
@@ -182,7 +182,7 @@
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
+                            :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" 
                             :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"
@@ -303,7 +303,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.videoProps.chapters?.length > 0) {
+    if (props.soundsliceSlug && props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
