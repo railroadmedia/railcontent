@@ -54,6 +54,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.back-to-school', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
+    public function monthly()
+    {
+        return view('pianote.sales.monthly', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
     public function promoEG()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
