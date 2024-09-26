@@ -2259,7 +2259,7 @@
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto lg:w-3/4 xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1&locked=true" class="text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>Just The Pad</strong></h3>
                         <p class="text-sm mt-2 mb-5">Last Chance Ever (SAVE 25%)</p>
                         <h2 class="inline-block"><s class="opacity-60">$79</s> <strong class="text-4xl">${{ floatval($productPrices['practicepad']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
@@ -2274,7 +2274,8 @@
                             <i class="fas fa-check text-drumeo mr-1"></i> 3 levels for movement<br>
                             <i class="fas fa-check text-drumeo mr-1"></i> 90-day guarantee</p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&locked=true" class="text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
+                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[30-day-chops]=1&products[GHFAL-DIGI]=1&promo-code=p4-last-chance&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
+                        <img class="h-20 absolute top-0 right-0 z-10 -mt-4 -mx-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
                         <h3><strong>Unlimited Lessons</strong></h3>
                         <p class="text-sm mt-2 mb-5">1 Year of Drumeo + P4 Practice Pad.</p>
                         <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
@@ -2282,6 +2283,9 @@
                         <ul class="list-disc ml-10">
                             <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
                             <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> P4 Practice Pad</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 30-Day Chops</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Great Hands For A Lifetime</li>
                         </ul>
                         <hr class="w-full my-5" style="border-color:#ebf2f8">
                         <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
