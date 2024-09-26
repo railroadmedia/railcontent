@@ -4,6 +4,7 @@ namespace App\Modules\Content\Models\Sanity\Enums;
 
 use App\Modules\Content\Models\Sanity\Challenge;
 use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\Focus;
 use App\Modules\Content\Models\Sanity\Instructor;
 use App\Modules\Content\Models\Sanity\PlayAlong;
 use App\Modules\Content\Models\Sanity\QuickTip;
@@ -35,22 +36,66 @@ enum FilterType: string
     case Theory = 'theory';
     case Topic = 'topic';
     case Gear = 'gear';
+    case Focus = 'focus';
 
     public function filterOptions(): array
     {
         return match ($this) {
-            FilterType::Genre => [Instructor::getName(),
-                Course::getName(), StudentFocus::getName(), Rudiment::getName(), GearGuide::getName(),
-                Challenges::getName(), BootCamp::getName(), QuickTip::getName(), Live::getName(), Solo::getName(), Performance::getName(),
-                QuestionAndAnswer::getName(), PlayAlong::getName(), BootCamp::getName(), Podcast::getName(), SongTutorial::getName(), Archive::getName(),
-                Song::getName()],
-            FilterType::Lifestyle => [Instructor::getName(), Course::getName(), StudentFocus::getName(),QuickTip::getName()],
-            FilterType::Essential => [Instructor::getName(), Course::getName(), StudentFocus::getName(),QuickTip::getName(), Rudiment::getName(),Spotlight::getName(),
-                BootCamp::getName(), Live::getName(), QuestionAndAnswer::getName(), PlayAlong::getName()],
-            FilterType::Creativity => [Instructor::getName(), Course::getName(),StudentFocus::getName(),QuickTip::getName()],
-            FilterType::Theory => [Instructor::getName(), Course::getName(), StudentFocus::getName(), QuickTip::getName(),Live::getName(), QuestionAndAnswer::getName(), PlayAlong::getName()],
-            FilterType::Topic => [Course::getName(), StudentFocus::getName(),Rudiment::getName(),BootCamp::getName(),QuickTip::getName(),Challenge::getName(), Workout::getName()],
+            FilterType::Genre => [
+                Instructor::getName(),
+                Course::getName(),
+                StudentFocus::getName(),
+                Rudiment::getName(),
+                GearGuide::getName(),
+                Challenges::getName(),
+                BootCamp::getName(),
+                QuickTip::getName(),
+                Live::getName(),
+                Solo::getName(),
+                Performance::getName(),
+                QuestionAndAnswer::getName(),
+                PlayAlong::getName(),
+                BootCamp::getName(),
+                Podcast::getName(),
+                SongTutorial::getName(),
+                Archive::getName(),
+                Song::getName(),
+                Instructor::getName()
+            ],
+            FilterType::Lifestyle => [Instructor::getName(), Course::getName(), StudentFocus::getName(), QuickTip::getName()],
+            FilterType::Essential => [
+                Instructor::getName(),
+                Course::getName(),
+                StudentFocus::getName(),
+                QuickTip::getName(),
+                Rudiment::getName(),
+                Spotlight::getName(),
+                BootCamp::getName(),
+                Live::getName(),
+                QuestionAndAnswer::getName(),
+                PlayAlong::getName()
+            ],
+            FilterType::Creativity => [Instructor::getName(), Course::getName(), StudentFocus::getName(), QuickTip::getName()],
+            FilterType::Theory => [
+                Instructor::getName(),
+                Course::getName(),
+                StudentFocus::getName(),
+                QuickTip::getName(),
+                Live::getName(),
+                QuestionAndAnswer::getName(),
+                PlayAlong::getName()
+            ],
+            FilterType::Topic => [
+                Course::getName(),
+                StudentFocus::getName(),
+                Rudiment::getName(),
+                BootCamp::getName(),
+                QuickTip::getName(),
+                Challenge::getName(),
+                Workout::getName()
+            ],
             FilterType::Gear => [Rudiment::getName()],
+            FilterType::Focus => [Instructor::getName()]
         };
     }
 }

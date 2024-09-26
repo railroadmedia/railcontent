@@ -13,6 +13,7 @@ use App\Modules\Content\Models\Sanity\Enums\FilterType;
 use App\Modules\Content\Models\Vimeo;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
+use Modules\Content\Models\ContentFocus;
 use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
@@ -61,14 +62,15 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'topic'      => ContentTopic::class,
             'genre'      => ContentStyle::class,
             'gear'       => ContentGears::class,
+            'focus'      => ContentFocus::class
         ];
         $permissions = $this->getPermissions();
 
         $artists = $this->getArtists();
 
-        $instructors = $this->getInstructors();
-
         $extraData = $this->getExtraData($extraModels);
+
+        $instructors = $this->getInstructors($extraData);
 
         if ($contentType == "all") {
             $contentTypes = array_merge(
@@ -197,7 +199,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
     /**
      * @return array
      */
-    private function getInstructors(): array
+    private function getInstructors($extraData): array
     {
         $instructorsData = Content::with('data', 'fields')
             ->where('type', '=', 'instructor')
@@ -255,6 +257,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     '_sanityAsset' => 'image@' . $thumb
                 ];
             }
+            $contentExtraData = [];
             foreach ($instructorDatum['fields'] as $info) {
                 if (in_array($info['key'], ['is_coach', 'is_active', 'is_house_coach', 'is_featured', 'is_coach_of_the_month'])) {
                     $instructors[$id][$info['key']] = ($info['value'] == 1);
@@ -266,7 +269,10 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     $instructors[$id][$info['key']] = (int)$info['value'];
                 }
                 if (in_array($info['key'], ['focus'])) {
-                    $instructors[$id][$info['key']][] = $info['value'];
+                    $contentExtraData[$info['key']][] = $info['value'];
+                }
+                if (in_array($info['key'], ['style'])) {
+                    $contentExtraData['genre'][] = $info['value'];
                 }
             }
             if ($thumb != '') {
@@ -275,6 +281,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     '_sanityAsset' => 'image@' . $thumb
                 ];
             }
+            $this->handleExtraData($contentExtraData, $extraData, $instructors[$id], $id);
+            $this->handleGenre($extraData, $instructors[$id], $id);
         }
 
         $filename = resource_path() . '/sanitystudio/instructors.ndjson';
@@ -413,15 +421,16 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
     }
 
     /**
-     * @param mixed  $result
      * @param array  $extraData
      * @param array  $songs
      * @param string $id
      * @return array
      */
-    private function handleGenre(mixed $result, array $extraData, array &$songs, string $id): array
+    private function handleGenre(array $extraData, array &$songs, string $id): array
     {
-        $contentGenres = ContentStyle::query()->where('content_id', '=', $result->id)->get();
+
+        $contentGenres = ContentStyle::query()->where('content_id', '=', $id)->get();
+
         foreach ($contentGenres as $contentGenre) {
             $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
             if (isset($extraData['genre']['genre_' . strtolower($name)])) {
@@ -842,7 +851,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     [
                         'soundslice_slug',
                         'name',
-                        'bpm',
                         'gear',
                         'low_soundslice_slug',
                         'high_soundslice_slug',
@@ -905,8 +913,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $sanityDocuments['transcriber_name'] = $transcriber;
                 $imported           = true;
             }
-            if ($field['key'] == 'released') {
-                $sanityDocuments['released'] = (int) $field['value'];
+            if ($field['key'] == 'released' || $field['key'] == 'bpm') {
+                $sanityDocuments[$field['key']] = (int) $field['value'];
                 $imported           = true;
             }
             if ($field['key'] == 'album') {
@@ -1003,7 +1011,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $this->handleContentChapters($chapters, $sanityDocuments, $id);
         $this->handlePermissions($result, $permissions, $sanityDocuments, $id);
         $this->handleExtraData($contentExtraData, $extraData, $sanityDocuments, $id);
-        $this->handleGenre($result, $extraData, $sanityDocuments, $id);
+        $this->handleGenre($extraData, $sanityDocuments, $id);
         $this->handleInstructors($result, $instructors, $sanityDocuments, $id);
         $this->handleChildren($result, $sanityDocuments, $id, $type);
 
