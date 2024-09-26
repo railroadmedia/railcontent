@@ -742,6 +742,21 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Casio Privia Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_casio-privia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
             'Pianote Awards Giveaway' => [
                 'custom_attributes' => [],
                 'events' => [

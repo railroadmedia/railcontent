@@ -49,15 +49,15 @@
                             <i class="fas fa-check-circle text-pianote lg:ml-2"></i> One entry per person.</p>
 
                     </div>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
                         @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
                         "stacked" => true,
                         "nameInput" => true,
-                        "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",
-                        "formName" => 'FP30 Giveaway',
+                        "formId" => "Pianote - Engagement - Trigger - Casio Privia Giveaway - Web Form",
+                        "formName" => 'Casio Privia Giveaway',
                         "buttonText" => "I WANT TO WIN!",
                         ])
                     @else
@@ -170,15 +170,15 @@
                         </h4>
                     </div>
 
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
                         @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
                         "stacked" => true,
                         "nameInput" => true,
-                        "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",
-                        "formName" => 'FP30 Giveaway',
+                        "formId" => "Pianote - Engagement - Trigger - Casio Privia Giveaway - Web Form2",
+                        "formName" => 'Casio Privia Giveaway',
                         "buttonText" => "I WANT TO WIN!",
                         ])
                     @else
