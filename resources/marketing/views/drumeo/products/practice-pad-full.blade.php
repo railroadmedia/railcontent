@@ -1993,22 +1993,23 @@
         "price" => floatval($productPrices['practicepad']->discounted_price),
         "noBreadcrumb" => true
     ])
-    <div class="text-white px-4 sm:px-6 py-8 sm:py-10 lg:py-12" style="background: linear-gradient(0deg, #1A3768 0%, #0B76DB 100%);">
+    <div class="text-white px-5 sm:px-6 py-6 sm:py-10 lg:py-12" style="background: linear-gradient(0deg, #1A3768 0%, #0B76DB 100%);">
         <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center overflow-hidden">
+            <div class="flex flex-col md:flex-row lg:items-center overflow-hidden">
                 <div class="relative flex-shrink-0">
                     <img class="h-48 sm:h-60 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/p4-last-chance/spread.png" alt="P4 Practice Pad" class="object-cover w-full h-full">
                 </div>
-                <div class="sm:pl-7 text-left mt-3 sm:mt-0">
-                    <h3 class="font-black mb-4">Last Chance Ever | P4 Practice Pad</h3>
-                    <p class="leading-normal">
+                <div class="sm:pl-3 lg:pl-7 text-left mt-1 sm:mt-0">
+                    <h3 class="font-black">Last Chance Ever</h3>
+                    <p class="leading-tight my-4">
                         The P4 Practice Pad has helped 30,000+ drummers improve their hands away from the drum set. And after 8 years, the original 4-zone practice pad is retiring.
                         <br><br>
                         That means this is your <strong>last chance ever</strong> to grab the most popular practice pad in Drumeo history.
                         <br><br>
-                        You can grab it on its own and SAVE 25% or get yours with 1 year of unlimited drum lessons.
+                        You can grab it on its own and SAVE 25% or get yours FREE with 1 year of unlimited drum lessons.
                         <br><br>
                         Scroll down to nab one of the last P4 Practice Pads.</p>
+                    <a class="join smaller musora anchor-slide" href="#final">Click Here To Order &raquo;</a>
                 </div>
             </div>
         </div>
