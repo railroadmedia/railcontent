@@ -19,13 +19,12 @@
                         </div>
                     </div>
                     <div v-if="canRefer" class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
-                        <form id="MusoraEngagementTriggerReferWebForm" accept-charset="UTF-8" method="POST"
-                              action="/customer-io/submit-email-form" class="ajax-form clearfix mx-auto">
-                            <input type="hidden" name="form_name" value="Musora Referral">
-                            <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
-                            <input type="hidden" name="success_redirect" value="">
+                        <form id="MusoraEngagementTriggerReferWebForm" @submit.prevent="handleSubmit" class="mx-auto">
                             <!-- Tracking Inputs -->
                             <div v-html="trackingInputsHtml"></div>
+                            <input type="hidden" name="form_name" value="Musora Referral">
+                            <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
+                            <input type="hidden" name="success_redirect" value="https://www.pianote.com/chord-hacks/lessons">
                             
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
@@ -34,15 +33,15 @@
                                 <input id="sign-up-email"
                                        class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                        name="email" type="email" placeholder="Email address..." required="">
-                                <button class="submit g-recaptcha tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
-                                        :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" type="submit"
-                                        :data-sitekey="recaptchaKey"
-                                        :data-callback="'recaptchaSubmitMusoraEngagementTriggerReferWebForm'"
-                                        data-action='submit'>
+                                <button class="submit tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                        :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" type="submit">
                                     Send Invite
                                 </button>
                             </div>
                         </form>
+                        <div v-if="formSubmitted" class="tw-mt-4 tw-text-green-500">
+                            Form has been successfully submitted!
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,9 +50,10 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
+import axios from 'axios';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -65,10 +65,6 @@ const props = defineProps({
     inviteUrl: {
         type: String,
         default: '',
-    },
-    recaptchaKey: {
-        type: String,
-        default: process.env.VUE_APP_RECAPTCHA_KEY,
     },
     trackingInputsHtml: {
         type: String,
@@ -86,21 +82,36 @@ const cardImg = computed(() => {
     return imgs[brand.value];
 });
 
-function recaptchaSubmitMusoraEngagementTriggerReferWebForm(token) {
-    const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const userEmail = document.getElementById('MusoraEngagementTriggerReferWebForm').querySelector('input[type=email]');
+const formSubmitted = ref(false);
 
+onMounted(() => {
+    console.log('Tracking Inputs HTML:', props.trackingInputsHtml);
+});
+
+async function handleSubmit(event) {
+    const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const userEmail = document.getElementById('sign-up-email');
     if (userEmail.value.match(emailFormat)) {
-        console.log('Email format is valid:', userEmail.value);
-        console.log('Submitting form...');
-        document.getElementById("MusoraEngagementTriggerReferWebForm").submit();
-        console.log('Form submitted');
-        dataLayer.push({
-            "event": "gtm.formSubmit",
-            "formId": "MusoraEngagementTriggerReferWebForm",
-            "formSuccess": true
-        });
-        console.log('Data layer event pushed');
+        try {
+            console.log('Submitting form with data:', {
+                email: userEmail.value,
+                form_name: 'Musora Referral',
+                inf_form_xid: 'MusoraEngagementTriggerReferWebForm',
+            });
+            console.log('Tracking Inputs HTML on submit:', props.trackingInputsHtml);
+
+            const response = await axios.post("customer-io.submit-email-form", {
+                email: userEmail.value,
+                form_name: 'Musora Referral',
+                inf_form_xid: 'MusoraEngagementTriggerReferWebForm',
+                tracking_inputs: props.trackingInputsHtml,
+            });
+            console.log('Form submitted', response);
+            formSubmitted.value = true;
+            window.location.href = document.querySelector('input[name="success_redirect"]').value;
+        } catch (error) {
+            console.error('Error submitting form', error);
+        }
     } else {
         console.log('Email format is invalid:', userEmail.value);
         userEmail.classList.add('bg-red-200');

@@ -2,37 +2,18 @@
 
 @section('meta')
     <title>Musora | Invite A Friend</title>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"
+    integrity="sha512-8pbzenDolL1l5OPSsoURCx9TEdMFTaeFipASVrMYKhuYtly+k3tcsQYliOEKTmuB1t7yuzAiVo+yd7SJz+ijFQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style> .grecaptcha-badge {display:none; right:0!important;} </style>
 @endsection
 
 @section('layout-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function recaptchaSubmitMusoraEngagementTriggerReferWebForm(token) {
-            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            const userEmail = document.getElementById('MusoraEngagementTriggerReferWebForm').querySelector('input[type=email]');
-                event.preventDefault();
-            if (userEmail.value.match(emailFormat)) {
-                console.log('Email format is valid:', userEmail.value);
-                console.log('Submitting form...');
-                document.getElementById("MusoraEngagementTriggerReferWebForm").submit();
-                console.log('Form submitted');
-                dataLayer.push({
-                    "event": "gtm.formSubmit",
-                    "formId": "MusoraEngagementTriggerReferWebForm",
-                    "formSuccess": true
-                });
-                console.log('Data layer event pushed');
-                emailSignUpConversionTrackerForImpactProvider();
-                console.log('Conversion tracker called');
-            } else {
-                console.log('Email format is invalid:', userEmail.value);
-                userEmail.classList.add('bg-red-200');
-            }
-        }
+       
 
+                /*
         function emailSignUpConversionTrackerForImpactProvider() {
             var email = document.getElementById('sign-up-email').value;
             console.log('Email:', email);
@@ -43,7 +24,7 @@
             var hashedOrderId = md5('drumeo_'.concat(email));
             console.log('Hashed Order ID (MD5):', hashedOrderId);
         
-            var actionTrackerId = getSignUpActionTrackerId('{{ config('app.env') }}');
+            var actionTrackerId = getSignUpActionTrackerId(document.getElementById('env').value);
             console.log('Action Tracker ID:', actionTrackerId);
         
             ire('trackConversion', actionTrackerId, {
@@ -65,6 +46,7 @@
                 "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}" :
                 "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}";
         }
+        */
     </script>
 @endsection
 
@@ -80,10 +62,11 @@
         );
     @endphp
 
+    {{-- <input type="hidden" id="env" value="{{ config('app.env') }}"> --}}
+
     <invite-friend
         :can-refer="{{ json_encode($canRefer) }}"
         invite-url="{{ url()->route('referral.email-invite') }}"
-        recaptcha-key="{{ env('VUE_APP_RECAPTCHA_KEY') }}"
         tracking-inputs-html="{{ $trackingInputsHtml }}"
     ></invite-friend>
 @endsection
