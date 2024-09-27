@@ -1,5 +1,8 @@
 <?php
 
+use App\Modules\Brand\Enums\Brand;
+use Illuminate\Validation\Rule;
+
 return [
     // brand, this gets swapped dynamically based on the current domain and members area page
     'brand' => 'musora',
@@ -121,6 +124,7 @@ return [
                 ],
                 'custom_event_attributes' => [
                     'referrer' => 'required|string',
+                    'brand' => ['required', 'string', Rule::in(all_brands())]
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
