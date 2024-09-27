@@ -358,23 +358,27 @@
 
 @section('content')
 
-    @if($cohort['slug'] == '30-day-double-bass')
-        <div class="bg-white text-black">
+    <div class="bg-white text-black">
+        @if($cohort['slug'] == '30-day-double-bass')
             @include('drumeo.products._30D-double-bass', [
                 'theme' => 'drumeo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])
-        </div>
-    @elseif($cohort['slug'] == 'electric-guitarists-start-here')
-        <div class="bg-white text-black">
+        @elseif($cohort['slug'] == '30-day-jazz')
+            @include('drumeo.products._30D-jazz', [
+                'theme' => 'drumeo',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == 'electric-guitarists-start-here')
             @include('guitareo.products._electric-guitarists-start-here', [
                 'theme' => 'guitareo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])
-        </div>
-    @endif
+        @endif
+    </div>
     <Cohort
         :cohort="{{ json_encode($cohort) }}"
         :register-url="{{ json_encode($registerButtonUrl) }}"
