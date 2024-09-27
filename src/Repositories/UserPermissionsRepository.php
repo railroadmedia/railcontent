@@ -119,4 +119,40 @@ class UserPermissionsRepository extends RepositoryBase
             ->where('name', $permissionName)
             ->exists();
     }
+
+
+    public function userHasPermissionsWithFutureStartDate($userId)
+    {
+        return $this->query()
+            ->join(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions . '.id',
+                '=',
+                ConfigService::$tableUserPermissions . '.permission_id'
+            )
+            ->where(
+                function ($query) {
+                    $query->whereDate(
+                        'expiration_date',
+                        '>=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('expiration_date');
+                }
+            )
+            ->where(
+                function ($query) {
+                    $query->whereDate(
+                        'start_date',
+                        '>=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('start_date');
+                }
+            )
+            ->where('user_id', $userId)
+            ->exists();
+    }
 }
