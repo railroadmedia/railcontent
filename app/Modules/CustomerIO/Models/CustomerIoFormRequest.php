@@ -3,7 +3,9 @@
 namespace App\Modules\CustomerIO\Models;
 
 use App\Rules\ReCaptcha;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class CustomerIoFormRequest extends FormRequest
@@ -36,5 +38,14 @@ class CustomerIoFormRequest extends FormRequest
     {
         $forms = config('customer-io.forms.' . config('customer-io.forms.brand'), []);
         return $forms[$this->input('form_name')]['attributes'] ?? [];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(response()->json([
+                'errors' => $validator->errors(),
+            ], 422));
+        }
     }
 }

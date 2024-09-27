@@ -25,7 +25,7 @@
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
                             <input type="hidden" name="success_redirect" value="https://www.pianote.com/chord-hacks/lessons">
-                            
+
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
@@ -100,12 +100,17 @@ async function handleSubmit(event) {
             });
             console.log('Tracking Inputs HTML on submit:', props.trackingInputsHtml);
 
-            const response = await axios.post("customer-io.submit-email-form", {
+            const response = await axios.post("/customer-io/submit-email-form", {
                 email: userEmail.value,
                 form_name: 'Musora Referral',
                 inf_form_xid: 'MusoraEngagementTriggerReferWebForm',
                 tracking_inputs: props.trackingInputsHtml,
             });
+
+            /*
+            *  TODO: check if response.status is 201
+            *  if it is 422, the form validation failed
+            */
             console.log('Form submitted', response);
             formSubmitted.value = true;
             window.location.href = document.querySelector('input[name="success_redirect"]').value;
