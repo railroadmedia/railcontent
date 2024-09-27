@@ -8,8 +8,11 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
+// load module commands
+$this->load(app_path('Modules/Ecommerce/Console/Commands'));
+$this->load(app_path('Modules/UserManagementSystem/Console/Commands'));
 $this->load(app_path('Modules/Content/Console/Commands'));
-
+$this->load(app_path('Modules/EventTracking/Console/Commands'));
 
 //All times are in UTC
 Schedule::command('ProcessTrackings')->everyMinute();

@@ -96,7 +96,7 @@ class PlayAlong extends BaseSanityContentTypeModel
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup),
 
-            new Field(FieldType::String, 'bpm', 'BPM', group:$detailsGroup),
+            new Field(FieldType::Number, 'bpm', 'BPM', validation: [new Min(0)], group:$detailsGroup),
 
             new Field(FieldType::URL, 'mp3_no_drums_no_click_url', group: $detailsGroup),
             new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', group: $detailsGroup),

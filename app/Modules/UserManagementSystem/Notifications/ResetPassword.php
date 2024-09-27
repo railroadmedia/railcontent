@@ -23,9 +23,9 @@ class ResetPassword extends ResetPasswordBase
     }
 
     /**
-     * Get the reset password notification mail message for the given URL.
+     * @inheritDoc
      */
-    protected function buildMailMessage(string $url): MailMessage
+    protected function buildMailMessage($url): MailMessage
     {
         $user = User::where('email', request('email'))->first();
 

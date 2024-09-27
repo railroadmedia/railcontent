@@ -6,7 +6,6 @@ use App\Mail\Agnostic;
 use App\Modules\Brand\Services\BrandService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -167,6 +166,9 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         parent::setUp();
 
+        // ensure that the brand service doesn't have any remnants from previous test runs
+        BrandService::$currentBrand = null;
+
         Route::get(
             $this->testRouteName,
             function () {
@@ -245,10 +247,10 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $responseJson = json_decode($response->getContent());
 
         $this->assertNotEmpty($responseJson->token);
-        $this->assertArraySubset($user->toArray(), (array)$responseJson->user);
+        $this->assertArraySubsetMatch($user->toArray(), (array)$responseJson->user);
 
-        $this->assertArraySubset($user->toArray(), auth()->user()->toArray());
-        $this->assertArraySubset($user->toArray(), user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), auth()->user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), user()->toArray());
 
         Event::assertDispatched(MobileAppLogin::class);
         Event::assertDispatched(UserEvent::class);
@@ -302,8 +304,8 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
         $response->assertRedirect('/' . $user->last_used_brand);
 
-        $this->assertArraySubset($user->toArray(), auth()->user()->toArray());
-        $this->assertArraySubset($user->toArray(), user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), auth()->user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), user()->toArray());
 
         Event::assertDispatched(UserEvent::class);
     }
@@ -336,7 +338,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         Event::assertDispatched(UserEvent::class);
     }
 
-        public function test_authenticate_via_remember_token()
+    public function test_authenticate_via_remember_token()
     {
         $email = $this->faker->email();
         $password = $this->faker->words(3, true);
@@ -423,8 +425,8 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
         $this->assertEquals(302, $response->getStatusCode());
 
-        $this->assertArraySubset($user->toArray(), auth()->user()->toArray());
-        $this->assertArraySubset($user->toArray(), user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), auth()->user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), user()->toArray());
 
         Event::assertDispatched(UserEvent::class);
     }
@@ -488,7 +490,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             ['email' => $email, 'password' => $password, 'device_name' => 'test']
         );
 
-        $this->assertArraySubset($user->toArray(), auth()->user()->toArray());
+        $this->assertArraySubsetMatch($user->toArray(), auth()->user()->toArray());
 
         $this->assertDatabaseHas('personal_access_tokens', ['tokenable_id' => $user->id]);
 

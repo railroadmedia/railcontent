@@ -7,11 +7,10 @@ use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Testing\TestCase as FoundationBaseTestCase;
+use Illuminate\Support\Facades\URL;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -38,8 +37,6 @@ abstract class TestCase extends FoundationBaseTestCase
      */
     public function createApplication(): Application
     {
-        $this->ensureDatabaseExists();
-
         $app = require __DIR__ . '/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
@@ -88,15 +85,7 @@ abstract class TestCase extends FoundationBaseTestCase
         return $prefix . $end;
     }
 
-    private function ensureDatabaseExists(): void
-    {
-        $databasePath = __DIR__ . '/../database/testing.sqlite';
-        if (!file_exists($databasePath)) {
-            file_put_contents($databasePath, '');
-        }
-    }
-
-    protected function assertArraySubset(array $subset, array $array, bool $strict = false, string $message = '')
+    public function assertArraySubsetMatch(array $subset, array $array, bool $strict = false, string $message = ''): void
     {
         $differences = [];
 

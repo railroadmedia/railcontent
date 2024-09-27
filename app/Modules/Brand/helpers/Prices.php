@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Modules\Brand\helpers;
+
 class Prices
 {
     public static $plusSubscriptionAnnualFull = 240;

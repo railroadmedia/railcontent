@@ -25,7 +25,7 @@ class SongTutorial extends ParentTemplate
         $this->addFields([
                              new Field(FieldType::String, 'song_name', group: $detailsGroup),
                              new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
-                             new Field(FieldType::Number, 'length_in_seconds','Duration', group: $detailsGroup)
+                             new Field(FieldType::Number, 'length_in_seconds', 'Duration', group: $detailsGroup)
                    ]);
     }
 

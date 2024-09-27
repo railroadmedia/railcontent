@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Mentor\Tests\Feature\Controllers;
+namespace Modules\Mentor\tests\Feature\Controllers;
 
 use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\HelpScout\Models\HelpScoutUser;
@@ -11,10 +11,17 @@ use Illuminate\Support\Facades\Event;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
+/**
+ * DEV NOTE: this test class would run into issues with accessing the HelpScoutServiceBase::$client when run as part of
+ * the test suite. To ensure that the service is properly configured for these tests and isn't altered any other, we must
+ * run these tests in separate processes
+ *
+ * @runTestsInSeparateProcesses
+ */
 class HelpScoutMentorControllerTest extends TestCase
 {
-    public const DEVELOPMENT_HELPSCOUT_USERID = 554771;
-    public const DEVELOPMENT_HELPSCOUT_CUSTOMERID = 551120840;
+    public const int DEVELOPMENT_HELPSCOUT_USERID = 554771;
+    public const int DEVELOPMENT_HELPSCOUT_CUSTOMERID = 551120840;
 
     private MentorService $mentorService;
 
@@ -31,7 +38,6 @@ class HelpScoutMentorControllerTest extends TestCase
         $mentor = Mentor::factory()->create(['supported_brands' => $brand]);
         $user = User::factory()->create([]);
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-
 
         $helpScoutCustomer = HelpScoutCustomer::factory()->create([
             'internal_id' => $user->id,

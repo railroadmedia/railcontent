@@ -255,8 +255,8 @@ class LeadGenController extends BaseController
                     ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
             })
             ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Guitareo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
-        if(!is_null($currentLesson)) {
-            if(!$currentLesson->one_off) {
+        if (!is_null($currentLesson)) {
+            if (!$currentLesson->one_off) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
                 $currentLessonIndex = $lessons->search(function ($item) use ($leadgenSlug) {
                     return $item->slug === $leadgenSlug;
@@ -288,7 +288,7 @@ class LeadGenController extends BaseController
                         ->whereNull('leadgens.end_date')
                         ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
                 })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Guitareo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
-            if(!is_null($leadgen)) {
+            if (!is_null($leadgen)) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
                 return view('_partials.layout.global-lead-gen-index-layout', [
