@@ -25,7 +25,7 @@ class Course extends ParentTemplate
 
         $this->addFields(
             [
-                new Field(FieldType::Number, 'length_in_seconds','Duration', group: $detailsGroup)
+                new Field(FieldType::Number, 'length_in_seconds', 'Duration', group: $detailsGroup)
             ],
         );
     }

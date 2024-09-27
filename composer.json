@@ -81,7 +81,7 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "10.5.9",
         "reliese/laravel": "^1.3",
         "ext-pdo": "*"
     },
@@ -98,7 +98,6 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/Brand/helpers/prices.php",
             "app/Modules/EventTracking/Avo/Avo.php"
         ]
     },
@@ -124,14 +123,14 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "@php -d memory_limit=-1 artisan test --stop-on-failure --stop-on-error",
-        "test-p": "@php -d memory_limit=-1 artisan test --parallel --stop-on-failure --stop-on-error",
+        "test-p": "@php -d memory_limit=-1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error",
         "test-cov-p": [
             "@putenv XDEBUG_MODE=coverage",
-            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --coverage --parallel --stop-on-failure --stop-on-error"
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error --coverage"
         ],
         "test-cov-html-p": [
             "@putenv XDEBUG_MODE=coverage",
-            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --stop-on-failure --stop-on-error --coverage-html reports/"
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error --coverage-html reports/"
         ],
         "test-cov": [
             "@putenv XDEBUG_MODE=coverage",

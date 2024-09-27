@@ -18,22 +18,328 @@
     </testsuite>
   </testsuites>
   <php>
+    <!-- Application -->
+    <env name="APP_NAME" value="Musora Web Platform"/>
     <env name="APP_ENV" value="testing"/>
-    <env name="BCRYPT_ROUNDS" value="4"/>
-    <env name="CACHE_STORE" value="array"/>
+    <env name="APP_KEY" value="base64:191XeCIUtk74j6+7Qi4mpPoWjEPUNHurWYt/S08qH1k="/>
+    <env name="APP_DEBUG" value="true"/>
+    <env name="DEBUGBAR_ENABLED" value="false"/>
+    <env name="APP_URL" value="https://testing.musora.com"/>
+
+    <!-- Logging -->
+    <env name="LOG_CHANNEL" value="daily"/>
+    <env name="LOG_DEPRECATIONS_CHANNEL" value="null"/>
+    <env name="LOG_LEVEL" value="debug"/>
+
+    <!-- Database -->
     <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql"/>
     <env name="DB_DEFAULT_CONNECTION" value="musora_laravel_mysql"/>
-    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql"/>
     <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="mysql8"/>
     <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="mysql8"/>
     <env name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME" value="musora_web_platform_automated_tests"/>
+    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_laravel_mysql"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_USER_NAME" value="root"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_PASSWORD" value="root"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_PORT" value="3306"/>
+    <env name="DB_DATABASE" value="musora_web_platform_automated_tests"/>
     <env name="DB_MYSQL_DRIVER" value="pdo_mysql"/>
-    <env name="MAIL_MAILER" value="array"/>
+
+    <!-- Recommendation System -->
+    <env name="RECSYS_ENABLED" value="true"/>
+
+    <!-- Snowflake -->
+    <env name="DB_SNOWFLAKE_ACCOUNT" value="testing123"/>
+    <env name="DB_SNOWFLAKE_DATABASE" value="RECSYS"/>
+    <env name="DB_SNOWFLAKE_USER_NAME" value="MUSORA_ADMIN"/>
+    <env name="DB_SNOWFLAKE_PASSWORD" value="testing123"/>
+
+    <!-- HuggingFace -->
+    <env name="HUGGINGFACE_TOKEN" value="testing123"/>
+    <env name="HUGGINGFACE_URL" value="testing123"/>
+
+    <!-- AWS and Filesystems -->
+    <env name="BROADCAST_CONNECTION" value="log"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="DB_CONNECTION" value="musora_laravel_mysql"/>
+    <env name="FILESYSTEM_DISK" value="local"/>
+    <env name="AWS_ACCESS_KEY_ID" value="testing123"/>
+    <env name="AWS_BUCKET" value="musora-web-platform"/>
+    <env name="AWS_DEFAULT_REGION" value="us-east-1"/>
+    <env name="AWS_SECRET_ACCESS_KEY" value="testing123"/>
+    <env name="AWS_USE_PATH_STYLE_ENDPOINT" value="false"/>
+
+    <env name="HASH_VERIFY" value="false"/>
     <env name="PULSE_ENABLED" value="false"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
+
+    <!-- Sessions, Cache, Queue -->
+    <env name="BROADCAST_DRIVER" value="log"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="FILESYSTEM_DRIVER" value="local"/>
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>
-    <env name="TELESCOPE_ENABLED" value="false"/>
-    <env name="APP_URL" value="https://testing.musora.com"/>
+    <env name="SESSION_LIFETIME" value="120000"/>
+    <env name="SESSION_SECURE_COOKIE" value="true"/>
+
+    <!-- Redis -->
+    <env name="REDIS_HOST" value="redis"/>
+    <env name="REDIS_PASSWORD" value="null"/>
+    <env name="REDIS_PORT" value="6379"/>
+
+    <!-- Mail -->
+    <env name="MAIL_MAILER" value="array"/>
+    <env name="MAIL_USERNAME" value="null"/>
+    <env name="MAIL_PASSWORD" value="null"/>
+    <env name="MAIL_ENCRYPTION" value="null"/>
+    <env name="MAIL_FROM_ADDRESS" value="null"/>
+    <env name="MAIL_FROM_NAME" value="${APP_NAME}"/>
+
+    <!-- S3 Configuration -->
+    <env name="S3_KEY" value="testing123"/>
+    <env name="S3_SECRET" value="testing123"/>
+    <env name="S3_REGION" value="us-east-1"/>
+    <env name="S3_BUCKET" value="musora-web-platform"/>
+
+    <env name="APP_NAME" value="Musora Web Platform"/>
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_KEY" value="base64:191XeCIUtk74j6+7Qi4mpPoWjEPUNHurWYt/S08qH1k="/>
+    <env name="APP_DEBUG" value="true"/>
+    <env name="DEBUGBAR_ENABLED" value="false"/>
+    <env name="APP_URL" value="https://dev.musora.com"/>
+    <env name="LOG_CHANNEL" value="daily"/>
+    <env name="LOG_DEPRECATIONS_CHANNEL" value="null"/>
+    <env name="LOG_LEVEL" value="debug"/>
+    <env name="DB_DEFAULT_CONNECTION_NAME" value="musora_laravel_mysql"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="mysql8"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="mysql8"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME" value="musora_web_platform_automated_tests"/>
+    <env name="USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME" value="musora_web_platform_automated_tests"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_USER_NAME" value="root"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_PASSWORD" value="root"/>
+    <env name="DB_MUSORA_LARAVEL_MYSQL_PORT" value="3306"/>
+    <env name="DB_DATABASE" value="musora_web_platform_automated_tests"/>
+    <env name="RECSYS_ENABLED" value="true"/>
+    <env name="DB_SNOWFLAKE_ACCOUNT" value="testing123"/>
+    <env name="DB_SNOWFLAKE_DATABASE" value="RECSYS"/>
+    <env name="DB_SNOWFLAKE_USER_NAME" value="MUSORA_ADMIN"/>
+    <env name="DB_SNOWFLAKE_PASSWORD" value="testing123"/>
+    <env name="HUGGINGFACE_TOKEN" value="testing123"/>
+    <env name="HUGGINGFACE_URL" value="testing123"/>
+    <env name="BROADCAST_CONNECTION" value="log"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="DB_CONNECTION" value="musora_laravel_mysql"/>
+    <env name="FILESYSTEM_DISK" value="local"/>
+    <env name="AWS_ACCESS_KEY_ID" value="testing123"/>
+    <env name="AWS_BUCKET" value="musora-web-platform"/>
+    <env name="AWS_DEFAULT_REGION" value="us-east-1"/>
+    <env name="AWS_SECRET_ACCESS_KEY" value="testing123"/>
+    <env name="AWS_USE_PATH_STYLE_ENDPOINT" value="false"/>
+    <env name="HASH_VERIFY" value="false"/>
+    <env name="BROADCAST_DRIVER" value="log"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="FILESYSTEM_DRIVER" value="local"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="redis"/>
+    <env name="SESSION_LIFETIME" value="120000"/>
+    <env name="SESSION_CONNECTION" value="default"/>
+    <env name="SESSION_DOMAIN" value="'dev.musora.com'"/>
+    <env name="SESSION_SECURE_COOKIE" value="true"/>
+    <env name="REDIS_HOST" value="redis"/>
+    <env name="REDIS_PASSWORD" value="null"/>
+    <env name="REDIS_PORT" value="6379"/>
+    <env name="MAIL_MAILER" value="log"/>
+    <env name="MAIL_HOST" value="mailhog"/>
+    <env name="MAIL_PORT" value="1025"/>
+    <env name="MAIL_USERNAME" value="null"/>
+    <env name="MAIL_PASSWORD" value="null"/>
+    <env name="MAIL_ENCRYPTION" value="null"/>
+    <env name="MAIL_FROM_ADDRESS" value="null"/>
+    <env name="MAIL_FROM_NAME" value="${APP_NAME}"/>
+    <env name="S3_KEY" value="testing123"/>
+    <env name="S3_SECRET" value="testing123"/>
+    <env name="S3_REGION" value="us-east-1"/>
+    <env name="S3_BUCKET" value="musora-web-platform"/>
+    <env name="MWP_AWS_S3_ACCESS_KEY_ID" value="testing123"/>
+    <env name="MWP_AWS_S3_SECRET_ACCESS_KEY" value="testing123"/>
+    <env name="MWP_AWS_S3_DEFAULT_REGION" value="us-east-1"/>
+    <env name="MWP_AWS_S3_BUCKET" value="musora-web-platform"/>
+    <env name="MWP_AWS_S3_USE_PATH_STYLE_ENDPOINT" value="false"/>
+    <env name="MWP_AWS_S3_CLOUDFRONT_ACCESS_URL" value="https://d3fzm1tzeyr5n3.cloudfront.net/"/>
+    <env name="PUSHER_APP_ID" value="testing123"/>
+    <env name="PUSHER_APP_KEY" value="testing123"/>
+    <env name="PUSHER_APP_SECRET" value="testing123"/>
+    <env name="PUSHER_APP_CLUSTER" value="testing123"/>
+    <env name="MIX_PUSHER_APP_KEY" value="${PUSHER_APP_KEY}"/>
+    <env name="MIX_PUSHER_APP_CLUSTER" value="${PUSHER_APP_CLUSTER}"/>
+    <env name="VIMEO_ACCESS_TOKEN" value="testing123"/>
+    <env name="VIMEO_CLIENT_ID" value="testing123"/>
+    <env name="VIMEO_CLIENT_SECRET" value="testing123"/>
+    <env name="DRUMEO_STREAM_API_KEY" value="testing123"/>
+    <env name="DRUMEO_STREAM_APP_SECRET" value="testing123"/>
+    <env name="PIANOTE_STREAM_API_KEY" value="testing123"/>
+    <env name="PIANOTE_STREAM_APP_SECRET" value="testing123"/>
+    <env name="GUITAREO_STREAM_API_KEY" value="testing123"/>
+    <env name="GUITAREO_STREAM_APP_SECRET" value="testing123"/>
+    <env name="SINGEO_STREAM_API_KEY" value="testing123"/>
+    <env name="SINGEO_STREAM_APP_SECRET" value="testing123"/>
+    <env name="DRUMEO_YOUTUBE_API_CLIENT_ID" value="testing123"/>
+    <env name="DRUMEO_YOUTUBE_API_CLIENT_SECRET" value="testing123"/>
+    <env name="DRUMEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN" value="testing123"/>
+    <env name="PIANOTE_YOUTUBE_API_CLIENT_ID" value="testing123"/>
+    <env name="PIANOTE_YOUTUBE_API_CLIENT_SECRET" value="testing123"/>
+    <env name="PIANOTE_YOUTUBE_API_CLIENT_REFRESH_TOKEN" value="testing123"/>
+    <env name="GUITAREO_YOUTUBE_API_CLIENT_ID" value="testing123"/>
+    <env name="GUITAREO_YOUTUBE_API_CLIENT_SECRET" value="testing123"/>
+    <env name="GUITAREO_YOUTUBE_API_CLIENT_REFRESH_TOKEN" value="testing123"/>
+    <env name="SINGEO_YOUTUBE_API_CLIENT_ID" value="testing123"/>
+    <env name="SINGEO_YOUTUBE_API_CLIENT_SECRET" value="testing123"/>
+    <env name="SINGEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN" value="testing123"/>
+    <env name="SAASQUATCH_API_KEY" value="testing123"/>
+    <env name="SAASQUATCH_TENANT_ALIAS" value="testing123"/>
+    <env name="SAASQUATCH_CURRENT_PROGRAM_ID" value="testing123"/>
+    <env name="HELPSCOUT_APP_ID" value="testing123"/>
+    <env name="HELPSCOUT_APP_SECRET" value="testing123"/>
+    <env name="HELPSCOUT_TRACKING_BEACON_ID" value="testing123"/>
+    <env name="NOVA_S3_KEY" value="testing123"/>
+    <env name="NOVA_S3_SECRET" value="testing123"/>
+    <env name="NOVA_S3_REGION" value="us-east-2"/>
+    <env name="NOVA_S3_BUCKET" value="laravel-nova"/>
+    <env name="MUSORA_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="MUSORA_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="MUSORA_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="MUSORA_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="MUSORA_CUSTOMER_IO_SITE_ID" value="testing123"/>
+    <env name="DRUMEO_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="DRUMEO_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="DRUMEO_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="DRUMEO_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="DRUMEO_CUSTOMER_IO_SITE_ID" value="testing123"/>
+    <env name="PIANOTE_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="PIANOTE_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="PIANOTE_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="PIANOTE_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="PIANOTE_CUSTOMER_IO_SITE_ID" value="testing123"/>
+    <env name="GUITAREO_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="GUITAREO_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="GUITAREO_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="GUITAREO_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="GUITAREO_CUSTOMER_IO_SITE_ID" value="testing123"/>
+    <env name="SINGEO_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="SINGEO_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="SINGEO_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="SINGEO_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="SINGEO_CUSTOMER_IO_SITE_ID" value="testing123"/>
+    <env name="MUSORA_PROSPECTS_CUSTOMER_IO_TRACK_API_KEY" value="testing123"/>
+    <env name="MUSORA_PROSPECTS_CUSTOMER_IO_APP_API_KEY" value="testing123"/>
+    <env name="MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_NAME" value="testing123"/>
+    <env name="MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_ID" value="testing123"/>
+    <env name="MUSORA_PROSPECTS_CUSTOMER_IO_SITE_ID" value="testing123"/>
+
+    <env name="PIANOTE_STRIPE_API_SECRET" value="testing123"/>
+    <env name="PIANOTE_STRIPE_PUBLISHABLE_KEY" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_USERNAME" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_PASSWORD" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_SIGNATURE" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_CURRENCY_CODE" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_VERSION" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_NVP_CURL_URL" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_CHECKOUT_REDIRECT_URL" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_CHECKOUT_RETURN_URL" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_CHECKOUT_CANCEL_URL" value="testing123"/>
+    <env name="PIANOTE_PAYPAL_API_TEST_BILLING_AGREEMENT_ID" value="testing123"/>
+
+    <env name="GUITAREO_STRIPE_API_SECRET" value="testing123"/>
+    <env name="GUITAREO_STRIPE_PUBLISHABLE_KEY" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_USERNAME" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_PASSWORD" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_SIGNATURE" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_CURRENCY_CODE" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_VERSION" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_NVP_CURL_URL" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_CHECKOUT_REDIRECT_URL" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_CHECKOUT_RETURN_URL" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_CHECKOUT_CANCEL_URL" value="testing123"/>
+    <env name="GUITAREO_PAYPAL_API_TEST_BILLING_AGREEMENT_ID" value="testing123"/>
+
+    <env name="DRUMEO_STRIPE_API_SECRET" value="testing123"/>
+    <env name="DRUMEO_STRIPE_PUBLISHABLE_KEY" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_USERNAME" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_PASSWORD" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_SIGNATURE" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_CURRENCY_CODE" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_VERSION" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_NVP_CURL_URL" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_CHECKOUT_REDIRECT_URL" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_CHECKOUT_RETURN_URL" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_CHECKOUT_CANCEL_URL" value="testing123"/>
+    <env name="DRUMEO_PAYPAL_API_TEST_BILLING_AGREEMENT_ID" value="testing123"/>
+
+    <env name="SINGEO_STRIPE_API_SECRET" value="testing123"/>
+    <env name="SINGEO_STRIPE_PUBLISHABLE_KEY" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_USERNAME" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_PASSWORD" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_SIGNATURE" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_CURRENCY_CODE" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_VERSION" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_NVP_CURL_URL" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_CHECKOUT_REDIRECT_URL" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_CHECKOUT_RETURN_URL" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_CHECKOUT_CANCEL_URL" value="testing123"/>
+    <env name="SINGEO_PAYPAL_API_TEST_BILLING_AGREEMENT_ID" value="testing123"/>
+
+    <env name="MUSORA_STRIPE_API_SECRET" value="testing123"/>
+    <env name="MUSORA_STRIPE_PUBLISHABLE_KEY" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_USERNAME" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_PASSWORD" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_SIGNATURE" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_CURRENCY_CODE" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_VERSION" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_NVP_CURL_URL" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_CHECKOUT_REDIRECT_URL" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_CHECKOUT_RETURN_URL" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_CHECKOUT_CANCEL_URL" value="testing123"/>
+    <env name="MUSORA_PAYPAL_API_TEST_BILLING_AGREEMENT_ID" value="testing123"/>
+    <env name="RUDDERSTACK_WRITE_KEY" value="2TU5G9aYpLOYivpnpot6nVcaG9N"/>
+
+    <env name="SHOPIFY_APP_API_KEY" value="testing123"/>
+    <env name="SHOPIFY_APP_API_SECRET" value="testing123"/>
+    <env name="SHOPIFY_APP_HOST_NAME" value="testing123"/>
+    <env name="SHOPIFY_APP_STOREFRONT_ACCESS_TOKEN" value="testing123"/>
+    <env name="SHOPIFY_APP_ADMIN_API_ACCESS_TOKEN" value="testing123"/>
+    <env name="SHOPIFY_APP_API_VERSION" value="testing123"/>
+    <env name="SHOPIFY_MULTIPASS_SECRET_KEY" value="testing123"/>
+
+    <env name="SHOPIFY_ENABLED" value="true"/>
+    <env name="SHOPIFY_API_VERSION" value="2023-07"/>
+    <env name="SHOPIFY_INCLUDE_VALIDATION_ERRORS" value="true"/>
+    <env name="SHOPIFY_ACCESS_TOKEN" value="FOO-BAR-123"/>
+    <env name="SHOPIFY_DOMAIN" value="musora-pre-production.myshopify.com"/>
+    <env name="SHOPIFY_API_VERSION" value="2023-07"/>
+    <env name="SHOPIFY_RATE_LIMIT_THRESHOLD" value="1"/>
+    <env name="SHOPIFY_RATE_LIMIT_SLEEP_TIME" value="1"/>
+    <env name="SHOPIFY_APP_API_KEY" value="FOO-BAR-123"/>
+    <env name="SHOPIFY_APP_API_SECRET" value="FOO-BAR-123"/>
+    <env name="SHOPIFY_APP_HOST_NAME" value="https://musora-pre-production.myshopify.com"/>
+    <env name="SHOPIFY_APP_STOREFRONT_ACCESS_TOKEN" value="FOO-BAR-123"/>
+    <env name="SHOPIFY_APP_ADMIN_API_ACCESS_TOKEN" value="FOO-BAR-123"/>
+    <env name="SHOPIFY_APP_API_VERSION" value="2023-07"/>
+    <env name="SHOPIFY_MULTIPASS_SECRET_KEY" value="FOO-BAR-123"/>
+
+    <env name="RECHARGE_ACCESS_TOKEN" value="testing123"/>
+    <env name="RECHARGE_STOREFRONT_ACCESS_TOKEN" value="testing123"/>
+
+    <env name="SYNC_REVENUE_CAT" value="true"/>
+    <env name="REVENUE_KEY_IOS_MUSORA" value="testing123"/>
+    <env name="REVENUE_KEY_IOS_DRUMEO" value="testing123"/>
+    <env name="REVENUE_KEY_IOS_PIANOTE" value="testing123"/>
+    <env name="REVENUE_KEY_ANDROID_MUSORA" value="testing123"/>
+    <env name="REVENUE_KEY_ANDROID_DRUMEO" value="testing123"/>
+    <env name="REVENUE_KEY_ANDROID_PIANOTE" value="testing123"/>
+    <env name="JWT_SECRET" value="testing123"/>
+
+    <env name="SOUNDSLICE_APP_ID" value="testing123"/>
+    <env name="SOUNDSLICE_SECRET" value="testing123"/>
   </php>
   <source>
     <include>

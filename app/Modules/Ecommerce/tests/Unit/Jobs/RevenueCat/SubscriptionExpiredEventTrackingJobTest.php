@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ecommerce\Tests\Unit\Jobs\RevenueCat;
+namespace App\Modules\Ecommerce\tests\Unit\Jobs\RevenueCat;
 
 use App\Modules\Ecommerce\Jobs\RevenueCat\SubscriptionExpiredEventTrackingJob;
 use App\Modules\Ecommerce\Models\Product;

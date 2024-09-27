@@ -14,6 +14,7 @@ use App\Modules\Content\Models\Sanity\CoursePart;
 use App\Modules\Content\Models\Sanity\Creativity;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Essential;
+use App\Modules\Content\Models\Sanity\Focus;
 use App\Modules\Content\Models\Sanity\Foundation;
 use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Instructor;
@@ -148,6 +149,7 @@ class SanityStudioCMSController extends BaseController
             (new Creativity())->toArray(),
             (new Theory())->toArray(),
             (new Lifestyle())->toArray(),
+            (new Focus())->toArray(),
             (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),

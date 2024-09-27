@@ -2,28 +2,26 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
-use Modules\UserManagementSystem\Events\MobileAppLogin;
-use Modules\UserManagementSystem\Events\UserEvent;
-use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
 use Spatie\Permission\Models\Permission;
 
 class UserControllerTest extends UserManagementSystemTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        //        Route::get(
-        //            $this->testRouteName,
-        //            function () {
-        //                return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
-        //            }
-        //        )->middleware([AuthenticatedOnly::class]);
-    }
+    // protected function setUp(): void
+    // {
+    //     parent::setUp();
+    //
+    //     Route::get(
+    //        $this->testRouteName,
+    //        function () {
+    //            return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
+    //        }
+    //     )->middleware([AuthenticatedOnly::class]);
+    // }
 
     //    public function test_create()
     //    {
@@ -204,6 +202,8 @@ class UserControllerTest extends UserManagementSystemTestCase
             'password' => '12345678',
         ];
 
+        // fake the UserCreated event so that it doesn't attempt to sync the user with external services
+        Event::fake([UserCreated::class]);
 
         $response = $this->call(
             'PUT',

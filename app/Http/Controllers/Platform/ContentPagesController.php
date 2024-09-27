@@ -216,7 +216,7 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
 
-        if(($contentTypeName === 'student-focus' || $contentTypeName === 'student-reviews') && !user()->isAdmin()) {
+        if (($contentTypeName === 'student-focus' || $contentTypeName === 'student-reviews') && !user()->isAdmin()) {
             return view('content.sf-sr', [
                 'pageData' => [
                     'name' => $catalogueMeta['name'],
@@ -426,7 +426,7 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
-            'contentType' => ($childrenContent->isNotEmpty())?$childrenContent->first()->fetch('type'):null
+            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null
         ]);
     }
 
@@ -531,7 +531,7 @@ class ContentPagesController extends BaseController
             'xpAmount' => $secondContent->fetch('total_xp'),
             'displayItemAsOverview' => $secondContent['type'] === 'learning-path-level' &&
                 in_array(brand(), ['drumeo', 'pianote']),
-            'contentType' => ($courses->isNotEmpty())?$courses->first()->fetch('type'):null
+            'contentType' => ($courses->isNotEmpty()) ? $courses->first()->fetch('type') : null
         ]);
     }
 
@@ -640,7 +640,7 @@ class ContentPagesController extends BaseController
             'xpBonus' => $thirdContent->fetch('xp'),
             'xpAmount' => $thirdContent->fetch('total_xp'),
             'displayItemAsOverview' => false,
-            'contentType' => ($courses->isNotEmpty())?$courses->first()->fetch('type'):null
+            'contentType' => ($courses->isNotEmpty()) ? $courses->first()->fetch('type') : null
         ]);
     }
 
@@ -1557,7 +1557,7 @@ class ContentPagesController extends BaseController
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
 
-        if(!\user()->hasSongsAccess($brand)) {
+        if (!\user()->hasSongsAccess($brand)) {
             $catalogueMeta['tabs'] = array_values(
                 array_filter($catalogueMeta['tabs'], function ($tab) {
                     return $tab['name'] != 'Songs';
