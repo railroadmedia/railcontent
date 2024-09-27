@@ -15,7 +15,7 @@ export async function useOverviewPageData(contentType) {
     const progressPercent = await getProgressPercent(contentId); // Await the progress percent
 
     // Initialize the buildHeader hook
-    const { buildHeader } = useBuildHeader(contentType, progressPercent);
+    const { buildHeader } = useBuildHeader(progressPercent);
 
     try {
         if (contentType === "learning-path-level") {
@@ -26,7 +26,7 @@ export async function useOverviewPageData(contentType) {
                     position: index + 1 
                 }));
                 data.value = result;
-                data.value.header = buildHeader(result); // Use the hook to build header
+                data.value.header = buildHeader(contentType, result, progressPercent);
             } else {
                 throw new Error('Failed to fetch method');
             }
@@ -38,20 +38,19 @@ export async function useOverviewPageData(contentType) {
                     position: index + 1 
                 }));
                 data.value = result;
-                data.value.header = buildHeader(result); // Use the hook to build header
+                data.value.header = buildHeader(contentType, result, progressPercent);
             } else {
                 throw new Error('Failed to fetch foundation');
             }
         } else {
-            //This also works for course-part pages
             const result = await fetchMethodChildren(contentId);
             if (result) {
                 data.value = result[0];
-                data.value.header = buildHeader(result[0]); // Use the hook to build header
+                data.value.header = buildHeader(contentType, result[0], progressPercent);
             } else {
                 throw new Error('Failed to fetch method children');
             }
-        }
+        }        
     } catch (err) {
         error.value = err;
     } finally {
@@ -74,6 +73,7 @@ const getProgressPercent = async (id) => {
 
     try {
         const completedState = await fetchCompletedState(id);
+        console.log(completedState)
         return completedState ? completedState.percent : 0;
     } catch (error) {
         console.error('Error fetching completed state:', error);

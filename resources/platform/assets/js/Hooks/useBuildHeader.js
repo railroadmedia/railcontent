@@ -1,8 +1,8 @@
 // hooks/useBuildHeader.js
 import { ref } from 'vue';
 
-export function useBuildHeader(contentType, result, progressPercent) {
-    const buildHeader = (result) => {
+export function useBuildHeader(progressPercent) {
+    const buildHeader = (contentType, result, progressPercent) => {
         const header = {
             type: contentType,
             title: result.title,
