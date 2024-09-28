@@ -19,19 +19,19 @@
                         </div>
                     </div>
                     <div v-if="canRefer" class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
-                        <form id="MusoraEngagementTriggerReferWebForm" @submit.prevent="handleSubmit" class="mx-auto">
+                        <form id="MusoraEngagementTriggerReferWebForm" @submit.prevent="handleSubmitPass" class="mx-auto">
                             <!-- Tracking Inputs -->
-                            <div v-html="trackingInputsHtml"></div>
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
-                            <input type="hidden" name="success_redirect" value="https://www.pianote.com/chord-hacks/lessons">
-
+                            <input type="hidden" name="brand" :value="brand">
+                            
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
                             <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input id="sign-up-email"
-                                       class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
+                                       class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border focus:tw-outline-none"
+                                       :class="`focus:tw-border-${brand}`"
                                        name="email" type="email" placeholder="Email address..." required="">
                                 <button class="submit tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                         :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" type="submit">
@@ -39,8 +39,17 @@
                                 </button>
                             </div>
                         </form>
-                        <div v-if="formSubmitted" class="tw-mt-4 tw-text-green-500">
-                            Form has been successfully submitted!
+                        <div v-if="isModalOpen">
+                            <ModalRenderer>
+                                <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
+                                    <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
+                                        <div class="tw-text-2xl tw-font-bold tw-mb-5">Congrats! You’ve just shared free music lessons with your friend.</div>
+                                        <div>
+                                            <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ModalRenderer>
                         </div>
                     </div>
                 </div>
@@ -50,25 +59,19 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
+import ModalRenderer from "@collections/Modal/ModalRenderer";
 import axios from 'axios';
 
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const { brand, userEmail } = storeToRefs(userStore);
+
 const props = defineProps({
     canRefer: {
         type: Boolean,
         default: false,
-    },
-    inviteUrl: {
-        type: String,
-        default: '',
-    },
-    trackingInputsHtml: {
-        type: String,
-        required: true,
     },
 });
 
@@ -82,44 +85,53 @@ const cardImg = computed(() => {
     return imgs[brand.value];
 });
 
-const formSubmitted = ref(false);
+const isModalOpen = ref(false);
 
-onMounted(() => {
-    console.log('Tracking Inputs HTML:', props.trackingInputsHtml);
-});
+async function handleSubmitPass(event) {
 
-async function handleSubmit(event) {
     const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const userEmail = document.getElementById('sign-up-email');
-    if (userEmail.value.match(emailFormat)) {
+    const userEmailInput = document.getElementById('sign-up-email').value;
+    const referrer = userEmail.value;
+    const formName = document.querySelector('input[name="form_name"]').value;
+    const brand = document.querySelector('input[name="brand"]').value;
+
+    if (userEmailInput.match(emailFormat)) {
         try {
             console.log('Submitting form with data:', {
-                email: userEmail.value,
-                form_name: 'Musora Referral',
-                inf_form_xid: 'MusoraEngagementTriggerReferWebForm',
+                email: userEmailInput,
+                referrer: referrer,
+                form_name: formName,
+                brand: brand,
             });
-            console.log('Tracking Inputs HTML on submit:', props.trackingInputsHtml);
 
             const response = await axios.post("/customer-io/submit-email-form", {
-                email: userEmail.value,
-                form_name: 'Musora Referral',
-                inf_form_xid: 'MusoraEngagementTriggerReferWebForm',
-                tracking_inputs: props.trackingInputsHtml,
+                email: userEmailInput,
+                referrer: referrer,
+                form_name: formName,
+                brand: brand,
             });
 
-            /*
-            *  TODO: check if response.status is 201
-            *  if it is 422, the form validation failed
-            */
-            console.log('Form submitted', response);
-            formSubmitted.value = true;
-            window.location.href = document.querySelector('input[name="success_redirect"]').value;
+            console.log('response:', response);
+
+            if (response.status === 201) {
+                console.log('Form submitted', response);
+                isModalOpen.value = true;
+                document.getElementById('MusoraEngagementTriggerReferWebForm').reset();
+            } else if (response.status === 422) {
+                console.error('Form validation failed', response.data);
+            } else {
+                console.error('Unexpected response status', response.status);
+            }
         } catch (error) {
             console.error('Error submitting form', error);
         }
     } else {
-        console.log('Email format is invalid:', userEmail.value);
-        userEmail.classList.add('bg-red-200');
+        console.log('Email format is invalid:', userEmailInput);
+        document.getElementById('sign-up-email').classList.add('bg-red-200');
     }
+}
+
+function closeModal() {
+    isModalOpen.value = false;
 }
 </script>
