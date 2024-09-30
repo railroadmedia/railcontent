@@ -149,7 +149,7 @@
 
                         :content-description="videoData.description"
                         :content-chapters="videoData?.chapters" 
-                        :instructors="contentInstructors" 
+                        :instructors="videoData?.instructor" 
                     />
 
                     <VideoButtons 
@@ -204,7 +204,7 @@
                 />
 
                 <!-- Assignments -->
-                <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                <div v-if="videoData?.assignments?.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
@@ -216,24 +216,38 @@
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <AssignmentsContainer :lesson-data="lessonData" :assignments="assignments" :brand="brand"
-                            :user-id="videoResources.userId" />
+                        <AssignmentsContainer 
+                            :lesson-data="lessonData" 
+                            :assignments="videoData?.assignments" 
+                            :brand="brand"
+                            :user-id="userId" 
+                        />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
-                        <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
-                            :content-id="commentsProps.contentId" :user-id="commentsProps.userId"
-                            :user-name="commentsProps.userName" :user-avatar="commentsProps.userAvatar"
-                            :user-xp="commentsProps.userXp" :user-access-level="commentsProps.userAccessLevel"
-                            :profile-base-route="commentsProps.profileBaseRoute"
-                            :is-admin="commentsProps.isAdmin === 'true' ? true : false">
-                        </VideoComments>
+                        <VideoComments 
+                            :is-loading="isLoading"
+                            :theme-color="brand" 
+                            :brand="brand"
+                            :user-id="userId"
+                            :is-admin="isAdmin"
+                            :content-id="videoData?.id" 
+                            :user-name="userDisplayName" 
+                            :user-avatar="userProfilePictureUrl"
+                            :user-xp="userXP" 
+                            :user-access-level="userAccessLevel"
+                            :profile-base-route="`/${brand}/profile/${userId}/dashboard`"
+                        />
                     </div>
                 </div>
             </section>
         </div>
-        <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson" :next-lesson-json="nextLessonJson" />
+        <LessonComplete 
+            :lesson-content="lessonData" 
+            :this-lesson-json="thisLessonJson" 
+            :next-lesson-json="nextLessonJson" 
+        />
 
         <!-- Chapter Soundslice -->
         <transition name="show-from-bottom">
@@ -321,10 +335,6 @@ const props = defineProps({
         type: Object,
         default: {},
     },
-    commentsProps: {
-        type: Object,
-        default: {},
-    },
     soundsliceSlug: {
         type: String,
         default: '',
@@ -337,17 +347,13 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    contentInstructors: {
-        type: Array,
-        default: []
-    },
 });
 
 //Pinia
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
-const { userId, brand } = storeToRefs(userStore);
+const { userId, isAdmin, userDisplayName, userAccessLevel, userXP, userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 let hasBeenPlayed = false;
 let progressTracker;
@@ -369,11 +375,6 @@ const isCompleted = ref(false);
 //Reactive
 const state = reactive({
     assignmentCollapsed: false,
-});
-
-//Computed
-const showPracticeButton = computed(() => {
-    return !!props.soundsliceSlug;
 });
 
 //Methods
@@ -457,6 +458,7 @@ const showDraftLabel = computed(() => {
 })
 
 onBeforeMount(async() => {
+    console.log('videoProps.progressState', props.videoProps.progressState)
     const contentId = getContentId();
 
     const data = await fetchLessonContent(contentId);
@@ -470,6 +472,8 @@ onBeforeMount(async() => {
 
     // const lessons = await fetchNextPreviousLesson(contentId);
     // fetch related lessons, comments,
+
+    console.log('videoData.value', videoData.value)
 
     platformStore.setLoadingState(false);
 })

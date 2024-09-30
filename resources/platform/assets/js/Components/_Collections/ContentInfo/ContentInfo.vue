@@ -51,7 +51,7 @@
                 >
                     <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
                         <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">About {{ instructor.name }}</h6>
-                        <div v-if="instructor.data.find((i) => i.key === 'biography')" v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
+                        <div v-if="instructor.biography" v-html="instructor?.biography"></div>
                     </div>
                 </div>
             </template>
