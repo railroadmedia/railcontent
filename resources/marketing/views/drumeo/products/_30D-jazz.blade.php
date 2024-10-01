@@ -4,7 +4,7 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-jazz/logo.webp"
                         alt="30-Day Double Bass With Ulysses Logo">
                     @php
                         $lines = [
@@ -30,7 +30,7 @@
                                 class="inline lg:hidden">starting October 28th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
-                        style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
+                        style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/header.webp');"
 {{--                        @if(empty($platformVersion))--}}
 {{--                            x-on:click="trailerM = true;"--}}
 {{--                        @else--}}
@@ -80,7 +80,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:inline-block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/header.webp');"
                             x-on:click="trailer = true;"
                     >
                         <div class="join white smaller absolute  bottom-1  bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -154,7 +154,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/know-exactly.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/know-exactly.webp',
                         'title' => 'Know exactly what to practice.',
                         'desc' =>
                             'Jazz drumming engages your brain in different ways. 30-Day Jazz helps you build these pathways by following a simple daily practice schedule. By the end of the month, you’ll be comfortable playing syncopated jazz grooves.',
@@ -162,7 +162,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/schedule.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
                             'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Jazz fits any schedule. You only need 10 minutes per day to improve your jazz independence and musicianship.',
@@ -170,7 +170,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/play.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/real-music.webp',
                         'title' => 'Play with real music.',
                         'desc' =>
                             'No more painfully dry exercises set to MIDI playalongs. In 30-Day Jazz, you’re playing along with a world class jazz combo. They’ve crafted a custom playalong for you to apply your skills and expand your ears over 30 days.',
@@ -178,7 +178,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/live-support.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/q-a.webp',
                         'title' => 'Live support from REAL teachers.',
                         'desc' =>
                             'Each week you’ll have a 60-minute live lesson with Ulysses Owens Jr. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
@@ -186,7 +186,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/lifetime-access.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/lifetime.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
                             'You can access ALL playalongs, charts, and lessons from 30-Day Jazz for life. That means you can return to your favorite jazz exercises and songs over and over – plus, it means you can work at your own pace.',
@@ -198,7 +198,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/know-exactly.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/know-exactly.webp',
                         'title' => 'Know exactly what to practice.',
                         'desc' =>
                             'Jazz drumming engages your brain in different ways. 30-Day Jazz helps you build these pathways by following a simple daily practice schedule. By the end of the month, you’ll be comfortable playing syncopated jazz grooves.',
@@ -206,7 +206,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/schedule.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
                             'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Jazz fits any schedule. You only need 10 minutes a day to improve your jazz independence and musicianship.',
@@ -214,7 +214,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/live-support.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/q-a.webp',
                         'title' => 'Live support from REAL teachers.',
                         'desc' =>
                             'Each week you’ll have a 60-minute live lesson with Ulysses Owens Jr. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
@@ -264,7 +264,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
                 <img class="h-24 sm:h-28 lg:h-36 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-jazz/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
@@ -298,7 +298,7 @@
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/screen.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/screen.webp"
                     alt="Mobile Screen with 30-Day Double Bass With Ulysses">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the
@@ -343,28 +343,28 @@
             <h2 class="mb-6 sm:mb-10 lg:mb-14"><img
                     class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo"> <strong> is designed for:</strong></h2>
 
             @php
                 $drummers = [
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/beginner.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/beginner.webp',
                         'title' => 'Beginner Drummers.',
                         'description' =>
                             '30-Day Jazz starts with simple swing patterns on the ride cymbal. If you’re a motivated beginner, you can follow the daily practice regime to learn dozens of jazz patterns by the end of the month.',
                     ],
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-double-bass/intermediate.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-jazz/intermediate.webp',
                         'title' => 'Intermediate Drummers.',
                         'description' =>
                             'So you can play The Beatles and Nirvana but really want to expand your vocabulary on the drums. 30-Day Jazz introduces you to the world of jazz drumming in a fully immersive experience.',
                     ],
                     [
                         'image' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/advanced.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/advanced.webp',
                         'title' => 'Advanced Drummers',
                         'description' =>
                             'If you’re highly experienced in one style of drumming, 30-Day Jazz will introduce you to a new world. By the end of the month, you’ll be prepared to play with a live jazz band.',
@@ -417,7 +417,7 @@
                         <td></td>
                         <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-white.webp"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/logo-white.webp"
                                 alt="30 day drummer logo"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl" @click="tableClass = 'online'"><strong>Private<br> Lessons</strong></td>
                         <td class="cursor-pointer sm:cursor-default" @click="tableClass = 'books'"><strong>Online<br> Courses</strong></td>
@@ -481,9 +481,9 @@
                 <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/coach-image.webp">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/coach-image.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/coach-image.webp"
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
@@ -542,7 +542,7 @@
                 alt="guarantee badge">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <img class="h-48 sm:h-64 lg:h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/810x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/guarantee-students.webp">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/810x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/guarantee-students.webp">
                 <div class="mt-4 sm:mt-0 sm:pr-8 sm:text-left">
                     <h3 class="leading-tight mb-4 sm:mb-6"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                             guaranteed.</strong></h3>
@@ -567,7 +567,7 @@
             <div class="container mx-auto max-w-4xl relative z-50 text-center">
                 <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/30DDB-logo-dark.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/logo.webp"
                     alt="30 day Double Bass With 66Samus logo">
                 <h3 class="leading-tight mt-2 sm:mt-4"><strong>Learn jazz drumming in an<br class="sm:hidden"> immersive 30-day experience.</strong></h3>
                 <p class="leading-normal my-3 my-4">
@@ -598,7 +598,7 @@
                         @include('drumeo.products.partials._order-card', [
                             'header' => 'Course<br> Only',
                             'subheader' => '30-Day Jazz<br> + Free Bonus Worth $30',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-no-pedal.png',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
                             'imageHeight' => 'h-32 md:h-40',
                             'price' => '$97',
                             'specialText' => "One time payment.",
@@ -614,7 +614,7 @@
                             'badge' => 'Best Deal',
                             'header' => 'Course +<br> Unlimited Lessons',
                             'subheader' => '30-Day Jazz<br> + Drumeo & 3 Bonuses',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course.png',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',
                             'imageHeight' => 'h-32 md:h-40',
                             'price' => '$240',
                             'specialText' => "Renews annually at $240.",
