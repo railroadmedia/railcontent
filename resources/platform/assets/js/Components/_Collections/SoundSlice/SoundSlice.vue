@@ -30,20 +30,17 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    forceStartTime: {
-        type: Boolean,
-        default: false,
-    },
     loop: {
         type: Boolean,
         default: false,
     },
     startTime: {
         type: [Number, String],
-        default: 0,
+        default: null,
     },
     endTime: {
         type: [Number, String],
+        default: null,
     }
 });
 
@@ -348,11 +345,13 @@ onBeforeMount(() => {
     }
 
     //GET Current Time
-    if (localStorage.getItem(`${props.soundsliceSlug}_currentTime`)) {
-        uniqueSettings.time = localStorage.getItem(`${props.soundsliceSlug}_currentTime`);
-    }
-    else {
+    
+    if (typeof props.startTime === 'number' || typeof props.startTime === 'string') {
         uniqueSettings.time = props.startTime;
+    } else if (localStorage.getItem(`${props.soundsliceSlug}_currentTime`)) {
+        uniqueSettings.time = localStorage.getItem(`${props.soundsliceSlug}_currentTime`);
+    } else {
+        uniqueSettings.time = 0;
     }
 
 
