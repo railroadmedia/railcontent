@@ -6354,6 +6354,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vuepic/vue-datepicker@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "@vuepic/vue-datepicker@npm:9.0.3"
+  dependencies:
+    date-fns: "npm:^3.6.0"
+  peerDependencies:
+    vue: ">=3.2.0"
+  checksum: 10c0/c16ee115a1cc71afd018c967b4a36190beb093c97c5fd42eae65c110aa173c73747562d81e1b41c0f16bb7e3caa695efcc6530171aad55c19d7dd00385c8a7f9
+  languageName: node
+  linkType: hard
+
 "@vueuse/core@npm:^10.9.0":
   version: 10.11.1
   resolution: "@vueuse/core@npm:10.11.1"
@@ -8812,6 +8823,13 @@ __metadata:
     whatwg-mimetype: "npm:^3.0.0"
     whatwg-url: "npm:^11.0.0"
   checksum: 10c0/051c3aaaf3e961904f136aab095fcf6dff4db23a7fc759dd8ba7b3e6ba03fc07ef608086caad8ab910d864bd3b5e57d0d2f544725653d77c96a2c971567045f4
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "date-fns@npm:3.6.0"
+  checksum: 10c0/0b5fb981590ef2f8e5a3ba6cd6d77faece0ea7f7158948f2eaae7bbb7c80a8f63ae30b01236c2923cf89bb3719c33aeb150c715ea4fe4e86e37dcf06bed42fb6
   languageName: node
   linkType: hard
 
@@ -13235,7 +13253,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"klona@npm:^2.0.5":
+"klona@npm:^2.0.5, klona@npm:^2.0.6":
   version: 2.0.6
   resolution: "klona@npm:2.0.6"
   checksum: 10c0/94eed2c6c2ce99f409df9186a96340558897b3e62a85afdc1ee39103954d2ebe1c1c4e9fe2b0952771771fa96d70055ede8b27962a7021406374fdb695fd4d01
@@ -13799,6 +13817,13 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 10c0/655d110220983c1a4b9c0c679a2e8016d4b67f6e9c7b5435ff5979ecdb20d0813f4dec0a08674fcbdd4846a3f07edbb50a36811fd37930b94aaa0d9daceb017e
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:5.12.2":
+  version: 5.12.2
+  resolution: "lottie-web@npm:5.12.2"
+  checksum: 10c0/0aeaf631b10a76afd025df70c2a1486543530708e07a316946c08e55891dac483ffbaf2bf3648ae0b9c54c733118a0a086fd150aa76f7848606214c67ad72c30
   languageName: node
   linkType: hard
 
@@ -17251,6 +17276,7 @@ __metadata:
     "@vue/compiler-sfc": "npm:^3.4.20"
     "@vue/test-utils": "npm:^2.4.4"
     "@vue/vue3-jest": "npm:^29.2.6"
+    "@vuepic/vue-datepicker": "npm:^9.0.3"
     "@vueuse/core": "npm:^10.9.0"
     alpinejs: "npm:^3.4.2"
     ansi-styles: "npm:^6.1.0"
@@ -17311,6 +17337,7 @@ __metadata:
     vue-loader: "npm:^16.8.1"
     vue-recaptcha: "npm:^2.0.2"
     vue3-draggable: "npm:^2.0.9"
+    vue3-lottie: "npm:^3.3.1"
     webpack: "npm:^5.90.3"
   languageName: unknown
   linkType: soft
@@ -19535,6 +19562,19 @@ __metadata:
   peerDependencies:
     vue: ^3.0.0
   checksum: 10c0/ac7246a9cffb171591cfbcb4794d5f8e4fe3ab5fd8f1a60c10ac64069cae7f947ad942309d4d50e276dfeaa8cf9b6e28c6494de5e8cfc33a5296a213f61be664
+  languageName: node
+  linkType: hard
+
+"vue3-lottie@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "vue3-lottie@npm:3.3.1"
+  dependencies:
+    fast-deep-equal: "npm:^3.1.3"
+    klona: "npm:^2.0.6"
+    lottie-web: "npm:5.12.2"
+  peerDependencies:
+    vue: ^3.2
+  checksum: 10c0/8458920eabe5582341bf44352364d1186c3752a2fca464faf596d65fcbfcef16925ab7f0d7e0c43c8292784a007446252b198211c4faaf6fe7760af5f4ec4001
   languageName: node
   linkType: hard
 

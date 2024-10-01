@@ -86,6 +86,7 @@
     "@tinymce/tinymce-vue": "^5.1.1",
     "@typeform/embed": "^4.10.0",
     "@vimeo/player": "^2.15.0",
+    "@vuepic/vue-datepicker": "^9.0.3",
     "@vueuse/core": "^10.9.0",
     "alpinejs": "^3.4.2",
     "ansi-styles": "^6.1.0",
@@ -122,7 +123,8 @@
     "vue-axios": "^3.4.1",
     "vue-draggable-next": "^2.1.1",
     "vue-loader": "^16.8.1",
-    "vue3-draggable": "^2.0.9"
+    "vue3-draggable": "^2.0.9",
+    "vue3-lottie": "^3.3.1"
   },
   "packageManager": "yarn@4.1.0",
   "eslintConfig": {
