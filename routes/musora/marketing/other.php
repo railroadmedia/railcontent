@@ -34,6 +34,7 @@ Route::domain('{musoraDomain}')
         Route::get('mentors', [MarketingController::class, 'mentors']);
         Route::get('moderators', [MarketingController::class, 'moderators']);
         Route::get('playlists', [MarketingController::class, 'playlists']);
+        Route::get('playlist', [MarketingController::class, 'playlist']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);

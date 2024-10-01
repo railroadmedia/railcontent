@@ -132,6 +132,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.playlists', [ 'theme' => 'musora']);
     }
+    public function playlist()
+    {
+        return view('musora.pages.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function recitals()
     {
