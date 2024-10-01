@@ -5,7 +5,7 @@ export const musoraStructure = async (S, context) => {
     try {
         //TODO: replace hardcoded categories with a GROQ
         const uniqueCategories = [
-            'backstage-secret', 'sonor', 'tama', 'drum-fest-international-2022', 'diy-drum-experiment', 'in-rhythm', 'spotlight', 'the-history-of-electronic-drums',
+            'odd-times','backstage-secret', 'sonor', 'tama', 'drum-fest-international-2022', 'diy-drum-experiment', 'in-rhythm', 'spotlight', 'the-history-of-electronic-drums',
             'student-collaboration', 'behind-the-scenes', 'rhythms-from-another-planet', 'study-the-greats', 'exploring-beats', 'paiste-cymbals',
             'on-the-road', 'live', 'podcast', 'performance', 'rhythmic-adventures-of-captain-carson', 'solo', 'gear-guide', 'challenges','question-and-answer',
             'archive', 'boot-camp','recording'
