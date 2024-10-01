@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Content\Controllers\ContentLikesControllerUser;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,18 +37,19 @@ Route::prefix('content')
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
 
+        //Content User Likes
         Route::get(
-            '/user_data_all',
-            [ContentMetadataController::class, 'getContentUserDataAll']
-        )->name('content.user_data_all');
+            'user/likes/all',
+            [ContentLikesControllerUser::class, 'all']
+        )->name('content.user.likes.all');
 
         Route::post(
-            '/{contentId}/like',
-            [ContentMetadataController::class, 'likeContent']
-        )->name('content.like');
+            'user/likes/like/{contentId}',
+            [ContentLikesControllerUser::class, 'like']
+        )->name('content.user.like');
 
         Route::post(
-            '/{contentId}/unlike',
-            [ContentMetadataController::class, 'unLikeContent']
-        )->name('content.unlike');
+            'user/likes/unlike/{contentId}',
+            [ContentLikesControllerUser::class, 'unLike']
+        )->name('content.user.unlike');
     });

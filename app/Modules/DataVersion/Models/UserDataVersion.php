@@ -20,6 +20,7 @@ use Illuminate\Support\Collection;
  */
 class UserDataVersion extends Model
 {
+    public const int DefaultVersion = 1;
     protected $table = 'user_data_versions';
     public $timestamps = true;
 }

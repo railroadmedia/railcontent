@@ -10,25 +10,14 @@ use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
 use App\Modules\Content\Requests\ContentProgressMetadataRequest;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
-use App\Modules\DataVersion\Services\DataVersionService;
 use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 
 class ContentMetadataController extends Controller
 {
-    private DataVersionService $dataVersionService;
-
-    public function __construct(
-        private ProductProviderInterface $productProvider,
-        DataVersionService $dataVersionService
-    ) {
-        $this->dataVersionService = $dataVersionService;
-    }
-
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
@@ -140,70 +129,5 @@ class ContentMetadataController extends Controller
             'length_in_seconds' => $content['length_in_seconds'] ?? 0,
         ];
         return $response;
-    }
-
-    public function getContentUserDataAll(): array
-    {
-        $user = user();
-        $data = $this->buildUserContentData($user->id);
-        $wrappedData = $this->dataVersionService->wrapDataArrayWithVersion(
-            UserDataVersionKeyEnum::Content,
-            $data,
-            $user->id
-        );
-        return $wrappedData;
-    }
-
-    private function buildUserContentData(int $userId): array
-    {
-        $allLikedContent = ContentLike::getAllContentLikedByUser($userId);
-        //$allResumeTimes = LastEngagedSeconds::getAllContentResumeTimeSeconds($userId);
-        //$allProgressData = ContentUserProgress::getAllProgressDataByUser($userId);
-
-        $data = [];
-//        foreach ($allProgressData as $progressData) {
-//            $contentData = $data[$progressData->content_id] ?? [];
-//            if ($progressData['progress_percent'] > 0) {
-//                $contentData['p'] = $progressData['progress_percent'];
-//                $data[$progressData->content_id] = $contentData;
-//            }
-//        }
-        foreach ($allLikedContent as $likedContent) {
-            $contentData = $data[$likedContent->content_id] ?? [];
-            $contentData['l'] = 1;
-            $data[$likedContent->content_id] = $contentData;
-        }
-//        foreach ($allResumeTimes as $lastEngagedSeconds) {
-//            $contentData = $data[$lastEngagedSeconds->content_id] ?? [];
-//            $contentData['s'] = $lastEngagedSeconds->resume_time_seconds;
-//            $data[$lastEngagedSeconds->content_id] = $contentData;
-//        }
-        return $data;
-    }
-
-    public function likeContent(int $contentId)
-    {
-        $like = ContentLike::firstOrCreate(['contentId' => $contentId, 'userId' => user()->id]);
-        $content = Content::find($contentId);
-        if ($content) {
-            $content->like_count++;
-            $content->save();
-        }
-        if ($like->wasRecentlyCreated) {
-            $this->dataVersionService->incrementUserContextVersion(UserDataVersionKeyEnum::Content, user()->id);
-        }
-    }
-
-    public function unLikeContent(int $contentId)
-    {
-        $wasDeleted = ContentLike::where(['contentId' => $contentId, 'userId' => user()->id])->delete();
-        $content = Content::find($contentId);
-        if ($content && $content->like_count > 0) {
-            $content->like_count--;
-            $content->save();
-        }
-        if ($wasDeleted) {
-            $this->dataVersionService->incrementUserContextVersion(UserDataVersionKeyEnum::Content, user()->id);
-        }
     }
 }

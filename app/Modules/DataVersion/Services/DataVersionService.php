@@ -7,27 +7,23 @@ use App\Modules\DataVersion\Models\UserDataVersion;
 
 class DataVersionService
 {
-    public function wrapDataArrayWithVersion(UserDataVersionKeyEnum $dataKey, array $data, int $userId): array
+    public function incrementUserContextVersion(UserDataVersionKeyEnum $dataKey, int $userId): int
     {
-        return ['version' => $this->getUserDataVersion($dataKey, $userId), 'data' => $data];
-    }
-
-
-    public function incrementUserContextVersion(UserDataVersionKeyEnum $dataKey, int $userId): void
-    {
-        $version = $this->getUserDataVersion($dataKey, $userId);
+        $version = $this->getUserDataVersionObject($dataKey, $userId);
         if (!$version) {
             $version = new UserDataVersion();
             $version->user_id = $userId;
             $version->data_key = $dataKey;
+            $version->version = UserDataVersion::DefaultVersion;
         }
         $version->version = $version->version + 1;
         $version->save();
+        return $version->version;
     }
 
     public function getUserDataVersion(UserDataVersionKeyEnum $dataKey, int $userId)
     {
-        return $this->getUserDataVersionObject($dataKey, $userId)?->version;
+        return $this->getUserDataVersionObject($dataKey, $userId)?->version ?? UserDataVersion::DefaultVersion;
     }
 
     private function getUserDataVersionObject(UserDataVersionKeyEnum $dataKey, int $userId)

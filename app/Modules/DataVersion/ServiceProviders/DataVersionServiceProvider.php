@@ -19,8 +19,6 @@ class DataVersionServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware([])
-            ->group(__DIR__ . '/../routes/routes.php');
     }
 
     /**
