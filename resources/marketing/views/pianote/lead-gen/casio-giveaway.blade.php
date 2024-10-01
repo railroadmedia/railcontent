@@ -110,8 +110,29 @@
         </div>
     </section>
 
+    <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
+        <div class="max-w-md md:max-w-5xl mx-auto md:flex md:items-center">
+            <div class="md:pr-8 text-center md:text-left mb-6 md:mb-0 flex-shrink-0">
+                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes2.webp" alt="ui image">
+            </div>
+            <div class="lg:pl-6">
+                <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
+                    More Prizes.<br>
+                    More Chances to Win…
+                </h4>
+                <p class="leading-normal" style="color:#2A2F34;">
+                    We’re also giving away <strong>3 Annual Pianote Memberships</strong>.
+                    <br><br>
+                    Dive in and explore unlimited piano lessons, weekly live streams, exclusive resources, and personalized feedback from real teachers.
+                    <br><br>
+                    Sign up today and get everything you need to start your piano journey!
+                </p>
+            </div>
+        </div>
+    </section>
+
     {{-- diagonal line --}}
-    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
+    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #F1EFED calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
         <div class="max-w-md md:max-w-3xl mx-auto text-center">
             <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
