@@ -4,7 +4,7 @@
         :href="isLink ? href : null"
         :type="isLink ? null : type"
         :disabled="disabled"
-        :class="[ `tw-mu-button tw-btn-${size} tw-font-bebas-neue tw-flex tw-justify-center tw-items-center`, btnClasses, props.class ]"
+        :class="[ `tw-mu-button tw-font-bebas-neue tw-flex tw-justify-center tw-items-center`, btnClasses, props.class ]"
         @click="handleClick"
     >
         <template v-if="processing">
