@@ -47,6 +47,7 @@ use App\Modules\Content\Models\Sanity\Shows\ExploringBeats;
 use App\Modules\Content\Models\Sanity\Shows\GearGuide;
 use App\Modules\Content\Models\Sanity\Shows\InRhythm;
 use App\Modules\Content\Models\Sanity\Shows\Live;
+use App\Modules\Content\Models\Sanity\Shows\OddTimes;
 use App\Modules\Content\Models\Sanity\Shows\OnTheRoad;
 use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
 use App\Modules\Content\Models\Sanity\Shows\Performance;
@@ -101,6 +102,7 @@ class SanityStudioCMSController extends BaseController
             (new PlayAlong())->toArray(),
             (new PlayAlongPart())->toArray(),
             (new Rudiment())->toArray(),
+            (new OddTimes())->toArray(),
             (new DrumFestInternational2022())->toArray(),
             (new Spotlight())->toArray(),
             (new TheHistoryOfElectronicDrums())->toArray(),
