@@ -29,7 +29,9 @@
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
                                 class="inline lg:hidden">starting October 28th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video
+                    @if(!empty($platformVersion) && empty($cohort['cohort_trailer'])) hidden @endif
+                    "
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/header.webp');"
 {{--                        @if(empty($platformVersion))--}}
 {{--                            x-on:click="trailerM = true;"--}}
@@ -83,7 +85,9 @@
                         style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/header.webp');"
                             x-on:click="trailer = true;"
                     >
-                        <div class="join white smaller absolute  bottom-1  bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
+                        <div class="join white smaller absolute  bottom-1  bottom-2 left-1
+                        @if(!empty($platformVersion) && empty($cohort['cohort_trailer'])) hidden @endif
+                        "><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
             </div>
@@ -720,9 +724,11 @@
 'vimeo' => true,
 ])
 @else
-@include('_partials.components.video-modal', [
-'name' => 'trailer',
-'video' => $cohort['cohort_trailer'],
-'styles' => 'aspect-16:9',
-])
+    @if(!empty($cohort['cohort_trailer']))
+        @include('_partials.components.video-modal', [
+        'name' => 'trailer',
+        'video' => $cohort['cohort_trailer'],
+        'styles' => 'aspect-16:9',
+        ])
+    @endif
 @endif
