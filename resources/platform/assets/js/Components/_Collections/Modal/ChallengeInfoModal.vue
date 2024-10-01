@@ -1,0 +1,41 @@
+<template>
+    <InfoModal
+        v-if="info[type]"
+        :selfContained="true"
+        :title="info[type].title"
+        class-override="tw-max-w-[600px] tw-w-full"
+        :container-stay-on-close="containerStayOnClose"
+        @onClose="() => $emit('closeModal')"
+    >
+        <p class="tw-text-white tw-mb-5">{{ info[type].description }}</p>
+        <div class="tw-flex tw-justify-end">
+            <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white" @click="$emit('closeModal')">Okay!</MuButton>
+        </div>
+    </InfoModal>
+</template>
+<script setup>
+import InfoModal from '@collections/Modal/InfoModal.vue';
+import MuButton from '@units/Button/MuButton';
+
+const props = defineProps({
+    type: {
+        type: String,
+        default: 'streak',
+    },
+    containerStayOnClose: {
+        type: Boolean,
+        default: false,
+    },
+})
+
+const info = {
+    streak: {
+        title: '🔥 Introducing Streaks!',
+        description: 'Streaks make it easy to track how many days in a row you’ve completed a lesson for a specific Challenge. Higher streaks will unlock special achievements!'
+    },
+    rest: {
+        title: 'Introducing Rest Days!',
+        description: 'Rest Days allow you to miss a few days of a Challenge without restarting your streak. You have a limited number of Rest Day tokens, and can gain more tokens as you progress through a Challenge.'
+    }
+}
+</script>
