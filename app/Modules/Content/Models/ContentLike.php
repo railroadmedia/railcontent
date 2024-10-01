@@ -2,8 +2,10 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Content\Events\ContentLikeSaved;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * App\Modules\Content\Models\ContentLike
@@ -30,6 +32,11 @@ class ContentLike extends Model
     {
         return ContentLike::where(['content_id' => $contentId, 'user_id' => $userId])
             ->exists();
+    }
+
+    public static function getAllContentLikedByUser(int $userId): Collection
+    {
+        return ContentLike::query()->select(['content_id'])->where('user_id', $userId)->get();
     }
 
     public static function getContentLikedCount(int $contentId): int
