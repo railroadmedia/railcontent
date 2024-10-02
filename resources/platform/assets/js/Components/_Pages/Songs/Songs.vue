@@ -43,7 +43,7 @@ import { storeToRefs } from "pinia";
 import { getTabData } from './tabData';
 import { useCollectionStore } from "@stores/collection";
 import { useUserStore } from "@stores/user";
-import { fetchSongArtistCount, fetchSongCount, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
+import { fetchArtists, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
@@ -107,8 +107,8 @@ onBeforeMount(async() => {
             platformStore.disableCloseMembershipUpgradeModal();
         } else {
             // Fetch song artist count
-            const artists = await fetchSongArtistCount(brand.value);
-            artistCount.value = artists;
+            const artists = await fetchArtists(brand.value);
+            artistCount.value = artists.length;
 
             // Fetch started content (in-progress lessons)
             const startedIds = await fetchContentInProgress('song', brand.value);
