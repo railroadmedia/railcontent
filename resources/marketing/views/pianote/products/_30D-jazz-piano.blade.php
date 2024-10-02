@@ -56,7 +56,7 @@
                         @else
                             {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
                             <a href="#final" class="join pianote medium w-full anchor-slide">ENROLL NOW</a>
-                            <a href="https://www.musora.com/pianote/enrollment/30-day-double-bass">
+                            <a href="https://www.musora.com/pianote/enrollment/30-day-jazz-piano">
                                 <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-pianote">
                                     Registration is FREE for Pianote Members.
                                 </p>
@@ -93,7 +93,7 @@
                 <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                 <p class="text-sm px-3 lg:px-5">
                     Enrollment closes in <br class="lg:hidden">
-                        <span class="inline text-pianote" id="countdown" data-countdown-date="2024-09-02 00:00:00">
+                        <span class="inline text-pianote" id="countdown" data-countdown-date="2024-11-04 00:00:00">
                                 <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
                                 <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
                                 <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>
@@ -336,7 +336,7 @@
         <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
             <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
             <p class="mb-4">Enter your email below to get notified<br class="hidden sm:inline"> when the next challenge is announced. </p>
-            @include("pianote.lead-gen.partials.sign-up-form", [
+            @include("pianote._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     'formName' => 'Read Music in 30 Days Waitlist',
                     'formId' => 'Pianote - Engagement - Trigger - Read Music in 30 Days Waitlist - Web Form',

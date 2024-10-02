@@ -63,7 +63,7 @@
                             @else
 {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
                                 <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
-                                <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">
+                                <a href="https://www.musora.com/drumeo/enrollment/30-day-jazz">
                                     <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                         Registration is FREE for Drumeo Members.
                                     </p>
@@ -111,7 +111,7 @@
                                 <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
                             </span>
                         @else
-                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-09-02 00:00:00">
+                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-10-28 00:00:00">
                                 <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
                                 <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
                                 <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>
