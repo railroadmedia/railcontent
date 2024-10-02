@@ -1,5 +1,5 @@
 <template>
-    <div ref="videoWrap" class="video-wrap" :class="{'picture-in-picture': isPipEnabled}">
+    <div ref="videoWrap" class="video-wrap" :class="{ 'picture-in-picture': isPipEnabled }">
         <div class="widescreen">
             <div ref="youtubeIframe" class="iframe"></div>
         </div>
@@ -11,6 +11,7 @@
 
 <script>
 import PlayerRanges from '../VideoPlayer/_PlayerRanges.vue';
+import userJourney from '@services/userJourney';
 
 export default {
     name: 'YoutubePlayer',
@@ -87,6 +88,8 @@ export default {
             isPipEnabled: false,
             currentRange: 'original',
             hasBeenPlayed: false,
+            heartbeatTimer: 0,
+            ninetyFivePercentTracked: false,
         };
     },
 
@@ -104,19 +107,32 @@ export default {
                 return this.currentTime;
             },
         },
-        contentCurrentTimeStorageKey:{
-            get(){
+        contentCurrentTimeStorageKey: {
+            get() {
                 if (this.videoId) {
                     return this.videoId;
                 } else {
                     return this.contentId;
                 }
             },
-        }
+        },
+        trackingPayload: {
+            cache: false,
+            get() {
+                return {
+                    brand: this.brand,
+                    content_id: this.contentId,
+                    position_seconds: Math.floor(this.currentTimeInSeconds),
+                    video_player: "youtube",
+                    video_length_seconds: Math.floor(this.totalDuration)
+                };
+            },
+
+        },
     },
 
-    watch: { 
-        seekToTime: function(newVal, oldVal) { // watch it
+    watch: {
+        seekToTime: function (newVal, oldVal) { // watch it
             this.player.seekTo(newVal);
             pauseVideo(); //Pause when seeking? 
         }
@@ -239,16 +255,18 @@ export default {
                                 }
                             }, 50);
                         }
-
-                        vm.syncInterval = setInterval(() => {
-                            vm.currentTime = Math.round(vm.player.getCurrentTime());
-                        }, 1000);
                     },
                     onStateChange(event) {
                         if (event.data === 1) {
+                            if (!vm.hasBeenPlayed) {
+                                userJourney.trackVideo({ payload: vm.trackingPayload, type: 'started' });
+                            } else {
+                                vm.currentTime = Math.floor(vm.player.getCurrentTime());
+                                userJourney.trackVideo({ payload: vm.trackingPayload, type: 'resumed' });
+                            }
+
                             if (((vm.startSecond !== 0) || (vm.endSecond !== vm.totalDuration)) && !vm.hasBeenPlayed) {
-                                vm.player.seekTo(vm.startSecond);
-                                vm.setHasBeenPlayed();
+                                vm.player.playVideoAt(vm.startSecond);
                             }
                             vm.$emit('play', {
                                 ...event,
@@ -256,9 +274,48 @@ export default {
                                 progressState: vm.progressState,
                                 isYoutube: true,
                             });
+
+                            if (!vm.syncInterval) {
+                                userJourney.trackVideo({ payload: vm.trackingPayload, type: 'playing' });
+
+                                vm.syncInterval = setInterval(() => {
+                                    vm.currentTime = Math.floor(vm.player.getCurrentTime());
+                                    const videoDuration = Math.floor(vm.totalDuration);
+
+                                    // Calculate when the video reaches 95% played
+                                    if (vm.currentTime >= Math.floor(0.95 * videoDuration) && !vm.ninetyFivePercentTracked) {
+                                        userJourney.trackVideo({ payload: vm.trackingPayload, type: 'completed' });
+                                        vm.ninetyFivePercentTracked = true; // Ensure this is only tracked once
+                                    }
+
+                                    if (vm.heartbeatTimer > 0 && vm.heartbeatTimer % 3 === 0) {
+                                        window.sessionStorage.setItem(`${vm.contentCurrentTimeStorageKey}_currentTime`, vm.currentTime);
+                                    }
+
+                                    if (vm.heartbeatTimer > 0 && vm.heartbeatTimer % 15 === 0) {
+                                        userJourney.trackVideo({ payload: vm.trackingPayload, type: 'playing' });
+                                    }
+
+                                    vm.heartbeatTimer += 1;
+                                }, 1000);
+                            }
+
+                            if (!vm.hasBeenPlayed) {
+                                vm.setHasBeenPlayed();
+                            }
                         }
 
                         if (event.data === 2) {
+                            if (Math.floor(vm.currentTime) !== Math.floor(vm.totalDuration)) {
+                                userJourney.trackVideo({ payload: vm.trackingPayload, type: 'paused' });
+                            }
+
+                            clearInterval(vm.syncInterval);
+
+                            vm.syncInterval = null;
+
+                            vm.heartbeatTimer = 0;
+
                             vm.$emit('pause', {
                                 ...event,
                                 contentId: vm.contentId,
@@ -266,6 +323,10 @@ export default {
                         }
 
                         if (event.data === 0) {
+                            clearInterval(vm.syncInterval);
+                            vm.syncInterval = null;
+                            vm.heartbeatTimer = 0;
+
                             if (vm.hasBeenPlayed) {
                                 const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
                                 const isInPlaybackMode = window.location.href.includes('playlist-item');
@@ -280,14 +341,10 @@ export default {
                                 }
                             }
                         }
-
                     },
                 },
             });
 
-            setInterval(() => {
-                window.sessionStorage.setItem(`${this.contentCurrentTimeStorageKey}_currentTime`, this.player.getCurrentTime());
-            }, 2500);
 
         },
 

@@ -308,7 +308,6 @@
         'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 1 bonus<br class="inline sm:hidden"> worth $19',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
