@@ -160,7 +160,7 @@
                     ],
                 ];
         @endphp
-        <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
+        <div class="timeline-container pianote max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
             @foreach ($gettings as $key => $getting)
                 @if ($getting['position'] === 'right')
                     <div
@@ -263,11 +263,8 @@
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0 mx-auto sm:mx-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl"
                         style="background-image:url('{{ $drummer['image'] }}'); object-position: 60% 0">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img
-                                    class="h-8 transition-opacity opacity-0" loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg"
-                                    alt="plus icon"><br>{{ $drummer['title'] }}</strong></h6>
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong>
+                                <i class="fas fa-check-circle text-guitareo text-3xl"></i><br>{!! $drummer['title']  !!}</strong></h6>
                         <div class="absolute inset-0 z-0"
                             style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
@@ -284,9 +281,9 @@
             <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                 <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/coach-image.png">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/coach-image.webp">
                 <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/coach-image.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/coach-image.webp"
                     loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                     style="width: 130%;transform: translate(-44%, -7%);"
@@ -306,24 +303,6 @@
                     <br><br>
                     And he’ll be with you at every stage of your jazz journey.
                 </h6>
-                <div class="flex items-center">
-                    <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-graduation-cap text-pianote"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        Small Ensemble Director <strong>@ The Juilliard School</strong>
-                    </h6>
-                </div>
-                <div class="flex items-center my-4 sm:my-2">
-                    <h3 class="ml-0 mr-3"><i class="fa-brands fa-fw text-pianote fa-youtube"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        <strong>+6M views</strong> on viral jazz videos
-                    </h6>
-                </div>
-                <div class="flex items-center">
-                    <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-book text-pianote"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        <strong>2x</strong> Published Author
-                    </h6>
-                </div>
             </div>
         </div>
     </div>

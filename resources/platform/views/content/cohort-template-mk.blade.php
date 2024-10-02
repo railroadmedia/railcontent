@@ -283,6 +283,18 @@
         .timeline-container.guitareo .timeline:after {
             background-color: #00C9AC;
         }
+        .join.pianote {
+            background:#F61A30;
+        }
+        .join.pianote:hover {
+            background:#ff263c;
+        }
+        .timeline-container.pianote:after {
+            background-color: #F61A30;
+        }
+        .timeline-container.pianote .timeline:after {
+            background-color: #F61A30;
+        }
     </style>
 @endsection
 
