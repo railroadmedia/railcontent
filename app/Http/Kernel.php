@@ -6,7 +6,6 @@ use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\LoggingContextMiddleware;
-use App\Http\Middleware\PausedMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
 use App\Modules\MusoraApi\Middleware\DeprecationMiddleware;
 use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
@@ -27,7 +26,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
+        \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
