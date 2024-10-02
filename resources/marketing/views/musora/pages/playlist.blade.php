@@ -10,32 +10,6 @@
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
     <style>
-        .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 6 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
-
-        .header-pic {
-            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-5.png);
-        }
-        .dot {
-            left:-16px;
-        }
-
-        .full-line {
-            left:0;
-            bottom:31%;
-        }
-
-        @media (min-width:640px) {
-            .dot,
-            .full-line {
-                left:50%;
-            }
-
-            .full-line {
-                bottom:0;
-            }
-        }
-    </style>
-    <style>
         .join {
             display:inline-block;
             font:500 22px/1em 'Bebas Neue', sans-serif;
@@ -377,7 +351,7 @@
 </section>
 
 <section id="customize-anchor" class="relative px-5 sm:px-6 py-12 sm:py-16 lg:py-24 bg-black" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/final-section.png'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-black opacity-65"></div>
+    <div class="absolute inset-0 bg-black opacity-35"></div>
     <div class="relative container max-w-2xl mx-auto text-center">
         <div class="flex flex-wrap items-center">
             <div class="w-full text-center">
@@ -386,7 +360,7 @@
                 <div class="w-full mx-auto leading-relaxed">
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                         "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'The Playlist - Musora Newsletter V2', //Check the form name(taken from instapage)
+                        "formName" => 'The Playlist - Musora Newsletter',
                         "formId" => "Musora - Engagement - Trigger - The Playlist - Musora Newsletter - WebForm2",
                         "buttonText" => "Sign Up",
                         "nameInput" => "Your Name",

@@ -174,4 +174,12 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
     }
+    public function freeMusicLessonsForLife()
+    {
+        return view('musora.pages.free-music-lessons-for-life', [ 'theme' => 'musora'],  ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function everyDayMusician()
+    {
+        return view('musora.pages.everyday-musician', [ 'theme' => 'musora']);
+    }
 }
