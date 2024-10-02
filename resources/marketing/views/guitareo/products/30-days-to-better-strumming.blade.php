@@ -308,39 +308,41 @@
         <div id="final" class="anchor"></div>
         <div class="max-w-3xl mx-auto">
             <h2 class="leading-tight"><strong>Try It For Free or Buy It Now</strong></h2>
-            <h6 class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</h6>
+            <h6 class="mt-2 md:mt-4 mb-7">Join the community and get the course for free or buy just the course separately</h6>
         </div>
         <div class="max-w-xs sm:max-w-3xl mx-auto">
             <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-4 md:space-y-0 md:space-x-4">
                 @php
                     $cards = [
                         [
-                            'header' => 'Get this course',
-                            'subheader' => '& more with a membership',
-                            'price' => '7 Day Free Trial',
+                            'header' => 'Start A Free Trial',
+                            'subheader' => 'As little as',
+                            'price' => '$20/month',
                             'button_text' => 'TRY IT FOR FREE NOW',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase stramming',
                             'border_class' => 'border-black',
                             'link' => '/choose-plan-strumming',
                             'description' => [
-                                '<strong>Unlimited access to all features and lessons<br> across guitar, piano, drums & singing.</strong>',
-                                '<strong>Note-for-note breakdowns of 300+ popular<br> songs.</strong>',
-                                'Join a community of 90,000+ other students.',
-                                '90-day money back guarantee.',
-                                'Cancel anytime.'
+                                '<strong>Unlimited guitar lessons.</strong>',
+                                '<strong>500+ popular songs.</strong>',
+                                'Join a community of over 100,258 students.',
+                                'Lesson access for singing, piano, and drums.',
+                                '90-day money-back guarantee.',
+                                'Cancel anytime.',
                             ]
                         ],
                         [
-                            'header' => 'Just the course',
+                            'header' => 'Just The Course',
+                            'subheader' => 'Only',
                             'price' => '$97',
                             'button_text' => 'buy now',
                             'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase stramming',
                             'border_class' => 'border-guitareo',
                             'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
                             'description' => [
-                                '90-day money-back guarantee.',
                                 '20 guided play-along lessons.',
-                                'Lifetime access.'
+                                '90-day money-back guarantee.',
+                                'Lifetime access.',
                             ]
                         ]
                     ];
@@ -348,18 +350,14 @@
 
                 @foreach($cards as $index => $card)
                     <div class="w-full sm:w-1/2 px-1 relative">
-                        <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:py-6 px-4 {{ $card['border_class'] }}">
-                            <h3 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h3>
-                            @if(!empty($card['subheader']))
-                                <p class="-mb-3"><strong>{{ $card['subheader'] }}</strong></p>
-                            @endif
-                            @if(!empty($card['price']))
-                                <h3 class="py-4 lg:py-6"><strong>{{ $card['price'] }}</strong></h3>
-                            @endif
+                        <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:py-9 px-4 {{ $card['border_class'] }}">
+                            <h4 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h4>
+                            <p class="leading-tight text-sm my-2"><em>{{ $card['subheader'] }}</em></p>
+                            <h3 class="mb-4 lg:mb-6"><strong>{{ $card['price'] }}</strong></h3>
                             <a href="{{ $card['link'] }}" class="{{ $card['button_class'] }}">{{ $card['button_text'] }}</a>
-                            <div class="text-left mt-4 md:mt-6 inline-block mx-auto">
+                            <div class="text-center mt-3 md:mt-5 inline-block mx-auto">
                                 @foreach($card['description'] as $desc)
-                                    <p class="text-sm leading-tight mb-3">{!! $desc !!}</p>
+                                    <p class="text-sm leading-tight py-1">{!! $desc !!}</p>
                                 @endforeach
                             </div>
                         </div>
