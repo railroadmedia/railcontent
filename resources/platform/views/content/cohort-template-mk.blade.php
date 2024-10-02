@@ -359,14 +359,20 @@
 @section('content')
 
     <div class="bg-white text-black">
-        @if($cohort['slug'] == '30-day-double-bass')
-            @include('drumeo.products._30D-double-bass', [
-                'theme' => 'drumeo',
+        @if($cohort['slug'] == '30-day-jazz-piano')
+            @include('pianote.products._30D-jazz-piano', [
+                'theme' => 'pianote',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])
         @elseif($cohort['slug'] == '30-day-jazz')
             @include('drumeo.products._30D-jazz', [
+                'theme' => 'drumeo',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == '30-day-double-bass')
+            @include('drumeo.products._30D-double-bass', [
                 'theme' => 'drumeo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
