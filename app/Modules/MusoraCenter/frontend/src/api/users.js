@@ -20,10 +20,10 @@ export default {
                     limit,
                     page,
                     sort,
-                    search_term,
-                },
+                    search_term
+                }
             })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -36,7 +36,7 @@ export default {
     getUserById(id) {
         return axios
             .get(`/user-management-system/user/show/${id}`)
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -50,10 +50,10 @@ export default {
         return axios
             .put("/usora/json-api/user/store", {
                 data: {
-                    attributes,
-                },
+                    attributes
+                }
             })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -66,13 +66,13 @@ export default {
      */
     setUserAttributes(id, attributes = {}) {
         return axios
-            .patch(`/musora-center/api/users/${id}`, {
+            .patch(`/usora/json-api/user/update/${id}`, {
                 data: {
-                    attributes,
-                },
+                    attributes
+                }
             })
-            .then((response) => ({ response }))
-            .catch((error) => ({ error: { ...error.response.data } }));
+            .then(response => ({ response }))
+            .catch(error => ({ error: { ...error.response.data } }));
     },
 
     /**
@@ -85,8 +85,8 @@ export default {
     renewSubscription(subscription_id) {
         return axios
             .post(`/subscription-renew/${subscription_id}`)
-            .then((response) => response)
-            .catch((error) => {
+            .then(response => response)
+            .catch(error => {
                 ErrorHandler.push(error);
                 return error.response;
             });
@@ -104,10 +104,10 @@ export default {
             .get("/railcontent/user-permission", {
                 params: {
                     user_id,
-                    only_active,
-                },
+                    only_active
+                }
             })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -126,7 +126,7 @@ export default {
         user_id,
         permission_id,
         start_date = moment(moment.now()).format("Y-M-D"),
-        expiration_date,
+        expiration_date
     }) {
         return axios({
             method: id ? "patch" : "put",
@@ -138,10 +138,10 @@ export default {
                 user_id,
                 permission_id,
                 start_date,
-                expiration_date,
-            },
+                expiration_date
+            }
         })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -161,7 +161,7 @@ export default {
         order_by_column = "email",
         order_by_direction = "asc",
         term = "",
-        brands = ["drumeo", "pianote", "guitareo"],
+        brands = ["drumeo", "pianote", "guitareo"]
     }) {
         return axios
             .get("/ecommerce/customers", {
@@ -171,10 +171,10 @@ export default {
                     order_by_column,
                     order_by_direction,
                     term,
-                    brands,
-                },
+                    brands
+                }
             })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -187,7 +187,7 @@ export default {
     getCustomerById(id) {
         return axios
             .get(`/ecommerce/customer/${id}`)
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -197,11 +197,11 @@ export default {
                 data: {
                     type: "customer",
                     attributes: {
-                        note,
-                    },
-                },
+                        note
+                    }
+                }
             })
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -214,7 +214,7 @@ export default {
     getUserRoles(userId) {
         return axios
             .get(`/permissions/user-role/${userId}`)
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
     },
 
@@ -234,7 +234,7 @@ export default {
             requests.push(
                 axios.put("/permissions/user-roles", {
                     user_id: userId,
-                    roles: addRoles,
+                    roles: addRoles
                 })
             );
         }
@@ -243,8 +243,8 @@ export default {
             requests.push(
                 axios.delete("/permissions/user-roles", {
                     data: {
-                        roles: removeRolesIds,
-                    },
+                        roles: removeRolesIds
+                    }
                 })
             );
         }
@@ -264,7 +264,7 @@ export default {
     deleteUser(id) {
         return axios
             .delete(`/user-management-system/user/delete/${id}`)
-            .then((response) => response)
+            .then(response => response)
             .catch(ErrorHandler.push);
-    },
+    }
 };

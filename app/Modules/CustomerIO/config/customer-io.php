@@ -206,6 +206,15 @@ return [
                     'drumeo',
                 ],
             ],
+            'Better Doubles In 10 Days' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_better-doubles',
+                ],
+                'accounts_to_sync' => [
+                    'musora',
+                ],
+            ],
             'Getting Started On The Drums' => [
                 'custom_attributes' => [],
                 'events' => [

@@ -40,7 +40,8 @@
                                     :seek-to-time="seekToTime" 
                                     @play="handleVideoPlay" 
                                     @pause="handleVideoPause"
-                                    @onVideoEnd="handleVideoEnd" />
+                                    @onVideoEnd="handleVideoEnd" 
+                                />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && videoProps.useLegacyPlayer"
@@ -252,10 +253,17 @@
         <!-- Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                <SoundSlice :user-id="userId" :theme-color="brand"
-                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceSlug" :contentId="videoData.id" :force-start-time="true"
-                            :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                <SoundSlice 
+                    :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" 
+                    :user-id="userId" 
+                    :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                    :soundslice-slug="soundsliceSlug" 
+                    :contentId="videoData.id" 
+                    :start-time="chapterStartTime" 
+                    :end-time="chapterEndTime" 
+                    :loop="startLooping"
+                >
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoData.title" :disable-next="true"
                                             :disable-prev="true" @onClose="handleCloseSoundslice" />
@@ -420,7 +428,7 @@ const getBrandSpecificParams = () => {
         singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
-    }[brand]);
+    }[brand.value]);
 };
 
 const openSlice = (title, index, startAt, loop) => {
@@ -429,8 +437,13 @@ const openSlice = (title, index, startAt, loop) => {
     }
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = videoData.value?.chapters?.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.time;
+    chapterEndTime.value = props.videoProps.totalDuration;
     startLooping.value = loop;
+
+    if (loop) {
+        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    }
+
     openSoundslice.value = true;
 };
 

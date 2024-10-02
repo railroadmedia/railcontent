@@ -21,6 +21,7 @@ import PlayerRanges from './_PlayerRanges.vue';
 import Intercom from '../../assets/js/Services/intercom';
 import Helpscout from '../../assets/js/Services/helpscout';
 import useEventHandlers from './useEventHandlers.js';
+import userJourney from '@services/userJourney';
 
 const props = defineProps({
     contentType: {
@@ -242,7 +243,7 @@ defineExpose({
     hasBeenPlayed,
     currentPlaybackRate,
     hasRetriedSource,
-    pauseVideo
+    pauseVideo,
 });
 
 //watchers
@@ -460,6 +461,14 @@ function playPauseViaControlWrap(event) {
 function seek(time) {
     mediaElement.value.pause();
     const seekTime = Number(time) > 0 ? Math.round(Number(time)) : 0;
+    
+    /*
+    TODO: Implement seek tracking when Data Team is ready
+    if (hasBeenPlayed.value) {
+        const seekingPayload = { ...getTrackingPayload(), position_seconds: Math.round(currentTime.value), seek_position_seconds: Math.round(seekTime) };
+        userJourney.trackVideo({ payload: seekingPayload, type: 'seekStarted' });
+    }
+    */
 
     currentTime.value = seekTime;
 
@@ -1101,7 +1110,8 @@ const {
     mediaElementEventHandlers,
     chromeCastEventHandlers,
     keyboardEventHandlers,
-    keyboardEventHandlersShift
+    keyboardEventHandlersShift,
+    getTrackingPayload,
 } = useEventHandlers({
     loading,
     mediaElement,

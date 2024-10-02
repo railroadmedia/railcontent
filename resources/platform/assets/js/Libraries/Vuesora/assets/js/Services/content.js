@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ErrorHandler from './_error-handler';
+import userJourney from '../../../../../Services/userJourney';
 
 let endpointPrefix;
 
@@ -143,6 +144,8 @@ export default {
      * @returns {Promise} - resolved promise with the response object
      */
     likeContentById({ is_liked, content_id, user_id }) {
+        userJourney.trackLikes({ is_liked, content_id });
+        
         return axios({
             url: `${endpointPrefix}/railcontent/content-like`,
             method: is_liked ? 'put' : 'delete',

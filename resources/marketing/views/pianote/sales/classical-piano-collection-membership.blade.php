@@ -424,7 +424,7 @@
                 </div>
             </div>
 
-            <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#final">GET STARTED</a>
+            <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#customize-anchor">GET STARTED</a>
         </div>
     </section>
 
@@ -513,7 +513,7 @@
                 </div>
             @endforeach
         </div>
-          <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#final">claim your bonuses</a>
+          <a class="anchor-slide join w-11/12 sm:w-3/4 max-w-lg bg-pianote" href="#customize-anchor">claim your bonuses</a>
             <div class="container px-4 sm:mx-auto max-w-xl text-black opacity-50 pt-4 lg:pt-6 leading-none">
              <p class="text-sm">If VAT or Customs is an issue, you can choose not to receive any physical bonuses.</p>
             <a class="underline cursor-pointer text-sm" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&locked=true">Click here to choose that option.</a>
@@ -538,7 +538,7 @@
                         Improve your technique, boost your theory knowledge, or just get an answer to that burning question. <br><br>
                         There’s no limit. You can attend as many as you like.
                     </p>
-                    <a class="anchor-slide join w-full sm:max-w-[440px] bg-pianote mx-auto md:mx-0" href="#final">GET STARTED</a>
+                    <a class="anchor-slide join w-full sm:max-w-[440px] bg-pianote mx-auto md:mx-0" href="#customize-anchor">GET STARTED</a>
                 </div>
                 <div class="w-full sm:w-1/2 md:w-7/12 flex items-end mx-auto">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/kevin-lisa-live.png" alt="Kevin and Lisa" class="object-cover">
@@ -599,7 +599,7 @@
     @endphp
 
 <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
-    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6" id="final">
+    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6" id="customize-anchor">
         <div class="container mx-auto relative z-50 max-w-4xl">
             <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
             <br>

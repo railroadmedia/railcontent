@@ -69,6 +69,7 @@ Route::domain('{drumeoDomain}')
                 'bestbook-trial',
                 'coaches-quiz',
                 'earthworks',
+                'blue-man-trial',
                 'melodics',
                 'new-drummers-trial',
                 'power-pack',
