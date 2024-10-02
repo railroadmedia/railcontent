@@ -506,28 +506,22 @@
                         He’s an educator at the Juilliard School and he’s here to help you get started playing jazz on the drums.
                     </h6>
                     <div class="flex items-center">
-                        <div class="flex items-center">
-                            <h3 class=" mr-3"><i class="fad fa-fw fa-graduation-cap text-drumeo"></i></h3>
-                            <h6 class="leading-tight">
-                                Small Ensemble Director <strong>@ The Juilliard School</strong>
-                            </h6>
-                        </div>
+                        <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-graduation-cap text-drumeo"></i></h3>
+                        <h6 class="leading-tight mx-0">
+                            Small Ensemble Director <strong>@ The Juilliard School</strong>
+                        </h6>
                     </div>
-                    <div class="flex items-center my-2">
-                        <div class="flex items-center">
-                            <h3 class=" mr-3"><i class="fa-brands fa-fw text-drumeo fa-youtube"></i></h3>
-                            <h6 class="leading-tight">
-                                <strong>+6M views</strong> on viral jazz videos
-                            </h6>
-                        </div>
+                    <div class="flex items-center my-4 sm:my-2">
+                        <h3 class="ml-0 mr-3"><i class="fa-brands fa-fw text-drumeo fa-youtube"></i></h3>
+                        <h6 class="leading-tight mx-0">
+                            <strong>+6M views</strong> on viral jazz videos
+                        </h6>
                     </div>
                     <div class="flex items-center">
-                        <div class="flex items-center">
-                            <h3 class=" mr-3"><i class="fad fa-fw fa-book text-drumeo"></i></h3>
-                            <h6 class="leading-tight">
-                                <strong>2x</strong> Published Author
-                            </h6>
-                        </div>
+                        <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-book text-drumeo"></i></h3>
+                        <h6 class="leading-tight mx-0">
+                            <strong>2x</strong> Published Author
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -598,12 +592,14 @@
                     @endif
                 </h6>
 
-                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
+                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">
                         @include('drumeo.products.partials._order-card', [
-                            'header' => 'Course<br> Only',
-                            'subheader' => '30-Day Jazz<br> + Free Bonus Worth $30',
+                            'badge' => 'Launch Special',
+                            'header' => '30-Day Jazz',
+                            'subheader' => 'Course Only | Lifetime Access',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
-                            'imageHeight' => 'h-32 md:h-40',
+                            'imageHeight' => 'h-32 md:h-40 lg:h-44',
+                            'fullPrice' => '$127',
                             'price' => '$97',
                             'specialText' => "One time payment.",
                             'cta' => 'ENROLL NOW',
@@ -615,14 +611,14 @@
                         ])
                         @include('drumeo.products.partials._order-card', [
                             'highlightBorder' => true,
-                            'badge' => 'Best Deal',
-                            'header' => 'Course +<br> Unlimited Lessons',
-                            'subheader' => '30-Day Jazz<br> + Drumeo & 3 Bonuses',
+                            'badge' => 'FREE STICKBAG',
+                            'header' => 'Unlimited Lessons',
+                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 4 Bonuses Worth $528',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',
-                            'imageHeight' => 'h-32 md:h-40',
-                            'price' => '$240',
-                            'specialText' => "Renews annually at $240.",
-                            'cta' => 'ENROLL NOW',
+                            'imageHeight' => 'h-32 md:h-40 lg:h-44',
+                            'price' => '$20/mo',
+                            'specialText' => "Billed annually at $240/yr.",
+                            'cta' => 'GET EVERYTHING',
                             'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Jazz</strong>',
