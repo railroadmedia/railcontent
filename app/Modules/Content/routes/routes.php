@@ -35,4 +35,9 @@ Route::prefix('content')
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
+
+        Route::get(
+            'user_data_permissions',
+            [ContentMetadataController::class, 'getUserPermissions']
+        )->name('content.user-permissions');
     });

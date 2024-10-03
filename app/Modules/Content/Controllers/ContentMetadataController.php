@@ -12,12 +12,16 @@ use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ContentMetadataController extends Controller
 {
-    public function __construct(private ProductProviderInterface $productProvider)
+    public function __construct(
+        private ProductProviderInterface $productProvider,
+        private UserPermissionsService $userPermissionsService)
     {
     }
 
@@ -129,5 +133,15 @@ class ContentMetadataController extends Controller
             'length_in_seconds' => $content['length_in_seconds'] ?? 0,
         ];
         return $response;
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getUserPermissions() : JsonResponse
+    {
+        $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
+        $permissions = Arr::pluck($permissions, 'permission_id');
+        return response()->json($permissions);
     }
 }
