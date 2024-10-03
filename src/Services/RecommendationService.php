@@ -117,10 +117,10 @@ class RecommendationService
         return $recommendations;
     }
 
-    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
+    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section)
     {
         $tableName = $this->getTableName($brand, $section);
-        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get()->pluck('content_id');
+        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->get()->pluck('content_id');
         if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
             if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))) {

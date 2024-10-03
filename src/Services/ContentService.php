@@ -243,13 +243,16 @@ class ContentService
                 foreach($groupBySections as $section) {
                     $toZipper[] = $recommendations[$section->value] ?? [];
                 }
-                $zippered = zipperMerge($toZipper);
+                $processedRecommendations = zipperMerge($toZipper);
                 $numGroups += 1;
-                $totalCount += count($zippered);
-                $zippered = $this->paginateRecommendations($zippered, $pageSize, $page);
+                $totalCount += count($processedRecommendations);
+                $processedRecommendations = $this->contentRepository->getByIds($processedRecommendations);
+                $processedRecommendations = $this->paginateRecommendations($processedRecommendations, $pageSize, $page);
+                $servedIds = $processedRecommendations->pluck('id')->toArray();
+                $processedRecommendations = Decorator::decorate($processedRecommendations, 'group');
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
-                    'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
+                    'lessons_grouped_by_field' => implode(',', $servedIds),
                     'type' => 'recommended',
                     'recommended' => $index,
                     'id' => $index,
@@ -262,7 +265,7 @@ class ContentService
                         'position' => 1,
                     ]],
                     'all_lessons_count' => $totalCount,
-                    'lessons' => $zippered,
+                    'lessons' => $processedRecommendations,
                     'data' => []
                 ];
             }
@@ -272,11 +275,12 @@ class ContentService
                 'totalLessons' => $totalCount //TODO fix this to count the minimum of each
             ];
         } else {
-            $recommendations = zipperMerge($recommendations);
-            $totalCount = count($recommendations);
-            $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
+            $processedRecommendations = zipperMerge($recommendations);
+            $totalCount = count($processedRecommendations);
+            $processedRecommendations = $this->contentRepository->getByIds($processedRecommendations);
+            $processedRecommendations = $this->paginateRecommendations($processedRecommendations, $pageSize, $page);
             return [
-                'recommendations' => $recommendations,
+                'recommendations' => $processedRecommendations,
                 'totalCount' => $totalCount,
                 'totalLessons' => $totalCount
             ];
@@ -302,21 +306,12 @@ class ContentService
 
     private function getContentFilterResultsFromRecommendations($recommendations, $isGroupedBy)
     {
-        if ($isGroupedBy) {
-            foreach($recommendations['recommendations'] as $index => $groupedBy) {
-                $recommendations['recommendations'][$index]['lessons'] = $this->getByIds($groupedBy['lessons']);
-            }
-            $content = $recommendations['recommendations'];
-            $content = Decorator::decorate($content, 'group');
-        } else {
-            $content = $this->getByIds($recommendations['recommendations']);
-        }
         $filterOptions = [
             "type" => ["Recommendation"],
         ];
 
         return (new ContentFilterResultsEntity([
-            'results' => $content,
+            'results' => $recommendations['recommendations'],
             'filter_options' => $filterOptions,
             'total_results' => $recommendations['totalCount'],
             'total_lessons' => $recommendations['totalLessons'] //TODO this needs to be updated for groupBy
