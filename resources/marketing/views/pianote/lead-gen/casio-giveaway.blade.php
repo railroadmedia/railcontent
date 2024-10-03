@@ -113,7 +113,7 @@
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
         <div class="max-w-md md:max-w-5xl mx-auto md:flex md:items-center">
             <div class="md:pr-8 text-center md:text-left mb-6 md:mb-0 flex-shrink-0">
-                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes2.webp" alt="ui image">
+                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes3.png" alt="ui image">
             </div>
             <div class="lg:pl-6">
                 <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
@@ -121,6 +121,8 @@
                     More Chances to Win…
                 </h4>
                 <p class="leading-normal" style="color:#2A2F34;">
+                    A beautiful Casio Privia Digital Piano is not the only prize.
+                    <br><br>
                     We’re also giving away <strong>3 Annual Pianote Memberships</strong>.
                     <br><br>
                     Dive in and explore unlimited piano lessons, weekly live streams, exclusive resources, and personalized feedback from real teachers.
