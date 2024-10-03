@@ -2,7 +2,6 @@
 
 namespace Modules\UserManagementSystem\Models;
 
-use App\Enums\Interval;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
@@ -11,7 +10,6 @@ use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
-use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
@@ -128,6 +126,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $primary_brand
+ * @property string|null $first_access_at
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -1075,5 +1074,15 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'membership_level' => $this->membership_level,
             'membership_expiration_date' => $this->membership_expiration_date
         ];
+    }
+
+    public function isFirstAccess(): bool
+    {
+        if ($this->first_access_at) {
+            return false;
+        }
+        $this->first_access_at = Carbon::now();
+        $this->save();
+        return true;
     }
 }
