@@ -270,7 +270,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        setData(response, replace) {
+        async setData(response, replace) {
             const userStore = useUserStore();
             if (response) {
                 if (replace) {
@@ -278,8 +278,9 @@ export const useCollectionStore = defineStore({
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.total / this.filter.limit
                     );
+                    //Get Filter Options
                     try {
-                        const result = fetchAllFilterOptions(
+                        const result = await fetchAllFilterOptions(
                             userStore.brand,
                             [],
                             "",
@@ -288,25 +289,21 @@ export const useCollectionStore = defineStore({
                             this.filter.searchTerm,
                         );
                         if (result) {
-                            console.log(result)
+                            console.log('fitlerOptions', result.meta.filterOptions);
+                            this.filterColumns = getFilterValues(result.meta.filterOptions);
                         } else {
                             throw new Error('Failed to fetch Filter Options');
                         }
                     } catch (err) {
                         console.error(err);
                     } 
-                    
                     // this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
             }
-
-            if (this.filter.searchTerm) {
-                this.searching = true;
-            } else {
-                this.searching = false;
-            }
+        
+            this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
         },
 

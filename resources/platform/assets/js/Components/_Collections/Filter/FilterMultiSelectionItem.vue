@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue';
+import {computed, ref, onBeforeMount } from 'vue';
 
 const props = defineProps({
     column: {
@@ -47,6 +47,10 @@ const toggleCollapse = () => {
 const isSelected = (category, value) => {
     return props.selectedFilters.find(f => f === `${category},${value}`);
 }
+
+onBeforeMount( ()=> {
+    console.log('props.column', props.column)
+})
 </script>
 
 <style scoped>
