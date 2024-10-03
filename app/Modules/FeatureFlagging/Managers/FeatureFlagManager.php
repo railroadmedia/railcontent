@@ -245,12 +245,20 @@ class FeatureFlagManager implements FeatureFlagsContract
         foreach ($filters as $filter) {
             if (
                 !in_array($filter, $validFilters)
-                && !str_starts_with($filter, 'older_than')
+                && !self::isValidCreatedDateFilter($filter)
             ) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static function isValidCreatedDateFilter(string $filter): bool
+    {
+        return count(array_filter(
+            ['older_than', 'younger_than', 'created_after', 'created_before'],
+            fn ($validFilter) => str_starts_with($filter, $validFilter)
+        )) > 0;
     }
 
     private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): void
