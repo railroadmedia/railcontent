@@ -42,7 +42,7 @@
                         <p class="mx-0 my-4" style="max-width: 450px;">
                             At Pianote, it’s our mission to help everyone play this beautiful instrument. So we’re giving away a Casio Privia Digital Piano!
                             <br><br>
-                            Simply enter your name and email address before October 14th and you’ll be entered to win.
+                            Simply enter your name and email address by October 13th and you’ll be entered to win.
                         </p>
                         <p class="mt-3 mb-6 text-sm">
                             <i class="fas fa-check-circle text-pianote"></i> No purchase necessary.<br class="lg:hidden">
