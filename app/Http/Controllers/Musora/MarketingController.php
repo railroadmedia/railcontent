@@ -77,6 +77,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.terms');
     }
+    public function guitarcenterTerms()
+    {
+        return view('musora.pages.redeem.guitarcenter-terms');
+    }
 
     public function privacy()
     {

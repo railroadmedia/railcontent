@@ -56,6 +56,7 @@ Route::domain('{musoraDomain}')
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
         Route::get('guitarcenter', [CodeRedemptionController::class, 'renderNewAccountGuitarcenterRedeemPage']);
         Route::get('guitarcenter/existing', [CodeRedemptionController::class, 'renderExistingAccountGuitarcenterRedeemPage']);
+        Route::get('guitarcenter/terms', [MarketingController::class, 'guitarcenterTerms']);
 
         Route::get('drumeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewDrumeo']);
         Route::get('drumeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingDrumeo']);
