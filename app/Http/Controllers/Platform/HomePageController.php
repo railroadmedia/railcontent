@@ -395,6 +395,7 @@ class HomePageController extends BaseController
             "displayTrialSection" => $showNewTrialSection || $showOldTrialSection,
             "trialSectionRedesign" => $showNewTrialSection,
             "trialSection" => $trialSection,
+            "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => $homepageV2,
         ]);
     }
