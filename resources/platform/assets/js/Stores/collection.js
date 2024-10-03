@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { useUserStore } from "./user";
+import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -135,6 +135,7 @@ export const useCollectionStore = defineStore({
         },
 
         async fetchData() {
+            const userStore = useUserStore();
             try {
                 // const response = await axios
                 //     .get(
@@ -270,12 +271,31 @@ export const useCollectionStore = defineStore({
         },
 
         setData(response, replace) {
+            const userStore = useUserStore();
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.total / this.filter.limit
                     );
+                    try {
+                        const result = fetchAllFilterOptions(
+                            userStore.brand,
+                            [],
+                            "",
+                            "",
+                            this.queryType,
+                            this.filter.searchTerm,
+                        );
+                        if (result) {
+                            console.log(result)
+                        } else {
+                            throw new Error('Failed to fetch Filter Options');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    } 
+                    
                     // this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.entity];
@@ -435,6 +455,7 @@ export const useCollectionStore = defineStore({
 
         trackFilter() {
             const userStore = useUserStore();
+
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,
@@ -450,6 +471,7 @@ export const useCollectionStore = defineStore({
 
         trackFilterGroup(tab) {
             const userStore = useUserStore();
+            
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,
