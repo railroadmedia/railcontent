@@ -264,7 +264,7 @@
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl"
                         style="background-image:url('{{ $drummer['image'] }}'); object-position: 60% 0">
                         <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong>
-                                <i class="fas fa-check-circle text-guitareo text-3xl"></i><br>{!! $drummer['title']  !!}</strong></h6>
+                                <i class="fas fa-check-circle text-pianote text-3xl"></i><br>{!! $drummer['title']  !!}</strong></h6>
                         <div class="absolute inset-0 z-0"
                             style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
