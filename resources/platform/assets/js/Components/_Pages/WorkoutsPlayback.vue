@@ -139,7 +139,7 @@
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" :user-id="videoProps.userId" :theme-color="brand"
-                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3`"
                     :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" 
                     :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>

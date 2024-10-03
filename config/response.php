@@ -2546,7 +2546,8 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'primary_brand'
+            'primary_brand',
+            'homepage_v2'
         ],
 
         'quick-tips' => [
@@ -5769,7 +5770,8 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'primary_brand'
+            'primary_brand',
+            'homepage_v2'
         ],
 
         'quick-tips' => [

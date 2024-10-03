@@ -551,7 +551,7 @@ const seekToChapter = (time) => {
             <transition name="show-from-bottom">
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                     <SoundSlice :user-id="userId" :theme-color="brand"
-                        :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
+                        :additional-params="`${getBrandSpecificParams()}&layout=3`"
                         :soundslice-slug="soundsliceSlug" :contentId="contentId" 
                         :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                         <template v-slot:soundsliceControls>
