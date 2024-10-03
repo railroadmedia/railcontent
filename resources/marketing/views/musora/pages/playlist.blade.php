@@ -253,10 +253,10 @@
 
 @php
     $latestImages = [
-        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/item-3.png',
-        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/albums-02.webp',
-        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/item-1.png',
-        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/item-4.webp',
+        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/album-01.webp',
+        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/album-02.webp',
+        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/album-03.webp',
+        'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/musora/lead-gen/playlist/album-04.webp',
     ];
 @endphp
 
@@ -265,7 +265,7 @@
         <h3 class="text-left uppercase text-white font-black font-bebas leading-normal">Latest</h3>
         <div class="flex flex-wrap justify-center">
             @foreach ($latestImages as $image)
-                <div class="w-full sm:w-1/2 lg:w-1/4 p-2">
+                <div class="w-full sm:w-1/2 md:w-1/4 p-2">
                     <div class="overflow-hidden">
                         <img src="{{ $image }}" alt="Latest Image" class="w-10/12 md:w-full object-contain rounded">
                     </div>

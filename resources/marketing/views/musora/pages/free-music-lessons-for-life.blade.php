@@ -121,23 +121,23 @@
 <!-- Main -->
 @section('layout-body')
 
-  <header class="header-image px-5 sm:px-6 py-8 sm:py-12 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
+  <header class="header-image px-5 sm:px-6 py-8 sm:py-16 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="text-center md:text-left px-4 sm:px-0 w-full mx-auto md:mx-0 md:w-7/12">
-                    <div class="sm:px-3">
-                        <h2 class="leading-normal pb-72 sm:pb-0"> <strong>Enter For A Chance To Win <br> Music Lessons For Life </strong></h2>
-                        <p class="py-2 md:py-4">
-                           Do you want to improve your instrument but don’t know <br class="hidden sm:block"> where to start? Enter to win free music lessons for life!
+                <div class="text-center md:text-left sm:px-4 sm:px-0 w-full mx-auto md:mx-0 md:w-7/12">
+                    <div class="sm:pl-3">
+                        <h2 class="leading-none pb-80 sm:pb-0 tracking-tighter lg:tracking-tight"> <strong>Enter For A Chance To Win <br> Music Lessons For Life </strong></h2>
+                        <p class="py-2 md:py-4 tracking-tight">
+                           Do you want to improve your instrument but <br class="block lg:hidden"> don’t know <br class="hidden lg:block"> where to start? Enter to win free music lessons for life!
                         </p>
                         <p class="mt-3 mb-6 text-sm leading-wide">
-                            <i class="fas fa-check-circle text-musora pb-2"></i> No purchase or payment info necessary<br>
-                            <i class="fas fa-check-circle text-musora pb-2"></i> On-demand courses <br class="lg:hidden">
-                            <i class="fas fa-check-circle text-musora pb-2"></i> $1200 Value
+                            <i class="fas fa-check-circle text-musora pb-3"></i> No purchase or payment info necessary<br>
+                            <i class="fas fa-check-circle text-musora pb-3"></i> On-demand courses <br class="lg:hidden">
+                            <i class="fas fa-check-circle text-musora pb-3"></i> $1200 Value
                         </p>
                     </div>
-                    <div class="w-full mx-auto leading-relaxed">
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
+                    <div class="w-full sm:w-2/3 md:w-full mx-auto leading-relaxed">
+                        @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
                             "formName" => 'Free Music Lessons For Life',
                             "formId" => "Musora - Engagement - Trigger - Free Music Lessons For Life - WebForm", 
@@ -146,14 +146,22 @@
                             "stacked" => true,
                             "minimalForm" => true,
                             "buttonColor" => "bg-musora text-black",
-                            "redirectUrl" => "https://www.musora.com/thank-you",
+                            "redirectURL" => "/thank-you",
+                            "checkboxItems" => [
+                                'Drums' => 'drums',
+                                'Piano' => 'piano',
+                                'Guitar' => 'guitar',
+                                'Vocals' => 'vocals'
+                            ]
                         ])
                     </div>
+                    
                 </div>
             </div>
         </div>
     </header>
 
+   
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#ededed">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight font-playfair mb-3"><strong>What it includes:</strong></h2>
@@ -231,7 +239,7 @@
     
         <section class="pb-20 px-5 md:px-6" style="background: black;">
         <div class="container max-w-md md:max-w-4xl mx-auto text-center">
-            <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
+            <svg class="inline-block h-20 md:h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
                 <path d="M41.1853 6.17994C45.1417 2.22302 50.5047 0 56.1023 0H93.9075C99.5051 0 104.868 2.22302 108.824 6.17994L143.816 41.1862C147.773 45.1425 150 50.5055 150 56.103V93.908C150 99.5055 147.773 104.868 143.816 108.825L108.824 143.816C104.868 147.773 99.5051 150 93.9075 150H56.1023C50.5047 150 45.1417 147.773 41.1853 143.816L6.17879 108.825C2.22301 104.868 0 99.5055 0 93.908V56.103C0 50.5055 2.22301 45.1425 6.17879 41.1862L41.1853 6.17994ZM67.9714 44.2633V77.0862C67.9714 81.2477 71.1071 84.1197 75.0049 84.1197C78.9026 84.1197 82.0384 81.2477 82.0384 77.0862V44.2633C82.0384 40.6294 78.9026 37.2298 75.0049 37.2298C71.1071 37.2298 67.9714 40.6294 67.9714 44.2633ZM75.0049 93.4977C69.8177 93.4977 65.6268 97.9522 65.6268 102.876C65.6268 108.327 69.8177 112.254 75.0049 112.254C80.1921 112.254 84.383 108.327 84.383 102.876C84.383 97.9522 80.1921 93.4977 75.0049 93.4977Z" fill="#FFAE00"/>
             </svg>
             <h3 class="text-white font-extrabold leading-normal">
@@ -246,7 +254,7 @@
             @endforeach
             </div>
 
-            <div class="inline-block py-4 px-6">
+            <div class="inline-block py-4 sm:px-6">
                 <p class="text-white capitalize pb-2 lg:pb-4">The winner will be announced on our socials in:</p>
                 @php
                     $timeUnits = [
@@ -264,7 +272,7 @@
                                     <span class="inline-block mx-0.5 text-musora">:</span>
                                 @endif
                                 <span x-cloak x-show="{{ $unit['condition'] }}">
-                                    <div class="inline-block bg-musora text-black px-2 py-4 mx-1 rounded w-[60px] md:w-[90px] text-center">
+                                    <div class="inline-block bg-musora text-black px-2 py-4 mx-1 rounded w-[40px] sm:w-[60px] md:w-[90px] text-center">
                                         <span x-text="{{ $unit['value'] }}"></span>
                                     </div>
                                 </span>
