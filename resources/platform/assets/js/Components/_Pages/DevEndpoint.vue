@@ -1,6 +1,6 @@
 <script setup>
-import {fetchVimeoData} from 'musora-content-services';
-fetchVimeoData(368453).then(a => console.log('did we do it?', a));
+import {fetchUserPermissions} from 'musora-content-services';
+fetchUserPermissions().then(a => console.log('did we do it?', a));
 const props = defineProps({
   results: { type: String, default: '' },
   json_results: { type: String, default: '' },

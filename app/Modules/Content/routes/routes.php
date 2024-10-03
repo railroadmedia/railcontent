@@ -37,19 +37,8 @@ Route::prefix('content')
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
 
-        //Content User Likes
         Route::get(
-            'user/likes/all',
-            [ContentLikesControllerUser::class, 'all']
-        )->name('content.user.likes.all');
-
-        Route::post(
-            'user/likes/like/{contentId}',
-            [ContentLikesControllerUser::class, 'like']
-        )->name('content.user.like');
-
-        Route::post(
-            'user/likes/unlike/{contentId}',
-            [ContentLikesControllerUser::class, 'unLike']
-        )->name('content.user.unlike');
+            'user_data_permissions',
+            [ContentMetadataController::class, 'getUserPermissions']
+        )->name('content.user-permissions');
     });
