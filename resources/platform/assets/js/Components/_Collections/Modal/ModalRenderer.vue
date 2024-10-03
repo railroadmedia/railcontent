@@ -1,6 +1,7 @@
 <script>
 const appRoot = document.getElementById('app')
 const modalRoot = document.getElementById('modal-container')
+import { XIcon } from "@heroicons/vue/solid";
 
 export default {
     name: 'ModalRenderer',
@@ -9,7 +10,14 @@ export default {
         blackBackground: {
             type: Boolean,
             default: false
+        },
+        showXIcon: {
+            type: Boolean,
+            default: false,
         }
+    },
+    components: {
+        XIcon
     },
     setup(props, context) {
         const onClose = () => {
@@ -53,6 +61,9 @@ export default {
         <div id="slot-wrapper" @click="onWrapperClick"
             class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
         >
+            <button v-if="showXIcon" class="tw-absolute tw-top-4 tw-right-4 tw-text-white" @click="onClose">
+                <XIcon class="tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
+            </button>
             <slot></slot>
         </div>
     </teleport>
