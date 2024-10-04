@@ -248,7 +248,7 @@ class ContentService
                 $totalCount += count($processedRecommendations);
                 $processedRecommendations = $this->contentRepository->getByIds($processedRecommendations);
                 $processedRecommendations = $this->paginateRecommendations($processedRecommendations, $pageSize, $page);
-                $servedIds = $processedRecommendations->pluck('id')->toArray();
+                $servedIds = Arr::pluck($processedRecommendations, 'id');
                 $processedRecommendations = Decorator::decorate($processedRecommendations, 'group');
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
