@@ -88,7 +88,6 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
             'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
             'homepage_v2' => $homepageV2,
-            'is_first_access' => $user->isFirstAccess()
         ];
     }
 
