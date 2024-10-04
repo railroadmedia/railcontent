@@ -7,7 +7,6 @@ export function useFilterValues() {
             if(object[key].length > 0){
                 formattedFilters[key] = [];
                 object[key].map((o, i) => {
-                    console.log(o)
                     formattedFilters[key].push({
                         key: o.type,
                         value: o.count

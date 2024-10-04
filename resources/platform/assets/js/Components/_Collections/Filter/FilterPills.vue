@@ -43,12 +43,13 @@
 
     const pills = computed(() => {
         const pills = [];
-
+        console.log('props.multiSelectColumns', props.multiSelectColumns)
         if (props.multiSelectColumns.length > 0) {
             props.multiSelectColumns.map((column) => {
                 column.items && column.items.map((item) => {
                     const formattedColumn = column.category.replace( /\d+/, '');
-                    const isExist = props.selectedFilters.find(f => f === `${formattedColumn},${item.value}`);
+                    console.log('formattedColumn', `${formattedColumn},${item.key}`);
+                    const isExist = props.selectedFilters.find(f => f === `${formattedColumn},${item.key}`);
                     if (isExist) pills.push({ category: formattedColumn, item});
                 })
             })
