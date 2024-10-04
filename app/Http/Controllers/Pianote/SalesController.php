@@ -467,6 +467,16 @@ class SalesController extends BaseController
         return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
     }
 
+    public function yuletideshirtBundle()
+    {
+        return view('pianote.products.yuletide-shirt-bundle', ['theme' => 'pianote']);
+    }
+
+    public function yuletidesweaterBundle()
+    {
+        return view('pianote.products.yuletide-sweater-bundle', ['theme' => 'pianote']);
+    }
+
     public function classicalPianoCollection()
     {
         $productId = 1044;
