@@ -210,89 +210,89 @@
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
-                                    'title' => 'Day 1 — Get Into The Groove',
+                                    'title' => 'Get Into The Groove',
                                     'name' => 'getIntoTheGroove',
                                     'videoId' => '944945269',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
-                                    'title' => 'Day 2 — Learning To Miss',
+                                    'title' => 'Learning To Miss',
                                     'name' => 'learningToMiss',
                                     'videoId' => '944235965',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
-                                    'title' => 'Day 3 — Add In The Bridge',
+                                    'title' => 'Add In The Bridge',
                                     'name' => 'addInTheBridge',
                                     'videoId' => '944236131',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
-                                    'title' => 'Day 4 — The Campfire Strum Pattern',
+                                    'title' => 'The Campfire Strum Pattern',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/5-1715253975.jpg',
-                                    'title' => 'Day 5 — Add In A Variation',
+                                    'title' => 'Add In A Variation',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/6-1715490929.jpg',
-                                    'title' => 'Day 6 — The Reggae Strum Pattern',
+                                    'title' => 'The Reggae Strum Pattern',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/7-1715491118.jpg',
-                                    'title' => 'Day 7 — Learn To Push Your Chords',
+                                    'title' => 'Learn To Push Your Chords',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/8-1715491304.jpg',
-                                    'title' => 'Day 8 — The Rock ’N’ Roll Strum Pattern',
+                                    'title' => 'The Rock ’N’ Roll Strum Pattern',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/9-1715491483.jpg',
-                                    'title' => 'Day 9 — The Too-Many-Ands Strum Pattern',
+                                    'title' => 'The Too-Many-Ands Strum Pattern',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/10-1715491541.jpg',
-                                    'title' => 'Day 10 — Coming Up With Your Own Strum Patterns',
+                                    'title' => 'Coming Up With Your Own Strum Patterns',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/11-1715495497.jpg',
-                                    'title' => 'Day 11 — Add Variations To Your Strums',
+                                    'title' => 'Add Variations To Your Strums',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/12-1715495568.jpg',
-                                    'title' => 'Day 12 — Adding Accents',
+                                    'title' => 'Adding Accents',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/13-1715496223.jpg',
-                                    'title' => 'Day 13 — The 3-3-2 Strum Pattern',
+                                    'title' => 'The 3-3-2 Strum Pattern',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/14-1715496361.jpg',
-                                    'title' => 'Day 14 — Add Palm Mutes',
+                                    'title' => 'Add Palm Mutes',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/15-1715497833.jpg',
-                                    'title' => 'Day 15 — Thinking About Dynamics',
+                                    'title' => 'Thinking About Dynamics',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/16-1715496741.jpg',
-                                    'title' => 'Day 16 — Let’s Gallop',
+                                    'title' => 'Let’s Gallop',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/17-1715496918.jpg',
-                                    'title' => 'Day 17 — Give It A Smack',
+                                    'title' => 'Give It A Smack',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/18-1715497021.jpg',
-                                    'title' => 'Day 18 — Double It Up',
+                                    'title' => 'Double It Up',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/19-1715497134.jpg',
-                                    'title' => 'Day 19 — Put It All Together',
+                                    'title' => 'Put It All Together',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/20-1715497295.jpg',
-                                    'title' => 'Day 20 — Final Performance',
+                                    'title' => 'Final Performance',
                                 ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Week4 (1)-1715497438.jpg',
@@ -315,10 +315,9 @@
                                 ">
                                 <img src="{{ $lesson['thumb'] }}" alt="{{ $lesson['title'] }}" class="h-20 rounded-lg mr-4">
                                 <div class="flex flex-col">
-                                    @if ($index < 6)
-                                        <span class="text-guitareo font-bold text-xs uppercase">FREE</span>
-                                    @endif
-                                    <p class="leading-tight text-white font-semibold text-sm">{{ $lesson['title'] }}</p>
+                                    <p class="leading-normal text-white font-semibold text-sm">
+                                    @if ($index < 4) <strong class="text-guitareo">FREE</strong><br> @endif
+                                    {{ $lesson['title'] }}</p>
                                 </div>
                             </div>
                         @endforeach
