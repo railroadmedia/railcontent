@@ -2,21 +2,21 @@ export function useFilterValues() {
     const getFilterValues = (object) => {
         const formattedFilters = {};
         const numberFormat = /\s\(\d+\)/;
-        const filters = [];
 
         Object.keys(object).forEach((key) => {
             if(object[key].length > 0){
                 formattedFilters[key] = [];
                 object[key].map((o, i) => {
-                    formattedFilters[key] = object[key].map(item => ({
-                        key: item.type,
-                        value: item.count
-                    }));
+                    console.log(o)
+                    formattedFilters[key].push({
+                        key: o.type,
+                        value: o.count
+                    });
                 })
             }
         });
 
-        console.log('formattedFilters', formattedFilters);
+        const filters = [];
 
         if(Object.keys(formattedFilters).length > 0){
             for(const key of Object.keys(formattedFilters)){
