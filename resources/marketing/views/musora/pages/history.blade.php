@@ -117,12 +117,10 @@
                     "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Today in Music History',
                     "formId" => "Musora - Engagement - Trigger - Today in Music History - WebForm", 
-                    "buttonText" => "ENTER NOW",
+                    "buttonText" => "SIGN UP",
                     "nameInput" => "Your Name",
                     "stacked" => true,
-                    "minimalForm" => true,
                     "buttonColor" => "bg-musora text-black",
-                    "redirectURL" => "/thank-you",
                 ])
             </div>
         </div>

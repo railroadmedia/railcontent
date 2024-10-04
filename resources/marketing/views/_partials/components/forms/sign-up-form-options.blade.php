@@ -5,6 +5,8 @@
         $cleanFormId = str_replace('-', '', (str_replace(' ', '', $formId)));
     else
         $cleanFormId = "ajaxForm";
+
+    $theme = $theme ?? $brand
 @endphp
 
 @if (!empty($errors) && $errors->any())
@@ -90,8 +92,8 @@
 
     @if(!empty($redirectURL))
         <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
-    @else
-        <input name="success_redirect" type="hidden" value="/thank-you"/>
+    {{-- @else
+        <input name="success_redirect" type="hidden" value="/thank-you"/> --}}
     @endif
 </form>
 
@@ -101,16 +103,16 @@
         <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
     </div>
 
-    <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl hidden">
+    <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl hidden shadow-lg p-6">
         <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-        <h2 class="text-{{ $theme }} my-4 sm:my-5 font-bebas"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
-        <p><em>@if(!empty($body)) {{ $body }} @else You should receive an email from {{ 'team@' . $theme . '.com' }} within 10 minutes.
+        <h2 class="text-{{ $theme }} my-2 font-bebas"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
+        <p class="leading-normal text-xs"><em>@if(!empty($body)) {{ $body }} @else You should receive an email from {{ 'team@' . $theme . '.com' }} within 10 minutes.
                 If you don’t, then check your spam folder or re-enter your email address again. @endif
             </em>
         </p>
 
       @if(empty($noSocial))
-            <div class="social-media">
+            <div class="social-media tracking-widest">
                 @php
                     $socialLinks = [
                         'musora' => ['yt' => '@MusoraMedia', 'fb' => 'musoramedia', 'ig' => 'musoraofficial'],
@@ -145,6 +147,7 @@
 
         const checkboxes = document.querySelectorAll('.instrument-checkbox');
         const tooltip = document.getElementById('checkbox-tooltip');
+        const disclaimer = document.querySelector('.disclaimer');
 
         if (checkboxes.length > 0) {
             const isCheckboxSelected = Array.from(checkboxes).some(checkbox => checkbox.checked);
@@ -177,10 +180,22 @@
                         form.reset();
                         submitButton.querySelector('.pending').classList.add('hidden');
                         submitButton.querySelector('.success').classList.remove('hidden');
-                        document.querySelector('.thank-you-box').classList.remove('invisible', 'max-h-0', 'opacity-0', 'hidden');
-                        setTimeout(() => {
-                            window.location.href = form.querySelector('input[name="success_redirect"]').value;
-                        }, 1000);
+
+                        form.classList.add('hidden');
+                        const thankYouBox = document.querySelector('.thank-you-box');
+                        thankYouBox.classList.remove('invisible', 'max-h-0', 'opacity-0', 'hidden');
+                        thankYouBox.classList.add('active');
+                        
+                        if (disclaimer) {
+                            disclaimer.classList.add('hidden');
+                        }
+
+                        const successRedirect = form.querySelector('input[name="success_redirect"]');
+                        if (successRedirect && successRedirect.value) {
+                            setTimeout(() => {
+                                window.location.href = successRedirect.value;
+                            }, 2000);
+                        }
                     } else if (response.status === 422) {
                         console.error('Form validation failed', response.data);
                         submitButton.querySelector('.pending').classList.add('hidden');
