@@ -186,4 +186,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.everyday-musician', [ 'theme' => 'musora']);
     }
+    public function history()
+    {
+        return view('musora.pages.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
 }

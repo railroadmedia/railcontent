@@ -72,6 +72,7 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
         Route::get('free-music-lessons-for-life', [MarketingController::class, 'freeMusicLessonsForLife']);
         Route::get('everyday-musician', [MarketingController::class, 'everyDayMusician']);
+        Route::get('history', [MarketingController::class, 'history']);
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);

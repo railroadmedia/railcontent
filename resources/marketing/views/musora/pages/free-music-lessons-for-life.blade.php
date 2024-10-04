@@ -1,14 +1,14 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>Musora | Drumeo, Pianote, Singeo, Guitareo</title>
-    <meta property="og:title" content="Musora | Drumeo, Pianote, Singeo, Guitareo">
+    <title>Musora | Free Music Lessons For Life</title>
+    <meta property="og:title" content="Musora | Free Music Lessons For Life">
 
-    <meta name="description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
-    <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
+    <meta name="description" content="Do you want to improve your instrument but don’t know where to start? Enter to win free music lessons for life!">
+    <meta property="og:description" content="Do you want to improve your instrument but don’t know where to start? Enter to win free music lessons for life!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <style>
         h5 {
@@ -161,7 +161,6 @@
         </div>
     </header>
 
-   
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#ededed">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight font-playfair mb-3"><strong>What it includes:</strong></h2>
