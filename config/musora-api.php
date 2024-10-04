@@ -1820,7 +1820,6 @@ return [
             'show_onboarding',
             'last_used_brand',
             'primary_brand',
-            'is_first_access',
             'homepage_v2',
         ],
     ],
