@@ -118,7 +118,7 @@
 @endsection
 
 @section('body')
-<section x-data="{ visible: false, showVideoModal: false, videoId: null, currentVideoIndex: 0 }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-6 md:py-8" style="background: #111729;">
+<section x-data="{ visible: false, showVideoModal: false, videoId: null, currentVideoIndex: 0 }" x-intersect.once="visible = true;" class="text-white text-center px-4 md:px-6 py-8 md:py-12 lg:py-16" style="background: #111729;">
     <div class="container max-w-5xl mx-auto">
         <img
             alt="30 Days To Better Strumming Logo"
@@ -171,8 +171,7 @@
                         <div class="relative w-full" style="padding-top: 56.25%;">
                             <div id="vimeo-player" class="absolute inset-0 w-full h-full"></div>
                         </div>
-                        <a class="w-full sm:w-2/3 md:max-w-[320px] join guitareo smaller mt-4 sm:pr-4" href="/shop/30-days-to-better-strumming" x-show="showVideoModal">GET FULL ACCESS FOR FREE</a>
-                        <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller white outline my-2" x-show="showVideoModal" @click="nextLesson()">Next Lesson</a>
+                        <a class="w-full sm:w-2/3 md:max-w-[320px] join smaller guitareo mt-4" x-show="showVideoModal" @click="nextLesson()">Next Lesson <i class="fas fa-chevrons-right"></i> </a>
                     </div>
                 </div>
             </div>
@@ -182,29 +181,27 @@
                 <div class="relative min-h-screen flex items-center justify-center px-4" style="z-index: 1006;" @click="document.getElementById('end-of-lessons-modal').style.display = 'none'; resetModal();">
                     <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center" @click.stop>
                         <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
-                        <h3 class="leading-tight my-4"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
-                        <a class="join guitareo smaller" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a>
+                        <h3 class="leading-tight my-6"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
+                        <a class="join guitareo smaller" href="/choose-plan-strumming">GET FULL ACCESS FOR FREE <i class="fas fa-chevrons-right"></i></a>
                     </div>
                 </div>
             </div>
 
+            @component('_partials.components.modal', ['name' => 'unlock'])
+                @slot('content')
+                    <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center">
+                        <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
+                        <h3 class="leading-tight my-6"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
+                        <a class="join guitareo smaller" href="/choose-plan-strumming">GET FULL ACCESS FOR FREE <i class="fas fa-chevrons-right"></i></a>
+                    </div>
+                @endslot
+            @endcomponent
+
             <div class="text-black md:w-1/3 text-left">
-                <div class="relative h-96 mb-5 rounded-xl overflow-hidden">
+                <div class="relative rounded-xl overflow-hidden border border-gray-600" style="height: 509px;">
                     <div class="overflow-y-auto h-full lessons-list">
                         @php
                            $lessons = [
-                                [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Course Kickoff-1715065477.jpg',
-                                    'title' => 'Course Kick-Off',
-                                    'name' => 'kickOff',
-                                    'videoId' => '944222905',
-                                ],
-                                [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Gear Tips-1715065538.jpg',
-                                    'title' => 'Gear Tips',
-                                    'name' => 'gearTips',
-                                    'videoId' => '944223382',
-                                ],
                                 [
                                     'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
                                     'title' => 'Chord Shapes For The Challenge',
@@ -304,7 +301,7 @@
                             ];
                         @endphp
                         @foreach ($lessons as $index => $lesson)
-                            <div class="w-full flex items-center px-3 py-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
+                            <div class="w-full flex items-center px-3 py-4 cursor-pointer hover:opacity-80 transition-opacity"
                                 style="background: {{ $index % 2 == 0 ? '#071925' : '#000B17' }};"
                                 @click="
                                     @if (isset($lesson['videoId']))
@@ -328,8 +325,8 @@
                     </div>
                     <div class="absolute h-10 bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to bottom, transparent, #000);"></div>
                 </div>
-                <a href="/shop/30-days-to-better-strumming" class="w-full join smaller guitareo mb-3 text-base lg:text-xl">GET FULL ACCESS FOR FREE</a>
-                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline text-base lg:text-xl" style="outline: 0px;">BUY THE COURSE</a>
+{{--                <a href="/shop/30-days-to-better-strumming" class="w-full join smaller guitareo mb-3 text-base lg:text-xl">GET FULL ACCESS FOR FREE</a>--}}
+{{--                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="w-full join smaller white outline text-base lg:text-xl" style="outline: 0px;">BUY THE COURSE</a>--}}
             </div>
             </div>
         </div>
@@ -457,30 +454,6 @@
             </div>
         </div>
     </section>
-
-    @php
-        $videos = [
-            ['name' => 'kickOff', 'video' => '944222905'],
-        ];
-    @endphp
-
-    @foreach ($videos as $video)
-        @include('_partials.components.video-modal', [
-            'name' => $video['name'],
-            'video' => $video['video'],
-            'button' => '<div class="w-full mt-4 text-center"><a class="join guitareo" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a></div>',
-            'vimeo' => true,
-        ])
-    @endforeach
-    @component('_partials.components.modal', ['name' => 'unlock'])
-        @slot('content')
-            <div class="relative overflow-y-visible px-4 md:px-5 lg:px-7 py-5 md:py-7 text-white mx-auto text-center">
-                <h1 class="text-guitareo"><i class="fas fa-lock"></i></h1>
-                <h3 class="leading-tight my-4"><strong>Start your free trial to<br class="hidden sm:inline">  continue watching</strong></h3>
-                <a class="join guitareo smaller" href="/shop/30-days-to-better-strumming">GET FULL ACCESS FOR FREE</a>
-            </div>
-        @endslot
-    @endcomponent
 @endsection
 
 <script src="https://player.vimeo.com/api/player.js"></script>
