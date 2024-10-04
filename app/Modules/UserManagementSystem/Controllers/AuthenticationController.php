@@ -271,9 +271,9 @@ class AuthenticationController extends Controller
 
             $token = $user->createToken($request->get('device_name'));
             $user->withAccessToken($token);
-            $user['login_as_users'] = user()->hasRole('login_as_users');
 
             $attributes = $user->toArray();
+            $attributes['login_as_users'] = user()->hasRole('login_as_users');
             $toRemove = ['shopify_id'];
             $attributes = array_diff_key($attributes, array_flip($toRemove));
             return response()->json(['token' => $token->plainTextToken, 'user' => $attributes]);
