@@ -238,7 +238,7 @@
                 priceSpan.innerHTML = selectedOption.dataset.price;
                 this.classList.remove('error');
                 orderButton.classList.add('active');
-                orderButton.href = originalLink2 + '&products[' + selectedOption.value + ']=1&products[pianote-yuletide-knit-socks]=1&promo-code=yuletide-sweater,yuletide-socks&locked=true';
+                orderButton.href = originalLink2 + '&products[' + selectedOption.value + ']=1&products[pianote-yuletide-knit-socks]=1&promo-code=yuletide-sweater,yuletide-socks,yuletide-shipping&locked=true';
                 orderButton.dataset.productJson = selectedOption.dataset.productJson;
             });
         });

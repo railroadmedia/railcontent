@@ -495,6 +495,7 @@
                 GET STARTED
             </a>
                 <br>
+                <p class="inline-block opacity-60"><strong>NEW STUDENTS ONLY</strong></p>
             </div>
         </section>
     </div>
