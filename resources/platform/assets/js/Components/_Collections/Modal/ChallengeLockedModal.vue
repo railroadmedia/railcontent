@@ -2,7 +2,7 @@
     <InfoModal
         :selfContained="true"
         title="This lesson will be unlocked on July 13"
-        class-override="tw-max-w-[600px] tw-w-full dark:tw-text-white"
+        class-override="tw-max-w-[593px] tw-w-full dark:tw-text-white"
         @onClose="() => $emit('closeModal')"
     >
         <p>Come back tomorrow to maintain your streak!</p>
