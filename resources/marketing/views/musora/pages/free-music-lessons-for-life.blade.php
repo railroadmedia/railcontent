@@ -254,7 +254,6 @@
             </div>
 
             <div class="inline-block py-4 sm:px-6">
-                <p class="text-white capitalize pb-2 lg:pb-4">The winner will be announced on our socials in:</p>
                 @php
                     $timeUnits = [
                         ['condition' => 'timeLeft > 0 && day > 0', 'value' => 'day'],
@@ -263,24 +262,27 @@
                         ['condition' => 'timeLeft > 0', 'value' => 'second'],
                     ];
                 @endphp
-                <div class="uppercase text-3xl md:text-6xl font-bebas tracking-wide">
+                <div class="inline-block py-4 sm:px-6">
                     <span x-cloak x-data="timer()" x-init="countdown()">
-                        <span>
-                            @foreach ($timeUnits as $index => $unit)
-                                @if ($index > 0)
-                                    <span class="inline-block mx-0.5 text-musora">:</span>
-                                @endif
-                                <span x-cloak x-show="{{ $unit['condition'] }}">
-                                    <div class="inline-block bg-musora text-black px-2 py-4 mx-1 rounded w-[40px] sm:w-[60px] md:w-[90px] text-center">
-                                        <span x-text="{{ $unit['value'] }}"></span>
-                                    </div>
-                                </span>
-                            @endforeach
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                        </span>
+                        <p class="text-white capitalize pb-2 lg:pb-4" x-show="timeLeft >= 0">The winner will be announced on our socials in:</p>
+                        <div class="uppercase text-3xl md:text-6xl font-bebas tracking-wide">
+                            <span>
+                                @foreach ($timeUnits as $index => $unit)
+                                    <span x-cloak x-show="{{ $unit['condition'] }}">
+                                        <div class="inline-block bg-musora text-black px-2 py-4 mx-1 rounded w-[40px] sm:w-[60px] md:w-[90px] text-center">
+                                            <span x-text="{{ $unit['value'] }}"></span> 
+                                        </div>
+                                        @if ($index < count($timeUnits) - 1)
+                                            <span class="inline-block mx-0.5 text-musora">:</span>
+                                        @endif
+                                    </span>
+                                @endforeach
+                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                            </span>
+                        </div>
+                        <p class="text-white italic pt-2 lg:pt-4" x-show="timeLeft >= 0"> We will contact the winner by email.</p>
                     </span>
                 </div>
-                <p class="text-white italic pt-2 lg:pt-4"> We will contact the winner by email.</p>
             </div>
         </div>
     </section>
@@ -320,6 +322,6 @@
 @stop
 
  @include('_partials.components.countdown',[
-        'countdownDate' => '2024-10-08 00:00:00',
+        'countdownDate' => '2024-10-10 00:00:00',
         'promoVersion' => false
     ])
