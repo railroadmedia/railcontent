@@ -72,7 +72,7 @@ const handleFrequencyChange = (val) => {
 };
 
 const handleNext = () => {
-    step.value = 2;
+    step.value = 1;
 };
 
 const handleDateChange = (date) => {
@@ -140,6 +140,14 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
     .dp__menu {
         border: none !important;
+    }
+
+    .tw-dark .dp__outer_menu_wrap {
+        border: none !important;
+    }
+
+    .dp__outer_menu_wrap {
+        border: 1px solid #CBCBCD !important;
     }
 
     .dp__calendar_header_item {
