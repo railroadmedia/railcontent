@@ -16,7 +16,7 @@
                     You received this award for completing 30-Day Drummer with a perfect streak. You practiced a total of 123 minutes over the past 30 days.
                 </p>
                 <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-16 sm:tw-mb-6 tw-z-[3] tw-relative">
-                    <MuButton @click="console.log('download')"><musora-icon icon-name="download" class="tw-h-5 tw-mr-1 -tw-mt-1" /> Download</MuButton>
+                    <MuButton>View certificate</MuButton>
                     <MuButton><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>
                 </div>
                 <div class="tw-text-center">
