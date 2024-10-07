@@ -52,6 +52,9 @@
                 </div>
             </section>
 
+            <!-- Challenge Carousel -->
+            <ChallengeCarousel />
+
             <!-- Completed Lessons -->
             <MiniCatalogueSection
                 title="Completed Lessons"
@@ -129,7 +132,7 @@ import PageHeader from '@collections/PageHeader/PageHeader';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
 import UserMetric from '@collections/UserMetric/UserMetric';
 import GearCarousel from '@collections/GearCarousel/GearCarousel';
-
+import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 
 const props = defineProps({
     headerData: {
