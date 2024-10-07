@@ -78,7 +78,7 @@ const calculateXP = async ({ type, difficulty, childrenRefs = [], assignment = [
 }
 
 const XpInput = React.forwardRef((props, ref) => {
-    const { schemaType, onChange, value = '', elementProps } = props;
+    const {onChange, value = '', elementProps } = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
 
     const docId = String(useFormValue(["_id"]));
@@ -97,12 +97,8 @@ const XpInput = React.forwardRef((props, ref) => {
             setLoading(true);
             setError(null); // Reset error state
             const parentId = docId;
-                //docId.startsWith('drafts.') ? docId : `drafts.${docId}`;
-
             // Extract the _ref from each child object
             const childrenRefs = children ? children.map(child => child._ref).filter(Boolean) : [];
-            console.log('XpInput child:', children, childrenRefs);
-
             try {
                 const newTotalXp = await calculateXP({
                     type,
@@ -114,10 +110,9 @@ const XpInput = React.forwardRef((props, ref) => {
                 if (parentId && parentId !== "undefined") {
                     if (newTotalXp !== calculatedXp) {
                         setCalculatedXp(newTotalXp);
-//TODO: uncomment when the tests are ready
-//                         await sanityClient.patch(parentId)
-//                             .set({ total_xp: newTotalXp })
-//                             .commit();
+                        await sanityClient.patch(parentId)
+                            .set({ total_xp: newTotalXp })
+                            .commit();
                     }
                 } else {
                     console.error("Invalid Document ID:", docId);
@@ -155,7 +150,6 @@ const XpInput = React.forwardRef((props, ref) => {
                 ref={ref}
                 readOnly={loading} // Disable input while loading
             />
-            {!loading && <div>Calculated XP: {calculatedXp}</div>}
         </Stack>
     );
 });
