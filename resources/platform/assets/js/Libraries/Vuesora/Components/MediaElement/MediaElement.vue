@@ -306,7 +306,7 @@ export default {
                 // 'chromecast': this.castTitle != null,
                 airplay: true,
                 fullscreen: true,
-                markers: this.chapters.length > 0,
+                markers: this.chapters?.length > 0,
             };
             const mapArray = [];
 

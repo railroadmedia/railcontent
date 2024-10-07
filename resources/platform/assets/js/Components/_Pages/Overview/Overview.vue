@@ -98,7 +98,7 @@
     </div>
 </template>
 <script setup>
-import {computed, ref, onBeforeMount} from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from '@stores/platform';
@@ -209,6 +209,8 @@ onBeforeMount( async () => {
 
         //Header Data
         header.value = OverviewData.value.header;
+
+        console.log(header.value)
 
         //console.log('my data', data.value)    
         platformStore.setLoadingState(OverviewLoading.value);

@@ -5,17 +5,18 @@ namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Events\EmailChangeRequest;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
-use Modules\UserManagementSystem\Events\EmailChangeRequest;
-use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Illuminate\Support\Facades\Http;
 
 class EmailChangeControllerTest extends UserManagementSystemTestCase
 {
+    // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     public function test_request()
     {
         Event::fake();
@@ -114,7 +115,6 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
     public function test_confirmation()
     {
-        /** @var User $user */
         $user = User::factory()->create([
             'email' => $this->faker->email,
             'password' => $this->faker->words(3, true),
@@ -145,11 +145,13 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
             ['code' => $myToken]
         );
 
+        Event::assertDispatched(UserUpdated::class);
+
         // assert the new email was saved in users table
         $this->assertDatabaseHas(
             'usora_users',
             [
-                'id' => 1,
+                'id' => $user->id,
                 'email' => $newEmail,
             ]
         );
@@ -161,14 +163,11 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         $response->assertSessionHas(
             ['successes']
         );
-
-        Event::assertDispatched(UserUpdated::class);
     }
 
 
     public function test_confirmation_validation_fail()
     {
-        /** @var User $user */
         $user = User::factory()->create([
             'email' => $this->faker->email,
             'password' => $this->faker->words(3, true),

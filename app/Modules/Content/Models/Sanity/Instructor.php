@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
+use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListArrayElement;
@@ -22,6 +23,9 @@ class Instructor extends BaseSanityModel
 {
     public function __construct()
     {
+        $focusTagsReference = new Reference([['type' => 'focus']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
+
         $fields = [
             new BrandField(),
             new Field(FieldType::String, 'name'),
@@ -33,7 +37,8 @@ class Instructor extends BaseSanityModel
             new Field(FieldType::Boolean, 'is_house_coach', 'Is this person an internal coach?'),
             new Field(FieldType::Number, 'associated_user_id', 'Associated user id'),
             new Field(FieldType::String, 'focus_text', 'Coach Focus/Card Text - (On the coach cards, 3-8 words.)'),
-            new Field(FieldType::Array, 'focus', title:'Focus Tags (used for filtering and search)', of: new ListArrayElement()),
+            new Field(FieldType::Array, 'focus', title:'Focus Tags (used for filtering and search)', of: $focusTagsReference),
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
             new Field(FieldType::String, 'bands', 'Coach Bands Text - (shown near their bio, should be less than 200 words)'),
             new Field(FieldType::String, 'endorsements', 'Coach Endorsements Text - (shown near their bio, should be less than 200 words)'),
             new Field(FieldType::Number, 'forum_thread_id', "Coach Forum Thread ID - (forum thread database ID for 'Ask A Question' link)"),

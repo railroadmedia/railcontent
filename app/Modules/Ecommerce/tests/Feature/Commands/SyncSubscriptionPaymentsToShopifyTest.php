@@ -1,6 +1,6 @@
 <?php
 
-namespace Commands;
+namespace App\Modules\Ecommerce\tests\Feature\Commands;
 
 use App\Modules\Ecommerce\Jobs\Shopify\SyncSubscriptionPaymentsToShopifyOrders;
 use App\Modules\Ecommerce\Jobs\Shopify\SyncSubscriptionPaymentsToShopifyOrdersJobManager;

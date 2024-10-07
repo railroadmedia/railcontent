@@ -138,10 +138,15 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
-    
+
     public function jazzDrumming101()
     {
         return view('drumeo.lead-gen.pages.jazz-drumming-101', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    
+    public function betterDoubles()
+    {
+        return view('drumeo.lead-gen.pages.better-doubles', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function blueMan()
@@ -151,7 +156,7 @@ class LeadGenController extends BaseController
 
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
     {
-        if(is_null($prefix) && is_null($page)) {
+        if (is_null($prefix) && is_null($page)) {
             return view('drumeo.lead-gen.grooves-of-john-bonham.signup', ['recaptchaKey' => config('recaptcha.key')]);
         } else {
             switch ($page) {
@@ -253,7 +258,7 @@ class LeadGenController extends BaseController
 
     public function pages(Request $request, $domain, $page = null)
     {
-        if(str_contains($page, 'blog')) {
+        if (str_contains($page, 'blog')) {
             return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey' => config('recaptcha.key')]);
         } else {
             return view('drumeo.lead-gen.pages.'.$page, ['theme' => 'drumeo']);
@@ -313,8 +318,8 @@ class LeadGenController extends BaseController
                     ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
             })
             ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
-        if(!is_null($currentLesson)) {
-            if(!$currentLesson->one_off) {
+        if (!is_null($currentLesson)) {
+            if (!$currentLesson->one_off) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
                 $currentLessonIndex = $lessons->search(function ($item) use ($leadgenSlug) {
                     return $item->slug === $leadgenSlug;
@@ -346,7 +351,7 @@ class LeadGenController extends BaseController
                         ->whereNull('leadgens.end_date')
                         ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
                 })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('slug', $leadgenSlug)->select('leadgens.*')->where('leadgens.visible', true)->first();
-            if(!is_null($leadgen)) {
+            if (!is_null($leadgen)) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
                 return view('_partials.layout.global-lead-gen-index-layout', [

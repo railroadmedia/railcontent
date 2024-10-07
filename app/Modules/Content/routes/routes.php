@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Content\Controllers\ContentLikesControllerUser;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,9 @@ Route::prefix('content')
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
+
+        Route::get(
+            'user_data_permissions',
+            [ContentMetadataController::class, 'getUserPermissions']
+        )->name('content.user-permissions');
     });

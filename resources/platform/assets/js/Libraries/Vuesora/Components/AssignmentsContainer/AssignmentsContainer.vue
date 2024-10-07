@@ -8,7 +8,7 @@
                     :lesson-id="lessonId"
                     :theme-color="brand"
                     :brand="brand"
-                    :timecode="assignment.data.find((t) => t.key === 'timecode') ? assignment.data.find((t) => t.key === 'timecode').value : 0"
+                    :timecode="assignment.timecode ? assignment.timecode : 0"
                     :id="assignment.id"
                     :title="assignment.title"
                     :soundslice-slug="assignment.soundslice_slug"

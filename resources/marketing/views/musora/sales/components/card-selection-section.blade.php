@@ -8,12 +8,14 @@
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-6xl mx-auto">
-        <h1 class="leading-tight"><strong>
-                @if(!empty($headline)) {!! $headline  !!}  @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
-        <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
-            @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
-            (after your free trial). Cancel anytime.</h5>
-
+        @if(!empty($altHeadline))
+            {!! $altHeadline  !!}
+        @else
+            <h1 class="leading-tight"><strong>@if(!empty($headline)) {!! $headline  !!}  @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
+            <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
+                @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
+                (after your free trial). Cancel anytime.</h5>
+        @endif
         <div id="plusOptions"
             class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
             x-bind:class="{ 'hidden': !plusMembershipSelected }"

@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Modules\Ecommerce\tests\Unit;
 
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
@@ -10,6 +11,7 @@ use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use App\Modules\Ecommerce\tests\resources\Shopify\fixtures\ReadsFixture;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Signifly\Shopify\Shopify;
 use Tests\TestCase;

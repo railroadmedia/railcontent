@@ -8,8 +8,8 @@ export function useFilterValues() {
                 formattedFilters[key] = [];
                 object[key].map((o, i) => {
                     formattedFilters[key].push({
-                        key: o,
-                        value: o.replace(numberFormat, '')
+                        key: o.type,
+                        value: o.count
                     });
                 })
             }

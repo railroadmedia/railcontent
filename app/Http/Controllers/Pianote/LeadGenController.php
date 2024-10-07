@@ -140,7 +140,7 @@ class LeadGenController extends BaseController
     }
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
-        if(is_null($page)) {
+        if (is_null($page)) {
             return view('pianote.lead-gen.piano-complete-beginners-bootcamp.piano-complete-beginners-bootcamp');
         } else {
             return view('pianote.lead-gen.piano-complete-beginners-bootcamp.zoom');
@@ -151,7 +151,7 @@ class LeadGenController extends BaseController
 
     public function practiceBootcamp(Request $request, $domain, $page = null)
     {
-        if(is_null($page)) {
+        if (is_null($page)) {
             return view('pianote.lead-gen.perfect-piano-practice-bootcamp.perfect-piano-practice-bootcamp');
         } else {
             return view('pianote.lead-gen.perfect-piano-practice-bootcamp.zoom');
@@ -162,7 +162,7 @@ class LeadGenController extends BaseController
 
     public function chordHacks(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
@@ -178,7 +178,7 @@ class LeadGenController extends BaseController
 
     public function bluesPianoBootcamp(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.blues-piano-bootcamp.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
@@ -193,7 +193,7 @@ class LeadGenController extends BaseController
     }
     public function beautifulChristmasClassics(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey' => config('recaptcha.key')]);
         }
@@ -236,7 +236,7 @@ class LeadGenController extends BaseController
 
     public function gstd(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.getting-started.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
             case 'thank-you':
@@ -252,7 +252,7 @@ class LeadGenController extends BaseController
 
     public function gstdp(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.getting-started-on-the-piano.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
             case 'thank-you':
@@ -273,7 +273,7 @@ class LeadGenController extends BaseController
 
     public function learnSongs(Request $request, $domain, $page = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.learn-songs.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
@@ -295,7 +295,7 @@ class LeadGenController extends BaseController
 
     public function chordCharts(Request $request, $domain, $page = null)
     {
-        if(is_null($page)) {
+        if (is_null($page)) {
             return view('pianote.lead-gen.50-chord-charts.signup', ['recaptchaKey' => config('recaptcha.key')]);
         } else {
             return view('pianote.lead-gen.50-chord-charts.unlocked');
@@ -323,7 +323,7 @@ class LeadGenController extends BaseController
 
     public function personalityQuiz(Request $request, $domain, $page = null)
     {
-        switch($page) {
+        switch ($page) {
             case null:
                 return view('pianote.lead-gen.personality-quiz.personality-quiz');
             default:
@@ -354,8 +354,8 @@ class LeadGenController extends BaseController
                     ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
             })
             ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Pianote')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
-        if(!is_null($currentLesson)) {
-            if(!$currentLesson->one_off) {
+        if (!is_null($currentLesson)) {
+            if (!$currentLesson->one_off) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
                 $currentLessonIndex = $lessons->search(function ($item) use ($leadgenSlug) {
                     return $item->slug === $leadgenSlug;
@@ -387,7 +387,7 @@ class LeadGenController extends BaseController
                         ->whereNull('leadgens.end_date')
                         ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
                 })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Pianote')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
-            if(!is_null($leadgen)) {
+            if (!is_null($leadgen)) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
                 return view('_partials.layout.global-lead-gen-index-layout', [

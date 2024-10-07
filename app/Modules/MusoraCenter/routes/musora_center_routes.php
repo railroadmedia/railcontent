@@ -2,8 +2,6 @@
 
 // content management
 
-use App\Modules\MusoraCenter\Controllers\UserController;
-
 Route::get(
     '/content-redirect/{id}',
     \App\Modules\MusoraCenter\Controllers\ContentRedirectController::class . '@redirectToId'
@@ -62,16 +60,6 @@ Route::get(
     '/invoice/{paymentId}',
     \App\Modules\MusoraCenter\Controllers\InvoiceController::class . '@show'
 )->name('invoice.show');
-
-Route::group(
-    [
-        'prefix' => 'musora-center/api/users',
-        'middleware' => ['web_or_api_authenticated', 'musora-center-admin']
-    ],
-    function () {
-        Route::patch('/{user}', [UserController::class, 'update'])->name('user.update');
-    }
-);
 
 // http options
 Route::options('/{any}', function () {

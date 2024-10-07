@@ -373,9 +373,9 @@
                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
-        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
-        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="    background: rgba(0, 0, 0, 0.6);backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);"></div>
+        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5-m.mp4"></video>
+        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5.mp4"></video>
     </header>
     @php
         $packs = $musora['packs'];

@@ -50,7 +50,13 @@ class MentorService
 
     public function assignMentorByBrand(int $userId, string $brand): bool
     {
-        $mentor = $this->chooseMentor($brand);
+        try {
+            $mentor = $this->chooseMentor($brand);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return false;
+        }
+
         if (!$mentor) {
             Log::error("Unable to assign Mentor to User $userId");
             return false;
@@ -131,6 +137,9 @@ class MentorService
         return $primaryBrand;
     }
 
+    /**
+     * @throws Exception
+     */
     public function chooseMentor(string $brand, int $ignoreMentorUserId = 0): ?Mentor
     {
         $mentors = $this->getMentorsByBrand($brand);

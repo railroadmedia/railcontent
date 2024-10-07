@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\DataVersion\ServiceProviders\DataVersionServiceProvider;
 use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;

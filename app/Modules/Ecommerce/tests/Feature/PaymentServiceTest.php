@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Modules\Ecommerce\tests\Feature;
 
 use App\Modules\Ecommerce\Models\AppleReceipt;
 use App\Modules\Ecommerce\Models\GoogleReceipt;
@@ -7,8 +8,10 @@ use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use App\Modules\Ecommerce\Services\PaymentService;
+use Exception;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use InvalidArgumentException;
 use Tests\TestCase;
 
 class PaymentServiceTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ecommerce\tests\Feature;
+namespace App\Modules\Ecommerce\tests\Unit\Services;
 
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;

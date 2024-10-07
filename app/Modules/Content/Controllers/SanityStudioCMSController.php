@@ -14,6 +14,7 @@ use App\Modules\Content\Models\Sanity\CoursePart;
 use App\Modules\Content\Models\Sanity\Creativity;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Essential;
+use App\Modules\Content\Models\Sanity\Focus;
 use App\Modules\Content\Models\Sanity\Foundation;
 use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Instructor;
@@ -46,6 +47,7 @@ use App\Modules\Content\Models\Sanity\Shows\ExploringBeats;
 use App\Modules\Content\Models\Sanity\Shows\GearGuide;
 use App\Modules\Content\Models\Sanity\Shows\InRhythm;
 use App\Modules\Content\Models\Sanity\Shows\Live;
+use App\Modules\Content\Models\Sanity\Shows\OddTimes;
 use App\Modules\Content\Models\Sanity\Shows\OnTheRoad;
 use App\Modules\Content\Models\Sanity\Shows\PaisteCymbals;
 use App\Modules\Content\Models\Sanity\Shows\Performance;
@@ -100,6 +102,7 @@ class SanityStudioCMSController extends BaseController
             (new PlayAlong())->toArray(),
             (new PlayAlongPart())->toArray(),
             (new Rudiment())->toArray(),
+            (new OddTimes())->toArray(),
             (new DrumFestInternational2022())->toArray(),
             (new Spotlight())->toArray(),
             (new TheHistoryOfElectronicDrums())->toArray(),
@@ -148,6 +151,7 @@ class SanityStudioCMSController extends BaseController
             (new Creativity())->toArray(),
             (new Theory())->toArray(),
             (new Lifestyle())->toArray(),
+            (new Focus())->toArray(),
             (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),
