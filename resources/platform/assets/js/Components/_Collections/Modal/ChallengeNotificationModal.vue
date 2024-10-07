@@ -7,13 +7,10 @@
             <template v-if="step === 1">
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in 30-Day Drummer!</h1>
                 <p class="tw-mb-5">Next, select your notification frequency for this Challenges.</p>
-                <p class="tw-mb-[10px]">Notification Frequency</p>
-                <Dropdown
-                    :sorted-options="frequencyOptions"
-                    :selected-value="selectedFrequency"
-                    placeholderLabel="Frequency"
-                    @onChange="handleFrequencyChange"
-                />
+                <ul class="tw-text-left">
+                    <li class="tw-mb-5"><input class="tw-mr-[10px]" type="radio" value="daily" v-model="selectedFrequency" /> <label>Receive daily reminders to practice</label></li>
+                    <li><input class="tw-mr-[10px]" type="radio" value="no" v-model="selectedFrequency" /> <label>Receive no reminders to practice</label></li>
+                </ul>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton :disabled="!selectedFrequency" @click="handleNext">Next</MuButton>
                 </div>
@@ -52,19 +49,18 @@
 import { ref } from 'vue';
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
-import Dropdown from '@collections/Dropdown/Dropdown';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 const props = defineProps({
     challengeType: {
         type: String,
-        default: 'solo',
+        default: 'community',
     }
 });
 
-const selectedFrequency = ref(null);
-const step = ref(2);
+const selectedFrequency = ref('daily');
+const step = ref(1);
 const selectedDate = ref(new Date(Date.now()));
 
 const handleFrequencyChange = (val) => {
@@ -88,12 +84,6 @@ const handleDateChange = (date) => {
 const handleStartNow = () => {
 
 };
-
-const frequencyOptions = [
-    { value: 'Daily' },
-    { value: 'Weekly' },
-    { value: 'None' },
-]
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 </script>
