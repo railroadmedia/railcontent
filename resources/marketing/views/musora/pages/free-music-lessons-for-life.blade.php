@@ -26,63 +26,6 @@
                 font-size:20px
             }
         }
-
-        [placeholder]:focus::-webkit-input-placeholder {
-            color:transparent
-        }
-
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
-            color:#777
-        }
-
-        .ajax-form input, .ajax-form button {
-            font:400 18px/45px "Open Sans", sans-serif;
-            height:45px;
-            color:#999;
-            border-radius:100px;
-            padding:7px 20px;
-            margin:0 auto 10px;
-            transition:all .2s ease-in;
-            box-shadow:none;
-            text-align:inherit;
-            border: 1px solid;
-        }
-
-        @media (min-width:640px) {
-            .ajax-form input, .ajax-form button {
-                font-size:19px;
-                margin:0 auto
-            }
-        }
-
-        @media (min-width:1024px) {
-            .ajax-form input, .ajax-form button {
-                font-size:23px
-            }
-        }
-
-        .ajax-form button {
-            font-family:"Bebas Neue", sans-serif;
-            text-transform:uppercase;
-            margin:0 auto!important;
-            text-align:center;
-            display:block;
-            cursor:pointer;
-            border:none;
-            width:100%;
-            padding:0;
-            color:#fff;
-        }
-        form input, form button {
-            line-height:40px;
-            height: 40px;
-        }
-        @media (min-width: 40em) {
-            form input, form button {
-                height: 52px;
-                line-height: 52px;
-            }
-        }
         .thank-you-box.active {
             max-height:1000px;
             visibility:visible;
@@ -94,16 +37,6 @@
                 padding: 12px;
             }
         }
-        .ajax-form input {
-        margin-bottom: 8px;
-    }
-
-    .dropdown {
-        border-radius: 10px;
-        background: linear-gradient(180deg, #dfdfdf6b 0%, rgba(241, 247, 254, 0) 100%);
-        transition: all 0.3s;
-        border: 1px solid #DFDFDF;
-    }
     </style>
     <style>
         .header-image {
@@ -130,7 +63,7 @@
                         <p class="py-2 md:py-4 tracking-tight">
                            Do you want to improve your instrument but <br class="block lg:hidden"> don’t know <br class="hidden lg:block"> where to start? Enter to win free music lessons for life!
                         </p>
-                        <p class="mt-3 mb-6 text-sm leading-wide">
+                        <p class="mt-3 mb-3 text-sm leading-wide">
                             <i class="fas fa-check-circle text-musora pb-3"></i> No purchase or payment info necessary<br>
                             <i class="fas fa-check-circle text-musora pb-3"></i> On-demand courses <br class="lg:hidden">
                             <i class="fas fa-check-circle text-musora pb-3"></i> $1200 Value
@@ -324,4 +257,4 @@
  @include('_partials.components.countdown',[
         'countdownDate' => '2024-10-10 00:00:00',
         'promoVersion' => false
-    ])
+    ]) 

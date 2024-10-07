@@ -26,63 +26,6 @@
                 font-size:20px
             }
         }
-
-        [placeholder]:focus::-webkit-input-placeholder {
-            color:transparent
-        }
-
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
-            color:#777
-        }
-
-        .ajax-form input, .ajax-form button {
-            font:400 18px/45px "Open Sans", sans-serif;
-            height:45px;
-            color:#999;
-            border-radius:100px;
-            padding:7px 20px;
-            margin:0 auto 10px;
-            transition:all .2s ease-in;
-            box-shadow:none;
-            text-align:inherit;
-            border: 1px solid;
-        }
-
-        @media (min-width:640px) {
-            .ajax-form input, .ajax-form button {
-                font-size:19px;
-                margin:0 auto
-            }
-        }
-
-        @media (min-width:1024px) {
-            .ajax-form input, .ajax-form button {
-                font-size:23px
-            }
-        }
-
-        .ajax-form button {
-            font-family:"Bebas Neue", sans-serif;
-            text-transform:uppercase;
-            margin:0 auto!important;
-            text-align:center;
-            display:block;
-            cursor:pointer;
-            border:none;
-            width:100%;
-            padding:0;
-            color:#fff;
-        }
-        form input, form button {
-            line-height:40px;
-            height: 40px;
-        }
-        @media (min-width: 40em) {
-            form input, form button {
-                height: 52px;
-                line-height: 52px;
-            }
-        }
         .thank-you-box.active {
             max-height:1000px;
             visibility:visible;
@@ -93,9 +36,6 @@
             .thank-you-box.active {
                 padding: 12px;
             }
-        }
-        .ajax-form input {
-        margin-bottom: 8px;
     }
     </style>
 @endsection

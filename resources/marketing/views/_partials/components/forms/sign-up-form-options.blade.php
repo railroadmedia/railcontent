@@ -22,10 +22,8 @@
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
     class="ajax-form clearfix facebook-track-lead mx-auto relative">
-
-
+            {{-- Include tracking inputs for the form --}}
     @if(!empty($formName))
-             {{-- Include tracking inputs for the form --}}
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
             $formName,
             route('customer-io.submit-email-form-rc', [], false),
@@ -39,30 +37,37 @@
 
     @if(!empty($nameInput))
         <div class="w-full px-2 sm:px-3 float-left">
-                    {{-- Name input field --}}
-            <input class="w-full" name="first_name" type="text" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
+            <div class="mt-2">
+                                {{-- Name input field --}}
+                <input type="text" name="first_name" id="sign-up-name" class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif>
+            </div>
         </div>
     @endif
 
     <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
-                    {{-- Email input field --}}
-        <input id='sign-up-email' class="w-full" name="email" type="email" @if(!empty($inputText)) placeholder="{!!  $inputText  !!}" @else placeholder="Your Email" @endif required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
+                                {{-- Email input field --}}
+        <div class="my-2 relative pb-3">
+            <input type="email" name="email" id="sign-up-email" class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6" 
+                @if(!empty($inputText)) placeholder="{!!  $inputText  !!}" @else placeholder="Your Email" @endif required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif>
+            <div class="validation-icon hidden pointer-events-none absolute bottom-6 right-0 pr-3">
+                <i class="fa-solid fa-circle-exclamation text-red-600"></i>
+            </div>
+            <p class="mt-1 pl-4 text-xs text-red-600 hidden absolute" id="email-error">Not a valid email address.</p>
+        </div>
     </div>
-
             {{--  checkboxItems = ['Label' => 'value'] --}}
     @if(!empty($checkboxItems))
         <div class="w-full px-2 sm:px-3 text-white mb-4">
-              <span id="checkbox-tooltip" class="hidden pl-4 pb-1 text-red-600 absolute z-10" style="top:-25px; left:0;">
-                    Please select at least one option.
-                </span>
+            <span id="checkbox-tooltip" class="hidden text-red-600 absolute z-10 text-xs" style="top:-15px; left:20;">
+                Please select at least one option.
+            </span>
             <input name="preferred_instrument" id="preferred_instrument" type="hidden" required>
             <p class="m-3 text-center sm:text-left">Choose your preferred option:</p>
-              
-            <div class="gap-4 justify-center flex flex-wrap lg:space-x-5">
+            <div class="gap-x-4 justify-center flex flex-wrap lg:space-x-5">
                 @foreach ($checkboxItems as $label => $id)
                     <div class="relative flex items-start justify-center lg:items-center lg:justify-start lg:space-x-3 mb-2 lg:mb-0">
                         <div class="flex h-6 items-center">
-                            <input id="{{ $id }}" aria-describedby="{{ $id }}-description" type="checkbox" class="instrument-checkbox cursor-pointer h-4 w-4 rounded border-gray-300 text-{{$theme}} focus:ring-{{$theme}} focus:ring-offset-0 focus:ring-2 focus:ring-opacity-50 bg-{{$theme}}-100 checked:bg-{{$theme}}-500 checked:border-{{$theme}}-500" value="{{ $label }}" />
+                            <input id="{{ $id }}" aria-describedby="{{ $id }}-description" type="checkbox" class="instrument-checkbox cursor-pointer h-4 w-4 rounded border-gray-300 text-{{$theme}} focus:ring-{{$theme}} focus:ring-offset-0 focus:ring-2 focus:ring-opacity-0 bg-{{$theme}}-100 checked:bg-{{$theme}}-500 checked:border-{{$theme}}" value="{{ $label }}" />
                         </div>
                         <div class="ml-3 text-sm leading-6 lg:ml-0 text-center lg:text-left">
                             <label for="{{ $id }}" class="font-medium text-white">{{ $label }}</label>
@@ -70,12 +75,11 @@
                     </div>
                 @endforeach
             </div>
-              
         </div>
     @endif
-                    {{-- Submit button with reCAPTCHA --}}
+
     <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
-        <button class="submit g-recaptcha hover:opacity-80 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$theme}} @endif @if(!empty($outline)) outline @endif" type="submit"
+        <button class="submit g-recaptcha flex w-full justify-center rounded-full px-3 py-3 lg:py-2 text-base lg:text-xl uppercase font-bebas leading-none tw-tracking-tight shadow-sm hover:opacity-90 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$theme}} @endif @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'
                 data-action='submit'>
@@ -111,7 +115,7 @@
             </em>
         </p>
 
-      @if(empty($noSocial))
+        @if(empty($noSocial))
             <div class="social-media tracking-widest">
                 @php
                     $socialLinks = [
@@ -165,10 +169,9 @@
 
             const formData = new FormData(form);
 
-            // Log for debugging
-            for (let [key, value] of formData.entries()) {
-                console.log(`${key}: ${value}`);
-            }
+           // for (let [key, value] of formData.entries()) {
+           //     console.log(`${key}: ${value}`);
+           // }
 
             submitButton.querySelector('.pre-add').classList.add('hidden');
             submitButton.querySelector('.pending').classList.remove('hidden');
@@ -219,7 +222,9 @@
                 });
                 emailSignUpConversionTrackerForImpactProvider();
         } else {
-            userEmail.classList.add('bg-red-200');
+            userEmail.classList.add('bg-red-200', 'border-red-500');
+            document.getElementById('email-error').classList.remove('hidden');
+            document.querySelector('.validation-icon').classList.remove('hidden');
         }
     }
 
@@ -230,5 +235,20 @@
                 .join(', ');
             document.getElementById('preferred_instrument').value = selectedInstrument;
         });
+    });
+
+    document.getElementById('sign-up-email').addEventListener('input', function() {
+        const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const emailError = document.getElementById('email-error');
+        const iconError = document.querySelector('.validation-icon');
+        if (this.value.match(emailFormat)) {
+            emailError.classList.add('hidden');
+            this.classList.remove('bg-red-200', 'border-red');
+            iconError.classList.add('hidden');
+        } else {
+            emailError.classList.remove('hidden');
+            this.classList.add('bg-red-200', 'border-red');
+            iconError.classList.remove('hidden');
+        }
     });
 </script>
