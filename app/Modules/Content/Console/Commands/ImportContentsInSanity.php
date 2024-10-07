@@ -429,10 +429,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
      */
     private function handleGenre(array $extraData, array &$songs, string $id): array
     {
-
-        $contentGenres = ContentStyle::query()->where('content_id', '=', $id)->get();
-
-        foreach ($contentGenres as $contentGenre) {
+        $contentGenres = ContentStyle::query()->where('content_id', '=', $songs['railcontent_id'])->get();
+        foreach ($contentGenres->unique('style')->all() as $contentGenre) {
             $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentGenre->style);
             if (isset($extraData['genre']['genre_' . strtolower($name)])) {
                 $songs["genre"][] = [
