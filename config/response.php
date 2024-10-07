@@ -2547,7 +2547,8 @@ return [
             'show_onboarding',
             'last_used_brand',
             'primary_brand',
-            'homepage_v2'
+            'homepage_v2',
+            'is_first_access'
         ],
 
         'quick-tips' => [
@@ -5771,7 +5772,8 @@ return [
             'show_onboarding',
             'last_used_brand',
             'primary_brand',
-            'homepage_v2'
+            'homepage_v2',
+            'is_first_access'
         ],
 
         'quick-tips' => [
