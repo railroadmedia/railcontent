@@ -1,10 +1,10 @@
 <template>
     <!-- Large Desktop -->
-    <div class="tw-hidden xl:tw-flex tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-7 2xl:tw-px-12 tw-pb-5 tw-relative tw-my-5 dark:tw-text-white">
+    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative tw-my-5 dark:tw-text-white">
         <!-- Ellipsis -->
-        <div class="tw-absolute tw-top-2 2xl:tw-top-[15px] tw-right-2 2xl:tw-right-[15px]">
+        <div class="tw-absolute tw-top-1.5 2xl:tw-top-[15px] tw-right-1.5 2xl:tw-right-[15px]">
             <div class="tw-relative">
-                <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="showDropdown = !showDropdown">
+                <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="showDropdown = !showDropdown" v-click-outside="closeDropdown">
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
@@ -16,21 +16,23 @@
         </div>
 
         <!-- Left -->
-        <div class="tw-shrink-0 tw-mr-10 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
+        <div class="tw-shrink-0 tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
             <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
             <div class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">Day 2 Unlocks In 22:12</div>
             <MuButton class="tw-px-6"><musora-icon class="tw-w-[20px] tw-mr-2 -tw-scale-x-100" icon-name="reset" />Repeat day 25</MuButton>
         </div>
         <!-- Right -->
-        <div class="tw-grow 2xl:tw-flex-1 tw-relative tw-pb-5">
+        <div class="tw-max-w-[300px] 2xl:tw-max-w-none tw-grow 2xl:tw-flex-1 tw-relative tw-pb-5">
             <!-- Musora Logo -->
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="3xl:tw-pl-6 tw-relative tw-pt-7">
-                <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-video tw-mb-5 tw-relative">
-                    <!-- Thumbnail -->
-                    <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/s02-2-1675375801.jpg" />
+                <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative">
+                    <!-- Thumbnail (Video ratio) -->
+                    <img class="tw-w-full tw-hidden 3xl:tw-block" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/s02-2-1675375801.jpg" />
+                    <!-- Thumbnail (Square ratio) -->
+                    <img class="tw-w-full 3xl:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DDSquare.png" />
                     <!-- Overlay -->
                     <div class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -44,7 +46,7 @@
                             <div class="tw-font-extrabold">1</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Day Streak
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -56,7 +58,7 @@
                             <div class="tw-font-extrabold">2</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Rest Days
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -151,4 +153,8 @@ const { brand } = storeToRefs(userStore);
 const showDropdown = ref(false);
 
 const circumference = 2 * 22 / 7 * 108;
+
+const closeDropdown = () => {
+    showDropdown.value = false;
+}
 </script>
