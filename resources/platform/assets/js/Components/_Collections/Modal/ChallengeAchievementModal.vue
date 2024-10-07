@@ -4,7 +4,7 @@
         <div class="tw-rounded-[10px] tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-max-w-[440px] tw-w-full tw-px-2 sm:tw-px-12 tw-pt-[30px] tw-pb-5 tw-border tw-border-[#081825] tw-mb-5">
             <div class="tw-px-3 sm:tw-px-5 tw-mb-4">
                 <div class="tw-w-full tw-aspect-square tw-rounded-full tw-overflow-hidden">
-                    <Vue3Lottie animation-link="https://lottie.host/4ef1a405-db20-4e7c-b185-7800035f75af/kx4RO1kh30.json" width="100%" height="100%" />
+                    <Vue3Lottie animation-link="https://lottie.host/4ef1a405-db20-4e7c-b185-7800035f75af/kx4RO1kh30.json" width="100%" height="100%" speed="1.5" />
                 </div>
             </div>
             <div class="tw-flex tw-gap-2 tw-text-xs sm:tw-text-sm tw-relative tw-z-20">
