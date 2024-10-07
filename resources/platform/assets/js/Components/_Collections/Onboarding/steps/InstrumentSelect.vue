@@ -41,7 +41,7 @@ function goBack() {
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false" @on-header-go-back="goBack" :headerProps="{
     title: 'What instrument would you like to learn?',
     hideBackButton: false,
-    hideCloseButton: !props.steps[1].checked,
+    hideCloseButton: true,
   }">
     <template v-slot:content>
       <div class="
