@@ -1,8 +1,8 @@
 <template>
     <!-- Large Desktop -->
-    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative tw-my-5 dark:tw-text-white">
+    <div class="tw-hidden xl:tw-flex tw-justify-between tw-border tw-border-[#E0E0E1] dark:tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-px-6 2xl:tw-px-12 tw-pb-5 tw-relative tw-my-5 dark:tw-text-white tw-overflow-hidden">
         <!-- Ellipsis -->
-        <div class="tw-absolute tw-top-1.5 2xl:tw-top-[15px] tw-right-1.5 2xl:tw-right-[15px]">
+        <div class="tw-absolute tw-top-1.5 2xl:tw-top-[13px] tw-right-1.5 2xl:tw-right-[13px]">
             <div class="tw-relative">
                 <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="showDropdown = !showDropdown" v-click-outside="closeDropdown">
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
@@ -28,7 +28,7 @@
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="3xl:tw-pl-6 tw-relative tw-pt-7">
-                <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative">
+                <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative tw-w-[180px] 2xl:tw-w-[200px] 3xl:tw-w-auto tw-mx-auto">
                     <!-- Thumbnail (Video ratio) -->
                     <img class="tw-w-full tw-hidden 3xl:tw-block" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/s02-2-1675375801.jpg" />
                     <!-- Thumbnail (Square ratio) -->
@@ -106,11 +106,11 @@
                 </div>
             </div>
         </div>
-        <div class="tw-flex tw-justify-center tw-gap-2 tw-text-[11px] tw-w-full tw-px-2 tw-relative tw-mb-3">
+        <div class="tw-flex tw-justify-center tw-gap-2 tw-text-[11px] tw-w-full tw-px-2 lg:tw-px-0 tw-relative tw-mb-3">
             <!-- Streak -->
-            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-1 -tw-pl-2 tw-flex tw-items-center tw-relative">
+            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-1 tw-flex tw-items-center tw-relative">
                 <!-- Streak Lottie -->
-                <Vue3Lottie animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" width="30px" />
+                <Vue3Lottie class="-tw-ml-1" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" width="30px" />
                 <!-- Streak Text -->
                 <div class="tw-grow -tw-ml-1">
                     <div class="tw-font-extrabold">1</div>
