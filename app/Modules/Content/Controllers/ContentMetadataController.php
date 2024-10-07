@@ -90,18 +90,18 @@ class ContentMetadataController extends Controller
 
         $results =
             $user->progress()
-            ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
-            ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
-            ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
-            ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
-            ->when(
-                !is_null($page),
-                // when we're using pagination, we need to apply the limit to the page
-                fn ($query) => $query->forPage($page, $limit),
-                // otherwise, apply the limit to the whole query (if it's there)
-                fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
-            )
-            ->pluck('content_id');
+                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
+                ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
+                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+                ->when(
+                    !is_null($page),
+                    // when we're using pagination, we need to apply the limit to the page
+                    fn ($query) => $query->forPage($page, $limit),
+                    // otherwise, apply the limit to the whole query (if it's there)
+                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+                )
+                ->pluck('content_id');
 
         return response()->json([$progressState->value => $results]);
     }
@@ -118,21 +118,6 @@ class ContentMetadataController extends Controller
             'isAdded' => false,
             'currentSecond' => $currentSecond
         ];
-    }
-
-    /**
-     * @param $vimeoId
-     * @return array
-     */
-    public function getVimeoData($vimeoId)
-    {
-        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
-        $response = [
-            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
-            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
-            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
-        ];
-        return $response;
     }
 
     /**

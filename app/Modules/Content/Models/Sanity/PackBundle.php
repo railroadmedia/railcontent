@@ -19,7 +19,7 @@ class PackBundle extends ParentTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Pack Bundles', childType: 'pack-bundle-lesson', withResources: true);
+        parent::__construct(self::getName(), 'Pack Bundles', childType: 'pack-bundle-lesson', withResources: true, parentType: 'pack');
         $detailsGroup = new Group('editorFields', 'Details', true);
 
         $this->addFields(
