@@ -295,6 +295,18 @@
         .timeline-container.pianote .timeline:after {
             background-color: #F61A30;
         }
+        .join.singeo {
+            background:#8300E9;
+        }
+        .join.singeo:hover {
+            background:#9000ff;
+        }
+        .timeline-container.singeo:after {
+            background-color: #8300E9;
+        }
+        .timeline-container.singeo .timeline:after {
+            background-color: #8300E9;
+        }
     </style>
 @endsection
 
@@ -374,6 +386,12 @@
         @if($cohort['slug'] == '30-day-jazz-piano')
             @include('pianote.products._30D-jazz-piano', [
                 'theme' => 'pianote',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == 'everyday-improv')
+            @include('singeo.products._everyday-improv', [
+                'theme' => 'singeo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])

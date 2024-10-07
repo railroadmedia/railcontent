@@ -156,6 +156,11 @@ class SalesController extends BaseController
         return view('singeo.products.singing-straw', [ 'theme' => 'singeo' ]);
     }
 
+    public function everydayImprov()
+    {
+        return view('singeo.products.everyday-improv', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'singeo' ]);
+    }
+
     public function lifetimeMasterclass()
     {
         return view('singeo.lead-gen.lifetime-members-masterclass');
