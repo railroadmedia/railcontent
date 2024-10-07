@@ -187,7 +187,7 @@ const calculatedBgImg = computed(() => {
         return props.bgImg;
     }
 
-    return '';
+    return props.squareImg;
 });
 
 const handleCtaClick = (event, url) => {
