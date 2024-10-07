@@ -383,6 +383,7 @@ class OnboardingController extends Controller
 
         $user = user();
         $user->primary_brand = $brand;
+        $user->last_used_brand = $brand;
         $user->save();
 
         dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
