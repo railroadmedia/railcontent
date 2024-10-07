@@ -49,7 +49,7 @@
                         @else
                             {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
                             <a href="#final" class="join singeo medium w-full anchor-slide">ENROLL NOW</a>
-                            <a href="https://www.musora.com/drumeo/enrollment/30-day-jazz">
+                            <a href="https://www.musora.com/singeo/enrollment/everyday-improv">
                                 <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-singeo">
                                     Registration is FREE for Singeo Members.
                                 </p>
@@ -62,7 +62,7 @@
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
                             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
                         <p class="inline-block leading-tight text-sm align-middle">Join
-                            {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
+                            {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
             <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                 <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                <h4 class="px-3 lg:px-5 text-2xl"><strong>October 28th</strong></h4>
+                <h4 class="px-3 lg:px-5 text-2xl"><strong>November 11th</strong></h4>
                 <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                 <p class="text-sm px-3 lg:px-5">
                     Enrollment closes in <br class="lg:hidden">
@@ -97,7 +97,7 @@
                                 <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
                             </span>
                     @else
-                        <span class="inline text-singeo" id="countdown" data-countdown-date="2024-10-28 00:00:00">
+                        <span class="inline text-singeo" id="countdown" data-countdown-date="2024-11-11 00:00:00">
                                 <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
                                 <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
                                 <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>
@@ -112,7 +112,7 @@
                 <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                     <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-singeo text-2xl"></i>
                     <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                        <span class="text-sm"> October 28th to<br class="hidden md:inline"> November 27th</span>
+                        <span class="text-sm"> November 11th to<br class="hidden md:inline"> December 8th</span>
                     </p>
                 </div>
                 <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
@@ -124,8 +124,7 @@
                 <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-start">
                     <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-singeo text-2xl"></i>
                     <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                        <span class="text-sm">Play jazz grooves & fills<br class="hidden md:inline">
-                                at a gigging level.</span>
+                        <span class="text-sm">Sing over any song or<br class="hidden md:inline"> chord progression.</span>
                     </p>
                 </div>
             </div>
@@ -137,81 +136,28 @@
 
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
     <div class="container max-w-4xl mx-auto">
-        <h2 class="leading-tight mb-7 sm:mb-12"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
+        <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock confidence with <br>vocal improvisation tools.</strong></h2>
         @php
-            if (empty($platformVersion)) {
-                $gettings = [
-                    [
-                        'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/know-exactly.webp',
-                        'title' => 'Know exactly what to practice.',
-                        'desc' =>
-                            'Jazz drumming engages your brain in different ways. 30-Day Jazz helps you build these pathways by following a simple daily practice schedule. By the end of the month, you’ll be comfortable playing syncopated jazz grooves.',
-                    ],
-                    [
-                        'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/schedule.webp',
-                        'title' => 'Fits any schedule.',
-                        'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Jazz fits any schedule. You only need 10 minutes per day to improve your jazz independence and musicianship.',
-                    ],
-                    [
-                        'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/real-music.webp',
-                        'title' => 'Play with real music.',
-                        'desc' =>
-                            'No more painfully dry exercises set to MIDI playalongs. In 30-Day Jazz, you’re playing along with a world class jazz combo. They’ve crafted a custom playalong for you to apply your skills and expand your ears over 30 days.',
-                    ],
-                    [
-                        'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/q-a.webp',
-                        'title' => 'Live support from REAL teachers.',
-                        'desc' =>
-                            'Each week you’ll have a 60-minute live lesson with Ulysses Owens Jr. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
-                    ],
-                    [
-                        'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/lifetime.webp',
-                        'title' => 'Lifetime access.',
-                        'desc' =>
-                            'You can access ALL playalongs, charts, and lessons from 30-Day Jazz for life. That means you can return to your favorite jazz exercises and songs over and over – plus, it means you can work at your own pace.',
-                    ],
+            $gettings = [
+                [
+                    'position' => 'left',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/know-exactly.webp',
+                    'title' => 'Do you struggle to find the right notes? ',
+                    'desc' => 'You’re not alone! Everyday Improv helps you identify notes, rhythms, and melodies that will work over any song. Plus, you’ll start to feel comfortable making decisions in the moment… no need to fear singing the “wrong” note!',
+                ],
+                [
+                    'position' => 'right',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/schedule.webp',
+                    'title' => 'Learn vocal improv in 10 minutes a day. ',
+                    'desc' => 'Everyday Improv is the easiest way to improve your singing. No homework, confusing music theory, or hours of practice needed. Just follow every lesson in real-time for 10 minutes a day. The incredible Emma Nissen is your guide.',
+                ],
+                [
+                    'position' => 'left',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/q-a.webp',
+                    'title' => 'Develop your improv ability in just 30 days. ',
+                    'desc' => 'First, you’ll build a strong foundation for improvisation. Next, you’ll learn the four basics of improv, explore how to use your voice as an instrument, and have fun with runs. By the end of the month, you’ll be able to sing over any song – even if you don’t know it yet.',
+                ]
                 ];
-            }
-            else {
-                $gettings = [
-                    [
-                        'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/know-exactly.webp',
-                        'title' => 'Know exactly what to practice.',
-                        'desc' =>
-                            'Jazz drumming engages your brain in different ways. 30-Day Jazz helps you build these pathways by following a simple daily practice schedule. By the end of the month, you’ll be comfortable playing syncopated jazz grooves.',
-                    ],
-                    [
-                        'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/schedule.webp',
-                        'title' => 'Fits any schedule.',
-                        'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Jazz fits any schedule. You only need 10 minutes a day to improve your jazz independence and musicianship.',
-                    ],
-                    [
-                        'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/q-a.webp',
-                        'title' => 'Live support from REAL teachers.',
-                        'desc' =>
-                            'Each week you’ll have a 60-minute live lesson with Ulysses Owens Jr. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
-                    ],
-                ];
-
-            }
         @endphp
         <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
             @foreach ($gettings as $key => $getting)
@@ -258,12 +204,8 @@
                 alt="30-Day Double Bass With Ulysses Logo">
             <h4 class="leading-loose text-left">
                 <i class="fas fa-check text-singeo mr-5"></i> Daily guided drum workouts<br>
-                <i class="fas fa-check text-singeo mr-5"></i> Weekly LIVE Q&A workshops<br>
-                <i class="fas fa-check text-singeo mr-5"></i> Flexible weekly schedule<br>
-                @if(empty($platformVersion))
-                    <i class="fas fa-check text-singeo mr-5"></i> Ongoing motivation & support<br>
-                    <i class="fas fa-check text-singeo mr-5"></i> Guaranteed results
-                @endif
+                <i class="fas fa-check text-singeo mr-5"></i> Flexible schedule<br>
+                <i class="fas fa-check text-singeo mr-5"></i> FREE for Musora members<br>
             </h4>
         </div>
 
@@ -277,57 +219,9 @@
             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
         <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
-            {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
+            {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
     </div>
 </section>
-<div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
-    style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
-</div>
-<section class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
-    <div class="container max-w-4xl mx-auto">
-        <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-            <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/screen.webp"
-                alt="Mobile Screen with 30-Day Double Bass With Ulysses">
-            <div class="flex-grow sm:pl-7">
-                <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the
-                        way.</strong></h3>
-                <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your
-                    lessons, you can ask your instructor at each week’s LIVE Q&A event. Ulysses will be there to
-                    help you through any sticking points and keep you motivated to complete the full course.</h6>
-                <div class="text-center sm:text-left">
-                    <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>JOIN Ulysses LIVE: <i
-                                class="fas fa-arrow-down text-singeo mx-2 inline lg:hidden"></i> <i
-                                class="fas fa-arrow-right text-singeo mx-2 hidden lg:inline"></i></strong></h6><br
-                        class="inline lg:hidden">
-
-                    <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                        <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-singeo">
-                            <strong>NOV</strong></p>
-                        <p class="leading-none text-lg py-1 text-black"><strong class="font-black">2</strong></p>
-                    </div>
-                    <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                        <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-singeo">
-                            <strong>NOV</strong></p>
-                        <p class="leading-none text-lg py-1 text-black"><strong class="font-black">9</strong></p>
-                    </div>
-                    <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                        <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-singeo">
-                            <strong>NOV</strong></p>
-                        <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>
-                    </div>
-                    <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                        <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-singeo">
-                            <strong>NOV</strong></p>
-                        <p class="leading-none text-lg py-1 text-black"><strong class="font-black">23</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
     <div class="container max-w-6xl mx-auto">
         <h2 class="mb-6 sm:mb-10 lg:mb-14"><img
@@ -341,23 +235,23 @@
                 [
                     'image' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/beginner.webp',
-                    'title' => 'Beginner Drummers.',
+                    'title' => 'Beginner Singers.',
                     'description' =>
-                        '30-Day Jazz starts with simple swing patterns on the ride cymbal. If you’re a motivated beginner, you can follow the daily practice regime to learn dozens of jazz patterns by the end of the month.',
+                        'This course might be challenging, but Everyday Improv will help you find your range so you can start to improvise within it. Plus, finding the right note will begin to feel like second nature.',
                 ],
                 [
                     'image' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/singeo/products/everyday-improv/intermediate.webp',
-                    'title' => 'Intermediate Drummers.',
+                    'title' => 'Intermediate Singers.',
                     'description' =>
-                        'So you can play The Beatles and Nirvana but really want to expand your vocabulary on the drums. 30-Day Jazz introduces you to the world of jazz drumming in a fully immersive experience.',
+                        'Does singing without a guide sound scary? Everyday Improv can help. You’ll learn how to turn mistakes into music, master scat improv, and sing along with any song.',
                 ],
                 [
                     'image' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/advanced.webp',
-                    'title' => 'Advanced Drummers',
+                    'title' => 'Advanced Singers',
                     'description' =>
-                        'If you’re highly experienced in one style of drumming, 30-Day Jazz will introduce you to a new world. By the end of the month, you’ll be prepared to play with a live jazz band.',
+                        'Already a great singer but want to get better at improvisation? In 10 minutes a day, you’ll unlock the confidence to come up with melodies and rhythms on the spot.',
                 ],
             ];
         @endphp
@@ -367,11 +261,8 @@
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0 mx-auto sm:mx-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl"
                         style="background-image:url('{{ $drummer['image'] }}'); object-position: 60% 0">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img
-                                    class="h-8 transition-opacity opacity-0" loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg"
-                                    alt="plus icon"><br>{{ $drummer['title'] }}</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong>
+                                <i class="fas fa-check-circle text-singeo text-3xl"></i><br>{{ $drummer['title'] }}</strong></h6>
                         <div class="absolute inset-0 z-0"
                             style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
@@ -379,89 +270,6 @@
                 </div>
             @endforeach
         </div>
-
-        @if(empty($platformVersion))
-            <h2 class="mt-10 lg:mt-24 mb-3"><strong>Playing makes perfect.</strong></h2>
-            <h6 class="leading-normal mb-14 md:mb-11">For less than the cost of monthly private lessons<br
-                    class="hidden sm:inline"> you’ll get a 30-day program to transform your drumming.</h6>
-
-            <div class="relative" x-data="{
-        tableClass: 'private',
-        getClass() {
-            return {
-                'private': this.tableClass === 'private',
-                'books': this.tableClass === 'books',
-                'online': this.tableClass === 'online'
-            };
-        }
-    }"
-            >
-                <p
-                    class="inline sm:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2">
-                    <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
-
-                <table :class="getClass()"
-                    class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
-                    <tbody>
-                    <tr style="background-color:transparent!important;">
-                        <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-opacity opacity-0" loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/singeo/products/everyday-improv/logo-white.webp"
-                                alt="30 day drummer logo"></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tl-xl" @click="tableClass = 'online'"><strong>Private<br> Lessons</strong></td>
-                        <td class="cursor-pointer sm:cursor-default" @click="tableClass = 'books'"><strong>Online<br> Courses</strong></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl" @click="tableClass = 'private'"><strong>Drum<br> Books</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Style</td>
-                        <td>24 Play-along Workouts</td>
-                        <td>In-Person</td>
-                        <td>Self-Directed</td>
-                        <td>Self-Directed</td>
-                    </tr>
-                    <tr>
-                        <td>Live</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>Sometimes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Length</td>
-                        <td>30 Days</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                        <td>Open Ended</td>
-                    </tr>
-                    <tr>
-                        <td>Access</td>
-                        <td>Lifetime</td>
-                        <td>One-Time</td>
-                        <td>Varies</td>
-                        <td>Lifetime</td>
-                    </tr>
-                    <tr>
-                        <td>Guarantee</td>
-                        <td>90 days</td>
-                        <td>No</td>
-                        <td>Varies</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Investment</td>
-                        <td class="rounded-b-xl">
-                            <strong>$97</strong><br>
-                            <span class="text-xs">Single Payment</span></td>
-                        <td class="rounded-bl-xl"><strong>$30-$100</strong><br> <span class="text-xs">Per
-                                    Lesson</span></td>
-                        <td><strong>$89-$270+</strong><br>&nbsp;</td>
-                        <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        @endif
     </div>
 </section>
 
@@ -484,197 +292,23 @@
             <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
                 style="background-color:#00101d;">
                 <h6 class="uppercase text-singeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
-                <h2 class="text-center sm:text-left"><strong>Ulysses Owens Jr. </strong></h2>
-                <h6 class="leading-normal my-4 lg:my-6">Ulysses Owens Jr. is a GRAMMY-winning jazz drummer, producer, and educator known for his innovative performances and contributions to jazz.
+                <h2 class="text-center sm:text-left"><strong>Emma Nissen</strong></h2>
+                <h6 class="leading-normal my-4 lg:my-6">Emma Nissen is a jazz-pop phenom known for her ability to scat and improvise in a unique modern jazz style.
                     <br><br>
-                    He has released eight albums, including "A New Beat," which topped jazz charts in 2024. Owens has authored several books on jazz drumming, developed music products, and created online educational courses.
+                    She has become recognized by Lauren Daigle, SZA, Meghan Trainor, Queen Latifah, and Adam Blackstone – a long-time Rihanna, Maroon 5, and Justin Timberlake collaborator, and Emmy and GRAMMY winner.
                     <br><br>
-                    He’s an educator at the Juilliard School and he’s here to help you get started playing jazz on the drums.
+                    Emma’s debut album, Love Like You, showcases her extraordinary talent and is set to be one of the standout releases of the year.
+                    <br><br>
+                    And she’s here to guide you on your vocal improvisation journey!
                 </h6>
-                <div class="flex items-center">
-                    <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-graduation-cap text-singeo"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        Small Ensemble Director <strong>@ The Juilliard School</strong>
-                    </h6>
-                </div>
-                <div class="flex items-center my-4 sm:my-2">
-                    <h3 class="ml-0 mr-3"><i class="fa-brands fa-fw text-singeo fa-youtube"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        <strong>+6M views</strong> on viral jazz videos
-                    </h6>
-                </div>
-                <div class="flex items-center">
-                    <h3 class="ml-0 mr-3"><i class="fad fa-fw fa-book text-singeo"></i></h3>
-                    <h6 class="leading-tight mx-0">
-                        <strong>2x</strong> Published Author
-                    </h6>
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-@if(empty($platformVersion))
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
-        style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
-    </div>
-    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
-        <div class="container max-w-5xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 inline-block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 mb-6 sm:mb-8 transition-opacity opacity-0"
-                loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
-                alt="guarantee badge">
-            <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <img class="h-48 sm:h-64 lg:h-96 sm:order-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/810x0/filters:quality(95)/marketing/singeo/products/everyday-improv/guarantee-students.webp">
-                <div class="mt-4 sm:mt-0 sm:pr-8 sm:text-left">
-                    <h3 class="leading-tight mb-4 sm:mb-6"><strong>Your favorite drum<br class="inline sm:hidden"> course,
-                            guaranteed.</strong></h3>
-
-                    <p class="leading-normal">30-Day Jazz is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to expand your vocabulary on the drums.
-                        <br><br>
-                        We think it’ll be your favorite drum course ever –
-                        <br><br>
-                        So even though it’s only a month, you’ll get three full months to go through everything and make sure it was right for you. If not, just contact our friendly support team for a full refund.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-@endif
 <div id="final" class="anchor"></div>
 
-@if(empty($platformVersion))
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
-        style="background-color:#eff7ff;">
-        <div class="container mx-auto max-w-4xl relative z-50 text-center">
-            <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/singeo/products/everyday-improv/logo.webp"
-                alt="30 day Double Bass With 66Samus logo">
-            <h3 class="leading-tight mt-2 sm:mt-4"><strong>Learn jazz drumming in an<br class="sm:hidden"> immersive 30-day experience.</strong></h3>
-            <p class="leading-normal my-3 my-4">
-                <i class="fas fa-check text-singeo ml-3"></i> 20 Guided Workouts<br class="sm:hidden">
-                <i class="fas fa-check text-singeo ml-3"></i> 4 Live Q&A Sessions<br class="lg:hidden">
-                @if(empty($platformVersion))
-                    <i class="fas fa-check text-singeo ml-3"></i> 90-Day Money Back Guarantee<br class="sm:hidden">
-                @endif
-                <i class="fas fa-check text-singeo ml-3"></i> Lifetime Course Access
-            </p>
-            {{--                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>--}}
-            <h6 class="leading-normal mb-4 text-singeo uppercase">
-                @if(empty($platformVersion))
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                        Enrollment closes in
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                        </strong>
-                    </span>
-                @endif
-            </h6>
 
-            <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">
-                @include('drumeo.products.partials._order-card', [
-                    'badge' => 'Launch Special',
-                    'header' => '30-Day Jazz',
-                    'subheader' => 'Course Only | Lifetime Access',
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/singeo/products/everyday-improv/course-only.webp',
-                    'imageHeight' => 'h-32 md:h-40 lg:h-44',
-                    'fullPrice' => '$127',
-                    'price' => '$97',
-                    'specialText' => "One time payment.",
-                    'cta' => 'ENROLL NOW',
-                    'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',
-                    'bonuses' => [
-                        '<strong>30-Day Jazz</strong>',
-                        '<strong>FREE</strong> 1-month Singeo Access',
-                    ],
-                ])
-                @include('drumeo.products.partials._order-card', [
-                    'highlightBorder' => true,
-                    'badge' => 'FREE STICKBAG',
-                    'header' => 'Unlimited Lessons',
-                    'subheader' => '1 Year Of Singeo +<br class="sm:hidden"> 4 Bonuses Worth $528',
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/singeo/products/everyday-improv/unlimited-lessons.webp',
-                    'imageHeight' => 'h-32 md:h-40 lg:h-44',
-                    'price' => '$20/mo',
-                    'specialText' => "Billed annually at $240/yr.",
-                    'cta' => 'GET EVERYTHING',
-                    'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
-                    'bonuses' => [
-                        '<strong>30-Day Jazz</strong>',
-                        '<strong>Singeo Annual Membership</strong>',
-                        '<strong>FREE</strong> Drumeo StickBag',
-                        '<strong>FREE</strong> 30-Day Chops',
-                        '<strong>FREE</strong> 30-Day Independence',
-                    ],
-                ])
-            </div>
-
-            <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true">
-                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Singeo<br class="hidden sm:inline"> and get 30-Day Jazz with no physical bonuses.</em></u></p></a>
-        </div>
-    </section>
-    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
-        <p class="max-w-3xl px-4 md:px-2 leading-loose">
-            <i class="fas fa-info-circle text-singeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
-        </p>
-    </section>
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Do I need to attend the lessons live?",
-                "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are optional. Plus, you’ll be sent a recording so you can watch anytime.",
-                ])
-
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "What if I’m going to miss a day (or two, or more)?",
-                "desc" => "That’s totally fine. The course is meant to be flexible – there are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session to catch up.",
-                ])
-
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "How much time per week will this course require?",
-                "desc" => "30-Day Jazz gives you guided daily jazz workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.",
-                ])
-
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Does it work on acoustic AND electronic drums?",
-                "desc" => "Yes. 30-Day Jazz is built for the beginner-to-advanced drummer looking to become more versatile on the drums. You can complete all of Ulysses’ exercises on either acoustic or electronic and see the full effects on your playing.",
-                ])
-
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "What devices can I access the course on?",
-                "desc" => "30-Day Jazz is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase online.",
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-            </div>
-        </div>
-    </section>
-@endif
 
 @component('_partials.components.modal', ['name' => 'waitlistModal'])
     @slot('content')

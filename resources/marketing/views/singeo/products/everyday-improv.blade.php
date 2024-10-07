@@ -17,6 +17,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-page-singeo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <style>
         .timeline-container::after {
             top: 30px;
