@@ -62,11 +62,11 @@ export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl,
     experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
     genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
     topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
-    goals: getSavedGoals(selectedGoals.length ? selectedGoals : [selectedGoals]),
+    goals: getSavedMultiSelect({ options: selectedGoals, plural: 'goals', singular: 'goals', configOptions }),
   })
 };
 
-export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
+export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, selectedGoals, brand, steps }) => {
   const newSteps = steps.map((step, index) => {
     if (index > 1) {
       return { ...step, checked: false };
@@ -85,18 +85,10 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
       return selectedExperience.brand === brand;
     }
   };
-  const hasGoals = () => {
-    if (!selectedExperience) {
-      return false;
-    }
-    if (selectedExperience.length) {
-      return !!selectedExperience.find(exp => exp.brand === brand);
-    } else {
-      return selectedExperience.brand === brand;
-    }
-  };
+
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
+  const hasGoals = !!selectedGoals.find(goal => goal.brand === brand);
 
   if (hasGear) {
     newSteps[0].checked = true;
@@ -125,7 +117,7 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
       newSteps[index].checked = true;
     }
   }
-  if (hasGoals()) {
+  if (hasGoals) {
     const index = newSteps.findIndex(item => item.key === 'goals');
     if (index !== -1) {
       newSteps[index].checked = true;
