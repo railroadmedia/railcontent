@@ -339,7 +339,7 @@ class ContentService
     private function paginateRecommendations($recommendations, $pageSize, $page)
     {
         $offset = ($page  - 1) * $pageSize;
-        $recommendations = array_slice($recommendations, $offset, $pageSize);
+        $recommendations = $recommendations->slice($offset, $pageSize);
         return $recommendations;
     }
 
