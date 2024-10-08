@@ -257,8 +257,6 @@ class ShopifyAPIService
 
         $responseCartData = $jsonResponse["data"]["cartCreate"]["cart"] ?? [];
 
-        dd($jsonResponse);
-
         if ($responseCode !== 200 || empty($responseCartData)) {
             throw new Exception(
                 "Shopify API call (cartCreate) error: " .
