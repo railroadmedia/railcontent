@@ -1,7 +1,8 @@
 import { computed, ref } from "vue";
 import axios from "axios";
+import userJourney from "@services/userJourney";
 
-export default function useCarouselEvents (originalData, slicedData, page, cardNum){
+export default function useCarouselEvents (originalData, slicedData, page, cardNum, trackingSection = null, brand = 'drumeo') {
     const original = ref(originalData || []);
 
     const showPagination = computed(() => {
@@ -25,6 +26,19 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
             if(slicedData.value.length === 0){
                 page.value -= 1;
                 slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
+            }
+            if (slicedData.value.length > 0 && trackingSection && trackingSection === 'recommended') {
+                const trackingPayload = {
+                    brand,
+                    //hardcoded, right now this will only run in home page
+                    navigation_section: 'home',
+                    recommended_content: slicedData.value.map((content, index) => ({
+                        id: content.id,
+                        position: index,
+                    })),
+                }
+    
+                userJourney.trackRecommendedContentServed(trackingPayload);
             }
         }
     }

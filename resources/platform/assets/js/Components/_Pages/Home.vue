@@ -143,7 +143,6 @@
     import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
     import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
@@ -241,11 +240,4 @@
             openPlaylistModal();
         }
     });
-
-    const recommendationLinks = {
-        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-    }
 </script>
