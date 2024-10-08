@@ -14,7 +14,9 @@
                 class="tw-mb-2 tw-px-4 lg:tw-px-0" 
                 :class="isSelected(category, item.value) ? 'tw-font-bold' : ''" 
             >
-                <button class="tw-flex tw-justify-between lg:tw-justify-start tw-items-center tw-w-full" @click="$emit('clickColumnItem', `${category},${item.value}`)">
+                <button class="tw-flex tw-justify-between lg:tw-justify-start tw-items-center tw-w-full" 
+                    @click="$emit('clickColumnItem', `${category},${item.key}`)"
+                >
                     <span class="lg:tw-order-1 tw-text-left">{{ item.key }} ({{ item.value }})</span>
                     <input class="tw-border-[2px] dark:tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00] tw-cursor-pointer lg:tw-mr-[14px]" type="checkbox" :checked="isSelected(category, item.value)" />
                 </button>
@@ -54,7 +56,7 @@ const isSelected = (category, value) => {
 }
 
 onBeforeMount( ()=> {
-    console.log('props.column', props.column)
+    //console.log('props.column', props.column)
 })
 </script>
 

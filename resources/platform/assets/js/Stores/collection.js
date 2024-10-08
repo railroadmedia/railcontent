@@ -41,6 +41,7 @@ export const useCollectionStore = defineStore({
     },
     actions: {
         applyFilter(param) {
+            console.log('applyFilter(param)', param)
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -190,7 +191,6 @@ export const useCollectionStore = defineStore({
 
             return '';
         },
-
         getIncludedFields(){
             if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
                 return [...this.tabData[this.filter.activeTab].key]
@@ -272,6 +272,7 @@ export const useCollectionStore = defineStore({
 
         async setData(response, replace) {
             const userStore = useUserStore();
+            //console.log('this.getIncludedFields()', this.getIncludedFields())
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
@@ -289,7 +290,6 @@ export const useCollectionStore = defineStore({
                             this.filter.searchTerm,
                         );
                         if (result) {
-                            console.log('fitlerOptions', result.meta.filterOptions);
                             this.filterColumns = getFilterValues(result.meta.filterOptions);
                         } else {
                             throw new Error('Failed to fetch Filter Options');
