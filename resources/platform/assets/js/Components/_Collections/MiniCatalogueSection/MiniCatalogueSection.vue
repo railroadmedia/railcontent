@@ -146,5 +146,5 @@ onUnmounted(() => {
     window.removeEventListener('resize', watchResize);
 })
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage } = useCarouselEvents(props.preLoadedContent, data, page, cardNum, props.trackingSection, userStore.brand);
 </script>

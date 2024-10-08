@@ -197,6 +197,7 @@ export const useCollectionStore = defineStore({
                         this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
                     }
                 }
+                this.trackRecommendedServed(response.data.data);
             }
 
             if (this.filter.searchTerm) {
@@ -241,9 +242,9 @@ export const useCollectionStore = defineStore({
                 let tabParams = params.getAll('tabs[]');
 
                 //Set active tab from URL
-                if(tabParams && tabParams.length > 0){
+                if (tabParams && tabParams.length > 0) {
                     const activeTab = defaults.tabOptions.find((tab) => {
-                        if(Array.isArray(tab.key)){
+                        if (Array.isArray(tab.key)) {
                             return JSON.stringify(tab.key) === JSON.stringify(tabParams);
                         } else {
                             return tab.key === tabParams[0];
@@ -281,7 +282,7 @@ export const useCollectionStore = defineStore({
                 url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
             }
 
-            if(this.filter.progress){
+            if (this.filter.progress) {
                 url.searchParams.set('included_user_states[]', this.filter.progress);
             }
 
@@ -331,6 +332,23 @@ export const useCollectionStore = defineStore({
             }
 
             this.setURLParams()
+        },
+
+        trackRecommendedServed(responseData) {
+            const isRecommended = this.filter?.params?.included_types[0] === 'Recommendation';
+            if (isRecommended) {
+                const userStore = useUserStore();
+                const payload = {
+                    navigation_section: 'recommended',
+                    brand: userStore.brand,
+                    recommended_content: responseData.map((content, index) => ({
+                        id: content.id,
+                        position: this.data.length !== responseData.length ? (this.data.length - responseData.length) + index : index
+                    })),
+                };
+
+                userJourney.trackRecommendedContentServed(payload);
+            }
         },
 
         trackSort() {
