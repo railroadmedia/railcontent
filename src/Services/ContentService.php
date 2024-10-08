@@ -246,7 +246,7 @@ class ContentService
                 $processedRecommendations = zipperMerge($toZipper);
                 $numGroups += 1;
                 $totalCount += count($processedRecommendations);
-                $processedRecommendations = $this->contentRepository->getByIds($processedRecommendations);
+                $processedRecommendations = $this->getByIds($processedRecommendations);
                 $processedRecommendations = $this->paginateRecommendations($processedRecommendations, $pageSize, $page);
                 $servedIds = Arr::pluck($processedRecommendations, 'id');
                 $processedRecommendations = Decorator::decorate($processedRecommendations, 'group');
@@ -277,7 +277,7 @@ class ContentService
         } else {
             $processedRecommendations = zipperMerge($recommendations);
             $totalCount = count($processedRecommendations);
-            $processedRecommendations = $this->contentRepository->getByIds($processedRecommendations);
+            $processedRecommendations = $this->getByIds($processedRecommendations);
             $processedRecommendations = $this->paginateRecommendations($processedRecommendations, $pageSize, $page);
             return [
                 'recommendations' => $processedRecommendations,
