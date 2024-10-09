@@ -4,7 +4,7 @@
             <div class="w-full sm:w-7/12 text-center lg:text-left">
                 <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/logo.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo">
 
                 <h2 class=" overflow-hidden">
@@ -19,7 +19,7 @@
                 <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video
                     @if(!empty($platformVersion) && empty($cohort['cohort_trailer'])) hidden @endif
                     "
-                    style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp');"
+                    style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/header.webp');"
                     {{--                        @if(empty($platformVersion))--}}
                     {{--                            x-on:click="trailerM = true;"--}}
                     {{--                        @else--}}
@@ -59,7 +59,7 @@
                     <div class="w-full sm:w-1/2 lg:pb-5">
                         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                             loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/reviews.webp"
                             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
                         <p class="inline-block leading-tight text-sm align-middle">Join
                             {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
@@ -68,7 +68,7 @@
             </div>
             <div class="w-full sm:w-5/12 hidden sm:inline-block">
                 <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                    style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp');"
+                    style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/header.webp');"
                     x-on:click="trailer = true;"
                 >
                     <div class="join white smaller absolute  bottom-1  bottom-2 left-1
@@ -141,19 +141,19 @@
             $gettings = [
                 [
                     'position' => 'left',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/know-exactly.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/know-exactly.webp',
                     'title' => 'Do you struggle to find the right notes? ',
                     'desc' => 'You’re not alone! Everyday Improv helps you identify notes, rhythms, and melodies that will work over any song. Plus, you’ll start to feel comfortable making decisions in the moment… no need to fear singing the “wrong” note!',
                 ],
                 [
                     'position' => 'right',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/schedule.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/learn.webp',
                     'title' => 'Learn vocal improv in 10 minutes a day. ',
                     'desc' => 'Everyday Improv is the easiest way to improve your singing. No homework, confusing music theory, or hours of practice needed. Just follow every lesson in real-time for 10 minutes a day. The incredible Emma Nissen is your guide.',
                 ],
                 [
                     'position' => 'left',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/q-a.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/develop2.webp',
                     'title' => 'Develop your improv ability in just 30 days. ',
                     'desc' => 'First, you’ll build a strong foundation for improvisation. Next, you’ll learn the four basics of improv, explore how to use your voice as an instrument, and have fun with runs. By the end of the month, you’ll be able to sing over any song – even if you don’t know it yet.',
                 ]
@@ -200,7 +200,7 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
             <img class="h-24 sm:h-28 lg:h-36 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/logo.webp"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                 alt="30-Day Double Bass With Ulysses Logo">
             <h4 class="leading-loose text-left">
                 <i class="fas fa-check text-singeo mr-5"></i> Daily guided drum workouts<br>
@@ -216,7 +216,7 @@
         @endif
         <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/reviews.webp"
             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
         <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
             {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
@@ -227,28 +227,28 @@
         <h2 class="mb-6 sm:mb-10 lg:mb-14"><img
                 class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/singeo/products/everyday-improv/logo.webp"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                 alt="30-Day Double Bass With Ulysses Logo"> <strong> is designed for:</strong></h2>
 
         @php
             $drummers = [
                 [
                     'image' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/beginner.webp',
+                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/beginner.webp',
                     'title' => 'Beginner Singers.',
                     'description' =>
                         'This course might be challenging, but Everyday Improv will help you find your range so you can start to improvise within it. Plus, finding the right note will begin to feel like second nature.',
                 ],
                 [
                     'image' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/singeo/products/everyday-improv/intermediate.webp',
+                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/singeo/products/everyday-improv/enrollment/intermediate.webp',
                     'title' => 'Intermediate Singers.',
                     'description' =>
                         'Does singing without a guide sound scary? Everyday Improv can help. You’ll learn how to turn mistakes into music, master scat improv, and sing along with any song.',
                 ],
                 [
                     'image' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/advanced.webp',
+                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/advanced.webp',
                     'title' => 'Advanced Singers',
                     'description' =>
                         'Already a great singer but want to get better at improvisation? In 10 minutes a day, you’ll unlock the confidence to come up with melodies and rhythms on the spot.',
@@ -279,9 +279,9 @@
             <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                 <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/coach-image.webp">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/coach-image.webp">
                 <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/coach-image.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/coach-image.webp"
                     loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                     style="width: 130%;transform: translate(-44%, -7%);"
