@@ -53,7 +53,12 @@
             </section>
 
             <!-- Challenge Carousel -->
-            <ChallengeCarousel />
+            <MiniCatalogueSection
+                title="Challenges"
+                :see-all-url="`/${brand}/challenges`"
+                seeAllAriaLabel="See All Challenges"
+                catalogue-type="challenge"
+            />
 
             <!-- Completed Lessons -->
             <MiniCatalogueSection
