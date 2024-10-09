@@ -26,17 +26,6 @@
                 font-size:20px
             }
         }
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:10px;
-        }
-        @media (min-width: 40em) {
-            .thank-you-box.active {
-                padding: 12px;
-            }
-    }
     </style>
 @endsection
 

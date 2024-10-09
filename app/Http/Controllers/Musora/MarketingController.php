@@ -190,4 +190,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function youtube()
+    {
+        return view('musora.pages.youtube', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
 }
