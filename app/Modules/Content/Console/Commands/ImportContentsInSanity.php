@@ -690,7 +690,6 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             if (!empty($contentURLs)) {
                 $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
             }
-            //dd($songs[$id]);
         }
         if ($result->sort != 0) {
             $sanityDocuments['sort'] = $result->sort;
@@ -909,12 +908,16 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $imported                       = true;
             }
 
-            if (array_key_exists($field['key'], $extraModels) || ($field['key'] == 'essentials')) {
+            if (array_key_exists($field['key'], $extraModels)) {
                 $contentExtraData[$field['key']][] = $field['value'];
                 $imported                          = true;
             }
             if (($field['key'] == 'essentials')) {
                 $contentExtraData['essential'][] = $field['value'];
+                $imported                        = true;
+            }
+            if (($field['key'] == 'style')) {
+                $contentExtraData['genre'][] = $field['value'];
                 $imported                        = true;
             }
             if ($field['key'] == 'gear') {

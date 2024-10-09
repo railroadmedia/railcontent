@@ -76,8 +76,8 @@ function goBack() {
 }
 
 const stepHeaderProps = {
-  title: "What experience level best describes you?",
-  subtitle: "Now it’s time to choose your experience level. You can update your experience level in your profile at any time.",
+  title: "What skill level best describes you?",
+  hideCloseButton: true,
 };
 </script>
 

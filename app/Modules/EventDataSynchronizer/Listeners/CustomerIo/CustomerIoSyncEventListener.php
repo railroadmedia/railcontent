@@ -48,6 +48,7 @@ use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
 use App\Modules\Referral\Events\EmailInvite;
 use App\Modules\Referral\Events\ReferralClaimed;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 use Throwable;
 
 class CustomerIoSyncEventListener
@@ -110,27 +111,36 @@ class CustomerIoSyncEventListener
     /**
      * @param UserUpdated $userUpdated
      */
-    public function handleUserUpdated(UserUpdated $userUpdated)
+    public function handleUserUpdated(UsoraUserUpdated|UserUpdated $userUpdated)
     {
         if (self::$disable) {
             return;
         }
 
         try {
-            $user = $this->userService->getByIdOrNull($userUpdated->getNewUser()->id);
+            if ($userUpdated instanceof UsoraUserUpdated) {
+                $newEmail = $userUpdated->getNewUser()->getEmail();
+                $oldEmail = $userUpdated->getOldUser()->getEmail();
+                // UsoraUserUpdated's User models are Railroad\Usora\Entities type, so get the
+                // Modules\UserManagementSystem\Models version, so we can interact with it the same way
+                $user = User::find($userUpdated->getNewUser()->getId());
+            } else {
+                $newEmail = $userUpdated->getNewUser()->email;
+                $oldEmail = $userUpdated->getOldUser()->email;
+                $user = $userUpdated->getNewUser();
+            }
 
-            if (!empty($user) && !in_array(
-                $userUpdated->getNewUser()->id,
-                self::$alreadyQueuedUserIds
-            )) {
-                if ($userUpdated->getNewUser()->email != $userUpdated->getOldUser()->email) {
+
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
+                if ($newEmail !== $oldEmail) {
                     /**
                      * NOTE: As page views are tracked in Customer.io, this event needs to be handled synchronously to avoid conflicts
                      * in Customer.io profiles. That's why it doesn't dispatch an event
                      */
+                    Log::info('handling email updated: ' . $user->id);
                     $this->customerIoService->handleUserEmailChanged(
-                        oldEmail: $userUpdated->getOldUser()->email,
-                        newEmail: $userUpdated->getNewUser()->email
+                        oldEmail: $oldEmail,
+                        newEmail: $newEmail
                     );
                 }
                 dispatch(

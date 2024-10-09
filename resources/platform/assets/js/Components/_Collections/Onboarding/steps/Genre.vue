@@ -77,8 +77,7 @@ const isNextButtonDisabled = () => {
 };
 
 const headerProps = {
-  title: "Great. What kind of songs are you into these days?",
-  subtitle: "You can select more than one genre and change your settings in your profile at any time.",
+  title: "Great. What kinds of songs are you into these days?",
 };
 </script>
 

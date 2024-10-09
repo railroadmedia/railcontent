@@ -35,6 +35,7 @@ abstract class LessonTemplate extends BaseSanityModel
         public bool $withResources = false,
         public bool $withLiveEvent = false,
         public ?string $parentType = null,
+        public bool $isChallengeChild = false,
         public bool $withAssignments = true,
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
@@ -160,6 +161,12 @@ new Field(FieldType::Number, 'width')]
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+        }
+        if ($this->isChallengeChild) {
+            $fields = array_merge($fields, [
+                new Field(FieldType::Boolean, 'is_always_unlocked_for_challenge', 'Is Always Unlocked', group: $detailsGroup),
+                new Field(FieldType::Boolean, 'is_bonus_content_for_challenge', 'Is Bonus Content', group: $detailsGroup),
+            ]);
         }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);

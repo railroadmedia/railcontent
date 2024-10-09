@@ -31,11 +31,11 @@
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/header.webp');"
-                        @if(empty($platformVersion))
-                            x-on:click="trailerM = true;"
-                        @else
+{{--                        @if(empty($platformVersion))--}}
+{{--                            x-on:click="trailerM = true;"--}}
+{{--                        @else--}}
                             x-on:click="trailer = true;"
-                        @endif
+{{--                        @endif--}}
                     >
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -731,15 +731,15 @@
     @endcomponent
 
     @if(empty($platformVersion))
-        @include('_partials.components.video-modal', [
-            'name' => 'trailerM',
-            'video' => '999638868',
-            'vimeo' => true,
-            'styles' => 'pb-[177%] bg-white',
-        ])
+{{--        @include('_partials.components.video-modal', [--}}
+{{--            'name' => 'trailerM',--}}
+{{--            'video' => '999638868',--}}
+{{--            'vimeo' => true,--}}
+{{--            'styles' => 'pb-[177%] bg-white',--}}
+{{--        ])--}}
         @include('_partials.components.video-modal', [
             'name' => 'trailer',
-            'video' => '995963955',
+            'video' => '1010405112',
             'vimeo' => true,
         ])
     @else

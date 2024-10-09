@@ -67,13 +67,16 @@
             transform: translate(-50%, 0);
             z-index: 0;
             left: 0;
+            display: none;
         }
+
         @media (min-width: 768px) {
             .timeline-container::after {
                 bottom: 0;
+                display: inline-block;
             }
-
         }
+
         .timeline-container .timeline::after {
             content: '';
             position: absolute;
@@ -85,16 +88,24 @@
             border-radius: 50%;
             z-index: 1;
             left: -16px;
+            display: none;
         }
+
         @media (min-width: 768px) {
             .timeline-container .timeline::after {
                 left: 50%;
+                display: inline-block;
             }
         }
+
         @media (min-width: 768px) {
             .timeline-container::after, .timeline::after {
                 left: 50%;
             }
+        }
+        .join.smaller.strumming {
+            font-size: 18px;
+            padding: 12px 16px;
         }
     </style>
 @stop
@@ -113,7 +124,9 @@
 
 @section('global-body')
     @include('guitareo.sales.partials._nav', [
-        'cartVersion' => true,
+        "subscriptionVersion" => true,
+        "trialVersion" => true,
+        "joinUrl" => '/choose-plan-strumming',
     ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
@@ -122,35 +135,39 @@
                 <img alt="30 Days To Better Strumming Logo" class="h-14 sm:h-20"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"><br>
                 <h1 class="leading-tight my-6"><strong>Strum with confidence</strong><br> in just 30 days.</h1>
-                <h6 class="leading-tight italic">Add essential rhythm techniques and strumming patterns to <br class="hidden sm:inline">
-                    your playing <strong>by simply practicing for 10 minutes a day.</strong></h6>
+                <h6 class="leading-tight italic">
+                    Add essential rhythm techniques and <br class="inline sm:hidden"> strumming patterns to <br class="hidden sm:inline">
+                    your playing <strong>by simply practicing for 10 minutes a day.</strong>
+                </h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
+                    <div class="w-full max-w-[300px] sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
                         &nbsp;Watch Trailer
                     </div>
-                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
+                    <div class="w-full max-w-[300px] sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
-                         &nbsp;Watch Trailer
+                        &nbsp;Watch Trailer
                     </div>
-{{--                    <a class="w-5/12 join smaller text-white  m-2 anchor-slide" href="#final">ENROLL NOW</a>--}}
-                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>
+                    <a class="w-full max-w-[300px] sm:w-5/12 join smaller text-white my-2 sm:m-2" href="/choose-plan-strumming">START FOR FREE</a>
+                    {{-- <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a> --}}
                 </div>
-{{--                <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>--}}
-{{--                    <strong x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                    </strong>--}}
-{{--                </p>--}}
+                {{--
+                <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
+                    <strong x-cloak x-data="timer()" x-init="countdown()">
+                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                    </strong>
+                </p>
+                --}}
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.65)"></div>
         <video class="object-cover w-full relative z-0 h-[500px] sm:h-[700px]" type="video/mp4" autoplay loop playsinline muted
-            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4"
-        ></video>
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4">
+        </video>
     </header>
 
     <section class="bg-black text-white py-4 sm:py-7 sm:px-6 text-center">
@@ -284,16 +301,72 @@
                 @endforeach
             </div>
         </div>
-        <h1 class="leading-none sm:-mt-8  sm:mb-8 text-5xl"><i class="fal fa-angle-down text-guitareo"></i></h1>
-{{--        <div class="flex justify-center py-4">--}}
-{{--            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 anchor-slide" href="#final">ENROLL NOW</a>--}}
-{{--        </div>--}}
-{{--        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
-{{--            loading="lazy" onload="this.classList.remove('opacity-0')"--}}
-{{--            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
-{{--            alt="Image of joined student profiles">--}}
-{{--        <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
-{{--            {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
+        <h1 class="leading-none sm:-mt-8 sm:mb-8 text-5xl hidden md:block"><i class="fal fa-angle-down text-guitareo"></i></h1>
+    </section>
+
+    <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: linear-gradient(to bottom, #EFF3F5, #EFF3F500);">
+        <div id="final" class="anchor"></div>
+        <div class="max-w-3xl mx-auto">
+            <h2 class="leading-tight"><strong>Try It For Free or Buy It Now</strong></h2>
+            <h6 class="mt-2 md:mt-4 mb-5">Join the community and get the course for free or buy just the course separately</h6>
+        </div>
+        <div class="max-w-xs sm:max-w-3xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-4 md:space-y-0 md:space-x-4">
+                @php
+                    $cards = [
+                        [
+                            'header' => 'Get this course',
+                            'subheader' => '& more with a membership',
+                            'price' => '7 Day Free Trial',
+                            'button_text' => 'TRY IT FOR FREE NOW',
+                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-black uppercase stramming',
+                            'border_class' => 'border-black',
+                            'link' => '/choose-plan-strumming',
+                            'description' => [
+                                '<strong>Unlimited access to all features and lessons<br> across guitar, piano, drums & singing.</strong>',
+                                '<strong>Note-for-note breakdowns of 300+ popular<br> songs.</strong>',
+                                'Join a community of 90,000+ other students.',
+                                '90-day money back guarantee.',
+                                'Cancel anytime.'
+                            ]
+                        ],
+                        [
+                            'header' => 'Just the course',
+                            'price' => '$97',
+                            'button_text' => 'buy now',
+                            'button_class' => 'join smaller w-11/12 sm:max-w-[300px] transition-opacity duration-300 hover:opacity-80 bg-guitareo uppercase stramming',
+                            'border_class' => 'border-guitareo',
+                            'link' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
+                            'description' => [
+                                '90-day money-back guarantee.',
+                                '20 guided play-along lessons.',
+                                'Lifetime access.'
+                            ]
+                        ]
+                    ];
+                @endphp
+
+                @foreach($cards as $index => $card)
+                    <div class="w-full sm:w-1/2 px-1 relative">
+                        <div class="bg-white text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 p-4 md:py-6 px-4 {{ $card['border_class'] }}">
+                            <h3 class="leading-tight" id="final2"><strong>{{ $card['header'] }}</strong></h3>
+                            @if(!empty($card['subheader']))
+                                <p class="-mb-3"><strong>{{ $card['subheader'] }}</strong></p>
+                            @endif
+                            @if(!empty($card['price']))
+                                <h3 class="py-4 lg:py-6"><strong>{{ $card['price'] }}</strong></h3>
+                            @endif
+                            <a href="{{ $card['link'] }}" class="{{ $card['button_class'] }}">{{ $card['button_text'] }}</a>
+                            <div class="text-left mt-4 md:mt-6 inline-block mx-auto">
+                                @foreach($card['description'] as $desc)
+                                    <p class="text-sm leading-tight mb-3">{!! $desc !!}</p>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: #111729">
@@ -309,7 +382,7 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
                     alt="Thumbnail for tutorial video"/>
             </div>
-            @php
+           @php
                 $weeks = [
                     [
                         'img' =>
@@ -382,11 +455,11 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
     </section>
+
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #F1F7FE">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-2xl lg:max-w-4xl mx-auto">
 
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-around mt-5 sm:mt-10">
                 <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0" loading="lazy"
@@ -394,18 +467,18 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png"
                     alt="30-Day Independence Logo">
                 <h4 class="leading-loose text-left">
-                    <i class="fas fa-check text-guitareo mr-5"></i> 20 guided play-along lessons<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> Lifetime access to the course<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> 90-Day Money Back Guarantee
+                    <i class="fas fa-check-circle text-guitareo mr-1 md:mr-3"></i> 20 guided play-along lessons<br>
+                    <i class="fas fa-check-circle text-guitareo mr-1 md:mr-3"></i> Lifetime access to the course<br>
+                    <i class="fas fa-check-circle text-guitareo mr-1 md:mr-3"></i> 90-Day Money Back Guarantee
                 </h4>
             </div>
-{{--            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>--}}
-{{--            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
-{{--                loading="lazy" onload="this.classList.remove('opacity-0')"--}}
-{{--                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
-{{--                alt="Image of joined student profiles">--}}
-{{--            <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
-{{--                {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
+           <a href="/choose-plan-strumming" class="join smaller w-full max-w-[300px] mt-6 sm:mt-12 mb-3 sm:mb-5 strumming">START FOR FREE</a><br>
+            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                alt="Image of joined student profiles">
+            <p class="inline-block leading-tight text-sm align-middle text-left">Join
+                {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
         </div>
     </section>
 
@@ -437,15 +510,15 @@
                     <p>His teaching philosophy is about bringing out the best in his students and fostering a love of music. He strives to make sure that music lessons are fun. He enjoys sharing music with his students and celebrating their achievements.</p>
                 </div>
             </div>
-{{--            <div class="text-center">--}}
-{{--                <a href="#final" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>--}}
-{{--                <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
-{{--                    loading="lazy" onload="this.classList.remove('opacity-0')"--}}
-{{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
-{{--                    alt="Image of joined student profiles">--}}
-{{--                <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
-{{--                    {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
-{{--            </div>--}}
+            <div class="text-center">
+                <a href="/choose-plan-strumming" class="join smaller w-full max-w-[300px] mb-3 sm:mb-5 strumming">START FOR FREE</a><br>
+                <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                    alt="Image of joined student profiles">
+                <p class="inline-block leading-tight text-sm align-middle text-left">Join
+                    {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
+            </div>
         </div>
     </section>
 
@@ -467,7 +540,6 @@
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
 
-    <div id="final" class="anchor"></div>
     <section class="text-center text-white relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
         style="background-color:#111729;">
         <div class="container mx-auto relative z-50 text-center">
@@ -490,7 +562,7 @@
 {{--                </span>--}}
 {{--            </h6>--}}
 
-            <span class="join sold-out medium  align-middle mt-7">ENROLLMENT CLOSED</span>
+            <a class="join smaller w-full max-w-[300px] align-middle mt-7 strumming" href="/choose-plan-strumming">START FOR FREE</a>
         </div>
     </section>
 
@@ -521,85 +593,94 @@
             </div>
         </div>
     </section>
+
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-4xl">
             <h2 class="mb-4 sm:mb-6"><strong>Still Have Questions?</strong></h2>
             <div class="px-4">
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What Level of Playing Is Required For This Course?',
-                    'desc' => 'This course is suitable for beginners and intermediate players. Basic knowledge of guitar chords and some experience with strumming will be helpful. If you’ve never played guitar before, we’d suggest checking out our Acoustic Guitarists Start Here course first!',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What Equipment Do I Need For This Course?',
-                    'desc' => 'You’ll need an acoustic or electric guitar, a pick, and internet access for the lessons.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Do I Have to Use a Pick?',
-                    'desc' => 'We’d encourage you to use a guitar pick, but you are welcome to use your fingers instead. We will not be covering fingerstyle patterns in this course. It’s all based on strumming motions',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Is This Just For Acoustic Players?',
-                    'desc' => 'The instructor will be playing an acoustic the whole time, but you can take this course on either acoustic or electric with no issues.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What Strum Patterns Are Covered In This Course?',
-                    'desc' => 'We’ll first cover strumming eighth notes comfortably. Then, we will go over six strum patterns, all based on eighth notes. You’ll learn how to add some variations to make the strum patterns more exciting and how to fit them into a song. ',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What Type of Song Will Be Covered In This Course?',
-                    'desc' => 'We will work on one song throughout the course, but the concepts apply to most pop, rock, country, and folk songs. ',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Do I Need To Read Music?',
-                    'desc' => 'No, there are no requirements to learn tablature, chord charts, or sheet music.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What Chords Do I Need To Know?',
-                    'desc' => 'The main parts of the song use E, G, A, and Asus2. The bridge uses a variation of C and D that are not complicated to play. We cover these chord shapes in the prerequisite videos.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'How Much Practice Time Is Required?',
-                    'desc' => 'The 10-minute videos will be your practice session. You can always keep practicing after the 10 minutes, but going through the videos will cover your practice commitments. ',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Can I Slow The Track Down?',
-                    'desc' => 'Yes, you can use our Practice feature to loop or slow down sections after the 10-minute lesson if you want to practice even more. ',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'How can I track my progress throughout the course?',
-                    'desc' => 'Our main course page will show which lessons have been started and completed so you can find the current lesson right away.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What if I fall behind in the lessons?',
-                    'desc' => 'Don\'t worry! You can access the lessons at your own pace. It\'s important to practice regularly, but you can always revisit lessons if you happen to miss one. The lessons are around 10 minutes long, so you can catch back up in no time',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'Will there be opportunities for questions?',
-                    'desc' => 'We do have a comments area underneath each lesson where you can ask any questions you may have or you can email the instructor directly.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'How do I access the course materials?',
-                    'desc' => 'Course materials will be accessible through our online platform. You\'ll receive login details upon registration.',
-                ])
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    'title' => 'What should I do if I encounter difficulties with a particular lesson?',
-                    'desc' => 'Contact the instructor or support team for assistance. They can provide additional guidance and support throughout this course.',
-                ])
+                @php
+                    $questions = [
+                        [
+                            'num' => '?',
+                            'title' => 'What Level of Playing Is Required For This Course?',
+                            'desc' => 'This course is suitable for beginners and intermediate players. Basic knowledge of guitar chords and some experience with strumming will be helpful. If you’ve never played guitar before, we’d suggest checking out our Acoustic Guitarists Start Here course first!',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What Equipment Do I Need For This Course?',
+                            'desc' => 'You’ll need an acoustic or electric guitar, a pick, and internet access for the lessons.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'Do I Have to Use a Pick?',
+                            'desc' => 'We’d encourage you to use a guitar pick, but you are welcome to use your fingers instead. We will not be covering fingerstyle patterns in this course. It’s all based on strumming motions',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'Is This Just For Acoustic Players?',
+                            'desc' => 'The instructor will be playing an acoustic the whole time, but you can take this course on either acoustic or electric with no issues.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What Strum Patterns Are Covered In This Course?',
+                            'desc' => 'We’ll first cover strumming eighth notes comfortably. Then, we will go over six strum patterns, all based on eighth notes. You’ll learn how to add some variations to make the strum patterns more exciting and how to fit them into a song.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What Type of Song Will Be Covered In This Course?',
+                            'desc' => 'We will work on one song throughout the course, but the concepts apply to most pop, rock, country, and folk songs.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'Do I Need To Read Music?',
+                            'desc' => 'No, there are no requirements to learn tablature, chord charts, or sheet music.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What Chords Do I Need To Know?',
+                            'desc' => 'The main parts of the song use E, G, A, and Asus2. The bridge uses a variation of C and D that are not complicated to play. We cover these chord shapes in the prerequisite videos.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'How Much Practice Time Is Required?',
+                            'desc' => 'The 10-minute videos will be your practice session. You can always keep practicing after the 10 minutes, but going through the videos will cover your practice commitments.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'Can I Slow The Track Down?',
+                            'desc' => 'Yes, you can use our Practice feature to loop or slow down sections after the 10-minute lesson if you want to practice even more.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'How can I track my progress throughout the course?',
+                            'desc' => 'Our main course page will show which lessons have been started and completed so you can find the current lesson right away.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What if I fall behind in the lessons?',
+                            'desc' => 'Don\'t worry! You can access the lessons at your own pace. It\'s important to practice regularly, but you can always revisit lessons if you happen to miss one. The lessons are around 10 minutes long, so you can catch back up in no time',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'Will there be opportunities for questions?',
+                            'desc' => 'We do have a comments area underneath each lesson where you can ask any questions you may have or you can email the instructor directly.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'How do I access the course materials?',
+                            'desc' => 'Course materials will be accessible through our online platform. You\'ll receive login details upon registration.',
+                        ],
+                        [
+                            'num' => '?',
+                            'title' => 'What should I do if I encounter difficulties with a particular lesson?',
+                            'desc' => 'Contact the instructor or support team for assistance. They can provide additional guidance and support throughout this course.',
+                        ],
+                    ];
+                @endphp
+
+                @foreach($questions as $question)
+                    @include('_partials.components.question-dropdown', $question)
+                @endforeach
             </div>
         </div>
     </section>

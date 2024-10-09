@@ -12,12 +12,16 @@ use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ContentMetadataController extends Controller
 {
-    public function __construct(private ProductProviderInterface $productProvider)
+    public function __construct(
+        private ProductProviderInterface $productProvider,
+        private UserPermissionsService $userPermissionsService)
     {
     }
 
@@ -86,18 +90,18 @@ class ContentMetadataController extends Controller
 
         $results =
             $user->progress()
-            ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
-            ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
-            ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
-            ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
-            ->when(
-                !is_null($page),
-                // when we're using pagination, we need to apply the limit to the page
-                fn ($query) => $query->forPage($page, $limit),
-                // otherwise, apply the limit to the whole query (if it's there)
-                fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
-            )
-            ->pluck('content_id');
+                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
+                ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
+                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+                ->when(
+                    !is_null($page),
+                    // when we're using pagination, we need to apply the limit to the page
+                    fn ($query) => $query->forPage($page, $limit),
+                    // otherwise, apply the limit to the whole query (if it's there)
+                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+                )
+                ->pluck('content_id');
 
         return response()->json([$progressState->value => $results]);
     }
@@ -117,17 +121,12 @@ class ContentMetadataController extends Controller
     }
 
     /**
-     * @param $vimeoId
-     * @return array
+     * @return JsonResponse
      */
-    public function getVimeoData($vimeoId)
+    public function getUserPermissions() : JsonResponse
     {
-        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
-        $response = [
-            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
-            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
-            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
-        ];
-        return $response;
+        $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
+        $permissions = Arr::pluck($permissions, 'permission_id');
+        return response()->json($permissions);
     }
 }
