@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useClient, useFormValue } from 'sanity';
 import { Stack, TextInput, Spinner, Box } from '@sanity/ui';
 
-const calculateXP = async ({ type, difficulty, childrenRefs = [], assignment = [] }, sanityClient, parentDocId) => {
+const calculateXP = async ({ xp, type, difficulty, childrenRefs = [], assignment = [] }, sanityClient, parentDocId) => {
     const specialXP = [
         { type: 'pack', value: 5000 },
         { type: 'pack-bundle', value: 500 },
@@ -31,7 +31,7 @@ const calculateXP = async ({ type, difficulty, childrenRefs = [], assignment = [
     const defaultXPperType = specialXP.find(element => element.type === type);
     const difficultyDefaultXP = difficultyXP.find(element => element.id === String(difficulty));
 
-    let baseXp = (defaultXPperType?.value ?? difficultyDefaultXP?.value) || 0;
+    let baseXp = (xp !== undefined)? xp : ((defaultXPperType?.value ?? difficultyDefaultXP?.value) || 0);
 
     try {
         // Fetch the child documents based on references
@@ -39,16 +39,13 @@ const calculateXP = async ({ type, difficulty, childrenRefs = [], assignment = [
             ids: childrenRefs
         });
 
-        console.log('Child Documents:', childrenRefs, childDocuments);
-
         // Calculate XP for each child document
         const childrenXp = await Promise.all(childDocuments.map(async (child) => {
-            const childId = child._id.startsWith('drafts.') ? child._id : `drafts.${child._id}`;
             let childTotalXp = child.total_xp || 0;
-
             if (!childTotalXp) {
                 // If total_xp is not set, recursively calculate it
                 childTotalXp = await calculateXP({
+                    xp: child.xp,
                     type: child._type,
                     difficulty: child.difficulty,
                     childrenRefs: child.child || [], // Ensure to fetch references of the child
@@ -64,7 +61,7 @@ const calculateXP = async ({ type, difficulty, childrenRefs = [], assignment = [
             return childTotalXp || 0; // Return calculated XP for this child
         }));
 
-        const assignmentsXp = assignment.length * 25; // Calculate XP for assignments
+        const assignmentsXp = (assignment?.length * 25) ?? 0; // Calculate XP for assignments
 
         // Calculate total XP
         const totalXp = baseXp + childrenXp.reduce((acc, xp) => acc + xp, 0) + assignmentsXp;
@@ -100,13 +97,13 @@ const XpInput = React.forwardRef((props, ref) => {
             // Extract the _ref from each child object
             const childrenRefs = children ? children.map(child => child._ref).filter(Boolean) : [];
             try {
-                const newTotalXp = await calculateXP({
-                    type,
-                    difficulty,
-                    childrenRefs,
-                    assignment,
-                }, sanityClient, parentId);
-
+                  const newTotalXp = await calculateXP({
+                      xp,
+                      type,
+                        difficulty,
+                        childrenRefs,
+                        assignment,
+                    }, sanityClient, parentId);
                 if (parentId && parentId !== "undefined") {
                     if (newTotalXp !== calculatedXp) {
                         setCalculatedXp(newTotalXp);
