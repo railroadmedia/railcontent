@@ -1,0 +1,231 @@
+<?php
+
+namespace App\Modules\Content\Models;
+
+use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Enums\ProgressState;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\UserManagementSystem\Models\User;
+
+enum AwardTier: string
+{
+    case GOLD = 'gold';
+    case SILVER = 'silver';
+    case BRONZE = 'bronze';
+}
+
+
+/**
+ * App\Modules\Content\Models\Content
+ *
+ * @property integer $id
+ * @property integer $content_id
+ * @property integer $user_id
+ * @property boolean $is_locked
+ * @property boolean $is_active
+ * @property integer $current_rest_days
+ * @property array $lessons_meta_data - key: content_id to values:  is_completed, is_bonus_content, time_practiced, unlock_date
+ * @property Carbon $start_date
+ * @property Carbon $last_completed_date
+ * @property integer $completed_time_practiced
+ * @property integer $completed_best_streak
+ *
+ */
+class ChallengeUserProgress extends Model
+{
+    protected $table = 'challenges_user_progress';
+    protected $guarded = ['id'];
+
+    protected function casts(): array
+    {
+        return [
+            'lessons_meta_data' => 'array',
+            'start_date' => 'date',
+            'last_completed_date' => 'datetime',
+        ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function content(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'content_id');
+    }
+
+    /**
+     * @return int - the current running streak of finished lessons
+     */
+    public function getCurrentStreak(): int
+    {
+        $currentStreak = 0;
+        foreach($this->lessons_meta_data as $lesson) {
+            if($lesson['unlock_date'] > now()) {
+                break;
+            }
+            if ($lesson['is_bonus_content_for_challenge']) {
+                continue;
+            }
+            if ($lesson['is_completed']) {
+                $currentStreak++;
+            } else {
+                // TODO unless it was yesterday :(((((
+                $currentStreak = 0;
+            }
+        }
+        return $currentStreak;
+    }
+
+    /**
+     * @return int - the largest streak of lessons in the current challenge
+     */
+    public function getBestCurrentStreak() : int
+    {
+        $bestStreak = 0;
+        $currentStreak = 0;
+        foreach($this->lessons_meta_data as $lesson)
+        {
+            if($lesson['unlock_date'] > now()) {
+                break;
+            }
+            if ($lesson['is_bonus_content']) {
+                continue;
+            }
+            if ($lesson['is_completed']) {
+                $currentStreak++;
+            } else {
+                $bestStreak = max($bestStreak, $currentStreak);
+                $currentStreak = 0;
+            }
+        }
+        return $bestStreak;
+    }
+
+    /**
+     * @return int - Sum of minutes practiced in this challenge run
+     */
+    public function getMinutesPracticed(): int
+    {
+        // TODO https://musora.atlassian.net/browse/TCH-41
+        // This will either be a rolling value stored in table or computed as a property of the lessonsMetaData
+        $minutesPracticed = 0;
+        foreach($this->lessons_meta_data as $lessonData) {
+            $minutesPracticed += $lessonData['time_practiced'] ?? 0;
+        }
+        return $minutesPracticed;
+    }
+
+
+    /**
+     * Build the lessonsMetaData array for a given challenge
+     * @param array $challenge - Sanity document for the challenge
+     * @param Carbon|null $startDate - Start date for the challenge, if null we take the challenge published_on date, or now() whatever is older
+     * @param bool $isUnlocked - Flag to indicate whether lessons are locked
+     * @return array -
+     */
+    public static function defineLessonsMetaData(array $challenge, Carbon $startDate = null, bool $isLocked = true) : array
+    {
+        $lessons = $challenge['lessons'];
+        $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
+        $startDate = max($startDate, Carbon::now());
+        $lessonMetaData = [];
+        //TODO does this need to be moved to the user's timezone?
+        // Document says only for solo challenges
+        // https://musora.atlassian.net/browse/TCH-40
+        $rollingUnlockDate = $startDate->copy();
+        foreach($lessons as  $lesson) {
+            $unlockDate = !$isLocked || $lesson['is_always_unlocked_for_challenge'] ? $startDate : $rollingUnlockDate;
+            $lessonMetaData[$lesson['id']] =
+                [
+                    'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
+                    'is_completed' => false,
+                    'time_practiced' => 0,
+                    'unlock_date' => $unlockDate->toISOString(),
+                ];
+            if (!$lesson['is_always_unlocked_for_challenge']) {
+                // TODO start of day? to hande daylight saving times
+                $rollingUnlockDate->addDay();
+            }
+        }
+        return $lessonMetaData;
+    }
+
+    /**
+     * @param $challenge - Sanity Document for the challenge
+     * @return int - number of rest days
+     */
+    public static function calculateDefaultRestdays($challenge)
+    {
+        // TODO https://musora.atlassian.net/browse/TCH-39
+        return 2;
+    }
+
+    /**
+     * @param int $challengeId
+     * @param int $userId
+     * @return ChallengeUserProgress
+     * @throws Exception
+     */
+    public static function whereChallengeIdAndUser(int $challengeId, int $userId) : ChallengeUserProgress | null
+    {
+        $challengeUserCollection = self::query()
+            ->where('content_id', $challengeId)
+            ->where('user_id', $userId)
+            ->get();
+
+        if ($challengeUserCollection->count() > 1) {
+            throw new Exception(sprintf(
+                'Multiple %s found for Content %s and User %s',
+                class_basename(__CLASS__),
+                $challengeId,
+                $userId
+            ));
+        }
+        return $challengeUserCollection->first();
+    }
+
+    public function leaveChallenge()
+    {
+        $this->is_active = false;
+        $this->current_rest_days = 0;
+        $this->lessons_meta_data = [];
+        $this->is_locked = true;
+        $this->start_date = null;
+        $this->save();
+    }
+
+    /**
+     * Set lesson progress (completed and time_practiced) for a given lesson
+     * @param int $lessonId
+     * @param bool $isCompleted
+     * @param int|null $timePracticed - if null, will not update the existing value
+     * @return void
+     */
+    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null) : void
+    {
+        $lessonMetaData = $this->lessons_meta_data;
+        if (!$lessonMetaData[$lessonId] || !$this->is_active) return;
+
+        $lessonMetaData[$lessonId]['is_completed'] = $isCompleted;
+        if (!is_null($timePracticed)) {
+            // TODO this could be = or += depending on how time practides is sent
+            $lessonMetaData[$lessonId]['time_practiced'] = $timePracticed;
+        }
+        $this->lessons_meta_data = $lessonMetaData;
+        $this->save();
+    }
+
+
+    public function getAwardTier() : AwardTier
+    {
+        //TODO https://musora.atlassian.net/browse/TCH-47
+        return AwardTier::GOLD;
+    }
+}

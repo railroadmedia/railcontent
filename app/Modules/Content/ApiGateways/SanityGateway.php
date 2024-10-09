@@ -7,6 +7,65 @@ use Sanity\Client as SanityClient;
 
 class SanityGateway
 {
+    private array $defaultFields = [
+        "'sanity_id' : _id",
+        "'id': railcontent_id",
+        "railcontent_id",
+        "artist",
+        "title",
+        "'image': thumbnail.asset->url",
+        "'thumbnail': thumbnail.asset->url",
+        "difficulty",
+        "difficulty_string",
+        "web_url_path",
+        "'url' : web_url_path",
+        "published_on",
+        "'type': _type",
+        "progress_percent",
+        "'length_in_seconds' : coalesce(length_in_seconds, soundslice[0].soundslice_length_in_second)",
+        "brand",
+        "'genre': genre[]->name",
+        'status',
+        "'slug' : slug.current",
+        "'permission_id': permission[]->railcontent_id",
+    ];
+
+    private array $contentSpecificFields = [
+        'challenge' => [
+            'enrollment_start_time',
+            'enrollment_end_time',
+            'registration_url',
+            '"lesson_count": child_count',
+            '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "Start Challenge")',
+            'challenge_state',
+            'challenge_state_text',
+            '"description": description[0].children[0].text',
+            'total_xp',
+            'xp',
+            '"instructors": instructor[]->name',
+            '"instructor_signature": instructor[0]->signature.asset->url',
+            '"header_image_url": thumbnail.asset->url',
+            '"logo_image_url": logo_image_url.asset->url',
+            '"award": award.asset->url',
+            'award_custom_text',
+            '"gold_award": gold_award.asset->url',
+            '"silver_award": silver_award.asset->url',
+            '"bronze_award": bronze_award.asset->url',
+            '"lessons": child[]->{
+                  "id": railcontent_id,
+                  title,
+                  "image": thumbnail.asset->url,
+                  "instructors": instructor[]->name,
+                  length_in_seconds,
+                  difficulty_string,
+                  difficulty,
+                  "type": _type,
+                  is_always_unlocked_for_challenge,
+                  is_bonus_content_for_challenge,
+            }',
+        ],
+        ];
+
     public SanityClient $sanity;
 
     /**
@@ -96,39 +155,61 @@ class SanityGateway
 
     /**
      * @param array $ids - railcontent.id values
+     * @param string $type - sanity _type value
      * @return mixed|string - matching documents
      */
-    public function getByRailContentIds(array $ids)
+    public function getByRailContentIds(array $ids, ?string $type = null)
     {
 
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
-        $query ="*[railcontent_id in [${idsString}]]{
-          railcontent_id,
-          title,
-          'image': thumbnail.asset->url,
-          'thumbnail': thumbnail.asset->url,
-          'artist': select(artist->name != null => artist->name, instructor[0]->name),
-          difficulty,
-          difficulty_string,
-          web_url_path,
-          published_on,
-          'type': _type,
-          progress_percent,
-          length_in_seconds,
-          brand,
-          'slug' : slug.current,
+        $typeString = $type ? "&& _type = '$type'" : '';
+        $fieldsString = $this->getFieldsString($typeString);
+        $query ="*[railcontent_id in [{$idsString}] $typeString]{
+          $fieldsString
         }";
         $documents = $gateway->sanity->fetch($query);
         // The following are used to format similar to RailContent, these are a stopgap measure
+        // TODO these need to be removed and any decorators using them should be update/removed
         foreach($documents as $key => $document) {
-            $documents[$key]['id'] = $document['railcontent_id'];
-            $documents[$key]['url'] = $document['web_url_path'];
             $documents[$key]['fields'] = $this->mapSanityFields($document);
             $documents[$key]['data'] = $this->mapSanityFields($document);
         }
         return $documents;
+    }
+
+    /**
+     * @param int $ids - railcontent.id value
+     * @param string $type - sanity _type value
+     * @return array - matching challenge document
+     */
+    public function getByRailContentId(int $railcontentId, ?string $type = null) : array
+    {
+
+        $gateway = new SanityGateway();
+        // see musora-content-services sanity.js for the fields and format we need to replicate
+        $fieldsString = $this->getFieldsString($type);
+        $typeString = $type ? "&& _type == '$type'" : '';
+        $query ="*[railcontent_id == $railcontentId $typeString]{
+          $fieldsString
+        } [0 ... 1]";
+        $document = $gateway->sanity->fetch($query)[0] ?? [];
+        // The following are used to format similar to RailContent, these are a stopgap measure
+        // TODO these need to be removed and any decorators using them should be update/removed
+        $document['fields'] = $this->mapSanityFields($document);
+        $document['data'] = $this->mapSanityFields($document);
+        return $document;
+    }
+
+    /**
+     * @param string $contentType - sanity _type value
+     * @return string - groq query string for fields
+     */
+    private function getFieldsString(string $contentType) : string
+    {
+        $allFields = array_merge($this->defaultFields, $this->contentSpecificFields[$contentType] ?? []);
+        return implode(',', $allFields);
     }
 
     private function mapSanityFields($document)
@@ -137,4 +218,5 @@ class SanityGateway
         // eventually this should be removed.
         return [];
     }
+
 }

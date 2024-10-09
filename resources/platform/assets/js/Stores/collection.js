@@ -41,6 +41,7 @@ export const useCollectionStore = defineStore({
     },
     actions: {
         applyFilter(param) {
+            //console.log('applyFilter(param)', param)
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -123,6 +124,7 @@ export const useCollectionStore = defineStore({
             if(endpoints[type]){
                 return await endpoints[type]();
             } else {
+                //console.log('run fetchAll', this.getIncludedFields())
                 return await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
@@ -190,7 +192,6 @@ export const useCollectionStore = defineStore({
 
             return '';
         },
-
         getIncludedFields(){
             if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
                 return [...this.tabData[this.filter.activeTab].key]
@@ -272,6 +273,7 @@ export const useCollectionStore = defineStore({
 
         async setData(response, replace) {
             const userStore = useUserStore();
+            //console.log('this.getIncludedFields()', this.getIncludedFields())
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
@@ -279,17 +281,17 @@ export const useCollectionStore = defineStore({
                         response.total / this.filter.limit
                     );
                     //Get Filter Options
+                    //console.log('this.filter.included_fields', this.filter.included_fields);
                     try {
                         const result = await fetchAllFilterOptions(
                             userStore.brand,
-                            [],
+                            [ ...this.filter.included_fields ],
                             "",
                             "",
                             this.queryType,
                             this.filter.searchTerm,
                         );
                         if (result) {
-                            console.log('fitlerOptions', result.meta.filterOptions);
                             this.filterColumns = getFilterValues(result.meta.filterOptions);
                         } else {
                             throw new Error('Failed to fetch Filter Options');
@@ -354,7 +356,7 @@ export const useCollectionStore = defineStore({
                 platformStore.setLoadingState(false);
 
                 if(this.fetchType === 'childCollection'){
-                    console.log('childCollection', data)
+                    //console.log('childCollection', data)
                     return data;
                 }
             }

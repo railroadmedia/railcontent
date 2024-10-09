@@ -8,18 +8,12 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
  * Defines the schema structure for a Challenge part document type in Sanity.
- *
- * @property string       $type
- * @property string       $name
- * @property string       $title
- * @property ?string      $icon
- * @property array<Field> $fields
  */
 class ChallengePart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Challenge Part', parentType: 'challenge');
+        parent::__construct(self::getName(), 'Challenge Part', parentType: 'challenge', isChallengeChild: true);
 
         // Add the reference to the parent course
         $detailsGroup = new Group('editorFields', 'Details', true);

@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Content\Controllers\ContentLikesControllerUser;
+use App\Modules\Content\Controllers\ChallengesMetaDataController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,12 +33,49 @@ Route::prefix('content')
         )->name('content.user_data');
 
         Route::get(
-            'vimeo-data/{vimeo_id}',
-            [ContentMetadataController::class, 'getVimeoData']
-        )->name('content.vimeo-data');
-
-        Route::get(
             'user_data_permissions',
             [ContentMetadataController::class, 'getUserPermissions']
         )->name('content.user-permissions');
+
+
+
+    });
+
+Route::prefix('challenges')
+    ->middleware('web_or_api_authenticated')
+    ->group(function () {
+        Route::get(
+            '{id}',
+            [ChallengesMetaDataController::class, 'getChallengeMetadata']
+        )->name('challenges.metadata');
+
+        Route::get(
+            'user_data/{id}',
+            [ChallengesMetaDataController::class, 'getUserChallengeProgress']
+        )->name('challenges.user_progress');
+
+        Route::get(
+            'download_award/{id}',
+            [ChallengesMetaDataController::class, 'getUserAward']
+        )->name('challenges.user_award');
+
+        Route::post(
+            'enroll/{id}',
+            [ChallengesMetaDataController::class, 'enrollUser']
+        )->name('challenges.enroll');
+
+        Route::post(
+            'set_start_date/{id}',
+            [ChallengesMetaDataController::class, 'setStartDate']
+        )->name('challenges.set_start_date');
+
+        Route::post(
+            'leave/{id}',
+            [ChallengesMetaDataController::class, 'leaveChallenge']
+        )->name('challenges.leave');
+
+        Route::post(
+            'unlock/{id}',
+            [ChallengesMetaDataController::class, 'unlockChallenge']
+        )->name('challenges.unlock');
     });

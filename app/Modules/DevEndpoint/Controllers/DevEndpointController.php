@@ -2,11 +2,14 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+use App\Modules\Content\Models\ChallengeUserProgress;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
 use Modules\Content\ApiGateways\SanityGateway;
+use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
@@ -15,6 +18,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RecommendationService;
 use Railroad\Railcontent\Support\Collection;
+use Stripe\Card;
 
 class DevEndpointController extends Controller
 {
@@ -29,37 +33,92 @@ class DevEndpointController extends Controller
         private PermissionService $permissionService,
         private ContentPermissionService $contentPermissionService,
         private ContentPermissionRepository $contentPermissionRepository,
+        private ChallengesService $challengesService
     ) {
     }
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+        $challengeId = 402199;
+        $userId = 631736; //If you update this to your id, everything should be an unlock date of the startdate
+//        $this->prepChallengeData($challengeId);
+//        $this->setContentCompleted($challengeId);
+
+//        $this->unlockChallenge($challengeId, $userId);
+//        $this->challengesService->completeChallenge($challengeId, $userId);
+        return 'whooo challenge data inserted';
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
-        return $this->testCollection();
 
-        $results = [
-            'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'drumeo'),
-            'singeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'singeo'),
-            'pianote' => $this->recommendationService->getFilteredRecommendations($arg1, 'pianote'),
-            'guitareo' => $this->recommendationService->getFilteredRecommendations($arg1, 'guitareo'),
-        ];
-        dd($results);
-        return $this->recommendationService->getFilteredRecommendations(1111, 'pianote', RecommenderSection::Course);
-        $this->testRandomization();
-        dd("hello from the playground");
+
     }
 
-    private function testCollection()
+    private function prepChallengeData($challengeId = null, $startdate = null)
     {
-        $collection = new Collection([['key1' => ['child1' => 'heelo']]]);// new Collection([['key1' => ['hello'], ['key1' =>['goodby']]]]);
-        //$collection2 = new Collection([['key1' => 'hello', ['key1' => 'goodby']);
-        foreach($collection as $index => $content) {
-            $t = $collection[$index]['key1'];
-            $t[] = 'hello2';
-            $collection[$index]['key1'] = $t;//[] = 'new value';
+        $challengeId = $challengeId ?? 402199; // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
+        $userIds = [
+            // "good" users
+            755987,755984,755976,755957,755953,755945,755932,755919,755916,755904,755886,755880,755877,755866,755848,755827,755824,755820,755808,755807,755799,755787,755786,755782,755764,
+            755675, // explicitly in block list
+            755745, // user with no profile picture
+            755406, // musora user
+            735658, //eli test user
+            631736, // me
+        ];
+        ChallengeUserProgress::truncate();
+        foreach($userIds as $userId) {
+            $isUnlocked = $userId == 755976 || $userId == 755957;
+            $this->challengesService->startChallenge($challengeId, $userId, startDate: $startdate, isLocked: !$isUnlocked);
         }
-        return true;
+
     }
+
+    private function setContentCompleted($challengeId)
+    {
+
+        $data = [
+            755987 => [
+                '402542' => [
+                    'is_completed' => true,
+                    'time_practiced' => 8,
+                ],
+                '402314' => [
+                    'is_completed' => true,
+                    'time_practiced' => 3,
+                ],
+            ],
+            631736 => [
+                '402542' => [
+                    'is_completed' => true,
+                    'time_practiced' => 8,
+                ],
+                '402314' => [
+                    'is_completed' => true,
+                    'time_practiced' => 10,
+                ],
+                '402316' => [
+                    'is_completed' => true,
+                    'time_practiced' => 1000,
+                ],
+            ],
+        ];
+
+        foreach($data as $userId => $lessons) {
+            $challengeProgress =  ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+            foreach($lessons as $lessonId => $lesson) {
+                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['time_practiced']);
+            }
+        }
+
+    }
+
+    private function unlockChallenge($challengeId, $userId)
+    {
+        $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        $progressData->is_locked = false;
+        $progressData->save();
+    }
+
+
 
     private function testSanity()
     {
@@ -83,62 +142,6 @@ class DevEndpointController extends Controller
         return $updatedDoc;
     }
 
-    private function testAPIEndpoints()
-    {
-        $inputs = array_map(function ($endpoint) {
-            return $endpoint->value;
-        }, APIEndPoint::cases());
-        $callback = function ($endpoint) {
-            $this->recommendationService->APIEndPoint = $endpoint;
-            $userIDs = [579297, 648632, 149869, 150909, 152882];
-            $randomize = false;
-            $userID = $randomize ? $userIDs[0] : $userIDs[array_rand($userIDs, 1)];
-            return $this->recommendationService->getFilteredRecommendations($userID, "drumeo", RecommenderSection::Song);
-        };
-        $results = $this->timeEvent($callback, $inputs, 5, 1, );
-        return $results;
-    }
-
-    private function testingRecSysSections()
-    {
-        $inputSections = [
-            'two sections' => [RecommenderSection::Course, RecommenderSection::QuickTip],
-            'one sections' => [RecommenderSection::QuickTip],
-            'blank' => [],
-        ];
-        $userID = 631736;
-        $brand = 'drumeo';
-        $callback = function ($sections) use ($userID, $brand) {
-            return $this->contentService->getRecommendedContent($userID, $brand, $sections);
-        };
-        $results = $this->timeEvent($callback, $inputSections, 1, 0);
-        return $results;
-    }
-
-    private function testBulkRecommendation()
-    {
-
-        $userIDs = [648632, 149869, 150909, 152882];
-        $brand = 'SINGEO';
-        $results = $this->recommendationService->getBulkFilterRecommendations($userIDs, $brand, RecommenderSection::Song);
-        dd($results);
-    }
-
-    private function testingForRecommendationSystem()
-    {
-
-        $brand = 'drumeo';
-        $section = RecommenderSection::Song;
-        $ids = ['579297', '1114', '149628', '149643', '111'];
-        $callback = function ($id) use ($brand, $section) {
-            return $this->recommendationService->getFilteredRecommendations($id, $brand, $section);
-        };
-        $timeResults = $this->timeEvent($callback, $ids, 2, 1);
-        dd($timeResults);
-        $userID = 579297;
-        $results = $this->recommendationService->getFilteredRecommendations($userID, $brand, $section);
-        dd($results);
-    }
 
     // ----------------------------------- UTILITY FUNCTIONS ------------------------------------------
 
