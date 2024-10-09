@@ -280,10 +280,11 @@ export const useCollectionStore = defineStore({
                         response.total / this.filter.limit
                     );
                     //Get Filter Options
+                    console.log('this.filter.included_fields', this.filter.included_fields)
                     try {
                         const result = await fetchAllFilterOptions(
                             userStore.brand,
-                            [],
+                            [ ...this.filter.included_fields ],
                             "",
                             "",
                             this.queryType,
