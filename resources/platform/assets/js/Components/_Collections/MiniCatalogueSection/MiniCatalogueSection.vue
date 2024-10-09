@@ -20,7 +20,9 @@
             </div>
             <div>
                 <transition appear name="fade">
+                    <ChallengeCarousel v-if="isChallenge" />
                     <CatalogueCardContainer
+                        v-else
                         :force-no-links="forceNoLinks"
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="data"
@@ -37,11 +39,13 @@
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref, watch} from 'vue';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
 import useCarouselEvents from "@hooks/useCarouselEvents";
+import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 
 const props = defineProps({
@@ -88,7 +92,11 @@ const props = defineProps({
   trackingSection: {
     type: String,
     default: ''
-  }
+  },
+  catalogueType: {
+    type: String,
+    default: ''
+  },
 });
 
 const userStore = useUserStore();
@@ -96,6 +104,10 @@ const userStore = useUserStore();
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
+
+const isChallenge = computed(() => {
+    return props.catalogueType === 'challenge';
+})
 
 const handleSeeAllClick = (event) => {
   if (props.seeAllUrl && props.trackingSection) {
@@ -113,27 +125,7 @@ const handleSeeAllClick = (event) => {
 };
 
 const watchResize = () => {
-    if(props.isMiniView){
-        if(window.innerWidth > 2256){
-            cardNum.value = 10;
-        } else if(window.innerWidth > 1536){
-            cardNum.value = 8;
-        } else if(window.innerWidth > 1280){
-            cardNum.value = 6;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else {
-            cardNum.value = 20;
-        }
-    } else {
-        if(window.innerWidth > 1536){
-           cardNum.value = 5;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else if(window.innerWidth <= 1024){
-            cardNum.value = 20;
-        }
-    }
+    getCardNum(props, cardNum);
 
     getPageData();
 }
