@@ -41,7 +41,7 @@ export const useCollectionStore = defineStore({
     },
     actions: {
         applyFilter(param) {
-            console.log('applyFilter(param)', param)
+            //console.log('applyFilter(param)', param)
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -124,6 +124,7 @@ export const useCollectionStore = defineStore({
             if(endpoints[type]){
                 return await endpoints[type]();
             } else {
+                //console.log('run fetchAll', this.getIncludedFields())
                 return await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
@@ -280,7 +281,7 @@ export const useCollectionStore = defineStore({
                         response.total / this.filter.limit
                     );
                     //Get Filter Options
-                    console.log('this.filter.included_fields', this.filter.included_fields)
+                    //console.log('this.filter.included_fields', this.filter.included_fields);
                     try {
                         const result = await fetchAllFilterOptions(
                             userStore.brand,
@@ -355,7 +356,7 @@ export const useCollectionStore = defineStore({
                 platformStore.setLoadingState(false);
 
                 if(this.fetchType === 'childCollection'){
-                    console.log('childCollection', data)
+                    //console.log('childCollection', data)
                     return data;
                 }
             }

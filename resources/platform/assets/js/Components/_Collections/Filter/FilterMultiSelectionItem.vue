@@ -55,8 +55,6 @@ const toggleCollapse = () => {
 }
 
 const isSelected = (category, key) => {
-    console.log('selected', props.selectedFilters );
-    console.log('category, key', `${category},${key}`)
     return props.selectedFilters.find(f => f === `${category},${key}`);
 }
 
