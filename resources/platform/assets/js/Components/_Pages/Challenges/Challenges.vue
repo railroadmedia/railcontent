@@ -22,11 +22,13 @@ import { computed, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
+import { useCollectionStore } from "@stores/collection";
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
 
+const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { brand } = storeToRefs(userStore);
@@ -79,6 +81,9 @@ const tabData = computed(() => {
 })
 
 onBeforeMount(() => {
-    platformStore.setLoadingState(false);
+    collectionStore.setDefaults({
+        tabOptions: tabData.value,
+        queryType: 'challenge',
+    });
 })
 </script>

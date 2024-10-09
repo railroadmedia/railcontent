@@ -1,7 +1,7 @@
 <template>
     <div class="lg:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-1 lg:tw-gap-[15px]" :class="rowStyles">
         <SkeletonChallengeCard v-if="isLoading" v-for="i in skeletonNum" :key="`skeleton-challenge-card-${i}`" :is-grouped-view="isGroupedView" />
-        <ChallengeCard v-else v-for="i in 12" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
+        <ChallengeCard v-else v-for="(item, i) in content" :item="item" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
     </div>
 </template>
 <script setup>
@@ -15,6 +15,10 @@ const props = defineProps({
     isGroupedView: {
         type: Boolean,
         default: () => false,
+    },
+    content: {
+        type: Array,
+        default: () => [],
     },
 });
 
