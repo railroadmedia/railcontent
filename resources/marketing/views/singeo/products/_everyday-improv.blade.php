@@ -48,7 +48,7 @@
                             <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                         @else
                             {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
-                            <a href="#final" class="join singeo medium w-full anchor-slide">ENROLL NOW</a>
+                            <a href="#final" class="join smaller w-full anchor-slide">LEARN MORE &raquo;</a>
                             <a href="https://www.musora.com/singeo/enrollment/everyday-improv">
                                 <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-singeo">
                                     Registration is FREE for Singeo Members.
@@ -212,7 +212,7 @@
         @if(!empty($hasProduct) && $hasProduct == 'true')
             <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
         @else
-            <a href="#final" class="join singeo medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
         @endif
         <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
             onload="this.classList.remove('opacity-0')"
