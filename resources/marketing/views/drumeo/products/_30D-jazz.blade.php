@@ -606,32 +606,33 @@
                             'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Jazz</strong>',
-                                '<strong>FREE</strong> 1-month Drumeo Access',
+                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
                             ],
                         ])
                         @include('drumeo.products.partials._order-card', [
                             'highlightBorder' => true,
                             'badge' => 'FREE STICKBAG',
                             'header' => 'Unlimited Lessons',
-                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 4 Bonuses Worth $528',
+                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 5 Bonuses Worth $625',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',
                             'imageHeight' => 'h-32 md:h-40 lg:h-44',
                             'price' => '$20/mo',
                             'specialText' => "Billed annually at $240/yr.",
                             'cta' => 'GET EVERYTHING',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true',
                             'bonuses' => [
-                                '<strong>30-Day Jazz</strong>',
                                 '<strong>Drumeo Annual Membership</strong>',
-                                '<strong>FREE</strong> Drumeo StickBag',
-                                '<strong>FREE</strong> 30-Day Chops',
-                                '<strong>FREE</strong> 30-Day Independence',
+                                '<strong class="text-drumeo">FREE</strong> 30-Day Jazz',
+                                '<strong class="text-drumeo">FREE</strong> Drumeo StickBag',
+                                '<strong class="text-drumeo">FREE</strong> 30-Day Chops',
+                                '<strong class="text-drumeo">FREE</strong> 30-Day Double Bass',
+                                '<strong class="text-drumeo">FREE</strong> 30-Day Independence',
                             ],
                         ])
                     </div>
 
-                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-independence]=1&locked=true">
-                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Drumeo<br class="hidden sm:inline"> and get 30-Day Jazz with no physical bonuses.</em></u></p></a>
+                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true">
+                <p><u><em><strong>Don't want to pay shipping?</strong> <br class="hidden sm:inline"> Click here to join Drumeo and get 30-Day Jazz with no physical bonuses.</em></u></p></a>
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
