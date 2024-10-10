@@ -31,7 +31,7 @@
         </ul>
     </div>
 @endif
-
+<div class="form-container">
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
     class="ajax-form clearfix facebook-track-lead mx-auto relative">
@@ -93,20 +93,22 @@
         </button>
     </div>
 
+    @if(!empty($formId))
+        <input name="inf_form_xid" type="hidden" value="{{ str_replace('-', '', (str_replace(' ', '', $formId))) }}"/>
+    @endif
+
+   @if(!empty($redirectURL))
+        <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
+    {{-- @else
+        <input name="success_redirect" type="hidden" value="/thank-you"/> --}}
+    @endif
+
     @if(!empty($checkboxItems) && !$stacked && $checkboxPosition == 'bottom')
         @include('_partials.components.forms.checkbox-group', [
             'checkboxItems' => $checkboxItems, 
             'checkboxTitle' => $checkboxTitle ?? null, 
             'theme' => $theme
         ])
-    @endif
-
-    @if(!empty($formId))
-        <input name="inf_form_xid" type="hidden" value="{{ str_replace('-', '', (str_replace(' ', '', $formId))) }}"/>
-    @endif
-
-    @if(!empty($redirectURL))
-        <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
     @endif
 </form>
 
@@ -146,127 +148,139 @@
     </div>
 @else
 
-    <div class="thank-you-box rounded-full w-full mx-auto text-center text-{{$theme}} max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
+    <div class="thank-you-box rounded-full w-full mx-auto text-center bg-white bg-opacity-40 text-{{$theme}} max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
         <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
     </div>
 @endif
+
+</div>
 
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    function recaptchaSubmit{{$cleanFormId}}(token) {
-        const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const userEmail = document.getElementById('{{ $cleanFormId }}').querySelector('input[type=email]');
-        const userName = document.getElementById('{{ $cleanFormId }}').querySelector('input[type=text]');
-        const form = document.getElementById("{{$cleanFormId}}");
-        const submitButton = form.querySelector('.submit');
-
-        const checkboxes = document.querySelectorAll('.instrument-checkbox');
-        const tooltip = document.getElementById('checkbox-tooltip');
-        const disclaimer = document.querySelector('.disclaimer');
-
-        let isValid = true;
-
-        // Checkbox validation
-        if (checkboxes.length > 0) {
-            const isCheckboxSelected = Array.from(checkboxes).some(checkbox => checkbox.checked);
-
-            if (!isCheckboxSelected) {
-                tooltip.classList.remove('opacity-0');
-                tooltip.classList.add('opacity-100');
-                setTimeout(() => {
-                    tooltip.classList.remove('opacity-100');
-                    tooltip.classList.add('opacity-0');
-                }, 3000);
-                isValid = false;
-            } else {
-                tooltip.classList.add('opacity-0');
-            }
-        }
-
-        // Email validation
-        if (!userEmail.value.match(emailFormat)) {
-            userEmail.classList.add('bg-red-200', 'border-red-500');
-            document.getElementById('email-error').classList.remove('opacity-0');
-            isValid = false;
-        } else {
-            userEmail.classList.remove('bg-red-200', 'border-red-500');
-            document.getElementById('email-error').classList.add('opacity-0');
-        }
-
-        if (isValid) {
-            const formData = new FormData(form);
-
-            submitButton.querySelector('.pre-add').classList.add('hidden');
-            submitButton.querySelector('.pending').classList.remove('hidden');
-
-            axios.post(form.action, formData)
-                .then(response => {
-                    if (response.status === 201) {
-                        console.log('Form submitted', response);
-                        form.reset();
-                        submitButton.querySelector('.pending').classList.add('hidden');
-                        submitButton.querySelector('.success').classList.remove('hidden');
-
-                        form.classList.add('hidden');
-                        const thankYouBox = document.querySelector('.thank-you-box');
-                        thankYouBox.classList.remove('invisible', 'max-h-0', 'opacity-0', 'hidden');
-                        thankYouBox.classList.add('active');
-                        
-                        if (disclaimer) {
-                            disclaimer.classList.add('hidden');
-                        }
-
-                        const successRedirect = form.querySelector('input[name="success_redirect"]');
-                        if (successRedirect && successRedirect.value) {
-                            setTimeout(() => {
-                                window.location.href = successRedirect.value;
-                            }, 2000);
-                        }
-                    } else if (response.status === 422) {
-                        console.error('Form validation failed', response.data);
-                        submitButton.querySelector('.pending').classList.add('hidden');
-                        submitButton.querySelector('.fail').classList.remove('hidden');
-                    } else {
-                        console.error('Unexpected response status', response.status);
-                        submitButton.querySelector('.pending').classList.add('hidden');
-                        submitButton.querySelector('.fail').classList.remove('hidden');
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        console.error('Server responded with an error', error.response.data);
-                    } else if (error.request) {
-                        console.error('No response received', error.request);
-                    } else {
-                        console.error('Error setting up request', error.message);
-                    }
-                    submitButton.querySelector('.pending').classList.add('hidden');
-                    submitButton.querySelector('.fail').classList.remove('hidden');
-                });
-                emailSignUpConversionTrackerForImpactProvider();
-        }
-    }
-
-    document.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const selectedInstrument = Array.from(document.querySelectorAll('.instrument-checkbox:checked'))
-                .map(cb => cb.value)
-                .join(', ');
-            document.getElementById('preferred_instrument').value = selectedInstrument;
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('form').forEach(form => {
+        const formId = form.id;
+        const formContainer = form.closest('.form-container');
+        const thankYouBox = formContainer ? formContainer.querySelector('.thank-you-box') : null;
+        
+        form.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const preferredInstrument = form.querySelector('#preferred_instrument');
+                if (preferredInstrument) {
+                    const selectedInstrument = Array.from(form.querySelectorAll('.instrument-checkbox:checked'))
+                        .map(cb => cb.value)
+                        .join(', ');
+                    preferredInstrument.value = selectedInstrument;
+                }
+            });
         });
-    });
 
-    document.getElementById('sign-up-email').addEventListener('input', function() {
-        const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const emailError = document.getElementById('email-error');
-        if (this.value.match(emailFormat)) {
-            emailError.classList.add('opacity-0');
-            this.classList.remove('bg-red-200', 'border-red');
-        } else {
-            emailError.classList.remove('opacity-0');
-            this.classList.add('bg-red-200', 'border-red');
+        const emailInput = form.querySelector('input[type="email"]');
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                const emailError = form.querySelector('#email-error');
+                if (this.value.match(emailFormat)) {
+                    if (emailError) emailError.classList.add('opacity-0');
+                    this.classList.remove('bg-red-200', 'border-red');
+                } else {
+                    if (emailError) emailError.classList.remove('opacity-0');
+                    this.classList.add('bg-red-200', 'border-red');
+                }
+            });
         }
+        
+        // Define recaptchaSubmit for each form
+        window[`recaptchaSubmit${formId}`] = function(token) {
+            const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const userEmail = form.querySelector('input[type=email]');
+            const submitButton = form.querySelector('.submit');
+            const checkboxes = form.querySelectorAll('.instrument-checkbox');
+            const tooltip = form.querySelector('#checkbox-tooltip');
+            const disclaimer = form.querySelector('.disclaimer');
+            
+
+            let isValid = true;
+
+            if (checkboxes.length > 0 && tooltip) {
+                const isCheckboxSelected = Array.from(checkboxes).some(checkbox => checkbox.checked);
+                if (!isCheckboxSelected) {
+                    tooltip.classList.remove('opacity-0');
+                    tooltip.classList.add('opacity-100');
+                    setTimeout(() => {
+                        tooltip.classList.remove('opacity-100');
+                        tooltip.classList.add('opacity-0');
+                    }, 3000);
+                    isValid = false;
+                } else {
+                    tooltip.classList.add('opacity-0');
+                }
+            }
+
+            if (userEmail) {
+                const emailError = form.querySelector('#email-error');
+                if (!userEmail.value.match(emailFormat)) {
+                    userEmail.classList.add('bg-red-200', 'border-red-500');
+                    if (emailError) emailError.classList.remove('opacity-0');
+                    isValid = false;
+                } else {
+                    userEmail.classList.remove('bg-red-200', 'border-red-500');
+                    if (emailError) emailError.classList.add('opacity-0');
+                }
+            }
+
+            if (isValid && submitButton) {
+                const formData = new FormData(form);
+                const preAdd = submitButton.querySelector('.pre-add');
+                const pending = submitButton.querySelector('.pending');
+                const success = submitButton.querySelector('.success');
+                const fail = submitButton.querySelector('.fail');
+
+                if (preAdd) preAdd.classList.add('hidden');
+                if (pending) pending.classList.remove('hidden');
+
+                axios.post(form.action, formData)
+                    .then(response => {
+                        if (response.status === 201) {
+                            console.log('Form submitted', response);
+                            form.reset();
+                            if (pending) pending.classList.add('hidden');
+                            if (success) success.classList.remove('hidden');
+
+                            form.classList.add('hidden');
+                            if (thankYouBox) {
+                                thankYouBox.classList.remove('invisible', 'max-h-0', 'opacity-0', 'hidden');
+                                thankYouBox.classList.add('active');
+                            }
+                            
+                            if (disclaimer) {
+                                disclaimer.classList.add('hidden');
+                            }
+
+                            const successRedirect = form.querySelector('input[name="success_redirect"]');
+                            if (successRedirect && successRedirect.value) {
+                                setTimeout(() => {
+                                    window.location.href = successRedirect.value;
+                                }, 2000);
+                            }
+                        } else {
+                            console.error('Unexpected response status', response.status);
+                            if (pending) pending.classList.add('hidden');
+                            if (fail) fail.classList.remove('hidden');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error submitting form:', error);
+                        if (pending) pending.classList.add('hidden');
+                        if (fail) fail.classList.remove('hidden');
+                    });
+                if (typeof emailSignUpConversionTrackerForImpactProvider === 'function') {
+                    emailSignUpConversionTrackerForImpactProvider();
+                }
+            }
+        };
     });
+});
 </script>
