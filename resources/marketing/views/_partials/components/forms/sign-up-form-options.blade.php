@@ -53,7 +53,8 @@
         @include('_partials.components.forms.checkbox-group', [
             'checkboxItems' => $checkboxItems,
             'checkboxTitle' => $checkboxTitle ?? null,
-            'theme' => $theme
+            'theme' => $theme,
+            'cleanFormId' => $cleanFormId
         ])
     @endif
 
@@ -77,7 +78,8 @@
         @include('_partials.components.forms.checkbox-group', [
             'checkboxItems' => $checkboxItems,
             'checkboxTitle' => $checkboxTitle ?? null,
-            'theme' => $theme
+            'theme' => $theme,
+            'cleanFormId' => $cleanFormId
         ])
     @endif
 
@@ -168,10 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
         form.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const preferredInstrument = form.querySelector('#preferred_instrument');
+                const selectedInstrument = Array.from(form.querySelectorAll('.instrument-checkbox:checked'))
+                    .map(cb => cb.value)
+                    .join(', ');
+
+                console.log(`Selected checkboxes in form with ID ${formId}: ${selectedInstrument}`);
+
                 if (preferredInstrument) {
-                    const selectedInstrument = Array.from(form.querySelectorAll('.instrument-checkbox:checked'))
-                        .map(cb => cb.value)
-                        .join(', ');
                     preferredInstrument.value = selectedInstrument;
                 }
             });
@@ -200,7 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = form.querySelectorAll('.instrument-checkbox');
             const tooltip = form.querySelector('#checkbox-tooltip');
             const disclaimer = form.querySelector('.disclaimer');
-
 
             let isValid = true;
 

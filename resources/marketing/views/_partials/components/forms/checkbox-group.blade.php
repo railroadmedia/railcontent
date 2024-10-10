@@ -6,13 +6,16 @@
     </p>
 
     <div class="gap-x-4 flex justify-center lg:justify-start flex-wrap lg:space-x-5 pl-3">
-        @foreach ($checkboxItems as $label => $id)
+        @foreach ($checkboxItems as $index => $label)
+            @php
+                $uniqueId = $cleanFormId . $index;
+            @endphp
             <div class="relative flex items-start justify-center lg:items-center lg:justify-start">
                 <div class="flex h-6 items-center">
-                    <input id="{{ $id }}" aria-describedby="{{ $id }}-description" type="checkbox" class="instrument-checkbox cursor-pointer h-4 w-4 rounded border-gray-300 text-{{ $theme }} focus:ring-{{ $theme }} focus:ring-offset-0 focus:ring-2 focus:ring-opacity-0 bg-{{ $theme }}-100 checked:bg-{{ $theme }}-500 checked:border-{{ $theme }} focus:outline-none" value="{{ $label }}" />
+                    <input id="{{ $uniqueId }}" aria-describedby="{{ $uniqueId }}-description" type="checkbox" class="instrument-checkbox cursor-pointer h-4 w-4 rounded border-gray-300 text-{{ $theme }} focus:ring-{{ $theme }} focus:ring-offset-0 focus:ring-2 focus:ring-opacity-0 bg-{{ $theme }}-100 checked:bg-{{ $theme }}-500 checked:border-{{ $theme }} focus:outline-none" value="{{ $label }}" />
                 </div>
                 <div class="text-sm leading-6 text-center lg:text-left">
-                    <label for="{{ $id }}" class="font-medium pl-2 cursor-pointer select-none">{{ $label }}</label>
+                    <label for="{{ $uniqueId }}" class="font-medium pl-2 cursor-pointer select-none">{{ $label }}</label>
                 </div>
             </div>
         @endforeach
