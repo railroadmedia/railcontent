@@ -159,7 +159,7 @@
                 ]
                 ];
         @endphp
-        <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
+        <div class="timeline-container singeo max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
             @foreach ($gettings as $key => $getting)
                 @if ($getting['position'] === 'right')
                     <div
