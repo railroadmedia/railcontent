@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
@@ -1043,9 +1044,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             fn (OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
         );
 
-        $hasGear = $this->onboardingGear->contains(
-            fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
-        );
+        $hasGear = in_array($this->last_used_brand, [Brand::Pianote->value, Brand::Singeo->value]) ||
+            $this->onboardingGear->contains(
+                fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
+            );
 
         $hasTopics = $this->onboardingTopics->contains(
             fn (OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
