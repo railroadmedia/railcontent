@@ -276,9 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (pending) pending.classList.add('hidden');
                         if (fail) fail.classList.remove('hidden');
                     });
-                if (typeof emailSignUpConversionTrackerForImpactProvider === 'function') {
-                    emailSignUpConversionTrackerForImpactProvider();
-                }
             }
         };
     });
