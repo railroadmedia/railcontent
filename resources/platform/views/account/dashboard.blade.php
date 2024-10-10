@@ -1,31 +1,5 @@
 @php
-/**
- * @var \Modules\UserManagementSystem\Models\User $user
- */
-$hasGear =
-    count(
-        user()->onboardingGear->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-$hasTopics =
-    count(
-        user()->onboardingTopics->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-$hasGenres =
-    count(
-        user()->onboardingGenres->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-
-$hasExperience = user()->onboardingExperience ? true : false;
-
-$hasGoals= user()->onboardingGoals ? true : false;
-
-$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
+    $showCompleteYourAccountButton = !user()->hasCompletedOnboarding();
 
     $headerData = [
         'title' => $dashboardUser->display_name,
@@ -72,7 +46,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         {{-- Header --}}
         <breadcrumb
-            :breadcrumbs="{{ json_encode([ 
+            :breadcrumbs="{{ json_encode([
                 [
                     "title" => "Dashboard",
                 ]
