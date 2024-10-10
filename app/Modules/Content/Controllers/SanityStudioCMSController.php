@@ -282,7 +282,7 @@ class SanityStudioCMSController extends BaseController
         }
     }
 
-    public function getVimeoEndpoints($vimeoId)
+    public function getVimeoEndpoints(string $vimeoId): Vimeo
     {
         $video = Vimeo::where('external_id', $vimeoId)->first();
         if(!$video) {
