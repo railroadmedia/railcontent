@@ -613,7 +613,7 @@
                             'highlightBorder' => true,
                             'badge' => 'FREE STICKBAG',
                             'header' => 'Unlimited Lessons',
-                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 5 Bonuses Worth $625',
+                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 5 Bonuses Worth $655',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',
                             'imageHeight' => 'h-32 md:h-40 lg:h-44',
                             'price' => '$20/mo',
