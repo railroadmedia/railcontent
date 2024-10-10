@@ -169,7 +169,7 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- Workouts page template --}}
-    <workouts-playback
+    {{-- <workouts-playback
         breadcrumb-first-level-url="/{{ $brand }}/workouts"
         breadcrumb-first-level-title="Workouts"
         @if($lessonType === 'challenge-part')
@@ -186,7 +186,22 @@
         :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
         :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
     >
-    </workouts-playback>
+    </workouts-playback> --}}
+
+
+    <lesson-playback
+        :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
+        :lesson-data="{{ json_encode($lessonContent) }}"
+        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
+        :video-resources="{{ json_encode($videoResources) }}"
+        :video-buttons="{{ json_encode($videoButtons) }}"
+        :comments-props="{{ json_encode($commentsProps) }}"
+        :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
+        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
+        :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+    >
+    </lesson-playback>
+
 @endsection
 
 @section('layout-scripts')
