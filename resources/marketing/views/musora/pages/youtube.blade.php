@@ -54,7 +54,7 @@
                             "checkboxTitle" => "Preferred Instrument",
                             "minimalForm" => true,
                             "buttonColor" => "bg-musora text-black",
-                            "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing', 'Bass' => 'Bass'],
+                            "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing'],
                         ])
                     </div>
                 </div>
@@ -69,7 +69,7 @@
             ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/header.png', 'title' => 'exclusive discounts'],
         ];
     @endphp
-    
+
     <section class="container max-w-4xl mx-auto bg-white">
         <div  class="grid grid-cols-2 gap-4 py-10 md:py-20">
                 @foreach ($benefits as $benefit)
@@ -99,7 +99,7 @@
                             "checkboxTitle" => "Preferred Instrument",
                             "minimalForm" => true,
                             "buttonColor" => "bg-black text-white",
-                            "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing', 'Bass' => 'Bass'],
+                            "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing'],
                             "theme" => "black",
                             "checkboxPosition"=>'bottom',
                             "redirectURL" => "/thank-you",

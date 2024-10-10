@@ -1,5 +1,5 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<style> .grecaptcha-badge {display:none;right:0!important;} 
+<style> .grecaptcha-badge {display:none;right:0!important;}
     .thank-you-box.active {
             max-height:1000px;
             visibility:visible;
@@ -34,8 +34,8 @@
 <div class="form-container">
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="ajax-form clearfix facebook-track-lead mx-auto relative">
-    
+    class="ajax-form clearfix facebook-track-lead mx-auto relative flex flex-wrap">
+
     {{-- Include tracking inputs for the form --}}
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
@@ -51,14 +51,14 @@
 
     @if(!empty($checkboxItems) && !$stacked  && $checkboxPosition == 'top')
         @include('_partials.components.forms.checkbox-group', [
-            'checkboxItems' => $checkboxItems, 
-            'checkboxTitle' => $checkboxTitle ?? null, 
+            'checkboxItems' => $checkboxItems,
+            'checkboxTitle' => $checkboxTitle ?? null,
             'theme' => $theme
         ])
     @endif
 
     @if(!empty($nameInput))
-        <div class="w-full px-2 sm:px-3 float-left">
+        <div class="w-full px-2 sm:px-3">
             <div class="my-2">
                 {{-- Name input field --}}
                 <input type="text" name="first_name" id="sign-up-name" class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif>
@@ -66,22 +66,22 @@
         </div>
     @endif
 
-    <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }} relative">
+    <div class="w-full px-2 sm:px-3 {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }} relative">
         {{-- Email input field --}}
-        <input type="email" name="email" id="sign-up-email" class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6" 
+        <input type="email" name="email" id="sign-up-email" class="block w-full rounded-full border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-{{$theme}} sm:text-sm sm:leading-6"
             @if(!empty($inputText)) placeholder="{!!  $inputText  !!}" @else placeholder="Your Email" @endif required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif>
         <p class="opacity-0 pt-0.5 pl-4 text-xs text-red-600 transition-opacity duration-300" id="email-error"> <i class="fa-solid fa-circle-exclamation text-red-600"></i> Not a valid email address.</p>
     </div>
 
     @if(!empty($checkboxItems) && $stacked)
         @include('_partials.components.forms.checkbox-group', [
-            'checkboxItems' => $checkboxItems, 
-            'checkboxTitle' => $checkboxTitle ?? null, 
+            'checkboxItems' => $checkboxItems,
+            'checkboxTitle' => $checkboxTitle ?? null,
             'theme' => $theme
         ])
     @endif
 
-    <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12 mt-0' }}">
+    <div class="w-full px-2 sm:px-3 {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12 mt-0' }}">
         <button class="submit g-recaptcha flex w-full justify-center rounded-full px-3 py-2.5 text-lg uppercase font-bebas leading-none tw-tracking-tight shadow-sm hover:opacity-90 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$theme}} @endif @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'
@@ -105,8 +105,8 @@
 
     @if(!empty($checkboxItems) && !$stacked && $checkboxPosition == 'bottom')
         @include('_partials.components.forms.checkbox-group', [
-            'checkboxItems' => $checkboxItems, 
-            'checkboxTitle' => $checkboxTitle ?? null, 
+            'checkboxItems' => $checkboxItems,
+            'checkboxTitle' => $checkboxTitle ?? null,
             'theme' => $theme
         ])
     @endif
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formId = form.id;
         const formContainer = form.closest('.form-container');
         const thankYouBox = formContainer ? formContainer.querySelector('.thank-you-box') : null;
-        
+
         form.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const preferredInstrument = form.querySelector('#preferred_instrument');
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
+
         // Define recaptchaSubmit for each form
         window[`recaptchaSubmit${formId}`] = function(token) {
             const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = form.querySelectorAll('.instrument-checkbox');
             const tooltip = form.querySelector('#checkbox-tooltip');
             const disclaimer = form.querySelector('.disclaimer');
-            
+
 
             let isValid = true;
 
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 thankYouBox.classList.remove('invisible', 'max-h-0', 'opacity-0', 'hidden');
                                 thankYouBox.classList.add('active');
                             }
-                            
+
                             if (disclaimer) {
                                 disclaimer.classList.add('hidden');
                             }
