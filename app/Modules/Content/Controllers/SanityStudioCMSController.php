@@ -289,16 +289,15 @@ class SanityStudioCMSController extends BaseController
             ConfigService::$brand  = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
-                Vimeo::updateOrInsert(
-                    ['external_id' => $vimeoId],
-                    [
-                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
-                        'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
-                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
-                        'length_in_seconds'        => $vimeo['length_in_seconds']
-                    ]
-                );
-            $video = Vimeo::where('external_id', $vimeoId)->first();
+            $video = Vimeo::create(
+                [
+                    'external_id'              => $vimeoId,
+                    'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                    'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
+                    'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
+                    'length_in_seconds'        => $vimeo['length_in_seconds']
+                ]
+            );
       }
 
         return $video;
