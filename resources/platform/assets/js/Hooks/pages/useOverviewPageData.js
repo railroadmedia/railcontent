@@ -1,12 +1,13 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
+import axios from 'axios';
 import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
-export async function useOverviewPageData(contentType) {
+export async function useOverviewPageData(contentType, parentType) {
     const userStore = useUserStore();
-    
+
     const data = ref(null);
     const error = ref(null);
     const isLoading = ref(true);
@@ -18,39 +19,53 @@ export async function useOverviewPageData(contentType) {
     const { buildHeader } = useBuildHeader(progressPercent);
 
     try {
-        if (contentType === "learning-path-level") {
-            const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
-            if (result) {
-                result.levels = result.levels.map((level, index) => ({
-                    ...level,
-                    position: index + 1 
-                }));
-                data.value = result;
-                data.value.header = buildHeader(contentType, result, progressPercent);
-            } else {
-                throw new Error('Failed to fetch method');
-            }
-        } else if (contentType === "unit") {
-            const result = await fetchFoundation('foundations-2019');
-            if (result) {
-                result.units = result.units.map((unit, index) => ({
-                    ...unit,
-                    position: index + 1 
-                }));
-                data.value = result;
-                data.value.header = buildHeader(contentType, result, progressPercent);
-            } else {
-                throw new Error('Failed to fetch foundation');
+        if (parentType === 'challenges'){
+            const result = await axios(`/challenges/user_data/${contentId}`);
+            console.log('challenges', result)
+            if(result){
+                data.value = {
+                    children: result.data.lessons,
+                };
             }
         } else {
-            const result = await fetchMethodChildren(contentId);
-            if (result) {
-                data.value = result[0];
-                data.value.header = buildHeader(contentType, result[0], progressPercent);
+            if (contentType === "learning-path-level") {
+                const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
+                console.log('result',result)
+                if (result) {
+                    result.levels = result.levels.map((level, index) => ({
+                        ...level,
+                        position: index + 1
+                    }));
+                    data.value = result;
+                    data.value.header = buildHeader(contentType, result, progressPercent);
+                } else {
+                    throw new Error('Failed to fetch method');
+                }
+            } else if (contentType === "unit") {
+                const result = await fetchFoundation('foundations-2019');
+                console.log('result',result)
+                if (result) {
+                    result.units = result.units.map((unit, index) => ({
+                        ...unit,
+                        position: index + 1
+                    }));
+                    data.value = result;
+                    data.value.header = buildHeader(contentType, result, progressPercent);
+                } else {
+                    throw new Error('Failed to fetch foundation');
+                }
             } else {
-                throw new Error('Failed to fetch method children');
+                const result = await fetchMethodChildren(contentId);
+                console.log('result',result)
+                if (result) {
+                    data.value = result[0];
+                    data.value.header = buildHeader(contentType, result[0], progressPercent);
+                } else {
+                    throw new Error('Failed to fetch method children');
+                }
             }
-        }        
+        }
+
     } catch (err) {
         error.value = err;
     } finally {
