@@ -347,7 +347,7 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
-const isRelatedSectionOpen = ref(hasRelatedLessons);
+const isRelatedSectionOpen = ref(props.relatedLessons.data.length > 0);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
