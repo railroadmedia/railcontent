@@ -14,7 +14,7 @@
     </InfoModal>
 </template>
 <script setup>
-import InfoModal from '@collections/Modal/InfoModal.vue';
+import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
 
 const props = defineProps({
