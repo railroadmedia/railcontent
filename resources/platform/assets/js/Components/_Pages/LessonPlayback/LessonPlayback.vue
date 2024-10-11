@@ -3,8 +3,7 @@
         :class="hasRelatedLessons ? 'tw-max-w-[1703px]' : 'tw-max-w-[1450px]'">
         <Breadcrumb :breadcrumbs="contentBreadcrumb.pages" />
 
-        <div
-            class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-mt-3 tw-flex-col tw-gap-4">
+        <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-mt-3 tw-flex-col tw-gap-4">
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 xl:tw-row-span-2 tw-w-full tw-flex"
                 :class="hasRelatedLessons && isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">
@@ -16,7 +15,7 @@
                         <div v-if="isLoading" class="tw-animate-pulse tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-bg-[#F2F2F2] dark:tw-bg-[#002039]"></div>
                         <!-- Upgrade Cover  -->
                         <MembershipUpgradeVideoCover 
-                            v-if="noAccess" 
+                            v-else-if="noAccess" 
                             :thumbnail-url="videoData.thumbnail_url" 
                         />
                         <template v-else-if="videoData?.video?.external_id">
@@ -143,6 +142,15 @@
                         :user-id="userId"
                         :resources="videoData.resources"
                         :difficulty="videoData.difficulty"
+
+                        :show-practice-button="showPracticeButton" 
+                        :show-share-button="false" 
+                        :show-complete-button="true"
+                        report-recipient="support+question-and-answer@drumeo.com"
+                        :is-completed="isCompleted"
+                        @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
+                        @on-like-content="likeContent" 
+                        @on-complete-content="completeContent"
                     />
 
                     <ContentInfo 
@@ -265,8 +273,12 @@
                     :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls :title="soundsliceTitle || videoData.title" :disable-next="true"
-                                            :disable-prev="true" @onClose="handleCloseSoundslice" />
+                        <SoundSliceControls 
+                            :title="soundsliceTitle || videoData.title" 
+                            :disable-next="true"
+                            :disable-prev="true" 
+                            @onClose="handleCloseSoundslice" 
+                        />
                     </template>
                 </SoundSlice>
             </div>
@@ -385,6 +397,10 @@ const state = reactive({
     assignmentCollapsed: false,
 });
 
+const showPracticeButton = computed(() => {
+    return !!props.soundsliceSlug;
+});
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -469,6 +485,20 @@ const noAccess = computed(() => {
 const showDraftLabel = computed(() => {
     return props.lessonData.status === 'draft';
 })
+
+const completeContent = () => {
+    isCompleted.value = !isCompleted.value;
+}
+
+const likeContent = () => {
+    likeData.value.isLiked = !likeData.value.isLiked;
+
+    if (likeData.value.isLiked) {
+        likeData.value.likeCount += 1;
+    } else {
+        likeData.value.likeCount -= 1;
+    }
+}
 
 onBeforeMount(async() => {
     console.log('videoProps.progressState', props.videoProps.progressState)

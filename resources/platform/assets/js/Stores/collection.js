@@ -124,14 +124,13 @@ export const useCollectionStore = defineStore({
             if(endpoints[type]){
                 return await endpoints[type]();
             } else {
-                //console.log('run fetchAll', this.getIncludedFields())
                 return await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
                     sort: this.filter.sort,
                     limit: this.filter.limit,
                     groupBy: this.getGroupBy(),
-                    includedFields: this.getIncludedFields(),
+                    includedFields: this.filter.included_fields,
                 })
             }
         },
@@ -280,13 +279,16 @@ export const useCollectionStore = defineStore({
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.total / this.filter.limit
                     );
+                    //Get Genre
+                    const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
+                    const genre = genreField ? genreField.split(',')[1] : null;
+
                     //Get Filter Options
-                    //console.log('this.filter.included_fields', this.filter.included_fields);
                     try {
                         const result = await fetchAllFilterOptions(
                             userStore.brand,
                             [ ...this.filter.included_fields ],
-                            "",
+                            genre,
                             "",
                             this.queryType,
                             this.filter.searchTerm,
@@ -299,7 +301,6 @@ export const useCollectionStore = defineStore({
                     } catch (err) {
                         console.error(err);
                     } 
-                    // this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
