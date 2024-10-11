@@ -150,7 +150,9 @@
     </header>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-4xl mx-auto
+        @if(empty($platformVersion)) mb-24 sm:mb-40 lg:mb-36 @endif
+        ">
             <h2 class="leading-tight mb-7 sm:mb-12"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
             @php
             if (empty($platformVersion)) {
@@ -265,6 +267,24 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF7FF">
         <div class="container max-w-4xl mx-auto">
+            @if(empty($platformVersion))
+                <div class="hidden sm:inline-block aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative -mt-32 sm:-mt-64 mb-6 lg:mb-10"
+                        x-on:click="trailer = true;"
+                >
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                    <img class="rounded-xl overflow-hidden object-cover inset-0 absolute z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/thumb.jpg">
+    {{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"--}}
+    {{--                    x-ref="playToLearnVideo"--}}
+    {{--                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"--}}
+    {{--                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"--}}
+    {{--                    data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel2.mp4" type="video/mp4" autoplay muted loop playsinline></video>--}}
+                </div>
+                <div class="sm:hidden inline-block aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative -mt-32 sm:-mt-64 mb-6 lg:mb-10"
+                        x-on:click="trailerM = true;">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                    <img class="rounded-xl overflow-hidden object-cover inset-0 absolute z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/thumb.jpg">
+                </div>
+            @endif
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
                 <img class="h-24 sm:h-28 lg:h-36 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
