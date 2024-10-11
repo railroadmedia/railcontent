@@ -142,7 +142,7 @@
         "scrollToJoin" => true,
         "hideMenu" => true,
     ])
-    <header class="text-center px-5 sm:px-6 py-16 sm:py-20 lg:py-28 relative overflow-hidden text-white bg-cover bg-center"
+    <header class="text-center px-5 sm:px-6 py-16 sm:py-20 lg:py-28 relative overflow-hidden text-white bg-cover bg-center relative z-10"
         style="background: linear-gradient(to left, #9F3E77, #B31A1D);">
         <div class="container max-w-6xl mx-auto relative z-20">
             <h6 class="text-musora uppercase tracking-widest font-bold leading-none  mb-3 sm:mb-4">BEAUTIFUL BEGINNER BUNDLE</h6>
@@ -177,38 +177,38 @@
         </div>
     </header>
 
-    <section class="text-center px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative overflow-hidden " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
+    <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
         <div class="pt-4 md:pt-0">
-            <div class="container max-w-4xl mx-auto mb-20 -mt-20 md:-mt-40 lg:-mt-48 z-20 relative">
+            <div class="container max-w-4xl mx-auto mb-20 -mt-10 md:-mt-14 lg:-mt-16 z-20 relative">
                 <div class="px-5 lg:px-0">
                     <div class="flex flex-wrap sm:flex-nowrap text-center shadow-xl rounded-xl relative" style="background:linear-gradient(to bottom, #fff, #F1F7FE);">
                         <div class="z-10 flex flex-wrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-6 lg:px-5 text-left sm:text-center">
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
-                                <i class="far fa-fw mr-3 sm:mr-0 fa-light fa-user-group text-pianote text-2xl" aria-hidden="true"></i>
+                                <i class="far fa-fw mr-3 sm:mr-0 fa-light fa-user-group text-pianote text-xl" aria-hidden="true"></i>
                                 <div class="flex flex-col items-left">
-                                    <p><strong class="text-xs lg:text-base font-black px-1 md:px-2">{{ number_format(Prices::$students) }}</strong></p>
-                                    <p class="leading-tight mx-0 pb-1">Active students</p>
+                                    <h4><strong class="font-black my-2">{{ number_format(Prices::$students) }}</strong></h4>
+                                    <p class="leading-tight mx-0 text-sm">Active students</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
-                                <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl" aria-hidden="true"></i>
+                                <i class="fab fa-fw mr-3 sm:mr-0 fa-youtube text-pianote text-xl" aria-hidden="true"></i>
                                 <div class="flex flex-col items-left">
-                                    <p><strong class="text-xs lg:text-base font-black px-1 md:px-2">10 minutes a day</strong></p>
-                                    <p class="leading-tight mx-0 pb-1">As little as</p>
+                                    <h4><strong class="font-black">{{ convertNumber(Prices::$pianoteYoutubeSubsc) }}</strong></h4>
+                                    <p class="leading-tight mx-0 text-sm">YouTube subscribers</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
-                                <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl" aria-hidden="true"></i>
+                                <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-xl" aria-hidden="true"></i>
                                 <div class="flex flex-col items-left">
-                                    <p><strong class="text-xs lg:text-base font-black px-1 md:px-2">Beginner</strong></p>
-                                    <p class="leading-tight mx-0 pb-1">Skill Level</p>
+                                    <h4><strong class="font-black">4.8/5</strong></h4>
+                                    <p class="leading-tight mx-0 text-sm">Student reviews</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 ">
-                                <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl" aria-hidden="true"></i>
+                                <i class="far fa-fw mr-3 sm:mr-0 fa-star text-pianote text-xl" aria-hidden="true"></i>
                                 <div class="flex flex-col items-left">
-                                    <p><strong class="text-xs lg:text-base font-black px-1 md:px-2">Play your first song</strong></p>
-                                    <p class="leading-tight mx-0 pb-1">Result</p>
+                                    <h4><strong class="font-black">World-class</strong></h4>
+                                    <p class="leading-tight mx-0 text-sm">Instructors</p>
                                 </div>
                             </div>
                         </div>
@@ -216,24 +216,23 @@
                 </div>
             </div>
         </div>
-        <div class="container max-w-3xl mx-auto relative z-20">
-            <h2 class="leading-tight mb-4"><strong>The #1 struggle<br> new piano players face…</strong></h2>
+        <div class="container max-w-3xl mx-auto relative z-20 overflow-hidden">
+            <h2 class="leading-tight mb-4"><strong>The <u style="text-decoration-color: #F61A30;">easiest</u> way to<br> learn piano online</strong></h2>
 
-            <p class="leading-tight"><u>…is not knowing what to practice.</u>
-            <br><br>
-            <strong>We fixed that.</strong>
+            <p class="leading-tight">No more guesswork. Because we’ve got it all mapped out for you.
                 <br><br>
-            Because your lessons ARE the practice sessions. Play with a real teacher in timed, short lessons so you’ll always know you’re doing the right thing at the right time.
+                All you have to do is press play and follow along.
                 <br><br>
-            All you have to do is press play and follow along.
-                <br><br>
-            <em class="text-pianote font-bold">Here’s how it works:</em></p>
+                <strong class="font-black text-pianote">Here’s how it works.</strong></p>
 
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="uppercase text-pianote"><strong>Step 1</strong></h5>
-                <p class="leading-tight my-5"><strong>Choose your course.</strong> You’ll find courses on pop music, chording, Blues, even improvisation. Choose the one you want to learn. For beginners, we recommend New Piano Players Start Here.</p>
+                <h5 class=""><strong><span class="text-pianote">STEP 1.</span><br>Pick your jam.</strong></h5>
+                <p class="leading-tight my-5">Pop, classical, blues, chording, fingering—whatever sparks your interest, we’ve got it. Dive into hundreds of topics and pick the one that gets you excited to hit the keys.
+                    <br><br>
+                    Not sure where to start?<br>
+                    Check out New Piano Players Start Here—the perfect course for beginners to start strong and build confidence from day one.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -629,8 +628,8 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[practice-kit]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true'
+            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&redirect=/order&promo-code=beginner-bundle&locked=true';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[pianote-headphones-2024]=1&redirect=/order&promo-code=beginner-bundle,beginner-headphones,headphones-us&locked=true'
     @endphp
     <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6">
@@ -658,98 +657,98 @@
                 </h2>
                 <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
 
-{{--                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>--}}
+                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
                 <br>
-{{--                <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>--}}
-{{--                <div style="font-size:0px">--}}
-{{--                    @foreach($bonuses as $bonus)--}}
-{{--                        <div--}}
-{{--                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"--}}
-{{--                            x-data="{--}}
-{{--                        flipped: false,--}}
-{{--                    }"--}}
-{{--                            x-on:click="--}}
-{{--                        flipped = !flipped;--}}
-{{--                        if(flipped){--}}
-{{--                            $refs.front.classList.add('rotate-y-180');--}}
-{{--                            $refs.back.classList.remove('-rotate-y-180');--}}
-{{--                            $refs.back.classList.add('rotate-y-0');--}}
-{{--                        }--}}
-{{--                        else {--}}
-{{--                            $refs.front.classList.remove('rotate-y-180');--}}
-{{--                            $refs.back.classList.add('-rotate-y-180');--}}
-{{--                            $refs.back.classList.remove('rotate-y-0');--}}
-{{--                        }--}}
-{{--                    "--}}
-{{--                        >--}}
-{{--                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">--}}
-{{--                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
-{{--                                    <div--}}
-{{--                                        x-ref="front"--}}
-{{--                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"--}}
-{{--                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">--}}
-{{--                                        @if(!empty($bonus['badge']))--}}
-{{--                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>--}}
-{{--                                        @endif--}}
-{{--                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"--}}
-{{--                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"--}}
-{{--                                            x-intersect.once="lazyLoad = true">--}}
-{{--                                            <picture class="absolute inset-0 w-full h-full object-cover">--}}
-{{--                                                <img src="{{ $bonus['image'] }}"--}}
-{{--                                                    alt="Bonus Image"--}}
-{{--                                                    class="w-full h-full object-cover opacity-0 transition-opacity"--}}
-{{--                                                    loading="lazy"--}}
-{{--                                                    onload="this.classList.remove('opacity-0')">--}}
-{{--                                            </picture>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">--}}
-{{--                                            <i class="fas fa-arrow-right text-4xl"></i><br>--}}
-{{--                                            <p class="text-sm"><strong>DETAILS</strong></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div--}}
-{{--                                        x-ref="back"--}}
-{{--                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"--}}
-{{--                                        style="backface-visibility: hidden;"--}}
-{{--                                    >--}}
-{{--                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">--}}
-{{--                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
+                <div style="font-size:0px">
+                    @foreach($bonuses as $bonus)
+                        <div
+                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
+                            x-data="{
+                        flipped: false,
+                    }"
+                            x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    "
+                        >
+                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div
+                                        x-ref="front"
+                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                        @if(!empty($bonus['badge']))
+                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
+                                        @endif
+                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
+                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                            x-intersect.once="lazyLoad = true">
+                                            <picture class="absolute inset-0 w-full h-full object-cover">
+                                                <img src="{{ $bonus['image'] }}"
+                                                    alt="Bonus Image"
+                                                    class="w-full h-full object-cover opacity-0 transition-opacity"
+                                                    loading="lazy"
+                                                    onload="this.classList.remove('opacity-0')">
+                                            </picture>
+                                        </div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        x-ref="back"
+                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                        style="backface-visibility: hidden;"
+                                    >
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-{{--                            <p class="w-full leading-normal mt-2">--}}
-{{--                                <span style="display:inline-block;">--}}
-{{--                            @if(!empty($bonus['price']))--}}
-{{--                                        <s class="opacity-40">${{ $bonus['price'] }}</s>--}}
-{{--                                    @endif--}}
-{{--                                    @if(!empty($bonus['customText']))--}}
-{{--                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>--}}
-{{--                                    @else--}}
-{{--                                        <strong class="text-pianote">FREE</strong>--}}
-{{--                                    @endif--}}
-{{--                                <br>--}}
-{{--                                <em>--}}
-{{--                                    @if(!empty($bonus['shipping']))--}}
-{{--                                        Free Bonus--}}
-{{--                                    @elseif(!empty($bonus['customSubText']))--}}
-{{--                                        Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%--}}
-{{--                                    @else--}}
-{{--                                        Online Access--}}
-{{--                                    @endif--}}
-{{--                                </em>--}}
-{{--                            </span>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
+                            <p class="w-full leading-normal mt-2">
+                                <span style="display:inline-block;">
+                            @if(!empty($bonus['price']))
+                                        <s class="opacity-40">${{ $bonus['price'] }}</s>
+                                    @endif
+                                    @if(!empty($bonus['customText']))
+                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>
+                                    @else
+                                        <strong class="text-pianote">FREE</strong>
+                                    @endif
+                                <br>
+                                <em>
+                                    @if(!empty($bonus['shipping']))
+                                        Free Bonus
+                                    @elseif(!empty($bonus['customSubText']))
+                                        Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%
+                                    @else
+                                        Online Access
+                                    @endif
+                                </em>
+                            </span>
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
 
-                                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" >SOLD OUT</a>
-{{--                                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>--}}
+{{--                                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" >SOLD OUT</a>--}}
+                                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>
                 <br>
-{{--                                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">--}}
-{{--                                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>--}}
+                                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">
+                                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>
             </div>
         </section>
     </div>

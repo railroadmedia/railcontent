@@ -33,11 +33,11 @@
                     @if(!empty($platformVersion) && empty($cohort['cohort_trailer'])) hidden @endif
                     "
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/header.webp');"
-{{--                        @if(empty($platformVersion))--}}
-{{--                            x-on:click="trailerM = true;"--}}
-{{--                        @else--}}
+                        @if(empty($platformVersion))
+                            x-on:click="trailerM = true;"
+                        @else
                             x-on:click="trailer = true;"
-{{--                        @endif--}}
+                        @endif
                     >
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -62,7 +62,7 @@
                                 <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                             @else
 {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
-                                <a href="#final" class="join smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>
+                                <a href="#final" class="join blue smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-jazz">
                                     <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                         Registration is FREE for Drumeo Members.
@@ -284,7 +284,7 @@
             @if(!empty($hasProduct) && $hasProduct == 'true')
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
             @else
-                <a href="#final" class="join drumeo outline medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
+                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -709,15 +709,15 @@
 @endcomponent
 
 @if(empty($platformVersion))
-{{--        @include('_partials.components.video-modal', [--}}
-{{--            'name' => 'trailerM',--}}
-{{--            'video' => '999638868',--}}
-{{--            'vimeo' => true,--}}
-{{--            'styles' => 'pb-[177%] bg-white',--}}
-{{--        ])--}}
+        @include('_partials.components.video-modal', [
+            'name' => 'trailerM',
+            'video' => '1018759528',
+            'vimeo' => true,
+            'styles' => 'pb-[177%] bg-white',
+        ])
 @include('_partials.components.video-modal', [
 'name' => 'trailer',
-'video' => '1017590754',
+'video' => '1018759800',
 'vimeo' => true,
 ])
 @else
