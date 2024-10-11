@@ -13,10 +13,10 @@
                     <div class="tw-aspect-square tw-bg-black"></div>
                 </div>
                 <p class="tw-mb-6 tw-text-center tw-text-sm ">
-                    You received this award for completing 30-Day Drummer with a perfect streak. You practiced a total of 123 minutes over the past 30 days.
+                    You practiced for a total of <span class="tw-font-bold">123 minutes</span> and achieved a <span class="tw-font-bold">30-day streak</span> during 30-Day Drummer: Season 3, which earned you a gold certificate.
                 </p>
                 <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-16 sm:tw-mb-6 tw-z-[3] tw-relative">
-                    <MuButton>View certificate</MuButton>
+                    <MuButton @click="openCertificate">View certificate</MuButton>
                     <MuButton><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>
                 </div>
                 <div class="tw-text-center">
@@ -28,6 +28,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
+import axios from 'axios';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { Vue3Lottie } from 'vue3-lottie';
@@ -45,9 +46,14 @@ const animations = {
     singeo: 'https://lottie.host/c9db39ce-cee4-4a2c-a3bf-b6504cc173e7/f7ryuBuw5u.json',
 }
 
+const openCertificate = async () => {
+    const certificate = await axios(`/challenges/download_award/${402199}`);
+    console.log(certificate);
+}
+
 onMounted(() => {
-    // setInterval(() => {
-    //     hideAnimation.value = true;
-    // },1200)
+    setTimeout(() => {
+        hideAnimation.value = true;
+    },1200)
 })
 </script>
