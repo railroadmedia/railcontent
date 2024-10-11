@@ -51,7 +51,7 @@ import Stc from './Components/_Pages/STC';
 import CoachIndex from './Components/_Pages/CoachIndex';
 import Support from './Components/_Pages/Support';
 import Workouts from './Components/_Pages/Workouts';
-import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback/WorkoutsPlayback';
+// import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback/WorkoutsPlayback';
 import Offline from './Components/_Pages/Live/Offline';
 import Online from './Components/_Pages/Live/Online';
 import CoachShow from './Components/_Pages/CoachShow';
@@ -224,7 +224,7 @@ app.component('AppContainer', AppContainer)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
     .component('PageHeader', PageHeader)
-    .component('WorkoutsPlayback', WorkoutsPlayback)
+    // .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
     .component('Artists', Artists)
