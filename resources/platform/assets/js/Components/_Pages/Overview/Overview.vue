@@ -13,6 +13,7 @@
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
+            :dropdowns="dropdowns[parentType] || []"
         />
 
         <template v-if="!isLoading">
@@ -108,6 +109,7 @@ import ListCatalogue from '@collections/ListCatalogue/ListCatalogue'
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 import { useOverviewPageData } from '@hooks/pages/useOverviewPageData';
+import { dropdowns } from '@pages/Overview/dropdowns';
 
 const props = defineProps({
     contentType: {
@@ -218,6 +220,5 @@ onBeforeMount( async () => {
 
         //console.log('my data', data.value)
         platformStore.setLoadingState(OverviewLoading.value);
-
 })
 </script>
