@@ -24,9 +24,10 @@ import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useCollectionStore } from "@stores/collection";
 
-import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
-import PageHeader from '@collections/PageHeader/PageHeader.vue';
-import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
+import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
+import PageHeader from '@collections/PageHeader/PageHeader';
+import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
+
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
