@@ -375,14 +375,14 @@
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/beginner.webp',
-                        'title' => 'Beginner Drummers.',
+                        'title' => 'Beginner Drummers',
                         'description' =>
                             '30-Day Jazz starts with simple swing patterns on the ride cymbal. If you’re a motivated beginner, you can follow the daily practice regime to learn dozens of jazz patterns by the end of the month.',
                     ],
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/drumeo/products/30-day-jazz/intermediate.webp',
-                        'title' => 'Intermediate Drummers.',
+                        'title' => 'Intermediate Drummers',
                         'description' =>
                             'So you can play The Beatles and Nirvana but really want to expand your vocabulary on the drums. 30-Day Jazz introduces you to the world of jazz drumming in a fully immersive experience.',
                     ],

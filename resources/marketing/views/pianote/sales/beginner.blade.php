@@ -88,36 +88,15 @@
             fill: #f61a30 !important;
         }
 
-        .bubble:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border: 5px solid transparent;
-            border-top-color: black;
-            border-bottom: 0;
-            margin-left: -5px;
-            margin-bottom: -5px;
-        }
 
-        @if(!empty($trialVersion))
-            .option-buttons.active {
-            border-color:#f61a30!important;
-            background-color:#4a0c12 !important;
+        table.comparison tr td:nth-child(2) {
+            background-color: #f61a30;
+            text-shadow: 3px 3px #f61a30;
         }
-        .option-buttons.active .radio-check {
-            border-color:#f61a30!important;
-            background-color:#f61a30!important;
-        }
-        .option-buttons.active .radio-check i {
-            display:block!important;
-        }
-        @endif
-        .splide__slide.is-active .active-bg {
-            background-color:#1B2434!important;
-            color:#fff!important;
+        table.comparison tr:hover td:nth-child(2),
+        table.comparison tr:nth-child(2n):hover td:nth-child(2) {
+            background-color:#eb1a2f;
+
         }
     </style>
 @stop
@@ -228,7 +207,7 @@
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class=""><strong><span class="text-pianote">STEP 1.</span><br>Pick your jam.</strong></h5>
+                <h5 class="leading-tight"><strong><span class="text-pianote">STEP 1.</span><br>Pick your jam.</strong></h5>
                 <p class="leading-tight my-5">Pop, classical, blues, chording, fingering—whatever sparks your interest, we’ve got it. Dive into hundreds of topics and pick the one that gets you excited to hit the keys.
                     <br><br>
                     Not sure where to start?<br>
@@ -339,8 +318,9 @@
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="uppercase text-pianote"><strong>Step 2</strong></h5>
-                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!</p>
+                <h5 class="leading-tight"><strong><span class="text-pianote">STEP 2.</span><br>Press play and follow along.</strong></h5>
+                <p class="leading-tight my-5">Learn by PLAYING with a real teacher.<br>
+                    The sessions are short, focused, most of all -- fun! Each day you’ll unlock a new lesson.</p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                     x-on:click="stepTwo = true;">
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
@@ -353,53 +333,11 @@
 
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
 
-            <h5 class="uppercase text-pianote"><strong>Step 3</strong></h5>
-            <p class="leading-tight my-5 px-6"><strong>Hear the result.</strong> The most important part of learning piano is building a daily habit. By practicing just a little bit each day, you’ll hear the results sooner (so will everyone else!).</p>
+            <h5 class="leading-tight"><strong><span class="text-pianote">STEP 3.</span><br>Hears the results. Way faster</strong></h5>
+            <p class="leading-tight my-5 px-6">The most important part of learning piano is building a daily habit. Practice a little each day, and you’ll be hearing the results way sooner (and so will everyone around you!).</p>
         </div>
         <div class="container max-w-5xl mx-auto">
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
-        </div>
-    </section>
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative overflow-hidden ">
-        <div class="container max-w-4xl mx-auto relative z-20">
-            <div class="flex flex-wrap sm:flex-nowrap items-start">
-                <picture class="w-full sm:w-auto flex-shrink">
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/august/coach-profile.webp">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/august/coach-profile.webp">
-                    <img
-                        class="border-8 border-white shadow-lg rounded-xl mb-5 sm:mb-0 transition-opacity opacity-0"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/august/coach-profile-m.png"
-                        alt="grid"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                    >
-                </picture>
-               <div class="w-full sm:w-7/12 flex-shrink-0 sm:pl-4 lg:pl-10">
-                   <h5 class="uppercase text-pianote font-black">At Pianote, it’s all about YOU!</h5>
-                   <h2 class="leading-tight my-4"><strong>Hi, I’m Lisa,</strong></h2>
-                   <p class="leading-tight">the lead instructor at Pianote.
-                       <br><br>
-                       And if there’s one thing I’ve learned in my 20+ years of teaching, it’s this…
-                       <br><br>
-                       <strong>There’s no “one size fits all” approach to learning the piano.</strong>
-                       <br><br>
-                       While gamified apps are a fun way to get started, you need a teacher to help you reach your goals on this instrument (whatever they are).
-                       <br><br>
-                       At Pianote, we understand not everyone wants to be a classical pianist or professional musician. Most just want to have fun and play the music they enjoy.
-                       <br><br>
-                       <strong>We make that easy.</strong>
-                       <br><br>
-                       If you want to play rock, we won’t make you learn Beethoven first. If you want to play pop, you don’t need to read music fluently. And if you want to play classical, jazz, gospel, or more…
-                       <br><br>
-                       <strong> We’ve got world-class pianists to guide you every step of the way.</strong>
-                       <br><br>
-                       And if you need help, support, or even just a bit of encouragement, you can work with REAL teachers and an incredibly supportive community.
-                       <br><br>
-                       You don’t get that from an app.
-                       <br><br>
-                       Come and see why Pianote is the Ultimate Mix of Technology and Tradition.</p>
-               </div>
-           </div>
         </div>
     </section>
 
@@ -420,10 +358,11 @@
                 </svg>
             </div>
         </div>
-        <h2 class="leading-tight mb-4 sm:mb-6">Other apps show you the notes.<br> <strong>We teach you how to play them.</strong></h2>
-        <p class="leading-tight max-w-lg mx-auto mb-9">Video lessons from REAL teachers will guide you through the music you want to play. You’ll learn faster, and have more fun!
-            <br><br>
-            <strong>Want to try it? Click below!</strong></p>
+        <h2 class="leading-tight mb-4 sm:mb-6">Other apps show you the notes.<br> <strong>We teach you how to <u style="text-decoration-color: #F61A30;">play</u> them.</strong></h2>
+        <p class="leading-normal max-w-3xl mx-auto mb-9">Sure, apps can give you the notes.<br>
+            But REAL teachers at Pianote show you how to bring them to life. We’re talking about<br>
+            finger placement, posture, technique, pedal timing—the stuff no algorithm can ever truly teach.<br>
+            <strong>Ready to experience a real lesson? <span class="text-pianote">Click below and give it a try!</span></strong></p>
         <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-m.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo.webp" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -431,46 +370,49 @@
     </section>
 
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 relative text-white" style="background-color:#01050f;">
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-white text-center" style="background: linear-gradient(258deg, #9F3E77 1.12%, #B31A1D 99.64%);">
         <div class="container max-w-5xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h3 class="leading-tight"><strong>You’re here because you want to play the music</strong></h3>
+            <p class="leading-tight">(not just hit the right keys).</p>
+            <h3 class="leading-tight mb-7 sm:mb-10"><strong>And we’re here to make that happen.</strong></h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 @php
                     $features = [
                                 [
                                 "icon" => "fa-circle-play",
-                                "title" => "Detailed Tutorials",
-                                "desc" => "Don’t just follow along. Get guided lessons from REAL teachers.",
+                                "title" => "No more guesswork",
+                                "desc" => "Should I use my thumb or index finger? Get step-by-step guidance for every single note and more.",
                                 ],
                                 [
                                 "icon" => "fa-rectangle-vertical-history",
                                 "title" => "Huge Library",
-                                "desc" => "From classical to pop, you’ll find your favorites here.",
+                                "desc" => "From Beethoven to Elton John, whatever your jam is, you’ll find it here in our song library.",
                                 ],
                                 [
                                 "icon" => "fa-gauge",
-                                "title" => "Slow It Down",
-                                "desc" => "Change the tempo. Practice at YOUR pace. See amazing results.",
-                                ],
-                                [
-                                "icon" => "fa-arrows-repeat",
-                                "title" => "Loop It Back",
-                                "desc" => "Stuck on a section? Loop it over and over until you’ve got it.",
+                                "title" => "Set YOUR perfect tempo.",
+                                "desc" => "Slow it down, speed it up, or loop a section until it’s perfect. Practice at your own pace.",
                                 ],
                                 [
                                 "icon" => "fa-comment-dollar",
-                                "title" => "No Extra Fees",
+                                "title" => "No sneaky fees",
                                 "desc" => "Some platforms charge you per song. Not us. It’s all included.",
                                 ],
                                 [
+                                "icon" => "fa-circle-play",
+                                "title" => "Weekly Livestreams",
+                                "desc" => "Learn fresh tips and tricks while hanging out with your teachers and fellow students in real-time.",
+                                ],
+                                [
                                 "icon" => "fa-handshake-angle",
-                                "title" => "Personal Support",
-                                "desc" => "Got questions? Ask our teachers and get a personal response.",
+                                "title" => "Personalized 1:1 support",
+                                "desc" => "YouTubers ghosting you? We don’t. Ask our teachers and get personalized help whenever you need it.",
                                 ]
                             ];
                 @endphp
                 @foreach($features as $feature)
                     <div class="flex items-start">
-                        <h3 class="w-10 text-center"><i class="fal {{ $feature['icon'] }} text-pianote"></i></h3>
+                        <h3 class="w-10 text-center"><i class="fal {{ $feature['icon'] }} text-musora"></i></h3>
                         <div class="pl-4">
                             <h6 class="leading-tight font-black mb-1">{{ $feature['title'] }}</h6>
                             <p class="leading-tight">{{ $feature['desc'] }}</p>
@@ -481,149 +423,272 @@
         </div>
     </section>
 
-    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center px-5 lg:px-8 relative overflow-hidden">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="leading-tight"><strong>Practice Better. PLAY Better.</strong></h2>
-            <p class="leading-tight text-pianote font-bold mt-2 mb-5"><em>Essential tools to maximize your practice time and improve your playing.</em></p>
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
+        <div class="container max-w-5xl mx-auto">
 
-            <p class="max-w-2xl mx-auto leading-tight mb-10 sm:mb-12">They say practice makes perfect.
-            <br><br>
-            It’s a cliche -- and it’s not entirely true. Because if you’re not practicing the RIGHT things -- the RIGHT way...
-                <br><br>
-            You could be wasting your time.
-                <br><br>
-            That’s why when you join Pianote this month, you’ll get the Ultimate Practice Bundle (valued at $380) to help you make the most of your practice time and get the best results.
-                <br><br>
-                <em><strong>Take a look at your bonuses… Join today and you’ll get all of these.</strong></em></p>
+            Meet your instructors
+            Learn from world-class teachers.
 
-            @php
-                $bonuses = [
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
-                        'description' => "Level up your skills with Pianote - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
-                        'price' => '240',
-                        'customText' => '$200',
-                        'customSubText' => 'true'
-                    ],
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-card.webp',
-                        'description' => 'You’ll find a Piano Key Overlay so you can remember all the note names, pencils, erasers, sticky notes, highlighters, and more.',
-                        'price' => floatval($productPrices['practice-kit']->price),
-                        'shipping' => true,
-                    ],
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/practice-planner-card.webp',
-                        'description' => 'Outline your week and then stick to it. It’s that simple.',
-                        'price' => floatval($productPrices['pianote-practice-planner']->price),
-                        'shipping' => true,
-                    ],
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-card.webp',
-                        'description' => 'Upgrade your practice space and master your music theory with this gorgeous poster bundle.',
-                        'price' => floatval($productPrices['music-theory-posters']->price),
-                        'shipping' => true,
-                    ],
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-card.webp',
-                        'description' => 'Every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.',
-                        'price' => floatval($productPrices['digital-chords-scales-guide']->price),
-                    ],
-                    [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-card.webp',
-                        'description' => 'Learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.',
-                        'price' => floatval($productPrices['read-music-in-30-days']->price),
-                    ],
-                    [
-                        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                        'description' => 'This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day.',
-                        'price' => floatval($productPrices['new-piano-players-start-here']->price),
-                    ],
-                ]
-            @endphp
-            <div class="flex flex-wrap text-left">
-                <div class="w-full sm:flex items-center mb-12 lg:mb-16">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-m.webp">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/practicekit-logo.webp">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[1]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">The quality of your practice will determine the quality of your playing. And this kit is LOADED with tools to help you get the most out of your valuable practice time. You’ll find a Piano Key Overlay so you can remember all the note names, pencils, erasers, sticky notes, highlighters, and more.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12 lg:mb-16">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/planner-m.webp">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/pianote-planner-logo.webp">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[2]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">Fail to plan, and plan to fail. The Pianote Practice Planner is your “secret weapon” to making progress on the keys. Outline your week and then stick to it. It’s that simple. And you can work with a Pianote Mentor to create a plan that fits your goals.</p>
+            Lisa Witt
+            Lead Pianote Instructor
+            With over 20 years of experience and 168 million YouTube views, Lisa turns traditional piano lessons into fun, beginner-friendly play-alongs.
 
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12 lg:mb-16">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/music-theory-posters-m.webp">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[3]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12 lg:mb-16">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/chords-scales-digital-m.webp">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-digital-logo2.png">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[4]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">This is your digital encyclopedia of piano chords & scales. Inside this 174-page e-book, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear. And it’s all arranged by key, so it’s super easy to navigate.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12 lg:mb-16">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-bg-m.webp">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/august/RMI30D-logo.webp">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[5]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">Have you always wanted to read music, but struggled to learn? This 30-day challenge will de-mystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.</p>
 
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-60 lg:h-64 mb-4 sm:mb-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/august/NPPSH-bg-m.webp">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-10">
-                        <img class="h-14 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
-                        <h5 class="leading-tight my-4"><s class="opacity-60">WAS ${{ $bonuses[6]['price'] }}</s> <span class="font-black text-pianote">FREE</span></h5>
-                        <p class="leading-normal">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
-                    </div>
-                </div>
-            </div>
+            Jordan Rudess
+            GRAMMY-winning - Dream Theater’s Keyboardist
+            With remarkable skills and exceptional piano technique, Jordan loves sharing his deep musical insights and inspiring musicians at all levels.
+
+            Victoria Theodore
+            Stanford Master of Classical Piano
+            As a highly accomplished pianist who has performed with legends like Stevie Wonder and Beyoncé, Victoria inspires the next generation of musicians with her captivating performances.
+
+
+            Jesús Molina
+            World-class Jazz Pianist
+            Best known for his extraordinary technique and improvisations, Jesús is passionate about inspiring others to push musical boundaries and explore new possibilities.
+
+            Erskine Hawkins
+            Gospel Piano
+
+
+            Sangah Noona
+            Tango Piano
+            Gabriel Palatchi
+            Latin Jazz
+            Amberly Martz
+            Worship Piano
+            Brett Ziegler
+            Cocktail Piano
+
+            GET THE BUNDLE >
+
         </div>
     </section>
 
-    @php
-        $testimonials = $pianote['testimonials'];
-        $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
-        $facebook = convertNumber(Prices::$pianoteFacebookLikes);
-        $instagram = convertNumber(Prices::$pianoteInstagramFollowers);
-    @endphp
-    @include('musora.sales.components.testimonials-section', [
-        'header' => 'pianists',
-        'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'instagramLink' => 'https://instagram.com/pianoteofficial/',
-    ])
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
+        <div class="container max-w-5xl mx-auto">
+            Join Pianote today with the Beautiful Beginner Bundle and get
+            One year of UNLIMITED piano lessons plus 4 awesome LIFETIME bonuses
+
+            Membership                                                                 SAVE 25%
+            PIANOTE MEMBERSHIP
+
+            Experience the joy of making beautiful music with unlimited piano lessons. Play along with world-class musicians, master your favorite songs, and get personalized 1:1 support at your fingertips.
+
+            Plus, you’ll also get full access to voice, guitar, and drum lessons at no extra cost.
+
+
+
+            Bonus 1                                                                       $127 FREE
+            NEW PIANO PLAYERS START HERE
+            Get ready to dive into your first 30 days on the piano! This beginner-friendly course will help you get started on the keys with total confidence, guiding you lesson by lesson, note by note. Simply follow along with Lisa for 10 minutes a day to kickstart your musical journey.
+
+
+            Bonus 2                                                                       $127 FREE
+            EASY CHORDS
+            Now that you’re comfortable with the piano, let’s take a further step with Easy Chords! Every song (yes, even classical ones) is built on chords, and they’re the key to telling musical stories. In just 10 minutes a day for 30 days, follow Lisa as you’ll go from knowing about chords to confidently playing them.
+
+
+            Bonus 3                                                                         $97 FREE
+            READ MUSIC IN 30 DAYS
+            No more spending hours memorizing every single note. This 30-day course will demystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.
+
+
+
+            Bonus 4                                                                                FREE
+            READ MUSIC IN 30 DAYS E-BOOK
+            Every hero needs a trusty sidekick, and this e-book is ready to join you on your musical adventure! Grab this FREE 74-page companion e-book, packed to help you nail those notes and reinforce everything you learn.
+
+
+            SAVE 70% >
+        </div>
+    </section>
+
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="background: #F4F1EC;">
+        <div class="container max-w-5xl mx-auto">
+            LIMITED TIME OFFER
+
+            Get the brand new Pianote headphones
+            For just $20
+
+            Get ready to experience your digital piano like never before!
+            With an impressive frequency range and large drivers, the new Pianote headphones let you hear every note as it was meant to be heard. Plus, enjoy complete privacy—no more worrying about your neighbors overhearing as you practice that tricky section. (They just don’t get that practice is part of the journey!)
+            For just $20*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
+            Treat your ears to a whole new level of sound, and keep your practice sessions delightfully uninterrupted!
+            *Free shipping in the US.
+
+            [Button]
+            GET THE BUNDLE >
+
+        </div>
+    </section>
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center">
+        <div class="container max-w-5xl mx-auto">
+
+            <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+                <div class="container max-w-6xl mx-auto">
+                    <div class="relative">
+                        <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
+                            <tbody>
+                            <style>
+                                table.comparison tr td {
+                                    width: 33.3%!important;
+                                    font-size: 14px;
+                                }
+                                @media (min-width: 768px) {
+                                    table.comparison tr td {
+                                        font-size: 18px;
+                                    }
+
+                                }
+                            </style>
+                            <tr style="background-color:transparent!important;">
+                                <td></td>
+                                <td class="rounded-tl-xl"><strong>WEBINAR<br> BUNDLE</strong></td>
+                                <td class="rounded-tr-xl">TRADITIONAL<br> LESSONS</td>
+                            </tr>
+                            <tr>
+                                <td>Step-by-step curriculum</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Real teacher</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Live lessons</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td>On-demand lessons</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Learn from home</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Multiple instructors</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Popular songs</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Books/Posters included</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>90-Day Guarantee</td>
+                                <td><i class="fas fa-check"></i></td>
+                                <td><i class="fas fa-times"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Investment</td>
+                                <td class="rounded-bl-xl"><s class="opacity-60">$611</s> <strong>$177<br> 1st year.</strong></td>
+                                <td class="rounded-br-xl">$2400-$3600 <br>per year.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
     ])
+
+
+    @php
+        $testimonials = [
+            [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/nico.webp',
+                'name' => 'Nico Human',
+                'location' => 'New Westminster, Canada',
+                'title' => 'Learning the piano is easier than I thought it would be',
+                'description' => 'Life is busy, and it’s tough to predict when you will have time to practice and learn. But learning the piano is easier than I thought it would be. The lessons are little units. It’s like how you eat an elephant: in biteable chunks!<br><br> I love that I can learn on my own schedule whenever I have an opportunity. It feels modern and progressive, and it can work for anyone.',
+            ],
+            [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/erika.webp',
+                'name' => 'Erika Espinosa',
+                'location' => 'Washington, USA',
+                'title' => 'Way less stressful than private lessons.',
+                'description' => 'I work many hours, and I’m a mom of a teenager and a 5-year-old. I took private lessons for over a year, but it was hard for me to continue because of my busy schedule. <br><br>Pianote’s lessons are laid out so well, mimicking private lessons but allowing you to learn at your own pace. Plus, it’s way less stressful than private lessons.<br><br>I’m super happy and pleased with my decision to join Pianote!',
+            ],
+             [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/steve.webp',
+                'name' => 'Steve Wilson',
+                'location' => 'Arizona, USA',
+                'title' => 'I\'ve learned that it doesn\'t have to be such a huge time commitment to really start',
+                'description' => 'I\'ve learned that it doesn\'t have to be such a huge time commitment to really start to learn it because I\'m doing this for me. I\'m not doing this as a course. I\'m not doing this because somebody else wants me to learn it. This is finally for me and something I want to do for myself. <br><br> I tried some piano books and I tried some of the courses, where you can plug a piano into an iPad and then try to play along with it. That didn\'t very work very well for me. But when I saw Lisa teaching basic chords and making music from that, that was very inspiring.',
+            ],
+           [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/janet.webp',
+                'name' => 'Janet Ketchen',
+                'location' => 'Victoria, Canada',
+                'title' => 'I’m 66 years old now, and I’m having a ball!',
+                'description' => 'I first wanted to play the piano as a child. I also wanted to learn ballet. But we couldn’t afford both, so I said I would learn the piano sometime later in life. Well, I’m 66 years old now and I’m having a ball! Anyone should try this, and it is never too late to learn!',
+            ],
+             [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/bernhard.webp',
+                'name' => 'Bernhard Zainsinger',
+                'location' => 'Chicago, USA',
+                'title' => 'Lisa is the perfect teacher',
+                'description' => 'Lisa is the perfect teacher. Her hands-on teaching approach is invaluable to my learning and helps me make progress more easily.',
+            ],
+
+            [
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/marcel.webp',
+                'name' => 'Marcel Robichaud',
+                'location' => 'Canada',
+                'title' => 'Finally, the instrument really feels like an instrument where I can enjoy playing it',
+                'description' => 'Hey, Lisa and Pianote and anyone watching this. This is Marce. <br><br> I just want to record a quick message to say Thank you for all your help.<br><br>It\'s been such a treat to be with the piano. Finally, the instrument really feels like an instrument that I can enjoy playing, rather than just being a pretty piece of furniture sitting in a corner, collecting dust in my living room (laughs).<br><br>So once again, I appreciate everything you guys do - all the support, everything. It\'s just been awesome. Thank you so much.',
+            ],
+        ];
+    @endphp
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20">
+        <div class="container max-w-5xl mx-auto text-center">
+            <h2 class="pb-10 md:pb-16">See why our students love us.<br>
+                <strong>Real stories from real students.</strong></h2>
+            <div class="masonry text-left">
+                @foreach ($testimonials as $card)
+                    <div class="masonry-item bg-[#F1F7FE] shadow-lg rounded-lg p-6 lg:px-6 mb-4 flex flex-col">
+                        <div class="flex items-center mb-4">
+                            <img class="w-16 h-16 rounded-full mr-4" src="{{ $card['avatar'] }}" alt="{{ $card['name'] }}">
+                            <div>
+                                <h5 class="text-lg font-semibold">{{ $card['name'] }}</h5>
+                                <p class="text-gray-600 text-xs">{{ $card['location'] }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <span>
+                                @for ($i = 0; $i < 5; $i++)
+                                    <i class="fas fa-star text-2xl text-[#FFC800]"></i>
+                                @endfor
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">"{{ $card['title'] }}"</h3>
+                        <p class="text-gray-700 flex-grow">"{!! $card['description'] !!}"</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
@@ -631,136 +696,52 @@
             $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&redirect=/order&promo-code=beginner-bundle&locked=true';
             $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[pianote-headphones-2024]=1&redirect=/order&promo-code=beginner-bundle,beginner-headphones,headphones-us&locked=true'
     @endphp
-    <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
-        <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6">
-            <div class="container mx-auto relative z-50  max-w-4xl ">
+    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6" style="background: #F6F5F4;">
+        <div class="container mx-auto relative z-50  max-w-4xl ">
 
-                <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
-                <br>
-                <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
-                    <strong class="relative inline-block">EVERYTHING
-                        <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
-                    </strong>
-                    YOU NEED <br class="hidden sm:inline">
-                    TO LEARN PIANO.
-                </h1>
-                <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                    <i class="fas fa-check text-pianote"></i> Play-Along Lessons
-                    <i class="fas fa-check lg:ml-5 text-pianote"></i> Great Teachers
-                    <br class="sm:hidden">
-                    <i class="fas fa-check lg:ml-5 text-pianote"></i> Fun Practice
-                    <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
-                </p>
+            <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
+            <br>
+            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
+                <strong class="relative inline-block">EVERYTHING
+                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+                </strong>
+                YOU NEED <br class="hidden sm:inline">
+                TO LEARN PIANO.
+            </h1>
+            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                <i class="fas fa-check text-pianote"></i> Play-Along Lessons
+                <i class="fas fa-check lg:ml-5 text-pianote"></i> Great Teachers
+                <br class="sm:hidden">
+                <i class="fas fa-check lg:ml-5 text-pianote"></i> Fun Practice
+                <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
+            </p>
 
-                <h2 class="leading-tight mt-6 mb-1">
-                    <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
-                </h2>
-                <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
+            <h2 class="leading-tight mt-6 mb-1">
+                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
+            </h2>
+            <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
 
-                    <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
-                <br>
-                <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
-                <div style="font-size:0px">
-                    @foreach($bonuses as $bonus)
-                        <div
-                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
-                            x-data="{
-                        flipped: false,
-                    }"
-                            x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    "
-                        >
-                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
-                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                    <div
-                                        x-ref="front"
-                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
-                                        @if(!empty($bonus['badge']))
-                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
-                                        @endif
-                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
-                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                            x-intersect.once="lazyLoad = true">
-                                            <picture class="absolute inset-0 w-full h-full object-cover">
-                                                <img src="{{ $bonus['image'] }}"
-                                                    alt="Bonus Image"
-                                                    class="w-full h-full object-cover opacity-0 transition-opacity"
-                                                    loading="lazy"
-                                                    onload="this.classList.remove('opacity-0')">
-                                            </picture>
-                                        </div>
-                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                            <i class="fas fa-arrow-right text-4xl"></i><br>
-                                            <p class="text-sm"><strong>DETAILS</strong></p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        x-ref="back"
-                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
-                                        style="backface-visibility: hidden;"
-                                    >
-                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
+            <br>
+            <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
 
-                            <p class="w-full leading-normal mt-2">
-                                <span style="display:inline-block;">
-                            @if(!empty($bonus['price']))
-                                        <s class="opacity-40">${{ $bonus['price'] }}</s>
-                                    @endif
-                                    @if(!empty($bonus['customText']))
-                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>
-                                    @else
-                                        <strong class="text-pianote">FREE</strong>
-                                    @endif
-                                <br>
-                                <em>
-                                    @if(!empty($bonus['shipping']))
-                                        Free Bonus
-                                    @elseif(!empty($bonus['customSubText']))
-                                        Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%
-                                    @else
-                                        Online Access
-                                    @endif
-                                </em>
-                            </span>
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
+
 
 {{--                                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" >SOLD OUT</a>--}}
-                                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>
-                <br>
-                                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">
-                                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>
-            </div>
-        </section>
-    </div>
-
-    <section class="content-section text-center" style="background: #000;">
+                            <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>
+            <br>
+                            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">
+                                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>
+        </div>
+    </section>
+    <section class="content-section text-center text-black" style="background: #e6e4e3;">
         <div class="container mx-auto relative z-50">
-            <div class="inline-block w-full px-3 md:px-4 mb-5 text-white">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
                 <p><strong>Any questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 text-white" style="margin-top: 0;">
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
@@ -769,6 +750,13 @@
             </div>
         </div>
     </section>
+
+    @include('musora.sales.components.app-section', [
+        'image' => 'marketing/pianote/membership/homepage/webp-format/devices.webp',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
+    ])
+    @include('pianote._partials.faq')
 
     @include('_partials.components.video-modal',[
         'name' => 'demoVid',
