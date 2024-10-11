@@ -203,7 +203,7 @@
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                 alt="30-Day Double Bass With Ulysses Logo">
             <h4 class="leading-loose text-left">
-                <i class="fas fa-check text-singeo mr-5"></i> Daily guided drum workouts<br>
+                <i class="fas fa-check text-singeo mr-5"></i> Daily guided workouts<br>
                 <i class="fas fa-check text-singeo mr-5"></i> Flexible schedule<br>
                 <i class="fas fa-check text-singeo mr-5"></i> FREE for Musora members<br>
             </h4>
@@ -235,14 +235,14 @@
                 [
                     'image' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/beginner.webp',
-                    'title' => 'Beginner Singers.',
+                    'title' => 'Beginner Singers',
                     'description' =>
                         'This course might be challenging, but Everyday Improv will help you find your range so you can start to improvise within it. Plus, finding the right note will begin to feel like second nature.',
                 ],
                 [
                     'image' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/singeo/products/everyday-improv/enrollment/intermediate.webp',
-                    'title' => 'Intermediate Singers.',
+                    'title' => 'Intermediate Singers',
                     'description' =>
                         'Does singing without a guide sound scary? Everyday Improv can help. You’ll learn how to turn mistakes into music, master scat improv, and sing along with any song.',
                 ],
