@@ -1,15 +1,15 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <style> .grecaptcha-badge {display:none;right:0!important;}
     .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:10px;
+        max-height:1000px;
+        visibility:visible;
+        opacity:1;
+        padding:10px;
+    }
+    @media (min-width: 40em) {
+        .thank-you-box.active {
+            padding: 12px;
         }
-        @media (min-width: 40em) {
-            .thank-you-box.active {
-                padding: 12px;
-            }
     }
 </style>
 @php
@@ -109,6 +109,7 @@
         @include('_partials.components.forms.checkbox-group', [
             'checkboxItems' => $checkboxItems,
             'checkboxTitle' => $checkboxTitle ?? null,
+            'cleanFormId' => $cleanFormId,
             'theme' => $theme
         ])
     @endif
@@ -157,8 +158,6 @@
 
 </div>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -166,6 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const formId = form.id;
         const formContainer = form.closest('.form-container');
         const thankYouBox = formContainer ? formContainer.querySelector('.thank-you-box') : null;
+
+        // Remove listeners to avoid duplication
+        form.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
+            const newCheckbox = checkbox.cloneNode(true);
+            checkbox.parentNode.replaceChild(newCheckbox, checkbox);
+        });
 
         form.querySelectorAll('.instrument-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
