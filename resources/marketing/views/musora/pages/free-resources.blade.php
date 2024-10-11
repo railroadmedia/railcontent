@@ -132,42 +132,43 @@
                 </div>
             </div>
         </section>
-        <section class="px-5 sm:px-6 sm:pb-16 lg:pb-24 text-black">
-            <div class="flex flex-col lg:flex-row gap-8 justify-between items-start relative">
-                <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
-                    <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
-                    <div class="flex flex-col space-y-4">
-                        <a href="https://youtube.com/musoraofficial" class="bg-musora text-white font-bold py-20 md:py-14 rounded-2xl text-center">  
-                            <div class="relative">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/logo-light.svg" alt="Musora Logo" class="h-6">
-                            </div>
-                        </a>
-                        <a href="https://youtube.com/drumeoofficial" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center"> 
-                            <div class="relative">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/drumeo.svg" alt="Drumeo Logo" class="h-8">
-                            </div>
-                        </a>
-                        <a href="https://youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center">
-                            <div class="relative">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/pianote.svg" alt="Pianote Logo" class="h-8">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-        
-                <div class="flex flex-col gap-2 lg:w-6/12">
-                    <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
-                    <div class="space-y-4">
-                        <a href="/playlist" class="bg-cover bg-center">
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/musora-playlist.png" alt="Musora Playlists" class="rounded-lg">
-                        </a>
-                        <a href="/history" class="bg-cover bg-center">
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/history.png" alt="Today in Music History" class="rounded-lg">
-                        </a>
-                    </div>
+     <section class="px-5 sm:px-6 sm:pb-16 lg:pb-24 text-black">
+        <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative border-l-2 border-black">
+            <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
+                <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
+                <div class="flex flex-col space-y-4">
+                    <a href="https://youtube.com/musoraofficial" class="bg-musora text-white font-bold py-16 lg:py-14 rounded-2xl text-center">
+                        <div class="relative">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/logo-light.svg" alt="Musora Logo" class="h-6">
+                        </div>
+                    </a>
+                    <a href="https://youtube.com/drumeoofficial" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                        <div class="relative">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/drumeo.svg" alt="Drumeo Logo" class="h-8">
+                        </div>
+                    </a>
+                    <a href="https://youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                        <div class="relative">
+                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/pianote.svg" alt="Pianote Logo" class="h-8">
+                        </div>
+                    </a>
                 </div>
             </div>
-        </section>
+    
+            <div class="flex flex-col gap-2 lg:w-6/12">
+                <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
+                <div class="space-y-4">
+                    <a href="/playlist" class="bg-cover bg-center">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/musora-playlist.png" alt="Musora Playlists" class="rounded-lg">
+                    </a>
+                    <a href="/history" class="bg-cover bg-center">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/history.png" alt="Today in Music History" class="rounded-lg">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     </div>
 
 @stop
