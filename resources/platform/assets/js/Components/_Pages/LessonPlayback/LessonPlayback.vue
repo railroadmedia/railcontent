@@ -1,12 +1,12 @@
 <template>
     <div class="tw-w-full tw-mx-auto tw-px-4 md:tw-px-8"
         :class="hasRelatedLessons ? 'tw-max-w-[1703px]' : 'tw-max-w-[1450px]'">
-        <Breadcrumb :breadcrumbs="contentBreadcrumb.pages" />
+        <Breadcrumb :breadcrumbs="breadCrumbs" />
 
         <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-mt-3 tw-flex-col tw-gap-4">
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 xl:tw-row-span-2 tw-w-full tw-flex"
-                :class="hasRelatedLessons && isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">
+                :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">
                 <!-- Video Content -->
                 <div class="tw-w-full">
                     <!--Video-->
@@ -154,7 +154,7 @@
                     />
 
                     <ContentInfo 
-                        :breadcrumbs="contentBreadcrumb.pages" 
+                        :breadcrumbs="breadCrumbs" 
 
                         :content-description="videoData.description"
                         :content-chapters="videoData?.chapters" 
@@ -162,6 +162,7 @@
                     />
 
                     <VideoButtons 
+                        v-if="!isWorkout"
                         :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" 
                         :brand="brand"
@@ -171,7 +172,7 @@
                     />
 
                     <ContentProgress 
-                        v-if="!noAccess" 
+                        v-if="!noAccess && !isWorkout" 
                         :brand="brand" 
                         :is-completed="lessonData.completed"
                         :progress="lessonData.progress_percent" 
@@ -184,7 +185,7 @@
                 </div>
                 <!-- Related Lessons Toggle -->
                 <RelatedLessonsToggle
-                    v-if="hasRelatedLessons && relatedLessons.data.length > 0"
+                    v-if="hasRelatedLessons"
                     :relatedLessons="relatedLessons"
                     :isRelatedSectionOpen="isRelatedSectionOpen"
                     v-model:isRelatedSectionOpen="isRelatedSectionOpen"
@@ -193,7 +194,7 @@
 
             <!--Related Section -->
             <RelatedLessons
-                v-if="hasRelatedLessons && relatedLessons.data.length > 0"
+                v-if="hasRelatedLessons"
                 :isRelatedSectionOpen="isRelatedSectionOpen"
                 :relatedLessons="relatedLessons"
                 v-model:isRelatedSectionOpen="isRelatedSectionOpen"
@@ -213,7 +214,7 @@
                 />
 
                 <!-- Assignments -->
-                <div v-if="videoData?.assignments?.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                <div v-if="videoData?.assignments?.length > 0 && !isWorkout" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
@@ -253,6 +254,7 @@
             </section>
         </div>
         <LessonComplete 
+            v-if="!isWorkout"
             :lesson-content="lessonData" 
             :this-lesson-json="thisLessonJson" 
             :next-lesson-json="nextLessonJson" 
@@ -315,58 +317,24 @@ import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson } from
 import { getContentId } from '@hooks/utils';
 
 const props = defineProps({
-    thisLessonJson: {
-        type: Object,
-        default: () => {}
-    },
-    nextLessonJson: {
-        type: Object,
-        default: () => {}
-    },
-    progressXp: {
-        type: String,
-        default: ''
-    },
-    lessonData: {
-        type: [Array, Object],
-        default: () => []
-    },
-    assignments: {
-        type: Array,
-        default: [],
-    },
-    hasRelatedLessons: {
-        type: Boolean,
-        default: false,
-    },
-    videoProps: {
-        type: Object,
-        default: {},
-    },
-    relatedLessons: {
-        type: Object,
-        default: {},
-    },
-    videoResources: {
-        type: Object,
-        default: {},
-    },
-    videoButtons: {
-        type: Object,
-        default: {},
-    },
-    soundsliceSlug: {
-        type: String,
-        default: '',
-    },
-    contentBreadcrumb: {
-        type: Object,
-        default: {},
-    },
-    contentDescription: {
-        type: String,
-        default: ''
-    },
+    assignments: Array,
+    breadcrumbFirstLevelUrl: String,
+    breadcrumbFirstLevelTitle: String,
+    breadcrumbSecondLevelUrl: String,
+    breadcrumbSecondLevelTitle: String,
+    breadcrumbLastLevelTitle: String,    
+    contentType: String,
+    contentBreadcrumb: Object,
+    contentDescription: String,
+    thisLessonJson: Object,
+    lessonData: [Array, Object],
+    nextLessonJson: Object,
+    progressXp: String,
+    relatedLessons: Object,
+    soundsliceSlug: String,
+    videoProps: Object,
+    videoResources: Object,
+    videoButtons: Object,
 });
 
 //Pinia
@@ -379,7 +347,7 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
-const isRelatedSectionOpen = ref(props.hasRelatedLessons);
+const isRelatedSectionOpen = ref(props.relatedLessons.data.length > 0);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -478,8 +446,48 @@ const handleCloseSoundslice = () => {
     Intercom.showWidget();
 };
 
+
+//Computed
+const withContentBreadcrumbData = computed( () => {
+    return props.contentBreadcrumb?.pages?.length > 0;
+})
+
+const breadcrumbProps = computed(() => {
+    const breadcrumbLevels = [
+        {
+            title: props.breadcrumbFirstLevelTitle,
+            url: props.breadcrumbFirstLevelUrl
+        }
+    ];
+    if (props.breadcrumbSecondLevelTitle?.length) {
+        breadcrumbLevels.push({
+            title: props.breadcrumbSecondLevelTitle,
+            url: props.breadcrumbSecondLevelUrl
+        });
+    }
+    breadcrumbLevels.push({
+        title: props.breadcrumbLastLevelTitle,
+        url: ''
+    });
+    return breadcrumbLevels;
+});
+
+const breadCrumbs = computed( () => {
+    if(withContentBreadcrumbData.value) {
+        return props.contentBreadcrumb.pages;
+    } else if(breadcrumbProps.value?.length > 0) {
+        return breadcrumbProps.value;
+    } else {
+        return [];
+    }
+})
+
+const hasRelatedLessons = computed( () => {
+    return props.relatedLessons.data.length > 0;
+})
+
 const noAccess = computed(() => {
-    return props.thisLessonJson?.data[0]?.need_access;
+    return props.videoProps.need_access;
 })
 
 const showDraftLabel = computed(() => {
@@ -499,6 +507,10 @@ const likeContent = () => {
         likeData.value.likeCount -= 1;
     }
 }
+
+const isWorkout = computed( () => {
+    return props.contentType === 'workout';
+})
 
 onBeforeMount(async() => {
     console.log('videoProps.progressState', props.videoProps.progressState)

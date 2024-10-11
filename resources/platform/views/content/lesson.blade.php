@@ -300,13 +300,13 @@
 
     <lesson-playback
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
-        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
+        :video-props="{{ json_encode($videoProps) }}" 
+        :related-lessons="{{ $relatedLessons }}"
         :video-resources="{{ json_encode($videoResources) }}"
         :video-buttons="{{ json_encode($videoButtons) }}"
         :comments-props="{{ json_encode($commentsProps) }}"
         :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
         :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
-        :has-related-lessons="{{ json_encode($hasRelatedLessons) }}"
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"

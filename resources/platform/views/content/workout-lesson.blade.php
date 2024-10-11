@@ -168,37 +168,24 @@
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
-    {{-- Workouts page template --}}
-    {{-- <workouts-playback
+    <lesson-playback
         breadcrumb-first-level-url="/{{ $brand }}/workouts"
         breadcrumb-first-level-title="Workouts"
         @if($lessonType === 'challenge-part')
             breadcrumb-second-level-url="{{ url()->route("platform.workouts.challenges") }}"
             breadcrumb-second-level-title="Challenges"
         @endif
-        :lesson-data="{{ json_encode($lessonContent) }}"
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
-        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
-        :video-resources="{{ json_encode($videoResources) }}"
-        :video-buttons="{{ json_encode($videoButtons) }}"
-        :comments-props="{{ json_encode($commentsProps) }}"
-        :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
         :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
-        :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
-    >
-    </workouts-playback> --}}
-
-
-    <lesson-playback
-        :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
+        :comments-props="{{ json_encode($commentsProps) }}"
+        content-type="{{ $lessonContent->fetch('type') }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
-        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
-        :video-resources="{{ json_encode($videoResources) }}"
-        :video-buttons="{{ json_encode($videoButtons) }}"
-        :comments-props="{{ json_encode($commentsProps) }}"
-        :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
-        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
+        :related-lessons="{{ $relatedLessons }}"
         :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+        :this-lesson-json="{{ $thisLessonJson }}"
+        :video-buttons="{{ json_encode($videoButtons) }}"
+        :video-props="{{ json_encode($videoProps) }}" 
+        :video-resources="{{ json_encode($videoResources) }}"
     >
     </lesson-playback>
 
