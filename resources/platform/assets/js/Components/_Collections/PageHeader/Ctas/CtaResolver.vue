@@ -16,6 +16,7 @@ import VideoModalCta from './VideoModalCta.vue';
 import GoogleFormCta from './GoogleFormCta.vue';
 import PageHeaderPrimaryCta from '../PageHeaderPrimaryCta.vue';
 import CreatePlaylistCta from '../../Playlists/CreatePlaylistCta.vue';
+import UnlockChallengeCta from '@collections/PageHeader/Ctas/UnlockChallengeCta.vue';
 
 const componentMap = {
     AskAQuestionCta,
@@ -29,7 +30,8 @@ const componentMap = {
     VideoModalCta,
     GoogleFormCta,
     PageHeaderPrimaryCta,
-    CreatePlaylistCta
+    CreatePlaylistCta,
+    UnlockChallengeCta,
 };
 
 const resolveComponent = (type) => componentMap[type];
