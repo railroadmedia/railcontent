@@ -426,7 +426,8 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
-            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null
+            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null,
+            'parentType' => $primaryPage,
         ]);
     }
 

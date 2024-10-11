@@ -1,7 +1,7 @@
 <template>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <Breadcrumb :breadcrumbs="breadcrumbs" />
-        
+
         <PageHeader
             :title="header?.title"
             :description="header?.description"
@@ -16,7 +16,7 @@
         />
 
         <template v-if="!isLoading">
-            
+
             <!-- BACK-END NOT IMPLEMENTED -->
             <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
                 <div class="tw-w-full tw-p-4 tw-pb-0">
@@ -174,6 +174,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    parentType: {
+        type: String,
+        default: '',
+    },
 })
 
 //Pinia
@@ -196,15 +200,15 @@ const showNumbers = computed(() => {
 })
 const OverviewChildData = computed( () => {
     if(props.contentType === 'learning-path-level') return data.value.levels;
-    if(props.contentType === 'unit') return data.value.units; 
-    return data.value.children; 
+    if(props.contentType === 'unit') return data.value.units;
+    return data.value.children;
 })
 
 onBeforeMount( async () => {
     // console.log('content type is', props.contentType)
     // console.log('headerData', props.headerData.ctas)
     // console.log('sanity content is: ', props.contentType);
-    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
+    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
         data.value = OverviewData.value;
 
         //Header Data
@@ -212,7 +216,7 @@ onBeforeMount( async () => {
 
         console.log(header.value)
 
-        //console.log('my data', data.value)    
+        //console.log('my data', data.value)
         platformStore.setLoadingState(OverviewLoading.value);
 
 })
