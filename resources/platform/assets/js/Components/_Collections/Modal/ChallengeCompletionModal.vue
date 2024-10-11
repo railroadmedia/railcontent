@@ -1,14 +1,16 @@
 <template>
     <ModalRenderer :black-background="true">
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement ? 'tw-opacity-1' : 'tw-opacity-0'">
+                <!-- Completion Animation -->
+<!--            <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed.drumeo" width="100%" height="100%" :loop="false" />-->
             <!-- Desktop/Tablet -->
             <div class="tw-hidden md:tw-flex tw-flex-col tw-justify-center tw-items-center dark:tw-text-white">
                 <h1 class="tw-text-2xl tw-font-bold tw-mb-2 tw-text-white">You're done for the day!</h1>
                 <p class="tw-text-white">Return tomorrow to maintain your streak!</p>
 
                 <div class="tw-border tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-max-w-[700px] lg:tw-max-w-[758px] tw-w-full tw-flex tw-px-8 lg:tw-px-12 tw-pb-5 tw-relative tw-overflow-hidden tw-my-5">
-                    <!-- Animation -->
-                    <Vue3Lottie class="tw-absolute tw-w-full tw-h-auto tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover tw-bg-cover" animation-link="https://lottie.host/78a3fc85-e9ef-404e-ac70-05b4413fdec2/15jLWPqTYS.json" width="100%" height="100%" />
+                    <!-- Streak Animation -->
+                    <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" width="100%" height="100%" :loop="false" />
                     <!-- Left -->
                     <div class="tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
                         <!-- Challenge Logo -->
@@ -78,8 +80,8 @@
                 <h1 class="tw-text-2xl tw-font-bold tw-mb-1 tw-text-center tw-text-white">You're done for the day!</h1>
                 <p class="tw-text-center tw-text-white">Return tomorrow to maintain your streak!</p>
                 <div class="tw-rounded-[10px] tw-bg-white dark:tw-bg-[#182132] tw-max-w-[330px] tw-mx-2 tw-w-full tw-flex tw-flex-col tw-pb-6 tw-px-2 tw-relative tw-my-4 tw-overflow-hidden">
-                    <!-- Animation -->
-                    <Vue3Lottie class="tw-absolute tw-w-[calc(100%+400px)] tw-h-auto tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" animation-link="https://lottie.host/78a3fc85-e9ef-404e-ac70-05b4413fdec2/15jLWPqTYS.json" />
+                    <!-- Streak Animation -->
+                    <Vue3Lottie class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" />
                     <div class="tw-relative tw-w-full tw-mb-5 tw-pt-6">
                         <!-- Musora Logo -->
                         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
@@ -156,7 +158,7 @@ import { computed, onMounted, ref } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
-
+import { completionAnimations } from '@pages/Challenges/completionAnimations';
 
 import ModalRenderer from '@collections/Modal/ModalRenderer';
 import MuButton from '@units/Button/MuButton';
@@ -171,6 +173,7 @@ const infoModalType = ref('');
 const showFinishAnimation = ref(false);
 const showLabelAnimation = ref(false);
 const showAchievement = ref(false);
+const hideAnimation = ref(false);
 
 const hasProgress = computed(() => {
     return progress.value > 0;
@@ -180,17 +183,20 @@ const circumference = 2 * 22 / 7 * 120;
 
 const updateInfoModalType = (type) => {
     infoModalType.value = type;
-    console.log('clicked',type)
 }
 
 onMounted(() => {
     setInterval(() => {
         progress.value = 40;
         showLabelAnimation.value = true;
-    }, 4000)
+    }, 2000)
 
     // setInterval(() => {
     //     showAchievement.value = true;
     // }, 8000)
+
+    setInterval(() => {
+        hideAnimation.value = true;
+    }, completionAnimations[15].duration)
 })
 </script>
