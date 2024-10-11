@@ -9,8 +9,8 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="showDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>Change Start Date</button></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>Leave 30-Day Drummer</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave 30-Day Drummer</button></li>
                 </ul>
             </div>
         </div>
@@ -46,7 +46,7 @@
                             <div class="tw-font-extrabold">1</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Day Streak
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('streak')"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             <div class="tw-font-extrabold">2</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Rest Days
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('rest')"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="showDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>Change Start Date</button></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>Leave 30-Day Drummer</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave 30-Day Drummer</button></li>
                 </ul>
             </div>
         </div>
@@ -116,7 +116,7 @@
                     <div class="tw-font-extrabold">1</div>
                     <div class="tw-flex tw-items-center tw-justify-between">
                         Day Streak
-                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                     <div class="tw-font-extrabold">2</div>
                     <div class="tw-flex tw-items-center tw-justify-between">
                         Rest Days
-                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
                     </div>
                 </div>
             </div>
@@ -138,23 +138,56 @@
             <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white"><i class="fa-solid fa-play tw-mr-2 tw-mt-1"></i> Start Day 2</MuButton>
         </div>
     </div>
+
+    <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" />
+    <ChallengeLeaveModal v-if="isLeaveModalOpen" @modal-close="closeLeaveModal" />
+    <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
+
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
+import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
+import ChallengeLeaveModal from '@collections/Modal/ChallengeLeaveModal';
+import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const showDropdown = ref(false);
+const isNotificationModalOpen = ref(false);
+const isLeaveModalOpen = ref(false);
+const infoModalType = ref('');
 
 const circumference = 2 * 22 / 7 * 108;
 
 const closeDropdown = () => {
     showDropdown.value = false;
+}
+
+const openNotificationModal = () => {
+    showDropdown.value = false;
+    isNotificationModalOpen.value = true;
+}
+
+const closeNotificationModal = () => {
+    isNotificationModalOpen.value = false;
+}
+
+const openLeaveModal = () => {
+    showDropdown.value = false;
+    isLeaveModalOpen.value = true;
+}
+
+const closeLeaveModal = () => {
+    isLeaveModalOpen.value = false;
+}
+
+const updateInfoModalType = (type) => {
+    infoModalType.value = type;
 }
 </script>
