@@ -22,7 +22,7 @@
                             <!-- Draft Label -->
                             <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
-                            <transition v-if="videoData?.video?.type === 'youtube'" appear name="fade">
+                            <transition v-if="videoData?.video?.type === 'youtube-video'" appear name="fade">
                                 <YoutubePlayer 
                                     ref="mediaElementVueInstance"
                                     :brand="brand" 
@@ -207,7 +207,7 @@
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
                 <!-- Chapters -->
                 <VideoChapters
-                    v-if="videoData?.chapters?.length"
+                    v-if="videoData?.chapters?.length && isWorkout"
                     :chapters="videoData.chapters"
                     @open-slice="openSlice"
                     @seek-to-chapter="seekToChapter"

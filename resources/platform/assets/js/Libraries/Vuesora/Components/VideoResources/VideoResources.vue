@@ -260,7 +260,11 @@
             </ModalRenderer>
         </div>
 
-        <CoachesInLesson v-if="instructors.length > 0" :instructors="instructors" :brand="brand"></CoachesInLesson>
+        <CoachesInLesson 
+            v-if="instructors?.length > 0" 
+            :instructors="instructors" 
+            :brand="brand"
+        />
     </div>
 </template>
 
@@ -445,7 +449,7 @@ export default {
             if (this.artist) {
                 return this.artist;
             }
-            return this.instructors.length > 0 ? this.instructors[0].name : this.brand.toUpperCase();
+            return this.instructors?.length > 0 ? this.instructors[0].name : this.brand.toUpperCase();
         },
         isPageLoading(){
             const platformStore = usePlatformStore();
