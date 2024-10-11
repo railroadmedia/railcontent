@@ -117,7 +117,10 @@ const props = defineProps({
   },
   ctas: Array,
   description: String,
-  dropdowns: Array,
+  dropdowns: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));
