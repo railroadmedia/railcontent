@@ -126,11 +126,17 @@
                             </svg>
                         </button>
 
-                        <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
-                            :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
+                        <Dropdown 
+                            v-if="showDropdown" 
+                            :brand="brand" 
+                            :item="item" 
+                            :is-open="state.dropdownOpen"
+                            :dropdownOptions="dropdownOptions"
                             :position="state.dropdownPosition"
+                            @closeDropdown="closeDropdown"
                             @addToList="handleAddToList()"
-                            @progressReset="$emit('progressReset', { content_id: item.id })" />
+                            @progressReset="$emit('progressReset', { content_id: item.id })" 
+                        />
                     </div>
                 </div>
             </div>
@@ -269,11 +275,16 @@ const hasProduct = computed(() => {
 })
 
 const registrationUrl = computed(() => {
-    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value.post.fields?.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const duration = computed( () => {
-    let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
+    let time;
+    if(props.item.length_in_seconds) {
+        time = props.item.length_in_seconds;
+    } else {
+        time = props.item.fields?.find(field => field.key === 'length_in_seconds')?.value || '';
+    }
     let hours = Math.floor(time / 3600);
     let minutes = Math.floor(time / 60);
     let seconds = time - minutes * 60;
@@ -304,23 +315,29 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if(contentModel.value.post.fields) {
+    if(props.item.instructor) {
+        return props.item.instructor;
+    } else if(contentModel.value.post.fields) {
         if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+            return contentModel.value.post.fields?.find(field => field.key === 'artist')?.value || ''
         }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+        return contentModel.value.post.fields?.find(field => field.key === 'instructor')?.value.name || ''
     }
     return '';
-
 })
 
 const mappedData = computed(() => {
+    //Difficulty....
     let difficultyValue = 0; //default
-    if(contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
+    if(props.item.difficulty) {
+        difficultyValue = props.item.difficulty
+    } else if (contentModel.value.post.fields) {
+        difficultyValue = contentModel.value.post.fields?.find(field => field.key === 'difficulty')?.value || 0;
     }
-
     contentModel.value.card.difficulty = difficultyValue;
+
+    //Thumbnail....
+    if (props.item.thumbnail_url) contentModel.value.card.thumbnail = props.item.thumbnail_url;
 
     return contentModel.value.card
 });
@@ -336,7 +353,7 @@ const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
-const closeDropdownOnScroll = () => {
+const closeDropdown = () => {
     if (state.dropdownOpen) {
         state.dropdownOpen = false;
     }
@@ -344,23 +361,22 @@ const closeDropdownOnScroll = () => {
 
 const handleAddToList = () => {
     const { item: { id, type } } = props;
-    const { black_title: name, description, thumbnail_url } = mappedData.value;
-    window.openplaylistmodal({ modalType: 'addItem', content: { content_id: id, type, name, description, thumbnail_url } })
+    const { black_title: name, description, thumbnail } = mappedData.value;
+    window.openplaylistmodal({ modalType: 'addItem', content: { content_id: id, type, name, description, thumbnail_url: thumbnail } })
 };
 
 const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
-
 onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.addEventListener('scroll', closeDropdownOnScroll);
+    contentContainer.addEventListener('scroll', closeDropdown);
 });
 
 onUnmounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
+    contentContainer.removeEventListener('scroll', closeDropdown);
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);
