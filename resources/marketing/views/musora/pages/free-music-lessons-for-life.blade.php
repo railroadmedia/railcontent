@@ -159,7 +159,7 @@
             ];
         @endphp
     
-        <section class="pb-20 px-5 md:px-6" style="background: black;">
+        <section class="px-5 md:px-6" style="background: black;">
         <div class="container max-w-md md:max-w-4xl mx-auto text-center">
             <svg class="inline-block h-20 md:h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
                 <path d="M41.1853 6.17994C45.1417 2.22302 50.5047 0 56.1023 0H93.9075C99.5051 0 104.868 2.22302 108.824 6.17994L143.816 41.1862C147.773 45.1425 150 50.5055 150 56.103V93.908C150 99.5055 147.773 104.868 143.816 108.825L108.824 143.816C104.868 147.773 99.5051 150 93.9075 150H56.1023C50.5047 150 45.1417 147.773 41.1853 143.816L6.17879 108.825C2.22301 104.868 0 99.5055 0 93.908V56.103C0 50.5055 2.22301 45.1425 6.17879 41.1862L41.1853 6.17994ZM67.9714 44.2633V77.0862C67.9714 81.2477 71.1071 84.1197 75.0049 84.1197C78.9026 84.1197 82.0384 81.2477 82.0384 77.0862V44.2633C82.0384 40.6294 78.9026 37.2298 75.0049 37.2298C71.1071 37.2298 67.9714 40.6294 67.9714 44.2633ZM75.0049 93.4977C69.8177 93.4977 65.6268 97.9522 65.6268 102.876C65.6268 108.327 69.8177 112.254 75.0049 112.254C80.1921 112.254 84.383 108.327 84.383 102.876C84.383 97.9522 80.1921 93.4977 75.0049 93.4977Z" fill="#FFAE00"/>
@@ -175,8 +175,6 @@
                 </div>
             @endforeach
             </div>
-
-            <div class="inline-block py-4 sm:px-6">
                 @php
                     $timeUnits = [
                         ['condition' => 'timeLeft > 0 && day > 0', 'value' => 'day'],
@@ -203,10 +201,9 @@
                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                             </span>
                         </div>
-                        <p class="text-white italic pt-2 lg:pt-4" x-show="timeLeft >= 0"> We will contact the winner by email.</p>
+                        <p class="text-white italic pt-2 lg:pt-4 pb-20" x-show="timeLeft >= 0"> We will contact the winner by email.</p>
                     </span>
                 </div>
-            </div>
         </div>
     </section>
 
