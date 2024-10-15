@@ -19,7 +19,7 @@ class ParentTypeField extends Field
      */
     public function __construct(string $initialValue, Group|array|null $group = null)
     {
-        parent::__construct(FieldType::String, 'parent_type', 'Parent type', hidden: "true", group: $group, initialValue: $initialValue);
+        parent::__construct(FieldType::String, 'parent_type', 'Parent type', group: $group, initialValue: $initialValue);
     }
 
 }
