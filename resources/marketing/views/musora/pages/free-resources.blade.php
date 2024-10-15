@@ -39,7 +39,7 @@
             <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
             <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">Free Video Lessons</h5>
         </header>
-    
+
               @php
             $benefits = [
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
@@ -48,7 +48,7 @@
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/guitar.png', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
             ];
         @endphp
-        
+
         <div class="grid grid-col-1 md:grid-cols-2 gap-2 md:gap-5 lg:gap-8 pb-10 md:pb-20">
             @foreach ($benefits as $benefit)
                 <div class="text-left">
@@ -59,7 +59,7 @@
                 </div>
             @endforeach
         </div>
-    
+
         {{-- <section class="px-5 sm:px-6 py-8 sm:py-16 text-white rounded-3xl" style="background-color:#0C1523;">
             <div class="flex flex-col lg:flex-row items-center lg:items-start">
                 <div class="w-full lg:w-5/12 px-6 text-center">
@@ -68,7 +68,7 @@
                 <div class="w-full md:w-10/12 lg:w-6/12 xl:w-5/12 text-center lg:text-left">
                     <h3 class="uppercase pt-10 leading-tight lg:pl-6">
                         <strong>
-                            ENTER TO Win A FREE GUITAR 
+                            ENTER TO Win A FREE GUITAR
                             <br class="block lg:hidden" />
                             SIGNED BY PEACH PIT
                         </strong>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="w-full md:w-1/2 lg:w-5/12 xl:w-4/12 text-center max-w-[400px]">
                 @php
-                    $annualLink = '/ecommerce/add-to-cart?products=annual-plan'; //TODO: Update link
+                    $annualLink = '/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&promo-code=musorayt&locked=true';
                     $points = [
                         '<strong>Learn piano, guitar, drums, & singing.</strong>',
                         '<strong>300+ popular songs.</strong>',
@@ -111,7 +111,7 @@
                         'Cancel anytime.'
                     ];
                 @endphp
-                
+
                 <div class="w-full px-2 md:px-3 mb-4 md:mb-0 relative text-center">
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black text-musora border border-black">EXCLUSIVE OFFER</p>
                     <a href="{{ $annualLink }}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 border-black" aria-label="Annual Plan">
@@ -137,24 +137,24 @@
             <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
                 <div class="flex flex-col space-y-4">
-                    <a href="https://youtube.com/musoraofficial" class="bg-musora text-white font-bold py-16 lg:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/@MusoraMedia" class="bg-musora text-white font-bold py-16 lg:py-14 rounded-2xl text-center">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/logo-light.svg" alt="Musora Logo" class="h-6">
                         </div>
                     </a>
-                    <a href="https://youtube.com/drumeoofficial" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/freedrumlessons/" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/drumeo.svg" alt="Drumeo Logo" class="h-8">
                         </div>
                     </a>
-                    <a href="https://youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/pianote.svg" alt="Pianote Logo" class="h-8">
                         </div>
                     </a>
                 </div>
             </div>
-    
+
             <div class="flex flex-col gap-2 lg:w-6/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
                 <div class="space-y-4">
