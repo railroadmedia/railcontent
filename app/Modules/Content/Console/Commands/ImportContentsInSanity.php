@@ -564,6 +564,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
     private function handleChildren(mixed $result, array &$songs, string $id, mixed $type): array
     {
         $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position', 'asc')->get();
+        if($contentHierarchy->isEmpty()){
+            return $songs;
+        }
         $duration = 0;
         foreach ($contentHierarchy as $hierarchy) {
             if ($hierarchy->child) {
@@ -696,6 +699,13 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }
         if (isset($this->difficultyMapping[$difficulty])) {
             $sanityDocuments["difficulty_string"] = $this->difficultyMapping[$difficulty];
+        }
+        if($result->parent_content_data) {
+            $parents = (json_decode($result->parent_content_data));
+            foreach ($parents as $parent){
+                $sanityDocuments['parent_content_data'][] = ['type' => $parent->type,
+                    'id' => $parent->id, 'slug' =>$parent->slug];
+            }
         }
         $resources       = [];
         $chapters        = [];
