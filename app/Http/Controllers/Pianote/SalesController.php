@@ -502,4 +502,10 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
+    public function headphones()
+    {
+        return view('pianote.products.headphones', [
+            'theme' => 'pianote',
+        ]);
+    }
 }
