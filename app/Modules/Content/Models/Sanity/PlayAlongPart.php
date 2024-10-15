@@ -17,7 +17,7 @@ class PlayAlongPart extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Play Along Part', withResources:true);
+        parent::__construct(self::getName(), 'Play Along Part', withResources:true, parentType: 'play-along');
     }
 
     public static function getName(): string
