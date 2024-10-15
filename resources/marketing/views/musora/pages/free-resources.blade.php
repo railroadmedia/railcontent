@@ -42,7 +42,7 @@
     
               @php
             $benefits = [
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-2.png', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/singeo.jpg', 'title' => 'Improve Any Voice', 'link' => 'https://www.singeo.com/improve-any-voice/lessons'],
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/guitar.png', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
@@ -60,7 +60,7 @@
             @endforeach
         </div>
     
-        <section class="px-5 sm:px-6 py-8 sm:py-16 text-white rounded-3xl" style="background-color:#0C1523;">
+        {{-- <section class="px-5 sm:px-6 py-8 sm:py-16 text-white rounded-3xl" style="background-color:#0C1523;">
             <div class="flex flex-col lg:flex-row items-center lg:items-start">
                 <div class="w-full lg:w-5/12 px-6 text-center">
                     <img class="w-64 h-64 rounded-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg" alt="Musora Team Image">
@@ -90,8 +90,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-          <section class="px-5 sm:px-6 py-6 text-black rounded-3xl my-10 lg:my-20 bg-musora border-2 border-black">
+        </section> --}}
+          <section class="px-5 sm:px-6 py-6 text-black rounded-3xl mb-10 lg:mb-20 bg-musora border-2 border-black">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="w-full lg:w-7/12 text-center px-6 flex jusitfy-center flex-col items-center">
                     <h1 class="capitalize leading-tight"><strong>The ultimate music  <br/> lessons experience  <br/> at a special price</strong></h1>
@@ -133,7 +133,7 @@
             </div>
         </section>
      <section class="px-5 sm:px-6 sm:pb-16 lg:pb-24 text-black">
-        <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative border-l-2 border-black">
+        <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative">
             <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
                 <div class="flex flex-col space-y-4">
