@@ -98,6 +98,29 @@
             background-color:#eb1a2f;
 
         }
+
+        /* column-oriented masonry layout */
+        .masonry {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
     </style>
 @stop
 
@@ -423,44 +446,138 @@
         </div>
     </section>
 
+    <div id="coaches" class="anchor"></div>
+    <section class="py-12 md:py-20 text-center">
+        <div class="max-w-3xl mx-auto">
+            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 mx-auto"> Meet your instructors</p>
+            <h2 class="leading-tight font-extrabold">Learn from world-class teachers.</h2>
+        </div>
+        <div class="md:pb-56 lg:pb-96 relative">
+            <section class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0">
+                <div
+                        x-data="{
+                        init() {
+                            new Splide(this.$refs.splide, {
+                                classes: {
+                                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                        prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
+                                        next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                        pagination: 'splide__pagination flex -bottom-10',
+                                },
+                                padding: '3rem',
+                                perPage: 4,
+                                perMove: 1,
+                                type: 'loop',
+                                focus: 0,
+                                interval: 2000,
+                                lazyLoad: 'nearby',
+                                breakpoints: {
+                                    1020: {
+                                        padding: '2rem',
+                                    },
+                                    720: {
+                                        padding: '3rem',
+                                        perPage: 3,
+                                        drag   : 'free',
+                                        snap   : false,
+                                    },
+                                    620: {
+                                        padding: '1rem',
+                                        perPage: 2,
+                                    },
+                                },
+                            }).mount()
+                        },
+                    }"
+                >
+                    <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                @php
+                                    $courses = [
+
+                                        [
+                                        'img' => 'marketing/pianote/membership/homepage/2024/coaches/7-days-to-sight-reading.webp',
+                                        'instructor' => 'Lisa Witt',
+                                        'title' => 'Lead Pianote Instructor',
+                                        'description' => 'With over 20 years of experience and 168 million YouTube views, Lisa turns traditional piano lessons into fun, beginner-friendly play-alongs.'
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/jordan-rudess.jpg',
+                                        'instructor' => 'Jordan Rudess',
+                                        'title' => 'GRAMMY-winning - Dream Theater’s Keyboardist',
+                                        'description' => 'With remarkable skills and exceptional piano technique, Jordan loves sharing his deep musical insights and inspiring musicians at all levels.',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/classical-piano.webp',
+                                        'instructor' => 'Victoria Theodore',
+                                        'title' => 'Stanford Master of Classical Piano',
+                                        'description' => 'As a highly accomplished pianist who has performed with legends like Stevie Wonder and Beyoncé, Victoria inspires the next generation of musicians with her captivating performances.',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/improvisational-jazz.webp',
+                                        'instructor' => 'Jesús Molina',
+                                        'title' => 'World-class Jazz Pianist',
+                                        'description' => 'Best known for his extraordinary technique and improvisations, Jesús is passionate about inspiring others to push musical boundaries and explore new possibilities.',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/gospel-piano.webp',
+                                        'instructor' => 'Erskine Hawkins',
+                                        'title' => 'Gospel Piano',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/Tango-Piano.webp',
+                                        'instructor' => 'Sangah Noona',
+                                        'title' => 'Tango Piano',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/Latin-Jazz.webp',
+                                        'instructor' => 'Gabriel Palatchi',
+                                        'title' => 'Latin Jazz',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/worship-piano.webp',
+                                        'instructor' => 'Amberly Martz',
+                                        'title' => 'Worship Piano',
+                                        ],
+                                        [
+                                            'img' => 'marketing/pianote/membership/homepage/2024/coaches/cocktail-piano.webp',
+                                        'instructor' => 'Brett Ziegler',
+                                        'title' => 'Cocktail Piano',
+                                        ],
+                                    ];
+                                @endphp
+                                @foreach ($courses as $image)
+                                    <li class="splide__slide flex flex-col items-center justify-center px-1">
+                                        <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
+                                            <picture>
+                                                <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
+                                                <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
+                                                <img
+                                                        alt="{{ $image['instructor'] }}"
+                                                        class="absolute top-0 left-0 w-full h-full object-cover transition-opacity opacity-0 duration-300"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}"
+                                                        onload="this.classList.remove('opacity-0');"
+                                                />
+                                            </picture>
+                                            <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
+                                                <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['instructor'] !!}</h4>
+                                                <p class="leading-none text-xs sm:text-sm">{{ $image['title'] }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </section>
+
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
         <div class="container max-w-5xl mx-auto">
 
-            Meet your instructors
-            Learn from world-class teachers.
-
-            Lisa Witt
-            Lead Pianote Instructor
-            With over 20 years of experience and 168 million YouTube views, Lisa turns traditional piano lessons into fun, beginner-friendly play-alongs.
-
-
-            Jordan Rudess
-            GRAMMY-winning - Dream Theater’s Keyboardist
-            With remarkable skills and exceptional piano technique, Jordan loves sharing his deep musical insights and inspiring musicians at all levels.
-
-            Victoria Theodore
-            Stanford Master of Classical Piano
-            As a highly accomplished pianist who has performed with legends like Stevie Wonder and Beyoncé, Victoria inspires the next generation of musicians with her captivating performances.
-
-
-            Jesús Molina
-            World-class Jazz Pianist
-            Best known for his extraordinary technique and improvisations, Jesús is passionate about inspiring others to push musical boundaries and explore new possibilities.
-
-            Erskine Hawkins
-            Gospel Piano
-
-
-            Sangah Noona
-            Tango Piano
-            Gabriel Palatchi
-            Latin Jazz
-            Amberly Martz
-            Worship Piano
-            Brett Ziegler
-            Cocktail Piano
-
-            GET THE BUNDLE >
 
         </div>
     </section>
