@@ -26,17 +26,6 @@
                 font-size:20px
             }
         }
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:10px;
-        }
-        @media (min-width: 40em) {
-            .thank-you-box.active {
-                padding: 12px;
-            }
-        }
     </style>
     <style>
         .header-image {
@@ -55,7 +44,7 @@
 @section('layout-body')
 
   <header class="header-image px-5 sm:px-6 py-8 sm:py-16 bg-no-repeat text-white bg-cover bg-center" style="background-color:#00101D;">
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto max-w-4xl text-white">
             <div class="flex flex-wrap sm:flex-nowrap">
                 <div class="text-center md:text-left sm:px-4 sm:px-0 w-full mx-auto md:mx-0 md:w-7/12">
                     <div class="sm:pl-3">
@@ -85,7 +74,8 @@
                                 'Piano' => 'piano',
                                 'Guitar' => 'guitar',
                                 'Vocals' => 'vocals'
-                            ]
+                            ],
+                            "checkboxTitle" => "Preferred Instrument"
                         ])
                     </div>
                     

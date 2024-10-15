@@ -73,6 +73,8 @@ Route::domain('{musoraDomain}')
         Route::get('free-music-lessons-for-life', [MarketingController::class, 'freeMusicLessonsForLife']);
         Route::get('everyday-musician', [MarketingController::class, 'everyDayMusician']);
         Route::get('history', [MarketingController::class, 'history']);
+        Route::get('youtube', [MarketingController::class, 'youtube']);
+        Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
