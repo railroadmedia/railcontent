@@ -186,6 +186,7 @@
                 <!-- Related Lessons Toggle -->
                 <RelatedLessonsToggle
                     v-if="hasRelatedLessons"
+                    :is-loading="isLoading"
                     :relatedLessons="relatedLessons"
                     :isRelatedSectionOpen="isRelatedSectionOpen"
                     v-model:isRelatedSectionOpen="isRelatedSectionOpen"
@@ -194,8 +195,9 @@
 
             <!--Related Section -->
             <RelatedLessons
-                v-if="hasRelatedLessons"
+                
                 :isRelatedSectionOpen="isRelatedSectionOpen"
+                :is-loading="isLoading"
                 :relatedLessons="relatedLessons"
                 v-model:isRelatedSectionOpen="isRelatedSectionOpen"
             />
@@ -330,7 +332,7 @@ const props = defineProps({
     lessonData: [Array, Object],
     nextLessonJson: Object,
     progressXp: String,
-    relatedLessons: Object,
+    //relatedLessons: Object,
     soundsliceSlug: String,
     videoProps: Object,
     videoResources: Object,
@@ -347,7 +349,7 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
-const isRelatedSectionOpen = ref(props.relatedLessons.data.length > 0);
+const isRelatedSectionOpen = ref(true);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -359,6 +361,8 @@ const mediaElementVueInstance = ref(null)
 const videoData = ref({});
 const likeData = ref({});
 const isCompleted = ref(false);
+const relatedLessons = ref([]);
+const nextPreviousLessons = ref(null);
 
 //Reactive
 const state = reactive({
@@ -483,7 +487,7 @@ const breadCrumbs = computed( () => {
 })
 
 const hasRelatedLessons = computed( () => {
-    return props.relatedLessons.data.length > 0;
+    return relatedLessons.value.length > 0;
 })
 
 const noAccess = computed(() => {
@@ -525,10 +529,15 @@ onBeforeMount(async() => {
     const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`);
     isCompleted.value = completed?.data[contentId]?.state === 'completed';
 
-    // const lessons = await fetchNextPreviousLesson(contentId);
-    // fetch related lessons, comments,
+    // const nextPreviousLessonData = await fetchNextPreviousLesson(contentId);
+    // nextPreviousLessons.value = nextPreviousLessonData;
 
-    console.log('videoData.value', videoData.value)
+    const relatedLessonsData = await fetchRelatedLessons(contentId, brand.value);
+    relatedLessons.value = relatedLessonsData.related_lessons;
+
+    // console.log('nextPreviousLessonData', nextPreviousLessons.value);
+    console.log('relatedLessonsData', relatedLessons.value);
+    //console.log('videoData.value', videoData.value)
 
     platformStore.setLoadingState(false);
 })
