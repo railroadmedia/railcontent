@@ -47,10 +47,10 @@ abstract class LessonTemplate extends BaseSanityModel
                         new Field(FieldType::String, 'hlsManifestUrl'),
                         new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
                             fields: [
-new Field(FieldType::String, 'vimeo_key'),
-new Field(FieldType::String, 'file'),
-new Field(FieldType::Number, 'height'),
-new Field(FieldType::Number, 'width')]
+                                new Field(FieldType::String, 'vimeo_key'),
+                                new Field(FieldType::String, 'file'),
+                                new Field(FieldType::Number, 'height'),
+                                new Field(FieldType::Number, 'width')]
                         ), ),
                     ],
             previewItem: new ListItemPreview('height', 'width'),
@@ -61,6 +61,14 @@ new Field(FieldType::Number, 'width')]
                         new Field(FieldType::Image, 'chapter_thumbnail_url')
                         ],
             previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
+        );
+        $parentContentData = new ListObject(
+            fields:[
+                       new Field(FieldType::Number, 'id'),
+                       new Field(FieldType::String, 'title'),
+                       new Field(FieldType::String, 'slug'),
+                       new Field(FieldType::String, 'type')],
+            previewItem: new ListItemPreview('slug', 'type')
         );
 
         $assignmentsList = new ListObject(
@@ -157,6 +165,9 @@ new Field(FieldType::Number, 'width')]
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'parent_content_data', 'Parent Content Data', of: $parentContentData, group:$detailsGroup)
+            ]);
         }
         if ($this->isChallengeChild) {
             $fields = array_merge($fields, [
