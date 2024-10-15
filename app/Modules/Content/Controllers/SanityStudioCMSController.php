@@ -87,6 +87,7 @@ class SanityStudioCMSController extends BaseController
         $dataset = config('content.dataset');
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
+        $token = env('SANITY_API_TOKEN');
 
         // publishing workspace
         $types = [
@@ -161,6 +162,7 @@ class SanityStudioCMSController extends BaseController
         $publishing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
+            'token' => $token,
             'name' => Workspace::Publishing->workspaceName(),
             'basePath' => Workspace::Publishing->basePath(),
             'title' => Workspace::Publishing->title(),
@@ -176,6 +178,7 @@ class SanityStudioCMSController extends BaseController
         $marketing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
+            'token' => $token,
             'name' => Workspace::Marketing->workspaceName(),
             'basePath' => Workspace::Marketing->basePath(),
             'title' => Workspace::Marketing->title(),
