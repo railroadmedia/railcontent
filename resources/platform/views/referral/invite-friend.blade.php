@@ -17,7 +17,7 @@
 
 @section('content')
     <invite-friend
-        :can-refer="{{ json_encode($canRefer) }}"
+        {{-- :can-refer="{{ json_encode($canRefer) }}" --}}
         {{-- invite-url="{{ url()->route('referral.email-invite') }}" --}}
     ></invite-friend>
 @endsection

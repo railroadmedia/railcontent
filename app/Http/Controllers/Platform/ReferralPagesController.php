@@ -4,11 +4,13 @@ use App\Http\Controllers\BaseController;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Modules\Referral\Services\ReferralService;
 class ReferralPagesController extends BaseController
 {
@@ -40,10 +42,21 @@ class ReferralPagesController extends BaseController
         return view(
             'referral.invite-friend',
             [
-                'recaptchaKey' => config('recaptcha.key'),
-                'userReferralCode' => $referrer->referral_code,
-                'canRefer' => $this->referralService->canRefer($referrer),
+                // 'recaptchaKey' => config('recaptcha.key'),
+                // 'userReferralCode' => $referrer->referral_code,
+                // 'canRefer' => $this->referralService->canRefer($referrer),
             ]
         );
     }
+    
+    public function validateEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $result = $this->referralService->validateEmail($email);
+        
+        Log::info('Email validation result:', $result);
+        
+        return response()->json($result);
+    }
+ 
 }

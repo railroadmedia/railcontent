@@ -5,7 +5,7 @@
                 <h1 class="lg:tw-mb-14 tw-text-2xl sm:tw-text-3xl xl:tw-text-5xl">
                     <strong>Share 30 days of free<br class="tw-hidden sm:tw-inline"> lessons with a friend!</strong>
                 </h1>
-                <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4" :class="canRefer ? '' : ''">
+                <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4">
                     <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl tw-my-5 md:tw-my-6 lg:tw-my-0">
                         <div class="tw-flex tw-w-full tw-relative">
                             <div class="tw-w-full">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="canRefer" class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
+                    <div class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
                         <form id="MusoraEngagementTriggerReferWebForm" @submit.prevent="handleSubmitPass" class="mx-auto">
                             <!-- Tracking Inputs -->
                             <input type="hidden" name="form_name" value="Musora Referral">
@@ -42,12 +42,12 @@
                         <div v-if="isModalOpen">
                             <ModalRenderer>
                                 <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
-                                    <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-                                        <div class="tw-text-2xl tw-font-bold tw-mb-5">Congrats! You’ve just shared free music lessons with your friend.</div>
-                                        <div>
-                                            <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</button>
-                                        </div>
+                                <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
+                                    <div class="tw-text-2xl tw-font-bold tw-mb-5">{{ modalMessage }}</div>
+                                    <div>
+                                    <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</button>
                                     </div>
+                                </div>
                                 </div>
                             </ModalRenderer>
                         </div>
@@ -68,13 +68,6 @@ import axios from 'axios';
 const userStore = useUserStore();
 const { brand, userEmail } = storeToRefs(userStore);
 
-const props = defineProps({
-    canRefer: {
-        type: Boolean,
-        default: false,
-    },
-});
-
 const cardImg = computed(() => {
     const imgs = {
         drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
@@ -86,9 +79,9 @@ const cardImg = computed(() => {
 });
 
 const isModalOpen = ref(false);
+const modalMessage = ref('');
 
 async function handleSubmitPass(event) {
-
     const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const userEmailInput = document.getElementById('sign-up-email').value;
     const referrer = userEmail.value;
@@ -97,38 +90,38 @@ async function handleSubmitPass(event) {
 
     if (userEmailInput.match(emailFormat)) {
         try {
-            console.log('Submitting form with data:', {
-                email: userEmailInput,
-                referrer: referrer,
-                form_name: formName,
-                brand: brand,
-            });
+            const validationResponse = await axios.post(`/${brand}/referral/validate-email`, { email: userEmailInput });
+
+            if (validationResponse.data.exists && validationResponse.data.active) {
+                showModal('An account with this email address already exists. You can only gift access to new Musora students.');
+                return;
+            }
 
             const response = await axios.post("/customer-io/submit-email-form", {
                 email: userEmailInput,
-                referrer: referrer,
+                referrer,
                 form_name: formName,
-                brand: brand,
+                brand,
             });
 
-            console.log('response:', response);
-
             if (response.status === 201) {
-                console.log('Form submitted', response);
-                isModalOpen.value = true;
+                showModal("Congrats! You've just shared free music lessons with your friend.");
                 document.getElementById('MusoraEngagementTriggerReferWebForm').reset();
-            } else if (response.status === 422) {
-                console.error('Form validation failed', response.data);
             } else {
-                console.error('Unexpected response status', response.status);
+                showModal("Please try again later.");
             }
         } catch (error) {
-            console.error('Error submitting form', error);
+            console.error('Error:', error);
+            showModal("Please try again later.");
         }
     } else {
-        console.log('Email format is invalid:', userEmailInput);
         document.getElementById('sign-up-email').classList.add('bg-red-200');
     }
+}
+
+function showModal(message) {
+    modalMessage.value = message;
+    isModalOpen.value = true;
 }
 
 function closeModal() {
