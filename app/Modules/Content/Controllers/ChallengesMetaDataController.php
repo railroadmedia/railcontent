@@ -168,5 +168,43 @@ class ChallengesMetaDataController extends Controller
         $fileName = "$challengeName-$today.pdf";
         return  $userAwardPDF->stream($fileName);
     }
+
+    /**
+     * Notify the user when enrollment opens for a given challenge
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function notificationsEnrollmentOpen(int $id) : JsonResponse
+    {
+        $result = $this->enableNotification($id, ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
+        return $result ?
+            response()->json() :
+            response()->json(['error' => "Challenge $id not found"], status: 404);
+    }
+
+    /**
+     * Notify the user for community notifications
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function notificationsCommunityReminders(int $id) : JsonResponse
+    {
+        $result = $this->enableNotification($id, ChallengesService::COMMUNITY_NOTIFICATION_KEY);
+        return $result ?
+            response()->json() :
+            response()->json(['error' => "Challenge $id not found"], status: 404);
+    }
+
+    private function enableNotification($id, $key) : bool
+    {
+        $challenge = $this->challengesService->getById($id);
+        if (is_null($challenge)) {
+            return false;
+        }
+        $this->challengesService->updateCustomerIONotifications($id, user(), $key);
+        return true;
+    }
 }
 

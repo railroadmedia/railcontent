@@ -19,7 +19,7 @@ class Workout extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Workout', withResources: true);
+        parent::__construct(self::getName(), 'Workout', withResources: true, withAssignments: false);
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
                              new Field(FieldType::String, 'soundslice_slug', group:$detailsGroup)
