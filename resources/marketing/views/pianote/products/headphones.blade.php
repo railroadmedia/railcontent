@@ -35,7 +35,7 @@
         }
 
         .join.smaller.outline {
-            padding: 12px 7%;
+            padding: 15px 7%;
             border-color: #F61A30;
             background-color: rgb(18, 18, 6, 0.3);
         }
@@ -101,6 +101,10 @@
             background-color: #BD0013;
         }
 
+        .content-section table.comparison.eardrums tr:hover td:nth-child(2) {
+            filter: brightness(1.2); 
+        }
+        
         .content-section table.comparison.eardrums tr td {
             color: black;
             padding: 15px 7px;
@@ -212,8 +216,8 @@
    
     @php
         if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&promo-code=members&locked=true';
-             $discountedPrice = 149;
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&locked=true';
+             $discountedPrice = 79;
         }
         else {
              $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
@@ -246,13 +250,13 @@
 <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
-                <h6 class="leading-tight my-3">Superior Sound, Comfort, and Privacy <br class="sm:hidden">for Piano Players.</h6>
+                <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
+                <h6 class="leading-tight my-3 lg:my-6">Superior Sound, Comfort, and Privacy <br class="sm:hidden">for Piano Players.</h6>
                 <h2 class="leading-tight">
                     @if(floatval($productPrices['pianote-headphones-2024']->price) > floatval($productPrices['pianote-headphones-2024']->discounted_price))
-                        <s class="opacity-50">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
+                        <s class="opacity-50 font-extralight">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
                         <strong>${{ floatval($productPrices['pianote-headphones-2024']->discounted_price) }}</strong>
-                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones-2024']->discounted_price) / floatval($productPrices['pianote-headphones-2024']->price)))) }}%)</em>
+                        {{-- <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones-2024']->discounted_price) / floatval($productPrices['pianote-headphones-2024']->price)))) }}%)</em> --}}
                     @else
                         <strong>${{ floatval($productPrices['pianote-headphones-2024']->discounted_price) }}</strong>
                     @endif
@@ -261,7 +265,7 @@
                     <div class="sm:w-5/12 join smaller outline red hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline red sm:hidden inline-block"   @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['pianote-headphones-2024']->getStockAvailability() > 1 && !empty($products['pianote-headphones-2024']->getStockAvailability()))
-                        <a class="w-5/12 join smaller bg-pianote anchor-slide" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller bg-pianote anchor-slide ml-2" href="#customize-anchor">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
@@ -269,10 +273,11 @@
                 {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>--}}
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div>
-        {{--        <img class="object-cover w-full h-full relative z-0" src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header.jpg">--}}
-        <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
-            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video>
+        {{-- <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div> --}}
+               <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg.webp">
+                <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg-m.webp">
+        {{-- <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video> --}}
     </header>
 
 
@@ -307,20 +312,20 @@
             ],
         ];
     @endphp
-        <section class="text-center px-x py-10 sm:py-16" style="background:#F1EFED;">
+        <section class="text-center px-4 py-10 sm:py-16" style="background:#F1EFED;">
         <div class="container max-w-5xl mx-auto">
             <div class="max-w-2xl mx-auto text-center mb-4">
-                <h2 class="text-3xl"><strong>Studio-Quality Sound.  <br class="inline sm:hidden"> Immersive Practice. Better Results. </strong></h2>
-                <p class="leading-relaxed my-2 sm:mb-8">
+                <h2><strong>Studio-Quality Sound. <br> Immersive Practice. Better Results. </strong></h2>
+                <h6 class="leading-relaxed my-2 sm:mb-8">
                     The Pianote Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
                     comfort, and complete privacy for focused practice sessions.
-                </p>
+                </h6>
             </div>
-            <div class="max-w-5xl mx-auto px-4 pt-7 pb-6 md:pb-0 leading-none">
+            <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
-                            <div class="content relative text-left md:pl-6">
+                            <div class="content relative text-left">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
                                 <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
@@ -352,9 +357,9 @@
 
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
-         <div class="container mx-auto max-w-3xl">
-         <h2 class="text-black"><strong>Great Sound. <br class="sm:hidden">  Better Price </strong></h2>
-            <h5 class="leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones deliver a richer sound across the spectrum, so you’ll catch every detail from the deep bass to the crisp trebles.</h5>
+         <div class="container mx-auto max-w-3xl px-2">
+         <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
+            <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
          </div>
             
             <div class="relative">
@@ -416,14 +421,15 @@
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-white">
                             @if(floatval($productPrices['pianote-headphones-2024']->price) > $discountedPrice)
-                                <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
-                            @endif
+                                {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
                             <strong>${{ $discountedPrice }}</strong>
+                            @else
+                             <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>                            
+                            @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         @php
-                            floatval($productPrices['pianote-headphones-2024']->price)
                         @endphp
                     </tr>
                     </tbody>
@@ -531,10 +537,13 @@ $testimonials = [
             <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important - playing piano.</strong>
 
                 <br><br>
-                We’ve designed these headphones with your piano practice in mind, and we’re confident you’ll love them. 
+                We’ve designed these headphones with your piano practice in mind, and we’re confident you’ll love them. 
                 <br><br>
-                So even though it’s only a month, you’ll get three full months to go through everything and make sure it’s
-                right for you. If not, just contact our friendly support team for a refund.
+                But if anything goes wrong, you’ll have the peace of mind that comes with knowing your headphones are protected for two full years.
+                <br><br>
+                So you can focus on your piano playing. 
+                <br><br>
+                We’ll worry about the rest.
 
             </h6>
         </div>
@@ -551,7 +560,8 @@ $testimonials = [
                         $originalPrice = $productPrices['pianote-headphones-2024']->price;
                         $discountedPrice = $productPrices['pianote-headphones-2024']->discounted_price;
                         $difference = $originalPrice - $discountedPrice;
-                        $badge = $difference > 0 ? 'SAVE $' . number_format($difference, 2) : '';
+                        $percentage = $originalPrice > 0 ? ($difference / $originalPrice) * 100 : 0;
+                        $badge = $difference > 0 ? 'SAVE ' . number_format($percentage) . '%' : '';
                     @endphp
                     
                     @include('drumeo.products.partials._order-card', [
@@ -563,7 +573,7 @@ $testimonials = [
                         'price' => "$" . floatval($productPrices['pianote-headphones-2024']->discounted_price),
                         'specialText' => 'One-time payment.',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[pianote-headphones]=1',
+                        'link' => '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&locked=true',
                         'bonuses' => [
                             '<strong>1 Pair of Pianote Headphones</strong>',
                             '1.8m cable',
@@ -580,7 +590,7 @@ $testimonials = [
                         'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
                         'specialText' => 'With Annual Membership of $240/yr',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[pianote-membership-1-year]=1&products[pianote-headphones]=1',
+                        'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&locked=true',
                         'bonuses' => [
                             '<strong>Everything included with the<br>Headphones PLUS:</strong>',
                             'Step-by-Step Lessons',
