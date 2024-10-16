@@ -465,7 +465,7 @@
         <div class="container max-w-5xl mx-auto">
             <h3 class="leading-tight"><strong>You’re here because you want to play the music</strong></h3>
             <p class="leading-tight">(not just hit the right keys).</p>
-            <h3 class="leading-tight mb-7 sm:mb-10"><strong>And we’re here to make that happen.</strong></h3>
+            <h3 class="leading-tight mb-7 sm:mb-12"><strong>And we’re here to make that happen.</strong></h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 @php
                     $features = [
@@ -644,64 +644,69 @@
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
         <div class="container max-w-5xl mx-auto">
-            <img class="h-60" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
-            <h6 class="leading-tight mx-auto font-black text-pianote mt-3">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
+            <img class="h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
+            <h6 class="leading-tight mx-auto font-black text-pianote mt-7">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
             <h2 class="leading-tight font-black mt-1 mb-2">One year of UNLIMITED piano lessons<br> plus 4 awesome LIFETIME bonuses</h2>
-            <h4 class="leading-tight mb-7"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
+            <h4 class="leading-tight mb-10"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
             @php
                 $bonuses = [
                     [
                         'title' => 'Pianote Membership',
                         'description' => 'Experience the joy of making beautiful music with unlimited piano lessons. Play along with world-class musicians, master your favorite songs, and get personalized 1:1 support at your fingertips. <br><br><span class="text-pianote">Plus, you\'ll also get full access to voice, guitar, and drum lessons at no extra cost.</span>',
-                        'price' => '$240',
+                        'noBonus' => true,
+                        'price' => ' ',
                         'discounted_price' => 'SAVE 25%',
-                        'image' => 'https://via.placeholder.com/80x80',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/promos/october/bonus-01.webp',
                     ],
                     [
                         'title' => 'New Piano Players Start Here',
                         'description' => 'Get ready to dive into your first 30 days on the piano! This beginner-friendly course will help you get started on the keys with total confidence, guiding you lesson by lesson, note by note. Simply follow along with Lisa for 10 minutes a day to kickstart your musical journey.',
                         'price' => '$127',
                         'discounted_price' => 'FREE',
-                        'image' => 'https://via.placeholder.com/80x80',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/promos/october/bonus-02.webp',
                     ],
                     [
                         'title' => 'Easy Chords',
                         'description' => 'Now that you’re comfortable with the piano, let’s take a further step with Easy Chords! Every song (yes, even classical ones) is built on chords, and they’re the key to telling musical stories. In just 10 minutes a day for 30 days, follow Lisa as you’ll go from knowing about chords to confidently playing them.',
                         'price' => '$127',
                         'discounted_price' => 'FREE',
-                        'image' => 'https://via.placeholder.com/80x80',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/promos/october/bonus-03.webp',
                     ],
                     [
                         'title' => 'Read Music In 30 Days',
                         'description' => 'No more spending hours memorizing every single note. This 30-day course will demystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.',
                         'price' => '$97',
                         'discounted_price' => 'FREE',
-                        'image' => 'https://via.placeholder.com/80x80',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/promos/october/bonus-04.webp',
                     ],
                     [
                         'title' => 'Read Music In 30 Days E-Book',
                         'description' => 'Every hero needs a trusty sidekick, and this e-book is ready to join you on your musical adventure! Grab this FREE 74-page companion e-book, packed to help you nail those notes and reinforce everything you learn.',
                         'price' => '',
                         'discounted_price' => 'FREE',
-                        'image' => 'https://via.placeholder.com/80x80',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/promos/october/bonus-05.webp',
                     ],
                 ];
             @endphp
             @foreach ($bonuses as $bonus)
                 <div class="rounded-xl p-6 mb-5 text-left" style="background-color:#F2F5FA;">
                     <div class="flex items-start">
-                        <img src="{{ $bonus['image'] }}" class="w-20 h-20">
+                        <img src="{{ $bonus['image'] }}" class="h-36 rounded-xl">
                         <div class="sm:pl-6">
                             <div class="flex justify-between">
                                 <div>
-                                    <p class="text-pianote uppercase mb-1">Bonus</p>
+                                    @if(empty($bonus['noBonus']))
+                                        <p class="text-pianote uppercase mb-1">Bonus</p>
+                                    @else
+                                        <p class="text-pianote uppercase mb-1">MEMBERSHIP</p>
+                                    @endif
                                     <h5 class="font-black mb-2">{{ $bonus['title'] }}</h5>
                                 </div>
                                 <div class="text-right">
                                     @if ($bonus['price'])
                                         <h5 class="inline-block mr-2"><s class="opacity-60">{{ $bonus['price'] }}</s></h5>
                                     @endif
-                                    <p class="px-3 py-1.5 rounded-lg text-white inline-block" style="background-color:#007904;">{{ $bonus['discounted_price'] }}</p>
+                                    <p class="px-2 py-0.5 rounded-lg text-white inline-block text-sm" style="background-color:#007904;">{{ $bonus['discounted_price'] }}</p>
                                 </div>
                             </div>
                             <p class="mb-4">{!!  $bonus['description']  !!}</p>
@@ -715,9 +720,9 @@
     </section>
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative" style="background: #F4F1EC;">
-        <div class="container max-w-5xl mx-auto">
+        <div class="container max-w-4xl mx-auto">
             <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 text-left lg:pr-6">
+                <div class="lg:w-7/12 text-left lg:pr-6">
                     <p class="text-pianote uppercase font-black mb-2">Limited Time Offer</p>
                     <h3 class="font-black mb-4">
                         Get the brand new Pianote headphones for just $20
@@ -735,8 +740,8 @@
                     <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>
                 </div>
 
-                <div class="lg:w-1/2 mt-10 lg:mt-0 relative">
-                    <img src="https://via.placeholder.com/400x400" alt="Pianote Headphones" class="mx-auto lg:ml-auto lg:mr-0">
+                <div class="lg:w-5/12 mt-10 lg:mt-0 relative">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/headphones.webp" alt="Pianote Headphones" class="mx-auto lg:ml-auto lg:mr-0">
                 </div>
             </div>
         </div>
@@ -760,8 +765,8 @@
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png"
                                     >
                         </td>
+                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>YouTube<br> Tutorials</strong></td>
                         <td class="cursor-pointer sm:cursor-default"><strong>Private <br> Lessons</strong></td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
                     </tr>
                     <tr>
                         <td>Flexibility</td>
