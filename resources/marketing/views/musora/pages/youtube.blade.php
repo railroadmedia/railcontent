@@ -33,16 +33,16 @@
 <!-- Main -->
 @section('layout-body')
 
-    <header class="px-5 sm:px-6 py-8 sm:py-16 lg:py-24 text-black" style="background-color:#FAFAFA;">
+    <header class="px-5 sm:px-6 py-8 sm:py-12 lg:py-20 text-black" style="background-color:#FAFAFA;">
         <div class="container mx-auto max-w-6xl">
             <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                <div class="w-full lg:w-5/12 px-6">
-                    <img class="w-full object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/membership/app-page/header.png" alt="Musora Coaches Image">
+                <div class="w-full lg:w-5/12 px-6 text-center">
+                    <img class="w-full object-cover max-w-lg lg:max-w-full mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/membership/app-page/header.png" alt="Musora Coaches Image">
                 </div>
                 <div class="w-full lg:w-6/12 text-center lg:text-left">
-                    <h1 class="uppercase pt-10 text-4xl md:text-5xl text-7xl"><strong>The Free Stuff</strong></h1>
-                    <p class="tracking-tight pb-4 lg:pb-6">
-                        Sign up below to get access to FREE lessons, giveaways, <br class="block sm:hidden"> exclusive discounts and any other cool stuff we do.
+                    <h1 class="uppercase lg:pt-10"><strong>The Free Stuff</strong></h1>
+                    <p class="leading-tight pb-4 lg:pb-6">
+                        Sign up below to get access to FREE lessons, <br class="block sm:hidden"> giveaways,<br class="hidden sm:inline-block"> exclusive discounts and any other<br class="block sm:hidden">  cool stuff we do.
                     </p>
                     <div class="w-full sm:w-10/12 lg:w-full mx-auto">
                         @include("_partials.components.forms.sign-up-form-options", [
@@ -63,18 +63,18 @@
     </header>
       @php
         $benefits = [
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/header.png', 'title' => 'Exclusive Giveaways'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/header.png', 'title' => 'Free gifts & resources'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/header.png', 'title' => 'Free lessons'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/header.png', 'title' => 'exclusive discounts'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/giveaways.png', 'title' => 'Exclusive Giveaways'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/resources.png', 'title' => 'Free gifts & resources'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/free-lessons.png', 'title' => 'Free lessons'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/50_off-gold.jpg', 'title' => 'exclusive discounts'],
         ];
     @endphp
 
-    <section class="container max-w-4xl mx-auto bg-white">
+    <section class="container max-w-4xl mx-auto bg-white px-4">
         <div  class="grid grid-cols-2 gap-4 py-10 md:py-20">
                 @foreach ($benefits as $benefit)
                     <div class="text-center">
-                        <img src="{{ $benefit['image'] }}" alt="{{ $benefit['title'] }}" class="mx-auto">
+                        <img src="{{ $benefit['image'] }}" alt="{{ $benefit['title'] }}" class="mx-auto rounded-xl">
                         <h5 class="mt-2 uppercase"><strong>{{ $benefit['title'] }}</strong></h5>
                     </div>
                 @endforeach
@@ -85,9 +85,9 @@
         <div class="container mx-auto max-w-6xl">
             <div class="flex flex-col justify-center items-center">
                 <div class="w-full text-center">
-                <h1 class="uppercase pt-10 text-4xl md:text-5xl lg:text-6xl"><strong>We know you love free stuff</strong></h1>
-                    <p class="tracking-tight pb-4 lg:pb-6">
-                        Sign up below for free lessons, giveaways, offers & more. <br class="block sm:hidden"> There’s literally no reason not to!
+                <h1 class="leading-tight uppercase"><strong>We know you<br class="block sm:hidden">  love free stuff</strong></h1>
+                    <p class="leading-tight mt-2 pb-4 lg:pb-6">
+                        Sign up below for free lessons, giveaways,<br class="block sm:hidden">  offers & more. There’s literally no reason not to!
                     </p>
                     <div class="w-full sm:w-10/12 lg:w-1/2 mx-auto">
                         @include("_partials.components.forms.sign-up-form-options", [
@@ -101,7 +101,6 @@
                             "buttonColor" => "bg-black text-white",
                             "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing'],
                             "theme" => "black",
-                            "checkboxPosition"=>'bottom',
                             "redirectURL" => "/thank-you",
                         ])
                     </div>

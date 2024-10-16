@@ -12,11 +12,7 @@
     <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
-    @endif
 
     @include('_partials.layout._fonts')
 
@@ -89,15 +85,87 @@
         }
 
 
+        table.comparison tr:hover, table.comparison tr:nth-child(even):hover {
+            background-color: #f2f5fa;
+        }
+        table.comparison tr:hover td:nth-child(2), table.comparison tr:nth-child(even):hover td:nth-child(2) {
+            background: linear-gradient(to right, #F61A30, #A10000);
+        }
+        table.comparison tr:hover td:nth-child(3),
+        table.comparison tr:nth-child(even):hover td:nth-child(3),
+        table.comparison tr:hover td:nth-child(4),
+        table.comparison tr:nth-child(even):hover td:nth-child(4) {
+            background-color: #f6f8fb;
+        }
+        table.comparison tr td {
+            padding: 10px 7px;
+            font: 400 12px/1.2em 'Open Sans', sans-serif;
+        }
+        @media (min-width: 768px) {
+            table.comparison tr td {
+                font-size: 14px;
+                padding: 20px 10px;
+            }
+        }
+        table.comparison tr td:nth-child(1) {
+            text-align: right;
+            font-weight: 900;
+        }
         table.comparison tr td:nth-child(2) {
-            background-color: #f61a30;
-            text-shadow: 3px 3px #f61a30;
+            color: #fff;
+            background: linear-gradient(to right, #F61A30, #A10000);
+            text-shadow: 1px 1px 0 #A10000;
         }
-        table.comparison tr:hover td:nth-child(2),
-        table.comparison tr:nth-child(2n):hover td:nth-child(2) {
-            background-color:#eb1a2f;
+        table.comparison tr td:nth-child(3),
+        table.comparison tr td:nth-child(4) {
+            background-color: #f2f5fa;
+        }
+        table.comparison tr td:nth-child(2),
+        table.comparison tr td:nth-child(3),
+        table.comparison tr td:nth-child(4) {
+            width: 25%;
+        }
+        @media (min-width: 768px) {
+            table.comparison tr td:nth-child(2),
+            table.comparison tr td:nth-child(3),
+            table.comparison tr td:nth-child(4) {
+                width: 25%;
+            }
+        }
+        table.comparison tr:nth-child(1) td {
+            border-width: 0 0 2px;
+            border-color: #fff;
+            padding: 18px 0;
+        }
+        @media (min-width: 768px) {
+            table.comparison tr:nth-child(1) td {
+                font-size: 17px;
+                padding: 18px 10px;
+            }
+        }
+        @media (min-width: 1024px) {
+            table.comparison tr:nth-child(1) td {
+                font-size: 19px;
+            }
+        }
+        table.comparison tr:last-child td {
+            padding: 14px 10px;
+        }
+        @media (min-width: 768px) {
+            table.comparison tr:last-child td {
+                padding: 25px 10px;
+            }
+        }
+        table.comparison tr:last-child td strong {
+            font-size: 19px;
+        }
+        @media (min-width: 768px) {
+            table.comparison tr:last-child td strong {
+                font-size: 22px;
+            }
+        }
 
-        }
+
 
         /* column-oriented masonry layout */
         .masonry {
@@ -447,12 +515,10 @@
     </section>
 
     <div id="coaches" class="anchor"></div>
-    <section class="py-12 md:py-20 text-center">
-        <div class="max-w-3xl mx-auto">
-            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 mx-auto"> Meet your instructors</p>
-            <h2 class="leading-tight font-extrabold">Learn from world-class teachers.</h2>
-        </div>
-        <div class="md:pb-56 lg:pb-96 relative">
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
+        <p class="leading-tight mx-auto font-black text-pianote uppercase"> Meet your instructors</p>
+        <h2 class="leading-tight font-extrabold mt-1">Learn from world-class teachers.</h2>
+        <div class="md:pb-56 lg:pb-80 relative my-7">
             <section class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0">
                 <div
                         x-data="{
@@ -562,7 +628,7 @@
                                             </picture>
                                             <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                 <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['instructor'] !!}</h4>
-                                                <p class="leading-none text-xs sm:text-sm">{{ $image['title'] }}</p>
+                                                <p class="leading-none text-xs">{{ $image['title'] }}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -573,157 +639,181 @@
                 </div>
             </section>
         </div>
+        <a href="#customize-anchor" class="join smaller anchor-slide">GET THE BUNDLE &raquo;</a>
     </section>
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
         <div class="container max-w-5xl mx-auto">
+            <img class="h-60" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
+            <h6 class="leading-tight mx-auto font-black text-pianote mt-3">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
+            <h2 class="leading-tight font-extrabold mt-1 mb-7">One year of UNLIMITED piano lessons<br> plus 4 awesome LIFETIME bonuses</h2>
+            @php
+                $bonuses = [
+                    [
+                        'title' => 'Pianote Membership',
+                        'description' => 'Experience the joy of making beautiful music with unlimited piano lessons. Play along with world-class musicians, master your favorite songs, and get personalized 1:1 support at your fingertips. <br><br><span class="text-pianote">Plus, you\'ll also get full access to voice, guitar, and drum lessons at no extra cost.</span>',
+                        'price' => '$240',
+                        'discounted_price' => 'SAVE 25%',
+                        'image' => 'https://via.placeholder.com/80x80',
+                    ],
+                    [
+                        'title' => 'New Piano Players Start Here',
+                        'description' => 'Get ready to dive into your first 30 days on the piano! This beginner-friendly course will help you get started on the keys with total confidence, guiding you lesson by lesson, note by note. Simply follow along with Lisa for 10 minutes a day to kickstart your musical journey.',
+                        'price' => '$127',
+                        'discounted_price' => 'FREE',
+                        'image' => 'https://via.placeholder.com/80x80',
+                    ],
+                    [
+                        'title' => 'Easy Chords',
+                        'description' => 'Now that you’re comfortable with the piano, let’s take a further step with Easy Chords! Every song (yes, even classical ones) is built on chords, and they’re the key to telling musical stories. In just 10 minutes a day for 30 days, follow Lisa as you’ll go from knowing about chords to confidently playing them.',
+                        'price' => '$127',
+                        'discounted_price' => 'FREE',
+                        'image' => 'https://via.placeholder.com/80x80',
+                    ],
+                    [
+                        'title' => 'Read Music In 30 Days',
+                        'description' => 'No more spending hours memorizing every single note. This 30-day course will demystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.',
+                        'price' => '$97',
+                        'discounted_price' => 'FREE',
+                        'image' => 'https://via.placeholder.com/80x80',
+                    ],
+                    [
+                        'title' => 'Read Music In 30 Days E-Book',
+                        'description' => 'Every hero needs a trusty sidekick, and this e-book is ready to join you on your musical adventure! Grab this FREE 74-page companion e-book, packed to help you nail those notes and reinforce everything you learn.',
+                        'price' => '',
+                        'discounted_price' => 'FREE',
+                        'image' => 'https://via.placeholder.com/80x80',
+                    ],
+                ];
+            @endphp
+            @foreach ($bonuses as $bonus)
+                <div class="rounded-xl p-6 mb-5 text-left" style="background-color:#F2F5FA;">
+                    <div class="flex items-start">
+                        <img src="{{ $bonus['image'] }}" class="w-20 h-20">
+                        <div class="sm:pl-6">
+                            <div class="flex justify-between">
+                                <div>
+                                    <p class="text-pianote uppercase mb-1">Bonus</p>
+                                    <h5 class="font-black mb-2">{{ $bonus['title'] }}</h5>
+                                </div>
+                                <div class="text-right">
+                                    @if ($bonus['price'])
+                                        <h5 class="inline-block mr-2"><s class="opacity-60">{{ $bonus['price'] }}</s></h5>
+                                    @endif
+                                    <p class="px-3 py-1.5 rounded-lg text-white inline-block" style="background-color:#007904;">{{ $bonus['discounted_price'] }}</p>
+                                </div>
+                            </div>
+                            <p class="mb-4">{!!  $bonus['description']  !!}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
-
+            <a href="#customize-anchor" class="join smaller anchor-slide">SAVE 70% &raquo;</a>
         </div>
     </section>
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative" style="background: #F4F1EC;">
         <div class="container max-w-5xl mx-auto">
-            Join Pianote today with the Beautiful Beginner Bundle and get
-            One year of UNLIMITED piano lessons plus 4 awesome LIFETIME bonuses
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 text-left lg:pr-6">
+                    <p class="text-pianote uppercase font-black mb-2">Limited Time Offer</p>
+                    <h3 class="font-black mb-4">
+                        Get the brand new Pianote headphones for just $20
+                    </h3>
+                    <p class="leading-tight mb-4">
+                        <strong>Get ready to experience your digital piano like never before!</strong><br><br>
+                        With an impressive frequency range and large drivers, the new Pianote headphones let you hear every note as it was meant to be heard. Plus, enjoy complete privacy—no more worrying about your neighbors overhearing as you practice that tricky section. (They just don’t get that practice is part of the journey!)
+                        <br><br>
+                        For just $20*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
+                        <br><br>
+                        Treat your ears to a whole new level of sound, and keep your practice sessions delightfully uninterrupted!
+                        <br><br>
+                        *Free shipping in the US.
+                    </p>
+                    <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>
+                </div>
 
-            Membership                                                                 SAVE 25%
-            PIANOTE MEMBERSHIP
-
-            Experience the joy of making beautiful music with unlimited piano lessons. Play along with world-class musicians, master your favorite songs, and get personalized 1:1 support at your fingertips.
-
-            Plus, you’ll also get full access to voice, guitar, and drum lessons at no extra cost.
-
-
-
-            Bonus 1                                                                       $127 FREE
-            NEW PIANO PLAYERS START HERE
-            Get ready to dive into your first 30 days on the piano! This beginner-friendly course will help you get started on the keys with total confidence, guiding you lesson by lesson, note by note. Simply follow along with Lisa for 10 minutes a day to kickstart your musical journey.
-
-
-            Bonus 2                                                                       $127 FREE
-            EASY CHORDS
-            Now that you’re comfortable with the piano, let’s take a further step with Easy Chords! Every song (yes, even classical ones) is built on chords, and they’re the key to telling musical stories. In just 10 minutes a day for 30 days, follow Lisa as you’ll go from knowing about chords to confidently playing them.
-
-
-            Bonus 3                                                                         $97 FREE
-            READ MUSIC IN 30 DAYS
-            No more spending hours memorizing every single note. This 30-day course will demystify the language of music so you can read and play the songs you love. You’ll learn by DOING, playing a little bit each day with Lisa as you connect the notes on the page to the keys on your piano.
-
-
-
-            Bonus 4                                                                                FREE
-            READ MUSIC IN 30 DAYS E-BOOK
-            Every hero needs a trusty sidekick, and this e-book is ready to join you on your musical adventure! Grab this FREE 74-page companion e-book, packed to help you nail those notes and reinforce everything you learn.
-
-
-            SAVE 70% >
-        </div>
-    </section>
-
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="background: #F4F1EC;">
-        <div class="container max-w-5xl mx-auto">
-            LIMITED TIME OFFER
-
-            Get the brand new Pianote headphones
-            For just $20
-
-            Get ready to experience your digital piano like never before!
-            With an impressive frequency range and large drivers, the new Pianote headphones let you hear every note as it was meant to be heard. Plus, enjoy complete privacy—no more worrying about your neighbors overhearing as you practice that tricky section. (They just don’t get that practice is part of the journey!)
-            For just $20*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
-            Treat your ears to a whole new level of sound, and keep your practice sessions delightfully uninterrupted!
-            *Free shipping in the US.
-
-            [Button]
-            GET THE BUNDLE >
-
+                <div class="lg:w-1/2 mt-10 lg:mt-0 relative">
+                    <img src="https://via.placeholder.com/400x400" alt="Pianote Headphones" class="mx-auto lg:ml-auto lg:mr-0">
+                </div>
+            </div>
         </div>
     </section>
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center">
         <div class="container max-w-5xl mx-auto">
 
-            <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-                <div class="container max-w-6xl mx-auto">
-                    <div class="relative">
-                        <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
-                            <tbody>
-                            <style>
-                                table.comparison tr td {
-                                    width: 33.3%!important;
-                                    font-size: 14px;
-                                }
-                                @media (min-width: 768px) {
-                                    table.comparison tr td {
-                                        font-size: 18px;
-                                    }
-
-                                }
-                            </style>
-                            <tr style="background-color:transparent!important;">
-                                <td></td>
-                                <td class="rounded-tl-xl"><strong>WEBINAR<br> BUNDLE</strong></td>
-                                <td class="rounded-tr-xl">TRADITIONAL<br> LESSONS</td>
-                            </tr>
-                            <tr>
-                                <td>Step-by-step curriculum</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Real teacher</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Live lessons</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>On-demand lessons</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Learn from home</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Multiple instructors</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Popular songs</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Books/Posters included</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>90-Day Guarantee</td>
-                                <td><i class="fas fa-check"></i></td>
-                                <td><i class="fas fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Investment</td>
-                                <td class="rounded-bl-xl"><s class="opacity-60">$611</s> <strong>$177<br> 1st year.</strong></td>
-                                <td class="rounded-br-xl">$2400-$3600 <br>per year.</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+            <div class="relative">
+                <p
+                        class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2 text-black">
+                    <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong>
+                </p>
+                <table id="comparison-table"
+                        class="w-full mx-auto comparison max-w-4xl mb-10 private table-wrapper">
+                    <tbody>
+                    <tr style="background-color:transparent!important;">
+                        <td></td>
+                        <td class="rounded-t-xl bg-pianote">
+                            <img class="h-8 sm:h-14 transition-opacity opacity-0" loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png"
+                                    >
+                        </td>
+                        <td class="cursor-pointer sm:cursor-default"><strong>Private <br> Lessons</strong></td>
+                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Flexibility</td>
+                        <td>Learn anytime, anywhere, at your own pace.</td>
+                        <td>Watch any time</td>
+                        <td>Limited. Depends on your and the teacher’s schedules</td>
+                    </tr>
+                    <tr>
+                        <td>Clear learning roadmap</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Topic Variety</td>
+                        <td>Yes. Covers a wide range: pop, classical, technique, theory, and more.</td>
+                        <td>Yes</td>
+                        <td>Limited. Depends on the teacher’s expertise and curriculum.</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher Support</td>
+                        <td>Personalized support with students reviews and feedback</td>
+                        <td>No</td>
+                        <td>1:1 Support</td>
+                    </tr>
+                    <tr>
+                        <td>Community</td>
+                        <td>Supportive community </td>
+                        <td>No </td>
+                        <td>No </td>
+                    </tr>
+                    <tr>
+                        <td>Guarantee</td>
+                        <td>90 days</td>
+                        <td>No</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Total Investment</td>
+                        <td class="rounded-bl-xl"><strong>$180</strong><br> For 1 year of unlimited lessons</td>
+                        <td><strong>Free</strong><br> (limited quality)</td>
+                        <td class="rounded-br-xl"><strong>From $3,120</strong><br> ($60/lesson/week * 52 weeks)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
 
     @include('musora.sales.components.guarantee-section', [
+        'theme' => 'musora',
+        'bgColor' => true,
         'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
@@ -779,8 +869,19 @@
     @endphp
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20">
         <div class="container max-w-5xl mx-auto text-center">
-            <h2 class="pb-10 md:pb-16">See why our students love us.<br>
-                <strong>Real stories from real students.</strong></h2>
+            <h2 class="leading-tight"><strong>Trusted by pianists everywhere.</strong></h2>
+            <p class="mt-2">See real stories from real students.</p>
+            <img alt="star ratings" class="h-11 my-3 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
+            <p class="mx-auto mb-7">
+                Rated 4.8/5 based on <strong class="font-black">{{ number_format(Prices::$reviews) }} student reviews.</strong>
+                <a role="link" aria-label="Link to shopperapproved" class="inline-block" target="_blank"
+                            href="https://www.shopperapproved.com/reviews/Musora.com"
+                        onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
+                >
+                    <strong class="font-black text-{{ $theme }}"><u>See the reviews »</u></strong>
+                </a>
+            </p>
+
             <div class="masonry text-left">
                 @foreach ($testimonials as $card)
                     <div class="masonry-item bg-[#F1F7FE] shadow-lg rounded-lg p-6 lg:px-6 mb-4 flex flex-col">
@@ -813,42 +914,97 @@
             $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&redirect=/order&promo-code=beginner-bundle&locked=true';
             $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[pianote-headphones-2024]=1&redirect=/order&promo-code=beginner-bundle,beginner-headphones,headphones-us&locked=true'
     @endphp
-    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6" style="background: #F6F5F4;">
-        <div class="container mx-auto relative z-50  max-w-4xl ">
 
-            <img class="h-8 sm:h-10 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
-            <br>
-            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 leading-none sm:leading-none lg:leading-none uppercase">
-                <strong class="relative inline-block">EVERYTHING
-                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
-                </strong>
-                YOU NEED <br class="hidden sm:inline">
-                TO LEARN PIANO.
-            </h1>
-            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                <i class="fas fa-check text-pianote"></i> Play-Along Lessons
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Great Teachers
-                <br class="sm:hidden">
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Fun Practice
-                <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
-            </p>
+    @php
+        $courseDetails = [
+            'courseOnly' => [
+                'title' => 'Beautiful Beginner Bundle',
+                'description' => 'Everything you need to get started on the piano.',
+                'discountedPrice' => 591,
+                'price' => 180,
+                'keyFeatures' => [
+                    'One year of unlimited piano lessons ($240 value) ',
+                    'BONUS New Piano Players Start Here ($127 value)',
+                    'BONUS Easy Chords ($127 value)',
+                    'BONUS Read Music in 30 Days ($97 value)',
+                    'BONUS Read Music in 30 Days E-Book (Free)',
+                    '90-Day Guarantee'
+                ]
+            ],
+            'membershipSpecial' => [
+                'title' => 'Beautiful Beginner Bundle + Pianote Headphones ',
+                'description' => 'Everything in the Beautiful Beginner Bundle, PLUS the brand new Pianote headphones at an unbeatable price.',
+                'discountedPrice' => 690,
+                'price' => 200,
+                'keyFeatures' => [
+                    'One year of unlimited piano lessons ($240 value) ',
+                    'BONUS New Piano Players Start Here ($127 value)',
+                    'BONUS Easy Chords ($127 value)',
+                    'BONUS Read Music in 30 Days ($97 value)',
+                    'BONUS Read Music in 30 Days E-Book (Free)',
+                    'SPECIAL OFFER New Pianote Headphones ($99 value)',
+                    'Free shipping in the US',
+                    '90-Day Guarantee'
+                ]
+            ]
+        ];
+    @endphp
+    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background-color:#F6F5F4;" id="final">
+        <div class="container max-w-6xl mx-auto relative z-50">
+            <div class="flex flex-wrap items-center">
+                <div class="text-center lg:text-left w-full lg:w-1/4 mb-7 lg:mb-0 relative">
+                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 font-black">Get 1 year of unlimited piano lessons plus $351 worth of FREE bonuses</h3>
 
-            <h2 class="leading-tight mt-6 mb-1">
-                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
-            </h2>
-            <p class="mb-4 sm:mb-6"><strong class="text-pianote">Save {{ round(100 - (100 * (floatval($discountedPrice) / floatval($originalPrice)))) }}%</strong> for your first year. Renews at $240/yr.</p>
+                    <p class="mb-2 sm:mb-3 text-black">Know exactly what to practice, learn from world-class teachers, and enjoy personalized support every step of the way.</p>
+                </div>
 
-                <a class="join" href="{{ $buttonLink }}" aria-label="Customize anchor">GET STARTED</a>
-            <br>
-            <h2 class="leading-tight my-6"><strong>Join Pianote and get:</strong></h2>
-
-
-
-{{--                                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" >SOLD OUT</a>--}}
-                            <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET STARTED</a>
-            <br>
-                            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="{{ $buttonLink2 }}">
-                                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital bonuses.</em></u></p></a>
+                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-3/4 lg:pl-5 xl:pl-10">
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
+                            class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
+                        <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
+                        <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
+                        @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
+                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
+                        @else
+                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
+                        @endif
+                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>
+                        <hr class="w-full my-5" style="border-color:#b2cae1">
+                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
+                            @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
+                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
+                            @endforeach
+                        </p>
+                    </a>
+                    <a href="/shop/classical-piano-collection-membership"
+                            class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 lg:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
+                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
+                        <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
+                        <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
+                        @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
+                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
+                        @else
+                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
+                        @endif
+                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">save 71% & Start now</div>
+                        <ul class="list-disc ml-6 text-black">
+                            @if (!empty($courseDetails['membershipSpecial']['bonusItems']))
+                                @foreach ($courseDetails['membershipSpecial']['bonusItems'] as $bonusItem)
+                                    <li class="text-sm leading-relaxed text-black"><span class="text-{{$theme}}"></span> {!! $bonusItem !!}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                        <hr class="w-full my-5" style="border-color:#b2cae1">
+                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
+                            @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)
+                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
+                            @endforeach
+                        </p>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
     <section class="content-section text-center text-black" style="background: #e6e4e3;">
