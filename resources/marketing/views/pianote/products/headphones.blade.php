@@ -300,7 +300,7 @@
             [
                 'position' => 'right',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/practice-in-privacy.webp',
-                'title' => 'Don’t let anywhere hear you practice.',
+                'title' => 'Don’t let anyone hear you practice.',
                 'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in -- and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
             ],
             [
@@ -482,36 +482,24 @@
 @php
 $testimonials = [
     [
-        'quote' => '"These are really solid, fun, entertaining headphones."',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg'
+        'quote' => 'These headphones have quickly become my favorite! I love their comfortable fit and lightweight design, and the sound quality is exceptional. When I play piano, I’m hearing every detail like never before and I even find myself reaching for them when listening to music on my phone or laptop — they really make everything sound amazing!',
+        'role' => 'CANADA',
+        'name' => 'Tim Bondyra',
+        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
     ],
-    [
-        'quote' => '"They\'re the most comfortable headphones I\'ve ever had."',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-2.svg'
-    ],
-    [
-        'quote' => '"They\'re going to block out the majority of noise if you\'re on a plane or if you\'re in a very loud environment."',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-3.svg'
-    ]
 ];
 @endphp
 
 <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
-    <div class="container mx-auto relative z-10 max-w-5xl">
+    <div class="container max-w-2xl mx-auto relative z-10">
         <h2 class="leading-normal pb-4 md:pb-8"><strong>Everything you love about<br class="hidden sm:inline">the Pianote headphones...</strong></h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1">
             @foreach ($testimonials as $testimonial)
-                <div class="rounded-xl p-10 sm:p-4 lg:p-8 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
-                    <h5 class="mb-4">{{ $testimonial['quote'] }}</h5>
+                <div class="rounded-xl p-10 sm:p-4 lg:p-10 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
+                    <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
                     <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
-                        <img class="rounded-full h-10 w-10" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
+                        <img class="rounded-full h-14 w-14 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
                         <div class="ml-3">
                             <p class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></p>
                             <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
@@ -604,6 +592,8 @@ $testimonials = [
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
             @endif
         </div>
+        <h6 class="uppercase mt-6"><strong>For hygienic reasons all <br class="inline sm:hidden"> HEADPHONE sales are final.</strong></h6>
+
     </section>
 
     {{-- <section class="text-center py-10" style="background: #00101D;">
