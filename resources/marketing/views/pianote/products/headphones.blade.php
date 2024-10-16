@@ -482,19 +482,19 @@
 @php
 $testimonials = [
     [
-        'quote' => '"These are really solid, fun, entertaining headphones."',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg'
+        'quote' => 'These headphones have quickly become my favorite! I love their comfortable fit and lightweight design, and the sound quality is exceptional. When I play piano, I’m hearing every detail like never before and I even find myself reaching for them when listening to music on my phone or laptop — they really make everything sound amazing!',
+        'role' => 'CANADA',
+        'name' => 'Tim Bondyra',
+        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
     ],
     [
-        'quote' => '"They\'re the most comfortable headphones I\'ve ever had."',
+        'quote' => 'They\'re the most comfortable headphones I\'ve ever had.',
         'role' => 'Tech Reviewer',
         'name' => 'Reviewer',
         'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-2.svg'
     ],
     [
-        'quote' => '"They\'re going to block out the majority of noise if you\'re on a plane or if you\'re in a very loud environment."',
+        'quote' => 'They\'re going to block out the majority of noise if you\'re on a plane or if you\'re in a very loud environment.',
         'role' => 'Tech Reviewer',
         'name' => 'Reviewer',
         'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-3.svg'
@@ -509,9 +509,9 @@ $testimonials = [
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             @foreach ($testimonials as $testimonial)
                 <div class="rounded-xl p-10 sm:p-4 lg:p-8 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
-                    <h5 class="mb-4">{{ $testimonial['quote'] }}</h5>
+                    <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
                     <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
-                        <img class="rounded-full h-10 w-10" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
+                        <img class="rounded-full h-10 w-10 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
                         <div class="ml-3">
                             <p class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></p>
                             <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
@@ -604,6 +604,8 @@ $testimonials = [
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
             @endif
         </div>
+        <h6 class="uppercase mt-6"><strong>For hygienic reasons all <br class="inline sm:hidden"> HEADPHONE sales are final.</strong></h6>
+
     </section>
 
     {{-- <section class="text-center py-10" style="background: #00101D;">
