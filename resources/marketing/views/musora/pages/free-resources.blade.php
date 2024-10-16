@@ -34,7 +34,7 @@
 @section('layout-body')
 
     <div class="container mx-auto max-w-7xl px-4 md:px-10">
-        <header class="py-10 md:py-20">
+        <header class="py-10 md:py-16">
             <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
             <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
             <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">Free Video Lessons</h5>
@@ -42,10 +42,10 @@
 
               @php
             $benefits = [
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-2.png', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/singeo.jpg', 'title' => 'Improve Any Voice', 'link' => 'https://www.singeo.com/improve-any-voice/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/guitar.png', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotd.webp', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotp.webp', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/iav.webp', 'title' => 'Improve Any Voice', 'link' => 'https://www.singeo.com/improve-any-voice/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotag.webp', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
             ];
         @endphp
 
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </section>
-     <section class="px-5 sm:px-6 sm:pb-16 lg:pb-24 text-black">
+     <section class="pb-10 sm:px-6 sm:pb-16 lg:pb-24 text-black">
         <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative">
             <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
@@ -155,14 +155,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-2 lg:w-6/12">
+            <div class="flex flex-col justify-between gap-4 lg:w-6/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
-                <div class="space-y-4">
-                    <a href="/playlist" class="bg-cover bg-center">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/musora-playlist.png" alt="Musora Playlists" class="rounded-lg">
+                <div class="flex flex-col items-baseline">
+                    <a href="/playlist" class="bg-cover bg-center mb-6">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/mp.webp" alt="Musora Playlists" class="rounded-2xl">
                     </a>
                     <a href="/history" class="bg-cover bg-center">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/history.png" alt="Today in Music History" class="rounded-lg">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/timh.webp" alt="Today in Music History" class="rounded-2xl">
                     </a>
                 </div>
             </div>
