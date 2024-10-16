@@ -181,10 +181,10 @@
         content-type="{{ $lessonContent->fetch('type') }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
         :related-lessons="{{ $relatedLessons }}"
-        :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+        :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
         :this-lesson-json="{{ $thisLessonJson }}"
         :video-buttons="{{ json_encode($videoButtons) }}"
-        :video-props="{{ json_encode($videoProps) }}" 
+        :video-props="{{ json_encode($videoProps) }}"
         :video-resources="{{ json_encode($videoResources) }}"
     >
     </lesson-playback>
