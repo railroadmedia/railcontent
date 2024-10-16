@@ -250,13 +250,13 @@
 <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
-                <h6 class="leading-tight my-3">Superior Sound, Comfort, and Privacy <br class="sm:hidden">for Piano Players.</h6>
+                <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
+                <h6 class="leading-tight my-3 lg:my-6">Superior Sound, Comfort, and Privacy <br class="sm:hidden">for Piano Players.</h6>
                 <h2 class="leading-tight">
                     @if(floatval($productPrices['pianote-headphones-2024']->price) > floatval($productPrices['pianote-headphones-2024']->discounted_price))
-                        <s class="opacity-50">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
+                        <s class="opacity-50 font-extralight">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
                         <strong>${{ floatval($productPrices['pianote-headphones-2024']->discounted_price) }}</strong>
-                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones-2024']->discounted_price) / floatval($productPrices['pianote-headphones-2024']->price)))) }}%)</em>
+                        {{-- <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones-2024']->discounted_price) / floatval($productPrices['pianote-headphones-2024']->price)))) }}%)</em> --}}
                     @else
                         <strong>${{ floatval($productPrices['pianote-headphones-2024']->discounted_price) }}</strong>
                     @endif
@@ -421,14 +421,15 @@
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-white">
                             @if(floatval($productPrices['pianote-headphones-2024']->price) > $discountedPrice)
-                                <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
-                            @endif
+                                {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
                             <strong>${{ $discountedPrice }}</strong>
+                            @else
+                             <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>                            
+                            @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         @php
-                            floatval($productPrices['pianote-headphones-2024']->price)
                         @endphp
                     </tr>
                     </tbody>
@@ -559,7 +560,8 @@ $testimonials = [
                         $originalPrice = $productPrices['pianote-headphones-2024']->price;
                         $discountedPrice = $productPrices['pianote-headphones-2024']->discounted_price;
                         $difference = $originalPrice - $discountedPrice;
-                        $badge = $difference > 0 ? 'SAVE $' . number_format($difference, 2) : '';
+                        $percentage = $originalPrice > 0 ? ($difference / $originalPrice) * 100 : 0;
+                        $badge = $difference > 0 ? 'SAVE ' . number_format($percentage) . '%' : '';
                     @endphp
                     
                     @include('drumeo.products.partials._order-card', [
