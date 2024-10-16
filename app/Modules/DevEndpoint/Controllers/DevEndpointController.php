@@ -3,6 +3,8 @@
 namespace App\Modules\DevEndpoint\Controllers;
 
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -33,7 +35,9 @@ class DevEndpointController extends Controller
         private PermissionService $permissionService,
         private ContentPermissionService $contentPermissionService,
         private ContentPermissionRepository $contentPermissionRepository,
-        private ChallengesService $challengesService
+        private ChallengesService $challengesService,
+        private CustomerIoSyncService $customerIoSyncService,
+        private UserService $userService,
     ) {
     }
 
@@ -41,6 +45,7 @@ class DevEndpointController extends Controller
     {
         $challengeId = 402199;
         $userId = 631736; //If you update this to your id, everything should be an unlock date of the startdate
+
 //        $this->prepChallengeData($challengeId);
 //        $this->setContentCompleted($challengeId);
 

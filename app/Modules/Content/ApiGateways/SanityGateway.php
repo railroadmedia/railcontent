@@ -182,9 +182,9 @@ class SanityGateway
     /**
      * @param int $ids - railcontent.id value
      * @param string $type - sanity _type value
-     * @return array - matching challenge document
+     * @return array | null - matching challenge document or null
      */
-    public function getByRailContentId(int $railcontentId, ?string $type = null) : array
+    public function getByRailContentId(int $railcontentId, ?string $type = null) : array | null
     {
 
         $gateway = new SanityGateway();
@@ -194,7 +194,8 @@ class SanityGateway
         $query ="*[railcontent_id == $railcontentId $typeString]{
           $fieldsString
         } [0 ... 1]";
-        $document = $gateway->sanity->fetch($query)[0] ?? [];
+        $document = $gateway->sanity->fetch($query)[0] ?? null;
+        if (is_null($document)) return null;
         // The following are used to format similar to RailContent, these are a stopgap measure
         // TODO these need to be removed and any decorators using them should be update/removed
         $document['fields'] = $this->mapSanityFields($document);

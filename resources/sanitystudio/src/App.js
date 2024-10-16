@@ -12,11 +12,13 @@ import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import 
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
+import XpInput from './components/XpInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import {defaultDocumentNode} from './defaultDocumentNode';
 import {musoraStructure} from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
-import {media} from 'sanity-plugin-media'; // You can add more custom components here as needed
+import {media} from 'sanity-plugin-media';
+import VimeoVideoInput from "./components/VimeoVideoInput"; // You can add more custom components here as needed
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -25,7 +27,9 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
-    OpenAiInput: OpenAiInput
+    OpenAiInput: OpenAiInput,
+    VimeoVideoInput: VimeoVideoInput,
+    XpInput: XpInput
 };
 
 const icons = {
@@ -78,6 +82,13 @@ const mapComponents = (fields) => {
                 })
             };
         }
+        if (field.fields) {
+            field = {
+                ...field,
+                fields: mapComponents(field.fields)
+            };
+        }
+
 
         return field;
     });
