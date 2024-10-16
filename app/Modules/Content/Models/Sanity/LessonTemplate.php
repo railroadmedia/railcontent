@@ -36,6 +36,7 @@ abstract class LessonTemplate extends BaseSanityModel
         public bool $withLiveEvent = false,
         public ?string $parentType = null,
         public bool $isChallengeChild = false,
+        public bool $withAssignments = true,
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -64,14 +65,6 @@ abstract class LessonTemplate extends BaseSanityModel
             previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
         );
 
-        $assignmentsList = new ListObject(
-            fields: [new Field(FieldType::String, 'assignment_title'),
-                        new Field(FieldType::String, 'assignment_soundslice'),
-                        new Field(FieldType::String, 'assignment_description'),
-                        new Field(FieldType::URL, 'assignment_sheet_music_image'),
-                        new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
-                    ]
-        );
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
         $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
@@ -110,7 +103,7 @@ abstract class LessonTemplate extends BaseSanityModel
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', inputComponent: 'XpInput',  readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 ];
         if ($this->withLiveEvent) {
@@ -135,10 +128,21 @@ abstract class LessonTemplate extends BaseSanityModel
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list', group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
-            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList, group:$detailsGroup),
-            new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup)
+            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList, group:$detailsGroup)
         ]);
-
+        if ($this->withAssignments) {
+            $assignmentsList = new ListObject(
+                fields: [new Field(FieldType::String, 'assignment_title'),
+                            new Field(FieldType::String, 'assignment_soundslice'),
+                            new Field(FieldType::String, 'assignment_description'),
+                            new Field(FieldType::URL, 'assignment_sheet_music_image'),
+                            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
+                        ]
+            );
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup)
+            ]);
+        }
         if ($this->withResources) {
             $resourceList = new ListObject(
                 fields: [new Field(FieldType::String, 'resource_name'),
