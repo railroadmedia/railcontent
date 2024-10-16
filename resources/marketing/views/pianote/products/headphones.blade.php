@@ -102,9 +102,9 @@
         }
 
         .content-section table.comparison.eardrums tr:hover td:nth-child(2) {
-            filter: brightness(1.2); 
+            filter: brightness(1.2);
         }
-        
+
         .content-section table.comparison.eardrums tr td {
             color: black;
             padding: 15px 7px;
@@ -161,7 +161,7 @@
             border-spacing: 15px 0;
             cursor: pointer;
         }
-        
+
         @media (max-width: 767px) {
             table.comparison {
                 border-spacing: 7px 0;
@@ -213,7 +213,7 @@
             display: block;
         }
     </style>
-   
+
     @php
         if(!empty($membersVersion)) {
              $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&locked=true';
@@ -225,7 +225,7 @@
                 ? floatval($productPrices['pianote-headphones-2024']->discounted_price)
                 : number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2);
                 }
-                
+
     @endphp
 @stop
 
@@ -294,7 +294,7 @@
                 'position' => 'left',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/cushioned-ear-pads.webp',
                 'title' => 'Comfort that keeps you playing.',
-                'desc' => 'The Pianote Headphones feature <strong> ultra-soft, cushioned ear pads </strong>and a light weight frame.<strong> Weighing just 295 grams</strong>, they’re so light and comfortable you’ll forget you’re wearing them. 
+                'desc' => 'The Pianote Headphones feature <strong> ultra-soft, cushioned ear pads </strong>and a light weight frame.<strong> Weighing just 295 grams</strong>, they’re so light and comfortable you’ll forget you’re wearing them.
                 <br/><br/>So you can <strong>focus on what’s most important - the music.</strong>',
             ],
             [
@@ -307,7 +307,7 @@
                 'position' => 'left',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/zero-latency.webp',
                 'title' => 'Wired for real-time response.',
-                'desc' => 'The Pianote Headphones feature a <strong>wired connection </strong>for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time. 
+                'desc' => 'The Pianote Headphones feature a <strong>wired connection </strong>for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
                 <br/><br/>And the 3.5mm jack (with 6.3mm adapter) means you can plug into ANY digital piano.',
             ],
         ];
@@ -361,7 +361,7 @@
          <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
             <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
          </div>
-            
+
             <div class="relative">
                 <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}"  class="w-full mx-auto border-separate comparison eardrums earbuds">
@@ -424,7 +424,7 @@
                                 {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
                             <strong>${{ $discountedPrice }}</strong>
                             @else
-                             <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>                            
+                             <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>
                             @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
@@ -450,7 +450,7 @@
                 ];
             @endphp
                 <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
-            
+
                 <ul class="list-disc text-left px-4 pb-4">
                 @foreach ($items as $item)
                     <li>
@@ -459,7 +459,7 @@
                 @endforeach
             </ul>
         </div>
-        <div class="hidden md:block"> 
+        <div class="hidden md:block">
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
             @php
                 $infoPops = [
@@ -525,11 +525,11 @@ $testimonials = [
             <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important - playing piano.</strong>
 
                 <br><br>
-                We’ve designed these headphones with your piano practice in mind, and we’re confident you’ll love them. 
+                We’ve designed these headphones with your piano practice in mind, and we’re confident you’ll love them.
                 <br><br>
                 But if anything goes wrong, you’ll have the peace of mind that comes with knowing your headphones are protected for two full years.
                 <br><br>
-                So you can focus on your piano playing. 
+                So you can focus on your piano playing.
                 <br><br>
                 We’ll worry about the rest.
 
@@ -551,7 +551,7 @@ $testimonials = [
                         $percentage = $originalPrice > 0 ? ($difference / $originalPrice) * 100 : 0;
                         $badge = $difference > 0 ? 'SAVE ' . number_format($percentage) . '%' : '';
                     @endphp
-                    
+
                     @include('drumeo.products.partials._order-card', [
                         'badge' => $badge,
                         'header' => 'Pianote Headphones',
@@ -578,7 +578,7 @@ $testimonials = [
                         'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
                         'specialText' => 'With Annual Membership of $240/yr',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&locked=true',
+                        'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
                         'bonuses' => [
                             '<strong>Everything included with the<br>Headphones PLUS:</strong>',
                             'Step-by-Step Lessons',
