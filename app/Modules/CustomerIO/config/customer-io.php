@@ -114,6 +114,21 @@ return [
                     'preferred_instrument' => 'Preferred Instrument'
                 ],
             ],
+            'Youtube Resources' => [
+                'custom_attributes' => [
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_youtube-resources',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [

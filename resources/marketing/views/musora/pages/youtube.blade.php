@@ -47,8 +47,8 @@
                     <div class="w-full sm:w-10/12 lg:w-full mx-auto">
                         @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Free Music Lessons For Life',
-                            "formId" => "Musora - Engagement - Trigger - Free Music Lessons For Life - WebForm", //TODO: Update form ID
+                            "formName" => 'Youtube Resources',
+                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm", //TODO: Update form ID
                             "buttonText" => "GET THE FREE THINGS",
                             'stacked' => false,
                             "checkboxTitle" => "Preferred Instrument",
@@ -92,8 +92,8 @@
                     <div class="w-full sm:w-10/12 lg:w-1/2 mx-auto">
                         @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Free Music Lessons For Life',
-                            "formId" => "Musora - Engagement - Trigger - Free Music Lessons For Life - WebForm2", //TODO: Update form ID
+                            "formName" => 'Youtube Resources',
+                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm2", //TODO: Update form ID
                             "buttonText" => "GET THE FREE THINGS",
                             'stacked' => false,
                             "checkboxTitle" => "Preferred Instrument",
