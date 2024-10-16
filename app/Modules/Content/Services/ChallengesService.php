@@ -38,6 +38,7 @@ class ChallengesService
      */
     public function getEnrolledUsers(int $contentId, int $count=3)
     {
+        $maxDisplayNameLength = 10;
         $enrolledUserIds = $this->getEnrolledUserIds($contentId);
         $IdsblockList = $this->getBlockListForDisplayedUsers();
         $results = User::query()
@@ -46,6 +47,7 @@ class ChallengesService
             // this will also filter out deleted users as they have the format musora+deleted
             ->whereNotLike('email', '%@musora%')
             ->whereNotLike('email', '%test%') // this isn't great because many users have @testX.com accounts for businesses
+            ->whereRaw("LENGTH(display_name) <= $maxDisplayNameLength")
             ->whereNotIn('id', $IdsblockList)
             ->inRandomOrder()
             ->limit($count)
@@ -63,12 +65,9 @@ class ChallengesService
      */
     private function getEnrolledUserIds(int $challengeId) : array | null
     {
-        // TODO https://musora.atlassian.net/browse/TCH-42
-        // only pull currently enrolled users? something with start_date and last_completed_date?
-        // or add a "in_progress" field?
-        // ->whereNotNull('start_date')->get();
         return ChallengeUserProgress::query()
             ->where('content_id', $challengeId)
+            ->where('is_active', true)
             ->get('user_id')
         ->toArray();
     }
