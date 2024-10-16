@@ -163,11 +163,11 @@
 
                     <VideoButtons 
                         v-if="!isWorkout"
-                        :prev-lesson-url="videoButtons.prevLessonUrl"
-                        :next-lesson-url="videoButtons.nextLessonUrl" 
+                        :prev-lesson-url="nextPreviousLessons?.prevLesson?.web_url_path"
+                        :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path" 
                         :brand="brand"
-                        :prev-label="videoButtons.prevLabel" 
-                        :next-label="videoButtons.nextLabel"
+                        prev-label="Previous Lesson" 
+                        next-label="Next Lesson"
                         :has-qa-video="videoButtons.hasQAVideo" 
                     />
 
@@ -178,7 +178,7 @@
                         :progress="lessonData.progress_percent" 
                         :xp-amount="progressXp" 
                         :is-started="lessonData.progress_percent > 0"
-                        :next-lesson-url="videoButtons.nextLessonUrl" 
+                        :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path" 
                         :show-complete-button="true"
                         :content-id="videoData.id" 
                     />
@@ -195,7 +195,6 @@
 
             <!--Related Section -->
             <RelatedLessons
-                
                 :isRelatedSectionOpen="isRelatedSectionOpen"
                 :is-loading="isLoading"
                 :relatedLessons="relatedLessons"
@@ -258,8 +257,8 @@
         <LessonComplete 
             v-if="!isWorkout"
             :lesson-content="lessonData" 
-            :this-lesson-json="thisLessonJson" 
-            :next-lesson-json="nextLessonJson" 
+            :this-lesson-json="lessonData" 
+            :next-lesson-json="nextPreviousLessons?.nextLesson" 
         />
 
         <!-- Chapter Soundslice -->
@@ -328,9 +327,9 @@ const props = defineProps({
     contentType: String,
     contentBreadcrumb: Object,
     contentDescription: String,
-    thisLessonJson: Object,
+    //thisLessonJson: Object,
     lessonData: [Array, Object],
-    nextLessonJson: Object,
+    // nextLessonJson: Object,
     progressXp: String,
     //relatedLessons: Object,
     soundsliceSlug: String,
@@ -529,14 +528,14 @@ onBeforeMount(async() => {
     const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`);
     isCompleted.value = completed?.data[contentId]?.state === 'completed';
 
-    // const nextPreviousLessonData = await fetchNextPreviousLesson(contentId);
-    // nextPreviousLessons.value = nextPreviousLessonData;
+    const nextPreviousLessonData = await fetchNextPreviousLesson(contentId);
+    nextPreviousLessons.value = nextPreviousLessonData;
 
     const relatedLessonsData = await fetchRelatedLessons(contentId, brand.value);
     relatedLessons.value = relatedLessonsData.related_lessons;
 
-    // console.log('nextPreviousLessonData', nextPreviousLessons.value);
-    console.log('relatedLessonsData', relatedLessons.value);
+    console.log('nextPreviousLessonData', nextPreviousLessons.value);
+    //console.log('relatedLessonsData', relatedLessons.value);
     //console.log('videoData.value', videoData.value)
 
     platformStore.setLoadingState(false);
