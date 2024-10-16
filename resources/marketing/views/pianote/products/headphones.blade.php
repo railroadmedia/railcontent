@@ -487,28 +487,16 @@ $testimonials = [
         'name' => 'Tim Bondyra',
         'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
     ],
-    [
-        'quote' => 'They\'re the most comfortable headphones I\'ve ever had.',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-2.svg'
-    ],
-    [
-        'quote' => 'They\'re going to block out the majority of noise if you\'re on a plane or if you\'re in a very loud environment.',
-        'role' => 'Tech Reviewer',
-        'name' => 'Reviewer',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-3.svg'
-    ]
 ];
 @endphp
 
 <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
-    <div class="container mx-auto relative z-10 max-w-5xl">
+    <div class="container max-w-2xl mx-auto relative z-10">
         <h2 class="leading-normal pb-4 md:pb-8"><strong>Everything you love about<br class="hidden sm:inline">the Pianote headphones...</strong></h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1">
             @foreach ($testimonials as $testimonial)
-                <div class="rounded-xl p-10 sm:p-4 lg:p-8 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
+                <div class="rounded-xl p-10 sm:p-4 lg:p-10 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
                     <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
                     <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
                         <img class="rounded-full h-10 w-10 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
