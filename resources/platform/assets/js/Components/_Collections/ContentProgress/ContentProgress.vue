@@ -9,12 +9,11 @@
             <div :class="`flex flex-column trophy-progress-cutoff tw-h-[38px] sm:tw-h-[70px] bg-${brand} inverted relative`">
               <span :class="`progress-border ba-${brand}-5 border-darken absolute-fill`"></span>
               <span
-                :data-current-progress="progress"
                 class="trophy-progress relative bg-white"
-                :style="{ transform: `translateX(${progress - 100}%)` }"
+                :style="{ transform: `translateX(${contentProgress - 100}%)` }"
               >
-                <span :class="`progress-percent body tw-font-bold tw-text-[10px] sm:tw-text-base ${brandTextColor} ${progress > 50 ? '' : 'right'}`">
-                  {{ Math.round(progress) }}%
+                <span :class="`progress-percent body tw-font-bold tw-text-[10px] sm:tw-text-base ${brandTextColor} ${contentProgress > 50 ? '' : 'right'}`">
+                  {{ Math.round(contentProgress) }}%
                 </span>
               </span>
             </div>
@@ -23,7 +22,7 @@
                 <i :class="`fas fa-trophy ${brandTextColor}`"></i>
                 <span v-if="xpAmount">&nbsp;&nbsp;{{ xpAmount }} XP</span>
               </div>
-              <div :class="`white-underlay ba-${brand}-5 ${progress === 100 ? 'visible' : ''} border-darken`"></div>
+              <div :class="`white-underlay ba-${brand}-5 ${contentProgress === 100 ? 'visible' : ''} border-darken`"></div>
             </div>
           </div>
         </div>
@@ -39,7 +38,7 @@
             <span v-else v-html="backButton.text"></span>
           </a>
           <div v-else class="tw-flex tw-justify-center">
-            <button class="btn resetProgress tw-hidden sm:tw-block"
+            <button class="btn tw-hidden sm:tw-block"
                     :data-brand="brand"
                     :data-content-id="contentId"
                     title="Reset Progress"
@@ -49,13 +48,13 @@
                 <i class="fas fa-undo tw-text-white reset tw-mb-0.5 tw-text-lg" aria-hidden="true"></i> Reset
               </span>
             </button>
-            <button class="btn completeButton tw-text-base tw-max-w-[250px] sm:tw-max-w-none"
+            <button class="btn tw-text-base tw-max-w-[250px] sm:tw-max-w-none"
                     :class="isCompleted ? 'is-complete' : ''"
                     dusk="master-complete-button"
                     title="Mark Lesson as Complete"
                     :data-brand="brand"
                     :data-content-id="contentId"
-                    @click="toggleComplete"
+                    @click="completeContent"
             >
               <span class="incompleted bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border tw-border-white sm:tw-border-none tw-shadow-none" :class="!isCompleted ? 'tw-flex sm:tw-flex-col tw-h-[35px] sm:tw-h-auto' : 'tw-hidden'">
                 <div class="tw-border-2 tw-border-white tw-rounded-full tw-px-1 tw-mr-1 sm:tw-mr-0 sm:tw-mb-1.5">
@@ -78,7 +77,9 @@
   // TODO: We might need to test corner cases if this is implemented in templates different than the LessonPlayback
   import { ref, computed } from 'vue';
   import { textColor } from '@constants/brands';
-  
+  import ContentService from "@vuesora/assets/js/Services/content";
+  import Utils from "@vuesora/assets/js/classes/utils";
+
   const props = defineProps({
     labelText: String,
     brand: String,
@@ -89,22 +90,52 @@
     backButton: Object,
     nextLessonUrl: String,
     showCompleteButton: Boolean,
-    contentId: Number
+    contentId: Number,
+    isChallenge: {
+        type: Boolean,
+        default: false,
+    }
   });
+
+  const emit = defineEmits(['toggleCompleteContent']);
+
+  const contentProgress = ref(props.progress);
 
   const brandTextColor = computed(() => {
     return textColor[props.brand];
   });
 
   const resetProgress = () => {
-    // Add logic for resetting progress
-    // console.log('Reset progress');
-    // TODO: Refactor event listeners and attach here
+      window.showconfirmationmodal({
+          title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+          subtitle: 'This cannot be undone.',
+          callbacks: {
+              submit: () => {
+                  ContentService.resetContentProgress(props.contentId)
+                  .then((resolved) => {
+                      if (resolved) {
+                          window.shownotification({
+                              icon: 'check',
+                              text: 'Ready to start again? Your progress has been reset.'
+                          });
+
+                          contentProgress.value = 0;
+                          emit('toggleCompleteContent');
+                      }
+                  });
+              },
+          }
+      });
   }
 
-  const toggleComplete = () => {
-    // Add logic for marking lesson as complete/incomplete
-    // console.log('Toggle complete');
-    // TODO: Refactor event listeners and attach here
+  const completeContent = () => {
+      if(!props.isCompleted){
+          ContentService.markContentAsComplete(props.contentId)
+          .then(() => {
+              Utils.triggerEvent(window, 'lesson-complete', { complete: true });
+              contentProgress.value = 100;
+              emit('toggleCompleteContent');
+          });
+      }
   }
   </script>
