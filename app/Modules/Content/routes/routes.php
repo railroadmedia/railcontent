@@ -78,4 +78,14 @@ Route::prefix('challenges')
             'unlock/{id}',
             [ChallengesMetaDataController::class, 'unlockChallenge']
         )->name('challenges.unlock');
+
+        Route::post(
+            'notifications/enrollment_open/{id}',
+            [ChallengesMetaDataController::class, 'notificationsEnrollmentOpen']
+        )->name('challenges.notifications.enroll');
+
+        Route::post(
+            'notifications/community_reminders/{id}',
+            [ChallengesMetaDataController::class, 'notificationsCommunityReminders']
+        )->name('challenges.notifications.community_reminders');
     });
