@@ -485,7 +485,7 @@ $testimonials = [
         'quote' => 'These headphones have quickly become my favorite! I love their comfortable fit and lightweight design, and the sound quality is exceptional. When I play piano, I’m hearing every detail like never before and I even find myself reaching for them when listening to music on my phone or laptop — they really make everything sound amazing!',
         'role' => 'CANADA',
         'name' => 'Tim Bondyra',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
+        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
     ],
 ];
 @endphp
@@ -499,7 +499,7 @@ $testimonials = [
                 <div class="rounded-xl p-10 sm:p-4 lg:p-10 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
                     <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
                     <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
-                        <img class="rounded-full h-10 w-10 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
+                        <img class="rounded-full h-14 w-14 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
                         <div class="ml-3">
                             <p class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></p>
                             <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
