@@ -22,4 +22,10 @@ Route::prefix('admin')
             [\App\Modules\Content\Controllers\SanityStudioCMSController::class, 'getLastContent']
         )
             ->name('admin.getLastContent');
+        Route::get(
+            '/vimeo/{id}',
+            [SanityStudioCMSController::class, 'getVimeoEndpoints']
+        )
+            ->name('admin.vimeo');
+        //
     });
