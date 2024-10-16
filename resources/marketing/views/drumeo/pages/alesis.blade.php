@@ -171,7 +171,7 @@
                     ],
                     'alesisCrimson' => [
                         'name' => 'Crimson III',
-                        'video' => '//player.vimeo.com/video/915243228'
+                        'video' => '//player.vimeo.com/video/1020370365'
                     ],
                     'alesisStrata' => [
                         'name' => 'Strata Prime',
@@ -179,7 +179,7 @@
                     ],
                     'alesisStrataCore' => [
                         'name' => 'Strata Core',
-                        'video' => '//player.vimeo.com/video/915243228'
+                        'video' => '//player.vimeo.com/video/1020370277'
                     ],
                 ];
 
