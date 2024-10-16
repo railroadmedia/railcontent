@@ -64,15 +64,15 @@
     </header>
       @php
         $benefits = [
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/giveaways.png', 'title' => 'Exclusive Giveaways'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/resources.png', 'title' => 'Free gifts & resources'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/free-lessons.png', 'title' => 'Free lessons'],
-            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/app-page/50_off-gold.jpg', 'title' => 'exclusive discounts'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/app-page/giveaways.png', 'title' => 'Exclusive Giveaways'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/app-page/resources.png', 'title' => 'Free gifts & resources'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/app-page/free-lessons.png', 'title' => 'Free lessons'],
+            ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/app-page/50_off-gold.jpg', 'title' => 'exclusive discounts'],
         ];
     @endphp
 
-    <section class="container max-w-4xl mx-auto bg-white px-4">
-        <div  class="grid grid-cols-2 gap-4 py-10 md:py-20">
+    <section class="container max-w-4xl mx-auto bg-white px-4 md:px-10">
+        <div  class="grid grid-cols-2 gap-6 py-10 md:py-20">
                 @foreach ($benefits as $benefit)
                     <div class="text-center">
                         <img src="{{ $benefit['image'] }}" alt="{{ $benefit['title'] }}" class="mx-auto rounded-xl">
