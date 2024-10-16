@@ -646,7 +646,8 @@
         <div class="container max-w-5xl mx-auto">
             <img class="h-60" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
             <h6 class="leading-tight mx-auto font-black text-pianote mt-3">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
-            <h2 class="leading-tight font-extrabold mt-1 mb-7">One year of UNLIMITED piano lessons<br> plus 4 awesome LIFETIME bonuses</h2>
+            <h2 class="leading-tight font-black mt-1 mb-2">One year of UNLIMITED piano lessons<br> plus 4 awesome LIFETIME bonuses</h2>
+            <h4 class="leading-tight mb-7"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
             @php
                 $bonuses = [
                     [
@@ -959,7 +960,7 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-3/4 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
+                    <a href="{{ $buttonLink }}"
                             class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
@@ -977,7 +978,7 @@
                             @endforeach
                         </p>
                     </a>
-                    <a href="/shop/classical-piano-collection-membership"
+                    <a href="{{ $buttonLink2 }}"
                             class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 lg:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
                         <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
