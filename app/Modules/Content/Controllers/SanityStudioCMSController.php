@@ -282,22 +282,24 @@ class SanityStudioCMSController extends BaseController
         }
     }
 
-    public function getVimeoEndpoints(string $vimeoId): Vimeo
+    public function getVimeoEndpoints(string $vimeoId): ?Vimeo
     {
         $video = Vimeo::where('external_id', $vimeoId)->first();
         if(!$video) {
             ConfigService::$brand  = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
-            $video = Vimeo::create(
-                [
-                    'external_id'              => $vimeoId,
-                    'video_poster_image_url'   => $vimeo['video_poster_image_url'],
-                    'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
-                    'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
-                    'length_in_seconds'        => $vimeo['length_in_seconds']
-                ]
-            );
+            if($vimeo){
+                $video = Vimeo::create(
+                    [
+                        'external_id'              => $vimeoId,
+                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                        'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
+                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
+                        'length_in_seconds'        => $vimeo['length_in_seconds']
+                    ]
+                );
+            }
       }
 
         return $video;
