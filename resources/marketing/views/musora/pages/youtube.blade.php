@@ -48,13 +48,14 @@
                         @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
                             "formName" => 'Youtube Resources',
-                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm", //TODO: Update form ID
+                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm",
                             "buttonText" => "GET THE FREE THINGS",
                             'stacked' => false,
                             "checkboxTitle" => "Preferred Instrument",
                             "minimalForm" => true,
                             "buttonColor" => "bg-musora text-black",
                             "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing'],
+                            "redirectURL" => '/youtube/free-resources',
                         ])
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                         @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
                             "formName" => 'Youtube Resources',
-                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm2", //TODO: Update form ID
+                            "formId" => "Musora - Engagement - Trigger - Youtube Resources - WebForm2",
                             "buttonText" => "GET THE FREE THINGS",
                             'stacked' => false,
                             "checkboxTitle" => "Preferred Instrument",
@@ -101,7 +102,7 @@
                             "buttonColor" => "bg-black text-white",
                             "checkboxItems" => ['Guitar' => 'Guitar', 'Piano' => 'Piano', 'Drums' => 'Drums', 'Singing' => 'Singing'],
                             "theme" => "black",
-                            "redirectURL" => "/thank-you",
+                            "redirectURL" => '/youtube/free-resources',
                         ])
                     </div>
                 </div>

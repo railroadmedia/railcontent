@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function beginner()
     {
-        return view('pianote.sales.beginner', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+        return view('pianote.sales.promo-beautiful-beginner-bundle', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
     public function backToSchool()
     {
