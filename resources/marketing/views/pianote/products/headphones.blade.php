@@ -316,16 +316,16 @@
         <div class="container max-w-5xl mx-auto">
             <div class="max-w-2xl mx-auto text-center mb-4">
                 <h2><strong>Studio-Quality Sound. <br> Immersive Practice. Better Results. </strong></h2>
-                <p class="leading-relaxed my-2 sm:mb-8">
+                <h6 class="leading-relaxed my-2 sm:mb-8">
                     The Pianote Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
                     comfort, and complete privacy for focused practice sessions.
-                </p>
+                </h6>
             </div>
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
-                            <div class="content relative text-left md:pl-6">
+                            <div class="content relative text-left">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
                                 <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
