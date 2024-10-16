@@ -14,59 +14,59 @@
                         <!-- Skeleton Loading -->
                         <div v-if="isLoading" class="tw-animate-pulse tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-bg-[#F2F2F2] dark:tw-bg-[#002039]"></div>
                         <!-- Upgrade Cover  -->
-                        <MembershipUpgradeVideoCover 
-                            v-else-if="noAccess" 
-                            :thumbnail-url="videoData.thumbnail_url" 
+                        <MembershipUpgradeVideoCover
+                            v-else-if="noAccess"
+                            :thumbnail-url="videoData.thumbnail_url"
                         />
                         <template v-else-if="videoData?.video?.external_id">
                             <!-- Draft Label -->
                             <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
                             <transition v-if="videoData?.video?.type === 'youtube-video'" appear name="fade">
-                                <YoutubePlayer 
+                                <YoutubePlayer
                                     ref="mediaElementVueInstance"
-                                    :brand="brand" 
-                                    :theme-color="brand" 
-                                    :use-intersection-observer="true" 
+                                    :brand="brand"
+                                    :theme-color="brand"
+                                    :use-intersection-observer="true"
                                     :start-second="startSecond"
-                                    :progress-state="videoProps.progressState" 
+                                    :progress-state="videoProps.progressState"
 
-                                    :video-id="videoData?.video?.external_id" 
+                                    :video-id="videoData?.video?.external_id"
                                     :video-length="videoData.length_in_seconds"
                                     :content-id="videoData?.id"
-                                    :end-second="videoData.length_in_seconds" 
+                                    :end-second="videoData.length_in_seconds"
                                     :total-duration="videoData.length_in_seconds"
-                                    :seek-to-time="seekToTime" 
-                                    @play="handleVideoPlay" 
+                                    :seek-to-time="seekToTime"
+                                    @play="handleVideoPlay"
                                     @pause="handleVideoPause"
-                                    @onVideoEnd="handleVideoEnd" 
+                                    @onVideoEnd="handleVideoEnd"
                                 />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && videoProps.useLegacyPlayer"
                                 appear name="fade">
-                                <video-media-element 
-                                    ref="mediaElementVueInstance" 
+                                <video-media-element
+                                    ref="mediaElementVueInstance"
                                     element-id="lessonPlayer"
-                                    :brand="brand" 
+                                    :brand="brand"
                                     :theme-color="brand"
                                     :current-second="videoProps.lastWatchPositionInSeconds"
-                                    :progress-state="videoProps.progressState" 
+                                    :progress-state="videoProps.progressState"
                                     :seek-to-time="seekToTime"
                                     :is-liked="videoProps.isLiked"
-                                    :check-for-timecode="videoProps.checkForTimecode" 
+                                    :check-for-timecode="videoProps.checkForTimecode"
 
-                                    :poster="videoData?.thumbnail_url" 
+                                    :poster="videoData?.thumbnail_url"
                                     :sources="videoData?.video?.video_playback_endpoints"
-                                    :hls-manifest-url="videoData?.video?.hlsManifestUrl" 
+                                    :hls-manifest-url="videoData?.video?.hlsManifestUrl"
                                     :video-id="videoData?.video?.external_id"
-                                    :content-id="videoData?.id" 
+                                    :content-id="videoData?.id"
                                     :video-length="videoData?.length_in_seconds"
-                                    :chapters="videoData?.chapters" 
+                                    :chapters="videoData?.chapters"
                                     :user-id="userId"
-                                    :like-count="likeData?.likeCount" 
-                                    @playing="handleVideoPlay" 
-                                    @pause="handleVideoPause" 
+                                    :like-count="likeData?.likeCount"
+                                    @playing="handleVideoPlay"
+                                    @pause="handleVideoPause"
                                     @ended="handleVideoEnd"
                                 >
                                     <div :class="`widescreen title tw-text-${brand}`">
@@ -77,9 +77,9 @@
                             <!-- Vimeo -->
                             <transition v-else-if="videoData?.video?.type === 'vimeo-video' && !videoProps.useLegacyPlayer"
                                 appear name="fade">
-                                <video-player 
-                                    ref="mediaElementVueInstance" 
-                                    :theme-color="brand" 
+                                <video-player
+                                    ref="mediaElementVueInstance"
+                                    :theme-color="brand"
                                     :brand="brand"
                                     :ranges="videoProps.ranges ? videoProps.ranges : {}"
                                     :ranges-video-ids="videoProps.rangesVideoIds ? videoProps.rangesVideoIds : {}"
@@ -88,18 +88,18 @@
                                     :current-second="videoProps.currentSecond"
                                     :cast-title="videoProps.castTitle"
                                     :use-intersection-observer="videoProps.useIntersectionObserver"
-                                    :seek-to-time="seekToTime" 
-                                    
-                                    :poster="videoData?.thumbnail_url" 
+                                    :seek-to-time="seekToTime"
+
+                                    :poster="videoData?.thumbnail_url"
                                     :sources="videoData?.video?.video_playback_endpoints"
-                                    :hls-manifest-url="videoData?.video?.hlsManifestUrl" 
-                                    :chapters="videoData?.chapters" 
-                                    :content-id="videoData?.id" 
+                                    :hls-manifest-url="videoData?.video?.hlsManifestUrl"
+                                    :chapters="videoData?.chapters"
+                                    :content-id="videoData?.id"
                                     :user-id="userId"
-                                    :video-id="videoData?.video?.external_id" 
+                                    :video-id="videoData?.video?.external_id"
                                     :video-length="videoData?.length_in_seconds"
-                                    :total-duration="videoData.length_in_seconds" 
-                                    @play="handleVideoPlay" 
+                                    :total-duration="videoData.length_in_seconds"
+                                    @play="handleVideoPlay"
                                     @pause="handleVideoPause"
                                     @onVideoEnd="handleVideoEnd"
                                 >
@@ -143,44 +143,45 @@
                         :resources="videoData.resources"
                         :difficulty="videoData.difficulty"
 
-                        :show-practice-button="showPracticeButton" 
-                        :show-share-button="false" 
+                        :show-practice-button="showPracticeButton"
+                        :show-share-button="false"
                         :show-complete-button="true"
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
-                        @on-like-content="likeContent" 
-                        @on-complete-content="completeContent"
+                        @on-like-content="likeContent"
+                        @on-complete-content="toggleCompleteContent"
                     />
 
-                    <ContentInfo 
-                        :breadcrumbs="breadCrumbs" 
+                    <ContentInfo
+                        :breadcrumbs="breadCrumbs"
 
                         :content-description="videoData.description"
-                        :content-chapters="videoData?.chapters" 
-                        :instructors="videoData?.instructor" 
+                        :content-chapters="videoData?.chapters"
+                        :instructors="videoData?.instructor"
                     />
 
-                    <VideoButtons 
+                    <VideoButtons
                         v-if="!isWorkout"
                         :prev-lesson-url="videoButtons.prevLessonUrl"
-                        :next-lesson-url="videoButtons.nextLessonUrl" 
+                        :next-lesson-url="videoButtons.nextLessonUrl"
                         :brand="brand"
-                        :prev-label="videoButtons.prevLabel" 
+                        :prev-label="videoButtons.prevLabel"
                         :next-label="videoButtons.nextLabel"
-                        :has-qa-video="videoButtons.hasQAVideo" 
+                        :has-qa-video="videoButtons.hasQAVideo"
                     />
 
-                    <ContentProgress 
-                        v-if="!noAccess && !isWorkout" 
-                        :brand="brand" 
-                        :is-completed="lessonData.completed"
-                        :progress="lessonData.progress_percent" 
-                        :xp-amount="progressXp" 
+                    <ContentProgress
+                        v-if="!noAccess && !isWorkout"
+                        :brand="brand"
+                        :is-completed="isCompleted"
+                        :progress="lessonData.progress_percent"
+                        :xp-amount="progressXp"
                         :is-started="lessonData.progress_percent > 0"
-                        :next-lesson-url="videoButtons.nextLessonUrl" 
+                        :next-lesson-url="videoButtons.nextLessonUrl"
                         :show-complete-button="true"
-                        :content-id="videoData.id" 
+                        :content-id="videoData.id"
+                        @toggle-complete-content="toggleCompleteContent"
                     />
                 </div>
                 <!-- Related Lessons Toggle -->
@@ -195,7 +196,6 @@
 
             <!--Related Section -->
             <RelatedLessons
-                
                 :isRelatedSectionOpen="isRelatedSectionOpen"
                 :is-loading="isLoading"
                 :relatedLessons="relatedLessons"
@@ -228,26 +228,26 @@
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <AssignmentsContainer 
-                            :lesson-data="lessonData" 
-                            :assignments="videoData?.assignments" 
+                        <AssignmentsContainer
+                            :lesson-data="lessonData"
+                            :assignments="videoData?.assignments"
                             :brand="brand"
-                            :user-id="userId" 
+                            :user-id="userId"
                         />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
-                        <VideoComments 
+                        <VideoComments
                             :is-loading="isLoading"
-                            :theme-color="brand" 
+                            :theme-color="brand"
                             :brand="brand"
                             :user-id="userId"
                             :is-admin="isAdmin"
-                            :content-id="videoData?.id" 
-                            :user-name="userDisplayName" 
+                            :content-id="videoData?.id"
+                            :user-name="userDisplayName"
                             :user-avatar="userProfilePictureUrl"
-                            :user-xp="userXP" 
+                            :user-xp="userXP"
                             :user-access-level="userAccessLevel"
                             :profile-base-route="`/${brand}/profile/${userId}/dashboard`"
                         />
@@ -255,33 +255,33 @@
                 </div>
             </section>
         </div>
-        <LessonComplete 
+        <LessonComplete
             v-if="!isWorkout"
-            :lesson-content="lessonData" 
-            :this-lesson-json="thisLessonJson" 
-            :next-lesson-json="nextLessonJson" 
+            :lesson-content="lessonData"
+            :this-lesson-json="thisLessonJson"
+            :next-lesson-json="nextLessonJson"
         />
 
         <!-- Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                <SoundSlice 
-                    :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" 
-                    :user-id="userId" 
+                <SoundSlice
+                    :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`"
+                    :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug" 
-                    :contentId="videoData.id" 
-                    :start-time="chapterStartTime" 
-                    :end-time="chapterEndTime" 
+                    :soundslice-slug="soundsliceSlug"
+                    :contentId="videoData.id"
+                    :start-time="chapterStartTime"
+                    :end-time="chapterEndTime"
                     :loop="startLooping"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls 
-                            :title="soundsliceTitle || videoData.title" 
+                        <SoundSliceControls
+                            :title="soundsliceTitle || videoData.title"
                             :disable-next="true"
-                            :disable-prev="true" 
-                            @onClose="handleCloseSoundslice" 
+                            :disable-prev="true"
+                            @onClose="handleCloseSoundslice"
                         />
                     </template>
                 </SoundSlice>
@@ -324,7 +324,7 @@ const props = defineProps({
     breadcrumbFirstLevelTitle: String,
     breadcrumbSecondLevelUrl: String,
     breadcrumbSecondLevelTitle: String,
-    breadcrumbLastLevelTitle: String,    
+    breadcrumbLastLevelTitle: String,
     contentType: String,
     contentBreadcrumb: Object,
     contentDescription: String,
@@ -498,7 +498,7 @@ const showDraftLabel = computed(() => {
     return props.lessonData.status === 'draft';
 })
 
-const completeContent = () => {
+const toggleCompleteContent = () => {
     isCompleted.value = !isCompleted.value;
 }
 
