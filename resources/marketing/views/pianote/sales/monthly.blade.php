@@ -160,8 +160,8 @@
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> Popular Songs
             </p>
 
-{{--            <a class="join smaller sold-out mb-2 sm:mb-0" aria-label="Customize anchor">SOLD OUT</a>--}}
-            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET STARTED</a>
+            <a class="join smaller sold-out mb-2 sm:mb-0" aria-label="Customize anchor">SOLD OUT</a>
+{{--            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET STARTED</a>--}}
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -491,9 +491,9 @@
 
 
 {{--                <a class="join sold-out mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" aria-label="Customize anchor">SOLD OUT</a>--}}
-            <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                GET STARTED
-            </a>
+{{--            <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">--}}
+{{--                GET STARTED--}}
+{{--            </a>--}}
                 <br>
                 <p class="inline-block opacity-60"><strong>NEW STUDENTS ONLY</strong></p>
             </div>
