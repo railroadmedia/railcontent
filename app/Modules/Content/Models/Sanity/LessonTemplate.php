@@ -43,17 +43,18 @@ abstract class LessonTemplate extends BaseSanityModel
         $video               = new ListObject(
             fields: [
                         new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
-                        new Field(FieldType::String, 'external_id'),
+                        new Field(FieldType::String, 'external_id', inputComponent: 'VimeoVideoInput'),
                         new Field(FieldType::String, 'hlsManifestUrl'),
                         new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
                             fields: [
-new Field(FieldType::String, 'vimeo_key'),
-new Field(FieldType::String, 'file'),
-new Field(FieldType::Number, 'height'),
-new Field(FieldType::Number, 'width')]
+                                new Field(FieldType::String, 'vimeo_key'),
+                                new Field(FieldType::String, 'file'),
+                                new Field(FieldType::Number, 'height'),
+                                new Field(FieldType::Number, 'width')],
+                            previewItem: new ListItemPreview('height', 'width'),
                         ), ),
                     ],
-            previewItem: new ListItemPreview('height', 'width'),
+
         );
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),
