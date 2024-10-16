@@ -11,6 +11,7 @@
     window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
     window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
     window.railcontentConfig = {};
+    window.railcontentConfig.token = "{{ csrf_token() }}";
 </script>
 <div id="app" class="flex-1">
     <dev-endpoint

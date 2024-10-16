@@ -5,16 +5,26 @@ namespace Modules\Content\Services;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\AwardTier;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use JMS\Serializer\Tests\Fixtures\Discriminator\Car;
 use Modules\UserManagementSystem\Models\User;
 
 class ChallengesService
 {
+    const string ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
+    const string COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+
+
     public function __construct(
-        private UserService $userService,
+        private UserAccessPermissionsService $userAccessPermissionsService,
+        private CustomerIoSyncService $customerIoSyncService,
+        private CustomerIoService $customerIoService,
         private SanityGateway $sanityGateway,
     )
     {
@@ -132,7 +142,7 @@ class ChallengesService
      * @param $challengeId
      * @return array
      */
-    public function getById($challengeId) : array
+    public function getById($challengeId) : array | null
     {
         return $this->sanityGateway->getByRailContentId($challengeId, 'challenge');
     }
@@ -154,5 +164,28 @@ class ChallengesService
         $userProgress->last_completed_date = $today;
         $userProgress->is_active = false;
         $userProgress->save();
+    }
+
+    public function updateCustomerIONotifications($challengeId, $user, $notificationKey) : void
+    {
+        $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+        $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
+        if (is_null($customerIO)) {
+            return;
+        }
+        $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey] ?? '[]');
+
+        if (!in_array($challengeId, $existingNotifications) ) {
+            $existingNotifications[] = $challengeId;
+        }
+        $data = [$notificationKey => $existingNotifications];
+
+        $this->customerIoService->createOrUpdateCustomerByUserId(
+            $user->id,
+            $musoraWorkspace,
+            $user->email,
+            $data,
+            $user->created_at->timestamp
+        );
     }
 }
