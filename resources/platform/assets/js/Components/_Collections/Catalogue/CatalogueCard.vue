@@ -122,10 +122,12 @@
                         </button>
 
                         <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
-                            :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
+                            :dropdownOptions="dropdownOptions" 
+                            @closeDropdown="closeDropdown()"
                             :position="state.dropdownPosition"
                             @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: itemTitle, description: mappedData.description, thumbnail_url: itemThumbnail })"
-                            @progressReset="$emit('progressReset', { content_id: item.id })" />
+                            @progressReset="$emit('progressReset', { content_id: item.id })" 
+                        />
                     </div>
                 </div>
             </div>
@@ -367,7 +369,7 @@ const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
-const closeDropdownOnScroll = () => {
+const closeDropdown = () => {
     if (state.dropdownOpen) {
         state.dropdownOpen = false;
     }
@@ -381,12 +383,12 @@ const getPublishedOn = (item) => {
 
 onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.addEventListener('scroll', closeDropdownOnScroll);
+    contentContainer.addEventListener('scroll', closeDropdown);
 });
 
 onUnmounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
+    contentContainer.removeEventListener('scroll', closeDropdown);
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);

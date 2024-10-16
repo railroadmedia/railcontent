@@ -18,7 +18,7 @@ export async function useSongPageData(contentId, brand, userId, token) {
     data.value = songResponse;
 
     if (relatedSongsResponse) {
-      data.value.relatedLessons = relatedSongsResponse.data;
+      data.value.relatedLessons = relatedSongsResponse.entity;
     }
 
     if (currentSongCompleteResponse) {
