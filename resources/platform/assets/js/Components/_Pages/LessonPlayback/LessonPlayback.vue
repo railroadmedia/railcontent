@@ -182,6 +182,7 @@
                         :show-complete-button="true"
                         :content-id="videoData.id"
                         @toggle-complete-content="toggleCompleteContent"
+                        @open-completion-modal="openCompletionModal"
                     />
                 </div>
                 <!-- Related Lessons Toggle -->
@@ -288,6 +289,8 @@
             </div>
         </transition>
     </div>
+
+    <ChallengeCompletionModal v-if="isCompletionModalOpen" />
 </template>
 
 <script setup>
@@ -317,6 +320,7 @@ import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import DraftLabel from '@units/DraftLabel/DraftLabel';
 import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
+import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
 const props = defineProps({
     assignments: Array,
@@ -350,6 +354,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(true);
+const isCompletionModalOpen = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -510,6 +515,14 @@ const likeContent = () => {
     } else {
         likeData.value.likeCount -= 1;
     }
+}
+
+const openCompletionModal = () => {
+    isCompletionModalOpen.value = true;
+}
+
+const closeCompletionModal = () => {
+    isCompletionModalOpen.value = false;
 }
 
 const isWorkout = computed( () => {
