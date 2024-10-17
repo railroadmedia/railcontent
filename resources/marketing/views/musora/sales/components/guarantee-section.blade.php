@@ -14,7 +14,7 @@
         style="background-color:#fff;"
     @endif
 >
-    <div class="container mx-auto max-w-6xl"
+        <div class="container mx-auto max-w-6xl"
         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
         x-intersect.once="lazyLoad = true; $refs.guaranteeBadge.src = $refs.guaranteeBadge.dataset.src;">
         <picture>
