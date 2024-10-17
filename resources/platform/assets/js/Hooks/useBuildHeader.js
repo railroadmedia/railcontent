@@ -9,6 +9,7 @@ export function useBuildHeader(progressPercent) {
             description: result.description,
             ctas: buildHeaderCTA(result),
             progress: progressPercent,
+            contentId: result.id,
         };
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
@@ -52,7 +53,7 @@ export function useBuildHeader(progressPercent) {
                     progress: progressPercent
                 }
             };
-            ctas.push(resetButton); 
+            ctas.push(resetButton);
         }
 
         if (result.resources) {
