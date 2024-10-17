@@ -43,9 +43,9 @@
               @php
             $benefits = [
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotd.webp', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotp.webp', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/iav.webp', 'title' => 'Improve Any Voice', 'link' => 'https://www.singeo.com/improve-any-voice/lessons'],
-                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotag.webp', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotp.webp', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/iav.webp', 'title' => 'Improve Any Voice', 'link' => 'https://www.singeo.com/improve-any-voice/lessons'],
+                ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotag.webp', 'title' => 'Getting Started On The Acoustic Guitar', 'link' => 'https://www.guitareo.com/free-acoustic-guitar-lessons/lessons'],
             ];
         @endphp
 
@@ -53,7 +53,7 @@
             @foreach ($benefits as $benefit)
                 <div class="text-left">
                     <a href="{{ $benefit['link'] }}" target="_blank">
-                        <img src="{{ $benefit['image'] }}" alt="{{ $benefit['title'] }}" class="mx-auto rounded-lg transform hover:scale-105 transition-transform duration-300">
+                        <img src="{{ $benefit['image'] }}" alt="{{ $benefit['title'] }}" class="mx-auto rounded-lg transform hover:scale-[1.02] transition-transform duration-300">
                         <h4 class="mb-6 md:mb-0 mt-2 capitalized font-bold">{{ $benefit['title'] }}</h4>
                     </a>
                 </div>
@@ -132,22 +132,22 @@
                 </div>
             </div>
         </section>
-     <section class="pb-10 sm:px-6 sm:pb-16 lg:pb-24 text-black">
+     <section class="pb-10 sm:pb-16 lg:pb-24 text-black">
         <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative">
             <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>
                 <div class="flex flex-col space-y-4">
-                    <a href="https://www.youtube.com/@MusoraMedia" class="bg-musora text-white font-bold py-16 lg:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/@MusoraMedia" class="bg-musora text-white font-bold py-16 lg:py-14 rounded-2xl text-center transition-all duration-300 hover:opacity-90 cursor-pointer">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/logo-light.svg" alt="Musora Logo" class="h-6">
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/freedrumlessons/" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/freedrumlessons/" class="bg-drumeo text-white font-bold py-20 md:py-14 rounded-2xl text-center transition-all duration-300 hover:opacity-90 cursor-pointer">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/drumeo.svg" alt="Drumeo Logo" class="h-8">
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center">
+                    <a href="https://www.youtube.com/pianoteofficial" class="bg-pianote text-white font-bold py-20 md:py-14 rounded-2xl text-center transition-all duration-300 hover:opacity-90 cursor-pointer">
                         <div class="relative">
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/pianote.svg" alt="Pianote Logo" class="h-8">
                         </div>
@@ -155,20 +155,32 @@
                 </div>
             </div>
 
+            <div class="hidden lg:block w-px bg-black self-stretch"></div>
+
             <div class="flex flex-col justify-between gap-4 lg:w-6/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
-                <div class="flex flex-col items-baseline">
-                    <a href="/playlist" class="bg-cover bg-center mb-6">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/mp.webp" alt="Musora Playlists" class="rounded-2xl">
-                    </a>
-                    <a href="/history" class="bg-cover bg-center">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/timh.webp" alt="Today in Music History" class="rounded-2xl">
-                    </a>
-                </div>
+                    <div class="flex flex-col items-baseline">
+                        <a href="/playlist" class="relative bg-cover bg-center mb-6 group block">
+                            <img 
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/mp.webp" 
+                                alt="Musora Playlists" 
+                                class="rounded-2xl transition-transform duration-300"
+                            >
+                            <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
+                        </a>
+                        
+                        <a href="/history" class="relative bg-cover bg-center block group">
+                            <img 
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/timh.webp" 
+                                alt="Today in Music History" 
+                                class="rounded-2xl transition-transform duration-300"
+                            >
+                            <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
+                        </a>
+                    </div>
             </div>
         </div>
     </section>
-
-    </div>
+</div>
 
 @stop
