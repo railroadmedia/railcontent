@@ -7,7 +7,7 @@
                     <a @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
-                        <ChevronRightIcon class="tw-w-5" />
+                        <ChevronRightIcon v-if="seeAllUrl" class="tw-w-5" />
                     </a>
                     <slot name="label"></slot>
                 </div>
@@ -21,6 +21,7 @@
             <div>
                 <transition appear name="fade">
                     <ChallengeCarousel v-if="isChallenge" />
+                    <ChallengeAwardContainer v-else-if="isChallengeAward" />
                     <CatalogueCardContainer
                         v-else
                         :force-no-links="forceNoLinks"
@@ -47,6 +48,7 @@ import userJourney from '@services/userJourney';
 import useCarouselEvents from "@hooks/useCarouselEvents";
 import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import ChallengeAwardContainer from '@collections/ChallengeAwardContainer/ChallengeAwardContainer';
 
 const props = defineProps({
   seeAllUrl: {
@@ -107,6 +109,10 @@ const cardNum = ref(5);
 
 const isChallenge = computed(() => {
     return props.catalogueType === 'challenge';
+})
+
+const isChallengeAward = computed(() => {
+    return props.catalogueType === 'challengeAward';
 })
 
 const handleSeeAllClick = (event) => {
