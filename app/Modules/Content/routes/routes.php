@@ -50,6 +50,11 @@ Route::prefix('challenges')
         )->name('challenges.metadata');
 
         Route::get(
+            'lessons/{id}',
+            [ChallengesMetaDataController::class, 'getChallengeLessons']
+        )->name('challenges.lessons');
+
+        Route::get(
             'user_data/{id}',
             [ChallengesMetaDataController::class, 'getUserChallengeProgress']
         )->name('challenges.user_progress');

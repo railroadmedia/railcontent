@@ -46,25 +46,18 @@ class ChallengesMetaDataController extends Controller
      */
     public function getUserChallengeProgress(int $id)
     {
-        $userId = user()->id;
-        $progressData = ChallengeUserProgress::whereChallengeIdAndUser($id, $userId);
-        if (is_null($progressData) || !$progressData->is_active) {
-            return response()->json(['is_active' => false]);
-        }
-        $lessons = $this->challengesService->getCurrentLessonData($id, $progressData);
-        $response = [
-            'is_active' => $progressData->is_active,
-            'current_streak' => $progressData->getCurrentStreak(),
-            'minutes_practiced' => $progressData->getMinutesPracticed(),
-            'rest_days' => $progressData->current_rest_days,
-            'is_unlocked' => !$progressData->is_locked,
-            'best_completed_streak' => $progressData->completed_best_streak,
-            'best_completed_time_practiced' => $progressData->completed_time_practiced,
-            'last_completion_time' => $progressData->last_completed_date,
-            'lessons' => $lessons,
-        ];
-        return response()->json($response);
+        return response()->json($this->challengesService->getCurrentLessonData($id, user()->id, isLesson: false));
     }
+
+    /**
+     * @param $id - Lesson railcontent id
+     * @return JsonResponse
+     */
+    public function getChallengeLessons(int $id)
+    {
+        return response()->json($this->challengesService->getCurrentLessonData($id, user()->id, isLesson: true));
+    }
+
 
     /**
      * @param $id - Challenge railcontent id
@@ -139,7 +132,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getUserAward($id)
     {
-        $challenge = $this->challengesService->getById($id);
+        $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen
@@ -177,8 +170,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function notificationsEnrollmentOpen(int $id) : JsonResponse
     {
-        $result = $this->enableNotification($id, ChallengesService::ENROLLMENT_NOTIFICATION_KEY);
-        return $result ?
+        return $this->enableNotification($id, ChallengesService::ENROLLMENT_NOTIFICATION_KEY) ?
             response()->json() :
             response()->json(['error' => "Challenge $id not found"], status: 404);
     }
@@ -191,15 +183,14 @@ class ChallengesMetaDataController extends Controller
      */
     public function notificationsCommunityReminders(int $id) : JsonResponse
     {
-        $result = $this->enableNotification($id, ChallengesService::COMMUNITY_NOTIFICATION_KEY);
-        return $result ?
+        return $this->enableNotification($id, ChallengesService::COMMUNITY_NOTIFICATION_KEY) ?
             response()->json() :
             response()->json(['error' => "Challenge $id not found"], status: 404);
     }
 
     private function enableNotification($id, $key) : bool
     {
-        $challenge = $this->challengesService->getById($id);
+        $challenge = $this->challengesService->getChallengeById($id);
         if (is_null($challenge)) {
             return false;
         }
