@@ -486,9 +486,7 @@
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-white text-center" style="background: linear-gradient(258deg, #9F3E77 1.12%, #B31A1D 99.64%);">
         <div class="container max-w-5xl mx-auto">
-            <h3 class="leading-tight"><strong>You’re here because you want to play the music</strong></h3>
-            <p class="leading-tight">(not just hit the right keys).</p>
-            <h3 class="leading-tight mb-7 sm:mb-12"><strong>And we’re here to <u style="text-decoration-color: #FFAC00;">make that happen.</u></strong></h3>
+            <h3 class="leading-tight mb-7 sm:mb-12"><strong>You’re here because you want to play the music <br class="hidden sm:inline">and we’re here to <u style="text-decoration-color: #FFAC00;">make that happen.</u></strong></h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 @php
                     $features = [
@@ -594,7 +592,7 @@
                                         [
                                             'img' => 'marketing/pianote/membership/homepage/2024/coaches/jordan-rudess.jpg',
                                         'instructor' => 'Jordan Rudess',
-                                        'title' => 'GRAMMY-winning - Dream Theater’s Keyboardist',
+                                        'title' => 'GRAMMY-winning<br>Dream Theater’s Keyboardist',
                                         'description' => 'With remarkable skills and exceptional piano technique, Jordan loves sharing his deep musical insights and inspiring musicians at all levels.',
                                         ],
                                         [
@@ -651,7 +649,7 @@
                                             </picture>
                                             <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                 <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['instructor'] !!}</h4>
-                                                <p class="leading-none text-xs">{{ $image['title'] }}</p>
+                                                <p class="leading-none text-xs">{!!  $image['title']  !!}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -744,19 +742,17 @@
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-col-reverse sm:flex-row items-center">
                 <div class="sm:w-7/12 text-left sm:pr-6">
-                    <p class="text-pianote uppercase font-black mb-2">Limited Time Offer</p>
-                    <h3 class="font-black mb-4">
+                    <p class="leading-tight text-pianote uppercase font-black mb-3">Limited Time Offer</p>
+                    <h3 class="leading-tight font-black mb-5">
                         Get the brand new Pianote headphones for just $20
                     </h3>
-                    <p class="leading-tight mb-4">
+                    <p class="leading-tight mb-5">
                         <strong>Get ready to experience your digital piano like never before!</strong><br><br>
                         With an impressive frequency range and large drivers, the new Pianote headphones let you hear every note as it was meant to be heard. Plus, enjoy complete privacy—no more worrying about your neighbors overhearing as you practice that tricky section. (They just don’t get that practice is part of the journey!)
                         <br><br>
                         For just $20*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
                         <br><br>
-                        Treat your ears to a whole new level of sound, and keep your practice sessions delightfully uninterrupted!
-                        <br><br>
-                        *Free shipping in the US.
+                        <em class="text-sm">*Free shipping in the US.</em>
                     </p>
                     <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>
                 </div>
@@ -950,8 +946,8 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&redirect=/order&promo-code=beginner-bundle&locked=true';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[pianote-headphones-2024]=1&redirect=/order&promo-code=beginner-bundle,beginner-headphones,headphones-us&locked=true'
+            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&redirect=/order&promo-code=BB0924&locked=true';
+            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[pianote-headphones-2024]=1&redirect=/order&promo-code=BB0924,beginner-headphones,headphones-us&locked=true'
     @endphp
 
     @php
