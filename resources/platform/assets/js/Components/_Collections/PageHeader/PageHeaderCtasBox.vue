@@ -8,7 +8,7 @@
     <PageHeaderDropdown v-if="displayDropdown" class="tw-hidden sm:tw-block" faIconClass="fa fa-ellipsis-h sm:tw-mt-1">
         <template v-slot:content>
             <div class="dropdown-content tw-min-w-[210px]">
-                <CtaResolver :ctas="dropdowns" inDropdown />
+                <CtaResolver v-bind="props" :ctas="dropdowns"  inDropdown />
             </div>
         </template>
     </PageHeaderDropdown>
@@ -32,7 +32,7 @@ const props = defineProps({
     primaryCta: {
         type: Boolean,
         default: false,
-    }
+    },
 });
 
 const secondaryCtas = computed(() =>

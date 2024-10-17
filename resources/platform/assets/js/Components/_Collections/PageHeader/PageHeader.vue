@@ -50,7 +50,7 @@
     </template>
     <template #top-right>
       <div v-if="!isSongsPage" :class="primaryCta && !dropdowns.length ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
-        <PageHeaderCtasBox v-if="(ctas && ctas.length) || dropdowns.length" :ctas="ctas" :dropdowns="dropdowns" :primary-cta="primaryCta" />
+        <PageHeaderCtasBox v-if="(ctas && ctas.length) || dropdowns.length" v-bind="props" />
       </div>
     </template>
     <template #bottom-full>
