@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use JMS\Serializer\Tests\Fixtures\Discriminator\Car;
 use Modules\Content\ApiGateways\SanityGateway;
 use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Enums\RecommenderSection;
@@ -43,6 +44,7 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+
         $challengeId = 402199;
         $userId = 631736; //If you update this to your id, everything should be an unlock date of the startdate
 
@@ -77,20 +79,62 @@ class DevEndpointController extends Controller
 
     }
 
+    private function testStreakData($challengeId)
+    {
+        $userId = 631736;
+        $data = [];
+        $startDate = '20241010';
+        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
+        $this->setContentCompleted($challengeId);
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+
+        $progressData = $userProgress->getStreakCurrentData();
+        $data[] = $progressData;
+        for($i = 0; $i < 8; $i++) {
+            $userProgress = $this->setUserProgressBackDays($userProgress);
+            $progressData = $userProgress->getStreakCurrentData();
+            $data[] = $progressData;
+        }
+
+//        $startDate = '20241011';
+//        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
+//        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+//        $progressData = $userProgress->getStreakCurrentData();
+//        $data[] = $progressData;
+
+        return $data;
+    }
+
+    private function setUserProgressBackDays($userProgress, int $days = 1)
+    {
+        $oStartDate = Carbon::parse($userProgress->start_date);
+        $oStartDate = $oStartDate->subDays($days);
+        $oLessonData = $userProgress->lessons_meta_data;
+        $userProgress->start_date = $oStartDate->toISOString();
+        foreach($oLessonData as $index => $lessonDatum) {
+            $oUnlockDate = Carbon::parse($lessonDatum['unlock_date']);
+            $oUnlockDate = $oUnlockDate->subDays($days);
+            $oLessonData[$index]['unlock_date'] = $oUnlockDate->toISOString();
+        }
+        $userProgress->lessons_meta_data = $oLessonData;
+        $userProgress->save();
+        return $userProgress;
+    }
+
     private function setContentCompleted($challengeId)
     {
 
         $data = [
-            755987 => [
-                '402542' => [
-                    'is_completed' => true,
-                    'time_practiced' => 8,
-                ],
-                '402314' => [
-                    'is_completed' => true,
-                    'time_practiced' => 3,
-                ],
-            ],
+//            755987 => [
+//                '402542' => [
+//                    'is_completed' => true,
+//                    'time_practiced' => 8,
+//                ],
+//                '402314' => [
+//                    'is_completed' => true,
+//                    'time_practiced' => 3,
+//                ],
+//            ],
             631736 => [
                 '402542' => [
                     'is_completed' => true,
@@ -101,6 +145,30 @@ class DevEndpointController extends Controller
                     'time_practiced' => 10,
                 ],
                 '402316' => [
+                    'is_completed' => true,
+                    'time_practiced' => 1000,
+                ],
+                '402318' => [
+                    'is_completed' => false,
+                    'time_practiced' => 1000,
+                ],
+                '402320' => [
+                    'is_completed' => false,
+                    'time_practiced' => 1000,
+                ],
+                '402322' => [
+                    'is_completed' => true,
+                    'time_practiced' => 1000,
+                ],
+                '402324' => [
+                    'is_completed' => true,
+                    'time_practiced' => 1000,
+                ],
+                '402326' => [
+                    'is_completed' => true,
+                    'time_practiced' => 1000,
+                ],
+                '402328' => [
                     'is_completed' => true,
                     'time_practiced' => 1000,
                 ],

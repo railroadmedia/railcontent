@@ -43,6 +43,7 @@ class Challenge extends ParentTemplate
                             new Field(FieldType::File, 'silver_award', 'Silver Award', group: $detailsGroup, validation: [new Required()]),
                             new Field(FieldType::File, 'bronze_award', 'Bronze Award', group: $detailsGroup, validation: [new Required()]),
                             new Field(FieldType::File, 'badge', 'Badge', group: $detailsGroup, validation: [new Required()]),
+                            new Field(FieldType::Boolean, 'is_solo', 'Is Solo Challenge', group: $detailsGroup, initialValue: false),
                          ]);
     }
 
