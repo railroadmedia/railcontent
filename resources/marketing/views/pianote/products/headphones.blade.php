@@ -7,7 +7,7 @@
     <meta name="description" content="The Pianote Headphones deliver studio-quality sound, all-day comfort, and complete privacy for focused practice sessions.">
     <meta property="og:description" content="The Pianote Headphones deliver studio-quality sound, all-day comfort, and complete privacy for focused practice sessions.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/share-image.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/share-image-new.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -482,7 +482,7 @@
 @php
 $testimonials = [
     [
-        'quote' => 'These headphones have quickly become my favorite! I love their comfortable fit and lightweight design, and the sound quality is exceptional. When I play piano, I’m hearing every detail like never before and I even find myself reaching for them when listening to music on my phone or laptop — they really make everything sound amazing!',
+        'quote' => 'These headphones have quickly<strong> become my favorite!</strong> I love their <strong>comfortable fit</strong> and <strong>lightweight design</strong>, and the sound quality is exceptional. When I play piano, I’m <strong>hearing every detail like never before</strong> and I even find myself reaching for them when listening to music on my phone or laptop — they really <strong>make everything sound amazing!</strong>',
         'role' => 'CANADA',
         'name' => 'Tim Bondyra',
         'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
@@ -490,7 +490,7 @@ $testimonials = [
 ];
 @endphp
 
-<section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
+{{-- <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
     <div class="container max-w-2xl mx-auto relative z-10">
         <h2 class="leading-normal pb-4 md:pb-8"><strong>Everything you love about<br class="hidden sm:inline">the Pianote headphones...</strong></h2>
 
@@ -508,6 +508,26 @@ $testimonials = [
                 </div>
             @endforeach
         </div>
+    </div>
+</section> --}}
+
+<section class="px-6 pt-10 sm:pt-14 lg:pt-24 pb-32 lg:pb-40 bg-[#F1EFED]">
+    <div class="container mx-auto max-w-3xl">
+        @foreach ($testimonials as $testimonial)
+            <div class="text-center flex flex-row">
+                <img class="h-4 md:h-8 pr-4" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/quotation-icon.svg">
+                <div class="text-left">
+                    <h3 class="leading-snug">{!! $testimonial['quote'] !!}</h3>
+                    <div class="flex items-center mt-4">
+                        <img class="rounded-full h-20 w-20 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
+                        <div class="ml-3">
+                            <h6 class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></h6>
+                            <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </section>
 
