@@ -270,6 +270,17 @@ class SanityStudioCMSController extends BaseController
             $content->setReleased($request->get('released'));
             $content->setAlbum($request->get('album'));
             $assignments = $content->setAssignments($request->get('assignment'));
+            $chilrens = [];
+            if($request->has('childrenArray')){
+                $chilrens = $request->get('childrenArray');
+                foreach ($chilrens as $index=>$children){
+                    $content->setChildId($children['railcontent_id'], ($index + 1));
+                          event(new ContentCreated($children['railcontent_id']));
+                    $childrens[] = Content::query()
+                        ->where('id', '=', $children['railcontent_id'])
+                        ->first();
+                }
+            }
 
             $content->save();
 
@@ -279,7 +290,12 @@ class SanityStudioCMSController extends BaseController
             $content = Content::query()
                 ->where('id', '=', $content->id)
                 ->first();
-            $content['assignment'] = $assignments;
+            if($assignments) {
+                $content['assignment'] = $assignments;
+            }
+            if(!empty($chilrens)){
+                $content['childrens'] = $childrens;
+            }
 
             return $content;
         }

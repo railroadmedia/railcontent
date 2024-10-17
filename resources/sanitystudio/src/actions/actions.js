@@ -50,16 +50,109 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                 return null;
             }
         };
+        const fetchChildDocument = async (childId) => {
+            try {
+                const query = `*[_id == "${childId}"]{
+                    "slug":slug.current,
+                    _type,
+                    _id,
+                    railcontent_id
+                }[0]`;
+                const encodedQuery = encodeURIComponent(query);
+                const url2 = `https://${sanityConfig.projectId}.api.sanity.io/${api}/data/query/${sanityConfig.dataset}?perspective=${perspective}&query=${encodedQuery}`;
+                const response = await fetch(url2, { headers });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch parent document');
+                }
+
+                const result = await response.json();
+                return result.result;
+            } catch (error) {
+                console.error('Error fetching child document:', error);
+                return null;
+            }
+        };
+        const mapRailcontentToId = (childrenArray, childId) => {
+            // Find the child document in childrenArray based on railcontent_id
+            const matchedChild = childrenArray.find(child => child.railcontent_id === childId);
+            if (matchedChild) {
+                return matchedChild._id; // Return the _id if a match is found
+            } else {
+                console.error(`No match found for railcontent_id: ${childId}`);
+                return null;
+            }
+        };
+        async function mutate(mutations) {
+            try {
+                const result = await fetch(
+                    `https://${sanityConfig.projectId}.api.sanity.io/v2021-06-07/data/mutate/${sanityConfig.dataset}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${sanityConfig.token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(mutations),
+                        method: "POST",
+                    }
+                );
+
+                const json = await result.json();
+
+                if (result.ok) {
+                    console.log('Mutation successful:', json);
+                } else {
+                    console.error('Mutation failed:', json);
+                }
+
+                return json;
+            } catch (error) {
+                console.error('Error in mutation request:', error);
+                throw error;
+            }
+        }
+        const patchChildDocument = async (childId, updates, childrenArray) => {
+            const documentId = mapRailcontentToId(childrenArray, childId);
+            if (documentId) {
+                 try {
+                    const mutations = {
+                        mutations: [
+                            {
+                                patch: {
+                                    id: documentId,
+                                    set: updates,
+                                },
+                            },
+                        ],
+                    };
+                    // Call the mutate function
+                    const response = await mutate(mutations);
+
+                    if (response && response.results) {
+                        console.log(`Successfully updated child document with _id: ${documentId}`);
+                    } else {
+                        console.error(`Failed to update child document with _id: ${documentId}`);
+                    }
+                    console.log(`Successfully updated child document with _id: ${childId}`);
+                } catch (error) {
+                    console.error(`Failed to update child document ${childId}:`, error);
+                }
+            }
+        };
 
         return {
             ...originalResult,
             onHandle: async () => {
                 let draftCopy = { ...props.draft };
-
-                // Update child_count if necessary
-                if ("child" in draftCopy && draftCopy.child.length !== draftCopy.child_count) {
+                let childrenArray = [];
+                if ("child" in draftCopy) {
                     draftCopy.child_count = draftCopy.child.length;
                     patch.execute([{ set: { child_count: draftCopy.child.length } }]);
+
+                    for (const child of draftCopy.child) {
+                        const childDocument = await fetchChildDocument(child._ref); // Fetch the full child document
+                        childrenArray.push(childDocument);
+                    };
+                    draftCopy.childrenArray = childrenArray;
                 }
 
                 // Process parent content if parent_type exists in the draft
@@ -67,7 +160,6 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     try {
                         const parentDocument = await fetchParentDocument(props.id);
                         console.log('Fetched parent document:', parentDocument);
-
                         if (parentDocument) {
                             const parentsArray = [];
 
@@ -110,12 +202,26 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     }
 
                     const data = await response.json();
-                    console.log('Custom action response:', data);
+                    console.log('Custom action response:', data, childrenArray);
 
                     // Patch the draft with the fetched data
                     patch.execute([{ set: { railcontent_id: data.id } }]);
                     patch.execute([{ set: { web_url_path: data.web_url_path } }]);
                     patch.execute([{ set: { assignment: data.assignment } }]);
+                    if(data.childrens){
+                        for (const child of data.childrens) {
+                            let parentsContentData = [];
+                            const currentParent = JSON.parse(child.parent_content_data);
+                            parentsContentData.push({
+                                slug: currentParent[0].slug,
+                                type: currentParent[0].type,
+                                id: currentParent[0].id,
+                                _key: randomKey(),
+                            });
+                            await patchChildDocument(child.id, { parent_content_data: parentsContentData }, childrenArray);
+                        };
+
+                    }
                 } catch (error) {
                     console.error('Error fetching external data:', error);
                 }
