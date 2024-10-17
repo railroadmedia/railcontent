@@ -270,6 +270,23 @@
         </div>
     </header>
 
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor"
+        class="promo-banner flex text-white text-center items-center justify-center -mt-12 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"
+        style="background: #091F30;">
+        <p class="inline-block mx-0 text-sm leading-tight uppercase">
+            <strong class="text-musora">SAVE 70% OFFER ENDS IN:</strong>
+                <br>
+            <span x-cloak x-data="timer()" x-init="countdown()">
+                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+            </span>
+        </p>
+    </a>
+
     <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
         <div class="pt-4 md:pt-0">
             <div class="container max-w-4xl mx-auto mb-20 -mt-10 md:-mt-14 lg:-mt-16 z-20 relative">
@@ -997,18 +1014,27 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left mx-auto w-full lg:w-3/4 lg:pl-5 xl:pl-10">
-                    <a href="{{ $buttonLink }}"
-                            class="z-10 relative px-5 sm:px-6 sm:pr-10 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12 relative z-10" style="text-decoration:none">
+                    <a href="{{ $buttonLink }}" style="text-decoration:none"
+                            class="z-10 relative px-5 sm:px-6 sm:pr-10 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-1/2 relative z-10">
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
+                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @else
-                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
+                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                             <p class="inline-block text-black">(Save 70%)</p>
                         @endif
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>
+                        <p class="leading-tight text-sm"><span class="text-pianote">Discount ends in:</span><br>
+                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">
+                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                            </span>
+                        </p>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
@@ -1016,19 +1042,28 @@
                             @endforeach
                         </p>
                     </a>
-                    <a href="{{ $buttonLink2 }}"
-                            class="px-5 sm:px-6 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-7/12 relative z-20" style="text-decoration:none; background: #fffbf7;filter: drop-shadow(0px 0px 10px rgba(246, 26, 48, 0.50));">
+                    <a href="{{ $buttonLink2 }}" class="px-5 sm:px-6 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-1/2 relative z-20 sm:max-w-md"
+                        style="text-decoration:none; background: #fffbf7;filter: drop-shadow(0px 0px 10px rgba(246, 26, 48, 0.50));">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
                         <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
                         @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
+                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
                         @else
-                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
+                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
                             <p class="inline-block text-black">(Save 71%)</p>
                         @endif
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">save 71% & Start now</div>
+                        <p class="leading-tight text-sm"><span class="text-pianote">Offer ends in:</span><br>
+                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">
+                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                            </span>
+                        </p>
                         <ul class="list-disc ml-6 text-black">
                             @if (!empty($courseDetails['membershipSpecial']['bonusItems']))
                                 @foreach ($courseDetails['membershipSpecial']['bonusItems'] as $bonusItem)
@@ -1086,10 +1121,32 @@
         'video' => '1018435070',
         'vimeo' => true,
     ])
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-11-01 00:00:00',
+        'promoVersion' => false
+        ])
 
         @include("pianote.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @endsection
