@@ -123,13 +123,13 @@
         table.comparison tr td:nth-child(2),
         table.comparison tr td:nth-child(3),
         table.comparison tr td:nth-child(4) {
-            width: 25%;
+            width: 45%;
         }
         @media (min-width: 768px) {
             table.comparison tr td:nth-child(2),
             table.comparison tr td:nth-child(3),
             table.comparison tr td:nth-child(4) {
-                width: 25%;
+                width: 28%;
             }
         }
         table.comparison tr:nth-child(1) td {
@@ -164,8 +164,28 @@
                 font-size: 22px;
             }
         }
-
-
+        table.comparison.private tr td:nth-child(3) {
+            display: table-cell;
+        }
+        table.comparison.private tr td:nth-child(4) {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            table.comparison.private tr td:nth-child(4) {
+                display: table-cell;
+            }
+        }
+        table.comparison.online tr td:nth-child(4) {
+            display: table-cell;
+        }
+        table.comparison.online tr td:nth-child(3) {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            table.comparison.online tr td:nth-child(3) {
+                display: table-cell;
+            }
+        }
 
         /* column-oriented masonry layout */
         .masonry {
@@ -222,13 +242,15 @@
                 <span class="relative inline-block"> plus $450 worth
                     <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#ffae00" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#ffae00" stroke-width="3" stroke-linecap="round"></path></svg>
                 </span>
-                 of FREE bonuses
+                <br class="sm:hidden">of FREE bonuses
             </h2>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
                 <i class="fas fa-check text-musora"></i> Perfectly-structured curriculum
-                <i class="fas fa-check lg:ml-5 text-musora"></i> Designed for beginners
                 <br class="sm:hidden">
-                <i class="fas fa-check lg:ml-5 text-musora"></i> Note-by-note instruction
+                <i class="fas fa-check sm:ml-5 text-musora"></i> Designed for beginners
+                <br class="lg:hidden">
+                <i class="fas fa-check sm:ml-5 text-musora"></i> Note-by-note instruction
+                <br class="sm:hidden">
                 <i class="fas fa-check ml-3 sm:ml-5 text-musora"></i> Personalized support from real teachers
             </p>
 
@@ -255,29 +277,29 @@
                         <div class="z-10 flex flex-wrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-6 lg:px-5 text-left sm:text-center">
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                                 <i class="far fa-fw mr-3 sm:mr-0 fa-light fa-user-group text-pianote text-xl" aria-hidden="true"></i>
-                                <div class="flex flex-col items-left">
-                                    <h4><strong class="font-black my-2">{{ number_format(Prices::$students) }}</strong></h4>
+                                <div class="flex flex-col items-left text-left sm:text-center">
+                                    <h4 class="mx-0"><strong>{{ number_format(Prices::$students) }}</strong></h4>
                                     <p class="leading-tight mx-0 text-sm">Active students</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                                 <i class="fab fa-fw mr-3 sm:mr-0 fa-youtube text-pianote text-xl" aria-hidden="true"></i>
-                                <div class="flex flex-col items-left">
-                                    <h4><strong class="font-black">{{ convertNumber(Prices::$pianoteYoutubeSubsc) }}</strong></h4>
+                                <div class="flex flex-col items-left text-left sm:text-center">
+                                    <h4 class="mx-0"><strong class="font-black">{{ convertNumber(Prices::$pianoteYoutubeSubsc) }}</strong></h4>
                                     <p class="leading-tight mx-0 text-sm">YouTube subscribers</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                                 <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-xl" aria-hidden="true"></i>
-                                <div class="flex flex-col items-left">
-                                    <h4><strong class="font-black">4.8/5</strong></h4>
+                                <div class="flex flex-col items-left text-left sm:text-center">
+                                    <h4 class="mx-0"><strong class="font-black">4.8/5</strong></h4>
                                     <p class="leading-tight mx-0 text-sm">Student reviews</p>
                                 </div>
                             </div>
                             <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 ">
                                 <i class="far fa-fw mr-3 sm:mr-0 fa-star text-pianote text-xl" aria-hidden="true"></i>
-                                <div class="flex flex-col items-left">
-                                    <h4><strong class="font-black">World-class</strong></h4>
+                                <div class="flex flex-col items-left text-left sm:text-center">
+                                    <h4 class="mx-0"><strong class="font-black">World-class</strong></h4>
                                     <p class="leading-tight mx-0 text-sm">Instructors</p>
                                 </div>
                             </div>
@@ -412,14 +434,15 @@
                 <h5 class="leading-tight"><strong><span class="text-pianote">STEP 2.</span><br>Press play and follow along.</strong></h5>
                 <p class="leading-tight my-5">Learn by PLAYING with a real teacher.<br>
                     The sessions are short, focused, most of all -- fun! Each day you’ll unlock a new lesson.</p>
-                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                    x-on:click="stepTwo = true;">
-                    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                        x-ref="playToLearnVideo"
-                        x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
-                        x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
-                        data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/promos/august/step2.mp4" type="video/mp4" autoplay muted loop playsinline></video>
-                </div>
+                <img class="w-full rounded-xl cursor-pointer autoplay-video" x-on:click="stepTwo = true;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/step2.webp">
+{{--                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"--}}
+{{--                    x-on:click="stepTwo = true;">--}}
+{{--                    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"--}}
+{{--                        x-ref="playToLearnVideo"--}}
+{{--                        x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"--}}
+{{--                        x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"--}}
+{{--                        data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/promos/august/step2.mp4" type="video/mp4" autoplay muted loop playsinline></video>--}}
+{{--                </div>--}}
             </div>
 
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
@@ -428,11 +451,11 @@
             <p class="leading-tight my-5 px-6">The most important part of learning piano is building a daily habit. Practice a little each day, and you’ll be hearing the results way sooner (and so will everyone around you!).</p>
         </div>
         <div class="container max-w-5xl mx-auto">
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/august/step3.png">
+            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/step3.webp">
         </div>
     </section>
 
-    <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-bg.webp');">
+    <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#591513;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/october/piano-bg.webp');">
         <div class="mb-3">
             <img class="h-6 sm:h-7  mr-2 " src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png " alt="pianote logo" fetchpriority="high">
 
@@ -465,7 +488,7 @@
         <div class="container max-w-5xl mx-auto">
             <h3 class="leading-tight"><strong>You’re here because you want to play the music</strong></h3>
             <p class="leading-tight">(not just hit the right keys).</p>
-            <h3 class="leading-tight mb-7 sm:mb-12"><strong>And we’re here to make that happen.</strong></h3>
+            <h3 class="leading-tight mb-7 sm:mb-12"><strong>And we’re here to <u style="text-decoration-color: #FFAC00;">make that happen.</u></strong></h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 @php
                     $features = [
@@ -639,15 +662,13 @@
                 </div>
             </section>
         </div>
-        <a href="#customize-anchor" class="join smaller anchor-slide">GET THE BUNDLE &raquo;</a>
-    </section>
+        <a href="#customize-anchor" class="join smaller anchor-slide mb-20">GET THE BUNDLE &raquo;</a>
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center" style="">
         <div class="container max-w-5xl mx-auto">
-            <img class="h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
+            <img class="h-28 sm:h-48 lg:h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
             <h6 class="leading-tight mx-auto font-black text-pianote mt-7">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
-            <h2 class="leading-tight font-black mt-1 mb-2">One year of UNLIMITED piano lessons<br> plus 4 awesome LIFETIME bonuses</h2>
-            <h4 class="leading-tight mb-10"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
+            <h2 class="leading-tight font-black mt-1 mb-2">One year of UNLIMITED piano lessons<br class="hidden sm:inline"> plus 4 awesome LIFETIME bonuses</h2>
+            <h4 class="leading-tight mb-7 sm:mb-10"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
             @php
                 $bonuses = [
                     [
@@ -690,8 +711,8 @@
             @endphp
             @foreach ($bonuses as $bonus)
                 <div class="rounded-xl p-6 mb-5 text-left" style="background-color:#F2F5FA;">
-                    <div class="flex items-start">
-                        <img src="{{ $bonus['image'] }}" class="h-36 rounded-xl">
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <img src="{{ $bonus['image'] }}" class="h-24 sm:h-32 lg:h-36 mb-3 sm:mb-0 rounded-xl">
                         <div class="sm:pl-6">
                             <div class="flex justify-between">
                                 <div>
@@ -719,10 +740,10 @@
         </div>
     </section>
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative" style="background: #F4F1EC;">
+    <section class="px-7 sm:px-6 py-10 sm:py-16 lg:py-20 relative" style="background: #F4F1EC;">
         <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-7/12 text-left lg:pr-6">
+            <div class="flex flex-col-reverse sm:flex-row items-center">
+                <div class="sm:w-7/12 text-left sm:pr-6">
                     <p class="text-pianote uppercase font-black mb-2">Limited Time Offer</p>
                     <h3 class="font-black mb-4">
                         Get the brand new Pianote headphones for just $20
@@ -740,33 +761,45 @@
                     <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>
                 </div>
 
-                <div class="lg:w-5/12 mt-10 lg:mt-0 relative">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/headphones.webp" alt="Pianote Headphones" class="mx-auto lg:ml-auto lg:mr-0">
+                <div class="sm:w-5/12 mb-7 sm:mb-0 relative">
+                    <img class="mx-auto sm:ml-auto sm:mr-0 max-w-xs sm:max-w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/headphones.webp" alt="Pianote Headphones">
                 </div>
             </div>
         </div>
     </section>
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-center">
         <div class="container max-w-5xl mx-auto">
-
-            <div class="relative">
+                <h2 class="leading-tight mb-7"><strong>The better way<br class="sm:hidden"> to learn piano.</strong></h2>
+            <div class="relative" x-data="{
+        tableClass: 'private',
+        getClass() {
+            return {
+                'private': this.tableClass === 'private',
+                'online': this.tableClass === 'online'
+            };
+        }
+    }">
                 <p
                         class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2 text-black">
                     <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong>
                 </p>
-                <table id="comparison-table"
-                        class="w-full mx-auto comparison max-w-4xl mb-10 private table-wrapper">
+                <table :class="getClass()"
+                        class="w-full mx-auto comparison max-w-5xl mb-10 private">
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl bg-pianote">
-                            <img class="h-8 sm:h-14 transition-opacity opacity-0" loading="lazy"
+                        <td class="rounded-t-xl bg-pianote relative">
+                            <img class="h-5 sm:h-6 mr-3 sm:mr-0 transition-opacity opacity-0" loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png"
                                     >
+                            <img class="h-8 sm:h-10 lg:h-14 mr-1.5 absolute top-0 right-0 transition-opacity opacity-0" loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/promos/october/best-value-badge.svg"
+                                    >
                         </td>
-                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>YouTube<br> Tutorials</strong></td>
-                        <td class="cursor-pointer sm:cursor-default"><strong>Private <br> Lessons</strong></td>
+                        <td class="cursor-pointer sm:cursor-default" @click="tableClass = 'online'"><strong>YouTube<br> Tutorials</strong></td>
+                        <td class="cursor-pointer sm:cursor-default rounded-tr-xl" @click="tableClass = 'private'"><strong>Private <br> Lessons</strong></td>
                     </tr>
                     <tr>
                         <td>Flexibility</td>
@@ -958,13 +991,13 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background-color:#F6F5F4;" id="final">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
-                <div class="text-center lg:text-left w-full lg:w-1/4 mb-7 lg:mb-0 relative">
-                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 font-black">Get 1 year of unlimited piano lessons plus $450 worth of FREE bonuses</h3>
+                <div class="text-center lg:text-left w-full max-w-xl lg:max-w-full mx-auto lg:w-1/4 mb-7 lg:mb-0 relative">
+                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 font-black">Get 1 year of unlimited piano lessons <u style="text-decoration-color: #F61A30;">plus $450 worth of FREE bonuses</u></h3>
 
                     <p class="mb-2 sm:mb-3 text-black">Know exactly what to practice, learn from world-class teachers, and enjoy personalized support every step of the way.</p>
                 </div>
 
-                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-3/4 lg:pl-5 xl:pl-10">
+                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left mx-auto w-full lg:w-3/4 lg:pl-5 xl:pl-10">
                     <a href="{{ $buttonLink }}"
                             class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
@@ -974,6 +1007,7 @@
                         @else
                             <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
+                            <p class="inline-block text-black">(Save 70%)</p>
                         @endif
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
@@ -984,7 +1018,7 @@
                         </p>
                     </a>
                     <a href="{{ $buttonLink2 }}"
-                            class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 lg:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
+                            class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
                         <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
@@ -993,6 +1027,7 @@
                         @else
                             <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
+                            <p class="inline-block text-black">(Save 71%)</p>
                         @endif
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">save 71% & Start now</div>
                         <ul class="list-disc ml-6 text-black">
