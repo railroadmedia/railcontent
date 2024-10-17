@@ -762,13 +762,13 @@
                 <div class="sm:w-7/12 text-left sm:pr-6">
                     <p class="leading-tight text-pianote uppercase font-black mb-3">Limited Time Offer</p>
                     <h3 class="leading-tight font-black mb-5">
-                        Get the brand new Pianote headphones for just $20
+                        Get the brand new Pianote headphones for <u style="text-decoration-color: #F61A30;"> just $20 more</u>
                     </h3>
                     <p class="leading-tight mb-5">
                         <strong>Get ready to experience your digital piano like never before!</strong><br><br>
                         With an impressive frequency range and large drivers, the new Pianote headphones let you hear every note as it was meant to be heard. Plus, enjoy complete privacy—no more worrying about your neighbors overhearing as you practice that tricky section. (They just don’t get that practice is part of the journey!)
                         <br><br>
-                        For just $20*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
+                        For just $20 more*, you can snag these brand-new headphones today when you join Pianote with the Beautiful Beginner Bundle!
                         <br><br>
                         <em class="text-sm">*Free shipping in the US.</em>
                     </p>
@@ -1008,8 +1008,13 @@
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
                 <div class="text-center lg:text-left w-full max-w-xl lg:max-w-full mx-auto lg:w-1/4 mb-7 lg:mb-0 relative">
-                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 font-black">Get 1 year of unlimited piano lessons <u style="text-decoration-color: #F61A30;">plus $450 worth of FREE bonuses</u></h3>
+                    <h3 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5 font-black">Get 1 year of unlimited piano lessons <br>
 
+                            <span class="relative inline-block"> plus $450 worth
+                    <svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 70%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#F61A30" stroke-width="3" stroke-linecap="round"></path></svg>
+                </span>
+                            of FREE bonuses
+                    </h3>
                     <p class="mb-2 sm:mb-3 text-black">Know exactly what to practice, learn from world-class teachers, and enjoy personalized support every step of the way.</p>
                 </div>
 
