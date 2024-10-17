@@ -88,7 +88,7 @@ abstract class ParentTemplate extends BaseSanityModel
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', inputComponent: 'XpInput', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
         ];
         if ($this->withTrailer) {

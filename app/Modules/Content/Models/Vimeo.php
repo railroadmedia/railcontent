@@ -19,4 +19,5 @@ class Vimeo extends Model
 {
     protected $table = 'vimeo';
 
+    protected $fillable = ['external_id', 'video_playback_endpoints', 'video_poster_image_url','hlsManifestUrl','length_in_seconds'];
 }

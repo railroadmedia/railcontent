@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Controllers;
 
+use App\Decorators\Content\VimeoTrailerDecorator;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
@@ -72,10 +73,12 @@ use App\Modules\Content\Models\Sanity\Unit;
 use App\Modules\Content\Models\Sanity\UnitPart;
 use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
+use App\Modules\Content\Models\Vimeo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Railroad\Railcontent\Events\ContentCreated;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
 
 class SanityStudioCMSController extends BaseController
@@ -280,5 +283,28 @@ class SanityStudioCMSController extends BaseController
 
             return $content;
         }
+    }
+
+    public function getVimeoEndpoints(string $vimeoId): ?Vimeo
+    {
+        $video = Vimeo::where('external_id', $vimeoId)->first();
+        if(!$video) {
+            ConfigService::$brand  = 'musora';
+            $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
+            $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
+            if($vimeo){
+                $video = Vimeo::create(
+                    [
+                        'external_id'              => $vimeoId,
+                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                        'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
+                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
+                        'length_in_seconds'        => $vimeo['length_in_seconds']
+                    ]
+                );
+            }
+      }
+
+        return $video;
     }
 }
