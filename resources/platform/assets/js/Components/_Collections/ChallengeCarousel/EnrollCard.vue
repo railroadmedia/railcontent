@@ -25,12 +25,19 @@
                 <div>
                     <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge Logo" />
                     <template v-if="isCommunityChallenge">
-                        <div class="tw-flex tw-mb-2 3xl:tw-mb-0">
+                        <div class="tw-mb-2 tw-flex">
                             <!-- Avatars -->
-                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>
-                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>
-                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-w hite tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>
+                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727447340-755877.jpg');"></div>
+                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727435036-755827.jpg');"></div>
+                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727463538-755945.jpg');"></div>
                         </div>
+
+<!--                        <div class="tw-flex tw-mb-2 3xl:tw-mb-1">-->
+<!--                            &lt;!&ndash; Avatars &ndash;&gt;-->
+<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>-->
+<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>-->
+<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-w hite tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>-->
+<!--                        </div>-->
                         <p class="tw-text-sm tw-line-clamp-2 tw-mb-2">
                             Join <span class="tw-font-bold">Stidger, Poco Askew, Dr Mojo,</span> and <span class="tw-font-bold">683</span> other drummers who have already enrolled! Runs Aug 1 - 31.
                         </p>
@@ -38,9 +45,9 @@
                     <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>
                 </div>
                 <!-- CTA -->
-                <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white">
+                <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white" is-link href="/drumeo/enrollment/30-day-independence">
                     <svg class="tw-w-5 tw-h-5 tw-mr-1 tw-hidden 3xl:tw-block" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg> Enroll Now
                 </MuButton>
             </div>
@@ -91,7 +98,7 @@
                 <!-- CTA -->
                 <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-w-full">
                     <svg class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg> Enroll Now
                 </MuButton>
             </div>
@@ -101,6 +108,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import axios from 'axios';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { useUserStore } from "@stores/user";
 import userJourney from "@services/userJourney";
@@ -182,58 +190,16 @@ const labelText = computed(() => {
     return props.challengeType;
 })
 
-const thumbnailImg = computed(() => {
-    if (props.contentType === 'song') {
-        hasSquareImg.value = true;
-        return props.squareImg;
+const handleCta = async () => {
+    try {
+        //Get enrollment notification
+        // const notification = await axios.post(`/challenges/notifications/enrollment_open/`);
+    } catch (e){
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
     }
 
-    if (bigDesktop.value && props.wideImg) {
-        hasSquareImg.value = false;
-        return props.wideImg;
-    }
-
-    if (desktop.value && props.squareImg) {
-        hasSquareImg.value = true;
-        return props.squareImg;
-    }
-
-    if (mobile.value && props.squareImg) {
-        hasSquareImg.value = true;
-        return props.squareImg;
-    }
-
-    return '';
-});
-
-const calculatedBgImg = computed(() => {
-    if (props.contentType === 'song') {
-        return props.squareImg;
-    }
-
-    if (props.bgImg) {
-        return props.bgImg;
-    }
-
-    return '';
-});
-
-const handleCtaClick = (event, url) => {
-    if (props.trackingSection && props.trackingSection.length) {
-        event.preventDefault();
-
-        userJourney.trackHomeContentClick({
-            token: userStore.token,
-            payload: {
-                contentId: null,
-                brand: userStore.brand,
-                section: props.trackingSection,
-            }
-        }).finally(() => {
-            window.location.href = url;
-        });
-    } else {
-        window.location.href = url;
-    }
-};
+}
 </script>

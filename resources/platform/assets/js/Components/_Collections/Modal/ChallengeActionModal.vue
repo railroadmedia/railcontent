@@ -1,21 +1,23 @@
 <template>
     <InfoModal
         :selfContained="true"
+        :title="modalTitle"
         class-override="tw-max-w-[593px] tw-w-full"
-        @onClose="() => $emit('closeModal')"
+        @onClose="() => emit('closeModal')"
     >
         <div class="tw-flex tw-flex-col tw-justify-center -tw-mt-[50px] dark:tw-text-white">
             <img class="tw-h-20 tw-mb-5" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge logo" />
             <h1 class="tw-text-2xl tw-font-bold tw-mb-[10px]">{{ headerText }}</h1>
             <p class="tw-mb-5">{{ descriptionText }}</p>
             <div class="tw-flex tw-justify-end">
-                <MuButton>{{ buttonText }}</MuButton>
+                <MuButton @click="buttonAction">{{ buttonText }}</MuButton>
             </div>
         </div>
     </InfoModal>
 </template>
 <script setup>
 import { computed } from "vue";
+import axios from 'axios';
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
 
@@ -28,7 +30,13 @@ const props = defineProps({
         type: String,
         default: '30-Day Drummer',
     },
+    contentId: {
+        type: Number,
+        default: 0,
+    },
 })
+
+const emit = defineEmits(['closeModal']);
 
 const isUnlockModal = computed(() => {
     return props.modalType === 'unlock'
@@ -36,6 +44,16 @@ const isUnlockModal = computed(() => {
 
 const isRetakeModal = computed(() => {
     return props.modalType === 'retake'
+})
+
+const isLeaveModal = computed(() => {
+    return props.modalType === 'leave'
+})
+
+const modalTitle = computed(() => {
+    if(isLeaveModal.value){
+        return `Are you sure you want to leave ${props.title}?`;
+    }
 })
 
 const headerText = computed(() => {
@@ -61,4 +79,24 @@ const buttonText = computed(() => {
         return 'Retake Challenge'
     }
 })
+
+const buttonAction = async () => {
+    try {
+        if(isUnlockModal.value){
+            // const unlock = await axios.post(`/challenges/unlock/${props.contentId}`);
+
+        } else if(isRetakeModal.value){
+
+        } else if(isLeaveModal.value){
+            // const leave = await axios.post(`/challenges/leave/${props.contentId}`);
+        }
+
+        emit('closeModal');
+    } catch(e) {
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
+    }
+}
 </script>

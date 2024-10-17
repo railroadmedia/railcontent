@@ -60,6 +60,12 @@
                 catalogue-type="challenge"
             />
 
+            <!-- Challenge Awards -->
+            <MiniCatalogueSection
+                title="My Awards"
+                catalogue-type="challengeAward"
+            />
+
             <!-- Completed Lessons -->
             <MiniCatalogueSection
                 title="Completed Lessons"

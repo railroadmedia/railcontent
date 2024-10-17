@@ -6,7 +6,7 @@
             showAllAlways
             @click="handleOpen"
         />
-        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" />
+        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" />
     </div>
 </template>
 
@@ -19,6 +19,10 @@ const props = defineProps({
     text: String,
     emailLogo: String,
     emailRecipient: String,
+    contentId: {
+        type: [String, Number],
+        default: null,
+    },
 });
 
 const modalOpen = ref(false);

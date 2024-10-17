@@ -71,6 +71,7 @@
         </div>
       </div>
     </div>
+
   </template>
 
   <script setup>
@@ -79,6 +80,7 @@
   import { textColor } from '@constants/brands';
   import ContentService from "@vuesora/assets/js/Services/content";
   import Utils from "@vuesora/assets/js/classes/utils";
+  import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
   const props = defineProps({
     labelText: String,
@@ -93,11 +95,11 @@
     contentId: Number,
     isChallenge: {
         type: Boolean,
-        default: false,
+        default: true,
     }
   });
 
-  const emit = defineEmits(['toggleCompleteContent']);
+  const emit = defineEmits(['toggleCompleteContent', 'openCompletionModal']);
 
   const contentProgress = ref(props.progress);
 
@@ -130,12 +132,18 @@
 
   const completeContent = () => {
       if(!props.isCompleted){
-          ContentService.markContentAsComplete(props.contentId)
-          .then(() => {
-              Utils.triggerEvent(window, 'lesson-complete', { complete: true });
-              contentProgress.value = 100;
-              emit('toggleCompleteContent');
-          });
+          //Challenge
+          if(props.isChallenge){
+            emit('openCompletionModal');
+
+          } else {
+              // ContentService.markContentAsComplete(props.contentId)
+              //     .then(() => {
+              //         Utils.triggerEvent(window, 'lesson-complete', { complete: true });
+              //         contentProgress.value = 100;
+              //         emit('toggleCompleteContent');
+              //     });
+          }
       }
   }
   </script>

@@ -1,8 +1,8 @@
 <template>
     <ModalRenderer :black-background="true">
-        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement ? 'tw-opacity-1' : 'tw-opacity-0'">
-                <!-- Completion Animation -->
-<!--            <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed.drumeo" width="100%" height="100%" :loop="false" />-->
+        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement && !showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
+            <!-- Completion Animation -->
+            <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed.drumeo" width="100%" height="100%" :loop="false" />
             <!-- Desktop/Tablet -->
             <div class="tw-hidden md:tw-flex tw-flex-col tw-justify-center tw-items-center dark:tw-text-white">
                 <h1 class="tw-text-2xl tw-font-bold tw-mb-2 tw-text-white">You're done for the day!</h1>
@@ -10,7 +10,7 @@
 
                 <div class="tw-border tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-max-w-[700px] lg:tw-max-w-[758px] tw-w-full tw-flex tw-px-8 lg:tw-px-12 tw-pb-5 tw-relative tw-overflow-hidden tw-my-5">
                     <!-- Streak Animation -->
-                    <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" width="100%" height="100%" :loop="false" />
+<!--                    <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" width="100%" height="100%" :loop="false" />-->
                     <!-- Left -->
                     <div class="tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
                         <!-- Challenge Logo -->
@@ -144,8 +144,12 @@
             <Vue3Lottie v-if="showFinishAnimation" class="tw-absolute tw-w-full tw-h-full tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover tw-bg-cover" animation-link="https://lottie.host/c0f917ca-73c4-4b4c-8d2e-53a415d7ae09/jrNUPzGgwb.json" width="100%" height="100%" />
         </div>
 
-        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAchievement ? 'tw-opacity-1' : 'tw-opacity-0'">
-            <ChallengeAchievementModal @open-streak-info="updateInfoModalType('streak')" />
+        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAchievement ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
+            <ChallengeAchievementModal @open-streak-info="updateInfoModalType('streak')" @open-award-modal="openAwardModal"  />
+        </div>
+
+        <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
+            <ChallengeAwardModal v-if="showAward" :is-modal="false" />
         </div>
     </ModalRenderer>
 
@@ -164,6 +168,7 @@ import ModalRenderer from '@collections/Modal/ModalRenderer';
 import MuButton from '@units/Button/MuButton';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 import ChallengeAchievementModal from '@collections/Modal/ChallengeAchievementModal';
+import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -173,6 +178,7 @@ const infoModalType = ref('');
 const showFinishAnimation = ref(false);
 const showLabelAnimation = ref(false);
 const showAchievement = ref(false);
+const showAward = ref(false);
 const hideAnimation = ref(false);
 
 const hasProgress = computed(() => {
@@ -185,18 +191,27 @@ const updateInfoModalType = (type) => {
     infoModalType.value = type;
 }
 
+const openAwardModal = () => {
+    showAchievement.value = false;
+    showAward.value = true;
+}
+
 onMounted(() => {
-    setInterval(() => {
+    setTimeout(() => {
         progress.value = 40;
         showLabelAnimation.value = true;
     }, 2000)
 
-    // setInterval(() => {
-    //     showAchievement.value = true;
-    // }, 8000)
+    setTimeout(() => {
+        showAchievement.value = true;
+    }, 7000)
 
-    setInterval(() => {
+    // setTimeout(() => {
+    //     hideAnimation.value = true;
+    // }, completionAnimations[15].duration)
+
+    setTimeout(() => {
         hideAnimation.value = true;
-    }, completionAnimations[15].duration)
+    }, 7000)
 })
 </script>

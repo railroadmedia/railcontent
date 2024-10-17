@@ -2,9 +2,9 @@
     <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" @onClose="emit('modalClose')">
         <div class="tw-flex tw-flex-col tw-justify-center -tw-mt-[50px] dark:tw-text-white tw-text-center">
             <!-- Dark mode Logo -->
-            <img class="tw-h-20 tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo}}`" />
+            <img class="tw-h-20 tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.dark_mode_logo}`" alt="challenge dark mode logo" />
             <!-- Light mode Logo -->
-            <img class="tw-h-20 tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo}`" />
+            <img class="tw-h-20 tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.light_mode_logo}`" alt="challenge light mode logo" />
 
             <!-- Step 1 -->
             <template v-if="step === 1">
@@ -41,7 +41,7 @@
                 <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other drummers who have already enrolled!</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" class="tw-mr-[9px]">View Challenge</MuButton>
-                    <MuButton>Go Home</MuButton>
+                    <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
                 </div>
             </template>
         </div>
@@ -76,7 +76,8 @@ const props = defineProps({
 const emit = defineEmits(['modalClose']);
 
 const userStore = useUserStore();
-const { userProfilePictureUrl } = storeToRefs(userStore);
+const { userProfilePictureUrl, brand } = storeToRefs(userStore);
+
 
 const selectedFrequency = ref(true);
 const step = ref(props.defaultStep);
@@ -110,24 +111,30 @@ const handleFrequencyChange = (val) => {
 };
 
 const handleNext = async () => {
-    if(props.challengeType === 'community'){
-        try {
+
+    try {
+        if(props.challengeType === 'community'){
+            // if(selectedFrequency.value){
+            //     const setNotification = await axios.post(`/challenges/notifications/community_reminders/${props.challenge.content_id}`);
+            // }
+
             const data = await axios.get(`/challenges/${props.challenge.content_id}`);
             challengeData.value = data.data;
             step.value = 2;
+
             setTimeout(() => {
                 slideIn.value = true;
             },1500)
+        } else {
+            step.value = 2;
         }
-        catch(e) {
-            window.shownotification({
-                icon: 'error',
-                text: 'Woops! Something wrong happened, please try again later.'
-            })
-        }
-    } else {
-        step.value = 2;
+    } catch (e) {
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
     }
+
 };
 
 const handleDateChange = (date) => {

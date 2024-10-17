@@ -1,5 +1,5 @@
 <template>
-    <ModalRenderer :black-background="true" :show-x-icon="true">
+    <component :is="isModal ? compMap.ModalRenderer : 'div'" :black-background="true" :show-x-icon="true">
         <div class="tw-max-w-[470px] tw-w-full tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0">
             <!-- Animation -->
             <Vue3Lottie v-if="!hideAnimation" class="tw-w-[calc(100% + 200px)] sm:tw-w-[800px] tw-h-[800px] tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-[5]" :animation-link="animations[brand]" width="100%" height="100%" :loop="false" />
@@ -17,14 +17,16 @@
                 </p>
                 <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-16 sm:tw-mb-6 tw-z-[3] tw-relative">
                     <MuButton @click="openCertificate">View certificate</MuButton>
-                    <MuButton><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>
+                    <MuButton @click="openShareModal"><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>
                 </div>
                 <div class="tw-text-center">
                     <a :href="`/${brand}/challenges`" class="tw-uppercase tw-underline tw-font-bold tw-font-bebas-neue dark:tw-text-white tw-z-[3] tw-relative">Return to Challenges</a>
                 </div>
             </div>
         </div>
-    </ModalRenderer>
+    </component>
+
+    <ShareModal v-if="isShareOpen" :container-stay-on-close="true" @close-modal="closeShareModal" />
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
@@ -32,12 +34,26 @@ import axios from 'axios';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { Vue3Lottie } from 'vue3-lottie';
+
 import ModalRenderer from '@collections/Modal/ModalRenderer';
 import MuButton from '@units/Button/MuButton';
+import ShareModal from '@collections/Modal/ShareModal';
+
+const props = defineProps({
+    isModal: {
+        type: Boolean,
+        default: true,
+    }
+})
+
+const compMap = {
+    ModalRenderer,
+}
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 const hideAnimation = ref(false);
+const isShareOpen = ref(false);
 
 const animations = {
     drumeo: 'https://lottie.host/6b65abab-e596-499f-9826-35d7e8d65d94/iYfnMjtsYE.json',
@@ -49,6 +65,14 @@ const animations = {
 const openCertificate = async () => {
     const certificate = await axios(`/challenges/download_award/${402199}`);
     console.log(certificate);
+}
+
+const openShareModal = () => {
+    isShareOpen.value = true;
+}
+
+const closeShareModal = () => {
+    isShareOpen.value = false;
 }
 
 onMounted(() => {
