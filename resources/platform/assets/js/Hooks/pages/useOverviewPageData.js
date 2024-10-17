@@ -25,6 +25,7 @@ export async function useOverviewPageData(contentType, parentType) {
             if(result){
                 data.value = {
                     children: result.data.lessons,
+                    header: buildHeader(contentType, result, progressPercent),
                 };
             }
         } else {
