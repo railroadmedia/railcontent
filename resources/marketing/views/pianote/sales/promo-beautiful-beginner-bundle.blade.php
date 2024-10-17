@@ -214,6 +214,7 @@
 
 @section('body-data')
     x-data ='{
+    headphones : false,
     demoVid : false,
     stepTwo : false,
     lazyLoad: false,
@@ -663,7 +664,7 @@
         <a href="#customize-anchor" class="join smaller anchor-slide mb-20">GET THE BUNDLE &raquo;</a>
 
         <div class="container max-w-5xl mx-auto">
-            <img class="h-28 sm:h-48 lg:h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/spread.png">
+            <img class="h-28 sm:h-48 lg:h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/bundle-image.webp">
             <h6 class="leading-tight mx-auto font-black text-pianote mt-7">Join Pianote today with the Beautiful Beginner Bundle and get</h6>
             <h2 class="leading-tight font-black mt-1 mb-2">One year of UNLIMITED piano lessons<br class="hidden sm:inline"> plus 4 awesome LIFETIME bonuses</h2>
             <h4 class="leading-tight mb-7 sm:mb-10"><strong>For</strong> <s class="opacity-60">$591</s> <strong>$180</strong> (Save 70%)</h4>
@@ -758,7 +759,9 @@
                 </div>
 
                 <div class="sm:w-5/12 mb-7 sm:mb-0 relative">
-                    <img class="mx-auto sm:ml-auto sm:mr-0 max-w-xs sm:max-w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/headphones.webp" alt="Pianote Headphones">
+                    <img class="mx-auto sm:ml-auto sm:mr-0 max-w-xs sm:max-w-full cursor-pointer autoplay-video" x-on:click="headphones = true;"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/headphones.webp"
+                        alt="Pianote Headphones">
                 </div>
             </div>
         </div>
@@ -847,7 +850,7 @@
 
 
     @include('musora.sales.components.guarantee-section', [
-        'theme' => 'musora',
+        'theme' => 'white',
         'bgColor' => true,
         'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
@@ -958,11 +961,11 @@
                 'discountedPrice' => 591,
                 'price' => 180,
                 'keyFeatures' => [
-                    'One year of unlimited piano lessons ($240 value) ',
-                    'BONUS New Piano Players Start Here ($127 value)',
-                    'BONUS Easy Chords ($127 value)',
-                    'BONUS Read Music in 30 Days ($97 value)',
-                    'BONUS Read Music in 30 Days E-Book (Free)',
+                    '1 year of unlimited lessons ($240 value)',
+                    'New Piano Players Start Here ($127 value)',
+                    'Easy Chords ($127 value)',
+                    'Read Music in 30 Days ($97 value)',
+                    'Read Music in 30 Days E-Book (Free)',
                     '90-Day Guarantee'
                 ]
             ],
@@ -973,11 +976,11 @@
                 'price' => 200,
                 'keyFeatures' => [
                     'One year of unlimited piano lessons ($240 value) ',
-                    'BONUS New Piano Players Start Here ($127 value)',
-                    'BONUS Easy Chords ($127 value)',
-                    'BONUS Read Music in 30 Days ($97 value)',
-                    'BONUS Read Music in 30 Days E-Book (Free)',
-                    'SPECIAL OFFER New Pianote Headphones ($99 value)',
+                    '<span class="text-pianote">BONUS</span> New Piano Players Start Here ($127 value)',
+                    '<span class="text-pianote">BONUS</span> Easy Chords ($127 value)',
+                    '<span class="text-pianote">BONUS</span> Read Music in 30 Days ($97 value)',
+                    '<span class="text-pianote">BONUS</span> Read Music in 30 Days E-Book (Free)',
+                    '<strong><span class="text-pianote">SPECIAL OFFER</span> New Pianote Headphones</strong> ($99 value)',
                     'Free shipping in the US',
                     '90-Day Guarantee'
                 ]
@@ -995,7 +998,7 @@
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left mx-auto w-full lg:w-3/4 lg:pl-5 xl:pl-10">
                     <a href="{{ $buttonLink }}"
-                            class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
+                            class="z-10 relative px-5 sm:px-6 sm:pr-10 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12 relative z-10" style="text-decoration:none">
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
@@ -1007,14 +1010,14 @@
                         @endif
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
+                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
                                 <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
                             @endforeach
                         </p>
                     </a>
                     <a href="{{ $buttonLink2 }}"
-                            class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-7/12 bg-white" style="text-decoration:none; background: #FFFBF7;">
+                            class="px-5 sm:px-6 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-7/12 relative z-20" style="text-decoration:none; background: #fffbf7;filter: drop-shadow(0px 0px 10px rgba(246, 26, 48, 0.50));">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
                         <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
@@ -1034,7 +1037,7 @@
                             @endif
                         </ul>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
+                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)
                                 <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
                             @endforeach
@@ -1076,6 +1079,11 @@
     @include('_partials.components.video-modal',[
         'name' => 'stepTwo',
         'video' => '802011057',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'headphones',
+        'video' => '1018435070',
         'vimeo' => true,
     ])
 
