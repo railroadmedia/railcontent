@@ -29,7 +29,7 @@ enum AwardTier: string
  * @property boolean $is_locked
  * @property boolean $is_active
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: content_id to values:  is_completed, is_bonus_content, time_practiced, unlock_date
+ * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, count_towards_streak, is_bonus_content, time_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -60,52 +60,79 @@ class ChallengeUserProgress extends Model
         return $this->belongsTo(Content::class, 'content_id');
     }
 
-    /**
-     * @return int - the current running streak of finished lessons
-     */
-    public function getCurrentStreak(): int
+    public function getStartAndEndDate() : array
     {
-        $currentStreak = 0;
-        foreach($this->lessons_meta_data as $lesson) {
-            if($lesson['unlock_date'] > now()) {
-                break;
+        $startDate = $this->start_date;
+        if ($startDate) {
+            $endDate = Carbon::parse($startDate);
+            foreach ($this->lessons_meta_data as $lesson) {
+                $unlockDate = Carbon::parse($lesson['unlock_date']);
+                $endDate = max($endDate, $unlockDate);
             }
-            if ($lesson['is_bonus_content_for_challenge']) {
-                continue;
-            }
-            if ($lesson['is_completed']) {
-                $currentStreak++;
-            } else {
-                // TODO unless it was yesterday :(((((
-                $currentStreak = 0;
-            }
+        } else {
+            $endDate = $startDate;
         }
-        return $currentStreak;
+        return [
+            'start_date' => $startDate,
+            'end_date' => $endDate->toISOString(),
+        ];
+
     }
 
-    /**
-     * @return int - the largest streak of lessons in the current challenge
-     */
-    public function getBestCurrentStreak() : int
+    public function getStreakCurrentData() : array
     {
         $bestStreak = 0;
         $currentStreak = 0;
-        foreach($this->lessons_meta_data as $lesson)
-        {
-            if($lesson['unlock_date'] > now()) {
-                break;
-            }
+        $missedLessons = 0;
+        // TODO does this need to be moved to the user's timezone?
+        // Document says only for solo challenges
+        // https://musora.atlassian.net/browse/TCH-40
+        $today = Carbon::now()->startOfDay();
+
+        foreach ($this->lessons_meta_data as $lesson) {
+            $unlockDate = Carbon::parse($lesson['unlock_date']);
             if ($lesson['is_bonus_content']) {
                 continue;
             }
-            if ($lesson['is_completed']) {
-                $currentStreak++;
+            if ($unlockDate > $today) {
+                break;
+            } else if ($unlockDate == $today) {
+                if ($lesson['is_completed']) {
+                    $currentStreak++;
+                    $bestStreak = max($bestStreak, $currentStreak);
+                }
             } else {
-                $bestStreak = max($bestStreak, $currentStreak);
-                $currentStreak = 0;
+                if ($lesson['is_completed']) {
+                    $currentStreak++;
+                    $bestStreak = max($bestStreak, $currentStreak);
+                } else {
+                    $bestStreak = max($bestStreak, $currentStreak);
+                    $currentStreak = 0;
+                    $missedLessons++;
+                }
             }
         }
-        return $bestStreak;
+        return [
+            'best' => $bestStreak,
+            'current' => $currentStreak,
+            'missed' => $missedLessons,
+        ];
+    }
+
+    /**
+     * @return - the largest streak of lessons in the current challenge
+     */
+    public function getBestCurrentStreak()
+    {
+        return $this->getStreakCurrentData()['best'];
+    }
+
+    /**
+     * @return - the current running streak of finished lessons
+     */
+    public function getCurrentStreak()
+    {
+        return $this->getStreakCurrentData()['current'];
     }
 
     /**
@@ -134,7 +161,7 @@ class ChallengeUserProgress extends Model
     {
         $lessons = $challenge['lessons'];
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = max($startDate, Carbon::now());
+        $startDate = max($startDate, Carbon::now())->startOfDay();
         $lessonMetaData = [];
         //TODO does this need to be moved to the user's timezone?
         // Document says only for solo challenges
@@ -142,12 +169,14 @@ class ChallengeUserProgress extends Model
         $rollingUnlockDate = $startDate->copy();
         foreach($lessons as  $lesson) {
             $unlockDate = !$isLocked || $lesson['is_always_unlocked_for_challenge'] ? $startDate : $rollingUnlockDate;
-            $lessonMetaData[$lesson['id']] =
+            $lessonMetaData[] =
                 [
+                    'content_id' => $lesson['id'],
                     'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
                     'is_completed' => false,
                     'time_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
+                    'count_towards_streak' => true,
                 ];
             if (!$lesson['is_always_unlocked_for_challenge']) {
                 // TODO start of day? to hande daylight saving times
@@ -156,6 +185,28 @@ class ChallengeUserProgress extends Model
         }
         return $lessonMetaData;
     }
+
+    public function getCompiledMetadata() : array
+    {
+        $streakData = $this->getStreakCurrentData();
+        $startEndDate = $this->getStartAndEndDate();
+        $data = [
+            'is_active' => $this->is_active,
+            'current_streak' => $streakData['current'],
+            'minutes_practiced' => $this->getMinutesPracticed(),
+            'missed_lessons' => $streakData['missed'],
+            'current_best_streak' => $streakData['best'],
+            'rest_days' => $this->current_rest_days,
+            'is_unlocked' => !$this->is_locked,
+            'best_completed_streak' => $this->completed_best_streak,
+            'best_completed_time_practiced' => $this->completed_time_practiced,
+            'last_completion_time' => $this->last_completed_date,
+            'start_date' => $startEndDate['start_date'],
+            'end_date' => $startEndDate['end_date'],
+        ];
+        return $data;
+    }
+
 
     /**
      * @param $challenge - Sanity Document for the challenge
@@ -211,12 +262,16 @@ class ChallengeUserProgress extends Model
     public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null) : void
     {
         $lessonMetaData = $this->lessons_meta_data;
-        if (!$lessonMetaData[$lessonId] || !$this->is_active) return;
-
-        $lessonMetaData[$lessonId]['is_completed'] = $isCompleted;
-        if (!is_null($timePracticed)) {
-            // TODO this could be = or += depending on how time practides is sent
-            $lessonMetaData[$lessonId]['time_practiced'] = $timePracticed;
+        if (!$this->is_active) return;
+        foreach($lessonMetaData as $index => $lessonMetaDatum) {
+            if($lessonMetaDatum['content_id'] == $lessonId) {
+                $lessonMetaData[$index]['is_completed'] = $isCompleted;
+                if (!is_null($timePracticed)) {
+                    // TODO this could be = or += depending on how time practides is sent
+                    $lessonMetaData[$index]['time_practiced'] = $timePracticed;
+                }
+                break;
+            }
         }
         $this->lessons_meta_data = $lessonMetaData;
         $this->save();

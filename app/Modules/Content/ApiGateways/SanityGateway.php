@@ -34,6 +34,7 @@ class SanityGateway
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
+            'is_solo_challenge',
             'registration_url',
             '"lesson_count": child_count',
             '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "Start Challenge")',
@@ -52,16 +53,28 @@ class SanityGateway
             '"silver_award": silver_award.asset->url',
             '"bronze_award": bronze_award.asset->url',
             '"lessons": child[]->{
-                  "id": railcontent_id,
-                  title,
-                  "image": thumbnail.asset->url,
-                  "instructors": instructor[]->name,
-                  length_in_seconds,
-                  difficulty_string,
-                  difficulty,
-                  "type": _type,
-                  is_always_unlocked_for_challenge,
-                  is_bonus_content_for_challenge,
+                "sanity_id" : _id,
+                "id": railcontent_id,
+                railcontent_id,
+                artist,
+                title,
+                "image": thumbnail.asset->url,
+                "thumbnail": thumbnail.asset->url,
+                difficulty,
+                difficulty_string,
+                web_url_path,
+                "url" : web_url_path,
+                published_on,
+                "type": _type,
+                progress_percent,
+                "length_in_seconds" : coalesce(length_in_seconds, soundslice[0].soundslice_length_in_second),
+                brand,
+                "genre": genre[]->name,
+                status,
+                "slug" : slug.current,
+                "permission_id": permission[]->railcontent_id,
+                is_always_unlocked_for_challenge,
+                is_bonus_content_for_challenge,
             }',
         ],
         ];
@@ -180,7 +193,7 @@ class SanityGateway
     }
 
     /**
-     * @param int $ids - railcontent.id value
+     * @param int $railcontentId - railcontent.id value
      * @param string $type - sanity _type value
      * @return array | null - matching challenge document or null
      */
@@ -204,10 +217,34 @@ class SanityGateway
     }
 
     /**
+     * @param int $railcontentId - railcontent.id value
+     * @param string $type - sanity _type value
+     * @return array - matching challenge document
+     */
+    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null) : array
+    {
+
+        $gateway = new SanityGateway();
+        // see musora-content-services sanity.js for the fields and format we need to replicate
+        $challengeFields = $this->getFieldsString('challenge');
+        $typeString = $type ? "&& _type == '$type'" : '';
+        $fieldsString = $this->getFieldsString($type);
+        $query ="*[railcontent_id == $railcontentId $typeString]{
+          $fieldsString,
+          'parent': *[references(^._id) && _type == 'challenge'][0]{
+                $challengeFields
+                },
+        } [0 ... 1]";
+        $document = $gateway->sanity->fetch($query)[0] ?? [];
+        return $document;
+    }
+
+
+    /**
      * @param string $contentType - sanity _type value
      * @return string - groq query string for fields
      */
-    private function getFieldsString(string $contentType) : string
+    private function getFieldsString(?string $contentType) : string
     {
         $allFields = array_merge($this->defaultFields, $this->contentSpecificFields[$contentType] ?? []);
         return implode(',', $allFields);
