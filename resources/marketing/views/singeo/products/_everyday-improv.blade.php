@@ -2,17 +2,17 @@
     <div class="container max-w-5xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
             <div class="w-full sm:w-7/12 text-center lg:text-left">
-                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
+                <img class="h-20 sm:h-24 lg:h-28 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo">
 
-                <h2 class="overflow-hidden py-4 md:py-0">
+                <h2 class="leading-none overflow-hidden mt-4 mb-2 sm:mb-3">
                     <strong>
                         Sing Freely with the<br> Power of Vocal Improv
                     </strong>
                 </h2>
-                <h3 class="-mt-3 sm:-mt-1 lg:mt-0">in just 10 minutes a day.</h3>
+                <h3 class="">in just 10 minutes a day.</h3>
 
                 <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat now.</strong></h6>
 
