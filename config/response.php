@@ -2545,7 +2545,10 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'active_permissions_ids'
+            'active_permissions_ids',
+	    'primary_brand',
+            'homepage_v2',
+            'is_first_access',
         ],
 
         'quick-tips' => [
@@ -5768,7 +5771,10 @@ return [
             'features',
             'show_onboarding',
             'last_used_brand',
-            'active_permissions_ids'
+            'active_permissions_ids',
+            'primary_brand',
+            'homepage_v2',
+            'is_first_access',
         ],
 
         'quick-tips' => [

@@ -304,6 +304,7 @@ export const useCollectionStore = defineStore({
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
+                //this.trackRecommendedServed(response.data.data);
             }
         
             this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
@@ -385,7 +386,7 @@ export const useCollectionStore = defineStore({
                 url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
             }
 
-            if(this.filter.progress){
+            if (this.filter.progress) {
                 url.searchParams.set('included_user_states[]', this.filter.progress);
             }
 
@@ -435,6 +436,23 @@ export const useCollectionStore = defineStore({
             }
 
             this.setURLParams()
+        },
+
+        trackRecommendedServed(responseData) {
+            const isRecommended = this.filter?.params?.included_types[0] === 'Recommendation';
+            if (isRecommended) {
+                const userStore = useUserStore();
+                const payload = {
+                    navigation_section: 'recommended',
+                    brand: userStore.brand,
+                    recommended_content: responseData.map((content, index) => ({
+                        id: content.id,
+                        position: this.data.length !== responseData.length ? (this.data.length - responseData.length) + index : index
+                    })),
+                };
+
+                userJourney.trackRecommendedContentServed(payload);
+            }
         },
 
         trackSort() {
