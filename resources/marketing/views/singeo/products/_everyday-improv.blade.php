@@ -7,7 +7,7 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/singeo/products/everyday-improv/enrollment/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo">
 
-                <h2 class=" overflow-hidden">
+                <h2 class="overflow-hidden py-4 md:py-0">
                     <strong>
                         Sing Freely with the<br> Power of Vocal Improv
                     </strong>
@@ -59,7 +59,7 @@
                     <div class="w-full sm:w-1/2 lg:pb-5">
                         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                             loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/reviews.webp"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/review.webp"
                             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
                         <p class="inline-block leading-tight text-sm align-middle">Join
                             {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
@@ -216,7 +216,7 @@
         @endif
         <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/reviews.webp"
+            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/enrollment/review.webp"
             alt="Image of joined student profiles in 30-Day Double Bass With Ulysses">
         <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
             {{ number_format($nPackOwners ?? 0) }} singers who<br> have already registered.</p>
