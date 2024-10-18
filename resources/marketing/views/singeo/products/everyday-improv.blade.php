@@ -8,7 +8,7 @@
     <meta name="description" content="Sing Freely With The Power Of Vocal Improvisation">
     <meta property="og:description" content="Sing Freely With The Power Of Vocal Improvisation">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-jazz/share-image.jpg" style="display: none;"> 
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/everyday-improv/timeline-05.webp" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
