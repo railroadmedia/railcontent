@@ -2,13 +2,13 @@
 
 @section('global-head')
     @parent
-    <title>30-Day Jazz | Singeo</title>
-    <meta property="og:title" content="30-Day Jazz | Singeo">
+    <title>Everyday Improv | Singeo</title>
+    <meta property="og:title" content="Everyday Improv | Singeo">
 
-    <meta name="description" content="Immerse yourself in jazz drumming for 30 days.">
-    <meta property="og:description" content="Immerse yourself in jazz drumming for 30 days.">
+    <meta name="description" content="Sing Freely With The Power Of Vocal Improvisation">
+    <meta property="og:description" content="Sing Freely With The Power Of Vocal Improvisation">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-jazz/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-jazz/share-image.jpg" style="display: none;"> 
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -21,6 +21,11 @@
     <style>
         .timeline-container::after {
             top: 30px;
+            background-color: #8300e9;
+
+        }
+        .timeline-container .timeline::after {
+            background-color: #8300e9;
         }
         @media (min-width: 768px) {
             .timeline-container .timeline:after {
@@ -227,7 +232,14 @@
     x-data ="{
     trailer : false,
     trailerM : false,
-    waitlistModal: false,
+    kickOff : false,
+    blueNote: false,
+    uncovered: false,
+     lazyLoad: false,
+        loadAlternateSrc: function(src) {
+        this.$refs.playToLearnVideo.src = src;
+        },
+        videoLoaded: false,
     }"
 @endsection
 
@@ -243,7 +255,10 @@
 {{--        'noBreadcrumb' => true,--}}
 {{--    ])--}}
 
-    @include('singeo.products._everyday-improv')
+
+    {{-- @include('singeo.products._everyday-improv') --}}
+
+    @include('singeo.products._everyday-improv-sales')
 
 
     @include('singeo.sales.partials._footer')
