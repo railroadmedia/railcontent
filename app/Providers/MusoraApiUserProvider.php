@@ -79,6 +79,8 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $userArray = array_merge($user->toArray(), $extraData, $featureArray);
 
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+
         return [
             'user' => $userArray,
             'subscriptionIntervalType' => $user->subscriptionIntervalType(),
@@ -97,6 +99,10 @@ class MusoraApiUserProvider implements UserProviderInterface
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
             'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
+            'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
+            'homepage_v2' => $homepageV2,
+            'is_first_access' => user()->isFirstAccess()
         ];
     }
 
@@ -170,7 +176,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
             'features' => $this->getAccessibleFeatures(),
-            'active_permissions_ids' => $user->getActivePermissionsIds()
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
+            'primary_brand' => $user->primary_brand,
         ], $extraData);
     }
 

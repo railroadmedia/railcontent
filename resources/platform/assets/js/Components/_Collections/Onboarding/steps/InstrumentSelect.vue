@@ -39,7 +39,7 @@ function goBack() {
     title: 'What instrument would you like to learn?',
     subtitle: 'Want to learn more than one instument? You can change your instrument at any time in your profile or by using the instrument selector in the navigation.',
     hideBackButton: false,
-    hideCloseButton: !props.steps[1].checked,
+    hideCloseButton: true,
   }">
     <template v-slot:content>
       <div class="
