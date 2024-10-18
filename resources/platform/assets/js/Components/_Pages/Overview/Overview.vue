@@ -10,10 +10,11 @@
             :progress="header?.progress"
             :info-data="header?.infoData"
             :is-loading="isLoading"
+            :hero-img="header?.thumbnail"
+            :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
-            :dropdowns="dropdowns[parentType] || []"
         />
 
         <template v-if="!isLoading">
@@ -192,6 +193,7 @@ const { isLoading } = storeToRefs(platformStore);
 const data = ref(null);
 const header = ref(null);
 const error = ref(null);
+const isUnlocked = ref(false); //challenge dropdown
 
 //Computed
 const showOverview = computed(() => {
@@ -206,6 +208,12 @@ const OverviewChildData = computed( () => {
     return data.value.children;
 })
 
+const headerDropdown = computed(() => {
+    if(!isUnlocked.value){
+        return dropdowns[props.parentType] || [];
+    }
+})
+
 onBeforeMount( async () => {
     // console.log('content type is', props.contentType)
     // console.log('headerData', props.headerData.ctas)
@@ -215,6 +223,8 @@ onBeforeMount( async () => {
 
         //Header Data
         header.value = OverviewData.value.header;
+
+        isUnlocked.value = OverviewData.value?.is_unlocked;
 
         console.log(header.value)
 
