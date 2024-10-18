@@ -10,6 +10,8 @@ use App\Modules\Referral\Events\EmailInvite;
 use App\Modules\Referral\Requests\EmailInviteRequest;
 use App\Modules\Referral\Services\ReferralService;
 use Avo;
+use Illuminate\Support\Facades\Log;
+use Request;
 
 class ReferralController extends Controller
 {
@@ -69,5 +71,15 @@ class ReferralController extends Controller
         return redirect()
             ->away($redirect)
             ->with(['email-invite-message' => config('referral.messages.email_invite_success')]);
+    }
+
+    public function validateEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $result = $this->referralService->validateEmail($email);
+
+        Log::info('Email validation result:', $result);
+
+        return response()->json($result);
     }
 }
