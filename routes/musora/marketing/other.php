@@ -70,6 +70,9 @@ Route::domain('{musoraDomain}')
         Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
         Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
+        Route::get('headrush', [CodeRedemptionController::class, 'headrushRedeemNewGuitareo']);
+        Route::get('headrush/existing', [CodeRedemptionController::class, 'headrushRedeemExistingGuitareo']);
+
         Route::get('free-music-lessons-for-life', [MarketingController::class, 'freeMusicLessonsForLife']);
         Route::get('everyday-musician', [MarketingController::class, 'everyDayMusician']);
         Route::get('history', [MarketingController::class, 'history']);
@@ -84,5 +87,5 @@ Route::domain('{musoraDomain}')
         Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'])
             ->withoutMiddleware([VerifyCsrfToken::class])
             ->name('claim-spotify');
-        
+
     });
