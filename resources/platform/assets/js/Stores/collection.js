@@ -230,7 +230,7 @@ export const useCollectionStore = defineStore({
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
-                this.trackRecommendedServed(response.data.data);
+                //this.trackRecommendedServed(response.data.data);
             }
 
             if (this.filter.searchTerm) {
@@ -260,27 +260,24 @@ export const useCollectionStore = defineStore({
 
             //Set active tab
             if (defaults.tabOptions) {
-                const params = new URLSearchParams(window.location.search);
-                let tabParams = params.getAll('tabs[]');
+                this.tabOptions = defaults.tabOptions;
 
-                //Set active tab from URL
-                if (tabParams && tabParams.length > 0) {
-                    const activeTab = defaults.tabOptions.find((tab) => {
-                        if (Array.isArray(tab.key)) {
-                            return JSON.stringify(tab.key) === JSON.stringify(tabParams);
-                        } else {
-                            return tab.key === tabParams[0];
-                        }
-                    })
+                //Set active tab as first tab from tabOptions
+                this.filter.activeTab = defaults.tabOptions[0].value;
+                this.tabData[this.filter.activeTab] = { ...defaults.tabOptions[0] };
+            }
 
-                    this.filter.activeTab = activeTab.value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
+            if(defaults.queryType){
+                this.queryType = defaults.queryType;
+            }
 
-                    //Set active tab as first tab from tabOptions
-                } else {
-                    this.filter.activeTab = defaults.tabOptions[0].value;
-                    this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
-                }
+            this.getURLParams();
+
+            if(!defaults.noFetchOnLoad){
+                await this.getData();
+
+                const platformStore = usePlatformStore();
+                platformStore.setLoadingState(false);
             }
         },
 

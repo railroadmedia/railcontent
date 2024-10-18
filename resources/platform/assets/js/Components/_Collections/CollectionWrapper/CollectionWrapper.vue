@@ -1,21 +1,13 @@
 <template>
     <div>
-        <CollectionFilterWrapper :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"
-            :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon"
-            :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters"
-            :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm"
-            :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
-            :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
-            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange"
-            @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
-            @on-progress-change="handleProgressChange" />
+        <CollectionFilterWrapper
+            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
+        />
 
         <transition appear name="fade">
             <!-- Delete contentType prop after May 6th -->
-            <CollectionResults :content="data" :selected-filters="getSelectedFilters"
-                :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage"
-                :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore"
-                :contentType="collectionType">
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
@@ -28,11 +20,16 @@
                 />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
-                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
-                    :show-reset-progress="showResetProgress" />
-                <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="collectionType"
-                    :will-scroll="false" :subscription-calendar-id="subscriptionCalendarId" :is-admin="isAdmin" />
+                                   @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress" />
+                <CatalogueCardContainer
+                    v-else
+                    :pre-loaded-content="data"
+                    :content-type-override="collectionType"
+                    :will-scroll="false"
+                    :subscription-calendar-id="subscriptionCalendarId"
+                    :is-admin="isAdmin"
+                />
             </CollectionResults>
         </transition>
     </div>

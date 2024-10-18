@@ -49,4 +49,45 @@ class LearningPathsService
 
         return $learningPaths;
     }
+    public function showLearningPaths(string $brand): bool
+    {
+        $hideSection = $brand . '_trial_section_hide';
+        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels = count(
+                    user()->onboardingExperience->filter(function ($item) use ($brand) {
+                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                    })
+                ) > 0;
+
+            return ($hasExperienceLevels) ? true : false;
+        }
+        return false;
+    }
+
+    public function showNewLearningPaths(): bool
+    {
+        $user = user();
+        return $user->is_trial
+            && $user->created_at->diffInDays(now()) <= 30
+            && FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
+    }
+
+    public function getNewLearningPaths(): array
+    {
+        $brand = brand();
+        if ($brand !== 'drumeo' && $brand !== 'pianote') {
+            return [];
+        }
+
+        $user = user();
+        $experienceLevel = intval(
+            $user
+                ->onboardingExperience
+                ->where('brand', brand())
+                ->first()
+                ->experience_level ?? 0
+        );
+
+        return config('learning.v2.' . $brand . '.' . $user->membership_level)[$experienceLevel] ?? [];
+    }
 }
