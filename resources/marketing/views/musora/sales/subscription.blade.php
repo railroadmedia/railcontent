@@ -461,6 +461,9 @@
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
         'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
         ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'musical',
+        ])
     @endif
 
     @include('musora.sales.components.app-section', [

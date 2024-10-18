@@ -320,6 +320,9 @@
                 'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
 
         ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'singing',
+        ])
     @endif
 
     @include('musora.sales.components.app-section', [

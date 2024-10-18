@@ -32,13 +32,34 @@
                     @if(!empty($subHeader))
                         {!!  $subHeader !!}
                     @else
-                        YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.
+                        YOUR FIRST @if(!empty($month)) 30 Days ARE @else Week Is @endif  FREE.
                     @endif
                     </strong></p>
                 <h3 class="leading-normal"> @if(!empty($headerLight)) {!! $header !!} @else <strong>{!! $header !!}</strong> @endif </h3>
-                <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
-                    {!! $list !!}
-                </ul>
+                    @if(!empty($headerLight))
+                        <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
+                            {!! $list !!}
+                        </ul>
+                    @else
+                        <p class="text-left mt-4 sm:mt-5 mb-3">Free access for 7 days, then $240 per year.</p>
+                        <ul class="fa-ul text-left pl-6 mb-4 sm:mb-5 mx-auto inline-block">
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> Cancel anytime.</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> 90-Day Money Back Guarantee beyond your trial.</li>
+                            <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i>
+                                @if($theme == 'drumeo')
+                                    <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.
+                                @elseif($theme == 'pianote')
+                                    <strong>PLUS</strong> singing, guitar, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'guitareo')
+                                    <strong>PLUS</strong> singing, piano, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'singeo')
+                                    <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'musora')
+                                    All-access for piano, guitar, drums and singing.
+                                @endif
+                            </li>
+                        </ul>
+                    @endif
                 @if(!empty($emailSignup))
                     <div class="max-w-xs sm:max-w-sm mx-auto sm:mx-0">
                         <form id="ajaxForm" accept-charset="UTF-8" action="{{ url()->route('claim-spotify') }}" class="ajax-form clearfix facebook-track-lead w-full mx-auto" method="POST">
