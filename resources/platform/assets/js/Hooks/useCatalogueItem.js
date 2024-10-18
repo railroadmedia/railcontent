@@ -16,6 +16,13 @@ export default function useCatalogueItem(props) {
 
             return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
     });
+    const isLocked = computed(() => {
+        if (userStore.isAdmin) {
+            return false;
+        }
+
+        return props.item?.is_locked === true;
+    })
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateQuarterPublishedOn = computed(() => DateTime.fromSQL(props.item.quarter_published, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());
@@ -99,6 +106,7 @@ export default function useCatalogueItem(props) {
 
     return {
         is_added,
+        isLocked,
         progress_percent,
         noAccess,
         datePublshedOn,
