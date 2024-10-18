@@ -98,9 +98,22 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                 }
 
                 // Process parent document if applicable
+                let parentContentId = null;
                 if (draftCopy.parent_type) {
-                    const parentDocument = await fetchDocument(`*["${props.id}" in child[]._ref]{ "slug": slug.current, _type, _id, railcontent_id, "parent": ... }[0]`);
+                    const parentDocument = await fetchDocument(`*["${props.id}" in child[]._ref]{ "slug": slug.current, _type, _id, railcontent_id, "parent": {
+                        railcontent_id,
+                        "slug":slug.current,
+                        _type,
+                        _id,
+                        "parent": *[^._id in child[]._ref]{
+                            railcontent_id, "slug":slug.current, _type, _id,
+                            "parent": *[^._id in child[]._ref]{
+                                railcontent_id, "slug":slug.current, _type, _id
+                            }[0]
+                        }[0]
+                    } }[0]`);
                     if (parentDocument) {
+                        parentContentId = parentDocument.railcontent_id;
                         const parentsArray = [];
                         let currentParent = parentDocument.parent;
                         while (currentParent) {
@@ -119,6 +132,10 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                 // Fetch data from external service
                 try {
                     const externalUrl = `${appUrl}/admin/last-content`;
+                    const payload = {
+                        ...draftCopy,
+                        parent_id: parentContentId, // Add parent ID to the payload
+                    };
                     const response = await fetch(externalUrl, {
                         method: 'POST',
                         headers: {
@@ -126,7 +143,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                             'Accept': 'application/json',
                             'X-CSRF-TOKEN': token,
                         },
-                        body: JSON.stringify(draftCopy),
+                        body: JSON.stringify(payload),
                     });
 
                     if (!response.ok) {

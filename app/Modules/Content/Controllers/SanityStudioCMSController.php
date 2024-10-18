@@ -281,6 +281,9 @@ class SanityStudioCMSController extends BaseController
                         ->first();
                 }
             }
+            if($request->has('parent_id')){
+                    $content->setParentId($request->get('parent_id'), 1);
+                }
 
             $content->save();
 
