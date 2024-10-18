@@ -90,7 +90,7 @@ class SanityStudioCMSController extends BaseController
         $dataset = config('content.dataset');
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
-        $token = env('SANITY_API_TOKEN');
+        $token = env('SANITY_API_TOKEN_RW');
 
         // publishing workspace
         $types = [

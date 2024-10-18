@@ -6,136 +6,77 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
         const originalResult = originalPublishAction(props);
         const { patch, publish } = useDocumentOperation(props.id, props.type);
         const sanityConfig = window.sanityConfig.find(item => item.name === 'publishing-workspace');
-        const url = sanityConfig.appUrl + `/admin/last-content`;
-        const api = 'v2022-03-07';
+        const { projectId, dataset, token: sanityToken, appUrl } = sanityConfig;
+        const apiVersion = 'v2022-03-07';
         const perspective = 'raw';
+        const baseUrl = `https://${projectId}.api.sanity.io/${apiVersion}/data/query/${dataset}`;
         const headers = {
-            'Authorization': `Bearer ${sanityConfig.token}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${sanityToken}`,
+            'Content-Type': 'application/json',
         };
 
-        // This function fetches the parent document by ID
-        const fetchParentDocument = async (parentId) => {
+        // Generic document fetch function
+        const fetchDocument = async (query) => {
             try {
-                const query = `*["${parentId}" in child[]._ref]{
-                    "slug":slug.current,
-                    _type,
-                    _id,
-                    railcontent_id,
-                    "parent":{
-                        railcontent_id,
-                        "slug":slug.current,
-                        _type,
-                        _id,
-                        "parent": *[^._id in child[]._ref]{
-                            railcontent_id, "slug":slug.current, _type, _id,
-                            "parent": *[^._id in child[]._ref]{
-                                railcontent_id, "slug":slug.current, _type, _id
-                            }[0]
-                        }[0]
-                    }
-                }[0]`;
                 const encodedQuery = encodeURIComponent(query);
-                const url2 = `https://${sanityConfig.projectId}.api.sanity.io/${api}/data/query/${sanityConfig.dataset}?perspective=${perspective}&query=${encodedQuery}`;
-                const response = await fetch(url2, { headers });
+                const response = await fetch(`${baseUrl}?perspective=${perspective}&query=${encodedQuery}`, { headers });
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch parent document');
+                    throw new Error('Failed to fetch document');
                 }
-
                 const result = await response.json();
                 return result.result;
             } catch (error) {
-                console.error('Error fetching parent document:', error);
+                console.error('Error fetching document:', error);
                 return null;
             }
         };
-        const fetchChildDocument = async (childId) => {
-            try {
-                const query = `*[_id == "${childId}"]{
-                    "slug":slug.current,
-                    _type,
-                    _id,
-                    railcontent_id
-                }[0]`;
-                const encodedQuery = encodeURIComponent(query);
-                const url2 = `https://${sanityConfig.projectId}.api.sanity.io/${api}/data/query/${sanityConfig.dataset}?perspective=${perspective}&query=${encodedQuery}`;
-                const response = await fetch(url2, { headers });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch parent document');
-                }
 
-                const result = await response.json();
-                return result.result;
-            } catch (error) {
-                console.error('Error fetching child document:', error);
-                return null;
-            }
-        };
         const mapRailcontentToId = (childrenArray, childId) => {
-            // Find the child document in childrenArray based on railcontent_id
             const matchedChild = childrenArray.find(child => child.railcontent_id === childId);
-            if (matchedChild) {
-                return matchedChild._id; // Return the _id if a match is found
-            } else {
-                console.error(`No match found for railcontent_id: ${childId}`);
-                return null;
-            }
+            return matchedChild ? matchedChild._id : null;
         };
-        async function mutate(mutations) {
+
+        const mutate = async (mutations) => {
             try {
-                const result = await fetch(
-                    `https://${sanityConfig.projectId}.api.sanity.io/v2021-06-07/data/mutate/${sanityConfig.dataset}`,
+                const response = await fetch(
+                    `https://${projectId}.api.sanity.io/v2021-06-07/data/mutate/${dataset}`,
                     {
-                        headers: {
-                            'Authorization': `Bearer ${sanityConfig.token}`,
-                            'Content-Type': 'application/json'
-                        },
+                        headers,
                         body: JSON.stringify(mutations),
-                        method: "POST",
+                        method: 'POST',
                     }
                 );
-
-                const json = await result.json();
-
-                if (result.ok) {
-                    console.log('Mutation successful:', json);
-                } else {
-                    console.error('Mutation failed:', json);
+                const json = await response.json();
+                if (!response.ok) {
+                    throw new Error('Mutation failed');
                 }
-
                 return json;
             } catch (error) {
                 console.error('Error in mutation request:', error);
                 throw error;
             }
-        }
+        };
+
         const patchChildDocument = async (childId, updates, childrenArray) => {
             const documentId = mapRailcontentToId(childrenArray, childId);
-            if (documentId) {
-                 try {
-                    const mutations = {
-                        mutations: [
-                            {
-                                patch: {
-                                    id: documentId,
-                                    set: updates,
-                                },
-                            },
-                        ],
-                    };
-                    // Call the mutate function
-                    const response = await mutate(mutations);
+            if (!documentId) {
+                console.error(`No matching document found for railcontent_id: ${childId}`);
+                return;
+            }
 
-                    if (response && response.results) {
-                        console.log(`Successfully updated child document with _id: ${documentId}`);
-                    } else {
-                        console.error(`Failed to update child document with _id: ${documentId}`);
-                    }
-                    console.log(`Successfully updated child document with _id: ${childId}`);
-                } catch (error) {
-                    console.error(`Failed to update child document ${childId}:`, error);
+            try {
+                const mutations = {
+                    mutations: [{ patch: { id: documentId, set: updates } }],
+                };
+                const response = await mutate(mutations);
+                if (response?.results) {
+                    console.log(`Successfully updated child document with _id: ${documentId}`);
+                } else {
+                    console.error(`Failed to update child document with _id: ${documentId}`);
                 }
+            } catch (error) {
+                console.error(`Failed to update child document ${childId}:`, error);
             }
         };
 
@@ -144,57 +85,48 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
             onHandle: async () => {
                 let draftCopy = { ...props.draft };
                 let childrenArray = [];
-                if ("child" in draftCopy) {
+
+                if (draftCopy.child) {
                     draftCopy.child_count = draftCopy.child.length;
                     patch.execute([{ set: { child_count: draftCopy.child.length } }]);
 
-                    for (const child of draftCopy.child) {
-                        const childDocument = await fetchChildDocument(child._ref); // Fetch the full child document
-                        childrenArray.push(childDocument);
-                    };
+                    // Fetch child documents in parallel
+                    childrenArray = await Promise.all(
+                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id }[0]`))
+                    );
                     draftCopy.childrenArray = childrenArray;
                 }
 
-                // Process parent content if parent_type exists in the draft
-                if ("parent_type" in draftCopy) {
-                    try {
-                        const parentDocument = await fetchParentDocument(props.id);
-                        console.log('Fetched parent document:', parentDocument);
-                        if (parentDocument) {
-                            const parentsArray = [];
-
-                            // Traverse up the parent chain and collect parents
-                            let currentParent = parentDocument.parent;
-                            while (currentParent) {
-                                parentsArray.push({
-                                    slug: currentParent.slug,
-                                    type: currentParent._type,
-                                    id: currentParent.railcontent_id,
-                                    _key: randomKey(),
-                                });
-
-                                // Move to the next parent in the chain (if exists)
-                                currentParent = currentParent.parent || null;
-                            }
-
-                            // Patch the draft with the collected parent array
-                            patch.execute([{ set: { parent_content_data: parentsArray } }]);
+                // Process parent document if applicable
+                if (draftCopy.parent_type) {
+                    const parentDocument = await fetchDocument(`*["${props.id}" in child[]._ref]{ "slug": slug.current, _type, _id, railcontent_id, "parent": ... }[0]`);
+                    if (parentDocument) {
+                        const parentsArray = [];
+                        let currentParent = parentDocument.parent;
+                        while (currentParent) {
+                            parentsArray.push({
+                                slug: currentParent.slug,
+                                type: currentParent._type,
+                                id: currentParent.railcontent_id,
+                                _key: randomKey(),
+                            });
+                            currentParent = currentParent.parent || null;
                         }
-                    } catch (error) {
-                        console.error('Error processing parent document:', error);
+                        patch.execute([{ set: { parent_content_data: parentsArray } }]);
                     }
                 }
 
-                // Fetch data from the external service
+                // Fetch data from external service
                 try {
-                    const response = await fetch(url, {
+                    const externalUrl = `${appUrl}/admin/last-content`;
+                    const response = await fetch(externalUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
-                            'X-CSRF-TOKEN': token
+                            'X-CSRF-TOKEN': token,
                         },
-                        body: JSON.stringify(draftCopy)
+                        body: JSON.stringify(draftCopy),
                     });
 
                     if (!response.ok) {
@@ -202,31 +134,26 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     }
 
                     const data = await response.json();
-                    console.log('Custom action response:', data, childrenArray);
+                    patch.execute([{ set: { railcontent_id: data.id, web_url_path: data.web_url_path, assignment: data.assignment } }]);
 
-                    // Patch the draft with the fetched data
-                    patch.execute([{ set: { railcontent_id: data.id } }]);
-                    patch.execute([{ set: { web_url_path: data.web_url_path } }]);
-                    patch.execute([{ set: { assignment: data.assignment } }]);
-                    if(data.childrens){
+                    if (data.childrens) {
                         for (const child of data.childrens) {
-                            let parentsContentData = [];
-                            const currentParent = JSON.parse(child.parent_content_data);
-                            parentsContentData.push({
-                                slug: currentParent[0].slug,
-                                type: currentParent[0].type,
-                                id: currentParent[0].id,
-                                _key: randomKey(),
-                            });
-                            await patchChildDocument(child.id, { parent_content_data: parentsContentData }, childrenArray);
-                        };
-
+                            const parentData = JSON.parse(child.parent_content_data)[0];
+                            const updates = {
+                                parent_content_data: [{
+                                    slug: parentData.slug,
+                                    type: parentData.type,
+                                    id: parentData.id,
+                                    _key: randomKey(),
+                                }],
+                            };
+                            await patchChildDocument(child.id, updates, childrenArray);
+                        }
                     }
                 } catch (error) {
                     console.error('Error fetching external data:', error);
                 }
 
-                // Delegate to the original handler
                 originalResult.onHandle();
             },
         };
