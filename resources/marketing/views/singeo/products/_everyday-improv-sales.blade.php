@@ -1,7 +1,7 @@
 @php
-    $buttonLink = '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1'; //TODO: Update  links
-    $fullPrice  = floatval($productPrices['30-days-to-better-technique']->discounted_price);
-    $price = floatval($productPrices['30-days-to-better-technique']->price);
+    $buttonLink = '/ecommerce/add-to-cart?products[everyday-improv]=1'; 
+    $fullPrice  = 97;
+    $price = 97;
 @endphp
 
 
@@ -122,7 +122,6 @@
         </div>
     </section>
 
-
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFF4FB;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="capitalize leading-tight mb-7 sm:mb-12"><strong>Unlock Confidence With The <br>Tools Of Vocal Improvisation</strong></h2>
@@ -186,7 +185,7 @@
                     @endforeach
             </div>
         </div>
-        <h1 class="leading-none sm:-mt-14 lg:-mt-16 hidden md:block"><i class="fal fa-angle-down text-singeo"></i></h1>
+        <h1 class="leading-none sm:-mt-14 md:-mt-16 hidden md:block"><i class="fal fa-angle-down text-singeo"></i></h1>
         <div>
             <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>
         </div>
@@ -286,15 +285,15 @@
     </section>
 
 
-    <section class="text-center px-5 py-10 lg:py-16" style="background: linear-gradient(90deg, #DAB3F8 0%, #8414E2 100%);">
+    <section class="text-center px-4 py-6 sm:py-10 lg:py-16" style="background: linear-gradient(90deg, #DAB3F8 0%, #8414E2 100%);">
         <div class="container mx-auto text-white flex flex-col items-center justify-center py-3">
             <h2 class="leading-tight text-center tracking-tight">
                 <strong>
-                    “One of the most incredible voices,  and an even better person”
+                    “One of the most incredible voices, and <br class="hidden sm:inline lg:hidden"/> an even better person”
                 </strong>
             </h2>
-            <h5 class="italic">
-                ~ <strong>Adam Blackstone,</strong> songwriter, producer & musical director for Nicki Minaj and Justin Timberlake.
+            <h5 class="italic leading-normal">
+                ~ <strong>Adam Blackstone,</strong> songwriter, producer &amp; <br class="hidden sm:inline lg:hidden"/>musical director for Nicki Minaj and Justin Timberlake.
             </h5>
         </div>
     </section>
@@ -314,9 +313,9 @@
             </picture>
             <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/coach-m-2.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
         
-            <div class="container mx-auto max-w-4xl p-4 md:p-6 -mt-96 md:-mt-52 text-left">
+            <div class="container mx-auto max-w-4xl p-4 md:p-6 -mt-96 md:-mt-52 lg:-mt-56 lg:-mt-72 text-left">
                 <div class="flex flex-col justify-center items-center">
-                    <p class="uppercase tracking-wider font-light">MEET YOUR INSTRUCTOR</p>
+                    <p class="uppercase tracking-wider font-light text-xs md:text-sm">MEET YOUR INSTRUCTOR</p>
                     <h1 class="text-3xl md:text-4xl mb-4 text-[#F8F8F8]"><strong>Emma Nissen</strong></h1>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 md:pt-6">
@@ -489,7 +488,7 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl  border-2 border-{{$theme}}" style="text-decoration:none;">
                         <p class="border border-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-{{$theme}}">COURSE ONLY</p>
                         <h2 class="text-black leading-tight mb-5"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h2>
@@ -509,7 +508,7 @@
                             @endforeach
                         </p>
                     </a>
-                    <a href="/shop/classical-piano-collection-membership"
+                    <a href="/ecommerce/add-to-cart?products[singeo-base-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
                        class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border border-[#ACACAC]" style="text-decoration:none;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black uppercase">1 Year of lessons</p>
                         <h2 class="text-black leading-tight mb-5"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h2>
