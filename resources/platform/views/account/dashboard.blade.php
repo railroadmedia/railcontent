@@ -1,31 +1,5 @@
 @php
-/**
- * @var \Modules\UserManagementSystem\Models\User $user
- */
-$hasGear =
-    count(
-        user()->onboardingGear->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-$hasTopics =
-    count(
-        user()->onboardingTopics->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-$hasGenres =
-    count(
-        user()->onboardingGenres->filter(function ($item) {
-            return $item->brand == brand();
-        }),
-    ) > 0;
-
-$hasExperience = user()->onboardingExperience ? true : false;
-
-$hasGoals= user()->onboardingGoals ? true : false;
-
-$showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
+    $showCompleteYourAccountButton = !user()->hasCompletedOnboarding();
 
     $headerData = [
         'title' => $dashboardUser->display_name,

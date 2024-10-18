@@ -36,13 +36,14 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { onMounted, computed } from "vue";
 import { useCollectionStore } from "@stores/collection";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import CollectionFilterWrapper from '@collections/Filter/CollectionFilterWrapper.vue';
 import CollectionResults from '../Catalogue/CollectionResults.vue';
 import UserCatalogueEvents from "@vuesora/mixins/UserCatalogueEvents";
+import userJourney from "@services/userJourney";
 
 //Views
 import ListCatalogue from "@collections/ListCatalogue/ListCatalogue";
@@ -143,7 +144,7 @@ const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
 const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
-const { brand } = storeToRefs(userStore);
+const { brand, journeySection } = storeToRefs(userStore);
 
 //Collection type reactives
 
@@ -323,4 +324,37 @@ const handleSortChange = (item) => {
 const handleTabChange = (tab) => {
     collectionStore.switchTab(tab);
 }
+
+onMounted(() => {
+    // console.log('collection type',props.collectionType)
+    // console.log(props.sortOptions, props.defaultSort)
+    // console.log(props.preLoadedContent)
+
+
+    if (isRecommendation.value && showGroupBy.value) {
+        data.value.forEach(item => {
+            const trackingPayload = {
+                brand: brand.value,
+                navigation_section: 'recommended',
+                recommended_content: item.lessons.map((item, index) => ({
+                    id: item.id,
+                    position: index,
+                })),
+            }
+
+            userJourney.trackRecommendedContentServed(trackingPayload);
+        });
+    } else if (isRecommendation.value) {
+            const trackingPayload = {
+                brand: brand.value,
+                navigation_section: 'recommended',
+                recommended_content: data.value.map((item, index) => ({
+                    id: item.id,
+                    position: index,
+                })),
+            }
+
+            userJourney.trackRecommendedContentServed(trackingPayload);
+    }
+})
 </script>

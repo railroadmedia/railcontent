@@ -52,21 +52,21 @@ const getSavedGoals = (goals) => {
 
 export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
   return ({
-      user: {
-          id: userId,
-          name: userDisplayName || null,
-          userProfilePictureUrl: userProfilePictureUrl || null
-      },
-      instrument: instrument || 'default',
-      instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
-      experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
-      genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
-      topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
-      goals: getSavedGoals(selectedGoals.length ? selectedGoals : [selectedGoals]),
+    user: {
+      id: userId,
+      name: userDisplayName || null,
+      userProfilePictureUrl: userProfilePictureUrl || null
+    },
+    instrument: instrument || 'default',
+    instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
+    experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
+    genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
+    topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
+    goals: getSavedMultiSelect({ options: selectedGoals, plural: 'goals', singular: 'goals', configOptions }),
   })
 };
 
-export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
+export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, selectedGoals, brand, steps }) => {
   const newSteps = steps.map((step, index) => {
     if (index > 1) {
       return {...step, checked: false };
@@ -85,18 +85,10 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
       return selectedExperience.brand === brand;
     }
   };
-  const hasGoals= () => {
-    if (!selectedExperience) {
-      return false;
-    }
-    if (selectedExperience.length) {
-      return !!selectedExperience.find(exp => exp.brand === brand);
-    } else {
-      return selectedExperience.brand === brand;
-    }
-  };
+
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
+  const hasGoals = !!selectedGoals.find(goal => goal.brand === brand);
 
   if (hasGear) {
     newSteps[0].checked = true;
@@ -112,8 +104,11 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
   if (hasTopics) {
     newSteps[5].checked = true;
   }
-  if (hasGoals()) {
-    newSteps[6].checked = true;
+  if (hasGoals) {
+    const index = newSteps.findIndex(item => item.key === 'goals');
+    if (index !== -1) {
+      newSteps[index].checked = true;
+    }
   }
   return newSteps;
 };
