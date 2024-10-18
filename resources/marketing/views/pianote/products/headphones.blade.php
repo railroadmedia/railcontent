@@ -487,6 +487,12 @@ $testimonials = [
         'name' => 'Tim Bondyra',
         'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
     ],
+      [
+        'quote' => 'As a person with a smaller cranium, <strong>these headphones fit amazingly well</strong>! The ear pads fit perfectly around my ears and they are <strong>very comfortable to wear</strong>. Now I can play piano without external distractions and can really work on the dynamics of the song as the headphones <strong> pick up even the faintest of sounds</strong>. These are truly great headphones!!',
+        'role' => 'CANADA',
+        'name' => 'Megan Werry',
+        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/megan-headphones.jpeg'
+    ],
 ];
 @endphp
 
@@ -511,25 +517,48 @@ $testimonials = [
     </div>
 </section> --}}
 
-<section class="px-6 pt-10 sm:pt-14 lg:pt-24 pb-32 lg:pb-40 bg-[#F1EFED]">
-    <div class="container mx-auto max-w-3xl">
-        @foreach ($testimonials as $testimonial)
-            <div class="text-center flex flex-row">
-                <img class="h-4 md:h-8 pr-4" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/quotation-icon.svg">
-                <div class="text-left">
-                    <h3 class="leading-snug">{!! $testimonial['quote'] !!}</h3>
-                    <div class="flex items-center mt-4">
-                        <img class="rounded-full h-20 w-20 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
-                        <div class="ml-3">
-                            <h6 class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></h6>
-                            <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
+    <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
+        <div class="container max-w-2xl mx-auto relative z-10">
+
+            <div x-data x-init="
+                new Splide($refs.splide, {
+                    type: 'loop',
+                    autoplay: true,
+                    interval: 6000,
+                    arrows: false,
+                    pagination: false,
+                }).mount();
+            ">
+                <div class="splide" x-ref="splide">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            @foreach ($testimonials as $testimonial)
+                                <div class="splide__slide">
+                                    <div class="text-center flex flex-row">
+                                        <img class="h-4 md:h-8 pr-4" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/quotation-icon.svg">
+                                        <div class="text-left">
+                                            <h3 class="leading-snug">{!! $testimonial['quote'] !!}</h3>
+                                            <div class="flex items-center mt-4">
+                                                <img class="rounded-full h-20 w-20 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of  @if (!empty($testimonial['role'])){{ $testimonial['role'] }}@endif">
+                                                <div class="ml-3">
+                                                    @if (!empty($testimonial['name']))
+                                                        <h6 class="leading-none pb-1"><strong>{{ $testimonial['name'] }}</strong></h6>
+                                                    @endif
+                                                    @if (!empty($testimonial['role']))
+                                                        <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
-    </div>
-</section>
+        </div>
+    </section>
 
  <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #111729 calc(50% + 1px));">
