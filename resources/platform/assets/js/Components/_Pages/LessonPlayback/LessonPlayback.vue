@@ -164,11 +164,11 @@
                     <VideoButtons
                         v-if="!isWorkout"
                         :prev-lesson-url="nextPreviousLessons?.prevLesson?.web_url_path"
-                        :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path" 
+                        :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :brand="brand"
-                        prev-label="Previous Lesson" 
+                        prev-label="Previous Lesson"
                         next-label="Next Lesson"
-                        :has-qa-video="videoButtons.hasQAVideo" 
+                        :has-qa-video="videoButtons.hasQAVideo"
                     />
 
                     <ContentProgress
@@ -258,9 +258,9 @@
         </div>
         <LessonComplete
             v-if="!isWorkout"
-            :lesson-content="lessonData" 
-            :this-lesson-json="lessonData" 
-            :next-lesson-json="nextPreviousLessons?.nextLesson" 
+            :lesson-content="lessonData"
+            :this-lesson-json="lessonData"
+            :next-lesson-json="nextPreviousLessons?.nextLesson"
         />
 
         <!-- Chapter Soundslice -->
@@ -361,7 +361,8 @@ const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.videoProps.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
-const mediaElementVueInstance = ref(null)
+const mediaElementVueInstance = ref(null);
+const contentId = ref(getContentId());
 
 const videoData = ref({});
 const likeData = ref({});
@@ -517,8 +518,11 @@ const likeContent = () => {
     }
 }
 
-const openCompletionModal = () => {
-    isCompletionModalOpen.value = true;
+const openCompletionModal = async () => {
+    const userData = await axios(`/challenges/lessons/${contentId.value}`);
+    console.log(userData)
+
+    // isCompletionModalOpen.value = true;
 }
 
 const closeCompletionModal = () => {
@@ -531,21 +535,20 @@ const isWorkout = computed( () => {
 
 onBeforeMount(async() => {
     console.log('videoProps.progressState', props.videoProps.progressState)
-    const contentId = getContentId();
 
-    const data = await fetchLessonContent(contentId);
+    const data = await fetchLessonContent(contentId.value);
     videoData.value = data;
 
-    const like = await axios.get(`/content/${contentId}/user_data/${userId.value}`);
+    const like = await axios.get(`/content/${contentId.value}/user_data/${userId.value}`);
     likeData.value = like?.data;
 
-    const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`);
-    isCompleted.value = completed?.data[contentId]?.state === 'completed';
+    const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`);
+    isCompleted.value = completed?.data[contentId.value]?.state === 'completed';
 
-    const nextPreviousLessonData = await fetchNextPreviousLesson(contentId);
+    const nextPreviousLessonData = await fetchNextPreviousLesson(contentId.value);
     nextPreviousLessons.value = nextPreviousLessonData;
 
-    const relatedLessonsData = await fetchRelatedLessons(contentId, brand.value);
+    const relatedLessonsData = await fetchRelatedLessons(contentId.value, brand.value);
     relatedLessons.value = relatedLessonsData.related_lessons;
 
     console.log('nextPreviousLessonData', nextPreviousLessons.value);
