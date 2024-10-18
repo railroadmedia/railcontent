@@ -288,11 +288,11 @@
 
     <section class="text-center px-5 py-10 lg:py-16" style="background: linear-gradient(90deg, #DAB3F8 0%, #8414E2 100%);">
         <div class="container mx-auto text-white flex flex-col items-center justify-center py-3">
-            <h1 class="leading-tight text-center tracking-tight">
+            <h2 class="leading-tight text-center tracking-tight">
                 <strong>
                     “One of the most incredible voices,  and an even better person”
                 </strong>
-            </h1>
+            </h2>
             <h5 class="italic">
                 ~ <strong>Adam Blackstone,</strong> songwriter, producer & musical director for Nicki Minaj and Justin Timberlake.
             </h5>
