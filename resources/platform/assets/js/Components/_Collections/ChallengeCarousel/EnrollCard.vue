@@ -128,50 +128,6 @@ const props = defineProps({
         type: String,
         default: 'community'
     },
-    contentType: {
-        type: String,
-        default: ''
-    },
-    title: {
-        type: String,
-        default: ''
-    },
-    description: {
-        type: String,
-        default: ''
-    },
-    ctaText: {
-        type: String,
-        default: ''
-    },
-    ctaUrl: {
-        type: String,
-        default: ''
-    },
-    videoUrl: {
-        type: String,
-        default: ''
-    },
-    bgImg: {
-        type: String,
-        default: ''
-    },
-    wideImg: {
-        type: String,
-        default: ''
-    },
-    squareImg: {
-        type: String,
-        default: ''
-    },
-    trackingSection: {
-        type: String,
-        default: ''
-    },
-    logo: {
-        type: String,
-        default: ''
-    }
 });
 
 const isSoloChallenge = computed(() => {
@@ -193,7 +149,7 @@ const labelText = computed(() => {
 const handleCta = async () => {
     try {
         //Get enrollment notification
-        // const notification = await axios.post(`/challenges/notifications/enrollment_open/`);
+        // const notification = await axios.post(`/challenges/notifications/enrollment_open/${id}`);
     } catch (e){
         window.shownotification({
             icon: 'error',
