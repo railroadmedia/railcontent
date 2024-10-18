@@ -465,7 +465,7 @@
 
             <h4 class="leading-tight text-pianote my-4"><i class="fas fa-arrow-down"></i></h4>
 
-            <h5 class="leading-tight"><strong><span class="text-pianote">STEP 3.</span><br>Hears the results. Way faster</strong></h5>
+            <h5 class="leading-tight"><strong><span class="text-pianote">STEP 3.</span><br>Hear the results. Way faster.</strong></h5>
             <p class="leading-tight my-5 px-6">The most important part of learning piano is building a daily habit. Practice a little each day, and you’ll be hearing the results way sooner (and so will everyone around you!).</p>
         </div>
         <div class="container max-w-5xl mx-auto">
