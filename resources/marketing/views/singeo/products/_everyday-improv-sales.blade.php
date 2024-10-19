@@ -451,7 +451,7 @@
                 ]
             ],
             'membershipSpecial' => [
-                'title' => 'Get Everyday Improv + 1 Year of Lessons With Singeo.',
+                'title' => 'Everyday Improv + 1 Year of Lessons',
                 'description' => '<strong>Unlimited Singeo courses for a year.</strong> Everything you need to become the singer you want to be.',
                 'price' => 240,
                 'discountedPrice' => 240,
@@ -489,9 +489,9 @@
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
-                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl  border-2 border-{{$theme}}" style="text-decoration:none;">
-                        <p class="border border-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-{{$theme}}">COURSE ONLY</p>
-                        <h2 class="text-black leading-tight mb-5"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h2>
+                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
+                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
+                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['courseOnly']['description'] !!}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
@@ -500,7 +500,7 @@
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @endif
                         <p class="inline-block text-sm text-black">One time payment.</p><br>
-                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>
+                        <div class="join bg-black smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="lg:leading-normal text-sm text-black text-center">
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
@@ -509,9 +509,9 @@
                         </p>
                     </a>
                     <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
-                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border border-[#ACACAC]" style="text-decoration:none;">
+                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border-2 border-{{$theme}}" style="text-decoration:none;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black uppercase">1 Year of lessons</p>
-                        <h2 class="text-black leading-tight mb-5"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h2>
+                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['membershipSpecial']['description'] !!}</p>
                         @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
