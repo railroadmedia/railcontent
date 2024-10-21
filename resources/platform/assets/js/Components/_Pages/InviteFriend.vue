@@ -24,7 +24,7 @@
                             <input type="hidden" name="form_name" value="Musora Referral">
                             <input type="hidden" name="inf_form_xid" value="MusoraEngagementTriggerReferWebForm">
                             <input type="hidden" name="brand" :value="brand">
-                            
+
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
@@ -90,7 +90,7 @@ async function handleSubmitPass(event) {
 
     if (userEmailInput.match(emailFormat)) {
         try {
-            const validationResponse = await axios.post(`/${brand}/referral/validate-email`, { email: userEmailInput });
+            const validationResponse = await axios.post(`/referral/validate-email`, { email: userEmailInput });
 
             if (validationResponse.data.exists && validationResponse.data.active) {
                 showModal('An account with this email address already exists. You can only gift access to new Musora students.');
