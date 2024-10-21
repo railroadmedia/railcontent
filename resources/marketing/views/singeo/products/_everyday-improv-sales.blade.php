@@ -8,11 +8,11 @@
 <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center py-80 md:py-48 lg:py-40">
         <div class="container mx-auto max-w-5xl capitalize">
-            <img alt="Everyday Improv Logo" class="h-16 sm:h-20 lg:h-24 my-4"
+            <img alt="Everyday Improv Logo" class="h-16 sm:h-20 lg:h-24"
                  src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg">
             <br>
-            <h1 class="leading-normal"><strong>Sing Freely With The Power<br class="hidden md:block"/>Of Vocal Improvisation</strong></h1>
-            <h6 class="italic leading-relaxed">30 Days of Guided Workouts Led By Emma Nissen For <br/> Beginner &amp; Intermediate Singers</h6>
+            <h1 class="leading-tight my-4"><strong>Sing Freely With The Power<br class="hidden md:block"/>Of Vocal Improvisation</strong></h1>
+            <h6 class="italic leading-tight">30 Days of Guided Workouts Led By Emma Nissen <br/> For Beginner &amp; Intermediate Singers</h6>
             <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
                 <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                      @click="trailer = true;">
@@ -35,9 +35,10 @@
             </h5> --}}
         </div>
     </div>
-    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
-   <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp">
-          <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp">
+
+    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgb(2 11 22 / 60%);"></div>
+    <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+        src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/singeo/products/everyday-improv/header.mp4"></video>
 </header>
 
  <section class="relative text-center px-4 sm:px-6 md:pt-20 lg:pt-32 bg-cover bg-center" style="background-color:#EFF4FB;">
@@ -56,18 +57,18 @@
                             ],
                             [
                                 'text' => '3.',
-                                'highlight' => 'Sing with a new found <br class="inline sm:hidden"> confidence'
+                                'highlight' => 'Sing with a new found  confidence'
                             ]
                         ];
                     @endphp
 
                     <div class="flex flex-wrap sm:flex-nowrap text-center shadow-xl rounded-xl relative" style="background:#DAB3F8">
-                        <div class="z-10 flex flex-wrap items-center justify-center w-full sm:w-auto sm:flex-grow py-4 sm:py-6 lg:px-16 text-left sm:text-center">
+                        <div class="z-10 flex flex-wrap items-center justify-center w-full sm:w-auto sm:flex-grow py-2 sm:py-6 sm:px-2 lg:px-16 text-left sm:text-center">
                             @foreach ($items as $index => $item)
-                                <div class="flex sm:block w-full sm:w-1/3 px-8 sm:px-0 mb-4 sm:mb-0">
-                                    <div class="flex flex-row items-center sm:px-4 md:px-8">
-                                        <h1 class="leading-tight font-bebas text-singeo mx-0 pb-1 text-5xl">{{ $item['text'] }}</h1>
-                                        <p class="md:leading-tight text-base sm:text-xs md:text-base font-black px-1 md:px-2 uppercase text-left">{!! $item['highlight'] !!}</p>
+                                <div class="flex sm:block w-full sm:w-1/3 my-3 sm:my-0 px-4 sm:px-2 lg:px-8">
+                                    <div class="flex flex-row items-center">
+                                        <h1 class="leading-none font-bebas text-singeo mx-0 text-5xl">{{ $item['text'] }}</h1>
+                                        <p class="leading-tight md:leading-tight text-base sm:text-xs md:text-base font-black pl-4 sm:pl-3 uppercase text-left">{!! $item['highlight'] !!}</p>
                                     </div>
                                 </div>
                             @endforeach
