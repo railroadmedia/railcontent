@@ -426,7 +426,7 @@
     <div class="edge-banner text-center">
         <div class="row">
             <p><strong> ** Every Book Includes A Drumeo
-                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$plusSubscriptionMonthlyFull }} Value) ** </strong></p>
+                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$plusSubscriptionMonthly }} Value) ** </strong></p>
         </div>
     </div>
 
@@ -491,7 +491,7 @@
             @include('_partials.components.question-dropdown', [
             "num" => "?",
             "title" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",
-            "desc" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."
+            "desc" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days."
             ])
         </div>
         <div class="row">
