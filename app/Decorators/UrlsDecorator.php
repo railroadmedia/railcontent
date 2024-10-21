@@ -133,9 +133,10 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
                 continue;
             }
 
-            $oldRequest = \Request::create($url);
-
-            if (!in_array($oldRequest->getHttpHost(), [
+            // we only need to format the URL if it's one of our domains
+            $parsedUrl = parse_url($url);
+            $host = $parsedUrl['host'] ?? null;
+            if (!in_array($host, [
                 'www.drumeo.com',
                 'www.pianote.com',
                 'www.singeo.com',
@@ -147,6 +148,8 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
             ])) {
                 continue;
             }
+
+            $oldRequest = \Request::create($url);
             if (!empty($oldRequest->segments())) {
                 $segments = $this->formatNewUrl($oldRequest->segments(), $url);
                 $urls[$match] = $segments;
