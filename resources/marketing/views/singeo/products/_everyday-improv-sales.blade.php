@@ -404,7 +404,7 @@
                         </div>
                         <div class="py-3 sm:py-4 lg:py-6 px-4 cursor-pointer text-left" x-on:click="open = !open;">
                             <p class="text-singeo uppercase text-left text-sm">{!! $week['weekNum'] !!}</p>
-                            <h5 class="leading-normal"><strong>{!! $week['title'] !!}</strong></h5>
+                            <h5 class="leading-normal capitalize"><strong>{!! $week['title'] !!}</strong></h5>
                             <p x-bind:class="open && 'mb-4'" class="leading-tight text-sm">{{--{!! $week['excerpt'] !!}--}} <span class="text-singeo inline-block" x-bind:class="open && 'hidden'">Read more...</span> </p>
                             <div x-cloak class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden" x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open }">
                                 <p class="leading-tight mb-4">{!! $week['desc'] !!}</p>
