@@ -817,4 +817,24 @@ class Content extends Model
 
         return $value;
     }
+
+    public function setChildId($value, $childPosition = 1)
+    {
+        $hierarhy =
+            ContentHierarchy::query()
+                ->where('parent_id', '=', $this->id)
+                ->where('child_id', '=', $value)
+                ->get();
+
+        if ($hierarhy->isEmpty()) {
+            $hierarhy = new ContentHierarchy();
+            $hierarhy->parent_id = $this->id;
+            $hierarhy->child_id = $value;
+            $hierarhy->child_position = $childPosition;
+            $hierarhy->created_on =
+                Carbon::now()
+                    ->toDateTimeString();
+            $hierarhy->save();
+        }
+    }
 }
