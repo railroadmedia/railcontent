@@ -91,8 +91,8 @@
                         <h6 class="mb-4 lg:mb-6 text-left"><strong>Without vocal improvisation, singers often:</strong></h6>
                         <ul class="space-y-4">
                             @foreach ([
-                                'Feel intimidated by the thought of creating melodies and rhythms without lyrics',
-                                'Feel insecure about singing the "wrong" note or out of key',
+                                'Feel intimidated by the thought of creating melodies and rhythms without lyrics.',
+                                'Feel insecure about singing the "wrong" note or out of key.',
                                 'Struggle to find the right notes over a chord progression.'
                             ] as $item)
                                 <li class="flex items-start pb-3">
