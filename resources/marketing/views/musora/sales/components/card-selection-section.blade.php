@@ -71,8 +71,8 @@
                     <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif" aria-label="Annual Plan">
                         <div class="bg-white px-3 py-6 md:py-9">
                             <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
-                            <h4 class="inline-block leading-tight"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
-                            <p class="text-sm"><em>Billed at ${{200}} per year.</em></p>
+                            <h4 class="inline-block leading-tight"><strong>${{ number_format(Prices::$baseSubscriptionAnnual / 12, 2) }}/month</strong></h4>
+                            <p class="text-sm"><em>Billed at ${{Prices::$baseSubscriptionAnnual}} per year.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">Free for 7 days</div>
                             <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
                             <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
@@ -89,7 +89,7 @@
                     <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif" aria-label="Monthly Plan">
                         <div class="bg-white px-3 py-5 md:py-7">
                             <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
-                            <h4 class="inline-block leading-tight"><strong>${{ 25 }}/month</strong></h4>
+                            <h4 class="inline-block leading-tight"><strong>${{ Prices::$baseSubscriptionMonthly }}/month</strong></h4>
                             <p class="text-sm"><em>Pay as you go.</em></p>
                             <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0">Free for 7 days</div>
                             <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>

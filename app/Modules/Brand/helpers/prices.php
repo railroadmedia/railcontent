@@ -4,8 +4,9 @@ class Prices
 {
     public static $plusSubscriptionAnnualFull = 240;
     public static $plusSubscriptionAnnual = 240;
-    public static $plusSubscriptionMonthlyFull = 30;
-    public static $plusSubscriptionMonthly = 30;
+    public static $plusSubscriptionMonthly = 40;
+    public static $baseSubscriptionAnnual = 200;
+    public static $baseSubscriptionMonthly = 33.33;
 
     //Content Counts
     public static $students = 100258;
