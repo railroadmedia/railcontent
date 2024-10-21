@@ -275,18 +275,16 @@
     <div id="order" class="anchor"></div>
 
     @if(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "300+ popular songs.",
-            "firstPoint" => "Unlimited singing lessons.",
-            "thirdPoint" => "Direct access to vocal coaches.",
-            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+            "orderUrl" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'singing',
@@ -311,17 +309,15 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
                 'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
 
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'singing',
         ])
     @endif
 

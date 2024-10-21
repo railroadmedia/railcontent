@@ -495,6 +495,7 @@
         @yield('final')
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.order-section-collage', [
+        'orderUrl' => '/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true',
         'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
         'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
@@ -535,16 +536,14 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
-        'header' => 'Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
+        'header' => '<strong>Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'drumming',
         ])
     @endif
 

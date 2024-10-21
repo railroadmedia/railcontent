@@ -41,7 +41,7 @@
                             {!! $list !!}
                         </ul>
                     @else
-                        <p class="text-left mt-4 sm:mt-5 mb-3">Free access for 7 days, then $240 per year.</p>
+                        <p class="text-left mt-4 sm:mt-5 mb-3 font-black">Free access for 7 days, then $240 per year.</p>
                         <ul class="fa-ul text-left pl-6 mb-4 sm:mb-5 mx-auto inline-block">
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> Cancel anytime.</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> 90-Day Money Back Guarantee beyond your trial.</li>
