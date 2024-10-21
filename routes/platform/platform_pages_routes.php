@@ -398,11 +398,6 @@ Route::domain('{musoraDomain}')
                             ->whereIn('brand', all_brands())
                             ->name('platform.invite-a-friend');
                     });
-
-                Route::post('/{brand}/referral/validate-email', [ReferralPagesController::class, 'validateEmail'])
-                ->whereIn('brand', all_brands())
-                ->name('platform.validate-email');
-        
             });
 
         // anyone even without pack or a membership can access these

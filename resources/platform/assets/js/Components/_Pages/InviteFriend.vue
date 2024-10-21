@@ -96,7 +96,6 @@ async function handleSubmitPass(event) {
                 showModal('An account with this email address already exists. You can only gift access to new Musora students.');
                 return;
             }
-
             const response = await axios.post("/customer-io/submit-email-form", {
                 email: userEmailInput,
                 referrer,
@@ -111,7 +110,6 @@ async function handleSubmitPass(event) {
                 showModal("Please try again later.");
             }
         } catch (error) {
-            console.error('Error:', error);
             showModal("Please try again later.");
         }
     } else {

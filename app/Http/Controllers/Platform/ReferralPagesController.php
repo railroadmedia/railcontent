@@ -1,24 +1,27 @@
 <?php
+
 namespace App\Http\Controllers\Platform;
+
 use App\Http\Controllers\BaseController;
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\Referral\Services\ReferralService;
 use Avo;
 use Exception;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use App\Modules\Referral\Services\ReferralService;
+
 class ReferralPagesController extends BaseController
 {
     private ReferralService $referralService;
+
     public function __construct(ReferralService $referralService)
     {
         $this->referralService = $referralService;
     }
+
     public function inviteAFriend(Request $request): Factory|View|Application
     {
         $user = user();
@@ -28,6 +31,7 @@ class ReferralPagesController extends BaseController
             config('referral.saasquatch_referral_program_id.' . $brand),
             $brand
         );
+
         try {
             Avo::referral_page_viewed(
                 AvoHelper::defaultEventProperties(
@@ -39,24 +43,7 @@ class ReferralPagesController extends BaseController
             // Do not block user flow if event tracking fails
             Log::error($e->getMessage());
         }
-        return view(
-            'referral.invite-friend',
-            [
-                // 'recaptchaKey' => config('recaptcha.key'),
-                // 'userReferralCode' => $referrer->referral_code,
-                // 'canRefer' => $this->referralService->canRefer($referrer),
-            ]
-        );
+
+        return view('referral.invite-friend');
     }
-    
-    public function validateEmail(Request $request)
-    {
-        $email = $request->input('email');
-        $result = $this->referralService->validateEmail($email);
-        
-        Log::info('Email validation result:', $result);
-        
-        return response()->json($result);
-    }
- 
 }

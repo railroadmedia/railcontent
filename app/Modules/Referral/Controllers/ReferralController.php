@@ -11,7 +11,7 @@ use App\Modules\Referral\Requests\EmailInviteRequest;
 use App\Modules\Referral\Services\ReferralService;
 use Avo;
 use Illuminate\Support\Facades\Log;
-use Request;
+use Illuminate\Http\Request;
 
 class ReferralController extends Controller
 {
@@ -77,8 +77,6 @@ class ReferralController extends Controller
     {
         $email = $request->input('email');
         $result = $this->referralService->validateEmail($email);
-
-        Log::info('Email validation result:', $result);
 
         return response()->json($result);
     }
