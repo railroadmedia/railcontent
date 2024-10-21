@@ -1,5 +1,5 @@
 @php
-    $buttonLink = '/ecommerce/add-to-cart?products[everyday-improv]=1'; 
+    $buttonLink = '/ecommerce/add-to-cart?products[everyday-improv]=1';
     $fullPrice  = 97;
     $price = 97;
 @endphp
@@ -60,14 +60,14 @@
                             ]
                         ];
                     @endphp
-            
+
                     <div class="flex flex-wrap sm:flex-nowrap text-center shadow-xl rounded-xl relative" style="background:#DAB3F8">
                         <div class="z-10 flex flex-wrap items-center justify-center w-full sm:w-auto sm:flex-grow py-4 sm:py-6 lg:px-16 text-left sm:text-center">
                             @foreach ($items as $index => $item)
                                 <div class="flex sm:block w-full sm:w-1/3 px-8 sm:px-0 mb-4 sm:mb-0">
                                     <div class="flex flex-row items-center sm:px-4 md:px-8">
-                                        <h1 class="leading-tight font-bebas font-medium text-singeo mx-0 pb-1 text-5xl">{{ $item['text'] }}</h1>
-                                        <p class="text-base sm:text-xs md:text-base font-black px-1 md:px-2 uppercase text-left font-bold">{!! $item['highlight'] !!}</p>
+                                        <h1 class="leading-tight font-bebas text-singeo mx-0 pb-1 text-5xl">{{ $item['text'] }}</h1>
+                                        <p class="md:leading-tight text-base sm:text-xs md:text-base font-black px-1 md:px-2 uppercase text-left">{!! $item['highlight'] !!}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -88,7 +88,7 @@
                 </div>
                 <div class="grid sm:grid-cols-2 gap-6 md:gap-8">
                     <div class="p-6 sm:p-4 md:p-12 rounded-xl bg-[#DEE5EF]">
-                        <h6 class="mb-4 lg:mb-6 tracking-tight text-left"><strong>Without vocal improvisation, singers often:</strong></h6>
+                        <h6 class="mb-4 lg:mb-6 text-left"><strong>Without vocal improvisation, singers often:</strong></h6>
                         <ul class="space-y-4">
                             @foreach ([
                                 'Feel intimidated by the thought of creating melodies and rhythms without lyrics',
@@ -103,7 +103,7 @@
                         </ul>
                     </div>
                     <div class="p-4 sm:p-2 md:p-12 bg-white rounded-xl">
-                        <h6 class="mb-4 lg:mb-6 tracking-tight text-left"><strong>With vocal improvisation, you will:</strong></h6>
+                        <h6 class="mb-4 lg:mb-6 text-left"><strong>With vocal improvisation, you will:</strong></h6>
                         <ul class="space-y-4">
                             @foreach ([
                                 'Feel comfortable with making decision in the heat of the moment.',
@@ -160,7 +160,7 @@
                         @if ($getting['position'] === 'right')
                             <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-24 mb-16 md:mb-20">
                                 <div class="content relative text-left md:pr-10">
-                                    <h6 class="leading-normal">{!! $getting['desc'] !!}</h6>                            
+                                    <h6 class="leading-normal">{!! $getting['desc'] !!}</h6>
                                 </div>
                                 @if (!empty($getting['special']))
                                     <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
@@ -230,14 +230,14 @@
                     @foreach ($learners as $learner)
                         <div class="w-full sn:w-2/3 md:w-full flex flex-col bg-white rounded-xl">
                             <div class="md:aspect-[4/3] relative rounded-xl overflow-hidden">
-                                <img 
+                                <img
                                 src="{{ $learner['image'] }}"
                                 alt="{{ $learner['alt'] }}"
                                 class="w-full h-full object-cover"
                                 />
                             </div>
-                            <div class="tracking-normal">
-                                <h6 class="py-2 font-semibold leading-snug">{!! $learner['title'] !!}</h6>
+                            <div class="">
+                                <h6 class="py-2 font-black leading-snug">{!! $learner['title'] !!}</h6>
                                 <p class="pr-8 leading-normal">{!! $learner['description'] !!}<p>
                             </div>
                         </div>
@@ -251,15 +251,15 @@
         <div class="container sm:max-w-xl md:max-w-4xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12">
             <div class="w-full md:w-1/2 md:text-right">
-                <img 
-                class="h-24 sm:h-28 lg:h-40 transition-opacity opacity-0 mx-auto" 
+                <img
+                class="h-24 sm:h-28 lg:h-40 transition-opacity opacity-0 mx-auto"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg"
                 alt="Everyday Improv Logo"
                 />
             </div>
-            
+
             <div class="w-full sm:w-1/2 flex flex-col gap-4">
                 <ul class="text-center md:text-left space-y-4">
                 @php
@@ -269,7 +269,7 @@
                     'Flexible weekly schedule',
                     ];
                 @endphp
-                
+
                 @foreach ($features as $feature)
                 <li class="flex items-start gap-4">
                     <i class="fas fa-check text-{{$theme}} text-xl"></i>
@@ -281,13 +281,13 @@
             </div>
         </div>
         <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>
-        <p class="text-lg font-semibold mt-4">Only $97</p>
+        <p class="text-lg font-black mt-4">Only $97</p>
     </section>
 
 
     <section class="text-center px-4 py-6 sm:py-10 lg:py-16" style="background: linear-gradient(90deg, #DAB3F8 0%, #8414E2 100%);">
         <div class="container mx-auto text-white flex flex-col items-center justify-center py-3">
-            <h2 class="leading-tight text-center tracking-tight">
+            <h2 class="leading-tight text-center">
                 <strong>
                     “One of the most incredible voices, and <br class="hidden sm:inline lg:hidden"/> an even better person”
                 </strong>
@@ -312,10 +312,10 @@
                 >
             </picture>
             <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/coach-m-2.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
-        
+
             <div class="container mx-auto max-w-4xl p-4 md:p-6 -mt-96 md:-mt-52 lg:-mt-56 lg:-mt-72 text-left">
                 <div class="flex flex-col justify-center items-center">
-                    <p class="uppercase tracking-wider font-light text-xs md:text-sm">MEET YOUR INSTRUCTOR</p>
+                    <p class="uppercase text-xs md:text-sm">MEET YOUR INSTRUCTOR</p>
                     <h1 class="text-3xl md:text-4xl mb-4 text-[#F8F8F8]"><strong>Emma Nissen</strong></h1>
                 </div>
                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 md:pt-6">
@@ -330,16 +330,16 @@
             </div>
             <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] py-4" href="#customize-anchor">GET STARTED</a>
         </div>
-        
+
         <div class="container mx-auto max-w-5xl py-4 px-4 md:px-6 pb-10">
-            <h5 class="uppercase text-center my-4 md:my-8 font-semibold color-[#E3E3E3]">See Emma in Action</h5>
+            <h5 class="uppercase text-center my-4 md:my-8 font-black color-[#E3E3E3]">See Emma in Action</h5>
             <div class="grid grid-cols-1 gap-4 sm:gap-6 mx-auto w-full md:w-1/2">
                 <div class="relative">
                     <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="blueNote = true;" role="button">
                         <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" data-src="" type="video/mp4" autoplay loop playsinline muted></video>
                         <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/singeo/products/everyday-improv/thumb-01.webp" alt="Thumbnail for piano technique tutorial video"/>
                     </div>
-                    <p class="pt-2 text-left tracking-tight"><strong>Emma Nissen at Blue Note New York with Adam Blackstone</strong></p>
+                    <p class="pt-2 text-left"><strong>Emma Nissen at Blue Note New York with Adam Blackstone</strong></p>
                 </div>
                 {{-- <div class="relative">
                     <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="danceOfEternity = true;" role="button">
@@ -351,7 +351,7 @@
                 </div> --}}
             </div>
         </div>
-        
+
         <div class="container mx-auto max-w-6xl px-6 md:px-10">
             <h2 class="leading-none text-center pb-4 md:py-8 capitalize"><strong>Get in on the buzz.</strong></h2>
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Everyday Improv Logo">
@@ -361,7 +361,7 @@
             <h2 class="leading-normal pt-4 text-center capitalize"><strong>Vocal Improvisation Made Simple.</strong></h2>
             <div class="aspect-16:9 cursor-pointer rounded-xl my-7 autoplay-video overflow-hidden w-full relative" x-on:click="kickOff = true;" role="button">
                 {{-- <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i> --}}
-                <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" 
+                <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/course-kick.webp" alt="Thumbnail for tutorial video"/>
             </div>
                        @php
@@ -474,9 +474,9 @@
                         @foreach ($courseDetails['features'] as $index => $feature)
                             <div class="flex flex-row items-center space-x-2 sm:space-x-3 mt-2 sm:mt-5 lg:pr-8">
                                 <div class="flex items-center justify-center">
-                                    <span class="font-medium text-xl md:text-2xl text-{{ $theme }} font-bebas">{{ $index + 1 }}.</span>
+                                    <span class="text-xl md:text-2xl text-{{ $theme }} font-bebas">{{ $index + 1 }}.</span>
                                 </div>
-                                <p class="leading-normal md:leading-loose tracking-normal">
+                                <p class="leading-normal md:leading-loose">
                                     {{ $feature }}
                                 </p>
                             </div>
@@ -486,13 +486,13 @@
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
-                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
-                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
+                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 text-black">COURSE ONLY</p>
+                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['courseOnly']['description'] !!}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @else
-                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @endif
                         <p class="inline-block text-sm text-black">One time payment.</p><br>
@@ -506,13 +506,13 @@
                     </a>
                     <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
                        class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border-2 border-{{$theme}}" style="text-decoration:none;">
-                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black uppercase">1 Year of lessons</p>
-                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
+                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 text-black uppercase">1 Year of lessons</p>
+                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['membershipSpecial']['description'] !!}</p>
                         @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
                         @else
-                            <h2 class="inline-block text-black opacity-40 font-light text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
+                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
                         @endif
                         <p class="inline-block text-sm text-black">per year</p><br>
@@ -576,7 +576,7 @@
             </div>
         </div>
     </section>
-   
+
     @include('_partials.components.video-modal', [
     'name' => 'trailer',
     'video' => '1018831162',
