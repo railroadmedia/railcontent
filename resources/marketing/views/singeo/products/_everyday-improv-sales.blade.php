@@ -252,7 +252,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12">
             <div class="w-full md:w-1/2 md:text-right">
                 <img 
-                class="h-24 sm:h-28 lg:h-48 transition-opacity opacity-0 mx-auto" 
+                class="h-24 sm:h-28 lg:h-40 transition-opacity opacity-0 mx-auto" 
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg"
@@ -260,20 +260,20 @@
                 />
             </div>
             
-            <div class="w-full md:w-1/2 flex flex-col gap-4">
-                <ul class="text-left space-y-4">
+            <div class="w-full sm:w-1/2 flex flex-col gap-4">
+                <ul class="text-center md:text-left space-y-4">
                 @php
                     $features = [
-                    'Learn to sing over any song or chord progression even if you\'re not familiar with it.',
-                    'Develop confidence to explore singing freely & discover your style.',
-                    'Confidently craft your melodies in the heat of the moment.',
+                    'Daily guided Singing workouts',
+                    'Weekly LIVE Q&A workshops',
+                    'Flexible weekly schedule',
                     ];
                 @endphp
                 
                 @foreach ($features as $feature)
                 <li class="flex items-start gap-4">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/arrow-icon.svg" class="w-4 h-4 mt-1 mr-2 flex-shrink-0" alt="Arrow Icon">
-                    <h6 class="leading-normal m-0">{{ $feature }}</h6>
+                    <i class="fas fa-check text-{{$theme}} text-xl"></i>
+                    <h5 class="leading-normal m-0">{{ $feature }}</h5>
                 </li>
                 @endforeach
                 </ul>
@@ -353,7 +353,7 @@
         </div>
         
         <div class="container mx-auto max-w-6xl px-6 md:px-10">
-            <h2 class="leading-none text-center pb-4 md:py-8"><strong>Get in on the buzz.</strong></h2>
+            <h2 class="leading-none text-center pb-4 md:py-8 capitalize"><strong>Get in on the buzz.</strong></h2>
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Everyday Improv Logo">
         </div>
 
@@ -419,8 +419,6 @@
         </div>
     </section>
 
-
-
      @include('musora.sales.components.guarantee-section-custom', [
         'badge' => 'marketing/singeo/membership/homepage/webp-format/singeo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
@@ -474,22 +472,17 @@
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg" alt="Improv Logo" class="w-1/2 sm:w-1/3 lg:w-full mb-1">
                     <div class="w-full mx-auto sm:mx-0 text-left sm:px-10 md:px-28 lg:px-0">
                         @foreach ($courseDetails['features'] as $index => $feature)
-                            <div class="flex flex-row justify-start items-start space-x-2 sm:space-x-3 mt-2 sm:mt-5 lg:pr-8">
-                                    @if ($index == 0)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/01-icon.svg" alt="Icon number 1" class="w-5">
-                                    @elseif ($index == 1)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/02-icon.svg" alt="Icon number 2" class="w-5">
-                                    @elseif ($index == 2)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/03-icon.svg" alt="Icon number 3" class="w-5">
-                                    @endif
-                                <p class="leading-loose tracking-normal">
+                            <div class="flex flex-row items-center space-x-2 sm:space-x-3 mt-2 sm:mt-5 lg:pr-8">
+                                <div class="flex items-center justify-center">
+                                    <span class="font-medium text-xl md:text-2xl text-{{ $theme }} font-bebas">{{ $index + 1 }}.</span>
+                                </div>
+                                <p class="leading-normal md:leading-loose tracking-normal">
                                     {{ $feature }}
                                 </p>
                             </div>
                         @endforeach
                     </div>
                 </div>
-
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
@@ -586,13 +579,13 @@
    
     @include('_partials.components.video-modal', [
     'name' => 'trailer',
-    'video' => '1010405112',
+    'video' => '1018831162',
     'vimeo' => true,
     ])
 
     @include('_partials.components.video-modal', [
         'name' => 'trailerM',
-        'video' => '999638868',
+        'video' => '1018831162',
         'vimeo' => true,
         'styles' => 'pb-[177%] bg-white',
     ])
