@@ -94,3 +94,12 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'notificationsCommunityReminders']
         )->name('challenges.notifications.community_reminders');
     });
+
+Route::prefix('playlists')
+    ->middleware('web_or_api_authenticated')
+    ->group(function () {
+        Route::get(
+            'all/{user?}',
+            [\App\Modules\Content\Controllers\PlaylistsMetadataController::class, 'getUserPlaylists']
+        )->name('playlists.catalog');
+    });
