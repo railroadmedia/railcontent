@@ -5,8 +5,8 @@
 @endphp
 
 
-<header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
-    <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+<header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
+    <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center py-80 md:py-48 lg:py-40">
         <div class="container mx-auto max-w-5xl capitalize">
             <img alt="Everyday Improv Logo" class="h-16 sm:h-20 lg:h-24 my-4"
                  src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg">
@@ -22,7 +22,7 @@
                      x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                     &nbsp;Watch Trailer
                 </div>
-                <a class="w-full sm:w-5/12 join smaller text-white my-2 sm:m-2" href="#customize-anchor">GET STARTED</a>
+                <a class="w-full sm:w-5/12 join smaller text-white my-2 sm:m-2 anchor-slide" href="#customize-anchor">GET STARTED</a>
             </div>
             {{-- <h5>Only
                 @if($price > $fullPrice)
@@ -36,19 +36,19 @@
         </div>
     </div>
     <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
-    <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
-           src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
+   <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp">
+          <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header.webp">
 </header>
 
  <section class="relative text-center px-4 sm:px-6 md:pt-20 lg:pt-32 bg-cover bg-center" style="background-color:#EFF4FB;">
         <div class="pt-4 md:pt-0">
-            <div class="container max-w-5xl mx-auto mb-20 -mt-20 md:-mt-36 lg:-mt-48 z-20 relative flex justify-center items-center">
+            <div class="container max-w-5xl mx-auto mb-20 -mt-20 md:-mt-28 lg:-mt-48 z-20 relative flex justify-center items-center">
                 <div class="px-5 lg:px-0">
                     @php
                         $items = [
                             [
                                 'text' => '1.',
-                                'highlight' => 'Watch A Lesson a day for 30 days.'
+                                'highlight' => 'Watch A Lesson a day <br class="inline sm:hidden">for 30 days.'
                             ],
                             [
                                 'text' => '2.',
@@ -56,7 +56,7 @@
                             ],
                             [
                                 'text' => '3.',
-                                'highlight' => 'Sing with a new found confidence'
+                                'highlight' => 'Sing with a new found <br class="inline sm:hidden"> confidence'
                             ]
                         ];
                     @endphp
@@ -67,7 +67,7 @@
                                 <div class="flex sm:block w-full sm:w-1/3 px-8 sm:px-0 mb-4 sm:mb-0">
                                     <div class="flex flex-row items-center sm:px-4 md:px-8">
                                         <h1 class="leading-tight font-bebas font-medium text-singeo mx-0 pb-1 text-5xl">{{ $item['text'] }}</h1>
-                                        <p class="text-xs lg:text-base font-black px-1 md:px-2 uppercase text-left font-bold">{!! $item['highlight'] !!}</p>
+                                        <p class="text-base sm:text-xs md:text-base font-black px-1 md:px-2 uppercase text-left font-bold">{!! $item['highlight'] !!}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -86,8 +86,8 @@
                     <p>Most singers love to sing along with their favorite songs.</p>
                     <p>But what happens when you're asked to sing without a guide? Many singers struggle <br class="hidden md:block"/>to find the right notes or create melodies on the spot.</p>
                 </div>
-                <div class="grid sm:grid-cols-2 md:gap-8">
-                    <div class="p-4 sm:p-2 md:p-9">
+                <div class="grid sm:grid-cols-2 gap-6 md:gap-8">
+                    <div class="p-6 sm:p-4 md:p-12 rounded-xl bg-[#DEE5EF]">
                         <h6 class="mb-4 lg:mb-6 tracking-tight text-left"><strong>Without vocal improvisation, singers often:</strong></h6>
                         <ul class="space-y-4">
                             @foreach ([
@@ -95,14 +95,14 @@
                                 'Feel insecure about singing the "wrong" note or out of key',
                                 'Struggle to find the right notes over a chord progression.'
                             ] as $item)
-                                <li class="flex items-start">
+                                <li class="flex items-start pb-3">
                                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/cross-icon.svg" class="w-4 h-4 mt-1 mr-2 flex-shrink-0" alt="Cross Icon">
                                     <p class="text-left m-0 leading-tight">{{ $item }}</p>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                    <div class="p-4 sm:p-2 md:p-9">
+                    <div class="p-4 sm:p-2 md:p-12 bg-white rounded-xl">
                         <h6 class="mb-4 lg:mb-6 tracking-tight text-left"><strong>With vocal improvisation, you will:</strong></h6>
                         <ul class="space-y-4">
                             @foreach ([
@@ -110,7 +110,7 @@
                                 'Sing with confidence knowing they can overcome any "wrong" note and make it right.',
                                 'Identify notes, rhythms, and melodies over any given song or chord progression.'
                             ] as $item)
-                                <li class="flex items-start">
+                                <li class="flex items-start pb-3">
                                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/arrow-icon.svg" class="w-4 h-4 mt-1 mr-2 flex-shrink-0" alt="Arrow Icon">
                                     <p class="text-left m-0 leading-tight">{{ $item }}</p>
                                 </li>
@@ -129,12 +129,12 @@
                 $gettings = [
                     [
                         'position' => 'left',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/placeholder.jpg',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/timeline-01.webp',
                         'desc' => '<strong>Find your range</strong> so that you can comfortably improvise within it.',
                     ],
                     [
                         'position' => 'right',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/placeholder.jpg',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/timeline-02.webp',
                         'title' => 'Match pitch to single notes and chords',
                         'desc' => '<strong>Match pitch to single notes and chords</strong> to make finding the right note feel like second nature.',
                     ],
@@ -145,7 +145,7 @@
                     ],
                     [
                         'position' => 'right',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/placeholder.jpg',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/timeline-04.webp',
                         'desc' => '<strong>Master scat improv</strong> with fun syllables, rhythms, and dynamics to improve your ability to find melodies.',
                     ],
                     [
@@ -252,7 +252,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12">
             <div class="w-full md:w-1/2 md:text-right">
                 <img 
-                class="h-24 sm:h-28 lg:h-48 transition-opacity opacity-0 mx-auto" 
+                class="h-24 sm:h-28 lg:h-40 transition-opacity opacity-0 mx-auto" 
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg"
@@ -260,20 +260,20 @@
                 />
             </div>
             
-            <div class="w-full md:w-1/2 flex flex-col gap-4">
-                <ul class="text-left space-y-4">
+            <div class="w-full sm:w-1/2 flex flex-col gap-4">
+                <ul class="text-center md:text-left space-y-4">
                 @php
                     $features = [
-                    'Learn to sing over any song or chord progression even if you\'re not familiar with it.',
-                    'Develop confidence to explore singing freely & discover your style.',
-                    'Confidently craft your melodies in the heat of the moment.',
+                    'Daily guided Singing workouts',
+                    'Weekly LIVE Q&A workshops',
+                    'Flexible weekly schedule',
                     ];
                 @endphp
                 
                 @foreach ($features as $feature)
                 <li class="flex items-start gap-4">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/arrow-icon.svg" class="w-4 h-4 mt-1 mr-2 flex-shrink-0" alt="Arrow Icon">
-                    <h6 class="leading-normal m-0">{{ $feature }}</h6>
+                    <i class="fas fa-check text-{{$theme}} text-xl"></i>
+                    <h5 class="leading-normal m-0">{{ $feature }}</h5>
                 </li>
                 @endforeach
                 </ul>
@@ -318,22 +318,22 @@
                     <p class="uppercase tracking-wider font-light text-xs md:text-sm">MEET YOUR INSTRUCTOR</p>
                     <h1 class="text-3xl md:text-4xl mb-4 text-[#F8F8F8]"><strong>Emma Nissen</strong></h1>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 md:pt-6">
-                    <div class="md:py-4">
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 md:pt-6">
+            <div class="md:py-4">
                         <p class="mb-4"><strong>Emma Nissen</strong> is a jazz-pop phenom <strong>known for her ability to scat and improvise in a unique modern jazz style.</strong> Her videos of this on Instagram have amassed over <strong>100 million views,</strong> taking her Instagram to over 500k followers.</p>
                         <p class="mb-4">She has become recognized by the likes of Lauren Daigle, SZA, Meghan Trainor, Queen Latifah, and long-time Rihanna, Maroon 5, and Justin Timberlake collaborator, <strong>Emmy and Grammy winner Adam Blackstone.</strong></p>
-                    </div>
-                    <div class="md:py-4">
+            </div>
+                <div class="md:py-4">
                         <p class="mb-4">Emma has gone on to perform with Adam & his world-class band at the famed NYC jazz club, The Blue Note. This led to the chance to work alongside Adam and other industry titans like Grammy, Dove, and Billboard award winner Seth Mosley, Grammy award nominee Nate Pyfer, and acclaimed producer Stephen Nelson in the recording studio.</p>
-                    </div>
                 </div>
+            </div>
             </div>
             <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] py-4" href="#customize-anchor">GET STARTED</a>
         </div>
         
         <div class="container mx-auto max-w-5xl py-4 px-4 md:px-6 pb-10">
             <h5 class="uppercase text-center my-4 md:my-8 font-semibold color-[#E3E3E3]">See Emma in Action</h5>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div class="grid grid-cols-1 gap-4 sm:gap-6 mx-auto w-full md:w-1/2">
                 <div class="relative">
                     <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="blueNote = true;" role="button">
                         <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" data-src="" type="video/mp4" autoplay loop playsinline muted></video>
@@ -341,19 +341,19 @@
                     </div>
                     <p class="pt-2 text-left tracking-tight"><strong>Emma Nissen at Blue Note New York with Adam Blackstone</strong></p>
                 </div>
-                <div class="relative">
+                {{-- <div class="relative">
                     <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="danceOfEternity = true;" role="button">
                         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>
                         <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" data-src="" type="video/mp4" autoplay loop playsinline muted></video>
                         <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/placeholder.jpg" alt="Thumbnail for piano technique tutorial video "/>
                     </div>
                     <p class="pt-2 text-left traking-tight"><strong>Emma Nissen Uncovered Ep</strong></p>
-                </div>
+                </div> --}}
             </div>
         </div>
         
         <div class="container mx-auto max-w-6xl px-6 md:px-10">
-            <h2 class="leading-none text-center pb-4 md:py-8"><strong>Get in on the buzz.</strong></h2>
+            <h2 class="leading-none text-center pb-4 md:py-8 capitalize"><strong>Get in on the buzz.</strong></h2>
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Everyday Improv Logo">
         </div>
 
@@ -364,7 +364,7 @@
                 <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" 
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/course-kick.webp" alt="Thumbnail for tutorial video"/>
             </div>
-            @php
+                       @php
                 $weeks = [
                     [
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/singeo/products/everyday-improv/week-01.webp',
@@ -419,11 +419,12 @@
         </div>
     </section>
 
-
-
-     @include('musora.sales.components.guarantee-section', [
+     @include('musora.sales.components.guarantee-section-custom', [
         'badge' => 'marketing/singeo/membership/homepage/webp-format/singeo-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
+        'backgroundColor' => '#EFF4FB',
+        'textColor' => '#000',
+        'hasGradient' => false,
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence to share your voice with the world.',
     ])
 
@@ -451,7 +452,7 @@
                 ]
             ],
             'membershipSpecial' => [
-                'title' => 'Get Everyday Improv + 1 Year of Lessons With Singeo.',
+                'title' => 'Everyday Improv + 1 Year of Lessons',
                 'description' => '<strong>Unlimited Singeo courses for a year.</strong> Everything you need to become the singer you want to be.',
                 'price' => 240,
                 'discountedPrice' => 240,
@@ -471,27 +472,22 @@
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/header-logo.svg" alt="Improv Logo" class="w-1/2 sm:w-1/3 lg:w-full mb-1">
                     <div class="w-full mx-auto sm:mx-0 text-left sm:px-10 md:px-28 lg:px-0">
                         @foreach ($courseDetails['features'] as $index => $feature)
-                            <div class="flex flex-row justify-start items-start space-x-2 sm:space-x-3 mt-2 sm:mt-5 lg:pr-8">
-                                    @if ($index == 0)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/01-icon.svg" alt="Icon number 1" class="w-5">
-                                    @elseif ($index == 1)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/02-icon.svg" alt="Icon number 2" class="w-5">
-                                    @elseif ($index == 2)
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/03-icon.svg" alt="Icon number 3" class="w-5">
-                                    @endif
-                                <p class="leading-loose tracking-normal">
+                            <div class="flex flex-row items-center space-x-2 sm:space-x-3 mt-2 sm:mt-5 lg:pr-8">
+                                <div class="flex items-center justify-center">
+                                    <span class="font-medium text-xl md:text-2xl text-{{ $theme }} font-bebas">{{ $index + 1 }}.</span>
+                                </div>
+                                <p class="leading-normal md:leading-loose tracking-normal">
                                     {{ $feature }}
                                 </p>
                             </div>
                         @endforeach
                     </div>
                 </div>
-
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
                     <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
-                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl  border-2 border-{{$theme}}" style="text-decoration:none;">
-                        <p class="border border-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-{{$theme}}">COURSE ONLY</p>
-                        <h2 class="text-black leading-tight mb-5"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h2>
+                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
+                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
+                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['courseOnly']['description'] !!}</p>
                         @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
@@ -500,7 +496,7 @@
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
                         @endif
                         <p class="inline-block text-sm text-black">One time payment.</p><br>
-                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>
+                        <div class="join bg-black smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="lg:leading-normal text-sm text-black text-center">
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
@@ -508,10 +504,10 @@
                             @endforeach
                         </p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?products[singeo-base-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
-                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border border-[#ACACAC]" style="text-decoration:none;">
+                    <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
+                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border-2 border-{{$theme}}" style="text-decoration:none;">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black uppercase">1 Year of lessons</p>
-                        <h2 class="text-black leading-tight mb-5"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h2>
+                        <h3 class="text-black leading-tight mb-5 tracking-tight pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
                         <p class="text-sm mb-5 text-black">{!! $courseDetails['membershipSpecial']['description'] !!}</p>
                         @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
                             <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
@@ -583,13 +579,13 @@
    
     @include('_partials.components.video-modal', [
     'name' => 'trailer',
-    'video' => '1010405112',
+    'video' => '1018831162',
     'vimeo' => true,
     ])
 
     @include('_partials.components.video-modal', [
         'name' => 'trailerM',
-        'video' => '999638868',
+        'video' => '1018831162',
         'vimeo' => true,
         'styles' => 'pb-[177%] bg-white',
     ])
