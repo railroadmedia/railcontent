@@ -590,11 +590,12 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 } elseif ($hierarchy->child->type == 'assignment') {
                     unset($songs['child_count']);
                         $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
+                    $assignmentSheetMusicImage = $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray();
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
                         'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
                         'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
-                        'assignment_sheet_music_image' => $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->first()['value'] ?? '',
+                        'assignment_sheet_music_image' => $assignmentSheetMusicImage,
                         'railcontent_id'               => $hierarchy->child->id,
                     ];
                 }
