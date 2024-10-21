@@ -355,7 +355,8 @@
 
         <div class="container mx-auto max-w-6xl px-6 md:px-10">
             <h2 class="leading-none text-center pb-4 md:py-8 capitalize"><strong>Get in on the buzz.</strong></h2>
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Everyday Improv Logo">
+            <img class="w-full hidden md:inline" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Comments">
+            <img class="w-full inline md:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments-m.webp" alt="Comments">
         </div>
 
         <div id="kickOff" class="anchor"></div>
