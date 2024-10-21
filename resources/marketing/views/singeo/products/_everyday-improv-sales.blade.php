@@ -358,6 +358,7 @@
             <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/everyday-improv/comments.webp" alt="Everyday Improv Logo">
         </div>
 
+        <div id="kickOff" class="anchor"></div>
         <div class="container max-w-4xl mx-auto px-6 py-10 md:py-16 lg:-py-28">
             <h2 class="leading-normal pt-4 text-center capitalize"><strong>Vocal Improvisation Made Simple.</strong></h2>
             <div class="aspect-16:9 cursor-pointer rounded-xl my-7 autoplay-video overflow-hidden w-full relative" x-on:click="kickOff = true;" role="button">
