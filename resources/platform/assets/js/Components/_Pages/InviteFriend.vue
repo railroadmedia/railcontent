@@ -28,26 +28,70 @@
                             <label for="email" class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6">
                                 <strong>Invite via email</strong>
                             </label>
-                            <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
-                                <input id="sign-up-email"
-                                       class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border focus:tw-outline-none"
-                                       :class="`focus:tw-border-${brand}`"
-                                       name="email" type="email" placeholder="Email address..." required="">
-                                <button class="submit tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
-                                        :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" type="submit">
-                                    Send Invite
-                                </button>
+                            <div class="tw-flex tw-flex-col tw-w-full">
+                                <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-start tw-justify-center tw-mt-1">
+                                    <div class="tw-w-full tw-flex-1 sm:tw-mr-4">
+                                        <div class="tw-relative">
+                                            <input 
+                                                id="sign-up-email"
+                                                v-model="email"
+                                                :disabled="isSubmitting"
+                                                class="tw-inline-block tw-text-black tw-w-full tw-default-form-field tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border focus:tw-outline-none"
+                                                :class="[
+                                                    `focus:tw-border-${brand}`,
+                                                    { 'tw-bg-red-50 tw-border-red-500': validationError }
+                                                ]"
+                                                name="email" 
+                                                type="email" 
+                                                placeholder="Email address..." 
+                                                @input="clearError"
+                                            >
+                                            <div 
+                                                class="tw-text-red-500 tw-text-xs tw-mt-2 tw-ml-6"
+                                                :class="{ 'tw-hidden': !validationError }"
+                                            >
+                                                {{ validationError }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tw-w-full sm:tw-w-auto tw-mt-4 sm:tw-mt-0">
+                                        <button 
+                                            type="submit"
+                                            class="submit tw-btn-primary tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                            :class="[
+                                                `tw-bg-${brand} hover:tw-bg-${brand}-600`,
+                                                { 'tw-opacity-95 tw-cursor-not-allowed': isSubmitting }
+                                            ]"
+                                        >
+                                            <span :class="{ 'tw-hidden': isSubmitting }">
+                                                Send Invite
+                                            </span>
+                                            <span 
+                                                class="pending tw-inline-flex tw-items-center tw-justify-center tw-gap-2"
+                                                :class="{ 'tw-hidden': !isSubmitting }"
+                                            >
+                                                <i class="fad fa-spinner-third fa-spin"></i>
+                                                Sending
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <div v-if="isModalOpen">
                             <ModalRenderer>
-                                <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
-                                <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-                                    <div class="tw-text-2xl tw-font-bold tw-mb-5">{{ modalMessage }}</div>
-                                    <div>
-                                    <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</button>
+                                <div class="tw-flex tw-justify-center tw-items-center tw-my-2" style="background:transparent!important;">
+                                    <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
+                                        <div class="tw-text-2xl tw-font-bold tw-mb-5">{{ modalMessage }}</div>
+                                        <div>
+                                            <button 
+                                                @click="closeModal" 
+                                                class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]"
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </ModalRenderer>
                         </div>
@@ -68,6 +112,12 @@ import axios from 'axios';
 const userStore = useUserStore();
 const { brand, userEmail } = storeToRefs(userStore);
 
+const email = ref('');
+const isSubmitting = ref(false);
+const validationError = ref('');
+const isModalOpen = ref(false);
+const modalMessage = ref('');
+
 const cardImg = computed(() => {
     const imgs = {
         drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/drumeo-30-day-free-trial.png',
@@ -78,42 +128,73 @@ const cardImg = computed(() => {
     return imgs[brand.value];
 });
 
-const isModalOpen = ref(false);
-const modalMessage = ref('');
+function validateEmail(email) {
+    const trimmedEmail = email?.trim() || '';
+    
+    if (!trimmedEmail) {
+        return 'Email is required';
+    }
+
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if (!emailRegex.test(trimmedEmail)) {
+        return 'Please enter a valid email address';
+    }
+    return '';
+}
+
+function clearError() {
+    validationError.value = '';
+}
 
 async function handleSubmitPass(event) {
-    const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const userEmailInput = document.getElementById('sign-up-email').value;
-    const referrer = userEmail.value;
-    const formName = document.querySelector('input[name="form_name"]').value;
-    const brand = document.querySelector('input[name="brand"]').value;
+    event.preventDefault();
+    
+    const emailError = validateEmail(email.value);
+    if (emailError) {
+        validationError.value = emailError;
+        return;
+    }
 
-    if (userEmailInput.match(emailFormat)) {
-        try {
-            const validationResponse = await axios.post(`/referral/validate-email`, { email: userEmailInput });
+    isSubmitting.value = true;
 
-            if (validationResponse.data.exists && validationResponse.data.active) {
-                showModal('An account with this email address already exists. You can only gift access to new Musora students.');
-                return;
-            }
-            const response = await axios.post("/customer-io/submit-email-form", {
-                email: userEmailInput,
-                referrer,
-                form_name: formName,
-                brand,
-            });
+    try {
+        const form = event.target;
+        const formName = form.querySelector('input[name="form_name"]').value;
+        const formBrand = form.querySelector('input[name="brand"]').value;
 
-            if (response.status === 201) {
-                showModal("Congrats! You've just shared free music lessons with your friend.");
-                document.getElementById('MusoraEngagementTriggerReferWebForm').reset();
-            } else {
-                showModal("Please try again later.");
-            }
-        } catch (error) {
+        const validationResponse = await axios.post('/referral/validate-email', { 
+            email: email.value.trim() 
+        });
+
+        if (validationResponse.data.exists && validationResponse.data.active) {
+            showModal('An account with this email address already exists. You can only gift access to new Musora students.');
+            return;
+        }
+
+        const response = await axios.post("/customer-io/submit-email-form", {
+            email: email.value.trim(),
+            referrer: userEmail.value,
+            form_name: formName,
+            brand: formBrand,
+        });
+
+        if (response.status === 201) {
+            showModal("Congrats! You've just shared free music lessons with your friend.");
+            email.value = '';
+            validationError.value = '';
+        } else {
             showModal("Please try again later.");
         }
-    } else {
-        document.getElementById('sign-up-email').classList.add('tw-bg-red-200');
+    } catch (error) {
+        if (error.response?.status === 422) {
+            console.log('Error response:', error.response.data);
+            
+        } else {
+            showModal("An error occurred. Please try again later.");
+        }
+    } finally {
+        isSubmitting.value = false;
     }
 }
 
