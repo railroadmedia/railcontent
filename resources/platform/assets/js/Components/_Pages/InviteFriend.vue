@@ -113,7 +113,7 @@ async function handleSubmitPass(event) {
             showModal("Please try again later.");
         }
     } else {
-        document.getElementById('sign-up-email').classList.add('bg-red-200');
+        document.getElementById('sign-up-email').classList.add('tw-bg-red-200');
     }
 }
 
