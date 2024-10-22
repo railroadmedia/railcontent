@@ -37,7 +37,8 @@
                 icon: "{{ $workspace['icon'] }}",
                 appUrl: "{{ $appUrl }}",
                 schema: {!! stripFromJson($workspace['schema']) !!},
-                csrfToken: "{{ $csrfToken }}"
+                csrfToken: "{{ $csrfToken }}",
+                token: "{{ $workspace['token'] }}"
             },
             @endforeach
         ];

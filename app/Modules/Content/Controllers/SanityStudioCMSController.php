@@ -90,6 +90,7 @@ class SanityStudioCMSController extends BaseController
         $dataset = config('content.dataset');
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
+        $token = env('SANITY_API_TOKEN_RW');
 
         // publishing workspace
         $types = [
@@ -164,6 +165,7 @@ class SanityStudioCMSController extends BaseController
         $publishing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
+            'token' => $token,
             'name' => Workspace::Publishing->workspaceName(),
             'basePath' => Workspace::Publishing->basePath(),
             'title' => Workspace::Publishing->title(),
@@ -179,6 +181,7 @@ class SanityStudioCMSController extends BaseController
         $marketing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
+            'token' => $token,
             'name' => Workspace::Marketing->workspaceName(),
             'basePath' => Workspace::Marketing->basePath(),
             'title' => Workspace::Marketing->title(),
@@ -267,6 +270,20 @@ class SanityStudioCMSController extends BaseController
             $content->setReleased($request->get('released'));
             $content->setAlbum($request->get('album'));
             $assignments = $content->setAssignments($request->get('assignment'));
+            $chilrens = [];
+            if($request->has('childrenArray')){
+                $chilrens = $request->get('childrenArray');
+                foreach ($chilrens as $index=>$children){
+                    $content->setChildId($children['railcontent_id'], ($index + 1));
+                          event(new ContentCreated($children['railcontent_id']));
+                    $childrens[] = Content::query()
+                        ->where('id', '=', $children['railcontent_id'])
+                        ->first();
+                }
+            }
+            if($request->has('parent_id')){
+                    $content->setParentId($request->get('parent_id'), 1);
+                }
 
             $content->save();
 
@@ -276,7 +293,12 @@ class SanityStudioCMSController extends BaseController
             $content = Content::query()
                 ->where('id', '=', $content->id)
                 ->first();
-            $content['assignment'] = $assignments;
+            if($assignments) {
+                $content['assignment'] = $assignments;
+            }
+            if(!empty($chilrens)){
+                $content['childrens'] = $childrens;
+            }
 
             return $content;
         }
