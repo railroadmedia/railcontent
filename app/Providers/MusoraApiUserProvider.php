@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -21,30 +22,17 @@ use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    private CalendarService $calendarService;
-    private ContentService $contentService;
-    private RevenueCatService $revenueCatService;
-    private SubscriptionService $subscriptionService;
-    private UserService $userService;
-    private CommentService $commentService;
-    private PostRepository $postRepository;
-
     public function __construct(
-        CalendarService $calendarService,
-        ContentService $contentService,
-        RevenueCatService $revenueCatService,
-        SubscriptionService $subscriptionService,
-        UserService $userService,
-        CommentService $commentService,
-        PostRepository $postRepository
+        private CalendarService $calendarService,
+        private ContentService $contentService,
+        private RevenueCatService $revenueCatService,
+        private SubscriptionService $subscriptionService,
+        private UserService $userService,
+        private CommentService $commentService,
+        private PostRepository $postRepository,
+        private LearningPathsService $learningPathsService,
+
     ) {
-        $this->calendarService = $calendarService;
-        $this->contentService = $contentService;
-        $this->revenueCatService = $revenueCatService;
-        $this->subscriptionService = $subscriptionService;
-        $this->userService = $userService;
-        $this->commentService = $commentService;
-        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User

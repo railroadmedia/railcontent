@@ -157,11 +157,10 @@ class ChallengeUserProgress extends Model
      * @param bool $isUnlocked - Flag to indicate whether lessons are locked
      * @return array -
      */
-    public static function defineLessonsMetaData(array $challenge, Carbon $startDate = null, bool $isLocked = true) : array
+    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isLocked = true) : array
     {
         $lessons = $challenge['lessons'];
-        $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = max($startDate, Carbon::now())->startOfDay();
+        $startDate = Carbon::parse($startDate ?? $challenge['published_on'])->startOfDay();
         $lessonMetaData = [];
         //TODO does this need to be moved to the user's timezone?
         // Document says only for solo challenges

@@ -44,24 +44,53 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
-
-        $challengeId = 402199;
-        $userId = 631736; //If you update this to your id, everything should be an unlock date of the startdate
-
-//        $this->prepChallengeData($challengeId);
-//        $this->setContentCompleted($challengeId);
-
-//        $this->unlockChallenge($challengeId, $userId);
-//        $this->challengesService->completeChallenge($challengeId, $userId);
-        return 'whooo challenge data inserted';
+        if ($arg1 == 'challenges') {
+            return $this->handleChallengesEndpoints($request);
+        }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
-
-
     }
 
-    private function prepChallengeData($challengeId = null, $startdate = null)
+    private function handleChallengesEndpoints($request) : string
     {
-        $challengeId = $challengeId ?? 402199; // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
+        $action = $request->get('action');
+        $userId = $request->get('user_id', user()?->id ?? 631736); // adrian@musora.com
+        $challengeId = $request->get('challenge_id', 402199); // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
+        switch($action) {
+            case ('prep'):
+                $this->prepChallengeData($challengeId, $request->get('start_date', null));
+                return "Prepped Challenge Data $challengeId";
+            case ('complete');
+                $this->challengesService->completeChallenge($challengeId, $userId);
+                return "Completed Challenge $challengeId for user $userId";
+            case('complete_lessons'):
+                $this->setContentCompleted($challengeId, $userId);
+                return "Content Completed: $challengeId for user $userId";
+            case('move_days'):
+                $numDays = $request->get('num_days', 1);
+                $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                $startDate = Carbon::parse($progress->start_date);
+                $newStartDate = $startDate->subDays($numDays);
+                $challenge = $this->challengesService->getChallengeById($challengeId);
+
+                $newLessonData = ChallengeUserProgress::defineLessonsMetaData($challenge, $newStartDate);
+                $originalProgress = $progress->lessons_meta_data;
+                foreach($progress->lessons_meta_data as $index => $_) {
+                    $originalProgress[$index]['unlock_date'] = $newLessonData[$index]['unlock_date'];
+                }
+                $progress->lessons_meta_data = $originalProgress;
+                $progress->start_date = $newStartDate->toISOString();
+                $progress->save();
+                $challengeName = $challenge['title'];
+                return "Start date for $challengeName for user: $userId moved to {$newStartDate->toISOString()}. Completed lessons and practice time maintained";
+            case('clean'):
+                ChallengeUserProgress::truncate();
+                return "All challenge data cleared";
+        }
+        return '';
+    }
+
+    private function prepChallengeData($challengeId, $startdate = null)
+    {
         $userIds = [
             // "good" users
             755987,755984,755976,755957,755953,755945,755932,755919,755916,755904,755886,755880,755877,755866,755848,755827,755824,755820,755808,755807,755799,755787,755786,755782,755764,

@@ -26,7 +26,7 @@ class Method extends ParentTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Method', childName: 'Levels', withResources: true, withTrailer: true);
+        parent::__construct(self::getName(), 'Method', childName: 'Levels', withResources: true, withTrailer: true, withLogos: true);
 
         $detailsGroup = new Group('editorFields', 'Details', true);
 

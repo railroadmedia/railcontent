@@ -52,6 +52,10 @@ class SanityGateway
             '"gold_award": gold_award.asset->url',
             '"silver_award": silver_award.asset->url',
             '"bronze_award": bronze_award.asset->url',
+            '"logo_image_url": logo_image_url.asset->url',
+            '"dark_mode_logo_url": dark_mode_logo_url.asset->url',
+            '"light_mode_logo_url": light_mode_logo_url.asset->url',
+            'child_count',
             '"lessons": child[]->{
                 "sanity_id" : _id,
                 "id": railcontent_id,

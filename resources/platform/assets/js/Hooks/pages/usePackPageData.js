@@ -34,13 +34,13 @@ export async function usePackPageData(contentType) {
     const progressPercent = await getProgressPercent();
 
     // Initialize the buildHeader hook
-    const { buildHeader } = useBuildHeader(contentType, { title: '', description: '' }, progressPercent);
+    const { buildHeader } = useBuildHeader(progressPercent);
 
     try {
-        const result = await fetchByRailContentId(contentId, "pack-children");
+        const result = await fetchByRailContentId(contentId, "pack-bundle");
         if (result) {
             data.value = result;
-            data.value.header = buildHeader(result); // Use the hook to build header
+            data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
         }
     } catch (err) {
         error.value = err;
