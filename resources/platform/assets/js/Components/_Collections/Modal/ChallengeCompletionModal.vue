@@ -197,6 +197,20 @@ const hasProgress = computed(() => {
     return progress.value > 0;
 });
 
+const headerText = computed(() => {
+    if(!props.completionData.next_lesson){
+        return `You've completed 30-Day Drummer!`
+    } else {
+
+    }
+})
+
+const subHeaderText = computed(() => {
+    if(isNextLessonLocked.value){
+        return 'Return tomorrow to maintain your streak!'
+    }
+})
+
 const streakDay = computed(() => {
     return props.completionData?.user_data?.current_streak;
 })
