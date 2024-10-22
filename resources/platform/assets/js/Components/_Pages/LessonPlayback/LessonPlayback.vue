@@ -314,7 +314,7 @@ import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCove
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson } from 'musora-content-services';
+import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 
 const props = defineProps({
@@ -524,6 +524,10 @@ onBeforeMount(async() => {
 
     const like = await axios.get(`/content/${contentId}/user_data/${userId.value}`);
     likeData.value = like?.data;
+
+    //Test Local Storage Functions
+    //const liked = await isContentLiked(contentId);
+    //console.log('liked', liked)
 
     const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`);
     isCompleted.value = completed?.data[contentId]?.state === 'completed';
