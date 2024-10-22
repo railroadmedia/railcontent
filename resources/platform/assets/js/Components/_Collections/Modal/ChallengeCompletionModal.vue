@@ -2,7 +2,7 @@
     <ModalRenderer :black-background="true">
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-200" :class="!showAchievement && !showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
             <!-- Completion Animation -->
-            <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed.drumeo" width="100%" height="100%" :loop="false" />
+<!--            <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations.completed.styles" :animation-link="completionAnimations.completed.drumeo" width="100%" height="100%" :loop="false" />-->
             <!-- Desktop/Tablet -->
             <div class="tw-hidden md:tw-flex tw-flex-col tw-justify-center tw-items-center dark:tw-text-white">
                 <h1 class="tw-text-2xl tw-font-bold tw-mb-2 tw-text-white">You're done for the day!</h1>
@@ -10,12 +10,13 @@
 
                 <div class="tw-border tw-border-[#081825] tw-rounded-[10px] tw-bg-white dark:tw-bg-[linear-gradient(90deg,_#131A27_0%,_#182132_100%)] tw-max-w-[700px] lg:tw-max-w-[758px] tw-w-full tw-flex tw-px-8 lg:tw-px-12 tw-pb-5 tw-relative tw-overflow-hidden tw-my-5">
                     <!-- Streak Animation -->
-<!--                    <Vue3Lottie v-if="!hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" width="100%" height="100%" :loop="false" />-->
+                    <Vue3Lottie v-if="completionAnimations[streakDay] && !hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10 tw-object-cover" :class="completionAnimations[streakDay]?.styles" :animation-link="completionAnimations[streakDay]?.drumeo" width="100%" height="100%" :loop="false" />
                     <!-- Left -->
                     <div class="tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
                         <!-- Challenge Logo -->
                         <img class="tw-h-24 tw-mb-2" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
-                        <div class="tw-font-bold tw-text-sm">Day 2 Unlocks In 22:12</div>
+<!--                        <div v-if="isNextLessonLocked" class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In 22:12</div>-->
+                        <div class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In {{ countdownString }}</div>
                     </div>
                     <!-- Right -->
                     <div class="tw-flex-1 tw-relative tw-pb-5">
@@ -25,21 +26,21 @@
                         <div class="tw-pl-6 tw-relative tw-pt-7">
                             <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-video tw-mb-5 tw-relative">
                                 <!-- Thumbnail -->
-                                <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/s02-2-1675375801.jpg" />
+                                <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${nextLessonThumbnail}`" alt="Next lesson thumbnail" />
                                 <!-- Overlay -->
-                                <div class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
+                                <div v-if="isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                                     <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
-                                    <div class="tw-font-bold tw-text-sm tw-text-white">Unlocks in 22:12</div>
+                                    <div class="tw-font-bold tw-text-sm tw-text-white">Unlocks in {{ countdownString }}</div>
                                 </div>
                             </div>
                             <div class="tw-flex tw-gap-2 tw-text-[13px] tw-relative tw-z-20">
                                 <!-- Streak -->
                                 <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pr-1 tw-flex tw-items-center tw-relative">
                                     <!-- Bubble speech -->
-                                    <div class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showLabelAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">Nice!</div>
+                                    <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showLabelAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ completionAnimations[streakDay]?.text }}</div>
                                     <Vue3Lottie class="tw-w-11 lg:tw-w-[46px] -tw-ml-1 tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                                     <div>
-                                        <div class="tw-font-extrabold">1</div>
+                                        <div class="tw-font-extrabold">{{ streakDay }}</div>
                                         <div class="tw-flex tw-items-center">
                                             Day Streak
                                             <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
@@ -53,7 +54,7 @@
                                     <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
                                     <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                                     <div class="tw-flex-grow">
-                                        <div class="tw-font-extrabold">2</div>
+                                        <div class="tw-font-extrabold">{{ restDay }}</div>
                                         <div class="tw-flex tw-items-center tw-justify-between">
                                             Rest Days
                                             <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
@@ -70,7 +71,7 @@
                     </div>
                 </div>
                 <div class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20">Finish Day 1</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="$emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
@@ -81,7 +82,7 @@
                 <p class="tw-text-center tw-text-white">Return tomorrow to maintain your streak!</p>
                 <div class="tw-rounded-[10px] tw-bg-white dark:tw-bg-[#182132] tw-max-w-[330px] tw-mx-2 tw-w-full tw-flex tw-flex-col tw-pb-6 tw-px-2 tw-relative tw-my-4 tw-overflow-hidden">
                     <!-- Streak Animation -->
-                    <Vue3Lottie class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations[15].styles" :animation-link="completionAnimations[15].drumeo" />
+                    <Vue3Lottie v-if="completionAnimations[streakDay] && !hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations[streakDay]?.styles" :animation-link="completionAnimations[streakDay]?.drumeo" />
                     <div class="tw-relative tw-w-full tw-mb-5 tw-pt-6">
                         <!-- Musora Logo -->
                         <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
@@ -95,10 +96,12 @@
                                         :stroke-dashoffset="circumference - progress / 100 * circumference"
                                         :class="`tw-text-${brand} tw-transition-all tw-duration-700`" />
                             </svg>
-                            <div class="tw-absolute tw-text-center">
-                                <img class="tw-h-14" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
-                                <div class="tw-text-[13px] tw-font-bold">Day 2 Unlocks In</div>
-                                <div class="tw-font-bond tw-font-bebas-neue tw-text-6xl">22:12</div>
+                            <div class="tw-absolute tw-text-center tw-max-w-[200px]">
+                                <img class="tw-h-14 tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
+<!--                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>-->
+<!--                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-6xl">22:12</div>-->
+                                <div class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>
+                                <div class="tw-font-bond tw-font-bebas-neue tw-text-6xl">{{ countdownString }}</div>
                             </div>
                         </div>
                     </div>
@@ -106,12 +109,12 @@
                         <!-- Streak -->
                         <div class="tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 -tw-pl-2 tw-flex tw-items-center tw-relative">
                             <!-- Bubble speech -->
-                            <div class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showLabelAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">Nice!</div>
+                            <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showLabelAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ completionAnimations[streakDay]?.text }}</div>
                             <!-- Streak Lottie -->
                             <Vue3Lottie animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" width="40px" />
                             <!-- Streak Text -->
                             <div>
-                                <div class="tw-font-extrabold">1</div>
+                                <div class="tw-font-extrabold">{{ streakDay }}</div>
                                 <div class="tw-flex tw-items-center">
                                     Day Streak
                                     <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
@@ -127,7 +130,7 @@
                             <img class="tw-mr-3 tw-w-4 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                             <!-- Rest Text -->
                             <div>
-                                <div class="tw-font-extrabold">2</div>
+                                <div class="tw-font-extrabold">{{ restDay }}</div>
                                 <div class="tw-flex tw-items-center">
                                     Rest Days
                                     <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
@@ -137,7 +140,7 @@
                     </div>
                 </div>
                 <div class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10">Finish Day 1</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="$emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
@@ -158,17 +161,25 @@
 
 </template>
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, onUnmounted } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
 import { completionAnimations } from '@pages/Challenges/completionAnimations';
+import { countdown } from "@collections/ChallengeCarousel/countdown";
 
 import ModalRenderer from '@collections/Modal/ModalRenderer';
 import MuButton from '@units/Button/MuButton';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 import ChallengeAchievementModal from '@collections/Modal/ChallengeAchievementModal';
 import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
+
+const props = defineProps({
+    completionData: {
+        type: Object,
+        default: {},
+    }
+})
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -180,10 +191,50 @@ const showLabelAnimation = ref(false);
 const showAchievement = ref(false);
 const showAward = ref(false);
 const hideAnimation = ref(false);
+const countdownString = ref('');
 
 const hasProgress = computed(() => {
     return progress.value > 0;
 });
+
+const streakDay = computed(() => {
+    return props.completionData?.user_data?.current_streak;
+})
+
+const restDay = computed(() => {
+    return props.completionData?.user_data?.rest_days;
+})
+
+const currentLessonTitle = computed(() => {
+    return props.completionData?.lesson?.title;
+})
+
+const nextLessonThumbnail = computed(() => {
+    return props.completionData?.next_lesson?.thumbnail;
+})
+
+const nextLessonTitle = computed(() => {
+    return props.completionData?.next_lesson?.title;
+})
+
+const isNextLessonLocked = computed(() => {
+    return props.completionData?.next_lesson?.is_locked;
+})
+
+const runCountDown = (stop = false) => {
+    const intervalCountdown = setInterval(() => {
+        const count = countdown('2024-10-24 12:00');
+        countdownString.value = count;
+
+        if(count === '00:00'){
+            clearInterval(intervalCountdown);
+        }
+    }, 1000)
+
+    if(stop){
+        clearInterval(intervalCountdown);
+    }
+}
 
 const circumference = 2 * 22 / 7 * 120;
 
@@ -202,16 +253,26 @@ onMounted(() => {
         showLabelAnimation.value = true;
     }, 2000)
 
-    setTimeout(() => {
-        showAchievement.value = true;
-    }, 7000)
+    // setTimeout(() => {
+    //     showAchievement.value = true;
+    // }, 7000)
 
     // setTimeout(() => {
     //     hideAnimation.value = true;
-    // }, completionAnimations[15].duration)
+    // }, completionAnimations[streakDay.value].duration)
 
     setTimeout(() => {
         hideAnimation.value = true;
     }, 7000)
+
+    // if(isNextLessonLocked.value){
+        runCountDown();
+    // }
+})
+
+onUnmounted(() => {
+    if(isNextLessonLocked.value){
+        runCountDown(true);
+    }
 })
 </script>

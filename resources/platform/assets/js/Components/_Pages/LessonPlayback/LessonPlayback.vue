@@ -181,6 +181,7 @@
                         :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :show-complete-button="true"
                         :content-id="videoData.id"
+                        :is-challenge="isChallenge"
                         @toggle-complete-content="toggleCompleteContent"
                         @open-completion-modal="openCompletionModal"
                     />
@@ -290,7 +291,7 @@
         </transition>
     </div>
 
-    <ChallengeCompletionModal v-if="isCompletionModalOpen" />
+    <ChallengeCompletionModal v-if="isCompletionModalOpen" :completion-data="completionData" @close-modal="closeCompletionModal" />
 </template>
 
 <script setup>
@@ -341,6 +342,10 @@ const props = defineProps({
     videoProps: Object,
     videoResources: Object,
     videoButtons: Object,
+    lessonType: {
+        type: String,
+        default: '',
+    }
 });
 
 //Pinia
@@ -369,6 +374,7 @@ const likeData = ref({});
 const isCompleted = ref(false);
 const relatedLessons = ref([]);
 const nextPreviousLessons = ref(null);
+const completionData = ref(null);
 
 //Reactive
 const state = reactive({
@@ -520,9 +526,10 @@ const likeContent = () => {
 
 const openCompletionModal = async () => {
     const userData = await axios(`/challenges/lessons/${contentId.value}`);
-    console.log(userData)
+    console.log(userData);
+    completionData.value = userData.data;
 
-    // isCompletionModalOpen.value = true;
+    isCompletionModalOpen.value = true;
 }
 
 const closeCompletionModal = () => {
@@ -531,6 +538,10 @@ const closeCompletionModal = () => {
 
 const isWorkout = computed( () => {
     return props.contentType === 'workout';
+})
+
+const isChallenge = computed(() => {
+    return props.contentType === 'challenge-part';
 })
 
 onBeforeMount(async() => {

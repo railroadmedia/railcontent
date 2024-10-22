@@ -130,19 +130,24 @@
       });
   }
 
-  const completeContent = () => {
+  const completeContent = async() => {
       if(!props.isCompleted){
-          //Challenge
-          if(props.isChallenge){
-            emit('openCompletionModal');
+          try {
+              const complete = await ContentService.markContentAsComplete(props.contentId);
 
-          } else {
-              // ContentService.markContentAsComplete(props.contentId)
-              //     .then(() => {
-              //         Utils.triggerEvent(window, 'lesson-complete', { complete: true });
-              //         contentProgress.value = 100;
-              //         emit('toggleCompleteContent');
-              //     });
+              emit('toggleCompleteContent');
+              contentProgress.value = 100;
+
+              if(props.isChallenge) {
+                  emit('openCompletionModal');
+              } else {
+                  Utils.triggerEvent(window, 'lesson-complete', { complete: true });
+              }
+          } catch(e) {
+              window.shownotification({
+                  icon: 'error',
+                  text: 'Woops! Something wrong happened, please try again later.'
+              })
           }
       }
   }
