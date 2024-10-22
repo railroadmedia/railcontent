@@ -1,5 +1,7 @@
 <template>
-    <div :class="`tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-[6px] sm:tw-px-4 md:tw-px-8 bg-${brand} tw-rounded-[10px] tw-mt-3`">
+    <SkeletonContentProgress v-if="isLoading" />
+
+    <div v-else :class="`tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-[6px] sm:tw-px-4 md:tw-px-8 bg-${brand} tw-rounded-[10px] tw-mt-3`">
       <div class="content-progress flex flex-row flex-wrap tw-py-3 sm:tw-py-6">
         <div v-if="labelText" class="flex flex-column left-column align-v-center">
           <h3 :class="`display ${brandTextColor} nowrap`">{{ labelText }}</h3>
@@ -81,6 +83,9 @@
   import ContentService from "@vuesora/assets/js/Services/content";
   import Utils from "@vuesora/assets/js/classes/utils";
   import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
+  import { usePlatformStore } from "@stores/platform";
+  import { storeToRefs } from "pinia/dist/pinia";
+  import SkeletonContentProgress from '@collections/SkeletonLoader/SkeletonContentProgress';
 
   const props = defineProps({
     labelText: String,
@@ -98,6 +103,9 @@
         default: true,
     }
   });
+
+  const platformStore = usePlatformStore();
+  const { isLoading } = storeToRefs(platformStore);
 
   const emit = defineEmits(['toggleCompleteContent', 'openCompletionModal']);
 
