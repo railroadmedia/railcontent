@@ -7,9 +7,9 @@
         :container-stay-on-close="containerStayOnClose"
         @onClose="() => $emit('closeModal')"
     >
-        <p class="tw-text-white tw-mb-5">{{ info[type].description }}</p>
+        <p class="dark:tw-text-white tw-mb-5">{{ info[type].description }}</p>
         <div class="tw-flex tw-justify-end">
-            <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white" @click="$emit('closeModal')">Okay!</MuButton>
+            <MuButton @click="$emit('closeModal')">Okay!</MuButton>
         </div>
     </InfoModal>
 </template>
