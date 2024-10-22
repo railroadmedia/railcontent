@@ -62,7 +62,7 @@
 
     <!-- MOBILE -->
     <div :style="{ backgroundImage: `url('https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/IndependenceBackground.png')` }"
-         class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center">
+         class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center">
         <!-- Background Overlay -->
         <div class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
         <!-- Challenge Type Label -->
