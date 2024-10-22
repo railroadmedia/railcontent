@@ -14,15 +14,15 @@
                     <!-- Left -->
                     <div class="tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
                         <!-- Challenge Logo -->
-                        <img class="tw-h-24 tw-mb-2" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
-<!--                        <div v-if="isNextLessonLocked" class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In 22:12</div>-->
-                        <div class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In {{ countdownString }}</div>
+                        <img class="dark:tw-hidden tw-h-24 tw-mb-2" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
+                        <img class="tw-hidden dark:tw-block tw-h-24 tw-mb-2" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
+                        <div v-if="isNextLessonLocked" class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In 22:12</div>
                     </div>
                     <!-- Right -->
                     <div class="tw-flex-1 tw-relative tw-pb-5">
                         <!-- Musora Logo -->
-                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
-                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
+                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" alt="Musora logo" />
+                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" alt="Musora logo" />
                         <div class="tw-pl-6 tw-relative tw-pt-7">
                             <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-video tw-mb-5 tw-relative">
                                 <!-- Thumbnail -->
@@ -77,7 +77,7 @@
 
             <!-- Mobile -->
             <div class="tw-flex tw-flex-col tw-items-center tw-h-full tw-pt-11 md:tw-hidden dark:tw-text-white tw-px-4">
-                <img class="tw-h-20 tw-mb-8" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
+                <img class="tw-h-20 tw-mb-8" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
                 <h1 class="tw-text-2xl tw-font-bold tw-mb-1 tw-text-center tw-text-white">You're done for the day!</h1>
                 <p class="tw-text-center tw-text-white">Return tomorrow to maintain your streak!</p>
                 <div class="tw-rounded-[10px] tw-bg-white dark:tw-bg-[#182132] tw-max-w-[330px] tw-mx-2 tw-w-full tw-flex tw-flex-col tw-pb-6 tw-px-2 tw-relative tw-my-4 tw-overflow-hidden">
@@ -85,8 +85,8 @@
                     <Vue3Lottie v-if="completionAnimations[streakDay] && !hideAnimation" class="tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-10" :class="completionAnimations[streakDay]?.styles" :animation-link="completionAnimations[streakDay]?.drumeo" />
                     <div class="tw-relative tw-w-full tw-mb-5 tw-pt-6">
                         <!-- Musora Logo -->
-                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
-                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
+                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" alt="Musora logo" />
+                        <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" alt="Musora logo" />
                         <div class="tw-flex tw-justify-center tw-items-center tw-relative tw-z-10">
                             <svg class="tw-transform -tw-rotate-90 tw-w-[300px] tw-h-[284px]">
                                 <circle cx="150" cy="142" r="120" stroke="currentColor" stroke-width="20" fill="transparent"
@@ -97,11 +97,10 @@
                                         :class="`tw-text-${brand} tw-transition-all tw-duration-700`" />
                             </svg>
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
-                                <img class="tw-h-14 tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
-<!--                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>-->
-<!--                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-6xl">22:12</div>-->
-                                <div class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>
-                                <div class="tw-font-bond tw-font-bebas-neue tw-text-6xl">{{ countdownString }}</div>
+                                <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
+                                <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
+                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>
+                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-6xl">22:12</div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +198,7 @@ const hasProgress = computed(() => {
 
 const headerText = computed(() => {
     if(!props.completionData.next_lesson){
-        return `You've completed 30-Day Drummer!`
+        return `You've completed ${props.completionData?.lesson.challenge_title}`
     } else {
 
     }
@@ -209,6 +208,14 @@ const subHeaderText = computed(() => {
     if(isNextLessonLocked.value){
         return 'Return tomorrow to maintain your streak!'
     }
+})
+
+const lightModeLogo = computed(() => {
+    return props.completionData?.lesson.challenge_light_mode_logo_url;
+})
+
+const darkModeLogo = computed(() => {
+    return props.completionData?.lesson.challenge_dark_mode_logo_url;
 })
 
 const streakDay = computed(() => {
