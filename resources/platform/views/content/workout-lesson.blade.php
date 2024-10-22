@@ -186,6 +186,7 @@
         :video-buttons="{{ json_encode($videoButtons) }}"
         :video-props="{{ json_encode($videoProps) }}"
         :video-resources="{{ json_encode($videoResources) }}"
+        :lesson-type="{{ json_encode($primaryPage) }}"
     >
     </lesson-playback>
 
