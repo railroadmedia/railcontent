@@ -64,6 +64,14 @@ abstract class LessonTemplate extends BaseSanityModel
                         ],
             previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
         );
+        $parentContentData = new ListObject(
+            fields:[
+                       new Field(FieldType::Number, 'id'),
+                       new Field(FieldType::String, 'title'),
+                       new Field(FieldType::String, 'slug'),
+                       new Field(FieldType::String, 'type')],
+            previewItem: new ListItemPreview('slug', 'type')
+        );
 
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
@@ -135,7 +143,7 @@ abstract class LessonTemplate extends BaseSanityModel
                 fields: [new Field(FieldType::String, 'assignment_title'),
                             new Field(FieldType::String, 'assignment_soundslice'),
                             new Field(FieldType::String, 'assignment_description'),
-                            new Field(FieldType::URL, 'assignment_sheet_music_image'),
+                            new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: new ListArrayElement()),
                             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                         ]
             );
@@ -162,6 +170,9 @@ abstract class LessonTemplate extends BaseSanityModel
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'parent_content_data', 'Parent Content Data', of: $parentContentData, group:$detailsGroup)
+            ]);
         }
         if ($this->isChallengeChild) {
             $fields = array_merge($fields, [

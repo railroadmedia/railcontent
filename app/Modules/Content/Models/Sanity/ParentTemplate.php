@@ -48,6 +48,14 @@ abstract class ParentTemplate extends BaseSanityModel
         $lifestyleReference = new Reference([['type' => 'lifestyle']], options: ['disableNew' => false]);
         $essentialReference = new Reference([['type' => 'essential']], options: ['disableNew' => false]);
         $creativityReference = new Reference([['type' => 'creativity']], options: ['disableNew' => false]);
+        $parentContentData = new ListObject(
+            fields:[
+                       new Field(FieldType::Number, 'id'),
+                       new Field(FieldType::String, 'title'),
+                       new Field(FieldType::String, 'slug'),
+                       new Field(FieldType::String, 'type')],
+            previewItem: new ListItemPreview('slug', 'type')
+        );
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup  = new Group('openAI', 'OpenAI');
@@ -87,7 +95,16 @@ abstract class ParentTemplate extends BaseSanityModel
             $video               = new ListObject(
                 fields: [
                             new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
-                            new Field(FieldType::String, 'external_id')
+                            new Field(FieldType::String, 'external_id'),
+                            new Field(FieldType::String, 'hlsManifestUrl'),
+                            new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
+                                fields: [
+                                            new Field(FieldType::String, 'vimeo_key'),
+                                            new Field(FieldType::String, 'file'),
+                                            new Field(FieldType::Number, 'height'),
+                                            new Field(FieldType::Number, 'width')],
+                                previewItem: new ListItemPreview('height', 'width'),
+                            ), ),
                         ],
             );
             $fields = array_merge($fields, [
@@ -147,6 +164,9 @@ abstract class ParentTemplate extends BaseSanityModel
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);
+            $fields = array_merge($fields, [
+                new Field(FieldType::Array, 'parent_content_data', 'Parent Content Data', of: $parentContentData, group:$detailsGroup)
+            ]);
         }
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
         parent::__construct($this->name, $this->title, fields: $fields, preview: $preview, groups: $groups);

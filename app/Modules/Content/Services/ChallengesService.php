@@ -127,6 +127,7 @@ class ChallengesService
             $sanityDocument = $this->sanityGateway->getChallengeDataFromChild($contentId);
             $challenge = $sanityDocument['parent'];
             $challengeLessons = $challenge['lessons'];
+
         } else {
             $challenge = $this->getChallengeById($contentId);
             $challengeLessons = $challenge['lessons'];
@@ -138,13 +139,13 @@ class ChallengesService
         $firstIncompleteLesson = [];
         $userData = [];
 
-        if (!is_null($progressData)) {
+        if (!is_null($progressData) && $progressData->is_active) {
             $today = Carbon::now()->startOfDay();
             foreach($challengeLessons as $index => $lesson) {
                 $unlockDate = $progressData->lessons_meta_data[$index]['unlock_date'];
                 $unlockDate = Carbon::parse($unlockDate);
                 $challengeLessons[$index]['unlock_date'] = $unlockDate->toISOString();
-                $challengeLessons[$index]['is_locked'] = $unlockDate >= $today;
+                $challengeLessons[$index]['is_locked'] = $progressData->is_locked && $unlockDate > $today;
                 $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];;
             }
 
@@ -174,6 +175,9 @@ class ChallengesService
                     break;
                 }
             }
+            $lessonDocument['challenge_dark_mode_logo_url'] = $challenge['dark_mode_logo_url'];
+            $lessonDocument['challenge_light_mode_logo_url'] = $challenge['light_mode_logo_url'];
+            $lessonDocument['challenge_title'] = $challenge['title'];
         }
 
         return [

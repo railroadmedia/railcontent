@@ -19,7 +19,7 @@ class SongTutorialChildren extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Song Tutorial Children', withResources: true);
+        parent::__construct(self::getName(), 'Song Tutorial Children', withResources: true, parentType: 'song-tutorial');
         $detailsGroup = new Group('editorFields', 'Details', true);
         $this->addFields([
                              new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),

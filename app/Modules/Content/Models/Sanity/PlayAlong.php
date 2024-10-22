@@ -24,20 +24,13 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class PlayAlong extends BaseSanityContentTypeModel
+class PlayAlong extends ParentTemplate
 {
     public function __construct()
     {
-        $instructorReference = new Reference([['type' => 'instructor']]);
-        $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
-        $blockList = new Block();
-        $video               = new ListObject(
-            fields: [
-                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
-                        new Field(FieldType::String, 'external_id')
-                    ],
-        );
+        parent::__construct(self::getName(), 'Play Alongs', withResources: true);
 
+        $detailsGroup = new Group('editorFields', 'Details', true);
         $assignmentsList = new ListObject(
             fields: [new Field(FieldType::String, 'assignment_title'),
                         new Field(FieldType::String, 'assignment_soundslice'),
@@ -45,75 +38,40 @@ class PlayAlong extends BaseSanityContentTypeModel
                         new Field(FieldType::URL, 'assignment_sheet_music_image')
                     ]
         );
-        $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
-        $resourceList = new ListObject(
-            fields: [new Field(FieldType::String, 'resource_name'),
-                        new Field(FieldType::URL, 'resource_url')],
-            previewItem: new ListItemPreview('resource_name', 'resource_url')
+        $video               = new ListObject(
+            fields: [
+                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: [new Required()]),
+                        new Field(FieldType::String, 'external_id'),
+                        new Field(FieldType::String, 'hlsManifestUrl'),
+                        new Field(FieldType::Array, 'video_playback_endpoints', title:'video_playback_endpoints', of: new ListObject(
+                            fields: [
+                                        new Field(FieldType::String, 'vimeo_key'),
+                                        new Field(FieldType::String, 'file'),
+                                        new Field(FieldType::Number, 'height'),
+                                        new Field(FieldType::Number, 'width')],
+                            previewItem: new ListItemPreview('height', 'width'),
+                        ), ),
+                    ],
+
         );
-        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+        $childReference = new Reference([['type' => 'play-along-part']]);
 
-        $detailsGroup = new Group('editorFields', 'Details', true);
-        $openAIGroup  = new Group('openAI', 'OpenAI');
-        $groups       = [
-            $detailsGroup,
-            $openAIGroup,
-        ];
+        $this->addFields(
+            [
+                new Field(FieldType::Object, 'video', hidden: "({document}) => (document?.brand == 'guitareo')", fields: $video->fields, group: $detailsGroup),
+                new Field(FieldType::Number, 'length_in_seconds',  hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
 
-        $fields  = [
-            new Field(FieldType::String, 'title', validation: [new Required()], group: $detailsGroup),
-            new Field(
-                FieldType::Slug,
-                'slug',
-                options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
-                hidden:  "({document}) => !document?.title,",
-                group:   $detailsGroup
-            ),
-            new BrandField($detailsGroup),
-            new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
-            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
-            new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
-            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
-            new Field(
-                FieldType::Number,
-                'difficulty',
-                validation:     [new Min(0), new Max(10)],
-                inputComponent: 'DifficultyInput',
-                group: $detailsGroup
-            ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
-            new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
-            new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
+                new Field(FieldType::Array, 'child', 'Lessons',  hidden: "({document}) => (document?.brand != 'guitareo')", of: $childReference, group:$detailsGroup),
 
-            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
-            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference, group:$detailsGroup),
+                new Field(FieldType::Number, 'bpm', 'BPM', hidden: "({document}) => (document?.brand == 'guitareo')", validation: [new Min(0)], group:$detailsGroup),
 
-            new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
-            new Field(FieldType::Number, 'length_in_seconds', group: $detailsGroup),
-            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed', group:$detailsGroup),
-            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
-            new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
-            new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList, group:$detailsGroup),
-
-            new Field(FieldType::Number, 'bpm', 'BPM', validation: [new Min(0)], group:$detailsGroup),
-
-            new Field(FieldType::URL, 'mp3_no_drums_no_click_url', group: $detailsGroup),
-            new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', group: $detailsGroup),
-            new Field(FieldType::URL, 'mp3_no_drums_yes_click_url', group: $detailsGroup),
-            new Field(FieldType::URL, 'mp3_yes_drums_yes_click_url', group: $detailsGroup),
-            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
-
-            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
-            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
-            new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
-            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
-        ];
-
-        //        $defaultFields = $this->getCommonFields($detailsGroup, includeDescription: false);
-        //        $fields = array_merge($defaultFields, $fields);
-        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
-        parent::__construct(self::getName(), 'Play Alongs', fields: $fields, preview: $preview, groups: $groups);
+                new Field(FieldType::URL, 'mp3_no_drums_no_click_url',  hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::URL, 'mp3_yes_drums_no_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::URL, 'mp3_no_drums_yes_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::URL, 'mp3_yes_drums_yes_click_url', hidden: "({document}) => (document?.brand == 'guitareo')", group: $detailsGroup),
+                new Field(FieldType::Array, 'assignment', 'Assignments', hidden: "({document}) => (document?.brand == 'guitareo')", of: $assignmentsList, group:$detailsGroup),
+            ],
+        );
     }
 
     public static function getName(): string
