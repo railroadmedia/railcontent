@@ -11,7 +11,7 @@
           tw-no-underline
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="(!isLocked && !noAccess && renderLink && isReleased) ? item.web_url_path : null"
+       :href="(!noAccess && renderLink && isReleased) ? item.web_url_path : null"
        @click="openUpgradeModal"
     >
 
@@ -52,11 +52,11 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess || isLocked }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
                     >
-                        <musora-icon v-if="noAccess || isLocked" class="tw-w-[30px] tw-mb-2" icon-name="lock-icon"></musora-icon>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px] tw-mb-2" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased || isLocked" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-2" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>

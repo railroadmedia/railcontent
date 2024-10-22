@@ -16,33 +16,35 @@ export default function useCatalogueItem(props) {
 
             return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
     });
-    const isLocked = computed(() => {
-        if (userStore.isAdmin) {
-            return false;
-        }
-
-        return props.item?.is_locked === true;
-    })
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateQuarterPublishedOn = computed(() => DateTime.fromSQL(props.item.quarter_published, { zone: 'UTC' }).toFormat('x'));
+    const dateUnlockedOn = computed(() => DateTime.fromSQL(props.item.unlock_date, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());
     const isReleased = computed(() => {
             if (userStore.isAdmin) {
                 return true;
             }
 
-            if(props.item.quarter_published && props.item.status === 'draft'){
+            if(props.item.unlock_date){
+                return dateNow.value > dateUnlockedOn.value;
+            } else if(props.item.quarter_published && props.item.status === 'draft'){
                 return dateNow.value > dateQuarterPublishedOn.value;
             } else {
                 return dateNow.value > datePublshedOn.value;
             }
         });
     const releaseDate = computed(() => {
-        if(props.item.quarter_published){
-            return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
+        let date = '';
+
+        if(props.item.unlock_date){
+            date = props.item.unlock_date;
+        } else if(props.item.quarter_published){
+            date = props.item.quarter_published;
         } else {
-            return DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy');
+            date = props.item.published_on;
         }
+
+        return DateTime.fromSQL(date).toFormat('LLL d/yy');
     });
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
     const thumbnailIcon = computed(() => {
@@ -55,7 +57,7 @@ export default function useCatalogueItem(props) {
             };
 
             if (!isReleased.value) {
-                return 'fa-clock';
+                return 'fa-lock';
             }
 
             if (noAccess.value) {
@@ -106,7 +108,6 @@ export default function useCatalogueItem(props) {
 
     return {
         is_added,
-        isLocked,
         progress_percent,
         noAccess,
         datePublshedOn,
