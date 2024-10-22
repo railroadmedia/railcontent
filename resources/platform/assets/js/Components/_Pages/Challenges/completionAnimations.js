@@ -6,6 +6,7 @@ export const completionAnimations = {
         singeo: 'https://lottie.host/99218eda-d69a-4988-93c1-cb78850ec5db/1M05ONEo5W.json',
         styles: 'tw-w-[calc(100%+400px)] sm:tw-w-full tw-h-auto',
         duration: 5000,
+        text: 'Nice!'
     },
     10: {
         drumeo: 'https://lottie.host/78a3fc85-e9ef-404e-ac70-05b4413fdec2/15jLWPqTYS.json',
@@ -14,6 +15,7 @@ export const completionAnimations = {
         singeo: 'https://lottie.host/b42a1be1-c1d4-4a6a-ba05-cf7c3ac9e328/F6yuKriIQf.json',
         styles: 'tw-w-[calc(100%+200px)] sm:tw-w-[600px] tw-h-auto',
         duration: 2500,
+        text: 'Great!'
     },
     15: {
         drumeo: 'https://lottie.host/45d3a312-3d96-4827-89f1-e522d0086a65/i5udgslkg8.json',
@@ -22,6 +24,7 @@ export const completionAnimations = {
         singeo: 'https://lottie.host/2f7b671e-2b5b-438d-98a0-b995dba40f53/8nKexdbSyB.json',
         styles: 'tw-w-[calc(100%+400px)] sm:tw-w-[800px] tw-h-auto',
         duration: 2800,
+        text: 'Fantastic!'
     },
     20: {
         drumeo: 'https://lottie.host/74bf25dd-376e-4ee4-b2d7-24c1a4bfaa13/jrmL6ilgZX.json',
@@ -30,6 +33,7 @@ export const completionAnimations = {
         singeo: 'https://lottie.host/99218eda-d69a-4988-93c1-cb78850ec5db/1M05ONEo5W.json',
         styles: 'tw-w-[calc(100%+400px)] sm:tw-w-full tw-h-auto',
         duration: 5000,
+        text: 'Well Done!'
     },
     25: {
         drumeo: 'https://lottie.host/78a3fc85-e9ef-404e-ac70-05b4413fdec2/15jLWPqTYS.json',
@@ -38,6 +42,7 @@ export const completionAnimations = {
         singeo: 'https://lottie.host/b42a1be1-c1d4-4a6a-ba05-cf7c3ac9e328/F6yuKriIQf.json',
         styles: 'tw-w-[calc(100%+400px)] sm:tw-w-[800px] tw-h-auto',
         duration: 2500,
+        text: 'Well Done!'
     },
     completed: {
         drumeo: 'https://lottie.host/c0f917ca-73c4-4b4c-8d2e-53a415d7ae09/jrNUPzGgwb.json',
