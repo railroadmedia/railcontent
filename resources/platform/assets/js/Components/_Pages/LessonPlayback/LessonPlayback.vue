@@ -269,8 +269,8 @@
                     :user-id="userId" 
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug" 
-                    :contentId="videoData.id" 
+                    :soundslice-slug="videoData?.soundslice_slug" 
+                    :contentId="videoData?.id" 
                     :start-time="chapterStartTime" 
                     :end-time="chapterEndTime" 
                     :loop="startLooping"
@@ -318,24 +318,18 @@ import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isCon
 import { getContentId } from '@hooks/utils';
 
 const props = defineProps({
-    assignments: Array,
     breadcrumbFirstLevelUrl: String,
     breadcrumbFirstLevelTitle: String,
     breadcrumbSecondLevelUrl: String,
     breadcrumbSecondLevelTitle: String,
-    breadcrumbLastLevelTitle: String,    
+    breadcrumbLastLevelTitle: String,  
+    contentBreadcrumb: Object,  
     contentType: String,
-    contentBreadcrumb: Object,
-    contentDescription: String,
-    //thisLessonJson: Object,
-    lessonData: [Array, Object],
-    // nextLessonJson: Object,
     progressXp: String,
-    //relatedLessons: Object,
-    soundsliceSlug: String,
+    videoButtons: Object,
     videoProps: Object,
     videoResources: Object,
-    videoButtons: Object,
+    lessonData: [Array, Object],
 });
 
 //Pinia
@@ -369,7 +363,7 @@ const state = reactive({
 });
 
 const showPracticeButton = computed(() => {
-    return !!props.soundsliceSlug;
+    return !!videoData.value?.soundslice_slug;
 });
 
 //Methods
@@ -391,7 +385,7 @@ const handleVideoPlay = (payload) => {
                     totalDuration: mediaElementVueInstance.value.videoLength
                         || mediaElementVueInstance.value.totalDuration,
                     sessionToken: sessionTokenElement.value || null,
-                    brand: props.videoProps.brand,
+                    brand: brand.value,
                     contentId: mediaElementVueInstance.value.contentId
                 });
             });
@@ -516,7 +510,7 @@ const isWorkout = computed( () => {
 })
 
 onBeforeMount(async() => {
-    console.log('videoProps.progressState', props.videoProps.progressState)
+    //console.log('videoProps.progressState', props.videoProps.progressState)
     const contentId = getContentId();
 
     const data = await fetchLessonContent(contentId);
@@ -538,9 +532,9 @@ onBeforeMount(async() => {
     const relatedLessonsData = await fetchRelatedLessons(contentId, brand.value);
     relatedLessons.value = relatedLessonsData.related_lessons;
 
-    console.log('nextPreviousLessonData', nextPreviousLessons.value);
+    //console.log('nextPreviousLessonData', nextPreviousLessons.value);
     //console.log('relatedLessonsData', relatedLessons.value);
-    //console.log('videoData.value', videoData.value)
+    console.log('videoData.value', videoData.value)
 
     platformStore.setLoadingState(false);
 })
