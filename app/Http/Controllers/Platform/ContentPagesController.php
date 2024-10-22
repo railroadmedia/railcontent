@@ -938,7 +938,7 @@ class ContentPagesController extends BaseController
                 "firstContent" => $firstContent,
                 "rangesVideoIds" => $rangesVideoIds,
                 "adminMessage" => $adminMessage,
-
+                "primaryPage" => $primaryPage,
             ]);
         }
 
