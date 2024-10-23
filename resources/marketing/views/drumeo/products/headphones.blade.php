@@ -7,7 +7,7 @@
     <meta name="description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
     <meta property="og:description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/share-image.jpg"> 
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/share-image-new.jpg"> 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -20,7 +20,7 @@
     <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
-         .join:hover {
+        .join, .join:hover {
             background-color: #0b76db;
             border-color: #0b76db;
         }
@@ -28,6 +28,10 @@
             background-color: #FFAE00;
             border-color: #FFAE00;
             color: #000;
+        }
+        .join.outline.red {
+            border-color: #0b76db;
+            color: #0b76db;
         }
 
         .join.smaller.outline {
@@ -63,7 +67,7 @@
         }
 
         .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(2) {
-             background: linear-gradient(to left, #0058AB, #0058AB) !important;
+             background: linear-gradient(to left, #0b76db, #084884) !important;
         }
 
         .content-section table.comparison.eardrums tr td:nth-child(2),
@@ -208,9 +212,6 @@
             opacity: 1;
             display: block;
         }
-        .headphones-card p {
-            text-align: center !important;
-        }
     </style>
 
     @php
@@ -249,7 +250,7 @@
 <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)//marketing/drumeo/products/headphones/logo-light.webp"><br>
+                <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
                 <h6 class="leading-tight my-3 lg:my-6">The perfect headphones for your E-Kit. </h6>
                 <h2 class="leading-tight">
                     @if(floatval($productPrices['drumeo-headphones']->price) > floatval($productPrices['drumeo-headphones']->discounted_price))
@@ -264,7 +265,7 @@
                     {{-- <div class="sm:w-5/12 join smaller outline red hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline red sm:hidden inline-block"   @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div> --}}
                     @if( $products['drumeo-headphones']->getStockAvailability() > 1 && !empty($products['drumeo-headphones']->getStockAvailability()))
-                        <a class="w-full md:w-6/12 join drumeo smaller anchor-slide ml-2" href="#customize-anchor">Order Now</a>
+                        <a class="w-full md:w-5/12 join smaller bg-drumeo anchor-slide ml-2" href="#customize-anchor">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
@@ -273,8 +274,8 @@
             </div>
         </div>
         {{-- <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div> --}}
-               <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/header.webp">
-                <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/header-m.webp">
+               <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg.webp">
+                <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg-m.webp">
         {{-- <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video> --}}
     </header>
@@ -282,25 +283,28 @@
 
      @php
         $gettings = [
-        [
+    [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
-        'title' => '<strong>Catch every detail.</strong>',
-        'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.',
-        ],
-        [
-        'position' => 'left', 
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
-        'title' => '<strong>A warm hug for your ears.</strong>',
-        'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.',
-        ],
-        [
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/catch-every-detail.webp',
+        'title' => 'Catch every detail.',
+        'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.
+        <br/><br/>Your E-Kit will sound better immediately, helping you connect with your music and stay motivated to practice longer.',
+    ],
+    [
+        'position' => 'left',
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/cushioned-ear-pads.webp',
+        'title' => 'A warm hug for your ears.',
+        'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.
+        <br/><br/>This allows you to play long practice sessions comfortably.',
+    ],
+    [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp', 
-        'title' => '<strong>Wired for real-time response.</strong>',
-        'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong><br class="hidden lg:inline"/>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.',
-        ],
-        ];
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/cushioned-ear-pads.webp',
+        'title' => 'Wired for real-time response.',
+        'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
+        <br/><br/>That means you can improve your timing with zero frustration.',
+    ],
+];
     @endphp
         <section class="text-center px-4 py-10 sm:py-16" style="background:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
@@ -314,10 +318,10 @@
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
-                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-y-20 lg:gap-x-10 mb-16 md:mb-20">
-                            <div class="content relative text-left lg:pt-10">
+                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
+                            <div class="content relative text-left">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
-                                <p class="tracking-tight md:pt-4">{!! $getting['desc'] !!}</p>
+                                <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
                             @if (!empty($getting['special']))
                                 <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
@@ -327,16 +331,16 @@
                             @endif
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-y-20 lg:gap-x-10 @if ($key !== count($gettings) - 1) mb-16 md:mb-20 @else md:mb-10 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== count($gettings) - 1) mb-16 md:mb-20 @else md:mb-10 @endif">
                             @if (!empty($getting['special']))
                                 <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
                                 </video>
                             @else
                                 <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                             @endif
-                            <div class="content relative text-left md:mb-10 lg:pt-10">
+                            <div class="content relative text-left md:mb-10">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
-                                <p class="tracking-tight md:pt-4">{!! $getting['desc'] !!}</p>
+                                <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
                         </div>
                     @endif
@@ -362,7 +366,7 @@
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-01.webp" 
                                     alt="Drumeo Headphones">
                             </td>
                             <td class="rounded-t-xl">
@@ -395,8 +399,8 @@
                         <tr>
                             <td>Frequency Response</td>
                             <td>10-26,000 Hz</td>
-                            <td>15-20,000 Hz</td>
-                            <td>8-25,000 Hz</td>
+                            <td>10-26,000 Hz</td>
+                            <td>Open Ended</td>
                         </tr>
                         <tr>
                             <td>Impedance</td>
@@ -436,7 +440,7 @@
                     ['title' => '1 Gold ¼” Adapter'],
                 ];
             @endphp
-                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/whats-inside.webp" alt="Image 1">
+                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
 
                 <ul class="list-disc text-left px-4 pb-4">
                 @foreach ($items as $item)
@@ -447,7 +451,7 @@
             </ul>
         </div>
         <div class="hidden md:block">
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/headphones/whats-inside.webp" alt="Image 2">
+            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
             @php
                 $infoPops = [
                     ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],
@@ -473,9 +477,9 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/guarantee.webp"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/guarantee-logo.svg"
                 alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The Drumeo<br class="inline sm:hidden"> Guarantee.</strong></h2>
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The Pianote<br class="inline sm:hidden"> Guarantee.</strong></h2>
 
             <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important -- playing the drums.</strong>
 
@@ -494,10 +498,10 @@
    <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F6F8FC;">
         <div class="container mx-auto relative z-10 max-w-3xl">
-            <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/logo-dark.webp"><br>
+            <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/logo-black.webp"><br>
             <h6 class="leading-tight mt-4 mb-2">Superior Sound, Comfort, and Privacy for <br class="sm:hidden">Piano Players.</h6>
             @if( $products['drumeo-headphones']->getStockAvailability() > 1 && !empty($products['drumeo-headphones']->getStockAvailability()))
-                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 headphones-card">
+                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
                     @php
                         $originalPrice = $productPrices['drumeo-headphones']->price;
                         $discountedPrice = $productPrices['drumeo-headphones']->discounted_price;
@@ -509,7 +513,7 @@
                     @include('drumeo.products.partials._order-card', [
                         'badge' => $badge,
                         'header' => 'Drumeo Headphones',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order.webp',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order.webp',
                         'imageHeight' => 'h-28 lg:h-32',
                         'fullPrice' => "$" . floatval($productPrices['drumeo-headphones']->price),
                         'price' => "$" . floatval($productPrices['drumeo-headphones']->discounted_price),
@@ -517,7 +521,7 @@
                         'cta' => 'SELECT',
                         'link' => '/ecommerce/add-to-cart?products[drumeo-headphones]=1&locked=true',
                         'bonuses' => [
-                            '<strong class="tracking-tight">1 Pair of Drumeo Headphones</strong>',
+                            '<strong>1 Pair of Drumeo Headphones</strong>',
                             '1.8m cable',
                             '6.3mm stereo adapter',
                         ],
@@ -527,14 +531,14 @@
                         'highlightBorder' => true,
                         'badge' => 'LAUNCH SPECIAL',
                         'header' => 'Headphones + 1 Year<br>Drumeo Membership',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order-bundle.webp',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
                         'imageHeight' => 'h-28 lg:h-32',
                         'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
                         'specialText' => 'With Annual Membership of $240/yr',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',
+                        'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',
                         'bonuses' => [
-                            '<strong class="tracking-tight">Everything included with the Headphones PLUS:</strong>',
+                            '<strong>Everything included with the<br>Headphones PLUS:</strong>',
                             'Step-by-Step Lessons',
                             'Personalized Support',
                             'Song Tutorials',
@@ -550,10 +554,33 @@
 
     </section>
 
-    {{-- @include('_partials.components.video-modal',[
+    {{-- <section class="text-center py-10" style="background: #00101D;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5 text-white">
+                <p>Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4 text-white" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+            </div>
+        </div>
+    </section> --}}
+
+    @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '1018435070',
         'vimeo' => true,
+    ])
+    {{-- @include('_partials.components.video-modal',[
+        'name' => 'trailerM',
+        'video' => '1018435070',
+        'vimeo' => true,
+            'styles' => 'pb-[177%] bg-white',
     ]) --}}
 
     @include("pianote.sales.partials._footer")
