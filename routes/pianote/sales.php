@@ -37,7 +37,12 @@ Route::domain('{pianoteDomain}')
                     ->whereIn('page', [
                         'asobergirlsguide',
                         'ben-dunnill',
+                        'gamazda',
+                        'jemma-heigis',
                         'keyboardkraze',
+                        'musician-wave',
+                        'musicradar',
+                        'noah-wonder',
                         'pianodreamers'
                     ]);
             }

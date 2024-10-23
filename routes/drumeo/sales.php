@@ -175,7 +175,15 @@ Route::domain('{drumeoDomain}')
                         'tobines',
                         'worshipdrummer',
                         'wyattstav',
-                        'zackgrooves'
+                        'zackgrooves',
+                        'electric-drum-advisor',
+                        'music-production-zone',
+                        'musician-wave',
+                        'izzy-lamberti',
+                        'john-miles-brockman',
+                        'musicradar',
+                        'rock-angel',
+                        'sun-fyre',
                     ]);
             }
         );

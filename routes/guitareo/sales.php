@@ -18,8 +18,21 @@ Route::domain('{guitareoDomain}')
 
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
-        Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
-        Route::get('/affiliate/andrew-clarke', [SalesController::class, 'andrewclarke']);
+        Route::group(
+            ['prefix' => 'affiliate' ],
+            function () {
+                Route::get('/{page?}', SalesController::class . '@affiliates')
+                    ->whereIn('page', [
+                        'asobergirlsguide',
+                        'andrew-clarke',
+                        'guitar-tuner',
+                        'guitarworld',
+                        'musician-wave',
+                        'musicradar',
+                        'the-guitar-geek',
+                    ]);
+            }
+        );
 
         Route::get('/cookie', [SalesController::class, 'cookie']);
         Route::get('/terms', [SalesController::class, 'terms']);
