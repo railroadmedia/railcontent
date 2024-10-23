@@ -8,6 +8,7 @@ use Exception;
 use App\Modules\Referral\Exceptions\ReferralException;
 use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Models\Referrer;
+use App\Modules\Referral\Models\ReferralContact;
 use Throwable;
 
 class ReferralService
@@ -119,16 +120,12 @@ class ReferralService
     public function validateEmail(string $email): array
     {
         $dateThreshold = Carbon::now()->subDays(120);
-        $databaseConnectionName = config('referral.database_info_for_unique_user_email_validation.database_connection_name');
         
-        $user = DB::connection($databaseConnectionName)
-            ->table(config('referral.database_info_for_unique_user_email_validation.table'))
-            ->where(config('referral.database_info_for_unique_user_email_validation.email_column'), $email)
-            ->first();
-
+        $user = ReferralContact::where('email', $email)->first();
+        
         $exists = $user !== null;
         $active = $exists && $user->membership_expiration_date > $dateThreshold;
-
+        
         return [
             'exists' => $exists,
             'active' => $active,
