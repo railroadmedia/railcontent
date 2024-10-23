@@ -47,7 +47,7 @@
                                                 @input="clearError"
                                             >
                                             <div 
-                                                class="tw-text-red-500 tw-text-xs tw-mt-2 tw-ml-6"
+                                                class="tw-text-red-500 tw-text-xs tw-mt-1"
                                                 :class="{ 'tw-hidden': !validationError }"
                                             >
                                                 {{ validationError }}
@@ -80,7 +80,7 @@
                         </form>
                         <div v-if="isModalOpen">
                             <ModalRenderer>
-                                <div class="tw-flex tw-justify-center tw-items-center tw-my-2" style="background:transparent!important;">
+                                <div class="tw-flex tw-justify-center tw-items-center tw-m-2 md:tw-m-0" style="background:transparent!important;">
                                     <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
                                         <div class="tw-text-2xl tw-font-bold tw-mb-5">{{ modalMessage }}</div>
                                         <div>
@@ -148,8 +148,6 @@ function clearError() {
 }
 
 async function handleSubmitPass(event) {
-    event.preventDefault();
-    
     const emailError = validateEmail(email.value);
     if (emailError) {
         validationError.value = emailError;
@@ -162,23 +160,23 @@ async function handleSubmitPass(event) {
         const form = event.target;
         const formName = form.querySelector('input[name="form_name"]').value;
         const formBrand = form.querySelector('input[name="brand"]').value;
-
+    
         const validationResponse = await axios.post('/referral/validate-email', { 
             email: email.value.trim() 
         });
-
+    
         if (validationResponse.data.exists && validationResponse.data.active) {
             showModal('An account with this email address already exists. You can only gift access to new Musora students.');
             return;
         }
-
+    
         const response = await axios.post("/customer-io/submit-email-form", {
             email: email.value.trim(),
             referrer: userEmail.value,
             form_name: formName,
             brand: formBrand,
         });
-
+    
         if (response.status === 201) {
             showModal("Congrats! You've just shared free music lessons with your friend.");
             email.value = '';
@@ -189,7 +187,7 @@ async function handleSubmitPass(event) {
     } catch (error) {
         if (error.response?.status === 422) {
             console.log('Error response:', error.response.data);
-            
+            showModal("Validation error. Please check the input and try again.");
         } else {
             showModal("An error occurred. Please try again later.");
         }

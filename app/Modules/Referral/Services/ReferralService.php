@@ -3,7 +3,6 @@
 namespace App\Modules\Referral\Services;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Modules\Referral\Exceptions\ReferralException;
 use App\Modules\Referral\Exceptions\SaasquatchException;

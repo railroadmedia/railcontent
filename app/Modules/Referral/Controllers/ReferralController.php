@@ -10,7 +10,6 @@ use App\Modules\Referral\Events\EmailInvite;
 use App\Modules\Referral\Requests\EmailInviteRequest;
 use App\Modules\Referral\Services\ReferralService;
 use Avo;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class ReferralController extends Controller
