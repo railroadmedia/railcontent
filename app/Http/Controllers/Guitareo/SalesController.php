@@ -54,6 +54,11 @@ class SalesController extends BaseController
         return view('guitareo.sales.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
     }
 
+    public function andrewclarke()
+    {
+        return view('guitareo.sales.affiliates.andrew-clarke', ['theme' => 'guitareo', 'month' => true]);
+    }
+
     public function cookie()
     {
         return view('guitareo.sales.pages.cookie');

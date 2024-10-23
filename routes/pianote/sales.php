@@ -35,7 +35,10 @@ Route::domain('{pianoteDomain}')
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
-                        'asobergirlsguide', 'keyboardkraze', 'pianodreamers'
+                        'asobergirlsguide',
+                        'ben-dunnill',
+                        'keyboardkraze',
+                        'pianodreamers'
                     ]);
             }
         );

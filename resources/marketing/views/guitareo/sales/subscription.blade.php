@@ -166,6 +166,10 @@
 {{--        </section>--}}
     @endif
 
+    @hasSection('top-bar')
+        @yield('top-bar')
+    @endif
+
     @php
         $bubbles =  [
              [

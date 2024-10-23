@@ -71,6 +71,16 @@ class SalesController extends BaseController
         return view('singeo.sales.affiliates.asobergirlsguide', ['theme' => 'singeo', 'month' => true]);
     }
 
+    public function musicianwavesing()
+    {
+        return view('singeo.sales.affiliates.musician-wave-sing', ['theme' => 'singeo', 'month' => true]);
+    }
+
+    public function singeomusicradar()
+    {
+        return view('singeo.sales.affiliates.singeo-musicradar', ['theme' => 'singeo', 'month' => true]);
+    }
+
     public function prefBeginner()
     {
         return view('singeo.lead-gen.self-segmentaion.beginner');

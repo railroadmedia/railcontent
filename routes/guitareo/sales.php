@@ -19,6 +19,7 @@ Route::domain('{guitareoDomain}')
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+        Route::get('/affiliate/andrew-clarke', [SalesController::class, 'andrewclarke']);
 
         Route::get('/cookie', [SalesController::class, 'cookie']);
         Route::get('/terms', [SalesController::class, 'terms']);
