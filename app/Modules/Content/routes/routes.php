@@ -99,7 +99,11 @@ Route::prefix('playlists')
     ->middleware('web_or_api_authenticated')
     ->group(function () {
         Route::get(
-            'all/{user?}',
+            'all',
             [\App\Modules\Content\Controllers\PlaylistsMetadataController::class, 'getUserPlaylists']
         )->name('playlists.catalog');
+
+        Route::put('/duplicate', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@duplicatePlaylist')->name('playlist.duplicate');
+        Route::delete('/playlist',\App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistWithItems')->name('playlist.delete');
+        Route::put('/playlist/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylist')->name('playlist.update');
     });
