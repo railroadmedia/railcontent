@@ -61,10 +61,11 @@
                 <!-- Like Button -->
                 <div class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-transition-colors disabled:tw-opacity-80"
                         :class="isLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         :title="isLiked ? 'Unlike' : 'Like'"
-                        @click="likeContent"
+                        :disabled="isLiking"
+                        @click="handleLikeContent"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
                             <musora-icon :icon-name="isLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-w-6 tw-h-6 tw-mr-1" />
@@ -284,6 +285,7 @@ import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 import SkeletonVideoResources from '@collections/SkeletonLoader/SkeletonVideoResources';
+import { likeContent, unlikeContent } from 'musora-content-services';
 
 export default {
     name: "VideoResources",
@@ -430,6 +432,7 @@ export default {
             showMore: false,
             showLeftArrow: false,
             showRightArrow: false,
+            isLiking: false, 
         };
     },
 
@@ -486,14 +489,25 @@ export default {
         handleOpenModal() {
             this.showShareModal = !this.showShareModal;
         },
-        likeContent() {
-            this.$emit('onLikeContent');
 
-            ContentService.likeContentById({
-                is_liked: !this.isLiked,
-                content_id: this.contentId,
-                user_id: this.userId,
-            });
+        async handleLikeContent() {
+            if (this.isLiking) return; 
+            this.isLiking = true;     
+            try {
+                // Use a conditional operator to determine whether to like or unlike
+                await (this.isLiked ? unlikeContent(this.contentId) : likeContent(this.contentId));
+                // Toggle the liked state after the request succeeds
+                this.$emit('onLikeContent'); 
+                //Success
+                window.shownotification({
+                    icon: 'check',
+                    text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
+                })
+            } catch (error) {
+                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
+            } finally {
+                this.isLiking = false; // Reset loading state
+            }
         },
 
         toCapitalCase: (string) => Utils.toCapitalCase(string),

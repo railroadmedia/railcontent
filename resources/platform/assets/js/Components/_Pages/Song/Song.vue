@@ -20,9 +20,7 @@
                         :assignments= "data.soundslice"
                         :hasInstrumentless="data.instrumentless"
                         :lessonProgress= "data.lesson_progress"
-                        :isLiked= "isLiked"
                         :isAdded= "isAdded"
-                        :likeCount= "likeCount"
                         :report-logo="reportLogo"
                         :no-access="noAccess"
                     />
@@ -89,10 +87,8 @@
     // Props
     const props = defineProps({
         contentId: Number,
-        isLiked: Boolean,
         noAccess: Boolean,
         isAdded: Boolean,
-        likeCount: [Number, String],
         reportLogo: String,
     });
 

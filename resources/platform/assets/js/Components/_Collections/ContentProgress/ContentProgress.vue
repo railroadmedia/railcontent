@@ -89,7 +89,7 @@
     brand: String,
     isCompleted: Boolean,
     progress: Number,
-    xpAmount: String,
+    xpAmount: [String, Number],
     isStarted: Boolean,
     backButton: Object,
     nextLessonUrl: String,

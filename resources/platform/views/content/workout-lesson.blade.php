@@ -1,4 +1,5 @@
 @php
+    $hasQAVideo = !empty($lessonContent['qna_video_playback_endpoints']);
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
             'ref' => 'mediaElementVueInstance',
@@ -176,16 +177,17 @@
             breadcrumb-second-level-title="Challenges"
         @endif
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
-        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
-        :comments-props="{{ json_encode($commentsProps) }}"
         content-type="{{ $lessonContent->fetch('type') }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
-        :related-lessons="{{ $relatedLessons }}"
-        :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
-        :this-lesson-json="{{ $thisLessonJson }}"
-        :video-buttons="{{ json_encode($videoButtons) }}"
-        :video-props="{{ json_encode($videoProps) }}" 
+        :qa-video="{{ $hasQAVideo }}" {{-- Mostly used for user data --}}
+        :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
         :video-resources="{{ json_encode($videoResources) }}"
+        {{-- :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}" --}}
+        {{-- :comments-props="{{ json_encode($commentsProps) }}" --}}
+        {{-- :related-lessons="{{ $relatedLessons }}" --}}
+        {{-- :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }} --}}
+        {{-- :this-lesson-json="{{ $thisLessonJson }}" --}}
+        {{-- :video-buttons="{{ json_encode($videoButtons) }}" --}}
     >
     </lesson-playback>
 
