@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Http\Middleware\TrustHosts as Middleware;
+use Illuminate\Support\Facades\Cache;
 
 class TrustHosts extends Middleware
 {
@@ -27,28 +28,30 @@ class TrustHosts extends Middleware
      */
     protected function generateBrandDomainsAndSubdomains(): array
     {
-        $brands = array_column(Brand::cases(), 'value');
+        return Cache::remember('trusted_hosts', now()->addMinutes(60), function () {
+            $brands = array_column(Brand::cases(), 'value');
 
-        // grab the APP_URL setting
-        $host = parse_url(app()['config']->get('app.url'), PHP_URL_HOST);
-        // and explode it into the different parts, so we can identify the brand portion
-        $hostParts = explode('.', $host);
-        $brandIndex = count($hostParts) - 2;
+            // grab the APP_URL setting
+            $host = parse_url(app()['config']->get('app.url'), PHP_URL_HOST);
+            // and explode it into the different parts, so we can identify the brand portion
+            $hostParts = explode('.', $host);
+            $brandIndex = count($hostParts) - 2;
 
-        $domains = [];
+            $domains = [];
 
-        foreach ($brands as $brand) {
-            // build up the url for each brand
-            $hostParts[$brandIndex] = $brand;
-            $brandUrl =  implode('.', $hostParts);
+            foreach ($brands as $brand) {
+                // build up the url for each brand
+                $hostParts[$brandIndex] = $brand;
+                $brandUrl = implode('.', $hostParts);
 
-            // add the normal domain
-            $domains[] = $brandUrl;
+                // add the normal domain
+                $domains[] = $brandUrl;
 
-            // add the subdomain regex, replicating the regex from TrustHosts' allSubdomainsOfApplicationUrl
-            $domains[] = '^(.+\.)?'.preg_quote($brandUrl).'$';
-        }
+                // add the subdomain regex, replicating the regex from TrustHosts' allSubdomainsOfApplicationUrl
+                $domains[] = '^(.+\.)?'.preg_quote($brandUrl).'$';
+            }
 
-        return $domains;
+            return $domains;
+        });
     }
 }
