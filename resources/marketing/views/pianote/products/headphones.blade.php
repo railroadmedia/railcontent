@@ -281,44 +281,39 @@
     </header>
 
 
-     @php
-        $gettings = [
-            [
-                'position' => 'right',
-                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/catch-every-detail.webp',
-                'title' => 'Catch every detail.',
-                'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your digital piano like it’s meant to be heard.
-                <br/><br/>Your digital piano will sound better immediately, helping you connect with your music and stay motivated to practice longer. It’s like upgrading your speakers without having to buy a new piano!',
-            ],
-            [
-                'position' => 'left',
-                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/cushioned-ear-pads.webp',
-                'title' => 'Comfort that keeps you playing.',
-                'desc' => 'The Pianote Headphones feature <strong> ultra-soft, cushioned ear pads </strong>and a light weight frame.<strong> Weighing just 295 grams</strong>, they’re so light and comfortable you’ll forget you’re wearing them.
-                <br/><br/>So you can <strong>focus on what’s most important - the music.</strong>',
-            ],
-            [
-                'position' => 'right',
-                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/practice-in-privacy.webp',
-                'title' => 'Don’t let anyone hear you practice.',
-                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in -- and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
-            ],
-            [
-                'position' => 'left',
-                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/zero-latency.webp',
-                'title' => 'Wired for real-time response.',
-                'desc' => 'The Pianote Headphones feature a <strong>wired connection </strong>for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
-                <br/><br/>And the 3.5mm jack (with 6.3mm adapter) means you can plug into ANY digital piano.',
-            ],
-        ];
+    @php
+    $gettings = [
+        [
+            'position' => 'right',
+            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
+            'title' => 'Catch every detail.',
+            'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.
+            <br/><br/>Your E-Kit will sound better immediately, helping you <strong>connect with your music</strong> and stay motivated to practice longer.',
+        ],
+        [
+            'position' => 'left',
+            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
+            'title' => 'A warm hug for your ears.',
+            'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.
+            <br/><br/>This allows you to play long practice sessions comfortably.',
+        ],
+        [
+            'position' => 'right',
+            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp',
+            'title' => 'Wired for real-time response.',
+            'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
+            <br/><br/>That means you can improve your timing with zero frustration.',
+        ],
+    ];
     @endphp
-        <section class="text-center px-4 py-10 sm:py-16" style="background:#F1EFED;">
+
+    <section class="text-center px-4 py-10 sm:py-16" style="background:#F1EFED;">
         <div class="container max-w-5xl mx-auto">
             <div class="max-w-2xl mx-auto text-center mb-4">
-                <h2><strong>Studio-Quality Sound. <br> Immersive Practice. Better Results. </strong></h2>
+                <h2><strong>Studio-Quality Sound. Bass-friendly Low End. Next-Level Comfort.</strong></h2>
                 <h6 class="leading-relaxed my-2 sm:mb-8">
-                    The Pianote Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
-                    comfort, and complete privacy for focused practice sessions.
+                    The Drumeo Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
+                    comfort, and improved low-end for E-Kit bass frequencies.
                 </h6>
             </div>
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
@@ -402,8 +397,8 @@
                     <tr>
                         <td>Frequency Response</td>
                         <td>10-26,000 Hz</td>
-                        <td>10-26,000 Hz</td>
-                        <td>Open Ended</td>
+                        <td>15-20,000 Hz</td>
+                        <td>8-25,000 Hz</td>
                     </tr>
                      <tr>
                         <td>Impedance</td>
@@ -449,7 +444,7 @@
                     ['title' => '1 Gold ¼” Adapter'],
                 ];
             @endphp
-                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
+                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
 
                 <ul class="list-disc text-left px-4 pb-4">
                 @foreach ($items as $item)
@@ -460,7 +455,7 @@
             </ul>
         </div>
         <div class="hidden md:block">
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
+            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
             @php
                 $infoPops = [
                     ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],
@@ -567,7 +562,7 @@ $testimonials = [
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/guarantee-logo.svg"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/guarantee-logo.svg"
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The Pianote<br class="inline sm:hidden"> Guarantee.</strong></h2>
 
