@@ -43,7 +43,7 @@
                                 />
                             </transition>
                             <!-- Vimeo video (legacy player) -->
-                            <transition v-else-if="videoData?.video?.type === 'vimeo-video' && videoProps.useLegacyPlayer"
+                            <transition v-else-if="videoData?.video?.type === 'vimeo-video' && useLegacyVideoPlayer"
                                 appear name="fade">
                                 <video-media-element
                                     ref="mediaElementVueInstance"
@@ -53,7 +53,7 @@
                                     :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState"
                                     :seek-to-time="seekToTime"
-                                    :is-liked="videoProps.isLiked"
+                                    :is-liked="isLiked"
                                     :check-for-timecode="videoProps.checkForTimecode"
 
                                     :poster="videoData?.thumbnail_url"
@@ -75,7 +75,7 @@
                                 </video-media-element>
                             </transition>
                             <!-- Vimeo -->
-                            <transition v-else-if="videoData?.video?.type === 'vimeo-video' && !videoProps.useLegacyPlayer"
+                            <transition v-else-if="videoData?.video?.type === 'vimeo-video' && !useLegacyVideoPlayer"
                                 appear name="fade">
                                 <video-player
                                     ref="mediaElementVueInstance"
@@ -122,21 +122,16 @@
                     <VideoResources
                         :theme-color="brand"
                         :brand="brand"
-                        :parent-title="videoResources.parentTitle"
-                        :show-add-to-list="videoResources.showAddToList"
-                        :show-info-button="videoResources.showInfoButton"
-                        :report-user-email="videoResources.reportUserEmail"
-                        :report-user-name="videoResources.reportUserName"
-                        :is-added="videoResources.isAdded"
-                        :report-logo="videoResources.reportLogo"
+                        :report-user-email="userEmail"
+                        :report-user-name="userDisplayName"
                         :no-access="noAccess"
-
+                        :report-logo="emailLogo"
                         :title="videoData.title"
                         :lesson-type="videoData.type"
                         :thumbnail-url="videoData.thumbnail_url"
                         :description="videoData.description"
                         :instructors="videoData.instructor"
-                        :is-liked="likeData?.isLiked"
+                        :is-liked="isLiked"
                         :like-count="likeData?.likeCount"
                         :content-id="videoData.id"
                         :user-id="userId"
@@ -145,9 +140,14 @@
 
                         :show-practice-button="showPracticeButton"
                         :show-share-button="false"
-                        :show-complete-button="true"
+                        :show-complete-button="isWorkout"
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
+
+                        :show-add-to-list="videoResources.showAddToList"
+                        :show-info-button="videoResources.showInfoButton"
+                        :is-added="videoResources.isAdded"
+
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
                         @on-complete-content="toggleCompleteContent"
@@ -168,16 +168,16 @@
                         :brand="brand"
                         prev-label="Previous Lesson"
                         next-label="Next Lesson"
-                        :has-qa-video="videoButtons.hasQAVideo"
+                        :qa-video="qaVideo"
                     />
 
                     <ContentProgress
                         v-if="!noAccess && !isWorkout"
                         :brand="brand"
                         :is-completed="isCompleted"
-                        :progress="lessonData.progress_percent"
-                        :xp-amount="progressXp"
-                        :is-started="lessonData.progress_percent > 0"
+                        :progress="lessonData?.progress_percent"
+                        :xp-amount="videoData?.xp"
+                        :is-started="lessonData?.progress_percent > 0"
                         :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :show-complete-button="true"
                         :content-id="videoData.id"
@@ -272,8 +272,8 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug"
-                    :contentId="videoData.id"
+                    :soundslice-slug="videoData?.soundslice_slug"
+                    :contentId="videoData?.id"
                     :start-time="chapterStartTime"
                     :end-time="chapterEndTime"
                     :loop="startLooping"
@@ -319,28 +319,22 @@ import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCove
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson } from 'musora-content-services';
+import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
 const props = defineProps({
-    assignments: Array,
     breadcrumbFirstLevelUrl: String,
     breadcrumbFirstLevelTitle: String,
     breadcrumbSecondLevelUrl: String,
     breadcrumbSecondLevelTitle: String,
     breadcrumbLastLevelTitle: String,
-    contentType: String,
     contentBreadcrumb: Object,
-    contentDescription: String,
-    //thisLessonJson: Object,
-    lessonData: [Array, Object],
-    // nextLessonJson: Object,
-    progressXp: String,
-    //relatedLessons: Object,
-    soundsliceSlug: String,
+    contentType: String,
+    qaVideo: Boolean,
     videoProps: Object,
     videoResources: Object,
+    lessonData: [Array, Object],
     videoButtons: Object,
     lessonType: {
         type: String,
@@ -352,7 +346,17 @@ const props = defineProps({
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
-const { userId, isAdmin, userDisplayName, userAccessLevel, userXP, userProfilePictureUrl, brand } = storeToRefs(userStore);
+const {
+    userId,
+    userEmail,
+    isAdmin,
+    userDisplayName,
+    userAccessLevel,
+    userXP,
+    userProfilePictureUrl,
+    brand,
+    useLegacyVideoPlayer
+} = storeToRefs(userStore);
 
 let hasBeenPlayed = false;
 let progressTracker;
@@ -363,7 +367,7 @@ const isCompletionModalOpen = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
-const chapterEndTime = ref(props.videoProps.totalDuration);
+const chapterEndTime = ref(0);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
 const mediaElementVueInstance = ref(null);
@@ -371,6 +375,7 @@ const contentId = ref(getContentId());
 
 const videoData = ref({});
 const likeData = ref({});
+const isLiked = ref(false);
 const isCompleted = ref(false);
 const relatedLessons = ref([]);
 const nextPreviousLessons = ref(null);
@@ -382,7 +387,7 @@ const state = reactive({
 });
 
 const showPracticeButton = computed(() => {
-    return !!props.soundsliceSlug;
+    return !!videoData.value?.soundslice_slug;
 });
 
 //Methods
@@ -404,7 +409,7 @@ const handleVideoPlay = (payload) => {
                     totalDuration: mediaElementVueInstance.value.videoLength
                         || mediaElementVueInstance.value.totalDuration,
                     sessionToken: sessionTokenElement.value || null,
-                    brand: props.videoProps.brand,
+                    brand: brand.value,
                     contentId: mediaElementVueInstance.value.contentId
                 });
             });
@@ -437,11 +442,11 @@ const openSlice = (title, index, startAt, loop) => {
     }
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = props.videoProps.totalDuration;
+    chapterEndTime.value = videoData.value?.length_in_seconds;
     startLooping.value = loop;
 
     if (loop) {
-        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+        chapterEndTime.value = formattedChapters.value.length === index ? videoData.value?.length_in_seconds : formattedChapters.value[index].time;
     }
 
     openSoundslice.value = true;
@@ -498,12 +503,20 @@ const breadCrumbs = computed( () => {
     }
 })
 
+const emailLogo = computed( ()=> {
+    if(brand.value === "singeo") {
+        return "https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png";
+    } else {
+        return `https://dmmior4id2ysr.cloudfront.net/logos/${brand.value}-logo.png`
+    }
+});
+
 const hasRelatedLessons = computed( () => {
     return relatedLessons.value.length > 0;
 })
 
 const noAccess = computed(() => {
-    return props.videoProps.need_access;
+    return videoData.value?.need_access;
 })
 
 const showDraftLabel = computed(() => {
@@ -515,9 +528,9 @@ const toggleCompleteContent = () => {
 }
 
 const likeContent = () => {
-    likeData.value.isLiked = !likeData.value.isLiked;
+    isLiked.value = !isLiked.value;
 
-    if (likeData.value.isLiked) {
+    if (isLiked.value) {
         likeData.value.likeCount += 1;
     } else {
         likeData.value.likeCount -= 1;
@@ -544,28 +557,32 @@ const isChallenge = computed(() => {
     return props.contentType === 'challenge-part';
 })
 
-onBeforeMount(async() => {
-    console.log('videoProps.progressState', props.videoProps.progressState)
+onBeforeMount(async () => {
+    console.log('videoResources', props.videoResources);
+    const contentId = getContentId();
 
-    const data = await fetchLessonContent(contentId.value);
+    // Execute all Video Calls
+    const [data, like, liked, completed, nextPreviousLessonData, relatedLessonsData] = await Promise.all([
+        fetchLessonContent(contentId),
+        axios.get(`/content/${contentId}/user_data/${userId.value}`),
+        isContentLiked(contentId),
+        axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`),
+        fetchNextPreviousLesson(contentId),
+        fetchRelatedLessons(contentId, brand.value)
+    ]);
+
+    // Update ref data reactively after the calls resolve
     videoData.value = data;
-
-    const like = await axios.get(`/content/${contentId.value}/user_data/${userId.value}`);
     likeData.value = like?.data;
-
-    const completed = await axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`);
-    isCompleted.value = completed?.data[contentId.value]?.state === 'completed';
-
-    const nextPreviousLessonData = await fetchNextPreviousLesson(contentId.value);
+    isLiked.value = liked;
+    isCompleted.value = completed?.data[contentId]?.state === 'completed';
     nextPreviousLessons.value = nextPreviousLessonData;
-
-    const relatedLessonsData = await fetchRelatedLessons(contentId.value, brand.value);
     relatedLessons.value = relatedLessonsData.related_lessons;
 
-    console.log('nextPreviousLessonData', nextPreviousLessons.value);
-    //console.log('relatedLessonsData', relatedLessons.value);
-    //console.log('videoData.value', videoData.value)
+    //Check values
+    console.log('isLiked', isLiked.value)
+    console.log('videoData.value', videoData.value);
 
     platformStore.setLoadingState(false);
-})
+});
 </script>

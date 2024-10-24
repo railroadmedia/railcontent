@@ -24,7 +24,8 @@ const config = {
       railcontentConfig: {
         token: window.railcontentConfig.token,
         userId:  window.railcontentConfig.userId,
-      }
+      },
+      localStorage: window.localStorage
 };
 
 // Initialize the service with the configuration

@@ -15,7 +15,7 @@
 
       <div class="flex flex-column">
         <div class="flex flex-row">
-          <div v-if="hasQAVideo" class="flex flex-column ph-1">
+          <div v-if="qaVideo" class="flex flex-column ph-1">
             <button id="playQAVideo" data-tooltip="Play QnA Video" class="btn">
               <span :class="['qa', brand, ' inverted text-', brand]">
                 <i class="fas fa-question-circle"></i>
@@ -63,7 +63,7 @@ const props = defineProps({
   brand: String,
   prevLabel: String,
   nextLabel: String,
-  hasQAVideo: Boolean,
+  qaVideo: Boolean,
   hasBrandedColor: Boolean,
 })
 </script>
