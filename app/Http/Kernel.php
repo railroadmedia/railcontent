@@ -7,6 +7,7 @@ use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\LoggingContextMiddleware;
 use App\Http\Middleware\RedirectIfMobileRequest;
+use App\Http\Middleware\ValidateRedirectUrl;
 use App\Modules\MusoraApi\Middleware\DeprecationMiddleware;
 use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -58,6 +59,7 @@ class Kernel extends HttpKernel
             LeadTrackerMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
+            ValidateRedirectUrl::class,
         ],
 
         'web_authenticated' => [
@@ -79,6 +81,7 @@ class Kernel extends HttpKernel
             LoggingContextMiddleware::class,
             LogOutWhenNeeded::class,
             AuthenticateSession::class,
+            ValidateRedirectUrl::class,
         ],
 
         'web_member_only' => [
