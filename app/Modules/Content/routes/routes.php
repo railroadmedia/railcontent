@@ -106,4 +106,10 @@ Route::prefix('playlists')
         Route::put('/duplicate', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@duplicatePlaylist')->name('playlist.duplicate');
         Route::delete('/playlist',\App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistWithItems')->name('playlist.delete');
         Route::put('/playlist/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylist')->name('playlist.update');
+        Route::post('/playlist', \App\Modules\Content\Controllers\PlaylistsMetadataController::class  . '@createPlaylist')->name('playlist.create');
+        Route::put('/like', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@likePlaylist')->name('playlist.like');
+        Route::delete('/like', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistLike')->name('playlist.delete.like');
+        Route::get('/playlist', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylist')->name('playlist.fetch');
+        Route::get('/playlist-lessons', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItems')->name('playlist.items');
+        //
     });
