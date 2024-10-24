@@ -158,7 +158,7 @@ export const useCollectionStore = defineStore({
                 // return response;
 
                 const response = await this.getEndpoint(this.fetchType);
-                console.log(response)
+                //console.log(response)
 
                 return response;
             } catch (e) {
@@ -286,15 +286,20 @@ export const useCollectionStore = defineStore({
                     //Get Filter Options
                     try {
                         const result = await fetchAllFilterOptions(
-                            userStore.brand,
-                            [ ...this.filter.included_fields ],
-                            genre,
-                            "",
-                            this.queryType,
-                            this.filter.searchTerm,
+                            userStore.brand, //brand
+                            [ ...this.filter.included_fields ], //filters array
+                            genre, //style
+                            "", //artist
+                            this.queryType, //contentType
+                            this.filter.searchTerm, //term
+                            undefined, //progressIds
+                            undefined, //coachIds
+                            true, //includeTabs
                         );
                         if (result) {
                             this.filterColumns = getFilterValues(result.meta.filterOptions);
+                            this.tabData = result.tabs;
+                            console.log('tabData', this.tabData);
                         } else {
                             throw new Error('Failed to fetch Filter Options');
                         }
