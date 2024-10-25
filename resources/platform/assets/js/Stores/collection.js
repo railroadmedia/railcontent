@@ -7,7 +7,7 @@ import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-conte
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
-const { getFilterValues } = useFilterValues();
+const { getFilterValues, formatTabData } = useFilterValues();
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -174,8 +174,6 @@ export const useCollectionStore = defineStore({
             this.loading = displayLoading;
             this.fetching = true;
 
-            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
-
             const response = await this.fetchData();
             this.setData(response, replace);
             this.setURLParams();
@@ -210,6 +208,19 @@ export const useCollectionStore = defineStore({
             }
         },
 
+        setActiveTab() {
+            const activeTab = this.tabOptions.find((tab) => {
+                return tab.key === this.filter.activeTab;
+            })
+
+            console.log('this.tabOptions', this.tabOptions)
+            console.log('activeTab', activeTab) //undefined
+            console.log('this.filter.activeTab', this.filter.activeTab); //Empty String
+            
+            this.filter.activeTab = activeTab.value;
+            this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
+        },
+
         getURLParams() {
             const params = new URLSearchParams(window.location.search);
 
@@ -217,17 +228,8 @@ export const useCollectionStore = defineStore({
             let tabParams = params.getAll('tabs[]');
 
             //Set active tab from URL
-            if(tabParams && tabParams.length > 0){
-                const activeTab = this.tabOptions.find((tab) => {
-                    if(Array.isArray(tab.key)){
-                        return JSON.stringify(tab.key) === JSON.stringify(tabParams);
-                    } else {
-                        return tab.key === tabParams[0];
-                    }
-                })
-
-                this.filter.activeTab = activeTab.value;
-                this.tabData[this.filter.activeTab] = { ...activeTab };
+            if(tabParams && tabParams.length > 0 ){
+                this.filter.activeTab = tabParams[0]; 
             }
 
             //Get search params
@@ -279,6 +281,9 @@ export const useCollectionStore = defineStore({
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.total / this.filter.limit
                     );
+
+                    this.tabData[this.filter.activeTab].currentPage = 1;
+
                     //Get Genre
                     const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
                     const genre = genreField ? genreField.split(',')[1] : null;
@@ -297,9 +302,14 @@ export const useCollectionStore = defineStore({
                             true, //includeTabs
                         );
                         if (result) {
+                            //Set Filter Columns
                             this.filterColumns = getFilterValues(result.meta.filterOptions);
-                            this.tabData = result.tabs;
-                            console.log('tabData', this.tabData);
+                            
+                            //Set Tab Options
+                            this.tabOptions = formatTabData(result.tabs, result.catalogName );
+
+                            //Set Active Tab
+                            this.setActiveTab();
                         } else {
                             throw new Error('Failed to fetch Filter Options');
                         }
@@ -333,15 +343,6 @@ export const useCollectionStore = defineStore({
                 this.sortOptions = defaults.sortOptions;
             }
 
-            //Set active tab
-            if (defaults.tabOptions) {
-                this.tabOptions = defaults.tabOptions;
-
-                //Set active tab as first tab from tabOptions
-                this.filter.activeTab = defaults.tabOptions[0].value;
-                this.tabData[this.filter.activeTab] = { ...defaults.tabOptions[0] };
-            }
-
             if(defaults.queryType){
                 this.queryType = defaults.queryType;
             }
@@ -368,7 +369,7 @@ export const useCollectionStore = defineStore({
                 }
             }
 
-
+            this.setActiveTab()
         },
 
         setURLParams() {
@@ -383,12 +384,8 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            if (Array.isArray(this.tabData[this.filter.activeTab].key)) {
-                this.tabData[this.filter.activeTab].key.map((key) => {
-                    key && url.searchParams.append('tabs[]', key);
-                })
-            } else {
-                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
+            if(this.tabData[this.filter.activeTab]?.key){
+                url.searchParams.set('tabs[]', JSON.stringify(this.tabData[this.filter.activeTab]?.key));
             }
 
             if (this.filter.progress) {
