@@ -366,15 +366,6 @@
             startCountdown();
         });
     </script>
-    <script>
-        const postMessageTest = () => {
-            window.postMessage('post message');
-        }
-
-        const reactNativeTest = () => {
-            window.ReactNativeWebView.postMessage('react native');
-        }
-    </script>
 @endsection
 
 @section('meta')
