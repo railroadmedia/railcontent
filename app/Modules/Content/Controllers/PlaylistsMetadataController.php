@@ -287,6 +287,11 @@ class PlaylistsMetadataController extends Controller
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $mergedData = $items->map(function ($item) use ($sanityDataAssoc) {
             $sanityInfo = $sanityDataAssoc->get($item->content_id);
+            $item['thumbnail_url'] = $sanityInfo ?  $sanityInfo['thumbnail']: null;
+            $item['item_type'] = $sanityInfo ?  $sanityInfo['type']: $item['type'];
+            $item['user_playlist_item_extra_data'] = $sanityInfo ?  ($sanityInfo['extra_data'] ?? null): null;
+            $item['duration'] = $sanityInfo ?  $sanityInfo['length_in_seconds']: null;
+            $item['playlist_item_name'] = $sanityInfo ?  $item['playlist_item_name']: $item['content_name'];
             return array_merge(
                 $item->toArray(),
                 $sanityInfo ? $sanityInfo : []
