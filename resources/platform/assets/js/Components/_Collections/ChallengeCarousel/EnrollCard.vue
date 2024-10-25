@@ -111,8 +111,9 @@ import { ref, computed } from "vue";
 import axios from 'axios';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { useUserStore } from "@stores/user";
-import userJourney from "@services/userJourney";
+
 import MuButton from '@units/Button/MuButton';
+import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
 
 const userStore = useUserStore();
 
@@ -156,6 +157,5 @@ const handleCta = async () => {
             text: 'Woops! Something wrong happened, please try again later.'
         })
     }
-
 }
 </script>
