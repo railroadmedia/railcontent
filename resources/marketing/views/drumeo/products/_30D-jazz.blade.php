@@ -153,7 +153,7 @@
         <div class="container max-w-4xl mx-auto
         @if(empty($platformVersion)) mb-24 sm:mb-40 lg:mb-36 @endif
         ">
-            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12" onclick="postMessageTest()"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
             @php
             if (empty($platformVersion)) {
                 $gettings = [
