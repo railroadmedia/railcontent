@@ -153,7 +153,7 @@
         <div class="container max-w-4xl mx-auto
         @if(empty($platformVersion)) mb-24 sm:mb-40 lg:mb-36 @endif
         ">
-            <h2 class="leading-tight mb-7 sm:mb-12" onclick="postMessageTest()"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12" onclick="postMessageTest"><strong>Immerse yourself in jazz <br> drumming for 30 days.</strong></h2>
             @php
             if (empty($platformVersion)) {
                 $gettings = [
@@ -290,7 +290,7 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-jazz/logo.webp"
                     alt="30-Day Double Bass With Ulysses Logo"
-                     onclick="reactNativeTest()"
+                     onclick="reactNativeTest"
                 >
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
