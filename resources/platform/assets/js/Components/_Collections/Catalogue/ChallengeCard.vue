@@ -1,8 +1,8 @@
 <template>
-    <a class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs" :class="widthStyles">
+    <a :href="item.web_url_path" class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs" :class="widthStyles">
         <div class="tw-rounded-[0.5px] sm:tw-rounded-md lg:tw-rounded-lg tw-overflow-hidden tw-border tw-border-primary-7 tw-relative tw-group">
             <!-- Card Image -->
-            <img class="tw-w-full tw-aspect-[2/3] tw-object-cover tw-object-center" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/`" />
+            <img class="tw-w-full tw-aspect-[2/3] tw-object-cover tw-object-center" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${item.image}`" />
             <!-- Community Icon -->
             <div class="tw-bg-[#374151] tw-rounded-xl tw-absolute tw-left-2 lg:tw-left-[13px] tw-top-2 lg:tw-top-[13px] tw-px-1 sm:tw-px-1.5 tw-py-0.5 sm:tw-py-1">
                 <svg class="tw-w-4 sm:tw-w-5 lg:tw-w-6 tw-h-4 sm:tw-h-5 lg:tw-h-6" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
             <!-- Overlay -->
             <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/40 tw-hidden group-hover:tw-block"></div>
         </div>
-        <div class="tw-my-[7px] tw-uppercase">
+        <div class="tw-mt-[7px] tw-mb-2 tw-uppercase">
             {{ item.artist_name }}
         </div>
         <DifficultyLabel :difficultyValue="item.difficulty" />
