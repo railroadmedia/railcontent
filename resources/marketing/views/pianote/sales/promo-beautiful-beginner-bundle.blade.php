@@ -504,7 +504,7 @@
 
     <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20 relative text-white text-center" style="background: linear-gradient(258deg, #9F3E77 1.12%, #B31A1D 99.64%);">
         <div class="container max-w-5xl mx-auto">
-            <h3 class="leading-tight mb-7 sm:mb-12"><strong>You’re here because you want to play the music <br class="hidden sm:inline">and we’re here to <u style="text-decoration-color: #FFAC00;">make that happen.</u></strong></h3>
+            <h3 class="leading-tight mb-7 sm:mb-12"><strong>You’re here because you want to play the music that inspires you <br class="hidden sm:inline"> and we’re here to <u style="text-decoration-color: #FFAC00;">make that happen.</u></strong></h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 @php
                     $features = [
