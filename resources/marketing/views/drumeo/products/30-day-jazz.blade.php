@@ -256,8 +256,11 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         const postMessageTest = () => {
-            window.ReactNativeWebView.postMessage('react native');
             window.postMessage('post message');
+        }
+
+        const reactNativeTest = () => {
+            window.ReactNativeWebView.postMessage('react native');
         }
     </script>
 @stop
