@@ -282,28 +282,25 @@
 
      @php
         $gettings = [
-    [
+        [
         'position' => 'right',
         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
-        'title' => 'Catch every detail.',
-        'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.
-        <br/><br/>Your E-Kit will sound better immediately, helping you connect with your music and stay motivated to practice longer.',
-    ],
-    [
-        'position' => 'left',
+        'title' => '<strong>Catch every detail.</strong>',
+        'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.',
+        ],
+        [
+        'position' => 'left', 
         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
-        'title' => 'A warm hug for your ears.',
-        'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.
-        <br/><br/>This allows you to play long practice sessions comfortably.',
-    ],
-    [
+        'title' => '<strong>A warm hug for your ears.</strong>',
+        'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.',
+        ],
+        [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp',
-        'title' => 'Wired for real-time response.',
-        'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
-        <br/><br/>That means you can improve your timing with zero frustration.',
-    ],
-];
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp', 
+        'title' => '<strong>Wired for real-time response.</strong>',
+        'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong><br class="hidden lg:inline"/>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.',
+        ],
+        ];
     @endphp
         <section class="text-center px-4 py-10 sm:py-16" style="background:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
@@ -317,8 +314,8 @@
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
-                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
-                            <div class="content relative text-left">
+                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-y-20 lg:gap-x-10 mb-16 md:mb-20">
+                            <div class="content relative text-left md:pt-6 lg:pt-10">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
                                 <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
@@ -330,14 +327,14 @@
                             @endif
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== count($gettings) - 1) mb-16 md:mb-20 @else md:mb-10 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-y-20 lg:gap-x-10 @if ($key !== count($gettings) - 1) mb-16 md:mb-20 @else md:mb-10 @endif">
                             @if (!empty($getting['special']))
                                 <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
                                 </video>
                             @else
                                 <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                             @endif
-                            <div class="content relative text-left md:mb-10">
+                            <div class="content relative text-left md:mb-10 md:pt-6 lg:pt-10">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
                                 <p class="tracking-tight">{!! $getting['desc'] !!}</p>
                             </div>
