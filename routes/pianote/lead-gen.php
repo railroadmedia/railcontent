@@ -17,6 +17,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/tcpcpreferences', [LeadGenController::class, 'tcpcpreferences']);
         Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
         Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
+        Route::get('/chords-book-email', [LeadGenController::class, 'chordsBookEmail']);
         Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
         Route::get('/f-sharp-minor', [LeadGenController::class, 'fSharpMinor']);
         Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
