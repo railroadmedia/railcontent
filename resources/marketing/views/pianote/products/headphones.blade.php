@@ -63,11 +63,11 @@
 
         .content-section table.comparison.eardrums tr td:nth-child(2) {
             color: white;
-             background: linear-gradient(to right, #F61A30, #A10000) !important;
+            background: linear-gradient(to right, #F61A30, #A10000) !important;
         }
 
         .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(2) {
-             background: linear-gradient(to right, #F61A30, #A10000) !important;
+            background: linear-gradient(to right, #F61A30, #A10000) !important;
         }
 
         .content-section table.comparison.eardrums tr td:nth-child(2),
@@ -167,7 +167,7 @@
                 border-spacing: 7px 0;
             }
         }
-         .info-pop {
+        .info-pop {
             position: absolute;
         }
         .info-pop:after, .info-pop:before {
@@ -247,7 +247,7 @@
         "noBreadcrumb" => true
     ])
 
-<header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
+    <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/logo-white.webp"><br>
@@ -274,46 +274,51 @@
             </div>
         </div>
         {{-- <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div> --}}
-               <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg.webp">
-                <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg-m.webp">
+        <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg.webp">
+        <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/header-bg-m.webp">
         {{-- <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video> --}}
     </header>
 
 
     @php
-    $gettings = [
-        [
-            'position' => 'right',
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
-            'title' => 'Catch every detail.',
-            'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.
-            <br/><br/>Your E-Kit will sound better immediately, helping you <strong>connect with your music</strong> and stay motivated to practice longer.',
-        ],
-        [
-            'position' => 'left',
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
-            'title' => 'A warm hug for your ears.',
-            'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.
-            <br/><br/>This allows you to play long practice sessions comfortably.',
-        ],
-        [
-            'position' => 'right',
-            'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp',
-            'title' => 'Wired for real-time response.',
-            'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
-            <br/><br/>That means you can improve your timing with zero frustration.',
-        ],
-    ];
+        $gettings = [
+            [
+                'position' => 'right',
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/catch-every-detail.webp',
+                'title' => 'Catch every detail.',
+                'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your digital piano like it’s meant to be heard.
+                <br/><br/>Your digital piano will sound better immediately, helping you connect with your music and stay motivated to practice longer. It’s like upgrading your speakers without having to buy a new piano!',
+            ],
+            [
+                'position' => 'left',
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/cushioned-ear-pads.webp',
+                'title' => 'Comfort that keeps you playing.',
+                'desc' => 'The Pianote Headphones feature <strong> ultra-soft, cushioned ear pads </strong>and a light weight frame.<strong> Weighing just 295 grams</strong>, they’re so light and comfortable you’ll forget you’re wearing them.
+                <br/><br/>So you can <strong>focus on what’s most important - the music.</strong>',
+            ],
+            [
+                'position' => 'right',
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/practice-in-privacy.webp',
+                'title' => 'Don’t let anyone hear you practice.',
+                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in -- and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
+            ],
+            [
+                'position' => 'left',
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/zero-latency.webp',
+                'title' => 'Wired for real-time response.',
+                'desc' => 'The Pianote Headphones feature a <strong>wired connection </strong>for <strong>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.
+                <br/><br/>And the 3.5mm jack (with 6.3mm adapter) means you can plug into ANY digital piano.',
+            ],
+        ];
     @endphp
-
     <section class="text-center px-4 py-10 sm:py-16" style="background:#F1EFED;">
         <div class="container max-w-5xl mx-auto">
             <div class="max-w-2xl mx-auto text-center mb-4">
-                <h2><strong>Studio-Quality Sound. Bass-friendly Low End. Next-Level Comfort.</strong></h2>
+                <h2><strong>Studio-Quality Sound. <br> Immersive Practice. Better Results. </strong></h2>
                 <h6 class="leading-relaxed my-2 sm:mb-8">
-                    The Drumeo Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
-                    comfort, and improved low-end for E-Kit bass frequencies.
+                    The Pianote Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
+                    comfort, and complete privacy for focused practice sessions.
                 </h6>
             </div>
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
@@ -352,10 +357,10 @@
 
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
-         <div class="container mx-auto max-w-3xl px-2">
-         <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
-            <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
-         </div>
+            <div class="container mx-auto max-w-3xl px-2">
+                <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
+                <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
+            </div>
 
             <div class="relative">
                 <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower pt-2"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
@@ -400,13 +405,13 @@
                         <td>15-20,000 Hz</td>
                         <td>8-25,000 Hz</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td>Impedance</td>
                         <td>40 ohms</td>
                         <td>35 ohms</td>
                         <td>64 ohms</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td>Sensitivity</td>
                         <td>98 ±3 dB</td>
                         <td>98 dB</td>
@@ -417,15 +422,15 @@
                         <td class="rounded-b-xl text-white">
                             @if(floatval($productPrices['pianote-headphones-2024']->price) > $discountedPrice)
                                 {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
-                            <strong>${{ $discountedPrice }}</strong>
+                                <strong>${{ $discountedPrice }}</strong>
                             @else
-                             <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>
+                                <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>
                             @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
                         @php
-                        @endphp
+                            @endphp
                     </tr>
                     </tbody>
                 </table>
@@ -474,43 +479,43 @@
 {{--    </div>--}}
 {{--</section>--}}
 
-@php
-$testimonials = [
-    [
-        'quote' => 'These headphones have quickly<strong> become my favorite!</strong> I love their <strong>comfortable fit</strong> and <strong>lightweight design</strong>, and the sound quality is exceptional. When I play piano, I’m <strong>hearing every detail like never before</strong> and I even find myself reaching for them when listening to music on my phone or laptop — they really <strong>make everything sound amazing!</strong>',
-        'role' => 'CANADA',
-        'name' => 'Tim Bondyra',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
-    ],
-      [
-        'quote' => 'As a person with a smaller cranium, <strong>these headphones fit amazingly well</strong>! The ear pads fit perfectly around my ears and they are <strong>very comfortable to wear</strong>. Now I can play piano without external distractions and can really work on the dynamics of the song as the headphones <strong> pick up even the faintest of sounds</strong>. These are truly great headphones!!',
-        'role' => 'CANADA',
-        'name' => 'Megan Werry',
-        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/megan-headphones.jpeg'
-    ],
-];
-@endphp
+    @php
+        $testimonials = [
+            [
+                'quote' => 'These headphones have quickly<strong> become my favorite!</strong> I love their <strong>comfortable fit</strong> and <strong>lightweight design</strong>, and the sound quality is exceptional. When I play piano, I’m <strong>hearing every detail like never before</strong> and I even find myself reaching for them when listening to music on my phone or laptop — they really <strong>make everything sound amazing!</strong>',
+                'role' => 'CANADA',
+                'name' => 'Tim Bondyra',
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/TimB.jpg'
+            ],
+              [
+                'quote' => 'As a person with a smaller cranium, <strong>these headphones fit amazingly well</strong>! The ear pads fit perfectly around my ears and they are <strong>very comfortable to wear</strong>. Now I can play piano without external distractions and can really work on the dynamics of the song as the headphones <strong> pick up even the faintest of sounds</strong>. These are truly great headphones!!',
+                'role' => 'CANADA',
+                'name' => 'Megan Werry',
+                'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/headphones/megan-headphones.jpeg'
+            ],
+        ];
+    @endphp
 
-{{-- <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
-    <div class="container max-w-2xl mx-auto relative z-10">
-        <h2 class="leading-normal pb-4 md:pb-8"><strong>Everything you love about<br class="hidden sm:inline">the Pianote headphones...</strong></h2>
+    {{-- <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
+        <div class="container max-w-2xl mx-auto relative z-10">
+            <h2 class="leading-normal pb-4 md:pb-8"><strong>Everything you love about<br class="hidden sm:inline">the Pianote headphones...</strong></h2>
 
-        <div class="grid grid-cols-1">
-            @foreach ($testimonials as $testimonial)
-                <div class="rounded-xl p-10 sm:p-4 lg:p-10 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
-                    <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
-                    <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
-                        <img class="rounded-full h-14 w-14 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
-                        <div class="ml-3">
-                            <p class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></p>
-                            <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
+            <div class="grid grid-cols-1">
+                @foreach ($testimonials as $testimonial)
+                    <div class="rounded-xl p-10 sm:p-4 lg:p-10 text-left h-full bg-white shadow-md flex flex-col justify-between w-10/12 sm:w-full mx-auto">
+                        <h6 class="mb-4">"{{ $testimonial['quote'] }}"</h6>
+                        <div class="flex items-center mt-4 border-t border-[#FFECEC] pt-2">
+                            <img class="rounded-full h-14 w-14 object-cover" src="{{ $testimonial['avatar'] }}" alt="Avatar of {{ $testimonial['role'] }}">
+                            <div class="ml-3">
+                                <p class="leading-none pb-1"><strong>{{ $testimonial['name'] ?? '' }}</strong></p>
+                                <p class="text-xs text-gray-600">{{ $testimonial['role'] }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-</section> --}}
+    </section> --}}
 
     <section class="text-center px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background:#F1EFED;">
         <div class="container max-w-2xl mx-auto relative z-10">
@@ -555,7 +560,7 @@ $testimonials = [
         </div>
     </section>
 
- <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #111729 calc(50% + 1px));">
     </div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#111729;">
@@ -581,7 +586,7 @@ $testimonials = [
         </div>
     </section>
 
-   <div id="customize-anchor" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
         <div class="container mx-auto relative z-10 max-w-3xl">
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/logo-black.webp"><br>
@@ -612,25 +617,25 @@ $testimonials = [
                             '6.3mm stereo adapter',
                         ],
                     ])
-                     @include('drumeo.products.partials._order-card', [
-                        'firstOnMobile' => true,
-                        'highlightBorder' => true,
-                        'badge' => 'LAUNCH SPECIAL',
-                        'header' => 'Headphones + 1 Year<br>Pianote Membership',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
-                        'imageHeight' => 'h-28 lg:h-32',
-                        'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                        'specialText' => 'With Annual Membership of $240/yr',
-                        'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
-                        'bonuses' => [
-                            '<strong>Everything included with the<br>Headphones PLUS:</strong>',
-                            'Step-by-Step Lessons',
-                            'Personalized Support',
-                            'Song Tutorials',
-                            'World-Class Instructors',
-                        ],
-                    ])
+                    @include('drumeo.products.partials._order-card', [
+                       'firstOnMobile' => true,
+                       'highlightBorder' => true,
+                       'badge' => 'LAUNCH SPECIAL',
+                       'header' => 'Headphones + 1 Year<br>Pianote Membership',
+                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
+                       'imageHeight' => 'h-28 lg:h-32',
+                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
+                       'specialText' => 'With Annual Membership of $240/yr',
+                       'cta' => 'SELECT',
+                       'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
+                       'bonuses' => [
+                           '<strong>Everything included with the<br>Headphones PLUS:</strong>',
+                           'Step-by-Step Lessons',
+                           'Personalized Support',
+                           'Song Tutorials',
+                           'World-Class Instructors',
+                       ],
+                   ])
                 </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
