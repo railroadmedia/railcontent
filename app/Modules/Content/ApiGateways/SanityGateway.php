@@ -28,6 +28,7 @@ class SanityGateway
         'status',
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
+        '"instructors": instructor[]->name',
     ];
 
     private array $contentSpecificFields = [
