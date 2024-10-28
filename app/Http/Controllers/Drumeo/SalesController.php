@@ -300,7 +300,7 @@ class SalesController extends BaseController
             'newAccount' => $isNewAccount,
             'accessCodeArray' => $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ];
-        return view('drumeo.pages.alesis', $data);
+        return view('drumeo.pages.alesis', $data, ['theme' => 'drumeo']);
     }
 
     public function alesisNitro(Request $request)
@@ -351,6 +351,16 @@ class SalesController extends BaseController
     public function alesisStrataCoreExisting(Request $request)
     {
         return $this->handleRedeemRequest($request, 'alesisStrataCore', false);
+    }
+
+    public function yamaha(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'yamaha', true);
+    }
+
+    public function yamahaExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'yamaha', false);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)

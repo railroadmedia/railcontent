@@ -1,4 +1,4 @@
-@extends('guitareo.sales.affiliates.affiliate-trial-layout', [
+@extends('guitareo.sales.affiliates.affiliate-layout', [
      'video' => '980937080',
      'headline' => 'Thanks for clicking the link!',
      'background' => "#d3fff9",

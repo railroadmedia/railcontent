@@ -83,6 +83,7 @@ class AuthenticationController extends Controller
             $request->validate([
                 'email' => 'required|email|exists:usora_users,email',
                 'password' => 'required|string',
+                'redirect_to' => 'nullable|string',
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -103,10 +104,16 @@ class AuthenticationController extends Controller
             auth()->login($user, $remember);
 
             $this->authenticated($user, $password);
+            // don't just use $request->get with the default value, because an empty string could still come through
+            if ($request->filled('redirect_to')) {
+                $redirectTo = $request->get('redirect_to');
+            } else {
+                $redirectTo = '/' . brand();
+            }
 
             return response()->json([
                 'message' => 'success',
-                'redirect_to' => $request->get('redirect_to', '/' . brand()),
+                'redirect_to' => $redirectTo,
             ]);
         }
 

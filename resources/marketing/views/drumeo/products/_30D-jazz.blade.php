@@ -289,7 +289,8 @@
                 <img class="h-24 sm:h-28 lg:h-36 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-jazz/logo.webp"
-                    alt="30-Day Double Bass With Ulysses Logo">
+                    alt="30-Day Double Bass With Ulysses Logo"
+                >
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>

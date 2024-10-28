@@ -21,16 +21,16 @@
             </h1>
         @endif
         @if(!empty($boldText))
-            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
+            <h5 class="leading-normal mb-5 lg:mb-7 ">{!!  $boldText  !!}</h5>
         @endif
-        @if(empty($boldText) && empty($noCheck))
-        <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-            <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
-            <br class="lg:hidden">
-            <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
-            <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
-        </p>
+        @if(empty($noCheck))
+            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+                <br class="lg:hidden">
+                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
+                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+            </p>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
@@ -59,14 +59,14 @@
             </a>
             @if(empty($noTrailer))
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
-            @else
-            <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
-                href="https://www.shopperapproved.com/reviews/Musora.com"
-                rel="noopener noreferrer"
-                aria-label="See the reviews on Shopper Approved"
-                onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
-            >SEE THE REVIEWS</a>
-
+            @endif
+            @if(!empty($reviewsButton))
+                <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
+                    href="https://www.shopperapproved.com/reviews/Musora.com"
+                    rel="noopener noreferrer"
+                    aria-label="See the reviews on Shopper Approved"
+                    onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
+                >SEE THE REVIEWS</a>
             @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
