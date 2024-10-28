@@ -118,13 +118,17 @@ class PlaylistsMetadataController extends Controller
         $playlist = UserPlaylist::findOrFail($playlistId);
         // Ensure the authenticated user is the owner of the playlist
         if ($playlist->user_id !== user()->id) {
-            return response()->json(['error' => 'You don’t have access to delete this playlist.'], 403);
+            return response()->json([
+                'success' => false,
+                'error' => 'You don’t have access to delete this playlist.'], 403);
         }
 
         $playlist->items()->delete();  // Deletes all related playlist items
         $playlist->delete();  // Deletes the playlist
 
-        return response()->json(['message' => 'Playlist and associated items deleted successfully.']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Playlist and associated items deleted successfully.']);
     }
 
     public function updatePlaylist(Request $request, $playlistId): JsonResponse
@@ -203,6 +207,7 @@ class PlaylistsMetadataController extends Controller
 
         if ($existingLike) {
             return response()->json([
+                                        'success' => false,
                                         'message' => 'You already liked this playlist.',
                                     ], 200);
         }
@@ -216,6 +221,7 @@ class PlaylistsMetadataController extends Controller
         $like->save();
 
         return response()->json([
+                                    'success' => true,
                                     'message' => 'Playlist liked successfully',
                                     'like' => $like,
                                 ], 201);
@@ -241,6 +247,7 @@ class PlaylistsMetadataController extends Controller
         // If the like does not exist, return a message
         if (!$like) {
             return response()->json([
+                                        'success' => false,
                                         'message' => 'You have not liked this playlist.',
                                     ], 404);
         }
@@ -249,6 +256,7 @@ class PlaylistsMetadataController extends Controller
         $like->delete();
 
         return response()->json([
+                                    'success' => true,
                                     'message' => 'Playlist like removed successfully.',
                                 ], 200);
     }
