@@ -315,9 +315,9 @@
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-y-20 lg:gap-x-10 mb-16 md:mb-20">
-                            <div class="content relative text-left md:pt-6 lg:pt-10">
+                            <div class="content relative text-left lg:pt-10">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
-                                <p class="tracking-tight">{!! $getting['desc'] !!}</p>
+                                <p class="tracking-tight md:pt-4">{!! $getting['desc'] !!}</p>
                             </div>
                             @if (!empty($getting['special']))
                                 <video class="-mt-7 rounded-lg" src="{{ $getting['special'] }}" type="video/mp4" autoplay muted loop>
@@ -334,9 +334,9 @@
                             @else
                                 <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                             @endif
-                            <div class="content relative text-left md:mb-10 md:pt-6 lg:pt-10">
+                            <div class="content relative text-left md:mb-10 lg:pt-10">
                                 <h5 class="mb-2 mt-1 md:mt-0"><strong>{!! $getting['title'] !!}</strong></h5>
-                                <p class="tracking-tight">{!! $getting['desc'] !!}</p>
+                                <p class="tracking-tight md:pt-4">{!! $getting['desc'] !!}</p>
                             </div>
                         </div>
                     @endif
