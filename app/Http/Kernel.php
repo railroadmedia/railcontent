@@ -101,6 +101,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
+            ValidateRedirectUrl::class,
         ],
 
         'api_authenticated' => [
@@ -117,6 +118,7 @@ class Kernel extends HttpKernel
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
             LogOutWhenNeeded::class,
+            ValidateRedirectUrl::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!
