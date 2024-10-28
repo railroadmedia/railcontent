@@ -4,7 +4,6 @@ namespace App\Modules\Content\ApiGateways;
 
 use Sanity\Client as SanityClient;
 
-
 class SanityGateway
 {
     private array $defaultFields = [
@@ -29,6 +28,7 @@ class SanityGateway
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
         '"instructors": instructor[]->name',
+        'parent_content_data'
     ];
 
     private array $contentSpecificFields = [
@@ -107,7 +107,7 @@ class SanityGateway
      * @return array - updated document
      * @throws \Sanity\Exception\ConfigException
      */
-    public function patchSetSingle(string $id, array $data) : array
+    public function patchSetSingle(string $id, array $data): array
     {
         return $this->sanity->patch($id)->set($data)->commit();
     }
@@ -119,10 +119,10 @@ class SanityGateway
      * @return array - updated document
      * @throws \Sanity\Exception\ConfigException
      */
-    public function patchAppendReferences(string $id, string $field, array $newReferences) : array
+    public function patchAppendReferences(string $id, string $field, array $newReferences): array
     {
         $data = [];
-        foreach($newReferences as $newReference) {
+        foreach ($newReferences as $newReference) {
             $data[] = ["_type" => 'reference', "_ref" => $newReference, '_key' => uniqid()];
         }
         return $this->sanity->patch($id)->setIfMissing([$field => []])->append($field, $data)->commit();
@@ -135,9 +135,9 @@ class SanityGateway
      * @return array - updated document
      * @throws \Sanity\Exception\ConfigException
      */
-    public function patchAppend(string $id, string $field, array $data) : array
+    public function patchAppend(string $id, string $field, array $data): array
     {
-        foreach($data as $index => $datum) {
+        foreach ($data as $index => $datum) {
             $data[$index]['_key'] = $data[$index]['_key'] ?? uniqid();
         }
         return $this->sanity->patch($id)->setIfMissing($field = [])->append($field, $data)->commit();
@@ -149,10 +149,10 @@ class SanityGateway
      * @throws \Sanity\Exception\ConfigException
      * @throws \Sanity\Exception\InvalidArgumentException
      */
-    public function patchSetMany(array $mutations) : array
+    public function patchSetMany(array $mutations): array
     {
         $transaction = $this->sanity->transaction();
-        foreach($mutations as $id => $data) {
+        foreach ($mutations as $id => $data) {
             $transaction->patch($this->sanity->patch($id)->set($data));
         }
         return $transaction->commit();
@@ -180,13 +180,13 @@ class SanityGateway
         // see musora-content-services sanity.js for the fields and format we need to replicate
         $typeString = $type ? "&& _type = '$type'" : '';
         $fieldsString = $this->getFieldsString($typeString);
-        $query ="*[railcontent_id in [{$idsString}] $typeString]{
+        $query = "*[railcontent_id in [{$idsString}] $typeString]{
           $fieldsString
         }";
         $documents = $gateway->sanity->fetch($query);
         // The following are used to format similar to RailContent, these are a stopgap measure
         // TODO these need to be removed and any decorators using them should be update/removed
-        foreach($documents as $key => $document) {
+        foreach ($documents as $key => $document) {
             $documents[$key]['fields'] = $this->mapSanityFields($document);
             $documents[$key]['data'] = $this->mapSanityFields($document);
         }
@@ -198,18 +198,20 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array | null - matching challenge document or null
      */
-    public function getByRailContentId(int $railcontentId, ?string $type = null) : array | null
+    public function getByRailContentId(int $railcontentId, ?string $type = null): array | null
     {
 
         $gateway = new SanityGateway();
         // see musora-content-services sanity.js for the fields and format we need to replicate
         $fieldsString = $this->getFieldsString($type);
         $typeString = $type ? "&& _type == '$type'" : '';
-        $query ="*[railcontent_id == $railcontentId $typeString]{
+        $query = "*[railcontent_id == $railcontentId $typeString]{
           $fieldsString
         } [0 ... 1]";
         $document = $gateway->sanity->fetch($query)[0] ?? null;
-        if (is_null($document)) return null;
+        if (is_null($document)) {
+            return null;
+        }
         // The following are used to format similar to RailContent, these are a stopgap measure
         // TODO these need to be removed and any decorators using them should be update/removed
         $document['fields'] = $this->mapSanityFields($document);
@@ -222,7 +224,7 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array - matching challenge document
      */
-    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null) : array
+    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null): array
     {
 
         $gateway = new SanityGateway();
@@ -230,7 +232,7 @@ class SanityGateway
         $challengeFields = $this->getFieldsString('challenge');
         $typeString = $type ? "&& _type == '$type'" : '';
         $fieldsString = $this->getFieldsString($type);
-        $query ="*[railcontent_id == $railcontentId $typeString]{
+        $query = "*[railcontent_id == $railcontentId $typeString]{
           $fieldsString,
           'parent': *[references(^._id) && _type == 'challenge'][0]{
                 $challengeFields
@@ -240,12 +242,56 @@ class SanityGateway
         return $document;
     }
 
+    public function getAssignmentsByRailcontentIds($brand, array $ids, ?string $type = null)
+    {
+
+        $gateway = new SanityGateway();
+        $idsString = implode(',', $ids);
+        $fieldsString = $this->getFieldsString($type);
+        $query = "*[brand == '{$brand}' && railcontent_id in [{$idsString}]]{
+          $fieldsString,
+  assignment[railcontent_id in  [{$idsString}]]
+}";
+        $documents = $gateway->sanity->fetch($query);
+        $assignments = [];
+        foreach ($documents as $key => $document) {
+            foreach ($document['assignment'] ?? [] as $assignment) {
+                $routes = [];
+                if (!empty($document['parent_content_data'] ?? [])) {
+                    $route = collect($document['parent_content_data'])->map(function ($parent) {
+                        switch ($parent['type']) {
+                            case 'learning-path':
+                                return 'Method';
+                            case 'learning-path-level':
+                                return 'L';
+                            default:
+                                return $parent['slug'];
+                        }
+                    })->toArray();
+                    $routes = array_reverse($route);
+                }
+                $routes = array_merge($routes, [$document['title']]);
+                $assignments[] = [
+                    'title'     => $assignment['assignment_title'],
+                    'item_type' => 'assignment',
+                    'instructors' => $document['instructors'],
+                    'thumbnail' => $document['thumbnail'],
+                    'difficulty_string' => $document['difficulty_string'],
+                    'published_on' => $document['published_on'],
+                    'railcontent_id'     => $assignment['railcontent_id'],
+                    'route' => $routes
+                ];
+            }
+        }
+        return $assignments;
+    }
+
 
     /**
      * @param string $contentType - sanity _type value
      * @return string - groq query string for fields
      */
-    private function getFieldsString(?string $contentType) : string
+    private function getFieldsString(?string $contentType): string
     {
         $allFields = array_merge($this->defaultFields, $this->contentSpecificFields[$contentType] ?? []);
         return implode(',', $allFields);

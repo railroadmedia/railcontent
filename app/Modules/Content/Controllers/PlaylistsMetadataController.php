@@ -20,8 +20,8 @@ class PlaylistsMetadataController extends Controller
 {
     public function __construct(
         private PlaylistsService $playlistsService,
-        private SanityGateway $sanityGateway)
-    {
+        private SanityGateway $sanityGateway
+    ) {
     }
 
     /**
@@ -53,7 +53,7 @@ class PlaylistsMetadataController extends Controller
 
         $playlists = UserPlaylist::with('items')
             ->where('railcontent_user_playlists.user_id', $user->id)
-            ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
+            ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
             ->forPage($page, $limit)
             ->searchTerm($request->get('term'))
             ->sortBy($orderByColumn, $orderByDirection)
@@ -65,7 +65,7 @@ class PlaylistsMetadataController extends Controller
         // Total results count
         $totalResults = UserPlaylist::query()
             ->where('railcontent_user_playlists.user_id', $user->id)
-            ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
+            ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
             ->searchTerm($request->get('term'))
             ->count();
 
@@ -183,7 +183,7 @@ class PlaylistsMetadataController extends Controller
             'brand'        => $validatedData['brand'] ?? config('railcontent.brand'),
             'name'         => $validatedData['name'],
             'description'  => $validatedData['description'] ?? '',
-            'thumbnail_url'=> $validatedData['thumbnail_url'] ?? null,
+            'thumbnail_url' => $validatedData['thumbnail_url'] ?? null,
             'category'     => $validatedData['category'] ?? null,
             'private'      => $validatedData['private'] ?? true,
             'created_at'   => Carbon::now()->toDateTimeString(),
@@ -280,36 +280,64 @@ class PlaylistsMetadataController extends Controller
             ($playlist->user_id != $user->id && $playlist->private == true),
             new NotFoundException("You don’t have access to this playlist", 'Private Playlist')
         );
-//        throw_if(
-//            ($playlist == -2),
-//            new NotFoundException(
-//                "You don’t have access to this playlist. Unblock the playlist owner to access the playlist.  ",
-//                'Blocked Playlist'
-//            )
-//        );
+        //        throw_if(
+        //            ($playlist == -2),
+        //            new NotFoundException(
+        //                "You don’t have access to this playlist. Unblock the playlist owner to access the playlist.  ",
+        //                'Blocked Playlist'
+        //            )
+        //        );
 
-      //  $playlist = $this->formatPlaylists(new Collection($playlist));
+        //  $playlist = $this->formatPlaylists(new Collection($playlist));
         return response()->json(['data' => $playlist]);
     }
 
     public function getPlaylistItems(Request $request)
     {
         $playlistId = $request->get('playlist_id');
+        $playlist = UserPlaylist::findOrFail($playlistId);
+        throw_if(!$playlist, new NotFoundException("Playlist not exists."));
         $items = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId)
+            ->orderBy('position', 'asc')
             ->get();
         $contentIds = $items->pluck('content_id');
+
         $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray());
+        $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds($playlist['brand'], $contentIds->toArray());
+
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
-        $mergedData = $items->map(function ($item) use ($sanityDataAssoc) {
+        $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
+        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc) {
             $sanityInfo = $sanityDataAssoc->get($item->content_id);
-            $item['thumbnail_url'] = $sanityInfo ?  $sanityInfo['thumbnail']: null;
-            $item['item_type'] = $sanityInfo ?  $sanityInfo['type']: $item['type'];
-            $item['user_playlist_item_extra_data'] = $sanityInfo ?  ($sanityInfo['extra_data'] ?? null): null;
-            $item['duration'] = $sanityInfo ?  $sanityInfo['length_in_seconds']: null;
-            $item['playlist_item_name'] = $sanityInfo ?  $item['playlist_item_name']: $item['content_name'];
+            $route = [];
+            if (!empty($sanityInfo['parent_content_data'] ?? [])) {
+
+                $route = collect($sanityInfo['parent_content_data'])->map(function ($parent) {
+                    switch ($parent['type']) {
+                        case 'learning-path':
+                            return 'Method';
+                        case 'learning-path-level':
+                            return 'L';
+                            //                            case 'learning-path-course':
+                            //                                return 'Gear';
+                        default:
+                            return $parent['slug'];
+                    }
+                })->toArray();
+
+                $sanityInfo['route'] = array_reverse($route);
+            }
+            $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
+            $item['thumbnail_url'] = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo ? $sanityInfo['thumbnail'] : null);
+            $item['item_type'] = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo ? $sanityInfo['type'] : null);
+            $item['user_playlist_item_extra_data'] = $sanityInfo ? ($sanityInfo['extra_data'] ?? null) : null;
+            $item['duration'] = $sanityInfo ? $sanityInfo['length_in_seconds'] : null;
+            $item['playlist_item_name'] = $sanityInfo ? $item['playlist_item_name'] : $item['content_name'];
             $item['user_playlist_item_id'] = $item['id'];
             $item['id'] = $item['content_id'];
+            $item['instructors'] = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo ? $sanityInfo['instructors'] : null);
+            $item['route'] = $assignmentInfo ? $assignmentInfo['route'] : (($sanityInfo && isset($sanityInfo['route'])) ? $sanityInfo['route'] : []);
             return array_merge(
                 $item->toArray(),
                 $sanityInfo ? $sanityInfo : []
