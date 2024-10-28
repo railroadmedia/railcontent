@@ -171,13 +171,11 @@
         style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(!empty($yamaha))
-                <div class="mb-7 align-middle flex items-center justify-center w-full">
-                    <img class="inline-block h-9 sm:h-14 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/redeem/yamaha-logo.png"
-                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
-                    <img class="inline-block h-8 sm:h-12 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
-                        alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                </div>
+                <img class="inline-block h-9 sm:h-12 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/membership/redeem/yamaha-logo.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <br>
+                <img class="inline-block h-8 sm:h-12 mb-7 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <h3 class="leading-tight mb-3 font-black">Congratulations on your <br class="hidden sm:inline-block">purchase of a Yamaha EAD10!</h3>
                 <h6 class="leading-tight mb-6 sm:mb-10">
                     Level up your skills with the lessons, songs, teachers, and <br class="hidden sm:inline-block">
