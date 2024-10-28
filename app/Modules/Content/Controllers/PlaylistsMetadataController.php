@@ -87,9 +87,17 @@ class PlaylistsMetadataController extends Controller
         return response()->json($results);
     }
 
-    public function duplicatePlaylist(Request $request)
+    public function duplicatePlaylist($playlistId, Request $request)
     {
-        $playlistId = $request->get('playlist_id');
+        // Validate incoming data
+        $validatedData = $request->validate([
+                                                'name'        => 'nullable|string|max:255',
+                                                'description' => 'nullable|string|max:1000',
+                                                'category'        => 'nullable|string|max:255',
+                                                'private'       => 'nullable|boolean',
+                                                'thumbnail_url' => 'nullable|url',
+                                            ]);
+
         $user = user();
         $originalPlaylist = UserPlaylist::with('items')->findOrFail($playlistId);
 
