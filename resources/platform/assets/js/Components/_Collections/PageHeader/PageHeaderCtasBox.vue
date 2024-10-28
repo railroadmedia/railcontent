@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import CtaResolver from './Ctas/CtaResolver.vue';
 import PageHeaderDropdown from '@collections/PageHeader/PageHeaderDropdown';
 import MobileCtaDropdown from './MobileCtaDropdown.vue';
@@ -48,10 +48,6 @@ const secondaryCtas = computed(() =>
 const displayDropdown = computed(() => props.dropdowns.length > 0 );
 // only display mobile dropdown if there are more than 1 secondary CTAs or dropdowns exist
 const displayMobileDropdown = secondaryCtas.value.length >= 1;
-
-onMounted(() => {
-    console.log('dropdowns', secondaryCtas.value)
-})
 </script>
 <style lang="scss" scoped>
 .ctas-container {
