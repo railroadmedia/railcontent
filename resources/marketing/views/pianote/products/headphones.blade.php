@@ -433,46 +433,46 @@
         </div>
     </section>
 
-    <section class="text-center px-6 py-8 sm:py-10 lg:py-12" style="background:#FFFFFF;">
-    <div class="container mx-auto relative z-10 max-w-5xl">
-       <h2 class="pb-2"><strong>What’s in the box?</strong></h2>
-       <p class="hidden md:block pb-4">(Tap for more information.)</p>
-       <div class="md:hidden">
-            @php
-                $items = [
-                    ['title' => '1 pair of Headphones'],
-                    ['title' => '1 Gold ¼” Adapter'],
-                ];
-            @endphp
-                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
+{{--    <section class="text-center px-6 py-8 sm:py-10 lg:py-12" style="background:#FFFFFF;">--}}
+{{--    <div class="container mx-auto relative z-10 max-w-5xl">--}}
+{{--       <h2 class="pb-2"><strong>What’s in the box?</strong></h2>--}}
+{{--       <p class="hidden md:block pb-4">(Tap for more information.)</p>--}}
+{{--       <div class="md:hidden">--}}
+{{--            @php--}}
+{{--                $items = [--}}
+{{--                    ['title' => '1 pair of Headphones'],--}}
+{{--                    ['title' => '1 Gold ¼” Adapter'],--}}
+{{--                ];--}}
+{{--            @endphp--}}
+{{--                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">--}}
 
-                <ul class="list-disc text-left px-4 pb-4">
-                @foreach ($items as $item)
-                    <li>
-                        <p class="py-1">{{ $item['title'] }}</p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="hidden md:block">
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
-            @php
-                $infoPops = [
-                    ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],
-                    ['top' => '25%', 'left' => '90%', 'tip' => 'Pair of Headphones'],
-                    ['top' => '95%', 'left' => '71%', 'tip' => '6.3mm stereo adapter'],
-                ];
-            @endphp
-            @foreach ($infoPops as $infoPop)
-                <div class="info-pop hidden sm:block cursor-pointer rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: {{ $infoPop['top'] }}; left: {{ $infoPop['left'] }};"
-                    tip="{{ $infoPop['tip'] }}">
-                    <i class="fa-duotone fa-solid fa-circle-info text-xl lg:text-2xl" style="--fa-primary-color: #050505; --fa-secondary-color: #ffffff; --fa-secondary-opacity: 0.9; --fa-secondary-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);"></i>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+{{--                <ul class="list-disc text-left px-4 pb-4">--}}
+{{--                @foreach ($items as $item)--}}
+{{--                    <li>--}}
+{{--                        <p class="py-1">{{ $item['title'] }}</p>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--        <div class="hidden md:block">--}}
+{{--            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">--}}
+{{--            @php--}}
+{{--                $infoPops = [--}}
+{{--                    ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],--}}
+{{--                    ['top' => '25%', 'left' => '90%', 'tip' => 'Pair of Headphones'],--}}
+{{--                    ['top' => '95%', 'left' => '71%', 'tip' => '6.3mm stereo adapter'],--}}
+{{--                ];--}}
+{{--            @endphp--}}
+{{--            @foreach ($infoPops as $infoPop)--}}
+{{--                <div class="info-pop hidden sm:block cursor-pointer rounded-full w-7 h-7 flex items-center justify-center"--}}
+{{--                    style="top: {{ $infoPop['top'] }}; left: {{ $infoPop['left'] }};"--}}
+{{--                    tip="{{ $infoPop['tip'] }}">--}}
+{{--                    <i class="fa-duotone fa-solid fa-circle-info text-xl lg:text-2xl" style="--fa-primary-color: #050505; --fa-secondary-color: #ffffff; --fa-secondary-opacity: 0.9; --fa-secondary-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);"></i>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
 
 @php
 $testimonials = [

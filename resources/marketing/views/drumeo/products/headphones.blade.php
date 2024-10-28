@@ -7,7 +7,7 @@
     <meta name="description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
     <meta property="og:description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/share-image-new.jpg"> 
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/headphones/share-image-new.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -350,7 +350,7 @@
     </section>
 
    <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
-        <div class="container mx-auto max-w-5xl">
+        <div class="container mx-auto max-w-5xl mb-20">
             <div class="container mx-auto max-w-3xl px-2">
                 <h2 class="text-black"><strong>Great Sound. Better Price.</strong></h2>
                 <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you'll catch every detail <br class="hidden md:inline"/>from the deep bass to the crisp trebles.</h6>
@@ -366,21 +366,21 @@
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-01.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-01.webp"
                                     alt="Drumeo Headphones">
                             </td>
                             <td class="rounded-t-xl">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp"
                                     alt="Audio-Technica M40X">
                             </td>
                             <td class="rounded-t-xl">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp"
                                     alt="Sennheiser HD 280 Pro">
                             </td>
                         </tr>
@@ -429,46 +429,46 @@
         </div>
     </section>
 
-    <section class="text-center px-6 py-8 sm:py-10 lg:pt-12 lg:pb-32" style="background:#F6F8FC;">
-    <div class="container mx-auto relative z-10 max-w-5xl">
-       <h2 class="pb-2"><strong>What’s in the box?</strong></h2>
-       <p class="hidden md:block pb-4">(Tap for more information.)</p>
-       <div class="md:hidden">
-            @php
-                $items = [
-                    ['title' => '1 pair of Headphones'],
-                    ['title' => '1 Gold ¼” Adapter'],
-                ];
-            @endphp
-                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">
+{{--    <section class="text-center px-6 py-8 sm:py-10 lg:pt-12 lg:pb-32" style="background:#F6F8FC;">--}}
+{{--    <div class="container mx-auto relative z-10 max-w-5xl">--}}
+{{--       <h2 class="pb-2"><strong>What’s in the box?</strong></h2>--}}
+{{--       <p class="hidden md:block pb-4">(Tap for more information.)</p>--}}
+{{--       <div class="md:hidden">--}}
+{{--            @php--}}
+{{--                $items = [--}}
+{{--                    ['title' => '1 pair of Headphones'],--}}
+{{--                    ['title' => '1 Gold ¼” Adapter'],--}}
+{{--                ];--}}
+{{--            @endphp--}}
+{{--                <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 1">--}}
 
-                <ul class="list-disc text-left px-4 pb-4">
-                @foreach ($items as $item)
-                    <li>
-                        <p class="py-1">{{ $item['title'] }}</p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="hidden md:block">
-            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">
-            @php
-                $infoPops = [
-                    ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],
-                    ['top' => '25%', 'left' => '90%', 'tip' => 'Pair of Headphones'],
-                    ['top' => '95%', 'left' => '71%', 'tip' => '6.3mm stereo adapter'],
-                ];
-            @endphp
-            @foreach ($infoPops as $infoPop)
-                <div class="info-pop hidden sm:block cursor-pointer rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: {{ $infoPop['top'] }}; left: {{ $infoPop['left'] }};"
-                    tip="{{ $infoPop['tip'] }}">
-                    <i class="fa-duotone fa-solid fa-circle-info text-xl lg:text-2xl" style="--fa-primary-color: #050505; --fa-secondary-color: #ffffff; --fa-secondary-opacity: 0.9; --fa-secondary-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);"></i>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+{{--                <ul class="list-disc text-left px-4 pb-4">--}}
+{{--                @foreach ($items as $item)--}}
+{{--                    <li>--}}
+{{--                        <p class="py-1">{{ $item['title'] }}</p>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--        <div class="hidden md:block">--}}
+{{--            <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)//marketing/pianote/products/headphones/whats-inside.webp" alt="Image 2">--}}
+{{--            @php--}}
+{{--                $infoPops = [--}}
+{{--                    ['top' => '25%', 'left' => '45%', 'tip' => 'Professional Stereo Headphones'],--}}
+{{--                    ['top' => '25%', 'left' => '90%', 'tip' => 'Pair of Headphones'],--}}
+{{--                    ['top' => '95%', 'left' => '71%', 'tip' => '6.3mm stereo adapter'],--}}
+{{--                ];--}}
+{{--            @endphp--}}
+{{--            @foreach ($infoPops as $infoPop)--}}
+{{--                <div class="info-pop hidden sm:block cursor-pointer rounded-full w-7 h-7 flex items-center justify-center"--}}
+{{--                    style="top: {{ $infoPop['top'] }}; left: {{ $infoPop['left'] }};"--}}
+{{--                    tip="{{ $infoPop['tip'] }}">--}}
+{{--                    <i class="fa-duotone fa-solid fa-circle-info text-xl lg:text-2xl" style="--fa-primary-color: #050505; --fa-secondary-color: #ffffff; --fa-secondary-opacity: 0.9; --fa-secondary-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);"></i>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
 
  <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #111729 calc(50% + 1px));">
