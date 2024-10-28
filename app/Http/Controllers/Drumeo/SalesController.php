@@ -447,4 +447,8 @@ class SalesController extends BaseController
         return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }
 
+    public function headphones()
+    {
+        return view('drumeo.products.headphones', ['theme' => 'drumeo',]);
+    }
 }
