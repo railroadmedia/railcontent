@@ -281,11 +281,11 @@
     </header>
 
 
-    @php
+     @php
         $gettings = [
             [
                 'position' => 'right',
-                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/catch-every-detail.webp',
+                'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/catch-every-detail-pianote.webp',
                 'title' => 'Catch every detail.',
                 'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your digital piano like it’s meant to be heard.
                 <br/><br/>Your digital piano will sound better immediately, helping you connect with your music and stay motivated to practice longer. It’s like upgrading your speakers without having to buy a new piano!',

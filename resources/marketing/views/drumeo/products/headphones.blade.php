@@ -7,7 +7,7 @@
     <meta name="description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
     <meta property="og:description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/share-image.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/share-image.jpg"> 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -20,7 +20,7 @@
     <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
-        .join:hover {
+         .join:hover {
             background-color: #0b76db;
             border-color: #0b76db;
         }
@@ -59,11 +59,11 @@
 
         .content-section table.comparison.eardrums tr td:nth-child(2) {
             color: white;
-            background: linear-gradient(to left, #0b76db, #084884) !important;
+             background: linear-gradient(to left, #0b76db, #084884) !important;
         }
 
         .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(2) {
-            background: linear-gradient(to left, #0058AB, #0058AB) !important;
+             background: linear-gradient(to left, #0058AB, #0058AB) !important;
         }
 
         .content-section table.comparison.eardrums tr td:nth-child(2),
@@ -163,7 +163,7 @@
                 border-spacing: 7px 0;
             }
         }
-        .info-pop {
+         .info-pop {
             position: absolute;
         }
         .info-pop:after, .info-pop:before {
@@ -246,7 +246,7 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
+<header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="quietkick" class="h-16 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)//marketing/drumeo/products/headphones/logo-light.webp"><br>
@@ -273,42 +273,42 @@
             </div>
         </div>
         {{-- <div class="top-0 left-0 absolute w-full h-full z-10" style="background: radial-gradient(rgba(24,25,27,0.8), transparent);"></div> --}}
-        <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/header.webp">
-        <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/header-m.webp">
+               <img class="hidden sm:inline object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/header.webp">
+                <img class="sm:hidden object-cover w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/header-m.webp">
         {{-- <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video> --}}
     </header>
 
 
-    @php
+     @php
         $gettings = [
         [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail-new.webp',
         'title' => '<strong>Catch every detail.</strong>',
         'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.',
         ],
         [
-        'position' => 'left',
+        'position' => 'left', 
         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
         'title' => '<strong>A warm hug for your ears.</strong>',
         'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.',
         ],
         [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp',
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp', 
         'title' => '<strong>Wired for real-time response.</strong>',
         'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong><br class="hidden lg:inline"/>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.',
         ],
         ];
     @endphp
-    <section class="text-center px-4 py-10 sm:py-16" style="background:#F6F8FC;">
+        <section class="text-center px-4 py-10 sm:py-16" style="background:#F6F8FC;">
         <div class="container max-w-5xl mx-auto">
             <div class="max-w-5xl mx-auto text-center mb-4">
                 <h2><strong>Studio-Quality Sound. <br>Bass-friendly Low End. Next-Level Comfort.</strong></h2>
                 <h6 class="leading-relaxed my-2 sm:mb-8">
                     The Drumeo Headphones deliver studio-quality sound, all-day <br class="hidden sm:inline">
-                    comfort, and improved low-end for E-Kit bass frequencies.
+                   comfort, and improved low-end for E-Kit bass frequencies.
                 </h6>
             </div>
             <div class="max-w-5xl mx-auto pt-7 pb-6 md:pb-0 leading-none">
@@ -345,80 +345,80 @@
         </div>
     </section>
 
-    <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
+   <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl mb-20">
-            <div class="container mx-auto max-w-3xl px-2">
+            <div class="container mx-auto max-w-5xl px-2 md:px-6 lg:px-0">
                 <h2 class="text-black"><strong>Great Sound. Better Price.</strong></h2>
-                <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you'll catch every detail <br class="hidden md:inline"/>from the deep bass to the crisp trebles.</h6>
+                <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
             </div>
 
             <div class="relative">
                 <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table class="w-full mx-auto border-separate comparison eardrums earbuds">
                     <tbody style="background-color:transparent!important;">
-                    <tr style="background-color:transparent!important;">
-                        <td></td>
-                        <td class="rounded-t-xl">
-                            <img class="h-20 md:h-40 transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp"
-                                alt="Drumeo Headphones">
-                        </td>
-                        <td class="rounded-t-xl">
-                            <img class="h-20 md:h-40 transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp"
-                                alt="Audio-Technica M40X">
-                        </td>
-                        <td class="rounded-t-xl">
-                            <img class="h-20 md:h-40 transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp"
-                                alt="Sennheiser HD 280 Pro">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Type</td>
-                        <td>Closed-Back Dynamic</td>
-                        <td>Closed-Back Dynamic</td>
-                        <td>Closed-Back Dynamic</td>
-                    </tr>
-                    <tr>
-                        <td>Driver Size</td>
-                        <td>45mm</td>
-                        <td>40mm</td>
-                        <td>40mm</td>
-                    </tr>
-                    <tr>
-                        <td>Frequency Response</td>
-                        <td>10-26,000 Hz</td>
-                        <td>15-20,000 Hz</td>
-                        <td>8-25,000 Hz</td>
-                    </tr>
-                    <tr>
-                        <td>Impedance</td>
-                        <td>40 ohms</td>
-                        <td>35 ohms</td>
-                        <td>64 ohms</td>
-                    </tr>
-                    <tr>
-                        <td>Sensitivity</td>
-                        <td>98 ±3 dB</td>
-                        <td>98 dB</td>
-                        <td>102 dB</td>
-                    </tr>
-                    <tr style="background-color:transparent!important;">
-                        <td class="rounded-b-xl">Price</td>
-                        <td class="rounded-b-xl text-white">
-                            <s class="opacity-40" style="font-size: 36px; font-weight:400;">$99</s>
-                            <strong style="font-size: 36px;">$79</strong>
-                        </td>
-                        <td class="rounded-b-xl"><strong>$99</strong></td>
-                        <td class="rounded-b-xl"><strong>$99</strong></td>
-                    </tr>
+                        <tr style="background-color:transparent!important;">
+                            <td></td>
+                            <td class="rounded-t-xl">
+                                <img class="h-20 md:h-40 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp" 
+                                    alt="Drumeo Headphones">
+                            </td>
+                            <td class="rounded-t-xl">
+                                <img class="h-20 md:h-40 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp" 
+                                    alt="Audio-Technica M40X">
+                            </td>
+                            <td class="rounded-t-xl">
+                                <img class="h-20 md:h-40 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp" 
+                                    alt="Sennheiser HD 280 Pro">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>Closed-Back Dynamic</td>
+                            <td>Closed-Back Dynamic</td>
+                            <td>Closed-Back Dynamic</td>
+                        </tr>
+                        <tr>
+                            <td>Driver Size</td>
+                            <td>45mm</td>
+                            <td>40mm</td>
+                            <td>40mm</td>
+                        </tr>
+                        <tr>
+                            <td>Frequency Response</td>
+                            <td>10-26,000 Hz</td>
+                            <td>15-20,000 Hz</td>
+                            <td>8-25,000 Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Impedance</td>
+                            <td>40 ohms</td>
+                            <td>35 ohms</td>
+                            <td>64 ohms</td>
+                        </tr>
+                        <tr>
+                            <td>Sensitivity</td>
+                            <td>98 ±3 dB</td>
+                            <td>98 dB</td>
+                            <td>102 dB</td>
+                        </tr>
+                        <tr style="background-color:transparent!important;">
+                            <td class="rounded-b-xl">Price</td>
+                            <td class="rounded-b-xl text-white">
+                                <s class="opacity-40" style="font-size: 36px; font-weight:400;">$99</s>
+                                <strong style="font-size: 36px;">$79</strong>
+                            </td>
+                            <td class="rounded-b-xl"><strong>$99</strong></td>
+                            <td class="rounded-b-xl"><strong>$99</strong></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -466,7 +466,7 @@
 {{--        </div>--}}
 {{--    </section>--}}
 
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
+ <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #111729 calc(50% + 1px));">
     </div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#111729;">
@@ -480,22 +480,22 @@
             <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important -- playing the drums.</strong>
 
                 <br><br>
-                We’ve designed these headphones with your E-Kit practice in mind, and we’re confident you’ll love them.
+               We’ve designed these headphones with your E-Kit practice in mind, and we’re confident you’ll love them.
                 <br><br>
                 But if anything goes wrong, you’ll have the peace of mind that comes with knowing your headphones are  protected for two full years.
                 <br><br>
-                So you can focus on your drumming.
+                 So you can focus on your drumming.
                 <br><br>
                 We’ll worry about the rest.
             </h6>
         </div>
     </section>
 
-    <div id="customize-anchor" class="anchor"></div>
+   <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F6F8FC;">
         <div class="container mx-auto relative z-10 max-w-3xl">
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/logo-dark.webp"><br>
-            <h6 class="leading-tight mt-4 mb-2">Superior Sound, Comfort, and Privacy for <br class="sm:hidden">Piano Players.</h6>
+            <h6 class="leading-tight mt-4 mb-2">Superior Sound, Comfort, and Privacy for <br class="sm:hidden">for Drummers.</h6>
             @if( $products['drumeo-headphones']->getStockAvailability() > 1 && !empty($products['drumeo-headphones']->getStockAvailability()))
                 <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 headphones-card">
                     @php
@@ -522,25 +522,25 @@
                             '6.3mm stereo adapter',
                         ],
                     ])
-                    @include('drumeo.products.partials._order-card', [
-                       'firstOnMobile' => true,
-                       'highlightBorder' => true,
-                       'badge' => 'LAUNCH SPECIAL',
-                       'header' => 'Headphones + 1 Year<br>Drumeo Membership',
-                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order-bundle.webp',
-                       'imageHeight' => 'h-28 lg:h-32',
-                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                       'specialText' => 'With Annual Membership of $240/yr',
-                       'cta' => 'SELECT',
-                       'link' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',
-                       'bonuses' => [
-                           '<strong class="tracking-tight">Everything included with the Headphones PLUS:</strong>',
-                           'Step-by-Step Lessons',
-                           'Personalized Support',
-                           'Song Tutorials',
-                           'World-Class Instructors',
-                       ],
-                   ])
+                     @include('drumeo.products.partials._order-card', [
+                        'firstOnMobile' => true,
+                        'highlightBorder' => true,
+                        'badge' => 'LAUNCH SPECIAL',
+                        'header' => 'Headphones + 1 Year<br>Drumeo Membership',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order-bundle.webp',
+                        'imageHeight' => 'h-28 lg:h-32',
+                        'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
+                        'specialText' => 'With Annual Membership of $240/yr',
+                        'cta' => 'SELECT',
+                        'link' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',
+                        'bonuses' => [
+                            '<strong class="tracking-tight">Everything included with the Headphones PLUS:</strong>',
+                            'Step-by-Step Lessons',
+                            'Personalized Support',
+                            'Song Tutorials',
+                            'World-Class Instructors',
+                        ],
+                    ])
                 </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
