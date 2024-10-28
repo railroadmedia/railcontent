@@ -293,6 +293,7 @@ class PlaylistsMetadataController extends Controller
             $item['duration'] = $sanityInfo ?  $sanityInfo['length_in_seconds']: null;
             $item['playlist_item_name'] = $sanityInfo ?  $item['playlist_item_name']: $item['content_name'];
             $item['user_playlist_item_id'] = $item['id'];
+            $item['id'] = $item['content_id'];
             return array_merge(
                 $item->toArray(),
                 $sanityInfo ? $sanityInfo : []
