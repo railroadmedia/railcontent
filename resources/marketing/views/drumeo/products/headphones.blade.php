@@ -284,7 +284,7 @@
         $gettings = [
         [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail.webp',
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/catch-every-detail-new.webp',
         'title' => '<strong>Catch every detail.</strong>',
         'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.',
         ],
