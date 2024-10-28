@@ -2,6 +2,7 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -10,18 +11,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
-use JMS\Serializer\Tests\Fixtures\Discriminator\Car;
-use Modules\Content\ApiGateways\SanityGateway;
+use Illuminate\Support\Facades\Storage;
 use Modules\Content\Services\ChallengesService;
-use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\RecommendationService;
-use Railroad\Railcontent\Support\Collection;
-use Stripe\Card;
 
 class DevEndpointController extends Controller
 {
@@ -39,6 +36,7 @@ class DevEndpointController extends Controller
         private ChallengesService $challengesService,
         private CustomerIoSyncService $customerIoSyncService,
         private UserService $userService,
+        private SanityGateway $sanityGateway,
     ) {
     }
 
@@ -48,6 +46,7 @@ class DevEndpointController extends Controller
             return $this->handleChallengesEndpoints($request);
         }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
+
     }
 
     private function handleChallengesEndpoints($request) : string
@@ -283,5 +282,15 @@ class DevEndpointController extends Controller
             }
         }
         return $timeResults;
+    }
+
+    private function saveSanityCall($id, $fileName, $type = null)
+    {
+        // Used like:
+
+        $fullPath = Storage::disk("content_test_resources")->path($fileName);
+        $result = $this->sanityGateway->getByRailContentId($id, $type);
+        $json = json_encode($result);
+        file_put_contents($fullPath, $json);
     }
 }
