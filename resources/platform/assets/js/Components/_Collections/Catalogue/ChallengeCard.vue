@@ -14,12 +14,17 @@
                     <path d="M4.86278 10.5132C4.46119 11.2374 4.23251 12.0707 4.23251 12.9574V15.4809H1.70898V12.9574C1.70898 11.5637 2.83881 10.4339 4.23251 10.4339C4.45013 10.4339 4.66132 10.4614 4.86278 10.5132Z" fill="#D1D5DB"/>
                 </svg>
             </div>
-
+            <!-- In Progress Icon -->
+            <div class="tw-absolute tw-right-3 tw-top-3">
+                <i class="fas fa-adjust tw-text-white tw-text-3xl tw-rotate-180"></i>
+            </div>
             <div class="tw-flex tw-flex-col tw-justify-end tw-items-center tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-full">
                 <!-- Logo -->
                 <img class="tw-mb-5 tw-w-full tw-px-5" :src="item.logo_image_url" />
                 <!-- Date Label -->
                 <div :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">September 1 - 31</div>
+                <!-- Progress Bar -->
+                <div class="tw-absolute tw-left-0 tw-bottom-0 tw-h-[5px] tw-w-full tw-bg-drumeo"></div>
             </div>
             <!-- Completed Icon -->
 <!--            <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">-->
