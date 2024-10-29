@@ -13,6 +13,7 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('/trial', [MarketingController::class, 'trial']);
+        Route::get('/trial-month', [MarketingController::class, 'trialMonth']);
         Route::get('/app', [MarketingController::class, 'app']);
         Route::get('/spotify', [MarketingController::class, 'spotify']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);

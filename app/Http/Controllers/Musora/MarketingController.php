@@ -25,6 +25,14 @@ class MarketingController extends BaseController
             'hideMenu' => true,
         ]);
     }
+    public function trialMonth()
+    {
+        return view('musora.sales.subscription', [
+            'theme' => 'musora',
+            'scrollToJoin' => true,
+            'month' => true,
+        ]);
+    }
     public function spotify()
     {
         return view('musora.sales.spotify', [
