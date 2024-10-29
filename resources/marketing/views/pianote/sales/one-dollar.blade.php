@@ -71,6 +71,7 @@
 @section('final')
     @include('musora.sales.components.order-section-collage', [
     'headerLight' => true,
+    'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&locked=true&promo-code=oneDollar',
     'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
     'subHeader' => 'THE EASIEST WAY TO LEARN PIANO ONLINE',
     'header' => '<strong>Unlimited piano lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
