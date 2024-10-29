@@ -200,8 +200,9 @@ class ChallengesService
                 $endDate = $startDate->copy()->addDays($dayCount);
             }
             $isSameMonth = $startDate->month == $endDate->month;
-            $durationText = $startDate->format('F j');
-            $durationText .= ' - ' . ($isSameMonth ? $endDate->format('j') : $endDate->format('F j'));
+            $formatKey = $isSameMonth ? 'm' : 'F';
+            $durationText = $startDate->format($formatKey . ' j');
+            $durationText .= ' - ' . ($isSameMonth ? $endDate->format('j') : $endDate->format($formatKey . ' j'));
             $lessonDocument['duration_text'] = $durationText;
 
         }
