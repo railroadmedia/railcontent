@@ -81,23 +81,23 @@
             color:transparent
         }
 
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+        form.ajax-form ::-webkit-input-placeholder, form.ajax-form ::-moz-placeholder, form.ajax-form :-ms-input-placeholder, form.ajax-form :-moz-placeholder {
             color:#777
         }
 
-        form {
+        form.ajax-form {
             position: relative;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
         @media (min-width: 768px) {
-            form {
+            form.ajax-form {
                 margin: 0 auto 10px;
             }
         }
 
-        form input, form button {
+        form.ajax-form input, form.ajax-form button {
             font: 400 18px/50px 'Open Sans', sans-serif;
             height: 50px;
             color: #999;
@@ -107,13 +107,13 @@
             margin: 0 auto 15px;
         }
         @media (min-width: 768px) {
-            form input, form button {
+            form.ajax-form input, form.ajax-form button {
                 font-size: 22px;
                 height: 65px;
                 line-height: 65px;
             }
         }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
+        form.ajax-form input[type="submit"], form.ajax-form button[type="submit"], form.ajax-form input button, form.ajax-form button button {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             background: #0b76db;
@@ -126,7 +126,7 @@
             text-align: center;
             padding: 0;
         }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+        form.ajax-form input[type="submit"]:hover, form.ajax-form button[type="submit"]:hover, form.ajax-form input button:hover, form.ajax-form button button:hover {
             background: #258ff4;
         }
         .disclaimer {
