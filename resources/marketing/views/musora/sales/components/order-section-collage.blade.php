@@ -92,8 +92,11 @@
                             href="/choose-plan"
                         @endif
                         >
-                            START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-
+                            @if(!empty($cta))
+                                {!! $cta !!}
+                            @else
+                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                            @endif
                         </a>
 {{--                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>--}}
                         @if(!empty($theme) && $theme == 'musora')
