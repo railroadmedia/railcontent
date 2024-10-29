@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Modules\Content\Services\ChallengesService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 
 class ChallengesMetaDataController extends Controller
 {
     public function __construct(
         private ChallengesService $challengesService,
+        private UserContentProgressService $userContentProgressService,
     )
     {
     }
@@ -38,6 +40,13 @@ class ChallengesMetaDataController extends Controller
             'total' => $enrolledUsersAndCount['total'],
         ];
         return response()->json($response);
+    }
+
+    public function completeLesson($id)
+    {
+        $userId = user()->id;
+        $completionData = $this->challengesService->completeLessonAndGetCurrentProgressResults($id, $userId);
+        return response()->json($completionData);
     }
 
     /**

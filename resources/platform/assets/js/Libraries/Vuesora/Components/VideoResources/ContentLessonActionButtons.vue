@@ -209,7 +209,7 @@ export default {
         return {
             resourceDropdown: false,
             showMore: false,
-            hasLiked: this.isLiked,
+            hasLiked: false,
             totalLikes: this.likeCount,
             hasAdded: this.isAdded,
             useTimecode: true,
@@ -234,6 +234,7 @@ export default {
         },
     },
     mounted() {
+        this.hasLiked = this.isLiked;
         document.addEventListener('click', (event) => {
             if (!event.target.matches('.open-resources')) {
                 this.resourceDropdown = false;
@@ -264,15 +265,15 @@ export default {
                 } else {
                     this.totalLikes -= 1;
                 }
+            } catch (error) {
+                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
+            } finally {
+                this.isLiking = false; // Reset loading state
                 //Success
                 window.shownotification({
                     icon: 'check',
                     text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
                 })
-            } catch (error) {
-                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
-            } finally {
-                this.isLiking = false; // Reset loading state
             }
         },
 

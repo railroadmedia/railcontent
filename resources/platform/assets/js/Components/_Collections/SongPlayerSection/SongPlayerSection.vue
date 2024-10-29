@@ -300,5 +300,7 @@ onBeforeMount(async () => {
     // Update ref data reactively after the calls resolve
     likeData.value = like?.data;
     isLiked.value = liked;
+
+    console.log(isLiked.value)
 });
 </script>
