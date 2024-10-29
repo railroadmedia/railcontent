@@ -18,6 +18,7 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .join, .join:hover {

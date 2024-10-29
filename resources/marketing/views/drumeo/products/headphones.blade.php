@@ -18,6 +18,7 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
          .join:hover {
@@ -347,14 +348,14 @@
 
    <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl mb-20">
-            <div class="container mx-auto max-w-5xl px-2 md:px-6 lg:px-0">
+            <div class="container mx-auto max-w-5xl px-2 sm:px-6 lg:px-0">
                 <h2 class="text-black"><strong>Great Sound. Better Price.</strong></h2>
-                <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
+                <h6 class="leading-normal md:leading-relaxed mb-20 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
             </div>
 
             <div class="relative">
-                <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
-                <table class="w-full mx-auto border-separate comparison eardrums earbuds">
+                <p class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}" class="w-full mx-auto border-separate comparison eardrums earbuds">
                     <tbody style="background-color:transparent!important;">
                         <tr style="background-color:transparent!important;">
                             <td></td>
@@ -365,14 +366,14 @@
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp" 
                                     alt="Drumeo Headphones">
                             </td>
-                            <td class="rounded-t-xl">
+                            <td class="rounded-t-xl" @click="tableClass = 'headphones'">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp" 
                                     alt="Audio-Technica M40X">
                             </td>
-                            <td class="rounded-t-xl">
+                            <td class="rounded-t-xl" @click="tableClass = 'earbuds'">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
@@ -413,8 +414,8 @@
                         <tr style="background-color:transparent!important;">
                             <td class="rounded-b-xl">Price</td>
                             <td class="rounded-b-xl text-white">
-                                <s class="opacity-40" style="font-size: 36px; font-weight:400;">$99</s>
-                                <strong style="font-size: 36px;">$79</strong>
+                                <s class="opacity-40">$99</s>
+                                <strong >$79</strong>
                             </td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
