@@ -45,12 +45,10 @@
                      aria-label="Choose plan"
                 @endif
             >
-                @if(!empty($promoVersion) && empty($trialVersion))
-                    @if(!empty($cta))
-                        {!! $cta !!}
-                    @else
-                        SEE YOUR DEAL &raquo;
-                    @endif
+                @if(!empty($cta))
+                    {!! $cta !!}
+                @elseif(!empty($promoVersion) && empty($trialVersion))
+                    SEE YOUR DEAL &raquo;
                 @elseif(!empty($month))
                     30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else

@@ -65,7 +65,6 @@
         'pointThree' => '10-MINUTE PRACTICE',
         'pointFour' => 'HUGE SONG LIBRARY',
         'noTrailer' => true,
-        'cta' => '30 DAYS FOR FREE',
     ])
 @endsection
 @section('final')
