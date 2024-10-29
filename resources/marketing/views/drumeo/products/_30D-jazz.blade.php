@@ -61,8 +61,8 @@
                             @if(!empty($hasProduct) && $hasProduct == 'true')
                                 <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                             @else
-{{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
-                                <a href="#final" class="join blue smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>
+                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>
+{{--                                <a href="#final" class="join blue smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>--}}
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-jazz">
                                     <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                         Registration is FREE for Drumeo Members.
@@ -302,11 +302,11 @@
                 </h4>
             </div>
 
-            @if(!empty($hasProduct) && $hasProduct == 'true')
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
-            @else
-                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
-            @endif
+{{--            @if(!empty($hasProduct) && $hasProduct == 'true')--}}
+{{--                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>--}}
+{{--            @else--}}
+{{--                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>--}}
+{{--            @endif--}}
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -597,63 +597,63 @@
                     @endif
                     <i class="fas fa-check text-drumeo ml-3"></i> Lifetime Course Access
                 </p>
-{{--                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>--}}
-                <h6 class="leading-normal mb-4 text-drumeo uppercase">
-                    @if(empty($platformVersion))
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                        Enrollment closes in
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                        </strong>
-                    </span>
-                    @endif
-                </h6>
+                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>
+{{--                <h6 class="leading-normal mb-4 text-drumeo uppercase">--}}
+{{--                    @if(empty($platformVersion))--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        Enrollment closes in--}}
+{{--                        <strong>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!--}}
+{{--                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                    @endif--}}
+{{--                </h6>--}}
 
-                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">
-                        @include('drumeo.products.partials._order-card', [
-                            'badge' => 'Launch Special',
-                            'header' => '30-Day Jazz',
-                            'subheader' => 'Course Only | Lifetime Access',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
-                            'imageHeight' => 'h-32 md:h-40 lg:h-44',
-                            'fullPrice' => '$127',
-                            'price' => '$97',
-                            'specialText' => "One time payment.",
-                            'cta' => 'ENROLL NOW',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',
-                            'bonuses' => [
-                                '<strong>30-Day Jazz</strong>',
-                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
-                            ],
-                        ])
-                        @include('drumeo.products.partials._order-card', [
-                            'highlightBorder' => true,
-                            'badge' => 'FREE STICKBAG',
-                            'header' => 'Unlimited Lessons',
-                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 5 Bonuses Worth $655',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',
-                            'imageHeight' => 'h-32 md:h-40 lg:h-44',
-                            'price' => '$20/mo',
-                            'specialText' => "Billed annually at $240/yr.",
-                            'cta' => 'GET EVERYTHING',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true',
-                            'bonuses' => [
-                                '<strong>Drumeo Annual Membership</strong>',
-                                '<strong class="text-drumeo">FREE</strong> 30-Day Jazz',
-                                '<strong class="text-drumeo">FREE</strong> Drumeo StickBag',
-                                '<strong class="text-drumeo">FREE</strong> 30-Day Chops',
-                                '<strong class="text-drumeo">FREE</strong> 30-Day Double Bass',
-                                '<strong class="text-drumeo">FREE</strong> 30-Day Independence',
-                            ],
-                        ])
-                    </div>
+{{--                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">--}}
+{{--                        @include('drumeo.products.partials._order-card', [--}}
+{{--                            'badge' => 'Launch Special',--}}
+{{--                            'header' => '30-Day Jazz',--}}
+{{--                            'subheader' => 'Course Only | Lifetime Access',--}}
+{{--                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',--}}
+{{--                            'imageHeight' => 'h-32 md:h-40 lg:h-44',--}}
+{{--                            'fullPrice' => '$127',--}}
+{{--                            'price' => '$97',--}}
+{{--                            'specialText' => "One time payment.",--}}
+{{--                            'cta' => 'ENROLL NOW',--}}
+{{--                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',--}}
+{{--                            'bonuses' => [--}}
+{{--                                '<strong>30-Day Jazz</strong>',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',--}}
+{{--                            ],--}}
+{{--                        ])--}}
+{{--                        @include('drumeo.products.partials._order-card', [--}}
+{{--                            'highlightBorder' => true,--}}
+{{--                            'badge' => 'FREE STICKBAG',--}}
+{{--                            'header' => 'Unlimited Lessons',--}}
+{{--                            'subheader' => '1 Year Of Drumeo +<br class="sm:hidden"> 5 Bonuses Worth $655',--}}
+{{--                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/unlimited-lessons.webp',--}}
+{{--                            'imageHeight' => 'h-32 md:h-40 lg:h-44',--}}
+{{--                            'price' => '$20/mo',--}}
+{{--                            'specialText' => "Billed annually at $240/yr.",--}}
+{{--                            'cta' => 'GET EVERYTHING',--}}
+{{--                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&products[stickbag]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true',--}}
+{{--                            'bonuses' => [--}}
+{{--                                '<strong>Drumeo Annual Membership</strong>',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> 30-Day Jazz',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> Drumeo StickBag',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> 30-Day Chops',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> 30-Day Double Bass',--}}
+{{--                                '<strong class="text-drumeo">FREE</strong> 30-Day Independence',--}}
+{{--                            ],--}}
+{{--                        ])--}}
+{{--                    </div>--}}
 
-                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true">
-                <p><u><em><strong>Don't want to pay shipping?</strong> <br class="hidden sm:inline"> Click here to join Drumeo and get 30-Day Jazz with no physical bonuses.</em></u></p></a>
+{{--                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true">--}}
+{{--                <p><u><em><strong>Don't want to pay shipping?</strong> <br class="hidden sm:inline"> Click here to join Drumeo and get 30-Day Jazz with no physical bonuses.</em></u></p></a>--}}
             </div>
         </section>
         <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
