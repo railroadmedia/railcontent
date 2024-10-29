@@ -80,7 +80,7 @@ class UserAccessPermissionsCollection
                 if ($fixedExpirationDate == $expirationDate) {
                     $fixedExpirationDate = $expirationDate;
                 }
-                $userAccessPermission->actualStartTime = Carbon::today();
+                $userAccessPermission->actualStartTime = Carbon::parse($userAccessPermission->start_time);
                 $userAccessPermission->actualExpirationTime = $fixedExpirationDate;
                 if ($fixedExpirationDate > $maxFixedExpirationDate) {
                     $maxFixedExpirationDate = $fixedExpirationDate;
