@@ -65,11 +65,14 @@
         'pointThree' => '10-MINUTE PRACTICE',
         'pointFour' => 'HUGE SONG LIBRARY',
         'noTrailer' => true,
+        'promoVersion' => true,
+        'cta' => '30 DAYS FOR FREE',
     ])
 @endsection
 @section('final')
     @include('musora.sales.components.order-section-collage', [
     'headerLight' => true,
+    'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true',
     'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
     'header' => '<strong>Unlimited piano lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
