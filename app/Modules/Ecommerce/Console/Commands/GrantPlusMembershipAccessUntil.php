@@ -23,7 +23,7 @@ use Modules\UserManagementSystem\Models\User;
 
 class GrantPlusMembershipAccessUntil extends Command
 {
-    protected $signature = 'ecommerce:GrantPlusMembershipAccessUntil {userIdOrEmail} {expirationDate}';
+    protected $signature = 'ecommerce:GrantPlusMembershipAccessUntil {userIdOrEmail} {startDate} {expirationDate}';
 
     protected $description = 'grant user access until date';
 
@@ -41,13 +41,14 @@ class GrantPlusMembershipAccessUntil extends Command
             $this->error("User $userIdOrEmail not found");
         }
         $expirationDate = Carbon::parse($this->argument('expirationDate'));
+        $startDate = Carbon::parse($this->argument('startDate'));
         $permissionId = UserAccessPermissionsCollection::MusoraPlusMembershipPermission;
 
         if ($user->membership_expiration_date < $expirationDate || $user->membership_level != 'plus') {
             $accessPermissionsService->addFixedAccessPermission(
                 $user,
                 $permissionId,
-                Carbon::today(),
+                $startDate,
                 $expirationDate
             );
             $this->info("User granted plus access until $expirationDate");
