@@ -145,8 +145,10 @@
                   const complete =  await axios.post(`/challenges/complete_lesson/${props.contentId}?brand=${props.brand}`);
                   console.log(complete)
 
+                  emit('toggleCompleteContent');
+
                   if(complete.data?.show_modal){
-                      emit('toggleCompleteContent');
+                      emit('openChallengeCompletionModal', complete.data);
                   }
 
                   contentProgress.value = 100;

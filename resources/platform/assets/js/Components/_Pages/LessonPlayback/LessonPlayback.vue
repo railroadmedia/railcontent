@@ -291,7 +291,7 @@
         </transition>
     </div>
 
-    <ChallengeCompletionModal v-if="isChallengeCompletionModalOpen" :completion-data="completionData" @close-modal="closeCompletionModal" />
+    <ChallengeCompletionModal v-if="isChallengeCompletionModalOpen" :completion-data="completionData" @close-modal="closeChallengeCompletionModal" />
 </template>
 
 <script setup>
@@ -537,7 +537,8 @@ const likeContent = () => {
     }
 }
 
-const openChallengeCompletionModal = async () => {
+const openChallengeCompletionModal = async (data) => {
+    completionData.value = data;
     isChallengeCompletionModalOpen.value = true;
 }
 
@@ -558,13 +559,11 @@ onBeforeMount(async () => {
     const contentId = getContentId();
 
     // Execute all Video Calls
-    const [data, like, liked, completed, nextPreviousLessonData, relatedLessonsData] = await Promise.all([
+    const [data, like, liked, completed] = await Promise.all([
         fetchLessonContent(contentId),
         axios.get(`/content/${contentId}/user_data/${userId.value}`),
         isContentLiked(contentId),
-        axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`),
-        fetchNextPreviousLesson(contentId),
-        fetchRelatedLessons(contentId, brand.value)
+        axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`)
     ]);
 
     // Update ref data reactively after the calls resolve
@@ -572,8 +571,6 @@ onBeforeMount(async () => {
     likeData.value = like?.data;
     isLiked.value = liked;
     isCompleted.value = completed?.data[contentId]?.state === 'completed';
-    nextPreviousLessons.value = nextPreviousLessonData;
-    relatedLessons.value = relatedLessonsData.related_lessons;
 
     //Check values
     console.log('isLiked', isLiked.value)
