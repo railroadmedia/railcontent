@@ -27,12 +27,12 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', ]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote' ]);
     }
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
