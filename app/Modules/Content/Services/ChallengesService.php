@@ -150,8 +150,9 @@ class ChallengesService
                 $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];
                 // TODO https://musora.atlassian.net/browse/TCH-72
                 // handle index and short name
-                $challengeLessons[$index]['index'] = $index;
-                $challengeLessons[$index]['short_name'] = "Day {$index}";
+                $day = $index + 1;
+                $challengeLessons[$index]['index'] = $day;
+                $challengeLessons[$index]['short_name'] = "Day {$day}";
             }
 
             $firstIncompleteLesson = $this->getFirstIncompleteLesson($challengeLessons, $progressData);
@@ -283,7 +284,7 @@ class ChallengesService
         $motivationalText = [];
         if (!$userProgress->is_locked || !$lessonsProgress['added_to_streak']) {
             $active = false;
-        } else if ($lessonsProgress['is_milestone']) {
+        } elseif ($lessonsProgress['is_milestone']) {
             $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
             $motivationalTextConfig = config('challengemotivationalresponses')[$milestone];
             $motivationalText = [
@@ -305,7 +306,16 @@ class ChallengesService
             ];
         }
         $userData = $userProgress->getCompiledMetadata();
-        $challengeData = array_intersect_key($lessonData['lesson'], array_flip(['challenge_dark_mode_logo_url', 'challenge_light_mode_logo_url', 'challenge_logo_image_url', 'index', 'short_name']));
+        $challengeData = array_intersect_key($lessonData['lesson'],
+            array_flip([
+                'challenge_dark_mode_logo_url',
+                'challenge_light_mode_logo_url',
+                'challenge_logo_image_url',
+                'challenge_title',
+                'index',
+                'short_name',
+                'thumbnail']
+        ));
         return [
             'show_modal' => $active,
             ...$lessonsProgress,
