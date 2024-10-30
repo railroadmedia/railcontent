@@ -90,15 +90,17 @@ const handleButtonClick = () => {
   isLoading.value = true;
   localStorage.setItem("lastEmailUsed", emailInput.value);
 
-  axios.post('/user-management-system/login', { email: emailInput.value, password: passwordInput.value })
+  axios.post('/user-management-system/login', {
+    email: emailInput.value,
+    password: passwordInput.value,
+    redirect_to: new URLSearchParams(window.location.search).get('redirect_to')
+  })
     .then((response) => {
       if (response.status === 200) {
-        const redirectTo = new URLSearchParams(window.location.search).get('redirect_to');
-        if (redirectTo) {
-          window.location.href = redirectTo;
-        } else {
-          window.location.href = response.data.redirect_to;
-        }
+          const redirectTo = response.data.redirect_to;
+          if (redirectTo) {
+            window.location.href = redirectTo;
+          }
       }
     })
     .catch((e) => {

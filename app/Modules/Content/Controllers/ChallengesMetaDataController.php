@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
@@ -151,24 +152,40 @@ class ChallengesMetaDataController extends Controller
         $lastCompleted = Carbon::parse($userProgress->last_completed_date);
         $lastCompleted = $lastCompleted->toFormattedDateString();
         $tier = $userProgress->getAwardTier()->value;
-        $award = $challenge["{$tier}_award"];
-        //TODO how to handle images/make pretty?
-        // https://musora.atlassian.net/browse/TCH-46
-        $userAwardPDF = Pdf::loadView("awards.award-template", [
-            'user_name' => $user->display_name,
-            'streak' => $userProgress->completed_best_streak,
-            'minutes_practiced' => $userProgress->completed_time_practiced,
-            'date_completed' => $lastCompleted,
-            'challenge_title' => $challenge['title'],
-            'award' => $award,
-            'award_text' => $challenge['award_custom_text'],
-            'tier' => $tier,
-            'instructor_signature' => $challenge['instructor_signature'],
-        ]);
-        $today = Carbon::now()->toDateString();
-        $challengeName = $challenge['slug'];
-        $fileName = "$challengeName-$today.pdf";
-        return  $userAwardPDF->stream($fileName);
+
+        $awardTempFilePath = $this->createTempFileFromUrl($challenge["{$tier}_award"]);
+        $signatureTempFilePath = $this->createTempFileFromUrl($challenge['instructor_signature']);
+        try {
+            $userAwardPDF = Pdf::loadView("awards.award-template", [
+                'user_name' => $user->display_name,
+                'streak' => $userProgress->completed_best_streak,
+                'minutes_practiced' => $userProgress->completed_time_practiced,
+                'date_completed' => $lastCompleted,
+                'challenge_title' => $challenge['title'],
+                'award' => $awardTempFilePath,
+                'award_text' => $challenge['award_custom_text'],
+                'tier' => $tier,
+                'instructor_signature' => $signatureTempFilePath,
+            ])->setPaper('', 'landscape');
+            $today = Carbon::now()->toDateString();
+            $challengeName = $challenge['slug'];
+            $fileName = "$challengeName-$today.pdf";
+            return  $userAwardPDF->stream($fileName);
+        } catch (\Throwable $e){
+            throw $e;
+        } finally {
+            if ($awardTempFilePath) unlink($awardTempFilePath);
+            if ($signatureTempFilePath) unlink($signatureTempFilePath);
+        }
+    }
+
+    private function createTempFileFromUrl($url) : string | null
+    {
+        if (!$url) return null;
+        $hash = sha1(Carbon::now()->toISOString() . $url);
+        $awardTempFilePath = tempnam(sys_get_temp_dir(), $hash);
+        file_put_contents($awardTempFilePath, fopen($url, 'r'));
+        return $awardTempFilePath;
     }
 
     /**

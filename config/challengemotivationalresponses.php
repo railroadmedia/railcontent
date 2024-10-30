@@ -41,5 +41,6 @@ return [
         'pianote' => 'https=>//lottie.host/3287ce92-0770-4ab3-95d3-3f74f10d4ca0/sEt84SWvHf.json',
         'guitareo' => 'https=>//lottie.host/70c2c2f6-2325-4350-baa9-f703710c4ca3/FH8b9EZJkC.json',
         'singeo' => 'https=>//lottie.host/d2c57df2-f221-4054-a5db-22f12e1a659a/kTBSCOj8tW.json',
+        'text' => '',
     ]
 ];
