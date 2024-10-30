@@ -152,9 +152,10 @@ class ChallengesMetaDataController extends Controller
         $lastCompleted = Carbon::parse($userProgress->last_completed_date);
         $lastCompleted = $lastCompleted->toFormattedDateString();
         $tier = $userProgress->getAwardTier()->value;
-
-        $awardTempFilePath = $this->createTempFileFromUrl($challenge["{$tier}_award"]);
-        $signatureTempFilePath = $this->createTempFileFromUrl($challenge['instructor_signature']);
+        $awardUrl = $challenge["{$tier}_award"];
+        $signatureUrl = $challenge['instructor_signature'];
+        $awardTempFilePath = $this->createTempFileFromUrl($awardUrl);
+        $signatureTempFilePath = $this->createTempFileFromUrl($signatureUrl);
         try {
             $userAwardPDF = Pdf::loadView("awards.award-template", [
                 'user_name' => $user->display_name,
@@ -163,9 +164,11 @@ class ChallengesMetaDataController extends Controller
                 'date_completed' => $lastCompleted,
                 'challenge_title' => $challenge['title'],
                 'award' => $awardTempFilePath,
+                'award_url' => $awardUrl,
                 'award_text' => $challenge['award_custom_text'],
                 'tier' => $tier,
                 'instructor_signature' => $signatureTempFilePath,
+                'instructor_signature_url' => $signatureUrl,
                 'instructor_name' => $challenge['instructors'][0],
             ])->setPaper('', 'landscape');
             $today = Carbon::now()->toDateString();
