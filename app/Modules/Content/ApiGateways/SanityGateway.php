@@ -79,6 +79,7 @@ class SanityGateway
                 "permission_id": permission[]->railcontent_id,
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
+                video,
             }',
         ],
         ];
