@@ -67,6 +67,9 @@ class DevEndpointController extends Controller
             case('move_days'):
                 $numDays = $request->get('num_days', 1);
                 $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                if (!$progress) {
+                    return "Invalid challenge Id and user_id combination. Please enroll your user in the challenge first :D with /challenges/enroll/challenge_id or /challenges/set_start_date/challenge_id&start_date=YYYYMMDD which can be set to the past";
+                }
                 $startDate = Carbon::parse($progress->start_date);
                 $newStartDate = $startDate->subDays($numDays);
                 $challenge = $this->challengesService->getChallengeById($challengeId);
