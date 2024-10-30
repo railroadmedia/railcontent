@@ -153,13 +153,15 @@ class PlaylistsMetadataController extends Controller
         // Find the playlist by ID
         $playlist = UserPlaylist::findOrFail($playlistId);
         if ($playlist->user_id !== user()->id) {
-            return response()->json(['error' => 'You don’t have access to update this playlist'], 403);
+            return response()->json(['success' => false,
+                                     'error' => 'You don’t have access to update this playlist'], 403);
         }
 
         // Update the playlist with validated data
         $playlist->update($validatedData);
 
         return response()->json([
+                                    'success' => true,
                                     'message'   => 'Playlist updated successfully',
                                     'playlist'  => $playlist,
                                 ], 201);
@@ -331,7 +333,7 @@ class PlaylistsMetadataController extends Controller
             $item['item_type'] = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo ? $sanityInfo['type'] : null);
             $item['user_playlist_item_extra_data'] = $sanityInfo ? ($sanityInfo['extra_data'] ?? null) : null;
             $item['duration'] = $sanityInfo ? $sanityInfo['length_in_seconds'] : null;
-            $item['playlist_item_name'] = $sanityInfo ? $item['playlist_item_name'] : $item['content_name'];
+            $item['playlist_item_name'] = $item['playlist_item_name'] ? $item['playlist_item_name'] : $item['content_name'];
             $item['user_playlist_item_id'] = $item['id'];
             $item['id'] = $item['content_id'];
             $item['instructors'] = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo ? $sanityInfo['instructors'] : null);
@@ -357,23 +359,31 @@ class PlaylistsMetadataController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
      */
     public function updatePlaylistItem(Request $request){
+        $validatedData = $request->validate([
+                                                'start_second'        => 'nullable|numeric|min:0',
+                                                'end_second' => 'nullable|numeric|min:0',
+                                                'playlist_item_name'        => 'nullable|string|max:255',
+                                            ]);
         $user = user();
         $playlistItemId = $request->get('user_playlist_item_id');
         $playlistItem = UserPlaylistContent::with('playlist')->findOrFail($playlistItemId);
-        throw_if(!$playlistItem, new NotFoundException("Playlist item not exists."));
-        throw_if(
-            (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)),
-            new NotFoundException("You don’t have access to update items from this playlist", 'Private Playlist')
-        );
-        $updatableFields = ['start_second', 'end_second', 'playlist_item_name'];
-        $dataToUpdate = $request->only($updatableFields);
+        if (!$playlistItem) {
+            return response()->json(['success' => false,
+                                     'error' => 'Playlist item not exists.'], 404);
+        }
+        if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
+            return response()->json(['success' => false,
+                                     'error' => 'You don’t have access to update items from this playlist'], 403);
+        }
 
-        $playlistItem->update($dataToUpdate);
+        $playlistItem->update($validatedData);
 
-        return response()->json(['message' => 'Playlist item updated successfully']);
+        return response()->json([
+                                    'success' => true,
+                                    'message' => 'Playlist item updated successfully'
+                                ]);
     }
 
     /**
