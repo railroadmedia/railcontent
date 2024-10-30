@@ -12,7 +12,7 @@
     hassessionstatus="{{session()->has('status')}}"
     sessionstatus="{{ session()->get('status') }}"
     :usecsrftoken="!!({{$useCsrfToken ?? true}})"
-    order-now-url="{{ url('/#orderNow') }}"
+    order-now-url="{{ url('/choose-plan') }}"
     >
         <template v-slot:csrf>{{ csrf_field() }}</template>
     </login>
