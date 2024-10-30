@@ -28,9 +28,7 @@ class ResetPassword extends ResetPasswordBase
     protected function buildMailMessage($url): MailMessage
     {
         $user = User::where('email', request('email'))->first();
-        $token = encodeURISub($this->token);
-        $email = encodeURISub(request('email'));
-        $resetURL = "https://www.musora.com/user-management-system/password/password-reset-form?token=$token&email=$email";
+
         return (new MailMessage())
             ->subject('Musora Account Password Reset Link')
             ->view(
@@ -39,7 +37,10 @@ class ResetPassword extends ResetPasswordBase
                     'input' => [
                         'line-one' => "We've received a request to reset your password. To reset your password, click the button below. ",
                         'button-name' => 'Reset Password',
-                        'url' => $resetURL,
+                        'url' => url()->route(
+                            'user_management_system.password.show-reset-form',
+                            ['token' => $this->token, 'email' => request('email')]
+                        ),
                         'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
                         'display-name' => $user->display_name
                     ]
