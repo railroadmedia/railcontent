@@ -183,7 +183,7 @@
                         :content-id="videoData.id"
                         :is-challenge="isChallenge"
                         @toggle-complete-content="toggleCompleteContent"
-                        @open-completion-modal="openCompletionModal"
+                        @open-challenge-completion-modal="openChallengeCompletionModal"
                     />
                 </div>
                 <!-- Related Lessons Toggle -->
@@ -291,7 +291,7 @@
         </transition>
     </div>
 
-    <ChallengeCompletionModal v-if="isCompletionModalOpen" :completion-data="completionData" @close-modal="closeCompletionModal" />
+    <ChallengeCompletionModal v-if="isChallengeCompletionModalOpen" :completion-data="completionData" @close-modal="closeCompletionModal" />
 </template>
 
 <script setup>
@@ -363,7 +363,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(true);
-const isCompletionModalOpen = ref(false);
+const isChallengeCompletionModalOpen = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -537,16 +537,12 @@ const likeContent = () => {
     }
 }
 
-const openCompletionModal = async () => {
-    const userData = await axios(`/challenges/lessons/${contentId.value}`);
-    console.log(userData);
-    completionData.value = userData.data;
-
-    isCompletionModalOpen.value = true;
+const openChallengeCompletionModal = async () => {
+    isChallengeCompletionModalOpen.value = true;
 }
 
-const closeCompletionModal = () => {
-    isCompletionModalOpen.value = false;
+const closeChallengeCompletionModal = () => {
+    isChallengeCompletionModalOpen.value = false;
 }
 
 const isWorkout = computed( () => {
