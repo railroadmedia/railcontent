@@ -308,7 +308,7 @@ class PlaylistsMetadataController extends Controller
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
-        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc) {
+        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId) {
             $sanityInfo = $sanityDataAssoc->get($item->content_id);
             $route = [];
             if (!empty($sanityInfo['parent_content_data'] ?? [])) {
@@ -318,9 +318,7 @@ class PlaylistsMetadataController extends Controller
                         case 'learning-path':
                             return 'Method';
                         case 'learning-path-level':
-                            return 'L';
-                            //                            case 'learning-path-course':
-                            //                                return 'Gear';
+                            return 'L'.$parent['position'];
                         default:
                             return $parent['slug'];
                     }
@@ -338,6 +336,13 @@ class PlaylistsMetadataController extends Controller
             $item['id'] = $item['content_id'];
             $item['instructors'] = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo ? $sanityInfo['instructors'] : null);
             $item['route'] = $assignmentInfo ? $assignmentInfo['route'] : (($sanityInfo && isset($sanityInfo['route'])) ? $sanityInfo['route'] : []);
+
+            if($sanityInfo){
+                $sanityInfo['url'] = $item['url'] = $sanityInfo['web_url_path'] = url()->route('platform.user.playlist-item', [
+                    'playlistId' => $playlistId,
+                    'playlistItemId' =>   $item['user_playlist_item_id'],
+                ]);
+            }
             return array_merge(
                 $item->toArray(),
                 $sanityInfo ? $sanityInfo : []
@@ -345,6 +350,30 @@ class PlaylistsMetadataController extends Controller
         });
 
         return response()->json($mergedData);
+    }
+
+    /**
+     * Update playlist item if it exists and belongs to the authenticated user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
+    public function updatePlaylistItem(Request $request){
+        $user = user();
+        $playlistItemId = $request->get('user_playlist_item_id');
+        $playlistItem = UserPlaylistContent::with('playlist')->findOrFail($playlistItemId);
+        throw_if(!$playlistItem, new NotFoundException("Playlist item not exists."));
+        throw_if(
+            (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)),
+            new NotFoundException("You don’t have access to update items from this playlist", 'Private Playlist')
+        );
+        $updatableFields = ['start_second', 'end_second', 'playlist_item_name'];
+        $dataToUpdate = $request->only($updatableFields);
+
+        $playlistItem->update($dataToUpdate);
+
+        return response()->json(['message' => 'Playlist item updated successfully']);
     }
 
     /**

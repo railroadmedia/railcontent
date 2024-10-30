@@ -60,10 +60,12 @@ class UserPlaylist extends Model
                 ->selectRaw('IF( pinned.id IS NULL, FALSE, TRUE) as  isPinned')
               ->orderByRaw('isPinned desc, pinned.created_at ' . $direction);
         } elseif ($column == 'most_recent') {
-            return $query->select('*',
-                                  \DB::raw('GREATEST(' .
+            return $query->select(
+                '*',
+                \DB::raw('GREATEST(' .
                                            config('railcontent.table_prefix') . 'user_playlists.created_at, COALESCE(' .
-                                           config('railcontent.table_prefix') . 'user_playlists.updated_at, 0), COALESCE(last_progress, 0)) as datemax'))
+                                           config('railcontent.table_prefix') . 'user_playlists.updated_at, 0), COALESCE(last_progress, 0)) as datemax')
+            )
                 ->orderBy('datemax', $direction);
         } else {
             // Default sorting if the column is not recognized
@@ -114,7 +116,7 @@ class UserPlaylist extends Model
             ->selectRaw('COUNT(id) as playlistsCount, GROUP_CONCAT(id) as playlistIds')
             ->where('user_id', $userId)
             ->where('brand', $brand)
-            ->when($term, fn($q) => $q->searchTerm($term))
+            ->when($term, fn ($q) => $q->searchTerm($term))
             ->groupBy('category');
     }
 

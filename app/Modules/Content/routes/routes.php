@@ -111,5 +111,6 @@ Route::prefix('playlists')
         Route::delete('/like', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistLike')->name('playlist.delete.like');
         Route::get('/playlist', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylist')->name('playlist.fetch');
         Route::get('/playlist-lessons', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItems')->name('playlist.items');
+        Route::post('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylistItem')->name('playlist.item.update');
         //
     });
