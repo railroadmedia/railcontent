@@ -54,7 +54,7 @@
                             <img style="display: inline;" src="data:image/png;base64,{{ base64_encode(file_get_contents('https://musora-web-platform.s3.us-east-1.amazonaws.com/challenges/test_badge.png')) }}" />
                         </td>
                         <td style="text-align: center; width: 33%;">
-                            Domino Santantonio
+                            {{ $instructor_name }}
                             <div style="text-align: center; font-size: 10px; border-top: 1px solid #CBCBCD; margin-top: 10px; padding-top: 10px; font-weight: bold;">INSTRUCTOR</div>
                         </td>
                     </tr>

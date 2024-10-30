@@ -146,9 +146,9 @@ class ChallengesMetaDataController extends Controller
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen
-        if (is_null($userProgress->last_completed_date)) {
-            return null;
-        }
+//        if (is_null($userProgress->last_completed_date)) {
+//            return null;
+//        }
         $lastCompleted = Carbon::parse($userProgress->last_completed_date);
         $lastCompleted = $lastCompleted->toFormattedDateString();
         $tier = $userProgress->getAwardTier()->value;
@@ -166,6 +166,7 @@ class ChallengesMetaDataController extends Controller
                 'award_text' => $challenge['award_custom_text'],
                 'tier' => $tier,
                 'instructor_signature' => $signatureTempFilePath,
+                'instructor_name' => $challenge['instructors'][0],
             ])->setPaper('', 'landscape');
             $today = Carbon::now()->toDateString();
             $challengeName = $challenge['slug'];
