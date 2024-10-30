@@ -14,13 +14,11 @@ const userStore = useUserStore();
 const notification = useNotificationStore();
 
 const props = defineProps({
-  loginurl: {
+  redirectUrl: {
     type: String,
+    default: ''
   },
   reseturl: {
-    type: String,
-  },
-  joinurl: {
     type: String,
   },
   usecsrftoken: {
@@ -93,7 +91,7 @@ const handleButtonClick = () => {
   axios.post('/user-management-system/login', {
     email: emailInput.value,
     password: passwordInput.value,
-    redirect_to: new URLSearchParams(window.location.search).get('redirect_to')
+    redirect_to: new URLSearchParams(window.location.search).get('redirect_to') ?? props.redirectUrl
   })
     .then((response) => {
       if (response.status === 200) {
