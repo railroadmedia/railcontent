@@ -305,7 +305,7 @@ class ChallengesService
             ];
         }
         $userData = $userProgress->getCompiledMetadata();
-        $challengeData = array_intersect_key($lessonData['lesson'], array_flip(['challenge_dark_mode_logo_url', 'challenge_light_mode_logo_url', 'challenge_logo_image_url']));
+        $challengeData = array_intersect_key($lessonData['lesson'], array_flip(['challenge_dark_mode_logo_url', 'challenge_light_mode_logo_url', 'challenge_logo_image_url', 'index', 'short_name']));
         return [
             'show_modal' => $active,
             ...$lessonsProgress,

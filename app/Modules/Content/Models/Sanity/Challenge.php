@@ -39,10 +39,11 @@ class Challenge extends ParentTemplate
                             ),
                             new Field(FieldType::Number, 'length_in_seconds', 'Duration', group: $detailsGroup),
                             new Field(FieldType::String, 'award_custom_text', 'Custom Text for the PDF award', group: $detailsGroup),
-                            new Field(FieldType::File, 'gold_award', 'Gold Award', group: $detailsGroup, validation: [new Required()]),
-                            new Field(FieldType::File, 'silver_award', 'Silver Award', group: $detailsGroup, validation: [new Required()]),
-                            new Field(FieldType::File, 'bronze_award', 'Bronze Award', group: $detailsGroup, validation: [new Required()]),
-                            new Field(FieldType::File, 'badge', 'Badge', group: $detailsGroup, validation: [new Required()]),
+                            new Field(FieldType::File, 'gold_award', 'Gold Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
+                            new Field(FieldType::File, 'silver_award', 'Silver Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
+                            new Field(FieldType::File, 'bronze_award', 'Bronze Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
+                            new Field(FieldType::File, 'badge', 'Badge', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
+                            //new Field(FieldType::File, 'instructor_signature', 'Instructor Signature', group: $detailsGroup, validation: [new Required()], options: ['accept' => 'image/png']),
                             new Field(FieldType::Boolean, 'is_solo', 'Is Solo Challenge', group: $detailsGroup, initialValue: false),
                          ]);
     }
