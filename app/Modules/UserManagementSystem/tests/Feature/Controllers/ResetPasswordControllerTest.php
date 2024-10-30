@@ -2,19 +2,15 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Models\PasswordReset;
+use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
-use Modules\UserManagementSystem\Models\User;
 
 class ResetPasswordControllerTest extends UserManagementSystemTestCase
 {
-    // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     public function test_reset_password_validation_failed()
     {
         $response = $this->call(
@@ -27,7 +23,6 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_reset_password_invalid_token()
     {
-        $hashKey = Str::random(40);
         $password = Str::random(12);
 
         $response = $this->call(
@@ -48,7 +43,7 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_reset_password_email_notification_and_reset_with_token()
     {
-        $email = $this->faker->email();
+        $email = $this->faker->email;
         $password = $this->faker->words(3, true);
 
         User::factory()->create([

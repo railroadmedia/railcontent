@@ -10,6 +10,7 @@ use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
@@ -98,7 +99,7 @@ class ChallengesService
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
         $startDate = max($startDate, Carbon::now()->startOfDay());
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData($challenge, startDate: $startDate, isLocked: $isLocked);
-        $restDays = ChallengeUserProgress::calculateDefaultRestdays($challenge);
+        $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate([
             'content_id' => $challengeId,
             'user_id' => $userId,
@@ -116,7 +117,7 @@ class ChallengesService
 
 
     /**
-     * Get lesson metadata for lock dates and completion status.
+     * Get lesson and related content metadata for the current user progress.
      * @param int $contentId
      * @param int $userId
      * @return array
@@ -124,7 +125,7 @@ class ChallengesService
     public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true) : ?array
     {
         if ($isLesson) {
-            $sanityDocument = $this->sanityGateway->getChallengeDataFromChild($contentId);
+            $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
             $challenge = $sanityDocument['parent'];
             $challengeLessons = $challenge['lessons'];
 
@@ -146,7 +147,11 @@ class ChallengesService
                 $unlockDate = Carbon::parse($unlockDate);
                 $challengeLessons[$index]['unlock_date'] = $unlockDate->toISOString();
                 $challengeLessons[$index]['is_locked'] = $progressData->is_locked && $unlockDate > $today;
-                $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];;
+                $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];
+                // TODO https://musora.atlassian.net/browse/TCH-72
+                // handle index and short name
+                $challengeLessons[$index]['index'] = $index;
+                $challengeLessons[$index]['short_name'] = "Day {$index}";
             }
 
             $firstIncompleteLesson = $this->getFirstIncompleteLesson($challengeLessons, $progressData);
@@ -168,6 +173,8 @@ class ChallengesService
 
         $nextPreviousLesson = $this->getPreviousAndNextLessonIds($contentId, $challengeLessons);
 
+
+        // Assign the formatted lesson to the `lesson` object and add relevant challenge data
         if ($isLesson) {
             foreach ($challengeLessons as $lesson) {
                 if ($lesson['id'] == $contentId) {
@@ -177,8 +184,30 @@ class ChallengesService
             }
             $lessonDocument['challenge_dark_mode_logo_url'] = $challenge['dark_mode_logo_url'];
             $lessonDocument['challenge_light_mode_logo_url'] = $challenge['light_mode_logo_url'];
+            $lessonDocument['challenge_logo_image_url'] = $challenge['logo_image_url'];
             $lessonDocument['challenge_title'] = $challenge['title'];
+        } else {
+            // format the duration of the challenge
+            if ($userData['is_active']) {
+                $startDate = Carbon::parse($userData['start_date']);
+                $endDate = Carbon::parse($userData['end_date']);
+            } else {
+                $startDate = Carbon::parse($lessonDocument['published_on']);
+                $dayCount = 0;
+                foreach($challengeLessons as $child) {
+                    $dayCount += $child['is_always_unlocked_for_challenge'] ?? false ? 0 : 1;
+                }
+                $endDate = $startDate->copy()->addDays($dayCount);
+            }
+            $isSameMonth = $startDate->month == $endDate->month;
+            $formatKey = $isSameMonth ? 'm' : 'F';
+            $durationText = $startDate->format($formatKey . ' j');
+            $durationText .= ' - ' . ($isSameMonth ? $endDate->format('j') : $endDate->format($formatKey . ' j'));
+            $lessonDocument['duration_text'] = $durationText;
+
         }
+
+
 
         return [
             'lesson' => $lessonDocument,
@@ -240,6 +269,51 @@ class ChallengesService
     public function getChallengeById($challengeId) : array | null
     {
         return $this->sanityGateway->getByRailContentId($challengeId, 'challenge');
+    }
+
+    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId) : array
+    {
+        $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
+        $challenge = $sanityDocument['parent'];
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
+        $lessonsProgress = $userProgress->updateLessonsProgress($lessonId, isCompleted: true);
+        $isChallengeCompleted = $userProgress->areAllLessonsCompleted();
+        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true);
+        $active = true;
+        $motivationalText = [];
+        if (!$userProgress->is_locked || !$lessonsProgress['added_to_streak']) {
+            $active = false;
+        } else if ($lessonsProgress['is_milestone']) {
+            $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
+            $motivationalTextConfig = config('challengemotivationalresponses')[$milestone];
+            $motivationalText = [
+                'lottie_url' => $motivationalTextConfig[brand()],
+                'milestone' => $milestone,
+                'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
+                'motivational_subtext' => $isChallengeCompleted  ? '' : "You've earned an additional freeze token!",
+                'badge_text' => $motivationalTextConfig['text'],
+            ];
+        } else {
+            $missingLessons = $lessonData['user_data']['missed_lessons'];
+            $noMissingLessons = $missingLessons == 0;
+            $motivationalText = [
+                'lottie_url' => null,
+                'milestone' => null,
+                'motivational_title' => $noMissingLessons ? "You're done for the day!" : "You're almost caught up!",
+                'motivational_subtext' => $noMissingLessons ? "Return tomorrow to maintain your streak!" : "Complete {$missingLessons} more lesson(s) to catch up",
+                'badge_text' => null,
+            ];
+        }
+        $userData = $userProgress->getCompiledMetadata();
+        $challengeData = array_intersect_key($lessonData['lesson'], array_flip(['challenge_dark_mode_logo_url', 'challenge_light_mode_logo_url', 'challenge_logo_image_url', 'index', 'short_name']));
+        return [
+            'show_modal' => $active,
+            ...$lessonsProgress,
+            ...$motivationalText,
+            ...$challengeData,
+            'user_data' => $userData,
+            'next_lesson' => $lessonData['next_lesson']
+        ];
     }
 
     /**

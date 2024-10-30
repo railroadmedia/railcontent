@@ -498,15 +498,15 @@ export default {
                 await (this.isLiked ? unlikeContent(this.contentId) : likeContent(this.contentId));
                 // Toggle the liked state after the request succeeds
                 this.$emit('onLikeContent'); 
+            } catch (error) {
+                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
+            } finally {
+                this.isLiking = false; // Reset loading state
                 //Success
                 window.shownotification({
                     icon: 'check',
                     text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
                 })
-            } catch (error) {
-                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
-            } finally {
-                this.isLiking = false; // Reset loading state
             }
         },
 

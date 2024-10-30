@@ -79,6 +79,7 @@ class SanityGateway
                 "permission_id": permission[]->railcontent_id,
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
+                video,
             }',
         ],
         ];
@@ -225,7 +226,7 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array - matching challenge document
      */
-    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null) : array
+    public function getChallengeChildAndParentData(int $railcontentId, ?string $type = null) : array
     {
 
         $gateway = new SanityGateway();
