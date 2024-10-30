@@ -124,7 +124,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "@php -d memory_limit=-1 artisan test --stop-on-failure --stop-on-error",
-        "test-p": "@php -d memory_limit=-1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error",
+        "test-p": "@php -d memory_limit=-1 artisan test --parallel --recreate-databases",
         "test-cov-p": [
             "@putenv XDEBUG_MODE=coverage",
             "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error --coverage"

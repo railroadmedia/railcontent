@@ -7,6 +7,6 @@
     <h2> Brand: {{ $brand }} </h2>
     <h2> Challenge: {{ $challenge_title }} </h2>
     <h2> Award Text: {{ $award_text }} </h2>
-    <h2> Signature file path: {{ $instructor_signature }}</h2>
-    <img src="{{ $instructor_signature }}">
+    <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents($instructor_signature))}}">
+    <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents($award))}}">
 </div>
