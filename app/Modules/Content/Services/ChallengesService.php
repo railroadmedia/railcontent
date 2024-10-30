@@ -142,17 +142,23 @@ class ChallengesService
 
         if (!is_null($progressData) && $progressData->is_active) {
             $today = Carbon::now()->startOfDay();
+            $day = 0;
             foreach($challengeLessons as $index => $lesson) {
                 $unlockDate = $progressData->lessons_meta_data[$index]['unlock_date'];
                 $unlockDate = Carbon::parse($unlockDate);
                 $challengeLessons[$index]['unlock_date'] = $unlockDate->toISOString();
                 $challengeLessons[$index]['is_locked'] = $progressData->is_locked && $unlockDate > $today;
                 $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];
-                // TODO https://musora.atlassian.net/browse/TCH-72
-                // handle index and short name
-                $day = $index + 1;
-                $challengeLessons[$index]['index'] = $day;
-                $challengeLessons[$index]['short_name'] = "Day {$day}";
+                if (!$lesson['is_always_unlocked_for_challenge']) {
+                    $day += 1;
+                    $challengeLessons[$index]['index'] = $day;
+                    $challengeLessons[$index]['short_name'] = "Day {$day}";
+                } else {
+                    $challengeLessons[$index]['index'] = '';
+                    $challengeLessons[$index]['short_name'] = $lesson['title'];
+                }
+
+
             }
 
             $firstIncompleteLesson = $this->getFirstIncompleteLesson($challengeLessons, $progressData);
