@@ -76,7 +76,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up'
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectGuestsTo(fn() => route('login'));
+        $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
         $middleware->encryptCookies(except: [
@@ -110,6 +110,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Railroad\LeadTracker\Middleware\LeadTrackerMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_authenticated', [
@@ -129,6 +130,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\LoggingContextMiddleware::class,
             \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_member_only', [
@@ -146,6 +148,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('api_authenticated', [
@@ -161,6 +164,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
             \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_or_api_public', [

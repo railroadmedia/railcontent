@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Platform;
 use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
-use Google\Service\Gmail\Filter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Helpers\FiltersHelper;
@@ -100,10 +98,10 @@ class WorkoutsPageController extends BaseController
         ContentRepository::$countFilterOptionItems = true;
 
         FiltersHelper::prepareFiltersFields();
-
+        $defaultLimit = ContentJsonController::getDefaultLimit([$lessonType], brand(), $request->get('tabs', []), 20);
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 10),
+            $request->get('limit', $defaultLimit),
             $request->get('sort', '-published_on'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
