@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Content\Controllers\ChallengesMetaDataController;
+use App\Modules\Content\Controllers\ContentLikesControllerUser;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +39,26 @@ Route::prefix('content')
         )->name('content.user-permissions');
 
 
+        Route::get(
+            'vimeo-data/{vimeo_id}',
+            [ContentMetadataController::class, 'getVimeoData']
+        )->name('content.vimeo-data');
+        
+        //Content User Likes
+        Route::get(
+            'user/likes/all',
+            [ContentLikesControllerUser::class, 'all']
+        )->name('content.user.likes.all');
 
+        Route::post(
+            'user/likes/like/{contentId}',
+            [ContentLikesControllerUser::class, 'like']
+        )->name('content.user.like');
+
+        Route::post(
+            'user/likes/unlike/{contentId}',
+            [ContentLikesControllerUser::class, 'unLike']
+        )->name('content.user.unlike');
     });
 
 Route::prefix('challenges')

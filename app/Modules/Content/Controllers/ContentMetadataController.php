@@ -14,17 +14,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\MusoraApi\Contracts\ProductProviderInterface;
-use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ContentMetadataController extends Controller
 {
-    public function __construct(
-        private ProductProviderInterface $productProvider,
-        private UserPermissionsService $userPermissionsService)
-    {
-    }
-
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
@@ -113,7 +105,7 @@ class ContentMetadataController extends Controller
         $likedCount = ContentLike::getContentLikedCount($contentId);
         $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
         return [
-            'isLiked' => $isLiked ,
+            'isLiked' => $isLiked,
             'likeCount' => $likedCount,
             'isAdded' => false,
             'currentSecond' => $currentSecond
@@ -128,5 +120,20 @@ class ContentMetadataController extends Controller
         $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
         $permissions = Arr::pluck($permissions, 'permission_id');
         return response()->json($permissions);
+    }
+
+    /**
+     * @param $vimeoId
+     * @return array
+     */
+    public function getVimeoData($vimeoId)
+    {
+        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
+        $response = [
+            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
+            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
+            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+        return $response;
     }
 }
