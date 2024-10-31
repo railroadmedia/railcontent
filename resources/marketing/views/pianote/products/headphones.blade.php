@@ -217,7 +217,7 @@
 
     @php
         if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&locked=true';
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
              $discountedPrice = 79;
         }
         else {
@@ -611,7 +611,7 @@
                         'price' => "$" . floatval($productPrices['pianote-headphones-2024']->discounted_price),
                         'specialText' => 'One-time payment.',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1&locked=true',
+                        'link' => '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1',
                         'bonuses' => [
                             '<strong>1 Pair of Pianote Headphones</strong>',
                             '1.8m cable',

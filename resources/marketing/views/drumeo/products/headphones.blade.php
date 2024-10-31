@@ -7,7 +7,7 @@
     <meta name="description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
     <meta property="og:description" content="The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/share-image.jpg"> 
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/headphones/share-image.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -216,7 +216,7 @@
 
     @php
         if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[drumeo-headphones]=1&locked=true';
+             $orderUrl = '/ecommerce/add-to-cart?products[drumeo-headphones]=1';
              $discountedPrice = 79;
         }
         else {
@@ -290,14 +290,14 @@
         'desc' => 'With an extended <strong>frequency range of 10–26,000 Hz</strong> and <strong>larger 45mm drivers</strong>, these headphones allow you to experience your E-Kit like it\'s meant to be heard.',
         ],
         [
-        'position' => 'left', 
+        'position' => 'left',
         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/cushioned-ear-pads.webp',
         'title' => '<strong>A warm hug for your ears.</strong>',
         'desc' => 'The Drumeo Headphones feature <strong>ultra-soft, cushioned ear pads</strong> and a lightweight frame. <strong>Weighing just 295 grams</strong>, they\'re so light and comfortable you\'ll forget you\'re wearing them.',
         ],
         [
         'position' => 'right',
-        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp', 
+        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/products/headphones/zero-latency.webp',
         'title' => '<strong>Wired for real-time response.</strong>',
         'desc' => 'The Drumeo Headphones feature a <strong>wired connection</strong> for <strong><br class="hidden lg:inline"/>zero-latency audio</strong>, meaning you hear the notes exactly as you play them, in real time.',
         ],
@@ -363,21 +363,21 @@
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/headphones/headphones-comparison-01.webp"
                                     alt="Drumeo Headphones">
                             </td>
                             <td class="rounded-t-xl" @click="tableClass = 'headphones'">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-02.webp"
                                     alt="Audio-Technica M40X">
                             </td>
                             <td class="rounded-t-xl" @click="tableClass = 'earbuds'">
                                 <img class="h-20 md:h-40 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp" 
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/headphones/headphones-comparison-03.webp"
                                     alt="Sennheiser HD 280 Pro">
                             </td>
                         </tr>
@@ -516,7 +516,7 @@
                         'price' => "$" . floatval($productPrices['drumeo-headphones']->discounted_price),
                         'specialText' => 'One-time payment.',
                         'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[drumeo-headphones]=1&locked=true',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-headphones]=1',
                         'bonuses' => [
                             '<strong class="tracking-tight">1 Pair of Drumeo Headphones</strong>',
                             '1.8m cable',
