@@ -4,7 +4,7 @@
             <!-- Card Image -->
             <img class="tw-w-full tw-aspect-[2/3] tw-object-cover tw-object-center" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${item.image}`" />
             <!-- Community Icon -->
-            <div class="tw-bg-[#374151] tw-rounded-xl tw-absolute tw-left-2 lg:tw-left-[13px] tw-top-2 lg:tw-top-[13px] tw-px-1 sm:tw-px-1.5 tw-py-0.5 sm:tw-py-1">
+            <div v-if="!item.is_solo_challenge" class="tw-bg-[#374151] tw-rounded-xl tw-absolute tw-left-2 lg:tw-left-[13px] tw-top-2 lg:tw-top-[13px] tw-px-1 sm:tw-px-1.5 tw-py-0.5 sm:tw-py-1">
                 <svg class="tw-w-4 sm:tw-w-5 lg:tw-w-6 tw-h-4 sm:tw-h-5 lg:tw-h-6" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.8031 5.38681C11.8031 6.78052 10.6733 7.91034 9.27957 7.91034C7.88587 7.91034 6.75604 6.78052 6.75604 5.38681C6.75604 3.9931 7.88587 2.86328 9.27957 2.86328C10.6733 2.86328 11.8031 3.9931 11.8031 5.38681Z" fill="#D1D5DB"/>
                     <path d="M16.009 7.06916C16.009 7.9983 15.2558 8.75152 14.3266 8.75152C13.3975 8.75152 12.6443 7.9983 12.6443 7.06916C12.6443 6.14003 13.3975 5.38681 14.3266 5.38681C15.2558 5.38681 16.009 6.14003 16.009 7.06916Z" fill="#D1D5DB"/>
