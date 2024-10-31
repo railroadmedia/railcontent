@@ -39,6 +39,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/prima-resources', [LeadGenController::class, 'primaResources']);
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
         Route::get('/technique-essentials', [LeadGenController::class, 'techniqueEssentials']);
+        Route::get('/win', [LeadGenController::class, 'win']);
 
         Route::group(
             ['prefix' => 'piano-complete-beginners-bootcamp'],
