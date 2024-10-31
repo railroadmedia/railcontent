@@ -1,19 +1,22 @@
-import React from 'react';
-import { useCurrentUser} from 'sanity'
+import React, { useMemo, memo } from 'react';
+import { useCurrentUser } from 'sanity';
 
-const RolesBasedPermissionsInput = React.forwardRef((props, ref) => {
-    const {renderDefault, schemaType} = props;
-    const {role} = useCurrentUser();
+const RolesBasedPermissionsInput = memo(
+    React.forwardRef((props, ref) => {
+        const { renderDefault, schemaType } = props;
+        const { role } = useCurrentUser();
 
-    // Disable 'Create' options for editors
-    schemaType.of.map((option) => {
-        if (role !== 'administrator') {
-            option.options = {...option.options, disableNew: true};
-        }
-        return option;
-    });
+        const options = useMemo(() => {
+            return schemaType.of.map((option) => {
+                if (role !== 'administrator') {
+                    option.options = {...option.options, disableNew: true};
+                }
+                return option;
+            });
+        }, [schemaType.of, role]);
 
-    return renderDefault({...props});
-});
+        return renderDefault({ ...props, schemaType: { ...schemaType, of: options } });
+    })
+);
 
 export default RolesBasedPermissionsInput;
