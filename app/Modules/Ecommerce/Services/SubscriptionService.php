@@ -9,6 +9,7 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
@@ -34,7 +35,8 @@ class SubscriptionService
      */
     public function getActiveSubscription(User $user): ?Subscription
     {
-        $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+        $subscriptions = $this->getSubscriptions($user);
+
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
             return $subscription->product?->isRecurringMembershipProduct() ?? false;
@@ -44,23 +46,18 @@ class SubscriptionService
             /** @var Subscription $subscription */
             return $subscription->status == RechargeSubscriptionStatusEnum::Active->value;
         });
-        $mostRecentActiveSubscription = $subscriptions->sortByDesc('createdAt')->first();
 
+        $mostRecentActiveSubscription = $activeMembershipSubscriptions->sortByDesc('createdAt')->first();
         return $mostRecentActiveSubscription;
     }
 
-    public function updateSubscriptionProduct(Subscription $subscription, $shopifyVariantId)
+    public function updateSubscriptionProduct(Subscription $subscription, Product $product)
     {
-        $this->recharge->updateSubscriptionProduct($subscription, $shopifyVariantId);
+        $this->recharge->updateSubscriptionProduct($subscription, $product);
     }
 
-    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions)
+    private function getSubscriptions(User $user): Collection
     {
-        $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
-        if (!$user->shopify_id) {
-            // User doesn't have any subscriptions from Shopify to be synced.
-            return null;
-        }
         $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
         $subscriptionSkus = $subscriptions->pluck('sku')->toArray();
         $productLookup = $this->productService->getProductsBySkus($subscriptionSkus)
@@ -84,6 +81,17 @@ class SubscriptionService
             }
             $subscription->setProduct($product);
         });
+        return $subscriptions;
+    }
+
+    public function syncSubscriptionData(UserAccessPermissionsCollection $userAccessPermissions)
+    {
+        $user = $this->userService->getByIdOrNull($userAccessPermissions->getUserId());
+        if (!$user->shopify_id) {
+            // User doesn't have any subscriptions from Shopify to be synced.
+            return null;
+        }
+        $subscriptions = $this->getSubscriptions($user);
 
         $membershipSubscriptions = $subscriptions->filter(function ($subscription) {
             /** @var Subscription $subscription */
