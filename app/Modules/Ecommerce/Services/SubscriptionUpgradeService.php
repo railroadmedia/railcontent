@@ -64,14 +64,13 @@ class SubscriptionUpgradeService
             $intervalLength = 1;
         }
 
-        $shopifyVariantId = Product::whereBrand('musora')
+        $product = Product::whereBrand('musora')
             ->where('digital_access_type', '=', DigitalAccessType::Plus->value)
             ->where('digital_access_time_interval_type', $interval->value)
             ->where('digital_access_time_interval_length', $intervalLength)
-            ->first()
-            ?->shopify_id;
+            ->first();
 
-        $this->subscriptionService->updateSubscriptionProduct($subscription, $shopifyVariantId);
+        $this->subscriptionService->updateSubscriptionProduct($subscription, $product);
     }
 
     public function getProratedUpgradeCost(User $user): ?float
