@@ -487,7 +487,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[everyday-improv]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[everyday-improv]=1"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
                         <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 text-black">COURSE ONLY</p>
                         <h3 class="text-black leading-tight mb-5 pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>

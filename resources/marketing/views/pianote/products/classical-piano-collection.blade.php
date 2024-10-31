@@ -497,7 +497,7 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
