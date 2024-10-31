@@ -72,10 +72,10 @@ class ReferralController extends Controller
             ->with(['email-invite-message' => config('referral.messages.email_invite_success')]);
     }
 
-    public function validateEmail(Request $request)
+    public function validateEmail(Request $request): JsonResponse
     {
-        $email = $request->input('email');
-        $result = $this->referralService->validateEmail($email);
+        $validated = $request->validate(['email' => 'required|email']);
+        $result = $this->referralService->validateEmail($validated['email']);
 
         return response()->json($result);
     }

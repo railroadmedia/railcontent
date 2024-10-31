@@ -7,7 +7,8 @@ use Exception;
 use App\Modules\Referral\Exceptions\ReferralException;
 use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Models\Referrer;
-use App\Modules\Referral\Models\ReferralContact;
+use Modules\UserManagementSystem\Models\User;
+
 use Throwable;
 
 class ReferralService
@@ -120,7 +121,7 @@ class ReferralService
     {
         $dateThreshold = Carbon::now()->subDays(120);
         
-        $user = ReferralContact::where('email', $email)->first();
+        $user = User::where('email', $email)->select(['membership_expiration_date'])->first();
         
         $exists = $user !== null;
         $active = $exists && $user->membership_expiration_date > $dateThreshold;

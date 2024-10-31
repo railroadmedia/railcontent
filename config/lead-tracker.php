@@ -1862,7 +1862,7 @@ return [
             ],
         ],
         [
-            'path' => '/customer-io/submit-email-form-rc',
+            'path' => '/customer-io/submit-email-form',
             'method' => 'post',
             'form_name' => 'Musora Referral',
             'brand' => 'musora',
