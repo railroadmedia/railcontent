@@ -21,7 +21,7 @@
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
                                     :theme-color="brand" :video-length="videoProps.videoLength"
-                                    :progress-state="videoProps.progressState" :content-id="videoProps.id"
+                                    :progress-state="videoProps.progressState" :content-id="videoProps.contentId"
                                     :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
@@ -34,7 +34,7 @@
                                     :brand="videoProps.brand" :theme-color="videoProps.brand"
                                     :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :content-id="videoProps.contentId" :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                     :chapters="videoProps.chapters" :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
