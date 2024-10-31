@@ -7,8 +7,8 @@
 @section('form')
     @include("pianote._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-        "formName" => 'Passing Chords',
-        "formId" => "Pianote - Engagement - Trigger - Passing Chords - Web Form",
+        "formName" => 'Passing Chords PDF',
+        "formId" => "Pianote - Engagement - Trigger - Passing Chords PDF - Web Form",
         "buttonText" => "Send It",
         "minimalForm" => true,
     ])
