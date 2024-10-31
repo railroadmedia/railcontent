@@ -52,7 +52,7 @@
         <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 md:h-10" alt="Win text">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 sm:h-7 md:h-10" alt="Win text">
                     <h1 class="leading-tight pb-4 pt-2">
                         <strong>Pianote 
                             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" alt="Prima Digital Piano" style="display: inline; width: auto; height: 1.1em;"><br class="inline sm:hidden"/>
@@ -230,13 +230,13 @@
                                 </div>
                                 <div class="mt-4 lg:mt-6">
                                     @if(isset($product['use_alternate_tags']) && $product['use_alternate_tags'])
-                                        <h4 class="text-base md:text-2xl text-left"><strong>{{ $product['title'] }}</strong></h4>
+                                        <h4 class="text-base lg:text-2xl text-left"><strong>{{ $product['title'] }}</strong></h4>
                                         <div class="my-2 flex items-center space-x-2 text-left">
                                             <p class="text-white rounded-md bg-black px-2 py-1 m-0"><strong>${{ $product['price'] }}</strong></p>
                                             <p>{{ $product['total_value'] }}</p>
                                         </div>
                                     @else
-                                        <h5 class="text-base md:text-xl text-left"><strong>{{ $product['title'] }}</strong></h5>
+                                        <h5 class="text-base lg:text-xl text-left"><strong>{{ $product['title'] }}</strong></h5>
                                         <div class="my-2 flex items-center space-x-2 text-left">
                                             <p class="text-white rounded-md bg-black px-2 py-1 m-0"><strong>${{ $product['price'] }}</strong></p>
                                             <p>{{ $product['total_value'] }}</p>
@@ -261,9 +261,9 @@
                                             @endforeach
                                         </ul>
                                     @else
-                                        <ul class="flex flex-col md:flex-wrap md:flex-row">
-                                            @foreach($product['features'] as $feature)
-                                                <li class="text-xs lg:pr-3 leading-loose m-0">
+                                        <ul class="grid grid-cols-1 md:grid-row-2 lg:flex lg:flex-wrap lg:flex-row">                                           
+                                             @foreach($product['features'] as $feature)
+                                                <li class="text-xs sm:pr-2 leading-loose m-0">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
