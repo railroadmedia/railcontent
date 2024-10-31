@@ -93,6 +93,11 @@ Route::prefix('challenges')
             'notifications/community_reminders/{id}',
             [ChallengesMetaDataController::class, 'notificationsCommunityReminders']
         )->name('challenges.notifications.community_reminders');
+
+        Route::post(
+            'complete_lesson/{id}',
+            [ChallengesMetaDataController::class, 'completeLesson']
+        )->name('challenges.complete_lesson');
     });
 
 Route::prefix('playlists')

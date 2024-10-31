@@ -29,7 +29,7 @@ enum AwardTier: string
  * @property boolean $is_locked
  * @property boolean $is_active
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, count_towards_streak, is_bonus_content, time_practiced, unlock_date
+ * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -157,18 +157,18 @@ class ChallengeUserProgress extends Model
      * @param bool $isUnlocked - Flag to indicate whether lessons are locked
      * @return array -
      */
-    public static function defineLessonsMetaData(array $challenge, Carbon $startDate = null, bool $isLocked = true) : array
+    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isLocked = true) : array
     {
         $lessons = $challenge['lessons'];
-        $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = max($startDate, Carbon::now())->startOfDay();
+        $startDate = Carbon::parse($startDate ?? $challenge['published_on'])->startOfDay();
         $lessonMetaData = [];
         //TODO does this need to be moved to the user's timezone?
         // Document says only for solo challenges
         // https://musora.atlassian.net/browse/TCH-40
         $rollingUnlockDate = $startDate->copy();
         foreach($lessons as  $lesson) {
-            $unlockDate = !$isLocked || $lesson['is_always_unlocked_for_challenge'] ? $startDate : $rollingUnlockDate;
+            $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
+            $unlockDate = !$isLocked || $isAlwaysUnlocked ? $startDate : $rollingUnlockDate;
             $lessonMetaData[] =
                 [
                     'content_id' => $lesson['id'],
@@ -176,7 +176,7 @@ class ChallengeUserProgress extends Model
                     'is_completed' => false,
                     'time_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
-                    'count_towards_streak' => true,
+                    'is_always_unlocked' => $isAlwaysUnlocked,
                 ];
             if (!$lesson['is_always_unlocked_for_challenge']) {
                 // TODO start of day? to hande daylight saving times
@@ -192,10 +192,6 @@ class ChallengeUserProgress extends Model
         $startEndDate = $this->getStartAndEndDate();
         $data = [
             'is_active' => $this->is_active,
-            'current_streak' => $streakData['current'],
-            'minutes_practiced' => $this->getMinutesPracticed(),
-            'missed_lessons' => $streakData['missed'],
-            'current_best_streak' => $streakData['best'],
             'rest_days' => $this->current_rest_days,
             'is_unlocked' => !$this->is_locked,
             'best_completed_streak' => $this->completed_best_streak,
@@ -203,19 +199,55 @@ class ChallengeUserProgress extends Model
             'last_completion_time' => $this->last_completed_date,
             'start_date' => $startEndDate['start_date'],
             'end_date' => $startEndDate['end_date'],
+            'current_streak' => $streakData['current'],
+            'missed_lessons' => $streakData['missed'],
+            'current_best_streak' => $streakData['best'],
+            'minutes_practiced' => $this->getMinutesPracticed(),
+            'completion_percent' => $this->getCompletionPercent(),
         ];
         return $data;
     }
 
+    /**
+     * Calculate the integer % of completed lessons
+     * @return int
+     */
+    public function getCompletionPercent() : int
+    {
+        $total = 0;
+        $completed = 0;
+        foreach($this->lessons_meta_data as $lessons_meta_datum) {
+            $total++;
+            $completed += $lessons_meta_datum['is_completed'] ? 1 : 0;
+        }
+        return intval(($completed * 100) / $total);
+    }
+
 
     /**
-     * @param $challenge - Sanity Document for the challenge
+     * @param array $challenge - Sanity Document for the challenge
      * @return int - number of rest days
      */
-    public static function calculateDefaultRestdays($challenge)
+    public static function calculateDefaultRestDays(array $challenge) : int
     {
-        // TODO https://musora.atlassian.net/browse/TCH-39
-        return 2;
+        return ChallengeUserProgress::getNumberOfDaysInChallenge($challenge) >= 10 ? 1 : 0;
+    }
+
+
+    private static function getNumberOfDaysInChallenge(array $challenge) : int
+    {
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($challenge['lessons'], function($lesson) {
+            return !($lesson['is_always_unlocked_for_challenge'] ?? false);
+        });
+        return count($lessonLessonsAsOpposedToIntroLessons);
+    }
+
+    private function getNumberOfLessonDays() : int
+    {
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($this->lessons_meta_data, function($lesson) {
+            return !$lesson['is_always_unlocked'];
+        });
+        return count($lessonLessonsAsOpposedToIntroLessons);
     }
 
     /**
@@ -257,12 +289,18 @@ class ChallengeUserProgress extends Model
      * @param int $lessonId
      * @param bool $isCompleted
      * @param int|null $timePracticed - if null, will not update the existing value
-     * @return void
+     * @return array -
      */
-    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null) : void
+    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null) : array
     {
+        $previousStreakData = $this->getStreakCurrentData();
+        $results = [
+            'is_milestone' => false,
+            'added_to_streak' => false,
+            'added_to_rest_days' => false,
+        ];
         $lessonMetaData = $this->lessons_meta_data;
-        if (!$this->is_active) return;
+
         foreach($lessonMetaData as $index => $lessonMetaDatum) {
             if($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['is_completed'] = $isCompleted;
@@ -274,7 +312,54 @@ class ChallengeUserProgress extends Model
             }
         }
         $this->lessons_meta_data = $lessonMetaData;
+        if ($this->is_active) {
+            $currentStreakData = $this->getStreakCurrentData();
+            $totalLessons = $this->getNumberOfLessonDays();
+            /**
+             * Milestones will need basic logic
+             * 30-day challenge - every 5 days
+             * 10-day challenge - one at 5 days
+             * 1-9  day challenge - none, other than completion
+             * 11-29 day challenges - math to be determined
+             * Every milestone is +1 rest day
+             */
+            if ($totalLessons >= 10) {
+                $isMilestoneStreak = ($currentStreakData['current'] % 5 == 0);
+                $hasStreakIncreased = $currentStreakData['current'] != $previousStreakData['current'];
+                $isMileStone = $isMilestoneStreak && $hasStreakIncreased;
+                $results['is_milestone'] = $isMileStone;
+                $this->current_rest_days += $isMileStone ? 1 : 0;
+                $results['added_to_streak'] = $hasStreakIncreased;
+                $results['added_to_rest_days'] = $isMileStone;
+            }
+        }
         $this->save();
+        return $results;
+    }
+
+    /**
+     * @return bool - if all lessons are completed
+     */
+    public function areAllLessonsCompleted() : bool
+    {
+        foreach($this->lessons_meta_data as $lessons_meta_datum) {
+            if (!$lessons_meta_datum['is_completed']) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param int $id - Content Id
+     * @return array | null;
+     */
+    public function getMetaDatumForContent(int $id) : array | null
+    {
+        foreach($this->lessons_meta_data as $lessonDatum) {
+            if ($lessonDatum['content_id'] == $id) return $lessonDatum;
+        }
+        return null;
     }
 
 

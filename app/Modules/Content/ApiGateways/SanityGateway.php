@@ -53,6 +53,10 @@ class SanityGateway
             '"gold_award": gold_award.asset->url',
             '"silver_award": silver_award.asset->url',
             '"bronze_award": bronze_award.asset->url',
+            '"logo_image_url": logo_image_url.asset->url',
+            '"dark_mode_logo_url": dark_mode_logo_url.asset->url',
+            '"light_mode_logo_url": light_mode_logo_url.asset->url',
+            'child_count',
             '"lessons": child[]->{
                 "sanity_id" : _id,
                 "id": railcontent_id,
@@ -76,6 +80,7 @@ class SanityGateway
                 "permission_id": permission[]->railcontent_id,
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
+                video,
             }',
         ],
         ];
@@ -224,7 +229,7 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array - matching challenge document
      */
-    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null): array
+    public function getChallengeChildAndParentData(int $railcontentId, ?string $type = null) : array
     {
 
         $gateway = new SanityGateway();
