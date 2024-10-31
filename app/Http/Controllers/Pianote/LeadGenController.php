@@ -50,6 +50,11 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.blog-forms.weekly-email-2', ['recaptchaKey' => config('recaptcha.key')]);
     }
+
+    public function passingChords()
+    {
+        return view('pianote.lead-gen.blog-forms.passing-chords', ['recaptchaKey' => config('recaptcha.key')]);
+    }
     public function chordsBookEmail()
     {
         return view('pianote.lead-gen.blog-forms.chords-book-email', ['recaptchaKey' => config('recaptcha.key')]);

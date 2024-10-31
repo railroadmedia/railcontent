@@ -445,6 +445,15 @@ return [
             ],
         ],
         'pianote' => [
+            'Passing Chords PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_passing-chords',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Metronome Notice' => [
                 'custom_attributes' => [],
                 'events' => [
