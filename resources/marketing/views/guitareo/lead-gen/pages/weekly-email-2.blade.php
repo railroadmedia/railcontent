@@ -1,5 +1,5 @@
 @extends('_partials.components.forms.blog-form-layout', [
-    'brand' => 'guitareo',
+    'theme' => 'guitareo',
 ])
 
 @section('title', 'Weekly Email')

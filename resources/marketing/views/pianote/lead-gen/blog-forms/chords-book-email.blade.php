@@ -1,5 +1,5 @@
 @extends('_partials.components.forms.blog-form-layout',[
-    'brand' => 'pianote',
+    'theme' => 'pianote',
 ])
 
 @section('title', 'Digital Chords And Scales')
