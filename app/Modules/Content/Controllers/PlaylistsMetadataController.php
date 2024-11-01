@@ -304,51 +304,21 @@ class PlaylistsMetadataController extends Controller
             ->orderBy('position', 'asc')
             ->get();
         $contentIds = $items->pluck('content_id');
+        $parentIds = $items->pluck('content_parent')->filter();
 
+        // Fetch Sanity and Assignment data
         $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray());
-        $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds($playlist['brand'], $contentIds->toArray());
+        $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
+            $playlist->brand,
+            $contentIds->toArray(),
+            $parentIds->toArray()
+        );
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
+
         $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId) {
-            $sanityInfo = $sanityDataAssoc->get($item->content_id);
-            $route = [];
-            if (!empty($sanityInfo['parent_content_data'] ?? [])) {
-
-                $route = collect($sanityInfo['parent_content_data'])->map(function ($parent) {
-                    switch ($parent['type']) {
-                        case 'learning-path':
-                            return 'Method';
-                        case 'learning-path-level':
-                            return 'L'.$parent['position'];
-                        default:
-                            return $parent['slug'];
-                    }
-                })->toArray();
-
-                $sanityInfo['route'] = array_reverse($route);
-            }
-            $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
-            $item['thumbnail_url'] = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo ? $sanityInfo['thumbnail'] : null);
-            $item['item_type'] = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo ? $sanityInfo['type'] : null);
-            $item['user_playlist_item_extra_data'] = $sanityInfo ? ($sanityInfo['extra_data'] ?? null) : null;
-            $item['duration'] = $sanityInfo ? $sanityInfo['length_in_seconds'] : null;
-            $item['playlist_item_name'] = $item['playlist_item_name'] ? $item['playlist_item_name'] : $item['content_name'];
-            $item['user_playlist_item_id'] = $item['id'];
-            $item['id'] = $item['content_id'];
-            $item['instructors'] = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo ? $sanityInfo['instructors'] : null);
-            $item['route'] = $assignmentInfo ? $assignmentInfo['route'] : (($sanityInfo && isset($sanityInfo['route'])) ? $sanityInfo['route'] : []);
-
-            if($sanityInfo){
-                $sanityInfo['url'] = $item['url'] = $sanityInfo['web_url_path'] = url()->route('platform.user.playlist-item', [
-                    'playlistId' => $playlistId,
-                    'playlistItemId' =>   $item['user_playlist_item_id'],
-                ]);
-            }
-            return array_merge(
-                $item->toArray(),
-                $sanityInfo ? $sanityInfo : []
-            );
+            return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId);
         });
 
         return response()->json($mergedData);
@@ -441,6 +411,35 @@ class PlaylistsMetadataController extends Controller
                                 ]);
     }
 
+    public function getPlaylistItem(Request $request)
+    {
+        $user = user();
+        $playlistItemId = $request->get('user_playlist_item_id');
+        $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
+
+        // Check if the user has access to the playlist
+        if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'You don’t have access to items from this playlist'
+                                    ], 403);
+        }
+
+        // Fetch Sanity and Assignment data for the specific item
+        $sanityData = $this->sanityGateway->getByRailContentIds([$playlistItem->content_id]);
+        $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
+            $playlistItem->playlist->brand,
+            [$playlistItem->content_id],
+            $playlistItem->content_parent ? [$playlistItem->content_parent] : []
+        );
+
+        $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
+        $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
+
+        $item = $this->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id);
+        return response()->json($item);
+    }
+
 
     /**
      * Format the playlists with durations and URLs.
@@ -466,5 +465,52 @@ class PlaylistsMetadataController extends Controller
         }
 
         return $playlists;
+    }
+
+    /**
+     * Helper function to format playlist item data with Sanity and Assignment info.
+     *
+     * @param UserPlaylistContent $item
+     * @param Collection $sanityDataAssoc
+     * @param Collection $assignmentDataAssoc
+     * @param int $playlistId
+     * @return array
+     */
+    private function formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId)
+    {
+        $sanityInfo = $sanityDataAssoc->get($item->content_id);
+        $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
+
+        // Process route information if it exists in Sanity data
+        $route = [];
+        if (!empty($sanityInfo['parent_content_data'] ?? [])) {
+            $route = collect($sanityInfo['parent_content_data'])->map(function ($parent) {
+                switch ($parent['type']) {
+                    case 'learning-path':
+                        return 'Method';
+                    case 'learning-path-level':
+                        return 'L' . $parent['position'];
+                    default:
+                        return $parent['slug'];
+                }
+            })->toArray();
+            $sanityInfo['route'] = array_reverse($route);
+        }
+
+        $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
+        $item->item_type = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo['type'] ?? null);
+        $item->user_playlist_item_extra_data = $sanityInfo['extra_data'] ?? null;
+        $item->duration = $sanityInfo['length_in_seconds'] ?? null;
+        $item->playlist_item_name = $item->playlist_item_name ?? $item->content_name;
+        $item->user_playlist_item_id = $item->id;
+        $item->id = $item->content_id;
+        $item->instructors = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo['instructors'] ?? null);
+        $item->route = $assignmentInfo ? $assignmentInfo['route'] : ($sanityInfo['route'] ?? []);
+        $item->url = url()->route('platform.user.playlist-item', [
+            'playlistId' => $playlistId,
+            'playlistItemId' => $item->user_playlist_item_id,
+        ]);
+
+        return array_merge($item->toArray(), $sanityInfo ?? [], $assignmentInfo ?? []);
     }
 }
