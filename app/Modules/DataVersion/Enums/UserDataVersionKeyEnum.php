@@ -4,5 +4,7 @@ namespace App\Modules\DataVersion\Enums;
 
 enum UserDataVersionKeyEnum: int
 {
-    case Content = 0;
+    case ContentLikes = 0;
+    case ContentProgress = 1;
+
 }

@@ -1,8 +1,12 @@
 <?php
 
 use App\Modules\Content\Controllers\ChallengesMetaDataController;
-use App\Modules\Content\Controllers\ContentLikesControllerUser;
+use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
+use App\Modules\Content\Controllers\ContentProgressController;
+use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
+use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
+use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('content')
@@ -38,27 +42,52 @@ Route::prefix('content')
             [ContentMetadataController::class, 'getUserPermissions']
         )->name('content.user-permissions');
 
-
         Route::get(
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
-        
-        //Content User Likes
+
+        //Content Likes
         Route::get(
             'user/likes/all',
-            [ContentLikesControllerUser::class, 'all']
-        )->name('content.user.likes.all');
+            [ContentLikesController::class, 'all']
+        )->name('content.user.likes.all')
+            ->middleware(DataVersionGetMiddleware::class . ':' . UserDataVersionKeyEnum::ContentLikes->value);
 
         Route::post(
             'user/likes/like/{contentId}',
-            [ContentLikesControllerUser::class, 'like']
-        )->name('content.user.like');
+            [ContentLikesController::class, 'like']
+        )->name('content.user.like')
+            ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentLikes->value);
 
         Route::post(
             'user/likes/unlike/{contentId}',
-            [ContentLikesControllerUser::class, 'unLike']
-        )->name('content.user.unlike');
+            [ContentLikesController::class, 'unLike']
+        )->name('content.user.unlike')
+            ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentLikes->value);
+
+
+        //Content Progress
+        Route::get(
+            'user/progress/all',
+            [ContentProgressController::class, 'all']
+        )->name('content.user.progress.all')
+            ->middleware(DataVersionGetMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
+
+        //Content Progress
+        Route::post(
+            'user/progress/start',
+            [ContentProgressController::class, 'start']
+        )->name('content.user.progress.start')
+            ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
+
+
+        Route::post(
+            'user/progress/complete',
+            [ContentProgressController::class, 'update']
+        )->name('content.user.progress.update')
+            ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
+
     });
 
 Route::prefix('challenges')
