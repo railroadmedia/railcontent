@@ -117,5 +117,6 @@ Route::prefix('playlists')
         Route::get('/playlist', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylist')->name('playlist.fetch');
         Route::get('/playlist-lessons', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItems')->name('playlist.items');
         Route::post('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylistItem')->name('playlist.item.update');
+        Route::delete('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@removeItemFromPlaylist')->name('playlist.item.remove');
         //
     });

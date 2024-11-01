@@ -363,21 +363,43 @@ class PlaylistsMetadataController extends Controller
     public function updatePlaylistItem(Request $request){
         $validatedData = $request->validate([
                                                 'start_second'        => 'nullable|numeric|min:0',
-                                                'end_second' => 'nullable|numeric|min:0',
-                                                'playlist_item_name'        => 'nullable|string|max:255',
+                                                'end_second'          => 'nullable|numeric|min:0',
+                                                'playlist_item_name'  => 'nullable|string|max:255',
+                                                'position'            => 'nullable|numeric|min:0'
                                             ]);
+
         $user = user();
         $playlistItemId = $request->get('user_playlist_item_id');
         $playlistItem = UserPlaylistContent::with('playlist')->findOrFail($playlistItemId);
-        if (!$playlistItem) {
-            return response()->json(['success' => false,
-                                     'error' => 'Playlist item not exists.'], 404);
-        }
+
+        // Check ownership and playlist existence
         if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
             return response()->json(['success' => false,
                                      'error' => 'You don’t have access to update items from this playlist'], 403);
         }
 
+        // Handle position update if a new position is specified in the request
+        if (isset($validatedData['position']) && $validatedData['position'] !== $playlistItem->position) {
+            $newPosition = $validatedData['position'];
+            $currentPosition = $playlistItem->position;
+
+            if ($newPosition > $currentPosition) {
+                // Move items between the current and new positions down by one
+                UserPlaylistContent::where('user_playlist_id', $playlistItem->user_playlist_id)
+                    ->whereBetween('position', [$currentPosition + 1, $newPosition])
+                    ->decrement('position');
+            } else {
+                // Move items between the new and current positions up by one
+                UserPlaylistContent::where('user_playlist_id', $playlistItem->user_playlist_id)
+                    ->whereBetween('position', [$newPosition, $currentPosition - 1])
+                    ->increment('position');
+            }
+
+            // Update the position of the current item
+            $playlistItem->position = $newPosition;
+        }
+
+        // Update other fields in the playlist item
         $playlistItem->update($validatedData);
 
         return response()->json([
@@ -385,6 +407,40 @@ class PlaylistsMetadataController extends Controller
                                     'message' => 'Playlist item updated successfully'
                                 ]);
     }
+
+    public function removeItemFromPlaylist(Request $request)
+    {
+        $user = user(); // Assuming this function retrieves the current user
+        $playlistItemId = $request->get('user_playlist_item_id');
+
+        // Using findOrFail to automatically handle non-existence
+        $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
+
+
+        // Check if the user has access to the playlist
+        if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'You don’t have access to update items from this playlist'
+                                    ], 403);
+        }
+
+        // Call the instance method to delete and reposition
+        $deleted = $playlistItem->deletePlaylistItemAndReposition();
+
+        if (!$deleted) {
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Failed to delete the playlist item.'
+                                    ], 500);
+        }
+
+        return response()->json([
+                                    'success' => true,
+                                    'message' => 'Playlist item deleted successfully'
+                                ]);
+    }
+
 
     /**
      * Format the playlists with durations and URLs.
