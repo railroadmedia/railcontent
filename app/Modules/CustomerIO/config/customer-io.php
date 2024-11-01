@@ -454,6 +454,15 @@ return [
                     'pianote',
                 ],
             ],
+            '5 Pentatonic Licks PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_pentatonic-licks',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Metronome Notice' => [
                 'custom_attributes' => [],
                 'events' => [
