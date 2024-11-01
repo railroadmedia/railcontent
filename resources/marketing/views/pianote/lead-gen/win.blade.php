@@ -271,9 +271,9 @@
                                             @endforeach
                                         </ul>
                                     @else
-                                        <ul class="grid grid-cols-1 md:grid-row-2 lg:flex lg:flex-wrap lg:flex-row">                                           
+                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:flex-row">                                           
                                              @foreach($product['features'] as $feature)
-                                                <li class="text-xs sm:pr-2 leading-loose tracking-tight m-0 lg:pr-3">
+                                                <li class="text-xs sm:pr-2 leading-loose md:tracking-tighter lg:tracking-tight m-0 lg:pr-3">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
