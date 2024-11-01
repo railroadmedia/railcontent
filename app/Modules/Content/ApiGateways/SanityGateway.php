@@ -28,7 +28,8 @@ class SanityGateway
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
         '"instructors": instructor[]->name',
-        'parent_content_data'
+        'parent_content_data',
+        'video'
     ];
 
     private array $contentSpecificFields = [
@@ -247,15 +248,21 @@ class SanityGateway
         return $document;
     }
 
-    public function getAssignmentsByRailcontentIds($brand, array $ids, ?string $type = null)
+    public function getAssignmentsByRailcontentIds($brand, array $ids,array $parentIds, ?string $type = null)
     {
 
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
+        $parentIdsString = implode(',', $parentIds);
         $fieldsString = $this->getFieldsString($type);
-        $query = "*[brand == '{$brand}' && railcontent_id in [{$idsString}]]{
-          $fieldsString,
-  assignment[railcontent_id in  [{$idsString}]]
+        $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
+          $fieldsString, resource,
+  assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
+         assignment_title,
+         assignment_sheet_music_image,
+         assignment_timecode,
+         assignment_description,
+         railcontent_id}
 }";
         $documents = $gateway->sanity->fetch($query);
         $assignments = [];
@@ -284,7 +291,12 @@ class SanityGateway
                     'difficulty_string' => $document['difficulty_string'],
                     'published_on' => $document['published_on'],
                     'railcontent_id'     => $assignment['railcontent_id'],
-                    'route' => $routes
+                    'sheet_music_image_url' => $assignment['assignment_sheet_music_image'] ?? [],
+                    'timecode' => $assignment['assignment_timecode'] ?? null,
+                    'description' => $assignment['assignment_description'] ?? null,
+                    'soundslice_slug' => $assignment['assignment_soundslice'] ?? null,
+                    'route' => $routes,
+                    'resources' => $document['resource'] ?? []
                 ];
             }
         }
