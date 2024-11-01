@@ -253,27 +253,27 @@
                                         </div>
                                     @endif
                                     @if($index == 0)
-                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 lg:grid-template-columns-custom">
+                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-template-columns-custom">
                                             @foreach($product['features'] as $feature)
-                                                <li class="text-xs md:text-sm leading-loose m-0">
+                                                <li class="text-sm leading-loose m-0">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
                                             @endforeach
                                         </ul>
                                     @elseif($index == 1)
-                                        <ul class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                        <ul class="grid grid-cols-1 md:grid-cols-3">
                                             @foreach($product['features'] as $feature)
-                                                <li class="text-xs md:text-sm leading-loose m-0">
+                                                <li class="text-sm leading-loose m-0">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
                                             @endforeach
                                         </ul>
                                     @else
-                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:flex-row">                                           
+                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:flex-row md:gap-y-2">                                           
                                              @foreach($product['features'] as $feature)
-                                                <li class="text-xs sm:pr-2 leading-loose md:tracking-tighter lg:tracking-tight m-0 lg:pr-3">
+                                                <li class="text-sm md:text-xs sm:pr-2 leading-loose md:tracking-tighter lg:tracking-tight m-0 lg:pr-3">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
