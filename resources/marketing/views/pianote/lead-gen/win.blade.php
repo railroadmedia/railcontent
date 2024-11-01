@@ -269,7 +269,7 @@
                                     @else
                                         <ul class="grid grid-cols-1 md:grid-row-2 lg:flex lg:flex-wrap lg:flex-row">                                           
                                              @foreach($product['features'] as $feature)
-                                                <li class="text-xs sm:pr-2 leading-loose m-0">
+                                                <li class="text-xs sm:pr-2 leading-loose tracking-tight m-0 lg:pr-3">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
                                                     <span>{{ $feature }}</span>
                                                 </li>
@@ -368,10 +368,16 @@
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 md:h-10" alt="Win text">
-                    <h1 class="leading-tight pb-4 pt-2">
-                        <strong>Pianote 
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" alt="Prima Digital Piano" style="display: inline; width: auto; height: 1.1em;"><br class="inline sm:hidden"/>
-                            Digital Pianos
+                   <h1 class="flex items-center justify-center gap-x-1 py-2">
+                        <strong class="flex flex-wrap items-center justify-center gap-x-1">
+                            <span class="dev:border dev:border-red-500">Pianote</span>
+                            <img 
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
+                                alt="Prima Digital Piano" 
+                                class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
+                            />
+                            <br class="inline sm:hidden"/>
+                            <span>Digital Pianos</span>
                         </strong>
                     </h1>
                    <h3><strong>Plus $3432 in additional prizes</strong></h3>
