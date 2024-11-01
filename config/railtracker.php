@@ -25,11 +25,9 @@ return [
 
     'table_prefix' => 'railtracker4_',
     'table_prefix_media_playback_tracking' => 'railtracker_',
-    'media_playback_types_table' => 'media_playback_types',
-    'media_playback_sessions_table' => 'media_playback_sessions',
 
     // cache
-    'redis_connection_name' => 'railtracker',
+    'redis_connection_name' => 'default',
     'cache_prefix' => 'mwp_railtracker_',
     'cache_duration' => 60 * 60 * 24 * 2, // 2 days
     'batch_prefix' => env('RAILTRACKER_BATCH_PREFIX', 'railtracker4_mwp_'),

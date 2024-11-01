@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Railtracker\Services\ConfigService;
+use App\Modules\RailTracker\Services\ConfigService;
 use Spatie\Permission\Models\Role;
 use Exception;
 

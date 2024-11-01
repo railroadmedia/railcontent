@@ -24,8 +24,8 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class ContentProgressEventListener

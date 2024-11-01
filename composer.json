@@ -47,7 +47,6 @@
         "railroad/railcontent": "v3.0.*",
         "railroad/railforums": "3.0.*",
         "railroad/railnotifications": "4.0.*",
-        "railroad/railtracker": "5.0.*",
         "railroad/referral": "4.0.*",
         "railroad/usora": "4.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",
@@ -99,7 +98,8 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/EventTracking/Avo/Avo.php"
+            "app/Modules/EventTracking/Avo/Avo.php",
+            "app/Modules/RailTracker/Helpers/railtracker_helpers.php"
         ]
     },
     "autoload-dev": {
