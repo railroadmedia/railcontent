@@ -53,13 +53,19 @@
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 sm:h-7 md:h-10" alt="Win text">
-                    <h1 class="leading-tight pb-4 pt-2 font-black">
-                    Pianote 
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" alt="Prima Digital Piano" style="display: inline; width: auto; height: 1.1em;"  class="inline important"><br class="inline sm:hidden"/>
-                            Digital Pianos
-                        
+                   <h1 class="flex items-center justify-center gap-x-1 py-2">
+                        <strong class="flex flex-wrap items-center justify-center gap-x-1">
+                            <span class="dev:border dev:border-red-500">Pianote</span>
+                            <img 
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
+                                alt="Prima Digital Piano" 
+                                class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
+                            />
+                            <br class="inline sm:hidden"/>
+                            <span>Digital Pianos</span>
+                        </strong>
                     </h1>
-                    <h3><strong>Plus $3432 in additional prizes</strong></h3>
+                    <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
                         Win a digital piano, headphones, a metronome, BookBag, or 
                         <br class="hidden sm:inline"/> piano lessons for life with Pianote.
