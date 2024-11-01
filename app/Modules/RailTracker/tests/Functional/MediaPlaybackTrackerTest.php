@@ -2,6 +2,7 @@
 
 namespace App\Modules\RailTracker\tests\Functional;
 
+use App\Modules\Content\Models\Content;
 use App\Modules\RailTracker\Models\MediaPlaybackSessions;
 use App\Modules\RailTracker\Models\MediaPlaybackTypes;
 use Auth;

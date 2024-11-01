@@ -75,17 +75,23 @@ Route::prefix('content')
             ->middleware(DataVersionGetMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
         //Content Progress
-        Route::post(
+        Route::put(
             'user/progress/start',
             [ContentProgressController::class, 'start']
         )->name('content.user.progress.start')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
 
-        Route::post(
+        Route::put(
             'user/progress/complete',
-            [ContentProgressController::class, 'update']
-        )->name('content.user.progress.update')
+            [ContentProgressController::class, 'complete']
+        )->name('content.user.progress.complete')
+            ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
+
+        Route::put(
+            'user/progress/reset',
+            [ContentProgressController::class, 'reset']
+        )->name('content.user.progress.reset')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
     });

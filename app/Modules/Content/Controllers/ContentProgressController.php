@@ -6,6 +6,7 @@ use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ContentProgressController
 {
@@ -39,27 +40,24 @@ class ContentProgressController
         return $allProgressData->toArray();
     }
 
-    public function start(int $contentId): JsonResponse
+    public function start(Request $request): JsonResponse
     {
+        $contentId = $request->input('contentId');
         $this->contentProgressService->startContent($contentId, user()->id);
         return response()->json(['success' => 'success'], 201);
     }
 
-    public function complete(int $contentId): JsonResponse
+    public function complete(Request $request): JsonResponse
     {
+        $contentId = $request->input('contentId');
         $this->contentProgressService->completeContent($contentId, user()->id);
         return response()->json(['success' => 'success']);
     }
 
-    public function reset(int $contentId): JsonResponse
+    public function reset(Request $request): JsonResponse
     {
+        $contentId = $request->input('contentId');
         $this->contentProgressService->resetContent($contentId, user()->id);
-        return response()->json(['success' => 'success']);
-    }
-
-    public function saveProgress(int $contentId, int $progressPercent): JsonResponse
-    {
-        $this->contentProgressService->saveContentProgress($contentId, $progressPercent, user()->id);
         return response()->json(['success' => 'success']);
     }
 }

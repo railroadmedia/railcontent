@@ -2,6 +2,7 @@
 
 namespace App\Modules\RailTracker\tests\Integration;
 
+use App\Modules\Content\Models\Content;
 use Carbon\Carbon;
 use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 use App\Modules\RailTracker\tests\RailtrackerTestCase;
