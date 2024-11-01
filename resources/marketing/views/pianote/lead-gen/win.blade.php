@@ -53,11 +53,11 @@
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 sm:h-7 md:h-10" alt="Win text">
-                    <h1 class="leading-tight pb-4 pt-2">
-                        <strong>Pianote 
-                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" alt="Prima Digital Piano" style="display: inline; width: auto; height: 1.1em;"><br class="inline sm:hidden"/>
+                    <h1 class="leading-tight pb-4 pt-2 font-black">
+                    Pianote 
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" alt="Prima Digital Piano" style="display: inline; width: auto; height: 1.1em;"  class="inline important"><br class="inline sm:hidden"/>
                             Digital Pianos
-                        </strong>
+                        
                     </h1>
                     <h3><strong>Plus $3432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
