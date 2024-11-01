@@ -14,9 +14,17 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ContentMetadataController extends Controller
 {
+    public function __construct(
+        private readonly ProductProviderInterface $productProvider,
+        private readonly UserPermissionsService $userPermissionsService
+    ) {
+    }
+
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
@@ -61,13 +69,16 @@ class ContentMetadataController extends Controller
     /**
      * Retrieve the data for content with a progress state for the user
      *
-     * @param  ProgressState  $progressState
-     * @param  ContentProgressMetadataRequest  $request
-     * @param  User|null  $user
+     * @param ProgressState $progressState
+     * @param ContentProgressMetadataRequest $request
+     * @param User|null $user
      * @return JsonResponse
      */
-    private function contentWithProgressForUser(ProgressState $progressState, ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
-    {
+    private function contentWithProgressForUser(
+        ProgressState $progressState,
+        ContentProgressMetadataRequest $request,
+        ?User $user = null
+    ): JsonResponse {
         // if the user ID isn't provided, grab the user from the session
         $user = $user ?? user();
 
@@ -82,16 +93,16 @@ class ContentMetadataController extends Controller
 
         $results =
             $user->progress()
-                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
-                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
-                ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
-                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+                ->when($progressState === ProgressState::Started, fn($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn($query) => $query->complete())
+                ->when(!is_null($type), fn($query) => $query->ofContentType($type))
+                ->when(!is_null($brand), fn($query) => $query->ofContentBrand($brand))
                 ->when(
                     !is_null($page),
                     // when we're using pagination, we need to apply the limit to the page
-                    fn ($query) => $query->forPage($page, $limit),
+                    fn($query) => $query->forPage($page, $limit),
                     // otherwise, apply the limit to the whole query (if it's there)
-                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+                    fn($query) => $query->when(!is_null($limit), fn($query) => $query->limit($limit))
                 )
                 ->pluck('content_id');
 
@@ -115,7 +126,7 @@ class ContentMetadataController extends Controller
     /**
      * @return JsonResponse
      */
-    public function getUserPermissions() : JsonResponse
+    public function getUserPermissions(): JsonResponse
     {
         $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
         $permissions = Arr::pluck($permissions, 'permission_id');
