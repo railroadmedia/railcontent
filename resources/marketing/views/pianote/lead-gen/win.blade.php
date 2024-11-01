@@ -42,6 +42,10 @@
                 grid-template-columns: 1.5fr 1fr 1fr 1fr;
             }
         }
+
+        .join.smaller {
+        padding: 12px 30px;
+        }
     </style>
 @endsection
 
@@ -52,16 +56,16 @@
         <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 sm:h-7 md:h-10" alt="Win text">
-                   <h1 class="flex items-center justify-center gap-x-1 py-2">
-                        <strong class="flex flex-wrap items-center justify-center gap-x-1">
-                            <span class="dev:border dev:border-red-500">Pianote</span>
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-9 md:h-10" alt="Win text">
+                   <h1 class="flex items-center justify-center gap-x-1 py-2 leading-normal">
+                        <strong class="md:flex md:flex-wrap items-center justify-center gap-x-1">
+                            <span>Pianote</span>
                             <img 
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
                                 alt="Prima Digital Piano" 
                                 class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
                             />
-                            <br class="inline sm:hidden"/>
+                            <br class="block md:hidden"/>
                             <span>Digital Pianos</span>
                         </strong>
                     </h1>
@@ -144,7 +148,7 @@
                         'total_value' => '($4195 Total Value)',
                         'use_alternate_tags' => true,
                         'features' => [
-                            '1-Year Pianote Membership',
+                            '1-Year Pianote Membership ($240 value)',
                             'Stereo Speakers',
                             'Bluetooth Connectivity',
                             'Music Stand Included',
@@ -282,7 +286,7 @@
                     @endforeach
                 </div>
             </div>
-            <a class="anchor-slide join smaller w-11/12 md:w-1/2 lg:w-1/3 bg-pianote" href="#customize-anchor">ENTER NOW</a>
+            <a class="anchor-slide join smaller w-full sm:w-2/3 md:w-1/2 lg:w-1/3 bg-pianote" href="#customize-anchor">ENTER NOW</a>
         </div>
     </section>
 
@@ -308,7 +312,7 @@
             <h2 class="text-center leading-none pb-4"><strong>Yeah, it’s legit.</strong></h2>
             <h6 class="mb-24">This isn’t our first rodeo. Hear from previous winners of our piano giveaways!</h6>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-16 md:gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-16 sm:gap-10">
                 @foreach ($testimonials as $testimonial)
                     <div class="relative text-center z-10 rounded-md pt-12 pb-10 px-10 shadow-md" style="background-color:#F1EFED;">
                         <div class="absolute top-0 left-1/2 w-24 h-24 mx-auto mb-4">
@@ -331,17 +335,17 @@
 
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFFFFF calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
-        <div class="max-w-md md:max-w-3xl mx-auto text-center">
+        <div class="max-w-2xl mx-auto text-center">
             <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
                 <path d="M41.1853 6.17994C45.1417 2.22302 50.5047 0 56.1023 0H93.9075C99.5051 0 104.868 2.22302 108.824 6.17994L143.816 41.1862C147.773 45.1425 150 50.5055 150 56.103V93.908C150 99.5055 147.773 104.868 143.816 108.825L108.824 143.816C104.868 147.773 99.5051 150 93.9075 150H56.1023C50.5047 150 45.1417 147.773 41.1853 143.816L6.17879 108.825C2.22301 104.868 0 99.5055 0 93.908V56.103C0 50.5055 2.22301 45.1425 6.17879 41.1862L41.1853 6.17994ZM67.9714 44.2633V77.0862C67.9714 81.2477 71.1071 84.1197 75.0049 84.1197C78.9026 84.1197 82.0384 81.2477 82.0384 77.0862V44.2633C82.0384 40.6294 78.9026 37.2298 75.0049 37.2298C71.1071 37.2298 67.9714 40.6294 67.9714 44.2633ZM75.0049 93.4977C69.8177 93.4977 65.6268 97.9522 65.6268 102.876C65.6268 108.327 69.8177 112.254 75.0049 112.254C80.1921 112.254 84.383 108.327 84.383 102.876C84.383 97.9522 80.1921 93.4977 75.0049 93.4977Z" fill="#FFAE00"/>
             </svg>
             <h3 class="text-white font-extrabold leading-normal">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white md:pl-14">
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                   Enter your name and email address.
+                    Enter your name and email address.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
@@ -349,16 +353,16 @@
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                   One entry per person.
+                    One entry per person.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     No age restrictions.
                 </div>
             </div>
-            <div class="inline-block italic text-black py-4 px-6 bg-musora">
-                Winners will be announced during a livestream <strong>on November 25th</strong>!
-            </div>
+            <h6 class="inline-block italic text-black py-4 px-6 lg:px-5 bg-musora rounded-md w-full md:w-max-w-none leading-normal">
+                Winners will be announced during a <br class="block sm:hidden">livestream <strong>on November 25th</strong>!
+            </h6>
         </div>
     </section>
 
@@ -367,20 +371,20 @@
          <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-6 md:h-10" alt="Win text">
-                   <h1 class="flex items-center justify-center gap-x-1 py-2">
-                        <strong class="flex flex-wrap items-center justify-center gap-x-1">
-                            <span class="dev:border dev:border-red-500">Pianote</span>
+                   <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-9 md:h-10" alt="Win text">
+                   <h1 class="flex items-center justify-center gap-x-1 py-2 leading-normal">
+                        <strong class="md:flex md:flex-wrap items-center justify-center gap-x-1">
+                            <span>Pianote</span>
                             <img 
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
                                 alt="Prima Digital Piano" 
                                 class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
                             />
-                            <br class="inline sm:hidden"/>
+                            <br class="block md:hidden"/>
                             <span>Digital Pianos</span>
                         </strong>
                     </h1>
-                   <h3><strong>Plus $3432 in additional prizes</strong></h3>
+                   <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
                         Win a digital piano, headphones, a metronome, BookBag, or 
                         <br class="hidden sm:inline"/> piano lessons for life with Pianote.
