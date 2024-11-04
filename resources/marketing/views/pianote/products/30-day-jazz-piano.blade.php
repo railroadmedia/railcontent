@@ -57,7 +57,7 @@
         @php
             $price = floatval($productPrices['30-day-jazz-piano']->price);
             $discountedPrice = floatval($productPrices['30-day-jazz-piano']->discounted_price);
-            $enrollmentLink = 'https://www.pianote.com/choose-plan';
+            $enrollmentLink = '/ecommerce/add-to-cart?products[30-day-jazz]=1';
             $brandTitle = 'Pianote';
             $buttonText = 'GET STARTED';
             $buttonLink = "/ecommerce/add-to-cart?products[30-day-jazz]=1";
@@ -75,14 +75,16 @@
     'checklist' => ['Learn By Doing', 'Play Every Day', 'Perfect For Beginners'],
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-right-collage.webp',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-left-collage.webp',
-    'mediaSource' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-video.png',
+    "isVideo" => true,
+    'mediaSource' => 'https://player.vimeo.com/progressive_redirect/playback/1019964518/rendition/720p/file.mp4?loc=external&signature=8761cea606fb7cd3fc2ab56f243ec6a61fa103fe9217eee47d4d172417f94679',
+    'alternateSrc' => 'https://player.vimeo.com/progressive_redirect/playback/884916532/rendition/540p/file.mp4?loc=external&signature=f1a2096ed4a6bdaa8ff4b8a69b7787e5cc14ae0bec918c278337772f2dea1edd',
+    'poster' => 'https://i.vimeocdn.com/video/1754218536-f8a5209579972b4151468a5d286eb9e0736358110de6397a1f11b325f2b9fb60-d?mw=1500&mh=844&q=70',
     'extraClass' => 'h-20 sm:h-24 lg:h-32',
 ])
 
-
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
     <div class="container max-w-4xl mx-auto">
-        <h2 class="leading-tight mb-7 sm:mb-12 lg:mb-16"><strong>Discover the beautiful, exciting <br> world of jazz piano.</strong></h2>
+        <h2 class="leading-tight mb-12 lg:mb-16"><strong>Discover the beautiful, exciting <br> world of jazz piano.</strong></h2>
         @php
                 $gettings = [
                     [
@@ -187,10 +189,15 @@ $items = [
                     @endif
                 </div> --}}
         </div>
-        @include('drumeo.products.partials.evergreen._price-link', [
-            'enrollmentLink' => $enrollmentLink,
-            'brandTitle' => $brandTitle,
-        ])
+      <h5 class="leading-tight">
+            <strong class="font-black">Only
+            @if($price > $discountedPrice)
+                    <s class="opacity-60">${{ $price }}</s> ${{ $discountedPrice }} (SAVE {{ round(100 - (100 * ($discountedPrice / $price))) }}%)
+            @else
+                ${{ $discountedPrice }}
+            @endif
+            </strong>
+        </h5>
     </div>
 </section>
 
@@ -202,11 +209,10 @@ $items = [
             x-on:click="testimonial = true;" role="button">
             {{-- <i
                 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i> --}}
-
-
             <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/thumb.webp"
                 alt="testimonial image" fetchpriority="high" />
+           
 
         </div>
     </div>
@@ -255,9 +261,9 @@ $items = [
                                 style="background-image: url('{{ $pianoPlayer['image'] }}')"
                             >
                                 <div class="absolute inset-0"></div>
-                                <div class="absolute bottom-2 sm:bottom-1 w-full text-center text-white z-10">
+                                <div class="absolute bottom-1 w-full text-center text-white z-10">
                                     <i class="fa-duotone fa-check-circle text-3xl sm:text-xl md:text-3xl" style="--fa-primary-color: #ffffff; --fa-secondary-color: #F61A30; --fa-secondary-opacity: 1;"></i>                                    
-                                     <h6 class="text-2xl sm:text-xs lg:text-xl leading-normal px-16">
+                                     <h6 class="text-2xl sm:text-xs lg:text-xl leading-normal">
                                         <strong class="block leading-tight">{!! $pianoPlayer['title'] !!}</strong>
                                         <strong class="block leading-tight">Piano Players</strong>
                                     </h6>
@@ -265,7 +271,7 @@ $items = [
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 leading-normal">{{ $pianoPlayer['description'] }}</p>
+                    <p class="mt-3 leading-normal text-base sm:text-xs md:text-base">{{ $pianoPlayer['description'] }}</p>
                 </div>
             @endforeach
         </div>
@@ -319,12 +325,12 @@ $points = [
     <div class="container max-w-6xl mx-auto relative z-50" style="background: #ffffff;" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/order-collage.webp">
         <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #ffffff;">
-                <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 opacity-0 transition-opacity duration-300 ease-in-out" 
+                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-1 opacity-0 transition-opacity duration-300 ease-in-out" 
                      src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"  
                      loading="lazy" 
                      onload="this.classList.remove('opacity-0')" 
                      alt="logo">
-                <h2 class="pb-6 sm:pb-4 tracking-normal"><strong>Learn Jazz Piano <br/>in Just 30 Days.</strong></h2>
+                <h2 class="text-4xl sm:text-3xl md:text-4xl pt-6 sm:pt-4 lg:pb-4 tracking-normal"><strong>Learn Jazz Piano <br/>in Just 30 Days.</strong></h2>
                 <div class="text-center sm:text-left sm:pb-5">
                     <ul>
                         @foreach ($points as $index => $point)
@@ -341,9 +347,18 @@ $points = [
                             @endif
                         @endforeach
                     </ul>
-                    <div class="flex flex-wrap flex-col sm:flex-nowrap md:flex-row items-center mt-6 sm:mt-12">
-                        <a href="{{$buttonLink}}" class="join pianote medium w-full max-w-[300px] mb-3 anchor-slide" role="button">Enroll Now</a>
+                    <div class="flex flex-wrap flex-col sm:flex-nowrap md:flex-row items-center mt-6 sm:mt-12 lg:mt-8">
+                        <a href="{{$buttonLink}}" class="join pianote medium w-full max-w-[300px] mb-3" role="button">Get started</a>
                     </div>
+                      <h5 class="leading-tight text-center md:text-left">
+                            <strong class="font-black">Only
+                            @if($price > $discountedPrice)
+                                    <s class="opacity-60">${{ $price }}</s> ${{ $discountedPrice }} (SAVE {{ round(100 - (100 * ($discountedPrice / $price))) }}%)
+                            @else
+                                ${{ $discountedPrice }}
+                            @endif
+                            </strong>
+                        </h5>
                 </div>
             </div>
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
