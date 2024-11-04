@@ -2,7 +2,7 @@
     <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
             <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
-                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="history.back()">
+                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="handleGoBack">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
             </div>
@@ -427,6 +427,13 @@ const startDateText = computed(() => {
 const endDateText = computed(() => {
     return DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('d'))}`;
 })
+
+const handleGoBack = () => {
+    history.back();
+    window.ReactNativeWebView.postMessage('react native');
+    window.postMessage('post message');
+
+}
 
 const countdown = () => {
     const start = new Date(props.cohort['enrollment_end_date']);

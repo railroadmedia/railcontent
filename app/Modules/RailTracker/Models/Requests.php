@@ -19,5 +19,5 @@ class Requests extends Model
 {
     protected $table = 'railtracker4_requests';
     protected $primaryKey = 'id';
-
+    protected $connection = 'musora_laravel_mysql_writer_only';
 }

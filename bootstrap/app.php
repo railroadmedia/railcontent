@@ -19,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
         \Railroad\Railnotifications\NotificationsServiceProvider::class,
         \Railroad\Points\Providers\PointsServiceProvider::class,
-        \Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
+        \App\Modules\RailTracker\Providers\RailtrackerServiceProvider::class,
         \Railroad\Railanalytics\AnalyticsServiceProvider::class,
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
@@ -76,7 +76,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up'
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectGuestsTo(fn() => route('login'));
+        $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
         $middleware->encryptCookies(except: [
@@ -104,12 +104,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
-            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Modules\RailTracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Http\Middleware\RedirectIfMobileRequest::class,
             \Railroad\LeadTracker\Middleware\LeadTrackerMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_authenticated', [
@@ -120,7 +121,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
-            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Modules\RailTracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Http\Middleware\RedirectIfMobileRequest::class,
             \Railroad\LeadTracker\Middleware\LeadTrackerMiddleware::class,
@@ -129,6 +130,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\LoggingContextMiddleware::class,
             \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_member_only', [
@@ -142,10 +144,11 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
-            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Modules\RailTracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('api_authenticated', [
@@ -155,12 +158,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
-            \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
+            \App\Modules\RailTracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             \Railroad\MusoraApi\Middleware\BrandMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             \App\Http\Middleware\LoggingContextMiddleware::class,
             \Modules\UserManagementSystem\Middleware\LogOutWhenNeeded::class,
+            \App\Http\Middleware\ValidateRedirectUrl::class,
         ]);
 
         $middleware->group('web_or_api_public', [

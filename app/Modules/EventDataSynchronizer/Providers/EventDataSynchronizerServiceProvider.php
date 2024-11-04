@@ -42,7 +42,7 @@ use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
 use App\Modules\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;

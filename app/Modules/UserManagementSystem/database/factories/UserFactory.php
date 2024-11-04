@@ -123,6 +123,7 @@ class UserFactory extends Factory
             'is_trial' => 0,
             'legacy_expiration_date' => null,
             'primary_brand' => $this->faker->randomElement(['drumeo', 'pianote', 'guitareo', 'singeo']),
+            'first_access_at' => Carbon::now(),
         ];
     }
 

@@ -48,6 +48,10 @@ return [
             'driver' => 'local',
             'root' => base_path('app/Modules/Ecommerce/tests/resources'),
         ],
+        'content_test_resources' => [
+            'driver' => 'local',
+            'root' => base_path('app/Modules/Content/tests/Feature/resources'),
+        ],
     ],
 
 ];

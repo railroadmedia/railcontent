@@ -79,6 +79,7 @@ class SanityGateway
                 "permission_id": permission[]->railcontent_id,
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
+                video,
             }',
         ],
         ];
@@ -101,6 +102,7 @@ class SanityGateway
             'dataset' => $dataset,
             'apiVersion' => $apiVersion,
             'token' => $accessToken,
+            'perspective' => 'published'
         ]);
     }
 
@@ -181,8 +183,8 @@ class SanityGateway
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
-        $typeString = $type ? "&& _type = '$type'" : '';
-        $fieldsString = $this->getFieldsString($typeString);
+        $typeString = $type ? "&& _type == '$type'" : '';
+        $fieldsString = $this->getFieldsString($type);
         $query ="*[railcontent_id in [{$idsString}] $typeString]{
           $fieldsString
         }";
@@ -225,7 +227,7 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array - matching challenge document
      */
-    public function getChallengeDataFromChild(int $railcontentId, ?string $type = null) : array
+    public function getChallengeChildAndParentData(int $railcontentId, ?string $type = null) : array
     {
 
         $gateway = new SanityGateway();
