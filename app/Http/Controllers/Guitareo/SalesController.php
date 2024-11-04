@@ -49,9 +49,11 @@ class SalesController extends BaseController
         return view('guitareo.sales.choose-plan', ['theme' => 'guitareo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
-    public function asobergirlsguide()
+    public function affiliates(Request $request, $domain, $page = null)
     {
-        return view('guitareo.sales.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
+        return view('guitareo.sales.affiliates.'.$page, ['theme' => 'guitareo', 'month' => true]);
+
+        throw new NotFoundHttpException();
     }
 
     public function cookie()

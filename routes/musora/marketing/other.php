@@ -13,6 +13,7 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('/trial', [MarketingController::class, 'trial']);
+        Route::get('/trial-month', [MarketingController::class, 'trialMonth']);
         Route::get('/app', [MarketingController::class, 'app']);
         Route::get('/spotify', [MarketingController::class, 'spotify']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
@@ -34,6 +35,7 @@ Route::domain('{musoraDomain}')
         Route::get('mentors', [MarketingController::class, 'mentors']);
         Route::get('moderators', [MarketingController::class, 'moderators']);
         Route::get('playlists', [MarketingController::class, 'playlists']);
+        Route::get('playlist', [MarketingController::class, 'playlist']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
@@ -55,6 +57,7 @@ Route::domain('{musoraDomain}')
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
         Route::get('guitarcenter', [CodeRedemptionController::class, 'renderNewAccountGuitarcenterRedeemPage']);
         Route::get('guitarcenter/existing', [CodeRedemptionController::class, 'renderExistingAccountGuitarcenterRedeemPage']);
+        Route::get('guitarcenter/terms', [MarketingController::class, 'guitarcenterTerms']);
 
         Route::get('drumeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewDrumeo']);
         Route::get('drumeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingDrumeo']);
@@ -68,6 +71,14 @@ Route::domain('{musoraDomain}')
         Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
         Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
+        Route::get('headrush', [CodeRedemptionController::class, 'headrushRedeemNewGuitareo']);
+        Route::get('headrush/existing', [CodeRedemptionController::class, 'headrushRedeemExistingGuitareo']);
+
+        Route::get('free-music-lessons-for-life', [MarketingController::class, 'freeMusicLessonsForLife']);
+        Route::get('everyday-musician', [MarketingController::class, 'everyDayMusician']);
+        Route::get('history', [MarketingController::class, 'history']);
+        Route::get('youtube', [MarketingController::class, 'youtube']);
+        Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
@@ -77,4 +88,5 @@ Route::domain('{musoraDomain}')
         Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'])
             ->withoutMiddleware([VerifyCsrfToken::class])
             ->name('claim-spotify');
+
     });

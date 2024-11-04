@@ -166,6 +166,10 @@
 {{--        </section>--}}
     @endif
 
+    @hasSection('top-bar')
+        @yield('top-bar')
+    @endif
+
     @php
         $bubbles =  [
              [
@@ -277,18 +281,15 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
-            "songs" => "500+ popular songs.",
-            "firstPoint" => "Unlimited guitar lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+            "orderUrl" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'guitar',
@@ -314,15 +315,15 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-        'header' => 'Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.',
+        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
         ])
-
     @endif
 
     @include('musora.sales.components.app-section', [

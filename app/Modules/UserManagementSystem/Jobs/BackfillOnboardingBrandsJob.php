@@ -123,7 +123,7 @@ class BackfillOnboardingBrandsJob implements ShouldQueue
                 ];
             }
 
-            if ($attributes) {
+            if (!$attributes) {
                 continue;
             }
 
