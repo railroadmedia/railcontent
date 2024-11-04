@@ -296,7 +296,8 @@ class SanityGateway
                     'description' => $assignment['assignment_description'] ?? null,
                     'soundslice_slug' => $assignment['assignment_soundslice'] ?? null,
                     'route' => $routes,
-                    'resources' => $document['resource'] ?? []
+                    'resources' => $document['resource'] ?? [],
+                    'permission_id' => $document['permission_id'] ?? []
                 ];
             }
         }

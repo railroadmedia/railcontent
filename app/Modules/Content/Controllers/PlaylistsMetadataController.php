@@ -416,6 +416,13 @@ class PlaylistsMetadataController extends Controller
         $user = user();
         $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
 
+        if(!$playlistItem){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'You don’t have access to item'
+                                    ], 403);
+        }
+
         // Check if the user has access to the playlist
         if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
             return response()->json([
@@ -435,7 +442,10 @@ class PlaylistsMetadataController extends Controller
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
 
-        $item = $this->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id);
+
+        $userPermissions = user()->getActivePermissionsIds();
+
+        $item = $this->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
         return response()->json($item);
     }
 
@@ -475,7 +485,7 @@ class PlaylistsMetadataController extends Controller
      * @param int $playlistId
      * @return array
      */
-    private function formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId)
+    private function formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions)
     {
         $sanityInfo = $sanityDataAssoc->get($item->content_id);
         $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
@@ -497,7 +507,7 @@ class PlaylistsMetadataController extends Controller
         }
 
         $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
-        $item->item_type = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo['type'] ?? null);
+        $item->item_type = $item->type = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo['type'] ?? null);
         $item->user_playlist_item_extra_data = $sanityInfo['extra_data'] ?? null;
         $item->duration = $sanityInfo['length_in_seconds'] ?? null;
         $item->playlist_item_name = $item->playlist_item_name ?? $item->content_name;
@@ -510,6 +520,9 @@ class PlaylistsMetadataController extends Controller
             'playlistItemId' => $item->user_playlist_item_id,
         ]);
 
-        return array_merge($item->toArray(), $sanityInfo ?? [], $assignmentInfo ?? []);
+        $data = array_merge($item->toArray(), $sanityInfo ?? [], $assignmentInfo ?? []);
+        $data['need_access'] = empty(array_intersect($userPermissions, $data['permission_id']));
+
+        return $data;
     }
 }
