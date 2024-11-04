@@ -213,8 +213,8 @@
                     [
                         'title' => 'One of 3 Pianote Metronomes',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/prize-05.webp',
-                        'price' => '99 Value Each',
-                        'total_value' => '($297 Total Value)',
+                        'price' => '79 Value Each',
+                        'total_value' => '($237 Total Value)',
                         'features' => [
                             'Made in Germany by Wittner',
                             'Hand-wound & Battery-Free',
