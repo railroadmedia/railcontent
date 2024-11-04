@@ -294,9 +294,8 @@ class PlaylistsMetadataController extends Controller
         return response()->json(['data' => $playlist]);
     }
 
-    public function getPlaylistItems(Request $request)
+    public function getPlaylistItems($playlistId, Request $request)
     {
-        $playlistId = $request->get('playlist_id');
         $playlist = UserPlaylist::findOrFail($playlistId);
         throw_if(!$playlist, new NotFoundException("Playlist not exists."));
         $items = UserPlaylistContent::query()
