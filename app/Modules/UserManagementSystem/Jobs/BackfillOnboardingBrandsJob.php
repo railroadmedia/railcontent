@@ -3,6 +3,7 @@
 namespace App\Modules\UserManagementSystem\Jobs;
 
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncCustomerByEmail;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
@@ -46,13 +47,19 @@ class BackfillOnboardingBrandsJob implements ShouldQueue
 
         foreach ($users as $user) {
             // check membership brand
-            $brands = $user->userAccessPermissions()
-                           ->with('product')
+            $brands = [];
+            $productIds = $user->userAccessPermissions()
                            ->orderBy('created_at', 'asc')
                            ->get()
-                           ->map(fn (UserAccessPermission $uap) => $uap->product->brand)
-                           ->filter(fn (string $brand) => $brand !== 'musora')
                            ->toArray();
+
+            foreach ($productIds as $key => $productId) {
+                /** @var Product $product */
+                $product = Product::whereId($productId)->first();
+                if ($product && $product->brand !== 'musora') {
+                    array_push($brands, $product->brand);
+                }
+            }
 
             // check onboarding instrument answers
             $brandAnswers = $user->onboardingAnswerHistory()
