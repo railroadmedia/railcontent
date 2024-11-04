@@ -419,4 +419,9 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.tcpcpreferences');
     }
+
+      public function win()
+    {
+        return view('pianote.lead-gen.win', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
+    }
 }

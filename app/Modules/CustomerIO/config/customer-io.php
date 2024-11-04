@@ -808,6 +808,21 @@ return [
                     'pianote',
                 ],
             ],
+            'Prima Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_prima-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
             '7 Days To Sight Reading' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
