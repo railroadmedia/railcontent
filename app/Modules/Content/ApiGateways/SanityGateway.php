@@ -10,6 +10,7 @@ class SanityGateway
         "'sanity_id' : _id",
         "'id': railcontent_id",
         "railcontent_id",
+        "'artist_name':coalesce(artist->name, instructor[0]->name)",
         "artist",
         "title",
         "'image': thumbnail.asset->url",
@@ -29,7 +30,8 @@ class SanityGateway
         "'permission_id': permission[]->railcontent_id",
         '"instructors": instructor[]->name',
         'parent_content_data',
-        'video'
+        'video',
+        'soundslice'
     ];
 
     private array $contentSpecificFields = [
