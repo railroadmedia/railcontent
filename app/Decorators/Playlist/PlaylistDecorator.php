@@ -12,7 +12,7 @@ use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 
 class PlaylistDecorator extends ModeDecoratorBase
 {

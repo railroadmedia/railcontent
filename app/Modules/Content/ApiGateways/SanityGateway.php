@@ -102,6 +102,7 @@ class SanityGateway
             'dataset' => $dataset,
             'apiVersion' => $apiVersion,
             'token' => $accessToken,
+            'perspective' => 'published'
         ]);
     }
 
@@ -182,8 +183,8 @@ class SanityGateway
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
-        $typeString = $type ? "&& _type = '$type'" : '';
-        $fieldsString = $this->getFieldsString($typeString);
+        $typeString = $type ? "&& _type == '$type'" : '';
+        $fieldsString = $this->getFieldsString($type);
         $query ="*[railcontent_id in [{$idsString}] $typeString]{
           $fieldsString
         }";

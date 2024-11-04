@@ -1,0 +1,257 @@
+<?php
+
+namespace App\Modules\RailTracker\tests\Functional;
+
+use App\Modules\Content\Models\Content;
+use App\Modules\RailTracker\Models\MediaPlaybackSessions;
+use App\Modules\RailTracker\Models\MediaPlaybackTypes;
+use Auth;
+use Carbon\Carbon;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\tests\RailtrackerTestCase;
+use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
+use Modules\UserManagementSystem\Models\User;
+
+class MediaPlaybackTrackerTest extends RailtrackerTestCase
+{
+    protected MediaPlaybackTracker $mediaPlaybackTracker;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->mediaPlaybackTracker = $this->app->make(MediaPlaybackTracker::class);
+    }
+
+    public function test_track_media_playback_type()
+    {
+        $type = $this->faker->word;
+        $category = $this->faker->word;
+
+        $this->mediaPlaybackTracker->trackMediaType($type, $category);
+
+        $this->assertDatabaseHas(
+            MediaPlaybackTypes::class,
+            [
+                'type' => $type,
+                'category' => $category,
+            ]
+        );
+    }
+
+    public function test_track_media_playback_session_start()
+    {
+        $userId = User::factory()->create()->id;
+        Auth::loginUsingId($userId);
+
+        $mediaId = $this->faker->word . rand();
+        $mediaLength = rand();
+        $mediaType = $this->faker->word;
+        $mediaCategory = $this->faker->word;
+        $currentSecond = rand();
+        $secondsPlayed = rand();
+        $brand = 'drumeo';
+
+        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType($mediaType, $mediaCategory);
+
+        $this->expectsEvents([MediaPlaybackTracked::class]);
+
+        $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+            $mediaId,
+            $mediaLength,
+            $userId,
+            $mediaTypeId,
+            $currentSecond,
+            $secondsPlayed,
+            $brand
+        );
+
+        $this->assertDatabaseHas(
+            MediaPlaybackSessions::class,
+            [
+                'media_id' => $mediaId,
+                'media_length_seconds' => $mediaLength,
+                'user_id' => $userId,
+                'type_id' => $mediaTypeId,
+                'current_second' => $currentSecond,
+                'seconds_played' => $secondsPlayed,
+                'started_on' => Carbon::now()->toDateTimeString(),
+                'last_updated_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_track_media_playback_session_start_no_user()
+    {
+        $mediaId = $this->faker->word . rand();
+        $mediaLength = rand();
+        $mediaType = $this->faker->word;
+        $mediaCategory = $this->faker->word;
+
+        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType($mediaType, $mediaCategory);
+
+        $this->expectsEvents([MediaPlaybackTracked::class]);
+
+        $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+            $mediaId,
+            $mediaLength,
+            null,
+            $mediaTypeId
+        );
+
+        $this->assertDatabaseHas(
+            MediaPlaybackSessions::class,
+            [
+                'media_id' => $mediaId,
+                'media_length_seconds' => $mediaLength,
+                'user_id' => null,
+                'type_id' => $mediaTypeId,
+                'seconds_played' => 0,
+                'current_second' => 0,
+                'started_on' => Carbon::now()->toDateTimeString(),
+                'last_updated_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_track_media_playback_session_progress()
+    {
+        $userId = User::factory()->create()->id;
+        Auth::loginUsingId($userId);
+
+        $mediaId = $this->faker->word . rand();
+        $mediaLength = rand();
+        $mediaType = $this->faker->word;
+        $mediaCategory = $this->faker->word;
+
+        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType($mediaType, $mediaCategory);
+
+        $sessionId = $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+            $mediaId,
+            $mediaLength,
+            $userId,
+            $mediaTypeId
+        )['id'];
+
+        $secondsPlayed = rand();
+        $currentSecond = rand();
+
+        $this->expectsEvents([MediaPlaybackTracked::class]);
+
+        $updated = $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+            $sessionId,
+            $secondsPlayed,
+            $currentSecond
+        );
+
+        $this->assertDatabaseHas(
+            MediaPlaybackSessions::class,
+            [
+                'id' => $sessionId,
+                'seconds_played' => $secondsPlayed,
+                'current_second' => $currentSecond,
+                'last_updated_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_track_media_playback_session_progress_stress()
+    {
+        $userId = User::factory()->create()->id;
+        Auth::loginUsingId($userId);
+
+        $mediaId = $this->faker->word . rand();
+        $mediaLength = rand();
+        $mediaType = $this->faker->word;
+        $mediaCategory = $this->faker->word;
+
+        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType($mediaType, $mediaCategory);
+
+        $sessionId = $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+            $mediaId,
+            $mediaLength,
+            $userId,
+            $mediaTypeId
+        )['id'];
+
+        $secondsPlayed = rand();
+        $currentSecond = rand();
+
+        for ($i = 0; $i < 25; $i++) {
+            $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+                $sessionId,
+                rand(),
+                rand()
+            );
+        }
+
+        $updated = $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+            $sessionId,
+            $secondsPlayed,
+            $currentSecond
+        );
+
+        $this->assertDatabaseHas(
+            MediaPlaybackSessions::class,
+            [
+                'id' => $sessionId,
+                'seconds_played' => $secondsPlayed,
+                'current_second' => $currentSecond,
+                'last_updated_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_track_media_playback_sessions_stress()
+    {
+        for ($c = 0; $c < 15; $c++) {
+            $userId = User::factory()->create()->id;
+            Auth::loginUsingId($userId);
+
+            $mediaId = $this->faker->word . rand();
+            $mediaLength = rand();
+            $mediaType = $this->faker->word;
+            $mediaCategory = $this->faker->word;
+
+            $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType($mediaType, $mediaCategory);
+
+            $sessionId = $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+                $mediaId,
+                $mediaLength,
+                $userId,
+                $mediaTypeId
+            )['id'];
+
+            $secondsPlayed = rand();
+            $currentSecond = rand();
+
+            for ($i = 0; $i < 5; $i++) {
+                $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+                    $sessionId,
+                    rand(),
+                    rand()
+                );
+            }
+
+            $updated = $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+                $sessionId,
+                $secondsPlayed,
+                $currentSecond
+            );
+
+            $this->assertDatabaseHas(
+                MediaPlaybackSessions::class,
+                [
+                    'media_id' => $mediaId,
+                    'media_length_seconds' => $mediaLength,
+                    'user_id' => $userId,
+                    'type_id' => $mediaTypeId,
+                    'seconds_played' => $secondsPlayed,
+                    'current_second' => $currentSecond,
+                    'started_on' => Carbon::now()->toDateTimeString(),
+                    'last_updated_on' => Carbon::now()->toDateTimeString(),
+                ]
+            );
+        }
+    }
+}

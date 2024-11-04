@@ -4,8 +4,8 @@ namespace App\Listeners\Content;
 
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Events\EngageContent;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 
 class EngageContentEventListener
 {

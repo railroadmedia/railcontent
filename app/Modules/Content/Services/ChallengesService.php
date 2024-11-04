@@ -5,12 +5,7 @@ namespace Modules\Content\Services;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
-use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
-use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
-use Exception;
-use http\Exception\InvalidArgumentException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
@@ -22,8 +17,6 @@ class ChallengesService
 
 
     public function __construct(
-        private UserAccessPermissionsService $userAccessPermissionsService,
-        private CustomerIoSyncService $customerIoSyncService,
         private CustomerIoService $customerIoService,
         private SanityGateway $sanityGateway,
     )
@@ -96,8 +89,9 @@ class ChallengesService
         if (!$challenge) {
             return null;
         }
+        $isSolo = !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = max($startDate, Carbon::now()->startOfDay());
+        $startDate = $startDate->startOfDay();
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData($challenge, startDate: $startDate, isLocked: $isLocked);
         $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate([
@@ -110,6 +104,7 @@ class ChallengesService
             'is_locked' => $isLocked,
             'lessons_meta_data' => $lessonMetaData,
             'is_active' => true,
+            'is_solo' => $isSolo,
         ]);
         return $challengeUserProgress;
     }
@@ -193,17 +188,9 @@ class ChallengesService
                 $endDate = Carbon::parse($userData['end_date']);
             } else {
                 $startDate = Carbon::parse($lessonDocument['published_on']);
-                $dayCount = 0;
-                foreach($challengeLessons as $child) {
-                    $dayCount += $child['is_always_unlocked_for_challenge'] ?? false ? 0 : 1;
-                }
-                $endDate = $startDate->copy()->addDays($dayCount);
+                $endDate = $this->getChallengeEndDate($challenge);
             }
-            $isSameMonth = $startDate->month == $endDate->month;
-            $formatKey = $isSameMonth ? 'm' : 'F';
-            $durationText = $startDate->format($formatKey . ' j');
-            $durationText .= ' - ' . ($isSameMonth ? $endDate->format('j') : $endDate->format($formatKey . ' j'));
-            $lessonDocument['duration_text'] = $durationText;
+            $lessonDocument['duration_text'] = $this->getDurationText($startDate, $endDate);
 
         }
 
@@ -217,6 +204,15 @@ class ChallengesService
             'next_lesson' => $nextPreviousLesson['next_lesson'],
             'previous_lesson' => $nextPreviousLesson['previous_lesson'],
         ];
+    }
+
+    public function getDurationText(Carbon $startDate, Carbon $endDate) : string
+    {
+        $isSameMonth = $startDate->month == $endDate->month;
+        $formatKey = $isSameMonth ? 'F' : 'M';
+        $durationText = $startDate->format($formatKey . ' j');
+        $durationText .= ' - ' . ($isSameMonth ? $endDate->format('j') : $endDate->format($formatKey . ' j'));
+        return $durationText;
     }
 
     /**
@@ -269,6 +265,16 @@ class ChallengesService
     public function getChallengeById($challengeId) : array | null
     {
         return $this->sanityGateway->getByRailContentId($challengeId, 'challenge');
+    }
+
+    /**
+     * Get the sanity Documents for listed challenges
+     * @param array $challengeIds
+     * @return array | null
+     */
+    public function getChallengeByIds($challengeIds) : array | null
+    {
+        return $this->sanityGateway->getByRailContentIds($challengeIds, 'challenge');
     }
 
     public function completeLessonAndGetCurrentProgressResults($lessonId, $userId) : array
@@ -356,5 +362,20 @@ class ChallengesService
             $data,
             $user->created_at->timestamp
         );
+    }
+
+    /**
+     * Return the date of the last day of the challenge
+     * @param array $challenge - Sanity challenge document
+     * @return Carbon|null
+     */
+    public function getChallengeEndDate(array $challenge) : Carbon | null
+    {
+        $startDate =  Carbon::parse($challenge['published_on']);
+        $dayCount = -1;
+        foreach($challenge['lessons'] as $child) {
+            $dayCount += $child['is_always_unlocked_for_challenge'] ?? false ? 0 : 1;
+        }
+        return $startDate->copy()->addDays($dayCount);
     }
 }

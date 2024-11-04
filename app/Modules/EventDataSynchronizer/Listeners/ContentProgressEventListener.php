@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Maps\ContentTypes;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Modules\RailTracker\Services\ContentEngagementService;
 use App\Modules\Tracker\Models\MediaPlaybackTypes;
@@ -22,16 +23,15 @@ use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class ContentProgressEventListener
 {
     public function __construct(
-        private UserContentProgressService $userContentProgressService,
+        private readonly ContentProgressService $contentProgressService,
         private ContentHierarchyService $contentHierarchyService,
         private ContentService $contentService,
         private CommentService $commentService,
@@ -345,6 +345,9 @@ class ContentProgressEventListener
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
         $contentId = $this->getContentId($mediaPlaybackTracked);
+        if (!$contentId) {
+            Log::warning("Unable to get contentId from mediaId $mediaPlaybackTracked->mediaId");
+        }
         $brand = in_array($mediaPlaybackTracked->brand, config('brands', []))
             ? $mediaPlaybackTracked->brand
             : config('railcontent.brand');
@@ -464,13 +467,10 @@ class ContentProgressEventListener
             return;
         }
 
-        $vimeoIdFields =
-            $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)
-                ->toArray();
 
-        $lengthInSeconds = (int)$mediaPlaybackTracked->mediaLengthInSeconds;
+        if ($contentId) {
+            $lengthInSeconds = (int)$mediaPlaybackTracked->mediaLengthInSeconds;
 
-        foreach ($vimeoIdFields as $content) {
             $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
                 $mediaPlaybackTracked->userId,
                 $mediaPlaybackTracked->mediaId,
@@ -483,7 +483,7 @@ class ContentProgressEventListener
                 $this->userPointsService->setPoints(
                     $mediaPlaybackTracked->userId,
                     [
-                        'content_id' => $content['content_id'],
+                        'content_id' => $contentId,
                         'minutes_watched' => 'all',
                     ],
                     'minutes_of_content_watched_v2',
@@ -502,8 +502,8 @@ class ContentProgressEventListener
 
 
             if ($mediaPlaybackTracked->mediaLengthInSeconds > 0) {
-                $this->userContentProgressService->saveContentProgress(
-                    $content['content_id'],
+                $this->contentProgressService->saveContentProgress(
+                    $contentId,
                     min(
                         round(
                             $mediaPlaybackTracked->currentSecond / $mediaPlaybackTracked->mediaLengthInSeconds * 100
@@ -667,7 +667,7 @@ class ContentProgressEventListener
         $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
         $content = $this->contentService->getById($event->contentId);
         //only brand method should be stored
-        if ($content['slug'] == $brand.'-method') {
+        if ($content['slug'] == $brand . '-method') {
             user()->brand_method_levels = $userBrandMethodLevels;
             user()->save();
         }
