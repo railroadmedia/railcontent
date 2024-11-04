@@ -523,6 +523,11 @@ class PlaylistsMetadataController extends Controller
 
         $data = array_merge($item->toArray(), $sanityInfo ?? [], $assignmentInfo ?? []);
         $data['need_access'] = empty(array_intersect($userPermissions, $data['permission_id']));
+        if (!empty($data['extra_data'])) {
+            foreach (json_decode($data['extra_data'], true) ?? [] as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
 
         return $data;
     }
