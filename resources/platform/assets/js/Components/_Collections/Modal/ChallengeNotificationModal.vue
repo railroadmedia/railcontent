@@ -23,7 +23,7 @@
             <template v-if="step === 2 && challengeType === 'solo'">
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">Choose Your Start Date</h1>
                 <div class="tw-mx-auto">
-                    <Datepicker :start-date="selectedDate" inline :enable-time-picker="false" :action-row="{ showCancel: false, showSelect: false, showPreview: false }" position="center" @internal-model-change="handleDateChange" />
+                    <Datepicker :start-date="selectedDate" inline :enable-time-picker="false" :action-row="{ showCancel: false, showSelect: false, showPreview: false }" position="center" :min-date="new Date()" @internal-model-change="handleDateChange" />
                 </div>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton :disabled="!selectedDate" @click="setStartDate">{{ setStartDateButtonText }}</MuButton>
@@ -61,7 +61,7 @@ import MuButton from '@units/Button/MuButton';
 const props = defineProps({
     challengeType: {
         type: String,
-        default: 'community',
+        default: 'solo',
     },
     challenge: {
       type: Object,
@@ -69,7 +69,7 @@ const props = defineProps({
     },
     defaultStep: {
         type: Number,
-        default: 1,
+        default: 0,
     },
 });
 
@@ -80,7 +80,7 @@ const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep);
+const step = ref(props.defaultStep || props.challengeType === 'community' ? 1 : 2);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
