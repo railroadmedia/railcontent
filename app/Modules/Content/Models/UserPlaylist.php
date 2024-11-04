@@ -44,7 +44,7 @@ class UserPlaylist extends Model
 
     public function scopeOfBrand(Builder $query, Brand $brand): Builder
     {
-        return $query->where('railcontent_user_playlists.brand', $brand->value);
+        return $query->where("{$this->table}.brand", $brand->value);
     }
 
     public function scopeSortBy(Builder $query, string $column, string $direction = 'desc'): Builder
@@ -53,9 +53,9 @@ class UserPlaylist extends Model
             return $query->orderBy('name', 'asc');
         } elseif ($column == 'pinned') {
             return $query->leftJoin('railcontent_pinned_playlists as pinned', function ($join) {
-                $join->on('pinned.playlist_id', '=', 'railcontent_user_playlists.id');
+                $join->on('pinned.playlist_id', '=', "{$this->table}.id");
             })->select(
-                config('railcontent.table_prefix').'user_playlists.*'
+                "{$this->table}.*"
             )
                 ->selectRaw('IF( pinned.id IS NULL, FALSE, TRUE) as  isPinned')
               ->orderByRaw('isPinned desc, pinned.created_at ' . $direction);
@@ -63,8 +63,8 @@ class UserPlaylist extends Model
             return $query->select(
                 '*',
                 \DB::raw('GREATEST(' .
-                                           config('railcontent.table_prefix') . 'user_playlists.created_at, COALESCE(' .
-                                           config('railcontent.table_prefix') . 'user_playlists.updated_at, 0), COALESCE(last_progress, 0)) as datemax')
+                                           "{$this->table}.created_at, COALESCE("
+                                          . "{$this->table}.updated_at, 0), COALESCE(last_progress, 0)) as datemax")
             )
                 ->orderBy('datemax', $direction);
         } else {
@@ -87,14 +87,14 @@ class UserPlaylist extends Model
                 $builder->where('name', 'LIKE', $termWildcard);
 
                 // Search in related playlist items' content and name if exists
-                $builder->orWhereExists(function (Builder $subQuery) use ($termWildcard) {
-                    $subQuery->select(config('railcontent.table_prefix').'user_playlist_content.user_playlist_id')
-                        ->from(config('railcontent.table_prefix').'user_playlist_content')
+                $builder->orWhereExists(function (\Illuminate\Database\Query\Builder $subQuery) use ($termWildcard) {
+                    $subQuery->select('railcontent_user_playlist_content.user_playlist_id')
+                        ->from('railcontent_user_playlist_content')
                         ->whereRaw(
-                            config('railcontent.table_prefix') . 'user_playlist_content.user_playlist_id = ' .
-                            config('railcontent.table_prefix') . 'user_playlists.id'
+                            'railcontent_user_playlist_content.user_playlist_id = ' .
+                             "{$this->table}.id"
                         )
-                        ->where(function (Builder $contentQuery) use ($termWildcard) {
+                        ->where(function (\Illuminate\Database\Query\Builder $contentQuery) use ($termWildcard) {
                             $contentQuery->where('content_name', 'LIKE', $termWildcard)
                                 ->orWhere('playlist_item_name', 'LIKE', $termWildcard);
                         });
