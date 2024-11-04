@@ -294,8 +294,9 @@ class PlaylistsMetadataController extends Controller
         return response()->json(['data' => $playlist]);
     }
 
-    public function getPlaylistItems($playlistId, Request $request)
+    public function getPlaylistItems(Request $request)
     {
+        $playlistId = $request->get('playlist_id');
         $playlist = UserPlaylist::findOrFail($playlistId);
         throw_if(!$playlist, new NotFoundException("Playlist not exists."));
         $items = UserPlaylistContent::query()
@@ -410,10 +411,9 @@ class PlaylistsMetadataController extends Controller
                                 ]);
     }
 
-    public function getPlaylistItem(Request $request)
+    public function getPlaylistItem($playlistItemId, Request $request)
     {
         $user = user();
-        $playlistItemId = $request->get('user_playlist_item_id');
         $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
 
         // Check if the user has access to the playlist
