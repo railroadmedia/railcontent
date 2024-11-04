@@ -13,8 +13,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Services\PlaylistsService;
-use Railroad\Railcontent\Exceptions\NotFoundException;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class PlaylistsMetadataController extends Controller
 {
@@ -54,20 +52,13 @@ class PlaylistsMetadataController extends Controller
         $playlists = UserPlaylist::with('items')
             ->where('railcontent_user_playlists.user_id', $user->id)
             ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
-            ->forPage($page, $limit)
             ->searchTerm($request->get('term'))
             ->sortBy($orderByColumn, $orderByDirection)
-            ->get();
+            ->paginate($limit, ['*'], 'page', $page);
+        $totalResults = $playlists->total();
 
         // Formatting durations and URLs for playlists
-        $playlists = $this->formatPlaylists($playlists);
-
-        // Total results count
-        $totalResults = UserPlaylist::query()
-            ->where('railcontent_user_playlists.user_id', $user->id)
-            ->when(!is_null($brand), fn ($query) => $query->ofBrand($brand))
-            ->searchTerm($request->get('term'))
-            ->count();
+        $playlists = $this->formatPlaylists($playlists->items());
 
         // Filter options processing
         $filterOptions = UserPlaylist::filterOptions($user->id, $brand, $request->get('term'))->get();
@@ -99,7 +90,13 @@ class PlaylistsMetadataController extends Controller
                                             ]);
 
         $user = user();
-        $originalPlaylist = UserPlaylist::with('items')->findOrFail($playlistId);
+        $originalPlaylist = UserPlaylist::with('items')->find($playlistId);
+        if(!$originalPlaylist){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Playlist do not exists'
+                                    ], 404);
+        }
 
         $newPlaylist = $originalPlaylist->replicate();
         $newPlaylist->name = $request->get('name', $originalPlaylist->name . ' (Duplicate)');
@@ -123,7 +120,13 @@ class PlaylistsMetadataController extends Controller
     public function deletePlaylistWithItems(Request $request)
     {
         $playlistId = $request->get('playlist_id');
-        $playlist = UserPlaylist::findOrFail($playlistId);
+        $playlist = UserPlaylist::find($playlistId);
+        if(!$playlist){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Playlist do not exists'
+                                    ], 404);
+        }
         // Ensure the authenticated user is the owner of the playlist
         if ($playlist->user_id !== user()->id) {
             return response()->json([
@@ -151,7 +154,13 @@ class PlaylistsMetadataController extends Controller
                                             ]);
 
         // Find the playlist by ID
-        $playlist = UserPlaylist::findOrFail($playlistId);
+        $playlist = UserPlaylist::find($playlistId);
+        if(!$playlist){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Playlist do not exists'
+                                    ], 404);
+        }
         if ($playlist->user_id !== user()->id) {
             return response()->json(['success' => false,
                                      'error' => 'You don’t have access to update this playlist'], 403);
@@ -213,7 +222,7 @@ class PlaylistsMetadataController extends Controller
         $existingLike = UserPlaylistLike::where('playlist_id', $playlistId)
             ->where('user_id', $userId)
             ->where('brand', $brand)
-            ->first();
+            ->exists();
 
         if ($existingLike) {
             return response()->json([
@@ -275,13 +284,21 @@ class PlaylistsMetadataController extends Controller
     {
         $user = user();
         $playlistId = $request->get('playlist_id');
-        $playlist = UserPlaylist::findOrFail($playlistId);
-        throw_if(!$playlist, new NotFoundException("Playlist not exists."));
+        $playlist = UserPlaylist::find($playlistId);
+        if(!$playlist) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
 
-        throw_if(
-            ($playlist->user_id != $user->id && $playlist->private == true),
-            new NotFoundException("You don’t have access to this playlist", 'Private Playlist')
-        );
+        if($playlist->user_id != $user->id && $playlist->private == true){
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'You don’t have access to this playlist',
+                                    ], 403);
+        }
+
         //        throw_if(
         //            ($playlist == -2),
         //            new NotFoundException(
@@ -297,8 +314,13 @@ class PlaylistsMetadataController extends Controller
     public function getPlaylistItems(Request $request)
     {
         $playlistId = $request->get('playlist_id');
-        $playlist = UserPlaylist::findOrFail($playlistId);
-        throw_if(!$playlist, new NotFoundException("Playlist not exists."));
+        $playlist = UserPlaylist::find($playlistId);
+        if(!$playlist) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
         $items = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId)
             ->orderBy('position', 'asc')
@@ -307,11 +329,12 @@ class PlaylistsMetadataController extends Controller
         $parentIds = $items->pluck('content_parent')->filter();
 
         // Fetch Sanity and Assignment data
-        $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray());
+        $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray(), 'playlist-item');
         $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
             $playlist->brand,
             $contentIds->toArray(),
-            $parentIds->toArray()
+            $parentIds->toArray(),
+            'playlist-item'
         );
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
@@ -341,7 +364,13 @@ class PlaylistsMetadataController extends Controller
 
         $user = user();
         $playlistItemId = $request->get('user_playlist_item_id');
-        $playlistItem = UserPlaylistContent::with('playlist')->findOrFail($playlistItemId);
+        $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
+        if(!$playlistItem){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Item do not exists'
+                                    ], 404);
+        }
 
         // Check ownership and playlist existence
         if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
@@ -383,10 +412,13 @@ class PlaylistsMetadataController extends Controller
     {
         $user = user(); // Assuming this function retrieves the current user
         $playlistItemId = $request->get('user_playlist_item_id');
-
-        // Using findOrFail to automatically handle non-existence
         $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
-
+        if(!$playlistItem){
+            return response()->json([
+                                        'success' => false,
+                                        'error' => 'Item do not exists'
+                                    ], 404);
+        }
 
         // Check if the user has access to the playlist
         if (!$playlistItem->playlist || ($playlistItem->playlist->user_id !== $user->id)) {
@@ -433,11 +465,12 @@ class PlaylistsMetadataController extends Controller
         }
 
         // Fetch Sanity and Assignment data for the specific item
-        $sanityData = $this->sanityGateway->getByRailContentIds([$playlistItem->content_id]);
+        $sanityData = $this->sanityGateway->getByRailContentIds([$playlistItem->content_id], 'playlist-item');
         $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
             $playlistItem->playlist->brand,
             [$playlistItem->content_id],
-            $playlistItem->content_parent ? [$playlistItem->content_parent] : []
+            $playlistItem->content_parent ? [$playlistItem->content_parent] : [],
+            'playlist-item'
         );
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
@@ -457,7 +490,7 @@ class PlaylistsMetadataController extends Controller
      * @param array $playlists The playlists to format.
      * @return array The formatted playlists.
      */
-    private function formatPlaylists(Collection $playlists): Collection
+    private function formatPlaylists(array $playlists): array
     {
         foreach ($playlists as $index => $playlist) {
             $minsec                                 = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
@@ -471,7 +504,7 @@ class PlaylistsMetadataController extends Controller
             ]);
 
             $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : '';
-            $playlists[$index]['total_items'] = $playlist->items->count();
+            $playlists[$index]['total_items'] = count($playlist['items']);
         }
 
         return $playlists;

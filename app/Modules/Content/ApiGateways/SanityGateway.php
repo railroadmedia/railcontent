@@ -10,7 +10,6 @@ class SanityGateway
         "'sanity_id' : _id",
         "'id': railcontent_id",
         "railcontent_id",
-        "'artist_name':coalesce(artist->name, instructor[0]->name)",
         "artist",
         "title",
         "'image': thumbnail.asset->url",
@@ -28,10 +27,6 @@ class SanityGateway
         'status',
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
-        '"instructors": instructor[]->name',
-        'parent_content_data',
-        'video',
-        'soundslice'
     ];
 
     private array $contentSpecificFields = [
@@ -86,6 +81,13 @@ class SanityGateway
                 video,
             }',
         ],
+        'playlist-item' => [
+            '"instructors": instructor[]->name',
+            'parent_content_data',
+            'video',
+            'soundslice',
+            "'artist_name':coalesce(artist->name, instructor[0]->name)",
+        ]
         ];
 
     public SanityClient $sanity;
@@ -186,8 +188,8 @@ class SanityGateway
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
-        $typeString = $type ? "&& _type = '$type'" : '';
-        $fieldsString = $this->getFieldsString($typeString);
+        $typeString = ($type && $type !== 'playlist-item') ? "&& _type == '$type'" : '';
+        $fieldsString = $this->getFieldsString($type);
         $query = "*[railcontent_id in [{$idsString}] $typeString]{
           $fieldsString
         }";
@@ -271,6 +273,7 @@ class SanityGateway
         foreach ($documents as $key => $document) {
             foreach ($document['assignment'] ?? [] as $assignment) {
                 $routes = [];
+
                 if (!empty($document['parent_content_data'] ?? [])) {
                     $route = collect($document['parent_content_data'])->map(function ($parent) {
                         switch ($parent['type']) {
