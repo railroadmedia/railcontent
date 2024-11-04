@@ -1145,13 +1145,13 @@ return [
         ],
     ],
     'subscription_topics' => [
-        'drumeo_membership_perks' => env('DRUMEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_2'),
-        'drumeo_lesson_events' => env('DRUMEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_5'),
-        'pianote_membership_perks' => env('PIANOTE_PERKS_SUBSCRIPTION_TOPIC', 'topic_1'),
-        'pianote_lesson_events' => env('PIANOTE_LESSONS_SUBSCRIPTION_TOPIC', 'topic_7'),
-        'guitareo_membership_perks' => env('GUITAREO_PERKS_SUBSCRIPTION_TOPIC', 'topic_4'),
-        'guitareo_lesson_events' => env('GUITAREO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_3'),
-        'singeo_membership_perks' => env('SINGEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_6'),
-        'singeo_lesson_events' => env('SINGEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_8'),
+        'drumeo_membership_perks' => env('DRUMEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_3'),
+        'drumeo_lesson_events' => env('DRUMEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_2'),
+        'pianote_membership_perks' => env('PIANOTE_PERKS_SUBSCRIPTION_TOPIC', 'topic_10'),
+        'pianote_lesson_events' => env('PIANOTE_LESSONS_SUBSCRIPTION_TOPIC', 'topic_9'),
+        'guitareo_membership_perks' => env('GUITAREO_PERKS_SUBSCRIPTION_TOPIC', 'topic_11'),
+        'guitareo_lesson_events' => env('GUITAREO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_13'),
+        'singeo_membership_perks' => env('SINGEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_12'),
+        'singeo_lesson_events' => env('SINGEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_14'),
     ]
 ];
