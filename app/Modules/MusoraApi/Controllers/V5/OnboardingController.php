@@ -4,6 +4,7 @@ namespace App\Modules\MusoraApi\Controllers\V5;
 
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use Avo;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -65,6 +66,8 @@ class OnboardingController extends Controller
                 'has_completed_onboarding' => true,
             ])
         );
+
+        SyncOnboardingBrands::dispatchAfterResponse(user()->id, $brand);
 
         return response()->json();
     }
