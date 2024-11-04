@@ -38,6 +38,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
+use Modules\UserManagementSystem\Models\OnboardingBrand;
 use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -1086,5 +1087,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->first_access_at = Carbon::now();
         $this->save();
         return true;
+    }
+
+    public function onboardingBrands(): HasOne
+    {
+        return $this->hasOne(OnboardingBrand::class);
     }
 }
