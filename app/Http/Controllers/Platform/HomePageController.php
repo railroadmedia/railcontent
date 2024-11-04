@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
@@ -75,7 +76,8 @@ class HomePageController extends BaseController
         private CohortService $cohortService,
         private OnboardingService $onboardingService,
         private LearningPathsService $learningPathsService,
-        private UserAccessPermissionsService $userAccessPermissionsService
+        private UserAccessPermissionsService $userAccessPermissionsService,
+        private ExploreTasksService $exploreTasksService
     ) {
     }
 
@@ -336,19 +338,21 @@ class HomePageController extends BaseController
         }
 
         $trialSection = [];
-        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
+        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
 
         if ($showOldTrialSection) {
             $trialSection = $this->learningPathsService->getLearningPaths();
         }
 
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+
         if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths();
+            $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
         }
 
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
         return view('home.index', [
             "brand" => $brand,
@@ -397,6 +401,7 @@ class HomePageController extends BaseController
             "trialSection" => $trialSection,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => $homepageV2,
+            "exploreTasks" => $userTasks,
         ]);
     }
 
@@ -696,10 +701,11 @@ class HomePageController extends BaseController
     public function getUsersPlaylist()
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
-            user()->id,
-            'user-playlist',
-            brand(),
-            self::PLAYLISTS_COUNTENT_COUNT
+            userId: user()->id,
+            playlistType: 'user-playlist',
+            brand: brand(),
+            limit: self::PLAYLISTS_COUNTENT_COUNT,
+            sort: '-last_progress'
         );
 
         $results = new ContentFilterResultsEntity(['results' => $playlists]);

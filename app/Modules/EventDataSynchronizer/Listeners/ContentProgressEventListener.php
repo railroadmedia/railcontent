@@ -360,13 +360,8 @@ class ContentProgressEventListener
             Log::info("handleMediaPlaybackTracked $userId");
             //Log::debug(print_r($mediaPlaybackTracked, true));
         }
-        $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
 
-        if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds) && $mediaPlaybackTracked->secondsPlayed > 0) {
-            //            $min = $this->userMetricsService->getTotalMinutesPracticed(
-            //                $mediaPlaybackTracked->userId,
-            //                $assignmentTypeIds
-            //            );
+        if ($mediaPlaybackTracked->secondsPlayed > 0) {
             $userBrandMinutesPracticed = user()->brand_minutes_practiced;
             $initialValue = $userBrandMinutesPracticed[$brand] ?? 0;
             $min = ($initialValue + round($mediaPlaybackTracked->secondsPlayed / 60, 0));
