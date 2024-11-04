@@ -12,7 +12,7 @@
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
        :href="(!noAccess && renderLink && isReleased) ? item.web_url_path : null"
-       @click="openUpgradeModal"
+       @click="openModal"
     >
 
         <!-- LESSON NUMBERS -->
@@ -358,6 +358,8 @@ const props = defineProps({
     },
 })
 
+const emit = defineEmits('openChallengeLockModal')
+
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
@@ -372,7 +374,6 @@ const {
     thumbnailType,
     is_added,
     completedIcon,
-    isLocked,
 } = useCatalogueItem(props);
 
 const {
@@ -469,12 +470,18 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
+const isChallenge = computed(() => {
+    return props.item.type === "challenge-part";
+})
+
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openUpgradeModal = () => {
+const openModal = () => {
+    if(isChallenge.value && !isReleased.value){
+        emit('openChallengeLockModal', props.item)
+    }
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 </script>
-

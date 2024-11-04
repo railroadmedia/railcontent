@@ -18,15 +18,14 @@ export default function useCatalogueItem(props) {
     });
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateQuarterPublishedOn = computed(() => DateTime.fromSQL(props.item.quarter_published, { zone: 'UTC' }).toFormat('x'));
-    const dateUnlockedOn = computed(() => DateTime.fromSQL(props.item.unlock_date, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());
     const isReleased = computed(() => {
             if (userStore.isAdmin) {
                 return true;
             }
 
-            if(props.item.unlock_date){
-                return dateNow.value > dateUnlockedOn.value;
+            if(props.item.is_locked){
+                return !props.item.is_locked;
             } else if(props.item.quarter_published && props.item.status === 'draft'){
                 return dateNow.value > dateQuarterPublishedOn.value;
             } else {
@@ -36,7 +35,7 @@ export default function useCatalogueItem(props) {
     const releaseDate = computed(() => {
         let date = '';
 
-        if(props.item.unlock_date){
+        if(props.item.is_locked){
             date = props.item.unlock_date;
         } else if(props.item.quarter_published){
             date = props.item.quarter_published;
