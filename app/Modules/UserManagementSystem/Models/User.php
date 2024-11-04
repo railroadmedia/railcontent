@@ -16,6 +16,7 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -1077,6 +1078,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'membership_level' => $this->membership_level,
             'membership_expiration_date' => $this->membership_expiration_date
         ];
+    }
+
+    public function exploreTasks(): HasMany
+    {
+        return $this->hasMany(UserExploreTask::class);
     }
 
     public function isFirstAccess(): bool
