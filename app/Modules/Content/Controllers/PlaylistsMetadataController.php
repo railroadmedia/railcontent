@@ -316,9 +316,10 @@ class PlaylistsMetadataController extends Controller
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
+        $userPermissions = user()->getActivePermissionsIds();
 
-        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId) {
-            return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId);
+        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions) {
+            return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions);
         });
 
         return response()->json($mergedData);
