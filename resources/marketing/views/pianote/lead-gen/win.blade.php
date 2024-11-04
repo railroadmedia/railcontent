@@ -135,6 +135,7 @@
     </section>
     
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
+        <div id="customize-anchor" class="anchor"></div>
         <div class="md:max-w-5xl mx-auto text-center lg:px-10">
             <h2 class="uppercase leading-normal mb-4 lg:mb-8">
                 <strong>win one of <br/>these <span class="underline decoration-red-500 decoration-1">incredible prizes</span></strong>
@@ -286,7 +287,7 @@
                     @endforeach
                 </div>
             </div>
-            <a class="anchor-slide join smaller w-full sm:w-2/3 md:w-1/2 lg:w-1/3 bg-pianote" href="#customize-anchor">ENTER NOW</a>
+            <a class="anchor-slide join smaller w-full sm:w-2/3 md:w-1/2 lg:w-1/3 bg-pianote" href="#final">ENTER NOW</a>
         </div>
     </section>
 
@@ -366,8 +367,8 @@
         </div>
     </section>
 
-    <div id="customize-anchor" class="anchor"></div>
     <section class="header-custom px-5 sm:px-6 py-10 md:py-20 bg-no-repeat text-white bg-cover bg-center" style="background-color: #00101D;">
+        <div id="final" class="anchor"></div>
          <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
