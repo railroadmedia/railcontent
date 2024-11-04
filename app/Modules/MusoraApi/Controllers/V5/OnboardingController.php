@@ -4,6 +4,7 @@ namespace App\Modules\MusoraApi\Controllers\V5;
 
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use Avo;
 use Carbon\Carbon;
@@ -58,6 +59,18 @@ class OnboardingController extends Controller
                     ->addSeconds(30)
             )
         );
+
+        if (boolval(FeatureFlagging::branch('homepage-v2', user()))) {
+            user()
+                ->exploreTasks()
+                ->uncompleted()
+                ->notExpired()
+                ->byHook('complete-your-account')
+                ->update([
+                    'is_completed' => true,
+                    'completed_at' => Carbon::now()
+                ]);
+        }
 
         Avo::onboarding_goals_step_completed(
             AvoHelper::defaultEventProperties([

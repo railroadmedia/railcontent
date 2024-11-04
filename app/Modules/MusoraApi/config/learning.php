@@ -605,6 +605,594 @@ return [
                     ],
                 ]
             ]
-        ]
+        ],
+        'guitareo' => [
+            "basic" => [
+                [
+                    [
+                        "header" => 'Play Your First Song',
+                        "subheader" => 'No need to read guitar tabs—just press play, and follow along for a daily 10-minute lesson.',
+                        "id" => 402198,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402198, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                        ],
+                    ],
+                    [
+                        "header" => 'Warm Up Your Fingers',
+                        "subheader" => 'Just starting out? Try this 10-minute warmup and get your fingers moving.',
+                        "id" => 402083,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MajorScaleWarmupsSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MajorScaleWarmupsWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 402083],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/major-scale-warmup/402083'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Gain Control of Your Rhythm',
+                        "subheader" => 'Add essential rhythm techniques and strumming patterns to your playing in just 30 days.',
+                        "id" => 410037,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 410037, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                        ],
+                    ],
+                    [
+                        "header" => 'Warm Up Your Fingers',
+                        "subheader" => 'Looking for an easy five-minute warmup? Enjoy this beginner guitar lesson with Kent.',
+                        "id" => 402093,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FingerDexteritySquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FingerDexterityWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 402093],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/finger-dexterity-warmup/402093'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Express Yourself on the Guitar',
+                        "subheader" => 'Does your playing need some spice? Take this lesson to develop more expressive techniques.',
+                        "id" => 348230,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ExpressiveSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ExpressiveWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 348230],
+                            "content_url" => 'https://www.musora.com/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
+                        ],
+                    ],
+                    [
+                        "header" => "Start Rockin' Out Right Away",
+                        "subheader" => 'Play along with Ayla as she shows you how to practice rocking out on the guitar in just 15 minutes.',
+                        "id" => 402155,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ClassicRockEssentialsSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ClassicRockEssentialsWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 402155],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/classic-rock-essentials/402155'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Elevate Your Guitar Playing',
+                        "subheader" => 'Join 5x GRAMMY Award-winner Mark Lettieri as he shows you how to create iconic guitar parts.',
+                        "id" => 363978,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartWide.png',
+                        "content_type" => 'course',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 363978],
+                            "content_url" => 'https://www.musora.com/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
+                        ],
+                    ],
+                    [
+                        "header" => 'Practice the Pentatonic Scale',
+                        "subheader" => 'Get your fingers moving on the fretboard in this 15-minute warmup with Kent.',
+                        "id" => 408403,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/15MinuteSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/15MinuteWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 408403],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/15-minute-minor-pentatonic-5-positions/408403'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Create Your Own Music',
+                        "subheader" => 'Build your technique & confidence so you can play with more creative flair.',
+                        "id" => 389312,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartWide.png',
+                        "content_type" => 'course',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 389312],
+                            "content_url" => 'https://www.musora.com/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
+                        ],
+                    ],
+                    [
+                        "header" => 'Play This Iconic Riff by The Police',
+                        "subheader" => 'Play along with Kent in this 15-minute tutorial to master this classic riff by The Police.',
+                        "id" => 402973,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MessageInABottleSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MessageInABottleWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 402973],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/message-in-a-bottle/402973'
+                        ],
+                    ],
+                ],
+            ],
+            "plus" => [
+                [
+                    [
+                        "header" => 'Play Your First Song',
+                        "subheader" => 'No need to read guitar tabs—just press play, and follow along for a daily 10-minute lesson.',
+                        "id" => 402198,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/AGSHWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402198, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                        ],
+                    ],
+                    [
+                        "header" => 'Warm Up Your Fingers',
+                        "subheader" => 'Just starting out? Try this 10-minute warmup and get your fingers moving.',
+                        "id" => 402083,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MajorScaleWarmupsSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/MajorScaleWarmupsWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 402083],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/major-scale-warmup/402083'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Gain Control of Your Rhythm',
+                        "subheader" => 'Add essential rhythm techniques and strumming patterns to your playing in just 30 days.',
+                        "id" => 410037,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DaysToBetterStrummingWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 410037, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                        ],
+                    ],
+                    [
+                        "header" => 'Play Boulevard of Broken Dreams by Green Day',
+                        "subheader" => "Get your punk rock fix with this easy version of Green Day's iconic song.",
+                        "id" => 408310,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/BoulevardOfBrokenDreamsSquare.png',
+                        "content_type" => 'song',
+                        "button" => [
+                            "page_type" => 'Song',
+                            "page_params" => ["id" => 408310],
+                            "content_url" => 'https://www.musora.com/guitareo/songs/boulevard-of-broken-dreams-easy-version/408310',
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Express Yourself on the Guitar',
+                        "subheader" => 'Does your playing need some spice? Take this lesson to develop more expressive techniques.',
+                        "id" => 348230,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ExpressiveSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/ExpressiveWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 348230],
+                            "content_url" => 'https://www.musora.com/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
+                        ],
+                    ],
+                    [
+                        "header" => 'Play Everlong by Foo Fighters',
+                        "subheader" => "Learn to play this classic rock song by Foo Fighters on the guitar.",
+                        "id" => 377833,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/EverlongSquare.png',
+                        "content_type" => 'song',
+                        "button" => [
+                            "page_type" => 'Song',
+                            "page_params" => ["id" => 377833],
+                            "content_url" => 'https://www.musora.com/guitareo/songs/everlong/377833',
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Elevate Your Guitar Playing',
+                        "subheader" => 'Join 5x GRAMMY Award-winner Mark Lettieri as he shows you how to create iconic guitar parts.',
+                        "id" => 363978,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartWide.png',
+                        "content_type" => 'course',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 363978],
+                            "content_url" => 'https://www.musora.com/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
+                        ],
+                    ],
+                    [
+                        "header" => 'Play Hotel California by Eagles',
+                        "subheader" => "Ready to check into Hotel California? Be careful... once you start playing you can never stop.",
+                        "id" => 383929,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/HotelCaliforniaSquare.png',
+                        "content_type" => 'song',
+                        "button" => [
+                            "page_type" => 'Song',
+                            "page_params" => ["id" => 383929],
+                            "content_url" => 'https://www.musora.com/guitareo/songs/hotel-california/383929',
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Create Your Own Music',
+                        "subheader" => 'Build your technique & confidence so you can play with more creative flair.',
+                        "id" => 389312,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/CreatingThePerfectGuitarPartWide.png',
+                        "content_type" => 'course',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 389312],
+                            "content_url" => 'https://www.musora.com/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
+                        ],
+                    ],
+                    [
+                        "header" => 'Play Bark at the Moon by Ozzy Osbourne',
+                        "subheader" => "Get your guitar and start playing this classic Ozzy Osbourne song.",
+                        "id" => 390402,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/BarkattheMoonSquare.png',
+                        "content_type" => 'song',
+                        "button" => [
+                            "page_type" => 'Song',
+                            "page_params" => ["id" => 390402],
+                            "content_url" => 'https://www.musora.com/guitareo/songs/bark-at-the-moon/390402',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'singeo' => [
+            'basic' => [
+                [
+                    [
+                        "header" => 'Gain Control of Your Voice',
+                        "subheader" => 'Focus on the most important vocal techniques for beginners. Join Lisa in this challenge to level up your voice!',
+                        "id" => 402200,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402200, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                        ],
+                    ],
+                    [
+                        "header" => 'Your Daily Vocal Warm-Up',
+                        "subheader" => 'Warm up your voice with this quick routine. Perfect for singers of any level!',
+                        "id" => 356716,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalWide.png',
+                        "content_type" => 'quick-tips',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 356716],
+                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Gain Control of Your Voice',
+                        "subheader" => 'Focus on the most important vocal techniques for beginners. Join Lisa in this challenge to level up your voice!',
+                        "id" => 402200,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402200, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                        ],
+                    ],
+                    [
+                        "header" => 'Your Daily Vocal Warm-Up',
+                        "subheader" => 'Warm up your voice with this quick routine. Perfect for singers of any level!',
+                        "id" => 356716,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalWide.png',
+                        "content_type" => 'quick-tips',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 356716],
+                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Create Simple and Beautiful Harmonies',
+                        "subheader" => 'Start harmonizing right away! Find your pitch and master intervals in just 30 days.',
+                        "id" => 410538,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysWide.png',
+                        "content_type" => 'pack',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 410538, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Develop Your Own Style',
+                        "subheader" => 'Learn the different vocal styles and how to apply those techniques in this series of lessons.',
+                        "id" => 324931,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 324931],
+                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Develop Your Own Style',
+                        "subheader" => 'Learn the different vocal styles and how to apply those techniques in this series of lessons.',
+                        "id" => 324931,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 324931],
+                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+            ],
+            'plus' => [
+                [
+                    [
+                        "header" => 'Gain Control of Your Voice',
+                        "subheader" => 'Focus on the most important vocal techniques for beginners. Join Lisa in this challenge to level up your voice!',
+                        "id" => 402200,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402200, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                        ],
+                    ],
+                    [
+                        "header" => 'Your Daily Vocal Warm-Up',
+                        "subheader" => 'Warm up your voice with this quick routine. Perfect for singers of any level!',
+                        "id" => 356716,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalWide.png',
+                        "content_type" => 'quick-tips',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 356716],
+                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Gain Control of Your Voice',
+                        "subheader" => 'Focus on the most important vocal techniques for beginners. Join Lisa in this challenge to level up your voice!',
+                        "id" => 402200,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingBettterIn30DaysWide.png',
+                        "content_type" => 'challenge',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 402200, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                        ],
+                    ],
+                    [
+                        "header" => 'Your Daily Vocal Warm-Up',
+                        "subheader" => 'Warm up your voice with this quick routine. Perfect for singers of any level!',
+                        "id" => 356716,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/9MinuteVocalWide.png',
+                        "content_type" => 'quick-tips',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 356716],
+                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Create Simple and Beautiful Harmonies',
+                        "subheader" => 'Start harmonizing right away! Find your pitch and master intervals in just 30 days.',
+                        "id" => 410538,
+                        "logo" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysLogo.png',
+                        "bgImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysBackground.png',
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/SingHarmonyIn30DaysWide.png',
+                        "content_type" => 'pack',
+                        "button" => [
+                            "page_type" => 'PackOverview',
+                            "page_params" => ["id" => 410538, "type" => 'Lesson'],
+                            "content_url" => 'https://www.musora.com/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Develop Your Own Style',
+                        "subheader" => 'Learn the different vocal styles and how to apply those techniques in this series of lessons.',
+                        "id" => 324931,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 324931],
+                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        "header" => 'Develop Your Own Style',
+                        "subheader" => 'Learn the different vocal styles and how to apply those techniques in this series of lessons.',
+                        "id" => 324931,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/FindingYourUniqueVoiceWide.png',
+                        "content_type" => 'learning-path-level',
+                        "button" => [
+                            "page_type" => 'CourseOverview',
+                            "page_params" => ["id" => 324931],
+                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                        ],
+                    ],
+                    [
+                        "header" => 'Build Your Vocal Stamina',
+                        "subheader" => 'Practice singing with Susana in this fun call-and-response style workout.',
+                        "id" => 410471,
+                        "squareImg" => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntSquare.png',
+                        "wideImg"  => 'https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/Riffs&RunsIntWide.png',
+                        "content_type" => 'workout',
+                        "button" => [
+                            "page_type" => 'Lesson',
+                            "page_params" => ["id" => 410471],
+                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ]
 ];

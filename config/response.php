@@ -2548,7 +2548,9 @@ return [
             'last_used_brand',
             'primary_brand',
             'homepage_v2',
-            'is_first_access'
+            'explore_tasks',
+            'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [
@@ -5773,7 +5775,9 @@ return [
             'last_used_brand',
             'primary_brand',
             'homepage_v2',
-            'is_first_access'
+            'explore_tasks',
+            'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [
