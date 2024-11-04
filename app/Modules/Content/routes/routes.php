@@ -100,6 +100,11 @@ Route::prefix('challenges')
     ->middleware('web_or_api_authenticated')
     ->group(function () {
         Route::get(
+            'user_progress_for_index_page/get',
+            [ChallengesMetaDataController::class, 'getChallengesMetadataForIndexPage']
+        )->name('challenges.user_progress_for_index_page');
+
+        Route::get(
             '{id}',
             [ChallengesMetaDataController::class, 'getChallengeMetadata']
         )->name('challenges.metadata');

@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
@@ -43,11 +42,74 @@ class ChallengesMetaDataController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * @param $id - Challenge railcontent id
+     * @return JsonResponse
+     */
     public function completeLesson($id)
     {
         $userId = user()->id;
         $completionData = $this->challengesService->completeLessonAndGetCurrentProgressResults($id, $userId);
         return response()->json($completionData);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getChallengesMetadataForIndexPage(Request $request)
+    {
+        $userId = user()->id;
+        $contentIds = $request->get('content_ids', '');
+        $contentIds = explode(',', $contentIds);
+        if (!$contentIds) return response()->json([]);
+        $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
+        $resultPackage = [];
+        $challenges = $this->challengesService->getChallengeByIds($contentIds);
+        foreach($contentIds as $contentId) {
+            $challenge = null;
+            foreach($challenges as $testChallenge) {
+                if ($testChallenge['id'] == $contentId) {
+                    $challenge = $testChallenge;
+                }
+            }
+            if (is_null($challenge)) {
+                continue;
+            }
+
+            $progressData = null;
+            foreach ($userProgresses as $userProgress) {
+                if ($userProgress['content_id'] == $contentId) {
+                    $startEndDate = $userProgress->getStartAndEndDate();
+                    $status = $userProgress->isCompleteAndNotActive() ? 'completed' : 'active';
+                    $durationText = $userProgress->is_locked ?
+                        $this->challengesService->getDurationText(Carbon::parse($startEndDate['start_date']), Carbon::parse($startEndDate['end_date'])) :
+                        'Unlocked';
+                    $progressData = [
+                        'is_user_enrolled' => true,
+                        'progress_percent' => $userProgress->getCompletionPercent(),
+                        'duration_text' => $durationText,
+                        'is_solo_challenge' => $userProgress['is_solo'],
+                        'status' => $status,
+                    ];
+                    break;
+                }
+            }
+            if (is_null($progressData)) {
+                $progressData = [
+                    'is_user_enrolled' => false,
+                    'progress_percent' => 0,
+                    'duration_text' => $this->challengesService->getDurationText(Carbon::parse($challenge['published_on']), $this->challengesService->getChallengeEndDate($challenge)),
+                    'is_solo_challenge' => $challenge['is_solo_challenge'],
+                    'status' => 'not_started',
+                ];
+            }
+            $progressData['content_id'] = $challenge['id'];
+            $resultPackage[$challenge['id']] = $progressData;
+        }
+
+        return response()->json($resultPackage);
     }
 
     /**

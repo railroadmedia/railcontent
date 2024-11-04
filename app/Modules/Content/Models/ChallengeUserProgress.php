@@ -28,6 +28,7 @@ enum AwardTier: string
  * @property integer $user_id
  * @property boolean $is_locked
  * @property boolean $is_active
+ * @property boolean $is_solo
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
  * @property Carbon $start_date
@@ -274,6 +275,22 @@ class ChallengeUserProgress extends Model
         return $challengeUserCollection->first();
     }
 
+    /**
+     * @param array $challengeId
+     * @param int $userId
+     * @return Collection | null
+     * @throws Exception
+     */
+    public static function whereChallengeIdsAndUser(array $challengeIds, int $userId) : Collection | null
+    {
+        $challengeUserCollection = self::query()
+            ->whereIn('content_id', $challengeIds)
+            ->where('user_id', $userId)
+            ->get();
+        return $challengeUserCollection;
+    }
+
+
     public function leaveChallenge()
     {
         $this->is_active = false;
@@ -335,6 +352,14 @@ class ChallengeUserProgress extends Model
         }
         $this->save();
         return $results;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompleteAndNotActive() : bool
+    {
+        return !$this->is_active && !is_null($this->last_completed_date);
     }
 
     /**
