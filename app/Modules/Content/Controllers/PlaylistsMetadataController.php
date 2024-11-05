@@ -117,9 +117,8 @@ class PlaylistsMetadataController extends Controller
         return $newPlaylist;
     }
 
-    public function deletePlaylistWithItems(Request $request)
+    public function deletePlaylistWithItems($playlistId, Request $request)
     {
-        $playlistId = $request->get('playlist_id');
         $playlist = UserPlaylist::find($playlistId);
         if(!$playlist){
             return response()->json([
@@ -280,10 +279,9 @@ class PlaylistsMetadataController extends Controller
                                 ], 200);
     }
 
-    public function getPlaylist(Request $request)
+    public function getPlaylist($playlistId, Request $request)
     {
         $user = user();
-        $playlistId = $request->get('playlist_id');
         $playlist = UserPlaylist::find($playlistId);
         if(!$playlist) {
             return response()->json([
