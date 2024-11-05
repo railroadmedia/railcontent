@@ -33,6 +33,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    lessonData: {
+        type: Object,
+        default: () => {},
+    },
 });
 
 const secondaryCtas = computed(() =>

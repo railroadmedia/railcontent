@@ -6,7 +6,7 @@
             showAllAlways
             @click="handleOpen"
         />
-        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" />
+        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" :challenge="lessonData" />
     </div>
 </template>
 
@@ -22,6 +22,10 @@ const props = defineProps({
     contentId: {
         type: [String, Number],
         default: null,
+    },
+    lessonData: {
+        type: Object,
+        default: () => {},
     },
 });
 

@@ -121,6 +121,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  lessonData: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));

@@ -15,6 +15,7 @@
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
+            :lesson-data="data?.lesson"
         />
 
         <template v-if="!isLoading">
