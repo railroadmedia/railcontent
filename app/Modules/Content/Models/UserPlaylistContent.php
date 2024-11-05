@@ -38,17 +38,14 @@ class UserPlaylistContent extends Model
         return $this->belongsTo(UserPlaylist::class, 'user_playlist_id');
     }
 
-    public function deletePlaylistItemAndReposition()
+    public function deletePlaylistItemAndReposition(): bool
     {
         // Adjust positions for items with higher positions
         self::where('user_playlist_id', $this->user_playlist_id)
             ->where('position', '>', $this["position"])
             ->decrement('position');
 
-        // Delete the specific item
-        $deleted = $this->delete();
-
-        return $deleted > 0;
+        return boolval($this->delete());
     }
 
 }
