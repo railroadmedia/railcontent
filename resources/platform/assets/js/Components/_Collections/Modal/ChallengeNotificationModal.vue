@@ -49,12 +49,11 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue';
-import axios from 'axios';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import { postChallengesSetStartDate } from 'musora-content-services';
+import { postChallengesSetStartDate, fetchChallengeMetadata } from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
@@ -116,7 +115,7 @@ const handleNext = async () => {
             if(selectedFrequency.value){
                 const setNotification = await postChallengesCommunityNotification(props.challenge.content_id);
 
-                const data = await axios.get(`/challenges/${props.challenge.content_id}`);
+                const data = await fetchChallengeMetadata(props.challenge.content_id);
                 challengeData.value = data.data;
                 step.value = 2;
 
