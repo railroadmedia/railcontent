@@ -17,7 +17,7 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import axios from 'axios';
+import { postChallengesLeave, postChallengesUnlock } from 'musora-content-services';
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
 
@@ -83,12 +83,12 @@ const buttonText = computed(() => {
 const buttonAction = async () => {
     try {
         if(isUnlockModal.value){
-            // const unlock = await axios.post(`/challenges/unlock/${props.contentId}`);
+            const unlock = await postChallengesUnlock(props.contentId);
 
         } else if(isRetakeModal.value){
 
         } else if(isLeaveModal.value){
-            // const leave = await axios.post(`/challenges/leave/${props.contentId}`);
+            const leave = await postChallengesLeave(props.contentId);
         }
 
         emit('closeModal');

@@ -108,9 +108,9 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import axios from 'axios';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { useUserStore } from "@stores/user";
+import { postChallengesEnrollmentNotification } from 'musora-content-services';
 
 import MuButton from '@units/Button/MuButton';
 import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
@@ -150,7 +150,7 @@ const labelText = computed(() => {
 const handleCta = async () => {
     try {
         //Get enrollment notification
-        // const notification = await axios.post(`/challenges/notifications/enrollment_open/${id}`);
+        // const notification = postChallengesEnrollmentNotification(id);
     } catch (e){
         window.shownotification({
             icon: 'error',

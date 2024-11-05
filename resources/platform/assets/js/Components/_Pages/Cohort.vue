@@ -301,6 +301,7 @@ import { DateTime } from 'luxon';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import axios from 'axios';
+import { postChallengesEnroll } from 'musora-content-services';
 
 import CohortDropdown from '@collections/Dropdown/CohortDropdown';
 import VideoModal from '@collections/Modal/VideoModal';
@@ -350,16 +351,16 @@ const joinText = computed(() => {
 });
 
 const enroll = async() => {
-    // try {
-    //     const enrollUser = await axios.post(`/challenges/enroll/${props.cohort.content_id}`);
-    //     isEnrolled.value = true;
-    //     openChallengeNotificationModal.value = true;
-    // } catch (e){
-    //     window.shownotification({
-    //         icon: 'error',
-    //         text: 'Woops! Something wrong happened, please try again later.'
-    //     })
-    // }
+    try {
+        const enrollUser = await postChallengesEnroll(props.cohort.content_id);
+        isEnrolled.value = true;
+        openChallengeNotificationModal.value = true;
+    } catch (e){
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
+    }
 
     openChallengeNotificationModal.value = true;
 
