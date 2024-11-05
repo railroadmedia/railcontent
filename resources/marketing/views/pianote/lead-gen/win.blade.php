@@ -69,10 +69,10 @@
                             <span>Digital Pianos</span>
                         </strong>
                     </h1>
-                    <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
+                    <h3 class="pt-2"><strong>Plus $3,432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
-                        Win a digital piano, headphones, a metronome, BookBag, or 
-                        <br class="hidden sm:inline"/> piano lessons for life with Pianote.
+                        Enter by November 24 to win a digital piano, headphones, a metronome, 
+                        <br class="hidden sm:inline"/> BookBag, or piano lessons for life with Pianote.
                     </p>
                     <h6 class="mb-8"><strong>Entry is FREE.</strong></h6>
                     <div class="container mx-auto max-w-lg text-center">
@@ -99,12 +99,19 @@
     </header>
 
     <section class="px-4 md:px-6 py-12 md:py-20">
-        <div class="max-w-md md:max-w-4xl mx-auto">
+        <div class="max-w-lg md:max-w-4xl mx-auto">
             <div class="md:flex md:flex-wrap">
                 <div class="w-full mb-4 md:mb-8 text-center">
-                    <h2 class="font-extrabold leading-normal mb-2">
-                        <span class="underline decoration-red-500 decoration-1">Everything</span> you need to start playing piano
-                    </h2>
+                     <h2 class="font-extrabold leading-normal mb-2 inline-block">
+                            <span class="relative inline-block">
+                            Everything
+                            <svg class="absolute left-0 right-0 bottom-0 w-full h-3 lg:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 524 22" fill="none">
+                                <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path>
+                                <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path>
+                            </svg>
+                            </span>
+                            you need to start playing piano
+                        </h2>
                     <h6 class="leading-tight lg:mb-6"><strong><em>
                         Introducing the Pianote Prima -- the BEST beginner digital piano.</em></strong></h6>
                 </div>
@@ -123,9 +130,11 @@
                         <br><br>
                         And to celebrate the launch of the Pianote Prima, we’re GIVING 5 OF THEM AWAY!
                         <br><br>
-                        Just enter your name and email address and you’ll be in the running to win.
+                        Just enter your name and email address by <strong>November 24</strong> and you’ll be in the running to win.
                     </p>
-                    <p class="bg-musora py-4 px-4 rounded-xl tracking-tight text-center">Winners will be announced during a <br class="inline md:hidden"/> livestream on <strong>November 25th!</strong></p>
+                    <p class="bg-musora py-4 px-2 rounded-xl text-center">Winners will be announced during our <br class="block sm:hidden"/>
+                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter"><strong>YouTube Livestream</strong></a><br class="hidden sm:block"/>on November 25th!
+                    </p>                
                 </div>
                 <div class="md:w-5/12 justify-center pl-8 md:pl-16">
                     <img class="rounded-xl hidden md:inline-block w-full h-full object-cover opacity-0" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/pianote/lead-gen/win/collage.webp" alt="intro image" loading="lazy">
@@ -138,7 +147,7 @@
         <div id="customize-anchor" class="anchor"></div>
         <div class="md:max-w-5xl mx-auto text-center lg:px-10">
             <h2 class="uppercase leading-normal mb-4 lg:mb-8">
-                <strong>win one of <br/>these <span class="underline decoration-red-500 decoration-1">incredible prizes</span></strong>
+                <strong>win one of <br/> <span class="underline decoration-red-500 decoration-1">these incredible prizes</span></strong>
             </h2>
             @php
                 $products = [
@@ -146,7 +155,7 @@
                         'title' => 'One of 5 Pianote Prima Digital Pianos',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/win/prize-01.webp',
                         'price' => '839 Value Each',
-                        'total_value' => '($4195 Total Value)',
+                        'total_value' => '($4,195 Total Value)',
                         'use_alternate_tags' => true,
                         'features' => [
                             '1-Year Pianote Membership ($240 value)',
@@ -162,7 +171,7 @@
                     [
                         'title' => 'One Lifetime Pianote Membership',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/win/prize-02.webp',
-                        'price' => '1200 Value',
+                        'price' => '1,200 Value',
                         'total_value' => '',
                         'use_alternate_tags' => true,
                         'features' => [
@@ -178,7 +187,7 @@
                         'title' => 'One of 5 Annual Pianote Memberships',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/win/prize-3.webp',
                         'price' => '240 Value Each',
-                        'total_value' => '($1200 Total Value)',
+                        'total_value' => '($1,200 Total Value)',
                         'features' => [
                             'Unlimited Step-by-Step Lessons',
                             'Weekly Live Lessons',
@@ -336,14 +345,14 @@
 
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFFFFF calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
-        <div class="max-w-2xl mx-auto text-center">
+        <div class="max-w-3xl mx-auto text-center">
             <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
                 <path d="M41.1853 6.17994C45.1417 2.22302 50.5047 0 56.1023 0H93.9075C99.5051 0 104.868 2.22302 108.824 6.17994L143.816 41.1862C147.773 45.1425 150 50.5055 150 56.103V93.908C150 99.5055 147.773 104.868 143.816 108.825L108.824 143.816C104.868 147.773 99.5051 150 93.9075 150H56.1023C50.5047 150 45.1417 147.773 41.1853 143.816L6.17879 108.825C2.22301 104.868 0 99.5055 0 93.908V56.103C0 50.5055 2.22301 45.1425 6.17879 41.1862L41.1853 6.17994ZM67.9714 44.2633V77.0862C67.9714 81.2477 71.1071 84.1197 75.0049 84.1197C78.9026 84.1197 82.0384 81.2477 82.0384 77.0862V44.2633C82.0384 40.6294 78.9026 37.2298 75.0049 37.2298C71.1071 37.2298 67.9714 40.6294 67.9714 44.2633ZM75.0049 93.4977C69.8177 93.4977 65.6268 97.9522 65.6268 102.876C65.6268 108.327 69.8177 112.254 75.0049 112.254C80.1921 112.254 84.383 108.327 84.383 102.876C84.383 97.9522 80.1921 93.4977 75.0049 93.4977Z" fill="#FFAE00"/>
             </svg>
             <h3 class="text-white font-extrabold leading-normal">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white md:pl-14">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white sm:pl-4 md:pl-14">
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     Enter your name and email address.
@@ -361,8 +370,9 @@
                     No age restrictions.
                 </div>
             </div>
-            <h6 class="inline-block italic text-black py-4 px-6 lg:px-5 bg-musora rounded-md w-full md:w-max-w-none leading-normal">
-                Winners will be announced during a <br class="block sm:hidden">livestream <strong>on November 25th</strong>!
+              <h6 class="inline-block text-black py-4 lg:py-5 px-6 lg:px-3 bg-musora rounded-md w-full md:w-max-w-none leading-normal">
+               Winners will be announced during our<br class="block sm:hidden">
+                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter"><strong>YouTube Livestream</strong></a> on November 25th!
             </h6>
         </div>
     </section>
@@ -385,10 +395,10 @@
                             <span>Digital Pianos</span>
                         </strong>
                     </h1>
-                   <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
-                    <p class="py-6 lg:py-10 leading-normal opacity-75">
-                        Win a digital piano, headphones, a metronome, BookBag, or
-                        <br class="hidden sm:inline"/> piano lessons for life with Pianote.
+                   <h3 class="pt-2"><strong>Plus $3,432 in additional prizes</strong></h3>
+                     <p class="py-6 lg:py-10 leading-normal opacity-75">
+                        Enter by November 24 to win a digital piano, headphones, a metronome, 
+                        <br class="hidden sm:inline"/> BookBag, or piano lessons for life with Pianote.
                     </p>
                     <h6 class="mb-8"><strong>Entry is FREE.</strong></h6>
                     <div class="container mx-auto max-w-lg text-center">
