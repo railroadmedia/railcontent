@@ -4,6 +4,8 @@ namespace App\Modules\Content\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Modules\Content\Models\UserPlaylist
@@ -25,5 +27,25 @@ use Illuminate\Database\Eloquent\Model;
 class UserPlaylistContent extends Model
 {
     protected $table = 'railcontent_user_playlist_content';
+    protected $fillable = ['start_second', 'end_second', 'playlist_item_name'];
+
+    public function content(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'content_id');
+    }
+    public function playlist(): BelongsTo
+    {
+        return $this->belongsTo(UserPlaylist::class, 'user_playlist_id');
+    }
+
+    public function deletePlaylistItemAndReposition(): bool
+    {
+        // Adjust positions for items with higher positions
+        self::where('user_playlist_id', $this->user_playlist_id)
+            ->where('position', '>', $this["position"])
+            ->decrement('position');
+
+        return boolval($this->delete());
+    }
 
 }
