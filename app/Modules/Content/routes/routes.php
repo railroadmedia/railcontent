@@ -179,5 +179,5 @@ Route::prefix('playlists')
         Route::post('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylistItem')->name('playlist.item.update');
         Route::delete('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@removeItemFromPlaylist')->name('playlist.item.remove');
         Route::get('/item/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItem')->name('playlist.item');
-
+        Route::put('/add-item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@addItemToPlaylists')->name('playlist.add.item');
     });

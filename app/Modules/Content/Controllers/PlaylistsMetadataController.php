@@ -7,6 +7,7 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
 use App\Modules\Content\Models\UserPlaylistLike;
+use App\Modules\Content\Requests\AddItemToPlaylistRequest;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
@@ -479,6 +480,49 @@ class PlaylistsMetadataController extends Controller
 
         $item = $this->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
         return response()->json($item);
+    }
+
+    public function addItemToPlaylists(AddItemToPlaylistRequest $request)
+    {
+        $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
+        foreach ($request->get('playlist_id') as $playlistId){
+            $playlist = UserPlaylist::find($playlistId);
+            if($playlist){
+                $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
+                    ->max('position');
+                foreach ($flattenContent['lessons'] as $item){
+                    $lastPosition++;
+                    $playlistItemData = [
+                        'content_id'      => $item,
+                        'content_parent'         => null, //TODO
+                        'user_playlist_id'        => $playlistId,
+                        'position'         => $lastPosition,
+                        'created_at'   => Carbon::now()->toDateTimeString(),
+                    ];
+
+                    $playlistItem = UserPlaylistContent::create($playlistItemData);
+                }
+                if($request->get('import_all_assignments', false)){
+foreach($flattenContent['soundslice_assignments'] as $item){
+    $lastPosition++;
+    $playlistItemData = [
+        'content_id'      => $item,
+        'content_parent'         => null, //TODO
+        'user_playlist_id'        => $playlistId,
+        'position'         => $lastPosition,
+        'created_at'   => Carbon::now()->toDateTimeString(),
+    ];
+
+    $playlistItem = UserPlaylistContent::create($playlistItemData);
+}
+                }
+            }
+
+        }
+        return response()->json([
+                                    'success' => true,
+                                    'message' => 'Playlist item added successfully'
+                                ]);
     }
 
 

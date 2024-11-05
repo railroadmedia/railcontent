@@ -310,6 +310,68 @@ class SanityGateway
         return $assignments;
     }
 
+    public function countLessonsAndAssignments($id)
+    {
+        $gateway = new SanityGateway();
+        $fieldsString = $this->getFieldsString('playlist-item');
+
+        // Fetch only leaf nodes directly, traversing the hierarchy
+        $query = "*[railcontent_id == {$id}]{
+        $fieldsString,
+        resource,
+
+        // Use a recursive-like approach to get only leaf nodes
+        'lastChildItems': array::compact(
+            child[]-> {
+                'id': railcontent_id,
+                'type': _type,
+                'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
+                'children': child[]-> {
+                    // Fetch child nodes if they exist
+                    'id': railcontent_id,
+                    'type': _type,
+                    'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
+                    'isLeaf': !defined(child)
+                }
+            }
+        )
+    }";
+
+        $documents = $gateway->sanity->fetch($query);
+
+        $assignmentIds = [];
+        $leafNodes = [];
+        if (!empty($documents)) {
+            // Flatten the structure to get leaf nodes only
+            foreach ($documents[0]['lastChildItems'] as $item) {
+                if (!empty($item['assignments'])) {
+                    foreach ($item['assignments'] as $assignment) {
+                        $assignmentIds[] = $assignment['railcontent_id'];
+                    }
+                }
+                if (isset($item['children'])) {
+                    foreach ($item['children'] as $child) {
+                        if ($child['isLeaf']) {
+                            $leafNodes[] = $child['id'];
+                            if (!empty($child['assignments'])) {
+                                foreach ($child['assignments'] as $assignment) {
+                                    $assignmentIds[] = $assignment['railcontent_id'];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            $assignmentIds = array_unique($assignmentIds);
+        }
+
+        return [
+            'lessons' => $leafNodes,
+            'lessons_count' => count($leafNodes),
+            'soundslice_assignments' => $assignmentIds,
+            'soundslice_assignments_count' => count($assignmentIds),
+        ];
+    }
 
     /**
      * @param string $contentType - sanity _type value
