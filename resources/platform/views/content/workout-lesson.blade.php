@@ -95,27 +95,27 @@
         'difficulty' => $lessonContent->fetch('difficulty'),
     ];
 
-    $videoButtons = [
-        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
-        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
-        'isCompleted' => $lessonContent->fetch('completed'),
-        'contentId' => $lessonContent->fetch('id'),
-        'xpAmount' => $lessonContent->fetch('fields.xp'),
-    ];
+//    $videoButtons = [
+//        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+//        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+//        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+//        'isCompleted' => $lessonContent->fetch('completed'),
+//        'contentId' => $lessonContent->fetch('id'),
+//        'xpAmount' => $lessonContent->fetch('fields.xp'),
+//    ];
 
-    $commentsProps = [
-        'themeColor' => $brand, // Assuming $brand is a variable
-        'brand' => $brand,
-        'contentId' => $lessonContent->fetch('id'),
-        'userId' => user()->id,
-        'userName' => user()->display_name,
-        'userAvatar' => user()->profile_picture_url,
-        'userXp' => user()->totalXP(),
-        'userAccessLevel' => user()->access_level,
-        'profileBaseRoute' => "/profile/",
-        'isAdmin' => json_encode(user()->isAdmin())
-    ];
+//    $commentsProps = [
+//        'themeColor' => $brand, // Assuming $brand is a variable
+//        'brand' => $brand,
+//        'contentId' => $lessonContent->fetch('id'),
+//        'userId' => user()->id,
+//        'userName' => user()->display_name,
+//        'userAvatar' => user()->profile_picture_url,
+//        'userXp' => user()->totalXP(),
+//        'userAccessLevel' => user()->access_level,
+//        'profileBaseRoute' => "/profile/",
+//        'isAdmin' => json_encode(user()->isAdmin())
+//    ];
 
     $contentBreadCrumb = new stdClass();
 
