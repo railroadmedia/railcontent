@@ -44,7 +44,7 @@
             :seeAllUrl="workoutsContentUrl" :preLoadedContent="workoutsContent.data" trackingSection="workouts" />
 
         <!-- New Releases section -->
-        <MiniCatalogueSection v-if="(!isV2User && newContent.data) || (isV2User && userHas30Days)" title="New Releases" seeAllAriaLabel="See All New Releases"
+        <MiniCatalogueSection v-if="(!isV2User && newContent.data?.length) || (isV2User && userHas30Days)" title="New Releases" seeAllAriaLabel="See All New Releases"
             :seeAllUrl="newContentUrl" :preLoadedContent="newContent.data" trackingSection="new" />
 
         <!-- Playlist section add arrows -->
