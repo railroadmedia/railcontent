@@ -5,8 +5,8 @@
         class-override="tw-max-w-[593px] tw-w-full"
         @onClose="() => emit('closeModal')"
     >
-        <div class="tw-flex tw-flex-col tw-justify-center -tw-mt-[50px] dark:tw-text-white">
-            <img class="tw-h-20 tw-mb-5" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge logo" />
+        <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white">
+            <img v-if="showLogo" class="tw-h-20 tw-mb-5 -tw-mt-[50px]" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge logo" />
             <h1 class="tw-text-2xl tw-font-bold tw-mb-[10px]">{{ headerText }}</h1>
             <p class="tw-mb-5">{{ descriptionText }}</p>
             <div class="tw-flex tw-justify-end">
@@ -39,15 +39,19 @@ const props = defineProps({
 const emit = defineEmits(['closeModal']);
 
 const isUnlockModal = computed(() => {
-    return props.modalType === 'unlock'
+    return props.modalType === 'unlock';
 })
 
 const isRetakeModal = computed(() => {
-    return props.modalType === 'retake'
+    return props.modalType === 'retake';
 })
 
 const isLeaveModal = computed(() => {
-    return props.modalType === 'leave'
+    return props.modalType === 'leave';
+})
+
+const showLogo = computed(() => {
+    return isUnlockModal.value || isRetakeModal.value;
 })
 
 const modalTitle = computed(() => {
@@ -58,25 +62,29 @@ const modalTitle = computed(() => {
 
 const headerText = computed(() => {
     if(isUnlockModal.value){
-        return `Are you sure you want to unlock ${props.title}?`
+        return `Are you sure you want to unlock ${props.title}?`;
     } else if(isRetakeModal.value){
-        return `Do you want to retake ${props.title}?`
+        return `Do you want to retake ${props.title}?`;
     }
 })
 
 const descriptionText = computed(() => {
     if(isUnlockModal.value){
-        return `Unlocking the ${props.title} will reset your current streak and rest days information. This action is irreversible.`
+        return `Unlocking the ${props.title} will reset your current streak and rest days information. This action is irreversible.`;
     } else if(isRetakeModal.value){
-        return `You completed ${props.title} on August 23, 2024. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`
+        return `You completed ${props.title} on August 23, 2024. You can retake the challenge to improve your streak and earn a new certificate. Your previously earned badges will remain unaffected.`;
+    } else if(isLeaveModal.value){
+        return `Leaving the ${props.title} will delete your progress`;
     }
 })
 
 const buttonText = computed(() => {
     if(isUnlockModal.value){
-        return 'Unlock 30-Day Drummer'
+        return 'Unlock 30-Day Drummer';
     } else if(isRetakeModal.value){
-        return 'Retake Challenge'
+        return 'Retake Challenge';
+    } else if(isLeaveModal.value){
+        return 'Leave Challenge';
     }
 })
 
