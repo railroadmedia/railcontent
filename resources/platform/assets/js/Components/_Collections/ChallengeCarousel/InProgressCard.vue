@@ -142,7 +142,7 @@
     </div>
 
     <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" />
-    <ChallengeLeaveModal v-if="isLeaveModalOpen" @modal-close="closeLeaveModal" />
+    <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @modal-close="closeLeaveModal" />
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
@@ -154,7 +154,7 @@ import { Vue3Lottie } from 'vue3-lottie';
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
-import ChallengeLeaveModal from '@collections/Modal/ChallengeLeaveModal';
+import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 
 const userStore = useUserStore();
