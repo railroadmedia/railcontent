@@ -1,10 +1,10 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
         <div
-            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
+            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[224px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
                     tw-no-scrollbar
-                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-rows-2 tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
+                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
                     ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap ' : ''}
                     ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
@@ -17,12 +17,12 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in preLoadedContent" :key="'grid' + item.id" :item="item"
+                    <MiniCatalogueCard v-for="(item, index) in preLoadedContent" :key="'grid' + item.id" :item="item"
                         :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown"
-                        :trackingSection="trackingSection" />
+                        :trackingSection="trackingSection" :showSeeAllCard="showSeeAllCard" :index="index" />
                 </template>
                 <template v-else>
                     <CatalogueListElement v-if="showListElement" v-for="item in preLoadedContent"
@@ -149,6 +149,10 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    showSeeAllCard: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits(['onProgressReset'])
@@ -201,9 +205,16 @@ const isCoachShow = computed(() => {
 })
 
 const miniViewRowStyles = computed(() => {
+    let rowStyles = '';
     if(props.page === 1){
-        return 'lg:tw-grid-rows-none';
+        rowStyles = `${rowStyles} lg:tw-grid-rows-none`;
     }
+    if (props.preLoadedContent.length > 3) {
+        rowStyles = `${rowStyles} tw-grid-rows-2`;
+    } else {
+        rowStyles = `${rowStyles} tw-grid-rows-1 tw-grid-cols-3`;
+    }
+    return rowStyles;
 })
 
 const { addToList } = useUserCatalogueEvents({ ...props });

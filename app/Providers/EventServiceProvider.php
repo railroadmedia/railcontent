@@ -68,6 +68,7 @@ class EventServiceProvider extends ServiceProvider
         UserContentProgressSaved::class => [
             [ExploreTasksListener::class, 'handleUserContentProgressSaved']
         ],
+
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
         PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],

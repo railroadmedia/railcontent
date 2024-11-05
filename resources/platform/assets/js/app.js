@@ -19,7 +19,7 @@ import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
-import Home from './Components/_Pages/Home.vue';
+import Home from './Components/_Pages/Homev2.vue';
 import LessonHistory from './Components/_Pages/LessonHistory';
 import LessonPlayback from './Components/_Pages/LessonPlayback';
 import Playlist from './Components/_Pages/Playlist';
@@ -67,6 +67,7 @@ import ChildCollectionPage from './Components/_Collections/CollectionPage/ChildC
 import PageHeader from './Components/_Collections/PageHeader/PageHeader'
 import MiniCatalogueSection from './Components/_Collections/MiniCatalogueSection/MiniCatalogueSection';
 import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountModal';
+import NewMusoraIcon from './Components/_Collections/NewMusoraIcon/NewMusoraIcon';
 
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
@@ -241,7 +242,8 @@ app.component('AppContainer', AppContainer)
     .component('ReturningContentUpdates', ReturningContentUpdates)
     .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
     .component('LeavingContentUpdates', LeavingContentUpdates)
-
+    .component('NewMusoraIcon', NewMusoraIcon)
+    
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */
