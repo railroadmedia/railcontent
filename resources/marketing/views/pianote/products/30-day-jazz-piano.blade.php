@@ -78,7 +78,7 @@
     <div class="container max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
         <div class="flex flex-col items-center text-center">
             <img 
-                class="h-16 sm:h-20 lg:h-24 -mb-3 sm:mb-0 py-1"
+                class="h-20 lg:h-24 -mb-3 sm:mb-0 py-1"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"
                 alt="30 day Jazz logo"
                 fetchpriority="high">
@@ -101,7 +101,7 @@
             @endphp
             <div class="w-full flex flex-row justify-evenly md:justify-center items-center gap-4 lg:gap-10 lg:py-2">
                 @foreach($checklist as $item)
-                    <div class="flex flex-col md:flex-row items-center text-center gap-2">
+                    <div class="flex flex-col md:flex-row items-center text-center md:gap-2">
                         <i class="fas fa-check-circle text-pianote text-md"></i>
                         <p class="text-sm md:text-base">{!! $item !!}</p>
                     </div>
@@ -212,9 +212,9 @@
                 @if ($getting['position'] === 'right')
                     <div
                         class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
-                        <div class="content relative text-left sm:pl-10 md:pl-0">
+                        <div class="content relative text-left">
                             <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                            <p class="text-[#2A2F34]">{{ $getting['desc'] }}</p>
+                            <p class="text-[#2A2F34] lg:pr-6">{{ $getting['desc'] }}</p>
                         </div>
                         <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
@@ -231,9 +231,9 @@
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
                                 style="background-image:url('{{ $getting['img'] }}')"></div>
                         @endif
-                        <div class="content relative text-left sm:pl-10 md:pl-0 md:mb-10">
+                        <div class="content relative text-left md:mb-10">
                             <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
-                            <p class="text-[#2A2F34]">{{ $getting['desc'] }}</p>
+                            <p class="text-[#2A2F34] lg:pr-6">{{ $getting['desc'] }}</p>
                         </div>
                     </div>
                 @endif
