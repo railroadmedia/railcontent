@@ -38,17 +38,15 @@ const getSavedExperience = (selectedExperience) => {
   return multiSelectMap;
 };
 
-const getSavedGoals = (goals) => {
-  const multiSelectMap = {};
-  brands.forEach((brand) => {
-    const goalsPerBrand = goals.find((goal) => goal.brand === brand);
-    if (!!goalsPerBrand) {
-      multiSelectMap[brand] = goalsPerBrand.goals;
+const getLastCheckedStep = (steps) => {
+  let lastIndex = -1; // Start with -1, which indicates no checked steps were found if it remains -1
+  for (let i = 0; i < steps.length; i++) {
+    if (steps[i].checked) {
+      lastIndex = i; // Update lastIndex each time a checked step is found
     }
-  });
-
-  return multiSelectMap;
-};
+  }
+  return lastIndex; // Return the last index where checked is true
+}
 
 export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
   return ({
@@ -123,5 +121,16 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
       newSteps[index].checked = true;
     }
   }
+
+  const lastCheckedStep = getLastCheckedStep(newSteps);
+
+  if (lastCheckedStep !== -1) {
+    newSteps.forEach((step, index) => {
+      if (index < lastCheckedStep) {
+        step.checked = true;
+      }
+    });
+  }
+
   return newSteps;
 };

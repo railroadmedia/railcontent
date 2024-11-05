@@ -197,11 +197,11 @@
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
-    const { brand, userCompletedAccount } = storeToRefs(userStore);
+    const { brand, showOnboardingBanner } = storeToRefs(userStore);
 
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
-        return userCompletedAccount.value;
+        return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {

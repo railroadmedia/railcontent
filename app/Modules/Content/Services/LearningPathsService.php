@@ -73,6 +73,11 @@ class LearningPathsService
         $homepageRedesign = FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', $user));
 
+        //  NOTE: Homepage V2 Pilot
+        if ($homepageV2) {
+            return true;
+        }
+
         return $user->is_trial
             && $user->created_at->diffInDays(now()) <= 30
             && ($homepageV2 || $homepageRedesign);

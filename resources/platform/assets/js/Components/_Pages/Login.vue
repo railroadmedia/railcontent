@@ -84,6 +84,10 @@ const changeConfirmationScreen = (confirmationType) => {
   }
 };
 
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
 const handleButtonClick = () => {
   isLoading.value = true;
   localStorage.setItem("lastEmailUsed", emailInput.value);
@@ -95,6 +99,11 @@ const handleButtonClick = () => {
   })
     .then((response) => {
       if (response.status === 200) {
+          deleteCookie(`hideOnboardingBanner_drumeo`);
+          deleteCookie(`hideOnboardingBanner_guitareo`);
+          deleteCookie(`hideOnboardingBanner_singeo`);
+          deleteCookie(`hideOnboardingBanner_pianote`);
+          
           const redirectTo = response.data.redirect_to;
           if (redirectTo) {
             window.location.href = redirectTo;

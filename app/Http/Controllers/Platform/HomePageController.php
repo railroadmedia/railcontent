@@ -354,6 +354,8 @@ class HomePageController extends BaseController
 
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
+
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
