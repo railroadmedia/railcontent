@@ -20,23 +20,23 @@
             background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/win/bottom-bg-m.webp');
             background-size: cover;
         }
-    
+
         @media (min-width: 768px) {
             .header-custom {
                 background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/win/bottom-bg.webp');
             }
         }
-    
+
         .ajax-form input, .ajax-form button {
             height: 50px;
             font-size: 1.25rem;
         }
-    
+
         .decoration-red-500 {
             text-decoration-color: #f56565;
             text-decoration-thickness: 1px;
         }
-    
+
         @media (min-width: 1024px) {
             .lg\:grid-template-columns-custom {
                 grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -60,9 +60,9 @@
                    <h1 class="flex items-center justify-center gap-x-1 py-2 leading-normal">
                         <strong class="md:flex md:flex-wrap items-center justify-center gap-x-1">
                             <span>Pianote</span>
-                            <img 
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
-                                alt="Prima Digital Piano" 
+                            <img
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg"
+                                alt="Prima Digital Piano"
                                 class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
                             />
                             <br class="block md:hidden"/>
@@ -71,14 +71,14 @@
                     </h1>
                     <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
-                        Win a digital piano, headphones, a metronome, BookBag, or 
+                        Win a digital piano, headphones, a metronome, BookBag, or
                         <br class="hidden sm:inline"/> piano lessons for life with Pianote.
                     </p>
                     <h6 class="mb-8"><strong>Entry is FREE.</strong></h6>
-                    {{-- @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver')) --}}
-                    {{-- <span class="join sold-out smaller w-full">Opens Oct. 4th</span> --}}
                     <div class="container mx-auto max-w-lg text-center">
-                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
+                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
+                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>
+                        @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
                             @include('pianote._partials.sign-up-form', [
                                 "recaptchaKey" => $recaptchaKey,
                                 "stacked" => true,
@@ -133,7 +133,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
         <div id="customize-anchor" class="anchor"></div>
         <div class="md:max-w-5xl mx-auto text-center lg:px-10">
@@ -224,18 +224,18 @@
                     ]
                 ];
             @endphp
-    
+
             <div class="container mx-auto pb-6 lg:pb-10 text-left">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 md:gap-y-10 lg:gap-y-20 lg:gap-x-6">
                     @foreach($products as $index => $product)
                         <div class="{{ $index < 2 ? 'col-span-1 md:col-span-2' : '' }}">
                             <div class="">
                                 <div class="relative bg-white rounded-lg p-2">
-                                    <img 
-                                        src="{{ $product['image'] }}" 
-                                        alt="{{ $product['title'] }}" 
-                                        class="w-full h-full object-cover rounded-lg opacity-0 transition-opacity duration-500" 
-                                        loading="lazy" 
+                                    <img
+                                        src="{{ $product['image'] }}"
+                                        alt="{{ $product['title'] }}"
+                                        class="w-full h-full object-cover rounded-lg opacity-0 transition-opacity duration-500"
+                                        loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                     >
                                 </div>
@@ -272,7 +272,7 @@
                                             @endforeach
                                         </ul>
                                     @else
-                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:flex-row md:gap-y-2">                                           
+                                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:flex-row md:gap-y-2">
                                              @foreach($product['features'] as $feature)
                                                 <li class="text-sm md:text-xs sm:pr-2 leading-loose md:tracking-tighter lg:tracking-tight m-0 lg:pr-3">
                                                     <i class="fas fa-check text-red-500 mr-1"></i>
@@ -296,13 +296,13 @@
             [
                 'name' => 'Winner name',
                 'location' => 'Location',
-                'profileImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg',  
+                'profileImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg',
                 'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nullam nec purus nec purus.'
             ],
             [
                 'name' => 'Winner name',
                 'location' => 'Location',
-                'profileImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg',  
+                'profileImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/headphones/avatar-1.svg',
                 'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nullam nec purus nec purus.'
             ]
         ];
@@ -376,9 +376,9 @@
                    <h1 class="flex items-center justify-center gap-x-1 py-2 leading-normal">
                         <strong class="md:flex md:flex-wrap items-center justify-center gap-x-1">
                             <span>Pianote</span>
-                            <img 
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg" 
-                                alt="Prima Digital Piano" 
+                            <img
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/prima.svg"
+                                alt="Prima Digital Piano"
                                 class="h-8 md:h-10 lg:h-14 w-auto object-contain -mb-2 px-2"
                             />
                             <br class="block md:hidden"/>
@@ -387,15 +387,15 @@
                     </h1>
                    <h3 class="pt-2"><strong>Plus $3432 in additional prizes</strong></h3>
                     <p class="py-6 lg:py-10 leading-normal opacity-75">
-                        Win a digital piano, headphones, a metronome, BookBag, or 
+                        Win a digital piano, headphones, a metronome, BookBag, or
                         <br class="hidden sm:inline"/> piano lessons for life with Pianote.
                     </p>
                     <h6 class="mb-8"><strong>Entry is FREE.</strong></h6>
-                    {{-- @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver')) --}}
-                    {{-- <span class="join sold-out smaller w-full">Opens Oct. 4th</span> --}}
                     <div class="container mx-auto max-w-lg text-center">
-                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
-                            @include('pianote._partials.sign-up-form', [
+                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
+                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>
+                        @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
+                        @include('pianote._partials.sign-up-form', [
                                 "recaptchaKey" => $recaptchaKey,
                                 "stacked" => true,
                                 "minimalForm" => true,
