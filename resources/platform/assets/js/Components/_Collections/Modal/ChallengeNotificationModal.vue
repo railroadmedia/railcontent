@@ -79,7 +79,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep || props.challengeType === 'community' ? 1 : 2);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -143,7 +143,9 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-        const startDate = await postChallengesSetStartDate(props.challenge.content_id, selectedDate.value);
+        const startDate = await postChallengesSetStartDate(props.challenge.content_id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+
+        emit('modalClose');
     }
     catch(e) {
         window.shownotification({
