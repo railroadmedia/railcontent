@@ -107,7 +107,7 @@
   const platformStore = usePlatformStore();
   const { isLoading } = storeToRefs(platformStore);
 
-  const emit = defineEmits(['toggleCompleteContent', 'openCompletionModal']);
+  const emit = defineEmits(['toggleCompleteContent', 'openChallengeCompletionModal']);
 
   const contentProgress = ref(props.progress);
 
@@ -141,14 +141,23 @@
   const completeContent = async() => {
       if(!props.isCompleted){
           try {
-              const complete = await ContentService.markContentAsComplete(props.contentId);
-
-              emit('toggleCompleteContent');
-              contentProgress.value = 100;
-
               if(props.isChallenge) {
-                  emit('openCompletionModal');
+                  const complete =  await axios.post(`/challenges/complete_lesson/${props.contentId}?brand=${props.brand}`);
+                  console.log(complete)
+
+                  emit('toggleCompleteContent');
+
+                  if(complete.data?.show_modal){
+                      emit('openChallengeCompletionModal', complete.data);
+                  }
+
+                  contentProgress.value = 100;
               } else {
+                  const complete = await ContentService.markContentAsComplete(props.contentId);
+
+                  emit('toggleCompleteContent');
+                  contentProgress.value = 100;
+
                   Utils.triggerEvent(window, 'lesson-complete', { complete: true });
               }
           } catch(e) {
