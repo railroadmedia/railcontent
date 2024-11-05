@@ -285,7 +285,7 @@ import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 import SkeletonVideoResources from '@collections/SkeletonLoader/SkeletonVideoResources';
-import { likeContent, unlikeContent, postContentCompleted } from 'musora-content-services';
+import { likeContent, unlikeContent, postChallengesCompleteLesson } from 'musora-content-services';
 
 export default {
     name: "VideoResources",
@@ -531,7 +531,7 @@ export default {
         async handleCompleteLesson() {
             if(this.isChallenge && !this.isCompleted){
                 try {
-                    const complete = await postContentCompleted(this.contentId);
+                    const complete = await postChallengesCompleteLesson(this.contentId);
                     console.log('complete', complete);
 
                     this.$emit('onCompleteContent');
