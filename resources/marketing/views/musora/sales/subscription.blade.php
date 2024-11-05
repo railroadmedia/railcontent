@@ -334,7 +334,7 @@
 @endsection
 
 @section('layout-body')
-    <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#101921;">
+    <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
@@ -379,7 +379,7 @@
             <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5.mp4"></video>
         @else
             <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
-            <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
+            <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header6-m.mp4"></video>
             <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
         @endif
     </header>
