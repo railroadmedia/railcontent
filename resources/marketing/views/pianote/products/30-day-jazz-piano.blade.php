@@ -66,21 +66,107 @@
             $students = 'piano players';
         @endphp
 
-<!-- Header Section -->
-    @include('drumeo.products.partials.evergreen._header', [
-    'logoHeader' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp',
-    'logoAlt' => '30 day Jazz logo',
-    'text' => 'Lean Jazz Piano',
-    'subtitle' => 'in just 30 days.',
-    'checklist' => ['Learn By Doing', 'Play Every Day', 'Perfect For Beginners'],
-    'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-right-collage.webp',
-    'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-left-collage.webp',
-    "isVideo" => true,
-    'mediaSource' => 'https://player.vimeo.com/progressive_redirect/playback/1019964518/rendition/720p/file.mp4?loc=external&signature=8761cea606fb7cd3fc2ab56f243ec6a61fa103fe9217eee47d4d172417f94679',
-    'alternateSrc' => 'https://player.vimeo.com/progressive_redirect/playback/884916532/rendition/540p/file.mp4?loc=external&signature=f1a2096ed4a6bdaa8ff4b8a69b7787e5cc14ae0bec918c278337772f2dea1edd',
-    'poster' => 'https://i.vimeocdn.com/video/1754218536-f8a5209579972b4151468a5d286eb9e0736358110de6397a1f11b325f2b9fb60-d?mw=1500&mh=844&q=70',
-    'extraClass' => 'h-20 sm:h-24 lg:h-32',
-])
+<header 
+    class="px-5 sm:px-6 pt-6 md:pt-9 pb-12 md:pb-18 overflow-hidden" 
+    style="background: linear-gradient(rgba(239, 247, 255, 1) 50%, #ffffff 50%)"
+    x-data="{
+        loadAlternateSrc(src) {
+            this.$refs.playToLearnVideo.src = src;
+        },
+        videoLoaded: false
+    }">
+    <div class="container max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+        <div class="flex flex-col items-center text-center">
+            <img 
+                class="h-16 sm:h-20 lg:h-24 -mb-3 sm:mb-0 py-1"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"
+                alt="30 day Jazz logo"
+                fetchpriority="high">
+
+            <div class="w-full">
+                <h1 class="rotater-text overflow-hidden">
+                    <strong>
+                        <span>Learn Jazz Piano</span>
+                    </strong>
+                </h1>
+                <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">in just 30 days.</h2>
+            </div>
+
+            @php
+            $checklist = [
+                'Learn By<br class="block md:hidden"> Doing',
+                'Play Every<br class="block md:hidden"> Day',
+                'Perfect For<br class="block md:hidden"> Beginners'
+            ];
+            @endphp
+            <div class="w-full flex flex-row justify-evenly md:justify-center items-center gap-4 lg:gap-10 lg:py-2">
+                @foreach($checklist as $item)
+                    <div class="flex flex-col md:flex-row items-center text-center gap-2">
+                        <i class="fas fa-check-circle text-pianote text-md"></i>
+                        <p class="text-sm md:text-base">{!! $item !!}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="py-5 sm:py-6 relative">
+            <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-left-collage.webp" 
+                    alt="in just 30 days." 
+                    class="h-56 lg:h-72" 
+                    fetchpriority="high">
+            </div>
+
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                x-on:click="trailer = true;" 
+                role="button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fa fa-play play-button z-10"></i>
+
+                <div x-data="{ videoLoaded: false }">
+                    <img src="https://i.vimeocdn.com/video/1938445145-3e0a0393c34442f22141b7c97e37be6a0b0050458e1dd51e67104f3e6b829fd4-d?mw=80&q=85" 
+                        alt="Blurred Poster Image" 
+                        class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl" 
+                        x-show="!videoLoaded">
+
+                    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                        x-ref="playToLearnVideo"
+                        x-on:error="loadAlternateSrc('https://player.vimeo.com/progressive_redirect/playback/884916532/rendition/540p/file.mp4?loc=external&signature=f1a2096ed4a6bdaa8ff4b8a69b7787e5cc14ae0bec918c278337772f2dea1edd')"
+                        x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                        x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                        data-src="https://player.vimeo.com/progressive_redirect/playback/1019964518/rendition/720p/file.mp4?loc=external&signature=8761cea606fb7cd3fc2ab56f243ec6a61fa103fe9217eee47d4d172417f94679"
+                        type="video/mp4"
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                        fetchpriority="high">
+                        <source src="https://player.vimeo.com/progressive_redirect/playback/1019964518/rendition/720p/file.mp4?loc=external&signature=8761cea606fb7cd3fc2ab56f243ec6a61fa103fe9217eee47d4d172417f94679" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-right-collage.webp" 
+                    alt="in just 30 days." 
+                    class="h-56 lg:h-72" 
+                    fetchpriority="high">
+            </div>
+        </div>
+
+        <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">
+            <a href="{{$buttonLink}}" class="join pianote medium w-full max-w-[350px] mb-3" role="button">Get started</a>
+            <h5 class="leading-tight text-center">
+                <strong class="font-black">Only
+                    @if($price > $discountedPrice)
+                        <s class="opacity-60">${{ $price }}</s> ${{ $discountedPrice }} (SAVE {{ round(100 - (100 * ($discountedPrice / $price))) }}%)
+                    @else
+                        ${{ $discountedPrice }}
+                    @endif
+                </strong>
+            </h5>
+        </div>
+    </div>
+</header>
 
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
     <div class="container max-w-4xl mx-auto">
@@ -173,7 +259,7 @@ $items = [
             <ul class="pl-6">
                 @foreach ($items as $item)
                     <li>
-                        <h5 class="leading-loose text-left">
+                        <h5 class="leading-loose text-left py-1">
                         <i class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5" aria-hidden="true"></i>{{ $item }}</h5>
                     </li>
                 @endforeach
