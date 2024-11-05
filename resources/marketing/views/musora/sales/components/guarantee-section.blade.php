@@ -36,7 +36,7 @@
             </div>
             <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
                 <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">2</h5>
-                <h6 class="leading-normal">Enjoy them for <br>90-days, risk-free.</h6>
+                <h6 class="leading-normal">Enjoy them for <br>90 days, risk-free.</h6>
             </div>
             <div class="w-full sm:w-1/3 px-2">
                 <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">3</h5>

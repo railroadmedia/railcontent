@@ -74,7 +74,7 @@
             <div class="columns medium-6">
                 <i class="far fa-shield-check text-blue"></i>
                 <h3 class="dense"><strong>100% GUARANTEED</strong></h3>
-                <p><em class="text-blue">Try Risk-Free For 90-Days</em><br>
+                <p><em class="text-blue">Try Risk-Free For 90 Days</em><br>
                     The ability to quickly & accurately learn songs is one of the most valuable skills for drummers — for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
                 </p>
             </div>

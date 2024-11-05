@@ -426,7 +426,7 @@
                 <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
                 <div class="text-wrap medium-text-left">
                     <h2><strong>90-Day Money-Back Guarantee</strong></h2>
-                    <p><strong>We love our students.</strong> And we always want you to have an amazing experience on the drums. So to make sure you LOVE your drum lessons, Electrify Your Drumming is backed by a 100% money-back guarantee. If you don’t love the lessons, just contact us within 90-days and contact support for a full refund.</p>
+                    <p><strong>We love our students.</strong> And we always want you to have an amazing experience on the drums. So to make sure you LOVE your drum lessons, Electrify Your Drumming is backed by a 100% money-back guarantee. If you don’t love the lessons, just contact us within 90 days and contact support for a full refund.</p>
                 </div>
             </div>
         </div>

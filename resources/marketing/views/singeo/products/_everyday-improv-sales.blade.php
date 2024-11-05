@@ -202,7 +202,7 @@
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/products/everyday-improv/learning-01.webp',
-                        'title' => 'Learn All You Need To Know In Just <br/> 30-days',
+                        'title' => 'Learn All You Need To Know In Just <br/> 30 days',
                         'description' =>
                             '30 days is all you need to embrace the confidence that comes from the freedom of improvisation.',
                         'alt' => 'Calendar with 30 days'
