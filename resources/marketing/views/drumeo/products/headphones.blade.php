@@ -414,8 +414,10 @@
                         <tr style="background-color:transparent!important;">
                             <td class="rounded-b-xl">Price</td>
                             <td class="rounded-b-xl text-white">
-                                <s class="opacity-40">$99</s>
-                                <strong >$79</strong>
+                                @if(floatval($productPrices['drumeo-headphones']->price) > floatval($productPrices['drumeo-headphones']->discounted_price))
+                                    <s class="opacity-50 font-extralight">${{ floatval($productPrices['drumeo-headphones']->price) }}</s>
+                                @endif
+                                <strong>${{ floatval($productPrices['drumeo-headphones']->discounted_price) }}</strong>
                             </td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
