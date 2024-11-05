@@ -137,10 +137,11 @@
                         :user-id="userId"
                         :resources="videoData.resources"
                         :difficulty="videoData.difficulty"
+                        :is-challenge="isChallenge"
 
                         :show-practice-button="showPracticeButton"
                         :show-share-button="false"
-                        :show-complete-button="isWorkout"
+                        :show-complete-button="isWorkout || isChallenge"
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
 
@@ -151,6 +152,7 @@
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
                         @on-complete-content="toggleCompleteContent"
+                        @open-challenge-completion-modal="openChallengeCompletionModal"
                     />
 
                     <ContentInfo
@@ -172,7 +174,7 @@
                     />
 
                     <ContentProgress
-                        v-if="!noAccess && !isWorkout"
+                        v-if="!noAccess && !isWorkout && !isChallenge"
                         :brand="brand"
                         :is-completed="isCompleted"
                         :progress="lessonData?.progress_percent"
@@ -181,9 +183,6 @@
                         :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :show-complete-button="true"
                         :content-id="videoData.id"
-                        :is-challenge="isChallenge"
-                        @toggle-complete-content="toggleCompleteContent"
-                        @open-challenge-completion-modal="openChallengeCompletionModal"
                     />
                 </div>
                 <!-- Related Lessons Toggle -->
