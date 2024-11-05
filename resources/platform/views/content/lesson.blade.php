@@ -1,11 +1,11 @@
 @php
     $hasQAVideo = !empty($lessonContent['qna_video_playback_endpoints']);
-    $hasRelatedLessons = false;
-    if (
-        count(json_decode($relatedLessons)->data) > 1
-    ) {
-        $hasRelatedLessons = true;
-    }
+//    $hasRelatedLessons = false;
+//    if (
+//        count(json_decode($relatedLessons)->data) > 1
+//    ) {
+//        $hasRelatedLessons = true;
+//    }
 
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
@@ -103,27 +103,27 @@
         'difficulty' => $lessonContent->fetch('difficulty'),
     ];
     $videoProps['need_access'] = $lessonContent->fetch('need_access') ?? false;
-    $videoButtons = [
-        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
-        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
-        'isCompleted' => $lessonContent->fetch('completed'),
-        'contentId' => $lessonContent->fetch('id'),
-        'xpAmount' => $lessonContent->fetch('fields.xp'),
-    ];
-
-    $commentsProps = [
-        'themeColor' => $brand, // Assuming $brand is a variable
-        'brand' => $brand,
-        'contentId' => $lessonContent->fetch('id'),
-        'userId' => user()->id,
-        'userName' => user()->display_name,
-        'userAvatar' => user()->profile_picture_url,
-        'userXp' => user()->totalXP(),
-        'userAccessLevel' => user()->access_level,
-        'profileBaseRoute' => '/profile/',
-        'isAdmin' => json_encode(user()->isAdmin()),
-    ];
+//    $videoButtons = [
+//        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+//        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+//        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+//        'isCompleted' => $lessonContent->fetch('completed'),
+//        'contentId' => $lessonContent->fetch('id'),
+//        'xpAmount' => $lessonContent->fetch('fields.xp'),
+//    ];
+//
+//    $commentsProps = [
+//        'themeColor' => $brand, // Assuming $brand is a variable
+//        'brand' => $brand,
+//        'contentId' => $lessonContent->fetch('id'),
+//        'userId' => user()->id,
+//        'userName' => user()->display_name,
+//        'userAvatar' => user()->profile_picture_url,
+//        'userXp' => user()->totalXP(),
+//        'userAccessLevel' => user()->access_level,
+//        'profileBaseRoute' => '/profile/',
+//        'isAdmin' => json_encode(user()->isAdmin()),
+//    ];
 
     $contentBreadCrumb = new stdClass();
     $contentBreadCrumb->pages = [];
