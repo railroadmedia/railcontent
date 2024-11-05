@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfd98d4a54e5f8c212b00cdee03e5014",
+    "content-hash": "3a279ccf962a07e2acbb15ed711f39cc",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10758,62 +10758,6 @@
                 "source": "https://github.com/railroadmedia/railnotifications/tree/v4.0.2"
             },
             "time": "2024-09-05T19:35:39+00:00"
-        },
-        {
-            "name": "railroad/railtracker",
-            "version": "v5.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "97606ffca4efde808660e0b0439bdd38d8db60de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/97606ffca4efde808660e0b0439bdd38d8db60de",
-                "reference": "97606ffca4efde808660e0b0439bdd38d8db60de",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/dbal": "^3.3",
-                "doctrine/orm": "^2.19",
-                "guzzlehttp/guzzle": "^7.2",
-                "jenssegers/agent": "^2.5",
-                "laravel/framework": "^11.9",
-                "php": "^8.2",
-                "predis/predis": "^2.2",
-                "ramsey/uuid": "^4.2.2",
-                "symfony/cache": "^6.4"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^9.2",
-                "phpunit/php-code-coverage": "^11.0.1",
-                "phpunit/phpunit": "^11.0.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Helpers/railtracker_helpers.php"
-                ],
-                "psr-4": {
-                    "Railroad\\Railtracker\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Tracks user actions in your application.",
-            "keywords": [
-                "login",
-                "pageview",
-                "tracker",
-                "tracking"
-            ],
-            "support": {
-                "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v5.0.1"
-            },
-            "time": "2024-09-05T19:36:30+00:00"
         },
         {
             "name": "railroad/referral",

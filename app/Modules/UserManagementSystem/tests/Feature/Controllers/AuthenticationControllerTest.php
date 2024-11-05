@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use App\Http\Middleware\ValidateRedirectUrl;
 use App\Mail\Agnostic;
 use App\Modules\Brand\Services\BrandService;
 use Carbon\Carbon;
@@ -161,7 +162,6 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $this->assertFalse(Auth::check());
     }
 
-    // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     protected function setUp(): void
     {
         parent::setUp();
@@ -175,6 +175,9 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
                 return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
             }
         )->middleware([AuthenticatedOnly::class]);
+
+        // create the homepage-v2 experiment
+        $this->artisan('featureFlag:addExperiment homepage-v2 --default_value=0');
     }
 
     public function test_authenticate_token_validation_fails()
@@ -323,7 +326,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
         Event::fake([UserEvent::class]);
 
-        $response = $this->post(
+        $response = $this->withoutMiddleware(ValidateRedirectUrl::class)->post(
             config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password, 'redirect_to' => $redirectUrl]
         );
@@ -445,7 +448,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
         auth()->login($user);
 
-        $response = $this->call(
+        $response = $this->withoutMiddleware(ValidateRedirectUrl::class)->call(
             'GET',
             config('user_management_system.route_prefix') . '/check-for-auth-then-redirect-back-with-auth-key',
             ['redirect_to' => $redirectUrl]
@@ -463,7 +466,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
     {
         $redirectUrl = 'https://www.domain.com/order';
 
-        $response = $this->call(
+        $response = $this->withoutMiddleware(ValidateRedirectUrl::class)->call(
             'GET',
             config('user_management_system.route_prefix') . '/check-for-auth-then-redirect-back-with-auth-key',
             ['redirect_to' => $redirectUrl]
