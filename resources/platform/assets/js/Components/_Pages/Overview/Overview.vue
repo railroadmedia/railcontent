@@ -3,20 +3,17 @@
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         
         <PageHeader
-            :title="header.title"
-            :description="header.description"
-            :info-data="header.infoData"
-            :hero-img="headerData.heroImg"
-            :progress="headerData.progress"
-            :progress-label-text="headerData.progressLabelText"
-            :content-id="headerData.contendId"
-            :page-type="pageType"
-            :icon-name="headerData.iconName"
-            :ctas="headerData.ctas"
-            :dark-mode-logo="headerData.darkModeLogo"
-            :light-mode-logo="headerData.lightModeLogo"
+            :title="header?.title"
+            :description="header?.description"
+            :content-id="header?.contentId"
+            :page-type="header?.type"
+            :progress="header?.progress"
+            :info-data="header?.infoData"
+            :is-loading="isLoading"
+            :progress-label-text="headerData?.progressLabelText"
+            :icon-name="headerData?.iconName"
+            :ctas="headerData?.ctas"
         />
-
 
         <template v-if="!isLoading">
             
@@ -48,7 +45,7 @@
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :content="data"
+                            :content="OverviewChildData"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -75,15 +72,12 @@
                 <!-- Pianote Foundations -->
                 <a v-if="showPianoteFoundations" href="/pianote/method/foundations-2019/215952"
                    class="flex flex-row no-decoration hover-bg-grey-7 dark:hover:tw-bg-[#002039] tw-relative text-grey-3 hover-text-black content-overview pv-2">
-
                     <div class="flex flex-column">
                         <p class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
                     </div>
-
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
                         10 Levels
                     </div>
-
                     <div class="flex flex-column icon-col align-v-center hide-xs-only">
                         <div class="body">
                             <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] rounded fa-play-circle"></i>
@@ -104,7 +98,7 @@
     </div>
 </template>
 <script setup>
-import {computed, ref, onBeforeMount} from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from '@stores/platform';
@@ -190,49 +184,36 @@ const { isLoading } = storeToRefs(platformStore);
 
 //Refs
 const data = ref(null);
-const header = ref({
-    title: "",
-    description: "",
-    infoData: []
-})
+const header = ref(null);
 const error = ref(null);
 
 //Computed
 const showOverview = computed(() => {
-    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course';
+    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course'  || props.contentType === 'unit';
 })
 const showNumbers = computed(() => {
-    return props.contentType === 'learning-path-lesson';
+    return props.contentType === 'learning-path-lesson' || props.contentType === 'unit-part';
 })
-const useSanityData = computed(() => {
-    return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson';
+const OverviewChildData = computed( () => {
+    if(props.contentType === 'learning-path-level') return data.value.levels;
+    if(props.contentType === 'unit') return data.value.units; 
+    return data.value.children; 
 })
 
 onBeforeMount( async () => {
-    // console.log('childContent', props.childContent.data);
-    console.log('Overview content type is ', props.contentType);
-    if( useSanityData ) {
-        //console.log('sanity content is: ', props.contentType);
-        const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
-            data.value = props.contentType === 'learning-path-level' ? OverviewData.value.levels : OverviewData.value.children;
-            console.log('data', data.value)
-            header.value.title = OverviewData.value.title;
-            header.value.description = OverviewData.value.description;
-            if(props.contentType === 'learning-path-course' || props.contentType === 'learning-path-lesson') {
-                header.value.infoData = [
-                    `${OverviewData.value.child_count} Course`,
-                    `${OverviewData.value.xp} XP`
-                ]
-            } else {
-                header.value.infoData = props.headerData.infoData; //Default
-            }
-            platformStore.setLoadingState(OverviewLoading.value);
-    } else {
-        //console.log('content type is ', props.contentType);
-        data.value = props.childContent.data; //Default
-        setTimeout(() => {
-            platformStore.setLoadingState(false);
-        }, 2000)
-    }
+    // console.log('content type is', props.contentType)
+    // console.log('headerData', props.headerData.ctas)
+    // console.log('sanity content is: ', props.contentType);
+    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
+        data.value = OverviewData.value;
+
+        //Header Data
+        header.value = OverviewData.value.header;
+
+        console.log(header.value)
+
+        //console.log('my data', data.value)    
+        platformStore.setLoadingState(OverviewLoading.value);
+
 })
 </script>

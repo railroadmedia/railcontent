@@ -24,7 +24,8 @@ const config = {
       railcontentConfig: {
         token: window.railcontentConfig.token,
         userId:  window.railcontentConfig.userId,
-      }
+      },
+      localStorage: window.localStorage
 };
 
 // Initialize the service with the configuration
@@ -51,7 +52,7 @@ import Stc from './Components/_Pages/STC';
 import CoachIndex from './Components/_Pages/CoachIndex';
 import Support from './Components/_Pages/Support';
 import Workouts from './Components/_Pages/Workouts';
-import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback/WorkoutsPlayback';
+// import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback/WorkoutsPlayback';
 import Offline from './Components/_Pages/Live/Offline';
 import Online from './Components/_Pages/Live/Online';
 import CoachShow from './Components/_Pages/CoachShow';
@@ -68,6 +69,7 @@ import DrummersToolbox from './Components/_Pages/DrummersToolbox';
 import Login from './Components/_Pages/Login.vue';
 import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
 import sfsr from './Components/_Pages/SFSR/SFSR';
+import Dashboard from './Components/_Pages/Dashboard';
 import DevEndpoint from './Components/_Pages/DevEndpoint';
 import AllContentUpdates from './Components/_Pages/ContentUpdate/All';
 import ReturningContentUpdates from './Components/_Pages/ContentUpdate/Returning';
@@ -223,7 +225,7 @@ app.component('AppContainer', AppContainer)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
     .component('PageHeader', PageHeader)
-    .component('WorkoutsPlayback', WorkoutsPlayback)
+    // .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
     .component('Artists', Artists)
@@ -258,6 +260,7 @@ app.component('AppContainer', AppContainer)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
     .component('sfsr', sfsr)
+    .component('Dashboard', Dashboard)
     .component('DevEndpoint', DevEndpoint)
     .component('AllContentUpdates', AllContentUpdates)
     .component('ReturningContentUpdates', ReturningContentUpdates)

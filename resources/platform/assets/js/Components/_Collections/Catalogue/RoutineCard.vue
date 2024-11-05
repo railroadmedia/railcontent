@@ -168,8 +168,8 @@ const mappedData = computed(() => {
 })
 
 const showRoutineSoundSlice = (type) => {
-    let soundSliceSlug = contentModel.value[`${type}_soundslice_slug`];
+    let soundSliceSlug = props.item[`${type}_soundslice_slug`];
 
-    emit('showRoutineSoundSlice', { soundSliceSlug, title: contentModel.value.title, routineId: contentModel.value.id });
+    emit('showRoutineSoundSlice', { soundSliceSlug, title: props.item.title, routineId: props.item.id });
 }
 </script>

@@ -81,7 +81,7 @@
                         :title="songTitle"
                         :description="songArtist"
                         :is-liked="isLiked"
-                        :like-count="likeCount"
+                        :like-count="likeData.value?.likeCount"
                         :is-added="isAdded"
                         :content-id="contentId"
                         :user-id="userId"
@@ -131,7 +131,7 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
@@ -151,7 +151,7 @@
                     :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug"
+                    :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
@@ -176,6 +176,7 @@ import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
+import { isContentLiked } from 'musora-content-services';
 import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const userStore = useUserStore();
@@ -190,12 +191,10 @@ const props = defineProps({
     songArtist: String,
     songAlbum: String,
     songMeta: String,
-    isLiked: Boolean,
     isAdded: Boolean,
     assignments: Array,
     hasInstrumentless: Boolean,
     lessonProgress: [Number, String],
-    likeCount: [Number, String],
     reportLogo: String,
     noAccess: Boolean,
     showDraft: {
@@ -204,6 +203,9 @@ const props = defineProps({
     },
 });
 
+const likeData = ref({});
+const isLiked = ref(false);
+const isCompleted = ref(false);
 const soundsliceObject = ref(props.assignments?.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const lessonProgressRef = ref(props.lessonProgress);
@@ -287,4 +289,18 @@ const handleCloseSoundslice = () => {
     Helpscout.showWidget();
     Intercom.showWidget();
 };
+
+onBeforeMount(async () => {
+    // Execute all Video Calls
+    const [like, liked ] = await Promise.all([
+        axios.get(`/content/${props.contentId}/user_data/${userId.value}`),
+        isContentLiked(props.contentId),
+    ]);
+
+    // Update ref data reactively after the calls resolve
+    likeData.value = like?.data;
+    isLiked.value = liked;
+
+    console.log(isLiked.value)
+});
 </script>

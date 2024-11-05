@@ -3,6 +3,7 @@
         <template v-if="!isLoading">
             <!-- Learning Paths -->
             <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
+            <NewLearningPathContainer v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
 
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
@@ -26,11 +27,11 @@
 
             <!-- Continue section -->
             <MiniCatalogueSection
-                v-if="startedContent.data.length"
+                v-if="data?.continueSection.length"
                 title="Continue"
                 seeAllAriaLabel="See All Lessons In Progress"
-                :seeAllUrl="continueUrl"
-                :preLoadedContent="startedContent.data"
+                :seeAllUrl="`/${brand}/lesson-history/in-progress`"
+                :preLoadedContent="data?.continueSection"
                 :isMiniView="true"
                 :show-dropdown="true"
                 :use-ref-data="true"
@@ -53,15 +54,15 @@
                 </template>
             </MiniCatalogueSection>
 
-            <!-- Workouts section -->
-            <MiniCatalogueSection
+            <!-- Workouts section - REMOVING -->
+            <!-- <MiniCatalogueSection
                 v-if="data?.workouts?.length"
                 title="Workouts"
                 seeAllAriaLabel="See All Workouts"
                 :seeAllUrl="`${brand}/workouts`"
                 :preLoadedContent="data.workouts"
                 trackingSection="workouts"
-            />
+            /> -->
 
             <!-- New Releases -->
             <MiniCatalogueSection
@@ -76,7 +77,8 @@
             <!-- Playlist section -->
             <ListSection
                 v-if="usersList.length"
-                :usersList="usersList"
+                :newContentUrl="newContentUrl"
+                :usersList="playlistsStore.playlists"
                 :my-list-url="`/${brand}/playlists`"
             />
 
@@ -91,8 +93,8 @@
                 trackingSection="live"
             />
 
-            <!-- Upcoming section -->
-            <MiniCatalogueSection
+            <!-- Upcoming section - REMOVING -->
+            <!-- <MiniCatalogueSection
                 v-if="data?.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
@@ -100,7 +102,7 @@
                 :force-no-links="true"
                 :preLoadedContent="data.upcomingEvents"
                 trackingSection="upcoming-events"
-            />
+            /> -->
 
             <template v-if="isPackOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->
@@ -146,11 +148,18 @@
 
 <script setup>
     import { computed, onBeforeMount, onMounted, ref } from 'vue';
+    import { usePlatformStore } from '@stores/platform';
+    import { useHomePageData } from '@hooks/pages/useHomePageData';
+    import { useUserStore } from "@stores/user";
+    import {storeToRefs} from "pinia/dist/pinia";
+    import { usePlaylistsStore } from "@stores/playlists";
+
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
+    import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
     import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
@@ -158,13 +167,10 @@
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
-    import { useUserStore } from "@stores/user";
-    import { usePlatformStore } from '@stores/platform';
-    import {storeToRefs} from "pinia/dist/pinia";
     import HomePageSkeleton from "./HomePageSkeleton";
-    import { useHomePageData } from '@hooks/pages/useHomePageData';
 
     //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
     const { brand, userId, token, userCompletedAccount } = storeToRefs(userStore);
     const platformStore = usePlatformStore();
@@ -185,6 +191,8 @@
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
+        newContent: { type: Object, default: () => ({}) },
+        newContentUrl: { type: String, default: '' },
         nextLearningPathLevel: { type: String, default: '' },
         nextLearningPathProgressPercent: { type: Number, default: 0 },
         packData: { type: Array, default: () => ([]) },
@@ -260,16 +268,17 @@
     }
 
     //Lifecycles
+    onBeforeMount( async () => {
+        playlistsStore.playlists = props.usersList;
+
+        const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
+        data.value = homeData.value;
+        platformStore.setLoadingState(homeLoading.value);
+    });
+
     onMounted(() => {
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
-    });
-
-    onBeforeMount( async () => {
-        const { data: homeData, error: homeError, isLoading: homeLoading } = await useHomePageData(brand.value, userId.value, token.value);
-        data.value = homeData.value;
-        console.log('DATA', data.value)
-        platformStore.setLoadingState(homeLoading.value);
     });
 </script>

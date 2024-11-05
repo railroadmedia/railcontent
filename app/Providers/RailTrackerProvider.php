@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
-use Railroad\Railtracker\Trackers\MediaPlaybackTracker;
+use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
 
 class RailTrackerProvider implements RailTrackerProviderInterface
 {

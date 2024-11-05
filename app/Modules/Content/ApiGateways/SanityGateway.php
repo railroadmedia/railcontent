@@ -108,6 +108,7 @@ class SanityGateway
             'dataset' => $dataset,
             'apiVersion' => $apiVersion,
             'token' => $accessToken,
+            'perspective' => 'published'
         ]);
     }
 

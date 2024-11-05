@@ -27,6 +27,7 @@
                         :show-dropdown="showDropdown"
                         :tracking-section="trackingSection"
                         :page="page"
+                        :is-mini-catalogue="true"
                         @on-progress-reset="resetProgress"
                     />
                 </transition>
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import {onMounted, onUnmounted, ref, watch} from 'vue';
 import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
@@ -146,5 +147,13 @@ onUnmounted(() => {
     window.removeEventListener('resize', watchResize);
 })
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage } = useCarouselEvents(props.preLoadedContent, data, page, cardNum, props.trackingSection, userStore.brand);
+//in case preLoadedContent is an empty array on rendering and it gets updated after
+watch(
+    () => props.preLoadedContent,
+    (newData) => {
+        setOriginal(newData);
+    },
+)
+
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
 </script>

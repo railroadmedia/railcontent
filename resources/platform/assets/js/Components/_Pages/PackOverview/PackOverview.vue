@@ -11,6 +11,7 @@
             :info-data="header?.infoData"
             :ctas="header?.ctas"
             :description="header?.description"
+            :is-loading="isLoading"
         />
         <div class="tw-my-4">
             <ListCatalogue
@@ -95,6 +96,7 @@ onMounted( async () => {
         data.value = PackData.value;
         //Header Data
         header.value = PackData.value.header;
+        console.log('header', header.value)
 
         platformStore.setLoadingState(PackLoading.value);
 })

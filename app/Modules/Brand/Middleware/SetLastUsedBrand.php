@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
-use Railroad\Railtracker\Services\ConfigService;
+use App\Modules\RailTracker\Services\ConfigService;
 
 use function user;
 

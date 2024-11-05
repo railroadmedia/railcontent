@@ -10,19 +10,17 @@
                 <!-- Song Player Section -->
                 <div class="tw-col-span-3 tw-w-full 2xl:tw-col-span-2 tw-row-span-1">
                     <SongPlayerSection
-                        :contentId="contentId"
+                        :contentId="data.id"
                         :resources="data.resources"
-                        :thumbnailUrl="data.thumbnail_url"
+                        :thumbnailUrl="data.thumbnail"
                         :songTitle= "data.title"
-                        :songArtist= "data.artist"
+                        :songArtist= "data.artist_name"
                         :songAlbum= "data.album"
-                        :songMeta= "data.style"
+                        :songMeta= "data.genre[0]"
                         :assignments= "data.soundslice"
                         :hasInstrumentless="data.instrumentless"
                         :lessonProgress= "data.lesson_progress"
-                        :isLiked= "isLiked"
                         :isAdded= "isAdded"
-                        :likeCount= "likeCount"
                         :report-logo="reportLogo"
                         :no-access="noAccess"
                     />
@@ -89,16 +87,15 @@
     // Props
     const props = defineProps({
         contentId: Number,
-        isLiked: Boolean,
         noAccess: Boolean,
         isAdded: Boolean,
-        likeCount: [Number, String],
         reportLogo: String,
     });
 
     onBeforeMount( async () => {
         const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
         data.value = songData.value;
+        console.log('song data', data.value);
         platformStore.setLoadingState(songLoading.value);
     });
 </script>

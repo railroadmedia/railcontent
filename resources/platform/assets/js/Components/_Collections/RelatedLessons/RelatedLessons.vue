@@ -2,7 +2,10 @@
     <aside
       class="tw-w-full tw-col-span-3 xl:tw-row-span-4 tw-flex tw-flex-col xl:tw-mb-4 xl:tw-mt-0 xl:tw-col-span-1"
       :class="{ 'xl:tw-hidden': !isRelatedSectionOpen }">
-      <div class="tw-flex tw-w-full">
+
+      <SkeletonRelatedLessons v-if="isLoading" />
+
+      <div v-else class="tw-flex tw-w-full">
         <div
           class="tw-w-full tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-overflow-hidden tw-transition-all">
           <header class="tw-flex tw-flex-col">
@@ -30,7 +33,7 @@
             class="tw-w-full tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block"
             :class="isCollapsed ? 'tw-hidden' : 'tw-flex'"
           >
-            <div v-for="(item, i) in relatedLessons.data" :key="i"
+            <div v-for="(item, i) in relatedLessons" :key="i"
               class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
               <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
             </div>
@@ -42,18 +45,24 @@
 
 <script setup>
 import { ref } from 'vue';
+import { usePlatformStore } from "@stores/platform";
+import { storeToRefs } from "pinia/dist/pinia";
 import CatalogueListElement from '@collections/Catalogue/CatalogueListElement.vue';
+import SkeletonRelatedLessons from '@collections/SkeletonLoader/SkeletonRelatedLessons';
 
 const props = defineProps({
-isRelatedSectionOpen: {
-  type: Boolean,
-  required: true
-},
-relatedLessons: {
-  type: Object,
-  required: true
-},
+  isRelatedSectionOpen: {
+    type: Boolean,
+    required: true
+  },
+  relatedLessons: {
+    type: [Object, Array],
+    required: true
+  },
 });
+
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const isCollapsed = ref(false);
 

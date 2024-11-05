@@ -8,9 +8,10 @@
             title="Coaches"
             icon-name="whistle"
             class="tw-mb-[30px]"
-            :description="headerDescription"
+            :description="headerDescriptions[brand]"
         />
 
+        <!-- Need to integrate with MCS -->
         <!-- Coach Event -->
         <CoachEvent
             v-if="hasCoachEvent"
@@ -55,47 +56,27 @@
         <div class="tw-mb-[30px]">
             <MiniCatalogueSection
                 title="Latest Featured Lessons"
-                :pre-loaded-content="latestLessons"
-            />
-        </div>
-        <!-- From Subscribed Coaches -->
-        <div v-if="followedLessons.length" class="tw-mb-[30px]">
-            <MiniCatalogueSection
-                title="From Subscribed Coaches"
-                :see-all-url="`/${brand}/lessons/subscribed`"
-                seeAllAriaLabel="See All From Subscribed Coaches"
-                :pre-loaded-content="followedLessons"
+                :pre-loaded-content="featuredLessons"
             />
         </div>
 
+        <!-- Need to integrate with MCS -->
         <!-- Upcoming Coaches -->
-        <UpcomingCoach
-            v-if="hasUpcomingCoaches"
-            :upcoming-coaches="upcomingCoaches"
-        />
+        <UpcomingCoach v-if="hasUpcomingCoaches" :upcoming-coaches="upcomingCoaches" />
 
-        <ActiveCoach
-            v-if="hasActiveCoaches"
-            :active-coaches="activeCoaches"
-        />
+        <ActiveCoach :active-coaches="activeCoaches"/>
 
-        <CollectionWrapper
-            :collection-type="collectionType"
-            :filterable-values="collectionFilterableValues"
-            :included-types="collectionIncludedTypes"
-            :limit="collectionLimit"
-            :required-fields="collectionRequiredFields"
-            :statuses="collectionStatuses"
-            :tab-options="collectionTabOptions"
-            :default-sort="collectionDefaultSort"
-            :show-reset-progress="collectionShowResetProgress"
-        />
+        <CollectionWrapper collection-type="coach" :tab-options="tabData" />
     </div>
 </template>
 <script setup>
-import { computed, onBeforeMount } from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
+import { useCollectionStore } from "@stores/collection";
+import { getActiveCoaches } from "@hooks/pages/useCoachIndexPageData";
+import { fetchByReference } from 'musora-content-services';
+
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import CoachEvent from "@vuesora/Components/Coaches/CoachEvent";
@@ -105,58 +86,12 @@ import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogu
 import UpcomingCoach from '@collections/UpcomingCoach/UpcomingCoach';
 import ActiveCoach from '@collections/ActiveCoach/ActiveCoach';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
-import {useCollectionStore} from "@stores/collection";
+import {usePlatformStore} from "@stores/platform";
 
 const props = defineProps({
-    activeCoaches: {
-        type: Array,
-        default: () => [],
-    },
-    breadcrumbs: {
-        type: Array,
-        default: () => [],
-    },
     coachEvent: {
         type: Object,
         default: () => ({}),
-    },
-    collectionData:{
-        type: Object,
-        default: () => ({}),
-    },
-    collectionDefaultSort: {
-        type: String,
-        default: '-published_on',
-    },
-    collectionFilterableValues: {
-        type: Array,
-        default: () => [],
-    },
-    collectionIncludedTypes: {
-        default: '',
-    },
-    collectionLimit:{
-        type: [Number, Boolean],
-        default: () => 10,
-    },
-    collectionRequiredFields: {
-        type: Array,
-        default: () => [],
-    },
-    collectionShowResetProgress: {
-        type: Boolean,
-        default: () => false,
-    },
-    collectionStatuses: {
-        type: Array,
-        default: () => ["published"],
-    },
-    collectionTabOptions: {
-        type: Array,
-        default: () => [],
-    },
-    collectionType: {
-        default: '',
     },
     coachEventCurrentDateString: {
         type: String,
@@ -170,10 +105,6 @@ const props = defineProps({
         type: Object,
         default: {},
     },
-    hasActiveCoaches: {
-        type: Boolean,
-        default: () => false,
-    },
     hasFeaturedCoaches: {
         type: Boolean,
         default: () => false,
@@ -185,10 +116,6 @@ const props = defineProps({
     hasUpcomingCoaches:{
         type: Boolean,
         default: () => false,
-    },
-    headerDescription: {
-        type: String,
-        default: '',
     },
     coachEventSubscriptionCalendarId: {
         type: String,
@@ -202,10 +129,6 @@ const props = defineProps({
         type: String,
         default: () => "",
     },
-    latestLessons: {
-        type: Array,
-        default: () => [],
-    },
     coachEventYoutubeEventId: {
         type: String,
         default: () => "",
@@ -218,18 +141,24 @@ const props = defineProps({
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
+
 const { brand } = storeToRefs(userStore);
+const { isLoading } = storeToRefs(platformStore);
+
+const activeCoaches = ref([]);
+const featuredLessons = ref([]);
 
 const hasCoachEvent = computed(() => {
     return Object.keys(props.coachEvent.data).length > 0;
 })
 
 const featuredCoachLength = computed(() => {
-    return props.featuredCoaches.results?.length;
+    return props.featuredCoaches?.results?.length;
 })
 
 const formattedFeaturedCoaches = computed(() => {
-    return props.featuredCoaches.results?.map((coach) => {
+    return props.featuredCoaches?.results?.map((coach) => {
         return {
             ...coach,
             title: coach.fields.find(c=>c.key === 'name').value,
@@ -242,20 +171,36 @@ const formattedFeaturedCoaches = computed(() => {
     })
 })
 
+const breadcrumbs = [
+    {
+        title: 'Coaches'
+    }
+];
+
 const tabData = [
     {
         value: 'All Coaches',
         groupByView: false,
         key: '',
     },
-    {
-        value: 'Subscribed Coaches',
-        groupByView: false,
-        key: '',
-    },
 ];
 
-onBeforeMount(() => {
+const headerDescriptions = {
+    drumeo: 'Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!',
+    pianote: 'Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!',
+    guitareo: 'Tackle your next guitar goal with bite-sized courses from many of the world\'s best guitarists.',
+    singeo: 'Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!',
+}
+
+onBeforeMount(async() => {
+    const featured = await fetchByReference(brand.value, { includedFields: ['is_featured']});
+    featuredLessons.value = featured.entity;
+
+    //Needs to be updated when BE figures out the subscribed feature
+    const coaches = await getActiveCoaches();
+    activeCoaches.value = coaches;
+
+    //Needs to be updated when BE figures out the subscribed feature
     collectionStore.setDefaults({
         tabOptions: tabData,
         filter: {

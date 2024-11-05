@@ -41,7 +41,7 @@
         </a>
 
         <!-- Action Button -->
-        <div class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px]">
+        <div class="tw-flex tw-flex-col tw-justify-start sm:tw-justify-between tw-pl-[5px] tw-relative tw-h-[58px] sm:tw-h-[78px] dark:tw-text-white">
             <button class="sm:tw-hidden" @click="toggleDropdown">
                 <svg class="" width="21" height="21" viewBox="0 0 25 25" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@
 </template>
 <script setup>
 
-import { computed, ref, onBeforeMount } from 'vue';
+import { computed, ref } from 'vue';
 import { PlusIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
@@ -119,10 +119,6 @@ const props = defineProps({
     contentType: {
         type: String,
         default: '' // Default empty string
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
     },
     lockUnowned: {
         type: Boolean,
@@ -201,8 +197,4 @@ const resetProgress = () => {
     showDropdown.value = false;
     emit('progressReset', { content_id: props.item.id });
 }
-
-onBeforeMount(()=> {
-    console.log('MiniCatalogueCard data:', props.item)
-})
 </script>

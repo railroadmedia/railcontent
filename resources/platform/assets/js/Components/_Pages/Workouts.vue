@@ -2,12 +2,13 @@
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 ">
         <Breadcrumb :breadcrumbs="[{ title: 'Workouts' }]"/>
     </div>
+
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6">
+
         <section v-if="carouselData.length">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-start">
                     <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Featured Challenges</a>
-<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314424?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <div class="tw-hidden lg:tw-block">
                         <Tooltip position="right">
                             <template v-slot:trigger>
@@ -24,7 +25,6 @@
                     <div class="tw-relative lg:tw-hidden">
                         <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px]"></musora-icon>
                     </div>
-
                 </div>
                 <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     See All <span class="tw-hidden sm:tw-inline">Challenges</span>
@@ -40,7 +40,6 @@
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-start">
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
-<!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
                     <div class="tw-hidden lg:tw-block">
                         <Tooltip position="right">
                             <template v-slot:trigger>
@@ -60,28 +59,33 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <div v-if="continueData.data.length" class="tw-mt-[30px]">
+
+            <!-- Continue section -->
+            <div v-if="continueSection.length" class="tw-mt-[30px]">
                 <MiniCatalogueSection
                     title="Continue"
                     seeAllAriaLabel="See All Workouts In Progress"
-                    :seeAllUrl="`/${brand}/lesson-history/in-progress`"
-                    :pre-loaded-content="continueData.data"
+                    :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+                    :pre-loaded-content="continueSection"
                     :isMiniView="true"
                     :show-dropdown="true"
+                    trackingSection="continue"
                 />
             </div>
         </section>
+
         <br>
+
         <CollectionWrapper
-            :collection-type="collectionType"
+            collection-type="workout"
             :filterable-values="filterableValues"
-            :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
-            :pre-loaded-content="workoutData"
+            :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
             :statuses="statuses"
-            :tabs="tabs"
+            :tab-options="tabData"
             :is-admin="isAdmin"
         />
     </div>
+
     <InfoModal v-if="modalType" :self-contained="true" :title="infoText[modalType].title" @onClose="closeModal" class-override="tw-max-w-[600px] tw-w-full">
         <p class="tw-mb-4 dark:tw-text-white">{{ infoText[modalType].content }}</p>
         <div class="tw-flex tw-justify-end">
@@ -91,10 +95,11 @@
 </template>
 
 <script setup>
-// TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
+import { useCollectionStore } from "@stores/collection";
+import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
 import Tooltip from '@collections/Tooltip/Tooltip';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
@@ -105,25 +110,9 @@ import InfoModal from "@collections/Modal/InfoModal";
 import MuButton from '@units/Button/MuButton';
 
 const props = defineProps({
-    breadcrumbLastLevelUrl: {
-        type: String,
-        default: ''
-    },
-    breadcrumbLevelTitle: {
-        type: String,
-        default: ''
-    },
     carouselData: {
         type: Array,
         default: () => []
-    },
-    continueData: {
-        type: [Array, Object],
-        default: () => []
-    },
-    workoutData: {
-        type: [Array, Object],
-        default: () => [],
     },
     collectionType: {
         type: String,
@@ -145,28 +134,16 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    tabs: {
-        type: Array,
-        default: () => [],
-    },
 });
 
+const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const modalType = ref(false);
-// const videoModalOpen = ref(false);
-// const videoSrc = ref('');
-//
-// const openVideo = (src) => {
-//     videoSrc.value = src;
-//     videoModalOpen.value = true;
-// }
-//
-// const closeVideo = () => {
-//     videoModalOpen.value = false;
-// }
-//
+const isLoading = ref(true); // Loading state ref
+const continueSection = ref([]); // Ref for storing started lessons
+
 const openModal = (type) => {
     modalType.value = type;
 }
@@ -185,4 +162,30 @@ const infoText = {
         content: 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
     },
 }
+
+onBeforeMount(async () => {
+    console.log(props.collectionType)
+
+    isLoading.value = true;
+    try {
+        // Fetch started content (in-progress workouts)
+        const startedIds = await fetchContentInProgress('workout', brand.value, { limit: 20 });
+        const lessons = await fetchByRailContentIds(startedIds.started);
+
+        // Set the continue section with started workouts
+        continueSection.value = lessons;
+
+        // Set default collection store values
+        collectionStore.setDefaults({
+            filter: {
+                sort: '-published_on'
+            },
+            queryType: 'workout',
+        });
+    } catch (error) {
+        console.error('Error fetching continue section data:', error);
+    } finally {
+        isLoading.value = false;
+    }
+});
 </script>

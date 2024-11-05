@@ -71,7 +71,7 @@
         </div>
 
         <!-- Packs -->
-        <div class="tw-flex tw-flex-wrap">
+        <div class="tw-flex tw-flex-wrap tw-mb-[30px]">
             <GuitareoPack
                 v-for="pack in packs"
                 :key="pack.id"
@@ -88,7 +88,7 @@
                     title="Courses"
                     seeAllAriaLabel="See All Courses"
                     seeAllUrl="/guitareo/courses"
-                    :preLoadedContent="courses.data"
+                    :preLoadedContent="courses"
                     :lock-unowned="true"
                 />
             </div>
@@ -99,7 +99,7 @@
                     title="Quick Tips"
                     seeAllAriaLabel="See All Quick Tips"
                     seeAllUrl="/guitareo/quick-tips"
-                    :preLoadedContent="quickTips.data"
+                    :preLoadedContent="quickTips"
                     :lock-unowned="true"
                 />
             </div>
@@ -122,31 +122,22 @@
     </div>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { useUserStore } from "@stores/user";
+import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import GuitareoPack from '@collections/GuitareoPack/GuitareoPack';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+import { fetchAll } from 'musora-content-services';
 
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
-const { userId } = storeToRefs(userStore);
+const { brand, userId } = storeToRefs(userStore);
 
 const props = defineProps({
-    courses: {
-        type: Object,
-        default: {},
-    },
     guitarQuestPack: {
-        type: Object,
-        default: {},
-    },
-    packs: {
-        type: Array,
-        default: [],
-    },
-    quickTips: {
         type: Object,
         default: {},
     },
@@ -155,6 +146,12 @@ const props = defineProps({
         default: [],
     },
 })
+
+
+//refs
+const quickTips = ref(null);
+const courses = ref(null);
+const packs = ref(null);
 
 const breadcrumbs = [
     {
@@ -180,5 +177,34 @@ const guitarQuestProgress = computed(() => {
     } else {
         return props.guitarQuestPack.user_progress[userId.value]?.state;
     }
+})
+
+onBeforeMount( ()=> {
+    const fetchData = async () => {
+        const [quickTipsData, coursesData, packData] = await Promise.all([
+            fetchAll(brand.value, 'quick-tips', {
+                page: 1,
+                limit: 20,
+            }),
+            fetchAll(brand.value, 'course', {
+                page: 1,
+                limit: 20,
+            }),
+            fetchAll(brand.value, 'pack', {
+                page: 1,
+                limit: 4,
+            }),
+        ]);
+
+        quickTips.value = quickTipsData.entity;
+        courses.value = coursesData.entity;
+        packs.value = packData.entity;
+
+        console.log(packs.value);
+        
+        platformStore.setLoadingState(false);
+    }
+
+    fetchData();
 })
 </script>

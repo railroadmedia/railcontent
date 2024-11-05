@@ -4,6 +4,7 @@ namespace App\Modules\Tracker\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * @property integer $id
@@ -23,5 +24,13 @@ class LastEngagedSeconds extends Model
         return LastEngagedSeconds::query()
             ->where('user_id', '=', $userId)
             ->where('content_id', $contentId)->first()?->resume_time_seconds ?? 0;
+    }
+
+    public static function getAllContentResumeTimeSeconds(int $userId): Collection
+    {
+        return LastEngagedSeconds::query()
+            ->select(['content_id', 'resume_time_seconds'])
+            ->where('user_id', '=', $userId)
+            ->get();
     }
 }

@@ -23,25 +23,36 @@
                     </button>
                 </div>
             </div>
-            <div class="tw-flex tw-flex-row">
-                <ContentSchedule
-                    v-if="hasScheduleEvents"
-                    :preloaded-content="scheduleEvents"
+
+            <!-- Content Schedule -->
+            <div v-if="!isLoading" class="tw-flex tw-flex-row">
+                <ContentSchedule 
+                    v-if="schedule.length" 
+                    :preloaded-content="schedule"
+                    :subscription-calendar-id="subscriptionCalendarId" 
+                    :theme-color="brand" 
                     :timezone="timezone"
-                    :subscription-calendar-id="subscriptionCalendarId"
-                />
-                <span v-else class="dark:tw-text-white">No upcoming live events</span>
+                />              
+                <span class="dark:tw-text-white" v-else>No scheduled releases</span>
+            </div>
+
+            <!-- Loading Skeleton -->
+            <div v-else class="tw-flex-col tw-w-full">
+                <SkeletonListCatalogueItem v-for="i in 8" :key="i" />
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
 import { useUserStore } from "@stores/user";
-import { storeToRefs } from "pinia/dist/pinia";
+import { storeToRefs } from "pinia";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import ContentSchedule from '@vuesora/views/schedule/Schedule';
-import { computed } from "vue";
+import { computed, ref, onBeforeMount } from "vue";
+import { fetchUpcomingEvents } from 'musora-content-services';
+import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 
 const props = defineProps({
     headerPageType: {
@@ -60,10 +71,6 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    scheduleEvents: {
-        type: Array,
-        default: [],
-    },
     subscriptionCalendarId: {
         type: String,
         default: '',
@@ -72,8 +79,9 @@ const props = defineProps({
         type: String,
         default: '',
     },
-})
+});
 
+//Pinia
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
@@ -83,7 +91,29 @@ const breadcrumbs = [
     }
 ];
 
+// Refs
+const schedule = ref([]);
+const isLoading = ref(false);
+
+//Computed
 const hasScheduleEvents = computed(() =>{
-    return props.scheduleEvents.length > 0;
+    return schedule.value.length > 0;
+});
+
+// Lifecycles
+onBeforeMount(async () => {
+    isLoading.value = true;
+    try {        
+        const upcomingEvents = await fetchUpcomingEvents(brand.value, {
+            page: 1,
+            limit: 20,
+        });
+
+        schedule.value = Array.isArray(upcomingEvents) ? upcomingEvents : [];
+    } catch (error) {
+        console.error('Error fetching schedule data:', error);
+    } finally {
+        isLoading.value = false;
+    }
 });
 </script>

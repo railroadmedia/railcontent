@@ -20,8 +20,7 @@
     </template>
 
     <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
-      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : ''
-      ]">
+      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : '']">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
@@ -33,6 +32,7 @@
               {{ title }}
             </span>
           </template>
+
           <div class="tw-ml-[5px]">
             <!-- Modal for Mobile -->
             <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
@@ -99,7 +99,7 @@ const props = defineProps({
   heroImg: String,
   heroImgClasses: String,
   title: String,
-  infoData: Array,
+  infoData: [Array, Object],
   additionalImgSrc: String,
   secondaryCtaText: String,
   hasCtas: Boolean,

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Providers;
 
+use App\Modules\Content\Console\Commands\VerifyUserContextPerformance;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 class ContentServiceProvider extends ServiceProvider
 {
+
+
     /**
      * Bootstrap the application services.
      */
@@ -16,6 +19,9 @@ class ContentServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        $this->commands([
+            VerifyUserContextPerformance::class
+        ]);
         $this->mergeConfigFrom(
             __DIR__ . '/../config/sanity-cms.php',
             'content'

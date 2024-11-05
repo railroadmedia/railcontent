@@ -14,8 +14,8 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 use Throwable;
 
 class ContentProgressEventListener
@@ -42,25 +42,23 @@ class ContentProgressEventListener
      * @var UserPointsService
      */
     private $userPointsService;
-    //    /**
-    //     * @var MediaPlaybackRepository
-    //     */
-    private $mediaPlaybackRepository;
+
+    private MediaPlaybackRepository $mediaPlaybackRepository;
 
     public function __construct(
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
         ContentService $contentService,
         ContentRepository $contentRepository,
-        UserPointsService $userPointsService
-        //        MediaPlaybackRepository $mediaPlaybackRepository
+        UserPointsService $userPointsService,
+        MediaPlaybackRepository $mediaPlaybackRepository
     ) {
         $this->userContentProgressService = $userContentProgressService;
         $this->contentService = $contentService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentRepository = $contentRepository;
         $this->userPointsService = $userPointsService;
-        //        $this->mediaPlaybackRepository = $mediaPlaybackRepository;
+        $this->mediaPlaybackRepository = $mediaPlaybackRepository;
     }
 
     public function handleUserProgressSaved(UserContentProgressSaved $userContentProgressSaved)

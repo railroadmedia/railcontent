@@ -6,7 +6,7 @@
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
-                :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${thumbnail}`"
+                :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.thumbnail}`"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
                 :alt="`${title} thumbnail`"
@@ -16,7 +16,7 @@
                 <img
                     class="tw-max-h-[70px] sm:tw-max-h-[40px]"
                     :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
-                    :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${logo}`"
+                    :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                     :alt="`${title} logo`"
@@ -127,7 +127,7 @@
 <script setup>
 import {storeToRefs} from "pinia/dist/pinia";
 import { useUserStore } from '@stores/user';
-import { computed, ref } from "vue";
+import { computed, ref, onBeforeMount } from "vue";
 import { DateTime } from 'luxon';
 import { useResetProgress } from "@hooks/useResetProgress";
 import { usePlatformStore } from "../../../Stores/platform";
@@ -159,16 +159,6 @@ const isReleased = computed(() => {
 
 const releaseDate = computed(() => {
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
-})
-
-const thumbnail = computed(() => {
-    const url = props.pack.data && props.pack.data.find((d) => d.key === 'thumbnail_url');
-    return url && url.value;
-})
-
-const logo = computed(() => {
-    const url = props.pack.data && props.pack.data.find((d) => d.key === 'logo_image_url');
-    return url && url.value;
 })
 
 const title = computed(() => {
@@ -253,7 +243,7 @@ const addToPlaylist = () => {
         content_id: props.pack.id,
         type: props.pack.type,
         name: title.value,
-        thumbnail_url: thumbnail.value,
+        thumbnail_url: props.pack.thumbnail,
         description: description.value,
     }
 
@@ -278,5 +268,9 @@ const logoStyle = computed(() => {
     if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === '500 Songs In 5 Days' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
         return 'lg:tw-max-h-[40px]';
     }
+})
+
+onBeforeMount( () => {
+    //console.log('props.pack', props.pack)
 })
 </script>

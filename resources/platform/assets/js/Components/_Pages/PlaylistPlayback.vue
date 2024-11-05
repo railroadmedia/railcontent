@@ -3,7 +3,7 @@
     RE add captions
     fix tracking for videos
 */
-import {  computed, reactive, ref } from 'vue';
+import {computed, onMounted, reactive, ref} from 'vue';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaybackCue from '@collections/Playlists/PlaybackCue.vue';
 import ContentUnavailable from '@collections/Playlists/ContentUnavailable.vue';
@@ -23,6 +23,7 @@ import Intercom from '@vuesora/assets/js/Services/intercom';
 import Helpscout from '@vuesora/assets/js/Services/helpscout';
 import AssignmentsContainer from '@vuesora/Components/AssignmentsContainer/AssignmentsContainer.vue';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import {usePlatformStore} from "@stores/platform";
 
 //-----------Props-----------//
 const props = defineProps({
@@ -277,7 +278,11 @@ const chapterEndTime = ref(props.totalDuration);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
 const seekToTime = ref(0);
-
+const likeData = ref({
+    isLiked: props.isLiked,
+    likeCount: parseInt(props.likeCount)
+})
+const isContentCompleted = ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -317,19 +322,6 @@ const showUpgradeCover = computed(() => {
     return activeItem.show_plus_upgrade_modal;
 })
 
-const formattedChapters = computed(() => {
-    if (props.videoChapters?.length) {
-        return props.videoChapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
-            return {
-                title: chapter_description,
-                thumbnail: chapter_thumbnail_url,
-                time: chapter_timecode
-            }
-        })
-    }
-    return [];
-});
-
 const unavailableType = computed(() => {
     if (!props.isReleased) {
         return 'unreleased';
@@ -349,14 +341,12 @@ const unavailableType = computed(() => {
     return null;
 });
 
-
-
 const showPracticeButton = computed(() => {
     return !!props.soundsliceSlug;
 });
 
 const showVideoChapters = computed(() => {
-    return formattedChapters.value.length && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
+    return props.videoChapters && props.videoChapters.length > 0  && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
 });
 
 //--------Methods---------------//
@@ -395,6 +385,25 @@ const handleCloseSoundslice = () => {
 const seekToChapter = (time) => {
     seekToTime.value = time;
 };
+
+const completeContent = () => {
+    isContentCompleted.value = !isContentCompleted.value;
+}
+
+const likeContent = () => {
+    likeData.value.isLiked = !likeData.value.isLiked;
+
+    if (likeData.value.isLiked) {
+        likeData.value.likeCount += 1;
+    } else {
+        likeData.value.likeCount -= 1;
+    }
+}
+
+onMounted(() => {
+    const platformStore = usePlatformStore();
+    platformStore.setLoadingState(false);
+})
 </script>
 
 <template>
@@ -469,21 +478,22 @@ const seekToChapter = (time) => {
                 <div class="tw-mb-4">
                     <VideoResources :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="contentInstructors"
-                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
+                        :parent-title="parentTitle" :is-liked="likeData?.isLiked" :like-count="likeData?.likeCount" :is-completed="isContentCompleted" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-practice-button="showPracticeButton"
+                        :show-practice-button="showPracticeButton" :show-info-button="showInfoButton"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
-                        :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
+                        :lesson="playlistItems.data[props.playlistItemPosition - 1]"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
                         :report-user-name="userName" :artist="artist" :no-access="needAccess"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
+                        @open-practice-soundslice="openSlice(videoResources.title, videoChapters.length, 0, false)"
+                        @on-like-content="likeContent" @on-complete-content="completeContent"
                     />
 
                     <!-- Info Section -->
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="!needAccess && showVideoChapters" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="!needAccess && showVideoChapters" :chapters="videoChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />

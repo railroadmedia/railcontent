@@ -29,8 +29,8 @@ use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
-use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Events\EngageContent;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsController extends BaseController

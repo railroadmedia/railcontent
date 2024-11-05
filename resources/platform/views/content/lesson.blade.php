@@ -297,26 +297,24 @@
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
-
     <lesson-playback
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
-        :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
-        :video-resources="{{ json_encode($videoResources) }}"
-        :video-buttons="{{ json_encode($videoButtons) }}"
-        :comments-props="{{ json_encode($commentsProps) }}"
         :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
-        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
-        :has-related-lessons="{{ json_encode($hasRelatedLessons) }}"
-        :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
-        :lesson-data="{{ json_encode($lessonContent) }}"
-        :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
-        :this-lesson-json="{{ $thisLessonJson }}"
-        :next-lesson-json="{{ !empty($nextChild) ? $nextLessonJson : null }}"
+        :lesson-data="{{ json_encode($lessonContent) }}" {{-- Mostly used for user data and status--}}
         @if(!empty($lessonContent->fetch('soundslice_slug')))
             :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
         @endif
-    >
-    </lesson-playback>
+        :qa-video="{{ $hasQAVideo }}" 
+        :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
+        :video-resources="{{ json_encode($videoResources) }}" {{-- Mostly used for user data --}}
+        {{-- :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}" --}}
+        {{-- :comments-props="{{ json_encode($commentsProps) }}" --}}
+        {{-- :related-lessons="{{ $relatedLessons }}" --}}
+        {{-- :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }} --}}
+        {{-- :this-lesson-json="{{ $thisLessonJson }}" --}}
+        {{-- :video-buttons="{{ json_encode($videoButtons) }}" --}}
+    ></lesson-playback>
+
 @endsection
 
 @section('layout-scripts')

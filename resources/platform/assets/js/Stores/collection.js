@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
-import { useUserStore } from "./user";
+import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-content-services';
+import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
+import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
-const { getFilterValues } = useFilterValues();
+const { getFilterValues, formatTabData } = useFilterValues();
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -20,7 +22,7 @@ export const useCollectionStore = defineStore({
                 limit: 20,
                 params: {},
                 searchTerm: '',
-                sort: '',
+                sort: '-published_on',
                 progress: '',
             },
             filterColumns: [],
@@ -32,11 +34,14 @@ export const useCollectionStore = defineStore({
             tabOptions: [],
             totalPages: 0,
             totalResults: 0,
+            collectionType: '',
+            fetchType: '',
             queryType: '',
         }
     },
     actions: {
         applyFilter(param) {
+            //console.log('applyFilter(param)', param)
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -80,6 +85,56 @@ export const useCollectionStore = defineStore({
             return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
         },
 
+        getContentId (){
+            const pathname = window.location.pathname;
+            const match = pathname.match(/\/(\d+)\/?$/);
+            return match ? match[1] : null;
+        },
+
+        async getEndpoint(type){
+            const userStore = useUserStore();
+
+            const endpoints = {
+                'coachLessons': async() => {
+                    return await fetchCoachLessons(userStore.brand, this.getContentId(), {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        sort: this.filter.sort,
+                        limit: this.filter.limit,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+                'lessonHistory': async() => {
+                    return  await useLessonHistoryPageData(this.tabData[this.filter.activeTab].key, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+                'childCollection': async() => {
+                    return await useChildCollectionPageData(this.collectionType, this.queryType, {
+                        page: this.tabData[this.filter.activeTab].currentPage,
+                        limit: this.filter.limit,
+                        sort: this.filter.sort,
+                        searchTerm: this.filter.searchTerm,
+                    })
+                },
+            }
+
+            if(endpoints[type]){
+                return await endpoints[type]();
+            } else {
+                return await fetchAll(userStore.brand, this.queryType, {
+                    page: this.tabData[this.filter.activeTab].currentPage,
+                    searchTerm: this.filter.searchTerm,
+                    sort: this.filter.sort,
+                    limit: this.filter.limit,
+                    groupBy: this.getGroupBy(),
+                    includedFields: this.filter.included_fields,
+                })
+            }
+        },
+
         async fetchData() {
             const userStore = useUserStore();
             try {
@@ -102,13 +157,41 @@ export const useCollectionStore = defineStore({
                 //         })
                 // return response;
 
-                const response = await fetchAll(userStore.brand, this.queryType, {
-                    page: this.tabData[this.filter.activeTab].currentPage,
-                    searchTerm: this.filter.searchTerm,
-                    sort: this.filter.sort,
-                    groupBy: this.getGroupBy(),
-                    includedFields: this.getIncludedFields(),
-                })
+                //Get Genre
+                const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
+                const genre = genreField ? genreField.split(',')[1] : null;
+
+                //Get Filter Options
+                const result = await fetchAllFilterOptions(
+                    userStore.brand, //brand
+                    [ ...this.filter.included_fields ], //filters array
+                    genre, //style
+                    "", //artist
+                    this.queryType, //contentType
+                    this.filter.searchTerm, //term
+                    undefined, //progressIds
+                    undefined, //coachIds
+                    true, //includeTabs
+                );
+                if (result) {
+                    //Set Filter Columns
+                    this.filterColumns = getFilterValues(result.meta.filterOptions);
+
+                    if(this.tabOptions.length === 0){
+                        //Set Tab Options
+                        this.tabOptions = formatTabData(result.tabs, result.catalogName)
+                        console.log('tab tab', result)
+                        console.log('after fetch', this.tabOptions)
+
+                        //Set Active Tab
+                        this.setActiveTab();
+                    }
+                } else {
+                    throw new Error('Failed to fetch Filter Options');
+                }
+
+                const response = await this.getEndpoint(this.fetchType);
+                //console.log(response)
 
                 return response;
             } catch (e) {
@@ -124,25 +207,24 @@ export const useCollectionStore = defineStore({
             this.loading = displayLoading;
             this.fetching = true;
 
-            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
-
             const response = await this.fetchData();
             this.setData(response, replace);
             this.setURLParams();
             this.fetching = false;
+
+            return response;
         },
 
         getGroupBy(){
             if(this.tabData[this.filter.activeTab].groupByView){
-                return this.tabData[this.filter.activeTab].key;
+                return this.tabData[this.filter.activeTab].key[0];
             }
 
             return '';
         },
-
         getIncludedFields(){
             if(!this.tabData[this.filter.activeTab].groupByView && this.tabData[this.filter.activeTab].key){
-                return [this.tabData[this.filter.activeTab].key]
+                return [...this.tabData[this.filter.activeTab].key]
             }else {
                 return []
             }
@@ -159,6 +241,20 @@ export const useCollectionStore = defineStore({
             }
         },
 
+        setActiveTab() {
+            const activeTab = this.tabOptions.find((tab) => {
+                return tab.key === this.filter.activeTab;
+            })
+
+            console.log('this.tabOptions', this.tabOptions)
+            console.log('activeTab', activeTab) //undefined
+            console.log('this.filter.activeTab', this.filter.activeTab); //Empty String
+
+            this.filter.activeTab = activeTab.value;
+            this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
+            this.tabData[this.filter.activeTab].currentPage = 1;
+        },
+
         getURLParams() {
             const params = new URLSearchParams(window.location.search);
 
@@ -166,17 +262,8 @@ export const useCollectionStore = defineStore({
             let tabParams = params.getAll('tabs[]');
 
             //Set active tab from URL
-            if(tabParams && tabParams.length > 0){
-                const activeTab = this.tabOptions.find((tab) => {
-                    if(Array.isArray(tab.key)){
-                        return JSON.stringify(tab.key) === JSON.stringify(tabParams);
-                    } else {
-                        return tab.key === tabParams[0];
-                    }
-                })
-
-                this.filter.activeTab = activeTab.value;
-                this.tabData[this.filter.activeTab] = { ...activeTab };
+            if(tabParams && tabParams.length > 0 ){
+                this.filter.activeTab = tabParams[0];
             }
 
             //Get search params
@@ -219,25 +306,22 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        setData(response, replace) {
+        async setData(response, replace) {
+            const userStore = useUserStore();
+            //console.log('this.getIncludedFields()', this.getIncludedFields())
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.total / this.filter.limit
                     );
-                    // this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
                 //this.trackRecommendedServed(response.data.data);
             }
 
-            if (this.filter.searchTerm) {
-                this.searching = true;
-            } else {
-                this.searching = false;
-            }
+            this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
         },
 
@@ -258,26 +342,30 @@ export const useCollectionStore = defineStore({
                 this.sortOptions = defaults.sortOptions;
             }
 
-            //Set active tab
-            if (defaults.tabOptions) {
-                this.tabOptions = defaults.tabOptions;
-
-                //Set active tab as first tab from tabOptions
-                this.filter.activeTab = defaults.tabOptions[0].value;
-                this.tabData[this.filter.activeTab] = { ...defaults.tabOptions[0] };
-            }
-
             if(defaults.queryType){
                 this.queryType = defaults.queryType;
+            }
+
+            if(defaults.fetchType){
+                this.fetchType = defaults.fetchType;
+            }
+
+            if(defaults.collectionType){
+                this.collectionType = defaults.collectionType;
             }
 
             this.getURLParams();
 
             if(!defaults.noFetchOnLoad){
-                await this.getData();
+                const data = await this.getData();
 
                 const platformStore = usePlatformStore();
                 platformStore.setLoadingState(false);
+
+                if(this.fetchType === 'childCollection'){
+                    //console.log('childCollection', data)
+                    return data;
+                }
             }
         },
 
@@ -293,12 +381,8 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            if (Array.isArray(this.tabData[this.filter.activeTab].key)) {
-                this.tabData[this.filter.activeTab].key.map((key) => {
-                    key && url.searchParams.append('tabs[]', key);
-                })
-            } else {
-                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
+            if(this.tabData[this.filter.activeTab]?.key){
+                url.searchParams.set('tabs[]', JSON.stringify(this.tabData[this.filter.activeTab]?.key));
             }
 
             if (this.filter.progress) {
@@ -388,6 +472,7 @@ export const useCollectionStore = defineStore({
 
         trackFilter() {
             const userStore = useUserStore();
+
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,
@@ -403,6 +488,7 @@ export const useCollectionStore = defineStore({
 
         trackFilterGroup(tab) {
             const userStore = useUserStore();
+
             const payload = {
                 brand: userStore.brand,
                 section: userStore.journeySection,

@@ -13,13 +13,16 @@
         :ctas="headerData.ctas && headerData.ctas.length ? headerData.ctas : null"
       />
 
-      <div v-if="showInProgress" class="tw-mt-[30px]">
+      <!-- Continue section -->
+      <div v-if="!isLoading && continueSection.length" class="tw-mt-[30px]">
           <MiniCatalogueSection
               title="Continue"
               seeAllAriaLabel="See All Lessons in Progress"
-              :seeAllUrl="`/${brand}/lesson-history/in-progress`"
-              :preLoadedContent="startedLessons"
+              :seeAllUrl="`/${brand}/lesson-history/in-progress?sort=-published_on&included_fields%5B%5D=type%2CSong&tabs%5B%5D=inProgress&included_user_states%5B%5D=started`"
+              :preLoadedContent="continueSection"
               :isMiniView="true"
+              :show-dropdown="true"
+              trackingSection="continue"
           />
       </div>
 
@@ -30,21 +33,13 @@
           content-endpoint="/railcontent/content"
           :theme-color="brand"
           :brand="brand"
-          :pre-loaded-content="listLessons"
           :session-token="sessionToken"
         />
         <CollectionWrapper
           v-else
           v-bind="recommendedProps"
-          :brand="brand"
           :collection-type="lessonType"
-          :filterable-values="catalogueMeta.allowableFilters"
-          :include-future-scheduled-content-only="includeFutureScheduledContentOnly"
-          :included-types="includedTypes"
-          :statuses="statuses"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :multiple-types="isAllContent"
-          :is-all-content="isAllContent"
           :hide-filter-icon="lessonType === 'routine'"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
@@ -60,29 +55,23 @@
   import { usePlatformStore } from "@stores/platform";
   import { storeToRefs } from "pinia/dist/pinia";
   import { useCollectionStore } from "@stores/collection";
+  import { useUserStore } from "@stores/user";
+  import { queryTypeConverter} from "@pages/Catalogue/queryTypeConverter";
 
   import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
   import PageHeader from '@collections/PageHeader/PageHeader.vue';
-  import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
   import PlayAlongs from '@vuesora/views/play-alongs/PlayAlongs.vue';
   import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper.vue';
-  import {useUserStore} from "@stores/user";
+  import { fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
   import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 
   const props = defineProps({
-    hasStartedLessons: Boolean,
     lessonType: String,
     catalogueMeta: Object,
-    startedLessons: Array,
     breadcrumbs: Array,
-    listLessons: Object,
     sessionToken: String,
     askQuestionRecipient: String,
     emailLogoLink: String,
-    includeFutureScheduledContentOnly: Boolean,
-    statuses: Array,
-    isAllContent: Boolean,
-    includedTypes: Array,
     showInProgress: Boolean,
     catalogueType: String,
   });
@@ -94,6 +83,7 @@
   const { brand } = storeToRefs(userStore);
 
   const onLoadData = ref([]);
+  const continueSection = ref([]);
 
   const recommendedProps = computed(() => {
     const recommended = {};
@@ -120,13 +110,26 @@
   })
 
   onBeforeMount(async() => {
+    console.log(props.lessonType)
+
+    try {
+      // Fetch started content (in-progress workouts)
+      const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
+      const lessons = await fetchByRailContentIds(startedIds.started);
+
+      // Set the continue section with started workouts
+      continueSection.value = lessons;
+
+      console.log('started',continueSection.value);
+
+      // Set default collection store values
       collectionStore.setDefaults({
-          tabOptions: tabData.value,
-          filter: {
-              sort: '-published_on'
-          },
-          queryType: props.lessonType,
-          ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && {noFetchOnLoad: true})
+        tabOptions: tabData.value,
+        queryType: queryTypeConverter(props.lessonType),
+        ...(props.lessonType === 'play-along' && brand.value === 'drumeo' && { noFetchOnLoad: true })
       });
+    } catch (error) {
+        console.error('Error fetching continue section data:', error);
+    }
   })
   </script>

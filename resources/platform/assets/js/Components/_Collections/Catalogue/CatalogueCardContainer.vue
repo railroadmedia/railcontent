@@ -4,7 +4,7 @@
             :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
                     tw-no-scrollbar
-                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-rows-2 tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
+                    ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
                     ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap ' : ''}
                     ${!isMiniView && willScroll && (!isLoading && !collectionStoreLoading) ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
@@ -23,7 +23,6 @@
                         :item="item"
                         :content-type="item.type"
                         :user-id="userId"
-                        :is-admin="isAdmin"
                         :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride"
@@ -105,10 +104,6 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
-    isAdmin: {
-        type: Boolean,
-        default: () => false,
-    },
     noWrap: {
         type: Boolean,
         default: () => false,
@@ -161,6 +156,10 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    isMiniCatalogue: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits(['onProgressReset'])
@@ -179,6 +178,17 @@ const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collect
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
+const miniViewRowStyles = computed(() => {
+    if(props.page === 1){
+        if(props.preLoadedContent.length === 1){
+            return 'lg:tw-grid-rows-none';
+        }
+        return 'tw-grid-rows-2 lg:tw-grid-rows-none';
+    }
+
+    return 'tw-grid-rows-2';
+})
+
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value || isCoachShow.value);
 })
@@ -188,7 +198,7 @@ const showListElement = computed(() => {
 });
 
 const skeletonCardCount = computed(() => {
-    return showGroupBy.value ? 5 : 12;
+    return showGroupBy.value || props.isMiniCatalogue ? 5 : 12;
 })
 
 const showGroupBy = computed(() => {

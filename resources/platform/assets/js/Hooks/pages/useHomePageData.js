@@ -1,6 +1,5 @@
-// hooks/useHomePageData.js
 import { ref } from 'vue';
-import { fetchWorkouts, fetchNewReleases, fetchUpcomingEvents} from 'musora-content-services';
+import { fetchNewReleases, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
 
 export async function useHomePageData(brand) {
   const data = ref(null);
@@ -8,26 +7,32 @@ export async function useHomePageData(brand) {
   const isLoading = ref(true);
 
   try {
-    //TODO: Add lessons in progress /content/in_progress/397822?brand=drumeo&content_type=all ??
-    const [workoutsResponse, newReleasesResponse, upcomingEventsResponse] = await Promise.all([
-      fetchWorkouts(brand),
-      fetchNewReleases(brand),
-      fetchUpcomingEvents(brand),
+    // Fetch IDs for started content
+    const [startedIds, newReleasesResponse] = await Promise.all([
+      fetchContentInProgress('all', brand),
+      fetchNewReleases(brand)
     ]);
 
-    data.value = {
-      workouts: workoutsResponse || [],
-      newReleases: newReleasesResponse || [],
-      upcomingEvents: upcomingEventsResponse || [],
-    };
+    // Fetch content by RailContent IDs for started lessons only
+    const lessons = await fetchByRailContentIds(startedIds.started);
 
+    // Filter lessons based on IDs
+    const started = lessons.filter(lesson => startedIds.started.includes(lesson.id));
+
+    // Set the data
+    data.value = {
+      newReleases: newReleasesResponse || [],
+      continueSection: started || [],
+    };
   } catch (err) {
+    console.error('Error fetching data:', err);
     error.value = err;
   } finally {
     isLoading.value = false;
+    // Log data.value to ensure it's set
+    console.log('data.value in finally:', data.value);
   }
 
-  console.log(data.value)
-
+  // Return the data object and other states
   return { data, error, isLoading };
 }

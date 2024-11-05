@@ -1,39 +1,56 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchMethod, fetchMethodChildren } from 'musora-content-services';
+import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
+import { useBuildHeader } from '@hooks/useBuildHeader';
 
 export async function useOverviewPageData(contentType) {
     const userStore = useUserStore();
-
+    
     const data = ref(null);
     const error = ref(null);
     const isLoading = ref(true);
 
+    const contentId = getContentId();
+    const progressPercent = await getProgressPercent(contentId); // Await the progress percent
+
+    // Initialize the buildHeader hook
+    const { buildHeader } = useBuildHeader(progressPercent);
+
     try {
-        //Method Levels
-        if(contentType === "learning-path-level") {
+        if (contentType === "learning-path-level") {
             const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
-            if (result) {   
-                //Add Method Level Position
+            if (result) {
                 result.levels = result.levels.map((level, index) => ({
                     ...level,
                     position: index + 1 
                 }));
                 data.value = result;
+                data.value.header = buildHeader(contentType, result, progressPercent);
             } else {
                 throw new Error('Failed to fetch method');
             }
-        }
-        //Method Level Courses
-        else if(contentType === "learning-path-course" || contentType === "learning-path-lesson") {
-            //console.log('childId', childContentId())
-            const result = await fetchMethodChildren(childContentId());
-            if (result) {   
-                //console.log('result', result[0])
-                data.value = result[0];
+        } else if (contentType === "unit") {
+            const result = await fetchFoundation('foundations-2019');
+            if (result) {
+                result.units = result.units.map((unit, index) => ({
+                    ...unit,
+                    position: index + 1 
+                }));
+                data.value = result;
+                data.value.header = buildHeader(contentType, result, progressPercent);
+            } else {
+                throw new Error('Failed to fetch foundation');
             }
-        }
+        } else {
+            const result = await fetchMethodChildren(contentId);
+            if (result) {
+                data.value = result[0];
+                data.value.header = buildHeader(contentType, result[0], progressPercent);
+            } else {
+                throw new Error('Failed to fetch method children');
+            }
+        }        
     } catch (err) {
         error.value = err;
     } finally {
@@ -43,18 +60,23 @@ export async function useOverviewPageData(contentType) {
     return { data, error, isLoading };
 }
 
-//Methods
-const childContentId = () => {
-    //Get content id for url
+// Helper function to get content ID from URL
+const getContentId = () => {
     const pathname = window.location.pathname;
-    // Use a regular expression to match the last number in the path
     const match = pathname.match(/\/(\d+)\/?$/);
-    if (match) {
-        // The last number will be in match[1]
-        const lastNumber = match[1];
-        //console.log(lastNumber)
-        return lastNumber; // Output: 241248 (example)
-    } else {
-        console.log('No number found');
+    return match ? match[1] : null;
+}
+
+// Function to fetch progress percent and update state
+const getProgressPercent = async (id) => {
+    if (!id) return 0; // Return 0 if no ID is found
+
+    try {
+        const completedState = await fetchCompletedState(id);
+        console.log(completedState)
+        return completedState ? completedState.percent : 0;
+    } catch (error) {
+        console.error('Error fetching completed state:', error);
+        return 0;
     }
 }

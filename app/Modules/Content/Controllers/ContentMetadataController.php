@@ -4,10 +4,12 @@ namespace App\Modules\Content\Controllers;
 
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
 use App\Modules\Content\Requests\ContentProgressMetadataRequest;
+use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Illuminate\Http\JsonResponse;
@@ -20,9 +22,9 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 class ContentMetadataController extends Controller
 {
     public function __construct(
-        private ProductProviderInterface $productProvider,
-        private UserPermissionsService $userPermissionsService)
-    {
+        private readonly ProductProviderInterface $productProvider,
+        private readonly UserPermissionsService $userPermissionsService
+    ) {
     }
 
     public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
@@ -69,13 +71,16 @@ class ContentMetadataController extends Controller
     /**
      * Retrieve the data for content with a progress state for the user
      *
-     * @param  ProgressState  $progressState
-     * @param  ContentProgressMetadataRequest  $request
-     * @param  User|null  $user
+     * @param ProgressState $progressState
+     * @param ContentProgressMetadataRequest $request
+     * @param User|null $user
      * @return JsonResponse
      */
-    private function contentWithProgressForUser(ProgressState $progressState, ContentProgressMetadataRequest $request, ?User $user = null): JsonResponse
-    {
+    private function contentWithProgressForUser(
+        ProgressState $progressState,
+        ContentProgressMetadataRequest $request,
+        ?User $user = null
+    ): JsonResponse {
         // if the user ID isn't provided, grab the user from the session
         $user = $user ?? user();
 
@@ -90,16 +95,16 @@ class ContentMetadataController extends Controller
 
         $results =
             $user->progress()
-                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
-                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
-                ->when(!is_null($type), fn ($query) => $query->ofContentType($type))
-                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
+                ->when($progressState === ProgressState::Started, fn($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn($query) => $query->complete())
+                ->when(!is_null($type), fn($query) => $query->ofContentType($type))
+                ->when(!is_null($brand), fn($query) => $query->ofContentBrand($brand))
                 ->when(
                     !is_null($page),
                     // when we're using pagination, we need to apply the limit to the page
-                    fn ($query) => $query->forPage($page, $limit),
+                    fn($query) => $query->forPage($page, $limit),
                     // otherwise, apply the limit to the whole query (if it's there)
-                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
+                    fn($query) => $query->when(!is_null($limit), fn($query) => $query->limit($limit))
                 )
                 ->pluck('content_id');
 
@@ -113,7 +118,7 @@ class ContentMetadataController extends Controller
         $likedCount = ContentLike::getContentLikedCount($contentId);
         $currentSecond = LastEngagedSeconds::getResumeTimeSeconds($contentId, $user->id);
         return [
-            'isLiked' => $isLiked ,
+            'isLiked' => $isLiked,
             'likeCount' => $likedCount,
             'isAdded' => false,
             'currentSecond' => $currentSecond
@@ -123,10 +128,25 @@ class ContentMetadataController extends Controller
     /**
      * @return JsonResponse
      */
-    public function getUserPermissions() : JsonResponse
+    public function getUserPermissions(): JsonResponse
     {
         $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
         $permissions = Arr::pluck($permissions, 'permission_id');
         return response()->json($permissions);
+    }
+
+    /**
+     * @param $vimeoId
+     * @return array
+     */
+    public function getVimeoData($vimeoId)
+    {
+        $content = $this->productProvider->getVimeoEndpoints($vimeoId);
+        $response = [
+            'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
+            'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
+            'length_in_seconds' => $content['length_in_seconds'] ?? 0,
+        ];
+        return $response;
     }
 }
