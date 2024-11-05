@@ -349,8 +349,9 @@
    <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl mb-20">
             <div class="container mx-auto max-w-5xl px-2 sm:px-6 lg:px-0">
-                <h2 class="text-black"><strong>Great Sound. Better Price.</strong></h2>
-                <h6 class="leading-normal md:leading-relaxed mb-20 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
+                <h2 class="text-black"><strong>The Best Sound For Your Buck.</strong></h2>
+                <h6 class="leading-normal md:leading-relaxed mb-20 md:mb-12">
+                    With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
             </div>
 
             <div class="relative">
