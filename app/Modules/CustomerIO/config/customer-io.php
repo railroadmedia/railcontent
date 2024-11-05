@@ -831,7 +831,7 @@ return [
                     'first_name' => 'nullable|string'
                 ],
                 'events' => [
-                    'pianote_prospect_prima-giveaway',
+                    'pianote_prospect_prima-giveaway-nov2024',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
