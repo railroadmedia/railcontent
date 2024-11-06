@@ -139,7 +139,7 @@ return [
                     'brand' => 'required|string',
                 ],
                 'accounts_to_sync' => [
-                    'musora_prospects',
+                    'musora',
                 ],
                 'attributes' => [
                     'email' => 'Email',
