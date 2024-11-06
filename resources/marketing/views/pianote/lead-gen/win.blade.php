@@ -134,7 +134,7 @@
                         Just enter your name and email address by <strong>November 24</strong> and you’ll be in the running to win.
                     </p>
                     <p class="bg-musora py-4 px-2 rounded-xl text-center">Winners will be announced during our <br class="block sm:hidden"/>
-                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter"><strong>YouTube Livestream</strong></a><br class="hidden sm:block"/>on November 25th!
+                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter" target="_blank"><strong>YouTube Livestream</strong></a><br class="hidden sm:block"/>on November 25th!
                     </p>
                 </div>
                 <div class="md:w-5/12 justify-center pl-8 md:pl-16">
@@ -147,9 +147,14 @@
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
         <div id="customize-anchor" class="anchor"></div>
         <div class="md:max-w-5xl mx-auto text-center lg:px-10">
-            <h2 class="uppercase leading-normal mb-4 lg:mb-8">
-                <strong>win one of <br/> <span class="underline decoration-red-500 decoration-1">these incredible prizes</span></strong>
+            <h2 class="uppercase leading-normal mb-4 lg:mb-8 relative">
+                <strong>win one of <br/> <span>these incredible prizes</span></strong>
+                  <svg class="absolute left-0 right-0 w-full h-3 md:h-5 -mt-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 524 22" fill="none">
+                    <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path>
+                    <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path>
+                    </svg>
             </h2>
+           
             @php
                 $products = [
                     [
@@ -373,7 +378,7 @@
             </div>
               <h6 class="inline-block text-black py-4 lg:py-5 px-6 lg:px-3 bg-musora rounded-md w-full md:w-max-w-none leading-normal">
                Winners will be announced during our<br class="block sm:hidden">
-                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter"><strong>YouTube Livestream</strong></a> on November 25th!
+                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter" target="_blank"><strong>YouTube Livestream</strong></a> on November 25th!
             </h6>
         </div>
     </section>
