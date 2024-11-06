@@ -22,8 +22,8 @@ export function useBuildHeader(progressPercent) {
         if (contentType === 'pack') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
-            header.darkLogo = result.light_logo;
-            header.lightLogo = result.dark_logo;
+            header.darkModeLogo = result.light_mode_logo_url;
+            header.lightModeLogo = result.dark_mode_logo_url;
         }
 
         return header;
@@ -52,7 +52,7 @@ export function useBuildHeader(progressPercent) {
                     progress: progressPercent
                 }
             };
-            ctas.push(resetButton); 
+            ctas.push(resetButton);
         }
 
         if (result.resources) {
