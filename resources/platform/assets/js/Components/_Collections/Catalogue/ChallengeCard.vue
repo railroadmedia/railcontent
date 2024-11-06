@@ -15,21 +15,23 @@
                 </svg>
             </div>
             <!-- In Progress Icon -->
-            <div class="tw-absolute tw-right-3 tw-top-3">
+            <div v-if="item.progress_percent && item.progress_percent < 100" class="tw-absolute tw-right-3 tw-top-3">
                 <i class="fas fa-adjust tw-text-white tw-text-3xl tw-rotate-180"></i>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-end tw-items-center tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-full">
                 <!-- Logo -->
                 <img class="tw-mb-5 tw-w-full tw-px-5" :src="item.logo_image_url" />
                 <!-- Date Label -->
-                <div :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">September 1 - 31</div>
+                <div v-if="item.duration_text" :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">{{ item.duration_text }}</div>
                 <!-- Progress Bar -->
-                <div class="tw-absolute tw-left-0 tw-bottom-0 tw-h-[5px] tw-w-full tw-bg-drumeo"></div>
+                <div v-if="item.progress_percent" class="tw-flex tw-w-full tw-justify-start">
+                    <div class="tw-h-[5px] tw-bg-drumeo" :style="`width: ${item.progress_percent}%`"></div>
+                </div>
             </div>
             <!-- Completed Icon -->
-<!--            <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">-->
-<!--                <musora-icon icon-name="circle-check-filled" class="tw-text-white tw-w-12 sm:tw-w-16 lg:tw-w-20 tw-h-12 sm:tw-h-16 lg:tw-h-20" />-->
-<!--            </div>-->
+            <div v-if="item.progress_percent && item.progress_percent === 100" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
+                <musora-icon icon-name="circle-check-filled" class="tw-text-white tw-w-12 sm:tw-w-16 lg:tw-w-20 tw-h-12 sm:tw-h-16 lg:tw-h-20" />
+            </div>
             <!-- Overlay -->
             <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/40 tw-hidden group-hover:tw-block"></div>
         </div>
