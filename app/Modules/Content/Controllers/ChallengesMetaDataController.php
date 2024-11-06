@@ -227,10 +227,12 @@ class ChallengesMetaDataController extends Controller
                 'challenge_title' => $challenge['title'],
                 'award' => $awardTempFilePath,
                 'award_url' => $awardUrl,
+                'award_url_64' => base64_encode($awardUrl),
                 'award_text' => $challenge['award_custom_text'],
                 'tier' => $tier,
                 'instructor_signature' => $signatureTempFilePath,
                 'instructor_signature_url' => $signatureUrl,
+                'instructor_signature_url_64' => base64_encode($signatureUrl),
                 'instructor_name' => $challenge['instructors'][0],
             ])->setPaper('', 'landscape');
             $today = Carbon::now()->toDateString();
