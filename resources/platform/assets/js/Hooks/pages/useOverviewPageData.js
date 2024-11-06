@@ -21,7 +21,6 @@ export async function useOverviewPageData(contentType, parentType) {
     try {
         if (parentType === 'challenges'){
             const result = await axios(`/challenges/user_data/${contentId}`);
-            console.log('challenges', result)
             if(result){
                 data.value = {
                     children: result.data.lessons,
@@ -32,7 +31,6 @@ export async function useOverviewPageData(contentType, parentType) {
         } else {
             if (contentType === "learning-path-level") {
                 const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
-                console.log('result',result)
                 if (result) {
                     result.levels = result.levels.map((level, index) => ({
                         ...level,
@@ -45,7 +43,6 @@ export async function useOverviewPageData(contentType, parentType) {
                 }
             } else if (contentType === "unit") {
                 const result = await fetchFoundation('foundations-2019');
-                console.log('result',result)
                 if (result) {
                     result.units = result.units.map((unit, index) => ({
                         ...unit,
