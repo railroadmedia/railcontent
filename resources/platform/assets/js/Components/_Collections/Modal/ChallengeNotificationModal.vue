@@ -49,11 +49,11 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue';
-import axios from 'axios';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
+import { postChallengesSetStartDate, fetchChallengeMetadata } from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
@@ -78,9 +78,8 @@ const emit = defineEmits(['modalClose']);
 const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
-
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep || props.challengeType === 'community' ? 1 : 2);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -111,20 +110,19 @@ const handleFrequencyChange = (val) => {
 };
 
 const handleNext = async () => {
-
     try {
         if(props.challengeType === 'community'){
-            // if(selectedFrequency.value){
-            //     const setNotification = await axios.post(`/challenges/notifications/community_reminders/${props.challenge.content_id}`);
-            // }
+            if(selectedFrequency.value){
+                const setNotification = await postChallengesCommunityNotification(props.challenge.content_id);
 
-            const data = await axios.get(`/challenges/${props.challenge.content_id}`);
-            challengeData.value = data.data;
-            step.value = 2;
+                const data = await fetchChallengeMetadata(props.challenge.content_id);
+                challengeData.value = data.data;
+                step.value = 2;
 
-            setTimeout(() => {
-                slideIn.value = true;
-            },1500)
+                setTimeout(() => {
+                    slideIn.value = true;
+                },1500)
+            }
         } else {
             step.value = 2;
         }
@@ -145,9 +143,9 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-        const startDate = await axios.post(`/challenges/set_start_date/${props.challenge.content_id}`, {
-            start_date: selectedDate.value,
-        });
+        const startDate = await postChallengesSetStartDate(props.challenge.content_id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+
+        emit('modalClose');
     }
     catch(e) {
         window.shownotification({

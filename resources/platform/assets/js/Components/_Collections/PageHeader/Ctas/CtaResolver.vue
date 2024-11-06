@@ -1,5 +1,5 @@
 <template>
-    <component v-for="(cta, index) in ctas" :key="index" :is="resolveComponent(cta.type)" v-bind="cta.props"
+    <component v-for="(cta, index) in ctas" :key="index" :is="resolveComponent(cta.type)" :lesson-data="lessonData" v-bind="cta.props"
         :inDropdown="inDropdown" />
 </template>
 
@@ -44,6 +44,10 @@ const props = defineProps({
     inDropdown: {
         type: Boolean,
         default: false,
+    },
+    lessonData: {
+        type: Object,
+        default: () => {},
     },
 });
 </script>

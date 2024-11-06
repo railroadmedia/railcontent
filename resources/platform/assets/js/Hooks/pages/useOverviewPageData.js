@@ -1,7 +1,7 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
 import axios from 'axios';
-import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
+import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation, fetchUserChallengeProgress } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -20,12 +20,13 @@ export async function useOverviewPageData(contentType, parentType) {
 
     try {
         if (parentType === 'challenges'){
-            const result = await axios(`/challenges/user_data/${contentId}`);
+            const result = await fetchUserChallengeProgress(contentId);
             if(result){
                 data.value = {
-                    children: result.data.lessons,
-                    header: buildHeader('challenges', result.data.lesson, progressPercent),
-                    is_unlocked: result.data.user_data.is_unlocked
+                    children: result.lessons,
+                    header: buildHeader('challenges', result.lesson, progressPercent),
+                    is_unlocked: result.user_data.is_unlocked,
+                    lesson: result.lesson,
                 };
             }
         } else {
