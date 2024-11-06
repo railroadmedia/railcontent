@@ -383,12 +383,12 @@ return [
                     'drumeo',
                 ],
             ],
-            'Drumeo Drumset Giveaway' => [
+            'Drumeo Drumset Giveaway nov24' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string'
                 ],
                 'events' => [
-                    'drumeo_prospect_drumset-giveaway-may-2024',
+                    'drumeo_prospect_drumset-giveaway-nov-2024',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',

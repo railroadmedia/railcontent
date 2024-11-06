@@ -4,8 +4,8 @@
     <title>Win a Yamaha Stage Custom Drum Set | Drumeo</title>
     <meta property="og:title" content="Win a Yamaha Stage Custom Drum Set | Drumeo">
 
-    <meta name="description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
-    <meta property="og:description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
+    <meta name="description" content="Want a free drum set? Simply enter your email address to secure your chance to win.">
+    <meta property="og:description" content="Want a free drum set? Simply enter your email address to secure your chance to win.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -74,21 +74,21 @@
                         <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary<br class="lg:hidden">
                         <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">
                         <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Worldwide entry</p>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
-                        <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
+{{--                    @else--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
+                        @include("drumeo.lead-gen.partials.sign-up-form", [
+                            "recaptchaKey" => $recaptchaKey,
+                            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway nov24 - Web Form",
+                            "formName" => 'Drumeo Drumset Giveaway',
+                            "nameInput" => true,
+                            "stacked" => true,
+                            "buttonText" => "I WANT TO WIN!",
+                        ])
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif
-{{--                    @include("drumeo.lead-gen.partials.sign-up-form", [--}}
-{{--                        "recaptchaKey" => $recaptchaKey,--}}
-{{--                        "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",--}}
-{{--                        "formName" => 'Drumeo Drumset Giveaway',--}}
-{{--                        "nameInput" => true,--}}
-{{--                        "stacked" => true,--}}
-{{--                        "buttonText" => "I WANT TO WIN!",--}}
-{{--                    ])--}}
                 </div>
             </div>
         </div>
@@ -288,38 +288,38 @@
         </div>
     </section>
 
-    <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">
-        <div class="container mx-auto max-w-3xl">
-            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to<br class="inline sm:hidden"> start a trial?</strong></h3>
-            <p>We’re on a mission to help people start and STAY playing the drums.
-                <br><br>
-                And we want the winner of this drum set to be someone who’s serious about using the kit. By starting a trial, you’re showing us that you’re actively looking to learn and improve on the drums.
-                <br><br>
-                On top of that, we want to show you the awesome lessons we have inside Drumeo. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.
-                <br><br>
-                And hey, if you like it, we hope you’ll stick around.
-            </p>
-        </div>
-    </section>
+{{--    <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">--}}
+{{--        <div class="container mx-auto max-w-3xl">--}}
+{{--            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to<br class="inline sm:hidden"> start a trial?</strong></h3>--}}
+{{--            <p>We’re on a mission to help people start and STAY playing the drums.--}}
+{{--                <br><br>--}}
+{{--                And we want the winner of this drum set to be someone who’s serious about using the kit. By starting a trial, you’re showing us that you’re actively looking to learn and improve on the drums.--}}
+{{--                <br><br>--}}
+{{--                On top of that, we want to show you the awesome lessons we have inside Drumeo. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.--}}
+{{--                <br><br>--}}
+{{--                And hey, if you like it, we hope you’ll stick around.--}}
+{{--            </p>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/order-bg.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
-            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
-                <span class="join sold-out smaller w-full">Opens Nov 12th</span>
-            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
-                <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+{{--            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
+{{--            @elseif--}}
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
+                    "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway nov24 - Web Form2",
+                    "formName" => 'Drumeo Drumset Giveaway',
+                    "nameInput" => true,
+                    "stacked" => true,
+                    "buttonText" => "I WANT TO WIN!",
+                ])
             @else
                 <span class="join sold-out smaller w-full">this offer has now ended</span>
             @endif
-{{--            @include("drumeo.lead-gen.partials.sign-up-form", [--}}
-{{--                "recaptchaKey" => $recaptchaKey,--}}
-{{--                "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",--}}
-{{--                "formName" => 'Drumeo Drumset Giveaway',--}}
-{{--                "nameInput" => true,--}}
-{{--                "stacked" => true,--}}
-{{--                "buttonText" => "I WANT TO WIN!",--}}
-{{--            ])--}}
         </div>
     </section>
 

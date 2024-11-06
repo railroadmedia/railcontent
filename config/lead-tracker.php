@@ -445,7 +445,7 @@ return [
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
-            'form_name' => 'Drumeo Drumset Giveaway',
+            'form_name' => 'Drumeo Drumset Giveaway nov24',
             'brand' => 'drumeo',
 
             'input_data_map' => [
