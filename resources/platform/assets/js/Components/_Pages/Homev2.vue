@@ -52,12 +52,12 @@
             :my-list-url="`/${brand}/playlists`" />
 
         <!-- Live section -->
-        <CoachEvent v-if="coachEvent  && brand !== 'drumeo'" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
+        <CoachEvent v-if="coachEvent  && !isV2User" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
             :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
             :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
 
         <!-- Upcoming section -->
-        <MiniCatalogueSection v-if="!isV2User && hasUpcomingEvents && brand !== 'drumeo'" title="Upcoming Events" seeAllAriaLabel="See All Upcoming Events"
+        <MiniCatalogueSection v-if="!isV2User && hasUpcomingEvents" title="Upcoming Events" seeAllAriaLabel="See All Upcoming Events"
             :seeAllUrl="upcomingUrl" :force-no-links="true" :preLoadedContent="upcomingEvents.data"
             trackingSection="upcoming-events" />
 
