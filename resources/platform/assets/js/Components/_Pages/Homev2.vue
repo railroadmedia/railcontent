@@ -44,7 +44,7 @@
             :seeAllUrl="workoutsContentUrl" :preLoadedContent="workoutsContent.data" trackingSection="workouts" />
 
         <!-- New Releases section -->
-        <MiniCatalogueSection v-if="(!isV2User && newContent.data) || (isV2User && userHas30Days)" title="New Releases" seeAllAriaLabel="See All New Releases"
+        <MiniCatalogueSection v-if="(!isV2User && newContent.data?.length) || (isV2User && userHas30Days)" title="New Releases" seeAllAriaLabel="See All New Releases"
             :seeAllUrl="newContentUrl" :preLoadedContent="newContent.data" trackingSection="new" />
 
         <!-- Playlist section add arrows -->
@@ -78,8 +78,17 @@
             class="tw-mb-8" />
 
         <!-- Dashboard section -->
-        <DashboardSection :accountUrl="accountUrl" :xp-earned="userMetrics.xp.value" :minutes-practiced="userMetrics.practiced.value"
+        <DashboardSection v-if="isV2User" :accountUrl="accountUrl" :xp-earned="userMetrics.xp.value" :minutes-practiced="userMetrics.practiced.value"
             :user-level-title="userMetrics.xp.label" />
+
+        <!-- Stats section -->
+        <StatsSection
+            v-if="!isPackOnlyBoolean && !isV2User"
+            :accountUrl="accountUrl"
+            :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
+            :nextLearningPathLevel="nextLearningPathLevel"
+            :userMetrics="userMetrics"
+        />
     </div>
 </template>
 
@@ -103,6 +112,7 @@ import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
 import WelcomeMessage from '@collections/WelcomeMessage/WelcomeMessage.vue';
 import ExploreSection from '../_Collections/ExploreSection/ExploreSection.vue';
 import DashboardSection from '../_Collections/DashboardCard/DashboardSection.vue';
+import StatsSection from '@collections/StatsSection/StatsSection.vue';
 
 const props = defineProps({
     accountUrl: { type: String, default: '' },
