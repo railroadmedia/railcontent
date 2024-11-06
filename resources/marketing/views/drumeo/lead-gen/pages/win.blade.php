@@ -80,8 +80,8 @@
                     @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                         @include("drumeo.lead-gen.partials.sign-up-form", [
                             "recaptchaKey" => $recaptchaKey,
-                            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway nov24 - Web Form",
-                            "formName" => 'Drumeo Drumset Giveaway',
+                            "formId" => "Drumeo - Engagement - Trigger - Yamaha Giveaway nov24 - Web Form",
+                            "formName" => 'Yamaha Giveaway nov24',
                             "nameInput" => true,
                             "stacked" => true,
                             "buttonText" => "I WANT TO WIN!",
@@ -311,8 +311,8 @@
             @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway nov24 - Web Form2",
-                    "formName" => 'Drumeo Drumset Giveaway',
+                    "formId" => "Drumeo - Engagement - Trigger - Yamaha Giveaway nov24 - Web Form2",
+                    "formName" => 'Yamaha Giveaway nov24',
                     "nameInput" => true,
                     "stacked" => true,
                     "buttonText" => "I WANT TO WIN!",
