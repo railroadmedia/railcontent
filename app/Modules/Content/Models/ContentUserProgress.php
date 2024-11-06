@@ -15,11 +15,11 @@ use Modules\UserManagementSystem\Models\User;
 /**
  * App\Modules\Content\Models\Content
  *
- * @property integer $id
- * @property integer $content_id
- * @property integer $user_id
+ * @property int $id
+ * @property int $content_id
+ * @property int $user_id
  * @property string $state
- * @property integer $progress_percent
+ * @property int $progress_percent
  * @property string $higher_key_progress
  * @property Carbon $updated_on
  * @property Carbon $started_on
@@ -135,6 +135,6 @@ class ContentUserProgress extends Model
 
     public static function getAllProgressDataByUser(int $userId): \Illuminate\Support\Collection
     {
-        return self::query()->where('user_id', $userId)->get();
+        return self::query()->select(['content_id', 'state', 'progress_percent'])->where('user_id', $userId)->get();
     }
 }

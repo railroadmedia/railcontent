@@ -163,37 +163,6 @@ const infoText = {
     },
 }
 
-const tabData = [
-    {
-        value : "All",
-        groupByView: false,
-        key: ""
-    },
-    {
-        value : "5 Minutes",
-        groupByView: false,
-        key: ["length_in_seconds < 450"]
-    },
-    {
-        value : "10 Minutes",
-        groupByView: false,
-        key: [
-            "length_in_seconds > 451",
-            "length_in_seconds < 751"
-        ]
-    },
-    {
-        value : "15+ Minutes",
-        groupByView: false,
-        key: ["length_in_seconds > 750"]
-    },
-    {
-        value: "Instructors",
-        groupByView: true,
-        key: ["instructor"]
-    }
-]
-
 onBeforeMount(async () => {
     console.log(props.collectionType)
 
@@ -208,7 +177,6 @@ onBeforeMount(async () => {
 
         // Set default collection store values
         collectionStore.setDefaults({
-            tabOptions: tabData,
             filter: {
                 sort: '-published_on'
             },

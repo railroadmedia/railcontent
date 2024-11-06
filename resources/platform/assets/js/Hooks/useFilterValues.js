@@ -40,5 +40,29 @@ export function useFilterValues() {
         return filters;
     }
 
-    return { getFilterValues };
+    //Format Sanity Tab Data to match existig implementation
+    const formatTabData = (tabs, name) => {
+        //Default
+        if(tabs.length === 0) {
+            return [
+                {
+                    value : `All ${name}`,
+                    groupByView: false,
+                    key: ""
+                },
+            ]
+        }
+        
+        let formattedTabs = tabs.map( (tab) => {
+            return {
+                value: tab.name,
+                groupByView: tab.is_group_by || false,
+                key: tab.value,
+                required: tab.is_required_field || false,
+            }
+        })
+        return formattedTabs;
+    }
+
+    return { getFilterValues, formatTabData };
 }

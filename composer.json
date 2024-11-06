@@ -47,7 +47,6 @@
         "railroad/railcontent": "v3.0.*",
         "railroad/railforums": "3.0.*",
         "railroad/railnotifications": "4.0.*",
-        "railroad/railtracker": "5.0.*",
         "railroad/referral": "4.0.*",
         "railroad/usora": "4.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",
@@ -99,7 +98,8 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/EventTracking/Avo/Avo.php"
+            "app/Modules/EventTracking/Avo/Avo.php",
+            "app/Modules/RailTracker/Helpers/railtracker_helpers.php"
         ]
     },
     "autoload-dev": {
@@ -124,7 +124,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "@php -d memory_limit=-1 artisan test --stop-on-failure --stop-on-error",
-        "test-p": "@php -d memory_limit=-1 artisan test --parallel --recreate-databases",
+        "test-p": "@php -d memory_limit=-1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error",
         "test-cov-p": [
             "@putenv XDEBUG_MODE=coverage",
             "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --recreate-databases --processes=4 --stop-on-failure --stop-on-error --coverage"

@@ -16,6 +16,8 @@
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
             :lesson-data="data?.lesson"
+            :dark-mode-logo="headerData?.darkModeLogo"
+            :light-mode-logo="headerData?.lightModeLogo"
         />
 
         <template v-if="!isLoading">

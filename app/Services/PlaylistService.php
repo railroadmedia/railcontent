@@ -7,7 +7,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use Railroad\Railtracker\Services\ContentLastEngagedService;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 
 class PlaylistService
 {

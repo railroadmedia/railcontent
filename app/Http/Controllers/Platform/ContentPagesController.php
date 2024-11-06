@@ -769,88 +769,9 @@ class ContentPagesController extends BaseController
 
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
-        if (($contentToRenderAsLesson['type'] == 'learning-path-lesson')) {
-            ContentRepository::$availableContentStatues = $originalContentStatuses;
-            $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
-            $learningPath = \Arr::last($contentToRenderAsLesson->getParentContentData());
-            $nextPrevLessons = $this->methodService->getNextAndPreviousLessons(
-                $contentToRenderAsLesson['id'],
-                $learningPath->id
-            );
-            $nextChild = $nextPrevLessons->getNextLesson();
-            $previousChild = $nextPrevLessons->getPreviousLesson();
-        } elseif (!empty($contentToRenderAsLessonParent)) {
-            $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
-
-            $lessonHierarchyContent =
-                $parentChildren->where('id', $contentToRenderAsLesson['id'])
-                    ->first();
-
-            $nextChild = $parentChildren->getMatchOffset($lessonHierarchyContent, 1);
-            $previousChild = $parentChildren->getMatchOffset($lessonHierarchyContent, -1);
-        } else {
-            $sort = $contentToRenderAsLesson['published_on'] ? 'published_on' : 'sort';
-
-            if ($contentToRenderAsLesson['type'] == 'rhythmic-adventures-of-captain-carson' ||
-                $contentToRenderAsLesson['type'] == 'diy-drum-experiments' ||
-                $contentToRenderAsLesson['type'] == 'in-rhythm') {
-                $sort = 'sort';
-            }
-
-            $parentChildren =
-                $this->contentService->getFiltered(
-                    $request->get('page', 1),
-                    $request->get('limit', 10),
-                    '-'.$sort,
-                    [$contentToRenderAsLesson['type']]
-                )['results'];
-
-            // Alter 'availableContentStatues' so next/prev buttons don't link to lessons with different status.
-            // (eg: don't link to archived lessons from non-archived lessons, and vice-versa)
-            if ($contentToRenderAsLesson->fetch('status') === ContentService::STATUS_PUBLISHED) {
-                ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
-            }
-            if ($contentToRenderAsLesson->fetch('status') === ContentService::STATUS_ARCHIVED) {
-                ContentRepository::$availableContentStatues = [ContentService::STATUS_ARCHIVED];
-            }
-
-            $neighbourSiblings = $this->contentService->getTypeNeighbouringSiblings(
-                $contentToRenderAsLesson['type'],
-                $sort,
-                $sort == 'sort' ? $contentToRenderAsLesson['sort'] : $contentToRenderAsLesson['published_on'],
-                1,
-                $sort,
-                'desc',
-                $contentToRenderAsLesson['id']
-            );
-
-            // Revert to previous state
-            ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-
-            $nextChild = $neighbourSiblings['before']->first();
-            $previousChild = $neighbourSiblings['after']->first();
-        }
-
         $contentToRenderAsLesson =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$contentToRenderAsLesson]))
                 ->first();
-
-        $parentChildrenTrimmed = [];
-        $matched = false;
-
-        foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ($parentChild['status'] == ContentService::STATUS_UNLISTED) {
-                unset($parentChildren[$parentChildIndex]);
-                continue;
-            }
-            $matched = $parentChild['id'] == $contentToRenderAsLesson['id'];
-            if (!$matched && (count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            } elseif ($matched && count($parentChildren) < 10 && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            }
-        }
 
         if (empty($contentToRenderAsLesson['assignments'] ?? [])) {
             LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
@@ -873,27 +794,6 @@ class ContentPagesController extends BaseController
             !empty($contentToRenderAsLesson->fetch('*fields.instructor')) ||
             !empty($contentToRenderAsLesson->fetch('data.description')) ||
             !empty($contentToRenderAsLesson['chapters']);
-
-        $thisLessonJson = clone $contentToRenderAsLesson;
-        $thisLessonJson['completed'] = true;
-        $thisLessonJson =
-            (new ContentFilterResultsEntity(['results' => [$thisLessonJson], 'total_results' => 1]))->toResponseRawJson(
-            );
-
-        // temp, add instructor from the parent to all children if not set
-        foreach ($parentChildrenTrimmed as $parentChildIndex => $parentChild) {
-            if (empty($parentChild->fetch('fields.instructor.1')) && !empty($parent)) {
-                $parentChildrenTrimmed[$parentChildIndex]['fields'][] = [
-                    'key' => 'instructor',
-                    'value' => $parent->fetch('fields.instructor.1'),
-                    'position' => 1,
-                    'type' => 'content',
-                    'content_id' => $parentChild['id'],
-                ];
-            }
-        }
-
-        $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildrenTrimmed]))->toResponseRawJson();
 
         $rangesVideoIds = [];
         if ($primaryPage == 'songs' && $brand == 'singeo') {
@@ -923,17 +823,11 @@ class ContentPagesController extends BaseController
                 "lessonType" => $contentToRenderAsLesson['type'],
                 "lessonContent" => $contentToRenderAsLesson,
                 "parent" => $contentToRenderAsLessonParent,
-                "parentChildren" => $parentChildren,
                 "hasSiblings" => !empty($parentChildren),
-                "nextChild" => $nextChild,
-                "previousChild" => $previousChild,
                 "isLive" => false,
-                "relatedLessons" => $relatedLessons,
                 "themeColor" => $themeColor,
                 "isHiddenContentType" => $isHiddenContentType,
                 "hasLessonInfo" => $hasLessonInfo,
-                "thisLessonJson" => $thisLessonJson,
-                "nextLessonJson" => content_to_json($nextChild),
                 "showEmail" => false,
                 "firstContent" => $firstContent,
                 "rangesVideoIds" => $rangesVideoIds,
@@ -947,17 +841,11 @@ class ContentPagesController extends BaseController
             "lessonType" => $contentToRenderAsLesson['type'],
             "lessonContent" => $contentToRenderAsLesson,
             "parent" => $contentToRenderAsLessonParent,
-            "parentChildren" => $parentChildren,
             "hasSiblings" => !empty($parentChildren),
-            "nextChild" => $nextChild,
-            "previousChild" => $previousChild,
             "isLive" => false,
-            "relatedLessons" => $relatedLessons,
             "themeColor" => $themeColor,
             "isHiddenContentType" => $isHiddenContentType,
             "hasLessonInfo" => $hasLessonInfo,
-            "thisLessonJson" => $thisLessonJson,
-            "nextLessonJson" => content_to_json($nextChild),
             "showEmail" => false,
             "firstContent" => $firstContent,
             "rangesVideoIds" => $rangesVideoIds,
