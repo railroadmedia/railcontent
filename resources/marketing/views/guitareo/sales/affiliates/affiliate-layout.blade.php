@@ -21,3 +21,8 @@
         'theme' => 'guitareo',
     ])
 @endsection
+
+@section('scripts')
+    @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.drumeo.production.providers.everflow.brand_id')])
+@endsection
