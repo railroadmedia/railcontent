@@ -35,7 +35,7 @@ class DataVersionGetMiddleware
         $currentVersion = intval($request->header('Data-Version')) ?? -1;
         $version = $this->dataVersionService->getUserDataVersion($dataVersionKey, user()->id);
         if ($version == $currentVersion) {
-            return ['version' => 'No Change'];
+            return response()->json(['version' => 'No Change']);
         }
 
         $response = $next($request);
