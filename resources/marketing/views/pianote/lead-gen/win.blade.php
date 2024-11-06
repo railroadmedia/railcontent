@@ -134,7 +134,7 @@
                         Just enter your name and email address by <strong>November 24</strong> and you’ll be in the running to win.
                     </p>
                     <p class="bg-musora py-4 px-2 rounded-xl text-center">Winners will be announced during our <br class="block sm:hidden"/>
-                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter" target="_blank"><strong>YouTube Livestream</strong></a><br class="hidden sm:block"/>on November 25th!
+                        <a href="https://www.youtube.com/live/JWxgP5k8MtA" class="underline cursor-poimter" target="_blank"><strong>YouTube Livestream</strong></a><br class="hidden lg:block"/> on November 25th!
                     </p>
                 </div>
                 <div class="md:w-5/12 justify-center pl-8 md:pl-16">
