@@ -90,5 +90,5 @@
 
 @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
 @if(empty($noEverflow))
-    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.pianote.production.providers.everflow.brand_id')])
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.guitareo.production.providers.everflow.brand_id')])
 @endif
