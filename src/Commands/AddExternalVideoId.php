@@ -53,27 +53,26 @@ class AddExternalVideoId extends Command
         $this->info("Started adding");
 
         $chunkSize = 1000;
+        $externalIds = $this->getExternalVideoIds();
 
         $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContent)
-            ->select(ConfigService::$tableContent.'.id',ConfigService::$tableContent.'.type', 'video.vimeo_video_id', 'video.youtube_video_id')
+            ->select(ConfigService::$tableContent.'.id',ConfigService::$tableContent.'.type', 'video.vimeo_video_id', 'video.youtube_video_id', 'video.id as videoId')
             ->join(ConfigService::$tableContent.' as video', ConfigService::$tableContent.'.video','=','video.id')
             ->whereNotNull(ConfigService::$tableContent.'.video')
             ->orderBy(ConfigService::$tableContent.'.id', 'desc')
             ->chunk(
                 $chunkSize,
-                function (Collection $rows) {
-
+                function (Collection $rows) use ($externalIds) {
                     foreach ($rows as $item) {
-                        $externalVideoId= $item->youtube_video_id ?? $item->vimeo_video_id;
+                        $externalVideoId = $item->youtube_video_id ?? $item->vimeo_video_id ?? $externalIds[$item->videoId] ?? null;
                         $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                        ->table(ConfigService::$tableContent)
+                            ->table(ConfigService::$tableContent)
                             ->where('id',$item->id)
                             ->update([
                                          'external_video_id' => $externalVideoId
                                      ]);
                         $this->info('Updated lesson with id:'.$item->id. '    with external id:'.$externalVideoId);
-
                     }
                 }
             );
@@ -83,5 +82,24 @@ class AddExternalVideoId extends Command
         $format = "Finished in total %s seconds\n";
 
         $this->info(sprintf($format, $finish));
+    }
+
+    private function getExternalVideoIds(): array
+    {
+        $externalIds = [];
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->table(ConfigService::$tableContent)
+            ->select('video.content_id', 'video.value')
+            ->join(ConfigService::$tableContentFields . ' as video', ConfigService::$tableContent . '.video', '=', 'video.content_id')
+            ->whereIn('video.key', ['vimeo_video_id', 'youtube_video_id'])
+            ->whereNotNull(ConfigService::$tableContent . '.video')
+            ->orderBy(ConfigService::$tableContent . '.id', 'desc')
+            ->chunk(1000, function (Collection $rows) use (&$externalIds) {
+                foreach ($rows as $item) {
+                    $externalIds[$item->content_id] = $item->value;
+                }
+            });
+
+        return $externalIds;
     }
 }
