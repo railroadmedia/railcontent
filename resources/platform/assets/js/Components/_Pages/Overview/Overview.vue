@@ -15,6 +15,8 @@
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
+            :dark-mode-logo="headerData?.darkModeLogo"
+            :light-mode-logo="headerData?.lightModeLogo"
         />
 
         <template v-if="!isLoading">
