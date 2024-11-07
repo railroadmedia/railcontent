@@ -15,7 +15,7 @@ class ContentLikesController
         return response()->json($data);
     }
 
-    public function like(int $contentId)
+    public function like(int $contentId): void
     {
         $content = Content::find($contentId);
         if ($content) {
@@ -26,7 +26,7 @@ class ContentLikesController
         }
     }
 
-    public function unLike(int $contentId)
+    public function unLike(int $contentId): void
     {
         $wasDeleted = ContentLike::where(['content_id' => $contentId, 'user_id' => user()->id])->delete();
         $content = Content::find($contentId);
