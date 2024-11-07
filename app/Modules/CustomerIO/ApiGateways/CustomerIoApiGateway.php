@@ -14,30 +14,21 @@ class CustomerIoApiGateway
      * Attributes are set and unset using a value or empty value. If you pass an empty array no attributes will be added
      * or removed. If you want to unset an existing attribute it must be passed with a null value.
      *
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $emailAddress
-     * @param string|null $customerId
-     * @param array|null $attributes
-     * @param int|null $createdAtTimestamp
      * @throws Exception
      */
     public function addOrUpdateCustomer(
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
-        string $emailAddress,
-        ?string $customerId,
+        string $email,
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
-        $url = 'https://track.customer.io/api/v1/customers/' . $emailAddress;
+        $url = 'https://track.customer.io/api/v1/customers/' . $email;
         $method = 'PUT';
 
         $dataArray = $attributes;
 
-        if (!empty($customerId)) {
-            $dataArray['id'] = $customerId;
-        }
+        $dataArray['email'] = $email;
 
         if (!empty($createdAtTimestamp)) {
             $dataArray['created_at'] = $createdAtTimestamp;
@@ -54,9 +45,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoAppApiKey
-     * @param string $customerEmail
-     * @return mixed
      * @throws Exception
      */
     public function getCustomer(
@@ -79,14 +67,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $customerEmail
-     * @param string $eventName
-     * @param array|null $eventData // key value pairs
-     * @param string|null $eventType
-     * @param int|null $createdAtTimestamp
-     * @return bool
      * @throws Exception
      */
     public function createEvent(
@@ -132,13 +112,6 @@ class CustomerIoApiGateway
     /**
      * https://customer.io/docs/api/#operation/getPersonActivities
      *
-     * @param string $customerIoAppApiKey
-     * @param string $customerEmail
-     * @param string|null $type
-     * @param string|null $name
-     * @param int|null $limit
-     * @param string|null $startToken
-     * @return mixed
      * @throws Exception
      */
     public function getCustomerActivities(
@@ -172,11 +145,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoAppApiKey ,
-     * @param string $customerIoTransactionalMessageId
-     * @param string $customerEmail
-     * @param array|null $messageDataArray
-     * @return bool
      * @throws Exception
      */
     public function sendTransactionalEmail(
@@ -212,11 +180,6 @@ class CustomerIoApiGateway
      * Customers can have more than one device.
      * This method adds iOS and Android devices, or updates devices for, a customer profile.
      *
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $customerEmail
-     * @param array $deviceData
-     * @param int|null $createdAtTimestamp
      * @throws Exception
      */
     public function addOrUpdateCustomerDevice(
@@ -251,11 +214,6 @@ class CustomerIoApiGateway
     /**
      * https://customer.io/docs/merge-people/
      *
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $primaryCustomerEmail
-     * @param string $secondaryCustomerEmail
-     * @return bool
      * @throws Exception
      */
     public function mergeCustomers(
@@ -285,10 +243,6 @@ class CustomerIoApiGateway
 
 
     /**
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $customerEmail
-     * @return void
      * @throws Exception
      */
     public function deleteCustomer(
@@ -313,12 +267,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoAppApiKey
-     * @param string|null $type
-     * @param string|null $name
-     * @param int|null $limit
-     * @param string|null $startToken
-     * @return array
      * @throws Exception
      */
     public function getActivities(
@@ -354,13 +302,13 @@ class CustomerIoApiGateway
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
         int $segmentId,
-        array $customerIds,
+        array $customerEmails,
     ): void {
-        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id';
+        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=email';
         $method = 'POST';
 
         $dataArray = [
-            'ids' => array_values($customerIds),
+            'ids' => array_values($customerEmails),
         ];
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
@@ -375,12 +323,6 @@ class CustomerIoApiGateway
     }
 
     /**
-     * @param string $customerIoSiteId
-     * @param string $customerIoTrackApiKey
-     * @param string $cioId
-     * @param array|null $attributes
-     * @param int|null $createdAtTimestamp
-     * @return void
      * @throws Exception
      */
     public function updateCustomerByCioId(
@@ -409,6 +351,9 @@ class CustomerIoApiGateway
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function unsuppressEmail(
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
@@ -466,7 +411,7 @@ class CustomerIoApiGateway
             };
         } catch (Exception $e) {
             Log::error('CustomerIoApiGateway::executeRequest: exception while reaching: ' . $url . ' - ' . $e->getMessage());
-            Log::debug(print_r($e->getTrace(), true));
+            // Log::debug(print_r($e->getTrace(), true));
             throw $e;
         }
 
@@ -483,13 +428,6 @@ class CustomerIoApiGateway
         return $response ?? [];
     }
 
-    /**
-     * @param string|null $type
-     * @param string|null $name
-     * @param int|null $limit
-     * @param string|null $startToken
-     * @return array
-     */
     public function createActivitiesQueryParams(?string $type, ?string $name, ?int $limit, ?string $startToken): array
     {
         $params = [];

@@ -1,55 +1,56 @@
 <template>
     <div>
-        <CollectionFilterWrapper
-            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
-            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
-        />
+        <CollectionFilterWrapper :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"
+            :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon"
+            :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters"
+            :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm"
+            :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange"
+            @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange"
+            @on-progress-change="handleProgressChange" />
 
         <transition appear name="fade">
             <!-- Delete contentType prop after May 6th -->
-            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters"
+                :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage"
+                :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore"
+                :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
-                <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
-                <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
-                <SongCardContainer
-                    v-else-if="isSong"
-                    :pre-loaded-content="data"
-                    :content-type-override="collectionType"
-                    :subscription-calendar-id="subscriptionCalendarId"
-                />
+                <CoachCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching"
+                    :search-term="getSearchTerm" />
+                <SongCardContainer v-else-if="isSong" :pre-loaded-content="data" :content-type-override="collectionType"
+                    :subscription-calendar-id="subscriptionCalendarId" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
-                                   @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress" />
-                <CatalogueCardContainer
-                    v-else
-                    :pre-loaded-content="data"
-                    :content-type-override="collectionType"
-                    :will-scroll="false"
-                    :subscription-calendar-id="subscriptionCalendarId"
-                    :is-admin="isAdmin"
-                />
+                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
+                    :show-reset-progress="showResetProgress" />
+                <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="collectionType"
+                    :will-scroll="false" :subscription-calendar-id="subscriptionCalendarId" :is-admin="isAdmin" />
             </CollectionResults>
         </transition>
     </div>
 </template>
 
 <script setup>
-import {onMounted, computed, onBeforeMount} from "vue";
+import { onMounted, computed, onBeforeMount } from "vue";
 import { useCollectionStore } from "@stores/collection";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import CollectionFilterWrapper from '@collections/Filter/CollectionFilterWrapper.vue';
 import CollectionResults from '../Catalogue/CollectionResults.vue';
 import UserCatalogueEvents from "@vuesora/mixins/UserCatalogueEvents";
+import userJourney from "@services/userJourney";
 
 //Views
 import ListCatalogue from "@collections/ListCatalogue/ListCatalogue";
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
 import SongCardContainer from "@collections/Catalogue/SongCardContainer";
 import RoutinesCatalogue from "@collections/Catalogue/RoutineCatalogue";
-import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue";
+import CoachCatalogue from "@collections/Catalogue/CoachCatalogue";
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";
@@ -104,7 +105,7 @@ const props = defineProps({
     },
     limit: {
         type: [Number, Boolean],
-        default: () => 10,
+        default: () => 20,
     },
     preLoadedContent: {
         type: Object,
@@ -193,7 +194,7 @@ const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
 const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
-const { brand } = storeToRefs(userStore);
+const { brand, journeySection } = storeToRefs(userStore);
 
 const request_params = computed(() => {
     return {
@@ -214,12 +215,12 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    } else if(props.multipleTypes){
+    } else if (props.multipleTypes) {
         types = props.includedTypes;
     } else {
         types = [...types, ...props.includedTypes];
 
-        if(props.collectionType && !types.includes(props.collectionType)){
+        if (props.collectionType && !types.includes(props.collectionType)) {
             types.push(props.collectionType);
         }
 
@@ -350,7 +351,7 @@ const tabOptionData = computed(() => {
 })
 
 const getTabData = computed(() => {
-    return  {
+    return {
         currentPage: 1,
         totalPages: Object.keys(props.preLoadedContent).length > 0 ? Math.ceil(props.preLoadedContent?.meta?.totalResults / props.limit) : 0,
         totalResults: Object.keys(props.preLoadedContent).length > 0 ? props.preLoadedContent?.meta?.totalResults : 0,
@@ -443,5 +444,32 @@ onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
+
+
+    if (isRecommendation.value && showGroupBy.value) {
+        data.value.forEach(item => {
+            const trackingPayload = {
+                brand: brand.value,
+                navigation_section: 'recommended',
+                recommended_content: item.lessons.map((item, index) => ({
+                    id: item.id,
+                    position: index,
+                })),
+            }
+
+            userJourney.trackRecommendedContentServed(trackingPayload);
+        });
+    } else if (isRecommendation.value) {
+            const trackingPayload = {
+                brand: brand.value,
+                navigation_section: 'recommended',
+                recommended_content: data.value.map((item, index) => ({
+                    id: item.id,
+                    position: index,
+                })),
+            }
+
+            userJourney.trackRecommendedContentServed(trackingPayload);
+    }
 })
 </script>

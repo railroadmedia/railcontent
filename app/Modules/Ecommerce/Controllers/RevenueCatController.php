@@ -130,6 +130,11 @@ class RevenueCatController extends Controller
                             : ShopifyPaymentSourceEnum::Google,
                         null //defaults to USD
                     );
+
+                    $user->primary_brand = in_array($musoraProduct->brand, config('event-data-synchronizer.customer_io_allowed_primary_brands'))
+                        ? $musoraProduct->brand
+                        : null;
+
                     $this->setUserSubscription($user, $type);
                     $this->customerIoService->updateCustomerIoAttributesFromRevenueCat(
                         $user,
@@ -989,21 +994,23 @@ class RevenueCatController extends Controller
                     null,
                     $app
                 );
-                $apiResponse = json_decode($revenuecatPurchase);
 
-                Log::debug(
-                    'Should revoke ' .
+                $apiResponse = json_decode($revenuecatPurchase);
+                if($apiResponse) {
+                    Log::debug(
+                        'Should revoke ' .
                         $subscriptionNotification->subscriptionId .
                         ' for ' .
                         $apiResponse->subscriber->original_app_user_id .
                         ' on Revenuecat(user access revoked from Google Play Console)'
-                );
+                    );
 
-                $this->revenueCatService->revoke(
-                    $apiResponse->subscriber->original_app_user_id,
-                    $subscriptionNotification->subscriptionId,
-                    'android'
-                );
+                    $this->revenueCatService->revoke(
+                        $apiResponse->subscriber->original_app_user_id,
+                        $subscriptionNotification->subscriptionId,
+                        'android'
+                    );
+                }
             }
         }
 

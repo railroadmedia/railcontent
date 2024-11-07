@@ -737,7 +737,7 @@
 
             <div class="relative">
                 <p
-                    class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower text-black">
+                    class="inline md:hidden leading-none text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower pt-2 text-black">
                     <strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong>
                 </p>
                 <table id="comparison-table"
@@ -1119,9 +1119,9 @@
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1"
                         @else
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&promo-code=read-music-shipping&locked=true"
+                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         @endif
                         >
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">

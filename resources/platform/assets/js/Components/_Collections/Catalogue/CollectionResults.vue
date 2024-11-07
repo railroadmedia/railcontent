@@ -1,6 +1,6 @@
 <template>
     <div class="tw-mb-[30px]">
-        <div v-if="showEmptyState">
+        <div v-if="showEmptyState" class="dark:tw-text-white">
             We couldn't find what you're looking for. Please try again!
         </div>
         <div v-else-if="singeoPackState" class="dark:tw-text-white">

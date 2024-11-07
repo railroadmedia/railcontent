@@ -12,13 +12,16 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover  -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance"
                                     :brand="brand" :theme-color="brand" :video-length="videoProps.videoLength"
-                                    :progress-state="videoProps.progressState" :content-id="videoProps.id"
+                                    :progress-state="videoProps.progressState" :content-id="videoProps.contentId"
                                     :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
@@ -31,7 +34,8 @@
                                     :brand="videoProps.brand" :theme-color="videoProps.brand"
                                     :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :content-id="videoProps.contentId"
+                                    :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                     :chapters="videoProps.chapters" :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
@@ -74,72 +78,49 @@
                         </template>
                     </div>
 
-                    <VideoResources
-                        :theme-color="videoResources.themeColor"
-                        :brand="videoResources.brand"
-                        :title="videoResources.title"
-                        :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl"
-                        :description="videoResources.description"
-                        :instructors="videoResources.instructors"
-                        :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked"
-                        :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded"
-                        :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId"
-                        :resources="videoResources.resources"
+                    <VideoResources :theme-color="videoResources.themeColor" :brand="videoResources.brand"
+                        :title="videoResources.title" :lesson-type="videoResources.lessonType"
+                        :thumbnail-url="videoResources.thumbnailUrl" :description="videoResources.description"
+                        :instructors="videoResources.instructors" :parent-title="videoResources.parentTitle"
+                        :is-liked="videoResources.isLiked" :like-count="videoResources.likeCount"
+                        :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
+                        :user-id="videoResources.userId" :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList"
                         :show-info-button="videoResources.showInfoButton"
                         :report-user-email="videoResources.reportUserEmail"
-                        :report-user-name="videoResources.reportUserName"
-                        :report-logo="videoResources.reportLogo"
-                        :difficulty="videoResources.difficulty"
-                        :no-access="noAccess"
-                    />
+                        :report-user-name="videoResources.reportUserName" :report-logo="videoResources.reportLogo"
+                        :difficulty="videoResources.difficulty" :no-access="noAccess" />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
 
-                    <VideoButtons :has-branded-color="true" :prev-lesson-url="videoButtons.prevLessonUrl"
+                    <VideoButtons :prev-lesson-url="videoButtons.prevLessonUrl"
                         :next-lesson-url="videoButtons.nextLessonUrl" :brand="brand"
                         :prev-label="videoButtons.prevLabel" :next-label="videoButtons.nextLabel"
                         :has-qa-video="videoButtons.hasQAVideo" />
 
                     <ContentProgress v-if="!noAccess" :brand="brand" :is-completed="lessonData.completed"
-                        :progress="lessonData.progress_percent" :xp-amount="progressXp" :is-started="lessonData.progress_percent > 0"
-                        :next-lesson-url="videoButtons.nextLessonUrl" :show-complete-button="true"
-                        :content-id="videoProps.contentId" />
+                        :progress="lessonData.progress_percent" :xp-amount="progressXp"
+                        :is-started="lessonData.progress_percent > 0" :next-lesson-url="videoButtons.nextLessonUrl"
+                        :show-complete-button="true" :content-id="videoProps.contentId" />
                 </div>
                 <!-- Related Lessons Toggle -->
-                <RelatedLessonsToggle
-                    v-if="hasRelatedLessons && relatedLessons.data.length > 0"
-                    :relatedLessons="relatedLessons"
-                    :isRelatedSectionOpen="isRelatedSectionOpen"
-                    v-model:isRelatedSectionOpen="isRelatedSectionOpen"
-                />
+                <RelatedLessonsToggle v-if="hasRelatedLessons && relatedLessons.data.length > 0"
+                    :relatedLessons="relatedLessons" :isRelatedSectionOpen="isRelatedSectionOpen"
+                    v-model:isRelatedSectionOpen="isRelatedSectionOpen" />
             </section>
 
             <!--Related Section -->
-            <RelatedLessons
-                v-if="hasRelatedLessons && relatedLessons.data.length > 0"
-                :isRelatedSectionOpen="isRelatedSectionOpen"
-                :relatedLessons="relatedLessons"
-                v-model:isRelatedSectionOpen="isRelatedSectionOpen"
-            />
+            <RelatedLessons v-if="hasRelatedLessons && relatedLessons.data.length > 0"
+                :isRelatedSectionOpen="isRelatedSectionOpen" :relatedLessons="relatedLessons"
+                v-model:isRelatedSectionOpen="isRelatedSectionOpen" />
 
             <!-- Lesson Content Wrapper -->
-            <section
-            	v-if="!noAccess"
-            	class="tw-col-span-3 xl:tw-row-span-2"
+            <section v-if="!noAccess" class="tw-col-span-3 xl:tw-row-span-2"
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
                 <!-- Chapters -->
-                <VideoChapters
-                    v-if="formattedChapters.length"
-                    :chapters="formattedChapters"
-                    @open-slice="openSlice"
-                    @seek-to-chapter="seekToChapter"
-                />
+                <VideoChapters v-if="formattedChapters.length" :hide-action-buttons="!soundsliceSlug"
+                    :chapters="formattedChapters" @open-slice="openSlice" @seek-to-chapter="seekToChapter" />
 
                 <!-- Assignments -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
@@ -147,16 +128,15 @@
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </button>
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
-                        <assignments-container :lesson-data="lessonData" :assignments="assignments" :brand="brand"
-                            :user-id="videoResources.userId">
-                        </assignments-container>
+                        <AssignmentsContainer :lesson-data="lessonData" :assignments="assignments" :brand="brand"
+                            :user-id="videoResources.userId" />
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
@@ -172,18 +152,21 @@
                 </div>
             </section>
         </div>
-        <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson" :next-lesson-json="nextLessonJson" />
+        <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson"
+            :next-lesson-json="nextLessonJson" />
 
         <!-- Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
-                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
-                            :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                <SoundSlice
+                    :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`"
+                    :user-id="videoProps.userId" :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3`" :soundslice-slug="soundsliceSlug"
+                    :contentId="videoProps.contentId" :start-time="chapterStartTime" :end-time="chapterEndTime"
+                    :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"
-                                            :disable-prev="true" @onClose="handleCloseSoundslice" />
+                            :disable-prev="true" @onClose="handleCloseSoundslice" />
                     </template>
                 </SoundSlice>
             </div>
@@ -214,15 +197,16 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     thisLessonJson: {
         type: Object,
-        default: () => {}
+        default: () => { }
     },
     nextLessonJson: {
         type: Object,
-        default: () => {}
+        default: () => { }
     },
     progressXp: {
         type: String,
@@ -311,9 +295,23 @@ const formattedChapters = computed(() => {
     return [];
 });
 
-const showPracticeButton = computed(() => {
-    return !!props.soundsliceSlug;
-});
+const sendProgressTrackerEvent = () => {
+    if(progressTracker) {
+        const sessionTokenElement = document.querySelector('#sessionToken');
+        progressTracker.send({
+            mediaId: mediaElementVueInstance.value.videoId,
+            mediaType: 'video',
+            mediaCategory: props.videoProps.videoType,
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            sessionToken: sessionTokenElement.value || null,
+            brand: props.videoProps.brand,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
+};
 
 //Methods
 const handleVideoPlay = (payload) => {
@@ -322,21 +320,9 @@ const handleVideoPlay = (payload) => {
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
-        const sessionTokenElement = document.querySelector('#sessionToken');
         if (mediaElementVueInstance.value) {
             window.addEventListener('unload', (event) => {
-                progressTracker.send({
-                    mediaId: mediaElementVueInstance.value.videoId,
-                    mediaType: 'video',
-                    mediaCategory: 'vimeo',
-                    watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
-                        || mediaElementVueInstance.value.currentTime,
-                    totalDuration: mediaElementVueInstance.value.videoLength
-                        || mediaElementVueInstance.value.totalDuration,
-                    sessionToken: sessionTokenElement.value || null,
-                    brand: props.videoProps.brand,
-                    contentId: mediaElementVueInstance.value.contentId
-                });
+                sendProgressTrackerEvent();
             });
         }
     }
@@ -344,12 +330,17 @@ const handleVideoPlay = (payload) => {
     progressTracker.start();
 };
 
-const handleVideoPause = (payload) => {
+const handleVideoPause = () => {
     progressTracker.stop();
+    sendProgressTrackerEvent();
 };
 
-const handleVideoEnd = () => {
-    isRelatedSectionOpen.value = true;
+const handleVideoEnd = (showRelatedSection = true) => {
+    if (showRelatedSection) {
+        isRelatedSectionOpen.value = true;
+    }
+    sendProgressTrackerEvent();
+    ContentService.markContentAsComplete(props.videoProps.contentId);
 };
 
 const getBrandSpecificParams = () => {
@@ -358,7 +349,7 @@ const getBrandSpecificParams = () => {
         singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
-    }[brand]);
+    }[brand.value]);
 };
 
 const openSlice = (title, index, startAt, loop) => {
@@ -367,8 +358,13 @@ const openSlice = (title, index, startAt, loop) => {
     }
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    chapterEndTime.value = props.videoProps.totalDuration;
     startLooping.value = loop;
+
+    if (loop) {
+        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    }
+
     openSoundslice.value = true;
 };
 
@@ -393,5 +389,9 @@ const noAccess = computed(() => {
 
 const thumbnailUrl = computed(() => {
     return props.thisLessonJson?.data[0]?.data.find(item => item.key === 'original_thumbnail_url')?.value;
+})
+
+const showDraftLabel = computed(() => {
+    return props.lessonData.status === 'draft';
 })
 </script>

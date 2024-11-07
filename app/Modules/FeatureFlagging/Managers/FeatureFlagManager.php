@@ -4,7 +4,6 @@ namespace App\Modules\FeatureFlagging\Managers;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Contracts\FeatureFlagsContract;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\FeatureFlagging\Models\Branch;
 use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Models\Feature;
@@ -28,7 +27,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $experiments = Experiment::all();
         $allowedBranches = [];
-        foreach($experiments as $experiment) {
+        foreach ($experiments as $experiment) {
             $allowedBranches[$experiment->name] = $this->branch($experiment->name, $user);
         }
         return $allowedBranches;
@@ -39,7 +38,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $features = Feature::all();
         $allowedFeatures = [];
-        foreach($features as $feature) {
+        foreach ($features as $feature) {
             if ($this->accessible($feature->name, $user)) {
                 $allowedFeatures[] = $feature->name;
             }
@@ -59,9 +58,11 @@ class FeatureFlagManager implements FeatureFlagsContract
         if ($user && $this->doesUserMatchFilter($feature->block_filter, $user)) {
             return false;
         }
-        if ($user &&
+        if (
+            $user &&
             ($this->doesUserMatchFilter($feature->allow_filter, $user)
-                || $this->doesUserMatchUserList($feature->userid_list, $user))) {
+                || $this->doesUserMatchUserList($feature->userid_list, $user))
+        ) {
             return true;
         }
         return Carbon::parse($feature->active_at)->isPast();
@@ -110,8 +111,10 @@ class FeatureFlagManager implements FeatureFlagsContract
         $selectedBranch = null;
         if ($user) {
             foreach ($branches as $branch) {
-                if ($this->doesUserMatchUserList($branch->userid_list, $user)
-                    || $this->doesUserMatchFilter($branch->allow_filter, $user)) {
+                if (
+                    $this->doesUserMatchUserList($branch->userid_list, $user)
+                    || $this->doesUserMatchFilter($branch->allow_filter, $user)
+                ) {
                     $selectedBranch = $branch;
                     break;
                 }
@@ -163,7 +166,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         if ($string_filter) {
             $filters = explode(',', $string_filter);
-            foreach($filters as $filter) {
+            foreach ($filters as $filter) {
                 if ($this->isUserMatch($filter, $user)) {
                     return true;
                 }
@@ -174,11 +177,13 @@ class FeatureFlagManager implements FeatureFlagsContract
 
     private function isUserMatch(string $filter, User $user): bool
     {
-        $isMatch = match(true) {
+        $isMatch = match (true) {
             $filter == 'admin' => $user->isAdmin(),
             $filter == 'musora' => $user->isMusoraAccount(),
             str_starts_with($filter, 'older_than') => $this->doesUserMatchAgeThanFilter($filter, $user, true),
             str_starts_with($filter, 'younger_than') => $this->doesUserMatchAgeThanFilter($filter, $user, false),
+            str_starts_with($filter, 'created_after') => $this->doesUserMatchCreated($filter, $user),
+            str_starts_with($filter, 'created_before') => $this->doesUserMatchCreated($filter, $user, true),
             default => false
         };
         return $isMatch;
@@ -194,7 +199,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         $count = intval($sections[2]);
         $createdTime = $user->created_at;
         $now = Carbon::now();
-        $earliestAllowedTime = match(strtolower($unit)) {
+        $earliestAllowedTime = match (strtolower($unit)) {
             'day', 'days' => $now->subDays($count),
             'month', 'months' => $now->subMonths($count),
             'year', 'years' => $now->subYears($count),
@@ -207,6 +212,28 @@ class FeatureFlagManager implements FeatureFlagsContract
         }
     }
 
+
+    /**
+     * Handles the case of users created after a certain date in the format yyyy_mm_dd
+     * Example: created_after_2024_10_21
+     */
+    public function doesUserMatchCreated(string $filter, User $user, bool $before = false): bool
+    {
+        $sections = explode('_', $filter);
+        if (count($sections) != 5) {
+            return false;
+        }
+        $year = intval($sections[2]);
+        $month = intval($sections[3]);
+        $day = intval($sections[4]);
+        $date = Carbon::create($year, $month, $day)->startOfDay();
+        $createdDate = $user->created_at->startOfDay();
+
+        return $before
+            ? $createdDate->lessThan($date)
+            : $createdDate->greaterThanOrEqualTo($date);
+    }
+
     /**
      * @param array|string $allow_filter
      * @return bool
@@ -215,13 +242,23 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $validFilters = ['admin', 'musora'];
         $filters = is_array($allow_filter) ? $allow_filter : explode(',', $allow_filter);
-        foreach($filters as $filter) {
-            if (!in_array($filter, $validFilters)
-                && !str_starts_with($filter, 'older_than')) {
+        foreach ($filters as $filter) {
+            if (
+                !in_array($filter, $validFilters)
+                && !self::isValidCreatedDateFilter($filter)
+            ) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static function isValidCreatedDateFilter(string $filter): bool
+    {
+        return count(array_filter(
+            ['older_than', 'younger_than', 'created_after', 'created_before'],
+            fn ($validFilter) => str_starts_with($filter, $validFilter)
+        )) > 0;
     }
 
     private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): void

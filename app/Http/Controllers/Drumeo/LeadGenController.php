@@ -138,6 +138,21 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
     }
+    
+    public function jazzDrumming101()
+    {
+        return view('drumeo.lead-gen.pages.jazz-drumming-101', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    
+    public function betterDoubles()
+    {
+        return view('drumeo.lead-gen.pages.better-doubles', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+
+    public function blueMan()
+    {
+        return view('drumeo.lead-gen.pages.blue-man', ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
     {
@@ -283,6 +298,10 @@ class LeadGenController extends BaseController
     public function weeklyMail()
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function thePlaylist()
+    {
+        return view('drumeo.lead-gen.pages.the-playlist', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)

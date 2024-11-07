@@ -6,10 +6,10 @@
                 <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
-                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
+                <div class="tw-w-full tw-text-[13px] sm:tw-text-base tw-leading-[24px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
                     <div class="tw-uppercase">{{ artistName }}</div>
                     <DotSeparator />
-                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
+                    <DifficultyLabel class="tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
                     <DotSeparator />
                     <div>{{ singularContentType }}</div>
                 </div>

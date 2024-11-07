@@ -21,7 +21,7 @@ class PaymentMethodUpdatedEventTrackingJob extends WebhookChildJob
         $shopifyId = $customer['shopify_customer_id'];
         $user = User::query()->where('shopify_id', '=', $shopifyId)->first();
         if (!$user) {
-            Log::debug("User not found for shopify_id: $shopifyId");
+            Log::error("User not found for shopify_id: $shopifyId");
             return;
         }
 

@@ -48,6 +48,7 @@ use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use App\Modules\Referral\Events\EmailInvite;
+use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider
 {
@@ -62,8 +63,11 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             HelpScoutEventListener::class . '@handleUserCreated',
         ],
         UserUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserUpdated',
-            HelpScoutEventListener::class . '@handleUserUpdated',
+            [CustomerIoSyncEventListener::class, 'handleUserUpdated'],
+            [HelpScoutEventListener::class, 'handleUserUpdated'],
+        ],
+        UsoraUserUpdated::class => [
+            [CustomerIoSyncEventListener::class, 'handleUserUpdated'],
         ],
         UserAccessPermissionsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
@@ -102,7 +106,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             CustomerIoSyncEventListener::class . '@handleFirstActivityPerDay',
         ],
         UTMLinks::class => [
-//            CustomerIoSyncEventListener::class . '@handleUTMLinks',
+            //            CustomerIoSyncEventListener::class . '@handleUTMLinks',
         ],
         MobileAppLogin::class => [
             CustomerIoSyncEventListener::class . '@handleMobileAppLogin',

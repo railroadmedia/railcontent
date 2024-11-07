@@ -363,11 +363,15 @@ const showVideoChapters = computed(() => {
 const handleVideoPause = () => { }; //?
 const handleVideoPlay = () => { }; //?
 
-const openSlice = (title, index, startAt, loop) => {
-    soundsliceTitle.value = title;
+const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = formattedChapters.value.length === index ? props.totalDuration : formattedChapters.value[index].time;
+    chapterEndTime.value = props.videoProps.totalDuration;
     startLooping.value = loop;
+
+    if (loop) {
+        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    }
+
     openSoundslice.value = true;
 };
 
@@ -377,7 +381,7 @@ const getBrandSpecificParams = () => {
         singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
-    }[brand]);
+    }[props.brand]);
 };
 
 const handleCloseSoundslice = () => {
@@ -419,7 +423,7 @@ const seekToChapter = (time) => {
                     <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine')"
                         class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4 tw-relative"
                         :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
-                        <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                        <SoundSlice :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                             :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
                     </div>
                     <!-- Video Players -->
@@ -521,7 +525,7 @@ const seekToChapter = (time) => {
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                         <button class="tw-z-10" @click="state.assignmentCollapsed = !state.assignmentCollapsed">
-                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
                                 :class="!state.assignmentCollapsed && 'tw-rotate-180'">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -547,8 +551,8 @@ const seekToChapter = (time) => {
             <transition name="show-from-bottom">
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                     <SoundSlice :user-id="userId" :theme-color="brand"
-                        :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                        :soundslice-slug="soundsliceSlug" :contentId="contentId" :force-start-time="true"
+                        :additional-params="`${getBrandSpecificParams()}&layout=3`"
+                        :soundslice-slug="soundsliceSlug" :contentId="contentId" 
                         :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                         <template v-slot:soundsliceControls>
                             <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"

@@ -19,12 +19,11 @@ import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
-import Home from './Components/_Pages/Home.vue';
+import Home from './Components/_Pages/Homev2.vue';
 import LessonHistory from './Components/_Pages/LessonHistory';
 import LessonPlayback from './Components/_Pages/LessonPlayback';
 import Playlist from './Components/_Pages/Playlist';
 import Playlists from './Components/_Pages/Playlists';
-import Referral from './Components/_Pages/Referral';
 import Schedule from './Components/_Pages/Schedule';
 import Songs from './Components/_Pages/Songs';
 import Stc from './Components/_Pages/STC';
@@ -45,6 +44,13 @@ import Search from './Components/_Pages/Search';
 import PackOverview from './Components/_Pages/PackOverview';
 import PackOverviewBundles from './Components/_Pages/PackOverviewBundles';
 import Login from './Components/_Pages/Login.vue';
+import BestBeginnerDrumBook from './Components/_Pages/BestBeginnerDrumBook';
+import DrummersToolbox from './Components/_Pages/DrummersToolbox';
+import sfsr from './Components/_Pages/SFSR/SFSR';
+import AllContentUpdates from './Components/_Pages/ContentUpdate/All';
+import ReturningContentUpdates from './Components/_Pages/ContentUpdate/Returning';
+import ComingSoonContentUpdates from './Components/_Pages/ContentUpdate/ComingSoon';
+import LeavingContentUpdates from './Components/_Pages/ContentUpdate/Leaving';
 
 //App Components
 import AppContainer from './Components/_Containers/AppContainer.vue';
@@ -61,6 +67,7 @@ import ChildCollectionPage from './Components/_Collections/CollectionPage/ChildC
 import PageHeader from './Components/_Collections/PageHeader/PageHeader'
 import MiniCatalogueSection from './Components/_Collections/MiniCatalogueSection/MiniCatalogueSection';
 import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountModal';
+import NewMusoraIcon from './Components/_Collections/NewMusoraIcon/NewMusoraIcon';
 
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
@@ -206,7 +213,6 @@ app.component('AppContainer', AppContainer)
     .component('Schedule', Schedule)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
-    .component('Referral', Referral)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
@@ -231,13 +237,21 @@ app.component('AppContainer', AppContainer)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
     .component('Login', Login)
-
+    .component('sfsr', sfsr)
+    .component('AllContentUpdates', AllContentUpdates)
+    .component('ReturningContentUpdates', ReturningContentUpdates)
+    .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
+    .component('LeavingContentUpdates', LeavingContentUpdates)
+    .component('NewMusoraIcon', NewMusoraIcon)
+    
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */
             `./Components/_Pages/PlaylistPlayback.vue`
         )
     ))
+    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
+    .component('DrummersToolbox', DrummersToolbox)
 
     .component('MembershipUpdatePage', defineAsyncComponent(() =>
         import(

@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -77,6 +77,18 @@ class SalesController extends BaseController
     public function practiceAnywhere()
     {
         return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
+    public function backToSchool()
+    {
+        return view('drumeo.sales.back-to-school', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
+    public function guitarcenter()
+    {
+        return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    }
+    public function welcomeBackDiscount()
+    {
+        return view('drumeo.sales.welcome-back-discount', ['theme' => 'drumeo']);
     }
     public function restart()
     {
@@ -183,6 +195,37 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
+    public function thirtyDayDoubleBass()
+    {
+        $productId = 930;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-double-bass', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    public function thirtyDayJazz()
+    {
+        $productId = 1165;
+//        $productId = 930;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-jazz', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
     public function thirtyDayIndependenceDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
@@ -249,6 +292,7 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.sonor');
     }
 
+
     public function handleRedeemRequest(Request $request, $productType, $isNewAccount)
     {
         $data = [
@@ -256,7 +300,7 @@ class SalesController extends BaseController
             'newAccount' => $isNewAccount,
             'accessCodeArray' => $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ];
-        return view('drumeo.pages.alesis', $data);
+        return view('drumeo.pages.alesis', $data, ['theme' => 'drumeo']);
     }
 
     public function alesisNitro(Request $request)
@@ -307,6 +351,16 @@ class SalesController extends BaseController
     public function alesisStrataCoreExisting(Request $request)
     {
         return $this->handleRedeemRequest($request, 'alesisStrataCore', false);
+    }
+
+    public function yamaha(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'yamaha', true);
+    }
+
+    public function yamahaExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'yamaha', false);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)
@@ -393,4 +447,8 @@ class SalesController extends BaseController
         return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }
 
+    public function headphones()
+    {
+        return view('drumeo.products.headphones', ['theme' => 'drumeo',]);
+    }
 }

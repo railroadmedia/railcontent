@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    {{-- MERGING NOTES: When merging this with sanity branch, manually merge HomeV2.vue changes into Home.vue component --}}
     <home
         :is-pack-only="false"
         account-url="{{ user()->getDashboardUrl() }}"
@@ -20,7 +21,7 @@
         :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
-        @if(count($hotForumTopics) > 0) 
+        @if(count($hotForumTopics) > 0)
             :conversation-data="{{ json_encode($hotForumTopics) }}"
         @endif
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
@@ -35,12 +36,16 @@
         :upcoming-events="{{ $upcomingEvents }}"
         upcoming-url="{{ '/'.$brand.'/live' }}"
         :users-list="{{ json_encode($usersList->results())  }}"
-        :user-metrics="{{ json_encode($userMetrics) }}"A
+        :user-metrics="{{ json_encode($userMetrics) }}"
         :workouts-content="{{ $workoutsContentJson }}"
         workouts-content-url="{{ url()->route('platform.workouts') }}"
         youtube-id="{{ $youtubeId }}"
         :learning-paths="{{ json_encode($trialSection) }}"
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
+        :trial-section-redesign="{{ $trialSectionRedesign }}"
+        :is-first-access="{{ $isFirstAccess ? 'true' : 'false' }}"
+        :explore-tasks="{{ json_encode($exploreTasks) }}"
+        :is-v2-user="{{ json_encode($homepageV2) }}"
     ></home>
 
 @include('partials._railanalytics-brand-tracking-iframe')

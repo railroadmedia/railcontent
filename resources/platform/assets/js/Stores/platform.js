@@ -3,12 +3,16 @@ import { defineStore } from 'pinia';
 export const usePlatformStore = defineStore({
     id: 'platform',
     state: () => ({
+        tinymcePath: '', 
         membershipUpgradeModal: {
             open: false,
             disableClose: false,
         }
     }),
     actions: {
+        setTinymcePath (path) {
+            this.tinymcePath = path;
+        },
         openMembershipUpgradeModal() {
             this.membershipUpgradeModal.open = true;
 

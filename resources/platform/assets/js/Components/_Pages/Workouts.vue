@@ -60,32 +60,16 @@
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <template v-if="continueData.data.length">
-                <section class="dark:tw-text-white tw-mb-4">
-                    <!-- Section Title -->
-                    <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
-                        <a :href="`/${brand}/lesson-history/in-progress`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h3 class="tw-font-bold tw-text-xl md:tw-text-2xl">Continue</h3>
-                        </a>
-                        <a :href="`/${brand}/lesson-history/in-progress`"
-                           aria-label="See All Subscribed Lessons"
-                           class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                        >
-                            See All
-                        </a>
-                    </div>
-                    <div class="tw-px-4 lg:tw-px-0">
-                        <transition appear name="fade">
-                            <CatalogueCardContainer
-                                :is-mini-view="true"
-                                :pre-loaded-content="continueData.data"
-                                :show-dropdown="true"
-                                :no-skeleton="true"
-                            />
-                        </transition>
-                    </div>
-                </section>
-            </template>
+            <div v-if="continueData.data.length" class="tw-mt-[30px]">
+                <MiniCatalogueSection
+                    title="Continue"
+                    seeAllAriaLabel="See All Workouts In Progress"
+                    :seeAllUrl="`/${brand}/lesson-history/in-progress`"
+                    :pre-loaded-content="continueData.data"
+                    :isMiniView="true"
+                    :show-dropdown="true"
+                />
+            </div>
         </section>
         <br>
         <CollectionWrapper
@@ -115,7 +99,7 @@ import { useUserStore } from "@stores/user";
 import Tooltip from '@collections/Tooltip/Tooltip';
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import InfoModal from "@collections/Modal/InfoModal";
 import MuButton from '@units/Button/MuButton';

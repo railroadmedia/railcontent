@@ -1,7 +1,8 @@
 <template>
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <!-- Learning Paths -->
-        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
+        <LearningPathContainer v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
+        <NewLearningPathContainer v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
 
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
@@ -30,25 +31,18 @@
             :preLoadedContent="startedContent.data"
             :isMiniView="true"
             :show-dropdown="true"
-            :use-ref-data="true"
             trackingSection="continue"
         />
 
         <!-- Recommended section -->
         <MiniCatalogueSection
-            v-if="recommends.length > 0"
+            v-if="recommendedContent.data.length"
             title="Inspired By Your Activity"
             seeAllAriaLabel="See All Content"
             :seeAllUrl="recommendedContentUrl"
-            :preLoadedContent="recommends"
+            :preLoadedContent="recommendedContent.data"
             trackingSection="recommended"
-        >
-            <template #icon>
-                <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
-                    <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
-                </button>
-            </template>
-        </MiniCatalogueSection>
+        />
 
         <!-- Workouts section -->
         <MiniCatalogueSection
@@ -74,16 +68,14 @@
         <ListSection
             v-if="usersList.length"
             :newContentUrl="newContentUrl"
-            :usersList="usersList"
+            :usersList="playlistsStore.playlists"
             :my-list-url="`/${brand}/playlists`"
         />
 
-        <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
-            <!-- Live section -->
-            <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
-                :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
-        </div>
+        <!-- Live section -->
+        <CoachEvent v-if="coachEvent" class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
+            :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
+            :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
 
         <!-- Upcoming section -->
         <MiniCatalogueSection
@@ -138,25 +130,23 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, onBeforeMount } from 'vue';
+    import { useUserStore } from "@stores/user";
+    import { storeToRefs } from "pinia/dist/pinia";
+    import { usePlaylistsStore } from "@stores/playlists";
+
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
     import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
+    import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
     import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
-    import { useUserStore } from "@stores/user";
-    import {storeToRefs} from "pinia/dist/pinia";
-
-    //Pinia Stores
-    const userStore = useUserStore();
-    const { brand, userCompletedAccount } = storeToRefs(userStore);
 
     const props = defineProps({
         accountUrl: { type: String, default: '' },
@@ -201,11 +191,17 @@
         },
         workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
+        trialSectionRedesign: { type: Boolean, default: false },
     });
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+    const userStore = useUserStore();
+    const { brand, showOnboardingBanner } = storeToRefs(userStore);
 
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
-        return userCompletedAccount.value;
+        return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {
@@ -221,8 +217,6 @@
         return { data: [...props.packData] };
     })
 
-    const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
-    const recSysPage = ref(1);
 
     const openPlaylistModal = () => {
         window.openplaylistmodal({
@@ -237,25 +231,13 @@
         });
     };
 
-    const shuffleRecommends = () => {
-        if(Math.ceil(props.recommendedContent.data.length / 5) === recSysPage.value){
-            recSysPage.value = 1;
-        } else {
-            recSysPage.value = recSysPage.value + 1;
-        }
-        recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
-    }
+    onBeforeMount(() => {
+        playlistsStore.playlists = props.usersList;
+    })
 
     onMounted(() => {
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
     });
-
-    const recommendationLinks = {
-        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-    }
 </script>

@@ -14,8 +14,12 @@ Route::domain('{pianoteDomain}')
         Route::get('/confirming', [LeadGenController::class, 'confirming']);
         Route::get('/subscribed', [LeadGenController::class, 'subscribed']);
         Route::get('/preferences', [LeadGenController::class, 'preferences']);
+        Route::get('/tcpcpreferences', [LeadGenController::class, 'tcpcpreferences']);
         Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
         Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
+        Route::get('/passing-chords', [LeadGenController::class, 'passingChords']);
+        Route::get('/pentatonic-licks', [LeadGenController::class, 'pentatonicLicks']);
+        Route::get('/chords-book-email', [LeadGenController::class, 'chordsBookEmail']);
         Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
         Route::get('/f-sharp-minor', [LeadGenController::class, 'fSharpMinor']);
         Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
@@ -32,8 +36,12 @@ Route::domain('{pianoteDomain}')
         Route::get('/beautiful-christmas-classics', [LeadGenController::class, 'beautifulChristmasClassics']);
         Route::get('/digital-chords-scales-guide', [LeadGenController::class, 'digitalChordsAndScales']);
         Route::get('/casio-giveaway', [LeadGenController::class, 'giveaway']);
+        Route::get('/giveaway', [LeadGenController::class, 'giveawayAlt']);
         Route::get('/awards', [LeadGenController::class, 'awards']);
+        Route::get('/prima-resources', [LeadGenController::class, 'primaResources']);
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
+        Route::get('/technique-essentials', [LeadGenController::class, 'techniqueEssentials']);
+        Route::get('/giveaway/win', [LeadGenController::class, 'win']);
 
         Route::group(
             ['prefix' => 'piano-complete-beginners-bootcamp'],
@@ -85,6 +93,15 @@ Route::domain('{pianoteDomain}')
             ['prefix' => 'getting-started'],
             function () {
                 Route::get('/{page?}', LeadGenController::class . '@gstd')
+                    ->whereIn('page', [
+                        null, 'thank-you', 'ty-annual', 'ty-monthly'
+                    ]);
+            }
+        );
+        Route::group(
+            ['prefix' => 'getting-started-on-the-piano'],
+            function () {
+                Route::get('/{page?}', LeadGenController::class . '@gstdp')
                     ->whereIn('page', [
                         null, 'thank-you', 'ty-annual', 'ty-monthly'
                     ]);

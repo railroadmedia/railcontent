@@ -44,7 +44,7 @@
             <h1>Resources</h1>
             <p><a href="{{ get_legacy_brand_base_url('pianote') }}/blog/">The Pianote Note</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/chord-hacks">Chord Hacks</a><br>
-                <a href="{{ get_legacy_brand_base_url('pianote') }}/getting-started">Getting Started On Piano</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/getting-started-on-the-piano">Getting Started On Piano</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/piano-in-5-days">5 Days To Playing Piano</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/learn-songs">Learn 3 Songs On Piano</a></p>
         </div>
@@ -81,4 +81,6 @@
     </div>
 </footer>
 @include("pianote.lead-gen.impact-email-sign-up-tracker")
-@include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.pianote.production.providers.everflow.brand_id')])
+@if(empty($noEverflow))
+    @include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.pianote.production.providers.everflow.brand_id')])
+@endif

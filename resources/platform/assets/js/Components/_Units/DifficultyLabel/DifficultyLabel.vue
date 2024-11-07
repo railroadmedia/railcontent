@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-items-center">
-        <div class="tw-w-1.5 tw-h-1.5 tw-rounded-full tw-inline-block tw-mr-1.5" :class="difficultyClass" />
+        <div v-if="!hideDot" class="tw-w-1.5 tw-h-1.5 tw-rounded-full tw-inline-block tw-mr-1.5" :class="difficultyClass" />
         <span>
             {{ formattedDifficulty }}
         </span>
@@ -21,6 +21,10 @@ const props = defineProps({
         validator: (value) => {
             return ['uppercase', 'lowercase', 'capitalize', 'none'].includes(value);
         }
+    },
+    hideDot: {
+        type: Boolean,
+        default: false,
     }
 });
 

@@ -11,14 +11,17 @@
                 <div class="tw-w-full">
                     <!--Video-->
                     <div class="tw-w-full tw-aspect-video dark:tw-bg-[#081825] tw-bg-[#EDEDED] tw-relative">
+                        <!-- Upgrade Cover -->
                         <MembershipUpgradeVideoCover v-if="noAccess" :thumbnail-url="videoProps.thumbnailUrl" />
-
                         <template v-else-if="videoProps.videoId">
+                            <!-- Draft Label -->
+                            <DraftLabel v-show="showDraftLabel" />
+
                             <!-- YouTube -->
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
                                     :theme-color="brand" :video-length="videoProps.videoLength"
-                                    :progress-state="videoProps.progressState" :content-id="videoProps.id"
+                                    :progress-state="videoProps.progressState" :content-id="videoProps.contentId"
                                     :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
@@ -31,7 +34,7 @@
                                     :brand="videoProps.brand" :theme-color="videoProps.brand"
                                     :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :content-id="videoProps.contentId" :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                     :chapters="videoProps.chapters" :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
@@ -135,9 +138,9 @@
         <!-- Workout Chapter Soundslice -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
-                <SoundSlice :user-id="videoProps.userId" :theme-color="brand"
-                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" :force-start-time="true"
+                <SoundSlice :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" :user-id="videoProps.userId" :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3`"
+                    :soundslice-slug="soundsliceSlug" :contentId="videoProps.contentId" 
                     :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoResources.title" :disable-next="true"
@@ -151,7 +154,7 @@
 
 <script setup>
 // TODO: ADD THE PLAY AND PAUSE EVENTS TO THE VIDEO PLAYERS
-import { onMounted, ref, computed } from "vue";
+import {ref, computed} from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@stores/user";
 
@@ -166,7 +169,6 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import ContentInfo from "@collections/ContentInfo/ContentInfo.vue";
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import CatalogueListElement from "@collections/Catalogue/CatalogueListElement.vue";
 import Intercom from "@vuesora/assets/js/Services/intercom";
 import Helpscout from "@vuesora/assets/js/Services/helpscout";
 import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
@@ -174,6 +176,7 @@ import ContentService from '@vuesora/assets/js/Services/content';
 import RelatedLessonsToggle from '@collections/RelatedLessons/RelatedLessonsToggle';
 import RelatedLessons from '@collections/RelatedLessons/RelatedLessons';
 import MembershipUpgradeVideoCover from '../_Collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
+import DraftLabel from '@units/DraftLabel/DraftLabel';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: {
@@ -231,7 +234,11 @@ const props = defineProps({
     contentInstructors: {
         type: Array,
         default: []
-    }
+    },
+    lessonData: {
+        type: [Array, Object],
+        default: () => []
+    },
 });
 
 const userStore = useUserStore();
@@ -241,6 +248,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(false);
+const isRelatedSectionCollapsed = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
@@ -290,6 +298,24 @@ const showPracticeButton = computed(() => {
     return !!props.soundsliceSlug;
 });
 
+const sendProgressTrackerEvent = () => {
+    if(progressTracker) {
+        const sessionTokenElement = document.querySelector('#sessionToken');
+        progressTracker.send({
+            mediaId: mediaElementVueInstance.value.videoId,
+            mediaType: 'video',
+            mediaCategory: props.videoProps.videoType,
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            sessionToken: sessionTokenElement.value || null,
+            brand: props.videoProps.brand,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
+};
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -297,21 +323,9 @@ const handleVideoPlay = (payload) => {
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
-        const sessionTokenElement = document.querySelector('#sessionToken');
         if (mediaElementVueInstance.value) {
             window.addEventListener('unload', (event) => {
-                progressTracker.send({
-                    mediaId: mediaElementVueInstance.value.videoId,
-                    mediaType: 'video',
-                    mediaCategory: 'vimeo',
-                    watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
-                        || mediaElementVueInstance.value.currentTime,
-                    totalDuration: mediaElementVueInstance.value.videoLength
-                        || mediaElementVueInstance.value.totalDuration,
-                    sessionToken: sessionTokenElement.value || null,
-                    brand: props.videoProps.brand,
-                    contentId: mediaElementVueInstance.value.contentId
-                });
+                sendProgressTrackerEvent();
             });
         }
     }
@@ -319,12 +333,17 @@ const handleVideoPlay = (payload) => {
     progressTracker.start();
 };
 
-const handleVideoPause = (payload) => {
+const handleVideoPause = () => {
     progressTracker.stop();
+    sendProgressTrackerEvent();
 };
 
-const handleVideoEnd = () => {
-    isRelatedSectionOpen.value = true;
+const handleVideoEnd = (showRelatedSection = true) => {
+    if (showRelatedSection) {
+        isRelatedSectionOpen.value = true;
+    }
+    sendProgressTrackerEvent();
+    ContentService.markContentAsComplete(props.videoProps.contentId);
 };
 
 const getBrandSpecificParams = () => {
@@ -333,7 +352,7 @@ const getBrandSpecificParams = () => {
         singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
-    }[brand]);
+    }[brand.value]);
 };
 
 const openSlice = (title, index, startAt, loop) => {
@@ -342,8 +361,13 @@ const openSlice = (title, index, startAt, loop) => {
     }
     soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    chapterEndTime.value = props.videoProps.totalDuration;
     startLooping.value = loop;
+
+    if (loop) {
+        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+    }
+
     openSoundslice.value = true;
 };
 
@@ -364,5 +388,9 @@ const handleCloseSoundslice = () => {
 
 const noAccess = computed(() => {
     return props.videoProps.need_access;
+})
+
+const showDraftLabel = computed(() => {
+    return props.lessonData.status === 'draft';
 })
 </script>

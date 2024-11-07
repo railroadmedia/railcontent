@@ -68,7 +68,7 @@
             <div class="columns medium-6">
                 <i class="fa-light fa-play text-blue"></i>
                 <h4><strong>Lifetime Access</strong></h4>
-                <p><em class="text-blue">Try risk-free for 90-days</em><br>
+                <p><em class="text-blue">Try risk-free for 90 days</em><br>
                     You’ll get lifetime access to all of the video performances from the Drumeo Festival — accessible inside your Drumeo.com account and accessible on any internet-ready device. Or if you’d rather take the performances with you on the road, you’ll be able to download your videos through the Drumeo App on Apple or Android phones and tablets.
                 </p>
             </div>

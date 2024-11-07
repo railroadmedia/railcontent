@@ -201,7 +201,7 @@
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No purchase necessary. <br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No age restrictions. <br>
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No location restrictions.<br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No sneaky shipping fees.
                             <br><br>
-                            <strong>The winner will be announced<br class="inline sm:hidden"> on February 1st!</strong></p>
+                            <strong>The winner will be announced<br class="inline sm:hidden"> on August 17th!</strong></p>
                 </div>
             </div>
         </div>

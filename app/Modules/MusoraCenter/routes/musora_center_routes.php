@@ -1,6 +1,7 @@
 <?php
 
 // content management
+
 Route::get(
     '/content-redirect/{id}',
     [

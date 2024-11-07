@@ -4,25 +4,26 @@ class Prices
 {
     public static $plusSubscriptionAnnualFull = 240;
     public static $plusSubscriptionAnnual = 240;
-    public static $plusSubscriptionMonthlyFull = 30;
-    public static $plusSubscriptionMonthly = 30;
+    public static $plusSubscriptionMonthly = 40;
+    public static $baseSubscriptionAnnual = 200;
+    public static $baseSubscriptionMonthly = 33.33;
 
     //Content Counts
-    public static $students = 96059;
-    public static $reviews = 7074;
+    public static $students = 100258;
+    public static $reviews = 7117;
     public static $drumeoLessons = 2500;
     public static $drumeoPlayAlongs = 300;
     public static $drumeoSongs = 1500;
     public static $drumeoCourses = 260;
 
     // social media counts
-    public static $drumeoYoutubeSubsc = 3740000;
+    public static $drumeoYoutubeSubsc = 4030000;
     public static $drumeoFacebookLikes = 1200000;
-    public static $drumeoInstagramFollowers = 1900000;
+    public static $drumeoInstagramFollowers = 2000000;
 
-    public static $pianoteYoutubeSubsc = 1730000;
+    public static $pianoteYoutubeSubsc = 1820000;
     public static $pianoteFacebookLikes = 435000;
-    public static $pianoteInstagramFollowers = 298000;
+    public static $pianoteInstagramFollowers = 302000;
 
     public static $guitareoYoutubeSubsc = 1080000;
     public static $guitareoFacebookLikes = 330000;

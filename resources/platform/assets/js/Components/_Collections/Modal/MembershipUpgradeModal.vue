@@ -167,7 +167,7 @@ const intervalDesc = computed(() => {
 })
 
 const consentText = computed(() => {
-    if(isMonthly.value) return 'By choosing "Pay Monthly," I understand that my next renewal will be $30 for Musora+ with Songs.';
+    if(isMonthly.value) return 'By choosing "Pay Monthly," I understand that my next renewal will be $40 for Musora+ with Songs.';
 })
 
 const upgradeNow = async() => {

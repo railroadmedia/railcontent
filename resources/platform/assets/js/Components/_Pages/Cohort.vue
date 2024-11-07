@@ -1,8 +1,8 @@
 <template>
-    <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4">
+    <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
             <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
-                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="history.back()">
+                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="handleGoBack">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
             </div>
@@ -139,7 +139,7 @@
         </div>
     </header>
 
-    <section class="tw-bg-white tw-py-7">
+    <section class="tw-bg-white tw-py-7" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
             <!--  Body title  -->
             <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['body_title'] }}</h3>
@@ -148,7 +148,7 @@
         </div>
     </section>
 
-    <section class="tw-bg-[#F1F7FE] tw-py-7 ">
+    <section class="tw-bg-[#F1F7FE] tw-py-7 " v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
             <div class="tw-relative tw-cursor-pointer tw-mb-10" @click="openTrailer = true">
                 <!--  Body Image  -->
@@ -174,7 +174,7 @@
     </section>
 
 
-    <section id="final" v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
+    <section id="final" v-if="cohort['is_product'] && !isCustom" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
         <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
@@ -205,11 +205,24 @@
     <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <!--  Bottom title  -->
-            <h3 class="tw-font-extrabold tw-text-center">{{ cohort['bottom_title'] }}</h3>
-            <!--  Bottom description  -->
-            <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
-
+            <div class="tw-text-center">
+                <!--  Logo  -->
+                <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
+                <!--  Bottom title  -->
+                <h3 class="tw-font-extrabold ">{{ cohort['bottom_title'] }}</h3>
+                <p class="uppercase tw-mt-4"
+                    :class="`tw-text-${brand}`">
+                    <!-- Countdown -->
+                    <template v-if="countdownText">
+                        Enrollment closes in <span class="tw-font-black">{{ countdownText }}</span>
+                    </template>
+                    <template v-else>
+                        <span class="tw-text-pianote">Enrollment closed</span>
+                    </template>
+                </p>
+                <!--  Bottom description  -->
+                <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
+            </div>
             <template v-if="cohort['is_product']">
                 <div v-if="!isEnrolled && !hasEnded" >
                     <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
@@ -244,7 +257,7 @@
                 <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                    <button v-else-if="!cohort['is_product'] && hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <button v-else-if="!cohort['is_product'] && !hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
@@ -354,6 +367,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    isCustom: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 const token = inject('csrf_token');
@@ -410,6 +427,13 @@ const startDateText = computed(() => {
 const endDateText = computed(() => {
     return DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('d'))}`;
 })
+
+const handleGoBack = () => {
+    history.back();
+    window.ReactNativeWebView.postMessage('react native');
+    window.postMessage('post message');
+
+}
 
 const countdown = () => {
     const start = new Date(props.cohort['enrollment_end_date']);

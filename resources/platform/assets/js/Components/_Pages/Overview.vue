@@ -17,12 +17,11 @@
         />
 
         <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
-            <div class="tw-w-full tw-p-4">
+            <div class="tw-w-full tw-p-4 tw-pb-0">
                 <div class="tw-flex tw-flex-col">
-                    <div class="flex flex-row align-v-center">
-                        <p class="tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-xl tw-font-bold tw-mt-2 tw-ml-3 tw-leading-none">
-                            Your Next Lesson...
-                        </p>
+                    <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
+                        Your Next Lesson...
+                        <i class="fa-solid fa-arrow-right sm:tw-hidden"></i>
                     </div>
                     <div class="flex flex-row remove-borders">
                         <transition appear name="fade">
@@ -33,6 +32,7 @@
                                 :lock-unowned="true"
                                 :data-user-id="userId"
                                 :is-admin="isAdmin"
+                                :is-next-lesson="true"
                             />
                         </transition>
                     </div>

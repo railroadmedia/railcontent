@@ -5,8 +5,8 @@
     <meta property="og:title" content="Keep your membership + get 9 free bonuses.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
-    <meta property="og:description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
+    <meta name="description" content="You’ve spent 30 days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
+    <meta property="og:description" content="You’ve spent 30 days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
         <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')

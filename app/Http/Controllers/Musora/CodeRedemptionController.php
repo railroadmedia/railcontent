@@ -148,6 +148,26 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
+    public function renderNewAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountGuitarcenterRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'guitarcenter' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function renderExistingAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
@@ -182,6 +202,15 @@ class CodeRedemptionController extends BaseController
     public function sweetwaterRedeemExistingGuitareo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
+    }
+
+    public function headrushRedeemNewGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => true, 'theme' => 'guitareo']);
+    }
+    public function headrushRedeemExistingGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => false, 'theme' => 'guitareo']);
     }
 
     public function sweetwaterRedeemNewSingeo()

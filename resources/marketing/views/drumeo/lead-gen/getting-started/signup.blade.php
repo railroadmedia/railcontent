@@ -139,7 +139,7 @@ $lessons = [
                     <h3 class="leading-tight mb-5">Go from a <strong>total beginner</strong> to playing your <strong>first drum beats</strong> in this <u>FREE</u> series.</h3>
                     <div class="max-w-sm mx-auto sm:hidden mb-5">
                         <img
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/lead-gen/getting-started/header-m.webp"
                             alt="header hero image mobile"
                             fetchpriority="high"
                         />
@@ -160,7 +160,7 @@ $lessons = [
             <div class="w-full sm:w-1/2 hidden sm:block">
                 <img
                     class="transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/lead-gen/getting-started/header.webp"
                     alt="header hero image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"

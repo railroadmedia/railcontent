@@ -128,7 +128,15 @@
                                 $resourceName = 'zipURL';
                             }
                         @endphp
-
+                        @if($leadgen->slug == 'technique-essentials/lessons')
+                            @include('_partials.components.leadgen-assignment', [
+                                "title" => $assignment->title,
+                                'subTitle' => $assignment->subtitle,
+                                $resourceName => $assignment->src,
+                                'soundslice' => $assignment->soundslice,
+                                'num' => $key+1,
+                            ])
+                        @else
                         @include('_partials.components.leadgen-assignment-resources', [
                             "title" => $assignment->title,
                             'subTitle' => $assignment->subtitle,
@@ -136,6 +144,7 @@
                             'soundslice' => $assignment->soundslice,
                             'num' => $key+1,
                         ])
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -237,6 +246,31 @@
             'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
             'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
             'customLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[piano-chords-and-scales-guide]=1&promo-code=trial-book&redirect=/order&locked=true',
+        ])
+    @endif
+
+     @if($theme === 'pianote' && $leadgen->slug == 'technique-essentials/lessons')
+        @include('drumeo.lead-gen.partials._learn-more', [
+            'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/technique-essentials/sign-up-bg.webp',
+            'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/marketing/pianote/lead-gen/technique-essentials/30DTBT-logo-light.webp',
+            'header' => 'What would happen if you learned piano from <br class="hidden md:block"> <strong>the best keyboardist in the world?</strong>',
+            'subheader' => 'Improve your piano technique with 30 days of guided lessons from Jordan Rudess.',
+            'btnLink' => '/shop/30-days-to-better-technique',
+            'btnText' => 'LEARN MORE',
+            'logoStyle' => 'h-24 md:h-36',
+        ])
+    @endif
+
+    @if($theme === 'pianote' && $leadgen->slug == 'getting-started-on-the-piano/lessons')
+        @include('pianote.lead-gen.partials._getting-started', [
+            'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/CTA-bg.webp',
+            'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
+            'header' => 'You\'ve started your piano journey<br>',
+            'subheader' => 'Now take the next step',
+            'text'=> '<strong>Get a free 30-day trial to the Pianote membership</strong> and enjoy access to<br class="hidden sm:block">unlimited piano lessons, guided practices, personalized feedback, and more.',
+            'btnLink' => '/trial-month',
+            'btnText' => 'START YOUR FREE TRIAL',
+            'logoStyle' => 'h-7 md:h-8',
         ])
     @endif
 

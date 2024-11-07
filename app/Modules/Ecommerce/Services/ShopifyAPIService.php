@@ -28,6 +28,10 @@ class ShopifyAPIService
                 note
                 totalQuantity
                 updatedAt
+                attributes {
+                    key
+                    value
+                }
                 buyerIdentity {
                     countryCode
                     email
@@ -222,6 +226,10 @@ class ShopifyAPIService
             json_encode($discountCodesToAddToCard, JSON_UNESCAPED_SLASHES)
         );
 
+        $createCartAttributesString = $this->jsonStringToGraphQLObjectString(
+            json_encode([['key' => 'cart_brand', 'value' => get_brand_from_request_url_domain()]], JSON_UNESCAPED_SLASHES)
+        );
+
         $cartString = self::cartGraphQLReturnDataString;
         $userErrorString = self::userErrorsGraphQLReturnDataString;
 
@@ -231,7 +239,8 @@ class ShopifyAPIService
                     cartCreate(
                         input: {
                             lines: $createCartInputLineString,
-                            discountCodes: $createCartDiscountCodesString
+                            discountCodes: $createCartDiscountCodesString,
+                            attributes: $createCartAttributesString
                         }
                     ) {
                     $cartString

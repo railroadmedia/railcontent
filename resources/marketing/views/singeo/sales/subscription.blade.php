@@ -153,40 +153,35 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
+    @hasSection('top-bar')
+        @yield('top-bar')
+    @endif
 
     @php
         $bubbles =  [
              [
                  'src' => $bubble1,
-                 'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
-             ],
-             [
-                 'src' => $bubble2,
                  'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
              ],
              [
-                 'src' => $bubble3,
+                 'src' => $bubble2,
                  'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
              ],
              [
+                 'src' => $bubble3,
+                 'classes' => 'h-16 sm:h-12 lg:h-16 top-[50%] sm:top-[50%] left-[8%] sm:left-[8%]',
+             ],
+             [
                  'src' => $bubble4,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
-             ],
-             [
-                 'src' => $bubble5,
-                 'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
-             ],
-             [
-                 'src' => $bubble6,
                  'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
              ],
              [
-                 'src' => $bubble7,
+                 'src' => $bubble5,
                  'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
              ],
              [
-                 'src' => $bubble8,
-                 'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+                 'src' => $bubble6,
+                 'classes' => 'h-16 sm:h-16 lg:h-20 top-[53%] sm:top-[53%] left-[99%] sm:left-[92%]',
              ]
          ];
           $features = $singeo['features'];
@@ -283,18 +278,16 @@
     <div id="order" class="anchor"></div>
 
     @if(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/singeo/membership/homepage/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "300+ popular songs.",
-            "firstPoint" => "Unlimited singing lessons.",
-            "thirdPoint" => "Direct access to vocal coaches.",
-            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+            "orderUrl" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'singing',
@@ -316,17 +309,17 @@
         'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 1 bonus<br class="inline sm:hidden"> worth $19',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
+        'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'marketing/singeo/membership/homepage/2024/singeo-splash.webp',
+                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
 
         ])
     @endif

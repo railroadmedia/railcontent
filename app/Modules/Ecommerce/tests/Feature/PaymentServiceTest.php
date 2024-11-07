@@ -80,6 +80,37 @@ class PaymentServiceTest extends TestCase
         $this->assertEquals($amount, $totalAmount);
     }
 
+    public function test_returns_total_paid_for_subscription_payment_with_refund()
+    {
+        $paid = 999.0;
+        $refunded = 100.0;
+        // create a basic subscription payment that doesn't use an external provider
+        $subscriptionPayment = $this->createSubscriptionPayment(null, 'USD', $paid);
+        $payment = $subscriptionPayment->payment;
+        // set a refunded value that's less than the payment
+        $payment->total_refunded = $refunded;
+        $payment->save();
+        $payment->save();
+
+        $totalAmount = $this->paymentService->getTotalPaid($subscriptionPayment);
+        $this->assertEquals(899.0, $totalAmount);
+    }
+
+    public function test_returns_total_paid_for_subscription_payment_with_over_refund()
+    {
+        $paid = 999.0;
+        $refunded = 1000.0;
+        // create a basic subscription payment that doesn't use an external provider
+        $subscriptionPayment = $this->createSubscriptionPayment(null, 'USD', $paid);
+        $payment = $subscriptionPayment->payment;
+        // set a refunded value that's greater than the payment
+        $payment->total_refunded = $refunded;
+        $payment->save();
+
+        $totalAmount = $this->paymentService->getTotalPaid($subscriptionPayment);
+        $this->assertEquals(0.0, $totalAmount);
+    }
+
     /**
      * Helper function to create a subscription payment with a valid payment in the given amount,
      * using the specified external provider

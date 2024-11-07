@@ -3,19 +3,15 @@
 namespace App\Modules\Ecommerce\Controllers;
 
 use App\Jobs\WebhookJob;
-use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
-use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedSubscriptionManagerJob;
 use App\Modules\Ecommerce\Jobs\Shopify\RefundCreatedJob;
-use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
-use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
-use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
 use App\Modules\Ecommerce\Jobs\ShopifySyncProductJob;
-use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Modules\Ecommerce\Jobs\Shopify\ShopifyOrderCreatedJob;
+use Modules\Ecommerce\Jobs\Shopify\ShopifyOrderUpdatedJob;
 
 class ShopifyWebHookController extends Controller
 {
@@ -36,10 +32,7 @@ class ShopifyWebHookController extends Controller
             Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email");
             $id = $this->getWebhookIdentifierOrGUID($request);
             $content = $request->all();
-            $children = [
-                new ShopifySyncCustomerJob($shopifyCustomerId, $email)
-            ];
-            dispatch(new WebhookJob('Shopify-order-updated', $id, $content, $children));
+            dispatch(new ShopifyOrderUpdatedJob($id, $content, $shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -64,13 +57,7 @@ class ShopifyWebHookController extends Controller
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
             $id = $this->getWebhookIdentifierOrGUID($request);
             $contents = $request->all();
-            $children = [
-                new AddOrderTags(new Order(json_decode(json_encode($contents), false))),
-                new OrderCreatedEventTrackingJob($contents),
-                new OrderCreatedUpdateLastTrialDataJob($contents),
-                new OrderCreatedSubscriptionManagerJob($contents)
-            ];
-            dispatch(new WebhookJob('Shopify-order-created', $id, $contents, $children));
+            dispatch(new ShopifyOrderCreatedJob($id, $contents));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());

@@ -20,6 +20,7 @@ use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
+use App\Console\Commands\QuarterlyUpdateContent;
 use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairGuitareoPDFs;
@@ -42,6 +43,7 @@ use App\Console\Commands\UpdateStatusForCopyRightContent;
 use App\Console\Commands\VaporEnvManager;
 use App\Modules\UserManagementSystem\Console\Commands\SendAccountSetupEmail;
 use App\Modules\UserManagementSystem\Console\Commands\SetUserNeedsLogout;
+use App\Modules\UserManagementSystem\Console\Commands\SyncPrimaryBrand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -93,6 +95,8 @@ class Kernel extends ConsoleKernel
         CheckCommentsUrl::class,
         SendAccountSetupEmail::class,
         GenerateWeeklyMembershipStats::class,
+        SyncPrimaryBrand::class,
+        QuarterlyUpdateContent::class,
     ];
 
     /**
@@ -139,6 +143,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
 
         $schedule->command('user:sendAccountSetupEmail')->dailyAt('21:00'); //1pm PST
+
+        $schedule->command('content:QuarterlyUpdateContent')->quarterly();
     }
 
     /**

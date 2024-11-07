@@ -4,8 +4,8 @@
           <h3 class="tw-text-2xl tw-leading-[30px] tw-font-bold dark:tw-text-white">Chapters:</h3>
           <button class="btn collapse-square"
                   @click="isCollapsed = !isCollapsed">
-              <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="isCollapsed && 'tw-rotate-180'">
-                  <i class="fas fa-chevron-up tw-text-lg"></i>
+              <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="isCollapsed && 'tw-rotate-180'">
+                  <i class="fas fa-chevron-down tw-text-lg"></i>
               </div>
           </button>
       </div>
@@ -40,7 +40,7 @@
                 <p class="tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
             </div>
           </div>
-          <div class="tw-hidden md:tw-flex tw-flex-shrink-0">
+          <div v-if="!hideActionButtons" class="tw-hidden md:tw-flex tw-flex-shrink-0">
             <!-- Practice Button -->
             <button id="video-chapter-song"
                     class="tw-btn-primary tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-mr-2 tw-flex tw-justify-center tw-items-center tw-group tw-px-[25px] tw-h-[40px]"
@@ -60,7 +60,7 @@
               Loop
             </button>
           </div>
-          <div class="tw-shrink-0 md:tw-hidden">
+          <div v-if="!hideActionButtons" class="tw-shrink-0 md:tw-hidden">
               <DropdownAlt :options="dropdownOptions" @practice="handleOpenSoundslice(chapter.title, index, chapter.time, false)" @loop="handleOpenSoundslice(chapter.title, index, chapter.time, true)" />
           </div>
 
@@ -71,24 +71,24 @@
 </template>
 
 <script setup>
-import {  ref, onBeforeMount } from "vue";
+import { ref } from "vue";
 import DropdownAlt from '@collections/Dropdown/DropdownAlt';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 
-onBeforeMount(()=> {
-//console.log('video chapters', props.chapters)
-})
-
 const props = defineProps({
-chapters: {
-  type: Array,
-  default: () => [],
-},
+    chapters: {
+      type: Array,
+      default: () => [],
+    },
+    hideActionButtons: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const emit = defineEmits([
-'openSlice',
-'seekToChapter'
+    'openSlice',
+    'seekToChapter'
 ]);
 
 const isCollapsed = ref(false);
@@ -100,11 +100,11 @@ return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
 };
 
 const handleOpenSoundslice = (title, index, startTime, loop) => {
-emit('openSlice', title, index + 1, startTime, loop);
+    emit('openSlice', title, index + 1, startTime, loop);
 };
 
 const handleSeekToChapter = (startTime) => {
-emit('seekToChapter', startTime);
+    emit('seekToChapter', startTime);
 }
 
 const dropdownOptions = [

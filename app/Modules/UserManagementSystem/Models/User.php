@@ -2,20 +2,21 @@
 
 namespace Modules\UserManagementSystem\Models;
 
-use App\Enums\Interval;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Enums\MembershipLevel;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
-use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use App\Modules\Ecommerce\Models\Address;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -38,6 +39,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
+use Modules\UserManagementSystem\Models\OnboardingBrand;
 use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -126,6 +128,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $trial_expiration_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $primary_brand
+ * @property string|null $first_access_at
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -370,6 +374,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(Customer::class, 'user_id');
     }
 
+    public function progress(): HasMany
+    {
+        return $this->hasMany(ContentUserProgress::class, 'user_id');
+    }
 
     public function getNotificationSetting(string $brand, string $settingName): bool
     {
@@ -518,7 +526,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return string | null
      */
-    public function subscriptionIntervalType() : string | null
+    public function subscriptionIntervalType(): string | null
     {
         return $this->recharge_interval;
     }
@@ -773,6 +781,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingGoals::class);
     }
 
+    public function onboardingAnswerHistory()
+    {
+        return $this->hasMany(OnboardingAnswerHistory::class);
+    }
+
     /**
      * @return bool
      */
@@ -1004,9 +1017,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             $cohortPermissionsIds = config('railcontent.cohort_permission_ids', []);
         }
         return $this->hasMany(
-                UserAccessPermission::class,
-                "user_id"
-            )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
+            UserAccessPermission::class,
+            "user_id"
+        )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
     }
 
     public function isMusoraAccount(): bool
@@ -1030,23 +1043,24 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function hasCompletedOnboarding(): bool
     {
         $hasExperience = $this->onboardingExperience->contains(
-            fn(OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
+            fn (OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
         );
 
-        $hasGear = $this->onboardingGear->contains(
-            fn(OnboardingGear $gear) => $gear->brand == $this->last_used_brand
-        );
+        $hasGear = in_array($this->last_used_brand, [Brand::Pianote->value, Brand::Singeo->value]) ||
+            $this->onboardingGear->contains(
+                fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
+            );
 
         $hasTopics = $this->onboardingTopics->contains(
-            fn(OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
+            fn (OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
         );
 
         $hasGenres = $this->onboardingGenres->contains(
-            fn(OnboardingGenre $genres) => $genres->brand == $this->last_used_brand
+            fn (OnboardingGenre $genres) => $genres->brand == $this->last_used_brand
         );
 
         $hasGoals = $this->onboardingGoals->contains(
-            fn(OnboardingGoals $goals) => $goals->brand == $this->last_used_brand
+            fn (OnboardingGoals $goals) => $goals->brand == $this->last_used_brand
         );
 
         return $hasExperience && $hasGear && $hasTopics && $hasGenres && $hasGoals;
@@ -1064,5 +1078,25 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             'membership_level' => $this->membership_level,
             'membership_expiration_date' => $this->membership_expiration_date
         ];
+    }
+
+    public function exploreTasks(): HasMany
+    {
+        return $this->hasMany(UserExploreTask::class);
+    }
+
+    public function isFirstAccess(): bool
+    {
+        if ($this->first_access_at) {
+            return false;
+        }
+        $this->first_access_at = Carbon::now();
+        $this->save();
+        return true;
+    }
+
+    public function onboardingBrands(): HasOne
+    {
+        return $this->hasOne(OnboardingBrand::class);
     }
 }

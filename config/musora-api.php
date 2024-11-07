@@ -1818,7 +1818,12 @@ return [
             'branches',
             'features',
             'show_onboarding',
-            'last_used_brand'
+            'last_used_brand',
+            'primary_brand',
+            'homepage_v2',
+            'explore_tasks',
+            'is_first_access',
+            'brand_minutes_practiced',
         ],
     ],
     'brand_logo_path_for_email' => [

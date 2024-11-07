@@ -177,6 +177,7 @@ Route::domain('{musoraDomain}')
                         'rudiments',
                         'song-tutorials',
                         'drum-fest-international-2022',
+                        'odd-times',
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -263,6 +264,19 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}/schedule', [ContentPagesController::class, 'schedule'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.schedule');
+                Route::get('/{brand}/content-updates/coming-soon', [ContentPagesController::class, 'comingSoon'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.coming-soon');
+                Route::get('/{brand}/content-updates/leaving', [ContentPagesController::class, 'leaving'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.leaving');
+                Route::get('/{brand}/content-updates/returning', [ContentPagesController::class, 'returning'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates.returning');
+                Route::get('/{brand}/content-updates', [ContentPagesController::class, 'allContentUpdates'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content-updates');
+
 
                 /*
                  * Specific Sub-Content Hierarchy Pages
@@ -343,7 +357,8 @@ Route::domain('{musoraDomain}')
                             'play-alongs',
                             'song-tutorials',
                             'drum-fest-international-2022',
-                            'workouts'
+                            'workouts',
+                            'odd-times',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -371,6 +386,7 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->whereIn('primaryPage', ['method'])
                     ->name('platform.content.fourth-level');
+
 
                 /*
                  * Referral Pages
@@ -857,11 +873,13 @@ Route::domain('{musoraDomain}')
 Route::domain('{musoraDomain}')
     ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
     ->group(function () {
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
+        Route::get('/{brand}/referral/invite-a-friend', 
+        [ReferralPagesController::class, 'inviteAFriend'])            
+            ->whereIn('brand', all_brands())            
             ->name('platform.invite-a-friend');
 
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+        Route::get('/{brand}/profile/settings/account', 
+        [ProfileSettingsPagesController::class, 'account'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
     });

@@ -1,9 +1,9 @@
 <template>
-    <div class="tw-w-full">
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-[30px]">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-mb-[30px]">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Login Credentials' } ]"/>
-            <PageHeader 
+            <PageHeader
                 page-type="settings"
                 :title="userDisplayName"
                 :hero-img="userProfilePictureUrl"
@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${showOnboardingBanner ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }
@@ -22,60 +22,51 @@
         <!-- Page Pills -->
         <PillNav :pills="accountPages"/>
 
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-            <!-- Page Content -->
-            <div class="tw-flex tw-flex-col tw-grow">
-                <input id="userInfo" type="hidden" :data-user-id="userId">
-                
-                <!-- LOGIN -->
-                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
-                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
-                                    @click="handleShowEmailModal"
-                            >
-                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
-                            </button>
-                        </div>
-                        <div class="tw-flex tw-flex-col">
-                            <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
-                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Email</h6>
-                                <p class="">{{ userEmail }}</p>
-                            </div>
-                            <p v-if="showEmailSuccessMessage" class="tw-text-sm tw-text-[#8c9698] tw-italic tw-mt-3 dark:tw-text-[#9EC0DC]">
-                                An email confirmation link has been sent to your new email address.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Display Name Modal -->
-                    <EditEmailModal v-if="showEmailModal" @onCloseModal="handleShowEmailModal" @onSuccess="showEmailSuccessMessage = true" />
-                </section>
+        <!-- Page Content -->
+        <input id="userInfo" type="hidden" :data-user-id="userId">
 
-                <!-- PASSWORD -->
-                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
-                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
-                                @click="handleShowPasswordModal"
-                            >
-                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
-                            </button>
-                        </div>
-                        <div class="tw-flex tw-flex-col">
-                            <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
-                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Password</h6>
-                                <p class="">••••••••</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Display Name Modal -->
-                    <EditPasswordModal v-if="showPasswordModal" @onCloseModal="handleShowPasswordModal" />
-                </section>
-
+        <!-- LOGIN -->
+        <section class="tw-flex tw-flex-col tw-py-[30px] tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+            <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
+                <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
+                <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0"
+                        @click="handleShowEmailModal"
+                >
+                    <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                </button>
             </div>
-        </div>
+            <div class="tw-flex tw-flex-col">
+                <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
+                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Email</h6>
+                    <p class="">{{ userEmail }}</p>
+                </div>
+                <p v-if="showEmailSuccessMessage" class="tw-text-sm tw-text-[#8c9698] tw-italic tw-mt-3 dark:tw-text-[#9EC0DC]">
+                    An email confirmation link has been sent to your new email address.
+                </p>
+            </div>
+            <!-- Display Name Modal -->
+            <EditEmailModal v-if="showEmailModal" @onCloseModal="handleShowEmailModal" @onSuccess="showEmailSuccessMessage = true" />
+        </section>
+
+        <!-- PASSWORD -->
+        <section class="tw-flex tw-flex-col tw-py-[30px] tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
+                    <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
+                    <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0"
+                        @click="handleShowPasswordModal"
+                    >
+                        <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                    </button>
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
+                        <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Password</h6>
+                        <p class="">••••••••</p>
+                    </div>
+                </div>
+            <!-- Display Name Modal -->
+            <EditPasswordModal v-if="showPasswordModal" @onCloseModal="handleShowPasswordModal" />
+        </section>
     </div>
 </template>
 <script setup>
@@ -90,15 +81,15 @@
 
     //Pinia
     const userStore = useUserStore();
-    const { 
-        brand, 
-        userId, 
+    const {
+        brand,
+        userId,
         userEmail,
-        userDisplayName, 
-        userProfilePictureUrl, 
-        userCreatedYear, 
-        userCompletedAccount 
-    } = storeToRefs(userStore);   
+        userDisplayName,
+        userProfilePictureUrl,
+        userCreatedYear,
+        showOnboardingBanner
+    } = storeToRefs(userStore);
 
     //Computed
 
@@ -108,7 +99,7 @@
         {
             name: 'Profile',
             url: `/${brand.value}/profile/${userId.value}/settings/profile`,
-        }, 
+        },
         {
             name: 'Login Credentials',
             url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
@@ -130,7 +121,7 @@
 
     const showEmailModal = ref(false);
     const showPasswordModal = ref(false);
-    
+
     //Methods
     const handleShowEmailModal = () => {
         showEmailModal.value = !showEmailModal.value;
@@ -153,6 +144,6 @@
                 });
             }
             handleClose()
-        });  
-    }; 
+        });
+    };
 </script>

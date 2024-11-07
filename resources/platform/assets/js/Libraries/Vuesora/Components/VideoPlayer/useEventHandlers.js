@@ -1,5 +1,6 @@
 // useEventHandlers.js
 import { nextTick } from "vue";
+import userJourney from "@services/userJourney";
 
 export default function ({
     loading,
@@ -30,6 +31,19 @@ export default function ({
     progressState,
     endCallback,
 }) {
+    const payload = (payloadOverride = {}) => ({
+        brand,
+        content_id: contentId,
+        position_seconds: Math.round(currentTime.value),
+        video_player: "vimeo",
+        video_length_seconds: Math.round(totalDuration.value),
+        ...payloadOverride
+    });
+
+    let heartbeatInterval = null;
+    let heartbeatTimer = 0;
+    let ninetyFivePercentTracked = false;
+
     const eventHandlers = {
         loading: () => {
             loading.value = true;
@@ -93,6 +107,16 @@ export default function ({
             isPlaying.value = false;
             loading.value = false;
 
+            if (Math.round(currentTime.value) !== Math.round(totalDuration.value)) {
+                userJourney.trackVideo({ payload: payload(), type: 'paused' });
+            }
+
+            if (heartbeatInterval) {
+                clearInterval(heartbeatInterval);
+                heartbeatInterval = null;
+                heartbeatTimer = 0;
+            }
+
             emit('pause', {
                 ...event,
                 contentId
@@ -100,9 +124,35 @@ export default function ({
         },
 
         play: (event) => {
+            if (hasBeenPlayed.value) {
+                userJourney.trackVideo({ payload: payload(), type: 'resumed' });
+            }
+
+            if (!hasBeenPlayed.value && totalDuration.value > 0) {
+                userJourney.trackVideo({ payload: payload(), type: 'started' });
+                hasBeenPlayed.value = true;
+            }
+
+            if (!heartbeatInterval && totalDuration.value > 0) {
+                userJourney.trackVideo({ payload: payload(), type: 'playing' });
+
+                heartbeatInterval = setInterval(() => {
+                    if (heartbeatTimer % 15 === 0 && heartbeatTimer !== 0) {
+                        userJourney.trackVideo({ payload: payload(), type: 'playing' });
+                    }
+                    if (currentTime.value >= Math.round(0.95 * totalDuration.value) && !ninetyFivePercentTracked) {
+                        userJourney.trackVideo({ payload: payload({ position_seconds: Math.round(0.95 * Math.round(totalDuration.value)) }), type: 'completed' });
+                        ninetyFivePercentTracked = true;
+                        endCallback(false);
+                    }
+                    if (!loading.value) {
+                        heartbeatTimer += 1;
+                    }
+                }, 1000);
+            }
+
             isPlaying.value = true;
             loading.value = false;
-            hasBeenPlayed.value = true;
 
             emit('play', {
                 ...event,
@@ -116,11 +166,11 @@ export default function ({
                 isPlaying.value = true;
                 loading.value = false;
             }, 100);
+
             emit('playing', event);
         },
 
         timeupdate: (event) => {
-            //console.log('timeupdate')
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
             emit('timeupdate', event);
@@ -150,9 +200,13 @@ export default function ({
         seeked: () => {
             loading.value = false;
 
+            /*
+            TODO: Re-enable this when we have a better understanding of how to handle this
             if (hasBeenPlayed.value && !isChromeCastConnected.value) {
+                userJourney.trackVideo({ payload: payload(), type: 'seekCompleted' });
                 mediaElement.value.play();
             }
+            */
         },
 
         enterpictureinpicture: () => {
@@ -164,7 +218,6 @@ export default function ({
         },
 
         ended: () => {
-            console.log('ended called in event handlers')
             isPipEnabled.value = false;
             endCallback();
         },
@@ -209,7 +262,7 @@ export default function ({
                 mediaElement.value.play();
             }
 
-            
+
             emit('cc-disconnect', event);
         },
 
@@ -242,7 +295,7 @@ export default function ({
         KeyL: () => seek(currentTime.value + 10),
         KeyF: () => fullscreen(),
         // next line was: this.videojsInstance.isFullscreen ? this.fullscreen() : () => {}
-        Escape: () => (false ? fullscreen() : () => {}),
+        Escape: () => (false ? fullscreen() : () => { }),
         ArrowUp: () => changeVolume({ volume: (currentVolume.value * 100) + 5 }),
         ArrowDown: () => changeVolume({ volume: (currentVolume.value * 100) - 5 }),
         KeyM: () => {
@@ -269,6 +322,7 @@ export default function ({
         mediaElementEventHandlers,
         chromeCastEventHandlers,
         keyboardEventHandlers,
-        keyboardEventHandlersShift
+        keyboardEventHandlersShift,
+        getTrackingPayload: payload,
     }
 }

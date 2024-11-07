@@ -18,10 +18,19 @@ class MarketingController extends BaseController
     {
         return view('musora.sales.trial', [
             'theme' => 'musora',
+            'commercialHeader' => true,
             'promoVersion' => true,
             'trialVersion' => true,
             'scrollToJoin' => true,
             'hideMenu' => true,
+        ]);
+    }
+    public function trialMonth()
+    {
+        return view('musora.sales.subscription', [
+            'theme' => 'musora',
+            'scrollToJoin' => true,
+            'month' => true,
         ]);
     }
     public function spotify()
@@ -59,6 +68,10 @@ class MarketingController extends BaseController
     {
         return view('musora.lead-gen.thank-you', ['theme' => 'musora']);
     }
+    public function thePlaylist()
+    {
+        return view('musora.lead-gen.the-playlist', ['theme' => 'musora', 'recaptchaKey' => config('recaptcha.key')]);
+    }
     public function moderators()
     {
         return view('musora.pages.moderators', ['theme' => 'musora']);
@@ -71,6 +84,10 @@ class MarketingController extends BaseController
     public function terms()
     {
         return view('musora.pages.terms');
+    }
+    public function guitarcenterTerms()
+    {
+        return view('musora.pages.redeem.guitarcenter-terms');
     }
 
     public function privacy()
@@ -127,6 +144,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.playlists', [ 'theme' => 'musora']);
     }
+    public function playlist()
+    {
+        return view('musora.pages.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function recitals()
     {
@@ -164,5 +185,25 @@ class MarketingController extends BaseController
     public function app()
     {
         return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
+    }
+    public function freeMusicLessonsForLife()
+    {
+        return view('musora.pages.free-music-lessons-for-life', [ 'theme' => 'musora'],  ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function everyDayMusician()
+    {
+        return view('musora.pages.everyday-musician', [ 'theme' => 'musora']);
+    }
+    public function history()
+    {
+        return view('musora.pages.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function youtube()
+    {
+        return view('musora.pages.youtube', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function freeResources()
+    {
+        return view('musora.pages.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
 }

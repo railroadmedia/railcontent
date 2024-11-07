@@ -5,6 +5,7 @@ namespace App\Modules\MusoraApi\Controllers\V1;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use App\Modules\UserManagementSystem\Jobs\SetDefaultPlaylistsJob;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Carbon\Carbon;
@@ -90,7 +91,7 @@ class OnboardingController extends Controller
         OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])
             ->delete();
 
-        $topicList = [];
+        $topics = [];
         foreach ($data as $topic) {
             $onboardingTopic = new OnboardingTopic(['topic' => $topic, 'brand' => $brand, 'user_id' => user()->id]);
             $onboardingTopic->save();
@@ -101,13 +102,23 @@ class OnboardingController extends Controller
                 'user_id' => user()->id,
             ]);
             $onboardingAnswerHistory->save();
-            $topicList[] = $topic;
+            $topics[] = $topic;
         }
+
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
+                user(),
+                [
+                    $brand . '_onboarding_topics' => $topics,
+                ]
+            ),
+            30
+        );
 
         Avo::onboarding_topics_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
-                'topic_list' => $topicList,
+                'topic_list' => $topics,
             ])
         );
         return response(json_encode(user()), 200);
@@ -139,6 +150,16 @@ class OnboardingController extends Controller
             $genres[] = $genre;
         }
 
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
+                user(),
+                [
+                    $brand . '_onboarding_genres' => $genres,
+                ]
+            ),
+            30
+        );
+
         Avo::onboarding_genres_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
@@ -161,35 +182,45 @@ class OnboardingController extends Controller
             'brand' => 'required',
         ]);
 
-        OnboardingExperience::where(['brand' => $brand, 'user_id' => user()->id])
+        $user = user();
+
+        $hasAnsweredBefore = OnboardingExperience::where([
+            'brand' => $brand,
+            'user_id' => $user->id,
+        ])->exists();
+
+        OnboardingExperience::where(['brand' => $brand, 'user_id' => $user->id])
             ->delete();
 
-
         OnboardingExperience::create(
-            ['experience_level' => $experienceLevel, 'brand' => $brand, 'user_id' => user()->id]
+            ['experience_level' => $experienceLevel, 'brand' => $brand, 'user_id' => $user->id]
         );
 
-        $skillLevel = OnboardingSkillLevelEnum::from($experienceLevel)->name;
+        $skillLevel = OnboardingSkillLevelEnum::from($experienceLevel);
 
         $onboardingAnswerHistory = new OnboardingAnswerHistory();
         $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_EXPERIENCE;
-        $onboardingAnswerHistory->onboarding_answer = $skillLevel;
+        $onboardingAnswerHistory->onboarding_answer = $skillLevel->name;
         $onboardingAnswerHistory->brand = $brand;
-        $onboardingAnswerHistory->user_id = user()->id;
+        $onboardingAnswerHistory->user_id = $user->id;
         $onboardingAnswerHistory->save();
 
         dispatchWithDelay(
             new CustomerIoSyncUserByUserId(
-                user(),
-                [$brand . '_onboarding_skill_level' => $skillLevel],
+                $user,
+                [$brand . '_onboarding_skill_level' => $skillLevel->name],
             ),
             30
         );
 
+        if (!$hasAnsweredBefore) {
+            SetDefaultPlaylistsJob::dispatchAfterResponse($user, $brand, $skillLevel);
+        }
+
         Avo::onboarding_experience_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $brand,
-                'experience_level' => strval($experienceLevel),
+                'experience_level' => $onboardingAnswerHistory->onboarding_answer,
             ])
         );
 
@@ -351,11 +382,22 @@ class OnboardingController extends Controller
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
+
+        $brand = $this->onboardingService->getBrandFromInstrument($instrument);
+
         Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
-                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
+                'brand' => $brand
+
             ])
         );
+
+        $user = user();
+        $user->primary_brand = $brand;
+        $user->last_used_brand = $brand;
+        $user->save();
+
+        dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
 
         return response("History data for instrument has been saved.", 200);
     }

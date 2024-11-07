@@ -93,9 +93,9 @@
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
 
-                <a class="sm:mx-0.5 w-full sm:w-56 join drumeo smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
-                    href="#customize-anchor" aria-label="Customize anchor"
-                >GET STARTED </a>
+{{--                <a class="sm:mx-0.5 w-full sm:w-56 join drumeo smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"--}}
+{{--                    href="#customize-anchor" aria-label="Customize anchor"--}}
+{{--                >GET STARTED </a>--}}
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline white smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             </div>
 
@@ -350,16 +350,16 @@
                 </h2>
                 <p class="mb-4 sm:mb-6"><strong class="text-musora">Save {{$savePercentage}}%</strong> for your first year. Renews at $240/yr.</p>
 
-                <a role="link" aria-label="Get Started" class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                    style="padding: 20px 10px;"
-                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${colors[selectedProduct][0]}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true`">
-                    GET Started
-                </a>
+{{--                <a role="link" aria-label="Get Started" class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"--}}
+{{--                    style="padding: 20px 10px;"--}}
+{{--                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${colors[selectedProduct][0]}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true`">--}}
+{{--                    GET Started--}}
+{{--                </a>--}}
             </div>
 
             <br>
-            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true">
-            <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 2 free digital lesson packs.</em></u></p></a>
+{{--            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true">--}}
+{{--            <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 2 free digital lesson packs.</em></u></p></a>--}}
         </div>
     </section>
 @endsection

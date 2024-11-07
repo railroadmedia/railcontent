@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Http\Controllers\BaseController;
 use App\Modules\Ecommerce\Controllers\ShopifyCartAPIController;
 use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class LoginPageController extends BaseController
 {
     private ShopifyAPIService $shopifyAPIService;
+    // DEV NOTE: there was a typo when this was first created within Shopify, and so we need to maintain it here
+    private const SHOPIFY_MULTIPASS_KEY = 'shopify_mulitpass';
+    private const REDIRECT_TO_MULTIPASS_KEY = 'redirect_to_multipass';
+    private const SHOPIFY_CHECKOUT_URL_KEY = 'checkout_url';
 
     public function __construct(ShopifyAPIService $shopifyAPIService)
     {
@@ -26,28 +30,28 @@ class LoginPageController extends BaseController
         // 3. pass both values through login form to auth endpoint
         // 4. auth endpoint should log in redirect back to checkout_url with encoded json for shopify: https://shopify.dev/docs/api/multipass
 
-        // only redirect already logged in users to the platform if its not a multipass request.
-        if (!empty(user()) && $request->get('shopify_mulitpass', 0) != 1) {
+        // only redirect already logged-in users to the platform if it's not a multipass request.
+        if (!empty(user()) && $request->get(self::SHOPIFY_MULTIPASS_KEY, 0) != 1) {
             return redirect()->route('platform.home-redirect');
         }
 
-        // always set checkout url to current session cart checkout url if its not in the url params
-        if ($request->get('shopify_mulitpass', 0) == 1 && empty($request->get('checkout_url'))) {
+        // always set checkout url to current session cart checkout url if it's not in the url params
+        if ($request->get(self::SHOPIFY_MULTIPASS_KEY, 0) == 1 && empty($request->get(self::SHOPIFY_CHECKOUT_URL_KEY))) {
             $existingShopifyCartId = Session::get(ShopifyCartAPIController::SHOPIFY_CART_ID_SESSION_KEY);
 
             if (!empty($existingShopifyCartId)) {
                 $cartData = $this->shopifyAPIService->getCart($existingShopifyCartId);
-                $request['checkout_url'] = parse_url($cartData['checkoutUrl'], PHP_URL_PATH);
+                $request[self::SHOPIFY_CHECKOUT_URL_KEY] = parse_url($cartData['checkoutUrl'], PHP_URL_PATH);
             }
         }
 
-        // if the user just logged in and it's a multipass request, redirect back to shopify multipass/checkout url
+        // if the user just logged in, and it's a multipass request, redirect back to shopify multipass/checkout url
         if (!empty(user()) &&
-            $request->get('shopify_mulitpass', 0) == 1 &&
-            $request->get('redirect_to_multipass', 0) == 1) {
+            $request->get(self::SHOPIFY_MULTIPASS_KEY, 0) == 1 &&
+            $request->get(self::REDIRECT_TO_MULTIPASS_KEY, 0) == 1) {
 
-            if (!empty($request->get('checkout_url'))) {
-                $shopifyRedirectUrl = config('shopify.storefront.host_name') . $request->get('checkout_url');
+            if (!empty($request->get(self::SHOPIFY_CHECKOUT_URL_KEY))) {
+                $shopifyRedirectUrl = config('shopify.storefront.host_name') . $request->get(self::SHOPIFY_CHECKOUT_URL_KEY);
             } else {
                 // fallback if all else fails
                 $shopifyRedirectUrl = 'https://www.drumeo.com/shop';
@@ -63,8 +67,8 @@ class LoginPageController extends BaseController
             return redirect()->away($multipassLoginUrl);
         }
 
-        if ($request->get('shopify_mulitpass', 0) == 1) {
-            // If there is a logged in user and its a multipass request, always log the user out and force the
+        if ($request->get(self::SHOPIFY_MULTIPASS_KEY, 0) == 1) {
+            // If there is a logged-in user, and it's a multipass request, always log the user out and force the
             // person to log in using the form. We must do this otherwise people cannot log out via Shopify.
             if (!empty(user())) {
                 Auth::logout();
@@ -76,9 +80,9 @@ class LoginPageController extends BaseController
                     'redirect' => url()->route(
                         'login',
                         [
-                            'shopify_mulitpass' => 1,
-                            'redirect_to_multipass' => 1,
-                            'checkout_url' => $request->get('checkout_url'),
+                            self::SHOPIFY_MULTIPASS_KEY => 1,
+                            self::REDIRECT_TO_MULTIPASS_KEY => 1,
+                            self::SHOPIFY_CHECKOUT_URL_KEY => $request->get(self::SHOPIFY_CHECKOUT_URL_KEY),
                             'referrer' => $request->headers->get('referer', 'https://www.musora.com')
                         ]
                     )
