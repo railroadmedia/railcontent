@@ -90,7 +90,7 @@ export default function useCatalogueItem(props) {
         if (shows.indexOf(type) !== -1) {
             type = 'show';
         }
-
+        console.log("type", type)
         return new ContentModel(type, {
             brand: userStore.brand,
             post: props.item,

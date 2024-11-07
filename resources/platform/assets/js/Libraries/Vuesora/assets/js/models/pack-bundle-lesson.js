@@ -10,6 +10,7 @@ export default class PackBundleLessonContentModel extends ContentModel {
         this.card.grey_title = this.getPostDuration();
 
         this.list.color_title = null;
+        this.list.thumbnail = this.post.thumbnail;
         this.list.column_data = [
             this.getPostDuration(),
         ];

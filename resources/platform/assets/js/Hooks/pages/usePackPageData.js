@@ -1,6 +1,6 @@
 // hooks/usePackPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchPackAll } from 'musora-content-services';
+import { fetchCompletedState, fetchPackAll, fetchPackChildren } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -36,17 +36,32 @@ export async function usePackPageData(contentType) {
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
-    try {
-        const result = await fetchPackAll(contentId, "pack-bundle");
-        if (result) {
-            data.value = result;
-            data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
+    if(contentType === "pack-overview") {
+        try {
+            const result = await fetchPackChildren(contentId, "pack-bundle");
+            if (result) {
+                data.value = result;
+                data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
+            }
+        } catch (err) {
+            error.value = err;
+        } finally {
+            isLoading.value = false;
         }
-    } catch (err) {
-        error.value = err;
-    } finally {
-        isLoading.value = false;
+    } else {
+        try {
+            const result = await fetchPackAll(contentId, "pack-bundle");
+            if (result) {
+                data.value = result;
+                data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
+            }
+        } catch (err) {
+            error.value = err;
+        } finally {
+            isLoading.value = false;
+        }
     }
+
 
     return { data, error, isLoading };
 }
