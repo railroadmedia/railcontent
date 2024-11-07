@@ -88,11 +88,19 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     'rudiment',
                     'challenge-part',
                     'challenge',
-                    'rhythms-from-another-planet',
                     'song-tutorial-children',
                     'song-tutorial',
                     'semester-pack-lesson',
-                    'semester-pack'
+                    'semester-pack',
+                    'song',
+                    'coach-stream',
+                    'learning-path-lesson',
+                    'learning-path-course',
+                    'learning-path-level',
+                    'learning-path',
+                    'unit-part',
+                    'unit'
+
                 ],
                 config('railcontent.showTypes')[$this->argument('brand')]
             );
@@ -105,10 +113,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         //import  related models
         if ($this->argument('clean') == 'true') {
             $directory = resource_path() . '/sanitystudio';
-            $related   = ['permissions.ndjson', 'instructors.ndjson', 'artists.ndjson'];
+            $related   = ['permissions.ndjson',  'artists.ndjson'];
             foreach ($extraModels as $index => $extraModel) {
                 $related[] = $index . '.ndjson';
             }
+            $related[] = 'instructors.ndjson';
             foreach ($related as $filename) {
                 $this->info(" ---- Start $filename migration. ----");
                 $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $filename $destination --replace");
@@ -563,7 +572,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
     private function handleChildren(mixed $result, array &$songs, string $id, mixed $type): array
     {
         $contentHierarchy = ContentHierarchy::with('child')->where('parent_id', '=', $result->id)->orderBy('child_position', 'asc')->get();
-        if($contentHierarchy->isEmpty()){
+        if ($contentHierarchy->isEmpty()) {
             return $songs;
         }
         $duration = 0;
@@ -589,7 +598,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     ];
                 } elseif ($hierarchy->child->type == 'assignment') {
                     unset($songs['child_count']);
-                        $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
+                    $songs['assignments_total_xp'] = $songs['assignments_total_xp'] + 25;
                     $assignmentSheetMusicImage = $hierarchy->child->data->where('key', '=', 'sheet_music_image_url')->pluck('value')->toArray();
                     $songs["assignment"][] = [
                         'assignment_title'             => $hierarchy->child->title,
@@ -602,7 +611,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             }
         }
 
-        $songs['length_in_seconds'] = $duration;
+        if($duration != 0) { $songs['length_in_seconds'] = $duration; }
 
         return $songs;
     }
@@ -618,9 +627,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $query->where('railcontent_content.id', '=', $railcontentId);
         }
 
-        return $query->whereNotIn('railcontent_content.id', [402037, 30437, 206255, 375281, 30435, 203875,   268094,
-            23313, 23393, 23395, 29663,
-            410145, 331419, 350720, 331265, 268090, 325246, 324389, 310413, 347097, 373123, 374076,213076, 213078, 264279])
+        return $query->whereNotIn('railcontent_content.id', [      410145,        213076,  213078])
             ->orderBy('id', 'asc')
             ->get();
     }
@@ -679,7 +686,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             "web_url_path"     => $result->web_url_path,
             "popularity"       => $result->popularity
         ];
-        if($result->published_on){
+        if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->format('Y-m-d\TH:i:s\Z');
         }
         if (!$result->web_url_path) {
@@ -707,20 +714,17 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if (isset($this->difficultyMapping[$difficulty])) {
             $sanityDocuments["difficulty_string"] = $this->difficultyMapping[$difficulty];
         }
-        if($result->parent_content_data) {
+        if ($result->parent_content_data) {
             $parents = (json_decode($result->parent_content_data));
-            foreach ($parents as $parent){
+            foreach ($parents as $parent) {
                 $sanityDocuments['parent_content_data'][] = ['type' => $parent->type,
-                    'id' => $parent->id, 'slug' =>$parent->slug];
+                    'id' => $parent->id, 'slug' => $parent->slug, 'position' => $parent->position ?? 1];
             }
         }
         $resources       = [];
         $chapters        = [];
         $notImportedData = [];
-        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,382827,391008,382879,391160,
-            399638,                404279, 404299, 401415, 270443,
-            318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
-            382879, 391008, 391160, 401415, 378258, 381186];
+        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,391008,382879,391160, 399638,404279, 404299, 401415, 270443,  318625, 30437, 206255, 375281, 268094, 23313, 23393, 23395, 331419];
         foreach ($result->data as $datum) {
             $imported = false;
             if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
@@ -885,7 +889,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     'enrollment_end_time',
                     'live_event_start_time',
                     'live_event_end_time',
-                    ]) && $field['value'] != '') {
+                    ]
+            ) && $field['value'] != '') {
                 try {
                     // Attempt to parse and format the date
                     $sanityDocuments[$field['key']] = Carbon::parse($field['value'])->format('Y-m-d\TH:i:s\Z');
@@ -1045,9 +1050,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $this->handleGenre($extraData, $sanityDocuments, $id);
         $this->handleInstructors($result, $instructors, $sanityDocuments, $id);
         $this->handleChildren($result, $sanityDocuments, $id, $type);
-        if(!$result->total_xp || $result->total_xp == 0){
+        if (!$result->total_xp || $result->total_xp == 0) {
             $default = $this->getDefaultTotalXp($result->type, $result->difficulty);
-            $sanityDocuments['total_xp'] = (($sanityDocuments['xp'] != 0) ? $sanityDocuments['xp']:  $default) + $sanityDocuments['assignments_total_xp'] + $sanityDocuments['children_total_xp'];
+            $sanityDocuments['total_xp'] = (($sanityDocuments['xp'] != 0) ? $sanityDocuments['xp'] : $default) + ($sanityDocuments['assignments_total_xp']??0) + ($sanityDocuments['children_total_xp']??0);
         }
         unset($sanityDocuments['assignments_total_xp']);
         unset($sanityDocuments['children_total_xp']);
@@ -1086,15 +1091,16 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         return $sanityDocuments;
     }
 
-    private function getDefaultTotalXp($type, $difficulty){
+    private function getDefaultTotalXp($type, $difficulty)
+    {
         $specialTypeXP = ['pack' => 5000, 'pack-bundle' => 500,
-            'unit' => 1000, 'learning-path' => 5000, 'learning-path-level'=>1000, 'learning-path-course' => 150, 'course' => 500, 'song' => 150];
-        $difficultyXp = ['1' =>100,'2'=>100,'3'=>100,
-            'Beginner'=>100, 'Intermediate'=>150,'All'=>150,'Al'=>150, 'All Skill Levels'=>150,'Advanced'=>200,  '4'=>150,'5'=>150,'6'=>150,'7'=>200,'8'=>200,'9'=>200,'10' => 200,'500' =>150, '05' => 150, '02' => 100, '01' => 100];
+            'unit' => 1000, 'learning-path' => 5000, 'learning-path-level' => 1000, 'learning-path-course' => 150, 'course' => 500, 'song' => 150];
+        $difficultyXp = ['1' => 100,'2' => 100,'3' => 100,
+            'Beginner' => 100, 'Intermediate' => 150,'All' => 150,'Al' => 150, 'All Skill Levels' => 150,'Advanced' => 200,  '4' => 150,'5' => 150,'6' => 150,'7' => 200,'8' => 200,'9' => 200,'10' => 200,'500' => 150, '05' => 150, '02' => 100, '01' => 100];
         $defaultXPperType = $specialTypeXP[$type] ?? 0;
         $difficultyDefaultXP = $difficultyXp[$difficulty] ?? 0;
 
-        return ($defaultXPperType!= 0)? $defaultXPperType : $difficultyDefaultXP;
+        return ($defaultXPperType != 0) ? $defaultXPperType : $difficultyDefaultXP;
 
     }
 }
