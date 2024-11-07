@@ -15,7 +15,7 @@
         />
         <div class="tw-my-4">
             <ListCatalogue
-                :content="data?.children"
+                :content="data"
                 :user-id="userId"
                 :is-admin="isAdmin"
                 :show-numbers="true"
@@ -94,9 +94,10 @@ onMounted( async () => {
     //console.log(props.headerPageType)
     const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-overview');
         data.value = PackData.value;
+        console.log('data.value', data.value)
         //Header Data
-        header.value = PackData.value.header;
-        console.log('header', header.value)
+        header.value = PackData?.value?.header;
+        console.log( 'header', header.value )
 
         platformStore.setLoadingState(PackLoading.value);
 })

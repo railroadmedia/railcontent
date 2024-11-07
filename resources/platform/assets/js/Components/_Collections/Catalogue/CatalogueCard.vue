@@ -306,7 +306,7 @@ const thumbnailBadge = computed(() => {
     } else if (props.item.type === 'workout') {
         return duration.value;
     } else if (props.item.type === 'course' || props.item.type === 'pack-bundle') {
-        return `${props.item.child_count} Lessons`;
+        return `${props.item.lesson_count} Lessons`;
     } else {
         return duration.value;
     }
