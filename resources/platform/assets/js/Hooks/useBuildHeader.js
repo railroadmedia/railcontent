@@ -12,18 +12,19 @@ export function useBuildHeader(progressPercent) {
         };
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
+            //console.log('info', result)
             header.infoData = [
-                `${result.child_count} ${contentType === 'pack-bundle' ? 'Packs' : 'Lessons'}`,
+                `${result.lesson_count} ${contentType === 'pack-bundle' ? 'Packs' : 'Lessons'}`,
                 `${result.total_xp} XP`
             ];
         }
 
-        // Add additional custom fields based on contentType if needed
-        if (contentType === 'pack') {
+        // Add additional custom fields based on contentType if 
+        if (contentType === 'pack' || contentType === 'pack-bundle') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
-            header.darkModeLogo = result.light_mode_logo_url;
-            header.lightModeLogo = result.dark_mode_logo_url;
+            header.darkModeLogo = result.light_logo;
+            header.lightModeLogo = result.dark_logo;
         }
 
         return header;

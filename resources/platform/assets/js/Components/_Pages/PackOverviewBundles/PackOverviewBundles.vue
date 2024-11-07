@@ -84,10 +84,11 @@ const header = ref(null)
 
 onMounted( async () => {
     const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-bundle');
+        //console.log('packData', PackData.value )
         data.value = PackData.value;
         //Header Data
-        header.value = PackData.value.header;
-        
+        header.value = PackData?.value?.header;
+        //console.log( 'header', header.value )
         platformStore.setLoadingState(PackLoading.value);
 })
 </script>
