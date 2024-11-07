@@ -16,6 +16,7 @@ use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\RedirectController;
+use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\STCController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
@@ -385,6 +386,18 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->whereIn('primaryPage', ['method'])
                     ->name('platform.content.fourth-level');
+
+
+                /*
+                 * Referral Pages
+                 */
+                Route::domain('{musoraDomain}')
+                    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+                    ->group(function () {
+                        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+                            ->whereIn('brand', all_brands())
+                            ->name('platform.invite-a-friend');
+                    });
             });
 
         // anyone even without pack or a membership can access these
@@ -860,7 +873,13 @@ Route::domain('{musoraDomain}')
 Route::domain('{musoraDomain}')
     ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
     ->group(function () {
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+        Route::get('/{brand}/referral/invite-a-friend', 
+        [ReferralPagesController::class, 'inviteAFriend'])            
+            ->whereIn('brand', all_brands())            
+            ->name('platform.invite-a-friend');
+
+        Route::get('/{brand}/profile/settings/account', 
+        [ProfileSettingsPagesController::class, 'account'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
     });

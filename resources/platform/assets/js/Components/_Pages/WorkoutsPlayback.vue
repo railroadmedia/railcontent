@@ -21,7 +21,7 @@
                             <transition v-if="videoProps.videoType === 'youtube'" appear name="fade">
                                 <YoutubePlayer :video-id="videoProps.videoId" ref="mediaElementVueInstance" :brand="brand"
                                     :theme-color="brand" :video-length="videoProps.videoLength"
-                                    :progress-state="videoProps.progressState" :content-id="videoProps.id"
+                                    :progress-state="videoProps.progressState" :content-id="videoProps.contentId"
                                     :use-intersection-observer="true" :start-second="startSecond"
                                     :end-second="videoProps.videoLength" :total-duration="videoProps.videoLength"
                                     :seek-to-time="seekToTime" @play="handleVideoPlay" @pause="handleVideoPause"
@@ -34,7 +34,7 @@
                                     :brand="videoProps.brand" :theme-color="videoProps.brand"
                                     :poster="videoProps.thumbnailUrl" :sources="videoProps.sources"
                                     :hls-manifest-url="videoProps.hlsManifestUrl" :video-id="videoProps.vimeoVideoId"
-                                    :content-id="videoProps.id" :current-second="videoProps.lastWatchPositionInSeconds"
+                                    :content-id="videoProps.contentId" :current-second="videoProps.lastWatchPositionInSeconds"
                                     :progress-state="videoProps.progressState" :video-length="videoProps.videoLength"
                                     :chapters="videoProps.chapters" :user-id="videoProps.userId"
                                     :like-count="videoProps.likeCount" :is-liked="videoProps.isLiked"
@@ -298,6 +298,24 @@ const showPracticeButton = computed(() => {
     return !!props.soundsliceSlug;
 });
 
+const sendProgressTrackerEvent = () => {
+    if(progressTracker) {
+        const sessionTokenElement = document.querySelector('#sessionToken');
+        progressTracker.send({
+            mediaId: mediaElementVueInstance.value.videoId,
+            mediaType: 'video',
+            mediaCategory: props.videoProps.videoType,
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            sessionToken: sessionTokenElement.value || null,
+            brand: props.videoProps.brand,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
+};
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -305,21 +323,9 @@ const handleVideoPlay = (payload) => {
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
-        const sessionTokenElement = document.querySelector('#sessionToken');
         if (mediaElementVueInstance.value) {
             window.addEventListener('unload', (event) => {
-                progressTracker.send({
-                    mediaId: mediaElementVueInstance.value.videoId,
-                    mediaType: 'video',
-                    mediaCategory: 'vimeo',
-                    watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
-                        || mediaElementVueInstance.value.currentTime,
-                    totalDuration: mediaElementVueInstance.value.videoLength
-                        || mediaElementVueInstance.value.totalDuration,
-                    sessionToken: sessionTokenElement.value || null,
-                    brand: props.videoProps.brand,
-                    contentId: mediaElementVueInstance.value.contentId
-                });
+                sendProgressTrackerEvent();
             });
         }
     }
@@ -327,12 +333,17 @@ const handleVideoPlay = (payload) => {
     progressTracker.start();
 };
 
-const handleVideoPause = (payload) => {
+const handleVideoPause = () => {
     progressTracker.stop();
+    sendProgressTrackerEvent();
 };
 
-const handleVideoEnd = () => {
-    isRelatedSectionOpen.value = true;
+const handleVideoEnd = (showRelatedSection = true) => {
+    if (showRelatedSection) {
+        isRelatedSectionOpen.value = true;
+    }
+    sendProgressTrackerEvent();
+    ContentService.markContentAsComplete(props.videoProps.contentId);
 };
 
 const getBrandSpecificParams = () => {

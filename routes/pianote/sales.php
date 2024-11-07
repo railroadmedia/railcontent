@@ -14,12 +14,16 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial-songs', [SalesController::class, 'trialSongs']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
         Route::get('/ultimate-practice', [SalesController::class, 'ultimatepractice']);
+        Route::get('/promo/beautiful-beginner-bundle', [SalesController::class, 'beginner']);
         Route::get('/back-to-school', [SalesController::class, 'backToSchool']);
+        Route::get('/monthly', [SalesController::class, 'monthly']);
         Route::get('/restart', [SalesController::class, 'restart'] );
         Route::get('/song-secrets-bonus', [SalesController::class, 'promoSS']);
         Route::get('/ultimate-technique', [SalesController::class, 'promoUT']);
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
+        Route::get('/trial/more-time', [SalesController::class, 'promoMT']);
+        Route::get('/trial/one-dollar', [SalesController::class, 'promoOD']);
         Route::get('/welcome-offer', [SalesController::class, 'promoWO']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);
         Route::get('/student-only', [SalesController::class, 'promo']);
@@ -33,7 +37,15 @@ Route::domain('{pianoteDomain}')
             function () {
                 Route::get('/{page?}', SalesController::class . '@affiliates')
                     ->whereIn('page', [
-                        'asobergirlsguide', 'keyboardkraze', 'pianodreamers'
+                        'asobergirlsguide',
+                        'ben-dunnill',
+                        'gamazda',
+                        'jemma-heigis',
+                        'keyboardkraze',
+                        'musician-wave',
+                        'musicradar',
+                        'noah-wonder',
+                        'pianodreamers'
                     ]);
             }
         );

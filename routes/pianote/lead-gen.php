@@ -17,6 +17,9 @@ Route::domain('{pianoteDomain}')
         Route::get('/tcpcpreferences', [LeadGenController::class, 'tcpcpreferences']);
         Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
         Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
+        Route::get('/passing-chords', [LeadGenController::class, 'passingChords']);
+        Route::get('/pentatonic-licks', [LeadGenController::class, 'pentatonicLicks']);
+        Route::get('/chords-book-email', [LeadGenController::class, 'chordsBookEmail']);
         Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
         Route::get('/f-sharp-minor', [LeadGenController::class, 'fSharpMinor']);
         Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
@@ -38,6 +41,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/prima-resources', [LeadGenController::class, 'primaResources']);
         Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
         Route::get('/technique-essentials', [LeadGenController::class, 'techniqueEssentials']);
+        Route::get('/giveaway/win', [LeadGenController::class, 'win']);
 
         Route::group(
             ['prefix' => 'piano-complete-beginners-bootcamp'],

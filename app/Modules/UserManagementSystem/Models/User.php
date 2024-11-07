@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
@@ -15,6 +16,7 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -37,6 +39,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
+use Modules\UserManagementSystem\Models\OnboardingBrand;
 use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -1043,9 +1046,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             fn (OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
         );
 
-        $hasGear = $this->onboardingGear->contains(
-            fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
-        );
+        $hasGear = in_array($this->last_used_brand, [Brand::Pianote->value, Brand::Singeo->value]) ||
+            $this->onboardingGear->contains(
+                fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
+            );
 
         $hasTopics = $this->onboardingTopics->contains(
             fn (OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
@@ -1076,6 +1080,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         ];
     }
 
+    public function exploreTasks(): HasMany
+    {
+        return $this->hasMany(UserExploreTask::class);
+    }
+
     public function isFirstAccess(): bool
     {
         if ($this->first_access_at) {
@@ -1084,5 +1093,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->first_access_at = Carbon::now();
         $this->save();
         return true;
+    }
+
+    public function onboardingBrands(): HasOne
+    {
+        return $this->hasOne(OnboardingBrand::class);
     }
 }

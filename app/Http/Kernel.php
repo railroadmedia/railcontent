@@ -6,8 +6,8 @@ use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\LoggingContextMiddleware;
-use App\Http\Middleware\PausedMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
+use App\Http\Middleware\ValidateRedirectUrl;
 use App\Modules\MusoraApi\Middleware\DeprecationMiddleware;
 use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -27,7 +27,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
+        \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
             LeadTrackerMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
+            ValidateRedirectUrl::class,
         ],
 
         'web_authenticated' => [
@@ -80,6 +81,7 @@ class Kernel extends HttpKernel
             LoggingContextMiddleware::class,
             LogOutWhenNeeded::class,
             AuthenticateSession::class,
+            ValidateRedirectUrl::class,
         ],
 
         'web_member_only' => [
@@ -99,6 +101,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
+            ValidateRedirectUrl::class,
         ],
 
         'api_authenticated' => [
@@ -115,6 +118,7 @@ class Kernel extends HttpKernel
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
             LogOutWhenNeeded::class,
+            ValidateRedirectUrl::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!

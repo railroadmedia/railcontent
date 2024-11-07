@@ -587,8 +587,8 @@
                                     <span class="line-through" style="color: #879097; margin-right: 5px;"> $249 </span>
                                     <strong>$149</strong>
                                 @else
-                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> $249 </span>
-                                    <strong>$149</strong>
+                                    <strong> $249 </strong>
+                                    {{-- <strong>$149</strong> --}}
                                 @endif
                             </h3>
                             <p class="text-sm mb-5"><em>One-time payment.</em></p>

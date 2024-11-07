@@ -27,12 +27,12 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', ]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote' ]);
     }
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -50,9 +50,17 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.ultimate-practice', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
+    public function beginner()
+    {
+        return view('pianote.sales.promo-beautiful-beginner-bundle', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
     public function backToSchool()
     {
         return view('pianote.sales.back-to-school', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
+    }
+    public function monthly()
+    {
+        return view('pianote.sales.monthly', ['theme' => 'pianote', 'smallPromoBanner' => 'true',]);
     }
     public function promoEG()
     {
@@ -61,6 +69,14 @@ class SalesController extends BaseController
     public function promoWO()
     {
         return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
+    public function promoMT()
+    {
+        return view('pianote.sales.more-time', ['theme' => 'pianote', 'month' => true]);
+    }
+    public function promoOD()
+    {
+        return view('pianote.sales.one-dollar', ['theme' => 'pianote', 'month' => true]);
     }
     public function welcomeBackDiscount()
     {
@@ -463,6 +479,16 @@ class SalesController extends BaseController
         return view('pianote.products.easy-chords-trial', ['theme' => 'pianote']);
     }
 
+    public function yuletideshirtBundle()
+    {
+        return view('pianote.products.yuletide-shirt-bundle', ['theme' => 'pianote']);
+    }
+
+    public function yuletidesweaterBundle()
+    {
+        return view('pianote.products.yuletide-sweater-bundle', ['theme' => 'pianote']);
+    }
+
     public function classicalPianoCollection()
     {
         $productId = 1044;
@@ -481,6 +507,12 @@ class SalesController extends BaseController
     public function classicalPianoCollectionMembership()
     {
         return view('pianote.sales.classical-piano-collection-membership', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function headphones()
+    {
+        return view('pianote.products.headphones', [
             'theme' => 'pianote',
         ]);
     }

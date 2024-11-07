@@ -81,23 +81,23 @@
             color:transparent
         }
 
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+        form.ajax-form ::-webkit-input-placeholder, form.ajax-form ::-moz-placeholder, form.ajax-form :-ms-input-placeholder, form.ajax-form :-moz-placeholder {
             color:#777
         }
 
-        form {
+        form.ajax-form {
             position: relative;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
         @media (min-width: 768px) {
-            form {
+            form.ajax-form {
                 margin: 0 auto 10px;
             }
         }
 
-        form input, form button {
+        form.ajax-form input, form.ajax-form button {
             font: 400 18px/50px 'Open Sans', sans-serif;
             height: 50px;
             color: #999;
@@ -107,13 +107,13 @@
             margin: 0 auto 15px;
         }
         @media (min-width: 768px) {
-            form input, form button {
+            form.ajax-form input, form.ajax-form button {
                 font-size: 22px;
                 height: 65px;
                 line-height: 65px;
             }
         }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
+        form.ajax-form input[type="submit"], form.ajax-form button[type="submit"], form.ajax-form input button, form.ajax-form button button {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             background: #0b76db;
@@ -126,7 +126,7 @@
             text-align: center;
             padding: 0;
         }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+        form.ajax-form input[type="submit"]:hover, form.ajax-form button[type="submit"]:hover, form.ajax-form input button:hover, form.ajax-form button button:hover {
             background: #258ff4;
         }
         .disclaimer {
@@ -283,6 +283,30 @@
         .timeline-container.guitareo .timeline:after {
             background-color: #00C9AC;
         }
+        .join.pianote {
+            background:#F61A30;
+        }
+        .join.pianote:hover {
+            background:#ff263c;
+        }
+        .timeline-container.pianote:after {
+            background-color: #F61A30;
+        }
+        .timeline-container.pianote .timeline:after {
+            background-color: #F61A30;
+        }
+        .join.singeo {
+            background:#8300E9;
+        }
+        .join.singeo:hover {
+            background:#9000ff;
+        }
+        .timeline-container.singeo:after {
+            background-color: #8300E9;
+        }
+        .timeline-container.singeo .timeline:after {
+            background-color: #8300E9;
+        }
     </style>
 @endsection
 
@@ -358,23 +382,39 @@
 
 @section('content')
 
-    @if($cohort['slug'] == '30-day-double-bass')
-        <div class="bg-white text-black">
+    <div class="bg-white text-black">
+        @if($cohort['slug'] == '30-day-jazz-piano')
+            @include('pianote.products._30D-jazz-piano', [
+                'theme' => 'pianote',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == 'everyday-improv')
+            @include('singeo.products._everyday-improv', [
+                'theme' => 'singeo',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == '30-day-jazz')
+            @include('drumeo.products._30D-jazz', [
+                'theme' => 'drumeo',
+                'platformVersion' => true,
+                'hasProduct' => json_encode($hasProduct)
+            ])
+        @elseif($cohort['slug'] == '30-day-double-bass')
             @include('drumeo.products._30D-double-bass', [
                 'theme' => 'drumeo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])
-        </div>
-    @elseif($cohort['slug'] == 'electric-guitarists-start-here')
-        <div class="bg-white text-black">
+        @elseif($cohort['slug'] == 'electric-guitarists-start-here')
             @include('guitareo.products._electric-guitarists-start-here', [
                 'theme' => 'guitareo',
                 'platformVersion' => true,
                 'hasProduct' => json_encode($hasProduct)
             ])
-        </div>
-    @endif
+        @endif
+    </div>
     <Cohort
         :cohort="{{ json_encode($cohort) }}"
         :register-url="{{ json_encode($registerButtonUrl) }}"

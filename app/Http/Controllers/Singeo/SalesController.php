@@ -9,7 +9,7 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('singeo.sales.subscription', ['theme' => 'singeo']);
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'noEverflow' => true]);
     }
     public function fiveReasons()
     {
@@ -69,6 +69,16 @@ class SalesController extends BaseController
     public function asobergirlsguide()
     {
         return view('singeo.sales.affiliates.asobergirlsguide', ['theme' => 'singeo', 'month' => true]);
+    }
+
+    public function musicianwavesing()
+    {
+        return view('singeo.sales.affiliates.musician-wave-sing', ['theme' => 'singeo', 'month' => true]);
+    }
+
+    public function singeomusicradar()
+    {
+        return view('singeo.sales.affiliates.singeo-musicradar', ['theme' => 'singeo', 'month' => true]);
     }
 
     public function prefBeginner()
@@ -154,6 +164,11 @@ class SalesController extends BaseController
     public function singingStraw()
     {
         return view('singeo.products.singing-straw', [ 'theme' => 'singeo' ]);
+    }
+
+    public function everydayImprov()
+    {
+        return view('singeo.products.everyday-improv', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'singeo' ]);
     }
 
     public function lifetimeMasterclass()

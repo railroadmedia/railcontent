@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Referral\Controllers\ReferralController;
 use Illuminate\Support\Facades\Route;
 
 // note: these endpoints support web or json requests
@@ -11,7 +12,12 @@ Route::group(
     function () {
         Route::post(
             '/email-invite',
-            \App\Modules\Referral\Controllers\ReferralController::class.'@emailInvite'
+            ReferralController::class.'@emailInvite'
         )->name('referral.email-invite');
+
+        Route::post(
+            '/validate-email',
+            [ReferralController::class,'validateEmail']
+        )->name('referral.validate-email');
     }
 );

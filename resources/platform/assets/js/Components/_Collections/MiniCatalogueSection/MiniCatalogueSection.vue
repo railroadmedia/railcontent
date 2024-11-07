@@ -6,7 +6,7 @@
                 <div class="tw-flex tw-items-center">
                     <a @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
+                        <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] lg:tw-leading-[36px] lg:tw-text-[24px]">{{ title }}</h2>
                         <ChevronRightIcon class="tw-w-5" />
                     </a>
                     <slot name="label"></slot>
@@ -27,6 +27,7 @@
                         :show-dropdown="showDropdown"
                         :tracking-section="trackingSection"
                         :page="page"
+                        :show-see-all-card="preLoadedContent.length > 6 && showSeeAllCard"
                         @on-progress-reset="resetProgress"
                     />
                 </transition>
@@ -95,6 +96,7 @@ const userStore = useUserStore();
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
+const showSeeAllCard = ref(false);
 
 const handleSeeAllClick = (event) => {
   if (props.seeAllUrl && props.trackingSection) {
@@ -113,6 +115,7 @@ const handleSeeAllClick = (event) => {
 
 const watchResize = () => {
     if(props.isMiniView){
+        showSeeAllCard.value = false;
         if(window.innerWidth > 2256){
             cardNum.value = 10;
         } else if(window.innerWidth > 1536){
@@ -122,7 +125,8 @@ const watchResize = () => {
         } else if(window.innerWidth > 1024){
             cardNum.value = 4;
         } else {
-            cardNum.value = 20;
+            showSeeAllCard.value = true;
+            cardNum.value = 6;
         }
     } else {
         if(window.innerWidth > 1536){
