@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=540,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coach-share-image/@yield('url').jpg" style="display: none;">
 @endsection
 
-@section('promo-banner')
+@section('top-bar')
     <div class="text-white px-4 sm:px-6 py-6 sm:py-8 relative z-10" style="background-color:#000318;">
         <div class="container max-w-4xl mx-auto">
             <div class="sm:flex mx-auto items-start text-center">

@@ -19,12 +19,11 @@ import AccountDetails from './Components/_Pages/Settings/AccountDetails.vue';
 import Artists from './Components/_Pages/Artists.vue';
 import ChildCatalog from './Components/_Pages/ChildCatalog.vue';
 import Cohort from './Components/_Pages/Cohort';
-import Home from './Components/_Pages/Home.vue';
+import Home from './Components/_Pages/Homev2.vue';
 import LessonHistory from './Components/_Pages/LessonHistory';
 import LessonPlayback from './Components/_Pages/LessonPlayback';
 import Playlist from './Components/_Pages/Playlist';
 import Playlists from './Components/_Pages/Playlists';
-import Referral from './Components/_Pages/Referral';
 import Schedule from './Components/_Pages/Schedule';
 import Songs from './Components/_Pages/Songs';
 import Stc from './Components/_Pages/STC';
@@ -35,6 +34,7 @@ import WorkoutsPlayback from './Components/_Pages/WorkoutsPlayback';
 import Offline from './Components/_Pages/Live/Offline';
 import Online from './Components/_Pages/Live/Online';
 import CoachShow from './Components/_Pages/CoachShow';
+import InviteFriend from './Components/_Pages/InviteFriend';
 import StudentFocus from './Components/_Pages/StudentFocus';
 import Shows from './Components/_Pages/Shows';
 import Overview from './Components/_Pages/Overview';
@@ -67,6 +67,7 @@ import ChildCollectionPage from './Components/_Collections/CollectionPage/ChildC
 import PageHeader from './Components/_Collections/PageHeader/PageHeader'
 import MiniCatalogueSection from './Components/_Collections/MiniCatalogueSection/MiniCatalogueSection';
 import DeleteAccountModal from './Components/_Collections/Modal/DeleteAccountModal';
+import NewMusoraIcon from './Components/_Collections/NewMusoraIcon/NewMusoraIcon';
 
 //Vuesora Assets
 import Forms from './Libraries/Vuesora/assets/js/classes/forms';
@@ -212,7 +213,6 @@ app.component('AppContainer', AppContainer)
     .component('Schedule', Schedule)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
-    .component('Referral', Referral)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
@@ -225,6 +225,7 @@ app.component('AppContainer', AppContainer)
     .component('Payments', Payments)
     .component('NotificationSettings', NotificationSettings)
     .component('AccountDetails', AccountDetails)
+    .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)
@@ -241,7 +242,8 @@ app.component('AppContainer', AppContainer)
     .component('ReturningContentUpdates', ReturningContentUpdates)
     .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
     .component('LeavingContentUpdates', LeavingContentUpdates)
-
+    .component('NewMusoraIcon', NewMusoraIcon)
+    
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

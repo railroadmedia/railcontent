@@ -93,7 +93,7 @@
                     :vue-router="false"
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
-                    :user-completed-account="{{ json_encode($showCompleteYourAccountButton) }}"
+                    :show-onboarding-banner="{{ json_encode($showCompleteYourAccountButton) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
                     tinymce-path="{{ mix('platform/js/tinymce/tinymce.min.js') }}"

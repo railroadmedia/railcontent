@@ -6,16 +6,17 @@ use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\Content\LoggingEventListener;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
-use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\UserEvent;
+use Modules\UserManagementSystem\Listeners\ExploreTasksListener;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\PlaylistDeleted;
 use Railroad\Railcontent\Events\PlaylistItemDeleted;
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railforums\EventListeners\PostEventListener;
 use Railroad\Railforums\EventListeners\ThreadEventListener;
@@ -38,8 +39,9 @@ class EventServiceProvider extends ServiceProvider
             NotificationEventListener::class . '@handlePostLiked',
         ],
         PostCreated::class => [
-            NotificationEventListener::class . '@handlePostCreated',
-            PostEventListener::class . '@onPostCreated'
+            [NotificationEventListener::class, 'handlePostCreated'],
+            [PostEventListener::class, 'onPostCreated'],
+            [ExploreTasksListener::class, 'handlePostCreated']
         ],
         PostDeleted::class => [
             PostEventListener::class . '@onPostDeleted'
@@ -60,8 +62,13 @@ class EventServiceProvider extends ServiceProvider
             AuthenticationEventListener::class . '@handleUserAuthenticated'
         ],
         UserCreated::class => [
-            [EventTrackerListener::class, 'handleUserCreated']
+            [EventTrackerListener::class, 'handleUserCreated'],
+            [ExploreTasksListener::class, 'handleUserCreated']
         ],
+        UserContentProgressSaved::class => [
+            [ExploreTasksListener::class, 'handleUserContentProgressSaved']
+        ],
+
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
         PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],

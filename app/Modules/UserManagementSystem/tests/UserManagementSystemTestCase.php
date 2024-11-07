@@ -14,5 +14,7 @@ abstract class UserManagementSystemTestCase extends TestCase
 
         Mail::fake();
         Notification::fake();
+        // disable railtracker middleware because it doesn't work with the testing environment
+        $this->withoutMiddleware([\Railroad\Railtracker\Middleware\RailtrackerMiddleware::class]);
     }
 }

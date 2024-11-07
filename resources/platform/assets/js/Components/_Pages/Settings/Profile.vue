@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${showOnboardingBanner ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }
@@ -40,7 +40,7 @@
                 <p>{{ userDisplayName }}</p>
             </div>
             <small class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">
-                This is the name other users will see on your profile, comments and forum posts.
+                This will appear on your profile, comments, forum posts and your main homepage.
             </small>
             <!-- Display Name Modal -->
             <EditDisplayNameModal v-if="showDisplayNameModal" @onCloseDisplayNameModal="handleShowDisplayNameModal" />
@@ -442,7 +442,7 @@
         userBiography,
         userProfilePictureUrl,
         userCreatedYear,
-        userCompletedAccount,
+        showOnboardingBanner,
         userDrumPhoto,
         userDrummingSince,
         userDrumBrands,

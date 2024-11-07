@@ -8,7 +8,7 @@ export const useUserStore = defineStore({
     brand: 'drumeo',
     journeySection: null,
     token: null,
-    userCompletedAccount: null,
+    showOnboardingBanner: null,
     userSignature: null,
   }),
   getters: {
@@ -77,7 +77,18 @@ export const useUserStore = defineStore({
       } else {
         return new Date().getFullYear();
       }
-    }
+    },
+    userHas30Days: (state) => {
+      if(state.user?.created_at) {
+        const createdAt = new Date(state.user.created_at);
+        const today = new Date();
+        const diffTime = Math.abs(today - createdAt);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays >= 30;
+      } else {
+        return false;
+      }
+    },
   },
   actions: {
     setUser (user) {
@@ -127,8 +138,8 @@ export const useUserStore = defineStore({
     setToken (token) {
       this.token = token;
     },
-    setCompletedAccount (value) {
-      this.userCompletedAccount = value;
+    setShowOnboardingBanner (value) {
+      this.showOnboardingBanner = value;
     },
     setUserSignature (value) {
       this.userSignature = value;
