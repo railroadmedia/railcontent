@@ -147,6 +147,15 @@ return [
                     'timestamp' => 'Timestamp',
                 ],
             ],
+            'Groove Coordination' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_groove-coordination',
+                ],
+                'accounts_to_sync' => [
+                    'musora',
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [

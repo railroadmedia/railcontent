@@ -303,6 +303,10 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.pages.the-playlist', ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function grooveCoordination ()
+    {
+        return view('drumeo.lead-gen.pages.groove-coordination', ['recaptchaKey' => config('recaptcha.key')]);
+    }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
