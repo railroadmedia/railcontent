@@ -319,7 +319,6 @@ class SanityGateway
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         resource,
-
         // Use a recursive-like approach to get only leaf nodes
         'lastChildItems': array::compact(
             child[]-> {
@@ -342,27 +341,38 @@ class SanityGateway
         $assignmentIds = [];
         $leafNodes = [];
         if (!empty($documents)) {
+
             // Flatten the structure to get leaf nodes only
-            foreach ($documents[0]['lastChildItems'] as $item) {
+            if(!$documents[0]['lastChildItems']){
+                $parent = (last($documents[0]['parent_content_data']));
+                $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null];
+            }
+            foreach ($documents[0]['lastChildItems']??[] as $item) {
                 if (!empty($item['assignments'])) {
                     foreach ($item['assignments'] as $assignment) {
-                        $assignmentIds[] = $assignment['railcontent_id'];
+                        $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
                     }
                 }
                 if (isset($item['children'])) {
                     foreach ($item['children'] as $child) {
                         if ($child['isLeaf']) {
-                            $leafNodes[] = $child['id'];
+                            $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id']];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
-                                    $assignmentIds[] = $assignment['railcontent_id'];
+                                    $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
                                 }
                             }
                         }
                     }
+                }else{
+                    $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id']];
+                    if (!empty($item['assignments'])) {
+                        foreach ($item['assignments'] as $assignment) {
+                            $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                        }
+                    }
                 }
             }
-            $assignmentIds = array_unique($assignmentIds);
         }
 
         return [

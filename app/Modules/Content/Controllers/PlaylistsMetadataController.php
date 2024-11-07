@@ -485,39 +485,63 @@ class PlaylistsMetadataController extends Controller
     public function addItemToPlaylists(AddItemToPlaylistRequest $request)
     {
         $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
+
+        $extraData = [
+            'import_full_soundslice_assignment' => json_encode(['is_full_track' => true]),
+            'import_instrumentless_soundslice_assignment' => json_encode(['is_instrumentless_track' => true]),
+            'import_high_routine' => json_encode(['is_high_routine' => true]),
+            'import_low_routine' => json_encode(['is_low_routine' => true])
+        ];
+
         foreach ($request->get('playlist_id') as $playlistId){
             $playlist = UserPlaylist::find($playlistId);
             if($playlist){
                 $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
                     ->max('position');
-                foreach ($flattenContent['lessons'] as $item){
-                    $lastPosition++;
-                    $playlistItemData = [
-                        'content_id'      => $item,
-                        'content_parent'         => null, //TODO
-                        'user_playlist_id'        => $playlistId,
-                        'position'         => $lastPosition,
-                        'created_at'   => Carbon::now()->toDateTimeString(),
-                    ];
-
-                    $playlistItem = UserPlaylistContent::create($playlistItemData);
+                $extraFlags = $request->all(['import_full_soundslice_assignment','import_instrumentless_soundslice_assignment', 'import_high_routine', 'import_low_routine']);
+                $isExtra = false;
+                foreach($extraFlags as $key=>$value){
+                    if($value){
+                        $isExtra = true;
+                        $lastPosition++;
+                        $playlistItemData = [
+                            'content_id'      => $request->get('content_id'),
+                            'content_parent'         => null,
+                            'user_playlist_id'        => $playlistId,
+                            'position'         => $lastPosition,
+                            'created_at'   => Carbon::now()->toDateTimeString(),
+                            'extra_data' => $extraData[$key],
+                        ];
+                        $playlistItem = UserPlaylistContent::create($playlistItemData);
+                    }
                 }
-                if($request->get('import_all_assignments', false)){
-foreach($flattenContent['soundslice_assignments'] as $item){
-    $lastPosition++;
-    $playlistItemData = [
-        'content_id'      => $item,
-        'content_parent'         => null, //TODO
-        'user_playlist_id'        => $playlistId,
-        'position'         => $lastPosition,
-        'created_at'   => Carbon::now()->toDateTimeString(),
-    ];
-
-    $playlistItem = UserPlaylistContent::create($playlistItemData);
-}
+                if(!$isExtra) {
+                    foreach ($flattenContent['lessons'] as $item) {
+                        $lastPosition++;
+                        $playlistItemData = [
+                            'content_id'       => $item['id'],
+                            'content_parent'   => $item['parent_id'],
+                            'user_playlist_id' => $playlistId,
+                            'position'         => $lastPosition,
+                            'created_at'       => Carbon::now()->toDateTimeString(),
+                        ];
+                        $playlistItem     = UserPlaylistContent::create($playlistItemData);
+                    }
+                }
+                if($request->get('import_all_assignments', false)) {
+                    foreach ($flattenContent['soundslice_assignments'] as $item) {
+                        $lastPosition++;
+                        $playlistItemData = [
+                            'content_id'       => $item['id'],
+                            'content_parent'   => $item['parent_id'],
+                            'user_playlist_id' => $playlistId,
+                            'position'         => $lastPosition,
+                            'created_at'       => Carbon::now()->toDateTimeString(),
+                        ];
+                        $playlistItem = UserPlaylistContent::create($playlistItemData);
+                    }
                 }
             }
-
         }
         return response()->json([
                                     'success' => true,
@@ -575,6 +599,8 @@ foreach($flattenContent['soundslice_assignments'] as $item){
                         return 'Method';
                     case 'learning-path-level':
                         return 'L' . $parent['position'];
+                    case 'foundation':
+                        return 'Method';
                     default:
                         return $parent['slug'];
                 }
