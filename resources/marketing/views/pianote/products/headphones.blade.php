@@ -352,7 +352,7 @@
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
             <div class="container mx-auto max-w-3xl px-2">
-                <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
+                <h2 class="text-black"><strong>The Best Sound For Your Buck.</strong></h2>
                 <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
             </div>
 
