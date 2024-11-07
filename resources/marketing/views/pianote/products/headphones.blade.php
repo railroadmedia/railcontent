@@ -216,17 +216,10 @@
     </style>
 
     @php
-        if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
-             $discountedPrice = 79;
-        }
-        else {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
-             $discountedPrice = number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2) == intval(floatval($productPrices['pianote-headphones-2024']->discounted_price))
-                ? floatval($productPrices['pianote-headphones-2024']->discounted_price)
-                : number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2);
-                }
-
+        $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
+        $discountedPrice = number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2) == intval(floatval($productPrices['pianote-headphones-2024']->discounted_price))
+           ? floatval($productPrices['pianote-headphones-2024']->discounted_price)
+           : number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2)
     @endphp
 @stop
 
@@ -422,10 +415,10 @@
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-white">
                             @if(floatval($productPrices['pianote-headphones-2024']->price) > $discountedPrice)
-                                {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
+                                 <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
                                 <strong>${{ $discountedPrice }}</strong>
                             @else
-                                <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>
+                                <strong>${{$discountedPrice}}</strong>
                             @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
