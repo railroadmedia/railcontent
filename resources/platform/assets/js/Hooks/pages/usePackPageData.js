@@ -1,6 +1,6 @@
 // hooks/usePackPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchPackAll, fetchPackChildren } from 'musora-content-services';
+import { fetchCompletedState, fetchPackAll, fetchPackData } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -38,8 +38,9 @@ export async function usePackPageData(contentType) {
 
     if(contentType === "pack-overview") {
         try {
-            const result = await fetchPackChildren(contentId, "pack-bundle");
+            const result = await fetchPackData(contentId, "pack-bundle");
             if (result) {
+                console.log('result', result)
                 data.value = result;
                 data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
             }

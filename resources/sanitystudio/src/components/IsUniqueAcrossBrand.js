@@ -26,7 +26,7 @@ export default async function IsUniqueAcrossBrand(slug, context) {
     const documents = await client.fetch(query, params);
     if (document.parent_type) {
         const isSlugUnique = !documents.some(doc =>
-            doc.child.some(child => child.exists === true)
+            doc.child && doc.child.some(child => child && child.exists === true)
         );
         return isSlugUnique;
     }

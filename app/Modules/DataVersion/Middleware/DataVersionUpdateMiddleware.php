@@ -34,11 +34,18 @@ class DataVersionUpdateMiddleware
         }
         $response = $next($request);
 
-        if (!$response->exception && is_array($response->original)) {
+        if (!$response->exception) {
             $version = $this->dataVersionService->incrementUserContextVersion($dataVersionKey, user()->id);
-            $response->original['version'] = $version;
+            $content = $response->getContent();
+            if (!$content) {
+                return response()->json(['version' => $version]);
+            }
+            if (json_validate($content)) {
+                $data = json_decode($content);
+                $data->version = $version;
+                return response()->json($data);
+            }
         }
-
         return $response;
     }
 }

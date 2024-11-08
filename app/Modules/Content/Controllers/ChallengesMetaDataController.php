@@ -7,6 +7,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -90,7 +91,7 @@ class ChallengesMetaDataController extends Controller
                         'is_user_enrolled' => true,
                         'progress_percent' => $userProgress->getCompletionPercent(),
                         'duration_text' => $durationText,
-                        'is_solo_challenge' => $userProgress['is_solo'],
+                        'is_solo' => $userProgress['is_solo'],
                         'status' => $status,
                     ];
                     break;
@@ -101,7 +102,7 @@ class ChallengesMetaDataController extends Controller
                     'is_user_enrolled' => false,
                     'progress_percent' => 0,
                     'duration_text' => $this->challengesService->getDurationText(Carbon::parse($challenge['published_on']), $this->challengesService->getChallengeEndDate($challenge)),
-                    'is_solo_challenge' => $challenge['is_solo_challenge'],
+                    'is_solo' => $challenge['is_solo'],
                     'status' => 'not_started',
                 ];
             }
@@ -198,8 +199,41 @@ class ChallengesMetaDataController extends Controller
     }
 
     /**
+     * Return all badges a user has completed
+     * @return JsonResponse
+     */
+    public function getUserBadges(Request $request)
+    {
+        $user = user();
+        $userId = $user->id;
+        $challengeProgress = ChallengeUserProgress::whereUserIdAndCompleted($userId);
+        if ($challengeProgress->isEmpty()) return response()->json([]);
+        $challengeIds = $challengeProgress->pluck('content_id')->toArray();
+        $brand = $request->get('brand', brand());
+        $challenges = $this->challengesService->getChallengeByIds($challengeIds, $brand);
+        $badges = [];
+        $completedDates = $challengeProgress->pluck('last_completed_date', 'content_id')->toArray();
+        arsort($completedDates);
+        foreach($challengeProgress as $progress) {
+            foreach($challenges as $challenge) {
+                if ($progress->content_id == $challenge['id']) {
+                    $badges[] = [
+                        'title' => $challenge['title'],
+                        'badge' => $challenge['badge'],
+                        'id' => $challenge['id'],
+                        ... $this->getUserAwardData($challenge, $progress, $user)
+                    ];
+                    break;
+                }
+            }
+        }
+        return response()->json($badges);
+    }
+
+
+    /**
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      * @throws \Exception
      */
     public function getUserAward($id)
@@ -208,50 +242,48 @@ class ChallengesMetaDataController extends Controller
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen
-//        if (is_null($userProgress->last_completed_date)) {
-//            return null;
-//        }
-        $lastCompleted = Carbon::parse($userProgress->last_completed_date);
-        $lastCompleted = $lastCompleted->toFormattedDateString();
-        $tier = $userProgress->getAwardTier()->value;
-        $awardUrl = $challenge["{$tier}_award"];
-        $signatureUrl = $challenge['instructor_signature'];
-        $awardTempFilePath = $this->createTempFileFromUrl($awardUrl);
-        $signatureTempFilePath = $this->createTempFileFromUrl($signatureUrl);
-        try {
-            $userAwardPDF = Pdf::loadView("awards.award-template", [
-                'user_name' => $user->display_name,
-                'streak' => $userProgress->completed_best_streak,
-                'minutes_practiced' => $userProgress->completed_time_practiced,
-                'date_completed' => $lastCompleted,
-                'challenge_title' => $challenge['title'],
-                'award' => $awardTempFilePath,
-                'award_url' => $awardUrl,
-                'award_text' => $challenge['award_custom_text'],
-                'tier' => $tier,
-                'instructor_signature' => $signatureTempFilePath,
-                'instructor_signature_url' => $signatureUrl,
-                'instructor_name' => $challenge['instructors'][0],
-            ])->setPaper('', 'landscape');
-            $today = Carbon::now()->toDateString();
-            $challengeName = $challenge['slug'];
-            $fileName = "$challengeName-$today.pdf";
-            return  $userAwardPDF->stream($fileName);
-        } catch (\Throwable $e){
-            throw $e;
-        } finally {
-            if ($awardTempFilePath) unlink($awardTempFilePath);
-            if ($signatureTempFilePath) unlink($signatureTempFilePath);
+        if (is_null($userProgress->last_completed_date)) {
+            return  response()->json([]);
         }
+        return  response()->json($this->getUserAwardData($challenge, $userProgress, $user));
     }
 
-    private function createTempFileFromUrl($url) : string | null
+    private function getUserAwardData($challenge, $userProgress, $user)
     {
-        if (!$url) return null;
-        $hash = sha1(Carbon::now()->toISOString() . $url);
-        $awardTempFilePath = tempnam(sys_get_temp_dir(), $hash);
-        file_put_contents($awardTempFilePath, fopen($url, 'r'));
-        return $awardTempFilePath;
+        $tier = $userProgress->getAwardTier()->value;
+        $lastCompleted = Carbon::parse($userProgress->last_completed_date);
+        $lastCompleted = $lastCompleted->toFormattedDateString();
+
+        $ribbonUrl = "https://d3fzm1tzeyr5n3.cloudfront.net/challenges/{$tier}_ribbon.png";
+        $musoraTextLogoUrl = 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/on_musora.png';
+        $brandUrl = match($challenge['brand']) {
+            'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
+            'singeo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
+            'guitareo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png',
+            'pianote' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/marketing/pianote/membership/homepage/2023/pianote-logo-red.png'
+        };
+        $imageValues = [
+            'award' => $challenge["{$tier}_award"],
+            'instructor_signature' =>  $challenge['instructor_signature'],
+            'musora_logo' => $musoraTextLogoUrl,
+            'brand_logo' => $brandUrl,
+            'ribbon_image' => $ribbonUrl,
+        ];
+        foreach($imageValues as $key => $url) {
+            $file = $url ? file_get_contents($url) : '';
+            $imageValues[$key . '_64'] = base64_encode($file);
+        }
+
+        return [
+            'user_name' => $user->display_name,
+            'streak' => $userProgress->completed_best_streak,
+            'minutes_practiced' => $userProgress->completed_time_practiced,
+            'date_completed' => $lastCompleted,
+            'challenge_title' => $challenge['title'],
+            'award_text' => $challenge['award_custom_text'],
+            'tier' => $tier,
+            ... $imageValues,
+        ];
     }
 
     /**

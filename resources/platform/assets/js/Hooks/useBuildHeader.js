@@ -17,12 +17,12 @@ export function useBuildHeader(progressPercent) {
             ];
         }
 
-        // Add additional custom fields based on contentType if 
+        // Add additional custom fields based on contentType if
         if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenges') {
-            header.thumbnail = result.logo_image_url;
+            header.thumbnail = result.thumbnail;
             header.image = result.image;
-            header.darkModeLogo = result.light_mode_logo_url;
-            header.lightModeLogo = result.dark_mode_logo_url;
+            header.darkModeLogo = result.light_logo;
+            header.lightModeLogo = result.dark_logo;
         }
 
         return header;

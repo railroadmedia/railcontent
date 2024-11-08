@@ -89,7 +89,7 @@ class ChallengesService
         if (!$challenge) {
             return null;
         }
-        $isSolo = !(is_null($startDate) && $isLocked);
+        $isSolo = ($challenge['is_solo'] ?? false) || !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
         $startDate = $startDate->startOfDay();
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData($challenge, startDate: $startDate, isLocked: $isLocked);
@@ -137,23 +137,16 @@ class ChallengesService
 
         if (!is_null($progressData) && $progressData->is_active) {
             $today = Carbon::now()->startOfDay();
-            $day = 0;
             foreach($challengeLessons as $index => $lesson) {
                 $unlockDate = $progressData->lessons_meta_data[$index]['unlock_date'];
                 $unlockDate = Carbon::parse($unlockDate);
                 $challengeLessons[$index]['unlock_date'] = $unlockDate->toISOString();
                 $challengeLessons[$index]['is_locked'] = $progressData->is_locked && $unlockDate > $today;
-                $challengeLessons[$index]['is_completed'] = $progressData->lessons_meta_data[$index]['is_completed'];
-                if (!$lesson['is_always_unlocked_for_challenge']) {
-                    $day += 1;
-                    $challengeLessons[$index]['index'] = $day;
-                    $challengeLessons[$index]['short_name'] = "Day {$day}";
-                } else {
-                    $challengeLessons[$index]['index'] = '';
-                    $challengeLessons[$index]['short_name'] = $lesson['title'];
-                }
-
-
+                $challengeLessons[$index]['completed'] = $progressData->lessons_meta_data[$index]['completed'];
+                // TODO https://musora.atlassian.net/browse/TCH-72
+                // handle index and short name
+                $challengeLessons[$index]['index'] = $index;
+                $challengeLessons[$index]['short_name'] = "Day {$index}";
             }
 
             $firstIncompleteLesson = $this->getFirstIncompleteLesson($challengeLessons, $progressData);
@@ -161,7 +154,7 @@ class ChallengesService
             $userData = $progressData->getCompiledMetadata();
             $now = Carbon::now();
             $userData['challenge_state'] = match (true) {
-                $challenge['is_solo_challenge'] => 'active_solo',
+                $challenge['is_solo'] => 'active_solo',
                 !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
                     $challenge['enrollment_start_time']
                 ) => 'upcoming',
@@ -234,7 +227,7 @@ class ChallengesService
         foreach ($challengeLessons as $index => $lesson) {
             foreach ($progressData->lessons_meta_data as $userProgressLesson) {
                 if ($lesson['id'] == $userProgressLesson['content_id']) {
-                    if (is_null($firstIncompleteLesson) && !$userProgressLesson['is_completed']) {
+                    if (is_null($firstIncompleteLesson) && !$userProgressLesson['completed']) {
                         $firstIncompleteLesson = $lesson;
                     }
                     $unlockDate = Carbon::parse($userProgressLesson['unlock_date']);
@@ -277,11 +270,12 @@ class ChallengesService
     /**
      * Get the sanity Documents for listed challenges
      * @param array $challengeIds
+     * @param string $brand
      * @return array | null
      */
-    public function getChallengeByIds($challengeIds) : array | null
+    public function getChallengeByIds($challengeIds, ?string $brand = null) : array | null
     {
-        return $this->sanityGateway->getByRailContentIds($challengeIds, 'challenge');
+        return $this->sanityGateway->getByRailContentIds($challengeIds, 'challenge', $brand);
     }
 
     public function completeLessonAndGetCurrentProgressResults($lessonId, $userId) : array
@@ -339,17 +333,17 @@ class ChallengesService
     }
 
     /**
-     * @param $challengId
+     * @param $challengeId
      * @param $userId
      * @return void
      * @throws \Exception
      */
-    public function completeChallenge($challengId, $userId)
+    public function completeChallenge($challengeId, $userId)
     {
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengId, $userId);
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
         $today = Carbon::now();
-        $bestStreak = max($userProgress->completed_best_streak, $userProgress->getBestCurrentStreak());
-        $bestMinutesPracticed = max($userProgress->completed_time_practiced, $userProgress->getMinutesPracticed());
+        $bestStreak = max($userProgress->getBestCurrentStreak(), $userProgress->completed_best_streak);
+        $bestMinutesPracticed = max($userProgress->getMinutesPracticed(), $userProgress->completed_time_practiced);
         $userProgress->completed_time_practiced = $bestMinutesPracticed;
         $userProgress->completed_best_streak = $bestStreak;
         $userProgress->last_completed_date = $today;
