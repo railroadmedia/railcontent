@@ -255,8 +255,8 @@
                 <i class="fas fa-check ml-3 sm:ml-5 text-musora"></i> Personalized support from real teachers
             </p>
 
-{{--            <a class="join smaller sold-out mb-2 sm:mb-0" aria-label="Customize anchor">SOLD OUT</a>--}}
-            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET THE BUNDLE</a>
+            <a class="join smaller sold-out mb-2 sm:mb-0" aria-label="Customize anchor">SOLD OUT</a>
+{{--            <a class="join smaller mb-2 sm:mb-0 anchor-slide" href="#customize-anchor" aria-label="Customize anchor">GET THE BUNDLE</a>--}}
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -270,22 +270,22 @@
         </div>
     </header>
 
-    <div class="sticky-trigger block"></div>
-    <a href="#customize-anchor"
-        class="promo-banner flex text-white text-center items-center justify-center -mt-12 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"
-        style="background: #091F30;">
-        <p class="inline-block mx-0 text-sm leading-tight uppercase">
-            <strong class="text-musora">SAVE 70% OFFER ENDS IN:</strong>
-                <br>
-            <span x-cloak x-data="timer()" x-init="countdown()">
-                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-            </span>
-        </p>
-    </a>
+{{--    <div class="sticky-trigger block"></div>--}}
+{{--    <a href="#customize-anchor"--}}
+{{--        class="promo-banner flex text-white text-center items-center justify-center -mt-12 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"--}}
+{{--        style="background: #091F30;">--}}
+{{--        <p class="inline-block mx-0 text-sm leading-tight uppercase">--}}
+{{--            <strong class="text-musora">SAVE 70% OFFER ENDS IN:</strong>--}}
+{{--                <br>--}}
+{{--            <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--            </span>--}}
+{{--        </p>--}}
+{{--    </a>--}}
 
     <section class="text-center px-5 sm:px-6 pb-12 sm:pb-16 lg:pb-20 " style="background: linear-gradient(180deg, #f4f0eb, #fff);">
         <div class="pt-4 md:pt-0">
@@ -678,7 +678,7 @@
                 </div>
             </section>
         </div>
-        <a href="#customize-anchor" class="join smaller anchor-slide mb-20">GET THE BUNDLE &raquo;</a>
+{{--        <a href="#customize-anchor" class="join smaller anchor-slide mb-20">GET THE BUNDLE &raquo;</a>--}}
 
         <div class="container max-w-5xl mx-auto">
             <img class="h-28 sm:h-48 lg:h-56" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/pianote/promos/october/bundle-image.webp">
@@ -752,7 +752,7 @@
                 </div>
             @endforeach
 
-            <a href="#customize-anchor" class="join smaller anchor-slide">SAVE 70% &raquo;</a>
+{{--            <a href="#customize-anchor" class="join smaller anchor-slide">SAVE 70% &raquo;</a>--}}
         </div>
     </section>
 
@@ -772,7 +772,7 @@
                         <br><br>
                         <em class="text-sm">*Free shipping in the US.</em>
                     </p>
-                    <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>
+{{--                    <a href="#customize-anchor" class="join smaller anchor-slide">Get the Bundle &raquo;</a>--}}
                 </div>
 
                 <div class="sm:w-5/12 mb-7 sm:mb-0 relative">
@@ -1019,70 +1019,71 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left mx-auto w-full lg:w-3/4 lg:pl-5 xl:pl-10">
-                    <a href="{{ $buttonLink }}" style="text-decoration:none"
-                            class="z-10 relative px-5 sm:px-6 sm:pr-10 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-1/2 relative z-10">
-                        <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
-                        <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>
-                        @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
-                        @else
-                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
-                            <p class="inline-block text-black">(Save 70%)</p>
-                        @endif
-                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>
-                        <p class="leading-tight text-sm"><span class="text-pianote">Discount ends in:</span><br>
-                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                            </span>
-                        </p>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>
-                            @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
-                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
-                            @endforeach
-                        </p>
-                    </a>
-                    <a href="{{ $buttonLink2 }}" class="px-5 sm:px-6 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-1/2 relative z-20 sm:max-w-md"
-                        style="text-decoration:none; background: #fffbf7;filter: drop-shadow(0px 0px 10px rgba(246, 26, 48, 0.50));">
-                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>
-                        <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
-                        <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>
-                        @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
-                        @else
-                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
-                            <p class="inline-block text-black">(Save 71%)</p>
-                        @endif
-                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">save 71% & Start now</div>
-                        <p class="leading-tight text-sm"><span class="text-pianote">Offer ends in:</span><br>
-                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                            </span>
-                        </p>
-                        <ul class="list-disc ml-6 text-black">
-                            @if (!empty($courseDetails['membershipSpecial']['bonusItems']))
-                                @foreach ($courseDetails['membershipSpecial']['bonusItems'] as $bonusItem)
-                                    <li class="text-sm leading-relaxed text-black"><span class="text-{{$theme}}"></span> {!! $bonusItem !!}</li>
-                                @endforeach
-                            @endif
-                        </ul>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>
-                            @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)
-                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>
-                            @endforeach
-                        </p>
-                    </a>
+                    <span class="join sold-out smaller mx-auto">OFFER HAS NOW ENDED</span>
+{{--                    <a href="{{ $buttonLink }}" style="text-decoration:none"--}}
+{{--                            class="z-10 relative px-5 sm:px-6 sm:pr-10 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-1/2 relative z-10">--}}
+{{--                        <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>--}}
+{{--                        <p class="text-sm mb-5 text-black">{{ $courseDetails['courseOnly']['description'] }}</p>--}}
+{{--                        @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])--}}
+{{--                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>--}}
+{{--                        @else--}}
+{{--                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>--}}
+{{--                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>--}}
+{{--                            <p class="inline-block text-black">(Save 70%)</p>--}}
+{{--                        @endif--}}
+{{--                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">SAVE 70%</div>--}}
+{{--                        <p class="leading-tight text-sm"><span class="text-pianote">Discount ends in:</span><br>--}}
+{{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                            </span>--}}
+{{--                        </p>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>--}}
+{{--                            @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)--}}
+{{--                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>--}}
+{{--                            @endforeach--}}
+{{--                        </p>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ $buttonLink2 }}" class="px-5 sm:px-6 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-1/2 relative z-20 sm:max-w-md"--}}
+{{--                        style="text-decoration:none; background: #fffbf7;filter: drop-shadow(0px 0px 10px rgba(246, 26, 48, 0.50));">--}}
+{{--                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">BEST OFFER</p>--}}
+{{--                        <h3 class="text-black leading-tight"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>--}}
+{{--                        <p class="text-sm mb-5 text-black">{{ $courseDetails['membershipSpecial']['description'] }}</p>--}}
+{{--                        @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])--}}
+{{--                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>--}}
+{{--                        @else--}}
+{{--                            <h2 class="inline-block text-black opacity-40 font-light line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>--}}
+{{--                            <h2 class="inline-block text-black"><strong class="">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>--}}
+{{--                            <p class="inline-block text-black">(Save 71%)</p>--}}
+{{--                        @endif--}}
+{{--                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">save 71% & Start now</div>--}}
+{{--                        <p class="leading-tight text-sm"><span class="text-pianote">Offer ends in:</span><br>--}}
+{{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                            </span>--}}
+{{--                        </p>--}}
+{{--                        <ul class="list-disc ml-6 text-black">--}}
+{{--                            @if (!empty($courseDetails['membershipSpecial']['bonusItems']))--}}
+{{--                                @foreach ($courseDetails['membershipSpecial']['bonusItems'] as $bonusItem)--}}
+{{--                                    <li class="text-sm leading-relaxed text-black"><span class="text-{{$theme}}"></span> {!! $bonusItem !!}</li>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+{{--                        </ul>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                        <p class="leading-loose text-xs text-black"><strong>Key Features</strong><br>--}}
+{{--                            @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)--}}
+{{--                                <i class="fas fa-check text-{{$theme}} mr-1"></i> {!! $keyFeature !!}<br>--}}
+{{--                            @endforeach--}}
+{{--                        </p>--}}
+{{--                    </a>--}}
                 </div>
             </div>
         </div>
