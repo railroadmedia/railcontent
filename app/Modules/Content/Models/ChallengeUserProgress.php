@@ -203,6 +203,7 @@ class ChallengeUserProgress extends Model
             'current_streak' => $streakData['current'],
             'missed_lessons' => $streakData['missed'],
             'current_best_streak' => $streakData['best'],
+            'is_solo' => $this->is_solo,
             'minutes_practiced' => $this->getMinutesPracticed(),
             'completion_percent' => $this->getCompletionPercent(),
         ];
@@ -390,7 +391,15 @@ class ChallengeUserProgress extends Model
 
     public function getAwardTier() : AwardTier
     {
-        //TODO https://musora.atlassian.net/browse/TCH-47
-        return AwardTier::GOLD;
+        $length = $this->getNumberOfLessonDays();
+        $bestStreak = $this->completed_best_streak;
+        $halfLength = $length / 2;
+        if ($length == $bestStreak) {
+            return AwardTier::GOLD;
+        } elseif($length < 10 || $bestStreak < $halfLength) {
+            return AwardTier::BRONZE;
+        } else {
+            return AwardTier::SILVER;
+        }
     }
 }

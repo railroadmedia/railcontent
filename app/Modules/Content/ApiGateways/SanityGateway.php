@@ -33,7 +33,7 @@ class SanityGateway
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
-            'is_solo_challenge',
+            'is_solo',
             'registration_url',
             '"lesson_count": child_count',
             '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "Start Challenge")',
@@ -69,7 +69,6 @@ class SanityGateway
                 "url" : web_url_path,
                 published_on,
                 "type": _type,
-                progress_percent,
                 "length_in_seconds" : coalesce(length_in_seconds, soundslice[0].soundslice_length_in_second),
                 brand,
                 "genre": genre[]->name,

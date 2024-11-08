@@ -89,7 +89,7 @@ class ChallengesService
         if (!$challenge) {
             return null;
         }
-        $isSolo = !(is_null($startDate) && $isLocked);
+        $isSolo = ($challenge['is_solo'] ?? false) || !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
         $startDate = $startDate->startOfDay();
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData($challenge, startDate: $startDate, isLocked: $isLocked);
@@ -154,7 +154,7 @@ class ChallengesService
             $userData = $progressData->getCompiledMetadata();
             $now = Carbon::now();
             $userData['challenge_state'] = match (true) {
-                $challenge['is_solo_challenge'] => 'active_solo',
+                $challenge['is_solo'] => 'active_solo',
                 !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
                     $challenge['enrollment_start_time']
                 ) => 'upcoming',

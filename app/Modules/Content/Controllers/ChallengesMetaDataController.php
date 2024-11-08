@@ -90,7 +90,7 @@ class ChallengesMetaDataController extends Controller
                         'is_user_enrolled' => true,
                         'progress_percent' => $userProgress->getCompletionPercent(),
                         'duration_text' => $durationText,
-                        'is_solo_challenge' => $userProgress['is_solo'],
+                        'is_solo' => $userProgress['is_solo'],
                         'status' => $status,
                     ];
                     break;
@@ -101,7 +101,7 @@ class ChallengesMetaDataController extends Controller
                     'is_user_enrolled' => false,
                     'progress_percent' => 0,
                     'duration_text' => $this->challengesService->getDurationText(Carbon::parse($challenge['published_on']), $this->challengesService->getChallengeEndDate($challenge)),
-                    'is_solo_challenge' => $challenge['is_solo_challenge'],
+                    'is_solo' => $challenge['is_solo'],
                     'status' => 'not_started',
                 ];
             }

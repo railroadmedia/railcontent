@@ -18,7 +18,7 @@
         "light_mode_logo_url": "https://cdn.sanity.io/images/4032r8py/staging/0df461c9187e7e760f65010251a87351634d5d29-2000x1000.svg",
         "status": "published",
         "enrollment_end_time": null,
-        "is_solo_challenge": null,
+        "is_solo": null,
         "primary_cta_text": "Start Challenge",
         "total_xp": 2500,
         "instructor_signature": null,

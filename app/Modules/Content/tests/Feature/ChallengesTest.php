@@ -245,7 +245,7 @@ class ChallengesTest extends TestCase
 
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -256,7 +256,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 12 - 21', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -273,7 +273,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -283,7 +283,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('Nov 27 - Dec 4', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -307,7 +307,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -317,7 +317,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(40, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 5', $challengeMetadata['duration_text']);
-        $this->assertTrue(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertTrue(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -334,7 +334,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -344,7 +344,7 @@ class ChallengesTest extends TestCase
         $this->assertFalse($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 8', $challengeMetadata['duration_text']);
-        $this->assertNull($challengeMetadata['is_solo_challenge']);
+        $this->assertNull($challengeMetadata['is_solo']);
         $this->assertEquals('not_started', $challengeMetadata['status']);
     }
 
@@ -368,7 +368,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -378,7 +378,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(20, $challengeMetadata['progress_percent']);
         $this->assertEquals('Unlocked', $challengeMetadata['duration_text']);
-        $this->assertTrue(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertTrue(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -404,7 +404,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402204];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -414,7 +414,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(100, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 10', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('completed', $challengeMetadata['status']);
     }
 
@@ -423,7 +423,7 @@ class ChallengesTest extends TestCase
         $userId = user()->id;
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
         // --- TEST EXPECTED VALUES
         $response->assertOk();
