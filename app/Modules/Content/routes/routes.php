@@ -130,6 +130,11 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getUserAward']
         )->name('challenges.user_award');
 
+        Route::get(
+            'user_badges/get',
+            [ChallengesMetaDataController::class, 'getUserBadges']
+        )->name('challenges.all_user_badges');
+
         Route::post(
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']

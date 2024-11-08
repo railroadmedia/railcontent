@@ -30,7 +30,7 @@ enum AwardTier: string
  * @property boolean $is_active
  * @property boolean $is_solo
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
+ * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -98,12 +98,12 @@ class ChallengeUserProgress extends Model
             if ($unlockDate > $today) {
                 break;
             } else if ($unlockDate == $today) {
-                if ($lesson['is_completed']) {
+                if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
                 }
             } else {
-                if ($lesson['is_completed']) {
+                if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
                 } else {
@@ -174,7 +174,7 @@ class ChallengeUserProgress extends Model
                 [
                     'content_id' => $lesson['id'],
                     'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
-                    'is_completed' => false,
+                    'completed' => false,
                     'time_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
                     'is_always_unlocked' => $isAlwaysUnlocked,
@@ -220,7 +220,7 @@ class ChallengeUserProgress extends Model
         $completed = 0;
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
             $total++;
-            $completed += $lessons_meta_datum['is_completed'] ? 1 : 0;
+            $completed += $lessons_meta_datum['completed'] ? 1 : 0;
         }
         return intval(($completed * 100) / $total);
     }
@@ -277,6 +277,22 @@ class ChallengeUserProgress extends Model
     }
 
     /**
+     * @param int $userId
+     * @return Collection | null
+     * @throws Exception
+     */
+    public static function whereUserIdAndCompleted(int $userId) : Collection | null
+    {
+        $challengeUserCollection = self::query()
+            ->where('user_id', $userId)
+            ->whereNotNull('last_completed_date')
+            ->orderByDesc('last_completed_date')
+            ->get();
+
+        return $challengeUserCollection;
+    }
+
+    /**
      * @param array $challengeId
      * @param int $userId
      * @return Collection | null
@@ -321,7 +337,7 @@ class ChallengeUserProgress extends Model
 
         foreach($lessonMetaData as $index => $lessonMetaDatum) {
             if($lessonMetaDatum['content_id'] == $lessonId) {
-                $lessonMetaData[$index]['is_completed'] = $isCompleted;
+                $lessonMetaData[$index]['completed'] = $isCompleted;
                 if (!is_null($timePracticed)) {
                     // TODO this could be = or += depending on how time practides is sent
                     $lessonMetaData[$index]['time_practiced'] = $timePracticed;
@@ -369,7 +385,7 @@ class ChallengeUserProgress extends Model
     public function areAllLessonsCompleted() : bool
     {
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
-            if (!$lessons_meta_datum['is_completed']) {
+            if (!$lessons_meta_datum['completed']) {
                 return false;
             }
         }

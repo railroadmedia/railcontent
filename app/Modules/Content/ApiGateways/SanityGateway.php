@@ -27,6 +27,7 @@ class SanityGateway
         'status',
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
+        'child_count',
     ];
 
     private array $contentSpecificFields = [
@@ -55,6 +56,7 @@ class SanityGateway
             '"dark_mode_logo_url": dark_mode_logo_url.asset->url',
             '"light_mode_logo_url": light_mode_logo_url.asset->url',
             'child_count',
+            '"badge" : badge.asset->url',
             '"lessons": child[]->{
                 "sanity_id" : _id,
                 "id": railcontent_id,
@@ -182,15 +184,16 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return mixed|string - matching documents
      */
-    public function getByRailContentIds(array $ids, ?string $type = null)
+    public function getByRailContentIds(array $ids, ?string $type = null, ?string $brand = null)
     {
 
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
         $typeString = ($type && $type !== 'playlist-item') ? "&& _type == '$type'" : '';
+        $brandString = $brand ? " && brand == '$brand'" : '';
         $fieldsString = $this->getFieldsString($type);
-        $query = "*[railcontent_id in [{$idsString}] $typeString]{
+        $query = "*[railcontent_id in [{$idsString}] $typeString $brandString]{
           $fieldsString
         }";
         $documents = $gateway->sanity->fetch($query);
