@@ -12,6 +12,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::group(['prefix' => 'drumshop' ], function () {
         Route::get('/gift-card', [SalesController::class, 'giftCard']);
         Route::get('/{page?}', ShopController::class . '@products')->whereIn('page', [
+            '100-grooves',
             'beginner-book',
             'better-drum-fills',
             'better-drum-fills-giveaway',
