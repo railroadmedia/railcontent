@@ -57,10 +57,10 @@
         @php
             $price = floatval($productPrices['30-day-jazz-piano']->price);
             $discountedPrice = floatval($productPrices['30-day-jazz-piano']->discounted_price);
-            $enrollmentLink = '/ecommerce/add-to-cart?products[30-day-jazz]=1';
+            $enrollmentLink = '/ecommerce/add-to-cart?products[30-day-jazz-piano]=1';
             $brandTitle = 'Pianote';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-jazz]=1";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-jazz-piano]=1";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'piano players';
