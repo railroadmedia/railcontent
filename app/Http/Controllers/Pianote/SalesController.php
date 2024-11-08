@@ -516,4 +516,10 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
+    public function thirtyDayJazzPiano()
+    {
+        return view('pianote.products.30-day-jazz-piano', [
+            'theme' => 'pianote',
+        ]);
+    }
 }

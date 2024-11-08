@@ -45,6 +45,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/classical-piano-collection', [SalesController::class, 'classicalPianoCollection']);
                 Route::get('/classical-piano-collection-membership', [SalesController::class, 'classicalPianoCollectionMembership']);
                 Route::get('/headphones', [SalesController::class, 'headphones']);
+                Route::get('/30-day-jazz-piano', [SalesController::class, 'thirtyDayJazzPiano']);
             }
         );
 
