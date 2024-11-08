@@ -426,10 +426,10 @@
                 x-data="{ answer: '', showForm: false }">
                 <div x-show="!showForm">
                     <h4 class="leading-tight"><strong>Skill Testing Question:</strong></h4>
-                    <h2 class="leading-tight my-4" style="font-family:Serif">(5 × 2) - (10 ÷ 2)</h2>
+                    <h2 class="leading-tight my-4" style="font-family:Serif">10 + 5 - 3</h2>
                     <input type="number" x-model="answer" placeholder="Your Answer" class="text-center mb-3 py-2 border border-black rounded-full mx-auto" />
                     <button class="join smaller"
-                        x-on:click="showForm = (answer == 5)">
+                        x-on:click="showForm = (answer == 12)">
                         Check Answer
                     </button>
                 </div>
