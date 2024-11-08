@@ -49,6 +49,12 @@
     </style>
 @endsection
 
+@section('body-data')
+    x-data ="{
+    giveawayModal: false,
+    }"
+@endsection
+
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
@@ -79,16 +85,8 @@
 {{--                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
 {{--                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
 {{--                        @else--}}
-                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
-                            @include('pianote._partials.sign-up-form', [
-                                "recaptchaKey" => $recaptchaKey,
-                                "stacked" => true,
-                                "minimalForm" => true,
-                                "nameInput" => true,
-                                "formId" => "Pianote - Engagement - Trigger - Prima Giveaway - Web Form",
-                                "formName" => 'Prima Giveaway',
-                                "buttonText" => "ENTER GIVEAWAY",
-                            ])
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
+                             <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
@@ -154,7 +152,7 @@
                     <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path>
                     </svg>
             </h2>
-           
+
             @php
                 $products = [
                     [
@@ -412,15 +410,7 @@
 {{--                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
 {{--                        @else--}}
                         @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
-                        @include('pianote._partials.sign-up-form', [
-                                "recaptchaKey" => $recaptchaKey,
-                                "stacked" => true,
-                                "minimalForm" => true,
-                                "nameInput" => true,
-                                "formId" => "Pianote - Engagement - Trigger - Prima Giveaway - Web Form2",
-                                "formName" => 'Prima Giveaway',
-                                "buttonText" => "ENTER GIVEAWAY",
-                            ])
+                            <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
@@ -430,6 +420,35 @@
         </div>
     </section>
 
+    @component('_partials.components.modal', ['name' => 'giveawayModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-gray-100 mx-auto rounded-xl shadow-lg text-center"
+                x-data="{ answer: '', showForm: false }">
+                <div x-show="!showForm">
+                    <h4 class="leading-tight"><strong>Skill Testing Question:</strong></h4>
+                    <h2 class="leading-tight my-4" style="font-family:Serif">(5 × 2) - (10 ÷ 2)</h2>
+                    <input type="number" x-model="answer" placeholder="Your Answer" class="text-center mb-3 py-2 border border-black rounded-full mx-auto" />
+                    <button class="join smaller"
+                        x-on:click="showForm = (answer == 5)">
+                        Check Answer
+                    </button>
+                </div>
+
+                <div x-show="showForm">
+                    <h4 class="leading-tight mb-4"><strong>Correct! Now, we just<br> need your details:</strong></h4>
+                    @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                        "stacked" => true,
+                        "minimalForm" => true,
+                        "nameInput" => true,
+                        "formId" => "Pianote - Engagement - Trigger - Prima Giveaway - Web Form",
+                        "formName" => 'Prima Giveaway',
+                        "buttonText" => "ENTER GIVEAWAY",
+                    ])
+                </div>
+            </div>
+        @endslot
+    @endcomponent
     @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
