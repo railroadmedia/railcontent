@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class ContentProgressFeatureTest extends TestCase
 {
-    public function test_workflow()
+    public function test_progress_workflow()
     {
         $userId = User::factory()->create()->id;
         $content = Content::factory()->create();
@@ -22,16 +22,14 @@ class ContentProgressFeatureTest extends TestCase
         $currentVersion = $this->getContentProgressAll()['version'];
         $this->assertEquals(1, $currentVersion);
 
-        $this->post(route('content.user.progress.start'), ['contentId' => $content->id]);
-
-
         $this->mediaSessionRequest($content->id, 100, 10, 10);
         $this->assertProgress($content, $userId, ProgressState::Started, 10);
 
         $currentVersion = $this->getContentProgressAll()['version'];
-        $this->assertEquals(3, $currentVersion);
+        $this->assertEquals(2, $currentVersion);
 
-        $this->post(route('content.user.progress.complete'), ['contentId' => $content->id]);
+        $response = $this->put(route('content.user.progress.complete'), ['contentId' => $content->id]);
+        $this->assertEquals(200, $response->getStatusCode());
 
         $currentVersion = $this->getContentProgressAll()['version'];
         $this->assertEquals(3, $currentVersion);
@@ -55,17 +53,18 @@ class ContentProgressFeatureTest extends TestCase
         int $secondsWatched,
 
     ): void {
-        $this->post(
+        $response = $this->post(
             route('railtracker.media-playback-session.post'),
             [
                 'media_id' => $contentId,
                 'media_length_seconds' => $contentLengthSeconds,
-                'media_type' => 'test',
-                'media_category' => 'test',
+                'media_type' => 'video',
+                'media_category' => 'vimeo',
                 'current_second' => $currentSeconds,
                 'seconds_played' => $secondsWatched
             ]
         );
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
 
