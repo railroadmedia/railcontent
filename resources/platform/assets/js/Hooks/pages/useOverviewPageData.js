@@ -1,6 +1,5 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import axios from 'axios';
 import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation, getProgressPercentageByIds, fetchUserChallengeProgress } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
