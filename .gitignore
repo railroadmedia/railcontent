@@ -156,3 +156,8 @@ php-cs-fixer-results.txt
 .codebuddy
 
 /.phpunit.cache
+
+# Swap file genreated by Vim
+*.swp
+
+

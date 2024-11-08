@@ -4,8 +4,10 @@ namespace App\Modules\Content\Services;
 
 
 use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 
@@ -176,4 +178,13 @@ class ContentProgressService
         }
         return $progress;
     }
+
+   public function updateContentProgress(MediaPlaybackSession $mediaPlaybackSession, Content $content): void
+   {
+       if ($mediaPlaybackSession->media_length_seconds <= 0) {
+           return;
+       }
+       $percentage = $mediaPlaybackSession->calculatePercentage();
+       $this->saveContentProgress($content->id, $percentage, $mediaPlaybackSession->user_id);
+   }
 }

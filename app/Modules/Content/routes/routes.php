@@ -4,6 +4,7 @@ use App\Modules\Content\Controllers\ChallengesMetaDataController;
 use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
+use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -41,6 +42,11 @@ Route::prefix('content')
             'user_data_permissions',
             [ContentMetadataController::class, 'getUserPermissions']
         )->name('content.user-permissions');
+
+        Route::get(
+            'user/permissions',
+            [UserPermissionsController::class, 'getUserPermissionData']
+        )->name('content.user-permissions-data');
 
         Route::get(
             'vimeo-data/{vimeo_id}',
@@ -123,6 +129,11 @@ Route::prefix('challenges')
             'download_award/{id}',
             [ChallengesMetaDataController::class, 'getUserAward']
         )->name('challenges.user_award');
+
+        Route::get(
+            'user_badges/get',
+            [ChallengesMetaDataController::class, 'getUserBadges']
+        )->name('challenges.all_user_badges');
 
         Route::post(
             'enroll/{id}',

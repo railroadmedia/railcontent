@@ -6,9 +6,9 @@ use App\Maps\ContentTypes;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Modules\RailTracker\Enums\MediaTypeEnum;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use App\Modules\RailTracker\Services\ContentEngagementService;
-use App\Modules\Tracker\Models\MediaPlaybackTypes;
-use App\Services\UserMetricsService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -18,10 +18,8 @@ use Railroad\Railcontent\Events\CommentUnLiked;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use App\Modules\RailTracker\Events\MediaPlaybackTracked;
@@ -32,17 +30,14 @@ class ContentProgressEventListener
 {
     public function __construct(
         private readonly ContentProgressService $contentProgressService,
-        private ContentHierarchyService $contentHierarchyService,
-        private ContentService $contentService,
-        private CommentService $commentService,
-        private CommentLikeService $commentLikeService,
-        private ContentRepository $contentRepository,
-        private UserPointsService $userPointsService,
-        private UserProviderInterface $userProvider,
-        private MediaPlaybackRepository $mediaPlaybackRepository,
-        private UserMetricsService $userMetricsService,
-        private UserPlaylistsService $userPlaylistsService,
-        private ContentEngagementService $contentEngagementService,
+        private readonly ContentService $contentService,
+        private readonly CommentService $commentService,
+        private readonly CommentLikeService $commentLikeService,
+        private readonly UserPointsService $userPointsService,
+        private readonly UserProviderInterface $userProvider,
+        private readonly MediaPlaybackRepository $mediaPlaybackRepository,
+        private readonly UserPlaylistsService $userPlaylistsService,
+        private readonly ContentEngagementService $contentEngagementService,
     ) {
     }
 
@@ -307,24 +302,25 @@ class ContentProgressEventListener
         }
     }
 
-    private function getContentId(MediaPlaybackTracked $mediaPlaybackTracked)
+    private function getContentId(MediaPlaybackSession $mediaPlaybackSession)
     {
-        $contentId = intval($mediaPlaybackTracked->contentId);
-        if ($contentId) {
+        $contentId = intval($mediaPlaybackSession->media_id);
+        if ($contentId && $contentId < 100000000) {
+            //assume these ids are content id and not vimeo ids
             return $contentId;
         }
 
         //Sometimes contentId is not provided and we need to look up id from media id
         $contentId = Content::query()->select('id')
-            ->where('external_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->where('external_video_id', '=', $mediaPlaybackSession->media_id)
             ->first()?->id;
         if ($contentId) {
             return $contentId;
         }
 
         $videoContentId = Content::query()->select('id')
-            ->where('vimeo_video_id', '=', $mediaPlaybackTracked->mediaId)
-            ->orWhere('youtube_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->where('vimeo_video_id', '=', $mediaPlaybackSession->media_id)
+            ->orWhere('youtube_video_id', '=', $mediaPlaybackSession->media_id)
             ->first()?->id;
         if ($videoContentId) {
             $contentId = Content::query()->select('id')
@@ -334,185 +330,34 @@ class ContentProgressEventListener
                 return $contentId;
             }
         }
-        $contentId = intval($mediaPlaybackTracked->mediaId);
-        if ($contentId && $contentId < 100000000) {
-            //assume these ids are content id and not vimeo ids
-            return $contentId;
-        }
         return null;
     }
 
-    public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
+    public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked): void
     {
-        $contentId = $this->getContentId($mediaPlaybackTracked);
+        $mediaPlaybackSession = $mediaPlaybackTracked->mediaPlaybackSession;
+        $mediaType = $mediaPlaybackSession->mediaTypeAsEnum();
+        $userId = $mediaPlaybackSession->user_id;
+        $contentId = $this->getContentId($mediaPlaybackSession);
         if (!$contentId) {
-            Log::warning("Unable to get contentId from mediaId $mediaPlaybackTracked->mediaId");
-        }
-        $brand = in_array($mediaPlaybackTracked->brand, config('brands', []))
-            ? $mediaPlaybackTracked->brand
-            : config('railcontent.brand');
-
-        if ($contentId) {
-            $this->contentEngagementService->update(
-                $mediaPlaybackTracked->userId,
-                $contentId,
-                $mediaPlaybackTracked->currentSecond
-            );
-        } else {
-            $userId = user()->id;
-            Log::info("handleMediaPlaybackTracked $userId");
-            //Log::debug(print_r($mediaPlaybackTracked, true));
-        }
-        $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
-
-        if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds) && $mediaPlaybackTracked->secondsPlayed > 0) {
-            //            $min = $this->userMetricsService->getTotalMinutesPracticed(
-            //                $mediaPlaybackTracked->userId,
-            //                $assignmentTypeIds
-            //            );
-            $userBrandMinutesPracticed = user()->brand_minutes_practiced;
-            $initialValue = $userBrandMinutesPracticed[$brand] ?? 0;
-            $min = ($initialValue + round($mediaPlaybackTracked->secondsPlayed / 60, 0));
-            $userBrandMinutesPracticed[$brand] = $min;
-            user()->brand_minutes_practiced = $userBrandMinutesPracticed;
-            user()->save();
-        }
-
-        $media = new MediaPlaybackTypes();
-        $dbCon = config('railtracker.database_connection_name');
-        $media->setConnection($dbCon);
-        $soundslice = $media->where('category', '=', 'soundslice')->first();
-        $playAlong = $media->where('category', '=', 'play-alongs')->first();
-
-        // sound slice assignment
-        if ($soundslice && ($mediaPlaybackTracked->typeId == $soundslice->id)) {
-            $maxMinutesToTrack = 600;
-
-            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
-                $mediaPlaybackTracked->userId,
-                $mediaPlaybackTracked->mediaId,
-                $mediaPlaybackTracked->typeId
-            );
-
-            if ($totalTimeWatchedSeconds <= $maxMinutesToTrack) {
-                $minutes = floor($totalTimeWatchedSeconds / 60);
-                $totalAmount = 0;
-                while ($minutes > 0) {
-                    $this->userPointsService->setPoints(
-                        $mediaPlaybackTracked->userId,
-                        [
-                            'content_id' => $mediaPlaybackTracked->mediaId,
-                            'minutes_watched' => $minutes,
-                        ],
-                        'per_minute_of_assignment_practiced',
-                        config('xp_ranks.per_minute_of_assignment_practiced'),
-                        'Awarded for every minute of an assignment practiced watched.',
-                        $brand
-                    );
-
-                    $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_assignment_practiced');
-
-                    $minutes--;
-                }
-            }
-            $this->userProvider->saveExperiencePoints(
-                $mediaPlaybackTracked->userId,
-                $this->userPointsService->countUserPointsPerBrand(
-                    $mediaPlaybackTracked->userId
-                )
-            );
-
+            Log::warning("Unable to get contentId from mediaId $mediaPlaybackSession->media_id");
             return;
         }
-
-        // play along song
-        if ($playAlong && ($mediaPlaybackTracked->typeId == $playAlong->id)) {
-            $maxMinutesToTrack = 600;
-
-            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
-                $mediaPlaybackTracked->userId,
-                $mediaPlaybackTracked->mediaId,
-                $mediaPlaybackTracked->typeId
-            );
-
-            if ($totalTimeWatchedSeconds <= $maxMinutesToTrack) {
-                $minutes = floor($totalTimeWatchedSeconds / 60);
-                $totalAmount = 0;
-                while ($minutes > 0) {
-                    $this->userPointsService->setPoints(
-                        $mediaPlaybackTracked->userId,
-                        [
-                            'content_id' => $mediaPlaybackTracked->mediaId,
-                            'minutes_watched' => $minutes,
-                        ],
-                        'per_minute_of_play_along_practiced',
-                        config('xp_ranks.per_minute_of_play_along_practiced'),
-                        'Awarded for every minute of a play-along practiced watched.',
-                        $brand
-                    );
-
-                    $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_play_along_practiced');
-
-                    $minutes--;
-                }
-
-                $this->userProvider->saveExperiencePoints(
-                    $mediaPlaybackTracked->userId,
-                    $this->userPointsService->countUserPointsPerBrand(
-                        $mediaPlaybackTracked->userId
-                    )
-                );
-            }
-
+        $content = Content::query()->find($contentId);
+        if (!$content) {
+            Log::warning("Content $contentId not found");
             return;
         }
-
-
-        if ($contentId) {
-            $lengthInSeconds = (int)$mediaPlaybackTracked->mediaLengthInSeconds;
-
-            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
-                $mediaPlaybackTracked->userId,
-                $mediaPlaybackTracked->mediaId,
-                $mediaPlaybackTracked->typeId
-            );
-            $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
-            if ($minutes > 0) {
-                $points = $minutes * config('xp_ranks.per_minute_content_watched');
-
-                $this->userPointsService->setPoints(
-                    $mediaPlaybackTracked->userId,
-                    [
-                        'content_id' => $contentId,
-                        'minutes_watched' => 'all',
-                    ],
-                    'minutes_of_content_watched_v2',
-                    $points,
-                    null, //unnecessary use of space here, could infer it from trigger name
-                    $brand
-                );
-
-                $this->userProvider->saveExperiencePoints(
-                    $mediaPlaybackTracked->userId,
-                    $this->userPointsService->countUserPointsPerBrand(
-                        $mediaPlaybackTracked->userId
-                    )
-                );
-            }
-
-
-            if ($mediaPlaybackTracked->mediaLengthInSeconds > 0) {
-                $this->contentProgressService->saveContentProgress(
-                    $contentId,
-                    min(
-                        round(
-                            $mediaPlaybackTracked->currentSecond / $mediaPlaybackTracked->mediaLengthInSeconds * 100
-                        ),
-                        99
-                    ),
-                    $mediaPlaybackTracked->userId
-                );
-            }
+        switch ($mediaType) {
+            case MediaTypeEnum::SoundSliceAssignment:
+                $this->handleMediaPlaybackTrackedSoundSlice($userId, $content, $mediaPlaybackSession);
+                break;
+            case MediaTypeEnum::PlayAlong:
+                $this->handleMediaPlaybackTrackedPlayAlong($userId, $content, $mediaPlaybackSession);
+                break;
+            default:
+                $this->handleMediaPlaybackTrackedVideo($userId, $content, $mediaPlaybackSession);
+                break;
         }
     }
 
@@ -670,6 +515,128 @@ class ContentProgressEventListener
         if ($content['slug'] == $brand . '-method') {
             user()->brand_method_levels = $userBrandMethodLevels;
             user()->save();
+        }
+    }
+
+    public function handleMediaPlaybackTrackedSoundSlice(
+        int $userId,
+        Content $content,
+        MediaPlaybackSession $mediaPlaybackSession
+    ): void {
+        if ($mediaPlaybackSession->seconds_played > 0) {
+            $userBrandMinutesPracticed = user()->brand_minutes_practiced;
+            $initialValue = $userBrandMinutesPracticed[$content->brand] ?? 0;
+            $min = ($initialValue + round($mediaPlaybackSession->seconds_played / 60, 0));
+            $userBrandMinutesPracticed[$content->brand] = $min;
+            user()->brand_minutes_practiced = $userBrandMinutesPracticed;
+            user()->save();
+        }
+        $maxMinutesToTrack = 600;
+
+        $totalTimeWatchedSeconds = $this->mediaPlaybackRepository->sumTotalPlayed(
+            $userId,
+            $mediaPlaybackSession->media_id,
+            $mediaPlaybackSession->type_id
+        );
+
+        if ($totalTimeWatchedSeconds <= $maxMinutesToTrack) {
+            $minutes = floor($totalTimeWatchedSeconds / 60);
+            $totalAmount = 0;
+            while ($minutes > 0) {
+                $this->userPointsService->setPoints(
+                    $userId,
+                    [
+                        'content_id' => $content->id,
+                        'minutes_watched' => $minutes,
+                    ],
+                    'per_minute_of_assignment_practiced',
+                    config('xp_ranks.per_minute_of_assignment_practiced'),
+                    'Awarded for every minute of an assignment practiced watched.',
+                    $content->brand
+                );
+
+                $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_assignment_practiced');
+
+                $minutes--;
+            }
+        }
+        $points = $this->userPointsService->countUserPointsPerBrand($userId);
+        $this->userProvider->saveExperiencePoints(
+            $userId,
+            $points
+        );
+    }
+
+    public function handleMediaPlaybackTrackedPlayAlong(
+        int $userId,
+        Content $content,
+        MediaPlaybackSession $mediaPlaybackSession
+    ): void {
+        $maxMinutesToTrack = 600;
+
+        $totalTimeWatchedSeconds = $this->mediaPlaybackRepository->sumTotalPlayed(
+            $userId,
+            $mediaPlaybackSession->media_id,
+            $mediaPlaybackSession->type_id
+        );
+
+        if ($totalTimeWatchedSeconds <= $maxMinutesToTrack) {
+            $minutes = floor($totalTimeWatchedSeconds / 60);
+            $totalAmount = 0;
+            while ($minutes > 0) {
+                $this->userPointsService->setPoints(
+                    $userId,
+                    [
+                        'content_id' => $content->id,
+                        'minutes_watched' => $minutes,
+                    ],
+                    'per_minute_of_play_along_practiced',
+                    config('xp_ranks.per_minute_of_play_along_practiced'),
+                    'Awarded for every minute of a play-along practiced watched.',
+                    $content->brand
+                );
+
+                $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_play_along_practiced');
+
+                $minutes--;
+            }
+            $points = $this->userPointsService->countUserPointsPerBrand($userId);
+            $this->userProvider->saveExperiencePoints($userId, $points);
+        }
+    }
+
+    public function handleMediaPlaybackTrackedVideo(
+        int $userId,
+        Content $content,
+        MediaPlaybackSession $mediaPlaybackSession
+    ): void {
+        $this->contentEngagementService->update($userId, $content->id, $mediaPlaybackSession->current_second);
+        $this->contentProgressService->updateContentProgress($mediaPlaybackSession, $content);
+
+        $lengthInSeconds = $mediaPlaybackSession->media_length_seconds;
+
+        $totalTimeWatchedSeconds = $this->mediaPlaybackRepository->sumTotalPlayed(
+            $userId,
+            $mediaPlaybackSession->media_id,
+            $mediaPlaybackSession->type_id
+        );
+        $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
+        if ($minutes > 0) {
+            $points = $minutes * config('xp_ranks.per_minute_content_watched');
+
+            $this->userPointsService->setPoints(
+                $userId,
+                [
+                    'content_id' => $content->id,
+                    'minutes_watched' => 'all',
+                ],
+                'minutes_of_content_watched_v2',
+                $points,
+                null, //unnecessary use of space here, could infer it from trigger name
+                $content->brand
+            );
+            $points = $this->userPointsService->countUserPointsPerBrand($userId);
+            $this->userProvider->saveExperiencePoints($userId, $points);
         }
     }
 }

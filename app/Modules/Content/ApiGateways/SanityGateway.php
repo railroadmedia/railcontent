@@ -27,13 +27,14 @@ class SanityGateway
         'status',
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
+        'child_count',
     ];
 
     private array $contentSpecificFields = [
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
-            'is_solo_challenge',
+            'is_solo',
             'registration_url',
             '"lesson_count": child_count',
             '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "Start Challenge")',
@@ -55,6 +56,7 @@ class SanityGateway
             '"dark_mode_logo_url": dark_mode_logo_url.asset->url',
             '"light_mode_logo_url": light_mode_logo_url.asset->url',
             'child_count',
+            '"badge" : badge.asset->url',
             '"lessons": child[]->{
                 "sanity_id" : _id,
                 "id": railcontent_id,
@@ -69,7 +71,6 @@ class SanityGateway
                 "url" : web_url_path,
                 published_on,
                 "type": _type,
-                progress_percent,
                 "length_in_seconds" : coalesce(length_in_seconds, soundslice[0].soundslice_length_in_second),
                 brand,
                 "genre": genre[]->name,
@@ -183,15 +184,16 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return mixed|string - matching documents
      */
-    public function getByRailContentIds(array $ids, ?string $type = null)
+    public function getByRailContentIds(array $ids, ?string $type = null, ?string $brand = null)
     {
 
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
         $typeString = ($type && $type !== 'playlist-item') ? "&& _type == '$type'" : '';
+        $brandString = $brand ? " && brand == '$brand'" : '';
         $fieldsString = $this->getFieldsString($type);
-        $query = "*[railcontent_id in [{$idsString}] $typeString]{
+        $query = "*[railcontent_id in [{$idsString}] $typeString $brandString]{
           $fieldsString
         }";
         $documents = $gateway->sanity->fetch($query);
