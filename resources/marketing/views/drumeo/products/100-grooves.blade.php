@@ -33,18 +33,18 @@
         "noBreadcrumb" => true
     ])
     <header class="bg-[#F1F7FE] text-black">
-        <div class="relative md:px-6 pb-10 md:py-20 lg:py-28 xl:py-36 overflow-hidden">
+        <div class="relative md:px-6 lg:px-12 pb-10 md:py-20 lg:py-28 xl:py-36 overflow-hidden mx-auto w-full" style="max-width: 1440px;">
             <div class="container max-w-5xl lg:mx-auto">
                 <div class="flex flex-wrap md:flex-nowrap items-center">
                     <div class="w-full md:w-5/12 text-center lg:text-left order-2 md:order-1 px-5 md:px-0 z-10 md:pr-10">
-                    
-                        <img class="block h-28 md:h-24 lg:h-32 py-2 mx-auto md:mx-0" 
-                            alt="logo" 
+
+                        <img class="block h-28 md:h-24 lg:h-32 py-2 mx-auto md:mx-0"
+                            alt="logo"
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/logo-dark.svg"
                         >
-                         <img class="block h-6 pl-2 py-1 mx-auto md:mx-0" 
-                            alt="logo" 
+                         <img class="block h-6 pl-2 py-1 mx-auto lg:mx-0"
+                            alt="logo"
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
@@ -52,7 +52,7 @@
                         The 15 Rudiments You Actually Need To<br class="sm:hidden">
                         Know (And How To Learn Them Quickly)</h6> --}}
                         <p class="text-sm text-drumeo pt-10">LAUNCH SPECIAL</p>
-                        
+
                         <h3 class="mb-4 sm:mb-6">
                             @if(floatval($productPrices['100-grooves-book']->price) > floatval($productPrices['100-grooves-book']->discounted_price))
                                 <s class="opacity-60">${{ floatval($productPrices['100-grooves-book']->price) }}</s>
@@ -70,11 +70,11 @@
                                 <strong>${{ floatval($productPrices['100-grooves-book']->discounted_price) }}</strong>
                             @endif
                         </h3>
-                        <a href="/ecommerce/add-to-cart?products[100-grooves-book]=1" class="join blue medium w-full md:max-w-[350px]">
+                        <a href="/ecommerce/add-to-cart?products[100-grooves-book]=1" class="join blue smaller w-full md:max-w-[350px]">
                             ORDER NOW &raquo;
                         </a>
                     </div>
-    
+
                     <div class="w-full order-1 md:order-2 flex justify-end md:hidden">
                         <img class="w-3/4 block lg:hidden"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/100-grooves/header-m.webp"
@@ -82,13 +82,13 @@
                     </div>
                 </div>
             </div>
-    
-           <img class="hidden md:block absolute top-0 right-0 h-full object-cover z-0 max-w-none sm:pb-10"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/100-grooves/header-full.jpg"
+
+           <img class="hidden md:block absolute top-0 right-0 h-full object-cover z-0 max-w-none sm:pb-10 sm:-mr-12 lg:mx-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/100-grooves/header.webp"
                 alt="100 Grooves Book Image">
         </div>
     </header>
-    
+
     <section class="text-left sm:px-6 pt-8 sm:py-10 lg:py-14 bg-[#F1F7FE] relative">
     <div class="max-w-7xl mx-auto p-4 lg:p-0">
         <div class="flex flex-col lg:flex-row gap-8">
@@ -192,13 +192,13 @@
                     <img class="w-full max-w-xs sm:max-w-sm" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/100-grooves/book.webp">
                 </div>
                 <div class="w-full sm:w-1/2 text-center lg:text-left sm:pr-5">
-                   <img class="block h-28 lg:h-32 pb-2 mx-auto sm:mx-0" 
-                            alt="logo" 
+                   <img class="block h-28 lg:h-32 pb-2 mx-auto sm:mx-0"
+                            alt="logo"
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/logo-light.svg"
                         >
-                         <img class="block h-6 pl-2 py-1 mx-auto sm:mx-0" 
-                            alt="logo" 
+                         <img class="block h-6 pl-2 py-1 mx-auto lg:mx-0"
+                            alt="logo"
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
@@ -227,7 +227,7 @@
         </div>
     </section>
 
-    
+
 
     @include("drumeo.sales.partials._footer")
 
