@@ -346,7 +346,9 @@ class SanityGateway
 
             // Flatten the structure to get leaf nodes only
             if(!$documents[0]['lastChildItems']){
-                $parent = (last($documents[0]['parent_content_data']));
+               if(isset($documents[0]['parent_content_data'])) {
+                   $parent = (last($documents[0]['parent_content_data']));
+               }
                 $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null];
             }
             foreach ($documents[0]['lastChildItems']??[] as $item) {

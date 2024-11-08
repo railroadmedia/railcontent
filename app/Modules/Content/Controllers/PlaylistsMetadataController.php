@@ -482,9 +482,23 @@ class PlaylistsMetadataController extends Controller
         return response()->json($item);
     }
 
-    public function addItemToPlaylists(AddItemToPlaylistRequest $request)
+    /**
+     * @param \App\Modules\Content\Requests\AddItemToPlaylistRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addItemToPlaylists(AddItemToPlaylistRequest $request): JsonResponse
     {
+        $extraParams = $request->only([
+                                         'import_full_soundslice_assignment',
+                                         'import_instrumentless_soundslice_assignment',
+                                         'import_high_routine',
+                                         'import_low_routine'
+                                     ]);
         $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
+        $itemsThatShouldBeAdd = ($flattenContent['lessons_count'] + count($extraParams)) ?? (count($extraParams));
+        if ($request->get('import_all_assignments', false)){
+            $itemsThatShouldBeAdd += $flattenContent['soundslice_assignments_count'];
+    }
 
         $extraData = [
             'import_full_soundslice_assignment' => json_encode(['is_full_track' => true]),
@@ -494,15 +508,15 @@ class PlaylistsMetadataController extends Controller
         ];
 
         foreach ($request->get('playlist_id') as $playlistId){
-            $playlist = UserPlaylist::find($playlistId);
+            $playlist = UserPlaylist::with('items')->find($playlistId);
             if($playlist){
+                if ($playlist->items->count() + $itemsThatShouldBeAdd > config('railcontent.playlist_items_limit', 300)) {
+                    $limitExcedeed[] = $playlist;
+                    continue;
+                }
                 $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
                     ->max('position');
-                $extraFlags = $request->all(['import_full_soundslice_assignment','import_instrumentless_soundslice_assignment', 'import_high_routine', 'import_low_routine']);
-                $isExtra = false;
-                foreach($extraFlags as $key=>$value){
-                    if($value){
-                        $isExtra = true;
+                foreach($extraParams as $key=>$value){
                         $lastPosition++;
                         $playlistItemData = [
                             'content_id'      => $request->get('content_id'),
@@ -513,9 +527,8 @@ class PlaylistsMetadataController extends Controller
                             'extra_data' => $extraData[$key],
                         ];
                         $playlistItem = UserPlaylistContent::create($playlistItemData);
-                    }
                 }
-                if(!$isExtra) {
+                if(empty($extraParams)) {
                     foreach ($flattenContent['lessons'] as $item) {
                         $lastPosition++;
                         $playlistItemData = [
@@ -543,10 +556,25 @@ class PlaylistsMetadataController extends Controller
                 }
             }
         }
-        return response()->json([
-                                    'success' => true,
-                                    'message' => 'Playlist item added successfully'
-                                ]);
+        $results = [
+            'success' => true,
+        ];
+        if (isset($limitExcedeed)) {
+            $results['limit_excedeed'] = $limitExcedeed;
+        }
+
+        $results['successful'] = [];
+
+        return response()->json($results);
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function countLessonsAndAssignments($id):array
+    {
+        return $this->sanityGateway->countLessonsAndAssignments($id);
     }
 
 
