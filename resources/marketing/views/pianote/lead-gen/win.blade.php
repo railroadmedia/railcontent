@@ -323,7 +323,7 @@
         ];
     @endphp
 
-    <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #FFF;">
+    <section class="text-center px-4 sm:px-6 py-10 sm:py-14 lg:py-20 hidden" style="background: #FFF;">
         <div class="container max-w-4xl mx-auto pb-16">
             <h2 class="text-center leading-none pb-4"><strong>Yeah, it’s legit.</strong></h2>
             <h6 class="mb-24">This isn’t our first rodeo. Hear from previous winners of our piano giveaways!</h6>
@@ -349,7 +349,7 @@
         </div>
     </section>
 
-    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFFFFF calc(50% + 1px));"></div>
+    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #F1EFED calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
         <div class="max-w-3xl mx-auto text-center">
             <svg class="inline-block h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
