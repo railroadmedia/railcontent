@@ -38,7 +38,7 @@
                 <div class="flex flex-wrap md:flex-nowrap items-center">
                     <div class="w-full md:w-5/12 text-center lg:text-left order-2 md:order-1 px-5 md:px-0 z-10 md:pr-10">
                     
-                        <img class="block h-28 lg:h-32 py-2 mx-auto md:mx-0" 
+                        <img class="block h-28 md:h-24 lg:h-32 py-2 mx-auto md:mx-0" 
                             alt="logo" 
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/logo-dark.svg"
@@ -48,10 +48,10 @@
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
-                        <h6 class="leading-normal my-4 sm:my-6">
+                        {{-- <h6 class="leading-normal my-4 sm:my-6">
                         The 15 Rudiments You Actually Need To<br class="sm:hidden">
-                        Know (And How To Learn Them Quickly)</h6>
-                        <p class="text-sm text-drumeo">LAUNCH SPECIAL</p>
+                        Know (And How To Learn Them Quickly)</h6> --}}
+                        <p class="text-sm text-drumeo pt-10">LAUNCH SPECIAL</p>
                         
                         <h3 class="mb-4 sm:mb-6">
                             @if(floatval($productPrices['100-grooves-book']->price) > floatval($productPrices['100-grooves-book']->discounted_price))
@@ -76,14 +76,14 @@
                     </div>
     
                     <div class="w-full order-1 md:order-2 flex justify-end md:hidden">
-                        <img class="w-3/4 sm:2/4 block lg:hidden"
+                        <img class="w-3/4 block lg:hidden"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/drumeo/products/100-grooves/header-m.webp"
                             alt="100 Grooves Book Image">
                     </div>
                 </div>
             </div>
     
-           <img class="hidden md:block absolute top-0 right-0 h-full md:h-5/6 lg:h-full object-cover z-0 max-w-none lg:pb-10"
+           <img class="hidden md:block absolute top-0 right-0 h-full object-cover z-0 max-w-none sm:pb-10"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/100-grooves/header-full.jpg"
                 alt="100 Grooves Book Image">
         </div>
@@ -156,64 +156,32 @@
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
-        <div class="container max-w-5xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
-            <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>See what drummers are saying:</strong></h3>
+        <div class="container max-w-2xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
+            <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>Inspiration for drummers of all levels.</strong></h3>
             <div class="flex flex-wrap text-left overflow-hidden relative" x-bind:class="open ? 'max-h-full' : 'max-h-[670px] sm:max-h-[580px] lg:max-h-full'">
                 @php
                     $testimonials = [
                         [
-                        'name' => 'Hannah Welton',
-                        'credit' => 'Drummer for Prince',
-                        'comment' => 'What an incredible resource! Drumeo never fails to deliver innovative and informative tools to enhance the technique and overall performance of drummers everywhere. No matter your drumming goals or aspirations, “Easy Rudiments” is sure to help you get exactly where you want to be!',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/2021-12-15-Hannah-Welton-headshots-101-1-1640671453.jpg',
-                        ],
-                        [
-                        'name' => 'Dorothea Taylor',
-                        'credit' => 'The Godmother Of Drumming',
-                        'comment' => 'Learning the essential rudiments opens up a lifetime of knowledge for the road ahead.
-                        This new book from Drumeo is just what you need for a good foundation starting your drumming experience.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg',
-                        ],
-                        [
-                        'name' => 'Zach Jones',
-                        'credit' => 'Drummer for Sting',
-                        'comment' => '“Easy Rudiments” offers a practical, musical approach to learning the foundational skills of drumming. If you’re looking for a quick, fun route from buying your first pair of drumsticks to playing along to your favorite tunes and making music with other people, this is the book for you.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/zach-jones-1-1-1693917165.jpg',
-                        ],
-                        [
-                        'name' => 'Tony Palermo',
-                        'credit' => 'Drummer for Papa Roach',
-                        'comment' => 'Rudiments can be overwhelming, but with “Easy Rudiments”, Drumeo has broken them down to 15 essentials. You also have to have the mindset that rudiments are not just limited to a pad. Placing rudiments around the kit is an exciting way to up your drumming musicality. I always use rudiments as part of my pre show warm up and I’m looking forward to expanding with this book.',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/products/easy-rudiments/tony-profile.jpg',
-                        ],
-                        [
-                        'name' => 'Mike Sleath',
-                        'credit' => 'Drummer for Shawn Mendes',
-                        'comment' => 'Easy Rudiments by Drumeo covers all the most important tools every drummer needs! A must have for anyone looking to pick up some sticks!!',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/236685-avatar-1573487733.jpg',
-                        ],
-                        [
-                        'name' => 'JP Bouvet',
-                        'credit' => 'Independent Drummer',
-                        'comment' => 'A book that saves you from guessing which rudiments matter the most. I use these rudiments constantly in my improvisation.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/2023-08-08-JP-Bouvet-Coach-Cards-1x1-1692091193.jpg',
-                        ],
+                        'name' => 'Nic Collins',
+                        'credit' => 'Genesis, Better Stranger',
+                        'comment' => '"100 Beats You Need To Know" is an awesome release from Drumeo and a must-have for any drummer. So much of what I\'ve learnt behind the kit came from playing along to my favorite songs and albums. Now with so many legendary grooves and transcriptions in one place, there\'s something new to learn for any drummer at any level.',                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp',
+                        ]
                      ];
                 @endphp
                 @foreach ($testimonials as $testimonial)
-                    <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="w-full py-2 sm:px-2 lg:p-3">
                         <div class="flex flex-wrap sm:flex-nowrap items-start p-5 bg-white rounded-lg">
-                            <img class="mb-2 sm:mb-0 h-16 lg:h-20 rounded-full" src="{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }}">
-                            <p class="sm:pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
-                                <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['credit'] }}</em><br>
-                                {{ $testimonial['comment'] }}
+                            <img class="mb-2 sm:mb-0 h-16 lg:h-24 rounded-full" src="{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }}">
+                            <p class="sm:pl-4 text-base lg:text-xl"><strong>{{ $testimonial['name'] }}</strong><br>
+                                <em class="inline-block mb-1 opacity-60">{{ $testimonial['credit'] }}</em><br>
+                               <span class="leading-relaxed tracking-none"> {{ $testimonial['comment'] }}</span>
                             </p>
                         </div>
                     </div>
                 @endforeach
-                <div class="absolute bottom-0 left-0 right-0 h-16 z-10 lg:hidden" x-bind:class="{ 'hidden': open }" style="background:linear-gradient(to bottom, transparent, #f1f7fe);"></div>
+                {{-- <div class="absolute bottom-0 left-0 right-0 h-16 z-10 lg:hidden" x-bind:class="{ 'hidden': open }" style="background:linear-gradient(to bottom, transparent, #f1f7fe);"></div> --}}
             </div>
-            <div class="join drumeo outline smaller lg:hidden" x-on:click="open = !open;" x-bind:class="{ 'hidden': open }">Show All</div>
+            {{-- <div class="join drumeo outline smaller lg:hidden" x-on:click="open = !open;" x-bind:class="{ 'hidden': open }">Show All</div> --}}
         </div>
     </section>
     <div id="final" class="anchor"></div>
@@ -234,10 +202,10 @@
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
-                        <h6 class="leading-normal my-4 sm:my-6">
+                        {{-- <h6 class="leading-normal my-4 sm:my-6">
                         The 15 Rudiments You Actually Need To<br class="sm:hidden">
-                        Know (And How To Learn Them Quickly)</h6>
-                        <p class="text-sm text-drumeo">LAUNCH SPECIAL</p>
+                        Know (And How To Learn Them Quickly)</h6> --}}
+                        <p class="text-sm text-drumeo pt-10">LAUNCH SPECIAL</p>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['100-grooves-book']->price) > floatval($productPrices['100-grooves-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['100-grooves-book']->price) }}</s>
