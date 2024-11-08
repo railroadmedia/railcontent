@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { recordWatchSession } from 'musora-content-services';
 
 export default class ProgressTracker {
     constructor() {
@@ -71,20 +72,7 @@ export default class ProgressTracker {
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        data.append('seconds_played', this.secondsWatched);
-        data.append('media_id', mediaId);
-        data.append('media_type', mediaType);
-        data.append('media_category', mediaCategory);
-        data.append('session_id', sessionToken);
-        data.append('brand', brand);
-        data.append('content_id', contentId);
-
-        if (watchPosition && totalDuration) {
-            data.append('current_second', watchPosition);
-            data.append('media_length_seconds', totalDuration);
-        }
-
-        navigator.sendBeacon(endpoint, data);
+        recordWatchSession(mediaId, mediaType, mediaCategory, totalDuration, watchPosition, this.secondsWatched, sessionToken);
     }
 
     /**
@@ -118,15 +106,7 @@ export default class ProgressTracker {
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        return axios.post(endpoint, {
-            seconds_played: this.secondsWatched,
-            media_id: mediaId,
-            media_type: mediaType,
-            media_category: mediaCategory,
-            current_second: watchPosition,
-            media_length_seconds: totalDuration,
-            session_id: sessionToken,
-        })
+        return recordWatchSession(mediaId, mediaType, mediaCategory, totalDuration, watchPosition, this.secondsWatched, sessionToken)
             .then(response => response)
             .catch((error) => {
                 console.error(error);
