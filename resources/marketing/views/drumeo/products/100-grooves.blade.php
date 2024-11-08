@@ -89,61 +89,60 @@
         </div>
     </header>
     
-        <section class="text-left sm:px-6 pt-8 sm:py-10 lg:py-14 bg-[#F1F7FE] relative">
-        <div class="max-w-7xl mx-auto p-4 lg:p-0">
-            <div class="flex flex-col md:flex-row gap-8">
-                <div class="w-full sm:w-10/12 md:w-7/12 lg:w-6/12 mx-auto flex lg:items-center justify-center">
-                    <div class="w-full max-w-xl"> 
-                        <img
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/100-grooves/sample.webp"
-                            alt="100 Grooves Sample Image"
-                            class="w-full h-auto object-cover" 
-                        >
-                    </div>
-                </div>
-                
-                <div class="w-full md:w-6/12 md:space-y-6 lg:pl-4 lg:pr-10 tracking-normal">
-                    <h3 class="leading-tight lg:pt-4">
-                        <strong>
-                            100 Grooves <br/>
-                            That Changed History
-                        </strong>
-                    </h3>
-                    <div class="space-y-3">
-                        <p>
-                            You live in an era of access to every piece of recorded music ever.
-                        </p>
-                        <p>
-                            And with so many options, how do you know which songs truly moved the
-                            needle in the drumming world?
-                        </p>
-                        <p>
-                            After decades of hearing from thousands of drummers, we organized the
-                            most-influential drum parts into one handy guide.
-                        </p>
-                        <p>
-                            From Jimi Hendrix to John Coltrane, TOOL to Taylor Swift, we broke genre
-                            barriers to bring you <strong>the most comprehensive list of 100 grooves every
-                            drummer needs to know</strong>. And you'll learn more than just the grooves.
-                        </p>
-                        <p>
-                            You'll also have the history of each famous recording - including the
-                            drummer, album and backstory behind each iconic drum part. It's
-                            everything you need to go deeper (and impress your friends at parties).
-                        </p>
-                        <p>
-                            These beats are masterpieces in groove, creativity, and musicianship. You'll
-                            see a transformation in your own drumming with each one you add to your
-                            repertoire.
-                        </p>
-                        <p>
-                            Scroll down to take a peek inside - we're honored to help organize these
-                            pieces of drum recording history in one handy guide for you.
-                        </p>
-                    </div>
-                </div>
+    <section class="text-left sm:px-6 pt-8 sm:py-10 lg:py-14 bg-[#F1F7FE] relative">
+    <div class="max-w-7xl mx-auto p-4 lg:p-0">
+        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="w-full sm:w-10/12 lg:w-6/12 mx-auto flex lg:items-center justify-center">
+            <div class="w-full max-w-xl lg:max-w-2xl">
+            <img
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/products/100-grooves/sample.webp"
+                alt="100 Grooves Sample Image"
+                class="w-full h-auto object-cover"
+            >
             </div>
         </div>
+        <div class="w-full lg:w-6/12 space-y-4 sm:space-y-6 lg:pl-4 lg:pr-10 tracking-normal">
+            <h3 class="leading-tight lg:pt-4">
+            <strong>
+                100 Grooves <br/>
+                That Changed History
+            </strong>
+            </h3>
+            <div class="space-y-3">
+            <p>
+                You live in an era of access to every piece of recorded music ever.
+            </p>
+            <p>
+                And with so many options, how do you know which songs truly moved the
+                needle in the drumming world?
+            </p>
+            <p>
+                After decades of hearing from thousands of drummers, we organized the
+                most-influential drum parts into one handy guide.
+            </p>
+            <p>
+                From Jimi Hendrix to John Coltrane, TOOL to Taylor Swift, we broke genre
+                barriers to bring you <strong>the most comprehensive list of 100 grooves every
+                drummer needs to know</strong>. And you'll learn more than just the grooves.
+            </p>
+            <p>
+                You'll also have the history of each famous recording - including the
+                drummer, album and backstory behind each iconic drum part. It's
+                everything you need to go deeper (and impress your friends at parties).
+            </p>
+            <p>
+                These beats are masterpieces in groove, creativity, and musicianship. You'll
+                see a transformation in your own drumming with each one you add to your
+                repertoire.
+            </p>
+            <p>
+                Scroll down to take a peek inside - we're honored to help organize these
+                pieces of drum recording history in one handy guide for you.
+            </p>
+            </div>
+        </div>
+        </div>
+    </div>
     </section>
 
 
