@@ -135,6 +135,6 @@ class ContentUserProgress extends Model
 
     public static function getAllProgressDataByUser(int $userId): \Illuminate\Support\Collection
     {
-        return self::query()->select(['content_id', 'state', 'progress_percent'])->where('user_id', $userId)->get();
+        return self::query()->select(['content_id', 'state', 'progress_percent', 'updated_on'])->where('user_id', $userId)->get();
     }
 }
