@@ -522,4 +522,24 @@ class SalesController extends BaseController
             'theme' => 'pianote',
         ]);
     }
+    public function prima()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function primaLTM()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+            'lifetime' => true,
+        ]);
+    }
+    public function primaUlt()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+            'ultimate' => true,
+        ]);
+    }
 }
