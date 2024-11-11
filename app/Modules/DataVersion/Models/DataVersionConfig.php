@@ -6,54 +6,44 @@ use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 
 readonly class DataVersionConfig
 {
+    private const string DATA_KEY = "key";
+    private const string DATA_ENABLED = "enabled";
+    private const string DATA_CHECK_INTERVAL = "checkInterval";
+    private const string DATA_REFRESH_INTERVAL = "refreshInterval";
+
+    private array $data;
+
     public function __construct(
-        private UserDataVersionKeyEnum $versionKey,
-        private bool $isEnabled,
-        private int $versionCheckPollingIntervalSeconds,
-        private int $fullRefreshIntervalSeconds
+        UserDataVersionKeyEnum $versionKey,
+        bool $isEnabled,
+        int $versionCheckPollingIntervalSeconds,
+        int $fullRefreshIntervalSeconds
     ) {
+        $this->data = [
+            self::DATA_KEY => $versionKey->value,
+            self::DATA_ENABLED => $isEnabled,
+            self::DATA_CHECK_INTERVAL => $versionCheckPollingIntervalSeconds,
+            self::DATA_REFRESH_INTERVAL => $fullRefreshIntervalSeconds
+        ];
     }
 
     public function __serialize(): array
     {
-        return $this->toArray();
+        return $this->data;
     }
 
     public function __unserialize(array $data): void
     {
-        $this->versionKey = UserDataVersionKeyEnum::tryFrom($data["key"]);
-        $this->isEnabled = $data['enabled'];
-        $this->versionCheckPollingIntervalSeconds = $data['checkInterval'];
-        $this->fullRefreshIntervalSeconds = $data['refreshInterval'];
+        $this->data = $data;
     }
 
     public function toArray(): array
     {
-        return [
-            "key" => $this->versionKey->value,
-            "enabled" => $this->isEnabled,
-            "checkInterval" => $this->versionCheckPollingIntervalSeconds,
-            "refreshInterval" => $this->fullRefreshIntervalSeconds
-        ];
-    }
-
-    public function getVersionKey(): UserDataVersionKeyEnum
-    {
-        return $this->versionKey;
+        return $this->data;
     }
 
     public function isEnabled(): bool
     {
-        return $this->isEnabled;
-    }
-
-    public function getVersionCheckPollingIntervalSeconds(): int
-    {
-        return $this->versionCheckPollingIntervalSeconds;
-    }
-
-    public function getFullRefreshIntervalSeconds(): int
-    {
-        return $this->fullRefreshIntervalSeconds;
+        return $this->data[self::DATA_ENABLED];
     }
 }
