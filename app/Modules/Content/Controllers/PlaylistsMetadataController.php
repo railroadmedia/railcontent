@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Services\PlaylistsService;
+use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 
 class PlaylistsMetadataController extends Controller
 {
@@ -496,7 +497,8 @@ class PlaylistsMetadataController extends Controller
                                      ]);
         $flattenContent = $this->sanityGateway->countLessonsAndAssignments($request->get('content_id'));
         $itemsThatShouldBeAdd = ($flattenContent['lessons_count'] + count($extraParams)) ?? (count($extraParams));
-        if ($request->get('import_all_assignments', false)){
+        $importAllAssignments = $request->get('import_all_assignments', false);
+        if ($importAllAssignments){
             $itemsThatShouldBeAdd += $flattenContent['soundslice_assignments_count'];
     }
 
@@ -507,6 +509,7 @@ class PlaylistsMetadataController extends Controller
             'import_low_routine' => json_encode(['is_low_routine' => true])
         ];
 
+        $added = [];
         foreach ($request->get('playlist_id') as $playlistId){
             $playlist = UserPlaylist::with('items')->find($playlistId);
             if($playlist){
@@ -517,16 +520,19 @@ class PlaylistsMetadataController extends Controller
                 $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
                     ->max('position');
                 foreach($extraParams as $key=>$value){
+                    if($value) {
                         $lastPosition++;
-                        $playlistItemData = [
-                            'content_id'      => $request->get('content_id'),
-                            'content_parent'         => null,
-                            'user_playlist_id'        => $playlistId,
+                        $playlistItemData     = [
+                            'content_id'       => $request->get('content_id'),
+                            'content_parent'   => null,
+                            'user_playlist_id' => $playlistId,
                             'position'         => $lastPosition,
-                            'created_at'   => Carbon::now()->toDateTimeString(),
-                            'extra_data' => $extraData[$key],
+                            'created_at'       => Carbon::now()->toDateTimeString(),
+                            'extra_data'       => $extraData[$key],
                         ];
-                        $playlistItem = UserPlaylistContent::create($playlistItemData);
+                        $playlistItem         = UserPlaylistContent::create($playlistItemData);
+                        $added[$playlistId][] = $playlistItem->id;
+                    }
                 }
                 if(empty($extraParams)) {
                     foreach ($flattenContent['lessons'] as $item) {
@@ -539,21 +545,24 @@ class PlaylistsMetadataController extends Controller
                             'created_at'       => Carbon::now()->toDateTimeString(),
                         ];
                         $playlistItem     = UserPlaylistContent::create($playlistItemData);
+                        $added[$playlistId][] = $playlistItem->id;
+                        if($importAllAssignments){
+                            foreach ($flattenContent['soundslice_assignments'][$item['id']]??[] as $item) {
+                                $lastPosition++;
+                                $playlistItemData = [
+                                    'content_id'       => $item['id'],
+                                    'content_parent'   => $item['parent_id'],
+                                    'user_playlist_id' => $playlistId,
+                                    'position'         => $lastPosition,
+                                    'created_at'       => Carbon::now()->toDateTimeString(),
+                                ];
+                                $playlistItem = UserPlaylistContent::create($playlistItemData);
+                                $added[$playlistId][] = $playlistItem->id;
+                            }
+                        }
                     }
                 }
-                if($request->get('import_all_assignments', false)) {
-                    foreach ($flattenContent['soundslice_assignments'] as $item) {
-                        $lastPosition++;
-                        $playlistItemData = [
-                            'content_id'       => $item['id'],
-                            'content_parent'   => $item['parent_id'],
-                            'user_playlist_id' => $playlistId,
-                            'position'         => $lastPosition,
-                            'created_at'       => Carbon::now()->toDateTimeString(),
-                        ];
-                        $playlistItem = UserPlaylistContent::create($playlistItemData);
-                    }
-                }
+                event(new PlaylistItemsUpdated($playlistId));
             }
         }
         $results = [
@@ -563,7 +572,7 @@ class PlaylistsMetadataController extends Controller
             $results['limit_excedeed'] = $limitExcedeed;
         }
 
-        $results['successful'] = [];
+        $results['successful'] = $added;
 
         return response()->json($results);
     }
