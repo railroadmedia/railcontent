@@ -27,14 +27,14 @@ readonly class DataVersionConfig
         ];
     }
 
-    public function __serialize(): array
+    public static function __set_state(array $state_array): static
     {
-        return $this->data;
-    }
-
-    public function __unserialize(array $data): void
-    {
-        $this->data = $data;
+        return new static(
+            UserDataVersionKeyEnum::tryFrom($state_array['data'][self::DATA_KEY]),
+            $state_array['data'][self::DATA_ENABLED],
+            $state_array['data'][self::DATA_CHECK_INTERVAL],
+            $state_array['data'][self::DATA_REFRESH_INTERVAL]
+        );
     }
 
     public function toArray(): array
