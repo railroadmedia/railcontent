@@ -342,8 +342,8 @@ class SanityGateway
 
         $assignmentIds = [];
         $leafNodes = [];
+        $assignmentsCount = 0;
         if (!empty($documents)) {
-
             // Flatten the structure to get leaf nodes only
             if(!$documents[0]['lastChildItems']){
                if(isset($documents[0]['parent_content_data'])) {
@@ -354,7 +354,8 @@ class SanityGateway
             foreach ($documents[0]['lastChildItems']??[] as $item) {
                 if (!empty($item['assignments'])) {
                     foreach ($item['assignments'] as $assignment) {
-                        $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                        $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                        $assignmentsCount++;
                     }
                 }
                 if (isset($item['children'])) {
@@ -363,7 +364,8 @@ class SanityGateway
                             $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id']];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
-                                    $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                                    $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                                    $assignmentsCount++;
                                 }
                             }
                         }
@@ -372,9 +374,18 @@ class SanityGateway
                     $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id']];
                     if (!empty($item['assignments'])) {
                         foreach ($item['assignments'] as $assignment) {
-                            $assignmentIds[$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                            $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                            $assignmentsCount++;
                         }
                     }
+                }
+            }
+         //   $assignmentsCount = count($assignmentIds);
+            if ($documents[0]['type'] == 'song') {
+                if ($documents[0]['instrumentless']) {
+                    $assignmentsCount = 2;
+                }else{
+                    $assignmentsCount = 1;
                 }
             }
         }
@@ -383,7 +394,7 @@ class SanityGateway
             'lessons' => $leafNodes,
             'lessons_count' => count($leafNodes),
             'soundslice_assignments' => $assignmentIds,
-            'soundslice_assignments_count' => count($assignmentIds),
+            'soundslice_assignments_count' => $assignmentsCount,
         ];
     }
 
