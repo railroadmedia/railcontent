@@ -88,6 +88,7 @@ class SanityGateway
             'video',
             'soundslice',
             "'artist_name':coalesce(artist->name, instructor[0]->name)",
+            "instrumentless",
         ]
         ];
 

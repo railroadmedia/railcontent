@@ -519,6 +519,7 @@ class PlaylistsMetadataController extends Controller
                 }
                 $lastPosition = UserPlaylistContent::where('user_playlist_id', $playlistId)
                     ->max('position');
+                $isExtra = false;
                 foreach($extraParams as $key=>$value){
                     if($value) {
                         $lastPosition++;
@@ -532,9 +533,11 @@ class PlaylistsMetadataController extends Controller
                         ];
                         $playlistItem         = UserPlaylistContent::create($playlistItemData);
                         $added[$playlistId][] = $playlistItem->id;
+                        $isExtra = true;
                     }
                 }
-                if(empty($extraParams)) {
+
+                if(!$isExtra) {
                     foreach ($flattenContent['lessons'] as $item) {
                         $lastPosition++;
                         $playlistItemData = [
