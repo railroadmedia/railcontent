@@ -19,6 +19,11 @@ class DataVersionServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // publish config file
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/dataVersioning.php',
+            'dataVersioning'
+        );
     }
 
     /**
