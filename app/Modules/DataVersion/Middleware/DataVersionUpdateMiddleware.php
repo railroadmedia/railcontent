@@ -34,7 +34,7 @@ class DataVersionUpdateMiddleware
         }
         $response = $next($request);
 
-        if (!$response->exception) {
+        if ($response->isSuccessful() && !$response->exception) {
             $version = $this->dataVersionService->incrementUserContextVersion($dataVersionKey, user()->id);
             $content = $response->getContent();
             if (!$content) {
@@ -42,8 +42,12 @@ class DataVersionUpdateMiddleware
             }
             if (json_validate($content)) {
                 $data = json_decode($content);
-                $data->version = $version;
-                return response()->json($data);
+                if (is_array($data)) {
+                    $data['version'] = $version;
+                } else {
+                    $data->version = $version;
+                }
+                return response()->json($data, $response->getStatusCode());
             }
         }
         return $response;

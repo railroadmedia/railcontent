@@ -5,6 +5,7 @@ namespace App\Modules\Content\Controllers;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,11 @@ class ContentProgressController
         $allProgressData = ContentUserProgress::getAllProgressDataByUser(user()->id)
             ->keyBy('content_id')
             ->map(function ($item) {
-                return ['s' => $item['state'], 'p' => $item['progress_percent']];
+                return [
+                    's' => $item['state'],
+                    'p' => $item['progress_percent'],
+                    'u' => Carbon::parse($item['updated_on'])->timestamp
+                ];
             });
         $lastEngagedSeconds = LastEngagedSeconds::getAllContentResumeTimeSeconds(user()->id)
             ->keyBy('content_id')

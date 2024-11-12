@@ -3,7 +3,6 @@
 namespace App\Modules\DataVersion\ServiceProviders;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class DataVersionServiceProvider extends ServiceProvider
@@ -19,6 +18,11 @@ class DataVersionServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // publish config file
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/dataVersioning.php',
+            'dataVersioning'
+        );
     }
 
     /**
