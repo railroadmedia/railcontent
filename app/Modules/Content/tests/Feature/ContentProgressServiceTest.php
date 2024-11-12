@@ -7,6 +7,9 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ContentProgressService;
+use App\Modules\RailTracker\database\Factories\MediaPlaybackSessionFactory;
+use App\Modules\RailTracker\Enums\MediaTypeEnum;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -115,7 +118,7 @@ class ContentProgressServiceTest extends TestCase
 
         //middle
         $childIds = $this->service->getChildIds($content2->id);
-        $this->assertEquals([$content3->id, $content4->id], $childIds,);
+        $this->assertEquals([$content3->id, $content4->id], $childIds);
 
         //bottom
         $childIds = $this->service->getChildIds($content4->id);
@@ -158,6 +161,22 @@ class ContentProgressServiceTest extends TestCase
         $this->service->saveContentProgress($content1->id, 100, $userId);
         $this->assertProgress($content, $userId, ProgressState::Started, 50);
         $this->assertProgress($content1, $userId, ProgressState::Completed, 100);
+    }
+
+    public function test_update_progress_from_session()
+    {
+        $user = User::factory()->create();
+        $content = $this->getNewContent();
+        $session = MediaPlaybackSessionFactory::createSession(
+            $user,
+            $content,
+            MediaTypeEnum::VideoYouTube,
+            100,
+            10,
+            10
+        );
+        $this->service->updateContentProgress($session, $content);
+        $this->assertProgress($content, $user->id, ProgressState::Started, 10);
 
     }
 

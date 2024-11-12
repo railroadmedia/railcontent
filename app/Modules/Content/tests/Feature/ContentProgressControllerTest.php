@@ -22,7 +22,7 @@ class ContentProgressControllerTest extends TestCase
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(1, $currentVersion);
 
-        $response = $this->put(route('content.user.progress.start'), ['contentId' => $content->id]);
+        $response = $this->post(route('content.user.progress.start'), ['contentId' => $content->id]);
 
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(2, $currentVersion);
@@ -38,7 +38,7 @@ class ContentProgressControllerTest extends TestCase
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(1, $currentVersion);
 
-        $response = $this->put(route('content.user.progress.complete'), ['contentId' => $content->id]);
+        $response = $this->post(route('content.user.progress.complete'), ['contentId' => $content->id]);
 
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(2, $currentVersion);
@@ -54,9 +54,9 @@ class ContentProgressControllerTest extends TestCase
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(1, $currentVersion);
 
-        $response = $this->put(route('content.user.progress.start'), ['contentId' => $content->id]);
-        $response = $this->put(route('content.user.progress.complete'), ['contentId' => $content->id]);
-        $response = $this->put(route('content.user.progress.reset'), ['contentId' => $content->id]);
+        $response = $this->post(route('content.user.progress.start'), ['contentId' => $content->id]);
+        $response = $this->post(route('content.user.progress.complete'), ['contentId' => $content->id]);
+        $response = $this->post(route('content.user.progress.reset'), ['contentId' => $content->id]);
 
         $currentVersion = $this->get(route('content.user.progress.all'))->json()['version'];
         $this->assertEquals(4, $currentVersion);

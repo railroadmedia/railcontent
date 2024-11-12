@@ -1,25 +1,16 @@
 <?php
 
-namespace App\Modules\RailTracker\Trackers;
+namespace App\Modules\RailTracker\Services;
 
-use App\Modules\RailTracker\Models\MediaPlaybackSessions;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use App\Modules\RailTracker\Models\MediaPlaybackTypes;
+use App\Modules\RailTracker\Trackers\TrackerBase;
 use Cache;
 use Carbon\Carbon;
-use Exception;
-use App\Modules\RailTracker\Events\MediaPlaybackTracked;
-use App\Modules\RailTracker\Services\ConfigService;
 use Ramsey\Uuid\Uuid;
 
-/*
- * This does NOT implement TrackerInterface because it doesn't use Doctrine ORM, and the writing of media-playback data
- * should happen right away—rather than on the other side of a caching queue-like system—because UX would suffer if
- * progress data not available for use right away.
- *
- * Jonathan, April 2019
- */
-
-class MediaPlaybackTracker extends TrackerBase
+class MediaPlaybackService extends TrackerBase
 {
     public function trackMediaPlaybackStart(
         string $mediaId,
@@ -30,7 +21,6 @@ class MediaPlaybackTracker extends TrackerBase
         int $secondsPlayed = 0,
         ?string $brand = null,
         ?string $startedOnDatetimeString = null,
-        ?int $contentId = null
     ): array {
         if (empty($startedOnDatetimeString)) {
             $startedOnDatetimeString = Carbon::now()->toDateTimeString();
@@ -48,7 +38,7 @@ class MediaPlaybackTracker extends TrackerBase
             'last_updated_on' => $startedOnDatetimeString,
         ];
 
-        $mediaPlaybackSession = new MediaPlaybackSessions();
+        $mediaPlaybackSession = new MediaPlaybackSession();
         $mediaPlaybackSession->uuid = Uuid::uuid4();
         $mediaPlaybackSession->media_id = $mediaId;
         $mediaPlaybackSession->media_length_seconds = $mediaLengthSeconds;
@@ -61,21 +51,7 @@ class MediaPlaybackTracker extends TrackerBase
         $mediaPlaybackSession->save();
         $data['id'] = $mediaPlaybackSession->id;
 
-        event(
-            new MediaPlaybackTracked(
-                $mediaPlaybackSession->id,
-                $data['media_id'],
-                $data['media_length_seconds'],
-                $data['user_id'],
-                $data['type_id'],
-                $data['seconds_played'],
-                $data['current_second'],
-                $data['started_on'],
-                $data['last_updated_on'],
-                $brand,
-                $contentId
-            )
-        );
+        event(new MediaPlaybackTracked($mediaPlaybackSession));
         $data['brand'] = $brand;
         return $data;
     }
@@ -98,7 +74,7 @@ class MediaPlaybackTracker extends TrackerBase
             'last_updated_on' => $lastUpdatedOn,
         ];
 
-        $session = MediaPlaybackSessions::query()->find($sessionId);
+        $session = MediaPlaybackSession::query()->find($sessionId);
 
         if (empty($session)) {
             return false;
@@ -112,21 +88,7 @@ class MediaPlaybackTracker extends TrackerBase
             return false;
         }
 
-        event(
-            new MediaPlaybackTracked(
-                $session['id'],
-                $session['media_id'],
-                $session['media_length_seconds'],
-                $session['user_id'],
-                $session['type_id'],
-                $data['seconds_played'],
-                $data['current_second'],
-                $session['started_on'],
-                $data['last_updated_on'],
-                $brand,
-                $contentId
-            )
-        );
+        event(new MediaPlaybackTracked($session));
 
         return array_merge($session->toArray(), $data);
     }
@@ -141,9 +103,13 @@ class MediaPlaybackTracker extends TrackerBase
                 'railtracker_media_playback_types_id_' . serialize($data) . '_brand_' . config('railtracker.brand')
             );
 
-        return Cache::remember($cacheKey, now()->addSeconds(config('railtracker.cache_duration')), function () use ($data) {
-            $mediaPlaybackType = MediaPlaybackTypes::query()->firstOrCreate($data);
-            return $mediaPlaybackType->id;
-        });
+        return Cache::remember(
+            $cacheKey,
+            now()->addSeconds(config('railtracker.cache_duration')),
+            function () use ($data) {
+                $mediaPlaybackType = MediaPlaybackTypes::query()->firstOrCreate($data);
+                return $mediaPlaybackType->id;
+            }
+        );
     }
 }

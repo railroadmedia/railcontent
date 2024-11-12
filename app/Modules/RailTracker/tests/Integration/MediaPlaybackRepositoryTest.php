@@ -2,10 +2,10 @@
 
 namespace App\Modules\RailTracker\tests\Integration;
 
-use Carbon\Carbon;
 use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Modules\RailTracker\tests\RailtrackerTestCase;
-use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
+use Carbon\Carbon;
 
 class MediaPlaybackRepositoryTest extends RailtrackerTestCase
 {
@@ -15,7 +15,7 @@ class MediaPlaybackRepositoryTest extends RailtrackerTestCase
     private $mediaPlaybackRepository;
 
     /**
-     * @var MediaPlaybackTracker
+     * @var MediaPlaybackService
      */
     private $mediaPlaybackTracker;
 
@@ -24,7 +24,7 @@ class MediaPlaybackRepositoryTest extends RailtrackerTestCase
         parent::setUp();
 
         $this->mediaPlaybackRepository = app(MediaPlaybackRepository::class);
-        $this->mediaPlaybackTracker = app(MediaPlaybackTracker::class);
+        $this->mediaPlaybackTracker = app(MediaPlaybackService::class);
     }
 
     public function test_sum_total_played()

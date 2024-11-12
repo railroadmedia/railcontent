@@ -239,9 +239,16 @@
                         <h6
                             v-if="comment.content"
                             class="tw-text-sm font-bold"
+                            style="margin-bottom:4px"
+                        >
+                            {{ comment.content.parentTitle }}
+                        </h6>
+                        <span
+                            v-if="comment.content"
+                            class="tw-text-sm"
                         >
                             {{ comment.content.title }}
-                        </h6>
+                        </span>
                     </div>
 
                     <div class="flex flex-column lesson-created-on hide-xs-only ph-1">
@@ -424,6 +431,7 @@ import CommentMixin from '../_mixin';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import {storeToRefs} from 'pinia';
 import {useUserStore} from "@stores/user";
+import {fetchCommentModContentData} from 'musora-content-services';
 
 const userStore = useUserStore();
 const {userDisplayName} = storeToRefs(userStore);
@@ -758,16 +766,10 @@ export default {
                     if (response) {
                         const comments = response.data;
 
-                        ContentService.getContentByIds(allContentIds.join(','))
-                            .then((response) => {
-                                const content = Utils.flattenContent(response.data.data);
-
-                                comments.forEach((comment) => {
-                                    content.forEach((content) => {
-                                        if (content.id === comment.content_id) {
-                                            comment.content = content;
-                                        }
-                                    });
+                        fetchCommentModContentData(allContentIds)
+                            .then((contentData) => {
+                                comments.forEach(function(comment){
+                                    comment.content = contentData[comment.content_id] ?? null;
                                 });
 
                                 if (replace) {

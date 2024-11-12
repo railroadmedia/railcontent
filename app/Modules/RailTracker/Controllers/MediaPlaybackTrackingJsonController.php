@@ -2,6 +2,8 @@
 
 namespace App\Modules\RailTracker\Controllers;
 
+use App\Modules\RailTracker\Enums\MediaTypeEnum;
+use App\Modules\RailTracker\Services\MediaPlaybackService;
 use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -9,21 +11,20 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
-use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
 
 class MediaPlaybackTrackingJsonController extends Controller
 {
     use ValidatesRequests;
 
     /**
-     * @var MediaPlaybackTracker
+     * @var MediaPlaybackService
      */
     private $mediaPlaybackTracker;
 
     /**
      * MediaPlaybackTrackingController constructor.
      */
-    public function __construct(MediaPlaybackTracker $mediaPlaybackTracker)
+    public function __construct(MediaPlaybackService $mediaPlaybackTracker)
     {
         $this->mediaPlaybackTracker = $mediaPlaybackTracker;
     }
@@ -69,20 +70,20 @@ class MediaPlaybackTrackingJsonController extends Controller
             $userId = session()->get(auth()->guard()->getName());
         }
 
-        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType(
-            $request->input('media_type'),
+        $mediaTypeId = MediaTypeEnum::fromTypeCategory(
+            $request->get('media_type'),
             $request->input('media_category')
-        );
+        )->value;
+
 
         $data = $this->mediaPlaybackTracker->trackMediaPlaybackStart(
             $request->input('media_id'),
-            $request->input('media_length_seconds'),
+            $request->input('media_length_seconds', 0),
             $userId,
             $mediaTypeId,
             $request->input('current_second', 0),
             $request->input('seconds_played', 0),
-            $request->input('brand'),
-            contentId: $request->input('content_id')
+            $request->input('brand')
         );
 
         return response()->json(

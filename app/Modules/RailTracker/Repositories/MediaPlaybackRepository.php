@@ -2,7 +2,7 @@
 
 namespace App\Modules\RailTracker\Repositories;
 
-use App\Modules\RailTracker\Models\MediaPlaybackSessions;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use App\Modules\RailTracker\Models\MediaPlaybackTypes;
 
 class MediaPlaybackRepository extends TrackerRepositoryBase
@@ -10,7 +10,7 @@ class MediaPlaybackRepository extends TrackerRepositoryBase
 
     public function sumTotalPlayed(int $userId, string $mediaId, int $mediaTypeId) : int
     {
-        return MediaPlaybackSessions::query()->where('user_id', $userId)
+        return MediaPlaybackSession::query()->where('user_id', $userId)
             ->where('media_id', $mediaId)
             ->where('type_id', $mediaTypeId)
             ->sum('seconds_played');
