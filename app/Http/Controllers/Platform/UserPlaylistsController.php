@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Modules\Content\Models\UserPlaylist;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
@@ -16,6 +17,7 @@ use App\Decorators\Content\ResourceDecorator;
 use App\Http\Controllers\BaseController;
 use App\Services\PlaylistService;
 use Illuminate\Http\Request;
+use Modules\Content\Services\PlaylistsService;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -47,6 +49,7 @@ class UserPlaylistsController extends BaseController
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
+    private PlaylistsService $userPlaylistService;
 
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
@@ -59,7 +62,8 @@ class UserPlaylistsController extends BaseController
         ResourceDecorator $resourceDecorator,
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         ContentLastEngagedService $contentLastEngagedService,
-        PlaylistService $playlistService
+        PlaylistService $playlistService,
+        PlaylistsService $userPlaylistService
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
@@ -72,6 +76,7 @@ class UserPlaylistsController extends BaseController
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->contentLastEngagedService = $contentLastEngagedService;
         $this->playlistService = $playlistService;
+        $this->userPlaylistService = $userPlaylistService;
     }
 
     public function index(Request $request): View
@@ -144,98 +149,18 @@ class UserPlaylistsController extends BaseController
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $user = user();
+        $playlist = UserPlaylist::find($playlistId);
+        throw_if((!$playlist), new NotFoundHttpException());
 
-        $playlist = $this->userPlaylistsService->getUserPlaylistById($playlistId, false);
-        throw_if(empty($playlist), new NotFoundHttpException());
+        $playlist['has_access'] = ($playlist->user_id != $user->id && $playlist->private == true) ? 0 : 1;
+        $playlist['is_my_playlist'] = $playlist->user_id == $user->id;
+        $playlist['description'] = $playlist['description'] ?? '';
+        $playlist['playback_url'] = url()->route('platform.play.playlist', [
+            'playlistId' => $playlist['id'],
+        ]);
 
-        $playlist['has_access'] = ($playlist['private'] == false || $playlist['is_my_playlist'] == true) ? 1 : 0;
-
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit');
-
-        $contentTypes = array_merge(config('railcontent.appUserListContentTypes', []), array_values(
-            config(
-                'railcontent.showTypes',
-                []
-            )[config(
-                'railcontent.brand'
-            )] ?? []
-        ), ['routine']);
-
-        $playlistItems = [];
-        if ($playlist['has_access'] == 1) {
-            $initialByPassPermissions = ContentRepository::$bypassPermissions;
-            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-            ContentRepository::$bypassPermissions = true;
-            $oldStatuses = ContentRepository::$availableContentStatues;
-            $oldFutureContent = ContentRepository::$pullFutureContent;
-            if(is_array(ContentRepository::$availableContentStatues)) {
-                array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
-            }
-            ContentRepository::$pullFutureContent = true;
-            $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
-
-            ContentRepository::$bypassPermissions = $initialByPassPermissions;
-            ContentRepository::$availableContentStatues = $oldStatuses;
-            ContentRepository::$pullFutureContent = $oldFutureContent;
-
-            foreach ($items as $index => $item) {
-                if ($item['type'] == 'song' && empty($item['assignments'] ?? [])) {
-                    LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
-                    $this->lessonAssignmentDecorator->decorate(new Collection([$item]))
-                        ->first();
-                    if(count($item['assignments'] ?? []) > 0) {
-                        $playlistItems[$index]['duration'] = $item['assignments'][0]['length_in_seconds'] ?? 0;
-                    }
-                }
-                if($item['type'] == 'assignment') {
-                    $playlistItems[$index]['duration'] = $item['length_in_seconds'];
-                }
-
-                $playlistItems[$index]['id'] = $item['id'];
-                $playlistItems[$index]['type'] = $item['type'];
-                $playlistItems[$index]['item_type'] = $item['item_type'];
-                $playlistItems[$index]['title'] = $item['title'];
-                $playlistItems[$index]['artist'] = $item['artist'];
-                $playlistItems[$index]['status'] = $item['status'];
-                $playlistItems[$index]['published_on'] = $item['published_on'];
-                $playlistItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
-                $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
-                $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
-                $playlistItems[$index]['show_plus_upgrade_modal'] = $item['show_plus_upgrade_modal'] ?? false;
-
-                $playlistItems[$index]['duration'] = $item['length_in_seconds'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
-                $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
-                    'playlistId' => $playlistId,
-                    'playlistItemId' => $item['user_playlist_item_id'],
-                ]);
-                $playlistItems[$index]['route'] = $item['route'] ?? '';
-                $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
-                $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
-                $playlistItems[$index]['user_playlist_item_extra_data'] =
-                    $item['user_playlist_item_extra_data'] ?? null;
-                $playlistItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
-                $playlistItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
-                $playlistItems[$index]['start_second'] = $item['start_second'] ?? null;
-                $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
-                $playlistItems[$index]['started'] = $item['started'] ?? false;
-                $playlistItems[$index]['completed'] = $item['completed'] ?? false;
-                $playlistItems[$index]['thumbnail_url'] = $item->fetch(
-                    'data.original_thumbnail_url',
-                    $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? '')
-                );
-                $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
-                $playlistItems[$index]['progress_percent'] = $item['progress_percent'] ?? 0;
-                $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
-                $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
-                $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
-                $playlistItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
-                $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
-                $playlistItems[$index]['difficulty'] = $item['difficulty'] ?? false;
-            }
-            $playlist['duration'] = $items->sum('length_in_seconds');
-        }
-
+        $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist->brand, $playlist->id);
+     
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);
@@ -248,7 +173,6 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $playlist['total_items']
         ]);
     }
 

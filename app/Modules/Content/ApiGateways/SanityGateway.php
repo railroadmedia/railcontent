@@ -306,7 +306,8 @@ class SanityGateway
                     'soundslice_slug' => $assignment['assignment_soundslice'] ?? null,
                     'route' => $routes,
                     'resources' => $document['resource'] ?? [],
-                    'permission_id' => $document['permission_id'] ?? []
+                    'permission_id' => $document['permission_id'] ?? [],
+                    'status' => $document['status']
                 ];
             }
         }
@@ -322,6 +323,7 @@ class SanityGateway
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         resource,
+        'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
         // Use a recursive-like approach to get only leaf nodes
         'lastChildItems': array::compact(
             child[]-> {
@@ -350,6 +352,12 @@ class SanityGateway
                if(isset($documents[0]['parent_content_data'])) {
                    $parent = (last($documents[0]['parent_content_data']));
                }
+                if (!empty($documents[0]['assignments'])) {
+                    foreach ($documents[0]['assignments'] as $assignment) {
+                        $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => null];
+                        $assignmentsCount++;
+                    }
+                }
                 $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null];
             }
             foreach ($documents[0]['lastChildItems']??[] as $item) {
