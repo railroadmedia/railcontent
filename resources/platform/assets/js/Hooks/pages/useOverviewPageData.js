@@ -1,6 +1,6 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchMethod, getProgressPercentage, fetchMethodChildren, fetchFoundation, fetchCompletedState, fetchMethod, getProgressPercentage, fetchMethodChildren, fetchFoundation, getProgressPercentageByIds, fetchUserChallengeProgress } from 'musora-content-services';
+import { fetchMethod, fetchMethodChildren, fetchFoundation, fetchCompletedState, getProgressPercentage, fetchUserChallengeProgress } from 'musora-content-services';
 
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
@@ -30,7 +30,7 @@ export async function useOverviewPageData(contentType, parentType) {
                 };
             }
         } else {
-<			if (contentType === "learning-path-level") {
+		if (contentType === "learning-path-level") {
 	            const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
 	            if (result) {
 	                result.levels = result.levels.map((level, index) => ({
