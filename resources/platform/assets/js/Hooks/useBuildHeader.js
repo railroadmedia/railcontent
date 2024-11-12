@@ -10,9 +10,15 @@ export function useBuildHeader(progressPercent) {
         };
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
-            //console.log('info', result)
+            let packType = 'Lessons';
+            if(contentType === 'pack-bundle') packType = 'Packs';
+            if(contentType === 'learning-path-course') packType = 'Courses';
+
+            let lessonCount = result.lesson_count;
+            if(contentType === 'learning-path-course' || contentType === 'learning-path-lesson') lessonCount = result.child_count;
+
             header.infoData = [
-                `${result.lesson_count} ${contentType === 'pack-bundle' ? 'Packs' : 'Lessons'}`,
+                `${lessonCount} ${packType}`,
                 `${result.total_xp} XP`
             ];
         }
