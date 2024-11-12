@@ -254,8 +254,9 @@ class ChallengesService
                         'duration_text' => $durationText,
                         'is_solo' => $userProgress['is_solo'],
                         'status' => $status,
-                        'user_data' => $userProgress->getCompiledMetadata(),
                         'first_incomplete_lesson' => $firstIncompleteLesson,
+                        ... $userProgress->getCompiledMetadata(),
+                        ... $challenge,
                     ];
                     break;
                 }
@@ -267,16 +268,12 @@ class ChallengesService
                     'duration_text' => $this->getDurationText(Carbon::parse($challenge['published_on']), $this->getChallengeEndDate($challenge)),
                     'is_solo' => $challenge['is_solo'],
                     'status' => 'not_started',
-                    'user_data' => [],
                     'first_incomplete_lesson' => [],
+                    ... $challenge,
                 ];
             }
             $challengeMetaDataToReturn['content_id'] = $challenge['id'];
-            if ($returnChallengeData) {
-                $challengeMetaDataToReturn['challenge'] = $challenge;
-                unset($challengeMetaDataToReturn['challenge']['lessons']);
-            }
-            $resultPackage[$challenge['id']] = $challengeMetaDataToReturn;
+            $resultPackage[] = $challengeMetaDataToReturn;
         }
         return $resultPackage;
     }
