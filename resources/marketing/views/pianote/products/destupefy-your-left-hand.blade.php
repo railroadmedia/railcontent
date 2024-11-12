@@ -61,22 +61,6 @@
         </div>
     </header>
 
-    <div class="sticky-trigger block"></div>
-    <a href="#customize-anchor"
-        class="promo-banner flex text-white text-center items-center justify-center -mt-20 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-pianote"
-    >
-        <span class="inline-block mx-0 leading-tight uppercase">
-            <strong class="text-musora">SAVE 95% - OFFER ENDS IN:</strong>
-            <br>
-            <span x-cloak x-data="timer()" x-init="countdown()">
-                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-            </span>
-        </span>
-    </a>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
         <i class="close stop-play fas fa-times" data-dismiss="modal" aria-label="Close"></i>
         <div class="modal-dialog modal-lg" role="document">
@@ -572,23 +556,5 @@
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-    <script type="application/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var stickyBar = document.querySelector('.promo-banner');
-            window.addEventListener('scroll', function () {
-                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-                if (window.scrollY > (unstickTrigger - 115)) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < stickTrigger - 115) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-                    stickyBar.classList.add('fixed', 'mt-0');
-                }
-            });
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 @stop
