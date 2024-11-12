@@ -192,12 +192,7 @@ class ChallengesMetaDataController extends Controller
         foreach($challengeProgress as $progress) {
             foreach($challenges as $challenge) {
                 if ($progress->content_id == $challenge['id']) {
-                    $badges[] = [
-                        'title' => $challenge['title'],
-                        'badge' => $challenge['badge'],
-                        'id' => $challenge['id'],
-                        ... $this->getUserAwardData($challenge, $progress, $user)
-                    ];
+                    $badges[] = $this->getUserAwardData($challenge, $progress, $user);
                     break;
                 }
             }
@@ -257,6 +252,9 @@ class ChallengesMetaDataController extends Controller
             'challenge_title' => $challenge['title'],
             'award_text' => $challenge['award_custom_text'],
             'tier' => $tier,
+            'title' => $challenge['title'],
+            'badge' => $challenge['badge'],
+            'id' => $challenge['id'],
             ... $imageValues,
         ];
     }
