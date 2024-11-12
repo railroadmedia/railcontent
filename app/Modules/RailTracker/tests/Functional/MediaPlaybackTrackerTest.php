@@ -2,25 +2,24 @@
 
 namespace App\Modules\RailTracker\tests\Functional;
 
-use App\Modules\Content\Models\Content;
-use App\Modules\RailTracker\Models\MediaPlaybackSessions;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
+use App\Modules\RailTracker\Models\MediaPlaybackSession;
 use App\Modules\RailTracker\Models\MediaPlaybackTypes;
+use App\Modules\RailTracker\Services\MediaPlaybackService;
+use App\Modules\RailTracker\tests\RailtrackerTestCase;
 use Auth;
 use Carbon\Carbon;
-use App\Modules\RailTracker\Events\MediaPlaybackTracked;
-use App\Modules\RailTracker\tests\RailtrackerTestCase;
-use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
 use Modules\UserManagementSystem\Models\User;
 
 class MediaPlaybackTrackerTest extends RailtrackerTestCase
 {
-    protected MediaPlaybackTracker $mediaPlaybackTracker;
+    protected MediaPlaybackService $mediaPlaybackTracker;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->mediaPlaybackTracker = $this->app->make(MediaPlaybackTracker::class);
+        $this->mediaPlaybackTracker = $this->app->make(MediaPlaybackService::class);
     }
 
     public function test_track_media_playback_type()
@@ -67,7 +66,7 @@ class MediaPlaybackTrackerTest extends RailtrackerTestCase
         );
 
         $this->assertDatabaseHas(
-            MediaPlaybackSessions::class,
+            MediaPlaybackSession::class,
             [
                 'media_id' => $mediaId,
                 'media_length_seconds' => $mediaLength,
@@ -100,7 +99,7 @@ class MediaPlaybackTrackerTest extends RailtrackerTestCase
         );
 
         $this->assertDatabaseHas(
-            MediaPlaybackSessions::class,
+            MediaPlaybackSession::class,
             [
                 'media_id' => $mediaId,
                 'media_length_seconds' => $mediaLength,
@@ -145,7 +144,7 @@ class MediaPlaybackTrackerTest extends RailtrackerTestCase
         );
 
         $this->assertDatabaseHas(
-            MediaPlaybackSessions::class,
+            MediaPlaybackSession::class,
             [
                 'id' => $sessionId,
                 'seconds_played' => $secondsPlayed,
@@ -192,7 +191,7 @@ class MediaPlaybackTrackerTest extends RailtrackerTestCase
         );
 
         $this->assertDatabaseHas(
-            MediaPlaybackSessions::class,
+            MediaPlaybackSession::class,
             [
                 'id' => $sessionId,
                 'seconds_played' => $secondsPlayed,
@@ -240,7 +239,7 @@ class MediaPlaybackTrackerTest extends RailtrackerTestCase
             );
 
             $this->assertDatabaseHas(
-                MediaPlaybackSessions::class,
+                MediaPlaybackSession::class,
                 [
                     'media_id' => $mediaId,
                     'media_length_seconds' => $mediaLength,

@@ -92,11 +92,8 @@ class ChallengeUserProgress extends Model
 
         foreach ($this->lessons_meta_data as $lesson) {
             $unlockDate = Carbon::parse($lesson['unlock_date']);
-            if ($lesson['is_bonus_content']) {
+            if ($lesson['is_always_unlocked'] || $unlockDate > $today) {
                 continue;
-            }
-            if ($unlockDate > $today) {
-                break;
             } else if ($unlockDate == $today) {
                 if ($lesson['completed']) {
                     $currentStreak++;
@@ -106,7 +103,7 @@ class ChallengeUserProgress extends Model
                 if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
-                } else {
+                } elseif (!$lesson['is_bonus_content']) {
                     $bestStreak = max($bestStreak, $currentStreak);
                     $currentStreak = 0;
                     $missedLessons++;
@@ -354,17 +351,29 @@ class ChallengeUserProgress extends Model
              * 30-day challenge - every 5 days
              * 10-day challenge - one at 5 days
              * 1-9  day challenge - none, other than completion
-             * 11-29 day challenges - math to be determined
+             * 11-29 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * Example: 29 / 2 = 15. Day 15 milestone & completion milestone
              * Every milestone is +1 rest day
              */
-            if ($totalLessons >= 10) {
-                $isMilestoneStreak = ($currentStreakData['current'] % 5 == 0);
-                $hasStreakIncreased = $currentStreakData['current'] != $previousStreakData['current'];
-                $isMileStone = $isMilestoneStreak && $hasStreakIncreased;
-                $results['is_milestone'] = $isMileStone;
-                $this->current_rest_days += $isMileStone ? 1 : 0;
-                $results['added_to_streak'] = $hasStreakIncreased;
-                $results['added_to_rest_days'] = $isMileStone;
+            $currentStreak = $currentStreakData['current'];
+            $hasStreakIncreased = $currentStreak != $previousStreakData['current'];
+            $results['added_to_streak'] = $hasStreakIncreased;
+            if ($hasStreakIncreased) {
+                if ($totalLessons >= 10) {
+                    if ($totalLessons == 10 || $totalLessons == 30) {
+                        $isMilestoneStreak = ($currentStreak % 5 == 0);
+                    } else {
+                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                                $totalLessons / 2
+                            ) == $currentStreak;
+                    }
+                    $results['is_milestone'] = $isMilestoneStreak;
+                    $this->current_rest_days += $isMilestoneStreak ? 1 : 0;
+                    $results['added_to_rest_days'] = $isMilestoneStreak;
+                } else {
+                    $results['is_milestone'] = $totalLessons == $currentStreak;
+                }
+
             }
         }
         $this->save();
@@ -380,11 +389,14 @@ class ChallengeUserProgress extends Model
     }
 
     /**
-     * @return bool - if all lessons are completed
+     * @return bool - if all non-intro lessons are completed
      */
     public function areAllLessonsCompleted() : bool
     {
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
+            if ($lessons_meta_datum['is_always_unlocked']) {
+                continue;
+            }
             if (!$lessons_meta_datum['completed']) {
                 return false;
             }

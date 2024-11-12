@@ -1,6 +1,6 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation, getProgressPercentageByIds, fetchUserChallengeProgress } from 'musora-content-services';
+import { fetchCompletedState, fetchMethod, getProgressPercentage, fetchMethodChildren, fetchFoundation, getProgressPercentageByIds, fetchUserChallengeProgress } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -12,7 +12,7 @@ export async function useOverviewPageData(contentType, parentType) {
     const isLoading = ref(true);
 
     const contentId = getContentId();
-    const progressPercent = await getContentProgressPercent(contentId); // Await the progress percent
+    const progressPercent = await getProgressPercentage(contentId); // Await the progress percent
 
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
@@ -71,9 +71,6 @@ export async function useOverviewPageData(contentType, parentType) {
         isLoading.value = false;
     }
 
-    const progressData = await addLessonsProgress(data.value.children);
-    data.value.children = progressData;
-
     return { data, error, isLoading };
 }
 
@@ -84,32 +81,3 @@ const getContentId = () => {
     return match ? match[1] : null;
 }
 
-// Function to fetch progress percent and update state
-const getContentProgressPercent = async (id) => {
-    if (!id) return 0; // Return 0 if no ID is found
-
-    try {
-        const completedState = await fetchCompletedState(id);
-        console.log(completedState)
-        return completedState ? completedState.percent : 0;
-    } catch (error) {
-        console.error('Error fetching completed state:', error);
-        return 0;
-    }
-}
-
-const addLessonsProgress = async (data) => {
-    const ids = [];
-    data.forEach((item) => {
-        ids.push(item.id);
-    });
-
-    const progress = await getProgressPercentageByIds(ids);
-
-    const addedProgress = data.map((item) => ({
-        ...item,
-        ...(progress[item.id] && { progress_percent: progress[item.id] }),
-    }))
-
-    return addedProgress;
-}
