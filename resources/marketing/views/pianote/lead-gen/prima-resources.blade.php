@@ -1,7 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/drumeo/lead-gen/pages/awards-data.php'))
-@endphp
-
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -145,30 +141,37 @@
             [
                 'number' => '01',
                 'title' => "Let's get started",
+                'title_section' => 'Let’s get started.<br> Setting up your new Prima piano.',
                 'subtitle' => 'Unboxing & Setup',
-                'description' => 'This is the exciting part. Your new piano has arrived. Let\'s get it out of the box and ready to play. This video will show you all the parts and features of the Prima, and take you step by step through the setup process. It\'s super easy! Just click play and follow along.',
+                'description' => '<p class="pb-2">This is the exciting part. Your new piano has arrived. Let\'s get it out of the box and ready to play.</p>
+                <p>This video will show you all the parts and features of the Prima, and take you step by step through the setup process. It\'s super easy! Just click play and follow along.</p>',
                 'hasVideo' => true,
                 'imageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/features-04.webp'
             ],
             [
                 'number' => '02',
                 'title' => 'How to use your Prima piano',
+                'title_section' => 'How to use your Prima piano.',
                 'subtitle' => 'Prima Quickstart Guide',
-                'description' => 'You\'ve turned it on, now let\'s make some music! This video is your quickstart guide to playing your Pianote Prima. We\'ll cover the basic on setup, sound selection, and essential features you need to know.',
+                'description' => '<p class="pb-2">You\'ve turned it on, now let\'s make some music!</p>
+                <p>This video is your quickstart guide to playing your Pianote Prima. We\'ll cover the basic on setup, sound selection, and essential features you need to know.</p>',
                 'hasVideo' => true,
                 'imageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/features-04.webp'
             ],
             [
                 'number' => '03',
                 'title' => 'Getting the most from your Prima piano',
+                'title_section' => 'Getting the most from <br>your Prima piano.',
                 'subtitle' => 'Prima Advanced Features',
-                'description' => 'A deeper dive into the powerful features of your Prima piano. Your Prima piano can do some amazing things. We\'ll take you through all the bells and settings so you can unleash the full potential of this beautiful piano.',
+                'description' => '<p class="pb-2">A deeper dive into the powerful features of your Prima piano.</p>
+                <p>Your Prima piano can do some amazing things. We\'ll take you through all the bells and settings so you can unleash the full potential of this beautiful piano.</p>',
                 'hasVideo' => true,
                 'imageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/features-04.webp'
             ],
             [
                 'number' => '04',
                 'title' => 'Download the Pianote Prima user manual',
+                'title_section' => 'Download the Pianote Prima <br>user manual.',
                 'subtitle' => 'User Manual Download',
                 'description' => 'Lost your physical copy? No worries! You can download the user manual here.',
                 'hasVideo' => false,
@@ -179,7 +182,6 @@
 
 <div 
     x-data="timelineNav()"
-    x-init="init()"
 >
     <div class="sticky top-0 bg-white border-b z-50 px-5 sm:px-6 shadow">
         <div class="container max-w-4xl mx-auto">
@@ -203,25 +205,34 @@
         </div>
     </div>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-white">
-            <div class="container max-w-4xl mx-auto">
+    <section class="text-center px-5 sm:px-6 py-10 sm:pt-14 lg:pt-20 bg-white">
+            <div class="container max-w-5xl mx-auto">
                 <div x-data="{ activeStep: 1 }" class="relative">
                     <!--  Line -->
-                    <div class="absolute left-1 md:left-1/2 top-0 bottom-0 border-l-2 border-dashed border-black transform md:-translate-x-1/2"></div>
-                
+                    <div class="absolute left-1 md:left-1/2 top-0 bottom-0 transform md:-translate-x-1/2">
+                        <svg class="h-full" width="2" viewBox="0 0 2 100" preserveAspectRatio="none">
+                            <line 
+                                x1="1" 
+                                y1="0" 
+                                x2="1" 
+                                y2="100" 
+                                stroke="#3B3B3B" 
+                                stroke-width="2" 
+                                stroke-dasharray="0.5 0.7" 
+                            />
+                        </svg>
+                    </div>                
                     <div class="relative">
                         @foreach ($timelineItems as $index => $item)
                             <div class="mb-16 md:mb-24 last:mb-0 relative" data-section="{{ $item['number'] }}">
-                                <!-- Num -->
                                 <div class="absolute left-0 md:left-1/2 w-10 h-10 lg:h-16 lg:w-16 bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-lg flex items-center justify-center transform md:-translate-x-1/2 text-white font-bold text-sm lg:text-3xl z-10 shadow-2xl">
                                     {{ $item['number'] }}
                                 </div>
                 
                                 <div class="relative ml-12 md:ml-0 mt-10">
-                                    <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
-                                        <!-- Img -->
-                                        <div class="mt-4 md:mt-0 order-1 md:order-{{ $index % 2 === 0 ? '2' : '1' }} md:mt-20">
-                                            <div class="relative rounded-lg overflow-hidden lg:mt-20">
+                                    <div class="md:grid md:grid-cols-2 md:gap-32 items-center md:pt-20 {{ $loop->last ? 'md:pb-20' : '' }}">
+                                        <div class="mt-4 md:mt-0 order-1 md:order-{{ $index % 2 === 0 ? '1' : '2' }}">
+                                            <div class="relative rounded-lg overflow-hidden lg:mt-20 " onclick="{{ $item['number'] }} = true">
                                                 <img 
                                                     src="{{ $item['imageUrl'] }}" 
                                                     alt="{{ $item['title'] }}" 
@@ -232,14 +243,13 @@
                                             </div>
                                         </div>
                 
-                                        <!-- Content -->
-                                        <div class="md:pl-8 text-left order-2 md:order-{{ $index % 2 === 0 ? '1' : '2' }} md:mt-20">
+                                        <div class="text-left order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }} lg:mt-20">
                                             <div class="space-y-3">
-                                                <h6 class="border-2 rounded-full border-pianote inline-flex items-center py-1 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal tracking-tight">
+                                                <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal tracking-tight">
                                                     {{ $item['subtitle'] }}
                                                 </h6>                                                
-                                                <h3 class=""><strong>{{ $item['title'] }}</strong></h3>
-                                                <p class="text-[#2A2F34]">{{ $item['description'] }}</p>
+                                                <h4 class="leading-normal"><strong>{!! $item['title_section'] !!}</strong></h4>
+                                                <div class="text-[#2A2F34] leading-relaxed">{!! $item['description'] !!}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -248,17 +258,36 @@
                         @endforeach
                     </div>
                 </div>
+                <i class="fa-regular fa-chevron-down -mt-6 hidden md:inline"></i>
             </div>
         </section>
 </div>
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '1019964518',
-        'vimeo' => true,
-    ])
+
+    <section class="pb-10 md:pb-28 px-4">
+        <div class="bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-3xl px-8 py-16 mx-auto max-w-5xl">  
+            <div class="text-center space-y-6 text-white">
+                <div class="flex justify-center mb-4">
+                <i class="fa-solid fa-party-horn text-[#FFAE00] text-5xl lg:text-7xl"></i>
+                </div>
+                
+                <h4><strong>You're ready to go! Let's play beautiful music.</strong></h4>
+                
+                <h5 class="italic leading-relaxed tracking-normal">
+                    Your piano's on. You've chosen the perfect sound. Your fingers are ready to go... <br>
+                    Log in to Pianote and find your perfect lesson today.
+                </h5>
+
+                <div class="mt-8">
+                    <a href="https://www.musora.com/pianote" class="join bg-pianote smaller w-full sm:max-w-[400px]">
+                        LOGIN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     @include('_partials.components.video-modal',[
-        'name' => 'testimonial',
+        'name' => 'trailer',
         'video' => '1019964518',
         'vimeo' => true,
     ])
@@ -271,6 +300,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('timelineNav', () => ({
             activeSection: '01',
+            init() {},
             updateActiveSection() {
                 const sections = document.querySelectorAll('[data-section]');
                 const scrollPosition = window.scrollY + (window.innerHeight / 3);
