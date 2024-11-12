@@ -1,13 +1,13 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>BookBag | Pianote</title>
-    <meta property="og:title" content="BookBag | Pianote">
+    <title>Prima @if(!empty($ultimate)) Ultimate Bundle @elseif(!empty($lifetime)) Keyboard @else Bundle @endif | Pianote</title>
+    <meta property="og:title" content="Prima | Pianote">
 
-    <meta name="description" content="A handcrafted premium leather satchel for your music books, laptop, and life.">
-    <meta property="og:description" content="A handcrafted premium leather satchel for your music books, laptop, and life.">
+    <meta name="description" content="Everything you need to start playing the piano. ">
+    <meta property="og:description" content="Everything you need to start playing the piano. ">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/book-bag/book-bag-share-image.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
