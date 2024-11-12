@@ -60,7 +60,7 @@
     </InfoModal>
 </template>
 <script setup>
-import { ref, onBeforeMount, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import html2pdf from 'html2pdf.js';
 import html2canvas from 'html2canvas';
 import { fetchUserAward } from 'musora-content-services';
@@ -189,7 +189,7 @@ const gradients = {
     },
 }
 
-onBeforeMount(() => {
+onMounted(() => {
     generatePng();
 });
 </script>

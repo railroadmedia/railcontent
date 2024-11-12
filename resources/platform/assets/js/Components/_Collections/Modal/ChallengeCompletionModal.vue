@@ -26,7 +26,7 @@
                         <div class="tw-pl-6 tw-relative tw-pt-7">
                             <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-video tw-mb-5 tw-relative">
                                 <!-- Thumbnail -->
-                                <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${nextLessonThumbnail}`" alt="Next lesson thumbnail" />
+                                <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${lessonThumbnail}`" alt="Next lesson thumbnail" />
                                 <!-- Overlay -->
                                 <div v-if="isNextLessonLocked || isLastLesson" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                                     <template v-if="isNextLessonLocked">
@@ -238,8 +238,8 @@ const currentLessonTitle = computed(() => {
     return props.completionData?.short_name;
 })
 
-const nextLessonThumbnail = computed(() => {
-    return props.completionData?.next_lesson?.thumbnail;
+const lessonThumbnail = computed(() => {
+    return isLastLesson.value ? props.completionData?.current_lesson_thumbnail : props.completionData?.next_lesson?.thumbnail;
 })
 
 const nextLessonTitle = computed(() => {
@@ -276,7 +276,8 @@ const updateInfoModalType = (type) => {
 }
 
 const openAwardModal = async() => {
-    const data = await fetchUserAward(402205);
+    const data = await fetchUserAward(props.completionData?.challenge_id);
+    console.log('award', data)
     awardData.value = data;
 
     showAchievement.value = false;

@@ -10,7 +10,7 @@
 
             <div class="tw-z-[2] tw-relative dark:tw-text-white">
                 <div class="tw-px-10 sm:tw-px-[70px] tw-mb-4 tw-z-[1] tw-relative">
-                    <img src="https://cdn.sanity.io/files/4032r8py/staging/8bcbb17dc1bf82bc0a14b4a198724a101f8a7838.png" alt="Challenge Badge" />
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challengeBadge}`" alt="Challenge Badge" />
                 </div>
                 <p class="tw-mb-6 tw-text-center tw-text-sm ">
                     You practiced for a total of <span class="tw-font-bold">{{ minutesPracticed }} minutes</span> and achieved a <span class="tw-font-bold">{{ streak }}-day streak</span> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
@@ -64,6 +64,10 @@ const { brand } = storeToRefs(userStore);
 const hideAnimation = ref(false);
 const isShareOpen = ref(false);
 const isCertificateOpen = ref(false);
+
+const challengeBadge = computed(() => {
+    return props.awardData?.badge;
+})
 
 const minutesPracticed = computed(() => {
     return props.awardData?.minutes_practiced;
