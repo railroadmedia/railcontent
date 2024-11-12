@@ -86,12 +86,16 @@
                                 <span v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
                                     <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                                  textCase="capitalize" />
-                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                                    <span v-if="!isChallenge" class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                                 </span>
-                                    <span class="tw-mb-0.5">
+                                <span v-if="!isChallenge" class="tw-mb-0.5">
                                     {{ contentTypeString }}
                                 </span>
                             </h6>
+                            <!-- Bonus label -->
+                            <div v-if="item?.is_bonus_content_for_challenge" class="tw-flex tw-mt-1">
+                                <div :class="`tw-text-[11px] tw-py-0.5 tw-px-2 tw-text-white tw-bg-${brand} tw-rounded-full`">Bonus</div>
+                            </div>
                         </div>
                     </a>
                     <!-- CHALLENGE CTA's -->
@@ -205,7 +209,11 @@ const props = defineProps({
     scrollContainer: {
         type: String,
         default: 'content-container'
-    }
+    },
+    isChallenge: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const {
