@@ -156,23 +156,30 @@
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
-        <div class="container max-w-2xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
+        <div class="container max-w-5xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
             <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>Inspiration for drummers of all levels.</strong></h3>
-            <div class="flex flex-wrap text-left overflow-hidden relative" x-bind:class="open ? 'max-h-full' : 'max-h-[670px] sm:max-h-[580px] lg:max-h-full'">
+            <div class="flex flex-wrap md:flex-nowrap text-left overflow-hidden relative" x-bind:class="open ? 'max-h-full' : 'max-h-[670px] sm:max-h-[580px] lg:max-h-full'">
                 @php
                     $testimonials = [
                         [
                         'name' => 'Nic Collins',
                         'credit' => 'Genesis, Better Stranger',
-                        'comment' => '"100 Beats You Need To Know" is an awesome release from Drumeo and a must-have for any drummer. So much of what I\'ve learnt behind the kit came from playing along to my favorite songs and albums. Now with so many legendary grooves and transcriptions in one place, there\'s something new to learn for any drummer at any level.',                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp',
-                        ]
+                        'comment' => '"100 Beats You Need To Know" is an awesome release from Drumeo and a must-have for any drummer. So much of what I\'ve learnt behind the kit came from playing along to my favorite songs and albums. Now with so many legendary grooves and transcriptions in one place, there\'s something new to learn for any drummer at any level.',                        
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp',
+                        ],
+                        [
+                        'name' => 'Brandon Pertzborn',
+                        'credit' => 'The Offspring',
+                        'comment' => 'What an amazing resource! Just as the title of the book suggests, if you have these beats in your toolkit, you’ll be ready for almost any situation behind the drums. So many of the beats in this book are beats I reference daily in my career. They’re all must-know beats that will prepare you for almost any situation on the drums.',                        
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/100-grooves/brandon-pertzborn.jpg',
+                        ],
                      ];
                 @endphp
                 @foreach ($testimonials as $testimonial)
                     <div class="w-full py-2 sm:px-2 lg:p-3">
                         <div class="flex flex-wrap sm:flex-nowrap items-start p-5 bg-white rounded-lg">
                             <img class="mb-2 sm:mb-0 h-16 lg:h-24 rounded-full" src="{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }}">
-                            <p class="sm:pl-4 text-base lg:text-xl"><strong>{{ $testimonial['name'] }}</strong><br>
+                            <p class="sm:pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
                                 <em class="inline-block mb-1 opacity-60">{{ $testimonial['credit'] }}</em><br>
                                <span class="leading-relaxed tracking-none"> {{ $testimonial['comment'] }}</span>
                             </p>

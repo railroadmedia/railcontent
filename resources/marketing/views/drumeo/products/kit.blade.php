@@ -644,7 +644,7 @@
         </div>
     </section>
 
-        <section class="px-4 sm:px-6 py-10">
+    <section class="px-4 sm:px-6 py-10">
         <div class="container max-w-5xl mx-auto relative z-50">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
                 <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA</strong><br>

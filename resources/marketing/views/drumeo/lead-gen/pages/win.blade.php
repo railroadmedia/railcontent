@@ -85,6 +85,7 @@
 {{--                    @else--}}
                     @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                         <span class="join smaller drumeo w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                        <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif
@@ -309,6 +310,7 @@
 {{--            @elseif--}}
             @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                 <span class="join smaller drumeo w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
             @else
                 <span class="join sold-out smaller w-full">this offer has now ended</span>
             @endif
@@ -321,10 +323,10 @@
                 x-data="{ answer: '', showForm: false }">
                 <div x-show="!showForm">
                     <h4 class="leading-tight"><strong>Skill Testing Question:</strong></h4>
-                    <h2 class="leading-tight my-4" style="font-family:Serif">(5 × 2) - (10 ÷ 2)</h2>
+                    <h2 class="leading-tight my-4" style="font-family:Serif">10 + 5 - 3</h2>
                     <input type="number" x-model="answer" placeholder="Your Answer" class="text-center mb-3 py-2 border border-black rounded-full mx-auto" />
                     <button class="join smaller drumeo"
-                        x-on:click="showForm = (answer == 5)">
+                        x-on:click="showForm = (answer == 12)">
                         Check Answer
                     </button>
                 </div>

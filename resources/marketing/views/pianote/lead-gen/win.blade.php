@@ -58,8 +58,9 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <header class="header-custom px-5 sm:px-6 py-10 lg:py-20 bg-no-repeat text-white bg-cover bg-center" style="background-color: #00101D;">
-        <div class="container mx-auto max-w-4xl text-center">
+    <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+          <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-9 md:h-10" alt="Win text">
@@ -85,8 +86,9 @@
 {{--                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
 {{--                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
 {{--                        @else--}}
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
-                             <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
+                            <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                            <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/giveaway/pianote-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
@@ -95,7 +97,12 @@
             </div>
             <h6 class="anchor-slide cursor-pointer pt-10 underline font-bold" href="#customize-anchor">View Prizes</h6>
         </div>
+        </div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
     </header>
+
 
     <section class="px-4 md:px-6 py-12 md:py-20">
         <div class="max-w-lg md:max-w-4xl mx-auto">
@@ -411,6 +418,7 @@
 {{--                        @else--}}
                         @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
                             <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                            <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/giveaway/pianote-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
@@ -426,10 +434,10 @@
                 x-data="{ answer: '', showForm: false }">
                 <div x-show="!showForm">
                     <h4 class="leading-tight"><strong>Skill Testing Question:</strong></h4>
-                    <h2 class="leading-tight my-4" style="font-family:Serif">(5 × 2) - (10 ÷ 2)</h2>
+                    <h2 class="leading-tight my-4" style="font-family:Serif">10 + 5 - 3</h2>
                     <input type="number" x-model="answer" placeholder="Your Answer" class="text-center mb-3 py-2 border border-black rounded-full mx-auto" />
                     <button class="join smaller"
-                        x-on:click="showForm = (answer == 5)">
+                        x-on:click="showForm = (answer == 12)">
                         Check Answer
                     </button>
                 </div>

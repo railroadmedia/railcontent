@@ -22,7 +22,7 @@
                      x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                     &nbsp;Watch Trailer
                 </div>
-                <a class="w-full sm:w-5/12 join smaller text-white my-2 sm:m-2 anchor-slide" href="#customize-anchor">GET STARTED</a>
+{{--                <a class="w-full sm:w-5/12 join smaller text-white my-2 sm:m-2 anchor-slide" href="#customize-anchor">GET STARTED</a>--}}
             </div>
             {{-- <h5>Only
                 @if($price > $fullPrice)
@@ -187,9 +187,9 @@
             </div>
         </div>
         <h1 class="leading-none sm:-mt-14 md:-mt-16 hidden md:block"><i class="fal fa-angle-down text-singeo"></i></h1>
-        <div>
-            <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>
-        </div>
+{{--        <div>--}}
+{{--            <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>--}}
+{{--        </div>--}}
     </section>
 
 
@@ -281,8 +281,8 @@
             </div>
             </div>
         </div>
-        <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>
-        <p class="text-lg font-black mt-4">Only $97</p>
+{{--        <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] mt-10 py-4" href="#customize-anchor">GET STARTED</a>--}}
+{{--        <p class="text-lg font-black mt-4">Only $97</p>--}}
     </section>
 
 
@@ -329,7 +329,7 @@
                 </div>
             </div>
             </div>
-            <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] py-4" href="#customize-anchor">GET STARTED</a>
+{{--            <a class="anchor-slide join smaller w-11/12 sm:max-w-[350px] py-4" href="#customize-anchor">GET STARTED</a>--}}
         </div>
 
         <div class="container mx-auto max-w-5xl py-4 px-4 md:px-6 pb-10">
@@ -487,46 +487,47 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[everyday-improv]=1"
-                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">
-                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 text-black">COURSE ONLY</p>
-                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
-                        <p class="text-sm mb-5 text-black">{!! $courseDetails['courseOnly']['description'] !!}</p>
-                        @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
-                        @else
-                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>
-                        @endif
-                        <p class="inline-block text-sm text-black">One time payment.</p><br>
-                        <div class="join bg-black smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="lg:leading-normal text-sm text-black text-center">
-                            @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
-                                {!! $keyFeature !!}<br>
-                            @endforeach
-                        </p>
-                    </a>
-                    <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"
-                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border-2 border-{{$theme}}" style="text-decoration:none;">
-                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 text-black uppercase">1 Year of lessons</p>
-                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>
-                        <p class="text-sm mb-5 text-black">{!! $courseDetails['membershipSpecial']['description'] !!}</p>
-                        @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
-                        @else
-                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>
-                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>
-                        @endif
-                        <p class="inline-block text-sm text-black">per year</p><br>
-                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">JOIN TODAY</div>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="lg:leading-normal text-sm text-black text-center">
-                            @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)
-                               {!! $keyFeature !!}<br>
-                            @endforeach
-                        </p>
-                    </a>
+                    <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>
+{{--                    <a href="/ecommerce/add-to-cart?products[everyday-improv]=1"--}}
+{{--                       class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl w-full sm:w-5/12 shadow-xl border-2 border-[##EFF4FB]" style="text-decoration:none;">--}}
+{{--                        <p class="border border-black inline-block rounded-xl text-sm mb-2 px-4 text-black">COURSE ONLY</p>--}}
+{{--                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>--}}
+{{--                        <p class="text-sm mb-5 text-black">{!! $courseDetails['courseOnly']['description'] !!}</p>--}}
+{{--                        @if ($courseDetails['courseOnly']['price'] == $courseDetails['courseOnly']['discountedPrice'])--}}
+{{--                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>--}}
+{{--                        @else--}}
+{{--                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['courseOnly']['discountedPrice'] }}</h2>--}}
+{{--                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['courseOnly']['price'] }}</strong></h2>--}}
+{{--                        @endif--}}
+{{--                        <p class="inline-block text-sm text-black">One time payment.</p><br>--}}
+{{--                        <div class="join bg-black smaller my-4 w-full max-w-[260px] text-white uppercase">GET STARTED</div>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                        <p class="lg:leading-normal text-sm text-black text-center">--}}
+{{--                            @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)--}}
+{{--                                {!! $keyFeature !!}<br>--}}
+{{--                            @endforeach--}}
+{{--                        </p>--}}
+{{--                    </a>--}}
+{{--                    <a href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[everyday-improv]=1&locked=true"--}}
+{{--                       class="px-5 sm:px-9 py-5 sm:py-7 sm:-ml-5 rounded-xl shadow-xl w-full sm:w-6/12 bg-white border-2 border-{{$theme}}" style="text-decoration:none;">--}}
+{{--                        <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 text-black uppercase">1 Year of lessons</p>--}}
+{{--                        <h3 class="text-black leading-tight mb-5 pt-4"><strong>{!! $courseDetails['membershipSpecial']['title'] !!}</strong></h3>--}}
+{{--                        <p class="text-sm mb-5 text-black">{!! $courseDetails['membershipSpecial']['description'] !!}</p>--}}
+{{--                        @if ($courseDetails['membershipSpecial']['price'] == $courseDetails['membershipSpecial']['discountedPrice'])--}}
+{{--                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>--}}
+{{--                        @else--}}
+{{--                            <h2 class="inline-block text-black opacity-40 text-4xl line-through">${{ $courseDetails['membershipSpecial']['discountedPrice'] }}</h2>--}}
+{{--                            <h2 class="inline-block text-black"><strong class="text-4xl">${{ $courseDetails['membershipSpecial']['price'] }}</strong></h2>--}}
+{{--                        @endif--}}
+{{--                        <p class="inline-block text-sm text-black">per year</p><br>--}}
+{{--                        <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">JOIN TODAY</div>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                        <p class="lg:leading-normal text-sm text-black text-center">--}}
+{{--                            @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)--}}
+{{--                               {!! $keyFeature !!}<br>--}}
+{{--                            @endforeach--}}
+{{--                        </p>--}}
+{{--                    </a>--}}
                 </div>
             </div>
         </div>
@@ -579,6 +580,23 @@
             </div>
         </div>
     </section>
+
+    @component('_partials.components.modal', ['name' => 'waitlistModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+                <p class="mb-4">Enter your email below to get notified<br class="hidden sm:inline"> when the next challenge is announced. </p>
+                @include("singeo._partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formName" => 'Everyday Improv Waitlist',
+                    "formId" => "Singeo - Engagement - Trigger - Everyday Improv Waitlist - Web Form",
+                    "buttonText" => "Let Me Know ",
+                    "stacked" => true,
+                    "noSocial" => true,
+                ])
+            </div>
+        @endslot
+    @endcomponent
 
     @include('_partials.components.video-modal', [
     'name' => 'trailer',

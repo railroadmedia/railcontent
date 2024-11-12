@@ -1199,6 +1199,15 @@ return [
                     'singeo',
                 ],
             ],
+            'Everyday Improv Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_everyday-improv-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
         ],
     ],
     'subscription_topics' => [
