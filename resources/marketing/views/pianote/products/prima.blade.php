@@ -459,10 +459,10 @@
     >
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
-            <h3 class="leading-tight my-5">comes with unlimited piano lessons from <img></h3>
-            <div class="bg-white text-black text-left rounded-xl border border-gray p-4 sm:p-6">
+            <h3 class="leading-tight mt-1 mb-5">comes with unlimited piano lessons from <img></h3>
+            <div style="background-color:#F1EFED;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
                 <h5 class="leading-tight"><strong>10-Level Curriculum</strong></h5>
-                <p class="leading-tight my-5">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</p>
+                <p class="leading-tight mt-2 mb-5">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -565,9 +565,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white text-black text-left rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="leading-tight"><strong>10-Level Curriculum</strong></h5>
-                <p class="leading-tight my-5">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</p>
+            <div style="background-color:#F1EFED;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
+                <h5 class="leading-tight"><strong>Daily Practice Workouts</strong></h5>
+                <p class="leading-tight mt-2 mb-5">Not sure what to practice?  Pick a 5, 10, or 15-minute routine and practice with a REAL teacher. It’s like Peloton for your piano.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -670,9 +670,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white text-black text-left rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="leading-tight"><strong>10-Level Curriculum</strong></h5>
-                <p class="leading-tight my-5">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</p>
+            <div style="background-color:#F1EFED;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
+                <h5 class="leading-tight"><strong>Your Favorite Songs</strong></h5>
+                <p class="leading-tight mt-2 mb-5">You play piano to play songs! Learn and play your favorites from our massive library. Then make them sound beautiful on your new Prima piano.</p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -775,9 +775,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white text-black text-left rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="leading-tight"><strong>10-Level Curriculum</strong></h5>
-                <p class="leading-tight my-5">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</p>
+            <div style="background-color:#F1EFED;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6">
+                <h5 class="leading-tight"><strong>The World’s Best Piano Players</strong></h5>
+                <p class="leading-tight mt-2 mb-5">Learn from legends and connect with real, friendly piano teachers who care about your goals. </p>
                 <div class="max-w-6xl mx-auto">
                     <div
                         x-data="{
@@ -886,30 +886,30 @@
         @if(!empty($ultimate)) style="background: #1D1B1B; color:#fff" @endif>
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Complete the setup.</strong></h2>
-            <h5 class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</h5>
+            <p class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</p>
             <img class="w-full max-w-5xl" src="">
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap text-left">
                 <div class="w-1/2 px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <h6><strong>The Prima Keyboard Stand</strong></h6>
+                    <p>This double braced "X" style keyboard stand is lightweight but very strong.<br><br>Adjusting this stand to the perfect height is easy, thanks to the trigger style latch- you can do it with a single finger!</p>
                 </div>
                 <div class="w-1/2 px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <h6><strong>The Prima Bench</strong></h6>
+                    <p>This compact heavy duty bench is comfortable, adjustable and portable.<br><br>It folds flat for storage or transport, and is height adjustable to help you find that perfect position for practice and performance!</p>
                 </div>
             </div>
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap text-left">
                 <div class="w-1/2 px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <h6><strong>The Pianote Metronome</strong></h6>
+                    <p>Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.<br><br>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust.</p>
                 </div>
                 <div class="w-1/2 px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <h6><strong>The Music Theory Poster Bundle</strong></h6>
+                    <p>Connecting what you see on a page to the keys can feel like a giant leap.<br><br>That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.</p>
                 </div>
             </div>
         </div>
@@ -918,27 +918,32 @@
         @if(!empty($ultimate)) style="background: #000; color:#fff" @endif>
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Lessons that are yours to keep -- for life.</strong></h2>
-            <h5 class="leading-tight my-5">These 30-Day Courses are yours to keep forever, even if you choose not to renew your Pianote membership.</h5>
+            <p class="leading-tight my-5">These 30-Day Courses are yours to keep forever, even if you choose not to renew your Pianote membership.</p>
             <div class="grid sm:grid-cols-3 lg:grid-cols-5">
                 <div class="px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <p class="leading-tight font-black mb-1"><strong>New Piano Players Start Here</strong></p>
+                    <p class="leading-tight text-sm">Your first 30 days on the piano. Learn in just 10 minutes per day.</p>
                 </div>
                 <div class="px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <p class="leading-tight font-black mb-1"><strong>Read Music in 30 Days</strong></p>
+                    <p class="leading-tight text-sm">Learn the language of music. Play your favorite songs.</p>
                 </div>
                 <div class="px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <p class="leading-tight font-black mb-1"><strong>30-Day Blues Piano</strong></p>
+                    <p class="leading-tight text-sm">Learn cool riffs, licks, and scales to play the Blues.</p>
                 </div>
                 <div class="px-2">
                     <img class="rounded-xl">
-                    <h6><strong>title</strong></h6>
-                    <p>desc</p>
+                    <p class="leading-tight font-black mb-1"><strong>The Classical Piano Collection</strong></p>
+                    <p class="leading-tight text-sm">Learn 5 iconic pieces with note-for-note tutorials.</p>
+                </div>
+                <div class="px-2">
+                    <img class="rounded-xl">
+                    <p class="leading-tight font-black mb-1"><strong>Easy Chords</strong></p>
+                    <p class="leading-tight text-sm">Improve your piano chord inversions in just 30 days.</p>
                 </div>
             </div>
         </div>
@@ -1008,10 +1013,10 @@
             <div class="container max-w-6xl mx-auto relative z-50">
                 <div class="flex flex-wrap sm:flex-nowrap items-center px-4 sm:px-6 py-10 md:py-16 lg:py-20">
                     <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
-                        <h2 class="pb-6 sm:pb-4"><strong>Everything you need to start playing the piano. </strong></h2>
-                            <h6 class="leading-tight">Get the PRIMA Ultimate bundle + 1 year of unlimited piano lessons + 7 extra launch bonuses.</h6>
+                        <h2 class="pb-6 sm:pb-4"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
+                            <h6 class="leading-tight max-w-xs">Get the PRIMA Ultimate bundle + 1 year of unlimited piano lessons + 7 extra launch bonuses.</h6>
 
-                        <h4 class="my-4 text-drumeo"> ONLY
+                        <h4 class="my-4"> ONLY
                             @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
                                 <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
                                 <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
