@@ -58,8 +58,9 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <header class="header-custom px-5 sm:px-6 py-10 lg:py-20 bg-no-repeat text-white bg-cover bg-center" style="background-color: #00101D;">
-        <div class="container mx-auto max-w-4xl text-center">
+    <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+          <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center">
                 <div class="mx-auto sm:mx-0 text-center">
                     <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/lead-gen/win/border.svg" class="h-9 md:h-10" alt="Win text">
@@ -95,7 +96,12 @@
             </div>
             <h6 class="anchor-slide cursor-pointer pt-10 underline font-bold" href="#customize-anchor">View Prizes</h6>
         </div>
+        </div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
     </header>
+
 
     <section class="px-4 md:px-6 py-12 md:py-20">
         <div class="max-w-lg md:max-w-4xl mx-auto">
