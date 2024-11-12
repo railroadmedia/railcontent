@@ -230,6 +230,7 @@
 
 @section('body-data')
     x-data ="{
+    waitlistModal : false,
     trailer : false,
     trailerM : false,
     kickOff : false,

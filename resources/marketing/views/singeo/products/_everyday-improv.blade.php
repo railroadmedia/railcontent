@@ -47,13 +47,13 @@
                         @if(!empty($hasProduct) && $hasProduct == 'true')
                             <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                         @else
-                            {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
-                            <a href="#final" class="join smaller w-full anchor-slide">LEARN MORE &raquo;</a>
-                            <a href="https://www.musora.com/singeo/enrollment/everyday-improv">
-                                <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-singeo">
-                                    Registration is FREE for Singeo Members.
-                                </p>
-                            </a>
+                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>
+{{--                            <a href="#final" class="join smaller w-full anchor-slide">LEARN MORE &raquo;</a>--}}
+{{--                            <a href="https://www.musora.com/singeo/enrollment/everyday-improv">--}}
+{{--                                <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-singeo">--}}
+{{--                                    Registration is FREE for Singeo Members.--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
                         @endif
                     </div>
                     <div class="w-full sm:w-1/2 lg:pb-5">
@@ -212,7 +212,7 @@
         @if(!empty($hasProduct) && $hasProduct == 'true')
             <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
         @else
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
+{{--            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>--}}
         @endif
         <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -308,8 +308,6 @@
 
 <div id="final" class="anchor"></div>
 
-
-
 @component('_partials.components.modal', ['name' => 'waitlistModal'])
     @slot('content')
         <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
@@ -317,8 +315,8 @@
             <p class="mb-4">Enter your email below to get notified<br class="hidden sm:inline"> when the next challenge is announced. </p>
             @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formName" => '30 Day Drummer Waitlist',
-                "formId" => "Singeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
+                "formName" => 'Everyday Improv Waitlist',
+                "formId" => "Singeo - Engagement - Trigger - Everyday Improv Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",
                 "stacked" => true,
                 "noSocial" => true,
