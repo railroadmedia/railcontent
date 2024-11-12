@@ -52,6 +52,20 @@ class ChallengesService
     }
 
     /**
+     * Get number of active users in the specified challenge
+     * @param int $challengeId
+     * @return int
+     *
+     */
+    public function getActiveUsersCount(int $challengeId): int
+    {
+        return ChallengeUserProgress::query()
+            ->where('content_id', $challengeId)
+            ->where('is_active', true)
+            ->count();
+    }
+
+    /**
      * Get all users ids enrolled in a challenge
      * @param int $challengeId
      * @return array|null

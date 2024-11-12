@@ -17,6 +17,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
  * @property int $id
  * @property int $brand_id
  * @property int $content_id
+ * @property string $cohort_title
+ * @property string $enrollment_end_date
  */
 class Cohort extends Model
 {
