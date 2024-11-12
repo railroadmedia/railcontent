@@ -38,12 +38,12 @@
                 <div class="flex flex-wrap md:flex-nowrap items-center">
                     <div class="w-full md:w-5/12 text-center lg:text-left order-2 md:order-1 px-5 md:px-0 z-10 md:pr-10">
 
-                        <img class="block h-28 md:h-24 lg:h-32 py-2 mx-auto md:mx-0"
+                        <img class="block h-28 md:h-24 lg:h-32 mx-auto md:mx-0"
                             alt="logo"
                             fetchpriority="high"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/logo-dark.svg"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/logo-dark-2.svg"
                         >
-                         <img class="block h-6 pl-2 py-1 mx-auto lg:mx-0"
+                         <img class="block h-4 pl-2 mx-auto lg:mx-0"
                             alt="logo"
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
@@ -150,14 +150,14 @@
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
         <div class="max-w-xs sm:max-w-md mx-auto px-16 sm:px-0">
-            <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/100-grooves/100-grooves-preview.pdf">
+            <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/100-grooves/100-Grooves-Teaser.pdf">
                 <div class="w-full bg-center bg-cover" style="padding-bottom:135%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/100-grooves/book.webp');"></div>
             </a>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f1f7fe;">
         <div class="container max-w-5xl mx-auto mb-16 lg:mb-5" x-data="{ open: false }">
-            <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>Inspiration for drummers of all levels.</strong></h3>
+            <h3 class="mb-5 sm:mb-8 lg:mb-10"><strong>See what drummers are saying:</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap text-left overflow-hidden relative" x-bind:class="open ? 'max-h-full' : 'max-h-[670px] sm:max-h-[580px] lg:max-h-full'">
                 @php
                     $testimonials = [
