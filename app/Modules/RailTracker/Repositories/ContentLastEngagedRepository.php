@@ -72,7 +72,7 @@ class ContentLastEngagedRepository extends TrackerRepositoryBase
         $contentLastEngagedTable =
             config('railtracker.table_prefix_media_playback_tracking').
             config('railtracker.content_last_engaged_table', 'content_last_engaged');
-        return DB::table($contentLastEngagedTable);
+        return \DB::table($contentLastEngagedTable);
     }
 
 }
