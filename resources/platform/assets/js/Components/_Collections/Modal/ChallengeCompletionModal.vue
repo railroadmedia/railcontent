@@ -155,7 +155,7 @@
         </div>
 
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
-            <ChallengeAwardModal v-if="showAward" :is-modal="false" />
+            <ChallengeAwardModal v-if="showAward" :is-modal="false" :award-data="awardData" @closeModal="$emit('closeModal')" />
         </div>
     </ModalRenderer>
 
@@ -176,12 +176,13 @@ import MuButton from '@units/Button/MuButton';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 import ChallengeAchievementModal from '@collections/Modal/ChallengeAchievementModal';
 import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
+import {fetchUserAward} from "musora-content-services";
 
 const props = defineProps({
     completionData: {
         type: Object,
         default: {},
-    }
+    },
 })
 
 const userStore = useUserStore();
@@ -195,6 +196,7 @@ const showAchievement = ref(false);
 const showAward = ref(false);
 const hideAnimation = ref(false);
 const countdownString = ref('');
+const awardData = ref({});
 
 const hasProgress = computed(() => {
     return progress.value > 0;
@@ -273,7 +275,10 @@ const updateInfoModalType = (type) => {
     infoModalType.value = type;
 }
 
-const openAwardModal = () => {
+const openAwardModal = async() => {
+    const data = await fetchUserAward(402205);
+    awardData.value = data;
+
     showAchievement.value = false;
     showAward.value = true;
 }
