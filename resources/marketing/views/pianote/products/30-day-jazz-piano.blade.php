@@ -154,7 +154,7 @@
         </div>
 
         <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">
-            <a href="{{$buttonLink}}" class="join pianote medium w-full max-w-[350px] mb-3" role="button">Get started</a>
+            <a href="#final" class="anchor-slide join pianote medium w-full max-w-[350px] mb-3" role="button">Get started</a>
             <h5 class="leading-tight text-center">
                 <strong class="font-black">Only
                     @if($price > $discountedPrice)
@@ -265,7 +265,7 @@ $items = [
                 @endforeach
             </ul>
         </div>
-        <a href="{{$buttonLink}}" class="join pianote medium w-full sm:w-1/2 md:w-1/3 max-w-[350px] mt-6 sm:mt-12 mb-3 anchor-slide" role="button">Enroll Now</a><br>
+        <a href="#final" class="join pianote medium w-full sm:w-1/2 md:w-1/3 max-w-[350px] mt-6 sm:mt-12 mb-3 anchor-slide" role="button">Enroll Now</a><br>
             {{-- <div class="flex flex-row items-center py-2">
                      @if ($numStudents > 500)
                     <img class="h-7 mr-2" alt="Joined Student Profiles" src={{ $studentProfilesImage }}>
