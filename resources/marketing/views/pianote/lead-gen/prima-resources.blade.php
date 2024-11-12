@@ -276,7 +276,7 @@
                                                         {{ $item['subtitle'] }}
                                                     </h6>                                                
                                                     <h4 class="leading-normal"><strong>{!! $item['title_section'] !!}</strong></h4>
-                                                    <div class="text-[#2A2F34] leading-relaxed">{!! $item['description'] !!}</div>
+                                                    <div class="leading-relaxed {{ $index === 2 ? 'md:pr-12' : '0' }}">{!! $item['description'] !!}</div>
                                                 </div>
                                             </div>
                                         </div>
