@@ -529,10 +529,12 @@ export default {
         },
 
         async handleCompleteLesson() {
-            if(this.isChallenge && !this.isCompleted){
+            if(this.isChallenge){
+                //Do not complete again when it is completed
+                if(this.isCompleted) return;
+
                 try {
                     const complete = await postChallengesCompleteLesson(this.contentId);
-                    console.log('complete', complete);
 
                     this.$emit('onCompleteContent');
 

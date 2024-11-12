@@ -201,6 +201,7 @@
                 :is-loading="isLoading"
                 :relatedLessons="relatedLessons"
                 v-model:isRelatedSectionOpen="isRelatedSectionOpen"
+                :is-challenge="isChallenge"
             />
 
             <!-- Lesson Content Wrapper -->
@@ -318,7 +319,7 @@ import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCove
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked } from 'musora-content-services';
+import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked, fetchChallengeLessonData, getProgressPercentageByIds } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
@@ -522,6 +523,10 @@ const showDraftLabel = computed(() => {
     return props.lessonData.status === 'draft';
 })
 
+const isChallenge = computed(() => {
+    return props.lessonType === 'challenges';
+})
+
 const toggleCompleteContent = () => {
     isCompleted.value = !isCompleted.value;
 }
@@ -549,46 +554,86 @@ const isWorkout = computed( () => {
     return props.contentType === 'workout';
 })
 
-const isChallenge = computed(() => {
-    return props.contentType === 'challenge-part';
-})
+const addProgress = async (data) => {
+    try {
+        const ids = [];
+        data.forEach((item) => {
+            ids.push(item.id);
+        });
 
-onBeforeMount(async () => {
-  console.log('videoResources', props.videoResources);
-  const contentId = getContentId();
+        const progress = await getProgressPercentageByIds(ids);
 
-  // Execute all video calls using Promise.allSettled
-  const results = await Promise.allSettled([
-    fetchLessonContent(contentId),
-    axios.get(`/content/${contentId}/user_data/${userId.value}`),
-    isContentLiked(contentId),
-    axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`),
-    fetchNextPreviousLesson(contentId),
-    fetchRelatedLessons(contentId, brand.value)
-  ]);
+        const addedProgress = data.map((item) => ({
+            ...item,
+            ...(progress[item.id] && { progress_percent: progress[item.id] }),
+        }))
 
-  // Process results
-  const [dataResult, likeResult, likedResult, completedResult, nextPrevResult, relatedLessonsResult] = results;
-
-  // Check each result individually and update state accordingly
-  videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
-  likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
-  isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
-  isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId]?.state === 'completed';
-  nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
-  relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
-
-  // Optional: log errors for any rejected promises
-  results.forEach((result, index) => {
-    if (result.status === 'rejected') {
-      console.error(`Promise at index ${index} failed:`, result.reason);
+        return addedProgress;
+    } catch(err){
+        console.log(err)
     }
-  });
 
-  // Check values
-  console.log('isLiked', isLiked.value);
-  console.log('videoData.value', videoData.value);
+}
 
-  platformStore.setLoadingState(false);
+const fetchLessonData = async () => {
+    if(isChallenge.value){
+        const results = await Promise.allSettled([
+            fetchChallengeLessonData(contentId.value),
+            axios.get(`/content/${contentId.value}/user_data/${userId.value}`),
+            isContentLiked(contentId.value),
+        ])
+
+        const [dataResult, likeResult, likedResult] = results;
+
+        videoData.value = dataResult.status === 'fulfilled' ? dataResult.value.lesson : null;
+        likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
+        isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
+        isCompleted.value = dataResult.status === 'fulfilled' && dataResult.value.lesson.completed;
+        nextPreviousLessons.value = dataResult.status === 'fulfilled' ? {
+            nextLesson: dataResult.value.next_lesson,
+            prevLesson: dataResult.value.previous_lesson,
+        } : null;
+
+
+        relatedLessons.value = dataResult.status === 'fulfilled' ? await addProgress(dataResult.value.lessons) : [];
+    } else {
+        // Execute all video calls using Promise.allSettled
+        const results = await Promise.allSettled([
+            fetchLessonContent(contentId.value),
+            axios.get(`/content/${contentId.value}/user_data/${userId.value}`),
+            isContentLiked(contentId.value),
+            axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`),
+            fetchNextPreviousLesson(contentId.value),
+            fetchRelatedLessons(contentId.value, brand.value)
+        ]);
+
+        // Process results
+        const [dataResult, likeResult, likedResult, completedResult, nextPrevResult, relatedLessonsResult] = results;
+
+        // Check each result individually and update state accordingly
+        videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
+        likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
+        isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
+        isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
+        nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
+        relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
+
+        // Optional: log errors for any rejected promises
+        results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+                console.error(`Promise at index ${index} failed:`, result.reason);
+            }
+        });
+
+        // Check values
+        console.log('isLiked', isLiked.value);
+        console.log('videoData.value', videoData.value);
+    }
+
+    platformStore.setLoadingState(false);
+}
+
+onBeforeMount (() => {
+  fetchLessonData();
 });
 </script>
