@@ -1,18 +1,18 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchMethod, fetchCourseOverview, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
+import { fetchCompletedState, fetchMethod, getProgressPercentage, fetchMethodChildren, fetchFoundation } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
 export async function useOverviewPageData(contentType) {
     const userStore = useUserStore();
-    
+
     const data = ref(null);
     const error = ref(null);
     const isLoading = ref(true);
 
     const contentId = getContentId();
-    const progressPercent = await getProgressPercent(contentId); // Await the progress percent
+    const progressPercent = await getProgressPercentage(contentId); // Await the progress percent
 
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
@@ -23,10 +23,11 @@ export async function useOverviewPageData(contentType) {
             if (result) {
                 result.levels = result.levels.map((level, index) => ({
                     ...level,
-                    position: index + 1 
+                    position: index + 1
                 }));
                 data.value = result;
                 data.value.header = buildHeader(contentType, result, progressPercent);
+                data.value.children = result.levels;
             } else {
                 throw new Error('Failed to fetch method');
             }
@@ -35,10 +36,11 @@ export async function useOverviewPageData(contentType) {
             if (result) {
                 result.units = result.units.map((unit, index) => ({
                     ...unit,
-                    position: index + 1 
+                    position: index + 1
                 }));
                 data.value = result;
                 data.value.header = buildHeader(contentType, result, progressPercent);
+                data.value.children = result.units;
             } else {
                 throw new Error('Failed to fetch foundation');
             }
@@ -50,7 +52,7 @@ export async function useOverviewPageData(contentType) {
             } else {
                 throw new Error('Failed to fetch method children');
             }
-        }        
+        }
     } catch (err) {
         error.value = err;
     } finally {
@@ -67,16 +69,3 @@ const getContentId = () => {
     return match ? match[1] : null;
 }
 
-// Function to fetch progress percent and update state
-const getProgressPercent = async (id) => {
-    if (!id) return 0; // Return 0 if no ID is found
-
-    try {
-        const completedState = await fetchCompletedState(id);
-        console.log(completedState)
-        return completedState ? completedState.percent : 0;
-    } catch (error) {
-        console.error('Error fetching completed state:', error);
-        return 0;
-    }
-}
