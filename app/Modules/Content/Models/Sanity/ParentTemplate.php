@@ -53,7 +53,8 @@ abstract class ParentTemplate extends BaseSanityModel
                        new Field(FieldType::Number, 'id'),
                        new Field(FieldType::String, 'title'),
                        new Field(FieldType::String, 'slug'),
-                       new Field(FieldType::String, 'type')],
+                       new Field(FieldType::String, 'type'),
+                       new Field(FieldType::Number, 'position')],
             previewItem: new ListItemPreview('slug', 'type')
         );
 

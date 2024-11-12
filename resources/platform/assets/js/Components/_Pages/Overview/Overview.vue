@@ -50,7 +50,7 @@
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :content="OverviewChildData"
+                            :content="data?.children"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -223,6 +223,7 @@ onBeforeMount( async () => {
     // console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
         data.value = OverviewData.value;
+        console.log('overview page data', data.value)
 
         //Header Data
         header.value = OverviewData.value.header;

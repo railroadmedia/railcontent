@@ -157,7 +157,7 @@ class ChallengesTest extends TestCase
         ]);
         $userData = $challengesService->getEnrolledUsers($this->challengeId, 10);
         $this->assertEquals(5, $userData['total']);
-        $this->assertEquals(2, count($userData['users']));
+        $this->assertCount(2, $userData['users']);
         $this->assertEquals('valid', $userData['users'][0]['display_name']);
         $this->assertEquals('valid', $userData['users'][1]['display_name']);
     }
@@ -230,6 +230,64 @@ class ChallengesTest extends TestCase
 
     }
 
+    public function test_milestones_for_length_10_with_unlocks_and_bonus(): void
+    {
+        $userId = user()->id;
+
+        // this data file has 10 lessons, with two intro videos
+        // always unlocked = [1,3];
+        // bonus content = [8,9];
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons-with-unlock-and-bonus.json', 'challenge-child-10-lessons-with-unlock-and-bonus.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: Carbon::now()->startOfDay()->toISOString());
+        $completedLessons = 0;
+        foreach ($userProgress->lessons_meta_data as $lesson_meta_datum) {
+            $lessonIndex = $lesson_meta_datum['content_id'];
+            if ($lessonIndex == 3) {
+                // skip one of the unlocked contents
+                continue;
+            } else {
+                $completedLessons += $lessonIndex == 1 ? 0 : 1;
+            }
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults($lessonIndex, $userId);
+
+            if ($lessonIndex == 12) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif ($lessonIndex == 7) {
+                $this->assertEquals($completedLessons, $lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're on a {$completedLessons} Day Streak!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals(
+                    "You've earned an additional freeze token!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif ($lessonIndex == 1) {
+                $this->assertFalse($lessonCompletedProgress['show_modal']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals("Return tomorrow to maintain your streak!", $lessonCompletedProgress['motivational_subtext']);
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+
+            $this->assertEquals($completedLessons, $currentStreakData['current']);
+            $this->assertEquals($completedLessons, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->travel(1)->days();
+        }
+        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+        $this->assertFalse(boolval($userProgress->is_active));
+        $this->assertEquals(10, $userProgress->completed_best_streak);
+    }
+
     public function test_index_metadata_for_challenge() : void
     {
         $userId = user()->id;
@@ -245,7 +303,7 @@ class ChallengesTest extends TestCase
 
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -256,7 +314,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 12 - 21', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -273,7 +331,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -283,7 +341,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('Nov 27 - Dec 4', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -299,15 +357,15 @@ class ChallengesTest extends TestCase
         $userProgressData = $challengesService->startChallenge($challengeId, $userId, '20241101');
         $lessonMetadata = $userProgressData->lessons_meta_data;
 //        // hack to complete the lessons without extra mocking. I'm lazy, and building the json files is a lot of work
-        $lessonMetadata[0]['is_completed'] = true;
-        $lessonMetadata[1]['is_completed'] = true;
+        $lessonMetadata[0]['completed'] = true;
+        $lessonMetadata[1]['completed'] = true;
         $userProgressData->lessons_meta_data = $lessonMetadata;
         $userProgressData->save();
 
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -317,7 +375,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(40, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 5', $challengeMetadata['duration_text']);
-        $this->assertTrue(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertTrue(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -334,7 +392,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -344,7 +402,7 @@ class ChallengesTest extends TestCase
         $this->assertFalse($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 8', $challengeMetadata['duration_text']);
-        $this->assertNull($challengeMetadata['is_solo_challenge']);
+        $this->assertNull($challengeMetadata['is_solo']);
         $this->assertEquals('not_started', $challengeMetadata['status']);
     }
 
@@ -360,15 +418,15 @@ class ChallengesTest extends TestCase
         $userProgress = $challengesService->startChallenge($challengeId, $userId, isLocked: false);
         $lessonMetadata = $userProgress->lessons_meta_data;
         // hack to complete the lessons without extra mocking. I'm lazy, and building the json files is a lot of work
-        $lessonMetadata[0]['is_completed'] = true;
-        $lessonMetadata[1]['is_completed'] = true;
+        $lessonMetadata[0]['completed'] = true;
+        $lessonMetadata[1]['completed'] = true;
         $userProgress->lessons_meta_data = $lessonMetadata;
         $userProgress->save();
 
         // --- RETRIEVE DATA ---
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -378,7 +436,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(20, $challengeMetadata['progress_percent']);
         $this->assertEquals('Unlocked', $challengeMetadata['duration_text']);
-        $this->assertTrue(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertTrue(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('active', $challengeMetadata['status']);
     }
 
@@ -395,7 +453,7 @@ class ChallengesTest extends TestCase
         $lessonMetadata = $userProgress->lessons_meta_data;
         // hack to complete the lessons without extra mocking. I'm lazy, and building the json files is a lot of work
         foreach($lessonMetadata as $index => $_) {
-            $lessonMetadata[$index]['is_completed'] = true;
+            $lessonMetadata[$index]['completed'] = true;
         }
         $userProgress->lessons_meta_data = $lessonMetadata;
         $userProgress->save();
@@ -404,7 +462,7 @@ class ChallengesTest extends TestCase
         // --- RETRIEVE DATA ---
         $contentIds = [402204];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
 
         // --- TEST EXPECTED VALUES
@@ -414,7 +472,7 @@ class ChallengesTest extends TestCase
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(100, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 10', $challengeMetadata['duration_text']);
-        $this->assertFalse(boolval($challengeMetadata['is_solo_challenge']));
+        $this->assertFalse(boolval($challengeMetadata['is_solo']));
         $this->assertEquals('completed', $challengeMetadata['status']);
     }
 
@@ -423,7 +481,7 @@ class ChallengesTest extends TestCase
         $userId = user()->id;
         $contentIds = [402199, 402200, 402201, 402202, 402203];
         $response = $this->getJson(
-            route('challenges.user_progress_for_index_page', ['content_ids' => $contentIds]),
+            route('challenges.user_progress_for_index_page', ['content_ids' => implode(',', $contentIds)]),
         );
         // --- TEST EXPECTED VALUES
         $response->assertOk();
@@ -452,6 +510,121 @@ class ChallengesTest extends TestCase
                 ->shouldReceive('getByRailContentId')
                 ->andReturn($json[$index]);
         });
+    }
+
+    public function test_milestones_for_length_11(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-11-lessons.json', 'challenge-child-11-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: Carbon::now()->startOfDay()->toISOString());
+
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults($lesson_meta_datum['content_id'], $userId);
+            $lessonNumber = $index + 1;
+            $this->assertTrue($lessonCompletedProgress['show_modal']);
+            if ($lessonNumber == 11) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif ($lessonNumber == 6) {
+                $this->assertEquals($lessonNumber, $lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're on a {$lessonNumber} Day Streak!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals(
+                    "You've earned an additional freeze token!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals("Return tomorrow to maintain your streak!", $lessonCompletedProgress['motivational_subtext']);
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            $this->assertEquals($lessonNumber, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->travel(1)->days();
+        }
+    }
+
+    public function test_milestones_with_unlocked_lessons(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-11-lessons.json', 'challenge-child-11-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: Carbon::now()->startOfDay()->toISOString());
+
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults($lesson_meta_datum['content_id'], $userId);
+            $lessonNumber = $index + 1;
+            $this->assertTrue($lessonCompletedProgress['show_modal']);
+            if ($lessonNumber == 11) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif ($lessonNumber == 6) {
+                $this->assertEquals($lessonNumber, $lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're on a {$lessonNumber} Day Streak!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals(
+                    "You've earned an additional freeze token!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals("Return tomorrow to maintain your streak!", $lessonCompletedProgress['motivational_subtext']);
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            $this->assertEquals($lessonNumber, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->travel(1)->days();
+        }
+    }
+
+    public function test_milestones_for_length_6(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-6-lessons.json', 'challenge-child-6-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: Carbon::now()->startOfDay()->toISOString());
+
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults($lesson_meta_datum['content_id'], $userId);
+            $lessonNumber = $index + 1;
+            $this->assertTrue($lessonCompletedProgress['show_modal']);
+            if ($lessonNumber == 6) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals("Return tomorrow to maintain your streak!", $lessonCompletedProgress['motivational_subtext']);
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            $this->assertEquals($lessonNumber, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+            $this->travel(1)->days();
+        }
     }
 
     public function test_milestones_for_length_30(): void

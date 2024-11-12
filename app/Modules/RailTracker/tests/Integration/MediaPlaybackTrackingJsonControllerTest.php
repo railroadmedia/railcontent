@@ -2,34 +2,13 @@
 
 namespace App\Modules\RailTracker\tests\Integration;
 
-use App\Modules\Content\Models\Content;
-use Carbon\Carbon;
 use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
+use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Modules\RailTracker\tests\RailtrackerTestCase;
-use App\Modules\RailTracker\Trackers\MediaPlaybackTracker;
-use PHPUnit\Framework\ExpectationFailedException;
-use SebastianBergmann\Comparator\ComparisonFailure;
+use Carbon\Carbon;
 
 class MediaPlaybackTrackingJsonControllerTest extends RailtrackerTestCase
 {
-    /**
-     * @var MediaPlaybackRepository
-     */
-    private $mediaPlaybackRepository;
-
-    /**
-     * @var MediaPlaybackTracker
-     */
-    private $mediaPlaybackTracker;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->mediaPlaybackRepository = app(MediaPlaybackRepository::class);
-        $this->mediaPlaybackTracker = app(MediaPlaybackTracker::class);
-    }
-
     public function test_store_validation()
     {
         $this->createAndLogInNewUser();
@@ -78,8 +57,8 @@ class MediaPlaybackTrackingJsonControllerTest extends RailtrackerTestCase
         $attributes = [
             'media_id' => $this->faker->word . rand(),
             'media_length_seconds' => rand(),
-            'media_type' => $this->faker->word,
-            'media_category' => $this->faker->word,
+            'media_type' => 'video',
+            'media_category' => 'vimeo',
             'session_id' => railtracker_session_token(),
         ];
 
@@ -117,8 +96,8 @@ class MediaPlaybackTrackingJsonControllerTest extends RailtrackerTestCase
         $attributes = [
             'media_id' => $this->faker->word . rand(),
             'media_length_seconds' => rand(),
-            'media_type' => $this->faker->word,
-            'media_category' => $this->faker->word,
+            'media_type' => 'video',
+            'media_category' => 'vimeo',
         ];
 
         $response = $this->call(
@@ -152,8 +131,8 @@ class MediaPlaybackTrackingJsonControllerTest extends RailtrackerTestCase
         $attributes = [
             'media_id' => $this->faker->word . rand(),
             'media_length_seconds' => rand(),
-            'media_type' => $this->faker->word,
-            'media_category' => $this->faker->word,
+            'media_type' => 'video',
+            'media_category' => 'vimeo',
             'current_second' => rand(),
             'seconds_played' => rand(),
         ];
@@ -189,8 +168,8 @@ class MediaPlaybackTrackingJsonControllerTest extends RailtrackerTestCase
         $attributes = [
             'media_id' => $this->faker->word . rand(),
             'media_length_seconds' => rand(),
-            'media_type' => $this->faker->word,
-            'media_category' => $this->faker->word,
+            'media_type' => 'video',
+            'media_category' => 'vimeo',
             'current_second' => rand(),
             'seconds_played' => rand(),
         ];

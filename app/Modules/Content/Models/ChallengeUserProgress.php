@@ -30,7 +30,7 @@ enum AwardTier: string
  * @property boolean $is_active
  * @property boolean $is_solo
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: id to values: content_id,  is_completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
+ * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -92,21 +92,18 @@ class ChallengeUserProgress extends Model
 
         foreach ($this->lessons_meta_data as $lesson) {
             $unlockDate = Carbon::parse($lesson['unlock_date']);
-            if ($lesson['is_bonus_content']) {
+            if ($lesson['is_always_unlocked'] || $unlockDate > $today) {
                 continue;
-            }
-            if ($unlockDate > $today) {
-                break;
             } else if ($unlockDate == $today) {
-                if ($lesson['is_completed']) {
+                if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
                 }
             } else {
-                if ($lesson['is_completed']) {
+                if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
-                } else {
+                } elseif (!$lesson['is_bonus_content']) {
                     $bestStreak = max($bestStreak, $currentStreak);
                     $currentStreak = 0;
                     $missedLessons++;
@@ -174,7 +171,7 @@ class ChallengeUserProgress extends Model
                 [
                     'content_id' => $lesson['id'],
                     'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
-                    'is_completed' => false,
+                    'completed' => false,
                     'time_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
                     'is_always_unlocked' => $isAlwaysUnlocked,
@@ -203,6 +200,7 @@ class ChallengeUserProgress extends Model
             'current_streak' => $streakData['current'],
             'missed_lessons' => $streakData['missed'],
             'current_best_streak' => $streakData['best'],
+            'is_solo' => $this->is_solo,
             'minutes_practiced' => $this->getMinutesPracticed(),
             'completion_percent' => $this->getCompletionPercent(),
         ];
@@ -219,7 +217,7 @@ class ChallengeUserProgress extends Model
         $completed = 0;
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
             $total++;
-            $completed += $lessons_meta_datum['is_completed'] ? 1 : 0;
+            $completed += $lessons_meta_datum['completed'] ? 1 : 0;
         }
         return intval(($completed * 100) / $total);
     }
@@ -276,6 +274,22 @@ class ChallengeUserProgress extends Model
     }
 
     /**
+     * @param int $userId
+     * @return Collection | null
+     * @throws Exception
+     */
+    public static function whereUserIdAndCompleted(int $userId) : Collection | null
+    {
+        $challengeUserCollection = self::query()
+            ->where('user_id', $userId)
+            ->whereNotNull('last_completed_date')
+            ->orderByDesc('last_completed_date')
+            ->get();
+
+        return $challengeUserCollection;
+    }
+
+    /**
      * @param array $challengeId
      * @param int $userId
      * @return Collection | null
@@ -320,7 +334,7 @@ class ChallengeUserProgress extends Model
 
         foreach($lessonMetaData as $index => $lessonMetaDatum) {
             if($lessonMetaDatum['content_id'] == $lessonId) {
-                $lessonMetaData[$index]['is_completed'] = $isCompleted;
+                $lessonMetaData[$index]['completed'] = $isCompleted;
                 if (!is_null($timePracticed)) {
                     // TODO this could be = or += depending on how time practides is sent
                     $lessonMetaData[$index]['time_practiced'] = $timePracticed;
@@ -337,17 +351,29 @@ class ChallengeUserProgress extends Model
              * 30-day challenge - every 5 days
              * 10-day challenge - one at 5 days
              * 1-9  day challenge - none, other than completion
-             * 11-29 day challenges - math to be determined
+             * 11-29 day challenges - Every Days / 2 - Integer only (default integer behaviour for rounding purposes)
+             * Example: 29 / 2 = 15. Day 15 milestone & completion milestone
              * Every milestone is +1 rest day
              */
-            if ($totalLessons >= 10) {
-                $isMilestoneStreak = ($currentStreakData['current'] % 5 == 0);
-                $hasStreakIncreased = $currentStreakData['current'] != $previousStreakData['current'];
-                $isMileStone = $isMilestoneStreak && $hasStreakIncreased;
-                $results['is_milestone'] = $isMileStone;
-                $this->current_rest_days += $isMileStone ? 1 : 0;
-                $results['added_to_streak'] = $hasStreakIncreased;
-                $results['added_to_rest_days'] = $isMileStone;
+            $currentStreak = $currentStreakData['current'];
+            $hasStreakIncreased = $currentStreak != $previousStreakData['current'];
+            $results['added_to_streak'] = $hasStreakIncreased;
+            if ($hasStreakIncreased) {
+                if ($totalLessons >= 10) {
+                    if ($totalLessons == 10 || $totalLessons == 30) {
+                        $isMilestoneStreak = ($currentStreak % 5 == 0);
+                    } else {
+                        $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
+                                $totalLessons / 2
+                            ) == $currentStreak;
+                    }
+                    $results['is_milestone'] = $isMilestoneStreak;
+                    $this->current_rest_days += $isMilestoneStreak ? 1 : 0;
+                    $results['added_to_rest_days'] = $isMilestoneStreak;
+                } else {
+                    $results['is_milestone'] = $totalLessons == $currentStreak;
+                }
+
             }
         }
         $this->save();
@@ -363,12 +389,15 @@ class ChallengeUserProgress extends Model
     }
 
     /**
-     * @return bool - if all lessons are completed
+     * @return bool - if all non-intro lessons are completed
      */
     public function areAllLessonsCompleted() : bool
     {
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
-            if (!$lessons_meta_datum['is_completed']) {
+            if ($lessons_meta_datum['is_always_unlocked']) {
+                continue;
+            }
+            if (!$lessons_meta_datum['completed']) {
                 return false;
             }
         }
@@ -390,7 +419,15 @@ class ChallengeUserProgress extends Model
 
     public function getAwardTier() : AwardTier
     {
-        //TODO https://musora.atlassian.net/browse/TCH-47
-        return AwardTier::GOLD;
+        $length = $this->getNumberOfLessonDays();
+        $bestStreak = $this->completed_best_streak;
+        $halfLength = $length / 2;
+        if ($length == $bestStreak) {
+            return AwardTier::GOLD;
+        } elseif($length < 10 || $bestStreak < $halfLength) {
+            return AwardTier::BRONZE;
+        } else {
+            return AwardTier::SILVER;
+        }
     }
 }

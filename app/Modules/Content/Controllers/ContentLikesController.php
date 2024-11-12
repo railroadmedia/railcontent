@@ -4,13 +4,15 @@ namespace App\Modules\Content\Controllers;
 
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
+use Illuminate\Http\JsonResponse;
 
 class ContentLikesController
 {
-    public function all(): array
+    public function all(): JsonResponse
     {
         $allLikedContent = ContentLike::getAllContentLikedByUser(user()->id);
-        return $allLikedContent->pluck('content_id')->toArray();
+        $data = $allLikedContent->pluck('content_id')->toArray();
+        return response()->json($data);
     }
 
     public function like(int $contentId): void

@@ -4,6 +4,7 @@ use App\Modules\Content\Controllers\ChallengesMetaDataController;
 use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
+use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -43,6 +44,11 @@ Route::prefix('content')
         )->name('content.user-permissions');
 
         Route::get(
+            'user/permissions',
+            [UserPermissionsController::class, 'getUserPermissionData']
+        )->name('content.user-permissions-data');
+
+        Route::get(
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
@@ -75,20 +81,20 @@ Route::prefix('content')
             ->middleware(DataVersionGetMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
         //Content Progress
-        Route::put(
+        Route::post(
             'user/progress/start',
             [ContentProgressController::class, 'start']
         )->name('content.user.progress.start')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
 
-        Route::put(
+        Route::post(
             'user/progress/complete',
             [ContentProgressController::class, 'complete']
         )->name('content.user.progress.complete')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
-        Route::put(
+        Route::post(
             'user/progress/reset',
             [ContentProgressController::class, 'reset']
         )->name('content.user.progress.reset')
@@ -124,6 +130,11 @@ Route::prefix('challenges')
             [ChallengesMetaDataController::class, 'getUserAward']
         )->name('challenges.user_award');
 
+        Route::get(
+            'user_badges/get',
+            [ChallengesMetaDataController::class, 'getUserBadges']
+        )->name('challenges.all_user_badges');
+
         Route::post(
             'enroll/{id}',
             [ChallengesMetaDataController::class, 'enrollUser']
@@ -158,4 +169,26 @@ Route::prefix('challenges')
             'complete_lesson/{id}',
             [ChallengesMetaDataController::class, 'completeLesson']
         )->name('challenges.complete_lesson');
+    });
+
+Route::prefix('playlists')
+    ->middleware('web_or_api_authenticated')
+    ->group(function () {
+        Route::get(
+            'all',
+            [\App\Modules\Content\Controllers\PlaylistsMetadataController::class, 'getUserPlaylists']
+        )->name('playlists.catalog');
+
+        Route::post('/duplicate/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@duplicatePlaylist')->name('playlist.duplicate');
+        Route::delete('/playlist/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistWithItems')->name('playlist.delete');
+        Route::put('/playlist/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylist')->name('playlist.update');
+        Route::post('/playlist', \App\Modules\Content\Controllers\PlaylistsMetadataController::class  . '@createPlaylist')->name('playlist.create');
+        Route::put('/like', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@likePlaylist')->name('playlist.like');
+        Route::delete('/like', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@deletePlaylistLike')->name('playlist.delete.like');
+        Route::get('/playlist/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylist')->name('playlist.fetch');
+        Route::get('/playlist-lessons', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItems')->name('playlist.items');
+        Route::post('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylistItem')->name('playlist.item.update');
+        Route::delete('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@removeItemFromPlaylist')->name('playlist.item.remove');
+        Route::get('/item/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItem')->name('playlist.item');
+
     });

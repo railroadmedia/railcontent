@@ -1,11 +1,16 @@
 import { reactive, computed, toRefs } from 'vue';
-import Utils from '@vuesora/assets/js/helper-functions/utils.js';
+import Utils from '@vuesora/assets/js/helper-functions/utils';
+import {useUserStore} from "@stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
 
 export default function useThemeClasses(props) {
+    const userStore = useUserStore();
+    const { brand } = storeToRefs(userStore);
+
     const state = reactive({
         themeBgClass: computed(() => {
             if (props.useThemeColor) {
-                return `bg-${props.themeColor}`;
+                return `bg-${brand.value}`;
             }
 
             const type = Utils.getThemeColorByContentType(props.contentType);
@@ -15,7 +20,7 @@ export default function useThemeClasses(props) {
 
         themeTextClass: computed(() => {
             if (props.useThemeColor) {
-                return `text-${props.themeColor}`;
+                return `text-${brand.value}`;
             }
 
             const type = Utils.getThemeColorByContentType(props.contentType);
@@ -25,7 +30,7 @@ export default function useThemeClasses(props) {
 
         themeHoverBgClass: computed(() => {
             if (props.useThemeColor) {
-                return `hover-bg-${props.themeColor}`;
+                return `hover-bg-${brand.value}`;
             }
 
             const type = Utils.getThemeColorByContentType(props.contentType);
@@ -35,7 +40,7 @@ export default function useThemeClasses(props) {
 
         themeHoverTextClass: computed(() => {
             if (props.useThemeColor) {
-                return `hover-text-${props.themeColor}`;
+                return `hover-text-${brand.value}`;
             }
 
             const type = Utils.getThemeColorByContentType(props.contentType);
