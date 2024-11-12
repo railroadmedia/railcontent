@@ -59,7 +59,7 @@ const lessonThumbnail = computed(() => {
 })
 //Song Artist
 const artist = computed(() => {
-    return props.lesson.artist;
+    return props.lesson.artist_name;
 })
 
 const contentTypeString = computed(() => {
@@ -142,11 +142,11 @@ const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(prop
 const lessonDate = props.lesson.published_on_in_timezone ? props.lesson.published_on_in_timezone : props.lesson.published_on;
 
 //Parse Release Date
-const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
-const day = DateTime.fromSQL(lessonDate).toFormat('ccc');
-const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
-const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
-const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
+const month = DateTime.fromISO(lessonDate).toFormat('LLL');
+const day = DateTime.fromISO(lessonDate).toFormat('ccc');
+const dayNumber = DateTime.fromISO(lessonDate).toFormat('d');
+const yearNumber = DateTime.fromISO(lessonDate).toFormat('yy');
+const time = DateTime.fromISO(lessonDate).toFormat('h:mm a');
 
 //-----------Methods-----------//
 
