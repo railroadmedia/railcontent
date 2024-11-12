@@ -24,7 +24,7 @@ export default function useCatalogueItem(props) {
                 return true;
             }
 
-            if(props.item.is_locked){
+            if(Object.hasOwn(props.item, 'is_locked')){
                 return !props.item.is_locked;
             } else if(props.item.quarter_published && props.item.status === 'draft'){
                 return dateNow.value > dateQuarterPublishedOn.value;

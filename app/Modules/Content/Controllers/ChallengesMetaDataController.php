@@ -21,6 +21,23 @@ class ChallengesMetaDataController extends Controller
     {
     }
 
+
+    /**
+     * Return challenge and user data for all user's active challenges (of that brand)
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getActiveChallengesForUser(Request $request)
+    {
+        $userId = user()->id;
+        $userProgresses = ChallengeUserProgress::whereUserIdAndActive($userId);
+        if ($userProgresses->isEmpty()) return response()->json([]);
+        $brand = $request->get('brand', brand());
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, true, $brand);
+        return response()->json($resultPackage);
+    }
+
     /**
      * @param $id - Challenge railcontent id
      * @return JsonResponse
@@ -66,50 +83,8 @@ class ChallengesMetaDataController extends Controller
         $contentIds = explode(',', $contentIds);
         if (!$contentIds) return response()->json([]);
         $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
-        $resultPackage = [];
-        $challenges = $this->challengesService->getChallengeByIds($contentIds);
-        foreach($contentIds as $contentId) {
-            $challenge = null;
-            foreach($challenges as $testChallenge) {
-                if ($testChallenge['id'] == $contentId) {
-                    $challenge = $testChallenge;
-                }
-            }
-            if (is_null($challenge)) {
-                continue;
-            }
-
-            $progressData = null;
-            foreach ($userProgresses as $userProgress) {
-                if ($userProgress['content_id'] == $contentId) {
-                    $startEndDate = $userProgress->getStartAndEndDate();
-                    $status = $userProgress->isCompleteAndNotActive() ? 'completed' : 'active';
-                    $durationText = $userProgress->is_locked ?
-                        $this->challengesService->getDurationText(Carbon::parse($startEndDate['start_date']), Carbon::parse($startEndDate['end_date'])) :
-                        'Unlocked';
-                    $progressData = [
-                        'is_user_enrolled' => true,
-                        'progress_percent' => $userProgress->getCompletionPercent(),
-                        'duration_text' => $durationText,
-                        'is_solo' => $userProgress['is_solo'],
-                        'status' => $status,
-                    ];
-                    break;
-                }
-            }
-            if (is_null($progressData)) {
-                $progressData = [
-                    'is_user_enrolled' => false,
-                    'progress_percent' => 0,
-                    'duration_text' => $this->challengesService->getDurationText(Carbon::parse($challenge['published_on']), $this->challengesService->getChallengeEndDate($challenge)),
-                    'is_solo' => $challenge['is_solo'],
-                    'status' => 'not_started',
-                ];
-            }
-            $progressData['content_id'] = $challenge['id'];
-            $resultPackage[$challenge['id']] = $progressData;
-        }
-
+        $brand = $request->get('brand', brand());
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, false, $brand);
         return response()->json($resultPackage);
     }
 
@@ -217,12 +192,7 @@ class ChallengesMetaDataController extends Controller
         foreach($challengeProgress as $progress) {
             foreach($challenges as $challenge) {
                 if ($progress->content_id == $challenge['id']) {
-                    $badges[] = [
-                        'title' => $challenge['title'],
-                        'badge' => $challenge['badge'],
-                        'id' => $challenge['id'],
-                        ... $this->getUserAwardData($challenge, $progress, $user)
-                    ];
+                    $badges[] = $this->getUserAwardData($challenge, $progress, $user);
                     break;
                 }
             }
@@ -282,6 +252,9 @@ class ChallengesMetaDataController extends Controller
             'challenge_title' => $challenge['title'],
             'award_text' => $challenge['award_custom_text'],
             'tier' => $tier,
+            'title' => $challenge['title'],
+            'badge' => $challenge['badge'],
+            'id' => $challenge['id'],
             ... $imageValues,
         ];
     }

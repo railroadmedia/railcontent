@@ -302,9 +302,9 @@
         :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
         :lesson-data="{{ json_encode($lessonContent) }}" {{-- Mostly used for user data and status--}}
         @if(!empty($lessonContent->fetch('soundslice_slug')))
-            :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }}
+            :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
         @endif
-        :qa-video="{{ $hasQAVideo }}" 
+        :qa-video="{{ $hasQAVideo }}"
         :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
         :video-resources="{{ json_encode($videoResources) }}" {{-- Mostly used for user data --}}
         {{-- :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}" --}}

@@ -63,6 +63,7 @@
                 'props' => [
                     'contentId' => $parentContent->fetch('id'),
                     'progress' => $parentContent->fetch('progress_percent', 0),
+                    'isChallenge' => $parentType === 'challenges',
                 ]
             ],
             [
