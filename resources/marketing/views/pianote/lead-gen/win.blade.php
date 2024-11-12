@@ -86,8 +86,9 @@
 {{--                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
 {{--                            <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
 {{--                        @else--}}
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
-                             <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                        @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
+                            <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                            <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/giveaway/pianote-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
@@ -417,6 +418,7 @@
 {{--                        @else--}}
                         @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 24, 8, 0, 0, 'America/Vancouver'))
                             <span class="join smaller w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                            <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/lead-gen/giveaway/pianote-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                         @else
                             <span class="join sold-out smaller w-full">This offer has now ended</span>
                         @endif
