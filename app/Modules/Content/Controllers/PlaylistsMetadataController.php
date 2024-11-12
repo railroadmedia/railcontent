@@ -190,7 +190,7 @@ class PlaylistsMetadataController extends Controller
                                             ]);
 
         $playlistData = [
-            'user_id'      => user()->id, // Assuming the user() helper fetches the authenticated user
+            'user_id'      => user()->id,
             'type'         => 'user-playlist',
             'brand'        => $validatedData['brand'] ?? config('railcontent.brand'),
             'name'         => $validatedData['name'],
@@ -206,6 +206,7 @@ class PlaylistsMetadataController extends Controller
         return response()->json([
                                     'message'   => 'Playlist created successfully',
                                     'playlist'  => $playlist,
+                                    'success' => true,
                                 ], 201);
     }
 
@@ -321,31 +322,9 @@ class PlaylistsMetadataController extends Controller
                                         'message' => 'Playlist not exists.',
                                     ], 404);
         }
-        $items = UserPlaylistContent::query()
-            ->where('user_playlist_id', $playlistId)
-            ->orderBy('position', 'asc')
-            ->get();
-        $contentIds = $items->pluck('content_id');
-        $parentIds = $items->pluck('content_parent')->filter();
+        $items = $this->playlistsService->getPlaylistItems($playlist->brand, $playlist->id);
 
-        // Fetch Sanity and Assignment data
-        $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray(), 'playlist-item');
-        $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
-            $playlist->brand,
-            $contentIds->toArray(),
-            $parentIds->toArray(),
-            'playlist-item'
-        );
-
-        $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
-        $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
-        $userPermissions = user()->getActivePermissionsIds();
-
-        $mergedData = $items->map(function ($item) use ($sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions) {
-            return $this->formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions);
-        });
-
-        return response()->json($mergedData);
+        return response()->json($items);
     }
 
     /**
@@ -410,7 +389,7 @@ class PlaylistsMetadataController extends Controller
 
     public function removeItemFromPlaylist(Request $request)
     {
-        $user = user(); // Assuming this function retrieves the current user
+        $user = user();
         $playlistItemId = $request->get('user_playlist_item_id');
         $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
         if(!$playlistItem){
@@ -430,7 +409,7 @@ class PlaylistsMetadataController extends Controller
 
         // Call the instance method to delete and reposition
         $deleted = $playlistItem->deletePlaylistItemAndReposition();
-
+        $this->playlistsService->updateDuration($playlistItem->playlist);
         if (!$deleted) {
             return response()->json([
                                         'success' => false,
@@ -565,7 +544,7 @@ class PlaylistsMetadataController extends Controller
                         }
                     }
                 }
-                event(new PlaylistItemsUpdated($playlistId));
+            $this->playlistsService->updateDuration($playlist);
             }
         }
         $results = [
