@@ -49,6 +49,39 @@ class ChallengesTest extends TestCase
         );
     }
 
+    public function test_active_challenges_endpoint(): void
+    {
+        $userId = user()->id;
+        $this->prep_challenge_index(0);
+        $challengesService = app()->make(ChallengesService::class);
+
+        $response = $this->getJson(route('challenges.user_active_challenges'));
+        $response->assertOk();
+        $responseData = $response->json();
+
+
+        $this->assertEmpty($responseData);
+
+        $challengesService->startChallenge(402199, $userId);
+        $this->prep_challenge_index(1);
+        $challengesService->startChallenge(402200, $userId);
+        $response = $this->getJson(route('challenges.user_active_challenges'));
+        $response->assertOk();
+        $responseData = $response->json();
+
+        $this->assertCount(2, $responseData);
+        $this->assertTrue($responseData[402199]['is_user_enrolled']);
+        $this->assertTrue($responseData[402200]['is_user_enrolled']);
+
+        $challengesService->completeChallenge(402200, $userId);
+        $response = $this->getJson(route('challenges.user_active_challenges'));
+        $response->assertOk();
+        $responseData = $response->json();
+
+        $this->assertCount(1, $responseData);
+        $this->assertTrue($responseData[402199]['is_user_enrolled']);
+    }
+
     public function test_leave_clears_current_progress(): void
     {
         $userId = user()->id;
