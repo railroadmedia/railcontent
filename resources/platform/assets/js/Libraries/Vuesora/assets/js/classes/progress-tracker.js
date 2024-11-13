@@ -72,7 +72,7 @@ export default class ProgressTracker {
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        recordWatchSession(mediaId, mediaType, mediaCategory, totalDuration, watchPosition, this.secondsWatched, sessionToken);
+        recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), sessionToken);
     }
 
     /**

@@ -391,8 +391,9 @@ const handleVideoPlay = (payload) => {
 };
 
 const sendProgressTrackerEvent = () => {
+    const sessionTokenElement = document.querySelector('#sessionToken');
+
     if(progressTracker) {
-        const sessionTokenElement = document.querySelector('#sessionToken');
         progressTracker.send({
             mediaId: mediaElementVueInstance.value.videoId,
             mediaType: 'video',
@@ -402,7 +403,7 @@ const sendProgressTrackerEvent = () => {
             totalDuration: mediaElementVueInstance.value.videoLength
                 || mediaElementVueInstance.value.totalDuration,
             sessionToken: sessionTokenElement.value || null,
-            brand: props.videoProps.brand,
+            brand: brand.value,
             contentId: mediaElementVueInstance.value.contentId
         });
     }
