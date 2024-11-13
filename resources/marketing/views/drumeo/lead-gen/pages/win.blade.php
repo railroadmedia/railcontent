@@ -78,7 +78,8 @@
 
                     <p class="hidden sm:inline-block mb-3 text-sm">
                         <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">
+                        <i class="fas fa-check-circle text-drumeo"></i> No sneaky fees<br class="lg:hidden">
+{{--                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">--}}
                         <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Worldwide entry</p>
 {{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
 {{--                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
@@ -264,11 +265,6 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12">
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    <p class="mx-0"><strong>No purchase necessary</strong> <br class="hidden sm:inline">
-                    and there are no age restrictions.</p>
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     <p class="mx-0"><strong>No location restrictions.</strong><br class="hidden sm:inline">
                     We’ll ship it anywhere in the world.</p>
                 </div>
@@ -276,6 +272,11 @@
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     <p class="mx-0"><strong>No sneaky shipping fees.</strong><br class="hidden sm:inline">
                     We’ll take care of it. (VAT may apply)</p>
+                </div>
+                <div class="flex">
+                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <p class="mx-0"><strong>No purchase necessary.</strong> <br class="hidden sm:inline">
+                        {{--and there are no age restrictions.--}}</p>
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
