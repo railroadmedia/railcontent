@@ -3,12 +3,21 @@ import { computed } from 'vue';
 import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
 import { useUserStore } from "@stores/user.js";
+import { getProgressPercentage } from 'musora-content-services';
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
-    const progress_percent = computed(() => props.item.progress_percent);
+    
+    let progress_percent = 0;
+    //Progress Percentage
+    getProgressPercentage(props.item.id).then( value => {
+        progress_percent = value;
+    }).catch( error => {
+        console.log('error fetching progress', error)
+    })
+
     const noAccess = computed(() => {
             if (userStore.isAdmin) {
                 return false;
