@@ -12,14 +12,19 @@
                 <div class="tw-px-10 sm:tw-px-[70px] tw-mb-4 tw-z-[1] tw-relative">
                     <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challengeBadge}`" alt="Challenge Badge" />
                 </div>
-                <p class="tw-mb-6 tw-text-center tw-text-sm ">
+                <p class="tw-mb-6 tw-text-center tw-text-sm">
                     You practiced for a total of <span class="tw-font-bold">{{ minutesPracticed }} minutes</span> and achieved a <span class="tw-font-bold">{{ streak }}-day streak</span> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
                 </p>
+
+                <div v-if="openFromAwards" class="tw-text-center tw-text-[#888888] tw-mb-6">
+                    Earned on {{ earnedDate }}
+                </div>
+
                 <div class="tw-flex-col sm:tw-flex-row tw-flex tw-justify-center tw-gap-[10px] tw-mb-16 sm:tw-mb-6 tw-z-[3] tw-relative">
                     <MuButton @click="openCertificate">View certificate</MuButton>
                     <MuButton @click="openShareModal"><musora-icon icon-name="share" class="tw-h-6 tw-mr-1 -tw-mt-1 " /> Share</MuButton>
                 </div>
-                <div class="tw-text-center">
+                <div v-if="!openFromAwards" class="tw-text-center">
                     <a :href="`/${brand}/challenges`" class="tw-uppercase tw-underline tw-font-bold tw-font-bebas-neue dark:tw-text-white tw-z-[3] tw-relative">Return to Challenges</a>
                 </div>
             </div>
@@ -49,6 +54,10 @@ const props = defineProps({
     awardData: {
         type: Object,
         default: {},
+    },
+    openFromAwards: {
+        type: Boolean,
+        default: false,
     }
 })
 
@@ -83,6 +92,10 @@ const tier = computed(() => {
 
 const challengeTitle = computed(() => {
     return props.awardData?.challenge_title;
+})
+
+const earnedDate = computed(() => {
+    return props.awardData?.date_completed;
 })
 
 const openCertificate = () => {
