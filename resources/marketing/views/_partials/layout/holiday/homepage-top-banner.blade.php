@@ -14,14 +14,14 @@
             </a>
             <img class="h-80 absolute right-0 top-0 hidden sm:block translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
         @endif
-            <h5 class="leading-tight my-4 uppercase">{!! $text !!}</h5>
+            <h5 class="leading-tight my-4">{!! $text !!}</h5>
 
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-4">
-                <a class="w-full sm:w-1/2 join smaller sm:order-2 bg-[#FFD600] text-black" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP NOW &raquo;</a>
+                <a class="w-full sm:w-1/2 join smaller outline sm:order-2 border-[#FFD600]" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP NOW &raquo;</a>
 
-{{--                <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">--}}
-{{--                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>--}}
-{{--                </div>--}}
+                <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">
+                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>
+                </div>
             </div>
 
         @if(session()->has('error'))
