@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import PlaylistService from '../Services/playlists';
-import {fetchUserPlaylists, fetchPlaylist} from "../../../../../../musora-content-services/src";
+import {fetchUserPlaylists, fetchPlaylist} from "musora-content-services";
 
 export const usePlaylistsStore = defineStore({
   id: 'Playlists',
