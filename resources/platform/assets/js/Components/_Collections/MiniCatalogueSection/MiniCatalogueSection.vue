@@ -21,7 +21,7 @@
             <div>
                 <transition appear name="fade">
                     <ChallengeCarousel v-if="isChallenge" />
-                    <ChallengeAwardContainer v-else-if="isChallengeAward" />
+                    <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
                     <CatalogueCardContainer
                         v-else
                         :force-no-links="forceNoLinks"

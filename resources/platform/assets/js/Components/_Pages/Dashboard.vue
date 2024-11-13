@@ -54,16 +54,20 @@
 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
+                v-if="challenges.length"
                 title="Challenges"
                 :see-all-url="`/${brand}/challenges`"
                 seeAllAriaLabel="See All Challenges"
                 catalogue-type="challenge"
+                :pre-loaded-content="challenges"
             />
 
             <!-- Challenge Awards -->
             <MiniCatalogueSection
+                v-if="awards.length"
                 title="My Awards"
                 catalogue-type="challengeAward"
+                :pre-loaded-content="awards"
             />
 
             <!-- Completed Lessons -->
@@ -136,14 +140,13 @@ import { computed, ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
-import { fetchContentInProgress, fetchCompletedContent, fetchByRailContentIds } from 'musora-content-services';
+import { fetchContentInProgress, fetchCompletedContent, fetchByRailContentIds, fetchUserBadges, fetchChallengeUserActiveChallenges } from 'musora-content-services';
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection';
 import UserMetric from '@collections/UserMetric/UserMetric';
 import GearCarousel from '@collections/GearCarousel/GearCarousel';
-import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 
 const props = defineProps({
     headerData: {
@@ -178,6 +181,8 @@ const { brand } = storeToRefs(userStore);
 
 const startedContents = ref([]);
 const completedContents = ref([]);
+const awards = ref([]);
+const challenges = ref([]);
 
 const metrics = computed(() => {
     const keys = Object.keys(props.userMetrics);
@@ -201,14 +206,18 @@ const breadcrumbs = [
 
 onBeforeMount(() => {
     const fetchData = async () => {
-        const [startedIds, completedIds] = await Promise.all([
+        const [startedIds, completedIds, badges, startedChallenges] = await Promise.all([
             fetchContentInProgress('all', brand.value),
-            fetchCompletedContent('all', brand.value)
+            fetchCompletedContent('all', brand.value),
+            fetchUserBadges(brand.value),
+            fetchChallengeUserActiveChallenges(brand.value),
         ]);
 
         const lessons = await fetchByRailContentIds([...startedIds.started, ...completedIds.completed]);
         const started = lessons.filter(lesson => startedIds.started.includes(lesson.id)).slice(0, 20);
         const completed = lessons.filter(lesson => completedIds.completed.includes(lesson.id)).slice(0, 20);
+        awards.value = badges;
+        challenges.value = startedChallenges;
 
         startedContents.value = started;
         completedContents.value = completed;
