@@ -28,6 +28,7 @@ class SanityGateway
         "'slug' : slug.current",
         "'permission_id': permission[]->railcontent_id",
         'child_count',
+        "'description': description[0].children[0].text",
     ];
 
     private array $contentSpecificFields = [
@@ -83,12 +84,36 @@ class SanityGateway
             }',
         ],
         'playlist-item' => [
-            '"instructors": instructor[]->name',
+            "'type': _type",
+            '"instructors": instructor[]->{
+                    "id":railcontent_id,
+                    name,
+                    short_bio,
+                    "biography": long_bio[0].children[0].text,
+                    web_url_path,
+                    "coach_card_image": coach_card_image.asset->url,
+                    "coach_profile_image":thumbnail_url.asset->url
+                }',
             'parent_content_data',
             'video',
             'soundslice',
-            "'artist_name':coalesce(artist->name, instructor[0]->name)",
+            '"resources": resource',
+            "'artist':coalesce(artist->name, instructor[0]->name)",
             "instrumentless",
+            "'chapters': chapter[]{
+                    chapter_description,
+                    chapter_timecode,
+                    'chapter_thumbnail_url': chapter_thumbnail_url.asset->url
+                }",
+            "'assignments':assignment[]{
+                'id': railcontent_id,
+                'soundslice_slug': assignment_soundslice,
+                'title': assignment_title,
+                'sheet_music_image_url': assignment_sheet_music_image,
+                'timecode': assignment_timecode,
+                'description': assignment_description,
+                'title':assignment_title,
+        }",
         ]
         ];
 
@@ -185,17 +210,19 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return mixed|string - matching documents
      */
-    public function getByRailContentIds(array $ids, ?string $type = null, ?string $brand = null)
+    public function getByRailContentIds(array $ids, ?string $type = null, ?string $brand = null, bool $includeParents = false)
     {
-
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         // see musora-content-services sanity.js for the fields and format we need to replicate
         $typeString = ($type && $type !== 'playlist-item') ? "&& _type == '$type'" : '';
         $brandString = $brand ? " && brand == '$brand'" : '';
         $fieldsString = $this->getFieldsString($type);
+        $parentQuery = $includeParents
+            ? ", 'parents': *[railcontent_id in (^.parent_content_data[].id)] {  $fieldsString }"
+            : '';
         $query = "*[railcontent_id in [{$idsString}] $typeString $brandString]{
-          $fieldsString
+            $fieldsString $parentQuery
         }";
         $documents = $gateway->sanity->fetch($query);
         // The following are used to format similar to RailContent, these are a stopgap measure
@@ -256,15 +283,18 @@ class SanityGateway
         return $document;
     }
 
-    public function getAssignmentsByRailcontentIds($brand, array $ids,array $parentIds, ?string $type = null)
+    public function getAssignmentsByRailcontentIds($brand, array $ids,array $parentIds, ?string $type = null, bool $includeParents = false)
     {
 
         $gateway = new SanityGateway();
         $idsString = implode(',', $ids);
         $parentIdsString = implode(',', $parentIds);
         $fieldsString = $this->getFieldsString($type);
+        $parentQuery = $includeParents
+            ? ", 'parents': *[railcontent_id in (^.parent_content_data[].id)] {  $fieldsString }"
+            : '';
         $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
-          $fieldsString, resource,
+          $fieldsString, resource $parentQuery,
   assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
          assignment_title,
          assignment_sheet_music_image,
@@ -278,15 +308,16 @@ class SanityGateway
             foreach ($document['assignment'] ?? [] as $assignment) {
                 $routes = [];
 
-                if (!empty($document['parent_content_data'] ?? [])) {
-                    $route = collect($document['parent_content_data'])->map(function ($parent) {
+                if (!empty($document['parents'] ?? [])) {
+
+                    $route = collect($document['parents'])->map(function ($parent) use($document) {
                         switch ($parent['type']) {
                             case 'learning-path':
                                 return 'Method';
                             case 'learning-path-level':
-                                return 'L';
+                                return 'L'.collect($document['parent_content_data'])->keyBy('id')[$parent['id']]['position'];
                             default:
-                                return $parent['slug'];
+                                return $parent['title'];
                         }
                     })->toArray();
                     $routes = array_reverse($route);
@@ -307,7 +338,12 @@ class SanityGateway
                     'route' => $routes,
                     'resources' => $document['resource'] ?? [],
                     'permission_id' => $document['permission_id'] ?? [],
-                    'status' => $document['status']
+                    'status' => $document['status'],
+                    'parent' => [
+                        'type' => $document['type'],
+                        'title' => $document['title'],
+                        'url' => $document['url']
+                    ]
                 ];
             }
         }
@@ -329,11 +365,13 @@ class SanityGateway
             child[]-> {
                 'id': railcontent_id,
                 'type': _type,
+                title,
                 'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
                 'children': child[]-> {
                     // Fetch child nodes if they exist
                     'id': railcontent_id,
                     'type': _type,
+                    title,
                     'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
                     'isLeaf': !defined(child)
                 }
@@ -358,7 +396,7 @@ class SanityGateway
                         $assignmentsCount++;
                     }
                 }
-                $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null];
+                $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null, 'title' => $documents[0]['title']];
             }
             foreach ($documents[0]['lastChildItems']??[] as $item) {
                 if (!empty($item['assignments'])) {
@@ -370,7 +408,7 @@ class SanityGateway
                 if (isset($item['children'])) {
                     foreach ($item['children'] as $child) {
                         if ($child['isLeaf']) {
-                            $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id']];
+                            $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id'], 'title' => $child['title']];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
                                     $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
@@ -380,7 +418,7 @@ class SanityGateway
                         }
                     }
                 }else{
-                    $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id']];
+                    $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id'],  'title' => $item['title']];
                     if (!empty($item['assignments'])) {
                         foreach ($item['assignments'] as $assignment) {
                             $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];

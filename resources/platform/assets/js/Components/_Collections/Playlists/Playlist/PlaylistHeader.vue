@@ -220,7 +220,7 @@ const dropdownOptions = [
 
 //--------------Computed--------------//
 const description = computed(() => {
-    return playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, "");
+    return playlistsStore.activePlaylist.description ? playlistsStore.activePlaylist.description.replace(/(<([^>]+)>)/gi, ""):'';
 })
 
 //--------------Methods--------------//

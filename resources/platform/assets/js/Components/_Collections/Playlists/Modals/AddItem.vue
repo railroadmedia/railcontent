@@ -12,7 +12,7 @@ import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '@units/LoadingSpinner/LoadingSpinner.vue';
 import AddDuplicate from './AddDuplicate.vue';
 import MuButton from '@units/Button/MuButton';
-import {addItemToPlaylist, countAssignmentsAndLessons} from 'musora-content-services';
+import {addItemToPlaylist, countAssignmentsAndLessons, fetchUserPlaylists} from 'musora-content-services';
 
 const props = defineProps({
     brand: {
@@ -112,7 +112,7 @@ const handleActionClick = (payload) => {
     const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
     const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
     if (duplicateIndex !== -1 && selectedIndex === -1) {
-        duplicateProps.value = { id: payload, show: true, title: props.content.name };
+        duplicateProps.value = { id: payload, show: true, title: props.content.title };
     } else {
         addRemovePlaylistSelection(payload);
     }
@@ -216,16 +216,18 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({
+    fetchUserPlaylists(props.brand, {
         brand: props.brand,
         page: pageNumber.value,
         limit: 10,
-        term: state.searchTerm,
+        searchTerm: state.searchTerm,
         content_id: props.content.content_id
-    }, token).then(r => {
+    })
+        .then(r => {
+
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
-        const { data: { data } } = r;
+        const { data } = r;
         if (data.length) {
             const formattedTable = data.map((item) => {
                 const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;

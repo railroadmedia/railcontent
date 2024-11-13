@@ -59,6 +59,14 @@ class PlaylistsMetadataController extends Controller
             ->paginate($limit, ['*'], 'page', $page);
         $totalResults = $playlists->total();
 
+        if($request->has('content_id')) {
+            $itemIdToCheck = $request->get('content_id');
+            $playlists->getCollection()->map(function ($playlist) use ($itemIdToCheck) {
+                $playlist->is_added_to_playlist = $playlist->items->pluck('content_id')->contains($itemIdToCheck);
+                return $playlist;
+            });
+        }
+
         // Formatting durations and URLs for playlists
         $playlists = $this->formatPlaylists($playlists->items());
 
@@ -505,6 +513,7 @@ class PlaylistsMetadataController extends Controller
                         $playlistItemData     = [
                             'content_id'       => $request->get('content_id'),
                             'content_parent'   => null,
+                            'content_name'     => $flattenContent['lessons'][0]['title'],
                             'user_playlist_id' => $playlistId,
                             'position'         => $lastPosition,
                             'created_at'       => Carbon::now()->toDateTimeString(),
@@ -522,6 +531,7 @@ class PlaylistsMetadataController extends Controller
                         $playlistItemData = [
                             'content_id'       => $item['id'],
                             'content_parent'   => $item['parent_id'],
+                            'content_name'     => $item['title'],
                             'user_playlist_id' => $playlistId,
                             'position'         => $lastPosition,
                             'created_at'       => Carbon::now()->toDateTimeString(),

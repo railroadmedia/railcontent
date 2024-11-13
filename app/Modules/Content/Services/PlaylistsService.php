@@ -78,12 +78,14 @@ class PlaylistsService
         $parentIds = $items->pluck('content_parent')->filter();
 
         // Fetch Sanity and Assignment data
-        $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray(), 'playlist-item');
+        $sanityData = $this->sanityGateway->getByRailContentIds($contentIds->toArray(), 'playlist-item', null, true);
+
         $assignmentsData = $this->sanityGateway->getAssignmentsByRailcontentIds(
             $brand,
             $contentIds->toArray(),
             $parentIds->toArray(),
-            'playlist-item'
+            'playlist-item',
+            true
         );
 
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
@@ -104,9 +106,8 @@ class PlaylistsService
 
         // Process route information if it exists in Sanity data
         $route = [];
-        if (!empty($sanityInfo['parent_content_data'] ?? [])) {
-           // dd($sanityInfo);
-            $route = collect($sanityInfo['parent_content_data'])->map(function ($parent) {
+        if (!empty($sanityInfo['parents'] ?? [])) {
+            $route = collect($sanityInfo['parents'])->map(function ($parent) use ($sanityInfo) {
                 switch ($parent['type']) {
                     case 'user-playlist':
                         return null;
@@ -115,14 +116,16 @@ class PlaylistsService
                     case 'learning-path':
                         return 'Method';
                     case 'learning-path-level':
-                        return 'L' . $parent['position'];
+                        return 'L' . collect($sanityInfo['parent_content_data'])->keyBy('id')[$parent['id']]['position'];
                     case 'foundation':
                         return 'Method';
                     default:
-                        return $parent['slug'];
+                        return $parent['title'];
                 }
             })->filter()->toArray();
             $sanityInfo['route'] = array_reverse($route);
+            $lastParent = last($sanityInfo['parent_content_data']);
+           // $sanityInfo['parent'] = ['type'=>$lastParent['type'],'title'=> $lastParent['slug'],'url'=> $lastParent['slug']];
         }
 
         $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
@@ -140,7 +143,6 @@ class PlaylistsService
         ]);
 
         $data = array_merge($sanityInfo ?? [], $assignmentInfo ?? [], $item->toArray());
-
         // Check if the user needs access
         $permissions = $data['permission_id'] ?? [];
         $data['need_access'] = empty(array_intersect($userPermissions, $permissions)) && !empty($permissions);
