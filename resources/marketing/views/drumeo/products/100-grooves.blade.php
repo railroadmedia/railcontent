@@ -48,11 +48,8 @@
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
-                        {{-- <h6 class="leading-normal my-4 sm:my-6">
-                        The 15 Rudiments You Actually Need To<br class="sm:hidden">
-                        Know (And How To Learn Them Quickly)</h6> --}}
-                        <p class="text-sm text-drumeo pt-10">LAUNCH SPECIAL</p>
 
+                        <h6 class="leading-normal my-4 sm:my-6">Learn your favorite iconic grooves with note-for-note charts, recording secrets, and Spotify & Apple Music playlists.</h6>
                         <h3 class="mb-4 sm:mb-6">
                             @if(floatval($productPrices['100-grooves-book']->price) > floatval($productPrices['100-grooves-book']->discounted_price))
                                 <s class="opacity-60">${{ floatval($productPrices['100-grooves-book']->price) }}</s>
@@ -149,9 +146,9 @@
     <section class="text-center text-white py-7 sm:py-14 lg:py-20 bg-cover bg-center" style="background-color:#013350;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/100-grooves/demo-bg.webp');">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
-        <div class="max-w-xs sm:max-w-md mx-auto px-16 sm:px-0">
+        <div class="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-8 sm:px-0">
             <a target="_blank" href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/100-grooves/100-Grooves-Teaser.pdf">
-                <div class="w-full bg-center bg-cover" style="padding-bottom:135%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/100-grooves/book.webp');"></div>
+                <div class="w-full bg-center bg-cover" style="padding-bottom:122%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/100-grooves/book2.png');"></div>
             </a>
         </div>
     </section>
@@ -164,13 +161,13 @@
                         [
                         'name' => 'Nic Collins',
                         'credit' => 'Genesis, Better Stranger',
-                        'comment' => '"100 Beats You Need To Know" is an awesome release from Drumeo and a must-have for any drummer. So much of what I\'ve learnt behind the kit came from playing along to my favorite songs and albums. Now with so many legendary grooves and transcriptions in one place, there\'s something new to learn for any drummer at any level.',                        
+                        'comment' => '"100 Beats You Need To Know" is an awesome release from Drumeo and a must-have for any drummer. So much of what I\'ve learnt behind the kit came from playing along to my favorite songs and albums. Now with so many legendary grooves and transcriptions in one place, there\'s something new to learn for any drummer at any level.',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp',
                         ],
                         [
                         'name' => 'Brandon Pertzborn',
                         'credit' => 'The Offspring',
-                        'comment' => 'What an amazing resource! Just as the title of the book suggests, if you have these beats in your toolkit, you’ll be ready for almost any situation behind the drums. So many of the beats in this book are beats I reference daily in my career. They’re all must-know beats that will prepare you for almost any situation on the drums.',                        
+                        'comment' => 'What an amazing resource! Just as the title of the book suggests, if you have these beats in your toolkit, you’ll be ready for almost any situation behind the drums. So many of the beats in this book are beats I reference daily in my career. They’re all must-know beats that will prepare you for almost any situation on the drums.',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/100-grooves/brandon-pertzborn.jpg',
                         ],
                      ];
@@ -209,10 +206,7 @@
                             fetchpriority="high"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/100-grooves/by-drumeo.svg"
                         >
-                        {{-- <h6 class="leading-normal my-4 sm:my-6">
-                        The 15 Rudiments You Actually Need To<br class="sm:hidden">
-                        Know (And How To Learn Them Quickly)</h6> --}}
-                        <p class="text-sm text-drumeo pt-10">LAUNCH SPECIAL</p>
+                         <h6 class="leading-normal my-4 sm:my-6">Learn your favorite iconic grooves with note-for-note charts, recording secrets, and Spotify & Apple Music playlists.</h6>
                     <h3 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['100-grooves-book']->price) > floatval($productPrices['100-grooves-book']->discounted_price))
                             <s class="opacity-60">${{ floatval($productPrices['100-grooves-book']->price) }}</s>
