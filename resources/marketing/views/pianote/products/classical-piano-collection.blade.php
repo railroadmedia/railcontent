@@ -178,7 +178,7 @@
         $autors = [
         [
             'id' => 'Bach',
-            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)//marketing/pianote/products/classical-piano-collection/prelude-in-c.webp',
+            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/prelude-in-c.webp',
             'alt' => 'Bach'
         ],
         [

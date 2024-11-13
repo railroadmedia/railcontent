@@ -141,10 +141,10 @@
                     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
                         <div class="container mx-auto max-w-5xl">
                             <h1 class="my-3 lg:my-6">
-                                <strong class="leading-tighter">Getting The Most From <br/>Your Pianote Prima Piano</strong>
+                                <strong class="leading-tighter">Getting The Most From <br class="hidden sm:block"/>Your Pianote Prima Piano</strong>
                             </h1>
                             <h5 class="leading-normal tracking-wide my-3 lg:my-6 italic">
-                                How to start making beautiful music on your <strong>NEW </strong>Prima piano
+                                How to start making beautiful music <br class="block sm:hidden"/> on your <strong>NEW </strong>Prima piano
                             </h5>
                         </div>
                     </div>
@@ -205,14 +205,14 @@
     >
         <div class="sticky top-0 bg-white border-b z-50 px-5 sm:px-6 shadow">
             <div class="container max-w-4xl mx-auto">
-                <nav class="flex space-x-8 overflow-x-auto py-4 scrollbar-hide justify-start md:justify-center items-center">
+                <nav class="flex space-x-8 overflow-x-auto py-4 scrollbar-hide justify-start sm:justify-center items-center">
                     @foreach ($timelineItems as $item)
                         <button 
                             @click="scrollToSection('{{ $item['number'] }}')"
                             class="flex-shrink-0 group relative pb-0.5 focus:outline-none"
                         >
                             <div class="flex flex-col items-start">
-                                <h5 class="font-medium uppercase tracking-tight font-bebas">{{ $item['subtitle'] }}</h5>
+                                <h5 class="font-medium uppercase font-bebas">{{ $item['subtitle'] }}</h5>
                             </div>
                            <div 
                             class="absolute bottom-0 left-0 w-full h-0.5 bg-pianote transform transition-transform duration-300"
@@ -225,7 +225,7 @@
             </div>
         </div>
     
-        <section class="text-center px-5 sm:px-6 pb-10 sm:pt-14 bg-white">
+        <section class="text-center pl-2 pr-4 sm:px-8 pb-16 md:pb-0 bg-white">
                 <div class="container max-w-5xl mx-auto">
                     <div x-data="{ activeStep: 1}" class="relative">
                         <!--  Line -->
@@ -250,7 +250,7 @@
                                     </div>
                     
                                     <div class="relative ml-12 md:ml-0 mt-10">
-                                        <div class="md:grid md:grid-cols-2 md:gap-32 items-center md:pt-20 {{ $loop->last ? 'md:pb-20' : '' }}">
+                                        <div class="md:grid md:grid-cols-2 sm:gap-20 lg:gap-32 items-center md:pt-20 {{ $loop->last ? 'md:pb-20' : '' }}">
                                             <div class="mt-4 md:mt-0 order-1 md:order-{{ $index % 2 === 0 ? '1' : '2' }}">
                                                 <div class="relative rounded-lg overflow-hidden lg:mt-20">
                                                     @if (!$item['hasVideo'])
@@ -272,7 +272,7 @@
                     
                                             <div class="text-left order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }} lg:mt-20">
                                                 <div class="space-y-3">
-                                                    <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal tracking-tight">
+                                                    <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal">
                                                         {{ $item['subtitle'] }}
                                                     </h6>                                                
                                                     <h4 class="leading-normal"><strong>{!! $item['title_section'] !!}</strong></h4>
@@ -291,15 +291,15 @@
     </div>
 
     <section class="pb-10 md:pb-28 px-4">
-        <div class="bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-3xl px-8 py-16 mx-auto max-w-5xl">  
+        <div class="bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-3xl px-4 sm:px-8 py-8 sm:py-16 mx-auto max-w-5xl">  
             <div class="text-center space-y-6 text-white">
                 <div class="flex justify-center mb-4">
                 <i class="fa-solid fa-party-horn text-[#FFAE00] text-5xl lg:text-7xl"></i>
                 </div>
                 
-                <h4><strong>You're ready to go! Let's play beautiful music.</strong></h4>
+                <h4 class="leading-tight"><strong>You're ready to go! Let's play beautiful music.</strong></h4>
                 
-                <h5 class="italic leading-relaxed tracking-normal">
+                <h5 class="italic leading-relaxed">
                     Your piano's on. You've chosen the perfect sound. Your fingers are ready to go... <br>
                     Log in to Pianote and find your perfect lesson today.
                 </h5>
