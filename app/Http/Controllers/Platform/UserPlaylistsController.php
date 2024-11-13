@@ -158,6 +158,7 @@ class UserPlaylistsController extends BaseController
         $playlist['playback_url'] = url()->route('platform.play.playlist', [
             'playlistId' => $playlist['id'],
         ]);
+        $playlist['is_liked_by_current_user'] = $playlist->likes()->where('user_id',$user->id)->exists();
 
         $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist->brand, $playlist->id);
      

@@ -42,6 +42,11 @@ class UserPlaylist extends Model
         return $this->hasMany(UserPlaylistContent::class);
     }
 
+    public function likes(): HasMany
+    {
+        return $this->hasMany(UserPlaylistLike::class, 'playlist_id');
+    }
+
     public function scopeOfBrand(Builder $query, Brand $brand): Builder
     {
         return $query->where("{$this->table}.brand", $brand->value);
@@ -66,7 +71,7 @@ class UserPlaylist extends Model
                                            "{$this->table}.created_at, COALESCE("
                                           . "{$this->table}.updated_at, 0), COALESCE(last_progress, 0)) as datemax")
             )
-                ->orderBy('datemax', $direction);
+                ->orderBy('datemax', 'desc');
         } else {
             // Default sorting if the column is not recognized
             return $query->orderBy($column, $direction);

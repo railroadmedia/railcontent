@@ -96,9 +96,9 @@ class SanityGateway
                 }',
             'parent_content_data',
             'video',
-            'soundslice',
+            "'soundslice_slug':soundslice[0]['soundslice_slug']",
             '"resources": resource',
-            "'artist':coalesce(artist->name, instructor[0]->name)",
+            "'artist_name':coalesce(artist->name, instructor[0]->name)",
             "instrumentless",
             "'chapters': chapter[]{
                     chapter_description,

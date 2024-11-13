@@ -150,7 +150,7 @@
         report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
         report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
         difficulty="{{ $lessonContent['difficulty'] ?? 0 }}"
-        artist="{{ $lessonContent['artist'] ?? ''}}"
+        artist="{{ $lessonContent['artist_name'] ?? ''}}"
     >
     </playlist-playback>
 @endsection
