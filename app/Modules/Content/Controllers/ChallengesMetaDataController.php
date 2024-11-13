@@ -104,7 +104,8 @@ class ChallengesMetaDataController extends Controller
         $userProgresses = ChallengeUserProgress::whereUserIdAndActive($userId);
         if ($userProgresses->isEmpty()) return response()->json([]);
         $brand = $request->get('brand', brand());
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, true, $brand);
+        $challengeIds = $userProgresses->pluck('content_id')->toArray();
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($challengeIds, $userProgresses, true, $brand);
         return response()->json($resultPackage);
     }
 
@@ -155,7 +156,7 @@ class ChallengesMetaDataController extends Controller
         if (!$contentIds) return response()->json([]);
         $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
         $brand = $request->get('brand', brand());
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, false, $brand);
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($contentIds, $userProgresses, false, $brand);
         return response()->json($resultPackage);
     }
 
