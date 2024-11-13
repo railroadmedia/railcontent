@@ -91,9 +91,9 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="text-center px-5 sm:px-6 py-16 sm:py-20 lg:py-28 relative overflow-hidden text-white bg-cover bg-center"
-        style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/august/header-bg.webp');">
-        <div class="container max-w-6xl mx-auto relative z-20">
+    <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+          <div class="container max-w-6xl mx-auto relative z-20">
             <h2 class="relative w-auto inline-block leading-tight">
                 <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="hidden sm:inline">
                 start playing the piano.
@@ -112,7 +112,6 @@
                 Only <s class="opacity-50">$1642</s> <strong>$799</strong>
             </h3>
             <div class="w-full max-w-xl mx-auto">
-
                 <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
                     href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true"
                 >START PLAYING</a>
@@ -126,9 +125,14 @@
                 </div>
             </div>
         </div>
-        @if(!empty($ultimate))
+        </div>
+         @if(!empty($ultimate))
             <div class="top-0 left-0 absolute w-full h-full z-10 opacity-60" style="background: linear-gradient(45deg, #A80011, #310A58 40%);"></div>
+        @else
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
         @endif
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
     </header>
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 bg-black text-white relative">
@@ -145,7 +149,7 @@
                 <br><br>
                 Introducing…
             </p>
-            <img class="h-16 my-6" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-prima.svg">
+            <img class="h-10 md:h-16 my-6" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-prima.svg">
             <img class="w-full max-w-5xl" src="">
         </div>
     </section>
@@ -239,53 +243,53 @@
                             @php
                                 $testimonials = [
                                     [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
-            "name" => "Tonya Hotz",
-            "location" => "Arizona, USA",
-            "video" => "882979587",
-            "title" => "There was a time when I felt I had missed my opportunity to really master an instrument. But here I am three years later and  <strong>making music is my favorite thing</strong>  to do.",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.webp",
-            "name" => "Allison Bond",
-            "location" => "Canada",
-            "video" => "877591721",
-            "title" => "Every time I have a question there’s something on Pianote for me. <strong>It’s a very positive place</strong> and I can play the piano with other people from around the world. ",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.webp",
-            "name" => "Steve Wilson",
-            "location" => "Arizona, USA",
-            "video" => "877591944",
-            "title" => "Pianote <strong> gave me the motivation I needed</strong> and to learn that it’s okay if I make a whole lot of mistakes. It’s really helpful and a lot of fun. ",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
-            "name" => "Darli Brazil",
-            "location" => "California, USA",
-            "video" => "878027528",
-            "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.webp",
-            "name" => "Ian Kershaw",
-            "location" => "United Kingdom",
-            "video" => "660596700",
-            "title" => "This is such a fantastic and welcoming, <strong> supportive student community.</strong> And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.webp",
-            "name" => "Jayde McIntosh",
-            "location" => "Australia",
-            "video" => "660596722",
-            "title" => "I can play some of my all-time favorite songs – and it’s just so awesome to know <strong>I can learn from home</strong> and accomplish one of my dreams. I’m so excited to keep learning! ",
-        ],
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Tonya-Hotz-profile.webp",
+                                        "name" => "Tonya Hotz",
+                                        "location" => "Arizona, USA",
+                                        "video" => "882979587",
+                                        "title" => "There was a time when I felt I had missed my opportunity to really master an instrument. But here I am three years later and  <strong>making music is my favorite thing</strong>  to do.",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Allison-Bond-profile.webp",
+                                        "name" => "Allison Bond",
+                                        "location" => "Canada",
+                                        "video" => "877591721",
+                                        "title" => "Every time I have a question there’s something on Pianote for me. <strong>It’s a very positive place</strong> and I can play the piano with other people from around the world. ",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Steve-Wilson-profile.webp",
+                                        "name" => "Steve Wilson",
+                                        "location" => "Arizona, USA",
+                                        "video" => "877591944",
+                                        "title" => "Pianote <strong> gave me the motivation I needed</strong> and to learn that it’s okay if I make a whole lot of mistakes. It’s really helpful and a lot of fun. ",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Darli-Brazil-profile.webp",
+                                        "name" => "Darli Brazil",
+                                        "location" => "California, USA",
+                                        "video" => "878027528",
+                                        "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Ian-Kershaw-profile.webp",
+                                        "name" => "Ian Kershaw",
+                                        "location" => "United Kingdom",
+                                        "video" => "660596700",
+                                        "title" => "This is such a fantastic and welcoming, <strong> supportive student community.</strong> And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
+                                    ],
+                                    [
+                                        "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp",
+                                        "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-profile.webp",
+                                        "name" => "Jayde McIntosh",
+                                        "location" => "Australia",
+                                        "video" => "660596722",
+                                        "title" => "I can play some of my all-time favorite songs – and it’s just so awesome to know <strong>I can learn from home</strong> and accomplish one of my dreams. I’m so excited to keep learning! ",
+                                    ],
                                 ];
                             @endphp
                             @foreach ($testimonials as $testimonial)
@@ -347,9 +351,10 @@
                                     pagination: false,
                                     breakpoints: {
                                         1020: {
+                                        perPage: 3.5,
                                         },
                                         768: {
-                                            perPage: 3,
+                                            perPage: 2.5,
                                             drag: 'free',
                                             snap: false,
                                         },
@@ -362,7 +367,7 @@
                             },
                         }"
                     >
-                        <section x-ref="splide" class="splide sm:mb-6">
+                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                      @php
@@ -471,7 +476,7 @@
                             }).mount()
                         },
                     }">
-                        <section x-ref="splide" class="splide mb-10">
+                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
@@ -558,7 +563,7 @@
                             },
                         }"
                     >
-                        <section x-ref="splide" class="splide mb-20 sm:mb-10">
+                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
@@ -639,7 +644,7 @@
                             },
                         }"
                     >
-                        <section x-ref="splide" class="splide mb-20 sm:mb-10">
+                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @php
@@ -845,12 +850,14 @@
         </section>
     @else
         <section class="px-3 sm:px-0 text-center relative z-50 overflow-hidden"
-            @if(!empty($ultimate)) style="background: #000; color:#fff" @endif>
+            @if(!empty($ultimate)) style="background: #000; color:#fff" @endif style="background: #F1EFED; color:#000;" >
             <div class="container max-w-6xl mx-auto relative z-50">
                 <div class="flex flex-wrap sm:flex-nowrap items-center px-4 sm:px-6 py-10 md:py-16 lg:py-20">
                     <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
-                        <h2 class="pb-6 sm:pb-4"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
-                            <h6 class="leading-tight max-w-xs">Get the PRIMA Ultimate bundle + 1 year of unlimited piano lessons + 7 extra launch bonuses.</h6>
+
+                        @if(!empty($ultimate))
+                            <h2 class="pb-6 sm:pb-4 leading-tight"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
+                            <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
 
                         <h4 class="my-4"> ONLY
                             @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
@@ -861,10 +868,9 @@
                                 <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                             @endif
                         </h4>
-                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
+                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
-                        @if(!empty($ultimate))
                             <picture>
                                 <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
                                 <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
@@ -873,6 +879,21 @@
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
                             </picture>
                         @else
+                            <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
+                            <h6 class="leading-tight max-w-xs">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
+
+                        <h4 class="my-4"> ONLY
+                            @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
+                                <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
+                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                                 (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
+                            @else
+                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                            @endif
+                        </h4>
+                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
+                    </div>
+                    <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
                                 <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
                                 <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
