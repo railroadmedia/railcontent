@@ -20,7 +20,7 @@
             </div>
             <div>
                 <transition appear name="fade">
-                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" />
+                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" @remove-challenge="removeItem" />
                     <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
                     <CatalogueCardContainer
                         v-else
@@ -153,5 +153,5 @@ watch(
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
 </script>
