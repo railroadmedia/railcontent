@@ -247,10 +247,10 @@
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || item.completed"
+                    v-if="item.started || lesson_completed"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            item.completed ? completedIcon : 'fa-adjust',
+                            lesson_completed ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -265,7 +265,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -274,6 +274,7 @@ import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
+import { contentStatusCompleted } from 'musora-content-services';
 
 const props = defineProps({
     isCoach: {
@@ -384,7 +385,9 @@ const {
 const { addToList, addEvent } = useUserCatalogueEvents({ ...props });
 const { resetProgress } = useResetProgress();
 
+//Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
+const lesson_completed = ref(false);
 
 //Computed
 const branchPathBG = computed(() => {
@@ -398,7 +401,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: props.item.completed,
+        completed: lesson_completed.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
@@ -475,5 +478,13 @@ const handleReset = () => {
 const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
+
+onBeforeMount( () => {
+    contentStatusCompleted(props.item.id).then( value => {
+        lesson_completed.value = value;
+    }).catch( error => {
+        console.log('error gettin completed value', error);
+    })
+})
 </script>
 
