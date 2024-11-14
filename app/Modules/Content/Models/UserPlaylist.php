@@ -20,6 +20,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string $name
  * @property string $description
  * @property string $thumbnail_url
+ * @property string $first_item_thumbnail_url
  * @property string $category
  * @property int $private
  * @property int $duration
@@ -30,7 +31,7 @@ use Modules\UserManagementSystem\Models\User;
 class UserPlaylist extends Model
 {
     protected $table = 'railcontent_user_playlists';
-    protected $fillable = ['user_id', 'type', 'brand', 'name', 'description', 'thumbnail_url', 'category', 'private', 'created_at'];
+    protected $fillable = ['user_id', 'type', 'brand', 'name', 'description', 'thumbnail_url', 'category', 'private', 'created_at', 'first_item_thumbnail_url'];
 
     public function user(): BelongsTo
     {

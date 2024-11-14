@@ -265,7 +265,7 @@ class SanityGateway
      * @param string $type - sanity _type value
      * @return array - matching challenge document
      */
-    public function getChallengeChildAndParentData(int $railcontentId, ?string $type = null) : array
+    public function getChallengeChildAndParentData(int $railcontentId, ?string $type = null): array
     {
 
         $gateway = new SanityGateway();
@@ -283,7 +283,7 @@ class SanityGateway
         return $document;
     }
 
-    public function getAssignmentsByRailcontentIds($brand, array $ids,array $parentIds, ?string $type = null, bool $includeParents = false)
+    public function getAssignmentsByRailcontentIds($brand, array $ids, array $parentIds, ?string $type = null, bool $includeParents = false)
     {
 
         $gateway = new SanityGateway();
@@ -310,7 +310,7 @@ class SanityGateway
 
                 if (!empty($document['parents'] ?? [])) {
 
-                    $route = collect($document['parents'])->map(function ($parent) use($document) {
+                    $route = collect($document['parents'])->map(function ($parent) use ($document) {
                         switch ($parent['type']) {
                             case 'learning-path':
                                 return 'Method';
@@ -359,6 +359,7 @@ class SanityGateway
         $query = "*[railcontent_id == {$id}]{
         $fieldsString,
         resource,
+        'thumbnail': thumbnail.asset->url,
         'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
         // Use a recursive-like approach to get only leaf nodes
         'lastChildItems': array::compact(
@@ -366,12 +367,14 @@ class SanityGateway
                 'id': railcontent_id,
                 'type': _type,
                 title,
+                'thumbnail': thumbnail.asset->url,
                 'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
                 'children': child[]-> {
                     // Fetch child nodes if they exist
                     'id': railcontent_id,
                     'type': _type,
                     title,
+                    'thumbnail': thumbnail.asset->url,
                     'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
                     'isLeaf': !defined(child)
                 }
@@ -386,19 +389,19 @@ class SanityGateway
         $assignmentsCount = 0;
         if (!empty($documents)) {
             // Flatten the structure to get leaf nodes only
-            if(!$documents[0]['lastChildItems']){
-               if(isset($documents[0]['parent_content_data'])) {
-                   $parent = (last($documents[0]['parent_content_data']));
-               }
+            if (!$documents[0]['lastChildItems']) {
+                if (isset($documents[0]['parent_content_data'])) {
+                    $parent = (last($documents[0]['parent_content_data']));
+                }
                 if (!empty($documents[0]['assignments'])) {
                     foreach ($documents[0]['assignments'] as $assignment) {
                         $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => null];
                         $assignmentsCount++;
                     }
                 }
-                $leafNodes[]= ['id' => $id, 'parent_id' => $parent['id'] ?? null, 'title' => $documents[0]['title']];
+                $leafNodes[] = ['id' => $id, 'parent_id' => $parent['id'] ?? null, 'title' => $documents[0]['title'], 'thumbnail' => $documents[0]['thumbnail']];
             }
-            foreach ($documents[0]['lastChildItems']??[] as $item) {
+            foreach ($documents[0]['lastChildItems'] ?? [] as $item) {
                 if (!empty($item['assignments'])) {
                     foreach ($item['assignments'] as $assignment) {
                         $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
@@ -408,7 +411,7 @@ class SanityGateway
                 if (isset($item['children'])) {
                     foreach ($item['children'] as $child) {
                         if ($child['isLeaf']) {
-                            $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id'], 'title' => $child['title']];
+                            $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id'], 'title' => $child['title'], 'thumbnail' => $child['thumbnail']];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
                                     $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
@@ -417,8 +420,8 @@ class SanityGateway
                             }
                         }
                     }
-                }else{
-                    $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id'],  'title' => $item['title']];
+                } else {
+                    $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id'],  'title' => $item['title'], 'thumbnail' => $item['thumbnail']];
                     if (!empty($item['assignments'])) {
                         foreach ($item['assignments'] as $assignment) {
                             $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
@@ -427,11 +430,11 @@ class SanityGateway
                     }
                 }
             }
-         //   $assignmentsCount = count($assignmentIds);
+            //   $assignmentsCount = count($assignmentIds);
             if ($documents[0]['type'] == 'song') {
                 if ($documents[0]['instrumentless']) {
                     $assignmentsCount = 2;
-                }else{
+                } else {
                     $assignmentsCount = 1;
                 }
             }

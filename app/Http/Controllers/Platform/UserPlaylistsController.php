@@ -6,7 +6,6 @@ use App\Modules\Content\Models\UserPlaylist;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
-
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
@@ -158,10 +157,11 @@ class UserPlaylistsController extends BaseController
         $playlist['playback_url'] = url()->route('platform.play.playlist', [
             'playlistId' => $playlist['id'],
         ]);
-        $playlist['is_liked_by_current_user'] = $playlist->likes()->where('user_id',$user->id)->exists();
+        $playlist['is_liked_by_current_user'] = $playlist->likes()->where('user_id', $user->id)->exists();
+        $playlist['thumbnail_url'] = $playlist['thumbnail_url'] ?? $playlist['first_item_thumbnail_url'];
 
         $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist->brand, $playlist->id);
-     
+
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);

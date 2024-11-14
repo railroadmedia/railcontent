@@ -12,8 +12,7 @@ class PlaylistsService
 {
     public function __construct(
         private SanityGateway $sanityGateway,
-    )
-    {
+    ) {
     }
 
     public function processFilterOptions(Collection $filterOptions): array
@@ -69,7 +68,8 @@ class PlaylistsService
         return $playlist;
     }
 
-    public function getPlaylistItems($brand, $playlistId){
+    public function getPlaylistItems($brand, $playlistId)
+    {
         $items = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId)
             ->orderBy('position', 'asc')
@@ -125,7 +125,7 @@ class PlaylistsService
             })->filter()->toArray();
             $sanityInfo['route'] = array_reverse($route);
             $lastParent = last($sanityInfo['parent_content_data']);
-           // $sanityInfo['parent'] = ['type'=>$lastParent['type'],'title'=> $lastParent['slug'],'url'=> $lastParent['slug']];
+            // $sanityInfo['parent'] = ['type'=>$lastParent['type'],'title'=> $lastParent['slug'],'url'=> $lastParent['slug']];
         }
 
         $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
@@ -170,7 +170,7 @@ class PlaylistsService
             }
         }
 
-// Decode and merge 'extra_data' if it exists
+        // Decode and merge 'extra_data' if it exists
         if (!empty($data['extra_data'])) {
             $extraData = json_decode($data['extra_data'], true);
             if (is_array($extraData)) {
