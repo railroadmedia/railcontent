@@ -1,120 +1,47 @@
 <?php
 $packs = [
     [
-        'image' => 'marketing/pianote/products/pianote-global-membership.jpg',
-        'header' => 'Pianote Annual Membership',
-        'subheader' => 'Get daily support, encouragement, and guidance in a private community of piano players just like you. Share your progress and ask questions, plus receive coaching from the best piano teachers in the world.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12345',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'pianote-annual-membership'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
-        'header' => 'The Pianote Bookbag',
-        'subheader' => 'A high-quality, durable Pianote bag perfect for carrying your music books and gear.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12346',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'pianote-bookbag'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
-        'header' => 'The Pianote PracticeKit',
-        'subheader' => 'Essential tools to make practicing more effective and enjoyable, with resources to help you stay motivated and track your progress.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12347',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'pianote-practicekit'
-    ],
-    [
-        'image' => 'marketing/pianote/products/little-book-bundle.jpg',
-        'header' => 'The Little Book Bundle',
-        'subheader' => 'A collection of portable, easy-to-read books covering scales, chords, arpeggios, and more to boost your piano skills anywhere.',
-        'description' => 'Exclusive for members!',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'little-book-bundle'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
-        'header' => 'Piano Chords & Scales: The Ultimate Guide',
-        'subheader' => 'Everything you need to know about chords and scales in one place, helping you understand music and play any song.',
-        'description' => 'Exclusive for members!',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'piano-chords-scales-guide'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
-        'header' => 'Pianote Planner',
-        'subheader' => 'Stay organized and keep track of your goals with this planner designed specifically for piano players.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12348',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'pianote-planner'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
-        'header' => 'The Most Beautiful Classical Piano Pieces',
-        'subheader' => 'Sheet music and video tutorials for iconic classical pieces, including Moonlight Sonata and Clair de Lune.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12349',
-        'price' => 127,
-        'badge' => 'FREE BONUS',
-        'sku' => 'classical-piano-pieces'
-    ],
-    [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
+        'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
         'header' => 'New Piano Players Start Here',
-        'subheader' => 'Your first 30 days of guided lessons. Press play each day and learn piano step-by-step with Lisa’s guidance.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12350',
-        'price' => 127,
+        'description' => '<p>This is your first 30 days on the piano.</p><p class="my-2">Just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson.</p> <p>No complicated theory. No need to read music. No frustration.</p>',
+        'vimeoId' => '798501810',
+        'price' => floatval($productPrices['new-piano-players-start-here']->price),
         'badge' => 'FREE BONUS',
-        'sku' => 'new-piano-players'
+        'sku' => 'new-piano-players-start-here'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
+        'image' => 'marketing/pianote/products/prima/bundle/EC.webp',
         'header' => 'Easy Chords',
-        'subheader' => 'Learn and practice chord inversions in 30 days, improving your chord-playing skills and making your music sound fuller.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '913081651',
-        'price' => 127,
+        'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p>',
+        'vimeoId' => '823788317',
+        'price' => floatval($productPrices['easy-chords']->price),
         'badge' => 'FREE BONUS',
         'sku' => 'easy-chords'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
+        'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
         'header' => '30-Day Blues Piano',
-        'subheader' => 'A fun, hands-on course that teaches you the Blues from basic structure to expressive riffs in just 10 minutes a day.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '913081651',
-        'price' => 127,
+        'description' => '<p>Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p>',
+        'vimeoId' => '852795615',
+        'price' => floatval($productPrices['30-day-blues-piano']->price),
         'badge' => 'FREE BONUS',
         'sku' => '30-day-blues-piano'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
+        'image' => 'marketing/pianote/products/prima/bundle/30DTBT.webp',
         'header' => '30 Days To Better Technique',
-        'subheader' => 'Guided by a world-renowned keyboardist, this course will help you develop strong technique and improve your playing in 30 days.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12353',
-        'price' => 127,
+        'description' => '<p>Improve your finger strength, coordination, and speed with GRAMMY-winner Jordan Rudess.</p><p class="my-2">The Dream Theater keyboardist will guide you through 30 days of exercises that WILL make you a better piano player…</p><p>Guaranteed.</p>',
+        'vimeoId' => '928599834',
+        'price' => floatval($productPrices['30-days-to-better-technique']->price),
         'badge' => 'FREE BONUS',
-        'sku' => '30-days-better-technique'
+        'sku' => '30-days-to-better-technique'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/new-piano-bonus.jpg',
+        'image' => 'marketing/pianote/products/prima/bundle/CPC.webp',
         'header' => 'The Classical Piano Collection',
-        'subheader' => 'Lifetime access to tutorials for iconic classical pieces like Moonlight Sonata, Für Elise, and more.',
-        'description' => 'Exclusive for members!',
-        'vimeoId' => '12354',
-        'price' => 127,
+        'description' => '<p>Play the most beautiful piano pieces ever written.</p><p class="my-2">You’ll get lifetime access to guided step-by-step tutorials for Moonlight Sonata, Für Elise, Gymnopédie, Prelude in C, and Prelude in E minor.</p><p>Learn the pieces that made you fall in love with the piano.</p>',
+        'vimeoId' => '1008560089',
+        'price' => floatval($productPrices['classical-piano-collection']->price),
         'badge' => 'FREE BONUS',
         'sku' => 'classical-piano-collection'
     ]

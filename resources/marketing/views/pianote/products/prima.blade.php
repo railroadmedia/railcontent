@@ -2,15 +2,6 @@
     require_once(resource_path('marketing/views/pianote/_partials/bonus-data-2024.php'));
 @endphp
 
-@php
-$productSkus = ['new-piano-players-start-here', '30-day-blues-piano', '30-days-to-better-technique'];
-$products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(function ($a, $b) use ($productSkus) {
-    return array_search($a->sku, $productSkus) - array_search($b->sku, $productSkus);
-});
-@endphp
-
-
-
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -90,7 +81,11 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
 @section('body-data')
     x-data="{
     trailer: false,
-    modal913081651: false,
+    modal798501810: false,
+    modal823788317: false,
+    modal852795615: false,
+    modal928599834: false,
+    modal1008560089: false,
     }"
 @endsection
 
@@ -108,10 +103,23 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
           <div class="container max-w-6xl mx-auto relative z-20">
+                @if(!empty($ultimate))
+                <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                @elseif(!empty($lifetime))
+                <img class="h-6 md:h-8  my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
+                @else
+                <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                @endif
+                @if(!empty($ultimate) || !empty($lifetime))
             <h2 class="relative w-auto inline-block leading-tight">
-                <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="hidden sm:inline">
-                start playing the piano.
+                <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
+                start <br class="hidden sm:inline">playing the piano.
             </h2>
+                @else
+             <h2 class="relative w-auto inline-block leading-tight">
+                <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
+            </h2>
+            @endif
             <h6 class="my-5 sm:my-6"><em>Get the best beginner digital piano kit PLUS</em></h6>
             <p class="text-sm leading-normal mb-5 lg:mb-7">
                 <i class="fas fa-check text-pianote"></i> An Annual Pianote Membership
@@ -140,11 +148,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
             </div>
         </div>
         </div>
-         @if(!empty($ultimate))
-            <div class="top-0 left-0 absolute w-full h-full z-10 opacity-60" style="background: linear-gradient(45deg, #A80011, #310A58 40%);"></div>
-        @else
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
-        @endif
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
             src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
     </header>
@@ -163,72 +167,67 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                 <br><br>
                 Introducing…
             </p>
-            <img class="h-10 md:h-16 my-6" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-prima.svg">
-            <img class="w-full max-w-5xl" src="">
         </div>
+        <img class="w-full max-w-5xl -mt-10 lg:-mt-36 hidden md:block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/2000x0/filters:quality(95)/marketing/pianote/products/prima/piano-features.webp">
+        <img class="w-full max-w-5xl -mt-10 lg:-mt-36 block md:hidden mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/piano-features-m.webp">
     </section>
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative"
-    @if(!empty($ultimate)) style="background: #1D1B1B; color:#fff" @endif style="background: #F1EFED;"
+
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background: #F1EFED;"
     >
         <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-3"><strong>Premium Features. Beginner Price.</strong></h2>
             @php
                 $items = [
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-01.mp4',
                     'title' => '88-Key Progressive Hammer Action',
                     'desc' => 'The fully weighted hammer-action keys mimic the feel of a real piano, providing a heavier touch in the lower registers and a lighter touch for the high notes<br><br>Whether you\'re playing simple scales or tackling more advanced pieces, the Prima’s keys offer a realistic feel that builds strength and dexterity, giving you the confidence to play on any piano.',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-02.mp4',
                     'title' => 'Seamless Connection to Your Lessons &  Music',
                     'desc' => 'With Bluetooth audio and MIDI, you can wirelessly connect the Prima to your tablet or phone for easy access to your Pianote lessons. Or stream music directly through the piano’s speakers.<br><br>Imagine streaming your favorite song directly through the piano’s speakers and playing along. With Prima, you can connect to lessons or jam sessions without any messy cables.',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-03.mp4',
 
                     'title' => 'A World of Sound at Your Fingertips',
                     'desc' => 'With 238 different tones, from classic grand pianos to strings, organs, and more, the Prima gives you endless options for creativity.<br><br>Switch between piano and strings, or experiment with jazz organ and orchestral sounds. The variety will keep you inspired and motivated to practice.',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-04.mp4',
                     'title' => 'Hear Every Note in Full, Rich Detail',
                     'desc' => 'The built-in stereo speakers are designed to fill your space with clear, balanced sound, while the stereo headphone jack ensures that you can practice privately without sacrificing sound quality.<br><br>Whether you’re practicing quietly late at night or performing for friends, the Prima delivers rich, concert-quality sound that brings your music to life.',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-05.mp4',
                     'title' => 'True Piano Sustain Pedal',
                     'desc' => 'Unlike the cheap plastic pedals that come with many beginner digital pianos, the Prima features a premium sustain pedal that feels just like a real acoustic piano pedal.<br><br>You’ll feel the difference immediately. It responds naturally to your touch, helping you develop the same techniques you would on a traditional acoustic piano.',
                     ],
                     [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
-                    'title' => 'Lightweight and Portable',
-                    'desc' => 'The Prima is easy to move around your home or take with you on the go. Whether you want to practice in different rooms, store it when not in use, or even take it to a friend\'s house or a class, you’ll have the flexibility to play wherever inspiration strikes.<br><br>At just [insert weight here], the Prima is easy to carry and set up anywhere, making it ideal for those with limited space or busy lives.',
-                    ],
-                    [
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/features-02.webp',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-06.mp4',
                     'title' => 'Keep Perfect Time, Your Way',
                     'desc' => 'With four distinct metronome sounds, the Prima helps you develop a strong sense of rhythm, a critical skill for every pianist.<br><br>Choose from different metronome sounds to keep your practice engaging and help you stay on beat, no matter what style of music you’re playing.',
                     ],
                 ];
             @endphp
-            @foreach ($items as $index => $item)
-                <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
-                    @if ($index % 2 == 0)
-                        <img class="w-full sm:w-6/12 lg:w-1/2 rounded-xl overflow-hidden transition-opacity opacity-0 order-1 sm:order-1"
-                            loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $item['img'] }}" alt="{{ $item['title'] }}">
-                    @else
-                        <img class="w-full sm:w-6/12 lg:w-1/2 rounded-xl overflow-hidden transition-opacity opacity-0 order-1 sm:order-2"
-                            loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $item['img'] }}" alt="{{ $item['title'] }}">
-                    @endif
+           @foreach ($items as $index => $item)
+            <div class="text-left flex flex-col sm:flex-row justify-center items-center md:py-10">
+                @if ($index % 2 == 0)
+                    <video class="w-full sm:w-6/12 lg:w-1/2 rounded-xl order-1 sm:order-1" src="{{ $item['video'] }}" type="video/mp4" autoplay muted loop>
+                    </video>
+                @else
+                    <video class="w-full sm:w-6/12 lg:w-1/2 rounded-xl order-1 sm:order-2" src="{{ $item['video'] }}" type="video/mp4" autoplay muted loop>
+                    </video>
+                @endif
 
-                    <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 {{ $index % 2 == 0 ? 'sm:pl-4 md:pl-10' : 'sm:pr-4 md:pr-10' }} order-2 sm:order-1">
-                        <div>
-                            <h6 class="leading-tight mx-0 my-2 sm:my-4"><strong>{{ $item['title'] }}</strong></h6>
-                            <p class="leading-normal max-w-xl">{!! $item['desc'] !!}</p>
-                        </div>
+                <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 {{ $index % 2 == 0 ? 'sm:pl-4 md:pl-10' : 'sm:pr-4 md:pr-10' }} order-2 sm:order-1">
+                    <div>
+                        <h6 class="leading-tight mx-0 my-2 sm:my-4"><strong>{{ $item['title'] }}</strong></h6>
+                        <p class="leading-normal max-w-xl">{!! $item['desc'] !!}</p>
                     </div>
                 </div>
+            </div>
             @endforeach
 
         </div>
@@ -337,37 +336,35 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"
-        @if(!empty($ultimate)) style="background: #000; color:#fff;" @endif style="background: #F1EFED; color:#000;"
-    >
-     <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"style="background: #F1EFED; color:#000;">
+            <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
             <div class="container mx-auto z-10 relative max-w-3xl">
         
                 @php
                     $sections = [
                         [
-                            'image' => '',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/bundle/10-level.webp',
                             'header' => '10-Level <br class="hidden md:block">Curriculum',
                             'subheader' => 'The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers.'
                         ],
                         [
-                            'image' => '',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/bundle/guided.webp',
                             'header' => 'Guided 30-Day <br class="hidden md:block">Challenges',
                             'subheader' => 'Practice and play WITH your teacher. Choose a 30-Day Challenge to work on a specific skill and see the results in just 30 days.'
                         ],
                         [
-                            'image' => '',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/bundle/daily.webp',
                             'header' => 'Daily Practice <br class="hidden md:block">Workouts',
                             'subheader' => 'Not sure what to practice? Pick a 5, 10, or 15-minute routine and practice with a REAL teacher. It’s like Peloton for your piano.'
                         ],
                         [
-                            'image' => '',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/bundle/favorite.webp',
                             'header' => 'Your Favorite <br class="hidden md:block">Songs',
                             'subheader' => 'You play piano to play songs! Learn and play your favorites from our massive library. Then make them sound beautiful on your new Prima piano.'
                         ],
                         [
-                            'image' => '',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/1000x0/filters:quality(95)/marketing/pianote/products/prima/bundle/piano-players.webp',
                             'header' => 'The World’s Best <br class="hidden md:block"> Piano Players',
                             'subheader' => 'Learn from legends and connect with real, friendly piano teachers who care about your goals.'
                         ]
@@ -378,152 +375,106 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                     @foreach ($sections as $index => $section)
                         <div class="bg-white shadow-md text-black rounded-xl p-6 lg:p-12 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 border-[#DAD4CC] border">
                             @if ($index % 2 !== 0)
-                                <img src="{{ $section['image'] }}" alt="" class="w-full md:w-1/2 rounded-lg object-cover">
-                                <div class="flex flex-col justify-center md:w-1/2 text-left">
+                                <div class="order-2 md:order-1 md:w-1/2 py-4 sm:p-8 md:p-0">
+                                    <img src="{{ $section['image'] }}" alt="" class="w-full rounded-lg object-cover">
+                                </div>
+                                <div class="order-1 md:order-2 flex flex-col justify-center md:w-1/2 text-left md:px-4">
                                     <h3 class="leading-none"><strong>{!! $section['header'] !!}</strong></h3>
-                                    <hr class="border-[#DAD4CC] my-2">
+                                    <hr class="border-[#DAD4CC] my-2 lg:my-4 border">
                                     <p class="leading-snug">{{ $section['subheader'] }}</p>
                                 </div>
                             @else
-                                <div class="flex flex-col justify-center md:w-1/2 text-left">
+                                <div class="order-1 md:order-1 flex flex-col justify-center md:w-1/2 text-left md:px-4">
                                     <h3 class="leading-none"><strong>{!! $section['header'] !!}</strong></h3>
-                                    <hr class="border-[#DAD4CC] my-2 lg:my-4">
+                                    <hr class="border-[#DAD4CC] my-2 lg:my-4 border">
                                     <p class="leading-snug">{{ $section['subheader'] }}</p>
                                 </div>
-                                <img src="{{ $section['image'] }}" alt="" class="w-full md:w-1/2 rounded-lg object-cover">
+                                <div class="order-2 md:order-2 md:w-1/2 py-4 sm:p-8 md:p-0">
+                                    <img src="{{ $section['image'] }}" alt="" class="w-full rounded-lg object-cover">
+                                </div>
                             @endif
                         </div>
                     @endforeach
                 </div>
             </div>
+    </section>
+
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative @if(empty($lifetime) && empty($ultimate)) hidden @endif">
+            <div class="container mx-auto z-10 relative max-w-5xl">
+                <h2 class="leading-tight"><strong>Complete the setup.</strong></h2>
+                <p class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</p>
+                <img class="w-full max-w-5xl rounded-xl px-2" src="https://d21q7xesnoiieh.cloudfront.net/1200x0/filters:quality(95)/marketing/pianote/products/prima/setup-01.webp">
+                <div class="flex flex-wrap text-left pt-4">
+                    <div class="w-full sm:w-1/2 px-2">
+                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/setup-02.webp">
+                        <h6 class="pt-4"><strong>The Prima Keyboard Stand</strong></h6>
+                        <p class="lg:pr-6">This double braced "X" style keyboard stand is lightweight but very strong.<br><br>Adjusting this stand to the perfect height is easy, thanks to the trigger style latch- you can do it with a single finger!</p>
+                    </div>
+                    <div class="w-full sm:w-1/2 px-2">
+                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/setup-03.webp">
+                        <h6 class="pt-4"><strong>The Prima Bench</strong></h6>
+                        <p class="lg:pr-6">This compact heavy duty bench is comfortable, adjustable and portable.<br><br>It folds flat for storage or transport, and is height adjustable to help you find that perfect position for practice and performance!</p>
+                    </div>
+                </div>
+                @if (!empty($ultimate))
+                <div class="flex flex-wrap text-left pt-4">
+                    <div class="w-full sm:w-1/2 px-2">
+                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-04.webp">
+                        <h6 class="pt-4"><strong>The Pianote Metronome</strong></h6>
+                        <p class="lg:pr-6">Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.<br><br>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust.</p>
+                    </div>
+                    <div class="w-full sm:w-1/2 px-2">
+                        <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-05.webp">
+                        <h6 class="pt-4"><strong>The Music Theory Poster Bundle</strong></h6>
+                        <p class="lg:pr-6">Connecting what you see on a page to the keys can feel like a giant leap.<br><br>That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.</p>
+                    </div>
+                </div>
+                @endif
+            </div>
         </section>
 
-   
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative @if(empty($lifetime) && empty($ultimate)) hidden @endif"
-        @if(!empty($ultimate)) style="background: #1D1B1B; color:#fff" @endif>
-        <div class="container mx-auto z-10 relative max-w-4xl">
-            <h2 class="leading-tight"><strong>Complete the setup.</strong></h2>
-            <p class="leading-tight my-5">Add the essential practice tools you need for the ultimate home practice space.</p>
-            <img class="w-full max-w-5xl" src="">
-            <div class="flex flex-wrap text-left">
-                <div class="w-1/2 px-2">
-                    <img class="rounded-xl">
-                    <h6><strong>The Prima Keyboard Stand</strong></h6>
-                    <p>This double braced "X" style keyboard stand is lightweight but very strong.<br><br>Adjusting this stand to the perfect height is easy, thanks to the trigger style latch- you can do it with a single finger!</p>
-                </div>
-                <div class="w-1/2 px-2">
-                    <img class="rounded-xl">
-                    <h6><strong>The Prima Bench</strong></h6>
-                    <p>This compact heavy duty bench is comfortable, adjustable and portable.<br><br>It folds flat for storage or transport, and is height adjustable to help you find that perfect position for practice and performance!</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap text-left">
-                <div class="w-1/2 px-2">
-                    <img class="rounded-xl">
-                    <h6><strong>The Pianote Metronome</strong></h6>
-                    <p>Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.<br><br>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust.</p>
-                </div>
-                <div class="w-1/2 px-2">
-                    <img class="rounded-xl">
-                    <h6><strong>The Music Theory Poster Bundle</strong></h6>
-                    <p>Connecting what you see on a page to the keys can feel like a giant leap.<br><br>That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.</p>
-                </div>
+    @php
+        $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+    @endphp
+
+    <section class="pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">        
+    <div class="container mx-auto max-w-5xl">
+            <div class="space-y-4 md:space-y-8">
+                @foreach($packs as $pack)
+                    @if(in_array($pack['sku'], $targetSkus))
+                        <div class="rounded-xl overflow-hidden">
+                            <div class="flex flex-col md:flex-row h-full">
+                                <div class="relative w-full md:w-5/12 lg:w-1/2 rounded-2xl">
+                                    <div class="aspect-video relative cursor-pointer">
+                                        <img 
+                                            src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/{{ $pack['image'] }}"
+                                            alt="{{ $pack['header'] }}"
+                                            class="w-full h-full object-cover rounded-2xl"
+                                            @if(!empty($pack['vimeoId'])) @click="modal{{ $pack['vimeoId'] }} = true" @endif
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="p-4 sm:px-4 sm:py-0 md:w-7/12 lg:w-1/2 flex flex-col justify-center lg:px-10">
+                                    <h5 class="mb-2"><strong>{!! $pack['header'] !!}</strong>
+                                    </h5>
+                                    <div class="flex items-center space-x-2 mb-4">
+                                        <span class="text-lg line-through opacity-30"><strong>${{ $pack['price'] }}</strong></span>
+                                        <span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
+                                            {{ $pack['badge'] }}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {!! $pack['description'] !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>
-
-@php
-    $targetSkus = ['new-piano-players', 'easy-chords', '30-day-blues-piano'];
-@endphp
-
-<section class="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 {{ !empty($ultimate) ? 'bg-black text-white' : 'bg-white text-black' }} {{ !empty($lifetime) ? 'hidden' : '' }}">
-    <div class="container mx-auto max-w-5xl">
-        <div class="space-y-6">
-            @foreach($packs as $pack)
-                @if(in_array($pack['sku'], $targetSkus))
-                    <div class="rounded-xl overflow-hidden">
-                        <div class="flex flex-col md:flex-row h-full">
-                            <div class="relative w-full md:w-3/5 rounded-2xl">
-                                <div class="aspect-video relative">
-                                    <img 
-                                        src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/{{ $pack['image'] }}"
-                                        alt="{{ $pack['header'] }}"
-                                        class="w-full h-full object-cover rounded-2xl"
-                                        @if(!empty($pack['vimeoId'])) @click="modal{{ $pack['vimeoId'] }} = true" @endif
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="p-6 md:w-2/5 flex flex-col justify-center lg:p-10">
-                                <h4 class="mb-2"><strong>
-                                    {!! $pack['header'] !!}
-                                    </strong>
-                                </h4>
-                                <div class="flex items-center space-x-2 mb-4">
-                                    <span class="text-lg line-through opacity-20"><strong>${{ $pack['price'] }}</strong></span>
-                                    <span class="px-2 py-1 bg-musora text-black text-sm font-bold rounded">
-                                        {{ $pack['badge'] }}
-                                    </span>
-                                </div>
-                                <p class="mb-3">
-                                    {!! $pack['subheader'] !!}
-                                </p>
-                                <p>
-                                    {{ $pack['description'] }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- Pulling from nova --}}
-
-<section class="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 {{!empty($ultimate) ? 'bg-black text-white' : 'bg-white text-black'}} {{!empty($lifetime) ? 'hidden' : ''}}">
-    <div class="container mx-auto max-w-5xl">
-        <div class="space-y-6">
-            @foreach($products as $product)
-            <div class="rounded-xl overflow-hidden">
-                <div class="flex flex-col md:flex-row h-full">
-                    <div class="relative w-full md:w-3/5 rounded-2xl">
-                        <div class="aspect-video relative">
-                            <img 
-                                src="{{ $product->thumbnail }}"
-                                alt="{{ $product->name }}"
-                                class="w-full h-full object-cover rounded-2xl"
-                                style="object-fit: cover;"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="p-6 md:w-2/5 flex flex-col justify-center lg:p-10">
-                        <h2 class="text-2xl font-bold mb-2">
-                            {{ $product->name }}
-                        </h2>
-                        <div class="flex items-center space-x-2 mb-4">
-                            <span class="text-lg line-through opacity-20">${{ $product->price }}</span>
-                                <span class="px-2 py-1 bg-musora text-black text-sm font-bold rounded">
-                                    FREE BONUS
-                                </span>
-                        </div>
-                        <p class="mb-3">
-                            {{ $product->short_desc }}
-                        </p>
-                        <p>
-                            {{ $product->bundle_desc }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-    
     
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white"
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
@@ -531,13 +482,18 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
             <h2 class="leading-tight"><strong>Peace of mind - guaranteed.</strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day lessons guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
             @if(!empty($lifetime))
-
+                <picture>
+                    <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
+                    <img class="transition-opacity opacity-0 h-20 sm:h-36" alt="icon" loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
+                </picture>
             @else
                 <picture>
-                    <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
+                    <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/bundle/warranty.webp">
                     <img class="transition-opacity opacity-0 h-16 sm:h-36" alt="icon" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/kit/guarantee.png">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/warranty.webp">
                 </picture>
             @endif
         </div>
@@ -549,36 +505,52 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
             <div class="container mx-auto relative z-10 max-w-3xl">
                 <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
                         @include('drumeo.products.partials._order-card', [
-                            'header' => 'Pianote Headphones',
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order.webp',
-                            'imageHeight' => 'h-28 lg:h-32',
+                            'header' => 'The Pianote PRIMA',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-01.webp',
+                            'imageHeight' => 'h-24 lg:h-28 px-4',
                             'fullPrice' => "$" . floatval($productPrices['practice-kit']->price),
                             'price' => "$" . floatval($productPrices['practice-kit']->discounted_price),
-                            'specialText' => 'One-time payment.',
-                            'cta' => 'SELECT',
+                            'specialText' => 'Free Shipping in the USA<br>*Discounted rates elsewhere',
+                            'cta' => 'BUY NOW',
+                            'highlightBorder' => true,
                             'link' => '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1',
                             'bonuses' => [
-                                '<strong>1 Pair of Pianote Headphones</strong>',
-                                '1.8m cable',
-                                '6.3mm stereo adapter',
+                                '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
+                                '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
+                                '<i class="fas fa-check text-pianote mr-1"></i> Stereo Speakers',
+                                '<i class="fas fa-check text-pianote mr-1"></i> Double Headphone Jack',
+                                '<i class="fas fa-check text-pianote mr-1"></i> Bluetooth Connectivity',
+                                '<i class="fas fa-check text-pianote mr-1"></i> 4 Built-in Metronomes',
+                                '<i class="fas fa-check text-pianote mr-1"></i> 238 Built-in Sounds',
+                                '<i class="fas fa-check text-pianote mr-1"></i> True Piano Sustain Pedal',
+                                '<i class="fas fa-check text-pianote mr-1"></i> Music Stand Included',
+                                '<i class="fas fa-check text-pianote mr-1"></i> USB MIDI and Audio In/Out',
                             ],
                         ])
                         @include('drumeo.products.partials._order-card', [
                            'firstOnMobile' => true,
-                           'header' => 'Headphones + 1 Year<br>Pianote Membership',
-                           'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
-                           'imageHeight' => 'h-28 lg:h-32',
-                           'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                           'specialText' => 'With Annual Membership of $240/yr',
-                           'cta' => 'SELECT',
+                           'header' => 'Add a Bench & Stand',
+                           'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-02.webp',
+                           'imageHeight' => 'h-24 lg:h-28',
+                           'price' => '$750',
+                           'specialText' => 'Free Shipping in the USA *Discounted rates elsewhere',
+                           'cta' => 'BUY NOW',
+                           'highlightBorder' => true,
                            'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
-                           'bonuses' => [
-                               '<strong>Everything included with the<br>Headphones PLUS:</strong>',
-                               'Step-by-Step Lessons',
-                               'Personalized Support',
-                               'Song Tutorials',
-                               'World-Class Instructors',
-                           ],
+                            'bonuses' => [
+                            '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Prima Keyboard Stand',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Prima Piano Bench',
+                            '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Stereo Speakers',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Double Headphone Jack',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Bluetooth Connectivity',
+                            '<i class="fas fa-check text-pianote mr-1"></i> 4 Built-in Metronomes',
+                            '<i class="fas fa-check text-pianote mr-1"></i> 238 Built-in Sounds',
+                            '<i class="fas fa-check text-pianote mr-1"></i> True Piano Sustain Pedal',
+                            '<i class="fas fa-check text-pianote mr-1"></i> Music Stand Included',
+                            '<i class="fas fa-check text-pianote mr-1"></i> USB MIDI and Audio In/Out',
+                        ],
                        ])
                     </div>
             </div>
@@ -607,11 +579,11 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
-                                <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
-                                <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
+                                <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order-ultimate.webp">
+                                <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order-ultimate.webp">
                                 <img class="transition-opacity opacity-0 w-full" alt="icon" loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-lifetime.png">
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order-ultimate.webp">
                             </picture>
                         @else
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
@@ -630,11 +602,11 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
-                                <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
-                                <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
+                                <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order.webp">
+                                <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order.webp">
                                 <img class="transition-opacity opacity-0 w-full" alt="icon" loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/products/prima/bundle/order.webp">
                             </picture>
                         @endif
                     </div>
@@ -680,8 +652,28 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'modal913081651',
-        'video' => '913081651',
+        'name' => 'modal798501810',
+        'video' => '798501810',
+        'vimeo' => true,
+    ])
+     @include('_partials.components.video-modal',[
+        'name' => 'modal823788317',
+        'video' => '823788317',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'modal852795615',
+        'video' => '852795615',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'modal928599834',
+        'video' => '928599834',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'modal1008560089',
+        'video' => '1008560089',
         'vimeo' => true,
     ])
 
