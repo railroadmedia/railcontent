@@ -21,8 +21,7 @@
             <!-- Challenge Logo -->
             <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
-            <div v-if="hasMissedLessons" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5 tw-text-[#F61A30]">You've Missed {{ missedLessons }} Lesson<span v-if="missedLessons > 1">s</span>.</div>
-            <div v-else-if="isNextLessonLocked" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">{{ nextLessonShortName }} Unlocks In {{ countdownString }}</div>
+            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasChallengeStarted && hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
             <MuButton class="tw-px-6" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
@@ -36,12 +35,12 @@
             <div class="tw-relative">
                 <div class="tw-mx-[44px] 3xl:tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px]">
                     <!-- Thumbnail (Video ratio) -->
-                    <img class="tw-w-full tw-hidden 3xl:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
+                    <img class="tw-w-full tw-hidden 3xl:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
                     <!-- TODO(challenge): square thumbnail-->
                     <img class="tw-w-full 3xl:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
                     <!-- Lock Overlay -->
-                    <div v-if="isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
+                    <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
                     </div>
                 </div>
@@ -147,7 +146,7 @@
     </div>
 
     <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" />
-    <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" :challenge="challenge" />
+    <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" :challenge="challenge" @on-leave-challenge="id => emit('onRemoveChallenge', id)" />
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
@@ -170,6 +169,8 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['onRemoveChallenge'])
+
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
@@ -185,8 +186,32 @@ const isSoloChallenge = computed(() => {
     return props.challenge.is_solo === 'solo';
 })
 
+const hasChallengeStarted = computed(() => {
+    return props.challenge.progress_percent > 0;
+})
+
 const challengeTitle = computed(() => {
     return props.challenge.title;
+})
+
+const actionText = computed(() => {
+    if(!hasChallengeStarted.value){
+        //TODO(challenge): update start date
+        return `You're enrolled! Lessons begin ${props.challenge.start_date}`;
+    } else if(hasMissedLessons.value){
+        return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
+    } else if(isNextLessonLocked){
+        return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
+    }
+})
+
+const challengeThumbnail = computed(() => {
+    if(!hasChallengeStarted.value){
+        return props.challenge.thumbnail
+    } else {
+        //TODO(challenge): need to add conditional when current lesson is not completed
+        return props.challenge.next_lesson.thumbnail;
+    }
 })
 
 const isNextLessonLocked = computed(() => {
@@ -220,20 +245,23 @@ const missedLessons = computed(() => {
 const ctaObj = computed(() => {
     const obj = {};
 
-    //TODO(challenge): need to add conditional when the first lesson is locked
-    //obj.icon = 'fa-solid fa-arrow-right-long';
-    // obj.iconLocation = 'right';
-
-    if(!isNextLessonLocked.value){
+    if(isNextLessonLocked.value){
+        if(!hasChallengeStarted.value){
+            obj.text = 'View Challenge';
+            obj.url = props.challenge.web_url_path;
+            obj.icon = 'fa-solid fa-arrow-right-long';
+             obj.iconLocation = 'right';
+        } else {
+            //TODO(challenge): need to add conditional when current lesson is completed
+            obj.text = `Replay ${props.challenge.current?.short_name}`;
+            obj.url = props.challenge.current?.web_url_path;
+            obj.icon = 'fas fas fa-redo-alt';
+            obj.iconLocation = 'left';
+        }
+    } else {
         obj.text = `Start ${nextLessonShortName.value}`;
         obj.url = props.challenge.next_lesson.web_url_path;
         obj.icon = 'fas fa-play';
-        obj.iconLocation = 'left';
-    } else {
-        //TODO(challenge): need to update current field after Adrian's update
-        obj.text = `Replay ${props.challenge.current?.short_name}`;
-        obj.url = props.challenge.current?.web_url_path;
-        obj.icon = 'fas fas fa-redo-alt';
         obj.iconLocation = 'left';
     }
 
