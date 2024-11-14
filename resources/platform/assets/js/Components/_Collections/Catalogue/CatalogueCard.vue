@@ -135,7 +135,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
+import { computed, onUnmounted, ref, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -146,6 +146,7 @@ import { useUserStore } from '@stores/user';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 import userJourney from '@services/userJourney';
 import { usePlatformStore } from "../../../Stores/platform";
+import { getProgressPercentage } from 'musora-content-services';
 
 //Pinia Stores
 const userStore = useUserStore();
@@ -225,6 +226,9 @@ const state = reactive({
         opacity: 0,
     }
 });
+
+//refs
+const lesson_progress = ref(0);
 
 //-----------Static Data-----------//
 const dropdownOptions = [
@@ -380,17 +384,6 @@ const getPublishedOn = (item) => {
     return dt.setZone('America/Los_Angeles').toFormat('LLL dd, yyyy');
 }
 
-
-onMounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.addEventListener('scroll', closeDropdown);
-});
-
-onUnmounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.removeEventListener('scroll', closeDropdown);
-});
-
 const emit = defineEmits(['addToList', 'progressReset']);
 
 const handleClick = (event) => {
@@ -413,4 +406,23 @@ const handleClick = (event) => {
         }
     }
 }
+
+onMounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.addEventListener('scroll', closeDropdown);
+});
+
+onBeforeMount( () => {
+    getProgressPercentage(props.item.id).then(value => {
+        lesson_progress.value = value;
+    }).catch( error => {
+        console.log('Error getting lesson_progress', error)
+    })
+})
+
+onUnmounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.removeEventListener('scroll', closeDropdown);
+});
+
 </script>
