@@ -19,6 +19,14 @@ enum AwardTier: string
     case BRONZE = 'bronze';
 }
 
+enum ChallengeUserProgressStatus: string
+{
+    case COMPLETED = 'completed';
+    case NOTSTARTED = 'not_started';
+    case ACTIVE = 'active';
+    case INPROGRESS = 'in_progress';
+}
+
 
 /**
  * App\Modules\Content\Models\Content
