@@ -11,7 +11,7 @@
                 <ul v-if="showDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>View Details</button></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave 30-Day Drummer</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
             </div>
         </div>
@@ -19,9 +19,14 @@
         <!-- Left -->
         <div class="tw-shrink-0 tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
-            <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" />
-            <div class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">Day 2 Unlocks In 22:12</div>
-            <MuButton class="tw-px-6"><musora-icon class="tw-w-[20px] tw-mr-2 -tw-scale-x-100" icon-name="reset" />Repeat day 25</MuButton>
+            <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
+            <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <div v-if="hasMissedLessons" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5 tw-text-[#F61A30]">You've Missed {{ missedLessons }} Lesson<span v-if="missedLessons > 1">s</span>.</div>
+            <div v-else-if="isNextLessonLocked" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5">{{ nextLessonShortName }} Unlocks In {{ countdownString }}</div>
+            <MuButton class="tw-px-6" :href="ctaObj?.url">
+                <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
+                {{ ctaObj?.text }}
+            </MuButton>
         </div>
         <!-- Right -->
         <div class="tw-grow 2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end">
@@ -31,11 +36,12 @@
             <div class="tw-relative">
                 <div class="tw-mx-[44px] 3xl:tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px]">
                     <!-- Thumbnail (Video ratio) -->
-                    <img class="tw-w-full tw-hidden 3xl:tw-block" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/s02-2-1675375801.jpg" />
+                    <img class="tw-w-full tw-hidden 3xl:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
-                    <img class="tw-w-full 3xl:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/30DDSquare.png" />
-                    <!-- Overlay -->
-                    <div class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
+                    <!-- TODO(challenge): square thumbnail-->
+                    <img class="tw-w-full 3xl:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
+                    <!-- Lock Overlay -->
+                    <div v-if="isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
                     </div>
                 </div>
@@ -44,7 +50,7 @@
                     <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 4xl:tw-pl-3 tw-pr-1 4xl:tw-pr-4 tw-flex tw-items-center tw-relative">
                         <Vue3Lottie class="tw-w-10 3xl:tw-w-[46px] -tw-ml-1 -tw-mr-1 3xl:tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                         <div class="tw-flex-grow">
-                            <div class="tw-font-extrabold">1</div>
+                            <div class="tw-font-extrabold">{{ streak }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Day Streak
                                 <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('streak')"></musora-icon>
@@ -56,7 +62,7 @@
                         <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
                         <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                         <div class="tw-flex-grow">
-                            <div class="tw-font-extrabold">2</div>
+                            <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Rest Days
                                 <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('rest')"></musora-icon>
@@ -69,7 +75,7 @@
 
         <!-- Progress Bar -->
         <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#223F57]">
-            <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:40%`">40%</div>
+            <div class="tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold" :class="progressPercent > 0 ? `tw-bg-${brand}` : `tw-w-auto tw-pl-2`" :style="`width:${progressPercent}%`">{{ progressPercent }}%</div>
         </div>
     </div>
 
@@ -141,20 +147,28 @@
     </div>
 
     <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" />
-    <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" />
+    <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" :challenge="challenge" />
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
+import { countdown } from "@collections/ChallengeCarousel/countdown";
 
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
 import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
 import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
+
+const props = defineProps({
+    challenge: {
+        type: Object,
+        required: true
+    }
+})
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -163,8 +177,68 @@ const showDropdown = ref(false);
 const isNotificationModalOpen = ref(false);
 const isLeaveModalOpen = ref(false);
 const infoModalType = ref('');
+const countdownString = ref('');
 
 const circumference = 2 * 22 / 7 * 108;
+
+const isSoloChallenge = computed(() => {
+    return props.challenge.is_solo === 'solo';
+})
+
+const challengeTitle = computed(() => {
+    return props.challenge.title;
+})
+
+const isNextLessonLocked = computed(() => {
+    return props.challenge.next_lesson.is_locked;
+})
+
+const nextLessonShortName = computed(() => {
+    return props.challenge.next_lesson.short_name;
+})
+
+const streak = computed(() => {
+    return props.challenge.current_streak;
+})
+
+const restDays = computed(() => {
+    return props.challenge.rest_days;
+})
+
+const progressPercent = computed(() => {
+    return props.challenge.progress_percent;
+})
+
+const hasMissedLessons = computed(() => {
+    return props.challenge.missed_lessons > 0;
+})
+
+const missedLessons = computed(() => {
+    return props.challenge.missed_lessons;
+})
+
+const ctaObj = computed(() => {
+    const obj = {};
+
+    //TODO(challenge): need to add conditional when the first lesson is locked
+    //obj.icon = 'fa-solid fa-arrow-right-long';
+    // obj.iconLocation = 'right';
+
+    if(!isNextLessonLocked.value){
+        obj.text = `Start ${nextLessonShortName.value}`;
+        obj.url = props.challenge.next_lesson.web_url_path;
+        obj.icon = 'fas fa-play';
+        obj.iconLocation = 'left';
+    } else {
+        //TODO(challenge): need to update current field after Adrian's update
+        obj.text = `Replay ${props.challenge.current?.short_name}`;
+        obj.url = props.challenge.current?.web_url_path;
+        obj.icon = 'fas fas fa-redo-alt';
+        obj.iconLocation = 'left';
+    }
+
+    return obj;
+})
 
 const closeDropdown = () => {
     showDropdown.value = false;
@@ -191,4 +265,31 @@ const closeLeaveModal = () => {
 const updateInfoModalType = (type) => {
     infoModalType.value = type;
 }
+
+const runCountDown = (stop = false) => {
+    const intervalCountdown = setInterval(() => {
+        const count = countdown(props.completionData?.next_lesson?.unlock_date);
+        countdownString.value = count;
+
+        if(count === '00:00'){
+            clearInterval(intervalCountdown);
+        }
+    }, 1000)
+
+    if(stop){
+        clearInterval(intervalCountdown);
+    }
+}
+
+onMounted(() => {
+    if(isNextLessonLocked.value){
+        runCountDown();
+    }
+})
+
+onUnmounted(() => {
+    if(isNextLessonLocked.value){
+        runCountDown(true);
+    }
+})
 </script>
