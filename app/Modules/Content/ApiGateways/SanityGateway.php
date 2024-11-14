@@ -85,7 +85,8 @@ class SanityGateway
         ],
         'playlist-item' => [
             "'type': _type",
-            '"instructors": instructor[]->{
+            '"instructors": instructor[]->name',
+            '"instructors_details": instructor[]->{
                     "id":railcontent_id,
                     name,
                     short_bio,
