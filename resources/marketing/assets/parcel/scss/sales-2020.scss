@@ -240,6 +240,17 @@ img {
             }
         }
 
+        &.musora {
+            border-color: $muGold;
+            color: $muGold;
+
+            &:hover,
+            &:focus {
+                background: $muGold;
+                color: #fff;
+            }
+        }
+
         &.black {
             border-color: #000;
             color: #000;
