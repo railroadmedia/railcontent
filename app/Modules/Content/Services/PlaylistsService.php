@@ -2,6 +2,7 @@
 
 namespace Modules\Content\Services;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
@@ -177,9 +178,90 @@ class PlaylistsService
                 $data = array_merge($data, $extraData);
             }
         }
-
-
         return $data;
+    }
+    /**
+     * @param mixed                               $sort
+     * @param \App\Modules\Brand\Enums\Brand|null $brand
+     * @param mixed                               $term
+     * @param mixed                               $limit
+     * @param mixed                               $page
+     * @param mixed                               $itemIdToCheck
+     * @return array
+     */
+    public function getPlaylists(mixed $sort, ?Brand $brand, mixed $term, mixed $limit, mixed $page, mixed $itemIdToCheck = null): array
+    {
+        $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn    = trim($sort, '-');
+        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress', 'most_recent', 'pinned'])) {
+            $orderByColumn = 'id';
+        }
+
+        $user = user();
+
+        $playlists    = UserPlaylist::with('items')
+            ->where('railcontent_user_playlists.user_id', $user->id)
+            ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
+            ->searchTerm($term)
+            ->sortBy($orderByColumn, $orderByDirection)
+            ->paginate($limit, ['*'], 'page', $page);
+        $totalResults = $playlists->total();
+
+        if ($itemIdToCheck) {
+            $playlists->getCollection()->map(function ($playlist) use ($itemIdToCheck) {
+                $playlist->is_added_to_playlist = $playlist->items->pluck('content_id')->contains($itemIdToCheck);
+
+                return $playlist;
+            });
+        }
+
+        // Formatting durations and URLs for playlists
+        $playlists = $this->formatPlaylists($playlists->items());
+
+        // Filter options processing
+        $filterOptions      = UserPlaylist::filterOptions($user->id, $brand, $term)->get();
+        $filterOptionsArray = $this->processFilterOptions($filterOptions);
+
+        // Final results structure
+        $results = [
+            'data' => $playlists,
+            'meta' => [
+                'filterOptions' => $filterOptionsArray,
+                'limit'         => $limit,
+                'page'          => $page,
+                'totalResults'  => $totalResults
+            ]
+        ];
+
+        return $results;
+    }
+    /**
+     * Format the playlists with durations and URLs.
+     *
+     * @param array $playlists The playlists to format.
+     * @return array The formatted playlists.
+     */
+    private function formatPlaylists(array $playlists): array
+    {
+
+        foreach ($playlists as $index => $playlist) {
+            $playlists[$index] = $playlist->toArray();
+            $minsec                                 = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
+            $hours                                  = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
+            $playlists[$index]['duration_formated'] = ($hours == 0) ? $minsec : $hours . ':' . $minsec;
+            $playlists[$index]['url']               =
+                url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
+
+            $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
+                'playlistId' => $playlist['id'],
+            ]);
+
+            $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : '';
+            $playlists[$index]['total_items'] = count($playlist['items']);
+            $playlists[$index]['thumbnail_url'] = $playlists[$index]['thumbnail_url'] ?? $playlists[$index]['first_item_thumbnail_url'];
+        }
+
+        return $playlists;
     }
 
 }
