@@ -73,7 +73,7 @@
                         <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:${progress}%`">{{ progress }}%</div>
                     </div>
                 </div>
-                <div class="tw-flex tw-justify-center tw-w-full">
+                <div v-if="!isLastLesson" class="tw-flex tw-justify-center tw-w-full">
                     <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="$emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tw-flex tw-justify-center tw-w-full">
+                <div v-if="!isLastLesson" class="tw-flex tw-justify-center tw-w-full">
                     <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="$emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
