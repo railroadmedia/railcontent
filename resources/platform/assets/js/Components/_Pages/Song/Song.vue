@@ -19,7 +19,6 @@
                         :songMeta= "data?.genre[0]"
                         :assignments= "data?.soundslice"
                         :hasInstrumentless="data?.instrumentless"
-                        :lessonProgress= "data?.lesson_progress"
                         :isAdded= "isAdded"
                         :report-logo="reportLogo"
                         :no-access="noAccess"
@@ -95,7 +94,7 @@
     onBeforeMount( async () => {
         const { data: songData, error: songError, isLoading: songLoading } = await useSongPageData(props.contentId, brand.value, userId.value, token.value);
         data.value = songData.value;
-        console.log('song data', data.value);
+
         platformStore.setLoadingState(songLoading.value);
     });
 </script>

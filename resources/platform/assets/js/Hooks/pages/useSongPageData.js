@@ -16,10 +16,10 @@ export async function useSongPageData(contentId, brand) {
     const relatedSongsResponse = results[1].status === "fulfilled" ? results[1].value : null;
 
     data.value = songResponse;
-    console.log('songResponse', songResponse)
+    //console.log('songResponse', songResponse)
 
     if (relatedSongsResponse) {
-      console.log('relatedSongs', relatedSongsResponse);
+      //console.log('relatedSongs', relatedSongsResponse);
       data.value.relatedLessons = relatedSongsResponse.entity;
     }
 
