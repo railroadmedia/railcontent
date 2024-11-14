@@ -1,3 +1,16 @@
+@php
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data-2024.php'));
+@endphp
+
+@php
+$productSkus = ['new-piano-players-start-here', '30-day-blues-piano', '30-days-to-better-technique'];
+$products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(function ($a, $b) use ($productSkus) {
+    return array_search($a->sku, $productSkus) - array_search($b->sku, $productSkus);
+});
+@endphp
+
+
+
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -77,6 +90,7 @@
 @section('body-data')
     x-data="{
     trailer: false,
+    modal913081651: false,
     }"
 @endsection
 
@@ -326,390 +340,65 @@
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"
         @if(!empty($ultimate)) style="background: #000; color:#fff;" @endif style="background: #F1EFED; color:#000;"
     >
-        <div class="container mx-auto z-10 relative max-w-4xl">
-            <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
+     <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
-            <div  @if(!empty($ultimate)) style="background: #F1EFED;" @endif style="background: #fff;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
-                <h5 class="leading-tight"><strong>10-Level Curriculum</strong></h5>
-                <h6 class="leading-normal mt-2 mb-5 lg:pr-10">The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers</h6>
-                <div class="max-w-6xl mx-auto">
-                    <div
-                        x-data="{
-                            init() {
-                                new Splide(this.$refs.splide, {
-                                    classes: {
-                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                            prev: 'hidden',
-                                            next: 'splide__arrow--next prima-piano-next -right-1',
-                                    },
-                                    perPage: 4,
-                                    perMove: 1,
-                                    type: 'loop',
-                                    focus: 0,
-                                    interval: 2000,
-                                    lazyLoad: 'nearby',
-                                    pagination: false,
-                                    breakpoints: {
-                                        1020: {
-                                        perPage: 3.5,
-                                        },
-                                        768: {
-                                            perPage: 2.5,
-                                            drag: 'free',
-                                            snap: false,
-                                        },
-                                        620: {
-                                            perPage: 1.5,
-                                            arrows: false,
-                                        },
-                                    },
-                                }).mount()
-                            },
-                        }"
-                    >
-                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                     @php
-                                        $packs = [
-                                            [
-                                                "image" => "marketing/pianote/products/prima/method.jpg",
-                                                "subheader" => "Getting Started On The Piano"
-                                            ],
-                                            [
-                                                "image" => "marketing/pianote/products/prima/method.jpg",
-                                                "subheader" => "Developing Dexterity And Keyboard Confidence"
-                                            ],
-                                            [
-                                                "image" => "marketing/pianote/products/prima/method.jpg",
-                                                "subheader" => "Chording"
-                                            ],
-                                            [
-                                                "image" => "marketing/pianote/products/prima/method.jpg",
-                                                "subheader" => "Playing Chords Like A Pro"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
-                                                "subheader" => "Sight Reading"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
-                                                "subheader" => "Developing Your Musicality"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
-                                                "subheader" => "Applying Technique & Solving Piano Player Problems"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
-                                                "subheader" => "Exploring Musical Styles"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
-                                                "subheader" => "Composition & Songwriting"
-                                            ],
-                                            [
-                                                "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
-                                                "subheader" => "The Next Steps"
-                                            ]
-                                        ];
-                                    @endphp
-                                    
-                                    @foreach ($packs as $index => $pack)
-                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
-                                                <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$pack['image']}}">
-                                                    <img
-                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}"
-                                                        onload="this.classList.remove('opacity-0');"
-                                                    />
-                                                </picture>
-                                                <div class="absolute bottom-1 left-0 w-full p-4 text-center text-white">
-                                                    <div class="h-12 flex flex-col justify-between">
-                                                         <h6 class="capitalized"><strong>Method Level {{ $index + 1 }}</strong></h6>
-                                                        <p class="text-xs tracking-tight text-center">{{ $pack['subheader'] }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
+            <div class="container mx-auto z-10 relative max-w-3xl">
+        
+                @php
+                    $sections = [
+                        [
+                            'image' => '',
+                            'header' => '10-Level <br class="hidden md:block">Curriculum',
+                            'subheader' => 'The Pianote Method is your guided path to music freedom. Get expert step-by-step lessons from real piano teachers.'
+                        ],
+                        [
+                            'image' => '',
+                            'header' => 'Guided 30-Day <br class="hidden md:block">Challenges',
+                            'subheader' => 'Practice and play WITH your teacher. Choose a 30-Day Challenge to work on a specific skill and see the results in just 30 days.'
+                        ],
+                        [
+                            'image' => '',
+                            'header' => 'Daily Practice <br class="hidden md:block">Workouts',
+                            'subheader' => 'Not sure what to practice? Pick a 5, 10, or 15-minute routine and practice with a REAL teacher. It’s like Peloton for your piano.'
+                        ],
+                        [
+                            'image' => '',
+                            'header' => 'Your Favorite <br class="hidden md:block">Songs',
+                            'subheader' => 'You play piano to play songs! Learn and play your favorites from our massive library. Then make them sound beautiful on your new Prima piano.'
+                        ],
+                        [
+                            'image' => '',
+                            'header' => 'The World’s Best <br class="hidden md:block"> Piano Players',
+                            'subheader' => 'Learn from legends and connect with real, friendly piano teachers who care about your goals.'
+                        ]
+                    ];
+                @endphp
+        
+                <div class="space-y-10">
+                    @foreach ($sections as $index => $section)
+                        <div class="bg-white shadow-md text-black rounded-xl p-6 lg:p-12 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 border-[#DAD4CC] border">
+                            @if ($index % 2 !== 0)
+                                <img src="{{ $section['image'] }}" alt="" class="w-full md:w-1/2 rounded-lg object-cover">
+                                <div class="flex flex-col justify-center md:w-1/2 text-left">
+                                    <h3 class="leading-none"><strong>{!! $section['header'] !!}</strong></h3>
+                                    <hr class="border-[#DAD4CC] my-2">
+                                    <p class="leading-snug">{{ $section['subheader'] }}</p>
+                                </div>
+                            @else
+                                <div class="flex flex-col justify-center md:w-1/2 text-left">
+                                    <h3 class="leading-none"><strong>{!! $section['header'] !!}</strong></h3>
+                                    <hr class="border-[#DAD4CC] my-2 lg:my-4">
+                                    <p class="leading-snug">{{ $section['subheader'] }}</p>
+                                </div>
+                                <img src="{{ $section['image'] }}" alt="" class="w-full md:w-1/2 rounded-lg object-cover">
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            <div  @if(!empty($ultimate)) style="background: #F1EFED;" @endif style="background: #fff;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
-                <h5 class="leading-tight"><strong>Daily Practice Workouts</strong></h5>
-                <h6 class="leading-normal mt-2 mb-5 lg:pr-10">Not sure what to practice?  Pick a 5, 10, or 15-minute routine and practice with a REAL teacher.<br> It’s like Peloton for your piano.</h6>
-                <div class="max-w-6xl mx-auto">
-                    <div x-data="{
-                        init() {
-                            new Splide(this.$refs.splide, {
-                                classes: {
-                                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                    prev: 'hidden',
-                                    next: 'splide__arrow--next prima-piano-next -right-1',
-                                },
-                                perPage: 2.5,
-                                perMove: 1,
-                                type: 'loop',
-                                focus: 0,
-                                interval: 2000,
-                                lazyLoad: 'nearby',
-                                pagination: false,
-                                breakpoints: {
-                                    1020: {},
-                                    768: {
-                                        perPage: 2.5,
-                                        drag: 'free',
-                                        snap: false,
-                                    },
-                                    620: {
-                                        perPage: 1.5,
-                                        arrows: false,
-                                    },
-                                },
-                            }).mount()
-                        },
-                    }">
-                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    @php
-                                        $packs = [
-                                            [
-                                                "image" => "marketing/pianote/products/prima/Chord-Extensions-1715712021.jpg",
-                                                "subtitle" => "Beautiful Pop Sounds"
-                                            ],
-                                            [
-                                                "image" => "marketing/pianote/products/prima/Chord-Extensions-1715712021.jpg",
-                                                "subtitle" => "Beginner Jazz Comping"
-                                            ],
-                                            [
-                                                "image" => "marketing/pianote/products/prima/Chord-Extensions-1715712021.jpg",
-                                                "subtitle" => "Advanced Chord Extensions"
-                                            ],
-                                            [
-                                                "image" => "/marketing/pianote/products/prima/Chord-Extensions-1715712021.jpg",
-                                                "subtitle" => "15-Minute Practice Routines"
-                                            ],
-                                        ]
-                                    @endphp
-                                    @foreach ($packs as $pack)
-                                        <li class="splide__slide flex flex-col items-start justify-start px-1">
-                                            <div class="relative w-full rounded-xl" style="padding-bottom: 58%;">
-                                                <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$pack['image']}}">
-                                                    <img
-                                                        class="absolute top-0 left-0 w-full object-cover rounded-xl transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$pack['image']}}"
-                                                        onload="this.classList.remove('opacity-0');"
-                                                    />
-                                                </picture>
-                                            </div>
-                                            <p class="text-sm mt-2"><strong>{{ $pack['subtitle'] }}</strong></p>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <div  @if(!empty($ultimate)) style="background: #F1EFED;" @endif style="background: #fff;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6 mb-6 sm:mb-10">
-                <h5 class="leading-tight"><strong>Your Favorite Songs</strong></h5>
-                <h6 class="leading-normal mt-2 mb-5 lg:pr-10">You play piano to play songs! Learn and play your favorites from our massive library. Then make them sound beautiful on your new Prima piano.</h6>
-                <div class="max-w-6xl mx-auto">
-                    <div
-                        x-data="{
-                            init() {
-                                new Splide(this.$refs.splide, {
-                                    classes: {
-                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                            prev: 'hidden',
-                                            next: 'splide__arrow--next prima-piano-next -right-1',
-                                            pagination: 'splide__pagination flex -bottom-10',
-                                    },
-                                  
-                                    perPage: 4,
-                                    perMove: 1,
-                                    type: 'loop',
-                                    focus: 0,
-                                    interval: 2000,
-                                    lazyLoad: 'nearby',
-                                    pagination: false,
-                                    breakpoints: {
-                                        1020: {
-                                           
-                                        },
-                                        768: {
-                                           
-                                            perPage: 3,
-                                            drag: 'free',
-                                            snap: false,
-                                        },
-                                        620: {
-                                           
-                                            perPage: 2,
-                                            arrows: false,
-                                        },
-                                    },
-                                }).mount()
-                            },
-                        }"
-                    >
-                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    @php
-                                        $packs = [
-                                                [
-                                                    "image" => "marketing/pianote/products/classical-piano-collection/prelude-in-c.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/pianote/products/classical-piano-collection/fur-elise.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/pianote/products/classical-piano-collection/moonlight-sonata.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/pianote/products/classical-piano-collection/prelude-in-e-minor.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/pianote/products/classical-piano-collection/gymnopedie.webp",
-                                                ]
-                                        ]
-                                    @endphp
-                                    @foreach ($packs as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
-                                                <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
-                                                    <img
-                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
-                                                        onload="this.classList.remove('opacity-0');"
-                                                    />
-                                                </picture>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <div  @if(!empty($ultimate)) style="background: #F1EFED;" @endif style="background: #fff;" class="text-black text-left  rounded-xl border border-gray p-4 sm:p-6">
-                <h5 class="leading-tight"><strong>The World’s Best Piano Players</strong></h5>
-                <p class="leading-tight mt-2 mb-5">Learn from legends and connect with real, friendly piano teachers who care about your goals. </p>
-                <div class="max-w-6xl mx-auto">
-                    <div
-                        x-data="{
-                            init() {
-                                new Splide(this.$refs.splide, {
-                                    classes: {
-                                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                            prev: 'hidden',
-                                            next: 'splide__arrow--next your-class-next -right-1',
-                                            pagination: 'splide__pagination flex -bottom-10',
-                                    },
-                                    perPage: 4,
-                                    perMove: 1,
-                                    type: 'loop',
-                                    focus: 0,
-                                    interval: 2000,
-                                    lazyLoad: 'nearby',
-                                    pagination: false,
-                                    breakpoints: {
-                                        1020: {
-                                        },
-                                        768: {
-                                            perPage: 3,
-                                            drag: 'free',
-                                            snap: false,
-                                        },
-                                        620: {
-                                            perPage: 2,
-                                            arrows: false,
-                                        },
-                                    },
-                                }).mount()
-                            },
-                        }"
-                    >
-                        <section x-ref="splide" class="splide mb-4 sm:mb-6">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    @php
-                                        $packs = [
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
-                                                ],
-                                                [
-                                                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
-                                                ],
-                                        ]
-                                    @endphp
-                                    @foreach ($packs as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 150%;">
-                                                <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['image']}}">
-                                                    <img
-                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
-                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['image']}}"
-                                                        onload="this.classList.remove('opacity-0');"
-                                                    />
-                                                </picture>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+
+   
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20  relative @if(empty($lifetime) && empty($ultimate)) hidden @endif"
         @if(!empty($ultimate)) style="background: #1D1B1B; color:#fff" @endif>
         <div class="container mx-auto z-10 relative max-w-4xl">
@@ -742,52 +431,99 @@
             </div>
         </div>
     </section>
-    @php
-        $packs = [
-            [
-                "image" => "marketing/pianote/products/prima/NPPH.jpg",
-                "header" => "New Piano Players Start <br>Here",
-                "subheader" => "Your first 30 days on the piano. Learn in just 10 minutes per day."
-            ],
-            [
-                "image" => "marketing/pianote/products/prima/RM30D.jpg",
-                "header" => "Read Music in <br>30 Days",
-                "subheader" => "Learn the language of music. Play your favorite songs."
-            ],
-            [
-                "image" => "marketing/pianote/products/prima/BP.jpg",
-                "header" => "30-Day Blues<br> Piano",
-                "subheader" => "Learn cool riffs, licks, and scales to play the Blues."
-            ],
-            [
-                "image" => "marketing/pianote/products/prima/CPC.jpg",
-                "header" => "The Classical Piano<br> Collection",
-                "subheader" => "Learn 5 iconic pieces with note-for-note tutorials."
-            ],
-            [
-                "image" => "marketing/pianote/products/prima/EC.jpg",
-                "header" => "Easy Chords",
-                "subheader" => "Improve your piano chord inversions in just 30 days."
-            ],
-        ];
-    @endphp
-    
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"
-        @if(!empty($ultimate)) style="background: #000; color:#fff" @endif>
-        <div class="container mx-auto z-10 relative max-w-5xl">
-            <h2 class="leading-tight"><strong>Lessons that are yours to keep -- for life.</strong></h2>
-            <p class="leading-tight my-5">These 30-Day Courses are yours to keep forever, even if you choose not to renew your Pianote membership.</p>
-            <div class="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                @foreach ($packs as $pack)
-                    <div class="px-1">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{ $pack['image'] }}" class="rounded-xl w-full h-auto">
-                        <p class="leading-normal tracking-tight my-1"><strong>{!! $pack['header'] !!}</strong></p>
-                        <p class="leading-tight text-xs">{{ $pack['subheader'] }}</p>
+
+@php
+    $targetSkus = ['new-piano-players', 'easy-chords', '30-day-blues-piano'];
+@endphp
+
+<section class="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 {{ !empty($ultimate) ? 'bg-black text-white' : 'bg-white text-black' }} {{ !empty($lifetime) ? 'hidden' : '' }}">
+    <div class="container mx-auto max-w-5xl">
+        <div class="space-y-6">
+            @foreach($packs as $pack)
+                @if(in_array($pack['sku'], $targetSkus))
+                    <div class="rounded-xl overflow-hidden">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="relative w-full md:w-3/5 rounded-2xl">
+                                <div class="aspect-video relative">
+                                    <img 
+                                        src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/{{ $pack['image'] }}"
+                                        alt="{{ $pack['header'] }}"
+                                        class="w-full h-full object-cover rounded-2xl"
+                                        @if(!empty($pack['vimeoId'])) @click="modal{{ $pack['vimeoId'] }} = true" @endif
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="p-6 md:w-2/5 flex flex-col justify-center lg:p-10">
+                                <h4 class="mb-2"><strong>
+                                    {!! $pack['header'] !!}
+                                    </strong>
+                                </h4>
+                                <div class="flex items-center space-x-2 mb-4">
+                                    <span class="text-lg line-through opacity-20"><strong>${{ $pack['price'] }}</strong></span>
+                                    <span class="px-2 py-1 bg-musora text-black text-sm font-bold rounded">
+                                        {{ $pack['badge'] }}
+                                    </span>
+                                </div>
+                                <p class="mb-3">
+                                    {!! $pack['subheader'] !!}
+                                </p>
+                                <p>
+                                    {{ $pack['description'] }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                @endif
+            @endforeach
         </div>
-    </section>
+    </div>
+</section>
+
+{{-- Pulling from nova --}}
+
+<section class="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 {{!empty($ultimate) ? 'bg-black text-white' : 'bg-white text-black'}} {{!empty($lifetime) ? 'hidden' : ''}}">
+    <div class="container mx-auto max-w-5xl">
+        <div class="space-y-6">
+            @foreach($products as $product)
+            <div class="rounded-xl overflow-hidden">
+                <div class="flex flex-col md:flex-row h-full">
+                    <div class="relative w-full md:w-3/5 rounded-2xl">
+                        <div class="aspect-video relative">
+                            <img 
+                                src="{{ $product->thumbnail }}"
+                                alt="{{ $product->name }}"
+                                class="w-full h-full object-cover rounded-2xl"
+                                style="object-fit: cover;"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:w-2/5 flex flex-col justify-center lg:p-10">
+                        <h2 class="text-2xl font-bold mb-2">
+                            {{ $product->name }}
+                        </h2>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-lg line-through opacity-20">${{ $product->price }}</span>
+                                <span class="px-2 py-1 bg-musora text-black text-sm font-bold rounded">
+                                    FREE BONUS
+                                </span>
+                        </div>
+                        <p class="mb-3">
+                            {{ $product->short_desc }}
+                        </p>
+                        <p>
+                            {{ $product->bundle_desc }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+    
     
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white"
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
@@ -809,7 +545,6 @@
 
     <div id="customize-anchor" class="anchor"></div>
     @if(!empty($lifetime))
-
         <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
             <div class="container mx-auto relative z-10 max-w-3xl">
                 <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
@@ -940,6 +675,12 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
+        'video' => '913081651',
+        'vimeo' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'modal913081651',
         'video' => '913081651',
         'vimeo' => true,
     ])

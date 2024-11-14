@@ -212,7 +212,7 @@
                             class="flex-shrink-0 group relative pb-0.5 focus:outline-none"
                         >
                             <div class="flex flex-col items-start">
-                                <h5 class="font-medium uppercase font-bebas">{{ $item['subtitle'] }}</h5>
+                                <h5 class="font-medium uppercase font-bebas tracking-normal">{{ $item['subtitle'] }}</h5>
                             </div>
                            <div 
                             class="absolute bottom-0 left-0 w-full h-0.5 bg-pianote transform transition-transform duration-300"
@@ -272,7 +272,7 @@
                     
                                             <div class="text-left order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }} lg:mt-20">
                                                 <div class="space-y-3">
-                                                    <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal">
+                                                    <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal tracking-wider">
                                                         {{ $item['subtitle'] }}
                                                     </h6>                                                
                                                     <h4 class="leading-normal"><strong>{!! $item['title_section'] !!}</strong></h4>
