@@ -4,6 +4,7 @@ namespace Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -216,6 +217,7 @@ class ChallengesService
     {
         $day = 0;
         foreach($lessons as $index => $lesson) {
+            $lessons[$index]['is_first_lesson'] = $index == 0;
             if (!$lesson['is_always_unlocked_for_challenge']) {
                 $day += 1;
                 $lessons[$index]['index'] = $day;
@@ -260,26 +262,21 @@ class ChallengesService
                 if ($userProgress['content_id'] == $contentId) {
                     if ($userProgress->is_active) {
                         $startEndDate = $userProgress->getStartAndEndDate();
-                        $status = $userProgress->isCompleteAndNotActive() ? 'completed' : 'active';
                         $challenge['lessons'] = $this->combineUserLessonDataWithSanityLessonData(
                             $challenge['lessons'],
                             $userProgress,
                             removeVideoData: true
                         );
-                        if ($userProgress->isCompleteAndNotActive()) {
-                            $firstIncompleteLesson = null;
-                            $previousCompletedLesson = end($challenge['lessons']);
-                        } else {
-                            $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
-                                $challenge['lessons'],
-                                $userProgress
-                            );
-                            $nextPreviousLessonAroundFirstIncompleteLesson = $this->getPreviousAndNextLesson(
-                                $firstIncompleteLesson['id'],
-                                $challenge['lessons']
-                            );
-                            $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
-                        }
+
+                        $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
+                            $challenge['lessons'],
+                            $userProgress
+                        );
+                        $nextPreviousLessonAroundFirstIncompleteLesson = $this->getPreviousAndNextLesson(
+                            $firstIncompleteLesson['id'],
+                            $challenge['lessons']
+                        );
+                        $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
                         $durationText = $userProgress->is_locked ?
                             $this->getDurationText(
                                 Carbon::parse($startEndDate['start_date']),
@@ -291,22 +288,22 @@ class ChallengesService
                             'progress_percent' => $userProgress->getCompletionPercent(),
                             'duration_text' => $durationText,
                             'is_solo' => $userProgress['is_solo'],
-                            'status' => $status,
+                            'status' => ChallengeUserProgressStatus::ACTIVE,
                             'next_lesson' => $firstIncompleteLesson,
                             'previous_completed_lesson' => $previousCompletedLesson,
                             ... $userProgress->getCompiledMetadata(),
                         ];
                         break;
-                    } else {
+                    } elseif ($userProgress->isCompleteAndNotActive()) {
                         $durationText = $this->getDurationText(Carbon::parse($challenge['published_on']), $this->getChallengeEndDate($challenge));
                         $challengeMetaDataToReturn = [
                             'is_user_enrolled' => true,
                             'progress_percent' => 100,
                             'duration_text' => $durationText,
                             'is_solo' => $challenge['is_solo'],
-                            'status' => 'completed',
+                            'status' => ChallengeUserProgressStatus::COMPLETED,
                             'next_lesson' => null,
-                            'previous_completed_lesson' => null,
+                            'previous_completed_lesson' => end($challenge['lessons']),
                         ];
                         break;
                     }
@@ -318,7 +315,7 @@ class ChallengesService
                     'progress_percent' => 0,
                     'duration_text' => $this->getDurationText(Carbon::parse($challenge['published_on']), $this->getChallengeEndDate($challenge)),
                     'is_solo' => $challenge['is_solo'],
-                    'status' => 'not_started',
+                    'status' => ChallengeUserProgressStatus::NOTSTARTED,
                     'next_lesson' => null,
                     'previously_completed_lesson' => null,
                 ];
