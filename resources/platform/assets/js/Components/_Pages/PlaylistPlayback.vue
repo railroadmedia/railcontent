@@ -365,11 +365,11 @@ const handleVideoPlay = () => { }; //?
 
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = props.videoProps.totalDuration;
+    chapterEndTime.value = props.totalDuration;
     startLooping.value = loop;
 
     if (loop) {
-        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+        chapterEndTime.value = formattedChapters.value.length === index ? props.totalDuration : formattedChapters.value[index].time;
     }
 
     openSoundslice.value = true;
