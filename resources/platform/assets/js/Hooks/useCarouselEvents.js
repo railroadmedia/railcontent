@@ -37,7 +37,7 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
                         position: index,
                     })),
                 }
-    
+
                 userJourney.trackRecommendedContentServed(trackingPayload);
             }
         }
@@ -53,13 +53,17 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         getPageData();
     }
 
+    const removeItem = (contentId) => {
+        original.value = original.value.filter((item) => item.id !== contentId);
+        getPageData();
+    }
+
     const resetProgress = (contentId) => {
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset your progress, are you sure about this?',
             callbacks: {
                 submit: () => {
-                    original.value = original.value.filter((item) => item.id !== contentId);
-                    getPageData();
+                    removeItem(contentId);
 
                     axios.put(`/railcontent/reset`, {
                         content_id: contentId,
@@ -78,5 +82,6 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         nextPage,
         prevPage,
         resetProgress,
+        removeItem,
     }
 }
