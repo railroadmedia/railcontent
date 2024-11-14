@@ -102,51 +102,61 @@
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
-          <div class="container max-w-6xl mx-auto relative z-20">
+            <div class="container max-w-6xl mx-auto relative z-20">
                 @if(!empty($ultimate))
-                <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                    <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                    <h2 class="relative w-auto inline-block leading-tight">
+                        <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
+                        start <br class="hidden sm:inline">playing the piano.
+                    </h2>
+                    <h6 class="my-5 sm:my-6"><em>Get the best beginner digital piano kit PLUS</em></h6>
+                    <p class="text-sm leading-normal mb-5 lg:mb-7">
+                        <i class="fas fa-check text-pianote"></i> An Annual Pianote Membership
+                        <br class="sm:hidden">
+                        <i class="fas fa-check lg:ml-5 text-pianote"></i> Keyboard Stand + Bench
+                        <br class="lg:hidden">
+                        <i class="fas fa-check lg:ml-5 text-pianote"></i> Metronome
+                        <br class="sm:hidden">
+                        <i class="fas fa-check lg:ml-5 text-pianote"></i> Theory Posters + 5 Launch Bonuses
+                    </p>
+                    <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
+                        Only <s class="opacity-50">$1642</s> <strong>$799</strong>
+                    </h3>
                 @elseif(!empty($lifetime))
-                <img class="h-6 md:h-8  my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
+                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
+                    <h2 class="relative w-auto inline-block leading-tight">
+                        <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
+                        start <br class="hidden sm:inline">playing the piano.
+                    </h2>
+                    <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
+                        Only <strong>$599</strong>
+                    </h3>
                 @else
-                <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                    <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                    <h2 class="relative w-auto inline-block leading-tight">
+                        <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
+                    </h2>
+                    <h6 class="my-5 sm:my-6"><em>Get the best beginner digital piano PLUS an Annual Membership to Pianote. <br class="hidden sm:inline">+ 5 LAUNCH BONUSES</em></h6>
+
+                    <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
+                         Only <s class="opacity-50">$1374</s><strong> $599</strong>
+                    </h3>
                 @endif
-                @if(!empty($ultimate) || !empty($lifetime))
-            <h2 class="relative w-auto inline-block leading-tight">
-                <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
-                start <br class="hidden sm:inline">playing the piano.
-            </h2>
-                @else
-             <h2 class="relative w-auto inline-block leading-tight">
-                <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
-            </h2>
-            @endif
-            <h6 class="my-5 sm:my-6"><em>Get the best beginner digital piano kit PLUS</em></h6>
-            <p class="text-sm leading-normal mb-5 lg:mb-7">
-                <i class="fas fa-check text-pianote"></i> An Annual Pianote Membership
-                <br class="sm:hidden">
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Keyboard Stand + Bench
-                <br class="lg:hidden">
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Metronome
-                <br class="sm:hidden">
-                <i class="fas fa-check lg:ml-5 text-pianote"></i> Theory Posters + 5 Launch Bonuses
-            </p>
-            <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
-                Only <s class="opacity-50">$1642</s> <strong>$799</strong>
-            </h3>
-            <div class="w-full max-w-xl mx-auto">
-                <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
-                    href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true"
-                >START PLAYING</a>
-                <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
-                    @click="trailer = true;">
-                    &nbsp;Watch The Trailer
-                </div>
-                <div class="w-full sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
-                    x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
-                    &nbsp;Watch The Trailer
+    
+                <div class="w-full max-w-xl mx-auto">
+                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
+                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true"
+                    >START PLAYING</a>
+                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
+                        @click="trailer = true;">
+                        &nbsp;Watch The Trailer
+                    </div>
+                    <div class="w-full sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
+                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
+                        &nbsp;Watch The Trailer
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
