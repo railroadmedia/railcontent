@@ -70,8 +70,9 @@ class ChallengesTest extends TestCase
         $responseData = $response->json();
 
         $this->assertCount(2, $responseData);
-        $this->assertTrue($responseData[402199]['is_user_enrolled']);
-        $this->assertTrue($responseData[402200]['is_user_enrolled']);
+
+        $this->assertTrue($this->getChallengeDataById($responseData,402199)['is_user_enrolled']);
+        $this->assertTrue($this->getChallengeDataById($responseData,402200)['is_user_enrolled']);
 
         $challengesService->completeChallenge(402200, $userId);
         $response = $this->getJson(route('challenges.user_active_challenges'));
@@ -79,7 +80,7 @@ class ChallengesTest extends TestCase
         $responseData = $response->json();
 
         $this->assertCount(1, $responseData);
-        $this->assertTrue($responseData[402199]['is_user_enrolled']);
+        $this->assertTrue($this->getChallengeDataById($responseData, 402199)['is_user_enrolled']);
     }
 
     public function test_leave_clears_current_progress(): void
@@ -342,7 +343,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
 
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
@@ -370,7 +371,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('Nov 27 - Dec 4', $challengeMetadata['duration_text']);
@@ -404,7 +405,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(40, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 5', $challengeMetadata['duration_text']);
@@ -431,7 +432,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
         $this->assertFalse($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(0, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 8', $challengeMetadata['duration_text']);
@@ -465,7 +466,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(20, $challengeMetadata['progress_percent']);
         $this->assertEquals('Unlocked', $challengeMetadata['duration_text']);
@@ -501,7 +502,7 @@ class ChallengesTest extends TestCase
         // --- TEST EXPECTED VALUES
         $response->assertOk();
         $responseData = $response->json();
-        $challengeMetadata = $responseData[$challengeId];
+        $challengeMetadata = $this->getChallengeDataById($responseData, $challengeId);
         $this->assertTrue($challengeMetadata['is_user_enrolled']);
         $this->assertEquals(100, $challengeMetadata['progress_percent']);
         $this->assertEquals('November 1 - 10', $challengeMetadata['duration_text']);
@@ -543,6 +544,16 @@ class ChallengesTest extends TestCase
                 ->shouldReceive('getByRailContentId')
                 ->andReturn($json[$index]);
         });
+    }
+
+    private function getChallengeDataById($challenges, $challengeId)
+    {
+        foreach($challenges as $challenge) {
+            if ($challenge['content_id'] == $challengeId) {
+                return $challenge;
+            }
+        }
+        return null;
     }
 
     public function test_milestones_for_length_11(): void

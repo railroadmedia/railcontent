@@ -20,7 +20,6 @@ class SanityGateway
         "'url' : web_url_path",
         "published_on",
         "'type': _type",
-        "progress_percent",
         "'length_in_seconds' : coalesce(length_in_seconds, soundslice[0].soundslice_length_in_second)",
         "brand",
         "'genre': genre[]->name",
