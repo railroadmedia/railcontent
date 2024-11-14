@@ -447,7 +447,7 @@
         $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
-    <section class="pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">        
+    <section class="@if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @else py-8 sm:py-16 lg:py-20 px-4 sm:px-6 @endif @if(!empty($lifetime)) hidden @endif">        
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
                 @foreach($packs as $pack)
