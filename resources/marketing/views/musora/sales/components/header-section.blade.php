@@ -33,7 +33,7 @@
             </p>
         @endif
         @if(!empty($BFheader))
-            <h6 class="py-2 px-3 bg-musora rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong> {{ $BFheader }}.</h6>
+            <h6 class="leading-tight py-2 px-3 bg-musora rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"

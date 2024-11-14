@@ -332,11 +332,46 @@
 
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/BF-header-banner.webp')",
             'text' => 'Save up to 91% on <br class="sm:hidden">drum lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
             'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
         ])
+
+        <div class="sticky-trigger block"></div>
+        <a href="#customize-anchor"
+            class="promo-banner anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] -mt-12 transition-none"
+            style="background: #FFAC00;">
+
+            <div x-data="timer()" x-init="countdown()"
+                {{--                x-cloak x-show="day < 2"--}}
+            >
+                <div class="inline-flex flex-wrap mx-auto justify-center items-center">
+                    <p class="leading-none m-0 font-black"><strong>DEALS END IN:</strong></p>
+                    <div class="h-8 mx-2 bg-black" style="width:2px;"></div>
+                    <div class="flex text-center">
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="day">00</div>
+                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
+                        </div>
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="hour">00</div>
+                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>
+                        </div>
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="minute">00</div>
+                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
+                        </div>
+                        <div x-show="timeLeft > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="second">00</div>
+                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>
+                        </div>
+                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
+                    </div>
+                </div>
+            </div>
+        </a>
     @endif
 
 
@@ -589,4 +624,23 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @stop

@@ -1,22 +1,20 @@
-<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-6 sm:py-12 bg-cover bg-top"
-
-{{--    style="background-image:@if(!empty($bg)) {{ $bg }} @else url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp') @endif ";--}}
-    style="background:linear-gradient(to bottom, #010305, #042b50);"
+<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-4 sm:px-8 lg:px-5 py-6 sm:py-16 lg:py-20 bg-cover bg-top"
+    style="background:@if(!empty($bg)) {{ $bg }} @endif "
 >
-    <div class="container mx-auto relative z-30 max-w-lg">
+    <div class="container mx-auto relative z-30 max-w-md md:max-w-lg">
 
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-12 sm:h-14 lg:h-24 mx-auto'
+                    'styles' => 'h-16 sm:h-24 lg:h-28 mx-auto'
                 ])
             </a>
-            <h5 class="leading-tight my-4">{!! $text !!}</h5>
+            <h5 class="leading-tight my-4 sm:my-5">{!! $text !!}</h5>
 
             <div x-data="timer()" x-init="countdown()"
 {{--                x-cloak x-show="day < 2"--}}
             >
                 <div class="inline-flex flex-wrap mx-auto justify-center items-center">
-                    <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
+                    <p class="leading-none m-0 font-black "><strong>DEALS END IN:</strong></p>
                     <div class="h-12 mx-2 sm:mx-4 bg-white" style="width:2px;"></div>
                     <div class="flex">
                         <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
@@ -40,18 +38,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-4">
+            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-5">
                 <a class="w-full sm:w-1/2 join musora smaller outline sm:order-2 border-musora" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>
 
                 <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">
                     <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>
                 </div>
             </div>
-
-        @if(session()->has('error'))
-            <h5 class="leading-tight my-2"><strong class="text-musora">{{ session()->get('error') }}</strong></h5>
-        @endif
-
+        <img class="h-14 sm:h-24 lg:h-28 -mr-2 sm:mr-0 -mt-4 sm:-mt-8 absolute top-0 right-0 z-10 transform sm:translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/save-badge.webp">
     </div>
 {{--    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>--}}
 </section>
