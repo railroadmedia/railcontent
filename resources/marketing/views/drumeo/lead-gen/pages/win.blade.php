@@ -190,7 +190,7 @@
                                      [
                                          'location' => 'France',
                                          'name' => 'Steph C.',
-                                         'comment' => '',
+                                         'comment' => 'My YAMAHA drumkit is in my band\'s studio, ready to jam...<br><br>It looks like i\'m gonna spend a lot of time behind my new Yamaha kit, working rudiments and technical stuff with Drumeo!!!<br><br>Thanks again to you and all the DRUMEO Team!',
                                          'img' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/winner1.jpg',
                                      ],
                                      [
