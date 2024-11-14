@@ -27,6 +27,79 @@
             }
         }
     </style>
+    <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+            color:#777
+        }
+
+        .giveaway-form input, .giveaway-form button {
+            font:400 18px/45px "Open Sans", sans-serif;
+            height:45px;
+            color:#999;
+            border-radius:100px;
+            padding:7px 20px;
+            margin:0 auto 10px;
+            transition:all .2s ease-in;
+            box-shadow:none;
+            text-align:inherit;
+            border: 1px solid;
+        }
+
+        @media (min-width:640px) {
+            .giveaway-form input, .giveaway-form button {
+                font-size:19px;
+                margin:0 auto
+            }
+        }
+
+        @media (min-width:1024px) {
+            .giveaway-form input, .giveaway-form button {
+                font-size:23px
+            }
+        }
+
+        .giveaway-form button {
+            font-family:"Bebas Neue", sans-serif;
+            text-transform:uppercase;
+            margin:0 auto!important;
+            text-align:center;
+            display:block;
+            cursor:pointer;
+            border:none;
+            width:100%;
+            padding:0;
+            color:#fff;
+        }
+        .giveaway-form input, .giveaway-form button {
+            line-height:40px;
+            height: 40px;
+        }
+        @media (min-width: 40em) {
+            .giveaway-form input, .giveaway-form button {
+                height: 52px;
+                line-height: 52px;
+            }
+        }
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:10px;
+        }
+        @media (min-width: 40em) {
+            .thank-you-box.active {
+                padding: 12px;
+            }
+        }
+        .giveaway-form input {
+            margin-bottom: 8px;
+        }
+    </style>
 @endsection
 
 
@@ -62,6 +135,32 @@
             </div>
         </div>
     </header>
+
+    <section class="text-white px-4 md:px-10 py-10 sm:py-12" style="background-color:#101520;">
+        <div class="container max-w-4xl mx-auto">
+            <div class="flex flex-col sm:flex-row items-center">
+                <div class="w-full sm:w-1/2 text-left px-2 sm:px-0 mb-4 sm:mb-0">
+                    <h1 class="uppercase leading-none mb-4"><strong>Linkin Park Cymbal Giveaway</strong></h1>
+                    <p class="leading-normal">
+                        We're giving away the entire set of Istanbul cymbals that Brandon used in the video to ONE lucky winner
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 text-center sm:text-left giveaway-form">
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Cymbal Giveaway',
+                        "formId" => "Musora - Engagement - Trigger - Cymbal Giveaway - WebForm",
+                        "buttonText" => "I WANT TO WIN",
+                        "nameInput" => "Your Name",
+                        "stacked" => true,
+                        "minimalForm" => true,
+                        "buttonColor" => "bg-musora text-black",
+                        "redirectUrl" => "https://www.musora.com/thank-you",
+                    ])
+                </div>
+            </div>
+        </div>
+    </section>
       @php
         $benefits = [
             ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/app-page/giveaways.png', 'title' => 'Exclusive Giveaways'],
