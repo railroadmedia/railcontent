@@ -60,10 +60,10 @@
             transform: translateX(0.2rem);
         }
         .prima-piano-next svg {
-            fill: #F61A30; 
+            fill: #F61A30;
         }
     </style>
-   
+
     @php
         if(!empty($membersVersion)) {
              $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true';
@@ -189,33 +189,33 @@
             @php
                 $items = [
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-01.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature1.mp4',
                     'title' => '88-Key Progressive Hammer Action',
                     'desc' => 'The fully weighted hammer-action keys mimic the feel of a real piano, providing a heavier touch in the lower registers and a lighter touch for the high notes<br><br>Whether you\'re playing simple scales or tackling more advanced pieces, the Prima’s keys offer a realistic feel that builds strength and dexterity, giving you the confidence to play on any piano.',
                     ],
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-02.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature2.mp4',
                     'title' => 'Seamless Connection to Your Lessons &  Music',
                     'desc' => 'With Bluetooth audio and MIDI, you can wirelessly connect the Prima to your tablet or phone for easy access to your Pianote lessons. Or stream music directly through the piano’s speakers.<br><br>Imagine streaming your favorite song directly through the piano’s speakers and playing along. With Prima, you can connect to lessons or jam sessions without any messy cables.',
                     ],
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-03.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature3.mp4',
 
                     'title' => 'A World of Sound at Your Fingertips',
                     'desc' => 'With 238 different tones, from classic grand pianos to strings, organs, and more, the Prima gives you endless options for creativity.<br><br>Switch between piano and strings, or experiment with jazz organ and orchestral sounds. The variety will keep you inspired and motivated to practice.',
                     ],
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-04.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature4.mp4',
                     'title' => 'Hear Every Note in Full, Rich Detail',
                     'desc' => 'The built-in stereo speakers are designed to fill your space with clear, balanced sound, while the stereo headphone jack ensures that you can practice privately without sacrificing sound quality.<br><br>Whether you’re practicing quietly late at night or performing for friends, the Prima delivers rich, concert-quality sound that brings your music to life.',
                     ],
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-05.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature5.mp4',
                     'title' => 'True Piano Sustain Pedal',
                     'desc' => 'Unlike the cheap plastic pedals that come with many beginner digital pianos, the Prima features a premium sustain pedal that feels just like a real acoustic piano pedal.<br><br>You’ll feel the difference immediately. It responds naturally to your touch, helping you develop the same techniques you would on a traditional acoustic piano.',
                     ],
                     [
-                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature-06.mp4',
+                    'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature6.mp4',
                     'title' => 'Keep Perfect Time, Your Way',
                     'desc' => 'With four distinct metronome sounds, the Prima helps you develop a strong sense of rhythm, a critical skill for every pianist.<br><br>Choose from different metronome sounds to keep your practice engaging and help you stay on beat, no matter what style of music you’re playing.',
                     ],
@@ -350,7 +350,7 @@
             <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
             <div class="container mx-auto z-10 relative max-w-3xl">
-        
+
                 @php
                     $sections = [
                         [
@@ -380,7 +380,7 @@
                         ]
                     ];
                 @endphp
-        
+
                 <div class="space-y-10">
                     @foreach ($sections as $index => $section)
                         <div class="bg-white shadow-md text-black rounded-xl p-6 lg:p-12 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 border-[#DAD4CC] border">
@@ -447,7 +447,7 @@
         $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
-    <section class="@if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @else py-8 sm:py-16 lg:py-20 px-4 sm:px-6 @endif @if(!empty($lifetime)) hidden @endif">        
+    <section class="pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
                 @foreach($packs as $pack)
@@ -456,7 +456,7 @@
                             <div class="flex flex-col md:flex-row h-full">
                                 <div class="relative w-full md:w-5/12 lg:w-1/2 rounded-2xl">
                                     <div class="aspect-video relative cursor-pointer">
-                                        <img 
+                                        <img
                                             src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/{{ $pack['image'] }}"
                                             alt="{{ $pack['header'] }}"
                                             class="w-full h-full object-cover rounded-2xl"
@@ -485,7 +485,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative text-white"
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
         <div class="container mx-auto z-10 relative max-w-4xl">
