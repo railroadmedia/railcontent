@@ -292,15 +292,15 @@ const handleCloseSoundslice = () => {
 
 onBeforeMount(async () => {
     // Execute all Video Calls
-    const [like, liked ] = await Promise.all([
-        axios.get(`/content/${props.contentId}/user_data/${userId.value}`),
-        isContentLiked(props.contentId),
-    ]);
+    // const [like, liked ] = await Promise.all([
+    //     axios.get(`/content/${props.contentId}/user_data/${userId.value}`),
+    //     isContentLiked(props.contentId),
+    // ]);
 
     // Update ref data reactively after the calls resolve
-    likeData.value = like?.data;
-    isLiked.value = liked;
+    // likeData.value = like?.data;
+    // isLiked.value = liked;
 
-    console.log(isLiked.value)
+    // console.log(isLiked.value)
 });
 </script>
