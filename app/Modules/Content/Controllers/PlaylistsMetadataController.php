@@ -281,7 +281,7 @@ class PlaylistsMetadataController extends Controller
         //        );
 
         //  $playlist = $this->formatPlaylists(new Collection($playlist));
-        $playlist = $this->formatPlaylists([$playlist]);
+        $playlist = $this->playlistsService->formatPlaylists([$playlist]);
         return response()->json(['data' => $playlist[0]]);
     }
 

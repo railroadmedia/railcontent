@@ -241,7 +241,7 @@ class PlaylistsService
      * @param array $playlists The playlists to format.
      * @return array The formatted playlists.
      */
-    private function formatPlaylists(array $playlists): array
+    public function formatPlaylists(array $playlists): array
     {
 
         foreach ($playlists as $index => $playlist) {
