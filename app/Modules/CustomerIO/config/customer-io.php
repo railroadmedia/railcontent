@@ -147,21 +147,6 @@ return [
                     'timestamp' => 'Timestamp',
                 ],
             ],
-            'Cymbal Giveaway' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
-                'events' => [
-                    'musora_prospect_cymbal-giveaway',
-                ],
-                'accounts_to_sync' => [
-                    'musora_prospects',
-                ],
-                'attributes' => [
-                    'first_name' => 'First Name',
-                    'email' => 'Email'
-                ],
-            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [
@@ -419,6 +404,21 @@ return [
                 ],
                 'events' => [
                     'drumeo_prospect_drumset-giveaway-nov-2024',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Cymbal Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'drumeo_prospect_cymbal-giveaway',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',

@@ -149,7 +149,7 @@
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                         "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Cymbal Giveaway',
-                        "formId" => "Musora - Engagement - Trigger - Cymbal Giveaway - WebForm",
+                        "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
                         "buttonText" => "I WANT TO WIN",
                         "nameInput" => "Your Name",
                         "stacked" => true,
