@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 class ContentServiceProvider extends ServiceProvider
 {
-
-
     /**
      * Bootstrap the application services.
      */
@@ -25,6 +23,11 @@ class ContentServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/sanity-cms.php',
             'content'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/algolia.php',
+            'algolia'
         );
 
         // middleware is controlled in the route files
