@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Platform;
 
-use Illuminate\View\View;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
@@ -14,6 +13,10 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Models\Instructor;
+use App\Modules\Content\Resources\Algolia\SearchParameters;
+use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -23,7 +26,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Models\User;
+use Illuminate\View\View;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
@@ -1332,21 +1335,60 @@ class ContentPagesController extends BaseController
      */
     public function search(Request $request): View
     {
-        ContentRepository::$availableContentStatues =
-            $request->get('statuses', ContentRepository::$availableContentStatues);
+        $search = new AlgoliaSearchService();
+        $searchParams = new SearchParameters($search, $request->get('term'));
 
+        $requestedStatuses = $request->get('statuses');
+        if ($requestedStatuses) {
+            $searchParams->onlyForStatus(...$requestedStatuses);
+        }
+
+        $requestedBrands = $request->get('brands');
+        if ($requestedBrands) {
+            $validBrands = array_filter($requestedBrands, function (string $brand) {
+                return Brand::tryFrom($brand);
+            });
+
+            $validBrands = array_filter(
+                array_map(
+                    function (string $status) {
+                        return Brand::tryFrom($status);
+                    },
+                    $validBrands
+                ),
+                fn ($item) => !is_null($item)
+            );
+
+            $searchParams->onlyForBrand(...$validBrands);
+        }
+
+        $instructors = Instructor::findMany($request->get('coach_ids', []));
+        if ($instructors->isNotEmpty()) {
+            $searchParams->onlyForInstructor(...$instructors->toArray());
+        }
+
+        // DEV NOTE: Algolia uses pagination starting at 0
+        $algoliaPage = $request->get('page', 1) - 1;
+        $searchParams->withOptions(
+            advancedSyntax: true,
+            hitsPerPage: $request->get('limit', 20),
+            page: $algoliaPage,
+        );
+
+        $searchResponse = $search->search($searchParams);
+
+        //TODO DELETEME
         $includedTypes = ContentTypes::searchableContentTypes();
-
         $lessons = $this->fullTextSearchService->search(
-            $request->get('term', null),
-            $request->get('page', 1),
-            $request->get('limit', 20),
-            $request->get('included_types', $includedTypes),
-            $request->get('statuses', []),
-            $request->get('sort', '-score'),
-            $request->get('date_time_cutoff', null),
-            $request->get('brands', null),
-            $request->get('coach_ids', [])
+            $request->get('term', null),// done
+            $request->get('page', 1), //done
+            $request->get('limit', 20), //done
+            $request->get('included_types', $includedTypes), // done
+            $request->get('statuses', []), // done
+            $request->get('sort', '-score'), //TODO?
+            $request->get('date_time_cutoff', null), //TODO?
+            $request->get('brands', null), // done
+            $request->get('coach_ids', []) //done
         );
 
         $listLessons =
@@ -1356,12 +1398,14 @@ class ContentPagesController extends BaseController
                     'totalResults' => $lessons['total_results'],
                 ])
                 ->content();
+        //TODO END
 
         return view('content.search', [
-            "lessons" => $listLessons,
+            "lessons" => $searchResponse->formatToJson(),
             "searchTerm" => $request->get('term', null),
-            "totalResults" => $lessons['total_results'],
+            "totalResults" => $searchResponse->getNbHits(),
             "includedTypes" => json_encode($includedTypes),
+            "test" => $listLessons // TODO DELETEME
         ]);
     }
 
@@ -1848,7 +1892,7 @@ class ContentPagesController extends BaseController
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
-            'pluralContentType' =>'',
+            'pluralContentType' => '',
         ]);
     }
 
