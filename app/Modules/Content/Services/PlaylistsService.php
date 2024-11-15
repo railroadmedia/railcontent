@@ -6,7 +6,9 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
+use App\Modules\Content\Models\UserPlaylistPinned;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class PlaylistsService
@@ -69,7 +71,15 @@ class PlaylistsService
         return $playlist;
     }
 
-    public function getPlaylistItems($brand, $playlistId)
+    /**
+     * Retrieves the items in a specific playlist, fetches related Sanity and Assignment data,
+     * and formats the data for each item.
+     *
+     * @param string $brand        The brand associated with the playlist.
+     * @param int $playlistId      The ID of the playlist whose items are being retrieved.
+     * @return array               An array of formatted playlist item data.
+     */
+    public function getPlaylistItems(string $brand, int $playlistId): \Illuminate\Support\Collection|array
     {
         $items = UserPlaylistContent::query()
             ->where('user_playlist_id', $playlistId)
@@ -100,13 +110,26 @@ class PlaylistsService
         return $mergedData;
     }
 
-    private function formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions)
+    /**
+     * Formats the data for a playlist item by merging information from Sanity, assignments, and item-specific data.
+     *
+     * @param mixed $item                    The playlist item being formatted.
+     * @param \Illuminate\Support\Collection $sanityDataAssoc     A collection of Sanity data keyed by content ID.
+     * @param \Illuminate\Support\Collection $assignmentDataAssoc A collection of assignment data keyed by content ID.
+     * @param int $playlistId                The ID of the playlist the item belongs to.
+     * @param array $userPermissions         An array of user permissions to check access for the playlist item.
+     * @return array                         The formatted playlist item data, including route, metadata, and permissions.
+     */
+    private function formatPlaylistItemData( mixed $item,
+        \Illuminate\Support\Collection $sanityDataAssoc,
+        \Illuminate\Support\Collection $assignmentDataAssoc,
+        int $playlistId,
+        array $userPermissions): array
     {
         $sanityInfo = $sanityDataAssoc->get($item->content_id);
         $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
 
         // Process route information if it exists in Sanity data
-        $route = [];
         if (!empty($sanityInfo['parents'] ?? [])) {
             $route = collect($sanityInfo['parents'])->map(function ($parent) use ($sanityInfo) {
                 switch ($parent['type']) {
@@ -125,8 +148,6 @@ class PlaylistsService
                 }
             })->filter()->toArray();
             $sanityInfo['route'] = array_reverse($route);
-            $lastParent = last($sanityInfo['parent_content_data']);
-            // $sanityInfo['parent'] = ['type'=>$lastParent['type'],'title'=> $lastParent['slug'],'url'=> $lastParent['slug']];
         }
 
         $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
@@ -180,14 +201,17 @@ class PlaylistsService
         }
         return $data;
     }
+
     /**
-     * @param mixed                               $sort
-     * @param \App\Modules\Brand\Enums\Brand|null $brand
-     * @param mixed                               $term
-     * @param mixed                               $limit
-     * @param mixed                               $page
-     * @param mixed                               $itemIdToCheck
-     * @return array
+     * Retrieves playlists for the current user based on various filters and sorting options.
+     *
+     * @param mixed                               $sort            Sorting parameter, e.g., 'name', 'id', or '-created_at'.
+     * @param \App\Modules\Brand\Enums\Brand|null $brand           Optional brand to filter playlists.
+     * @param mixed                               $term            Search term for playlist filtering.
+     * @param mixed                               $limit           Number of playlists per page.
+     * @param mixed                               $page            Current page number for pagination.
+     * @param mixed|null                          $itemIdToCheck   Optional item ID to check if it exists in the playlists.
+     * @return array                              An array containing playlist data and metadata, including filter options.
      */
     public function getPlaylists(mixed $sort, ?Brand $brand, mixed $term, mixed $limit, mixed $page, mixed $itemIdToCheck = null): array
     {
@@ -199,7 +223,7 @@ class PlaylistsService
 
         $user = user();
 
-        $playlists    = UserPlaylist::with('items')
+        $playlists    = UserPlaylist::query()
             ->where('railcontent_user_playlists.user_id', $user->id)
             ->when(!is_null($brand), fn($query) => $query->ofBrand($brand))
             ->searchTerm($term)
@@ -235,6 +259,7 @@ class PlaylistsService
 
         return $results;
     }
+
     /**
      * Format the playlists with durations and URLs.
      *
@@ -245,6 +270,7 @@ class PlaylistsService
     {
 
         foreach ($playlists as $index => $playlist) {
+            $pinned = $playlist->pins()->where('user_id', user()->id)->exists();
             $playlists[$index] = $playlist->toArray();
             $minsec                                 = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
             $hours                                  = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
@@ -256,12 +282,64 @@ class PlaylistsService
                 'playlistId' => $playlist['id'],
             ]);
 
-            $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : '';
-            $playlists[$index]['total_items'] = count($playlist['items']);
+            $playlists[$index]['description'] = $playlist['description'] ?? '';
+            $playlists[$index]['total_items'] = count($playlist['items'] ?? []);
             $playlists[$index]['thumbnail_url'] = $playlists[$index]['thumbnail_url'] ?? $playlists[$index]['first_item_thumbnail_url'];
+            $playlists[$index]['pinned'] = $pinned;
+            $playlists[$index]['is_my_playlist'] = $playlists[$index]['user_id'] == user()->id;
         }
 
         return $playlists;
     }
 
+    /**
+     * Retrieves and formats all playlists pinned by the current user for a specific brand.
+     *
+     * @param string $brand The brand for which pinned playlists should be retrieved.
+     * @return array An array of formatted pinned playlists.
+     */
+    public function getPinnedPlaylists(string $brand): array
+    {
+        $playlists = UserPlaylist::whereHas('pins', function ($query) {
+            $query->where('user_id', user()->id);
+        })->with('pins')->where('brand','=',$brand)->get();
+
+        return  $this->formatPlaylists($playlists->all());
+    }
+
+    /**
+     * Pins a playlist for the current user if the allowed pin limit has not been reached.
+     *
+     * @param UserPlaylist $playlist
+     * @return int|UserPlaylistPinned
+     */
+    public function pinPlaylist(UserPlaylist $playlist): int|UserPlaylistPinned
+    {
+        $allowedPinNumber = config('railcontent.pinned_playlists_nr', 5);
+        $pinnedPlaylistsCount = UserPlaylist::whereHas('pins', function ($query) {
+            $query->where('user_id', user()->id);
+        })->with('pins')->where('brand','=',$playlist->brand)->count();
+        if($pinnedPlaylistsCount < $allowedPinNumber){
+            $pinnedData = [
+                'user_id'      => user()->id,
+                'playlist_id'         => $playlist->id,
+                'created_at'   => Carbon::now()->toDateTimeString(),
+            ];
+
+            return UserPlaylistPinned::create($pinnedData);
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * @param \App\Modules\Content\Models\UserPlaylist $playlist
+     * @return bool
+     */
+    public function unpinPlaylist(UserPlaylist $playlist): bool
+    {
+        return UserPlaylistPinned::where('user_id', user()->id)
+            ->where('playlist_id', $playlist->id)
+            ->delete();
+    }
 }

@@ -48,6 +48,11 @@ class UserPlaylist extends Model
         return $this->hasMany(UserPlaylistLike::class, 'playlist_id');
     }
 
+    public function pins(): HasMany
+    {
+        return $this->hasMany(UserPlaylistPinned::class, 'playlist_id');
+    }
+
     public function scopeOfBrand(Builder $query, Brand $brand): Builder
     {
         return $query->where("{$this->table}.brand", $brand->value);

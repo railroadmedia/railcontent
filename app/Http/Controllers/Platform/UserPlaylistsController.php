@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\ContentLikesDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\UserPlaylist;
@@ -78,28 +79,20 @@ class UserPlaylistsController extends BaseController
      */
     public function playlist(Request $request, $domain, $brand, $playlistId): View
     {
-        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $user = user();
         $playlist = UserPlaylist::find($playlistId);
         throw_if((!$playlist), new NotFoundHttpException());
-
-        $playlist['has_access'] = ($playlist->user_id != $user->id && $playlist->private == true) ? 0 : 1;
-        $playlist['is_my_playlist'] = $playlist->user_id == $user->id;
-        $playlist['description'] = $playlist['description'] ?? '';
-        $playlist['playback_url'] = url()->route('platform.play.playlist', [
-            'playlistId' => $playlist['id'],
-        ]);
         $playlist['is_liked_by_current_user'] = $playlist->likes()->where('user_id', $user->id)->exists();
-        $playlist['thumbnail_url'] = $playlist['thumbnail_url'] ?? $playlist['first_item_thumbnail_url'];
+        $formatedPlaylist = $this->userPlaylistService->formatPlaylists([$playlist]);
+        $playlist = $formatedPlaylist[0];
+        $playlist['has_access'] = ($playlist['user_id'] != $user->id && $playlist['private'] == true) ? 0 : 1;
 
-        $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist->brand, $playlist->id);
+        $playlistItems = $this->userPlaylistService->getPlaylistItems($playlist['brand'], $playlist['id']);
 
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);
-        $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
-        $playlist['pinned'] = in_array($playlist['id'], \Arr::pluck($pinnedPlaylists, 'id'));
 
         return view('account.playlist', [
             "listLessons" => $items->toResponseRawJson(),
@@ -158,6 +151,8 @@ class UserPlaylistsController extends BaseController
             $playlistItem['released'] = false;
         }
         $playlistItem['parent'] = $playlistItem['parents'][0] ?? [];
+        $playlistItem['instructors'] = $playlistItem['instructors_details'] ?? $playlistItem['instructors'];
+
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parents'] ?? []]))->toResponseRawJson();
         event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));

@@ -353,7 +353,7 @@ onBeforeMount(() => {
                         <template v-else-if="lesson.instructors && lesson.instructors.length">
                             <span v-for="(instructor, i) in lesson.instructors" class="tw-whitespace-nowrap tw-truncate "
                                 :key="i">
-                                {{ instructor.name }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
+                                {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                             </span>
                         </template>
                         <!-- Or Lesson Type -->

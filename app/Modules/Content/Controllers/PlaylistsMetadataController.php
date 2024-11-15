@@ -9,12 +9,10 @@ use App\Modules\Content\Models\UserPlaylistContent;
 use App\Modules\Content\Models\UserPlaylistLike;
 use App\Modules\Content\Requests\AddItemToPlaylistRequest;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Services\PlaylistsService;
-use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 
 class PlaylistsMetadataController extends Controller
 {
@@ -52,7 +50,20 @@ class PlaylistsMetadataController extends Controller
         return response()->json($results);
     }
 
-    public function duplicatePlaylist($playlistId, Request $request)
+    /**
+     * Duplicates an existing playlist and its associated items.
+     *
+     * This method creates a duplicate of an existing playlist, including its items. The new playlist is created
+     * with the same attributes as the original, except for the name (which is appended with " (Duplicate)" by default),
+     * and any attributes provided in the request. The new playlist is saved under the authenticated user’s ID.
+     * The associated items of the original playlist are also duplicated and associated with the new playlist.
+     *
+     * @param int $playlistId The ID of the playlist to duplicate.
+     * @param \Illuminate\Http\Request $request The HTTP request object, containing the optional updated values
+     * for the duplicated playlist's name, description, category, thumbnail URL, and privacy.
+     * @return \Illuminate\Database\Eloquent\Model The newly created duplicate playlist.
+     */
+    public function duplicatePlaylist(int $playlistId, Request $request)
     {
         // Validate incoming data
         $validatedData = $request->validate([
@@ -91,7 +102,19 @@ class PlaylistsMetadataController extends Controller
         return $newPlaylist;
     }
 
-    public function deletePlaylistWithItems($playlistId, Request $request)
+    /**
+     * Deletes a playlist and all associated items for the authenticated user.
+     *
+     * This method finds a playlist by its ID and deletes it along with all the items related to that playlist.
+     * It checks if the playlist exists and whether the authenticated user is the owner of the playlist before
+     * proceeding with the deletion. If successful, it returns a response indicating that the playlist and its
+     * items were deleted.
+     *
+     * @param int $playlistId The ID of the playlist to be deleted.
+     * @param \Illuminate\Http\Request $request The HTTP request object.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating the success or failure of the deletion.
+     */
+    public function deletePlaylistWithItems(int $playlistId, Request $request): JsonResponse
     {
         $playlist = UserPlaylist::find($playlistId);
         if (!$playlist) {
@@ -115,7 +138,19 @@ class PlaylistsMetadataController extends Controller
             'message' => 'Playlist and associated items deleted successfully.']);
     }
 
-    public function updatePlaylist(Request $request, $playlistId): JsonResponse
+    /**
+     * Updates an existing playlist for the authenticated user.
+     *
+     * This method validates the incoming request data for the playlist, including optional fields like name,
+     * description, category, privacy setting, and thumbnail URL. If the playlist exists and belongs to the
+     * authenticated user, it updates the playlist with the validated data and returns the updated playlist.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist update data.
+     * @param int $playlistId The ID of the playlist to be updated.
+     * @return \Illuminate\Http\JsonResponse A JSON response with a success message, the updated playlist data,
+     *                                      and a success status.
+     */
+    public function updatePlaylist(Request $request, int $playlistId): JsonResponse
     {
         // Validate incoming data
         $validatedData = $request->validate([
@@ -149,6 +184,17 @@ class PlaylistsMetadataController extends Controller
                                 ], 201);
     }
 
+    /**
+     * Creates a new playlist for the authenticated user.
+     *
+     * This method validates the incoming request data for the playlist, including fields like name, description,
+     * category, thumbnail URL, privacy setting, and brand. After validation, a new playlist is created and saved
+     * to the database with the provided data.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist data.
+     * @return \Illuminate\Http\JsonResponse A JSON response with a success message, the created playlist data,
+     *                                      and a success status.
+     */
     public function createPlaylist(Request $request): JsonResponse
     {
         // Validate incoming data
@@ -182,7 +228,17 @@ class PlaylistsMetadataController extends Controller
                                 ], 201);
     }
 
-    public function likePlaylist(Request $request)
+    /**
+     * Adds a "like" to a playlist for the authenticated user.
+     *
+     * This method validates the provided playlist ID and checks if the user has already liked the playlist.
+     * If the user has not liked the playlist, a new "like" is created and saved. If the user has already liked
+     * the playlist, a message is returned indicating this.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist ID and optional brand.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating whether the like was successfully added or not.
+     */
+    public function likePlaylist(Request $request): JsonResponse
     {
         // Validate request data
         $validatedData = $request->validate([
@@ -220,7 +276,16 @@ class PlaylistsMetadataController extends Controller
                                 ], 201);
     }
 
-    public function deletePlaylistLike(Request $request)
+    /**
+     * Removes the "like" from a playlist for the authenticated user.
+     *
+     * This method validates the provided playlist ID and checks if the user has liked the playlist.
+     * If a "like" is found, it is deleted. If the user has not liked the playlist, an error message is returned.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist ID and brand.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating whether the like was successfully removed or not.
+     */
+    public function deletePlaylistLike(Request $request): JsonResponse
     {
         // Validate request data
         $validatedData = $request->validate([
@@ -254,7 +319,19 @@ class PlaylistsMetadataController extends Controller
                                 ], 200);
     }
 
-    public function getPlaylist($playlistId, Request $request)
+    /**
+     * Retrieves a specific playlist based on the given playlist ID.
+     *
+     * This method checks if the playlist exists and whether the authenticated user has access to the playlist.
+     * If the playlist is private and does not belong to the user, access is denied.
+     * It also checks if the playlist is liked by the current user and formats the playlist data
+     * before returning it in the response.
+     *
+     * @param int $playlistId The ID of the playlist to retrieve.
+     * @param \Illuminate\Http\Request $request The HTTP request object.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the playlist data or an error message if the playlist doesn't exist or the user lacks access.
+     */
+    public function getPlaylist(int $playlistId, Request $request): JsonResponse
     {
         $user = user();
         $playlist = UserPlaylist::find($playlistId);
@@ -280,12 +357,22 @@ class PlaylistsMetadataController extends Controller
         //            )
         //        );
 
-        //  $playlist = $this->formatPlaylists(new Collection($playlist));
+        $playlist['is_liked_by_current_user'] = $playlist->likes()->where('user_id', $user->id)->exists();
         $playlist = $this->playlistsService->formatPlaylists([$playlist]);
         return response()->json(['data' => $playlist[0]]);
     }
 
-    public function getPlaylistItems(Request $request)
+    /**
+     * Retrieves the items from a specified playlist.
+     *
+     * This method fetches the items of a playlist by first checking if the playlist exists.
+     * If the playlist exists, it retrieves the items associated with the playlist using the
+     * `playlistsService`. The method returns the playlist items in the response.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist ID.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the playlist items or an error message if the playlist doesn't exist.
+     */
+    public function getPlaylistItems(Request $request): JsonResponse
     {
         $playlistId = $request->get('playlist_id');
         $playlist = UserPlaylist::find($playlistId);
@@ -301,12 +388,19 @@ class PlaylistsMetadataController extends Controller
     }
 
     /**
-     * Update playlist item if it exists and belongs to the authenticated user.
+     * Updates a playlist item if it exists and belongs to the authenticated user.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * This method performs the following steps:
+     * - Validates the provided data (start and end seconds, playlist item name, and position).
+     * - Checks if the playlist item exists and belongs to the authenticated user.
+     * - Updates the playlist item's position if a new position is provided, adjusting the position of other items as necessary.
+     * - Updates the first item's thumbnail if the current item is moved to the first position.
+     * - Updates the playlist item with the validated data (name, start and end times, position).
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the updated data for the playlist item.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating the success or failure of the update operation.
      */
-    public function updatePlaylistItem(Request $request)
+    public function updatePlaylistItem(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
                                                 'start_second'        => 'nullable|numeric|min:0',
@@ -368,7 +462,20 @@ class PlaylistsMetadataController extends Controller
                                 ]);
     }
 
-    public function removeItemFromPlaylist(Request $request)
+    /**
+     * Removes an item from a user's playlist and repositions remaining items.
+     *
+     * This method performs the following steps:
+     * - Checks if the playlist item exists.
+     * - Verifies that the user has access to modify the playlist item.
+     * - Deletes the playlist item and repositions remaining items.
+     * - If the removed item was the first item in the playlist, updates the thumbnail of the first item.
+     * - Calls a service to update the playlist duration.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request object containing the playlist item ID.
+     * @return \Illuminate\Http\JsonResponse A JSON response indicating whether the operation was successful or not.
+     */
+    public function removeItemFromPlaylist(Request $request): JsonResponse
     {
         $user = user();
         $playlistItemId = $request->get('user_playlist_item_id');
@@ -420,7 +527,20 @@ class PlaylistsMetadataController extends Controller
                                 ]);
     }
 
-    public function getPlaylistItem($playlistItemId, Request $request)
+    /**
+     * Retrieves a specific playlist item and checks access permissions before returning the item data.
+     *
+     * The method performs the following tasks:
+     * - Checks if the user has access to the playlist item.
+     * - Verifies that the user has access to the playlist.
+     * - Fetches related Sanity and Assignment data.
+     * - Formats and returns the playlist item data with the necessary metadata.
+     *
+     * @param int $playlistItemId The ID of the playlist item to retrieve.
+     * @param \Illuminate\Http\Request $request The HTTP request object.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the playlist item data or an error message if access is denied.
+     */
+    public function getPlaylistItem(int $playlistItemId, Request $request): JsonResponse
     {
         $user = user();
         $playlistItem = UserPlaylistContent::with('playlist')->find($playlistItemId);
@@ -460,8 +580,18 @@ class PlaylistsMetadataController extends Controller
     }
 
     /**
-     * @param \App\Modules\Content\Requests\AddItemToPlaylistRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * Adds items to the specified playlists, including lessons, assignments, and extra data based on the request.
+     *
+     * This method performs the following tasks:
+     * - Counts lessons and assignments for the content.
+     * - Checks if the playlists exceed the item limit.
+     * - Adds items to the playlists, including extra data (e.g., soundslice assignments, routines).
+     * - Updates the first item thumbnail and the playlist duration.
+     *
+     * If the total items exceed the playlist limit, the request will be skipped for that playlist.
+     *
+     * @param \App\Modules\Content\Requests\AddItemToPlaylistRequest $request The request containing playlist IDs, content ID, and additional parameters.
+     * @return \Illuminate\Http\JsonResponse A JSON response containing the success status and added items.
      */
     public function addItemToPlaylists(AddItemToPlaylistRequest $request): JsonResponse
     {
@@ -581,26 +711,123 @@ class PlaylistsMetadataController extends Controller
     }
 
     /**
-     * @param $id
-     * @return array
+     * Counts the lessons and assignments for a specific entity identified by the given ID.
+     *
+     * This method calls the `countLessonsAndAssignments` method from the `sanityGateway` service to retrieve
+     * the count of lessons and assignments associated with the entity specified by the ID.
+     *
+     * @param mixed $id The ID of the entity to count lessons and assignments for.
+     * @return array An associative array containing the count of lessons and assignments.
      */
     public function countLessonsAndAssignments($id): array
     {
         return $this->sanityGateway->countLessonsAndAssignments($id);
     }
 
+    /**
+     * Fetches the pinned playlists for the user based on the provided brand.
+     *
+     * This method retrieves the brand from the request, and if not provided, it defaults to the brand set in the configuration.
+     * It then calls the `getPinnedPlaylists` method in the `playlistsService` to retrieve the pinned playlists.
+     *
+     * @param \Illuminate\Http\Request $request The incoming HTTP request, which contains the brand parameter.
+     * @return array An array of pinned playlists retrieved from the playlists service.
+     */
+    public function getPinnedPlaylists(Request $request): array
+    {
+        $brand = $request->get('brand') ?? config('railcontent.brand');
 
+        return $this->playlistsService->getPinnedPlaylists($brand);
+    }
+
+    /**
+     * Pins a playlist to the user's playlist menu.
+     *
+     * This method first checks if the playlist exists. If the playlist does not exist, it returns a 404 response.
+     * If the playlist is successfully pinned, it returns a success response.
+     * If the user has already pinned the maximum allowed number of playlists, it returns an error response.
+     *
+     * @param int $playlistId The ID of the playlist to pin.
+     * @return \Illuminate\Http\JsonResponse The JSON response indicating success or failure.
+     */
+    public function pinPlaylist(int $playlistId): \Illuminate\Http\JsonResponse
+    {
+        $playlist = UserPlaylist::find($playlistId);
+        if (!$playlist) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
+
+        $pinned = $this->playlistsService->pinPlaylist($playlist);
+        if($pinned == -1) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'errors'  => [
+                        [
+                            'detail' => 'You can only pin five playlists to the menu. To add or remove a playlist, toggle
+the pin icon on or off.',
+                        ],
+                    ],
+                ],
+                422
+            );
+        } else {
+            return response()->json([
+                                        'success' => true,
+                                        'message' => 'Playlist pinned successfully',
+                                    ], 201);
+        }
+    }
+
+    /**
+     * Unpins a playlist from the user's playlist menu.
+     *
+     * This method checks if the playlist exists. If it does not exist, a 404 response is returned.
+     * If the playlist is successfully unpinned, a success response is returned.
+     *
+     * @param int $playlistId The ID of the playlist to unpin.
+     * @return \Illuminate\Http\JsonResponse The JSON response indicating success or failure.
+     */
+    public function unpinPlaylist(int $playlistId): \Illuminate\Http\JsonResponse
+    {
+        $playlist = UserPlaylist::find($playlistId);
+        if (!$playlist) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
+
+        $this->playlistsService->unpinPlaylist($playlist);
+        return response()->json([
+                                    'success' => true,
+                                    'message' => 'Playlist unpinned successfully',
+                                ], 201);
+
+    }
 
     /**
      * Helper function to format playlist item data with Sanity and Assignment info.
      *
-     * @param UserPlaylistContent $item
-     * @param Collection $sanityDataAssoc
-     * @param Collection $assignmentDataAssoc
-     * @param int $playlistId
-     * @return array
+     * This method takes in a playlist item and formats it by combining relevant data
+     * from Sanity and Assignment sources, such as thumbnail, item type, instructors, and route.
+     * It also checks whether the user has access to the content based on their permissions.
+     *
+     * @param \App\Models\UserPlaylistContent $item The playlist item to format.
+     * @param \Illuminate\Support\Collection $sanityDataAssoc Associative array of Sanity data keyed by content ID.
+     * @param \Illuminate\Support\Collection $assignmentDataAssoc Associative array of Assignment data keyed by content ID.
+     * @param int $playlistId The ID of the playlist to which the item belongs.
+     * @param array $userPermissions The user's active permissions for access control checks.
+     * @return array The formatted playlist item data with additional details such as route, thumbnail, duration, etc.
      */
-    private function formatPlaylistItemData($item, $sanityDataAssoc, $assignmentDataAssoc, $playlistId, $userPermissions)
+    private function formatPlaylistItemData( \App\Models\UserPlaylistContent $item,
+        \Illuminate\Support\Collection $sanityDataAssoc,
+        \Illuminate\Support\Collection $assignmentDataAssoc,
+        int $playlistId,
+        array $userPermissions): array
     {
         $sanityInfo = $sanityDataAssoc->get($item->content_id);
         $assignmentInfo = $assignmentDataAssoc->get($item->content_id);

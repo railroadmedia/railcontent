@@ -192,4 +192,7 @@ Route::prefix('playlists')
         Route::get('/item/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItem')->name('playlist.item');
         Route::post('/add-item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@addItemToPlaylists')->name('playlist.add.item');
         Route::get('/count-lessons-and-assignments/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@countLessonsAndAssignments')->name('playlists.count.lessons.and.assignments');
+        Route::get('/my-pinned-playlists', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPinnedPlaylists')->name('pinned.playlists');
+        Route::put('/pin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@pinPlaylist')->name('pin.playlist');
+        Route::put('/unpin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@unpinPlaylist')->name('unpin.playlist');
     });

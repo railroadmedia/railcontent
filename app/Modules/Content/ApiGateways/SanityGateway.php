@@ -296,6 +296,15 @@ class SanityGateway
             : '';
         $query = "*[brand == '{$brand}' && railcontent_id in [{$parentIdsString}]]{
           $fieldsString, resource $parentQuery,
+          'instructors_details': instructor[]->{
+                    'id':railcontent_id,
+                    name,
+                    short_bio,
+                    'biography': long_bio[0].children[0].text,
+                    web_url_path,
+                    'coach_card_image': coach_card_image.asset->url,
+                    'coach_profile_image':thumbnail_url.asset->url
+                },
   assignment[railcontent_id in  [{$idsString}]]{assignment_soundslice,
          assignment_title,
          assignment_sheet_music_image,
@@ -328,6 +337,7 @@ class SanityGateway
                     'title'     => $assignment['assignment_title'],
                     'item_type' => 'assignment',
                     'instructors' => $document['instructors'],
+                    'instructors_details' => $document['instructors_details'],
                     'thumbnail' => $document['thumbnail'],
                     'difficulty_string' => $document['difficulty_string'],
                     'published_on' => $document['published_on'],
