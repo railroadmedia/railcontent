@@ -49,13 +49,7 @@
 
 @yield('global-body')
 
-@if(Carbon\Carbon::create(2024, 11, 30, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-{{--    end of black friday--}}
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-11-30 00:00:00',
-        'promoVersion' => true
-    ])
-@elseif(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+@if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
     {{--    end of BF weekend--}}
     @include('_partials.components.countdown',[
         'countdownDate' => '2024-12-02 00:00:00',
