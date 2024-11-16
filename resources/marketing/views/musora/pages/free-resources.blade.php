@@ -106,24 +106,44 @@
 <!-- Main -->
 @section('layout-body')
 
+    <div class="container mx-auto max-w-7xl px-4 md:px-10">
+        <header class="py-10 md:py-16">
+            <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
+            <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
+            <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">GIVEAWAY</h5>
+        </header>
 
-    <section class="text-white px-4 md:px-10 py-10 sm:py-12" style="background-color:#101520;">
-        <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-col sm:flex-row items-center">
-                <div class="w-full sm:w-1/2 text-left px-2 sm:px-0 mb-4 sm:mb-0">
-                    <h1 class="uppercase leading-none mb-4"><strong>Linkin Park Cymbal Giveaway</strong></h1>
-                    <p class="leading-normal">
-                        We're giving away the entire set of Istanbul cymbals that Brandon used in the video to ONE lucky winner
-                    </p>
+        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-12 bg-drumeo rounded-xl" {{--style="background-color:#101520;"--}}>
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="w-full lg:w-5/12 lg:pr-8 text-left px-2 sm:px-0 mb-4 lg:mb-0">
+                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/890x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win.jpg">
                 </div>
-                <div class="w-full sm:w-1/2 text-center sm:text-left giveaway-form">
+                <div class="w-full lg:w-7/12 text-left giveaway-form">
+                    <h2 class="uppercase leading-none mb-4"><strong>Win The Cymbals From<br> Drumeo’s Linkin Park Video</strong></h2>
+                    <p class="leading-normal mb-3">
+                        <strong>Win the ENTIRE set of Istanbul cymbals that Brandon used in our latest video.</strong>
+                        <br><br>
+                        Item list:
+                    </p>
+                    <style>
+                            ul {
+                                column-count: 2;
+                            }
+                    </style>
+                    <ul class="pl-6 mb-3 list-disc" style="column-gap: 20px;">
+                        <li class="leading-tight text-sm mb-3">Istanbul Traditional 10" Splash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Traditional 15" Medium Hihats</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Traditional 16" Thin Crash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Traditional 18" Dark Crash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Traditional 20" Dark Crash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Xsist	18" Ion FX Crash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Mantra 22" Ride</li>
+                    </ul>
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                         "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Cymbal Giveaway',
                         "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
                         "buttonText" => "I WANT TO WIN",
-                        "nameInput" => "Your Name",
-                        "stacked" => true,
                         "minimalForm" => true,
                         "buttonColor" => "bg-musora text-black",
                         "redirectUrl" => "https://www.musora.com/thank-you",
@@ -131,16 +151,9 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <div class="container mx-auto max-w-7xl px-4 md:px-10">
-        <header class="py-10 md:py-16">
-            <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
-            <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
-            <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">Free Video Lessons</h5>
-        </header>
-
-              @php
+        <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold my-10 md:my-16">Free Video Lessons</h5>
+        @php
             $benefits = [
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotd.webp', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotp.webp', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],

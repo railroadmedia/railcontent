@@ -98,9 +98,7 @@ return [
                 ],
             ],
             'Cymbal Giveaway' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_cymbal-giveaway',
                 ],
@@ -108,7 +106,6 @@ return [
                     'drumeo',
                 ],
                 'attributes' => [
-                    'first_name' => 'First Name',
                     'email' => 'Email'
                 ],
             ],
@@ -429,9 +426,7 @@ return [
                 ],
             ],
             'Cymbal Giveaway' => [
-                'custom_attributes' => [
-                    'first_name' => 'nullable|string',
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_cymbal-giveaway',
                 ],
@@ -439,7 +434,6 @@ return [
                     'drumeo',
                 ],
                 'attributes' => [
-                    'first_name' => 'First Name',
                     'email' => 'Email'
                 ],
             ],
