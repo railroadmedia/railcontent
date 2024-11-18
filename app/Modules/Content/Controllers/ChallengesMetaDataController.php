@@ -3,22 +3,92 @@
 namespace App\Modules\Content\Controllers;
 
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\CohortService;
+use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\View\View;
 use Modules\Content\Services\ChallengesService;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class ChallengesMetaDataController extends Controller
 {
     public function __construct(
         private ChallengesService $challengesService,
-        private UserContentProgressService $userContentProgressService,
+        private CohortService $cohortService,
+        private ProductService $productService,
+        private UserAccessPermissionsService $userAccessPermissionsService,
     )
     {
+    }
+
+    /**
+     * @param Request $request
+     * @param $slug
+     * @param $purchased
+     * @return View
+     */
+    public function enrollmentPage(Request $request, $slug, $purchased = false): View
+    {
+        // TODO TCH-56 this needs to be updated to pull all data from sanity instead of nova (and the cohort table).
+        // this is the just the first pass so we can start testing enrollment
+        $cohort = $this->cohortService->getCohort($slug);
+        if (!$cohort) {
+            abort(404);
+        }
+        $challengeId = $cohort['content_id'];
+        $today = now()->startOfDay()->format('Ymd');
+        $registerButtonUrl = url()->route('challenges.set_start_date', ['id' => $challengeId, 'start_date', $today]);
+        $content = $this->challengesService->getChallengeById($challengeId);
+        $nPackOwners =  $this->challengesService->getActiveUsersCount($challengeId);
+        $cohort['course_url'] = $content['web_url_path'];
+        $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser($challengeId, user()->id)?->is_active ?? false : false;
+        //$productId = $cohort['product_id'];
+        //$hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        // below here is where things need to be refactored
+
+
+
+        $enrollmentClosed = $cohort['enrollmentClosed'];
+
+        $cohort['conversation_url'] =
+            $cohort['conversation_thread_id'] ?
+                url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
+        $cohort['timeline_image_url'] =
+            config('railcontent.cohort_timeline_image_urls')[brand()]
+            ??
+            config('railcontent.cohort_timeline_image_urls')['pianote'];
+
+        $lists = $cohort->lists;
+        foreach ($lists as $list) {
+            $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
+        }
+        $cohort->lists = $lists;
+
+        if ($cohort['custom_cohort'] == true) {
+            $view = 'content.cohort-template-mk';
+        } else {
+            $view = 'content.cohort-template';
+        }
+
+        return view($view, [
+            'hasProduct' => $isEnrolled,
+            'nPackOwners' => $nPackOwners,
+            'registerButtonUrl' => $registerButtonUrl,
+            'brand' => brand(),
+            'cohort' => $cohort,
+            'enrollmentClosed' => $enrollmentClosed,
+            'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
+            'purchased' => $purchased,
+            'recaptchaKey' => config('recaptcha.key'),
+        ]);
     }
 
 
@@ -34,7 +104,8 @@ class ChallengesMetaDataController extends Controller
         $userProgresses = ChallengeUserProgress::whereUserIdAndActive($userId);
         if ($userProgresses->isEmpty()) return response()->json([]);
         $brand = $request->get('brand', brand());
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, true, $brand);
+        $challengeIds = $userProgresses->pluck('content_id')->toArray();
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($challengeIds, $userProgresses, true, $brand);
         return response()->json($resultPackage);
     }
 
@@ -44,6 +115,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getChallengeMetadata($id)
     {
+
         $enrolledUsersAndCount = $this->challengesService->getEnrolledUsers($id);
         $enrolledUsers = $enrolledUsersAndCount['users'];
         // TODO https://musora.atlassian.net/browse/TCH-51
@@ -84,7 +156,7 @@ class ChallengesMetaDataController extends Controller
         if (!$contentIds) return response()->json([]);
         $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
         $brand = $request->get('brand', brand());
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($userProgresses, false, $brand);
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($contentIds, $userProgresses, false, $brand);
         return response()->json($resultPackage);
     }
 
@@ -192,12 +264,7 @@ class ChallengesMetaDataController extends Controller
         foreach($challengeProgress as $progress) {
             foreach($challenges as $challenge) {
                 if ($progress->content_id == $challenge['id']) {
-                    $badges[] = [
-                        'title' => $challenge['title'],
-                        'badge' => $challenge['badge'],
-                        'id' => $challenge['id'],
-                        ... $this->getUserAwardData($challenge, $progress, $user)
-                    ];
+                    $badges[] = $this->getUserAwardData($challenge, $progress, $user);
                     break;
                 }
             }
@@ -257,6 +324,9 @@ class ChallengesMetaDataController extends Controller
             'challenge_title' => $challenge['title'],
             'award_text' => $challenge['award_custom_text'],
             'tier' => $tier,
+            'title' => $challenge['title'],
+            'badge' => $challenge['badge'],
+            'id' => $challenge['id'],
             ... $imageValues,
         ];
     }

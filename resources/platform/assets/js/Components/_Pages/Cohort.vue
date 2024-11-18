@@ -389,7 +389,7 @@ const joinText = computed(() => {
 const enroll = (purchase = false) => {
     if(!isEnrolled.value){
         fetch(props.registerUrl, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': token,
