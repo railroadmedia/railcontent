@@ -97,6 +97,18 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Cymbal Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_cymbal-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Free Music Lessons For Life' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
@@ -410,6 +422,18 @@ return [
                 ],
                 'attributes' => [
                     'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Cymbal Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_cymbal-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
                     'email' => 'Email'
                 ],
             ],

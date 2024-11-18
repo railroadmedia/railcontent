@@ -27,6 +27,79 @@
             }
         }
     </style>
+    <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+            color:#777
+        }
+
+        .giveaway-form input, .giveaway-form button {
+            font:400 18px/45px "Open Sans", sans-serif;
+            height:45px;
+            color:#999;
+            border-radius:100px;
+            padding:7px 20px;
+            margin:0 auto 10px;
+            transition:all .2s ease-in;
+            box-shadow:none;
+            text-align:inherit;
+            border: 1px solid;
+        }
+
+        @media (min-width:640px) {
+            .giveaway-form input, .giveaway-form button {
+                font-size:19px;
+                margin:0 auto
+            }
+        }
+
+        @media (min-width:1024px) {
+            .giveaway-form input, .giveaway-form button {
+                font-size:23px
+            }
+        }
+
+        .giveaway-form button {
+            font-family:"Bebas Neue", sans-serif;
+            text-transform:uppercase;
+            margin:0 auto!important;
+            text-align:center;
+            display:block;
+            cursor:pointer;
+            border:none;
+            width:100%;
+            padding:0;
+            color:#fff;
+        }
+        .giveaway-form input, .giveaway-form button {
+            line-height:40px;
+            height: 40px;
+        }
+        @media (min-width: 40em) {
+            .giveaway-form input, .giveaway-form button {
+                height: 52px;
+                line-height: 52px;
+            }
+        }
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:10px;
+        }
+        @media (min-width: 40em) {
+            .thank-you-box.active {
+                padding: 12px;
+            }
+        }
+        .giveaway-form input {
+            margin-bottom: 8px;
+        }
+    </style>
 @endsection
 
 
@@ -37,10 +110,52 @@
         <header class="py-10 md:py-16">
             <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
             <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
-            <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">Free Video Lessons</h5>
+            <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">GIVEAWAY</h5>
         </header>
 
-              @php
+        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-14 bg-drumeo rounded-xl" {{--style="background-color:#101520;"--}}>
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="w-full lg:w-5/12 lg:pr-8 text-left px-2 sm:px-0 mb-4 lg:mb-0">
+                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win.jpg">
+                </div>
+                <div class="w-full lg:w-7/12 text-left giveaway-form">
+                    <h2 class="uppercase leading-none mb-2"><strong>Win The Cymbals From<br> Drumeo’s Linkin Park Video</strong></h2>
+                    <p class="leading-normal mb-1">
+                        <strong>Win the ENTIRE set of Istanbul Agop cymbals that Brandon used in our latest video.</strong>
+                        <br>
+                        Item list:
+                    </p>
+                    <style>
+                            ul {
+                                column-count: 2;
+                            }
+                    </style>
+                    <ul class="pl-6 mb-3 list-disc" style="column-gap: 20px;">
+                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 10" Splash</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 15" Medium Hihats</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 16" Thin Crash</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 18" Dark Crash</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 20" Dark Crash</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Xist	18" Ion FX Crash</li>
+                        <li class="leading-tight text-sm mb-1">Istanbul Mantra 22" Ride</li>
+                    </ul>
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Cymbal Giveaway',
+                        "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
+                        "buttonText" => "I WANT TO WIN",
+                        "minimalForm" => true,
+                        "buttonColor" => "bg-musora text-black",
+                        "redirectUrl" => "https://www.musora.com/thank-you",
+                    ])
+                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><u>View Terms & Conditions</u></a><br>
+                        By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold my-10 md:my-16">Free Video Lessons</h5>
+        @php
             $benefits = [
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotd.webp', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotp.webp', 'title' => 'Getting Started On The Piano', 'link' => 'https://www.pianote.com/getting-started-on-the-piano/lessons'],
@@ -161,18 +276,18 @@
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mb-2">Newsletters</h5>
                     <div class="flex flex-col items-baseline">
                         <a href="/playlist" class="relative bg-cover bg-center mb-6 group block">
-                            <img 
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/mp.webp" 
-                                alt="Musora Playlists" 
+                            <img
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/mp.webp"
+                                alt="Musora Playlists"
                                 class="rounded-2xl transition-transform duration-300"
                             >
                             <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>
                         </a>
-                        
+
                         <a href="/history" class="relative bg-cover bg-center block group">
-                            <img 
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/timh.webp" 
-                                alt="Today in Music History" 
+                            <img
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/musora/lead-gen/youtube/timh.webp"
+                                alt="Today in Music History"
                                 class="rounded-2xl transition-transform duration-300"
                             >
                             <i class="fa-regular fa-arrow-up-right absolute top-2 right-2 text-white text-4xl transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-2"></i>

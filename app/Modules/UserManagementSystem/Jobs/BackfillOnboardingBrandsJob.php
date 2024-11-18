@@ -41,7 +41,7 @@ class BackfillOnboardingBrandsJob implements ShouldQueue
         $this->onboardingService = app(OnboardingService::class);
 
         $users = User::query()
-            ->where('membership_expiration_date', '>', now())
+            ->where('membership_expiration_date', '<=', now())
             ->whereBetween('id', [$this->firstId, $this->lastId])
             ->get();
 
