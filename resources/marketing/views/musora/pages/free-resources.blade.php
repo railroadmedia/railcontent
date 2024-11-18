@@ -121,7 +121,7 @@
                 <div class="w-full lg:w-7/12 text-left giveaway-form">
                     <h2 class="uppercase leading-none mb-4"><strong>Win The Cymbals From<br> Drumeo’s Linkin Park Video</strong></h2>
                     <p class="leading-normal mb-3">
-                        <strong>Win the ENTIRE set of Istanbul cymbals that Brandon used in our latest video.</strong>
+                        <strong>Win the ENTIRE set of Istanbul Agop cymbals that Brandon used in our latest video.</strong>
                         <br><br>
                         Item list:
                     </p>
@@ -136,7 +136,7 @@
                         <li class="leading-tight text-sm mb-3">Istanbul Traditional 16" Thin Crash</li>
                         <li class="leading-tight text-sm mb-3">Istanbul Traditional 18" Dark Crash</li>
                         <li class="leading-tight text-sm mb-3">Istanbul Traditional 20" Dark Crash</li>
-                        <li class="leading-tight text-sm mb-3">Istanbul Xsist	18" Ion FX Crash</li>
+                        <li class="leading-tight text-sm mb-3">Istanbul Xist	18" Ion FX Crash</li>
                         <li class="leading-tight text-sm mb-3">Istanbul Mantra 22" Ride</li>
                     </ul>
                     @include("drumeo.lead-gen.partials.sign-up-form", [
