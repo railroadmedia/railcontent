@@ -2,6 +2,7 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+use App\Models\Cohort;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
@@ -84,6 +85,13 @@ class DevEndpointController extends Controller
                 $progress->save();
                 $challengeName = $challenge['title'];
                 return "Start date for $challengeName for user: $userId moved to {$newStartDate->toISOString()}. Completed lessons and practice time maintained";
+            case('cohort'):
+                $cohortId = $request->get('cohort_id');
+                $cohort = Cohort::query()->where('id', $cohortId)->first();
+                $cohort->content_id = $challengeId;
+                $cohort->enrollment_end_date = Carbon::parse('20251111 23:00')->toISOString();
+                $cohort->save();
+                return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";

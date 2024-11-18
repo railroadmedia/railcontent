@@ -31,7 +31,7 @@ const props = defineProps({
 const info = {
     streak: {
         title: '🔥 Introducing Streaks!',
-        description: 'Streaks make it easy to track how many days in a row you’ve completed a lesson for a specific Challenge. Higher streaks will unlock special achievements!'
+        description: 'Streaks make it easy to track how many days in a row you\'ve completed a lesson for a specific Challenge. Bonus days will always count towards your streak. Higher streaks will unlock special achievements!'
     },
     rest: {
         title: '<img class="tw-mr-2 tw-w-6 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" /> <img class="tw-mr-2 tw-w-6 tw-inline-block dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" /> Introducing Rest Days!',

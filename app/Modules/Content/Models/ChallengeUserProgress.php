@@ -19,6 +19,14 @@ enum AwardTier: string
     case BRONZE = 'bronze';
 }
 
+enum ChallengeUserProgressStatus: string
+{
+    case COMPLETED = 'completed';
+    case NOTSTARTED = 'not_started';
+    case ACTIVE = 'active';
+    case INPROGRESS = 'in_progress';
+}
+
 
 /**
  * App\Modules\Content\Models\Content
@@ -216,8 +224,10 @@ class ChallengeUserProgress extends Model
         $total = 0;
         $completed = 0;
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
-            $total++;
-            $completed += $lessons_meta_datum['completed'] ? 1 : 0;
+            if (!$lessons_meta_datum['is_always_unlocked']) {
+                $total++;
+                $completed += $lessons_meta_datum['completed'] ? 1 : 0;
+            }
         }
         return intval(($completed * 100) / $total);
     }
