@@ -4,7 +4,6 @@ namespace App\Modules\UserManagementSystem\Jobs;
 
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncCustomerByEmail;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Illuminate\Bus\Batchable;
