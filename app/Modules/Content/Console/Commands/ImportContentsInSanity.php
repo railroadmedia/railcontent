@@ -686,10 +686,12 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'xp'               => (int)$result->xp,
             'total_xp'         => (int)$result->total_xp,
             'show_in_new_feed' => $result->show_in_new_feed == 1,
-            'instrumentless' => $result->instrumentless == 1,
             "web_url_path"     => $result->web_url_path,
             "popularity"       => $result->popularity
         ];
+        if($type == 'song'){
+            $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
+        }
         if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->format('Y-m-d\TH:i:s\Z');
         }
@@ -721,8 +723,16 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if ($result->parent_content_data) {
             $parents = (json_decode($result->parent_content_data));
             foreach ($parents as $parent) {
-                $sanityDocuments['parent_content_data'][] = ['type' => $parent->type,
-                                                             'id' => $parent->id, 'slug' => $parent->slug, 'position' => $parent->position ?? 1];
+                if($parent->type != 'edge-pack' && $parent->type != 'user-playlist' && !in_array($parent->slug,['lead-guitar-101', 'electric-rhythm-guitar-101',
+                        'acoustic-rhythm-guitar-101', 'lead-guitar-quick-start', 'beginner-electric-quick-start', 'beginner-acoustic-quick-start',
+                        'no-guitar-needed','reading-music','lead-guitar-102','electric-rhythm-guitar-102','acoustic-rhythm-guitar-102']) ) {
+                    $sanityDocuments['parent_content_data'][] = [
+                        'type'     => $parent->type,
+                        'id'       => $parent->id,
+                        'slug'     => $parent->slug,
+                        'position' => $parent->position ?? 1
+                    ];
+                }
             }
         }
         $resources       = [];
