@@ -306,6 +306,19 @@ class ChallengeUserProgress extends Model
      * @return Collection | null
      * @throws Exception
      */
+    public static function whereUserId(int $userId) : Collection | null
+    {
+        $challengeUserCollection = self::query()
+            ->where('user_id', $userId)
+            ->get();
+        return $challengeUserCollection;
+    }
+
+    /**
+     * @param int $userId
+     * @return Collection | null
+     * @throws Exception
+     */
     public static function whereUserIdAndCompleted(int $userId) : Collection | null
     {
         $challengeUserCollection = self::query()

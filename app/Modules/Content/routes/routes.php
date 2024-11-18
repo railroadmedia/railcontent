@@ -136,6 +136,16 @@ Route::prefix('challenges')
         )->name('challenges.all_user_badges');
 
         Route::get(
+            'tab_owned/get',
+            [ChallengesMetaDataController::class, 'getOwnedChallenges']
+        )->name('challenges.tab_owned_challenges');
+
+        Route::get(
+            'tab_completed/get',
+            [ChallengesMetaDataController::class, 'getCompletedChallenges']
+        )->name('challenges.tab_completed_challenges');
+
+        Route::get(
             'user_active_challenges/get',
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
