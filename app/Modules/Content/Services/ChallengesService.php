@@ -149,32 +149,22 @@ class ChallengesService
         $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
         $firstIncompleteLesson = [];
         $userData = [];
-
-        if (!is_null($progressData) && $progressData->is_active) {
+        $isUserActive = $progressData?->is_active ?? false;
+        if ($isUserActive) {
             $challengeLessons = $this->combineUserLessonDataWithSanityLessonData($challengeLessons, $progressData);
             $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson($challengeLessons, $progressData);
 
             $userData = $progressData->getCompiledMetadata();
-            $now = Carbon::now();
-            $userData['challenge_state'] = match (true) {
-                $challenge['is_solo'] => 'active_solo',
-                !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
-                    $challenge['enrollment_start_time']
-                ) => 'upcoming',
-                $now < Carbon::parse($challenge['published_on']) => 'enrollment',
-                $now < Carbon::parse($userData['end_date']) => 'active_community',
-                default => 'completed_community',
-            };
+            $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date']);
             if ($isLesson) {
                 $nextPreviousLesson = $this->getPreviousAndNextLesson($contentId, $challengeLessons);
             } else {
-                $nextPreviousLesson = [
-                    'next_lesson' => $firstIncompleteLesson,
-                    'previous_lesson' => null,
-                ];
+                $nextPreviousLesson = $this->getPreviousAndNextLesson($firstIncompleteLesson['id'], $challengeLessons);
+                $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
             }
         } else {
             $userData['is_active'] = false;
+            $userData['challenge_state'] = $this->getChallengeState($challenge);
             $nextPreviousLesson = [];
         }
 
@@ -191,6 +181,14 @@ class ChallengesService
             $lessonDocument['challenge_light_mode_logo_url'] = $challenge['light_mode_logo_url'];
             $lessonDocument['challenge_logo_image_url'] = $challenge['logo_image_url'];
             $lessonDocument['challenge_title'] = $challenge['title'];
+
+            // filter lessons to only show incomplete and future lessons.
+            if ($isUserActive) {
+                $challengeLessons = array_filter($challengeLessons, function ($lesson) {
+                    return $lesson['completed'];
+                });
+            }
+
         } else {
             // format the duration of the challenge
             if ($userData['is_active']) {
@@ -239,6 +237,20 @@ class ChallengesService
         }
 
         return $lessons;
+    }
+
+    private function getChallengeState($challenge, $userEndDate = null) : string
+    {
+        $now = Carbon::now();
+        return match (true) {
+            $challenge['is_solo'] => 'active_solo',
+            !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
+                $challenge['enrollment_start_time']
+            ) => 'upcoming',
+            $now < Carbon::parse($challenge['published_on']) => 'enrollment',
+            !is_null($userEndDate) && $now < Carbon::parse($userEndDate) => 'active_community',
+            default => 'completed_community',
+        };
     }
 
     public function getChallengeMetaDataForUserProgress(array $allChallengeIds, Collection $userProgresses, bool $returnChallengeData, ?string $brand = null) : array

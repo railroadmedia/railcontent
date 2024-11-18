@@ -175,6 +175,8 @@ class ChallengeUserProgress extends Model
         foreach($lessons as  $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
             $unlockDate = !$isLocked || $isAlwaysUnlocked ? $startDate : $rollingUnlockDate;
+            $lessonPublishedDate = Carbon::parse($lesson['published_on']);
+            $unlockDate = max($unlockDate, $lessonPublishedDate);
             $lessonMetaData[] =
                 [
                     'content_id' => $lesson['id'],
