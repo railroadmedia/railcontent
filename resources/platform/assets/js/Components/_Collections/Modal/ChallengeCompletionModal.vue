@@ -26,7 +26,7 @@
                         <div class="tw-pl-6 tw-relative tw-pt-7">
                             <div class="tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-video tw-mb-5 tw-relative">
                                 <!-- Thumbnail -->
-                                <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${nextLessonThumbnail}`" alt="Next lesson thumbnail" />
+                                <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${lessonThumbnail}`" alt="Next lesson thumbnail" />
                                 <!-- Overlay -->
                                 <div v-if="isNextLessonLocked || isLastLesson" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                                     <template v-if="isNextLessonLocked">
@@ -155,7 +155,7 @@
         </div>
 
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
-            <ChallengeAwardModal v-if="showAward" :is-modal="false" />
+            <ChallengeAwardModal v-if="showAward" :is-modal="false" :award-data="awardData" @closeModal="$emit('closeModal')" />
         </div>
     </ModalRenderer>
 
@@ -176,12 +176,13 @@ import MuButton from '@units/Button/MuButton';
 import ChallengeInfoModal from '@collections/Modal/ChallengeInfoModal';
 import ChallengeAchievementModal from '@collections/Modal/ChallengeAchievementModal';
 import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
+import {fetchUserAward} from "musora-content-services";
 
 const props = defineProps({
     completionData: {
         type: Object,
         default: {},
-    }
+    },
 })
 
 const userStore = useUserStore();
@@ -195,6 +196,7 @@ const showAchievement = ref(false);
 const showAward = ref(false);
 const hideAnimation = ref(false);
 const countdownString = ref('');
+const awardData = ref({});
 
 const hasProgress = computed(() => {
     return progress.value > 0;
@@ -236,8 +238,8 @@ const currentLessonTitle = computed(() => {
     return props.completionData?.short_name;
 })
 
-const nextLessonThumbnail = computed(() => {
-    return props.completionData?.next_lesson?.thumbnail;
+const lessonThumbnail = computed(() => {
+    return isLastLesson.value ? props.completionData?.current_lesson_thumbnail : props.completionData?.next_lesson?.thumbnail;
 })
 
 const nextLessonTitle = computed(() => {
@@ -273,7 +275,11 @@ const updateInfoModalType = (type) => {
     infoModalType.value = type;
 }
 
-const openAwardModal = () => {
+const openAwardModal = async() => {
+    const data = await fetchUserAward(props.completionData?.challenge_id);
+    console.log('award', data)
+    awardData.value = data;
+
     showAchievement.value = false;
     showAward.value = true;
 }
