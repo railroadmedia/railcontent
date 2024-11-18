@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .join, .join:hover {
-            background-color: #F61A30;
+            background: #F61A30;
             border-color: #F61A30;
         }
         .join.musora, .join.musora:hover {
