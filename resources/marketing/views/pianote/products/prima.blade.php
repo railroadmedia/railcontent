@@ -564,7 +564,7 @@
                            'specialText' => 'Free Shipping in the USA <br>*Discounted rates elsewhere',
                            'cta' => 'BUY NOW',
                            'highlightBorder' => true,
-                           'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1',
+                           'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1',
                             'bonuses' => [
                             '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                             '<i class="fas fa-check text-pianote mr-1"></i> Prima Keyboard Stand',
@@ -615,7 +615,7 @@
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h4>
                         <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
-                        <a href=""><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> {{-- TODO: Add link to the bench and stand --}}
+                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> {{-- TODO: Add link to the bench and stand --}}
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
