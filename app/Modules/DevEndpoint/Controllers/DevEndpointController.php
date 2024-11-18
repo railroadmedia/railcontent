@@ -2,9 +2,12 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
+use Algolia\AlgoliaSearch\Api\SearchClient;
 use App\Models\Cohort;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Resources\Algolia\SearchParameters;
+use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
@@ -43,6 +46,47 @@ class DevEndpointController extends Controller
 
     public function handleRequest(Request $request, $arg1 = null)
     {
+
+        // TODO BK NOTE:
+        // testing out the native client
+        $client = SearchClient::create(config('algolia.app_id'),
+            config('algolia.api_key'));
+        $response = $client->searchSingleIndex('staging_sanity_all', ['query' => 'foo']);
+        dd($response);
+
+
+
+        // $searchClient = SearchClient::create(config('algolia.app_id'),config('algolia.api_key'));
+        //
+        // $searchResponse = $searchClient->searchSingleIndex(
+        //     config('algolia.all_index_name'),
+        //     ['query' => 'nirvana'],
+        // );
+
+        $search = new AlgoliaSearchService();
+        // $searchResponse = $search->search('nirvana -jazz');
+        // $searchResponse = $search->search('nirvana');
+
+        // $searchResponse = $search->search((new SearchParameters($search, 'nirvana -jazz'))->withOptions(advancedSyntax: true)
+        //     ->onlyForType(DocumentType::Song, DocumentType::QuickTips, DocumentType::Challenge));
+        $searchParams = new SearchParameters($search, 'song');
+        $searchParams->withOptions(advancedSyntax: true);
+
+        $searchResponse = $search->search($searchParams);
+
+        // $searchResponse = $searchClient->searchSingleIndex(
+        //     ['requests' => [
+        //         ['indexName' => config('algolia.index_name'), 'query' => 'nirvana']
+        //     ]],
+        // );
+
+//         $test = new SearchParameters($search, 'nirvana');
+//         $test->onlyForType(DocumentType::Song, DocumentType::QuickTips, DocumentType::Challenge);
+//         // $test->filters = ['(_type:song OR _type:quick-tips OR _type:lesson)'];
+//
+// $searchResponse = $search->search($test);
+        dd($searchResponse);
+
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }
