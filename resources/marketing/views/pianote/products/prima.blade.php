@@ -11,7 +11,17 @@
     <meta name="description" content="Everything you need to start playing the piano. ">
     <meta property="og:description" content="Everything you need to start playing the piano. ">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg">
+    @php
+        if (Request::is('shop/prima')) {
+            $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/keyboard-bundle-share-image.jpg';
+        } elseif (Request::is('shop/prima-ltm')) {
+            $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg';
+        } elseif (Request::is('shop/prima-ultimate')) {
+            $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/ultimate-bundle-share-image.jpg';
+        }
+    @endphp
+
+    <meta property="og:image" content="{{ $shareImage }}">    
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -61,6 +71,13 @@
         }
         .prima-piano-next svg {
             fill: #F61A30;
+        }
+        .lifetime-card a {
+            border-color: #0C1524 !important;
+            border-width: 1px !important;
+        }
+         .lifetime-card p {
+           text-align: center !important;
         }
     </style>
 
@@ -144,8 +161,8 @@
                 @endif
     
                 <div class="w-full max-w-xl mx-auto">
-                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
-                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[classical-piano-collection]=1&products[taktell-piccolo-metronome]=1&products[classical-piano-pieces]=1&locked=true"
+                    <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
+                        href="#customize-anchor"
                     >START PLAYING</a>
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
@@ -427,13 +444,13 @@
                     </div>
                 </div>
                 @if (!empty($ultimate))
-                <div class="flex flex-wrap text-left pt-4">
-                    <div class="w-full sm:w-1/2 px-2">
+                <div class="flex flex-wrap text-left">
+                    <div class="w-full sm:w-1/2 px-2 pt-4">
                         <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-04.webp">
                         <h6 class="pt-4"><strong>The Pianote Metronome</strong></h6>
                         <p class="lg:pr-6">Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.<br><br>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust.</p>
                     </div>
-                    <div class="w-full sm:w-1/2 px-2">
+                    <div class="w-full sm:w-1/2 px-2 pt-4">
                         <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/setup-05.webp">
                         <h6 class="pt-4"><strong>The Music Theory Poster Bundle</strong></h6>
                         <p class="lg:pr-6">Connecting what you see on a page to the keys can feel like a giant leap.<br><br>That’s why we’ve made it easy with 6 beautiful full-color posters highlighting the essential theory you need to play the songs you love.</p>
@@ -447,7 +464,7 @@
         $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
-    <section class="pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
+    <section class=" @if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 @else py-8 sm:py-16 lg:py-20 @endif px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
                 @foreach($packs as $pack)
@@ -513,17 +530,17 @@
     @if(!empty($lifetime))
         <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
             <div class="container mx-auto relative z-10 max-w-3xl">
-                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
+                <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8 lifetime-card">
                         @include('drumeo.products.partials._order-card', [
                             'header' => 'The Pianote PRIMA',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-01.webp',
                             'imageHeight' => 'h-24 lg:h-28 px-4',
-                            'fullPrice' => "$" . floatval($productPrices['practice-kit']->price),
-                            'price' => "$" . floatval($productPrices['practice-kit']->discounted_price),
+                            'fullPrice' => "$599",
+                            'price' => "$599",
                             'specialText' => 'Free Shipping in the USA<br>*Discounted rates elsewhere',
                             'cta' => 'BUY NOW',
                             'highlightBorder' => true,
-                            'link' => '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1',
+                            'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1',
                             'bonuses' => [
                                 '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                                 '<i class="fas fa-check text-pianote mr-1"></i> 88-key Progressive Lever Hammer Action',
@@ -543,10 +560,10 @@
                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/prima/order-02.webp',
                            'imageHeight' => 'h-24 lg:h-28',
                            'price' => '$750',
-                           'specialText' => 'Free Shipping in the USA *Discounted rates elsewhere',
+                           'specialText' => 'Free Shipping in the USA <br>*Discounted rates elsewhere',
                            'cta' => 'BUY NOW',
                            'highlightBorder' => true,
-                           'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
+                           'link' => '/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1',
                             'bonuses' => [
                             '<i class="fas fa-check text-pianote mr-1"></i> The Pianote Prima',
                             '<i class="fas fa-check text-pianote mr-1"></i> Prima Keyboard Stand',
@@ -576,16 +593,10 @@
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
                             <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
 
-                        <h4 class="my-4"> ONLY
-                            @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
-                                <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
-                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
-                                 (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
-                            @else
-                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
-                            @endif
-                        </h4>
-                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
+                        <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
+                        Only <s class="opacity-50">$1642</s> <strong>$799</strong>
+                        </h3>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-ultimate-bundle-pianote]=1">Start Playing</a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -597,18 +608,13 @@
                             </picture>
                         @else
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
-                            <h6 class="leading-tight max-w-xs">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
 
-                        <h4 class="my-4"> ONLY
-                            @if(floatval($productPrices['alesis-ekit']->price) > floatval($productPrices['alesis-ekit']->discounted_price))
-                                <s class="opacity-50">${{ floatval($productPrices['alesis-ekit']->price) }}</s>
-                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
-                                 (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%)
-                            @else
-                                <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
-                            @endif
+                        <h4 class="my-4"> 
+                         Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h4>
-                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
+                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> 
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -661,31 +667,23 @@
         'vimeo' => true,
     ])
 
-    @include('_partials.components.video-modal',[
-        'name' => 'modal798501810',
-        'video' => '798501810',
-        'vimeo' => true,
-    ])
-     @include('_partials.components.video-modal',[
-        'name' => 'modal823788317',
-        'video' => '823788317',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'modal852795615',
-        'video' => '852795615',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'modal928599834',
-        'video' => '928599834',
-        'vimeo' => true,
-    ])
-    @include('_partials.components.video-modal',[
-        'name' => 'modal1008560089',
-        'video' => '1008560089',
-        'vimeo' => true,
-    ])
+    @php
+    $videoBonuses = [
+        ['name' => 'modal798501810', 'video' => '798501810'],
+        ['name' => 'modal823788317', 'video' => '823788317'],
+        ['name' => 'modal852795615', 'video' => '852795615'],
+        ['name' => 'modal928599834', 'video' => '928599834'],
+        ['name' => 'modal1008560089', 'video' => '1008560089'],
+    ];
+    @endphp
+
+    @foreach ($videoBonuses as $modal)
+        @include('_partials.components.video-modal', [
+            'name' => $modal['name'],
+            'video' => $modal['video'],
+            'vimeo' => true,
+        ])
+    @endforeach
 
     @include("pianote.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
