@@ -26,7 +26,7 @@ const relatedLessonDescription = computed(() => {
 
 //Song Artist
 const artist = computed(() => {
-    const artist = props.relatedLesson.fields.find(data => data.key === 'artist');
+    const artist = props.relatedLesson['artist'] ?? props.relatedLesson.fields.find(data => data.key === 'artist');
     return artist?.value;
 })
 

@@ -4,6 +4,7 @@ import { onBeforeMount, onMounted, inject, reactive, computed, onBeforeUpdate } 
 import PlaylistService from '@services/playlists.js';
 import { usePlaylistsStore } from '@stores/playlists';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
+import {updatePlaylist} from 'musora-content-services';
 
 //Inject
 const token = inject('csrf_token');
@@ -95,9 +96,11 @@ const privateToggle = () => {
     // }
     emit('makePublic', state.isPrivate)
     let isPrivate = props.data.private === 1 ? true : false;
-    PlaylistService.setToPrivate(props.data.id, isPrivate, token)
+    updatePlaylist(props.data.id, {
+        "private": isPrivate ? 0 : 1,
+    }, token)
         .then((response) => {
-            if (response.status === 201) {
+            if (response.success === true) {
                 //show success message
                 window.shownotification({
                     icon: state.isPrivate ? 'fa-lock' : 'fa-lock-open',
