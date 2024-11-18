@@ -419,7 +419,7 @@ class ChallengesService
         $motivationalText = [];
         if (!$userProgress->is_locked || !$lessonsProgress['added_to_streak']) {
             $active = false;
-        } else if ($lessonsProgress['is_milestone']) {
+        } elseif ($lessonsProgress['is_milestone']) {
             $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
             $motivationalTextConfig = config('challengemotivationalresponses')[$milestone] ?? config('challengemotivationalresponses')['default'];
             $motivationalText = [

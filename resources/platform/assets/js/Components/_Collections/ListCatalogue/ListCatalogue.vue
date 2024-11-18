@@ -20,6 +20,7 @@
                 :destroy-on-list-removal="destroyOnListRemoval"
                 :compact-layout="compactLayout"
                 :is-next-lesson="isNextLesson"
+                @open-challenge-lock-modal="openChallengeLockModal"
             />
 
             <div id="branch-paths" v-if="branchPathContent.data" >
@@ -48,14 +49,18 @@
         </template>
         <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i" />
     </div>
+
+    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :challenge="lockedChallenge" @close-modal="closeChallengeLockModal" />
 </template>
 <script setup>
+import { ref } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import { useCollectionStore } from "@stores/collection";
 
 import CatalogueListItem from "./ListCatalogueItem";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
+import ChallengeLockedModal from '@collections/Modal/ChallengeLockedModal';
 
 const props = defineProps({
     content: {
@@ -138,4 +143,16 @@ const collectionStore = useCollectionStore();
 
 const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
 const { isLoading } = storeToRefs(platformStore);
+
+const isChallengeLockModalOpen = ref(false);
+const lockedChallenge = ref(null);
+
+const openChallengeLockModal = (data) => {
+    lockedChallenge.value = data;
+    isChallengeLockModalOpen.value = true;
+}
+
+const closeChallengeLockModal = () => {
+    isChallengeLockModalOpen.value = false;
+}
 </script>

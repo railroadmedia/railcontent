@@ -10,9 +10,12 @@
             :progress="header?.progress"
             :info-data="header?.infoData"
             :is-loading="isLoading"
+            :hero-img="header?.thumbnail"
+            :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
             :ctas="headerData?.ctas"
+            :lesson-data="data?.lesson"
             :dark-mode-logo="headerData?.darkModeLogo"
             :light-mode-logo="headerData?.lightModeLogo"
         />
@@ -110,6 +113,7 @@ import ListCatalogue from '@collections/ListCatalogue/ListCatalogue'
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 import { useOverviewPageData } from '@hooks/pages/useOverviewPageData';
+import { dropdowns } from '@pages/Overview/dropdowns';
 
 const props = defineProps({
     contentType: {
@@ -176,6 +180,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    parentType: {
+        type: String,
+        default: '',
+    },
 })
 
 //Pinia
@@ -188,6 +196,7 @@ const { isLoading } = storeToRefs(platformStore);
 const data = ref(null);
 const header = ref(null);
 const error = ref(null);
+const isUnlocked = ref(false); //challenge dropdown
 
 //Computed
 const showOverview = computed(() => {
@@ -202,16 +211,24 @@ const OverviewChildData = computed( () => {
     return data.value.children;
 })
 
+const headerDropdown = computed(() => {
+    if(!isUnlocked.value){
+        return dropdowns[props.parentType] || [];
+    }
+})
+
 onBeforeMount( async () => {
     // console.log('content type is', props.contentType)
     // console.log('headerData', props.headerData.ctas)
     // console.log('sanity content is: ', props.contentType);
-    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
+    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
         data.value = OverviewData.value;
         console.log('overview page data', data.value)
 
         //Header Data
         header.value = OverviewData.value.header;
+
+        isUnlocked.value = OverviewData.value?.is_unlocked;
 
         console.log(header.value)
 

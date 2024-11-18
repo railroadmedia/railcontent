@@ -280,7 +280,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getUserAward($id)
     {
-        $challenge = $this->challengesService->getChallengeById($id);
+              $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen

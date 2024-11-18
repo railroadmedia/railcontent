@@ -3,7 +3,7 @@
         <div>
             <button @click="toggleDropdown" type="button"
                 class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1 tw-mb-0"
-                :class="[text ? 'tw-px-6' : 'tw-w-[40px] tw-h-[40px] tw-p-0']" :aria-expanded="showDropdown.toString()"
+                :class="[text ? 'tw-px-6' : 'tw-w-[40px] sm:tw-w-[48px] tw-h-[40px] sm:tw-h-[48px] tw-p-0']" :aria-expanded="showDropdown.toString()"
                 aria-haspopup="true">
                 <template v-if="$slots.button">
                     <slot name="button"></slot>
@@ -17,7 +17,7 @@
             </button>
         </div>
 
-        <div class="tw-absolute tw-right-0 tw-bg-white dark:tw-bg-[#081825] tw-shadow tw-text-xs tw-text-[#00101D] tw-rounded tw-z-50"
+        <div class="tw-absolute tw-right-0 tw-bg-white dark:tw-bg-[#081825] tw-shadow tw-text-xs sm:tw-text-sm tw-text-[#00101D] tw-rounded tw-z-50"
             :class="{ 'tw-opacity-0': !showDropdown, 'tw-opacity-100 tw-transition-opacity tw-duration-200 tw-ease-in-out': showDropdown }"
             v-show="showDropdown"
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">

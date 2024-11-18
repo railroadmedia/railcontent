@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -9,6 +9,7 @@
             <!-- Delete contentType prop after May 6th -->
             <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <ChallengeCardContainer v-else-if="isChallenge" :content="data" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
@@ -53,6 +54,7 @@ import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";
+import ChallengeCardContainer from '@collections/Catalogue/ChallengeCardContainer';
 
 const props = defineProps({
     collectionType: {
@@ -145,6 +147,7 @@ const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, 
 const { brand, journeySection } = storeToRefs(userStore);
 
 //Collection type reactives
+
 const isRecommendation = computed(() => {
     return props.collectionType === 'Recommendation';
 })
