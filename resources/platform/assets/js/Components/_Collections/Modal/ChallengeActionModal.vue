@@ -33,7 +33,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['closeModal']);
+const emit = defineEmits(['closeModal', 'onLeaveChallenge']);
 
 const isUnlockModal = computed(() => {
     return props.modalType === 'unlock';
@@ -94,6 +94,7 @@ const buttonAction = async () => {
 
         } else if(isLeaveModal.value){
             const leave = await postChallengesLeave(props.challenge?.id);
+            emit('onLeaveChallenge', props.challenge?.id);
         }
 
         emit('closeModal');

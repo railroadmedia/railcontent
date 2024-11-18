@@ -5,11 +5,11 @@
         :title="info[type].title"
         class-override="tw-max-w-[600px] tw-w-full"
         :container-stay-on-close="containerStayOnClose"
-        @onClose="() => $emit('closeModal')"
+        @onClose="() => emit('closeModal')"
     >
         <p class="dark:tw-text-white tw-mb-5">{{ info[type].description }}</p>
         <div class="tw-flex tw-justify-end">
-            <MuButton @click="$emit('closeModal')">Okay!</MuButton>
+            <MuButton @click="emit('closeModal')">Okay!</MuButton>
         </div>
     </InfoModal>
 </template>
@@ -27,6 +27,8 @@ const props = defineProps({
         default: false,
     },
 })
+
+const emit = defineEmits(['closeModal']);
 
 const info = {
     streak: {
