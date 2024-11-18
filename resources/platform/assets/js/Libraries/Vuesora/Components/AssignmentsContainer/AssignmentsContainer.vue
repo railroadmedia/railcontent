@@ -73,11 +73,11 @@ export default {
     computed: {
         //Thumbnail
         lessonThumbnail() {
-            const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
+            const thumbnail = this.lessonData['thumbnail'] ?? this.lessonData['data'].find(data => data.key === 'thumbnail_url') ?? '';
             return thumbnail && thumbnail.value;
         },
         lessonTitle() {
-            const title = this.lessonData['fields'].find(data => data.key === 'title');
+            const title = this.lessonData['title'] ?? this.lessonData['fields'].find(data => data.key === 'title') ?? '';
             return title.value;
         },
         lessonId() {

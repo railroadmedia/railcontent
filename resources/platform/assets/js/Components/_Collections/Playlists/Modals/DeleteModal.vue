@@ -4,6 +4,7 @@
     import { usePlaylistsStore } from '@stores/playlists';
     import LoadingSpinner from '@units/LoadingSpinner/LoadingSpinner.vue';
     import MuButton from '@units/Button/MuButton';
+    import {deletePlaylistItem, deletePlaylist} from 'musora-content-services';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -45,9 +46,10 @@
 
     //-----------Methods-----------//
     const handleDeletePlaylist = () => {
-        PlaylistService.deletePlaylist(props.data.id, token)
+        deletePlaylist(props.data.id)
             .then(function(response) {
-                if (response.status === 200) {
+
+                if (response.success === true) {
                     //update pinia stores (if pinned)
                     playlistsStore.unpinPlaylist(props.data.id)
 
@@ -102,8 +104,7 @@
         //Close Modal
         emit('onCloseModal');
         //Send Request
-        PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
-            .then(function(response) {
+        deletePlaylistItem(props.data).then(function(response) {
                 if (response.status === 200) {
                     if(props.data.index === 0) playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token);
 
