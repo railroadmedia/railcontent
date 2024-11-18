@@ -74,7 +74,7 @@
 
         <!-- Progress Bar -->
         <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#223F57]">
-            <div class="tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold" :class="progressPercent > 0 ? `tw-bg-${brand}` : `tw-w-auto tw-pl-2`" :style="`width:${progressPercent}%`">{{ progressPercent }}%</div>
+            <div class="tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold" :class="progressPercent > 0 ? `tw-bg-${brand}` : `tw-w-auto tw-pl-2`" :style="`width:${progressPercent}%`">{{ progressPercent }}%</div>
         </div>
     </div>
 
@@ -104,7 +104,7 @@
                     <circle cx="130" cy="130" r="121" stroke="currentColor" stroke-width="20" fill="transparent"
                             :stroke-dasharray="circumference"
                             :stroke-dashoffset="circumference - progressPercent / 100 * circumference"
-                            :class="`tw-text-${brand} tw-transition-all tw-duration-700`" />
+                            :class="`tw-text-${brand}`" />
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
                     <!-- Challenge Logos -->
