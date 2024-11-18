@@ -274,7 +274,7 @@ import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
-import { contentStatusCompleted } from 'musora-content-services';
+import { getProgressPercentage } from 'musora-content-services';
 
 const props = defineProps({
     isCoach: {
@@ -480,8 +480,8 @@ const openUpgradeModal = () => {
 }
 
 onBeforeMount( () => {
-    contentStatusCompleted(props.item.id).then( value => {
-        lesson_completed.value = value;
+    getProgressPercentage(props.item.id).then( value => {
+        lesson_completed.value = value === 100;
     }).catch( error => {
         console.log('error gettin completed value', error);
     })
