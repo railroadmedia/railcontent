@@ -816,14 +816,14 @@ the pin icon on or off.',
      * from Sanity and Assignment sources, such as thumbnail, item type, instructors, and route.
      * It also checks whether the user has access to the content based on their permissions.
      *
-     * @param \App\Models\UserPlaylistContent $item The playlist item to format.
+     * @param UserPlaylistContent $item The playlist item to format.
      * @param \Illuminate\Support\Collection $sanityDataAssoc Associative array of Sanity data keyed by content ID.
      * @param \Illuminate\Support\Collection $assignmentDataAssoc Associative array of Assignment data keyed by content ID.
      * @param int $playlistId The ID of the playlist to which the item belongs.
      * @param array $userPermissions The user's active permissions for access control checks.
      * @return array The formatted playlist item data with additional details such as route, thumbnail, duration, etc.
      */
-    private function formatPlaylistItemData( \App\Models\UserPlaylistContent $item,
+    private function formatPlaylistItemData(UserPlaylistContent $item,
         \Illuminate\Support\Collection $sanityDataAssoc,
         \Illuminate\Support\Collection $assignmentDataAssoc,
         int $playlistId,
