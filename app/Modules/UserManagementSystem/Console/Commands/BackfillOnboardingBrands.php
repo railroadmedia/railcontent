@@ -19,7 +19,7 @@ class BackfillOnboardingBrands extends Command
     {
         $jobs = [];
         User::query()
-            ->where('membership_expiration_date', '>', now())
+            ->where('membership_expiration_date', '<=', now())
             ->select('id')
             ->orderBy('id')
             ->chunkById(200, function (Collection $users) use (&$jobs) {
