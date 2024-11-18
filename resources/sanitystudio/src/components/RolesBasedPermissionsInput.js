@@ -6,14 +6,13 @@ const RolesBasedPermissionsInput = memo(
         const { renderDefault, schemaType } = props;
         const { role } = useCurrentUser();
 
-        const options = useMemo(() => {
-            return schemaType.of.map((option) => {
-                if (role !== 'administrator') {
-                    option.options = {...option.options, disableNew: true};
-                }
-                return option;
-            });
-        }, [schemaType.of, role]);
+const options = useMemo(() => {
+    return schemaType.of.map((option) => {
+        return role !== 'administrator'
+            ? { ...option, options: { ...option.options, disableNew: true } }
+            : option;
+    });
+}, [schemaType.of, role]);
 
         return renderDefault({ ...props, schemaType: { ...schemaType, of: options } });
     })
