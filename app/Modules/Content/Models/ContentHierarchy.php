@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ContentHierarchy extends Model
 {
     protected $table = 'railcontent_content_hierarchy';
+    protected $fillable = ['child_id', 'parent_id', 'child_position', 'created_on'];
     public $timestamps = false;
 
     public function child(): BelongsTo
