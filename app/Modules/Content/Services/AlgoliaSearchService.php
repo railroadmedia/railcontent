@@ -75,11 +75,11 @@ class AlgoliaSearchService
         }
 
         // apply default restrictions if necessary
-        if ($this->brand && !$query->hasBrandFilter) {
+        if ($this->brand) {
             $query->onlyForBrand($this->brand);
         }
 
-        if (!empty($this->statusRestrictions) && !$query->hasStatusFilter) {
+        if (!empty($this->statusRestrictions)) {
             $query->onlyForStatus(...$this->statusRestrictions);
         }
 
