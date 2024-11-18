@@ -147,7 +147,7 @@ class ChallengesService
         }
 
         $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
-        $firstIncompleteLesson = [];
+        $firstIncompleteLesson = null;
         $userData = [];
         $isUserActive = $progressData?->is_active ?? false;
         if ($isUserActive) {
@@ -165,7 +165,7 @@ class ChallengesService
         } else {
             $userData['is_active'] = false;
             $userData['challenge_state'] = $this->getChallengeState($challenge);
-            $nextPreviousLesson = [];
+            $nextPreviousLesson = [ 'next_lesson' => null, 'previous_lesson' => null];
         }
 
 
@@ -184,9 +184,13 @@ class ChallengesService
 
             // filter lessons to only show incomplete and future lessons.
             if ($isUserActive) {
-                $challengeLessons = array_filter($challengeLessons, function ($lesson) {
-                    return $lesson['completed'];
-                });
+                $temp = [];
+                foreach($challengeLessons as $lesson) {
+                    if (!$lesson['completed']) {
+                        $temp[] = $lesson;
+                    }
+                }
+                $challengeLessons = $temp;
             }
 
         } else {

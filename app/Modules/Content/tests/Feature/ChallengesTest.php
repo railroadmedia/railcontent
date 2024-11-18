@@ -737,11 +737,6 @@ class ChallengesTest extends TestCase
         $this->assertTrue($userProgress->areAllLessonsCompleted());
     }
 
-    public function test_lesson_data_check_challenge_state(): void
-    {
-        //user_data.challenge_state
-    }
-
     public function test_lesson_data_check_inactive(): void
     {
         $this->mockChallengeAndLessonDataData();
@@ -819,11 +814,10 @@ class ChallengesTest extends TestCase
         }
 
         $resultData = $challengesService->getCurrentLessonData($maxLessonId, $userId, isLesson: true);
-        $this->assertEquals($maxLessonId - 2, $resultData['previous_lesson']['id']);
-        $this->assertEmpty($resultData['next_lesson']);
-        $this->assertEmpty($resultData['first_incomplete_lesson']);
-        $this->assertCount(0, $resultData['lessons']);
-
+        $this->assertNull($resultData['previous_lesson']);
+        $this->assertNull($resultData['next_lesson']);
+        $this->assertNull($resultData['first_incomplete_lesson']);
+        $this->assertCount(24, $resultData['lessons']);
     }
 
 
