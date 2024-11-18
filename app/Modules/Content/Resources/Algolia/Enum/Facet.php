@@ -45,10 +45,15 @@ enum Facet: string
             Index::Podcast,
             Index::PlayAlong,
             Index::Course,
-            Index::Bootcamp => Collect(Facet::cases())->reject(
+            Index::Bootcamp => Collect(self::cases())->reject(
                 fn (self $attribute) => in_array($attribute, [self::ArtistName, self::Album, self::Genre])
             )->toArray()
         };
+    }
+
+    public function isInIndex(Index $index): bool
+    {
+        return in_array($this, self::getForIndex($index));
     }
 
     /**

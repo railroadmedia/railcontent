@@ -6,6 +6,8 @@ namespace App\Modules\Content\Resources\Algolia\Enum;
  * Types of Documents in Sanity
  *
  * DEV NOTE: these values are from the 'Legacy webhook for Algolia' Sanity webhook
+ *
+ * @codeCoverageIgnore
  */
 enum DocumentType: string
 {
