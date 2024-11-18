@@ -129,9 +129,6 @@ class SearchParameters
 
     // internal settings
     protected bool $hasOptions;
-    public bool $hasBrandFilter = false;
-    public bool $hasTypeFilter = false;
-    public bool $hasStatusFilter = false;
 
     public function __construct(public AlgoliaSearchService $algoliaSearchService, public string $query)
     {
@@ -317,7 +314,7 @@ class SearchParameters
      */
     public function addFilter(Facet $facet, string|int|array $value, ?string $comparator = null, bool $orStatement = false, bool $applyNot = false): self
     {
-        if (!in_array($facet, Facet::getForIndex($this->algoliaSearchService->index))) {
+        if (!$facet->isInIndex($this->algoliaSearchService->index)) {
             Log::error(sprintf('Facet %s is not available for index %s. Filter has not been applied.', $facet->value, $this->algoliaSearchService->index->value));
             return $this;
         }
@@ -345,24 +342,17 @@ class SearchParameters
             case Facet::TYPE_DATE_TIMESTAMP:
                 if (!$comparator) {
                     Log::error(sprintf('Missing required comparator for %s facet %s. Filter has not been applied.', $facet->getAttributeType(), $facet->value));
-                    break;
+                    return $this;
                 }
                 $filter .= sprintf('%s %s %s', $facet->value, $comparator, $value);
                 break;
             default:
                 Log::error(sprintf('Unsupported attribute type for: %s. Filter has not been applied.', $facet->value));
+                return $this;
         }
 
         $this->filters[] = $filter;
         $this->hasOptions = true;
-        return $this;
-    }
-
-    private function addFilterWithoutOtherOptions(Facet $facet, string|int|array $value, ?string $comparator = null, bool $orStatement = false, bool $applyNot = false): self
-    {
-        $startingHasOptions = $this->hasOptions;
-        $this->addFilter($facet, $value, $comparator, $orStatement, $applyNot);
-        $this->hasOptions = $startingHasOptions;
         return $this;
     }
 
@@ -375,12 +365,11 @@ class SearchParameters
     public function onlyForBrand(Brand ...$brands): self
     {
         if (count($brands) === 1) {
-            $updated = $this->addFilterWithoutOtherOptions(Facet::Brand, $brands[0]->value);
+            $updated = $this->addFilter(Facet::Brand, $brands[0]->value);
         } else {
             $brandStrings = array_map(fn (Brand $brand) => $brand->value, $brands);
-            $updated = $this->addFilterWithoutOtherOptions(Facet::Brand, $brandStrings);
+            $updated = $this->addFilter(Facet::Brand, $brandStrings);
         }
-        $this->hasBrandFilter = true;
         return $updated;
     }
 
@@ -393,12 +382,11 @@ class SearchParameters
     public function onlyForType(DocumentType ...$types): self
     {
         if (count($types) === 1) {
-            $updated = $this->addFilterWithoutOtherOptions(Facet::DocumentType, $types[0]->value);
+            $updated = $this->addFilter(Facet::DocumentType, $types[0]->value);
         } else {
             $typeStrings = array_map(fn (DocumentType $type) => $type->value, $types);
-            $updated = $this->addFilterWithoutOtherOptions(Facet::DocumentType, $typeStrings);
+            $updated = $this->addFilter(Facet::DocumentType, $typeStrings);
         }
-        $this->hasTypeFilter = true;
         return $updated;
     }
 
@@ -411,12 +399,11 @@ class SearchParameters
     public function onlyForStatus(Status ...$statuses): self
     {
         if (count($statuses) === 1) {
-            $updated = $this->addFilterWithoutOtherOptions(Facet::Status, $statuses[0]->value);
+            $updated = $this->addFilter(Facet::Status, $statuses[0]->value);
         } else {
             $statusStrings = array_map(fn (Status $status) => $status->value, $statuses);
-            $updated = $this->addFilterWithoutOtherOptions(Facet::Status, $statusStrings);
+            $updated = $this->addFilter(Facet::Status, $statusStrings);
         }
-        $this->hasStatusFilter = true;
         return $updated;
     }
 
@@ -432,7 +419,7 @@ class SearchParameters
             $updated = $this->addFilter(Facet::InstructorNames, $instructors[0]->name);
         } else {
             $instructorNames = array_map(fn (Instructor $instructor) => $instructor->name, $instructors);
-            $updated = $this->addFilter(Facet::Status, $instructorNames);
+            $updated = $this->addFilter(Facet::InstructorNames, $instructorNames);
         }
         return $updated;
     }
@@ -470,9 +457,6 @@ class SearchParameters
 
             // remove our internal attributes
             unset($options['hasOptions']);
-            unset($options['hasBrandFilter']);
-            unset($options['hasTypeFilter']);
-            unset($options['hasStatusFilter']);
             unset($options['algoliaSearchService']);
 
             // convert the filters into a string
@@ -481,14 +465,6 @@ class SearchParameters
             }
 
             // remove any null values
-            return array_filter($options, function ($value) {
-                return $value !== null;
-            });
-        } elseif ($this->hasBrandFilter || $this->hasTypeFilter || $this->hasStatusFilter) {
-            // set only the filter option and the query
-            $options['filters'] = implode(' AND ', $this->filters);
-            $options['query'] = $this->query;
-
             return array_filter($options, function ($value) {
                 return $value !== null;
             });
