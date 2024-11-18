@@ -35,9 +35,15 @@
     <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
-        .join, .join:hover {
+        .join, .join.smaller {
             background: #F61A30;
             border-color: #F61A30;
+        }
+        .join:hover, .join:focus, 
+        .join.smaller:focus, .join.smaller:hover {
+            background: #F61A30;
+            filter: brightness(125%);
+            box-shadow: 0 0 7px hsla(0, 0%, 0%, 0.35);
         }
         .join.musora, .join.musora:hover {
             background-color: #FFAE00;
