@@ -204,6 +204,7 @@ export default {
             return new ContentModel(type, {
                 brand: this.brand,
                 post: this.item,
+                isSearch: this.is_search,
             });
         },
     },

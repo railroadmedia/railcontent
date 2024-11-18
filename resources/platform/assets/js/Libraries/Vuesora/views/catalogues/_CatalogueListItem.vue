@@ -272,6 +272,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    is_search: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   computed: {
     mappedData() {

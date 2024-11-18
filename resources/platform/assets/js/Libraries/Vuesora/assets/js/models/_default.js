@@ -64,9 +64,11 @@ export default class ContentModel {
 
         if(Array.isArray(instructor)){
             return instructor.join(', ');
+        } else if (Array.isArray(this.post.instructors)) {
+            return this.post.instructors.join(', ');
         }
 
-        return [];
+        return 'Instructor';
     }
 
     getInstructors() {
@@ -151,7 +153,15 @@ export default class ContentModel {
             singeo: 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo_fallback_thumb.jpg',
         };
 
-        let thumb = this.post.image;
+        let thumb = null;
+
+        if (this.post.image) {
+            thumb = this.post.image;
+        }
+        
+        if (this.post.thumbnail_url) {
+            thumb = this.post.thumbnail_url;
+        }
 
         if (this.postType === 'learning-path' && this.brand === 'drumeo') {
             thumb = this.getPostDatum('background_image_url');
