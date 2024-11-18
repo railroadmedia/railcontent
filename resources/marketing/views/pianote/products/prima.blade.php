@@ -554,7 +554,6 @@
                                 '<i class="fas fa-check text-pianote mr-1"></i> USB MIDI and Audio In/Out',
                             ],
                         ])
-                         {{-- TODO: Add link to the bench and stand --}}
                         @include('drumeo.products.partials._order-card', [
                            'firstOnMobile' => true,
                            'header' => 'Add a Bench & Stand',
@@ -615,7 +614,7 @@
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h4>
                         <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
-                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> {{-- TODO: Add link to the bench and stand --}}
+                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> 
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
