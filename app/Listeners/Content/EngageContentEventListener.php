@@ -20,6 +20,8 @@ class EngageContentEventListener
 
     public function handleEngageContent(PlaylistItemLoaded $event)
     {
+        //TODO Roxana
+
         $item = $this->userPlaylistService->getPlaylistItemById($event->playlistItemId);
 
         $this->userPlaylistService->updatePlaylistsLastProgress($item['content_id'], brand());
@@ -28,8 +30,9 @@ class EngageContentEventListener
 
     public function handleRemoveEngageContent($event)
     {
+        //TODO Roxana
         $deleted = $this->contentLastEngagedService->deleteEngagedContent(user()->id, $event->playlistId, null);
-        if(isset($event->playlistItemId) && ($deleted == 1) && ($event->position > 1)) {
+        if (isset($event->playlistItemId) && ($deleted == 1) && ($event->position > 1)) {
             $previousPlaylistItem = $this->userPlaylistService->getItemWithPositionInPlaylist($event->playlistId, ($event->position - 1));
             $this->contentLastEngagedService->engageContent(user()->id, $previousPlaylistItem['id'], $event->playlistId, null);
         }

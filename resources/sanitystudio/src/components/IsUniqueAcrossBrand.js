@@ -10,19 +10,21 @@ export default async function IsUniqueAcrossBrand(slug, context) {
         type: document._type,
         id: clean_id,
         draft_id: 'drafts.'+ clean_id,
+        status: 'published',
         slug,
     };
     // Construct the query based on the presence of the brand field
-    let query = `*[_type == $type && slug.current == $slug && !(_id in [$id, $draft_id])]`;
+    let query = `*[_type == $type  && status == $status && slug.current == $slug && !(_id in [$id, $draft_id])]`;
     if (document.parent_type) {
         params.type = document.parent_type;
         query = `*[_type == $type && ($id in child[]._ref)  && $slug in child[]->slug.current && !(child[]->_id in [$id, $draft_id])]{
-           child[]->{'exists':_id != $id && slug.current == $slug}
+           child[]->{'exists':_id != $id && _id != $draft_id && slug.current == $slug && status == $status}
         }`;
     } else if (document.brand) {
         params.brand = document.brand;
-        query = `*[_type == $type && brand == $brand && slug.current == $slug && !(_id in [$id, $draft_id])]`;
+        query = `*[_type == $type && brand == $brand && status == $status && slug.current == $slug && !(_id in [$id, $draft_id])]`;
     }
+
     const documents = await client.fetch(query, params);
     if (document.parent_type) {
         const isSlugUnique = !documents.some(doc =>
