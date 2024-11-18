@@ -2,6 +2,20 @@
 
 $bonuses = [
     [
+        'imageFull' => true,
+        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
+        'title' => '30-Day Chops',
+        'description' => 'Boost your creativity in just 30 days',
+        'price' => floatval($productPrices['30-day-chops']->price),
+    ],
+    [
+        'imageFull' => true,
+        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
+        'title' => '30-Day Drummer',
+        'description' => 'Learn the drums with daily guided workouts.',
+        'price' => floatval($productPrices['30-day-drummer-4']->price),
+    ],
+    [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
         'title' => 'Drumeo EarDrums',
         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',

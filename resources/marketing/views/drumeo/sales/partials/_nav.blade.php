@@ -69,6 +69,7 @@
                 </div>
             </div>
         @endif
+    
 
         <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
             <a @if(!empty($scrollToJoin))

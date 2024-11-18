@@ -1,4 +1,5 @@
 <section x-show="filter === 'all'">
+
     <div class="container mx-auto">
         <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-badge-percent text-{{ $brand }} mr-1"></i> {!!  $header  !!}</strong></h5>
         <div class="flex flex-wrap mb-5 sm:mb-10">

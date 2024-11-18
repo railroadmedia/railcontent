@@ -161,20 +161,50 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+    @endif
 
-{{--        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-black relative" style="background-color:#f3efee;">--}}
-{{--            <div class="container max-w-5xl mx-auto relative z-20">--}}
-{{--                <img class="h-16 sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp">--}}
-{{--                <h6 class="leading-tight mt-3 mb-1"><strong>Learn the language of music <br class="sm:hidden"> with daily guided workouts.</strong></h6>--}}
-{{--                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on July 1st!</p>--}}
-{{--                <a href="/shop/read-music" class="join smaller">Learn More</a>--}}
-{{--            </div>--}}
-{{--            <picture>--}}
-{{--                <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">--}}
-{{--                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp">--}}
-{{--            </picture>--}}
-{{--        </section>--}}
+    @if(!empty($bfVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/BF-header-banner.webp')",
+            'text' => 'Save up to 91% on <br class="sm:hidden">drum lessons, gear & more!',
+            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
+            'vimeo' => '885338636',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true&promo-code=FREE-W-ANNUAL-6702',
+        ])
+
+        <div class="sticky-trigger block"></div>
+        <a href="#customize-anchor"
+            class="promo-banner anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] -mt-12 transition-none"
+            style="background: #FFAC00;">
+
+            <div x-data="timer()" x-init="countdown()"
+                {{--                x-cloak x-show="day < 2"--}}
+            >
+                <div class="inline-flex flex-wrap mx-auto justify-center items-center">
+                    <p class="leading-none m-0 font-black"><strong>DEALS END IN:</strong></p>
+                    <div class="h-8 mx-2 bg-black" style="width:2px;"></div>
+                    <div class="flex text-center">
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="day">00</div>
+                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
+                        </div>
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="hour">00</div>
+                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>
+                        </div>
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="minute">00</div>
+                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
+                        </div>
+                        <div x-show="timeLeft > 0">
+                            <div class="text-lg leading-none font-extrabold" x-text="second">00</div>
+                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>
+                        </div>
+                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
+                    </div>
+                </div>
+            </div>
+        </a>
     @endif
 
     @hasSection('top-bar')
@@ -263,6 +293,8 @@
             ])
         @else
             @include('musora.sales.components.header-section', [
+            'promoHeader' => true,
+            'BFheader' => 'Save $100 + get $635 in free bonuses',
                 'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
@@ -360,8 +392,13 @@
         @php
             $bonuses = [
                 [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
+                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
+                    'title' => 'New Piano Players Start Here',
+                    'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+                    'price' => floatval($productPrices['new-piano-players-start-here']->price),
+                ],
+                [
+                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
                     'title' => 'Easy Chords',
                     'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
                     'price' => floatval($productPrices['easy-chords']->price),
@@ -373,13 +410,29 @@
                     'description' => 'Learn the Blues in just 30 days',
                     'price' => floatval($productPrices['30-day-blues-piano']->price),
                 ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                    'title' => '30 Days To Better Technique',
+                    'description' => 'What would happen if you learned piano from the best keyboardist in the world?',
+                    'price' => floatval($productPrices['30-days-to-better-technique']->price),
+                ],
+                [
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/classical-piano-collection/membership/classical-piano-collection-card.webp',
+                    'description' => 'Play The Most Beautiful Piano Music In The World With Step-By-Step Tutorials.',
+                    'price' => floatval($productPrices['classical-piano-collection']->price),
+                    'shipping' => true,
+                ],
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
+        'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/promos/november/2024/pianote-deal-logo.svg',
         'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&locked=true&promo-code=special',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
+        'belowButton' => true,
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

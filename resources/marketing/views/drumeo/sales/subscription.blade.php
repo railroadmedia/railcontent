@@ -559,26 +559,50 @@
             $bonuses = [
                 [
                     'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
-                    'title' => '30-Day Chops',
-                    'description' => 'Boost your creativity in just 30 days',
-                    'price' => floatval($productPrices['30-day-chops']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dd.webp',
                     'title' => '30-Day Drummer',
                     'description' => 'Learn the drums with daily guided workouts.',
                     'price' => floatval($productPrices['30-day-drummer-4']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30di.webp',
+                    'title' => '30-Day Independence',
+                    'description' => 'Improve your coordination with daily guided workouts.',
+                    'price' => floatval($productPrices['30-day-independence']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30ddb.webp',
+                    'title' => '30-Day Double Bass',
+                    'description' => 'Unlock your foot speed & control on the drums.',
+                    'price' => floatval($productPrices['30-day-double-bass']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dj.webp',
+                    'title' => '30-Day Jazz',
+                    'description' => 'Immerse yourself in jazz drumming for 30 days.',
+                    'price' => floatval($productPrices['30-day-jazz']->price),
+                ],
+                [
+                    'imageFull' => true,
+                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dc.webp',
+                    'title' => '30-Day Chops',
+                    'description' => 'Boost your creativity in just 30 days',
+                    'price' => floatval($productPrices['30-day-chops']->price),
                 ],
             ];
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
+        'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/drumeo-deal-logo.svg',
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=special',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+        'belowButton' => true,
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
