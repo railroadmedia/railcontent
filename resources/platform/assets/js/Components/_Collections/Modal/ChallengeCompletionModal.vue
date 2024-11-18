@@ -155,7 +155,7 @@
         </div>
 
         <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-700" :class="showAward ? 'tw-opacity-1 tw-z-10' : 'tw-opacity-0 tw-z-0'">
-            <ChallengeAwardModal v-if="showAward" :is-modal="false" :award-data="awardData" @closeModal="$emit('closeModal')" />
+            <ChallengeAwardModal v-if="showAward" :is-modal="false" :open-from-awards="false" :award-data="awardData" @closeModal="$emit('closeModal')" />
         </div>
     </ModalRenderer>
 
