@@ -15,6 +15,7 @@ use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Instructor;
+use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Providers\RailcontentURLProvider;
@@ -44,7 +45,6 @@ use Railroad\Railcontent\Services\MethodService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
-use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPagesController extends BaseController
@@ -1377,35 +1377,11 @@ class ContentPagesController extends BaseController
 
         $searchResponse = $search->search($searchParams);
 
-        //TODO DELETEME
-        $includedTypes = ContentTypes::searchableContentTypes();
-        $lessons = $this->fullTextSearchService->search(
-            $request->get('term', null),// done
-            $request->get('page', 1), //done
-            $request->get('limit', 20), //done
-            $request->get('included_types', $includedTypes), // done
-            $request->get('statuses', []), // done
-            $request->get('sort', '-score'), //TODO?
-            $request->get('date_time_cutoff', null), //TODO?
-            $request->get('brands', null), // done
-            $request->get('coach_ids', []) //done
-        );
-
-        $listLessons =
-            reply()
-                ->json($lessons['results'], [
-                    'transformer' => DataTransformer::class,
-                    'totalResults' => $lessons['total_results'],
-                ])
-                ->content();
-        //TODO END
-
         return view('content.search', [
             "lessons" => $searchResponse->formatToJson(),
             "searchTerm" => $request->get('term', null),
             "totalResults" => $searchResponse->getNbHits(),
-            "includedTypes" => json_encode($includedTypes),
-            "test" => $listLessons // TODO DELETEME
+            "includedTypes" => json_encode(array_column(DocumentType::cases(), 'value')),
         ]);
     }
 
