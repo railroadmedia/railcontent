@@ -7,6 +7,7 @@ export default class ProgressTracker {
         this.endTime = 0;
         this.secondsWatched = 0;
         this.running = false;
+        this.watchSessionToken = null;
 
         this.endpointPrefix = window.ENDPOINT_PREFIX || '';
     }
@@ -54,15 +55,11 @@ export default class ProgressTracker {
      * @param {string|number} totalDuration
      * @param {string} sessionToken - used to validate the current user
      */
-    send({
-        endpoint = `${this.endpointPrefix}/railtracker/media-playback-session`,
-        mediaId,
+    async send({
         mediaType,
         mediaCategory,
         watchPosition,
         totalDuration,
-        sessionToken,
-        brand,
         contentId = null
     }) {
         const data = new FormData();
@@ -72,7 +69,9 @@ export default class ProgressTracker {
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), sessionToken);
+        this.watchSessionToken = await recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), this.watchSessionToken);
+    
+        return this.watchSessionToken;
     }
 
     /**
@@ -87,14 +86,12 @@ export default class ProgressTracker {
      * @param {string} sessionToken - used to validate the current user
      * @returns {Promise}
      */
-    sendAsync({
-        endpoint = `${this.endpointPrefix}/railtracker/media-playback-session`,
-        mediaId,
+    async sendAsync({
         mediaType,
         mediaCategory,
         watchPosition,
         totalDuration,
-        sessionToken,
+        contentId = null
     }) {
         if (this.secondsWatched == null) {
             return new Promise.resolve(false);
@@ -106,10 +103,7 @@ export default class ProgressTracker {
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        return recordWatchSession(mediaId, mediaType, mediaCategory, totalDuration, watchPosition, this.secondsWatched, sessionToken)
-            .then(response => response)
-            .catch((error) => {
-                console.error(error);
-            });
+        this.watchSessionToken = await recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), this.watchSessionToken);
+        return this.watchSessionToken;
     }
 }
