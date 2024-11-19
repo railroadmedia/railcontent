@@ -43,7 +43,6 @@ $bonuses = [
         'sku' => 'drumeo-eardrums',
         'online-ship' => "Free Shipping",
         'shipping' => "no-shipping",
-        'sku' => 'drumeo-eardrums',
     ],
     [
         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-15.webp',
@@ -52,7 +51,6 @@ $bonuses = [
         'sku' => 'quietkick',
         'online-ship' => "Free Shipping",
         'shipping' => true,
-        'sku' => 'quietkick',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
@@ -60,7 +58,6 @@ $bonuses = [
         'description' => 'Practice anywhere with two full-size playing surfaces.',
         'sku' => 'quietpad',
         'shipping' => true,
-        'sku' => 'quietpad',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
@@ -68,7 +65,6 @@ $bonuses = [
         'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
         'sku' => 'practicepad',
         'shipping' => true,
-        'sku' => 'practicepad',
     ],
     [
         'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-09.webp',
@@ -76,7 +72,6 @@ $bonuses = [
         'description' => '',
         'sku' => 'BeginnerBook',
         'shipping' => true,
-        'sku' => 'BeginnerBook',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
@@ -84,7 +79,6 @@ $bonuses = [
         'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
         'sku' => 'Drumeo-VaterSticks',
         'shipping' => true,
-        'sku' => 'Drumeo-VaterSticks',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
