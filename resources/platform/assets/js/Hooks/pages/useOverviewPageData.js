@@ -21,12 +21,15 @@ export async function useOverviewPageData(contentType, parentType) {
     try {
     	if (parentType === 'challenges'){
             const result = await fetchUserChallengeProgress(contentId);
+            console.log('challenges', result)
             if(result){
                 data.value = {
                     children: result.lessons,
                     header: buildHeader('challenges', result.lesson, progressPercent),
                     is_unlocked: result.user_data.is_unlocked,
                     lesson: result.lesson,
+                    user_data: result.user_data,
+                    next_lesson: result.next_lesson,
                 };
             }
         } else {

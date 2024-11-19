@@ -14,7 +14,7 @@
             :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
-            :ctas="headerData?.ctas"
+            :ctas="headerCtas"
             :lesson-data="data?.lesson"
             :dark-mode-logo="headerData?.darkModeLogo"
             :light-mode-logo="headerData?.lightModeLogo"
@@ -212,8 +212,66 @@ const OverviewChildData = computed( () => {
 })
 
 const headerDropdown = computed(() => {
-    if(!isUnlocked.value){
-        return dropdowns[props.parentType] || [];
+    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value){
+        return dropdowns['challenges'];
+    }
+})
+
+const isChallenge = computed(() => {
+    return props.parentType === 'challenges';
+})
+
+const isChallengeEnrolled = computed(() => {
+    return data.value?.user_data?.is_active;
+})
+
+const generateChallengeCtas = (data) => {
+    if(isChallengeEnrolled.value){
+        //if user is enrolled and hasn't started the challenge
+        if(data.next_lesson.id === data.children[0].id && data.lessons[0].progress === 0){
+            return [
+                {
+                    type: 'PageHeaderPrimaryCta',
+                    props: {
+                        text: 'Start Challenge',
+                        url: data.children[0].url,
+                        isPrimary: true,
+                    }
+                }
+            ]
+        } else {
+            return [
+                {
+                    type: 'PageHeaderPrimaryCta',
+                    props: {
+                        text: 'Continue',
+                        url: data.next_lesson.url,
+                        isPrimary: true,
+                    }
+                }
+            ]
+        }
+    } else {
+        return [
+            {
+                type: 'PageHeaderPrimaryCta',
+                props: {
+                    text: 'Enroll now',
+                    faIconClass: 'fa-regular fa-graduation-cap',
+                    url: 'something',
+                    isPrimary: true,
+                }
+            }
+        ];
+    }
+}
+
+const headerCtas = computed(() => {
+    if(isChallenge.value){
+        console.log('challenge header',data.value)
+        return data.value && generateChallengeCtas(data.value);
+    } else {
+        return props.headerData.ctas;
     }
 })
 
