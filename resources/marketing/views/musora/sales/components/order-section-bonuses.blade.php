@@ -60,7 +60,7 @@
                         <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             </div>
             <div style="font-size:0px">
-                @foreach($bonuses as $bonus)
+                @foreach($filteredBonuses as $bonus)
                     <div
                         class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
                         x-data="{
@@ -132,8 +132,8 @@
                                 <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             @endif
                             <span style="text-transform:uppercase; display:inline-block;">
-                            @if(!empty($bonus['price']))
-                                    <s class="opacity-40">${{ $bonus['price'] }}</s>
+                            @if(!empty($bonus['sku']))
+                                    <s class="opacity-40">${{ floatval($productPrices[$bonus['sku']]->price) }}</s>
                                 @endif
                                 @if(!empty($bonus['customText']))
                                     <strong class="text-musora">{{ $bonus['customText'] }}</strong>

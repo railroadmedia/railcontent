@@ -555,44 +555,16 @@
         ])
 
     @elseif(!empty($promoVersion))
+
         @php
-            $bonuses = [
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dd.webp',
-                    'title' => '30-Day Drummer',
-                    'description' => 'Learn the drums with daily guided workouts.',
-                    'price' => floatval($productPrices['30-day-drummer-4']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30di.webp',
-                    'title' => '30-Day Independence',
-                    'description' => 'Improve your coordination with daily guided workouts.',
-                    'price' => floatval($productPrices['30-day-independence']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30ddb.webp',
-                    'title' => '30-Day Double Bass',
-                    'description' => 'Unlock your foot speed & control on the drums.',
-                    'price' => floatval($productPrices['30-day-double-bass']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dj.webp',
-                    'title' => '30-Day Jazz',
-                    'description' => 'Immerse yourself in jazz drumming for 30 days.',
-                    'price' => floatval($productPrices['30-day-jazz']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dc.webp',
-                    'title' => '30-Day Chops',
-                    'description' => 'Boost your creativity in just 30 days',
-                    'price' => floatval($productPrices['30-day-chops']->price),
-                ],
-            ];
+            require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
+        @endphp
+        @php
+            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+
+            $filteredBonuses = collect($bonuses)->filter(function ($bonus) use ($targetSkus) {
+                return in_array($bonus['sku'], $targetSkus, true);
+            })->values();
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
