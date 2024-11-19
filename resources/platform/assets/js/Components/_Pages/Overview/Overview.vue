@@ -263,20 +263,25 @@ const generateChallengeCtas = (data) => {
             }
             // if next lesson is unlocked
             else {
-                let url;
+                let obj;
                 if(!data.previous_lesson.completed){
-                    url = data.previous_lesson.web_url_path;
+                    obj = {
+                        url: data.previous_lesson.web_url_path,
+                        text: 'Continue'
+                    }
                 } else {
-                    url = data.next_lesson.web_url_path;
+                    obj = {
+                        url: data.next_lesson.web_url_path,
+                        text: 'Next Lesson',
+                        faIconClass: 'fas fa-play',
+                    }
                 }
 
                 return [
                     {
                         type: 'PageHeaderPrimaryCta',
                         props: {
-                            text: 'Next Lesson',
-                            faIconClass: 'fas fa-play',
-                            url,
+                            ...obj,
                             isPrimary: true,
                         }
                     }
