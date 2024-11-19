@@ -258,7 +258,9 @@
         :content-type="{{ json_encode($contentType) }}"
         :header-data="{{ json_encode($headerDataObj) }}"
         page-type="{{ $parentContent->fetch('type') }}"
-        :parent-type="{{ json_encode($parentType) }}"
+        @if(!empty($parentType))
+            :parent-type="{{ json_encode($parentType) }}"
+        @endif
         @if(!empty($nextLessonJson))
             :has-next-lesson="{{ json_encode(true) }}"
             :next-lesson="{{ $nextLessonJson }}"
