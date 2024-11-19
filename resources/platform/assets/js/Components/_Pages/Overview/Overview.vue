@@ -14,7 +14,7 @@
             :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
-            :ctas="headerData?.ctas"
+            :ctas="headerCtas"
             :lesson-data="data?.lesson"
             :dark-mode-logo="headerData?.darkModeLogo"
             :light-mode-logo="headerData?.lightModeLogo"
@@ -212,8 +212,98 @@ const OverviewChildData = computed( () => {
 })
 
 const headerDropdown = computed(() => {
-    if(!isUnlocked.value){
-        return dropdowns[props.parentType] || [];
+    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value){
+        return dropdowns['challenges'];
+    }
+})
+
+const isChallenge = computed(() => {
+    return props.parentType === 'challenges';
+})
+
+const isChallengeEnrolled = computed(() => {
+    return data.value?.user_data?.is_active;
+})
+
+const generateChallengeCtas = (data) => {
+    if(isChallengeEnrolled.value){
+        //when next lesson is the first lesson
+        if(data.next_lesson.id === data.children[0].id){
+            let type;
+
+            if(data.next_lesson.locked){
+                type = 'LockedChallengeCta';
+            } else {
+                type = 'PageHeaderPrimaryCta';
+            }
+
+            return [
+                {
+                    type,
+                    props: {
+                        text: 'Start Challenge',
+                        url: data.children[0].web_url_path,
+                        isPrimary: true,
+                    }
+                }
+            ]
+        } else {
+            // if next lesson is locked
+            if(data.next_lesson.is_locked){
+                return [
+                    {
+                        type: 'LockedChallengeCta',
+                        props: {
+                            text: 'Next Lesson',
+                            isPrimary: true,
+                        },
+                        lessonData: data.next_lesson,
+                    }
+                ]
+            }
+            // if next lesson is unlocked
+            else {
+                let url;
+                if(!data.previous_lesson.completed){
+                    url = data.previous_lesson.web_url_path;
+                } else {
+                    url = data.next_lesson.web_url_path;
+                }
+
+                return [
+                    {
+                        type: 'PageHeaderPrimaryCta',
+                        props: {
+                            text: 'Next Lesson',
+                            faIconClass: 'fas fa-play',
+                            url,
+                            isPrimary: true,
+                        }
+                    }
+                ]
+            }
+        }
+    } else {
+        return [
+            {
+                type: 'PageHeaderPrimaryCta',
+                props: {
+                    text: 'Enroll now',
+                    faIconClass: 'fa-regular fa-graduation-cap',
+                    url: 'something',
+                    isPrimary: true,
+                }
+            }
+        ];
+    }
+}
+
+const headerCtas = computed(() => {
+    if(isChallenge.value){
+        console.log('challenge header',data.value)
+        return data.value && generateChallengeCtas(data.value);
+    } else {
+        return props.headerData.ctas;
     }
 })
 
