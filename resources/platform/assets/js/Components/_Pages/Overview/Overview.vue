@@ -227,29 +227,61 @@ const isChallengeEnrolled = computed(() => {
 
 const generateChallengeCtas = (data) => {
     if(isChallengeEnrolled.value){
-        //if user is enrolled and hasn't started the challenge
-        if(data.next_lesson.id === data.children[0].id && data.lessons[0].progress === 0){
+        //when next lesson is the first lesson
+        if(data.next_lesson.id === data.children[0].id){
+            let type;
+
+            if(data.next_lesson.locked){
+                type = 'LockedChallengeCta';
+            } else {
+                type = 'PageHeaderPrimaryCta';
+            }
+
             return [
                 {
-                    type: 'PageHeaderPrimaryCta',
+                    type,
                     props: {
                         text: 'Start Challenge',
-                        url: data.children[0].url,
+                        url: data.children[0].web_url_path,
                         isPrimary: true,
                     }
                 }
             ]
         } else {
-            return [
-                {
-                    type: 'PageHeaderPrimaryCta',
-                    props: {
-                        text: 'Continue',
-                        url: data.next_lesson.url,
-                        isPrimary: true,
+            // if next lesson is locked
+            if(data.next_lesson.is_locked){
+                return [
+                    {
+                        type: 'LockedChallengeCta',
+                        props: {
+                            text: 'Next Lesson',
+                            isPrimary: true,
+                        },
+                        lessonData: data.next_lesson,
                     }
+                ]
+            }
+            // if next lesson is unlocked
+            else {
+                let url;
+                if(!data.previous_lesson.completed){
+                    url = data.previous_lesson.web_url_path;
+                } else {
+                    url = data.next_lesson.web_url_path;
                 }
-            ]
+
+                return [
+                    {
+                        type: 'PageHeaderPrimaryCta',
+                        props: {
+                            text: 'Next Lesson',
+                            faIconClass: 'fas fa-play',
+                            url,
+                            isPrimary: true,
+                        }
+                    }
+                ]
+            }
         }
     } else {
         return [
