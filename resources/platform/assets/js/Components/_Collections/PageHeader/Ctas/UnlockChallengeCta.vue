@@ -17,8 +17,6 @@ import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 
 const props = defineProps({
     text: String,
-    emailLogo: String,
-    emailRecipient: String,
     contentId: {
         type: [String, Number],
         default: null,
