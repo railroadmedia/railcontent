@@ -277,6 +277,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-two:
