@@ -27,14 +27,17 @@ export default class ProgressTracker {
         this.calculateSecondsWatched();
     }
 
+    /**
+     * Calculate seconds watched
+     */
     calculateSecondsWatched() {
         this.endTime = performance.now();
         this.running = false;
 
-        let millisecondsToAddToSecondsWatched = this.endTime - this.startTime;
-        let secondsToAddToSecondsWatched = millisecondsToAddToSecondsWatched/1000;
+        const millisecondsWatched = this.endTime - this.startTime;
+        const secondsWatched = millisecondsWatched / 1000;
 
-        this.secondsWatched = this.secondsWatched + secondsToAddToSecondsWatched;
+        this.secondsWatched += secondsWatched;
     }
 
     /**
@@ -45,15 +48,10 @@ export default class ProgressTracker {
     }
 
     /**
-     * Send a navigator beacon with a FormData object containing progress data
+     * Send a tracking request
      *
-     * @param {string} endpoint - the endpoint to send data to
-     * @param {string|number} mediaId - The Media ID you wish to track progress for
-     * @param {string} mediaType - Type type of media (video/assignment)
-     * @param {string} mediaCategory - (vimeo/youtube or soundslice)
-     * @param {string|number} watchPosition - Current watch position of the media
-     * @param {string|number} totalDuration
-     * @param {string} sessionToken - used to validate the current user
+     * @param {Object} params - The parameters for the tracking request
+     * @returns {Promise<string|null>} - Returns the session token or `null` on failure
      */
     async send({
         mediaType,
@@ -62,29 +60,34 @@ export default class ProgressTracker {
         totalDuration,
         contentId = null
     }) {
-        const data = new FormData();
-        if(this.running){
+        if (this.running) {
             this.calculateSecondsWatched();
         }
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        this.watchSessionToken = await recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), this.watchSessionToken);
-    
-        return this.watchSessionToken;
+        try {
+            this.watchSessionToken = await recordWatchSession(
+                contentId,
+                mediaType,
+                mediaCategory,
+                parseInt(totalDuration, 10),
+                parseInt(watchPosition, 10),
+                parseInt(this.secondsWatched, 10),
+                this.watchSessionToken
+            );
+            return this.watchSessionToken;
+        } catch (error) {
+            console.error('Error sending watch session:', error);
+            return null;
+        }
     }
 
     /**
-     * Send an async tracking request on demand
+     * Send an async tracking request
      *
-     * @param {string} endpoint - the endpoint to send data to
-     * @param {string|number} mediaId - The Media ID you wish to track progress for
-     * @param {string} mediaType - Type type of media (video/assignment)
-     * @param {string} mediaCategory - (vimeo/youtube or soundslice)
-     * @param {string|number} watchPosition - Current watch position of the media
-     * @param {string|number} totalDuration
-     * @param {string} sessionToken - used to validate the current user
-     * @returns {Promise}
+     * @param {Object} params - The parameters for the tracking request
+     * @returns {Promise<string|boolean>} - Returns the session token or `false` on failure
      */
     async sendAsync({
         mediaType,
@@ -94,16 +97,29 @@ export default class ProgressTracker {
         contentId = null
     }) {
         if (this.secondsWatched == null) {
-            return new Promise.resolve(false);
+            return false;
         }
 
-        if(this.running){
+        if (this.running) {
             this.calculateSecondsWatched();
         }
 
         this.secondsWatched = Math.round(this.secondsWatched);
 
-        this.watchSessionToken = await recordWatchSession(contentId, mediaType, mediaCategory, parseInt(totalDuration, 10), parseInt(watchPosition, 10), parseInt(this.secondsWatched, 10), this.watchSessionToken);
-        return this.watchSessionToken;
+        try {
+            this.watchSessionToken = await recordWatchSession(
+                contentId,
+                mediaType,
+                mediaCategory,
+                parseInt(totalDuration, 10),
+                parseInt(watchPosition, 10),
+                parseInt(this.secondsWatched, 10),
+                this.watchSessionToken
+            );
+            return this.watchSessionToken;
+        } catch (error) {
+            console.error('Error in async watch session:', error);
+            return false;
+        }
     }
 }
