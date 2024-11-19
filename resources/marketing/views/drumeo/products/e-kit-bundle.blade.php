@@ -205,7 +205,11 @@
             @endphp --}}
 
         @php
-        $findSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+
+            $filteredBonuses = collect($bonuses)->filter(function ($bonus) use ($targetSkus) {
+                return in_array($bonus['sku'], $targetSkus, true);
+            })->values();        
         @endphp
 
             @include('drumeo._partials.bf-order-section-bonuses', [
@@ -232,7 +236,6 @@
                 </div>',
             'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
             'bundle'=> "kit",
-            'findSkus' => $findSkus,
             ])
     </div>
 

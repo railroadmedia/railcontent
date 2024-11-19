@@ -128,8 +128,7 @@
                 
             </div>
             <div style="font-size:0px">
-                @foreach($bonuses as $bonus)
-                 @if(in_array($bonus['sku'], $findSkus))
+                @foreach($filteredBonuses as $bonus)
                     <div
                         class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
                         x-data="{
@@ -220,7 +219,6 @@
                             </span>
                         </p>
                     </div>
-                    @endif
                 @endforeach
             </div>
             <h3 class="leading-tight mt-6 mb-4 sm:pb-6">
