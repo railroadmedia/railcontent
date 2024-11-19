@@ -17,7 +17,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "sanity": "^3.45.0",
+    "sanity": "^3.57.0",
     "sanity-plugin-iframe-pane": "^3.1.6",
     "sanity-plugin-media": "^2.2.5",
     "styled-components": "^6.1.11",

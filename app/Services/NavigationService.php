@@ -70,6 +70,11 @@ class NavigationService
                 'icon' => 'headphones',
             ],
             [
+                'name' => 'Challenges',
+                'path' => '/'.brand().'/challenges',
+                'icon' => 'challenges',
+            ],
+            [
                 'name' => 'Workouts',
                 'path' => '/'.brand().'/workouts',
                 'icon' => 'workouts',

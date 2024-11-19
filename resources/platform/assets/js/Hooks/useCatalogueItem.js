@@ -24,18 +24,26 @@ export default function useCatalogueItem(props) {
                 return true;
             }
 
-            if(props.item.quarter_published && props.item.status === 'draft'){
+            if(Object.hasOwn(props.item, 'is_locked')){
+                return !props.item.is_locked;
+            } else if(props.item.quarter_published && props.item.status === 'draft'){
                 return dateNow.value > dateQuarterPublishedOn.value;
             } else {
                 return dateNow.value > datePublshedOn.value;
             }
         });
     const releaseDate = computed(() => {
-        if(props.item.quarter_published){
-            return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
+        let date = '';
+
+        if(props.item.is_locked){
+            date = props.item.unlock_date;
+        } else if(props.item.quarter_published){
+            date = props.item.quarter_published;
         } else {
-            return DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy');
+            date = props.item.published_on;
         }
+
+        return DateTime.fromSQL(date).toFormat('LLL d/yy');
     });
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
     const thumbnailIcon = computed(() => {
@@ -48,7 +56,7 @@ export default function useCatalogueItem(props) {
             };
 
             if (!isReleased.value) {
-                return 'fa-clock';
+                return 'fa-lock';
             }
 
             if (noAccess.value) {

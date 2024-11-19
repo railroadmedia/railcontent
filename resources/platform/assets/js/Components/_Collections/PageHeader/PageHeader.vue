@@ -49,8 +49,8 @@
       </PageHeaderHero>
     </template>
     <template #top-right>
-      <div v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
-        <PageHeaderCtasBox v-if="ctas && ctas.length" :ctas="ctas" />
+      <div v-if="!isSongsPage" :class="primaryCta && !dropdowns.length ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+        <PageHeaderCtasBox v-if="(ctas && ctas.length) || dropdowns.length" v-bind="props" />
       </div>
     </template>
     <template #bottom-full>
@@ -106,7 +106,7 @@ const props = defineProps({
   darkModeLogo: String,
   lightModeLogo: String,
   progressLabelText: String,
-  isLoading: Boolean, 
+  isLoading: Boolean,
   progress: {
     type: [Number, String],
     default: null,
@@ -117,6 +117,14 @@ const props = defineProps({
   },
   ctas: Array,
   description: String,
+  dropdowns: {
+    type: Array,
+    default: () => [],
+  },
+  lessonData: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));

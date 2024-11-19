@@ -188,6 +188,7 @@
         {{-- :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }} --}}
         {{-- :this-lesson-json="{{ $thisLessonJson }}" --}}
         {{-- :video-buttons="{{ json_encode($videoButtons) }}" --}}
+        :lesson-type="{{ json_encode($primaryPage) }}"
     >
     </lesson-playback>
 

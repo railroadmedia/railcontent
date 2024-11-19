@@ -11,8 +11,8 @@
           tw-no-underline
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="renderLink && isReleased ? item.web_url_path : null"
-       @click="openUpgradeModal"
+       :href="(!noAccess && renderLink && isReleased) ? item.web_url_path : null"
+       @click="openModal"
     >
 
         <!-- LESSON NUMBERS -->
@@ -52,11 +52,11 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
                     >
-                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px] tw-mb-2" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-2" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>
@@ -130,6 +130,11 @@
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
+
+            <!-- Bonus label -->
+            <div v-if="item?.is_bonus_content_for_challenge" class="tw-flex">
+                <div :class="`tw-text-[11px] tw-py-0.5 tw-px-2 tw-text-white tw-bg-${brand} tw-rounded-full`">Bonus</div>
+            </div>
         </div>
 
         <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
@@ -140,9 +145,9 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel 
-            v-if="mappedData.difficulty" 
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+        <DifficultyLabel
+            v-if="mappedData.difficulty"
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
@@ -359,6 +364,8 @@ const props = defineProps({
     },
 })
 
+const emit = defineEmits('openChallengeLockModal')
+
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
@@ -471,11 +478,18 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
+const isChallenge = computed(() => {
+    return props.item.type === "challenge-part";
+})
+
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openUpgradeModal = () => {
+const openModal = () => {
+    if(isChallenge.value && !isReleased.value){
+        emit('openChallengeLockModal', props.item)
+    }
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
@@ -488,4 +502,3 @@ onBeforeMount( () => {
     })
 })
 </script>
-
