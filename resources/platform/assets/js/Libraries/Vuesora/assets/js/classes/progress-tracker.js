@@ -10,6 +10,8 @@ export default class ProgressTracker {
         this.watchSessionToken = null;
 
         this.endpointPrefix = window.ENDPOINT_PREFIX || '';
+
+        this.previousWatchPosition = 0;
     }
 
     /**
@@ -67,6 +69,12 @@ export default class ProgressTracker {
         this.secondsWatched = Math.round(this.secondsWatched);
 
         try {
+            if(this.watchSessionToken && (this.previousWatchPosition === parseInt(watchPosition, 10))) {
+                return;
+            }
+
+            this.previousWatchPosition = parseInt(watchPosition, 10);
+
             this.watchSessionToken = await recordWatchSession(
                 contentId,
                 mediaType,
@@ -105,6 +113,12 @@ export default class ProgressTracker {
         }
 
         this.secondsWatched = Math.round(this.secondsWatched);
+        
+        if(this.watchSessionToken && (this.previousWatchPosition === parseInt(watchPosition, 10))) {
+            return;
+        }
+
+        this.previousWatchPosition = parseInt(watchPosition, 10);
 
         try {
             this.watchSessionToken = await recordWatchSession(
