@@ -35,7 +35,7 @@ class SyncOnboardingBrands implements ShouldQueue
 
         $profile = $customerIoService->getCustomerByEmail('musora', $user->email);
 
-        if ($profile) {
+        if ($profile && array_key_exists('cio_subscription_preferences', $profile->getExternalAttributes())) {
             $topics = json_decode($profile->getExternalAttributes()['cio_subscription_preferences'], true)['topics'] ?? $topics;
         }
 
