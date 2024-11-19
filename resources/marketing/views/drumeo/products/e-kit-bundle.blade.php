@@ -1,6 +1,7 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/bonus-data-2024.php'));
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 @extends('drumeo._partials.global-layout')
 
@@ -161,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-    @php
+    {{-- @php
         $bonuses = [
                     [
                         'imageFull' => true,
@@ -199,7 +200,13 @@
                         'price' => floatval($productPrices['30-day-chops']->price),
                     ],
                 ];
-            @endphp
+
+
+            @endphp --}}
+
+        @php
+        $findSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+        @endphp
 
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
@@ -224,7 +231,8 @@
                     </span>
                 </div>',
             'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
-            'bundle'=> "kit", 
+            'bundle'=> "kit",
+            'findSkus' => $findSkus,
             ])
     </div>
 

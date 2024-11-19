@@ -3,7 +3,7 @@
 $bonuses = [
     [
         'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
+        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-05.webp',
         'title' => '30-Day Chops',
         'description' => 'Boost your creativity in just 30 days',
         'price' => floatval($productPrices['30-day-chops']->price),
@@ -11,7 +11,7 @@ $bonuses = [
     ],
     [
         'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
+        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-01.webp',
         'title' => '30-Day Drummer',
         'description' => 'Learn the drums with daily guided workouts.',
         'price' => floatval($productPrices['30-day-drummer-4']->price),
@@ -52,7 +52,7 @@ $bonuses = [
         'sku' => 'practicepad',
     ],
     [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
+        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-09.webp',
         'title' => 'The Best Beginner Drum Book',
         'description' => '',
         'price' => floatval($productPrices['BeginnerBook']->price),
@@ -140,7 +140,7 @@ $bonuses = [
         'sku' => '30-day-independence',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-new/padstand.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-13.webp',
         'title' => 'Drumeo PadStand',
         'description' => 'Practice anywhere with perfect height and ergonomics.',
         'price' => 79.00,
@@ -148,7 +148,7 @@ $bonuses = [
         'sku' => 'padstand',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-08.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-08.webp',
         'title' => 'Drumeo Headphones',
         'description' => 'Studio-Quality Sound. The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.',
         'price' => 99.00,
@@ -156,7 +156,7 @@ $bonuses = [
         'sku' => 'headphones',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-10.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-10.webp',
         'title' => 'Easy Rudiments Book',
         'description' => 'The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly).',
         'price' => 29.99,
@@ -164,7 +164,7 @@ $bonuses = [
         'sku' => 'easy-rudiments-book',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-09.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-11.webp',
         'title' => 'The Drummer\'s Toolbox Book',
         'description' => 'The Drummer\'s Toolbox presents drummers of all skill levels with the most comprehensive introduction to 101 drumming styles from the past century.',
         'price' => 29.99,
@@ -172,7 +172,7 @@ $bonuses = [
         'sku' => 'the-drummers-toolbox-book',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
         'title' => '2 Pairs Of Drumsticks',
         'description' => 'Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability.',
         'price' => 25.90,
@@ -180,7 +180,7 @@ $bonuses = [
         'sku' => 'Drumeo-VaterSticks-2',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
         'title' => 'Pair Of Drumsticks',
         'description' => 'Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability.',
         'price' => 25.90,
@@ -188,14 +188,14 @@ $bonuses = [
         'sku' => 'Drumeo-VaterSticks',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-03.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-03.webp',
         'title' => '30-Day Double Bass',
         'description' => 'Learn double bass speed, endurance and coordination with daily guided workouts.',
         'price' => 127.00,
         'sku' => '30-day-double-bass'
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-04.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-04.webp',
         'title' => '30-Day Jazz',
         'description' => 'In 30-Day Jazz, you\'ll be introduced to the grooves, fills and techniques you need to play along with iconic jazz songs.',
         'price' => 127.00,
