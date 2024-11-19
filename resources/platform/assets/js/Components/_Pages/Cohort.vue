@@ -267,8 +267,8 @@
             <!-- Cart link -->
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
-            <div>
-
+            <div class="tw-text-center tw-mb-2">
+                <button @click="openActionModal" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
@@ -300,6 +300,13 @@
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
     <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="cohort" @modal-close="closeNotificationModal" />
+    <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
+      :challenge="{
+        dark_mode_logo_url: cohort['dark_mode_logo'],
+        light_mode_logo_url: cohort['light_mode_logo'],
+        id: cohort['content_id'],
+        title: cohort['cohort_title'],
+    }" />
 </template>
 <script setup>
 import { inject, ref, computed, onBeforeMount } from 'vue';
@@ -311,6 +318,7 @@ import { postChallengesEnroll } from 'musora-content-services';
 import CohortDropdown from '@collections/Dropdown/CohortDropdown';
 import VideoModal from '@collections/Modal/VideoModal';
 import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
+import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -350,6 +358,7 @@ const openTrailer = ref(false);
 const openPurchase = ref(false);
 const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
+const openChallengeActionModal = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
@@ -373,6 +382,14 @@ const enroll = async() => {
 
 const closeNotificationModal = () => {
     openChallengeNotificationModal.value = false;
+}
+
+const openActionModal = () => {
+    openChallengeActionModal.value = true;
+}
+
+const closeActionModal = () => {
+    openChallengeActionModal.value = false;
 }
 
 const addOrdinal = (day) =>{
