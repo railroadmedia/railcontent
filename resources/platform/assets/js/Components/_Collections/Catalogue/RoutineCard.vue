@@ -152,6 +152,7 @@ const {
     thumbnailIcon,
     renderLink,
     progress_percent,
+    lesson_complete,
     isReleased,
     releaseDate,
 } = useCatalogueItem(props);
@@ -159,7 +160,7 @@ const {
 const class_object = computed(() => {
     return {
         'no-access': props.noAccess,
-        completed: props.item.completed,
+        completed: lesson_complete,
     }
 })
 

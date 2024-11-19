@@ -11,8 +11,8 @@
           tw-no-underline
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
-       :href="(!noAccess && renderLink && isReleased) ? item.web_url_path : null"
-       @click="openModal"
+       :href="renderLink && isReleased ? item.web_url_path : null"
+       @click="openUpgradeModal"
     >
 
         <!-- LESSON NUMBERS -->
@@ -52,11 +52,11 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
                     >
-                        <musora-icon v-if="noAccess" class="tw-w-[30px] tw-mb-2" icon-name="lock-icon"></musora-icon>
+                        <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-2" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>
@@ -130,11 +130,6 @@
                 <!-- Difficulty Label -->
                 <DifficultyLabel v-if="mappedData.difficulty" class="xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
-
-            <!-- Bonus label -->
-            <div v-if="item?.is_bonus_content_for_challenge" class="tw-flex">
-                <div :class="`tw-text-[11px] tw-py-0.5 tw-px-2 tw-text-white tw-bg-${brand} tw-rounded-full`">Bonus</div>
-            </div>
         </div>
 
         <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
@@ -145,9 +140,9 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel
-            v-if="mappedData.difficulty"
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
+        <DifficultyLabel 
+            v-if="mappedData.difficulty" 
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
@@ -252,10 +247,10 @@
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || lesson_completed"
+                    v-if="item.started || lesson_complete"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            lesson_completed ? completedIcon : 'fa-adjust',
+                            lesson_complete ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -279,7 +274,6 @@ import useThemeClasses from "@hooks/useThemeClasses";
 import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
 import { useResetProgress } from "@hooks/useResetProgress";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
-import { getProgressPercentage } from 'musora-content-services';
 
 const props = defineProps({
     isCoach: {
@@ -364,8 +358,6 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits('openChallengeLockModal')
-
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
@@ -374,6 +366,8 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
+    progress_percent,
+    lesson_complete,
     isReleased,
     releaseDate,
     thumbnailType,
@@ -393,8 +387,6 @@ const { resetProgress } = useResetProgress();
 
 //Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
-const lesson_completed = ref(false);
-const progress_percent = ref(0);
 
 //Computed
 const branchPathBG = computed(() => {
@@ -408,7 +400,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: lesson_completed.value,
+        completed: lesson_complete,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
@@ -478,27 +470,13 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
-const isChallenge = computed(() => {
-    return props.item.type === "challenge-part";
-})
-
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openModal = () => {
-    if(isChallenge.value && !isReleased.value){
-        emit('openChallengeLockModal', props.item)
-    }
+const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
-onBeforeMount( () => {
-    getProgressPercentage(props.item.id).then( value => {
-        lesson_completed.value = value === 100;
-        progress_percent.value = value;
-    }).catch( error => {
-        console.log('error gettin completed value', error);
-    })
-})
 </script>
+
