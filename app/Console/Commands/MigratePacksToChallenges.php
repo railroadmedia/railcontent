@@ -66,9 +66,7 @@ class MigratePacksToChallenges extends Command
                     $pack->slug = '30-day-drummer-season-1';
                 }
 
-                // Update the pack to "challenge"
-                $pack->type = 'challenge';
-                $pack->save();
+
                 $updatedChallenges[] = $pack->id;
 
                 // Get pack-bundles under this pack
@@ -106,6 +104,10 @@ class MigratePacksToChallenges extends Command
                     // Delete the old hierarchy entry for the lesson
                     $lesson->delete();
                 }
+                // Update the pack to "challenge"
+                $pack->type = 'challenge';
+                $pack->child_count = count($sortedLessons);
+                $pack->save();
 
                 $this->info("Pack ID $packChallengeId migrated successfully.");
             }
