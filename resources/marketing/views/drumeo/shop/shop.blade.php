@@ -24,8 +24,8 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% -- EXTENDED UNTIL JULY 31ST!</strong>',
-        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp',
+        'text' => 'Save up to 91% on drum lessons, gear & more!',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/BF-header-banner.webp',
         'isShop' => true,
     ])
 
@@ -77,7 +77,7 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Summer Bundles',
+            "header" => 'Featured',
         ])
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
@@ -142,7 +142,7 @@
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "badge" => "Most Popular",
@@ -196,7 +196,7 @@
         <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Accessories</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $item)
                     @include('_partials.components.shop.product-card', [
