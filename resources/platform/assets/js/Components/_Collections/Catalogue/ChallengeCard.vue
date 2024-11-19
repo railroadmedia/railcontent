@@ -1,5 +1,5 @@
 <template>
-    <a :href="item.web_url_path" class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs" :class="widthStyles">
+    <a :href="urlPath" class="tw-shrink-0 tw-text-primary-2 tw-text-[11px] lg:tw-text-xs" :class="widthStyles">
         <div class="tw-rounded-[0.5px] sm:tw-rounded-md lg:tw-rounded-lg tw-overflow-hidden tw-border tw-border-primary-7 tw-relative tw-group">
             <!-- Card Image -->
             <img class="tw-w-full tw-aspect-[2/3] tw-object-cover tw-object-center" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${item.image}`" />
@@ -15,21 +15,21 @@
                 </svg>
             </div>
             <!-- In Progress Icon -->
-            <div v-if="item.progress_percent && item.progress_percent < 100" class="tw-absolute tw-right-3 tw-top-3">
+            <div v-if="progressPercent && progressPercent < 100" class="tw-absolute tw-right-3 tw-top-3">
                 <i class="fas fa-adjust tw-text-white tw-text-3xl tw-rotate-180"></i>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-end tw-items-center tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-full">
                 <!-- Logo -->
                 <img class="tw-mb-5 tw-w-full tw-px-5" :src="item.logo_image_url" />
                 <!-- Date Label -->
-                <div v-if="item.duration_text" :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">{{ item.duration_text }}</div>
+                <div v-if="durationText" :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">{{ durationText }}</div>
                 <!-- Progress Bar -->
-                <div v-if="item.progress_percent" class="tw-flex tw-w-full tw-justify-start">
-                    <div class="tw-h-[5px] tw-bg-drumeo" :style="`width: ${item.progress_percent}%`"></div>
+                <div v-if="progressPercent" class="tw-flex tw-w-full tw-justify-start">
+                    <div class="tw-h-[5px] tw-bg-drumeo" :style="`width: ${progressPercent}%`"></div>
                 </div>
             </div>
             <!-- Completed Icon -->
-            <div v-if="item.progress_percent && item.progress_percent === 100" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
+            <div v-if="progressPercent && progressPercent === 100" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
                 <musora-icon icon-name="circle-check-filled" class="tw-text-white tw-w-12 sm:tw-w-16 lg:tw-w-20 tw-h-12 sm:tw-h-16 lg:tw-h-20" />
             </div>
             <!-- Overlay -->
@@ -42,11 +42,12 @@
     </a>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
+import { fetchChallengeIndexMetadata } from 'musora-content-services';
 
 const props = defineProps({
     isGroupedView: {
@@ -62,9 +63,34 @@ const props = defineProps({
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
+const progressPercent = ref(0);
+const is_enrolled = ref(false);
+const durationText = ref('');
+
 const widthStyles = computed(() => {
     if(props.isGroupedView){
         return 'tw-w-[168px] sm:tw-w-[230px] lg:tw-w-auto'
     }
+})
+
+const urlPath = computed(() => {
+    if(is_enrolled.value){
+        return props.item.web_url_path;
+    } else {
+        return props.item.registration_url;
+    }
+})
+
+onBeforeMount(() => {
+    const fetchData = async () => {
+        let data = await fetchChallengeIndexMetadata(props.item.id);
+        if(data.length > 0){
+            progressPercent.value = data[0].progress_percent;
+            is_enrolled.value = data[0].is_user_enrolled;
+            durationText.value = data[0].duration_text;
+        }
+    }
+
+    fetchData();
 })
 </script>
