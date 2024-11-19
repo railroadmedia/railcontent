@@ -208,12 +208,12 @@ onBeforeMount( async () => {
     // console.log('sanity content is: ', props.contentType);
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
         data.value = OverviewData.value;
-        console.log('overview page data', data.value)
+        //console.log('overview page data', data.value)
 
         //Header Data
         header.value = OverviewData.value.header;
 
-        console.log(header.value)
+        //console.log(header.value)
 
         //console.log('my data', data.value)
         platformStore.setLoadingState(OverviewLoading.value);

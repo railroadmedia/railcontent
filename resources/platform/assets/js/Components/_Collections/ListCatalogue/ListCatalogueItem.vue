@@ -367,7 +367,6 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
-    progress_percent,
     isReleased,
     releaseDate,
     thumbnailType,
@@ -388,6 +387,7 @@ const { resetProgress } = useResetProgress();
 //Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 const lesson_completed = ref(false);
+const progress_percent = ref(0);
 
 //Computed
 const branchPathBG = computed(() => {
@@ -482,6 +482,7 @@ const openUpgradeModal = () => {
 onBeforeMount( () => {
     getProgressPercentage(props.item.id).then( value => {
         lesson_completed.value = value === 100;
+        progress_percent.value = value;
     }).catch( error => {
         console.log('error gettin completed value', error);
     })

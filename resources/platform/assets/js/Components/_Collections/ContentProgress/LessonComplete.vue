@@ -52,6 +52,7 @@
   </template>
 
   <script setup>
+  import { onBeforeMount } from "vue";
   import { useUserStore } from "@stores/user";
   import CatalogueCard from '@collections/Catalogue/CatalogueCard';
   import useUserCatalogueEvents from "@hooks/useUserCatalogueEvents";
@@ -74,4 +75,8 @@
   });
 
   const { addToList } = useUserCatalogueEvents({ ...props });
+
+  onBeforeMount( ()=> {
+    console.log('props.thisLessonJson', props.thisLessonJson );
+  })
   </script>
