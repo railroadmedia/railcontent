@@ -14,14 +14,12 @@ export async function useOverviewPageData(contentType, parentType) {
 
     const contentId = getContentId();
     const progressPercent = await getProgressPercentage(contentId); // Await the progress percent
-    console.log('progressPercetn', progressPercent)
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
     try {
     	if (parentType === 'challenges'){
             const result = await fetchUserChallengeProgress(contentId);
-            console.log('challenges', result)
             if(result){
                 data.value = {
                     children: result.lessons,
@@ -30,6 +28,7 @@ export async function useOverviewPageData(contentType, parentType) {
                     lesson: result.lesson,
                     user_data: result.user_data,
                     next_lesson: result.next_lesson,
+                    previous_lesson: result.previous_lesson,
                 };
             }
         } else {
