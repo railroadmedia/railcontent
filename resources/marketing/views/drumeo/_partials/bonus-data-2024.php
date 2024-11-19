@@ -143,7 +143,7 @@ $bonusVideos = [
         'description' => '<p>The Drummer’s Toolbox presents drummers of all skill levels with the most comprehensive introduction to 101 drumming styles from the past century.</p><p class="my-2">Expand your musical vocabulary and become more versatile behind the drum set.</p>',
         'badge' => 'FREE BONUS',
         'price' => 29.99,
-        'sku' => 'teachers-book'
+        'sku' => 'the-drummers-toolbox-book'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drummers-toolbox.webp',
