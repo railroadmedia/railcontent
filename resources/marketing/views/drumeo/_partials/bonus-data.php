@@ -143,14 +143,6 @@ $bonuses = [
         'sku' => 'alesis-nitro-max-e-kit',
     ],
     [
-        'imageFull' => true,
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-02.webp',
-        'title' => '30-Day Independence',
-        'description' => 'Independence is the hardest part of learning the drums.',
-        'price' => 127.00,
-        'sku' => '30-day-independence',
-    ],
-    [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-13.webp',
         'title' => 'Drumeo PadStand',
         'description' => 'Practice anywhere with perfect height and ergonomics.',
@@ -189,27 +181,5 @@ $bonuses = [
         'price' => 25.90,
         'shipping' => true,
         'sku' => 'Drumeo-VaterSticks-2',
-    ],
-    [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
-        'title' => 'Pair Of Drumsticks',
-        'description' => 'Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability.',
-        'price' => 25.90,
-        'shipping' => true,
-        'sku' => 'Drumeo-VaterSticks',
-    ],
-    [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-03.webp',
-        'title' => '30-Day Double Bass',
-        'description' => 'Learn double bass speed, endurance and coordination with daily guided workouts.',
-        'price' => 127.00,
-        'sku' => '30-day-double-bass'
-    ],
-    [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-04.webp',
-        'title' => '30-Day Jazz',
-        'description' => 'In 30-Day Jazz, you\'ll be introduced to the grooves, fills and techniques you need to play along with iconic jazz songs.',
-        'price' => 127.00,
-        'sku' => '30-day-jazz'
     ],
 ];
