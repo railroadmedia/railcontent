@@ -1,5 +1,5 @@
 <?php
-$bonuses = [
+$bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/nitro-max.webp',
         'header' => 'Alesis Nitro Max E-Kit | Drumeo Edition',
@@ -7,7 +7,7 @@ $bonuses = [
         'price' => 1065.00,
         'badge' => '$599',
         'extraBadge' => 'Only Discounted With Full Bundle',
-        'vimeoId' => '',
+        'vimeoId' => '897277793',
         'sku' => 'alesis-nitro-max-e-kit'
     ],
     [
@@ -67,23 +67,23 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/p4-practice.webp',
         'header' => 'Drumeo P4 Practice Pad',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite ferr we tor ulget ut.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>The P4 Practice Pad is the most versatile practice pad in the world -- with four different playing surfaces to replicate different parts of the drum set. </p><p class="my-2">When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.</p>',
         'badge' => 'FREE BONUS',
         'price' => 79.00,
         'sku' => 'practicepad'
     ],
     [
-        'image' => '',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/quietkick.webp',
         'header' => 'Drumeo QuietKick',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>Drummers are notorious for it.</p><p class="my-2">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>',
         'badge' => 'FREE BONUS',
         'price' => 79.00,
         'sku' => 'quietkick'
     ],
     [
-        'image' => '',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/padstand.webp',
         'header' => 'Drumeo PadStand',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>Practice anywhere with perfect height and ergonomics.</p><p class="my-2">Works with ALL 12” practice pads.</p><p>The Drumeo PadStand can be used with a QuietPad, or any other 12” or smaller practice pad. Simply tighten the basket for the perfect fit.</p>',
         'badge' => 'FREE BONUS',
         'price' => 79.00,
         'sku' => 'padstand'
@@ -91,7 +91,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-sticks.webp',
         'header' => 'Pair Of Drumsticks',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => 'FREE BONUS',
         'price' => 12.95,
         'sku' => 'Drumeo-VaterSticks'
@@ -99,7 +99,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-sticks.webp',
         'header' => '2 Pairs Of Drumsticks',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => 'FREE BONUS',
         'price' => 12.95,
         'sku' => 'Drumeo-VaterSticks-2'
@@ -107,7 +107,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-eardrums.webp',
         'header' => 'Drumeo EarDRUMs',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>The Drumeo EarDrums have helped 14,000 drummers protect their ears and play their favorite songs. </p><p class="my-2">Catch every detail.</p><p>Seal in the sound.</p>',
         'badge' => 'FREE BONUS',
         'price' => 149.00,
         'sku' => 'eardrums'
@@ -115,7 +115,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-headphones.webp',
         'header' => 'Drumeo Headphones',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>Studio-Quality Sound.</p><p class="my-2">The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.</p>',
         'badge' => 'FREE BONUS',
         'price' => 99.00,
         'sku' => 'headphones'
@@ -123,7 +123,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/best-beginner.webp',
         'header' => 'The Best Beginner Drum Book',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.</p><p class="my-2">Getting started on the drums just became easier...</p>',
         'badge' => 'FREE BONUS',
         'price' => 29.99,
         'sku' => 'BeginnerBook'
@@ -131,7 +131,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/easy-rudiments.webp',
         'header' => 'Easy Rudiments Book',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly).</p><p class="my-2">Easy Rudiments is your simplified guide to learning the 15 rudiments you’ll actually use on a drum set.</p><p>Plus, you’ll know HOW and WHY to learn them in the first place.</p>',
         'badge' => 'FREE BONUS',
         'price' => 29.99,
         'sku' => 'easy-rudiments-book'
@@ -140,7 +140,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drummers-toolbox.webp',
         'header' => 'The Drummer’s Toolbox Book',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sodla vite.</p><p class="my-2">Bit enimus yo provident aut pariatur aut eligendi out. This bit rektora yo provident aut pariatur aut eligendi. Aut in pariatur ou deserunt vitae eligendi.</p>',
+        'description' => '<p>The Drummer’s Toolbox presents drummers of all skill levels with the most comprehensive introduction to 101 drumming styles from the past century.</p><p class="my-2">Expand your musical vocabulary and become more versatile behind the drum set.</p>',
         'badge' => 'FREE BONUS',
         'price' => 29.99,
         'sku' => 'teachers-book'
@@ -160,13 +160,5 @@ $bonuses = [
         'badge' => 'FREE BONUS',
         'price' => 59.00,
         'sku' => 'quietpad'
-    ],
-    [
-        'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/easy-rudiments.webp',
-        'header' => 'Easy Rudiment Book',
-        'description' => '<p>Lorem ipsum dolor sit amet consectetur. Sollicitudin fermentum prim magna et ut tellus ipsum ut.</p><p class="my-2">Non verum mi vulputate sed pretium pulvinar nunc. Eros ullamcorper congue duis convallis. At id pariatur eu deserunt vitae eligendi.</p>',
-        'badge' => 'FREE BONUS',
-        'price' => 29.99,
-        'sku' => 'easy-rudiments-book'
     ],
 ];
