@@ -254,7 +254,7 @@
                                             <div class="mt-4 md:mt-0 order-1 md:order-{{ $index % 2 === 0 ? '1' : '2' }}">
                                                 <div class="relative rounded-lg overflow-hidden lg:mt-20">
                                                     @if (!$item['hasVideo'])
-                                                        <a href="/downloads/prima-manual.pdf" target="_blank">
+                                                        <a href="https://pianote.s3.amazonaws.com/products/Pianote-Prima/Prima-User-Manual.pdf" target="_blank" download>
                                                     @endif
                                                             <img 
                                                                 src="{{ $item['imageUrl'] }}" 
