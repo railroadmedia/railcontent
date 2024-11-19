@@ -9,7 +9,7 @@ export default function useCatalogueItem(props) {
     const userStore = useUserStore();
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
-    
+
     let progress_percent = 0;
     //Progress Percentage
     getProgressPercentage(props.item.id).then( value => {
@@ -41,6 +41,7 @@ export default function useCatalogueItem(props) {
                 return dateNow.value > datePublshedOn.value;
             }
         });
+    const isCompleted = computed(() => props.item.completed);
     const releaseDate = computed(() => {
         let date = '';
 
@@ -125,6 +126,7 @@ export default function useCatalogueItem(props) {
         thumbnailIcon,
         renderLink,
         thumbnailType,
-        contentModel
+        contentModel,
+        isCompleted,
     };
 }
