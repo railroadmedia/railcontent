@@ -6,6 +6,7 @@
     import InputLabel from '@units/InputLabel/InputLabel.vue';
     import Dropdown from '@collections/Dropdown/Dropdown.vue'
     import PlaylistService from '@services/playlists.js';
+    import {createPlaylist, updatePlaylist, duplicatePlaylist} from 'musora-content-services';
     import { usePlaylistsStore } from '@stores/playlists';
     import ThumbnailUpload from '../../ThumbnailUpload/ThumbnailUpload.vue';
     import MuButton from '@units/Button/MuButton';
@@ -114,11 +115,10 @@
             thumbnail_url: state.thumb !== props.playlist.thumbnail_url ? state.thumb : null,
         };
         if(props.mode === "create") {
-            PlaylistService.createUserPlaylist({
-                token,
+            createPlaylist(
                 payload
-            }).then(function(response) {
-                if (response.status === 201) {
+            ).then(function(response) {
+                if (response.success === true) {
                     playlistsStore.loadingPlaylists = true;
                     //show success message
                     window.shownotification({
@@ -126,7 +126,7 @@
                         text: `${payload.name} was been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
-                        window.addItemCallback(response.data.data[0].id)
+                        window.addItemCallback(response.playlist.id)
                     }
                     //load Playlists (if collection catalog exists)
                     if(playlistsStore.pageHasPlaylistCatalog) {
@@ -150,7 +150,7 @@
             }).catch((error)=>{
                 window.shownotification({
                     icon: 'error',
-                    text: error.response.data.meta.errors[0].detail
+                    text: error
                 })
             })
         }
@@ -168,9 +168,9 @@
             // Update Pinned Playlist if name changed
             playlistsStore.updatePinnedItem(props.playlist.id, payload.name);
             //Send Request
-            PlaylistService.updatePlaylist(props.playlist.id, payload, token)
+            updatePlaylist(props.playlist.id, payload, token)
                 .then(function(response) {
-                    if (response.status === 201) {
+                    if (response.success === true) {
                         playlistsStore.loadingPlaylists = true;
                         //show success message
                         window.shownotification({
@@ -209,9 +209,9 @@
                 thumbnail_url: state.thumb,
                 category: state.category,
             }
-            PlaylistService.duplicatePlaylist(duplicateData, token)
+            duplicatePlaylist(props.playlist.id, duplicateData, token)
                 .then(function(response) {
-                    if (response.status === 201) {
+                    if (!(response.success === false)) {
                         playlistsStore.loadingPlaylists = true;
                         //show success message
                         window.shownotification({

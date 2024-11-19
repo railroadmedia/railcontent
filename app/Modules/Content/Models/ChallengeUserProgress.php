@@ -19,6 +19,14 @@ enum AwardTier: string
     case BRONZE = 'bronze';
 }
 
+enum ChallengeUserProgressStatus: string
+{
+    case COMPLETED = 'completed';
+    case NOTSTARTED = 'not_started';
+    case ACTIVE = 'active';
+    case INPROGRESS = 'in_progress';
+}
+
 
 /**
  * App\Modules\Content\Models\Content
@@ -167,6 +175,8 @@ class ChallengeUserProgress extends Model
         foreach($lessons as  $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
             $unlockDate = !$isLocked || $isAlwaysUnlocked ? $startDate : $rollingUnlockDate;
+            $lessonPublishedDate = Carbon::parse($lesson['published_on']);
+            $unlockDate = max($unlockDate, $lessonPublishedDate);
             $lessonMetaData[] =
                 [
                     'content_id' => $lesson['id'],
@@ -216,8 +226,10 @@ class ChallengeUserProgress extends Model
         $total = 0;
         $completed = 0;
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
-            $total++;
-            $completed += $lessons_meta_datum['completed'] ? 1 : 0;
+            if (!$lessons_meta_datum['is_always_unlocked']) {
+                $total++;
+                $completed += $lessons_meta_datum['completed'] ? 1 : 0;
+            }
         }
         return intval(($completed * 100) / $total);
     }
@@ -286,6 +298,19 @@ class ChallengeUserProgress extends Model
             ->orderBy('start_date')
             ->get();
 
+        return $challengeUserCollection;
+    }
+
+    /**
+     * @param int $userId
+     * @return Collection | null
+     * @throws Exception
+     */
+    public static function whereUserId(int $userId) : Collection | null
+    {
+        $challengeUserCollection = self::query()
+            ->where('user_id', $userId)
+            ->get();
         return $challengeUserCollection;
     }
 

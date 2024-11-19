@@ -145,6 +145,7 @@ abstract class LessonTemplate extends BaseSanityModel
                             new Field(FieldType::String, 'assignment_soundslice'),
                             new Field(FieldType::String, 'assignment_description'),
                             new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: new ListArrayElement()),
+                            new Field(FieldType::Number, 'assignment_timecode', description: 'Time in seconds'),
                             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"),
                         ]
             );

@@ -2,10 +2,12 @@
 
 namespace App\ViewComposers;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Services\NavigationService;
 use Illuminate\View\View;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railnotifications\Services\NotificationService;
+use Modules\Content\Services\PlaylistsService;
 
 class NavigationViewComposer
 {
@@ -21,7 +23,7 @@ class NavigationViewComposer
     /**
      * SidebarComposer constructor.
      */
-    public function __construct(NotificationService $notificationService, UserPlaylistsService $userPlaylistsService)
+    public function __construct(NotificationService $notificationService, PlaylistsService $userPlaylistsService)
     {
         $this->notificationService = $notificationService;
         $this->userPlaylistsService = $userPlaylistsService;
@@ -37,16 +39,12 @@ class NavigationViewComposer
         }
 
         $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;
-        $pinnedPlaylists = (user()) ? $this->userPlaylistsService->getPinnedPlaylists() : [];
-        $latestPlaylists = (user()) ? $this->userPlaylistsService->getUserPlaylist(
-            user()->id,
-            'user-playlist',
-            brand(),
-            10,
-            1,
-            null,
-            'most_recent'
-        ) : [];
+        $pinnedPlaylists = (user()) ? $this->userPlaylistsService->getPinnedPlaylists(brand()) : [];
+        $latestPlaylists = [];
+        if(brand()) {
+            $brand           = Brand::from(brand());
+            $latestPlaylists = (user()) ? $this->userPlaylistsService->getPlaylists('most_recent', $brand, null, 10, 1)['data'] : [];
+        }
 
         self::$viewDataCache = [
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),

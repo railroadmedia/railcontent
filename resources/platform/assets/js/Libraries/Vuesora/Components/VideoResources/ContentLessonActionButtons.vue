@@ -240,6 +240,7 @@ export default {
                 this.resourceDropdown = false;
             }
         });
+        console.log('likeCount', this.likeCount)
     },
     methods: {
         toggleMore() {

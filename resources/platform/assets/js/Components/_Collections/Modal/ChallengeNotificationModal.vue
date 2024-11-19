@@ -2,9 +2,9 @@
     <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" @onClose="emit('modalClose')">
         <div class="tw-flex tw-flex-col tw-justify-center -tw-mt-[50px] dark:tw-text-white tw-text-center">
             <!-- Dark mode Logo -->
-            <img class="tw-h-20 tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.dark_mode_logo}`" alt="challenge dark mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="challenge dark mode logo" />
             <!-- Light mode Logo -->
-            <img class="tw-h-20 tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.light_mode_logo}`" alt="challenge light mode logo" />
+            <img class="tw-h-24 tw-object-contain tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="challenge light mode logo" />
 
             <!-- Step 1 -->
             <template v-if="step === 1">
@@ -113,9 +113,9 @@ const handleNext = async () => {
     try {
         if(props.challengeType === 'community'){
             if(selectedFrequency.value){
-                const setNotification = await postChallengesCommunityNotification(props.challenge.content_id);
+                const setNotification = await postChallengesCommunityNotification(props.challenge.id);
 
-                const data = await fetchChallengeMetadata(props.challenge.content_id);
+                const data = await fetchChallengeMetadata(props.challenge.id);
                 challengeData.value = data.data;
                 step.value = 2;
 
@@ -143,7 +143,7 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-        const startDate = await postChallengesSetStartDate(props.challenge.content_id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+        const startDate = await postChallengesSetStartDate(props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
 
         emit('modalClose');
     }

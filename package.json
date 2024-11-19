@@ -97,6 +97,8 @@
     "dropzone": "5.7.2",
     "fast-glob": "^3.2.11",
     "flatpickr": "^4.6.13",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.2",
     "imgix-core-js": "^2.3.2",
     "laravel-vapor": "^0.6.0",
     "linkifyjs": "^3.0.0-beta.3",
