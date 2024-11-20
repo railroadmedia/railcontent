@@ -243,7 +243,7 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="leading-tight mt-4 mb-4">
+            <h3 class="leading-tight mt-4 mb-4  ">
               {!!$bundlePrice!!}
             </h3>
             {{-- <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p> --}}
