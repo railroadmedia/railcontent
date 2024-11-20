@@ -33,7 +33,7 @@
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#CF03DA]">(Save 41%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA]">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         default:
             $borderColor = 'border-none';

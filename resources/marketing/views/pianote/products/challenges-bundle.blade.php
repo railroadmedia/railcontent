@@ -8,10 +8,10 @@
 
 @section('global-head')
     @parent
-    <title>Pianote Deal | Pianote</title>
-    <meta property="og:title" content="Pianote Deal | Pianote">
-    <meta name="description" content="Save $100 On Your First Year + $635 In Lifetime Bonuses.">
-    <meta property="og:description" content="Save $100 On Your First Year + $635 In Lifetime Bonuses.">
+    <title>Challenges Bundle | Pianote</title>
+    <meta property="og:title" content="Challenges Bundle | Pianote">
+    <meta name="description" content="Get 3 Popular Courses For The Price Of 1.">
+    <meta property="og:description" content="Get 3 Popular Courses For The Price Of 1">
     <meta property="og:image"
         content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/promos/black-friday/pianote-deal-share-image.jpg"
         style="display: none;">
@@ -56,8 +56,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg"><br>
-                <h2 class="leading-tight my-3 lg:my-6"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
-                <h4 class="italic items-center capitalize">no recurring payments - just results.</h4>
+                <h2 class="leading-tight my-3 lg:my-6"><strong>Get 3 Popular Courses For The Price Of 1</strong></h2>
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
@@ -72,18 +71,16 @@
             </div>
         </div>
     </header>
-     @include('pianote._partials.bf-header-bottom')
 
 
     @php
-        $videoTargetSkus = ['pianote-membership', 'new-piano-players-start-here', 'easy-shords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+        $videoTargetSkus = ['30-day-blues-piano', '30-days-to-better-technique','easy-shords'];
     @endphp
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
-         <h2 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h2>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">You’ll save $100 on your first year of Pianote PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
-            Build a foundation, learn the most popular styles, and refine your technique. All with world-class instructors.</h5>
+         <h2 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h2>
+            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
                 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
@@ -100,7 +97,7 @@
         @include('drumeo._partials.countdown-bundle-2024')
 
         @php
-            $targetSkus = ['new-piano-players-start-here', 'easy-shords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+            $targetSkus = ['30-day-blues-piano', '30-days-to-better-technique','easy-shords'];
         @endphp
             <div id="customize-anchor"></div>   
             @include('drumeo._partials.bf-order-section-bonuses', [
@@ -109,7 +106,7 @@
             'logoHeight' => 'h-16 sm:h-20',
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 + Get $635 In Free Courses For Life.</h2>',            
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get 3 Popular Course For The Price Of 1</h2><br><h5 class="italic">no recurring payments - ever.</h5>',            
             'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true', 
             'bundle'=> "deal",
             ])
