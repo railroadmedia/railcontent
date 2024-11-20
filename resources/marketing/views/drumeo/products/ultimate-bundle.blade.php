@@ -44,7 +44,7 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--        "name" => "Lifetime",--}}
 {{--        "fullPrice" => 1200,--}}
 {{--        "price" => 1200,--}}
@@ -69,7 +69,7 @@
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        WORLD-CLASS TEACHERS                    
+                        WORLD-CLASS TEACHERS
                     </span>
                 </div>
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
@@ -82,7 +82,7 @@
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
                         <p class="leading-tight text-sm text-musora mt-3"><em>Only 100 available.</em></p>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,13 +90,13 @@
 
        @php
         $videoTargetSkus = [
-            'DLM-1-year', 'practicepad', 'quietkick', 'padstand', 
-            'Drumeo-VaterSticks-2', 'BeginnerBook', 'easy-rudiments-book', 
-            'the-drummers-toolbox-book', '30-day-drummer-4', '30-day-independence', 
+            'DLM-1-year', 'practicepad', 'quietkick', 'padstand',
+            'Drumeo-VaterSticks-2', 'BeginnerBook', 'easy-rudiments-book',
+            'the-drummers-toolbox-book', '30-day-drummer-4', '30-day-independence',
             '30-day-double-bass', '30-day-jazz', '30-day-chops'
         ];
     @endphp
-    
+
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
             <h2 class="leading-tight text-center mb-3 lg:pb-6">
@@ -105,7 +105,7 @@
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
             ])
-    
+
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
                 <div class="flex items-start gap-3 max-w-4xl md:pr-8">
                     <div class="flex-shrink-0">
@@ -121,25 +121,25 @@
             </div>
         </div>
     </section>
-    
+
     <div x-data="{lazyLoad: false}">
         @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
-    
+
         @include('drumeo._partials.countdown-bundle-2024')
-    
+
         @php
             $targetSkus = [
-                'practicepad', 'quietkick', 'padstand', 'Drumeo-VaterSticks-2', 
-                'BeginnerBook', 'easy-rudiments-book', 'the-drummers-toolbox-book', 
-                '30-day-drummer-4', '30-day-independence', '30-day-double-bass', 
+                'practicepad', 'quietkick', 'padstand', 'Drumeo-VaterSticks-2',
+                'BeginnerBook', 'easy-rudiments-book', 'the-drummers-toolbox-book',
+                '30-day-drummer-4', '30-day-independence', '30-day-double-bass',
                 '30-day-jazz', '30-day-chops'
             ];
         @endphp
-    
+
         @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-logo.svg',
@@ -166,7 +166,7 @@
             'bundle' => 'ultimate',
         ])
     </div>
-    
+
    @php
         $videoBonuses = [];
         foreach ($bonusVideos as $bonusVideo) {

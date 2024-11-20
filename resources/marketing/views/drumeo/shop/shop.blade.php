@@ -10,6 +10,43 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/og-image.jpg">
 
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
+    <style>
+        @media (min-width: 1536px) { /* Desktop */
+            .product-wrap:nth-child(n+11) {
+                display: none;
+            }
+        }
+
+        @media (min-width: 767px) and (max-width: 1535px) { /* Tablet */
+            .product-wrap:nth-child(n+9) {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) { /* Mobile */
+           .product-wrap:nth-child(n+7) {
+                display: none;
+            }
+        }
+
+        /* Show all when 'show-all' class is added */
+        .show-all .product-wrap {
+            display: block !important;
+        }
+
+        .join.outline.black {
+            background:transparent;
+            border:2px solid #000;
+            color:#000;
+            outline:none!important;
+        }
+
+        .join.outline.black:hover,
+        .join.outline.black:focus {
+            background:#000;
+            color:#fff;
+        }
+    </style>
 @endsection
 
 @section('x-data')
@@ -39,111 +76,38 @@
             $bundles = [
 
                     [
-                        'slug' => '/practice-anywhere',
-                        'desc' => 'Annual Drumeo membership + <br class="lg:hidden"> $385.95 in free bonuses!',
+                        'slug' => '/drumshop/practice-bundle',
+                    'full' => true,
                         'visible' => 1,
-                        'price' => 240,
-                        'discountedPrice' => 200,
-                        'bgColor' => 'background: linear-gradient(45deg, #3418E1, #FF005C)',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp',
-                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle2.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle-full.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle-full-m.webp',
                     ],
                     [
-                        'slug' => '/drumshop/5-for-3-bundle',
-                        'desc' => '5 years of Drumeo for the <br class="lg:hidden"> price of 3 + $150 gift card!',
+                        'slug' => '/drumshop/ultimate-bundle',
+                    'full' => true,
                         'visible' => 1,
-                        'price' => 1200,
-                        'discountedPrice' => 720,
-                        'imgStyle' => 'py-3 lg:py-4',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/logo.webp',
-                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-bundle2.webp',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full-m.webp',
                     ],
 
                 [
                     'slug' => '/drumshop/kit',
-                    'desc' => 'Drumeo E-Kit +<br class="lg:hidden"> $506.95 in free bonuses!',
                     'full' => true,
                     'visible' => 1,
-                    'price' => 499,
-                    'discountedPrice' => 499,
-                    'imgStyle' => 'sm:hidden',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-logo-horizontal.webp',
-                    'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-spread.webp',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2-m.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bunde-full-m.webp',
                 ],
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
             "header" => 'Featured',
         ])
-        <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
-                <div
-                    x-data="{
-                init() {
-                    new Splide(this.$refs.splide, {
-                        classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
-                                prev: 'hidden',
-                                next: 'splide__arrow--next hidden sm:flex mb-16',
-                                pagination: 'hidden',
-                        },
-                        perPage: 4,
-                        perMove: 1,
-                        type: 'loop',
-                        focus: 0,
-                        interval: 2000,
-                        breakpoints: {
-                            1023: {
-                                perPage: 3,
-                            },
-                            767: {
-                                perPage: 1.5,
-                                drag   : 'free',
-                                snap   : false,
-                            },
-                        },
-                    }).mount()
-                },
-            }"
-                >
-                    <div x-ref="splide" class="splide text-left">
-                        <div class="splide__track pb-8">
-                            <ul class="splide__list items-start">
-                                @foreach($featured as $key => $item)
-                                    <li class="splide__slide px-1">
-                                        @include('_partials.components.shop.product-card', [
-                                            "badge" => $item->badge_text,
-                                            "discounted_price" => $item->discounted_price,
-                                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                                            "instructor" => $item->instructor_name,
-                                            "logo" => $item->thumbnail_logo,
-                                            "price" => $item->price,
-                                            "size_case_sensitive" => $item->size_case_sensitive,
-                                            "sizes" => $item->sizes,
-                                            "sku" => $item->sku,
-                                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                                            "thumbnail" => $item->thumbnail,
-                                            "title" => $item->name,
-                                        ])
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+            <div class="container" x-data="{ showAll: false }">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
+                    :class="{ 'show-all': showAll }">
                     @include('_partials.components.shop.product-card', [
                         "badge" => "Most Popular",
                          "discounted_price" => 200,
@@ -154,50 +118,160 @@
                          "title" => "Drumeo Membership",
                          'soldOut' => false,
                     ])
+{{--                    @include('_partials.components.shop.product-card', [--}}
+{{--                    "badge" => "7-Day Free Trial",--}}
+{{--                     "price" => 240,--}}
+{{--                     "instructor" => "Award-Winning Membership",--}}
+{{--                     "discounted_price" => 240,--}}
+{{--                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",--}}
+{{--                     "title" => "Drumeo Membership",--}}
+{{--                     'soldOut' => false,--}}
+{{--                        "href" => "/",--}}
+{{--                    ])--}}
                     @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
-                     "price" => 240,
-                     "instructor" => "Award-Winning Membership",
-                     "discounted_price" => 240,
-                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
-                     "title" => "Drumeo Membership",
-                     'soldOut' => false,
-                        "href" => "/",
-                ])
-                @foreach($lessons as $key => $item)
-                    @include('_partials.components.shop.product-card', [
-                        "badge" => $item->badge_text,
-                        "discounted_price" => $item->discounted_price,
-                        "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                        "instructor" => $item->instructor_name,
-                        "logo" => $item->thumbnail_logo,
-                        "price" => $item->price,
-                        "sku" => $item->sku === 'drumeo' || $item->sku === 'pianote' || $item->sku === 'singeo' || $item->sku === 'guitareo' ? null : $item->sku,
-                        "soldOut" => $item->sold_out,
-                        "thumbnail" => $item->thumbnail,
-                        "title" => $item->name,
-                        'fetch' => $key < 4 ? true : null,
+                        "discounted_price" => 90,
+                        "href" => "https://www.musora.com/gift-card",
+                        "instructor" => "Award-Winning Membership",
+                        "price" =>  90,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
+                        "title" => "Musora Gift Cards",
+                        'soldOut' => false,
                     ])
-                @endforeach
+                    @foreach($lessons as $key => $item)
+                        @include('_partials.components.shop.product-card', [
+                            "badge" => $item->badge_text,
+                            "discounted_price" => $item->discounted_price,
+                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                            "instructor" => $item->instructor_name,
+                            "logo" => $item->thumbnail_logo,
+                            "price" => $item->price,
+                            "sku" => $item->sku === 'drumeo' || $item->sku === 'pianote' || $item->sku === 'singeo' || $item->sku === 'guitareo' ? null : $item->sku,
+                            "soldOut" => $item->sold_out,
+                            "thumbnail" => $item->thumbnail,
+                            "title" => $item->name,
+                            'fetch' => $key < 4 ? true : null,
+                        ])
+                    @endforeach
 
-                @include('_partials.components.shop.product-card', [
-                    "discounted_price" => 90,
-                    "href" => "https://www.musora.com/gift-card",
-                    "instructor" => "Award-Winning Membership",
-                    "price" =>  90,
-                    "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
-                    "title" => "Musora Gift Cards",
-                    'soldOut' => false,
-                ])
+                </div>
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center">
+                    <span
+                        @click="showAll = true"
+                        x-show="!showAll"
+                        class="join outline black smaller">
+                        See More
+                    </span>
+                </div>
             </div>
+        </section>
+
+        <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/practice-bundle",
+                         "price" => 1227.87,
+                         "discounted_price" => 399,
+                         "title" => "The Practice Bundle",
+                         "instructor" => "Save $828.87 on most popular practice essentials + lessons.",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/kit",
+                         "price" => 1474,
+                         "discounted_price" => 599,
+                         "title" => "The E-KIT Bundle",
+                         "instructor" => "Save $875 on an electronic drum kit + lessons.",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/ultimate-bundle",
+                         "price" => 1747.99,
+                         "discounted_price" => 799,
+                         "title" => "The ULTIMATE Bundle",
+                         "instructor" => "Save 948.90 on our ultimate bundle.",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
+                         'soldOut' => false,
+                    ])
+
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/stickbag",
+                         "price" => floatval($productPrices['stickbag']->discounted_price),
+                         "discounted_price" => floatval($productPrices['stickbag']->price),
+                         "title" => "Drumeo StickBag",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/eardrums",
+                         "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
+                         "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->price),
+                         "title" => "Drumeo EarDRUM In-Ear Monitors",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/the-drummers-toolbox",
+                         "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
+                         "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->price),
+                         "title" => "The Drummer’s Toolbox",
+                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03.webp",
+                         'soldOut' => false,
+                    ])
+                </div>
+            </div>
+        </section>
+
+        <section class="grid-view category-section" data-category="gifts" x-show="filter === 'gifts' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-gift text-{{ $brand }} mr-1"></i> Gifts</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+
+                    @include('_partials.components.shop.product-card', [
+                        "discounted_price" => 240,
+                        "href" => "/drumshop/gift-bundle",
+                        "price" =>  322.94,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle.webp",
+                        "title" => "The Gift Bundle",
+                        'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "discounted_price" => 50,
+                        "href" => "https://www.musora.com/gift-card",
+                        "price" =>  50,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-50.webp",
+                        "title" => "$50 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "discounted_price" => 100,
+                        "href" => "https://www.musora.com/gift-card",
+                        "price" =>  100,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-100.webp",
+                        "title" => "$100 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "discounted_price" => 240,
+                        "href" => "https://www.musora.com/gift-card",
+                        "price" =>  240,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-240.webp",
+                        "title" => "$240 Digital Gift Card",
+                        'soldOut' => false,
+                    ])
+                </div>
             </div>
         </section>
 
         <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
-            <div class="container">
+            <div class="container" x-data="{ showAll: false }">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-suitcase text-{{ $brand }} mr-1"></i> Physical Products</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
+                    :class="{ 'show-all': showAll }">
                 @foreach($accessories as $item)
                     @include('_partials.components.shop.product-card', [
                         "badge" => $item->badge_text,
@@ -212,6 +286,14 @@
                         "title" => $item->name,
                     ])
                 @endforeach
+                </div>
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
+                    <span
+                        @click="showAll = true"
+                        x-show="!showAll"
+                        class="join outline black smaller">
+                        See More
+                    </span>
                 </div>
             </div>
         </section>

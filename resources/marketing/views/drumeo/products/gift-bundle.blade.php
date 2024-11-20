@@ -44,7 +44,7 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--        "name" => "Lifetime",--}}
 {{--        "fullPrice" => 1200,--}}
 {{--        "price" => 1200,--}}
@@ -67,7 +67,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,11 +109,11 @@
             ])
 
         @include('drumeo._partials.countdown-bundle-2024')
-     
+
         @php
-            $targetSkus = ['quietpad', 'easy-rudiments-book', 'Drumeo-VaterSticks'];   
+            $targetSkus = ['quietpad', 'easy-rudiments-book', 'Drumeo-VaterSticks'];
         @endphp
-        <div id="customize-anchor"></div>   
+        <div id="customize-anchor"></div>
         @include('drumeo._partials.bf-order-section-bonuses', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-logo.svg',

@@ -44,7 +44,7 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--        "name" => "Lifetime",--}}
 {{--        "fullPrice" => 1200,--}}
 {{--        "price" => 1200,--}}
@@ -69,7 +69,7 @@
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        WORLD-CLASS TEACHERS                    
+                        WORLD-CLASS TEACHERS
                     </span>
                 </div>
                 <img class="hidden md:inline object-cover max-w-3xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
@@ -82,7 +82,7 @@
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
                         <p class="leading-tight text-sm text-musora mt-3"><em>Only {{ $products['alesis-ekit']->getStockAvailability() }} available.</em></p>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -121,21 +121,21 @@
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
-    
+
         @include('drumeo._partials.countdown-bundle-2024')
-    
+
         @php
             $targetSkus = [
-                'DLM-1-year', 'practicepad', 'quietkick', 'padstand', 
-                'Drumeo-VaterSticks-2', 'BeginnerBook', 
-                'easy-rudiments-book', 'the-drummers-toolbox-book', 
-                '30-day-drummer-4', '30-day-independence', 
+                'DLM-1-year', 'practicepad', 'quietkick', 'padstand',
+                'Drumeo-VaterSticks-2', 'BeginnerBook',
+                'easy-rudiments-book', 'the-drummers-toolbox-book',
+                '30-day-drummer-4', '30-day-independence',
                 '30-day-double-bass', '30-day-jazz', '30-day-chops'
-            ];     
+            ];
         @endphp
-    
-        <div id="customize-anchor"></div>   
-    
+
+        <div id="customize-anchor"></div>
+
         @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/practice-bundle-logo.svg',

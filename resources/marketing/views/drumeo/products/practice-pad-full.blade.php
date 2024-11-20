@@ -1987,7 +1987,7 @@
 
 @section('content')
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "The P4 Practice Pad",
         "fullPrice" => floatval($productPrices['practicepad']->price),
         "price" => floatval($productPrices['practicepad']->discounted_price),
