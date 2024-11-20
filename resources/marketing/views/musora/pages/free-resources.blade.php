@@ -148,7 +148,7 @@
                         "buttonColor" => "bg-musora text-black",
                         "redirectUrl" => "https://www.musora.com/thank-you",
                     ])
-                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><u>View Terms & Conditions</u></a><br>
+                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/cymblas-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
                         By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
                 </div>
             </div>
