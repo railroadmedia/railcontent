@@ -125,6 +125,7 @@
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
                     :soundslice-slug="soundsliceObject.soundsliceSlug"
                     :contentId="contentId"
+                    soundsliceType="song"
                 >
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls

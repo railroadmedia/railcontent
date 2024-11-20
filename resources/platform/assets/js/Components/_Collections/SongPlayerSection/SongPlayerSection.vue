@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
-        <div v-if="!isLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+        <div v-if="!isLoading && !initialDataFetched && !isUserDataLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
             <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-relative">
                     <MembershipUpgradeSongCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
@@ -91,6 +91,7 @@
                         :report-user-email="userEmail"
                         :report-user-name="userDisplayName"
                         :report-logo="reportLogo"
+                        @onLike="handleLikeEvent"
                     />
                 </div>
             </div>
@@ -168,7 +169,7 @@
     </div>
 </template>
 <script setup>
-import { ref, onBeforeMount, computed} from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
@@ -177,7 +178,7 @@ import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
 import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { getProgressPercentage, isContentLiked } from 'musora-content-services';
+import { getProgressPercentage } from 'musora-content-services';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -207,6 +208,8 @@ const isLiked = ref(false);
 const soundsliceObject = ref(props.assignments?.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const lessonProgressRef = ref(0);
+const initialDataFetched = ref(false);
+const isUserDataLoading = ref(false);
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -288,23 +291,31 @@ const handleCloseSoundslice = () => {
     Intercom.showWidget();
 };
 
-onBeforeMount(async () => {
-
+const fetchInitialData = async () => {
+    isUserDataLoading.value = true;
     try {
         // Get Progress Percentage
         lessonProgressRef.value = await getProgressPercentage(props.contentId);
 
-        // Check if Song is Liked
-        isLiked.value = await isContentLiked(props.contentId);
-
         // Fetch Song Data
         const response = await fetch(`/content/${props.contentId}/user_data/${userId.value}`);
         const value = await response.json();
-        likeCount.value = value?.data?.likeCount;
-
+        likeCount.value = value?.likeCount;
+        isLiked.value = value?.isLiked;
+        isUserDataLoading.value = false;
     } catch (error) {
         console.error('Error fetching song data:', error);
+        isUserDataLoading.value = false;
     }
+};
 
-});
+watch(
+    () => props.contentId,
+    (newContentId) => {
+        if (newContentId) {
+            fetchInitialData();
+        }
+    },
+    { immediate: true }
+);
 </script>
