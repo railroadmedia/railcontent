@@ -77,5 +77,4 @@ Route::domain('{pianoteDomain}')
             ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
         Route::get('/easy-chords-trial', [SalesController::class, 'easyChordsTrial']);
-        Route::get('/pianote-deal', [SalesController::class, 'pianoteDeal']);
     });

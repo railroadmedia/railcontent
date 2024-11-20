@@ -11,44 +11,48 @@ Route::domain('{pianoteDomain}')
         Route::group(
             ['prefix' => 'shop' ],
             function () {
+                Route::get('/30-day-blues-piano', [SalesController::class, 'thirtyDayBluesPiano']);
+                Route::get('/30-day-blues-piano/deal', [SalesController::class, 'thirtyDayBluesPianoDeal']);
+                Route::get('/30-day-jazz-piano', [SalesController::class, 'thirtyDayJazzPiano']);
                 Route::get('/30-days-to-better-technique', [SalesController::class, 'betterTechnique']);
+                Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
                 Route::get('/500-songs', [SalesController::class, 'songs500']);
+                Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle']);
                 Route::get('/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano']);
-                Route::get('/classical-piano-pieces', [SalesController::class, 'classicalPianoPieces']);
-                Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);
+                Route::get('/book-bag', [SalesController::class, 'bookBag']);
+                Route::get('/book-bag-members', [SalesController::class, 'bookBagMembers']);
+                Route::get('/book-bundle', [SalesController::class, 'bookBundle']);
+                Route::get('/challenges-bundle', [SalesController::class, 'challengesBundle']);
                 Route::get('/christmas-songbook', [SalesController::class, 'christmasSongbook']);
                 Route::get('/christmas-songbook-members', [SalesController::class, 'christmasSongbookMembers']);
+                Route::get('/classical-piano-collection', [SalesController::class, 'classicalPianoCollection']);
+                Route::get('/classical-piano-collection-membership', [SalesController::class, 'classicalPianoCollectionMembership']);
+                Route::get('/classical-piano-pieces', [SalesController::class, 'classicalPianoPieces']);
                 Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
                 Route::get('/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand']);
                 Route::get('/easy-chords', [SalesController::class, 'easyChords']);
-                Route::get('/30-day-blues-piano', [SalesController::class, 'thirtyDayBluesPiano']);
-                Route::get('/30-day-blues-piano/deal', [SalesController::class, 'thirtyDayBluesPianoDeal']);
                 Route::get('/faster-fingers', [SalesController::class, 'fasterfingers']);
+                Route::get('/gift-bundle', [SalesController::class, 'giftBundle']);
+                Route::get('/headphones', [SalesController::class, 'headphones']);
                 Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina']);
+                Route::get('/metronome', [SalesController::class, 'metronome']);
                 Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers']);
                 Route::get('/piano-technique-made-easy', [SalesController::class, 'pianotechniquemadeeasy']);
+                Route::get('/pianote-deal', [SalesController::class, 'pianoteDeal']);
                 Route::get('/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano']);
+                Route::get('/practice-kit', [SalesController::class, 'practiceKit']);
+                Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);
+                Route::get('/prima', [SalesController::class, 'prima']);
+                Route::get('/prima-ltm', [SalesController::class, 'primaLTM']);
+                Route::get('/prima-ultimate', [SalesController::class, 'primaUlt']);
+                Route::get('/read-music', [SalesController::class, 'readMusic']);
+                Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);
                 Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords']);
                 Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway']);
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano']);
-                Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle']);
-                Route::get('/metronome', [SalesController::class, 'metronome']);
-                Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);
-                Route::get('/book-bag', [SalesController::class, 'bookBag']);
-                Route::get('/book-bag-members', [SalesController::class, 'bookBagMembers']);
-                Route::get('/read-music', [SalesController::class, 'readMusic']);
-                Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
-                Route::get('/practice-kit', [SalesController::class, 'practiceKit']);
                 Route::get('/yuletide-shirt-bundle', [SalesController::class, 'yuletideshirtBundle']);
                 Route::get('/yuletide-sweater-bundle', [SalesController::class, 'yuletidesweaterBundle']);
-                Route::get('/classical-piano-collection', [SalesController::class, 'classicalPianoCollection']);
-                Route::get('/classical-piano-collection-membership', [SalesController::class, 'classicalPianoCollectionMembership']);
-                Route::get('/headphones', [SalesController::class, 'headphones']);
-                Route::get('/30-day-jazz-piano', [SalesController::class, 'thirtyDayJazzPiano']);
-                Route::get('/prima', [SalesController::class, 'prima']);
-                Route::get('/prima-ltm', [SalesController::class, 'primaLTM']);
-                Route::get('/prima-ultimate', [SalesController::class, 'primaUlt']);
             }
         );
 
