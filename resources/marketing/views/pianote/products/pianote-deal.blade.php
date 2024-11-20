@@ -52,12 +52,12 @@
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
         'noBreadcrumb' => true,
     ]) --}}
-     <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:800px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-bg.webp') no-repeat center center; background-size: cover;">
+     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
-            <div class="container mx-auto max-w-5xl">
+            <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
-                <img class="hidden md:inline object-cover max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-collage.webp" alt="Bundle Collage">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FF8FB4] text-3xl">(Save 41%)</span></h2>

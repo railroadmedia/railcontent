@@ -163,14 +163,11 @@
         ])
     </div>
 
-    @php
+     @php
         $videoBonuses = [];
         foreach ($bonusVideos as $bonusVideo) {
             if (!empty($bonusVideo['vimeoId']) && in_array($bonusVideo['sku'], $videoTargetSkus)) {
-                $videoBonuses[] = [
-                    'name' => 'modal' . $bonusVideo['sku'],
-                    'video' => $bonusVideo['vimeoId']
-                ];
+                $videoBonuses[] = ['name' => 'modal' . $bonusVideo['vimeoId'], 'video' => $bonusVideo['vimeoId']];
             }
         }
     @endphp

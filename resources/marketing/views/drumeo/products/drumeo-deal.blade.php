@@ -55,27 +55,27 @@
         }
     @endphp
 
-    <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:800px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-bg.webp') no-repeat center center; background-size: cover;">
+    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] lg:h-[880px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg"><br>
+                <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        ELECTRONIC DRUM SET
+                       PLAY-ALONG LESSONS
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        1 YEAR OF DRUM LESSONS
+                       POPULAR SONGS
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        5 FREE LIFETIME BONUSES
+                       WORLD-CLASS TEACHERS
                     </span>
                 </div>
-                <img class="hidden md:inline object-cover max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="E-Kit Bundle Collage">
-                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="E-Kit Bundle Collage Mobile">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage">
+                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-3xl">(Save 41%)</span></h2>
                     @if($stock > 0)
@@ -95,7 +95,11 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-                
+             <h2 class="leading-tight text-center mb-3 lg:pb-6">
+                <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
+            </h2>
+            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
+            Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</h5>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -120,8 +124,7 @@
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
             'logoHeight' => 'h-16 sm:h-18',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Course For The Price Of 1</strong></h2> 
-            <h5 class="italic items-center">Save $100 + Get $635 In Free Courses For Life.</h5>',            
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>',            
             'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true', 
             'bundle'=> "deal",
             ])

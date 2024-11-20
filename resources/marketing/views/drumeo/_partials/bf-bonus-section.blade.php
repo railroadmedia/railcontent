@@ -10,7 +10,7 @@
 @endphp
 
 
-<div class="space-y-4 md:space-y-8">
+<div class="space-y-4 md:space-y-8 md:pb-12">
     @foreach($filteredBonusVideos as $bonusVideo)
         @if(in_array($bonusVideo['sku'], $videoTargetSkus))
             <div class="rounded-xl overflow-hidden">

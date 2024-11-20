@@ -82,10 +82,10 @@
                 @endif
                 <div class="mx-auto px-1 md:px-3 w-full @if(!empty($secondImage)) md:max-w-3xl @else md:max-w-xs @endif">
                     <div class="inline-block w-full group">
-                        <div class="text-center flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="text-center flex flex-col md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-4">
                         @if(!empty($topImage))
                             <div class="flex-1 relative overflow-hidden rounded-xl">
-                                <div class="aspect-[16/10] relative">
+                                <div class="aspect-[18/10] relative">
                                     <div class="absolute inset-0">
                                         <div class="w-full h-full rounded-xl shadow-lg overflow-hidden">
                                             <picture class="block w-full h-full"
@@ -106,7 +106,7 @@
                             @endif
                             @if(!empty($secondImage))
                             <div class="flex-1 relative overflow-hidden rounded-xl">
-                                <div class="aspect-[16/10] relative">
+                                <div class="aspect-[18/10] relative">
                                     <div class="absolute inset-0">
                                         <div class="w-full h-full rounded-xl border-2 shadow-lg overflow-hidden {{ $borderColor }}">
                                             <picture class="block w-full h-full"
@@ -131,6 +131,7 @@
                 <br>
                 @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
                 @if(!empty($subHeader))<h4 class="leading-tight mt-4 sm:mt-5 mb-2">{!! $subHeader !!}</h4>@endif
+               <div class="@if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
                 <h2 class="leading-tight mt-6 mb-1 md:hidden">
                 {!!$bundlePrice!!}
                 </h2>
@@ -141,7 +142,7 @@
                         GET the deal <i class="fas fa-arrow-right"></i>
                     @endif
                 </a>
-                
+                </div>
             </div>
             <div style="font-size:0px">
                 @foreach($filteredBonuses as $bonus)
