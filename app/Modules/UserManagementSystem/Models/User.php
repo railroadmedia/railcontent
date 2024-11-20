@@ -16,7 +16,6 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -39,7 +38,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
-use Modules\UserManagementSystem\Models\OnboardingBrand;
 use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -1098,5 +1096,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function onboardingBrands(): HasOne
     {
         return $this->hasOne(OnboardingBrand::class);
+    }
+
+    public function scopeWithoutDeleted(Builder $query): void
+    {
+        $query->whereNot('email', 'like', 'musora+deleted_%@musora.com');
     }
 }

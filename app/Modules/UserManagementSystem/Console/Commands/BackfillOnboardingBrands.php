@@ -19,7 +19,9 @@ class BackfillOnboardingBrands extends Command
     {
         $jobs = [];
         User::query()
-            ->where('membership_expiration_date', '<=', now())
+            ->withoutDeleted()
+            ->whereNotNull('membership_expiration_date')
+            ->doesntHave('onboardingBrands')
             ->select('id')
             ->orderBy('id')
             ->chunkById(200, function (Collection $users) use (&$jobs) {
