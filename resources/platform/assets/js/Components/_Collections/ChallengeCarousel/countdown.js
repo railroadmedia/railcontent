@@ -1,6 +1,6 @@
 export const countdown = (targetDate) => {
-        const now = new Date().getTime();
-        const distance = new Date(targetDate).getTime() - now;
+        const now = new Date();
+        const distance = new Date(targetDate) - now;
 
         if (distance <= 0) {
             return '00:00';
