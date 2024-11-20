@@ -44,7 +44,7 @@ const props = defineProps({
     },
     soundsliceType: {
         type: String,
-        default: 'song',
+        default: '',
     },
 });
 
@@ -139,7 +139,7 @@ const handlePause = () => {
 }
 
 const sendProgressTracking = () => {
-    if (props.soundsliceType !== 'assignment') {
+    if (props.soundsliceType === 'song') {
         progressTracker.send({
             contentId: props.contentId,
             mediaType: 'assignment',
