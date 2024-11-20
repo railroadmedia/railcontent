@@ -38,27 +38,40 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
+    {{-- @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Drumeo E-Kit",
+        "specialText" => "Get <strong>$506.95</strong> in free bonuses with the E-Kit.",
+        "fullPrice" => floatval($productPrices['alesis-ekit']->price),
+        "price" => floatval($productPrices['alesis-ekit']->discounted_price),
+        "noBreadcrumb" => true
+    ]) --}}
 
     @php
-        $stock = !empty($products['alesis-ekit']->getPublicStockCount()) ? $products['alesis-ekit']->getPublicStockCount() : 0;
+        if(!empty($products['alesis-ekit']->getPublicStockCount())) {
+            $stock = $products['alesis-ekit']->getPublicStockCount();
+        }
+        else {
+            $stock = 0;
+        }
     @endphp
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:800px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg"><br>
-                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Courses For The Price Of 1</strong></h1>
-                <h4 class="italic items-center">Get the best online drum lessons with no recurring payments.</h4>
+                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Course For The Price Of 1</strong></h1>
+                    <h4 class="italic items-center">Get the best online drum lessons with no recurring payments.</h4>
                 <img class="hidden md:inline object-cover max-w-2xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="E-Kit Bundle Collage Mobile">
-                <div class="px-3 mx-auto w-full max-w-2xl">
+               <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-3xl">(Save 66%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>
+                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>
+                    </div>        
                 </div>
             </div>
         </div>
@@ -74,7 +87,7 @@
             <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
 
             @include('drumeo._partials.bf-bonus-section', [
-                'videoTargetSkus' => $videoTargetSkus,
+            'videoTargetSkus' => $videoTargetSkus,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
@@ -95,35 +108,35 @@
 
     <div x-data="{lazyLoad: false}">
         @include('musora.sales.components.guarantee-section', [
-            'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
-            'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-            'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
-        ])
+                'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
+                'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
+                'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+            ])
 
-        @include('drumeo._partials.countdown-bundle-2024')
+             @include('drumeo._partials.countdown-bundle-2024')
+           
 
-        @php
-            $targetSkus = ['30-day-independence', '30-day-double-bass', '30-day-chops'];
-        @endphp
-
-        <div id="customize-anchor"></div>
-        @include('drumeo._partials.bf-order-section-bonuses', [
+            @php
+                $targetSkus = ['30-day-independence', '30-day-double-bass', '30-day-chops'];     
+            @endphp
+             <div id="customize-anchor"></div>   
+            @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-18',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Courses For The Price Of 1</strong></h2> 
-                              <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Course For The Price Of 1</strong></h2> 
+                                <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true', 
-            'bundle' => 'challenge',
-        ])
+            'bundle'=> "challenge",
+            ])
     </div>
 
-    @php
+     @php
         $videoBonuses = [];
         foreach ($bonusVideos as $bonusVideo) {
             if (!empty($bonusVideo['vimeoId']) && in_array($bonusVideo['sku'], $videoTargetSkus)) {
-                $videoBonuses[] = ['name' => 'modal' . $bonusVideo['sku'], 'video' => $bonusVideo['vimeoId']];
+                $videoBonuses[] = ['name' => 'modal' . $bonusVideo['vimeoId'], 'video' => $bonusVideo['vimeoId']];
             }
         }
     @endphp
@@ -139,4 +152,5 @@
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>
+
 @stop
