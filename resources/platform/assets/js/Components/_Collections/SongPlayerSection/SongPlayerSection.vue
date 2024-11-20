@@ -91,7 +91,6 @@
                         :report-user-email="userEmail"
                         :report-user-name="userDisplayName"
                         :report-logo="reportLogo"
-                        @onLike="handleLikeEvent"
                     />
                 </div>
             </div>
