@@ -97,9 +97,9 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-            <h1 class="leading-tight text-center mb-3 lg:pb-6">
+            <h2 class="leading-tight text-center mb-3 lg:pb-6">
                 <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
-            </h1>
+            </h2>
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
             ])
