@@ -19,8 +19,7 @@
                             :thumbnail-url="videoData.thumbnail_url"
                         />
                         <template v-else-if="videoData?.video?.external_id">
-                            <!-- Draft Label -->
-                            <DraftLabel v-show="showDraftLabel" />
+
                             <!-- YouTube -->
                             <transition v-if="videoData?.video?.type === 'youtube-video'" appear name="fade">
                                 <YoutubePlayer
@@ -177,9 +176,9 @@
                         v-if="!noAccess && !isWorkout && !isChallenge"
                         :brand="brand"
                         :is-completed="isCompleted"
-                        :progress="lessonData?.progress_percent"
+                        :progress="progress_percent"
                         :xp-amount="videoData?.xp"
-                        :is-started="lessonData?.progress_percent > 0"
+                        :is-started="progress_percent > 0"
                         :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :show-complete-button="true"
                         :content-id="videoData.id"
@@ -231,7 +230,7 @@
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
                         <AssignmentsContainer
-                            :lesson-data="lessonData"
+                            :lesson-data="videoData"
                             :assignments="videoData?.assignments"
                             :brand="brand"
                             :user-id="userId"
@@ -258,10 +257,10 @@
             </section>
         </div>
         <LessonComplete
-            v-if="!isWorkout"
-            :lesson-content="lessonData"
-            :this-lesson-json="lessonData"
+            v-if="!isWorkout && videoData.id && videoData.type"
             :next-lesson-json="nextPreviousLessons?.nextLesson"
+            :contentId="videoData.id"
+            :contentType="videoData.type"
         />
 
         <!-- Chapter Soundslice -->
@@ -318,8 +317,14 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked, fetchChallengeLessonData, getProgressPercentageByIds } from 'musora-content-services';
+import { 
+    fetchLessonContent, 
+    fetchRelatedLessons, 
+    fetchNextPreviousLesson, 
+    isContentLiked, 
+    fetchChallengeLessonData, 
+    getProgressPercentage, 
+} from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
@@ -334,7 +339,6 @@ const props = defineProps({
     qaVideo: Boolean,
     videoProps: Object,
     videoResources: Object,
-    lessonData: [Array, Object],
     videoButtons: Object,
     lessonType: {
         type: String,
@@ -362,6 +366,7 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
+const progress_percent = ref(0);
 const isRelatedSectionOpen = ref(true);
 const isChallengeCompletionModalOpen = ref(false);
 const openSoundslice = ref(false);
@@ -519,10 +524,6 @@ const noAccess = computed(() => {
     return videoData.value?.need_access;
 })
 
-const showDraftLabel = computed(() => {
-    return props.lessonData.status === 'draft';
-})
-
 const isChallenge = computed(() => {
     return props.lessonType === 'challenges';
 })
@@ -554,27 +555,6 @@ const isWorkout = computed( () => {
     return props.contentType === 'workout';
 })
 
-const addProgress = async (data) => {
-    try {
-        const ids = [];
-        data.forEach((item) => {
-            ids.push(item.id);
-        });
-
-        const progress = await getProgressPercentageByIds(ids);
-
-        const addedProgress = data.map((item) => ({
-            ...item,
-            ...(progress[item.id] && { progress_percent: progress[item.id] }),
-        }))
-
-        return addedProgress;
-    } catch(err){
-        console.log(err)
-    }
-
-}
-
 const fetchLessonData = async () => {
     if(isChallenge.value){
         const results = await Promise.allSettled([
@@ -595,8 +575,9 @@ const fetchLessonData = async () => {
         } : null;
 
 
-        relatedLessons.value = dataResult.status === 'fulfilled' ? await addProgress(dataResult.value.lessons) : [];
+        relatedLessons.value = dataResult.status === 'fulfilled' ? await dataResult.value.lessons : [];
     } else {
+
         // Execute all video calls using Promise.allSettled
         const results = await Promise.allSettled([
             fetchLessonContent(contentId.value),
@@ -604,11 +585,20 @@ const fetchLessonData = async () => {
             isContentLiked(contentId.value),
             axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`),
             fetchNextPreviousLesson(contentId.value),
-            fetchRelatedLessons(contentId.value, brand.value)
+            fetchRelatedLessons(contentId.value, brand.value),
+            getProgressPercentage(contentId.value)
         ]);
 
         // Process results
-        const [dataResult, likeResult, likedResult, completedResult, nextPrevResult, relatedLessonsResult] = results;
+        const [
+            dataResult, 
+            likeResult, 
+            likedResult, 
+            completedResult, 
+            nextPrevResult, 
+            relatedLessonsResult,
+            progressResult
+        ] = results;
 
         // Check each result individually and update state accordingly
         videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
@@ -617,6 +607,7 @@ const fetchLessonData = async () => {
         isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
         nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
         relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
+        progress_percent.value = progressResult.status === 'fulfilled' ? progressResult.value : 0;
 
         // Optional: log errors for any rejected promises
         results.forEach((result, index) => {
@@ -626,7 +617,7 @@ const fetchLessonData = async () => {
         });
 
         // Check values
-        console.log('isLiked', isLiked.value);
+        //console.log('isLiked', isLiked.value);
         console.log('videoData.value', videoData.value);
     }
 
@@ -634,6 +625,6 @@ const fetchLessonData = async () => {
 }
 
 onBeforeMount (() => {
-  fetchLessonData();
+    fetchLessonData();
 });
 </script>

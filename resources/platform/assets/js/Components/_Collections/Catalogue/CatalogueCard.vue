@@ -278,7 +278,7 @@ const hasProduct = computed(() => {
 })
 
 const registrationUrl = computed(() => {
-    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value?.post?.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const duration = computed(() => {
@@ -318,11 +318,11 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
+    if (contentModel.value?.post?.fields) {
         if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+            return contentModel.value?.post?.fields.find(field => field.key === 'artist')?.value || ''
         }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+        return contentModel.value?.post?.fields.find(field => field.key === 'instructor')?.value.name || ''
     } else if (props.item.artist_name) {
         return props.item.artist_name;
     } else {
@@ -332,8 +332,8 @@ const contentCreator = computed(() => {
 
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
+    if (contentModel.value?.post?.fields) {
+        difficultyValue = contentModel.value?.post?.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;
