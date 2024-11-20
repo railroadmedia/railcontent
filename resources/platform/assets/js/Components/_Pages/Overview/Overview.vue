@@ -218,7 +218,7 @@ const headerDropdown = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.parentType === 'challenges';
+    return props.parentType === 'challenges' || props.contentType === 'challenge';
 })
 
 const isChallengeEnrolled = computed(() => {
@@ -295,7 +295,7 @@ const generateChallengeCtas = (data) => {
                 props: {
                     text: 'Enroll now',
                     faIconClass: 'fa-regular fa-graduation-cap',
-                    url: 'something',
+                    url: data.lesson.registration_url,
                     isPrimary: true,
                 }
             }
@@ -305,7 +305,6 @@ const generateChallengeCtas = (data) => {
 
 const headerCtas = computed(() => {
     if(isChallenge.value){
-        console.log('challenge header',data.value)
         return data.value && generateChallengeCtas(data.value);
     } else {
         return props.headerData.ctas;
@@ -324,8 +323,6 @@ onBeforeMount( async () => {
         header.value = OverviewData.value.header;
 
         isUnlocked.value = OverviewData.value?.is_unlocked;
-
-        console.log(header.value)
 
         //console.log('my data', data.value)
         platformStore.setLoadingState(OverviewLoading.value);

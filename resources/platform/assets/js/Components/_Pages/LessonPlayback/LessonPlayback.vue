@@ -524,7 +524,8 @@ const showDraftLabel = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.lessonType === 'challenge';
+    //TODO(challenge): delete challenges conditional
+    return props.lessonType === 'challenges' || props.lessonType === 'challenge' ;
 })
 
 const toggleCompleteContent = () => {
