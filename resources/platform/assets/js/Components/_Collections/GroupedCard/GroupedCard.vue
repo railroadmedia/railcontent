@@ -24,6 +24,7 @@
     <div class="tw-mb-5">
         <transition appear name="fade">
             <SongCardContainer v-if="isSong" :preLoadedContent="data" :isGroupedView="true" :add-margin-bottom="false" />
+            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" />
             <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" :no-results-message="noResultsMessage" />
         </transition>
     </div>
@@ -36,6 +37,7 @@ import { usePlatformStore } from "@stores/platform";
 import useCarouselEvents from "@hooks/useCarouselEvents";
 
 import CatalogueCardContainer from "@collections/Catalogue/CatalogueCardContainer";
+import ChallengeCardContainer from "@collections/Catalogue/ChallengeCardContainer";
 import SkeletonLoader from '@collections/SkeletonLoader/SkeletonLoader.vue';
 import SongCardContainer from "@collections/Catalogue/SongCardContainer.vue";
 import { contentTypes } from "../../../utils";
@@ -116,22 +118,28 @@ const contentType = computed(() => {
 })
 
 const watchResize = () => {
-    if(props.contentTypeOverride === 'song'){
+    if(isSong.value){
         if(window.innerWidth > 1536){
             cardNum.value = 7;
         } else if(window.innerWidth > 1024){
             cardNum.value = 5;
-        } else {
-            cardNum.value = 20;
+        }
+    } else if(isChallenge.value){
+        if(window.innerWidth > 1536){
+            cardNum.value = 6;
+        } else if(window.innerWidth > 1024){
+            cardNum.value = 4;
         }
     } else {
         if(window.innerWidth > 1536){
             cardNum.value = 5;
         } else if(window.innerWidth > 1024){
             cardNum.value = 4;
-        } else {
-            cardNum.value = 20;
         }
+    }
+
+    if(window.innerWidth <= 1024){
+        cardNum.value = 20;
     }
 
     getPageData();

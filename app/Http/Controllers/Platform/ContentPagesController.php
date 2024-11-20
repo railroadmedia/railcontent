@@ -426,7 +426,8 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
-            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null
+            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null,
+            'parentType' => $primaryPage,
         ]);
     }
 
@@ -831,7 +832,7 @@ class ContentPagesController extends BaseController
                 "firstContent" => $firstContent,
                 "rangesVideoIds" => $rangesVideoIds,
                 "adminMessage" => $adminMessage,
-
+                "primaryPage" => $primaryPage,
             ]);
         }
 
@@ -1855,5 +1856,12 @@ class ContentPagesController extends BaseController
     public function artists(Request $request)
     {
         return view('content.artists');
+    }
+
+    public function challenges(Request $request, $brand)
+    {
+        return view('content.challenges',[
+            'brand' => $brand,
+        ]);
     }
 }

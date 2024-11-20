@@ -73,15 +73,24 @@ export default {
     computed: {
         //Thumbnail
         lessonThumbnail() {
-            const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
-            return thumbnail && thumbnail.value;
+            if( this.lessonData.thumbnail_url ) {
+                return this.lessonData.thumbnail_url;
+            } else {
+                const thumbnail = this.lessonData['thumbnail'] ?? this.lessonData['data'].find(data => data.key === 'thumbnail_url') ?? '';
+                return thumbnail && thumbnail.value;
+            }
+
         },
         lessonTitle() {
-            const title = this.lessonData['fields'].find(data => data.key === 'title');
-            return title.value;
+            if( this.lessonData.title) {
+                return this.lessonData.title
+            } else {
+                const title = this.lessonData['title'] ?? this.lessonData['fields'].find(data => data.key === 'title') ?? '';
+                return title.value;
+            }
         },
         lessonId() {
-            return this.lessonData['id'];
+            return this.lessonData.id ? this.lessonData.id : this.lessonData['id'];
         },
     }
 

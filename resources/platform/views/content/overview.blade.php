@@ -63,6 +63,7 @@
                 'props' => [
                     'contentId' => $parentContent->fetch('id'),
                     'progress' => $parentContent->fetch('progress_percent', 0),
+                    'isChallenge' => $parentType === 'challenges',
                 ]
             ],
             [
@@ -257,6 +258,9 @@
         :content-type="{{ json_encode($contentType) }}"
         :header-data="{{ json_encode($headerDataObj) }}"
         page-type="{{ $parentContent->fetch('type') }}"
+        @if(!empty($parentType))
+            :parent-type="{{ json_encode($parentType) }}"
+        @endif
         @if(!empty($nextLessonJson))
             :has-next-lesson="{{ json_encode(true) }}"
             :next-lesson="{{ $nextLessonJson }}"

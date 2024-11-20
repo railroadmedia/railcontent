@@ -19,8 +19,7 @@
                             :thumbnail-url="videoData.thumbnail_url"
                         />
                         <template v-else-if="videoData?.video?.external_id">
-                            <!-- Draft Label -->
-                            <DraftLabel v-show="showDraftLabel" />
+
                             <!-- YouTube -->
                             <transition v-if="videoData?.video?.type === 'youtube-video'" appear name="fade">
                                 <YoutubePlayer
@@ -137,9 +136,11 @@
                         :user-id="userId"
                         :resources="videoData.resources"
                         :difficulty="videoData.difficulty"
+                        :is-challenge="isChallenge"
+
                         :show-practice-button="showPracticeButton"
                         :show-share-button="false"
-                        :show-complete-button="isWorkout"
+                        :show-complete-button="isWorkout || isChallenge"
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
 
@@ -149,7 +150,8 @@
 
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
-                        @on-complete-content="completeContent"
+                        @on-complete-content="toggleCompleteContent"
+                        @open-challenge-completion-modal="openChallengeCompletionModal"
                     />
 
                     <ContentInfo
@@ -171,12 +173,12 @@
                     />
 
                     <ContentProgress
-                        v-if="!noAccess && !isWorkout"
+                        v-if="!noAccess && !isWorkout && !isChallenge"
                         :brand="brand"
                         :is-completed="isCompleted"
-                        :progress="lessonData?.progress_percent"
+                        :progress="progress_percent"
                         :xp-amount="videoData?.xp"
-                        :is-started="lessonData?.progress_percent > 0"
+                        :is-started="progress_percent > 0"
                         :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path"
                         :show-complete-button="true"
                         :content-id="videoData.id"
@@ -198,6 +200,7 @@
                 :is-loading="isLoading"
                 :relatedLessons="relatedLessons"
                 v-model:isRelatedSectionOpen="isRelatedSectionOpen"
+                :is-challenge="isChallenge"
             />
 
             <!-- Lesson Content Wrapper -->
@@ -227,7 +230,7 @@
                     </div>
                     <div class="tw-flex-row tw-w-full" :class="state.assignmentCollapsed ? 'tw-hidden' : 'tw-flex'">
                         <AssignmentsContainer
-                            :lesson-data="lessonData"
+                            :lesson-data="videoData"
                             :assignments="videoData?.assignments"
                             :brand="brand"
                             :user-id="userId"
@@ -254,10 +257,10 @@
             </section>
         </div>
         <LessonComplete
-            v-if="!isWorkout"
-            :lesson-content="lessonData"
-            :this-lesson-json="lessonData"
+            v-if="!isWorkout && videoData.id && videoData.type"
             :next-lesson-json="nextPreviousLessons?.nextLesson"
+            :contentId="videoData.id"
+            :contentType="videoData.type"
         />
 
         <!-- Chapter Soundslice -->
@@ -286,6 +289,8 @@
             </div>
         </transition>
     </div>
+
+    <ChallengeCompletionModal v-if="isChallengeCompletionModalOpen" :completion-data="completionData" @close-modal="closeChallengeCompletionModal" />
 </template>
 
 <script setup>
@@ -312,9 +317,16 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import DraftLabel from '@units/DraftLabel/DraftLabel';
-import { fetchLessonContent, fetchRelatedLessons, fetchNextPreviousLesson, isContentLiked } from 'musora-content-services';
+import { 
+    fetchLessonContent, 
+    fetchRelatedLessons, 
+    fetchNextPreviousLesson, 
+    isContentLiked, 
+    fetchChallengeLessonData, 
+    getProgressPercentage, 
+} from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
+import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
 
 const props = defineProps({
     breadcrumbFirstLevelUrl: String,
@@ -327,7 +339,11 @@ const props = defineProps({
     qaVideo: Boolean,
     videoProps: Object,
     videoResources: Object,
-    lessonData: [Array, Object],
+    videoButtons: Object,
+    lessonType: {
+        type: String,
+        default: '',
+    }
 });
 
 //Pinia
@@ -350,14 +366,17 @@ let hasBeenPlayed = false;
 let progressTracker;
 
 //Refs
+const progress_percent = ref(0);
 const isRelatedSectionOpen = ref(true);
+const isChallengeCompletionModalOpen = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(0);
 const soundsliceTitle = ref('');
 const startLooping = ref(false);
-const mediaElementVueInstance = ref(null)
+const mediaElementVueInstance = ref(null);
+const contentId = ref(getContentId());
 
 const videoData = ref({});
 const likeData = ref({});
@@ -365,6 +384,7 @@ const isLiked = ref(false);
 const isCompleted = ref(false);
 const relatedLessons = ref([]);
 const nextPreviousLessons = ref(null);
+const completionData = ref(null);
 
 //Reactive
 const state = reactive({
@@ -519,11 +539,11 @@ const noAccess = computed(() => {
     return videoData.value?.need_access;
 })
 
-const showDraftLabel = computed(() => {
-    return props.lessonData.status === 'draft';
+const isChallenge = computed(() => {
+    return props.lessonType === 'challenges';
 })
 
-const completeContent = () => {
+const toggleCompleteContent = () => {
     isCompleted.value = !isCompleted.value;
 }
 
@@ -537,46 +557,89 @@ const likeContent = () => {
     }
 }
 
+const openChallengeCompletionModal = async (data) => {
+    completionData.value = data;
+    isChallengeCompletionModalOpen.value = true;
+}
+
+const closeChallengeCompletionModal = () => {
+    isChallengeCompletionModalOpen.value = false;
+}
+
 const isWorkout = computed( () => {
     return props.contentType === 'workout';
 })
 
-onBeforeMount(async () => {
-  console.log('videoResources', props.videoResources);
-  const contentId = getContentId();
+const fetchLessonData = async () => {
+    if(isChallenge.value){
+        const results = await Promise.allSettled([
+            fetchChallengeLessonData(contentId.value),
+            axios.get(`/content/${contentId.value}/user_data/${userId.value}`),
+            isContentLiked(contentId.value),
+        ])
 
-  // Execute all video calls using Promise.allSettled
-  const results = await Promise.allSettled([
-    fetchLessonContent(contentId),
-    axios.get(`/content/${contentId}/user_data/${userId.value}`),
-    isContentLiked(contentId),
-    axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId}`),
-    fetchNextPreviousLesson(contentId),
-    fetchRelatedLessons(contentId, brand.value)
-  ]);
+        const [dataResult, likeResult, likedResult] = results;
 
-  // Process results
-  const [dataResult, likeResult, likedResult, completedResult, nextPrevResult, relatedLessonsResult] = results;
+        videoData.value = dataResult.status === 'fulfilled' ? dataResult.value.lesson : null;
+        likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
+        isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
+        isCompleted.value = dataResult.status === 'fulfilled' && dataResult.value.lesson.completed;
+        nextPreviousLessons.value = dataResult.status === 'fulfilled' ? {
+            nextLesson: dataResult.value.next_lesson,
+            prevLesson: dataResult.value.previous_lesson,
+        } : null;
 
-  // Check each result individually and update state accordingly
-  videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
-  likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
-  isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
-  isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId]?.state === 'completed';
-  nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
-  relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
 
-  // Optional: log errors for any rejected promises
-  results.forEach((result, index) => {
-    if (result.status === 'rejected') {
-      console.error(`Promise at index ${index} failed:`, result.reason);
+        relatedLessons.value = dataResult.status === 'fulfilled' ? await dataResult.value.lessons : [];
+    } else {
+
+        // Execute all video calls using Promise.allSettled
+        const results = await Promise.allSettled([
+            fetchLessonContent(contentId.value),
+            axios.get(`/content/${contentId.value}/user_data/${userId.value}`),
+            isContentLiked(contentId.value),
+            axios.get(`/content/user_progress/${userId.value}?content_ids[]=${contentId.value}`),
+            fetchNextPreviousLesson(contentId.value),
+            fetchRelatedLessons(contentId.value, brand.value),
+            getProgressPercentage(contentId.value)
+        ]);
+
+        // Process results
+        const [
+            dataResult, 
+            likeResult, 
+            likedResult, 
+            completedResult, 
+            nextPrevResult, 
+            relatedLessonsResult,
+            progressResult
+        ] = results;
+
+        // Check each result individually and update state accordingly
+        videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
+        likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
+        isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
+        isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
+        nextPreviousLessons.value = nextPrevResult.status === 'fulfilled' ? nextPrevResult.value : null;
+        relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
+        progress_percent.value = progressResult.status === 'fulfilled' ? progressResult.value : 0;
+
+        // Optional: log errors for any rejected promises
+        results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+                console.error(`Promise at index ${index} failed:`, result.reason);
+            }
+        });
+
+        // Check values
+        //console.log('isLiked', isLiked.value);
+        console.log('videoData.value', videoData.value);
     }
-  });
 
-  // Check values
-  console.log('isLiked', isLiked.value);
-  console.log('videoData.value', videoData.value);
+    platformStore.setLoadingState(false);
+}
 
-  platformStore.setLoadingState(false);
+onBeforeMount (() => {
+    fetchLessonData();
 });
 </script>

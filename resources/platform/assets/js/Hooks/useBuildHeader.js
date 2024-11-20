@@ -1,6 +1,3 @@
-// hooks/useBuildHeader.js
-import { ref } from 'vue';
-
 export function useBuildHeader(progressPercent) {
     const buildHeader = (contentType, result, progressPercent) => {
         const header = {
@@ -9,6 +6,7 @@ export function useBuildHeader(progressPercent) {
             description: result.description,
             ctas: buildHeaderCTA(result),
             progress: progressPercent,
+            contentId: result.id,
         };
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
@@ -25,8 +23,8 @@ export function useBuildHeader(progressPercent) {
             ];
         }
 
-        // Add additional custom fields based on contentType if 
-        if (contentType === 'pack' || contentType === 'pack-bundle') {
+        // Add additional custom fields based on contentType if
+        if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenges') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
             header.darkModeLogo = result.light_logo;

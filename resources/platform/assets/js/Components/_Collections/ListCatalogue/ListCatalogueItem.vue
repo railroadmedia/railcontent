@@ -247,10 +247,10 @@
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || item.completed"
+                    v-if="item.started || lesson_complete"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            item.completed ? completedIcon : 'fa-adjust',
+                            lesson_complete ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -265,7 +265,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -367,6 +367,7 @@ const {
     thumbnailIcon,
     renderLink,
     progress_percent,
+    lesson_complete,
     isReleased,
     releaseDate,
     thumbnailType,
@@ -384,6 +385,7 @@ const {
 const { addToList, addEvent } = useUserCatalogueEvents({ ...props });
 const { resetProgress } = useResetProgress();
 
+//Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 //Computed
@@ -398,7 +400,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: props.item.completed,
+        completed: lesson_complete,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
@@ -475,5 +477,6 @@ const handleReset = () => {
 const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
+
 </script>
 

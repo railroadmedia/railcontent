@@ -178,16 +178,17 @@
         @endif
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         content-type="{{ $lessonContent->fetch('type') }}"
-        :lesson-data="{{ json_encode($lessonContent) }}"
         :qa-video="{{ $hasQAVideo }}" {{-- Mostly used for user data --}}
         :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
         :video-resources="{{ json_encode($videoResources) }}"
+        {{-- :lesson-data="{{ json_encode($lessonContent) }}" --}} {{-- Mostly used for user data and status--}}
         {{-- :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}" --}}
         {{-- :comments-props="{{ json_encode($commentsProps) }}" --}}
         {{-- :related-lessons="{{ $relatedLessons }}" --}}
         {{-- :soundslice-slug={{ json_encode($lessonContent->fetch('soundslice_slug')) }} --}}
         {{-- :this-lesson-json="{{ $thisLessonJson }}" --}}
         {{-- :video-buttons="{{ json_encode($videoButtons) }}" --}}
+        :lesson-type="{{ json_encode($primaryPage) }}"
     >
     </lesson-playback>
 

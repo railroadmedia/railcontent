@@ -135,7 +135,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
+import { computed, onUnmounted, ref, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -212,9 +212,10 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
-    progress_percent,
     isReleased,
     releaseDate,
+    progress_percent,
+    lesson_complete,
 } = useCatalogueItem(props);
 
 const state = reactive({
@@ -277,7 +278,7 @@ const hasProduct = computed(() => {
 })
 
 const registrationUrl = computed(() => {
-    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value?.post?.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const duration = computed(() => {
@@ -317,11 +318,11 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
+    if (contentModel.value?.post?.fields) {
         if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+            return contentModel.value?.post?.fields.find(field => field.key === 'artist')?.value || ''
         }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+        return contentModel.value?.post?.fields.find(field => field.key === 'instructor')?.value.name || ''
     } else if (props.item.artist_name) {
         return props.item.artist_name;
     } else {
@@ -331,8 +332,8 @@ const contentCreator = computed(() => {
 
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
+    if (contentModel.value?.post?.fields) {
+        difficultyValue = contentModel.value?.post?.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;
@@ -359,14 +360,14 @@ const wrapperClasses = computed(() => {
     return ({
         [defaultWrapperClasses]: defaultWrapperClasses && !props.wrapperClassOverride,
         'no-access': noAccess.value,
-        completed: props.item.completed,
+        completed: lesson_complete,
         'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
         [props.wrapperClassOverride]: props.wrapperClassOverride,
     })
 });
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && lesson_complete === true);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
 const closeDropdown = () => {
@@ -379,17 +380,6 @@ const getPublishedOn = (item) => {
     const dt = DateTime.fromSQL(item.published_on, { zone: 'utc' });
     return dt.setZone('America/Los_Angeles').toFormat('LLL dd, yyyy');
 }
-
-
-onMounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.addEventListener('scroll', closeDropdown);
-});
-
-onUnmounted(() => {
-    const contentContainer = document.getElementById(props.scrollContainer);
-    contentContainer.removeEventListener('scroll', closeDropdown);
-});
 
 const emit = defineEmits(['addToList', 'progressReset']);
 
@@ -413,4 +403,15 @@ const handleClick = (event) => {
         }
     }
 }
+
+onMounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.addEventListener('scroll', closeDropdown);
+});
+
+onUnmounted(() => {
+    const contentContainer = document.getElementById(props.scrollContainer);
+    contentContainer.removeEventListener('scroll', closeDropdown);
+});
+
 </script>

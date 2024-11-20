@@ -7,7 +7,7 @@
                     <a @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
-                        <ChevronRightIcon class="tw-w-5" />
+                        <ChevronRightIcon v-if="seeAllUrl" class="tw-w-5" />
                     </a>
                     <slot name="label"></slot>
                 </div>
@@ -20,7 +20,10 @@
             </div>
             <div>
                 <transition appear name="fade">
+                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" @remove-challenge="removeItem" />
+                    <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
                     <CatalogueCardContainer
+                        v-else
                         :force-no-links="forceNoLinks"
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="data"
@@ -37,12 +40,15 @@
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref, watch} from 'vue';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
 import useCarouselEvents from "@hooks/useCarouselEvents";
+import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import ChallengeAwardContainer from '@collections/ChallengeAwardContainer/ChallengeAwardContainer';
 
 const props = defineProps({
   seeAllUrl: {
@@ -88,7 +94,11 @@ const props = defineProps({
   trackingSection: {
     type: String,
     default: ''
-  }
+  },
+  catalogueType: {
+    type: String,
+    default: ''
+  },
 });
 
 const userStore = useUserStore();
@@ -96,6 +106,14 @@ const userStore = useUserStore();
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
+
+const isChallenge = computed(() => {
+    return props.catalogueType === 'challenge';
+})
+
+const isChallengeAward = computed(() => {
+    return props.catalogueType === 'challengeAward';
+})
 
 const handleSeeAllClick = (event) => {
   if (props.seeAllUrl && props.trackingSection) {
@@ -113,27 +131,7 @@ const handleSeeAllClick = (event) => {
 };
 
 const watchResize = () => {
-    if(props.isMiniView){
-        if(window.innerWidth > 2256){
-            cardNum.value = 10;
-        } else if(window.innerWidth > 1536){
-            cardNum.value = 8;
-        } else if(window.innerWidth > 1280){
-            cardNum.value = 6;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else {
-            cardNum.value = 20;
-        }
-    } else {
-        if(window.innerWidth > 1536){
-           cardNum.value = 5;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else if(window.innerWidth <= 1024){
-            cardNum.value = 20;
-        }
-    }
+    getCardNum(props, cardNum);
 
     getPageData();
 }
@@ -155,5 +153,5 @@ watch(
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
 </script>

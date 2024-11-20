@@ -12,6 +12,7 @@ import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '@units/LoadingSpinner/LoadingSpinner.vue';
 import AddDuplicate from './AddDuplicate.vue';
 import MuButton from '@units/Button/MuButton';
+import {addItemToPlaylist, countAssignmentsAndLessons, fetchUserPlaylists} from 'musora-content-services';
 
 const props = defineProps({
     brand: {
@@ -111,7 +112,7 @@ const handleActionClick = (payload) => {
     const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
     const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
     if (duplicateIndex !== -1 && selectedIndex === -1) {
-        duplicateProps.value = { id: payload, show: true, title: props.content.name };
+        duplicateProps.value = { id: payload, show: true, title: props.content.title };
     } else {
         addRemovePlaylistSelection(payload);
     }
@@ -136,27 +137,26 @@ const clearSearch = () => {
 
 const saveData = (playlistId) => {
     if(showVocalRoutineToggles.value) {
-        return PlaylistService.addToPlaylist({
+        return addItemToPlaylist({
             brand: props.brand,
-            contentId: props.content.content_id,
-            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
-            addLowRoutine: includeLowRoutine.value,
-            addHighRoutine: includeHighRoutine.value,
+            content_id: props.content.content_id,
+            playlist_id: playlistId ? [playlistId] : selectedPlaylists.value,
+            import_low_routine: includeLowRoutine.value,
+            import_high_routine: includeHighRoutine.value,
             token,
         });
     } else {
-        return PlaylistService.addToPlaylist({
+        return addItemToPlaylist({
             brand: props.brand,
-            contentId: props.content.content_id,
-            importAssignments: importAll.value,
-            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
-            addFull: addFullSongToggle.value,
-            addInstrumentless: addInstrumentlessToggle.value,
+            content_id: props.content.content_id,
+            import_all_assignments: importAll.value,
+            playlist_id: playlistId ? [playlistId] : selectedPlaylists.value,
+            import_full_soundslice_assignment: addFullSongToggle.value,
+            import_instrumentless_soundslice_assignment: addInstrumentlessToggle.value,
             token,
         }).then(function(response) {
-            if(response.status === 200) {
                 //Check if limit has exceeded.....
-                if(Object.keys(response.data)[0] === 'limit_excedeed') {
+                if (response.limit_excedeed) {
                     window.shownotification({
                         icon: 'error',
                         text: `You have reached the max limit of items. Delete one or more of your items to free up space or create a new playlist.`
@@ -164,7 +164,6 @@ const saveData = (playlistId) => {
                     return false;
                 }
                 return response;
-            }
         });
     }
 };
@@ -217,16 +216,18 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({
+    fetchUserPlaylists(props.brand, {
         brand: props.brand,
         page: pageNumber.value,
         limit: 10,
-        term: state.searchTerm,
+        searchTerm: state.searchTerm,
         content_id: props.content.content_id
-    }, token).then(r => {
+    })
+        .then(r => {
+
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
-        const { data: { data } } = r;
+        const { data } = r;
         if (data.length) {
             const formattedTable = data.map((item) => {
                 const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;
@@ -286,8 +287,8 @@ onMounted(() => {
 
     if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
-        PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
-            const { data: { soundslice_assignments_count, lessons_count } } = r;
+        countAssignmentsAndLessons(props.content.content_id).then((r) => {
+            const {  soundslice_assignments_count, lessons_count  } = r;
             additionalItems.value = soundslice_assignments_count;
             totalItems.value = lessons_count ? soundslice_assignments_count + lessons_count : soundslice_assignments_count;
             isLoadingAssignments.value = false;

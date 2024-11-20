@@ -2,6 +2,7 @@
     import { inject, onBeforeMount, computed, ref } from 'vue';
     import PlaylistService from '@services/playlists.js';
     import { usePlaylistsStore } from '@stores/playlists';
+    import {updatePlaylistItem} from 'musora-content-services';
     import InputLabel from '@units/InputLabel/InputLabel.vue';
     import MuButton from '@units/Button/MuButton';
 
@@ -50,11 +51,10 @@
     //-----------Methods-----------//
 
     const handleConfirm = () => {
-        PlaylistService.updatePlaylistItem({
+        updatePlaylistItem({
             user_playlist_item_id: props.content.user_playlist_item_id,
             playlist_item_name: itemName.value,
-        }, token)
-            .then(() => {
+        }).then(() => {
                 window.shownotification({
                     icon: 'edit',
                     text: 'Playlist item name has been successfully edited.'

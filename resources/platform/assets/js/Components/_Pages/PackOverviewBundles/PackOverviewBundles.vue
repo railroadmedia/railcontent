@@ -89,6 +89,7 @@ onMounted( async () => {
         //Header Data
         header.value = PackData?.value?.header;
         //console.log( 'header', header.value )
+
         platformStore.setLoadingState(PackLoading.value);
 })
 </script>

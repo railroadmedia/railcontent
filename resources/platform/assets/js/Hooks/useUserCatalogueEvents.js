@@ -49,9 +49,9 @@ export default function useUserCatalogueEvents(props, context) {
                 thumbnail_url = getValue(props.item.data, 'thumbnail_url');
                 description = getValue(props.item.fields, 'artist');
             } else {
-                name = getValue(props.item.fields, 'title');
-                thumbnail_url = getValue(props.item.data, 'thumbnail_url');
-                description = getValue(props.item.data, 'description');
+                name = props.item.title ?? '';
+                thumbnail_url = props.item.thumbnail ?? '';
+                description = '';
 
             }
             window.openplaylistmodal({

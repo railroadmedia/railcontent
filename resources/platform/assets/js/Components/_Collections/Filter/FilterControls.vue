@@ -131,6 +131,12 @@ const sortIcon = () => {
 const hasPills = computed(() => {
     return props.selectedFilters && Object.keys(props.selectedFilters).length > 0;
 })
+
+const rowStyles = computed(() => {
+    if(!props.hideSearch){
+        return 'tw-flex-col lg:tw-flex-row tw-overflow-x-auto';
+    }
+})
 </script>
 
 <style scoped></style>

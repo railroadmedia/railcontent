@@ -280,7 +280,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getUserAward($id)
     {
-        $challenge = $this->challengesService->getChallengeById($id);
+              $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen
@@ -329,6 +329,48 @@ class ChallengesMetaDataController extends Controller
             'id' => $challenge['id'],
             ... $imageValues,
         ];
+    }
+
+    /**
+     * Get all challenges the user has started or purchased
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getOwnedChallenges(Request $request)
+    {
+        $userId = user()->id;
+        $brand = $request->get('brand', brand());
+        $completedChallenges = ChallengeUserProgress::whereUserId($userId);
+        if (!$completedChallenges) return response()->json([]);
+        $completedIds = $completedChallenges->pluck('content_id')->toArray();
+        $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
+        $output = [
+            'entity' => $challenges,
+            'total' => count($challenges),
+        ];
+        return response()->json($output);
+    }
+
+    /**
+     * Get all challenges the user has completed
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getCompletedChallenges(Request $request)
+    {
+        $userId = user()->id;
+        $brand = $request->get('brand', brand());
+        $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId);
+        if (!$completedChallenges) return response()->json([]);
+        $completedIds = $completedChallenges->pluck('content_id')->toArray();
+        $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
+        $output = [
+            'entity' => $challenges,
+            'total' => count($challenges),
+        ];
+        return response()->json($output);
     }
 
     /**
