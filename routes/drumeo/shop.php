@@ -23,7 +23,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'drumeo-deal',
             'drumsticks',
             'easy-rudiments',
-            'ekit-bundle',
             'electrify-your-drumming',
             'festival-videos',
             'gift-bundle',
