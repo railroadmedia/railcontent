@@ -1,4 +1,4 @@
-<div class="h-5 sm:h-10 -mt-10 relative"
+<div id="guarantee-block" class="h-5 sm:h-10 -mt-10 relative"
     aria-hidden="true"
     @if(!empty($bgColor))
     style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #900F1C calc(50% + 1px));"
@@ -7,7 +7,7 @@
     @endif
 ></div>
 <div id="guarantee" class="anchor"></div>
-<section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6"
+<section id="guarantee-section" class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6"
     @if(!empty($bgColor))
         style="color:#fff!important;background: linear-gradient(0deg, #F61A30 0%, #900F1C 100%);"
     @else

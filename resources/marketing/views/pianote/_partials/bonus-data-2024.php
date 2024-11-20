@@ -1,11 +1,19 @@
 <?php
 $bonusVideos = [
     [
+        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/AP.webp',
+        'header' => 'Pianote 1-Year Access Pass',
+        'description' => '<p>The one-year access pass for gifting a full year of lessons without an ongoing subscription. You’ll get a physical access pass that you, or anyone, can redeem anytime – loaded with the lessons they’ll love to reach all of their goals on the piano.</p>',
+        'vimeoId' => '785314388',
+        'offerPrice' => '<strong class="font-black">$240</strong>',
+        'sku' => '1-year-membership'
+    ],
+    [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/AM.webp',
         'header' => 'Pianote Annual Membership',
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
-        'offerPrice' => '<strong class="font-black">$240</strong> <span class="text-xs">for your first year</span>',
+        'offerPrice' => '<strong class="font-black">$240</strong><span class="text-xs"> for your first year</span>',
         'sku' => 'pianote-membership'
     ],
     [
@@ -36,6 +44,15 @@ $bonusVideos = [
         'sku' => 'easy-chords'
     ],
     [
+        'image' => 'marketing/pianote/products/prima/bundle/EC.webp',
+        'header' => 'Easy Chords',
+        'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“I just want to say thank you! My ability to choose which chord inversion to play next when I go through a progression has improved a lot after going through this course!” ~ Lars, Piantoe Student</strong></p>',
+        'vimeoId' => '823788317',
+        'badge' => '42.33',
+        'price' => 127,
+        'sku' => 'easy-chords-challendge',
+    ],
+    [
         'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
         'header' => '30-Day Blues Piano',
         'description' => '<p>Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p>',
@@ -45,6 +62,15 @@ $bonusVideos = [
         'sku' => '30-day-blues-piano'
     ],
     [
+        'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
+        'header' => '30-Day Blues Piano',
+        'description' => '<p class="leading-tight">Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“It\'s been such life giving joy to practice with and learn from you daily!” ~ Kristyn, Pianote Student</strong></p>',
+        'vimeoId' => '852795615',
+        'badge' => '42.33',
+        'price' => 127,
+        'sku' => '30-day-blues-piano-challendge',
+    ],
+    [
         'image' => 'marketing/pianote/products/prima/bundle/30DTBT.webp',
         'header' => '30 Days To Better Technique',
         'description' => '<p>Improve your finger strength, coordination, and speed with GRAMMY-winner Jordan Rudess.</p><p class="my-2">The Dream Theater keyboardist will guide you through 30 days of exercises that WILL make you a better piano player…</p><p>Guaranteed.</p>',
@@ -52,6 +78,15 @@ $bonusVideos = [
         'badge' => 'FREE BONUS',
         'price' => 127,
         'sku' => '30-days-to-better-technique'
+    ],
+    [
+        'image' => 'marketing/pianote/products/prima/bundle/30DTBT.webp',
+        'header' => '30 Days To Better Technique',
+        'description' => '<p>Improve your finger strength, coordination, and speed with GRAMMY-winner Jordan Rudess.</p><p class="my-2">The Dream Theater keyboardist will guide you through 30 days of exercises that WILL make you a better piano player…</p><p>Guaranteed.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“What an absolutely fantastic 30 day course and what an amazing teacher. Thank you Jordan and the Musora team ” ~ Paul, Pianote Student</strong></p>',
+        'vimeoId' => '928599834',
+        'badge' => '42.33',
+        'price' => 127,
+        'sku' => '30-days-to-better-technique-challendge'
     ],
     [
         'image' => 'marketing/pianote/products/prima/bundle/CPC.webp',
@@ -72,7 +107,7 @@ $bonusVideos = [
         'sku' => 'practice-kit'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/MTPB.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/the-little-book-bundle.webp',
         'header' => 'The Little Book Bundle',
         'description' => '<p>Improve your chording, technique, and arpeggios.</p><p class="my-2">You’ll get The Little Book of Chord Progressions, The Little Book of Arpeggios, and The Little Book of Hanon.</p><p>These little books will make a BIG difference to your playing!</p>',
         'badge' => 'FREE BONUS',
@@ -80,7 +115,7 @@ $bonusVideos = [
         'sku' => 'little-book-bundle'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/PK.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/MTPB.webp',
         'header' => 'Pianote Music Theory Poster Bundle',
         'description' => '<p>Theory can be hard. But this set of 6 color posters helps break down the essential concepts of music theory.</p><p class="my-2">Your loved one will easily learn the notes, chords, and scales with this high-quality posters that look great in any practice space.</p>',
         'badge' => 'FREE BONUS',

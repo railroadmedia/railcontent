@@ -35,6 +35,11 @@
             $textColor = 'text-[#CF03DA]';
             $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA]">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
+        case 'book':
+            $borderColor = 'border-[#7E56FF]';
+            $textColor = 'text-[#7E56FF]';
+            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF]">(Save 41%)</span>';
+            break;
         default:
             $borderColor = 'border-none';
             $textColor = 'text-white';

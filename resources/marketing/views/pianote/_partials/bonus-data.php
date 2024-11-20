@@ -21,7 +21,8 @@ $bonuses = [
         'description' => 'Hear your piano the way it was meant to sound.',
         'price' => floatval($productPrices['pianote-headphones']->price),
         'shipping' => true,
-        'sku' => 'pianote-headphones'
+        'sku' => 'pianote-headphones',
+        'physical' => true
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11.webp',
@@ -29,15 +30,17 @@ $bonuses = [
         'description' => 'Always know exactly what to practice.',
         'price' => floatval($productPrices['pianote-practice-planner']->price),
         'shipping' => true,
-        'sku' => 'pianote-practice-planner'
+        'sku' => 'pianote-practice-planner',
+        'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-09.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-10.webp',
         'title' => 'Chords & <br>Scales Book',
         'description' => 'Your encyclopedia of piano chords & scales.',
         'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
         'shipping' => true,
-        'sku' => 'piano-chords-and-scales-guide'
+        'sku' => 'piano-chords-and-scales-guide',
+        'physical' => true
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Chords_Card.jpg',
@@ -45,7 +48,8 @@ $bonuses = [
         'description' => 'Hang these piano chords in your practice space.',
         'price' => floatval($productPrices['poster-chords']->price),
         'shipping' => true,
-        'sku' => 'poster-chords'
+        'sku' => 'poster-chords',
+        'physical' => true
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Scales_Card.jpg',
@@ -180,14 +184,16 @@ $bonuses = [
         'title' => 'Classical <br>Book',
         'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
         'price' => floatval($productPrices['classical-book']->price),
-        'sku' => 'classical-book'
+        'sku' => 'classical-book',
+        'physical' => true,
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12.webp',
         'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
         'price' => 49,
         'shipping' => true,
-        'sku' => 'classical-piano-pieces'
+        'sku' => 'classical-piano-pieces',
+        'physical' => true
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-04.webp',
@@ -215,14 +221,16 @@ $bonuses = [
         'title' => 'The Pianote PracticeKit',
         'description' => 'Essential tools to maximize your practice time.',
         'price' => 49,
-        'sku' => 'practice-kit'
+        'sku' => 'practice-kit',
+        'physical' => true
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-14.webp',
         'title' => 'The Little Book Bundle',
         'description' => 'Improve your chording, technique, and arpeggios.',
         'price' => 21,
-        'sku' => 'little-book-bundle'
+        'sku' => 'little-book-bundle',
+        'physical' => true
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/BB.webp',
@@ -230,7 +238,8 @@ $bonuses = [
         'description' => 'Premium leather satchel for your music books and equipment.',
         'price' => 249,
         'shipping' => true,
-        'sku' => 'book-bag'
+        'sku' => 'book-bag',
+        'physical' => true
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
@@ -240,6 +249,13 @@ $bonuses = [
         'sku' => 'pianote-membership'
     ],
     [
+        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-AP.webp',
+        'title' => 'Pianote Annual Membership',
+        'description' => 'Access hundreds of expertly designed piano lessons.',
+        'price' => 240,
+        'sku' => '1-year-membership'
+    ],
+    [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
         'title' => 'Pianote Annual Membership Deal',
         'description' => 'Access hundreds of expertly designed piano lessons at a special price.',
@@ -247,10 +263,11 @@ $bonuses = [
         'sku' => 'pianote-membership-deal'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12.webp',
-        'header' => 'The Most Beautiful Classical Piano Pieces Book',
-        'description' => 'This book contains 20 of the most beautiful classical piano pieces, in original and simplified arrangements.',
-        'price' => 49,
-        'sku' => 'classical-piano-pieces'
-    ]
+        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-08.webp',
+        'header' => 'Pianote Music Theory Poster Bundle',
+        'description' => '<p>Your loved one will easily learn the notes, chords, and scales with this high-quality posters.</p>',
+        'price' => 39,
+        'sku' => 'music-theory-posters',
+        'physical' => true
+    ],
 ];
