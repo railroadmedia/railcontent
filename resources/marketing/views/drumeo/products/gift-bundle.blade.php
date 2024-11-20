@@ -56,10 +56,10 @@
     <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:860px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-logo.svg"><br>
+                <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Give The Gift Of Music This Holiday Season.</strong></h2>
-                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
-                <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage">
+                <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage-m.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $322.94</s><strong> $240</strong> <span class="text-[#41F70F] text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
@@ -80,7 +80,7 @@
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
         <h2 class="leading-tight text-center"><strong>Here's what's you'll get with this bundle.</strong></h2>
-        <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">The perfect way to gift Drumeo to a friend – you’ll get a physical one-year access pass to Drumeo that can be redeemed anytime along with three additional gifts for a lucky drummer in your life. </h5>
+        <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-12">The perfect way to gift Drumeo to a friend – you’ll get a physical one-year access pass to Drumeo that can be redeemed anytime along with three additional gifts for a lucky drummer in your life. </h5>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -117,24 +117,10 @@
         @include('drumeo._partials.bf-order-section-bonuses', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-logo.svg',
-        'logoHeight' => 'h-16 sm:h-18',
+        'logoHeight' => 'h-16 sm:h-18 md:h-24',
         'topImage' => 'marketing/drumeo/promos/november/2024/gift-bundle/bonus-01.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save 948.90 on our ultimate bundle. </strong></h2>
-            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
-                <span class="flex items-center">
-                    <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                   PLAY-ALONG LESSONS
-                </span>
-                <span class="flex items-center">
-                    <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                    POPULAR SONGS
-                </span>
-                <span class="flex items-center">
-                    <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                   WORLD-CLASS TEACHERS
-                </span>
-            </div>',
+        'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season. </strong></h2>',
         'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-drumeo]=1&promo-code=the-gift-bundle-drumeo&locked=true',
         'bundle'=> 'gift',
         ])

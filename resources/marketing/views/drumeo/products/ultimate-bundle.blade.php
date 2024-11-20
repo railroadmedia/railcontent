@@ -56,7 +56,7 @@
     <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:860px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-logo.svg"><br>
+                <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Save $948.90 on our ultimate bundle. </strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
                     <span class="flex items-center">
@@ -72,8 +72,8 @@
                         WORLD-CLASS TEACHERS
                     </span>
                 </div>
-                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
-                <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage.webp" alt="Bundle Collage">
+                <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage-m.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00] text-3xl">(Save 59%)</span></h2>
                     @if($stock > 0)
@@ -99,9 +99,9 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="leading-tight text-center mb-3 lg:pb-6">
+            <h1 class="leading-tight text-center mb-3 lg:pb-6">
                 <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
-            </h2>
+            </h1>
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -162,7 +162,7 @@
                         WORLD-CLASS TEACHERS
                     </span>
                 </div>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ultimate-drumeo-bundle]=1&promo-code=ultimate-drumeo-bundle&locked=true',
             'bundle' => 'ultimate',
         ])
     </div>

@@ -77,7 +77,7 @@
                 <img class="hidden md:inline object-cover max-w-3xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/e-kit-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/e-kit-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none mb-1"><strong>$599</strong></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1474</s><strong> $599</strong> <span class="text-[#41F5FB2FF70F] text-3xl">(Save 59%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else
@@ -96,7 +96,7 @@
     <div id="customize-anchor"></div>   
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-                
+            <h2 class="leading-tight text-center pb-4 lg:pb-8"><strong>Here's what's you'll get with <br>this bundle.</strong></h2>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -146,7 +146,7 @@
             'topImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-am.webp',
             'secondImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-ek.webp', 
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Everything you need to play drums!</strong></h2> 
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $875 on an electronic drum kit + lessons.</strong></h2> 
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>

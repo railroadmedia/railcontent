@@ -59,7 +59,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg"><br>
-                <h2 class="leading-tight my-3 lg:my-6"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
+                <h2 class="leading-tight my-3"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
@@ -95,10 +95,10 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-             <h2 class="leading-tight text-center mb-3 lg:pb-6">
+             <h2 class="leading-tight text-center mb-3 lg:pb-4">
                 <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
             </h2>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
+            <h5 class="leading-normal text-center mb-3 lg:pb-6">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
             Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</h5>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
@@ -122,9 +122,9 @@
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
-            'logoHeight' => 'h-16 sm:h-18',
+            'logoHeight' => 'h-16 sm:h-18 md:h-24',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>',            
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',            
             'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true', 
             'bundle'=> "deal",
             ])
