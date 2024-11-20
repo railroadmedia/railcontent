@@ -102,14 +102,22 @@ const tabData = computed(() => {
 onBeforeMount(async() => {
     isLoading.value = true;
     try {
+        const artists = await fetchArtists(brand.value);
+        artistCount.value = artists.length;
+
+        // Set default collection store values
+        collectionStore.setDefaults({
+            tabOptions: tabData.value,
+            filter: {
+                sort: '-published_on'
+            },
+            queryType: 'song',
+        });
+
         if (props.showUpgradeModal) {
             platformStore.openMembershipUpgradeModal();
             platformStore.disableCloseMembershipUpgradeModal();
         } else {
-            // Fetch song artist count
-            const artists = await fetchArtists(brand.value);
-            artistCount.value = artists.length;
-
             // Fetch started content (in-progress lessons)
             const startedIds = await fetchContentInProgress('song', brand.value);
             const lessons = await fetchByRailContentIds(startedIds.started);
@@ -117,15 +125,6 @@ onBeforeMount(async() => {
 
             // Set the continue section with started lessons
             continueSection.value = startedLessons;
-
-            // Set default collection store values
-            collectionStore.setDefaults({
-                tabOptions: tabData.value,
-                filter: {
-                    sort: '-published_on'
-                },
-                queryType: 'song',
-            });
         }
     } catch (error) {
         console.error('Error in onBeforeMount:', error);
