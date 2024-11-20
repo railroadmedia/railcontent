@@ -159,5 +159,5 @@ export const getDate = (dateString) => {
         year: '2-digit',
     });
 
-    return formatter.format(date);
-}
+    return formatter.format(date).replace(/, /g, '/');
+};
