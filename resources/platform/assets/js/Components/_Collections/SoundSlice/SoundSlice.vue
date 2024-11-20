@@ -142,7 +142,7 @@ const sendProgressTracking = () => {
     if (props.soundsliceType !== 'assignment') {
         progressTracker.send({
             contentId: props.contentId,
-            mediaType: props.soundsliceType,
+            mediaType: 'assignment',
             mediaCategory: 'soundslice',
             watchPosition: Math.round(currentTimeRef.value),
             totalDuration: Math.round(endTime.value)
