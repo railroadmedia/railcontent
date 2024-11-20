@@ -154,7 +154,7 @@
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import {ref, computed, onMounted, onUnmounted, watch} from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
@@ -199,12 +199,17 @@ const challengeTitle = computed(() => {
     return props.challenge.title;
 })
 
+const startDate = computed(() => {
+    const utc = new Date(props.challenge.start_date);
+    const local = utc.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+    return local;
+})
+
 const actionText = computed(() => {
     if(hasMissedLessons.value){
         return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
     } else if(!hasChallengeStarted.value){
-        //TODO(challenge): update start date
-        return `You're enrolled! Lessons begin ${props.challenge.start_date}`;
+        return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked){
         return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
     }
@@ -220,7 +225,7 @@ const challengeThumbnail = computed(() => {
 })
 
 const isNextLessonLocked = computed(() => {
-    return props.challenge.next_lesson.is_locked;
+    return props.challenge.next_lesson.is_locked && countdownString.value !== '00:00';
 })
 
 const nextLessonShortName = computed(() => {
@@ -303,7 +308,8 @@ const closeMobileDropdown = () => {
 
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
-        const count = countdown(props.completionData?.next_lesson?.unlock_date);
+        const count = countdown(props.challenge.next_lesson?.unlock_date);
+        console.log('countdown', props.challenge.next_lesson?.unlock_date, count)
         countdownString.value = count;
 
         if(count === '00:00'){
@@ -327,4 +333,15 @@ onUnmounted(() => {
         runCountDown(true);
     }
 })
+
+watch(
+    () => isNextLessonLocked.value,
+    (value) => {
+        if(value){
+            runCountDown();
+        } else {
+            runCountDown(true);
+        }
+    },
+)
 </script>
