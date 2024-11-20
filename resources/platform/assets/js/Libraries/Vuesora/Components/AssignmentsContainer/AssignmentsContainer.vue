@@ -21,8 +21,7 @@
                     v-on:force-prev="forceIndex = forceIndex - 1"
                     v-on:force-next="forceIndex = forceIndex + 1"
                     v-on:force-current="forceIndex = index"
-                >
-                </ContentAssignment>
+                />
             </div>
         </div>
         <div class="tw-flex tw-flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] ph-1">
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import ContentAssignment from '../ContentAssignment/ContentAssignment';
+import ContentAssignment from '@vuesora/Components/ContentAssignment/ContentAssignment.vue';
 
 export default {
     name: 'AssignmentsContainer',

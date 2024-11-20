@@ -618,7 +618,7 @@ const fetchLessonData = async () => {
 
         // Check values
         //console.log('isLiked', isLiked.value);
-        console.log('videoData.value', videoData.value);
+        //console.log('videoData.value', videoData.value);
     }
 
     platformStore.setLoadingState(false);

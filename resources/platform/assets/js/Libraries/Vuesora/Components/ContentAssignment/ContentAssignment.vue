@@ -127,12 +127,13 @@
 
 <script>
 import { Duration } from 'luxon';
+import { bgColor, textColor } from "@constants/brands";
+import { getProgressPercentage } from 'musora-content-services';
 import ContentService from '../../assets/js/Services/content';
 import Utils from '../../assets/js/classes/utils';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
-import { bgColor, textColor } from "@constants/brands";
 import SoundSlice from '@collections/SoundSlice/SoundSlice.vue'
 import SoundSliceControls from '@collections/SoundSlice/SoundSliceControls.vue';
 
@@ -350,6 +351,14 @@ export default {
     beforeDestroy() {
         window.addEventListener('requesting-completion', this.setIsRequesting);
         window.removeEventListener('lesson-complete', this.syncCompleteState);
+    },
+    beforeMount() {
+        //Get completed state
+        getProgressPercentage(this.id).then( value => {
+            this.isComplete = value;
+        }).catch( error => {
+            console.log('error getting assignment progress', error)
+        })
     },
     methods: {
         addToPlaylist(data) {
