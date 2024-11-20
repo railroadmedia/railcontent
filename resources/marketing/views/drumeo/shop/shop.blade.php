@@ -99,9 +99,28 @@
                 ],
             ];
         @endphp
-        @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Featured',
-        ])
+        <section x-show="filter === 'all'">
+            <div class="container mx-auto">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
+                <div class="flex flex-wrap mb-5 sm:mb-10">
+                    <a href="/drumshop/drumeo-deal" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal.webp');"></div>
+                        </div>
+                    </a>
+                    <a href="/lifetime" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal.webp');"></div>
+                        </div>
+                    </a>
+                    <div class="w-full">
+                        @include('_partials.layout.holiday.bundle-tiles')
+                    </div>
+                </div>
+            </div>
+        </section>
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container" x-data="{ showAll: false }">

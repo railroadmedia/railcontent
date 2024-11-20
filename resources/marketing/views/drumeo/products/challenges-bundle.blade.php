@@ -13,7 +13,7 @@
     <meta name="description" content="3 Popular Course For The Price Of 1.">
     <meta property="og:description" content="3 Popular Course For The Price Of 1.">
     {{-- TODO: Add image--}}
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" style="display: none;"> 
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -71,7 +71,7 @@
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
                         <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
             <h2 class="leading-tight text-center mb-3"><strong>Improve your independence. <br> Learn Double Bass. <br>Play tasty chops.</strong></h2>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
+            <p class="leading-normal text-center mb-3 lg:pb-6 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</p>
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
@@ -114,20 +114,20 @@
             ])
 
              @include('drumeo._partials.countdown-bundle-2024')
-           
+
 
             @php
-                $targetSkus = ['30-day-independence', '30-day-double-bass', '30-day-chops'];     
+                $targetSkus = ['30-day-independence', '30-day-double-bass', '30-day-chops'];
             @endphp
-             <div id="customize-anchor"></div>   
+             <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-18',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Course For The Price Of 1</strong></h2> 
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Course For The Price Of 1</strong></h2>
                                 <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true', 
+            'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true',
             'bundle'=> "challenge",
             ])
     </div>
@@ -148,7 +148,7 @@
             'vimeo' => true,
         ])
     @endforeach
-    
+
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>

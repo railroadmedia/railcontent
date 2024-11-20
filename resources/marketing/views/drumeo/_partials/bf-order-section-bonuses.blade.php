@@ -54,7 +54,7 @@
             ->sortBy(function ($bonus) use ($targetSkus) {
                 return array_search($bonus['sku'], $targetSkus);
             })
-            ->values();   
+            ->values();
 @endphp
 
 <div
@@ -69,7 +69,7 @@
             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
             :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`" @endif
             x-intersect.once="lazyLoad = true">
-        <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
+        <div class="container mx-auto relative z-50 @if(!empty($maxWidth)) {{ $maxWidth }} @else max-w-6xl @endif">
             <div class="w-full">
                 @if(!empty($promoLogo))
                     <div class="text-center">
@@ -85,7 +85,7 @@
                 @if(!empty($promoHeader))
                     {!! $promoHeader !!}
                 @endif
-                <div class="mx-auto px-1 md:px-3 w-full @if(!empty($secondImage)) md:max-w-3xl @else md:max-w-xs @endif">
+                <div class="mx-auto px-1 md:px-3 w-full @if(!empty($secondImage)) md:max-w-3xl @else md:max-w-sm @endif">
                     <div class="inline-block w-full group">
                         <div class="text-center flex flex-col md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-4">
                         @if(!empty($topImage))
@@ -251,7 +251,7 @@
                 @if(!empty($CTA))
                     {{ $CTA }}
                 @else
-                GET the deal <i class="fas fa-arrow-right"></i>                
+                GET the deal <i class="fas fa-arrow-right"></i>
             @endif
             </a>
             <br>

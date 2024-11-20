@@ -90,10 +90,8 @@
 
        @php
         $videoTargetSkus = [
-            'DLM-1-year', 'practicepad', 'quietkick', 'padstand',
-            'Drumeo-VaterSticks-2', 'BeginnerBook', 'easy-rudiments-book',
-            'the-drummers-toolbox-book', '30-day-drummer-4', '30-day-independence',
-            '30-day-double-bass', '30-day-jazz', '30-day-chops'
+            'DLM-1-year', 'alesis-nitro-max-e-kit', 'eardrums', 'Drumeo-VaterSticks-2', 'headphones',
+            '30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'
         ];
     @endphp
 
@@ -133,20 +131,18 @@
 
         @php
             $targetSkus = [
-                'practicepad', 'quietkick', 'padstand', 'Drumeo-VaterSticks-2',
-                'BeginnerBook', 'easy-rudiments-book', 'the-drummers-toolbox-book',
-                '30-day-drummer-4', '30-day-independence', '30-day-double-bass',
-                '30-day-jazz', '30-day-chops'
+            'DLM-1-year', '30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops', 'drumeo-eardrums', 'headphones', 'Drumeo-VaterSticks-2'
             ];
         @endphp
 
         @include('drumeo._partials.bf-order-section-bonuses', [
+            'maxWidth' => 'max-w-4xl',
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-18',
             'topImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-am.webp',
             'secondImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-ek.webp',
-            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/4',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $948.90 on our ultimate bundle.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
                     <span class="flex items-center">

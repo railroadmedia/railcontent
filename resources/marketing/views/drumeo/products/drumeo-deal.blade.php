@@ -83,14 +83,14 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
     @php
-        $videoTargetSkus = ['DLM-1-year-drumeo', '30-day-drummer-4', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+        $videoTargetSkus = ['DLM-1-year-drumeo', '30-day-drummer-4', '30-day-double-bass', '30-day-jazz', '30-day-independence', '30-day-chops'];
     @endphp
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-[#F4F8FB]">
@@ -98,8 +98,8 @@
              <h2 class="leading-tight text-center mb-3 lg:pb-4">
                 <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
             </h2>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
-            Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</h5>
+            <p class="leading-normal text-center mb-3 lg:pb-6">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
+            Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</p>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -116,9 +116,9 @@
         @include('drumeo._partials.countdown-bundle-2024')
 
         @php
-            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-independence', '30-day-chops'];
         @endphp
-            <div id="customize-anchor"></div>   
+            <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
@@ -146,7 +146,7 @@
             'vimeo' => true,
         ])
     @endforeach
-    
+
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>
