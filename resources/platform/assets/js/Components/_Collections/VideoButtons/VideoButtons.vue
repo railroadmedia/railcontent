@@ -63,7 +63,10 @@ const props = defineProps({
   brand: String,
   prevLabel: String,
   nextLabel: String,
-  qaVideo: Boolean,
   hasBrandedColor: Boolean,
+  qaVideo: {
+        type: Boolean,
+        default: false
+    },
 })
 </script>

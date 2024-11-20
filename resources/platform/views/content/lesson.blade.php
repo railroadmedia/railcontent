@@ -304,7 +304,9 @@
         @if(!empty($lessonContent->fetch('soundslice_slug')))
             :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
         @endif
-        :qa-video="{{ $hasQAVideo }}"
+        @if($hasQAVideo)
+            :qa-video="{{ $hasQAVideo }}"
+        @endif
         :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
         :video-resources="{{ json_encode($videoResources) }}" {{-- Mostly used for user data --}}
         {{-- :lesson-data="{{ json_encode($lessonContent) }}" --}} {{-- Mostly used for user data and status--}}

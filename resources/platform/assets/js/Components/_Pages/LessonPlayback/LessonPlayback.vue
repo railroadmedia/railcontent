@@ -169,7 +169,7 @@
                         :brand="brand"
                         prev-label="Previous Lesson"
                         next-label="Next Lesson"
-                        :qa-video="qaVideo"
+                        :qaVideo="qaVideo"
                     />
 
                     <ContentProgress
@@ -336,14 +336,17 @@ const props = defineProps({
     breadcrumbLastLevelTitle: String,
     contentBreadcrumb: Object,
     contentType: String,
-    qaVideo: Boolean,
     videoProps: Object,
     videoResources: Object,
     videoButtons: Object,
     lessonType: {
         type: String,
         default: '',
-    }
+    },
+    qaVideo: {
+        type: Boolean,
+        default: false
+    },
 });
 
 //Pinia
