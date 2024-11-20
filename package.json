@@ -108,7 +108,7 @@
     "mediaelement": "^7.0.2",
     "mediaelement-plugins": "^2.6.7",
     "mitt": "^3.0.0",
-    "musora-content-services": "^1.0.176",
+    "musora-content-services": "^1.0.177",
     "mux.js": "^5.5.1",
     "normalize.css": "^8.0.1",
     "noty": "^3.2.0-beta-deprecated",

@@ -113,7 +113,22 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        return DateTime.fromSQL(this.post.published_on).toFormat('LLL d/yy');
+        const dateString = this.post.published_on;
+
+        // handle null
+        if (!dateString) return null;
+
+        // handle invalid
+        const date = new Date(dateString);
+        if (isNaN(date)) return null;
+
+        const formatter = new Intl.DateTimeFormat('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: '2-digit',
+        });
+
+        return formatter.format(date);
     }
 
     get postType() {
