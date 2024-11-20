@@ -243,7 +243,7 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="leading-tight mt-6 mb-4 sm:pb-6">
+            <h3 class="leading-tight mt-4 mb-4">
               {!!$bundlePrice!!}
             </h3>
             {{-- <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p> --}}
@@ -255,7 +255,7 @@
             @endif
             </a>
             <br>
-            <a role="link" class="inline-block opacity-70 text-white @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif" aria-label="Start a monthly membership" href="">
+            <a role="link" class="inline-block opacity-90 text-white @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif" aria-label="Start a monthly membership" href="">
                 @if($bundle == 'deal') <p><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
             </a>
             </div>

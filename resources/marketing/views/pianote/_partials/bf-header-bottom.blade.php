@@ -12,7 +12,7 @@
 
             <div class="flex items-center justify-center md:justify-start flex-1 mb-6 md:mb-0 md:px-8 space-x-3 px-4 md:px-4 md:flex-col md:space-x-0 md:space-y-2">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/stars-icon.svg" alt="Rating Icon" class="h-4 md:h-6">
-                <p class="text-center lg:text-left">
+                <p class="text-center">
                     <span class="font-bold">Rated 4.8 out of 5</span><br class="hidden md:block lg:hidden">
                     <span>based on 7117 reviews.</span>
                 </p>

@@ -65,7 +65,7 @@
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-12 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/challenges-bundle-logo.svg"><br>
                 <h2 class="leading-tight mt-3 lg:my-6"><strong>Get 3 Popular Courses For The Price Of 1</strong></h2>
-                <h4 class="italic capitalize">no recurring payments - just results.</h4>
+                <h4 class="italic capitalize pb-2 md:pb-6">no recurring payments - just results.</h4>
                 <img class="hidden md:inline object-cover max-w-xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
@@ -88,8 +88,8 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
-         <h2 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h2>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
+         <h1 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h1>
+            <h5 class="leading-normal text-center mb-3 lg:pb-10 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
                 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
@@ -115,7 +115,7 @@
             'logoHeight' => 'h-16 sm:h-20',
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-2 lg:mb-5"><strong>Get 3 Popular Course For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-5">no recurring payments - ever.</h5>',            
+            'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Course For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',            
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true', 
             'bundle'=> "challenges-pianote",
             ])

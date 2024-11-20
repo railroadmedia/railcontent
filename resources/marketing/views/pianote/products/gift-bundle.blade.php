@@ -60,13 +60,13 @@
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
         'noBreadcrumb' => true,
     ]) --}}
-     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
+     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[600px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-20 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/gift-bundle-new.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Give The Gift Of Music This Holiday Season.</strong></h2>
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-collage.webp" alt="Bundle Collage">
-                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-collage-m.webp" alt="Collage Mobile">
+                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-collage.webp" alt="Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
@@ -112,7 +112,7 @@
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/gift-bundle-new.svg',
-            'logoHeight' => 'h-16 sm:h-20',
+            'logoHeight' => 'h-16 sm:h-20 md:h-24',
             'topImage' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-AP.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season.</h2>',            
