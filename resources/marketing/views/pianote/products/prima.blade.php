@@ -467,14 +467,14 @@
         </section>
 
     @php
-        $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+        $videoTargetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
     <section class=" @if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 @else py-8 sm:py-16 lg:py-20 @endif px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
-                @foreach($packs as $pack)
-                    @if(in_array($pack['sku'], $targetSkus))
+                @foreach($bonusVideos as $pack)
+                    @if(in_array($pack['sku'], $videoTargetSkus))
                         <div class="rounded-xl overflow-hidden">
                             <div class="flex flex-col md:flex-row h-full">
                                 <div class="relative w-full md:w-5/12 lg:w-1/2 rounded-2xl">
