@@ -2,100 +2,112 @@
 
 $bonuses = [
     [
-        'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dd.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonus-30dd.webp',
         'title' => '30-Day Drummer',
         'description' => 'Learn the drums with daily guided workouts.',
         'sku' => '30-day-drummer-4',
+        'price' => 127.00
     ],
     [
-        'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30di.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonus-30di.webp',
         'title' => '30-Day Independence',
         'description' => 'Improve your coordination with daily guided workouts.',
         'sku' => '30-day-independence',
+        'price' => 127.00
     ],
     [
-        'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30ddb.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonus-30ddb.webp',
         'title' => '30-Day Double Bass',
         'description' => 'Unlock your foot speed & control on the drums.',
         'sku' => '30-day-double-bass',
+        'price' => 127.00
     ],
     [
-        'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dj.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonus-30dj.webp',
         'title' => '30-Day Jazz',
         'description' => 'Immerse yourself in jazz drumming for 30 days.',
         'sku' => '30-day-jazz',
+        'price' => 127.00
     ],
     [
-        'imageFull' => true,
-        'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/bonus-30dc.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonus-30dc.webp',
         'title' => '30-Day Chops',
         'description' => 'Boost your creativity in just 30 days',
         'sku' => '30-day-chops',
+        'price' => 127.00
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-07.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-07.webp',
         'title' => 'Drumeo EarDrums',
         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
         'sku' => 'drumeo-eardrums',
         'online-ship' => "Free Shipping",
         'shipping' => "no-shipping",
+        'physical' => true,
+        'price' => 149.00
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-15.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-15.webp',
         'title' => 'Drumeo QuietKick',
         'description' => 'Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).',
         'sku' => 'quietkick',
         'online-ship' => "Free Shipping",
         'shipping' => true,
+        'price' => 79.00,
+        'physical' => true
     ],
     [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/quietpad.webp',
         'title' => 'QuietPad',
         'description' => 'Practice anywhere with two full-size playing surfaces.',
         'sku' => 'quietpad',
         'shipping' => true,
+        'physical' => true,
+        'price' => 59.00
     ],
     [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-12.webp',
         'title' => 'Practice Pad',
         'description' => 'The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.',
         'sku' => 'practicepad',
         'shipping' => true,
+        'phisical' => true,
+        'price' => 79.00
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-09.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-09.webp',
         'title' => 'The Best Beginner Drum Book',
-        'description' => '',
+        'description' => 'The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.',
         'sku' => 'BeginnerBook',
+        'physical' => true,
         'shipping' => true,
+        'price' => 29.99
     ],
     [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-sticks-new.webp',
         'title' => 'Drumeo Drumsticks',
         'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
         'sku' => 'Drumeo-VaterSticks',
+        'physical' => true,
         'shipping' => true,
+        'price' => 12.95
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
         'title' => 'Rock Drumming Masterclass',
-        'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+        'description' => 'Todd Sucherman\'s 26-week masterclass to help you improve your rock drumming.',
         'sku' => 'rock-drumming-masterclass-pack',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
         'title' => 'Drum Technique Made Easy',
-        'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+        'description' => 'Bruce Becker\'s 26-week masterclass to improve your hand & foot technique.',
         'sku' => 'drum-technique-made-easy-pack',
     ],
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
         'title' => 'Independence Made Easy',
-        'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+        'description' => 'Jared Falk\'s 26-week masterclass to unlock your musicality and freedom on the drums.',
         'sku' => 'independence-made-easy-pack',
     ],
     [
@@ -107,7 +119,7 @@ $bonuses = [
     [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
         'title' => 'Successful Drumming',
-        'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+        'description' => 'Jared Falk\'s step-by-step curriculum for building a rock-solid foundation on the drums.',
         'sku' => 'SD-DIGI',
     ],
     [
@@ -129,11 +141,12 @@ $bonuses = [
         'sku' => 'GHFAL-DIGI',
     ],
     [
-        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/bonuses-new/nitro-max.webp',
+        'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/nitro-max.webp',
         'title' => 'Alesis Nitro Max E-Kit',
         'description' => 'Transform your room, apartment or townhouse into a drum studio.',
         'price' => 1065.00,
         'shipping' => true,
+        'physical' => true,
         'sku' => 'alesis-nitro-max-e-kit',
     ],
     [
@@ -142,6 +155,7 @@ $bonuses = [
         'description' => 'Practice anywhere with perfect height and ergonomics.',
         'price' => 79.00,
         'shipping' => true,
+        'physical' => true,
         'sku' => 'padstand',
     ],
     [
@@ -150,6 +164,7 @@ $bonuses = [
         'description' => 'Studio-Quality Sound. The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.',
         'price' => 99.00,
         'shipping' => true,
+        'physical' => true,
         'sku' => 'headphones',
     ],
     [
@@ -158,6 +173,7 @@ $bonuses = [
         'description' => 'The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly).',
         'price' => 29.99,
         'shipping' => true,
+        'physical' => true,
         'sku' => 'easy-rudiments-book',
     ],
     [
@@ -166,14 +182,16 @@ $bonuses = [
         'description' => 'The Drummer\'s Toolbox presents drummers of all skill levels with the most comprehensive introduction to 101 drumming styles from the past century.',
         'price' => 29.99,
         'shipping' => true,
+        'physical' => true,
         'sku' => 'the-drummers-toolbox-book',
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
         'title' => '2 Pairs Of Drumsticks',
         'description' => 'Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability.',
-        'price' => 25.90,
+        'price' => 12.95, 
         'shipping' => true,
+        'physical' => true,
         'sku' => 'Drumeo-VaterSticks-2',
     ],
 ];

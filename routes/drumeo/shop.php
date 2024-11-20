@@ -23,6 +23,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'drumeo-deal',
             'drumsticks',
             'easy-rudiments',
+            'ekit-bundle',
             'electrify-your-drumming',
             'festival-videos',
             'gift-bundle',
@@ -57,7 +58,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         Route::get('/30-day-independence/deal', [SalesController::class, 'thirtyDayIndependenceDeal']);
         Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
         Route::get('/headphones', [SalesController::class, 'headphones']);
-        Route::get('/e-kit-bundle', [SalesController::class, 'eKitBundle']);
         Route::get('/{productslug}', [ShopController::class, 'product']);
     });
 });

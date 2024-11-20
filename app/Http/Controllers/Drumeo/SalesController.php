@@ -451,8 +451,4 @@ class SalesController extends BaseController
     {
         return view('drumeo.products.headphones', ['theme' => 'drumeo']);
     }
-    public function eKitBundle()
-    {
-        return view('drumeo.products.e-kit-bundle', ['theme' => 'drumeo']);
-    }
 }

@@ -23,7 +23,7 @@
         case 'challenge':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#CF03DA]">(Save 67%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA]">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'deal':
             $borderColor = 'border-[#FFAC00]';
@@ -36,6 +36,15 @@
             $bundlePrice = '<s class="opacity-50"> $240</s><strong> $200</strong> <span class="text-white">(Save 17%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
     }
+
+     $filteredBonuses = collect($bonuses)
+            ->filter(function ($bonus) use ($targetSkus) {
+                return in_array($bonus['sku'], $targetSkus, true);
+            })
+            ->sortBy(function ($bonus) use ($targetSkus) {
+                return array_search($bonus['sku'], $targetSkus);
+            })
+            ->values();   
 @endphp
 
 <div
@@ -66,13 +75,14 @@
                 @if(!empty($promoHeader))
                     {!! $promoHeader !!}
                 @endif
-                <div class="mx-auto px-1 md:px-3 w-full max-w-3xl">
+                <div class="mx-auto px-1 md:px-3 w-full @if(!empty($secondImage)) md:max-w-3xl @else md:max-w-xs @endif">
                     <div class="inline-block w-full group">
                         <div class="text-center flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                            <div class="flex-1 relative overflow-hidden rounded-3xl">
+                        @if(!empty($topImage))
+                            <div class="flex-1 relative overflow-hidden rounded-xl">
                                 <div class="aspect-[16/10] relative">
                                     <div class="absolute inset-0">
-                                        <div class="w-full h-full rounded-3xl shadow-lg overflow-hidden">
+                                        <div class="w-full h-full rounded-xl shadow-lg overflow-hidden">
                                             <picture class="block w-full h-full"
                                                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                                     x-intersect.once="lazyLoad = true">
@@ -88,11 +98,12 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             @if(!empty($secondImage))
-                            <div class="flex-1 relative overflow-hidden rounded-3xl">
+                            <div class="flex-1 relative overflow-hidden rounded-xl">
                                 <div class="aspect-[16/10] relative">
                                     <div class="absolute inset-0">
-                                        <div class="w-full h-full rounded-3xl border-2 shadow-lg overflow-hidden {{ $borderColor }}">
+                                        <div class="w-full h-full rounded-xl border-2 shadow-lg overflow-hidden {{ $borderColor }}">
                                             <picture class="block w-full h-full"
                                                     :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                                     x-intersect.once="lazyLoad = true">
@@ -196,9 +207,9 @@
                         </div>
 
                         <p class="w-full leading-normal mt-2">
-                            @if(!empty($bonus['title']))
+                            {{-- @if(!empty($bonus['title']))
                                 <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
-                            @endif
+                            @endif --}}
                             <span style="display:inline-block;">
                             @if(!empty($bonus['price']))
                                     <s class="opacity-40">${{ $bonus['price'] }}</s>
@@ -233,7 +244,9 @@
             @endif
             </a>
             <br>
-            <a role="link" class="inline-block opacity-70" aria-label="Start a monthly membership" href=""><p><em>Renews at $240/year. Cancel anytime.</em></p></a>
-        </div>
+            <a role="link" class="inline-block opacity-70 text-white @if($bundle == 'challenge') hidden @endif" aria-label="Start a monthly membership" href="">
+                @if($bundle == 'deal') <p><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+            </a>
+            </div>
     </section>
 </div>
