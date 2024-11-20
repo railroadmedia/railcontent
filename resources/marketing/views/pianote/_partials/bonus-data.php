@@ -24,7 +24,7 @@ $bonuses = [
         'sku' => 'pianote-headphones'
     ],
     [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11.webp',
         'title' => 'Practice Planner',
         'description' => 'Always know exactly what to practice.',
         'price' => floatval($productPrices['pianote-practice-planner']->price),
@@ -32,7 +32,7 @@ $bonuses = [
         'sku' => 'pianote-practice-planner'
     ],
     [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-09.webp',
         'title' => 'Chords & <br>Scales Book',
         'description' => 'Your encyclopedia of piano chords & scales.',
         'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
@@ -183,7 +183,7 @@ $bonuses = [
         'sku' => 'classical-book'
     ],
     [
-        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/5307c3c2-d687-44d9-8da5-e8be784f8c86-classical-piano-pieces-shop-card.jpg',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12.webp',
         'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
         'price' => 49,
         'shipping' => true,
@@ -211,14 +211,14 @@ $bonuses = [
         'sku' => 'classical-piano-collection'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/PK.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-09.webp',
         'title' => 'The Pianote PracticeKit',
         'description' => 'Essential tools to maximize your practice time.',
         'price' => 49,
         'sku' => 'practice-kit'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/MTPB.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-14.webp',
         'title' => 'The Little Book Bundle',
         'description' => 'Improve your chording, technique, and arpeggios.',
         'price' => 21,
@@ -247,7 +247,7 @@ $bonuses = [
         'sku' => 'pianote-membership-deal'
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/CPP.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12.webp',
         'header' => 'The Most Beautiful Classical Piano Pieces Book',
         'description' => 'This book contains 20 of the most beautiful classical piano pieces, in original and simplified arrangements.',
         'price' => 49,
