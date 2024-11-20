@@ -140,9 +140,9 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel 
-            v-if="mappedData.difficulty" 
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+        <DifficultyLabel
+            v-if="mappedData.difficulty"
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
