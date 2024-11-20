@@ -390,45 +390,19 @@
 
     @elseif(!empty($promoVersion))
         @php
-            $bonuses = [
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-                    'title' => 'New Piano Players Start Here',
-                    'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
-                    'price' => floatval($productPrices['new-piano-players-start-here']->price),
-                ],
-                [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                    'title' => 'Easy Chords',
-                    'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
-                    'price' => floatval($productPrices['easy-chords']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                    'title' => '30-Day Blues',
-                    'description' => 'Learn the Blues in just 30 days',
-                    'price' => floatval($productPrices['30-day-blues-piano']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
-                    'title' => '30 Days To Better Technique',
-                    'description' => 'What would happen if you learned piano from the best keyboardist in the world?',
-                    'price' => floatval($productPrices['30-days-to-better-technique']->price),
-                ],
-                [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)//marketing/pianote/products/classical-piano-collection/membership/classical-piano-collection-card.webp',
-                    'description' => 'Play The Most Beautiful Piano Music In The World With Step-By-Step Tutorials.',
-                    'price' => floatval($productPrices['classical-piano-collection']->price),
-                    'shipping' => true,
-                ],
-            ]
+            require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
+        @endphp
+        @php
+            $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+
+            $filteredBonuses = collect($bonuses)->filter(function ($bonus) use ($targetSkus) {
+                return in_array($bonus['sku'], $targetSkus, true);
+            })->values();
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
-        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/promos/november/2024/pianote-deal-logo.svg',
-        'topImage' => 'marketing/pianote/membership/homepage/webp-format/pianote-annual-2w-card.webp',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg',
+        'topImage' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
         'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',

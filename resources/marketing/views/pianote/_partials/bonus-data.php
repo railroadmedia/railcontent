@@ -2,15 +2,14 @@
 
 $bonuses = [
     [
-        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
-        'imageFull' => true,
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-02.webp',
         'title' => 'New Piano Players Start Here',
         'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
         'price' => floatval($productPrices['new-piano-players-start-here']->price),
         'sku' => 'new-piano-players-start-here'
     ],
     [
-        'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-03.webp',
         'title' => 'Easy Chords',
         'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
         'price' => floatval($productPrices['easy-chords']->price),
@@ -191,21 +190,21 @@ $bonuses = [
         'sku' => 'classical-piano-pieces'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-04.webp',
         'title' => '30-Day Blues Piano',
         'description' => 'Learn Blues structure, scales, and riffs in just 10 minutes a day.',
         'price' => 127,
         'sku' => '30-day-blues-piano'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/bundle/30DTBT.webp',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-05.webp',
         'title' => '30 Days To Better Technique',
         'description' => 'Improve finger strength and speed with GRAMMY-winner Jordan Rudess.',
         'price' => 127,
         'sku' => '30-days-to-better-technique'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/bundle/CPC.webp',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-06.webp',
         'title' => 'The Classical Piano Collection',
         'description' => 'Play beautiful piano pieces with step-by-step tutorials.',
         'price' => 127,
@@ -234,14 +233,14 @@ $bonuses = [
         'sku' => 'book-bag'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
         'title' => 'Pianote Annual Membership',
         'description' => 'Access hundreds of expertly designed piano lessons.',
         'price' => 240,
         'sku' => 'pianote-membership'
     ],
     [
-        'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
         'title' => 'Pianote Annual Membership Deal',
         'description' => 'Access hundreds of expertly designed piano lessons at a special price.',
         'price' => 140,
