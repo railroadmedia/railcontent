@@ -391,18 +391,14 @@ const handleVideoPlay = (payload) => {
 };
 
 const sendProgressTrackerEvent = () => {
-    const sessionTokenElement = document.querySelector('#sessionToken');
-
     if(progressTracker) {
         progressTracker.send({
-            mediaId: mediaElementVueInstance.value.videoId,
             mediaType: 'video',
             mediaCategory: props.videoProps.videoType,
             watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
                 || mediaElementVueInstance.value.currentTime,
             totalDuration: mediaElementVueInstance.value.videoLength
                 || mediaElementVueInstance.value.totalDuration,
-            sessionToken: sessionTokenElement.value || null,
             brand: brand.value,
             contentId: mediaElementVueInstance.value.contentId
         });

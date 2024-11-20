@@ -114,7 +114,7 @@
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
                     :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading"
-                    @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause">
+                    @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause" soundsliceType="assignment">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
                             @onGoToPrevious="goToPrevious" @onGoToNext="goToNext" @onClose="closeExercise" />
@@ -129,7 +129,6 @@
 import { Duration } from 'luxon';
 import ContentService from '../../assets/js/Services/content';
 import Utils from '../../assets/js/classes/utils';
-import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
 import { bgColor, textColor } from "@constants/brands";
@@ -237,8 +236,6 @@ export default {
     },
     data() {
         return {
-            progressTracker: null,
-            progressTrackerEventListener: null,
             currentPage: 1,
             totalPages: this.pages.length || 0,
             open: false,
@@ -393,8 +390,6 @@ export default {
             this.open = true;
             document.body.classList.add('no-scroll', 'dim-sidebar');
 
-            this.progressTracker = new ProgressTracker();
-
             Helpscout.hideWidget();
             Intercom.hideWidget();
         },
@@ -413,16 +408,6 @@ export default {
             this.loading = true;
             this.open = false;
             document.body.classList.remove('no-scroll', 'dim-sidebar');
-
-            this.progressTracker.sendAsync({
-                mediaId: this.id,
-                mediaType: 'assignment',
-                mediaCategory: 'soundslice',
-            });
-
-            this.progressTracker = null;
-
-            window.removeEventListener('unload', () => this.sendProgressTracking);
 
             Helpscout.showWidget();
             Intercom.showWidget();
@@ -500,31 +485,15 @@ export default {
             this.isRequesting = false;
         },
 
-        sendProgressTracking() {
-            this.progressTracker.send({
-                mediaId: this.id,
-                mediaType: 'assignment',
-                mediaCategory: 'soundslice',
-            });
-        },
-
         handlePlay() {
             if (!this.hasBeenPlayed) {
                 this.hasBeenPlayed = true;
                 ContentService.markContentAsStarted(this.id);
             }
-
-            this.progressTracker.start();
-
-            if (!this.progressTrackerEventListener) {
-                this.progressTrackerEventListener = true;
-
-                window.addEventListener('unload', this.sendProgressTracking);
-            }
         },
 
         handlePause() {
-            this.progressTracker.stop();
+            //console.log('tracker stop');
         },
     },
 };
