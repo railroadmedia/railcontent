@@ -30,6 +30,11 @@
             $textColor = 'text-[#FFAC00]';
             $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00]">(Save 41%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
+        case 'challenges-pianote':
+            $borderColor = 'border-[#CF03DA]';
+            $textColor = 'text-[#CF03DA]';
+            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#CF03DA]">(Save 41%)</span><br><p class="text-sm">No recurring payments.</p>';
+            break;
         default:
             $borderColor = 'border-none';
             $textColor = 'text-white';
@@ -244,7 +249,7 @@
             @endif
             </a>
             <br>
-            <a role="link" class="inline-block opacity-70 text-white @if($bundle == 'challenge') hidden @endif" aria-label="Start a monthly membership" href="">
+            <a role="link" class="inline-block opacity-70 text-white @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif" aria-label="Start a monthly membership" href="">
                 @if($bundle == 'deal') <p><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
             </a>
             </div>
