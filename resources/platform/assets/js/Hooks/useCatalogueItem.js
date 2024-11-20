@@ -4,15 +4,16 @@ import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
 import { useUserStore } from "@stores/user.js";
 import { getProgressPercentage } from 'musora-content-services';
+import {getDate} from "../utils";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
-    
+
     const progress_percent = ref(0);
     const lesson_complete = ref(false);
-                               
+
     //Progress Percentage
     getProgressPercentage(props.item.id).then( value => {
         progress_percent.value = value;
@@ -43,11 +44,11 @@ export default function useCatalogueItem(props) {
             }
         });
     const releaseDate = computed(() => {
-        if(props.item.quarter_published){
-            return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
-        } else {
-            return DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy');
+        if (props.item.quarter_published){
+            return getDate(props.item.quarter_published);
         }
+
+        return getDate(props.item.published_on);
     });
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
     const thumbnailIcon = computed(() => {
