@@ -139,3 +139,25 @@ export const toKebabCase = (string) => {
         .replace(/[\s_]+/g, '-')
         .toLowerCase();
 };
+
+/**
+ * Retrieve date in LLL d/yy format from timestamp
+ * @param dateString
+ * @returns {string|null}
+ */
+export const getDate = (dateString) => {
+    // handle null
+    if (!dateString) return null;
+
+    // handle invalid
+    const date = new Date(dateString);
+    if (isNaN(date)) return null;
+
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: '2-digit',
+    });
+
+    return formatter.format(date);
+}
