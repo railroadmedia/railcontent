@@ -70,7 +70,7 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join pianote mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif

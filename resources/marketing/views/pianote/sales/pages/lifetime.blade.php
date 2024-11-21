@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
-                <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last-chance)</span></h2>
+                <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last chance)</span></h2>
                 
                {{-- @if($stock > 0) --}}
                    <a class="join musora mt-4 w-full anchor-slide text-black sm:max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>

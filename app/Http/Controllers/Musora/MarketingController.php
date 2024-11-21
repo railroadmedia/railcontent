@@ -206,4 +206,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
+    public function lifetimeDeal()
+    {
+        return view('musora.pages.lifetime-deal', [ 'theme' => 'musora']);
+    }
 }

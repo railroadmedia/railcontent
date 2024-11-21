@@ -79,6 +79,7 @@ Route::domain('{musoraDomain}')
         Route::get('history', [MarketingController::class, 'history']);
         Route::get('youtube', [MarketingController::class, 'youtube']);
         Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
+        Route::get('lifetime-deal', [MarketingController::class, 'lifetimeDeal']);
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
