@@ -142,30 +142,21 @@
         /*}*/
 
         .ajax-form input, .ajax-form button {
-            font: 400 18px/40px 'Open Sans', sans-serif;
-            height: 40px;
+            font: 400 18px/50px 'Open Sans', sans-serif;
+            height: 50px;
             color: #999;
             border-radius: 100px;
             text-align: left;
-            padding: 2px 20px;
-            margin: 0 auto 5px;
+            padding: 7px 20px;
+            margin: 0 auto 15px;
         }
-        /*.ajax-form input, .ajax-form button {*/
-        /*    font: 400 18px/50px 'Open Sans', sans-serif;*/
-        /*    height: 50px;*/
-        /*    color: #999;*/
-        /*    border-radius: 100px;*/
-        /*    text-align: left;*/
-        /*    padding: 7px 20px;*/
-        /*    margin: 0 auto 15px;*/
-        /*}*/
-        /*@media (min-width: 768px) {*/
-        /*    .ajax-form input, .ajax-form button {*/
-        /*        font-size: 22px;*/
-        /*        height: 65px;*/
-        /*        line-height: 65px;*/
-        /*    }*/
-        /*}*/
+        @media (min-width: 768px) {
+            .ajax-form input, .ajax-form button {
+                font-size: 22px;
+                height: 65px;
+                line-height: 65px;
+            }
+        }
         .ajax-form input[type="submit"],
         .ajax-form button[type="submit"],
         .ajax-form input button,
@@ -307,6 +298,7 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
+        BFwaitlist: false,
         waitlist: false,
         trailer : false,
         lazyLoad: false,
@@ -347,31 +339,41 @@
         @yield('top-bar')
     @endif
 
-{{--    @if(!empty($bfVersion))--}}
-{{--        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bf-banner.png');">--}}
-{{--            <div class="container max-w-4xl mx-auto">--}}
-{{--                <div class="flex flex-wrap items-center justify-center">--}}
-{{--                    <div class="w-full sm:w-7/12 mb-2 sm:mb-0">--}}
-{{--                        <img class="h-7 sm:h-8 lg:h-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">--}}
-{{--                        <h5 class="leading-tight font-bold text-musora tracking-widest mt-2"><strong>STARTS ON NOVEMBER 26TH</strong></h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="w-full sm:w-5/12">--}}
-{{--                        <p class="leading-tight text-sm mb-2">Sign up to be the first to know.</p>--}}
-{{--                        @include("drumeo.lead-gen.partials.sign-up-form", [--}}
-{{--                            "formId" => "Drumeo - Engagement - Trigger - BF24 Waitlist - Web Form",--}}
-{{--                            "formName" => 'BF24 Waitlist',--}}
-{{--                            "buttonText" => "Notify Me",--}}
-{{--                            'stacked' => true,--}}
-{{--                            "redirectURL" => "/thankyou",--}}
-{{--                            "recaptchaKey" => $recaptchaKey,--}}
-{{--                            "minimalForm" => true--}}
-{{--                        ])--}}
-
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
-{{--    @endif--}}
+    @if(!empty($bfVersion))
+        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bf-banner.png');">
+            <div class="container max-w-4xl mx-auto">
+                <div class="flex flex-wrap items-center justify-center">
+                    <div class="w-full sm:w-auto mb-2 sm:mb-0 pr-6">
+                        <img class="h-7 sm:h-8 lg:h-11" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
+                    </div>
+                    <div class="w-full sm:w-auto">
+                        <h5 class="leading-tight font-bold text-musora mb-2">STARTS ON NOVEMBER 26TH</h5>
+                        <span class="join smaller blue w-full" @click="BFwaitlist = true;">Get Notified &raquo;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @component('_partials.components.modal', ['name' => 'BFwaitlist'])
+            @slot('content')
+                <div class="relative overflow-y-visible max-w-md px-5 md:px-10 py-7 md:py-10 bg-black text-white mx-auto rounded-xl shadow-lg text-center">
+                    <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
+                    <p class="leading-tight my-4">Sign up to be the first to know.</p>
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "formId" => "Drumeo - Engagement - Trigger - BF24 Waitlist - Web Form",
+                        "formName" => 'BF24 Waitlist',
+                        "buttonText" => "Notify Me",
+                        'stacked' => true,
+                        "redirectURL" => "/thankyou",
+                        "recaptchaKey" => $recaptchaKey,
+                        "minimalForm" => true
+                    ])
+                    <p class="leading-tight text-sm mt-2"><em>
+                            Don’t worry, we value your privacy and<br class="hidden sm:inline">
+                            you can unsubscribe at any time.</em></p>
+                </div>
+            @endslot
+        @endcomponent
+    @endif
 
     @php
        $bubbles =  [
