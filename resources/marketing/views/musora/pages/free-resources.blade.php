@@ -162,7 +162,7 @@
                 <div class="w-full lg:w-7/12 text-left giveaway-form">
                     <h2 class="uppercase leading-none mb-2"><strong>WIN A COPY OF PHOBIA BY BREAKING BENJAMIN, SIGNED BY CHAD SZELIGA</strong></h2>
                     <p class="leading-normal mb-1">
-                        <strong>Enter to win one copy of Phobia, signed by former Breaking Benjamin drummer Chad Szeliga</strong>
+                        <strong>Enter to win one copy of Phobia, signed by former Breaking Benjamin drummer Chad Szeliga.</strong>
                     </p>
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                         "recaptchaKey" => $recaptchaKey,
@@ -173,7 +173,7 @@
                         "buttonColor" => "bg-musora text-black",
                         "redirectUrl" => "https://www.musora.com/thank-you",
                     ])
-                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/cymblas-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
+                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/phobia-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
                         By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
                 </div>
             </div>
