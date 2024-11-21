@@ -11,7 +11,7 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'noEverflow' => true]);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'noEverflow' => true, 'recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function homeMonth()

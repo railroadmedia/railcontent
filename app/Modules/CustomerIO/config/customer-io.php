@@ -159,6 +159,15 @@ return [
                     'timestamp' => 'Timestamp',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'musora_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [
@@ -507,6 +516,15 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'musora',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
                 ],
             ],
         ],
@@ -1003,6 +1021,15 @@ return [
                     'pianote',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
@@ -1131,6 +1158,15 @@ return [
                     'guitareo',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'guitareo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
         ],
         'singeo' => [
             'Improve Any Voice' => [
@@ -1227,6 +1263,15 @@ return [
                 'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_everyday-improv-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_bf24-waitlist',
                 ],
                 'accounts_to_sync' => [
                     'singeo',
