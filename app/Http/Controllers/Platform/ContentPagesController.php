@@ -253,7 +253,8 @@ class ContentPagesController extends BaseController
                     'title' => $catalogueMeta['name'],
                 ],
             ];
-            return view('content.catalogue', [
+            $viewName = $contentTypeName == 'challenge' ? 'content.challenges' : 'content.catalogue';
+            return view($viewName, [
                 "catalogueType" => $catalogName,
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $startedListLessons,
@@ -720,6 +721,7 @@ class ContentPagesController extends BaseController
 
             $contentToRenderAsLesson = $secondContent;
             $contentToRenderAsLessonParent = $firstContent;
+            $contentToRenderAsLesson['parent'] = $contentToRenderAsLessonParent;
         }
 
         if (!empty($thirdId)) {
@@ -1858,7 +1860,7 @@ class ContentPagesController extends BaseController
         return view('content.artists');
     }
 
-    public function challenges(Request $request, $brand)
+    public function challenge(Request $request, $brand)
     {
         return view('content.challenges',[
             'brand' => $brand,

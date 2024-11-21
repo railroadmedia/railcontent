@@ -24,7 +24,7 @@
     <div class="tw-mb-5">
         <transition appear name="fade">
             <SongCardContainer v-if="isSong" :preLoadedContent="data" :isGroupedView="true" :add-margin-bottom="false" />
-            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" />
+            <ChallengeCardContainer v-else-if="isChallenge" :is-grouped-view="true" :content="data" />
             <CatalogueCardContainer v-else :pre-loaded-content="data" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" :no-results-message="noResultsMessage" />
         </transition>
     </div>

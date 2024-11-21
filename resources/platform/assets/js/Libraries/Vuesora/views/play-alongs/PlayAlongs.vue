@@ -18,8 +18,8 @@
         <div class="tw-flex tw-flex-col tw-grow">
             <SkeletonListCatalogueItem v-if="isPageLoading" v-for="i in 8" :key="i" />
 
-            <PlayAlongsListItem v-else-if="content.length > 0" v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
-                :index="i + 1" :item="item" :brand="brand"
+            <PlayAlongsListItem v-else-if="content.length > 0" v-for="(item, i) in content" :ref="`list${item.id}`"
+                :key="`list${item.id}`" :index="i + 1" :item="item" :brand="brand"
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
                 @addToList="addToListEventHandler" @markAsComplete="completedEventHandler"
@@ -236,7 +236,7 @@ export default {
                 { key: `allPlayAlongs`, value: `All Play-Alongs` },
             ];
         },
-        isPageLoading(){
+        isPageLoading() {
             const platformStore = usePlatformStore();
             const { isLoading } = storeToRefs(platformStore);
 
@@ -311,7 +311,7 @@ export default {
             })
         },
         async getContent(resetPlaylist, showLoading = true) {
-            if(showLoading) this.loading = true;
+            if (showLoading) this.loading = true;
 
             const data = await fetchAll(this.brand, 'play-along', {
                 page: this.page,
@@ -419,21 +419,13 @@ export default {
             }
         },
         updateTrack(item) {
-            if(!item.need_access){
-                if (this.activeItem != null && item.id === this.activeItem.id) {
+            if (!item.need_access) {
+                if (this.activeItem && item.id === this.activeItem.id) {
                     this.playPause();
                 } else {
-                    if (this.trackProgress) {
+                    if (this.progressTracker) {
                         this.progressTracker.stop();
-                        // When a user switches the track we send their practice time and reset
-                        // the window unload event for the next track in case that's the last
-                        // one they play
-                        // - Curtis, Oct 2019
-                        if (this.activeItem != null) {
-                            this.sendProgressTracking();
-                        }
-                        this.updateNavigatorBeacon();
-                        this.$nextTick(() => { this.progressTracker.reset(); });
+                        this.progressTracker.reset();
                     }
                     this.playTrack(item);
                     if (this.loop) {
@@ -446,6 +438,7 @@ export default {
             if (this.audioPlayer.paused === false) {
                 this.isPlaying = false;
                 this.audioPlayer.pause();
+                this.sendProgressTracking();
             } else {
                 this.isPlaying = true;
                 this.audioPlayer.play();
@@ -460,6 +453,8 @@ export default {
 
             this.switchTrack(false);
             this.audioPlayer.play();
+            this.sendProgressTracking();
+            this.updateTrackingListeners();
         },
         switchTrack(resume) {
             const { currentTime } = this;
@@ -755,7 +750,7 @@ export default {
             });
         },
         keyboardControlEventHandler(event) {
-            if (this.keyboardEventHandlers[event.code] && this.activeItem != null) {
+            if (this.keyboardEventHandlers[event.code] && this.activeItem) {
                 event.stopPropagation();
                 event.preventDefault();
                 this.keyboardEventHandlers[event.code]();
@@ -794,17 +789,27 @@ export default {
         },
         sendProgressTracking() {
             this.progressTracker.send({
-                mediaId: this.activeItem.id,
+                contentId: this.activeItem.id,
                 mediaType: 'practice',
                 mediaCategory: 'play-alongs',
+                watchPosition: this.currentTime,
+                totalDuration: this.totalDuration,
                 sessionToken: this.sessionToken,
-                brand: this.brand,
             });
         },
-        updateNavigatorBeacon() {
-            window.removeEventListener('unload', this.sendProgressTracking);
+
+        updateTrackingListeners() {
+            window.removeEventListener('visibilitychange', this.sendProgressTracking);
             this.$nextTick(() => {
-                window.addEventListener('unload', this.sendProgressTracking);
+                document.addEventListener('visibilitychange', () => {
+                    this.sendProgressTracking();
+                });
+            });
+            window.removeEventListener('pagehide', this.sendProgressTracking);
+            this.$nextTick(() => {
+                document.addEventListener('pagehide', () => {
+                    this.sendProgressTracking();
+                });
             });
         },
     },

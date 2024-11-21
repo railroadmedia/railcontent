@@ -42,15 +42,6 @@ class UrlDecorator extends ModeDecoratorBase
                 ]);
             }
 
-            if ($content['type'] == 'challenge') {
-                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge', [
-                    'brand' => $content['brand'],
-                     'challenges',
-                    $content['slug'],
-                    $content['id'],
-                ]);
-            }
-
             //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
             if ((brand() == 'guitareo' && $content['type'] == 'play-along') ||
                 ($content['type'] == 'course') ||
@@ -66,6 +57,7 @@ class UrlDecorator extends ModeDecoratorBase
             if ($content['type'] == 'song-tutorial' ||
                 $content['type'] == 'quick-tips' ||
                 $content['type'] == 'student-review' ||
+                $content['type'] == 'challenge' ||
                 (count($contentParentData) == 0 && !empty($contentTypeToURLSlugMap[$content['type']]))) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.first-level', [
                     'brand' => $content['brand'],
@@ -74,15 +66,6 @@ class UrlDecorator extends ModeDecoratorBase
                     $content['id'],
                 ]);
                 // second-level types
-            } elseif (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
-                $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge.workout', [
-                    'brand' => $content['brand'],
-                    "challenges",
-                    $contentParentData[0]->slug,
-                    $contentParentData[0]->id,
-                    $content['slug'],
-                    $content['id'],
-                ]);
             } elseif (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type])) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],

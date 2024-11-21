@@ -3,36 +3,36 @@
         <Breadcrumb :breadcrumbs="[{ title: 'Workouts' }]"/>
     </div>
 
-    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6">
-
-        <section v-if="carouselData.length">
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                <div class="tw-flex tw-items-start">
-                    <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Featured Challenges</a>
-                    <div class="tw-hidden lg:tw-block">
-                        <Tooltip position="right">
-                            <template v-slot:trigger>
-                                <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
-                            </template>
-                            <template v-slot:content>
-                                <div class="tw-max-w-[350px]">
-                                    <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>
-                                    <div>{{ infoText['challenge']['content'] }}</div>
-                                </div>
-                            </template>
-                        </Tooltip>
-                    </div>
-                    <div class="tw-relative lg:tw-hidden">
-                        <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px]"></musora-icon>
-                    </div>
-                </div>
-                <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    See All <span class="tw-hidden sm:tw-inline">Challenges</span>
-                </a>
-            </div>
-            <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
-            <HeaderCarousel :preloaded-carousel="carouselData"/>
-        </section>
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6"
+<!--        Chris asked me to leave in this functionality ... juuuust in case we wanted it later. nov 2024>-->
+<!--        <section v-if="carouselData.length">-->
+<!--            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">-->
+<!--                <div class="tw-flex tw-items-start">-->
+<!--                    <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Featured Challenges</a>-->
+<!--                    <div class="tw-hidden lg:tw-block">-->
+<!--                        <Tooltip position="right">-->
+<!--                            <template v-slot:trigger>-->
+<!--                                <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>-->
+<!--                            </template>-->
+<!--                            <template v-slot:content>-->
+<!--                                <div class="tw-max-w-[350px]">-->
+<!--                                    <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>-->
+<!--                                    <div>{{ infoText['challenge']['content'] }}</div>-->
+<!--                                </div>-->
+<!--                            </template>-->
+<!--                        </Tooltip>-->
+<!--                    </div>-->
+<!--                    <div class="tw-relative lg:tw-hidden">-->
+<!--                        <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px]"></musora-icon>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">-->
+<!--                    See All <span class="tw-hidden sm:tw-inline">Challenges</span>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />-->
+<!--            <HeaderCarousel :preloaded-carousel="carouselData"/>-->
+<!--        </section>-->
 
         <br>
 

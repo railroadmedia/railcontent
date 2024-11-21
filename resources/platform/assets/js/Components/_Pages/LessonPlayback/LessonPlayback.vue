@@ -405,34 +405,49 @@ const handleVideoPlay = (payload) => {
     }
     if (progressTracker == null) {
         progressTracker = new ProgressTracker();
-        const sessionTokenElement = document.querySelector('#sessionToken');
         if (mediaElementVueInstance.value) {
-            window.addEventListener('unload', (event) => {
-                progressTracker.send({
-                    mediaId: mediaElementVueInstance.value.videoId,
-                    mediaType: 'video',
-                    mediaCategory: 'vimeo',
-                    watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
-                        || mediaElementVueInstance.value.currentTime,
-                    totalDuration: mediaElementVueInstance.value.videoLength
-                        || mediaElementVueInstance.value.totalDuration,
-                    sessionToken: sessionTokenElement.value || null,
-                    brand: brand.value,
-                    contentId: mediaElementVueInstance.value.contentId
-                });
-            });
+            attachVisibilityAndPagehideEvents();
         }
     }
     hasBeenPlayed = true;
     progressTracker.start();
 };
 
-const handleVideoPause = (payload) => {
-    progressTracker.stop();
+const sendProgressTrackerEvent = () => {
+    if(progressTracker) {
+        progressTracker.send({
+            mediaType: 'video',
+            mediaCategory: props.videoProps.videoType,
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            brand: brand.value,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
 };
 
-const handleVideoEnd = () => {
-    isRelatedSectionOpen.value = true;
+const attachVisibilityAndPagehideEvents = () => {
+    document.addEventListener('visibilitychange', () => {
+        sendProgressTrackerEvent();
+    });
+
+    window.addEventListener('pagehide', () => {
+        sendProgressTrackerEvent();
+    });
+};
+
+const handleVideoPause = () => {
+    progressTracker.stop();
+    sendProgressTrackerEvent();
+};
+const handleVideoEnd = (showRelatedSection = true) => {
+    if (showRelatedSection) {
+        isRelatedSectionOpen.value = true;
+    }
+    sendProgressTrackerEvent();
+    ContentService.markContentAsComplete(props.videoProps.contentId);
 };
 
 const getBrandSpecificParams = () => {
@@ -528,7 +543,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.lessonType === 'challenges';
+    return props.lessonType === 'challenge';
 })
 
 const toggleCompleteContent = () => {
