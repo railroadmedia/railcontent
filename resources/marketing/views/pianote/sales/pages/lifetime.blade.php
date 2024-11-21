@@ -7,7 +7,7 @@
 
     <meta name="description" content="Your Last Chance To Score A Lifetime Membership For This Price.">
     <meta property="og:description" content="Your Last Chance To Score A Lifetime Membership For This Price.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/lifetime-deal-share-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
