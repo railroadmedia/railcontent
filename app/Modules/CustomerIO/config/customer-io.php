@@ -159,15 +159,15 @@ return [
                     'timestamp' => 'Timestamp',
                 ],
             ],
-//            'BF24 Waitlist' => [
-//                'custom_attributes' => [],
-//                'events' => [
-//                    'musora_prospect_bf24-waitlist',
-//                ],
-//                'accounts_to_sync' => [
-//                    'musora_prospects',
-//                ],
-//            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'musora_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [
@@ -518,15 +518,15 @@ return [
                     'musora',
                 ],
             ],
-//            'BF24 Waitlist' => [
-//                'custom_attributes' => [],
-//                'events' => [
-//                    'drumeo_prospect_bf24-waitlist',
-//                ],
-//                'accounts_to_sync' => [
-//                    'drumeo',
-//                ],
-//            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Passing Chords PDF' => [
@@ -1021,15 +1021,15 @@ return [
                     'pianote',
                 ],
             ],
-//            'BF24 Waitlist' => [
-//                'custom_attributes' => [],
-//                'events' => [
-//                    'pianote_prospect_bf24-waitlist',
-//                ],
-//                'accounts_to_sync' => [
-//                    'pianote',
-//                ],
-//            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
@@ -1268,15 +1268,15 @@ return [
                     'singeo',
                 ],
             ],
-//            'BF24 Waitlist' => [
-//                'custom_attributes' => [],
-//                'events' => [
-//                    'singeo_prospect_bf24-waitlist',
-//                ],
-//                'accounts_to_sync' => [
-//                    'singeo',
-//                ],
-//            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
         ],
     ],
     'subscription_topics' => [

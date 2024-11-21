@@ -362,12 +362,11 @@
                     </div>
                     <div class="w-full sm:w-5/12">
                         <p class="leading-tight text-sm mb-2">Sign up to be the first to know.</p>
-                        @include("musora.lead-gen.partials.sign-up-form", [
-                            "formId" => "Musora - Engagement - Trigger - BF24 Waitlist - Web Form",
+                        @include("guitareo.lead-gen.partials.sign-up-form", [
+                            "formId" => "Guitareo - Engagement - Trigger - BF24 Waitlist - Web Form",
                             "formName" => 'BF24 Waitlist',
                             "buttonText" => "Notify Me",
                             'stacked' => true,
-                            "redirectURL" => "/thank-you",
                             "recaptchaKey" => $recaptchaKey,
                             "minimalForm" => true
                         ])
