@@ -184,6 +184,7 @@ const userStore = useUserStore();
 const { resetProgress } = useResetProgress();
 const { brand } = storeToRefs(userStore);
 const { isLoading } = storeToRefs(platformStore);
+const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
@@ -199,8 +200,6 @@ const miniViewRowStyles = computed(() => {
     }
     return rowStyles;
 })
-
-const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value || isCoachShow.value);
