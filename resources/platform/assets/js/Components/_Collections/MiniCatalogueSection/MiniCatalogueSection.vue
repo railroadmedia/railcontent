@@ -6,8 +6,8 @@
                 <div class="tw-flex tw-items-center">
                     <a @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
-                        <ChevronRightIcon v-if="seeAllUrl" class="tw-w-5" />
+                        <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] lg:tw-leading-[36px] lg:tw-text-[24px]">{{ title }}</h2>
+                        <ChevronRightIcon class="tw-w-5" />
                     </a>
                     <slot name="label"></slot>
                 </div>
@@ -31,6 +31,7 @@
                         :tracking-section="trackingSection"
                         :page="page"
                         :is-mini-catalogue="true"
+                        :show-see-all-card="preLoadedContent.length > 6 && showSeeAllCard"
                         @on-progress-reset="resetProgress"
                     />
                 </transition>
@@ -106,6 +107,7 @@ const userStore = useUserStore();
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
+const showSeeAllCard = ref(false);
 
 const isChallenge = computed(() => {
     return props.catalogueType === 'challenge';
@@ -130,9 +132,12 @@ const handleSeeAllClick = (event) => {
   }
 };
 
-const watchResize = () => {
-    getCardNum(props, cardNum);
+const toggleSeeAllCard = (val) => {
+    showSeeAllCard.value = val;
+}
 
+const watchResize = () => {
+    getCardNum(props, cardNum, toggleSeeAllCard);
     getPageData();
 }
 

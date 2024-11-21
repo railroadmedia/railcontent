@@ -4,7 +4,7 @@ const xxlDesktop = breakpoints.greaterOrEqual('2xl');
 const xlDesktop = breakpoints.greaterOrEqual('xl');
 const lgDesktop = breakpoints.greaterOrEqual('lg');
 
-export const getCardNum = (props, cardNum) => {
+export const getCardNum = (props, cardNum, toggleSeeAllCard) => {
     if(props.catalogueType === 'challenge'){
         if(xlDesktop.value){
             cardNum.value = 2;
@@ -15,16 +15,18 @@ export const getCardNum = (props, cardNum) => {
         }
     } else {
         if(props.isMiniView){
-            if(window.innerWidth >= 2256){
+            toggleSeeAllCard(false);
+            if(window.innerWidth > 2256){
                 cardNum.value = 10;
-            } else if(xxlDesktop.value){
+            } else if(window.innerWidth > 1536){
                 cardNum.value = 8;
-            } else if(xlDesktop.value){
+            } else if(window.innerWidth > 1280){
                 cardNum.value = 6;
-            } else if(lgDesktop.value){
+            } else if(window.innerWidth > 1024){
                 cardNum.value = 4;
             } else {
-                cardNum.value = 20;
+                toggleSeeAllCard(true);
+                cardNum.value = 6;
             }
         } else {
             if(xxlDesktop.value){
