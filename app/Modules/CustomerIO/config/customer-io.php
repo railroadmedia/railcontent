@@ -166,6 +166,7 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'musora_prospects',
+                    'musora',
                 ],
             ],
         ],
@@ -525,6 +526,7 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
+                    'musora',
                 ],
             ],
         ],
@@ -1028,6 +1030,7 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                    'musora',
                 ],
             ],
         ],
@@ -1165,6 +1168,7 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'guitareo',
+                    'musora',
                 ],
             ],
         ],
@@ -1275,6 +1279,7 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'singeo',
+                    'musora',
                 ],
             ],
         ],
