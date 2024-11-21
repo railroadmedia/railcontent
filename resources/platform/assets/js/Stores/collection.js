@@ -193,7 +193,6 @@ export const useCollectionStore = defineStore({
                 }
 
                 const response = await this.getEndpoint(this.fetchType);
-                //console.log(response)
 
                 return response;
             } catch (e) {
@@ -218,8 +217,10 @@ export const useCollectionStore = defineStore({
         },
 
         getGroupBy(){
-            if(this.tabData[this.filter.activeTab].groupByView){
-                return this.tabData[this.filter.activeTab].key[0];
+            if(this.queryType === 'challenge' && this.tabData[this.filter.activeTab]){
+                return this.tabData[this.filter.activeTab].key;
+            } else if(this.tabData[this.filter.activeTab].groupByView){
+                return this.tabData[this.filter.activeTab].key;
             }
 
             return '';
