@@ -27,7 +27,7 @@ export async function usePackPageData(contentType) {
         try {
             const result = await fetchPackData(contentId, "pack-bundle");
             if (result) {
-                console.log('result', result)
+                //console.log('result', result)
                 data.value = result;
                 data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
             }
