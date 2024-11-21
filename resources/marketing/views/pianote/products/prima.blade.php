@@ -127,7 +127,8 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container max-w-6xl mx-auto relative z-20">
                 @if(!empty($ultimate))
-                    <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                    {{-- <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg"> --}}
+                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
                         start <br class="hidden sm:inline">playing the piano.
@@ -155,7 +156,8 @@
                         Only <strong>$599</strong>
                     </h3>
                 @else
-                    <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                    {{-- <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg"> --}}
+                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
                     </h2>
@@ -265,7 +267,7 @@
 
         </div>
     </section>
-    <section class="text-center px-6 py-10 sm:py-14 lg:py-20 @if(!empty($lifetime)) hidden @endif"
+    {{-- <section class="text-center px-6 py-10 sm:py-14 lg:py-20 @if(!empty($lifetime)) hidden @endif"
         @if(!empty($ultimate))
             style="background: linear-gradient(to bottom, #A80011, #310A58); color:#fff"
         @else
@@ -365,6 +367,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section> --}}
+
+    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center @if(!empty($lifetime)) hidden @endif">
+        <img class="h-12 sm:h-16 md:h-24 inline mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1300x0/marketing/pianote/products/prima/headline.webp">
+        
+        <p class="text-lg py-2 md:py-4">
+            Every Pianote Prima comes with a <span class="italic text-[#B99964]"><strong>FREE</strong></span> download of Bechstein’s Digital Grand Essentials.
+        </p>
+        
+        <div class="max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center md:items-start md:gap-8 pt-6">
+            <div class="w-full md:w-6/12 space-y-4 md:space-y-6 text-left lg:px-6 leading-normal">
+                <p>The Pianote Prima has a beautiful piano sound built in, but we’ve partnered with German piano manufacturer Bechstein to include their <span class="text-[#B99964]"><strong>Digital Grand Essentials (valued at $136)</strong></span> with every Pianote Prima.</p>
+                <p>So you can make your new Prima sound like a true concert grand.</p>
+                <p>Digital Grand Essentials is played through Native Instruments’ free Kontakt player. Connect your Prima via MIDI to access this beautiful grand piano sound.</p>
+                <p>And if you’re new to virtual instruments, don’t worry. We’ll walk you through every step.</p>
+            </div>
+
+            <div class="flex-shrink-0 w-full sm:w-10/12 md:w-6/12 flex justify-center items-center md:py-6">
+                <img 
+                    src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/spread.webp" 
+                    alt="Laptop Preview" 
+                    class="w-full h-auto object-contain"
+                >
             </div>
         </div>
     </section>
