@@ -208,6 +208,6 @@ class MarketingController extends BaseController
     }
     public function lifetimeDeal()
     {
-        return view('musora.pages.lifetime-deal', [ 'theme' => 'musora']);
+        return view('musora.pages.lifetime', [ 'theme' => 'musora']);
     }
 }

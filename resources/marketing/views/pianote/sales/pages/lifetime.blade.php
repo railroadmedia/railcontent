@@ -38,7 +38,7 @@
 {{--                "noBreadcrumb" => true,--}}
 {{--                "noCountdown" => true--}}
 {{--            ])--}}
-    <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-bg.webp') no-repeat center center; background-size: cover;">
+    <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">
         <img alt="Bundle" class="h-10 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
                 <h2 class="leading-tight pt-3 lg:pt-6"><strong>Your <span class="text-musora">Last Chance </span>To Score A <br class="hidden md:block">Lifetime Membership For This Price.</strong></h2>
