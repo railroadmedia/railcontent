@@ -1,7 +1,7 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
         <div
-            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
+            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[224px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
                     tw-no-scrollbar
                     ${isMiniView && willScroll ? `tw-grid tw-pb-[8px] tw-grid-flow-col lg:tw-grid-flow-row lg:tw-auto-cols-auto lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full tw-auto-rows-min ${miniViewRowStyles}` : ''}
@@ -17,22 +17,12 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard
-                        v-for="item in preLoadedContent"
-                        :key="'grid' + item.id"
-                        :item="item"
-                        :content-type="item.type"
-                        :user-id="userId"
-                        :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs"
-                        :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction"
-                        :force-no-links="forceNoLinks"
-                        :show-dropdown="showDropdown"
-                        :trackingSection="trackingSection"
-                        @addToList="addToList"
-                        @progressReset="handleProgressReset"
-                    />
+                    <MiniCatalogueCard v-for="(item, index) in preLoadedContent" :key="'grid' + item.id" :item="item"
+                        :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+                        :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+                        :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
+                        @progressReset="handleProgressReset" :show-dropdown="showDropdown"
+                        :trackingSection="trackingSection" :showSeeAllCard="showSeeAllCard" :index="index" />
                 </template>
                 <template v-else>
                     <CatalogueListElement v-if="showListElement" v-for="item in preLoadedContent"
@@ -104,6 +94,10 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
+    isAdmin: {
+        type: Boolean,
+        default: () => false,
+    },
     noWrap: {
         type: Boolean,
         default: () => false,
@@ -160,6 +154,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    showSeeAllCard: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits(['onProgressReset'])
@@ -170,24 +168,13 @@ const smallerThanLg = breakpoints.smaller('lg') // only smaller than lg
 const platformStore = usePlatformStore();
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
-
 const { resetProgress } = useResetProgress();
 const { brand } = storeToRefs(userStore);
 const { isLoading } = storeToRefs(platformStore);
-const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
-const miniViewRowStyles = computed(() => {
-    if(props.page === 1){
-        if(props.preLoadedContent.length === 1){
-            return 'lg:tw-grid-rows-none';
-        }
-        return 'tw-grid-rows-2 lg:tw-grid-rows-none';
-    }
-
-    return 'tw-grid-rows-2';
-})
+const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value || isCoachShow.value);
@@ -196,6 +183,10 @@ const breakToListView = computed(() => {
 const showListElement = computed(() => {
     return props.displayInline || (breakToListView.value && smallerThanLg.value);
 });
+
+const showSkeletonLoader = computed(() => {
+    return !props.noSkeleton && collectionStoreLoading.value;
+})
 
 const skeletonCardCount = computed(() => {
     return showGroupBy.value || props.isMiniCatalogue ? 5 : 12;
@@ -221,8 +212,17 @@ const isCoachShow = computed(() => {
     return props.contentTypeOverride === 'coach-show';
 })
 
-const showSkeletonLoader = computed(() => {
-    return !props.noSkeleton && collectionStoreLoading.value;
+const miniViewRowStyles = computed(() => {
+    let rowStyles = '';
+    if(props.page === 1){
+        rowStyles = `${rowStyles} lg:tw-grid-rows-none`;
+    }
+    if (props.preLoadedContent.length > 3) {
+        rowStyles = `${rowStyles} tw-grid-rows-2`;
+    } else {
+        rowStyles = `${rowStyles} tw-grid-rows-1 tw-grid-cols-3`;
+    }
+    return rowStyles;
 })
 
 const handleProgressReset = (payload) => {
