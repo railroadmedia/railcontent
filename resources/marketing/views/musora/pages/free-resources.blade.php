@@ -166,8 +166,8 @@
                     </p>
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                         "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'Cymbal Giveaway',
-                        "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
+                        "formName" => 'Phobia Giveaway',
+                        "formId" => "Drumeo - Engagement - Trigger - Phobia Giveaway - Web Form",
                         "buttonText" => "I WANT TO WIN",
                         "minimalForm" => true,
                         "buttonColor" => "bg-musora text-black",
