@@ -400,7 +400,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: lesson_complete,
+        "completed": lesson_complete.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
