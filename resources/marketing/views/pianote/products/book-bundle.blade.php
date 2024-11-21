@@ -46,8 +46,8 @@
     }"
 @endsection
 @php
-    $stock = !empty($products['alesis-ekit']->getPublicStockCount()) 
-        ? $products['alesis-ekit']->getPublicStockCount() 
+    $stock = !empty($products['alesis-ekit']->getPublicStockCount())
+        ? $products['alesis-ekit']->getPublicStockCount()
         : 0;
 @endphp
 
@@ -75,7 +75,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
 
 
     @php
-        $videoTargetSkus = ['pianote-membership', 'book-bag', 'practice-kit', 'piano-chords-and-scales-guide', 'pianote-practice-planner', 'classical-piano-pieces'];
+        $videoTargetSkus = ['pianote-membership', 'book-bag', 'practice-kit', 'little-book-bundle', 'piano-chords-and-scales-guide', 'pianote-practice-planner', 'classical-piano-pieces'];
     @endphp
 
     <section class="pt-8 pb-16 sm:pt-16 lg:pt-20 px-4 sm:px-6 bg-white">
@@ -93,15 +93,15 @@
         <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8 max-w-4xl">
         Piano players LOVE books. That’s why we’ve loaded this bundle with practice books, planners, and songbooks to fill your shelves.<br><br>Improve your chording, plan and track your progress, and play the most beautiful piano pieces ever written.
         </h5>
-                
+
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
         </div>
     </section>
-    
+
     @php
-        $videoTargetSkus = ['new-piano-players-start-here', 'easy-shords', '30-day-blues-piano', '30-days-to-better-technique', 'easy-chords', 'classical-piano-collection'];
+        $videoTargetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'easy-chords', 'classical-piano-collection'];
     @endphp
 
     <section class="pt-8 pb-16 lg:pb-28 px-4 sm:px-6 bg-white">
@@ -110,7 +110,7 @@
         <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8 max-w-4xl">
        You’ll get LIFETIME access to all these courses when you join Pianote. Even if you don’t renew your membership. These lessons are yours to keep for life.<br><br> Start learning, improve your chording and technique. Play the Blues and beautiful Classical piano. It’s all here.
         </h5>
-                
+
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -126,9 +126,9 @@
         @include('drumeo._partials.countdown-bundle-2024')
 
         @php
-            $targetSkus = ['practice-kit', 'piano-chords-and-scales-guide', 'pianote-practice-planner', 'classical-piano-pieces', 'new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+            $targetSkus = ['practice-kit', 'little-book-bundle', 'piano-chords-and-scales-guide', 'pianote-practice-planner', 'classical-piano-pieces', 'new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
         @endphp
-            <div id="customize-anchor"></div>   
+            <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/book-bundle-logo.svg',
@@ -136,8 +136,8 @@
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'secondImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-BB.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get The Best Online Piano Lessons And A <br class="hidden md:block">Library Of Piano Books</h2>',            
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle&locked=true', 
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get The Best Online Piano Lessons And A <br class="hidden md:block">Library Of Piano Books</h2>',
+            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle&locked=true',
             'bundle'=> "book",
             ])
     </div>

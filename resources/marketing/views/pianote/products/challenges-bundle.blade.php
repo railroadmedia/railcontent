@@ -45,8 +45,8 @@
     }"
 @endsection
 @php
-    $stock = !empty($products['alesis-ekit']->getPublicStockCount()) 
-        ? $products['alesis-ekit']->getPublicStockCount() 
+    $stock = !empty($products['alesis-ekit']->getPublicStockCount())
+        ? $products['alesis-ekit']->getPublicStockCount()
         : 0;
 @endphp
 
@@ -75,7 +75,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
         <div class="container mx-auto max-w-6xl">
          <h1 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h1>
             <h5 class="leading-normal text-center mb-3 lg:pb-10 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
-                
+
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -108,15 +108,14 @@
         @php
             $targetSkus = ['30-day-blues-piano', '30-days-to-better-technique', 'easy-chords'];
         @endphp
-            <div id="customize-anchor"></div>   
+            <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/challenges-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-20',
-            'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Course For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',            
-            'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true', 
+            'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Course For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',
+            'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true',
             'bundle'=> "challenges-pianote",
             ])
     </div>
