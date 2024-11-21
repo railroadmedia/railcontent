@@ -45,7 +45,9 @@
                     <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>
                 </div>
             </div>
-        <img class="h-14 sm:h-24 lg:h-28 -mr-2 sm:mr-0 -mt-4 sm:-mt-8 absolute top-0 right-0 z-10 transform sm:translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/save-badge.webp">
+        @if(!empty($badge))
+            <img class="h-14 sm:h-24 lg:h-28 -mr-2 sm:mr-0 -mt-4 sm:-mt-8 absolute top-0 right-0 z-10 transform sm:translate-x-full" src="{{ $badge }}">
+        @endif
     </div>
 {{--    <div class="inset-0 absolute z-0" style="background-size: 400px;background-image: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif);"></div>--}}
 </section>

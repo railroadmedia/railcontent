@@ -45,8 +45,8 @@
     }"
 @endsection
 @php
-    $stock = !empty($products['alesis-ekit']->getPublicStockCount()) 
-        ? $products['alesis-ekit']->getPublicStockCount() 
+    $stock = !empty($products['alesis-ekit']->getPublicStockCount())
+        ? $products['alesis-ekit']->getPublicStockCount()
         : 0;
 @endphp
 
@@ -54,7 +54,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    {{-- @include('_partials.components.shop.promo-banner-3', [
+    {{-- @include('_partials.components.shop.promo-banner-2', [
         'name' => 'Classical Piano Pieces',
         'fullPrice' => floatval($productPrices['read-music-in-30-days-workbook']->price),
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
@@ -74,7 +74,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                    </div>        
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
         <div class="container mx-auto max-w-5xl">
          <h1 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h1>
             <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">The perfect way to gift Pianote to a friend – you’ll get a physical one-year access pass to Pianote that can be redeemed anytime along with three additional gifts for a lucky pianist in your life. </h5>
-                
+
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             ])
@@ -108,15 +108,15 @@
         @php
             $targetSkus = ['music-theory-posters', 'practice-kit', 'little-book-bundle',];
         @endphp
-            <div id="customize-anchor"></div>   
+            <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/gift-bundle-new.svg',
             'logoHeight' => 'h-16 sm:h-20 md:h-24',
             'topImage' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-AP.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season.</h2>',            
-            'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true', 
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season.</h2>',
+            'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true',
             'bundle'=> "gift",
             ])
     </div>

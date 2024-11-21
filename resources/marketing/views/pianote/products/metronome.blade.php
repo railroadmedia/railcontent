@@ -46,7 +46,7 @@
         : number_format(floatval($productPrices['taktell-piccolo-metronome']->discounted_price), 2);
 @endphp
 
-@include('_partials.components.shop.promo-banner-3', [
+@include('_partials.components.shop.promo-banner-2', [
     "name" => "Pianote Metronome",
     "fullPrice" => $fullPriceValue,
     "price" => $discountedPriceValue,

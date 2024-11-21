@@ -76,7 +76,7 @@
         : number_format(floatval($productPrices['christmas-songbook']->discounted_price), 2);
 
          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1';
-         
+
 //     if(!empty($membersVersion)) {
 //          $discountedPrice = number_format(24.50, 2);
 //          $orderUrl = '/ecommerce/add-to-cart?products[christmas-songbook]=1&products[christmas-song-book-digital]=1&promo-code=members-discount';
@@ -87,7 +87,7 @@
 //     }
     @endphp
 
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Christmas Songbook",
         "fullPrice" => floatval($productPrices['christmas-songbook']->price),
         "price" => $discountedPrice,

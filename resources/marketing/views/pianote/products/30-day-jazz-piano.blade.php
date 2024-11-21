@@ -46,7 +46,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "30-Day Jazz Piano",
         "fullPrice" => floatval($productPrices['30-day-jazz-piano']->price),
         "price" => floatval($productPrices['30-day-jazz-piano']->discounted_price),
@@ -66,8 +66,8 @@
             $students = 'piano players';
         @endphp
 
-<header 
-    class="px-5 sm:px-6 pt-6 md:pt-9 pb-12 md:pb-18 overflow-hidden" 
+<header
+    class="px-5 sm:px-6 pt-6 md:pt-9 pb-12 md:pb-18 overflow-hidden"
     style="background: linear-gradient(rgba(239, 247, 255, 1) 50%, #ffffff 50%)"
     x-data="{
         loadAlternateSrc(src) {
@@ -77,7 +77,7 @@
     }">
     <div class="container max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
         <div class="flex flex-col items-center text-center">
-            <img 
+            <img
                 class="h-20 lg:h-24 -mb-3 sm:mb-0 py-1"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"
                 alt="30 day Jazz logo"
@@ -111,21 +111,21 @@
 
         <div class="py-5 sm:py-6 relative">
             <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-left-collage.webp" 
-                    alt="in just 30 days." 
-                    class="h-56 lg:h-72" 
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-left-collage.webp"
+                    alt="in just 30 days."
+                    class="h-56 lg:h-72"
                     fetchpriority="high">
             </div>
 
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                x-on:click="trailer = true;" 
+                x-on:click="trailer = true;"
                 role="button">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fa fa-play play-button z-10"></i>
 
                 <div x-data="{ videoLoaded: false }">
-                    <img src="https://i.vimeocdn.com/video/1938445145-3e0a0393c34442f22141b7c97e37be6a0b0050458e1dd51e67104f3e6b829fd4-d?mw=80&q=85" 
-                        alt="Blurred Poster Image" 
-                        class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl" 
+                    <img src="https://i.vimeocdn.com/video/1938445145-3e0a0393c34442f22141b7c97e37be6a0b0050458e1dd51e67104f3e6b829fd4-d?mw=80&q=85"
+                        alt="Blurred Poster Image"
+                        class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl"
                         x-show="!videoLoaded">
 
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
@@ -146,9 +146,9 @@
             </div>
 
             <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-right-collage.webp" 
-                    alt="in just 30 days." 
-                    class="h-56 lg:h-72" 
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/header-right-collage.webp"
+                    alt="in just 30 days."
+                    class="h-56 lg:h-72"
                     fetchpriority="high">
             </div>
         </div>
@@ -298,7 +298,7 @@ $items = [
             <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/thumb.webp"
                 alt="testimonial image" fetchpriority="high" />
-           
+
 
         </div>
     </div>
@@ -342,13 +342,13 @@ $items = [
                 <div class="flex flex-col">
                     <div class="relative w-full rounded-xl overflow-hidden">
                         <div class="relative w-full pb-[56.25%]">
-                            <div 
+                            <div
                                 class="absolute inset-0 w-full h-full bg-cover bg-center"
                                 style="background-image: url('{{ $pianoPlayer['image'] }}')"
                             >
                                 <div class="absolute inset-0"></div>
                                 <div class="absolute bottom-1 w-full text-center text-white z-10">
-                                    <i class="fa-duotone fa-check-circle text-3xl sm:text-xl md:text-3xl" style="--fa-primary-color: #ffffff; --fa-secondary-color: #F61A30; --fa-secondary-opacity: 1;"></i>                                    
+                                    <i class="fa-duotone fa-check-circle text-3xl sm:text-xl md:text-3xl" style="--fa-primary-color: #ffffff; --fa-secondary-color: #F61A30; --fa-secondary-opacity: 1;"></i>
                                      <h6 class="text-2xl sm:text-xs lg:text-xl leading-normal">
                                         <strong class="block leading-tight">{!! $pianoPlayer['title'] !!}</strong>
                                         <strong class="block leading-tight">Piano Players</strong>
@@ -411,10 +411,10 @@ $points = [
     <div class="container max-w-6xl mx-auto relative z-50" style="background: #ffffff;" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/order-collage.webp">
         <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #ffffff;">
-                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-1 opacity-0 transition-opacity duration-300 ease-in-out" 
-                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"  
-                     loading="lazy" 
-                     onload="this.classList.remove('opacity-0')" 
+                <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-1 opacity-0 transition-opacity duration-300 ease-in-out"
+                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/30-day-jazz-piano/logo.webp"
+                     loading="lazy"
+                     onload="this.classList.remove('opacity-0')"
                      alt="logo">
                 <h2 class="text-4xl sm:text-3xl md:text-4xl pt-6 sm:pt-4 lg:pb-4 tracking-normal"><strong>Learn Jazz Piano <br/>in Just 30 Days.</strong></h2>
                 <div class="text-center sm:text-left sm:pb-5">
@@ -448,10 +448,10 @@ $points = [
                 </div>
             </div>
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0 transition-opacity" 
-                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/order-collage.webp" 
-                     alt="collage" 
-                     loading="lazy" 
+                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0 transition-opacity"
+                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/sale/order-collage.webp"
+                     alt="collage"
+                     loading="lazy"
                      onload="this.classList.remove('opacity-0')">
             </div>
         </div>

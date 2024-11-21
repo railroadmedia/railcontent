@@ -219,7 +219,7 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Pianote BookBag",
         "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
         "price" => $discountedPrice,

@@ -134,7 +134,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "30-Day To Better Technique",
         "fullPrice" => floatval($productPrices['30-days-to-better-technique']->price),
         "price" => floatval($productPrices['30-days-to-better-technique']->discounted_price),

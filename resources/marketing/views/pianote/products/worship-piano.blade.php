@@ -19,7 +19,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
                     "name" => "Worship Piano",
                     "fullPrice" => floatval($productPrices['worship-piano']->price),
                     "price" => floatval($productPrices['worship-piano']->discounted_price),

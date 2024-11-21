@@ -106,8 +106,14 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    
-   
+
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Practice Kit",
+        "fullPrice" => floatval($productPrices['practice-kit']->price),
+        "price" => floatval($productPrices['practice-kit']->discounted_price),
+        "noBreadcrumb" => true
+    ])
+
     <header class="px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F1F7FE;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center mt-28 sm:mt-0">
@@ -120,11 +126,11 @@
                         @if (floatval($productPrices['practice-kit']->price) >
                                 floatval($productPrices['practice-kit']->discounted_price))
                             <strong><s
-                                class="opacity-30">${{ floatval($productPrices['practice-kit']->price) }}</s></strong> 
+                                class="opacity-30">${{ floatval($productPrices['practice-kit']->price) }}</s></strong>
                             <strong>${{ floatval($productPrices['practice-kit']->discounted_price) }}</strong>
                             <span class="text-pianote text-sm md:text-2xl"> (SAVE
                             {{ round(100 - 100 * (floatval($productPrices['practice-kit']->discounted_price) / floatval($productPrices['practice-kit']->price))) }}%)</span>
-                            
+
                         @else
                             <strong>
                                 ${{ floatval($productPrices['practice-kit']->discounted_price) }}</strong>
@@ -220,15 +226,15 @@
                     </li>
                 @endforeach
             </ul>
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.webp"> 
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.webp">
         </div>
 
-        <div class="hidden md:block"> 
+        <div class="hidden md:block">
             <picture>
                 <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.webp">
                 <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/practice-kit/spread.png" alt="Pianotr Practice Kit">
             </picture>
-        
+
         @php
             $infoPops = [
                 ['top' => '75%', 'left' => '15%', 'tip' => 'PracticeKit case'],
@@ -265,13 +271,13 @@
               <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/practice-kit/logo.webp"
                         alt="Pianote Practice Kit Logo">
-            
+
                     <h2 class="leading-tight my-4 sm:my-6 text-black text-center">Essential tools to <strong>maximize <br class="md:hidden">your practice time and improve your playing.</strong></h2>
                     <h2 class="mb-4 sm:mb-6">
                         @if (floatval($productPrices['practice-kit']->price) >
                                 floatval($productPrices['practice-kit']->discounted_price))
                             <strong><s
-                                class="opacity-30">${{ floatval($productPrices['practice-kit']->price) }}</s></strong> 
+                                class="opacity-30">${{ floatval($productPrices['practice-kit']->price) }}</s></strong>
                             <strong>${{ floatval($productPrices['practice-kit']->discounted_price) }}</strong>
                             <span class="text-pianote text-sm md:text-2xl"> (SAVE
                             {{ round(100 - 100 * (floatval($productPrices['practice-kit']->discounted_price) / floatval($productPrices['practice-kit']->price))) }}%)</span>

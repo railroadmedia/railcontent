@@ -21,7 +21,7 @@
         }
     @endphp
 
-    <meta property="og:image" content="{{ $shareImage }}">    
+    <meta property="og:image" content="{{ $shareImage }}">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -39,7 +39,7 @@
             background: #F61A30;
             border-color: #F61A30;
         }
-        .join:hover, .join:focus, 
+        .join:hover, .join:focus,
         .join.smaller:focus, .join.smaller:hover {
             background: #F61A30;
             filter: brightness(125%);
@@ -116,7 +116,7 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Pianote BookBag",
         "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
         "price" => $discountedPrice,
@@ -165,7 +165,7 @@
                          Only <s class="opacity-50">$1374</s><strong> $599</strong>
                     </h3>
                 @endif
-    
+
                 <div class="w-full max-w-xl mx-auto">
                     <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
                         href="#customize-anchor"
@@ -616,11 +616,11 @@
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
                             <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
 
-                        <h4 class="my-4"> 
+                        <h4 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h4>
                         <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
-                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> 
+                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
