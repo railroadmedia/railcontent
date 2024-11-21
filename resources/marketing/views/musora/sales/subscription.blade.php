@@ -517,31 +517,31 @@
 @endsection
 
 @section('layout-body')
-    @if(!empty($fullSubscriptionVersion))
-        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/bf-banner.png');">
-            <div class="container max-w-4xl mx-auto">
-                <div class="flex flex-wrap items-center justify-center">
-                    <div class="w-full sm:w-7/12 mb-2 sm:mb-0">
-                        <img class="h-7 sm:h-8 lg:h-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
-                        <h5 class="leading-tight font-bold text-musora tracking-widest mt-2"><strong>STARTS ON NOVEMBER 26TH</strong></h5>
-                    </div>
-                    <div class="w-full sm:w-5/12">
-                        <p class="leading-tight text-sm mb-2">Sign up to be the first to know.</p>
-                        @include("musora.lead-gen.partials.sign-up-form", [
-                            "formId" => "Musora - Engagement - Trigger - BF24 Waitlist - Web Form",
-                            "formName" => 'BF24 Waitlist',
-                            "buttonText" => "Notify Me",
-                            'stacked' => true,
-                            "redirectURL" => "/thank-you",
-                            "recaptchaKey" => $recaptchaKey,
-                            "minimalForm" => true
-                        ])
+{{--    @if(!empty($fullSubscriptionVersion))--}}
+{{--        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/bf-banner.png');">--}}
+{{--            <div class="container max-w-4xl mx-auto">--}}
+{{--                <div class="flex flex-wrap items-center justify-center">--}}
+{{--                    <div class="w-full sm:w-7/12 mb-2 sm:mb-0">--}}
+{{--                        <img class="h-7 sm:h-8 lg:h-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">--}}
+{{--                        <h5 class="leading-tight font-bold text-musora tracking-widest mt-2"><strong>STARTS ON NOVEMBER 26TH</strong></h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-5/12">--}}
+{{--                        <p class="leading-tight text-sm mb-2">Sign up to be the first to know.</p>--}}
+{{--                        @include("musora.lead-gen.partials.sign-up-form", [--}}
+{{--                            "formId" => "Musora - Engagement - Trigger - BF24 Waitlist - Web Form",--}}
+{{--                            "formName" => 'BF24 Waitlist',--}}
+{{--                            "buttonText" => "Notify Me",--}}
+{{--                            'stacked' => true,--}}
+{{--                            "redirectURL" => "/thank-you",--}}
+{{--                            "recaptchaKey" => $recaptchaKey,--}}
+{{--                            "minimalForm" => true--}}
+{{--                        ])--}}
 
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
+{{--    @endif--}}
     <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
