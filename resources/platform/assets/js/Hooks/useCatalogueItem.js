@@ -129,6 +129,7 @@ export default function useCatalogueItem(props) {
         thumbnailIcon,
         renderLink,
         thumbnailType,
-        contentModel
+        contentModel,
+        isCompleted,
     };
 }

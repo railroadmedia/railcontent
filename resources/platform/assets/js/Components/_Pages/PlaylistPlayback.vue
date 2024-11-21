@@ -564,7 +564,7 @@ onMounted(() => {
                     <SoundSlice :user-id="userId" :theme-color="brand"
                         :additional-params="`${getBrandSpecificParams()}&layout=3`"
                         :soundslice-slug="soundsliceSlug" :contentId="contentId"
-                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping" soundsliceType="chapter-practice">
                         <template v-slot:soundsliceControls>
                             <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"
                                 :disable-prev="true" @onClose="handleCloseSoundslice" />

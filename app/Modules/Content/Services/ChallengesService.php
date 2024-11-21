@@ -40,6 +40,12 @@ class ChallengesService
             ->whereNotNull('profile_picture_url')
             // this will also filter out deleted users as they have the format musora+deleted
             ->whereNotLike('email', '%@musora%')
+            ->whereNotLike('email', '%@drumeo%')
+            ->whereNotLike('email', '%@guitareo%')
+            ->whereNotLike('email', '%@singeo%')
+            ->whereNotLike('email', '%@pianote%')
+            ->whereNotLike('email', '%@playbass%')
+            ->whereNotLike('email', '%@recordeo%')
             ->whereNotLike('email', '%test%') // this isn't great because many users have @testX.com accounts for businesses
             ->whereRaw("LENGTH(display_name) <= $maxDisplayNameLength")
             ->whereNotIn('id', $IdsblockList)
@@ -252,12 +258,12 @@ class ChallengesService
                 $challenge['enrollment_start_time']
             ) => 'upcoming',
             $now < Carbon::parse($challenge['published_on']) => 'enrollment',
-            !is_null($userEndDate) && $now < Carbon::parse($userEndDate) => 'active_community',
+            $now < $this->getChallengeEndDate($challenge) => 'active_community',
             default => 'completed_community',
         };
     }
 
-    public function getChallengeMetaDataForUserProgress(array $allChallengeIds, Collection $userProgresses, bool $returnChallengeData, ?string $brand = null) : array
+    public function getChallengeMetaDataForUserProgress(array $allChallengeIds, mixed $userProgresses, bool $returnChallengeData, ?string $brand = null) : array
     {
         $resultPackage = [];
         $challenges = $this->getChallengeByIds($allChallengeIds, $brand);

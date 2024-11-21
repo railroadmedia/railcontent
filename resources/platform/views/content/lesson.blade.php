@@ -152,12 +152,8 @@
         $contentBreadCrumb->breadcrumbClassOverride = $breadcrumbClassOverride ?? '';
     } elseif ($lessonType === 'challenge-part') {
         $contentBreadCrumb->pages[] = (object) [
-            'title' => 'Workouts',
-            'url' => url()->route('platform.workouts'),
-        ];
-        $contentBreadCrumb->pages[] = (object) [
             'title' => 'Challenges',
-            'url' => url()->route('platform.workouts.challenges'),
+            "url" => url()->route('platform.content-type-catalog', ['challenge']),
         ];
         $contentBreadCrumb->pages[] = (object) [
             'title' => $parent->fetch('fields.title'),
@@ -304,7 +300,9 @@
         @if(!empty($lessonContent->fetch('soundslice_slug')))
             :soundslice-slug="{{ json_encode($lessonContent->fetch('soundslice_slug')) }}"
         @endif
-        :qa-video="{{ $hasQAVideo }}"
+        @if($hasQAVideo)
+            :qa-video="{{ $hasQAVideo }}"
+        @endif
         :video-props="{{ json_encode($videoProps) }}" {{-- Mostly used for user data --}}
         :video-resources="{{ json_encode($videoResources) }}" {{-- Mostly used for user data --}}
         {{-- :lesson-data="{{ json_encode($lessonContent) }}" --}} {{-- Mostly used for user data and status--}}

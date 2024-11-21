@@ -3,7 +3,7 @@ import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchChallengeIndexMetadata } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -85,25 +85,6 @@ export const useCollectionStore = defineStore({
             return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
         },
 
-        async getChallengeProgress (data){
-            const ids = [];
-
-            data.entity.forEach((item) => {
-                ids.push(item.id);
-            });
-
-            const progress = await fetchChallengeIndexMetadata(ids);
-
-            return {
-                entity: data.entity.map(item => ({
-                    ...item,
-                    ...(progress[item.id] && { ...progress[item.id] }),
-                })),
-                total: data.total
-            }
-
-        },
-
         getContentId (){
             const pathname = window.location.pathname;
             const match = pathname.match(/\/(\d+)\/?$/);
@@ -151,10 +132,6 @@ export const useCollectionStore = defineStore({
                     groupBy: this.getGroupBy(),
                     includedFields: this.filter.included_fields,
                 })
-
-                if(this.queryType === 'challenge'){
-                    data = await this.getChallengeProgress(data);
-                }
 
                 return data;
             }

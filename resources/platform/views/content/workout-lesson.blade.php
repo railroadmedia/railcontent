@@ -124,11 +124,7 @@
         !empty($lessonContent['chapters'])){
 
             if(!empty($lessonContent['parent'])){
-                if(str_contains($lessonContent['parent']->fetch('type'),'challenge-part')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
-                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
-                }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'workouts')){
+                if(str_contains($lessonContent['parent']->fetch('type'),'workouts')){
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts");
                     $contentBreadCrumb->firstLevelTitle = 'Workouts';
                 }
@@ -142,16 +138,9 @@
                 $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
             }
             else {
-                //Temporary Fix For Challenges
-                if ($lessonType === 'challenge-part') {
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
-                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
-                    $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
-                } else {
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
-                    $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
-                    $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
-                }
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
+                $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
             }
     }
 @endphp
@@ -170,11 +159,15 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     <lesson-playback
-        breadcrumb-first-level-url="/{{ $brand }}/workouts"
-        breadcrumb-first-level-title="Workouts"
+
+        breadcrumb-first-level-url="{{ $contentBreadCrumb->firstLevelUrl }}"
+        breadcrumb-first-level-title="{{ $contentBreadCrumb->firstLevelTitle }}"
         @if($lessonType === 'challenge-part')
-            breadcrumb-second-level-url="{{ url()->route("platform.workouts.challenges") }}"
-            breadcrumb-second-level-title="Challenges"
+            breadcrumb-second-level-url="{{ url()->route("platform.content.first-level", [
+                'primaryPage' => 'challenge',
+                'firstContentSlug' =>$lessonContent['parent']['slug'],
+                'firstContentId' => $lessonContent['parent']['id']]) }}"
+            breadcrumb-second-level-title= {{$lessonContent['parent']->fetch('fields.title')}}
         @endif
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         content-type="{{ $lessonContent->fetch('type') }}"

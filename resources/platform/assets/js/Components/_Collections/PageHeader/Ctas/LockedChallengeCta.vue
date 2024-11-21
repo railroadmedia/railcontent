@@ -2,11 +2,11 @@
     <div>
         <PageHeaderCta
             v-bind="$attrs"
-            text="Unlock"
+            :text="text"
             showAllAlways
             @click="handleOpen"
         />
-        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :content-id="contentId" :challenge="lessonData" />
+        <ChallengeActionModal v-if="modalOpen" modal-type="unlock" @close-modal="handleClose" :challenge="lessonData" />
     </div>
 </template>
 
@@ -17,11 +17,7 @@ import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 
 const props = defineProps({
     text: String,
-    contentId: {
-        type: [String, Number],
-        default: null,
-    },
-    lessonData: {
+    nextLesson: {
         type: Object,
         default: () => {},
     },
