@@ -125,44 +125,56 @@
             color:transparent
         }
 
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
             color:#777
         }
 
-        form {
+        .ajax-form {
             position: relative;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
-        @media (min-width: 768px) {
-            form {
-                margin: 0 auto 10px;
-            }
-        }
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form {*/
+        /*        margin: 0 auto 10px;*/
+        /*    }*/
+        /*}*/
 
-        form input, form button {
-            font: 400 18px/50px 'Open Sans', sans-serif;
-            height: 50px;
+        .ajax-form input, .ajax-form button {
+            font: 400 18px/40px 'Open Sans', sans-serif;
+            height: 40px;
             color: #999;
             border-radius: 100px;
             text-align: left;
-            padding: 7px 20px;
-            margin: 0 auto 15px;
+            padding: 2px 20px;
+            margin: 0 auto 5px;
         }
-        @media (min-width: 768px) {
-            form input, form button {
-                font-size: 22px;
-                height: 65px;
-                line-height: 65px;
-            }
-        }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
+        /*.ajax-form input, .ajax-form button {*/
+        /*    font: 400 18px/50px 'Open Sans', sans-serif;*/
+        /*    height: 50px;*/
+        /*    color: #999;*/
+        /*    border-radius: 100px;*/
+        /*    text-align: left;*/
+        /*    padding: 7px 20px;*/
+        /*    margin: 0 auto 15px;*/
+        /*}*/
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form input, .ajax-form button {*/
+        /*        font-size: 22px;*/
+        /*        height: 65px;*/
+        /*        line-height: 65px;*/
+        /*    }*/
+        /*}*/
+        .ajax-form input[type="submit"],
+        .ajax-form button[type="submit"],
+        .ajax-form input button,
+        .ajax-form button button {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             background: #0b76db;
             text-transform: uppercase;
-            margin: 0 auto 15px;
+            /*margin: 0 auto 15px;*/
             display: block;
             cursor: pointer;
             border: none;
@@ -170,7 +182,7 @@
             text-align: center;
             padding: 0;
         }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
             background: #258ff4;
         }
         .disclaimer {
@@ -289,6 +301,7 @@
             }
         }
     </style>
+
 @stop
 
 @section('body-data')
@@ -333,6 +346,32 @@
     @hasSection('top-bar')
         @yield('top-bar')
     @endif
+
+{{--    @if(!empty($bfVersion))--}}
+{{--        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bf-banner.png');">--}}
+{{--            <div class="container max-w-4xl mx-auto">--}}
+{{--                <div class="flex flex-wrap items-center justify-center">--}}
+{{--                    <div class="w-full sm:w-7/12 mb-2 sm:mb-0">--}}
+{{--                        <img class="h-7 sm:h-8 lg:h-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">--}}
+{{--                        <h5 class="leading-tight font-bold text-musora tracking-widest mt-2"><strong>STARTS ON NOVEMBER 26TH</strong></h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-full sm:w-5/12">--}}
+{{--                        <p class="leading-tight text-sm mb-2">Sign up to be the first to know.</p>--}}
+{{--                        @include("drumeo.lead-gen.partials.sign-up-form", [--}}
+{{--                            "formId" => "Drumeo - Engagement - Trigger - BF24 Waitlist - Web Form",--}}
+{{--                            "formName" => 'BF24 Waitlist',--}}
+{{--                            "buttonText" => "Notify Me",--}}
+{{--                            'stacked' => true,--}}
+{{--                            "redirectURL" => "/thankyou",--}}
+{{--                            "recaptchaKey" => $recaptchaKey,--}}
+{{--                            "minimalForm" => true--}}
+{{--                        ])--}}
+
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
+{{--    @endif--}}
 
     @php
        $bubbles =  [
