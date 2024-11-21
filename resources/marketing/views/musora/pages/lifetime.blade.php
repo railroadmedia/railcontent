@@ -65,14 +65,7 @@
 
         .join.smaller {
             padding:14px 30px;
-            font-size:16px;
-        }
-
-        @media (min-width:768px) {
-            .join.smaller {
-                font-size:18px;
-                padding:12px 30px;
-            }
+            font-size:18px;
         }
          .join.musora {
             background-color:#FFAE00;
@@ -164,10 +157,10 @@
                 />
             </div>
 
-            <div class="w-full md:w-1/2 text-center lg:text-left lg:pl-6">
+            <div class="w-full sm:w-10/12 md:w-1/2 text-left sm:text-center md:text-left lg:pl-6">
                 <h3 class="mb-6">
                 <strong>
-                   The Times They Are <br class="block md:hidden"> A’ Changin
+                   The Times They Are A’ Changin
                 </strong>
                 </h3>
                 <p class="mb-2 md:mb-4">

@@ -13,6 +13,13 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+
+    <style>
+    .join.smaller {
+            padding:14px 30px;
+            font-size:18px;
+        }
+    </style>
 @stop
 
 @section('body-data')
@@ -91,8 +98,8 @@
                 <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/timeline-m.webp">
             </div>
         </section>
-    <section class="bg-gray-100 py-8 px-4 lg:py-24 lg:px-8">
-        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8">
+    <section class="bg-gray-100 py-8 px-4 sm:py-12 lg:py-24 lg:px-8">
+        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-left sm:text-center md:text-left">
             <div class="w-full sm:w-10/12 md:w-5/12">
                 <img 
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/coach-collage.webp" 
@@ -101,7 +108,7 @@
                 />
             </div>
 
-            <div class="w-full md:w-1/2 text-center lg:text-left lg:pl-10">
+            <div class="w-full sm:w-10/12 md:w-1/2 lg:pl-10">
                 <h3 class="mb-6">
                 <strong>
                     The Times They Are A' Changin
@@ -121,7 +128,7 @@
                 </p>
                 <a 
                     href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" 
-                    class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
+                    class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0 py-4"
                 >
                     GET THE DEAL
                 </a>

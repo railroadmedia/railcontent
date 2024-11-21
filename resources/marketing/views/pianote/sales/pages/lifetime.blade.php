@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
+    <style>
+    .join.smaller {
+            padding:14px 30px;
+            font-size:18px;
+        }
+    </style>
 @stop
 
 @section('global-body')
@@ -97,8 +104,8 @@
             </p>
         </div>
     </section>
-    <section class="bg-gray-100 py-8 px-4 lg:py-24 lg:px-8">
-        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8">
+    <section class="bg-gray-100 py-8 px-4 md:py-12 lg:py-24 lg:px-8">
+        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-left sm:text-center md:text-left">
             <div class="w-full sm:w-10/12 md:w-5/12">
                 <img 
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/lifetime-deal/coach-collage.webp" 
@@ -107,10 +114,10 @@
                 />
             </div>
 
-            <div class="w-full md:w-1/2 text-center lg:text-left lg:pl-10">
+            <div class="w-full sm:w-10/12 md:w-1/2 lg:pl-10">
                 <h3 class="mb-6">
                 <strong>
-                   Your LAST CHANCE to get a <br>Lifetime Membership at this price.
+                   Your LAST CHANCE to get a <br class="hidden sm:block">Lifetime Membership at this price.
                 </strong>
                 </h3>
                 <p class="mb-2 md:mb-4">
