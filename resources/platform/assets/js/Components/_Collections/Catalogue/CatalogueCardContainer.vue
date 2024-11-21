@@ -29,10 +29,10 @@
                         :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction"
                         :force-no-links="forceNoLinks"
-                        @addToList="addToList"
-                        @progressReset="handleProgressReset"
                         :show-dropdown="showDropdown"
                         :trackingSection="trackingSection"
+                        @addToList="addToList"
+                        @progressReset="handleProgressReset"
                         :showSeeAllCard="showSeeAllCard"
                         :index="index"
                     />
