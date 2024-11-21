@@ -3,7 +3,7 @@
         <Breadcrumb :breadcrumbs="[{ title: 'Workouts' }]"/>
     </div>
 
-    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6"
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-6">
 <!--        Chris asked me to leave in this functionality ... juuuust in case we wanted it later. nov 2024>-->
 <!--        <section v-if="carouselData.length">-->
 <!--            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">-->
