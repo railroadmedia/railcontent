@@ -337,8 +337,15 @@
     <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
+            @if(!empty($bfVersion))
+                <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/black-friday/musora-BF-header.webp">
+                <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
+                <h5 class="text-musora leading-tight"><strong>SAVE $100 ON YOUR FIRST YEAR OF LESSONS.</strong></h5>
+                <h5 class="font-light">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h5>
+            @else
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
             <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play your favorite songs.</h5>
+            @endif
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 my-5 sm:my-7">
                 <a class="sm:mx-0.5 w-full sm:w-56 join musora-gold smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                     @if(!empty($promoVersion))
@@ -450,6 +457,19 @@
             'instrument' => 'musical',
         ])
     @else
+        @if($bfVersion)
+        @include('drumeo._partials.countdown-bundle-2024')
+
+        @include('musora.sales.components.order-section-collage-bf', [
+        'headerLight' => true,
+        'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+        'header' => '<strong>Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+        'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+        ])
+        @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
@@ -459,6 +479,7 @@
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
         'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
         ])
+        @endif
     @endif
 
     @include('musora.sales.components.app-section', [
@@ -478,4 +499,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+@else
+    {{--    end of cyber monday--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-03 00:00:00',
+        'promoVersion' => true
+    ])
+@endif
 @stop

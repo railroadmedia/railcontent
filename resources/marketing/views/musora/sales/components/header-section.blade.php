@@ -5,6 +5,11 @@
     style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
     @endif
 >
+    @if(!empty($bfVersion) && ($theme == 'singeo'))
+    <img class="h-16 sm:h-20 lg:h-24 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-BF-header.webp" alt="logo">
+    @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
+    <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-BF-header.webp" alt="logo">
+    @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
             <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
@@ -23,14 +28,20 @@
         @if(!empty($boldText))
             <h5 class="leading-normal mb-5 lg:mb-7 ">{!!  $boldText  !!}</h5>
         @endif
-        @if(empty($noCheck))
-            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
-                <br class="lg:hidden">
-                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
-                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
-            </p>
+         
+        @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
+        <h5 class="text-{{$theme}} leading-tight"><strong>SAVE $100 ON YOUR FIRST YEAR OF LESSONS.</strong></h5>
+        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h6>
+        @else
+            @if(empty($noCheck))
+                <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                    <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+                    <br class="lg:hidden">
+                    <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
+                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+                </p>
+            @endif
         @endif
         @if(!empty($BFheader))
             <h6 class="leading-tight py-2 px-3 bg-musora rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>

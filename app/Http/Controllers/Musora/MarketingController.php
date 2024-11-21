@@ -12,6 +12,7 @@ class MarketingController extends BaseController
         return view('musora.sales.subscription', [
             'theme' => 'musora',
             'fullSubscriptionVersion' => true,
+            'bfVersion' => 'true',
         ]);
     }
     public function trial()

@@ -311,17 +311,33 @@
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&locked=true&redirect=/order&promo-code=FREE-W-ANNUAL-6702,special',
         ])
     @else
-        @include('musora.sales.components.order-section-collage', [
-        'headerLight' => true,
-        'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
-        'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
-        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
-        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
-                'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
 
-        ])
+        @if(!empty($bfVersion)) 
+            @include('drumeo._partials.countdown-bundle-2024')
+
+            @include('musora.sales.components.order-section-collage-bf', [
+            'headerLight' => true,
+            'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+            'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
+            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                    'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+            ])
+        @else
+            @include('musora.sales.components.order-section-collage', [
+            'headerLight' => true,
+            'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
+            'header' => '<strong>Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.</strong>',
+            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>
+            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
+            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+                    'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
+
+            ])
+        @endif
     @endif
 
     @include('musora.sales.components.app-section', [
@@ -349,6 +365,20 @@
         ])
     @else
         @include("singeo.sales.partials._footer")
+    @endif
+
+     @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+    @else
+        {{--    end of cyber monday--}}
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-12-03 00:00:00',
+            'promoVersion' => true
+        ])
     @endif
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

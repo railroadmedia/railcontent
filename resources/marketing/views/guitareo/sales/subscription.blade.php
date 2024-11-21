@@ -314,16 +314,32 @@
         'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
         ])
     @else
-        @include('musora.sales.components.order-section-collage', [
-        'headerLight' => true,
-        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
-        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
-        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
-        ])
+
+        @if(!empty($bfVersion))
+            @include('drumeo._partials.countdown-bundle-2024')
+
+            @include('musora.sales.components.order-section-collage-bf', [
+            'headerLight' => true,
+            'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+            'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+            'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+            ])
+        @else
+            @include('musora.sales.components.order-section-collage', [
+            'headerLight' => true,
+            'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+            'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+            'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+            ])
+        @endif
     @endif
 
     @include('musora.sales.components.app-section', [
@@ -353,6 +369,19 @@
         @include("guitareo.sales.partials._footer")
     @endif
 
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+    @else
+    {{--    end of cyber monday--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-03 00:00:00',
+        'promoVersion' => true
+    ])
+    @endif
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

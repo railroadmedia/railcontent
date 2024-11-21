@@ -9,7 +9,7 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('singeo.sales.subscription', ['theme' => 'singeo', 'noEverflow' => true]);
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'noEverflow' => true, 'bfVersion' => 'true']);
     }
     public function fiveReasons()
     {
