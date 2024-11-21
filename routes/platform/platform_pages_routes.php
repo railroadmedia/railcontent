@@ -179,34 +179,13 @@ Route::domain('{musoraDomain}')
                     ])
                     ->name('platform.content-type-catalog');
 
-                Route::get('/{brand}/challenges', [ContentPagesController::class, 'challenges'])
+                Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenge'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.challenges');
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
@@ -274,14 +253,6 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.live-chat');
 
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
-                    [ContentPagesController::class, 'secondLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['challenges'])
-                    ->name('platform.workout.challenge.workout');
-
                 /*
                  * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
                  */
@@ -334,6 +305,7 @@ Route::domain('{musoraDomain}')
                             'drum-fest-international-2022',
                             'workouts',
                             'odd-times',
+                            'challenge'
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -343,7 +315,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges', 'challenge'])
                     ->name('platform.content.second-level');
 
                 Route::get(

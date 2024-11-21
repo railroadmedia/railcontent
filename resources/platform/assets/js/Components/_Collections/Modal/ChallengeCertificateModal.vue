@@ -77,7 +77,6 @@ const props = defineProps({
 
 const emit = defineEmits(['closeModal']);
 
-const certificateData = ref({});
 const addHeightToPdf = ref(false);
 const pdfSrc = ref(null);
 const certificateContent = ref(null);
@@ -89,7 +88,7 @@ const ribbon = computed(() => {
 
 const borders = computed(() => {
     if(props.certificateData?.tier) {
-        return gradients[certificateData?.tier];
+        return gradients[props.certificateData?.tier];
     }
 })
 
@@ -170,16 +169,16 @@ const generatePng = () => {
 
 const gradients = {
     bronze: {
-        top: 'linear-gradient(90deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        right: 'linear-gradient(360deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        bottom: 'linear-gradient(270deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        left: 'linear-gradient(180deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
+        top: 'linear-gradient(90deg, #9E8976 0.23%, #7A5E50 19.83%, #F6D0AB 41.45%, #9D774E 61.56%, #C99B70 86.2%, #795F52 100.77%)',
+        right: 'linear-gradient(180deg, #9E8976 0.23%, #7A5E50 19.83%, #F6D0AB 41.45%, #9D774E 61.56%, #C99B70 86.2%, #795F52 100.77%)',
+        bottom: 'linear-gradient(90deg, #9E8976 0.23%, #7A5E50 19.83%, #F6D0AB 41.45%, #9D774E 61.56%, #C99B70 86.2%, #795F52 100.77%)',
+        left: 'linear-gradient(180deg, #9E8976 0.23%, #7A5E50 19.83%, #F6D0AB 41.45%, #9D774E 61.56%, #C99B70 86.2%, #795F52 100.77%)',
     },
     silver: {
-        top: 'linear-gradient(90deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        right: 'linear-gradient(360deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        bottom: 'linear-gradient(270deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
-        left: 'linear-gradient(180deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',
+        top: 'linear-gradient(90deg, #A8A8A6 -14.68%, #9F9E9E 21.69%, #D4D4D4 47.47%, #A29F9F 99.35%)',
+        right: 'linear-gradient(180deg, #A8A8A6 -14.68%, #9F9E9E 21.69%, #D4D4D4 47.47%, #A29F9F 99.35%)',
+        bottom: 'linear-gradient(90deg, #A8A8A6 -14.68%, #9F9E9E 21.69%, #D4D4D4 47.47%, #A29F9F 99.35%)',
+        left: 'linear-gradient(180deg, #A8A8A6 -14.68%, #9F9E9E 21.69%, #D4D4D4 47.47%, #A29F9F 99.35%)',
     },
     gold: {
         top: 'linear-gradient(90deg, #8C421D -14.68%, #FBE67B 21.69%, #F7D14E 47.47%, #D4A041 99.35%)',

@@ -77,11 +77,11 @@ const descriptionText = computed(() => {
 
 const buttonText = computed(() => {
     if(isUnlockModal.value){
-        return 'Unlock 30-Day Drummer';
+        return `Unlock ${props.challenge?.title}`;
     } else if(isRetakeModal.value){
-        return 'Retake Challenge';
+        return `Retake ${props.challenge?.title}`;
     } else if(isLeaveModal.value){
-        return 'Leave Challenge';
+        return `Leave ${props.challenge?.title}`;
     }
 })
 

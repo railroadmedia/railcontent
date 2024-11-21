@@ -12,13 +12,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
 use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
+use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Railroad\Railcontent\Services\RecommendationService;
 
 class DevEndpointController extends Controller
@@ -38,6 +42,7 @@ class DevEndpointController extends Controller
         private CustomerIoSyncService $customerIoSyncService,
         private UserService $userService,
         private SanityGateway $sanityGateway,
+        private RailcontentV2DataSyncingService $dataSyncingService,
     ) {
     }
 
@@ -47,7 +52,6 @@ class DevEndpointController extends Controller
             return $this->handleChallengesEndpoints($request);
         }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
-
     }
 
     private function handleChallengesEndpoints($request) : string
@@ -62,9 +66,6 @@ class DevEndpointController extends Controller
             case ('complete');
                 $this->challengesService->completeChallenge($challengeId, $userId);
                 return "Completed Challenge $challengeId for user $userId";
-            case('complete_lessons'):
-                $this->setContentCompleted($challengeId, $userId);
-                return "Content Completed: $challengeId for user $userId";
             case('move_days'):
                 $numDays = $request->get('num_days', 1);
                 $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
@@ -92,6 +93,8 @@ class DevEndpointController extends Controller
                 $cohort->enrollment_end_date = Carbon::parse('20251111 23:00')->toISOString();
                 $cohort->save();
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
+            case('enroll'):
+                $this->challengesService->startChallenge($challengeId, $userId);
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";

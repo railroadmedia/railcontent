@@ -8,9 +8,9 @@
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
-                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path">View Details</a></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
+                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white">View Details</a></li>
+                    <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
             </div>
@@ -21,7 +21,7 @@
             <!-- Challenge Logo -->
             <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
-            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasChallengeStarted && hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
+            <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
             <MuButton class="tw-px-6" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
@@ -88,7 +88,7 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="mobileShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
+                    <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
             </div>
@@ -154,7 +154,7 @@
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import {ref, computed, onMounted, onUnmounted, watch} from "vue";
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
@@ -188,7 +188,7 @@ const countdownString = ref('');
 const circumference = 2 * 22 / 7 * 108;
 
 const isSoloChallenge = computed(() => {
-    return props.challenge.is_solo === 'solo';
+    return props.challenge.is_solo;
 })
 
 const hasChallengeStarted = computed(() => {
@@ -199,12 +199,17 @@ const challengeTitle = computed(() => {
     return props.challenge.title;
 })
 
+const startDate = computed(() => {
+    const utc = new Date(props.challenge.start_date);
+    const local = utc.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+    return local;
+})
+
 const actionText = computed(() => {
-    if(!hasChallengeStarted.value){
-        //TODO(challenge): update start date
-        return `You're enrolled! Lessons begin ${props.challenge.start_date}`;
-    } else if(hasMissedLessons.value){
+    if(hasMissedLessons.value){
         return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
+    } else if(!hasChallengeStarted.value){
+        return `You're enrolled! Lessons begin ${startDate.value}`;
     } else if(isNextLessonLocked){
         return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
     }
@@ -220,7 +225,7 @@ const challengeThumbnail = computed(() => {
 })
 
 const isNextLessonLocked = computed(() => {
-    return props.challenge.next_lesson.is_locked;
+    return props.challenge.next_lesson.is_locked && countdownString.value !== '00:00';
 })
 
 const nextLessonShortName = computed(() => {
@@ -258,8 +263,8 @@ const ctaObj = computed(() => {
              obj.iconLocation = 'right';
         } else {
             //TODO(challenge): need to add conditional when current lesson is completed
-            obj.text = `Replay ${props.challenge.current?.short_name}`;
-            obj.url = props.challenge.current?.web_url_path;
+            obj.text = `Replay ${props.challenge.previous_completed_lesson?.short_name}`;
+            obj.url = props.challenge.previous_completed_lesson?.web_url_path;
             obj.icon = 'fas fas fa-redo-alt';
             obj.iconLocation = 'left';
         }
@@ -303,7 +308,7 @@ const closeMobileDropdown = () => {
 
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
-        const count = countdown(props.completionData?.next_lesson?.unlock_date);
+        const count = countdown(props.challenge.next_lesson?.unlock_date);
         countdownString.value = count;
 
         if(count === '00:00'){
@@ -327,4 +332,15 @@ onUnmounted(() => {
         runCountDown(true);
     }
 })
+
+watch(
+    () => isNextLessonLocked.value,
+    (value) => {
+        if(value){
+            runCountDown();
+        } else {
+            runCountDown(true);
+        }
+    },
+)
 </script>

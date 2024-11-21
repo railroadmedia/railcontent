@@ -9,10 +9,9 @@ export default function useCatalogueItem(props) {
     const userStore = useUserStore();
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
-    
     const progress_percent = ref(0);
     const lesson_complete = ref(false);
-                               
+    
     //Progress Percentage
     getProgressPercentage(props.item.id).then( value => {
         progress_percent.value = value;
@@ -42,6 +41,7 @@ export default function useCatalogueItem(props) {
                 return dateNow.value > datePublshedOn.value;
             }
         });
+    const isCompleted = computed(() => props.item.completed);
     const releaseDate = computed(() => {
         if(props.item.quarter_published){
             return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
@@ -121,6 +121,7 @@ export default function useCatalogueItem(props) {
         thumbnailIcon,
         renderLink,
         thumbnailType,
-        contentModel
+        contentModel,
+        isCompleted,
     };
 }
