@@ -22,7 +22,8 @@
                         :key="'grid' + item.id"
                         :item="item"
                         :content-type="item.type"
-                        :user-id="userId" :is-admin="isAdmin"
+                        :user-id="userId"
+                        :is-admin="isAdmin"
                         :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride"
@@ -32,7 +33,8 @@
                         @progressReset="handleProgressReset"
                         :show-dropdown="showDropdown"
                         :trackingSection="trackingSection"
-                        :showSeeAllCard="showSeeAllCard" :index="index"
+                        :showSeeAllCard="showSeeAllCard"
+                        :index="index"
                     />
                 </template>
                 <template v-else>
@@ -185,6 +187,19 @@ const { isLoading } = storeToRefs(platformStore);
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
+const miniViewRowStyles = computed(() => {
+    let rowStyles = '';
+    if(props.page === 1){
+        rowStyles = `${rowStyles} lg:tw-grid-rows-none`;
+    }
+    if (props.preLoadedContent.length > 3) {
+        rowStyles = `${rowStyles} tw-grid-rows-2`;
+    } else {
+        rowStyles = `${rowStyles} tw-grid-rows-1 tw-grid-cols-3`;
+    }
+    return rowStyles;
+})
+
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
 const breakToListView = computed(() => {
@@ -195,12 +210,12 @@ const showListElement = computed(() => {
     return props.displayInline || (breakToListView.value && smallerThanLg.value);
 });
 
-const showSkeletonLoader = computed(() => {
-    return !props.noSkeleton && collectionStoreLoading.value;
-})
-
 const skeletonCardCount = computed(() => {
     return showGroupBy.value || props.isMiniCatalogue ? 5 : 12;
+})
+
+const showSkeletonLoader = computed(() => {
+    return !props.noSkeleton && collectionStoreLoading.value;
 })
 
 const showGroupBy = computed(() => {
@@ -221,19 +236,6 @@ const isRecommendation = computed(() => {
 
 const isCoachShow = computed(() => {
     return props.contentTypeOverride === 'coach-show';
-})
-
-const miniViewRowStyles = computed(() => {
-    let rowStyles = '';
-    if(props.page === 1){
-        rowStyles = `${rowStyles} lg:tw-grid-rows-none`;
-    }
-    if (props.preLoadedContent.length > 3) {
-        rowStyles = `${rowStyles} tw-grid-rows-2`;
-    } else {
-        rowStyles = `${rowStyles} tw-grid-rows-1 tw-grid-cols-3`;
-    }
-    return rowStyles;
 })
 
 const handleProgressReset = (payload) => {
