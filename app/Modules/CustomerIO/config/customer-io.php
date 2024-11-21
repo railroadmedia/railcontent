@@ -109,6 +109,18 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Free Music Lessons For Life' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
@@ -439,6 +451,18 @@ return [
                 'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_cymbal-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
