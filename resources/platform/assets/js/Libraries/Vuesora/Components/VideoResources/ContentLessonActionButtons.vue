@@ -267,13 +267,13 @@ export default {
                     this.totalLikes -= 1;
                 }
             } catch (error) {
-                console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
+                console.error(`Error ${this.hasLiked ? 'unliking' : 'liking'} content:`, error);
             } finally {
                 this.isLiking = false; // Reset loading state
                 //Success
                 window.shownotification({
                     icon: 'check',
-                    text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
+                    text: `Content has been ${this.hasLiked ? 'liked' : 'unliked'} successfully!`
                 })
             }
         },

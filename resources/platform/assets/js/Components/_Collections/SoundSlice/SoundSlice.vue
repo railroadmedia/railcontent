@@ -41,7 +41,11 @@ const props = defineProps({
     endTime: {
         type: [Number, String],
         default: null,
-    }
+    },
+    soundsliceType: {
+        type: String,
+        default: '',
+    },
 });
 
 //Emits
@@ -124,21 +128,26 @@ const handlePlay = (event) => {
     progressTracker.start();
     if (!progressTrackerEventListener.value) {
         progressTrackerEventListener.value = true;
-        window.addEventListener('unload', sendProgressTracking);
+        window.addEventListener('visibilitychange', sendProgressTracking);
     }
 }
 
 const handlePause = () => {
     ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
     progressTracker.stop();
+    sendProgressTracking();
 }
 
 const sendProgressTracking = () => {
-    progressTracker.send({
-        mediaId: props.contentId,
-        mediaType: 'assignment',
-        mediaCategory: 'soundslice',
-    });
+    if (props.soundsliceType === 'song') {
+        progressTracker.send({
+            contentId: props.contentId,
+            mediaType: 'assignment',
+            mediaCategory: 'soundslice',
+            watchPosition: Math.round(currentTimeRef.value),
+            totalDuration: Math.round(endTime.value)
+        });
+    }
 }
 
 const spacebarToPlayPause = (event) => {
@@ -384,13 +393,9 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     document.removeEventListener('visibilitychange', handleVisibilityChange);
-    progressTracker.sendAsync({
-        mediaId: props.contentId,
-        mediaType: 'assignment',
-        mediaCategory: 'soundslice',
-    });
+    sendProgressTracking();
     progressTracker = null;
-    window.removeEventListener('unload', () => sendProgressTracking);
+    window.removeEventListener('visibilitychange', () => sendProgressTracking);
     window.removeEventListener('message', handleSoundsliceEvent);
     document.removeEventListener('keyup', spacebarToPlayPause);
 });

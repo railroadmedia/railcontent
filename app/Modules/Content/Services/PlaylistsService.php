@@ -324,9 +324,10 @@ class PlaylistsService
                 'user_id'      => user()->id,
                 'playlist_id'         => $playlist->id,
                 'created_at'   => Carbon::now()->toDateTimeString(),
+                'brand' => $playlist->brand
             ];
-
-            return UserPlaylistPinned::create($pinnedData);
+            UserPlaylistPinned::create($pinnedData);
+            return 1;
         } else {
             return -1;
         }

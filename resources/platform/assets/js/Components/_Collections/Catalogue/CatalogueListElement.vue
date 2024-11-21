@@ -222,6 +222,7 @@ const {
     thumbnailIcon,
     renderLink,
     progress_percent,
+    lesson_complete,
     isReleased,
     releaseDate,
 } = useCatalogueItem(props);
@@ -354,15 +355,15 @@ const mappedData = computed(() => {
 const wrapperClasses = computed(() => {
     return {
     'no-access': noAccess.value,
-    completed: props.item.completed,
+    completed: lesson_complete,
     [props.wrapperClassOverride]: props.wrapperClassOverride
 }});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && lesson_complete === true);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 const isCompleted = computed(() => {
-    return props.item.completed;
+    return lesson_complete;
 })
 
 const closeDropdown = () => {

@@ -145,19 +145,16 @@ const app = createApp({
                 progressTracker = new ProgressTracker();
 
                 const { mediaElementVueInstance } = this.$refs;
-                const sessionTokenElement = document.querySelector('#sessionToken');
 
                 if (mediaElementVueInstance) {
-                    window.addEventListener('unload', (event) => {
+                    window.addEventListener('visibilitychange', (event) => {
                       progressTracker.send({
-                            mediaId: mediaElementVueInstance.videoId,
                             mediaType: 'video',
                             mediaCategory: 'vimeo',
                             watchPosition: mediaElementVueInstance.currentTimeInSeconds
                                 || mediaElementVueInstance.currentTime,
                             totalDuration: mediaElementVueInstance.videoLength
                                 || mediaElementVueInstance.totalDuration,
-                            sessionToken: sessionTokenElement.value || null,
                             brand:mediaElementVueInstance.brand,
                             contentId: mediaElementVueInstance.contentId
                         });
@@ -168,31 +165,9 @@ const app = createApp({
             progressTracker.start();
         },
 
-        handleVideoPause(payload) {
+        handleVideoPause() {
             progressTracker.stop();
         },
-
-        handlePlayAlongsPlay() {
-            if (playAlongsProgressTracker == null) {
-                playAlongsProgressTracker = new ProgressTracker();
-
-                const { playAlongsVueInstance } = this.$refs;
-                if (playAlongsVueInstance) {
-                    window.addEventListener('unload', (event) => {
-                        progressTracker.send({
-                            mediaType: 'practice',
-                            mediaCategory: 'play-alongs',
-                            sessionToken: sessionTokenElement.value || null
-                        });
-                    });
-                }
-            }
-            playAlongsProgressTracker.start();
-        },
-
-        handlePlayAlongsPause() {
-            playAlongsProgressTracker.stop();
-        }
     }
 });
 

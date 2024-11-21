@@ -36,4 +36,8 @@
 </template>
 <script setup>
 import DotSeparator from '@vuesora/Components/VideoResources/DotSeparator';
+
+defineOptions({
+  inheritAttrs: false, // Prevent automatic attribute inheritance
+});
 </script>

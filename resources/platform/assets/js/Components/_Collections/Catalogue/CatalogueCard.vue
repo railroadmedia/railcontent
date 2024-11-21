@@ -146,7 +146,6 @@ import { useUserStore } from '@stores/user';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 import userJourney from '@services/userJourney';
 import { usePlatformStore } from "../../../Stores/platform";
-import { getProgressPercentage } from 'musora-content-services';
 
 //Pinia Stores
 const userStore = useUserStore();
@@ -213,9 +212,10 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
-    progress_percent,
     isReleased,
     releaseDate,
+    progress_percent,
+    lesson_complete,
 } = useCatalogueItem(props);
 
 const state = reactive({
@@ -226,9 +226,6 @@ const state = reactive({
         opacity: 0,
     }
 });
-
-//refs
-const lesson_progress = ref(0);
 
 //-----------Static Data-----------//
 const dropdownOptions = [
@@ -281,7 +278,7 @@ const hasProduct = computed(() => {
 })
 
 const registrationUrl = computed(() => {
-    return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
+    return contentModel.value?.post?.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
 const duration = computed(() => {
@@ -321,11 +318,11 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
+    if (contentModel.value?.post?.fields) {
         if (isSongContent.value) {
-            return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
+            return contentModel.value?.post?.fields.find(field => field.key === 'artist')?.value || ''
         }
-        return contentModel.value.post.fields.find(field => field.key === 'instructor')?.value.name || ''
+        return contentModel.value?.post?.fields.find(field => field.key === 'instructor')?.value.name || ''
     } else if (props.item.artist_name) {
         return props.item.artist_name;
     } else {
@@ -335,8 +332,8 @@ const contentCreator = computed(() => {
 
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
+    if (contentModel.value?.post?.fields) {
+        difficultyValue = contentModel.value?.post?.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;
@@ -363,14 +360,14 @@ const wrapperClasses = computed(() => {
     return ({
         [defaultWrapperClasses]: defaultWrapperClasses && !props.wrapperClassOverride,
         'no-access': noAccess.value,
-        completed: props.item.completed,
+        completed: lesson_complete,
         'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
         [props.wrapperClassOverride]: props.wrapperClassOverride,
     })
 });
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && lesson_complete === true);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
 const closeDropdown = () => {
@@ -411,14 +408,6 @@ onMounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
     contentContainer.addEventListener('scroll', closeDropdown);
 });
-
-onBeforeMount( () => {
-    getProgressPercentage(props.item.id).then(value => {
-        lesson_progress.value = value;
-    }).catch( error => {
-        console.log('Error getting lesson_progress', error)
-    })
-})
 
 onUnmounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);

@@ -14,6 +14,7 @@ export async function useOverviewPageData(contentType, parentType) {
 
     const contentId = getContentId();
     const progressPercent = await getProgressPercentage(contentId); // Await the progress percent
+
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 

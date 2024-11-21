@@ -15,7 +15,7 @@
         />
         <div class="tw-my-4">
             <ListCatalogue
-                :content="data"
+                :content="data?.children"
                 :user-id="userId"
                 :is-admin="isAdmin"
                 :show-numbers="true"

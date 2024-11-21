@@ -82,13 +82,14 @@ import {  computed } from 'vue';
 import { textColor } from '@constants/brands';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
+import SkeletonContentProgress from '../SkeletonLoader/SkeletonContentProgress.vue';
 
 const props = defineProps({
     labelText: String,
     brand: String,
     isCompleted: Boolean,
     progress: Number,
-    xpAmount: String,
+    xpAmount: [String, Number],
     isStarted: Boolean,
     backButton: Object,
     nextLessonUrl: String,

@@ -111,6 +111,7 @@ const {
     contentModel,
     thumbnailIcon,
     progress_percent,
+    lesson_complete,
     isReleased,
     releaseDate,
 } = useCatalogueItem({ ...props, brand: brand.value, contentTypeOverride: 'song' });
@@ -129,7 +130,7 @@ const mappedData = computed(() => {
 
 const class_object = computed(() => ({
     'no-access': noAccess.value,
-    completed: props.item.completed,
+    completed: lesson_complete,
 }));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);

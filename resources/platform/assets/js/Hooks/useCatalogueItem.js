@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import ContentHelpers from "@vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '@vuesora/assets/js/models/_model.js';
 import { useUserStore } from "@stores/user.js";
@@ -9,11 +9,14 @@ export default function useCatalogueItem(props) {
     const userStore = useUserStore();
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
+    
+    const progress_percent = ref(0);
+    const lesson_complete = ref(false);
 
-    let progress_percent = 0;
     //Progress Percentage
     getProgressPercentage(props.item.id).then( value => {
-        progress_percent = value;
+        progress_percent.value = value;
+        lesson_complete.value = value === 100;
     }).catch( error => {
         console.log('error fetching progress', error)
     })
@@ -33,9 +36,7 @@ export default function useCatalogueItem(props) {
                 return true;
             }
 
-            if(Object.hasOwn(props.item, 'is_locked')){
-                return !props.item.is_locked;
-            } else if(props.item.quarter_published && props.item.status === 'draft'){
+            if(props.item.quarter_published && props.item.status === 'draft'){
                 return dateNow.value > dateQuarterPublishedOn.value;
             } else {
                 return dateNow.value > datePublshedOn.value;
@@ -43,17 +44,11 @@ export default function useCatalogueItem(props) {
         });
     const isCompleted = computed(() => props.item.completed);
     const releaseDate = computed(() => {
-        let date = '';
-
-        if(props.item.is_locked){
-            date = props.item.unlock_date;
-        } else if(props.item.quarter_published){
-            date = props.item.quarter_published;
+        if(props.item.quarter_published){
+            return DateTime.fromSQL(props.item.quarter_published).toFormat('LLL d/yy');
         } else {
-            date = props.item.published_on;
+            return DateTime.fromSQL(props.item.published_on).toFormat('LLL d/yy');
         }
-
-        return DateTime.fromSQL(date).toFormat('LLL d/yy');
     });
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
     const thumbnailIcon = computed(() => {
@@ -66,7 +61,7 @@ export default function useCatalogueItem(props) {
             };
 
             if (!isReleased.value) {
-                return 'fa-lock';
+                return 'fa-clock';
             }
 
             if (noAccess.value) {
@@ -117,6 +112,7 @@ export default function useCatalogueItem(props) {
     return {
         is_added,
         progress_percent,
+        lesson_complete,
         noAccess,
         datePublshedOn,
         dateNow,

@@ -4,6 +4,7 @@ namespace App\Modules\Content\Services;
 
 use App\Models\Brand;
 use App\Models\TrialSection;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
@@ -54,10 +55,10 @@ class LearningPathsService
         $hideSection = $brand . '_trial_section_hide';
         if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels = count(
-                    user()->onboardingExperience->filter(function ($item) use ($brand) {
-                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                    })
-                ) > 0;
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
 
             return ($hasExperienceLevels) ? true : false;
         }
