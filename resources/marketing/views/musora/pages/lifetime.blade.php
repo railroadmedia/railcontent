@@ -177,9 +177,7 @@
                     And as your Musora Membership continues to expand with new courses, challenges, and instrument additions (and even more to come)...
                 </p>
                 <p class="mb-2 md:mb-4">
-                    <strong>
-                        We can’t continue offering Lifetime Memberships for $1200.
-                    </strong>
+                     We can’t continue offering Lifetime Memberships for $1200.
                 </p>
                 <p class="mb-2 md:mb-8">
                     The price is going up next year.
