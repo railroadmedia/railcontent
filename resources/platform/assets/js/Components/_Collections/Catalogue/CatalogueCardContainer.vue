@@ -214,10 +214,6 @@ const skeletonCardCount = computed(() => {
     return showGroupBy.value || props.isMiniCatalogue ? 5 : 12;
 })
 
-const showSkeletonLoader = computed(() => {
-    return !props.noSkeleton && collectionStoreLoading.value;
-})
-
 const showGroupBy = computed(() => {
     return tabData.value[filter.value.activeTab]?.groupByView;
 })
@@ -236,6 +232,10 @@ const isRecommendation = computed(() => {
 
 const isCoachShow = computed(() => {
     return props.contentTypeOverride === 'coach-show';
+})
+
+const showSkeletonLoader = computed(() => {
+    return !props.noSkeleton && collectionStoreLoading.value;
 })
 
 const handleProgressReset = (payload) => {
