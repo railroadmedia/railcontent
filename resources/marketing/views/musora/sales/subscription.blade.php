@@ -468,6 +468,7 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
         'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+        'orderUrl' => '/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&promo-code=musora-deal-2024&locked=true',
         ])
         @else
         @include('musora.sales.components.order-section-collage', [
@@ -506,7 +507,7 @@
         'countdownDate' => '2024-12-02 00:00:00',
         'promoVersion' => true
     ])
-@else
+    @else
     {{--    end of cyber monday--}}
     @include('_partials.components.countdown',[
         'countdownDate' => '2024-12-03 00:00:00',
