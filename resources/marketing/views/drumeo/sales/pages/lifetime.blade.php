@@ -121,7 +121,7 @@
                 </p>
                 <a 
                     href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" 
-                    class="join w-full sn:max-w-[350px] musora smaller mt-4 md:mt-0"
+                    class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
                 >
                     GET THE DEAL
                 </a>
