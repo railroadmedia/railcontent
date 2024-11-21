@@ -390,6 +390,7 @@
         ])
 
     @elseif(!empty($promoVersion))
+        @include('drumeo._partials.countdown-bundle-2024')
         @php
             require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
         @endphp
@@ -400,14 +401,16 @@
                 return in_array($bonus['sku'], $targetSkus, true);
             })->values();
         @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('drumeo._partials.bf-order-section-bonuses', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg',
         'topImage' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'logoHeight' => 'h-16 sm:h-20 md:h-24',
         'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
         'belowButton' => true,
+        'bundle'=> "deal",
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

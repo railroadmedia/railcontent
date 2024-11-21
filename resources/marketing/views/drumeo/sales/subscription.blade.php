@@ -556,6 +556,7 @@
         ])
 
     @elseif(!empty($promoVersion))
+        @include('drumeo._partials.countdown-bundle-2024')
 
         @php
             require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
@@ -568,14 +569,16 @@
             })->values();
         @endphp
 
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('drumeo._partials.bf-order-section-bonuses', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/drumeo-deal-logo.svg',
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'logoHeight' => 'h-16 sm:h-18',
         'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
         'belowButton' => true,
+        'bundle' => 'deal',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
