@@ -4,14 +4,14 @@ $bonuses = [
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-02.webp',
         'title' => 'New Piano Players Start Here',
-        'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
+        'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano.',
         'price' => floatval($productPrices['new-piano-players-start-here']->price),
         'sku' => 'new-piano-players-start-here'
     ],
     [
         'image' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-03.webp',
         'title' => 'Easy Chords',
-        'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+        'description' => 'You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
         'price' => floatval($productPrices['easy-chords']->price),
         'sku' => 'easy-chords'
     ],
@@ -265,7 +265,7 @@ $bonuses = [
     [
         'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-08.webp',
         'header' => 'Pianote Music Theory Poster Bundle',
-        'description' => '<p>Your loved one will easily learn the notes, chords, and scales with this high-quality posters.</p>',
+        'description' => 'Your loved one will easily learn the notes, chords, and scales with this high-quality posters.',
         'price' => 39,
         'sku' => 'music-theory-posters',
         'physical' => true
