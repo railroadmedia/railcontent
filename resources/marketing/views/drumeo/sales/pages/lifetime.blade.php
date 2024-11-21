@@ -5,9 +5,9 @@
     <meta property="og:title" content="Lifetime Membership | Drumeo">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="Drum lessons for LIFE.">
-    <meta property="og:description" content="Drum lessons for LIFE.">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
+    <meta name="description" content="Unlimited drum lessons for life.">
+    <meta property="og:description" content="Unlimited drum lessons for life.">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-share-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -26,7 +26,6 @@
     @include("drumeo.sales.partials._nav", [
     "cartVersion" => true
     ])
-
     @php
         if(!empty($products['DLM-Lifetime']->getPublicStockCount())) {
             $stock = $products['DLM-Lifetime']->getPublicStockCount();
@@ -45,7 +44,7 @@
 {{--    ])--}}
 
     <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-bg.webp') no-repeat center center; background-size: cover;">
-        <div class="container mx-auto text-center">
+        <div class="container mx-auto text-center px-4">
         <img alt="Bundle" class="h-10 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
                 <h2 class="leading-tight pt-3 lg:pt-6"><strong>Unlimited drum lessons for life.</strong></h2>
                 <h5 class="leading-tight italic"> Your last chance to grab a Lifetime Membership at the old price.</h5>
@@ -75,7 +74,7 @@
                 <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last-chance)</span></h2>
                 
                {{-- @if($stock > 0) --}}
-                   <a class="join musora mt-4 w-full anchor-slide text-black max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>
+                   <a class="join musora mt-4 w-full anchor-slide text-black sm:max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>
                    <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
                {{-- @else
                     <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
@@ -94,7 +93,7 @@
         </section>
     <section class="bg-gray-100 py-8 px-4 lg:py-24 lg:px-8">
         <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8">
-            <div class="w-full md:w-5/12">
+            <div class="w-full sm:w-10/12 md:w-5/12">
                 <img 
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/coach-collage.webp" 
                     alt="Group of people" 
@@ -122,7 +121,7 @@
                 </p>
                 <a 
                     href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" 
-                    class="join w-full max-w-[350px] musora smaller"
+                    class="join w-full sn:max-w-[350px] musora smaller mt-4 md:mt-0"
                 >
                     GET THE DEAL
                 </a>
@@ -137,10 +136,10 @@
         style="background:linear-gradient(to bottom, #131633, #000000);"
     >
         <div class="container mx-auto relative z-50 max-w-4xl">
-            <img alt="Bundle" class="h-10 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
+            <img alt="Bundle" class="h-10 sm:h-12 md:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
             <h3 class="leading-tight pt-2 md:pt-6"><strong>Your last chance to grab a Lifetime <br class="hidden md:block">Membership at the old price.</strong></h3>
             <div class="w-full pt-2 md:pt-6">
-            <img class="max-w-sm bg-center bg-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/order.webp" alt="Order Image">
+            <img class="max-w-sm bg-center bg-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/order.webp" alt="Lifetime Card Image">
                 <br>
                 {{-- <h2 class="leading-tight mt-4 sm:mt-6 mb-1">
                     @if(!empty($upgradeVersion))
@@ -150,8 +149,8 @@
                     @endif
                 </h2> --}}
                {{-- @if($stock > 0) --}}
-                    <h2 class="leading-none my-1 md:my-6"><strong>$1200 </strong><span class="text-musora text-2xl"> (last-chance)</span></h2>
-                    <a class="join musora w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
+                    <h2 class="leading-none my-4 md:my-6"><strong>$1200 </strong><span class="text-musora text-2xl"> (Only 100 left)</span></h2>
+                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
                     <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
                {{-- @else
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
