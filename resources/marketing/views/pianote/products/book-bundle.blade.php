@@ -101,7 +101,7 @@
     </section>
 
     @php
-        $videoTargetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'easy-chords', 'classical-piano-collection'];
+        $videoTargetSkus2 = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'easy-chords', 'classical-piano-collection'];
     @endphp
 
     <section class="pt-8 pb-16 lg:pb-28 px-4 sm:px-6 bg-white">
@@ -112,7 +112,7 @@
         </h5>
 
             @include('drumeo._partials.bf-bonus-section', [
-            'videoTargetSkus' => $videoTargetSkus,
+            'videoTargetSkus' => $videoTargetSkus2,
             ])
         </div>
     </section>

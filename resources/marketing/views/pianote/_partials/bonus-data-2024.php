@@ -127,6 +127,7 @@ $bonusVideos = [
         'header' => 'The Pianote BookBag',
         'description' => '<p>A handcrafted premium leather satchel for your music books, laptop, and life.</p><p class="my-2">Five separate internal compartments give you enough space for your music books, sheet music, notebooks, and a laptop.</p><p>This messenger bag is your everyday carry for the things that matter most.</p>',
         'badge' => '$159',
+        'vimeoId' => '913081651',
         'price' => 249,
         'sku' => 'book-bag'
     ],
