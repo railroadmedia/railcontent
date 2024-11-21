@@ -159,6 +159,7 @@ Route::domain('{musoraDomain}')
                         'student-collaborations',
                         'live-streams',
                         'solos',
+                        'challenges',
                         'gear-guides',
                         'performances',
                         'in-rhythm',
@@ -179,7 +180,7 @@ Route::domain('{musoraDomain}')
                     ])
                     ->name('platform.content-type-catalog');
 
-                Route::get('/{brand}/challenges', [ContentPagesController::class, 'challenges'])
+                Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenges'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.challenges');
 
