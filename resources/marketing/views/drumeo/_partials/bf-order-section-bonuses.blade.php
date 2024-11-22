@@ -3,47 +3,47 @@
         case 'kit':
             $borderColor = 'border-[#5FB2FF]';
             $textColor = 'text-[#5FB2FF]';
-            $bundlePrice = '<s class="opacity-50"> $1474</s><strong> $599</strong> <span class="text-[#5FB2FF]">(Save 59%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1474</s><strong> $599</strong> <span class="text-[#5FB2FF] text-xl md:text-3xl">(Save 59%)</span>';
             break;
         case 'ultimate':
             $borderColor = 'border-[#FF6F00]';
             $textColor = 'text-[#FF6F00]';
-            $bundlePrice = '<s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00]">(Save 54%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00] text-xl md:text-3xl">(Save 54%)</span>';
             break;
         case 'practice':
             $borderColor = 'border-[#FF0055]';
             $textColor = 'text-[#FF0055]';
-            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055]">(Save 67%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span>';
             break;
         case 'gift':
             $borderColor = 'border-[#41F70F]';
             $textColor = 'text-[#41F70F]';
-            $bundlePrice = '<s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F]">(Save 31%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span>';
             break;
         case 'challenge':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA]">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'deal':
             $borderColor = 'border-[#FFAC00]';
             $textColor = 'text-[#FFAC00]';
-            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00]">(Save 41%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00] text-xl md:text-3xl">(Save 41%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA]">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'book':
             $borderColor = 'border-[#7E56FF]';
             $textColor = 'text-[#7E56FF]';
-            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF]">(Save 41%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF] text-xl md:text-3xl">(Save 41%)</span>';
             break;
         default:
             $borderColor = 'border-none';
             $textColor = 'text-white';
-            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $200</strong> <span class="text-white">(Save 17%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $200</strong> <span class="text-white text-xl md:text-3xl">(Save 17%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
     }
 
@@ -140,7 +140,7 @@
                 <h2 class="leading-tight mt-6 mb-1 md:hidden">
                 {!!$bundlePrice!!}
                 </h2>
-                <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
+                <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
                     @if(!empty($CTA))
                         {{ $CTA }}
                     @else
@@ -243,11 +243,11 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="leading-tight mt-4 mb-4  ">
+            <h2 class="leading-tight mt-4 mb-4">
               {!!$bundlePrice!!}
-            </h3>
+            </h2>
             {{-- <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p> --}}
-            <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+            <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                 @if(!empty($CTA))
                     {{ $CTA }}
                 @else

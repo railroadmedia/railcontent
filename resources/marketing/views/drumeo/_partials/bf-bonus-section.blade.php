@@ -44,9 +44,8 @@
                                     {{ $bonusVideo['badge'] }}
                                 </span>
                             @endif
-
                             @if(!empty($bonusVideo['extraBadge']))
-                                <span class="text-base italic">
+                                <span class="text-base italic block sm:hidden">
                                     {{ $bonusVideo['extraBadge'] }}
                                 </span>
                             @endif
