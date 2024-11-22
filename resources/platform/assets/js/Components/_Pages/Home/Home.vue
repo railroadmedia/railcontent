@@ -261,10 +261,7 @@
     });
 
     //Refs
-    const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
-    const recSysPage = ref(1);
     const data = ref(null);
-    const error = ref(null);
 
     //Methods
     const openPlaylistModal = () => {

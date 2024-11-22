@@ -27,7 +27,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  userCompletedAccount: {
+  showOnboardingBanner: {
     type: Boolean,
     default: false,
   },
@@ -87,9 +87,9 @@ watch(
   { immediate: true }
 );
 watch(
-  () => props.userCompletedAccount,
-  (userCompletedAccount) => {
-    userStore.setCompletedAccount(userCompletedAccount)
+  () => props.showOnboardingBanner,
+  (showOnboardingBanner) => {
+    userStore.setShowOnboardingBanner(showOnboardingBanner)
   },
   { immediate: true }
 )
