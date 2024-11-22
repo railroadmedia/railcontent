@@ -125,7 +125,7 @@ import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
-import { usePlatformStore } from "../../../Stores/platform";
+import { usePlatformStore } from "@stores/platform";
 import { contentTypes } from "../../../utils";
 import ProgressBar from './ProgressBar.vue';
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
