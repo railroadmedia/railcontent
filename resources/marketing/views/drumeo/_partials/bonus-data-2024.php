@@ -4,11 +4,12 @@ $bonusVideos = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/nitro-max-new.webp',
         'header' => 'Alesis Nitro Max E-Kit | Drumeo Edition',
         'description' => '<p>Transform your room, apartment or townhouse into a drum studio.</p><p class="my-2">Drumeo partnered with Alesis to offer you the highest-rated beginner e-kit with one year of unlimited drum lessons. It\'s everything you need to play the drums. And with mesh heads, you can practice late without disturbing anyone.</p>',
-        'price' => 1065.00,
-        'badge' => '$599',
+        'price' => 599,
+        'badge' => null,
         'extraBadge' => 'Only Discounted With Full Bundle',
         'sku' => 'alesis-nitro-max-e-kit'
     ],
+    
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/AM.webp',
         'header' => 'Drumeo Annual Membership',

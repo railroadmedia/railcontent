@@ -58,8 +58,8 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/practice-bundle-logo.svg"><br>
-                <h2 class="leading-tight my-3 lg:my-6"><strong>Save $828.87 on most popular practice <br/> essentials + lessons. </strong></h2>
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
+                <h2 class="leading-tight my-3 lg:my-6"><strong>Save $828.87 on most popular practice <br class="hidden md:block"/> essentials + lessons. </strong></h2>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 text-sm md:text-base">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
                         PLAY-ALONG LESSONS
@@ -73,7 +73,7 @@
                         WORLD-CLASS TEACHERS
                     </span>
                 </div>
-                <img class="hidden md:inline object-cover max-w-3xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
+                <img class="hidden md:inline object-cover md:max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span></h2>
@@ -82,7 +82,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                        <p class="leading-tight text-sm text-musora mt-3"><em>Only {{ $products['alesis-ekit']->getStockAvailability() }} available.</em></p>
+                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 400 available.</em></p>
                     </div>
                 </div>
             </div>
@@ -146,8 +146,8 @@
             'logoHeight' => 'h-16 sm:h-18',
             'topImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-am.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/4',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $828.87 on most popular practice <br/> essentials + lessons.</strong></h2>
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12">
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $828.87 on most popular practice <br class="hidden md:block"/> essentials + lessons.</strong></h2>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12 text-sm md:text-base">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
                         PLAY-ALONG LESSONS
