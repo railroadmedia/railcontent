@@ -235,7 +235,7 @@
                         "href" => "/drumshop/eardrums",
                          "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->price),
-                         "title" => "Drumeo EarDRUM In-Ear Monitors",
+                         "title" => "Drumeo EarDrums In-Ear Monitors",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
                          'soldOut' => false,
                     ])

@@ -161,7 +161,7 @@ $bonuses = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-08.webp',
         'title' => 'Drumeo Headphones',
-        'description' => 'Studio-Quality Sound. The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.',
+        'description' => 'Studio-quality sound. The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.',
         'price' => 99.00,
         'shipping' => true,
         'physical' => true,
@@ -189,7 +189,7 @@ $bonuses = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-14.webp',
         'title' => '2 Pairs Of Drumsticks',
         'description' => 'Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability.',
-        'price' => 12.95, 
+        'price' => 12.95,
         'shipping' => true,
         'physical' => true,
         'sku' => 'Drumeo-VaterSticks-2',

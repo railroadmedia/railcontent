@@ -9,7 +9,7 @@ $bonusVideos = [
         'extraBadge' => 'Only Discounted With Full Bundle',
         'sku' => 'alesis-nitro-max-e-kit'
     ],
-    
+
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/AM.webp',
         'header' => 'Drumeo Annual Membership',
@@ -149,7 +149,7 @@ $bonusVideos = [
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/drumeo-eardrums-new.webp',
-        'header' => 'Drumeo EarDRUMs',
+        'header' => 'Drumeo EarDrums',
         'description' => '<p>The Drumeo EarDrums have helped 14,000 drummers protect their ears and play their favorite songs. </p><p class="my-2">Catch every detail.</p><p>Seal in the sound.</p>',
         'badge' => null,
         'price' => 149.00,
@@ -158,7 +158,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-headphones.webp',
         'header' => 'Drumeo Headphones',
-        'description' => '<p>Studio-Quality Sound.</p><p class="my-2">The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.</p>',
+        'description' => '<p>Studio-quality sound.</p><p class="my-2">The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.</p>',
         'badge' => null,
         'price' => 99.00,
         'sku' => 'headphones'
