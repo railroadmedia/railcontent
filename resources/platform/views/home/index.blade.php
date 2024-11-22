@@ -34,8 +34,8 @@
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
         :trial-section-redesign="{{ $trialSectionRedesign }}"
         :is-first-access="{{ $isFirstAccess ? 'true' : 'false' }}"
-        :explore-tasks="{{ json_encode($exploreTasks) }}"
-        :is-v2-user="{{ json_encode($homepageV2) }}"
+{{--         :explore-tasks="{{ json_encode($exploreTasks) }}"
+ --}}        :is-v2-user="{{ json_encode($homepageV2) }}"
     ></home>
 
 @include('partials._railanalytics-brand-tracking-iframe')
