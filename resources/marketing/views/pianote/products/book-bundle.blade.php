@@ -35,7 +35,6 @@
     </style>
 @stop()
 
-
 @section('body-data')
    x-data="{
         @foreach($bonusVideos as $bonusVideo)
@@ -142,13 +141,15 @@
             ])
     </div>
 
-     @php
-        $videoBonuses = [];
-        foreach ($bonusVideos as $bonusVideo) {
-            if (!empty($bonusVideo['vimeoId']) && in_array($bonusVideo['sku'], $videoTargetSkus)) {
-                $videoBonuses[] = ['name' => 'modal' . $bonusVideo['vimeoId'], 'video' => $bonusVideo['vimeoId']];
-            }
+    @php
+    $allVideoTargetSkus = array_merge($videoTargetSkus, $videoTargetSkus2);
+    
+    $videoBonuses = [];
+    foreach ($bonusVideos as $bonusVideo) {
+        if (!empty($bonusVideo['vimeoId']) && in_array($bonusVideo['sku'], $allVideoTargetSkus)) {
+            $videoBonuses[] = ['name' => 'modal' . $bonusVideo['vimeoId'], 'video' => $bonusVideo['vimeoId']];
         }
+    }
     @endphp
 
     @foreach ($videoBonuses as $modal)

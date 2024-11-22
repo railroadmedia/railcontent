@@ -21,6 +21,14 @@ $bonusVideos = [
         'header' => 'Pianote Annual Membership',
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
+        'offerPrice' => '<strong><span>$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
+        'sku' => 'pianote-membership-book'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/black-friday/pianote-deal/AM.webp',
+        'header' => 'Pianote Annual Membership',
+        'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
+        'vimeoId' => '785314388',
         'badge' => null,
         'offerPrice' => '<strong><span class="opacity-30 line-through">$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
         'sku' => 'pianote-membership-deal'
@@ -141,7 +149,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/PP.webp',
         'header' => 'Pianote Planner',
-        'description' => '<p>Always know exactly what to practice.</p><p class="my-2">The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.</p>',
+        'description' => '<p>Always know exactly what to practice.</p><p class="my-2">The Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.</p>',
         'badge' => null,
         'price' => 39,
         'sku' => 'pianote-practice-planner'
