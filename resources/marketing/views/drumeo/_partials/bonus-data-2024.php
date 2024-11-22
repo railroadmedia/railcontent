@@ -200,7 +200,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/quietpad.webp',
         'header' => 'QuietPad',
-        'description' => '<p>Essential tools to maximize your practice time and improve your technique.</p><p class="my-2">Remember the note names thanks to the Piano Key Design. Plus the rubber strip over your plastic keys. No messy residue!</p><p>And keep detailed notes with mechanical pencils, colored pencils, highlighters, and sticky notes.</p>',
+        'description' => '<p>Practice anywhere with two full-size playing surfaces.</p><p class="my-2">The portable, double-sided practice pad with different volumes so you can practice late into the night.</p>',
         'badge' => null,
         'price' => 40.00,
         'vimeoId' => '982740966',

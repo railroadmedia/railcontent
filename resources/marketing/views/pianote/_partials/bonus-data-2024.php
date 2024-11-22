@@ -13,7 +13,7 @@ $bonusVideos = [
         'header' => 'Pianote Annual Membership',
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
-        'offerPrice' => '<strong class="font-black">$240</strong><span class="text-xs"> for your first year</span>',
+        'price' => 240,      
         'sku' => 'pianote-membership'
     ],
     [
@@ -46,9 +46,9 @@ $bonusVideos = [
     [
         'image' => 'marketing/pianote/products/prima/bundle/EC.webp',
         'header' => 'Easy Chords',
-        'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“I just want to say thank you! My ability to choose which chord inversion to play next when I go through a progression has improved a lot after going through this course!” ~ Lars, Piantoe Student</strong></p>',
+        'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“I just want to say thank you! My ability to choose which chord inversion to play next when I go through a progression has improved a lot after going through this course!” ~ Lars, Pianote Student</strong></p>',
         'vimeoId' => '823788317',
-        'badge' => '42.33',
+        'badge' => '$42.33',
         'price' => 127,
         'sku' => 'easy-chords-challendge',
     ],
@@ -66,7 +66,7 @@ $bonusVideos = [
         'header' => '30-Day Blues Piano',
         'description' => '<p class="leading-tight">Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“It\'s been such life giving joy to practice with and learn from you daily!” ~ Kristyn, Pianote Student</strong></p>',
         'vimeoId' => '852795615',
-        'badge' => '42.33',
+        'badge' => '$42.33',
         'price' => 127,
         'sku' => '30-day-blues-piano-challendge',
     ],
@@ -84,7 +84,7 @@ $bonusVideos = [
         'header' => '30 Days To Better Technique',
         'description' => '<p>Improve your finger strength, coordination, and speed with GRAMMY-winner Jordan Rudess.</p><p class="my-2">The Dream Theater keyboardist will guide you through 30 days of exercises that WILL make you a better piano player…</p><p>Guaranteed.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“What an absolutely fantastic 30 day course and what an amazing teacher. Thank you Jordan and the Musora team ” ~ Paul, Pianote Student</strong></p>',
         'vimeoId' => '928599834',
-        'badge' => '42.33',
+        'badge' => '$42.33',
         'price' => 127,
         'sku' => '30-days-to-better-technique-challendge'
     ],
@@ -126,7 +126,6 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/BB.webp',
         'header' => 'The Pianote BookBag',
         'description' => '<p>A handcrafted premium leather satchel for your music books, laptop, and life.</p><p class="my-2">Five separate internal compartments give you enough space for your music books, sheet music, notebooks, and a laptop.</p><p>This messenger bag is your everyday carry for the things that matter most.</p>',
-        'badge' => '$159',
         'vimeoId' => '913081651',
         'price' => 249,
         'sku' => 'book-bag'

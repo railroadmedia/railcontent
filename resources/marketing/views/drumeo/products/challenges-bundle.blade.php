@@ -126,7 +126,7 @@
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-18',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Course For The Price Of 1</strong></h2>
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Courses For The Price Of 1</strong></h2>
                                 <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true',
             'bundle'=> "challenge",

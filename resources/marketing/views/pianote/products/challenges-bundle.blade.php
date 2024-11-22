@@ -93,6 +93,7 @@
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
+            'case' => 'challenges',
             ])
         </div>
     </section>
@@ -114,7 +115,7 @@
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/challenges-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-20',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Course For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',
+            'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Courses For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true',
             'bundle'=> "challenges-pianote",
             ])

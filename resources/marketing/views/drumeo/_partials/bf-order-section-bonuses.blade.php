@@ -38,7 +38,7 @@
         case 'book':
             $borderColor = 'border-[#7E56FF]';
             $textColor = 'text-[#7E56FF]';
-            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF] text-xl md:text-3xl">(Save 41%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF] text-xl md:text-3xl">(Save 69%)</span>';
             break;
         default:
             $borderColor = 'border-none';
