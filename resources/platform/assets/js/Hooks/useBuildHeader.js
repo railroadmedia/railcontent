@@ -24,7 +24,7 @@ export function useBuildHeader(progressPercent) {
         }
 
         // Add additional custom fields based on contentType if
-        if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenges') {
+        if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenge') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
             header.darkModeLogo = result.light_logo;
