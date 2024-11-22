@@ -397,7 +397,7 @@
     </section>
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"style="background: #F1EFED; color:#000;">
-            <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
+            <h2 class="leading-tight"><strong>Your new Pianote Prima <span class="hidden sm:inline">piano </span></strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
             <div class="container mx-auto z-10 relative max-w-3xl">
 
@@ -519,7 +519,7 @@
                                     <h5 class="mb-2"><strong>{!! $pack['header'] !!}</strong>
                                     </h5>
                                     <div class="flex items-center space-x-2 mb-4">
-                                        <span class="text-lg line-through opacity-30"><strong>${{ $pack['price'] }}</strong> Value</span>
+                                        <span class="text-lg opacity-30"><strong>${{ $pack['price'] }}</strong> Value</span>
                                         {{--<span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
                                             {{ $pack['badge'] }}
                                         </span>--}}
