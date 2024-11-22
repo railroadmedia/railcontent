@@ -14,7 +14,7 @@ $bonusVideos = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/AM.webp',
         'header' => 'Drumeo Annual Membership',
         'description' => '<p>Learn the drums with the world\'s best teachers, step-by-step lessons, and detailed song breakdowns.</p><p class="my-2">You\'ll have everything you need to learn beginner beats, drum set independence, new styles and beyond. It\'s the ultimate way to get started or get back into playing the drums.</p>',
-        'offerPrice' => '<strong class="font-black">$240</strong> <span class="text-xs">for your first year</span>',
+        'price' => 240,
         'vimeoId' => '898623255',
         'sku' => 'DLM-1-year'
     ],
