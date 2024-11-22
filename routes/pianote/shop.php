@@ -62,7 +62,7 @@ Route::domain('{pianoteDomain}')
             ]);
 
         Route::get('/{category}', [ShopController::class, 'shop'])
-            ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing']);
+            ->whereIn('category', ['shop', 'lessons', 'accessories', 'gifts', 'clothing']);
         ;
 
         Route::get('/shop/{productslug}', [ShopController::class, 'product']);

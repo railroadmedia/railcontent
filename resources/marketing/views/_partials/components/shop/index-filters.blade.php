@@ -23,15 +23,24 @@
                 >
                     Gear
                 </h4>
-                @if(empty($noClothing))
-                <h4
-                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
-                    x-bind:class="filter === 'clothing' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
-                    x-on:click="filter = 'clothing'"
-                >
-                    Clothing
-                </h4>
+                @if($brand === 'drumeo' || $brand === 'pianote')
+                    <h4
+                        class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"
+                        x-bind:class="filter === 'gifts' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
+                        x-on:click="filter = 'gifts'"
+                    >
+                        Gifts
+                    </h4>
                 @endif
+{{--                @if(empty($noClothing))--}}
+{{--                <h4--}}
+{{--                    class="px-2 sm:px-4 py-3 sm:py-4 inline-block cursor-pointer text-gray-400"--}}
+{{--                    x-bind:class="filter === 'clothing' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"--}}
+{{--                    x-on:click="filter = 'clothing'"--}}
+{{--                >--}}
+{{--                    Clothing--}}
+{{--                </h4>--}}
+{{--                @endif--}}
             </div>
             <div>
                 <select id="sortBySection" data-filter-type="sort-order" class="w-full text-gray-500 py-2 pl-2 pr-6 rounded-xl bg-white border border-gray-400">

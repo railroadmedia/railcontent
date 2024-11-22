@@ -265,6 +265,7 @@
                         'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-50',
                         "discounted_price" => 50,
                         "href" => "https://www.musora.com/electronic-gift-card?amount=50",
                         "price" =>  50,
@@ -273,6 +274,7 @@
                         'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-100',
                         "discounted_price" => 100,
                         "href" => "https://www.musora.com/electronic-gift-card?amount=100",
                         "price" =>  100,
@@ -281,6 +283,7 @@
                         'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
+                        "sku" => 'musora-gift-card-240',
                         "discounted_price" => 240,
                         "href" => "https://www.musora.com/electronic-gift-card?amount=240",
                         "price" =>  240,
