@@ -8,7 +8,7 @@
         case 'ultimate':
             $borderColor = 'border-[#FF6F00]';
             $textColor = 'text-[#FF6F00]';
-            $bundlePrice = '<s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00]">(Save 67%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00]">(Save 54%)</span>';
             break;
         case 'practice':
             $borderColor = 'border-[#FF0055]';
