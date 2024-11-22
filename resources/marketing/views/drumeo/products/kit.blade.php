@@ -288,15 +288,20 @@
                 <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> an Annual Membership to Drumeo.<br>
                     <em>+ 5 LIFETIME BONUSES</em></h5>
             @endif
-            <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
+            {{-- <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
                 @if ($fullPrice > floatval($productPrices['alesis-ekit']->discounted_price))
                     <s class="opacity-50">${{ $fullPrice }}</s>
-                    <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
+                    <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong> --}}
                     {{-- (Save {{ round(100 - (100 * (floatval($productPrices['alesis-ekit']->discounted_price) / floatval($productPrices['alesis-ekit']->price)))) }}%) --}}
-                @else
+                {{-- @else
                     <strong>${{ floatval($productPrices['alesis-ekit']->discounted_price) }}</strong>
                 @endif
-            </h4>
+            </h4> --}}
+              <h2 class="leading-tight mb-4 sm:mb-5">
+                    <s class="opacity-50">$1474</s>
+                    <strong class="font-black">$599</strong>
+                <span class="text-xl md:text-3xl text-[#5FB2FF]">(Save 59%)</span>
+            </h2>
             <div class="w-full max-w-xs mx-auto">
                 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
                     <a class="w-full join smaller blue" href="{{ $orderUrl }}">Buy Now</a>
