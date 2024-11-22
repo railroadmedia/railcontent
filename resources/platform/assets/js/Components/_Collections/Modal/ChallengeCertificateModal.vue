@@ -1,10 +1,6 @@
 <template>
-    <InfoModal
-        :selfContained="true"
-        class-override="tw-max-w-[980px] tw-w-full"
-        @onClose="() => emit('closeModal')"
-    >
-        <div class="tw-opacity-0 tw-absolute">
+    <div class="tw-max-w-[980px] tw-w-full tw-px-4 sm:tw-px-14 tw-py-10 tw-bg-white dark:tw-bg-[#081825]">
+        <div class="tw-opacity-0 tw-absolute tw-z-0">
             <!-- Certificate Content -->
             <div ref="certificateContent" class="tw-flex tw-justify-center tw-items-center" :class="addHeightToPdf ? 'tw-h-[800px]' : ''">
                 <div class="tw-text-center tw-relative tw-px-32">
@@ -51,13 +47,13 @@
                 </div>
             </div>
         </div>
-        <div class="tw-px-2 lg:tw-px-10">
+        <div class="tw-px-2 lg:tw-px-10 tw-relative tw-z-10">
             <img v-if="imageSrc" :src="imageSrc" class="tw-w-full tw-object-contain tw-mb-6" />
             <div class="tw-flex tw-justify-end">
                 <MuButton @click="generatePdf">Download</MuButton>
             </div>
         </div>
-    </InfoModal>
+    </div>
 </template>
 <script setup>
 import { ref, onMounted, computed } from 'vue';

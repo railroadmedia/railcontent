@@ -42,7 +42,7 @@
     </a>
 </template>
 <script setup>
-import { computed, onBeforeMount, ref } from "vue";
+import {computed, onBeforeMount, ref, watch} from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
@@ -81,16 +81,24 @@ const urlPath = computed(() => {
     }
 })
 
-onBeforeMount(() => {
-    const fetchData = async () => {
-        let data = await fetchChallengeIndexMetadata(props.item.id);
-        if(data.length > 0){
-            progressPercent.value = data[0].progress_percent;
-            is_enrolled.value = data[0].is_user_enrolled;
-            durationText.value = data[0].duration_text;
-        }
+const fetchData = async () => {
+    let data = await fetchChallengeIndexMetadata(props.item.id);
+    if(data.length > 0){
+        progressPercent.value = data[0].progress_percent;
+        is_enrolled.value = data[0].is_user_enrolled;
+        durationText.value = data[0].duration_text;
     }
+}
 
+onBeforeMount(() => {
     fetchData();
 })
+
+watch(
+    () => props.item.id,
+    (value) => {
+        fetchData();
+    },
+)
+
 </script>

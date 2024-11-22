@@ -12,7 +12,7 @@ export default function useCatalogueItem(props) {
 
     const progress_percent = ref(0);
     const lesson_complete = ref(false);
-
+    
     // Progress Percentage
     getProgressPercentage(props.item.id).then(value => {
         progress_percent.value = value;
@@ -31,7 +31,7 @@ export default function useCatalogueItem(props) {
 
     const dateNow = computed(() => Date.now());
 
-    const isReleased = computed(() => {
+   const isReleased = computed(() => {
         const datePublishedOn = new Date(props.item.published_on).getTime();
         const dateQuarterPublishedOn = props.item.quarter_published ? new Date(props.item.quarter_published).getTime() : null;
 
@@ -46,7 +46,6 @@ export default function useCatalogueItem(props) {
 
         return dateNow.value > datePublishedOn;
     });
-
     const releaseDate = computed(() => {
         if (props.item.quarter_published) {
             return getDate(props.item.quarter_published);
@@ -130,5 +129,6 @@ export default function useCatalogueItem(props) {
         renderLink,
         thumbnailType,
         contentModel,
+        isCompleted,
     };
 }
