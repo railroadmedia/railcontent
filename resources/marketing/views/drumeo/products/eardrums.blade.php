@@ -479,7 +479,7 @@
                     <img class="h-auto w-full sm:w-auto sm:h-56 lg:h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/features-01b.webp">
                     <div class="sm:px-6 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Catch every detail.</strong></h4>
-                        <p>Triple driver headphones (that means 3 tiny speakers) give you a full range of sound -- from low kick drums to high cymbal shots.</p>
+                        <p>Triple driver headphones (that means 3 tiny speakers) give you a full range of sound – from low kick drums to high cymbal shots.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center mb-7 sm:mb-10">

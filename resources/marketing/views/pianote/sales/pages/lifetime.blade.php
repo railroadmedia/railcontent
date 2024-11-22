@@ -100,7 +100,7 @@
                        <p class="text-left leading-relaxed mt-5">
                 Playing the piano makes your life better. It’s proven to improve your mood, memory, and cognitive function.
                 <br><br>
-                <strong>This isn’t just a hobby -- it’s a lifestyle.</strong>
+                <strong>This isn’t just a hobby – it’s a lifestyle.</strong>
                 <br><br>
                 That’s why we’re re-opening Lifetime Memberships for a limited time.
                 <br><br>

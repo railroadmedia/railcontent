@@ -854,7 +854,7 @@
                             <span><strong>But you must enroll before June 23 to have the best chance of getting the book
                                     before
                                     the Challenge starts.</strong></span> <br><br>
-                            Or -- choose the Annual Membership and you’ll get the book along with 7 other bonuses ($364
+                            Or – choose the Annual Membership and you’ll get the book along with 7 other bonuses ($364
                             value).
                         </p>
                     </div>

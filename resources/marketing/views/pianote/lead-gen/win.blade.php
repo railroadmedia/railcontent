@@ -119,7 +119,7 @@
                             you need to start playing piano
                         </h2>
                     <h6 class="leading-tight lg:mb-6"><strong><em>
-                        Introducing the Pianote Prima -- the BEST beginner digital piano.</em></strong></h6>
+                        Introducing the Pianote Prima – the BEST beginner digital piano.</em></strong></h6>
                 </div>
                 <div class="md:w-7/12">
                     <img class="md:hidden rounded-xl mb-6 w-full h-full object-cover opacity-0" onload="this.classList.remove('opacity-0')" loading="lazy" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/win/collage-m.webp" alt="intro image">

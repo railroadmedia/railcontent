@@ -81,7 +81,13 @@
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
             $bundles = [
-
+                [
+                    'slug' => '/drumshop/kit',
+                    'full' => true,
+                    'visible' => 1,
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bunde-full-m.webp',
+                ],
                     [
                         'slug' => '/drumshop/practice-bundle',
                     'full' => true,
@@ -96,14 +102,6 @@
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full.webp',
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full-m.webp',
                     ],
-
-                [
-                    'slug' => '/drumshop/kit',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bunde-full-m.webp',
-                ],
             ];
         @endphp
         <section x-show="filter === 'all'">
@@ -183,7 +181,7 @@
 
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/practice-bundle",

@@ -479,12 +479,12 @@
                 'weekNum' => 'Week 3',
                 'title' => 'Speed. How to practice and play fast.',
                 'excerpt' => 'Now it’s time to impress.',
-                'desc' => ' Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
+                'desc' => ' Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast – you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
                 'backHeader' => 'Here’s what you’ll get:',
                 'back' => [
                     [
                         'icon' => 'fa-sharp fa-light fa-circle-1',
-                        'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now -- with you.',
+                        'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now – with you.',
                     ],
                     [
                         'icon' => 'fa-sharp fa-light fa-circle-2',
@@ -492,7 +492,7 @@
                     ],
                     [
                         'icon' => 'fa-sharp fa-light fa-circle-3',
-                        'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
+                        'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act – it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
                     ],
                 ],
             ],
@@ -612,7 +612,7 @@
                                 <br><br>
                                 <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
                                 <br><br>
-                                That means you’ll have enough time to go through every lesson and play with Jordan - THREE times. And if -- after you’ve put in the work -- you don’t see real improvements to your technique... 
+                                That means you’ll have enough time to go through every lesson and play with Jordan - THREE times. And if – after you’ve put in the work – you don’t see real improvements to your technique... 
                                 <br><br>
                                 If your fingers don’t feel stronger and your hands aren’t more coordinated…
                                 <br><br>

@@ -401,7 +401,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img class="transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="Alphabet T" onload="this.classList.remove('opacity-0')" loading="lazy"></span>odd Sucherman has played more than 2000 rock shows — entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
+                <span class="first-letter"><img class="transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="Alphabet T" onload="this.classList.remove('opacity-0')" loading="lazy"></span>odd Sucherman has played more than 2000 rock shows — entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine – releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
                 <br><br>
                 And for the next six months, Todd will be sharing his “keys to the kingdom” with students around the world through The Rock Drumming Masterclass — a 26-week course that will give you the confidence you need to play ANY rock music you want.
                 <br><br>

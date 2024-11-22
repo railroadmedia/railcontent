@@ -110,7 +110,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/p4-practice-new.webp',
         'header' => 'Drumeo P4 Practice Pad',
-        'description' => '<p>The P4 Practice Pad is the most versatile practice pad in the world -- with four different playing surfaces to replicate different parts of the drum set. </p><p class="my-2">When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.</p>',
+        'description' => '<p>The P4 Practice Pad is the most versatile practice pad in the world – with four different playing surfaces to replicate different parts of the drum set. </p><p class="my-2">When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.</p>',
         'badge' => null,
         'price' => 79.00,
         'sku' => 'practicepad'
@@ -202,7 +202,7 @@ $bonusVideos = [
         'header' => 'QuietPad',
         'description' => '<p>Practice anywhere with two full-size playing surfaces.</p><p class="my-2">The portable, double-sided practice pad with different volumes so you can practice late into the night.</p>',
         'badge' => null,
-        'price' => 40.00,
+        'price' => 59,
         'vimeoId' => '982740966',
         'sku' => 'quietpad'
     ],

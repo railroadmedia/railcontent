@@ -301,7 +301,7 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="uppercase text-pianote"><strong>Step 2</strong></h5>
-                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!</p>
+                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all – fun! Each day you’ll unlock a new lesson. Give it a try!</p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                     x-on:click="stepTwo = true;">
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"

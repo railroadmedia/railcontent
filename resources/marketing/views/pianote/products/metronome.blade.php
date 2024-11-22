@@ -79,7 +79,7 @@
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
         <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight"><strong>You NEED a metronome.</strong></h2>
-            <p class="leading-normal mt-2 mb-5 mx-auto max-w-xl">It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust. The Pianote Metronome will help you keep perfect time -- every time.</p>
+            <p class="leading-normal mt-2 mb-5 mx-auto max-w-xl">It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust. The Pianote Metronome will help you keep perfect time – every time.</p>
             @php
                 $gridItems = [
                     [

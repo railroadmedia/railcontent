@@ -451,7 +451,7 @@
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="leading-tight"><strong><span class="text-pianote">STEP 2.</span><br>Press play and follow along.</strong></h5>
                 <p class="leading-tight my-5">Learn by PLAYING with a real teacher.<br>
-                    The sessions are short, focused, most of all -- fun! Each day you’ll unlock a new lesson.</p>
+                    The sessions are short, focused, most of all – fun! Each day you’ll unlock a new lesson.</p>
                 <img class="w-full rounded-xl cursor-pointer autoplay-video" x-on:click="stepTwo = true;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/step2.webp">
 {{--                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"--}}
 {{--                    x-on:click="stepTwo = true;">--}}

@@ -70,7 +70,7 @@
                 <img alt="Bundle" class="h-14 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg"><br>
                 <h2 class="leading-tight my-3"><strong>Save $100 + Get $635 In <br class="block sm:hidden"> Free Courses For Life.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 text-sm md:text-base">
-                    <span class="flex items-center"> 
+                    <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
                        PLAY-ALONG LESSONS
                     </span>

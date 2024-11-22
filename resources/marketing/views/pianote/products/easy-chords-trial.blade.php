@@ -43,22 +43,22 @@
             background: linear-gradient(180deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);
             }
         }
-    
+
        #special .splide__pagination {
-        bottom: 10px; 
+        bottom: 10px;
         display: flex;
         justify-content: center;
-        gap: 12px; 
+        gap: 12px;
         }
         #special .splide__pagination__page {
-            background-color: #fff; 
+            background-color: #fff;
             border-radius: 50%;
             border: 1px solid #0C1524;
             transition: background-color 0.3s;
         }
 
         #special .splide__pagination__page.is-active {
-            background-color: #0C1524; 
+            background-color: #0C1524;
         }
 
           .join.smaller {
@@ -82,7 +82,7 @@
     ])
 
     <header id="header-image" class="bg-no-repeat md:bg-cover md:bg-center pb-16 md:py-20" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/easy-chords-trial/header-bg-new.jpg'); background-color: #F2F9FF">
-       <img class="w-full bg-no-repeat bg-cover bg-center md:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords-trial/header-m-2.png"> 
+       <img class="w-full bg-no-repeat bg-cover bg-center md:hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords-trial/header-m-2.png">
         <div class="container mx-auto max-w-4xl px-5">
             <div class="flex flex-col items-center sm:flex-nowrap">
                 <div class="text-center md:text-left px-4 sm:px-0">
@@ -90,12 +90,12 @@
                         <h5 class="text-pianote uppercase tracking-widest font-bold py-2 md:py-4">Start Day 2 of</h5>
                         <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png" alt="logo">
                         <p class="mx-0 my-4 text-black" style="max-width: 450px;">
-                            You’ve done the hard part -- starting! Now keep the momentum going and try Easy Chords <strong>FREE.</strong>
+                            You’ve done the hard part – starting! Now keep the momentum going and try Easy Chords <strong>FREE.</strong>
                         </p>
                     </div>
                     <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">START FREE FOR 7 DAYS</a>
                 </div>
-                
+
             </div>
         </div>
     </header>
@@ -245,7 +245,7 @@
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                     x-on:click="trailer = true;" role="button">
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fa fa-play play-button z-10"></i>
-                
+
                     <div x-data="{ videoLoaded: false }">
                         <img src="{{ $poster }}" alt="Blurred Poster Image" class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl" x-show="!videoLoaded">
 
@@ -271,7 +271,7 @@
     </section>
 
  <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5" style="background:#ffffff;">
- <div class="container max-w-6xl mx-auto px-4 md:px-20">      
+ <div class="container max-w-6xl mx-auto px-4 md:px-20">
  <h1 class="font-lexend uppercase leading-none text-4xl pb-1 md:text-5xl"><strong>PLAY TO LEARN</strong></h1>
      <h5 class="text-center text-pianote font-semibold italic py-2 md:py-4">Improve your skills in just 10 minutes
          a day.</h5>
@@ -309,7 +309,7 @@
                          drag: 'free',
                          arrows: true,
                          gap: 10,
-                         pagination: true, 
+                         pagination: true,
                      },
                      800: {
                             perPage: 2,
@@ -466,7 +466,7 @@
                 <div x-ref="splide" class="splide mb-12 sm:mb-10 lg:mb-12 py-4">
                     <div class="splide__track">
                         <ul class="splide__list items-start" style="padding-top: 60px !important;">
-                            
+
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-4 lg:px-8 mr-4 text-center h-[420px] sm:h-[460px] lg:h-[440px]">
                                     <div class="mb-6" style="margin-top: -60px;">
@@ -483,7 +483,7 @@
                 </div>
             </div>
         </div>
-     </div>  
+     </div>
     </section>
 
     <section class="py-20 px-4 lg:px-6" style="background:#F2F9FF;">
@@ -495,7 +495,7 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/products/easy-chords/easy-chords-logo.png"
                     alt="logo">
                 <p class="my-6 text-black text-xl">
-                    You’ve done the hard part -- starting! <br>
+                    You’ve done the hard part – starting! <br>
                     Now keep the momentum going and try <br class="md:hidden"> Easy Chords <strong>FREE.</strong>
                 </p>
                 <a class="join smaller w-11/12 sm:max-w-[350px] bg-pianote" href="/choose-plan">START FREE FOR 7 DAYS</a>

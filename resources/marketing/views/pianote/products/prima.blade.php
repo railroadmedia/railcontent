@@ -127,7 +127,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container max-w-6xl mx-auto relative z-20">
                 @if(!empty($ultimate))
-                    {{-- <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg"> --}}
+                     <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
                     <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
@@ -156,7 +156,7 @@
                         Only <strong>$599</strong>
                     </h3>
                 @else
-                    {{-- <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg"> --}}
+                     <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
                     <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
@@ -196,7 +196,7 @@
                 <br><br>
                 What piano should I buy?
                 <br><br>
-                A piano is an investment -- and it can be an expensive one. And when you’re a beginner you often don’t know what features you need -- and what extras you’re paying for unnecessarily.
+                A piano is an investment – and it can be an expensive one. And when you’re a beginner you often don’t know what features you need – and what extras you’re paying for unnecessarily.
                 <br><br>
                 So we partnered with an experienced piano manufacturer to create the BEST 88-key digital piano for beginners.
                 <br><br>
