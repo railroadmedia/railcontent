@@ -247,10 +247,10 @@
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || lesson_complete"
+                    v-if="item.started || isCompleted"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            lesson_complete ? completedIcon : 'fa-adjust',
+                            isCompleted ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -367,7 +367,6 @@ const {
     thumbnailIcon,
     renderLink,
     progress_percent,
-    lesson_complete,
     isReleased,
     releaseDate,
     thumbnailType,
@@ -401,7 +400,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        "completed": lesson_complete.value,
+        "completed": isCompleted.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,

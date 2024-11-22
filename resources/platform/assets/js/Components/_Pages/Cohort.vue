@@ -268,6 +268,7 @@
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
             <div class="tw-text-center tw-mb-2">
+                <!-- TODO(challenge): Add conditional to only show for solo -->
                 <button @click="openActionModal" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
 
@@ -299,6 +300,7 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
+    <!-- TODO(challenge): Add is_solo property in props -->
     <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="cohort" @modal-close="closeNotificationModal" />
     <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
       :challenge="{
@@ -377,7 +379,6 @@ const enroll = async() => {
     }
 
     openChallengeNotificationModal.value = true;
-
 }
 
 const closeNotificationModal = () => {

@@ -19,8 +19,8 @@
         <!-- Left -->
         <div class="tw-shrink-0 tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
-            <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
-            <img class="tw-h-[70px] 2xl:tw-h-24 tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
+            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
             <MuButton class="tw-px-6" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
@@ -33,12 +33,12 @@
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
-                <div class="tw-mx-[44px] 3xl:tw-mx-5 tw-rounded-[10px] tw-overflow-hidden tw-aspect-square 3xl:tw-aspect-video tw-mb-5 tw-relative tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px]">
+                <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative" :class="showSquareThumbnail ? 'tw-aspect-square 3xl:tw-aspect-video tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-[44px] 3xl:tw-mx-5' : 'tw-max-w-[255px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5'">
                     <!-- Thumbnail (Video ratio) -->
-                    <img class="tw-w-full tw-hidden 3xl:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challengeThumbnail}`" />
+                    <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
                     <!-- TODO(challenge): square thumbnail-->
-                    <img class="tw-w-full 3xl:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
+                    <img :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -215,8 +215,12 @@ const actionText = computed(() => {
     }
 })
 
+const showSquareThumbnail = computed(() => {
+    return !hasChallengeStarted.value && isNextLessonLocked.value;
+})
+
 const challengeThumbnail = computed(() => {
-    if(!hasChallengeStarted.value){
+    if(!hasChallengeStarted.value && isNextLessonLocked.value){
         return props.challenge.thumbnail
     } else {
         //TODO(challenge): need to add conditional when current lesson is not completed
@@ -343,4 +347,6 @@ watch(
         }
     },
 )
+
+console.log(props.challenge)
 </script>

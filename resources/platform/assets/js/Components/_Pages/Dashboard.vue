@@ -64,7 +64,7 @@
 
             <!-- Challenge Awards -->
             <MiniCatalogueSection
-                v-if="awards.length"
+                v-if="awards && awards.length"
                 title="My Awards"
                 catalogue-type="challengeAward"
                 :pre-loaded-content="awards"

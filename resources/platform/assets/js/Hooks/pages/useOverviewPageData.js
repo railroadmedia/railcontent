@@ -19,12 +19,12 @@ export async function useOverviewPageData(contentType, parentType) {
     const { buildHeader } = useBuildHeader(progressPercent);
 
     try {
-    	if (parentType === 'challenges'){
+    	if (parentType === 'challenge'){
             const result = await fetchUserChallengeProgress(contentId);
             if(result){
                 data.value = {
                     children: result.lessons,
-                    header: buildHeader('challenges', result.lesson, progressPercent),
+                    header: buildHeader('challenge', result.lesson, progressPercent),
                     is_unlocked: result.user_data.is_unlocked,
                     lesson: result.lesson,
                     user_data: result.user_data,

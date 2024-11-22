@@ -222,9 +222,9 @@ const {
     thumbnailIcon,
     renderLink,
     progress_percent,
-    lesson_complete,
     isReleased,
     releaseDate,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const state = reactive({
@@ -355,16 +355,13 @@ const mappedData = computed(() => {
 const wrapperClasses = computed(() => {
     return {
     'no-access': noAccess.value,
-    completed: lesson_complete,
+    completed: isCompleted.value,
     [props.wrapperClassOverride]: props.wrapperClassOverride
 }});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && lesson_complete === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && isCompleted.value);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
-const isCompleted = computed(() => {
-    return lesson_complete;
-})
 
 const closeDropdown = () => {
     if (state.dropdownOpen) {
