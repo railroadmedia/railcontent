@@ -191,7 +191,7 @@ const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 const miniViewRowStyles = computed(() => {
     let rowStyles = '';
     if(props.page === 1){
-        rowStyles = `${rowStyles} lg:tw-grid-rows-none`;
+        rowStyles = `lg:tw-grid-rows-none`;
     }
     if (props.preLoadedContent.length > 3) {
         rowStyles = `${rowStyles} tw-grid-rows-2`;

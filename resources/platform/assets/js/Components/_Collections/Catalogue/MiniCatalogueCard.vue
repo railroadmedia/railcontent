@@ -119,7 +119,7 @@
     </div>
 </template>
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref } from 'vue';
 import { PlusIcon, ChevronRightIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
@@ -134,12 +134,6 @@ import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { userId, brand } = storeToRefs(userStore);
-
-onMounted(() => {
-    console.log(props.item)
-    console.log(props.item.title)
-    console.log(props.item.difficulty)
-});
 
 const props = defineProps({
     index: {
@@ -201,7 +195,6 @@ const isSongContent = computed(() => {
 })
 
 const contentTypeString = computed(() => {
-console.log(props.item.title, props.contentType, contentTypes[props.contentType])
 if (props.contentType && contentTypes[props.contentType]?.singular) {
         return contentTypes[props.contentType].singular
     }

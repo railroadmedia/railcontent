@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import NewMusoraIcon from '../NewMusoraIcon/NewMusoraIcon.vue';
+import NewMusoraIcon from '@collections/NewMusoraIcon/NewMusoraIcon.vue';
 import { useUserStore } from "@stores/user";
 import { usePageContainerStore } from '@stores/pageContainer';
 import { storeToRefs } from "pinia/dist/pinia";
