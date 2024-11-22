@@ -64,7 +64,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
         'header' => '30-Day Blues Piano',
         'description' => '<p>Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p>',
-        'vimeoId' => '852795615',
+        'vimeoId' => '879913986',
         'badge' => null,
         'price' => 127,
         'sku' => '30-day-blues-piano'
@@ -73,7 +73,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/products/prima/bundle/30DBP.webp',
         'header' => '30-Day Blues Piano',
         'description' => '<p class="leading-tight">Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“It\'s been such life giving joy to practice with and learn from you daily!” ~ Kristyn, Pianote Student</strong></p>',
-        'vimeoId' => '852795615',
+        'vimeoId' => '879913986',
         'badge' => '$42.33',
         'price' => 127,
         'sku' => '30-day-blues-piano-challendge',

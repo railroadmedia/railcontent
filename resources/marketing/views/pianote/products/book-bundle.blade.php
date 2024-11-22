@@ -35,6 +35,7 @@
     </style>
 @stop()
 
+
 @section('body-data')
    x-data="{
         @foreach($bonusVideos as $bonusVideo)
@@ -60,7 +61,7 @@
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
         'noBreadcrumb' => true,
     ]) --}}
-     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
+     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[650px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/book-bundle-logo.svg"><br>
@@ -86,10 +87,10 @@
         $videoTargetSkus = ['pianote-membership', 'book-bag', 'practice-kit', 'little-book-bundle', 'piano-chords-and-scales-guide', 'pianote-practice-planner', 'classical-piano-pieces'];
     @endphp
 
-    <section class="pt-8 pb-16 sm:pt-16 lg:pt-20 px-4 sm:px-6 bg-white">
+    <section class="pt-8 pb-4 lg:pb-16 sm:pt-16 lg:pt-20 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
          <h1 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h1>
-        <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8 max-w-4xl">
+        <h5 class="leading-normal text-center mb-4 lg:pb-6 md:px-8 max-w-4xl">
         Piano players LOVE books. That’s why we’ve loaded this bundle with practice books, planners, and songbooks to fill your shelves.<br><br>Improve your chording, plan and track your progress, and play the most beautiful piano pieces ever written.
         </h5>
 
@@ -103,10 +104,10 @@
         $videoTargetSkus2 = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'easy-chords', 'classical-piano-collection'];
     @endphp
 
-    <section class="pt-8 pb-16 lg:pb-28 px-4 sm:px-6 bg-white">
+    <section class="pb-16 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
          <h1 class="leading-tight text-center mb-3"><strong>Bonus lessons.  <br> Yours for life. </strong></h1>
-        <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8 max-w-4xl">
+        <h5 class="leading-normal text-center mb-4 lg:pb-6 md:px-8 max-w-4xl">
        You’ll get LIFETIME access to all these courses when you join Pianote. Even if you don’t renew your membership. These lessons are yours to keep for life.<br><br> Start learning, improve your chording and technique. Play the Blues and beautiful Classical piano. It’s all here.
         </h5>
 
@@ -116,7 +117,7 @@
         </div>
     </section>
 
-    <div x-data="{lazyLoad: false}">
+    <div x-data="{lazyLoad: false}" class="pt-10 lg:pt-16">
          @include('musora.sales.components.guarantee-section', [
         'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',

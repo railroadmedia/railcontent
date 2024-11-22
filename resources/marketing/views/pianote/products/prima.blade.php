@@ -371,7 +371,7 @@
         </div>
     </section> --}}
 
-    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center @if(!empty($lifetime)) hidden @endif">
+    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center hidden @if(!empty($lifetime)) hidden @endif">
         <img class="h-12 sm:h-16 md:h-24 inline mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1300x0/marketing/pianote/products/prima/headline.webp">
 
         <p class="text-lg py-2 md:py-4">
@@ -624,7 +624,7 @@
 
                         @if(!empty($ultimate))
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
-                            <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate Bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
 
                         <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
                         Only <s class="opacity-50">$1642</s> <strong>$799</strong>
@@ -641,13 +641,13 @@
                             </picture>
                         @else
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
-                            <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
 
-                        <h4 class="my-4">
+                        <h3 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
-                        </h4>
+                        </h3>
                         <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
-                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
+                        <a href="/shop/prima-ultimate"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>

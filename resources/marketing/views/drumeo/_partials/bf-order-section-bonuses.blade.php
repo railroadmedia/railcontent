@@ -223,7 +223,7 @@
                             @endif --}}
                             <span style="display:inline-block;">
                             @if(!empty($bonus['price']))
-                                    <s class="opacity-60">${{ $bonus['price'] }}</s>
+                                    ${{ $bonus['price'] }}
                             @endif
                             <strong class="{{ $textColor }}">FREE</strong>
                             <span class="text-white italic block">Lifetime Access</span>
@@ -249,9 +249,9 @@
                             {{-- @if(!empty($bonus['title']))
                                 <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             @endif --}}
-                            <span style="display:inline-block;">
+                            <span style="display:inline-block;" class="opacity-60">
                             @if(!empty($bonus['price']) && $bundle != 'challenge' && $bundle != 'challenges-pianote')
-                                <s class="opacity-60">${{ $bonus['price'] }} Value</s>
+                                ${{ $bonus['price'] }} Value
                             @endif
 {{--                                @if(!empty($bonus['customText']))--}}
 {{--                                    <strong class="{{ $textColor }}">{{ $bonus['customText'] }}</strong>--}}

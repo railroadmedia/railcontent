@@ -174,7 +174,7 @@
                 <p class="mb-2 md:mb-4">
                      We can’t continue offering Lifetime Memberships for $1200.
                 </p>
-                <p class="mb-2 md:mb-8">
+                <p class="mb-2 md:mb-4">
                     The price is going up next year.
                 </p>
                 <p class="mb-2 md:mb-8">

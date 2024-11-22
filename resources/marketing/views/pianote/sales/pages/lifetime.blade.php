@@ -137,7 +137,7 @@
                    We simply can’t keep offering Lifetime Memberships for $1200.
                 </strong>
                 </p>
-                <p class="mb-2 md:mb-8">
+                <p class="mb-2 md:mb-4">
                     The price will be going up next year.
                 </p>
                  <p class="mb-2 md:mb-8">
