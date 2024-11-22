@@ -150,7 +150,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/drumeo-eardrums-new.webp',
         'header' => 'Drumeo EarDrums',
-        'description' => '<p>The Drumeo EarDrums have helped 14,000 drummers protect their ears and play their favorite songs. </p><p class="my-2">Catch every detail.</p><p>Seal in the sound.</p>',
+        'description' => '<p>Protect your ears and play your favorite songs.</p><p class="my-2">The Drumeo EarDrums have helped 14,000+ drummers practice, tour, and listen to music in all different situations. Now they’re back in black with upgraded cables and a custom hard case.</p><p>You’ll never leave home without them.</p>',
         'badge' => null,
         'price' => 149.00,
         'sku' => 'eardrums'
@@ -158,7 +158,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/drumeo-headphones.webp',
         'header' => 'Drumeo Headphones',
-        'description' => '<p>Studio-quality sound.</p><p class="my-2">The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.</p>',
+        'description' => '<p>The perfect headphones for your E-kit.</p><p class="my-2">The Drumeo Headphones deliver studio-quality sound, all-day comfort, and improved low-end for E-Kit bass frequencies.</p><p>That means you can practice longer without hurting your ears.</p>',
         'badge' => null,
         'price' => 99.00,
         'sku' => 'headphones'

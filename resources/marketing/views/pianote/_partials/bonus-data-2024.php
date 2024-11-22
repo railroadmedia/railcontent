@@ -5,7 +5,7 @@ $bonusVideos = [
         'header' => 'Pianote 1-Year Access Pass',
         'description' => '<p>The one-year access pass for gifting a full year of lessons without an ongoing subscription. You’ll get a physical access pass that you, or anyone, can redeem anytime – loaded with the lessons they’ll love to reach all of their goals on the piano.</p>',
         'vimeoId' => '785314388',
-        'offerPrice' => '<strong class="font-black">$240</strong>',
+        'offerPrice' => '<span class="opacity-30"><strong><s>$240</strong> Value</s></span>',
         'sku' => '1-year-membership'
     ],
     [
