@@ -12,13 +12,14 @@ use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
+use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
+use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
@@ -31,7 +32,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         private CommentService $commentService,
         private PostRepository $postRepository,
         private LearningPathsService $learningPathsService,
-
+        private ExploreTasksService $exploreTasksService
     ) {
     }
 
@@ -69,6 +70,8 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
 
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
+
         return [
             'user' => $userArray,
             'subscriptionIntervalType' => $user->subscriptionIntervalType(),
@@ -90,7 +93,9 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_learning_paths_on_homepage' => $this->learningPathsService->showLearningPaths(brand()),
             'show_new_learning_paths' => $this->learningPathsService->showNewLearningPaths(),
             'homepage_v2' => $homepageV2,
-            'is_first_access' => user()->isFirstAccess()
+            'explore_tasks' => $userTasks,
+            'is_first_access' => user()->isFirstAccess(),
+            'brand_minutes_practiced' => $user->getBrandMinutesPracticed(),
         ];
     }
 

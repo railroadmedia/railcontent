@@ -12,11 +12,39 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+
+    <style>
+        /*  Carousel   */
+        .splide__pagination__page.is-active {
+            background: white;
+            transform: none !important;
+        }
+        .splide__arrow svg{
+            fill: #0B76DB !important;
+        }
+
+        .splide__arrow--next {
+            right: -12px;
+        }
+
+        @media (min-width: 1140px) {
+            .splide__arrow--next {
+                right: -100px;
+            }
+        }
+    </style>
+@endsection
+
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    }'
 @endsection
 
 @section('global-body')
@@ -39,18 +67,16 @@
                     <p class="mb-4">
                         Always wanted to play drums? Ready for a kit upgrade?
                         <br><br>
-                        We’re giving away a fully-loaded Yamaha Stage Custom drum kit (with cymbals & hardware). And all you have to enter is take a week of free drum lessons.
-                        <br><br>
-                        Simply start a FREE 7-day trial of Drumeo between <span class="text-white font-extrabold">August 6-15</span> and you’ll be automatically entered to win.
+                        We’re giving away a fully-loaded Yamaha Stage Custom drum kit (with cymbals & hardware). All you have to do to enter is drop your email address below by <strong>November 22nd</strong>.
                     </p>
 
                     <p class="hidden sm:inline-block mb-3 text-sm">
-                        <i class="fas fa-check text-drumeo"></i> No purchase necessary<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> Cancel anytime<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check text-drumeo"></i> Worldwide entry</p>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens Aug 6th</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+                        <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">
+                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Worldwide entry</p>
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                         <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
@@ -84,7 +110,7 @@
                         <br><br>
                         Made from 100% birch wood, these drums offer short decay, quick attack and a versatile sound that suits any genre. You’ll be ready to start jamming along with your favorite songs – and taking your drumming to the next level.
                         <br><br>
-                        This kit retails for $799 USD–
+                        This kit retails for $1499 USD–
                         <br><br>
                         <strong>But you’ll have a chance to win it FREE.</strong>
                     </p>
@@ -128,6 +154,75 @@
 
     <section class="text-center py-20 px-4 md:px-6" style="background:#f6f8fc;">
         <div class="max-w-4xl container mx-auto">
+            <h3 class="font-black leading-normal" style="color:#2A2F34;">Yeah, it’s legit.</h3>
+            <h5 class="leading-tight mb-5">Drumeo runs kit giveaways a couple of times per year. Here<br class="hidden sm:inline"> are some heartwarming stories from (lucky) past winners:</h5>
+            <div class="max-w-5xl mx-auto px-5 sm:px-6 mb-10 sm:mb-0">
+                <div
+                    x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            classes: {
+                                    arrow: 'hidden',
+                                    pagination: 'splide__pagination -bottom-10',
+                            },
+                            gap: '1rem',
+                            perPage: 2,
+                            perMove: 1,
+                            focus: 0,
+                            interval: 2000,
+                            breakpoints: {
+                                767: {
+                                    perPage: 1.5,
+                                    drag   : 'free',
+                                    snap   : false,
+                                },
+                            },
+                        }).mount()
+                    },
+                }"
+                >
+                    <div x-ref="splide" class="splide sm:mb-9">
+                        <div class="splide__track">
+                            <ul class="splide__list items-start" style="padding-top: 60px !important;">
+                                @php
+                                    $testimonials = [
+                                     [
+                                         'location' => 'France',
+                                         'name' => 'Steph C.',
+                                         'comment' => '',
+                                         'img' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/winner1.jpg',
+                                     ],
+                                     [
+                                         'location' => 'Belgium',
+                                         'name' => 'Stephanie',
+                                         'comment' => 'Almost 1 year ago, Drumeo did a giveaway: You had the chance to win an amazing drum kit from Yamaha, and all you had to do was enter your email address, so I did.<br><br>Shortly after that, I received an email from Drumeo (Kyle) to let me know I’ve won the drum kit! At first, I couldn’t believe it. But when I saw a video on Instagram where I heard my name, I then realised I’ve really won. I couldn’t be happier!!<br><br>On the 22nd of December, the drum kit arrived at my home. It was the best Christmas gift I’ve ever received.<br><br>As soon as I could, I started to assemble it. What an amazing and beautiful drum kit! Since that day I have enjoyed playing the drums even more.<br><br>Thank you very much Drumeo for making this happen!!<br><br>Next month there is another giveaway, so I would like to say: Good luck everybody.',
+                                         'img' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/winner2.jpg',
+                                     ],
+                                 ];
+                                @endphp
+                                @foreach ($testimonials as $testimonial)
+                                    <li class="splide__slide bg-white rounded-xl py-6 px-3 sm:px-6 text-center">
+{{--                                        <div class="-mt-10 mb-6">--}}
+{{--                                            <img class="rounded-full w-[90px] h-[90px] object-cover transition-opacity opacity-0"--}}
+{{--                                                loading="lazy" onload="this.classList.remove('opacity-0')"--}}
+{{--                                                src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />--}}
+{{--                                        </div>--}}
+                                        <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
+                                        <p class="leading-tight"><i>{!! $testimonial['location'] !!}</i></p>
+                                        <p class="leading-tight mt-2 mb-3">{!! $testimonial['comment'] !!}</p>
+                                        <img class="w-full rounded-xl max-w-xs mx-auto" src="{{ $testimonial['img'] }}">
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center py-20 px-4 md:px-6" style="background:#fff;">
+        <div class="max-w-4xl container mx-auto">
             <h4 class="font-extrabold leading-tight mb-5" style="color:#2A2F34;">
                 You’ve won a drum set. <br>
                 Now learn how to play it…
@@ -146,7 +241,7 @@
                         <br><br>
                         And even if you don’t land the big prize (but you probably will, right?), you still have a chance to win unlimited drum lessons for a year.
                         <br><br>
-                        We’re giving away 5 annual Drumeo Memberships as runner-up prizes. Good luck!
+                        We’re giving away <strong>5 annual Drumeo Memberships</strong> as runner-up prizes. Good luck!
                     </p>
                 </div>
             </div>
@@ -154,7 +249,7 @@
     </section>
 
     {{-- diagonal line --}}
-    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #f6f8fc calc(50% + 1px));"></div>
+    <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6 text-white" style="background: linear-gradient(to bottom, #0b76da, #185691);">
         <div class="max-w-md md:max-w-3xl mx-auto text-center">
             <svg class="inline-block h-28 relative z-10 mb-12" xmlns="http://www.w3.org/2000/svg" width="200" height="200"
@@ -188,7 +283,7 @@
                 </div>
             </div>
             <div class="inline-block italic bg-musora rounded-xl text-black py-4 px-6">
-                <h6><strong><em>The winner will be announced during a LIVE event on August 17th!</em></strong></h6>
+                <h6><strong><em>The winner will be announced during a LIVE event!</em></strong></h6>
             </div>
         </div>
     </section>
@@ -210,9 +305,9 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/order-bg.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
-            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 6, 0, 0, 0, 'America/Vancouver'))
-                <span class="join sold-out smaller w-full">Opens Aug 6th</span>
-            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 8, 16, 0, 0, 0, 'America/Vancouver'))
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
+                <span class="join sold-out smaller w-full">Opens Nov 12th</span>
+            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
                 <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
             @else
                 <span class="join sold-out smaller w-full">this offer has now ended</span>
@@ -228,25 +323,15 @@
         </div>
     </section>
 
-    @include('pianote.lead-gen.partials.video-player',[
-        "name" => "trailer",
-        "vimeoId" => "767456067",
-    ])
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
         ])
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
     @include('_partials.components.countdown',[
     'countdownDate' => '2023-07-10 00:00:00',

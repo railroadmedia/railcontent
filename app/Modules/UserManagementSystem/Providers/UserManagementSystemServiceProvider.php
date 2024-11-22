@@ -9,7 +9,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Listeners\ExploreTasksListener;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railforums\Events\PostCreated;
 
 class UserManagementSystemServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,23 @@ class UserManagementSystemServiceProvider extends ServiceProvider
     {
         parent::__construct($application);
     }
+
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        PostCreated::class => [
+            ExploreTasksListener::class . '@handlePostCreated'
+        ],
+        UserCreated::class => [
+            ExploreTasksListener::class . '@handleUserCreated'
+        ],
+        UserContentProgressSaved::class => [
+            ExploreTasksListener::class . '@handleUserContentProgressSaved'
+        ],
+    ];
 
     /**
      * Bootstrap the application services.

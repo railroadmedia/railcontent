@@ -1,0 +1,254 @@
+@php
+    require_once(resource_path('marketing/views/guitareo/_partials/homepage-data.php'));
+@endphp
+
+@extends('musora._partials.layout', [
+    "hideJoin" => true,
+])
+
+@section('head-includes')
+
+    <title>Access Pass Redeem | Guitareo</title>
+    <meta name="description" content="To redeem your access pass enter your code below!">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <style>
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent;
+        }
+
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder {
+            color:#AAA;
+        }
+
+        input::-moz-placeholder,
+        textarea::-moz-placeholder {
+            color:#AAA;
+        }
+
+        input:-ms-input-placeholder,
+        textarea:-ms-input-placeholder {
+            color:#AAA;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color:#AAA;
+        }
+
+        .error {
+            color:red;
+            font:500 20px "Open Sans", sans-serif;
+        }
+
+        input.jq-couponcode-part {
+            width:69px;
+        }
+
+        input.jq-couponcode-good {
+            background-color:#77ff77;
+        }
+
+        input.jq-couponcode-good-nohighlight {
+            text-align:center;
+            padding:2px 10px;
+        }
+
+        input.jq-couponcode-bad {
+            background-color:#ff7777;
+        }
+
+        .jq-couponcode-sep {
+            width:6px;
+        }
+
+        .apply {
+            background:#00060B;
+            border-radius:70px;
+            color:#FFF;
+            font:400 28px/60px "Bebas Neue", sans-serif;
+            text-transform:uppercase;
+            height:60px;
+            width:100%;
+            margin:20px auto 0;
+            border:none;
+            cursor:pointer;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            background:#FFF;
+            color:#000;
+            border:1px solid #ccc;
+            font:400 20px/20px "Open Sans", sans-serif;
+            margin:0;
+            padding:15px 20px;
+            box-sizing:border-box;
+            box-shadow:none !important;
+            border-radius:100px;
+        }
+
+        .default-form-field {
+            width:100%;
+        }
+
+        .help-message {
+            color:#666;
+            font:400 16px "Open Sans", sans-serif;
+            padding:0 0.9375rem;
+            margin-bottom:10px;
+        }
+
+        .validation-error {
+            color: red;
+            font: 600 20px/1em "Open Sans", sans-serif;
+        }
+
+        #commentform .code-input {
+            text-align:center;
+            display:inline-block;
+            margin:0;
+            font-size:10px;
+        }
+
+        .redeem-switcher {
+            font:400 16px "Open Sans", sans-serif;
+            text-align:center;
+            display:block;
+            margin:0 auto 5px;
+        }
+
+        .input-describer {
+            font:900 20px "Open Sans", sans-serif;
+            margin:15px auto 10px;
+        }
+
+        @media only screen and (min-width:40em) {
+            .redeem-switcher {
+                margin:0 auto 15px;
+            }
+
+            #commentform .code-input {
+                font-size:16px;
+                width:95%;
+            }
+        }
+
+        .apply {
+            background:#ffae00;
+            color:#000;
+        }
+
+        .apply:hover {
+            background:#ffb61a;
+            color:#000;
+        }
+    </style>
+    <style>
+        .apply {
+            background:#00C9AC;
+        }
+
+        .apply:hover {
+            background:#00e3c5;
+        }
+    </style>
+@endsection
+
+@section('body-data')
+    x-data ='{
+        tos: false,
+        lazyLoad: false,
+    }'
+@endsection
+
+@section('layout-body')
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="container mx-auto max-w-3xl">
+            <div class="mb-2 align-middle flex items-center justify-center w-full">
+                <img class="inline-block h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/headrush-logo.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
+                <img class="inline-block h-7 sm:h-12 transition-opacity opacity-0" src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+            </div>
+            <h3 class="leading-tight mt-4 mb-3"><strong>Congratulations on your<br class="hidden sm:inline"> purchase of a HeadRush Pedal!</strong></h3>
+            <h5 class="leading-tight mt-2 mb-6 sm:mb-8 mx-auto max-w-xl">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
+            <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+        </div>
+    </div>
+    <div class="py-8 sm:py-12 px-4 sm:px-6">
+        <div class="container mx-auto max-w-3xl">
+             @if($newAccount)
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong><b>Existing Member?</b>
+                        <br>
+                        <a class="text-guitareo underline"
+                                href="/headrush/existing"
+                        >Click here to add to your account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for new accounts)</em>
+                </div>
+
+                @foreach ($errors->all() as $error)
+                    <br>
+                    <p class="validation-error">{{ $error }}</p>
+                @endforeach
+
+                @include('musora.pages.redeem._redeem-form', [
+                    'existing' => !$newAccount,
+                    'buttonText' => 'Click To Redeem &raquo;',
+                    'buttonColor' => 'bg-guitareo text-white',
+                ])
+             @else
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong> <b>Not already a member?</b>
+                        <br>
+                        <a class="text-guitareo underline" href="/headrush">Click here to redeem on a new account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for existing members)</em>
+                </div>
+
+                @foreach ($errors->all() as $error)
+                    <br>
+                    <p class="validation-error">{{ $error }}</p>
+                @endforeach
+
+                @include('musora.pages.redeem._redeem-form', [
+                    'existing' => !$newAccount,
+                    'buttonText' => 'Click To Redeem &raquo;',
+                    'buttonColor' => 'bg-guitareo text-white',
+                ])
+             @endif
+
+
+            <br>
+            @if(!$newAccount)
+                <p class="help-message">
+                    ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
+                </p>
+            @endif
+
+            <p class="help-message">
+                ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
+            </p>
+        </div>
+    </div>
+
+    @php
+        $gridItems = $guitareo['gridItems'];
+    @endphp
+
+    @include('musora.sales.components.reason-cards-section', [
+        'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
+    ])
+
+    @include('_partials.components.forms.redeem-form-script', [
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
+        'existingMember' => !$newAccount,
+    ])
+@endsection

@@ -1,7 +1,9 @@
 <template>
     <div class="tw-relative tw-flex tw-flex-row tw-items-center tw-text-[#00101D] tw-border-0 tw-border-b tw-border-solid tw-border-gray-200 dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039]/50 hover:tw-bg-[#F5F5F6] tw-transition">
-        <a :href="thread.url+'?sortby_val=-published_on'" 
+        <a :href="thread.url+'?sortby_val=-published_on'"
            :class="[brandHoverColor]"
+           :id="`thread-${thread.id}`"
+           :datatest-id="`thread-${thread.id}`"
            class="tw-py-4 tw-pl-2 tw-transition-colors tw-inline-flex tw-no-underline tw-w-full" 
         >
             <!-- Avatar -->

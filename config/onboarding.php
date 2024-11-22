@@ -62,5 +62,63 @@ return [
                 'Participate in a singing community'
             ]
         ]
-    ]
+    ],
+    'default_tasks' => [
+        [
+            'title' => 'Take a Tour',
+            'hook' => 'take-a-tour',
+            'description' => 'Discover our top features',
+            'icon' => 'map',
+            'expires_in_days' => 30,
+        ],
+        [
+            'title' => 'Complete Your Account',
+            'hook' => 'complete-your-account',
+            'description' => 'Unlock your recommended lessons',
+            'icon' => 'profile',
+        ],
+        [
+            'title' => 'Introduce Yourself',
+            'hook' => 'introduce-yourself',
+            'description' => 'Connect with other musicians',
+            'icon' => 'forum',
+        ],
+        [
+            'title' => 'Start the METHOD',
+            'hook' => 'start-the-method',
+            'description' => 'Follow a 10-level curriculum',
+            'icon' => 'path',
+        ],
+    ],
+    'default_playlists' => [
+        'drumeo' => [
+            'New' => [639114],
+            'Beginner' => [639134],
+            'Intermediate' => [639136],
+            'Advanced' => [639140],
+            'Expert' => [639141],
+        ],
+        'pianote' => [
+            'New' => [639170, 639177],
+            'Beginner' => [639172, 639177],
+            'Intermediate' => [639173],
+            'Advanced' => [639175],
+            'Expert' => [639175],
+        ],
+        'guitareo' => [
+            // TODO: update playlist ids once they are created
+            'New' => [639184],
+            'Beginner' => [639186],
+            'Intermediate' => [639187],
+            'Advanced' => [639188],
+            'Expert' => [639188],
+        ],
+        'singeo' => [
+            'New' => [639190],
+            'Beginner' => [639190],
+            'Intermediate' => [639192],
+            'Advanced' => [639193],
+            'Expert' => [639193],
+        ],
+    ],
 ];

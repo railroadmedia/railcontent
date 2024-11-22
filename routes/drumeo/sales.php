@@ -47,6 +47,8 @@ Route::domain('{drumeoDomain}')
         Route::get('/alesis-strata-core/existing', [SalesController::class, 'alesisStrataCoreExisting']);
         Route::get('/alesis-nitro-pro', [SalesController::class, 'alesisNitroPro']);
         Route::get('/alesis-nitro-pro/existing', [SalesController::class, 'alesisNitroProExisting']);
+        Route::get('/yamaha-ead10', [SalesController::class, 'yamaha']);
+        Route::get('/yamaha-ead10/existing', [SalesController::class, 'yamahaExisting']);
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
@@ -135,13 +137,19 @@ Route::domain('{drumeoDomain}')
                         '66samus',
                         'adriendrums',
                         'alejandrosifuentes',
+                        'apartment-drummer',
                         'andrewrooney',
+                        'arthur-dubois',
                         'asobergirlsguide',
                         'bhcollective',
+                        'blaine-stillman',
                         'brandonscott',
+                        'brett-clur',
                         'bryanforcedrums',
                         'cooperdrummer',
+                        'dany-kufner',
                         'davidcola',
+                        'dorothea-taylor',
                         'drumhelper',
                         'drummingreview',
                         'drumninja',
@@ -161,7 +169,15 @@ Route::domain('{drumeoDomain}')
                         'tobines',
                         'worshipdrummer',
                         'wyattstav',
-                        'zackgrooves'
+                        'zackgrooves',
+                        'electric-drum-advisor',
+                        'music-production-zone',
+                        'musician-wave',
+                        'izzy-lamberti',
+                        'john-miles-brockman',
+                        'musicradar',
+                        'rock-angel',
+                        'sun-fyre',
                     ]);
             }
         );

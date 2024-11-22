@@ -62,18 +62,15 @@
         </div>
     </section>
 
-    @include('musora.sales.components.card-selection-section', [
-        "headline" => "Try Drumeo. Your first week is free.",
-        "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
-        "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "1500+ popular songs.",
-        "firstPoint" => "The world’s best drum lessons.",
-        "thirdPoint" => "Unlimited personal support.",
-        "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+    @include('musora.sales.components.order-section-collage', [
+    'headerLight' => true,
+    'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
+    'header' => '<strong>Unlimited drum lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
+    'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
+    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.</li>',
+    'image' => 'marketing/drumeo/membership/homepage/2024/collage.webp',
     ])
 
     @include("drumeo.sales.partials._footer")

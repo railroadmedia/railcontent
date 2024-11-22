@@ -5,6 +5,7 @@ namespace App\Modules\MusoraApi\Controllers\V1;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
+use App\Modules\UserManagementSystem\Jobs\SetDefaultPlaylistsJob;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Carbon\Carbon;
@@ -176,30 +177,40 @@ class OnboardingController extends Controller
             'brand' => 'required',
         ]);
 
-        OnboardingExperience::where(['brand' => $brand, 'user_id' => user()->id])
+        $user = user();
+
+        $hasAnsweredBefore = OnboardingExperience::where([
+            'brand' => $brand,
+            'user_id' => $user->id,
+        ])->exists();
+
+        OnboardingExperience::where(['brand' => $brand, 'user_id' => $user->id])
             ->delete();
 
-
         OnboardingExperience::create(
-            ['experience_level' => $experienceLevel, 'brand' => $brand, 'user_id' => user()->id]
+            ['experience_level' => $experienceLevel, 'brand' => $brand, 'user_id' => $user->id]
         );
 
-        $skillLevel = OnboardingSkillLevelEnum::from($experienceLevel)->name;
+        $skillLevel = OnboardingSkillLevelEnum::from($experienceLevel);
 
         $onboardingAnswerHistory = new OnboardingAnswerHistory();
         $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_EXPERIENCE;
-        $onboardingAnswerHistory->onboarding_answer = $skillLevel;
+        $onboardingAnswerHistory->onboarding_answer = $skillLevel->name;
         $onboardingAnswerHistory->brand = $brand;
-        $onboardingAnswerHistory->user_id = user()->id;
+        $onboardingAnswerHistory->user_id = $user->id;
         $onboardingAnswerHistory->save();
 
         dispatchWithDelay(
             new CustomerIoSyncUserByUserId(
-                user(),
-                [$brand . '_onboarding_skill_level' => $skillLevel],
+                $user,
+                [$brand . '_onboarding_skill_level' => $skillLevel->name],
             ),
             30
         );
+
+        if (!$hasAnsweredBefore) {
+            SetDefaultPlaylistsJob::dispatchAfterResponse($user, $brand, $skillLevel);
+        }
 
         Avo::onboarding_experience_step_completed(
             AvoHelper::defaultEventProperties([

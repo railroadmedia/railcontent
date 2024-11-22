@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'key' => '6LchhKQlAAAAAH5Pr3sHh-M6TvDgAZZqpVhVSMEr',
-    'secret' => '6LchhKQlAAAAACdGSHlsawvAQEMRS6rX7c1-vePH',
+    'key' => '6Lcrn_8UAAAAAGTGzWXaW8IsQtyicuNdwEv2CEmT',
+    'secret' => '6Lcrn_8UAAAAAPp40lIejbdpMrppNB2DbxexMN6D',
 ];

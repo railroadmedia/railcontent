@@ -578,16 +578,17 @@ class RechargeGateway
         );
     }
 
-    public function updateSubscriptionProduct($subscription, $shopifyVariantId): void
+    public function updateSubscriptionProduct($subscription, Product $product): void
     {
-        if ($subscription->shopifyVariantId == $shopifyVariantId) {
+        if ($subscription->shopifyVariantId == $product->shopify_id) {
             return;
         }
         $result = $this->call(
             'PUT',
             "/subscriptions/$subscription->id",
             [
-                'shopify_variant_id' => $shopifyVariantId,
+                'shopify_variant_id' => $product->shopify_id,
+                'price' => $product->price,
             ],
             apiVersion: self::API_VERSION_2021_01
         );

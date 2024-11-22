@@ -2546,9 +2546,11 @@ return [
             'show_onboarding',
             'last_used_brand',
             'active_permissions_ids',
-	    'primary_brand',
+            'primary_brand',
             'homepage_v2',
+            'explore_tasks',
             'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [
@@ -5774,7 +5776,9 @@ return [
             'active_permissions_ids',
             'primary_brand',
             'homepage_v2',
+            'explore_tasks',
             'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [

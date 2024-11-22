@@ -4,6 +4,7 @@ namespace App\Modules\Content\Services;
 
 use App\Models\Brand;
 use App\Models\TrialSection;
+use App\Modules\Brand\Enums\Brand as BrandEnum;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -50,6 +51,7 @@ class LearningPathsService
 
         return $learningPaths;
     }
+
     public function showLearningPaths(string $brand): bool
     {
         $hideSection = $brand . '_trial_section_hide';
@@ -68,15 +70,24 @@ class LearningPathsService
     public function showNewLearningPaths(): bool
     {
         $user = user();
+        $homepageRedesign = FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', $user));
+
+        //  NOTE: Homepage V2 Pilot
+        if ($homepageV2) {
+            return true;
+        }
+
         return $user->is_trial
             && $user->created_at->diffInDays(now()) <= 30
-            && FeatureFlagging::branch('homepage-learning-path-redesign', $user) === 'experiment';
+            && ($homepageV2 || $homepageRedesign);
     }
 
-    public function getNewLearningPaths(): array
+    public function getNewLearningPaths(bool $homepageV2): array
     {
         $brand = brand();
-        if ($brand !== 'drumeo' && $brand !== 'pianote') {
+
+        if (!$homepageV2 && in_array($brand, [BrandEnum::Guitareo->value, BrandEnum::Singeo->value])) {
             return [];
         }
 

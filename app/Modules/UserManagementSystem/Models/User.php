@@ -127,9 +127,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $trial_expiration_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
-==== BASE ====
  * @property string|null $primary_brand
-==== BASE ====
+ * @property string|null $first_access_at
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -1006,11 +1005,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         ];
     }
 
+    public function exploreTasks(): HasMany
+    {
+        return $this->hasMany(UserExploreTask::class);
+    }
+
     public function getAuthPasswordName()
     {
         return 'password';
     }
-    
+
     public function getActivePermissionsIds()
     {
         $userAccessPermissions = $this->userAccessPermissions()->getResults();
@@ -1026,5 +1030,15 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->first_access_at = Carbon::now();
         $this->save();
         return true;
+    }
+
+    public function onboardingBrands(): HasOne
+    {
+        return $this->hasOne(OnboardingBrand::class);
+    }
+
+    public function scopeWithoutDeleted(Builder $query): void
+    {
+        $query->whereNot('email', 'like', 'musora+deleted_%@musora.com');
     }
 }
