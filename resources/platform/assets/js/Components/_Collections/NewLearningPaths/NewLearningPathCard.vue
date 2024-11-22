@@ -31,7 +31,7 @@
                             {{ title }}
                         </h1>
                         <p v-if="description.length"
-                            class="tw-text-[12px] tw-leading-[18px] tw-line-clamp-2">
+                            class="tw-text-[12px] tw-leading-[18px] xl:tw-text-[18px] xl:tw-leading-[27px] tw-line-clamp-2">
                             {{ description }}
                         </p>
                     </div>
@@ -68,7 +68,7 @@
                             {{ title }}
                         </h1>
                         <p v-if="description.length"
-                            class="tw-text-[12px] tw-leading-[18px] 3xl:tw-text-[14px] 3xl:tw-leading-[21px] tw-line-clamp-2">
+                            class="tw-text-[14px] tw-leading-[18px] tw-line-clamp-2">
                             {{ description }}
                         </p>
                     </div>
@@ -187,7 +187,7 @@ const calculatedBgImg = computed(() => {
         return props.bgImg;
     }
 
-    return '';
+    return props.squareImg;
 });
 
 const handleCtaClick = (event, url) => {
@@ -209,4 +209,3 @@ const handleCtaClick = (event, url) => {
     }
 };
 </script>
-==== BASE ====

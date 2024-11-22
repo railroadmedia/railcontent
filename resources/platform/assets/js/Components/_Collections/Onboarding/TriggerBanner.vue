@@ -1,9 +1,7 @@
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { getCookie, setCookie } from '@vuesora/assets/js/functions/cookies';
-import { XIcon } from "@heroicons/vue/solid";
-import Button from "@units/Button/Button.vue";
 
 import { useUserStore } from '@stores/user';
 
@@ -12,16 +10,25 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 onBeforeMount(() => {
-    const hideOnboardingBanner = !!getCookie("hideOnboardingBanner");
-    if (hideOnboardingBanner) {
-      shouldShowBanner.value = false;
-    }
+  const hideOnboardingBanner = !!getCookie(`hideOnboardingBanner_${brand.value}`);
+  if (hideOnboardingBanner) {
+    shouldShowBanner.value = false;
+  }
 });
 
 const hideOnboardingBanner = () => {
-    setCookie("hideOnboardingBanner", "true", 365);
-    shouldShowBanner.value = false;
+  setCookie(`hideOnboardingBanner_${brand.value}`, "true", 365);
+  shouldShowBanner.value = false;
 };
+
+const brandedMessage = computed(() => {
+  return {
+    drumeo: 'Complete your drum profile and unlock your recommended lessons!',
+    singeo: 'Complete your singing profile and unlock your recommended lessons!',
+    pianote: 'Complete your piano profile and unlock your recommended lessons!',
+    guitareo: 'Complete your guitar profile and unlock your recommended lessons!',
+  }[brand.value];
+});
 </script>
 
 <template>
@@ -29,48 +36,37 @@ const hideOnboardingBanner = () => {
       tw-flex
       tw-flex-col
       lg:tw-flex-row
-      tw-bg-[#E4E4E7]
       dark:tw-bg-[#002039B2]/70
-      tw-border
-      tw-border-[#A1A1A9]
-      dark:tw-border-[#344858]
       tw-justify-between
-      tw-min-h-[105px]
+      tw-min-h-[90px]
       tw-rounded-[10px]
       tw-items-center
-      tw-px-[26px]
+      tw-p-[15px]
+      lg:tw-px-[20px]
       tw-relative
-      tw-py-[13px]
+      lg:tw-py-[25px]
       tw-my-4
+      tw-border-[1px]
+      tw-border-[#E0E0E1]
+      dark:tw-border-none
     " v-if="shouldShowBanner">
-    <div
-      class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
-      You haven’t set up your account for this instrument.
+    <div class="tw-flex tw-justify-center tw-items-center tw-self-start">
+      <NewMusoraIcon :brand="brand" variant="profile" svgClass="tw-w-[50px] tw-h-[50px]" />
+      <div
+        class="tw-ml-[15px] xl:tw-ml-[30px] tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-leading-[18px] lg:tw-text-[18px] lg:tw-leading-[27px]">
+        {{ brandedMessage }}
+      </div>
     </div>
-    <a :href="`/onboarding?brand=${userStore.brand}&update=2`" class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none lg:tw-mr-6 dark:tw-text-white 
-        hover:tw-bg-black/10 dark:hover:tw-bg-white/10">Complete Your Account
-    </a>
-    <button class="
-        tw-absolute
-        dark:tw-text-white
-        dark:tw-border-white
-        tw-text-[#00101D]
-        tw-border-black
-        tw-border-[2px]
-        tw-rounded-full
-        tw-h-[20px]
-        tw-w-[20px]
-        tw-flex
-        tw-justify-center
-        tw-items-center
-        tw-top-[5px]
-        tw-right-[5px]
-        md:tw-top-[9px]
-        md:tw-right-[9px]
-        hover:tw-bg-black/10
-        dark:hover:tw-bg-white/10
-      " @click="hideOnboardingBanner">
-      <XIcon class="tw-w-[12px] tw-h-[12px]" />
-    </button>
+    <div class="tw-flex tw-items-end lg:tw-justify-center lg:tw-items-center tw-self-end">
+      <button class="hover:tw-text-white tw-uppercase tw-font-bebas-neue tw-text-[16px] tw-leading-[24px] tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mr-[30px]" @click="hideOnboardingBanner">
+        DISMISS
+      </button>
+      <a :href="`/onboarding?brand=${userStore.brand}`" class="tw-hidden lg:tw-block tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none dark:tw-text-white 
+        hover:tw-bg-black/10 dark:hover:tw-bg-white/10">COMPLETE PROFILE
+      </a>
+      <a :href="`/onboarding?brand=${userStore.brand}`" class="lg:tw-hidden hover:tw-text-white tw-uppercase tw-font-bebas-neue tw-text-[16px] tw-leading-[24px] tw-text-black dark:tw-text-white">
+        COMPLETE PROFILE
+      </a>
+    </div>
   </div>
 </template>
