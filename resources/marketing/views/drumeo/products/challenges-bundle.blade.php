@@ -55,11 +55,11 @@
         }
     @endphp
 
-    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[800px] lg:h-[880px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
+    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] md:h-[800px] lg:h-[880px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg"><br>
-                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Course For The Price Of 1</strong></h1>
+                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Course For <br class="block sm:hidden">The Price Of 1</strong></h1>
                     <h4 class="italic items-center">Get the best online drum lessons with no recurring payments.</h4>
                 <img class="hidden md:inline object-cover max-w-2xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="Bundle Collage Mobile">
@@ -88,6 +88,7 @@
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
+            'case' => 'challenges',
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">

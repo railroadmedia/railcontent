@@ -11,7 +11,7 @@
 
 
 <div class="space-y-4 md:space-y-8 lg:space-y-14 md:pb-1">
-    @foreach($filteredBonusVideos as $bonusVideo)
+    @foreach($filteredBonusVideos as $index => $bonusVideo)
         @if(in_array($bonusVideo['sku'], $videoTargetSkus))
             <div class="rounded-xl overflow-hidden">
                 <div class="flex flex-col md:flex-row h-full">
@@ -30,11 +30,30 @@
                         @if(!empty($bonusVideo['header']))
                             <h5 class="m-0"><strong>{!! $bonusVideo['header'] !!}</strong></h5>
                         @endif
-
-                        <div class="flex items-center space-x-2 my-3">
+                        @if(!empty($case) && $case === 'deal')
+                         <div class="flex items-center flex-wrap space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
-                                <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> Value</span>
+                                <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong></span>
                             @endif
+                            @if(!empty($bonusVideo['offerPrice']))
+                                <span class="text-lg">{!! $bonusVideo['offerPrice'] !!}</span>
+                            @endif
+                                @if($index > 0)
+                                    <span class="px-2 py-1 bg-musora text-black text-base font-black rounded">
+                                        FREE BONUS
+                                    </span>
+                                @endif
+                            @if(!empty($bonusVideo['extraBadge']))
+                                <span class="text-base italic">
+                                    {{ $bonusVideo['extraBadge'] }}
+                                </span>
+                            @endif
+                        </div>
+                        
+                        @else 
+                        <div class="flex items-center flex-wrap space-x-2 my-3">
+                            @if(!empty($bonusVideo['price']))
+                                <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> @if(!empty($case) && $case == 'challenges') @else Value @endif</span>                            @endif
                             @if(!empty($bonusVideo['offerPrice']))
                                 <span class="text-lg">{!! $bonusVideo['offerPrice'] !!}</span>
                             @endif
@@ -45,11 +64,12 @@
                                 </span>
                             @endif
                             @if(!empty($bonusVideo['extraBadge']))
-                                <span class="text-base italic block sm:hidden">
+                                <span class="text-base italic">
                                     {{ $bonusVideo['extraBadge'] }}
                                 </span>
                             @endif
                         </div>
+                        @endif
 
                         @if(!empty($bonusVideo['description']))
                             <div>

@@ -64,7 +64,7 @@
         style="background:linear-gradient(30deg, #0a3761, #0c1526);"
     @endif
 >
-    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+    <section class="py-14 sm:py-16 md::py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
             @if(empty($bgColor))
             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
             :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`" @endif
@@ -149,7 +149,7 @@
                 </a>
                 </div>
             </div>
-            <div style="font-size:0px">
+            <div style="font-size:0px" class="mb-4 md:mb-8">
                 @foreach($filteredBonuses as $bonus)
                     <div
                         class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
@@ -216,15 +216,19 @@
                                 </div>
                             </div>
                         </div>
-
-                        <p class="w-full leading-normal mt-2">
+                        @if($bundle == 'deal')
+                         <p class="w-full leading-normal mt-2">
                             {{-- @if(!empty($bonus['title']))
                                 <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             @endif --}}
                             <span style="display:inline-block;">
                             @if(!empty($bonus['price']))
-                                    <s class="opacity-60">${{ $bonus['price'] }} Value</s>
-                                @endif
+                                    <s class="opacity-60">${{ $bonus['price'] }}</s>
+                            @endif
+                            <strong class="{{ $textColor }}">FREE</strong>
+                            <span class="text-white italic block">Lifetime Access</span>
+
+
 {{--                                @if(!empty($bonus['customText']))--}}
 {{--                                    <strong class="{{ $textColor }}">{{ $bonus['customText'] }}</strong>--}}
 {{--                                @else--}}
@@ -240,6 +244,31 @@
 {{--                                </em>--}}
                             </span>
                         </p>
+                        @else
+                        <p class="w-full leading-normal mt-2">
+                            {{-- @if(!empty($bonus['title']))
+                                <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
+                            @endif --}}
+                            <span style="display:inline-block;">
+                            @if(!empty($bonus['price']) && $bundle != 'challenge' && $bundle != 'challenges-pianote')
+                                <s class="opacity-60">${{ $bonus['price'] }} Value</s>
+                            @endif
+{{--                                @if(!empty($bonus['customText']))--}}
+{{--                                    <strong class="{{ $textColor }}">{{ $bonus['customText'] }}</strong>--}}
+{{--                                @else--}}
+{{--                                    <strong class="{{ $textColor }}">FREE</strong>--}}
+{{--                                @endif--}}
+{{--                                <br>--}}
+{{--                                <em>--}}
+{{--                                    @if(!empty($bonus['physical']))--}}
+{{--                                        Physical Bonus--}}
+{{--                                    @else--}}
+{{--                                        Lifetime Access--}}
+{{--                                    @endif--}}
+{{--                                </em>--}}
+                            </span>
+                        </p>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -256,7 +285,7 @@
             </a>
             <br>
             <a role="link" class="inline-block opacity-90 text-white @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif" aria-label="Start a monthly membership" href="">
-                @if($bundle == 'deal') <p><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+                @if($bundle == 'deal') <p class="text-sm md:text-base"><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
             </a>
             </div>
     </section>
