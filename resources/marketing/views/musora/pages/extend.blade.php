@@ -1,11 +1,13 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'hideJoin' => true,
+])
 
 @section('head-includes')
-    <title>Lifetime Deal | Musora</title>
-    <meta property="og:title" content="Musora | Lifetime Deal">
+    <title>Extend your membership | Musora</title>
+    <meta property="og:title" content="Extend your membership | Musora">
 
-    <meta name="description" content="Unlimited music lessons for life.">
-    <meta property="og:description" content="Unlimited music lessons for life.">
+    <meta name="description" content="Your Musora+ membership will be extended beyond the current renewal date – to add one full year, no matter when your renewal date is scheduled.">
+    <meta property="og:description" content="Your Musora+ membership will be extended beyond the current renewal date – to add one full year, no matter when your renewal date is scheduled.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
@@ -78,51 +80,28 @@
             filter: brightness(1.05);
         }
     </style>
-
 @endsection
 
-
-<!-- Main -->
 @section('layout-body')
-
-    {{-- @php
-        if(!empty($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability())) {
-            $stock = $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() - 16;
-        }
-        else {
-            $stock = 0;
-        }
-    @endphp --}}
-{{--    @include('_partials.components.shop.promo-banner', [--}}
-{{--                "name" => "Lifetime",--}}
-{{--                "fullPrice" => 1200,--}}
-{{--                "price" => 1200,--}}
-{{--                    "specialText" => "<strong>Only <s class='opacity-60'>100</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
-{{--                "noBreadcrumb" => true,--}}
-{{--                "noCountdown" => true--}}
-{{--            ])--}}
 <div x-data="scrollComponent">
-    <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/header-bg.webp') no-repeat center center; background-size: cover;">
+    <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20"
+        style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/extend/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">
-            <img alt="Bundle" class="h-10 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
-                <h2 class="leading-tight pt-3 lg:pt-6"><strong>Get a free $100 electronic gift card <br> when you extend your membership.</strong></h2>
+            <img alt="Bundle" class="h-16 sm:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/promos/november/extend/students-logo.webp"><br>
+                <h2 class="leading-tight pt-3 lg:pt-6"><strong>Get a free $100 electronic gift card <br class="hidden sm:inline"> when you extend your membership.</strong></h2>
 
             <div class="w-full max-w-4xl mx-auto my-4 sm:my-8 ">
-                <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/musora-devices.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
+                <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/extend/musora-collage.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mb-1"><strong>$240 </strong></h2>
 
-               {{-- @if($stock > 0) --}}
                 <a
-                    href="/ecommerce/add-to-cart?products[musora-lifetime-membership-access]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
+                    href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100]=1&promo-code=musora-extend-2024&locked=true"
                     class="join w-full sm:max-w-xs musora smaller mt-4"
                 >
                     GET THE DEAL
                 </a>
-               {{-- @else
-                    <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
-               @endif --}}
             </div>
         </div>
     </section>

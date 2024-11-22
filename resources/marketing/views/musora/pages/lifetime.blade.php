@@ -1,4 +1,6 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'hideJoin' => true,
+])
 
 @section('head-includes')
     <title>Lifetime Deal | Musora</title>
@@ -78,7 +80,7 @@
             filter: brightness(1.05);
         }
     </style>
-    
+
 @endsection
 
 
@@ -125,11 +127,11 @@
 {{--                </span>--}}
 
             <div class="w-full max-w-4xl mx-auto my-4 sm:my-8 ">
-                <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/musora-devices.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>            
+                <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/musora-devices.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last chance)</span></h2>
-                
+
                {{-- @if($stock > 0) --}}
                    <a class="join musora mt-4 w-full text-black sm:max-w-[420px]"  @click="scrollToFinal" >GET THE DEAL</a>
                    <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
@@ -150,9 +152,9 @@
     <section class="bg-gray-100 py-8 px-4 lg:py-24 lg:px-8">
         <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8">
             <div class="w-full sm:w-10/12 md:w-5/12">
-                <img 
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora-m-team2.webp" 
-                    alt="Group of people" 
+                <img
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora-m-team2.webp"
+                    alt="Group of people"
                     class="w-full"
                 />
             </div>
@@ -178,8 +180,8 @@
                 <p class="mb-2 md:mb-8">
                     So this is your LAST CHANCE to lock in a lifetime of music lessons (drumming, singing, guitar, piano, and anything else added) at the old price.
                 </p>
-                <a 
-                    href="/ecommerce/add-to-cart?products[musora-lifetime-membership-access]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" 
+                <a
+                    href="/ecommerce/add-to-cart?products[musora-lifetime-membership-access]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
                     class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
                 >
                     GET THE DEAL
@@ -187,7 +189,7 @@
             </div>
         </div>
     </section>
-    
+
     @include('drumeo._partials.countdown-bundle-2024')
 
     <div id="final"></div>
@@ -215,7 +217,7 @@
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
                @endif --}}
             </div>
-           
+
 {{--            @if($stock > 0)--}}
 {{--                <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
 {{--                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
