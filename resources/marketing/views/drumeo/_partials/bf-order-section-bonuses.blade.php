@@ -285,7 +285,7 @@
             </a>
             <br>
             <a role="link" class="inline-block opacity-90 text-white @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif" aria-label="Start a monthly membership" href="">
-                @if($bundle == 'deal') <p class="text-sm md:text-base"><em>New students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+                @if($bundle == 'deal') <p class="text-sm md:text-base"><em>New annual students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
             </a>
             </div>
     </section>
