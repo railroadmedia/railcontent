@@ -58,7 +58,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="E-Kit Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/practice-bundle-logo.svg"><br>
-                <h2 class="leading-tight my-3 lg:my-6"><strong>Save $828.87 on most popular practice <br class="hidden md:block"/> essentials + lessons. </strong></h2>
+                <h2 class="leading-tight my-3 lg:my-6"><strong>Improve your drumming anywhere, anytime.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 text-sm md:text-base">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
@@ -146,7 +146,7 @@
             'logoHeight' => 'h-16 sm:h-18',
             'topImage' => 'marketing/drumeo/promos/november/2024/e-kit-bundle/bonus-am.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/4',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $828.87 on most popular practice <br class="hidden md:block"/> essentials + lessons.</strong></h2>
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Improve your drumming anywhere, anytime.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-12 text-sm md:text-base">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
