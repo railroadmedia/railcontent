@@ -34,8 +34,8 @@ class SanityGateway
         'challenge' => [
             'enrollment_start_time',
             'enrollment_end_time',
-            'is_solo',
             "'registration_url': '/' + brand + '/enrollment/' + slug.current",
+            'is_solo',
             '"lesson_count": child_count',
             '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "View Challenge")',
             'challenge_state',

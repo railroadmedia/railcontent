@@ -100,4 +100,5 @@ watch(
         fetchData();
     },
 )
+
 </script>

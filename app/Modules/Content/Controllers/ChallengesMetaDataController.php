@@ -54,9 +54,10 @@ class ChallengesMetaDataController extends Controller
         //$hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         // below here is where things need to be refactored
 
-
-
-        $enrollmentClosed = $cohort['enrollmentClosed'];
+        // TODO TCH-56 this needs to be updated to pull all data from sanity instead of nova (and the cohort table).
+        $enrollmentClosedDate = Carbon::parse($content['enrollment_end_date']);
+        $enrollmentClosed = false; // $enrollmentClosedDate >= Carbon::now();
+        $cohort['is_solo'] = $content['is_solo'] ?? false;
 
         $cohort['conversation_url'] =
             $cohort['conversation_thread_id'] ?
@@ -77,6 +78,7 @@ class ChallengesMetaDataController extends Controller
         } else {
             $view = 'content.cohort-template';
         }
+
 
         return view($view, [
             'hasProduct' => $isEnrolled,
@@ -219,7 +221,7 @@ class ChallengesMetaDataController extends Controller
     public function unlockChallenge(int $id) : JsonResponse
     {
         $userId = user()->id;
-        $result = $this->challengesService->startChallenge($id, $userId, isLocked: false);
+        $result = $this->challengesService->startChallenge($id, $userId, startDate: Carbon::now()->toISOString(), isLocked: false);
         if (is_null($result)) {
             return response()->json(['error' => "Challenge $id not found"], status: 404);
         }
@@ -341,7 +343,9 @@ class ChallengesMetaDataController extends Controller
     {
         $userId = user()->id;
         $brand = $request->get('brand', brand());
-        $completedChallenges = ChallengeUserProgress::whereUserId($userId);
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $completedChallenges = ChallengeUserProgress::whereUserId($userId, $page, $limit);
         if (!$completedChallenges) return response()->json([]);
         $completedIds = $completedChallenges->pluck('content_id')->toArray();
         $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
@@ -362,7 +366,9 @@ class ChallengesMetaDataController extends Controller
     {
         $userId = user()->id;
         $brand = $request->get('brand', brand());
-        $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId);
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId, $page, $limit);
         if (!$completedChallenges) return response()->json([]);
         $completedIds = $completedChallenges->pluck('content_id')->toArray();
         $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);

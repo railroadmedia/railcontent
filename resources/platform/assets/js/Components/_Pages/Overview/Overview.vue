@@ -218,7 +218,7 @@ const headerDropdown = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.parentType === 'challenges' || props.contentType === 'challenge';
+    return props.parentType === 'challenge';
 })
 
 const isChallengeEnrolled = computed(() => {

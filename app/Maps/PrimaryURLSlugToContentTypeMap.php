@@ -33,7 +33,8 @@ class PrimaryURLSlugToContentTypeMap
         'gear-guides' => 'gear-guides',
         'performances' => 'performances',
         'in-rhythm' => 'in-rhythm',
-        'challenges' => 'challenges',
+        'challenges' => 'challenges', // Drumeo Show challenge type
+        'challenge' => 'challenge', //challengeV2 content type
         'on-the-road' => 'on-the-road',
         'diy-drum-experiments' => 'diy-drum-experiments',
         'rhythmic-adventures-of-captain-carson' => 'rhythmic-adventures-of-captain-carson',

@@ -14,7 +14,7 @@ export function useBuildHeader(progressPercent) {
             if(contentType === 'pack-bundle') packType = 'Packs';
             if(contentType === 'learning-path-course') packType = 'Courses';
 
-            let lessonCount = result.lesson_count;
+            let lessonCount = contentType === 'course-part' ? result.child_count : result.lesson_count;
             if(contentType === 'learning-path-course' || contentType === 'learning-path-lesson') lessonCount = result.child_count;
 
             header.infoData = [

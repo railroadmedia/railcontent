@@ -543,8 +543,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    //TODO(challenge): delete challenges conditional
-    return props.lessonType === 'challenges' || props.lessonType === 'challenge' ;
+    return props.lessonType === 'challenge';
 })
 
 const toggleCompleteContent = () => {
