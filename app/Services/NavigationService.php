@@ -71,7 +71,7 @@ class NavigationService
             ],
             [
                 'name' => 'Challenges',
-                'path' => '/'.brand().'/challenges',
+                'path' => '/'.brand().'/challenge',
                 'icon' => 'challenges',
             ],
             [

@@ -287,51 +287,60 @@ class ChallengeUserProgress extends Model
 
     /**
      * @param int $userId
-     * @return Collection | null
-     * @throws Exception
+     * @return \Illuminate\Support\Collection
      */
-    public static function whereUserIdAndActive(int $userId) : Collection | null
+    public static function whereUserIdAndActive(int $userId)
     {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
             ->where('is_active', true)
             ->orderBy('start_date')
             ->get();
-
-        return $challengeUserCollection;
+        return collect($challengeUserCollection);
     }
 
     /**
      * @param int $userId
-     * @return Collection | null
-     * @throws Exception
+     * @param int $page
+     * @param int $limit
+     * @return \Illuminate\Support\Collection
      */
-    public static function whereUserId(int $userId) : Collection | null
+    public static function whereUserId(int $userId, int $page=1, int $limit=10) : \Illuminate\Support\Collection
     {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
-            ->get();
-        return $challengeUserCollection;
+            ->orderBy('start_date')
+            ->paginate($limit,
+                ['*'],
+                'page',
+                $page)
+            ->items();
+        return collect($challengeUserCollection);
     }
 
     /**
      * @param int $userId
-     * @return Collection | null
-     * @throws Exception
+     * @param $page
+     * @param $limit
+     * @return \Illuminate\Support\Collection
      */
-    public static function whereUserIdAndCompleted(int $userId) : Collection | null
+    public static function whereUserIdAndCompleted(int $userId, $page, $limit) : \Illuminate\Support\Collection
     {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
             ->whereNotNull('last_completed_date')
             ->orderByDesc('last_completed_date')
-            ->get();
+            ->paginate($limit,
+                ['*'],
+                'page',
+                $page)
+            ->items();
 
-        return $challengeUserCollection;
+        return collect($challengeUserCollection);
     }
 
     /**
-     * @param array $challengeId
+     * @param array $challengeIds
      * @param int $userId
      * @return Collection | null
      * @throws Exception
@@ -341,6 +350,7 @@ class ChallengeUserProgress extends Model
         $challengeUserCollection = self::query()
             ->whereIn('content_id', $challengeIds)
             ->where('user_id', $userId)
+            ->orderByDesc('start_date')
             ->get();
         return $challengeUserCollection;
     }

@@ -543,7 +543,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.lessonType === 'challenges';
+    return props.lessonType === 'challenge';
 })
 
 const toggleCompleteContent = () => {

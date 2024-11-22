@@ -27,6 +27,9 @@ export async function useOverviewPageData(contentType, parentType) {
                     header: buildHeader('challenges', result.lesson, progressPercent),
                     is_unlocked: result.user_data.is_unlocked,
                     lesson: result.lesson,
+                    user_data: result.user_data,
+                    next_lesson: result.next_lesson,
+                    previous_lesson: result.previous_lesson,
                 };
             }
         } else {

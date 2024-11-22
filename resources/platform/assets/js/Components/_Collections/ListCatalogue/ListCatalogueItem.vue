@@ -52,7 +52,7 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess || !isReleased || isCompleted }]"
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
@@ -140,9 +140,9 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel 
-            v-if="mappedData.difficulty" 
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+        <DifficultyLabel
+            v-if="mappedData.difficulty"
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
@@ -265,7 +265,7 @@
 </template>
 
 <script setup>
-import {computed, onBeforeMount, ref} from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -373,6 +373,7 @@ const {
     thumbnailType,
     is_added,
     completedIcon,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const {
@@ -400,7 +401,7 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: lesson_complete,
+        "completed": lesson_complete.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
