@@ -94,6 +94,7 @@
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
+            'case' => 'deal',
             ])
         </div>
     </section>

@@ -29,7 +29,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
         'header' => 'New Piano Players Start Here',
         'description' => '<p>This is your first 30 days on the piano.</p><p class="my-2">Just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson.</p> <p>No complicated theory. No need to read music. No frustration.</p>',
-        'vimeoId' => '798501810',
+        'vimeoId' => '879916161',
         'badge' => null,
         'price' => 127,
         'sku' => 'new-piano-players-start-here'
