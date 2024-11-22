@@ -134,16 +134,6 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll }">
-                    @include('_partials.components.shop.product-card', [
-                        "badge" => "Most Popular",
-                         "discounted_price" => 200,
-                            "href" => "/practice-anywhere",
-                         "instructor" => "Award-Winning Membership",
-                         "price" => 240,
-                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
-                         "title" => "Drumeo Membership",
-                         'soldOut' => false,
-                    ])
 {{--                    @include('_partials.components.shop.product-card', [--}}
 {{--                    "badge" => "7-Day Free Trial",--}}
 {{--                     "price" => 240,--}}
