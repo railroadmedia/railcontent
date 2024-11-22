@@ -104,9 +104,9 @@
 @section('body-data')
     x-data="{
     trailer: false,
-    modal798501810: false,
+    modal879916161: false,
     modal823788317: false,
-    modal852795615: false,
+    modal879913986: false,
     modal928599834: false,
     modal1008560089: false,
     }"
@@ -702,9 +702,9 @@
 
     @php
     $videoBonuses = [
-        ['name' => 'modal798501810', 'video' => '798501810'],
+        ['name' => 'modal879916161', 'video' => '879916161'],
         ['name' => 'modal823788317', 'video' => '823788317'],
-        ['name' => 'modal852795615', 'video' => '852795615'],
+        ['name' => 'modal879913986', 'video' => '879913986'],
         ['name' => 'modal928599834', 'video' => '928599834'],
         ['name' => 'modal1008560089', 'video' => '1008560089'],
     ];
