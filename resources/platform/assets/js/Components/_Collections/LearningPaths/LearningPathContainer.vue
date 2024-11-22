@@ -1,8 +1,8 @@
 <template>
-    <div v-if="showLearningPaths" class="tw-flex tw-flex-col tw-w-full tw-mt-[30px]">
+    <div v-if="showLearningPaths" class="tw-flex tw-flex-col tw-w-full tw-mb-[30px]">
         <div
             class="tw-flex tw-border-t-[1px] tw-border-[#223F57] tw-py-[22px] tw-items-center tw-justify-between tw-grow tw-mx-4 lg:tw-mx-0">
-            <h2 class="tw-font-bold tw-text-[30px] tw-leading-[22px]">
+            <h2 v-if="!isV2User" class="tw-font-bold tw-text-[30px] tw-leading-[22px]">
                 Where to start?
             </h2>
             <button @click="handleDismiss"
@@ -47,6 +47,10 @@ const props = defineProps({
     trackingSection: {
         type: String,
         default: ''
+    },
+    isV2User: {
+        type: Boolean,
+        default: false
     }
 });
 

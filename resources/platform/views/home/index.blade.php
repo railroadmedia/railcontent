@@ -21,7 +21,6 @@
             :conversation-data="{{ json_encode($hotForumTopics) }}"
         @endif
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
-        new-content-url="{{ url()->route('platform.new-lessons') }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
         :recommended-content="{{ $recommendedContentJson }}"
@@ -29,13 +28,16 @@
         :started-content="{{ $startedContentJson }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
         :users-list="{{ json_encode($usersList->results())  }}"
-        :user-metrics="{{ json_encode($userMetrics) }}"A
-        workouts-content-url="{{ url()->route('platform.workouts') }}"
+        :user-metrics="{{ json_encode($userMetrics) }}"
         youtube-id="{{ $youtubeId }}"
         :learning-paths="{{ json_encode($trialSection) }}"
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
+        :trial-section-redesign="{{ $trialSectionRedesign }}"
+        :is-first-access="{{ $isFirstAccess ? 'true' : 'false' }}"
+{{--         :explore-tasks="{{ json_encode($exploreTasks) }}"
+ --}}        :is-v2-user="{{ json_encode($homepageV2) }}"
     ></home>
 
-    @include('partials._railanalytics-brand-tracking-iframe')
+@include('partials._railanalytics-brand-tracking-iframe')
 
 @endsection
