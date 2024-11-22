@@ -175,7 +175,7 @@
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
     const platformStore = usePlatformStore();
-    const { brand, userId, token, userCompletedAccount, showOnboardingBanner, userHas30Days } = storeToRefs(userStore);
+    const { brand, userId, token, showOnboardingBanner, userHas30Days } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
 
     const props = defineProps({
@@ -229,8 +229,8 @@
     });
 
     const showTriggerBanner = computed(() => {
-        if(!props.isPackOnlyBoolean) return false; //hide for packs only
-        return userCompletedAccount.value;
+        if (props.isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {
