@@ -185,7 +185,6 @@
         continueUrl: { type: String, default: '' },
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
-        newContentUrl: { type: String, default: '' },
         recommendedContentUrl: { type: String, default: '' },
         upgradeMembershipUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
