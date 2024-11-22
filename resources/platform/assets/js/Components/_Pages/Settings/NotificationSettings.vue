@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${showOnboardingBanner ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }
@@ -48,7 +48,7 @@
         userDisplayName,
         userProfilePictureUrl,
         userCreatedYear,
-        userCompletedAccount
+        showOnboardingBanner
     } = storeToRefs(userStore);
 
     //Props
