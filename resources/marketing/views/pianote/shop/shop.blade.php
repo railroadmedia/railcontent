@@ -111,13 +111,16 @@
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/shop/pianote-deal" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal.webp');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/pianote/promos/black-friday/shop/pianote-deal.webp');"></div>
                         </div>
                     </a>
                     <a href="/lifetime" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/lifetime-deal.webp');"></div>
+                                <p class="z-20 absolute top-0 left-0 rounded-br-md bg-musora text-black font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs"
+                                style="background-color: #db182c!important;color:#fff!important;"
+                                >Last Chance</p>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/lifetime-deal.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/lifetime-deal.webp');"></div>
                         </div>
                     </a>
@@ -134,16 +137,16 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-globe-pointer text-{{ $brand }} mr-1"></i> Digital Deals</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left"
                     :class="{ 'show-all': showAll }">
-                @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
-                      "price" => 240,
-                     "instructor" => "Unlimited Piano Lessons",
-                      "discounted_price" => 240,
-                      "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
-                      "title" => "Pianote Membership",
-                      'soldOut' => false,
-                        "href" => "/",
-                 ])
+{{--                @include('_partials.components.shop.product-card', [--}}
+{{--                    "badge" => "7-Day Free Trial",--}}
+{{--                      "price" => 240,--}}
+{{--                     "instructor" => "Unlimited Piano Lessons",--}}
+{{--                      "discounted_price" => 240,--}}
+{{--                      "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",--}}
+{{--                      "title" => "Pianote Membership",--}}
+{{--                      'soldOut' => false,--}}
+{{--                        "href" => "/",--}}
+{{--                 ])--}}
 
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
