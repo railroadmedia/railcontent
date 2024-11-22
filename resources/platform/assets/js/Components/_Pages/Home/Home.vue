@@ -40,7 +40,7 @@
 
             <!-- Continue section -->
             <MiniCatalogueSection
-                v-if="data?.continueSection.length"
+                v-if="!isLoading && data?.continueSection.length"
                 title="Continue"
                 seeAllAriaLabel="See All Lessons In Progress"
                 :seeAllUrl="`/${brand}/lesson-history/in-progress`"

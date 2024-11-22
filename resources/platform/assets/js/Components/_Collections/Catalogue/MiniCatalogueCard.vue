@@ -47,7 +47,7 @@
                 <p
                     class="tw-flex tw-items-center tw-flex-wrap tw-text-[10px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC] tw-truncate">
                     <!-- Difficulty Label -->
-                    <span v-if="item.difficulty" class="tw-flex tw-items-center">
+                    <span v-if="typeof item.difficulty === 'string' || typeof item.difficulty === 'number'" class="tw-flex tw-items-center">
                         <DifficultyLabel :hideDot="true" class="tw-text-[10px]" :difficultyValue="item.difficulty"
                             textCase="capitalize" />
                             <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
@@ -119,7 +119,7 @@
     </div>
 </template>
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { PlusIcon, ChevronRightIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import { storeToRefs } from 'pinia';
@@ -134,6 +134,12 @@ import DifficultyLabel from '@units/DifficultyLabel/DifficultyLabel';
 const platformStore = usePlatformStore();
 const userStore = useUserStore();
 const { userId, brand } = storeToRefs(userStore);
+
+onMounted(() => {
+    console.log(props.item)
+    console.log(props.item.title)
+    console.log(props.item.difficulty)
+});
 
 const props = defineProps({
     index: {
@@ -179,7 +185,6 @@ const props = defineProps({
 });
 
 const {
-    contentModel,
     thumbnailIcon,
     renderLink,
     isReleased,
@@ -192,13 +197,13 @@ const showDropdown = ref(false);
 
 
 const isSongContent = computed(() => {
-    return contentModel.value.post.type === 'song'
+    return props.item.type === 'song'
 })
 
-
 const contentTypeString = computed(() => {
-    if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
-        return contentTypes[contentModel.value.post.type].singular
+console.log(props.item.title, props.contentType, contentTypes[props.contentType])
+if (props.contentType && contentTypes[props.contentType]?.singular) {
+        return contentTypes[props.contentType].singular
     }
     return '';
 })
@@ -211,8 +216,8 @@ const showProgressBar = computed(() => {
     return !isCurrentSeeAllCard.value
     && !isSongContent.value
     && !noAccess.value
-    && !contentModel.value.post.type !== 'play-along'
-    && !contentModel.value.post.type !== 'play-along-part';
+    && !props.item.type !== 'play-along'
+    && !props.item.type !== 'play-along-part';
 })
 
 const emit = defineEmits(['addToList', 'progressReset']);
