@@ -11,7 +11,6 @@ export default function useCatalogueItem(props) {
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
 
     const progress_percent = ref(0);
-    const lesson_complete = ref(false);
 
     // Progress Percentage
     getProgressPercentage(props.item.id).then(value => {
