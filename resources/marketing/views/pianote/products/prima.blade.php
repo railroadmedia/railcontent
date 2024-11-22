@@ -373,11 +373,11 @@
 
     <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center @if(!empty($lifetime)) hidden @endif">
         <img class="h-12 sm:h-16 md:h-24 inline mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1300x0/marketing/pianote/products/prima/headline.webp">
-        
+
         <p class="text-lg py-2 md:py-4">
             Every Pianote Prima comes with a <span class="italic text-[#B99964]"><strong>FREE</strong></span> download of Bechstein’s Digital Grand Essentials.
         </p>
-        
+
         <div class="max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center md:items-start md:gap-8 pt-6">
             <div class="w-full md:w-6/12 space-y-4 md:space-y-6 text-left lg:px-6 leading-normal">
                 <p>The Pianote Prima has a beautiful piano sound built in, but we’ve partnered with German piano manufacturer Bechstein to include their <span class="text-[#B99964]"><strong>Digital Grand Essentials (valued at $136)</strong></span> with every Pianote Prima.</p>
@@ -387,9 +387,9 @@
             </div>
 
             <div class="flex-shrink-0 w-full sm:w-10/12 md:w-6/12 flex justify-center items-center md:py-6">
-                <img 
-                    src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/spread.webp" 
-                    alt="Laptop Preview" 
+                <img
+                    src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/spread.webp"
+                    alt="Laptop Preview"
                     class="w-full h-auto object-contain"
                 >
             </div>
@@ -519,10 +519,10 @@
                                     <h5 class="mb-2"><strong>{!! $pack['header'] !!}</strong>
                                     </h5>
                                     <div class="flex items-center space-x-2 mb-4">
-                                        <span class="text-lg line-through opacity-30"><strong>${{ $pack['price'] }}</strong></span>
-                                        <span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
+                                        <span class="text-lg line-through opacity-30"><strong>${{ $pack['price'] }}</strong> Value</span>
+                                        {{--<span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
                                             {{ $pack['badge'] }}
-                                        </span>
+                                        </span>--}}
                                     </div>
                                     <div>
                                         {!! $pack['description'] !!}

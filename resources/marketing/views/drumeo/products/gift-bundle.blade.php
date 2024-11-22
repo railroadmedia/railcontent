@@ -79,7 +79,7 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-        <h2 class="leading-tight text-center"><strong>Here's what's you'll get with this bundle.</strong></h2>
+        <h2 class="leading-tight text-center pb-2"><strong>Here's what's you'll get with this bundle.</strong></h2>
         <p class="leading-normal text-center mb-3 lg:pb-6 md:px-12">The perfect way to gift Drumeo to a friend – you’ll get a physical one-year access pass to Drumeo that can be redeemed anytime along with three additional gifts for a lucky drummer in your life. </p>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,

@@ -11,7 +11,10 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <style>
-        .splide__arrow.pianote svg {
+        .splide__pagination__page.is-active {
+            background:#ddd!important;
+        }
+        .splide .splide__arrow svg {
             fill:#F61A30 !important;
         }
     </style>
@@ -84,21 +87,21 @@
                     'full' => true,
                     'visible' => 1,
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m.webp',
                 ],
                 [
                     'slug' => '/shop/prima',
                     'full' => true,
                     'visible' => 1,
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full-m.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full-m.webp',
                 ],
                 [
                     'slug' => '/shop/prima-ultimate',
                     'full' => true,
                     'visible' => 1,
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full-m.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full-m.webp',
                 ],
             ];
         @endphp
@@ -157,15 +160,15 @@
                         "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                     ])
                 @endforeach
-                    @include('_partials.components.shop.product-card', [
-                        "discounted_price" => 90,
-                        "href" => "https://www.musora.com/gift-card",
-                        "instructor" => "Award-Winning Membership",
-                        "price" =>  90,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
-                        "title" => "Musora Gift Cards",
-                        'soldOut' => false,
-                    ])
+{{--                    @include('_partials.components.shop.product-card', [--}}
+{{--                        "discounted_price" => 90,--}}
+{{--                        "href" => "https://www.musora.com/gift-card",--}}
+{{--                        "instructor" => "Award-Winning Membership",--}}
+{{--                        "price" =>  90,--}}
+{{--                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",--}}
+{{--                        "title" => "Musora Gift Cards",--}}
+{{--                        'soldOut' => false,--}}
+{{--                    ])--}}
             </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
                     <span
@@ -188,7 +191,7 @@
                          "discounted_price" => 399,
                          "title" => "The Book Bundle",
                          "instructor" => "Get the best online piano lessons and a library of piano books",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -197,7 +200,7 @@
                          "discounted_price" => 599,
                          "title" => "The Keyboard Bundle",
                          "instructor" => "Get the best beginner digital piano, Pianote Annual Membership, and 5 lifetime bonuses",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -206,7 +209,7 @@
                          "discounted_price" => 799,
                          "title" => "The ULTIMATE Bundle",
                          "instructor" => "Everything you need to start playing the piano",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle.webp",
                          'soldOut' => false,
                     ])
 
@@ -215,7 +218,7 @@
                          "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
                          "discounted_price" => floatval($productPrices['taktell-piccolo-metronome']->price),
                          "title" => "The Pianote Metronome",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-01.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-01.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -223,7 +226,7 @@
                          "price" => floatval($productPrices['pianote-book-bag']->discounted_price),
                          "discounted_price" => floatval($productPrices['pianote-book-bag']->price),
                          "title" => "The Pianote BookBag",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-02.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-02.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -231,7 +234,7 @@
                          "price" => floatval($productPrices['piano-chords-and-scales-guide']->discounted_price),
                          "discounted_price" => floatval($productPrices['piano-chords-and-scales-guide']->price),
                          "title" => "Piano Chords & Scales",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-03.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-03.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -241,7 +244,7 @@
                          "price" => 1,
                          "discounted_price" => 1,
                          "title" => "Pianote Headphones",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04.webp",
                          'soldOut' => false,
                     ])
                 </div>
@@ -263,7 +266,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 50,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=50",
                         "price" =>  50,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-50.webp",
                         "title" => "$50 Digital Gift Card",
@@ -271,7 +274,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 100,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=100",
                         "price" =>  100,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-100.webp",
                         "title" => "$100 Digital Gift Card",
@@ -279,7 +282,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 240,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=240",
                         "price" =>  240,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-240.webp",
                         "title" => "$240 Digital Gift Card",

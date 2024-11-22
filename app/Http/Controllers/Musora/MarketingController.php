@@ -12,6 +12,7 @@ class MarketingController extends BaseController
         return view('musora.sales.subscription', [
             'theme' => 'musora',
             'fullSubscriptionVersion' => true,
+            'promoVersion' => 'true',
             'bfVersion' => 'true',
         ]);
     }
@@ -159,6 +160,10 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.gift-card');
     }
+    public function Egiftcard()
+    {
+        return view('musora.pages.electronic-gift-card');
+    }
     public function method()
     {
         return view('musora.pages.method', [ 'theme' => 'musora', 'page' => 'method' ]);
@@ -210,5 +215,9 @@ class MarketingController extends BaseController
     public function lifetimeDeal()
     {
         return view('musora.pages.lifetime', [ 'theme' => 'musora']);
+    }
+    public function extend()
+    {
+        return view('musora.pages.extend', [ 'theme' => 'musora']);
     }
 }

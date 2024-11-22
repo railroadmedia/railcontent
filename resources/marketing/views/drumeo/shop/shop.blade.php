@@ -11,6 +11,12 @@
 
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
     <style>
+        .splide__arrow svg{
+            fill: #0B76DB !important;
+        }
+        .splide__pagination__page.is-active {
+            background:#ddd!important;
+        }
         @media (min-width: 1536px) { /* Desktop */
             .product-wrap:nth-child(n+11) {
                 display: none;
@@ -148,15 +154,15 @@
 {{--                     'soldOut' => false,--}}
 {{--                        "href" => "/",--}}
 {{--                    ])--}}
-                    @include('_partials.components.shop.product-card', [
-                        "discounted_price" => 90,
-                        "href" => "https://www.musora.com/gift-card",
-                        "instructor" => "Award-Winning Membership",
-                        "price" =>  90,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
-                        "title" => "Musora Gift Cards",
-                        'soldOut' => false,
-                    ])
+{{--                    @include('_partials.components.shop.product-card', [--}}
+{{--                        "discounted_price" => 90,--}}
+{{--                        "href" => "https://www.musora.com/gift-card",--}}
+{{--                        "instructor" => "Award-Winning Membership",--}}
+{{--                        "price" =>  90,--}}
+{{--                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",--}}
+{{--                        "title" => "Musora Gift Cards",--}}
+{{--                        'soldOut' => false,--}}
+{{--                    ])--}}
                     @foreach($lessons as $key => $item)
                         @include('_partials.components.shop.product-card', [
                             "badge" => $item->badge_text,
@@ -195,7 +201,7 @@
                          "discounted_price" => 399,
                          "title" => "The Practice Bundle",
                          "instructor" => "Save $828.87 on most popular practice essentials + lessons.",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -204,7 +210,7 @@
                          "discounted_price" => 599,
                          "title" => "The E-KIT Bundle",
                          "instructor" => "Save $875 on an electronic drum kit + lessons.",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -213,7 +219,7 @@
                          "discounted_price" => 799,
                          "title" => "The ULTIMATE Bundle",
                          "instructor" => "Save 948.90 on our ultimate bundle.",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
                          'soldOut' => false,
                     ])
 
@@ -222,7 +228,7 @@
                          "price" => floatval($productPrices['stickbag']->discounted_price),
                          "discounted_price" => floatval($productPrices['stickbag']->price),
                          "title" => "Drumeo StickBag",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -230,7 +236,7 @@
                          "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->price),
                          "title" => "Drumeo EarDRUM In-Ear Monitors",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -238,7 +244,7 @@
                          "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->price),
                          "title" => "The Drummer’s Toolbox",
-                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03.webp",
                          'soldOut' => false,
                     ])
                 </div>
@@ -260,7 +266,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 50,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=50",
                         "price" =>  50,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-50.webp",
                         "title" => "$50 Digital Gift Card",
@@ -268,7 +274,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 100,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=100",
                         "price" =>  100,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-100.webp",
                         "title" => "$100 Digital Gift Card",
@@ -276,7 +282,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 240,
-                        "href" => "https://www.musora.com/gift-card",
+                        "href" => "https://www.musora.com/electronic-gift-card?amount=240",
                         "price" =>  240,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gc-240.webp",
                         "title" => "$240 Digital Gift Card",

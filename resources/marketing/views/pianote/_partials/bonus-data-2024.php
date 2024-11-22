@@ -21,7 +21,7 @@ $bonusVideos = [
         'header' => 'Pianote Annual Membership',
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'offerPrice' => '<strong><span class="opacity-30 line-through">$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
         'sku' => 'pianote-membership-deal'
     ],
@@ -30,7 +30,7 @@ $bonusVideos = [
         'header' => 'New Piano Players Start Here',
         'description' => '<p>This is your first 30 days on the piano.</p><p class="my-2">Just sit down, press play, and follow along as Lisa guides you through a daily 10-minute lesson.</p> <p>No complicated theory. No need to read music. No frustration.</p>',
         'vimeoId' => '798501810',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 127,
         'sku' => 'new-piano-players-start-here'
     ],
@@ -39,7 +39,7 @@ $bonusVideos = [
         'header' => 'Easy Chords',
         'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p>',
         'vimeoId' => '823788317',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 127,
         'sku' => 'easy-chords'
     ],
@@ -57,7 +57,7 @@ $bonusVideos = [
         'header' => '30-Day Blues Piano',
         'description' => '<p>Let’s get Bluesy!</p><p class="my-2">In just 10 minutes a day, you’ll learn everything from the basic Blues structure and the most important scale, through to the Blues riffs and fills you’ll use to tell a musical story in the final week.</p> <p>It’s the most fun way to learn the Blues.</p>',
         'vimeoId' => '852795615',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 127,
         'sku' => '30-day-blues-piano'
     ],
@@ -75,7 +75,7 @@ $bonusVideos = [
         'header' => '30 Days To Better Technique',
         'description' => '<p>Improve your finger strength, coordination, and speed with GRAMMY-winner Jordan Rudess.</p><p class="my-2">The Dream Theater keyboardist will guide you through 30 days of exercises that WILL make you a better piano player…</p><p>Guaranteed.</p>',
         'vimeoId' => '928599834',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 127,
         'sku' => '30-days-to-better-technique'
     ],
@@ -93,7 +93,7 @@ $bonusVideos = [
         'header' => 'The Classical Piano Collection',
         'description' => '<p>Play the most beautiful piano pieces ever written.</p><p class="my-2">You’ll get lifetime access to guided step-by-step tutorials for Moonlight Sonata, Für Elise, Gymnopédie, Prelude in C, and Prelude in E minor.</p><p>Learn the pieces that made you fall in love with the piano.</p>',
         'vimeoId' => '1008560089',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 127,
         'sku' => 'classical-piano-collection'
     ],
@@ -102,7 +102,7 @@ $bonusVideos = [
         'header' => 'The Pianote PracticeKit',
         'description' => '<p>Essential tools to maximize your practice time and improve your playing.</p><p class="my-2">Remember the note names thanks to the Piano Key Overlay. Place the rubber strip over your piano keys. No messy residue!</p><p>And keep detailed notes with mechanical pencils, colored pencils, highlighters, and sticky notes.</p>',
         'vimeoId' => '1002072203',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 49,
         'sku' => 'practice-kit'
     ],
@@ -110,7 +110,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/the-little-book-bundle.webp',
         'header' => 'The Little Book Bundle',
         'description' => '<p>Improve your chording, technique, and arpeggios.</p><p class="my-2">You’ll get The Little Book of Chord Progressions, The Little Book of Arpeggios, and The Little Book of Hanon.</p><p>These little books will make a BIG difference to your playing!</p>',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 21,
         'sku' => 'little-book-bundle'
     ],
@@ -118,7 +118,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-gift-bundle/MTPB.webp',
         'header' => 'Pianote Music Theory Poster Bundle',
         'description' => '<p>Theory can be hard. But this set of 6 color posters helps break down the essential concepts of music theory.</p><p class="my-2">Your loved one will easily learn the notes, chords, and scales with this high-quality posters that look great in any practice space.</p>',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 39,
         'sku' => 'music-theory-posters'
     ],
@@ -135,7 +135,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/CSB.webp',
         'header' => 'Piano Chords & Scales: The Ultimate Guide',
         'description' => '<p>This book will help you learn every chord shape, chord variation, and scale in EVERY key.</p><p class="my-2">The tabs on the side make it easy to look up any note and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.</p>',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 39,
         'sku' => 'piano-chords-and-scales-guide'
     ],
@@ -143,7 +143,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/PP.webp',
         'header' => 'Pianote Planner',
         'description' => '<p>Always know exactly what to practice.</p><p class="my-2">The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.</p>',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 39,
         'sku' => 'pianote-practice-planner'
     ],
@@ -151,7 +151,7 @@ $bonusVideos = [
         'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/CPP.webp',
         'header' => 'The Most Beautiful Classical Piano Pieces Book',
         'description' => '<p>Bach. Beethoven. Chopin. Debussy. When you think of classical piano, you think of iconic pieces from the greats.</p><p class="my-2">This book contains 20 of the most beautiful classical piano pieces, in original and simplified arrangements. You’ll find Für Elise, Moonlight Sonata, Clair de Lune, and so much more.</p>',
-        'badge' => 'FREE BONUS',
+        'badge' => null,
         'price' => 49,
         'sku' => 'classical-piano-pieces'
     ]

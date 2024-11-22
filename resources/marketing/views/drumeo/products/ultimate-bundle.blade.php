@@ -61,15 +61,15 @@
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        PLAY-ALONG LESSONS
+                        ELECTRONIC DRUM SET
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        POPULAR SONGS
+                        1 YEAR OF DRUM LESSONS
                     </span>
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
-                        WORLD-CLASS TEACHERS
+                        8 FREE LIFETIME BONUSES
                     </span>
                 </div>
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage.webp" alt="Bundle Collage">

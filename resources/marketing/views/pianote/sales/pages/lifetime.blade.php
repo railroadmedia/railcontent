@@ -72,8 +72,14 @@
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
-                <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last chance)</span></h2>
-                
+                <h2 class="leading-none mb-1">
+                    @if(!empty($upgradeVersion))
+                        <s class="opacity-60">$1200</s> <strong>$960</strong>
+                    @else
+                        <strong>$1200</strong>
+                    @endif
+                    <span class="text-musora text-2xl"> (last chance)</span></h2>
+
                {{-- @if($stock > 0) --}}
                    <a class="join musora mt-4 w-full anchor-slide text-black sm:max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>
                    <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
@@ -107,9 +113,9 @@
     <section class="bg-gray-100 py-8 px-4 md:py-12 lg:py-24 lg:px-8">
         <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-left sm:text-center md:text-left">
             <div class="w-full sm:w-10/12 md:w-5/12">
-                <img 
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/lifetime-deal/coach-collage.webp" 
-                    alt="Group of people" 
+                <img
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/lifetime-deal/coach-collage.webp"
+                    alt="Group of people"
                     class="w-full"
                 />
             </div>
@@ -121,7 +127,7 @@
                 </strong>
                 </h3>
                 <p class="mb-2 md:mb-4">
-                    All good things must come to an end.                
+                    All good things must come to an end.
                 </p>
                 <p class="mb-2 md:mb-4">
                    Our mission is to make music accessible to everyone. And as the Pianote membership continues to grow and expand, with new courses, Challenges, and instruments being added (and more to come)...
@@ -137,8 +143,12 @@
                  <p class="mb-2 md:mb-8">
                     So this is your LAST CHANCE to lock in a lifetime of piano lessons (and singing, guitar, drums, and… 😉).
                 </p>
-                <a 
-                    href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" 
+                <a
+                    @if(!empty($upgradeVersion))
+                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
+                    @else
+                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
+                    @endif
                     class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
                 >
                     GET THE DEAL
@@ -146,7 +156,7 @@
             </div>
         </div>
     </section>
-    
+
     @include('drumeo._partials.countdown-bundle-2024')
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
@@ -167,14 +177,26 @@
                     @endif
                 </h2> --}}
                {{-- @if($stock > 0) --}}
-                    <h2 class="leading-none my-4 md:my-6"><strong>$1200 </strong><span class="text-musora text-2xl"> (Only 100 left)</span></h2>
-                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
+                    <h2 class="leading-none my-4 md:my-6">
+                        @if(!empty($upgradeVersion))
+                            <s class="opacity-60">$1200</s> <strong>$960</strong>
+                        @else
+                            <strong>$1200</strong>
+                        @endif
+                        <span class="text-musora text-2xl"> (Only 100 left)</span></h2>
+                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
+                        @if(!empty($upgradeVersion))
+                            href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
+                        @else
+                            href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
+                        @endif
+                    >GET THE DEAL <i class="fas fa-arrow-right"></i></a>
                     <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
                {{-- @else
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
                @endif --}}
             </div>
-           
+
 {{--            @if($stock > 0)--}}
 {{--                <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
 {{--                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
@@ -183,7 +205,7 @@
 {{--            @endif--}}
         </div>
     </section>
-   
+
 
 
     @include('pianote.sales.partials._footer')

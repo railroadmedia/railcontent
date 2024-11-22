@@ -37,12 +37,13 @@
     ])
 
     @php
-        if(!empty($products['DLM-Lifetime']->getPublicStockCount())) {
-            $stock = $products['DLM-Lifetime']->getPublicStockCount();
-        }
-        else {
-            $stock = 0;
-        }
+        $stock = 500;
+//    if(!empty($products['DLM-Lifetime']->getPublicStockCount())) {
+//        $stock = $products['DLM-Lifetime']->getPublicStockCount();
+//    }
+//    else {
+//        $stock = 0;
+//    }
     @endphp
 {{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--        "name" => "Lifetime",--}}

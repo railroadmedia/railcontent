@@ -223,21 +223,21 @@
                             @endif --}}
                             <span style="display:inline-block;">
                             @if(!empty($bonus['price']))
-                                    <s class="opacity-40">${{ $bonus['price'] }}</s>
+                                    <s class="opacity-60">${{ $bonus['price'] }} Value</s>
                                 @endif
-                                @if(!empty($bonus['customText']))
-                                    <strong class="{{ $textColor }}">{{ $bonus['customText'] }}</strong>
-                                @else
-                                    <strong class="{{ $textColor }}">FREE</strong>
-                                @endif
-                                <br>
-                                <em>
-                                    @if(!empty($bonus['physical']))
-                                        Physical Bonus
-                                    @else
-                                        Lifetime Access
-                                    @endif
-                                </em>
+{{--                                @if(!empty($bonus['customText']))--}}
+{{--                                    <strong class="{{ $textColor }}">{{ $bonus['customText'] }}</strong>--}}
+{{--                                @else--}}
+{{--                                    <strong class="{{ $textColor }}">FREE</strong>--}}
+{{--                                @endif--}}
+{{--                                <br>--}}
+{{--                                <em>--}}
+{{--                                    @if(!empty($bonus['physical']))--}}
+{{--                                        Physical Bonus--}}
+{{--                                    @else--}}
+{{--                                        Lifetime Access--}}
+{{--                                    @endif--}}
+{{--                                </em>--}}
                             </span>
                         </p>
                     </div>

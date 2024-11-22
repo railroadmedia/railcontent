@@ -122,10 +122,11 @@
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
+        'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
             'logoHeight' => 'h-16 sm:h-18 md:h-24',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',            
-            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true', 
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',
+            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
             'bundle'=> "deal",
             ])
     </div>

@@ -295,52 +295,30 @@
             'instrument' => 'guitar',
         ])
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'marketing/guitareo/products/30-days-to-better-strumming/30DTBS-cart.jpg',
-                    'title' => '30 Days To Better Strumming',
-                    'description' => 'Strum with confidence in just 30 days.',
-                    'price' => 97,
-                    'shipping' => 'true'
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
-        'header' => 'Online guitar lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
+        @include('drumeo._partials.countdown-bundle-2024')
+
+        @include('musora.sales.components.order-section-collage-bf', [
+        'headerLight' => true,
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        'orderUrl' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&promo-code=musora-deal-2024&locked=true',
         ])
     @else
-
-        @if(!empty($bfVersion))
-            @include('drumeo._partials.countdown-bundle-2024')
-
-            @include('musora.sales.components.order-section-collage-bf', [
-            'headerLight' => true,
-            'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-            'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
-            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
-            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
-            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-            'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
-            'orderUrl' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&promo-code=musora-deal-2024&locked=true',
-            ])
-        @else
-            @include('musora.sales.components.order-section-collage', [
-            'headerLight' => true,
-            'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-            'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
-            'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
-            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
-            <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-            'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
-            ])
-        @endif
+        @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        ])
     @endif
 
     @include('musora.sales.components.app-section', [

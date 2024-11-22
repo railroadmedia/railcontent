@@ -21,7 +21,7 @@
                     x-bind:class="filter === 'accessories' && 'active text-gray-900 font-black border-b-2 border-{{ $brand }}'"
                     x-on:click="filter = 'accessories'"
                 >
-                    Accessories
+                    Gear
                 </h4>
                 @if(empty($noClothing))
                 <h4

@@ -9,10 +9,10 @@
         @if($theme === 'drumeo' || $theme === 'pianote')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-16 sm:h-24 lg:h-28 mx-auto'
+                    'styles' => 'h-16 sm:h-24 lg:h-28 mb-4 sm:mb-5 mx-auto'
                 ])
             </a>
-            <h5 class="leading-tight my-4 sm:my-5">{!! $text !!}</h5>
+{{--            <h5 class="leading-tight my-4 sm:my-5">{!! $text !!}</h5>--}}
 
             <div x-data="timer()" x-init="countdown()" {{--x-cloak x-show="day < 8"--}}>
                 <div class="inline-flex flex-wrap mx-auto justify-center items-center">

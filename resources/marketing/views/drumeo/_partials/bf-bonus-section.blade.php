@@ -33,7 +33,7 @@
 
                         <div class="flex items-center space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
-                                <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong></span>
+                                <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> Value</span>
                             @endif
                             @if(!empty($bonusVideo['offerPrice']))
                                 <span class="text-lg">{!! $bonusVideo['offerPrice'] !!}</span>
