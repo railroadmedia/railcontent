@@ -172,7 +172,7 @@
                         @else
                             <strong>$1200</strong>
                         @endif
-                        <span class="text-musora text-2xl"> (Only 100 left)</span></h2>
+                    </h2>
                     <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
                         @if(!empty($upgradeVersion))
                             href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
