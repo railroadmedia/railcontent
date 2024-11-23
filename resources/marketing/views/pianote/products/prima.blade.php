@@ -671,7 +671,7 @@
             style="background:#EAE4DF;"
         @endif>
         <div class="container max-w-5xl mx-auto relative z-50">
-            <p class="leading-normal" style="width: 100%"><strong>Free Shipping In The USA</strong>
+            <p class="leading-normal" style="width: 100%"><strong>Free Shipping In The USA & Canada</strong>
                 *Discounted rates elsewhere </p>
         </div>
     </section>

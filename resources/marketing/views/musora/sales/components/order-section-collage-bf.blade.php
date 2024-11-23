@@ -7,7 +7,7 @@
   x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
+            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 md:p-10 lg:p-5 mb-4 sm:mb-0"
             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
             x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
                 <picture>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="w-full sm:w-72 lg:w-96 mx-auto sm:mx-0">
+                    <div class="w-full mx-auto sm:mx-0">
                         <h2 class="leading-none mt-1 md:mt-4 text-center leading-tight"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-musora text-2xl">(Save 41%)</span></h2>
                         <p class="text-xs italic text-center mb-1 md:mb-3"><em> For your first year, then $240/yr.</em></p>
                         <a role="link" aria-label="Start your membership" class="w-full sm:max-w-[370px] smaller join my-3 py-4 text-xl md:text-2xl @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
@@ -98,7 +98,10 @@
                                 GET THE DEAL <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
-                        <p class="text-sm italic text-center"><em> New students only. Renews at <br class="md:hidden">$240/year. Cancel anytime.</em></p>
+                        <p class="text-xs italic text-center"><em> New students only. Renews at $240/year. <br class="block sm:hidden">Cancel anytime.</em></p>
+                         <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
+                            <p class="text-xs text-center"><em>Annual members, <br class="block sm:hidden"><span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
+                        </a>
                        {{-- <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p> --}}
                         {{-- @if(!empty($theme) && $theme == 'musora')
                             <div class="flex justify-center sm:justify-start">
