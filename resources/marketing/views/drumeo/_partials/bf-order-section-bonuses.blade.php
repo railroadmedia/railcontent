@@ -284,7 +284,13 @@
             @endif
             </a>
             <br>
-                @if($bundle == 'deal') <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>New annual students only. Renews at $240/year. Cancel anytime.</em></p> @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+                @if($bundle == 'deal') <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
+                <em>New annual students only. Renews at $240/year. Cancel anytime.</em></p> 
+                 <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
+                 <p class="text-xs sm:text-sm md:text-base"><em>Annual members, <span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
+                </a>
+                @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+           
             </div>
     </section>
 </div>

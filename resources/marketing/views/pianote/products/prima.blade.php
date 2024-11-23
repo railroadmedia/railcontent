@@ -641,7 +641,7 @@
                             </picture>
                         @else
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
-                            <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-xs mx-auto">Get the Pianote PRIMA + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
 
                         <h3 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
