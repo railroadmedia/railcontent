@@ -116,12 +116,28 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-2', [
-        "name" => "Pianote BookBag",
-        "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
-        "price" => $discountedPrice,
-        "noBreadcrumb" => true
-    ])
+    @if(!empty($ultimate))
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 1642,
+            "price" => 799,
+            "noBreadcrumb" => true
+        ])
+    @elseif(!empty($lifetime))
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 599,
+            "price" => 599,
+            "noBreadcrumb" => true
+        ])
+    @else
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 1374,
+            "price" => 599,
+            "noBreadcrumb" => true
+        ])
+    @endif
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">

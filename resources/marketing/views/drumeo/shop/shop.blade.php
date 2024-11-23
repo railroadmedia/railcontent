@@ -167,6 +167,26 @@
                             'fetch' => $key < 4 ? true : null,
                         ])
                     @endforeach
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/drumeo-deal",
+                             "price" => 240,
+                             "discounted_price" => 140,
+                             "title" => "The Drumeo deal",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal-square.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/lifetime",
+                             "price" => 1200,
+                             "discounted_price" => 1200,
+                             "title" => "Lifetime Membership",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal-square.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
 
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center">
@@ -183,7 +203,7 @@
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+                <div style="margin-bottom: 0;" class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/practice-bundle",
                          "price" => 1227.87,
@@ -211,7 +231,15 @@
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
                          'soldOut' => false,
                     ])
-
+                </div>
+                <div class="text-center">
+                    <p class="leading-tight border border-gray-300 px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
+                        <i class="fas fa-sparkle mr-3"></i>
+                        <strong class="font-black">All Black Friday Bundles =</strong> <i class="fas fa-sparkle lg:hidden ml-3"></i><br class="lg:hidden"> FREE SHIPPING to USA/CANADA and Discounted Shipping Worldwide.
+                        <i class="fas fa-sparkle hidden lg:inline lg:ml-3"></i>
+                    </p>
+                </div>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->discounted_price),
@@ -304,6 +332,36 @@
                         "title" => $item->name,
                     ])
                 @endforeach
+                    <div x-cloak x-show="filter === 'accessories'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/practice-bundle",
+                             "price" => 1227.87,
+                             "discounted_price" => 399,
+                             "title" => "The Practice Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'accessories'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/kit",
+                             "price" => 1474,
+                             "discounted_price" => 599,
+                             "title" => "The E-KIT Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'accessories'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/ultimate-bundle",
+                             "price" => 1747.99,
+                             "discounted_price" => 799,
+                             "title" => "The ULTIMATE Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
                     <span

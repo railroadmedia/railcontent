@@ -37,14 +37,12 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner-2', [--}}
-{{--                "name" => "Lifetime",--}}
-{{--                "fullPrice" => 1200,--}}
-{{--                "price" => 1200,--}}
-{{--                    "specialText" => "<strong>Only <s class='opacity-60'>100</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
-{{--                "noBreadcrumb" => true,--}}
-{{--                "noCountdown" => true--}}
-{{--            ])--}}
+    @include('_partials.components.shop.promo-banner-2', [
+                "name" => "Lifetime",
+                "fullPrice" => 1200,
+                "price" => 1200,
+                "noBreadcrumb" => true,
+            ])
     <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">
         <img alt="Bundle" class="h-10 sm:h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal/lifetime-logo.svg"><br>
@@ -56,7 +54,7 @@
 
 {{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span--}}
 {{--                                    x-text="dayText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span--}}
 {{--                                    x-text="hourText"></span></span>--}}
 {{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span--}}
 {{--                                    x-text="minuteText"></span></span>--}}

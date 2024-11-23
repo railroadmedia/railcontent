@@ -21,7 +21,7 @@
                             <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
                             <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
                         </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
                             <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">00</div>
                             <div class="text-xs font-semibold" x-text="hourText">HRS</div>
                         </div>

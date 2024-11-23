@@ -15,7 +15,8 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/share-image-home.jpg">
+{{--        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/share-image-pianote2.webp ">--}}
     @endif
 
     @include('_partials.layout._fonts')
@@ -194,7 +195,7 @@
                             <div class="text-lg leading-none font-extrabold" x-text="day">00</div>
                             <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
                         </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
+                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
                             <div class="text-lg leading-none font-extrabold" x-text="hour">00</div>
                             <div class="text-xs font-semibold" x-text="hourText">HRS</div>
                         </div>

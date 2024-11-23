@@ -33,12 +33,12 @@
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 67%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'book':
             $borderColor = 'border-[#7E56FF]';
             $textColor = 'text-[#7E56FF]';
-            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF] text-xl md:text-3xl">(Save 69%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#7E56FF] text-xl md:text-3xl">(Save 70%)</span>';
             break;
         default:
             $borderColor = 'border-none';
@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                     @if($bundle == 'deal')
-                                    <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s><strong> $140<strong></p>
+                                        <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s></span><strong> $140</strong></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
                                     @endif
@@ -184,6 +184,8 @@
                                     GET the deal <i class="fas fa-arrow-right"></i>
                                 @endif
                             </a>
+
+
                         </div>
                     </div>
                     <br>
@@ -333,7 +335,6 @@
                     @else <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
                     @endif
                 </div>
-            </div>
         </section>
     </div>
 

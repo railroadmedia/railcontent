@@ -54,12 +54,12 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    {{-- @include('_partials.components.shop.promo-banner-2', [
-        'name' => 'Classical Piano Pieces',
-        'fullPrice' => floatval($productPrices['read-music-in-30-days-workbook']->price),
-        'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
+     @include('_partials.components.shop.promo-banner-2', [
+        'name' => 'Gift Bundle',
+        'fullPrice' => 349,
+        'price' => 240,
         'noBreadcrumb' => true,
-    ]) --}}
+    ])
      <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[600px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-gift-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl lg:pt-10">

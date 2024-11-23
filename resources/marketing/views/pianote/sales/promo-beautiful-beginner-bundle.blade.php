@@ -279,7 +279,7 @@
 {{--                <br>--}}
 {{--            <span x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
@@ -1035,7 +1035,7 @@
 {{--                        <p class="leading-tight text-sm"><span class="text-pianote">Discount ends in:</span><br>--}}
 {{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
@@ -1064,7 +1064,7 @@
 {{--                        <p class="leading-tight text-sm"><span class="text-pianote">Offer ends in:</span><br>--}}
 {{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}

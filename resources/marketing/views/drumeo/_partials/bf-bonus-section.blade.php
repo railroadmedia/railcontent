@@ -49,8 +49,8 @@
                                 </span>
                             @endif
                         </div>
-                        
-                        @else 
+
+                        @else
                         <div class="flex items-center flex-wrap space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
                                 <span class="text-lg opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> @if(!empty($case) && $case == 'challenges') @else Value @endif</span>
@@ -84,7 +84,14 @@
     @endforeach
 </div>
 
-<div class="container mx-auto text-center py-6 md:pt-16 md:pb-8 @if(!empty($noButton)) hidden @endif">
+<div class="container mx-auto text-center pt-6 md:pt-16 @if(!empty($noButton)) hidden @endif">
     <a href="#customize-anchor" class="join @if($theme === 'drumeo') blue @else pianote @endif smaller w-full md:max-w-[350px] text-xl anchor-slide"> GET THE DEAL</a>
+</div>
+<div class="text-center">
+    <p class="leading-tight border border-gray-300 px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
+        <i class="fas fa-sparkle mr-3"></i>
+        <strong class="font-black">All Black Friday Bundles =</strong> <i class="fas fa-sparkle lg:hidden ml-3"></i><br class="lg:hidden"> FREE SHIPPING to USA/CANADA and Discounted Shipping Worldwide.
+        <i class="fas fa-sparkle hidden lg:inline lg:ml-3"></i>
+    </p>
 </div>
 
