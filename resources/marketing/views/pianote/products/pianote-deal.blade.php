@@ -99,7 +99,7 @@
         </div>
     </section>
 
-    <div x-data="{lazyLoad: false}">
+    <div x-data="{lazyLoad: false}" class="sm:pt-10 lg:pt-4">
          @include('musora.sales.components.guarantee-section', [
         'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',

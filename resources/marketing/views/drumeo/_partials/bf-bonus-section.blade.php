@@ -83,3 +83,8 @@
         @endif
     @endforeach
 </div>
+
+<div class="container mx-auto text-center py-6 md:pt-16 md:pb-8 @if(!empty($noButton)) hidden @endif">
+    <a href="#customize-anchor" class="join @if($theme === 'drumeo') blue @else pianote @endif smaller w-full md:max-w-[350px] text-xl anchor-slide"> GET THE DEAL</a>
+</div>
+

@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                     @if($bundle == 'deal')
-                                    <p class="w-full leading-normal mt-2 uppercase"> <span><s class="opacity-60">$240</s><strong> $140<strong></p>
+                                    <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s><strong> $140<strong></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
                                     @endif
@@ -331,8 +331,10 @@
                     <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
                         <p class="text-xs sm:text-sm md:text-base"><em>Annual members, <span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
                     </a>
-                    @else <p><em>Renews at $240/year. Cancel anytime.</em></p> @endif
+                    @else <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p> 
+                    @endif
                 </div>
             </div>
         </section>
     </div>
+
