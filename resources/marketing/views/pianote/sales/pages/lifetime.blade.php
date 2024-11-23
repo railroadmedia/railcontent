@@ -68,9 +68,9 @@
 
            <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:900px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    {{-- <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/918163289" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>  --}}
+                     <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/1032522497" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
                     {{-- Todo: Update video ID --}}
-                    <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/pianote-lifetime-thumb.webp" alt="Lifetime Video">
+{{--                    <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/november/pianote-lifetime-thumb.webp" alt="Lifetime Video">--}}
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
