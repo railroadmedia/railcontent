@@ -540,7 +540,7 @@
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Peace of mind - guaranteed.</strong></h2>
-            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day lessons guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
+            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
             @if(!empty($lifetime))
                 <picture>
                     <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">

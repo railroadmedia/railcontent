@@ -118,7 +118,7 @@ $bonusVideos = [
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/quietkick-new.webp',
         'header' => 'Drumeo QuietKick',
-        'description' => '<p>Drummers are notorious for it.</p><p class="my-2">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>',
+        'description' => '<p>The QuietKick includes everything you need to start working out your foot.</p><p class="my-2"> You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>',
         'badge' => null,
         'price' => 79.00,
         'sku' => 'quietkick'

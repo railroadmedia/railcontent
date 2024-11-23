@@ -25,7 +25,7 @@ $bonuses = [
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-11-new.webp',
         'title' => 'Practice Planner',
         'description' => 'Always know exactly what to practice.',
         'price' => floatval($productPrices['pianote-practice-planner']->price),
@@ -34,7 +34,7 @@ $bonuses = [
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-10.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-10-new.webp',
         'title' => 'Chords & <br>Scales Book',
         'description' => 'Your encyclopedia of piano chords & scales.',
         'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
@@ -188,7 +188,7 @@ $bonuses = [
         'physical' => true,
     ],
     [
-        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12.webp',
+        'image' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-12-new.webp',
         'description' => 'Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.',
         'price' => 49,
         'shipping' => true,
