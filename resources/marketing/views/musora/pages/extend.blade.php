@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data-2024.php'));
+@endphp
+
 @extends('musora._partials.layout', [
     'hideJoin' => true,
 ])
@@ -87,6 +91,7 @@
     <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20"
         style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/extend/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">
+            <div id="customize-anchor" class="anchor"></div>
             <img alt="Bundle" class="h-16 sm:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/promos/november/extend/students-logo.webp"><br>
                 <h2 class="leading-tight pt-3 lg:pt-6"><strong>Get a free $100 electronic gift card <br class="hidden sm:inline"> when you extend your membership.</strong></h2>
 
@@ -94,8 +99,7 @@
                 <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/extend/musora-collage.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
-                <h2 class="leading-none mb-1"><strong>$240</strong></h2>
-                <p class="leading-tight opacity-90">(Includes free $100 gift card.)</p>
+                <h5 class="leading-none mb-1"><strong>$240</strong> <em>(Includes free $100 gift card.)</em></h5>
                 <a
                     href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100]=1&promo-code=musora-extend-2024&locked=true"
                     class="join w-full sm:max-w-xs musora smaller mt-4"
@@ -105,23 +109,32 @@
             </div>
         </div>
     </section>
-    <section class="py-8 px-4 lg:py-16 lg:px-8">
-        <div class="container mx-auto max-w-2xl">
+    @php
+        $videoTargetSkus = ['extension', 'all-access', 'store-credit', 'redeem-credit'];
+    @endphp
 
-            <div class="w-full text-left">
-                <p class="leading-normal">
-                    Here are the details:
-                </p>
-                <ul class="fa-ul list-disc pl-4 my-4">
-                    <li class="leading-normal mb-2"><strong>Membership Extension:</strong> Your Musora+ membership will be extended beyond the current renewal date – to add one full year, no matter when your renewal date is scheduled.</li>
-                    <li class="leading-normal mb-2"><strong>All-Access:</strong> Your membership extension gives you access to Drumeo, Pianote, Guitareo, Singeo – and includes our Songs experience.</li>
-                    <li class="leading-normal mb-2"><strong>Receive Store Credit:</strong> You’ll receive an email with an electronic gift card with $100 that will work in any of the Musora stores.</li>
-                    <li class="leading-normal"><strong>Redeem Store Credit:</strong> Simply apply the e-gift card code during checkout to redeem your store credit. There’s no expiration date – so you can use it whenever you want on the music accessories or merchandise of your preference. <em class="text-musora">Electronic gift cards cannot be applied towards membership renewals, App Store, or Android purchases.</em></li>
-                </ul>
-                <p class="leading-normal">
-                    This offer is only available for Black Friday – and only for existing Musora members (Drumeo, Pianote, Guitareo, Singeo).
-                </p>
+    <section class="pt-8 pb-16 sm:py-20 lg:pt-20 md:pb-32 px-4 sm:px-6 bg-white text-center">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="leading-tight text-center mb-3 md:pb-6">
+                <strong>Here are the details:</strong>
+            </h2>
+            <div class="text-left">
+                @include('drumeo._partials.bf-bonus-section', [
+                'videoTargetSkus' => $videoTargetSkus,
+                ])
             </div>
+
+            <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg  w-auto inline-block mx-auto">
+                <div class="flex items-start justify-center gap-3 max-w-4xl w-auto">
+                    <div class="flex-shrink-0">
+                        <i class="fa-solid fa-circle-exclamation text-xl"></i>
+                    </div>
+                    <p class="leading-normal">
+                        <span class="font-semibold">This offer is only available for Black Friday – and only for existing<br class="hidden sm:inline"> Musora members (Drumeo, Pianote, Guitareo, Singeo).</span>
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 </div>

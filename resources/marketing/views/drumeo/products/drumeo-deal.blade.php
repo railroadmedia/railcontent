@@ -47,13 +47,12 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    {{-- @include('_partials.components.shop.promo-banner-2', [
-        "name" => "Drumeo E-Kit",
-        "specialText" => "Get <strong>$506.95</strong> in free bonuses with the E-Kit.",
-        "fullPrice" => floatval($productPrices['alesis-ekit']->price),
-        "price" => floatval($productPrices['alesis-ekit']->discounted_price),
+     @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Drumeo Deal",
+        "fullPrice" => 240,
+        "price" => 140,
         "noBreadcrumb" => true
-    ]) --}}
+    ])
 
     @php
         if(!empty($products['alesis-ekit']->getPublicStockCount())) {
@@ -86,7 +85,7 @@
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-xl md:text-3xl">(Save 41%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-xl md:text-3xl">(Save 42%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
                     @else

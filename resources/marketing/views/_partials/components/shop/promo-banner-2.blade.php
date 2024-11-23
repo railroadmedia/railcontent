@@ -64,7 +64,7 @@
                     <p>
                         @if(!empty($price))
                             @if(round(100 - (100 * ($price / $fullPrice))) > 1)
-                                <strong>Save <span class="text-promo">{{ round(100 - (100 * ($price / $fullPrice))) }}%</span> on<br> {{ $name }}</strong>
+                                <strong>Save <span class="text-musora">{{ round(100 - (100 * ($price / $fullPrice))) }}%</span> on<br> {{ $name }}</strong>
                             @elseif(!empty($specialText))
                                 {!! $specialText !!}
                             @endif

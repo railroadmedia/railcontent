@@ -206,4 +206,36 @@ $bonusVideos = [
         'vimeoId' => '982740966',
         'sku' => 'quietpad'
     ],
+    [
+        'image' => 'marketing/musora/promos/november/extend/extension.png',
+        'header' => 'Membership Extension',
+        'description' => '<p>Your Musora+ membership will be extended beyond the current renewal date – to add one full year, no matter when your renewal date is scheduled.</p>',
+        'badge' => null,
+        'price' => null,
+        'sku' => 'extension',
+    ],
+    [
+        'image' => 'marketing/musora/promos/november/extend/access.png',
+        'header' => 'All-Access',
+        'description' => '<p>Your membership extension gives you access to Drumeo, Pianote, Guitareo, Singeo – and includes our Songs experience.</p>',
+        'badge' => null,
+        'price' => null,
+        'sku' => 'all-access',
+    ],
+    [
+        'image' => 'marketing/musora/promos/november/extend/recieve.png',
+        'header' => 'Receive Store Credit',
+        'description' => '<p>You’ll receive an email with an electronic gift card with $100 that will work in any of the Musora stores.</p>',
+        'badge' => null,
+        'price' => null,
+        'sku' => 'store-credit',
+    ],
+    [
+        'image' => 'marketing/musora/promos/november/extend/redeem.png',
+        'header' => 'Redeem Store Credit',
+        'description' => '<p>Simply apply the e-gift card code during checkout to redeem your store credit. There’s no expiration date – so you can use it whenever you want on the music accessories or merchandise of your preference.</p>',
+        'badge' => null,
+        'price' => null,
+        'sku' => 'redeem-credit'
+    ],
 ];

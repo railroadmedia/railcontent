@@ -44,14 +44,12 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner-2', [--}}
-{{--        "name" => "Lifetime",--}}
-{{--        "fullPrice" => 1200,--}}
-{{--        "price" => 1200,--}}
-{{--        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
-{{--        "noBreadcrumb" => true,--}}
-{{--                "noCountdown" => true--}}
-{{--    ])--}}
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Gift Bundle",
+        "fullPrice" => 349,
+        "price" => 240,
+        "noBreadcrumb" => true,
+    ])
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] md:h-[860px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">

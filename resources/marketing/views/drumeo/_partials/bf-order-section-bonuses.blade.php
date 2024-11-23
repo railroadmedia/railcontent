@@ -13,7 +13,7 @@
         case 'practice':
             $borderColor = 'border-[#FF0055]';
             $textColor = 'text-[#FF0055]';
-            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 68%)</span>';
             break;
         case 'gift':
             $borderColor = 'border-[#41F70F]';
@@ -23,12 +23,12 @@
         case 'challenge':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 67%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'deal':
             $borderColor = 'border-[#FFAC00]';
             $textColor = 'text-[#FFAC00]';
-            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00] text-xl md:text-3xl">(Save 41%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
@@ -115,7 +115,7 @@
                                     @endif
                                 </div>
                                 @endif
-                                
+
                                 @if(!empty($secondImage))
                                 <div class="flex-1 relative overflow-hidden rounded-xl"
                                     x-data="{ flipped: false }"
@@ -133,7 +133,7 @@
                                         }">
                                     <div class="aspect-[18/10] relative cursor-pointer" style="perspective: 1000px;">
                                         <div class="absolute inset-0" style="transform-style: preserve-3d;">
-                                            <div x-ref="secondFront" 
+                                            <div x-ref="secondFront"
                                                 class="absolute w-full h-full transition-transform duration-700"
                                                 style="backface-visibility: hidden;">
                                                 <div class="w-full h-full rounded-xl border-2 shadow-lg overflow-hidden {{ $borderColor }}">
@@ -154,7 +154,7 @@
                                                     <p class="text-sm"><strong>DETAILS</strong></p>
                                                 </div>
                                             </div>
-                                            
+
                                             <div x-ref="secondBack"
                                                 class="absolute w-full h-full transition-transform duration-700 -rotate-y-180 {{ $borderColor }}"
                                                 style="backface-visibility: hidden;">
@@ -189,7 +189,7 @@
                     <br>
                     @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
                     @if(!empty($subHeader))<h4 class="leading-tight mt-4 sm:mt-5 mb-2">{!! $subHeader !!}</h4>@endif
-               
+
                 <div style="font-size:0px" class="mb-4 md:mb-8">
                     @foreach($filteredBonuses as $bonus)
                         <div
@@ -326,11 +326,11 @@
                 </a>
                 <br>
                     @if($bundle == 'deal') <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
-                    <em>New annual students only. Renews at $240/year. Cancel anytime.</em></p> 
+                    <em>New annual students only. Renews at $240/year. Cancel anytime.</em></p>
                     <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
                         <p class="text-xs sm:text-sm md:text-base"><em>Annual members, <span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
                     </a>
-                    @else <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p> 
+                    @else <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
                     @endif
                 </div>
             </div>

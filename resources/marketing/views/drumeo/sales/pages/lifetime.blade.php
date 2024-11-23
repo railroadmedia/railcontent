@@ -41,14 +41,12 @@
             $stock = 0;
         }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner-2', [--}}
-{{--        "name" => "Lifetime",--}}
-{{--        "fullPrice" => 1200,--}}
-{{--        "price" => 1200,--}}
-{{--        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
-{{--        "noBreadcrumb" => true,--}}
-{{--                "noCountdown" => true--}}
-{{--    ])--}}
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Lifetime",
+        "fullPrice" => 1200,
+        "price" => 1200,
+        "noBreadcrumb" => true
+    ])
 
     <section class="text-white relative overflow-hidden z-10 object-cover object-center py-10 md:py-20" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">

@@ -13,7 +13,11 @@
     <meta name="description" content="Everything you need to start playing the drums.">
     <meta property="og:description" content="Everything you need to start playing the drums.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/products/kit/share-image.jpg" style="display: none;">
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-share-image.jpg" style="display: none;">
+    @else
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/products/kit/share-image.jpg" style="display: none;">
+    @endif
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')

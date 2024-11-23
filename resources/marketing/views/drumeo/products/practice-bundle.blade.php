@@ -45,14 +45,12 @@
 //        $stock = 0;
 //    }
     @endphp
-{{--    @include('_partials.components.shop.promo-banner-2', [--}}
-{{--        "name" => "Lifetime",--}}
-{{--        "fullPrice" => 1200,--}}
-{{--        "price" => 1200,--}}
-{{--        "specialText" => "<strong>Only <s class='opacity-60'>500</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
-{{--        "noBreadcrumb" => true,--}}
-{{--                "noCountdown" => true--}}
-{{--    ])--}}
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Practice Bundle",
+        "fullPrice" => 1227.87,
+        "price" => 399,
+        "noBreadcrumb" => true,
+    ])
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center" style="height:860px; background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/practice-bundle-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -76,7 +74,7 @@
                 <img class="hidden md:inline object-cover md:max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 68%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else

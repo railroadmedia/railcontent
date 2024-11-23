@@ -26,8 +26,9 @@
                     </h2>
                     <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
-                                class="inline lg:hidden">starting October 28th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class
+{{--                            <br class="inline lg:hidden"> starting October 28th.--}}
+                        </strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative sm:hidden bg-cover bg-top cursor-pointer autoplay-video
                     @if(!empty($platformVersion) && empty($cohort['cohort_trailer'])) hidden @endif
@@ -61,8 +62,8 @@
                             @if(!empty($hasProduct) && $hasProduct == 'true')
                                 <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                             @else
-                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>
-{{--                                <a href="#final" class="join blue smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>--}}
+{{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
+                                <a href="#final" class="join blue smaller medium w-full anchor-slide">LEARN MORE &raquo;</a>
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-jazz">
                                     <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                         Registration is FREE for Drumeo Members.
@@ -95,40 +96,40 @@
             <div
                 class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
-                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5 text-2xl"><strong>October 28th</strong></h4>
-                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in <br class="lg:hidden">
-                        @if(empty($platformVersion))
-                            <span class="text-drumeo" x-data="timer()" x-init="countdown()">
-                                <span x-cloak x-show="timeLeft > 0">
-                                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                </span>
-                                <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
-                            </span>
-                        @else
-                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-10-28 00:00:00">
-                                <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>
-                                <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>
-                                <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>
-                                <span id="seconds" class="hidden"><span id="secondValue"></span> <span id="secondText"></span></span>
-                            </span>
-                            <span id="expired" class="hidden">A Limited Time!</span>
-                        @endif
-                    </p>
+{{--                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>--}}
+{{--                    <h4 class="px-3 lg:px-5 text-2xl"><strong>October 28th</strong></h4>--}}
+{{--                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">--}}
+{{--                    <p class="text-sm px-3 lg:px-5">--}}
+{{--                        Enrollment closes in <br class="lg:hidden">--}}
+{{--                        @if(empty($platformVersion))--}}
+{{--                            <span class="text-drumeo" x-data="timer()" x-init="countdown()">--}}
+{{--                                <span x-cloak x-show="timeLeft > 0">--}}
+{{--                                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                </span>--}}
+{{--                                <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>--}}
+{{--                            </span>--}}
+{{--                        @else--}}
+{{--                            <span class="inline text-drumeo" id="countdown" data-countdown-date="2024-10-28 00:00:00">--}}
+{{--                                <span id="days" class="hidden"><span id="dayValue"></span> <span id="dayText"></span></span>--}}
+{{--                                <span id="hours" class="hidden"><span id="hourValue"></span> <span id="hourText"></span></span>--}}
+{{--                                <span id="minutes" class="hidden"><span id="minuteValue"></span> <span id="minuteText"></span></span>--}}
+{{--                                <span id="seconds" class="hidden"><span id="secondValue"></span> <span id="secondText"></span></span>--}}
+{{--                            </span>--}}
+{{--                            <span id="expired" class="hidden">A Limited Time!</span>--}}
+{{--                        @endif--}}
+{{--                    </p>--}}
                 </div>
                 <div
                     class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
-                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
-                        <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> October 28th to<br class="hidden md:inline"> November 27th</span>
-                        </p>
-                    </div>
+{{--                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">--}}
+{{--                        <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>--}}
+{{--                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>--}}
+{{--                            <span class="text-sm"> October 28th to<br class="hidden md:inline"> November 27th</span>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
@@ -331,33 +332,33 @@
                     <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your
                         lessons, you can ask your instructor at each week’s LIVE Q&A event. Ulysses will be there to
                         help you through any sticking points and keep you motivated to complete the full course.</h6>
-                    <div class="text-center sm:text-left">
-                        <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>JOIN Ulysses LIVE: <i
-                                    class="fas fa-arrow-down text-drumeo mx-2 inline lg:hidden"></i> <i
-                                    class="fas fa-arrow-right text-drumeo mx-2 hidden lg:inline"></i></strong></h6><br
-                            class="inline lg:hidden">
+{{--                    <div class="text-center sm:text-left">--}}
+{{--                        <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>JOIN Ulysses LIVE: <i--}}
+{{--                                    class="fas fa-arrow-down text-drumeo mx-2 inline lg:hidden"></i> <i--}}
+{{--                                    class="fas fa-arrow-right text-drumeo mx-2 hidden lg:inline"></i></strong></h6><br--}}
+{{--                            class="inline lg:hidden">--}}
 
-                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>NOV</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">2</strong></p>
-                        </div>
-                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>NOV</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">9</strong></p>
-                        </div>
-                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>NOV</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>
-                        </div>
-                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
-                                <strong>NOV</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">23</strong></p>
-                        </div>
-                    </div>
+{{--                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">--}}
+{{--                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">--}}
+{{--                                <strong>NOV</strong></p>--}}
+{{--                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">2</strong></p>--}}
+{{--                        </div>--}}
+{{--                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">--}}
+{{--                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">--}}
+{{--                                <strong>NOV</strong></p>--}}
+{{--                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">9</strong></p>--}}
+{{--                        </div>--}}
+{{--                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">--}}
+{{--                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">--}}
+{{--                                <strong>NOV</strong></p>--}}
+{{--                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>--}}
+{{--                        </div>--}}
+{{--                        <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">--}}
+{{--                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">--}}
+{{--                                <strong>NOV</strong></p>--}}
+{{--                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">23</strong></p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
@@ -597,7 +598,7 @@
                     @endif
                     <i class="fas fa-check text-drumeo ml-3"></i> Lifetime Course Access
                 </p>
-                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>
+{{--                <a x-on:click="waitlistModal = true;" class="join sold-out medium">JOIN WAITLIST</a>--}}
 {{--                <h6 class="leading-normal mb-4 text-drumeo uppercase">--}}
 {{--                    @if(empty($platformVersion))--}}
 {{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
@@ -613,23 +614,23 @@
 {{--                    @endif--}}
 {{--                </h6>--}}
 
-{{--                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">--}}
-{{--                        @include('drumeo.products.partials._order-card', [--}}
-{{--                            'badge' => 'Launch Special',--}}
-{{--                            'header' => '30-Day Jazz',--}}
-{{--                            'subheader' => 'Course Only | Lifetime Access',--}}
-{{--                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',--}}
-{{--                            'imageHeight' => 'h-32 md:h-40 lg:h-44',--}}
-{{--                            'fullPrice' => '$127',--}}
-{{--                            'price' => '$97',--}}
-{{--                            'specialText' => "One time payment.",--}}
-{{--                            'cta' => 'ENROLL NOW',--}}
-{{--                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',--}}
-{{--                            'bonuses' => [--}}
-{{--                                '<strong>30-Day Jazz</strong>',--}}
-{{--                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',--}}
-{{--                            ],--}}
-{{--                        ])--}}
+                    <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10 max-w-3xl">
+                        @include('drumeo.products.partials._order-card', [
+                            'badge' => 'Launch Special',
+                            'header' => '30-Day Jazz',
+                            'subheader' => 'Course Only | Lifetime Access',
+                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
+                            'imageHeight' => 'h-32 md:h-40 lg:h-44',
+                            'fullPrice' => '$127',
+                            'price' => '$97',
+                            'specialText' => "One time payment.",
+                            'cta' => 'ENROLL NOW',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',
+                            'bonuses' => [
+                                '<strong>30-Day Jazz</strong>',
+                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
+                            ],
+                        ])
 {{--                        @include('drumeo.products.partials._order-card', [--}}
 {{--                            'highlightBorder' => true,--}}
 {{--                            'badge' => 'FREE STICKBAG',--}}
@@ -650,7 +651,7 @@
 {{--                                '<strong class="text-drumeo">FREE</strong> 30-Day Independence',--}}
 {{--                            ],--}}
 {{--                        ])--}}
-{{--                    </div>--}}
+                    </div>
 
 {{--                <a role="link" class="inline-block mt-4" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[30-day-jazz]=1&products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-double-bass]=1&products[30-day-independence]=1&locked=true">--}}
 {{--                <p><u><em><strong>Don't want to pay shipping?</strong> <br class="hidden sm:inline"> Click here to join Drumeo and get 30-Day Jazz with no physical bonuses.</em></u></p></a>--}}
