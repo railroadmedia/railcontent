@@ -80,10 +80,10 @@
                         </div>
                     </div>
                 @else
-                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
+                    <div class="w-full sm:w-72 lg:w-96 mx-auto sm:mx-0">
                         <h2 class="leading-none mt-1 md:mt-4 text-center leading-tight"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-musora text-2xl">(Save 41%)</span></h2>
                         <p class="text-xs italic text-center mb-1 md:mb-3"><em> For your first year, then $240/yr.</em></p>
-                        <a role="link" aria-label="Start your membership" class=" w-full smaller sm:w-82 join my-3 py-4 text-2xl @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                        <a role="link" aria-label="Start your membership" class="w-full sm:max-w-[370px] smaller join my-3 py-4 text-xl md:text-2xl @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                         @if(!empty($orderUrl))
                             href="{{ $orderUrl }}"
                         @elseif(!empty($month))
