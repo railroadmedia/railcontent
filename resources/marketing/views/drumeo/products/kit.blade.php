@@ -658,25 +658,25 @@
 @endforeach
 
 
-    <section class="px-4 sm:px-6 py-10">
-        <div class="container max-w-5xl mx-auto relative z-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
-                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA</strong><br>
-                    Your Drumeo E-Kit will ship for free anywhere in the United States. </p>
+{{--    <section class="px-4 sm:px-6 py-10">--}}
+{{--        <div class="container max-w-5xl mx-auto relative z-50">--}}
+{{--            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">--}}
+{{--                <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA</strong><br>--}}
+{{--                    Your Drumeo E-Kit will ship for free anywhere in the United States. </p>--}}
 
-                <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
-                    We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.
-                    @if(!empty($membersVersion))
-                        <br>Australia / New Zealand: <s>$267</s>  $167 shipping.
-                        <br>Rest of World: <s>$147</s> $47 shipping.
-                    @else
-                        <br>Australia / New Zealand: <s>$280.50</s> $180.50 shipping.
-                        <br>Rest of World: <s>$160.50</s> $60.50 shipping.
-                    @endif
-                </p>
-            </div>
-        </div>
-    </section>
+{{--                <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>--}}
+{{--                    We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.--}}
+{{--                    @if(!empty($membersVersion))--}}
+{{--                        <br>Australia / New Zealand: <s>$267</s>  $167 shipping.--}}
+{{--                        <br>Rest of World: <s>$147</s> $47 shipping.--}}
+{{--                    @else--}}
+{{--                        <br>Australia / New Zealand: <s>$280.50</s> $180.50 shipping.--}}
+{{--                        <br>Rest of World: <s>$160.50</s> $60.50 shipping.--}}
+{{--                    @endif--}}
+{{--                </p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
 
 <!-- details section-->

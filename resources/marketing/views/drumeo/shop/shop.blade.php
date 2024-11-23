@@ -247,7 +247,7 @@
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 240,
                         "href" => "/drumshop/gift-bundle",
-                        "price" =>  322.94,
+                        "price" =>  341.94,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle.webp",
                         "title" => "The Gift Bundle",
                         'soldOut' => false,

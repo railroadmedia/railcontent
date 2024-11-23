@@ -6,9 +6,9 @@
     @endif
 >
     @if(!empty($bfVersion) && ($theme == 'singeo'))
-    <img class="h-16 sm:h-20 lg:h-24 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-BF-header.webp" alt="logo">
     @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
-    <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-BF-header.webp" alt="logo">
     @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
@@ -28,9 +28,9 @@
         @if(!empty($boldText))
             <h5 class="leading-normal mb-5 lg:mb-7 ">{!!  $boldText  !!}</h5>
         @endif
-         
+
         @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
-        <h5 class="text-{{$theme}} leading-tight"><strong>SAVE $100 ON YOUR FIRST YEAR OF LESSONS.</strong></h5>
+        <h5 class="text-{{$theme}} leading-tight"><strong>SAVE $100 ON YOUR FIRST <br class="sm:hidden"> YEAR OF LESSONS.</strong></h5>
         <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h6>
         @else
             @if(empty($noCheck))

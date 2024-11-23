@@ -114,7 +114,7 @@
                     Here’s how it works:</p>
                 <ul class="pl-6 list-disc">
                     <li><strong>Purchase store credit:</strong> When you complete a purchase of an electronic gift card, you’ll receive an email with an electronic gift card code that will work in any of the Musora stores. </li>
-                    <li><strong>Redeem store credit:</strong> Simply apply the e-gift card code during checkout to redeem your store credit. </li>
+                    <li><strong>Redeem store credit:</strong> Simply apply the e-gift card code during checkout to redeem your store credit. Gift cards can be used for a la carte lessons, gear, merch, and initial subscription orders. <em class="text-musora">Electronic gift cards cannot be applied towards membership renewals, App Store, or Android purchases.</em></li>
                 </ul>
                 <p class="my-4">Choose your preference from our three different gift card amounts:</p>
                 <ul class="pl-6 list-disc">

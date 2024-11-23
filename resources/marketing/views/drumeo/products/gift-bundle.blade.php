@@ -58,10 +58,10 @@
             <div class="container mx-auto max-w-5xl">
                 <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/gift-bundle-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Give The Gift Of Music This Holiday Season.</strong></h2>
-                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage">
+                <img class="hidden md:inline object-cover max-w-2xl lg:max-w-3xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $322.94</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $341.94</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else
