@@ -311,9 +311,14 @@
     @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
+{{--        @include("drumeo.sales.partials._nav", [--}}
+{{--            "subscriptionVersion" => true,--}}
+{{--            "scrollToJoin" => true,--}}
+{{--            "hideMenu" => true,--}}
+{{--        ])--}}
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,

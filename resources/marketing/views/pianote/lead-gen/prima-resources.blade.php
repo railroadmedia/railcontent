@@ -124,9 +124,9 @@
 
 @section('body-data')
     x-data ='{
-         modal01: false, 
-         modal02: false, 
-         modal03: false 
+         modal01: false,
+         modal02: false,
+         modal03: false
     }'
 @endsection
 
@@ -199,22 +199,22 @@
                 ]
             ];
         @endphp
-    
-    <div 
+
+    <div
         x-data="timelineNav()"
     >
         <div class="sticky top-0 bg-white border-b z-50 px-5 sm:px-6 shadow">
             <div class="container max-w-4xl mx-auto">
                 <nav class="flex space-x-8 overflow-x-auto py-4 scrollbar-hide justify-start sm:justify-center items-center">
                     @foreach ($timelineItems as $item)
-                        <button 
+                        <button
                             @click="scrollToSection('{{ $item['number'] }}')"
                             class="flex-shrink-0 group relative pb-0.5 focus:outline-none"
                         >
                             <div class="flex flex-col items-start">
                                 <h5 class="font-medium uppercase font-bebas tracking-normal">{{ $item['subtitle'] }}</h5>
                             </div>
-                           <div 
+                           <div
                             class="absolute bottom-0 left-0 w-full h-0.5 bg-pianote transform transition-transform duration-300"
                             :class="activeSection === '{{ $item['number'] }}' ? 'scale-x-100' : 'scale-x-0'"
                             x-cloak
@@ -224,31 +224,31 @@
                 </nav>
             </div>
         </div>
-    
+
         <section class="text-center pl-2 pr-4 sm:px-8 pb-16 md:pb-0 bg-white">
                 <div class="container max-w-5xl mx-auto">
                     <div x-data="{ activeStep: 1}" class="relative">
                         <!--  Line -->
                         <div class="absolute left-1 md:left-1/2 top-0 bottom-0 transform md:-translate-x-1/2">
                             <svg class="h-full" width="2" viewBox="0 0 2 100" preserveAspectRatio="none">
-                                <line 
-                                    x1="1" 
-                                    y1="0" 
-                                    x2="1" 
-                                    y2="100" 
-                                    stroke="#3B3B3B" 
-                                    stroke-width="2" 
-                                    stroke-dasharray="0.5 0.7" 
+                                <line
+                                    x1="1"
+                                    y1="0"
+                                    x2="1"
+                                    y2="100"
+                                    stroke="#3B3B3B"
+                                    stroke-width="2"
+                                    stroke-dasharray="0.5 0.7"
                                 />
                             </svg>
-                        </div>                
+                        </div>
                         <div class="relative">
                             @foreach ($timelineItems as $index => $item)
                                 <div class="mb-16 md:mb-24 last:mb-0 relative" data-section="{{ $item['number'] }}">
                                     <div class="absolute left-0 md:left-1/2 w-10 h-10 lg:h-16 lg:w-16 bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-lg flex items-center justify-center transform md:-translate-x-1/2 text-white font-bold text-sm lg:text-3xl z-10 shadow-custom">
                                         {{ $item['number'] }}
                                     </div>
-                    
+
                                     <div class="relative ml-12 md:ml-0 mt-10">
                                         <div class="md:grid md:grid-cols-2 sm:gap-20 lg:gap-32 items-center md:pt-20 {{ $loop->last ? 'md:pb-20' : '' }}">
                                             <div class="mt-4 md:mt-0 order-1 md:order-{{ $index % 2 === 0 ? '1' : '2' }}">
@@ -256,9 +256,9 @@
                                                     @if (!$item['hasVideo'])
                                                         <a href="https://pianote.s3.amazonaws.com/products/Pianote-Prima/Prima-User-Manual.pdf" target="_blank" download>
                                                     @endif
-                                                            <img 
-                                                                src="{{ $item['imageUrl'] }}" 
-                                                                alt="{{ $item['title'] }}" 
+                                                            <img
+                                                                src="{{ $item['imageUrl'] }}"
+                                                                alt="{{ $item['title'] }}"
                                                                 class="w-full h-full object-cover transition-opacity duration-300 opacity-0 cursor-pointer"
                                                                 onload="this.classList.remove('opacity-0')"
                                                                 loading="lazy"
@@ -269,12 +269,12 @@
                                                     @endif
                                                 </div>
                                             </div>
-                    
+
                                             <div class="text-left order-2 md:order-{{ $index % 2 === 0 ? '2' : '1' }} lg:mt-20">
                                                 <div class="space-y-3">
                                                     <h6 class="border-2 rounded-full border-pianote inline-flex items-center pt-0.5 px-3 font-medium font-bebas mt-2 md:mt-0 leading-normal tracking-wider">
                                                         {{ $item['subtitle'] }}
-                                                    </h6>                                                
+                                                    </h6>
                                                     <h4 class="leading-normal"><strong>{!! $item['title_section'] !!}</strong></h4>
                                                     <div class="leading-relaxed {{ $index === 2 ? 'md:pr-12' : '0' }}">{!! $item['description'] !!}</div>
                                                 </div>
@@ -291,14 +291,14 @@
     </div>
 
     <section class="pb-10 md:pb-28 px-4">
-        <div class="bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-3xl px-4 sm:px-8 py-8 sm:py-16 mx-auto max-w-5xl">  
+        <div class="bg-gradient-to-b from-[#A80011] to-[#310A58] rounded-3xl px-4 sm:px-8 py-8 sm:py-16 mx-auto max-w-5xl">
             <div class="text-center space-y-6 text-white">
                 <div class="flex justify-center mb-4">
                 <i class="fa-solid fa-party-horn text-[#FFAE00] text-5xl lg:text-7xl"></i>
                 </div>
-                
+
                 <h4 class="leading-tight"><strong>You're ready to go! Let's play beautiful music.</strong></h4>
-                
+
                 <h5 class="italic leading-relaxed">
                     Your piano's on. You've chosen the perfect sound. Your fingers are ready to go... <br>
                     Log in to Pianote and find your perfect lesson today.
@@ -315,7 +315,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'modal01',
-        'video' => '1019964518',
+        'video' => '1032542803',
         'vimeo' => true,
     ])
      @include('_partials.components.video-modal',[

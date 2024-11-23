@@ -144,9 +144,14 @@
     @elseif(!empty($promoVersion))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
+{{--        @include("pianote.sales.partials._nav", [--}}
+{{--            "subscriptionVersion" => true,--}}
+{{--            "scrollToJoin" => true,--}}
+{{--            "hideMenu" => true,--}}
+{{--        ])--}}
     @elseif(!empty($month))
         @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
