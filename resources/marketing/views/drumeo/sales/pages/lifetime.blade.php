@@ -88,7 +88,7 @@
 
                {{-- @if($stock > 0) --}}
                    <a class="join musora mt-4 w-full anchor-slide text-black sm:max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>
-                   <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
+                   <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p>
                {{-- @else
                     <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                @endif --}}
@@ -180,7 +180,7 @@
                             href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
                         @endif
                     >GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                    <p class="leading-tight text-sm underline pt-2"><em>Payment plans available.</em></p>
+                    <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p>
                {{-- @else
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
                @endif --}}
