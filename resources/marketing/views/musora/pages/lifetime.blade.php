@@ -95,7 +95,7 @@
             $stock = 0;
         }
     @endphp --}}
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--                "name" => "Lifetime",--}}
 {{--                "fullPrice" => 1200,--}}
 {{--                "price" => 1200,--}}

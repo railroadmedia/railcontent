@@ -56,9 +56,11 @@
         <div class="noise-wrap">
             <div class="row container mx-auto">
                 <div class="text text-left">
-                    @include($theme.'._partials.holiday-logo',[
-                        'styles' => 'logo'
-                    ])
+                    <a @if($theme === 'drumeo') href="/drumshop/" @else href="/shop/" @endif>
+                        @include($theme.'._partials.holiday-logo',[
+                            'styles' => 'logo',
+                        ])
+                    </a>
                     <p>
                         @if(!empty($price))
                             @if(round(100 - (100 * ($price / $fullPrice))) > 1)
