@@ -132,7 +132,7 @@
             @include('drumeo._partials.bf-order-section-bonuses', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
-        'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
+            'topImage' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-am.webp',
             'logoHeight' => 'h-14 sm:h-18 md:h-24',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Save $100 on your first year + <br class="block sm:hidden"> $635 in lifetime bonuses!</strong></h2>',
