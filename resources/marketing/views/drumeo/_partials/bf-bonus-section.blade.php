@@ -53,7 +53,8 @@
                         @else 
                         <div class="flex items-center flex-wrap space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
-                                <span class="text-lg opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> @if(!empty($case) && $case == 'challenges') @else Value @endif</span>                            @endif
+                                <span class="text-lg opacity-30"><strong>${{ $bonusVideo['price'] }}</strong> @if(!empty($case) && $case == 'challenges') @else Value @endif</span>
+                            @endif
                             @if(!empty($bonusVideo['offerPrice']))
                                 <span class="text-lg">{!! $bonusVideo['offerPrice'] !!}</span>
                             @endif

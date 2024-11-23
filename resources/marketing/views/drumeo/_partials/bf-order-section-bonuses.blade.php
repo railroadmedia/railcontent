@@ -122,7 +122,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <p class="opacity-60 w-full leading-normal mt-2 uppercase">$240 Value</p>
+                                    @if($bundle == 'deal')
+                                    <p class="w-full leading-normal mt-2 uppercase"> $240</p>
+                                    @else
+                                    <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
+                                    @endif
                                 </div>
                                 @endif
                                 
