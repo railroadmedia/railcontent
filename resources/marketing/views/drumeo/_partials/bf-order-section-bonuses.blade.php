@@ -86,20 +86,6 @@
                         {!! $promoHeader !!}
                     @endif
 
-                     <div class="@if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif mb-10">
-                        <h2 class="leading-tight mt-6 mb-1 md:hidden">
-                        {!!$bundlePrice!!}
-                        </h2>
-                            <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
-                                @if(!empty($CTA))
-                                    {{ $CTA }}
-                                @else
-                                    GET the deal <i class="fas fa-arrow-right"></i>
-                                @endif
-                            </a>
-                        </div>
-                    </div>
-
                     <div class="mx-auto px-1 md:px-3 w-full @if(!empty($secondImage)) md:max-w-3xl @else md:max-w-sm @endif">
                         <div class="inline-block w-full group">
                             <div class="text-center flex flex-col md:flex-row md:justify-center space-y-4 md:space-y-0 md:space-x-4">
@@ -185,6 +171,19 @@
                                 </div>
                             @endif
                             </div>
+                        </div>
+                    </div>
+                     <div class="@if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
+                        <h2 class="leading-tight mt-6 mb-1 md:hidden">
+                        {!!$bundlePrice!!}
+                        </h2>
+                            <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
+                                @if(!empty($CTA))
+                                    {{ $CTA }}
+                                @else
+                                    GET the deal <i class="fas fa-arrow-right"></i>
+                                @endif
+                            </a>
                         </div>
                     </div>
                     <br>
