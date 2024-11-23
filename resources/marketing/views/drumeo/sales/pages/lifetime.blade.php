@@ -74,7 +74,7 @@
 
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/918163289" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe> {{-- Todo: Update video ID --}}
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/1032532760" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe> {{-- Todo: Update video ID --}}
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">

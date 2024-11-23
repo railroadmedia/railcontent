@@ -185,7 +185,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
-            src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/header.mp4"></video>
     </header>
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 bg-black text-white relative">
