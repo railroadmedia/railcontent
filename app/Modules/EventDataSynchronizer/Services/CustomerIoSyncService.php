@@ -73,14 +73,10 @@ class CustomerIoSyncService
         }
 
         // first_platform_access (membership), sync based on first membership permission ever granted
-        \Log::info("Attempting to sync user access permissions for {$user->first_name} {$user->last_name}");
-
         if (!empty($user->userAccessPermissions)) {
-            \Log::info("User access permissions found for {$user->first_name} {$user->last_name}");
             foreach ($user->userAccessPermissions->sortBy('start_time') as $userAccessPermission) {
                 if ($userAccessPermission->isMembershipPermission()) {
-                    \Log::info("Membership permission found, adding attribute.");
-                    $attributes += ['first_platform_access' => Carbon::parse($userAccessPermission->start_time)->timestamp];
+                    $attributes['first_platform_access'] = Carbon::parse($userAccessPermission->start_time)->timestamp;
                     break;
                 }
             }
