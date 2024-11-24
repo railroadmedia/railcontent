@@ -79,7 +79,7 @@
                     @else
                         <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                     @endif
-                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 100 available.</em></p>
+{{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 100 available.</em></p>--}}
                     </div>
                 </div>
             </div>
@@ -100,6 +100,7 @@
             </h2>
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
+            'freeShipping' => true,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">

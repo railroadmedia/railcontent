@@ -89,14 +89,15 @@
 
     <section class="pt-8 pb-4 lg:pb-16 sm:pt-16 lg:pt-20 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
-         <h1 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h1>
-        <h5 class="leading-normal text-center mb-4 lg:pb-6 md:px-8 max-w-4xl">
+         <h2 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h2>
+        <p class="leading-normal text-center mb-4 md:px-8 max-w-xl">
         Piano players LOVE books. That’s why we’ve loaded this bundle with practice books, planners, and songbooks to fill your shelves.<br><br>Improve your chording, plan and track your progress, and play the most beautiful piano pieces ever written.
-        </h5>
+        </p>
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
              'noButton' => 'true',
+            'freeShipping' => true,
             ])
         </div>
     </section>
@@ -107,10 +108,10 @@
 
     <section class="pb-16 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
-         <h1 class="leading-tight text-center mb-3"><strong>Bonus lessons.  <br> Yours for life. </strong></h1>
-        <h5 class="leading-normal text-center mb-4 lg:pb-6 md:px-8 max-w-4xl">
+         <h2 class="leading-tight text-center mb-3"><strong>Bonus lessons.  <br class="sm:hidden"> Yours for life. </strong></h2>
+        <p class="leading-normal text-center mb-4 lg:mb-6 md:px-8 max-w-2xl">
        You’ll get LIFETIME access to all these courses when you join Pianote. Even if you don’t renew your membership. These lessons are yours to keep for life.<br><br> Start learning, improve your chording and technique. Play the Blues and beautiful Classical piano. It’s all here.
-        </h5>
+        </p>
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus2,

@@ -59,7 +59,7 @@
                 <img class="hidden md:inline object-cover max-w-2xl lg:max-w-3xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/gift-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $341.94</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else
@@ -77,10 +77,11 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
         <div class="container mx-auto max-w-5xl">
-        <h2 class="leading-tight text-center pb-2"><strong>Here's what's you'll get with this bundle.</strong></h2>
-        <p class="leading-normal text-center mb-3 lg:pb-6 md:px-12">The perfect way to gift Drumeo to a friend – you’ll get a physical one-year access pass to Drumeo that can be redeemed anytime along with three additional gifts for a lucky drummer in your life. </p>
+        <h2 class="leading-tight text-center mb-2"><strong>Here's what's you'll get with this bundle.</strong></h2>
+        <p class="leading-normal text-center mb-3 lg:mb-4 md:px-12">The perfect way to gift Drumeo to a friend – you’ll get a physical one-year access pass to Drumeo that can be redeemed anytime along with three additional gifts for a lucky drummer in your life. </p>
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
+            'freeShipping' => true,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">

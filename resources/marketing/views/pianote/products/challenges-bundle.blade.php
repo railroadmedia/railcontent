@@ -88,8 +88,8 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
-         <h1 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h1>
-            <h5 class="leading-normal text-center mb-3 lg:pb-10 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</h5>
+         <h2 class="leading-tight text-center mb-3"><strong>Improve your technique.<br>Master your chords.<br>Play the Blues.</strong></h2>
+            <p class="leading-normal text-center mb-3 lg:mb-10 md:px-8">Just press play. Your teacher plays every note with you – all you have to do is follow along.</p>
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,

@@ -88,9 +88,9 @@
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
-         <h1 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h1>
-            <h5 class="leading-normal text-center mb-3 lg:pb-6 md:px-8">You’ll save $100 on your first year of Pianote PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
-            Build a foundation, learn the most popular styles, and refine your technique. All with world-class instructors.</h5>
+         <h2 class="leading-tight text-center mb-3"><strong>Here’s what you’ll get <br> with this bundle. </strong></h2>
+            <p class="leading-normal text-center mb-3 lg:mb-6 md:px-8">You’ll save $100 on your first year of Pianote PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
+            Build a foundation, learn the most popular styles, and refine your technique. All with world-class instructors.</p>
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
