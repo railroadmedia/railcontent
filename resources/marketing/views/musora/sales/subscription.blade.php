@@ -518,41 +518,6 @@
 @endsection
 
 @section('layout-body')
-    @if(!empty($fullSubscriptionVersion))
-        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/bf-banner.png');">
-            <div class="container max-w-4xl mx-auto">
-                <div class="flex flex-wrap items-center justify-center">
-                    <div class="w-full sm:w-auto mb-2 sm:mb-0 pr-6">
-                        <img class="h-7 sm:h-8 lg:h-11" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
-                    </div>
-                    <div class="w-full sm:w-auto">
-                        <h5 class="leading-tight font-bold text-musora mb-2">STARTS ON NOVEMBER 26TH</h5>
-                        <span class="join smaller musora w-full" @click="BFwaitlist = true;">Get Notified &raquo;</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        @component('_partials.components.modal', ['name' => 'BFwaitlist'])
-            @slot('content')
-                <div class="relative overflow-y-visible max-w-md px-5 md:px-10 py-7 md:py-10 bg-black text-white mx-auto rounded-xl shadow-lg text-center">
-                    <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
-                    <p class="leading-tight my-4">Sign up to be the first to know.</p>
-                    @include("musora.lead-gen.partials.sign-up-form", [
-                        "formId" => "Musora - Engagement - Trigger - BF24 Waitlist - Web Form",
-                        "formName" => 'BF24 Waitlist',
-                        "buttonText" => "Notify Me",
-                        'stacked' => true,
-                        "redirectURL" => "/thank-you",
-                        "recaptchaKey" => $recaptchaKey,
-                        "minimalForm" => true
-                    ])
-                    <p class="leading-tight text-sm mt-2"><em>
-                            Don’t worry, we value your privacy and<br class="hidden sm:inline">
-                            you can unsubscribe at any time.</em></p>
-                </div>
-            @endslot
-        @endcomponent
-    @endif
     <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
