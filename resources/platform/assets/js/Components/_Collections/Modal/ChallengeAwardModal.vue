@@ -1,6 +1,6 @@
 <template>
-    <component :is="isModal ? compMap.ModalRenderer : 'div'" :black-background="true" :show-x-icon="true" @on-close="emit('closeModal')" >
-        <div v-if="!isCertificateOpen" class="tw-max-w-[470px] tw-w-full tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0 tw-z-20">
+    <component v-if="!isCertificateOpen" :is="isModal ? compMap.ModalRenderer : 'div'" :black-background="true" :show-x-icon="true" @on-close="emit('closeModal')" >
+        <div class="tw-max-w-[470px] tw-w-full tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0">
             <!-- Animation -->
             <Vue3Lottie v-if="!hideAnimation && !isModal" class="tw-w-[calc(100% + 200px)] sm:tw-w-[800px] tw-h-[800px] tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-[5]" :animation-link="animations[brand]" width="100%" height="100%" :loop="false" />
 
@@ -29,13 +29,10 @@
                 </div>
             </div>
         </div>
-
-        <div :class="isCertificateOpen ? '' : 'tw-opacity-0 tw-absolute tw-z-0'">
-            <ChallengeCertificateModal v-if="delayCertificate" :certificate-data="awardData" @closeModal="emit('closeModal')" />
-        </div>
     </component>
 
-    <ShareModal v-if="isShareOpen" :container-stay-on-close="true" @close-modal="closeShareModal" />
+    <ShareModal v-if="isShareOpen" :container-stay-on-close="true" @close-modal="closeShareModal" :source="challengeBadge" :title="challengeTitle" />
+    <ChallengeCertificateModal v-if="isCertificateOpen" :certificate-data="awardData" @closeModal="emit('closeModal')" />
 </template>
 <script setup>
 import { ref, onMounted, computed } from "vue";
@@ -76,7 +73,6 @@ const { brand } = storeToRefs(userStore);
 const hideAnimation = ref(false);
 const isShareOpen = ref(false);
 const isCertificateOpen = ref(false);
-const delayCertificate = ref(false);
 
 const challengeBadge = computed(() => {
     return props.awardData?.badge;
@@ -115,10 +111,6 @@ const closeShareModal = () => {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        delayCertificate.value = true;
-    },1)
-
     setTimeout(() => {
         hideAnimation.value = true;
     },1200)
