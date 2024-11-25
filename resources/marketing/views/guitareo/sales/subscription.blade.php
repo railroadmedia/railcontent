@@ -320,8 +320,8 @@
     @if(!empty($promoVersion))
         @include("guitareo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
 
     @elseif(!empty($month))

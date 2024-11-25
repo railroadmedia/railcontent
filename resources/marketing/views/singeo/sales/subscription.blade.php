@@ -318,7 +318,7 @@
         @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
+            "fullSubscriptionVersion" => true,
         ])
     @elseif(!empty($month))
         @include("singeo.sales.partials._nav", [
