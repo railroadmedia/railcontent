@@ -242,24 +242,24 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
-                         "price" => floatval($productPrices['stickbag']->discounted_price),
-                         "discounted_price" => floatval($productPrices['stickbag']->price),
+                         "price" => floatval($productPrices['stickbag']->price),
+                         "discounted_price" => floatval($productPrices['stickbag']->discounted_price),
                          "title" => "Drumeo StickBag",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/eardrums",
-                         "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
-                         "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->price),
+                         "price" => floatval($productPrices['drumeo-eardrums-black']->price),
+                         "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "title" => "Drumeo EarDrums In-Ear Monitors",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/the-drummers-toolbox",
-                         "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
-                         "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->price),
+                         "price" => floatval($productPrices['the-drummers-toolbox-book']->price),
+                         "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03.webp",
                          'soldOut' => false,
