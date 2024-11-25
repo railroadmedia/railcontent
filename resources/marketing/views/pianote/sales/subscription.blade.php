@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
 @endphp
 
 @extends('pianote._partials.global-layout')
@@ -315,6 +316,11 @@
         rolandTrailer : false,
         lazyLoad: false,
         videoLoaded: false,
+        @foreach($bonuses as $bonus)
+            @if(!empty($bonus['vimeoId']))
+                modal{{ $bonus['vimeoId'] }}: false,
+            @endif
+        @endforeach
     }'
 @endsection
 
@@ -581,16 +587,9 @@
     @elseif(!empty($promoVersion))
         @include('drumeo._partials.countdown-bundle-2024')
         @php
-            require_once(resource_path('marketing/views/pianote/_partials/bonus-data.php'));
-        @endphp
-        @php
             $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
-
-            $filteredBonuses = collect($bonuses)->filter(function ($bonus) use ($targetSkus) {
-                return in_array($bonus['sku'], $targetSkus, true);
-            })->values();
         @endphp
-        @include('drumeo._partials.bf-order-section-bonuses', [
+        @include('drumeo._partials.bf-order-section-bonuses-modal', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg',
         'topImage' => 'marketing/pianote/promos/black-friday/pianote-deal/bonus-AM.webp',
@@ -651,6 +650,23 @@
     @else
         @include("pianote.sales.partials._footer")
     @endif
+
+    @php
+        $videoBonuses = [];
+        foreach ($bonuses as $bonus) {
+            if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
+                $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
+            }
+        }
+    @endphp
+
+    @foreach ($videoBonuses as $modal)
+        @include('_partials.components.video-modal', [
+            'name' => $modal['name'],
+            'video' => $modal['video'],
+            'vimeo' => true,
+        ])
+    @endforeach
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

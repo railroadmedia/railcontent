@@ -6,6 +6,7 @@ $bonuses = [
         'title' => 'New Piano Players Start Here',
         'description' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano.',
         'price' => floatval($productPrices['new-piano-players-start-here']->price),
+        'vimeoId' => '879916161',
         'sku' => 'new-piano-players-start-here'
     ],
     [
@@ -13,6 +14,7 @@ $bonuses = [
         'title' => 'Easy Chords',
         'description' => 'You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
         'price' => floatval($productPrices['easy-chords']->price),
+        'vimeoId' => '823788317',
         'sku' => 'easy-chords'
     ],
     [
@@ -200,6 +202,7 @@ $bonuses = [
         'title' => '30-Day Blues Piano',
         'description' => 'Learn Blues structure, scales, and riffs in just 10 minutes a day.',
         'price' => 127,
+        'vimeoId' => '879913986',
         'sku' => '30-day-blues-piano'
     ],
     [
@@ -207,6 +210,7 @@ $bonuses = [
         'title' => '30 Days To Better Technique',
         'description' => 'Improve finger strength and speed with GRAMMY-winner Jordan Rudess.',
         'price' => 127,
+        'vimeoId' => '928599834',
         'sku' => '30-days-to-better-technique'
     ],
     [
@@ -214,6 +218,7 @@ $bonuses = [
         'title' => 'The Classical Piano Collection',
         'description' => 'Play beautiful piano pieces with step-by-step tutorials.',
         'price' => 127,
+        'vimeoId' => '1008560089',
         'sku' => 'classical-piano-collection'
     ],
     [
@@ -222,6 +227,7 @@ $bonuses = [
         'description' => 'Essential tools to maximize your practice time.',
         'price' => 49,
         'sku' => 'practice-kit',
+        'vimeoId' => '1002072203',
         'physical' => true
     ],
     [
@@ -239,6 +245,7 @@ $bonuses = [
         'price' => 249,
         'shipping' => true,
         'sku' => 'book-bag',
+        'vimeoId' => '913081651',
         'physical' => true
     ],
     [

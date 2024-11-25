@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 
 @extends('drumeo._partials.global-layout')
@@ -305,6 +306,11 @@
         trailer : false,
         lazyLoad: false,
         videoLoaded: false,
+        @foreach($bonuses as $bonus)
+            @if(!empty($bonus['vimeoId']))
+                modal{{ $bonus['vimeoId'] }}: false,
+            @endif
+        @endforeach
     }'
 @endsection
 
@@ -570,19 +576,11 @@
 
     @elseif(!empty($promoVersion))
         @include('drumeo._partials.countdown-bundle-2024')
-
-        @php
-            require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
-        @endphp
         @php
             $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
-
-            $filteredBonuses = collect($bonuses)->filter(function ($bonus) use ($targetSkus) {
-                return in_array($bonus['sku'], $targetSkus, true);
-            })->values();
         @endphp
 
-        @include('drumeo._partials.bf-order-section-bonuses', [
+        @include('drumeo._partials.bf-order-section-bonuses-modal', [
         'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
         'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/drumeo-deal-logo.svg',
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
@@ -633,6 +631,23 @@
         @include("drumeo.sales.partials._footer")
     @endif
 
+    @php
+        $videoBonuses = [];
+        foreach ($bonuses as $bonus) {
+            if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
+                $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
+            }
+        }
+    @endphp
+
+    @foreach ($videoBonuses as $modal)
+        @include('_partials.components.video-modal', [
+            'name' => $modal['name'],
+            'video' => $modal['video'],
+            'vimeo' => true,
+        ])
+    @endforeach
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>

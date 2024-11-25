@@ -6,6 +6,7 @@ $bonuses = [
         'title' => '30-Day Drummer',
         'description' => 'Learn the drums with daily guided workouts.',
         'sku' => '30-day-drummer-4',
+        'vimeoId' => '884916532',
         'price' => 127.00
     ],
     [
@@ -13,6 +14,7 @@ $bonuses = [
         'title' => '30-Day Independence',
         'description' => 'Improve your coordination with daily guided workouts.',
         'sku' => '30-day-independence',
+        'vimeoId' => '975466470',
         'price' => 127.00
     ],
     [
@@ -20,6 +22,7 @@ $bonuses = [
         'title' => '30-Day Double Bass',
         'description' => 'Unlock your foot speed & control on the drums.',
         'sku' => '30-day-double-bass',
+        'vimeoId' => '1010405112',
         'price' => 127.00
     ],
     [
@@ -27,6 +30,7 @@ $bonuses = [
         'title' => '30-Day Jazz',
         'description' => 'Immerse yourself in jazz drumming for 30 days.',
         'sku' => '30-day-jazz',
+        'vimeoId' => '1018759800',
         'price' => 127.00
     ],
     [
@@ -34,6 +38,7 @@ $bonuses = [
         'title' => '30-Day Chops',
         'description' => 'Boost your creativity in just 30 days',
         'sku' => '30-day-chops',
+        'vimeoId' => '884916500',
         'price' => 127.00
     ],
     [
@@ -63,6 +68,7 @@ $bonuses = [
         'sku' => 'quietpad',
         'shipping' => true,
         'physical' => true,
+        'vimeoId' => '982740966',
         'price' => 59.00
     ],
     [
