@@ -248,7 +248,7 @@
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/metronome",
                          "price" => floatval($productPrices['taktell-piccolo-metronome']->price),
-                         "discounted_price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_priceprice),
+                         "discounted_price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
                          "title" => "The Pianote Metronome",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-01.webp",
                          'soldOut' => false,
@@ -256,7 +256,7 @@
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/book-bag",
                          "price" => floatval($productPrices['pianote-book-bag']->price),
-                         "discounted_price" => floatval($productPrices['pianote-book-bag']->discounted_priceprice),
+                         "discounted_price" => floatval($productPrices['pianote-book-bag']->discounted_price),
                          "title" => "The Pianote BookBag",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-02.webp",
                          'soldOut' => false,
@@ -264,7 +264,7 @@
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/chords-scales-book",
                          "price" => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                         "discounted_price" => floatval($productPrices['piano-chords-and-scales-guide']->discounted_priceprice),
+                         "discounted_price" => floatval($productPrices['piano-chords-and-scales-guide']->discounted_price),
                          "title" => "Piano Chords & Scales",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-03.webp",
                          'soldOut' => false,
@@ -272,7 +272,7 @@
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/headphones",
                          "price" => floatval($productPrices['pianote-headphones-2024']->price),
-                         "discounted_price" => floatval($productPrices['pianote-headphones-2024']->discounted_priceprice),
+                         "discounted_price" => floatval($productPrices['pianote-headphones-2024']->discounted_price),
                          "title" => "Pianote Headphones",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04.webp",
                          'soldOut' => false,
