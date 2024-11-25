@@ -145,9 +145,9 @@
                 </p>
                 <a
                     @if(!empty($upgradeVersion))
-                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
+                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing"
                     @else
-                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
+                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs"
                     @endif
                     class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
                 >

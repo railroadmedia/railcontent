@@ -1107,15 +1107,9 @@
                         </div>
                     @endforeach
                 </div>
-                @if ($startDateCourse > Carbon\Carbon::now())
-                    <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
-                @endif
 
             </div>
 
-            @if ($startDateCourse > Carbon\Carbon::now())
-
-            @else
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
@@ -1124,9 +1118,9 @@
                             href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         @endif
                         >
-                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
-                        <p class="text-xs px-3 py-1">  @if ($earlyBirdEnd > Carbon\Carbon::now()) EARLY BIRD OFFER @else COURSE ONLY @endif</p>
-                    </div>
+{{--                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">--}}
+{{--                        <p class="text-xs px-3 py-1">  @if ($earlyBirdEnd > Carbon\Carbon::now()) EARLY BIRD OFFER @else COURSE ONLY @endif</p>--}}
+{{--                    </div>--}}
                     <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
                     <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
                     <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
@@ -1142,34 +1136,33 @@
                         <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
                     </p>
                 </a>
-                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-pdf]=1&products[music-theory-posters]=1&products[little-book-arpeggios]=1&products[little-book-chord]=1&products[little-book-hanon]=1&products[taktell-piccolo-metronome]=1&products[piano-riffs-and-fills]=1&locked=true"
-                    class="px-5 sm:px-12 py-7 sm:py-10 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
-                    <div class="inline-block border rounded-xl bg-musora text-black text-center my-2">
-                        <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>
-                    </div>
-                    <h3 class="leading-tight"><strong>Join Pianote</strong></h3>
-                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and popular songs!</p>
-                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
-                    <p class="inline-block text-xs">(Includes $364 in free bonuses)</p><br>
-                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
-                    <ul class="list-disc ml-5">
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Read Music in 30 Days</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Book</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion PDF</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>
+{{--                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-pdf]=1&products[music-theory-posters]=1&products[little-book-arpeggios]=1&products[little-book-chord]=1&products[little-book-hanon]=1&products[taktell-piccolo-metronome]=1&products[piano-riffs-and-fills]=1&locked=true"--}}
+{{--                    class="px-5 sm:px-12 py-7 sm:py-10 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">--}}
+{{--                    <div class="inline-block border rounded-xl bg-musora text-black text-center my-2">--}}
+{{--                        <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>--}}
+{{--                    </div>--}}
+{{--                    <h3 class="leading-tight"><strong>Join Pianote</strong></h3>--}}
+{{--                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and popular songs!</p>--}}
+{{--                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>--}}
+{{--                    <p class="inline-block text-xs">(Includes $364 in free bonuses)</p><br>--}}
+{{--                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>--}}
+{{--                    <ul class="list-disc ml-5">--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Read Music in 30 Days</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Book</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion PDF</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>--}}
+{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>--}}
 
-                    </ul>
-                    <hr class="w-full my-5" style="border-color:#b2cae1">
-                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
-                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
-                    </p>
-                </a>
+{{--                    </ul>--}}
+{{--                    <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
+{{--                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>--}}
+{{--                    </p>--}}
+{{--                </a>--}}
             </div>
-            @endif
         </div>
     </section>
 
