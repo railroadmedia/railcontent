@@ -647,7 +647,7 @@
                             'price' => '$127',
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
                                 '<strong>FREE</strong> 1-month Drumeo Access',

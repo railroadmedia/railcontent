@@ -775,7 +775,7 @@
                         'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
                         'price' => '$' . floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                         'specialText' => 'Just the IEMs',
-                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping',
                         'cta' => 'SELECT',
                         'specialText' => "One-time payment.",
                         'bonuses' => [
