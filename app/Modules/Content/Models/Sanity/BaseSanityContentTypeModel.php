@@ -26,7 +26,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
 
         $defaultFields = [
             new Field(FieldType::String, 'title', validation: [new Required()], group:$group),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique' => 'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,", group:$group),
+            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique' => 'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title", validation: [new Required()], group:$group),
             new BrandField($group),
             new StatusField($group),
             new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group:$group),
