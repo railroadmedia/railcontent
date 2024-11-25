@@ -203,9 +203,8 @@
                                             </picture>
                                         </div>
                                         @if(!empty($bonus['vimeoId']))
-                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible" @click="modal{{ $bonus['vimeoId'] }} = true">
-                                            <i class="fas fa-play play-button autoplay-video hover:opacity-80 border-4 border-solid border-white rounded-full cursor-pointer mt-24 mb-12 text-3xl py-4 px-5 md:py-6 md:px-7 md:mt-40 md:mb-24 md:text-2xl duration-300" style="background:rgba(0, 0, 0, 0.6);"></i><br>
-                                             
+                                        <div class="absolute z-40 text-center top-[40%] left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible" @click="modal{{ $bonus['vimeoId'] }} = true">
+                                            <i class="text-2xl fas fa-play play-button autoplay-video hover:opacity-80 border-4 border-solid border-white rounded-full cursor-pointer mt-24 mb-12 text-3xl py-3 px-5 duration-300" style="background:rgba(0, 0, 0, 0.6);"></i><br>
                                         </div>
                                         @endif
                                     </div>

@@ -61,7 +61,7 @@
         'price' => 399,
         'noBreadcrumb' => true,
     ])
-     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[650px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
+     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[580px] sm:h-[650px] md:h-[650px] lg:h-[780px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/book-bundle-logo.svg"><br>

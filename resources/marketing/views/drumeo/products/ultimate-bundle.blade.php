@@ -51,7 +51,7 @@
         "noBreadcrumb" => true,
     ])
 
-    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[800px] lg:h-[860px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-bg.webp') no-repeat center center; background-size: cover;">
+    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[700px] sm:h-[h-740px] lg:h-[860px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="Bundle" class="h-14 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/ultimate-bundle-logo.svg"><br>
@@ -119,7 +119,7 @@
         </div>
     </section>
 
-    <div x-data="{lazyLoad: false}">
+    <div x-data="{lazyLoad: false}" class="mt-12 md:mt-10 lg:mt-4">
         @include('musora.sales.components.guarantee-section', [
             'badge' => 'marketing/drumeo/membership/homepage/2024/guarantee.webp',
             'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
