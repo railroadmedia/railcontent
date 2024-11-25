@@ -215,11 +215,11 @@
 
     @php
      if(!empty($membersVersion)) {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1';
-          $fullPrice = 599;
+          $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ekit-bundle]=1&promo-code=ekit-bundle&locked=true';
+          $fullPrice = 1005.95;
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=_ALESISKIT&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ekit-bundle]=1&promo-code=ekit-bundle&locked=true';
           $fullPrice = 1005.95;
      }
     @endphp
@@ -569,7 +569,6 @@
 @php
     $videoTargetSkus = ['alesis-nitro-max-e-kit', 'DLM-1-year-kit', '30-day-drummer-4', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
 @endphp
-<div id="customize-anchor"></div>
 <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
     <div class="container mx-auto max-w-5xl">
         <h2 class="leading-tight text-center mb-4 lg:mb-8"><strong>Here's what's you'll get with <br>this bundle.</strong></h2>
@@ -640,7 +639,7 @@
                WORLD-CLASS TEACHERS
             </span>
         </div>',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ekit-bundle]=1&promo-code=ekit-bundle&locked=true',
     'bundle'=> "kit",
     ])
 </div>
@@ -741,11 +740,11 @@
 
         <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36" (91.44cm) // <strong>Width</strong> 48" (121.92cm) //  <strong>Height</strong> 12.12" (30.78cm)</p>
 
-        <div class="w-full max-w-xs mx-auto pt-4">
-            @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-                <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
-            @endif
-        </div>
+{{--        <div class="w-full max-w-xs mx-auto pt-4">--}}
+{{--            @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))--}}
+{{--                <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>--}}
+{{--            @endif--}}
+{{--        </div>--}}
 
     </div>
 </section>
