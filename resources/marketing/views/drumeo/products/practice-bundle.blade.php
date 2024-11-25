@@ -74,7 +74,7 @@
                 <img class="hidden md:inline object-cover md:max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage.webp" alt="E-Kit Bundle Collage">
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle/header-collage-m.webp" alt="E-Kit Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 68%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
                     @else

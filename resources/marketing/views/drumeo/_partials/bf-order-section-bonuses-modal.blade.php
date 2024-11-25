@@ -13,7 +13,7 @@
         case 'practice':
             $borderColor = 'border-[#FF0055]';
             $textColor = 'text-[#FF0055]';
-            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 68%)</span>';
+            $bundlePrice = '<s class="opacity-50"> $1227.87</s><strong> $399</strong> <span class="text-[#FF0055] text-xl md:text-3xl">(Save 67%)</span>';
             break;
         case 'gift':
             $borderColor = 'border-[#41F70F]';
