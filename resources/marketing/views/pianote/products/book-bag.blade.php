@@ -584,11 +584,15 @@
                             <h3 class="leading-tight mt-2">
 
                                 @if(!empty($membersVersion))
-                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> $249 </span>
-                                    <strong>$149</strong>
+                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> {{ floatval($productPrices['pianote-book-bag']->price) }} </span>
+                                    <strong>${{ $discountedPrice }}</strong>
                                 @else
-                                    <strong> $249 </strong>
-                                    {{-- <strong>$149</strong> --}}
+                                     @if (floatval($productPrices['pianote-book-bag']->price) > $discountedPrice)
+                                        <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
+                                        <strong>${{ $discountedPrice }}</strong>
+                                    @else
+                                        <strong>Only ${{ $discountedPrice }}</strong>
+                                    @endif
                                 @endif
                             </h3>
                             <p class="text-sm mb-5"><em>One-time payment.</em></p>
