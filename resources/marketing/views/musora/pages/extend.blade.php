@@ -96,7 +96,12 @@
                 <h2 class="leading-tight pt-3 lg:pt-6"><strong>Get a free $100 electronic gift card <br class="hidden sm:inline"> when you extend your membership.</strong></h2>
 
             <div class="w-full max-w-4xl mx-auto my-4 sm:my-8 ">
-                <img alt="Bundle" class="w-full h-full opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/musora/promos/november/extend/musora-collage.webp" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
+                <img alt="Bundle" class="w-full h-full hidden sm:inline-block opacity-0 transition-opacity duration-500"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/musora/promos/november/extend/musora-collage.webp"
+                    loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img alt="Bundle" class="w-full h-full sm:hidden inline-block opacity-0 transition-opacity duration-500"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/786x0/filters:quality(95)/marketing/musora/promos/november/extend/musora-collage.webp"
+                    loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h5 class="leading-none mb-1"><strong>$240</strong> <em>(Includes free $100 gift card.)</em></h5>
