@@ -2260,7 +2260,7 @@
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto lg:w-3/4 xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>Just The Pad</strong></h3>
                         <p class="text-sm mt-2 mb-5">Last Chance Ever (SAVE 25%)</p>
                         <h2 class="inline-block"><s class="opacity-60">$79</s> <strong class="text-4xl">${{ floatval($productPrices['practicepad']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>

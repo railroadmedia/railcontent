@@ -25,7 +25,7 @@
                         </strong>
                     </h2>
                     <h3 class="@if(empty($platformVersion)) pb-6 @endif -mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
-                    @if(!empty($platformVersion)) 
+                    @if(!empty($platformVersion))
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class
 {{--                            <br class="inline lg:hidden"> starting October 28th.--}}
                         </strong></h6>
@@ -57,7 +57,7 @@
                             Doing</p>
                     </div>
 
-              
+
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full @if(empty($platformVersion)) md:w-1/2 @else sm:w-1/2 @endif text-center sm:pr-2">
@@ -642,7 +642,7 @@
                             'price' => '$127',
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
-                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1&locked=true',
+                            'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1',
                             'bonuses' => [
                                 '<strong>30-Day Jazz</strong>',
                                 '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
