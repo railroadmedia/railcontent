@@ -57,11 +57,6 @@
             'userId' => user()->id,
             'sources' => $lessonContent['video_playback_endpoints'] ?? [],
             'resources' => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
-            'showAddToList' => $lessonType != 'song',
-            'showInfoButton' =>
-                !empty($lessonContent->fetch('*fields.instructor')) ||
-                !empty($lessonContent->fetch('data.description')) ||
-                !empty($lessonContent['chapters']),
             'reportUserEmail' => user()->email,
             'reportUserName' => user()->display_name,
             'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),
@@ -91,11 +86,6 @@
         'contentId' => $lessonContent->fetch('id'),
         'userId' => user()->id,
         'resources' => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
-        'showAddToList' => $lessonType != 'song',
-        'showInfoButton' =>
-            !empty($lessonContent->fetch('*fields.instructor')) ||
-            !empty($lessonContent->fetch('data.description')) ||
-            !empty($lessonContent['chapters']),
         'reportUserEmail' => user()->email,
         'reportUserName' => user()->display_name,
         'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),

@@ -144,8 +144,8 @@
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
 
-                        :show-add-to-list="videoResources.showAddToList"
-                        :show-info-button="videoResources.showInfoButton"
+                        :show-add-to-list="true"
+                        :show-info-button="showInfoButton"
                         :is-added="videoResources.isAdded"
 
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
@@ -398,6 +398,10 @@ const showPracticeButton = computed(() => {
     return !!videoData.value?.soundslice_slug;
 });
 
+const showInfoButton = computed(() => {
+    return videoData.value?.instructor?.length > 0 || videoData.value?.description?.length > 0  || videoData.value?.chapters?.length > 0;
+});
+
 //Methods
 const handleVideoPlay = (payload) => {
     if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
@@ -620,6 +624,7 @@ const fetchLessonData = async () => {
 
         // Check each result individually and update state accordingly
         videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
+        console.log('video data value', videoData.value)
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
