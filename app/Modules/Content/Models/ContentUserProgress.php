@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Maps\ContentTypes;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use Carbon\Carbon;
@@ -72,6 +73,16 @@ class ContentUserProgress extends Model
     {
         return $query->whereHas('content', function ($query) use ($type) {
             $query->where('type', $type);
+        });
+    }
+
+    /**
+     * Scope a query to only include progress for content of the types displayed on the home page
+     */
+    public function scopeOfHomePageContentTypes(Builder $query): Builder
+    {
+        return $query->whereHas('content', function ($query) {
+            $query->whereIn('type', ContentTypes::inProgressContentTypes());
         });
     }
 

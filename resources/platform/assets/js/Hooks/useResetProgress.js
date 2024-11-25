@@ -1,21 +1,24 @@
-import { ref } from 'vue';
+ import { ref } from 'vue';
 import axios from "axios";
+import { contentStatusReset } from 'musora-content-services';
 
 export function useResetProgress() {
     const loading = ref(false);
 
     const resetProgress = (contentId, iconClassRef, showConfirmation = true, arrayRef) => {
+        
+        
         const proceedWithReset = () => {
             iconClassRef.value = 'fas fa-spin fa-spinner';
             loading.value = true;
 
-            if(arrayRef){
-                arrayRef.value = arrayRef.value.filter((item) => item.id !== contentId);
-            }
+            //What does this do??
+                if(arrayRef){
+                    arrayRef.value = arrayRef.value.filter((item) => item.id !== contentId);
+                }
+            //?
 
-            axios.put(`/railcontent/reset`, {
-                content_id: contentId,
-            })
+            contentStatusReset(contentId)
             .then(() => {
                 window.shownotification({
                     icon: 'check',

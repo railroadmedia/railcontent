@@ -12,6 +12,7 @@ Route::domain('{singeoDomain}')
                 Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
                 Route::get('/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
                 Route::get('/singing-straw', [SalesController::class, 'singingStraw']);
+                Route::get('/everyday-improv', [SalesController::class, 'everydayImprov']);
             }
         );
 

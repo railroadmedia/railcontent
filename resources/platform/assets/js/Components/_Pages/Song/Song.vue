@@ -16,7 +16,7 @@
                         :songTitle= "data?.title"
                         :songArtist= "data?.artist_name"
                         :songAlbum= "data?.album"
-                        :songMeta= "data?.genre[0]"
+                        :songMeta= "data?.genre.length ? data?.genre[0].name : ''"
                         :assignments= "data?.soundslice"
                         :hasInstrumentless="data?.instrumentless"
                         :isAdded= "isAdded"

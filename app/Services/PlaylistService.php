@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -68,5 +70,38 @@ class PlaylistService
         }
 
         return $nextItem;
+    }
+
+    public function copyPlaylist(int $userId, int $playlistId): void
+    {
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
+
+        if (!$playlist || $playlist < 0) {
+            Log::error('Playlist not found', ['playlistId' => $playlistId]);
+            return;
+        }
+
+        $playlist = $this->userPlaylistsService
+            ->create([
+                'user_id' => $userId,
+                'type' => 'user-playlist',
+                'brand' => $playlist['brand'],
+                'name' => $playlist['name'],
+                'description' => $playlist['description'],
+                'thumbnail_url' => $playlist['thumbnail_url'],
+                'category' => $playlist['category'],
+                'private' => $playlist['private'],
+                'duration' => $playlist['duration'],
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ]);
+
+        $playlistLessons = $this->userPlaylistsService->getByPlaylistId($playlistId);
+
+        foreach ($playlistLessons as $playlistLesson) {
+            $this->userPlaylistsService->duplicatePlaylistItem(
+                $playlist['id'],
+                $playlistLesson
+            );
+        }
     }
 }

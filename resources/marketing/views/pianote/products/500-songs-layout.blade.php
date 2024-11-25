@@ -47,11 +47,11 @@
                     Achieve your goals with <strong>500 Songs in 5 Days</strong>.
                 @endif
             </h2>
-            <a @hasSection('product-json')
-                    class="join vue-add-to-cart" @yield('product-json')
-                @else
-                    class="join"
-                @endif href="@yield('order-link')">Get Started &raquo;</a>
+{{--            <a @hasSection('product-json')--}}
+{{--                    class="join vue-add-to-cart" @yield('product-json')--}}
+{{--                @else--}}
+{{--                    class="join"--}}
+{{--                @endif href="@yield('order-link')">Get Started &raquo;</a>--}}
             <p class="breakdown">
                 @hasSection('badge')
                     @yield('badge')
@@ -78,11 +78,11 @@
                         <iframe class="embed-responsive-item reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/347561373?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                     @endif
                 </div>
-                <a @hasSection('product-json')
-                    class="join stop-play vue-add-to-cart" @yield('product-json')
-                @else
-                    class="join stop-play"
-                @endif href="@yield('order-link')" data-dismiss="modal" aria-label="Close">Get Started</a>
+{{--                <a @hasSection('product-json')--}}
+{{--                    class="join stop-play vue-add-to-cart" @yield('product-json')--}}
+{{--                @else--}}
+{{--                    class="join stop-play"--}}
+{{--                @endif href="@yield('order-link')" data-dismiss="modal" aria-label="Close">Get Started</a>--}}
             </div>
         </div>
     </div>
@@ -877,11 +877,11 @@
                     <strong>${{ $productPrice }}</strong>
                 @endif
             </h2>
-            <a @hasSection('product-json')
-                class="join vue-add-to-cart" @yield('product-json')
-            @else
-                class="join"
-            @endif href="@yield('order-link')" >LEARN 500 SONGS NOW &raquo;</a>
+{{--            <a @hasSection('product-json')--}}
+{{--                class="join vue-add-to-cart" @yield('product-json')--}}
+{{--            @else--}}
+{{--                class="join"--}}
+{{--            @endif href="@yield('order-link')" >LEARN 500 SONGS NOW &raquo;</a>--}}
             <p class="breakdown">
                 @hasSection('badge')
                     @yield('badge')

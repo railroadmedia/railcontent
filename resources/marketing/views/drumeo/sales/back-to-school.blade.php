@@ -82,9 +82,11 @@
             </p>
 
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
-                <a class="sm:mx-0.5 w-full sm:w-56 join drumeo smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
-                    href="#customize-anchor" aria-label="Customize anchor"
-                >GET STARTED </a>
+                @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
+                    <a class="sm:mx-0.5 w-full sm:w-56 join drumeo smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
+                        href="#customize-anchor" aria-label="Customize anchor"
+                    >GET STARTED </a>
+                @endif
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             </div>
 
@@ -280,16 +282,20 @@
                     </div>
                 @endforeach
             </div>
-
-            <h3 class="leading-tight mt-6 mb-1">
-                <s class="opacity-50">$748</s>
-                <strong>$200</strong>
-            </h3>
-            <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ 240 }}/yr.</p>
-            <a role="link" aria-label=" Get Started" class="join {{ $theme }} mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
-                href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[30-day-chops]=1&products[30-day-independence]=1&products[30-day-double-bass]=1&promo-code=special&locked=true">
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 1, 8, 0, 0, 'America/Vancouver'))
+                <h3 class="leading-tight mt-6 mb-1">
+                    <s class="opacity-50">$748</s>
+                    <strong>$200</strong>
+                </h3>
+                <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ 240 }}/yr.</p>
+                <a role="link" aria-label=" Get Started" class="join {{ $theme }} mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
+                    href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[30-day-chops]=1&products[30-day-independence]=1&products[30-day-double-bass]=1&promo-code=special&locked=true">
                     CLICK HERE TO GET Started &raquo;
-            </a>
+                </a>
+            @else
+                <a role="link" aria-label=" Get Started" class="join sold-out mt-6 mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
+                >this offer has now ended</a>
+            @endif
         </div>
     </section>
 @endsection

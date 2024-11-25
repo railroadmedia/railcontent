@@ -1,6 +1,6 @@
 <template>
-    <div v-if="showLearningPaths" class="tw-flex tw-flex-col tw-w-full tw-mt-[30px]">
-        <div
+    <div v-if="showLearningPaths" class="tw-flex tw-flex-col tw-w-full tw-mb-[30px]">
+        <div v-if="!isV2User"
             class="tw-flex tw-py-[22px] tw-items-center tw-justify-between tw-grow tw-mx-4 lg:tw-mx-0">
             <h2 class="tw-font-bold tw-text-[24px] tw-leading-[22px]">
                 Where to start?
@@ -35,6 +35,10 @@ const props = defineProps({
     trackingSection: {
         type: String,
         default: ''
+    },
+    isV2User: {
+        type: Boolean,
+        default: false
     }
 });
 </script>

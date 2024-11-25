@@ -13,7 +13,7 @@
             </div>
             <h1 class="tw-text-[14px] tw-leading-[19px] lg:tw-text-[20px] lg:tw-leading-[30px] tw-font-bold">{{ title }}
             </h1>
-            <p v-if="description.length" class="tw-hidden lg:tw-block tw-text-[12px] tw-leading-[18px]">
+            <p v-if="description.length" class="tw-hidden lg:tw-block tw-text-[12px] tw-leading-[18px] xl:tw-text-[18px] xl:tw-leading-[27px] tw-font-normal">
                 {{ description }}
             </p>
             <div class="tw-flex tw-pt-[15px]">

@@ -55,7 +55,7 @@
             <i @click="trailerOne = true;" class="fas fa-play play-button autoplay-video"></i>
             <h1>The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h1>
-            <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
+{{--            <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>--}}
             <p>@if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))
                     <strong>ONLY <s>${{ floatval($productPrices['electrify-your-drumming']->price) }}</s>
                         @if(number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2) == intval(floatval($productPrices['electrify-your-drumming']->discounted_price)))
@@ -79,9 +79,9 @@
         'vimeo' => true,
     ])
         @slot('button')
-            <div class="text-center bg-white rounded-b-xl py-4">
-                <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
-            </div>
+{{--            <div class="text-center bg-white rounded-b-xl py-4">--}}
+{{--                <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>--}}
+{{--            </div>--}}
         @endslot
     @endcomponent
 
@@ -440,7 +440,7 @@
             <h2 class="columns">The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h2>
 
-            <div class="columns"><a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>
+{{--            <div class="columns"><a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>--}}
 
             <h4 class="columns uppercase">
                 @if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))

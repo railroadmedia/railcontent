@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
@@ -65,6 +66,7 @@ class HomePageController extends BaseController
         private readonly LearningPathsService $learningPathsService,
         private readonly UserAccessPermissionsService $userAccessPermissionsService,
         private readonly SanityGateway $sanityGateway,
+        private readonly ExploreTasksService $exploreTasksService
     ) {
     }
 
@@ -302,6 +304,8 @@ class HomePageController extends BaseController
 
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
 
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
+
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
@@ -331,11 +335,10 @@ class HomePageController extends BaseController
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
             "youtubeId" => $youtubeId ?? null,
-            "displayTrialSection" => $showNewTrialSection || $showOldTrialSection,
             "trialSectionRedesign" => $showNewTrialSection,
-            "trialSection" => $trialSection,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => $homepageV2,
+            "exploreTasks" => $userTasks,
         ]);
     }
 
@@ -606,10 +609,11 @@ class HomePageController extends BaseController
     public function getUsersPlaylist(): ContentFilterResultsEntity
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
-            user()->id,
-            'user-playlist',
-            brand(),
-            self::PLAYLISTS_COUNTENT_COUNT
+            userId: user()->id,
+            playlistType: 'user-playlist',
+            brand: brand(),
+            limit: self::PLAYLISTS_COUNTENT_COUNT,
+            sort: '-last_progress'
         );
 
         return new ContentFilterResultsEntity(['results' => $playlists]);

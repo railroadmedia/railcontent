@@ -54,7 +54,7 @@ class DevEndpointController extends Controller
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
-    private function handleChallengesEndpoints($request) : string
+    private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');
         $userId = $request->get('user_id', user()?->id ?? 631736); // adrian@musora.com
@@ -63,7 +63,7 @@ class DevEndpointController extends Controller
             case ('prep'):
                 $this->prepChallengeData($challengeId, $request->get('start_date', null));
                 return "Prepped Challenge Data $challengeId";
-            case ('complete');
+            case ('complete'):
                 $this->challengesService->completeChallenge($challengeId, $userId);
                 return "Completed Challenge $challengeId for user $userId";
             case('move_days'):
@@ -95,6 +95,7 @@ class DevEndpointController extends Controller
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
             case('enroll'):
                 $this->challengesService->startChallenge($challengeId, $userId);
+                // no break
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";
@@ -138,11 +139,11 @@ class DevEndpointController extends Controller
             $data[] = $progressData;
         }
 
-//        $startDate = '20241011';
-//        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-//        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-//        $progressData = $userProgress->getStreakCurrentData();
-//        $data[] = $progressData;
+        //        $startDate = '20241011';
+        //        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
+        //        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        //        $progressData = $userProgress->getStreakCurrentData();
+        //        $data[] = $progressData;
 
         return $data;
     }

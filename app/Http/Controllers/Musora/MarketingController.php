@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Musora;
 
-use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MarketingController extends BaseController
 {
@@ -19,12 +19,23 @@ class MarketingController extends BaseController
     {
         return view('musora.sales.trial', [
             'theme' => 'musora',
+            'commercialHeader' => true,
             'promoVersion' => true,
             'trialVersion' => true,
             'scrollToJoin' => true,
             'hideMenu' => true,
         ]);
     }
+
+    public function trialMonth(): View
+    {
+        return view('musora.sales.subscription', [
+            'theme' => 'musora',
+            'scrollToJoin' => true,
+            'month' => true,
+        ]);
+    }
+
     public function spotify(): View
     {
         return view('musora.sales.spotify', [
@@ -76,6 +87,11 @@ class MarketingController extends BaseController
     public function terms(): View
     {
         return view('musora.pages.terms');
+    }
+
+    public function guitarcenterTerms(): View
+    {
+        return view('musora.pages.redeem.guitarcenter-terms');
     }
 
     public function privacy(): View
@@ -133,6 +149,11 @@ class MarketingController extends BaseController
         return view('musora.pages.playlists', [ 'theme' => 'musora']);
     }
 
+    public function playlist(): View
+    {
+        return view('musora.pages.playlist', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+
     public function recitals(): View
     {
         return view('musora.pages.recitals');
@@ -169,5 +190,25 @@ class MarketingController extends BaseController
     public function app(): View
     {
         return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
+    }
+    public function freeMusicLessonsForLife(): View
+    {
+        return view('musora.pages.free-music-lessons-for-life', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function everyDayMusician(): View
+    {
+        return view('musora.pages.everyday-musician', [ 'theme' => 'musora']);
+    }
+    public function history(): View
+    {
+        return view('musora.pages.history', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function youtube(): View
+    {
+        return view('musora.pages.youtube', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function freeResources(): View
+    {
+        return view('musora.pages.free-resources', [ 'theme' => 'musora'], ['recaptchaKey' => config('recaptcha.key')]);
     }
 }

@@ -1,6 +1,7 @@
 import { computed, ref } from "vue";
 import axios from "axios";
 import userJourney from "@services/userJourney";
+import { contentStatusReset } from "musora-content-services";
 
 export default function useCarouselEvents (originalData, slicedData, page, cardNum, trackingSection = null, brand = 'drumeo') {
     const original = ref(originalData || []);
@@ -65,9 +66,15 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
                 submit: () => {
                     removeItem(contentId);
 
-                    axios.put(`/railcontent/reset`, {
-                        content_id: contentId,
-                    })
+                    //Reset Progress
+                    contentStatusReset(contentId)
+                    .then(() => {
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Your progress has been reset.'
+                        });
+                    });
+        
                 },
             }
         });

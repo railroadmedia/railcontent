@@ -4,8 +4,8 @@
     <title>Win a Casio Privia PX-S1100 | Pianote</title>
     <meta property="og:title" content="Win a Casio Privia PX-S1100 | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply start a trial to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply start a trial to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
@@ -40,19 +40,26 @@
                         <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" alt="logo">
                         <img class="h-52 sm:hidden mt-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
                         <p class="mx-0 my-4" style="max-width: 450px;">
-                            At Pianote, it’s our mission to help everyone play this beautiful instrument. So we’re giving away TWO Casio Privia Digital Pianos!
+                            At Pianote, it’s our mission to help everyone play this beautiful instrument. So we’re giving away a Casio Privia Digital Piano!
                             <br><br>
-                            Simply start a FREE 7-day trial of Pianote from now until July 11th and you’ll automatically be entered to win.
+                            Simply enter your name and email address by October 13th and you’ll be entered to win.
                         </p>
                         <p class="mt-3 mb-6 text-sm">
                             <i class="fas fa-check-circle text-pianote"></i> No purchase necessary.<br class="lg:hidden">
-                            <i class="fas fa-check-circle text-pianote lg:ml-2"></i> Cancel anytime.</p>
+                            <i class="fas fa-check-circle text-pianote lg:ml-2"></i> One entry per person.</p>
 
                     </div>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
-                        <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
+                        @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                        "stacked" => true,
+                        "nameInput" => true,
+                        "formId" => "Pianote - Engagement - Trigger - Casio Privia Giveaway - Web Form",
+                        "formName" => 'Casio Privia Giveaway',
+                        "buttonText" => "I WANT TO WIN!",
+                        ])
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif
@@ -106,7 +113,7 @@
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
         <div class="max-w-md md:max-w-5xl mx-auto md:flex md:items-center">
             <div class="md:pr-8 text-center md:text-left mb-6 md:mb-0 flex-shrink-0">
-                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes2.webp" alt="ui image">
+                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes3.png" alt="ui image">
             </div>
             <div class="lg:pl-6">
                 <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
@@ -114,15 +121,13 @@
                     More Chances to Win…
                 </h4>
                 <p class="leading-normal" style="color:#2A2F34;">
-                    We know you want this piano.
+                    A beautiful Casio Privia Digital Piano is not the only prize.
                     <br><br>
-                    That’s why we’re giving away TWO of them. And each comes with a year of unlimited lessons from Pianote.
+                    We’re also giving away <strong>3 Annual Pianote Memberships</strong>.
                     <br><br>
-                    But a beautiful digital piano is not the only prize.
+                    Dive in and explore unlimited piano lessons, weekly live streams, exclusive resources, and personalized feedback from real teachers.
                     <br><br>
-                    You could also win one of TWO Pianote BookBag Bundles. You’ll get a hand-crafted premium leather satchel full of music books. Play timeless classical pieces or your favorite Christmas Carols.
-                    <br><br>
-                    And finally, you could win one of two Annual Pianote Memberships.
+                    Sign up today and get everything you need to start your piano journey!
                 </p>
             </div>
         </div>
@@ -141,7 +146,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12 text-white">
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    Start a Free 7-Day Trial of Pianote to enter.
+                    Enter your name and email address.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
@@ -149,28 +154,26 @@
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No purchase necessary. Cancel anytime.
+                    No purchase necessary.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No shipping fees (VAT may apply).
+                    No age restrictions.
                 </div>
             </div>
             <div class="inline-block italic text-black py-4 px-6 bg-musora">
-                The winner will be announced {{--during a LIVE event--}} on <strong>July 11th</strong>!
+                The winner will be announced on our socials on <strong>October 14th</strong>!
             </div>
         </div>
     </section>
 
     <section class="flex items-center text-center px-6 sm:px-6 pt-8 sm:pt-12 pb-20 md:pb-24">
         <div class="container mx-auto max-w-3xl">
-            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to start a trial?</strong></h3>
+            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give my email address?</strong></h3>
             <p>
-                We want the winner to be someone who really wants and will use this free piano. After all, that’s what it’s for. Starting a trial lets us know you’re serious about the piano.
+                We want the winner to be someone who really wants and will use this free piano. After all, that’s what it’s for. So getting your name and email address lets us know you’re a real person!
                 <br><br>
-                On top of that, we want to show you the awesome lessons we have inside Pianote. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.
-                <br><br>
-                And hey, if you like it, we hope you’ll stick around.
+                On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome piano lessons, and we’d love to show you.” Don’t worry. We won’t send you spam or share your email address with anybody else. You’ll get free ongoing piano lessons and some special offers. And if you don’t like our emails, you can unsubscribe anytime.
             </p>
         </div>
     </section>
@@ -190,10 +193,17 @@
                         </h4>
                     </div>
 
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
-                        <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 4, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Oct. 4th</span>--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 10, 14, 8, 0, 0, 'America/Vancouver'))
+                        @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                        "stacked" => true,
+                        "nameInput" => true,
+                        "formId" => "Pianote - Engagement - Trigger - Casio Privia Giveaway - Web Form2",
+                        "formName" => 'Casio Privia Giveaway',
+                        "buttonText" => "I WANT TO WIN!",
+                        ])
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif

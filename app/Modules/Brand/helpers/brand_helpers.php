@@ -31,6 +31,32 @@ if (! function_exists('all_brands')) {
     }
 }
 
+if (! function_exists('get_brand_from_request_url_domain')) {
+    /**
+     * @return string
+     */
+    function get_brand_from_request_url_domain()
+    {
+        $requestUrl = request()->url();
+
+        $brand = 'musora';
+
+        if (Str::contains($requestUrl, 'drumeo.com')) {
+            $brand = 'drumeo';
+        } elseif (Str::contains($requestUrl, 'pianote.com')) {
+            $brand = 'pianote';
+        } elseif (Str::contains($requestUrl, 'guitareo.com')) {
+            $brand = 'guitareo';
+        } elseif (Str::contains($requestUrl, 'singeo.com')) {
+            $brand = 'singeo';
+        } elseif (Str::contains($requestUrl, 'playbass.com')) {
+            $brand = 'playbass';
+        }
+
+        return $brand;
+    }
+}
+
 if (! function_exists('all_brands_and_musora')) {
     function all_brands_and_musora()
     {

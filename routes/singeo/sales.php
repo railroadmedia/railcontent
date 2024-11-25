@@ -21,6 +21,8 @@ Route::domain('{singeoDomain}')
         Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
         Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+        Route::get('/affiliate/musician-wave', [SalesController::class, 'musicianwavesing']);
+        Route::get('/affiliate/musicradar', [SalesController::class, 'singeomusicradar']);
 
         Route::get('/privacy', [SalesController::class, 'privacy']);
         Route::get('/terms', [SalesController::class, 'terms']);
