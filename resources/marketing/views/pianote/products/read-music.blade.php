@@ -301,9 +301,11 @@
         $earlyBirdStart = Carbon\Carbon::create(2024, 6, 13, 0, 0, 0, 'America/Vancouver');
         $earlyBirdEnd = Carbon\Carbon::create(2024, 6, 24, 0, 0, 0, 'America/Vancouver');
         $course = 'Read Music in 30 Days';
+        $price = 127;
+        $discountedPrice = 127;
     @endphp
 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
+    {{-- <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
@@ -383,10 +385,10 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
+                    <div class="rounded-xl overflow-hidden relative bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
                         style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header2.png');"
                         x-on:click="trailer = true;">
-                        <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
+                        <div class="join white smaller absolute bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -440,7 +442,109 @@
             <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden">
                     PLUS you get lifetime access!</em></p>
         </div>
-    </header>
+    </header> --}}
+
+ <header
+    class="px-5 sm:px-6 pt-6 md:pt-9 pb-12 md:pb-18 overflow-hidden"
+    style="background: linear-gradient(rgba(239, 247, 255, 1) 50%, #ffffff 50%)"
+    x-data="{
+        loadAlternateSrc(src) {
+            this.$refs.playToLearnVideo.src = src;
+        },
+        videoLoaded: false
+    }">
+    <div class="container max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
+        <div class="flex flex-col items-center text-center">
+            <img
+                class="h-20 lg:h-24 -mb-3 sm:mb-0 py-1"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/evergreen/RMI30D-logo.webp"
+                alt="logo"
+                fetchpriority="high">
+
+            <div class="w-full">
+                <h1 class="rotater-text overflow-hidden">
+                    <strong>
+                        <span>Learn Jazz Piano</span>
+                    </strong>
+                </h1>
+                <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">in just 30 days.</h2>
+            </div>
+
+            @php
+            $checklist = [
+                'Learn By<br class="block md:hidden"> Doing',
+                'Play Every<br class="block md:hidden"> Day',
+                'Perfect For<br class="block md:hidden"> Beginners'
+            ];
+            @endphp
+            <div class="w-full flex flex-row justify-evenly md:justify-center items-center gap-4 lg:gap-10 lg:py-2">
+                @foreach($checklist as $item)
+                    <div class="flex flex-col md:flex-row items-center text-center md:gap-2">
+                        <i class="fas fa-check-circle text-pianote text-md"></i>
+                        <p class="text-sm md:text-base">{!! $item !!}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="py-5 sm:py-6 relative">
+            <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/evergreen/header-left-collage.webp"
+                    alt="in just 30 days."
+                    class="h-56 lg:h-72"
+                    fetchpriority="high">
+            </div>
+
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                x-on:click="trailer = true;"
+                role="button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fa fa-play play-button z-10"></i>
+
+                <div x-data="{ videoLoaded: false }">
+                    <img src="https://i.vimeocdn.com/video/1862205184-7474f7c13fe3f6e81ffb277bac7e14bab0f1726b62d038a53fda1d785d506f9e-d?mw=80&q=85"
+                        alt="Blurred Poster Image"
+                        class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl"
+                        x-show="!videoLoaded">
+
+                    <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                        x-ref="playToLearnVideo"
+                        x-on:error="loadAlternateSrc('https://player.vimeo.com/progressive_redirect/playback/952486575/rendition/720p/file.mp4?loc=external&signature=d8f336b12d6b8b2be938bd232e0aa4f893d3e3cc91c15a8f9b4ee16bcddca557')"
+                        x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                        x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                        data-src="https://player.vimeo.com/progressive_redirect/playback/952486575/rendition/720p/file.mp4?loc=external&signature=d8f336b12d6b8b2be938bd232e0aa4f893d3e3cc91c15a8f9b4ee16bcddca557"
+                        type="video/mp4"
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                        fetchpriority="high">
+                        <source src="https://player.vimeo.com/progressive_redirect/playback/952486575/rendition/720p/file.mp4?loc=external&signature=d8f336b12d6b8b2be938bd232e0aa4f893d3e3cc91c15a8f9b4ee16bcddca557" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/evergreen/header-right-collage.webp"
+                    alt="in just 30 days."
+                    class="h-56 lg:h-72"
+                    fetchpriority="high">
+            </div>
+        </div>
+
+        <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">
+            <a href="#final" class="anchor-slide join bg-pianote medium w-full max-w-[350px] mb-3" role="button">Get started</a>
+            <h5 class="leading-tight text-center">
+                <strong class="font-black">Only
+                    @if($price > $discountedPrice)
+                        <s class="opacity-60">${{ $price }}</s> ${{ $discountedPrice }} (SAVE {{ round(100 - (100 * ($discountedPrice / $price))) }}%)
+                    @else
+                        ${{ $discountedPrice }}
+                    @endif
+                </strong>
+            </h5>
+        </div>
+    </div>
+</header>
 
     <section class="bg-top bg-cover"
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp');">
@@ -499,7 +603,7 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:pt-14 lg:pt-20" style="background-color:#F1F7FE;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:pt-14 lg:pt-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>Learn to Read Music… <br class="block md:hidden" />By PLAYING Music</strong>
             </h2>
@@ -584,15 +688,13 @@
                 @endforeach
             </div>
         </div>
-        <h1 class="leading-none -mt-8 mb-8"><i class="fal fa-angle-down text-pianote hidden md:block"></i></h1>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #FFFFFF">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: ##F1F7FE">
         <div class="container max-w-4xl mx-auto">
             @php
                 $items = [
                     'Daily guided piano workouts',
-                    'Weekly Q&A workshops',
                     'Flexible weekly schedule',
                     'Ongoing motivation & support',
                     'Guaranteed results',
@@ -604,7 +706,7 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                     alt="30-Day Independence Logo">
-                <h4 class="leading-loose text-left pt-4 sm:pt-0">
+                <h4 class="leading-loose text-left pt-4 sm:pt-0 capitalize">
                     @foreach ($items as $item)
                         <i class="fas fa-check text-pianote mr-5"></i> {!! $item !!}<br>
                     @endforeach
@@ -614,11 +716,7 @@
 
         {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10" @click="waitlistModal = true;">JOIN WAITLIST</span> --}}
 
-        @if ($startDateCourse > Carbon\Carbon::now())
-            <span class="join sold-out medium w-full max-w-xs align-middle my-10">ENROLLMENT CLOSED</span>
-        @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle my-10 anchor-slide">ENROLL NOW</span>
-        @endif
 
     </section>
 
@@ -844,22 +942,24 @@
                 <div class="flex flex-col-reverse md:flex-row items-center w-full lg:pt-10">
                     <div class="w-full md:w-7/12 lg:w-1/2 text-justify px-6 lg:px-6">
                         <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your hands!</strong></h3>
-                        <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
-                            day. <br><br>
-                            Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE. <br><br>
-                            This 74-page book has every exercise used in the course PLUS a reference guide, practice notes
-                            for
-                            each day, and a ton of bonus sight-reading exercises.  <br><br>
-                            It’s the perfect companion to the course, and it’s yours FREE. <br><br>
-                            <span><strong>But you must enroll before June 23 to have the best chance of getting the book
-                                    before
-                                    the Challenge starts.</strong></span> <br><br>
-                            Or – choose the Annual Membership and you’ll get the book along with 7 other bonuses ($364
-                            value).
+                        <p class="pb-1 md:pb-2">
+                            Read Music in 30 Days is an online Challenge that will have you reading and playing music each day.
+                        </p>
+                        <p class="pb-2 md:pb-2">
+                            You’ll get a Companion E-Book when you enroll.
+                        </p>
+                        <p class="pb-2 md:pb-4">
+                            But if you’d like the real thing, sign up for a year of lessons with Pianote and you’ll get LIFETIME access to the course PLUS the physical book mailed to your door -- for FREE.
+                        </p>
+                        <p class="pb-2 md:pb-4">
+                            This 74-page book has every exercise used in the course PLUS a reference guide, practice notes for each day, and a ton of bonus sight-reading exercises.
+                        </p>
+                        <p class="pb-1 md:pb-2">
+                            It’s the perfect companion to the course.
                         </p>
                     </div>
                     <div class="flex w-full md:w-5/12 lg:w-1/2 p-10 md:p-0">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book.webp"
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/evergreen/e-book.webp"
                         alt="Read Music in 30 Days Book"
                         class="md:pl-10">
 {{--                        cursor-pointer transition-transform duration-300 transform hover:scale-105--}}
@@ -871,7 +971,7 @@
     </section>
 
 
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
+    {{-- <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #d70b3b calc(50% + 1px));">
     </div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
@@ -899,7 +999,7 @@
                         </span>
                     </h4>
         </div>
-    </section>
+    </section> --}}
 
     <section class="text-center px-2 sm:px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
@@ -1030,14 +1130,8 @@
             </div>
         </div>
         <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
-
-        @if ($startDateCourse > Carbon\Carbon::now())
-            <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
-        @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle anchor-slide">ENROLL NOW</span>
-        @endif
-
-            <div class="pt-4">
+            {{-- <div class="pt-4">
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png"
@@ -1045,7 +1139,7 @@
                 <p class="inline-block leading-tight text-sm align-middle">Join
                 {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.
                 </p>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -1088,15 +1182,15 @@
 
                 <h5 class="leading-tight mt-4 md: my-4 my-1"><strong>20 Guided Play-Along
                         Lessons. <br>
-                        4 Weekly Q&A Sessions. <br>
-                        Lifetime Course Access. <br> <span class="text-pianote">BONUS</span>
-                        Companion Book.</strong></h5>
+                        {{-- 4 Weekly Q&A Sessions. <br> --}}
+                        Lifetime Course Access. <br> 
+                        </h5>
 
                 <div class="flex flex-col items-start">
                     @php
                         $items = [
                             'Read music and play the songs you love.',
-                            'Join ' . number_format($nPackOwners ?? 0) . ' piano players who<br> have already registered.',
+                            '<span class="text-pianote">Bonus</span>  Companion PDF',
                             'Choose your best option to get started.',
                         ];
                     @endphp
@@ -1107,27 +1201,22 @@
                         </div>
                     @endforeach
                 </div>
-
             </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
-                    <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
-                        @if ($earlyBirdEnd < Carbon\Carbon::now())
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1"
-                        @else
-                            href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
-                        @endif
-                        >
-{{--                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">--}}
-{{--                        <p class="text-xs px-3 py-1">  @if ($earlyBirdEnd > Carbon\Carbon::now()) EARLY BIRD OFFER @else COURSE ONLY @endif</p>--}}
-{{--                    </div>--}}
+                    <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-10/12 z-10" style="background: #ffffff;"
+                      
+                    href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1"
+                                             >
+                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
+                        <p class="text-xs px-3 py-1"> COURSE ONLY</p>
+                    </div>
                     <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
                     <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
-                    <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
+                    <h2 class="inline-block"><strong class="text-4xl">$127</strong></h2>
                     <p class="inline-block text-xs">one time payment.</p><br>
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
-                        @if ($earlyBirdEnd > Carbon\Carbon::now())<li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion  Book</li> @endif
                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF</li>
                     </ul>
                     <hr class="w-full my-5" style="border-color:#b2cae1">
@@ -1136,33 +1225,35 @@
                         <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
                     </p>
                 </a>
-{{--                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-pdf]=1&products[music-theory-posters]=1&products[little-book-arpeggios]=1&products[little-book-chord]=1&products[little-book-hanon]=1&products[taktell-piccolo-metronome]=1&products[piano-riffs-and-fills]=1&locked=true"--}}
-{{--                    class="px-5 sm:px-12 py-7 sm:py-10 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">--}}
-{{--                    <div class="inline-block border rounded-xl bg-musora text-black text-center my-2">--}}
-{{--                        <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>--}}
-{{--                    </div>--}}
-{{--                    <h3 class="leading-tight"><strong>Join Pianote</strong></h3>--}}
-{{--                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and popular songs!</p>--}}
-{{--                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>--}}
-{{--                    <p class="inline-block text-xs">(Includes $364 in free bonuses)</p><br>--}}
-{{--                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>--}}
-{{--                    <ul class="list-disc ml-5">--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Read Music in 30 Days</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Book</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion PDF</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>--}}
-{{--                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>--}}
+                {{--TODO button--}}
+                {{-- <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-pdf]=1&products[music-theory-posters]=1&products[little-book-arpeggios]=1&products[little-book-chord]=1&products[little-book-hanon]=1&products[taktell-piccolo-metronome]=1&products[piano-riffs-and-fills]=1&locked=true"
+                    class="px-5 sm:px-12 py-7 sm:py-10 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
+                    <div class="inline-block border rounded-xl bg-musora text-black text-center my-2">
+                        <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>
+                    </div>
+                    <h3 class="leading-tight"><strong>Join Pianote + Get Read Music in 30 Days FREE</strong></h3>
+                    <p class="text-sm mt-2 mb-3">The Ultimate Online Lessons Experience.</p>
+                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
+                    <p class="inline-block text-xs">(Includes $392 in free bonuses)</p><br>
+                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
+                    <ul class="list-disc ml-5">
+                        <li class="text-sm leading-relaxed">Read Music in 30 Days</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Book</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion PDF</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Digital Chords & Scales Guide</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Easy Chords Course</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> 30-Day Blues Piano Course</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>
 
-{{--                    </ul>--}}
-{{--                    <hr class="w-full my-5" style="border-color:#b2cae1">--}}
-{{--                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
-{{--                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
-{{--                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>--}}
-{{--                    </p>--}}
-{{--                </a>--}}
+                    </ul>
+                    <hr class="w-full my-5" style="border-color:#b2cae1">
+                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
+                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
+                    </p>
+                </a> --}}
             </div>
+           
         </div>
     </section>
 
