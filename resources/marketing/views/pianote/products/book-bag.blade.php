@@ -584,15 +584,19 @@
                             <h3 class="leading-tight mt-2">
 
                                 @if(!empty($membersVersion))
-                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> $249 </span>
-                                    <strong>$149</strong>
+                                    <span class="line-through" style="color: #879097; margin-right: 5px;"> {{ floatval($productPrices['pianote-book-bag']->price) }} </span>
+                                    <strong>${{ $discountedPrice }}</strong>
                                 @else
-                                    <strong> $249 </strong>
-                                    {{-- <strong>$149</strong> --}}
+                                     @if (floatval($productPrices['pianote-book-bag']->price) > $discountedPrice)
+                                        <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
+                                        <strong>${{ $discountedPrice }}</strong>
+                                    @else
+                                        <strong>Only ${{ $discountedPrice }}</strong>
+                                    @endif
                                 @endif
                             </h3>
                             <p class="text-sm mb-5"><em>One-time payment.</em></p>
-                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">GET STARTED</div>
+                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">ORDER NOW</div>
                         </div>
                         <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
                             <p class="text-left text-sm mb-1.5 leading-tight"><strong class="">Premium Oil-Tanned Leather</strong></p>

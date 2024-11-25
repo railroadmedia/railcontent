@@ -632,7 +632,7 @@
                         <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
                         Only <s class="opacity-50">$1642</s> <strong>$799</strong>
                         </h3>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-ultimate-bundle-pianote]=1&promo-code=ultimate-bundle-pianote">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-ultimate-bundle-pianote]=1&promo-code=ultimate-bundle-pianote&locked=true">Start Playing</a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -649,7 +649,7 @@
                         <h3 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h3>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-keyboard-bundle]=1&promo-code=keyboard-bundle">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-keyboard-bundle]=1&promo-code=keyboard-bundle&locked=true">Start Playing</a>
                         <a href="/shop/prima-ultimate"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
