@@ -121,15 +121,16 @@
             <div class="text-left">
                 @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
+                'noButton' => 'true',
                 ])
             </div>
 
-            <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg  w-auto inline-block mx-auto">
+            <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg  w-auto inline-block mx-auto mt-6 md:mt-16">
                 <div class="flex items-start justify-center gap-3 max-w-4xl w-auto">
                     <div class="flex-shrink-0">
                         <i class="fa-solid fa-circle-exclamation text-xl"></i>
                     </div>
-                    <p class="leading-normal">
+                    <p class="leading-normal text-sm md:text-base">
                         <span class="font-semibold">This offer is only available for Black Friday – and only for existing<br class="hidden sm:inline"> Musora members (Drumeo, Pianote, Guitareo, Singeo).</span>
                     </p>
                 </div>
