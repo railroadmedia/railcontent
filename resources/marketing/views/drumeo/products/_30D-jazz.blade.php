@@ -130,7 +130,7 @@
                     class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
                     @if(empty($platformVersion))
                         <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
-                            <i class="far fa-infinity mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
+                            <i class="far fa-infinity mr-3 md:mr-0 text-drumeo text-2xl"></i>
                             <p class="leading-tight mx-0"><strong class="font-black">Lifetime Access</strong><br>
                                 <span class="text-sm"> Yours to play over<br class="hidden md:inline"> and over again.</span>
                             </p>
