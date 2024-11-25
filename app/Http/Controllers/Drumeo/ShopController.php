@@ -33,6 +33,10 @@ class ShopController extends BaseController
             return $value->productType->name === 'Accessories';
         });
 
+        $gifts = $products->filter(function ($value, $key) {
+            return $value->productType->name === 'Gifts';
+        });
+
         $misc = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Misc';
         });

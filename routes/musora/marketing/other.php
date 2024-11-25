@@ -39,6 +39,7 @@ Route::domain('{musoraDomain}')
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
+        Route::get('electronic-gift-card', [MarketingController::class, 'Egiftcard']);
         Route::get('method', [MarketingController::class, 'method']);
         Route::get('songs', [MarketingController::class, 'songs']);
         Route::get('community', [MarketingController::class, 'community']);
@@ -79,6 +80,8 @@ Route::domain('{musoraDomain}')
         Route::get('history', [MarketingController::class, 'history']);
         Route::get('youtube', [MarketingController::class, 'youtube']);
         Route::get('youtube/free-resources', [MarketingController::class, 'freeResources']);
+        Route::get('lifetime', [MarketingController::class, 'lifetimeDeal']);
+        Route::get('extend', [MarketingController::class, 'extend']);
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);

@@ -43,7 +43,7 @@
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/choose-plan" >Pricing</a>
-                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Shop</a>
+                    <a style="color: #ffae00;" class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Black Friday</a>
                     <a class="" href="{{ get_legacy_brand_base_url('pianote') }}/blog" >Blog</a>
 
                 </div>
@@ -155,7 +155,7 @@
 {{--            "linkUrl" => "/choose-plan",--}}
 {{--        ])--}}
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Shop",
+                "linkName" => "Black Friday Deals",
                 "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/shop",
             ])

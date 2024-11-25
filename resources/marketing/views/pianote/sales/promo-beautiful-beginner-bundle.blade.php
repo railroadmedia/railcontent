@@ -279,7 +279,7 @@
 {{--                <br>--}}
 {{--            <span x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
@@ -451,7 +451,7 @@
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="leading-tight"><strong><span class="text-pianote">STEP 2.</span><br>Press play and follow along.</strong></h5>
                 <p class="leading-tight my-5">Learn by PLAYING with a real teacher.<br>
-                    The sessions are short, focused, most of all -- fun! Each day you’ll unlock a new lesson.</p>
+                    The sessions are short, focused, most of all – fun! Each day you’ll unlock a new lesson.</p>
                 <img class="w-full rounded-xl cursor-pointer autoplay-video" x-on:click="stepTwo = true;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2050x0/filters:quality(95)/marketing/pianote/promos/october/step2.webp">
 {{--                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"--}}
 {{--                    x-on:click="stepTwo = true;">--}}
@@ -1035,7 +1035,7 @@
 {{--                        <p class="leading-tight text-sm"><span class="text-pianote">Discount ends in:</span><br>--}}
 {{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
@@ -1064,7 +1064,7 @@
 {{--                        <p class="leading-tight text-sm"><span class="text-pianote">Offer ends in:</span><br>--}}
 {{--                            <span class="uppercase" x-cloak x-data="timer()" x-init="countdown()">--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}

@@ -32,7 +32,7 @@ class SalesController extends BaseController
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true, 'recaptchaKey' => config('recaptcha.key')]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -540,6 +540,30 @@ class SalesController extends BaseController
         return view('pianote.products.prima', [
             'theme' => 'pianote',
             'ultimate' => true,
+        ]);
+    }
+    public function pianoteDeal()
+    {
+        return view('pianote.products.pianote-deal', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bookBundle()
+    {
+        return view('pianote.products.book-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function giftBundle()
+    {
+        return view('pianote.products.gift-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function challengesBundle()
+    {
+        return view('pianote.products.challenges-bundle', [
+            'theme' => 'pianote',
         ]);
     }
 }

@@ -303,7 +303,7 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="uppercase text-pianote"><strong>Step 2</strong></h5>
-                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!</p>
+                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all – fun! Each day you’ll unlock a new lesson. Give it a try!</p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                     x-on:click="stepTwo = true;">
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
@@ -451,7 +451,7 @@
 
             <p class="max-w-2xl mx-auto leading-tight mb-10 sm:mb-12">They say practice makes perfect.
             <br><br>
-            It’s a cliche -- and it’s not entirely true. Because if you’re not practicing the RIGHT things -- the RIGHT way...
+            It’s a cliche – and it’s not entirely true. Because if you’re not practicing the RIGHT things – the RIGHT way...
                 <br><br>
             You could be wasting your time.
                 <br><br>

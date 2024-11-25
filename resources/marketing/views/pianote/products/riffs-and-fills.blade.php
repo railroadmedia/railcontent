@@ -20,7 +20,7 @@
         "cartVersion" => true
     ])
 
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
                     "name" => "Piano Riffs & Fills",
                     "fullPrice" => floatval($productPrices['piano-riffs-and-fills']->price),
                     "price" => floatval($productPrices['piano-riffs-and-fills']->discounted_price),

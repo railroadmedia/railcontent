@@ -21,7 +21,7 @@
         }
     @endphp
 
-    <meta property="og:image" content="{{ $shareImage }}">    
+    <meta property="og:image" content="{{ $shareImage }}">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -39,7 +39,7 @@
             background: #F61A30;
             border-color: #F61A30;
         }
-        .join:hover, .join:focus, 
+        .join:hover, .join:focus,
         .join.smaller:focus, .join.smaller:hover {
             background: #F61A30;
             filter: brightness(125%);
@@ -86,27 +86,14 @@
            text-align: center !important;
         }
     </style>
-
-    @php
-        if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true';
-             $discountedPrice = 149;
-        }
-        else {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1';
-             $discountedPrice = number_format(floatval($productPrices['pianote-book-bag']->discounted_price), 2) == intval(floatval($productPrices['pianote-book-bag']->discounted_price))
-                ? floatval($productPrices['pianote-book-bag']->discounted_price)
-                : number_format(floatval($productPrices['pianote-book-bag']->discounted_price), 2);
-                }
-    @endphp
 @stop
 
 @section('body-data')
     x-data="{
     trailer: false,
-    modal798501810: false,
+    modal879916161: false,
     modal823788317: false,
-    modal852795615: false,
+    modal879913986: false,
     modal928599834: false,
     modal1008560089: false,
     }"
@@ -116,18 +103,35 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
-        "name" => "Pianote BookBag",
-        "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
-        "price" => $discountedPrice,
-        "noBreadcrumb" => true
-    ])
+    @if(!empty($ultimate))
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 1642,
+            "price" => 799,
+            "noBreadcrumb" => true
+        ])
+    @elseif(!empty($lifetime))
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 599,
+            "price" => 599,
+            "noBreadcrumb" => true
+        ])
+    @else
+        @include('_partials.components.shop.promo-banner-2', [
+            "name" => "Prima Keyboard",
+            "fullPrice" => 1374,
+            "price" => 599,
+            "noBreadcrumb" => true
+        ])
+    @endif
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container max-w-6xl mx-auto relative z-20">
                 @if(!empty($ultimate))
-                    <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                     <img class="h-6 md:h-11 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/ultimate-bundle-logo.svg">
+                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong><u style="text-decoration-color: #F61A30;">Everything you need</u></strong> to <br class="block sm:hidden">
                         start <br class="hidden sm:inline">playing the piano.
@@ -155,7 +159,8 @@
                         Only <strong>$599</strong>
                     </h3>
                 @else
-                    <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                     <img class="h-6 md:h-10 my-2 md:my-4 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/bundle/keyboard-bundle-logo.svg">
+                    <img class="h-6 md:h-10 my-2 block mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/Logo.webp">
                     <h2 class="relative w-auto inline-block leading-tight">
                         <strong>The <u style="text-decoration-color: #F61A30;">Perfect Way</u> to Start</strong> <br class="hidden sm:inline">Playing the Piano.
                     </h2>
@@ -165,7 +170,7 @@
                          Only <s class="opacity-50">$1374</s><strong> $599</strong>
                     </h3>
                 @endif
-    
+
                 <div class="w-full max-w-xl mx-auto">
                     <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
                         href="#customize-anchor"
@@ -183,7 +188,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.8)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
-            src="https://player.vimeo.com/progressive_redirect/playback/1028938916/rendition/1080p/file.mp4?loc=external&signature=c202155d97ff975ec8544dbe7d869330bae1779fd2190976d4bd3aa819bcc58e"></video>
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/header.mp4"></video>
     </header>
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 bg-black text-white relative">
@@ -194,7 +199,7 @@
                 <br><br>
                 What piano should I buy?
                 <br><br>
-                A piano is an investment -- and it can be an expensive one. And when you’re a beginner you often don’t know what features you need -- and what extras you’re paying for unnecessarily.
+                A piano is an investment – and it can be an expensive one. And when you’re a beginner you often don’t know what features you need – and what extras you’re paying for unnecessarily.
                 <br><br>
                 So we partnered with an experienced piano manufacturer to create the BEST 88-key digital piano for beginners.
                 <br><br>
@@ -265,7 +270,7 @@
 
         </div>
     </section>
-    <section class="text-center px-6 py-10 sm:py-14 lg:py-20 @if(!empty($lifetime)) hidden @endif"
+    {{-- <section class="text-center px-6 py-10 sm:py-14 lg:py-20 @if(!empty($lifetime)) hidden @endif"
         @if(!empty($ultimate))
             style="background: linear-gradient(to bottom, #A80011, #310A58); color:#fff"
         @else
@@ -367,10 +372,35 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+
+    <section class="bg-[#12193F] text-white py-12 lg:py-20 px-4 sm:px-6 lg:px-10 text-center hidden @if(!empty($lifetime)) hidden @endif">
+        <img class="h-12 sm:h-16 md:h-24 inline mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/1300x0/marketing/pianote/products/prima/headline.webp">
+
+        <p class="text-lg py-2 md:py-4">
+            Every Pianote Prima comes with a <span class="italic text-[#B99964]"><strong>FREE</strong></span> download of Bechstein’s Digital Grand Essentials.
+        </p>
+
+        <div class="max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center md:items-start md:gap-8 pt-6">
+            <div class="w-full md:w-6/12 space-y-4 md:space-y-6 text-left lg:px-6 leading-normal">
+                <p>The Pianote Prima has a beautiful piano sound built in, but we’ve partnered with German piano manufacturer Bechstein to include their <span class="text-[#B99964]"><strong>Digital Grand Essentials (valued at $136)</strong></span> with every Pianote Prima.</p>
+                <p>So you can make your new Prima sound like a true concert grand.</p>
+                <p>Digital Grand Essentials is played through Native Instruments’ free Kontakt player. Connect your Prima via MIDI to access this beautiful grand piano sound.</p>
+                <p>And if you’re new to virtual instruments, don’t worry. We’ll walk you through every step.</p>
+            </div>
+
+            <div class="flex-shrink-0 w-full sm:w-10/12 md:w-6/12 flex justify-center items-center md:py-6">
+                <img
+                    src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/spread.webp"
+                    alt="Laptop Preview"
+                    class="w-full h-auto object-contain"
+                >
+            </div>
+        </div>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative @if(!empty($lifetime)) hidden @endif"style="background: #F1EFED; color:#000;">
-            <h2 class="leading-tight"><strong>Your new Pianote Prima piano </strong></h2>
+            <h2 class="leading-tight"><strong>Your new Pianote Prima <span class="hidden sm:inline">piano </span></strong></h2>
             <h3 class="leading-tight mt-1 mb-5 lg:mb-8">comes with unlimited piano lessons from <img src="https://d21q7xesnoiieh.cloudfront.net/700x0/filters:quality(95)/marketing/pianote/products/prima/pianote-logo.svg" alt="pianote logo" class="h-6 md:h-8"></h3>
             <div class="container mx-auto z-10 relative max-w-3xl">
 
@@ -467,14 +497,14 @@
         </section>
 
     @php
-        $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
+        $videoTargetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
     @endphp
 
     <section class=" @if(!empty($ultimate)) pb-8 sm:pb-16 lg:pb-20 @else py-8 sm:py-16 lg:py-20 @endif px-4 sm:px-6 @if(!empty($lifetime)) hidden @endif">
     <div class="container mx-auto max-w-5xl">
             <div class="space-y-4 md:space-y-8">
-                @foreach($packs as $pack)
-                    @if(in_array($pack['sku'], $targetSkus))
+                @foreach($bonusVideos as $pack)
+                    @if(in_array($pack['sku'], $videoTargetSkus))
                         <div class="rounded-xl overflow-hidden">
                             <div class="flex flex-col md:flex-row h-full">
                                 <div class="relative w-full md:w-5/12 lg:w-1/2 rounded-2xl">
@@ -492,10 +522,10 @@
                                     <h5 class="mb-2"><strong>{!! $pack['header'] !!}</strong>
                                     </h5>
                                     <div class="flex items-center space-x-2 mb-4">
-                                        <span class="text-lg line-through opacity-30"><strong>${{ $pack['price'] }}</strong></span>
-                                        <span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
+                                        <span class="text-lg opacity-30"><strong>${{ $pack['price'] }}</strong> Value</span>
+                                        {{--<span class="px-2 py-1 bg-musora text-black text-base font-bold rounded">
                                             {{ $pack['badge'] }}
-                                        </span>
+                                        </span>--}}
                                     </div>
                                     <div>
                                         {!! $pack['description'] !!}
@@ -513,7 +543,7 @@
     style="background:linear-gradient(to bottom, #F61A30, #900F1C);">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight"><strong>Peace of mind - guaranteed.</strong></h2>
-            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day lessons guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
+            <p class="leading-tight mt-2 mb-5 sm:mb-7">Your piano includes a 90-day guarantee from Pianote + a 2-year parts warranty for your Prima.</p>
             @if(!empty($lifetime))
                 <picture>
                     <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1270x0/filters:quality(95)/marketing/pianote/products/prima/warranty.webp">
@@ -597,12 +627,12 @@
 
                         @if(!empty($ultimate))
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>Everything you<br> need to start<br> playing the piano. </strong></h2>
-                            <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-md">Get the PRIMA Ultimate Bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 7 extra launch bonuses.</h6>
 
                         <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
                         Only <s class="opacity-50">$1642</s> <strong>$799</strong>
                         </h3>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-ultimate-bundle-pianote]=1">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-ultimate-bundle-pianote]=1&promo-code=ultimate-bundle-pianote&locked=true">Start Playing</a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -614,13 +644,13 @@
                             </picture>
                         @else
                             <h2 class="pb-6 sm:pb-4 leading-tight"><strong>The Perfect Way <br> to Start Playing<br> the Piano. </strong></h2>
-                            <h6 class="leading-tight max-w-xs mx-auto">Get the PRIMA bundle + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
+                            <h6 class="leading-tight max-w-xs mx-auto">Get the Pianote PRIMA + 1 year of <br class="hidden md:block">unlimited piano lessons + 5 extra <br class="hidden md:block">launch bonuses.</h6>
 
-                        <h4 class="my-4"> 
+                        <h3 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
-                        </h4>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[the-keyboard-bundle]=1">Start Playing</a>
-                        <a href="/ecommerce/add-to-cart?products[prima-keyboard]=1&products[piano-bench]=1"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a> 
+                        </h3>
+                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-keyboard-bundle]=1&promo-code=keyboard-bundle&locked=true">Start Playing</a>
+                        <a href="/shop/prima-ultimate"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -644,7 +674,7 @@
             style="background:#EAE4DF;"
         @endif>
         <div class="container max-w-5xl mx-auto relative z-50">
-            <p class="leading-normal" style="width: 100%"><strong>Free Shipping In The USA</strong>
+            <p class="leading-normal" style="width: 100%"><strong>Free Shipping In The USA & Canada</strong>
                 *Discounted rates elsewhere </p>
         </div>
     </section>
@@ -669,15 +699,15 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '913081651',
+        'video' => '1032522905',
         'vimeo' => true,
     ])
 
     @php
     $videoBonuses = [
-        ['name' => 'modal798501810', 'video' => '798501810'],
+        ['name' => 'modal879916161', 'video' => '879916161'],
         ['name' => 'modal823788317', 'video' => '823788317'],
-        ['name' => 'modal852795615', 'video' => '852795615'],
+        ['name' => 'modal879913986', 'video' => '879913986'],
         ['name' => 'modal928599834', 'video' => '928599834'],
         ['name' => 'modal1008560089', 'video' => '1008560089'],
     ];

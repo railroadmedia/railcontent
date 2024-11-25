@@ -15,7 +15,7 @@
             @if(!empty($promoLogo))
                 <div class="text-center">
                     <img
-                            class="h-12 lg:h-16 mb-6 transition-opacity opacity-0"
+                            class="h-16 lg:h-24 mb-6 transition-opacity opacity-0"
                             src="{{ $promoLogo }}"
                             alt="Promo logo"
                             loading="lazy"
@@ -132,8 +132,8 @@
                                 <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             @endif
                             <span style="text-transform:uppercase; display:inline-block;">
-                            @if(!empty($bonus['price']))
-                                    <s class="opacity-40">${{ $bonus['price'] }}</s>
+                            @if(!empty($bonus['sku']))
+                                    <s class="opacity-40">${{ floatval($productPrices[$bonus['sku']]->price) }}</s>
                                 @endif
                                 @if(!empty($bonus['customText']))
                                     <strong class="text-musora">{{ $bonus['customText'] }}</strong>
@@ -152,60 +152,60 @@
                         </p>
                     </div>
                 @endforeach
-                <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
-                    @if($theme !== 'drumeo')
-                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="drumeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/membership/homepage/webp-format/drumeo-bonus.webp">
-                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/membership/homepage/webp-format/drumeo-bonus-m.webp">
-                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
-                        </div>
-                    @endif
-                    @if($theme !== 'pianote')
-                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="pianote tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/webp-format/pianote-bonus.webp">
-                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/webp-format/pianote-bonus-m.webp">
-                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
-                        </div>
-                    @endif
-                    @if($theme !== 'guitareo')
-                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="guitareo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/guitareo/membership/homepage/webp-format/guitareo-bonus.webp">
-                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/guitareo/membership/homepage/webp-format/guitareo-bonus-m.webp">
-                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
-                        </div>
-                    @endif
-                    @if($theme !== 'singeo')
-                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="singeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/singeo/membership/homepage/webp-format/singeo-bonus.webp">
-                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/singeo/membership/homepage/webp-format/singeo-bonus-m.webp">
-                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
-                        </div>
-                    @endif
-                </div>
+{{--                <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">--}}
+{{--                    @if($theme !== 'drumeo')--}}
+{{--                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">--}}
+{{--                            <img alt="drumeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/membership/homepage/webp-format/drumeo-bonus.webp">--}}
+{{--                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/membership/homepage/webp-format/drumeo-bonus-m.webp">--}}
+{{--                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                    @if($theme !== 'pianote')--}}
+{{--                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">--}}
+{{--                            <img alt="pianote tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/webp-format/pianote-bonus.webp">--}}
+{{--                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/webp-format/pianote-bonus-m.webp">--}}
+{{--                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                    @if($theme !== 'guitareo')--}}
+{{--                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">--}}
+{{--                            <img alt="guitareo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/guitareo/membership/homepage/webp-format/guitareo-bonus.webp">--}}
+{{--                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/guitareo/membership/homepage/webp-format/guitareo-bonus-m.webp">--}}
+{{--                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                    @if($theme !== 'singeo')--}}
+{{--                        <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">--}}
+{{--                            <img alt="singeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/singeo/membership/homepage/webp-format/singeo-bonus.webp">--}}
+{{--                            <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl transition-opacity opacity-0"--}}
+{{--                                loading="lazy"--}}
+{{--                                onload="this.classList.remove('opacity-0')"--}}
+{{--                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/singeo/membership/homepage/webp-format/singeo-bonus-m.webp">--}}
+{{--                            <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
             </div>
             <h3 class="leading-tight mt-6 mb-1">
                 <s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s>
@@ -220,6 +220,10 @@
                     GET Started &raquo;
                 @endif
             </a>
+            @if(!empty($belowButton))
+                <br>
+            <p class="text-sm"><em>New students only.</em></p>
+            @endif
             @if(!empty($altButtonLink))
                 <br>
                 <a role="link" class="inline-block opacity-70 mt-2" aria-label="Start a monthly membership" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>

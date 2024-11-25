@@ -353,40 +353,6 @@
         @yield('top-bar')
     @endif
 
-    @if(!empty($noEverflow))
-        <section class="bg-black bg-cover bg-center text-center text-white py-5 sm:py-7 px-5 sm:px-6" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/bf-banner.png');">
-            <div class="container max-w-4xl mx-auto">
-                <div class="flex flex-wrap items-center justify-center">
-                    <div class="w-full sm:w-auto mb-2 sm:mb-0 pr-6">
-                        <img class="h-7 sm:h-8 lg:h-11" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
-                    </div>
-                    <div class="w-full sm:w-auto">
-                        <h5 class="leading-tight font-bold text-musora mb-2">STARTS ON NOVEMBER 26TH</h5>
-                        <span class="join smaller musora w-full" @click="BFwaitlist = true;">Get Notified &raquo;</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        @component('_partials.components.modal', ['name' => 'BFwaitlist'])
-            @slot('content')
-                <div class="relative overflow-y-visible max-w-md px-5 md:px-10 py-7 md:py-10 bg-black text-white mx-auto rounded-xl shadow-lg text-center">
-                    <img class="w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/drumeo/promos/november/bf-logo-alt.png">
-                    <p class="leading-tight my-4">Sign up to be the first to know.</p>
-                    @include("guitareo.lead-gen.partials.sign-up-form", [
-                        "formId" => "Guitareo - Engagement - Trigger - BF24 Waitlist - Web Form",
-                        "formName" => 'BF24 Waitlist',
-                        "buttonText" => "Notify Me",
-                        'stacked' => true,
-                        "recaptchaKey" => $recaptchaKey,
-                        "minimalForm" => true
-                    ])
-                    <p class="leading-tight text-sm mt-2"><em>
-                            Don’t worry, we value your privacy and<br class="hidden sm:inline">
-                            you can unsubscribe at any time.</em></p>
-                </div>
-            @endslot
-        @endcomponent
-    @endif
     @php
         $bubbles =  [
              [
@@ -512,23 +478,18 @@
             'instrument' => 'guitar',
         ])
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'marketing/guitareo/products/30-days-to-better-strumming/30DTBS-cart.jpg',
-                    'title' => '30 Days To Better Strumming',
-                    'description' => 'Strum with confidence in just 30 days.',
-                    'price' => 97,
-                    'shipping' => 'true'
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'marketing/guitareo/membership/homepage/2024/guitareo-annual-2w-card.webp',
-        'header' => 'Online guitar lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $286',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&redirect=/order&locked=true&promo-code=FREE-W-ANNUAL-6702,special',
+        @include('drumeo._partials.countdown-bundle-2024')
+
+        @include('musora.sales.components.order-section-collage-bf', [
+        'headerLight' => true,
+        'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
+        'header' => '<strong>Unlimited guitar lessons.<br>Guided practice sessions. <br> Direct access to real teachers.</strong>',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
+        'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
+        'orderUrl' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&promo-code=musora-deal-2024&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
@@ -570,6 +531,19 @@
         @include("guitareo.sales.partials._footer")
     @endif
 
+    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    {{--    end of BF weekend--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-02 00:00:00',
+        'promoVersion' => true
+    ])
+    @else
+    {{--    end of cyber monday--}}
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-03 00:00:00',
+        'promoVersion' => true
+    ])
+    @endif
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

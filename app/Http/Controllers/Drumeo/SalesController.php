@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true', 'noEverflow' => true, 'recaptchaKey' => config('recaptcha.key')]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -449,6 +449,6 @@ class SalesController extends BaseController
 
     public function headphones()
     {
-        return view('drumeo.products.headphones', ['theme' => 'drumeo',]);
+        return view('drumeo.products.headphones', ['theme' => 'drumeo']);
     }
 }

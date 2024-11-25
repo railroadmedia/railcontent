@@ -234,7 +234,7 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Pianote Headphones",
         "fullPrice" => floatval($productPrices['pianote-headphones-2024']->price),
         "price" => $discountedPrice,
@@ -295,7 +295,7 @@
                 'position' => 'right',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/practice-in-privacy.webp',
                 'title' => 'Don’t let anyone hear you practice.',
-                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in -- and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
+                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in – and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
             ],
             [
                 'position' => 'left',

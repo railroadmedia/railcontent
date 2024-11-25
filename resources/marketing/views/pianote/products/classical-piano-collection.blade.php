@@ -127,6 +127,12 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
+    @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Classical Piano Collection",
+        "fullPrice" => floatval($productPrices['classical-piano-collection']->price),
+        "price" => floatval($productPrices['classical-piano-collection']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -206,7 +212,7 @@
     <section class="px-4 py-10 sm:py-14 lg:py-20 text-black bg-white">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="mb-7 playfair leading-none">Do you wish you could <br><strong>play these beautiful pieces?</strong></h2>
-            <p class="mb-4 sm:mb-10">From Chopin to Beethoven, these five classical piano pieces are timeless. Just imagine what it would <strong><em>feel like</em></strong> to play them -- rather than just listen to them.</p>
+            <p class="mb-4 sm:mb-10">From Chopin to Beethoven, these five classical piano pieces are timeless. Just imagine what it would <strong><em>feel like</em></strong> to play them – rather than just listen to them.</p>
         </div>
 
         <div class="max-w-5xl mx-auto text-center">

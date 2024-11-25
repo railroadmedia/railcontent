@@ -1610,7 +1610,7 @@
 {{--                            <span x-text="day"></span>--}}
 {{--                            <span x-text="dayText"></span>--}}
 {{--                        </span>--}}
-{{--                        <span x-cloak x-show="timeLeft > 0 && hour > 0">--}}
+{{--                        <span x-cloak x-show="timeLeft > 0">--}}
 {{--                            <span x-text="hour"></span>--}}
 {{--                            <span x-text="hourText"></span>--}}
 {{--                        </span>--}}
@@ -2149,7 +2149,7 @@
 {{--                            <span x-text="day"></span>--}}
 {{--                            <span x-text="dayText"></span>--}}
 {{--                        </span>--}}
-{{--                        <span x-cloak x-show="timeLeft > 0 && hour > 0">--}}
+{{--                        <span x-cloak x-show="timeLeft > 0">--}}
 {{--                            <span x-text="hour"></span>--}}
 {{--                            <span x-text="hourText"></span>--}}
 {{--                        </span>--}}

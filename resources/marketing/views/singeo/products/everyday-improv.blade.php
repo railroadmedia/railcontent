@@ -249,7 +249,7 @@
     @include('singeo.sales.partials._nav', [
         'cartVersion' => true,
     ])
-{{--    @include('_partials.components.shop.promo-banner', [--}}
+{{--    @include('_partials.components.shop.promo-banner-2', [--}}
 {{--        'name' => '30-Day Jazz',--}}
 {{--        'fullPrice' => floatval($productPrices['30-day-jazz']->price),--}}
 {{--        'price' => floatval($productPrices['30-day-jazz']->discounted_price),--}}

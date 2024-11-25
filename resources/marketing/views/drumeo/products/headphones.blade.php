@@ -240,7 +240,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo Headphones",
         "fullPrice" => floatval($productPrices['drumeo-headphones']->price),
         "price" => $discountedPrice,
@@ -481,7 +481,7 @@
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The Drumeo<br class="inline sm:hidden"> Guarantee.</strong></h2>
 
-            <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important -- playing the drums.</strong>
+            <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important – playing the drums.</strong>
 
                 <br><br>
                We’ve designed these headphones with your E-Kit practice in mind, and we’re confident you’ll love them.

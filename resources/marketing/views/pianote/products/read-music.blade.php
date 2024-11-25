@@ -278,7 +278,7 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         'name' => 'Read Music in 30 Days',
         'fullPrice' => floatval($productPrices['read-music-in-30-days']->price),
         'price' => floatval($productPrices['read-music-in-30-days']->discounted_price),
@@ -405,7 +405,7 @@
                                      <span class="text-black">   Enrollment closes in </span>
                                         <br>
                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                        <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                                     </span>
@@ -854,7 +854,7 @@
                             <span><strong>But you must enroll before June 23 to have the best chance of getting the book
                                     before
                                     the Challenge starts.</strong></span> <br><br>
-                            Or -- choose the Annual Membership and you’ll get the book along with 7 other bonuses ($364
+                            Or – choose the Annual Membership and you’ll get the book along with 7 other bonuses ($364
                             value).
                         </p>
                     </div>
@@ -892,7 +892,7 @@
                         <span x-cloak x-data="timer()" x-init="countdown()">
                             <span x-cloak x-show="timeLeft > 0">REGISTRATION CLOSES IN <br class="block md:hidden"></span>
                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
                             <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
