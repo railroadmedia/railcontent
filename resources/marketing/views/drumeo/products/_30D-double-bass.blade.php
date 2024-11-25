@@ -24,9 +24,9 @@
                             @endforeach
                         </strong>
                     </h2>
-                    <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
+                    <h3 class="@if(empty($promoVersion)) pb-6 @endif -mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2 @if(empty($platformVersion)) hidden @endif"><strong>Save your seat in the first-ever class
 {{--                            <br class="inline lg:hidden">starting September 2nd.--}}
                         </strong></h6>
 
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
+                        <div class="w-full @if(empty($promoVersion)) md:w-1/2 @else sm:w-1/2 @endif text-center sm:pr-2">
                             @if(!empty($hasProduct) && $hasProduct == 'true')
                                 <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
                             @else
@@ -120,6 +120,15 @@
                 </div>
                 <div
                     class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
+
+                    @if(empty($platformVersion))
+                        <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">
+                            <i class="far fa-infinity mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
+                            <p class="leading-tight mx-0"><strong class="font-black">Lifetime Access</strong><br>
+                                <span class="text-sm"> Yours to play over<br class="hidden md:inline"> and over again.</span>
+                            </p>
+                        </div>
+                    @endif
 {{--                    <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-start">--}}
 {{--                        <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>--}}
 {{--                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>--}}
@@ -140,8 +149,10 @@
                     </div>
                 </div>
             </div>
+            @if(!empty($platformVersion))
             <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden">
                     PLUS you get lifetime access!</em></p>
+            @endif
         </div>
     </header>
 
@@ -177,14 +188,6 @@
                     ],
                     [
                         'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/live-support.webp',
-                        'title' => 'Live support from REAL teachers.',
-                        'desc' =>
-                            'Each week you’ll have a 60-minute live lesson with 66Samus. Ask questions, get feedback, and connect with other students – you’re learning with students from around the world. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
-                    ],
-                    [
-                        'position' => 'left',
                         'img' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/lifetime-access.webp',
                         'title' => 'Lifetime access.',
@@ -227,7 +230,7 @@
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
-                            class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
+                            class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if(!$loop->last) mb-16 md:mb-20 @else md:mb-0 @endif">
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -268,7 +271,9 @@
                     alt="30-Day Double Bass With 66Samus Logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
+                    @if(!empty($platformVersion))
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>
+                    @endif
                     <i class="fas fa-check text-drumeo mr-5"></i> Flexible weekly schedule<br>
                     @if(empty($platformVersion))
                         <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
@@ -290,6 +295,7 @@
 {{--                {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>--}}
         </div>
     </section>
+    @if(!empty($platformVersion))
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
     </div>
@@ -337,7 +343,7 @@
             </div>
         </div>
     </section>
-
+    @endif
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
             <h2 class="mb-6 sm:mb-10 lg:mb-14"><img
@@ -430,6 +436,7 @@
                         <td>Self-Directed</td>
                         <td>Self-Directed</td>
                     </tr>
+                    @if(!empty($platformVersion))
                     <tr>
                         <td>Live</td>
                         <td>Yes</td>
@@ -437,6 +444,7 @@
                         <td>Sometimes</td>
                         <td>No</td>
                     </tr>
+                    @endif
                     <tr>
                         <td>Length</td>
                         <td>30 Days</td>
@@ -605,7 +613,9 @@
                 <h3 class="leading-tight mt-2 sm:mt-4"><strong>Boost your speed,<br class="sm:hidden"> control, and creativity.</strong></h3>
                 <p class="leading-normal my-3 my-4">
                     <i class="fas fa-check text-drumeo ml-3"></i> 20 Guided Workouts<br class="sm:hidden">
+                    @if(!empty($platformVersion))
                     <i class="fas fa-check text-drumeo ml-3"></i> 4 Live Q&A Sessions<br class="lg:hidden">
+                    @endif
                     @if(empty($platformVersion))
                     <i class="fas fa-check text-drumeo ml-3"></i> 90-Day Money Back Guarantee<br class="sm:hidden">
                     @endif
@@ -634,9 +644,9 @@
                             'subheader' => '30-Day Double Bass<br> + Free Bonus Worth $30',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-no-pedal.png',
                             'imageHeight' => 'h-32 md:h-40',
-                            'price' => '$97',
+                            'price' => '$127',
                             'specialText' => "One time payment.",
-                            'cta' => 'ENROLL NOW',
+                            'cta' => 'GET STARTED',
                             'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1&locked=true',
                             'bonuses' => [
                                 '<strong>30-Day Double Bass</strong>',
@@ -691,11 +701,11 @@
 {{--                <p><u><em><strong>Don't want to pay shipping?</strong> Click here to join Drumeo<br class="hidden sm:inline"> and get 30-Day Double Bass with no physical bonuses.</em></u></p></a>--}}
             </div>
         </section>
-        <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+        {{-- <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
             <p class="max-w-3xl px-4 md:px-2 leading-loose">
                 <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
             </p>
-        </section>
+        </section> --}}
         <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5">
