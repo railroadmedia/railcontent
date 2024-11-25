@@ -31,7 +31,7 @@
         </div>
     </component>
 
-    <ShareModal v-if="isShareOpen" :container-stay-on-close="true" @close-modal="closeShareModal" />
+    <ShareModal v-if="isShareOpen" :container-stay-on-close="true" @close-modal="closeShareModal" :source="challengeBadge" :title="challengeTitle" />
     <ChallengeCertificateModal v-if="isCertificateOpen" :certificate-data="awardData" @closeModal="emit('closeModal')" />
 </template>
 <script setup>
