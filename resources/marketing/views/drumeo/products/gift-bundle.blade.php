@@ -91,7 +91,7 @@
                     </div>
                     <div class="text-sm">
                         <span class="font-semibold">Disclaimer:</span>
-                        This bundle is ONLY available as a full-bundle. None of the discounted items can be purchased at that
+                        This bundle is ONLY available as a full bundle. None of the discounted items can be purchased at that
                         discounted price, on their own, and any refunds must be processed with the full bundle refunded and returned at the same
                         time. (Ex. You cannot purchase this bundle and request a refund on just the membership.)
                     </div>
