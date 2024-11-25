@@ -592,7 +592,7 @@
                                 @endif
                             </h3>
                             <p class="text-sm mb-5"><em>One-time payment.</em></p>
-                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">GET STARTED</div>
+                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] pianote" role="button" tabindex="0" aria-label="GET STARTED">ORDER NOW</div>
                         </div>
                         <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
                             <p class="text-left text-sm mb-1.5 leading-tight"><strong class="">Premium Oil-Tanned Leather</strong></p>

@@ -357,7 +357,7 @@
                 <h2 class="leading-tight">
                     @if(floatval($productPrices['drumeo-eardrums-black']->price) > floatval($productPrices['drumeo-eardrums-black']->discounted_price))
                         <s class="opacity-50">${{ floatval($productPrices['drumeo-eardrums-black']->price) }}</s>
-                        <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
+                        <strong>${{ number_format(floatval($productPrices['drumeo-eardrums-black']->discounted_price), 2) }}</strong>
                         <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums-black']->discounted_price) / floatval($productPrices['drumeo-eardrums-black']->price)))) }}%)</em>
                     @else
                         <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
