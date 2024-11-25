@@ -26,9 +26,9 @@
             </div>
             <div class="tw-text-center">
                 <button class="tw-w-full tw-bg-[#F9F9F9] dark:tw-bg-[#223F57] tw-rounded-full tw-aspect-square tw-flex tw-justify-center tw-items-center tw-mb-2" @click="shareSource('twitter')">
-                    <i class="fa-brands fa-twitter tw-text-xl sm:tw-text-2xl"></i>
+                    <i class="fa-brands fa-x-twitter tw-text-xl sm:tw-text-2xl"></i>
                 </button>
-                <span class="tw-hidden sm:tw-inline">Twitter</span>
+                <span class="tw-hidden sm:tw-inline">X</span>
             </div>
             <div class="tw-text-center">
                 <button class="tw-w-full tw-bg-[#F9F9F9] dark:tw-bg-[#223F57] tw-rounded-full tw-aspect-square tw-flex tw-justify-center tw-items-center tw-mb-2" @click="shareSource('email')">
@@ -44,7 +44,7 @@
             <div class="tw-h-full tw-flex tw-justify-center tw-items-center tw-absolute tw-right-[15px] tw-top-0 tw-z-[5]">
                 <i class="fa-regular fa-copy tw-text-xl"></i>
             </div>
-            <input id="share-link" class="tw-relative tw-outline-offset-0 tw-relative tw-w-full tw-h-10 sm:tw-h-[45px] tw-border-[#CBCBCD] dark:tw-border-[#445F74] tw-text-xs sm:tw-text-sm tw-rounded-[63px] tw-transition-color dark:tw-bg-black tw-bg-transparent tw-shadow-none tw-pl-[15px] tw-pr-20 tw-ring-transparent" value="www.musora.com" />
+            <input id="share-link" class="tw-relative tw-outline-offset-0 tw-relative tw-w-full tw-h-10 sm:tw-h-[45px] tw-border-[#CBCBCD] dark:tw-border-[#445F74] tw-text-xs sm:tw-text-sm tw-rounded-[63px] tw-transition-color dark:tw-bg-black tw-bg-transparent tw-shadow-none tw-pl-[15px] tw-pr-20 tw-ring-transparent" :value="source" />
         </div>
         <div class="tw-flex tw-justify-end">
             <MuButton @click="copyLink"><i class="fa-regular fa-copy tw-mr-1 -mt-1"></i> Copy Link</MuButton>
@@ -80,7 +80,7 @@ const copyLink = () => {
 const shareUrls = computed(() => {
     return {
         facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(props.source)}`,
-        twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(props.source)}`,
+        twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(props.source)}&text=${encodeURIComponent(props.title)}`,
         whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(props.title)}%20${encodeURIComponent(props.source)}`,
         linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(props.source)}`,
         email: `mailto:&body=${encodeURIComponent(props.source)}`
