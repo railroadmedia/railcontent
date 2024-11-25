@@ -139,7 +139,7 @@
             'secondImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-BB.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get The Best Online Piano Lessons And A <br class="hidden md:block">Library Of Piano Books</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle',
+            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle&locked=true',
             'bundle'=> "book",
             ])
     </div>

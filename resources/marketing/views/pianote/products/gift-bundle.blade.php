@@ -117,7 +117,7 @@
             'topImage' => 'marketing/pianote/promos/black-friday/the-gift-bundle/bonus-AP.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Give The Gift Of Music This Holiday Season.</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote',
+            'buttonLink' => '/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true',
             'bundle'=> "gift",
             ])
     </div>
