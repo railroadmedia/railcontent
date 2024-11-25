@@ -128,7 +128,7 @@
             $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-independence', '30-day-chops'];
         @endphp
             <div id="customize-anchor"></div>
-            @include('drumeo._partials.bf-order-section-bonuses', [
+            @include('drumeo._partials.bf-order-section-bonuses-modal', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
             'topImage' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-am.webp',

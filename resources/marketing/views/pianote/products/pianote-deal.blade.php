@@ -111,7 +111,7 @@
             $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
         @endphp
             <div id="customize-anchor"></div>
-            @include('drumeo._partials.bf-order-section-bonuses', [
+            @include('drumeo._partials.bf-order-section-bonuses-modal', [
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/pianote-deal/pianote-deal-logo.svg',
             'logoHeight' => 'h-16 sm:h-20',
