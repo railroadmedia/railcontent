@@ -106,14 +106,14 @@
 <!-- Main -->
 @section('layout-body')
 
-    <div class="container mx-auto max-w-7xl px-4 md:px-10">
-        <header class="py-10 md:py-16">
+    <div class="container mx-auto max-w-7xl px-4 md:px-10 py-10 md:py-16">
+        <header>
             <h1 class="text-3xl md:text-5xl lg:text-7xl"><strong>Free Resources</strong></h1>
             <p class="pb-10">Explore blogs, newsletters, and free tools for insights and productivity.</p>
-            <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">GIVEAWAY</h5>
+            <h5 class="border-y border-y-black py-4 mb-7 uppercase tracking-widest font-bold">GIVEAWAY</h5>
         </header>
 
-        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-14 bg-drumeo rounded-xl" {{--style="background-color:#101520;"--}}>
+        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 mb-5 bg-drumeo rounded-xl" {{--style="background-color:#101520;"--}}>
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="w-full lg:w-5/12 lg:pr-8 text-left px-2 sm:px-0 mb-4 lg:mb-0">
                     <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win.jpg">
@@ -154,7 +154,32 @@
             </div>
         </div>
 
-        <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold my-10 md:my-16">Free Video Lessons</h5>
+        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 rounded-xl" style="background-color:#222;">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="w-full lg:w-5/12 lg:pl-8 lg:order-1 text-left px-2 sm:px-0 mb-4 lg:mb-0">
+                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win2.jpg">
+                </div>
+                <div class="w-full lg:w-7/12 text-left giveaway-form">
+                    <h2 class="uppercase leading-none mb-2"><strong>WIN A COPY OF PHOBIA BY BREAKING BENJAMIN, SIGNED BY CHAD SZELIGA</strong></h2>
+                    <p class="leading-normal mb-1">
+                        <strong>Enter to win one copy of Phobia, signed by former Breaking Benjamin drummer Chad Szeliga.</strong>
+                    </p>
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formName" => 'Phobia Giveaway',
+                        "formId" => "Drumeo - Engagement - Trigger - Phobia Giveaway - Web Form",
+                        "buttonText" => "I WANT TO WIN",
+                        "minimalForm" => true,
+                        "buttonColor" => "bg-musora text-black",
+                        "redirectUrl" => "https://www.musora.com/thank-you",
+                    ])
+                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/phobia-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
+                        By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold mt-10 md:mt-16 mb-7">Free Video Lessons</h5>
         @php
             $benefits = [
                 ['image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/lead-gen/youtube/gsotd.webp', 'title' => 'Getting Started On The Drums', 'link' => 'https://www.drumeo.com/getting-started/lessons'],
@@ -206,7 +231,7 @@
                 </div>
             </div>
         </section> --}}
-          <section class="px-5 sm:px-6 py-6 text-black rounded-3xl mb-10 lg:mb-20 bg-musora border-2 border-black">
+          <section class="px-5 sm:px-6 py-6 rounded-3xl mb-10 lg:mb-20 bg-musora border-2 border-black">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="w-full lg:w-7/12 text-center px-6 flex jusitfy-center flex-col items-center">
                     <h1 class="capitalize leading-tight"><strong>The ultimate music  <br/> lessons experience  <br/> at a special price</strong></h1>
@@ -247,7 +272,7 @@
                 </div>
             </div>
         </section>
-     <section class="pb-10 sm:pb-16 lg:pb-24 text-black">
+     <section class="">
         <div class="flex flex-col lg:flex-row gap-16 md:gap-8 justify-between items-start relative">
             <div class="flex flex-col justify-evenly gap-4 w-full lg:w-5/12">
                 <h5 class="border-y border-y-black py-4 uppercase tracking-widest font-bold">YouTube Channels</h5>

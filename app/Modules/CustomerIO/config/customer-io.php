@@ -109,6 +109,18 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Free Music Lessons For Life' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
@@ -157,6 +169,16 @@ return [
                     'email' => 'Email',
                     'brand' => 'Brand',
                     'timestamp' => 'Timestamp',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'musora_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                    'musora',
                 ],
             ],
         ],
@@ -437,6 +459,18 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'Phobia Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_phobia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Drumeo Giveaway Rafflepress' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -506,6 +540,16 @@ return [
                     'drumeo_prospect_groove-coordination',
                 ],
                 'accounts_to_sync' => [
+                    'musora',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
                     'musora',
                 ],
             ],
@@ -1003,6 +1047,16 @@ return [
                     'pianote',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                    'musora',
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
@@ -1131,6 +1185,16 @@ return [
                     'guitareo',
                 ],
             ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'guitareo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                    'musora',
+                ],
+            ],
         ],
         'singeo' => [
             'Improve Any Voice' => [
@@ -1230,6 +1294,16 @@ return [
                 ],
                 'accounts_to_sync' => [
                     'singeo',
+                ],
+            ],
+            'BF24 Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'singeo_prospect_bf24-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                    'musora',
                 ],
             ],
         ],

@@ -195,6 +195,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @mixin Eloquent
  * @property-read Collection|EmailChange[] $emailChanges
  * @property-read int|null $email_changes_count
+ * @property-read Collection|UserAccessPermission[] $userAccessPermissions
  * @property-read Collection|FirebaseToken[] $firebaseTokens
  * @property-read int|null $firebase_tokens_count
  * @property-read Collection|PasswordReset[] $passwordResets

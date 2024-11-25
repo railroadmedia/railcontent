@@ -30,6 +30,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property bool $manually_revoked
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Permission $permission
  */
 class UserAccessPermission extends Model
 {
@@ -131,5 +132,20 @@ class UserAccessPermission extends Model
             default:
                 return 'Unknown';
         }
+    }
+
+    public function isMembershipPermission(): bool
+    {
+        $basicMembershipPermissionIds = [1, 52, 73, 77, 91, 78, 88, 89, 90];
+        $plusMembershipPermissionIds = [92];
+        $lifetimeMembershipPermissionIds = [78, 88, 89, 90];
+
+        $allMembershipPermissionIds = array_merge(
+            $basicMembershipPermissionIds,
+            $plusMembershipPermissionIds,
+            $lifetimeMembershipPermissionIds
+        );
+
+        return in_array($this->permission_id, $allMembershipPermissionIds);
     }
 }
