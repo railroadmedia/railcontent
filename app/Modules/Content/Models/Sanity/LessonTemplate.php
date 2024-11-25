@@ -141,7 +141,7 @@ abstract class LessonTemplate extends BaseSanityModel
         ]);
         if ($this->withAssignments) {
             $assignmentsList = new ListObject(
-                fields: [new Field(FieldType::String, 'assignment_title'),
+                fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                             new Field(FieldType::String, 'assignment_soundslice'),
                             new Field(FieldType::String, 'assignment_description'),
                             new Field(FieldType::Array, 'assignment_sheet_music_image', title:'Assignment sheet music image:', of: new ListArrayElement()),
