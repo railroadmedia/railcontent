@@ -143,16 +143,6 @@
                  <p class="mb-2 md:mb-8">
                     So this is your LAST CHANCE to lock in a lifetime of piano lessons (and singing, guitar, drums, and… 😉).
                 </p>
-                <a
-                    @if(!empty($upgradeVersion))
-                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
-                    @else
-                        href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
-                    @endif
-                    class="join w-full sm:max-w-[350px] musora smaller mt-4 md:mt-0"
-                >
-                    GET THE DEAL
-                </a>
             </div>
         </div>
     </section>
@@ -184,14 +174,16 @@
                             <strong>$1200</strong>
                         @endif
                         <span class="text-musora text-2xl"> (last chance)</span></h2>
-                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
                         @if(!empty($upgradeVersion))
+                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
                             href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs,lifetime-existing&locked=true"
-                        @else
-                            href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
-                        @endif
                     >GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                    <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p>
+                        @else
+                    <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
+                            href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"
+                    >GET THE DEAL <i class="fas fa-arrow-right"></i></a>
+                    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-2"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
+                @endif
                {{-- @else
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
                @endif --}}
