@@ -140,6 +140,13 @@
                     </p>
                 </div>
             </div>
+<br>
+            <a
+                href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100]=1&promo-code=musora-extend-2024&locked=true"
+                class="join w-full sm:max-w-xs musora mt-7"
+            >
+                GET THE DEAL
+            </a>
 
         </div>
     </section>
