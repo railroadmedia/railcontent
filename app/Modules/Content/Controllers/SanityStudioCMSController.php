@@ -274,10 +274,30 @@ class SanityStudioCMSController extends BaseController
             if($request->has('childrenArray')){
                 $chilrens = $request->get('childrenArray');
                 foreach ($chilrens as $index=>$children){
-                    $content->setChildId($children['railcontent_id'], ($index + 1));
-                          event(new ContentCreated($children['railcontent_id']));
+                    $childId = $children['railcontent_id'];
+                    if(!$childId){
+                        $newChild = new Content();
+                        $newChild->type = $children['_type'];
+                        $newChild->slug = $children['slug'];
+                        $newChild->brand = $children['brand'];
+                        $newChild->language   = 'en-US';
+                        $newChild->created_on = Carbon::now()->toDateTimeString();
+                        $newChild->status     = 'published';
+                        $newChild->save();
+                        $childId = $newChild->id;
+                        $newChild->setParentId($content->id, 1);
+                        $newChild->setParentContentData($content);
+                    }else{
+                        $child = Content::query()
+                            ->where('id', '=', $childId)
+                            ->first();
+                        $child->setParentId($content->id, 1);
+                        $child->setParentContentData($content);
+                    }
+                    $content->setChildId($childId, ($index + 1));
+                    event(new ContentCreated($childId));
                     $childrens[] = Content::query()
-                        ->where('id', '=', $children['railcontent_id'])
+                        ->where('id', '=', $childId)
                         ->first();
                 }
             }

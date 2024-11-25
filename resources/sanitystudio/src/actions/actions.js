@@ -92,7 +92,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
                     // Fetch child documents in parallel
                     childrenArray = await Promise.all(
-                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id }[0]`))
+                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand }[0]`))
                     );
                     draftCopy.childrenArray = childrenArray;
                 }
@@ -163,6 +163,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                                     id: parentData.id,
                                     _key: randomKey(),
                                 }],
+                                web_url_path: child.web_url_path
                             };
                             await patchChildDocument(child.id, updates, childrenArray);
                         }
