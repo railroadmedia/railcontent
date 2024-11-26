@@ -252,12 +252,12 @@ const generateChallengeCtas = (data) => {
             if(data.next_lesson.is_locked){
                 return [
                     {
-                        type: 'LockedChallengeCta',
+                        type: 'PageHeaderPrimaryCta',
                         props: {
-                            text: 'Next Lesson',
+                            text: `Replay ${data.previous_lesson.title}`,
                             isPrimary: true,
                         },
-                        lessonData: data.next_lesson,
+                        lessonData: data.previous_lesson.web_url_path,
                     }
                 ]
             }
