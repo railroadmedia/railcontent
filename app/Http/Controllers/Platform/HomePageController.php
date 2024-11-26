@@ -293,16 +293,16 @@ class HomePageController extends BaseController
         $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
         $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
+        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
 
         if ($showOldTrialSection) {
             $trialSection = $this->learningPathsService->getLearningPaths();
         }
 
         if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths();
+            $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
         }
 
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
 
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
