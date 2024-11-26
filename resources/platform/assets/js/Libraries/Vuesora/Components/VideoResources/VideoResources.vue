@@ -64,7 +64,6 @@
                         class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-transition-colors disabled:tw-opacity-80"
                         :class="isLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         :title="isLiked ? 'Unlike' : 'Like'"
-                        :disabled="isLiking"
                         @click="handleLikeContent"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -437,7 +436,6 @@ export default {
             showMore: false,
             showLeftArrow: false,
             showRightArrow: false,
-            isLiking: false,
         };
     },
 
@@ -496,8 +494,6 @@ export default {
         },
 
         async handleLikeContent() {
-            if (this.isLiking) return;
-            this.isLiking = true;
             try {
                 // Use a conditional operator to determine whether to like or unlike
                 await (this.isLiked ? unlikeContent(this.contentId) : likeContent(this.contentId));
@@ -506,11 +502,10 @@ export default {
             } catch (error) {
                 console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
             } finally {
-                this.isLiking = false; // Reset loading state
                 //Success
                 window.shownotification({
                     icon: 'check',
-                    text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
+                    text: `Content has been ${this.isLiked ? 'unliked' : 'liked'} successfully!`
                 })
             }
         },
