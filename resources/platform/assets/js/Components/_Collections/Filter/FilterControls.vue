@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isLoading" class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-between" :class="{ 'tw-mb-5': !hasPills}">
+    <div v-if="!isLoading" class="tw-flex tw-w-full tw-justify-between" :class="[{ 'tw-mb-5': !hasPills }, { 'tw-flex-col xl:tw-flex-row': !hideSearch }]">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 xl:tw-mb-0">
             <!-- Filter Tabs -->
             <FilterTabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
@@ -14,13 +14,13 @@
                         <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-white dark:tw-text-[#000C17]" />
                     </button>
                     <button v-else @click="() => emit('onToggleCollapse')"
-                            class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-bg-white dark:tw-bg-transparent">
+                            class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[35px] md:tw-w-10 tw-h-[35px] md:tw-h-10 tw-border tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-bg-white dark:tw-bg-transparent">
                         <AdjustmentsIcon class="tw-w-[22px] tw-h-[22px] tw-rotate-90" />
                     </button>
                 </template>
                 <template v-if="!hideSortIcon">
                     <button @click="handleOpenDropdown"
-                        class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]">
+                        class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[35px] md:tw-w-10 tw-h-[35px] md:tw-h-10 tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]">
                         <musora-icon :icon-name="sortIcon()" class="tw-w-[22px] tw-h-[22px]" />
                     </button>
                     <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="selectedSort" @onClose="handleCloseDropdown"
