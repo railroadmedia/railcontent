@@ -265,8 +265,8 @@ export const useCollectionStore = defineStore({
             let tabParams = params.getAll('tabs[]');
 
             //Set active tab from URL
-            if(tabParams && tabParams.length > 0 ){
-                this.filter.activeTab = tabParams[0];
+            if (tabParams && tabParams.length > 0 ){
+                this.filter.activeTab = tabParams[0].replace(/"/g, '');
             }
 
             //Get search params
