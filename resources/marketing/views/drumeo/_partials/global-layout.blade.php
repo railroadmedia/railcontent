@@ -49,7 +49,12 @@
 
 @yield('global-body')
 
-@if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+@if(Request::is('vote'))
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-12-16 12:00:00',
+        'promoVersion' => true
+    ])
+@elseif(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
     {{--    end of BF weekend--}}
     @include('_partials.components.countdown',[
         'countdownDate' => '2024-12-02 00:00:00',
