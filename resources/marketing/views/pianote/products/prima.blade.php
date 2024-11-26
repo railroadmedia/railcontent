@@ -10,14 +10,16 @@
 
     <meta name="description" content="Everything you need to start playing the piano. ">
     <meta property="og:description" content="Everything you need to start playing the piano. ">
-
     @php
         if (Request::is('shop/prima')) {
             $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/keyboard-bundle-share-image.jpg';
+              $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-keyboard-bundle]=1&promo-code=keyboard-bundle&locked=true';
         } elseif (Request::is('shop/prima-ltm')) {
             $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/share-image.jpg';
+              $orderUrl = '#customize-anchor';
         } elseif (Request::is('shop/prima-ultimate')) {
             $shareImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/prima/ultimate-bundle-share-image.jpg';
+              $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-ultimate-bundle-pianote]=1&promo-code=ultimate-bundle-pianote&locked=true';
         }
     @endphp
 
@@ -172,8 +174,8 @@
                 @endif
 
                 <div class="w-full max-w-xl mx-auto">
-                    <a class="anchor-slide w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
-                        href="#customize-anchor"
+                    <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500"
+                        href="{{ $orderUrl }}"
                     >START PLAYING</a>
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
@@ -632,7 +634,7 @@
                         <h3 class="leading-tight mt-6 mb-4 sm:mb-6">
                         Only <s class="opacity-50">$1642</s> <strong>$799</strong>
                         </h3>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-ultimate-bundle-pianote]=1&promo-code=ultimate-bundle-pianote&locked=true">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
                             <picture>
@@ -649,7 +651,7 @@
                         <h3 class="my-4">
                          Only <s class="opacity-80">$1374</s><strong> $599</strong>
                         </h3>
-                        <a class="join smaller w-full max-w-xs" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-keyboard-bundle]=1&promo-code=keyboard-bundle&locked=true">Start Playing</a>
+                        <a class="join smaller w-full max-w-xs" href="{{ $orderUrl }}">Start Playing</a>
                         <a href="/shop/prima-ultimate"><p class="italic opacity-50 text-xs underline pt-2"> Want to include a Keyboard Stand and Bench? Click here </p></a>
                     </div>
                     <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
