@@ -1,6 +1,6 @@
 <template>
     <component v-if="!isCertificateOpen" :is="isModal ? compMap.ModalRenderer : 'div'" :black-background="true" :show-x-icon="true" @on-close="emit('closeModal')" >
-        <div class="tw-max-w-[470px] tw-w-full tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0">
+        <div class="tw-max-w-[470px] tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0">
             <!-- Animation -->
             <Vue3Lottie v-if="!hideAnimation && !isModal" class="tw-w-[calc(100% + 200px)] sm:tw-w-[800px] tw-h-[800px] tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-[5]" :animation-link="animations[brand]" width="100%" height="100%" :loop="false" />
 
