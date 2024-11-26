@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/destupefy-your-left-hand">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <style> html { font-size:initial!important; } </style>
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
