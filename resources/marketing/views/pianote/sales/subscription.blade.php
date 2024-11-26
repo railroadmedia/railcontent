@@ -642,22 +642,39 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
-    <script type="application/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var stickyBar = document.querySelector('.promo-banner');
-            window.addEventListener('scroll', function () {
-                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-                if (window.scrollY > (unstickTrigger - 115)) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < stickTrigger - 115) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-                    stickyBar.classList.add('fixed', 'mt-0');
-                }
-            });
-        });
-    </script>
+   <script type="application/javascript">
+   document.addEventListener('DOMContentLoaded', function () {
+    var stickyBar = document.querySelector('.promo-banner');
+    
+    stickyBar.style.display = 'none';
+    stickyBar.style.opacity = '0';
+    
+    window.addEventListener('scroll', function () {
+        var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+        var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+        
+        if (window.scrollY > (unstickTrigger - 115)) {
+            stickyBar.classList.remove('fixed', 'mt-0');
+            stickyBar.style.display = 'flex';
+            setTimeout(() => {
+                stickyBar.style.opacity = '1';
+            }, 10);
+        }
+        else if (window.scrollY < stickTrigger - 115) {
+            stickyBar.classList.remove('fixed', 'mt-0');
+            stickyBar.style.opacity = '0';
+            setTimeout(() => {
+                stickyBar.style.display = 'none';
+            }, 300);
+        }
+        else if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+            stickyBar.classList.add('fixed', 'mt-0');
+            stickyBar.style.display = 'flex';
+            setTimeout(() => {
+                stickyBar.style.opacity = '1';
+            }, 10);
+        }
+    });
+});
+</script>
 @stop
