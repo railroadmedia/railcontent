@@ -47,12 +47,8 @@
                         <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h3>
-            @if(auth()->check())
-                <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
-            @else
                 <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
-            @endif
-            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
+{{--            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>--}}
         </div>
     </header>
 
@@ -211,12 +207,8 @@
                         <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h2>
-            @if(auth()->check())
-                <a href="{{ get_musora_brand_base_url()}}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
-            @else
                 <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
-            @endif
-            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
+{{--            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>--}}
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>
