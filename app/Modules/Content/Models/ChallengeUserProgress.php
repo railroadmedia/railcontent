@@ -2,11 +2,8 @@
 
 namespace App\Modules\Content\Models;
 
-use App\Modules\Brand\Enums\Brand;
-use App\Modules\Content\Enums\ProgressState;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,7 +66,7 @@ class ChallengeUserProgress extends Model
         return $this->belongsTo(Content::class, 'content_id');
     }
 
-    public function getStartAndEndDate() : array
+    public function getStartAndEndDate(): array
     {
         $startDate = $this->start_date;
         if ($startDate) {
@@ -88,7 +85,7 @@ class ChallengeUserProgress extends Model
 
     }
 
-    public function getStreakCurrentData() : array
+    public function getStreakCurrentData(): array
     {
         $bestStreak = 0;
         $currentStreak = 0;
@@ -102,7 +99,7 @@ class ChallengeUserProgress extends Model
             $unlockDate = Carbon::parse($lesson['unlock_date']);
             if ($lesson['is_always_unlocked'] || $unlockDate > $today) {
                 continue;
-            } else if ($unlockDate == $today) {
+            } elseif ($unlockDate == $today) {
                 if ($lesson['completed']) {
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
@@ -163,7 +160,7 @@ class ChallengeUserProgress extends Model
      * @param bool $isUnlocked - Flag to indicate whether lessons are locked
      * @return array -
      */
-    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isLocked = true) : array
+    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isLocked = true): array
     {
         $lessons = $challenge['lessons'];
         $startDate = Carbon::parse($startDate ?? $challenge['published_on'])->startOfDay();
@@ -194,7 +191,7 @@ class ChallengeUserProgress extends Model
         return $lessonMetaData;
     }
 
-    public function getCompiledMetadata() : array
+    public function getCompiledMetadata(): array
     {
         $streakData = $this->getStreakCurrentData();
         $startEndDate = $this->getStartAndEndDate();
@@ -221,7 +218,7 @@ class ChallengeUserProgress extends Model
      * Calculate the integer % of completed lessons
      * @return int
      */
-    public function getCompletionPercent() : int
+    public function getCompletionPercent(): int
     {
         $total = 0;
         $completed = 0;
@@ -239,23 +236,23 @@ class ChallengeUserProgress extends Model
      * @param array $challenge - Sanity Document for the challenge
      * @return int - number of rest days
      */
-    public static function calculateDefaultRestDays(array $challenge) : int
+    public static function calculateDefaultRestDays(array $challenge): int
     {
         return ChallengeUserProgress::getNumberOfDaysInChallenge($challenge) >= 10 ? 1 : 0;
     }
 
 
-    private static function getNumberOfDaysInChallenge(array $challenge) : int
+    private static function getNumberOfDaysInChallenge(array $challenge): int
     {
-        $lessonLessonsAsOpposedToIntroLessons = array_filter($challenge['lessons'], function($lesson) {
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($challenge['lessons'], function ($lesson) {
             return !($lesson['is_always_unlocked_for_challenge'] ?? false);
         });
         return count($lessonLessonsAsOpposedToIntroLessons);
     }
 
-    private function getNumberOfLessonDays() : int
+    private function getNumberOfLessonDays(): int
     {
-        $lessonLessonsAsOpposedToIntroLessons = array_filter($this->lessons_meta_data, function($lesson) {
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($this->lessons_meta_data, function ($lesson) {
             return !$lesson['is_always_unlocked'];
         });
         return count($lessonLessonsAsOpposedToIntroLessons);
@@ -267,7 +264,7 @@ class ChallengeUserProgress extends Model
      * @return ChallengeUserProgress
      * @throws Exception
      */
-    public static function whereChallengeIdAndUser(int $challengeId, int $userId) : ChallengeUserProgress | null
+    public static function whereChallengeIdAndUser(int $challengeId, int $userId): ChallengeUserProgress | null
     {
         $challengeUserCollection = self::query()
             ->where('content_id', $challengeId)
@@ -305,15 +302,17 @@ class ChallengeUserProgress extends Model
      * @param int $limit
      * @return \Illuminate\Support\Collection
      */
-    public static function whereUserId(int $userId, int $page=1, int $limit=10) : \Illuminate\Support\Collection
+    public static function whereUserId(int $userId, int $page = 1, int $limit = 10): \Illuminate\Support\Collection
     {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
             ->orderBy('start_date')
-            ->paginate($limit,
+            ->paginate(
+                $limit,
                 ['*'],
                 'page',
-                $page)
+                $page
+            )
             ->items();
         return collect($challengeUserCollection);
     }
@@ -324,16 +323,18 @@ class ChallengeUserProgress extends Model
      * @param $limit
      * @return \Illuminate\Support\Collection
      */
-    public static function whereUserIdAndCompleted(int $userId, $page, $limit) : \Illuminate\Support\Collection
+    public static function whereUserIdAndCompleted(int $userId, ?int $page = 1, ?int $limit = 10): \Illuminate\Support\Collection
     {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
             ->whereNotNull('last_completed_date')
             ->orderByDesc('last_completed_date')
-            ->paginate($limit,
+            ->paginate(
+                $limit,
                 ['*'],
                 'page',
-                $page)
+                $page
+            )
             ->items();
 
         return collect($challengeUserCollection);
@@ -345,7 +346,7 @@ class ChallengeUserProgress extends Model
      * @return Collection | null
      * @throws Exception
      */
-    public static function whereChallengeIdsAndUser(array $challengeIds, int $userId) : Collection | null
+    public static function whereChallengeIdsAndUser(array $challengeIds, int $userId): Collection | null
     {
         $challengeUserCollection = self::query()
             ->whereIn('content_id', $challengeIds)
@@ -373,7 +374,7 @@ class ChallengeUserProgress extends Model
      * @param int|null $timePracticed - if null, will not update the existing value
      * @return array -
      */
-    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null) : array
+    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null): array
     {
         $previousStreakData = $this->getStreakCurrentData();
         $results = [
@@ -415,8 +416,8 @@ class ChallengeUserProgress extends Model
                         $isMilestoneStreak = ($currentStreak % 5 == 0);
                     } else {
                         $isMilestoneStreak = $totalLessons == $currentStreak || ceil(
-                                $totalLessons / 2
-                            ) == $currentStreak;
+                            $totalLessons / 2
+                        ) == $currentStreak;
                     }
                     $results['is_milestone'] = $isMilestoneStreak;
                     $this->current_rest_days += $isMilestoneStreak ? 1 : 0;
@@ -434,7 +435,7 @@ class ChallengeUserProgress extends Model
     /**
      * @return bool
      */
-    public function isCompleteAndNotActive() : bool
+    public function isCompleteAndNotActive(): bool
     {
         return !$this->is_active && !is_null($this->last_completed_date);
     }
@@ -442,7 +443,7 @@ class ChallengeUserProgress extends Model
     /**
      * @return bool - if all non-intro lessons are completed
      */
-    public function areAllLessonsCompleted() : bool
+    public function areAllLessonsCompleted(): bool
     {
         foreach($this->lessons_meta_data as $lessons_meta_datum) {
             if ($lessons_meta_datum['is_always_unlocked']) {
@@ -459,16 +460,18 @@ class ChallengeUserProgress extends Model
      * @param int $id - Content Id
      * @return array | null;
      */
-    public function getMetaDatumForContent(int $id) : array | null
+    public function getMetaDatumForContent(int $id): array | null
     {
         foreach($this->lessons_meta_data as $lessonDatum) {
-            if ($lessonDatum['content_id'] == $id) return $lessonDatum;
+            if ($lessonDatum['content_id'] == $id) {
+                return $lessonDatum;
+            }
         }
         return null;
     }
 
 
-    public function getAwardTier() : AwardTier
+    public function getAwardTier(): AwardTier
     {
         $length = $this->getNumberOfLessonDays();
         $bestStreak = $this->completed_best_streak;
