@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Controllers;
 
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
@@ -82,7 +83,7 @@ class ContentMetadataController extends Controller
         // if the user ID isn't provided, grab the user from the session
         $user = $user ?? user();
 
-        $type = $request['content_type'] ?? null;
+        $type = $request->get('content_type') ? (array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('content_type')] ?? $request->get('content_type')) :  null;
         $brandValue = $request['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
