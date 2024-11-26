@@ -45,9 +45,11 @@
     }"
 @endsection
 @php
-    $stock = !empty($products['alesis-ekit']->getPublicStockCount())
-        ? $products['alesis-ekit']->getPublicStockCount()
-        : 0;
+
+    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true';
+$stock = !empty($products['alesis-ekit']->getPublicStockCount())
+  ? $products['alesis-ekit']->getPublicStockCount()
+  : 0;
 @endphp
 
 @section('global-body')
@@ -70,9 +72,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FF8FB4] text-xl md:text-3xl">(Save 42%)</span></h2>
                     @if($stock > 0)
-                        <a class="join pianote mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join pianote mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
                     </div>
                 </div>
@@ -95,6 +97,7 @@
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             'case' => 'deal',
+            'getDealUrl' => $orderUrl,
             ])
         </div>
     </section>
@@ -118,7 +121,7 @@
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 On Your First Year + $635 In Lifetime Bonuses.</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
+            'buttonLink' => $orderUrl,
             'bundle'=> "deal",
             ])
     </div>

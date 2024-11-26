@@ -46,9 +46,10 @@
     }"
 @endsection
 @php
-    $stock = !empty($products['alesis-ekit']->getPublicStockCount())
-        ? $products['alesis-ekit']->getPublicStockCount()
-        : 0;
+    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle&locked=true';
+$stock = !empty($products['alesis-ekit']->getPublicStockCount())
+  ? $products['alesis-ekit']->getPublicStockCount()
+  : 0;
 @endphp
 
 @section('global-body')
@@ -71,9 +72,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#A285FF] text-xl md:text-3xl">(Save 70%)</span></h2>
                     @if($stock > 0)
-                        <a class="join pianote mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join pianote mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
                     </div>
                 </div>
@@ -115,6 +116,7 @@
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus2,
+            'getDealUrl' => $orderUrl,
             ])
         </div>
     </section>
@@ -139,7 +141,7 @@
             'secondImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-BB.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get The Best Online Piano Lessons And A <br class="hidden md:block">Library Of Piano Books</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-book-bundle]=1&promo-code=book-bundle&locked=true',
+            'buttonLink' => $orderUrl,
             'bundle'=> "book",
             ])
     </div>

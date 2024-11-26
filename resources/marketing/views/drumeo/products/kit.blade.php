@@ -575,6 +575,7 @@
         @include('drumeo._partials.bf-bonus-section', [
         'videoTargetSkus' => $videoTargetSkus,
             'freeShipping' => true,
+            'getDealUrl' => $orderUrl,
         ])
 
         <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
@@ -639,7 +640,7 @@
                WORLD-CLASS TEACHERS
             </span>
         </div>',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ekit-bundle]=1&promo-code=ekit-bundle&locked=true',
+    'buttonLink' => $orderUrl,
     'bundle'=> "kit",
     ])
 </div>

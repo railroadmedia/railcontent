@@ -93,6 +93,8 @@
     @endforeach
 </div>
 
-<div class="container mx-auto text-center pt-6 md:pt-16 @if(!empty($noButton)) hidden @endif">
-    <a href="#customize-anchor" class="join @if($theme === 'drumeo') blue @else pianote @endif smaller w-full md:max-w-[350px] text-xl anchor-slide"> GET THE DEAL</a>
-</div>
+@if(!empty($getDealUrl))
+    <div class="container mx-auto text-center pt-6 md:pt-16 @if(!empty($noButton)) hidden @endif">
+        <a href="{{ $getDealUrl }}" class="join @if($theme === 'drumeo') blue @else pianote @endif smaller w-full md:max-w-[350px] text-xl"> GET THE DEAL</a>
+    </div>
+@endif
