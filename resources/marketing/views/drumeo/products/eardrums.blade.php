@@ -747,26 +747,26 @@
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
             @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
                 <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-8">
-                    @include('drumeo.products.partials._order-card', [
-                        'firstOnMobile' => true,
-                        'highlightBorder' => true,
-                        'badge' => 'BEST DEAL',
-                        'header' => 'EarDrums + 1 Year<br> Drumeo Membership',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                        'imageHeight' => 'h-28 lg:h-32',
-                        'price' => 'Free EarDrums',
-                        'specialText' => "with annual Membership of $240/yr.",
-                        'cta' => 'SELECT',
-                        'link' =>
-                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
-                        'bonuses' => [
-                            '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
-                            '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
-                            'Step-by-Step Lessons',
-                            'Song Breakdowns',
-                            'Personalized Support',
-                        ],
-                    ])
+{{--                    @include('drumeo.products.partials._order-card', [--}}
+{{--                        'firstOnMobile' => true,--}}
+{{--                        'highlightBorder' => true,--}}
+{{--                        'badge' => 'BEST DEAL',--}}
+{{--                        'header' => 'EarDrums + 1 Year<br> Drumeo Membership',--}}
+{{--                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',--}}
+{{--                        'imageHeight' => 'h-28 lg:h-32',--}}
+{{--                        'price' => 'Free EarDrums',--}}
+{{--                        'specialText' => "with annual Membership of $240/yr.",--}}
+{{--                        'cta' => 'SELECT',--}}
+{{--                        'link' =>--}}
+{{--                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',--}}
+{{--                        'bonuses' => [--}}
+{{--                            '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',--}}
+{{--                            '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',--}}
+{{--                            'Step-by-Step Lessons',--}}
+{{--                            'Song Breakdowns',--}}
+{{--                            'Personalized Support',--}}
+{{--                        ],--}}
+{{--                    ])--}}
                     @include('drumeo.products.partials._order-card', [
                         'header' => 'Drumeo<br> EarDrums',
                         'image' =>

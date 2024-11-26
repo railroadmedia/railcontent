@@ -46,7 +46,7 @@
 @endsection
 @php
 
-    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true';
+    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true';
 $stock = !empty($products['alesis-ekit']->getPublicStockCount())
   ? $products['alesis-ekit']->getPublicStockCount()
   : 0;

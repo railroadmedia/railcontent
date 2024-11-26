@@ -357,7 +357,7 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-   
+
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
             'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/BF-header-banner.webp')",
@@ -368,7 +368,7 @@
             'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
         ])
         <div class="sticky-trigger block"></div>
-        
+
     @endif
 
     @hasSection('top-bar')
@@ -570,6 +570,23 @@
         'belowButton' => true,
         'bundle'=> "deal",
         ])
+
+        @php
+            $videoBonuses = [];
+            foreach ($bonuses as $bonus) {
+                if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
+                    $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
+                }
+            }
+        @endphp
+
+        @foreach ($videoBonuses as $modal)
+            @include('_partials.components.video-modal', [
+                'name' => $modal['name'],
+                'video' => $modal['video'],
+                'vimeo' => true,
+            ])
+        @endforeach
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
@@ -621,23 +638,6 @@
         @include("pianote.sales.partials._footer")
     @endif
 
-    @php
-        $videoBonuses = [];
-        foreach ($bonuses as $bonus) {
-            if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
-                $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
-            }
-        }
-    @endphp
-
-    @foreach ($videoBonuses as $modal)
-        @include('_partials.components.video-modal', [
-            'name' => $modal['name'],
-            'video' => $modal['video'],
-            'vimeo' => true,
-        ])
-    @endforeach
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
@@ -645,14 +645,14 @@
    <script type="application/javascript">
    document.addEventListener('DOMContentLoaded', function () {
     var stickyBar = document.querySelector('.promo-banner');
-    
+
     stickyBar.style.display = 'none';
     stickyBar.style.opacity = '0';
-    
+
     window.addEventListener('scroll', function () {
         var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
         var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-        
+
         if (window.scrollY > (unstickTrigger - 115)) {
             stickyBar.classList.remove('fixed', 'mt-0');
             stickyBar.style.display = 'flex';

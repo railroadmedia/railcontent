@@ -438,16 +438,16 @@
                         ],
         ]
     @endphp
-    @include('musora.sales.components.order-section-bonuses', [
-    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'subHeader' => '<strong><span class="text-musora">SAVE 17%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
-    'theme' => 'drumeo',
-        'CTA' => 'CLAIM YOUR OFFER',
-    'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
-    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-    ])
+{{--    @include('musora.sales.components.order-section-bonuses', [--}}
+{{--    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',--}}
+{{--    'subHeader' => '<strong><span class="text-musora">SAVE 17%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',--}}
+{{--    'theme' => 'drumeo',--}}
+{{--        'CTA' => 'CLAIM YOUR OFFER',--}}
+{{--    'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',--}}
+{{--    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',--}}
+{{--    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',--}}
+{{--    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',--}}
+{{--    ])--}}
 
     <div id="customize-section" class="anchor"></div>
 

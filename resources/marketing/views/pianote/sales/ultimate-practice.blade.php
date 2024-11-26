@@ -590,10 +590,10 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @php
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[practice-kit]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true'
-    @endphp
+{{--    @php--}}
+{{--            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[practice-kit]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true';--}}
+{{--            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true'--}}
+{{--    @endphp--}}
     <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-4xl ">
