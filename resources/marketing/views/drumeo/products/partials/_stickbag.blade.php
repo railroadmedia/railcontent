@@ -104,7 +104,8 @@
                             @else
                                 ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
                             @endif </strong>
-                        (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
+                        {{-- (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%) --}}
+                        (Save 20%) {{-- For the BF --}}
                     @else
                         <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
                     @endif

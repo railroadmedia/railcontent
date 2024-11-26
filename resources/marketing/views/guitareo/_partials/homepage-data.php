@@ -124,11 +124,11 @@ $guitareo = [
                     'title' => 'Creating The Perfect <br> Guitar Part',
                     'instructor' => 'Mark Lettieri',
                 ],
-                [
-                    'img' => 'marketing/guitareo/membership/homepage/2024/coaches/add-power-to-your-playing.webp',
-                    'title' => 'Better <br> Guitar Solos',
-                    'instructor' => 'Dave Weiner',
-                ],
+                // [
+                //     'img' => 'marketing/guitareo/membership/homepage/2024/coaches/add-power-to-your-playing.webp',
+                //     'title' => 'Better <br> Guitar Solos',
+                //     'instructor' => 'Dave Weiner',
+                // ],
                 [
                     'img' => 'marketing/guitareo/membership/homepage/2024/coaches/unlock-your-creativity.webp',
                     'title' => 'Unlock Your<br> Creativity',
