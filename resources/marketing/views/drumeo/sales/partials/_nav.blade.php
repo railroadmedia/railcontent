@@ -21,13 +21,13 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Drumeo shop">Shop Deals</a>
         </div>
     @endif
 
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" style="background: linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);color:#000;" role="button" aria-label="Shop at Drumeo shop">Shop Deals</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
