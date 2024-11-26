@@ -11,7 +11,8 @@
     <meta property="og:url" content="https://www.pianote.com/faster-fingers">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    @include('_partials.layout._tailwindcdn')
+    <style> html { font-size:initial!important; } </style>
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/faster-fingers.css') }}">
 @stop
