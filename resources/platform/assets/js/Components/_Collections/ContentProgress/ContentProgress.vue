@@ -16,7 +16,7 @@
                             :style="{ transform: `translateX(${progressAmount - 100}%)` }"
                         >
                 <span :class="`progress-percent body tw-font-bold tw-text-[10px] sm:tw-text-base ${brandTextColor} ${progressAmount > 50 ? '' : 'right'}`">
-                  {{ Math.round(progressAmount) }}%
+                    {{ Math.round(progressAmount) }}%
                 </span>
               </span>
                     </div>
@@ -30,27 +30,33 @@
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-text-white tw-w-full sm:tw-w-auto tw-justify-center">
+                
                 <a v-if="!showCompleteButton"
                    :href="completed ? backButton.url : nextLessonUrl"
                    class="tw-btn-secondary tw-text-lg tw-mb-0 tw-leading-[0] tw-border-[3px] tw-text-white"
                 >
-            <span v-if="!completed">
-              <span v-if="isStarted">Next Lesson &raquo;</span>
-              <span v-else>Start First Lesson</span>
-            </span>
+                    <span v-if="!completed">
+                        <span v-if="isStarted">Next Lesson &raquo;</span>
+                        <span v-else>Start First Lesson</span>
+                    </span>
                     <span v-else v-html="backButton.text"></span>
                 </a>
+
                 <div v-else class="tw-flex tw-justify-center">
+
+                    <!-- Reset Progress Button-->
                     <button class="btn resetProgress tw-hidden sm:tw-block"
                             :data-brand="brand"
                             :data-content-id="contentId"
                             title="Reset Progress"
                             @click="triggerProgressReset"
                     >
-              <span class="bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border-none tw-shadow-none tw-flex-col">
-                <i class="fas fa-undo tw-text-white reset tw-mb-0.5 tw-text-lg" aria-hidden="true"></i> Reset
-              </span>
+                        <span class="bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border-none tw-shadow-none tw-flex-col">
+                            <i class="fas fa-undo tw-text-white reset tw-mb-0.5 tw-text-lg" aria-hidden="true"></i> Reset
+                        </span>
                     </button>
+
+                    <!-- Complete Button -->
                     <button class="btn completeButton tw-text-base tw-max-w-[250px] sm:tw-max-w-none"
                             :class="completed ? 'is-complete' : ''"
                             dusk="master-complete-button"
@@ -59,17 +65,18 @@
                             :data-content-id="contentId"
                             @click="triggerLessonComplete"
                     >
-              <span class="incompleted bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border tw-border-white sm:tw-border-none tw-shadow-none" :class="!completed ? 'tw-flex sm:tw-flex-col tw-h-[35px] sm:tw-h-auto' : 'tw-hidden'">
-                <div class="tw-border-2 tw-border-white tw-rounded-full tw-px-1 tw-mr-1 sm:tw-mr-0 sm:tw-mb-1.5">
-                  <i class="fas fa-check tw-text-[10px] tw-mb-1"></i>
-                </div> Complete
-              </span>
+                        <span class="incompleted bg-white inverted tw-text-white tw-px-6 tw-items-center tw-border tw-border-white sm:tw-border-none tw-shadow-none" :class="!completed ? 'tw-flex sm:tw-flex-col tw-h-[35px] sm:tw-h-auto' : 'tw-hidden'">
+                            <div class="tw-border-2 tw-border-white tw-rounded-full tw-px-1 tw-mr-1 sm:tw-mr-0 sm:tw-mb-1.5">
+                                <i class="fas fa-check tw-text-[10px] tw-mb-1"></i>
+                            </div> Complete
+                        </span>
                         <span class="completed tw-text-white tw-px-6 tw-items-center tw-border tw-border-white sm:tw-border-none tw-shadow-none" :class="completed ? 'tw-flex sm:tw-flex-col tw-h-[35px] sm:tw-h-auto' : 'tw-hidden'">
-                <div class="tw-border-2 tw-border-white tw-bg-white tw-rounded-full tw-px-1 tw-mr-1 sm:tw-mr-0 sm:tw-mb-1.5">
-                  <i :class="`fas fa-check tw-text-[10px] tw-mb-1 ${brandTextColor}`"></i>
-                </div> Completed
-              </span>
+                            <div class="tw-border-2 tw-border-white tw-bg-white tw-rounded-full tw-px-1 tw-mr-1 sm:tw-mr-0 sm:tw-mb-1.5">
+                                <i :class="`fas fa-check tw-text-[10px] tw-mb-1 ${brandTextColor}`"></i>
+                            </div> Completed
+                        </span>
                     </button>
+
                 </div>
             </div>
         </div>
@@ -117,7 +124,7 @@ const triggerLessonComplete = () => {
     //Update Locally First?
     progressAmount.value = 100;
 
-
+    
 }
 
 const completed = computed ( ()=> {
@@ -125,7 +132,7 @@ const completed = computed ( ()=> {
 })
 
 onBeforeMount( ()=> {
-    console.log('progress', props.progress);
+    //console.log('progress', props.progress);
     
     //Set initial Values
     progressAmount.value = props.progress;
