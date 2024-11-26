@@ -94,8 +94,8 @@
                     'slug' => '/shop/book-bundle',
                     'full' => true,
                     'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full2.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-70.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m-70.webp',
                 ],
                 [
                     'slug' => '/shop/prima-ultimate',
@@ -112,8 +112,8 @@
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/shop/pianote-deal" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal.webp');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal-3.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal-3.webp');"></div>
                         </div>
                     </a>
                     <a href="/lifetime" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
@@ -237,10 +237,10 @@
                     ])
                 </div>
                 <div class="text-center">
-                    <p class="leading-tight border border-gray-300 px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-                        <i class="fas fa-sparkle mr-3"></i>
-                        <strong class="font-black">All Black Friday Bundles =</strong> <i class="fas fa-sparkle lg:hidden ml-3"></i><br class="lg:hidden"> FREE SHIPPING to USA/CANADA and Discounted Shipping Worldwide.
-                        <i class="fas fa-sparkle hidden lg:inline lg:ml-3"></i>
+                    <p class="leading-normal border border-gray-300 px-2 sm:px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
+                        <i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL BLACK FRIDAY BUNDLES<br class="sm:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3"></i><br>
+                        <span class="text-sm">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide. <br class="hidden sm:inline">
+                        You won’t be able to add or remove items for any featured bundle.</span>
                     </p>
                 </div>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">

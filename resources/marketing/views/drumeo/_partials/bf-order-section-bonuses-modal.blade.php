@@ -216,9 +216,11 @@
                                     <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                                 @endif --}}
                                 <span style="display:inline-block;">
+                                <s>
                                 @if(!empty($bonus['price']))
-                                        ${{ $bonus['price'] }}
+                                    ${{ $bonus['price'] }}
                                 @endif
+                                </s>
                                 <strong class="{{ $textColor }}">FREE</strong>
                                 <span class="text-white italic block">Lifetime Access</span>
 

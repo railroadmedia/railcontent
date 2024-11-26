@@ -104,8 +104,7 @@
                             @else
                                 ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
                             @endif </strong>
-                        {{-- (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%) --}}
-                        (Save 20%) {{-- For the BF --}}
+                        (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
                     @else
                         <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
                     @endif
@@ -650,7 +649,7 @@
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
+                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >(Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)</p>
                         @endif
                         <a href="/ecommerce/add-to-cart?products[stickbag]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
@@ -675,7 +674,7 @@
                                     </strong></h4>
                                 <p class="text-sm"><em>
                                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                            Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%.
+                                           (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
                                         @endif
                                         One-time payment.</em></p>
                                 <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">ORDER NOW</div>
