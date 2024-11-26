@@ -100,7 +100,7 @@
             </h2>
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
-            'freeShipping' => true,
+                'freeShipping' => true,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
@@ -110,7 +110,7 @@
                     </div>
                     <div class="text-sm">
                         <span class="font-semibold">Disclaimer:</span>
-                        This bundle is ONLY available as a full-bundle. None of the discounted items can be purchased at that
+                        This bundle is ONLY available as a full bundle. None of the discounted items can be purchased at that
                         discounted price, on their own, and any refunds must be processed with the full bundle refunded and returned at the same
                         time. (Ex. You cannot purchase this bundle and request a refund on just the membership.)
                     </div>
@@ -133,7 +133,8 @@
             'DLM-1-year', '30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops', 'drumeo-eardrums', 'headphones', 'Drumeo-VaterSticks-2'
             ];
         @endphp
-
+        
+        <div id="customize-anchor"></div>
         @include('drumeo._partials.bf-order-section-bonuses', [
             'maxWidth' => 'max-w-4xl',
             'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
