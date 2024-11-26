@@ -111,13 +111,13 @@
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/drumshop/drumeo-deal" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal.webp');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal-new.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal-m.webp');"></div>
                         </div>
                     </a>
                     <a href="/lifetime" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal.webp');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal-3.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal-m.webp');"></div>
                         </div>
                     </a>
@@ -262,7 +262,7 @@
                          "price" => floatval($productPrices['the-drummers-toolbox-book']->price),
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03-last.webp",
                          'soldOut' => false,
                     ])
                 </div>
