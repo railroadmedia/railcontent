@@ -112,7 +112,7 @@
 
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
-                <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
+                <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalParams"
                     :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading"
                     @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause" soundsliceType="assignment">
                     <template v-slot:soundsliceControls>
@@ -128,13 +128,13 @@
 <script>
 import { Duration } from 'luxon';
 import { bgColor, textColor } from "@constants/brands";
-import { getProgressPercentage } from 'musora-content-services';
 import ContentService from '../../assets/js/Services/content';
 import Utils from '../../assets/js/classes/utils';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
 import SoundSlice from '@collections/SoundSlice/SoundSlice.vue'
 import SoundSliceControls from '@collections/SoundSlice/SoundSliceControls.vue';
+import { getProgressPercentage, assignmentStatusCompleted, assignmentStatusReset } from 'musora-content-services';
 
 export default {
     name: 'ContentAssignment',
@@ -156,10 +156,6 @@ export default {
             default: () => 0,
         },
         brand: {
-            type: String,
-            default: () => 'drumeo',
-        },
-        themeColor: {
             type: String,
             default: () => 'drumeo',
         },
@@ -352,7 +348,8 @@ export default {
     beforeMount() {
         //Get completed state
         getProgressPercentage(this.id).then( value => {
-            this.isComplete = value;
+            this.isComplete = value === 100;
+            //console.log('progress', value === 100)
         }).catch( error => {
             console.log('error getting assignment progress', error)
         })
@@ -429,6 +426,8 @@ export default {
             Utils.triggerEvent(window, 'vue-requesting-completion');
 
             if (this.isComplete) {
+                console.log('is complete');
+
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
                     subtitle: 'This cannot be undone.',
@@ -436,9 +435,9 @@ export default {
                         submit: () => {
                             this.isComplete = !this.isComplete;
 
-                            window.recalculateProgress(false, false, this.themeColor);
+                            window.recalculateProgress(false, false, this.brand);
 
-                            ContentService.resetContentProgress(vm.id)
+                            assignmentStatusReset(this.id, this.lessonId)
                                 .then((resolved) => {
                                     if (resolved) {
                                         element.classList.add('remove-request-complete');
@@ -463,11 +462,14 @@ export default {
                     }
                 });
             } else {
+                console.log('is not complete');
+
                 this.isComplete = !this.isComplete;
 
-                window.recalculateProgress(true, false, this.themeColor);
+                window.recalculateProgress(true, false, this.brand);
 
-                ContentService.markContentAsComplete(vm.id)
+                
+                assignmentStatusCompleted(this.id, this.lessonId)
                     .then((resolved) => {
                         if (resolved) {
                             element.classList.add('add-request-complete');

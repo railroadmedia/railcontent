@@ -168,7 +168,7 @@
     </div>
 </template>
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
@@ -190,7 +190,7 @@ const props = defineProps({
     songTitle: String,
     songArtist: String,
     songAlbum: String,
-    songMeta: String,
+    genre: Array,
     isAdded: Boolean,
     assignments: Array,
     hasInstrumentless: Boolean,
@@ -209,6 +209,17 @@ const openSoundslice = ref(null);
 const lessonProgressRef = ref(0);
 const initialDataFetched = ref(false);
 const isUserDataLoading = ref(false);
+
+const songMeta = computed(() => {
+    if (props.genre.length === 0) {
+        return '';
+    }
+    const uniqueGenres = [...new Set(props.genre)];
+    if (uniqueGenres.length === 1) {
+        return uniqueGenres[0];
+    }
+    return uniqueGenres?.join(', ');
+});
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';

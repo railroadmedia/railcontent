@@ -137,61 +137,49 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async fetchData() {
+        async fetchTabData(){
             const userStore = useUserStore();
-            try {
-                // const response = await axios
-                //     .get(
-                //         this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
-                //         {
-                //             params: {
-                //                 brand: userStore.brand,
-                //                 limit: this.filter.limit,
-                //                 page: this.tabData[this.filter.activeTab].currentPage,
-                //                 sort: this.filter.sort,
-                //                 ...this.filter.params,
-                //                 included_fields: this.filter.included_fields,
-                //                 count_filter_items: true,
-                //                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
-                //                 ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
-                //                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
-                //             },
-                //         })
-                // return response;
 
-                //Get Genre
-                const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
-                const genre = genreField ? genreField.split(',')[1] : null;
+            const params = new URLSearchParams(window.location.search);
 
-                //Get Filter Options
-                const result = await fetchAllFilterOptions(
-                    userStore.brand, //brand
-                    [ ...this.filter.included_fields ], //filters array
-                    genre, //style
-                    "", //artist
-                    this.queryType, //contentType
-                    this.filter.searchTerm, //term
-                    undefined, //progressIds
-                    undefined, //coachIds
-                    true, //includeTabs
-                );
-                if (result) {
-                    //Set Filter Columns
-                    this.filterColumns = getFilterValues(result.meta.filterOptions);
+            //Get filters
+            if (params.getAll('included_fields[]').length > 0) {
+                this.filter.included_fields = params.getAll('included_fields[]');
+            }
 
-                    if(this.tabOptions.length === 0){
-                        //Set Tab Options
-                        this.tabOptions = formatTabData(result.tabs, result.catalogName)
-                        console.log('tab tab', result)
-                        console.log('after fetch', this.tabOptions)
+            //Get Genre
+            const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
+            const genre = genreField ? genreField.split(',')[1] : null;
 
-                        //Set Active Tab
-                        this.setActiveTab();
-                    }
-                } else {
-                    throw new Error('Failed to fetch Filter Options');
+            //Get Filter Options
+            const result = await fetchAllFilterOptions(
+                userStore.brand, //brand
+                [ ...this.filter.included_fields ], //filters array
+                genre, //style
+                "", //artist
+                this.queryType, //contentType
+                this.filter.searchTerm, //term
+                undefined, //progressIds
+                undefined, //coachIds
+                true, //includeTabs
+            );
+            if (result) {
+                //Set Filter Columns
+                this.filterColumns = getFilterValues(result.meta.filterOptions);
+
+                if(this.tabOptions.length === 0){
+                    //Set Tab Options
+                    this.tabOptions = formatTabData(result.tabs, result.catalogName)
+                    console.log('tab tab', result)
+                    console.log('after fetch', this.tabOptions)
                 }
+            } else {
+                throw new Error('Failed to fetch Filter Options');
+            }
+        },
 
+        async fetchData() {
+            try {
                 const response = await this.getEndpoint(this.fetchType);
 
                 return response;
@@ -246,6 +234,7 @@ export const useCollectionStore = defineStore({
 
         setActiveTab() {
             const activeTab = this.tabOptions.find((tab) => {
+                console.log(this.filter.activeTab, tab.key, tab.key === this.filter.activeTab)
                 return tab.key === this.filter.activeTab;
             })
 
@@ -265,8 +254,8 @@ export const useCollectionStore = defineStore({
             let tabParams = params.getAll('tabs[]');
 
             //Set active tab from URL
-            if(tabParams && tabParams.length > 0 ){
-                this.filter.activeTab = tabParams[0];
+            if (tabParams && tabParams.length > 0 ){
+                this.filter.activeTab = tabParams[0].replace(/"/g, '');
             }
 
             //Get search params
@@ -357,7 +346,12 @@ export const useCollectionStore = defineStore({
                 this.collectionType = defaults.collectionType;
             }
 
+            await this.fetchTabData();
+
             this.getURLParams();
+
+            //Set Active Tab
+            this.setActiveTab();
 
             if(!defaults.noFetchOnLoad){
                 const data = await this.getData();
@@ -385,7 +379,7 @@ export const useCollectionStore = defineStore({
             }
 
             if(this.tabData[this.filter.activeTab]?.key){
-                url.searchParams.set('tabs[]', JSON.stringify(this.tabData[this.filter.activeTab]?.key));
+                url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab]?.key);
             }
 
             if (this.filter.progress) {

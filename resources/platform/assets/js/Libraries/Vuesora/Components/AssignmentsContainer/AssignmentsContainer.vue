@@ -6,7 +6,6 @@
                     :lesson-thumbnail="lessonThumbnail"
                     :lesson-title="lessonTitle"
                     :lesson-id="lessonId"
-                    :theme-color="brand"
                     :brand="brand"
                     :timecode="assignment.timecode ? assignment.timecode : 0"
                     :id="assignment.id"

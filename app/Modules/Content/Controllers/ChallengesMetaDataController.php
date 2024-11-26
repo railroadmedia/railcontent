@@ -25,8 +25,7 @@ class ChallengesMetaDataController extends Controller
         private CohortService $cohortService,
         private ProductService $productService,
         private UserAccessPermissionsService $userAccessPermissionsService,
-    )
-    {
+    ) {
     }
 
     /**
@@ -104,7 +103,9 @@ class ChallengesMetaDataController extends Controller
     {
         $userId = user()->id;
         $userProgresses = ChallengeUserProgress::whereUserIdAndActive($userId);
-        if ($userProgresses->isEmpty()) return response()->json([]);
+        if ($userProgresses->isEmpty()) {
+            return response()->json([]);
+        }
         $brand = $request->get('brand', brand());
         $challengeIds = $userProgresses->pluck('content_id')->toArray();
         $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($challengeIds, $userProgresses, true, $brand);
@@ -155,7 +156,9 @@ class ChallengesMetaDataController extends Controller
         $userId = user()->id;
         $contentIds = $request->get('content_ids', '');
         $contentIds = explode(',', $contentIds);
-        if (!$contentIds) return response()->json([]);
+        if (!$contentIds) {
+            return response()->json([]);
+        }
         $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
         $brand = $request->get('brand', brand());
         $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($contentIds, $userProgresses, false, $brand);
@@ -201,7 +204,7 @@ class ChallengesMetaDataController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function leaveChallenge(int $id) : JsonResponse
+    public function leaveChallenge(int $id): JsonResponse
     {
         $userId = user()->id;
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $userId);
@@ -218,7 +221,7 @@ class ChallengesMetaDataController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function unlockChallenge(int $id) : JsonResponse
+    public function unlockChallenge(int $id): JsonResponse
     {
         $userId = user()->id;
         $result = $this->challengesService->startChallenge($id, $userId, startDate: Carbon::now()->toISOString(), isLocked: false);
@@ -236,7 +239,7 @@ class ChallengesMetaDataController extends Controller
      * @param $isLocked - flag to indicate if content should be gated by time
      * @return JsonResponse
      */
-    public function setStartDate(Request $request, int $id) : JsonResponse
+    public function setStartDate(Request $request, int $id): JsonResponse
     {
         $userId = user()->id;
         //TODO move this to users timezone
@@ -255,8 +258,12 @@ class ChallengesMetaDataController extends Controller
     {
         $user = user();
         $userId = $user->id;
-        $challengeProgress = ChallengeUserProgress::whereUserIdAndCompleted($userId);
-        if ($challengeProgress->isEmpty()) return response()->json([]);
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $challengeProgress = ChallengeUserProgress::whereUserIdAndCompleted($userId, $page, $limit);
+        if ($challengeProgress->isEmpty()) {
+            return response()->json([]);
+        }
         $challengeIds = $challengeProgress->pluck('content_id')->toArray();
         $brand = $request->get('brand', brand());
         $challenges = $this->challengesService->getChallengeByIds($challengeIds, $brand);
@@ -282,7 +289,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getUserAward($id)
     {
-              $challenge = $this->challengesService->getChallengeById($id);
+        $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
         // what's the correct handling here? this shouldn't happen
@@ -346,7 +353,9 @@ class ChallengesMetaDataController extends Controller
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
         $completedChallenges = ChallengeUserProgress::whereUserId($userId, $page, $limit);
-        if (!$completedChallenges) return response()->json([]);
+        if (!$completedChallenges) {
+            return response()->json([]);
+        }
         $completedIds = $completedChallenges->pluck('content_id')->toArray();
         $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
         $output = [
@@ -369,7 +378,9 @@ class ChallengesMetaDataController extends Controller
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
         $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId, $page, $limit);
-        if (!$completedChallenges) return response()->json([]);
+        if (!$completedChallenges) {
+            return response()->json([]);
+        }
         $completedIds = $completedChallenges->pluck('content_id')->toArray();
         $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
         $output = [
@@ -385,7 +396,7 @@ class ChallengesMetaDataController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function notificationsEnrollmentOpen(int $id) : JsonResponse
+    public function notificationsEnrollmentOpen(int $id): JsonResponse
     {
         return $this->enableNotification($id, ChallengesService::ENROLLMENT_NOTIFICATION_KEY) ?
             response()->json() :
@@ -398,14 +409,14 @@ class ChallengesMetaDataController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function notificationsCommunityReminders(int $id) : JsonResponse
+    public function notificationsCommunityReminders(int $id): JsonResponse
     {
         return $this->enableNotification($id, ChallengesService::COMMUNITY_NOTIFICATION_KEY) ?
             response()->json() :
             response()->json(['error' => "Challenge $id not found"], status: 404);
     }
 
-    private function enableNotification($id, $key) : bool
+    private function enableNotification($id, $key): bool
     {
         $challenge = $this->challengesService->getChallengeById($id);
         if (is_null($challenge)) {
@@ -415,4 +426,3 @@ class ChallengesMetaDataController extends Controller
         return true;
     }
 }
-

@@ -1,5 +1,6 @@
 import ContentService from '../Services/content';
 import Utils from '../classes/utils';
+import { contentStatusCompleted, contentStatusReset } from 'musora-content-services';
 
 export default (function () {
     document.addEventListener('DOMContentLoaded', () => {
@@ -18,17 +19,21 @@ export default (function () {
             isRequesting = false;
         });
 
+        //Good ol' fashion event delegation...
         document.addEventListener('click', (event) => {
             const element = event.target;
 
+            //Clicking on addToList Button
             if (element.matches('.addToList')) {
                 addToList(event);
             }
 
+            //Clicking on .completeButton
             if (element.matches('.completeButton')) {
                 markAsComplete(event);
             }
 
+            //Clicking on .resetProgress
             if (element.matches('.resetProgress')) {
                 progressReset(event);
             }
@@ -114,26 +119,25 @@ export default (function () {
                         submit: () => {
                             icon.classList.remove('fa-redo-alt', 'fa-flip-horizontal');
                             icon.classList.add('fa-spin', 'fa-spinner');
-                
-                            ContentService.resetContentProgress(contentId)
-                                .then((resolved) => {
-                                    if (resolved) {
-                                        window.shownotification({
-                                            icon: 'check',
-                                            text: 'Removed! Your progress has been reset.'
-                                        });
-                
-                                        if (document.querySelector('.trophy-progress')) {
-                                            window.recalculateProgress(false, true, brand);
-                                        }
-                                        Array.from(resetProgressButtons).forEach((button) => {
-                                            button.parentElement.classList.add('hide');
-                                        });
+                            
+                            //Reset Progress!
+                            contentStatusReset(contentId)
+                                .then(() => {
+                                    window.shownotification({
+                                        icon: 'check',
+                                        text: 'Removed! Your progress has been reset.'
+                                    });
+            
+                                    if (document.querySelector('.trophy-progress')) {
+                                        window.recalculateProgress(false, true, brand);
                                     }
-                
+                                    Array.from(resetProgressButtons).forEach((button) => {
+                                        button.parentElement.classList.add('hide');
+                                    });
+                                }).finally( () => {
                                     icon.classList.remove('fa-spin', 'fa-spinner');
                                     icon.classList.add('fa-redo-alt', 'fa-flip-horizontal');
-                
+                                    //Hard Reload
                                     window.location.reload();
                                 });
                         },
@@ -197,8 +201,9 @@ export default (function () {
                                     element.classList.remove('is-complete');
                         
                                     window.recalculateProgress(!isRemoving, true, brand);
-                        
-                                    ContentService.resetContentProgress(contentId)
+                                    
+                                    //Actually Reset Progress
+                                    contentStatusReset(contentId)
                                         .then((resolved) => {
                                             if (resolved) {
                                                 window.shownotification({
@@ -237,12 +242,12 @@ export default (function () {
 
                     window.recalculateProgress(!isRemoving, true, brand);
 
-                    ContentService.markContentAsComplete(contentId)
-                        .then((resolved) => {
-                            if (resolved) {
-                                element.classList.add('add-request-complete');
-                            }
-
+                    //Mark As Complete!
+                    contentStatusCompleted(contentId)
+                        .then(() => {
+                            element.classList.add('add-request-complete');
+                        })
+                        .finally( () => {
                             isRequesting = false;
                         });
                 }

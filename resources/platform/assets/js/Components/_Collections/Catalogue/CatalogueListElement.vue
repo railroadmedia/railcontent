@@ -5,9 +5,11 @@
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
             <a
-            	:href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
-                item.type === 'song' ? 'tw-max-w-[121px]' : '',
-                item.type + '-thumbnail'
+            	:href="isReleased && renderLink && !forceNoLinks ? itemUrl : null" 
+                class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3"
+                :class="[
+                    item.type === 'song' ? 'tw-max-w-[121px]' : '',
+                    item.type + '-thumbnail'
             	]"
             	@click="openUpgradeModal"
             >
@@ -62,7 +64,7 @@
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
                     <a
-                        :href="isReleased && renderLink  && !forceNoLinks ? item.url : null"
+                        :href="isReleased && renderLink  && !forceNoLinks ? itemUrl : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1"
                         @click="openUpgradeModal"
                     >
@@ -149,7 +151,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -300,6 +302,11 @@ const duration = computed( () => {
     let seconds = time - minutes * 60;
     time = time - hours * 3600;
     return `${hours ? `${hours}:` : ''}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+})
+
+//Because there are different props for the same thing......
+const itemUrl = computed( ()=> {
+    return props.item.web_url_path ? props.item.web_url_path : props.item.url;
 })
 
 const enrollmentOpen = computed(() => {

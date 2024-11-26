@@ -284,7 +284,7 @@ class PlaylistsService
 
             $playlists[$index]['description'] = $playlist['description'] ?? '';
             $playlists[$index]['total_items'] = count($playlist['items'] ?? []);
-            $playlists[$index]['thumbnail_url'] = $playlists[$index]['thumbnail_url'] ?? $playlists[$index]['first_item_thumbnail_url'];
+            $playlists[$index]['thumbnail_url'] = $playlists[$index]['thumbnail_url'] ?? $playlists[$index]['first_item_thumbnail_url'] ?? '';
             $playlists[$index]['pinned'] = $pinned;
             $playlists[$index]['is_my_playlist'] = $playlists[$index]['user_id'] == user()->id;
         }
