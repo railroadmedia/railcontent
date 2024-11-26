@@ -128,13 +128,13 @@
 <script>
 import { Duration } from 'luxon';
 import { bgColor, textColor } from "@constants/brands";
-import { getProgressPercentage } from 'musora-content-services';
 import ContentService from '../../assets/js/Services/content';
 import Utils from '../../assets/js/classes/utils';
 import Intercom from "../../assets/js/Services/intercom"
 import Helpscout from "../../assets/js/Services/helpscout"
 import SoundSlice from '@collections/SoundSlice/SoundSlice.vue'
 import SoundSliceControls from '@collections/SoundSlice/SoundSliceControls.vue';
+import { getProgressPercentage, assignmentStatusCompleted, assignmentStatusReset } from 'musora-content-services';
 
 export default {
     name: 'ContentAssignment',
@@ -352,10 +352,12 @@ export default {
     beforeMount() {
         //Get completed state
         getProgressPercentage(this.id).then( value => {
-            this.isComplete = value;
+            this.isComplete = value === 100;
         }).catch( error => {
             console.log('error getting assignment progress', error)
         })
+
+        console.log('this.isComplete', this.isComplete)
     },
     methods: {
         addToPlaylist(data) {
@@ -438,7 +440,7 @@ export default {
 
                             window.recalculateProgress(false, false, this.themeColor);
 
-                            ContentService.resetContentProgress(vm.id)
+                            assignmentStatusReset(this.id, this.lessonId)
                                 .then((resolved) => {
                                     if (resolved) {
                                         element.classList.add('remove-request-complete');
@@ -467,7 +469,8 @@ export default {
 
                 window.recalculateProgress(true, false, this.themeColor);
 
-                ContentService.markContentAsComplete(vm.id)
+                
+                assignmentStatusCompleted(this.id, this.lessonId)
                     .then((resolved) => {
                         if (resolved) {
                             element.classList.add('add-request-complete');

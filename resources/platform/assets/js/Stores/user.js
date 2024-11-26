@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { updateUserProfile, updateLoginEmail, updateLoginPassword, updateUserSignature } from '@services/userService';
+import { updateUserProfile, updateLoginEmail, updateLoginPassword, updateUserSignature } from '../Services/userService';
 
 export const useUserStore = defineStore({
   id: 'User',
