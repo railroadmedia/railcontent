@@ -20,53 +20,54 @@
         "cartVersion" => true
     ])
 
-    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top" style="background-color:#000; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp); height:100vh;">
-        <div class="container mx-auto max-w-3xl rounded-xl py-10" style="background: linear-gradient(180deg, rgba(16, 43, 70, 0.75) 0%, rgba(13, 24, 42, 0.75) 100%); border: 1px solid #37597F; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
-            <div class="flex flex-wrap items-center">
-                <div class="text-white rounded-lg shadow-lg mx-auto text-center">
+    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top min-h-screen" 
+        style="background-color: #000; background-image: url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp); min-height: calc(100vh - 214px);">
+        <div class="container mx-auto max-w-4xl rounded-xl px-6 py-16" 
+            style="background: linear-gradient(180deg, #102B46 0%, #0D182A 100%); border: 2px solid #37597F; box-shadow: 0 0 60px 0px #26344B;">
+            <div class="flex flex-col items-center">
+                <div class="text-white rounded-lg shadow-lg text-center">
                     <div class="mb-6">
-                        <img src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" alt="Drumeo Awards" class="mx-auto h-24">
+                        <img src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" 
+                            alt="Drumeo Awards" class="mx-auto h-24 md:h-28">
                     </div>
 
-                    <h1 class="text-2xl md:text-4xl font-extrabold mb-2">The Countdown to Voting is On!</h1>
-                    <p class="text-sm md:text-lg font-medium mb-8">Voting opens @ 12:00 AM Dec 16th.</p>
+                    <h1 class="text-2xl md:text-4xl font-extrabold mb-2 leading-tight">The Countdown to <br class="md:hidden">Voting is On!</h1>
+                    <p class="text-sm md:text-2xl font-medium mb-8">Voting opens @ 12:00 AM Dec 16th.</p>
 
-                   <div class="grid grid-cols-4 gap-2 sm:gap-4 justify-center items-center mx-auto" x-data="timer()" x-init="countdown()">
-                        <div class="text-center">
-                            <div class="border md:border-2 border-white rounded-lg p-2 md:p-4">
-                                <div class="text-base md:text-6xl font-bold" x-text="day">00</div>
+                   <div class="flex flex-row justify-center gap-2 sm:gap-4 sm:gap-6" x-data="timer()" x-init="countdown()" x-cloak>
+                        <div class="text-center" x-cloak x-show="timeLeft > 0">
+                            <div class="border border-white rounded-lg p-4 sm:p-6 min-w-[64px] sm:min-w-[80px]">
+                                <div class="text-xl sm:text-3xl md:text-5xl font-black" x-text="String(day).padStart(2, '0')">00</div>
                             </div>
-                            <div class="text-xs md:text-sm mt-2">Days</div>
+                            <div class="text-xs sm:text-sm mt-2">Days</div>
                         </div>
-                        <div class="text-center">
-                            <div class="border md:border-2 border-white rounded-lg p-2 md:p-4">
-                                <div class="text-base sm:text-2xl md:text-6xl font-bold" x-text="hour">00</div>
+                        <div class="text-center" x-cloak x-show="timeLeft > 0">
+                            <div class="border border-white rounded-lg p-4 sm:p-6 min-w-[64px] sm:min-w-[80px]">
+                                <div class="text-xl sm:text-3xl md:text-5xl font-black" x-text="String(hour).padStart(2, '0')">00</div>
                             </div>
-                            <div class="text-xs md:text-sm mt-2">Hours</div>
+                            <div class="text-xs sm:text-sm mt-2">Hours</div>
                         </div>
-                        <div class="text-center">
-                            <div class="border md:border-2 border-white rounded-lg p-2 md:p-4">
-                                <div class="text-base sm:text-2xl md:text-6xl font-bold" x-text="minute">00</div>
+                        <div class="text-center" x-cloak x-show="timeLeft > 0">
+                            <div class="border border-white rounded-lg p-4 sm:p-6 min-w-[64px] sm:min-w-[80px]">
+                                <div class="text-xl sm:text-3xl md:text-5xl font-black" x-text="String(minute).padStart(2, '0')">00</div>
                             </div>
-                            <div class="text-xs md:text-sm mt-2">Minutes</div>
+                            <div class="text-xs sm:text-sm mt-2">Minutes</div>
                         </div>
-                        <div class="text-center">
-                            <div class="border md:border-2 border-white rounded-lg p-2 md:p-4">
-                                <div class="text-base sm:text-2xl md:text-6xl font-bold" x-text="second">00</div>
+                        <div class="text-center" x-cloak x-show="timeLeft > 0">
+                            <div class="border border-white rounded-lg p-4 sm:p-6 min-w-[64px] sm:min-w-[80px]">
+                                <div class="text-xl sm:text-3xl md:text-5xl font-black" x-text="String(second).padStart(2, '0')">00</div>
                             </div>
-                            <div class="text-xs md:text-sm mt-2">Seconds</div>
+                            <p class="text-xs sm:text-sm mt-2">Seconds</p>
                         </div>
-                        <div class="mt-4 text-sm text-white font-medium" x-cloak x-show="timeLeft < 0">Voting is now open!</div>
+                         <div class="mt-6 text-sm text-white font-black" x-cloak x-show="timeLeft < 0">
+                            Voting is now open!
+                        </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
     </main>
-
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-12-12 12:00:00',
-        'promoVersion' => true
-    ])
 
     @include('drumeo.sales.partials._footer', [
         'minimal' => true,
