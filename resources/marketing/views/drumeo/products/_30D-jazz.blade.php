@@ -635,7 +635,6 @@
                         @include('drumeo.products.partials._order-card', [
                             'badge' => 'Launch Special',
                             'header' => '30-Day Jazz',
-                            'subheader' => 'Course Only | Lifetime Access',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
                             'imageHeight' => 'h-32 md:h-40 lg:h-44',
                             'fullPrice' => "$".floatval($productPrices['30-day-jazz']->price),
