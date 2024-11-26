@@ -144,8 +144,8 @@
                         report-recipient="support+question-and-answer@drumeo.com"
                         :is-completed="isCompleted"
 
-                        :show-add-to-list="videoResources.showAddToList"
-                        :show-info-button="videoResources.showInfoButton"
+                        :show-add-to-list="true"
+                        :show-info-button="showInfoButton"
                         :is-added="videoResources.isAdded"
 
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
@@ -245,7 +245,7 @@
                             :brand="brand"
                             :user-id="userId"
                             :is-admin="isAdmin"
-                            :content-id="videoData?.id"
+                            :content-id="videoData?.railcontent_id"
                             :user-name="userDisplayName"
                             :user-avatar="userProfilePictureUrl"
                             :user-xp="userXP"
@@ -317,13 +317,13 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import { 
-    fetchLessonContent, 
-    fetchRelatedLessons, 
-    fetchNextPreviousLesson, 
-    isContentLiked, 
-    fetchChallengeLessonData, 
-    getProgressPercentage, 
+import {
+    fetchLessonContent,
+    fetchRelatedLessons,
+    fetchNextPreviousLesson,
+    isContentLiked,
+    fetchChallengeLessonData,
+    getProgressPercentage,
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
@@ -396,6 +396,10 @@ const state = reactive({
 
 const showPracticeButton = computed(() => {
     return !!videoData.value?.soundslice_slug;
+});
+
+const showInfoButton = computed(() => {
+    return videoData.value?.instructor?.length > 0 || videoData.value?.description?.length > 0  || videoData.value?.chapters?.length > 0;
 });
 
 //Methods
@@ -609,17 +613,18 @@ const fetchLessonData = async () => {
 
         // Process results
         const [
-            dataResult, 
-            likeResult, 
-            likedResult, 
-            completedResult, 
-            nextPrevResult, 
+            dataResult,
+            likeResult,
+            likedResult,
+            completedResult,
+            nextPrevResult,
             relatedLessonsResult,
             progressResult
         ] = results;
 
         // Check each result individually and update state accordingly
         videoData.value = dataResult.status === 'fulfilled' ? dataResult.value : null;
+        console.log('video data value', videoData.value)
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         isCompleted.value = completedResult.status === 'fulfilled' && completedResult.value.data[contentId.value]?.state === 'completed';
