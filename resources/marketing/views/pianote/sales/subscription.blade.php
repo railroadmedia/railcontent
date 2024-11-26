@@ -357,7 +357,7 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-
+   
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
             'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/BF-header-banner.webp')",
@@ -367,40 +367,8 @@
             'vimeo' => '885338636',
             'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
         ])
-
         <div class="sticky-trigger block"></div>
-        <a href="#customize-anchor"
-            class="promo-banner anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] -mt-12 transition-none"
-            style="background: #FFAC00;">
-
-            <div x-data="timer()" x-init="countdown()"
-                {{--                x-cloak x-show="day < 2"--}}
-            >
-                <div class="inline-flex flex-wrap mx-auto justify-center items-center">
-                    <p class="leading-none m-0 font-black"><strong>DEALS END IN:</strong></p>
-                    <div class="h-8 mx-2 bg-black" style="width:2px;"></div>
-                    <div class="flex text-center">
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="day">00</div>
-                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="hour">00</div>
-                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="minute">00</div>
-                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
-                        </div>
-                        <div x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="second">00</div>
-                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>
-                        </div>
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
-                    </div>
-                </div>
-            </div>
-        </a>
+        
     @endif
 
     @hasSection('top-bar')
@@ -504,7 +472,6 @@
         @endif
     @endif
 
-
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
@@ -585,7 +552,10 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @include('drumeo._partials.countdown-bundle-2024')
+        @include('_partials.components.shop.promo-banner-3', [
+            "name" => "Pianote Deal",
+            "noBreadcrumb" => true,
+        ])
         @php
             $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
         @endphp
@@ -672,22 +642,39 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
-    <script type="application/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var stickyBar = document.querySelector('.promo-banner');
-            window.addEventListener('scroll', function () {
-                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-                if (window.scrollY > (unstickTrigger - 115)) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < stickTrigger - 115) {
-                    stickyBar.classList.remove('fixed', 'mt-0');
-                }
-                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-                    stickyBar.classList.add('fixed', 'mt-0');
-                }
-            });
-        });
-    </script>
+   <script type="application/javascript">
+   document.addEventListener('DOMContentLoaded', function () {
+    var stickyBar = document.querySelector('.promo-banner');
+    
+    stickyBar.style.display = 'none';
+    stickyBar.style.opacity = '0';
+    
+    window.addEventListener('scroll', function () {
+        var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+        var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+        
+        if (window.scrollY > (unstickTrigger - 115)) {
+            stickyBar.classList.remove('fixed', 'mt-0');
+            stickyBar.style.display = 'flex';
+            setTimeout(() => {
+                stickyBar.style.opacity = '1';
+            }, 10);
+        }
+        else if (window.scrollY < stickTrigger - 115) {
+            stickyBar.classList.remove('fixed', 'mt-0');
+            stickyBar.style.opacity = '0';
+            setTimeout(() => {
+                stickyBar.style.display = 'none';
+            }, 300);
+        }
+        else if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+            stickyBar.classList.add('fixed', 'mt-0');
+            stickyBar.style.display = 'flex';
+            setTimeout(() => {
+                stickyBar.style.opacity = '1';
+            }, 10);
+        }
+    });
+});
+</script>
 @stop
