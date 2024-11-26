@@ -227,7 +227,7 @@
                     ])
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/prima",
-                         "price" => 1474,
+                         "price" => 1374,
                          "discounted_price" => 599,
                          "title" => "The Keyboard Bundle",
                          "instructor" => "Get the best beginner digital piano, Pianote Annual Membership, and 5 lifetime bonuses",
