@@ -355,7 +355,7 @@
             'text' => 'Save up to 91% on <br class="sm:hidden">drum lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
-            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true',
         ])
 
         <div class="sticky-trigger block"></div>
@@ -587,7 +587,7 @@
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
         'logoHeight' => 'h-16 sm:h-18',
         'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true',
         'belowButton' => true,
         'bundle' => 'deal',
         ])
