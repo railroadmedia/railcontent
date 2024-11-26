@@ -780,7 +780,6 @@
                         'specialText' => "One-time payment.",
                         'bonuses' => [
                             '<strong>1 Pair of EarDrum IEMs</strong>',
-                            '<strong>30 Days Of Drumeo</strong>',
                             'Single-layer Silicone Eartips (S/M/L)',
                             'Triple-layer Silicone Eartips (S/M/L)',
                             'Memory Foam Eartips (S/M/L)',

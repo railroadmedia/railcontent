@@ -2265,9 +2265,9 @@
                         <p class="text-sm mt-2 mb-5">Last Chance Ever (SAVE 25%)</p>
                         <h2 class="inline-block"><s class="opacity-60">$79</s> <strong class="text-4xl">${{ floatval($productPrices['practicepad']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                         <div class="join blue smaller my-4">ORDER NOW</div>
-                        <ul class="list-disc ml-10">
+                        {{-- <ul class="list-disc ml-10">
                             <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-month Drumeo Access</li>
-                        </ul>
+                        </ul> --}}
                         <hr class="w-full my-5" style="border-color:#b2cae1">
 
                         <p class="leading-loose text-sm"><strong>Key Features</strong><br>
@@ -2321,5 +2321,5 @@
             </div>
         </div>
     </section>
-    @include("drumeo.sales.partials._footer")
+    {{-- @include("drumeo.sales.partials._footer") --}}
 @stop
