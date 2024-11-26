@@ -195,7 +195,7 @@ onMounted(() => {
 <style scoped>
     @font-face {
         font-family: 'myfont';
-        src: url('https://musora-web-platform.s3.us-east-1.amazonaws.com/challenges/Meloday.ttf');
+        src: url('https://d3fzm1tzeyr5n3.cloudfront.net/challenges/Meloday.ttf');
     }
 
     .userName {
