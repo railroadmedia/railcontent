@@ -611,25 +611,25 @@
                             '6.3mm stereo adapter',
                         ],
                     ])
-                    @include('drumeo.products.partials._order-card', [
-                       'firstOnMobile' => true,
-                       'highlightBorder' => true,
-                       'badge' => 'LAUNCH SPECIAL',
-                       'header' => 'Headphones + 1 Year<br>Pianote Membership',
-                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
-                       'imageHeight' => 'h-28 lg:h-32',
-                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                       'specialText' => 'With Annual Membership of $240/yr',
-                       'cta' => 'SELECT',
-                       'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
-                       'bonuses' => [
-                           '<strong>Everything included with the<br>Headphones PLUS:</strong>',
-                           'Step-by-Step Lessons',
-                           'Personalized Support',
-                           'Song Tutorials',
-                           'World-Class Instructors',
-                       ],
-                   ])
+{{--                    @include('drumeo.products.partials._order-card', [--}}
+{{--                       'firstOnMobile' => true,--}}
+{{--                       'highlightBorder' => true,--}}
+{{--                       'badge' => 'LAUNCH SPECIAL',--}}
+{{--                       'header' => 'Headphones + 1 Year<br>Pianote Membership',--}}
+{{--                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',--}}
+{{--                       'imageHeight' => 'h-28 lg:h-32',--}}
+{{--                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',--}}
+{{--                       'specialText' => 'With Annual Membership of $240/yr',--}}
+{{--                       'cta' => 'SELECT',--}}
+{{--                       'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',--}}
+{{--                       'bonuses' => [--}}
+{{--                           '<strong>Everything included with the<br>Headphones PLUS:</strong>',--}}
+{{--                           'Step-by-Step Lessons',--}}
+{{--                           'Personalized Support',--}}
+{{--                           'Song Tutorials',--}}
+{{--                           'World-Class Instructors',--}}
+{{--                       ],--}}
+{{--                   ])--}}
                 </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>

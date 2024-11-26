@@ -61,7 +61,7 @@
         else {
             $stock = 0;
         }
-        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true';
+        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true';
     @endphp
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[640px] md:h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-bg.webp') no-repeat center center; background-size: cover;">

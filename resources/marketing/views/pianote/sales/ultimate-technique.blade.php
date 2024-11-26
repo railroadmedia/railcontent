@@ -211,10 +211,10 @@
         ])
     @endif
 
-    @php
-        $buttonLink =
-            '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-technique-made-easy]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order&locked=true&promo-code=ultimate-technique';
-    @endphp
+{{--    @php--}}
+{{--        $buttonLink =--}}
+{{--            '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-technique-made-easy]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order&locked=true&promo-code=ultimate-technique';--}}
+{{--    @endphp--}}
 
     <section
         class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden"
@@ -270,10 +270,10 @@
                         </h2>
                         <p><em class="text-sm">For your first year then $240/yr.</em></p>
                     </div>
-                    <a class="join smaller my-4 md:my-5 w-full md:w-10/12 lg:w-11/12 md:max-w-lg" style="padding: 18px 10px;"
-                            href="{{ $buttonLink }}">
-                            CLAIM YOUR OFFER
-                        </a>
+{{--                    <a class="join smaller my-4 md:my-5 w-full md:w-10/12 lg:w-11/12 md:max-w-lg" style="padding: 18px 10px;"--}}
+{{--                            href="{{ $buttonLink }}">--}}
+{{--                            CLAIM YOUR OFFER--}}
+{{--                        </a>--}}
                         <p class="text-sm"><em>Money-back 90-day guarantee.</em></p>
                 </div>
             </div>
@@ -444,10 +444,10 @@
                     But this offer is only available
                     until June 10th. </strong><br>
             So click below and keep your progress going!</h6>
-            <a class="join smaller my-4 md:my-5 w-full sm:max-w-xs md:w-1/2 md:max-w-lg lg:max-w-3xl" style="padding: 16px 10px;"
-                    href="{{ $buttonLink }}">
-                    CLAIM YOUR OFFER
-                </a>
+{{--            <a class="join smaller my-4 md:my-5 w-full sm:max-w-xs md:w-1/2 md:max-w-lg lg:max-w-3xl" style="padding: 16px 10px;"--}}
+{{--                    href="{{ $buttonLink }}">--}}
+{{--                    CLAIM YOUR OFFER--}}
+{{--                </a>--}}
         </div>
     </section>
 
@@ -550,10 +550,10 @@
                         </div>
                     </section>
 
-                    <a class="join mb-6 md:mb-8 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 16px 10px;"
-                        href="{{ $buttonLink }}">
-                        CLAIM YOUR OFFER
-                    </a>
+{{--                    <a class="join mb-6 md:mb-8 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 16px 10px;"--}}
+{{--                        href="{{ $buttonLink }}">--}}
+{{--                        CLAIM YOUR OFFER--}}
+{{--                    </a>--}}
                     <h5 class="text-musora mb-6 md:mb-8"><em><strong>PLUS get these special bonuses when you join today.</strong></em></h5>
                 </div>
                 <div style="font-size:0px">
@@ -692,10 +692,10 @@
                     <strong>$143</strong> <span class="text-musora">(Save 65%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join mb-2 w-full sm:max-w-xs md:max-w-lg" style="padding: 16px 10px;"
-                    href="{{ $buttonLink }}">
-                    CLAIM YOUR OFFER
-                </a>
+{{--                <a class="join mb-2 w-full sm:max-w-xs md:max-w-lg" style="padding: 16px 10px;"--}}
+{{--                    href="{{ $buttonLink }}">--}}
+{{--                    CLAIM YOUR OFFER--}}
+{{--                </a>--}}
                 <br>
                 <a class="inline-block opacity-70 mt-1"
                     href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&amp;redirect=%2Forder">

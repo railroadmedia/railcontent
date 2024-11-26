@@ -101,7 +101,7 @@
                     <strong>$180</strong> <span class="text-musora">(Save 25%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&redirect=/order&locked=true&promo-code=welcome-offer">GET STARTED &raquo;</a>
+{{--                <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&redirect=/order&locked=true&promo-code=welcome-offer">GET STARTED &raquo;</a>--}}
             </div>
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>

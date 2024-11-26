@@ -345,8 +345,9 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "Will it ship internationally?",
-                "desc" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
+                "desc" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart.",
                 ])
+{{--                You can also grab the QuietKick by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>--}}
             </div>
         </div>
     </section>
