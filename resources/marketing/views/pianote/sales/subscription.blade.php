@@ -367,8 +367,13 @@
             'vimeo' => '885338636',
             'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024&locked=true',
         ])
+        
         <div class="sticky-trigger block"></div>
-
+        <div href="#customize-anchor"
+            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
+            style="background:linear-gradient(to bottom, #020306, #4d050d);">
+            @include('drumeo._partials.countdown-homepage-2024')
+        </div>
     @endif
 
     @hasSection('top-bar')
@@ -552,10 +557,16 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @include('_partials.components.shop.promo-banner-3', [
-            "name" => "Pianote Deal",
-            "noBreadcrumb" => true,
-        ])
+        <a class="text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] transition-none"
+        @if($theme === 'pianote')
+            style="background:linear-gradient(to bottom, #020306, #4d050d);"
+            href="/shop/"
+        @else
+            style="background:linear-gradient(to bottom, #020306, #042c52);"
+            href="/drumshop/"
+        @endif>
+            @include('drumeo._partials.countdown-homepage-2024')
+        </a>
         @php
             $targetSkus = ['new-piano-players-start-here', 'easy-chords', '30-day-blues-piano', '30-days-to-better-technique', 'classical-piano-collection'];
         @endphp
@@ -641,40 +652,25 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    @yield('scripts')
-   <script type="application/javascript">
-   document.addEventListener('DOMContentLoaded', function () {
-    var stickyBar = document.querySelector('.promo-banner');
-
-    stickyBar.style.display = 'none';
-    stickyBar.style.opacity = '0';
-
-    window.addEventListener('scroll', function () {
-        var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-        var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-
-        if (window.scrollY > (unstickTrigger - 115)) {
-            stickyBar.classList.remove('fixed', 'mt-0');
-            stickyBar.style.display = 'flex';
-            setTimeout(() => {
-                stickyBar.style.opacity = '1';
-            }, 10);
-        }
-        else if (window.scrollY < stickTrigger - 115) {
-            stickyBar.classList.remove('fixed', 'mt-0');
-            stickyBar.style.opacity = '0';
-            setTimeout(() => {
-                stickyBar.style.display = 'none';
-            }, 300);
-        }
-        else if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-            stickyBar.classList.add('fixed', 'mt-0');
-            stickyBar.style.display = 'flex';
-            setTimeout(() => {
-                stickyBar.style.opacity = '1';
-            }, 10);
-        }
-    });
-});
-</script>
+    @yield('scripts')   
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            if (!stickyBar) return;
+    
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @stop
