@@ -70,6 +70,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     mutations: [{ patch: { id: documentId, set: updates } }],
                 };
                 const response = await mutate(mutations);
+                console.log('rox mutation mutate response ::::: ', response);
                 if (response?.results) {
                     console.log(`Successfully updated child document with _id: ${documentId}`);
                 } else {
@@ -154,17 +155,27 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     patch.execute([{ set: { railcontent_id: data.id, web_url_path: data.web_url_path, assignment: data.assignment } }]);
 
                     if (data.childrens) {
+                        console.log('rox need to update child doc ::: roxana actions.js  ++++++++++++++++  ', data.childrens);
                         for (const child of data.childrens) {
-                            const parentData = JSON.parse(child.parent_content_data)[0];
-                            const updates = {
-                                parent_content_data: [{
-                                    slug: parentData.slug,
-                                    type: parentData.type,
-                                    id: parentData.id,
-                                    _key: randomKey(),
-                                }],
+                            console.log('rox need to update child   in for  ::: ', child);
+                            let updates = {
                                 web_url_path: child.web_url_path
                             };
+                            if (child.parent_content_data) {
+                                const parentData = JSON.parse(child.parent_content_data)[0];
+                                updates = {
+                                    ...updates,
+                                    parent_content_data: [
+                                        {
+                                            slug: parentData.slug,
+                                            type: parentData.type,
+                                            id: parentData.id,
+                                            _key: randomKey(),
+                                        }
+                                    ]
+                                };
+                            }
+                            console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates);
                             await patchChildDocument(child.id, updates, childrenArray);
                         }
                     }
