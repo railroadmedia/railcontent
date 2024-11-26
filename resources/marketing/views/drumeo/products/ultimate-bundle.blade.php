@@ -43,6 +43,8 @@
         else {
             $stock = 0;
         }
+
+          $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ultimate-drumeo-bundle]=1&promo-code=ultimate-drumeo-bundle&locked=true';
     @endphp
     @include('_partials.components.shop.promo-banner-2', [
         "name" => "Ultimate Bundle",
@@ -75,9 +77,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00] text-xl md:text-3xl">(Save 54%)</span></h2>
                     @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
+                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal &raquo;</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
 {{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 100 available.</em></p>--}}
                     </div>
@@ -101,6 +103,7 @@
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
                 'freeShipping' => true,
+            'getDealUrl' => $orderUrl,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
@@ -133,7 +136,7 @@
             'DLM-1-year', '30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops', 'drumeo-eardrums', 'headphones', 'Drumeo-VaterSticks-2'
             ];
         @endphp
-        
+
         <div id="customize-anchor"></div>
         @include('drumeo._partials.bf-order-section-bonuses', [
             'maxWidth' => 'max-w-4xl',
@@ -158,7 +161,7 @@
                         WORLD-CLASS TEACHERS
                     </span>
                 </div>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-ultimate-drumeo-bundle]=1&promo-code=ultimate-drumeo-bundle&locked=true',
+            'buttonLink' => $orderUrl,
             'bundle' => 'ultimate',
         ])
     </div>

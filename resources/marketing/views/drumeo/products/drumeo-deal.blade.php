@@ -61,6 +61,7 @@
         else {
             $stock = 0;
         }
+        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true';
     @endphp
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[640px] md:h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-bg.webp') no-repeat center center; background-size: cover;">
@@ -87,9 +88,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-xl md:text-3xl">(Save 42%)</span></h2>
                     @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
                     </div>
                 </div>
@@ -111,6 +112,7 @@
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             'case' => 'deal',
+            'getDealUrl' => $orderUrl,
             ])
         </div>
     </section>
@@ -135,7 +137,7 @@
             'logoHeight' => 'h-14 sm:h-18 md:h-24',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024&locked=true',
+            'buttonLink' => $orderUrl,
             'bundle'=> 'deal',
             ])
     </div>
