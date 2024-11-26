@@ -121,6 +121,14 @@
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/lifetime-deal-m.webp');"></div>
                         </div>
                     </a>
+                    <div class="w-full p-2">
+                            <div class="flex flex-wrap sm:flex-nowrap items-center space-around border border-gray-300 px-4 sm:px-7 lg:px-6 py-4 sm:py-5 rounded-lg inline-block mx-auto"
+                                style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
+                                <p class="leading-normal flex-shrink-0 text-center pr-4 mb-3 sm:mb-0"><i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL BLACK FRIDAY BUNDLES<i class="fas fa-sparkle ml-3 inline lg:hidden"></i><br class="lg:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3 hidden lg:inline"></i></p>
+                                <p class="leading-normal text-sm text-center sm:text-left max-w-lg">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide.
+                                You won’t be able to add or remove items for any featured bundle.</p>
+                            </div>
+                    </div>
                     <div class="w-full">
                         @include('_partials.layout.holiday.bundle-tiles')
                     </div>
@@ -231,13 +239,6 @@
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
                          'soldOut' => false,
                     ])
-                </div>
-                <div class="text-center">
-                    <p class="leading-normal border border-gray-300 px-2 sm:px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-                        <i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL BLACK FRIDAY BUNDLES<br class="sm:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3"></i><br>
-                        <span class="text-sm">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide. <br class="hidden sm:inline">
-                        You won’t be able to add or remove items for any featured bundle.</span>
-                    </p>
                 </div>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
