@@ -237,10 +237,10 @@
                     ])
                 </div>
                 <div class="text-center">
-                    <p class="leading-tight border border-gray-300 px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-                        <i class="fas fa-sparkle mr-3"></i>
-                        <strong class="font-black">All Black Friday Bundles =</strong> <i class="fas fa-sparkle lg:hidden ml-3"></i><br class="lg:hidden"> FREE SHIPPING to USA/CANADA and Discounted Shipping Worldwide.
-                        <i class="fas fa-sparkle hidden lg:inline lg:ml-3"></i>
+                    <p class="leading-normal border border-gray-300 px-2 sm:px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
+                        <i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL BLACK FRIDAY BUNDLES<br class="sm:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3"></i><br>
+                        <span class="text-sm">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide. <br class="hidden sm:inline">
+                        You won’t be able to add or remove items for any featured bundle.</span>
                     </p>
                 </div>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
