@@ -51,9 +51,6 @@
 
                 <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                     <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                        @if(!empty($hasProduct) && $hasProduct == 'true')
-                            <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
-                        @else
                             {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
                             <a href="#final" class="join smaller w-full anchor-slide">LEARN MORE &raquo;</a>
                             <a href="https://www.musora.com/pianote/enrollment/30-day-jazz-piano">
@@ -61,7 +58,6 @@
                                     Registration is FREE for Pianote Members.
                                 </p>
                             </a>
-                        @endif
                     </div>
                     <div class="w-full sm:w-1/2 lg:pb-5">
                         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -210,11 +206,7 @@
             </h4>
         </div>
 
-        @if(!empty($hasProduct) && $hasProduct == 'true')
-            <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">YOU'RE ENROLLED!</a><br>
-        @else
             <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">LEARN MORE &raquo;</a><br>
-        @endif
         <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
             onload="this.classList.remove('opacity-0')"
             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-jazz-piano/review.webp"
