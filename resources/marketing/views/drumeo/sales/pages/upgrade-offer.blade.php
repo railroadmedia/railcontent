@@ -62,7 +62,19 @@
                     </div>
                     <div class="w-full sm:w-1/3 px-2">
                         <h5 class="text-drumeo border-drumeo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
-                        <h6 class="leading-normal">Change your mind?<br> Get a refund. <a class="tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></a></h6>
+                        <h6 class="leading-normal relative">
+                            Change your mind?<br> Get a refund.
+                            <div class="ml-2 inline-block cursor-pointer group" aria-label="Refund Information">
+                                <i class="fas fa-info-circle"></i>
+                                <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full hidden group-hover:block transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:max-h-[1000px] max-h-0"
+                                    style="    top: 0;">
+                                    <div class="absolute left-1/2 transform -translate-x-1/2 bottom-[-14px] border-[7px] border-transparent border-t-white"></div>
+                                    <div class="p-2 text-xs text-black bg-white rounded-lg shadow-xl" style="    width: 200px;">
+                                        If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)
+                                    </div>
+                                </div>
+                            </div>
+                        </h6>
                     </div>
                 </div>
             </div>
