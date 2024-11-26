@@ -86,22 +86,22 @@
                     'slug' => '/drumshop/kit',
                     'full' => true,
                     'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/ekit-bundle-full.webp',
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle-full-m.webp',
                 ],
                     [
                         'slug' => '/drumshop/practice-bundle',
                     'full' => true,
                         'visible' => 1,
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle-full.webp',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle-full-m2.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/practice-full-bundle.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/practice-bundle-full-m.webp',
                     ],
                     [
                         'slug' => '/drumshop/ultimate-bundle',
                     'full' => true,
                         'visible' => 1,
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full.webp',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle-full-m2.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/ultimate-full-bundle.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/ultimate-bundle-full-m.webp',
                     ],
             ];
         @endphp

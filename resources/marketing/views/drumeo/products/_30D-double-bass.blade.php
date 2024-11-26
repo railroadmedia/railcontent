@@ -640,8 +640,7 @@
                     <div class="flex flex-wrap items-start justify-center mx-auto mt-6 sm:mt-10">
                         @include('drumeo.products.partials._order-card', [
                             'threeWide' => true,
-                            'header' => 'Course<br> Only',
-                            'subheader' => '30-Day Double Bass<br> + Free Bonus Worth $30',
+                            'header' => '30-Day Double Bass',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-double-bass/course-no-pedal.png',
                             'imageHeight' => 'h-32 md:h-40',
                             'fullPrice' => "$".floatval($productPrices['30-day-jazz']->price),
@@ -649,10 +648,6 @@
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
                             'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1',
-                            'bonuses' => [
-                                '<strong>30-Day Double Bass</strong>',
-                                '<strong>FREE</strong> 1-month Drumeo Access',
-                            ],
                         ])
 {{--                        @include('drumeo.products.partials._order-card', [--}}
 {{--                            'threeWide' => true,--}}

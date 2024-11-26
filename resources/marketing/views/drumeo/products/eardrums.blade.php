@@ -721,24 +721,24 @@
             </div>
         </div>
     </section>
-    <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">
-        <div class="container mx-auto max-w-3xl">
-            <div class="flex flex-wrap sm:flex-nowrap">
-                <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-14 mb-7 sm:mb-0 sm:order-1">
-                    <img class="h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drumeo-icon.svg">
-                    <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>
-                    <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.
-                        <br><br>
-                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
-                    </p>
-                </div>
-                <picture class="w-full sm:w-auto h-auto sm:h-96">
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
-                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
-                </picture>
-            </div>
-        </div>
-    </section>
+{{--    <section class="pt-10 sm:px-6 sm:py-16 lg:py-20">--}}
+{{--        <div class="container mx-auto max-w-3xl">--}}
+{{--            <div class="flex flex-wrap sm:flex-nowrap">--}}
+{{--                <div class="px-6 sm:pr-0 sm:pl-7 lg:pl-14 mb-7 sm:mb-0 sm:order-1">--}}
+{{--                    <img class="h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drumeo-icon.svg">--}}
+{{--                    <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>--}}
+{{--                    <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.--}}
+{{--                        <br><br>--}}
+{{--                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--                <picture class="w-full sm:w-auto h-auto sm:h-96">--}}
+{{--                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">--}}
+{{--                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">--}}
+{{--                </picture>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
@@ -775,7 +775,7 @@
                         'fullPrice' => '$' . floatval($productPrices['drumeo-eardrums-black']->price),
                         'price' => '$' . number_format(floatval($productPrices['drumeo-eardrums-black']->discounted_price), 2),
                         'specialText' => 'Just the IEMs',
-                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping',
+                        'link' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1',
                         'cta' => 'SELECT',
                         'specialText' => "One-time payment.",
                         'bonuses' => [

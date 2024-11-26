@@ -2006,7 +2006,8 @@
                         <br><br>
                         That means this is your <strong>last chance ever</strong> to grab the most popular practice pad in Drumeo history.
                         <br><br>
-                        You can grab it on its own and SAVE 25% or get yours FREE with 1 year of unlimited drum lessons.
+                        You can grab it on its own and SAVE 25%.
+{{--                        or get yours FREE with 1 year of unlimited drum lessons--}}
                         <br><br>
                         Scroll down to nab one of the last P4 Practice Pads.</p>
                     <a class="join smaller musora anchor-slide" href="#final">Click Here To Order &raquo;</a>

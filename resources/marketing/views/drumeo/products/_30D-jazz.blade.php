@@ -635,7 +635,6 @@
                         @include('drumeo.products.partials._order-card', [
                             'badge' => 'Launch Special',
                             'header' => '30-Day Jazz',
-                            'subheader' => 'Course Only | Lifetime Access',
                             'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-jazz/course-only.webp',
                             'imageHeight' => 'h-32 md:h-40 lg:h-44',
                             'fullPrice' => "$".floatval($productPrices['30-day-jazz']->price),
@@ -643,10 +642,6 @@
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
                             'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1',
-                            'bonuses' => [
-                                '<strong>30-Day Jazz</strong>',
-                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
-                            ],
                         ])
 {{--                        @include('drumeo.products.partials._order-card', [--}}
 {{--                            'highlightBorder' => true,--}}
