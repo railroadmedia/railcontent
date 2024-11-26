@@ -649,10 +649,6 @@
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
                             'link' => '/ecommerce/add-to-cart?products[30-day-double-bass]=1',
-                            'bonuses' => [
-                                '<strong>30-Day Double Bass</strong>',
-                                '<strong>FREE</strong> 1-month Drumeo Access',
-                            ],
                         ])
 {{--                        @include('drumeo.products.partials._order-card', [--}}
 {{--                            'threeWide' => true,--}}

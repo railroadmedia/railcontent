@@ -643,10 +643,6 @@
                             'specialText' => "One time payment.",
                             'cta' => 'GET STARTED',
                             'link' => '/ecommerce/add-to-cart?products[30-day-jazz]=1',
-                            'bonuses' => [
-                                '<strong>30-Day Jazz</strong>',
-                                '<strong class="text-drumeo">FREE</strong> 1-month Drumeo Access',
-                            ],
                         ])
 {{--                        @include('drumeo.products.partials._order-card', [--}}
 {{--                            'highlightBorder' => true,--}}
