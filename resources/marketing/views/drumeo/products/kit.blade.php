@@ -567,7 +567,7 @@
 
 
 @php
-    $videoTargetSkus = ['alesis-nitro-max-e-kit', 'DLM-1-year-kit', '30-day-drummer-4', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+    $videoTargetSkus = ['alesis-nitro-max-e-kit', 'DLM-1-year-kit', '30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
 @endphp
 <section class="pt-8 pb-16 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#F4F8FB]">
     <div class="container mx-auto max-w-5xl">
