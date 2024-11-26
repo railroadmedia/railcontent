@@ -464,17 +464,17 @@
             <div class="w-full">
                 <h1 class="rotater-text overflow-hidden">
                     <strong>
-                        <span>Learn Jazz Piano</span>
+                        <span>Learn the language of music</span>
                     </strong>
                 </h1>
-                <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">in just 30 days.</h2>
+                <h2 class="-mt-3 sm:-mt-1 lg:mt-0 mb-4">with daily guided workouts.</h2>
             </div>
 
             @php
             $checklist = [
                 'Learn By<br class="block md:hidden"> Doing',
                 'Play Every<br class="block md:hidden"> Day',
-                'Perfect For<br class="block md:hidden"> Beginners'
+                'No Theory<br class="block md:hidden"> Required'
             ];
             @endphp
             <div class="w-full flex flex-row justify-evenly md:justify-center items-center gap-4 lg:gap-10 lg:py-2">
@@ -491,7 +491,7 @@
             <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/evergreen/header-left-collage.webp"
                     alt="in just 30 days."
-                    class="h-56 lg:h-72"
+                    class="h-52 lg:h-64"
                     fetchpriority="high">
             </div>
 
@@ -534,11 +534,12 @@
         <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">
             <a href="#final" class="anchor-slide join bg-pianote medium w-full max-w-[350px] mb-3" role="button">Get started</a>
             <h5 class="leading-tight text-center">
-                <strong class="font-black">Only
-                    @if($price > $discountedPrice)
-                        <s class="opacity-60">${{ $price }}</s> ${{ $discountedPrice }} (SAVE {{ round(100 - (100 * ($discountedPrice / $price))) }}%)
-                    @else
-                        ${{ $discountedPrice }}
+                <strong class="font-black">
+                    @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
+                        <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        @else
+                        Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
                     @endif
                 </strong>
             </h5>
@@ -647,11 +648,8 @@
                         'position' => 'left',
                         'img' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/feature-05.webp',
-                        'title' => 'BONUS Companion Book to keep improving.',
-                        'desc' =>
-                            $earlyBirdEnd < Carbon\Carbon::now()
-                                ? 'Practice makes you better. So you’ll get a FREE 74-page Companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.'
-                                : 'Practice makes you better. So you’ll get a FREE 74-page Companion Book when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
+                        'title' => 'BONUS workbook to keep improving.',
+                        'desc' =>'Practice makes you better. So you’ll get a FREE 74-page Companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
                     ],
                 ];
             @endphp
@@ -690,7 +688,7 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: ##F1F7FE">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #F1F7FE">
         <div class="container max-w-4xl mx-auto">
             @php
                 $items = [
@@ -716,11 +714,20 @@
 
         {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10" @click="waitlistModal = true;">JOIN WAITLIST</span> --}}
 
-            <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle my-10 anchor-slide">ENROLL NOW</span>
-
+            <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle mt-10 mb-4 anchor-slide">ENROLL NOW</span>
+             <h5 class="leading-tight text-center">
+                <strong class="font-black">
+                    @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
+                        <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        @else
+                        Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
+                    @endif
+                </strong>
+            </h5>
     </section>
 
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
+    {{-- <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));">
     </div>
     <section class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
@@ -770,7 +777,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
@@ -931,7 +938,6 @@
                 alt="Read Music in 30 Days Trailer Thumbnail" class="w-full cursor-pointer autoplay-video"
                 x-on:click="trailer = true"
             >
-
         </div>
     </section>
 
@@ -1131,6 +1137,16 @@
         </div>
         <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle anchor-slide">ENROLL NOW</span>
+             <h5 class="leading-tight text-center mt-4">
+                <strong class="font-black">
+                    @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
+                        <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} (SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)                   
+                        @else
+                        Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
+                    @endif
+                </strong>
+            </h5>
             {{-- <div class="pt-4">
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -1190,7 +1206,7 @@
                     @php
                         $items = [
                             'Read music and play the songs you love.',
-                            '<span class="text-pianote">Bonus</span>  Companion PDF',
+                            '<span class="text-pianote">Bonus</span>  Companion Workbook',
                             'Choose your best option to get started.',
                         ];
                     @endphp
@@ -1213,7 +1229,12 @@
                     </div>
                     <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
                     <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
-                    <h2 class="inline-block"><strong class="text-4xl">$127</strong></h2>
+                    <h2 class="inline-block"><strong class="text-4xl"> @if($productPrices['read-music-in-30-days']->price > $productPrices['read-music-in-30-days']->discounted_price)
+                        <s class="opacity-60">${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}</s>
+                        ${{ number_format(floatval($productPrices['read-music-in-30-days']->discounted_price)) }} <span class="text-sm md:text-base">(SAVE {{ ceil(100 - (100 * ($productPrices['read-music-in-30-days']->discounted_price / $productPrices['read-music-in-30-days']->price))) }}%)</span>                  
+                        @else
+                        Only ${{ number_format(floatval($productPrices['read-music-in-30-days']->price)) }}
+                    @endif</strong></h2>
                     <p class="inline-block text-xs">one time payment.</p><br>
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
