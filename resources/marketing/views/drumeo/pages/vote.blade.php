@@ -1,15 +1,5 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Refresh" content="0; url='https://www.drumeo.com/beat/drumeo-awards-2023/'" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-</head>
-<body>
-</body>
-</html> --}}
-
 @extends('drumeo._partials.global-layout')
+
 @section('global-head')
     <title>Vote | Drumeo</title>
     <meta property="og:title" content="Vote | Drumeo">
@@ -30,7 +20,7 @@
         "cartVersion" => true
     ])
 
-    <main class="text-white py-8 sm:py-24 lg:py-28 px-4 bg-cover bg-top" style="background-color:#000; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp);">
+    <main class="text-white py-8 sm:py-24 lg:py-36 px-4 bg-cover bg-top" style="background-color:#000; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/countdown-bg.webp);">
         <div class="container mx-auto max-w-3xl rounded-xl py-10" style="background: linear-gradient(180deg, rgba(16, 43, 70, 0.75) 0%, rgba(13, 24, 42, 0.75) 100%); border: 1px solid #37597F; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
             <div class="flex flex-wrap items-center">
                 <div class="text-white rounded-lg shadow-lg mx-auto text-center">
