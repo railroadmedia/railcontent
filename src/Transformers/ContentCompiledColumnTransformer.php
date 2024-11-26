@@ -12,6 +12,7 @@ class ContentCompiledColumnTransformer
 {
     public static bool $useCompiledColumnForServingData = true;
     public static bool $avoidDuplicates = false;
+    private $userPermissionsCache = [];
 
 
     public function __construct(
@@ -42,13 +43,25 @@ class ContentCompiledColumnTransformer
 
 
         $contentIds = Arr::pluck($contentRows, 'id');
-        $contentPermissionRows = collect(
-            $this->contentPermissionRepository->getByContentIdsOrTypes(
-                $contentIds,
-                []));
+
+        $contentPermissionRows = collect();
+
+        foreach ($contentRows as $contentRow) {
+            $contentPermissionRows = $contentPermissionRows->merge($contentRow['permissions'] ?? []);
+        }
+
         $groupedPermissions = $contentPermissionRows->groupBy('content_id');
         $userExists = (user() ?? false);
-        $userPermissions = $userExists ? $this->userPermissionsRepository->getUserPermissions(user()->id, true) : [];
+
+        $userPermissions = [];
+
+        if (isset($this->userPermissionsCache[user()->id]) && $userExists) {
+            $userPermissions = $this->userPermissionsCache[user()->id];
+        } elseif ($userExists && !isset($this->userPermissionsCache[user()->id])) {
+            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+            $this->userPermissionsCache[user()->id] = $userPermissions;
+        }
+
         $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
         if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
