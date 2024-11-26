@@ -632,6 +632,8 @@ const fetchLessonData = async () => {
         relatedLessons.value = relatedLessonsResult.status === 'fulfilled' ? relatedLessonsResult.value.related_lessons : [];
         progress_percent.value = progressResult.status === 'fulfilled' ? progressResult.value : 0;
 
+        console.log('progress_percent', progress_percent.value)
+
         // Optional: log errors for any rejected promises
         results.forEach((result, index) => {
             if (result.status === 'rejected') {
