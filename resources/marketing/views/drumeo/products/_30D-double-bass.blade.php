@@ -57,9 +57,6 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full @if(empty($platformVersion)) md:w-1/2 @else sm:w-1/2 @endif text-center sm:pr-2">
-                            @if(!empty($hasProduct) && $hasProduct == 'true')
-                                <a class="join sold-out medium w-full anchor-slide">YOU'RE ENROLLED!</a>
-                            @else
 {{--                                <a x-on:click="waitlistModal = true;" class="join sold-out medium w-full">JOIN WAITLIST</a>--}}
                                 <a href="#final" class="join drumeo medium w-full anchor-slide">ENROLL NOW</a>
 {{--                                <a href="https://www.musora.com/drumeo/enrollment/30-day-double-bass">--}}
@@ -67,7 +64,6 @@
 {{--                                        Registration is FREE for Drumeo Members.--}}
 {{--                                    </p>--}}
 {{--                                </a>--}}
-                            @endif
                         </div>
 {{--                        <div class="w-full sm:w-1/2 lg:pb-5">--}}
 {{--                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
