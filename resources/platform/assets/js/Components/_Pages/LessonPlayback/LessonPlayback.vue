@@ -245,7 +245,7 @@
                             :brand="brand"
                             :user-id="userId"
                             :is-admin="isAdmin"
-                            :content-id="videoData?.id"
+                            :content-id="videoData?.railcontent_id"
                             :user-name="userDisplayName"
                             :user-avatar="userProfilePictureUrl"
                             :user-xp="userXP"
@@ -317,13 +317,13 @@ import VideoChapters from "@collections/VideoChapters/VideoChapters.vue";
 import MembershipUpgradeVideoCover from '@collections/MembershipUpgradeVideoCover/MembershipUpgradeVideoCover';
 import SoundSlice from "@collections/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
-import { 
-    fetchLessonContent, 
-    fetchRelatedLessons, 
-    fetchNextPreviousLesson, 
-    isContentLiked, 
-    fetchChallengeLessonData, 
-    getProgressPercentage, 
+import {
+    fetchLessonContent,
+    fetchRelatedLessons,
+    fetchNextPreviousLesson,
+    isContentLiked,
+    fetchChallengeLessonData,
+    getProgressPercentage,
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
 import ChallengeCompletionModal from '@collections/Modal/ChallengeCompletionModal';
@@ -609,11 +609,11 @@ const fetchLessonData = async () => {
 
         // Process results
         const [
-            dataResult, 
-            likeResult, 
-            likedResult, 
-            completedResult, 
-            nextPrevResult, 
+            dataResult,
+            likeResult,
+            likedResult,
+            completedResult,
+            nextPrevResult,
             relatedLessonsResult,
             progressResult
         ] = results;
