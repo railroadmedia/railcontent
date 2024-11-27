@@ -247,7 +247,7 @@
                     [
                     'video' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/prima/video-features/feature6.mp4',
                     'title' => 'Keep Perfect Time, Your Way',
-                    'desc' => 'With four distinct metronome sounds, the Prima helps you develop a strong sense of rhythm, a critical skill for every pianist.<br><br>Choose from different metronome sounds to keep your practice engaging and help you stay on beat, no matter what style of music you’re playing.',
+                    'desc' => 'With four distinct metronome sounds, the Prima helps you develop a strong sense of rhythm, a critical skill for every pianist.<br><br>Choose from different metronomes to keep your practice engaging and help you stay on beat, no matter what style of music you’re playing.',
                     ],
                 ];
             @endphp
