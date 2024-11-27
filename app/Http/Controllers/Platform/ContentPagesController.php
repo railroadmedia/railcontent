@@ -13,8 +13,7 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
-use App\Modules\Brand\Enums\Brand;
-use App\Modules\Content\Models\Instructor;
+use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
@@ -1333,47 +1332,10 @@ class ContentPagesController extends BaseController
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function search(Request $request): View
+    public function search(ContentSearchRequest $request): View
     {
         $search = new AlgoliaSearchService();
-        $searchParams = new SearchParameters($search, $request->get('term'));
-
-        $requestedStatuses = $request->get('statuses');
-        if ($requestedStatuses) {
-            $searchParams->onlyForStatus(...$requestedStatuses);
-        }
-
-        $requestedBrands = $request->get('brands');
-        if ($requestedBrands) {
-            $validBrands = array_filter($requestedBrands, function (string $brand) {
-                return Brand::tryFrom($brand);
-            });
-
-            $validBrands = array_filter(
-                array_map(
-                    function (string $status) {
-                        return Brand::tryFrom($status);
-                    },
-                    $validBrands
-                ),
-                fn ($item) => !is_null($item)
-            );
-
-            $searchParams->onlyForBrand(...$validBrands);
-        }
-
-        $instructors = Instructor::findMany($request->get('coach_ids', []));
-        if ($instructors->isNotEmpty()) {
-            $searchParams->onlyForInstructor(...$instructors->toArray());
-        }
-
-        // DEV NOTE: Algolia uses pagination starting at 0
-        $algoliaPage = $request->get('page', 1) - 1;
-        $searchParams->withOptions(
-            advancedSyntax: true,
-            hitsPerPage: $request->get('limit', 20),
-            page: $algoliaPage,
-        );
+        $searchParams = SearchParameters::fromRequest($search, $request);
 
         $searchResponse = $search->search($searchParams);
 

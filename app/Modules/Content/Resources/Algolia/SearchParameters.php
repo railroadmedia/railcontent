@@ -5,6 +5,7 @@ namespace App\Modules\Content\Resources\Algolia;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Enums\Status;
 use App\Modules\Content\Models\Instructor;
+use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\Enum\Facet;
 use App\Modules\Content\Services\AlgoliaSearchService;
@@ -133,6 +134,76 @@ class SearchParameters
     public function __construct(public AlgoliaSearchService $algoliaSearchService, public string $query)
     {
         $this->hasOptions = false;
+    }
+
+    /**
+     * Build up a SearchParameters object with all possible options set by the ContentSearchRequest
+     *
+     * @param  AlgoliaSearchService  $algoliaSearchService
+     * @param  ContentSearchRequest  $request
+     * @return SearchParameters
+     */
+    public static function fromRequest(AlgoliaSearchService $algoliaSearchService, ContentSearchRequest $request): SearchParameters
+    {
+        $searchParams = new SearchParameters($algoliaSearchService, $request->get('term'));
+
+        $requestedStatuses = $request->get('statuses');
+        if ($requestedStatuses) {
+            $validStatuses = self::sanitizeEnumValues(Status::class, $requestedStatuses);
+            if (!empty($validStatuses)) {
+                $searchParams->onlyForStatus(...$validStatuses);
+            }
+        }
+
+        $requestedBrands = $request->get('brands');
+        if ($requestedBrands) {
+            $validBrands = self::sanitizeEnumValues(Brand::class, $requestedBrands);
+            if (!empty($validBrands)) {
+                $searchParams->onlyForBrand(...$validBrands);
+            }
+        }
+
+        $instructors = Instructor::findMany($request->get('coach_ids', []));
+        if ($instructors->isNotEmpty()) {
+            $searchParams->onlyForInstructor(...$instructors->toArray());
+        }
+
+        $requestedDocumentTypes = $request->get('included_types');
+        if ($requestedDocumentTypes) {
+            $validDocumentTypes = self::sanitizeEnumValues(DocumentType::class, $requestedDocumentTypes);
+            if (!empty($validDocumentTypes)) {
+                $searchParams->onlyForType(...$validDocumentTypes);
+            }
+        }
+
+        $searchParams->withOptions(
+            hitsPerPage: $request->get('limit'),
+            page: $request->get('page')
+        );
+
+        //TODO sort - I'm not sure how to make this work with Algolia ...
+        //TODO include_future_scheduled_content_only (if we're going to support it)
+
+        return $searchParams;
+    }
+
+    /**
+     * Get the array of Enum Class built from the values associated with it
+     *
+     * @param  string  $enumClass
+     * @param  array  $requestValues
+     * @return array
+     */
+    private static function sanitizeEnumValues(string $enumClass, array $requestValues)
+    {
+        return array_values(
+            array_filter(
+                array_map(
+                    fn (string $value) => $enumClass::tryFrom($value),
+                    $requestValues
+                )
+            )
+        );
     }
 
     /**
