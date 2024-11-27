@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { ViewListIcon, ViewGridIcon } from '@heroicons/vue/solid';
 import { usePlaylistsStore } from '@stores/playlists';
 import CollectionFilterWrapper from '@collections/Filter/CollectionFilterWrapper.vue';
-import { useFilterValues } from '@hooks/useFilterValues';
+import { filter } from 'lodash';
 
 //Inject
 const token = inject('csrf_token');
@@ -15,8 +15,6 @@ const { filterOptions } = storeToRefs(playlistsStore);
 
 //Emits
 const emit = defineEmits(['onToggleListView']);
-
-const { getFilterValues } = useFilterValues();
 
 //-----------Props-----------//
 const props = defineProps({
@@ -42,10 +40,29 @@ const state = reactive({
     selectedCategories: [],
 });
 
+function transformToMultiSelect(values) {
+    if (!values || !values.categories || !Array.isArray(values.categories)) {
+        console.error("Invalid filter options provided.");
+        return {};
+    }
 
-// fix filter values
+    return [
+        {
+            category: "categories",
+            items: values.categories.map(category => {
+                // Extract the key (text) and value (number) from the string (e.g., "General (6)")
+                const match = category.match(/^(.*) \((\d+)\)$/);
+                const key = match ? match[1] : category; // Extracted text or fallback to full string
+                const value = match ? parseInt(match[2], 10) : 0; // Extracted number or fallback to 0
+                return { key, value };
+            })
+        }
+    ];
+}
+
+//---------Computed Data---------//
 const filterValues = computed(() => {
-    return getFilterValues(filterOptions.value);
+    return transformToMultiSelect(filterOptions.value);
 });
 
 //---------Static Data---------//

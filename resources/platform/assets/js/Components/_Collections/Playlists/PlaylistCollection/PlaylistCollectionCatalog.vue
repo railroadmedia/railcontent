@@ -143,7 +143,7 @@ const props = defineProps({
         default: false,
     },
     filterOptions: {
-        type: [Object, Array],
+        type: [Object],
         default: null
     },
     trackingSection: {
