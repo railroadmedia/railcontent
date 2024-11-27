@@ -19,7 +19,8 @@ class UserPermissionsController extends Controller
         $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
         $data = [
             "permissions" => Arr::pluck($permissions, 'permission_id'),
-            "isAdmin" => user()->isAdmin()
+            "isAdmin" => user()->isAdmin(),
+            "isABasicMember" => user()->isABasicMember()
         ];
         return response()->json($data);
     }
