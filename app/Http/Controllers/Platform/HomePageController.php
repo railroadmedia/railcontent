@@ -290,9 +290,8 @@ class HomePageController extends BaseController
         }
 
         $trialSection = [];
-        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
+        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
 
         if ($showOldTrialSection) {
@@ -302,7 +301,6 @@ class HomePageController extends BaseController
         if ($showNewTrialSection) {
             $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
         }
-
 
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
