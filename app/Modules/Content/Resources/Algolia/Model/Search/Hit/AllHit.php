@@ -10,9 +10,13 @@ class AllHit extends MusoraHitClass
     public ?string $objectID = null;
     public ?string $rev = null;
     public ?int $railcontent_id = null;
+    public ?string $album = null;
+    public ?string $artist = null;
     public ?string $brand = null;
     public ?string $description = null;
     public ?string $difficulty = null;
+    /** @var ?string[]  */
+    public ?array $genre = null;
     /** @var ?string[]  */
     public ?array $instructor_names = null;
     public ?string $language = null;
