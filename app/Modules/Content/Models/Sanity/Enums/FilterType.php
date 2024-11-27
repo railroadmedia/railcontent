@@ -60,7 +60,7 @@ enum FilterType: string
                 SongTutorial::getName(),
                 Archive::getName(),
                 Song::getName(),
-                Instructor::getName()
+                Workout::getName()
             ],
             FilterType::Lifestyle => [Instructor::getName(), Course::getName(), StudentFocus::getName(), QuickTip::getName()],
             FilterType::Essential => [
