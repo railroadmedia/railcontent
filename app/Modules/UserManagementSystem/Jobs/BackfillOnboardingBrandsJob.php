@@ -125,7 +125,9 @@ class BackfillOnboardingBrandsJob implements ShouldQueue
                 ->pluck('brand')
                 ->first() ?? null;
 
-            array_push($brands, $mostWatchedBrand);
+            if ($mostWatchedBrand) {
+                array_push($brands, $mostWatchedBrand);
+            }
 
             // clean up duplicates
             $brands = array_unique($brands);
