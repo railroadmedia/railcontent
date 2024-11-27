@@ -28,7 +28,7 @@ export default {
         include_future = 1,
     }) {
         return axios
-            .get(`${endpointPrefix}/railcontent/search`, {
+            .get(`${endpointPrefix}/content/search`, {
                 params: {
                     brand,
                     limit,

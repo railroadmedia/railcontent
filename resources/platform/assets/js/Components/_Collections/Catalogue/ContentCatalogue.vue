@@ -159,7 +159,7 @@ export default {
         },
         searchEndpoint: {
             type: String,
-            default: () => "/railcontent/search",
+            default: () => "/content/search",
         },
         isPlaylists: {
             type: Boolean,

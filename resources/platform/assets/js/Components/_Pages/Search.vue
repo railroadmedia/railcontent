@@ -9,7 +9,7 @@
 
         <div class="tw-flex tw-flex-row bb-grey-1-1 dark:tw-border-[#223457] ">
             <ContentCatalogue
-                search-endpoint="/railcontent/search"
+                search-endpoint="/content/search"
                 :brand="brand"
                 catalogue-type="list"
                 limit="20"

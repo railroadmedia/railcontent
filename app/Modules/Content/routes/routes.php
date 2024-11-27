@@ -4,6 +4,7 @@ use App\Modules\Content\Controllers\ChallengesMetaDataController;
 use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
+use App\Modules\Content\Controllers\ContentSearchController;
 use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
@@ -100,6 +101,11 @@ Route::prefix('content')
         )->name('content.user.progress.reset')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
+        // search
+        Route::get(
+            'search',
+            [ContentSearchController::class, 'search']
+        )->name('content.search');
     });
 
 Route::prefix('challenges')

@@ -127,7 +127,7 @@ export default {
         page = '1',
     }) {
         return axios
-            .get('/railcontent/search', {
+            .get('/content/search', {
                 params: {
                     brand,
                     limit,
