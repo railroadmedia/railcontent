@@ -43,6 +43,11 @@ export default class ContentModel {
     }
 
     getPostField(key) {
+        // TODO: needs to be fixed from backend probably to prevent the patch
+        if (key === 'style') {
+            return this.post?.genre[0];
+        }
+
         const postField = this.post?.fields?.find(field => field.key === key);
 
         return postField ? postField.value : '';

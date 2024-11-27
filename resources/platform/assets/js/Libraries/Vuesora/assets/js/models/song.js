@@ -33,7 +33,7 @@ export default class SongContentModel extends ContentModel {
 
             this.list.column_data = [
                 this.getPostField('style'),
-                ContentModel.mapDifficulty(this.post),
+                // ContentModel.mapDifficulty(this.post), TODO: would display "Intermediate 5" which is not desired
                 this.postPublisedOn,
             ];
         }
