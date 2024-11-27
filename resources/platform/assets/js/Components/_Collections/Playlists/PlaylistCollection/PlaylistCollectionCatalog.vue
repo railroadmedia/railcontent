@@ -110,6 +110,7 @@
 
 <script setup>
 import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
+import { usePlatformStore } from '@stores/platform';
 import { usePlaylistsStore } from '@stores/playlists';
 import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
 import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
@@ -122,6 +123,7 @@ const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const platformStore = usePlatformStore();
 const userStore = useUserStore();
 
 const { brand } = storeToRefs(userStore)
@@ -213,7 +215,10 @@ onMounted(()=> {
                 term: state.searchTerm,
                 sort: state.sortValue,
                 categories: state.categories ? [state.categories] : [],
-            }, token);
+            }, token).then(() => {
+                playlistsStore.loadingPlaylists = false;
+                platformStore.setLoadingState(false);
+            });
     }
     //For Create Modal to reload Playlists
     playlistsStore.pageHasPlaylistCatalog = true;

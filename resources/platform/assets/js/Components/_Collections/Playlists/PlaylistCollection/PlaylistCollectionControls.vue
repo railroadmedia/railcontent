@@ -66,7 +66,7 @@ const loadPlaylists = () => {
         brand: brand,
         page: 1,
         limit: 10,
-        term: state.searchTerm,
+        searchTerm: state.searchTerm,
         sort: state.sortValue,
         count_filter_items: 1,
         categories: formatSelectedCategories(state.selectedCategories),
