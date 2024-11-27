@@ -14,8 +14,11 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
+use Modules\UserManagementSystem\Models\OnboardingBrand;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
@@ -111,22 +114,36 @@ class BackfillOnboardingBrandsJob implements ShouldQueue
                 }
             }
 
-            // if still nothing, check primary brand
-            if (empty($brands) && $user->primary_brand) {
-                $brands[] = $user->primary_brand;
-            }
+            $mostWatchedBrand = DB::table('railcontent_user_content_progress as progress')
+                ->selectRaw('content.brand as brand, count(progress.id) as total')
+                ->join('railcontent_content as content', 'content.id', '=', 'progress.content_id')
+                ->where('progress.user_id', $user->id)
+                ->groupBy('content.brand')
+                ->orderBy('total', 'desc')
+                ->limit(1)
+                ->get()
+                ->pluck('brand')
+                ->first() ?? null;
+
+            array_push($brands, $mostWatchedBrand);
 
             // clean up duplicates
             $brands = array_unique($brands);
 
             if (empty($brands)) {
                 Log::warning(sprintf("%s: No brand information found for user %s", $this->getClassName(), $user->email));
-                continue;
+
+                if (Carbon::now()->subDays(7)->greaterThan($user->created_at)) {
+                    $brands = [Brand::Musora->value];
+                } else {
+                    continue;
+                }
             }
 
             // push to customer.io
             $attributes = [];
 
+            /** @var OnboardingBrand $userOnboardingBrand */
             $userOnboardingBrand = $user->onboardingBrands()->firstOrCreate();
 
             $subscriptionTopics = config('customer-io.subscription_topics');
