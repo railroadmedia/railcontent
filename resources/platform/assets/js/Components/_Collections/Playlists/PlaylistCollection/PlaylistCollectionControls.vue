@@ -4,7 +4,8 @@ import { storeToRefs } from "pinia";
 import { ViewListIcon, ViewGridIcon } from '@heroicons/vue/solid';
 import { usePlaylistsStore } from '@stores/playlists';
 import CollectionFilterWrapper from '@collections/Filter/CollectionFilterWrapper.vue';
-import { filter } from 'lodash';
+// Todo fix filters in backend
+// import { useFilterValues } from '@hooks/useFilterValues';
 
 //Inject
 const token = inject('csrf_token');
@@ -15,6 +16,9 @@ const { filterOptions } = storeToRefs(playlistsStore);
 
 //Emits
 const emit = defineEmits(['onToggleListView']);
+
+// Todo fix filters in backend
+// const { getFilterValues } = useFilterValues();
 
 //-----------Props-----------//
 const props = defineProps({
@@ -41,6 +45,7 @@ const state = reactive({
 });
 
 function transformToMultiSelect(values) {
+    // Todo fix filters in backend
     if (!values || !values.categories || !Array.isArray(values.categories)) {
         console.error("Invalid filter options provided.");
         return {};
@@ -62,6 +67,9 @@ function transformToMultiSelect(values) {
 
 //---------Computed Data---------//
 const filterValues = computed(() => {
+    // Todo: fix in backend (controller)
+    // return getFilterValues(filterOptions.value);
+
     return transformToMultiSelect(filterOptions.value);
 });
 
