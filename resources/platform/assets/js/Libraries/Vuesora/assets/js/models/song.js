@@ -12,7 +12,6 @@ export default class SongContentModel extends ContentModel {
 
         this.list.color_title = this.getPostField('artist');
         this.list.column_data = [
-            ContentModel.mapDifficulty(this.post),
             this.getPostField('style'),
         ];
 
@@ -21,7 +20,6 @@ export default class SongContentModel extends ContentModel {
             this.card.grey_title = `${this.postInstructor}, ${ContentModel.mapDifficulty(this.post)}`;
 
             this.list.column_data = [
-                ContentModel.mapDifficulty(this.post),
                 this.getPostField('style'),
                 this.postChildLessonCount,
                 this.postPublisedOn,
