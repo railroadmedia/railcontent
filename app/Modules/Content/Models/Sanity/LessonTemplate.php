@@ -94,7 +94,8 @@ abstract class LessonTemplate extends BaseSanityModel
                 FieldType::Slug,
                 'slug',
                 options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
-                hidden:  "({document}) => !document?.title,",
+                hidden:  "({document}) => !document?.title",
+                validation: [new Required()],
                 group:   $detailsGroup
             ),
             new BrandField($detailsGroup),
