@@ -120,36 +120,40 @@
                 </div>
                 <div class="w-full lg:w-7/12 text-left giveaway-form">
                     <h2 class="uppercase leading-none mb-2"><strong>Win The Cymbals From<br> Drumeo’s Linkin Park Video</strong></h2>
-                    <p class="leading-normal mb-1">
-                        <strong>Win the ENTIRE set of Istanbul Agop cymbals that Brandon used in our latest video.</strong>
-                        <br>
-                        Item list:
-                    </p>
-                    <style>
+                    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                        <p class="leading-normal mb-1">
+                            <strong>Win the ENTIRE set of Istanbul Agop cymbals that Brandon used in our latest video.</strong>
+                            <br>
+                            Item list:
+                        </p>
+                        <style>
                             ul {
                                 column-count: 2;
                             }
-                    </style>
-                    <ul class="pl-6 mb-3 list-disc" style="column-gap: 20px;">
-                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 10" Splash</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 15" Medium Hihats</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 16" Thin Crash</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 18" Dark Crash</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Traditional 20" Dark Crash</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Xist	18" Ion FX Crash</li>
-                        <li class="leading-tight text-sm mb-1">Istanbul Mantra 22" Ride</li>
-                    </ul>
-                    @include("drumeo.lead-gen.partials.sign-up-form", [
-                        "recaptchaKey" => $recaptchaKey,
-                        "formName" => 'Cymbal Giveaway',
-                        "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
-                        "buttonText" => "I WANT TO WIN",
-                        "minimalForm" => true,
-                        "buttonColor" => "bg-musora text-black",
-                        "redirectUrl" => "https://www.musora.com/thank-you",
-                    ])
-                    <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/cymblas-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
-                        By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+                        </style>
+                        <ul class="pl-6 mb-3 list-disc" style="column-gap: 20px;">
+                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 10" Splash</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 15" Medium Hihats</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 16" Thin Crash</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 18" Dark Crash</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 20" Dark Crash</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Xist	18" Ion FX Crash</li>
+                            <li class="leading-tight text-sm mb-1">Istanbul Mantra 22" Ride</li>
+                        </ul>
+                        @include("drumeo.lead-gen.partials.sign-up-form", [
+                            "recaptchaKey" => $recaptchaKey,
+                            "formName" => 'Cymbal Giveaway',
+                            "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
+                            "buttonText" => "I WANT TO WIN",
+                            "minimalForm" => true,
+                            "buttonColor" => "bg-musora text-black",
+                            "redirectUrl" => "https://www.musora.com/thank-you",
+                        ])
+                        <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/cymblas-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
+                            By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+                    @else
+                        <h4 class="leading-normal mb-1">This giveaway has ended.</h4>
+                    @endif
                 </div>
             </div>
         </div>
@@ -161,6 +165,7 @@
                 </div>
                 <div class="w-full lg:w-7/12 text-left giveaway-form">
                     <h2 class="uppercase leading-none mb-2"><strong>WIN A COPY OF PHOBIA BY BREAKING BENJAMIN, SIGNED BY CHAD SZELIGA</strong></h2>
+                    @if(Carbon\Carbon::create(2024, 12, 07, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                     <p class="leading-normal mb-1">
                         <strong>Enter to win one copy of Phobia, signed by former Breaking Benjamin drummer Chad Szeliga.</strong>
                     </p>
@@ -175,6 +180,10 @@
                     ])
                     <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/phobia-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
                         By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+
+                    @else
+                        <h4 class="leading-normal mb-1">This giveaway has ended.</h4>
+                    @endif
                 </div>
             </div>
         </div>
@@ -200,37 +209,6 @@
             @endforeach
         </div>
 
-        {{-- <section class="px-5 sm:px-6 py-8 sm:py-16 text-white rounded-3xl" style="background-color:#0C1523;">
-            <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                <div class="w-full lg:w-5/12 px-6 text-center">
-                    <img class="w-64 h-64 rounded-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/musora/lead-gen/youtube/item-1.jpg" alt="Musora Team Image">
-                </div>
-                <div class="w-full md:w-10/12 lg:w-6/12 xl:w-5/12 text-center lg:text-left">
-                    <h3 class="uppercase pt-10 leading-tight lg:pl-6">
-                        <strong>
-                            ENTER TO Win A FREE GUITAR
-                            <br class="block lg:hidden" />
-                            SIGNED BY PEACH PIT
-                        </strong>
-                    </h3>
-                    <p class="tracking-tight pb-4 lg:pb-6 italic lg:pl-6 font-light">
-                        Win a signed Fender Telecaster (value of $1200) signed by the Peach Pit crew.
-                    </p>
-                    <div class="w-full sm:w-10/12 lg:w-full mx-auto">
-                        @include("_partials.components.forms.sign-up-form-options", [
-                            "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Today in Music History',
-                            "formId" => "Musora - Engagement - Trigger - Today in Music History - WebForm", //TODO: Update form ID
-                            "buttonText" => "ENTER NOW",
-                            'stacked' => false,
-                            "checkboxTitle" => "Preferred Instrument",
-                            "minimalForm" => true,
-                            "buttonColor" => "bg-musora text-black",
-                        ])
-                    </div>
-                </div>
-            </div>
-        </section> --}}
           <section class="px-5 sm:px-6 py-6 rounded-3xl mb-10 lg:mb-20 bg-musora border-2 border-black">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="w-full lg:w-7/12 text-center px-6 flex jusitfy-center flex-col items-center">
