@@ -476,8 +476,6 @@
         ])
     @elseif(!empty($promoVersion))
 
-        @include('drumeo._partials.countdown-bundle-2024')
-
         @include('musora.sales.components.order-section-collage-bf', [
         'headerLight' => true,
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',

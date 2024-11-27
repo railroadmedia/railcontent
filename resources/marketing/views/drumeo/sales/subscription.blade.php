@@ -358,6 +358,14 @@
             'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true',
         ])
 
+
+        <div class="sticky-trigger block"></div>
+        <div href="#customize-anchor"
+            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
+            style="    background: linear-gradient(to bottom, #020306, #042c52);">
+            @include('drumeo._partials.countdown-homepage-2024')
+        </div>
+
         <div class="sticky-trigger block"></div>
         <a href="#customize-anchor"
             class="promo-banner anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] -mt-12 transition-none"
@@ -575,7 +583,6 @@
         ])
 
     @elseif(!empty($promoVersion))
-        @include('drumeo._partials.countdown-bundle-2024')
         @php
             $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
         @endphp
@@ -657,6 +664,8 @@
     <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');
+            if (!stickyBar) return;
+
             window.addEventListener('scroll', function () {
                 var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
                 var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;

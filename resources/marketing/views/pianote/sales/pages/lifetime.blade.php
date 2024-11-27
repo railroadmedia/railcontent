@@ -147,8 +147,6 @@
         </div>
     </section>
 
-    @include('drumeo._partials.countdown-bundle-2024')
-
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         style="background:linear-gradient(to bottom, #131633, #000000);"

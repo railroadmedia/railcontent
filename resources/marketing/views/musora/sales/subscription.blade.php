@@ -642,8 +642,6 @@
         ])
     @else
         @if($bfVersion)
-        @include('drumeo._partials.countdown-bundle-2024')
-
         @include('musora.sales.components.order-section-collage-bf', [
         'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',

@@ -478,8 +478,6 @@
             'instrument' => 'guitar',
         ])
     @elseif(!empty($promoVersion))
-        @include('drumeo._partials.countdown-bundle-2024')
-
         @include('musora.sales.components.order-section-collage-bf', [
         'headerLight' => true,
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',

@@ -113,9 +113,6 @@
                 'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
             ])
 
-             @include('drumeo._partials.countdown-bundle-2024')
-
-
             @php
                 $targetSkus = ['30-day-independence', '30-day-double-bass', '30-day-chops'];
             @endphp
