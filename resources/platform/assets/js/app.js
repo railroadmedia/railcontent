@@ -18,7 +18,7 @@ const config = {
         projectId:'4032r8py',
         dataset:'production',
         version:'2021-06-07',
-        debug: true,
+        debug: false,
         useCachedAPI: true
       },
       railcontentConfig: {
