@@ -3,8 +3,8 @@
 namespace Modules\UserManagementSystem\Listeners;
 
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
-use Illuminate\Support\Carbon;
 use Exception;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;

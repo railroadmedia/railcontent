@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Content\Services;
+namespace App\Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
@@ -61,6 +61,40 @@ class ChallengesService
         return [
             'users' => $results,
             'total' => count($enrolledUserIds),
+        ];
+    }
+
+    /**
+     * Get enrolled users metadata for a given challenge
+     * @param int $contentId
+     * @param int|null $count
+     *
+     * @return array<{
+     *      entity: array<{
+     *          id: int,
+     *          email: string,
+     *          display_name: string,
+     *          profile_picture_url: string
+     *      }>,
+     *      total: int
+     *  }>
+     */
+    public function getEnrolledUsersMetadata(int $contentId, ?int $count=3)
+    {
+        $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
+        $enrolledUsers = $enrolledUsersAndCount['users'];
+        // TODO https://musora.atlassian.net/browse/TCH-51
+        // Decorate these using a decorator (api resource) instead of raw
+        $formattedUsers = $enrolledUsers->map(fn (User $user) => [
+            'id' => $user->id,
+            'email' => $user->email,
+            'display_name' => $user->display_name,
+            'profile_picture_url' => $user->profile_picture_url,
+        ]);
+
+        return [
+            'data' => $formattedUsers,
+            'total' => $enrolledUsersAndCount['total'],
         ];
     }
 
@@ -548,6 +582,7 @@ class ChallengesService
         $userProgress->completed_best_streak = $bestStreak;
         $userProgress->last_completed_date = $today->toISOString();
         $userProgress->is_active = false;
+        $userProgress->hide_completed_banner = false;
         $userProgress->save();
     }
 
@@ -588,4 +623,22 @@ class ChallengesService
         }
         return $startDate->copy()->addDays($dayCount);
     }
+
+    /**
+     * @param int $challengeId
+     * @param int $userId
+     * @return bool
+     * @throws \Exception
+     */
+    public function hideCompletedBanner(int $challengeId, int $userId) : bool
+    {
+        $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        if (is_null($progress?->last_completed_date)) {
+            return false;
+        }
+        $progress->hide_completed_banner = true;
+        $progress->save();
+        return true;
+    }
+
 }

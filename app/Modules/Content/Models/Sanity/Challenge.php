@@ -23,11 +23,18 @@ class Challenge extends ParentTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Challenge', withLogos: true, withEnrollment:true, withResources: true) ;
         $detailsGroup = new Group('editorFields', 'Details', true);
 
         // Define multiple child references
         $childReference = new Reference([['type' => "challenge-part"],['type' => "pack-bundle-lesson"]]);
+        $contentCardGroup = new Group('contentCards', 'Content Cards', false);
+        parent::__construct(self::getName(), 'Challenge', withLogos: true, withEnrollment:true, withResources: true, extraGroups: [$contentCardGroup]) ;
+
+        $contentCardFields = [
+            new Field(FieldType::Image, 'bgImg', 'Background Image', group: $contentCardGroup),
+            new Field(FieldType::Image, 'squareImg', 'Square Image', validation: [new Required()], group: $contentCardGroup),
+            new Field(FieldType::Image, 'wideImg', 'Wide Image', group: $contentCardGroup),
+        ];
 
         $this->addFields([
                             new Field(
@@ -43,9 +50,10 @@ class Challenge extends ParentTemplate
                             new Field(FieldType::File, 'silver_award', 'Silver Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
                             new Field(FieldType::File, 'bronze_award', 'Bronze Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
                             new Field(FieldType::File, 'badge', 'Badge', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
-                            //new Field(FieldType::File, 'instructor_signature', 'Instructor Signature', group: $detailsGroup, validation: [new Required()], options: ['accept' => 'image/png']),
                             new Field(FieldType::Boolean, 'is_solo', 'Is Solo Challenge', group: $detailsGroup, initialValue: false),
+                            ... $contentCardFields,
                          ]);
+
     }
 
     public static function getName(): string

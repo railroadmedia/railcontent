@@ -4,12 +4,13 @@ namespace App\Modules\Content\tests\Feature;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
-use App\Modules\RailTracker\Models\MediaPlaybackSession;
+use App\Modules\Content\Models\Content;
+use App\Modules\Content\Services\ChallengesService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Mockery\MockInterface;
-use Modules\Content\Services\ChallengesService;
+
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -25,6 +26,125 @@ class ChallengesTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
+    }
+
+    public function test_scope_brand() : void
+    {
+        $userId = user()->id;
+        $drumeoContent = Content::factory()->create(['brand' => 'drumeo']);
+        $singeoContent = Content::factory()->create(['brand' => 'singeo']);
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $singeoContent->id,
+            'user_id' => $userId,
+        ],
+        );
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $drumeoContent->id,
+            'user_id' => $userId,
+        ],
+        );
+        $drumeoTestContent = ChallengeUserProgress::query()->brand('drumeo')->get();
+        $this->assertCount(1, $drumeoTestContent);
+        $singeoTestContent = ChallengeUserProgress::query()->brand('singeo')->get();
+        $this->assertCount(1, $singeoTestContent);
+    }
+
+    public function test_scope_community_and_solo() : void
+    {
+        $userId = user()->id;
+        $content1 = Content::factory()->create();
+        $content2 = Content::factory()->create();
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content1->id,
+            'user_id' => $userId,
+        ], ['is_solo' => false]
+        );
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content2->id,
+            'user_id' => $userId,
+        ], ['is_solo' => true]
+        );
+        $solo = ChallengeUserProgress::query()->solo()->get();
+        $this->assertCount(1, $solo);
+        $community = ChallengeUserProgress::query()->community()->get();
+        $this->assertCount(1, $community);
+    }
+
+    public function test_scope_completed() : void
+    {
+        $userId = user()->id;
+        $content1 = Content::factory()->create();
+        $content2 = Content::factory()->create();
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content1->id,
+            'user_id' => $userId,
+        ], ['last_completed_date' => Carbon::now()->toISOString()]
+        );
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content2->id,
+            'user_id' => $userId,
+        ],
+        );
+        $completed = ChallengeUserProgress::query()->completed()->get();
+        $this->assertCount(1, $completed);
+    }
+
+    public function test_scope_hide_badge() : void
+    {
+        $userId = user()->id;
+        $content1 = Content::factory()->create();
+        $content2 = Content::factory()->create();
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content1->id,
+            'user_id' => $userId,
+        ], ['hide_completed_banner' => true]
+        );
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $content2->id,
+            'user_id' => $userId,
+        ],
+        );
+        $showBadges = ChallengeUserProgress::query()->showBadgeInBanner()->get();
+        $this->assertCount(1, $showBadges);
+    }
+
+    public function test_scope_active() : void
+    {
+        $userId = user()->id;
+        $contentActiveAndPast = Content::factory()->create();
+        $contentActiveAndNearFuture = Content::factory()->create();
+        $contentInactiveAndPast = Content::factory()->create();
+        $contentActiveAndFarFuture = Content::factory()->create();
+
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $contentActiveAndPast->id,
+            'user_id' => $userId,
+        ], ['is_active' => true,
+                'start_date' => Carbon::now()->subHours(10)->toISOString()]
+        );
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $contentActiveAndNearFuture->id,
+            'user_id' => $userId,
+        ], ['is_active' => true,
+            'start_date' => Carbon::now()->addHours(10)->toISOString()]
+        );
+
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $contentInactiveAndPast->id,
+            'user_id' => $userId,
+        ], ['is_active' => false,
+            'start_date' => Carbon::now()->subHours(10)->toISOString()]
+        );
+
+        ChallengeUserProgress::updateOrCreate([
+            'content_id' => $contentActiveAndFarFuture->id,
+            'user_id' => $userId,
+        ], [
+            'is_active' => true,
+                'start_date' => Carbon::now()->addDays(2)->toISOString()]
+        );
+        $active = ChallengeUserProgress::query()->active()->get();
+        $this->assertCount(2, $active);
     }
 
     public function test_enroll(): void

@@ -5780,7 +5780,6 @@ return [
             'is_first_access',
             'brand_minutes_practiced',
         ],
-
         'quick-tips' => [
             'id',
             'type',

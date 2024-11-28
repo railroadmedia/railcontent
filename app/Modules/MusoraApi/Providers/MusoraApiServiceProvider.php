@@ -28,6 +28,11 @@ class MusoraApiServiceProvider extends ServiceProvider
             'journeys'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/learning.php',
+            'learning'
+        );
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/onboarding.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/referral.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/learning.php');
