@@ -37,6 +37,7 @@ export const useCollectionStore = defineStore({
             collectionType: '',
             fetchType: '',
             queryType: '',
+            areFilterOptionsPreloaded: false
         }
     },
     actions: {
@@ -140,13 +141,6 @@ export const useCollectionStore = defineStore({
         async fetchFilterOptions(){
             const userStore = useUserStore();
 
-            const params = new URLSearchParams(window.location.search);
-
-            //Get filters
-            if (params.getAll('included_fields[]').length > 0) {
-                this.filter.included_fields = params.getAll('included_fields[]');
-            }
-
             //Get Genre
             const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
             const genre = genreField ? genreField.split(',')[1] : null;
@@ -178,7 +172,10 @@ export const useCollectionStore = defineStore({
 
         async fetchData() {
             try {
-                await this.fetchFilterOptions();
+                if (!this.areFilterOptionsPreloaded) {
+                    await this.fetchFilterOptions(false);
+                }
+                this.areFilterOptionsPreloaded = false;
                 const response = await this.getEndpoint(this.fetchType);
 
                 return response;
@@ -247,6 +244,14 @@ export const useCollectionStore = defineStore({
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
         },
 
+        getFilterURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            //Get filters
+            if (params.getAll('included_fields[]').length > 0) {
+                this.filter.included_fields = params.getAll('included_fields[]');
+            }
+        },
+
         getURLParams() {
             const params = new URLSearchParams(window.location.search);
 
@@ -267,11 +272,6 @@ export const useCollectionStore = defineStore({
 
             //Get sort
             if (params.get('sort')) this.filter.sort = params.get('sort');
-
-            //Get filters
-            if (params.getAll('included_fields[]').length > 0) {
-                this.filter.included_fields = params.getAll('included_fields[]');
-            }
 
             //GetProgress
             if (params.getAll('included_user_states[]').length > 0) {
@@ -350,6 +350,7 @@ export const useCollectionStore = defineStore({
                 this.collectionType = defaults.collectionType;
             }
 
+            this.getFilterURLParams();
             await this.fetchFilterOptions();
 
             this.getURLParams();
