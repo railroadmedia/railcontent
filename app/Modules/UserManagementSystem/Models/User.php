@@ -4,6 +4,7 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
@@ -17,6 +18,7 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -379,6 +381,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function progress(): HasMany
     {
         return $this->hasMany(ContentUserProgress::class, 'user_id');
+    }
+
+    public function challengeProgress(): HasMany
+    {
+        return $this->hasMany(ChallengeUserProgress::class, 'user_id');
     }
 
     public function getNotificationSetting(string $brand, string $settingName): bool

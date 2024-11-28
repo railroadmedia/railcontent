@@ -49,7 +49,6 @@ class HomePageController extends BaseController
     private const int WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int PLAYLISTS_COUNTENT_COUNT = 24;
-    private const int UPCOMING_EVENTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
 
     public function __construct(
         private readonly ContentService $contentService,
@@ -229,23 +228,8 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
-        $shouldShowTrialSection = false;
+
         $brand = brand();
-        $hideSection = $brand . '_trial_section_hide';
-
-        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
-            $hasExperienceLevels = count(
-                user()->onboardingExperience->filter(function ($item) use ($brand) {
-                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                })
-            ) > 0;
-
-            $shouldShowTrialSection = $hasExperienceLevels;
-        }
-        $trialSection = [];
-        if ($shouldShowTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        }
 
         $cohortBanner = [];
         $activeCohort = $this->cohortService->getActiveCohort();
@@ -289,20 +273,16 @@ class HomePageController extends BaseController
             }
         }
 
-        $trialSection = [];
-        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
+        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
-
-        if ($showOldTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        }
-
         if ($showNewTrialSection) {
             $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
+        } else if ($showOldTrialSection) {
+            $trialSection = $this->learningPathsService->getLearningPaths();
+        } else {
+            $trialSection = [];
         }
-
 
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
@@ -315,7 +295,7 @@ class HomePageController extends BaseController
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
-            'displayTrialSection' => $shouldShowTrialSection,
+            'displayTrialSection' => $showOldTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
             "hasExperience" => $hasExperience,
