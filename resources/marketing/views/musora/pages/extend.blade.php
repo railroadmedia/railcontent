@@ -106,7 +106,7 @@
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h5 class="leading-none mb-1"><strong>$240</strong> <em>(Includes free $100 gift card.)</em></h5>
                 <a
-                    href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100]=1&promo-code=musora-extend-2024&locked=true"
+                    href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100-extend]=1&promo-code=MEBF24&locked=true"
                     class="join w-full sm:max-w-xs musora smaller mt-4"
                 >
                     GET THE DEAL
@@ -142,7 +142,7 @@
             </div>
 <br>
             <a
-                href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100]=1&promo-code=musora-extend-2024&locked=true"
+                href="/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&products[musora-gift-card-100-extend]=1&promo-code=MEBF24&locked=true"
                 class="join w-full sm:max-w-xs musora mt-7"
             >
                 GET THE DEAL
