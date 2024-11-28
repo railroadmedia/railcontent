@@ -23,8 +23,6 @@ class ChallengesMetaDataController extends Controller
     public function __construct(
         private ChallengesService $challengesService,
         private CohortService $cohortService,
-        private ProductService $productService,
-        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
     }
 
