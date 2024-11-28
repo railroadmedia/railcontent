@@ -372,9 +372,13 @@ class OnboardingController extends Controller
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
+
+        $brand = $this->onboardingService->getBrandFromInstrument($instrument);
+
         Avo::onboarding_instrument_step_completed(
             AvoHelper::defaultEventProperties([
-                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
+                'brand' => $brand
+
             ])
         );
 
