@@ -852,7 +852,6 @@ class Content extends Model
         }
 
         $this->parent_content_data = (json_encode($parentContentData));
-        $this->save();
     }
 
     public function setWebUrlPath($value)
