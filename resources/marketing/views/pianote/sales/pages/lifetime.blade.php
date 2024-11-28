@@ -160,7 +160,7 @@
             <div class="w-full sm:w-10/12 md:w-1/2 lg:pr-10">
                 <h3 class="mb-6"><strong>Music Licensing Is Hard</strong></h3>
                 <p class="leading-normal">
-                    A Lifetime Membership gives you unlimited access to all Drumeo lessons, playalongs, live events, and in-house content – forever – plus all of our instrument channels (Pianote, Guitareo, Singeo). But a portion of your membership includes copyrighted material – with a growing library of famous songs with sheet music and playalong tools. 
+                    A Lifetime Membership gives you unlimited access to all Pianote lessons, live events, and in-house content – forever – plus all of our instrument channels (Drumeo, Guitareo, Singeo). But a portion of your membership includes copyrighted material – with a growing library of famous songs with sheet music and playalong tools. 
                     <br><br>
                     <strong>You’ll get 3 years of Songs access with your lifetime membership.</strong> After that, because we need to pay a small fee to record labels, you’ll have the option to continue your Songs access for $40/year. This ensures you enjoy great music while supporting the artists who created it.
                 </p>
