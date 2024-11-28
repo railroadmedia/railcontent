@@ -22,6 +22,7 @@
     })">
         <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]"
             :class="{ 'bottom-auto': stick }" x-ref="stickySection">
+
             <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in just<br class="sm:hidden">  10 minutes a day.</h4>
         </div>

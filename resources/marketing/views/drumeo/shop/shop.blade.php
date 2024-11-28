@@ -69,8 +69,8 @@
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
         'text' => 'Save up to 91% on drum lessons, gear & more!',
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/save-badge.webp',
-        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/BF-header-banner.webp',
+        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/cm-save-badge.webp',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/CM-header-banner.webp',
         'isShop' => true,
     ])
 
@@ -82,6 +82,13 @@
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
             $bundles = [
+                [
+                    'slug' => '/drumshop/challenges-bundle',
+                    'full' => true,
+                    'visible' => 1,
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/challenges-bundle-full.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/2024/shop/challenges-bundle-full-m.webp',
+                ],
                 [
                     'slug' => '/drumshop/kit',
                     'full' => true,
@@ -187,6 +194,16 @@
                     </div>
                     <div x-cloak x-show="filter === 'lessons'">
                         @include('_partials.components.shop.product-card', [
+                            "href" => "/drumshop/challenges-bundle",
+                             "price" => 381,
+                             "discounted_price" => 127,
+                             "title" => "Challenges Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle-square.jpg",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('_partials.components.shop.product-card', [
                             "href" => "/lifetime",
                              "price" => 1200,
                              "discounted_price" => 1200,
@@ -195,7 +212,6 @@
                              'soldOut' => false,
                         ])
                     </div>
-
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center">
                     <span
@@ -211,12 +227,18 @@
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
-                <div style="margin-bottom: 0;" class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+                <div style="margin-bottom: 0;" class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
+                    <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="127" href="/drumshop/challenges-bundle" x-data="{ open: false }">
+                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle-square.jpg');"></div>
+                        <p class="leading-tight font-black mb-1">Challenges Bundle</p>
+                        <p class="leading-tight text-sm mb-1">3 popular courses for the price of 1.</p>
+                        <p class="leading-tight"><s class="opacity-60">$381</s> <strong class="text-drumeo font-extrabold">$127</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 66%</span></p>
+                    </a>
                     <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="399" href="/drumshop/practice-bundle" x-data="{ open: false }">
-                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp');"></div>
+                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp');"></div>
                         <p class="leading-tight font-black mb-1">The Practice Bundle</p>
                         <p class="leading-tight text-sm mb-1">Save $828.87 on most popular practice essentials + lessons.</p>
-                        <p class="leading-tight"><s class="opacity-60">$1227.87</s> <strong class="text-drumeo font-extrabold">$399</strong><span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 67%</span></p>
+                        <p class="leading-tight"><s class="opacity-60">$1227.87</s> <strong class="text-drumeo font-extrabold">$399</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 67%</span></p>
                     </a>
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/kit",
@@ -224,7 +246,7 @@
                          "discounted_price" => 599,
                          "title" => "The E-KIT Bundle",
                          "instructor" => "Save $875 on an electronic drum kit + lessons.",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -233,17 +255,16 @@
                          "discounted_price" => 799,
                          "title" => "The ULTIMATE Bundle",
                          "instructor" => "Save 948.90 on our ultimate bundle.",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
                          'soldOut' => false,
                     ])
-                </div>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->price),
                          "discounted_price" => floatval($productPrices['stickbag']->discounted_price),
                          "title" => "Drumeo StickBag",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -251,7 +272,7 @@
                          "price" => floatval($productPrices['drumeo-eardrums-black']->price),
                          "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "title" => "Drumeo EarDrums In-Ear Monitors",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -259,7 +280,7 @@
                          "price" => floatval($productPrices['the-drummers-toolbox-book']->price),
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03-last.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03-last.webp",
                          'soldOut' => false,
                     ])
                 </div>
