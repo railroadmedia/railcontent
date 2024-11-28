@@ -45,7 +45,6 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -64,7 +63,6 @@ export const useCollectionStore = defineStore({
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
             this.trackFilter();
-            this.resetPagination();
             this.getData();
         },
 
@@ -198,6 +196,8 @@ export const useCollectionStore = defineStore({
             this.loading = displayLoading;
             this.fetching = true;
 
+            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
+
             const response = await this.fetchData();
             this.setData(response, replace);
             this.setURLParams();
@@ -246,7 +246,6 @@ export const useCollectionStore = defineStore({
 
             this.filter.activeTab = activeTab.value;
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
-            this.tabData[this.filter.activeTab].currentPage = 1;
         },
 
         getURLParams() {
@@ -399,7 +398,6 @@ export const useCollectionStore = defineStore({
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -408,7 +406,6 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.trackSort();
-            this.resetPagination();
             this.getData();
         },
 
