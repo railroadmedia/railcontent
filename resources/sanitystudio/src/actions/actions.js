@@ -79,6 +79,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
             } catch (error) {
                 console.error(`Failed to update child document ${childId}:`, error);
             }
+            return;
         };
 
         return {
@@ -153,10 +154,10 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
                     const data = await response.json();
                     patch.execute([{ set: { railcontent_id: data.id, web_url_path: data.web_url_path, assignment: data.assignment } }]);
-
-                    if (data.childrens) {
-                        console.log('rox need to update child doc ::: roxana actions.js  ++++++++++++++++  ', data.childrens);
-                        for (const child of data.childrens) {
+                    console.log('rox start from zero  ++++++++++++++++  ', data);
+                    if (data.relatedDocs) {
+                        console.log('rox need to update child doc ::: roxana actions.js  ++++++++++++++++  ', data.relatedDocs);
+                        for (const child of data.relatedDocs) {
                             console.log('rox need to update child   in for  ::: ', child);
                             let updates = {
                                 web_url_path: child.web_url_path
@@ -169,14 +170,43 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                                         {
                                             slug: parentData.slug,
                                             type: parentData.type,
-                                            id: parentData.id,
+                                            id:   parentData.id,
                                             _key: randomKey(),
                                         }
                                     ]
                                 };
                             }
-                            console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates);
+                            console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates, child);
                             await patchChildDocument(child.id, updates, childrenArray);
+                            console.log('rox need to update child after  patchChildDocument ++++++++++++++++  ', child.children);
+                            if (child.children) {
+                                console.log('rox need to update child for child doc ::: roxana actions.js  ++++++++++++++++  ', child.childrens);
+                                for (const child of child.childrens) {
+                                    console.log('rox need to update child   in for  ::: ', child);
+                                    let updates = {
+                                        web_url_path: child.web_url_path
+                                    };
+                                    if (child.parent_content_data) {
+                                        const parentData = JSON.parse(child.parent_content_data)[0];
+                                        updates = {
+                                            ...updates,
+                                            parent_content_data: [
+                                                {
+                                                    slug: parentData.slug,
+                                                    type: parentData.type,
+                                                    id:   parentData.id,
+                                                    _key: randomKey(),
+                                                }
+                                            ]
+                                        };
+                                    }
+//                                     childrenArray = await Promise.all(
+//                                         child.childrens.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand }[0]`))
+//                                     );
+//                                     console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates);
+//                                     await patchChildDocument(child.id, updates, childrenArray);
+                                }
+                            }
                         }
                     }
                 } catch (error) {
