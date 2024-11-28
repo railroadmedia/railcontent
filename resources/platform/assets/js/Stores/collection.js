@@ -45,7 +45,6 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -64,7 +63,6 @@ export const useCollectionStore = defineStore({
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
             this.trackFilter();
-            this.resetPagination();
             this.getData();
         },
 
@@ -139,7 +137,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async fetchTabData(){
+        async fetchFilterOptions(){
             const userStore = useUserStore();
 
             const params = new URLSearchParams(window.location.search);
@@ -172,8 +170,6 @@ export const useCollectionStore = defineStore({
                 if(this.tabOptions.length === 0){
                     //Set Tab Options
                     this.tabOptions = formatTabData(result.tabs, result.catalogName)
-                    console.log('tab tab', result)
-                    console.log('after fetch', this.tabOptions)
                 }
             } else {
                 throw new Error('Failed to fetch Filter Options');
@@ -182,6 +178,7 @@ export const useCollectionStore = defineStore({
 
         async fetchData() {
             try {
+                await this.fetchFilterOptions();
                 const response = await this.getEndpoint(this.fetchType);
 
                 return response;
@@ -197,6 +194,8 @@ export const useCollectionStore = defineStore({
         async getData(replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
+
+            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
 
             const response = await this.fetchData();
             this.setData(response, replace);
@@ -246,7 +245,6 @@ export const useCollectionStore = defineStore({
 
             this.filter.activeTab = activeTab.value;
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
-            this.tabData[this.filter.activeTab].currentPage = 1;
         },
 
         getURLParams() {
@@ -352,7 +350,7 @@ export const useCollectionStore = defineStore({
                 this.collectionType = defaults.collectionType;
             }
 
-            await this.fetchTabData();
+            await this.fetchFilterOptions();
 
             this.getURLParams();
 
@@ -399,7 +397,6 @@ export const useCollectionStore = defineStore({
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -408,7 +405,6 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.trackSort();
-            this.resetPagination();
             this.getData();
         },
 

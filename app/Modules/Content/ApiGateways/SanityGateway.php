@@ -28,6 +28,7 @@ class SanityGateway
         "'permission_id': permission[]->railcontent_id",
         'child_count',
         "'description': description[0].children[0].text",
+        "'artist_name':coalesce(artist->name, instructor[0]->name)",
     ];
 
     private array $contentSpecificFields = [
@@ -98,7 +99,6 @@ class SanityGateway
             'video',
             "'soundslice_slug':soundslice[0]['soundslice_slug']",
             '"resources": resource',
-            "'artist_name':coalesce(artist->name, instructor[0]->name)",
             "instrumentless",
             "'chapters': chapter[]{
                     chapter_description,
