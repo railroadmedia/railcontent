@@ -71,10 +71,10 @@
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
         'text' => 'Save up to 90% on piano lessons, gear & more!',
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/save-badge.webp',
+        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/save-badge.webp',
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
         'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
-        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/BF-header-banner.webp',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/shop-banner-without-badge.jpg',
     ])
     @include('_partials.components.shop.index-filters')
 
@@ -83,6 +83,13 @@
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
             $bundles = [
+                 [
+                    'slug' => '/shop/challenges-bundle',
+                    'full' => true,
+                    'visible' => 1,
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full-m.webp',
+                ],
                 [
                     'slug' => '/shop/prima',
                     'full' => true,
@@ -128,7 +135,7 @@
                     <div class="w-full p-2">
                         <div class="flex flex-wrap sm:flex-nowrap items-center space-around border border-gray-300 px-4 sm:px-7 lg:px-6 py-4 sm:py-5 rounded-lg inline-block mx-auto"
                             style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-                            <p class="leading-normal flex-shrink-0 text-center pr-4 mb-3 sm:mb-0"><i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL BLACK FRIDAY BUNDLES<i class="fas fa-sparkle ml-3 inline lg:hidden"></i><br class="lg:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3 hidden lg:inline"></i></p>
+                            <p class="leading-normal flex-shrink-0 text-center pr-4 mb-3 sm:mb-0"><i class="fas fa-sparkle mr-3"></i><strong class="font-black">ALL CYBER MONDAY BUNDLES<i class="fas fa-sparkle ml-3 inline lg:hidden"></i><br class="lg:hidden"> = LOCKED CARTS</strong><i class="fas fa-sparkle ml-3 hidden lg:inline"></i></p>
                             <p class="leading-normal text-sm text-center sm:text-left max-w-lg">You’ll get FREE SHIPPING for USA/Canada and discounted shipping worldwide.
                                 You won’t be able to add or remove items for any featured bundle.</p>
                         </div>

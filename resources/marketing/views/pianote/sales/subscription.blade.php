@@ -360,8 +360,8 @@
 
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
-            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/BF-header-banner.webp')",
-            'badge' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/black-friday/home/save-badge.webp",
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/CM-header-banner.webp')",
+            'badge' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/save-badge.webp",
             'text' => 'Save up to 90% on piano lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
@@ -579,7 +579,7 @@
         'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true',
         'belowButton' => true,
-        'bundle'=> "deal",
+        'bundle'=> "deal-cyber-monday",
         ])
 
         @php

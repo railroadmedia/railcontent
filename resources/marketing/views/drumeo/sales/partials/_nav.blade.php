@@ -53,7 +53,7 @@
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Features Menu"  aria-controls="features-dd">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Instruments Menu" aria-controls="instruments-dd" title="View Instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" aria-label="Pricing" title="View Pricing">Pricing</a>
-                    <a style="color: #ffae00;" class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" aria-label="Shop" title="Visit Shop">Black Friday</a>
+                    <a style="color: #00D7FF;" class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" aria-label="Shop" title="Visit Shop">Cyber Monday</a>
                     <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" title="Read our Blog">Blog</a>
                 </div>
                 <div id="features-dd" class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44 z-[70]" tabindex="0">
