@@ -94,8 +94,8 @@
                     'slug' => '/shop/book-bundle',
                     'full' => true,
                     'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-70.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m-70.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full3.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m3.webp',
                 ],
                 [
                     'slug' => '/shop/prima-ultimate',
@@ -222,7 +222,7 @@
                          "discounted_price" => 399,
                          "title" => "The Book Bundle",
                          "instructor" => "Get the best online piano lessons and a library of piano books",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle3.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -353,7 +353,7 @@
                              "price" => 1321,
                              "discounted_price" => 399,
                              "title" => "The Book Bundle",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle.webp",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle3.webp",
                              'soldOut' => false,
                         ])
                     </div>

@@ -13,7 +13,7 @@
     <meta name="description" content="Get The Best Piano Lessons And A Library Of Piano Books">
     <meta property="og:description" content="Get The Best Piano Lessons And A Library Of Piano Books">
     <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/promos/black-friday/book-bundle-share-image.jpg"
+        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/promos/black-friday/shop/book-bundle-share-image3.jpg"
         style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
@@ -67,8 +67,8 @@ $stock = !empty($products['alesis-ekit']->getPublicStockCount())
             <div class="container mx-auto max-w-5xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/book-bundle-logo.svg"><br>
                 <h2 class="leading-tight my-3 lg:my-6"><strong>Get The Best Piano Lessons And A <br class="hidden md:block">Library Of Piano Books</strong></h2>
-                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-collage.webp" alt="Bundle Collage">
-                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-collage.webp" alt="Bundle Collage Mobile">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-collage2.webp" alt="Bundle Collage">
+                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/the-book-bundle/header-collage2.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1321</s><strong> $399</strong> <span class="text-[#A285FF] text-xl md:text-3xl">(Save 70%)</span></h2>
                     @if($stock > 0)
