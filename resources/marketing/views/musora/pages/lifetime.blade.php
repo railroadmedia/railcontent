@@ -149,7 +149,7 @@
             <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/promos/november/timeline-m.webp">
         </div>
     </section>
-    <section class="bg-gray-100 py-8 px-4 lg:py-24 lg:px-8">
+    <section class="py-8 px-4 lg:py-24 lg:px-8" style="background-color:#f4f8fb;">
         <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8">
             <div class="w-full sm:w-10/12 md:w-5/12">
                 <img
@@ -186,6 +186,27 @@
                 >
                     GET THE DEAL
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 px-6 sm:py-12 lg:py-24 lg:px-8">
+        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-start lg:items-center gap-4 lg:gap-8 text-left sm:text-center md:text-left">
+            <div class="w-full sm:w-10/12 md:w-1/2 sm:order-1">
+                <img
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1120x0/filters:quality(95)/marketing/musora/promos/november/musora-lifetime-songs.webp"
+                    alt="Group of people"
+                    class="w-full"
+                />
+            </div>
+
+            <div class="w-full sm:w-10/12 md:w-1/2 lg:pr-10">
+                <h3 class="mb-6"><strong>Music Licensing Is Hard</strong></h3>
+                <p class="leading-normal">
+                    A Lifetime Membership gives you unlimited access to all Musora lessons, live events, and in-house content – forever – across all of our instrument channels (Drumeo, Pianote Guitareo, Singeo, and any future channels). But a portion of your membership includes copyrighted material – with a growing library of famous songs with sheet music and playalong tools. 
+                    <br><br>
+                    <strong>You’ll get 3 years of Songs access with your lifetime membership.</strong> After that, because we need to pay a small fee to record labels, you’ll have the option to continue your Songs access for $40/year. This ensures you enjoy great music while supporting the artists who created it.
+                </p>
             </div>
         </div>
     </section>
