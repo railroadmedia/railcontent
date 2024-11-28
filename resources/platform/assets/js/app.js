@@ -22,8 +22,8 @@ const config = {
         useCachedAPI: true
       },
       railcontentConfig: {
-        token: window.railcontentConfig.token,
-        userId:  window.railcontentConfig.userId,
+        token: window.railcontentConfig?.token,
+        userId:  window.railcontentConfig?.userId,
       },
       localStorage: window.localStorage
 };
