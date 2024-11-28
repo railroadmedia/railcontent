@@ -5,6 +5,7 @@ namespace App\Modules\UserManagementSystem\Jobs;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncCustomerByEmail;
+use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Modules\UserManagementSystem\Models\OnboardingBrand;
@@ -33,10 +34,14 @@ class SyncOnboardingBrands implements ShouldQueue
         $subscriptionTopics = config('customer-io.subscription_topics');
         $topics = array_fill_keys(array_values($subscriptionTopics), false);
 
-        $profile = $customerIoService->getCustomerByEmail('musora', $user->email);
+        try {
+            $profile = $customerIoService->getCustomerByEmail('musora', $user->email);
 
-        if ($profile && array_key_exists('cio_subscription_preferences', $profile->getExternalAttributes())) {
-            $topics = json_decode($profile->getExternalAttributes()['cio_subscription_preferences'], true)['topics'] ?? $topics;
+            if ($profile && array_key_exists('cio_subscription_preferences', $profile->getExternalAttributes())) {
+                $topics = json_decode($profile->getExternalAttributes()['cio_subscription_preferences'], true)['topics'] ?? $topics;
+            }
+        } catch (Exception $_) {
+            // do nothing as the profile will get created
         }
 
         if ($brand != Brand::Musora->value && Brand::tryFrom($brand)) {
