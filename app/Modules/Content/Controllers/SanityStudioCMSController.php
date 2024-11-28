@@ -241,48 +241,11 @@ class SanityStudioCMSController extends BaseController
             }
             return $permission;
         } else {
-            $lessonType = array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('_type')] ?? null;
-            if(!$lessonType){
-                $lessonType = $request->get('_type');
-            }
             $updatedContents = [];
-            if ($request->has('railcontent_id')) {
-                $content = Content::query()
-                    ->where('type', '=', $lessonType)
-                    ->where('id', '=', $request->get('railcontent_id'))
-                    ->first();
-            }
-            if ($request->has('published_on')) {
-                // Parse and convert to PST/PDT
-                $datetimePST = Carbon::parse($request->get('published_on'))->setTimezone('America/Los_Angeles')->toDateTimeString();
-            }
-
-            if (!isset($content)) {
-                $content             = new Content();
-                $content->type       = $lessonType;
-                $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
-                $content->language   = 'en-US';
-                $content->created_on = Carbon::now()->toDateTimeString();
-                $content->status     = 'published';
-                $content->brand      = $request->get('brand');
-
-                $content->save();
-            }
-
-            $content->status = 'published';
-            $content->brand  = $request->get('brand');
-            $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
-            $content->setTitle($request->get('title'));
-            $content->setDifficulty($request->get('difficulty'));
-            $content->setXP($request->get('xp'));
-            $content->setReleased($request->get('released'));
-            $content->setAlbum($request->get('album'));
-            if(isset($datetimePST)){
-                $content->published_on = $datetimePST;
-            }
+            $lessonType = $this->getLessonType($request->get('_type'));
+            $content = $this->findOrCreateContent($request, $lessonType);
             $assignments = $content->setAssignments($request->get('assignment'));
 
-            $chilrens = [];
             if($request->has('childrenArray')){
                 $chilrens = $request->get('childrenArray');
                 foreach ($chilrens as $index=>$children){
@@ -297,57 +260,28 @@ class SanityStudioCMSController extends BaseController
                         $child->status     = 'published';
                         $child->save();
                         $childId = $child->id;
-                        $child->setParentId($content->id, 1);
-                        $child->setParentContentData([$content]);
                     }else{
                         $child = Content::with('children')
                             ->where('id', '=', $childId)
                             ->first();
-
-                        $child->setParentId($content->id, 1);
-                        $child->setParentContentData([$content]);
-                        foreach($child->children as $childHierarchy){
-                            $childOfChild =$childHierarchy->child;
-                            $childOfChild->setParentContentData([$child, $content]);
-                            $childOfChild = $urlDecorator->decorate(collect([$childOfChild]))->first();
-                            $webUrlPath = parse_url($childOfChild['url'] ?? '', PHP_URL_PATH);
-                            if($webUrlPath) {
-                                $childOfChild->setWebUrlPath($webUrlPath);
-                            }
-                            unset($childOfChild['url']);
-                            $childOfChild->save();
-
-                            $updatedContents[] = ['railcontent_id'=> $childOfChild->id, 'web_url_path'=> $childOfChild->web_url_path,
-                                                                   'parent_content_data'=> $childOfChild->parent_content_data];
-                        }
+                        $children = $child->children;
+                        $childrenWithGrandchildren = $children->map(function($childHierarchy) {
+                            return                               $childHierarchy->child                           ;
+                        });
+                        $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, [$child,$content], $urlDecorator, $updatedContents);
                     }
-                    if (isset($children['published_on'])) {
-                        // Parse and convert to PST/PDT
-                        $datetimePST = Carbon::parse($children['published_on'])->setTimezone('America/Los_Angeles')->toDateTimeString();
-                        $child->published_on = $datetimePST;
-                    }
+                    $child->setParentId($content->id, 1);
+                    $child->setParentContentData([$content]);
                     $content->setChildId($childId, ($index + 1));
-                    $child = $urlDecorator->decorate(collect([$child]))->first();
-                    $webUrlPath = parse_url($child['url'] ?? '', PHP_URL_PATH);
-                    if($webUrlPath) {
-                        $child->setWebUrlPath(parse_url($child['url'] ?? '', PHP_URL_PATH));
-                    }
-                    unset($child['url']);
+                    $this->decorateContent($child, $urlDecorator);
                     $child->save();
-
                     $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
                 }
             }
             if($request->has('parent_id')){
                     $content->setParentId($request->get('parent_id'), 1);
                 }
-            $content = $urlDecorator->decorate(collect([$content]))->first();
-            $webUrlPath = parse_url($content['url'] ?? '', PHP_URL_PATH);
-            if($webUrlPath) {
-                $content->setWebUrlPath(parse_url($content['url'] ?? '', PHP_URL_PATH));
-            }
-
-            unset($content['url']);
+            $this->decorateContent($content, $urlDecorator);
             $content->save();
             $results = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data];
             if($assignments) {
@@ -357,6 +291,63 @@ class SanityStudioCMSController extends BaseController
 
             return $results;
         }
+    }
+
+    /**
+     * Finds or creates the top-level content based on the request.
+     *
+     * @param Request $request
+     * @return Content
+     */
+    private function findOrCreateContent(Request $request, $lessonType): Content
+    {
+        // Attempt to find an existing content.
+        $content = Content::query()
+            ->where('type', '=', $lessonType)
+            ->where('id', '=', $request->get('railcontent_id'))
+            ->first();
+
+        // Create a new content if it doesn't exist.
+        if (!$content) {
+            $content = new Content();
+            $content->type = $lessonType;
+            $content->slug = $request->get('slug')['current'] ?? null;
+            $content->language = 'en-US';
+            $content->status = 'published';
+            $content->brand = $request->get('brand');
+            $content->created_on = Carbon::now()->toDateTimeString();
+            $content->save();
+        }
+
+        return $content;
+    }
+
+    /**
+     * Decorates a content object with its web URL.
+     *
+     * @param Content $content
+     * @param UrlDecorator $urlDecorator
+     * @return void
+     */
+    private function decorateContent(Content $content, UrlDecorator $urlDecorator): void
+    {
+        $content = $urlDecorator->decorate(collect([$content]))->first();
+        $webUrlPath = parse_url($content['url'] ?? '', PHP_URL_PATH);
+        if ($webUrlPath) {
+            $content->setWebUrlPath($webUrlPath);
+        }
+        unset($content['url']);
+    }
+
+    /**
+     * Retrieves the lesson type based on the Sanity type.
+     *
+     * @param string|null $type
+     * @return string|null
+     */
+    private function getLessonType(?string $type): ?string
+    {
+        return array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$type] ?? $type;
     }
 
     public function getVimeoEndpoints(string $vimeoId): ?Vimeo
@@ -380,5 +371,39 @@ class SanityStudioCMSController extends BaseController
       }
 
         return $video;
+    }
+
+    /**
+     * @param array $children
+     * @param array $parents
+     * @param mixed $urlDecorator
+     * @param array $updatedContents
+     * @return array
+     */
+    private function updateHierarchy(
+        array $children,
+        array $parents,
+        mixed $urlDecorator,
+        array $updatedContents
+    ): array {
+        foreach ($children as $childOfChild) {
+            $childOfChild->setParentContentData($parents);
+            $this->decorateContent($childOfChild, $urlDecorator);
+            $childOfChild->save();
+            $updatedContents[] = [
+                'railcontent_id' => $childOfChild->id,
+                'web_url_path' => $childOfChild->web_url_path,
+                'parent_content_data' => $childOfChild->parent_content_data
+            ];
+            if($childOfChild->children) {
+                $children =$childOfChild->children;
+                $childrenWithGrandchildren = $children->map(function ($childHierarchy) {
+                    return $childHierarchy->child;
+                });
+                $parents = array_merge([$childOfChild], $parents);
+                $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, $parents, $urlDecorator, $updatedContents);
+            }
+        }
+        return $updatedContents;
     }
 }
