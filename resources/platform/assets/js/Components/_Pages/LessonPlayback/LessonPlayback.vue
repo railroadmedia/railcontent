@@ -473,7 +473,7 @@ const openSlice = (title, index, startAt, loop) => {
     startLooping.value = loop;
 
     if (loop) {
-        chapterEndTime.value = formattedChapters.value.length === index ? videoData.value?.length_in_seconds : formattedChapters.value[index].time;
+        chapterEndTime.value =  videoData.value?.chapters.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.chapter_timecode;
     }
 
     openSoundslice.value = true;
