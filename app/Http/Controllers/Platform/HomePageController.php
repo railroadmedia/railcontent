@@ -342,9 +342,20 @@ class HomePageController extends BaseController
 
     public function onboarding(Request $request)
     {
+        $newUser = !$this->onboardingService->getBrand(user()->id);
+        $user = User::whereId(Auth::id())->firstOrFail();
+
+        if ($user->primary_brand) {
+            $this->onboardingService->saveInstrument(
+                $this->onboardingService->getInstrumentFromBrand($user->primary_brand)
+            );
+        }
+
         Avo::onboarding_started(AvoHelper::defaultEventProperties());
 
-        return view('home.onboarding');
+        return view('home.onboarding', [
+            'newUser' => $newUser,
+        ]);
     }
 
     /**
