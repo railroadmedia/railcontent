@@ -45,6 +45,7 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
+            this.resetPagination();
             this.getData();
         },
 
@@ -63,6 +64,7 @@ export const useCollectionStore = defineStore({
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
             this.trackFilter();
+            this.resetPagination();
             this.getData();
         },
 
@@ -298,6 +300,10 @@ export const useCollectionStore = defineStore({
             }
         },
 
+        resetPagination(){
+            this.tabData[this.filter.activeTab].currentPage = 1;
+        },
+
         async setData(response, replace) {
             const userStore = useUserStore();
             //console.log('this.getIncludedFields()', this.getIncludedFields())
@@ -393,6 +399,7 @@ export const useCollectionStore = defineStore({
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
+            this.resetPagination();
             this.getData();
         },
 
@@ -401,6 +408,7 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.trackSort();
+            this.resetPagination();
             this.getData();
         },
 
