@@ -54,5 +54,6 @@ class PrimaryURLSlugToContentTypeMap
         'drum-fest-international-2022' => 'drum-fest-international-2022',
         'workouts' => 'workout',
         'odd-times'=>'odd-times',
+        'pack' => 'pack',
     ];
 }

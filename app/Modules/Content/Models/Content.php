@@ -838,16 +838,25 @@ class Content extends Model
         }
     }
 
-    public function setParentContentData($parent)
+    public function setParentContentData($parents)
     {
-        $parentContentData = [(object)[
-            'id' => $parent['id'],
-            'slug' => $parent['slug'],
-            'type' => $parent['type'],
-            'position' => null,
-        ]];
+        $parentContentData = [];
+        foreach($parents as $parent) {
+            $parentContentData[] =
+                (object)[
+                    'id'       => $parent['id'],
+                    'slug'     => $parent['slug'],
+                    'type'     => $parent['type'],
+                    'position' => null,
+                ];
+        }
 
         $this->parent_content_data = (json_encode($parentContentData));
         $this->save();
+    }
+
+    public function setWebUrlPath($value)
+    {
+        $this->web_url_path = $value;
     }
 }

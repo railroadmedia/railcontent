@@ -12,7 +12,7 @@ class UrlDecorator extends ModeDecoratorBase
      * @param Collection|ContentEntity[] $contents
      * @return array|Collection
      */
-    public function decorate(Collection $contents)
+    public function decorate(Collection|\Illuminate\Support\Collection $contents)
     {
         if ($contents->isEmpty()) {
             return $contents;
@@ -25,7 +25,8 @@ class UrlDecorator extends ModeDecoratorBase
              */
 
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
-            $contentParentData = $content->getParentContentData();
+            $contentParentData = json_decode($content['parent_content_data'] ?? '') ?? [];
+                //$content->getParentContentData();
 
             if(count($contentParentData) == 1 && $contentParentData[0]->type == 'edge-pack') {
                 $contentParentData = [];

@@ -80,6 +80,7 @@ use Illuminate\Http\Response;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
+use App\Decorators\Content\UrlDecorator;
 
 class SanityStudioCMSController extends BaseController
 {
@@ -229,6 +230,8 @@ class SanityStudioCMSController extends BaseController
 
     public function getLastContent(Request $request): array|Content
     {
+        $urlDecorator = app()->make(UrlDecorator::class);
+
         if ($request->get('_type') === 'permission') {
             $permissionService = app()->make(PermissionService::class);
             $permission = $permissionService->getByName($request->get('name'));
@@ -237,6 +240,7 @@ class SanityStudioCMSController extends BaseController
             }
             return $permission;
         } else {
+            $updatedContents = [];
             if ($request->has('railcontent_id')) {
                 $content = Content::query()
                     ->where('type', '=', $request->get('_type'))
@@ -270,55 +274,64 @@ class SanityStudioCMSController extends BaseController
             $content->setReleased($request->get('released'));
             $content->setAlbum($request->get('album'));
             $assignments = $content->setAssignments($request->get('assignment'));
+
             $chilrens = [];
             if($request->has('childrenArray')){
                 $chilrens = $request->get('childrenArray');
                 foreach ($chilrens as $index=>$children){
                     $childId = $children['railcontent_id'];
                     if(!$childId){
-                        $newChild = new Content();
-                        $newChild->type = $children['_type'];
-                        $newChild->slug = $children['slug'];
-                        $newChild->brand = $children['brand'];
-                        $newChild->language   = 'en-US';
-                        $newChild->created_on = Carbon::now()->toDateTimeString();
-                        $newChild->status     = 'published';
-                        $newChild->save();
-                        $childId = $newChild->id;
-                        $newChild->setParentId($content->id, 1);
-                        $newChild->setParentContentData($content);
+                        $child = new Content();
+                        $child->type = $children['_type'];
+                        $child->slug = $children['slug'];
+                        $child->brand = $children['brand'];
+                        $child->language   = 'en-US';
+                        $child->created_on = Carbon::now()->toDateTimeString();
+                        $child->status     = 'published';
+                        $child->save();
+                        $childId = $child->id;
+                        $child->setParentId($content->id, 1);
+                        $child->setParentContentData([$content]);
                     }else{
-                        $child = Content::query()
+                        $child = Content::with('children')
                             ->where('id', '=', $childId)
                             ->first();
+
                         $child->setParentId($content->id, 1);
-                        $child->setParentContentData($content);
+                        $child->setParentContentData([$content]);
+                        foreach($child->children as $childHierarchy){
+                            $childOfChild =$childHierarchy->child;
+                            $childOfChild->setParentContentData([$child, $content]);
+                            $childOfChild = $urlDecorator->decorate(collect([$childOfChild]))->first();
+                            $childOfChild->setWebUrlPath(parse_url($childOfChild['url'] ?? '', PHP_URL_PATH));
+                            unset($childOfChild['url']);
+                            $childOfChild->save();
+
+                            $updatedContents[$childOfChild->id] = ['railcontent_id'=> $childOfChild->id, 'web_url_path'=> $childOfChild->web_url_path,
+                                                                   'parent_content_data'=> $childOfChild->parent_content_data];
+                        }
                     }
                     $content->setChildId($childId, ($index + 1));
-                    event(new ContentCreated($childId));
-                    $childrens[] = Content::query()
-                        ->where('id', '=', $childId)
-                        ->first();
+                    $child = $urlDecorator->decorate(collect([$child]))->first();
+                    $child->setWebUrlPath(parse_url($child['url'] ?? '', PHP_URL_PATH));
+                    unset($child['url']);
+                    $child->save();
+                    $updatedContents[$childId] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
                 }
             }
             if($request->has('parent_id')){
                     $content->setParentId($request->get('parent_id'), 1);
                 }
-
+            $content = $urlDecorator->decorate(collect([$content]))->first();
+            $content->setWebUrlPath(parse_url($content['url'] ?? '', PHP_URL_PATH));
+            unset($content['url']);
             $content->save();
-
-            event(new ContentCreated($content->id));
-
-            //need to pull again content for the web_url_path
-            $content = Content::query()
-                ->where('id', '=', $content->id)
-                ->first();
+             $updatedContents[$content->id] = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data,
+                                              'assignments' => $assignments];
             if($assignments) {
                 $content['assignment'] = $assignments;
             }
-            if(!empty($chilrens)){
-                $content['childrens'] = $childrens;
-            }
+            $content['relatedDocs'] = $updatedContents;
 
             return $content;
         }
