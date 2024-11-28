@@ -290,7 +290,7 @@
                     @include('_partials.components.shop.product-card', [
                         "discounted_price" => 240,
                         "href" => "/shop/gift-bundle",
-                        "price" =>  322.94,
+                        "price" =>  349,
                         "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/590x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/gift-bundle.webp",
                         "title" => "The Gift Bundle",
                         'soldOut' => false,
