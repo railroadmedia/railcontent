@@ -251,14 +251,13 @@ class SanityStudioCMSController extends BaseController
                     ->where('type', '=', $lessonType)
                     ->where('id', '=', $request->get('railcontent_id'))
                     ->first();
-            } else {
-                $content = Content::query()
-                    ->where('type', '=', $lessonType)
-                    ->where('slug', '=', $request->get('slug')['current'])
-                    ->first();
+            }
+            if ($request->has('published_on')) {
+                // Parse and convert to PST/PDT
+                $datetimePST = Carbon::parse($request->get('published_on'))->setTimezone('America/Los_Angeles')->toDateTimeString();
             }
 
-            if (!$content) {
+            if (!isset($content)) {
                 $content             = new Content();
                 $content->type       = $lessonType;
                 $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
@@ -278,6 +277,9 @@ class SanityStudioCMSController extends BaseController
             $content->setXP($request->get('xp'));
             $content->setReleased($request->get('released'));
             $content->setAlbum($request->get('album'));
+            if(isset($datetimePST)){
+                $content->published_on = $datetimePST;
+            }
             $assignments = $content->setAssignments($request->get('assignment'));
 
             $chilrens = [];
@@ -308,37 +310,52 @@ class SanityStudioCMSController extends BaseController
                             $childOfChild =$childHierarchy->child;
                             $childOfChild->setParentContentData([$child, $content]);
                             $childOfChild = $urlDecorator->decorate(collect([$childOfChild]))->first();
-                            $childOfChild->setWebUrlPath(parse_url($childOfChild['url'] ?? '', PHP_URL_PATH));
+                            $webUrlPath = parse_url($childOfChild['url'] ?? '', PHP_URL_PATH);
+                            if($webUrlPath) {
+                                $childOfChild->setWebUrlPath($webUrlPath);
+                            }
                             unset($childOfChild['url']);
                             $childOfChild->save();
 
-                            $updatedContents[$childOfChild->id] = ['railcontent_id'=> $childOfChild->id, 'web_url_path'=> $childOfChild->web_url_path,
+                            $updatedContents[] = ['railcontent_id'=> $childOfChild->id, 'web_url_path'=> $childOfChild->web_url_path,
                                                                    'parent_content_data'=> $childOfChild->parent_content_data];
                         }
                     }
+                    if (isset($children['published_on'])) {
+                        // Parse and convert to PST/PDT
+                        $datetimePST = Carbon::parse($children['published_on'])->setTimezone('America/Los_Angeles')->toDateTimeString();
+                        $child->published_on = $datetimePST;
+                    }
                     $content->setChildId($childId, ($index + 1));
                     $child = $urlDecorator->decorate(collect([$child]))->first();
-                    $child->setWebUrlPath(parse_url($child['url'] ?? '', PHP_URL_PATH));
+                    $webUrlPath = parse_url($child['url'] ?? '', PHP_URL_PATH);
+                    if($webUrlPath) {
+                        $child->setWebUrlPath(parse_url($child['url'] ?? '', PHP_URL_PATH));
+                    }
                     unset($child['url']);
                     $child->save();
-                    $updatedContents[$childId] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
+
+                    $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
                 }
             }
             if($request->has('parent_id')){
                     $content->setParentId($request->get('parent_id'), 1);
                 }
             $content = $urlDecorator->decorate(collect([$content]))->first();
-            $content->setWebUrlPath(parse_url($content['url'] ?? '', PHP_URL_PATH));
+            $webUrlPath = parse_url($content['url'] ?? '', PHP_URL_PATH);
+            if($webUrlPath) {
+                $content->setWebUrlPath(parse_url($content['url'] ?? '', PHP_URL_PATH));
+            }
+
             unset($content['url']);
             $content->save();
-             $updatedContents[$content->id] = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data,
-                                              'assignments' => $assignments];
+            $results = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data];
             if($assignments) {
-                $content['assignment'] = $assignments;
+                $results['assignments'] = $assignments;
             }
-            $content['relatedDocs'] = $updatedContents;
+            $results['relatedDocs'] = $updatedContents;
 
-            return $content;
+            return $results;
         }
     }
 

@@ -58,23 +58,23 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
             }
         };
 
-        const patchChildDocument = async (childId, updates, childrenArray) => {
-            const documentId = mapRailcontentToId(childrenArray, childId);
-            if (!documentId) {
+        const patchChildDocument = async (childId, updates) => {
+            const document =  await fetchDocument(`*[railcontent_id == ${childId}]{  _type, _id, railcontent_id, title, brand }`);
+            if (!document) {
                 console.error(`No matching document found for railcontent_id: ${childId}`);
                 return;
             }
 
             try {
                 const mutations = {
-                    mutations: [{ patch: { id: documentId, set: updates } }],
+                    mutations: [{ patch: { id: document[0]._id, set: updates } }],
                 };
                 const response = await mutate(mutations);
                 console.log('rox mutation mutate response ::::: ', response);
                 if (response?.results) {
-                    console.log(`Successfully updated child document with _id: ${documentId}`);
+                    console.log(`Successfully updated child document with _id: ${document[0]._id}`);
                 } else {
-                    console.error(`Failed to update child document with _id: ${documentId}`);
+                    console.error(`Failed to update child document with _id: ${document[0]._id}`);
                 }
             } catch (error) {
                 console.error(`Failed to update child document ${childId}:`, error);
@@ -94,7 +94,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
                     // Fetch child documents in parallel
                     childrenArray = await Promise.all(
-                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand }[0]`))
+                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand, published_on }[0]`))
                     );
                     draftCopy.childrenArray = childrenArray;
                 }
@@ -153,10 +153,8 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     }
 
                     const data = await response.json();
-                    patch.execute([{ set: { railcontent_id: data.id, web_url_path: data.web_url_path, assignment: data.assignment } }]);
-                    console.log('rox start from zero  ++++++++++++++++  ', data);
+                    patch.execute([{ set: { railcontent_id: data.railcontent_id, web_url_path: data.web_url_path, assignment: data.assignments } }]);
                     if (data.relatedDocs) {
-                        console.log('rox need to update child doc ::: roxana actions.js  ++++++++++++++++  ', data.relatedDocs);
                         for (const child of data.relatedDocs) {
                             console.log('rox need to update child   in for  ::: ', child);
                             let updates = {
@@ -176,37 +174,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                                     ]
                                 };
                             }
-                            console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates, child);
-                            await patchChildDocument(child.id, updates, childrenArray);
-                            console.log('rox need to update child after  patchChildDocument ++++++++++++++++  ', child.children);
-                            if (child.children) {
-                                console.log('rox need to update child for child doc ::: roxana actions.js  ++++++++++++++++  ', child.childrens);
-                                for (const child of child.childrens) {
-                                    console.log('rox need to update child   in for  ::: ', child);
-                                    let updates = {
-                                        web_url_path: child.web_url_path
-                                    };
-                                    if (child.parent_content_data) {
-                                        const parentData = JSON.parse(child.parent_content_data)[0];
-                                        updates = {
-                                            ...updates,
-                                            parent_content_data: [
-                                                {
-                                                    slug: parentData.slug,
-                                                    type: parentData.type,
-                                                    id:   parentData.id,
-                                                    _key: randomKey(),
-                                                }
-                                            ]
-                                        };
-                                    }
-//                                     childrenArray = await Promise.all(
-//                                         child.childrens.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand }[0]`))
-//                                     );
-//                                     console.log('rox need to update child doc  before patchChildDocument ::: ', child.id, updates);
-//                                     await patchChildDocument(child.id, updates, childrenArray);
-                                }
-                            }
+                            await patchChildDocument(child.railcontent_id, updates);
                         }
                     }
                 } catch (error) {
