@@ -13,7 +13,7 @@
     <meta name="description" content="3 Popular Course For The Price Of 1.">
     <meta property="og:description" content="3 Popular Course For The Price Of 1.">
     {{-- TODO: Add image--}}
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/cyber-monday/challenges-share-image-new.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
