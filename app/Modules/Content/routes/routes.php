@@ -5,6 +5,7 @@ use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
 use App\Modules\Content\Controllers\UserPermissionsController;
+use App\Modules\Content\Controllers\V1\CarouselControllerV1;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -184,6 +185,22 @@ Route::prefix('challenges')
             'complete_lesson/{id}',
             [ChallengesMetaDataController::class, 'completeLesson']
         )->name('challenges.complete_lesson');
+
+        Route::post(
+            'hide_completed_banner/{id}',
+            [ChallengesMetaDataController::class, 'hideCompletedBadge']
+        )->name('challenges.hide_banner');
+    });
+
+// NOTE: I'd move this from here to a separate file, but I'm not sure where it should go (perhaps api.php?)
+// We should version the API even if we're versioning in MCS
+Route::as('api.')
+    ->prefix('/api')
+    ->middleware('web_or_api_authenticated')
+    ->group(function () {
+        Route::get('/v1/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
+            ->middleware('api_version:v1')
+            ->name('v1.content.carousel');
     });
 
 Route::prefix('playlists')

@@ -4,6 +4,7 @@
     <testsuite name="Unit">
       <directory suffix="Test.php">./tests/Unit</directory>
       <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Unit</directory>
+      <directory suffix="Test.php">./app/Modules/Content/tests/Unit</directory>
       <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Unit</directory>
       <directory suffix="Test.php">./app/Modules/MusoraApi/tests/V5/Unit</directory>
       <directory suffix="Test.php">./app/Modules/EventTracking/tests/Unit</directory>

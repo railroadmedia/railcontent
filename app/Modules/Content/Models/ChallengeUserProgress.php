@@ -2,11 +2,13 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\UserManagementSystem\Models\User;
 
 enum AwardTier: string
@@ -34,6 +36,7 @@ enum ChallengeUserProgressStatus: string
  * @property boolean $is_locked
  * @property boolean $is_active
  * @property boolean $is_solo
+ * @property boolean $hide_completed_banner
  * @property integer $current_rest_days
  * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date
  * @property Carbon $start_date
@@ -64,6 +67,43 @@ class ChallengeUserProgress extends Model
     public function content(): BelongsTo
     {
         return $this->belongsTo(Content::class, 'content_id');
+    }
+
+    public function scopeCompleted(Builder $query): Builder
+    {
+        return $query->whereNotNull('last_completed_date');
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query
+            ->where('is_active', true)
+            ->where('start_date', '<=',  Carbon::now()->addHours(24));
+    }
+
+    public function scopeSolo(Builder $query): Builder
+    {
+        return $query->where('is_solo', true);
+    }
+
+    public function scopeCommunity(Builder $query): Builder
+    {
+        return $query->where('is_solo', false);
+    }
+
+    public function scopeBrand(Builder $query, string $brand): Builder
+    {
+        // TODO TCH-112 - I don't think this branding works as expected, I don't know if content is linked this way
+        if (Brand::tryFrom($brand)) {
+            return $query->whereHas('content', fn (Builder $query) => $query->where('brand', $brand));
+        }
+
+        return $query;
+    }
+
+    public function scopeShowBadgeInBanner(Builder $query): Builder
+    {
+        return $query->where('hide_completed_banner', false);
     }
 
     public function getStartAndEndDate(): array
@@ -235,11 +275,11 @@ class ChallengeUserProgress extends Model
      */
     public static function calculateDefaultRestDays(array $challenge): int
     {
-        return ChallengeUserProgress::getNumberOfDaysInChallenge($challenge) >= 10 ? 1 : 0;
+        return ChallengeUserProgress::getNumberOfLessonDaysInChallenge($challenge) >= 10 ? 1 : 0;
     }
 
 
-    private static function getNumberOfDaysInChallenge(array $challenge): int
+    public static function getNumberOfLessonDaysInChallenge(array $challenge): int
     {
         $lessonLessonsAsOpposedToIntroLessons = array_filter($challenge['lessons'], function ($lesson) {
             return !($lesson['is_always_unlocked_for_challenge'] ?? false);

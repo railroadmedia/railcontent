@@ -28,6 +28,7 @@ class SanityGateway
         "'permission_id': permission[]->railcontent_id",
         'child_count',
         "'description': description[0].children[0].text",
+        "'artist_name':coalesce(artist->name, instructor[0]->name)",
     ];
 
     private array $contentSpecificFields = [
@@ -55,6 +56,9 @@ class SanityGateway
             '"logo_image_url": logo_image_url.asset->url',
             '"dark_mode_logo_url": dark_mode_logo_url.asset->url',
             '"light_mode_logo_url": light_mode_logo_url.asset->url',
+            '"bgImg": bgImg.asset->url',
+            '"wideImg": wideImg.asset->url',
+            '"squareImg": squareImg.asset->url',
             'child_count',
             '"badge" : badge.asset->url',
             '"lessons": child[]->{
@@ -98,7 +102,6 @@ class SanityGateway
             'video',
             "'soundslice_slug':soundslice[0]['soundslice_slug']",
             '"resources": resource',
-            "'artist_name':coalesce(artist->name, instructor[0]->name)",
             "instrumentless",
             "'chapters': chapter[]{
                     chapter_description,
@@ -281,6 +284,19 @@ class SanityGateway
         } [0 ... 1]";
         $document = $gateway->sanity->fetch($query)[0] ?? [];
         return $document;
+    }
+
+    public function getChallengesWithOpenEnrollment(string $brand): array
+    {
+        $challengeFields = $this->getFieldsString('challenge');
+        $query = "*[_type == 'challenge'
+            && enrollment_start_time <= now()
+            && enrollment_end_time >= now()
+            && brand == '$brand'
+            ]{
+            $challengeFields,
+        }";
+        return $this->sanity->fetch($query);
     }
 
     public function getAssignmentsByRailcontentIds($brand, array $ids, array $parentIds, ?string $type = null, bool $includeParents = false)

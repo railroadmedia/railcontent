@@ -38,6 +38,7 @@ abstract class ParentTemplate extends BaseSanityModel
         public bool $withEnrollment = false,
         public bool $withTrailer = false,
         public ?string $parentType = null,
+        public array $extraGroups = [],
     ) {
         $instructorReference = new Reference([['type' => 'instructor']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
@@ -63,6 +64,7 @@ abstract class ParentTemplate extends BaseSanityModel
         $groups       = [
             $detailsGroup,
             $openAIGroup,
+            ... $this->extraGroups,
         ];
 
         $fields  = [
@@ -178,6 +180,15 @@ abstract class ParentTemplate extends BaseSanityModel
     {
         foreach ($fields as $field) {
             $this->fields[] = $field;
+        }
+    }
+
+    protected function addGroupToFields(array $fieldNames, Group $group)
+    {
+        foreach($this->fields as $index => $field) {
+            if(in_array($field->name, $fieldNames)) {
+                $this->fields[$index]->addToGroup($group);
+            }
         }
     }
 }
