@@ -99,11 +99,11 @@
             <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
             <div class="tw-flex tw-justify-center tw-items-center tw-relative tw-z-[5]">
                 <svg class="tw-transform -tw-rotate-90 tw-w-[260px] tw-h-[260px]">
-                    <circle cx="130" cy="130" r="121" stroke="currentColor" stroke-width="20" fill="transparent"
+                    <circle cx="130" cy="130" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
                             class="tw-text-[#112E4A] tw-drop-shadow-md" />
-                    <circle cx="130" cy="130" r="121" stroke="currentColor" stroke-width="20" fill="transparent"
+                    <circle cx="130" cy="130" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
                             :stroke-dasharray="circumference"
-                            :stroke-dashoffset="circumference - progressPercent / 100 * circumference"
+                            :stroke-dashoffset="circumference - (progressPercent / 100) * circumference"
                             :class="`tw-text-${brand}`" />
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
@@ -185,7 +185,8 @@ const isLeaveModalOpen = ref(false);
 const infoModalType = ref('');
 const countdownString = ref('');
 
-const circumference = 2 * 22 / 7 * 108;
+const radius = 120;
+const circumference = 2 * Math.PI * radius;
 
 const isSoloChallenge = computed(() => {
     return props.challenge.is_solo;
