@@ -46,7 +46,7 @@ class Routine extends BaseSanityModel
         );
 
         $assignmentsList = new ListObject(
-            fields: [new Field(FieldType::String, 'assignment_title'),
+            fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
                         new Field(FieldType::URL, 'assignment_sheet_music_image')
@@ -72,7 +72,8 @@ class Routine extends BaseSanityModel
                 FieldType::Slug,
                 'slug',
                 options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
-                hidden:  "({document}) => !document?.title,",
+                hidden:  "({document}) => !document?.title",
+                validation: [new Required()],
                 group:   $detailsGroup
             ),
             new BrandField($detailsGroup),

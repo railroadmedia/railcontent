@@ -16,7 +16,7 @@
                         :songTitle= "data?.title"
                         :songArtist= "data?.artist_name"
                         :songAlbum= "data?.album"
-                        :songMeta= "data?.genre[0]"
+                        :genre= "data?.genre"
                         :assignments= "data?.soundslice"
                         :hasInstrumentless="data?.instrumentless"
                         :isAdded= "isAdded"
@@ -63,7 +63,7 @@
     </div>
 </template>
 <script setup>
-    import { ref, onBeforeMount } from 'vue';
+    import { ref, onBeforeMount, computed } from 'vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '@stores/user';
     import { usePlatformStore } from '@stores/platform';

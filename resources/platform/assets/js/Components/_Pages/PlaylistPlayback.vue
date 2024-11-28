@@ -360,7 +360,7 @@ const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = titl
     startLooping.value = loop;
 
     if (loop) {
-        chapterEndTime.value = formattedChapters.value.length === index ? props.totalDuration : formattedChapters.value[index].time;
+        chapterEndTime.value =  videoData.value?.chapters.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.chapter_timecode;
     }
 
     openSoundslice.value = true;

@@ -806,11 +806,11 @@ class Content extends Model
                     $assignment->language   = 'en-US';
                     $assignment->created_on = Carbon::now()->toDateTimeString();
                     $assignment->brand      = $this->brand;
-                    $assignment->soundslice_slug = $assignmentData['assignment_soundslice'];
+                    $assignment->soundslice_slug = $assignmentData['assignment_soundslice']??null;
                     $assignment->save();
                     $value[$index]['railcontent_id'] = $assignment->id;
                     $assignment->setParentId($this->id);
-                    $assignment->setDescription($assignmentData['assignment_description']);
+                    $assignment->setDescription($assignmentData['assignment_description']??null);
                 }
             }
         }

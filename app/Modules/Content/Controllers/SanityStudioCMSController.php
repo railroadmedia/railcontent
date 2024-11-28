@@ -4,6 +4,7 @@ namespace App\Modules\Content\Controllers;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
 use App\Http\Controllers\BaseController;
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\CatalogMetadata;
@@ -240,22 +241,26 @@ class SanityStudioCMSController extends BaseController
             }
             return $permission;
         } else {
+            $lessonType = array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('_type')] ?? null;
+            if(!$lessonType){
+                $lessonType = $request->get('_type');
+            }
             $updatedContents = [];
             if ($request->has('railcontent_id')) {
                 $content = Content::query()
-                    ->where('type', '=', $request->get('_type'))
+                    ->where('type', '=', $lessonType)
                     ->where('id', '=', $request->get('railcontent_id'))
                     ->first();
             } else {
                 $content = Content::query()
-                    ->where('type', '=', $request->get('_type'))
+                    ->where('type', '=', $lessonType)
                     ->where('slug', '=', $request->get('slug')['current'])
                     ->first();
             }
 
             if (!$content) {
                 $content             = new Content();
-                $content->type       = $request->get('_type');
+                $content->type       = $lessonType;
                 $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
                 $content->language   = 'en-US';
                 $content->created_on = Carbon::now()->toDateTimeString();
