@@ -137,7 +137,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async fetchTabData(){
+        async fetchFilterOptions(){
             const userStore = useUserStore();
 
             const params = new URLSearchParams(window.location.search);
@@ -170,8 +170,6 @@ export const useCollectionStore = defineStore({
                 if(this.tabOptions.length === 0){
                     //Set Tab Options
                     this.tabOptions = formatTabData(result.tabs, result.catalogName)
-                    console.log('tab tab', result)
-                    console.log('after fetch', this.tabOptions)
                 }
             } else {
                 throw new Error('Failed to fetch Filter Options');
@@ -180,6 +178,7 @@ export const useCollectionStore = defineStore({
 
         async fetchData() {
             try {
+                await this.fetchFilterOptions();
                 const response = await this.getEndpoint(this.fetchType);
 
                 return response;
@@ -351,7 +350,7 @@ export const useCollectionStore = defineStore({
                 this.collectionType = defaults.collectionType;
             }
 
-            await this.fetchTabData();
+            await this.fetchFilterOptions();
 
             this.getURLParams();
 
