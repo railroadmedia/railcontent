@@ -32,19 +32,20 @@
 
             <div class="tw-flex tw-flex-row">
                 <content-catalogue
-                        content-endpoint="/railcontent/content"
-                        catalogue-type="list"
-                        limit="20"
-                        theme-color="drumeo"
-                        :use-theme-color="true"
-                        :pre-loaded-content="{{ $lessons }}"
-                        user-id="{{ auth()->id() }}"
-                        :search-bar="true"
-                        :use-url-params="true"
-                        :paginate="true"
-                        :statuses="['archived']"
-                        total-results="{{ $totalResults }}"
-                        :show-loading-animation="true"></content-catalogue>
+                    content-endpoint="/railcontent/content"
+                    catalogue-type="list"
+                    limit="20"
+                    theme-color="drumeo"
+                    :use-theme-color="true"
+                    :pre-loaded-content="{{ $lessons }}"
+                    user-id="{{ auth()->id() }}"
+                    :search-bar="true"
+                    :use-url-params="true"
+                    :paginate="true"
+                    :statuses="['archived']"
+                    total-results="{{ $totalResults }}"
+                    :show-loading-animation="true">
+                </content-catalogue>
             </div>
         </div>
     </div>

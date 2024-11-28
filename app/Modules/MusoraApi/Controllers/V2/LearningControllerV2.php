@@ -6,7 +6,7 @@ use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Illuminate\Routing\Controller;
 
-class LearningController extends Controller
+class LearningControllerV2 extends Controller
 {
     public function __construct(private LearningPathsService $learningPathsService)
     {

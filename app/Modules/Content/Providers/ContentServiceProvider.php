@@ -3,15 +3,16 @@
 namespace App\Modules\Content\Providers;
 
 use App\Modules\Content\Console\Commands\VerifyUserContextPerformance;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
+use App\Modules\Content\Policies\ContentPolicy;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 class ContentServiceProvider extends ServiceProvider
 {
-
-
     /**
      * Bootstrap the application services.
      */
@@ -36,6 +37,15 @@ class ContentServiceProvider extends ServiceProvider
         ContentField::observe(ContentFieldObserver::class);
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // model policies
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            if ($modelClass === Content::class) {
+                return ContentPolicy::class;
+            }
+
+            return null;
+        });
     }
 
     /**

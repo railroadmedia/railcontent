@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Platform;
 
-use Illuminate\View\View;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
@@ -14,6 +13,7 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Modules\Content\Models\Content;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -22,8 +22,9 @@ use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Models\User;
+use Illuminate\View\View;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
@@ -274,6 +275,10 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
+        $content = Content::findOrFail($firstId);
+        if (!Gate::check('view', $content)) {
+            throw new NotFoundHttpException();
+        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -1851,7 +1856,7 @@ class ContentPagesController extends BaseController
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
-            'pluralContentType' =>'',
+            'pluralContentType' => '',
         ]);
     }
 
@@ -1862,7 +1867,7 @@ class ContentPagesController extends BaseController
 
     public function challenge(Request $request, $brand)
     {
-        return view('content.challenges',[
+        return view('content.challenges', [
             'brand' => $brand,
         ]);
     }

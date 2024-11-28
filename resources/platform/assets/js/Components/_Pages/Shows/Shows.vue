@@ -12,7 +12,7 @@
                     <div class="tw-bg-[#F2F2F2] dark:tw-bg-[#002039] corners-10 tw-aspect-square"></div>
                 </div>
                 <!-- Show cards -->
-                <a v-else v-for="(show, index) in shows" :key="index" :href="`${baseUrl}${show.type}`"
+                <a v-else v-for="(show, index) in shows" :key="index" :href="`${baseUrl}${show.url}`"
                     class="flex flex-column xs-6 sm-3 lg-2 pa-1">
                     <div class="show-index-card square corners-10 bg-grey-2 dark:tw-bg-[#081825] relative">
                         <img :src="show.thumbnailUrl" class="corners-10 tw-transition-opacity tw-opacity-0"
@@ -41,7 +41,7 @@ const { isLoading } = storeToRefs(platformStore);
 const shows = ref([]);
 
 const baseUrl = computed(() => {
-    return `${window.location.origin}/${userStore.brand}/`;
+    return `${window.location.origin}/`;
 });
 
 const removeOpacity = (event) => {

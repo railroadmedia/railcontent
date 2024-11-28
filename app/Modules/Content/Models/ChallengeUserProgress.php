@@ -35,7 +35,7 @@ enum ChallengeUserProgressStatus: string
  * @property boolean $is_active
  * @property boolean $is_solo
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, time_practiced, unlock_date
+ * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -82,7 +82,6 @@ class ChallengeUserProgress extends Model
             'start_date' => $startDate,
             'end_date' => $endDate->toISOString(),
         ];
-
     }
 
     public function getStreakCurrentData(): array
@@ -143,13 +142,11 @@ class ChallengeUserProgress extends Model
      */
     public function getMinutesPracticed(): int
     {
-        // TODO https://musora.atlassian.net/browse/TCH-41
-        // This will either be a rolling value stored in table or computed as a property of the lessonsMetaData
-        $minutesPracticed = 0;
-        foreach($this->lessons_meta_data as $lessonData) {
-            $minutesPracticed += $lessonData['time_practiced'] ?? 0;
+        $secondsPracticed = 0;
+        foreach ($this->lessons_meta_data as $lessonData) {
+            $secondsPracticed += $lessonData['seconds_practiced'] ?? 0;
         }
-        return $minutesPracticed;
+        return (int)round($secondsPracticed / 60);
     }
 
 
@@ -169,7 +166,7 @@ class ChallengeUserProgress extends Model
         // Document says only for solo challenges
         // https://musora.atlassian.net/browse/TCH-40
         $rollingUnlockDate = $startDate->copy();
-        foreach($lessons as  $lesson) {
+        foreach ($lessons as $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
             $unlockDate = !$isLocked || $isAlwaysUnlocked ? $startDate : $rollingUnlockDate;
             $lessonPublishedDate = Carbon::parse($lesson['published_on']);
@@ -179,7 +176,7 @@ class ChallengeUserProgress extends Model
                     'content_id' => $lesson['id'],
                     'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
                     'completed' => false,
-                    'time_practiced' => 0,
+                    'seconds_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
                     'is_always_unlocked' => $isAlwaysUnlocked,
                 ];
@@ -222,7 +219,7 @@ class ChallengeUserProgress extends Model
     {
         $total = 0;
         $completed = 0;
-        foreach($this->lessons_meta_data as $lessons_meta_datum) {
+        foreach ($this->lessons_meta_data as $lessons_meta_datum) {
             if (!$lessons_meta_datum['is_always_unlocked']) {
                 $total++;
                 $completed += $lessons_meta_datum['completed'] ? 1 : 0;
@@ -264,7 +261,7 @@ class ChallengeUserProgress extends Model
      * @return ChallengeUserProgress
      * @throws Exception
      */
-    public static function whereChallengeIdAndUser(int $challengeId, int $userId): ChallengeUserProgress | null
+    public static function whereChallengeIdAndUser(int $challengeId, int $userId): ChallengeUserProgress|null
     {
         $challengeUserCollection = self::query()
             ->where('content_id', $challengeId)
@@ -272,12 +269,14 @@ class ChallengeUserProgress extends Model
             ->get();
 
         if ($challengeUserCollection->count() > 1) {
-            throw new Exception(sprintf(
-                'Multiple %s found for Content %s and User %s',
-                class_basename(__CLASS__),
-                $challengeId,
-                $userId
-            ));
+            throw new Exception(
+                sprintf(
+                    'Multiple %s found for Content %s and User %s',
+                    class_basename(__CLASS__),
+                    $challengeId,
+                    $userId
+                )
+            );
         }
         return $challengeUserCollection->first();
     }
@@ -323,8 +322,11 @@ class ChallengeUserProgress extends Model
      * @param $limit
      * @return \Illuminate\Support\Collection
      */
-    public static function whereUserIdAndCompleted(int $userId, ?int $page = 1, ?int $limit = 10): \Illuminate\Support\Collection
-    {
+    public static function whereUserIdAndCompleted(
+        int $userId,
+        ?int $page = 1,
+        ?int $limit = 10
+    ): \Illuminate\Support\Collection {
         $challengeUserCollection = self::query()
             ->where('user_id', $userId)
             ->whereNotNull('last_completed_date')
@@ -346,7 +348,7 @@ class ChallengeUserProgress extends Model
      * @return Collection | null
      * @throws Exception
      */
-    public static function whereChallengeIdsAndUser(array $challengeIds, int $userId): Collection | null
+    public static function whereChallengeIdsAndUser(array $challengeIds, int $userId): Collection|null
     {
         $challengeUserCollection = self::query()
             ->whereIn('content_id', $challengeIds)
@@ -368,14 +370,17 @@ class ChallengeUserProgress extends Model
     }
 
     /**
-     * Set lesson progress (completed and time_practiced) for a given lesson
+     * Set lesson progress (completed and seconds_practiced) for a given lesson
      * @param int $lessonId
      * @param bool $isCompleted
-     * @param int|null $timePracticed - if null, will not update the existing value
+     * @param int|null $totalSecondsPracticed - if null, will not update the existing value
      * @return array -
      */
-    public function updateLessonsProgress(int $lessonId, bool $isCompleted = true, ?int $timePracticed = null): array
-    {
+    public function updateLessonsProgress(
+        int $lessonId,
+        bool $isCompleted = true,
+        ?int $totalSecondsPracticed = null
+    ): array {
         $previousStreakData = $this->getStreakCurrentData();
         $results = [
             'is_milestone' => false,
@@ -384,12 +389,11 @@ class ChallengeUserProgress extends Model
         ];
         $lessonMetaData = $this->lessons_meta_data;
 
-        foreach($lessonMetaData as $index => $lessonMetaDatum) {
-            if($lessonMetaDatum['content_id'] == $lessonId) {
+        foreach ($lessonMetaData as $index => $lessonMetaDatum) {
+            if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
-                if (!is_null($timePracticed)) {
-                    // TODO this could be = or += depending on how time practides is sent
-                    $lessonMetaData[$index]['time_practiced'] = $timePracticed;
+                if (!is_null($totalSecondsPracticed)) {
+                    $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }
                 break;
             }
@@ -425,7 +429,6 @@ class ChallengeUserProgress extends Model
                 } else {
                     $results['is_milestone'] = $totalLessons == $currentStreak;
                 }
-
             }
         }
         $this->save();
@@ -445,7 +448,7 @@ class ChallengeUserProgress extends Model
      */
     public function areAllLessonsCompleted(): bool
     {
-        foreach($this->lessons_meta_data as $lessons_meta_datum) {
+        foreach ($this->lessons_meta_data as $lessons_meta_datum) {
             if ($lessons_meta_datum['is_always_unlocked']) {
                 continue;
             }
@@ -460,9 +463,9 @@ class ChallengeUserProgress extends Model
      * @param int $id - Content Id
      * @return array | null;
      */
-    public function getMetaDatumForContent(int $id): array | null
+    public function getMetaDatumForContent(int $id): array|null
     {
-        foreach($this->lessons_meta_data as $lessonDatum) {
+        foreach ($this->lessons_meta_data as $lessonDatum) {
             if ($lessonDatum['content_id'] == $id) {
                 return $lessonDatum;
             }
@@ -478,7 +481,7 @@ class ChallengeUserProgress extends Model
         $halfLength = $length / 2;
         if ($length == $bestStreak) {
             return AwardTier::GOLD;
-        } elseif($length < 10 || $bestStreak < $halfLength) {
+        } elseif ($length < 10 || $bestStreak < $halfLength) {
             return AwardTier::BRONZE;
         } else {
             return AwardTier::SILVER;

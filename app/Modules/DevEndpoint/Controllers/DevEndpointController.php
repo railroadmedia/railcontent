@@ -171,49 +171,49 @@ class DevEndpointController extends Controller
 //            755987 => [
 //                '402542' => [
 //                    'is_completed' => true,
-//                    'time_practiced' => 8,
+//                    'seconds_practiced' => 8,
 //                ],
 //                '402314' => [
 //                    'is_completed' => true,
-//                    'time_practiced' => 3,
+//                    'seconds_practiced' => 3,
 //                ],
 //            ],
             631736 => [
                 '402542' => [
                     'is_completed' => true,
-                    'time_practiced' => 8,
+                    'seconds_practiced' => 8,
                 ],
                 '402314' => [
                     'is_completed' => true,
-                    'time_practiced' => 10,
+                    'seconds_practiced' => 10,
                 ],
                 '402316' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402318' => [
                     'is_completed' => false,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402320' => [
                     'is_completed' => false,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402322' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402324' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402326' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402328' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
             ],
         ];
@@ -221,7 +221,7 @@ class DevEndpointController extends Controller
         foreach($data as $userId => $lessons) {
             $challengeProgress =  ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
             foreach($lessons as $lessonId => $lesson) {
-                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['time_practiced']);
+                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['seconds_practiced']);
             }
         }
 

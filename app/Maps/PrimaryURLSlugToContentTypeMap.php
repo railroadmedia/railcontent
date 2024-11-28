@@ -55,4 +55,17 @@ class PrimaryURLSlugToContentTypeMap
         'workouts' => 'workout',
         'odd-times'=>'odd-times',
     ];
+
+    public static array $contentTypeToSanityTypeMapping = [
+        'boot-camps'             => 'boot-camp',
+        'backstage-secrets'      => 'backstage-secret',
+        'student-collaborations' => 'student-collaboration',
+        'podcasts'               => 'podcast',
+        'solos'                  => 'solo',
+        'gear-guides'            => 'gear-guide',
+        'performances'           => 'performance',
+        'diy-drum-experiments'   => 'diy-drum-experiment',
+        'tama-drums'             => 'tama',
+        'sonor-drums'            => 'sonor',
+    ];
 }

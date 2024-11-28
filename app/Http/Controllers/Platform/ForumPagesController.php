@@ -357,6 +357,7 @@ class ForumPagesController extends Controller
             "isPinned" => $thread->pinned,
             "isNew" => !$thread->is_read,
             "isLocked" => $thread->locked,
+            "isFollowed" => $thread->is_followed,
             "topic" => $thread->category_id,
             "replyAmount" => $thread->post_count,
             "authorUsername" => $thread->author_display_name,
