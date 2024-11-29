@@ -3,12 +3,12 @@
         <div class="">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
-            <PageHeader 
-                pageType="songs" 
-                title="Songs" 
-                iconName="headphones" 
-                :infoData="headerInfoData" 
-                :ctas="ctaConfig" 
+            <PageHeader
+                pageType="songs"
+                title="Songs"
+                iconName="headphones"
+                :infoData="headerInfoData"
+                :ctas="ctaConfig"
                 :is-loading="isLoading"
             />
 
