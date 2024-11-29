@@ -86,7 +86,7 @@ class LearningPathsService
     public function getNewLearningPaths(bool $homepageV2): array
     {
         $brand = brand();
-        if (!$homepageV2 && in_array($brand, [BrandEnum::Guitareo->value, BrandEnum::Singeo->value])) {
+        if (!$homepageV2 || (!$homepageV2 && in_array($brand, [BrandEnum::Guitareo->value, BrandEnum::Singeo->value]))) {
             return [];
         }
 
