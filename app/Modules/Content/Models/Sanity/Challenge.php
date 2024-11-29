@@ -31,9 +31,9 @@ class Challenge extends ParentTemplate
         parent::__construct(self::getName(), 'Challenge', withLogos: true, withEnrollment:true, withResources: true, extraGroups: [$contentCardGroup]) ;
 
         $contentCardFields = [
-            new Field(FieldType::Image, 'bgImg', 'Background Image', group: $contentCardGroup),
-            new Field(FieldType::Image, 'squareImg', 'Square Image', validation: [new Required()], group: $contentCardGroup),
-            new Field(FieldType::Image, 'wideImg', 'Wide Image', group: $contentCardGroup),
+            new Field(FieldType::Image, 'bgImg', 'Background Image', group: $contentCardGroup, options: ['accept' => '.png']),
+            new Field(FieldType::Image, 'squareImg', 'Square Image', validation: [new Required()], group: $contentCardGroup, options: ['accept' => '.png']),
+            new Field(FieldType::Image, 'wideImg', 'Wide Image', group: $contentCardGroup, options: ['accept' => '.png']),
         ];
 
         $this->addFields([
