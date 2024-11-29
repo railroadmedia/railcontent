@@ -133,7 +133,7 @@
                 <h2 class="leading-none mb-1"><strong>$1200 </strong><span class="text-musora text-2xl"> (last chance)</span></h2>
 
                {{-- @if($stock > 0) --}}
-                   <a class="join musora mt-4 w-full text-black sm:max-w-[420px]"  @click="scrollToFinal" >GET THE DEAL</a>
+                   <a class="join musora mt-4 w-full text-black sm:max-w-[420px]"  href="/ecommerce/add-to-cart?products[musora-lifetime-membership-access]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true" >GET THE DEAL</a>
 {{--                   <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p>--}}
                {{-- @else
                     <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>

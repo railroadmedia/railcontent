@@ -85,8 +85,16 @@
                     <span class="text-musora text-2xl"> (last chance)</span></h2>
 
                {{-- @if($stock > 0) --}}
-                   <a class="join musora mt-4 w-full anchor-slide text-black sm:max-w-[420px]" href="#customize-anchor">GET THE DEAL</a>
-                   <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p>
+                @if(!empty($upgradeVersion))
+                    <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"
+                        href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
+                    <a class="text-white underline" href="/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing-3p&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
+                @else
+                <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"
+                    href="/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
+                <a class="text-white underline" href="/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
+                @endif
+                   {{-- <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p> --}}
                {{-- @else
                     <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
                @endif --}}
