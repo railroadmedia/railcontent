@@ -14698,16 +14698,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"musora-content-services@npm:^1.0.196":
-  version: 1.0.196
-  resolution: "musora-content-services@npm:1.0.196"
+"musora-content-services@npm:^1.0.197":
+  version: 1.0.197
+  resolution: "musora-content-services@npm:1.0.197"
   dependencies:
     "@babel/preset-env": "npm:^7.25.3"
     "@sanity/client": "npm:^5.4.2"
     babel-jest: "npm:^29.7.0"
     docdash: "npm:^2.0.2"
     groqd: "npm:^0.15.12"
-  checksum: 10c0/512547b4d4cce31206979ffba797e147b68219dc3cc368fa7f36537c36bd95874750c29382df99c89e323e9416a2e62238470958aa63d16a9135d9a2616e6286
+  checksum: 10c0/4ffcc79882fd1814b69762a8447e8a7b329ac62be2601f6a5414f15325227dc7cfad0b61d478d80ec5a1115a00376c42f8534441b36145647009bfd2902acdfc
   languageName: node
   linkType: hard
 
@@ -17540,7 +17540,7 @@ __metadata:
     mediaelement: "npm:^7.0.2"
     mediaelement-plugins: "npm:^2.6.7"
     mitt: "npm:^3.0.0"
-    musora-content-services: "npm:^1.0.196"
+    musora-content-services: "npm:^1.0.197"
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
