@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { fetchNewReleases, fetchContentInProgress, fetchByRailContentIds } from 'musora-content-services';
+import { fetchNewReleases, fetchContentInProgress, fetchByRailContentIds, fetchCarouselCardData } from 'musora-content-services';
 
 export async function useHomePageData(brand) {
   const data = ref(null);
@@ -8,9 +8,10 @@ export async function useHomePageData(brand) {
 
   try {
     // Fetch IDs for started content
-    const [startedIds, newReleasesResponse] = await Promise.all([
+    const [startedIds, newReleasesResponse, carousels] = await Promise.all([
       fetchContentInProgress('all', brand),
-      fetchNewReleases(brand)
+      fetchNewReleases(brand),
+      fetchCarouselCardData(brand),
     ]);
 
     // Fetch content by RailContent IDs for started lessons only
@@ -23,6 +24,7 @@ export async function useHomePageData(brand) {
     data.value = {
       newReleases: newReleasesResponse || [],
       continueSection: started || [],
+      carousels: carousels || [],
     };
   } catch (err) {
     console.error('Error fetching data:', err);

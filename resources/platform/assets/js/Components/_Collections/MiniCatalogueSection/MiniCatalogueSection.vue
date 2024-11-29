@@ -20,7 +20,7 @@
             </div>
             <div>
                 <transition appear name="fade">
-                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" @remove-challenge="removeItem" />
+                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" @remove-challenge="removeItem" :type="pageType" />
                     <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
                     <CatalogueCardContainer
                         v-else
@@ -97,6 +97,10 @@ const props = defineProps({
     default: ''
   },
   catalogueType: {
+    type: String,
+    default: ''
+  },
+  pageType: {
     type: String,
     default: ''
   },
