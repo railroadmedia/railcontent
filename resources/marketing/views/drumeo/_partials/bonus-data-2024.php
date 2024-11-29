@@ -57,7 +57,7 @@ $bonusVideos = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/30DI.webp',
         'header' => '30-Day Independence',
         'description' => '<p>Independence is the hardest part of learning the drums.</p><p class="my-2">In 30-Day Independence, you\'ll build your 4-way coordination slowly by following daily guided workouts with El Estepario Siberiano.</p><p>In 30 days you\'ll drastically improve your drum set independence.</p>',
-        'badge' => '$42.33',
+        'badge' => '$42.34',
         'price' => 127.00,
         'vimeoId' => '975466470',
         'sku' => '30-day-independence-challenge'

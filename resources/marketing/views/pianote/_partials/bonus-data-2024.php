@@ -56,7 +56,7 @@ $bonusVideos = [
         'header' => 'Easy Chords',
         'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“I just want to say thank you! My ability to choose which chord inversion to play next when I go through a progression has improved a lot after going through this course!” ~ Lars, Pianote Student</strong></p>',
         'vimeoId' => '823788317',
-        'badge' => '$42.33',
+        'badge' => '$42.34',
         'price' => 127,
         'sku' => 'easy-chords-challendge',
     ],
