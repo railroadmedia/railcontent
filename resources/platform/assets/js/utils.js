@@ -109,7 +109,7 @@ export const contentTypes = {
     'archives': { singular: 'Archive', plural: 'Archives' },
     'recording': { singular: 'Recording', plural: 'Recordings' },
     'backstage-secrets': { singular: 'Backstage Secrets', plural: 'Backstage Secrets' },
-    'challenges': { singular: 'Challenge', plural: 'Challenges' },
+    'challenge': { singular: 'Challenge', plural: 'Challenges' },
     'diy-drum-experiments': { singular: 'DIY Drum Experiment', plural: 'DIY Drum Experiments' },
     'drum-fest-international-2022': { singular: 'Drum Fest International 2022', plural: 'Drum Fest International 2022' },
     'exploring-beats': { singular: 'Exploring Beat', plural: 'Exploring Beats' },

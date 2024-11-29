@@ -1,6 +1,6 @@
 <template>
     <div class="lg:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-1 lg:tw-gap-[15px]" :class="rowStyles">
-        <SkeletonChallengeCard v-if="isLoading" v-for="i in skeletonNum" :key="`skeleton-challenge-card-${i}`" :is-grouped-view="isGroupedView" />
+        <SkeletonChallengeCard v-if="isLoading || loading" v-for="i in skeletonNum" :key="`skeleton-challenge-card-${i}`" :is-grouped-view="isGroupedView" />
         <ChallengeCard v-else v-for="(item, i) in content" :item="item" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
     </div>
 </template>
@@ -8,6 +8,7 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
+import { useCollectionStore } from "@stores/collection";
 import ChallengeCard from '@collections/Catalogue/ChallengeCard';
 import SkeletonChallengeCard from '@collections/SkeletonLoader/SkeletonChallengeCard';
 
@@ -36,4 +37,6 @@ const skeletonNum = computed(() => {
 
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
+const collectionStore = useCollectionStore();
+const { loading } = storeToRefs(collectionStore);
 </script>

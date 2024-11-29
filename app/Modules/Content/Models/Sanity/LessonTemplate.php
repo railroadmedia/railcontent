@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Custom\BlockCharacterLengthMax;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
@@ -55,7 +56,6 @@ abstract class LessonTemplate extends BaseSanityModel
                             previewItem: new ListItemPreview('height', 'width'),
                         ), ),
                     ],
-
         );
         $chapterList = new ListObject(
             fields: [new Field(FieldType::String, 'chapter_description'),
@@ -67,7 +67,7 @@ abstract class LessonTemplate extends BaseSanityModel
         $parentContentData = new ListObject(
             fields:[
                        new Field(FieldType::Number, 'id'),
-                       new Field(FieldType::String, 'title'),
+                       new Field(FieldType::String, 'title', validation: [new Max(62)]),
                        new Field(FieldType::String, 'slug'),
                        new Field(FieldType::String, 'type'),
                        new Field(FieldType::Number, 'position')],
@@ -89,7 +89,7 @@ abstract class LessonTemplate extends BaseSanityModel
         ];
 
         $fields  = [
-            new Field(FieldType::String, 'title', validation: [new Required()], group: $detailsGroup),
+            new Field(FieldType::String, 'title', group: $detailsGroup, validation: [new Required(), new Max(62)]),
             new Field(
                 FieldType::Slug,
                 'slug',
@@ -103,7 +103,7 @@ abstract class LessonTemplate extends BaseSanityModel
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
-            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
+            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup, validation: [new BlockCharacterLengthMax(270)]),
             new Field(
                 FieldType::Number,
                 'difficulty',
@@ -113,7 +113,7 @@ abstract class LessonTemplate extends BaseSanityModel
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'xp', 'XP', validation: [new Min(0)], group: $detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', inputComponent: 'XpInput',  readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', inputComponent: 'XpInput', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 ];
         if ($this->withLiveEvent) {

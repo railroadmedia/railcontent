@@ -34,6 +34,9 @@ class CarouselServiceV1
         foreach ($onboardingCardData as $index => $onboardingCardDatum) {
             $onboardingCardData[$index]['show_everywhere'] = false;
             $onboardingCardData[$index]['type'] = 'onboarding';
+            if ($onboardingCardDatum['content_type'] == 'challenge') {
+                $onboardingCardData[$index]['button']['page_params']['isChallenge'] = true;
+            }
         }
 
         // all badges from the last day
@@ -65,28 +68,33 @@ class CarouselServiceV1
             ->get();
 
         // Challenge with open enrollment (that the user is not a part of)
-        $allProgress = $user->challengeProgress()->brand($brand)->get();
+        $allProgress = $user->challengeProgress()->brand($brand)->active()->get();
         $railcontentIds = $allProgress->pluck('content_id');
-        $challengeRecommendationProgresses = collect($this->sanity->getChallengesWithOpenEnrollment($brand))
-            ->filter(fn ($challenge) => !in_array($challenge['id'], $railcontentIds))
+        $challengeRecommendation = collect($this->sanity->getChallengesWithOpenEnrollment($brand))
+            ->filter(fn ($challenge) => !$railcontentIds->contains($challenge['id']))
             ->take(1);
-
         $allChallengeIds = [
             ...$badges->pluck('content_id'),
             ...$communityProgresses->pluck('content_id'),
             ...$soloProgresses->pluck('content_id'),
-            ...$challengeRecommendationProgresses->pluck('content_id'),
+            ...$challengeRecommendation->pluck('id'),
         ];
 
 
         $allChallengeMetaData = $this->challengesService->getChallengeMetaDataForUserProgress($allChallengeIds, $allProgress, returnChallengeData: true, brand: $brand);
         $allChallengeMetaData = collect($allChallengeMetaData)->keyby('content_id');
+        $challengeRecommendationCard = $challengeRecommendation->isEmpty() ? [] :
+            [
+                ...$allChallengeMetaData[$challengeRecommendation[0]['id']],
+                'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
+                'show_everywhere' => true,
+            ];
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
             ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-community'),
             ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-community'),
             ... $onboardingCardData,
-            ... $this->formatChallengeData($challengeRecommendationProgresses, $allChallengeMetaData, 'active-solo-community'),
+            $challengeRecommendationCard,
         ];
 
         return $compiledCardData;
@@ -96,13 +104,13 @@ class CarouselServiceV1
     {
         $compiledCardData = [];
         foreach($userProgresses as $userProgress) {
+            $id = $userProgress['content_id'] ?? $userProgress['id'];
             $challengeMetaDatum = $challengeMetaData[$userProgress->content_id];
             if ($challengeMetaDatum) {
-                unset($challengeMetaDatum['type']);
                 $compiledCardData[] = [
-                    'type' => $type,
-                    'show_everywhere' => true,
                     ...$challengeMetaDatum,
+                    'type' => $type, // this is set after metadatum to override the existing type field
+                    'show_everywhere' => true,
                 ];
             }
         }
