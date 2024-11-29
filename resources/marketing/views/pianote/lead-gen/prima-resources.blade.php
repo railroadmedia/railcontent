@@ -320,12 +320,12 @@
     ])
      @include('_partials.components.video-modal',[
         'name' => 'modal02',
-        'video' => '1019964518',
+        'video' => '1034584924',
         'vimeo' => true,
     ])
      @include('_partials.components.video-modal',[
         'name' => 'modal03',
-        'video' => '1019964518',
+        'video' => '1034584835',
         'vimeo' => true,
     ])
 
