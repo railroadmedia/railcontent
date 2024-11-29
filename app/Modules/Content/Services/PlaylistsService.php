@@ -4,17 +4,21 @@ namespace Modules\Content\Services;
 
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Models\ReportedPlaylists;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
 use App\Modules\Content\Models\UserPlaylistPinned;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Railroad\Mailora\Services\MailService;
 
 class PlaylistsService
 {
     public function __construct(
         private SanityGateway $sanityGateway,
+        private MailService $mailService
     ) {
     }
 
@@ -342,5 +346,60 @@ class PlaylistsService
         return UserPlaylistPinned::where('user_id', user()->id)
             ->where('playlist_id', $playlist->id)
             ->delete();
+    }
+
+    /**
+     * This method records a report for the specified playlist in the `ReportedPlaylists` model
+     * and sends an email notification to the configured recipient with the report details.
+     *
+     * @param UserPlaylist $playlist The playlist being reported.
+     * @param string|null $issue The issue description provided by the user, if any.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * - 200 on successful processing of the report and email notification.
+     * - 500 if an exception occurs while sending the email.
+     */
+    public function reportPlaylist(UserPlaylist $playlist, ?string $issue): JsonResponse
+    {
+        $currentUser = user();
+        ReportedPlaylists::updateOrCreate([
+                                              'playlist_id' => $playlist->id,
+                                              'reporter_id' => $currentUser->id,
+                                          ], [
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+        ]);
+
+        $input['subject'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
+        $input['lines'] = ['The following playlist has been reported:'];
+        $input['lines'][] =
+            url()->route('platform.user.playlist', ['id' => $playlist->id, 'brand' => $playlist->brand]);
+        if ($issue) {
+            $input['lines'][] = 'Reason:';
+            $input['lines'][] = $issue;
+        }
+
+        $input['unsubscribeLink'] = '';
+        $input['alert'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+
+        $input['logo'] = config('mailora.'.$playlist->brand.'.logo-link');
+        $input['type'] = 'layouts/inline/alert';
+        $input['recipient'] = config('mailora.'.$playlist->id.'.report-comment-recipient');
+
+        try {
+            $this->mailService->sendSecure($input);
+        } catch (\Exception $exception) {
+            return response()->json([
+                                        "success" => false,
+                                        "message" => $exception->getMessage(),
+                                    ], 500);
+        }
+
+        return response()->json([
+                                    "success" => true,
+                                    "message" => "The playlist was reported",
+                                ], 200);
     }
 }
