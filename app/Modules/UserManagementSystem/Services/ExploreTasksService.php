@@ -30,7 +30,7 @@ class ExploreTasksService
 
     public function uncompletedTasksForUser(User $user, ?int $take = 2): array
     {
-        if (boolval(FeatureFlagging::branch('homepage-v2', user()))) {
+        if (boolval(FeatureFlagging::branch('homepage-v2', $user))) {
             $count = $user->exploreTasks->count();
             if ($count === 0) {
                 $this->createDefaultExploreTasks($user);
