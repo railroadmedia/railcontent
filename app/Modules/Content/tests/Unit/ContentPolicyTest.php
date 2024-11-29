@@ -39,11 +39,22 @@ class ContentPolicyTest extends TestCase
 
     public function test_normal_user_cannot_access_content_published_in_the_future(): void
     {
+        $futureDate = Carbon::now()->addDays(30);
         $content = Content::factory()->create([
             'status' => ContentService::STATUS_PUBLISHED,
-            'published_on' => Carbon::now()->addDays(30),
+            'published_on' => $futureDate,
         ]);
         $this->actingAs($this->normalUser);
+        $this->assertFalse(Gate::check('view', $content));
+
+        // the published_on field could be set as a string instead of a proper Carbon date, so test that case too
+        $content->published_on = $futureDate->toDateTimeString();
+        $content->save();
+        $this->assertFalse(Gate::check('view', $content));
+
+        // fallback case that shouldn't happen, but let's be safe
+        $content->published_on = null;
+        $content->save();
         $this->assertFalse(Gate::check('view', $content));
     }
 
