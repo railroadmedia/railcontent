@@ -352,7 +352,7 @@ export const useCollectionStore = defineStore({
 
             this.getFilterURLParams();
             await this.fetchFilterOptions();
-
+            this.areFilterOptionsPreloaded = true;
             this.getURLParams();
 
             //Set Active Tab
