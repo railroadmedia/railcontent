@@ -3,7 +3,7 @@ import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -37,7 +37,6 @@ export const useCollectionStore = defineStore({
             collectionType: '',
             fetchType: '',
             queryType: '',
-            areFilterOptionsPreloaded: false
         }
     },
     actions: {
@@ -138,7 +137,17 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async fetchFilterOptions(){
+        async fetchCatalogMetadata() {
+            const userStore = useUserStore();
+            const data = await fetchMetadata(userStore.brand, this.queryType);
+            console.log(data);
+            if (this.tabOptions.length === 0) {
+                //Set Tab Options
+                this.tabOptions = formatTabData(data.tabs, data.catalogName);
+            }
+        },
+
+        async fetchFilterOptions() {
             const userStore = useUserStore();
 
             //Get Genre
@@ -155,16 +164,10 @@ export const useCollectionStore = defineStore({
                 this.filter.searchTerm, //term
                 undefined, //progressIds
                 undefined, //coachIds
-                true, //includeTabs
             );
             if (result) {
                 //Set Filter Columns
                 this.filterColumns = getFilterValues(result.meta.filterOptions);
-
-                if(this.tabOptions.length === 0){
-                    //Set Tab Options
-                    this.tabOptions = formatTabData(result.tabs, result.catalogName)
-                }
             } else {
                 throw new Error('Failed to fetch Filter Options');
             }
@@ -172,13 +175,11 @@ export const useCollectionStore = defineStore({
 
         async fetchData() {
             try {
-                if (!this.areFilterOptionsPreloaded) {
-                    await this.fetchFilterOptions(false);
-                }
-                this.areFilterOptionsPreloaded = false;
-                const response = await this.getEndpoint(this.fetchType);
-
-                return response;
+                const [response, filterResponse] = await Promise.allSettled([
+                    this.getEndpoint(this.fetchType),
+                    this.fetchFilterOptions()
+                ]);
+                return response.value;
             } catch (e) {
                 console.error(e);
                 window.shownotification({
@@ -351,8 +352,7 @@ export const useCollectionStore = defineStore({
             }
 
             this.getFilterURLParams();
-            await this.fetchFilterOptions();
-            this.areFilterOptionsPreloaded = true;
+            await this.fetchCatalogMetadata();
             this.getURLParams();
 
             //Set Active Tab
