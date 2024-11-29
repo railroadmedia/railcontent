@@ -143,13 +143,9 @@ class ChallengesMetaDataController extends Controller
     public function getChallengesMetadataForIndexPage(Request $request)
     {
         $userId = user()->id;
-        $contentIds = $request->get('content_ids', '');
-        $contentIds = explode(',', $contentIds);
-        if (!$contentIds) {
-            return response()->json([]);
-        }
-        $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
+        $userProgresses = ChallengeUserProgress::whereUserId($userId);
         $brand = $request->get('brand', brand());
+        $contentIds = $userProgresses->pluck('content_id')->toArray();
         $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress(
             $contentIds,
             $userProgresses,
