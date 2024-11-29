@@ -103,6 +103,8 @@ class SanityGateway
             "'soundslice_slug':soundslice[0]['soundslice_slug']",
             '"resources": resource',
             "instrumentless",
+            "high_soundslice_slug",
+            "low_soundslice_slug",
             "'chapters': chapter[]{
                     chapter_description,
                     chapter_timecode,
