@@ -382,7 +382,7 @@ class PlaylistsMetadataController extends Controller
                                         'message' => 'Playlist not exists.',
                                     ], 404);
         }
-        $items = $this->playlistsService->getPlaylistItems($playlist->brand, $playlist->id);
+        $items = $this->playlistsService->getPlaylistItems($playlist->brand, $playlist->id, $request->get('sort','position'));
 
         return response()->json($items);
     }
