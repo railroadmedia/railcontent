@@ -92,7 +92,8 @@
         style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/musora/promos/november/extend/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="container mx-auto text-center px-4">
             <div id="customize-anchor" class="anchor"></div>
-            <img alt="Bundle" class="h-16 sm:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/promos/november/extend/students-logo.webp"><br>
+            <img alt="Bundle" class="h-16 sm:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/promos/black-friday/musora-CM-header.webp"><br>
+            <p class="leading-tight tracking-widest mt-1">FOR MUSORA STUDENTS</p>
                 <h2 class="leading-tight pt-3 lg:pt-6"><strong>Get a free $100 electronic gift card <br class="hidden sm:inline"> when you extend your membership.</strong></h2>
 
             <div class="w-full max-w-4xl mx-auto my-4 sm:my-8 ">

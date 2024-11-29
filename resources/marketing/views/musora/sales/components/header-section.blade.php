@@ -6,9 +6,9 @@
     @endif
 >
     @if(!empty($bfVersion) && ($theme == 'singeo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-CM-header.webp" alt="logo">
     @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-CM-header.webp" alt="logo">
     @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
