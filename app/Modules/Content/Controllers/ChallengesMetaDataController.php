@@ -41,9 +41,12 @@ class ChallengesMetaDataController extends Controller
         $today = now()->startOfDay()->format('Ymd');
         $registerButtonUrl = url()->route('challenges.set_start_date', ['id' => $challengeId, 'start_date', $today]);
         $content = $this->challengesService->getChallengeById($challengeId);
-        $nPackOwners =  $this->challengesService->getActiveUsersCount($challengeId);
+        $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
         $cohort['course_url'] = $content['web_url_path'];
-        $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser($challengeId, user()->id)?->is_active ?? false : false;
+        $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
+            $challengeId,
+            user()->id
+        )?->is_active ?? false : false;
         //$productId = $cohort['product_id'];
         //$hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         // below here is where things need to be refactored
@@ -102,7 +105,12 @@ class ChallengesMetaDataController extends Controller
         }
         $brand = $request->get('brand', brand());
         $challengeIds = $userProgresses->pluck('content_id')->toArray();
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($challengeIds, $userProgresses, true, $brand);
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress(
+            $challengeIds,
+            $userProgresses,
+            true,
+            $brand
+        );
         return response()->json($resultPackage);
     }
 
@@ -112,7 +120,7 @@ class ChallengesMetaDataController extends Controller
      */
     public function getChallengeMetadata($id)
     {
-        $response =  $this->challengesService->getEnrolledUsersMetadata($id);
+        $response = $this->challengesService->getEnrolledUsersMetadata($id);
         return response()->json($response);
     }
 
@@ -142,7 +150,12 @@ class ChallengesMetaDataController extends Controller
         }
         $userProgresses = ChallengeUserProgress::whereChallengeIdsAndUser($contentIds, $userId);
         $brand = $request->get('brand', brand());
-        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress($contentIds, $userProgresses, false, $brand);
+        $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress(
+            $contentIds,
+            $userProgresses,
+            false,
+            $brand
+        );
         return response()->json($resultPackage);
     }
 
@@ -205,7 +218,12 @@ class ChallengesMetaDataController extends Controller
     public function unlockChallenge(int $id): JsonResponse
     {
         $userId = user()->id;
-        $result = $this->challengesService->startChallenge($id, $userId, startDate: Carbon::now()->toISOString(), isLocked: false);
+        $result = $this->challengesService->startChallenge(
+            $id,
+            $userId,
+            startDate: Carbon::now()->toISOString(),
+            isLocked: false
+        );
         if (is_null($result)) {
             return self::NotFoundErrorResponse($id, $userId);
         }
@@ -261,7 +279,9 @@ class ChallengesMetaDataController extends Controller
         $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
-        return  response()->json($this->challengesAwardService->getUserAwardData($challenge, $userProgress, $user, includeBase64: true));
+        return response()->json(
+            $this->challengesAwardService->getUserAwardData($challenge, $userProgress, $user, includeBase64: true)
+        );
     }
 
     /**
@@ -273,20 +293,9 @@ class ChallengesMetaDataController extends Controller
     public function getOwnedChallenges(Request $request)
     {
         $userId = user()->id;
-        $brand = $request->get('brand', brand());
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 10);
-        $completedChallenges = ChallengeUserProgress::whereUserId($userId, $page, $limit);
-        if (!$completedChallenges) {
-            return response()->json([]);
-        }
-        $completedIds = $completedChallenges->pluck('content_id')->toArray();
-        $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
-        $output = [
-            'entity' => $challenges,
-            'total' => count($challenges),
-        ];
-        return response()->json($output);
+        $ownedChallenges = ChallengeUserProgress::whereUserId($userId, limit: 1000);
+        $completedIds = $ownedChallenges->pluck('content_id')->toArray();
+        return response()->json($completedIds);
     }
 
     /**
@@ -298,20 +307,9 @@ class ChallengesMetaDataController extends Controller
     public function getCompletedChallenges(Request $request)
     {
         $userId = user()->id;
-        $brand = $request->get('brand', brand());
-        $page = $request->get('page', 1);
-        $limit = $request->get('limit', 10);
-        $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId, $page, $limit);
-        if (!$completedChallenges) {
-            return response()->json([]);
-        }
+        $completedChallenges = ChallengeUserProgress::whereUserIdAndCompleted($userId, limit: 1000);
         $completedIds = $completedChallenges->pluck('content_id')->toArray();
-        $challenges = $this->challengesService->getChallengeByIds($completedIds, $brand);
-        $output = [
-            'entity' => $challenges,
-            'total' => count($challenges),
-        ];
-        return response()->json($output);
+        return response()->json($completedIds);
     }
 
     /**
@@ -364,7 +362,7 @@ class ChallengesMetaDataController extends Controller
             response()->json(['error' => "Challenge $id not found or not complete for user $userId"], status: 404);
     }
 
-    private static function NotFoundErrorResponse(int $challengeId, ?int $userId = null) : JsonResponse
+    private static function NotFoundErrorResponse(int $challengeId, ?int $userId = null): JsonResponse
     {
         $userId = $userId ?? user()->id;
         return response()->json(['error' => "Challenge $challengeId not found for user $userId"], status: 404);
