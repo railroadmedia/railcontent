@@ -43,7 +43,7 @@ export function useFilterValues() {
     //Format Sanity Tab Data to match existig implementation
     const formatTabData = (tabs, name) => {
         //Default
-        if(tabs.length === 0) {
+        if((tabs?.length ?? 0) === 0) {
             return [
                 {
                     value : `All ${name}`,
@@ -52,7 +52,7 @@ export function useFilterValues() {
                 },
             ]
         }
-        
+
         let formattedTabs = tabs.map( (tab) => {
             return {
                 value: tab.name,

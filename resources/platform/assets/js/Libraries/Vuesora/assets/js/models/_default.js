@@ -46,7 +46,7 @@ export default class ContentModel {
         const postField = this.post?.fields?.find(field => field.key === key);
 
         if (key === 'style') {
-            return this.post.genre.length > 0 ? this.post.genre[0] : postField?.value || '';
+            return this.post.genre?.length > 0 ? this.post.genre[0] : postField?.value || '';
         }
 
         return postField ? postField.value : '';
