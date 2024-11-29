@@ -27,7 +27,7 @@
                 <div v-if="!openFromAwards" class="tw-text-center">
                     <a :href="`/${brand}/challenges`" class="tw-uppercase tw-underline tw-font-bold tw-font-bebas-neue dark:tw-text-white tw-z-[3] tw-relative">Return to Challenges</a>
                 </div>
-                <div v-if="!isSharable" class="tw-mt-5 tw-mx-2 tw-text-sm">
+                <div v-if="!isSharable" class="tw-mt-5 tw-text-xs tw-text-center">
                     Sharing is currently disabled in your browser. To share your awards with others, download the Musora app today!
                 </div>
             </div>

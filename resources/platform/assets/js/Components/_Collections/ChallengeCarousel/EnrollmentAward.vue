@@ -1,13 +1,14 @@
 <template>
     <!-- DESKTOP -->
-    <div :style="`backgroundImage: url('https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/IndependenceBackground.png')`"
-         class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-bg-cover tw-bg-center tw-py-4 2xl:tw-py-6 3xl:tw-py-5 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7">
+    <!-- TODO(challenge): add border depending on the tier and background image -->
+    <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=500,quality=95/${desktopBGImage}')` }"
+         class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-bg-cover tw-bg-center tw-py-4 2xl:tw-py-6 3xl:tw-py-5 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
         <div v-if="!isAward"  class="tw-absolute tw-inset-0 tw-backdrop-blur-sm tw-bg-[linear-gradient(270deg,_rgba(0,0,0,0.3)_30%,_rgba(0,0,0,0.5)_45.09%,_#000000_100%)] tw-z-[1]"></div>
         <!-- Ellipsis -->
         <div v-if="isAward" class="tw-absolute tw-top-1.5 2xl:tw-top-[10px] tw-right-1.5 2xl:tw-right-[10px]">
             <div class="tw-relative">
-                <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="desktopShowDropdown = !desktopShowDropdown" v-click-outside="closeDesktopDropdown">
+                <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full tw-text-black dark:tw-text-white" @click="desktopShowDropdown = !desktopShowDropdown" v-click-outside="closeDesktopDropdown">
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
@@ -15,7 +16,7 @@
                     <!-- TODO(challenge): Add href -->
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a class="tw-text-black dark:tw-text-white">View Details</a></li>
                     <!-- TODO(challenge): Add onclick -->
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button>Remove Banner</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-black dark:tw-text-white">Remove Banner</button></li>
                 </ul>
             </div>
         </div>
@@ -38,8 +39,17 @@
                 </div>
                 <!-- Logo -->
                 <div>
-                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge Logo" />
-                    <template v-if="!isAward && isCommunityChallenge">
+                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
+                    <template v-if="isAward">
+                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white">
+                            You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
+                        </div>
+                        <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
+                            Earned on {{ earnedDate }}
+                        </div>
+                    </template>
+
+                    <template v-else-if="isCommunityChallenge">
                         <div class="tw-mb-2 tw-flex">
                             <!-- Avatars -->
                             <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727447340-755877.jpg');"></div>
@@ -57,32 +67,34 @@
                             Join <span class="tw-font-bold">Stidger, Poco Askew, Dr Mojo,</span> and <span class="tw-font-bold">683</span> other drummers who have already enrolled! Runs Aug 1 - 31.
                         </p>
                     </template>
-<!--                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>-->
-                    <div class="tw-text-sm tw-mb-3 tw-max-w-[510px]">You practiced for a total of 123 minutes and achieved a 30-day streak during 30-Day Drummer: Season 3, which earned you a gold certificate. </div>
+                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>
+
                 </div>
                 <!-- CTA -->
-                <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white" is-link href="/drumeo/enrollment/30-day-independence">
-                    <svg class="tw-w-5 tw-h-5 tw-mr-1 tw-hidden 3xl:tw-block" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg> Enroll Now
+                <MuButton :href="ctaObj.url || ''" @click="ctaObj.action">
+<!--                    <svg class="tw-w-5 tw-h-5 tw-mr-1 tw-hidden 3xl:tw-block" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                    </svg>-->
+                    {{ ctaObj.text }}
                 </MuButton>
             </div>
             <!-- Right -->
             <div class="tw-flex tw-justify-end" :class="!isAward ? 'tw-flex-1' : 'tw-grow tw-shrink-0'">
                 <div class=" tw-overflow-hidden tw-relative" :class="!isAward ? 'tw-aspect-square 3xl:tw-aspect-video' : 'xl:tw-pr-4 3xl:tw-pr-8'">
-                    <img :class="!isAward ? 'tw-absolute tw-inset-0 tw-w-[212px] 2xl:tw-w-[225px] 3xl:tw-w-[255px] tw-rounded-[5px]' : 'xl:tw-w-[150px] 2xl:tw-w-[200px] 3xl:tw-w-[250px]'" src="https://musora-web-platform.s3.us-east-1.amazonaws.com/challenges/test_award.png" :alt="` Thumbnail`" />
+                    <img :class="!isAward ? 'tw-absolute tw-inset-0 tw-w-[212px] 2xl:tw-w-[225px] 3xl:tw-w-[255px] tw-rounded-[5px]' : 'xl:tw-w-[150px] 2xl:tw-w-[200px] 3xl:tw-w-[250px]'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="` Thumbnail`" />
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MOBILE -->
-    <div :style="{ backgroundImage: `url('https://d3fzm1tzeyr5n3.cloudfront.net/learning-paths/IndependenceBackground.png')` }"
-         class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center">
+    <!-- TODO(challenge): add border depending on the tier and background image -->
+    <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=200,quality=95/${mobileBGImage}')` }"
+         class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
-        <div class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
+        <div v-if="!isAward" class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
         <!-- Challenge Type Label -->
-        <div class="tw-absolute tw-top-[18px] tw-left-[18px] tw-z-[2]">
+        <div v-if="!isAward" class="tw-absolute tw-top-[18px] tw-left-[18px] tw-z-[2]">
             <div class="tw-bg-[#374151] tw-rounded-[6px] tw-px-2 tw-py-1 tw-flex tw-text-[11px] tw-uppercase tw-font-bold tw-items-center">
                 <svg v-if="isCommunityChallenge" class="tw-w-4 tw-h-4 tw-mr-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.8031 5.38681C11.8031 6.78052 10.6733 7.91034 9.27957 7.91034C7.88587 7.91034 6.75604 6.78052 6.75604 5.38681C6.75604 3.9931 7.88587 2.86328 9.27957 2.86328C10.6733 2.86328 11.8031 3.9931 11.8031 5.38681Z" fill="#D1D5DB"/>
@@ -97,9 +109,19 @@
         </div>
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
             <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
+                <!-- Award -->
+                <img v-if="isAward" class="tw-h-[230px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
                 <!-- Logo -->
-                <img :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d1923uyy6spedc.cloudfront.net/30DayDrummer-Logos-07-1702425574.svg" alt="Challenge Logo" />
-                <template v-if="isCommunityChallenge">
+                <img v-else :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} Logo`" />
+                <template v-if="isAward">
+                    <div class="tw-text-center tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white">
+                        You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
+                    </div>
+                    <div class="tw-text-center tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
+                        Earned on {{ earnedDate }}
+                    </div>
+                </template>
+                <template v-else-if="isCommunityChallenge">
                     <div class="tw-flex tw-mb-2 3xl:tw-mb-0">
                         <!-- Avatars -->
                         <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>
@@ -112,31 +134,42 @@
                 </template>
                 <div v-else class="tw-text-sm tw-font-bold tw-mb-5">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>
                 <!-- CTA -->
-                <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-w-full">
-                    <svg class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg> Enroll Now
+                <MuButton :href="ctaObj.url || ''" @click="ctaObj.action">
+<!--                    <svg class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                        <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                    </svg> -->
+                    {{ ctaObj.text }}
                 </MuButton>
             </div>
         </div>
     </div>
-</template>
 
+    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-model="closeAwardModal" />
+</template>
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, } from "vue";
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
-import { useUserStore } from "@stores/user";
 import { postChallengesEnrollmentNotification } from 'musora-content-services';
 
 import MuButton from '@units/Button/MuButton';
 import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
+import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
+import {usePlatformStore} from "@stores/platform";
+import {storeToRefs} from "pinia/dist/pinia";
 
 const props = defineProps({
     challengeType: {
         type: String,
         default: 'community'
     },
+    challenge: {
+        type: Object,
+        default: {},
+    }
 });
+
+const platformStore = usePlatformStore();
+const { isDarkMode } = storeToRefs(platformStore);
 
 const breakpoints = useBreakpoints({ ...breakpointsTailwind, '3xl': 1815 });
 const desktop = breakpoints.greaterOrEqual('lg');
@@ -145,6 +178,7 @@ const mobile = breakpoints.smaller('md');
 
 const desktopShowDropdown = ref(false);
 const mobileShowDropdown = ref(false);
+const isAwardModalOpen = ref(false);
 
 const isSoloChallenge = computed(() => {
     return props.challengeType === 'solo';
@@ -162,8 +196,85 @@ const labelText = computed(() => {
     return props.challengeType;
 })
 
+const thumbnail = computed(() => {
+    if(isAward.value){
+        return props.challenge.badge;
+    }
+})
+
+const desktopBGImage = computed(() => {
+    if(isAward.value){
+        if(isDarkMode.value){
+            return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-dark-desktop-bg.png';
+        } else {
+            return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-desktop-bg.png';
+        }
+    } else {
+        //TODO(challenge): add bg image
+
+    }
+
+})
+
+const mobileBGImage = computed(() => {
+    if(isAward.value){
+        if(isDarkMode.value){
+            return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-dark-bg.png';
+        } else {
+            return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-bg.png';
+        }
+    } else {
+        //TODO(challenge): add bg image
+
+    }
+
+})
+
+const testComputed = computed(() => {
+    return isDarkMode.value;
+})
+
+const logo = computed(() => {
+    if(isDarkMode.value){
+        return props.challenge.dark_mode_logo_url;
+    } else {
+        return props.challenge.light_mode_logo_url;
+    }
+})
+
 const isAward = computed(() => {
-    return true;
+    return props.challenge.type === 'challenge-award';
+})
+
+const tier = computed(() => {
+    return props.challenge.tier;
+})
+
+const minutesPracticed = computed(() => {
+    return props.challenge.minutes_practiced;
+})
+
+const challengeTitle = computed(() => {
+    return props.challenge.title;
+})
+
+const streak = computed(() => {
+    return props.challenge.streak;
+})
+
+const earnedDate = computed(() => {
+    return props.challenge.date_completed;
+})
+
+const ctaObj = computed(() => {
+    const obj = {};
+
+    if(isAward.value){
+        obj.text = 'See awards';
+        obj.action = openAwardModal;
+    }
+
+    return obj;
 })
 
 const closeDesktopDropdown = () => {
@@ -174,15 +285,12 @@ const closeMobileDropdown = () => {
     mobileShowDropdown.value = false;
 }
 
-const handleCta = async () => {
-    try {
-        //Get enrollment notification
-        // const notification = postChallengesEnrollmentNotification(id);
-    } catch (e){
-        window.shownotification({
-            icon: 'error',
-            text: 'Woops! Something wrong happened, please try again later.'
-        })
-    }
+const openAwardModal = () => {
+    isAwardModalOpen.value = true;
 }
+
+const closeAwardModal = () => {
+    isAwardModalOpen.value = false;
+}
+
 </script>
