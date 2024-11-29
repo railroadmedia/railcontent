@@ -91,8 +91,8 @@ class CarouselServiceV1
             ];
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
-            ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-community'),
-            ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-community'),
+            ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-challenge'),
+            ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-challenge'),
             ... $onboardingCardData,
             $challengeRecommendationCard,
         ];
