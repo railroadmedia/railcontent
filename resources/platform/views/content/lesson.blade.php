@@ -2,7 +2,6 @@
 //   TODO: Won't fix for now, leaving in for future reference, not sure if workouts uses it (?)
 //   https://musoraproduct.myjetbrains.com/youtrack/issue/BR-1258/Drumeo-QA-Buttons-Not-Connecting
 //   $hasQAVideo = !empty($lessonContent['qna_video_playback_endpoints']);
-    $videoProps['need_access'] = $lessonContent->fetch('need_access') ?? false;   
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
