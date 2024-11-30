@@ -78,8 +78,8 @@
         </div>
     </div>
 
-    <!-- SM Desktop / Tablet /Mobile -->
-    <div class="xl:tw-hidden tw-rounded-[10px] tw-bg-[#182132] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0 tw-pt-4 tw-pb-5 tw-px-2 tw-relative tw-overflow-hidden dark:tw-text-white">
+    <!-- SM Desktop / Tablet / Mobile -->
+    <div class="xl:tw-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#182132] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0 tw-pt-4 tw-pb-5 tw-px-2 tw-relative tw-overflow-hidden dark:tw-text-white tw-border tw-border-primary-7">
         <div class="tw-absolute tw-top-3 tw-right-3 tw-z-10">
             <div class="tw-relative">
                 <!-- Ellipsis -->
@@ -96,20 +96,22 @@
 
         <div class="tw-relative tw-w-full tw-mb-[18px]">
             <!-- Musora Logo -->
-            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-flex tw-justify-center tw-items-center tw-relative tw-z-[5]">
                 <svg class="tw-transform -tw-rotate-90 tw-w-[260px] tw-h-[260px]">
-                    <circle cx="130" cy="130" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
-                            class="tw-text-[#112E4A] tw-drop-shadow-md" />
-                    <circle cx="130" cy="130" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
+                    <circle cx="129" cy="129" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
+                            class="tw-text-[#E0E0E1] dark:tw-text-[#112E4A] tw-drop-shadow-md" />
+                    <circle cx="129" cy="129" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
                             :stroke-dasharray="circumference"
                             :stroke-dashoffset="circumference - (progressPercent / 100) * circumference"
                             :class="`tw-text-${brand}`" />
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
                     <!-- Challenge Logos -->
-                    <img class="tw-h-14 lg:h-16 tw-mb-1" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
-                    <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px]" :class="hasChallengeStarted && hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
+                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
+                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
+                    <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px]" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
                 </div>
             </div>
         </div>
@@ -130,7 +132,8 @@
             <!-- Rest Days -->
             <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-px-2 tw-flex tw-items-center tw-relative">
                 <!-- Rest Icon -->
-                <img class="tw-mr-2 tw-w-5" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
+                <img class="tw-mr-2 tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
+                <img class="tw-mr-2 tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                 <!-- Rest Text -->
                 <div class="tw-grow">
                     <div class="tw-font-extrabold">{{ restDays }}</div>
@@ -142,7 +145,7 @@
             </div>
         </div>
         <div class="tw-flex tw-flex-col tw-w-full tw-px-2 tw-max-w-[320px] tw-mx-auto">
-            <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white">
+            <MuButton :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
@@ -185,7 +188,7 @@ const isLeaveModalOpen = ref(false);
 const infoModalType = ref('');
 const countdownString = ref('');
 
-const radius = 120;
+const radius = 118;
 const circumference = 2 * Math.PI * radius;
 
 const isSoloChallenge = computed(() => {
@@ -348,6 +351,4 @@ watch(
         }
     },
 )
-
-console.log(props.challenge)
 </script>

@@ -9,17 +9,19 @@
 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
-                title="Challenges"
-                :see-all-url="`/${brand}/challenges`"
+                title="Featured Challenges"
+                :see-all-url="`/${brand}/challenge`"
                 seeAllAriaLabel="See All Challenges"
                 catalogue-type="challenge"
+                page-type="home"
+                :preLoadedContent="data?.carousels"
             />
 
             <!-- Learning Paths -->
-            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"
-                trackingSection="banner" />
-            <NewLearningPathContainer :isV2User v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths"
-                trackingSection="banner" />
+<!--            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"-->
+<!--                trackingSection="banner" />-->
+<!--            <NewLearningPathContainer :isV2User v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths"-->
+<!--                trackingSection="banner" />-->
 
             <!-- Join Header: Pack Only -->
             <StaticHeader
@@ -189,7 +191,7 @@
         upgradeMembershipUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
         nextLearningPathLevel: { type: String, default: '' },
-        
+
         // Boolean props
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
@@ -214,9 +216,9 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        startedContent: { 
-            type: Object, 
-            default: () => ({ data: [] }) 
+        startedContent: {
+            type: Object,
+            default: () => ({ data: [] })
         },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) }
