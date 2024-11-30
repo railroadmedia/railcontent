@@ -16,7 +16,7 @@
                     :wideImg="card.wideImg"
                     :squareImg="card.squareImg"
                 />
-                <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" />
+                <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
                 <InProgressCard v-else :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
             </template>
         </template>
