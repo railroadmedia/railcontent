@@ -28,7 +28,7 @@
                 <h3 class="tw-font-bebas-neue tw-text-base tw-uppercase tw-font-normal tw-text-center">Completion Bonus</h3>
                 <span class="heading tw-text-center tw-text-[30px]">
             <i class="fas fa-trophy tw-text-2xl"></i>
-             {{ lessonData.xp_bonus || 0 }} XP
+             {{ lessonData.xp || 0 }} XP
         </span>
             </div>
         </div>
