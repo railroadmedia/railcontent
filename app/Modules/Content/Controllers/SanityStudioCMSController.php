@@ -213,9 +213,13 @@ class SanityStudioCMSController extends BaseController
         try {
             $client = new \GuzzleHttp\Client();
             $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
-            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
-                'auth' => $auth,
-            ]);
+            $response = $client->request(
+                'GET',
+                'https://www.soundslice.com/' . 'api/v1/slices/' . $slug . '/recordings',
+                [
+                    'auth' => $auth,
+                ]
+            );
 
             $body = json_decode($response->getBody(), true);
             $duration = 0;
@@ -238,8 +242,10 @@ class SanityStudioCMSController extends BaseController
             }
             return $permission;
         } else {
-            $lessonType = array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('_type')] ?? null;
-            if(!$lessonType){
+            $lessonType = array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get(
+                '_type'
+            )] ?? null;
+            if (!$lessonType) {
                 $lessonType = $request->get('_type');
             }
             if ($request->has('railcontent_id')) {
@@ -255,20 +261,23 @@ class SanityStudioCMSController extends BaseController
             }
 
             if (!$content) {
-                $content             = new Content();
-                $content->type       = $lessonType;
-                $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
-                $content->language   = 'en-US';
+                $content = new Content();
+                $content->type = $lessonType;
+                $content->slug = $request->has('slug') ? $request->get('slug')['current'] : null;
+                $content->language = 'en-US';
                 $content->created_on = Carbon::now()->toDateTimeString();
-                $content->status     = 'published';
-                $content->brand      = $request->get('brand');
+                $content->status = $request->get('status');
+                $content->brand = $request->get('brand');
 
                 $content->save();
             }
 
-            $content->status = 'published';
-            $content->brand  = $request->get('brand');
-            $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
+            $content->published_on = $request->has('published_on') ? Carbon::parse(
+                $request->get('published_on')
+            ) : null;
+            $content->status = $request->get('status');
+            $content->brand = $request->get('brand');
+            $content->slug = $request->has('slug') ? $request->get('slug')['current'] : null;
             $content->setTitle($request->get('title'));
             $content->setDifficulty($request->get('difficulty'));
             $content->setXP($request->get('xp'));
@@ -276,19 +285,19 @@ class SanityStudioCMSController extends BaseController
             $content->setAlbum($request->get('album'));
             $assignments = $content->setAssignments($request->get('assignment'));
             $chilrens = [];
-            if($request->has('childrenArray')){
+            if ($request->has('childrenArray')) {
                 $chilrens = $request->get('childrenArray');
-                foreach ($chilrens as $index=>$children){
+                foreach ($chilrens as $index => $children) {
                     $content->setChildId($children['railcontent_id'], ($index + 1));
-                          event(new ContentCreated($children['railcontent_id']));
+                    event(new ContentCreated($children['railcontent_id']));
                     $childrens[] = Content::query()
                         ->where('id', '=', $children['railcontent_id'])
                         ->first();
                 }
             }
-            if($request->has('parent_id')){
-                    $content->setParentId($request->get('parent_id'), 1);
-                }
+            if ($request->has('parent_id')) {
+                $content->setParentId($request->get('parent_id'), 1);
+            }
 
             $content->save();
 
@@ -298,10 +307,10 @@ class SanityStudioCMSController extends BaseController
             $content = Content::query()
                 ->where('id', '=', $content->id)
                 ->first();
-            if($assignments) {
+            if ($assignments) {
                 $content['assignment'] = $assignments;
             }
-            if(!empty($chilrens)){
+            if (!empty($chilrens)) {
                 $content['childrens'] = $childrens;
             }
 
@@ -312,22 +321,22 @@ class SanityStudioCMSController extends BaseController
     public function getVimeoEndpoints(string $vimeoId): ?Vimeo
     {
         $video = Vimeo::where('external_id', $vimeoId)->first();
-        if(!$video) {
-            ConfigService::$brand  = 'musora';
+        if (!$video) {
+            ConfigService::$brand = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
-            if($vimeo){
+            if ($vimeo) {
                 $video = Vimeo::create(
                     [
-                        'external_id'              => $vimeoId,
-                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                        'external_id' => $vimeoId,
+                        'video_poster_image_url' => $vimeo['video_poster_image_url'],
                         'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
-                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
-                        'length_in_seconds'        => $vimeo['length_in_seconds']
+                        'hlsManifestUrl' => $vimeo['hlsManifestUrl'],
+                        'length_in_seconds' => $vimeo['length_in_seconds']
                     ]
                 );
             }
-      }
+        }
 
         return $video;
     }

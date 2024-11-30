@@ -7,6 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Integer;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
@@ -51,6 +52,7 @@ class Challenge extends ParentTemplate
                             new Field(FieldType::File, 'bronze_award', 'Bronze Award', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
                             new Field(FieldType::File, 'badge', 'Badge', group: $detailsGroup, validation: [new Required()], options: ['accept' => '.png']),
                             new Field(FieldType::Boolean, 'is_solo', 'Is Solo Challenge', group: $detailsGroup, initialValue: false),
+                            new Field(FieldType::Number, 'product_id', 'Shopify Product Id', group: $detailsGroup, validation: [new Integer()]),
                             ... $contentCardFields,
                          ]);
 

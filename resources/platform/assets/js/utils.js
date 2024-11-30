@@ -91,6 +91,7 @@ export const contentTypes = {
     'workout': { singular: 'Workout', plural: 'Workouts' },
     'rudiment': { singular: 'Rudiment', plural: 'Rudiments' },
     'pack-bundle-lesson': { singular: 'Pack Bundle Lesson', plural: 'Pack Bundle Lessons' },
+    'pack-bundle': { singular: 'Pack', plural: 'Packs' },
     'semester-pack-lesson': { singular: 'Semester Pack Lesson', plural: 'Semester Pack Lessons' },
     'challenge-part': { singular: 'Challenge Part', plural: 'Challenge Parts' },
     'song-tutorial-children': { singular: 'Song Tutorial Lesson', plural: 'Song Tutorial Lessons' },
@@ -131,7 +132,8 @@ export const contentTypes = {
     'recommended': { singular: 'Inspired By Your Activity', plural: 'Inspired By Your Activity' },
     'pack': { singular: 'Pack', plural: 'Packs' },
     'coach-lessons': { singular: 'Coach Lesson', plural: 'Coach Lessons' },
-    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' }
+    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' },
+    'odd-times': { singular: 'Odd Times With Aaron Edgar', plural: 'Odd Times With Aaron Edgar' },
 };
 
 export const toKebabCase = (string) => {

@@ -14,8 +14,8 @@ class NavigationService
             return [];
         }
         $shopName = brand() == 'drumeo' ? 'drumshop' : 'shop';
-        if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
-            return [
+        if ($user->isPackOrChallengeOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
+            $menu = [
                 [ // section
                     [
                         'name' => 'Home',
@@ -27,24 +27,38 @@ class NavigationService
                         'path' => get_legacy_brand_base_url().'/'.$shopName,
                         'icon' => 'cart',
                     ]
-                ],
-                [ // section
+                ]
+            ];
+            if ($user->isChallengeOnlyOwner()) {
+                $menu[] = [ // section
+                    [
+                        'name' => 'Challenges',
+                        'path' => '/'.brand().'/challenges',
+                        'icon' => 'challenges',
+                    ],
+                ];
+            }
+            if ($user->isPackOnlyOwner()) {
+                $menu[] = [ // section
                     [
                         'name' => 'Packs',
                         'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
-                ],
-                [ // section
+                ];
+            }
+
+            $menu[] =    [ // section
                     [
                         'name' => 'Forums',
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
 
-                ],
-            ];
+                ];
+            return $menu;
         }
+
 
         $methodurl = match(brand()) {
             'drumeo' => 'drumeo-method/241247',

@@ -79,6 +79,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
+            'isChallengeOnlyOwner' => $user->isChallengeOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
