@@ -1,5 +1,5 @@
 <template>
-    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full">
+    <InfoModal :selfContained="true" class-override="tw-max-w-[510px] tw-w-full" @on-close="emit('closeModal')">
         <div class="tw-flex tw-flex-col -tw-mt-[50px] dark:tw-text-white">
             <svg class="tw-mb-5 tw-mx-auto" width="96" height="97" viewBox="0 0 96 97" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M96 48.4999C96 57.1319 93.7172 65.2263 89.7365 72.2262C86.2934 78.2734 81.5769 83.4998 75.9454 87.5281C68.0782 93.179 58.4282 96.4998 48.0047 96.4998C38.251 96.4998 29.1764 93.5941 21.6017 88.5941C16.8285 85.4432 12.6497 81.4621 9.26324 76.8583C3.43362 68.9149 0 59.1036 0 48.4999C0 27.066 14.0552 8.90564 33.459 2.74528C37.4303 1.48113 41.628 0.726415 45.9766 0.54717C46.6464 0.509434 47.3255 0.5 48.0047 0.5C48.6839 0.5 49.3536 0.509434 50.0234 0.54717C54.372 0.716981 58.5792 1.48113 62.5505 2.74528C81.9448 8.90564 96 27.066 96 48.4999Z" fill="#223F57"/>
@@ -11,7 +11,7 @@
             <h1 class="tw-mb-[10px] tw-text-2xl tw-font-bold">We’ll let you know!</h1>
             <p class="tw-mb-5">You’ll receive a notification when enrollment opens!</p>
             <div class="tw-flex tw-justify-end">
-                <MuButton>Close</MuButton>
+                <MuButton @click="emit('closeModal')">Close</MuButton>
             </div>
         </div>
     </InfoModal>
@@ -19,4 +19,6 @@
 <script setup>
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
+
+const emit = defineEmits(['closeModal']);
 </script>
