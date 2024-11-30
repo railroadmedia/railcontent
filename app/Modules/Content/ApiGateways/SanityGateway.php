@@ -263,6 +263,36 @@ class SanityGateway
         return $document;
     }
 
+    public function getProductInformationForAllChallenges(): array
+    {
+        $gateway = new SanityGateway();
+        $query = "*[_type == 'challenge']{
+            'sanity_id': _id,
+            'id': railcontent_id,
+            'product_id',
+            'is_solo'
+        }";
+        $results = $gateway->sanity->fetch($query);
+        return $results;
+    }
+
+    /**
+     * @param string $brand
+     * @return array
+     */
+    public function getAllChallengesByBrand(?string $brand): array
+    {
+        $gateway = new SanityGateway();
+        $fieldsString = $this->getFieldsString('challenge');
+        $brandString = $brand ? " && brand == '$brand'" : '';
+        $query = "*[_type == 'challenge' $brandString]{
+            $fieldsString
+        }";
+        $results = $gateway->sanity->fetch($query);
+        return $results;
+    }
+
+
     /**
      * @param int $railcontentId - railcontent.id value
      * @param string $type - sanity _type value

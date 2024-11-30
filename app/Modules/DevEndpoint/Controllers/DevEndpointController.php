@@ -95,7 +95,7 @@ class DevEndpointController extends Controller
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
             case('enroll'):
                 $this->challengesService->startChallenge($challengeId, $userId);
-                // no break
+            // no break
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";

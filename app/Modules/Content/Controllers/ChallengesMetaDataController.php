@@ -145,9 +145,8 @@ class ChallengesMetaDataController extends Controller
         $userId = user()->id;
         $userProgresses = ChallengeUserProgress::whereUserId($userId);
         $brand = $request->get('brand', brand());
-        $contentIds = $userProgresses->pluck('content_id')->toArray();
         $resultPackage = $this->challengesService->getChallengeMetaDataForUserProgress(
-            $contentIds,
+            null,
             $userProgresses,
             false,
             $brand
