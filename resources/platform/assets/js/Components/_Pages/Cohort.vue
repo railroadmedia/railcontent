@@ -301,7 +301,7 @@
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
     <!-- TODO(challenge): Add is_solo property in props -->
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="cohort" @modal-close="closeNotificationModal" />
+    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="cohort" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
     <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
@@ -365,6 +365,14 @@ const openChallengeActionModal = ref(false);
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
 });
+
+const challengeType = computed(() => {
+    if(props.cohort.is_solo){
+        return 'solo';
+    } else {
+        return 'community'
+    }
+})
 
 const enroll = async() => {
     try {
