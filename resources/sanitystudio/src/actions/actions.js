@@ -177,3 +177,24 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
     };
     return BetterAction;
 }
+
+
+
+
+export function CreateDuplicateAction(originalPublishAction) {
+    const DuplicateAction = (props) => {
+        const originalResult = originalPublishAction(props);
+        const { patch, publish } = useDocumentOperation(props.id, props.type);
+
+        return {
+            ...originalResult,
+            onHandle: async () => {
+                console.log("duplicate action");
+                console.log(props);
+                patch.execute([{ set: { railcontent_id: null, web_url_path: null, status: 'draft', published_on: null } }]);
+                originalResult.onHandle();
+            },
+        };
+    };
+    return DuplicateAction;
+}

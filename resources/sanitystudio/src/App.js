@@ -13,7 +13,7 @@ import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import th
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import XpInput from './components/XpInput'; // Import the custom component
-import {CreateImprovedAction} from './actions/actions'; // Import the custom component
+import {CreateImprovedAction, CreateDuplicateAction} from './actions/actions'; // Import the custom component
 import {defaultDocumentNode} from './defaultDocumentNode';
 import {musoraStructure} from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
@@ -149,9 +149,13 @@ function App() {
                         actions: (input, context) =>
                                      singletonTypes.has(context.schemaType)
                                          ? input.filter(({ action }) => action && singletonActions.has(action))
-                                         : input.map((previousAction) =>
-                                             previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken, context) : previousAction
-                                         ),
+                                         : input.map(function(previousAction){
+                                             switch(previousAction.action){
+                                                 case "publish": return CreateImprovedAction(previousAction, config.csrfToken, context);
+                                                 case "duplicate": return CreateDuplicateAction(previousAction);
+                                                 default: return previousAction;
+                                             }
+                                         }),
                     },
                     form: {
                         components: {
