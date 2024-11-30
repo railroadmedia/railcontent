@@ -17,6 +17,7 @@ class ChallengesService
 {
     const string ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
     const string COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+    //TODO update for solo challenges - TCH-113
 
 
     public function __construct(
@@ -320,25 +321,15 @@ class ChallengesService
     }
 
     public function getChallengeMetaDataForUserProgress(
-        array $allChallengeIds,
+        ?array $allChallengeIds,
         mixed $userProgresses,
         bool $returnChallengeData,
         ?string $brand = null
     ): array {
         $resultPackage = [];
-        $challenges = $this->getChallengeByIds($allChallengeIds, $brand);
-        foreach ($allChallengeIds as $contentId) {
-            $challenge = null;
-            foreach ($challenges as $testChallenge) {
-                if ($testChallenge['id'] == $contentId) {
-                    $challenge = $testChallenge;
-                    break;
-                }
-            }
-            if (is_null($challenge)) {
-                continue;
-            }
-
+        $challenges = $allChallengeIds ? $this->getChallengeByIds($allChallengeIds, $brand) : $this->getAllChallengesByBrand($brand);
+        foreach ($challenges as $challenge) {
+            $contentId = $challenge['id'];
             $challengeMetaDataToReturn = null;
             foreach ($userProgresses as $userProgress) {
                 if ($userProgress['content_id'] == $contentId) {
@@ -490,6 +481,17 @@ class ChallengesService
     public function getChallengeByIds($challengeIds, ?string $brand = null): array|null
     {
         return $this->sanityGateway->getByRailContentIds($challengeIds, 'challenge', $brand);
+    }
+
+    /**
+     * Get the sanity Documents for listed challenges
+     * @param array $challengeIds
+     * @param string $brand
+     * @return array | null
+     */
+    public function getAllChallengesByBrand(string $brand = null): array|null
+    {
+        return $this->sanityGateway->getAllChallengesByBrand($brand);
     }
 
     public function completeLessonAndGetCurrentProgressResults($lessonId, $userId): array

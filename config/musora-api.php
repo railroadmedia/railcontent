@@ -1809,6 +1809,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'subscriptionIntervalType',
