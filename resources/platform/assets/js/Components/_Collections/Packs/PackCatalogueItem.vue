@@ -82,7 +82,7 @@
                 <div class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">{{ artistName }}</div>
                 <!-- Info -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
-                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
+                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
