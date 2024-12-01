@@ -7,29 +7,11 @@ import { Iframe } from 'sanity-plugin-iframe-pane';
 function getPreviewUrl(doc, dataset) {
     const sanityConfig = window.sanityConfig.find(item => item.name === 'publishing-workspace');
     const { appUrl } = sanityConfig;
-    if (!doc) return `${appUrl}/drumeo/?sanityPreview`;
-    console.log(doc);
-
+    if (!doc) return `invalid_document`;
     const contentPath = doc.web_url_path;
-    let contentId = doc._id;
-    let brand = doc.brand || 'drumeo';
-
-    // Remove the 'song_' prefix from the contentId
-    if (contentId.startsWith('song_')) {
-      contentId = contentId.replace('song_', '');
-    }
-
-    // Handle draft documents
-    if (contentId.startsWith('drafts.')) {
-      contentId = contentId.replace('drafts.', '');
-      return contentPath && contentId
-        ? `${appUrl}${contentPath}?sanityPreview`
-        : `${appUrl}/${brand}/?sanityPreview`;
-    }
-
-    return contentPath && contentId
+    return contentPath
       ? `${appUrl}${contentPath}?sanityPreview`
-      : `${appUrl}/${brand}/?sanityPreview`;
+      : `invalid_web_url_path`;
 }
 
 // Default Document Node Resolver
