@@ -152,7 +152,7 @@ function App() {
                                          : input.map(function(previousAction){
                                              switch(previousAction.action){
                                                  case "publish": return CreateImprovedAction(previousAction, config.csrfToken, context);
-                                                 case "duplicate": return CreateDuplicateAction(previousAction);
+                                                 case "duplicate": return CreateDuplicateAction(previousAction, context);
                                                  default: return previousAction;
                                              }
                                          }),

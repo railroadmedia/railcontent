@@ -178,21 +178,25 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
     return BetterAction;
 }
 
-
-
-
-export function CreateDuplicateAction(originalPublishAction) {
+export function CreateDuplicateAction(originalAction, context) {
+    const apiVersion = 'v2022-03-07';
+    const client = context.getClient({apiVersion: apiVersion})
     const DuplicateAction = (props) => {
-        const originalResult = originalPublishAction(props);
-        const { patch, publish } = useDocumentOperation(props.id, props.type);
-
+        const originalResult = originalAction(props);
         return {
             ...originalResult,
             onHandle: async () => {
-                console.log("duplicate action");
-                console.log(props);
-                patch.execute([{ set: { railcontent_id: null, web_url_path: null, status: 'draft', published_on: null } }]);
+                const originalTitle = props.published ? props.published.title : props.draft.title;
                 originalResult.onHandle();
+                let results = await client
+                    .fetch(`*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`);
+                let newId = results._id;
+                await client.patch(newId).set({
+                    railcontent_id: null,
+                    web_url_path: null,
+                    status: 'draft',
+                    published_on: null
+                }).commit();
             },
         };
     };
