@@ -13,17 +13,6 @@
         "
        :class="[class_object]"
     >
-        <!-- LESSON NUMBERS -->
-        <div v-if="showNumbers" class="
-            tw-flex
-            tw-items-center
-            tw-justify-center
-            number-col
-            hide-xs-only
-        ">
-            <div class="tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-full tw-w-1/3 tw-h-6"></div>
-        </div>
-
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
              :class="[thumbnailColumnClass]">
