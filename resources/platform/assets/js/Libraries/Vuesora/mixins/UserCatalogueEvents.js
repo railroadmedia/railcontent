@@ -1,15 +1,6 @@
 import ContentService from '../assets/js/Services/content';
 import {useResetProgress} from "@hooks/useResetProgress";
 
-const getValue = (obj, key) => {
-    const filtered = obj.filter((field) => {
-        if (field.key === key) {
-            return true;
-        }
-    })
-    return filtered.length ? filtered[0].value : '';
-}
-
 export default {
     methods: {
         // Used at the top level to emit the event with a payload
@@ -26,7 +17,7 @@ export default {
                                 type: e.currentTarget.getAttribute('data-content-type'),
                                 is_added: this.item.is_added_to_primary_playlist || false,
                             });
-                
+
                             window.shownotification({
                                 icon: 'check',
                                 text: 'Removed! The lesson has been removed from your list.'
@@ -36,22 +27,14 @@ export default {
                             console.log('Remove lesson cancelled');
                         }
                     }
-                });                
+                });
             } else {
                 const type = this.item.type ? this.item.type : e.currentTarget.getAttribute('data-content-type');
-                let name = '';
-                let thumbnail_url = '';
-                let description = '';
-                if (type === 'song') {
-                    name = getValue(this.item.fields, 'title');
-                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
-                    description = getValue(this.item.fields, 'artist');
-                } else {
-                    name = getValue(this.item.fields, 'title');
-                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
-                    description = getValue(this.item.data, 'description');
 
-                }
+                const name = this.item.title;
+                const thumbnail_url = this.item.image;
+                const description = this.item.artist_name;
+
                 this.emitAddToList({
                     content_id: this.item.id,
                     type,
@@ -64,9 +47,9 @@ export default {
         },
 
         progressReset(event) {
-            const { resetProgress } = useResetProgress();
+            const {resetProgress} = useResetProgress();
 
-            resetProgress(this.item.id, { value: 'fas fa-redo-alt fa-flip-horizontal' }, true);
+            resetProgress(this.item.id, {value: 'fas fa-redo-alt fa-flip-horizontal'}, true);
         },
 
         // Used to bus the event up one more level to the components parent
@@ -80,7 +63,7 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
-            window.openplaylistmodal({ modalType: 'addItem', content: payload });
+            window.openplaylistmodal({modalType: 'addItem', content: payload});
         },
 
         resetProgressEventHandler(payload) {
@@ -92,7 +75,7 @@ export default {
                         window.shownotification({
                             icon: 'check',
                             text: 'Ready to start again? Your progress has been reset.'
-                        });                        
+                        });
 
                         this.content.splice(post_index, 1);
                     }
