@@ -271,10 +271,8 @@ class SanityStudioCMSController extends BaseController
 
                 $content->save();
             }
-
-            $content->published_on = $request->has('published_on') ? Carbon::parse(
-                $request->get('published_on')
-            ) : null;
+            $publishedOn = $request->get('published_on') ?? null;
+            $content->published_on = $publishedOn ? Carbon::parse($publishedOn) : null;
             $content->status = $request->get('status');
             $content->brand = $request->get('brand');
             $content->slug = $request->has('slug') ? $request->get('slug')['current'] : null;
