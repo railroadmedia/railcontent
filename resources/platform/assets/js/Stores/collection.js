@@ -143,7 +143,7 @@ export const useCollectionStore = defineStore({
             console.log(data);
             if (this.tabOptions.length === 0) {
                 //Set Tab Options
-                this.tabOptions = formatTabData(data.tabs, data.name);
+                this.tabOptions = formatTabData(data.tabs, data.name ?? '');
             }
         },
 

@@ -46,7 +46,7 @@ export function useFilterValues() {
         if((tabs?.length ?? 0) === 0) {
             return [
                 {
-                    value : `All ${name}`,
+                    value : name ? `All ${name}` : '',
                     groupByView: false,
                     key: ""
                 },

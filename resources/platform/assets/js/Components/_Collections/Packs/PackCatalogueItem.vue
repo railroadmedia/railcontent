@@ -14,6 +14,7 @@
             <!-- Logo -->
             <div :class="`tw-absolute tw-w-full tw-p-[10px] tw-pt-[30px] tw-flex tw-justify-center`" style="background:linear-gradient(to bottom, transparent 0%, #000 100%);" :style="`bottom: ${hasStarted ? '6px' : '0'}`">
                 <img
+                    v-if="pack.logo_image_url != null"
                     class="tw-max-h-[70px] sm:tw-max-h-[40px]"
                     :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
                     :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
@@ -131,6 +132,7 @@ import { computed, ref, onBeforeMount } from "vue";
 import { DateTime } from 'luxon';
 import { useResetProgress } from "@hooks/useResetProgress";
 import { usePlatformStore } from "../../../Stores/platform";
+import { getProgressPercentage } from "musora-content-services";
 
 const userStore = useUserStore();
 const { brand, isAdmin } = storeToRefs(userStore);
@@ -169,9 +171,7 @@ const description = computed(() => {
     return props.pack.description;
 })
 
-const progressPercent = computed(() => {
-    return props.pack.progress_percent;
-})
+const progressPercent = ref(0);
 
 const hasStarted = computed(() => {
     return progressPercent.value > 0;
@@ -271,6 +271,6 @@ const logoStyle = computed(() => {
 })
 
 onBeforeMount( () => {
-    //console.log('props.pack', props.pack)
+    getProgressPercentage(props.pack.id).then((result) => progressPercent.value = result);
 })
 </script>
