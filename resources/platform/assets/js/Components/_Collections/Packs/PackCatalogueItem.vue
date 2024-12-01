@@ -154,13 +154,12 @@ const noAccess = computed(() => {
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
-    if(isAdmin.value) return true;
-
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
+    if (isAdmin.value) return true;
+    return DateTime.fromISO(props.pack.published_on).toISO() < DateTime.now().toISO();
 })
 
 const releaseDate = computed(() => {
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
+    return DateTime.fromISO(props.pack.published_on).toFormat('LLL d/yy');
 })
 
 const title = computed(() => {
