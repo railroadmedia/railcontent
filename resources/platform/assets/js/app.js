@@ -11,6 +11,9 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 import { initializeService } from 'musora-content-services';
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const perspective = urlParams.has('sanityPreview') ? 'previewDrafts' : 'published';
 // Configuration object
 const config = {
     sanityConfig: {
@@ -19,7 +22,8 @@ const config = {
         dataset:'staging',
         version:'2021-06-07',
         debug: true,
-        useCachedAPI: true
+        useCachedAPI: !perspective,
+        perspective: perspective
       },
       railcontentConfig: {
         token: window.railcontentConfig?.token,
