@@ -186,10 +186,12 @@ export function CreateDuplicateAction(originalAction, context) {
         return {
             ...originalResult,
             onHandle: async () => {
-                const originalTitle = props.published ? props.published.title : props.draft.title;
-                originalResult.onHandle();
+                const originalTitle = props.draft.title;
+                await originalResult.onHandle();
+                const query = `*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`;
                 let results = await client
-                    .fetch(`*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`);
+                    .fetch(query);
+
                 let newId = results._id;
                 await client.patch(newId).set({
                     railcontent_id: null,
