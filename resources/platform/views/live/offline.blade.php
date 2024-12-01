@@ -30,7 +30,6 @@
         header-icon-name="{{ $headerDataObj->iconName }}"
         header-title="{{ $headerDataObj->title }}"
         :header-ctas="{{ json_encode($headerDataObj->ctas) }}"
-        :schedule-events="{{ $scheduleEvents }}"
         subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
         timezone="{{ $fullTimezoneString }}"
     ></offline>
