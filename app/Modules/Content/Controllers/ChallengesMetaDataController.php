@@ -52,7 +52,7 @@ class ChallengesMetaDataController extends Controller
         // below here is where things need to be refactored
 
         // TODO TCH-56 this needs to be updated to pull all data from sanity instead of nova (and the cohort table).
-        $enrollmentClosedDate = Carbon::parse($content['enrollment_end_date']);
+        $enrollmentClosedDate = Carbon::parse($content['enrollment_end_time']);
         $enrollmentClosed = false; // $enrollmentClosedDate >= Carbon::now();
         $cohort['is_solo'] = $content['is_solo'] ?? false;
 
@@ -274,6 +274,9 @@ class ChallengesMetaDataController extends Controller
         $challenge = $this->challengesService->getChallengeById($id);
         $user = user();
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($id, $user->id);
+        if (!$userProgress) {
+            return self::NotFoundErrorResponse($id, $user->id);
+        }
         return response()->json(
             $this->challengesAwardService->getUserAwardData($challenge, $userProgress, $user, includeBase64: true)
         );

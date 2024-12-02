@@ -39,7 +39,6 @@ class SanityGateway
             'is_solo',
             '"lesson_count": child_count',
             '"primary_cta_text": select(dateTime(published_on) > dateTime(now()) && dateTime(enrollment_start_time) > dateTime(now()) => "Notify Me", "View Challenge")',
-            'challenge_state',
             'challenge_state_text',
             '"description": description[0].children[0].text',
             'total_xp',

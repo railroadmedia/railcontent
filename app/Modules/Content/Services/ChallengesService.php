@@ -34,7 +34,7 @@ class ChallengesService
      * @param int $count
      * @return \Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection|User[]
      */
-    public function getEnrolledUsers(int $contentId, int $count = 3)
+    private function getEnrolledUsers(int $contentId, int $count = 3)
     {
         $maxDisplayNameLength = 10;
         $enrolledUserIds = $this->getEnrolledUserIds($contentId);
@@ -327,62 +327,60 @@ class ChallengesService
         ?string $brand = null
     ): array {
         $resultPackage = [];
+        $userProgresses = $userProgresses->keyBy('content_id');
         $challenges = $allChallengeIds ? $this->getChallengeByIds($allChallengeIds, $brand) : $this->getAllChallengesByBrand($brand);
-        foreach ($challenges as $challenge) {
-            $contentId = $challenge['id'];
+        $challenges = collect($challenges)->keyBy('id');
+        foreach ($challenges as $contentId => $challenge) {
             $challengeMetaDataToReturn = null;
-            foreach ($userProgresses as $userProgress) {
-                if ($userProgress['content_id'] == $contentId) {
-                    if ($userProgress->is_active) {
-                        $startEndDate = $userProgress->getStartAndEndDate();
-                        $challenge['lessons'] = $this->combineUserLessonDataWithSanityLessonData(
-                            $challenge['lessons'],
-                            $userProgress,
-                            removeVideoData: true
-                        );
+            $userProgress = $userProgresses->get($contentId);
+            if (!is_null($userProgress)) {
+                if ($userProgress->is_active) {
+                    $startEndDate = $userProgress->getStartAndEndDate();
+                    $challenge['lessons'] = $this->combineUserLessonDataWithSanityLessonData(
+                        $challenge['lessons'],
+                        $userProgress,
+                        removeVideoData: true
+                    );
 
-                        $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
-                            $challenge['lessons'],
-                            $userProgress
-                        );
-                        $nextPreviousLessonAroundFirstIncompleteLesson = $this->getPreviousAndNextLesson(
-                            $firstIncompleteLesson['id'],
-                            $challenge['lessons']
-                        );
-                        $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
-                        $durationText = $userProgress->is_locked ?
-                            $this->getDurationText(
-                                Carbon::parse($startEndDate['start_date']),
-                                Carbon::parse($startEndDate['end_date'])
-                            ) :
-                            'Unlocked';
-                        $challengeMetaDataToReturn = [
-                            'is_user_enrolled' => true,
-                            'progress_percent' => $userProgress->getCompletionPercent(),
-                            'duration_text' => $durationText,
-                            'is_solo' => $userProgress['is_solo'],
-                            'status' => ChallengeUserProgressStatus::ACTIVE,
-                            'next_lesson' => $firstIncompleteLesson,
-                            'previous_completed_lesson' => $previousCompletedLesson,
-                            ... $userProgress->getCompiledMetadata(),
-                        ];
-                        break;
-                    } elseif ($userProgress->isCompleteAndNotActive()) {
-                        $durationText = $this->getDurationText(
-                            Carbon::parse($challenge['published_on']),
-                            $this->getChallengeEndDate($challenge)
-                        );
-                        $challengeMetaDataToReturn = [
-                            'is_user_enrolled' => true,
-                            'progress_percent' => 100,
-                            'duration_text' => $durationText,
-                            'is_solo' => $challenge['is_solo'],
-                            'status' => ChallengeUserProgressStatus::COMPLETED,
-                            'next_lesson' => null,
-                            'previous_completed_lesson' => end($challenge['lessons']),
-                        ];
-                        break;
-                    }
+                    $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
+                        $challenge['lessons'],
+                        $userProgress
+                    );
+                    $nextPreviousLessonAroundFirstIncompleteLesson = $this->getPreviousAndNextLesson(
+                        $firstIncompleteLesson['id'],
+                        $challenge['lessons']
+                    );
+                    $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
+                    $durationText = $userProgress->is_locked ?
+                        $this->getDurationText(
+                            Carbon::parse($startEndDate['start_date']),
+                            Carbon::parse($startEndDate['end_date'])
+                        ) :
+                        'Unlocked';
+                    $challengeMetaDataToReturn = [
+                        'is_user_enrolled' => true,
+                        'progress_percent' => $userProgress->getCompletionPercent(),
+                        'duration_text' => $durationText,
+                        'is_solo' => $userProgress['is_solo'],
+                        'status' => ChallengeUserProgressStatus::ACTIVE,
+                        'next_lesson' => $firstIncompleteLesson,
+                        'previous_completed_lesson' => $previousCompletedLesson,
+                        ... $userProgress->getCompiledMetadata(),
+                    ];
+                } elseif ($userProgress->isCompleteAndNotActive()) {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['published_on']),
+                        $this->getChallengeEndDate($challenge)
+                    );
+                    $challengeMetaDataToReturn = [
+                        'is_user_enrolled' => true,
+                        'progress_percent' => 100,
+                        'duration_text' => $durationText,
+                        'is_solo' => $challenge['is_solo'],
+                        'status' => ChallengeUserProgressStatus::COMPLETED,
+                        'next_lesson' => null,
+                        'previous_completed_lesson' => end($challenge['lessons']),
+                    ];
                 }
             }
             if (is_null($challengeMetaDataToReturn)) {
