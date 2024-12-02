@@ -282,7 +282,5 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
-
-        console.log('first access',isFirstAccess.value)
     });
 </script>
