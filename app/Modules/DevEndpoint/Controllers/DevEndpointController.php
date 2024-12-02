@@ -5,6 +5,7 @@ namespace App\Modules\DevEndpoint\Controllers;
 use App\Models\Cohort;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\ChallengesService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
@@ -15,7 +16,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
-use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
@@ -95,7 +95,7 @@ class DevEndpointController extends Controller
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
             case('enroll'):
                 $this->challengesService->startChallenge($challengeId, $userId);
-                // no break
+            // no break
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";

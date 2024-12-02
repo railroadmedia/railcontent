@@ -35,6 +35,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     pre-production: # deploys the main branch
@@ -65,6 +66,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     beta-testing:
@@ -96,6 +98,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-one:
@@ -157,6 +160,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-three:
@@ -187,6 +191,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-four:
@@ -217,6 +222,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-five:
@@ -247,6 +253,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-one:
@@ -308,6 +315,7 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-three:
@@ -338,5 +346,6 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'cd resources/sanitystudio && yarn install && yarn build && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'

@@ -2525,6 +2525,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -5756,6 +5757,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -5780,7 +5782,6 @@ return [
             'is_first_access',
             'brand_minutes_practiced',
         ],
-
         'quick-tips' => [
             'id',
             'type',

@@ -17,7 +17,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402199, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/30-day-drummer/402199'
+                            "content_url" => '/drumeo/workouts/challenges/30-day-drummer/402199'
                         ],
                     ],
                     [
@@ -30,7 +30,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402031],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/the-money-beat/402031'
+                            "content_url" => '/drumeo/workouts/the-money-beat/402031'
                         ],
                     ],
                 ],
@@ -47,7 +47,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 405781, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/groove-independence/405781'
+                            "content_url" => '/drumeo/workouts/challenges/groove-independence/405781'
                         ],
                     ],
                     [
@@ -60,7 +60,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 409075],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/drum-fill-timing/409075'
+                            "content_url" => '/drumeo/workouts/drum-fill-timing/409075'
                         ],
                     ],
                 ],
@@ -77,7 +77,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 409875, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/30-day-independence/409875'
+                            "content_url" => '/drumeo/workouts/challenges/30-day-independence/409875'
                         ],
                     ],
                     [
@@ -90,7 +90,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 405313],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/smells-like-teen-spirit/405313'
+                            "content_url" => '/drumeo/workouts/smells-like-teen-spirit/405313'
                         ],
                     ],
                 ],
@@ -105,7 +105,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 30399],
-                            "content_url" => 'https://www.musora.com/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
+                            "content_url" => '/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
                         ],
                     ],
                     [
@@ -118,7 +118,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 405617],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/rosanna/405617'
+                            "content_url" => '/drumeo/workouts/rosanna/405617'
                         ],
                     ],
                 ],
@@ -133,7 +133,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 30399],
-                            "content_url" => 'https://www.musora.com/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
+                            "content_url" => '/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
                         ],
                     ],
                     [
@@ -146,7 +146,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402019],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/dirk-s-metal-warm-up/402019'
+                            "content_url" => '/drumeo/workouts/dirk-s-metal-warm-up/402019'
                         ],
                     ],
                 ],
@@ -165,7 +165,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402199, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/30-day-drummer/402199'
+                            "content_url" => '/drumeo/workouts/challenges/30-day-drummer/402199'
                         ],
                     ],
                     [
@@ -178,7 +178,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402031],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/the-money-beat/402031'
+                            "content_url" => '/drumeo/workouts/the-money-beat/402031'
                         ],
                     ],
                 ],
@@ -195,7 +195,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 405781, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/groove-independence/405781'
+                            "content_url" => '/drumeo/workouts/challenges/groove-independence/405781'
                         ],
                     ],
                     [
@@ -208,7 +208,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 409075],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/drum-fill-timing/409075'
+                            "content_url" => '/drumeo/workouts/drum-fill-timing/409075'
                         ],
                     ],
                 ],
@@ -225,7 +225,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 409875, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/drumeo/workouts/challenges/30-day-independence/409875'
+                            "content_url" => '/drumeo/workouts/challenges/30-day-independence/409875'
                         ],
                     ],
                     [
@@ -237,7 +237,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 13595],
-                            "content_url" => 'https://www.musora.com/drumeo/songs/smells-like-teen-spirit-nirvana/13595',
+                            "content_url" => '/drumeo/songs/smells-like-teen-spirit-nirvana/13595',
                         ],
                     ],
                 ],
@@ -252,7 +252,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 30399],
-                            "content_url" => 'https://www.musora.com/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
+                            "content_url" => '/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
                         ],
                     ],
                     [
@@ -264,7 +264,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 410602],
-                            "content_url" => 'https://www.musora.com/drumeo/songs/landmines/410602',
+                            "content_url" => '/drumeo/songs/landmines/410602',
                         ],
                     ],
                 ],
@@ -279,7 +279,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 30399],
-                            "content_url" => 'https://www.musora.com/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
+                            "content_url" => '/drumeo/courses/how-to-become-a-good-sounding-drummer/30399'
                         ],
                     ],
                     [
@@ -291,7 +291,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 270767],
-                            "content_url" => 'https://www.musora.com/drumeo/songs/pneuma/270767',
+                            "content_url" => '/drumeo/songs/pneuma/270767',
                         ],
                     ],
                 ],
@@ -312,7 +312,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -325,7 +325,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 401907],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/your-first-c-major-scale/401907'
+                            "content_url" => '/pianote/workouts/your-first-c-major-scale/401907'
                         ],
                     ],
                 ],
@@ -342,7 +342,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -356,7 +356,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 404990],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/cinematic-piano-beginner/404990'
+                            "content_url" => '/pianote/workouts/cinematic-piano-beginner/404990'
                         ],
                     ],
                 ],
@@ -373,7 +373,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402196, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-day-blues/402196'
+                            "content_url" => '/pianote/workouts/challenges/30-day-blues/402196'
                         ],
                     ],
                     [
@@ -387,7 +387,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 404991],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/cinematic-piano-intermediate/404991'
+                            "content_url" => '/pianote/workouts/cinematic-piano-intermediate/404991'
                         ],
                     ],
                 ],
@@ -405,7 +405,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -419,7 +419,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 370038, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/packs/improvisation-and-musical-freedom/354975/improvisation-and-musical-freedom/370038'
+                            "content_url" => '/pianote/packs/improvisation-and-musical-freedom/354975/improvisation-and-musical-freedom/370038'
                         ],
                     ],
                 ],
@@ -437,7 +437,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -451,7 +451,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 370038, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/packs/improvisation-and-musical-freedom/354975/improvisation-and-musical-freedom/370038'
+                            "content_url" => '/pianote/packs/improvisation-and-musical-freedom/354975/improvisation-and-musical-freedom/370038'
                         ],
                     ],
                 ],
@@ -470,7 +470,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -482,7 +482,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 374297],
-                            "content_url" => 'https://www.musora.com/pianote/courses/7-days-to-sight-reading/374297'
+                            "content_url" => '/pianote/courses/7-days-to-sight-reading/374297'
                         ],
                     ],
                 ],
@@ -499,7 +499,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402201, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/new-piano-players-start-here/402201'
+                            "content_url" => '/pianote/workouts/challenges/new-piano-players-start-here/402201'
                         ],
                     ],
                     [
@@ -511,7 +511,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 403993],
-                            "content_url" => 'https://www.musora.com/pianote/songs/interstellar-main-theme-easy-version/403993',
+                            "content_url" => '/pianote/songs/interstellar-main-theme-easy-version/403993',
                         ],
                     ],
                 ],
@@ -528,7 +528,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402196, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-day-blues/402196'
+                            "content_url" => '/pianote/workouts/challenges/30-day-blues/402196'
                         ],
                     ],
                     [
@@ -540,7 +540,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 403992],
-                            "content_url" => 'https://www.musora.com/pianote/songs/interstellar-main-theme/403992',
+                            "content_url" => '/pianote/songs/interstellar-main-theme/403992',
                         ],
                     ],
                 ],
@@ -558,7 +558,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -570,7 +570,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 410192],
-                            "content_url" => 'https://www.musora.com/pianote/songs/golden-hour/410192',
+                            "content_url" => '/pianote/songs/golden-hour/410192',
                         ],
                     ],
                 ],
@@ -588,7 +588,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 404657, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/pianote/workouts/challenges/30-days-to-better-technique/404657'
+                            "content_url" => '/pianote/workouts/challenges/30-days-to-better-technique/404657'
                         ],
                     ],
                     [
@@ -600,7 +600,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 379391],
-                            "content_url" => 'https://www.musora.com/pianote/songs/clair-de-lune/379391',
+                            "content_url" => '/pianote/songs/clair-de-lune/379391',
                         ],
                     ],
                 ]
@@ -621,7 +621,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402198, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                            "content_url" => '/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
                         ],
                     ],
                     [
@@ -634,7 +634,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402083],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/major-scale-warmup/402083'
+                            "content_url" => '/guitareo/workouts/major-scale-warmup/402083'
                         ],
                     ],
                 ],
@@ -651,7 +651,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410037, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                            "content_url" => '/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
                         ],
                     ],
                     [
@@ -664,7 +664,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402093],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/finger-dexterity-warmup/402093'
+                            "content_url" => '/guitareo/workouts/finger-dexterity-warmup/402093'
                         ],
                     ],
                 ],
@@ -679,7 +679,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 348230],
-                            "content_url" => 'https://www.musora.com/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
+                            "content_url" => '/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
                         ],
                     ],
                     [
@@ -692,7 +692,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402155],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/classic-rock-essentials/402155'
+                            "content_url" => '/guitareo/workouts/classic-rock-essentials/402155'
                         ],
                     ],
                 ],
@@ -707,7 +707,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 363978],
-                            "content_url" => 'https://www.musora.com/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
+                            "content_url" => '/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
                         ],
                     ],
                     [
@@ -720,7 +720,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 408403],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/15-minute-minor-pentatonic-5-positions/408403'
+                            "content_url" => '/guitareo/workouts/15-minute-minor-pentatonic-5-positions/408403'
                         ],
                     ],
                 ],
@@ -735,7 +735,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 389312],
-                            "content_url" => 'https://www.musora.com/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
+                            "content_url" => '/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
                         ],
                     ],
                     [
@@ -748,7 +748,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402973],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/message-in-a-bottle/402973'
+                            "content_url" => '/guitareo/workouts/message-in-a-bottle/402973'
                         ],
                     ],
                 ],
@@ -767,7 +767,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402198, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
+                            "content_url" => '/guitareo/workouts/challenges/acoustic-guitarists-start-here/402198'
                         ],
                     ],
                     [
@@ -780,7 +780,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 402083],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/major-scale-warmup/402083'
+                            "content_url" => '/guitareo/workouts/major-scale-warmup/402083'
                         ],
                     ],
                 ],
@@ -797,7 +797,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410037, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
+                            "content_url" => '/guitareo/workouts/challenges/30-days-to-better-strumming/410037'
                         ],
                     ],
                     [
@@ -809,7 +809,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 408310],
-                            "content_url" => 'https://www.musora.com/guitareo/songs/boulevard-of-broken-dreams-easy-version/408310',
+                            "content_url" => '/guitareo/songs/boulevard-of-broken-dreams-easy-version/408310',
                         ],
                     ],
                 ],
@@ -824,7 +824,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 348230],
-                            "content_url" => 'https://www.musora.com/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
+                            "content_url" => '/guitareo/method/guitareo-method/333652/expressive-techniques-exploring-emotions-in-each-note/348230'
                         ],
                     ],
                     [
@@ -836,7 +836,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 377833],
-                            "content_url" => 'https://www.musora.com/guitareo/songs/everlong/377833',
+                            "content_url" => '/guitareo/songs/everlong/377833',
                         ],
                     ],
                 ],
@@ -851,7 +851,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 363978],
-                            "content_url" => 'https://www.musora.com/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
+                            "content_url" => '/guitareo/courses/creating-the-perfect-guitar-part-with-mark-lettieri/363978'
                         ],
                     ],
                     [
@@ -863,7 +863,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 383929],
-                            "content_url" => 'https://www.musora.com/guitareo/songs/hotel-california/383929',
+                            "content_url" => '/guitareo/songs/hotel-california/383929',
                         ],
                     ],
                 ],
@@ -878,7 +878,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 389312],
-                            "content_url" => 'https://www.musora.com/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
+                            "content_url" => '/guitareo/courses/unlocking-your-creativity-on-the-guitar-with-yvette-young/389312'
                         ],
                     ],
                     [
@@ -890,7 +890,7 @@ return [
                         "button" => [
                             "page_type" => 'Song',
                             "page_params" => ["id" => 390402],
-                            "content_url" => 'https://www.musora.com/guitareo/songs/bark-at-the-moon/390402',
+                            "content_url" => '/guitareo/songs/bark-at-the-moon/390402',
                         ],
                     ],
                 ],
@@ -911,7 +911,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -924,7 +924,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 356716],
-                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                            "content_url" => '/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
                         ],
                     ],
                 ],
@@ -941,7 +941,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -954,7 +954,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 356716],
-                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                            "content_url" => '/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
                         ],
                     ],
                 ],
@@ -971,7 +971,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410538, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
+                            "content_url" => '/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
                         ],
                     ],
                     [
@@ -984,7 +984,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],
@@ -999,7 +999,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 324931],
-                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                            "content_url" => '/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
                         ],
                     ],
                     [
@@ -1012,7 +1012,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],
@@ -1027,7 +1027,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 324931],
-                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                            "content_url" => '/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
                         ],
                     ],
                     [
@@ -1040,7 +1040,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],
@@ -1059,7 +1059,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -1072,7 +1072,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 356716],
-                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                            "content_url" => '/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
                         ],
                     ],
                 ],
@@ -1089,7 +1089,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 402200, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/challenges/sing-better-in-30-days/402200'
+                            "content_url" => '/singeo/workouts/challenges/sing-better-in-30-days/402200'
                         ],
                     ],
                     [
@@ -1102,7 +1102,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 356716],
-                            "content_url" => 'https://www.musora.com/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
+                            "content_url" => '/singeo/quick-tips/the-complete-9-minute-vocal-routine/356716'
                         ],
                     ],
                 ],
@@ -1119,7 +1119,7 @@ return [
                         "button" => [
                             "page_type" => 'PackOverview',
                             "page_params" => ["id" => 410538, "type" => 'Lesson'],
-                            "content_url" => 'https://www.musora.com/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
+                            "content_url" => '/singeo/packs/sing-harmony-in-30-days/410537/sing-harmony-in-30-days/410538'
                         ],
                     ],
                     [
@@ -1132,7 +1132,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],
@@ -1147,7 +1147,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 324931],
-                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                            "content_url" => '/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
                         ],
                     ],
                     [
@@ -1160,7 +1160,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],
@@ -1175,7 +1175,7 @@ return [
                         "button" => [
                             "page_type" => 'CourseOverview',
                             "page_params" => ["id" => 324931],
-                            "content_url" => 'https://www.musora.com/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
+                            "content_url" => '/singeo/method/singeo-method/308514/level-5-finding-your-unique-style/324931'
                         ],
                     ],
                     [
@@ -1188,7 +1188,7 @@ return [
                         "button" => [
                             "page_type" => 'Lesson',
                             "page_params" => ["id" => 410471],
-                            "content_url" => 'https://www.musora.com/singeo/workouts/intermediate-runs-riffs/410471'
+                            "content_url" => '/singeo/workouts/intermediate-runs-riffs/410471'
                         ],
                     ],
                 ],

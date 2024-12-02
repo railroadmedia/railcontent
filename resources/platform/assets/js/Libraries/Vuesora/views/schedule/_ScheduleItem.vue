@@ -14,7 +14,7 @@
                         onload="this.classList.remove('tw-opacity-0')"
                         :alt="`${item.title} thumbnail`"
                     />
-                    
+
                     <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
                         <p class="tw-text-xs text-white font-bold">
                             {{ day }},
@@ -119,23 +119,23 @@ export default {
         },
 
         month() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('LLL');
+            return DateTime.fromISO(this.formatted_time).toFormat('LLL');
         },
 
         day() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('ccc');
+            return DateTime.fromISO(this.formatted_time).toFormat('ccc');
         },
 
         dayNumber() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('d');
+            return DateTime.fromISO(this.formatted_time).toFormat('d');
         },
 
         yearNumber() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('yy');
+            return DateTime.fromISO(this.formatted_time).toFormat('yy');
         },
 
         time() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('h:mm a');
+            return DateTime.fromISO(this.formatted_time).toFormat('h:mm a');
         },
 
         releaseType() {

@@ -187,3 +187,30 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
     };
     return BetterAction;
 }
+
+export function CreateDuplicateAction(originalAction, context) {
+    const apiVersion = 'v2022-03-07';
+    const client = context.getClient({apiVersion: apiVersion})
+    const DuplicateAction = (props) => {
+        const originalResult = originalAction(props);
+        return {
+            ...originalResult,
+            onHandle: async () => {
+                const originalTitle = props.draft?.title ?? props.published?.title;
+                await originalResult.onHandle();
+                const query = `*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`;
+                let results = await client
+                    .fetch(query);
+
+                let newId = results._id;
+                await client.patch(newId).set({
+                    railcontent_id: null,
+                    web_url_path: null,
+                    status: 'draft',
+                    published_on: null
+                }).commit();
+            },
+        };
+    };
+    return DuplicateAction;
+}

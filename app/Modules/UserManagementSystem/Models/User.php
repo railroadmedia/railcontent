@@ -4,6 +4,7 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Models\Customer;
@@ -17,6 +18,7 @@ use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -227,6 +229,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
  * @property int $is_pack_owner
+ * @property int $is_challenge_owner
  * @property int $send_mobile_app_push_notifications
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
@@ -379,6 +382,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function progress(): HasMany
     {
         return $this->hasMany(ContentUserProgress::class, 'user_id');
+    }
+
+    public function challengeProgress(): HasMany
+    {
+        return $this->hasMany(ChallengeUserProgress::class, 'user_id');
     }
 
     public function getNotificationSetting(string $brand, string $settingName): bool
@@ -725,6 +733,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingAnswerHistory::class);
     }
 
+    public function isPackOrChallengeOnlyOwner(): bool
+    {
+        return $this->isPackOnlyOwner() || $this->isChallengeOnlyOwner();
+    }
+
+    public function isPackOrChallengeOwner(): bool
+    {
+        return $this->isPackOwner() || $this->isChallengeOwner();
+    }
+
     public function isPackOwner(): bool
     {
         return $this->is_pack_owner;
@@ -733,6 +751,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isPackOnlyOwner(): bool
     {
         return $this->isPackOwner() && !$this->isAMember();
+    }
+
+    public function isChallengeOwner(): bool
+    {
+        return $this->is_challenge_owner ?? false;
+    }
+
+    public function isChallengeOnlyOwner(): bool
+    {
+        return ($this->is_challenge_owner ?? false) && !$this->isAMember();
     }
 
     public function isAnExpiredMember(): bool

@@ -214,9 +214,13 @@ class SanityStudioCMSController extends BaseController
         try {
             $client = new \GuzzleHttp\Client();
             $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
-            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
-                'auth' => $auth,
-            ]);
+            $response = $client->request(
+                'GET',
+                'https://www.soundslice.com/' . 'api/v1/slices/' . $slug . '/recordings',
+                [
+                    'auth' => $auth,
+                ]
+            );
 
             $body = json_decode($response->getBody(), true);
             $duration = 0;
@@ -353,22 +357,22 @@ class SanityStudioCMSController extends BaseController
     public function getVimeoEndpoints(string $vimeoId): ?Vimeo
     {
         $video = Vimeo::where('external_id', $vimeoId)->first();
-        if(!$video) {
-            ConfigService::$brand  = 'musora';
+        if (!$video) {
+            ConfigService::$brand = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
-            if($vimeo){
+            if ($vimeo) {
                 $video = Vimeo::create(
                     [
-                        'external_id'              => $vimeoId,
-                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                        'external_id' => $vimeoId,
+                        'video_poster_image_url' => $vimeo['video_poster_image_url'],
                         'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
-                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
-                        'length_in_seconds'        => $vimeo['length_in_seconds']
+                        'hlsManifestUrl' => $vimeo['hlsManifestUrl'],
+                        'length_in_seconds' => $vimeo['length_in_seconds']
                     ]
                 );
             }
-      }
+        }
 
         return $video;
     }

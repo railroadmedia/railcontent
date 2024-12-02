@@ -269,14 +269,13 @@ class LivePageController extends BaseController
                 $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             }
 
-            $themeColor = ContentTypes::mapContentThemeColor($event->fetch('type'));
+            //$themeColor = ContentTypes::mapContentThemeColor($event->fetch('type'));
 
             return view(
                 'live.online',
                 [
                     'lessonContent' => $event,
                     'liveStreamId' => $youtubeId,
-                    'themeColor' => $themeColor,
                     'apiKey' => config('railchat.get_stream_credentials')['key'],
                     'token' => $token,
                     'chatChannelName' => $chatChannelName,
@@ -290,25 +289,9 @@ class LivePageController extends BaseController
             );
         }
 
-        $nextEventJson =
-            (new ContentFilterResultsEntity(['results' => ($event) ? clone $event : []]))->toResponseRawJson();
-
-        $onlyFutureScheduleEvents = [];
-
-        foreach ($liveEvents as $liveEvent) {
-            if (Carbon::now() < Carbon::parse($liveEvent['published_on'])) {
-                $onlyFutureScheduleEvents[] = $liveEvent;
-            }
-        }
-
-        $onlyFutureScheduleEvents = array_slice($onlyFutureScheduleEvents, 0, 10);
-
         return view(
             'live.offline',
             [
-                "nextEvent" => $event,
-                "nextEventJson" => $nextEventJson,
-                "scheduleEvents" => json_encode($onlyFutureScheduleEvents),
                 "fullTimezoneString" => $fullTimezoneString,
                 "timezones" => $timezones,
             ]

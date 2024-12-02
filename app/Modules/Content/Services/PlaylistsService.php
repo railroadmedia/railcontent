@@ -77,14 +77,21 @@ class PlaylistsService
      *
      * @param string $brand        The brand associated with the playlist.
      * @param int $playlistId      The ID of the playlist whose items are being retrieved.
+     * @param string $sort         Sorting parameter; 'position' by default; 'random' to shuffle items
      * @return array               An array of formatted playlist item data.
      */
-    public function getPlaylistItems(string $brand, int $playlistId): \Illuminate\Support\Collection|array
+    public function getPlaylistItems(string $brand, int $playlistId,  $sort = "position"): \Illuminate\Support\Collection|array
     {
-        $items = UserPlaylistContent::query()
-            ->where('user_playlist_id', $playlistId)
-            ->orderBy('position', 'asc')
-            ->get();
+        $query = UserPlaylistContent::query()
+            ->where('user_playlist_id', $playlistId);
+        if ($sort == 'random') {
+            $query = $query->inRandomOrder();
+        } else{
+            $query = $query ->orderBy('position', 'asc');
+        }
+
+        $items = $query->get();
+
         $contentIds = $items->pluck('content_id');
         $parentIds = $items->pluck('content_parent')->filter();
 
@@ -120,7 +127,7 @@ class PlaylistsService
      * @param array $userPermissions         An array of user permissions to check access for the playlist item.
      * @return array                         The formatted playlist item data, including route, metadata, and permissions.
      */
-    private function formatPlaylistItemData( mixed $item,
+    public function formatPlaylistItemData( mixed $item,
         \Illuminate\Support\Collection $sanityDataAssoc,
         \Illuminate\Support\Collection $assignmentDataAssoc,
         int $playlistId,
@@ -167,7 +174,7 @@ class PlaylistsService
         $data = array_merge($sanityInfo ?? [], $assignmentInfo ?? [], $item->toArray());
         // Check if the user needs access
         $permissions = $data['permission_id'] ?? [];
-        $data['need_access'] = empty(array_intersect($userPermissions, $permissions)) && !empty($permissions);
+        $data['need_access'] = !user()->isAdmin() && empty(array_intersect($userPermissions, $data['permission_id'])) && !empty($permissions);
 
         if ($data['need_access']) {
             // Define membership checks
@@ -199,6 +206,15 @@ class PlaylistsService
                 $data = array_merge($data, $extraData);
             }
         }
+
+        if ($data['type'] == 'routine' && isset($data['is_high_routine'])) {
+            $data['soundslice_slug'] = $data['high_soundslice_slug'];
+        }
+
+        if ($data['type'] == 'routine' && isset($data['is_low_routine'])) {
+            $data['soundslice_slug'] = $data['low_soundslice_slug'];
+        }
+
         return $data;
     }
 

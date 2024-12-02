@@ -30,7 +30,8 @@
     "build": "npx mix --mix-config=webpack.mix.sanity.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sanity": "./sanity.sh"
+    "sanity": "./sanity.sh",
+      "watch": "npx mix --mix-config=webpack.mix.sanity.js watch"
   },
   "eslintConfig": {
     "extends": [

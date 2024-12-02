@@ -3,7 +3,7 @@ import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useFilterValues } from "../Hooks/useFilterValues";
 import userJourney from "../Services/userJourney";
-import { fetchAll, fetchCoachLessons, fetchAllFilterOptions } from 'musora-content-services';
+import { fetchAll, fetchCoachLessons, fetchAllFilterOptions, fetchMetadata } from 'musora-content-services';
 import { useLessonHistoryPageData } from '@hooks/pages/useLessonHistoryPageData';
 import { useChildCollectionPageData } from '@hooks/pages/useChildCollectionPageData';
 
@@ -45,7 +45,6 @@ export const useCollectionStore = defineStore({
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -64,7 +63,6 @@ export const useCollectionStore = defineStore({
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
             this.trackFilter();
-            this.resetPagination();
             this.getData();
         },
 
@@ -126,6 +124,16 @@ export const useCollectionStore = defineStore({
             if(endpoints[type]){
                 return await endpoints[type]();
             } else {
+                let progress = 'all';
+                switch(this.filter.progress){
+                    case 'started': progress = 'in progress';
+                        break;
+                    case 'not-started': progress = 'not started';
+                        break;
+                    case 'completed': progress = 'completed'
+                        break;
+                }
+
                 let data = await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
@@ -133,21 +141,25 @@ export const useCollectionStore = defineStore({
                     limit: this.filter.limit,
                     groupBy: this.getGroupBy(),
                     includedFields: this.filter.included_fields,
+                    progress: progress
                 })
 
                 return data;
             }
         },
 
-        async fetchTabData(){
+        async fetchCatalogMetadata() {
             const userStore = useUserStore();
-
-            const params = new URLSearchParams(window.location.search);
-
-            //Get filters
-            if (params.getAll('included_fields[]').length > 0) {
-                this.filter.included_fields = params.getAll('included_fields[]');
+            const data = await fetchMetadata(userStore.brand, this.queryType);
+            console.log(data);
+            if (this.tabOptions.length === 0) {
+                //Set Tab Options
+                this.tabOptions = formatTabData(data.tabs, data.name ?? '');
             }
+        },
+
+        async fetchFilterOptions() {
+            const userStore = useUserStore();
 
             //Get Genre
             const genreField = this.filter.included_fields.find(field => field.startsWith('genre'));
@@ -163,28 +175,21 @@ export const useCollectionStore = defineStore({
                 this.filter.searchTerm, //term
                 undefined, //progressIds
                 undefined, //coachIds
-                true, //includeTabs
             );
             if (result) {
                 //Set Filter Columns
                 this.filterColumns = getFilterValues(result.meta.filterOptions);
-
-                if(this.tabOptions.length === 0){
-                    //Set Tab Options
-                    this.tabOptions = formatTabData(result.tabs, result.catalogName)
-                    console.log('tab tab', result)
-                    console.log('after fetch', this.tabOptions)
-                }
             } else {
                 throw new Error('Failed to fetch Filter Options');
             }
         },
 
-        async fetchData() {
+        async fetchData(fetchFilterOptions) {
             try {
-                const response = await this.getEndpoint(this.fetchType);
-
-                return response;
+                let promises = [this.getEndpoint(this.fetchType)];
+                if (fetchFilterOptions) promises.push(this.fetchFilterOptions());
+                const [response, filterResponse] = await Promise.allSettled(promises);
+                return response.value;
             } catch (e) {
                 console.error(e);
                 window.shownotification({
@@ -194,11 +199,13 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async getData(replace = true, displayLoading = true) {
+        async getData(replace = true, displayLoading = true, fetchFilterOptions = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
-            const response = await this.fetchData();
+            if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
+
+            const response = await this.fetchData(fetchFilterOptions);
             this.setData(response, replace);
             this.setURLParams();
             this.fetching = false;
@@ -246,7 +253,14 @@ export const useCollectionStore = defineStore({
 
             this.filter.activeTab = activeTab.value;
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
-            this.tabData[this.filter.activeTab].currentPage = 1;
+        },
+
+        getFilterURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            //Get filters
+            if (params.getAll('included_fields[]').length > 0) {
+                this.filter.included_fields = params.getAll('included_fields[]');
+            }
         },
 
         getURLParams() {
@@ -270,11 +284,6 @@ export const useCollectionStore = defineStore({
             //Get sort
             if (params.get('sort')) this.filter.sort = params.get('sort');
 
-            //Get filters
-            if (params.getAll('included_fields[]').length > 0) {
-                this.filter.included_fields = params.getAll('included_fields[]');
-            }
-
             //GetProgress
             if (params.getAll('included_user_states[]').length > 0) {
                 this.filter.progress = params.getAll('included_user_states[]')[0];
@@ -284,7 +293,7 @@ export const useCollectionStore = defineStore({
         loadMore() {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
-                this.getData(false, false);
+                this.getData(false, false, false);
             }
         },
 
@@ -310,12 +319,14 @@ export const useCollectionStore = defineStore({
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
-                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-                        response.total / this.filter.limit
-                    );
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
+                const hasMorePages = response.entity.length >= this.filter.limit;
+                const nextPage = Math.ceil(
+                    this.data.length / this.filter.limit
+                ) + (hasMorePages ? 1 : 0);
+                this.tabData[this.filter.activeTab].totalPages = nextPage; //hack to make it load another page without loading all results
                 //this.trackRecommendedServed(response.data.data);
             }
 
@@ -352,8 +363,8 @@ export const useCollectionStore = defineStore({
                 this.collectionType = defaults.collectionType;
             }
 
-            await this.fetchTabData();
-
+            this.getFilterURLParams();
+            await this.fetchCatalogMetadata();
             this.getURLParams();
 
             //Set Active Tab
@@ -399,7 +410,6 @@ export const useCollectionStore = defineStore({
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.resetPagination();
             this.getData();
         },
 
@@ -408,7 +418,6 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.trackSort();
-            this.resetPagination();
             this.getData();
         },
 

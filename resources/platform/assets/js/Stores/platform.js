@@ -3,8 +3,9 @@ import { defineStore } from 'pinia';
 export const usePlatformStore = defineStore({
     id: 'platform',
     state: () => ({
-        tinymcePath: '', 
+        tinymcePath: '',
         isLoading: true,
+        isDarkMode: false,
         membershipUpgradeModal: {
             open: false,
             disableClose: false,
@@ -34,6 +35,9 @@ export const usePlatformStore = defineStore({
         },
         disableCloseMembershipUpgradeModal() {
             this.membershipUpgradeModal.disableClose = true;
+        },
+        updateDarkMode(value){
+            this.isDarkMode = value;
         }
     },
 })

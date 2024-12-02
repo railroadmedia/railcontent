@@ -29,7 +29,6 @@
         token="{{ $token }}"
         youtube-id="{{ $liveStreamId }}"
         :user-data="{{ json_encode($userData) }}"
-        :schedule-events="{{ $scheduleEvents }}"
         @if(!empty($parentTitle))
             parent-title="{{ $parentTitle }}"
             course-url="{{ $courseUrl }}"

@@ -8,14 +8,12 @@ return [
             'topics' => ['Hands', 'Feet', 'Grooves', 'Fills', 'Independence', 'Rudiments', 'Composition', 'Performance', 'Drumline', 'Theory', 'Recording', 'Electronic Drums', 'Creativity'],
             'genres' => ['Rock', 'Pop', 'Jazz', 'Blues', 'Country', 'Metal', 'Funk', 'Soul', 'Christian', 'Hip-Hop/Rap'],
             'goals' => [
-                'Learn as many songs as possible',
-                'Stick to a consistent practice routine',
-                'Learn drumming theory',
-                'Improve drumming technique',
-                'Explore techniques, genres and styles',
-                'Get better with performing',
-                'Participate in a drumming community'
-            ]
+                "Learn as many songs as possible",
+                "Stick to a consistent practice routine",
+                "Improve drumming technique",
+                "Learn drumming theory",
+                "Explore techniques, genres, and styles"
+              ]
         ],
         'pianote' => [
             'gears' => ['Electric Keyboard', 'Digital Piano', 'Acoustic Piano', 'MIDI Controller'],
@@ -23,14 +21,12 @@ return [
             'topics' => ['Hand Independence', 'Technique', 'Sight Reading', 'Creativity', 'Performance', 'Scales', 'Exercises', 'Improvisation', 'Chording', 'Intervals', 'Practice', 'Speed', 'I’m unsure'],
             'genres' => ['Classical', 'Rock', 'Pop', 'Jazz', 'Blues', 'Country', 'Metal', 'Funk', 'Soul', 'Christian', 'Hip-Hop/Rap'],
             'goals' => [
-                'Learn as many songs as possible',
-                'Stick to a consistent practice routine',
-                'Learn piano theory',
-                'Improve piano technique',
-                'Explore techniques, genres and styles',
-                'Get better with performing',
-                'Participate in a piano-playing community'
-            ]
+                "Learn as many songs as possible",
+                "Stick to a consistent practice routine",
+                "Improve piano technique",
+                "Learn piano theory",
+                "Explore techniques, genres, and styles"
+              ]
         ],
         'guitareo' => [
             'gears' => ['Acoustic Guitar', 'Electric Guitar'],
@@ -40,11 +36,9 @@ return [
             'goals' => [
                 'Learn as many songs as possible',
                 'Stick to a consistent practice routine',
-                'Learn guitar theory',
                 'Improve guitar technique',
-                'Explore techniques, genres and styles',
-                'Get better with performing',
-                'Participate in a guitar-playing community'
+                'Learn guitar theory',
+                'Explore techniques, genres and styles'
             ]
         ],
         'singeo' => [
@@ -55,11 +49,9 @@ return [
             'goals' => [
                 'Learn as many songs as possible',
                 'Stick to a consistent practice routine',
-                'Learn singing theory',
                 'Improve singing technique',
-                'Explore techniques, genres and styles',
-                'Get better with performing',
-                'Participate in a singing community'
+                'Learn singing theory',
+                'Explore techniques, genres and styles'
             ]
         ]
     ],

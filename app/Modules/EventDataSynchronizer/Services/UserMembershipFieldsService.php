@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
@@ -12,20 +13,15 @@ use Railroad\Railcontent\Services\ContentService;
 
 class UserMembershipFieldsService
 {
-    private ContentService $contentService;
-    private UserProviderInterface $userProvider;
 
     private $instructorsCache = null;
-    private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
-        ContentService $contentService,
-        UserProviderInterface $userProvider,
-        UserAccessPermissionsService $userAccessPermissionsService
+        private ContentService $contentService,
+        private UserProviderInterface $userProvider,
+        private UserAccessPermissionsService $userAccessPermissionsService,
+        private ChallengeUserProgress $challengeUserProgress,
     ) {
-        $this->contentService = $contentService;
-        $this->userProvider = $userProvider;
-        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
@@ -67,7 +63,8 @@ class UserMembershipFieldsService
             $isLifetimeMember,
             $isAMember,
             $membershipExpirationDate,
-            $ownsPacks
+            $user->is_challenge_owner,
+            $ownsPacks,
         );
 
         return $this->saveMembershipData(
@@ -146,6 +143,7 @@ class UserMembershipFieldsService
         bool $isAMember,
         ?Carbon $membershipExpirationDate,
         bool $ownsPacks,
+        bool $ownsChallenges,
         array $associatedCoaches = null
     ): string {
         if (empty($userId)) {
@@ -174,6 +172,10 @@ class UserMembershipFieldsService
 
         if ($ownsPacks) {
             return 'pack';
+        }
+
+        if ($ownsChallenges) {
+            return 'challenge';
         }
 
         if (!empty($membershipExpirationDate) && $membershipExpirationDate < Carbon::now()) {

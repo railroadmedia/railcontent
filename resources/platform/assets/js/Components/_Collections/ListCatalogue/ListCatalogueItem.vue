@@ -14,22 +14,6 @@
        :href="renderLink && isReleased ? item.web_url_path : null"
        @click="openUpgradeModal"
     >
-
-        <!-- LESSON NUMBERS -->
-        <div v-if="showNumbers" class="
-            tw-flex
-            tw-flex-col
-            tw-text-[#00101D]
-            dark:tw-text-white
-            align-left
-            tw-justify-center
-            number-col
-            title
-            hide-xs-only
-        ">
-            {{ lesson_number }}
-        </div>
-
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
              :class="[thumbnailColumnClass, brand]">
@@ -437,14 +421,6 @@ const branchDescription = computed(() => {
 const branchThumbnail = computed(() => {
     const thumbnail_url = props.item.data.find((field) => field.key === 'thumbnail_url');
     return thumbnail_url.value;
-})
-
-const lesson_number = computed(() => {
-    if (props.item.type === "semester-pack-lesson") {
-        return contentModel.value.getPostField("week");
-    }
-
-    return props.index;
 })
 
 const mappedData = computed(() => {

@@ -8,7 +8,7 @@
             </h1>
 
             <p class="body tw-text-white tw-text-center tw-mb-[15px]">
-              Congratulations you completed <strong>{{ contentData?.fields?.title }}</strong>!
+              Congratulations you completed <strong>{{ contentData?.title || contentData?.fields?.title }}</strong>!
             </p>
 
             <h2 class="heading tw-text-white tw-text-center tw-uppercase">
@@ -100,7 +100,8 @@
           contentData.value = props.lessonContent;
           lessonData.value = props.thisLessonJson;
         }
-        //Check nextLessonData format 
+
+        //Check nextLessonData format
         nextLessonData.value = props.nextLessonJson?.data ? props.nextLessonJson.data[0] : props.nextLessonJson;
       });
     });

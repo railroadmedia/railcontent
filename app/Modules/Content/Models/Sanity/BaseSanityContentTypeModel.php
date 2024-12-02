@@ -7,6 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use App\Modules\Content\Models\Sanity\Structure\Validation\Custom\BlockCharacterLengthMax;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Integer;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
@@ -26,7 +27,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
         $licenseReference = new Reference([['type' => 'license']], options: ['disableNew' => false]);
 
         $defaultFields = [
-            new Field(FieldType::String, 'title', validation: [new Required()], group:$group),
+            new Field(FieldType::String, 'title', group: $group, validation: [new Required(), new Max(62)]),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique' => 'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title", validation: [new Required()], group:$group),
             new BrandField($group),
             new StatusField($group),
@@ -51,7 +52,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
             $defaultFields[] = new Field(FieldType::Array, 'license', 'License Information', of: $licenseReference, group:$group);
         }
         if ($includeDescription) {
-            $defaultFields[] = new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group);
+            $defaultFields[] = new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group, validation: [new BlockCharacterLengthMax(270)]);
         }
         return $defaultFields;
     }

@@ -19,6 +19,7 @@ class ShopifyOrderUpdatedJob
     {
         $children = [
             new ShopifySyncCustomerJob($this->shopifyCustomerId, $this->email),
+            new OrderUpdateChallengesEnrollment($this->contents),
         ];
         dispatch(new WebhookJob('Shopify-order-updated', $this->id, $this->contents, $children));
     }

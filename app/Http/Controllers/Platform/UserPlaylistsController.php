@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\UserPlaylist;
@@ -14,35 +12,22 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Modules\Content\Services\PlaylistsService;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\PlaylistItemLoaded;
-use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
-use Railroad\Railcontent\Services\UserPlaylistsService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsController extends BaseController
 {
-    private UserPlaylistsService $userPlaylistsService;
-    private UserPermissionsRepository $userPermissionsRepository;
-    private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
     private PlaylistsService $userPlaylistService;
 
     public function __construct(
-        UserPlaylistsService $userPlaylistsService,
-        UserPermissionsRepository $userPermissionsRepository,
-        PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         ContentLastEngagedService $contentLastEngagedService,
         PlaylistService $playlistService,
         PlaylistsService $userPlaylistService
     ) {
-        $this->userPlaylistsService = $userPlaylistsService;
-        $this->userPermissionsRepository = $userPermissionsRepository;
-        $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->contentLastEngagedService = $contentLastEngagedService;
         $this->playlistService = $playlistService;
         $this->userPlaylistService = $userPlaylistService;
@@ -54,9 +39,6 @@ class UserPlaylistsController extends BaseController
         $limit = $request->get('limit', 12);
         $term = $request->get('search');
         UserPlaylistsRepository::$availableCategories = $request->get('categories', false);
-
-
-
         $brand = Brand::from(brand());
         $sort             = $request->get('sortby_val', $request->get('sort', 'most_recent'));
 

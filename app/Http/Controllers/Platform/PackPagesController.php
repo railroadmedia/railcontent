@@ -69,32 +69,7 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand): View
     {
-        ContentRepository::$countFilterOptionItems = true;
-        ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
-
-        FiltersHelper::prepareFiltersFields();
-
-        if(user()->isPackOnlyOwner()) {
-            ContentRepository::$getEnrollmentContent = false;
-        }
-
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
-
-        if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs['results'] as $packIndex => $pack) {
-                // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
-                if ($pack['id'] == 353337) {
-                    unset($pack[$packIndex]);
-                }
-            }
-        }
-
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
-
-        return view('content.packs.packs-index', [
-            "packs" => $packs->toResponseRawJson(),
-            "catalogueMeta" => $catalogueMeta,
-        ]);
+        return view('content.packs.packs-index', []);
     }
 
     /**
@@ -307,7 +282,12 @@ class PackPagesController extends Controller
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_UNLISTED,];
+                [
+                    ContentService::STATUS_PUBLISHED,
+                    ContentService::STATUS_ARCHIVED,
+                    ContentService::STATUS_SCHEDULED,
+                    ContentService::STATUS_UNLISTED,
+                ];
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -593,7 +573,7 @@ class PackPagesController extends Controller
             ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,ContentService::STATUS_UNLISTED];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
         }
 
         Decorator::$typeDecoratorsEnabled = false;
