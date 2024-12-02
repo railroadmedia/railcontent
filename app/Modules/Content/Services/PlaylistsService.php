@@ -77,14 +77,21 @@ class PlaylistsService
      *
      * @param string $brand        The brand associated with the playlist.
      * @param int $playlistId      The ID of the playlist whose items are being retrieved.
+     * @param string $sort         Sorting parameter; 'position' by default; 'random' to shuffle items
      * @return array               An array of formatted playlist item data.
      */
-    public function getPlaylistItems(string $brand, int $playlistId): \Illuminate\Support\Collection|array
+    public function getPlaylistItems(string $brand, int $playlistId,  $sort = "position"): \Illuminate\Support\Collection|array
     {
-        $items = UserPlaylistContent::query()
-            ->where('user_playlist_id', $playlistId)
-            ->orderBy('position', 'asc')
-            ->get();
+        $query = UserPlaylistContent::query()
+            ->where('user_playlist_id', $playlistId);
+        if ($sort == 'random') {
+            $query = $query->inRandomOrder();
+        } else{
+            $query = $query ->orderBy('position', 'asc');
+        }
+
+        $items = $query->get();
+
         $contentIds = $items->pluck('content_id');
         $parentIds = $items->pluck('content_parent')->filter();
 
