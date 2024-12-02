@@ -151,7 +151,6 @@ export const useCollectionStore = defineStore({
         async fetchCatalogMetadata() {
             const userStore = useUserStore();
             const data = await fetchMetadata(userStore.brand, this.queryType);
-            console.log(data);
             if (this.tabOptions.length === 0) {
                 //Set Tab Options
                 this.tabOptions = formatTabData(data.tabs, data.name ?? '');
@@ -243,13 +242,12 @@ export const useCollectionStore = defineStore({
 
         setActiveTab() {
             const activeTab = this.tabOptions.find((tab) => {
-                console.log(this.filter.activeTab, tab.key, tab.key === this.filter.activeTab)
                 return tab.key === this.filter.activeTab;
             })
 
-            console.log('this.tabOptions', this.tabOptions)
-            console.log('activeTab', activeTab) //undefined
-            console.log('this.filter.activeTab', this.filter.activeTab); //Empty String
+            // console.log('this.tabOptions', this.tabOptions)
+            // console.log('activeTab', activeTab) //undefined
+            // console.log('this.filter.activeTab', this.filter.activeTab); //Empty String
 
             this.filter.activeTab = activeTab.value;
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
@@ -517,4 +515,3 @@ export const useCollectionStore = defineStore({
         }
     },
 });
-
