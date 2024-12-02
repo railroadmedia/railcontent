@@ -298,7 +298,12 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="cohort" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
+    //TODO(challenge): updated the field when migrating with MCS
+    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="{
+        ...cohort,
+        dark_mode_logo_url: cohort['dark_mode_logo'],
+        light_mode_logo_url: cohort['light_mode_logo'],
+    }" :challenge-type="'solo'" @modal-close="closeNotificationModal" />
     <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],

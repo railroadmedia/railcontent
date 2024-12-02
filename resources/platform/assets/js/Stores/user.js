@@ -26,6 +26,7 @@ export const useUserStore = defineStore({
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
     isAdmin: (state) => state.user?.permission_level === 'administrator',
+    isFirstAccess: (state) => state.user?.first_access_at,
     isLifetimeMember: (state) => state.user?.is_lifetime_member,
     userMembershipLevel: (state) => state.user?.membership_level,
     userMembershipExpiration: (state) => state.user?.membership_expiration_date,
@@ -97,7 +98,7 @@ export const useUserStore = defineStore({
         }
         //If user is not a member
         if( getters.isUserAMember ) {
-          return true; 
+          return true;
         }
         //Lifetime or Plus
         if(!getters.isLifetimeMember || getters.userMembershipLevel !== 'plus') {
@@ -163,6 +164,7 @@ export const useUserStore = defineStore({
     async updateProfile(data) {
       try {
           const response = await updateUserProfile(this.token, this.userId, data);
+          console.log('user store', response)
 
           //Update Pinia values if they exist
           data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);

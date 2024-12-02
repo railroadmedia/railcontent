@@ -8,6 +8,16 @@
         />
 
         <div className="tw-mt-[30px]">
+            <!-- Challenge Carousel -->
+            <MiniCatalogueSection
+                title="Featured Challenges"
+                :see-all-url="`/${brand}/challenge`"
+                seeAllAriaLabel="See All Challenges"
+                catalogue-type="challenge"
+                page-type="home"
+                :preLoadedContent="carousels"
+            />
+
             <CollectionWrapper
                 collection-type="challenge"
                 :hide-filter-icon="true"
@@ -18,16 +28,16 @@
     </div>
 </template>
 <script setup>
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { usePlatformStore } from "@stores/platform";
 import { useCollectionStore } from "@stores/collection";
+import { fetchCarouselCardData } from 'musora-content-services';
 
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb';
 import PageHeader from '@collections/PageHeader/PageHeader';
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
-
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
@@ -35,6 +45,7 @@ const platformStore = usePlatformStore();
 const { brand } = storeToRefs(userStore);
 
 const breadcrumbs = [{title: 'Challenges'}];
+const carousels = ref([]);
 
 const tabData = computed(() => {
     if (brand.value === 'drumeo' || brand.value === 'pianote') {
@@ -82,9 +93,16 @@ const tabData = computed(() => {
 })
 
 onBeforeMount(() => {
-    collectionStore.setDefaults({
-        tabOptions: tabData.value,
-        queryType: 'challenge',
-    });
+    const fetchData = async () => {
+        const challengeCarousels = await fetchCarouselCardData({ brand: brand.value });
+        carousels.value = challengeCarousels;
+
+        collectionStore.setDefaults({
+            tabOptions: tabData.value,
+            queryType: 'challenge',
+        });
+    }
+
+    fetchData();
 })
 </script>

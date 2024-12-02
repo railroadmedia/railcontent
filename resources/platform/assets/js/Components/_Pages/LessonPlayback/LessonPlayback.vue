@@ -89,7 +89,8 @@
                         report-recipient="support+question-and-answer@drumeo.com" :is-completed="isCompleted"
                         :show-add-to-list="true" :show-info-button="showInfoButton"
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
-                        @on-like-content="likeContent" @on-complete-content="toggleCompleteContent"
+                        @on-like-content="likeContent"
+                        @on-challenge-lesson-complete="completeChallengeLesson"
                         @open-challenge-completion-modal="openChallengeCompletionModal" />
 
                     <ContentInfo :breadcrumbs="breadcrumbsData" :content-description="videoData.description"
@@ -207,11 +208,19 @@ import {
     fetchNextPreviousLesson,
     isContentLiked,
     fetchChallengeLessonData,
+    postChallengesCompleteLesson,
     // this is not getting percentage, this is getting lats watched position in seconds, possibly rename this function
     getProgressPercentage,
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
-import { getBreadcrumbs } from './breadcrumbUtils'; 
+import { getBreadcrumbs } from './breadcrumbUtils';
+
+const props = defineProps({
+    lessonType: {
+        type: String,
+        default: '',
+    },
+})
 
 //Pinia
 const userStore = useUserStore();
@@ -378,7 +387,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return videoData.value.type === 'challenge';
+    return props.lessonType === 'challenge';
 })
 
 const toggleCompleteContent = () => {
@@ -395,9 +404,22 @@ const likeContent = () => {
     }
 }
 
-const openChallengeCompletionModal = async (data) => {
-    completionData.value = data;
-    isChallengeCompletionModalOpen.value = true;
+const completeChallengeLesson = async () => {
+    try{
+        const complete = await postChallengesCompleteLesson(videoData.value.id);
+        isCompleted.value = !isCompleted.value;
+
+        if(complete.show_modal){
+            completionData.value = complete;
+            isChallengeCompletionModalOpen.value = true;
+        }
+    } catch(e){
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
+    }
+
 }
 
 const closeChallengeCompletionModal = () => {
