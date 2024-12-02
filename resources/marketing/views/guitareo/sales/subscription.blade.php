@@ -402,7 +402,6 @@
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => 'POPULAR SONGS',
-        'cta' => 'SEE YOUR DEAL &raquo',
     ])
 
     @php
@@ -487,7 +486,7 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'image' => 'marketing/guitareo/membership/homepage/2023/guitareo-collage.png',
-        'orderUrl' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&promo-code=musora-deal-2024&locked=true',
+        'orderUrl' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

@@ -461,7 +461,7 @@
 
     @if(!empty($trialVersion))
         @include('musora.sales.components.order-section-collage', [
-            "orderUrl" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        "orderUrl" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
         'logo' => 'marketing/singeo/membership/homepage/2024/singeo-logo.webp',
         'header' => 'Unlimited singing lessons.<br>Guided practice sessions. <br> Vocal coaches and support.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
@@ -485,7 +485,7 @@
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Personalized feedback from vocal coaches.</li>
         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
                 'image' => 'marketing/singeo/membership/homepage/2024/singeo-collage-new.webp',
-                'orderUrl' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&promo-code=musora-deal-2024&locked=true',
+                'orderUrl' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

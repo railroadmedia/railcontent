@@ -1,10 +1,5 @@
-<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden"
-    @if(!empty($bgColor))
-        style="background: {{ $bgColor }};"
-    @else
-        style="background: linear-gradient(45deg, #07233e, #0c1524);"
-  @endif
-  x-data="{lazyLoad:false}">
+<section class="py-10 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp') no-repeat center center; background-size: cover;" 
+x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 md:p-10 lg:p-5 mb-4 sm:mb-0"
@@ -26,14 +21,19 @@
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
                 @if(!empty($logo))
-                    <img class="h-7 mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
+                    <img class="h-7 mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
                 @endif
-                <p class="uppercase text-musora mb-2"><strong class="font-black">
-                    @if(($theme == 'guitareo') || ($theme == 'singeo') )
-                        YOUR FIRST Week Is FREE.
-                    @endif
-                    </strong></p>
-                <h3 class="leading-normal"> @if(!empty($headerLight)) {!! $header !!} @else <strong>{!! $header !!}</strong> @endif </h3>
+                <br>
+                @if($bfVersion)
+                    <img class="h-7 mb-2 opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/christmas-deal.svg" alt="Christmas Deal Text" loading="lazy" onload="this.classList.remove('opacity-0');">                   
+                     <p class="text-[#F61A30] uppercase font-black"><strong>7 DAYS FREE THEN SAVE 20% ON YOUR FIRST YEAR</strong></p>
+                @endif
+                <h3 class="leading-normal py-2 md:py-4"> @if(!empty($headerLight)) {!! $header !!} @else <strong>{!! $header !!}</strong> @endif </h3>
+                 @if($bfVersion)
+                <p class="text-left mb-3 font-black">
+                    Free access for 7 days, then <span class="opacity-50 line-through">$240</span> $200 for your first year.
+                </p>
+                @endif
                     @if(!empty($headerLight))
                         <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                             {!! $list !!}
@@ -81,8 +81,8 @@
                     </div>
                 @else
                     <div class="w-full mx-auto sm:mx-0">
-                        <h2 class="leading-none mt-1 md:mt-4 text-center leading-tight"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-musora text-2xl">(Save 41%)</span></h2>
-                        <p class="text-xs italic text-center mb-1 md:mb-3"><em> For your first year, then $240/yr.</em></p>
+                        {{-- <h2 class="leading-none mt-1 md:mt-4 text-center leading-tight"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-musora text-2xl">(Save 41%)</span></h2>
+                        <p class="text-xs italic text-center mb-1 md:mb-3"><em> For your first year, then $240/yr.</em></p> --}}
                         <a role="link" aria-label="Start your membership" class="w-full sm:max-w-[370px] smaller join my-3 py-4 text-xl md:text-2xl @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                         @if(!empty($orderUrl))
                             href="{{ $orderUrl }}"
@@ -95,13 +95,21 @@
                             @if(!empty($cta))
                                 {!! $cta !!}
                             @else
-                                GET THE DEAL <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
-                        <p class="text-xs italic text-center"><em> New students only. Renews at $240/year. <br class="block sm:hidden">Cancel anytime.</em></p>
+                        @if($bfVersion)
+                        <div class="flex justify-center w-full sm:max-w-[370px]">
+                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pb-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pt-0.5 opacity-0 transition-opacity duration-500" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block mr-1 sm:mr-3 pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                            <img class="h-4 sm:h-5 inline-block pt-0.5 opacity-0 transition-opacity duration-500" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0');">
+                        </div>
+                        @endif
+                        {{-- <p class="text-xs italic text-center"><em> New students only. Renews at $240/year. <br class="block sm:hidden">Cancel anytime.</em></p>
                          <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
                             <p class="text-xs text-center"><em>Annual members, <br class="block sm:hidden"><span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
-                        </a>
+                        </a> --}}
                        {{-- <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p> --}}
                         {{-- @if(!empty($theme) && $theme == 'musora')
                             <div class="flex justify-center sm:justify-start">
