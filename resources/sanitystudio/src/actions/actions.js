@@ -186,7 +186,7 @@ export function CreateDuplicateAction(originalAction, context) {
         return {
             ...originalResult,
             onHandle: async () => {
-                const originalTitle = props.draft.title;
+                const originalTitle = props.draft?.title ?? props.published?.title;
                 await originalResult.onHandle();
                 const query = `*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`;
                 let results = await client
