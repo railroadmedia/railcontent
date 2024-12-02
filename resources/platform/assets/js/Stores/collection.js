@@ -133,14 +133,13 @@ export const useCollectionStore = defineStore({
                     case 'completed': progress = 'completed'
                         break;
                 }
-
                 let data = await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
                     sort: this.filter.sort,
                     limit: this.filter.limit,
                     groupBy: this.getGroupBy(),
-                    includedFields: this.filter.included_fields,
+                    includedFields: this.getFilterData(),
                     progress: progress
                 })
 
@@ -210,6 +209,16 @@ export const useCollectionStore = defineStore({
             this.fetching = false;
 
             return response;
+        },
+
+        getFilterData(){
+            let filters = [];
+            const tabValue = this.tabData[this.filter.activeTab].key;
+            if (tabValue?.includes(',')) {
+                filters.push(tabValue);
+            }
+            filters = filters.concat(this.filter.included_fields);
+            return filters;
         },
 
         getGroupBy(){
