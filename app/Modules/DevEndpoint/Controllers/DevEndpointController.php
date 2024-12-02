@@ -155,9 +155,16 @@ class DevEndpointController extends Controller
         $oLessonData = $userProgress->lessons_meta_data;
         $userProgress->start_date = $oStartDate->toISOString();
         foreach($oLessonData as $index => $lessonDatum) {
+
+
             $oUnlockDate = Carbon::parse($lessonDatum['unlock_date']);
             $oUnlockDate = $oUnlockDate->subDays($days);
             $oLessonData[$index]['unlock_date'] = $oUnlockDate->toISOString();
+            if(!is_null($lessonDatum['completed_at'])) {
+                $oCompletedDate = Carbon::parse($lessonDatum['completed_at']);
+                $oCompletedDate = $oCompletedDate->subDays($days);
+                $oLessonData[$index]['completed_at'] = $oCompletedDate->toISOString();
+            }
         }
         $userProgress->lessons_meta_data = $oLessonData;
         $userProgress->save();

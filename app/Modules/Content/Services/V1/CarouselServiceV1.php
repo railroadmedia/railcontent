@@ -95,8 +95,10 @@ class CarouselServiceV1
             ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-challenge'),
             ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-challenge'),
             ... $onboardingCardData,
-            $challengeRecommendationCard,
         ];
+        if ($challengeRecommendationCard) {
+            $compiledCardData[] = $challengeRecommendationCard;
+        }
 
         return $compiledCardData;
     }

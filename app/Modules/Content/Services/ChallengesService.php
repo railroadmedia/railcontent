@@ -295,7 +295,10 @@ class ChallengesService
 
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
-            $lessons[$index]['is_locked'] = $isLocked && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
+            // TODO TCH-117 - Bonus days redesign
+            $isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
+            $shouldLessonBeLocked =  $isLocked && !$isPreviousLessonCompleted && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
+            $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
             $lessons[$index]['completed'] = $isCompleted;
             if ($removeVideoData) {
@@ -526,6 +529,8 @@ class ChallengesService
                 'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
                 'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional freeze token!",
                 'badge_text' => $motivationalTextConfig['text'],
+                'styles' => $motivationalTextConfig['styles'],
+                'duration' => $motivationalTextConfig['duration'],
             ];
         } else {
             $missingLessons = $lessonData['user_data']['missed_lessons'];
@@ -536,6 +541,8 @@ class ChallengesService
                 'motivational_title' => $noMissingLessons ? "You're done for the day!" : "You're almost caught up!",
                 'motivational_subtext' => $noMissingLessons ? "Return tomorrow to maintain your streak!" : "Complete {$missingLessons} more lesson(s) to catch up",
                 'badge_text' => null,
+                'styles' => null,
+                'duration' => null,
             ];
         }
         $userData = $userProgress->getCompiledMetadata();
