@@ -83,19 +83,19 @@
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
             $bundles = [
-                 [
-                    'slug' => '/shop/challenges-bundle',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full-m.webp',
-                ],
                 [
                     'slug' => '/shop/prima',
                     'full' => true,
                     'visible' => 1,
                     'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full2.webp',
                     'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full-m.webp',
+                ],
+                 [
+                    'slug' => '/shop/challenges-bundle',
+                    'full' => true,
+                    'visible' => 1,
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full-m.webp',
                 ],
                 [
                     'slug' => '/shop/book-bundle',
@@ -185,6 +185,16 @@
                              "discounted_price" => 140,
                              "title" => "The Pianote Deal",
                              "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal-square.webp",
+                             'soldOut' => false,
+                        ])
+                    </div>
+                    <div x-cloak x-show="filter === 'lessons'">
+                        @include('_partials.components.shop.product-card', [
+                            "href" => "/shop/challenges-bundle",
+                             "price" => 381,
+                             "discounted_price" => 127,
+                             "title" => "Challenges Bundle",
+                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/challenges-bundle-square.jpg",
                              'soldOut' => false,
                         ])
                     </div>

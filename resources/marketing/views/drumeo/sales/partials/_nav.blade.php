@@ -166,7 +166,7 @@
 {{--            "linkUrl" => "/choose-plan",--}}
 {{--        ])--}}
          @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Shop",
+                "linkName" => "Cyber Monday Deals",
                 "linkIcon" => "fas fa-tag",
                 "linkUrl" => "/drumshop",
             ])

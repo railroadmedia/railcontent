@@ -31,7 +31,7 @@
 
         @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
         <h5 class="text-{{$theme}} leading-tight"><strong>SAVE $100 ON YOUR FIRST <br class="sm:hidden"> YEAR OF LESSONS.</strong></h5>
-        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h6>
+        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR CYBER MONDAY.</h6>
         @else
             @if(empty($noCheck))
                 <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
@@ -44,7 +44,7 @@
             @endif
         @endif
         @if(!empty($BFheader))
-            <h6 class="leading-tight py-2 px-3 bg-[#00D7FF] rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
+            <h6 class="leading-tight py-2 px-3 bg-[#00D7FF] rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>CYBER MONDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"

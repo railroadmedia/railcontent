@@ -525,7 +525,7 @@
                 <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/black-friday/musora-CM-header.webp">
                 <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
                 <h5 class="text-musora leading-tight"><strong>SAVE $100 ON YOUR FIRST YEAR OF LESSONS.</strong></h5>
-                <h5 class="font-light">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h5>
+                <h5 class="font-light">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR CYBER MONDAY.</h5>
             @else
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
             <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play your favorite songs.</h5>

@@ -39,7 +39,7 @@
             </div>
 
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-5">
-                <a class="w-full sm:w-1/2 join musora smaller outline sm:order-2 border-[#00D7FF] text-[#00D7FF]" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>
+                <a class="w-full sm:w-1/2 join musora smaller outline sm:order-2 border-[#00D7FF] text-[#00D7FF] hover:bg-[#00D7FF] hover:text-black" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>
 
                 <div class="w-full sm:w-1/2 sm:pr-2 mt-3 sm:mt-0 relative">
                     <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>

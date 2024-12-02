@@ -36,11 +36,11 @@
                     <li class="splide__slide flex flex-col items-center justify-start">
                         <a href="{{ $bundle['slug'] }}" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90 @if(!empty($bundle['specialW'])) lg:w-2/3 @elseif(!empty($bundle['specialW2'])) lg:w-1/3 @elseif(!empty($bundle['full'])) @else sm:w-1/2 @endif">
                             <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[108%] sm:pb-[35%]">
-                                @if($bundle['slug'] == '/shop/challenges-bundle')
-                                    <p class="absolute top-0 left-0 bg-[#00D7FF] font-black px-2 md:px-3 py-1 md:py-2 text-sm md: rounded-br-lg z-10 text-black">
-                                        CYBER MONDAY ONLY
-                                    </p>
-                                @endif
+{{--                                @if($bundle['slug'] == '/shop/challenges-bundle')--}}
+{{--                                    <p class="absolute top-0 left-0 bg-[#00D7FF] font-black px-2 md:px-3 py-1 md:py-2 text-sm md: rounded-br-lg z-10 text-black">--}}
+{{--                                        CYBER MONDAY ONLY--}}
+{{--                                    </p>--}}
+{{--                                @endif--}}
                                 @if(!empty($bundle['img']))
                                     <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('{{ $bundle['img'] }}');"></div>
                                     <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('{{ $bundle['imgM'] }}');"></div>

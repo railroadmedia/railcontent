@@ -65,11 +65,11 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span></h2>
                     @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
+                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true">get the deal &raquo;</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
-                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>
+{{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>--}}
                     </div>
                 </div>
             </div>

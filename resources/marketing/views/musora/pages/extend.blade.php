@@ -137,7 +137,7 @@
                         <i class="fa-solid fa-circle-exclamation text-xl"></i>
                     </div>
                     <p class="leading-normal text-sm md:text-base">
-                        <span class="font-semibold">This offer is only available for Black Friday – and only for existing<br class="hidden sm:inline"> Musora members (Drumeo, Pianote, Guitareo, Singeo).</span>
+                        <span class="font-semibold">This offer is only available for Cyber Monday – and only for existing<br class="hidden sm:inline"> Musora members (Drumeo, Pianote, Guitareo, Singeo).</span>
                     </p>
                 </div>
             </div>

@@ -71,9 +71,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#FA62FF] text-xl md:text-3xl">(Save 66%)</span></h2>
                     @if($stock > 0)
-                        <a class="join pianote mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true">get the deal</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
                     </div>
                 </div>
