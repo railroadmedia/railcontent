@@ -19,7 +19,7 @@ const config = {
     sanityConfig: {
         token: process.env.SANITY_API_TOKEN,
         projectId:'4032r8py',
-        dataset:'staging',
+        dataset:'production',
         version:'2021-06-07',
         debug: true,
         useCachedAPI: !perspective,
