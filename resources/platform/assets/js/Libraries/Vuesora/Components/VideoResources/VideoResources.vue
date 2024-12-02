@@ -528,20 +528,7 @@ export default {
                 //Do not complete again when it is completed
                 if(this.isCompleted) return;
 
-                try {
-                    const complete = await postChallengesCompleteLesson(this.contentId);
-
-                    this.$emit('onCompleteContent');
-
-                    if(complete.show_modal){
-                        this.$emit('openChallengeCompletionModal', complete)
-                    }
-                } catch (e){
-                    window.shownotification({
-                        icon: 'error',
-                        text: 'Woops! Something wrong happened, please try again later.'
-                    })
-                }
+                this.$emit('onChallengeLessonComplete');
             } else {
                 //Send Request
                 if (this.isCompleted) {
