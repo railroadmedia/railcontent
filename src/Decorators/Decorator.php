@@ -52,11 +52,11 @@ class Decorator
             }
 
             foreach ($decoratorClassNames as $decoratorClassName) {
-
-                /**
-                 * @var $decorator DecoratorInterface
-                 */
-                $decorator = app()->make($decoratorClassName);
+                if (!app()->has($decoratorClassName)) {
+                    $decorator = app()->make($decoratorClassName);
+                } else {
+                    $decorator = app($decoratorClassName);
+                }
 
                 if (empty($data)) {
                     return new Collection($data);
