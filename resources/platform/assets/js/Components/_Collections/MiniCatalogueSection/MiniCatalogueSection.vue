@@ -4,11 +4,11 @@
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-center">
-                    <a @click="handleSeeAllClick" :href="seeAllUrl"
-                       class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] lg:tw-leading-[36px] lg:tw-text-[24px]">{{ title }}</h2>
-                        <ChevronRightIcon class="tw-w-5" />
-                    </a>
+                    <component :is="seeAllUrl ? 'a' : 'div'" @click="handleSeeAllClick" :href="seeAllUrl"
+                       class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all " :class="seeAllUrl ? 'hover:tw-border-current' : ''">
+                        <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] lg:tw-leading-[36px] lg:tw-text-[24px]" v-html="title"></h2>
+                        <ChevronRightIcon v-if="seeAllUrl" class="tw-w-5" />
+                    </component>
                     <slot name="label"></slot>
                 </div>
                 <div v-if="showPagination" class="tw-flex tw-items-center">
