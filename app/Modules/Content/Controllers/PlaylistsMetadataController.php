@@ -806,6 +806,32 @@ the pin icon on or off.',
                                     'success' => true,
                                     'message' => 'Playlist unpinned successfully',
                                 ], 201);
+    }
 
+    /**
+     * Report a playlist for an issue.
+     *
+     * @param int $playlistId The ID of the playlist to be reported.
+     * @param \Illuminate\Http\Request $request The HTTP request containing the issue details.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * - 404 if the playlist does not exist.
+     * - 201 on successful reporting of the playlist.
+     */
+    public function reportPlaylist(int $playlistId, Request $request): JsonResponse
+    {
+        $playlist = UserPlaylist::find($playlistId);
+        if (!$playlist) {
+            return response()->json([
+                                        'success' => false,
+                                        'message' => 'Playlist not exists.',
+                                    ], 404);
+        }
+
+        $this->playlistsService->reportPlaylist($playlist, $request->get('issue'));
+        return response()->json([
+                                    'success' => true,
+                                    'message' => 'This playlist has been reported.',
+                                ], 201);
     }
 }
