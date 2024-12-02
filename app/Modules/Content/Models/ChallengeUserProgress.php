@@ -129,35 +129,52 @@ class ChallengeUserProgress extends Model
         $bestStreak = 0;
         $currentStreak = 0;
         $missedLessons = 0;
-        // TODO does this need to be moved to the user's timezone?
-        // Document says only for solo challenges
-        // https://musora.atlassian.net/browse/TCH-40
+        $remainingRestDays = $this->current_rest_days; // Use the available rest days
         $today = Carbon::now()->startOfDay();
 
         foreach ($this->lessons_meta_data as $lesson) {
-            $unlockDate = Carbon::parse($lesson['unlock_date']);
+            $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
+            $completedAt = isset($lesson['completed_at']) ? Carbon::parse($lesson['completed_at'])->startOfDay() : null;
+
+            // Skip lessons that are always unlocked, bonus, or unlock in the future
             if ($lesson['is_always_unlocked'] || $unlockDate > $today) {
                 continue;
-            } elseif ($unlockDate == $today) {
-                if ($lesson['completed']) {
+            }
+
+            if ($completedAt) {
+                // Completion counts toward streak only if completed on the day it was unlocked
+                if ($completedAt->isSameDay($unlockDate)) {
                     $currentStreak++;
-                    $bestStreak = max($bestStreak, $currentStreak);
+                } else {
+                    // Use a rest day if available
+                    if ($remainingRestDays > 0) {
+                        $remainingRestDays--; // Consume one rest day
+                        $currentStreak++; // Continue streak as if the day was completed
+                    } else {
+                        // Reset streak if no rest days remain
+                        $currentStreak = 0;
+                    }
                 }
-            } else {
-                if ($lesson['completed']) {
-                    $currentStreak++;
-                    $bestStreak = max($bestStreak, $currentStreak);
-                } elseif (!$lesson['is_bonus_content']) {
-                    $bestStreak = max($bestStreak, $currentStreak);
+            } elseif (!Carbon::now()->isSameDay($unlockDate)) {
+                // Use a rest day for non-completions if it's a passed day
+                if ($remainingRestDays > 0) {
+                    $remainingRestDays--; // Consume one rest day
+                    $currentStreak++; // Count the skipped day toward the streak
+                } else {
+                    // Reset streak if no rest days remain
                     $currentStreak = 0;
                     $missedLessons++;
                 }
             }
+
+            $bestStreak = max($bestStreak, $currentStreak);
         }
+
         return [
             'best' => $bestStreak,
             'current' => $currentStreak,
             'missed' => $missedLessons,
+            'remaining_rest_days' => $remainingRestDays, // Include remaining rest days in output
         ];
     }
 
@@ -432,6 +449,7 @@ class ChallengeUserProgress extends Model
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
             if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
+                $lessonMetaData[$index]['completed_at'] = Carbon::now()->toISOString();
                 if (!is_null($totalSecondsPracticed)) {
                     $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }
@@ -464,7 +482,12 @@ class ChallengeUserProgress extends Model
                         ) == $currentStreak;
                     }
                     $results['is_milestone'] = $isMilestoneStreak;
-                    $this->current_rest_days += $isMilestoneStreak ? 1 : 0;
+
+                    // If a rest day is used to maintain the streak, we need to make sure the difference in
+                    // rest day change is accounted for here since the database doesn't get updated until
+                    // after the new $currentStreakData() is calculated. This has code smell.
+                    $this->current_rest_days += $isMilestoneStreak ? (1 + ($currentStreakData['remaining_rest_days'] - $previousStreakData['remaining_rest_days'])) : 0;
+
                     $results['added_to_rest_days'] = $isMilestoneStreak;
                 } else {
                     $results['is_milestone'] = $totalLessons == $currentStreak;
