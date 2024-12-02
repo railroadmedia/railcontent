@@ -316,16 +316,27 @@ class SanityStudioCMSController extends BaseController
         if (!$content) {
             $content = new Content();
             $content->type = $lessonType;
-            $content->slug = $request->get('slug')['current'] ?? null;
             $content->language = 'en-US';
-            $content->status = $request->get('status');
-            $publishedOn = $request->get('published_on') ?? null;
-            $content->published_on = $publishedOn ? Carbon::parse($publishedOn) : null;
-            $content->brand = $request->get('brand');
+            $content->slug = $request->get('slug')['current'] ?? null;
             $content->created_on = Carbon::now()->toDateTimeString();
+            $content->status = $request->get('status');
+            $content->brand = $request->get('brand');
             $content->save();
         }
 
+        $content->slug = $request->get('slug')['current'] ?? null;
+        $content->status = $request->get('status');
+        $content->brand = $request->get('brand');
+        $publishedOn = $request->get('published_on') ?? null;
+        $content->published_on = $publishedOn ? Carbon::parse($publishedOn) : null;
+
+        $content->setTitle($request->get('title'));
+        $content->setDifficulty($request->get('difficulty'));
+        $content->setXP($request->get('xp'));
+        $content->setReleased($request->get('released'));
+        $content->setAlbum($request->get('album'));
+
+        $content->save();
         return $content;
     }
 
