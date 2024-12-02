@@ -211,7 +211,14 @@ import {
     getProgressPercentage,
 } from 'musora-content-services';
 import { getContentId } from '@hooks/utils';
-import { getBreadcrumbs } from './breadcrumbUtils'; 
+import { getBreadcrumbs } from './breadcrumbUtils';
+
+const props = defineProps({
+    lessonType: {
+        type: String,
+        default: '',
+    },
+})
 
 //Pinia
 const userStore = useUserStore();
@@ -378,7 +385,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return videoData.value.type === 'challenge';
+    return props.lessonType === 'challenge';
 })
 
 const toggleCompleteContent = () => {
