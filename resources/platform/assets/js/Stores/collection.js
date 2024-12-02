@@ -173,12 +173,11 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async fetchData() {
+        async fetchData(fetchFilterOptions) {
             try {
-                const [response, filterResponse] = await Promise.allSettled([
-                    this.getEndpoint(this.fetchType),
-                    this.fetchFilterOptions()
-                ]);
+                let promises = [this.getEndpoint(this.fetchType)];
+                if (fetchFilterOptions) promises.push(this.fetchFilterOptions());
+                const [response, filterResponse] = await Promise.allSettled(promises);
                 return response.value;
             } catch (e) {
                 console.error(e);
@@ -189,13 +188,13 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async getData(replace = true, displayLoading = true) {
+        async getData(replace = true, displayLoading = true, fetchFilterOptions = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
             if (replace) this.tabData[this.filter.activeTab].currentPage = 1;
 
-            const response = await this.fetchData();
+            const response = await this.fetchData(fetchFilterOptions);
             this.setData(response, replace);
             this.setURLParams();
             this.fetching = false;
@@ -283,7 +282,7 @@ export const useCollectionStore = defineStore({
         loadMore() {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
-                this.getData(false, false);
+                this.getData(false, false, false);
             }
         },
 
@@ -309,12 +308,14 @@ export const useCollectionStore = defineStore({
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
-                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-                        response.total / this.filter.limit
-                    );
                 } else {
                     this.data = [...this.data, ...response.entity];
                 }
+                const hasMorePages = response.entity.length >= this.filter.limit;
+                const nextPage = Math.ceil(
+                    this.data.length / this.filter.limit
+                ) + (hasMorePages ? 1 : 0);
+                this.tabData[this.filter.activeTab].totalPages = nextPage; //hack to make it load another page without loading all results
                 //this.trackRecommendedServed(response.data.data);
             }
 
