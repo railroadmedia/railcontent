@@ -76,6 +76,7 @@ use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
 use App\Modules\Content\Models\Vimeo;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -261,7 +262,7 @@ class SanityStudioCMSController extends BaseController
                         $child->brand = $children['brand'];
                         $child->language   = 'en-US';
                         $child->created_on = Carbon::now()->toDateTimeString();
-                        $child->status     = 'published';
+                        $child->status     = $children['status'];
                         $child->save();
                         $childId = $child->id;
                     }else{
@@ -317,7 +318,9 @@ class SanityStudioCMSController extends BaseController
             $content->type = $lessonType;
             $content->slug = $request->get('slug')['current'] ?? null;
             $content->language = 'en-US';
-            $content->status = 'published';
+            $content->status = $request->get('status');
+            $publishedOn = $request->get('published_on') ?? null;
+            $content->published_on = $publishedOn ? Carbon::parse($publishedOn) : null;
             $content->brand = $request->get('brand');
             $content->created_on = Carbon::now()->toDateTimeString();
             $content->save();
@@ -385,7 +388,7 @@ class SanityStudioCMSController extends BaseController
      * @return array
      */
     private function updateHierarchy(
-        array $children,
+        Collection $children,
         array $parents,
         mixed $urlDecorator,
         array $updatedContents

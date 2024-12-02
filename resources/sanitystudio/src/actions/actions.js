@@ -94,7 +94,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
                     // Fetch child documents in parallel
                     childrenArray = await Promise.all(
-                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand, published_on }[0]`))
+                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand, published_on, status }[0]`))
                     );
                     draftCopy.childrenArray = childrenArray;
                 }
