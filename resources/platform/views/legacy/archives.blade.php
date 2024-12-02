@@ -1,53 +1,40 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Drumeo Archives | Musora</title>
+    <title>{{ ucfirst($brand) }} Archives | Musora</title>
 @endsection
 
+@php
+    $askQuestionRecipient = config('mailora.' . $brand . '.ask-question-recipient');
+    $emailLogoLink = config('mailora.' . $brand . '.logo-link');
+    if (isset($startedLessons)) {
+        $decodedStartedLessons = json_decode($startedLessons);
+        $formattedStartedLessons = json_encode(isset($decodedStartedLessons) && isset($decodedStartedLessons->data) ? $decodedStartedLessons->data : []);
+    }
+@endphp
+
 @section('content')
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-        <breadcrumb
-            :breadcrumbs="{{ json_encode([ 
-                [
-                    "title" => "Legacy Resources",
-                    "url" => "/drumeo/legacy-resources",
-                ],
-                [
-                    'title' => 'Legacy Archives'
-                ]
+    <div id="app">
+        <catalogue
+            catalogue-type="list"
+            lesson-type="archives"
+            :catalogue-meta="{{ json_encode([
+                "name" => "Legacy Archives"
             ])}}"
-        ></breadcrumb>
-        <page-header
-            page-type="archives"
-            title="Legacy Archives"
-            icon-name="archives"
-            description="Legacy Resources are lessons or tools that are no longer added to or supported. Rather than remove them from the site completely you can access them here."
-        ></page-header>
-
-        <div class="tw-flex tw-flex-col tw-py-4">
-
-            <div class="tw-flex tw-flex-row pv-3">
-                <h1 class="heading capitalize dark:tw-text-white">Search Archives</h1>
-            </div>
-
-            <div class="tw-flex tw-flex-row">
-                <content-catalogue
-                    content-endpoint="/railcontent/content"
-                    catalogue-type="list"
-                    limit="20"
-                    theme-color="drumeo"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $lessons }}"
-                    user-id="{{ auth()->id() }}"
-                    :search-bar="true"
-                    :use-url-params="true"
-                    :paginate="true"
-                    :statuses="['archived']"
-                    total-results="{{ $totalResults }}"
-                    :show-loading-animation="true">
-                </content-catalogue>
-            </div>
-        </div>
+            :breadcrumbs="{{ json_encode([ 
+                    [
+                        "title" => "Legacy Resources",
+                        "url" => "/drumeo/legacy-resources",
+                    ],
+                    [
+                        'title' => 'Legacy Archives'
+                    ]
+                ])}}"
+            :session-token="{{ json_encode(railtracker_session_token()) }}"
+            {{-- ask-question-recipient="{{ $askQuestionRecipient }}" --}}
+            {{-- email-logo-link="{{ $emailLogoLink }}" --}}
+            {{-- :show-in-progress="{{ json_encode($hasStartedLessons && $lessonType !== 'routine') }}" --}}
+        ></catalogue>
     </div>
 @endsection
 

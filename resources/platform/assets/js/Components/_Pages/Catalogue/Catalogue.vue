@@ -40,7 +40,7 @@
           v-bind="recommendedProps"
           :collection-type="lessonType"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :hide-filter-icon="lessonType === 'routine'"
+          :hide-filter-icon="true"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
         />
