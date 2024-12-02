@@ -9,9 +9,8 @@ export default class PlayAlongContentModel extends ContentModel {
 
         this.card.color_title = this.post.style ? this.post.style.join(', ') : '';
         this.list.color_title = this.post.style ? this.post.style.join(', ') : '';
-
         this.list.column_data = [
-            `${this.post.bpm} BPM`,
+            this.post.bpm ? `${this.post.bpm} BPM` : ' ',
         ];
 
         if (this.brand === 'guitareo') {

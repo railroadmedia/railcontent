@@ -58,26 +58,28 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
             }
         };
 
-        const patchChildDocument = async (childId, updates, childrenArray) => {
-            const documentId = mapRailcontentToId(childrenArray, childId);
-            if (!documentId) {
+        const patchChildDocument = async (childId, updates) => {
+            const document =  await fetchDocument(`*[railcontent_id == ${childId}]{  _type, _id, railcontent_id, title, brand }`);
+            if (!document) {
                 console.error(`No matching document found for railcontent_id: ${childId}`);
                 return;
             }
 
             try {
                 const mutations = {
-                    mutations: [{ patch: { id: documentId, set: updates } }],
+                    mutations: [{ patch: { id: document[0]._id, set: updates } }],
                 };
                 const response = await mutate(mutations);
+                console.log('rox mutation mutate response ::::: ', response);
                 if (response?.results) {
-                    console.log(`Successfully updated child document with _id: ${documentId}`);
+                    console.log(`Successfully updated child document with _id: ${document[0]._id}`);
                 } else {
-                    console.error(`Failed to update child document with _id: ${documentId}`);
+                    console.error(`Failed to update child document with _id: ${document[0]._id}`);
                 }
             } catch (error) {
                 console.error(`Failed to update child document ${childId}:`, error);
             }
+            return;
         };
 
         return {
@@ -92,7 +94,7 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
 
                     // Fetch child documents in parallel
                     childrenArray = await Promise.all(
-                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id }[0]`))
+                        draftCopy.child.map(child => fetchDocument(`*[_id == "${child._ref}"]{ "slug": slug.current, _type, _id, railcontent_id, title, brand, published_on, status }[0]`))
                     );
                     draftCopy.childrenArray = childrenArray;
                 }
@@ -151,20 +153,28 @@ export function CreateImprovedAction(originalPublishAction, token, context) {
                     }
 
                     const data = await response.json();
-                    patch.execute([{ set: { railcontent_id: data.id, web_url_path: data.web_url_path, assignment: data.assignment } }]);
-
-                    if (data.childrens) {
-                        for (const child of data.childrens) {
-                            const parentData = JSON.parse(child.parent_content_data)[0];
-                            const updates = {
-                                parent_content_data: [{
-                                    slug: parentData.slug,
-                                    type: parentData.type,
-                                    id: parentData.id,
-                                    _key: randomKey(),
-                                }],
+                    patch.execute([{ set: { railcontent_id: data.railcontent_id, web_url_path: data.web_url_path, assignment: data.assignments } }]);
+                    if (data.relatedDocs) {
+                        for (const child of data.relatedDocs) {
+                            console.log('rox need to update child   in for  ::: ', child);
+                            let updates = {
+                                web_url_path: child.web_url_path
                             };
-                            await patchChildDocument(child.id, updates, childrenArray);
+                            if (child.parent_content_data) {
+                                const parentData = JSON.parse(child.parent_content_data)[0];
+                                updates = {
+                                    ...updates,
+                                    parent_content_data: [
+                                        {
+                                            slug: parentData.slug,
+                                            type: parentData.type,
+                                            id:   parentData.id,
+                                            _key: randomKey(),
+                                        }
+                                    ]
+                                };
+                            }
+                            await patchChildDocument(child.railcontent_id, updates);
                         }
                     }
                 } catch (error) {
@@ -186,7 +196,7 @@ export function CreateDuplicateAction(originalAction, context) {
         return {
             ...originalResult,
             onHandle: async () => {
-                const originalTitle = props.draft.title;
+                const originalTitle = props.draft?.title ?? props.published?.title;
                 await originalResult.onHandle();
                 const query = `*[title == '${originalTitle}' && _id in path("drafts.**")]{_id} | order(_createdAt desc)[0]`;
                 let results = await client

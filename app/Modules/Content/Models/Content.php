@@ -837,4 +837,25 @@ class Content extends Model
             $hierarhy->save();
         }
     }
+
+    public function setParentContentData($parents)
+    {
+        $parentContentData = [];
+        foreach($parents as $parent) {
+            $parentContentData[] =
+                (object)[
+                    'id'       => $parent['id'],
+                    'slug'     => $parent['slug'],
+                    'type'     => $parent['type'],
+                    'position' => null,
+                ];
+        }
+
+        $this->parent_content_data = (json_encode($parentContentData));
+    }
+
+    public function setWebUrlPath($value)
+    {
+        $this->web_url_path = $value;
+    }
 }

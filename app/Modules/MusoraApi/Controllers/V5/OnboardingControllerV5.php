@@ -19,7 +19,7 @@ use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Throwable;
 
-class OnboardingController extends Controller
+class OnboardingControllerV5 extends Controller
 {
     /**
      * @throws Throwable

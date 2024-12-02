@@ -23,7 +23,7 @@ use Modules\UserManagementSystem\Models\OnboardingGenre;
 use Modules\UserManagementSystem\Models\OnboardingGoals;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
 
-class OnboardingController extends Controller
+class OnboardingControllerV1 extends Controller
 {
     private OnboardingService $onboardingService;
 
