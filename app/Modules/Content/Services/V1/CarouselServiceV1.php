@@ -88,11 +88,7 @@ class CarouselServiceV1
                 ...$allChallengeMetaData[$challengeRecommendation[0]['id']],
                 'type' => 'challenge-recommendation', // this is set after metadatum to override the existing type field
                 'show_everywhere' => true,
-                "button" => [
-                    "page_type" => 'PackOverview',
-                    "page_params" => ["id" => $challengeRecommendation[0]['id'], "type" => 'Lesson'],
-                    "content_url" => $challengeRecommendation[0]['web_url_path'],
-                ],
+                'enrolled_users' => $this->challengesService->getEnrolledUsersMetadata($challengeRecommendation[0]['id'])
             ];
         $compiledCardData = [
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
