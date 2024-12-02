@@ -230,14 +230,15 @@
         </section>
 
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
-            <div class="container">
+            <div class="container" x-data="{ showAll: false }">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left"
+                    :class="{ 'show-all': showAll }">
                     <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="127" href="/shop/challenges-bundle" x-data="{ open: false }">
                         <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/challenges-bundle-square.jpg');"></div>
                         <p class="leading-tight font-black mb-1">Challenges Bundle</p>
                         <p class="leading-tight text-sm mb-1">3 popular courses for the price of 1.</p>
-                        <p class="leading-tight"><s class="opacity-60">$381</s> <strong class="text-drumeo font-extrabold">$127</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 66%</span></p>
+                        <p class="leading-tight"><s class="opacity-60">$381</s> <strong class="text-pianote font-extrabold">$127</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 66%</span></p>
                     </a>
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/book-bundle",
@@ -298,6 +299,14 @@
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04.webp",
                          'soldOut' => false,
                     ])
+                </div>
+                <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
+                    <span
+                        @click="showAll = true"
+                        x-show="!showAll"
+                        class="join outline black smaller">
+                        See More
+                    </span>
                 </div>
             </div>
         </section>
