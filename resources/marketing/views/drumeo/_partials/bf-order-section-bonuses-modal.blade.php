@@ -157,15 +157,17 @@
                         <h2 class="leading-tight mt-6 mb-1 md:hidden">
                         {!!$bundlePrice!!}
                         </h2>
-                            <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
-                                @if(!empty($CTA))
-                                    {{ $CTA }}
-                                @else
-                                    GET the deal <i class="fas fa-arrow-right"></i>
-                                @endif
-                            </a>
-
-
+                         @if(empty($soldOut))
+                             <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
+                                 @if(!empty($CTA))
+                                     {{ $CTA }}
+                                 @else
+                                     GET the deal <i class="fas fa-arrow-right"></i>
+                                 @endif
+                             </a>
+                         @else
+                             <a role="link" aria-label=" GET the deal" class="join md:hidden sold-out my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;">SOLD OUT</a>
+                         @endif
                         </div>
                     </div>
                     <br>
@@ -277,13 +279,17 @@
                 {!!$bundlePrice!!}
                 </h2>
                 {{-- <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p> --}}
-                <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                    @if(!empty($CTA))
-                        {{ $CTA }}
-                    @else
-                    GET the deal <i class="fas fa-arrow-right"></i>
+                @if(empty($soldOut))
+                    <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                        @if(!empty($CTA))
+                            {{ $CTA }}
+                        @else
+                            GET the deal <i class="fas fa-arrow-right"></i>
+                        @endif
+                    </a>
+                @else
+                    <a role="link" aria-label=" GET the deal" class="join sold-out mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;">SOLD OUT</a>
                 @endif
-                </a>
                 <br>
                     @if($bundle == 'deal') <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
                     <em>New annual students only. Renews at $240/year. Cancel anytime.</em></p>

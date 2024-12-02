@@ -87,11 +87,11 @@
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-xl md:text-3xl">(Save 42%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
                     </div>
                 </div>
             </div>
@@ -112,7 +112,6 @@
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
             'case' => 'deal',
-            'getDealUrl' => $orderUrl,
             ])
         </div>
     </section>
@@ -136,6 +135,7 @@
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',
             'buttonLink' => $orderUrl,
+            'soldOut' => true,
             'bundle'=> 'deal',
             ])
     </div>

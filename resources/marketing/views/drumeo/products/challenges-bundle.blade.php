@@ -64,11 +64,11 @@
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true">get the deal &raquo;</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true">get the deal &raquo;</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
 {{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>--}}
                     </div>
                 </div>
@@ -125,6 +125,7 @@
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Courses For The Price Of 1</strong></h2>
                                 <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true',
+            'soldOut' => true,
             'bundle'=> "challenge",
             ])
     </div>

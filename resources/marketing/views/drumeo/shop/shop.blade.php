@@ -228,18 +228,6 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
                 <div style="margin-bottom: 0;" class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
-                    <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="127" href="/drumshop/challenges-bundle" x-data="{ open: false }">
-                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle-square.jpg');"></div>
-                        <p class="leading-tight font-black mb-1">Challenges Bundle</p>
-                        <p class="leading-tight text-sm mb-1">3 popular courses for the price of 1.</p>
-                        <p class="leading-tight"><s class="opacity-60">$381</s> <strong class="text-drumeo font-extrabold">$127</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 66%</span></p>
-                    </a>
-                    <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="399" href="/drumshop/practice-bundle" x-data="{ open: false }">
-                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/practice-bundle.webp');"></div>
-                        <p class="leading-tight font-black mb-1">The Practice Bundle</p>
-                        <p class="leading-tight text-sm mb-1">Save $828.87 on most popular practice essentials + lessons.</p>
-                        <p class="leading-tight"><s class="opacity-60">$1227.87</s> <strong class="text-drumeo font-extrabold">$399</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 67%</span></p>
-                    </a>
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/kit",
                          "price" => 1474,
@@ -249,16 +237,6 @@
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
                          'soldOut' => false,
                     ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/ultimate-bundle",
-                         "price" => 1747.99,
-                         "discounted_price" => 799,
-                         "title" => "The ULTIMATE Bundle",
-                         "instructor" => "Save 948.90 on our ultimate bundle.",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle.webp",
-                         'soldOut' => false,
-                    ])
-
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->price),
