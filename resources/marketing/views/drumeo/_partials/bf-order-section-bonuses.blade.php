@@ -30,10 +30,15 @@
             $textColor = 'text-[#FFAC00]';
             $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
+        case 'deal-cyber-monday':
+            $borderColor = 'border-[#00D7FF]';
+            $textColor = 'text-[#00D7FF]';
+            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#00D7FF] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            break;
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
-            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 67%)</span><br><p class="text-sm">No recurring payments.</p>';
+            $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
         case 'book':
             $borderColor = 'border-[#7E56FF]';

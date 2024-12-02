@@ -522,7 +522,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
             @if(!empty($bfVersion))
-                <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/black-friday/musora-BF-header.webp">
+                <img class="h-16 sm:h-20 lg:h-24 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/black-friday/musora-CM-header.webp">
                 <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
                 <h5 class="text-musora leading-tight"><strong>SAVE $100 ON YOUR FIRST YEAR OF LESSONS.</strong></h5>
                 <h5 class="font-light">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR BLACK FRIDAY.</h5>

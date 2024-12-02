@@ -6,9 +6,9 @@
     @endif
 >
     @if(!empty($bfVersion) && ($theme == 'singeo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-CM-header.webp" alt="logo">
     @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-BF-header.webp" alt="logo">
+    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-CM-header.webp" alt="logo">
     @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
@@ -44,7 +44,7 @@
             @endif
         @endif
         @if(!empty($BFheader))
-            <h6 class="leading-tight py-2 px-3 bg-musora rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
+            <h6 class="leading-tight py-2 px-3 bg-[#00D7FF] rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>BLACK FRIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
