@@ -1,6 +1,7 @@
 <template>
     <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar lg:tw-grid tw-grid-cols-2 tw-gap-[6px] 2xl:tw-gap-[10px]">
-        <template v-for="card in preLoadedContent">
+        <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
+        <template v-else v-for="card in preLoadedContent">
             <template v-if="showCard(card)">
                 <!-- TODO(challenge): updated content_url to web_url_path -->
                 <NewLearningPathCard
@@ -29,6 +30,8 @@ import { storeToRefs } from "pinia/dist/pinia";
 import InProgressCard from '@collections/ChallengeCarousel/InProgressCard';
 import EnrollmentAward from '@collections/ChallengeCarousel/EnrollmentAward';
 import NewLearningPathCard from '@collections/NewLearningPaths/NewLearningPathCard';
+import SkeletonChallengeCarousel from '@collections/SkeletonLoader/SkeletonChallengeCarousel';
+import {usePlatformStore} from "@stores/platform";
 
 const props = defineProps({
     preLoadedContent: {
@@ -45,6 +48,8 @@ const emit = defineEmits(['removeChallenge']);
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const isHomepage = computed(() => {
     return props.type === 'home';
