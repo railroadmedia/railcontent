@@ -575,7 +575,7 @@ class PlaylistsMetadataController extends Controller
 
         $userPermissions = user()->getActivePermissionsIds();
 
-        $item = $this->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
+        $item = $this->playlistsService->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
         return response()->json($item);
     }
 
@@ -807,70 +807,5 @@ the pin icon on or off.',
                                     'message' => 'Playlist unpinned successfully',
                                 ], 201);
 
-    }
-
-    /**
-     * Helper function to format playlist item data with Sanity and Assignment info.
-     *
-     * This method takes in a playlist item and formats it by combining relevant data
-     * from Sanity and Assignment sources, such as thumbnail, item type, instructors, and route.
-     * It also checks whether the user has access to the content based on their permissions.
-     *
-     * @param UserPlaylistContent $item The playlist item to format.
-     * @param \Illuminate\Support\Collection $sanityDataAssoc Associative array of Sanity data keyed by content ID.
-     * @param \Illuminate\Support\Collection $assignmentDataAssoc Associative array of Assignment data keyed by content ID.
-     * @param int $playlistId The ID of the playlist to which the item belongs.
-     * @param array $userPermissions The user's active permissions for access control checks.
-     * @return array The formatted playlist item data with additional details such as route, thumbnail, duration, etc.
-     */
-    private function formatPlaylistItemData(UserPlaylistContent $item,
-        \Illuminate\Support\Collection $sanityDataAssoc,
-        \Illuminate\Support\Collection $assignmentDataAssoc,
-        int $playlistId,
-        array $userPermissions): array
-    {
-        $sanityInfo = $sanityDataAssoc->get($item->content_id);
-        $assignmentInfo = $assignmentDataAssoc->get($item->content_id);
-
-        // Process route information if it exists in Sanity data
-        if (!empty($sanityInfo['parent_content_data'] ?? [])) {
-            $route = collect($sanityInfo['parent_content_data'])->map(function ($parent) {
-                switch ($parent['type']) {
-                    case 'learning-path':
-                        return 'Method';
-                    case 'learning-path-level':
-                        return 'L' . $parent['position'];
-                    case 'foundation':
-                        return 'Method';
-                    default:
-                        return $parent['slug'];
-                }
-            })->toArray();
-            $sanityInfo['route'] = array_reverse($route);
-        }
-
-        $item->thumbnail_url = $assignmentInfo ? $assignmentInfo['thumbnail'] : ($sanityInfo['thumbnail'] ?? null);
-        $item->item_type = $item->type = $assignmentInfo ? $assignmentInfo['item_type'] : ($sanityInfo['type'] ?? null);
-        $item->user_playlist_item_extra_data = $sanityInfo['extra_data'] ?? null;
-        $item->duration = $sanityInfo['length_in_seconds'] ?? null;
-        $item->playlist_item_name = $item->playlist_item_name ?? $item->content_name;
-        $item->user_playlist_item_id = $item->id;
-        $item->id = $item->content_id;
-        $item->instructors = $assignmentInfo ? $assignmentInfo['instructors'] : ($sanityInfo['instructors'] ?? null);
-        $item->route = $assignmentInfo ? $assignmentInfo['route'] : ($sanityInfo['route'] ?? []);
-        $item->url = url()->route('platform.user.playlist-item', [
-            'playlistId' => $playlistId,
-            'playlistItemId' => $item->user_playlist_item_id,
-        ]);
-
-        $data = array_merge($item->toArray(), $sanityInfo ?? [], $assignmentInfo ?? []);
-        $data['need_access'] = empty(array_intersect($userPermissions, $data['permission_id']));
-        if (!empty($data['extra_data'])) {
-            foreach (json_decode($data['extra_data'], true) ?? [] as $key => $value) {
-                $data[$key] = $value;
-            }
-        }
-
-        return $data;
     }
 }

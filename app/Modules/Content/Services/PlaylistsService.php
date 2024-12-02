@@ -127,7 +127,7 @@ class PlaylistsService
      * @param array $userPermissions         An array of user permissions to check access for the playlist item.
      * @return array                         The formatted playlist item data, including route, metadata, and permissions.
      */
-    private function formatPlaylistItemData( mixed $item,
+    public function formatPlaylistItemData( mixed $item,
         \Illuminate\Support\Collection $sanityDataAssoc,
         \Illuminate\Support\Collection $assignmentDataAssoc,
         int $playlistId,
@@ -174,7 +174,7 @@ class PlaylistsService
         $data = array_merge($sanityInfo ?? [], $assignmentInfo ?? [], $item->toArray());
         // Check if the user needs access
         $permissions = $data['permission_id'] ?? [];
-        $data['need_access'] = empty(array_intersect($userPermissions, $permissions)) && !empty($permissions);
+        $data['need_access'] = !user()->isAdmin() && empty(array_intersect($userPermissions, $data['permission_id'])) && !empty($permissions);
 
         if ($data['need_access']) {
             // Define membership checks
@@ -206,6 +206,15 @@ class PlaylistsService
                 $data = array_merge($data, $extraData);
             }
         }
+
+        if ($data['type'] == 'routine' && isset($data['is_high_routine'])) {
+            $data['soundslice_slug'] = $data['high_soundslice_slug'];
+        }
+
+        if ($data['type'] == 'routine' && isset($data['is_low_routine'])) {
+            $data['soundslice_slug'] = $data['low_soundslice_slug'];
+        }
+
         return $data;
     }
 
