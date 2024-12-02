@@ -209,7 +209,6 @@ class HomePageController extends BaseController
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         if ($currentEvent) {
-            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
             if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
@@ -315,7 +314,6 @@ class HomePageController extends BaseController
             "trialSection" => $trialSection,
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "youtubeId" => $youtubeId ?? null,
             "trialSectionRedesign" => $showNewTrialSection,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => $homepageV2,

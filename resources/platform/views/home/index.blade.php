@@ -29,7 +29,7 @@
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
         :users-list="{{ json_encode($usersList->results())  }}"
         :user-metrics="{{ json_encode($userMetrics) }}"
-        youtube-id="{{ $youtubeId }}"
+        youtube-id="{{ $youtubeId ?? '' }}"
         :learning-paths="{{ json_encode($trialSection) }}"
         :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
         :trial-section-redesign="{{ $trialSectionRedesign }}"
