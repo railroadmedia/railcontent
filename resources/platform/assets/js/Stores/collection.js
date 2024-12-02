@@ -124,6 +124,16 @@ export const useCollectionStore = defineStore({
             if(endpoints[type]){
                 return await endpoints[type]();
             } else {
+                let progress = 'all';
+                switch(this.filter.progress){
+                    case 'started': progress = 'in progress';
+                        break;
+                    case 'not-started': progress = 'not started';
+                        break;
+                    case 'completed': progress = 'completed'
+                        break;
+                }
+
                 let data = await fetchAll(userStore.brand, this.queryType, {
                     page: this.tabData[this.filter.activeTab].currentPage,
                     searchTerm: this.filter.searchTerm,
@@ -131,6 +141,7 @@ export const useCollectionStore = defineStore({
                     limit: this.filter.limit,
                     groupBy: this.getGroupBy(),
                     includedFields: this.filter.included_fields,
+                    progress: progress
                 })
 
                 return data;
