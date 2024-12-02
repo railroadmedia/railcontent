@@ -9,9 +9,7 @@
 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
-                title="Featured Challenges"
-                :see-all-url="`/${brand}/challenge`"
-                seeAllAriaLabel="See All Challenges"
+                :title="welcomeMessage"
                 catalogue-type="challenge"
                 page-type="home"
                 :preLoadedContent="data?.carousels"
@@ -177,7 +175,7 @@
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
     const platformStore = usePlatformStore();
-    const { brand, userId, token, showOnboardingBanner, userHas30Days } = storeToRefs(userStore);
+    const { brand, userId, token, showOnboardingBanner, userHas30Days, isFirstAccess, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
 
     const props = defineProps({
@@ -196,7 +194,6 @@
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         trialSectionRedesign: { type: Boolean, default: false },
-        isFirstAccess: { type: Boolean, default: false },
         isV2User: { type: Boolean, default: false },
 
         // Number props
@@ -224,6 +221,14 @@
         userMetrics: { type: Object, default: () => ({}) }
     });
 
+    const welcomeMessage = computed(() => {
+        if (isFirstAccess.value) {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing</div>`
+        } else {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
+        }
+    })
+
     //Computed
     const hasCompleteYourAccountTask = computed(() => {
         return props.exploreTasks.find(task => task.hook === 'complete-your-account');
@@ -246,20 +251,6 @@
     const packDataObject = computed(() => {
         return { data: [...props.packData] };
     })
-
-    const welcomeMessageProps = computed(() => {
-        if (props.isFirstAccess) {
-            return {
-                welcomeMessage: `Welcome, ${userStore.user.first_name || userStore.user.display_name}`,
-                practiceMessage: `Start Here`
-            }
-        } else {
-            return {
-                welcomeMessage: `Welcome back, ${userStore.user.first_name || userStore.user.display_name}`,
-                practiceMessage: `Let's get practicing!`
-            }
-        }
-    });
 
     //Refs
     const data = ref(null);
@@ -291,5 +282,7 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
+
+        console.log('first access',isFirstAccess.value)
     });
 </script>
