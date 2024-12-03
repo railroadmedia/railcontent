@@ -207,7 +207,7 @@
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/practice-pad",
+                        "href" => "/drumshop/practice-pad-full",
                          "price" => floatval($productPrices['practicepad']->price),
                          "discounted_price" => floatval($productPrices['practicepad']->discounted_price),
                          "title" => "The P4 Practice Pad",
