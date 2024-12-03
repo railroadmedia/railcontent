@@ -70,7 +70,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'Save up to 90% on piano lessons, gear & more!',
+        'text' => 'Save up to 69% on piano lessons, gear & more!',
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
         'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp',

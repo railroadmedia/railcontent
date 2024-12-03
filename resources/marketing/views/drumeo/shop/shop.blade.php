@@ -68,7 +68,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'Save up to 91% on drum lessons, gear & more!',
+        'text' => 'Save up to 65% on drum lessons, gear & more!',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp',
         'isShop' => true,
     ])
