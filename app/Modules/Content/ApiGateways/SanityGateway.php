@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\ApiGateways;
 
+use Illuminate\Support\Carbon;
 use Sanity\Client as SanityClient;
 
 class SanityGateway
@@ -118,7 +119,16 @@ class SanityGateway
                 'description': assignment_description,
                 'title':assignment_title,
         }",
-        ]
+        ],
+        'live-event' => [
+            "'type': _type",
+            "'slug':slug.current",
+            "live_event_start_time",
+            "live_event_end_time",
+            "railcontent_id",
+            "'videoId': coalesce(live_event_youtube_id, video.external_id)",
+            "'instructors':instructor[]->name"
+            ]
         ];
 
     public SanityClient $sanity;
@@ -521,6 +531,23 @@ class SanityGateway
         // fields needs to exist for decorators to work, but no longer needs actual data
         // eventually this should be removed.
         return [];
+    }
+
+    public function getLiveEvents(string $brand, int $buffer = 0): array
+    {
+        $fields = $this->getFieldsString('live-event');
+        $startDate = Carbon::now()->addMinutes($buffer)->format('Y-m-d\TH:i:s.v\Z');
+        $endDate = Carbon::now()->subMinutes($buffer)->format('Y-m-d\TH:i:s.v\Z');
+
+        $query = '*[ live_event_start_time <= "'.$startDate.'"
+            && live_event_end_time >= "'.$endDate.'"
+            && status == "scheduled"
+            && brand == "'.$brand.'"
+            ]{
+            '.$fields.',
+        }';
+
+        return $this->sanity->fetch($query);
     }
 
 }

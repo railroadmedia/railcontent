@@ -17,6 +17,7 @@ use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use App\Modules\Content\ApiGateways\SanityGateway;
 
 class LivePageController extends BaseController
 {
@@ -52,7 +53,8 @@ class LivePageController extends BaseController
         CalendarService $calendarService,
         LiveStreamEventService $liveStreamEventService,
         RailchatService $railchatService,
-        PermissionService $permissionService
+        PermissionService $permissionService,
+        private readonly SanityGateway $sanityGateway
     ) {
         $this->contentService = $contentService;
         $this->calendarService = $calendarService;
@@ -106,15 +108,6 @@ class LivePageController extends BaseController
 
     public function live(Request $request, $domain, $brand)
     {
-        CacheHelper::$disableCache = true;
-
-        ContentRepository::$availableContentStatues = [
-            ContentService::STATUS_PUBLISHED,
-            ContentService::STATUS_SCHEDULED,
-        ];
-
-        ContentRepository::$pullFutureContent = true;
-
         $userRoleAdmin = user()->isAdmin();
         $chatChannelName = config('railchat.drumeo.chat_channel_name');
         $questionsChannelName = config('railchat.drumeo.questions_channel_name');
@@ -145,137 +138,39 @@ class LivePageController extends BaseController
 
         // get users timezone
         $fullTimezoneString = $this->calendarService->getTimezone($request);
+        $liveEvents = $this->sanityGateway->getLiveEvents(brand(), self::NOT_LIVE_PAGE_SWITCH_MINUTES);
 
-        $liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            ContentTypes::liveContentTypes(),
-            ContentService::STATUS_SCHEDULED,
-            Carbon::now()
-                ->subHours(6)
-                ->toDateTimeString(),
-            '>',
-            'published_on',
-            'asc',
-            [],
-            15
-        );
-
-        $contentReleases = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            ContentTypes::contentReleaseContentTypes(),
-            ContentService::STATUS_PUBLISHED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>',
-            'published_on',
-            'asc',
-            [],
-            10
-        );
-
-        $scheduleEvents =
-            $liveEvents->merge($contentReleases)
-                ->sort(
-                    function ($a, $b) {
-                        return strtotime($a['published_on']) - strtotime($b['published_on']);
-                    }
-                )
-                ->slice(0, 10)
-                ->values();
-
-        // calculate if there is a current event and the previous/next events
         $showLivePage = false;
-        $eventsWithinTimeFrame = [];
         $currentEvent = null;
-        $nextEvent = null;
 
-        foreach ($liveEvents as $liveEvent) {
-            if (empty($liveEvent->fetch('fields.live_event_start_time')) ||
-                empty($liveEvent->fetch('fields.live_event_end_time'))) {
-                continue;
-            }
-
-            $startTimeUtc = Carbon::parse($liveEvent->fetch('fields.live_event_start_time'));
-            $endTimeUtc = Carbon::parse($liveEvent->fetch('fields.live_event_end_time'));
-
-            $startTimeCutoff =
-                $startTimeUtc->copy()
-                    ->subMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES);
-            $endTimeCutoff =
-                $endTimeUtc->copy()
-                    ->addMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES);
-
-            if (Carbon::now() > $startTimeUtc->subMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES) &&
-                Carbon::now() < $endTimeUtc->addMinutes(15)) {
-                $showLivePage = true;
-                $eventsWithinTimeFrame[] = $liveEvent;
-            }
-        }
-
-        // if there are multiple events withing the time frame we need to figure out which one is closest
-        foreach ($eventsWithinTimeFrame as $eventWithinTimeFrame) {
-            $startTimeUtc = Carbon::parse($eventWithinTimeFrame->fetch('fields.live_event_start_time'));
-            $endTimeUtc = Carbon::parse($eventWithinTimeFrame->fetch('fields.live_event_end_time'));
-
-            if (empty($currentEvent)) {
-                $currentEvent = $eventWithinTimeFrame;
-            }
-
-            if (Carbon::now() > $startTimeUtc && Carbon::now() < $endTimeUtc) {
-                $currentEvent = $eventWithinTimeFrame;
-            }
-        }
-
-        // if there is no current live event, calculate the next upcoming event
-        if (!$showLivePage) {
-            foreach ($scheduleEvents as $scheduleEvent) {
-                if (empty($scheduleEvent->fetch('fields.live_event_start_time')) ||
-                    empty($scheduleEvent->fetch('fields.live_event_end_time'))) {
-                    continue;
-                }
-
-                $startTimeUtc = Carbon::parse($scheduleEvent->fetch('fields.live_event_start_time'));
-
-                if (Carbon::now() < $startTimeUtc->subMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES)) {
-                    $nextEvent = $scheduleEvent;
-                    break;
-                }
-            }
+        if(!empty($liveEvents)){
+            $showLivePage = true;
+            $currentEvent = $liveEvents[0];
         }
 
         // this is for previewing any upcoming event
         if ($request->has('forced-content-id')) {
-            $forcedEvent = $this->contentService->getById($request->get('forced-content-id'));
-
+            $forcedEvent = $this->sanityGateway->getByRailcontentId($request->get('forced-content-id'));
             if (!empty($forcedEvent)) {
                 $currentEvent = $forcedEvent;
-                $nextEvent = $forcedEvent;
                 $showLivePage = true;
             }
         }
-
-        $event = $currentEvent ?? $nextEvent;
 
         if ($showLivePage) {
             event(
                 new LiveStreamEventAttended(
                     user()->id,
-                    $event['id'],
+                    $currentEvent['id'],
                     Carbon::now()->toDateTimeString()
                 )
             );
 
-            if (!empty($event->fetch('fields.live_event_youtube_id'))) {
-                $youtubeId = $event->fetch('fields.live_event_youtube_id');
-            } else {
-                $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
-            }
-
-            //$themeColor = ContentTypes::mapContentThemeColor($event->fetch('type'));
-
             return view(
                 'live.online',
                 [
-                    'lessonContent' => $event,
-                    'liveStreamId' => $youtubeId,
+                    'lessonContent' => $currentEvent,
+                    'liveStreamId' => $currentEvent['videoId'],
                     'apiKey' => config('railchat.get_stream_credentials')['key'],
                     'token' => $token,
                     'chatChannelName' => $chatChannelName,
@@ -284,7 +179,6 @@ class LivePageController extends BaseController
                         $this->permissionService->is(user()->id, 'live_chat_moderator'),
                     'userData' => $userData,
                     'embedUrl' => $embedUrl,
-                    'scheduleEvents' => json_encode(array_slice($liveEvents->toArray(), 0, 10)),
                 ]
             );
         }
