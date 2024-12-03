@@ -362,7 +362,11 @@
         <div href="#customize-anchor"
             class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
             style="    background: linear-gradient(to bottom, #020306, #042c52);">
-            @include('drumeo._partials.countdown-homepage-2024')
+            @include($theme.'._partials.holiday-logo', [
+                'styles' => 'w-auto h-10 sm:h-14',
+                'isProductPage' => true,
+                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
+            ])
         </div>
     @endif
 
