@@ -76,6 +76,13 @@ class ChallengesMetaDataController extends Controller
             $view = 'content.cohort-template';
         }
 
+        $keysToCopy = [
+            'dark_mode_logo' => 'dark_mode_logo_url',
+            'light_mode_logo' => 'light_mode_logo_url',
+        ];
+        foreach($keysToCopy as $novaKey => $sanityKey) {
+            $cohort[$novaKey] = $content[$sanityKey];
+        }
 
         return view($view, [
             'hasProduct' => $isEnrolled,
