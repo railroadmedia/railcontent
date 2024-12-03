@@ -113,12 +113,13 @@
         @endphp
             <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses-modal', [
-            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',            
+            'maxWidth' => 'max-w-4xl',
+            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-20',
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
-            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a <br class="hidden md:block">free Metronome, Books, and $381 in digital bonuses.</h2>',
+            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/4',
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a free Metronome, Books, and $381 in digital bonuses.</h2>',
             'buttonLink' => $orderUrl,
             'bundle'=> "holiday-pianote",
             ])
