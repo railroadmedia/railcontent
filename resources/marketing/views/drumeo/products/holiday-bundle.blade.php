@@ -99,7 +99,7 @@
     </header>
 
     @php
-        $videoTargetSkus = ['DLM-1-year', 'quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
+        $videoTargetSkus = ['DLM-1-year-holiday', 'quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
     @endphp
 
     <section class="pt-8 pb-16 sm:py-20 lg:pt-20 md:pb-32 px-4 sm:px-6 bg-white">

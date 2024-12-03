@@ -85,7 +85,7 @@
 
 
     @php
-        $videoTargetSkus = ['pianote-membership', 'metronome', 'read-music-in-30-days-workbook', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'read-music-in-30-days', 'easy-chords'];
+        $videoTargetSkus = ['pianote-membership-holiday', 'metronome', 'read-music-in-30-days-workbook', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'read-music-in-30-days', 'easy-chords'];
     @endphp
 
     <section class="pt-8 pb-16 sm:py-16 lg:pt-20 lg:pb-28 px-4 sm:px-6 bg-white">
