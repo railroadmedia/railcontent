@@ -2,24 +2,22 @@
     <div class="tw-flex tw-flex-nowrap tw-overflow-x-scroll tw-no-scrollbar lg:tw-grid tw-grid-cols-2 tw-gap-[6px] 2xl:tw-gap-[10px]">
         <SkeletonChallengeCarousel v-if="isLoading" v-for="n in 2" :key="n" />
         <template v-else v-for="card in preLoadedContent">
-            <template v-if="showCard(card)">
-                <!-- TODO(challenge): updated content_url to web_url_path -->
-                <NewLearningPathCard
-                    v-if="card.type === 'onboarding'"
-                    :key="card.id"
-                    :contentType="card.content_type ?? ''"
-                    :title="card.header"
-                    :description="card.subheader"
-                    :logo="card.logo"
-                    :ctaText="card.ctaText"
-                    :ctaUrl="card.button?.content_url"
-                    :bgImg="card.bgImg"
-                    :wideImg="card.wideImg"
-                    :squareImg="card.squareImg"
-                />
-                <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
-                <InProgressCard v-else :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
-            </template>
+            <!-- TODO(challenge): updated content_url to web_url_path -->
+            <NewLearningPathCard
+                v-if="card.type === 'onboarding'"
+                :key="card.id"
+                :contentType="card.content_type ?? ''"
+                :title="card.header"
+                :description="card.subheader"
+                :logo="card.logo"
+                :ctaText="card.ctaText"
+                :ctaUrl="card.button?.content_url"
+                :bgImg="card.bgImg"
+                :wideImg="card.wideImg"
+                :squareImg="card.squareImg"
+            />
+            <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
+            <InProgressCard v-else :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
         </template>
     </div>
 </template>
@@ -65,13 +63,5 @@ const isChallenge = computed(() => {
 
 const showEnrollmentAward = (card) => {
     return card.type === 'challenge-award' && !card.is_user_enrolled;
-}
-
-const showCard = (card) => {
-    if(isHomepage.value || isDashboard.value) {
-        return true;
-    } else if(isChallenge.value) {
-        return !card.show_everywhere;
-    }
 }
 </script>
