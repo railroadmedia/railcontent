@@ -53,7 +53,11 @@ import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import { postChallengesSetStartDate, fetchChallengeMetadata } from 'musora-content-services';
+import {
+    postChallengesSetStartDate,
+    fetchChallengeMetadata,
+    postChallengesCommunityNotification
+} from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
@@ -89,21 +93,20 @@ const challengeData = ref({
 
 const userNames = computed(() => {
     const names = [];
-    challengeData.value.entity.forEach((user) => {
-        names.push(user.display_name);
-    });
+    // TODO this causes a crash because fetchChallengeMetadata has not yet returned before this is read
+    // challengeData.value.entity.forEach((user) => {
+    //     names.push(user.display_name);
+    // });
 
     return names.join(', ');
 })
 
 const challengeTitle = computed(() => {
-    //TODO(challenge): updated the field when migrating with MCS
-    return props.challenge.cohort_title;
+    return props.challenge.title;
 })
 
 const startDate = computed(() => {
-    //TODO(challenge): updated the field when migrating with MCS
-    const converted = new Date(props.challenge.cohort_start_date);
+    const converted = new Date(props.challenge.published_on);
     return `${months[converted.getMonth()]} ${converted.getDate()}`;
 })
 
@@ -125,7 +128,7 @@ const handleNext = async () => {
         if(props.challengeType === 'community'){
             if(selectedFrequency.value){
                 const setNotification = await postChallengesCommunityNotification(props.challenge.id);
-
+                //TODO this doesn't return in time bofer userNames is accessed
                 const data = await fetchChallengeMetadata(props.challenge.id);
                 challengeData.value = data.data;
                 step.value = 2;

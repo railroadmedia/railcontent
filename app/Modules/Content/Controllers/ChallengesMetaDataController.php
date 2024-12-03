@@ -77,9 +77,13 @@ class ChallengesMetaDataController extends Controller
         }
 
         $keysToCopy = [
+            'brand' => 'brand',
             'dark_mode_logo' => 'dark_mode_logo_url',
             'light_mode_logo' => 'light_mode_logo_url',
             'web_url_path' => 'web_url_path',
+            'title' => 'title',
+            'published_on' => 'published_on',
+            'id' => 'id',
         ];
         foreach($keysToCopy as $novaKey => $sanityKey) {
             $cohort[$novaKey] = $content[$sanityKey];
