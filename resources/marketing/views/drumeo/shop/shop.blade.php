@@ -181,7 +181,7 @@
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->price),
@@ -204,6 +204,14 @@
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03b.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/practice-pad",
+                         "price" => floatval($productPrices['practicepad']->price),
+                         "discounted_price" => floatval($productPrices['practicepad']->discounted_price),
+                         "title" => "The P4 Practice Pad",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-04.webp",
                          'soldOut' => false,
                     ])
                 </div>
