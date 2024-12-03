@@ -158,12 +158,20 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-        //TODO(challenge): remove content_id when migrating with MCS in enrollment page
-        const startDate = await postChallengesSetStartDate(props.challenge.content_id || props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
-
-        emit('modalClose');
+         //TODO(challenge): remove content_id when migrating with MCS in enrollment page
+         await postChallengesSetStartDate(props.challenge.content_id || props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+         const date = new Date();
+         if(selectedDate.value.getFullYear() === date.getFullYear()
+             && selectedDate.value.getMonth() === date.getMonth()
+             && selectedDate.value.getDate() === date.getDate() ){
+            window.location.href = props.challenge.web_url_path;
+        }
+        else{
+            window.location.href = `/${props.challenge.brand}`;
+        }
     }
     catch(e) {
+        console.log(e);
         window.shownotification({
             icon: 'error',
             text: 'Woops! Something wrong happened, please try again later.'
