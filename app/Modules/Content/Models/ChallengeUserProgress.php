@@ -446,7 +446,7 @@ class ChallengeUserProgress extends Model
             'added_to_rest_days' => false,
         ];
         $lessonMetaData = $this->lessons_meta_data;
-
+        $wereAllLessonsCompleted = $this->areAllLessonsCompleted();
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
             if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
@@ -458,6 +458,7 @@ class ChallengeUserProgress extends Model
             }
         }
         $this->lessons_meta_data = $lessonMetaData;
+        $areAllLessonsCompleted = $this->areAllLessonsCompleted();
         if ($this->is_active) {
             $currentStreakData = $this->getStreakCurrentData();
             $totalLessons = $this->getNumberOfLessonDays();
@@ -493,6 +494,9 @@ class ChallengeUserProgress extends Model
                 } else {
                     $results['is_milestone'] = $totalLessons == $currentStreak;
                 }
+            }
+            if ($areAllLessonsCompleted && !$wereAllLessonsCompleted) {
+                $results['is_milestone'] = true;
             }
         }
         $this->save();

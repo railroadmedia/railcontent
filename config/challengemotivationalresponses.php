@@ -52,6 +52,8 @@ return [
         'guitareo' => 'https://lottie.host/70c2c2f6-2325-4350-baa9-f703710c4ca3/FH8b9EZJkC.json',
         'singeo' => 'https://lottie.host/d2c57df2-f221-4054-a5db-22f12e1a659a/kTBSCOj8tW.json',
         'text' => '',
+        'styles' => 'tw-h-full',
+        'duration' => 7000,
     ],
     'default' => [ //This is the same as the 10 milestone as it's used for challenges with 11-29 days at the halfway mark
             'drumeo'=> 'https://lottie.host/78a3fc85-e9ef-404e-ac70-05b4413fdec2/15jLWPqTYS.json',
