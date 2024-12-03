@@ -225,7 +225,13 @@ class ChallengeUserProgress extends Model
         $rollingUnlockDate = $startDate->copy();
         foreach ($lessons as $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
-            $unlockDate = !$isLocked || $isAlwaysUnlocked ? $startDate : $rollingUnlockDate;
+            if ($isAlwaysUnlocked) {
+                $unlockDate = $lesson['published_on'];
+            } elseif ($isLocked) {
+                $unlockDate = $rollingUnlockDate;
+            } else {
+                $unlockDate = $startDate;
+            }
             $lessonPublishedDate = Carbon::parse($lesson['published_on']);
             $unlockDate = max($unlockDate, $lessonPublishedDate);
             $lessonMetaData[] =
