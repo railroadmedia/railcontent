@@ -38,7 +38,7 @@
                     <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('https://www.musora.com/musora-cdn/image/width=40,quality=95/${avatar.profile_picture_url}')`"></div>
                     <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('https://www.musora.com/musora-cdn/image/width=40,quality=95/${userProfilePictureUrl}')`"></div>
                 </div>
-                <p class="tw-text-left">You’ve joined <b>{{ userNames }}</b> and <b>{{ challengeData.total }}</b>other drummers who have already enrolled!</p>
+                <p class="tw-text-left">You’ve joined <b>{{ userNames }}</b> and <b>{{ challengeData.total }}</b> other drummers who have already enrolled!</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" is-link :href="`${challenge.web_url_path}`" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
