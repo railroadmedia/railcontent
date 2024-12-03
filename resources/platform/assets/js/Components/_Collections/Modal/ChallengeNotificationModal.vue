@@ -164,9 +164,8 @@ const setStartDate = async () => {
     try {
          await postChallengesSetStartDate(props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
          const date = new Date();
-         if(selectedDate.value.getFullYear() === date.getFullYear()
-             && selectedDate.value.getMonth() === date.getMonth()
-             && selectedDate.value.getDate() === date.getDate() ){
+         if(setStartDateButtonText.value === 'Start Now'){
+             //TODO(challenge): need to update url to the first lesson
             window.location.href = props.challenge.web_url_path;
         }
         else{
