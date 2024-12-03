@@ -214,7 +214,7 @@ const actionText = computed(() => {
         return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
     } else if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
-    } else if(isNextLessonLocked){
+    } else if(isNextLessonLocked.value){
         return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
     }
 })
@@ -351,4 +351,6 @@ watch(
         }
     },
 )
+
+console.log(props.challenge)
 </script>
