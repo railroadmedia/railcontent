@@ -542,9 +542,9 @@ class SalesController extends BaseController
             'ultimate' => true,
         ]);
     }
-    public function pianoteDeal()
+    public function holidayBundle()
     {
-        return view('pianote.products.pianote-deal', [
+        return view('pianote.products.holiday-bundle', [
             'theme' => 'pianote',
         ]);
     }

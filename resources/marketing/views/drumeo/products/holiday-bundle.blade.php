@@ -7,13 +7,13 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo Deal | Drumeo </title>
-    <meta property="og:title" content="Drumeo Deal | Drumeo">
+    <title>The Holiday Bundle | Drumeo </title>
+    <meta property="og:title" content="The Holiday Bundle | Drumeo">
 
-    <meta name="description" content="Save $100 + Get $635 In Free Courses For Life.">
-    <meta property="og:description" content="Save $100 + Get $635 In Free Courses For Life.">
+    <meta name="description" content="Annual membership with a free QuietPad, drumsticks and $381 in digital bonuses.">
+    <meta property="og:description" content="Annual membership with a free QuietPad, drumsticks and $381 in digital bonuses.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -61,14 +61,14 @@
         else {
             $stock = 0;
         }
-        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true';
+        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo&locked=true';
     @endphp
 
-    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[640px] md:h-[700px] lg:h-[800px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-bg.webp') no-repeat center center; background-size: cover;">
+    <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[640px] md:h-[700px] lg:h-[880px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="Bundle" class="h-14 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg"><br>
-                <h2 class="leading-tight my-3"><strong>Save $100 + Get $635 In Free Courses For Life.</strong></h2>
+                <img alt="Bundle" class="h-14 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg"><br>
+                <h2 class="leading-tight my-3"><strong>Annual membership with a free QuietPad, drumsticks and $381 in digital bonuses.</strong></h2>
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 text-sm md:text-base">
                     <span class="flex items-center">
                         <i class="fa-solid fa-check text-drumeo mr-2"></i>
@@ -86,7 +86,7 @@
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#5EA7EB] text-xl md:text-3xl">(Save 42%)</span></h2>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span></h2>
                     @if($stock > 0)
                         <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal</a>
                     @else
@@ -99,7 +99,7 @@
     </header>
 
     @php
-        $videoTargetSkus = ['DLM-1-year-drumeo', '30-day-drummer-4', '30-day-double-bass', '30-day-jazz', '30-day-independence', '30-day-chops'];
+        $videoTargetSkus = ['DLM-1-year', 'quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
     @endphp
 
     <section class="pt-8 pb-16 sm:py-20 lg:pt-20 md:pb-32 px-4 sm:px-6 bg-white">
@@ -107,11 +107,11 @@
              <h2 class="leading-tight text-center mb-3 lg:pb-4">
                 <strong>Here's what you'll get with <br class="hidden sm:block">this bundle.</strong>
             </h2>
-            <p class="leading-normal text-center mb-3 md:pb-6">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
-            Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</p>
+            {{-- <p class="leading-normal text-center mb-3 md:pb-6">You’ll save $100 on your first year of Drumeo PLUS you’ll get lifetime access to our most popular courses. Even if you don’t renew your membership. These lessons are yours forever.<br><br>
+            Play your first beats, improve your chops, get started with jazz, and more. All with world-class instructors.</p> --}}
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
-            'case' => 'deal',
+            'case' => 'holiday',
             'getDealUrl' => $orderUrl,
             ])
         </div>
@@ -125,18 +125,18 @@
             ])
 
         @php
-            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-independence', '30-day-chops'];
+            $targetSkus = ['quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
         @endphp
             <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses-modal', [
-            'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
-            'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal/drumeo-deal-logo.svg',
+            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',            
+            'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
             'topImage' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-am.webp',
             'logoHeight' => 'h-14 sm:h-18 md:h-24',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Save $100 on your first year + $635 in lifetime bonuses!</strong></h2>',
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-4"><strong>Annual membership with a free QuietPad, drumsticks and $381 in digital bonuses.</strong></h2>',
             'buttonLink' => $orderUrl,
-            'bundle'=> 'deal',
+            'bundle'=> 'holiday',
             ])
     </div>
 

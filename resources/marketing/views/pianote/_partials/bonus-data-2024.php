@@ -161,5 +161,28 @@ $bonusVideos = [
         'badge' => null,
         'price' => 49,
         'sku' => 'classical-piano-pieces'
+    ],
+    [
+        'image' => 'marketing/pianote/products/read-music-in-30-days/feature-05.webp',
+        'header' => 'Read Music in 30 Days',
+        'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
+        'badge' => null,
+        'price' => 127,
+        'sku' => 'read-music-in-30-days'
+    ],
+    [
+        'image' => 'marketing/pianote/products/read-music-in-30-days/feature-05.webp',
+        'header' => 'Read Music in 30 Days',
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge.</p>',        
+        'badge' => null,
+        'price' => 39,
+        'sku' => 'read-music-in-30-days-workbook'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-04.webp',
+        'header' => 'Pianote Metronome',
+        'description' => '<p>It’s the most important practice tool you’ll ever have.</p>',
+        'price' => 79,
+        'sku' => 'metronome'
     ]
 ];

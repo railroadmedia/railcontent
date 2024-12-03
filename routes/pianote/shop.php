@@ -34,11 +34,11 @@ Route::domain('{pianoteDomain}')
                 Route::get('/faster-fingers', [SalesController::class, 'fasterfingers']);
                 Route::get('/gift-bundle', [SalesController::class, 'giftBundle']);
                 Route::get('/headphones', [SalesController::class, 'headphones']);
+                Route::get('/holiday-bundle', [SalesController::class, 'holidayBundle']);
                 Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina']);
                 Route::get('/metronome', [SalesController::class, 'metronome']);
                 Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers']);
                 Route::get('/piano-technique-made-easy', [SalesController::class, 'pianotechniquemadeeasy']);
-                Route::get('/pianote-deal', [SalesController::class, 'pianoteDeal']);
                 Route::get('/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano']);
                 Route::get('/practice-kit', [SalesController::class, 'practiceKit']);
                 Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);

@@ -38,7 +38,7 @@
                         @if(!empty($bonusVideo['header']))
                             <h5 class="m-0"><strong>{!! $bonusVideo['header'] !!}</strong></h5>
                         @endif
-                        @if(!empty($case) && $case === 'deal')
+                        @if(!empty($case) && $case === 'holiday')
                          <div class="flex items-center flex-wrap space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
                                 <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong></span>
