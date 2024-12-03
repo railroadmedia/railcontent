@@ -41,7 +41,8 @@
                                 <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pr-1 tw-flex tw-items-center tw-relative">
                                     <!-- Streak badge -->
                                     <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ streakBadgeText }}</div>
-                                    <Vue3Lottie class="tw-w-11 lg:tw-w-[46px] -tw-ml-1 tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
+                                    <div v-if="streakDay === 0" class="tw-text-[26px] tw-mx-0.5">🔥</div>
+                                    <Vue3Lottie v-else class="tw-w-11 lg:tw-w-[46px] -tw-ml-1 tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                                     <div>
                                         <div class="tw-font-extrabold">{{ streakDay }}</div>
                                         <div class="tw-flex tw-items-center">
@@ -113,7 +114,8 @@
                             <!-- Streak Badge -->
                             <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ streakBadgeText }}</div>
                             <!-- Streak Lottie -->
-                            <Vue3Lottie animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" width="40px" />
+                            <div v-if="streakDay === 0" class="tw-text-[24px] tw-mx-0.5">🔥</div>
+                            <Vue3Lottie v-else animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" width="40px" />
                             <!-- Streak Text -->
                             <div>
                                 <div class="tw-font-extrabold">{{ streakDay }}</div>
