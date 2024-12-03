@@ -6,6 +6,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Services\UserTimezoneService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -193,7 +194,7 @@ class ChallengesMetaDataController extends Controller
     {
         $userId = user()->id;
         $challenge = $this->challengesService->getChallengeById($id);
-        $startDate = ($challenge['is_solo'] ?? false) ? Carbon::today() : null;
+        $startDate = ($challenge['is_solo'] ?? false) ? Carbon::now() : null;
         $result = $this->challengesService->startChallenge($id, $userId, $startDate);
         if (is_null($result)) {
             return response()->json("Challenge $id not found", status: 404);
@@ -250,10 +251,9 @@ class ChallengesMetaDataController extends Controller
     public function setStartDate(Request $request, int $id): JsonResponse
     {
         $userId = user()->id;
-        //TODO move this to users timezone
-        // Explicitly set to start of day
-        // https://musora.atlassian.net/browse/TCH-40
-        $startDate = \Carbon\Carbon::parse($request->get('start_date'));
+
+        // Always assume the date is being passed in the users timezone, then convert to UTC for storage.
+        $startDate = Carbon::parse($request->get('start_date'));
         $this->challengesService->startChallenge($id, $userId, startDate: $startDate);
         return response()->json();
     }

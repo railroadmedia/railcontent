@@ -8,6 +8,7 @@ use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
+use App\Services\UserTimezoneService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -34,7 +35,7 @@ class ChallengesService
      * @param int $count
      * @return \Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection|User[]
      */
-    private function getEnrolledUsers(int $contentId, int $count = 3)
+    public function getEnrolledUsers(int $contentId, int $count = 3)
     {
         $maxDisplayNameLength = 10;
         $enrolledUserIds = $this->getEnrolledUserIds($contentId);
@@ -157,7 +158,6 @@ class ChallengesService
         }
         $isSolo = ($challenge['is_solo'] ?? false) || !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = $startDate->startOfDay();
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData(
             $challenge,
             startDate: $startDate,
@@ -256,6 +256,26 @@ class ChallengesService
             $lessonDocument['duration_text'] = $this->getDurationText($startDate, $endDate);
         }
 
+        // Adjust unlock dates and status to users local timezone if it's a solo challenge
+        if ($challenge['is_solo']) {
+            $startDateUTC = Carbon::parse($userData['start_date']);
+            $startDateUsersTimezoneUTC = $startDateUTC->copy()->timezone(UserTimezoneService::getUsersCurrentTimezone());
+            $startDateStartOfDayUsersTimezoneRolling = $startDateUsersTimezoneUTC->copy()->startOfDay();
+
+            foreach ($challengeLessons as $challengeLessonIndex => $challengeLesson) {
+                $challengeLessons[$challengeLessonIndex]['unlock_date'] =
+                    $startDateStartOfDayUsersTimezoneRolling->toISOString(true);
+
+                if ($startDateStartOfDayUsersTimezoneRolling->copy()->timezone('UTC') >= Carbon::now()) {
+                    $challengeLessons[$challengeLessonIndex]['is_locked'] = true;
+                } else {
+                    $challengeLessons[$challengeLessonIndex]['is_locked'] = false;
+                }
+
+                $startDateStartOfDayUsersTimezoneRolling->addDay();
+            }
+        }
+
         return [
             'lesson' => $lessonDocument,
             'lessons' => $challengeLessons,
@@ -292,7 +312,6 @@ class ChallengesService
                 $userId = user()->id;
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
-
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
             // TODO TCH-117 - Bonus days redesign

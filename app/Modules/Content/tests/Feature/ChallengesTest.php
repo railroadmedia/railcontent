@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Services\ChallengesService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
+use DateTime;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Mockery\MockInterface;
@@ -629,6 +630,80 @@ class ChallengesTest extends TestCase
         }
     }
 
+    public function test_timezone_logic_for_streaks(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+
+        $challengesService = app()->make(ChallengesService::class);
+
+        // Set the test to start on a specific day and time in UTC
+        $startTimeCarbon = Carbon::create(2024, 12, 1, 6, 3, 0, 'UTC');
+        $this->travelTo($startTimeCarbon);
+
+        // Start the challenge
+        $startDate = Carbon::now()->toISOString();
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: $startDate);
+
+        // Simulate passing the user's timezone in the request
+        $userTimezone = 'America/Los_Angeles';
+
+        foreach ($userProgress->lessons_meta_data as $index => $lessonMetaDatum) {
+            // Simulate the unlock date in the user's timezone
+            $lessonUnlockTime = Carbon::parse($lessonMetaDatum['unlock_date'])
+                ->setTimezone($userTimezone)
+                ->toDateTimeString();
+
+            $this->travelTo(Carbon::parse($lessonUnlockTime));
+
+            // Complete the lesson
+            $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults(
+                $lessonMetaDatum['content_id'],
+                $userId
+            );
+
+            $lessonNumber = $index + 1;
+
+            // Check streak logic for milestones and modal
+            if ($lessonNumber == 5) {
+                $this->assertEquals($lessonNumber, $lessonCompletedProgress['milestone']);
+                $this->assertEquals(
+                    "You're on a {$lessonNumber} Day Streak!",
+                    $lessonCompletedProgress['motivational_title']
+                );
+                $this->assertEquals(
+                    "You've earned an additional freeze token!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } elseif ($lessonNumber == 10) {
+                $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
+                $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
+                $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
+                $this->assertNotNull($lessonCompletedProgress['lottie_url']);
+            } else {
+                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
+                $this->assertEquals(
+                    "Return tomorrow to maintain your streak!",
+                    $lessonCompletedProgress['motivational_subtext']
+                );
+                $this->assertNull($lessonCompletedProgress['lottie_url']);
+            }
+
+            // Validate streak data
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            $this->assertEquals($lessonNumber, $currentStreakData['best']);
+            $this->assertEquals(0, $currentStreakData['missed']);
+
+            // Travel to the next day in the user's timezone
+            $this->travel(1)->days();
+        }
+    }
+
     public function test_index_metadata_for_challenge(): void
     {
         $userId = user()->id;
@@ -1233,6 +1308,25 @@ class ChallengesTest extends TestCase
         $this->assertNotNull($userProgress);
         $this->assertFalse(boolval($userProgress->is_solo));
         $this->assertEquals($tomorrow, $userProgress->start_date->toISOString());
+    }
+
+    public function test_challenge_first_lesson_unlocks_at_time_of_start_exactly(): void
+    {
+        // reset carbon to be actual now, down to the second
+        Carbon::setTestNow(new Carbon(new DateTime()));
+
+        $userId = user()->id;
+        // 402204 - 10 lessons - enrolled - completed
+        $challengeId = 402204;
+        $this->prep_challenge_index(5);
+        $challengesService = app()->make(ChallengesService::class);
+
+        // --- PREP DATA -----
+        $userProgress = $challengesService->startChallenge($challengeId, $userId, Carbon::now()->toISOString());
+        $lessonMetadata = $userProgress->lessons_meta_data;
+
+        $this->assertEquals(Carbon::now()->toISOString(), $lessonMetadata[0]['unlock_date']);
+        $this->assertEquals(Carbon::now()->startOfDay()->addDay()->toISOString(), $lessonMetadata[1]['unlock_date']);
     }
 
     public function test_challenge_purchase_solo_challenge(): void
