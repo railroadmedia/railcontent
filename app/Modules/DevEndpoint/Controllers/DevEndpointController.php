@@ -79,6 +79,12 @@ class DevEndpointController extends Controller
                 $newLessonData = ChallengeUserProgress::defineLessonsMetaData($challenge, $newStartDate);
                 $originalProgress = $progress->lessons_meta_data;
                 foreach($progress->lessons_meta_data as $index => $_) {
+                    $oCompletedDate = $originalProgress[$index]['completed_at'];
+                    if ($oCompletedDate) {
+                        $oCompletedDate = Carbon::parse($oCompletedDate);
+                        $newCompletedDate = $oCompletedDate->subDays($numDays);
+                        $originalProgress[$index]['completed_at'] = $newCompletedDate->toISOString();
+                    }
                     $originalProgress[$index]['unlock_date'] = $newLessonData[$index]['unlock_date'];
                 }
                 $progress->lessons_meta_data = $originalProgress;
