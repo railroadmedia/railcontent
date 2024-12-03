@@ -521,15 +521,8 @@
     <header class="text-white relative overflow-hidden z-10 h-[560px] sm:h-[700px]" style="background-color:#101921;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
-            @if(!empty($bfVersion))
-                <img class="h-10 sm:h-12 lg:h-16 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/header-logo-musora.svg">
-                <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
-                <h5 class="text-[#F61A30] leading-tight"><strong>START A FREE ANNUAL TRIAL & SAVE 20% ON YOUR FIRST YEAR.</strong></h5>
-                <h5 class="font-light">ONLY <span class="opacity-40"><s>$240</s></span> $200 UNTIL DECEMBER 25.</h5>
-            @else
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
             <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play your favorite songs.</h5>
-            @endif
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 my-5 sm:my-7">
                 <a class="sm:mx-0.5 w-full sm:w-56 join musora-gold smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                     @if(!empty($promoVersion))
@@ -547,7 +540,7 @@
                         @if(!empty($cta))
                             {!! $cta !!}
                         @else
-                            START FOR FREE <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
+                            SEE YOUR DEAL &raquo;
                         @endif
                     @elseif(!empty($month))
                         30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
@@ -641,19 +634,6 @@
             'instrument' => 'musical',
         ])
     @else
-        @if($bfVersion)
-        @include('musora.sales.components.order-section-collage-bf', [
-        'headerLight' => true,
-        'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-        'bfLogo' => 'marketing/musora/promos/december/christmas-deal.svg',
-        'header' => '<strong>Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-        <li class="leading-tight mb-3"><i class="fa-li fas fa-check"></i> Personalized feedback from real teachers.</li>
-        <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
-        'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
-        'orderUrl' => '/ecommerce/add-to-cart?products[musora-annual-recurring-membership]=1&locked=true',
-        ])
-        @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
@@ -663,7 +643,6 @@
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
         'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
         ])
-        @endif
     @endif
 
     @include('musora.sales.components.app-section', [
