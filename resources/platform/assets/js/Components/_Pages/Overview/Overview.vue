@@ -50,7 +50,7 @@
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :content="isChallenge ? challengeOverviewContent : data?.children"
+                            :content="data?.children"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -227,6 +227,7 @@ const isChallengeEnrolled = computed(() => {
 })
 
 const generateChallengeCtas = (data) => {
+    console.log('cta', data)
     if(isChallengeEnrolled.value){
         //when next lesson is the first lesson
         if(data.next_lesson.id === data.children[0].id){
@@ -313,10 +314,6 @@ const headerCtas = computed(() => {
 })
 
 onBeforeMount( async () => {
-    if (!isChallenge) {
-        return;
-    }
-
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
 
     //Header Data
@@ -324,20 +321,8 @@ onBeforeMount( async () => {
 
     isUnlocked.value = OverviewData.value?.is_unlocked;
 
+    data.value = OverviewData.value;
+
     platformStore.setLoadingState(OverviewLoading.value);
-
-    // Only fetch OverviewData if parentType is 'challenge'
-    if (isChallenge.value) {
-        const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
-
-        // Overwrite fields in children
-        challengeOverviewContent.value = (OverviewData.value?.children || []).map(item => ({
-            ...item,
-            published_on: item.unlock_date || item.published_on, // Overwrite published_on with unlock_date
-            need_access: false,
-        }));
-    } else {
-        data.value = OverviewData.value;
-    }
 })
 </script>

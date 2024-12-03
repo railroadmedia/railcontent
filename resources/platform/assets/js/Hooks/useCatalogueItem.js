@@ -33,20 +33,25 @@ export default function useCatalogueItem(props) {
         const datePublishedOn = new Date(props.item.published_on).getTime();
         const dateQuarterPublishedOn = props.item.quarter_published ? new Date(props.item.quarter_published).getTime() : null;
 
-        if (userStore.isAdmin) {
-            return true;
-        }
+        // if (userStore.isAdmin) {
+        //     return true;
+        // }
 
-        // If the item is a draft and has a quarter_published date, check if the current date is greater than the quarter_published date
-        if (dateQuarterPublishedOn && props.item.status === 'draft') {
+       if(Object.hasOwn(props.item, 'is_locked')){
+           return !props.item.is_locked;
+       }
+       // If the item is a draft and has a quarter_published date, check if the current date is greater than the quarter_published date
+       else if (dateQuarterPublishedOn && props.item.status === 'draft') {
             return dateNow.value > dateQuarterPublishedOn;
-        }
+       }
 
         return dateNow.value > datePublishedOn;
     });
 
     const releaseDate = computed(() => {
-        if (props.item.quarter_published) {
+        if(props.item.is_locked){
+            return getDate(props.item.unlock_date);
+        } else if (props.item.quarter_published) {
             return getDate(props.item.quarter_published);
         }
 
