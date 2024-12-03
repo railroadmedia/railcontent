@@ -454,5 +454,9 @@ const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
 
+onBeforeMount( ()=> {
+    // console.log('I am in a list catalog item')
+})
+
 </script>
 
