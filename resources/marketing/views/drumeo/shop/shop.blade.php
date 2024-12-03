@@ -68,7 +68,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'Save up to 91% on drum lessons, gear & more!',
+        'text' => 'Save up to 65% on drum lessons, gear & more!',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp',
         'isShop' => true,
     ])
@@ -84,9 +84,9 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/drumshop/holiday-bundle" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl sm:pb-[35%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-full.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-m1.webp');"></div>
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%] sm:pb-[35%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-full-new.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-m-new.webp');"></div>
                         </div>
                     </a>
                     <div class="w-full p-2">
@@ -181,7 +181,7 @@
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->price),
@@ -204,6 +204,14 @@
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
                          "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03b.webp",
+                         'soldOut' => false,
+                    ])
+                    @include('_partials.components.shop.product-card', [
+                        "href" => "/drumshop/practice-pad-full",
+                         "price" => floatval($productPrices['practicepad']->price),
+                         "discounted_price" => floatval($productPrices['practicepad']->discounted_price),
+                         "title" => "The P4 Practice Pad",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-04.webp",
                          'soldOut' => false,
                     ])
                 </div>

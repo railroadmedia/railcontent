@@ -28,7 +28,7 @@
         case 'holiday':
             $borderColor = 'border-[#F61A30]';
             $textColor = 'text-[#F61A30]';
-            $bundlePrice = '<s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br> <p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $692.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br> <p class="text-sm">For your first year, then $240/yr.</p>';
             break;
            case 'holiday-pianote':
             $borderColor = 'border-[#F61A30]';

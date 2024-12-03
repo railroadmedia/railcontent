@@ -62,7 +62,7 @@
                 @if(!empty($cta))
                     {!! $cta !!}
                 @elseif(!empty($promoVersion) && empty($trialVersion))
-                    START FOR FREE <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
+                    SEE YOUR DEAL &raquo;
                 @elseif(!empty($month))
                     30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
