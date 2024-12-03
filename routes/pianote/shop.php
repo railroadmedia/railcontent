@@ -35,6 +35,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/gift-bundle', [SalesController::class, 'giftBundle']);
                 Route::get('/headphones', [SalesController::class, 'headphones']);
                 Route::get('/holiday-bundle', [SalesController::class, 'holidayBundle']);
+                Route::get('/pianote-deal', [SalesController::class, 'pianoteDeal']);
                 Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina']);
                 Route::get('/metronome', [SalesController::class, 'metronome']);
                 Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers']);

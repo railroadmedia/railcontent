@@ -360,14 +360,13 @@
 
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
-            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/CM-header-banner.webp')",
-            'badge' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/save-badge.webp",
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp')",
             'text' => 'Save up to 90% on piano lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
             'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-pianote-deal]=1&promo-code=pianote-deal-2024,pdbonus&locked=true',
         ])
-        
+
         <div class="sticky-trigger block"></div>
         <div href="#customize-anchor"
             class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
@@ -463,7 +462,7 @@
         @else
             @include('musora.sales.components.header-section', [
             'promoHeader' => true,
-            'BFheader' => 'Save $100 + get $635 in free bonuses',
+            'BFheader' => 'books, metronome & 3 digital courses',
                 'header' => 'Piano lessons for<br> <span class="relative inline-block">all skill levels<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/header-thumb2.webp',
@@ -557,26 +556,17 @@
         ])
 
     @elseif(!empty($promoVersion))
-        <a class="text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] transition-none"
-        @if($theme === 'pianote')
-            style="background:linear-gradient(to bottom, #020306, #4d050d);"
-            href="/shop/"
-        @else
-            style="background:linear-gradient(to bottom, #020306, #042c52);"
-            href="/drumshop/"
-        @endif>
-            @include('drumeo._partials.countdown-homepage-2024')
-        </a>
          @php
             $targetSkus = ['metronome', 'read-music-in-30-days-workbook', 'piano-chords-and-scales-guide', 'new-piano-players-start-here', 'read-music-in-30-days', 'easy-chords'];
         @endphp
             <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses-modal', [
-            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',            
+            'maxWidth' => 'max-w-4xl',
+            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
             'logoHeight' => 'h-16 sm:h-20',
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
-            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+            'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/4',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a <br class="hidden md:block">free Metronome, Books, and $381 in digital bonuses.</h2>',
             'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote&locked=true',
             'bundle'=> "holiday-pianote",
@@ -652,12 +642,12 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    @yield('scripts')   
+    @yield('scripts')
     <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');
             if (!stickyBar) return;
-    
+
             window.addEventListener('scroll', function () {
                 var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
                 var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;

@@ -354,7 +354,7 @@
             'text' => 'Save up to 91% on <br class="sm:hidden">drum lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
-            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo&locked=true',
         ])
 
 

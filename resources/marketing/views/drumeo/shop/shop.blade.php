@@ -166,16 +166,6 @@
                             'fetch' => $key < 4 ? true : null,
                         ])
                     @endforeach
-                    <div x-cloak x-show="filter === 'lessons'">
-                        @include('_partials.components.shop.product-card', [
-                            "href" => "/drumshop/drumeo-deal",
-                             "price" => 240,
-                             "discounted_price" => 140,
-                             "title" => "The Drumeo deal",
-                             "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/drumeo-deal-square.webp",
-                             'soldOut' => false,
-                        ])
-                    </div>
                 </div>
                 <div class="-mt-3 sm:-mt-5 lg:-mt-8 mb-10 text-center">
                     <span

@@ -71,65 +71,23 @@
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
         'text' => 'Save up to 90% on piano lessons, gear & more!',
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/save-badge.webp',
         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
         'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
-        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/shop-banner-without-badge.jpg',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/black-friday/xm-banner.webp',
     ])
     @include('_partials.components.shop.index-filters')
 
 
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        @php
-            $bundles = [
-                [
-                    'slug' => '/shop/prima',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full2.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full-m.webp',
-                ],
-                 [
-                    'slug' => '/shop/challenges-bundle',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full-m.webp',
-                ],
-                [
-                    'slug' => '/shop/book-bundle',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full3.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m3.webp',
-                ],
-                [
-                    'slug' => '/shop/prima-ultimate',
-                    'full' => true,
-                    'visible' => 1,
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full2.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full-m.webp',
-                ],
-            ];
-        @endphp
         <section x-show="filter === 'all'">
             <div class="container mx-auto">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
                 <div class="flex flex-wrap mb-5 sm:mb-10">
-                    <a href="/shop/pianote-deal" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal-3.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/pianote-deal-3.webp');"></div>
-                        </div>
-                    </a>
-                    <a href="/lifetime" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-{{--                                <p class="z-20 absolute top-0 left-0 rounded-br-md bg-musora text-black font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs"--}}
-{{--                                style="background-color: #db182c!important;color:#fff!important;"--}}
-{{--                                >Last Chance</p>--}}
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/lifetime-deal2.webp');"></div>
-                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/lifetime-deal2.webp');"></div>
+                    <a href="/shop/holiday-bundle" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl sm:pb-[35%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/holiday-bundle-full.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/holiday-bundle-full-m.webp');"></div>
                         </div>
                     </a>
                     <div class="w-full p-2">
@@ -140,9 +98,54 @@
                                 You won’t be able to add or remove items for any featured bundle.</p>
                         </div>
                     </div>
-                    <div class="w-full">
-                        @include('_partials.layout.holiday.bundle-tiles')
-                    </div>
+                    <a href="/shop/prima" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle3.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-m3.webp');"></div>
+                        </div>
+                    </a>
+                    <a href="/shop/gift-bundle" class="w-full mx-auto p-1 sm:p-2 sm:w-1/2 transition-opacity duration-500 hover:opacity-90">
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/gift-bundle2.webp');"></div>
+                            <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/gift-bundle-m2.webp');"></div>
+                        </div>
+                    </a>
+{{--                    <div class="w-full">--}}
+
+{{--                        @php--}}
+{{--                            $bundles = [--}}
+{{--                                [--}}
+{{--                                    'slug' => '/shop/prima',--}}
+{{--                                    'full' => true,--}}
+{{--                                    'visible' => 1,--}}
+{{--                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full2.webp',--}}
+{{--                                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle-full-m.webp',--}}
+{{--                                ],--}}
+{{--                                 [--}}
+{{--                                    'slug' => '/shop/challenges-bundle',--}}
+{{--                                    'full' => true,--}}
+{{--                                    'visible' => 1,--}}
+{{--                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full.webp',--}}
+{{--                                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/cyber-monday/shop/challenges-bundle-full-m.webp',--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    'slug' => '/shop/book-bundle',--}}
+{{--                                    'full' => true,--}}
+{{--                                    'visible' => 1,--}}
+{{--                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full3.webp',--}}
+{{--                                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle-full-m3.webp',--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    'slug' => '/shop/prima-ultimate',--}}
+{{--                                    'full' => true,--}}
+{{--                                    'visible' => 1,--}}
+{{--                                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full2.webp',--}}
+{{--                                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle-full-m.webp',--}}
+{{--                                ],--}}
+{{--                            ];--}}
+{{--                        @endphp--}}
+{{--                        @include('_partials.layout.holiday.bundle-tiles')--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </section>
@@ -230,49 +233,15 @@
         </section>
 
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
-            <div class="container" x-data="{ showAll: false }">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left"
-                    :class="{ 'show-all': showAll }">
-                    <a class="product-wrap relative text-black pb-4 hover:opacity-90 transition-opacity" data-price="127" href="/shop/challenges-bundle" x-data="{ open: false }">
-                        <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/challenges-bundle-square.jpg');"></div>
-                        <p class="leading-tight font-black mb-1">Challenges Bundle</p>
-                        <p class="leading-tight text-sm mb-1">3 popular courses for the price of 1.</p>
-                        <p class="leading-tight"><s class="opacity-60">$381</s> <strong class="text-pianote font-extrabold">$127</strong> <span class="ml-1 text-xs bottom-0 font-black text-black rounded-md px-1.5 leading-none py-1 inline-block bg-musora align-bottom">Save 66%</span></p>
-                    </a>
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/shop/book-bundle",
-                         "price" => 1321,
-                         "discounted_price" => 399,
-                         "title" => "The Book Bundle",
-                         "instructor" => "Get the best online piano lessons and a library of piano books",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/book-bundle3.webp",
-                         'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/shop/prima",
-                         "price" => 1374,
-                         "discounted_price" => 599,
-                         "title" => "The Keyboard Bundle",
-                         "instructor" => "Get the best beginner digital piano, Pianote Annual Membership, and 5 lifetime bonuses",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/keyboard-bundle.webp",
-                         'soldOut' => false,
-                    ])
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/shop/prima-ultimate",
-                         "price" => 1642,
-                         "discounted_price" => 799,
-                         "title" => "The ULTIMATE Bundle",
-                         "instructor" => "Everything you need to start playing the piano",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/ultimate-bundle.webp",
-                         'soldOut' => false,
-                    ])
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/shop/metronome",
                          "price" => floatval($productPrices['taktell-piccolo-metronome']->price),
                          "discounted_price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
                          "title" => "The Pianote Metronome",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-01.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-01b.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -280,7 +249,7 @@
                          "price" => floatval($productPrices['pianote-book-bag']->price),
                          "discounted_price" => floatval($productPrices['pianote-book-bag']->discounted_price),
                          "title" => "The Pianote BookBag",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-02.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-02b.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -288,25 +257,17 @@
                          "price" => floatval($productPrices['piano-chords-and-scales-guide']->price),
                          "discounted_price" => floatval($productPrices['piano-chords-and-scales-guide']->discounted_price),
                          "title" => "Piano Chords & Scales",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-03.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-03b.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
-                        "href" => "/shop/headphones",
-                         "price" => floatval($productPrices['pianote-headphones-2024']->price),
-                         "discounted_price" => floatval($productPrices['pianote-headphones-2024']->discounted_price),
-                         "title" => "Pianote Headphones",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04.webp",
+                        "href" => "/shop/christmas-songbook",
+                         "price" => floatval($productPrices['christmas-songbook']->price),
+                         "discounted_price" => floatval($productPrices['christmas-songbook']->discounted_price),
+                         "title" => "The Pianote Christmas Songbook",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/doorcrasher-04b.webp",
                          'soldOut' => false,
                     ])
-                </div>
-                <div class="-mt-3 sm:-mt-5 lg:-mt-8 sm:mt- lg:mb-10 text-center">
-                    <span
-                        @click="showAll = true"
-                        x-show="!showAll"
-                        class="join outline black smaller">
-                        See More
-                    </span>
                 </div>
             </div>
         </section>
