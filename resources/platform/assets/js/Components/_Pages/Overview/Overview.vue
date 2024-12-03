@@ -224,7 +224,7 @@ const isChallenge = computed(() => {
 
 const isChallengeEnrolled = computed(() => {
     return data.value?.user_data?.is_active;
-})z
+})
 
 const isChallengeSolo = computed(() => {
     return data.value?.lesson?.is_solo;
