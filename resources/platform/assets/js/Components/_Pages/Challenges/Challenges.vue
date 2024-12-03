@@ -95,11 +95,7 @@ const tabData = computed(() => {
 onBeforeMount(() => {
     const fetchData = async () => {
         const challengeCarousels = await fetchCarouselCardData({ brand: brand.value });
-        const filtered = challengeCarousels.filter(function(card){
-            return card.type !== "onboarding";
-        });
-
-        carousels.value = filtered;
+        carousels.value = challengeCarousels;
 
         collectionStore.setDefaults({
             tabOptions: tabData.value,
