@@ -26,7 +26,7 @@ class BootCamp extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Boot Camps', true);
+        parent::__construct(self::getName(), 'Boot Camps', true, withLiveEvent: true);
     }
     public static function getName(): string
     {
