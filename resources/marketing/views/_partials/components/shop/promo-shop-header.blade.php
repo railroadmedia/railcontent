@@ -1,6 +1,6 @@
 <header class="text-white text-center relative z-10 overflow-hidden  sm:px-6
 @if($theme === 'drumeo' || $theme === 'pianote')
-    py-6 sm:pb-12
+    py-6 sm:py-12
 @else
     py-6 sm:py-12 lg:py-16
 @endif
@@ -9,10 +9,10 @@
         @if($theme === 'drumeo' || $theme === 'pianote')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-16 sm:h-24 lg:h-28 mb-4 sm:mb-5 mx-auto'
+                    'styles' => 'h-12 sm:h-16 lg:h-20 mb-4 sm:mb-5 mx-auto'
                 ])
             </a>
-            <h5 class="leading-tight">{!! $text !!}</h5>
+            <h6 class="leading-tight">{!! $text !!}</h6>
 
 {{--            <div x-data="timer()" x-init="countdown()" --}}{{--x-cloak x-show="day < 8"--}}{{-->--}}
 {{--                <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00D7FF]">--}}

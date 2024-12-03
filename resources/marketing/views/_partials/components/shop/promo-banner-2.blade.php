@@ -15,7 +15,7 @@
             @include($theme.'._partials.holiday-logo',[
                 'styles' => 'w-auto h-10 sm:h-14',
                 'isProductPage' => true,
-                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
+                'productPageStyles' => 'w-auto h-10 sm:h-14 p-2'
             ])
         </a>
         <span class="text-center sm:text-right flex flex-wrap items-center sm:justify-end">
