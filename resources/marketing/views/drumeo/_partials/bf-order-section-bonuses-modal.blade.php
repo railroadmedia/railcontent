@@ -35,6 +35,11 @@
             $textColor = 'text-[#00D7FF]';
             $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#00D7FF] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
+        case 'holiday':
+            $borderColor = 'border-[#F61A30]';
+            $textColor = 'text-[#F61A30]';
+            $bundlePrice = '<s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            break;
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
             $textColor = 'text-[#CF03DA]';
@@ -113,8 +118,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if($bundle == 'deal')
-                                        <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s></span><strong> $140</strong></p>
+                                    @if($bundle == 'holiday')
+                                        <p class="w-full leading-normal mt-2 uppercase text-xl"><strong> $240</strong></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
                                     @endif
@@ -217,7 +222,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($bundle == 'deal')
+                            @if($bundle == 'holiday')
                             <p class="w-full leading-normal mt-2">
                                 {{-- @if(!empty($bonus['title']))
                                     <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>

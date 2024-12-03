@@ -350,8 +350,7 @@
 
     @if(!empty($bfVersion))
         @include('_partials.layout.holiday.homepage-top-banner',[
-            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/CM-header-banner.webp')",
-            'badge' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/cm-save-badge.webp",
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp')",
             'text' => 'Save up to 91% on <br class="sm:hidden">drum lessons, gear & more!',
             'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
             'vimeo' => '885338636',
@@ -365,40 +364,6 @@
             style="    background: linear-gradient(to bottom, #020306, #042c52);">
             @include('drumeo._partials.countdown-homepage-2024')
         </div>
-
-        <div class="sticky-trigger block"></div>
-        <a href="#customize-anchor"
-            class="promo-banner anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] -mt-12 transition-none"
-            style="background: #FFAC00;">
-
-            <div x-data="timer()" x-init="countdown()"
-                {{--                x-cloak x-show="day < 2"--}}
-            >
-                <div class="inline-flex flex-wrap mx-auto justify-center items-center">
-                    <p class="leading-none m-0 font-black"><strong>DEALS END IN:</strong></p>
-                    <div class="h-8 mx-2 bg-black" style="width:2px;"></div>
-                    <div class="flex text-center">
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="day">00</div>
-                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="hour">00</div>
-                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="minute">00</div>
-                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
-                        </div>
-                        <div x-show="timeLeft > 0">
-                            <div class="text-lg leading-none font-extrabold" x-text="second">00</div>
-                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>
-                        </div>
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
-                    </div>
-                </div>
-            </div>
-        </a>
     @endif
 
 
@@ -489,7 +454,7 @@
     @else
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
-            'BFheader' => 'Save $100 + get $635 in free bonuses',
+            'BFheader' => 'Get a practice pad, sticks & 3 digital courses.',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
@@ -584,19 +549,19 @@
 
     @elseif(!empty($promoVersion))
         @php
-            $targetSkus = ['30-day-drummer-4', '30-day-independence', '30-day-double-bass', '30-day-jazz', '30-day-chops'];
+            $targetSkus = ['quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
         @endphp
 
         @include('drumeo._partials.bf-order-section-bonuses-modal', [
-        'bgColor' => 'background:linear-gradient(to bottom, #131633, #000);',
-        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/drumeo-deal-logo.svg',
+        'bgColor' => 'background:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/2024/xm-bg.webp);',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
         'logoHeight' => 'h-16 sm:h-18',
-        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Save $100 on your first year + get $635 in lifetime bonuses.</strong></h3>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-drumeo-deal]=1&promo-code=drumeo-deal-2024,ddbonus&locked=true',
+        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a free</strong> <br> QuietPad, drumsticks and $381 in digital bonuses.</h3>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo&locked=true',
         'belowButton' => true,
-        'bundle' => 'deal',
+        'bundle' => 'holiday',
         ])
 
         @php

@@ -30,27 +30,27 @@
 {{--                    @endif--}}
 {{--                </p>--}}
                 @if(empty($noCountdown))
-                    <div class="mx-auto border-l-2 border-white pl-4 ml-2 sm:ml-4" x-data="timer()" x-init="countdown()" {{--x-cloak x-show="day < 8"--}}>
-                        <div class="flex text-center mx-auto sm:mx-0">
-                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">
-                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(day).padStart(2, '0')">00</div>
-                                <div class="text-xs font-bold text-{{ $theme }}" x-text="dayText">DAYS</div>
-                            </div>
-                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">
-                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(hour).padStart(2, '0')">00</div>
-                                <div class="text-xs font-bold text-{{ $theme }}" x-text="hourText">HRS</div>
-                            </div>
-                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">
-                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(minute).padStart(2, '0')">00</div>
-                                <div class="text-xs font-bold text-{{ $theme }}" x-text="minuteText">MIN</div>
-                            </div>
-                            <div x-show="timeLeft > 0">
-                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(second).padStart(2, '0')">00</div>
-                                <div class="text-xs font-bold text-{{ $theme }}" x-text="secondText">SEC</div>
-                            </div>
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
-                        </div>
-                    </div>
+{{--                    <div class="mx-auto border-l-2 border-white pl-4 ml-2 sm:ml-4" x-data="timer()" x-init="countdown()" --}}{{--x-cloak x-show="day < 8"--}}{{-->--}}
+{{--                        <div class="flex text-center mx-auto sm:mx-0">--}}
+{{--                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0 && day > 0">--}}
+{{--                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(day).padStart(2, '0')">00</div>--}}
+{{--                                <div class="text-xs font-bold text-{{ $theme }}" x-text="dayText">DAYS</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">--}}
+{{--                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(hour).padStart(2, '0')">00</div>--}}
+{{--                                <div class="text-xs font-bold text-{{ $theme }}" x-text="hourText">HRS</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="mr-3 sm:mr-4" x-show="timeLeft > 0">--}}
+{{--                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(minute).padStart(2, '0')">00</div>--}}
+{{--                                <div class="text-xs font-bold text-{{ $theme }}" x-text="minuteText">MIN</div>--}}
+{{--                            </div>--}}
+{{--                            <div x-show="timeLeft > 0">--}}
+{{--                                <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(second).padStart(2, '0')">00</div>--}}
+{{--                                <div class="text-xs font-bold text-{{ $theme }}" x-text="secondText">SEC</div>--}}
+{{--                            </div>--}}
+{{--                            <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 @endif
         </span>
     </div>
@@ -72,31 +72,31 @@
                             'styles' => 'logo',
                         ])
                     </a>
-                    <div x-data="timer()" x-init="countdown()"
-                        {{--                x-cloak x-show="day < 2"--}}
-                    >
-                        <div class="inline-flex flex-wrap mx-auto justify-center items-center">
-                            <div class="flex text-center border-l-2 border-white pl-4 ml-2 sm:ml-2">
-                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0 && day > 0">
-                                    <div class="text-base leading-none font-extrabold" x-text="String(day).padStart(2, '0')">00</div>
-                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="dayText">DAYS</div>
-                                </div>
-                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0">
-                                    <div class="text-base leading-none font-extrabold" x-text="String(hour).padStart(2, '0')">00</div>
-                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="hourText">HRS</div>
-                                </div>
-                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0">
-                                    <div class="text-base leading-none font-extrabold" x-text="String(minute).padStart(2, '0')">00</div>
-                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="minuteText">MIN</div>
-                                </div>
-                                <div x-show="timeLeft > 0">
-                                    <div class="text-base leading-none font-extrabold" x-text="String(second).padStart(2, '0')">00</div>
-                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="secondText">SEC</div>
-                                </div>
-                                <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div x-data="timer()" x-init="countdown()"--}}
+{{--                        --}}{{--                x-cloak x-show="day < 2"--}}
+{{--                    >--}}
+{{--                        <div class="inline-flex flex-wrap mx-auto justify-center items-center">--}}
+{{--                            <div class="flex text-center border-l-2 border-white pl-4 ml-2 sm:ml-2">--}}
+{{--                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0 && day > 0">--}}
+{{--                                    <div class="text-base leading-none font-extrabold" x-text="String(day).padStart(2, '0')">00</div>--}}
+{{--                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="dayText">DAYS</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0">--}}
+{{--                                    <div class="text-base leading-none font-extrabold" x-text="String(hour).padStart(2, '0')">00</div>--}}
+{{--                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="hourText">HRS</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="mr-2 sm:mr-3" x-show="timeLeft > 0">--}}
+{{--                                    <div class="text-base leading-none font-extrabold" x-text="String(minute).padStart(2, '0')">00</div>--}}
+{{--                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="minuteText">MIN</div>--}}
+{{--                                </div>--}}
+{{--                                <div x-show="timeLeft > 0">--}}
+{{--                                    <div class="text-base leading-none font-extrabold" x-text="String(second).padStart(2, '0')">00</div>--}}
+{{--                                    <div class="text-xs font-semibold text-{{ $theme }}" x-text="secondText">SEC</div>--}}
+{{--                                </div>--}}
+{{--                                <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 {{--                    <p>--}}
 {{--                        @if(!empty($price))--}}
 {{--                            @if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}
