@@ -96,7 +96,7 @@
 
             @include('drumeo._partials.bf-bonus-section', [
             'videoTargetSkus' => $videoTargetSkus,
-            'case' => 'holiday-pianote',
+            'case' => 'holiday',
             'getDealUrl' => $orderUrl,
             ])
         </div>
