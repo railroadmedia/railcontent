@@ -79,7 +79,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
+const step = ref(1);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -137,6 +137,9 @@ const handleNext = async () => {
             else {
                 step.value = 2;
             }
+        }
+        else{
+            step.value = 2;
         }
     } catch (e) {
         window.shownotification({
