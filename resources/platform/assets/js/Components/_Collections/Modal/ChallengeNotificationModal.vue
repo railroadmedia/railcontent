@@ -161,8 +161,7 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-         //TODO(challenge): remove content_id when migrating with MCS in enrollment page
-         await postChallengesSetStartDate(props.challenge.content_id || props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+         await postChallengesSetStartDate(props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
          const date = new Date();
          if(selectedDate.value.getFullYear() === date.getFullYear()
              && selectedDate.value.getMonth() === date.getMonth()
