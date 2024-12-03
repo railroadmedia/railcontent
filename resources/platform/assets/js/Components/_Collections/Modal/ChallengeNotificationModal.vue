@@ -8,7 +8,7 @@
 
             <!-- Step 1 -->
             <template v-if="step === 1">
-                <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in 30-Day Drummer!</h1>
+                <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in {{ challengeTitle }}!</h1>
                 <p class="tw-mb-5 tw-text-left">Next, choose if you would like to receive practice reminders for this Challenge (make sure you download the app to get push notifications).</p>
                 <ul class="tw-text-left">
                     <li class="tw-mb-5"><input class="tw-mr-[10px]" type="radio" :value="true" v-model="selectedFrequency" /> <label>Yes, send me practice reminders!</label></li>
@@ -83,7 +83,7 @@ const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
 
 const selectedFrequency = ref(true);
-const step = ref(1);
+const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeType === 'community' ? 1 : 2);
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
@@ -93,10 +93,12 @@ const challengeData = ref({
 
 const userNames = computed(() => {
     const names = [];
-    // TODO this causes a crash because fetchChallengeMetadata has not yet returned before this is read
-    // challengeData.value.entity.forEach((user) => {
-    //     names.push(user.display_name);
-    // });
+
+    if(challengeData.value?.entity && challengeData.value.entity.length > 0){
+        challengeData.value.entity.forEach((user) => {
+            names.push(user.display_name);
+        });
+    }
 
     return names.join(', ');
 })
@@ -128,7 +130,6 @@ const handleNext = async () => {
         if(props.challengeType === 'community'){
             if(selectedFrequency.value){
                 const setNotification = await postChallengesCommunityNotification(props.challenge.id);
-                //TODO this doesn't return in time bofer userNames is accessed
                 const data = await fetchChallengeMetadata(props.challenge.id);
                 challengeData.value = data.data;
                 step.value = 2;

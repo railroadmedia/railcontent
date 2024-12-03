@@ -303,7 +303,7 @@
         ...cohort,
         dark_mode_logo_url: cohort['dark_mode_logo'],
         light_mode_logo_url: cohort['light_mode_logo'],
-    }" :challenge-type="'solo'" @modal-close="closeNotificationModal" />
+    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
     <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
