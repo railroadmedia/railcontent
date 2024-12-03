@@ -153,6 +153,10 @@ class ContentProgressService
         $parentIds = $this->getParentIds($contentId);
 
         foreach ($parentIds as $parentId) {
+            // TODO why does this happen sometimes?
+            if (!$parentId) {
+                continue;
+            }
             $progress = $this->getProgressPercentage($parentId, $userId);
 
             if ($progress == 100) {
