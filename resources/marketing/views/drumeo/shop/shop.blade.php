@@ -187,7 +187,7 @@
                          "price" => floatval($productPrices['stickbag']->price),
                          "discounted_price" => floatval($productPrices['stickbag']->discounted_price),
                          "title" => "Drumeo StickBag",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01b.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01c.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -195,7 +195,7 @@
                          "price" => floatval($productPrices['drumeo-eardrums-black']->price),
                          "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "title" => "Drumeo EarDrums In-Ear Monitors",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02b.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02c.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [

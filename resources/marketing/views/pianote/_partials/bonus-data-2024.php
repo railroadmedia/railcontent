@@ -5,7 +5,7 @@ $bonusVideos = [
         'header' => 'Pianote 1-Year Access Pass',
         'description' => '<p>The one-year access pass for gifting a full year of lessons without an ongoing subscription. You’ll get a physical access pass that you, or anyone, can redeem anytime – loaded with the lessons they’ll love to reach all of their goals on the piano.</p>',
         'vimeoId' => '785314388',
-        'offerPrice' => '<span class="opacity-30"><strong><s>$240</strong> Value</s></span>',
+        'offerPrice' => '<span><strong>$240</strong></span>',
         'sku' => '1-year-membership'
     ],
     [
@@ -163,11 +163,12 @@ $bonusVideos = [
         'sku' => 'classical-piano-pieces'
     ],
     [
-        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC.webp',
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC-new.webp',
         'header' => 'Read Music in 30 Days',
         'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
         'badge' => null,
         'price' => 127,
+        'vimeoId' => '952486575',
         'sku' => 'read-music-in-30-days'
     ],
     [
