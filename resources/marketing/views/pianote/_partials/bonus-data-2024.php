@@ -163,11 +163,12 @@ $bonusVideos = [
         'sku' => 'classical-piano-pieces'
     ],
     [
-        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC.webp',
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC-new.webp',
         'header' => 'Read Music in 30 Days',
         'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
         'badge' => null,
         'price' => 127,
+        'vimeoId' => '952486575',
         'sku' => 'read-music-in-30-days'
     ],
     [
