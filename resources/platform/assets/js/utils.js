@@ -144,7 +144,7 @@ export const toKebabCase = (string) => {
 };
 
 /**
- * Retrieve date in LLL d/yy format from timestamp
+ * Retrieve date in LLL d/yy, h:mma format from timestamp
  * @param dateString
  * @returns {string|null}
  */
@@ -156,11 +156,22 @@ export const getDate = (dateString) => {
     const date = new Date(dateString);
     if (isNaN(date)) return null;
 
-    const formatter = new Intl.DateTimeFormat('en-US', {
+    // Create a formatter for date
+    const dateFormatter = new Intl.DateTimeFormat('en-US', {
         month: 'short',
-        day: 'numeric',
-        year: '2-digit',
+        day: 'numeric'
     });
 
-    return formatter.format(date).replace(/, /g, '/');
+    // Create a formatter for time
+    const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+    });
+
+    // Format date and time
+    const formattedDate = dateFormatter.format(date).replace(/, /g, '/');
+    const formattedTime = timeFormatter.format(date).toLowerCase(); // Convert to lowercase for 'am/pm'
+
+    return `${formattedDate} - ${formattedTime}`;
 };
