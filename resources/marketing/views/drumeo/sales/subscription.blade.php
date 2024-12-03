@@ -562,7 +562,7 @@
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
         'logoHeight' => 'h-16 sm:h-18',
-        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong> Get a Drumeo Membership with $453.95 in free bonuses.</strong></h3>',
+        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong> Get a Drumeo Membership with $452.95 in free bonuses.</strong></h3>',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo&locked=true',
         'belowButton' => true,
         'bundle' => 'holiday',
