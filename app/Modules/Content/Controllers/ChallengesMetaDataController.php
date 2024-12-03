@@ -180,7 +180,9 @@ class ChallengesMetaDataController extends Controller
     public function enrollUser(int $id)
     {
         $userId = user()->id;
-        $result = $this->challengesService->startChallenge($id, $userId);
+        $challenge = $this->challengesService->getChallengeById($id);
+        $startDate = ($challenge['is_solo'] ?? false) ? Carbon::today() : null;
+        $result = $this->challengesService->startChallenge($id, $userId, $startDate);
         if (is_null($result)) {
             return response()->json("Challenge $id not found", status: 404);
         }
