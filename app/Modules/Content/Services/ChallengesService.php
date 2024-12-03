@@ -296,8 +296,8 @@ class ChallengesService
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
             // TODO TCH-117 - Bonus days redesign
-            $isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
-            $shouldLessonBeLocked =  $isLocked && !$isPreviousLessonCompleted && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
+            //$isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
+            $shouldLessonBeLocked =  $isLocked && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
             $lessons[$index]['completed'] = $isCompleted;
