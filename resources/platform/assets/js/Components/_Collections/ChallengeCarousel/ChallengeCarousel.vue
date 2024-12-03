@@ -67,7 +67,7 @@ const showCard = (card) => {
     if(isHomepage.value || isDashboard.value) {
         return true;
     } else {
-        return card.show_everywhere;
+        return !card.show_everywhere;
     }
 }
 </script>
