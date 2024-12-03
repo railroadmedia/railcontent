@@ -59,6 +59,10 @@ const isDashboard = computed(() => {
     return props.type === 'dashboard';
 })
 
+const isChallenge = computed(() => {
+    return props.type === 'challenge';
+})
+
 const showEnrollmentAward = (card) => {
     return card.type === 'challenge-award' && !card.is_user_enrolled;
 }
@@ -66,7 +70,7 @@ const showEnrollmentAward = (card) => {
 const showCard = (card) => {
     if(isHomepage.value || isDashboard.value) {
         return true;
-    } else {
+    } else if(isChallenge.value) {
         return !card.show_everywhere;
     }
 }

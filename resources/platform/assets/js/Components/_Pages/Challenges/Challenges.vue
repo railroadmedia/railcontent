@@ -14,7 +14,7 @@
                 :see-all-url="`/${brand}/challenge`"
                 seeAllAriaLabel="See All Challenges"
                 catalogue-type="challenge"
-                page-type="home"
+                page-type="challenge"
                 :preLoadedContent="carousels"
             />
 
