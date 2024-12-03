@@ -314,7 +314,6 @@ const ctaObj = computed(() => {
         else if(isEnrollmentOpened.value && !isUserEnrolled.value){
             obj.text = 'Learn More';
             obj.url = props.challenge.registration_url;
-            console.log(obj.url !== undefined)
         }
     }
 
