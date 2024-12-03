@@ -572,7 +572,7 @@
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3',
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Get a Pianote Membership with $538 in free bonuses.</h2>',
-            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote&locked=true',
+            'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote,holiday-bundle-shipping&locked=true',
             'bundle'=> "holiday-pianote",
             ])
 

@@ -61,7 +61,7 @@
         else {
             $stock = 0;
         }
-        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo&locked=true';
+        $orderUrl = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo,holiday-bundle-shipping&locked=true';
     @endphp
 
     <header class="text-white relative overflow-hidden z-10 object-cover object-center h-[640px] md:h-[700px] lg:h-[880px]" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/header-bg.webp') no-repeat center center; background-size: cover;">
@@ -129,7 +129,7 @@
         @endphp
             <div id="customize-anchor"></div>
             @include('drumeo._partials.bf-order-section-bonuses-modal', [
-            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',            
+            'bgColor' => 'background-image: url(\'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-bg.webp\'); background-repeat: no-repeat; background-size: cover;',
             'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
             'topImage' => 'marketing/drumeo/promos/november/2024/bonuses-bottom/bonus-am.webp',
             'logoHeight' => 'h-14 sm:h-18 md:h-24',

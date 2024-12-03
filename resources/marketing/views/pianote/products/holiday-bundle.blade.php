@@ -46,7 +46,7 @@
 @endsection
 @php
 
-    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote&locked=true';
+    $orderUrl = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[the-holiday-bundle-pianote]=1&promo-code=holiday-bundle-pianote,holiday-bundle-shipping&locked=true';
     $stock = !empty($products['alesis-ekit']->getPublicStockCount())
   ? $products['alesis-ekit']->getPublicStockCount()
   : 0;
