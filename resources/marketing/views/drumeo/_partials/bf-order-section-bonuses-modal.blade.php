@@ -189,6 +189,7 @@
                         <div
                             class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
                         >
+                         @if(!empty($bonus['vimeoId']))
                             <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                                 <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                     <div
@@ -219,14 +220,47 @@
                                                 @endif
                                             </picture>
                                         </div>
-                                        @if(!empty($bonus['vimeoId']))
+                                       
                                         <div class="absolute z-40 text-center top-[40%] left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible" @click="modal{{ $bonus['vimeoId'] }} = true">
                                             <i class="text-2xl fas fa-play play-button autoplay-video hover:opacity-80 border-4 border-solid border-white rounded-full cursor-pointer mt-24 mb-12 text-3xl py-3 px-5 duration-300" style="background:rgba(0, 0, 0, 0.6);"></i><br>
                                         </div>
-                                        @endif
+                                       
                                     </div>
                                 </div>
                             </div>
+                             @else
+                                <div x-data="{ flipped: false }" x-on:click="flipped = !flipped; if(flipped){ $refs.front.classList.add('rotate-y-180'); $refs.back.classList.remove('-rotate-y-180'); $refs.back.classList.add('rotate-y-0'); } else { $refs.front.classList.remove('rotate-y-180'); $refs.back.classList.add('-rotate-y-180'); $refs.back.classList.remove('rotate-y-0'); }">
+                                    <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                                        <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                            <div x-ref="front" class="border-2 front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 {{ $borderColor }}" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                                @if(!empty($bonus['badge']))
+                                                    <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
+                                                @endif
+                                                <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true">
+                                                    <picture class="absolute inset-0 w-full h-full object-cover">
+                                                        @if(!empty($bonus['imageFull']))
+                                                            <source srcset="{{ $bonus['image'] }}" media="(min-width: 640px)">
+                                                            <img src="{{ $bonus['image'] }}" alt="Bonus Image" class="w-full h-full object-cover opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                                        @else
+                                                            <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $bonus['image'] }}" media="(min-width: 640px)">
+                                                            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/{{ $bonus['image'] }}" alt="Bonus Image" class="w-full h-full object-cover opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                                        @endif
+                                                    </picture>
+                                                </div>
+                                                <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                                    <i class="fas fa-arrow-right text-4xl"></i><br>
+                                                    <p class="text-sm"><strong>DETAILS</strong></p>
+                                                </div>
+                                            </div>
+                                            <div x-ref="back" class="back border-2 absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180 {{ $borderColor }}" style="backface-visibility: hidden;">
+                                                <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                                    <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
                             <p class="w-full leading-normal mt-2">
                                 {{-- @if(!empty($bonus['title']))
