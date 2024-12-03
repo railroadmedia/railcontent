@@ -33,9 +33,9 @@ export default function useCatalogueItem(props) {
         const datePublishedOn = new Date(props.item.published_on).getTime();
         const dateQuarterPublishedOn = props.item.quarter_published ? new Date(props.item.quarter_published).getTime() : null;
 
-        // if (userStore.isAdmin) {
-        //     return true;
-        // }
+        if (userStore.isAdmin) {
+            return true;
+        }
 
        if(Object.hasOwn(props.item, 'is_locked')){
            return !props.item.is_locked;
