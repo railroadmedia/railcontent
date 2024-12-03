@@ -50,7 +50,7 @@
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
                         <ListCatalogue
-                            :content="data?.children"
+                            :content="isChallenge ? challengeOverviewContent : data?.children"
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -194,6 +194,7 @@ const { isLoading } = storeToRefs(platformStore);
 
 //Refs
 const data = ref(null);
+const challengeOverviewContent = ref([]);
 const header = ref(null);
 const error = ref(null);
 const isUnlocked = ref(false); //challenge dropdown
@@ -312,19 +313,31 @@ const headerCtas = computed(() => {
 })
 
 onBeforeMount( async () => {
-    // console.log('content type is', props.contentType)
-    // console.log('headerData', props.headerData.ctas)
-    // console.log('sanity content is: ', props.contentType);
+    if (!isChallenge) {
+        return;
+    }
+
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
+
+    //Header Data
+    header.value = OverviewData.value.header;
+
+    isUnlocked.value = OverviewData.value?.is_unlocked;
+
+    platformStore.setLoadingState(OverviewLoading.value);
+
+    // Only fetch OverviewData if parentType is 'challenge'
+    if (isChallenge.value) {
+        const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
+
+        // Overwrite fields in children
+        challengeOverviewContent.value = (OverviewData.value?.children || []).map(item => ({
+            ...item,
+            published_on: item.unlock_date || item.published_on, // Overwrite published_on with unlock_date
+            need_access: false,
+        }));
+    } else {
         data.value = OverviewData.value;
-        //console.log('overview page data', data.value)
-
-        //Header Data
-        header.value = OverviewData.value.header;
-
-        isUnlocked.value = OverviewData.value?.is_unlocked;
-
-        //console.log('my data', data.value)
-        platformStore.setLoadingState(OverviewLoading.value);
+    }
 })
 </script>

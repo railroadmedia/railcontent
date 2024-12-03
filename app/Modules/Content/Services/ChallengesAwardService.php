@@ -9,11 +9,9 @@ use Modules\UserManagementSystem\Models\User;
 
 class ChallengesAwardService
 {
-
     public function __construct(
         private ChallengesService $challengesService,
-    )
-    {
+    ) {
     }
 
     /**
@@ -26,7 +24,7 @@ class ChallengesAwardService
         $challengeIds = $challengeProgress->pluck('content_id')->toArray();
         $challenges = $this->challengesService->getChallengeByIds($challengeIds, $brand);
         $badges = [];
-        $challenges = collect($challenges)->keyBy('content_id');
+        $challenges = collect($challenges)->keyBy('railcontent_id');
         foreach($challengeProgress as $progress) {
             $challenge = $challenges->get($progress->content_id);
             if ($challenge) {

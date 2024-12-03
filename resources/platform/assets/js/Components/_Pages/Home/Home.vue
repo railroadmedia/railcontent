@@ -79,6 +79,14 @@
                 trackingSection="new"
             />
 
+            <!-- Playlist section add arrows -->
+            <ListSection
+                v-if="usersList.length"
+                :newContentUrl="newContentUrl"
+                :usersList="playlistsStore.playlists"
+                :my-list-url="`/${brand}/playlists`"
+            />
+
             <!-- Live section -->
             <CoachEvent
                 v-if="coachEvent  && !isV2User"
@@ -131,8 +139,13 @@
             />
 
             <!-- Dashboard section -->
-            <DashboardSection v-if="isV2User" :accountUrl="accountUrl" :xp-earned="userMetrics.xp.value" :minutes-practiced="userMetrics.practiced.value"
-                :user-level-title="userMetrics.xp.label" />
+            <DashboardSection
+                v-if="isV2User"
+                :accountUrl="accountUrl"
+                :xp-earned="userMetrics.xp.value"
+                :minutes-practiced="userMetrics.practiced.value"
+                :user-level-title="userMetrics.xp.label"
+            />
 
             <!-- Stats section -->
             <StatsSection
@@ -170,6 +183,7 @@
     import WelcomeMessage from '@collections/WelcomeMessage/WelcomeMessage.vue';
     import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
+    import ListSection from '@collections/ListSection/ListSection.vue';
 
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
