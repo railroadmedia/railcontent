@@ -84,8 +84,8 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Featured</strong></h5>
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/drumshop/holiday-bundle" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90">
-                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-m1.webp');"></div>
+                        <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl sm:pb-[35%]">
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-full.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle-m1.webp');"></div>
                         </div>
                     </a>
@@ -190,23 +190,14 @@
 
         <section class="grid-view category-section" data-category="door-crashers" x-show="filter === 'door-crashers' || filter === 'all'">
             <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Bundles & Door Crashers</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-left">
-                    @include('_partials.components.shop.product-card', [
-                        "href" => "/drumshop/kit",
-                         "price" => 1474,
-                         "discounted_price" => 599,
-                         "title" => "The E-KIT Bundle",
-                         "instructor" => "Save $875 on an electronic drum kit + lessons.",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ekit-bundle.webp",
-                         'soldOut' => false,
-                    ])
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-person-to-door text-{{ $brand }} mr-1"></i> Door Crashers</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
                         "href" => "/drumshop/stickbag",
                          "price" => floatval($productPrices['stickbag']->price),
                          "discounted_price" => floatval($productPrices['stickbag']->discounted_price),
                          "title" => "Drumeo StickBag",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01b.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-01b.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -214,7 +205,7 @@
                          "price" => floatval($productPrices['drumeo-eardrums-black']->price),
                          "discounted_price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
                          "title" => "Drumeo EarDrums In-Ear Monitors",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02b.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-02b.webp",
                          'soldOut' => false,
                     ])
                     @include('_partials.components.shop.product-card', [
@@ -222,7 +213,7 @@
                          "price" => floatval($productPrices['the-drummers-toolbox-book']->price),
                          "discounted_price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                          "title" => "The Drummer’s Toolbox",
-                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03b.webp",
+                         "thumbnailFull" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/740x0/filters:quality(95)/marketing/drumeo/promos/november/2024/doorcrasher-03b.webp",
                          'soldOut' => false,
                     ])
                 </div>
