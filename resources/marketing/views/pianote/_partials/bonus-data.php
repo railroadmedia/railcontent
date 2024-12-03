@@ -278,7 +278,7 @@ $bonuses = [
         'physical' => true
     ],
     [
-        'image' => 'marketing/pianote/products/read-music-in-30-days/feature-05.webp',
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-03.webp',
         'header' => 'Read Music in 30 Days',
         'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
         'badge' => null,
@@ -286,9 +286,10 @@ $bonuses = [
         'sku' => 'read-music-in-30-days'
     ],
     [
-        'image' => 'marketing/pianote/products/read-music-in-30-days/feature-05.webp',
-        'header' => 'Read Music in 30 Days',
-        'description' => '<p>This book has been designed to be used WITH our 30-Day Challenge. Each day’s exercises are exactly the same as the videos, with added explanations. And you’ll find lots of bonus exercises at the back of the book.</p>',        'badge' => null,
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/bonus-06.webp',
+        'header' => 'Companion Book "Read Music in 30 Days"',
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',        
+        'badge' => null,
         'price' => 39,
        'physical' => true,
         'sku' => 'read-music-in-30-days-workbook'
