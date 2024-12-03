@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-model="closeAwardModal" />
+    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-modal="closeAwardModal" />
     <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>

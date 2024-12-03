@@ -91,7 +91,7 @@
                         @open-practice-soundslice="openSlice(videoData.title, videoData.chapters?.length, 0, false)"
                         @on-like-content="likeContent"
                         @on-challenge-lesson-complete="completeChallengeLesson"
-                        @open-challenge-completion-modal="openChallengeCompletionModal" />
+                    />
 
                     <ContentInfo :breadcrumbs="breadcrumbsData" :content-description="videoData.description"
                         :content-chapters="videoData?.chapters" :instructors="videoData?.instructor" />

@@ -213,7 +213,7 @@ const OverviewChildData = computed( () => {
 })
 
 const headerDropdown = computed(() => {
-    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value){
+    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value && isChallengeSolo.value){
         return dropdowns['challenges'];
     }
 })
@@ -226,8 +226,11 @@ const isChallengeEnrolled = computed(() => {
     return data.value?.user_data?.is_active;
 })
 
+const isChallengeSolo = computed(() => {
+    return data.value?.lesson?.is_solo;
+})
+
 const generateChallengeCtas = (data) => {
-    console.log('cta', data)
     if(isChallengeEnrolled.value){
         //when next lesson is the first lesson
         if(data.next_lesson.id === data.children[0].id){
