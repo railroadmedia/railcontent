@@ -236,6 +236,7 @@ class ChallengeUserProgress extends Model
                     'seconds_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
                     'is_always_unlocked' => $isAlwaysUnlocked,
+                    'completed_at' => null,
                 ];
             if (!$lesson['is_always_unlocked_for_challenge']) {
                 // TODO start of day? to hande daylight saving times
