@@ -15,11 +15,11 @@ export default class PlayAlongContentModel extends ContentModel {
 
         if (this.brand === 'guitareo') {
             this.card.color_title = this.getTypeWithIcon();
-            this.card.grey_title = `${this.postInstructor}, ${this.post.difficulty_string} ${this.post.difficulty}`;
+            this.card.grey_title = `${ this.post.artist_name }, ${this.post.difficulty_string} ${this.post.difficulty}`;
 
             this.list.color_title = null;
             this.list.column_data = [
-                this.postInstructor,
+                this.post.artist_name,
                 this.postChildLessonCount,
                 this.postPublisedOn,
             ];

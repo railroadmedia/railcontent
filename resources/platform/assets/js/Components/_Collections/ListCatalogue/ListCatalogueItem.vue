@@ -455,7 +455,7 @@ const openUpgradeModal = () => {
 }
 
 onBeforeMount( ()=> {
-    // console.log('I am in a list catalog item')
+    //console.log('I am in a list catalog item')
 })
 
 </script>
