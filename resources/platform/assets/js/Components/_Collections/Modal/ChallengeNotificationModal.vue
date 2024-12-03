@@ -40,7 +40,7 @@
                 </div>
                 <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other drummers who have already enrolled!</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
-                    <MuButton variant="secondary" class="tw-mr-[9px]">View Challenge</MuButton>
+                    <MuButton variant="secondary" is-link :href="`${challenge.web_url_path}`" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
                 </div>
             </template>

@@ -42,7 +42,7 @@ class ChallengesMetaDataController extends Controller
         $registerButtonUrl = url()->route('challenges.set_start_date', ['id' => $challengeId, 'start_date', $today]);
         $content = $this->challengesService->getChallengeById($challengeId);
         $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
-        $cohort['course_url'] = $content['web_url_path'];
+
         $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
             $challengeId,
             user()->id
@@ -79,6 +79,7 @@ class ChallengesMetaDataController extends Controller
         $keysToCopy = [
             'dark_mode_logo' => 'dark_mode_logo_url',
             'light_mode_logo' => 'light_mode_logo_url',
+            'web_url_path' => 'web_url_path',
         ];
         foreach($keysToCopy as $novaKey => $sanityKey) {
             $cohort[$novaKey] = $content[$sanityKey];
