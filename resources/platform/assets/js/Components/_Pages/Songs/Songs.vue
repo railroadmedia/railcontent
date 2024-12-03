@@ -88,9 +88,10 @@ const ctaConfig = computed(() => {
 });
 
 const headerInfoData = computed(() => {
+    const artistsAmount = artistCount.value !== 0 ? artistCount.value : '';
     return {
         type: 'Link',
-        text: `See all ${artistCount.value} artists`,
+        text: `See all ${artistsAmount} artists`,
         url: `/${brand.value}/artists`
     }
 })
@@ -102,8 +103,10 @@ const tabData = computed(() => {
 onBeforeMount(async() => {
     isLoading.value = true;
     try {
-        const artists = await fetchArtists(brand.value);
-        artistCount.value = artists.length;
+        // TODO: needs to get the length from the API, temporarily unblocked render with 'then'
+        fetchArtists(brand.value).then(artists => {
+            artistCount.value = artists.length;
+        });
 
         // Set default collection store values
         collectionStore.setDefaults({
