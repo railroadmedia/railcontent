@@ -30,6 +30,11 @@
             $textColor = 'text-[#F61A30]';
             $bundlePrice = '<s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br> <p class="text-sm">For your first year, then $240/yr.</p>';
             break;
+           case 'holiday-pianote':
+            $borderColor = 'border-[#F61A30]';
+            $textColor = 'text-[#F61A30]';
+            $bundlePrice = '<s class="opacity-50"> $778</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 69%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            break;
         case 'deal-cyber-monday':
             $borderColor = 'border-[#00D7FF]';
             $textColor = 'text-[#00D7FF]';
@@ -113,8 +118,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if($bundle == 'deal')
-                                        <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s></span><strong> $140</strong></p>
+                                    @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
+                                        <p class="w-full leading-normal mt-2 uppercase text-xl"> <span class="opacity-60">$240</span></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
                                     @endif

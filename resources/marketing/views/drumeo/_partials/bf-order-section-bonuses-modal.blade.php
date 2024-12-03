@@ -123,7 +123,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if($bundle == 'holiday')
+                                    @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
                                         <p class="w-full leading-normal mt-2 uppercase text-xl"><strong> $240</strong></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
@@ -233,13 +233,17 @@
                                     <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                                 @endif --}}
                                 <span style="display:inline-block;">
-                                <s>
+                                <s class="opacity-50">
                                 @if(!empty($bonus['price']))
                                     ${{ $bonus['price'] }}
                                 @endif
                                 </s>
                                 <strong class="{{ $textColor }}">FREE</strong>
+                                @if(empty($bonus['physical']))
                                 <span class="text-white italic block">Lifetime Access</span>
+                                @else 
+                                <span class="text-white italic block">Free Shipping</span>
+                                @endif
 
 
     {{--                                @if(!empty($bonus['customText']))--}}
