@@ -30,8 +30,8 @@ $bonusVideos = [
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
         'badge' => null,
-        'offerPrice' => '<strong><span class="opacity-30 line-through">$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
-        'sku' => 'pianote-membership-deal'
+        'offerPrice' => '<strong><span class="font-black">$240</span></strong>',
+        'sku' => 'pianote-membership-holiday'
     ],
     [
         'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
@@ -161,5 +161,28 @@ $bonusVideos = [
         'badge' => null,
         'price' => 49,
         'sku' => 'classical-piano-pieces'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC.webp',
+        'header' => 'Read Music in 30 Days',
+        'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
+        'badge' => null,
+        'price' => 127,
+        'sku' => 'read-music-in-30-days'
+    ],
+    [
+        'image' => '/marketing/pianote/promos/december/holiday-bundle/RMI30D.webp',
+        'header' => 'Read Music in 30 Days. Companion Book',
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',        
+        'badge' => null,
+        'price' => 39,
+        'sku' => 'read-music-in-30-days-workbook'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/PM.webp',
+        'header' => 'Pianote Metronome',
+        'description' => '<p>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust. The Pianote Metronome will help you keep perfect time – every time.</p>',
+        'price' => 79,
+        'sku' => 'metronome'
     ]
 ];

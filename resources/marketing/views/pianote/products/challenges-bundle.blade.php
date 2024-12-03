@@ -70,11 +70,11 @@
                 <img class="md:hidden object-cover w-full sm:max-w-xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/challenges-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#FA62FF] text-xl md:text-3xl">(Save 66%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true">get the deal</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true">get the deal</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
                     </div>
                 </div>
             </div>
@@ -116,6 +116,7 @@
             'promoHeader' => '<h2 class="leading-tight mb-2"><strong>Get 3 Popular Courses For The Price Of 1</h2></strong><h5 class="italic mb-2 lg:mb-6">no recurring payments - ever.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle-pianote]=1&promo-code=challenges-bundle-pianote&locked=true',
             'bundle'=> "challenges-pianote",
+            'soldOut'=> true,
             ])
     </div>
 

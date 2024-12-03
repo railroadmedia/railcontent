@@ -12,33 +12,33 @@
                     'styles' => 'h-16 sm:h-24 lg:h-28 mb-4 sm:mb-5 mx-auto'
                 ])
             </a>
-{{--            <h5 class="leading-tight my-4 sm:my-5">{!! $text !!}</h5>--}}
+            <h5 class="leading-tight">{!! $text !!}</h5>
 
-            <div x-data="timer()" x-init="countdown()" {{--x-cloak x-show="day < 8"--}}>
-                <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00D7FF]">
-                        <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
-                        <div class="h-12 mx-4 bg-[#00D7FF]" style="width:2px;"></div>
-                    <div class="flex">
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(day).padStart(2, '0')">0</div>
-                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(hour).padStart(2, '0')">0</div>
-                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>
-                        </div>
-                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(minute).padStart(2, '0')">0</div>
-                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
-                        </div>
-                        <div x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(second).padStart(2, '0')">0</div>
-                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>
-                        </div>
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
-                    </div>
-                </div>
-            </div>
+{{--            <div x-data="timer()" x-init="countdown()" --}}{{--x-cloak x-show="day < 8"--}}{{-->--}}
+{{--                <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00D7FF]">--}}
+{{--                        <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>--}}
+{{--                        <div class="h-12 mx-4 bg-[#00D7FF]" style="width:2px;"></div>--}}
+{{--                    <div class="flex">--}}
+{{--                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">--}}
+{{--                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(day).padStart(2, '0')">0</div>--}}
+{{--                            <div class="text-xs font-semibold" x-text="dayText">DAYS</div>--}}
+{{--                        </div>--}}
+{{--                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">--}}
+{{--                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(hour).padStart(2, '0')">0</div>--}}
+{{--                            <div class="text-xs font-semibold" x-text="hourText">HRS</div>--}}
+{{--                        </div>--}}
+{{--                        <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">--}}
+{{--                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(minute).padStart(2, '0')">0</div>--}}
+{{--                            <div class="text-xs font-semibold" x-text="minuteText">MIN</div>--}}
+{{--                        </div>--}}
+{{--                        <div x-show="timeLeft > 0">--}}
+{{--                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="String(second).padStart(2, '0')">0</div>--}}
+{{--                            <div class="text-xs font-semibold" x-text="secondText">SEC</div>--}}
+{{--                        </div>--}}
+{{--                        <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         @else
             <h1 class="uppercase leading-none sm:leading-none text-4xl sm:text-7xl mb-2">
                 <strong>

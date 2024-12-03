@@ -25,15 +25,25 @@
             $textColor = 'text-[#CF03DA]';
             $bundlePrice = '<s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span><br><p class="text-sm">No recurring payments.</p>';
             break;
-        case 'deal':
-            $borderColor = 'border-[#FFAC00]';
-            $textColor = 'text-[#FFAC00]';
-            $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#FFAC00] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+        case 'holiday':
+            $borderColor = 'border-[#F61A30]';
+            $textColor = 'text-[#F61A30]';
+            $bundlePrice = '<s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            break;
+             case 'holiday-pianote':
+            $borderColor = 'border-[#F61A30]';
+            $textColor = 'text-[#F61A30]';
+            $bundlePrice = '<s class="opacity-50"> $778</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 69%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
         case 'deal-cyber-monday':
             $borderColor = 'border-[#00D7FF]';
             $textColor = 'text-[#00D7FF]';
             $bundlePrice = '<s class="opacity-50"> $240</s><strong> $140</strong> <span class="text-[#00D7FF] text-xl md:text-3xl">(Save 42%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            break;
+        case 'holiday':
+            $borderColor = 'border-[#F61A30]';
+            $textColor = 'text-[#F61A30]';
+            $bundlePrice = '<s class="opacity-50"> $693.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
             break;
         case 'challenges-pianote':
             $borderColor = 'border-[#CF03DA]';
@@ -113,8 +123,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if($bundle == 'deal')
-                                        <p class="w-full leading-normal mt-2 uppercase text-xl"> <span><s class="opacity-60">$240</s></span><strong> $140</strong></p>
+                                    @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
+                                        <p class="w-full leading-normal mt-2 uppercase text-xl"><strong> $240</strong></p>
                                     @else
                                     <p class="opacity-60 w-full leading-normal mt-2 uppercase"> $240 Value</p>
                                     @endif
@@ -157,15 +167,17 @@
                         <h2 class="leading-tight mt-6 mb-1 md:hidden">
                         {!!$bundlePrice!!}
                         </h2>
-                            <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
-                                @if(!empty($CTA))
-                                    {{ $CTA }}
-                                @else
-                                    GET the deal <i class="fas fa-arrow-right"></i>
-                                @endif
-                            </a>
-
-
+                         @if(empty($soldOut))
+                             <a class="join md:hidden @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
+                                 @if(!empty($CTA))
+                                     {{ $CTA }}
+                                 @else
+                                     GET the deal <i class="fas fa-arrow-right"></i>
+                                 @endif
+                             </a>
+                         @else
+                             <a role="link" aria-label=" GET the deal" class="join md:hidden sold-out my-4 md:my-6 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;">SOLD OUT</a>
+                         @endif
                         </div>
                     </div>
                     <br>
@@ -215,19 +227,23 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($bundle == 'deal')
+                            @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
                             <p class="w-full leading-normal mt-2">
                                 {{-- @if(!empty($bonus['title']))
                                     <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                                 @endif --}}
                                 <span style="display:inline-block;">
-                                <s>
+                                <s class="opacity-50">
                                 @if(!empty($bonus['price']))
                                     ${{ $bonus['price'] }}
                                 @endif
                                 </s>
                                 <strong class="{{ $textColor }}">FREE</strong>
+                                @if(empty($bonus['physical']))
                                 <span class="text-white italic block">Lifetime Access</span>
+                                @else 
+                                <span class="text-white italic block">Free Shipping</span>
+                                @endif
 
 
     {{--                                @if(!empty($bonus['customText']))--}}
@@ -277,20 +293,23 @@
                 {!!$bundlePrice!!}
                 </h2>
                 {{-- <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p> --}}
-                <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
-                    @if(!empty($CTA))
-                        {{ $CTA }}
-                    @else
-                    GET the deal <i class="fas fa-arrow-right"></i>
-                @endif
-                </a>
-                <br>
-                    @if($bundle == 'deal') <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif">
-                    <em>New annual students only. Renews at $240/year. Cancel anytime.</em></p>
-                    <a role="link" class="block opacity-90 text-white" aria-label="Start membership" href="https://www.musora.com/extend" target="_blank">
-                        <p class="text-xs sm:text-sm md:text-base"><em>Annual members, <span class="underline cursor-pointer">click here for your extension deal.</span></em></p>
+                @if(empty($soldOut))
+                    <a role="link" aria-label=" GET the deal" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                        @if(!empty($CTA))
+                            {{ $CTA }}
+                        @else
+                            GET the deal <i class="fas fa-arrow-right"></i>
+                        @endif
                     </a>
-                    @else <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
+                @else
+                    <a role="link" aria-label=" GET the deal" class="join sold-out mb-4 md:mb-5 w-full sm:max-w-xs md:max-w-lg lg:max-w-3xl uppercase" style="padding: 20px 10px;">SOLD OUT</a>
+                @endif
+                <br>
+                    @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
+                     <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote' || $bundle == 'holiday' || $bundle == 'holiday-pianote') hidden @endif">
+                    <em>For your first year, then $240/yr.</em></p>
+                    @else 
+                    <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
                     @endif
                 </div>
         </section>

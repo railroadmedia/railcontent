@@ -81,19 +81,19 @@
                     <span class="text-musora text-2xl"> (last chance)</span></h2>
 
                {{-- @if($stock > 0) --}}
-                    @if(!empty($upgradeVersion))
-                            <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"
-                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing-3p&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
-                        @else
-                            <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"
-                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
-                         @endif
+{{--                    @if(!empty($upgradeVersion))--}}
+{{--                            <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"--}}
+{{--                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>--}}
+{{--                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing-3p&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>--}}
+{{--                        @else--}}
+{{--                            <a class="join musora mt-4 w-full text-black sm:max-w-[420px]" style="padding: 15px 10px;"--}}
+{{--                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>--}}
+{{--                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>--}}
+{{--                         @endif--}}
                    {{-- <p class="leading-tight text-sm pt-2"><em>Payment plans available.</em></p> --}}
-               {{-- @else
-                    <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
-               @endif --}}
+{{--               --}}{{-- @else--}}
+                    <a class="join sold-out mt-4 w-full" href="#customize-anchor">SOLD OUT</a>
+{{--               @endif --}}
             </div>
         </div>
     </section>
@@ -201,18 +201,18 @@
                             <strong>$1200</strong>
                         @endif
                         <span class="text-musora text-2xl"> (last chance)</span></h2>
-                        @if(!empty($upgradeVersion))
-                            <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
-                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing-3p&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
-                        @else
-                            <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"
-                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>
-                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>
-                @endif
-               {{-- @else
+{{--                        @if(!empty($upgradeVersion))--}}
+{{--                            <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"--}}
+{{--                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>--}}
+{{--                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-existing-3p&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>--}}
+{{--                        @else--}}
+{{--                            <a class="join musora w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;"--}}
+{{--                                href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true">GET THE DEAL <i class="fas fa-arrow-right"></i></a>--}}
+{{--                            <a class="text-white underline" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[LTM-songs-access-3-years]=1&promo-code=lifetime-3yr-songs&locked=true"><p class="leading-tight text-sm pt-4"><em>Prefer a payment plan? Click here to order with 3 monthly payments.</em></p></a>--}}
+{{--                @endif--}}
+{{--               --}}{{-- @else--}}
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
-               @endif --}}
+{{--               @endif --}}
             </div>
 
 {{--            @if($stock > 0)--}}

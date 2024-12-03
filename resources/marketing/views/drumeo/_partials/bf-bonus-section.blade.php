@@ -13,7 +13,7 @@
 @if(!empty($freeShipping))
     <div class="text-center">
         <p class="leading-normal border border-gray-300 px-2 sm:px-5 lg:px-7 py-2 rounded-lg inline-block w-auto my-7 mx-auto" style="background:linear-gradient(to right, #C3FFD7, #C3E4FF, #B2FFFB);">
-            <i class="fas fa-sparkle mr-3"></i><strong class="font-black">All Cyber Monday Bundles =</strong><i class="fas fa-sparkle ml-3"></i><br>
+            <i class="fas fa-sparkle mr-3"></i><strong class="font-black">All Holiday Bundles =</strong><i class="fas fa-sparkle ml-3"></i><br>
             <span class="text-sm">FREE SHIPPING to USA/CANADA and Discounted Shipping Worldwide.</span>
         </p>
     </div>
@@ -38,7 +38,7 @@
                         @if(!empty($bonusVideo['header']))
                             <h5 class="m-0"><strong>{!! $bonusVideo['header'] !!}</strong></h5>
                         @endif
-                        @if(!empty($case) && $case === 'deal')
+                        @if(!empty($case) && $case === 'holiday')
                          <div class="flex items-center flex-wrap space-x-2 my-3">
                             @if(!empty($bonusVideo['price']))
                                 <span class="text-lg line-through opacity-30"><strong>${{ $bonusVideo['price'] }}</strong></span>

@@ -6,9 +6,9 @@
     @endif
 >
     @if(!empty($bfVersion) && ($theme == 'singeo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/singeo/promos/november/singeo-CM-header.webp" alt="logo">
+    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/singeo-christmas-logo.svg" alt="logo">
     @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
-    <img class="h-16 sm:h-20 lg:h-24 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/promos/november/guitareo-CM-header.webp" alt="logo">
+    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/guitareo-christmas-logo.svg" alt="logo">
     @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
@@ -30,8 +30,8 @@
         @endif
 
         @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
-        <h5 class="text-{{$theme}} leading-tight"><strong>SAVE $100 ON YOUR FIRST <br class="sm:hidden"> YEAR OF LESSONS.</strong></h5>
-        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $140 FOR CYBER MONDAY.</h6>
+        <h5 class="text-[#F61A30] leading-tight pb-1"><strong>START A FREE ANNUAL TRIAL & <br class="sm:hidden">  SAVE 20% ON YOUR FIRST YEAR.</strong></h5>
+        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $200 UNTIL DECEMBER 25.</h6>
         @else
             @if(empty($noCheck))
                 <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
@@ -44,7 +44,7 @@
             @endif
         @endif
         @if(!empty($BFheader))
-            <h6 class="leading-tight py-2 px-3 bg-[#00D7FF] rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>CYBER MONDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
+            <h6 class="leading-tight py-2 px-3 bg-[#F61A30] text-white rounded-lg inline-block mb-5 lg:mb-7"><i class="far fa-badge-percent mr-1"></i> <strong>HOLIDAY SPECIAL:</strong><br class="sm:hidden"> {{ $BFheader }}.</h6>
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
@@ -62,7 +62,7 @@
                 @if(!empty($cta))
                     {!! $cta !!}
                 @elseif(!empty($promoVersion) && empty($trialVersion))
-                    SEE YOUR DEAL &raquo;
+                    START FOR FREE <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
                 @elseif(!empty($month))
                     30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
