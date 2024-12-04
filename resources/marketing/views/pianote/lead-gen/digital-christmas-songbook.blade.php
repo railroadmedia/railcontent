@@ -94,7 +94,7 @@
         </a>
     </section>
 
-    <section class="text-black px-5 sm:px-6 pb-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
+    <section class="text-black px-5 sm:px-6 py-10 sm:py-20 lg:py-36 relative" style="background-color:#0f5e8a;">
           <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" fetchpriority="high" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/header-bg-m.webp')"></div>
         <div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block" fetchpriority="high" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1700x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/header-bg.webp')"></div>
         <div class="container max-w-5xl mx-auto relative z-10">
