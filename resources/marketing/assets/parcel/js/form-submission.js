@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formId = form.id;
         const formContainer = form.closest('.form-container');
         const thankYouBox = formContainer ? formContainer.querySelector('.thank-you-box') : null;
-
+        const disclaimer = formContainer ? formContainer.querySelector('.disclaimer') : null;
       
         const handleCheckboxChange = () => {
             const preferredInstrument = form.querySelector('#preferred_instrument');
@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitButton = form.querySelector('.submit');
             const checkboxes = form.querySelectorAll('.instrument-checkbox');
             const tooltip = form.querySelector('#checkbox-tooltip');
-            const disclaimer = form.querySelector('.disclaimer');
 
             let isValid = true;
 

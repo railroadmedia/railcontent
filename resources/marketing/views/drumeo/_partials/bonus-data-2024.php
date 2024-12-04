@@ -22,9 +22,9 @@ $bonusVideos = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/AM.webp',
         'header' => 'Drumeo Annual Membership',
         'description' => '<p>Learn the drums with the world\'s best teachers, step-by-step lessons, and detailed song breakdowns.</p><p class="my-2">You\'ll have everything you need to learn beginner beats, drum set independence, new styles and beyond. It\'s the ultimate way to get started or get back into playing the drums.</p>',
-        'offerPrice' => '<strong><span class="opacity-30 line-through">$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
+        'offerPrice' => '<strong class="font-black"><span>$240</span></strong>',
         'vimeoId' => '898623255',
-        'sku' => 'DLM-1-year-drumeo'
+        'sku' => 'DLM-1-year-holiday'
     ],
     [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/AM.webp',
@@ -57,7 +57,7 @@ $bonusVideos = [
         'image' => 'marketing/drumeo/promos/november/2024/bonuses-new/30DI.webp',
         'header' => '30-Day Independence',
         'description' => '<p>Independence is the hardest part of learning the drums.</p><p class="my-2">In 30-Day Independence, you\'ll build your 4-way coordination slowly by following daily guided workouts with El Estepario Siberiano.</p><p>In 30 days you\'ll drastically improve your drum set independence.</p>',
-        'badge' => '$42.33',
+        'badge' => '$42.34',
         'price' => 127.00,
         'vimeoId' => '975466470',
         'sku' => '30-day-independence-challenge'
@@ -137,6 +137,7 @@ $bonusVideos = [
         'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => null,
         'price' => 12.95,
+        'vimeoId' => '436834726',
         'sku' => 'Drumeo-VaterSticks'
     ],
     [
@@ -145,6 +146,7 @@ $bonusVideos = [
         'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => null,
         'price' => 12.95,
+        'vimeoId' => '436834726',
         'sku' => 'Drumeo-VaterSticks-2'
     ],
     [

@@ -5,7 +5,7 @@ $bonusVideos = [
         'header' => 'Pianote 1-Year Access Pass',
         'description' => '<p>The one-year access pass for gifting a full year of lessons without an ongoing subscription. You’ll get a physical access pass that you, or anyone, can redeem anytime – loaded with the lessons they’ll love to reach all of their goals on the piano.</p>',
         'vimeoId' => '785314388',
-        'offerPrice' => '<span class="opacity-30"><strong><s>$240</strong> Value</s></span>',
+        'offerPrice' => '<span><strong>$240</strong></span>',
         'sku' => '1-year-membership'
     ],
     [
@@ -30,8 +30,8 @@ $bonusVideos = [
         'description' => '<p>Discover the best online piano lessons experience with Pianote.</p><p class="my-2">Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom.</p>',
         'vimeoId' => '785314388',
         'badge' => null,
-        'offerPrice' => '<strong><span class="opacity-30 line-through">$240</span><span class="font-black"> $140</span></strong> <span class="text-xs">for your first year</span>',
-        'sku' => 'pianote-membership-deal'
+        'offerPrice' => '<strong><span class="font-black">$240</span></strong>',
+        'sku' => 'pianote-membership-holiday'
     ],
     [
         'image' => 'marketing/pianote/products/prima/bundle/NPPSH.webp',
@@ -56,7 +56,7 @@ $bonusVideos = [
         'header' => 'Easy Chords',
         'description' => '<p>Chords are the building blocks of ALL popular songs.</p><p class="my-2">Improve your piano chords and master chord inversions with Easy Chords.<p>Play along with Lisa each day for 30 days, and transform your sound with more beautiful chords.</p><p class="leading-tight pt-2 lg:pt-6 italic"><strong>“I just want to say thank you! My ability to choose which chord inversion to play next when I go through a progression has improved a lot after going through this course!” ~ Lars, Pianote Student</strong></p>',
         'vimeoId' => '823788317',
-        'badge' => '$42.33',
+        'badge' => '$42.34',
         'price' => 127,
         'sku' => 'easy-chords-challendge',
     ],
@@ -161,5 +161,29 @@ $bonusVideos = [
         'badge' => null,
         'price' => 49,
         'sku' => 'classical-piano-pieces'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/RMI30DC-new.webp',
+        'header' => 'Read Music in 30 Days',
+        'description' => '<p>Reading music is like learning a language. And just like learning a language, you need to know where to start.</p><p class="my-2">Read Music in 30 Days starts from the beginning, and gradually progresses each day. Just follow along.</p>',
+        'badge' => null,
+        'price' => 127,
+        'vimeoId' => '952486575',
+        'sku' => 'read-music-in-30-days'
+    ],
+    [
+        'image' => '/marketing/pianote/promos/december/holiday-bundle/RMI30D.webp',
+        'header' => 'Read Music in 30 Days. Companion Book',
+        'description' => '<p>This book has been designed to be used with our 30-Day Challenge. </p><p class="my-2">Each day’s exercises are exactly the same as the videos, with added explanations. </p>And you’ll find lots of bonus exercises at the back of the book.</p>',        
+        'badge' => null,
+        'price' => 39,
+        'sku' => 'read-music-in-30-days-workbook'
+    ],
+    [
+        'image' => 'marketing/pianote/promos/december/holiday-bundle/PM.webp',
+        'header' => 'Pianote Metronome',
+        'description' => '<p>It’s the most important practice tool you’ll ever have. Work on your tempo, rhythm, and speed with a metronome you can trust. The Pianote Metronome will help you keep perfect time – every time.</p>',
+        'price' => 79,
+        'sku' => 'metronome'
     ]
 ];

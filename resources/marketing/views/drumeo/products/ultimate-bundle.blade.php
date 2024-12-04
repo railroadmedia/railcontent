@@ -76,11 +76,11 @@
                 <img class="max-w-2xl sm:max-w-xl md:hidden object-cover w-full p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/ultimate-bundle/header-collage-m.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $1747.90</s><strong> $799</strong> <span class="text-[#FF6F00] text-xl md:text-3xl">(Save 54%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal &raquo;</a>
-                    @else
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="{{ $orderUrl }}">get the deal &raquo;</a>--}}
+{{--                    @else--}}
                         <a class="join sold-out mt-4 w-full">SOLD OUT</a>
-                    @endif
+{{--                    @endif--}}
 {{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 100 available.</em></p>--}}
                     </div>
                 </div>
@@ -103,7 +103,6 @@
             @include('drumeo._partials.bf-bonus-section', [
                 'videoTargetSkus' => $videoTargetSkus,
                 'freeShipping' => true,
-            'getDealUrl' => $orderUrl,
             ])
 
             <div class="bg-[#CFEBFF] px-4 py-4 md:py-8 md:px-16 rounded-lg my-10 md:my-16">
@@ -160,6 +159,7 @@
                     </span>
                 </div>',
             'buttonLink' => $orderUrl,
+            'soldOut' => true,
             'bundle' => 'ultimate',
         ])
     </div>

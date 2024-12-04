@@ -113,51 +113,6 @@
             <h5 class="border-y border-y-black py-4 mb-7 uppercase tracking-widest font-bold">GIVEAWAY</h5>
         </header>
 
-        <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 mb-5 bg-drumeo rounded-xl" {{--style="background-color:#101520;"--}}>
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="w-full lg:w-5/12 lg:pr-8 text-left px-2 sm:px-0 mb-4 lg:mb-0">
-                    <img class="w-full max-w-md" style="border-radius: 1.75rem !important;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/870x0/filters:quality(95)/marketing/musora/lead-gen/youtube/win.jpg">
-                </div>
-                <div class="w-full lg:w-7/12 text-left giveaway-form">
-                    <h2 class="uppercase leading-none mb-2"><strong>Win The Cymbals From<br> Drumeo’s Linkin Park Video</strong></h2>
-                    @if(Carbon\Carbon::create(2024, 12, 02, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                        <p class="leading-normal mb-1">
-                            <strong>Win the ENTIRE set of Istanbul Agop cymbals that Brandon used in our latest video.</strong>
-                            <br>
-                            Item list:
-                        </p>
-                        <style>
-                            ul {
-                                column-count: 2;
-                            }
-                        </style>
-                        <ul class="pl-6 mb-3 list-disc" style="column-gap: 20px;">
-                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 10" Splash</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 15" Medium Hihats</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 16" Thin Crash</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 18" Dark Crash</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Traditional 20" Dark Crash</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Xist	18" Ion FX Crash</li>
-                            <li class="leading-tight text-sm mb-1">Istanbul Mantra 22" Ride</li>
-                        </ul>
-                        @include("drumeo.lead-gen.partials.sign-up-form", [
-                            "recaptchaKey" => $recaptchaKey,
-                            "formName" => 'Cymbal Giveaway',
-                            "formId" => "Drumeo - Engagement - Trigger - Cymbal Giveaway - Web Form",
-                            "buttonText" => "I WANT TO WIN",
-                            "minimalForm" => true,
-                            "buttonColor" => "bg-musora text-black",
-                            "redirectUrl" => "https://www.musora.com/thank-you",
-                        ])
-                        <p class="leading-tight text-xs mt-1"><a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/lead-gen/youtube/cymblas-t-and-c.pdf"><u>View Terms & Conditions</u></a><br>
-                            By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
-                    @else
-                        <h4 class="leading-normal mb-1">This giveaway has ended.</h4>
-                    @endif
-                </div>
-            </div>
-        </div>
-
         <div class="text-white px-3 sm:px-6 lg:px-10 py-6 lg:py-10 rounded-xl" style="background-color:#222;">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="w-full lg:w-5/12 lg:pl-8 lg:order-1 text-left px-2 sm:px-0 mb-4 lg:mb-0">
@@ -240,7 +195,7 @@
                                 <strong class="text-4xl">$180</strong>
                             </h4>
                             <p class="text-sm"><em>Save $60!</em></p>
-                            <button class="my-5 py-2 bg-musora text-black w-full rounded-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] uppercase font-medium font-bebas text-xl" role="button" tabindex="0">TRY FOR FREE FOR 7 DAYS</button>
+                            <button class="my-5 py-2 bg-musora text-black w-full rounded-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] uppercase font-medium font-bebas text-xl" role="button" tabindex="0">Get The Deal</button>
                             @foreach ($points as $point)
                                 <p class="text-sm mb-1.5">{!! $point !!}</p>
                             @endforeach

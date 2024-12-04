@@ -20,7 +20,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'challenges-bundle',
             'comfort-cover',
             'drum-technique-made-easy',
-            'drumeo-deal',
+            'holiday-bundle',
             'drumsticks',
             'easy-rudiments',
             'electrify-your-drumming',

@@ -13,7 +13,7 @@
     <meta name="description" content="3 Popular Course For The Price Of 1.">
     <meta property="og:description" content="3 Popular Course For The Price Of 1.">
     {{-- TODO: Add image--}}
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/drumeo/promos/black-friday/bundles/cyber-monday/challenges-share-image-new.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -58,18 +58,18 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
                 <img alt="Bundle" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/challenges-bundle-logo.svg"><br>
-                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Course For <br class="block sm:hidden">The Price Of 1</strong></h1>
+                <h1 class="leading-tight my-3 lg:my-4"><strong>3 Popular Courses For <br class="block sm:hidden">The Price Of 1</strong></h1>
                     <h4 class="italic items-center">Get the best online drum lessons with no recurring payments.</h4>
                 <img class="hidden md:inline object-cover max-w-2xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/2024/challenges-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
-                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 67%)</span></h2>
-                    @if($stock > 0)
-                        <a class="join drumeo mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal &raquo;</a>
-                    @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
-                    @endif
-                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>
+                    <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $381</s><strong> $127</strong> <span class="text-[#CF03DA] text-xl md:text-3xl">(Save 66%)</span></h2>
+{{--                    @if($stock > 0)--}}
+{{--                        <a class="join drumeo mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true">get the deal &raquo;</a>--}}
+{{--                    @else--}}
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
+{{--                    @endif--}}
+{{--                        <p class="leading-tight text-sm text-musora mt-3"><em>Only 300 available.</em></p>--}}
                     </div>
                 </div>
             </div>
@@ -125,6 +125,7 @@
             'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-2"><strong>3 Popular Courses For The Price Of 1</strong></h2>
                                 <h5 class="italic items-center">Get the best online drum lessons with no recurring payments.</h5>',
             'buttonLink' => '/ecommerce/add-to-cart?products[the-challenges-bundle]=1&promo-code=challenges-bundle&locked=true',
+            'soldOut' => true,
             'bundle'=> "challenge",
             ])
     </div>

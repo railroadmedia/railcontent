@@ -96,6 +96,7 @@ $bonuses = [
         'sku' => 'Drumeo-VaterSticks',
         'physical' => true,
         'shipping' => true,
+        'vimeoId' => '436834726',
         'price' => 12.95
     ],
     [
