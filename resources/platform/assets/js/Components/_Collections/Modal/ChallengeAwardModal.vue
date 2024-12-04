@@ -1,6 +1,6 @@
 <template>
-    <component v-if="!isCertificateOpen" :is="isModal ? compMap.ModalRenderer : 'div'" :black-background="true" :show-x-icon="true" @on-close="emit('closeModal')" >
-        <div class="tw-max-w-[470px] tw-rounded-[10px] tw-px-4 sm:tw-px-14 tw-py-10 tw-relative tw-border dark:tw-border-[rgba(255,255,255,0.09)] tw-mx-4 sm:tw-mx-0">
+    <component v-if="!isCertificateOpen" :is="isModal ? compMap.InfoModal : 'div'" :selfContained="true" class-override="tw-max-w-[470px] tw-w-full tw-border dark:tw-border-[rgba(255,255,255,0.09)]" @on-close="emit('closeModal')" >
+        <div class="-tw-mt-12">
             <!-- Animation -->
             <Vue3Lottie v-if="!hideAnimation && !isModal" class="tw-w-[calc(100% + 200px)] sm:tw-w-[800px] tw-h-[800px] tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-[5]" :animation-link="animations[brand]" width="100%" height="100%" :loop="false" />
 
@@ -38,13 +38,13 @@
     <ChallengeCertificateModal v-if="isCertificateOpen" :certificate-data="awardData" @closeModal="emit('closeModal')" />
 </template>
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import  { ref, onMounted, computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
 import { Vue3Lottie } from 'vue3-lottie';
 import { fetchUserAward } from "musora-content-services";
 
-import ModalRenderer from '@collections/Modal/ModalRenderer';
+import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
 import ShareModal from '@collections/Modal/ShareModal';
 import ChallengeCertificateModal from '@collections/Modal/ChallengeCertificateModal';
@@ -67,7 +67,7 @@ const props = defineProps({
 const emit = defineEmits(['closeModal']);
 
 const compMap = {
-    ModalRenderer,
+    InfoModal,
 }
 
 const userStore = useUserStore();
