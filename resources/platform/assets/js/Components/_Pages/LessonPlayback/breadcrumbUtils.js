@@ -41,7 +41,7 @@ export const getBreadcrumbs = (data, brand) => {
         if (!data || Object.keys(data).length === 0) {
             return breadcrumb;
         }
-    
+
         if (data.type === 'workout') {
             breadcrumb.pages.push({
                 title: 'Workouts',
@@ -75,14 +75,13 @@ export const getBreadcrumbs = (data, brand) => {
                 title: data.title
             });
         } else if (data.type === 'challenge-part') {
-            // TODO: Test challenges breadcrumbs
             breadcrumb.pages.push({
                 title: 'Challenges',
-                url: `/${brand}/challenges`
+                url: `/${brand}/challenge`
             });
             breadcrumb.pages.push({
                 title: data.parent_content_data?.[0]?.slug ?? '',
-                url: `/${brand}/${data.parent_content_data?.[0]?.slug ?? ''}`
+                url: `/${brand}/challenge/${data.parent_content_data?.[0]?.slug ?? ''}/${data.parent_content_data?.[0]?.id}`
             });
             breadcrumb.pages.push({
                 title: data.title
@@ -161,7 +160,7 @@ export const getBreadcrumbs = (data, brand) => {
                 title: data.title
             });
         }
-    
+
         // Todo: Verify if the breadcrumb override is used at all
         return breadcrumb.pages;
 };
