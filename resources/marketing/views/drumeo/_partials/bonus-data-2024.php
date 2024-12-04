@@ -137,6 +137,7 @@ $bonusVideos = [
         'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => null,
         'price' => 12.95,
+        'vimeoId' => '436834726',
         'sku' => 'Drumeo-VaterSticks'
     ],
     [
@@ -145,6 +146,7 @@ $bonusVideos = [
         'description' => '<p>Our new Drumeo 5A Drumsticks by Vater – made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.</p>',
         'badge' => null,
         'price' => 12.95,
+        'vimeoId' => '436834726',
         'sku' => 'Drumeo-VaterSticks-2'
     ],
     [

@@ -86,7 +86,7 @@
                 <div class="flex flex-wrap mb-5 sm:mb-10">
                     <a href="/shop/holiday-bundle" class="w-full mx-auto p-1 sm:p-2 transition-opacity duration-500 hover:opacity-90">
                         <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl pb-[71%] sm:pb-[35%]">
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2230x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/holiday-bundle-full.webp');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2228x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/holiday-bundle-full.webp');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/black-friday/shop/holiday-bundle-m.webp');"></div>
                         </div>
                     </a>

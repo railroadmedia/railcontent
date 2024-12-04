@@ -10,8 +10,8 @@
     @parent
     <title>The Holiday Bundle | Pianote</title>
     <meta property="og:title" content="The Holiday Bundle | Pianote">
-    <meta name="description" content="Annual membership with a free Metronome, Books, and $381 in digital bonuses.">
-    <meta property="og:description" content="Annual membership with a free Metronome, Books, and $381 in digital bonuses.">
+    <meta name="description" content="Annual membership with a free metronome, books, and $381 in digital bonuses.">
+    <meta property="og:description" content="Annual membership with a free metronome, books, and $381 in digital bonuses.">
     <meta property="og:image"
         content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/promos/december/holiday-bundle/holiday-share-image.jpg"
         style="display: none;">
@@ -66,7 +66,7 @@
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-6xl lg:pt-10">
                 <img alt="Bundle Logo" class="h-16 sm:h-18" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg"><br>
-                <h2 class="leading-tight my-3"><strong>Annual membership with a free Metronome, <br class="hidden lg:block">Books, and $381 in digital bonuses.</strong></h2>
+                <h2 class="leading-tight my-3"><strong>Annual membership with a free metronome, <br class="hidden lg:block">books, and $381 in digital bonuses.</strong></h2>
                 <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/promos/december/holiday-bundle/header-collage.webp" alt="Bundle Collage">
                 <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/december/holiday-bundle/header-collage.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
@@ -119,7 +119,7 @@
             'logoHeight' => 'h-16 sm:h-20',
             'topImage' => 'marketing/pianote/promos/black-friday/the-book-bundle/bonus-AM.webp',
             'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/3',
-            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a free Metronome, Books, and $381 in digital bonuses.</h2>',
+            'promoHeader' => '<h2 class="leading-tight mb-4 sm:mb-5"><strong>Annual membership with a free metronome, books, and $381 in digital bonuses.</h2>',
             'buttonLink' => $orderUrl,
             'bundle'=> "holiday-pianote",
             ])

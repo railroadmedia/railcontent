@@ -83,8 +83,8 @@
                        WORLD-CLASS TEACHERS
                     </span>
                 </div>
-                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/december/header-collage.webp" alt="Bundle Collage">
-                <img class="md:hidden object-cover w-full sm:max-w-2xl p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/header-collage.webp" alt="Bundle Collage Mobile">
+                <img class="hidden md:inline object-cover max-w-3xl lg:max-w-4xl mx-auto p-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/drumeo/promos/december/header-collage2.webp" alt="Bundle Collage">
+                <img class="md:hidden object-cover w-full sm:max-w-2xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/header-collage2.webp" alt="Bundle Collage Mobile">
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $692.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span></h2>
                     @if($stock > 0)
