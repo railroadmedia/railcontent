@@ -19,7 +19,7 @@
             tw-flex
             tw-rounded-full
             tw-bg-cover
-            tw-bg-center
+            tw-bg-top
             tw-bg-no-repeat
             tw-overflow-hidden
             tw-box-border

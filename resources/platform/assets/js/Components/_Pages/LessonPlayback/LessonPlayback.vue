@@ -97,7 +97,7 @@
                         :content-chapters="videoData?.chapters" :instructors="videoData?.instructor" />
 
                     <VideoButtons v-if="!isWorkout" :prev-lesson-url="nextPreviousLessons?.prevLesson?.web_url_path"
-                        :next-lesson-url="nextPreviousLessons?.nextLesson?.web_url_path" :brand="brand"
+                        :next-lesson-url="nextLessonUrl" :brand="brand"
                         prev-label="Previous Lesson" next-label="Next Lesson" :qaVideo="qaVideo" />
 
                     <ContentProgress v-if="!noAccess && !isWorkout && !isChallenge" :brand="brand"
@@ -160,9 +160,11 @@
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice
                     :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`"
-                    :user-id="userId" :theme-color="brand"
-                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="videoData?.soundslice_slug" :contentId="videoData?.id"
+                    :user-id="userId"
+                    :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3`"
+                    :soundslice-slug="videoData?.soundslice_slug"
+                    :contentId="videoData?.id"
                     :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoData.title" :disable-next="true"
@@ -276,6 +278,18 @@ const showPracticeButton = computed(() => {
 const showInfoButton = computed(() => {
     return videoData.value?.instructor?.length > 0 || videoData.value?.description?.length > 0 || videoData.value?.chapters?.length > 0;
 });
+
+const nextLessonUrl = computed(() => {
+    if(isChallenge.value && isNextLessonLocked.value){
+        return null;
+    }
+
+    return nextPreviousLessons.value?.nextLesson?.web_url_path;
+})
+
+const isNextLessonLocked = computed(() => {
+    return nextPreviousLessons.value?.nextLesson?.is_locked;
+})
 
 //Methods
 const handleVideoPlay = (payload) => {
@@ -443,6 +457,8 @@ const fetchLessonData = async () => {
         ])
 
         const [dataResult, likeResult, likedResult] = results;
+
+        console.log('challenge', dataResult)
 
         videoData.value = dataResult.status === 'fulfilled' ? dataResult.value.lesson : null;
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;

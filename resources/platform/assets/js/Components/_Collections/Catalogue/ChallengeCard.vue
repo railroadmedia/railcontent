@@ -84,9 +84,15 @@ const urlPath = computed(() => {
 const fetchData = async () => {
     let data = await fetchChallengeIndexMetadata(props.item.id);
     if(data.length > 0){
-        progressPercent.value = data[0].progress_percent;
-        is_enrolled.value = data[0].is_user_enrolled;
-        durationText.value = data[0].duration_text;
+        const challengeData = data.filter((item) => {
+            return item.content_id === props.item.id;
+        })
+
+        if(challengeData && challengeData.length > 0){
+            progressPercent.value = challengeData[0].progress_percent;
+            is_enrolled.value = challengeData[0].is_user_enrolled;
+            durationText.value = challengeData[0].duration_text;
+        }
     }
 }
 

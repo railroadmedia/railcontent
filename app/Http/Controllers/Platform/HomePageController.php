@@ -502,12 +502,12 @@ class HomePageController extends BaseController
                 "label" => "Forum Post Likes",
             ],
             "comments" => [
-                "icon" => "icon-comments-liked",
+                "icon" => "fa-solid fa-thumbs-up",
                 "value" => $userProfileMetrics->getCommentLikes(),
                 "label" => "Comment Likes",
             ],
             "practiced" => [
-                "icon" => "icon-minutes-practiced",
+                "icon" => "fa-solid fa-stopwatch",
                 "value" => user()->getBrandMinutesPracticed(),
                 "label" => "Minutes Practiced",
             ],

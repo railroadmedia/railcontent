@@ -153,7 +153,7 @@ class ContentProgressService
         $parentIds = $this->getParentIds($contentId);
 
         foreach ($parentIds as $parentId) {
-            // TODO why does this happen sometimes?
+            // TODO TP-318 why does this happen only sometimes?
             if (!$parentId) {
                 continue;
             }
