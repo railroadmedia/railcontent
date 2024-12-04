@@ -26,7 +26,7 @@ class Archive extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Archives');
+        parent::__construct(self::getName(), 'Archives', withLiveEvent: true);
     }
     public static function getName(): string
     {

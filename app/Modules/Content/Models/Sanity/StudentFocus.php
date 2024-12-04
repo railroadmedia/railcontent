@@ -17,7 +17,7 @@ class StudentFocus extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Student Focus', withResources: true);
+        parent::__construct(self::getName(), 'Student Focus', withResources: true, withLiveEvent: true);
     }
 
     public static function getName(): string
