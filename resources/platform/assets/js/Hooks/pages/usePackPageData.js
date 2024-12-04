@@ -25,7 +25,7 @@ export async function usePackPageData(contentType) {
 
     if(contentType === "pack-overview") {
         try {
-            const result = await fetchPackData(contentId, "pack");
+            const result = await fetchPackData(contentId);
             if (result) {
                 //console.log('result', result)
                 data.value = result;
