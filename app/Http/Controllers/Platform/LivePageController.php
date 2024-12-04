@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Services\CalendarService;
-use App\Services\LiveStreamEventService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
@@ -26,41 +25,16 @@ class LivePageController extends BaseController
      */
     private $contentService;
 
-    /**
-     * @var CalendarService
-     */
-    private $calendarService;
-
-    /**
-     * @var LiveStreamEventService
-     */
-    private $liveStreamEventService;
-
-    /**
-     * @var RailchatService
-     */
-    private $railchatService;
-
-    /**
-     * @var PermissionService
-     */
-    private $permissionService;
-
     public const NOT_LIVE_PAGE_SWITCH_MINUTES = 15;
 
     public function __construct(
         ContentService $contentService,
-        CalendarService $calendarService,
-        LiveStreamEventService $liveStreamEventService,
-        RailchatService $railchatService,
-        PermissionService $permissionService,
+        private readonly CalendarService $calendarService,
+        private readonly RailchatService $railchatService,
+        private readonly PermissionService $permissionService,
         private readonly SanityGateway $sanityGateway
     ) {
         $this->contentService = $contentService;
-        $this->calendarService = $calendarService;
-        $this->liveStreamEventService = $liveStreamEventService;
-        $this->railchatService = $railchatService;
-        $this->permissionService = $permissionService;
     }
 
     public function chat(Request $request, $domain, $brand): View
