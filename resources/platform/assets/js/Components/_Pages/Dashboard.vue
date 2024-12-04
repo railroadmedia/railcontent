@@ -54,7 +54,6 @@
 
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
-                v-if="challenges.length"
                 title="Challenges"
                 :see-all-url="`/${brand}/challenges`"
                 seeAllAriaLabel="See All Challenges"
@@ -65,9 +64,9 @@
 
             <!-- Challenge Awards -->
             <MiniCatalogueSection
-                v-if="awards && awards.length"
                 title="My Awards"
                 catalogue-type="challengeAward"
+                section-id="myawards"
                 :pre-loaded-content="awards"
             />
 

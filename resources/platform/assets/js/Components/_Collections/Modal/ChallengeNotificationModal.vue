@@ -11,8 +11,8 @@
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in {{ challengeTitle }}!</h1>
                 <p class="tw-mb-5 tw-text-left">Next, choose if you would like to receive practice reminders for this Challenge (make sure you download the app to get push notifications).</p>
                 <ul class="tw-text-left">
-                    <li class="tw-mb-5"><input class="tw-mr-[10px]" type="radio" :value="true" v-model="selectedFrequency" /> <label>Yes, send me practice reminders!</label></li>
-                    <li><input class="tw-mr-[10px]" type="radio" :value="false" v-model="selectedFrequency" /> <label>No thanks, I’m all good!</label></li>
+                    <li class="tw-mb-5" @click="handleFrequencyChange(true)"><input class="tw-mr-[10px]" type="radio" :value="true" v-model="selectedFrequency" /> <label>Yes, send me practice reminders!</label></li>
+                    <li @click="handleFrequencyChange(false)"><input class="tw-mr-[10px]" type="radio" :value="false" v-model="selectedFrequency" /> <label>No thanks, I’m all good!</label></li>
                 </ul>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton @click="handleNext">Next</MuButton>
@@ -21,7 +21,7 @@
 
             <!-- Step 2 (Solo) -->
             <template v-if="step === 2 && challengeType === 'solo'">
-                <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">Choose Your Start Date</h1>
+                <h1 class="tw-mb-6 tw-text-2xl tw-font-bold">Choose Your Start Date</h1>
                 <div class="tw-mx-auto">
                     <Datepicker :start-date="selectedDate" inline :enable-time-picker="false" :action-row="{ showCancel: false, showSelect: false, showPreview: false }" position="center" :min-date="new Date()" @internal-model-change="handleDateChange" />
                 </div>

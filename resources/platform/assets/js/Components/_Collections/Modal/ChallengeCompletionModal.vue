@@ -38,7 +38,7 @@
                             </div>
                             <div class="tw-flex tw-gap-2 tw-text-[13px] tw-relative tw-z-20">
                                 <!-- Streak -->
-                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pr-1 tw-flex tw-items-center tw-relative">
+                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pr-1 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
                                     <!-- Streak badge -->
                                     <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ streakBadgeText }}</div>
                                     <div v-if="streakDay === 0" class="tw-text-[26px] tw-mx-0.5">🔥</div>
@@ -47,12 +47,12 @@
                                         <div class="tw-font-extrabold">{{ streakDay }}</div>
                                         <div class="tw-flex tw-items-center">
                                             Day Streak
-                                            <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
+                                            <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Rest Days -->
-                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pl-2 tw-pr-1 tw-flex tw-items-center tw-relative">
+                                <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-pl-2 tw-pr-1 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                                     <!-- Rest badge -->
                                     <div v-if="isRestDayAdded" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">+1</div>
                                     <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
@@ -61,7 +61,7 @@
                                         <div class="tw-font-extrabold">{{ restDay }}</div>
                                         <div class="tw-flex tw-items-center tw-justify-between">
                                             Rest Days
-                                            <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
+                                            <musora-icon icon-name="info" class="tw-ml-4 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
 
                     <!-- Progress Bar -->
                     <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#223F57]">
-                        <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:${progress}%`">{{ progress }}%</div>
+                        <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-400 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:${progress}%`">{{ progress }}%</div>
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
@@ -94,23 +94,23 @@
                         <div class="tw-flex tw-justify-center tw-items-center tw-relative tw-z-10">
                             <svg class="tw-transform -tw-rotate-90 tw-w-[300px] tw-h-[284px]">
                                 <circle cx="150" cy="142" r="120" stroke="currentColor" stroke-width="20" fill="transparent"
-                                        class="tw-text-[#112E4A] tw-drop-shadow-md" />
+                                        class="tw-text-[#E0E0E1] dark:tw-text-[#112E4A] tw-drop-shadow-md" />
                                 <circle cx="150" cy="142" r="120" stroke="currentColor" stroke-width="20" fill="transparent"
                                         :stroke-dasharray="circumference"
                                         :stroke-dashoffset="circumference - progress / 100 * circumference"
-                                        :class="`tw-text-${brand} tw-transition-all tw-duration-700`" />
+                                        :class="`tw-text-${brand} tw-transition-all tw-duration-400`" />
                             </svg>
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
                                 <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
                                 <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
                                 <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>
-                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-6xl">{{ countdownString }}</div>
+                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px]">{{ countdownString }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="tw-flex tw-justify-center tw-gap-2 tw-text-[13px] tw-w-full tw-px-3 tw-relative tw-z-20">
                         <!-- Streak -->
-                        <div class="tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 -tw-pl-2 tw-flex tw-items-center tw-relative">
+                        <div class="tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 -tw-pl-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
                             <!-- Streak Badge -->
                             <div v-if="completionAnimations[streakDay]" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">{{ streakBadgeText }}</div>
                             <!-- Streak Lottie -->
@@ -121,12 +121,12 @@
                                 <div class="tw-font-extrabold">{{ streakDay }}</div>
                                 <div class="tw-flex tw-items-center">
                                     Day Streak
-                                    <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
+                                    <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                 </div>
                             </div>
                         </div>
                         <!-- Rest Days -->
-                        <div class="tw-rounded-[10px] tw-border tw-border-primary-6 tw-p-2 tw-flex tw-items-center tw-relative">
+                        <div class="tw-rounded-[10px] tw-border tw-border-primary-6 tw-p-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                             <!-- Rest badge -->
                             <div v-if="isRestDayAdded" class="tw-absolute tw-right-0 tw-bg-[#E1EFFE] tw-rounded-[6px] tw-text-[#1E429F] tw-text-sm tw-px-2 tw-py-0.5 tw-font-semibold tw-transition-all tw-duration-700" :class="showBadgeAnimation ? '-tw-top-3' : 'tw-opacity-0 tw-top-2'">+1</div>
                             <!-- Rest Icon -->
@@ -137,7 +137,7 @@
                                 <div class="tw-font-extrabold">{{ restDay }}</div>
                                 <div class="tw-flex tw-items-center">
                                     Rest Days
-                                    <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
+                                    <musora-icon icon-name="info" class="tw-ml-2 tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                                 </div>
                             </div>
                         </div>

@@ -41,7 +41,7 @@
                 <div>
                     <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
                     <template v-if="isAward">
-                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white">
+                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
                             You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
                         </div>
                         <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
@@ -111,7 +111,7 @@
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
             <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
                 <!-- Award -->
-                <img v-if="isAward" class="tw-h-[230px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
+                <img v-if="isAward" class="tw-h-[200px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
                 <!-- Logo -->
                 <img v-else :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} Logo`" />
                 <template v-if="isAward">
@@ -145,7 +145,6 @@
         </div>
     </div>
 
-    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-modal="closeAwardModal" />
     <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
@@ -153,11 +152,13 @@ import { ref, computed, } from "vue";
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { postChallengesEnrollmentNotification, postChallengesHideCompletedBanner } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 
 import MuButton from '@units/Button/MuButton';
 import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
 import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
+
 
 const props = defineProps({
     challengeType: {
@@ -174,6 +175,9 @@ const emit = defineEmits(['onRemoveChallenge']);
 
 const platformStore = usePlatformStore();
 const { isDarkMode } = storeToRefs(platformStore);
+
+const userStore = useUserStore();
+const { userDashboardUrl } = storeToRefs(userStore)
 
 const breakpoints = useBreakpoints({ ...breakpointsTailwind, '3xl': 1815 });
 const desktop = breakpoints.greaterOrEqual('lg');
@@ -300,7 +304,7 @@ const ctaObj = computed(() => {
 
     if(isAward.value){
         obj.text = 'See awards';
-        obj.action = openAwardModal;
+        obj.url = `${userDashboardUrl.value}/#myawards`;
     } else if(isRecommendation.value){
         //When enrollment is not opened
         //TODO(challenge): add conditional for when user is registered for notification
@@ -326,14 +330,6 @@ const closeDesktopDropdown = () => {
 
 const closeMobileDropdown = () => {
     mobileShowDropdown.value = false;
-}
-
-const openAwardModal = () => {
-    isAwardModalOpen.value = true;
-}
-
-const closeAwardModal = () => {
-    isAwardModalOpen.value = false;
 }
 
 const registerNotification = async () => {

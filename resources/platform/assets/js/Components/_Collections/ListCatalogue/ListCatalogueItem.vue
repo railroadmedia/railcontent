@@ -40,7 +40,7 @@
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-1" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>
@@ -388,10 +388,9 @@ const class_object = computed(() => {
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
-        "no-access": noAccess.value,
         compact: props.compactLayout,
         "start-learning-path":
-            props.contentTypeOverride === "learning-path-part",
+        props.contentTypeOverride === "learning-path-part",
     };
 })
 
@@ -457,6 +456,5 @@ const openUpgradeModal = () => {
 onBeforeMount( ()=> {
     //console.log('I am in a list catalog item')
 })
-
 </script>
 

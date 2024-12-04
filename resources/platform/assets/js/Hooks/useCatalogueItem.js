@@ -24,7 +24,7 @@ export default function useCatalogueItem(props) {
             return false;
         }
 
-        return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
+        return props.item.need_access || (props.lockUnowned && props.item.is_owned === false);
     });
 
     const dateNow = computed(() => Date.now());
@@ -70,6 +70,11 @@ export default function useCatalogueItem(props) {
             pianote: ['course', 'learning-path', 'pack', 'chord-and-scale'],
             singeo: ['course', 'learning-path', 'pack', 'chord-and-scale'],
         };
+
+        //For locked challenges
+        if(props.item.is_locked){
+            return 'fa-lock';
+        }
 
         if (!isReleased.value) {
             return 'fa-clock';
