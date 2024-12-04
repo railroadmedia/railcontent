@@ -9,9 +9,9 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white">View Details</a></li>
-                    <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal">Change Start Date</button></li>
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
+                    <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal" class="tw-text-sm">Change Start Date</button></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-sm" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
                 </ul>
             </div>
         </div>
@@ -47,7 +47,8 @@
                 <div class="tw-flex tw-gap-2 tw-text-[11px] 3xl:tw-text-[13px] tw-relative tw-z-20 tw-shrink-0">
                     <!-- Streak -->
                     <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 4xl:tw-pl-3 tw-pr-1 4xl:tw-pr-4 tw-flex tw-items-center tw-relative">
-                        <Vue3Lottie class="tw-w-10 3xl:tw-w-[46px] -tw-ml-1 -tw-mr-1 3xl:tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
+                        <div v-if="streak === 0" class="tw-text-[28px]">🔥</div>
+                        <Vue3Lottie v-else class="tw-w-10 3xl:tw-w-[46px] -tw-ml-1 -tw-mr-1 3xl:tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ streak }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
@@ -118,8 +119,9 @@
         <div class="tw-flex tw-justify-center tw-gap-2 tw-text-sm lg:tw-text-[11px] tw-w-full tw-px-2 lg:tw-px-0 tw-relative tw-mb-[18px] tw-max-w-[320px] tw-mx-auto">
             <!-- Streak -->
             <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 tw-flex tw-items-center tw-relative">
+                <div v-if="streak === 0" class="tw-text-[26px] tw-mx-1">🔥</div>
                 <!-- Streak Lottie -->
-                <Vue3Lottie class="tw-w-10" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
+                <Vue3Lottie v-else class="tw-w-10" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                 <!-- Streak Text -->
                 <div class="tw-grow -tw-ml-1">
                     <div class="tw-font-extrabold">{{ streak }}</div>
@@ -214,7 +216,7 @@ const actionText = computed(() => {
         return `You've missed ${missedLessons.value} lesson${missedLessons.value > 1 ? 's' : ''}.`;
     } else if(!hasChallengeStarted.value){
         return `You're enrolled! Lessons begin ${startDate.value}`;
-    } else if(isNextLessonLocked){
+    } else if(isNextLessonLocked.value){
         return `${nextLessonShortName.value} unlocks in ${countdownString.value}`;
     }
 })
@@ -351,4 +353,6 @@ watch(
         }
     },
 )
+
+console.log(props.challenge)
 </script>

@@ -25,15 +25,15 @@
             <!-- CONTENT DESCRIPTION -->
             <div v-if="contentDescription" class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
-                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About the Lesson</h6>
-                    <div v-html="contentDescription"></div>
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">About the Lesson</h6>
+                    <div v-html="contentDescription" class="tw-break-words tw-hyphens-auto"></div>
                 </div>
             </div>
 
             <!-- CHAPTER MARKERS -->
             <div v-if="contentChapters && contentChapters.length" class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
-                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">Chapter Markers</h6>
                     <template v-for="chapter in contentChapters">
                         <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
                             <a class="tw-font-bold font-underline"

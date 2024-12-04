@@ -1,14 +1,5 @@
 import ContentService from '@vuesora/assets/js/Services/content';
 
-const getValue = (obj, key) => {
-    const filtered = obj.filter((field) => {
-        if (field.key === key) {
-            return true;
-        }
-    })
-    return filtered.length ? filtered[0].value : '';
-}
-
 export default function useUserCatalogueEvents(props, context) {
     function progressReset(event) {
         const icon = event.target;
@@ -45,9 +36,9 @@ export default function useUserCatalogueEvents(props, context) {
             let thumbnail_url = '';
             let description = '';
             if (type === 'song') {
-                name = getValue(props.item.fields, 'title');
-                thumbnail_url = getValue(props.item.data, 'thumbnail_url');
-                description = getValue(props.item.fields, 'artist');
+                name = props.item.title;
+                thumbnail_url = props.item.thumbnail;
+                description = props.item.artist_name;
             } else {
                 name = props.item.title ?? '';
                 thumbnail_url = props.item.thumbnail ?? '';
