@@ -21,7 +21,10 @@
         />
 
         <template v-if="!isLoading">
-           <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
+            <!-- 
+                BE is still not complete for this - we need the last completed method lesson id for the NextLesson(railcontentId, methodId) function in MCS
+            -->
+           <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
                 <div class="tw-w-full tw-p-4 tw-pb-0">
                     <div class="tw-flex tw-flex-col">
                         <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
@@ -42,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="tw-flex tw-flex-col tw-my-[30px]">
                 <div class="tw-flex tw-w-full tw-flex-row">
