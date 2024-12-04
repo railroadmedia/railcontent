@@ -263,13 +263,16 @@ onBeforeMount(() => {
                     <div v-if="lesson.progress_percent === 100 || showOverlay"
                          class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-text-white tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center"
                     >
-                        <template v-if="showOverlay">
+                        <template v-if="showOverlay && lessonDate">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }},
                                 <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber
                                 }}</span>
                             </p>
                             <p class="tw-text-xs text-white">{{ time }}</p>
+                        </template>
+                        <template v-if="showOverlay && !lessonDate">
+                            <p class="tw-text-xs tw-font-bold">Unpublished</p>
                         </template>
                         <template v-if="lesson.progress_percent === 100">
                             <musora-icon icon-name="circle-check-filled" class="tw-w-6 tw-h-6"/>
