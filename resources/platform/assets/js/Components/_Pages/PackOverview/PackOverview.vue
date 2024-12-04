@@ -5,8 +5,8 @@
             :page-type="headerPageType"
             :title="header?.title"
             :hero-img="header?.image"
-            :dark-mode-logo="header?.darkLogo"
-            :light-mode-logo="header?.lightLogo"
+            :dark-mode-logo="header?.darkModeLogo"
+            :light-mode-logo="header?.lightModeLogo"
             :progress="header?.progress"
             :info-data="header?.infoData"
             :ctas="header?.ctas"
@@ -94,7 +94,6 @@ onMounted( async () => {
     //console.log(props.headerPageType)
     const { data: PackData, error: PackError, isLoading: PackLoading } = await usePackPageData('pack-overview');
         data.value = PackData.value;
-        //console.log('data', PackData.value)
         //Header Data
         header.value = PackData?.value?.header;
         platformStore.setLoadingState(PackLoading.value);

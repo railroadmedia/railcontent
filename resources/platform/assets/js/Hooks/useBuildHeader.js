@@ -28,8 +28,8 @@ export function useBuildHeader(progressPercent) {
         if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenge') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
-            header.darkModeLogo = result.light_logo;
-            header.lightModeLogo = result.dark_logo;
+            header.darkModeLogo = result.dark_logo;
+            header.lightModeLogo = result.light_logo;
         }
 
         return header;
