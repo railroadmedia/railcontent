@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-20" @click="handleCta">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="emit('closeModal')">Finish {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Finish {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
@@ -285,11 +285,18 @@ const updateInfoModalType = (type) => {
 
 const openAwardModal = async() => {
     const data = await fetchUserAward(props.completionData?.challenge_id);
-    console.log('award', data)
     awardData.value = data;
 
     showAchievement.value = false;
     showAward.value = true;
+}
+
+const handleCta = () => {
+    if(isNextLessonLocked.value){
+        emit('closeModal');
+    } else {
+        window.location.href = props.completionData?.next_lesson?.url;
+    }
 }
 
 onMounted(() => {
