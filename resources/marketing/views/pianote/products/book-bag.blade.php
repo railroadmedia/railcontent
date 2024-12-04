@@ -255,8 +255,7 @@
                     </div>
                     @if ($products['pianote-book-bag']->getStockAvailability() > 1 && !empty($products['pianote-book-bag']->getStockAvailability()))
                         <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500"
-                            href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
-                            @mouseout="move = false">Order Now</a>
+                            href="/ecommerce/add-to-cart?products[pianote-book-bag]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif

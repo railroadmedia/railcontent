@@ -70,9 +70,9 @@
                <div class="px-3 mx-auto w-full max-w-2xl">
                     <h2 class="leading-none my-1 md:my-4"><s class="opacity-50"> $349</s><strong> $240</strong> <span class="text-[#41F70F] text-xl md:text-3xl">(Save 31%)</span></h2>
                     @if($stock > 0)
-                        <a class="join pianote mt-4 w-full anchor-slide uppercase" href="#customize-anchor">get the deal</a>
+                        <a class="join pianote mt-4 w-full uppercase" href="/ecommerce/add-to-cart?products[the-gift-bundle-pianote]=1&promo-code=the-gift-bundle-pianote&locked=true">get the deal</a>
                     @else
-                        <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                        <a class="join sold-out mt-4 w-full">SOLD OUT</a>
                     @endif
                     </div>
                 </div>
