@@ -1,5 +1,6 @@
 export function useBuildHeader(progressPercent) {
     const buildHeader = (contentType, result, progressPercent) => {
+        console.log('result', result)
         const header = {
             type: contentType,
             title: result.title,
@@ -11,7 +12,7 @@ export function useBuildHeader(progressPercent) {
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
             let packType = 'Lessons';
-            if(contentType === 'pack-bundle') packType = 'Packs';
+            if(contentType === 'pack-bundle' && result.type === 'pack') packType = 'Packs';
             if(contentType === 'learning-path-course') packType = 'Courses';
 
             let lessonCount = contentType === 'course-part' ? result.child_count : result.lesson_count;
