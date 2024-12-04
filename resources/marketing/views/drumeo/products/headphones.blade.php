@@ -265,7 +265,7 @@
                     {{-- <div class="sm:w-5/12 join smaller outline red hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline red sm:hidden inline-block"   @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div> --}}
                     @if( $products['drumeo-headphones']->getStockAvailability() > 1 && !empty($products['drumeo-headphones']->getStockAvailability()))
-                        <a class="w-full md:w-6/12 join drumeo smaller anchor-slide ml-2" href="#customize-anchor">Order Now</a>
+                        <a class="w-full md:w-6/12 join drumeo smaller ml-2" href="/ecommerce/add-to-cart?products[drumeo-headphones]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
