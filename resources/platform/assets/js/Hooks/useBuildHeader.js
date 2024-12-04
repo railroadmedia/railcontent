@@ -45,7 +45,7 @@ export function useBuildHeader(progressPercent) {
                 isPrimary: true,
                 text: progressPercent === 0 ? "Start" :
                       progressPercent === 100 ? "Restart" : "Continue",
-                url: result.web_url_path
+                url: `/jump-to-continue-content/${result.id}`
             }
         };
         ctas.push(primaryButton);
