@@ -14,7 +14,7 @@
                 :see-all-url="`/${brand}/challenge`"
                 seeAllAriaLabel="See All Challenges"
                 catalogue-type="challenge"
-                page-type="home"
+                page-type="challenge"
                 :preLoadedContent="carousels"
             />
 
@@ -95,7 +95,9 @@ const tabData = computed(() => {
 onBeforeMount(() => {
     const fetchData = async () => {
         const challengeCarousels = await fetchCarouselCardData({ brand: brand.value });
-        carousels.value = challengeCarousels;
+        carousels.value = challengeCarousels.filter((carousel) => {
+            return !carousel.show_everywhere;
+        });
 
         collectionStore.setDefaults({
             tabOptions: tabData.value,

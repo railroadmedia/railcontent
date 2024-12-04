@@ -56,7 +56,7 @@
                             <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727435036-755827.jpg');"></div>
                             <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727463538-755945.jpg');"></div>
                         </div>
-
+                            <!-- TODO(challenge): add data for avatars -->
 <!--                        <div class="tw-flex tw-mb-2 3xl:tw-mb-1">-->
 <!--                            &lt;!&ndash; Avatars &ndash;&gt;-->
 <!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>-->
@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-model="closeAwardModal" />
+    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-modal="closeAwardModal" />
     <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
@@ -314,7 +314,6 @@ const ctaObj = computed(() => {
         else if(isEnrollmentOpened.value && !isUserEnrolled.value){
             obj.text = 'Learn More';
             obj.url = props.challenge.registration_url;
-            console.log(obj.url !== undefined)
         }
     }
 

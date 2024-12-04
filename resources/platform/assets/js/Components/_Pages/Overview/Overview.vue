@@ -214,7 +214,7 @@ const OverviewChildData = computed( () => {
 })
 
 const headerDropdown = computed(() => {
-    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value){
+    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value && isChallengeSolo.value){
         return dropdowns['challenges'];
     }
 })
@@ -225,6 +225,10 @@ const isChallenge = computed(() => {
 
 const isChallengeEnrolled = computed(() => {
     return data.value?.user_data?.is_active;
+})
+
+const isChallengeSolo = computed(() => {
+    return data.value?.lesson?.is_solo;
 })
 
 const generateChallengeCtas = (data) => {
@@ -314,10 +318,7 @@ const headerCtas = computed(() => {
 })
 
 onBeforeMount( async () => {
-    if (!isChallenge) {
-        return;
-    }
-
+    
     const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
 
     //Header Data
