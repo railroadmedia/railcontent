@@ -81,7 +81,7 @@ import InputLabel from "@units/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "@constants/brands";
 import { useFilterValues } from "@hooks/useFilterValues";
 import { useUserStore } from '@stores/user.js';
-import { fetchAll } from 'musora-content-services';
+import { fetchAll, fetchPlayAlongsCount } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
@@ -318,10 +318,19 @@ export default {
                 limit: this.limit,
                 searchTerm: this.searchTerm,
                 sort: this.sort,
+                includedFields: [],
+                groupBy: "",
+                progressIds: undefined,
+                useDefaultFields: true,
+                customFields: [],
+                progress: "all"
             })
-
+            //Count Patch
+            fetchPlayAlongsCount(brand).then(count => {
+                this.totalResults = count;
+            }).catch( error=> console.log('error fetching playalong count', error ) ) 
+            
             this.content = data.entity
-            this.totalResults = data.total;
             this.$nextTick(() => {
                 this.loading = false;
                 if (resetPlaylist) {
