@@ -39,6 +39,8 @@ import { storeToRefs } from "pinia/dist/pinia";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import PageHeader from '@collections/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
+import {usePlatformStore} from "@stores/platform";
+import {onMounted} from "vue";
 
 const props = defineProps({
     returning: {
@@ -61,10 +63,15 @@ const props = defineProps({
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const platformStore = usePlatformStore();
 
 const breadcrumbs = [
     {
         title: 'Content Updates',
     },
 ];
+
+onMounted( async () => {
+    platformStore.setLoadingState(false);
+})
 </script>
