@@ -38,7 +38,7 @@
                     <div v-for="(avatar, index) in challengeData.entity" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('${avatar.profile_picture_url}')`"></div>
                     <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
                 </div>
-                <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other drummers who have already enrolled!</p>
+                <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled!</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
@@ -86,6 +86,18 @@ const challengeData = ref({
     entity:[],
     total: 0,
 });
+
+const otherText = computed(() => {
+    if(brand.value === 'drumeo'){
+        return 'drummers';
+    } else if(brand.value === 'pianote'){
+        return 'piano players';
+    } else if(brand.value === 'guitareo'){
+        return 'guitar players';
+    } else if(brand.value === 'singeo'){
+        return 'singers';
+    }
+})
 
 const userNames = computed(() => {
     const names = [];
