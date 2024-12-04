@@ -9,16 +9,24 @@ use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
 use App\Modules\Content\Models\UserPlaylistPinned;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Railroad\Mailora\Services\MailService;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ContentService;
+use App\Modules\Content\Services\ContentProgressDataContext;
 
 class PlaylistsService
 {
     public function __construct(
         private SanityGateway $sanityGateway,
-        private MailService $mailService
+        private MailService $mailService,
+        private ContentLastEngagedService $contentLastEngagedService,
+        private ContentProgressDataContext $contentProgressDataContext
     ) {
     }
 
@@ -418,4 +426,37 @@ class PlaylistsService
                                     "message" => "The playlist was reported",
                                 ], 200);
     }
+
+    public function getPlaylistNextItem($playlistId)
+    {
+        $lastEngagedContent = $this->contentLastEngagedService
+            ->getLastEngagedContentForPlaylistId(user()->id, $playlistId);
+
+        $playlistItems = UserPlaylistContent::query()
+            ->where('user_playlist_id', '=', $playlistId)
+            ->orderBy('position', 'asc')
+            ->get();
+
+        if ($lastEngagedContent) {
+            $nextItem = $playlistItems->firstWhere('content_id', $lastEngagedContent->content_id);
+            if ($nextItem) {
+                $progress = $this->contentProgressDataContext->get($nextItem->content_id, user()->id);
+                if ($progress && $progress['state'] === 'completed') {
+                    // Find the next eligible item from the playlist
+                    $otherItems = $playlistItems->filter(fn($item) => $item->id !== $nextItem->id);
+                    $contents = $otherItems->pluck('content_id')->toArray();
+                    $progressOnOtherItems = $this->contentProgressDataContext->getByIds($contents, user()->id);
+                    $nextItem = $otherItems->first(function ($item) use ($progressOnOtherItems) {
+                        $progress = $progressOnOtherItems->firstWhere('content_id', $item->content_id);
+                        return !$progress || $progress->state !== 'completed';
+                    });
+                }
+            }
+        }
+        if (!isset($nextItem)) {
+            $nextItem = $playlistItems->first();
+        }
+        return $nextItem->id ?? null;
+    }
+
 }
