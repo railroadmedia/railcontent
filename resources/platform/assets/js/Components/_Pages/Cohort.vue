@@ -258,7 +258,7 @@
                 <template v-else>
                     <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                     <button v-else-if="!cohort['is_product'] && !hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
-                    <button @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <!-- <button @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button> -->
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
@@ -299,11 +299,11 @@
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
     //TODO(challenge): updated the field when migrating with MCS
-    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challenge="{
+    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challengeType="challengeType" :challenge="{
         ...cohort,
         dark_mode_logo_url: cohort['dark_mode_logo'],
         light_mode_logo_url: cohort['light_mode_logo'],
-    }" :challenge-type="'solo'" @modal-close="closeNotificationModal" />
+    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
     <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],

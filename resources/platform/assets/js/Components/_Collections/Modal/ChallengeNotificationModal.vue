@@ -8,7 +8,7 @@
 
             <!-- Step 1 -->
             <template v-if="step === 1">
-                <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in 30-Day Drummer!</h1>
+                <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">You're enrolled in {{ challengeTitle }}!</h1>
                 <p class="tw-mb-5 tw-text-left">Next, choose if you would like to receive practice reminders for this Challenge (make sure you download the app to get push notifications).</p>
                 <ul class="tw-text-left">
                     <li class="tw-mb-5"><input class="tw-mr-[10px]" type="radio" :value="true" v-model="selectedFrequency" /> <label>Yes, send me practice reminders!</label></li>
@@ -35,12 +35,12 @@
                 <h1 class="tw-mb-3 tw-text-2xl tw-font-bold">{{ challengeTitle }} starts on {{ startDate }}</h1>
                 <div class="tw-mb-[10px] tw-flex tw-justify-center">
                     <!-- Avatars -->
-                    <div v-for="(avatar, index) in challengeData.entity" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('${avatar.profile_picture_url}')`"></div>
-                    <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
+                    <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('https://www.musora.com/musora-cdn/image/width=40,quality=95/${avatar.profile_picture_url}')`"></div>
+                    <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('https://www.musora.com/musora-cdn/image/width=40,quality=95/${userProfilePictureUrl}')`"></div>
                 </div>
                 <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled!</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
-                    <MuButton variant="secondary" class="tw-mr-[9px]">View Challenge</MuButton>
+                    <MuButton variant="secondary" is-link :href="`${challenge.web_url_path}`" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
                 </div>
             </template>
@@ -53,7 +53,11 @@ import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
-import { postChallengesSetStartDate, fetchChallengeMetadata } from 'musora-content-services';
+import {
+    postChallengesSetStartDate,
+    fetchChallengeMetadata,
+    postChallengesCommunityNotification
+} from 'musora-content-services';
 
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
@@ -83,7 +87,7 @@ const step = ref(props.defaultStep !== 0 ? props.defaultStep : props.challengeTy
 const selectedDate = ref(new Date(Date.now()));
 const slideIn = ref(false);
 const challengeData = ref({
-    entity:[],
+    data:[],
     total: 0,
 });
 
@@ -101,7 +105,8 @@ const otherText = computed(() => {
 
 const userNames = computed(() => {
     const names = [];
-    challengeData.value.entity.forEach((user) => {
+
+    challengeData.value.data.forEach((user) => {
         names.push(user.display_name);
     });
 
@@ -109,13 +114,11 @@ const userNames = computed(() => {
 })
 
 const challengeTitle = computed(() => {
-    //TODO(challenge): updated the field when migrating with MCS
-    return props.challenge.cohort_title;
+    return props.challenge.title;
 })
 
 const startDate = computed(() => {
-    //TODO(challenge): updated the field when migrating with MCS
-    const converted = new Date(props.challenge.cohort_start_date);
+    const converted = new Date(props.challenge.published_on);
     return `${months[converted.getMonth()]} ${converted.getDate()}`;
 })
 
@@ -137,9 +140,8 @@ const handleNext = async () => {
         if(props.challengeType === 'community'){
             if(selectedFrequency.value){
                 const setNotification = await postChallengesCommunityNotification(props.challenge.id);
-
                 const data = await fetchChallengeMetadata(props.challenge.id);
-                challengeData.value = data.data;
+                challengeData.value = data;
                 step.value = 2;
 
                 setTimeout(() => {
@@ -149,6 +151,9 @@ const handleNext = async () => {
             else {
                 step.value = 2;
             }
+        }
+        else{
+            step.value = 2;
         }
     } catch (e) {
         window.shownotification({
@@ -167,12 +172,18 @@ const handleDateChange = (date) => {
 
 const setStartDate = async () => {
     try {
-        //TODO(challenge): remove content_id when migrating with MCS in enrollment page
-        const startDate = await postChallengesSetStartDate(props.challenge.content_id || props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
-
-        emit('modalClose');
+         await postChallengesSetStartDate(props.challenge.id, `${selectedDate.value.getFullYear()}-${selectedDate.value.getMonth() + 1}-${selectedDate.value.getDate()}`);
+         const date = new Date();
+         if(setStartDateButtonText.value === 'Start Now'){
+             //TODO(challenge): need to update url to the first lesson
+            window.location.href = props.challenge.web_url_path;
+        }
+        else{
+            window.location.href = `/${props.challenge.brand}`;
+        }
     }
     catch(e) {
+        console.log(e);
         window.shownotification({
             icon: 'error',
             text: 'Woops! Something wrong happened, please try again later.'

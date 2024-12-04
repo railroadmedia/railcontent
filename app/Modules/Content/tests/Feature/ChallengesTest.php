@@ -423,8 +423,8 @@ class ChallengesTest extends TestCase
         $completedLessons = 0;
         foreach ($userProgress->lessons_meta_data as $lesson_meta_datum) {
             $lessonIndex = $lesson_meta_datum['content_id'];
-            if ($lessonIndex == 3) {
-                // skip one of the unlocked contents
+            if ($lesson_meta_datum['is_always_unlocked']) {
+                // skip the unlocked contents
                 continue;
             } else {
                 $completedLessons += $lessonIndex == 1 ? 0 : 1;
@@ -450,10 +450,8 @@ class ChallengesTest extends TestCase
                     $lessonCompletedProgress['motivational_subtext']
                 );
                 $this->assertNotNull($lessonCompletedProgress['lottie_url']);
-            } elseif ($lessonIndex == 1) {
-                $this->assertFalse($lessonCompletedProgress['show_modal']);
             } else {
-                $this->assertNull($lessonCompletedProgress['milestone']);
+                $this->assertNull($lessonCompletedProgress['milestone'] ?? null);
                 $this->assertEquals("You're done for the day!", $lessonCompletedProgress['motivational_title']);
                 $this->assertEquals(
                     "Return tomorrow to maintain your streak!",
@@ -466,12 +464,169 @@ class ChallengesTest extends TestCase
 
             $this->assertEquals($completedLessons, $currentStreakData['current']);
             $this->assertEquals($completedLessons, $currentStreakData['best']);
+
             $this->assertEquals(0, $currentStreakData['missed']);
+
             $this->travel(1)->days();
         }
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
         $this->assertFalse(boolval($userProgress->is_active));
         $this->assertEquals(10, $userProgress->completed_best_streak);
+    }
+
+    public function test_streaks_with_catch_up_days_with_missed_days_and_streak_logic_10_day(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        // Start the challenge
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: Carbon::now()->startOfDay()->toISOString()
+        );
+
+        // Simulate completing lessons
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonNumber = $index + 1;
+
+            if ($lessonNumber == 3 || $lessonNumber == 4 || $lessonNumber == 5) {
+                // Skip lessons 3, 4, and 5 (simulate missing these days)
+                $this->travel(1)->days();
+                continue;
+            }
+
+            if ($lessonNumber == 6) {
+                // Complete all missed lessons (3, 4, 5) and the current lesson (6) on the same day
+                for ($missedLesson = 3; $missedLesson <= 6; $missedLesson++) {
+                    $missedLessonMetaDatum = $userProgress->lessons_meta_data[$missedLesson - 1];
+                    $challengesService->completeLessonAndGetCurrentProgressResults(
+                        $missedLessonMetaDatum['content_id'],
+                        $userId
+                    );
+                }
+            }
+
+            // Complete the lesson normally
+            $challengesService->completeLessonAndGetCurrentProgressResults(
+                $lesson_meta_datum['content_id'],
+                $userId
+            );
+
+
+            // Get the streak data
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+
+            // Assertions for streak behavior
+            if ($lessonNumber == 6) {
+                $this->assertEquals(
+                    1,
+                    $currentStreakData['current'],
+                    "Streak should increment by 1 even if multiple missed lessons are completed on a single day."
+                );
+            } elseif ($lessonNumber <= 2) {
+                $this->assertEquals($lessonNumber, $currentStreakData['current']);
+            } elseif ($lessonNumber >= 7) {
+                $this->assertEquals($lessonNumber - 5, $currentStreakData['current']);
+            }
+
+            $this->travel(1)->days();
+        }
+    }
+
+    public function test_streaks_with_catch_up_days_with_missed_days_and_catchup_day_10_day(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        // Start the challenge
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: Carbon::now()->startOfDay()->toISOString()
+        );
+
+        // Simulate completing lessons
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonNumber = $index + 1;
+
+            // skips day 6, but they have a rest day to use up
+            if ($lessonNumber == 6) {
+                $this->travel(1)->days();
+                continue;
+            }
+
+            // Complete the lesson normally
+            $challengesService->completeLessonAndGetCurrentProgressResults(
+                $lesson_meta_datum['content_id'],
+                $userId
+            );
+
+            // Get the streak data
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+
+            // Assertions for streak behavior
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+
+            $this->travel(1)->days();
+        }
+    }
+
+    public function test_streaks_with_catch_up_days_with_missed_days_and_catchup_day_streak_break_10_day(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+        $challengesService = app()->make(ChallengesService::class);
+        $this->travelTo(now()->startOfDay());
+        $this->travel(100)->minutes();
+
+        // Start the challenge
+        // Users get 1 free rest day when started if the challenge is 10 days or more
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: Carbon::now()->startOfDay()->toISOString()
+        );
+
+        // Simulate completing lessons
+        foreach ($userProgress->lessons_meta_data as $index => $lesson_meta_datum) {
+            $lessonNumber = $index + 1;
+
+            // skips day 6, but they have a rest day to use up
+            if ($lessonNumber == 6) {
+                $this->travel(1)->days();
+                continue;
+            }
+
+            // skips day 8, they have 1 more rest day
+            if ($lessonNumber == 8) {
+                $this->travel(1)->days();
+                continue;
+            }
+
+            // Complete the lesson normally
+            $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                $lesson_meta_datum['content_id'],
+                $userId
+            );
+
+            // Get the streak data
+            $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+            $currentStreakData = $userProgress->getStreakCurrentData();
+
+            // Assertions for streak behavior
+            $this->assertEquals($lessonNumber, $currentStreakData['current']);
+
+            $this->travel(1)->days();
+        }
     }
 
     public function test_index_metadata_for_challenge(): void

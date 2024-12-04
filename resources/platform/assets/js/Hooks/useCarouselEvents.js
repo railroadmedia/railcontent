@@ -22,9 +22,9 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
     }
 
     const getPageData = () => {
-        if(original.value && Array.isArray(original.value) && original.value.length > 0){
+        if(original.value && Array.isArray(original.value)){
             slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
-            if(slicedData.value.length === 0){
+            if(slicedData.value.length === 0 && page.value > 1){
                 page.value -= 1;
                 slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
             }
@@ -74,7 +74,7 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
                             text: 'Your progress has been reset.'
                         });
                     });
-        
+
                 },
             }
         });
