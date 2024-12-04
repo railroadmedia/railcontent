@@ -26,7 +26,7 @@ class QuestionAndAnswer extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Question & Answer');
+        parent::__construct(self::getName(), 'Question & Answer', withLiveEvent: true);
     }
 
     public static function getName(): string

@@ -26,7 +26,7 @@ class Live extends LessonTemplate
 {
     public function __construct()
     {
-        parent::__construct(self::getName(), 'Live Streams', withResources: true);
+        parent::__construct(self::getName(), 'Live Streams', withResources: true, withLiveEvent: true);
     }
 
     public static function getName(): string
