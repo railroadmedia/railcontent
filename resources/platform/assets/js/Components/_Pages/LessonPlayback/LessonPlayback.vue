@@ -160,9 +160,11 @@
             <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                 <SoundSlice
                     :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`"
-                    :user-id="userId" :theme-color="brand"
-                    :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="videoData?.soundslice_slug" :contentId="videoData?.id"
+                    :user-id="userId" 
+                    :theme-color="brand"
+                    :additional-params="`${getBrandSpecificParams()}&layout=3`"
+                    :soundslice-slug="videoData?.soundslice_slug" 
+                    :contentId="videoData?.id"
                     :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="soundsliceTitle || videoData.title" :disable-next="true"
