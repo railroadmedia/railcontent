@@ -242,7 +242,6 @@ const nextLessonShortName = computed(() => {
 })
 
 const streak = computed(() => {
-    return 2;
     return props.challenge.current_streak;
 })
 
