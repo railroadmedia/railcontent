@@ -307,7 +307,6 @@ onMounted(() => {
     // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
 
-
     if (isRecommendation.value && showGroupBy.value) {
         data.value.forEach(item => {
             const trackingPayload = {

@@ -12,7 +12,6 @@
                 collection-type="history"
                 :multiple-types="true"
                 :show-reset-progress="true"
-                :tab-options="tabData"
             />
         </div>
     </div>
@@ -26,26 +25,14 @@ import Breadcrumb from "@collections/Breadcrumb/Breadcrumb.vue";
 
 const collectionStore = useCollectionStore();
 
-const tabData = [
-    {
-        value: 'In Progress',
-        groupByView: false,
-        key: 'inProgress',
-    },
-    {
-        value: 'Completed',
-        groupByView: false,
-        key: 'completed',
-    },
-];
-
 onBeforeMount(() => {
     collectionStore.setDefaults({
-        tabOptions: tabData,
         filter: {
-            sort: '-published_on'
+            sort: '-published_on',
+            activeTab: 'inProgress'
         },
         fetchType: 'lessonHistory',
+        queryType: 'lesson-history'
     });
 })
 </script>

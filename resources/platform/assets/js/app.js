@@ -21,15 +21,15 @@ const config = {
         projectId:'4032r8py',
         dataset:'staging',
         version:'2021-06-07',
-        debug: false,
+        debug: true,
         useCachedAPI: !perspective,
         perspective: perspective
-      },
-      railcontentConfig: {
+    },
+    railcontentConfig: {
         token: window.railcontentConfig?.token,
         userId:  window.railcontentConfig?.userId,
-      },
-      localStorage: window.localStorage
+    },
+    localStorage: window.localStorage
 };
 
 // Initialize the service with the configuration

@@ -41,7 +41,6 @@ export const useCollectionStore = defineStore({
     },
     actions: {
         applyFilter(param) {
-            //console.log('applyFilter(param)', param)
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -254,10 +253,6 @@ export const useCollectionStore = defineStore({
                 return tab.key === this.filter.activeTab;
             })
 
-            // console.log('this.tabOptions', this.tabOptions)
-            // console.log('activeTab', activeTab) //undefined
-            // console.log('this.filter.activeTab', this.filter.activeTab); //Empty String
-
             this.filter.activeTab = activeTab.value;
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
         },
@@ -322,7 +317,6 @@ export const useCollectionStore = defineStore({
 
         async setData(response, replace) {
             const userStore = useUserStore();
-            //console.log('this.getIncludedFields()', this.getIncludedFields())
             if (response) {
                 if (replace) {
                     this.data = [...response.entity];
@@ -339,8 +333,9 @@ export const useCollectionStore = defineStore({
 
             this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
-        },
+        },  
 
+        //THIS RUNS WHEN THE PAGE LOADS!!
         async setDefaults(defaults) {
             if (defaults.isCoach) {
                 this.isCoach = defaults.isCoach;
@@ -384,7 +379,6 @@ export const useCollectionStore = defineStore({
                 platformStore.setLoadingState(false);
 
                 if(this.fetchType === 'childCollection'){
-                    //console.log('childCollection', data)
                     return data;
                 }
             }
