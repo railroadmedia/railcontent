@@ -280,7 +280,7 @@ const showInfoButton = computed(() => {
 });
 
 const nextLessonUrl = computed(() => {
-    if(isChallenge.value && isNextLessonLocked.value){
+    if(isChallenge.value && isNextLessonLocked.value && !isAdmin.value){
         return null;
     }
 
