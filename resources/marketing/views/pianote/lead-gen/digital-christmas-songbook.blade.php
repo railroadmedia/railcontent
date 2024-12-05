@@ -114,9 +114,6 @@
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/lead-gen/digital-christmas-songbook/devices.webp">
                         </div>
                         <h2 class="mt-4 mb-2"><strong>The Pianote Digital <br class="block"> Christmas Songbook</strong></h2>
-                        <p class="leading-normal">
-                            Play 10 of the most beautiful <br class="lg:hidden">
-                            and popular Christmas classics.</p>
                         <p class="leading-normal mt-2 mb-4"><strong>
                                 Enter your email address to get  <br class="lg:hidden">
                                 your FREE E-Book instantly.</strong></p>
