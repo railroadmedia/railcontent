@@ -38,7 +38,15 @@ class SearchResponse extends AlgoliaSearchResponse
      */
     public function formatToJson(): string
     {
-        return json_encode(['data' => $this->getDataForJson(), 'meta' => $this->getMetaForJson()]);
+        return json_encode($this->formatToObject());
+    }
+
+    /**
+     * Format the SearchResponse into a JSON string that our front-end and mobile app can use
+     */
+    public function formatToObject(): array
+    {
+        return ['data' => $this->getDataForJson(), 'meta' => $this->getMetaForJson()];
     }
 
     /**

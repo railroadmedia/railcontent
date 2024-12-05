@@ -17,6 +17,6 @@ class ContentSearchController extends Controller
         $searchParams = SearchParameters::fromRequest($search, $request);
         $searchResponse = $search->search($searchParams);
 
-        return response()->json($searchResponse->formatToJson());
+        return response()->json($searchResponse->formatToObject());
     }
 }

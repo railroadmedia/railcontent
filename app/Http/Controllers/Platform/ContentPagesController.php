@@ -1348,6 +1348,24 @@ class ContentPagesController extends BaseController
 
         $searchResponse = $search->search($searchParams);
 
+        /*
+         *   +objectID: "workout_412878"
+         *   +rev: "2g0uCSmAjwt10xp5lAgdJy"
+         *   +railcontent_id: 412878
+         *   +album: null
+         *   +artist: null
+         *   +brand: "drumeo"
+         *   +description: null
+         *   +difficulty: "Intermediate"
+         *   +genre: null
+         *   +instructor_names: array:1 [▶]
+         *   +language: "en-US"
+         *   +popularity: 308
+         *   +published_on:
+         */
+
+//        dd($searchResponse->formatToJson());
+
         return view('content.search', [
             "lessons" => $searchResponse->formatToJson(),
             "searchTerm" => $request->get('term', null),
