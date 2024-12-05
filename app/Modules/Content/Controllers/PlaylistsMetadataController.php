@@ -681,7 +681,7 @@ class PlaylistsMetadataController extends Controller
                             $playlistItemData = [
                                 'content_id'       => $item['id'],
                                 'content_parent'   => $item['parent_id'],
-                               // 'content_name'     => $item['title'],
+                                'content_name'     => $item['title'],
                                 'user_playlist_id' => $playlistId,
                                 'position'         => $lastPosition,
                                 'created_at'       => Carbon::now()->toDateTimeString(),
