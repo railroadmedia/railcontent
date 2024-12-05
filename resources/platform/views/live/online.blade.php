@@ -5,7 +5,7 @@
             'url' => '/'.$brand.'/live'
         ],
         [
-            'title' => $lessonContent->fetch('fields.title'),
+            'title' => $lessonContent['title'],
         ],
     ];
 @endphp
@@ -13,7 +13,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Live Lesson - {{ $lessonContent->fetch('fields.title') }} | {{ $brand }}</title>
+    <title>Live Lesson - {{ $lessonContent['title'] }} | {{ $brand }}</title>
 @endsection
 
 @section('content')

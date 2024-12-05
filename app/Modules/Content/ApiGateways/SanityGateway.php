@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\ApiGateways;
 
+use Illuminate\Support\Carbon;
 use Sanity\Client as SanityClient;
 
 class SanityGateway
@@ -118,7 +119,16 @@ class SanityGateway
                 'description': assignment_description,
                 'title':assignment_title,
         }",
-        ]
+        ],
+        'live-event' => [
+            "'type': _type",
+            "'slug':slug.current",
+            "live_event_start_time",
+            "live_event_end_time",
+            "railcontent_id",
+            "'videoId': coalesce(live_event_youtube_id, video.external_id)",
+            "'instructors':instructor[]->name"
+            ]
         ];
 
     public SanityClient $sanity;
@@ -527,6 +537,23 @@ class SanityGateway
     {
         $contentIdString= join(',', $contentIds);
         $query = "*[railcontent_id in [$contentIdString]]{_id, railcontent_id, brand, popularity, 'artistId': artist._ref, 'genreIds': genre[]._ref }";
+        return $this->sanity->fetch($query);
+    }
+    
+    public function getLiveEvents(string $brand, int $buffer = 0): array
+    {
+        $fields = $this->getFieldsString('live-event');
+        $startDate = Carbon::now('PST')->addMinutes($buffer)->toISOString();
+        $endDate = Carbon::now('PST')->subMinutes($buffer)->toISOString();
+
+        $query = '*[ live_event_start_time <= "'.$startDate.'"
+            && live_event_end_time >= "'.$endDate.'"
+            && status == "scheduled"
+            && brand == "'.$brand.'"
+            ]{
+            '.$fields.',
+        }';
+
         return $this->sanity->fetch($query);
     }
 

@@ -693,7 +693,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
         }
         if ($result->published_on) {
-            $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->format('Y-m-d\TH:i:s\Z');
+            $sanityDocuments['published_on'] = Carbon::parse($result->published_on, 'PST')->toISOString();
         }
         if (!$result->web_url_path) {
             $contentURLs =
@@ -955,7 +955,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 $imported           = true;
             }
             if ($field['key'] == 'length_in_seconds') {
-                $sanityDocuments['length_in_seconds'] = $field['value'];
+                $sanityDocuments['length_in_seconds'] = (int) $field['value'];
                 $imported           = true;
             }
             if ($field['key'] == 'transcriber_name') {
@@ -989,7 +989,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     if (($video['type'] != 'vimeo-video') && $sanityDocuments['length_in_seconds'] == 0) {
                         foreach ($video['fields'] as $videoField) {
                             if ($videoField['key'] == 'length_in_seconds') {
-                                $sanityDocuments['length_in_seconds'] = $videoField['value'];
+                                $sanityDocuments['length_in_seconds'] = (int) $videoField['value'];
                             }
                         }
                     }
@@ -999,7 +999,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         if ($vimeoData) {
                             $sanityDocuments['video']['hlsManifestUrl'] = $vimeoData['hlsManifestUrl'];
                             $sanityDocuments['video']['video_playback_endpoints'] = json_decode($vimeoData['video_playback_endpoints']);
-                            $sanityDocuments['length_in_seconds'] = $vimeoData['length_in_seconds'] ?? $sanityDocuments['length_in_seconds'];
+                            $length = $vimeoData['length_in_seconds'] ?? $sanityDocuments['length_in_seconds'];
+                            $sanityDocuments['length_in_seconds'] = (int) $length;
                         }
                         $vimeoVideos[$id] =  $sanityDocuments['video']['external_id'];
                     }
@@ -1097,7 +1098,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                 );
                 $sanityDocuments[$contentIndex]['video']['hlsManifestUrl']           = $video['hlsManifestUrl'];
                 $sanityDocuments[$contentIndex]['video']['video_playback_endpoints'] = $video['video_playback_endpoints'];
-                $sanityDocuments[$contentIndex]['length_in_seconds']                 = $video['length_in_seconds'] ?? $sanityDocuments[$contentIndex]['length_in_seconds'];
+                $length = $video['length_in_seconds'] ?? $sanityDocuments[$contentIndex]['length_in_seconds'];
+                $sanityDocuments[$contentIndex]['length_in_seconds']                 = (int) $length ;
             }
         }
         $this->info('Finish vimeo data pull');
