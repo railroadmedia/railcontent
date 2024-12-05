@@ -536,8 +536,8 @@ class SanityGateway
     public function getLiveEvents(string $brand, int $buffer = 0): array
     {
         $fields = $this->getFieldsString('live-event');
-        $startDate = Carbon::now()->addMinutes($buffer)->format('Y-m-d\TH:i:s.v\Z');
-        $endDate = Carbon::now()->subMinutes($buffer)->format('Y-m-d\TH:i:s.v\Z');
+        $startDate = Carbon::now('PST')->addMinutes($buffer)->toISOString();
+        $endDate = Carbon::now('PST')->subMinutes($buffer)->toISOString();
 
         $query = '*[ live_event_start_time <= "'.$startDate.'"
             && live_event_end_time >= "'.$endDate.'"

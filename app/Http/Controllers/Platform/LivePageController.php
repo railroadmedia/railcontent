@@ -37,7 +37,7 @@ class LivePageController extends BaseController
         $this->contentService = $contentService;
     }
 
-    public function chat(Request $request, $domain, $brand): View
+    public function chat(Request $request): View
     {
         $userRoleAdmin = user()->isAdmin();
         $chatChannelName = config('railchat.drumeo.chat_channel_name');
@@ -110,24 +110,24 @@ class LivePageController extends BaseController
 
         $timezones = CalendarService::getTimezoneList();
 
-        // get users timezone
-        $fullTimezoneString = $this->calendarService->getTimezone($request);
-        $liveEvents = $this->sanityGateway->getLiveEvents(brand(), self::NOT_LIVE_PAGE_SWITCH_MINUTES);
-
-        $showLivePage = false;
-        $currentEvent = null;
-
-        if(!empty($liveEvents)){
-            $showLivePage = true;
-            $currentEvent = $liveEvents[0];
-        }
-
         // this is for previewing any upcoming event
         if ($request->has('forced-content-id')) {
             $forcedEvent = $this->sanityGateway->getByRailcontentId($request->get('forced-content-id'));
             if (!empty($forcedEvent)) {
                 $currentEvent = $forcedEvent;
                 $showLivePage = true;
+            }
+        } else {
+            // get users timezone
+            $fullTimezoneString = $this->calendarService->getTimezone($request);
+            $liveEvents         = $this->sanityGateway->getLiveEvents(brand(), self::NOT_LIVE_PAGE_SWITCH_MINUTES);
+
+            $showLivePage = false;
+            $currentEvent = null;
+
+            if (!empty($liveEvents)) {
+                $showLivePage = true;
+                $currentEvent = $liveEvents[0];
             }
         }
 
