@@ -32,13 +32,34 @@
                     @if(!empty($subHeader))
                         {!!  $subHeader !!}
                     @else
-                        YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.
+                        YOUR FIRST @if(!empty($month)) 30 Days ARE @else Week Is @endif  FREE.
                     @endif
                     </strong></p>
                 <h3 class="leading-normal"> @if(!empty($headerLight)) {!! $header !!} @else <strong>{!! $header !!}</strong> @endif </h3>
-                <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
-                    {!! $list !!}
-                </ul>
+                    @if(!empty($headerLight))
+                        <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
+                            {!! $list !!}
+                        </ul>
+                    @else
+                        <p class="text-left mt-4 sm:mt-5 mb-3 font-black">Free access for 7 days, then $240 per year.</p>
+                        <ul class="fa-ul text-left pl-6 mb-4 sm:mb-5 mx-auto inline-block">
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> Cancel anytime.</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-{{ $theme }}"></i> 90-Day Money Back Guarantee beyond your trial.</li>
+                            <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i>
+                                @if($theme == 'drumeo')
+                                    <strong>PLUS</strong> piano, guitar, and singing lessons with full access to all Musora communities.
+                                @elseif($theme == 'pianote')
+                                    <strong>PLUS</strong> singing, guitar, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'guitareo')
+                                    <strong>PLUS</strong> singing, piano, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'singeo')
+                                    <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.
+                                @elseif($theme == 'musora')
+                                    All-access for piano, guitar, drums and singing.
+                                @endif
+                            </li>
+                        </ul>
+                    @endif
                 @if(!empty($emailSignup))
                     <div class="max-w-xs sm:max-w-sm mx-auto sm:mx-0">
                         <form id="ajaxForm" accept-charset="UTF-8" action="{{ url()->route('claim-spotify') }}" class="ajax-form clearfix facebook-track-lead w-full mx-auto" method="POST">
@@ -71,12 +92,15 @@
                             href="/choose-plan"
                         @endif
                         >
-                            START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-
+                            @if(!empty($cta))
+                                {!! $cta !!}
+                            @else
+                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                            @endif
                         </a>
-                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>
+{{--                        <p class="text-xs"><em> Pay nothing for @if(!empty($month)) 30 @else 7 @endif days, <br class="lg:hidden">then $20/month billed annually.</em></p>--}}
                         @if(!empty($theme) && $theme == 'musora')
-                            <div class="flex justify-center sm:justify-start mt-4 sm:mt-5">
+                            <div class="flex justify-center sm:justify-start">
                                 <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
                                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
                                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">

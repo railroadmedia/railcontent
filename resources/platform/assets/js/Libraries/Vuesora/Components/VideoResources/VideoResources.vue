@@ -64,7 +64,6 @@
                         class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-transition-colors disabled:tw-opacity-80"
                         :class="isLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         :title="isLiked ? 'Unlike' : 'Like'"
-                        :disabled="isLiking"
                         @click="handleLikeContent"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -261,9 +260,9 @@
             </ModalRenderer>
         </div>
 
-        <CoachesInLesson 
-            v-if="instructors?.length > 0" 
-            :instructors="instructors" 
+        <CoachesInLesson
+            v-if="instructors?.length > 0"
+            :instructors="instructors"
             :brand="brand"
         />
     </div>
@@ -285,7 +284,7 @@ import DifficultyLabel from "@units/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
 import { contentTypes } from '../../../../utils';
 import SkeletonVideoResources from '@collections/SkeletonLoader/SkeletonVideoResources';
-import { likeContent, unlikeContent } from 'musora-content-services';
+import { likeContent, unlikeContent, postChallengesCompleteLesson } from 'musora-content-services';
 
 export default {
     name: "VideoResources",
@@ -420,6 +419,11 @@ export default {
             type: Boolean,
             default: false,
         },
+
+        isChallenge: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -432,7 +436,6 @@ export default {
             showMore: false,
             showLeftArrow: false,
             showRightArrow: false,
-            isLiking: false, 
         };
     },
 
@@ -491,21 +494,18 @@ export default {
         },
 
         async handleLikeContent() {
-            if (this.isLiking) return; 
-            this.isLiking = true;     
             try {
                 // Use a conditional operator to determine whether to like or unlike
                 await (this.isLiked ? unlikeContent(this.contentId) : likeContent(this.contentId));
                 // Toggle the liked state after the request succeeds
-                this.$emit('onLikeContent'); 
+                this.$emit('onLikeContent');
             } catch (error) {
                 console.error(`Error ${this.isLiked ? 'unliking' : 'liking'} content:`, error);
             } finally {
-                this.isLiking = false; // Reset loading state
                 //Success
                 window.shownotification({
                     icon: 'check',
-                    text: `Content has been ${this.isLiked ? 'liked' : 'unliked'} successfully!`
+                    text: `Content has been ${this.isLiked ? 'unliked' : 'liked'} successfully!`
                 })
             }
         },
@@ -523,41 +523,49 @@ export default {
             window.openplaylistmodal({ modalType: 'addItem', content: data });
         },
 
-        handleCompleteLesson() {
-            //Send Request
-            if (this.isCompleted) {
-                ContentService.resetContentProgress(this.contentId)
-                    .then((resolved) => {
-                        if (resolved) {
+        async handleCompleteLesson() {
+            if(this.isChallenge){
+                //Do not complete again when it is completed
+                if(this.isCompleted) return;
+
+                this.$emit('onChallengeLessonComplete');
+            } else {
+                //Send Request
+                if (this.isCompleted) {
+                    ContentService.resetContentProgress(this.contentId)
+                        .then((resolved) => {
+                            if (resolved) {
+                                window.shownotification({
+                                    icon: 'check',
+                                    text: `Your progress has been reset.`
+                                })
+                            }
+                        }).catch(() => {
+                        window.shownotification({
+                            icon: 'error',
+                            text: 'Woops! Something wrong happened, please try again later.'
+                        })
+                    });
+                } else {
+                    ContentService.markContentAsComplete(this.contentId).then(() => {
+                        if (this.isCompleted) {
                             window.shownotification({
                                 icon: 'check',
-                                text: `Your progress has been reset.`
+                                text: `You've completed this lesson!`
                             })
                         }
                     }).catch(() => {
-                    window.shownotification({
-                        icon: 'error',
-                        text: 'Woops! Something wrong happened, please try again later.'
-                    })
-                });
-            } else {
-                ContentService.markContentAsComplete(this.contentId).then(() => {
-                    if (this.isCompleted) {
                         window.shownotification({
-                            icon: 'check',
-                            text: `You've completed this lesson!`
+                            icon: 'error',
+                            text: 'Woops! Something wrong happened, please try again later.'
                         })
-                    }
-                }).catch(() => {
-                    window.shownotification({
-                        icon: 'error',
-                        text: 'Woops! Something wrong happened, please try again later.'
                     })
-                })
 
+                }
+
+                this.$emit('onCompleteContent');
             }
 
-            this.$emit('onCompleteContent');
         },
 
         getResourceIcon(resource) {

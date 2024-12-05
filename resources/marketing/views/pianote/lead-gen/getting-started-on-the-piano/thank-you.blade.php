@@ -55,7 +55,7 @@
                 <img class="h-10 sm:h-14 filter saturate-0 brightness-0 invert" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/pianote/lead-gen/getting-started/logo.webp">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! <br class="hidden sm:inline">
-                        Check your inbox for your FREE lessons.</strong></h3>
+                        <span class="text-musora">Check your email inbox for your FREE lessons.</span></strong></h3>
                 <p class="leading-normal mt-2 mb-8">
                     Before you get started, here’s<br class="inline sm:hidden">
                     a message from Lisa!</p>

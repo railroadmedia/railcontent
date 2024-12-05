@@ -42,6 +42,10 @@ class ContentProgressController
             );
         }
 
+        if (count($allProgressData) == 0) {
+            //This fixes a strange issue when returning an empty array.  Javascript interprets it as an [] instead of a {}
+            $allProgressData[-1] = [];
+        }
         return $allProgressData->toArray();
     }
 

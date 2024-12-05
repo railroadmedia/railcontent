@@ -6,7 +6,6 @@ export default class LearningPathLevelContentModel extends ContentModel {
             brand,
             post,
         });
-
         this.card.grey_title = this.postChildLessonCount;
         this.list.thumbnail = this.post.thumbnail_url;
         this.list.thumb_title = this.levelNumber;
@@ -15,7 +14,7 @@ export default class LearningPathLevelContentModel extends ContentModel {
         this.list.grey_title = `with ${this.getInstructors()}`;
         this.list.column_data = [
             this.postChildLessonCount,
-            `${this.post.xp} xp`,
+            `${this.post.total_xp} xp`,
         ];
         this.list.description = this.post.description;
     }

@@ -1,9 +1,9 @@
 import { brands } from './constants'
 
 export const getMultiSelectOptions = ({ configOptions, property, brand }) => {
-    return configOptions[brand][property].map(
-        value => ({ text: value, value })
-      )
+  return configOptions[brand][property].map(
+    value => ({ text: value, value })
+  )
 };
 
 const getFormatPerBrand = ({ brand, options, plural, singular, configOptions }) => {
@@ -30,7 +30,7 @@ const getSavedExperience = (selectedExperience) => {
   const multiSelectMap = {};
   brands.forEach((brand) => {
     const experiencePerBrand = selectedExperience.find((experience) => experience.brand === brand);
-    if(!!experiencePerBrand) {
+    if (!!experiencePerBrand) {
       multiSelectMap[brand] = parseInt(experiencePerBrand.experience_level);
     }
   });
@@ -38,17 +38,15 @@ const getSavedExperience = (selectedExperience) => {
   return multiSelectMap;
 };
 
-const getSavedGoals = (goals) => {
-  const multiSelectMap = {};
-  brands.forEach((brand) => {
-    const goalsPerBrand = goals.find((goal) => goal.brand === brand);
-    if(!!goalsPerBrand) {
-      multiSelectMap[brand] = goalsPerBrand.goals;
+const getLastCheckedStep = (steps) => {
+  let lastIndex = -1; // Start with -1, which indicates no checked steps were found if it remains -1
+  for (let i = 0; i < steps.length; i++) {
+    if (steps[i].checked) {
+      lastIndex = i; // Update lastIndex each time a checked step is found
     }
-  });
-
-  return multiSelectMap;
-};
+  }
+  return lastIndex; // Return the last index where checked is true
+}
 
 export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument, selectedGoals }) => {
   return ({
@@ -69,7 +67,7 @@ export const getInitialInfo = ({ userId, userDisplayName, userProfilePictureUrl,
 export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, selectedGoals, brand, steps }) => {
   const newSteps = steps.map((step, index) => {
     if (index > 1) {
-      return {...step, checked: false };
+      return { ...step, checked: false };
     } else {
       return step;
     }
@@ -93,16 +91,29 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
   if (hasGear) {
     newSteps[0].checked = true;
     newSteps[1].checked = true;
-    newSteps[2].checked = true;
+    const index = newSteps.findIndex(item => item.key === 'instrumentType');
+    if (index !== -1) {
+      newSteps[index].checked = true;
+    }
   }
   if (hasExperience()) {
-    newSteps[3].checked = true;
+    const index = newSteps.findIndex(item => item.key === 'experience');
+    if (index !== -1) {
+      newSteps[index].checked = true;
+    }
   }
   if (hasGenres) {
-    newSteps[4].checked = true;
+    const index = newSteps.findIndex(item => item.key === 'genre');
+
+    if (index !== -1) {
+      newSteps[index].checked = true;
+    }
   }
   if (hasTopics) {
-    newSteps[5].checked = true;
+    const index = newSteps.findIndex(item => item.key === 'topics');
+    if (index !== -1) {
+      newSteps[index].checked = true;
+    }
   }
   if (hasGoals) {
     const index = newSteps.findIndex(item => item.key === 'goals');
@@ -110,5 +121,16 @@ export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, 
       newSteps[index].checked = true;
     }
   }
+
+  const lastCheckedStep = getLastCheckedStep(newSteps);
+
+  if (lastCheckedStep !== -1) {
+    newSteps.forEach((step, index) => {
+      if (index < lastCheckedStep) {
+        step.checked = true;
+      }
+    });
+  }
+
   return newSteps;
 };

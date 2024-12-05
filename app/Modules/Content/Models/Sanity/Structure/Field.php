@@ -68,7 +68,11 @@ class Field
             $optional['description'] = $this->description;
         }
         if (!is_null($this->to)) {
-            $optional['to'] = ['type' => $this->to];
+            if ($this->to instanceof Reference) {
+                $optional['to'] = [$this->to];
+            } else {
+                $optional['to'] = ['type' => $this->to];
+            }
         }
         if (!empty($this->of)) {
             if (!is_array($this->of)) {
@@ -127,5 +131,14 @@ class Field
     {
         $value = preg_replace("/\s\s+/", ' ', $value);
         return getStripFromJsonKey() . $value . getStripFromJsonKey();
+    }
+
+    public function addToGroup($group)
+    {
+        if (is_array($this->group)) {
+            $this->group[] = $group;
+        } else {
+            $this->group = [$this->group, $group];
+        }
     }
 }

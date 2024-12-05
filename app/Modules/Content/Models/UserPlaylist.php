@@ -20,6 +20,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string $name
  * @property string $description
  * @property string $thumbnail_url
+ * @property string $first_item_thumbnail_url
  * @property string $category
  * @property int $private
  * @property int $duration
@@ -30,7 +31,7 @@ use Modules\UserManagementSystem\Models\User;
 class UserPlaylist extends Model
 {
     protected $table = 'railcontent_user_playlists';
-    protected $fillable = ['user_id', 'type', 'brand', 'name', 'description', 'thumbnail_url', 'category', 'private', 'created_at'];
+    protected $fillable = ['user_id', 'type', 'brand', 'name', 'description', 'thumbnail_url', 'category', 'private', 'created_at', 'first_item_thumbnail_url'];
 
     public function user(): BelongsTo
     {
@@ -40,6 +41,16 @@ class UserPlaylist extends Model
     public function items(): HasMany
     {
         return $this->hasMany(UserPlaylistContent::class);
+    }
+
+    public function likes(): HasMany
+    {
+        return $this->hasMany(UserPlaylistLike::class, 'playlist_id');
+    }
+
+    public function pins(): HasMany
+    {
+        return $this->hasMany(UserPlaylistPinned::class, 'playlist_id');
     }
 
     public function scopeOfBrand(Builder $query, Brand $brand): Builder
@@ -66,7 +77,7 @@ class UserPlaylist extends Model
                                            "{$this->table}.created_at, COALESCE("
                                           . "{$this->table}.updated_at, 0), COALESCE(last_progress, 0)) as datemax")
             )
-                ->orderBy('datemax', $direction);
+                ->orderBy('datemax', 'desc');
         } else {
             // Default sorting if the column is not recognized
             return $query->orderBy($column, $direction);

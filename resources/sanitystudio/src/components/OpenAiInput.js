@@ -1,33 +1,53 @@
-import React, { useCallback } from 'react';
-import {useFormValue, useClient} from 'sanity';
-import {Stack, TextInput} from '@sanity/ui';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useFormValue, useClient } from 'sanity';
+import { Stack, TextInput } from '@sanity/ui';
 
 const OpenAiInput = React.forwardRef((props, ref) => {
-    // eslint-disable-next-line
-    const {onChange, value = '', elementProps} = props;
+    const { onChange, value = '', elementProps } = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = String(useFormValue(["_id"]));
-    const patch = sanityClient.patch( docId);
 
     const releasedYearAI = Number(useFormValue(["released_year_ai"]));
     const released = Number(useFormValue(["released"]));
-    if(releasedYearAI && releasedYearAI !== released){
-        patch.set({ released: releasedYearAI }).commit().catch(console.error);
-    }
+
     const difficultyAI = Number(useFormValue(["difficulty_ai"]));
     const difficulty = Number(useFormValue(["difficulty"]));
-    if(difficultyAI && difficultyAI !== difficulty){
-        patch.set({ difficulty: difficultyAI }).commit().catch(console.error);
-    }
 
-    const handleChange = useCallback(
-        (event) => {
-            console.log('OpenAiInput handleChange ');
-        },
-        [onChange]
-    );
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const patchDocument = async () => {
+            try {
+                const patch = sanityClient.patch(docId);
+
+                if (releasedYearAI && releasedYearAI !== released) {
+                    patch.set({ released: releasedYearAI });
+                }
+                if (difficultyAI && difficultyAI !== difficulty) {
+                    patch.set({ difficulty: difficultyAI });
+                }
+
+                await patch.commit();
+            } catch (error) {
+                console.error("Error patching document:", error);
+                setError("Failed to update document.");
+            }
+        };
+
+        if (releasedYearAI !== released || difficultyAI !== difficulty) {
+            patchDocument();
+        }
+    }, [releasedYearAI, released, difficultyAI, difficulty, docId, sanityClient]);
+
+    const handleChange = useCallback((event) => {
+        const newValue = event.currentTarget.value;
+        console.log('OpenAiInput handleChange', newValue);
+        onChange(newValue); // Call the onChange prop to handle changes externally
+    }, [onChange]);
+
     return (
         <Stack space={3}>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
             <TextInput
                 {...elementProps}
                 onChange={handleChange}

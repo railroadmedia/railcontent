@@ -282,7 +282,8 @@ const likeData = ref({
     isLiked: props.isLiked,
     likeCount: parseInt(props.likeCount)
 })
-const isContentCompleted = ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
+const isContentCompleted = ref(false);
+    //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -355,11 +356,11 @@ const handleVideoPlay = () => { }; //?
 
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
-    chapterEndTime.value = props.videoProps.totalDuration;
+    chapterEndTime.value = props.totalDuration;
     startLooping.value = loop;
 
     if (loop) {
-        chapterEndTime.value = formattedChapters.value.length === index ? props.videoProps.totalDuration : formattedChapters.value[index].time;
+        chapterEndTime.value =  videoData.value?.chapters.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.chapter_timecode;
     }
 
     openSoundslice.value = true;
@@ -562,8 +563,8 @@ onMounted(() => {
                 <div v-if="openSoundslice" id="practiceOverlay" class="bg-white">
                     <SoundSlice :user-id="userId" :theme-color="brand"
                         :additional-params="`${getBrandSpecificParams()}&layout=3`"
-                        :soundslice-slug="soundsliceSlug" :contentId="contentId" 
-                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping">
+                        :soundslice-slug="soundsliceSlug" :contentId="contentId"
+                        :start-time="chapterStartTime" :end-time="chapterEndTime" :loop="startLooping" soundsliceType="chapter-practice">
                         <template v-slot:soundsliceControls>
                             <SoundSliceControls :title="soundsliceTitle || playlistItemTitle" :disable-next="true"
                                 :disable-prev="true" @onClose="handleCloseSoundslice" />

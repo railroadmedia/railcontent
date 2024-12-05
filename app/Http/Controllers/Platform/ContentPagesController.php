@@ -17,6 +17,7 @@ use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Models\Content;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -25,6 +26,7 @@ use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Railroad\Railcontent\Controllers\ContentJsonController;
@@ -255,7 +257,8 @@ class ContentPagesController extends BaseController
                     'title' => $catalogueMeta['name'],
                 ],
             ];
-            return view('content.catalogue', [
+            $viewName = $contentTypeName == 'challenge' ? 'content.challenges' : 'content.catalogue';
+            return view($viewName, [
                 "catalogueType" => $catalogName,
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $startedListLessons,
@@ -275,6 +278,10 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
+        $content = Content::findOrFail($firstId);
+        if (!Gate::check('view', $content)) {
+            throw new NotFoundHttpException();
+        }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -428,7 +435,8 @@ class ContentPagesController extends BaseController
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
             'classicalMethodPack' => $classicalMethodPack,
             'classicalMethodPackJson' => $classicalMethodPackJson,
-            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null
+            'contentType' => ($childrenContent->isNotEmpty()) ? $childrenContent->first()->fetch('type') : null,
+            'parentType' => $primaryPage,
         ]);
     }
 
@@ -721,6 +729,7 @@ class ContentPagesController extends BaseController
 
             $contentToRenderAsLesson = $secondContent;
             $contentToRenderAsLessonParent = $firstContent;
+            $contentToRenderAsLesson['parent'] = $contentToRenderAsLessonParent;
         }
 
         if (!empty($thirdId)) {
@@ -833,7 +842,7 @@ class ContentPagesController extends BaseController
                 "firstContent" => $firstContent,
                 "rangesVideoIds" => $rangesVideoIds,
                 "adminMessage" => $adminMessage,
-
+                "primaryPage" => $primaryPage,
             ]);
         }
 
@@ -1837,5 +1846,12 @@ class ContentPagesController extends BaseController
     public function artists(Request $request)
     {
         return view('content.artists');
+    }
+
+    public function challenge(Request $request, $brand)
+    {
+        return view('content.challenges', [
+            'brand' => $brand,
+        ]);
     }
 }

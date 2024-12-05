@@ -29,12 +29,12 @@ const buildDescription = (upgradeCost) => {
     console.log(upgradeCost)
     if (upgradeCost && upgradeCost > 0) {
         descriptions.value = {
-            month: `By clicking "Pay Monthly", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $30 for Musora+ with Songs.`,
+            month: `By clicking "Pay Monthly", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $40 for Musora+ with Songs.`,
             year: `By clicking "Pay Annually", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $240 for Musora+ with Songs.`
         };
     } else {
         descriptions.value = {
-            month: `By clicking "Pay Monthly", I understand that my next renewal will be $30 for Musora+ with Songs.`,
+            month: `By clicking "Pay Monthly", I understand that my next renewal will be $40 for Musora+ with Songs.`,
             year: `By clicking "Pay Annually", I understand that my next renewal will be $240 for Musora+ with Songs.`
         };
     }
@@ -49,7 +49,7 @@ const intervalTierPrices = {
             description: 'Billed at $200 per year.'
         },
         month: {
-            title: '$25/month',
+            title: '$33.33/month',
             description: 'Pay as you go.',
         }
     },
@@ -59,7 +59,7 @@ const intervalTierPrices = {
             description: 'Billed at $240 per year.'
         },
         month: {
-            title: '$30/month',
+            title: '$40/month',
             description: 'Pay as you go.',
         }
     }

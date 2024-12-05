@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls"  :hide-controls-section="hideControlsSection" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptions" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -9,6 +9,7 @@
             <!-- Delete contentType prop after May 6th -->
             <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <ChallengeCardContainer v-else-if="isChallenge" :content="data" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
@@ -53,6 +54,7 @@ import CoachesGridCatalogue from "@vuesora/views/catalogues/CoachesGridCatalogue
 import GroupedResultsContainer from "@collections/GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "@vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "@collections/Packs/PackCatalogue";
+import ChallengeCardContainer from '@collections/Catalogue/ChallengeCardContainer';
 
 const props = defineProps({
     collectionType: {
@@ -98,10 +100,6 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
-    tabOptions: {
-        type: Array,
-        default: () => [],
-    },
     title: {
         type: String,
         default: () => '',
@@ -141,10 +139,11 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching, tabOptions } = storeToRefs(collectionStore);
 const { brand, journeySection } = storeToRefs(userStore);
 
 //Collection type reactives
+
 const isRecommendation = computed(() => {
     return props.collectionType === 'Recommendation';
 })
@@ -237,25 +236,6 @@ const isDownloadView = computed(() => {
 //Filter state reactive
 const hideFilter = computed(() => {
     return isRoutine.value;
-})
-
-const getTabOptions = computed(() => {
-    if (props.tabs?.length) {
-        return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
-            return {
-                key: (is_group_by) ? ['group_by,' + value[0]] : value,
-                value: name,
-                groupByView: (is_group_by) ? true : false,
-            }
-        })
-    }
-    return [
-        { key: `all${props.title.replace(' ', '').toLowerCase()}`, value: `All ${props.title}` },
-    ]
-});
-
-const tabOptionData = computed(() => {
-    return props.tabOptions.length > 0 ? props.tabOptions : getTabOptions.value;
 })
 
 //prop reactives

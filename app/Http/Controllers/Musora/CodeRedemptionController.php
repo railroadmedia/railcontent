@@ -204,6 +204,15 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
     }
 
+    public function headrushRedeemNewGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => true, 'theme' => 'guitareo']);
+    }
+    public function headrushRedeemExistingGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-headrush', ['newAccount' => false, 'theme' => 'guitareo']);
+    }
+
     public function sweetwaterRedeemNewSingeo()
     {
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'singeo']);

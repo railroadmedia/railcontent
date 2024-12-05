@@ -699,7 +699,7 @@
                 <br>
                 <a class="inline-block opacity-70 mt-1"
                     href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&amp;redirect=%2Forder">
-                    <p><u><em>Or click here to start a monthly membership for <br class="inline-block md:hidden">$30/month.
+                    <p><u><em>Or click here to start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month.
                                 (no free bonuses)</em></u></p>
                 </a>
             </div>

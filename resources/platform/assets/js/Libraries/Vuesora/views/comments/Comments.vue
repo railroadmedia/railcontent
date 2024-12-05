@@ -277,6 +277,15 @@ export default {
             return isLoading.value;
         },
     },
+
+    watch: {
+        contentId(newValue) {
+            if (newValue) {
+                this.getComments(this.requestParams);
+            }
+        },
+    },
+
     mounted() {
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
@@ -302,8 +311,6 @@ export default {
                 }
             }
         });
-
-        this.getComments(this.requestParams);
     },
     methods: {
         handleReplyOpened({ id }) {

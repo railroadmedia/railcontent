@@ -2,9 +2,10 @@
 
 namespace App\ViewComposers;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Services\NavigationService;
 use Illuminate\View\View;
-use Railroad\Railcontent\Services\UserPlaylistsService;
+use Modules\Content\Services\PlaylistsService;
 use Railroad\Railnotifications\Services\NotificationService;
 
 class NavigationViewComposer
@@ -14,41 +15,51 @@ class NavigationViewComposer
      */
     private $notificationService;
 
-    private $userPlaylistsService;
-
-    private static $viewDataCache;
-
     /**
-     * SidebarComposer constructor.
+     * @var PlaylistsService
      */
-    public function __construct(NotificationService $notificationService, UserPlaylistsService $userPlaylistsService)
-    {
-        $this->notificationService = $notificationService;
-        $this->userPlaylistsService = $userPlaylistsService;
-    }
+    private $playlistsService;
+
+    private $viewDataCache;
 
     /**
      * Check the users permission levels and render a different nav for different levels
+     *
+     * @param  View  $view
+     * @return void
      */
-    public function compose(View $view): void
+    public function compose(View $view)
     {
-        if (!empty(self::$viewDataCache)) {
+        if (!empty($this->viewDataCache)) {
+            return $this->viewDataCache;
+        }
+
+        if (empty(user())) {
+            $this->viewDataCache = [
+                'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
+                'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
+                "hasUnreadNotifications" => false,
+                "mostRecentPlaylists" => [],
+                "pinnedPlaylists" =>  []
+            ];
+
+            $view->with($this->viewDataCache);
+
             return;
         }
 
-        $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;
-        $pinnedPlaylists = (user()) ? $this->userPlaylistsService->getPinnedPlaylists() : [];
-        $latestPlaylists = (user()) ? $this->userPlaylistsService->getUserPlaylist(
-            user()->id,
-            'user-playlist',
-            brand(),
-            10,
-            1,
-            null,
-            'most_recent'
-        ) : [];
+        $this->notificationService = app(NotificationService::class);
+        $this->playlistsService = app(PlaylistsService::class);
 
-        self::$viewDataCache = [
+        $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;
+        $pinnedPlaylists = (user()) ? $this->playlistsService->getPinnedPlaylists(brand()) : [];
+        $latestPlaylists = [];
+        if(brand()) {
+            $brand           = Brand::from(brand());
+            $latestPlaylists = (user()) ? $this->playlistsService->getPlaylists('most_recent', $brand, null, 10, 1)['data'] : [];
+        }
+
+        $this->viewDataCache = [
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
             'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
             "hasUnreadNotifications" => $unread > 0,
@@ -56,6 +67,6 @@ class NavigationViewComposer
             "pinnedPlaylists" =>  $pinnedPlaylists
         ];
 
-        $view->with(self::$viewDataCache);
+        $view->with($this->viewDataCache);
     }
 }

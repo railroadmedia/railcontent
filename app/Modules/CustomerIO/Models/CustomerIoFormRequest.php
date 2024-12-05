@@ -3,7 +3,9 @@
 namespace App\Modules\CustomerIO\Models;
 
 use App\Rules\ReCaptcha;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class CustomerIoFormRequest extends FormRequest
@@ -19,6 +21,7 @@ class CustomerIoFormRequest extends FormRequest
         $allConfiguredFormNames = array_keys($forms);
 
         $customAttributeRules = $forms[$this->input('form_name')]['custom_attributes'] ?? [];
+        $customEventAttributesRules = $forms[$this->input('form_name')]['custom_event_attributes'] ?? [];
 
         $rules = array_merge([
             'email' => 'required|email',
@@ -26,7 +29,7 @@ class CustomerIoFormRequest extends FormRequest
             'g-recaptcha-response' => [Rule::requiredIf(function () {
                 return $this->route()->getName() === 'customer-io.submit-email-form-rc';
             }), new ReCaptcha()]
-        ], $customAttributeRules);
+        ], $customAttributeRules, $customEventAttributesRules);
 
         return $rules;
     }
@@ -35,5 +38,14 @@ class CustomerIoFormRequest extends FormRequest
     {
         $forms = config('customer-io.forms.' . config('customer-io.forms.brand'), []);
         return $forms[$this->input('form_name')]['attributes'] ?? [];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(response()->json([
+                'errors' => $validator->errors(),
+            ], 422));
+        }
     }
 }

@@ -9,25 +9,34 @@
     <meta property="og:description" content="It’s time to tame your left hand.">
     <meta property="og:url" content="https://www.pianote.com/destupefy-your-left-hand">
 
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/destupefy.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 @stop
+
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    }'
+@endsection
 
 @section('global-body')
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
-        "name" => "De-Stupefy Your Left Hand",
-        "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
-        "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
-        "noBreadcrumb" => true
-    ])
-    <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/header.jpg);">
-        <div class="container">
+{{--    @include('_partials.components.shop.promo-banner-3', [--}}
+{{--        "name" => "De-Stupefy Your Left Hand",--}}
+{{--        "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),--}}
+{{--        "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),--}}
+{{--        "noBreadcrumb" => true--}}
+{{--    ])--}}
+
+    <header class="header text-center relative z-20" style="height:auto;background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/header.jpg);">
+        <div class="container" style="z-index:20">
             <img class="logo"
                     src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
@@ -51,6 +60,23 @@
                     <br><strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
         </div>
     </header>
+
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor"
+        class="promo-banner flex text-white text-center items-center justify-center -mt-20 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-pianote"
+    >
+        <span class="inline-block mx-0 leading-tight uppercase">
+            <strong class="text-musora">SAVE 95% - OFFER ENDS IN:</strong>
+            <br>
+            <span x-cloak x-data="timer()" x-init="countdown()">
+                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+            </span>
+        </span>
+    </a>
     <div class="modal fade text-center" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
         <i class="close stop-play fas fa-times" data-dismiss="modal" aria-label="Close"></i>
         <div class="modal-dialog modal-lg" role="document">
@@ -214,7 +240,7 @@
     <section class="smarter-practice text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/smarter-practice-background.jpg">
         <div class="container">
             <h2><strong>Perfect Practice. Every time.</strong></h2>
-            <div class="flex text-left">
+            <div class="flex flex-wrap sm:flex-nowrap text-left">
                 <div class="song-demo-wrap lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/preview-soundslice.jpg"
                         data-toggle="modal" data-target="#songSlice">
                     <div class="text-arrow">
@@ -224,7 +250,7 @@
                     <i class="fas fa-play"></i>
                 </div>
 
-                <p>You’re busy. You want results from the work you put in.
+                <p class="mb-4 sm:mb-0">You’re busy. You want results from the work you put in.
                     <br><br>
                     That’s why EVERY lesson comes with hand-picked (see what I did there) practice exercises for you to work on and complete before moving to the next lesson.
                     <br><br>
@@ -297,65 +323,137 @@
             </div>
         </div>
     </section>
-    <section class="personal-teacher text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/lisa-witt.jpg);">
-        <div class="container">
-            <h1><strong>LISA WITT</strong></h1>
-            <h4 class="text-red"><em>is your teacher.</em></h4>
-            <p><strong>I was shocked.</strong>
-                <br><br>
-                My hands, they were so… <em>Uncoordinated!</em> It was like my left land was stuck in slow motion and no matter how hard I focused, how carefully I slowed down… My hands wouldn’t cooperate.
-                <br><br>
-                It was alarming. I felt like I had lost all the skills I had spent a lifetime developing.
-                <br><br>
-                I had taken a little hiatus from the piano and it had been a couple of years (yes years!) since I had properly practiced. And it showed.
-                <br><br>
-                So I took a breath, and made a commitment to completely focus on my left hand. I broke the exercises down to their most basic form, and practiced.
-                <br><br>
-                <em>And you know what happened?&nbsp;</em> <strong> I got better.</strong> After just a couple of weeks of focused left-hand practice, my playing drastically improved and I began to feel like my old piano self again.
-                <br><br>
-                Now what about you?  Do you struggle with your left hand? Does it always feel like it’s lagging behind when it comes to dexterity, coordination, and control?
-                <br><br>
-                If you’re like most piano players, chances are it does.
-                <br><br>
-                Through step-by-step lessons, I’ll show you how to break down exercises that are specifically designed to improve all aspects of your left-hand playing.
-                <br><br>
-                And I’ll show you how and what to focus on during your practice sessions, so your left hand won’t be lagging behind anymore.
-                <br><br>
-                Because I know if I can do it… <strong>So can you.</strong>
-                <br><br>
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature">
-            </p>
+    <section class="text-center px-2 sm:px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
+            <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/coach-profile.webp">
+                <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/coach-profile.webp"
+                    loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
+                    style="width: 130%;transform: translate(-44%, -7%);"
+                    src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                    alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+            </div>
+
+            <div class="text-white text-left z-10 rounded-2xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-lg sm:max-w-4xl lg:max-w-6xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
+                style="background-color:#00101d;">
+                <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
+                <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
+                <h6 class="leading-normal mt-4 lg:mt-6" style="font-size:15px">
+                    <strong>I was shocked.</strong>
+                    <br><br>
+                    My hands, they were so… <em>Uncoordinated!</em> It was like my left land was stuck in slow motion and no matter how hard I focused, how carefully I slowed down… My hands wouldn’t cooperate.
+                    <br><br>
+                    It was alarming. I felt like I had lost all the skills I had spent a lifetime developing.
+                    <br><br>
+                    I had taken a little hiatus from the piano and it had been a couple of years (yes years!) since I had properly practiced. And it showed.
+                    <br><br>
+                    So I took a breath, and made a commitment to completely focus on my left hand. I broke the exercises down to their most basic form, and practiced.
+                    <br><br>
+                    <em>And you know what happened?&nbsp;</em> <strong> I got better.</strong> After just a couple of weeks of focused left-hand practice, my playing drastically improved and I began to feel like my old piano self again.
+                    <br><br>
+                    Now what about you?  Do you struggle with your left hand? Does it always feel like it’s lagging behind when it comes to dexterity, coordination, and control?
+                    <br><br>
+                    If you’re like most piano players, chances are it does.
+                    <br><br>
+                    Through step-by-step lessons, I’ll show you how to break down exercises that are specifically designed to improve all aspects of your left-hand playing.
+                    <br><br>
+                    And I’ll show you how and what to focus on during your practice sessions, so your left hand won’t be lagging behind anymore.
+                    <br><br>
+                    Because I know if I can do it… <strong>So can you.</strong>
+                </h6>
+                <div class="text-right">
+                    <img class="h-16 lg:h-20 transition-opacity opacity-0" loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/lisa-witt-signature.svg"
+                        alt="Lisa Witt Signature">
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="student-testimonials text-center">
         <div class="container">
             <h2><strong>What students <br class="hidden-sm hidden-md hidden-lg"> are saying.</strong></h2>
-            <div class="testimonials">
-                @include('pianote.products.partials._testimonial', [
-                "heading" => "It was like I didn’t know how to play at all...",
-                "testimonial" => "My left hand seemed to have a mind of its own, and I’d get confused with the left-hand notes.<br><br>I had been having difficulty playing a song with both hands. I could play either hand alone, but when I’d try to play them together it was like I didn’t know how to play at all.<br><br>I stopped practicing the song for a few days and just concentrated on the left-hand exercises in De-Stupefy Your Left Hand for about a week.  Then when I went back to my song, I could play it with both hands!<br><br>I was so pleased. It really helped me move forward.<br><br>Now, my playing is more fluid and natural. I found it really helped me progress and overcome a hurdle that was getting me discouraged with my learning.",
-                "name" => "Joanne Dero",
-                "location" => "Ontario, Canada",
-                ])
-                @include('pianote.products.partials._testimonial', [
-                "heading" => "I noticed it was working when my wife said, ‘Hey that sounds pretty good.",
-                "testimonial" => "I had no variety in my left hand when trying to improvise. I just banged away on the chords. Also, I had very little confidence when sight-reading, constantly slowing down to get lefty in position.<br><br>De-Stupefy Your Left hand gave me (and is still giving me) specific exercises and drills that are fun to play at increasing tempos.<br><br>I noticed it was working when my wife said, “Hey that sounds pretty good.” She was right. I was running through the drills smoothly and with confidence.<br><br>I’d recommend this pack mainly because it’s fun. The lessons are short and well presented, and the exercises are designed so that you can feel yourself improving after just a few sessions. Another great addition to Pianote!",
-                "name" => "Stu Kollar",
-                "location" => "Ohio, USA",
-                ])
-                @include('pianote.products.partials._testimonial', [
-                "heading" => "(It) taught me things I would not have thought of on my own.",
-                "testimonial" => "I was struggling with my left hand, making mistakes, and having issues with my rhythm and dexterity.<br><br>De-Stupefy Your Left Hand kept my left hand pretty busy and taught me things I would not have thought of on my own.<br><br>I noticed it was making a difference when I played my arpeggios in a song I’m working on and I didn’t fumble as much. My husband said, “Wow!”. That was a great feeling!<br><br>I am more excited about my playing and more confident now. If you want to play with ease and have more dexterity in your left hand try this pack. You won’t regret it.",
-                "name" => "Linda Riddle",
-                "location" => "Missouri, USA",
-                ])
-                @include('pianote.products.partials._testimonial', [
-                "heading" => "(It feels) as if it was designed especially for my own issues.",
-                "testimonial" => "De-Stupefy Your Left Hand is really easy to follow, and being able to watch and follow along while someone else is playing makes it a lot easier.<br><br>When I started getting more control my left-hand playing became easier and lifted a load off my chest because this has always been a huge problem and frustration of mine.<br><br>De-Stupefy Your Left Hand is a really great presentation and makes a person feel as if it was designed especially for my own issues.<br><br>It was almost as if I was sitting right there!",
-                "name" => "Sean Robert Swart",
-                "location" => "South Africa",
-                ])
+            <div class="testimonials w-full">
+                <div
+                    x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            classes: {
+                                    arrow: 'splide__arrow bg-white opacity-100 top-1/2 transform -translate-y-1/2 shadow-lg h-11 w-11',
+                                    prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
+                                    next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                    pagination: 'splide__pagination hidden md:flex -bottom-10',
+                            },
+                            perMove: 1,
+                            type: 'loop',
+                            padding: '5rem',
+                            focus: 0,
+                            autoplay: true,
+                            pauseOnHover: true,
+                            pauseOnFocus: true,
+                            interval: 5000,
+                            breakpoints: {
+                                1020: {
+                                    padding: '2.5rem',
+                                },
+                                767: {
+                                    padding: '1.5rem',
+                                },
+                                620: {
+                                    drag   : 'free',
+                                    snap   : false,
+                                },
+                            },
+                        }
+                        ).mount()
+                    },
+                }"
+                >
+
+                    <div x-ref="splide" class="splide">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                <li class="splide__slide flex px-3">
+                                    @include('pianote.products.partials._testimonial', [
+                                    "heading" => "It was like I didn’t know how to play at all...",
+                                    "testimonial" => "My left hand seemed to have a mind of its own, and I’d get confused with the left-hand notes.<br><br>I had been having difficulty playing a song with both hands. I could play either hand alone, but when I’d try to play them together it was like I didn’t know how to play at all.<br><br>I stopped practicing the song for a few days and just concentrated on the left-hand exercises in De-Stupefy Your Left Hand for about a week.  Then when I went back to my song, I could play it with both hands!<br><br>I was so pleased. It really helped me move forward.<br><br>Now, my playing is more fluid and natural. I found it really helped me progress and overcome a hurdle that was getting me discouraged with my learning.",
+                                    "name" => "Joanne Dero",
+                                    "location" => "Ontario, Canada",
+                                    ])
+                                </li>
+                                <li class="splide__slide flex px-3">
+                                    @include('pianote.products.partials._testimonial', [
+                                    "heading" => "I noticed it was working when my wife said, ‘Hey that sounds pretty good.",
+                                    "testimonial" => "I had no variety in my left hand when trying to improvise. I just banged away on the chords. Also, I had very little confidence when sight-reading, constantly slowing down to get lefty in position.<br><br>De-Stupefy Your Left hand gave me (and is still giving me) specific exercises and drills that are fun to play at increasing tempos.<br><br>I noticed it was working when my wife said, “Hey that sounds pretty good.” She was right. I was running through the drills smoothly and with confidence.<br><br>I’d recommend this pack mainly because it’s fun. The lessons are short and well presented, and the exercises are designed so that you can feel yourself improving after just a few sessions. Another great addition to Pianote!",
+                                    "name" => "Stu Kollar",
+                                    "location" => "Ohio, USA",
+                                    ])
+                                </li>
+                                <li class="splide__slide flex px-3">
+                                    @include('pianote.products.partials._testimonial', [
+                                    "heading" => "(It) taught me things I would not have thought of on my own.",
+                                    "testimonial" => "I was struggling with my left hand, making mistakes, and having issues with my rhythm and dexterity.<br><br>De-Stupefy Your Left Hand kept my left hand pretty busy and taught me things I would not have thought of on my own.<br><br>I noticed it was making a difference when I played my arpeggios in a song I’m working on and I didn’t fumble as much. My husband said, “Wow!”. That was a great feeling!<br><br>I am more excited about my playing and more confident now. If you want to play with ease and have more dexterity in your left hand try this pack. You won’t regret it.",
+                                    "name" => "Linda Riddle",
+                                    "location" => "Missouri, USA",
+                                    ])
+                                </li>
+                                <li class="splide__slide flex px-3">
+                                    @include('pianote.products.partials._testimonial', [
+                                    "heading" => "(It feels) as if it was designed especially for my own issues.",
+                                    "testimonial" => "De-Stupefy Your Left Hand is really easy to follow, and being able to watch and follow along while someone else is playing makes it a lot easier.<br><br>When I started getting more control my left-hand playing became easier and lifted a load off my chest because this has always been a huge problem and frustration of mine.<br><br>De-Stupefy Your Left Hand is a really great presentation and makes a person feel as if it was designed especially for my own issues.<br><br>It was almost as if I was sitting right there!",
+                                    "name" => "Sean Robert Swart",
+                                    "location" => "South Africa",
+                                    ])
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -376,6 +474,7 @@
             </div>
         </div>
     </section>
+    <div class="unstick-trigger block"></div>
     <section class="final text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/order-background.jpg">
         <div class="container">
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo">
@@ -443,6 +542,12 @@
     </section>
 
     @include('pianote.sales.partials._footer')
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-11-09 00:00:00',
+        'promoVersion' => false
+        ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
@@ -466,4 +571,24 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
+
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 @stop

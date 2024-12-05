@@ -80,10 +80,9 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->partialMock(RechargeGateway::class, function (MockInterface $mock) use ($product2, $subscriptionData) {
             $mock->shouldReceive('getSubscriptions')->andReturn($subscriptionData);
             $mock->shouldReceive('updateSubscriptionProduct')->once()->withArgs(
-                [
-                    $subscriptionData->first(),
-                    $product2->shopify_id
-                ]
+                function ($subscription, $product) use ($subscriptionData, $product2) {
+                    return $subscription->id == $subscriptionData[0]->id && $product->id == $product2->id;
+                }
             );
         });
         /** @var SubscriptionUpgradeService $upgradeSubscriptionService */
@@ -107,10 +106,9 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->partialMock(RechargeGateway::class, function (MockInterface $mock) use ($product2, $subscriptionData) {
             $mock->shouldReceive('getSubscriptions')->andReturn($subscriptionData);
             $mock->shouldReceive('updateSubscriptionProduct')->once()->withArgs(
-                [
-                    $subscriptionData->first(),
-                    $product2->shopify_id
-                ]
+                function ($subscription, $product) use ($subscriptionData, $product2) {
+                    return $subscription->id == $subscriptionData[0]->id && $product->id == $product2->id;
+                }
             );
         });
         /** @var SubscriptionUpgradeService $upgradeSubscriptionService */
@@ -134,10 +132,9 @@ class UpgradeSubscriptionServiceTest extends TestCase
         $this->partialMock(RechargeGateway::class, function (MockInterface $mock) use ($product2, $subscriptionData) {
             $mock->shouldReceive('getSubscriptions')->andReturn($subscriptionData);
             $mock->shouldReceive('updateSubscriptionProduct')->once()->withArgs(
-                [
-                    $subscriptionData->first(),
-                    $product2->shopify_id
-                ]
+                function ($subscription, $product) use ($subscriptionData, $product2) {
+                    return $subscription->id == $subscriptionData[0]->id && $product->id == $product2->id;
+                }
             );
         });
         /** @var SubscriptionUpgradeService $upgradeSubscriptionService */

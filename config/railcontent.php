@@ -347,8 +347,6 @@ return [
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
             //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
-            \App\Decorators\Content\ChallengeDecorator::class,
-
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?

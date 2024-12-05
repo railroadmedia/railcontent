@@ -11,7 +11,7 @@
     $selectedGoals = array($drumeo, $guitareo, $singeo, $pianote);
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['hideHelpscoutInMobile' => true])
 
 @section('meta')
     <title>Onboarding | Musora</title>
@@ -23,6 +23,8 @@
             @if(request()->get('update') !== null)
                 :start-on-step="{{ json_encode(intval(request()->get('update'))) }}"
             @endif
+            :new-user="{{ $newUser }}"
+            :primary-brand="{{ json_encode(user()->primary_brand) }}"
             :config-options="{{ json_encode(config('onboarding.options')) }}"
             :selected-gear="{{ json_encode(user()->onboardingGear) }}"
             :selected-topics="{{ json_encode(user()->onboardingTopics) }}"

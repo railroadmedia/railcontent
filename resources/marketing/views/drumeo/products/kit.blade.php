@@ -208,7 +208,7 @@
 
     @php
      if(!empty($membersVersion)) {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1';
           $fullPrice = 599;
      }
      else {

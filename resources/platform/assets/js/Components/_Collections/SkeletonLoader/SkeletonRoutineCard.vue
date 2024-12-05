@@ -100,13 +100,7 @@ const props = defineProps({
 const emit = defineEmits(['showRoutineSoundSlice']);
 
 const {
-    noAccess,
     contentModel,
-    thumbnailIcon,
-    renderLink,
-    progress_percent,
-    isReleased,
-    releaseDate,
 } = useCatalogueItem(props);
 
 const mappedData = computed(() => {

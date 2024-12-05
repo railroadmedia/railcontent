@@ -14,6 +14,7 @@
             <!-- Logo -->
             <div :class="`tw-absolute tw-w-full tw-p-[10px] tw-pt-[30px] tw-flex tw-justify-center`" style="background:linear-gradient(to bottom, transparent 0%, #000 100%);" :style="`bottom: ${hasStarted ? '6px' : '0'}`">
                 <img
+                    v-if="pack.logo_image_url != null"
                     class="tw-max-h-[70px] sm:tw-max-h-[40px]"
                     :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
                     :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
@@ -81,7 +82,7 @@
                 <div class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">{{ artistName }}</div>
                 <!-- Info -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
-                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
+                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
@@ -131,6 +132,7 @@ import { computed, ref, onBeforeMount } from "vue";
 import { DateTime } from 'luxon';
 import { useResetProgress } from "@hooks/useResetProgress";
 import { usePlatformStore } from "../../../Stores/platform";
+import { getProgressPercentage } from "musora-content-services";
 
 const userStore = useUserStore();
 const { brand, isAdmin } = storeToRefs(userStore);
@@ -152,13 +154,12 @@ const noAccess = computed(() => {
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
-    if(isAdmin.value) return true;
-
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
+    if (isAdmin.value) return true;
+    return DateTime.fromISO(props.pack.published_on).toISO() < DateTime.now().toISO();
 })
 
 const releaseDate = computed(() => {
-    return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
+    return DateTime.fromISO(props.pack.published_on).toFormat('LLL d/yy');
 })
 
 const title = computed(() => {
@@ -169,9 +170,7 @@ const description = computed(() => {
     return props.pack.description;
 })
 
-const progressPercent = computed(() => {
-    return props.pack.progress_percent;
-})
+const progressPercent = ref(0);
 
 const hasStarted = computed(() => {
     return progressPercent.value > 0;
@@ -271,6 +270,6 @@ const logoStyle = computed(() => {
 })
 
 onBeforeMount( () => {
-    //console.log('props.pack', props.pack)
+    getProgressPercentage(props.pack.id).then((result) => progressPercent.value = result);
 })
 </script>

@@ -16,8 +16,8 @@ class ExpiredMemberRedirect
         if (!empty(user()) && !empty(brand()) && !user()->isAdmin()) {
             $user = user();
 
-            if ((!$user->isAMember() && $user->isAnExpiredMember() && !$user->isPackOwner()) ||
-                (empty($this->membership_expiration_date) && !$user->isPackOwner() && !$user->isAMember())) {
+            if ((!$user->isAMember() && $user->isAnExpiredMember() && !$user->isPackOrChallengeOwner()) ||
+                (empty($this->membership_expiration_date) && !$user->isPackOrChallengeOwner() && !$user->isAMember())) {
                 return redirect()->route('platform.membership-expired');
             }
 

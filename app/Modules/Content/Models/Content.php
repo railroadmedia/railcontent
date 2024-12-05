@@ -806,11 +806,11 @@ class Content extends Model
                     $assignment->language   = 'en-US';
                     $assignment->created_on = Carbon::now()->toDateTimeString();
                     $assignment->brand      = $this->brand;
-                    $assignment->soundslice_slug = $assignmentData['assignment_soundslice'];
+                    $assignment->soundslice_slug = $assignmentData['assignment_soundslice']??null;
                     $assignment->save();
                     $value[$index]['railcontent_id'] = $assignment->id;
                     $assignment->setParentId($this->id);
-                    $assignment->setDescription($assignmentData['assignment_description']);
+                    $assignment->setDescription($assignmentData['assignment_description']??null);
                 }
             }
         }
@@ -836,5 +836,26 @@ class Content extends Model
                     ->toDateTimeString();
             $hierarhy->save();
         }
+    }
+
+    public function setParentContentData($parents)
+    {
+        $parentContentData = [];
+        foreach($parents as $parent) {
+            $parentContentData[] =
+                (object)[
+                    'id'       => $parent['id'],
+                    'slug'     => $parent['slug'],
+                    'type'     => $parent['type'],
+                    'position' => null,
+                ];
+        }
+
+        $this->parent_content_data = (json_encode($parentContentData));
+    }
+
+    public function setWebUrlPath($value)
+    {
+        $this->web_url_path = $value;
     }
 }

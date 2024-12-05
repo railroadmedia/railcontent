@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "baseUrl": "resources/platform",
+        "paths": {
+            "@components/*": ["assets/js/Components/*"],
+            "@libraries/*": ["assets/js/Libraries/*"],
+            "@stores/*": ["assets/js/Stores/*"],
+            "@constants/*": ["assets/js/Constants/*"],
+            "@services/*": ["assets/js/Services/*"],
+            "@hooks/*": ["assets/js/Hooks/*"],
+            "@units/*": ["assets/js/Components/_Units/*"],
+            "@collections/*": ["assets/js/Components/_Collections/*"],
+            "@pages/*": ["assets/js/Components/_Pages/*"],
+            "@vuesora/*": ["assets/js/Libraries/Vuesora/*"]
+        }
+    },
+    "include": ["resources/platform/assets/js/**/*"]
+}

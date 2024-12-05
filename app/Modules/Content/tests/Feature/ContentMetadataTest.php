@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\tests\Feature;
 
+use App\Maps\ContentTypes;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\Content;
@@ -271,12 +272,13 @@ class ContentMetadataTest extends TestCase
         $response->assertJson($expectedJson);
     }
 
-    public function test_in_progress_content_returns_correct_value_for_all_content_types(): void
+    public function test_in_progress_content_returns_correct_value_for_all_homepage_content_types(): void
     {
         Content::factory()->count(10)->create();
-        $this->createContentWithProgress(5, 3);
-        $this->createContentWithProgress(4, 1, type: 'workout');
-        $this->createContentWithProgress(10, 6, type: 'challenge');
+        foreach (ContentTypes::inProgressContentTypes() as $contentType) {
+            $this->createContentWithProgress(4, 1, type: $contentType);
+        }
+        Content::factory()->count(10)->create();
         $incompleteContentIds = ContentUserProgress::where('user_id', $this->user->id)
             ->where('state', ProgressState::Started->value)
             ->pluck('content_id');
@@ -289,6 +291,41 @@ class ContentMetadataTest extends TestCase
         );
         $response->assertOk();
         $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_ignores_non_homepage_content_types(): void
+    {
+        Content::factory()->count(10)->create();
+        $validType = $this->faker->randomElement(ContentTypes::inProgressContentTypes());
+        $this->createContentWithProgress(10, 6, type: $validType);
+        $invalidType = 'learning-path';
+        $this->createContentWithProgress(4, 1, type: $invalidType);
+        $incompleteHomePageContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->whereHas('content', function ($query) use ($validType) {
+                $query->where('type', $validType);
+            })
+            ->pluck('content_id');
+        $incompleteNonHomePageContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->whereHas('content', function ($query) use ($invalidType) {
+                $query->where('type', $invalidType);
+            })
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteHomePageContentIds->toArray()
+        ];
+
+        $unexpectedJson = [
+            ProgressState::Started->value => $incompleteNonHomePageContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+        $response->assertJsonMissing($unexpectedJson);
     }
 
     public function test_in_progress_content_returns_error_for_invalid_brand(): void
@@ -386,12 +423,12 @@ class ContentMetadataTest extends TestCase
         $response->assertJson($expectedJson);
     }
 
-    public function test_completed_content_returns_correct_value_for_all_content_types(): void
+    public function test_completed_content_returns_correct_value_for_all_homepage_content_types(): void
     {
         Content::factory()->count(10)->create();
-        $this->createContentWithProgress(5, 3);
-        $this->createContentWithProgress(4, 1, type: 'workout');
-        $this->createContentWithProgress(10, 6, type: 'challenge');
+        foreach (ContentTypes::inProgressContentTypes() as $contentType) {
+            $this->createContentWithProgress(4, 1, type: $contentType);
+        }
         $completeContentIds = ContentUserProgress::where('user_id', $this->user->id)
             ->where('state', ProgressState::Completed->value)
             ->pluck('content_id');

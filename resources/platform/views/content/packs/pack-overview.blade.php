@@ -84,12 +84,8 @@
     } elseif($parentContent->fetch('type') === 'challenge'){
         $breadcrumbs = [
             [
-                "title" => 'Workouts',
-                "url" => url()->route('platform.workouts'),
-            ],
-            [
                 "title" => 'Challenges',
-                "url" => url()->route('platform.workouts.challenges'),
+                "url" => url()->route('platform.content-type-catalog', ['challenge']),
             ],
             [
                  "title" => $parentContent->fetch('fields.title'),

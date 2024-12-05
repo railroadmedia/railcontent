@@ -1,6 +1,7 @@
 import { computed, ref } from "vue";
 import axios from "axios";
 import userJourney from "@services/userJourney";
+import { contentStatusReset } from "musora-content-services";
 
 export default function useCarouselEvents (originalData, slicedData, page, cardNum, trackingSection = null, brand = 'drumeo') {
     const original = ref(originalData || []);
@@ -21,9 +22,9 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
     }
 
     const getPageData = () => {
-        if(original.value && Array.isArray(original.value) && original.value.length > 0){
+        if(original.value && Array.isArray(original.value)){
             slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
-            if(slicedData.value.length === 0){
+            if(slicedData.value.length === 0 && page.value > 1){
                 page.value -= 1;
                 slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
             }
@@ -37,10 +38,15 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
                         position: index,
                     })),
                 }
-    
+
                 userJourney.trackRecommendedContentServed(trackingPayload);
             }
         }
+    }
+
+    const reFetchData = async (data) => {
+        original.value = data;
+        slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
     }
 
     const nextPage = () => {
@@ -53,17 +59,27 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         getPageData();
     }
 
+    const removeItem = (contentId) => {
+        original.value = original.value.filter((item) => item.id !== contentId);
+        getPageData();
+    }
+
     const resetProgress = (contentId) => {
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset your progress, are you sure about this?',
             callbacks: {
                 submit: () => {
-                    original.value = original.value.filter((item) => item.id !== contentId);
-                    getPageData();
+                    removeItem(contentId);
 
-                    axios.put(`/railcontent/reset`, {
-                        content_id: contentId,
-                    })
+                    //Reset Progress
+                    contentStatusReset(contentId)
+                    .then(() => {
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Your progress has been reset.'
+                        });
+                    });
+
                 },
             }
         });
@@ -78,5 +94,7 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         nextPage,
         prevPage,
         resetProgress,
+        removeItem,
+        reFetchData,
     }
 }

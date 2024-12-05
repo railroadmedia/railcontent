@@ -36,11 +36,11 @@
                 </div>
             </div>
             <h2>Start playing piano or <br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
-            <a
-                class="join vue-add-to-cart"
-                href="/ecommerce/add-to-cart?products[worship-piano]=1"
-                data-product-json='{"worship-piano": 1}'
-            >Get Started &raquo;</a>
+{{--            <a--}}
+{{--                class="join vue-add-to-cart"--}}
+{{--                href="/ecommerce/add-to-cart?products[worship-piano]=1"--}}
+{{--                data-product-json='{"worship-piano": 1}'--}}
+{{--            >Get Started &raquo;</a>--}}
 
             <p class="breakdown">
                 @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
@@ -619,11 +619,11 @@
         <div class="container">
             <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo">
             <h2>Start playing piano or<br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
-            <a
-                href="/ecommerce/add-to-cart?products[worship-piano]=1"
-                class="join vue-add-to-cart"
-                data-product-json='{"worship-piano": 1}'
-            >Get Started &raquo;</a>
+{{--            <a--}}
+{{--                href="/ecommerce/add-to-cart?products[worship-piano]=1"--}}
+{{--                class="join vue-add-to-cart"--}}
+{{--                data-product-json='{"worship-piano": 1}'--}}
+{{--            >Get Started &raquo;</a>--}}
             <p class="breakdown">
                 @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['worship-piano']->price) }}.</s> &nbsp;

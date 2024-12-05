@@ -6,8 +6,8 @@
             :page-type="header?.type"
             :title="header?.title"
             :hero-img="header?.image"
-            :dark-mode-logo="header?.darkLogo"
-            :light-mode-logo="header?.lightLogo"
+            :dark-mode-logo="header?.darkModeLogo"
+            :light-mode-logo="header?.lightModeLogo"
             :progress="header?.progress"
             :info-data="header?.infoData"
             :ctas="header?.ctas"
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <!-- TODO: Completion Bonus XP does not exist in data -->
-            <CompletionBonus :xp-bonus="xpBonus" /> 
+            <CompletionBonus :xp-bonus="xpBonus" />
         </template>
 
         <div v-else class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 tw-gap-3 tw-my-[30px]">
@@ -88,7 +88,7 @@ onMounted( async () => {
         data.value = PackData.value;
         //Header Data
         header.value = PackData?.value?.header;
-        //console.log( 'header', header.value )
+
         platformStore.setLoadingState(PackLoading.value);
 })
 </script>

@@ -2525,6 +2525,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -2546,9 +2547,11 @@ return [
             'show_onboarding',
             'last_used_brand',
             'active_permissions_ids',
-	    'primary_brand',
+            'primary_brand',
             'homepage_v2',
+            'explore_tasks',
             'is_first_access',
+            'brand_minutes_practiced',
         ],
 
         'quick-tips' => [
@@ -5754,6 +5757,7 @@ return [
             'isEdgeExpired',
             'edgeExpirationDate',
             'isPackOnlyOwner',
+            'isChallengeOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'permission_level',
@@ -5774,9 +5778,10 @@ return [
             'active_permissions_ids',
             'primary_brand',
             'homepage_v2',
+            'explore_tasks',
             'is_first_access',
+            'brand_minutes_practiced',
         ],
-
         'quick-tips' => [
             'id',
             'type',

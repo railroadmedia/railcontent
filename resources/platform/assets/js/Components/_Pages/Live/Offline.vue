@@ -26,13 +26,13 @@
 
             <!-- Content Schedule -->
             <div v-if="!isLoading" class="tw-flex tw-flex-row">
-                <ContentSchedule 
-                    v-if="schedule.length" 
+                <ContentSchedule
+                    v-if="schedule.length"
                     :preloaded-content="schedule"
-                    :subscription-calendar-id="subscriptionCalendarId" 
-                    :theme-color="brand" 
+                    :subscription-calendar-id="subscriptionCalendarId"
+                    :theme-color="brand"
                     :timezone="timezone"
-                />              
+                />
                 <span class="dark:tw-text-white" v-else>No scheduled releases</span>
             </div>
 
@@ -95,15 +95,10 @@ const breadcrumbs = [
 const schedule = ref([]);
 const isLoading = ref(false);
 
-//Computed
-const hasScheduleEvents = computed(() =>{
-    return schedule.value.length > 0;
-});
-
 // Lifecycles
 onBeforeMount(async () => {
     isLoading.value = true;
-    try {        
+    try {
         const upcomingEvents = await fetchUpcomingEvents(brand.value, {
             page: 1,
             limit: 20,

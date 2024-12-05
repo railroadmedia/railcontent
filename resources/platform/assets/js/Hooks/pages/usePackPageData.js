@@ -1,6 +1,6 @@
 // hooks/usePackPageData.js
 import { ref } from 'vue';
-import { fetchCompletedState, fetchPackAll, fetchPackData } from 'musora-content-services';
+import { getProgressPercentage, fetchPackAll, fetchPackData } from 'musora-content-services';
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
 
@@ -17,30 +17,17 @@ export async function usePackPageData(contentType) {
         return match ? match[1] : null;
     }
 
-    const getProgressPercent = async () => {
-        const id = getContentId();
-        if (!id) return 0;
-
-        try {
-            const completedState = await fetchCompletedState(id);
-            return completedState ? completedState.percent : 0;
-        } catch (error) {
-            console.error('Error fetching completed state:', error);
-            return 0;
-        }
-    }
-
     const contentId = getContentId();
-    const progressPercent = await getProgressPercent();
+    const progressPercent = await getProgressPercentage(contentId); 
 
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
     if(contentType === "pack-overview") {
         try {
-            const result = await fetchPackData(contentId, "pack-bundle");
+            const result = await fetchPackData(contentId);
             if (result) {
-                console.log('result', result)
+                //console.log('result', result)
                 data.value = result;
                 data.value.header = buildHeader("pack-bundle", result, progressPercent); // Use the hook to build header
             }

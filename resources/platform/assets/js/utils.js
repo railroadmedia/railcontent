@@ -79,6 +79,7 @@ export const trapFocus = (element) => {
 
 export const contentTypes = {
     'learning-path-lesson': { singular: 'Method Lesson', plural: 'Method Lessons' },
+    'learning-path-course': { singular: 'Course', plural: 'Courses' },
     'pack-lesson': { singular: 'Pack Lesson', plural: 'Pack Lessons' },
     'quick-tips': { singular: 'Quick Tip', plural: 'Quick Tips' },
     'boot-camps': { singular: 'Boot Camp', plural: 'Boot Camps' },
@@ -90,6 +91,7 @@ export const contentTypes = {
     'workout': { singular: 'Workout', plural: 'Workouts' },
     'rudiment': { singular: 'Rudiment', plural: 'Rudiments' },
     'pack-bundle-lesson': { singular: 'Pack Bundle Lesson', plural: 'Pack Bundle Lessons' },
+    'pack-bundle': { singular: 'Pack', plural: 'Packs' },
     'semester-pack-lesson': { singular: 'Semester Pack Lesson', plural: 'Semester Pack Lessons' },
     'challenge-part': { singular: 'Challenge Part', plural: 'Challenge Parts' },
     'song-tutorial-children': { singular: 'Song Tutorial Lesson', plural: 'Song Tutorial Lessons' },
@@ -108,7 +110,7 @@ export const contentTypes = {
     'archives': { singular: 'Archive', plural: 'Archives' },
     'recording': { singular: 'Recording', plural: 'Recordings' },
     'backstage-secrets': { singular: 'Backstage Secrets', plural: 'Backstage Secrets' },
-    'challenges': { singular: 'Challenge', plural: 'Challenges' },
+    'challenge': { singular: 'Challenge', plural: 'Challenges' },
     'diy-drum-experiments': { singular: 'DIY Drum Experiment', plural: 'DIY Drum Experiments' },
     'drum-fest-international-2022': { singular: 'Drum Fest International 2022', plural: 'Drum Fest International 2022' },
     'exploring-beats': { singular: 'Exploring Beat', plural: 'Exploring Beats' },
@@ -130,7 +132,8 @@ export const contentTypes = {
     'recommended': { singular: 'Inspired By Your Activity', plural: 'Inspired By Your Activity' },
     'pack': { singular: 'Pack', plural: 'Packs' },
     'coach-lessons': { singular: 'Coach Lesson', plural: 'Coach Lessons' },
-    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' }
+    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' },
+    'odd-times': { singular: 'Odd Times With Aaron Edgar', plural: 'Odd Times With Aaron Edgar' },
 };
 
 export const toKebabCase = (string) => {
@@ -138,4 +141,37 @@ export const toKebabCase = (string) => {
         .replace(/([a-z])([A-Z])/g, "$1-$2")
         .replace(/[\s_]+/g, '-')
         .toLowerCase();
+};
+
+/**
+ * Retrieve date in LLL d/yy, h:mma format from timestamp
+ * @param dateString
+ * @returns {string|null}
+ */
+export const getDate = (dateString) => {
+    // handle null
+    if (!dateString) return null;
+
+    // handle invalid
+    const date = new Date(dateString);
+    if (isNaN(date)) return null;
+
+    // Create a formatter for date
+    const dateFormatter = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric'
+    });
+
+    // Create a formatter for time
+    const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+    });
+
+    // Format date and time
+    const formattedDate = dateFormatter.format(date).replace(/, /g, '/');
+    const formattedTime = timeFormatter.format(date).toLowerCase(); // Convert to lowercase for 'am/pm'
+
+    return `${formattedDate} - ${formattedTime}`;
 };

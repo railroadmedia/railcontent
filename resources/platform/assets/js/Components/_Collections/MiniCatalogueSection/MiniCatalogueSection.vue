@@ -1,14 +1,14 @@
 <template>
-    <section class="tw-flex tw-flex-row tw-mb-[30px]">
+    <section v-if="isLoading || (!isLoading && data.length > 0)" class="tw-flex tw-flex-row tw-mb-[30px]">
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+            <div :id="secetionId" class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-center">
-                    <a @click="handleSeeAllClick" :href="seeAllUrl"
-                       class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
-                        <ChevronRightIcon class="tw-w-5" />
-                    </a>
+                    <component :is="seeAllUrl ? 'a' : 'div'" @click="handleSeeAllClick" :href="seeAllUrl"
+                       class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all " :class="seeAllUrl ? 'hover:tw-border-current' : ''">
+                        <h2 class="tw-font-bold tw-text-[20px] tw-leading-[30px] lg:tw-leading-[36px] lg:tw-text-[24px]" v-html="title"></h2>
+                        <ChevronRightIcon v-if="seeAllUrl" class="tw-w-5" />
+                    </component>
                     <slot name="label"></slot>
                 </div>
                 <div v-if="showPagination" class="tw-flex tw-items-center">
@@ -20,7 +20,10 @@
             </div>
             <div>
                 <transition appear name="fade">
+                    <ChallengeCarousel v-if="isChallenge" :pre-loaded-content="data" :page-type="pageType" @remove-challenge="removeItem" @re-fetch-carousel="reFetchData" />
+                    <ChallengeAwardContainer v-else-if="isChallengeAward" :pre-loaded-content="data" />
                     <CatalogueCardContainer
+                        v-else
                         :force-no-links="forceNoLinks"
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="data"
@@ -28,6 +31,7 @@
                         :tracking-section="trackingSection"
                         :page="page"
                         :is-mini-catalogue="true"
+                        :show-see-all-card="preLoadedContent.length > 6 && showSeeAllCard"
                         @on-progress-reset="resetProgress"
                     />
                 </transition>
@@ -37,12 +41,17 @@
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref, watch} from 'vue';
-import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer.vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import CatalogueCardContainer from '@collections/Catalogue/CatalogueCardContainer';
+import ChallengeCarousel from '@collections/ChallengeCarousel/ChallengeCarousel';
 import { useUserStore } from '@stores/user';
 import userJourney from '@services/userJourney';
 import useCarouselEvents from "@hooks/useCarouselEvents";
+import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import ChallengeAwardContainer from '@collections/ChallengeAwardContainer/ChallengeAwardContainer';
+import {usePlatformStore} from "@stores/platform";
+import {storeToRefs} from "pinia/dist/pinia";
 
 const props = defineProps({
   seeAllUrl: {
@@ -88,14 +97,37 @@ const props = defineProps({
   trackingSection: {
     type: String,
     default: ''
-  }
+  },
+  catalogueType: {
+    type: String,
+    default: ''
+  },
+  pageType: {
+    type: String,
+    default: ''
+  },
+  secetionId: {
+    type: String,
+    default: ''
+  },
 });
 
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const data = ref([]);
 const page = ref(1);
 const cardNum = ref(5);
+const showSeeAllCard = ref(false);
+
+const isChallenge = computed(() => {
+    return props.catalogueType === 'challenge';
+})
+
+const isChallengeAward = computed(() => {
+    return props.catalogueType === 'challengeAward';
+})
 
 const handleSeeAllClick = (event) => {
   if (props.seeAllUrl && props.trackingSection) {
@@ -112,29 +144,12 @@ const handleSeeAllClick = (event) => {
   }
 };
 
-const watchResize = () => {
-    if(props.isMiniView){
-        if(window.innerWidth > 2256){
-            cardNum.value = 10;
-        } else if(window.innerWidth > 1536){
-            cardNum.value = 8;
-        } else if(window.innerWidth > 1280){
-            cardNum.value = 6;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else {
-            cardNum.value = 20;
-        }
-    } else {
-        if(window.innerWidth > 1536){
-           cardNum.value = 5;
-        } else if(window.innerWidth > 1024){
-            cardNum.value = 4;
-        } else if(window.innerWidth <= 1024){
-            cardNum.value = 20;
-        }
-    }
+const toggleSeeAllCard = (val) => {
+    showSeeAllCard.value = val;
+}
 
+const watchResize = () => {
+    getCardNum(props, cardNum, toggleSeeAllCard);
     getPageData();
 }
 
@@ -155,5 +170,5 @@ watch(
     },
 )
 
-const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
+const { showPagination, isFirstPage, isLastPage, getPageData, resetProgress, nextPage, prevPage, setOriginal, removeItem, reFetchData } = useCarouselEvents(props.preLoadedContent, data, page, cardNum);
 </script>

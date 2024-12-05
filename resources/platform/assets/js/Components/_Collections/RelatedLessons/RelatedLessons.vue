@@ -35,7 +35,7 @@
           >
             <div v-for="(item, i) in relatedLessons" :key="i"
               class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
-              <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
+              <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" :is-challenge="isChallenge" />
             </div>
           </section>
         </div>
@@ -59,6 +59,10 @@ const props = defineProps({
     type: [Object, Array],
     required: true
   },
+  isChallenge: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const platformStore = usePlatformStore();

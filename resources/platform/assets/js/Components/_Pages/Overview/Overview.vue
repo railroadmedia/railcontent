@@ -10,17 +10,21 @@
             :progress="header?.progress"
             :info-data="header?.infoData"
             :is-loading="isLoading"
+            :hero-img="header?.thumbnail"
+            :dropdowns="headerDropdown"
             :progress-label-text="headerData?.progressLabelText"
             :icon-name="headerData?.iconName"
-            :ctas="headerData?.ctas"
+            :ctas="headerCtas"
+            :lesson-data="data?.lesson"
             :dark-mode-logo="headerData?.darkModeLogo"
             :light-mode-logo="headerData?.lightModeLogo"
         />
 
         <template v-if="!isLoading">
-
-            <!-- BACK-END NOT IMPLEMENTED -->
-            <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
+            <!--
+                BE is still not complete for this - we need the last completed method lesson id for the NextLesson(railcontentId, methodId) function in MCS
+            -->
+           <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
                 <div class="tw-w-full tw-p-4 tw-pb-0">
                     <div class="tw-flex tw-flex-col">
                         <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
@@ -110,6 +114,7 @@ import ListCatalogue from '@collections/ListCatalogue/ListCatalogue'
 import CollectionWrapper from '@collections/CollectionWrapper/CollectionWrapper';
 import SkeletonListCatalogueItem from '@collections/SkeletonLoader/SkeletonListCatalogueItem';
 import { useOverviewPageData } from '@hooks/pages/useOverviewPageData';
+import { dropdowns } from '@pages/Overview/dropdowns';
 
 const props = defineProps({
     contentType: {
@@ -176,6 +181,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    parentType: {
+        type: String,
+        default: '',
+    },
 })
 
 //Pinia
@@ -186,8 +195,10 @@ const { isLoading } = storeToRefs(platformStore);
 
 //Refs
 const data = ref(null);
+const challengeOverviewContent = ref([]);
 const header = ref(null);
 const error = ref(null);
+const isUnlocked = ref(false); //challenge dropdown
 
 //Computed
 const showOverview = computed(() => {
@@ -202,20 +213,120 @@ const OverviewChildData = computed( () => {
     return data.value.children;
 })
 
+const headerDropdown = computed(() => {
+    if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value && isChallengeSolo.value){
+        return dropdowns['challenges'];
+    }
+})
+
+const isChallenge = computed(() => {
+    return props.parentType === 'challenge';
+})
+
+const isChallengeEnrolled = computed(() => {
+    return data.value?.user_data?.is_active;
+})
+
+const isChallengeSolo = computed(() => {
+    return data.value?.lesson?.is_solo;
+})
+
+const generateChallengeCtas = (data) => {
+    if(isChallengeEnrolled.value){
+        //when next lesson is the first lesson
+        if(data.next_lesson.id === data.children[0].id){
+            let type;
+
+            if(data.next_lesson.locked){
+                type = 'LockedChallengeCta';
+            } else {
+                type = 'PageHeaderPrimaryCta';
+            }
+
+            return [
+                {
+                    type,
+                    props: {
+                        text: 'Start Challenge',
+                        url: data.children[0].web_url_path,
+                        isPrimary: true,
+                    }
+                }
+            ]
+        } else {
+            // if next lesson is locked
+            if(data.next_lesson.is_locked){
+                return [
+                    {
+                        type: 'PageHeaderPrimaryCta',
+                        props: {
+                            text: `Replay ${data.previous_lesson.title}`,
+                            isPrimary: true,
+                        },
+                        lessonData: data.previous_lesson.web_url_path,
+                    }
+                ]
+            }
+            // if next lesson is unlocked
+            else {
+                let obj;
+                if(!data.previous_lesson.completed){
+                    obj = {
+                        url: data.previous_lesson.web_url_path,
+                        text: 'Continue'
+                    }
+                } else {
+                    obj = {
+                        url: data.next_lesson.web_url_path,
+                        text: 'Next Lesson',
+                        faIconClass: 'fas fa-play',
+                    }
+                }
+
+                return [
+                    {
+                        type: 'PageHeaderPrimaryCta',
+                        props: {
+                            ...obj,
+                            isPrimary: true,
+                        }
+                    }
+                ]
+            }
+        }
+    } else {
+        return [
+            {
+                type: 'PageHeaderPrimaryCta',
+                props: {
+                    text: 'Enroll now',
+                    faIconClass: 'fa-regular fa-graduation-cap',
+                    url: data.lesson.registration_url,
+                    isPrimary: true,
+                }
+            }
+        ];
+    }
+}
+
+const headerCtas = computed(() => {
+    if(isChallenge.value){
+        return data.value && generateChallengeCtas(data.value);
+    } else {
+        return props.headerData.ctas;
+    }
+})
+
 onBeforeMount( async () => {
-    // console.log('content type is', props.contentType)
-    // console.log('headerData', props.headerData.ctas)
-    // console.log('sanity content is: ', props.contentType);
-    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType);
-        data.value = OverviewData.value;
-        console.log('overview page data', data.value)
+    const { data: OverviewData, error: OverviewError, isLoading: OverviewLoading } = await useOverviewPageData(props.contentType, props.parentType);
 
-        //Header Data
-        header.value = OverviewData.value.header;
+    //Header Data
+    header.value = OverviewData.value.header;
 
-        console.log(header.value)
+    isUnlocked.value = OverviewData.value?.is_unlocked;
 
-        //console.log('my data', data.value)
-        platformStore.setLoadingState(OverviewLoading.value);
+    data.value = OverviewData.value;
+
+    platformStore.setLoadingState(OverviewLoading.value);
 })
 </script>

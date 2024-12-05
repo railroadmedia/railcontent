@@ -14,13 +14,11 @@ const userStore = useUserStore();
 const notification = useNotificationStore();
 
 const props = defineProps({
-  loginurl: {
+  redirectUrl: {
     type: String,
+    default: ''
   },
   reseturl: {
-    type: String,
-  },
-  joinurl: {
     type: String,
   },
   usecsrftoken: {
@@ -86,6 +84,10 @@ const changeConfirmationScreen = (confirmationType) => {
   }
 };
 
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
 const handleButtonClick = () => {
   isLoading.value = true;
   localStorage.setItem("lastEmailUsed", emailInput.value);
@@ -93,10 +95,15 @@ const handleButtonClick = () => {
   axios.post('/user-management-system/login', {
     email: emailInput.value,
     password: passwordInput.value,
-    redirect_to: new URLSearchParams(window.location.search).get('redirect_to')
+    redirect_to: new URLSearchParams(window.location.search).get('redirect_to') ?? props.redirectUrl
   })
     .then((response) => {
       if (response.status === 200) {
+          deleteCookie(`hideOnboardingBanner_drumeo`);
+          deleteCookie(`hideOnboardingBanner_guitareo`);
+          deleteCookie(`hideOnboardingBanner_singeo`);
+          deleteCookie(`hideOnboardingBanner_pianote`);
+          
           const redirectTo = response.data.redirect_to;
           if (redirectTo) {
             window.location.href = redirectTo;

@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
-        <div v-if="!isLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+        <div v-if="!isLoading && !initialDataFetched && !isUserDataLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
             <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-relative">
                     <MembershipUpgradeSongCover v-if="noAccess" :thumbnail-url="thumbnailUrl" />
@@ -65,11 +65,11 @@
                             :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${brand} tw-text-white dark:tw-bg-${brand} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                             data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                             @click="markSongAsComplete">
-                            <span v-if="lessonProgressRef !== '100'">
+                            <span v-if="lessonProgressRef !== 100">
                                 <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                 Mark as Complete
                             </span>
-                            <span v-if="lessonProgressRef === '100'">
+                            <span v-if="lessonProgressRef === 100">
                                 <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                 Completed
                             </span>
@@ -81,7 +81,7 @@
                         :title="songTitle"
                         :description="songArtist"
                         :is-liked="isLiked"
-                        :like-count="likeData.value?.likeCount"
+                        :like-count="likeCount"
                         :is-added="isAdded"
                         :content-id="contentId"
                         :user-id="userId"
@@ -168,7 +168,7 @@
     </div>
 </template>
 <script setup>
-import { ref, onBeforeMount} from 'vue';
+import { ref, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@stores/user';
 import ContentLessonActionButtons from '@vuesora/Components/VideoResources/ContentLessonActionButtons.vue';
@@ -176,8 +176,8 @@ import SoundSlice from "@collections/SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import ContentService from "@vuesora/assets/js/Services/content";
 import MembershipUpgradeSongCover from '../MembershipUpgradeSongCover/MembershipUpgradeSongCover';
-import { isContentLiked } from 'musora-content-services';
 import DraftLabel from '@units/DraftLabel/DraftLabel';
+import { getProgressPercentage } from 'musora-content-services';
 
 const userStore = useUserStore();
 const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
@@ -190,11 +190,10 @@ const props = defineProps({
     songTitle: String,
     songArtist: String,
     songAlbum: String,
-    songMeta: String,
+    genre: Array,
     isAdded: Boolean,
     assignments: Array,
     hasInstrumentless: Boolean,
-    lessonProgress: [Number, String],
     reportLogo: String,
     noAccess: Boolean,
     showDraft: {
@@ -203,12 +202,24 @@ const props = defineProps({
     },
 });
 
-const likeData = ref({});
+const likeCount = ref(0);
 const isLiked = ref(false);
-const isCompleted = ref(false);
 const soundsliceObject = ref(props.assignments?.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
-const lessonProgressRef = ref(props.lessonProgress);
+const lessonProgressRef = ref(0);
+const initialDataFetched = ref(false);
+const isUserDataLoading = ref(false);
+
+const songMeta = computed(() => {
+    if (!props.genre || props.genre.length === 0) {
+        return '';
+    }
+    const uniqueGenres = [...new Set(props.genre)];
+    if (uniqueGenres.length === 1) {
+        return uniqueGenres[0];
+    }
+    return uniqueGenres?.join(', ');
+});
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -219,7 +230,7 @@ const openFull = () => {
 };
 
 const markSongAsComplete = () => {
-    if (lessonProgressRef.value === '100') {
+    if (lessonProgressRef.value === 100) {
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
             subtitle: 'This cannot be undone.',
@@ -236,7 +247,7 @@ const markSongAsComplete = () => {
                                 lessonProgressRef.value = null;
                             }
                         }).catch(() => {
-                            lessonProgressRef.value = '100';
+                            lessonProgressRef.value = 100;
                             window.shownotification({
                                 icon: 'error',
                                 text: 'Woops! Something wrong happened, please try again later.'
@@ -246,13 +257,13 @@ const markSongAsComplete = () => {
             },
         });
     } else {
-        lessonProgressRef.value = '100';
+        lessonProgressRef.value = 100;
         ContentService.markContentAsComplete(props.contentId).then(() => {
             window.shownotification({
                 icon: 'check',
                 text: `You completed this song!`
             })
-            lessonProgressRef.value = '100';
+            lessonProgressRef.value = 100;
         }).catch(() => {
             lessonProgressRef.value = null;
             window.shownotification({
@@ -290,17 +301,31 @@ const handleCloseSoundslice = () => {
     Intercom.showWidget();
 };
 
-onBeforeMount(async () => {
-    // Execute all Video Calls
-    const [like, liked ] = await Promise.all([
-        axios.get(`/content/${props.contentId}/user_data/${userId.value}`),
-        isContentLiked(props.contentId),
-    ]);
+const fetchInitialData = async () => {
+    isUserDataLoading.value = true;
+    try {
+        // Get Progress Percentage
+        lessonProgressRef.value = await getProgressPercentage(props.contentId);
 
-    // Update ref data reactively after the calls resolve
-    likeData.value = like?.data;
-    isLiked.value = liked;
+        // Fetch Song Data
+        const response = await fetch(`/content/${props.contentId}/user_data/${userId.value}`);
+        const value = await response.json();
+        likeCount.value = value?.likeCount;
+        isLiked.value = value?.isLiked;
+        isUserDataLoading.value = false;
+    } catch (error) {
+        console.error('Error fetching song data:', error);
+        isUserDataLoading.value = false;
+    }
+};
 
-    console.log(isLiked.value)
-});
+watch(
+    () => props.contentId,
+    (newContentId) => {
+        if (newContentId) {
+            fetchInitialData();
+        }
+    },
+    { immediate: true }
+);
 </script>

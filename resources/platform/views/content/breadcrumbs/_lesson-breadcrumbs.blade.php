@@ -32,12 +32,8 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         'pages' => [
             [
-                'title' => 'Workouts',
-                'url' => url()->route('platform.workouts'),
-            ],
-            [
                 'title' => 'Challenges',
-                'url' => url()->route('platform.workouts.challenges'),
+                "url" => url()->route('platform.content-type-catalog', ['challenge']),
             ],
             [
                 'title' => $parent->fetch('fields.title'),

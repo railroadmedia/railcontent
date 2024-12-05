@@ -1,22 +1,21 @@
-// hooks/useBuildHeader.js
-import { ref } from 'vue';
-
 export function useBuildHeader(progressPercent) {
     const buildHeader = (contentType, result, progressPercent) => {
+        console.log('result', result)
         const header = {
             type: contentType,
             title: result.title,
             description: result.description,
             ctas: buildHeaderCTA(result),
             progress: progressPercent,
+            contentId: result.id,
         };
 
         if (contentType !== 'learning-path-level' && contentType !== 'unit') {
             let packType = 'Lessons';
-            if(contentType === 'pack-bundle') packType = 'Packs';
+            if(contentType === 'pack-bundle' && result.type === 'pack') packType = 'Packs';
             if(contentType === 'learning-path-course') packType = 'Courses';
 
-            let lessonCount = result.lesson_count;
+            let lessonCount = contentType === 'course-part' ? result.child_count : result.lesson_count;
             if(contentType === 'learning-path-course' || contentType === 'learning-path-lesson') lessonCount = result.child_count;
 
             header.infoData = [
@@ -25,12 +24,12 @@ export function useBuildHeader(progressPercent) {
             ];
         }
 
-        // Add additional custom fields based on contentType if 
-        if (contentType === 'pack' || contentType === 'pack-bundle') {
+        // Add additional custom fields based on contentType if
+        if (contentType === 'pack' || contentType === 'pack-bundle' || contentType === 'challenge') {
             header.thumbnail = result.thumbnail;
             header.image = result.image;
-            header.darkModeLogo = result.light_logo;
-            header.lightModeLogo = result.dark_logo;
+            header.darkModeLogo = result.dark_logo;
+            header.lightModeLogo = result.light_logo;
         }
 
         return header;
@@ -46,7 +45,7 @@ export function useBuildHeader(progressPercent) {
                 isPrimary: true,
                 text: progressPercent === 0 ? "Start" :
                       progressPercent === 100 ? "Restart" : "Continue",
-                url: result.web_url_path
+                url: `/jump-to-continue-content/${result.id}`
             }
         };
         ctas.push(primaryButton);

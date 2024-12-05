@@ -44,7 +44,7 @@
                             <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                         </div>
                         <template v-else>
-                            <!--  Enroll now Button  -->
+                            <!-- Enroll now Button-->
                             <button v-if="!hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                             <!--  Closed Button  -->
                             <span v-else class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
@@ -258,12 +258,17 @@
                 <template v-else>
                     <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                     <button v-else-if="!cohort['is_product'] && !hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <!-- <button @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button> -->
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
 
             <!-- Cart link -->
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
+
+            <div v-if="challengeType === 'solo'" class="tw-text-center tw-mb-2">
+                <button @click="openActionModal" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
+            </div>
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
@@ -293,55 +298,31 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    <!-- Sign up Modal -->
-    <ModalRenderer v-if="openSignUp">
-        <button class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50" @click="openSignUp = false">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-            <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${cohort['light_mode_logo']}`" alt="modal logo" />
-            <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${cohort['dark_mode_logo']}`" alt="modal logo" />
-            <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
-            <p class="tw-mb-5">
-                The course runs from {{ startDateText }} - {{ endDateText }}. We’ll notify you before the course begins.
-            </p>
-            <div>
-                <a :href="`/${brand}`" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Go home</a>
-                <a :href="cohort['course_url']" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white">Go to course</a>
-            </div>
-        </div>
-    </ModalRenderer>
-
-    <!-- Purchase Modal -->
-    <ModalRenderer v-if="openPurchase">
-        <button class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50" @click="openPurchase = false">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-            <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${cohort['light_mode_logo']}`" alt="modal logo" />
-            <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${cohort['dark_mode_logo']}`" alt="modal logo" />
-            <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
-            <p class="tw-mb-5">
-                The course runs from {{ startDateText }} - {{ endDateText }}. We’ll notify you before the course begins.
-            </p>
-            <div class="tw-mb-4">
-                <a :href="cohort['product_cart_link']" target="_blank" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white tw-w-full">Click here to complete your purchase</a>
-            </div>
-            <div>
-                <a :href="cohort['course_url']" class="tw-text-sm tw-text-[#2563EB] tw-underline ">Change your mind? Click here to to go the course instead.</a>
-            </div>
-        </div>
-    </ModalRenderer>
+    //TODO(challenge): updated the field when migrating with MCS
+    <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challengeType="challengeType" :challenge="{
+        ...cohort,
+        dark_mode_logo_url: cohort['dark_mode_logo'],
+        light_mode_logo_url: cohort['light_mode_logo'],
+    }" :challenge-type="challengeType" @modal-close="closeNotificationModal" />
+    <ChallengeActionModal v-if="openChallengeActionModal" modal-type="unlock"  @close-modal="closeActionModal"
+      :challenge="{
+        dark_mode_logo_url: cohort['dark_mode_logo'],
+        light_mode_logo_url: cohort['light_mode_logo'],
+        id: cohort['content_id'],
+        title: cohort['cohort_title'],
+    }" />
 </template>
 <script setup>
 import { inject, ref, computed, onBeforeMount } from 'vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
+import { postChallengesEnroll } from 'musora-content-services';
+
 import CohortDropdown from '@collections/Dropdown/CohortDropdown';
 import VideoModal from '@collections/Modal/VideoModal';
-import ModalRenderer from "@collections/Modal/ModalRenderer";
-import { XIcon } from "@heroicons/vue/solid";
+import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
+import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -378,40 +359,48 @@ const token = inject('csrf_token');
 const isEnrolled = ref(props.hasProduct);
 const countdownText = ref('');
 const openTrailer = ref(false);
-const openSignUp = ref(false);
 const openPurchase = ref(false);
 const hasEnded = ref(false);
+const openChallengeNotificationModal = ref(false);
+const openChallengeActionModal = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
 });
 
-const enroll = (purchase = false) => {
-    if(!isEnrolled.value){
-        fetch(props.registerUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': token,
-            },
-            referrerPolicy: 'no-referrer',
-        })
-        .then((response) => {
-            isEnrolled.value = true;
-
-            if(purchase){
-                openPurchase.value = true;
-                return;
-            }
-
-            openSignUp.value = true;
-        })
-        .catch((e) => {
-            window.shownotification({
-                isError: true
-            });
-        });
+const challengeType = computed(() => {
+    if(props.cohort.is_solo){
+        return 'solo';
+    } else {
+        return 'community'
     }
+})
+
+const enroll = async() => {
+    try {
+        const enrollUser = await postChallengesEnroll(props.cohort.content_id);
+        isEnrolled.value = true;
+        openChallengeNotificationModal.value = true;
+    } catch (e){
+        window.shownotification({
+            icon: 'error',
+            text: 'Woops! Something wrong happened, please try again later.'
+        })
+    }
+
+    openChallengeNotificationModal.value = true;
+}
+
+const closeNotificationModal = () => {
+    openChallengeNotificationModal.value = false;
+}
+
+const openActionModal = () => {
+    openChallengeActionModal.value = true;
+}
+
+const closeActionModal = () => {
+    openChallengeActionModal.value = false;
 }
 
 const addOrdinal = (day) =>{
@@ -460,6 +449,7 @@ const countdown = () => {
 }
 
 onBeforeMount(() => {
+    console.log(props.cohort)
     if(props.cohort['enrollment_end_date']){
         countdown();
         setInterval(countdown, 1000);

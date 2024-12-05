@@ -7,7 +7,9 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Modules\RailTracker\Enums\MediaTypeEnum;
+use App\Modules\RailTracker\Events\MediaPlaybackTracked;
 use App\Modules\RailTracker\Models\MediaPlaybackSession;
+use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
 use App\Modules\RailTracker\Services\ContentEngagementService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
@@ -15,6 +17,7 @@ use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
+use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -22,9 +25,6 @@ use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
-use App\Modules\RailTracker\Events\MediaPlaybackTracked;
-use App\Modules\RailTracker\Repositories\MediaPlaybackRepository;
-use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class ContentProgressEventListener
 {

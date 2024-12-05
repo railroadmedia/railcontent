@@ -4,6 +4,7 @@ namespace App\Modules\Content\Controllers;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
 use App\Http\Controllers\BaseController;
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\CatalogMetadata;
@@ -75,11 +76,13 @@ use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
 use App\Modules\Content\Models\Vimeo;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
+use App\Decorators\Content\UrlDecorator;
 
 class SanityStudioCMSController extends BaseController
 {
@@ -212,9 +215,13 @@ class SanityStudioCMSController extends BaseController
         try {
             $client = new \GuzzleHttp\Client();
             $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
-            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
-                'auth' => $auth,
-            ]);
+            $response = $client->request(
+                'GET',
+                'https://www.soundslice.com/' . 'api/v1/slices/' . $slug . '/recordings',
+                [
+                    'auth' => $auth,
+                ]
+            );
 
             $body = json_decode($response->getBody(), true);
             $duration = 0;
@@ -229,6 +236,8 @@ class SanityStudioCMSController extends BaseController
 
     public function getLastContent(Request $request): array|Content
     {
+        $urlDecorator = app()->make(UrlDecorator::class);
+
         if ($request->get('_type') === 'permission') {
             $permissionService = app()->make(PermissionService::class);
             $permission = $permissionService->getByName($request->get('name'));
@@ -237,93 +246,182 @@ class SanityStudioCMSController extends BaseController
             }
             return $permission;
         } else {
-            if ($request->has('railcontent_id')) {
-                $content = Content::query()
-                    ->where('type', '=', $request->get('_type'))
-                    ->where('id', '=', $request->get('railcontent_id'))
-                    ->first();
-            } else {
-                $content = Content::query()
-                    ->where('type', '=', $request->get('_type'))
-                    ->where('slug', '=', $request->get('slug')['current'])
-                    ->first();
-            }
-
-            if (!$content) {
-                $content             = new Content();
-                $content->type       = $request->get('_type');
-                $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
-                $content->language   = 'en-US';
-                $content->created_on = Carbon::now()->toDateTimeString();
-                $content->status     = 'published';
-                $content->brand      = $request->get('brand');
-
-                $content->save();
-            }
-
-            $content->status = 'published';
-            $content->brand  = $request->get('brand');
-            $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
-            $content->setTitle($request->get('title'));
-            $content->setDifficulty($request->get('difficulty'));
-            $content->setXP($request->get('xp'));
-            $content->setReleased($request->get('released'));
-            $content->setAlbum($request->get('album'));
+            $updatedContents = [];
+            $lessonType = $this->getLessonType($request->get('_type'));
+            $content = $this->findOrCreateContent($request, $lessonType);
             $assignments = $content->setAssignments($request->get('assignment'));
-            $chilrens = [];
+
             if($request->has('childrenArray')){
                 $chilrens = $request->get('childrenArray');
                 foreach ($chilrens as $index=>$children){
-                    $content->setChildId($children['railcontent_id'], ($index + 1));
-                          event(new ContentCreated($children['railcontent_id']));
-                    $childrens[] = Content::query()
-                        ->where('id', '=', $children['railcontent_id'])
-                        ->first();
+                    $childId = $children['railcontent_id'];
+                    if(!$childId){
+                        $child = new Content();
+                        $child->type = $children['_type'];
+                        $child->slug = $children['slug'];
+                        $child->brand = $children['brand'];
+                        $child->language   = 'en-US';
+                        $child->created_on = Carbon::now()->toDateTimeString();
+                        $child->status     = $children['status'];
+                        $child->save();
+                        $childId = $child->id;
+                    }else{
+                        $child = Content::with('children')
+                            ->where('id', '=', $childId)
+                            ->first();
+                        $children = $child->children;
+                        $childrenWithGrandchildren = $children->map(function($childHierarchy) {
+                            return                               $childHierarchy->child                           ;
+                        });
+                        $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, [$child,$content], $urlDecorator, $updatedContents);
+                    }
+                    $child->setParentId($content->id, 1);
+                    $child->setParentContentData([$content]);
+                    $content->setChildId($childId, ($index + 1));
+                    $this->decorateContent($child, $urlDecorator);
+                    $child->save();
+                    $updatedContents[] = ['railcontent_id'=> $child->id, 'web_url_path'=> $child->web_url_path, 'parent_content_data'=> $child->parent_content_data];
                 }
             }
             if($request->has('parent_id')){
                     $content->setParentId($request->get('parent_id'), 1);
                 }
-
+            $this->decorateContent($content, $urlDecorator);
             $content->save();
-
-            event(new ContentCreated($content->id));
-
-            //need to pull again content for the web_url_path
-            $content = Content::query()
-                ->where('id', '=', $content->id)
-                ->first();
+            $results = ['railcontent_id'=> $content->id, 'web_url_path'=> $content->web_url_path, 'parent_content_data'=>$content->parent_content_data];
             if($assignments) {
-                $content['assignment'] = $assignments;
+                $results['assignments'] = $assignments;
             }
-            if(!empty($chilrens)){
-                $content['childrens'] = $childrens;
-            }
+            $results['relatedDocs'] = $updatedContents;
 
-            return $content;
+            return $results;
         }
+    }
+
+    /**
+     * Finds or creates the top-level content based on the request.
+     *
+     * @param Request $request
+     * @return Content
+     */
+    private function findOrCreateContent(Request $request, $lessonType): Content
+    {
+        // Attempt to find an existing content.
+        $content = Content::query()
+            ->where('type', '=', $lessonType)
+            ->where('id', '=', $request->get('railcontent_id'))
+            ->first();
+
+        // Create a new content if it doesn't exist.
+        if (!$content) {
+            $content = new Content();
+            $content->type = $lessonType;
+            $content->language = 'en-US';
+            $content->slug = $request->get('slug')['current'] ?? null;
+            $content->created_on = Carbon::now()->toDateTimeString();
+            $content->status = $request->get('status');
+            $content->brand = $request->get('brand');
+            $content->save();
+        }
+
+        $content->slug = $request->get('slug')['current'] ?? null;
+        $content->status = $request->get('status');
+        $content->brand = $request->get('brand');
+        $publishedOn = $request->get('published_on') ?? null;
+        $content->published_on = $publishedOn ? Carbon::parse($publishedOn) : null;
+
+        $content->setTitle($request->get('title'));
+        $content->setDifficulty($request->get('difficulty'));
+        $content->setXP($request->get('xp'));
+        $content->setReleased($request->get('released'));
+        $content->setAlbum($request->get('album'));
+
+        $content->save();
+        return $content;
+    }
+
+    /**
+     * Decorates a content object with its web URL.
+     *
+     * @param Content $content
+     * @param UrlDecorator $urlDecorator
+     * @return void
+     */
+    private function decorateContent(Content $content, UrlDecorator $urlDecorator): void
+    {
+        $content = $urlDecorator->decorate(collect([$content]))->first();
+        $webUrlPath = parse_url($content['url'] ?? '', PHP_URL_PATH);
+        if ($webUrlPath) {
+            $content->setWebUrlPath($webUrlPath);
+        }
+        unset($content['url']);
+    }
+
+    /**
+     * Retrieves the lesson type based on the Sanity type.
+     *
+     * @param string|null $type
+     * @return string|null
+     */
+    private function getLessonType(?string $type): ?string
+    {
+        return array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$type] ?? $type;
     }
 
     public function getVimeoEndpoints(string $vimeoId): ?Vimeo
     {
         $video = Vimeo::where('external_id', $vimeoId)->first();
-        if(!$video) {
-            ConfigService::$brand  = 'musora';
+        if (!$video) {
+            ConfigService::$brand = 'musora';
             $vimeoTrailerDecorator = app()->make(VimeoTrailerDecorator::class);
             $vimeo = $vimeoTrailerDecorator->decorate($vimeoId);
-            if($vimeo){
+            if ($vimeo) {
                 $video = Vimeo::create(
                     [
-                        'external_id'              => $vimeoId,
-                        'video_poster_image_url'   => $vimeo['video_poster_image_url'],
+                        'external_id' => $vimeoId,
+                        'video_poster_image_url' => $vimeo['video_poster_image_url'],
                         'video_playback_endpoints' => json_encode($vimeo['video_playback_endpoints']),
-                        'hlsManifestUrl'           => $vimeo['hlsManifestUrl'],
-                        'length_in_seconds'        => $vimeo['length_in_seconds']
+                        'hlsManifestUrl' => $vimeo['hlsManifestUrl'],
+                        'length_in_seconds' => $vimeo['length_in_seconds']
                     ]
                 );
             }
-      }
+        }
 
         return $video;
+    }
+
+    /**
+     * @param array $children
+     * @param array $parents
+     * @param mixed $urlDecorator
+     * @param array $updatedContents
+     * @return array
+     */
+    private function updateHierarchy(
+        Collection $children,
+        array $parents,
+        mixed $urlDecorator,
+        array $updatedContents
+    ): array {
+        foreach ($children as $childOfChild) {
+            $childOfChild->setParentContentData($parents);
+            $this->decorateContent($childOfChild, $urlDecorator);
+            $childOfChild->save();
+            $updatedContents[] = [
+                'railcontent_id' => $childOfChild->id,
+                'web_url_path' => $childOfChild->web_url_path,
+                'parent_content_data' => $childOfChild->parent_content_data
+            ];
+            if($childOfChild->children) {
+                $children =$childOfChild->children;
+                $childrenWithGrandchildren = $children->map(function ($childHierarchy) {
+                    return $childHierarchy->child;
+                });
+                $parents = array_merge([$childOfChild], $parents);
+                $updatedContents = $this->updateHierarchy($childrenWithGrandchildren, $parents, $urlDecorator, $updatedContents);
+            }
+        }
+        return $updatedContents;
     }
 }

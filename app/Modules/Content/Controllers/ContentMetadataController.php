@@ -2,16 +2,15 @@
 
 namespace App\Modules\Content\Controllers;
 
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
-use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
 use App\Modules\Content\Requests\ContentProgressMetadataRequest;
-use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
-use Exception;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
@@ -84,7 +83,7 @@ class ContentMetadataController extends Controller
         // if the user ID isn't provided, grab the user from the session
         $user = $user ?? user();
 
-        $type = $request['content_type'] ?? null;
+        $type = $request->get('content_type') ? (array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('content_type')] ?? $request->get('content_type')) :  null;
         $brandValue = $request['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
@@ -95,16 +94,21 @@ class ContentMetadataController extends Controller
 
         $results =
             $user->progress()
-                ->when($progressState === ProgressState::Started, fn($query) => $query->incomplete())
-                ->when($progressState === ProgressState::Completed, fn($query) => $query->complete())
-                ->when(!is_null($type), fn($query) => $query->ofContentType($type))
-                ->when(!is_null($brand), fn($query) => $query->ofContentBrand($brand))
+                ->when($progressState === ProgressState::Started, fn ($query) => $query->incomplete())
+                ->when($progressState === ProgressState::Completed, fn ($query) => $query->complete())
+                ->when(
+                    !is_null($type),
+                    fn ($query) => $query->ofContentType($type),
+                    // if not looking for a specific content type, use our restricted list
+                    fn ($query) => $query->ofHomePageContentTypes()
+                )
+                ->when(!is_null($brand), fn ($query) => $query->ofContentBrand($brand))
                 ->when(
                     !is_null($page),
                     // when we're using pagination, we need to apply the limit to the page
-                    fn($query) => $query->forPage($page, $limit),
+                    fn ($query) => $query->forPage($page, $limit),
                     // otherwise, apply the limit to the whole query (if it's there)
-                    fn($query) => $query->when(!is_null($limit), fn($query) => $query->limit($limit))
+                    fn ($query) => $query->when(!is_null($limit), fn ($query) => $query->limit($limit))
                 )
                 ->pluck('content_id');
 

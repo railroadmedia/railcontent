@@ -1,5 +1,5 @@
 @extends('_partials.components.forms.blog-form-layout', [
-    'brand' => 'singeo',
+    'theme' => 'singeo',
     'darkBg' => true
 ])
 

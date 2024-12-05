@@ -6,6 +6,7 @@ use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
 use App\Modules\Content\Controllers\ContentSearchController;
 use App\Modules\Content\Controllers\UserPermissionsController;
+use App\Modules\Content\Controllers\V1\CarouselControllerV1;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
 use App\Modules\DataVersion\Middleware\DataVersionGetMiddleware;
 use App\Modules\DataVersion\Middleware\DataVersionUpdateMiddleware;
@@ -142,6 +143,16 @@ Route::prefix('challenges')
         )->name('challenges.all_user_badges');
 
         Route::get(
+            'tab_owned/get',
+            [ChallengesMetaDataController::class, 'getOwnedChallenges']
+        )->name('challenges.tab_owned_challenges');
+
+        Route::get(
+            'tab_completed/get',
+            [ChallengesMetaDataController::class, 'getCompletedChallenges']
+        )->name('challenges.tab_completed_challenges');
+
+        Route::get(
             'user_active_challenges/get',
             [ChallengesMetaDataController::class, 'getActiveChallengesForUser']
         )->name('challenges.user_active_challenges');
@@ -180,6 +191,22 @@ Route::prefix('challenges')
             'complete_lesson/{id}',
             [ChallengesMetaDataController::class, 'completeLesson']
         )->name('challenges.complete_lesson');
+
+        Route::post(
+            'hide_completed_banner/{id}',
+            [ChallengesMetaDataController::class, 'hideCompletedBadge']
+        )->name('challenges.hide_banner');
+    });
+
+// NOTE: I'd move this from here to a separate file, but I'm not sure where it should go (perhaps api.php?)
+// We should version the API even if we're versioning in MCS
+Route::as('api.')
+    ->prefix('/api')
+    ->middleware('web_or_api_authenticated')
+    ->group(function () {
+        Route::get('/v1/content/carousel', [CarouselControllerV1::class, 'getHomepageCarousel'])
+            ->middleware('api_version:v1')
+            ->name('v1.content.carousel');
     });
 
 Route::prefix('playlists')
@@ -201,5 +228,11 @@ Route::prefix('playlists')
         Route::post('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@updatePlaylistItem')->name('playlist.item.update');
         Route::delete('/item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@removeItemFromPlaylist')->name('playlist.item.remove');
         Route::get('/item/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPlaylistItem')->name('playlist.item');
+        Route::post('/add-item', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@addItemToPlaylists')->name('playlist.add.item');
+        Route::get('/count-lessons-and-assignments/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@countLessonsAndAssignments')->name('playlists.count.lessons.and.assignments');
+        Route::get('/my-pinned-playlists', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@getPinnedPlaylists')->name('pinned.playlists');
+        Route::put('/pin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@pinPlaylist')->name('pin.playlist');
+        Route::put('/unpin/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@unpinPlaylist')->name('unpin.playlist');
+        Route::put('/report/{id}', \App\Modules\Content\Controllers\PlaylistsMetadataController::class . '@reportPlaylist')->name('report.playlist');
 
     });

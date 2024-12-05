@@ -74,6 +74,7 @@ class ProductFactory extends Factory
             'digital_access_type' => $accessType->value,
             'digital_access_time_interval_type' => $interval?->value,
             'digital_access_time_interval_length' => 1,
+            'digital_access_time_type' => Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING,
         ]);
         switch ($accessType) {
             case DigitalAccessType::Basic:

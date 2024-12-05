@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import {ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated, watch} from "vue";
 import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@stores/notification';
 import { useConfirmationStore } from '@stores/confirmation';
@@ -208,6 +208,13 @@ const handleSubmit = () => {
   confirmation.callbacks.submit();
   confirmation.reset();
 };
+
+watch(
+    () => isDarkModeSelected.value,
+    (newData) => {
+        platformStore.updateDarkMode(newData);
+    },
+)
 
 onMounted(() => {
   //Check if Mobile on Resize

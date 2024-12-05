@@ -1,0 +1,165 @@
+<template>
+    <FilterControls v-if="!hideControlsSection" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
+        @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
+        @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
+        <template #extra-icon-left>
+            <slot name="extra-icon-left"></slot>
+        </template>
+        <template #extra-icon-right>
+            <slot name="extra-icon-right"></slot>
+        </template>
+    </FilterControls>
+    <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
+    <div class="tw-px-4 lg:tw-px-0" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
+        <FilterOptions v-if="!isCollapsed && !isTablet" :multi-select-columns="multiSelectColumns"
+            :single-select-columns="getSingleSelectColumns" :selected-filters="selectedFilters"
+            :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
+            @on-progress-click="progress => emit('onProgressChange', progress)" />
+        <FilterOptionsModal
+            v-if="!isCollapsed && isTablet"
+            :selected-filters="selectedFilters" :selected-progress="selectedProgress"
+            :multi-select-columns="multiSelectColumns" :single-select-columns="getSingleSelectColumns"
+            @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
+            @handle-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')"
+        />
+
+        <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
+    </div>
+
+</template>
+
+<script setup>
+import {computed, onMounted, onUnmounted, ref} from 'vue';
+import FilterOptions from './FilterOptions.vue';
+import FilterOptionsModal from './FilterOptionsModal.vue';
+import FilterControls from './FilterControls.vue';
+import FilterPills from './FilterPills.vue';
+
+const props = defineProps({
+    parentUrl: {
+        type: String,
+        default: () => "/",
+    },
+    activeTab: {
+        type: String,
+        default: '',
+    },
+    hideControls: {
+        type: Boolean,
+        default: false,
+    },
+    hideControlsSection: {
+        type: Boolean,
+        default: false,
+    },
+    hideFilterIcon: {
+        type: Boolean,
+        default: false,
+    },
+    hideSortIcon: {
+        type: Boolean,
+        default: false,
+    },
+    hideSearch: {
+        type: Boolean,
+        default: false,
+    },
+    loading: {
+        type: Boolean,
+        default: false,
+    },
+    multiSelectColumns: {
+        type: Array,
+        default: () => [],
+    },
+    selectedFilters: {
+        type: Array,
+        default: () => ([]),
+    },
+    selectedProgress: {
+        type: String,
+        default: '',
+    },
+    selectedSort: {
+        type: String,
+        default: '',
+    },
+    searchTerm: {
+        type: String,
+        default: '',
+    },
+    searchPlaceholder: {
+        type: String,
+        default: '',
+    },
+    singleSelectColumns: {
+        type: Array,
+        default: [
+            {
+                category: 'Progress',
+                items: [
+                    {
+                        key: 'All',
+                        value: '',
+                    },
+                    {
+                        key: 'In Progress',
+                        value: 'started',
+                    },
+                    {
+                        key: 'Complete',
+                        value: 'completed',
+                    },
+                    {
+                        key: 'Not Started',
+                        value: 'not-started',
+                    },
+                ],
+            },
+        ],
+    },
+    sortOptions: {
+        type: Array,
+        default: [],
+    },
+    tabOptions: {
+        type: Array,
+        default: [],
+    },
+    showProgressFilters: {
+        type: Boolean,
+        default: () => true,
+    },
+});
+
+const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange', 'onProgressChange', 'OnClearFilter']);
+
+const isTablet = ref(false);
+const isCollapsed = ref(true);
+
+const handleToggleCollapse = () => {
+    isCollapsed.value = !isCollapsed.value;
+};
+
+const getScreenSize = () => {
+    if (window.innerWidth > 1023) {
+        isTablet.value = false;
+    }
+    else {
+        isTablet.value = true;
+    }
+}
+
+const getSingleSelectColumns = computed(() => {
+    return props.showProgressFilters ? props.singleSelectColumns : [];
+});
+
+onMounted(() => {
+    getScreenSize();
+    window.addEventListener('resize', getScreenSize);
+})
+
+onUnmounted(() => {
+    window.addEventListener('resize', getScreenSize);
+})
+</script>

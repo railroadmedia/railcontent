@@ -16,6 +16,7 @@ use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\RedirectController;
+use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\STCController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
@@ -159,10 +160,10 @@ Route::domain('{musoraDomain}')
                         'student-collaborations',
                         'live-streams',
                         'solos',
+                        'challenges',
                         'gear-guides',
                         'performances',
                         'in-rhythm',
-                        'challenges',
                         'on-the-road',
                         'diy-drum-experiments',
                         'rhythmic-adventures-of-captain-carson',
@@ -179,58 +180,13 @@ Route::domain('{musoraDomain}')
                         'odd-times',
                     ])
                     ->name('platform.content-type-catalog');
-
+                Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenge'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.challenges');
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
-
-
-                Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts');
-
-                Route::get('/{brand}/workouts/challenges', [WorkoutsPageController::class, 'showChallengesPage'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.workouts.challenges');
-
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}',
-                    [ContentPagesController::class, 'firstLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn(
-                        'primaryPage',
-                        [
-
-                            'challenges',
-
-                        ]
-                    )
-                    ->name('platform.workout.challenge');
-
-
 
                 Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
                     ->whereIn('brand', ['drumeo'])
@@ -298,14 +254,6 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.live-chat');
 
-                Route::get(
-                    '/{brand}/workouts/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
-                    [ContentPagesController::class, 'secondLevel']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['challenges'])
-                    ->name('platform.workout.challenge.workout');
-
                 /*
                  * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
                  */
@@ -358,6 +306,7 @@ Route::domain('{musoraDomain}')
                             'drum-fest-international-2022',
                             'workouts',
                             'odd-times',
+                            'challenge'
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -367,7 +316,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges', 'challenge'])
                     ->name('platform.content.second-level');
 
                 Route::get(
@@ -385,6 +334,18 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->whereIn('primaryPage', ['method'])
                     ->name('platform.content.fourth-level');
+
+
+                /*
+                 * Referral Pages
+                 */
+                Route::domain('{musoraDomain}')
+                    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+                    ->group(function () {
+                        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+                            ->whereIn('brand', all_brands())
+                            ->name('platform.invite-a-friend');
+                    });
             });
 
         // anyone even without pack or a membership can access these
@@ -860,7 +821,17 @@ Route::domain('{musoraDomain}')
 Route::domain('{musoraDomain}')
     ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
     ->group(function () {
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+        Route::get(
+            '/{brand}/referral/invite-a-friend',
+            [ReferralPagesController::class, 'inviteAFriend']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.invite-a-friend');
+
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
     });

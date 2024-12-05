@@ -1,7 +1,6 @@
 <script setup>
-import {ref, inject, computed, onMounted} from 'vue'
+import {ref, computed, onMounted} from 'vue'
 import { storeToRefs } from 'pinia'
-import ModalRenderer from '@collections/Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
 import InstrumentType from './steps/InstrumentType.vue'
@@ -14,6 +13,10 @@ import { getInitialInfo, getCheckedSteps } from './utils';
 import { useUserStore } from '@stores/user';
 
 const props = defineProps({
+  primaryBrand: {
+    type: String,
+    default: null,
+  },
   startOnStep: {
     type: Number,
     default: null,
@@ -40,6 +43,10 @@ const props = defineProps({
   selectedGoals: {
     type: Object,
   },
+  newUser: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 
@@ -54,7 +61,8 @@ const info = ref(getInitialInfo({
     ...props,
     instrument: brandInstrument[props.selectedBrand],
 }))
-const steps = ref(initialSteps);
+const steps = ref(initialSteps.default);
+const skipSteps = ref([]);
 const brand = computed(() => instrumentBrand[info.value.instrument]);
 
 function changeStep (step) {
@@ -69,14 +77,23 @@ function changeInfo (newInfo) {
     info.value = newInfo;
 }
 
+function instrumentSelect (instrument) {
+    steps.value = initialSteps[instrumentBrand[instrument]];
+    steps.value[0].checked = true;
+    steps.value[1].checked = true;
+    changeInfo({ ...info.value, instrument });
+}
+
 function checkStepToggle (step, val) {
-    const newSteps = steps.value
+    const newSteps = steps.value;
     newSteps[step].checked = val
     steps.value = newSteps;
 }
 
 onMounted(() => {
   if (props.selectedBrand) {
+    steps.value = initialSteps[props.selectedBrand];
+
     if (props.startOnStep) {
       const newSteps = [...steps.value];
       newSteps.forEach(({}, index) => {
@@ -96,29 +113,42 @@ onMounted(() => {
       currentStep.value = lastCheckedStep > 0 ? lastCheckedStep : 0;
     }
   }
+  
+  if (props.newUser && props.primaryBrand) {
+    skipSteps.value = [1];
+    changeInfo({ ...info.value, user: info.value.user, instrument: brandInstrument[props.primaryBrand] });
+  }
 });
+
+const resetSkipAndHiddenSteps = () => {
+  skipSteps.value = [];
+}
+
+const shouldShowStep = (step) => {
+  return step === steps.value[currentStep.value].key;
+}
 </script>
 
 <template>
-  <div class="tw-bg-[#000c17]">
-    <UserInfo :brand="brand" v-if="currentStep === 0" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+  <div class="tw-bg-[#000c17] tw-dark">
+    <UserInfo :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('userInfo')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
               @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"/>
-    <InstrumentSelect :brand="brand" v-if="currentStep === 1" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+    <InstrumentSelect :currentStep="currentStep" :skipSteps="skipSteps" @onResetSkipAndHiddenSteps="resetSkipAndHiddenSteps" :brand="brand" v-if="shouldShowStep('instrumentSelect')" @onChangeStep="changeStep" @onInstrumentSelect="instrumentSelect"
                       @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"/>
-    <InstrumentType :brand="brand" v-if="currentStep === 2" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+    <InstrumentType :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('instrumentType')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
                     @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
-                    :step-name="initialSteps[currentStep].label"/>
-    <Experience :brand="brand" v-if="currentStep === 3" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+                    :step-name="steps[currentStep].label"/>
+    <Experience :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('experience')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
                 @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
-                :step-name="initialSteps[currentStep].label"/>
-    <Genre :brand="brand" v-if="currentStep === 4" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+                :step-name="steps[currentStep].label"/>
+    <Genre :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('genre')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
-           :step-name="initialSteps[currentStep].label"/>
-    <Topics :brand="brand" v-if="currentStep === 5" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+           :step-name="steps[currentStep].label"/>
+    <Topics :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('topics')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
             @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
-            :step-name="initialSteps[currentStep].label"/>
-    <Goals :brand="brand" v-if="currentStep === 6" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
+            :step-name="steps[currentStep].label"/>
+    <Goals :currentStep="currentStep" :skipSteps="skipSteps" :brand="brand" v-if="shouldShowStep('goals')" @onChangeStep="changeStep" @onChangeInfo="changeInfo"
            @onCheckStep="checkStepToggle" :steps="steps" :info="info" :config-options="configOptions"
-           :step-name="initialSteps[currentStep].label"/>
+           :step-name="steps[currentStep].label"/>
   </div>
 </template>

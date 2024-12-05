@@ -8,6 +8,7 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
+use App\Modules\Content\Services\ChallengesService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
@@ -15,13 +16,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Modules\Content\Services\ChallengesService;
+use Modules\Content\Console\Commands\ChallengesV2UpdateWebUrlPath;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
+use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Railroad\Railcontent\Services\RecommendationService;
 
 class DevEndpointController extends Controller
@@ -41,6 +45,7 @@ class DevEndpointController extends Controller
         private CustomerIoSyncService $customerIoSyncService,
         private UserService $userService,
         private SanityGateway $sanityGateway,
+        private RailcontentV2DataSyncingService $dataSyncingService,
     ) {
     }
 
@@ -91,10 +96,9 @@ class DevEndpointController extends Controller
             return $this->handleChallengesEndpoints($request);
         }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
-
     }
 
-    private function handleChallengesEndpoints($request) : string
+    private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');
         $userId = $request->get('user_id', user()?->id ?? 631736); // adrian@musora.com
@@ -103,15 +107,15 @@ class DevEndpointController extends Controller
             case ('prep'):
                 $this->prepChallengeData($challengeId, $request->get('start_date', null));
                 return "Prepped Challenge Data $challengeId";
-            case ('complete');
+            case ('complete'):
                 $this->challengesService->completeChallenge($challengeId, $userId);
                 return "Completed Challenge $challengeId for user $userId";
-            case('complete_lessons'):
-                $this->setContentCompleted($challengeId, $userId);
-                return "Content Completed: $challengeId for user $userId";
             case('move_days'):
                 $numDays = $request->get('num_days', 1);
                 $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+                if (!$progress) {
+                    return "Invalid challenge Id and user_id combination. Please enroll your user in the challenge first :D with /challenges/enroll/challenge_id or /challenges/set_start_date/challenge_id&start_date=YYYYMMDD which can be set to the past";
+                }
                 $startDate = Carbon::parse($progress->start_date);
                 $newStartDate = $startDate->subDays($numDays);
                 $challenge = $this->challengesService->getChallengeById($challengeId);
@@ -119,6 +123,12 @@ class DevEndpointController extends Controller
                 $newLessonData = ChallengeUserProgress::defineLessonsMetaData($challenge, $newStartDate);
                 $originalProgress = $progress->lessons_meta_data;
                 foreach($progress->lessons_meta_data as $index => $_) {
+                    $oCompletedDate = $originalProgress[$index]['completed_at'];
+                    if ($oCompletedDate) {
+                        $oCompletedDate = Carbon::parse($oCompletedDate);
+                        $newCompletedDate = $oCompletedDate->subDays($numDays);
+                        $originalProgress[$index]['completed_at'] = $newCompletedDate->toISOString();
+                    }
                     $originalProgress[$index]['unlock_date'] = $newLessonData[$index]['unlock_date'];
                 }
                 $progress->lessons_meta_data = $originalProgress;
@@ -133,6 +143,9 @@ class DevEndpointController extends Controller
                 $cohort->enrollment_end_date = Carbon::parse('20251111 23:00')->toISOString();
                 $cohort->save();
                 return "Cohort {$cohort->cohort_title} updated to point to $challengeId";
+            case('enroll'):
+                $this->challengesService->startChallenge($challengeId, $userId);
+                return "User $userId Enrolled in $challengeId";
             case('clean'):
                 ChallengeUserProgress::truncate();
                 return "All challenge data cleared";
@@ -176,11 +189,11 @@ class DevEndpointController extends Controller
             $data[] = $progressData;
         }
 
-//        $startDate = '20241011';
-//        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-//        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-//        $progressData = $userProgress->getStreakCurrentData();
-//        $data[] = $progressData;
+        //        $startDate = '20241011';
+        //        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
+        //        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        //        $progressData = $userProgress->getStreakCurrentData();
+        //        $data[] = $progressData;
 
         return $data;
     }
@@ -192,9 +205,16 @@ class DevEndpointController extends Controller
         $oLessonData = $userProgress->lessons_meta_data;
         $userProgress->start_date = $oStartDate->toISOString();
         foreach($oLessonData as $index => $lessonDatum) {
+
+
             $oUnlockDate = Carbon::parse($lessonDatum['unlock_date']);
             $oUnlockDate = $oUnlockDate->subDays($days);
             $oLessonData[$index]['unlock_date'] = $oUnlockDate->toISOString();
+            if(!is_null($lessonDatum['completed_at'])) {
+                $oCompletedDate = Carbon::parse($lessonDatum['completed_at']);
+                $oCompletedDate = $oCompletedDate->subDays($days);
+                $oLessonData[$index]['completed_at'] = $oCompletedDate->toISOString();
+            }
         }
         $userProgress->lessons_meta_data = $oLessonData;
         $userProgress->save();
@@ -208,49 +228,49 @@ class DevEndpointController extends Controller
 //            755987 => [
 //                '402542' => [
 //                    'is_completed' => true,
-//                    'time_practiced' => 8,
+//                    'seconds_practiced' => 8,
 //                ],
 //                '402314' => [
 //                    'is_completed' => true,
-//                    'time_practiced' => 3,
+//                    'seconds_practiced' => 3,
 //                ],
 //            ],
             631736 => [
                 '402542' => [
                     'is_completed' => true,
-                    'time_practiced' => 8,
+                    'seconds_practiced' => 8,
                 ],
                 '402314' => [
                     'is_completed' => true,
-                    'time_practiced' => 10,
+                    'seconds_practiced' => 10,
                 ],
                 '402316' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402318' => [
                     'is_completed' => false,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402320' => [
                     'is_completed' => false,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402322' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402324' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402326' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
                 '402328' => [
                     'is_completed' => true,
-                    'time_practiced' => 1000,
+                    'seconds_practiced' => 1000,
                 ],
             ],
         ];
@@ -258,7 +278,7 @@ class DevEndpointController extends Controller
         foreach($data as $userId => $lessons) {
             $challengeProgress =  ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
             foreach($lessons as $lessonId => $lesson) {
-                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['time_practiced']);
+                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['seconds_practiced']);
             }
         }
 

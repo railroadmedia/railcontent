@@ -7,6 +7,7 @@
     "registration_url": null,
     "dark_mode_logo_url": "https://cdn.sanity.io/images/4032r8py/staging/78f43ad68c3e1dcfa6bc97e5f4e69072b843e0b0-1368x665.svg",
     "light_mode_logo_url": "https://cdn.sanity.io/images/4032r8py/staging/0df461c9187e7e760f65010251a87351634d5d29-2000x1000.svg",
+    "product_id": 1,
     "lessons": [
         {
             "length_in_seconds": 113,

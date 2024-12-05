@@ -113,6 +113,7 @@ const {
     progress_percent,
     isReleased,
     releaseDate,
+    isCompleted,
 } = useCatalogueItem({ ...props, brand: brand.value, contentTypeOverride: 'song' });
 
 const artistName = computed(() => {
@@ -129,7 +130,7 @@ const mappedData = computed(() => {
 
 const class_object = computed(() => ({
     'no-access': noAccess.value,
-    completed: props.item.completed,
+    completed: isCompleted.value,
 }));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);

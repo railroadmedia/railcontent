@@ -111,7 +111,10 @@ export default {
         return axios({
             method: 'POST',
             url: types[type],
-            data: payload,
+            data: {
+                ...payload,
+                content_id: parseInt(payload.content_id, 10),
+            },
             headers
         });
     },

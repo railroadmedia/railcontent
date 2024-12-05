@@ -6,14 +6,13 @@
 
 @section('content')
     <login
-    loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect_to' => $redirect] : [])) }}"
+    redirect-url="{{ $redirect }}"
     reseturl="{{ url()->route('user_management_system.password.send-reset-email', (!empty($redirect) ? ['redirect_to' => $redirect] : [])) }}"
-    joinurl="{{url('/#orderNow')}}"
     :errors="{{json_encode($errors->all())}}"
     hassessionstatus="{{session()->has('status')}}"
     sessionstatus="{{ session()->get('status') }}"
     :usecsrftoken="!!({{$useCsrfToken ?? true}})"
-    order-now-url="{{ url('/#orderNow') }}"
+    order-now-url="{{ url('/choose-plan') }}"
     >
         <template v-slot:csrf>{{ csrf_field() }}</template>
     </login>

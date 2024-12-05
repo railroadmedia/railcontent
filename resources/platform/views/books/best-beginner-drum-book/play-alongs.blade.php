@@ -49,8 +49,6 @@ if(!empty($user)){
                     :pre-loaded-content="{{ $listLessons }}"
                     :session-token="{{ json_encode(railtracker_session_token()) }}"
                     :total-results="{{ json_encode(json_decode($listLessons)->meta->totalResults) }}"
-                    @play="handlePlayAlongsPlay"
-                    @pause="handlePlayAlongsPause"
                 ></play-alongs>
 
             </div>

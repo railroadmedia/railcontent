@@ -101,18 +101,6 @@ const props = defineProps({
         type: [Object, Array],
         default: () => [],
     },
-    followedLessons: {
-        type: Object,
-        default: {},
-    },
-    hasFeaturedCoaches: {
-        type: Boolean,
-        default: () => false,
-    },
-    hasFollowedCoaches: {
-        type: Boolean,
-        default: () => false,
-    },
     hasUpcomingCoaches:{
         type: Boolean,
         default: () => false,

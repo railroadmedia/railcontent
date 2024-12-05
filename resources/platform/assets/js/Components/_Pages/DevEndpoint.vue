@@ -1,14 +1,14 @@
 <script setup>
-import {postChallengesLeave, postChallengesEnroll, fetchUserChallengeProgress, fetchChallengeMetadata, postChallengesSetStartDate, fetchUserAward} from 'musora-content-services';
+import {fetchAll, postChallengesEnroll, fetchUserChallengeProgress, fetchChallengeMetadata, postChallengesSetStartDate, fetchUserAward} from 'musora-content-services';
 //fetchUserChallengeProgress(402199).then(a => console.log('did we do it?', a));
-//fetchChallengeMetadata(402199).then(a => console.log('did we do it?', a));
+fetchAll('drumeo', 'challenge').then(a => console.log('did we do it?', a));
 //fetchUserChallengeProgress(402199, '20241012').then(a => console.log('unlock', a));
 // postChallengesUnlock(402199).then(a => {
 //     console.log('a', a);
 //      printResult(fetchUserChallengeProgress, 402199, 'post'); }
 // );
 
-printResult(postChallengesLeave, 402199, 'enroll');
+//printResult(postChallengesLeave, 402199, 'enroll');
 
 function printResult(handler, params = {}, msg = 'printie printe') {
     handler(params).then(a => console.log(msg, a));

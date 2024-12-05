@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class ValidateRedirectUrl
 {
@@ -29,6 +30,7 @@ class ValidateRedirectUrl
                 $request->replace($otherInput);
                 $request->request->replace($otherInput);
                 $request->query->remove($key);
+                Log::debug("ValidateRedirectUrl removed invalid redirect url: $redirect");
             }
         }
 

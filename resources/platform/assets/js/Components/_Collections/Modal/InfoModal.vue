@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "selfContained", "classOverride", "showOverlay"]);
+const props = defineProps(["modalId", "title", "selfContained", "classOverride", "showOverlay", "containerStayOnClose"]);
 const emit = defineEmits(["onClose"]);
 
 const onClose = () => {
@@ -24,7 +24,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (props.selfContained) {
+  if (props.selfContained && !props.containerStayOnClose) {
     const modalContainer = document.getElementById("modal-container");
     modalContainer.classList.add("tw-hidden");
     modalContainer.classList.remove("tw-fixed");
@@ -57,7 +57,8 @@ onUnmounted(() => {
           tw-w-full
           tw-rounded-[8px]
           tw-z-30
-          tw-p-[30px]
+          tw-p-5
+          sm:tw-p-[30px]
           tw-flex
           tw-flex-col
           tw-relative

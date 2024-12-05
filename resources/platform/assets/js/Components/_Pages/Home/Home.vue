@@ -1,12 +1,22 @@
 <template>
-    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white tw-pt-10">
         <template v-if="!isLoading">
-            <!-- Learning Paths -->
-            <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
-            <NewLearningPathContainer v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths" trackingSection="banner" />
-
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
+
+            <!-- Challenge Carousel -->
+            <MiniCatalogueSection
+                :title="welcomeMessage"
+                catalogue-type="challenge"
+                page-type="home"
+                :preLoadedContent="data?.carousels"
+            />
+
+            <!-- Learning Paths -->
+<!--            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"-->
+<!--                trackingSection="banner" />-->
+<!--            <NewLearningPathContainer :isV2User v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths"-->
+<!--                trackingSection="banner" />-->
 
             <!-- Join Header: Pack Only -->
             <StaticHeader
@@ -20,14 +30,14 @@
             />
 
             <!-- Header carousel -->
-            <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
+            <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" />
 
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
             <!-- Continue section -->
             <MiniCatalogueSection
-                v-if="data?.continueSection.length"
+                v-if="!isLoading && data?.continueSection.length"
                 title="Continue"
                 seeAllAriaLabel="See All Lessons In Progress"
                 :seeAllUrl="`/${brand}/lesson-history/in-progress`"
@@ -38,21 +48,13 @@
                 trackingSection="continue"
             />
 
+            <!-- Explore section -->
+            <ExploreSection v-if="exploreTasks.length" :exploreTasks="exploreTasks" />
+
             <!-- Recommended section -->
-            <MiniCatalogueSection
-                v-if="recommends.length > 0"
-                title="Inspired By Your Activity"
-                seeAllAriaLabel="See All Content"
-                :seeAllUrl="recommendedContentUrl"
-                :preLoadedContent="recommends"
-                trackingSection="recommended"
-            >
-                <template #icon>
-                    <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
-                        <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
-                    </button>
-                </template>
-            </MiniCatalogueSection>
+            <MiniCatalogueSection v-if="recommendedContent.data.length" title="Inspired By Your Activity"
+                seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
+                :preLoadedContent="recommendedContent.data" trackingSection="recommended" />
 
             <!-- Workouts section - REMOVING -->
             <!-- <MiniCatalogueSection
@@ -66,7 +68,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                v-if="data?.newReleases.length"
+                 v-if="(!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -74,7 +76,7 @@
                 trackingSection="new"
             />
 
-            <!-- Playlist section -->
+            <!-- Playlist section add arrows -->
             <ListSection
                 v-if="usersList.length"
                 :newContentUrl="newContentUrl"
@@ -84,7 +86,7 @@
 
             <!-- Live section -->
             <CoachEvent
-                v-if="coachEvent"
+                v-if="coachEvent  && !isV2User"
                 class="tw-mb-6"
                 :preloadedContent="coachEvent"
                 :currentDateString="currentDate"
@@ -93,9 +95,9 @@
                 trackingSection="live"
             />
 
-            <!-- Upcoming section - REMOVING -->
+            <!-- Upcoming section - REMOVING why????? -->
             <!-- <MiniCatalogueSection
-                v-if="data?.upcomingEvents.length"
+                v-if="!isV2User && data?.upcomingEvents.length"
                 title="Upcoming Events"
                 seeAllAriaLabel="See All Upcoming Events"
                 :seeAllUrl="`${brand}/live`"
@@ -133,9 +135,18 @@
                 class="tw-mb-8"
             />
 
+            <!-- Dashboard section -->
+            <DashboardSection
+                v-if="isV2User"
+                :accountUrl="accountUrl"
+                :xp-earned="userMetrics.xp.value"
+                :minutes-practiced="userMetrics.practiced.value"
+                :user-level-title="userMetrics.xp.label"
+            />
+
             <!-- Stats section -->
             <StatsSection
-                v-if="!isPackOnlyBoolean"
+                v-if="!isPackOnlyBoolean && !isV2User"
                 :accountUrl="accountUrl"
                 :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
                 :nextLearningPathLevel="nextLearningPathLevel"
@@ -160,61 +171,83 @@
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
     import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
-    import ListSection from '@collections/ListSection/ListSection.vue';
     import MiniCatalogueSection from '@collections/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
     import PopularConversations from '@collections/PopularConversations/PopularConversations.vue';
     import StaticHeader from  '@collections/HeaderCarousel/StaticHeader.vue';
-    import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import HomePageSkeleton from "./HomePageSkeleton";
+    import ExploreSection from '@collections/ExploreSection/ExploreSection.vue';
+    import WelcomeMessage from '@collections/WelcomeMessage/WelcomeMessage.vue';
+    import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
+    import StatsSection from '@collections/StatsSection/StatsSection.vue';
+    import ListSection from '@collections/ListSection/ListSection.vue';
 
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
     const userStore = useUserStore();
-    const { brand, userId, token, userCompletedAccount } = storeToRefs(userStore);
     const platformStore = usePlatformStore();
+    const { brand, userId, token, showOnboardingBanner, userHas30Days, isFirstAccess, userFirstName, userDisplayName } = storeToRefs(userStore);
     const { isLoading } = storeToRefs(platformStore);
 
-    //Props
     const props = defineProps({
+        // String props
         accountUrl: { type: String, default: '' },
         calendarId: { type: [String, Number], default: '' },
-        carousel: { type: Array, default: () => ([]) },
-        coachEvent: { type: Object, default: () => null },
-        cohortBanner: { type: Array, default: () => ([]) },
-        courseData: { type: Object, default: () => ({}) },
         continueUrl: { type: String, default: '' },
-        conversationData: { type: Array, default: () => ([]) },
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
+        recommendedContentUrl: { type: String, default: '' },
+        upgradeMembershipUrl: { type: String, default: '' },
+        youtubeId: { type: String, default: '' },
+        nextLearningPathLevel: { type: String, default: '' },
+
+        // Boolean props
         existsCohortBanner: { type: Boolean, default: false },
         isPackOnly: { type: [Number, Boolean], default: 0 },
-        learningPaths: { type: Array, default: () => ([]) },
-        newContent: { type: Object, default: () => ({}) },
-        newContentUrl: { type: String, default: '' },
-        nextLearningPathLevel: { type: String, default: '' },
-        nextLearningPathProgressPercent: { type: Number, default: 0 },
-        packData: { type: Array, default: () => ([]) },
-        recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        recommendedContentUrl: { type: String, default: '' },
+        trialSectionRedesign: { type: Boolean, default: false },
+        isV2User: { type: Boolean, default: false },
+
+        // Number props
         timeCutoffMinutes: { type: Number, default: 0 },
-        upgradeMembershipUrl: { type: String, default: '' },
-        usersList: { type: Object, default: () => ({}) },
-        userMetrics: { type: Object, default: () => ({}) },
-        youtubeId: { type: String, default: '' },
+        nextLearningPathProgressPercent: { type: Number, default: 0 },
+
+        // Array props
+        carousel: { type: Array, default: () => ([]) },
+        cohortBanner: { type: Array, default: () => ([]) },
+        conversationData: { type: Array, default: () => ([]) },
+        learningPaths: { type: Array, default: () => ([]) },
+        packData: { type: Array, default: () => ([]) },
+        exploreTasks: { type: Array, default: () => ([]) },
+
+        // Object props
+        coachEvent: { type: Object, default: () => null },
+        courseData: { type: Object, default: () => ({}) },
+        newContent: { type: Object, default: () => ({}) },
+        recommendedContent: { type: Object, default: () => ({ data: [] }) },
         startedContent: {
             type: Object,
-            default: () => ({
-                data: []
-            })
+            default: () => ({ data: [] })
         },
+        usersList: { type: Object, default: () => ({}) },
+        userMetrics: { type: Object, default: () => ({}) }
     });
 
+    const welcomeMessage = computed(() => {
+        if (isFirstAccess.value) {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome back, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Let's get practicing</div>`
+        } else {
+            return `<div class="tw-text-lg tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Welcome, ${userFirstName.value || userDisplayName.value}</div><div class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Start Here</div>`
+        }
+    })
+
     //Computed
+    const hasCompleteYourAccountTask = computed(() => {
+        return props.exploreTasks.find(task => task.hook === 'complete-your-account');
+    });
+
     const showTriggerBanner = computed(() => {
-        if(!props.isPackOnlyBoolean) return false; //hide for packs only
-        return userCompletedAccount.value;
+        if (props.isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {
@@ -231,18 +264,7 @@
     })
 
     //Refs
-    const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
-    const recSysPage = ref(1);
     const data = ref(null);
-    const error = ref(null);
-
-    //Constant
-    const recommendationLinks = {
-        drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
-        pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
-        guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
-        singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
-    }
 
     //Methods
     const openPlaylistModal = () => {
@@ -257,15 +279,6 @@
             }
         });
     };
-
-    const shuffleRecommends = () => {
-        if(Math.ceil(props.recommendedContent.data.length / 5) === recSysPage.value){
-            recSysPage.value = 1;
-        } else {
-            recSysPage.value = recSysPage.value + 1;
-        }
-        recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
-    }
 
     //Lifecycles
     onBeforeMount( async () => {

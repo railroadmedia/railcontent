@@ -1,5 +1,6 @@
 import { DateTime, Duration } from 'luxon';
 import ContentHelpers from "../helper-functions/content.js";
+import {getDate} from "../../../../../utils";
 
 export default class ContentModel {
     constructor({ brand = 'drumeo', post }) {
@@ -43,6 +44,10 @@ export default class ContentModel {
 
     getPostField(key) {
         const postField = this.post?.fields?.find(field => field.key === key);
+
+        if (key === 'style') {
+            return this.post.genre?.length > 0 ? this.post.genre[0] : postField?.value || '';
+        }
 
         return postField ? postField.value : '';
     }
@@ -115,7 +120,7 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
-        return DateTime.fromSQL(this.post.published_on).toFormat('LLL d/yy');
+        return getDate(this.post.published_on);
     }
 
     get postType() {

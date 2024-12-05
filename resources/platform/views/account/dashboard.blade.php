@@ -1,5 +1,6 @@
 @php
     $showCompleteYourAccountButton = !user()->hasCompletedOnboarding();
+    $isCurrentUser = user()->id === $dashboardUser->id;
 
     $headerData = [
         'title' => $dashboardUser->display_name,
@@ -16,20 +17,22 @@
         $headerData['heroImg'] = $currentUser['avatar'];
     }
 
-    $ctaText = $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account';
-    $ctaUrlSuffix = $showCompleteYourAccountButton ? '&update=2' : '';
+    if ($isCurrentUser) {
+        $ctaText = $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account';
+        $ctaUrlSuffix = $showCompleteYourAccountButton ? '&update=2' : '';
 
-    $ctaUrl = "/onboarding?brand={$brand}{$ctaUrlSuffix}";
+        $ctaUrl = "/onboarding?brand={$brand}{$ctaUrlSuffix}";
 
-    $headerData['ctas'][] = [
-        'type' => 'PageHeaderPrimaryCta',
-        'props' => [
-            'text' => $ctaText,
-            'url' => $ctaUrl,
-            'showAllAlways' => true,
-            'isPrimary' => true,
-        ]
-    ];
+        $headerData['ctas'][] = [
+            'type' => 'PageHeaderPrimaryCta',
+            'props' => [
+                'text' => $ctaText,
+                'url' => $ctaUrl,
+                'showAllAlways' => true,
+                'isPrimary' => true,
+            ]
+        ];
+    }
 
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);

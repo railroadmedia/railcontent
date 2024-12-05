@@ -13,22 +13,6 @@
     :href="renderLink && isReleased ? item.url : null"
      @click="openUpgradeModal"
   >
-
-    <!-- LESSON NUMBERS -->
-    <div v-if="showNumbers" class="
-        tw-flex
-        tw-flex-col
-        tw-text-[#00101D]
-        dark:tw-text-white
-        align-left
-        tw-justify-center
-        number-col
-        title
-        hide-xs-only
-      ">
-      {{ lesson_number }}
-    </div>
-
     <!-- THUMBNAIL COLUMN -->
     <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
       :class="[thumbnailColumnClass, themeColor]">
@@ -276,6 +260,9 @@ export default {
       type: Boolean,
       default: () => false,
     },
+  },
+  mounted() {
+    console.log('this.item', this.item)
   },
   computed: {
     mappedData() {

@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+@endphp
+
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
@@ -148,6 +152,13 @@
     </style>
 @endsection
 
+@section('body-data')
+    x-data ='{
+    tos: false,
+    lazyLoad: false,
+    }'
+@endsection
+
 <!-- Main -->
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
@@ -159,54 +170,67 @@
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center"
         style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @php
-                $logoMapping = [
-                    'alesisNitro' => [
-                        'name' => 'Nitro Max',
-                        'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
-                    ],
-                    'alesisNitroPro' => [
-                        'name' => 'Nitro Pro',
-                        'video' => '//player.vimeo.com/video/986831506'
-                    ],
-                    'alesisCrimson' => [
-                        'name' => 'Crimson III',
-                        'video' => '//player.vimeo.com/video/915243228'
-                    ],
-                    'alesisStrata' => [
-                        'name' => 'Strata Prime',
-                        'video' => '//player.vimeo.com/video/915243228'
-                    ],
-                    'alesisStrataCore' => [
-                        'name' => 'Strata Core',
-                        'video' => '//player.vimeo.com/video/915243228'
-                    ],
-                ];
+            @if(!empty($yamaha))
+                <img class="inline-block h-9 sm:h-12 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/membership/redeem/yamaha-logo.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <br>
+                <img class="inline-block h-8 sm:h-12 mb-7 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <h3 class="leading-tight mb-3 font-black">Congratulations on your <br class="hidden sm:inline-block">purchase of a Yamaha EAD10!</h3>
+                <h6 class="leading-tight mb-6 sm:mb-10">
+                    Level up your skills with the lessons, songs, teachers, and <br class="hidden sm:inline-block">
+                    practice tools trusted by thousands of active students.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/redeem/yamaha-spread.png">
+            @else
+                @php
+                    $logoMapping = [
+                        'alesisNitro' => [
+                            'name' => 'Nitro Max',
+                            'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
+                        ],
+                        'alesisNitroPro' => [
+                            'name' => 'Nitro Pro',
+                            'video' => '//player.vimeo.com/video/986831506'
+                        ],
+                        'alesisCrimson' => [
+                            'name' => 'Crimson III',
+                            'video' => '//player.vimeo.com/video/1020370365'
+                        ],
+                        'alesisStrata' => [
+                            'name' => 'Strata Prime',
+                            'video' => '//player.vimeo.com/video/915243228'
+                        ],
+                        'alesisStrataCore' => [
+                            'name' => 'Strata Core',
+                            'video' => '//player.vimeo.com/video/1020370277'
+                        ],
+                    ];
 
-                $keys = [
-                    'alesisNitro',
-                    'alesisNitroPro',
-                    'alesisCrimson',
-                    'alesisStrata',
-                    'alesisStrataCore'
-                ];
-                $key = 'alesisNitro';
+                    $keys = [
+                        'alesisNitro',
+                        'alesisNitroPro',
+                        'alesisCrimson',
+                        'alesisStrata',
+                        'alesisStrataCore'
+                    ];
+                    $key = 'alesisNitro';
 
-                foreach ($keys as $k) {
-                    if (!empty($$k)) {
-                        $key = $k;
-                        break;
+                    foreach ($keys as $k) {
+                        if (!empty($$k)) {
+                            $key = $k;
+                            break;
+                        }
                     }
-                }
-                $nameSrc = $logoMapping[$key]['name'];
-                $videoSrc = $logoMapping[$key]['video'];
-            @endphp
-            <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
-            <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
-            <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
-            <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-            </div>
+                    $nameSrc = $logoMapping[$key]['name'];
+                    $videoSrc = $logoMapping[$key]['video'];
+                @endphp
+                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
+                <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
+                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                    <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -219,7 +243,8 @@
                     'alesisNitroPro' => '/alesis-nitro-pro',
                     'alesisCrimson' => '/alesis-crimson-iii',
                     'alesisStrata' => '/alesis-strata',
-                    'alesisStrataCore' => '/alesis-strata-core'
+                    'alesisStrataCore' => '/alesis-strata-core',
+                    'yamaha' => '/yamaha'
                 ];
 
                 $membershipLink = '';
@@ -275,6 +300,14 @@
         </div>
     </div>
 
+
+    @php
+        $gridItems = $drumeo['gridItems'];
+    @endphp
+
+    @include('musora.sales.components.reason-cards-section', [
+    'shortVersion' => true,
+    ])
 
     @include("drumeo.sales.partials._footer")
 

@@ -373,9 +373,15 @@
                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="    background: rgba(0, 0, 0, 0.6);backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);"></div>
-        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5-m.mp4"></video>
-        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5.mp4"></video>
+        @if(!empty($commercialHeader))
+            <div class="top-0 left-0 absolute w-full h-full z-10" style="    background: rgba(0, 0, 0, 0.6);backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);"></div>
+            <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5-m.mp4"></video>
+            <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header5.mp4"></video>
+        @else
+            <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
+            <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
+            <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
+        @endif
     </header>
     @php
         $packs = $musora['packs'];
@@ -431,25 +437,23 @@
     @hasSection('final')
         @yield('final')
     @elseif(!empty($hideMenu))
-        @include('musora.sales.components.card-selection-section', [
-            "whiteBg" => true,
-            "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
-            "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-            "songs" => "300+ popular songs.",
-            "firstPoint" => "Learn piano, guitar, drums, & singing.",
-            "thirdPoint" => "Unlimited personal support",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        @include('musora.sales.components.order-section-collage', [
+            "orderUrl" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
+        'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+        'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+        'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'musical',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'headerLight' => true,
         'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-        'header' => 'Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.',
+        'header' => '<strong>Unlimited music lessons.<br>Guided practice sessions. <br> The world’s best teachers.</strong>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
         <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',

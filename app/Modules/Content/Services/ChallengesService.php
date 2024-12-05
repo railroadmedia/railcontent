@@ -1,10 +1,13 @@
 <?php
 
-namespace Modules\Content\Services;
+namespace App\Modules\Content\Services;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Models\ChallengeUserProgressStatus;
+use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\RailTracker\Services\MediaPlaybackService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -14,13 +17,15 @@ class ChallengesService
 {
     const string ENROLLMENT_NOTIFICATION_KEY = 'challenges_enrollment_notifications';
     const string COMMUNITY_NOTIFICATION_KEY = 'challenges_community_notifications';
+    //TODO update for solo challenges - TCH-113
 
 
     public function __construct(
         private CustomerIoService $customerIoService,
         private SanityGateway $sanityGateway,
-    )
-    {
+        private MediaPlaybackService $mediaPlaybackService,
+        private ContentUserProgress $contentUserProgress,
+    ) {
     }
 
     /**
@@ -29,7 +34,7 @@ class ChallengesService
      * @param int $count
      * @return \Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection|User[]
      */
-    public function getEnrolledUsers(int $contentId, int $count=3)
+    private function getEnrolledUsers(int $contentId, int $count = 3)
     {
         $maxDisplayNameLength = 10;
         $enrolledUserIds = $this->getEnrolledUserIds($contentId);
@@ -39,7 +44,16 @@ class ChallengesService
             ->whereNotNull('profile_picture_url')
             // this will also filter out deleted users as they have the format musora+deleted
             ->whereNotLike('email', '%@musora%')
-            ->whereNotLike('email', '%test%') // this isn't great because many users have @testX.com accounts for businesses
+            ->whereNotLike('email', '%@drumeo%')
+            ->whereNotLike('email', '%@guitareo%')
+            ->whereNotLike('email', '%@singeo%')
+            ->whereNotLike('email', '%@pianote%')
+            ->whereNotLike('email', '%@playbass%')
+            ->whereNotLike('email', '%@recordeo%')
+            ->whereNotLike(
+                'email',
+                '%test%'
+            ) // this isn't great because many users have @testX.com accounts for businesses
             ->whereRaw("LENGTH(display_name) <= $maxDisplayNameLength")
             ->whereNotIn('id', $IdsblockList)
             ->inRandomOrder()
@@ -48,6 +62,40 @@ class ChallengesService
         return [
             'users' => $results,
             'total' => count($enrolledUserIds),
+        ];
+    }
+
+    /**
+     * Get enrolled users metadata for a given challenge
+     * @param int $contentId
+     * @param int|null $count
+     *
+     * @return array<{
+     *      entity: array<{
+     *          id: int,
+     *          email: string,
+     *          display_name: string,
+     *          profile_picture_url: string
+     *      }>,
+     *      total: int
+     *  }>
+     */
+    public function getEnrolledUsersMetadata(int $contentId, ?int $count=3)
+    {
+        $enrolledUsersAndCount = $this->getEnrolledUsers($contentId, $count);
+        $enrolledUsers = $enrolledUsersAndCount['users'];
+        // TODO https://musora.atlassian.net/browse/TCH-51
+        // Decorate these using a decorator (api resource) instead of raw
+        $formattedUsers = $enrolledUsers->map(fn (User $user) => [
+            'id' => $user->id,
+            'email' => $user->email,
+            'display_name' => $user->display_name,
+            'profile_picture_url' => $user->profile_picture_url,
+        ]);
+
+        return [
+            'data' => $formattedUsers,
+            'total' => $enrolledUsersAndCount['total'],
         ];
     }
 
@@ -70,20 +118,20 @@ class ChallengesService
      * @param int $challengeId
      * @return array|null
      */
-    private function getEnrolledUserIds(int $challengeId) : array | null
+    private function getEnrolledUserIds(int $challengeId): array|null
     {
         return ChallengeUserProgress::query()
             ->where('content_id', $challengeId)
             ->where('is_active', true)
             ->get('user_id')
-        ->toArray();
+            ->toArray();
     }
 
     /**
      * All manually restricted userids for displaying as enrolled
      * @return int[]
      */
-    private function getBlockListForDisplayedUsers() : array
+    private function getBlockListForDisplayedUsers(): array
     {
         // TODO https://musora.atlassian.net/browse/TCH-37
         // make query builder
@@ -97,8 +145,12 @@ class ChallengesService
      * @param $isLocked - flag to indicate if content should be gated by time
      * @return ChallengeUserProgress|null
      */
-    public function startChallenge(int $challengeId, int $userId, $startDate = null, $isLocked = true) : ChallengeUserProgress | null
-    {
+    public function startChallenge(
+        int $challengeId,
+        int $userId,
+        $startDate = null,
+        $isLocked = true
+    ): ChallengeUserProgress|null {
         $challenge = $this->getChallengeById($challengeId);
         if (!$challenge) {
             return null;
@@ -106,23 +158,26 @@ class ChallengesService
         $isSolo = ($challenge['is_solo'] ?? false) || !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
         $startDate = $startDate->startOfDay();
-        $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData($challenge, startDate: $startDate, isLocked: $isLocked);
+        $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData(
+            $challenge,
+            startDate: $startDate,
+            isLocked: $isLocked
+        );
         $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate([
             'content_id' => $challengeId,
             'user_id' => $userId,
-            ],
-        [
-            'current_rest_days' => $restDays,
-            'start_date' => $startDate,
-            'is_locked' => $isLocked,
-            'lessons_meta_data' => $lessonMetaData,
-            'is_active' => true,
-            'is_solo' => $isSolo,
-        ]);
+        ],
+            [
+                'current_rest_days' => $restDays,
+                'start_date' => $startDate,
+                'is_locked' => $isLocked,
+                'lessons_meta_data' => $lessonMetaData,
+                'is_active' => true,
+                'is_solo' => $isSolo,
+            ]);
         return $challengeUserProgress;
     }
-
 
 
     /**
@@ -131,13 +186,12 @@ class ChallengesService
      * @param int $userId
      * @return array
      */
-    public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true) : ?array
+    public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true): ?array
     {
         if ($isLesson) {
             $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
             $challenge = $sanityDocument['parent'];
             $challengeLessons = $challenge['lessons'];
-
         } else {
             $challenge = $this->getChallengeById($contentId);
             $challengeLessons = $challenge['lessons'];
@@ -146,39 +200,26 @@ class ChallengesService
         }
 
         $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
-        $firstIncompleteLesson = [];
+        $firstIncompleteLesson = null;
         $userData = [];
-
-        if (!is_null($progressData) && $progressData->is_active) {
-            $today = Carbon::now()->startOfDay();
-
-            foreach($challengeLessons as $index => $lesson) {
-                $unlockDate = $progressData->lessons_meta_data[$index]['unlock_date'];
-                $unlockDate = Carbon::parse($unlockDate);
-                $challengeLessons[$index]['unlock_date'] = $unlockDate->toISOString();
-                $challengeLessons[$index]['is_locked'] = $progressData->is_locked && $unlockDate > $today;
-                $challengeLessons[$index]['completed'] = $progressData->lessons_meta_data[$index]['completed'];
-            }
-            $challengeLessons = $this->addIndexAndShortNameToLessons($challengeLessons);
-
-            $firstIncompleteLesson = $this->getFirstIncompleteLesson($challengeLessons, $progressData);
+        $isUserActive = $progressData?->is_active ?? false;
+        $challengeLessons = $this->combineUserLessonDataWithSanityLessonData($challengeLessons, $progressData);
+        if ($isUserActive) {
+            $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson($challengeLessons, $progressData);
 
             $userData = $progressData->getCompiledMetadata();
-            $now = Carbon::now();
-            $userData['challenge_state'] = match (true) {
-                $challenge['is_solo'] => 'active_solo',
-                !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
-                    $challenge['enrollment_start_time']
-                ) => 'upcoming',
-                $now < Carbon::parse($challenge['published_on']) => 'enrollment',
-                $now < Carbon::parse($userData['end_date']) => 'active_community',
-                default => 'completed_community',
-            };
+            $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date']);
+            if ($isLesson) {
+                $nextPreviousLesson = $this->getPreviousAndNextLesson($contentId, $challengeLessons);
+            } else {
+                $nextPreviousLesson = $this->getPreviousAndNextLesson($firstIncompleteLesson['id'], $challengeLessons);
+                $nextPreviousLesson['next_lesson'] = $firstIncompleteLesson;
+            }
         } else {
             $userData['is_active'] = false;
+            $userData['challenge_state'] = $this->getChallengeState($challenge);
+            $nextPreviousLesson = ['next_lesson' => null, 'previous_lesson' => null];
         }
-
-        $nextPreviousLesson = $this->getPreviousAndNextLessonIds($contentId, $challengeLessons);
 
 
         // Assign the formatted lesson to the `lesson` object and add relevant challenge data
@@ -189,10 +230,20 @@ class ChallengesService
                     break;
                 }
             }
-            $lessonDocument['challenge_dark_mode_logo_url'] = $challenge['dark_mode_logo_url'];
-            $lessonDocument['challenge_light_mode_logo_url'] = $challenge['light_mode_logo_url'];
-            $lessonDocument['challenge_logo_image_url'] = $challenge['logo_image_url'];
-            $lessonDocument['challenge_title'] = $challenge['title'];
+            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug'];
+            foreach($challengeFieldsToCopyToLesson as $toCopy) {
+                $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy];
+            }
+            // filter lessons to only show incomplete and future lessons.
+            if ($isUserActive) {
+                $temp = [];
+                foreach ($challengeLessons as $lesson) {
+                    if (!$lesson['completed']) {
+                        $temp[] = $lesson;
+                    }
+                }
+                $challengeLessons = $temp;
+            }
         } else {
             // format the duration of the challenge
             if ($userData['is_active']) {
@@ -203,25 +254,25 @@ class ChallengesService
                 $endDate = $this->getChallengeEndDate($challenge);
             }
             $lessonDocument['duration_text'] = $this->getDurationText($startDate, $endDate);
-
         }
-
-
 
         return [
             'lesson' => $lessonDocument,
             'lessons' => $challengeLessons,
             'first_incomplete_lesson' => $firstIncompleteLesson,
             'user_data' => $userData,
-            'next_lesson' => $nextPreviousLesson['next_lesson'],
-            'previous_lesson' => $nextPreviousLesson['previous_lesson'],
+            ... $nextPreviousLesson,
         ];
     }
 
-    private function addIndexAndShortNameToLessons(array $lessons) : array
-    {
+    private function combineUserLessonDataWithSanityLessonData(
+        array $lessons,
+        ?ChallengeUserProgress $challengeUserProgress,
+        bool $removeVideoData = false
+    ): array {
         $day = 0;
-        foreach($lessons as $index => $lesson) {
+        foreach ($lessons as $index => $lesson) {
+            $lessons[$index]['is_first_lesson'] = $index == 0;
             if (!$lesson['is_always_unlocked_for_challenge']) {
                 $day += 1;
                 $lessons[$index]['index'] = $day;
@@ -230,69 +281,144 @@ class ChallengesService
                 $lessons[$index]['index'] = '';
                 $lessons[$index]['short_name'] = $lesson['title'];
             }
+            if ($challengeUserProgress?->is_active ?? false) {
+                $lessonDatum = $challengeUserProgress->getMetaDatumForContent($lesson['id']);
+                $unlockDate = $lessonDatum['unlock_date'];
+                $isLocked = $challengeUserProgress->is_locked;
+                $isCompleted = $lessonDatum['completed'];
+            } else  {
+                $unlockDate = $lesson['published_on'];
+                $isLocked = true;
+                $userId = user()->id;
+                $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
+            }
+
+
+            $unlockDate = Carbon::parse($unlockDate)->startOfDay();
+            // TODO TCH-117 - Bonus days redesign
+            //$isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
+            $shouldLessonBeLocked =  $isLocked && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
+            $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
+            $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
+            $lessons[$index]['completed'] = $isCompleted;
+            if ($removeVideoData) {
+                unset($lessons[$index]['video']);
+            }
         }
+
         return $lessons;
     }
 
-    public function getChallengeMetaDataForUserProgress(Collection $userProgresses, bool $returnChallengeData, ?string $brand = null) : array
+    private function getChallengeState($challenge, $userEndDate = null): string
     {
-        $resultPackage = [];
-        $contentIds = $userProgresses->pluck('content_id')->toArray();
-        $challenges = $this->getChallengeByIds($contentIds, $brand);
-        foreach($contentIds as $contentId) {
-            $challenge = null;
-            foreach($challenges as $testChallenge) {
-                if ($testChallenge['id'] == $contentId) {
-                    $challenge = $testChallenge;
-                    break;
-                }
-            }
-            if (is_null($challenge)) {
-                continue;
-            }
+        $now = Carbon::now();
+        return match (true) {
+            $challenge['is_solo'] => 'active_solo',
+            !is_null($challenge['enrollment_start_time']) && $now < Carbon::parse(
+                $challenge['enrollment_start_time']
+            ) => 'upcoming',
+            $now < Carbon::parse($challenge['published_on']) => 'enrollment',
+            $now < $this->getChallengeEndDate($challenge) => 'active_community',
+            default => 'completed_community',
+        };
+    }
 
+    public function getChallengeMetaDataForUserProgress(
+        ?array $allChallengeIds,
+        mixed $userProgresses,
+        bool $returnChallengeData,
+        ?string $brand = null
+    ): array {
+        $resultPackage = [];
+        $userProgresses = $userProgresses->keyBy('content_id');
+        $challenges = $allChallengeIds ? $this->getChallengeByIds($allChallengeIds, $brand) : $this->getAllChallengesByBrand($brand);
+        $challenges = collect($challenges)->keyBy('id');
+        foreach ($challenges as $contentId => $challenge) {
             $challengeMetaDataToReturn = null;
-            foreach ($userProgresses as $userProgress) {
-                if ($userProgress['content_id'] == $contentId) {
+            $userProgress = $userProgresses->get($contentId);
+            if (!is_null($userProgress)) {
+                if ($userProgress->is_active) {
                     $startEndDate = $userProgress->getStartAndEndDate();
-                    $status = $userProgress->isCompleteAndNotActive() ? 'completed' : 'active';
-                    $challenge['lessons'] = $this->addIndexAndShortNameToLessons($challenge['lessons']);
-                    $firstIncompleteLesson = $this->getFirstIncompleteLesson($challenge['lessons'], $userProgress);
+                    $challenge['lessons'] = $this->combineUserLessonDataWithSanityLessonData(
+                        $challenge['lessons'],
+                        $userProgress,
+                        removeVideoData: true
+                    );
+
+                    $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
+                        $challenge['lessons'],
+                        $userProgress
+                    );
+                    $nextPreviousLessonAroundFirstIncompleteLesson = $this->getPreviousAndNextLesson(
+                        $firstIncompleteLesson['id'],
+                        $challenge['lessons']
+                    );
+                    $previousCompletedLesson = $nextPreviousLessonAroundFirstIncompleteLesson['previous_lesson'];
                     $durationText = $userProgress->is_locked ?
                         $this->getDurationText(
-                            Carbon::parse($startEndDate['start_date']), Carbon::parse($startEndDate['end_date'])) :
+                            Carbon::parse($startEndDate['start_date']),
+                            Carbon::parse($startEndDate['end_date'])
+                        ) :
                         'Unlocked';
                     $challengeMetaDataToReturn = [
                         'is_user_enrolled' => true,
                         'progress_percent' => $userProgress->getCompletionPercent(),
                         'duration_text' => $durationText,
                         'is_solo' => $userProgress['is_solo'],
-                        'status' => $status,
-                        'first_incomplete_lesson' => $firstIncompleteLesson,
+                        'status' => ChallengeUserProgressStatus::ACTIVE,
+                        'next_lesson' => $firstIncompleteLesson,
+                        'previous_completed_lesson' => $previousCompletedLesson,
                         ... $userProgress->getCompiledMetadata(),
-                        ... $challenge,
                     ];
-                    break;
+                } elseif ($userProgress->isCompleteAndNotActive()) {
+                    $durationText = $this->getDurationText(
+                        Carbon::parse($challenge['published_on']),
+                        $this->getChallengeEndDate($challenge)
+                    );
+                    $challengeMetaDataToReturn = [
+                        'is_user_enrolled' => true,
+                        'progress_percent' => 100,
+                        'duration_text' => $durationText,
+                        'is_solo' => $challenge['is_solo'],
+                        'status' => ChallengeUserProgressStatus::COMPLETED,
+                        'next_lesson' => null,
+                        'previous_completed_lesson' => end($challenge['lessons']),
+                    ];
                 }
             }
             if (is_null($challengeMetaDataToReturn)) {
                 $challengeMetaDataToReturn = [
                     'is_user_enrolled' => false,
                     'progress_percent' => 0,
-                    'duration_text' => $this->getDurationText(Carbon::parse($challenge['published_on']), $this->getChallengeEndDate($challenge)),
+                    'duration_text' => $this->getDurationText(
+                        Carbon::parse($challenge['published_on']),
+                        $this->getChallengeEndDate($challenge)
+                    ),
                     'is_solo' => $challenge['is_solo'],
-                    'status' => 'not_started',
-                    'first_incomplete_lesson' => [],
-                    ... $challenge,
+                    'status' => ChallengeUserProgressStatus::NOTSTARTED,
+                    'next_lesson' => null,
+                    'previously_completed_lesson' => null,
                 ];
             }
-            $challengeMetaDataToReturn['content_id'] = $challenge['id'];
+            if ($returnChallengeData) {
+                unset($challenge['lessons']);
+                unset($challenge['video']);
+                $challengeDataToAdd = $challenge;
+            } else {
+                $challengeDataToAdd = [];
+            }
+            $challengeMetaDataToReturn = [
+                ... $challengeMetaDataToReturn,
+                ... $challengeDataToAdd,
+                'content_id' => $challenge['id']
+            ];
+
             $resultPackage[] = $challengeMetaDataToReturn;
         }
         return $resultPackage;
     }
 
-    public function getDurationText(Carbon $startDate, Carbon $endDate) : string
+    public function getDurationText(Carbon $startDate, Carbon $endDate): string
     {
         $isSameMonth = $startDate->month == $endDate->month;
         $formatKey = $isSameMonth ? 'F' : 'M';
@@ -306,12 +432,12 @@ class ChallengesService
      * @param $progressData
      * @return mixed|null
      */
-    private function getFirstIncompleteLesson($challengeLessons, $progressData)
+    private function getFirstIncompleteUnlockedLesson($challengeLessons, $progressData)
     {
         foreach ($challengeLessons as $lesson) {
             foreach ($progressData->lessons_meta_data as $userProgressLesson) {
                 if ($lesson['id'] == $userProgressLesson['content_id']) {
-                    if (!$userProgressLesson['completed']) {
+                    if (!$userProgressLesson['is_always_unlocked'] && !$userProgressLesson['completed']) {
                         return $lesson;
                     }
                     break;
@@ -326,12 +452,11 @@ class ChallengesService
      * @param $allLessons
      * @return array|null[]
      */
-    private function getPreviousAndNextLessonIds($lessonId, $allLessons)
+    private function getPreviousAndNextLesson($lessonId, $allLessons): array
     {
-
         $index = array_search($lessonId, Arr::pluck($allLessons, 'id'));
-        $nextLesson = $allLessons[$index+1] ?? null;
-        $previousLesson = $allLessons[$index-1] ?? null;
+        $nextLesson = $allLessons[$index + 1] ?? null;
+        $previousLesson = $allLessons[$index - 1] ?? null;
         return [
             'previous_lesson' => $previousLesson,
             'next_lesson' => $nextLesson,
@@ -343,7 +468,7 @@ class ChallengesService
      * @param $challengeId
      * @return array | null
      */
-    public function getChallengeById($challengeId) : array | null
+    public function getChallengeById($challengeId): array|null
     {
         return $this->sanityGateway->getByRailContentId($challengeId, 'challenge');
     }
@@ -354,35 +479,59 @@ class ChallengesService
      * @param string $brand
      * @return array | null
      */
-    public function getChallengeByIds($challengeIds, ?string $brand = null) : array | null
+    public function getChallengeByIds($challengeIds, ?string $brand = null): array|null
     {
         return $this->sanityGateway->getByRailContentIds($challengeIds, 'challenge', $brand);
     }
 
-    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId) : array
+    /**
+     * Get the sanity Documents for listed challenges
+     * @param array $challengeIds
+     * @param string $brand
+     * @return array | null
+     */
+    public function getAllChallengesByBrand(string $brand = null): array|null
+    {
+        return $this->sanityGateway->getAllChallengesByBrand($brand);
+    }
+
+    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId): array
     {
         $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
         $challenge = $sanityDocument['parent'];
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
         $wasChallengeCompleted = $userProgress->areAllLessonsCompleted();
-        $lessonsProgress = $userProgress->updateLessonsProgress($lessonId, isCompleted: true);
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
+        $secondsPracticed = $this->mediaPlaybackService->getSecondsWatchedSince(
+            $lessonId,
+            $userId,
+            Carbon::parse($userProgress->start_date)
+        );
+        $lessonsProgress = $userProgress->updateLessonsProgress(
+            $lessonId,
+            isCompleted: true,
+            totalSecondsPracticed: $secondsPracticed
+        );
         $isChallengeCompleted = $userProgress->areAllLessonsCompleted();
 
         $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true);
         $active = true;
         $motivationalText = [];
-        if (!$userProgress->is_locked || !$lessonsProgress['added_to_streak']) {
+        // TODO fix this!
+        if (!$userProgress->is_locked ) { //|| !$lessonsProgress['added_to_streak']) {
             $active = false;
-        } else if ($lessonsProgress['is_milestone']) {
+        } elseif ($lessonsProgress['is_milestone']) {
             $milestone = $isChallengeCompleted ? 'complete' : $lessonData['user_data']['current_streak'];
-            $motivationalTextConfig = config('challengemotivationalresponses')[$milestone] ?? config('challengemotivationalresponses')['default'];
+            $motivationalTextConfig = config('challengemotivationalresponses')[$milestone] ?? config(
+                'challengemotivationalresponses'
+            )['default'];
             $motivationalText = [
                 'lottie_url' => $motivationalTextConfig[brand()],
                 'milestone' => $milestone,
                 'motivational_title' => $isChallengeCompleted ? "You've completed {$challenge['title']}!" : "You're on a {$milestone} Day Streak!",
-                'motivational_subtext' => $isChallengeCompleted  ? '' : "You've earned an additional freeze token!",
+                'motivational_subtext' => $isChallengeCompleted ? '' : "You've earned an additional freeze token!",
                 'badge_text' => $motivationalTextConfig['text'],
+                'styles' => $motivationalTextConfig['styles'],
+                'duration' => $motivationalTextConfig['duration'],
             ];
         } else {
             $missingLessons = $lessonData['user_data']['missed_lessons'];
@@ -393,13 +542,26 @@ class ChallengesService
                 'motivational_title' => $noMissingLessons ? "You're done for the day!" : "You're almost caught up!",
                 'motivational_subtext' => $noMissingLessons ? "Return tomorrow to maintain your streak!" : "Complete {$missingLessons} more lesson(s) to catch up",
                 'badge_text' => null,
+                'styles' => null,
+                'duration' => null,
             ];
         }
         $userData = $userProgress->getCompiledMetadata();
         if (!$wasChallengeCompleted && $isChallengeCompleted) {
             $this->completeChallenge($challenge['id'], $userId);
         }
-        $challengeData = array_intersect_key($lessonData['lesson'], array_flip(['challenge_dark_mode_logo_url', 'challenge_light_mode_logo_url', 'challenge_logo_image_url', 'index', 'short_name']));
+        $challengeData = array_intersect_key(
+            $lessonData['lesson'],
+            array_flip(
+                [
+                    'challenge_dark_mode_logo_url',
+                    'challenge_light_mode_logo_url',
+                    'challenge_logo_image_url',
+                    'index',
+                    'short_name'
+                ]
+            )
+        );
         return [
             'challenge_id' => $challenge['id'],
             'current_lesson_thumbnail' => $sanityDocument['thumbnail'],
@@ -428,10 +590,11 @@ class ChallengesService
         $userProgress->completed_best_streak = $bestStreak;
         $userProgress->last_completed_date = $today->toISOString();
         $userProgress->is_active = false;
+        $userProgress->hide_completed_banner = false;
         $userProgress->save();
     }
 
-    public function updateCustomerIONotifications($challengeId, $user, $notificationKey) : void
+    public function updateCustomerIONotifications($challengeId, $user, $notificationKey): void
     {
         $musoraWorkspace = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
         $customerIO = $this->customerIoService->getCustomerByEmail($musoraWorkspace, $user->email);
@@ -440,7 +603,7 @@ class ChallengesService
         }
         $existingNotifications = json_decode($customerIO->getExternalAttributes()[$notificationKey] ?? '[]');
 
-        if (!in_array($challengeId, $existingNotifications) ) {
+        if (!in_array($challengeId, $existingNotifications)) {
             $existingNotifications[] = $challengeId;
         }
         $data = [$notificationKey => $existingNotifications];
@@ -459,13 +622,31 @@ class ChallengesService
      * @param array $challenge - Sanity challenge document
      * @return Carbon|null
      */
-    public function getChallengeEndDate(array $challenge) : Carbon | null
+    public function getChallengeEndDate(array $challenge): Carbon|null
     {
-        $startDate =  Carbon::parse($challenge['published_on']);
+        $startDate = Carbon::parse($challenge['published_on']);
         $dayCount = -1;
-        foreach($challenge['lessons'] as $child) {
+        foreach ($challenge['lessons'] as $child) {
             $dayCount += $child['is_always_unlocked_for_challenge'] ?? false ? 0 : 1;
         }
         return $startDate->copy()->addDays($dayCount);
     }
+
+    /**
+     * @param int $challengeId
+     * @param int $userId
+     * @return bool
+     * @throws \Exception
+     */
+    public function hideCompletedBanner(int $challengeId, int $userId) : bool
+    {
+        $progress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
+        if (is_null($progress?->last_completed_date)) {
+            return false;
+        }
+        $progress->hide_completed_banner = true;
+        $progress->save();
+        return true;
+    }
+
 }

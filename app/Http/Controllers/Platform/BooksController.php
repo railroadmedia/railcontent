@@ -524,7 +524,7 @@ class BooksController extends Controller
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $chapters = [
             [
@@ -638,7 +638,7 @@ class BooksController extends Controller
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
 
@@ -657,10 +657,11 @@ class BooksController extends Controller
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $isEdge = $user && $user->isAMember();
         $isPackOwner = $user && $user->isPackOnlyOwner();
+        $isChallengeOwner = $user && $user->isChallengeOnlyOwner();
 
         $chapters = [
             [
@@ -722,6 +723,7 @@ class BooksController extends Controller
             "user" => $user,
             "isEdge" => $isEdge,
             "isPackOwner" => $isPackOwner,
+            'isChallengeOwner' => $isChallengeOwner,
         ]);
     }
 
@@ -732,7 +734,7 @@ class BooksController extends Controller
 
         $user = user();
 
-        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOrChallengeOnlyOwner());
 
         $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
         $chapter = $this->drummersToolboxChapters($chapterNumber);

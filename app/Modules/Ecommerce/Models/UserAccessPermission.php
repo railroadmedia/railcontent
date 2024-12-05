@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\UserManagementSystem\Models\User;
 
 /**
@@ -52,6 +53,11 @@ class UserAccessPermission extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 
     public function getExpirationDate(): Carbon

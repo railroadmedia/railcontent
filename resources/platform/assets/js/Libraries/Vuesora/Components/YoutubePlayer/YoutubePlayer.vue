@@ -285,6 +285,7 @@ export default {
                                     // Calculate when the video reaches 95% played
                                     if (vm.currentTime >= Math.floor(0.95 * videoDuration) && !vm.ninetyFivePercentTracked) {
                                         userJourney.trackVideo({ payload: vm.trackingPayload, type: 'completed' });
+                                        vm.$emit('onVideoEnd');
                                         vm.ninetyFivePercentTracked = true; // Ensure this is only tracked once
                                     }
 
@@ -334,10 +335,7 @@ export default {
                                     vm.player.seekTo(0);
                                     vm.player.playVideo();
                                 } else {
-                                    vm.$emit('onVideoEnd', {
-                                        ...event,
-                                        contentId: vm.contentId,
-                                    });
+                                    vm.$emit('onVideoEnd');
                                 }
                             }
                         }

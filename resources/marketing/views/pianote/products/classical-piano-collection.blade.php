@@ -459,8 +459,8 @@
             'courseOnly' => [
                 'title' => 'The Classical Piano Collection',
                 'description' => 'Play the most beautiful piano music in the world with step-by-step tutorials.',
-                'price' => 95,
-                'discountedPrice' => 127,
+                'price' => floatval($productPrices['classical-piano-collection']->discounted_price),
+                'discountedPrice' => floatval($productPrices['classical-piano-collection']->price),
                 'keyFeatures' => [
                     'Lifetime Access',
                     '90-Day Guarantee'
@@ -497,7 +497,7 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-collection]=1"
                        class="z-10 relative px-5 sm:px-6 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-xl w-full sm:w-5/12" style="text-decoration:none">
                         <p class="border border-{{$theme}} text-{{$theme}} inline-block rounded-xl text-sm mb-2 px-4 tracking-wider text-black">COURSE ONLY</p>
                         <h3 class="text-black leading-tight"><strong>{{ $courseDetails['courseOnly']['title'] }}</strong></h3>
@@ -510,19 +510,6 @@
                         @endif
                         <p class="inline-block text-sm text-black">One time payment.</p><br>
                         <div class="join bg-{{$theme}} smaller my-4 w-full max-w-[260px] text-white uppercase">get started</div>
-
-                        <div class="text-sm text-pianote">
-                            <span x-cloak x-data="timer()" x-init="countdown()">
-                                <strong>Discount ends in:</strong>
-                                <br>
-                                <span class="uppercase text-black font-thin">
-                                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                    <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                </span>
-                            </span>
-                        </div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['courseOnly']['keyFeatures'] as $keyFeature)
@@ -550,18 +537,6 @@
                                 @endforeach
                             @endif
                         </ul>
-                        <div class="text-sm text-pianote">
-                            <span x-cloak x-data="timer()" x-init="countdown()">
-                                <strong>Offer ends in:</strong>
-                                <br>
-                                <span class="uppercase text-black font-thin">
-                                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                    <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                </span>
-                            </span>
-                        </div>
                         <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="leading-loose text-sm text-black"><strong>Key Features</strong><br>
                             @foreach ($courseDetails['membershipSpecial']['keyFeatures'] as $keyFeature)

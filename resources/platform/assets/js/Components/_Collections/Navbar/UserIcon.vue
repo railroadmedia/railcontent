@@ -131,7 +131,7 @@ export default {
 
         <OptionElement :href="`/${ brand }/playlists`">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
-          Playlists
+          My Playlists
         </OptionElement>
         <OptionElement v-if="showRecommendation" :href="`/${ brand }/lessons/recommended`">
           <musora-icon icon-name="recommendation" class="tw-w-[20px] tw-mr-2"/>

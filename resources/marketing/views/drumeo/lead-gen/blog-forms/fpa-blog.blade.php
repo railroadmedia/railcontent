@@ -1,5 +1,5 @@
 @extends('_partials.components.forms.blog-form-layout', [
-    'brand' => 'drumeo',
+    'theme' => 'drumeo',
 ])
 
 @section('title', 'Free Play-Alongs')

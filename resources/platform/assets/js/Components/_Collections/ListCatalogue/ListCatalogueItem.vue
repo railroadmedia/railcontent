@@ -14,22 +14,6 @@
        :href="renderLink && isReleased ? item.web_url_path : null"
        @click="openUpgradeModal"
     >
-
-        <!-- LESSON NUMBERS -->
-        <div v-if="showNumbers" class="
-            tw-flex
-            tw-flex-col
-            tw-text-[#00101D]
-            dark:tw-text-white
-            align-left
-            tw-justify-center
-            number-col
-            title
-            hide-xs-only
-        ">
-            {{ lesson_number }}
-        </div>
-
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
              :class="[thumbnailColumnClass, brand]">
@@ -52,11 +36,11 @@
 
                     <span
                         class="thumb-hover flex-center"
-                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)]': noAccess }, { 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }]"
+                        :class="[ { 'tw-bg-[rgba(0,12,23,0.85)] tw-visible tw-opacity-100': noAccess || !isReleased || isCompleted }]"
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
                         <i v-else class="fas" :class="thumbnailIcon"></i>
-                        <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+                        <p v-if="!isReleased" class="tw-text-white tw-font-bold tw-mt-1" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
                           {{ releaseDate }}
                         </p>
                     </span>
@@ -140,9 +124,9 @@
         </div>
 
         <!-- Difficulty Label -->
-        <DifficultyLabel 
-            v-if="mappedData.difficulty" 
-            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" 
+        <DifficultyLabel
+            v-if="mappedData.difficulty"
+            class="tw-hidden sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase"
             :class="`${overview && !isNextLesson ? '2xl:tw-flex' : 'xl:tw-flex'}`"
         />
 
@@ -247,10 +231,10 @@
             <!-- STARTED OR COMPLETED -->
             <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
                 <i
-                    v-if="item.started || item.completed"
+                    v-if="item.started || isCompleted"
                    class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
                    :class="[
-                            item.completed ? completedIcon : 'fa-adjust',
+                            isCompleted ? completedIcon : 'fa-adjust',
                             themeTextClass,
                     ]"></i>
 
@@ -265,7 +249,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -372,6 +356,7 @@ const {
     thumbnailType,
     is_added,
     completedIcon,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const {
@@ -384,6 +369,7 @@ const {
 const { addToList, addEvent } = useUserCatalogueEvents({ ...props });
 const { resetProgress } = useResetProgress();
 
+//Ref
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 //Computed
@@ -398,14 +384,13 @@ const branchPathText = computed(() => {
 const class_object = computed(() => {
     return {
         active: props.active,
-        completed: props.item.completed,
+        "completed": isCompleted.value,
         "content-overview pv-2": props.overview,
         "content-table-row pv-1": !props.overview,
         'tw-flex-nowrap': props.isNextLesson,
-        "no-access": noAccess.value,
         compact: props.compactLayout,
         "start-learning-path":
-            props.contentTypeOverride === "learning-path-part",
+        props.contentTypeOverride === "learning-path-part",
     };
 })
 
@@ -435,14 +420,6 @@ const branchDescription = computed(() => {
 const branchThumbnail = computed(() => {
     const thumbnail_url = props.item.data.find((field) => field.key === 'thumbnail_url');
     return thumbnail_url.value;
-})
-
-const lesson_number = computed(() => {
-    if (props.item.type === "semester-pack-lesson") {
-        return contentModel.value.getPostField("week");
-    }
-
-    return props.index;
 })
 
 const mappedData = computed(() => {
@@ -475,5 +452,9 @@ const handleReset = () => {
 const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
+
+onBeforeMount( ()=> {
+    //console.log('I am in a list catalog item')
+})
 </script>
 

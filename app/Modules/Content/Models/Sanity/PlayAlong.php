@@ -32,7 +32,7 @@ class PlayAlong extends ParentTemplate
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $assignmentsList = new ListObject(
-            fields: [new Field(FieldType::String, 'assignment_title'),
+            fields: [new Field(FieldType::String, 'assignment_title', validation: [new Required()]),
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
                         new Field(FieldType::URL, 'assignment_sheet_music_image')

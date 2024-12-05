@@ -5,9 +5,11 @@
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
             <a
-            	:href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
-                item.type === 'song' ? 'tw-max-w-[121px]' : '',
-                item.type + '-thumbnail'
+            	:href="isReleased && renderLink && !forceNoLinks ? itemUrl : null" 
+                class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3"
+                :class="[
+                    item.type === 'song' ? 'tw-max-w-[121px]' : '',
+                    item.type + '-thumbnail'
             	]"
             	@click="openUpgradeModal"
             >
@@ -47,9 +49,10 @@
                     <div
                         v-else
                         class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
-                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased && !noAccess },]"
+                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased && !noAccess && !isCompleted },]"
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
+                        <musora-icon v-else-if="isCompleted" icon-name="circle-check-filled" class="tw-text-white tw-w-5 tw-h-5" />
                         <i v-else class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
@@ -61,7 +64,7 @@
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
                     <a
-                        :href="renderLink  && !forceNoLinks ? item.url : null"
+                        :href="isReleased && renderLink  && !forceNoLinks ? itemUrl : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1"
                         @click="openUpgradeModal"
                     >
@@ -85,12 +88,16 @@
                                 <span v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
                                     <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                                  textCase="capitalize" />
-                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                                    <span v-if="!isChallenge" class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                                 </span>
-                                    <span class="tw-mb-0.5">
+                                <span v-if="!isChallenge" class="tw-mb-0.5">
                                     {{ contentTypeString }}
                                 </span>
                             </h6>
+                            <!-- Bonus label -->
+                            <div v-if="item?.is_bonus_content_for_challenge" class="tw-flex tw-mt-1">
+                                <div :class="`tw-text-[11px] tw-py-0.5 tw-px-2 tw-text-white tw-bg-${brand} tw-rounded-full`">Bonus</div>
+                            </div>
                         </div>
                     </a>
                     <!-- CHALLENGE CTA's -->
@@ -126,16 +133,16 @@
                             </svg>
                         </button>
 
-                        <Dropdown 
-                            v-if="showDropdown" 
-                            :brand="brand" 
-                            :item="item" 
+                        <Dropdown
+                            v-if="showDropdown"
+                            :brand="brand"
+                            :item="item"
                             :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions"
                             :position="state.dropdownPosition"
                             @closeDropdown="closeDropdown"
                             @addToList="handleAddToList()"
-                            @progressReset="$emit('progressReset', { content_id: item.id })" 
+                            @progressReset="$emit('progressReset', { content_id: item.id })"
                         />
                     </div>
                 </div>
@@ -144,7 +151,7 @@
     </div>
 </template>
 <script setup>
-import { computed, onUnmounted, reactive, onMounted } from 'vue';
+import { computed, onUnmounted, reactive, onMounted, onBeforeMount } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '@hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
@@ -204,7 +211,11 @@ const props = defineProps({
     scrollContainer: {
         type: String,
         default: 'content-container'
-    }
+    },
+    isChallenge: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const {
@@ -215,6 +226,7 @@ const {
     progress_percent,
     isReleased,
     releaseDate,
+    isCompleted,
 } = useCatalogueItem(props);
 
 const state = reactive({
@@ -292,6 +304,11 @@ const duration = computed( () => {
     return `${hours ? `${hours}:` : ''}${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 })
 
+//Because there are different props for the same thing......
+const itemUrl = computed( ()=> {
+    return props.item.web_url_path ? props.item.web_url_path : props.item.url;
+})
+
 const enrollmentOpen = computed(() => {
     return contentModel.value.post.challenge_state === 'enrollment';
 })
@@ -345,12 +362,12 @@ const mappedData = computed(() => {
 const wrapperClasses = computed(() => {
     return {
     'no-access': noAccess.value,
-    completed: props.item.completed,
+    completed: isCompleted.value,
     [props.wrapperClassOverride]: props.wrapperClassOverride
 }});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
-const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
+const showTrophy = computed(() => props.item.type === 'pack-bundle' && isCompleted.value);
 const isGuitareoChordAndScale = computed(() => brand === 'guitareo' && props.item.type === 'chord-and-scale');
 
 const closeDropdown = () => {
@@ -380,5 +397,4 @@ onUnmounted(() => {
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);
-
 </script>

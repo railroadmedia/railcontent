@@ -13,7 +13,7 @@ class PackBundleLesson extends LessonTemplate
     public function __construct()
     {
         //TODO is the parent strictly pack-bundle, or do we need the ability to have challenge as well?
-        parent::__construct(self::getName(), 'Pack Bundle Lesson', withResources: true, parentType: 'pack-bundle', isChallengeChild: true);
+        parent::__construct(self::getName(), 'Pack Bundle Lesson', withResources: true, parentType: 'pack-bundle', isChallengeChild: true, withLiveEvent: true);
     }
 
     public static function getName(): string

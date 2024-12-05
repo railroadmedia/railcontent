@@ -146,22 +146,22 @@ const hasLessonResources = computed(() => {
 })
 
 const lessonTitle = computed(() => {
-    return props.lessonContent.fields.find((l) => l.key === 'title')?.value;
+    return props.lessonContent['title'];
 })
 
 const contentType = computed(() => {
-    return props.lessonContent.type?.value;
+    return props.lessonContent['type'];
 })
 
 const instructors = computed(() => {
-    return props.lessonContent.fields.find((l) => l.key === 'instructor')?.value;
+    return props.lessonContent.instructors;
 })
 
 const instructorNames = computed(() => {
     if(Array.isArray(instructors.value)){
         const arr = [];
         instructors.value.map((instructor) => {
-            arr.push(instructor.fields.find((i) => i.key === 'name')?.value);
+            arr.push(instructor);
         });
 
         return arr.join(', ')

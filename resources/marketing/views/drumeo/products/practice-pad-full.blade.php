@@ -15,7 +15,6 @@
 @section('head')
     @parent
     <style>
-        @import "../_variables";
         .no-padding {
             padding: 0;
         }
@@ -29,26 +28,109 @@
             -ms-user-select: none;
             user-select: none;
         }
-        h1 {
+        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
+            font-weight: 900;
+        }
+        h1, h2, h3, h4, h5, h6, li, p {
+            font-weight: 400;
+            line-height: 1em;
             font-family: 'Open Sans', sans-serif;
-            line-height: 1.3em;
             margin: 0 auto;
+        }
+        h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
+            font-size: 50%;
+            top: -0.75em;
+        }
+        h1 {
+            line-height: 1.2em;
+            font-size: 30px;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+        }
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 48px;
+            }
         }
         h2 {
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.3em;
-            margin: 0 auto;
+            line-height: 1.2em;
+            font-size: 24px;
+        }
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 30px;
+            }
+        }
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 36px;
+            }
         }
         h3 {
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.3em;
-            margin: 0 auto;
+            font-size: 20px;
         }
-        p {
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.3em;
-            margin: 0 auto;
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 24px;
+            }
         }
+        @media (min-width: 1024px) {
+            h3 {
+                font-size: 30px;
+            }
+        }
+        h4 {
+            font-size: 18px;
+        }
+        @media (min-width: 768px) {
+            h4 {
+                font-size: 20px;
+            }
+        }
+        @media (min-width: 1024px) {
+            h4 {
+                font-size: 24px;
+            }
+        }
+        h5 {
+            font-size: 16px;
+        }
+        @media (min-width: 768px) {
+            h5 {
+                font-size: 18px;
+            }
+        }
+        @media (min-width: 1024px) {
+            h5 {
+                font-size: 20px;
+            }
+        }
+        h6 {
+            font-size: 15px;
+        }
+        @media (min-width: 768px) {
+            h6 {
+                font-size: 16px;
+            }
+        }
+        @media (min-width: 1024px) {
+            h6 {
+                font-size: 18px;
+            }
+        }
+        p, li {
+            line-height: 1.6em;
+            font-size: 15px;
+        }
+        @media (min-width: 1024px) {
+            p, li {
+                font-size: 16px;
+            }
+        }
+
         .black {
             background: #1c1c1c;
             color: #fff;
@@ -1595,114 +1677,6 @@
             margin:5px auto 0;
         }
 
-        .customize-section {
-            text-align:center;
-            padding:60px 0;
-        }
-
-        .customize-section .final-pitch {
-            padding:20px 0 40px;
-            font-size:0;
-        }
-
-        .customize-section .final-pitch h1 {
-            font:700 35px/1em "Open Sans", sans-serif;
-            margin:0 auto 20px;
-            text-transform:capitalize;
-            color:#000;
-            text-align:center;
-        }
-
-        .customize-section .final-pitch h1 s {
-            color:#777;
-        }
-
-        .customize-section .final-pitch p {
-            font:400 16px/1.2em "Open Sans", sans-serif;
-            margin:15px auto;
-        }
-
-        .customize {
-            padding:10px 10px 0;
-        }
-
-        .credit-cards {
-            margin:30px 0 15px;
-        }
-
-        @media (min-width:40em) {
-            .credit-cards {
-                margin:40px auto 15px;
-            }
-        }
-
-        @media (min-width:64em) {
-            .credit-cards {
-                margin:50px auto 15px;
-            }
-        }
-
-        .credit-cards i {
-            opacity:0.7;
-            margin:0 3px;
-            font-size:33px;
-        }
-
-        @media (min-width:40em) {
-            .credit-cards i {
-                font-size:45px;
-            }
-        }
-
-        .credit-cards img {
-            width:100%;
-            max-width:340px;
-        }
-
-        @media (min-width:40em) {
-            .credit-cards img {
-                max-width:480px;
-            }
-        }
-
-        @media (min-width:64em) {
-            .credit-cards img {
-                max-width:550px;
-            }
-        }
-
-        .questions {
-            padding:0 15px;
-            background:transparent;
-        }
-
-        .questions p {
-            margin:0;
-            opacity:0.7;
-            max-width:100%;
-            font-size:13px;
-        }
-
-        .questions p a {
-            color:inherit;
-            display:inline-block;
-        }
-
-
-        .bulk-order {
-            color:#3F72C4;
-            margin:0 auto;
-            display:block;
-            float:left;
-            width:100%;
-            text-decoration:underline;
-        }
-
-        .order-bar .bulk-order {
-            margin:15px auto 0;
-            color:#fff;
-        }
-
         .hidden-buy-slice .join {
             background:#3F72C4;
         }
@@ -1874,27 +1848,6 @@
                 line-height:1.3em;
                 margin:0 auto;
             }
-
-            .customize-section .final-pitch {
-                padding:30px 0 50px;
-            }
-
-            .customize-section .final-pitch h1 {
-                font-size:45px;
-                margin:0 auto 30px;
-            }
-
-            .customize-section .final-pitch p {
-                font-size:18px;
-            }
-
-            .customize {
-                padding:10px 15px 0;
-            }
-
-            .customize .cards i {
-                font-size:43px;
-            }
         }
 
         @media only screen and (min-width:64em) {
@@ -1968,190 +1921,6 @@
                 font-size:21px;
                 line-height:1.7em;
             }
-
-            .customize-section h1 {
-                font-size:45px;
-            }
-
-            .customize-section .final-pitch {
-                padding:30px 0 70px;
-            }
-
-            .customize .cards i {
-                font-size:48px;
-            }
-        }
-
-        .thank-you-box {
-            width:100%;
-            max-width:960px;
-            border-radius:5px;
-            height:auto;
-            max-height:0;
-            visibility:hidden;
-            opacity:0;
-            transition:all .4s ease-in;
-            display:block;
-            margin:0 auto;
-            background:#FFF;
-            text-align:center;
-            overflow:hidden;
-            color:#000
-        }
-
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:15px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box.active {
-                padding:20px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box.active {
-                padding:30px
-            }
-        }
-
-        .thank-you-box p {
-            font:400 15px/1.4em "Open Sans", sans-serif;
-            margin:0 auto
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p {
-                font-size:19px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box p {
-                font-size:23px
-            }
-        }
-
-        .thank-you-box p em {
-            line-height:1.4em;
-            max-width:550px;
-            display:inline-block;
-            font-size:12px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p em {
-                font-size:14px
-            }
-        }
-
-        .thank-you-box h2 {
-            font:700 30px/1em "Bebas Neue", sans-serif;
-            margin:15px auto;
-            text-transform:uppercase;
-            color:#0b76db
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box h2 {
-                font-size:37px;
-                margin:20px auto
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box h2 {
-                font-size:44px
-            }
-        }
-
-        .thank-you-box .social-media a {
-            background:#000;
-            color:#fff;
-            border-radius:50%;
-            display:inline-block;
-            text-align:center;
-            margin:20px 3px 0;
-            width:50px;
-            height:50px;
-            line-height:50px;
-            font-size:26px
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box .social-media a {
-                width:70px;
-                height:70px;
-                line-height:70px;
-                font-size:35px;
-                margin:25px 10px 0
-            }
-        }
-
-        #bulkOrder {
-            display:inline-block;
-            font-family:"Open Sans", sans-serif;
-            background:#e5f0ff;
-            border-top:4px solid #0b76db;
-            max-width:700px;
-            height:0;
-            visibility:hidden;
-            opacity:0;
-            overflow:hidden;
-            transition:all 0.7s;
-            min-height:inherit;
-            border-radius:7px
-        }
-
-        #bulkOrder.active {
-            height:inherit;
-            visibility:visible;
-            opacity:1;
-            padding:20px 20px 30px;
-            margin:30px auto 0
-        }
-
-        #bulkOrder.success {
-            background:#dbffe1;
-            border-color:#00991a
-        }
-
-        #bulkOrder.success .g-recaptcha {
-            display:none
-        }
-
-        #bulkOrder.success .join {
-            display:none
-        }
-
-        #bulkOrder.success p.success-text {
-            display:inline-block
-        }
-
-        #bulkOrder p.success-text {
-            display:none;
-            font-weight:700;
-            text-align:center;
-            margin:0 auto;
-            width:100%
-        }
-
-        #bulkOrder input, #bulkOrder textarea, #bulkOrder button {
-            font:400 15px "Open Sans", sans-serif;
-            border-radius:7px;
-            box-shadow:none
-        }
-
-        #bulkOrder .join {
-            font-family:"Bebas Neue", sans-serif;
-            border-radius:6px;
-            background:#0b76db;
-            padding:13px 30px;
-            margin:10px auto 0;
-            width:auto
         }
     </style>
 @stop()
@@ -2163,11 +1932,6 @@
 
     <script>
         $(document).ready(function () {
-
-            //bulk order display
-            $(".bulk-order").click(function () {
-                $('#bulkOrder').addClass('active');
-            });
 
             //pad hover mapper
             $('map').imageMapResize();
@@ -2229,18 +1993,27 @@
         "price" => floatval($productPrices['practicepad']->discounted_price),
         "noBreadcrumb" => true
     ])
-    @if(strpos(url()->full(), 'thankyou'))
-        <div class="thank-you-banner text-center">
-            <p>
-                <strong>Thanks for contacting us!</strong><br> We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
+    <div class="text-white px-5 sm:px-6 py-6 sm:py-10 lg:py-12" style="background: linear-gradient(0deg, #1A3768 0%, #0B76DB 100%);">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row lg:items-center overflow-hidden">
+                <div class="relative flex-shrink-0">
+                    <img class="h-48 sm:h-60 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/p4-last-chance/spread.png" alt="P4 Practice Pad" class="object-cover w-full h-full">
+                </div>
+                <div class="sm:pl-3 lg:pl-7 text-left mt-1 sm:mt-0">
+                    <h3 class="font-black">Last Chance Ever</h3>
+                    <p class="leading-tight my-4">
+                        The P4 Practice Pad has helped 30,000+ drummers improve their hands away from the drum set. And after 8 years, the original 4-zone practice pad is retiring.
+                        <br><br>
+                        That means this is your <strong>last chance ever</strong> to grab the most popular practice pad in Drumeo history.
+                        <br><br>
+                        You can grab it on its own and SAVE 25% or get yours FREE with 1 year of unlimited drum lessons.
+                        <br><br>
+                        Scroll down to nab one of the last P4 Practice Pads.</p>
+                    <a class="join smaller musora anchor-slide" href="#final">Click Here To Order &raquo;</a>
+                </div>
+            </div>
         </div>
-    @endif
-    @if(strpos(url()->full(), 'error'))
-        <div class="thank-you-banner text-center">
-            <p><strong>Oops!</strong><br> Please go back and make sure you check the security CAPTCHA box.<br> <a
-                        class="bulk-order anchor-slide" href="#bulk-order-anchor">click here</a></p>
-        </div>
-    @endif
+    </div>
     <div class="hero-header">
         <div class="row title text-center">
             <h1>THE <strong>MOST VERSATILE<br> PRACTICE PAD</strong> IN THE WORLD<sup>&trade;</sup>
@@ -2253,43 +2026,7 @@
         </div>
         <div class="row order-bar text-center">
             <div class="columns">
-                <a class="join stores big"
-                        href="/ecommerce/add-to-cart?products[practicepad]=1">Click Here To Order &raquo;</a>
-                <p>Or buy through your favorite online stores:</p>
-                {{--<a target="_blank" class="join amazon" href="https://www.amazon.com/dp/B01IRNGWDK"><img style="padding-top: 5px;"--}}
-                {{--src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>--}}
-                <a target="_blank"
-                   class="join stores musicians-friend"
-                   href="https://www.musiciansfriend.com/accessories/drumeo-p4-practice-pad">
-                    <img
-                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/musicians-friend-logo.png"
-                        alt="Musician's Friend"
-                    >
-                </a>
-                <br class="show-for-medium-only">
-                <a target="_blank"
-                   class="join stores guitar-center"
-                   href="https://www.guitarcenter.com/Drumeo/P4-Practice-Pad.gc">
-                    <img style="padding-bottom: 2px;"
-                         src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/guitar-center-logo.png"
-                         alt="Guitar center"
-                    >
-                </a>
-                <a target="_blank"
-                   class="join stores thomann"
-                   href="https://www.thomann.de/gb/drumeo_p4_pat_petrillo_practice_pad.htm">
-                    <img
-                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png"
-                        alt="thomann"
-                    >
-                </a>
-            </div>
-            <div class="columns">
-                <p>
-                    <strong>
-                        <a class="bulk-order anchor-slide" href="#bulk-order-anchor">Are you a drum shop? Click here <br class="hide-for-medium"> to stock the pad in your store!</a>
-                    </strong>
-                </p>
+                <a class="join stores big anchor-slide" href="#final">Click Here To Order &raquo;</a>
             </div>
         </div>
     </div>
@@ -2509,100 +2246,80 @@
             </div>
         </div>
     </div>
-    <div class="row customize-section">
-        <div class="columns"><img src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://s3.amazonaws.com/drumeo-packs/practice-pad/photo-bow.png" alt="Practice pad photos"></div>
-        <div id="customize-anchor" class="anchor"></div>
-        <div class="columns customize text-center">
-            <div class="final-pitch">
-                @if(floatval($productPrices['practicepad']->price) > floatval($productPrices['practicepad']->discounted_price))
-                    <h1><s>WAS ${{ floatval($productPrices['practicepad']->price) }}</s> NOW ${{ floatval($productPrices['practicepad']->discounted_price) }}</h1>
-                @else
-                    <h1>ONLY ${{ floatval($productPrices['practicepad']->discounted_price) }}</h1>
-                @endif
-                <a class="join stores big"
-                        href="/ecommerce/add-to-cart?products[practicepad]=1">Click Here To Order &raquo;</a>
-                <p>Or buy through your favorite online stores:</p>
-                {{--<a target="_blank" class="join stores amazon" href="https://www.amazon.com/dp/B01IRNGWDK"><img style="padding-top: 5px;"--}}
-                {{--src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>--}}
-                <a
-                    target="_blank"
-                    class="join stores musicians-friend"
-                    href="https://www.musiciansfriend.com/accessories/drumeo-p4-practice-pad"
-                >
-                    <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/musicians-friend-logo.png" alt="musicians friend">
-                </a>
-                <br class="show-for-medium-only">
-                <a target="_blank"
-                   class="join stores guitar-center"
-                   href="https://www.guitarcenter.com/Drumeo/P4-Practice-Pad.gc">
-                    <img style="padding-bottom: 2px;" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/guitar-center-logo.png" alt="guitar center">
-                </a>
-                <a
-                    target="_blank"
-                    class="join stores thomann"
-                    href="https://www.thomann.de/gb/drumeo_p4_pat_petrillo_practice_pad.htm"
-                >
-                    <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png" alt="thomann">
-                </a>
+    <div id="final" class="anchor"></div>
+    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #F4F8FB;">
+        <div class="container mx-auto relative z-50">
+            <img class="h-20 sm:h-28 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/p4-last-chance/logo.png" alt="30DD season 2">
+            <h4 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4 uppercase"><strong>Last Chance Ever</strong></h4>
+
+            <h6 class="leading-normal mb-4 font-bold">
+                Your LAST CHANCE to grab the most versatile practice pad.
+            </h6>
+
+            <div class="flex flex-wrap items-center mt-7 sm:mt-10">
+                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto lg:w-3/4 xl:w-7/12">
+                    <a href="/ecommerce/add-to-cart?products[practicepad]=1&products[drumeo_access_30-days]=1&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                        <h3><strong>Just The Pad</strong></h3>
+                        <p class="text-sm mt-2 mb-5">Last Chance Ever (SAVE 25%)</p>
+                        <h2 class="inline-block"><s class="opacity-60">$79</s> <strong class="text-4xl">${{ floatval($productPrices['practicepad']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                        <div class="join blue smaller my-4">ORDER NOW</div>
+                        <ul class="list-disc ml-10">
+                            <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-month Drumeo Access</li>
+                        </ul>
+                        <hr class="w-full my-5" style="border-color:#b2cae1">
+
+                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> 4 different sounds & feels<br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> 3 levels for movement<br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> 90-day guarantee</p>
+                    </a>
+                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[30-day-chops]=1&products[GHFAL-DIGI]=1&promo-code=p4-last-chance&locked=true" class="text-black hover:text-black px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
+                        <img class="h-20 absolute top-0 right-0 z-10 -mt-4 -mx-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
+                        <h3><strong>Unlimited Lessons</strong></h3>
+                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + P4 Practice Pad.</p>
+                        <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
+                        <div class="join blue smaller my-4">GET EVERYTHING</div>
+                        <ul class="list-disc ml-10">
+                            <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> P4 Practice Pad</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 30-Day Chops</li>
+                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Great Hands For A Lifetime</li>
+                        </ul>
+                        <hr class="w-full my-5" style="border-color:#ebf2f8">
+                        <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> Play Along To {{ Prices::$drumeoSongs }}+ Popular Songs.<br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>
+                            <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
+                    </a>
+                </div>
+                <div class="flex w-full justify-center lg:justify-start lg:order-1 lg:w-1/4 xl:w-5/12 lg:pl-4  mt-10 lg:mt-0">
+                    <img class="max-w-lg sm:max-w-lg xl:max-w-xl transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/p4-last-chance/collage.png" alt="order collage image">
+                </div>
             </div>
 
-
-            <p><strong> <a class="bulk-order anchor-slide" href="#bulk-order-anchor">Are you a drum shop? Click here <br
-                                class="hide-for-medium"> to stock the pad in your store!</a> </strong></p>
-
-            <div class="credit-cards columns">
-                <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i> <i
-                        class="fab fa-cc-paypal"></i>
-                <i class="fab fa-cc-discover"></i>
+        </div>
+    </section>
+    <section class="text-white px-4 sm:px-6 py-8 sm:py-12 text-center" style="background: #000;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
+                <p><strong>Any questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="columns questions">
-                <p><strong>Any questions?</strong><br class="hide-for-medium"> Call us toll-free at <a
-                            href="tel:+18004398921">1-800-439-8921</a> <br class="hide-for-medium"> or directly at <a
-                            href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
-        <div id="bulk-order-anchor" class="anchor columns"></div>
-        <div id="bulkOrder" class="text-center">
-            <h4 class="columns"><strong>Get a better rate when ordering in bulk.</strong></h4>
-
-            <form id="ajaxForm" class="ajax-form" name="drumeo" method="post" action="/form-mail/practice-pad.php">
-                <input type="hidden" name="subject" value="Bulk Order - P4 Practice Pad"/> <input type="hidden"
-                        name="redirect" value="/drumshop/practice-pad-full/?thankyou"/>
-                <div class="medium-6 columns half-padding">
-                    <input name="email" type="email" placeholder="Email Address" required/>
-                </div>
-                <div class="medium-6 columns half-padding">
-                    <input name="company" type="text" placeholder="Company"/>
-                </div>
-                <div class="medium-6 columns half-padding">
-                    <input name="country" type="text" placeholder="Country"/>
-                </div>
-                <div class="medium-6 columns half-padding"><input name="quantity" type="number"
-                            placeholder="Book Quantity"/>
-                </div>
-                <div class="columns half-padding">
-                    <textarea name="message" placeholder="Optional Message"></textarea>
-                </div>
-                <div class="medium-6 columns half-padding">
-                    <div class="g-recaptcha" data-sitekey="6LcBSxYUAAAAANEVgiFM3kmHOjzbcrkspWBtQd9n"></div>
-                </div>
-                <div class="medium-6 columns text-right half-padding">
-                    <button class="button join" type="submit">
-                        <span class="pre-add"><i class="fad fa-paper-plane"></i> Send</span> <span class="pending hide"><i
-                                    class="fad fa-spinner-third fa-spin"></i> Sending</span> <span class="success hide"><i
-                                    class="fad fa-thumbs-up"></i> Sent</span> <span class="fail hide"><i
-                                    class="fad fa-exclamation-triangle"></i> Oops</span>
-                    </button>
-                </div>
-            </form>
-
-            <div class="disclaimer"></div>
-
-            @include('drumeo.lead-gen.partials.thank-you-box', [
-                "headline" => "SENT",
-                "body" => "We'll respond to you soon! If you haven't heard back in the next week, please email <a class='text-white' href='{{ get_musora_brand_base_url() }}/contact'>contact us</a>."
-            ])
-        </div>
-    </div>
+    </section>
     @include("drumeo.sales.partials._footer")
 @stop

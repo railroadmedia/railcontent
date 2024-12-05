@@ -40,7 +40,7 @@
           v-bind="recommendedProps"
           :collection-type="lessonType"
           :title="catalogueMeta.shortname || catalogueMeta.name"
-          :hide-filter-icon="lessonType === 'routine'"
+          :hide-filter-icon="true"
           :hide-controls="lessonType === 'Recommendation'"
           :tab-options="tabData"
         />
@@ -110,8 +110,6 @@
   })
 
   onBeforeMount(async() => {
-    console.log(props.lessonType)
-
     try {
       // Fetch started content (in-progress workouts)
       const startedIds = await fetchContentInProgress(props.lessonType, brand.value, { limit: 20 });
@@ -119,8 +117,6 @@
 
       // Set the continue section with started workouts
       continueSection.value = lessons;
-
-      console.log('started',continueSection.value);
 
       // Set default collection store values
       collectionStore.setDefaults({

@@ -3,12 +3,12 @@
         <div class="">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
-            <PageHeader 
-                pageType="songs" 
-                title="Songs" 
-                iconName="headphones" 
-                :infoData="headerInfoData" 
-                :ctas="ctaConfig" 
+            <PageHeader
+                pageType="songs"
+                title="Songs"
+                iconName="headphones"
+                :infoData="headerInfoData"
+                :ctas="ctaConfig"
                 :is-loading="isLoading"
             />
 
@@ -88,9 +88,10 @@ const ctaConfig = computed(() => {
 });
 
 const headerInfoData = computed(() => {
+    const artistsAmount = artistCount.value !== 0 ? artistCount.value : '';
     return {
         type: 'Link',
-        text: `See all ${artistCount.value} artists`,
+        text: `See all ${artistsAmount} artists`,
         url: `/${brand.value}/artists`
     }
 })
@@ -102,14 +103,24 @@ const tabData = computed(() => {
 onBeforeMount(async() => {
     isLoading.value = true;
     try {
+        // TODO: needs to get the length from the API, temporarily unblocked render with 'then'
+        fetchArtists(brand.value).then(artists => {
+            artistCount.value = artists.length;
+        });
+
+        // Set default collection store values
+        collectionStore.setDefaults({
+            tabOptions: tabData.value,
+            filter: {
+                sort: '-published_on'
+            },
+            queryType: 'song',
+        });
+
         if (props.showUpgradeModal) {
             platformStore.openMembershipUpgradeModal();
             platformStore.disableCloseMembershipUpgradeModal();
         } else {
-            // Fetch song artist count
-            const artists = await fetchArtists(brand.value);
-            artistCount.value = artists.length;
-
             // Fetch started content (in-progress lessons)
             const startedIds = await fetchContentInProgress('song', brand.value);
             const lessons = await fetchByRailContentIds(startedIds.started);
@@ -117,15 +128,6 @@ onBeforeMount(async() => {
 
             // Set the continue section with started lessons
             continueSection.value = startedLessons;
-
-            // Set default collection store values
-            collectionStore.setDefaults({
-                tabOptions: tabData.value,
-                filter: {
-                    sort: '-published_on'
-                },
-                queryType: 'song',
-            });
         }
     } catch (error) {
         console.error('Error in onBeforeMount:', error);

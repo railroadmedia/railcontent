@@ -23,9 +23,11 @@ use Doctrine\ORM\ORMException;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Services\ExploreTasksService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
@@ -48,7 +50,6 @@ class HomePageController extends BaseController
     private const int WORKOUTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int NEW_RELEASES_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
     private const int PLAYLISTS_COUNTENT_COUNT = 24;
-    private const int UPCOMING_EVENTS_CONTENT_COUNT = self::DEFAULT_CONTENT_COUNT;
 
     public function __construct(
         private readonly ContentService $contentService,
@@ -65,6 +66,7 @@ class HomePageController extends BaseController
         private readonly LearningPathsService $learningPathsService,
         private readonly UserAccessPermissionsService $userAccessPermissionsService,
         private readonly SanityGateway $sanityGateway,
+        private readonly ExploreTasksService $exploreTasksService
     ) {
     }
 
@@ -207,7 +209,6 @@ class HomePageController extends BaseController
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         if ($currentEvent) {
-            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
             if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
@@ -227,23 +228,8 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
-        $shouldShowTrialSection = false;
+
         $brand = brand();
-        $hideSection = $brand . '_trial_section_hide';
-
-        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
-            $hasExperienceLevels = count(
-                user()->onboardingExperience->filter(function ($item) use ($brand) {
-                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                })
-            ) > 0;
-
-            $shouldShowTrialSection = $hasExperienceLevels;
-        }
-        $trialSection = [];
-        if ($shouldShowTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        }
 
         $cohortBanner = [];
         $activeCohort = $this->cohortService->getActiveCohort();
@@ -287,20 +273,18 @@ class HomePageController extends BaseController
             }
         }
 
-        $trialSection = [];
-        $newSectionBrands = $brand === 'drumeo' || $brand === 'pianote';
         $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths() && $newSectionBrands;
-
-        if ($showOldTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        }
-
-        if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths();
-        }
-
+        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
         $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
+        if ($showNewTrialSection) {
+            $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
+        } else if ($showOldTrialSection) {
+            $trialSection = $this->learningPathsService->getLearningPaths();
+        } else {
+            $trialSection = [];
+        }
+
+        $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
         return view('home.index', [
             "brand" => $brand,
@@ -311,7 +295,7 @@ class HomePageController extends BaseController
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
-            'displayTrialSection' => $shouldShowTrialSection,
+            'displayTrialSection' => $showOldTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
             "hasExperience" => $hasExperience,
@@ -330,20 +314,29 @@ class HomePageController extends BaseController
             "trialSection" => $trialSection,
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "youtubeId" => $youtubeId ?? null,
-            "displayTrialSection" => $showNewTrialSection || $showOldTrialSection,
             "trialSectionRedesign" => $showNewTrialSection,
-            "trialSection" => $trialSection,
             "isFirstAccess" => user()->isFirstAccess(),
             "homepageV2" => $homepageV2,
+            "exploreTasks" => $userTasks,
         ]);
     }
 
     public function onboarding(Request $request)
     {
+        $newUser = !$this->onboardingService->getBrand(user()->id);
+        $user = User::whereId(Auth::id())->firstOrFail();
+
+        if ($user->primary_brand) {
+            $this->onboardingService->saveInstrument(
+                $this->onboardingService->getInstrumentFromBrand($user->primary_brand)
+            );
+        }
+
         Avo::onboarding_started(AvoHelper::defaultEventProperties());
 
-        return view('home.onboarding');
+        return view('home.onboarding', [
+            'newUser' => $newUser,
+        ]);
     }
 
     /**
@@ -509,12 +502,12 @@ class HomePageController extends BaseController
                 "label" => "Forum Post Likes",
             ],
             "comments" => [
-                "icon" => "icon-comments-liked",
+                "icon" => "fa-solid fa-thumbs-up",
                 "value" => $userProfileMetrics->getCommentLikes(),
                 "label" => "Comment Likes",
             ],
             "practiced" => [
-                "icon" => "icon-minutes-practiced",
+                "icon" => "fa-solid fa-stopwatch",
                 "value" => user()->getBrandMinutesPracticed(),
                 "label" => "Minutes Practiced",
             ],
@@ -606,10 +599,11 @@ class HomePageController extends BaseController
     public function getUsersPlaylist(): ContentFilterResultsEntity
     {
         $playlists = $this->userPlaylistsService->getUserPlaylist(
-            user()->id,
-            'user-playlist',
-            brand(),
-            self::PLAYLISTS_COUNTENT_COUNT
+            userId: user()->id,
+            playlistType: 'user-playlist',
+            brand: brand(),
+            limit: self::PLAYLISTS_COUNTENT_COUNT,
+            sort: '-last_progress'
         );
 
         return new ContentFilterResultsEntity(['results' => $playlists]);

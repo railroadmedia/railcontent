@@ -6,6 +6,7 @@ use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Services\EventTrackingService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use Illuminate\Support\Facades\Log;
 
 class AssignPrimaryBrandJob extends WebhookChildJob
@@ -25,6 +26,8 @@ class AssignPrimaryBrandJob extends WebhookChildJob
 
             dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
             Log::info("User {$user->id} assigned primary brand $brand");
+
+            SyncOnboardingBrands::dispatch($user->id, $brand);
         }
     }
 }

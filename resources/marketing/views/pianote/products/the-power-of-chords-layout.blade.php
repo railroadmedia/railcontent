@@ -347,7 +347,7 @@
                     </h4>
                     <div class="hidden md:flex">
                         <div class="flex-1 relative">
-                            <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
+{{--                            <a class="join small w-full text-base" href="@yield('order-link')">get started</a>--}}
                             @if(floatval($productPrices['the-power-of-chords']->price) > $productPrice)
                                 <div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">
                                     SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['the-power-of-chords']->price)))) }}%
@@ -375,7 +375,7 @@
             </div>
             <div class="md:hidden max-w-xs mx-auto">
                 <div class="relative mb-6">
-                    <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
+{{--                    <a class="join small w-full text-base" href="@yield('order-link')">get started</a>--}}
                     {{--<div class="text-pianote text-xs text-center mt-2">--}}
                         {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}%--}}
                     {{--</div>--}}
@@ -569,9 +569,9 @@
             <h6 class="mt-2 leading-normal">
                 Simple steps to transform your <br class="md:hidden">understanding of music.
             </h6>
-            
 
-            <a class="join w-full my-5 sm:my-7" href="@yield('order-link')" >Get Started</a>
+
+{{--            <a class="join w-full my-5 sm:my-7" href="@yield('order-link')" >Get Started</a>--}}
             <h6 class="leading-tight text-center mb-1 md:mb-2">
 
                 <strong>ONLY</strong>

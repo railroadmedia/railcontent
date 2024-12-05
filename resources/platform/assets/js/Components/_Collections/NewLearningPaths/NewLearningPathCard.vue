@@ -1,9 +1,52 @@
 <template>
+    <!-- DESKTOP -->
+    <div :style="{ backgroundImage: `url(${calculatedBgImg})` }"
+        class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-mr-[10px] lg:tw-mr-0 tw-bg-cover tw-bg-center">
+        <div class="tw-flex tw-absolute tw-w-full tw-h-full tw-backdrop-blur-sm tw-p-[20px] lg:tw-p-[30px]"
+            :style="{ background: 'linear-gradient(270deg, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.5) 45.09%, #000000 100%)' }">
+            <div
+                class="tw-flex tw-flex-col tw-justify-between tw-pr-[20px] xl:tw-pr-[30px] tw-grow tw-h-[212px] 3xl:tw-h-[235px] tw-overflow-hidden">
+                <div class="tw-w-auto tw-h-full">
+                    <div v-if="contentType.length">
+                        <span
+                            class="tw-font-bold tw-text-[12px] tw-leading-normal lg:tw-text-[11px] lg:tw-leading-[15px] 2xl:tw-text-[12px] 2xl:tw-leading-[16px] tw-p-[5px] tw-uppercase tw-text-white tw-rounded-[4px] tw-bg-black">
+                            {{ contentType }}
+                        </span>
+                    </div>
+                    <div class="tw-pt-[15px] 2xl:tw-pt-[25px] tw-overflow-hidden">
+                        <h1
+                            class="tw-text-[18px] tw-leading-[27px] 3xl:tw-text-[20px] 3xl:tw-leading-[30px] tw-font-bold tw-pb-[5px] tw-line-clamp-2">
+                            {{ title }}
+                        </h1>
+                        <p v-if="description.length"
+                            class="tw-text-[14px] tw-leading-[18px] tw-line-clamp-2">
+                            {{ description }}
+                        </p>
+                    </div>
+                </div>
+                <div class="tw-flex tw-pt-[15px] tw-w-full tw-self-end">
+                    <a @click="(e) => handleCtaClick(e, ctaUrl)" :href="ctaUrl"
+                        class="tw-btn-primary tw-bg-white tw-text-black hover:tw-bg-[#627F97] hover:tw-text-white tw-py-[8px] tw-w-full">
+                        <span>
+                            START NOW
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="tw-flex tw-justify-end tw-items-center xl:tw-min-w-[212px] xl:tw-min-h-[212px] 3xl:tw-min-w-[418px] 3xl:tw-min-h-[235px] xl:tw-w-[212px] xl:tw-h-[212px] 3xl:tw-w-[418px] 3xl:tw-h-[235px]">
+                <img class="tw-rounded-[5px] xl:tw-h-[212px] xl:tw-min-w-[212px]"
+                    :class="hasSquareImg ? '3xl:tw-h-[235px] 3xl:tw-min-w-[235px]' : '3xl:tw-h-[235px] 3xl:tw-w-[418px]'"
+                    :src="thumbnailImg" :alt="`${title} Thumbnail`" />
+            </div>
+        </div>
+    </div>
+
     <!-- MOBILE -->
     <div :style="{ backgroundImage: `url(${calculatedBgImg})` }"
-        class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[310px] tw-h-[430px] md:tw-w-1/2 tw-mr-[10px] md:tw-mr-0 tw-bg-cover tw-bg-center">
+         class="tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-shrink-0 tw-bg-cover tw-bg-center">
         <div class="tw-flex tw-flex-col tw-items-center tw-absolute tw-w-full tw-h-full tw-p-[20px] tw-rounded-[10px]" :class="contentType !== 'challenge' ? 'tw-backdrop-blur-sm' : ''"
-            :style="{
+             :style="{
         background: contentType === 'challenge' ?
             'linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.7) 45%, #000000 100%)'
             : 'linear-gradient(270deg, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.5) 45.09%, #000000 100%)'
@@ -31,62 +74,19 @@
                             {{ title }}
                         </h1>
                         <p v-if="description.length"
-                            class="tw-text-[12px] tw-leading-[18px] tw-line-clamp-2">
+                           class="tw-text-[12px] tw-leading-[18px] xl:tw-text-[18px] xl:tw-leading-[27px] tw-line-clamp-2">
                             {{ description }}
                         </p>
                     </div>
                 </div>
                 <div class="tw-flex tw-pt-[15px] tw-w-full tw-self-end">
                     <a @click="(e) => handleCtaClick(e, ctaUrl)" :href="ctaUrl"
-                        class="tw-btn-primary tw-bg-white tw-text-black hover:tw-bg-[#627F97] hover:tw-text-white tw-py-[8px] tw-w-full">
+                       class="tw-btn-primary tw-bg-white tw-text-black hover:tw-bg-[#627F97] hover:tw-text-white tw-py-[8px] tw-w-full">
                         <span>
                             START NOW
                         </span>
                     </a>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DESKTOP -->
-    <div :style="{ backgroundImage: `url(${calculatedBgImg})` }"
-        class="tw-hidden xl:tw-flex tw-relative tw-overflow-hidden tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] lg:tw-w-1/2 xl:tw-h-[272px] 3xl:tw-h-[295px] tw-mr-[10px] lg:tw-mr-0 tw-bg-cover tw-bg-center">
-        <div class="tw-flex tw-absolute tw-w-full tw-h-full tw-backdrop-blur-sm tw-p-[20px] lg:tw-p-[30px]"
-            :style="{ background: 'linear-gradient(270deg, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.5) 45.09%, #000000 100%)' }">
-            <div
-                class="tw-flex tw-flex-col tw-justify-between tw-pr-[20px] xl:tw-pr-[30px] tw-grow tw-h-[212px] 3xl:tw-h-[235px] tw-overflow-hidden">
-                <div class="tw-w-auto tw-h-full">
-                    <div v-if="contentType.length">
-                        <span
-                            class="tw-font-bold tw-text-[12px] tw-leading-normal lg:tw-text-[11px] lg:tw-leading-[15px] 2xl:tw-text-[12px] 2xl:tw-leading-[16px] tw-p-[5px] tw-uppercase tw-text-white tw-rounded-[4px] tw-bg-black">
-                            {{ contentType }}
-                        </span>
-                    </div>
-                    <div class="tw-pt-[15px] 2xl:tw-pt-[25px] tw-overflow-hidden">
-                        <h1
-                            class="tw-text-[18px] tw-leading-[27px] 3xl:tw-text-[20px] 3xl:tw-leading-[30px] tw-font-bold tw-pb-[5px] tw-line-clamp-2">
-                            {{ title }}
-                        </h1>
-                        <p v-if="description.length"
-                            class="tw-text-[12px] tw-leading-[18px] 3xl:tw-text-[14px] 3xl:tw-leading-[21px] tw-line-clamp-2">
-                            {{ description }}
-                        </p>
-                    </div>
-                </div>
-                <div class="tw-flex tw-pt-[15px] tw-w-full tw-self-end">
-                    <a @click="(e) => handleCtaClick(e, ctaUrl)" :href="ctaUrl"
-                        class="tw-btn-primary tw-bg-white tw-text-black hover:tw-bg-[#627F97] hover:tw-text-white tw-py-[8px] tw-w-full">
-                        <span>
-                            START NOW
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div
-                class="tw-flex tw-justify-end tw-items-center xl:tw-min-w-[212px] xl:tw-min-h-[212px] 3xl:tw-min-w-[418px] 3xl:tw-min-h-[235px] xl:tw-w-[212px] xl:tw-h-[212px] 3xl:tw-w-[418px] 3xl:tw-h-[235px]">
-                <img class="tw-rounded-[5px] xl:tw-h-[212px] xl:tw-min-w-[212px]"
-                    :class="hasSquareImg ? '3xl:tw-h-[235px] 3xl:tw-min-w-[235px]' : '3xl:tw-h-[235px] 3xl:tw-w-[418px]'"
-                    :src="thumbnailImg" :alt="`${title} Thumbnail`" />
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@ const calculatedBgImg = computed(() => {
         return props.bgImg;
     }
 
-    return '';
+    return props.squareImg;
 });
 
 const handleCtaClick = (event, url) => {
@@ -209,4 +209,3 @@ const handleCtaClick = (event, url) => {
     }
 };
 </script>
-==== BASE ====

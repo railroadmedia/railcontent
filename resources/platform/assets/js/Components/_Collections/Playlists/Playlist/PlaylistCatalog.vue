@@ -2,7 +2,7 @@
     <main class="tw-w-full ">
 
         <template v-if="hasAccess">
-            
+
             <!-- Edit Banner -->
             <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-2">
                 <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden tw-rounded-md"
@@ -111,6 +111,7 @@ import { usePlaylistsStore } from '@stores/playlists';
 import PlaylistCard from './PlaylistCard.vue';
 import MusoraIcon from '@units/MusoraIcons/MusoraIcon.vue';
 import { useUserStore } from "@stores/user";
+import {updatePlaylistItem} from "musora-content-services";
 
 //Inject
 const token = inject('csrf_token');
@@ -183,11 +184,10 @@ const handleSort = async() => {
     //Update each item in temp array
     for(let i = 0; i < lessonsCopy.value.length; i++) {
         if (lessonsCopy.value[i].hasChanged) {
-            await PlaylistService.updatePlaylistItem({
+            await updatePlaylistItem({
                 user_playlist_item_id: lessonsCopy.value[i].user_playlist_item_id,
                 position: lessonsCopy.value[i].user_playlist_item_position
-            }, token)
-
+            })
             lessonsCopy.value[i].hasChanged = false;
         }
     }

@@ -1,4 +1,4 @@
-@extends('guitareo.sales.affiliates.affiliate-trial-layout')
+@extends('guitareo.sales.affiliates.affiliate-layout')
 
 @section('name', 'A Sober Girls Guide')
 

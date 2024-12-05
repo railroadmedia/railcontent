@@ -26,7 +26,7 @@ class MediaPlaybackServiceV2 extends TrackerBase
             Log::warning("Content $contentId not found");
             return;
         }
-        $mediaPlaybackSession = MediaPlaybackSession::query()->find($sessionId);
+        $mediaPlaybackSession = MediaPlaybackSession::query()->firstWhere('uuid', $sessionId);
 
         if (!$mediaPlaybackSession) {
             $mediaPlaybackSession = new MediaPlaybackSession();

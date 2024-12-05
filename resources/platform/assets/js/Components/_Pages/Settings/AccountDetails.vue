@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${showOnboardingBanner ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }
@@ -115,7 +115,7 @@ import MuToggle from '@units/FormInputs/MuToggle.vue';
 import PillNav from "@collections/PillNav/PillNav.vue";
 import DeleteAccountModal from "@collections/Modal/DeleteAccountModal.vue";
 import MuButton from "@units/Button/MuButton.vue";
-import MembershipUpgradeBanner from "../../_Collections/MembershipUpgradeBanner/MembershipUpgradeBanner";
+import MembershipUpgradeBanner from "@collections/MembershipUpgradeBanner/MembershipUpgradeBanner";
 
 const props = defineProps({
     storeIdentifier: String,
@@ -136,7 +136,7 @@ const {
     userDisplayName,
     userProfilePictureUrl,
     userCreatedYear,
-    userCompletedAccount,
+    showOnboardingBanner,
     userMembershipLevel,
     isLifetimeMember,
     userMembershipExpirationFormatted,

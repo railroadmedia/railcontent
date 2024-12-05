@@ -7,6 +7,7 @@ use Exception;
 use App\Modules\Referral\Exceptions\ReferralException;
 use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Models\Referrer;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
 class ReferralService
@@ -89,5 +90,26 @@ class ReferralService
         $referrer->saveOrFail();
 
         return $referrer;
+    }
+
+    /**
+     * Validate if an email exists and has an active membership.
+     *
+     * @param string $email
+     * @return array
+     */
+    public function validateEmail(string $email): array
+    {
+        $dateThreshold = Carbon::now()->subDays(120);
+
+        $user = User::where('email', $email)->select(['membership_expiration_date'])->first();
+
+        $exists = $user !== null;
+        $active = $exists && $user->membership_expiration_date > $dateThreshold;
+
+        return [
+            'exists' => $exists,
+            'active' => $active,
+        ];
     }
 }

@@ -82,6 +82,7 @@
     'subHeader' => 'LEARN YOUR FAVORITE SONGS FOR FREE.',
     'headerLight' => true,
     'header' => '<strong>30 days of FREE music lessons.</strong><br> Enter your email to get your access<br> code and start your free lessons.',
+    'headerLight' => true,
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No credit card required.</li>
     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No recurring billing.</li>
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> Awesome music lessons.</li>',

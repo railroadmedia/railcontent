@@ -143,6 +143,7 @@ export default function ({
                     if (currentTime.value >= Math.round(0.95 * totalDuration.value) && !ninetyFivePercentTracked) {
                         userJourney.trackVideo({ payload: payload({ position_seconds: Math.round(0.95 * Math.round(totalDuration.value)) }), type: 'completed' });
                         ninetyFivePercentTracked = true;
+                        endCallback(false);
                     }
                     if (!loading.value) {
                         heartbeatTimer += 1;

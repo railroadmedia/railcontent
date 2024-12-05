@@ -114,6 +114,39 @@ return [
                     'preferred_instrument' => 'Preferred Instrument'
                 ],
             ],
+            'Youtube Resources' => [
+                'custom_attributes' => [
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'musora_prospect_youtube-resources',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
+                ],
+            ],
+            'Musora Referral' => [
+                'custom_attributes' => [],
+                'events' => [
+                    '30day-trial-referral',
+                ],
+                'custom_event_attributes' => [
+                    'referrer' => 'required|string',
+                    'brand' => 'required|string',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'email' => 'Email',
+                    'brand' => 'Brand',
+                    'timestamp' => 'Timestamp',
+                ],
+            ],
         ],
         'drumeo' => [
             'The Playlist - Musora Newsletter' => [
@@ -430,6 +463,24 @@ return [
             ],
         ],
         'pianote' => [
+            'Passing Chords PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_passing-chords',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            '5 Pentatonic Licks PDF' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'pianote_prospect_pentatonic-licks',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Metronome Notice' => [
                 'custom_attributes' => [],
                 'events' => [
@@ -728,12 +779,33 @@ return [
                 ],
             ],
             'FP30 Giveaway' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
                 'events' => [
                     'pianote_prospect_giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Casio Privia Giveaway' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_casio-privia-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Pianote Awards Giveaway' => [
@@ -1089,5 +1161,15 @@ return [
                 ],
             ],
         ],
+    ],
+    'subscription_topics' => [
+        'drumeo_membership_perks' => env('DRUMEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_3'),
+        'drumeo_lesson_events' => env('DRUMEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_2'),
+        'pianote_membership_perks' => env('PIANOTE_PERKS_SUBSCRIPTION_TOPIC', 'topic_10'),
+        'pianote_lesson_events' => env('PIANOTE_LESSONS_SUBSCRIPTION_TOPIC', 'topic_9'),
+        'guitareo_membership_perks' => env('GUITAREO_PERKS_SUBSCRIPTION_TOPIC', 'topic_11'),
+        'guitareo_lesson_events' => env('GUITAREO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_13'),
+        'singeo_membership_perks' => env('SINGEO_PERKS_SUBSCRIPTION_TOPIC', 'topic_12'),
+        'singeo_lesson_events' => env('SINGEO_LESSONS_SUBSCRIPTION_TOPIC', 'topic_14'),
     ]
 ];

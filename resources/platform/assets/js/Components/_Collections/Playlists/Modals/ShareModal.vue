@@ -3,6 +3,7 @@
     import PlaylistService from '@services/playlists.js';
     import { usePlaylistsStore } from '@stores/playlists';
     import MuButton from '@units/Button/MuButton';
+    import {updatePlaylist} from "musora-content-services";
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -43,10 +44,10 @@
 
         //Close Modal
         emit('onCloseModal')
-
-        PlaylistService.setToPrivate(props.data.id, isPublic, token)
-            .then((response) => {
-                if (response.status === 201) {
+        updatePlaylist(props.data.id, {
+            "private": isPublic ? 0 : 1,
+        }) .then((response) => {
+                if (response.success === true) {
                     //show success message
                     window.shownotification({
                         icon: 'fa-lock-open',

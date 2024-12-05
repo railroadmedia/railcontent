@@ -112,4 +112,12 @@ class MediaPlaybackService extends TrackerBase
             }
         );
     }
+
+    public function getSecondsWatchedSince(int $contentId, int $userId, Carbon $since)
+    {
+        return MediaPlaybackSession::query()->where('user_id', $userId)
+            ->where('media_id', $contentId)
+            ->where('started_on', '>=', $since)
+            ->sum('seconds_played');
+    }
 }

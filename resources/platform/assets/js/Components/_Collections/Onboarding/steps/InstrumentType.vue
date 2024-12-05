@@ -24,7 +24,10 @@ const props = defineProps({
   },
   stepName: {
     type: String,
-  }
+  },
+  currentStep: {
+    type: Number,
+  },
 });
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
@@ -59,19 +62,19 @@ const handleNextStep = () => {
   saveGear({
     data,
     brand: props.brand
-  }).then(() => {
-    emit('onChangeStep', 3);
-    emit('onCheckStep', 2, true);
   }).catch(() => {
     window.shownotification({
       icon: 'error',
       text: 'There was an error saving your gear preferences, please try again later.'
     });
   });
+
+  emit("onCheckStep", props.currentStep, true);
+  emit("onChangeStep", props.currentStep + 1);
 };
 
 function goBack() {
-  emit('onChangeStep', 1);
+  emit('onChangeStep', props.currentStep - 1);
 }
 
 const isNextButtonDisabled = () => {
@@ -80,9 +83,7 @@ const isNextButtonDisabled = () => {
   }).length;
 };
 const headerProps = {
-  title: "What kind of gear will you be practicing with?",
-  subtitle: `You selected ${props.info.instrument}! Now it’s time to tell us about
-      your practice set up. You can select more than one instrument and change your settings in your profile at any time.`,
+  title: "What gear will you be practicing with?",
 }
 </script>
 
@@ -102,7 +103,7 @@ const headerProps = {
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
               classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next
       </Button>
-      <ProgressBar :brand="brand" :currentStep="2" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
+      <ProgressBar :brand="brand" :currentStep="props.currentStep" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
       <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
               classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next
       </Button>

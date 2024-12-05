@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UserPlaylistContent extends Model
 {
     protected $table = 'railcontent_user_playlist_content';
-    protected $fillable = ['start_second', 'end_second', 'playlist_item_name'];
+    protected $fillable = ['start_second', 'end_second', 'playlist_item_name', 'content_id','user_playlist_id','content_parent','position', 'extra_data','content_name'];
 
     public function content(): BelongsTo
     {
