@@ -25,7 +25,7 @@ class EngageContentEventListener
     {
         $item = UserPlaylistContent::find($event->playlistItemId);
 
-        $playlist = UserPlaylist::find($item['user_playlist_id']);
+        $playlist = UserPlaylist::find($item->user_playlist_id);
         $playlist->last_progress = Carbon::now()->toDateTimeString();
         $playlist->save();
 
