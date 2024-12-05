@@ -428,7 +428,7 @@ class SanityGateway
         $fieldsString,
         resource,
         'thumbnail': thumbnail.asset->url,
-        'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
+        'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
         // Use a recursive-like approach to get only leaf nodes
         'lastChildItems': array::compact(
             child[]-> {
@@ -436,14 +436,14 @@ class SanityGateway
                 'type': _type,
                 title,
                 'thumbnail': thumbnail.asset->url,
-                'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
+                'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
                 'children': child[]-> {
                     // Fetch child nodes if they exist
                     'id': railcontent_id,
                     'type': _type,
                     title,
                     'thumbnail': thumbnail.asset->url,
-                    'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id},
+                    'assignments':assignment[assignment_soundslice != null]{'railcontent_id': railcontent_id, 'title':assignment_title},
                     'isLeaf': !defined(child)
                 }
             }
@@ -463,7 +463,7 @@ class SanityGateway
                 }
                 if (!empty($documents[0]['assignments'])) {
                     foreach ($documents[0]['assignments'] as $assignment) {
-                        $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => null];
+                        $assignmentIds[$documents[0]['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $documents[0]['id'], 'title' => $assignment['title']];
                         $assignmentsCount++;
                     }
                 }
@@ -472,7 +472,7 @@ class SanityGateway
             foreach ($documents[0]['lastChildItems'] ?? [] as $item) {
                 if (!empty($item['assignments'])) {
                     foreach ($item['assignments'] as $assignment) {
-                        $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                        $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id'],  'title' => $assignment['title']];
                         $assignmentsCount++;
                     }
                 }
@@ -482,7 +482,7 @@ class SanityGateway
                             $leafNodes[] = ['id' => $child['id'],  'parent_id' => $item['id'], 'title' => $child['title'], 'thumbnail' => $child['thumbnail']];
                             if (!empty($child['assignments'])) {
                                 foreach ($child['assignments'] as $assignment) {
-                                    $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                                    $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id'],  'title' => $assignment['title']];
                                     $assignmentsCount++;
                                 }
                             }
@@ -492,7 +492,7 @@ class SanityGateway
                     $leafNodes[] = ['id' => $item['id'],  'parent_id' => $documents[0]['id'],  'title' => $item['title'], 'thumbnail' => $item['thumbnail']];
                     if (!empty($item['assignments'])) {
                         foreach ($item['assignments'] as $assignment) {
-                            $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id']];
+                            $assignmentIds[$item['id']][$assignment['railcontent_id']] = ['id' => $assignment['railcontent_id'], 'parent_id' => $item['id'],  'title' => $assignment['title']];
                             $assignmentsCount++;
                         }
                     }

@@ -379,7 +379,7 @@ onMounted(() => {
                     <!-- Lesson Skill Level -->
                     <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
                         <span v-if="lesson.item_type" class="tw-text-center tw-text-sm ">
-                            <DifficultyLabel class="" :difficultyValue="lesson.difficulty" textCase="uppercase" />
+                            <DifficultyLabel class="" :difficultyValue="lesson.difficulty_string" textCase="uppercase" />
                         </span>
                     </div>
                     <!-- Lesson Type -->

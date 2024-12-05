@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Services\PlaylistsService;
+use Railroad\Railcontent\Events\PlaylistItemLoaded;
 
 class PlaylistsMetadataController extends Controller
 {
@@ -572,10 +573,10 @@ class PlaylistsMetadataController extends Controller
         $sanityDataAssoc = collect($sanityData)->keyBy('railcontent_id');
         $assignmentDataAssoc = collect($assignmentsData)->keyBy('railcontent_id');
 
-
         $userPermissions = user()->getActivePermissionsIds();
 
         $item = $this->playlistsService->formatPlaylistItemData($playlistItem, $sanityDataAssoc, $assignmentDataAssoc, $playlistItem->user_playlist_id, $userPermissions);
+        event(new PlaylistItemLoaded($playlistItem->playlist->id, $playlistItemId, $playlistItem->position));
         return response()->json($item);
     }
 
@@ -680,7 +681,7 @@ class PlaylistsMetadataController extends Controller
                             $playlistItemData = [
                                 'content_id'       => $item['id'],
                                 'content_parent'   => $item['parent_id'],
-                               // 'content_name'     => $item['title'],
+                                'content_name'     => $item['title'],
                                 'user_playlist_id' => $playlistId,
                                 'position'         => $lastPosition,
                                 'created_at'       => Carbon::now()->toDateTimeString(),

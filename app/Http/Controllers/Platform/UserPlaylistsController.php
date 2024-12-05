@@ -122,7 +122,7 @@ class UserPlaylistsController extends BaseController
         $position = $otherItems->search(function ($item) use ($playlistItemId) {
             return $item['user_playlist_item_id'] == $playlistItemId;
         });
-        $position++;
+        $position = $position === false ? 1 : $position + 1;
         $previousPlaylistItem = $otherItems->get($position - 1);
         $nextPlaylistItem = $otherItems->get($position + 1);
         $givenDate = Carbon::parse($playlistItem['published_on']);
@@ -137,7 +137,7 @@ class UserPlaylistsController extends BaseController
 
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parents'] ?? []]))->toResponseRawJson();
-        event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
+        event(new PlaylistItemLoaded($playlistId, $playlistItem['user_playlist_item_id'], $position));
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
@@ -161,7 +161,7 @@ class UserPlaylistsController extends BaseController
      */
     public function playback(Request $request, $domain, $brand, $playlistId): RedirectResponse
     {
-        $item = $this->playlistService->getPlaylistNextItem($playlistId);
+        $item = $this->userPlaylistService->getPlaylistNextItem($playlistId);
 
         if (isset($item)) {
             return redirect(
