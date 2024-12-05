@@ -523,4 +523,11 @@ class SanityGateway
         return [];
     }
 
+    public function getExistingPopularityData($contentIds)
+    {
+        $contentIdString= join(',', $contentIds);
+        $query = "*[railcontent_id in [$contentIdString]]{_id, railcontent_id, brand, popularity, 'artistId': artist._ref, 'genreIds': genre[]._ref }";
+        return $this->sanity->fetch($query);
+    }
+
 }
