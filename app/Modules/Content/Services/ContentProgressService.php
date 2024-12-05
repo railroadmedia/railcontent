@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\Services;
 
-
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
@@ -79,19 +78,20 @@ class ContentProgressService
 
     private function getParentIds($contentId): array
     {
-//        TODO: Integrate allowed types
-//        $allowedTypesForStarted = array_merge(
-//            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Started],
-//            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-//        );
-//        $allowedTypesForCompleted = array_merge(
-//            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Completed],
-//            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-//        );
-//        $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
+        //        TODO: Integrate allowed types
+        //        $allowedTypesForStarted = array_merge(
+        //            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Started],
+        //            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
+        //        );
+        //        $allowedTypesForCompleted = array_merge(
+        //            config('railcontent.allowed_types_for_bubble_progress')[ProgressState::Completed],
+        //            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
+        //        );
+        //        $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
         return ContentHierarchy::query()
             ->where('child_id', $contentId)
+            ->whereNotNull('parent_id')
             ->pluck('parent_id')
             ->toArray();
     }
@@ -153,10 +153,6 @@ class ContentProgressService
         $parentIds = $this->getParentIds($contentId);
 
         foreach ($parentIds as $parentId) {
-            // TODO TP-318 why does this happen only sometimes?
-            if (!$parentId) {
-                continue;
-            }
             $progress = $this->getProgressPercentage($parentId, $userId);
 
             if ($progress == 100) {
@@ -183,12 +179,12 @@ class ContentProgressService
         return $progress;
     }
 
-   public function updateContentProgress(MediaPlaybackSession $mediaPlaybackSession, Content $content): void
-   {
-       if ($mediaPlaybackSession->media_length_seconds <= 0) {
-           return;
-       }
-       $percentage = $mediaPlaybackSession->calculatePercentage();
-       $this->saveContentProgress($content->id, $percentage, $mediaPlaybackSession->user_id);
-   }
+    public function updateContentProgress(MediaPlaybackSession $mediaPlaybackSession, Content $content): void
+    {
+        if ($mediaPlaybackSession->media_length_seconds <= 0) {
+            return;
+        }
+        $percentage = $mediaPlaybackSession->calculatePercentage();
+        $this->saveContentProgress($content->id, $percentage, $mediaPlaybackSession->user_id);
+    }
 }

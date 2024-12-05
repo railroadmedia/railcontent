@@ -44,6 +44,11 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         }
     }
 
+    const reFetchData = async (data) => {
+        original.value = data;
+        slicedData.value = original.value.slice(cardNum.value * (page.value - 1), cardNum.value * page.value);
+    }
+
     const nextPage = () => {
         page.value++;
         getPageData();
@@ -90,5 +95,6 @@ export default function useCarouselEvents (originalData, slicedData, page, cardN
         prevPage,
         resetProgress,
         removeItem,
+        reFetchData,
     }
 }

@@ -47,6 +47,8 @@ class MigratePacksToChallenges extends Command
                 // Check if the migration has already been performed
                 $pack = Content::find($packChallengeId);
 
+                $this->info('Migrating: ' . $pack->slug);
+
                 if (!$pack) {
                     $this->error("Pack with ID $packChallengeId not found.");
                     continue;
@@ -65,7 +67,6 @@ class MigratePacksToChallenges extends Command
                 if ($packChallengeId === 367385) {
                     $pack->slug = '30-day-drummer-season-1';
                 }
-
 
                 $updatedChallenges[] = $pack->id;
 
@@ -101,9 +102,16 @@ class MigratePacksToChallenges extends Command
 
                     $updatedChallengeParts[] = $lesson->child_id;
 
+                    // update the lesson content types to be challenge-part
+                    $lessonContent = Content::find($lesson->child_id);
+
+                    $lessonContent->type = 'challenge-part';
+                    $lessonContent->save();
+
                     // Delete the old hierarchy entry for the lesson
                     $lesson->delete();
                 }
+
                 // Update the pack to "challenge"
                 $pack->type = 'challenge';
                 $pack->child_count = count($sortedLessons);

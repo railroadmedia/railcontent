@@ -8,7 +8,7 @@
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
-                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
+                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
                     <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal" class="tw-text-sm">Change Start Date</button></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-sm" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
@@ -22,7 +22,7 @@
             <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
-            <MuButton :is-link="ctaObj?.url" :href="ctaObj?.url">
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
@@ -146,14 +146,14 @@
             </div>
         </div>
         <div class="tw-flex tw-flex-col tw-w-full tw-px-2 tw-max-w-[320px] tw-mx-auto">
-            <MuButton :is-link="ctaObj?.url" :href="ctaObj?.url">
+            <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
         </div>
     </div>
 
-    <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" :challenge="challenge" />
+    <ChallengeNotificationModal v-if="isNotificationModalOpen" challenge-type="solo" :default-step="2" @modal-close="closeNotificationModal" :challenge="challenge" :is-from-carousel="true" @on-re-fetch-data="reFetchData" />
     <ChallengeActionModal v-if="isLeaveModalOpen" modal-type="leave" @close-modal="closeLeaveModal" :challenge="challenge" @on-leave-challenge="id => emit('onRemoveChallenge', id)" />
     <ChallengeInfoModal v-if="infoModalType" :type="infoModalType" @close-modal="updateInfoModalType('')" />
 </template>
@@ -163,6 +163,7 @@ import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import { Vue3Lottie } from 'vue3-lottie';
 import { countdown } from "@collections/ChallengeCarousel/countdown";
+import { fetchCarouselCardData, fetchChallengeUserActiveChallenges } from 'musora-content-services';
 
 import MuButton from '@units/Button/MuButton';
 import MusoraIcon from "@units/MusoraIcons/MusoraIcon";
@@ -174,10 +175,14 @@ const props = defineProps({
     challenge: {
         type: Object,
         required: true
-    }
+    },
+    pageType: {
+        type: String,
+        default: '',
+    },
 })
 
-const emit = defineEmits(['onRemoveChallenge'])
+const emit = defineEmits(['onRemoveChallenge', 'onReFetchCarousel'])
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -285,6 +290,23 @@ const ctaObj = computed(() => {
 
     return obj;
 })
+
+const reFetchData = async () => {
+    let data;
+
+    if(props.pageType === 'home' || props.pageType === 'challenge'){
+        data = await fetchCarouselCardData(brand.value);
+
+        if(props.pageType === 'challenge') {
+            data = data.filter(challenge => !challenge.show_everywhere);
+        }
+    } else if(props.pageType === 'dashboard') {
+        data = await fetchChallengeUserActiveChallenges(brand.value)
+    }
+
+    emit('onReFetchCarousel', data);
+    closeNotificationModal();
+}
 
 const openNotificationModal = () => {
     isNotificationModalOpen.value = true;
