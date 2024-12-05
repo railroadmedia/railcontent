@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware;
+use App\Services\UserTimezoneService;
 use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator;
@@ -50,6 +51,7 @@ abstract class TestCase extends FoundationBaseTestCase
         $this->faker = Factory::create();
 
         Carbon::setTestNow(Carbon::now());
+        UserTimezoneService::mockUsersTimezone('UTC');
 
         // Set up testing database and config values
         $host = env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST', 'mysql8');

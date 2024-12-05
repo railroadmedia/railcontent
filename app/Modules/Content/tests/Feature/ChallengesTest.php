@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Content;
 use App\Modules\Content\Services\ChallengesService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
+use App\Services\UserTimezoneService;
 use DateTime;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -637,24 +638,24 @@ class ChallengesTest extends TestCase
 
         $challengesService = app()->make(ChallengesService::class);
 
-        // Set the test to start on a specific day and time in UTC
-        $startTimeCarbon = Carbon::create(2024, 12, 1, 6, 3, 0, 'UTC');
-        $this->travelTo($startTimeCarbon);
-
-        // Start the challenge
-        $startDate = Carbon::now()->toISOString();
-        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: $startDate);
-
-        // Simulate passing the user's timezone in the request
         $userTimezone = 'America/Los_Angeles';
 
-        foreach ($userProgress->lessons_meta_data as $index => $lessonMetaDatum) {
-            // Simulate the unlock date in the user's timezone
-            $lessonUnlockTime = Carbon::parse($lessonMetaDatum['unlock_date'])
-                ->setTimezone($userTimezone)
-                ->toDateTimeString();
+        UserTimezoneService::mockUsersTimezone($userTimezone);
 
-            $this->travelTo(Carbon::parse($lessonUnlockTime));
+        // Start date is always passed already in the users timezone
+        $startTimeCarbon = Carbon::create(2024, 12, 1, 6, 3);
+
+        // set test now to the exact same start time as the users local start time but in UTC
+        Carbon::setTestNow(Carbon::parse($startTimeCarbon->toDateTimeString(), $userTimezone)->timezone('UTC'));
+
+        // Start the challenge
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: $startTimeCarbon->toISOString()
+        );
+
+        foreach ($userProgress->lessons_meta_data as $index => $lessonMetaDatum) {
 
             // Complete the lesson
             $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults(
@@ -700,8 +701,74 @@ class ChallengesTest extends TestCase
             $this->assertEquals(0, $currentStreakData['missed']);
 
             // Travel to the next day in the user's timezone
-            $this->travel(1)->days();
+            // move ahead days ahead
+            $this->travelTo(Carbon::now()->addDay());
         }
+    }
+
+    public function test_timezone_logic_for_unlocks_and_streaks_africa(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+
+        // Simulate passing the user's timezone in the request
+        UserTimezoneService::mockUsersTimezone('Africa/Khartoum'); // UTC +2
+
+        $challengesService = app()->make(ChallengesService::class);
+
+        // Set the test to start on a specific day and time in UTC
+        // 2024-12-01 09:03:00 UTC,
+        // 2024-12-01 11:03:00 Africa/Khartoum,
+        $startTimeCarbon = Carbon::create(2024, 12, 1, 9, 3, 0, 'UTC');
+        $this->travelTo($startTimeCarbon);
+
+        // Start the challenge
+        $startDate = Carbon::now()->toISOString();
+        $userProgress = $challengesService->startChallenge($this->challengeId, $userId, startDate: $startDate);
+
+        // Travel to 11pm UTC, which is 1am the next day (2nd) for the user in their timezone.
+        // Lesson 2 should be unlocked.
+        $this->travelTo(Carbon::create(2024, 12, 1, 23, 0, 0, 'UTC'));
+
+        $userLessonData = $challengesService->getCurrentLessonData($this->challengeId, $userId);
+
+        $this->assertFalse($userLessonData['lessons'][1]['is_locked']);
+    }
+
+    public function test_timezone_logic_for_unlocks_and_streaks_pst(): void
+    {
+        $userId = user()->id;
+        $this->mockChallengeAndLessonDataData('challenge-10-lessons.json', 'challenge-child-10-lessons.json');
+
+        // Simulate passing the user's timezone in the request
+        UserTimezoneService::mockUsersTimezone('Mexico/General'); // UTC -6
+
+        $challengesService = app()->make(ChallengesService::class);
+
+        // Set the test to start on a specific day and time in UTC
+        // 2024-12-04 23:45:00 CST
+        // 2024-12-05 07:45:00 UTC
+        // Start date must always be passed in the string that represents the users current timezone
+        $startTimeCarbon = Carbon::parse(
+            Carbon::create('2024-12-05 23:45:00')->startOfDay()->toDateTimeString()
+        );
+
+        $this->travelTo($startTimeCarbon);
+
+        // Start the challenge
+        $userProgress = $challengesService->startChallenge(
+            $this->challengeId,
+            $userId,
+            startDate: $startTimeCarbon->toISOString()
+        );
+
+        $userLessonData = $challengesService->getCurrentLessonData($this->challengeId, $userId);
+
+        // Ensure day 1 unlocks 15 minutes later
+        $this->assertEquals(
+            '2024-12-06 00:00:00',
+            Carbon::parse($userLessonData['lessons'][1]['unlock_date'])->toDateTimeString()
+        );
     }
 
     public function test_index_metadata_for_challenge(): void

@@ -134,17 +134,16 @@ class ChallengeUserProgress extends Model
         $remainingRestDays = $this->current_rest_days; // Use the available rest days
 
         // Get today's date in the user's timezone
-        $today = Carbon::now($userTimezone)->startOfDay();
+        // then make carbon pretend it's a UTC datetime
+        $today = Carbon::parse(Carbon::now()->timezone($userTimezone)->startOfDay()->toDateTimeString());
 
         foreach ($this->lessons_meta_data as $lesson) {
-            // Convert unlock_date from UTC to the user's timezone
+            // Users today in their timezone should always compare directly with what unlock_date is in the DB
             $unlockDate = Carbon::parse($lesson['unlock_date'])
-                ->setTimezone($userTimezone)
                 ->startOfDay();
 
-            // Convert completed_at from UTC to the user's timezone if available
             $completedAt = isset($lesson['completed_at'])
-                ? Carbon::parse($lesson['completed_at'])->setTimezone($userTimezone)->startOfDay()
+                ? Carbon::parse($lesson['completed_at'])
                 : null;
 
             // Skip lessons that are always unlocked, bonus, or unlock in the future
@@ -234,7 +233,7 @@ class ChallengeUserProgress extends Model
         foreach ($lessons as $lessonIndex => $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
             if ($isAlwaysUnlocked) {
-                $unlockDate = $lesson['published_on'];
+                $unlockDate = Carbon::parse($lesson['published_on']);
             } elseif ($isLocked) {
                 $unlockDate = $rollingUnlockDate;
             } else {

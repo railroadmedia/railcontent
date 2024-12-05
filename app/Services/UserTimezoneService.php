@@ -11,11 +11,18 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class UserTimezoneService
 {
+    private static ?string $mockedTimezone = null;
+
     /**
      * @return string
      */
     public static function getUsersCurrentTimezone()
     {
+        // Use mocked timezone if set (for testing purposes).
+        if (self::$mockedTimezone !== null) {
+            return self::$mockedTimezone;
+        }
+
         /**
          * @var $request Request
          */
@@ -63,5 +70,15 @@ class UserTimezoneService
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Set a mocked timezone for testing purposes.
+     *
+     * @param string|null $timezone
+     */
+    public static function mockUsersTimezone(?string $timezone): void
+    {
+        self::$mockedTimezone = $timezone;
     }
 }

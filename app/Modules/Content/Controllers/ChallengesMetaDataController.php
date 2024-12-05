@@ -86,7 +86,7 @@ class ChallengesMetaDataController extends Controller
             'published_on' => 'published_on',
             'id' => 'id',
         ];
-        foreach($keysToCopy as $novaKey => $sanityKey) {
+        foreach ($keysToCopy as $novaKey => $sanityKey) {
             $cohort[$novaKey] = $content[$sanityKey];
         }
 
@@ -252,9 +252,14 @@ class ChallengesMetaDataController extends Controller
     {
         $userId = user()->id;
 
-        // Always assume the date is being passed in the users timezone, then convert to UTC for storage.
-        $startDate = Carbon::parse($request->get('start_date'));
+        // Start date MUST always be stored in the users local timezone. Even if the UTC time is 24-12-01 01:00:00,
+        // if the users timezone is UTC offset -5 when they start, we must store: 24-11-31 00:00:00
+        // this ensures that the unlock days are stored properly in the DB when converted to any future timezone
+        // the student may be in.
+        $startDate = Carbon::parse($request->get('start_date'))->startOfDay()->toISOString();
+
         $this->challengesService->startChallenge($id, $userId, startDate: $startDate);
+
         return response()->json();
     }
 
