@@ -12,8 +12,7 @@
                 </button>
                 <!-- Dropdown -->
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
-                    <!-- TODO(challenge): Add href -->
-                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
+                    <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="viewDetailUrl" class="tw-text-black dark:tw-text-white tw-text-sm">View Challenge Details</a></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-black dark:tw-text-white tw-text-sm" @click="removeBanner">Remove Banner</button></li>
                 </ul>
             </div>
@@ -97,6 +96,18 @@
                 {{ labelText }}
             </div>
         </div>
+        <!-- Ellipsis -->
+        <div v-if="isAward" class="tw-absolute tw-top-3 tw-right-3 tw-z-10">
+            <button class="tw-border-2 tw-border-primary-6 tw-w-[25px] tw-h-[25px] tw-flex tw-justify-center tw-items-center tw-rounded-full tw-z-[6]" @click="mobileShowDropdown = !mobileShowDropdown" v-click-outside="closeMobileDropdown">
+                <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
+            </button>
+            <!-- Dropdown -->
+            <ul v-if="mobileShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
+                <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="viewDetailUrl">View Challenge Details</a></li>
+                <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="removeBanner">Remove Banner</button></li>
+            </ul>
+        </div>
+
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
             <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
                 <!-- Award -->
@@ -339,6 +350,10 @@ const ctaObj = computed(() => {
     }
 
     return obj;
+})
+
+const viewDetailUrl = computed(() => {
+    return props.challenge?.web_url_path;
 })
 
 const closeDesktopDropdown = () => {

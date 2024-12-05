@@ -66,7 +66,7 @@ class ChallengesAwardService
                 $imageValues[$key . '_64'] = base64_encode($file);
             }
         }
-        $challengeFieldsToCopy = ['id', 'title', 'badge', 'artist_name', 'dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url'];
+        $challengeFieldsToCopy = ['id', 'title', 'badge', 'artist_name', 'dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'web_url_path'];
         $challengeValues = [];
         foreach($challengeFieldsToCopy as $fieldToCopy) {
             $challengeValues[$fieldToCopy] = $challenge[$fieldToCopy];
