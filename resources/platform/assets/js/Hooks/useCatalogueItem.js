@@ -72,7 +72,7 @@ export default function useCatalogueItem(props) {
         };
 
         //For locked challenges
-        if(props.item.is_locked){
+        if(props.item.is_locked && !userStore.isAdmin){
             return 'fa-lock';
         }
 
