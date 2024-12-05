@@ -17,7 +17,7 @@
                 :squareImg="card.squareImg"
             />
             <EnrollmentAward v-else-if="!card.is_user_enrolled" :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
-            <InProgressCard v-else :challenge="card" @on-remove-challenge="id => emit('removeChallenge', id)" />
+            <InProgressCard v-else :challenge="card" :page-type="pageType" @on-remove-challenge="id => emit('removeChallenge', id)" @on-re-fetch-carousel="data => emit('reFetchCarousel', data)" />
         </template>
     </div>
 </template>
@@ -36,13 +36,13 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    type: {
+    pageType: {
         type: String,
         default: '',
     },
 })
 
-const emit = defineEmits(['removeChallenge']);
+const emit = defineEmits(['removeChallenge', 'reFetchCarousel']);
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -50,15 +50,15 @@ const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
 
 const isHomepage = computed(() => {
-    return props.type === 'home';
+    return props.pageType === 'home';
 })
 
 const isDashboard = computed(() => {
-    return props.type === 'dashboard';
+    return props.pageType === 'dashboard';
 })
 
 const isChallenge = computed(() => {
-    return props.type === 'challenge';
+    return props.pageType === 'challenge';
 })
 
 const showEnrollmentAward = (card) => {

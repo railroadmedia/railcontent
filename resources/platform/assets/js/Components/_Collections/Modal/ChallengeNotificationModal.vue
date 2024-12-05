@@ -75,9 +75,13 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    isFromCarousel: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const emit = defineEmits(['modalClose']);
+const emit = defineEmits(['modalClose', 'onReFetchData']);
 
 const userStore = useUserStore();
 const { userProfilePictureUrl, brand } = storeToRefs(userStore);
@@ -177,9 +181,14 @@ const setStartDate = async () => {
          if(setStartDateButtonText.value === 'Start Now'){
              //TODO(challenge): need to update url to the first lesson
             window.location.href = props.challenge.web_url_path;
-        }
+         }
         else{
-            window.location.href = `/${props.challenge.brand}`;
+            //When the modal is opened from challenge carousel
+            if(props.isFromCarousel){
+                emit('onReFetchData')
+            } else {
+                window.location.href = `/${props.challenge.brand}`;
+            }
         }
     }
     catch(e) {
