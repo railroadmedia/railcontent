@@ -271,7 +271,6 @@ const ctaObj = computed(() => {
             obj.icon = 'fa-solid fa-arrow-right-long';
              obj.iconLocation = 'right';
         } else {
-            //TODO(challenge): need to add conditional when current lesson is completed
             obj.text = `Repeat ${props.challenge.previous_completed_lesson?.short_name}`;
             obj.url = props.challenge.previous_completed_lesson?.web_url_path;
             obj.icon = 'fas fas fa-redo-alt';
@@ -352,6 +351,4 @@ watch(
         }
     },
 )
-
-console.log(props.challenge)
 </script>
