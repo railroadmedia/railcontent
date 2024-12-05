@@ -125,9 +125,7 @@
                 <template v-else-if="isCommunityChallenge">
                     <div class="tw-flex tw-mb-2 3xl:tw-mb-0">
                         <!-- Avatars -->
-                        <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>
-                        <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>
-                        <div class="tw-w-10 tw-h-10 tw-border tw-border-w hite tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>
+                        <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/musora-cdn/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
                     </div>
                     <p class="tw-text-sm tw-line-clamp-3 tw-mb-2 tw-text-center">
                         Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
