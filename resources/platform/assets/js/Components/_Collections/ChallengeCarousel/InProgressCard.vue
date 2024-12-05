@@ -8,7 +8,7 @@
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
-                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
+                <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg tw-py-2">
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a :href="challenge.web_url_path" class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
                     <li v-if="isSoloChallenge" class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button @click="openNotificationModal" class="tw-text-sm">Change Start Date</button></li>
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-sm" @click="openLeaveModal">Leave {{ challengeTitle }}</button></li>
