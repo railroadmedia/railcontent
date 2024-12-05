@@ -137,7 +137,7 @@ class UserPlaylistsController extends BaseController
 
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parents'] ?? []]))->toResponseRawJson();
-        event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
+        event(new PlaylistItemLoaded($playlistId, $playlistItem['user_playlist_item_id'], $position));
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,

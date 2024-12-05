@@ -23,13 +23,11 @@ class EngageContentEventListener
 
     public function handleEngageContent(PlaylistItemLoaded $event)
     {
-        $item = UserPlaylistContent::find($event->playlistItemId);
-
-        $playlist = UserPlaylist::find($item->user_playlist_id);
+        $playlist = UserPlaylist::with('items')->where('id', '=',  $event->playlistId)->first();
         $playlist->last_progress = Carbon::now()->toDateTimeString();
         $playlist->save();
-
-        $this->contentLastEngagedService->engageContent(user()->id, $event->playlistItemId, $event->playlistId);
+        $item = $playlist->items->where('id',$event->playlistItemId)->first();
+        $this->contentLastEngagedService->engageContent(user()->id, $item->content_id, $event->playlistId);
     }
 
     public function handleRemoveEngageContent($event)

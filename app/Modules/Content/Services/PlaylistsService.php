@@ -4,6 +4,7 @@ namespace Modules\Content\Services;
 
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ReportedPlaylists;
 use App\Modules\Content\Models\UserPlaylist;
 use App\Modules\Content\Models\UserPlaylistContent;
@@ -441,14 +442,14 @@ class PlaylistsService
             $nextItem = $playlistItems->firstWhere('content_id', $lastEngagedContent->content_id);
             if ($nextItem) {
                 $progress = $this->contentProgressDataContext->get($nextItem->content_id, user()->id);
-                if ($progress && $progress['state'] === 'completed') {
+                if ($progress && $progress['state'] === ProgressState::Completed->value) {
                     // Find the next eligible item from the playlist
                     $otherItems = $playlistItems->filter(fn($item) => $item->id !== $nextItem->id);
                     $contents = $otherItems->pluck('content_id')->toArray();
                     $progressOnOtherItems = $this->contentProgressDataContext->getByIds($contents, user()->id);
                     $nextItem = $otherItems->first(function ($item) use ($progressOnOtherItems) {
                         $progress = $progressOnOtherItems->firstWhere('content_id', $item->content_id);
-                        return !$progress || $progress->state !== 'completed';
+                        return !$progress || $progress->state !== ProgressState::Completed->value;
                     });
                 }
             }
