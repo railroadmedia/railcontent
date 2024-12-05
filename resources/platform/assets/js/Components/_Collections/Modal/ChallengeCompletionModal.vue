@@ -235,7 +235,7 @@ const restDay = computed(() => {
 })
 
 const isRestDayAdded = computed(() => {
-    return props.completionData.added_to_rest_days;
+    return props.completionData?.added_to_rest_days;
 })
 
 const currentLessonTitle = computed(() => {
