@@ -535,16 +535,16 @@ class SanityGateway
 
     public function getExistingPopularityData($contentIds)
     {
-        $contentIdString= join(',', $contentIds);
+        $contentIdString = join(',', $contentIds);
         $query = "*[railcontent_id in [$contentIdString]]{_id, railcontent_id, brand, popularity, 'artistId': artist._ref, 'genreIds': genre[]._ref }";
         return $this->sanity->fetch($query);
     }
-    
+
     public function getLiveEvents(string $brand, int $buffer = 0): array
     {
         $fields = $this->getFieldsString('live-event');
-        $startDate = Carbon::now('PST')->addMinutes($buffer)->toISOString();
-        $endDate = Carbon::now('PST')->subMinutes($buffer)->toISOString();
+        $startDate = Carbon::now()->addMinutes($buffer)->toISOString();
+        $endDate = Carbon::now()->subMinutes($buffer)->toISOString();
 
         $query = '*[ live_event_start_time <= "'.$startDate.'"
             && live_event_end_time >= "'.$endDate.'"

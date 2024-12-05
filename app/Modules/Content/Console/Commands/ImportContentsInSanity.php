@@ -689,11 +689,11 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             "web_url_path"     => $result->web_url_path,
             "popularity"       => $result->popularity
         ];
-        if($type == 'song'){
+        if ($type == 'song') {
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
         }
         if ($result->published_on) {
-            $sanityDocuments['published_on'] = Carbon::parse($result->published_on, 'PST')->toISOString();
+            $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->toISOString();
         }
         if (!$result->web_url_path) {
             $contentURLs =
@@ -723,9 +723,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if ($result->parent_content_data) {
             $parents = (json_decode($result->parent_content_data));
             foreach ($parents as $parent) {
-                if($parent->type != 'edge-pack' && $parent->type != 'user-playlist' && !in_array($parent->slug,['lead-guitar-101', 'electric-rhythm-guitar-101',
+                if ($parent->type != 'edge-pack' && $parent->type != 'user-playlist' && !in_array($parent->slug, ['lead-guitar-101', 'electric-rhythm-guitar-101',
                         'acoustic-rhythm-guitar-101', 'lead-guitar-quick-start', 'beginner-electric-quick-start', 'beginner-acoustic-quick-start',
-                        'no-guitar-needed','reading-music','lead-guitar-102','electric-rhythm-guitar-102','acoustic-rhythm-guitar-102']) ) {
+                        'no-guitar-needed','reading-music','lead-guitar-102','electric-rhythm-guitar-102','acoustic-rhythm-guitar-102'])) {
                     $sanityDocuments['parent_content_data'][] = [
                         'type'     => $parent->type,
                         'id'       => $parent->id,
@@ -881,8 +881,8 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         foreach ($result->fields as $field) {
             $imported = false;
             if (in_array(
-                    $field['key'],
-                    [
+                $field['key'],
+                [
                         'soundslice_slug',
                         'name',
                         'gear',
@@ -893,18 +893,18 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'live_event_youtube_id',
                         'soundslice_slug',
                     ]
-                ) && $field['value'] != '') {
+            ) && $field['value'] != '') {
                 $sanityDocuments[$field['key']] = $field['value'];
                 $imported                  = true;
             }
             if (in_array(
-                    $field['key'],
-                    [  'enrollment_start_time',
+                $field['key'],
+                [  'enrollment_start_time',
                         'enrollment_end_time',
                         'live_event_start_time',
                         'live_event_end_time',
                     ]
-                ) && $field['value'] != '') {
+            ) && $field['value'] != '') {
                 try {
                     // Attempt to parse and format the date
                     $sanityDocuments[$field['key']] = Carbon::parse($field['value'])->format('Y-m-d\TH:i:s\Z');
