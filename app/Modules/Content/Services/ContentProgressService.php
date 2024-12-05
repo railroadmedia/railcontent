@@ -153,6 +153,10 @@ class ContentProgressService
         $parentIds = $this->getParentIds($contentId);
 
         foreach ($parentIds as $parentId) {
+            // TODO TP-318 why does this happen only sometimes?
+            if (!$parentId) {
+                continue;
+            }
             $progress = $this->getProgressPercentage($parentId, $userId);
 
             if ($progress == 100) {

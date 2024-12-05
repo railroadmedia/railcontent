@@ -1,6 +1,5 @@
 <template>
     <!-- DESKTOP -->
-    <!-- TODO(challenge): add border depending on the tier and background image -->
     <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=500,quality=95/${desktopBGImage}')` }"
          class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-bg-cover tw-bg-top tw-py-4 2xl:tw-py-6 3xl:tw-py-5 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
@@ -15,7 +14,6 @@
                 <ul v-if="desktopShowDropdown" class="tw-absolute tw-top-[100%+8px] tw-right-0 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white tw-z-10 tw-rounded-[5px] tw-shrink-0 tw-text-sm tw-whitespace-nowrap tw-drop-shadow-lg">
                     <!-- TODO(challenge): Add href -->
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><a class="tw-text-black dark:tw-text-white tw-text-sm">View Details</a></li>
-                    <!-- TODO(challenge): Add onclick -->
                     <li class="tw-py-2 tw-px-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"><button class="tw-text-black dark:tw-text-white tw-text-sm" @click="removeBanner">Remove Banner</button></li>
                 </ul>
             </div>
@@ -41,7 +39,7 @@
                 <div>
                     <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
                     <template v-if="isAward">
-                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white">
+                        <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
                             You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
                         </div>
                         <div class="tw-text-[#3F3F46] dark:tw-text-[#888888] tw-mb-3">
@@ -52,22 +50,14 @@
                     <template v-else-if="isCommunityChallenge">
                         <div class="tw-my-2 tw-flex">
                             <!-- Avatars -->
-                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727447340-755877.jpg');"></div>
-                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727435036-755827.jpg');"></div>
-                            <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1727463538-755945.jpg');"></div>
+                            <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/musora-cdn/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
                         </div>
-
-<!--                        <div class="tw-flex tw-mb-2 3xl:tw-mb-1">-->
-<!--                            &lt;!&ndash; Avatars &ndash;&gt;-->
-<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden"></div>-->
-<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>-->
-<!--                            <div class="tw-w-[30px] tw-h-[30px] tw-border tw-border-w hite tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>-->
-<!--                        </div>-->
                         <p class="tw-text-sm tw-line-clamp-2 tw-mb-2">
-                            Join <span class="tw-font-bold">Stidger, Poco Askew, Dr Mojo,</span> and <span class="tw-font-bold">683</span> other drummers who have already enrolled! Runs {{ durationText }}.
+                            Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
                         </p>
                     </template>
-                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>
+
+                    <div v-else class="tw-text-sm tw-font-bold tw-mb-3 3xl:tw-mb-0">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> {{ difficulty }}</div>
 
                 </div>
                 <!-- CTA -->
@@ -89,7 +79,6 @@
     </div>
 
     <!-- MOBILE -->
-    <!-- TODO(challenge): add border depending on the tier and background image -->
     <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=400,quality=95/${mobileBGImage}')` }"
          class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
@@ -111,7 +100,7 @@
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
             <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
                 <!-- Award -->
-                <img v-if="isAward" class="tw-h-[230px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
+                <img v-if="isAward" class="tw-h-[200px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
                 <!-- Logo -->
                 <img v-else :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} Logo`" />
                 <template v-if="isAward">
@@ -130,10 +119,10 @@
                         <div class="tw-w-10 tw-h-10 tw-border tw-border-w hite tw-rounded-full tw-relative tw-overflow-hidden -tw-ml-3"></div>
                     </div>
                     <p class="tw-text-sm tw-line-clamp-3 tw-mb-2 tw-text-center">
-                        Join <span class="tw-font-bold">Stidger, Poco Askew, Dr Mojo,</span> and <span class="tw-font-bold">683</span> other drummers who have already enrolled! Runs Aug 1 - 31.
+                        Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
                     </p>
                 </template>
-                <div v-else class="tw-text-sm tw-font-bold tw-mb-5">29 Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> Beginner</div>
+                <div v-else class="tw-text-sm tw-font-bold tw-mb-5">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> {{ difficulty }}</div>
                 <!-- CTA -->
                 <MuButton :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
                     <svg v-if="ctaObj.text === 'Learn More'" class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +134,6 @@
         </div>
     </div>
 
-    <ChallengeAwardModal v-if="isAwardModalOpen" :award-data="challenge" @close-model="closeAwardModal" />
     <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
@@ -153,11 +141,11 @@ import { ref, computed, } from "vue";
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { postChallengesEnrollmentNotification, postChallengesHideCompletedBanner } from 'musora-content-services';
 import { usePlatformStore } from "@stores/platform";
+import { useUserStore } from "@stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 
 import MuButton from '@units/Button/MuButton';
 import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
-import ChallengeAwardModal from '@collections/Modal/ChallengeAwardModal';
 
 const props = defineProps({
     challengeType: {
@@ -174,6 +162,9 @@ const emit = defineEmits(['onRemoveChallenge']);
 
 const platformStore = usePlatformStore();
 const { isDarkMode } = storeToRefs(platformStore);
+
+const userStore = useUserStore();
+const { userDashboardUrl, brand } = storeToRefs(userStore)
 
 const breakpoints = useBreakpoints({ ...breakpointsTailwind, '3xl': 1815 });
 const desktop = breakpoints.greaterOrEqual('lg');
@@ -231,7 +222,6 @@ const desktopBGImage = computed(() => {
             return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-desktop-bg.png';
         }
     } else {
-        //TODO(challenge): add bg image
             return props.challenge.bgImg;
     }
 })
@@ -244,7 +234,6 @@ const mobileBGImage = computed(() => {
             return 'https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-bg.png';
         }
     } else {
-        //TODO(challenge): add bg image
         return props.challenge.bgImg;
     }
 
@@ -295,12 +284,44 @@ const isUserEnrolled = computed(() => {
     return props.challenge.is_user_enrolled;
 })
 
+const numberOfLessons = computed(() => {
+    return props.challenge?.child_count;
+})
+
+const difficulty = computed(() => {
+    return props.challenge?.difficulty_string;
+})
+
+const userNames = computed(() => {
+    const names = [];
+    props.challenge?.enrolled_users?.data.forEach((user) => {
+        names.push(user.display_name);
+    });
+    return names.join(', ')
+})
+
+const totalEnrolled = computed(() => {
+    return props.challenge?.enrolled_users?.total;
+})
+
+const otherText = computed(() => {
+    if(brand.value === 'drumeo'){
+        return 'drummers';
+    } else if(brand.value === 'pianote'){
+        return 'piano players';
+    } else if(brand.value === 'guitareo'){
+        return 'guitar players';
+    } else if(brand.value === 'singeo'){
+        return 'singers';
+    }
+})
+
 const ctaObj = computed(() => {
     const obj = {};
 
     if(isAward.value){
         obj.text = 'See awards';
-        obj.action = openAwardModal;
+        obj.url = `${userDashboardUrl.value}/#myawards`;
     } else if(isRecommendation.value){
         //When enrollment is not opened
         //TODO(challenge): add conditional for when user is registered for notification
@@ -314,7 +335,6 @@ const ctaObj = computed(() => {
         else if(isEnrollmentOpened.value && !isUserEnrolled.value){
             obj.text = 'Learn More';
             obj.url = props.challenge.registration_url;
-            console.log(obj.url !== undefined)
         }
     }
 
@@ -327,14 +347,6 @@ const closeDesktopDropdown = () => {
 
 const closeMobileDropdown = () => {
     mobileShowDropdown.value = false;
-}
-
-const openAwardModal = () => {
-    isAwardModalOpen.value = true;
-}
-
-const closeAwardModal = () => {
-    isAwardModalOpen.value = false;
 }
 
 const registerNotification = async () => {

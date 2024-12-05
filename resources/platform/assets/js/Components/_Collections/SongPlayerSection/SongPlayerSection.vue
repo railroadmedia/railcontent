@@ -211,7 +211,7 @@ const initialDataFetched = ref(false);
 const isUserDataLoading = ref(false);
 
 const songMeta = computed(() => {
-    if (props.genre.length === 0) {
+    if (!props.genre || props.genre.length === 0) {
         return '';
     }
     const uniqueGenres = [...new Set(props.genre)];

@@ -4,7 +4,7 @@
         <!-- Ellipsis -->
         <div class="tw-absolute tw-top-1.5 2xl:tw-top-[10px] tw-right-1.5 2xl:tw-right-[10px]">
             <div class="tw-relative">
-                <button class="tw-border-2 tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="desktopShowDropdown = !desktopShowDropdown" v-click-outside="closeDesktopDropdown">
+                <button class="tw-border tw-border-primary-6 tw-w-[33px] tw-h-[33px] tw-flex tw-justify-center tw-items-center tw-rounded-full" @click="desktopShowDropdown = !desktopShowDropdown" v-click-outside="closeDesktopDropdown">
                     <i class="fa-solid fa-ellipsis tw-mt-0.5"></i>
                 </button>
                 <!-- Dropdown -->
@@ -22,7 +22,7 @@
             <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
             <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
-            <MuButton class="tw-px-6" :is-link="ctaObj?.url" :href="ctaObj?.url">
+            <MuButton :is-link="ctaObj?.url" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
                 {{ ctaObj?.text }}
             </MuButton>
@@ -37,7 +37,6 @@
                     <!-- Thumbnail (Video ratio) -->
                     <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
-                    <!-- TODO(challenge): square thumbnail-->
                     <img :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
@@ -46,26 +45,26 @@
                 </div>
                 <div class="tw-flex tw-gap-2 tw-text-[11px] 3xl:tw-text-[13px] tw-relative tw-z-20 tw-shrink-0">
                     <!-- Streak -->
-                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 4xl:tw-pl-3 tw-pr-1 4xl:tw-pr-4 tw-flex tw-items-center tw-relative">
-                        <div v-if="streak === 0" class="tw-text-[28px]">🔥</div>
+                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 4xl:tw-pl-3 tw-pr-1 4xl:tw-pr-4 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
+                        <div v-if="streak === 0" class="tw-text-[28px] tw-mr-1">🔥</div>
                         <Vue3Lottie v-else class="tw-w-10 3xl:tw-w-[46px] -tw-ml-1 -tw-mr-1 3xl:tw-mr-0" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ streak }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Day Streak
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('streak')"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
                             </div>
                         </div>
                     </div>
                     <!-- Rest Days -->
-                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-2 4xl:tw-px-4 tw-flex tw-items-center tw-relative">
+                    <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1 4xl:tw-px-4 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                         <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
                         <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
                                 Rest Days
-                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]" @click="updateInfoModalType('rest')"></musora-icon>
+                                <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#9EC0DC]"></musora-icon>
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,7 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#223F57]">
+        <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-primary-6">
             <div class="tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold" :class="progressPercent > 0 ? `tw-bg-${brand}` : `tw-w-auto tw-pl-2`" :style="`width:${progressPercent}%`">{{ progressPercent }}%</div>
         </div>
     </div>
@@ -118,8 +117,8 @@
         </div>
         <div class="tw-flex tw-justify-center tw-gap-2 tw-text-sm lg:tw-text-[11px] tw-w-full tw-px-2 lg:tw-px-0 tw-relative tw-mb-[18px] tw-max-w-[320px] tw-mx-auto">
             <!-- Streak -->
-            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 tw-flex tw-items-center tw-relative">
-                <div v-if="streak === 0" class="tw-text-[26px] tw-mx-1">🔥</div>
+            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-pr-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('streak')">
+                <div v-if="streak === 0" class="tw-text-[26px] tw-ml-1 tw-mr-1.5">🔥</div>
                 <!-- Streak Lottie -->
                 <Vue3Lottie v-else class="tw-w-10" animation-link="https://lottie.host/1503ac2e-09ae-4d87-a05f-957100264a9a/DQZRjOcsRN.json" />
                 <!-- Streak Text -->
@@ -127,12 +126,12 @@
                     <div class="tw-font-extrabold">{{ streak }}</div>
                     <div class="tw-flex tw-items-center tw-justify-between">
                         Day Streak
-                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('streak')"></musora-icon>
+                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                     </div>
                 </div>
             </div>
             <!-- Rest Days -->
-            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-px-2 tw-flex tw-items-center tw-relative">
+            <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-px-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                 <!-- Rest Icon -->
                 <img class="tw-mr-2 tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
                 <img class="tw-mr-2 tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
@@ -141,7 +140,7 @@
                     <div class="tw-font-extrabold">{{ restDays }}</div>
                     <div class="tw-flex tw-items-center tw-justify-between">
                         Rest Days
-                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]" @click="updateInfoModalType('rest')"></musora-icon>
+                        <musora-icon icon-name="info" class="tw-w-4 tw-h-4 tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                     </div>
                 </div>
             </div>
@@ -272,8 +271,7 @@ const ctaObj = computed(() => {
             obj.icon = 'fa-solid fa-arrow-right-long';
              obj.iconLocation = 'right';
         } else {
-            //TODO(challenge): need to add conditional when current lesson is completed
-            obj.text = `Replay ${props.challenge.previous_completed_lesson?.short_name}`;
+            obj.text = `Repeat ${props.challenge.previous_completed_lesson?.short_name}`;
             obj.url = props.challenge.previous_completed_lesson?.web_url_path;
             obj.icon = 'fas fas fa-redo-alt';
             obj.iconLocation = 'left';
@@ -281,7 +279,7 @@ const ctaObj = computed(() => {
     } else {
         obj.text = `Start ${nextLessonShortName.value}`;
         obj.url = props.challenge.next_lesson.web_url_path;
-        obj.icon = 'fas fa-play';
+        obj.icon = 'fas fa-play tw-mt-0.5';
         obj.iconLocation = 'left';
     }
 
@@ -353,6 +351,4 @@ watch(
         }
     },
 )
-
-console.log(props.challenge)
 </script>

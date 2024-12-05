@@ -1,8 +1,8 @@
 <template>
-    <section class="tw-flex tw-flex-row tw-mb-[30px]">
+    <section v-if="isLoading || (!isLoading && data.length > 0)" class="tw-flex tw-flex-row tw-mb-[30px]">
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+            <div :id="secetionId" class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-center">
                     <component :is="seeAllUrl ? 'a' : 'div'" @click="handleSeeAllClick" :href="seeAllUrl"
                        class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all " :class="seeAllUrl ? 'hover:tw-border-current' : ''">
@@ -50,6 +50,8 @@ import useCarouselEvents from "@hooks/useCarouselEvents";
 import { getCardNum } from '@collections/MiniCatalogueSection/getCardNum';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import ChallengeAwardContainer from '@collections/ChallengeAwardContainer/ChallengeAwardContainer';
+import {usePlatformStore} from "@stores/platform";
+import {storeToRefs} from "pinia/dist/pinia";
 
 const props = defineProps({
   seeAllUrl: {
@@ -104,9 +106,15 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  secetionId: {
+    type: String,
+    default: ''
+  },
 });
 
 const userStore = useUserStore();
+const platformStore = usePlatformStore();
+const { isLoading } = storeToRefs(platformStore);
 
 const data = ref([]);
 const page = ref(1);

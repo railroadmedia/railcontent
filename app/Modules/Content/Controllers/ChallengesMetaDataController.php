@@ -42,7 +42,7 @@ class ChallengesMetaDataController extends Controller
         $registerButtonUrl = url()->route('challenges.set_start_date', ['id' => $challengeId, 'start_date', $today]);
         $content = $this->challengesService->getChallengeById($challengeId);
         $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
-        $cohort['course_url'] = $content['web_url_path'];
+
         $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
             $challengeId,
             user()->id
@@ -76,6 +76,18 @@ class ChallengesMetaDataController extends Controller
             $view = 'content.cohort-template';
         }
 
+        $keysToCopy = [
+            'brand' => 'brand',
+            'dark_mode_logo' => 'dark_mode_logo_url',
+            'light_mode_logo' => 'light_mode_logo_url',
+            'web_url_path' => 'web_url_path',
+            'title' => 'title',
+            'published_on' => 'published_on',
+            'id' => 'id',
+        ];
+        foreach($keysToCopy as $novaKey => $sanityKey) {
+            $cohort[$novaKey] = $content[$sanityKey];
+        }
 
         return view($view, [
             'hasProduct' => $isEnrolled,
@@ -180,7 +192,9 @@ class ChallengesMetaDataController extends Controller
     public function enrollUser(int $id)
     {
         $userId = user()->id;
-        $result = $this->challengesService->startChallenge($id, $userId);
+        $challenge = $this->challengesService->getChallengeById($id);
+        $startDate = ($challenge['is_solo'] ?? false) ? Carbon::today() : null;
+        $result = $this->challengesService->startChallenge($id, $userId, $startDate);
         if (is_null($result)) {
             return response()->json("Challenge $id not found", status: 404);
         }

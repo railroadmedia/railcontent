@@ -4,9 +4,6 @@
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
 
-            <!-- Welcome Message -->
-            <WelcomeMessage v-if="isV2User" v-bind="welcomeMessageProps" />
-
             <!-- Challenge Carousel -->
             <MiniCatalogueSection
                 :title="welcomeMessage"

@@ -24,7 +24,7 @@ export default function useCatalogueItem(props) {
             return false;
         }
 
-        return props.item.need_access || (props.lockUnowned && props.item.is_owned === false) || (props.lockUnowned && !isReleased.value);
+        return props.item.need_access || (props.lockUnowned && props.item.is_owned === false);
     });
 
     const dateNow = computed(() => Date.now());
@@ -37,16 +37,21 @@ export default function useCatalogueItem(props) {
             return true;
         }
 
-        // If the item is a draft and has a quarter_published date, check if the current date is greater than the quarter_published date
-        if (dateQuarterPublishedOn && props.item.status === 'draft') {
+       if(Object.hasOwn(props.item, 'is_locked')){
+           return !props.item.is_locked;
+       }
+       // If the item is a draft and has a quarter_published date, check if the current date is greater than the quarter_published date
+       else if (dateQuarterPublishedOn && props.item.status === 'draft') {
             return dateNow.value > dateQuarterPublishedOn;
-        }
+       }
 
         return dateNow.value > datePublishedOn;
     });
 
     const releaseDate = computed(() => {
-        if (props.item.quarter_published) {
+        if(props.item.is_locked){
+            return getDate(props.item.unlock_date);
+        } else if (props.item.quarter_published) {
             return getDate(props.item.quarter_published);
         }
 
@@ -65,6 +70,11 @@ export default function useCatalogueItem(props) {
             pianote: ['course', 'learning-path', 'pack', 'chord-and-scale'],
             singeo: ['course', 'learning-path', 'pack', 'chord-and-scale'],
         };
+
+        //For locked challenges
+        if(props.item.is_locked && !userStore.isAdmin){
+            return 'fa-lock';
+        }
 
         if (!isReleased.value) {
             return 'fa-clock';

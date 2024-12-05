@@ -186,7 +186,7 @@
                             class="bg-white tw-rounded-full"
                             :class="drums ? 'text-grey-5' : 'inverted text-white'"
                         >
-                            <i class="icon-drums"></i>
+                            <musora-icon icon-name="drum-set" class="tw-w-[20px]"></musora-icon>
                         </span>
                     </button>
 
@@ -197,7 +197,7 @@
                         @keydown.prevent
                     >
                         <span
-                            class="bg-white tw-rounded-full tw-rounded-full"
+                            class="bg-white tw-rounded-full"
                             :class="loop ? 'text-grey-5' : 'inverted text-white'"
                         >
                             <i class="fa fa-repeat"></i>

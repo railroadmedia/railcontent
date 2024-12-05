@@ -6,8 +6,9 @@
         @onClose="() => emit('closeModal')"
     >
         <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white">
-            <img v-if="showLogo" class="tw-h-20 tw-mb-5 -tw-mt-[50px] tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.dark_mode_logo_url}`" alt="Challenge logo" />
-            <img v-if="showLogo" class="tw-h-20 tw-mb-5 -tw-mt-[50px] dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge?.light_mode_logo_url}`" alt="Challenge logo" />
+            <div class="tw-px-8">
+                <img v-if="showLogo" class="tw-max-h-[80px] tw-mb-5 -tw-mt-[50px] tw-mx-auto" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" alt="Challenge logo" />
+            </div>
             <h1 class="tw-text-2xl tw-font-bold tw-mb-[10px]">{{ headerText }}</h1>
             <p class="tw-mb-5">{{ descriptionText }}</p>
             <div class="tw-flex tw-justify-end">
@@ -18,6 +19,8 @@
 </template>
 <script setup>
 import { computed } from "vue";
+import { storeToRefs } from "pinia/dist/pinia";
+import { usePlatformStore } from "@stores/platform";
 import { postChallengesLeave, postChallengesUnlock } from 'musora-content-services';
 import InfoModal from '@collections/Modal/InfoModal';
 import MuButton from '@units/Button/MuButton';
@@ -35,6 +38,9 @@ const props = defineProps({
 
 const emit = defineEmits(['closeModal', 'onLeaveChallenge']);
 
+const platformStore = usePlatformStore();
+const { isDarkMode } = storeToRefs(platformStore);
+
 const isUnlockModal = computed(() => {
     return props.modalType === 'unlock';
 })
@@ -45,6 +51,14 @@ const isRetakeModal = computed(() => {
 
 const isLeaveModal = computed(() => {
     return props.modalType === 'leave';
+})
+
+const logo = computed(() => {
+    if(isDarkMode.value){
+         return props.challenge?.dark_mode_logo_url
+    } else {
+        return props.challenge?.light_mode_logo_url
+    }
 })
 
 const showLogo = computed(() => {

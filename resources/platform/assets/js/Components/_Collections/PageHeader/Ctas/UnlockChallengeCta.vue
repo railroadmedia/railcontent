@@ -2,7 +2,7 @@
     <div>
         <PageHeaderCta
             v-bind="$attrs"
-            text="Unlock"
+            text="Unlock Challenge"
             showAllAlways
             @click="handleOpen"
         />
