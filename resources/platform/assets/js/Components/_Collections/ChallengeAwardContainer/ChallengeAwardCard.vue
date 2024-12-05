@@ -1,7 +1,7 @@
 <template>
     <div class="tw-shrink-0 tw-w-[150px] lg:tw-w-auto tw-flex tw-flex-col tw-items-center dark:tw-text-white tw-cursor-pointer" @click="openModal">
         <img class="tw-w-full" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${award.badge}`" :alt="`${award.challenge_title} Award`" />
-        <p class="tw-font-bold">{{ award.challenge_title }}</p>
+        <p class="tw-font-bold tw-mt-2">{{ award.challenge_title }}</p>
         <p>{{ completedDate }}</p>
     </div>
 
