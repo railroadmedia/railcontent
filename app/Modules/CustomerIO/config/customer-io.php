@@ -1057,6 +1057,21 @@ return [
                     'musora',
                 ],
             ],
+            'Digital Christmas Songbook' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string'
+                ],
+                'events' => [
+                    'pianote_prospect_digital_christmas_songbook',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
