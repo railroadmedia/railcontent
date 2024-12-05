@@ -118,6 +118,11 @@ export default class ContentModel {
     }
 
     get postPublisedOn() {
+        if(this.post.is_locked){
+            return getDate(this.post.unlock_date);
+        } else if (this.post.quarter_published) {
+            return getDate(this.post.quarter_published);
+        }
         return getDate(this.post.published_on);
     }
 
