@@ -30,16 +30,17 @@
                                 You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate. {{ awardText }}
                             </p>
                             <div class="tw-flex tw-items-center tw-justify-center tw-mb-[30px]">
-                                <div>
-                                    <div class="tw-border-b tw-border-[#CBCBCD] tw-px-[30px] tw-pb-4 tw-mb-2 tw-italic tw-text-[13px]">{{ dateCompleted }}</div>
+                                <div class="tw-w-[180px]">
+                                    <div class="tw-border-b tw-border-[#CBCBCD] tw-pb-4 tw-mb-2 tw-italic tw-text-[13px]">{{ dateCompleted }}</div>
                                     <div class="tw-text-[10px] tw-font-bold">DATE</div>
                                 </div>
                                 <div>
                                     <img class="tw-mx-6 tw-h-40" :src="`data:image/png;base64,${awardImage}`" />
                                 </div>
-                                <div>
-                                    <div class="tw-border-b tw-border-[#CBCBCD] tw-px-[30px] tw-pb-3 tw-mb-2">
-                                        <img class="tw-h-[15px]" :src="`data:image/svg+xml;base64,${instructorSignature}`" />
+                                <div class="tw-w-[180px]">
+                                    <div class="instructorName tw-border-b tw-border-[#CBCBCD] tw-pb-4 tw-mb-2 tw-text-[13px]">
+                                        <img v-if="instructorSignature" class="tw-h-[15px]" :src="`data:image/svg+xml;base64,${instructorSignature}`" />
+                                        <span v-else>{{ instructorName }}</span>
                                     </div>
                                     <div class="tw-text-[10px] tw-font-bold">INSTRUCTOR</div>
                                 </div>
@@ -130,6 +131,10 @@ const instructorSignature = computed(() => {
     return props.certificateData?.instructor_signature_64;
 })
 
+const instructorName = computed(() => {
+    return props.certificateData?.artist_name;
+})
+
 const brandLogo = computed(() => {
     return props.certificateData?.brand_logo_64;
 })
@@ -196,11 +201,20 @@ onMounted(() => {
 </script>
 <style scoped>
     @font-face {
-        font-family: 'myfont';
+        font-family: 'userNameFont';
         src: url('https://d3fzm1tzeyr5n3.cloudfront.net/challenges/Meloday.ttf');
     }
 
+    @font-face {
+        font-family: 'instructorNameFont';
+        src: url('https://d3fzm1tzeyr5n3.cloudfront.net/challenges/DeliciousHandrawn-Regular.ttf');
+    }
+
+    .instructorName {
+        font-family: "instructorNameFont";
+    }
+
     .userName {
-        font-family: 'myfont';
+        font-family: 'userNameFont';
     }
 </style>
