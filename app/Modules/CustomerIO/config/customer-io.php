@@ -121,6 +121,18 @@ return [
                     'email' => 'Email'
                 ],
             ],
+            'WVH gear Giveaway' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_wvh-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+                'attributes' => [
+                    'email' => 'Email'
+                ],
+            ],
             'Free Music Lessons For Life' => [
                 'custom_attributes' => [
                     'first_name' => 'nullable|string',
