@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Models\Traits\StaticTableName;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class ContentHierarchy extends Model
 {
+    use StaticTableName;
+
     protected $table = 'railcontent_content_hierarchy';
     protected $fillable = ['child_id', 'parent_id', 'child_position', 'created_on'];
     public $timestamps = false;

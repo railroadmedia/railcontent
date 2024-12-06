@@ -256,6 +256,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    is_search: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   mounted() {
     console.log('this.item', this.item)

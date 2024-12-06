@@ -215,7 +215,9 @@ const OverviewChildData = computed( () => {
 
 const headerDropdown = computed(() => {
     if(isChallenge.value && !isUnlocked.value && isChallengeEnrolled.value && isChallengeSolo.value){
-        return dropdowns['challenges'];
+        return dropdowns['challenges']['unlock'];
+    } else if(isChallenge.value && isUnlocked.value && isChallengeSolo.value){
+        return dropdowns['challenges']['unlocked'](data.value.lesson?.registration_url)
     }
 })
 

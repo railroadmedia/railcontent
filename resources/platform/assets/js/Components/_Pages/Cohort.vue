@@ -1,7 +1,7 @@
 <template>
     <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
-            <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
+            <div v-if="!isFromApp" class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
                 <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="handleGoBack">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
@@ -363,6 +363,7 @@ const openPurchase = ref(false);
 const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
 const openChallengeActionModal = ref(false);
+const isFromApp = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
@@ -453,6 +454,11 @@ onBeforeMount(() => {
     if(props.cohort['enrollment_end_date']){
         countdown();
         setInterval(countdown, 1000);
+    }
+
+    const url = window.location.href;
+    if(url.includes('mobile-app-web-view')){
+        isFromApp.value = true;
     }
 })
 </script>

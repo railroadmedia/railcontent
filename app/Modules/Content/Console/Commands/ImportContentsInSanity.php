@@ -43,6 +43,30 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         'sonor-drums'            => 'sonor',
     ];
 
+    protected $specficContentTypesPerBrand = [
+        'drumeo' => [
+            'semester-pack-lesson',
+            'semester-pack',
+            'student-focus',
+            'play-along',
+            'rudiment',
+            'coach-stream',
+        ],
+        'pianote' => [
+            'song-tutorial-children',
+            'song-tutorial',
+            'unit-part',
+            'unit'
+        ],
+        'guitareo' => [
+            'play-along-part',
+            'play-along',
+        ],
+        'singeo' => [
+            'routine'
+        ]
+    ];
+
     public function handle(): int
     {
         $contentType        = $this->argument('type');
@@ -75,6 +99,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         if ($contentType == "all") {
             $contentTypes = array_merge(
+                $this->specficContentTypesPerBrand[$this->argument('brand')] ?? [],
                 [
                     'pack-bundle-lesson',
                     'pack-bundle',
@@ -82,25 +107,14 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     'course-part',
                     'course',
                     'workout',
-                    'student-focus',
-                    'play-along-part',
-                    'play-along',
-                    'rudiment',
+                    'quick-tips',
                     'challenge-part',
                     'challenge',
-                    'song-tutorial-children',
-                    'song-tutorial',
-                    'semester-pack-lesson',
-                    'semester-pack',
                     'song',
-                    'coach-stream',
                     'learning-path-lesson',
                     'learning-path-course',
                     'learning-path-level',
                     'learning-path',
-                    'unit-part',
-                    'unit'
-
                 ],
                 config('railcontent.showTypes')[$this->argument('brand')]
             );
@@ -214,7 +228,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $instructorsData = Content::with('data', 'fields')
             ->where('type', '=', 'instructor')
             ->where('railcontent_content.status', '=', 'published')
-            ->whereNotIn('id', [404505, 389348, 395073])
+            ->whereNotIn('id', [404505, 389348, 395073, 31935])
             ->get();
 
         $instructors = [];
@@ -738,7 +752,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $resources       = [];
         $chapters        = [];
         $notImportedData = [];
-        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,391008,382879,391160, 399638,404279, 404299, 401415, 270443,  318625, 30437, 206255, 375281, 268094, 23313, 23393, 23395, 331419];
+        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,391008,382879,391160, 399638,404279, 404299, 401415, 270443,  318625, 30437, 206255, 375281, 268094, 23313, 23393, 23395, 331419, 414974];
         foreach ($result->data as $datum) {
             $imported = false;
             if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
@@ -1071,6 +1085,19 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }
         unset($sanityDocuments['assignments_total_xp']);
         unset($sanityDocuments['children_total_xp']);
+
+        if(isset($sanityDocuments["genre"])) {
+            $sanityDocuments["genre"] = array_values(
+                array_reduce($sanityDocuments["genre"], function ($carry, $item) {
+                    $refs = array_column($carry, '_ref');
+                    if (!in_array($item['_ref'], $refs)) {
+                        $carry[] = $item;
+                    }
+
+                    return $carry;
+                },           [])
+            );
+        }
 
         return $sanityDocuments;
     }

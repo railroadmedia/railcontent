@@ -175,3 +175,43 @@ export const getDate = (dateString) => {
 
     return `${formattedDate} - ${formattedTime}`;
 };
+
+/**
+ * Retrieve date in LLL d/yy, h:mma format from an ISO string with offset
+ * @param isoString {string}
+ * @returns {string|null}
+ */
+export const getDateFromIso = (isoString) => {
+    // handle null or undefined input
+    if (!isoString) return null;
+
+    try {
+        // Parse the ISO string into a Date object
+        const date = new Date(isoString.slice(0, 19));
+
+        // Validate the date object
+        if (isNaN(date)) return null;
+
+        // Create a formatter for date
+        const dateFormatter = new Intl.DateTimeFormat('en-US', {
+            month: 'short',
+            day: 'numeric',
+        });
+
+        // Create a formatter for time
+        const timeFormatter = new Intl.DateTimeFormat('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        });
+
+        // Format date and time
+        const formattedDate = dateFormatter.format(date).replace(/, /g, '/');
+        const formattedTime = timeFormatter.format(date).toLowerCase(); // Convert to lowercase for 'am/pm'
+
+        return `${formattedDate} - ${formattedTime}`;
+    } catch (error) {
+        // Return null for any unexpected errors
+        return null;
+    }
+};

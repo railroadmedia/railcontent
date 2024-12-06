@@ -103,7 +103,7 @@ const buttonAction = async () => {
     try {
         if(isUnlockModal.value){
             const unlock = await postChallengesUnlock(props.challenge?.id);
-
+            window.location.reload();
         } else if(isRetakeModal.value){
 
         } else if(isLeaveModal.value){

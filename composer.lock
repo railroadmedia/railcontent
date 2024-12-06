@@ -4,8 +4,75 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a279ccf962a07e2acbb15ed711f39cc",
+    "content-hash": "7f8c4b97d4612e812221fc343a43e291",
     "packages": [
+        {
+            "name": "algolia/algoliasearch-client-php",
+            "version": "4.9.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/algoliasearch-client-php.git",
+                "reference": "16504069c3a03bd0922bfd3226c7f2f3188cd55c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/16504069c3a03bd0922bfd3226c7f2f3188cd55c",
+                "reference": "16504069c3a03bd0922bfd3226c7f2f3188cd55c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/psr7": "^2.0",
+                "php": ">=8.1",
+                "psr/http-message": "^1.1 || ^2.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0 || ^3.5.0",
+                "phpstan/phpstan": "^1.12",
+                "phpunit/phpunit": "^11.0",
+                "vlucas/phpdotenv": "^5.4"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/Http/Psr7/functions.php"
+                ],
+                "psr-4": {
+                    "Algolia\\AlgoliaSearch\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "homepage": "https://alg.li/support"
+                }
+            ],
+            "description": "API powering the features of Algolia.",
+            "homepage": "https://github.com/algolia/algoliasearch-client-php",
+            "keywords": [
+                "algolia",
+                "api",
+                "client",
+                "php",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.9.2"
+            },
+            "time": "2024-11-19T21:38:33+00:00"
+        },
         {
             "name": "amphp/amp",
             "version": "v3.0.2",
@@ -1052,16 +1119,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.331.0",
+            "version": "3.334.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "0f8b3f63ba7b296afedcb3e6a43ce140831b9400"
+                "reference": "3938b3467f64a30fed7ee1762a6785f808a5ae4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0f8b3f63ba7b296afedcb3e6a43ce140831b9400",
-                "reference": "0f8b3f63ba7b296afedcb3e6a43ce140831b9400",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3938b3467f64a30fed7ee1762a6785f808a5ae4d",
+                "reference": "3938b3467f64a30fed7ee1762a6785f808a5ae4d",
                 "shasum": ""
             },
             "require": {
@@ -1144,9 +1211,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.331.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.334.1"
             },
-            "time": "2024-11-27T19:12:58+00:00"
+            "time": "2024-12-05T01:17:41+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3005,16 +3072,16 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "fbc7c5ee5d94f7a910b78b43feb7931b7f971b59"
+                "reference": "2d622faf9aa1f8f7f24dd094e49b5cf6c0c5d4e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/fbc7c5ee5d94f7a910b78b43feb7931b7f971b59",
-                "reference": "fbc7c5ee5d94f7a910b78b43feb7931b7f971b59",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/2d622faf9aa1f8f7f24dd094e49b5cf6c0c5d4e6",
+                "reference": "2d622faf9aa1f8f7f24dd094e49b5cf6c0c5d4e6",
                 "shasum": ""
             },
             "require": {
@@ -3063,22 +3130,22 @@
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
-                "source": "https://github.com/dompdf/dompdf/tree/v3.0.0"
+                "source": "https://github.com/dompdf/dompdf/tree/v3.0.1"
             },
-            "time": "2024-04-29T14:01:28+00:00"
+            "time": "2024-12-05T14:59:38+00:00"
         },
         {
             "name": "dompdf/php-font-lib",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/php-font-lib.git",
-                "reference": "991d6a954f6bbd7e41022198f00586b230731441"
+                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/991d6a954f6bbd7e41022198f00586b230731441",
-                "reference": "991d6a954f6bbd7e41022198f00586b230731441",
+                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
+                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
                 "shasum": ""
             },
             "require": {
@@ -3108,9 +3175,9 @@
             "homepage": "https://github.com/dompdf/php-font-lib",
             "support": {
                 "issues": "https://github.com/dompdf/php-font-lib/issues",
-                "source": "https://github.com/dompdf/php-font-lib/tree/1.0.0"
+                "source": "https://github.com/dompdf/php-font-lib/tree/1.0.1"
             },
-            "time": "2024-04-29T13:40:38+00:00"
+            "time": "2024-12-02T14:37:59+00:00"
         },
         {
             "name": "dompdf/php-svg-lib",
@@ -4030,16 +4097,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.50",
+            "version": "8.13.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "ab8b27ded2df369de629af637fa9975dda014078"
+                "reference": "852ea8ac8ca3d31f9c57d7e50c4212e96c83108e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/ab8b27ded2df369de629af637fa9975dda014078",
-                "reference": "ab8b27ded2df369de629af637fa9975dda014078",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/852ea8ac8ca3d31f9c57d7e50c4212e96c83108e",
+                "reference": "852ea8ac8ca3d31f9c57d7e50c4212e96c83108e",
                 "shasum": ""
             },
             "require": {
@@ -4103,7 +4170,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2024-11-18T10:02:13+00:00"
+            "time": "2024-12-02T09:25:55+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -4232,16 +4299,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.383.0",
+            "version": "v0.384.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "0da092376837d363ef0cfa5ef56e43308f7c3763"
+                "reference": "fcb190bb02cea2c939e67867bf9122fd8d02c351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/0da092376837d363ef0cfa5ef56e43308f7c3763",
-                "reference": "0da092376837d363ef0cfa5ef56e43308f7c3763",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/fcb190bb02cea2c939e67867bf9122fd8d02c351",
+                "reference": "fcb190bb02cea2c939e67867bf9122fd8d02c351",
                 "shasum": ""
             },
             "require": {
@@ -4270,22 +4337,22 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.383.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.384.0"
             },
-            "time": "2024-11-20T01:10:23+00:00"
+            "time": "2024-11-27T01:08:46+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.43.0",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "b6a80acd906492086db59aada9196dcfb9c512fe"
+                "reference": "5670e56307d7a2eac931f677c0e59a4f8abb2e43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/b6a80acd906492086db59aada9196dcfb9c512fe",
-                "reference": "b6a80acd906492086db59aada9196dcfb9c512fe",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/5670e56307d7a2eac931f677c0e59a4f8abb2e43",
+                "reference": "5670e56307d7a2eac931f677c0e59a4f8abb2e43",
                 "shasum": ""
             },
             "require": {
@@ -4330,9 +4397,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.43.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.44.0"
             },
-            "time": "2024-11-07T19:35:20+00:00"
+            "time": "2024-12-04T15:34:58+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -4518,16 +4585,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.35.0",
+            "version": "v1.35.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "21d038043e50498c42f8f060ab2d6949066480f3"
+                "reference": "336005867c0ca3e2ad95183cf9dd74fa67915dd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/21d038043e50498c42f8f060ab2d6949066480f3",
-                "reference": "21d038043e50498c42f8f060ab2d6949066480f3",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/336005867c0ca3e2ad95183cf9dd74fa67915dd9",
+                "reference": "336005867c0ca3e2ad95183cf9dd74fa67915dd9",
                 "shasum": ""
             },
             "require": {
@@ -4569,9 +4636,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.35.0"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.35.1"
             },
-            "time": "2024-11-06T20:27:21+00:00"
+            "time": "2024-12-04T15:32:12+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -4664,16 +4731,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.29.0",
+            "version": "v4.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "0ef6b2eb74b782f3f9023276c324d22e440f7587"
+                "reference": "6042b5483f8029e42473faeb8ef75ba266278381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/0ef6b2eb74b782f3f9023276c324d22e440f7587",
-                "reference": "0ef6b2eb74b782f3f9023276c324d22e440f7587",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/6042b5483f8029e42473faeb8ef75ba266278381",
+                "reference": "6042b5483f8029e42473faeb8ef75ba266278381",
                 "shasum": ""
             },
             "require": {
@@ -4702,9 +4769,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.29.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.29.1"
             },
-            "time": "2024-11-27T18:37:40+00:00"
+            "time": "2024-12-03T22:07:45+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -5329,16 +5396,16 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "c4026af538c21355a11c4f90f2a9e0bad7abd88d"
+                "reference": "7e6a030ffab315099782a4844a2175455f511c68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/c4026af538c21355a11c4f90f2a9e0bad7abd88d",
-                "reference": "c4026af538c21355a11c4f90f2a9e0bad7abd88d",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/7e6a030ffab315099782a4844a2175455f511c68",
+                "reference": "7e6a030ffab315099782a4844a2175455f511c68",
                 "shasum": ""
             },
             "require": {
@@ -5393,7 +5460,7 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v1.3.1"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v1.3.2"
             },
             "funding": [
                 {
@@ -5401,7 +5468,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-14T14:22:48+00:00"
+            "time": "2024-12-05T14:52:50+00:00"
         },
         {
             "name": "intervention/image",
@@ -7946,16 +8013,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67"
+                "reference": "aef6ee73a77a66e404dd6540934a9ef1b3c855b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/32e515fdc02cdafbe4593e30a9350d486b125b67",
-                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
+                "reference": "aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
                 "shasum": ""
             },
             "require": {
@@ -8033,7 +8100,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.8.0"
+                "source": "https://github.com/Seldaek/monolog/tree/3.8.1"
             },
             "funding": [
                 {
@@ -8045,7 +8112,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-12T13:57:08+00:00"
+            "time": "2024-12-05T17:15:07+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -8714,16 +8781,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.28.0",
+            "version": "v4.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "3e9ef74f13ba5e887e4afc7a4e0110e63559e902"
+                "reference": "229a9c837bd768e8767660671f9fdf429f343a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/3e9ef74f13ba5e887e4afc7a4e0110e63559e902",
-                "reference": "3e9ef74f13ba5e887e4afc7a4e0110e63559e902",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/229a9c837bd768e8767660671f9fdf429f343a74",
+                "reference": "229a9c837bd768e8767660671f9fdf429f343a74",
                 "shasum": ""
             },
             "require": {
@@ -8791,7 +8858,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.28.0"
+                "source": "https://github.com/openspout/openspout/tree/v4.28.1"
             },
             "funding": [
                 {
@@ -8803,7 +8870,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-29T09:45:53+00:00"
+            "time": "2024-12-05T13:34:00+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -10607,16 +10674,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v3.0.11",
+            "version": "v3.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2bf63e9e9ec2f2a5819e407988740c99701356cd"
+                "reference": "306023c6bfc1a38ed226772dc7e8e7686d0b99bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2bf63e9e9ec2f2a5819e407988740c99701356cd",
-                "reference": "2bf63e9e9ec2f2a5819e407988740c99701356cd",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/306023c6bfc1a38ed226772dc7e8e7686d0b99bd",
+                "reference": "306023c6bfc1a38ed226772dc7e8e7686d0b99bd",
                 "shasum": ""
             },
             "require": {
@@ -10667,9 +10734,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.11"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v3.0.13"
             },
-            "time": "2024-11-26T22:40:18+00:00"
+            "time": "2024-12-02T17:10:17+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -17860,16 +17927,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.23.3",
+            "version": "v1.23.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "687400043d77943ef95e8417cb44e1673ee57844"
+                "reference": "0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/687400043d77943ef95e8417cb44e1673ee57844",
-                "reference": "687400043d77943ef95e8417cb44e1673ee57844",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca",
+                "reference": "0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca",
                 "shasum": ""
             },
             "require": {
@@ -17922,9 +17989,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.23.3"
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.23.4"
             },
-            "time": "2024-10-29T12:24:25+00:00"
+            "time": "2024-12-05T10:36:51+00:00"
         },
         {
             "name": "mockery/mockery",

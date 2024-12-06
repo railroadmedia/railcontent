@@ -40,7 +40,11 @@ export default class ContentTypeModel {
     constructor(type, {
         brand,
         post,
+        isSearch = false,
     }) {
+        if (isSearch) {
+            return new StudentFocusModel({ brand, post });
+        }
         switch (type) {
         case 'chord-and-scale': return new ChordsAndScalesModel({ brand, post });
         case 'course': return new CourseModel({ brand, post });

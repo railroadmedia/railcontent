@@ -8,6 +8,7 @@ use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
+use App\Services\UserTimezoneService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -34,7 +35,7 @@ class ChallengesService
      * @param int $count
      * @return \Illuminate\Database\Eloquent\Builder[]|Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection|User[]
      */
-    private function getEnrolledUsers(int $contentId, int $count = 3)
+    public function getEnrolledUsers(int $contentId, int $count = 3)
     {
         $maxDisplayNameLength = 10;
         $enrolledUserIds = $this->getEnrolledUserIds($contentId);
@@ -157,7 +158,6 @@ class ChallengesService
         }
         $isSolo = ($challenge['is_solo'] ?? false) || !(is_null($startDate) && $isLocked);
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
-        $startDate = $startDate->startOfDay();
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData(
             $challenge,
             startDate: $startDate,
@@ -283,7 +283,12 @@ class ChallengesService
             }
             if ($challengeUserProgress?->is_active ?? false) {
                 $lessonDatum = $challengeUserProgress->getMetaDatumForContent($lesson['id']);
-                $unlockDate = $lessonDatum['unlock_date'];
+                $unlockDate = Carbon::parse($lessonDatum['unlock_date']);
+
+                if ($challengeUserProgress?->is_solo ?? false) {
+                    $unlockDate = Carbon::parse($lessonDatum['unlock_date'], UserTimezoneService::getUsersCurrentTimezone());
+                }
+
                 $isLocked = $challengeUserProgress->is_locked;
                 $isCompleted = $lessonDatum['completed'];
             } else  {
@@ -293,11 +298,22 @@ class ChallengesService
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
-
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
             // TODO TCH-117 - Bonus days redesign
             //$isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
-            $shouldLessonBeLocked =  $isLocked && $unlockDate->isAfter(Carbon::today($unlockDate->timezone));
+
+            // we must compared based on day without letting Carbon account for timezones
+            $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
+                ->startOfDay();
+            // comparing 00:00:00 dates does weird things
+            $todayForComparison = Carbon::createFromFormat(
+                'Y-m-d',
+                Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
+            )->startOfDay()->addSecond();
+
+            $shouldLessonBeLocked = $isLocked &&
+                $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
             $lessons[$index]['completed'] = $isCompleted;

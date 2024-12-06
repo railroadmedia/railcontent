@@ -5,12 +5,15 @@ namespace App\Modules\Content\Controllers;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
 use App\Modules\Content\Requests\ContentProgressMetadataRequest;
+use App\Modules\Content\Services\ContentHierarchyService;
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
@@ -22,7 +25,8 @@ class ContentMetadataController extends Controller
 {
     public function __construct(
         private readonly ProductProviderInterface $productProvider,
-        private readonly UserPermissionsService $userPermissionsService
+        private readonly UserPermissionsService $userPermissionsService,
+        private readonly ContentHierarchyService $contentHierarchyService,
     ) {
     }
 
@@ -83,7 +87,7 @@ class ContentMetadataController extends Controller
         // if the user ID isn't provided, grab the user from the session
         $user = $user ?? user();
 
-        $type = $request->get('content_type') ? (array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('content_type')] ?? $request->get('content_type')) :  null;
+        $type = $request->get('content_type') ? (array_flip(PrimaryURLSlugToContentTypeMap::$contentTypeToSanityTypeMapping)[$request->get('content_type')] ?? $request->get('content_type')) : null;
         $brandValue = $request['brand'] ?? null;
         $brand = null;
         if ($brandValue) {
@@ -129,9 +133,27 @@ class ContentMetadataController extends Controller
         ];
     }
 
-    /**
-     * @return JsonResponse
-     */
+    public function nextContent(int $contentId, ?User $user = null): JsonResponse
+    {
+        try {
+            $content = Content::findOrFail($contentId);
+        } catch (ModelNotFoundException) {
+            return response()->json(['error' => "No content found for ID $contentId"], 404);
+        }
+
+        $nextContent = $this->contentHierarchyService->getNextContentForParentContentForUser(
+            $content,
+            $user ?? user()
+        );
+        return response()
+            ->json([
+                'next' => [
+                    'id' => $nextContent->id ?? null,
+                    'type' => $nextContent->type ?? null,
+                ]
+            ]);
+    }
+
     public function getUserPermissions(): JsonResponse
     {
         $permissions = $this->userPermissionsService->getUserPermissions(user()->id);
@@ -139,18 +161,13 @@ class ContentMetadataController extends Controller
         return response()->json($permissions);
     }
 
-    /**
-     * @param $vimeoId
-     * @return array
-     */
-    public function getVimeoData($vimeoId)
+    public function getVimeoData($vimeoId): array
     {
         $content = $this->productProvider->getVimeoEndpoints($vimeoId);
-        $response = [
+        return [
             'vimeo_video_id' => $content['vimeo_video_id'] ?? null,
             'video_playback_endpoints' => $content['video_playback_endpoints'] ?? [],
             'length_in_seconds' => $content['length_in_seconds'] ?? 0,
         ];
-        return $response;
     }
 }

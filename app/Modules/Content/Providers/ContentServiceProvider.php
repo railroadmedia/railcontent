@@ -28,6 +28,11 @@ class ContentServiceProvider extends ServiceProvider
             'content'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/algolia.php',
+            'algolia'
+        );
+
         // middleware is controlled in the route files
         Route::middleware([])
             ->group(__DIR__ . '/../routes/admin.php');

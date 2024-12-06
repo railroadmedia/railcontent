@@ -4,6 +4,7 @@ use App\Modules\Content\Controllers\ChallengesMetaDataController;
 use App\Modules\Content\Controllers\ContentLikesController;
 use App\Modules\Content\Controllers\ContentMetadataController;
 use App\Modules\Content\Controllers\ContentProgressController;
+use App\Modules\Content\Controllers\ContentSearchController;
 use App\Modules\Content\Controllers\UserPermissionsController;
 use App\Modules\Content\Controllers\V1\CarouselControllerV1;
 use App\Modules\DataVersion\Enums\UserDataVersionKeyEnum;
@@ -40,19 +41,24 @@ Route::prefix('content')
         )->name('content.user_data');
 
         Route::get(
+            '{contentId}/next/{user?}',
+            [ContentMetadataController::class, 'nextContent']
+        )->name('content.next');
+
+        Route::get(
             'user_data_permissions',
             [ContentMetadataController::class, 'getUserPermissions']
         )->name('content.user-permissions');
 
         Route::get(
-            'user/permissions',
-            [UserPermissionsController::class, 'getUserPermissionData']
-        )->name('content.user-permissions-data');
-
-        Route::get(
             'vimeo-data/{vimeo_id}',
             [ContentMetadataController::class, 'getVimeoData']
         )->name('content.vimeo-data');
+
+        Route::get(
+            'user/permissions',
+            [UserPermissionsController::class, 'getUserPermissionData']
+        )->name('content.user-permissions-data');
 
         //Content Likes
         Route::get(
@@ -81,13 +87,11 @@ Route::prefix('content')
         )->name('content.user.progress.all')
             ->middleware(DataVersionGetMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
-        //Content Progress
         Route::post(
             'user/progress/start',
             [ContentProgressController::class, 'start']
         )->name('content.user.progress.start')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
-
 
         Route::post(
             'user/progress/complete',
@@ -101,6 +105,11 @@ Route::prefix('content')
         )->name('content.user.progress.reset')
             ->middleware(DataVersionUpdateMiddleware::class . ':' . UserDataVersionKeyEnum::ContentProgress->value);
 
+        // search
+        Route::get(
+            'search',
+            [ContentSearchController::class, 'search']
+        )->name('content.search');
     });
 
 Route::prefix('challenges')

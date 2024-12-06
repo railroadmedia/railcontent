@@ -13,6 +13,10 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Modules\Content\Requests\ContentSearchRequest;
+use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
+use App\Modules\Content\Resources\Algolia\SearchParameters;
+use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Models\Content;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
@@ -42,7 +46,6 @@ use Railroad\Railcontent\Services\MethodService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
-use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPagesController extends BaseController
@@ -1338,38 +1341,36 @@ class ContentPagesController extends BaseController
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function search(Request $request): View
+    public function search(ContentSearchRequest $request): View
     {
-        ContentRepository::$availableContentStatues =
-            $request->get('statuses', ContentRepository::$availableContentStatues);
+        $search = new AlgoliaSearchService();
+        $searchParams = SearchParameters::fromRequest($search, $request);
 
-        $includedTypes = ContentTypes::searchableContentTypes();
+        $searchResponse = $search->search($searchParams);
 
-        $lessons = $this->fullTextSearchService->search(
-            $request->get('term', null),
-            $request->get('page', 1),
-            $request->get('limit', 20),
-            $request->get('included_types', $includedTypes),
-            $request->get('statuses', []),
-            $request->get('sort', '-score'),
-            $request->get('date_time_cutoff', null),
-            $request->get('brands', null),
-            $request->get('coach_ids', [])
-        );
+        /*
+         *   +objectID: "workout_412878"
+         *   +rev: "2g0uCSmAjwt10xp5lAgdJy"
+         *   +railcontent_id: 412878
+         *   +album: null
+         *   +artist: null
+         *   +brand: "drumeo"
+         *   +description: null
+         *   +difficulty: "Intermediate"
+         *   +genre: null
+         *   +instructor_names: array:1 [▶]
+         *   +language: "en-US"
+         *   +popularity: 308
+         *   +published_on:
+         */
 
-        $listLessons =
-            reply()
-                ->json($lessons['results'], [
-                    'transformer' => DataTransformer::class,
-                    'totalResults' => $lessons['total_results'],
-                ])
-                ->content();
+//        dd($searchResponse->formatToJson());
 
         return view('content.search', [
-            "lessons" => $listLessons,
+            "lessons" => $searchResponse->formatToJson(),
             "searchTerm" => $request->get('term', null),
-            "totalResults" => $lessons['total_results'],
-            "includedTypes" => json_encode($includedTypes),
+            "totalResults" => $searchResponse->getNbHits(),
+            "includedTypes" => json_encode(array_column(DocumentType::cases(), 'value')),
         ]);
     }
 
