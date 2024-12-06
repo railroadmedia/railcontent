@@ -3,7 +3,6 @@
 namespace App\Modules\Content\Models;
 
 use App\Modules\Brand\Enums\Brand;
-use App\Modules\Content\Services\ChallengesService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
 use Exception;
@@ -40,7 +39,7 @@ enum ChallengeUserProgressStatus: string
  * @property boolean $is_solo
  * @property boolean $hide_completed_banner
  * @property integer $current_rest_days
- * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date, completed_at
+ * @property array $lessons_meta_data - key: id to values: content_id,  completed, is_always_unlocked, is_bonus_content, seconds_practiced, unlock_date
  * @property Carbon $start_date
  * @property Carbon $last_completed_date
  * @property integer $completed_time_practiced
@@ -146,9 +145,9 @@ class ChallengeUserProgress extends Model
             $completedAt = isset($lesson['completed_at'])
                 ? Carbon::parse($lesson['completed_at'])
                 : null;
-            $isCurriculumLesson = self::isCurriculumMetadataLesson($lesson);
+
             // Skip lessons that are always unlocked, bonus, or unlock in the future
-            if (!$isCurriculumLesson || $unlockDate > $today) {
+            if ($lesson['is_always_unlocked'] || $unlockDate > $today) {
                 continue;
             }
 
@@ -224,48 +223,25 @@ class ChallengeUserProgress extends Model
      * @param bool $isUnlocked - Flag to indicate whether lessons are locked
      * @return array -
      */
-    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isChallengeLocked = true): array
+    public static function defineLessonsMetaData(array $challenge, Carbon $startDate, bool $isLocked = true): array
     {
         $lessons = $challenge['lessons'];
         $startDate = Carbon::parse($startDate ?? $challenge['published_on']);
         $lessonMetaData = [];
         $rollingUnlockDate = $startDate->copy();
-        $isSolo = $challenge['is_solo'] ?? false;
 
         foreach ($lessons as $lessonIndex => $lesson) {
             $isAlwaysUnlocked = $lesson['is_always_unlocked_for_challenge'] ?? false;
-            $isBonusContent = $lesson['is_bonus_content_for_challenge'] ?? false;
-            if ($isBonusContent) {
-                if ($isSolo) {
-                    // unlocked based on previous curriculum lesson's unlock_date
-                    $unlockDate = null;
-                    for ($reverseIndex = $lessonIndex -1; $reverseIndex >= 0; $reverseIndex--) {
-                        $previousLesson = $lessons[$reverseIndex];
-                        if (!$previousLesson['is_always_unlocked_for_challenge']) {
-                            $previousLessonUnlockDate = $lessonMetaData[$reverseIndex]['unlock_date'];
-                            $unlockDate = Carbon::parse($previousLessonUnlockDate);
-                            break;
-                        }
-                    }
-                    if (is_null($unlockDate)) {
-                        $unlockDate = $startDate;
-                    }
-                } else {
-                    // unlock based on published on date
-                    $unlockDate = Carbon::parse($lesson['published_on']);
-                }
-            } elseif ($isAlwaysUnlocked) {
+            if ($isAlwaysUnlocked) {
                 $unlockDate = Carbon::parse($lesson['published_on']);
-            } elseif ($isChallengeLocked) {
+            } elseif ($isLocked) {
                 $unlockDate = $rollingUnlockDate;
-            } else { // unguided experience
+            } else {
                 $unlockDate = $startDate;
             }
             $lessonPublishedDate = Carbon::parse($lesson['published_on']);
             $unlockDate = max($unlockDate, $lessonPublishedDate);
 
-
-            // TODO, handle this in a specific field in the database
             // For solo challenges,
             // always set the first days unlock time to exactly when the student enrolling in UTC. We need this
             // for timezone calculations.
@@ -276,15 +252,14 @@ class ChallengeUserProgress extends Model
             $lessonMetaData[] =
                 [
                     'content_id' => $lesson['id'],
-                    'is_bonus_content' => $isBonusContent,
+                    'is_bonus_content' => $lesson['is_bonus_content_for_challenge'] ?? false,
                     'completed' => false,
                     'seconds_practiced' => 0,
                     'unlock_date' => $unlockDate->toISOString(),
                     'is_always_unlocked' => $isAlwaysUnlocked,
                     'completed_at' => null,
                 ];
-            $incrementRollingDayCounter = !(($isSolo && $isBonusContent) || $isAlwaysUnlocked);
-            if ($incrementRollingDayCounter) {
+            if (!$lesson['is_always_unlocked_for_challenge']) {
                 // TODO start of day? to hande daylight saving times
                 $rollingUnlockDate->addDay();
             }
@@ -324,8 +299,7 @@ class ChallengeUserProgress extends Model
         $total = 0;
         $completed = 0;
         foreach ($this->lessons_meta_data as $lessons_meta_datum) {
-            $isCurriculumLesson = self::isCurriculumMetadataLesson($lessons_meta_datum);
-            if ($isCurriculumLesson) {
+            if (!$lessons_meta_datum['is_always_unlocked']) {
                 $total++;
                 $completed += $lessons_meta_datum['completed'] ? 1 : 0;
             }
@@ -340,24 +314,24 @@ class ChallengeUserProgress extends Model
      */
     public static function calculateDefaultRestDays(array $challenge): int
     {
-        return ChallengeUserProgress::getNumberOfCurriculumLessonsInSanityChallenge($challenge) >= 10 ? 1 : 0;
+        return ChallengeUserProgress::getNumberOfLessonDaysInChallenge($challenge) >= 10 ? 1 : 0;
     }
 
 
-    public static function getNumberOfCurriculumLessonsInSanityChallenge(array $challenge): int
+    public static function getNumberOfLessonDaysInChallenge(array $challenge): int
     {
-        $curriculumLessons = array_filter($challenge['lessons'], function ($lesson) {
-            return self::isCurriculumSanityLesson($lesson);
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($challenge['lessons'], function ($lesson) {
+            return !($lesson['is_always_unlocked_for_challenge'] ?? false);
         });
-        return count($curriculumLessons);
+        return count($lessonLessonsAsOpposedToIntroLessons);
     }
 
-    private function getNumberOfCirruculumLessons(): int
+    private function getNumberOfLessonDays(): int
     {
-        $cirruculumLessons = array_filter($this->lessons_meta_data, function ($lesson) {
-            return self::isCurriculumMetadataLesson($lesson);
+        $lessonLessonsAsOpposedToIntroLessons = array_filter($this->lessons_meta_data, function ($lesson) {
+            return !$lesson['is_always_unlocked'];
         });
-        return count($cirruculumLessons);
+        return count($lessonLessonsAsOpposedToIntroLessons);
     }
 
     /**
@@ -510,7 +484,7 @@ class ChallengeUserProgress extends Model
         $areAllLessonsCompleted = $this->areAllLessonsCompleted();
         if ($this->is_active) {
             $currentStreakData = $this->getStreakCurrentData();
-            $totalLessons = $this->getNumberOfCirruculumLessons();
+            $totalLessons = $this->getNumberOfLessonDays();
             /**
              * Milestones will need basic logic
              * 30-day challenge - every 5 days
@@ -566,9 +540,10 @@ class ChallengeUserProgress extends Model
     public function areAllLessonsCompleted(): bool
     {
         foreach ($this->lessons_meta_data as $lessons_meta_datum) {
-            $isCurriculumLesson = self::isCurriculumMetadataLesson($lessons_meta_datum);
-            $isCompleted = $lessons_meta_datum['completed'];
-            if ($isCurriculumLesson && !$isCompleted) {
+            if ($lessons_meta_datum['is_always_unlocked']) {
+                continue;
+            }
+            if (!$lessons_meta_datum['completed']) {
                 return false;
             }
         }
@@ -592,7 +567,7 @@ class ChallengeUserProgress extends Model
 
     public function getAwardTier(): AwardTier
     {
-        $length = $this->getNumberOfCirruculumLessons();
+        $length = $this->getNumberOfLessonDays();
         $bestStreak = $this->completed_best_streak;
         $halfLength = $length / 2;
         if ($length == $bestStreak) {
@@ -602,19 +577,5 @@ class ChallengeUserProgress extends Model
         } else {
             return AwardTier::SILVER;
         }
-    }
-
-    public static function isCurriculumSanityLesson($sanityLesson)
-    {
-        $isBonus = $sanityLesson['is_bonus_content_for_challenge'];
-        $isUnlocked = $sanityLesson['is_always_unlocked_for_challenge'];
-        return !($isBonus || $isUnlocked);
-    }
-
-    public static function isCurriculumMetadataLesson($metaDataLesson)
-    {
-        $isBonus = $metaDataLesson['is_bonus_content'];
-        $isUnlocked = $metaDataLesson['is_always_unlocked'];
-        return !($isBonus || $isUnlocked);
     }
 }
