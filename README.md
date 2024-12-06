@@ -766,3 +766,9 @@ OR
 - This could work for the mobile app, but the app itself doesn't have a way to pass in these params or headers yet.
   - For testing purposes, you could simulate starting a challenge 15 days in the past, 
     simulate completing and missing days up until the current real day, then log in to that same user on the app to test.
+---
+
+## Client Side
+To simulate dates on the client side (JS, web), use the Chrome extension Time Travel:
+[Time Travel](https://chromewebstore.google.com/detail/time-travel/jfdbpgcmmenmelcghpbbkldkcfiejcjg)
+---
