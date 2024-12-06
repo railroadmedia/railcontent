@@ -30,6 +30,7 @@ class SanityGateway
         'child_count',
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
+        "'lesson_count': child_count"
     ];
 
     private array $contentSpecificFields = [
@@ -530,7 +531,27 @@ class SanityGateway
     {
         // fields needs to exist for decorators to work, but no longer needs actual data
         // eventually this should be removed.
-        return [];
+        return [
+            ['key' => 'title', 'value' => $document['title'], 'position' => 1, 'type' => ''],
+            ['key' => 'artist', 'value' => $document['artist_name'], 'position' => 1, 'type' => ''],
+            ['key' => 'thumbnail_url', 'value' => $document['thumbnail'], 'position' => 1, 'type' => ''],
+            [
+                'key' => 'video',
+                'value' => [
+                    'fields' => [[
+                        'key' => 'length_in_seconds',
+                        'value' => $document['length_in_seconds'],
+                        'position' => 1,
+                        'type' => ''
+                    ]],
+                    'position' => 1,
+                    'type' => ''
+                ],
+                'position' => 1,
+                'type' => ''
+            ],
+            ['key' => 'length_in_seconds', 'value' => $document['length_in_seconds'], 'position' => 1, 'type' => '']
+        ];
     }
 
     public function getExistingPopularityData($contentIds)
