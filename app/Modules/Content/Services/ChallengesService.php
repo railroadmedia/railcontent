@@ -274,17 +274,19 @@ class ChallengesService
         ?ChallengeUserProgress $challengeUserProgress,
         bool $removeVideoData = false
     ): array {
-        $day = 0;
+        $curriculumDay = 0;
+        $previousCurriculumLesson = null;
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['is_first_lesson'] = $index == 0;
             $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
+            $dayRexeg = "/Day\s?#?[\d]*\.?[\d]*/";
+            preg_match($dayRexeg, $lesson['title'], $matches);
+            $lessons[$index]['short_name'] = $matches[0] ?? $lesson['title'];
             if ($isCurriculumLesson) {
-                $day += 1;
-                $lessons[$index]['index'] = $day;
-                $lessons[$index]['short_name'] = "Day {$day}";
+                $curriculumDay += 1;
+                $lessons[$index]['index'] = $curriculumDay;
             } else {
                 $lessons[$index]['index'] = '';
-                $lessons[$index]['short_name'] = $lesson['title'];
             }
             if ($challengeUserProgress?->is_active ?? false) {
                 $lessonDatum = $challengeUserProgress->getMetaDatumForContent($lesson['id']);
@@ -298,16 +300,20 @@ class ChallengesService
                 $isCompleted = $lessonDatum['completed'];
             } else  {
                 $unlockDate = $lesson['published_on'];
-                $isLocked = true;
+                $isLocked = false;
                 $userId = user()->id;
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
-            // TODO TCH-117 - Bonus days redesign
-            //$isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
 
-            // we must compared based on day without letting Carbon account for timezones
+            if ($isCurriculumLesson) {
+                $lockLessonBecausePreviousIncomplete = $previousCurriculumLesson['completed'] ?? false;
+            } else {
+                $lockLessonBecausePreviousIncomplete = false;
+            }
+
+            // we must compare based on day without letting Carbon account for timezones
             $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
                 ->startOfDay();
             // comparing 00:00:00 dates does weird things
@@ -316,14 +322,17 @@ class ChallengesService
                 Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
             )->startOfDay()->addSecond();
 
-            $shouldLessonBeLocked = $isLocked &&
-                $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+            $shouldLessonBeLocked = $isLocked && ($lockLessonBecausePreviousIncomplete ||
+                $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison));
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
             $lessons[$index]['completed'] = $isCompleted;
             if ($removeVideoData) {
                 unset($lessons[$index]['video']);
+            }
+            if ($isCurriculumLesson) {
+                $previousCurriculumLesson = $lessons[$index];
             }
         }
 
