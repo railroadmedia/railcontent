@@ -54,7 +54,7 @@ class Song extends BaseSanityContentTypeModel
             new Field(FieldType::String, 'genre_ai', 'Genre AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::String, 'album', group:$detailsGroup),
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By', group:$detailsGroup),
-            new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless', group:$detailsGroup),
+            new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless', group:$detailsGroup, initialValue: false),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed', group:$detailsGroup),
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
