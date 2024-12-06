@@ -276,6 +276,21 @@ class SanityGateway
         return $document;
     }
 
+    public function getAllByType(string $type, int $limit = 20): array
+    {
+        $gateway = new SanityGateway();
+        // see musora-content-services sanity.js for the fields and format we need to replicate
+        $fieldsString = $this->getFieldsString($type);
+        $query = "*[_type == '$type']{
+          $fieldsString
+        } [0 ... $limit]";
+        $documents = $gateway->sanity->fetch($query) ?? null;
+        if (is_null($documents)) {
+            return [];
+        }
+        return $documents;
+    }
+
     public function getProductInformationForAllChallenges(): array
     {
         $gateway = new SanityGateway();
