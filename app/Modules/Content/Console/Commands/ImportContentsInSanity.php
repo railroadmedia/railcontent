@@ -214,7 +214,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $instructorsData = Content::with('data', 'fields')
             ->where('type', '=', 'instructor')
             ->where('railcontent_content.status', '=', 'published')
-            ->whereNotIn('id', [404505, 389348, 395073])
+            ->whereNotIn('id', [404505, 389348, 395073, 31935])
             ->get();
 
         $instructors = [];
@@ -738,7 +738,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $resources       = [];
         $chapters        = [];
         $notImportedData = [];
-        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,391008,382879,391160, 399638,404279, 404299, 401415, 270443,  318625, 30437, 206255, 375281, 268094, 23313, 23393, 23395, 331419];
+        $contentWithWrongImage = [268071, 268097, 268122, 378258,382515,391008,382879,391160, 399638,404279, 404299, 401415, 270443,  318625, 30437, 206255, 375281, 268094, 23313, 23393, 23395, 331419, 414974];
         foreach ($result->data as $datum) {
             $imported = false;
             if ($datum['key'] == 'thumbnail_url' && $datum['value'] != '' && !in_array($datum['content_id'], $contentWithWrongImage)) {
