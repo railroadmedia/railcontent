@@ -471,7 +471,9 @@ class ChallengeUserProgress extends Model
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
             if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
-                $lessonMetaData[$index]['completed_at'] = Carbon::now()->toISOString();
+                $lessonMetaData[$index]['completed_at'] =
+                    Carbon::parse(Carbon::now()->timezone(UserTimezoneService::getUsersCurrentTimezone())
+                        ->toDateTimeString())->toISOString();
                 if (!is_null($totalSecondsPracticed)) {
                     $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }
