@@ -86,6 +86,7 @@ class SanityGateway
                 is_bonus_content_for_challenge,
                 video,
             }',
+            'product_id'
         ],
         'playlist-item' => [
             "'type': _type",
