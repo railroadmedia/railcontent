@@ -352,7 +352,7 @@ class ChallengeUserProgress extends Model
         return count($curriculumLessons);
     }
 
-    private function getNumberOfCirruculumLessons(): int
+    private function getNumberOfCurruculumLessons(): int
     {
         $cirruculumLessons = array_filter($this->lessons_meta_data, function ($lesson) {
             return self::isCurriculumMetadataLesson($lesson);
@@ -510,7 +510,7 @@ class ChallengeUserProgress extends Model
         $areAllLessonsCompleted = $this->areAllLessonsCompleted();
         if ($this->is_active) {
             $currentStreakData = $this->getStreakCurrentData();
-            $totalLessons = $this->getNumberOfCirruculumLessons();
+            $totalLessons = $this->getNumberOfCurruculumLessons();
             /**
              * Milestones will need basic logic
              * 30-day challenge - every 5 days
@@ -592,7 +592,7 @@ class ChallengeUserProgress extends Model
 
     public function getAwardTier(): AwardTier
     {
-        $length = $this->getNumberOfCirruculumLessons();
+        $length = $this->getNumberOfCurruculumLessons();
         $bestStreak = $this->completed_best_streak;
         $halfLength = $length / 2;
         if ($length == $bestStreak) {

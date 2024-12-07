@@ -406,8 +406,8 @@ class ChallengesTest extends TestCase
     {
         $userId = user()->id;
 
-        // this data file has 10 lessons, with two intro videos
-        // always unlocked = [1,3];
+        // this data file has 14 total lessons, 10 curriculum
+        // always unlocked = [0,1];
         // bonus content = [8,9];
         $this->mockChallengeAndLessonDataData(
             'challenge-10-lessons-with-unlock-and-bonus.json',
@@ -425,18 +425,18 @@ class ChallengesTest extends TestCase
         $completedLessons = 0;
         foreach ($userProgress->lessons_meta_data as $lesson_meta_datum) {
             $lessonIndex = $lesson_meta_datum['content_id'];
-            if ($lesson_meta_datum['is_always_unlocked']) {
+            $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($lesson_meta_datum);
+            if ($isCurriculumLesson) {
                 // skip the unlocked contents
-                continue;
-            } else {
                 $completedLessons += $lessonIndex == 1 ? 0 : 1;
             }
+
             $lessonCompletedProgress = $challengesService->completeLessonAndGetCurrentProgressResults(
                 $lessonIndex,
                 $userId
             );
 
-            if ($lessonIndex == 12) {
+            if ($lessonIndex == 14) {
                 $this->assertEquals('complete', $lessonCompletedProgress['milestone']);
                 $this->assertStringContainsString("You've completed ", $lessonCompletedProgress['motivational_title']);
                 $this->assertEmpty($lessonCompletedProgress['motivational_subtext']);
@@ -468,8 +468,9 @@ class ChallengesTest extends TestCase
             $this->assertEquals($completedLessons, $currentStreakData['best']);
 
             $this->assertEquals(0, $currentStreakData['missed']);
-
-            $this->travel(1)->days();
+            if (!$lesson_meta_datum['is_always_unlocked']) {
+                $this->travel(1)->days();
+            }
         }
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
         $this->assertFalse(boolval($userProgress->is_active));
