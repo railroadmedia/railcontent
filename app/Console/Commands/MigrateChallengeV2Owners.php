@@ -8,6 +8,7 @@ use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Services\ChallengesService;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
@@ -43,7 +44,7 @@ class MigrateChallengeV2Owners extends Command
     public function handle(SanityGateway $sanityGateway): void
     {
         $this->withExecutionTime(function () use ($sanityGateway) {
-            $this->migrate( $sanityGateway);
+            $this->migrate($sanityGateway);
         });
     }
 
@@ -54,7 +55,7 @@ class MigrateChallengeV2Owners extends Command
         UserAccessPermission::query()
             ->select('user_id')
             ->distinct()
-            ->where('source', 'web')
+            ->where('source', '!=', UserAccessPermissionsSourceEnum::Challenges->value)
             ->whereIn('product_id', $productIds)
             ->orderBy('user_id')
             ->chunk(1000, function ($items) {
