@@ -61,7 +61,7 @@ class MigrateChallengeV2Owners extends Command
             ->chunk(1000, function ($items) {
                 foreach ($items as $item) {
                     $user = User::query()->find($item->user_id);
-                    if (!$user) {
+                    if ($user) {
                         $user->is_challenge_owner = true;
                         $user->save();
                     }
