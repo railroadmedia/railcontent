@@ -13,6 +13,8 @@ use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 
+use function Amp\delay;
+
 class MigrateChallengeV2Owners extends Command
 {
     /**
@@ -59,13 +61,9 @@ class MigrateChallengeV2Owners extends Command
             ->whereIn('product_id', $productIds)
             ->orderBy('user_id')
             ->chunk(1000, function ($items) {
-                foreach ($items as $item) {
-                    $user = User::query()->find($item->user_id);
-                    if ($user) {
-                        $user->is_challenge_owner = true;
-                        $user->save();
-                    }
-                }
+                $userIds = $items->pluck('user_id')->toArray();
+                User::query()->whereIn('id', $userIds)->update(['is_challenge_owner' => true]);
+                sleep(1);
             });
     }
 }
