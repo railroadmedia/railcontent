@@ -30,7 +30,8 @@ class SanityGateway
         'child_count',
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
-        "'lesson_count': child_count"
+        "'lesson_count': child_count",
+        "parent_content_data"
     ];
 
     private array $contentSpecificFields = [
@@ -85,8 +86,9 @@ class SanityGateway
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
                 video,
+                parent_content_data
             }',
-            'product_id'
+            'product_id',
         ],
         'playlist-item' => [
             "'type': _type",
