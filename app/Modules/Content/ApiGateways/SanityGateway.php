@@ -30,7 +30,8 @@ class SanityGateway
         'child_count',
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
-        "'lesson_count': child_count"
+        "'lesson_count': child_count",
+        "parent_content_data"
     ];
 
     private array $contentSpecificFields = [
@@ -85,7 +86,9 @@ class SanityGateway
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
                 video,
+                parent_content_data
             }',
+            'product_id',
         ],
         'playlist-item' => [
             "'type': _type",
@@ -274,6 +277,21 @@ class SanityGateway
         $document['fields'] = $this->mapSanityFields($document);
         $document['data'] = $this->mapSanityFields($document);
         return $document;
+    }
+
+    public function getAllByType(string $type, int $limit = 20): array
+    {
+        $gateway = new SanityGateway();
+        // see musora-content-services sanity.js for the fields and format we need to replicate
+        $fieldsString = $this->getFieldsString($type);
+        $query = "*[_type == '$type']{
+          $fieldsString
+        } [0 ... $limit]";
+        $documents = $gateway->sanity->fetch($query) ?? null;
+        if (is_null($documents)) {
+            return [];
+        }
+        return $documents;
     }
 
     public function getProductInformationForAllChallenges(): array

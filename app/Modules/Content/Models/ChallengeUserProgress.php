@@ -458,7 +458,8 @@ class ChallengeUserProgress extends Model
     public function updateLessonsProgress(
         int $lessonId,
         bool $isCompleted = true,
-        ?int $totalSecondsPracticed = null
+        ?int $totalSecondsPracticed = null,
+        Carbon $completedTime = null
     ): array {
         $previousStreakData = $this->getStreakCurrentData();
         $results = [
@@ -471,9 +472,9 @@ class ChallengeUserProgress extends Model
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
             if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
-                $lessonMetaData[$index]['completed_at'] =
+                $lessonMetaData[$index]['completed_at'] = ($completedTime ?? 
                     Carbon::parse(Carbon::now()->timezone(UserTimezoneService::getUsersCurrentTimezone())
-                        ->toDateTimeString())->toISOString();
+                        ->toDateTimeString())->toISOString());
                 if (!is_null($totalSecondsPracticed)) {
                     $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }

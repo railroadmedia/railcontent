@@ -9,7 +9,9 @@
 import { watch, provide, onBeforeMount } from 'vue';
 import { useUserStore } from '@stores/user';
 import { usePlatformStore } from '@stores/platform'
-import { toKebabCase } from '../../utils.js'; 
+import { toKebabCase } from '../../utils.js';
+import { globalConfig } from "musora-content-services";
+import moment from 'moment-timezone';
 
 const props = defineProps({
   user: Object,
@@ -39,6 +41,7 @@ const props = defineProps({
 
 onBeforeMount(() => {
   provide('csrf_token', props.csrf_token);
+  globalConfig.localTimezoneString = moment.tz.guess();
 });
 const userStore = useUserStore();
 const platformStore = usePlatformStore();

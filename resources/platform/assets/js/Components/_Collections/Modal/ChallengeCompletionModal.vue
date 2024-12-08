@@ -14,9 +14,9 @@
                     <!-- Left -->
                     <div class="tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
                         <!-- Challenge Logo -->
-                        <img class="dark:tw-hidden tw-h-24 tw-mb-2" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
-                        <img class="tw-hidden dark:tw-block tw-h-24 tw-mb-2" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
-                        <div v-if="isNextLessonLocked" class="tw-font-bold tw-text-sm">{{ nextLessonTitle }} Unlocks In {{ countdownString }}</div>
+                        <img class="dark:tw-hidden tw-h-24" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
+                        <img class="tw-hidden dark:tw-block tw-h-24" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
+                        <div v-if="isNextLessonLocked" class="tw-font-bold tw-text-sm tw-mt-[15px]">{{ nextLessonTitle }} Unlocks In {{ countdownString }}</div>
                     </div>
                     <!-- Right -->
                     <div class="tw-flex-1 tw-relative tw-pb-5">
@@ -103,8 +103,8 @@
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
                                 <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
                                 <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
-                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold">{{ nextLessonTitle }} Unlocks In</div>
-                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px]">{{ countdownString }}</div>
+                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[5px]">{{ nextLessonTitle }} Unlocks In</div>
+                                <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px] -tw-mb-5">{{ countdownString }}</div>
                             </div>
                         </div>
                     </div>

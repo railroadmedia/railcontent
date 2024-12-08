@@ -22,7 +22,7 @@ class ExpiredMemberRedirect
             }
 
             // allow singeo courses through since singeo uses courses instead of packs
-            if ($user->isPackOwner() && !$user->isAMember() &&
+            if ($user->isPackOrChallengeOwner() && !$user->isAMember() &&
                 (strpos($request->path(), 'singeo/courses') === false)
                 && (strpos($request->path(), 'members') === false)
                 && (!$request->routeIs('platform.home'))) {
