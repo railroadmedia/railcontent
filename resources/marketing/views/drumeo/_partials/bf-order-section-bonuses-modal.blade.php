@@ -28,12 +28,12 @@
         case 'holiday':
             $borderColor = 'border-[#F61A30]';
             $textColor = 'text-[#F61A30]';
-            $bundlePrice = '<s class="opacity-50"> $692.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $692.95</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 65%)</span>';
             break;
         case 'holiday-pianote':
             $borderColor = 'border-[#F61A30]';
             $textColor = 'text-[#F61A30]';
-            $bundlePrice = '<s class="opacity-50"> $778</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 69%)</span><br><p class="text-sm">For your first year, then $240/yr.</p>';
+            $bundlePrice = '<s class="opacity-50"> $778</s><strong> $240</strong> <span class="text-[#F61A30] text-xl md:text-3xl">(Save 69%)</span>';
             break;
         case 'deal-cyber-monday':
             $borderColor = 'border-[#00D7FF]';
@@ -215,11 +215,11 @@
                                                 @endif
                                             </picture>
                                         </div>
-                                       
+
                                         <div class="absolute z-40 text-center top-[40%] left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible" @click="modal{{ $bonus['vimeoId'] }} = true">
                                             <i class="text-2xl fas fa-play play-button autoplay-video hover:opacity-80 border-4 border-solid border-white rounded-full cursor-pointer mt-24 mb-12 text-3xl py-3 px-5 duration-300" style="background:rgba(0, 0, 0, 0.6);"></i><br>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@
                                 <strong class="{{ $textColor }}">FREE</strong>
                                 @if(empty($bonus['physical']))
                                 <span class="text-white italic block">Lifetime Access</span>
-                                @else 
+                                @else
                                 <span class="text-white italic block">Free Shipping</span>
                                 @endif
 
@@ -335,9 +335,9 @@
                 @endif
                 <br>
                     @if($bundle == 'holiday' || $bundle == 'holiday-pianote')
-                     <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote' || $bundle == 'holiday' || $bundle == 'holiday-pianote') hidden @endif">
-                    <em>For your first year, then $240/yr.</em></p>
-                    @else 
+{{--                     <p class="inline-block opacity-90 text-white text-sm md:text-base @if($bundle == 'challenge' || $bundle == 'challenges-pianote' || $bundle == 'holiday' || $bundle == 'holiday-pianote') hidden @endif">--}}
+{{--                    <em>For your first year, then $240/yr.</em></p>--}}
+                    @else
                     <p class=" @if($bundle == 'challenge' || $bundle == 'challenges-pianote') hidden @endif"><em>Renews at $240/year. Cancel anytime.</em></p>
                     @endif
                 </div>
