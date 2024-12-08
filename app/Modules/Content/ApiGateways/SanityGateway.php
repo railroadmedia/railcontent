@@ -31,7 +31,6 @@ class SanityGateway
         "'description': description[0].children[0].text",
         "'artist_name':coalesce(artist->name, instructor[0]->name)",
         "'lesson_count': child_count",
-        "parent_content_data"
     ];
 
     private array $contentSpecificFields = [
@@ -85,8 +84,7 @@ class SanityGateway
                 "permission_id": permission[]->railcontent_id,
                 is_always_unlocked_for_challenge,
                 is_bonus_content_for_challenge,
-                video,
-                parent_content_data
+                video
             }',
             'product_id',
         ],
