@@ -1,6 +1,6 @@
 // hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchMethod, fetchMethodChildren, fetchFoundation, fetchCompletedState, getProgressPercentage, fetchUserChallengeProgress } from 'musora-content-services';
+import { fetchMethod, fetchMethodChildren, fetchFoundation, jumpToContinueContent, getProgressPercentage, fetchUserChallengeProgress } from 'musora-content-services';
 
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
@@ -43,6 +43,13 @@ export async function useOverviewPageData(contentType, parentType) {
 	                data.value = result;
 	                data.value.header = buildHeader(contentType, result, progressPercent);
 	                data.value.children = result.levels;
+					data.value.next_lesson = [];
+					//Get next lesson
+					jumpToContinueContent(result.id).then( result => {
+						data.value.next_lesson.push(result.next);
+					}).catch( error => {
+						console.log('error fetching next lesson', error);
+					})
 	            } else {
 	                throw new Error('Failed to fetch method');
 	            }
@@ -56,6 +63,13 @@ export async function useOverviewPageData(contentType, parentType) {
 	                data.value = result;
 	                data.value.header = buildHeader(contentType, result, progressPercent);
 	                data.value.children = result.units;
+					data.value.next_lesson = [];
+					//Get next lesson
+					jumpToContinueContent(result.id).then( result => {
+						data.value.next_lesson.push(result.next);
+					}).catch( error => {
+						console.log('error fetching next lesson', error);
+					})
 	            } else {
 	                throw new Error('Failed to fetch foundation');
 	            }
@@ -65,6 +79,13 @@ export async function useOverviewPageData(contentType, parentType) {
 	            if (result) {
 	                data.value = result[0];
 	                data.value.header = buildHeader(contentType, result[0], progressPercent);
+					data.value.next_lesson = [];
+					//Get next lesson
+					jumpToContinueContent(contentId).then( result => {
+						data.value.next_lesson.push(result.next);
+					}).catch( error => {
+						console.log('error fetching next lesson', error);
+					})
 	            } else {
 	                throw new Error('Failed to fetch method children');
 	            }
