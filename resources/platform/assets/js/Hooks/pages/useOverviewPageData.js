@@ -1,6 +1,12 @@
-// hooks/useOverviewPageData.js
 import { ref } from 'vue';
-import { fetchMethod, fetchMethodChildren, fetchFoundation, fetchCompletedState, getProgressPercentage, fetchUserChallengeProgress } from 'musora-content-services';
+import {
+    fetchMethod,
+    fetchMethodChildren,
+    fetchFoundation,
+    jumpToContinueContent,
+    getProgressPercentage,
+    fetchUserChallengeProgress
+} from 'musora-content-services';
 
 import { useUserStore } from "@stores/user";
 import { useBuildHeader } from '@hooks/useBuildHeader';
@@ -13,15 +19,40 @@ export async function useOverviewPageData(contentType, parentType) {
     const isLoading = ref(true);
 
     const contentId = getContentId();
-    const progressPercent = await getProgressPercentage(contentId); // Await the progress percent
+    const progressPercent = await getProgressPercentage(contentId);
 
     // Initialize the buildHeader hook
     const { buildHeader } = useBuildHeader(progressPercent);
 
+    // Helper to populate data
+    const populateData = async (result, type, childrenKey = 'children') => {
+        if (result) {
+            result[childrenKey] = result[childrenKey]?.map((item, index) => ({
+                ...item,
+                position: index + 1,
+            }));
+
+            data.value = result;
+            data.value.header = buildHeader(type, result, progressPercent);
+            data.value.next_lesson = [];
+
+            try {
+                const nextLesson = await jumpToContinueContent(result.id);
+                if (nextLesson?.next) {
+                    data.value.next_lesson.push(nextLesson.next);
+                }
+            } catch (nextLessonError) {
+                console.error('Error fetching next lesson:', nextLessonError);
+            }
+        } else {
+            throw new Error(`Failed to fetch data for type: ${type}`);
+        }
+    };
+
     try {
-    	if (parentType === 'challenge'){
+        if (parentType === 'challenge') {
             const result = await fetchUserChallengeProgress(contentId);
-            if(result){
+            if (result) {
                 data.value = {
                     children: result.lessons,
                     header: buildHeader('challenge', result.lesson, progressPercent),
@@ -32,43 +63,19 @@ export async function useOverviewPageData(contentType, parentType) {
                     previous_lesson: result.previous_lesson,
                 };
             }
+        } else if (contentType === 'learning-path-level') {
+            const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
+            await populateData(result, contentType, 'levels');
+        } else if (contentType === 'unit') {
+            const result = await fetchFoundation('foundations-2019');
+            await populateData(result, contentType, 'units');
         } else {
-		if (contentType === "learning-path-level") {
-	            const result = await fetchMethod(userStore.brand, `${userStore.brand}-method`);
-	            if (result) {
-	                result.levels = result.levels.map((level, index) => ({
-	                    ...level,
-	                    position: index + 1
-	                }));
-	                data.value = result;
-	                data.value.header = buildHeader(contentType, result, progressPercent);
-	                data.value.children = result.levels;
-	            } else {
-	                throw new Error('Failed to fetch method');
-	            }
-	        } else if (contentType === "unit") {
-	            const result = await fetchFoundation('foundations-2019');
-	            if (result) {
-	                result.units = result.units.map((unit, index) => ({
-	                    ...unit,
-	                    position: index + 1
-	                }));
-	                data.value = result;
-	                data.value.header = buildHeader(contentType, result, progressPercent);
-	                data.value.children = result.units;
-	            } else {
-	                throw new Error('Failed to fetch foundation');
-	            }
-	        } else {
-	            //console.log(contentType);
-	            const result = await fetchMethodChildren(contentId);
-	            if (result) {
-	                data.value = result[0];
-	                data.value.header = buildHeader(contentType, result[0], progressPercent);
-	            } else {
-	                throw new Error('Failed to fetch method children');
-	            }
-	        }
+            const result = await fetchMethodChildren(contentId);
+            if (result && result[0]) {
+                await populateData(result[0], contentType);
+            } else {
+                throw new Error('Failed to fetch method children');
+            }
         }
     } catch (err) {
         error.value = err;
@@ -84,5 +91,4 @@ const getContentId = () => {
     const pathname = window.location.pathname;
     const match = pathname.match(/\/(\d+)\/?$/);
     return match ? match[1] : null;
-}
-
+};

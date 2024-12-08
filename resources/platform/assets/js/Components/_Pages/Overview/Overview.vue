@@ -20,33 +20,31 @@
             :light-mode-logo="headerData?.lightModeLogo"
         />
 
-        <template v-if="!isLoading">
-            <!--
-                BE is still not complete for this - we need the last completed method lesson id for the NextLesson(railcontentId, methodId) function in MCS
-            -->
-           <!-- <div v-if="hasNextLesson" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
-                <div class="tw-w-full tw-p-4 tw-pb-0">
-                    <div class="tw-flex tw-flex-col">
-                        <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
-                            Your Next Lesson...
-                            <i class="fa-solid fa-arrow-right sm:tw-hidden"></i>
-                        </div>
-                        <div class="flex flex-row remove-borders">
-                            <transition appear name="fade">
-                                <ListCatalogue
-                                    :content="nextLesson.data"
-                                    :display-items-as-overview="true"
-                                    :lock-unowned="true"
-                                    :data-user-id="userId"
-                                    :is-admin="isAdmin"
-                                    :is-next-lesson="true"
-                                />
-                            </transition>
-                        </div>
+        <div v-if="nextLesson?.length" class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
+            <div class="tw-w-full tw-p-4 tw-pb-0">
+                <div class="tw-flex tw-flex-col">
+                    <div class="flex flex-row tw-justify-between align-v-center tw-text-[#00101D] dark:tw-text-white tw-text-base sm:tw-text-xl tw-font-bold tw-leading-none tw-font-bebas-neue">
+                        Your Next Lesson...
+                        <i class="fa-solid fa-arrow-right sm:tw-hidden"></i>
+                    </div>
+                    <div class="flex flex-row remove-borders">
+                        <transition appear name="fade">
+                            <ListCatalogue
+                                :content="nextLesson"
+                                :display-items-as-overview="true"
+                                :lock-unowned="true"
+                                :data-user-id="userId"
+                                :is-admin="isAdmin"
+                                :is-next-lesson="true"
+                                :is-loading="isLoading"
+                            />
+                        </transition>
                     </div>
                 </div>
-            </div> -->
-
+            </div>
+        </div>
+        
+        <template v-if="!isLoading">
             <div class="tw-flex tw-flex-col tw-my-[30px]">
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
@@ -153,10 +151,6 @@ const props = defineProps({
         type: Object,
         default: () => {},
     },
-    nextLesson: {
-        type: Object,
-        default: () => {},
-    },
     pageType: {
         type: String,
         default: '',
@@ -177,10 +171,6 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
-    hasNextLesson: {
-        type: Boolean,
-        default: false,
-    },
     parentType: {
         type: String,
         default: '',
@@ -195,6 +185,7 @@ const { isLoading } = storeToRefs(platformStore);
 
 //Refs
 const data = ref(null);
+const nextLesson = ref(null);
 const challengeOverviewContent = ref([]);
 const header = ref(null);
 const error = ref(null);
@@ -325,10 +316,14 @@ onBeforeMount( async () => {
     //Header Data
     header.value = OverviewData.value.header;
 
+    nextLesson.value = OverviewData.value.next_lesson;
+
     isUnlocked.value = OverviewData.value?.is_unlocked;
 
     data.value = OverviewData.value;
 
     platformStore.setLoadingState(OverviewLoading.value);
+
+    //console.log('OverviewData.value', OverviewData.value)
 })
 </script>

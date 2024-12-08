@@ -53,7 +53,7 @@
     <ChallengeLockedModal v-if="isChallengeLockModalOpen" :challenge="lockedChallenge" @close-modal="closeChallengeLockModal" />
 </template>
 <script setup>
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import { useCollectionStore } from "@stores/collection";
