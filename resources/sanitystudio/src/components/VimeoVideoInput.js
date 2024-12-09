@@ -65,7 +65,6 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                     });
             }
         else if (value && videoType === 'youtube-video') {
-            console.log('rox    ', `youtube-duration?id=${value}&brand=${brand}`);
             const url = sanityConfig.appUrl +`/admin/youtube-duration?id=${value}&brand=${brand}`;
             fetch(url, {
                 method: 'GET',
