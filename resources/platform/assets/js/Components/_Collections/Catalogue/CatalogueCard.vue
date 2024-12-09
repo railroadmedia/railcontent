@@ -9,7 +9,7 @@
                 <div
                     class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${itemThumbnail} `"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${itemThumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
                          loading="lazy"

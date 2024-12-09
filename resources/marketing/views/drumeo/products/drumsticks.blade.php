@@ -167,7 +167,7 @@
                         "band" => "Harry Styles"
                         ],
                         [
-                        "img" => "https://www.musora.com/musora-cdn/image/width=500,quality=95/https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2023/04/18004218/2023-03-30-Chad-Smith-Live-151-1.jpg",
+                        "img" => "https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2023/04/18004218/2023-03-30-Chad-Smith-Live-151-1.jpg",
                         "artist" => "Chad Smith",
                         "band" => "Red Hot Chili Peppers"
                         ],
@@ -197,7 +197,7 @@
                         "band" => "The Chainsmokers"
                         ],
                         [
-                        "img" => "https://www.musora.com/musora-cdn/image/width=500,quality=95/https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2022/06/21150547/2022-01-15-COACH-Greyson-AM-116.jpg",
+                        "img" => "https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2022/06/21150547/2022-01-15-COACH-Greyson-AM-116.jpg",
                         "artist" => "Greyson Nekrutman",
                         "band" => "Sepultura"
                         ],
@@ -256,7 +256,7 @@
                                 <img class="h-32 transition-opacity opacity-0"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
-                                    src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/e36ad306-8ba6-4db5-99bc-bd955080a57a-2023-06-21-Vater-Sticks-101-White-Backdrop+(1).jpg"
+                                    src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/e36ad306-8ba6-4db5-99bc-bd955080a57a-2023-06-21-Vater-Sticks-101-White-Backdrop+(1).jpg"
                                     alt="learn playing image"
                                 >
                                 <br>

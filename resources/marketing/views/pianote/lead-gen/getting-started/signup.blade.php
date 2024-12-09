@@ -8,7 +8,7 @@
     <meta name="description" content="Start learning piano the easy and fun way.">
     <meta property="og:description" content="Start learning piano the easy and fun way.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/cdn-cgi/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/getting-started">
 @endsection
 
@@ -45,14 +45,14 @@
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-1/2 text-center lg:text-left">
-                    <img class="h-14 sm:h-18 lg:h-24 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
+                    <img class="h-14 sm:h-18 lg:h-24 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/cdn-cgi/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
                     <h2 class="leading-none"><strong class="font-black">Start learning piano </strong><br>
                         the easy and fun way.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Sign up for 4 FREE play-along lessons</strong></h6>
 
                     <div class="my-3 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 87%;" data-open="trailer">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
+                        <img class="absolute inset-0" src="https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                     </div>
 
                     <p class="hidden lg:inline text-sm">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 hidden sm:block">
-                    <img class="cursor-pointer autoplay-video" data-open="trailer" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
+                    <img class="cursor-pointer autoplay-video" data-open="trailer" src="https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
     </div>
     </div>
     <section class="relative text-center px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-28 pb-6 sm:pb-10 lg:pb-14 bg-cover bg-center" style="background:linear-gradient(to bottom, #EEECEA, #fff);">
-        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[75%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
+        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[75%]" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
         <div class="z-20 relative">
             <h3 class="leading-tight"><strong>Your first week of piano <br class="inline sm:hidden"> lessons - FREE</strong></h3>
             <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">
@@ -129,8 +129,8 @@
                         see if playing the piano is right for you.</strong></span>
             </p>
             <div class="relative cursor-pointer max-w-xl lg:max-w-2xl mx-auto autoplay-video" data-open="demoVid">
-                <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 
             <div class="container max-w-6xl mx-auto">
@@ -138,10 +138,10 @@
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="flex flex-wrap items-start w-full sm:w-1/3 pb-4 sm:pb-0 sm:px-1.5 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson3.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson3.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson3.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson3.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -151,10 +151,10 @@
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/3 pb-4 sm:pb-0 sm:px-1.5 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson4.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson4.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson4.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson4.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -164,10 +164,10 @@
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/3 pb-4 sm:pb-0 sm:px-1.5 mb-4 sm:mb-0 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson5.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson5.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson5.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/lesson5.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -182,7 +182,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFEDEB;">
         <div class="container max-w-5xl mx-auto">
-            <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/cdn-cgi/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
                     <h2 class="mb-3 sm:mb-7"><strong>Don’t practice — PLAY!</strong></h2>
@@ -193,7 +193,7 @@
                         <strong>So we fixed it.</strong><br><br>
                         With Getting Started On The Piano, you’ll never have to practice, because your lessons ARE the practice! Simply press play and follow along with Lisa as you learn to play this beautiful instrument.</p>
                 </div>
-                <img class="h-56 lg:h-80 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="h-56 lg:h-80 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
     </section>
@@ -225,8 +225,8 @@
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <picture>
-                    <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
-                    <img  class="h-14 sm:h-16 lg:h-18 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
+                    <source media="(min-width:768px)" srcset="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
+                    <img  class="h-14 sm:h-16 lg:h-18 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=740,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
                 </picture>
                 <h2 class="my-3 md:my-4 leading-none">
                     <strong>4 days of piano lessons</strong> to show you how easy and fun learning the piano can be.
@@ -250,7 +250,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-md lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-md lg:max-w-5xl lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=1700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/collage.png" alt="collage">
             </div>
         </div>
     </section>

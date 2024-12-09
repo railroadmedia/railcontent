@@ -154,7 +154,7 @@ const formattedFeaturedCoaches = computed(() => {
             description: coach.data.find(c=>c.key === 'short_bio').value,
             primary_cta_text: `Visit ${coach.fields.find(c=>c.key === 'name').value.split(' ')[0]}'s Coach Page`,
             primary_cta_url: coach.url,
-            img: `https://www.musora.com/musora-cdn/image/width=720,quality=95/${coach.data.find(c=>c.key === 'coach_featured_image').value}`
+            img: `https://www.musora.com/cdn-cgi/image/width=720,quality=95/${coach.data.find(c=>c.key === 'coach_featured_image').value}`
         }
     })
 })

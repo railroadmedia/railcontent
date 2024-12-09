@@ -205,7 +205,7 @@
 {{--                                        <div class="-mt-10 mb-6">--}}
 {{--                                            <img class="rounded-full w-[90px] h-[90px] object-cover transition-opacity opacity-0"--}}
 {{--                                                loading="lazy" onload="this.classList.remove('opacity-0')"--}}
-{{--                                                src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />--}}
+{{--                                                src="https://www.musora.com/cdn-cgi/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />--}}
 {{--                                        </div>--}}
                                         <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
                                         <p class="leading-tight"><i>{!! $testimonial['location'] !!}</i></p>

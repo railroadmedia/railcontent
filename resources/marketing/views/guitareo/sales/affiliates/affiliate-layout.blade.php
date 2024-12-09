@@ -9,7 +9,7 @@
 
 @section('share-image')
     @hasSection('url')
-        <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=540,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/trials/@yield('url').jpg" style="display: none;">
+        <meta property="og:image" content="https://www.musora.com/cdn-cgi/image/width=540,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/trials/@yield('url').jpg" style="display: none;">
     @else
         <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/share-image-guitareo.webp"/>
     @endif

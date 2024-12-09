@@ -168,7 +168,7 @@
     ])
 
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center"
-        style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        style="background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(!empty($yamaha))
                 <img class="inline-block h-9 sm:h-12 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/drumeo/membership/redeem/yamaha-logo.png"

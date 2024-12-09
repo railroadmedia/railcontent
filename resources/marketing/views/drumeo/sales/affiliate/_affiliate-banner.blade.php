@@ -17,7 +17,7 @@
                 @isset($img2)
                     <img class="rounded-xl mx-auto mb-3 sm:mb-0 w-36 sm:w-56 lg:w-72" src="{{ $img2 }}">
                 @else
-                    <img class="rounded-full bg-{{ $theme }} border-{{ $theme }} border-4 sm:border-8 mx-auto mb-3 sm:mb-0 w-36 sm:w-56 lg:w-72" src="https://www.musora.com/musora-cdn/image/width=540,quality=95/https://{{ $slug }}.cloudfront.net/sales/trials/@yield('url').jpg">
+                    <img class="rounded-full bg-{{ $theme }} border-{{ $theme }} border-4 sm:border-8 mx-auto mb-3 sm:mb-0 w-36 sm:w-56 lg:w-72" src="https://www.musora.com/cdn-cgi/image/width=540,quality=95/https://{{ $slug }}.cloudfront.net/sales/trials/@yield('url').jpg">
                 @endif
             @endif
             <div class="sm:text-left px-2 sm:pr-0 sm:pl-7 lg:pl-10">

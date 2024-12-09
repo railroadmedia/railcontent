@@ -7,7 +7,7 @@ export default class StudentFocusContentModel extends ContentModel {
             post,
         });
 
-        const fallBackThumb = 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo_fallback_thumb.jpg';
+        const fallBackThumb = 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo_fallback_thumb.jpg';
 
 
         this.card.color_title = this.postInstructor ? this.postInstructor : '';

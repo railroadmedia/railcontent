@@ -5,7 +5,7 @@
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
             <a
-            	:href="isReleased && renderLink && !forceNoLinks ? itemUrl : null" 
+            	:href="isReleased && renderLink && !forceNoLinks ? itemUrl : null"
                 class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3"
                 :class="[
                     item.type === 'song' ? 'tw-max-w-[121px]' : '',
@@ -17,7 +17,7 @@
                     :class="item.type === 'song' ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${mappedData.thumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''

@@ -35,14 +35,14 @@
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center mb-5">
                 <div class="w-full sm:w-7/12 text-center lg:text-left pr-0 sm:pr-6">
-                    <img class="h-14 sm:h-16 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png" alt="logo" fetchpriority="high">
+                    <img class="h-14 sm:h-16 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/cdn-cgi/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png" alt="logo" fetchpriority="high">
                     <h2 class=""><strong>The essential keys</strong></h2>
                     <h3 class="sm:-mt-1 lg:mt-0"> to playing blues piano.</h3>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 4 FREE play-along lessons.</strong></h6>
 
                     <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/header-m.png" alt="header image" fetchpriority="high" />
+                        <img class="absolute inset-0" src="https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/header-m.png" alt="header image" fetchpriority="high" />
                     </div>
 
                     <p class="hidden lg:inline">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="relative bg-contain bg-top" style="padding-bottom: 102%;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/header.png" alt="header image" fetchpriority="high" />
+                        <img class="absolute inset-0" src="https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/header.png" alt="header image" fetchpriority="high" />
                     </div>
                 </div>
             </div>
@@ -116,10 +116,10 @@
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <div class="relative">
                         <picture class="w-1/3 sm:w-full cursor-pointer autoplay-video" data-open="demoVid">
-                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg">
+                            <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg">
                             <img
                                 class=" rounded-xl transition-opacity opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg"
+                                src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg"
                                 alt="grid"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
@@ -131,10 +131,10 @@
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <div class="relative">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg">
                         <img
                             class=" rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -146,10 +146,10 @@
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <div class="relative">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg">
                         <img
                             class=" rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -161,10 +161,10 @@
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <div class="relative">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg">
                         <img
                             class=" rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -180,9 +180,9 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/coach-profile-m.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/coach-profile-m.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
                 <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
@@ -210,7 +210,7 @@
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center justify-center">
                 <div class="text-center w-full sm:w-7/12 lg:w-5/12 mb-7 lg:mb-0">
-                    <img class="h-20 md:h-24 lg:h-32 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="h-20 md:h-24 lg:h-32 transition-all opacity-0" src="https://www.musora.com/cdn-cgi/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h2 class="mt-2 sm:mt-4"><strong>4 play-along lessons </strong></h2>
                     <h3>to get you started with the Blues</h3>
                     <div class="w-full mx-auto sm:mx-0 my-5 sm:my-6">

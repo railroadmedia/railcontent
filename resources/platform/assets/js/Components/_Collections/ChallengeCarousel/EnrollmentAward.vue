@@ -1,6 +1,6 @@
 <template>
     <!-- DESKTOP -->
-    <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=500,quality=95/${desktopBGImage}')` }"
+    <div :style="{ backgroundImage: `url('https://www.musora.com/cdn-cgi/image/width=500,quality=95/${desktopBGImage}')` }"
          class="tw-hidden xl:tw-block tw-relative tw-overflow-hidden tw-text-white tw-rounded-[10px] tw-h-[272px] 3xl:tw-h-[295px] 4xl:tw-h-[330px] tw-bg-cover tw-bg-top tw-py-4 2xl:tw-py-6 3xl:tw-py-5 tw-px-[30px] 2xl:tw-px-[35px] 3xl:tw-px-7" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
         <div v-if="!isAward"  class="tw-absolute tw-inset-0 tw-backdrop-blur-sm tw-bg-[linear-gradient(270deg,_rgba(0,0,0,0.3)_30%,_rgba(0,0,0,0.5)_45.09%,_#000000_100%)] tw-z-[1]"></div>
@@ -36,7 +36,7 @@
                 </div>
                 <!-- Logo -->
                 <div>
-                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
+                    <img :class="isSoloChallenge ? 'tw-mb-[10px] xl:tw-h-[86px] 2xl:tw-h-[99px] 3xl:tw-h-[105px] 4xl:tw-h-[110px]' : 'tw-mb-1 tw-h-[65px]'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} logo`" />
                     <template v-if="isAward">
                         <div class="tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white tw-mt-2">
                             You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
@@ -49,7 +49,7 @@
                     <template v-else-if="isCommunityChallenge">
                         <div class="tw-my-2 tw-flex">
                             <!-- Avatars -->
-                            <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/musora-cdn/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
+                            <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
                         </div>
                         <p class="tw-text-sm tw-line-clamp-2 tw-mb-2">
                             Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.
@@ -71,14 +71,14 @@
             <!-- Right -->
             <div class="tw-flex tw-justify-end" :class="!isAward ? 'tw-flex-1' : 'tw-grow tw-shrink-0'">
                 <div class=" tw-overflow-hidden tw-relative" :class="!isAward ? 'tw-aspect-square 3xl:tw-aspect-video tw-w-[212px] 2xl:tw-w-[225px] 3xl:tw-w-full tw-rounded-[5px]' : 'xl:tw-pr-4 3xl:tw-pr-8 xl:tw-w-[150px] 2xl:tw-w-[200px] 3xl:tw-w-[250px]'">
-                    <img :class="!isAward ? 'tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0' : ''" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnail}`" :alt="`${challengeTitle} Thumbnail`" />
+                    <img :class="!isAward ? 'tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${thumbnail}`" :alt="`${challengeTitle} Thumbnail`" />
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MOBILE -->
-    <div :style="{ backgroundImage: `url('https://www.musora.com/musora-cdn/image/width=400,quality=95/${mobileBGImage}')` }"
+    <div :style="{ backgroundImage: `url('https://www.musora.com/cdn-cgi/image/width=400,quality=95/${mobileBGImage}')` }"
          class="tw-shrink-0 tw-flex xl:tw-hidden tw-relative tw-text-white tw-justify-start tw-items-center tw-rounded-[10px] tw-overflow-hidden tw-w-[330px] tw-h-[430px] lg:tw-w-auto tw-bg-cover tw-bg-center" :class="isAward ? 'tw-border tw-border-[#888888]/20' : ''">
         <!-- Background Overlay -->
         <div v-if="!isAward" class="tw-absolute tw-inset-0 tw-bg-[linear-gradient(180deg,_rgba(0,0,0,0)_46.12%,_rgba(0,0,0,0.7)_65.36%,_#000000_100%)] tw-z-[1]"></div>
@@ -111,9 +111,9 @@
         <div class="tw-absolute tw-z-[2] tw-inset-0 tw-flex tw-items-end">
             <div class="tw-flex tw-flex-col tw-items-center tw-pb-5 tw-px-4 tw-w-full tw-max-w-[320px] tw-mx-auto">
                 <!-- Award -->
-                <img v-if="isAward" class="tw-h-[200px] tw-mb-4" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
+                <img v-if="isAward" class="tw-h-[200px] tw-mb-4" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${thumbnail}`" :alt="`${challengeTitle} Award`" />
                 <!-- Logo -->
-                <img v-else :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} Logo`" />
+                <img v-else :class="isSoloChallenge ? 'tw-h-[107px] tw-mb-[10px]' : 'tw-h-[86px] tw-mb-1'" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" :alt="`${challengeTitle} Logo`" />
                 <template v-if="isAward">
                     <div class="tw-text-center tw-text-sm tw-mb-2 tw-max-w-[510px] tw-text-black dark:tw-text-white">
                         You practiced for a total of <b>{{ minutesPracticed }} minutes</b> and achieved a <b>{{ streak }}-day streak</b> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.
@@ -125,7 +125,7 @@
                 <template v-else-if="isCommunityChallenge">
                     <div class="tw-flex tw-mb-2 3xl:tw-mb-0">
                         <!-- Avatars -->
-                        <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/musora-cdn/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
+                        <div v-for="user in challenge?.enrolled_users?.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-relative tw-overflow-hidden tw-bg-cover tw-bg-center" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/quality=90,width=50/${user.profile_picture_url}')`"></div>
                     </div>
                     <p class="tw-text-sm tw-line-clamp-3 tw-mb-2 tw-text-center">
                         Join <span class="tw-font-bold">{{ userNames }},</span> and <span class="tw-font-bold">{{ totalEnrolled }}</span> other {{ otherText }} who have already enrolled! Runs {{ durationText }}.

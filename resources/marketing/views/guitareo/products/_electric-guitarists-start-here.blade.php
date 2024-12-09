@@ -285,7 +285,7 @@
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
-                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
                         alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
@@ -303,7 +303,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
                                 alt="tiktok icon">
                             <h3 class="mt-2"><strong>105K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
@@ -311,7 +311,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
                                 alt="youtube icon">
                             <h3 class="mt-2"><strong>25M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>
@@ -319,7 +319,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
                                 alt="insta icon">
                             <h3 class="mt-2"><strong>314K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>

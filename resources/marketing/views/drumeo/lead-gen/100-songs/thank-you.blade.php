@@ -57,7 +57,7 @@
             <div class="text-center sm:px-3">
                 <img
                         class="h-14 sm:h-20 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
                         alt="logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -70,7 +70,7 @@
 
                 <img
                         class="h-56 sm:h-80 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
                         alt="logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -95,7 +95,7 @@
                 'title' => 'Change The Tempo',
                 'subtitle' => 'Figure out the hard parts.',
                 'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
+                'imageSrc' => 'https://www.musora.com/cdn-cgi/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
                 'altText' => 'drummer',
             ])
             @endcomponent
@@ -104,8 +104,8 @@
                 'title' => 'popular songs',
                 'subtitle' => ' Play the songs you love.',
                 'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
-                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
-                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
+                'desktopImageSrc' => 'https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
+                'mobileImageSrc' => 'https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
                 'altText' => 'drummer',
             ])
             @endcomponent
@@ -115,7 +115,7 @@
                 'title' => 'LOOP SECTIONS',
                 'subtitle' => 'Woodshed it until you nail it.',
                 'description' => 'Slow down or speed up any section of a song to hear every note.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
+                'imageSrc' => 'https://www.musora.com/cdn-cgi/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
                 'altText' => 'singer',
             ])
             @endcomponent
@@ -124,8 +124,8 @@
                 'title' => 'Remove The Drums',
                 'subtitle' => 'Be the drummer in the band.',
                 'description' => 'Magically remove the original drums to make each song uniquely yours.',
-                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
-                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
+                'desktopImageSrc' => 'https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
+                'mobileImageSrc' => 'https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
                 'altText' => 'drummer',
             ])
             @endcomponent
@@ -134,7 +134,7 @@
                 'title' => 'Perfect Notation',
                 'subtitle' => 'Learn it right the first time.',
                 'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
+                'imageSrc' => 'https://www.musora.com/cdn-cgi/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
                 'altText' => 'note sheets',
             ])
             @endcomponent
@@ -143,7 +143,7 @@
                 'title' => 'On-The-Go',
                 'subtitle' => 'Take your songs with you.',
                 'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
+                'imageSrc' => 'https://www.musora.com/cdn-cgi/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
                 'altText' => 'drummer',
                 'textRight' => true,
             ])

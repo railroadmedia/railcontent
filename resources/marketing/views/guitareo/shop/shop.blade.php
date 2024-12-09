@@ -100,7 +100,7 @@
     </div>
     <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
         <div class="container mx-auto max-w-4xl">
-            <img class="h-28 md:h-32 lazyload" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
+            <img class="h-28 md:h-32 lazyload" src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
 
             <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
                 Test-drive your lessons for 90 days. Zero risk. </h3>

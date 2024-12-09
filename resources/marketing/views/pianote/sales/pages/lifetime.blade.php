@@ -432,7 +432,7 @@
                     <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png');"></div>
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png');"></div>
                             </div>
                         </div>
                     </div>
@@ -482,7 +482,7 @@
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-black top-0 left-0 w-full py-0.5 bg-musora font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     @endif
-                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
+                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

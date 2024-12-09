@@ -15,7 +15,7 @@
                    class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                     <!-- Coach Image -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${cardImage(coach)}`"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${cardImage(coach)}`"
                          class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
                          :alt="`${fullName(coach)} Card`"
                          loading="lazy"
@@ -71,7 +71,7 @@ const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
 
 const cardImage = (coach) => {
-    return `https://www.musora.com/musora-cdn/image/width=300,quality=95/${coach.coach_card_image}`
+    return `https://www.musora.com/cdn-cgi/image/width=300,quality=95/${coach.coach_card_image}`
 }
 
 const fullName = (coach) => {
