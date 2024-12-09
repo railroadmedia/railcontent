@@ -14,6 +14,7 @@ use App\Modules\RailTracker\Services\ContentLastEngagedService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Mailora\Services\MailService;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -187,7 +188,7 @@ class PlaylistsService
         $data = array_merge($sanityInfo ?? [], $assignmentInfo ?? [], $item->toArray());
         // Check if the user needs access
         $permissions = $data['permission_id'] ?? [];
-        $data['need_access'] = !user()->isAdmin() && empty(array_intersect($userPermissions, $data['permission_id'])) && !empty($permissions);
+        $data['need_access'] = !user()->isAdmin() && empty(array_intersect($userPermissions, $data['permission_id'] ?? [])) && !empty($permissions);
 
         if ($data['need_access']) {
             // Define membership checks
@@ -297,6 +298,11 @@ class PlaylistsService
      */
     public function formatPlaylists(array $playlists): array
     {
+        $userIds = \Arr::pluck($playlists,'user_id');
+        $keyedUsers = User::query()
+            ->whereIn('id', $userIds)
+            ->get()
+            ->keyBy('id');
 
         foreach ($playlists as $index => $playlist) {
             $pinned = $playlist->pins()->where('user_id', user()->id)->exists();
@@ -316,6 +322,14 @@ class PlaylistsService
             $playlists[$index]['thumbnail_url'] = $playlists[$index]['thumbnail_url'] ?? $playlists[$index]['first_item_thumbnail_url'] ?? '';
             $playlists[$index]['pinned'] = $pinned;
             $playlists[$index]['is_my_playlist'] = $playlists[$index]['user_id'] == user()->id;
+            if (isset($keyedUsers[$playlist['user_id']])) {
+                $playlistAuthor = $keyedUsers[$playlist['user_id']];
+                $playlists[$index]['user'] = [
+                    'id' => $playlistAuthor['id'],
+                    'display_name' => $playlistAuthor['display_name'],
+                    'fields.profile_picture_image_url' => $playlistAuthor['profile_picture_url'],
+                ];
+            }
         }
 
         return $playlists;
