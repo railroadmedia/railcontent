@@ -25,7 +25,6 @@ return Application::configure(basePath: dirname(__DIR__))
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
         \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
         \Jenssegers\Agent\AgentServiceProvider::class,
-        \Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         \Venturecraft\Revisionable\RevisionableServiceProvider::class,
     ])
     ->withRouting(

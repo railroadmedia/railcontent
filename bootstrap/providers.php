@@ -19,4 +19,5 @@ return [
     App\Providers\AppServiceProvider::class,
     App\Providers\NovaServiceProvider::class,
     App\Modules\DataVersion\ServiceProviders\DataVersionServiceProvider::class,
+    Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
 ];
