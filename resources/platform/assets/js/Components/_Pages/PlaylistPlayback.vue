@@ -267,6 +267,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    videoType: {
+        type: String,
+        default: ''
+    },
 });
 
 const state = reactive({
@@ -379,7 +383,7 @@ const sendProgressTrackerEvent = () => {
     if (progressTracker) {
         progressTracker.send({
             mediaType: 'video',
-            mediaCategory: videoData.value?.video?.type.split('-')[0],
+            mediaCategory: props.videoType?.split('-')[0],
             watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
                 || mediaElementVueInstance.value.currentTime,
             totalDuration: mediaElementVueInstance.value.videoLength
@@ -415,10 +419,9 @@ const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = titl
     chapterEndTime.value = props.totalDuration;
     startLooping.value = loop;
 
-    // TODO FIX THIS VIDEO DATA THINGY
-
+    // TODO TEST LOOPS
     if (loop) {
-        chapterEndTime.value =  videoData.value?.chapters.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.chapter_timecode;
+        chapterEndTime.value =  props.videoChapters.length === index ? props.totalDuration : props.videoChapters[index]?.chapter_timecode;
     }
 
     openSoundslice.value = true;
