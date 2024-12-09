@@ -130,6 +130,7 @@
                 <SoundSlice
                     :user-id="userId"
                     :theme-color="brand"
+                    soundslice-type="song"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
                     :soundslice-slug="soundsliceObject.soundslice_slug"
                     :contentId="contentId"
@@ -152,6 +153,7 @@
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
                     :soundslice-slug="soundsliceObject.soundslice_slug"
+                    soundslice-type="song"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
