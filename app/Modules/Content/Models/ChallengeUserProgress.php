@@ -588,7 +588,8 @@ class ChallengeUserProgress extends Model
         $lessonMetaData = $this->lessons_meta_data;
         $wereAllLessonsCompleted = $this->areAllLessonsCompleted();
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
-            if ($lessonMetaDatum['content_id'] == $lessonId) {
+            // TOD Caleb please test this logic
+            if ($lessonMetaDatum['content_id'] == $lessonId && !$lessonMetaDatum['is_completed']) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
                 $lessonMetaData[$index]['completed_at'] = ($completedTime ??
                     Carbon::parse(Carbon::now()->timezone(UserTimezoneService::getUsersCurrentTimezone())

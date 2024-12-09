@@ -11,18 +11,15 @@ export function useLessonHistoryPageData() {
 
   const fetchLessonData = async (key, { page = 1, limit = 10, sort = '', searchTerm = '' } = {}) => {
     try {
-      // Get IDs based on the key
-      ids.value = await (key === 'inProgress' ? getAllStarted() : getAllCompleted());
-  
       // Fetch lesson data using the retrieved IDs
       const lessonsData = await fetchAll(brand.value, '', {
         page,
         limit,
         sort,
         searchTerm,
-        includedFields: [`railcontent_id in [${ids.value.join(',')}]`],
+        progress: key,
       });
-      
+
       data.value = lessonsData;
     } catch (error) {
       console.error(`Error fetching lesson data for key "${key}":`, error);

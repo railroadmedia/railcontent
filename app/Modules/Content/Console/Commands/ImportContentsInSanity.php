@@ -502,7 +502,18 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
      */
     private function handlePermissions(mixed $result, array $permissions, array &$songs, string $id): array
     {
-        $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id)->get();
+        $forcePermissions =
+            [
+                '367385' => 81,
+                '383627' => 96,
+                '394326' => 101,
+                '412811' => 115
+            ];
+        $contentPermissions = ContentPermissions::with('permissions')->where('content_id', '=', $result->id);
+        if(isset($forcePermissions[$result->id])){
+            $contentPermissions = $contentPermissions->where('permission_id', '=', $forcePermissions[$result->id]);
+        }
+        $contentPermissions = $contentPermissions->get();
         foreach ($contentPermissions as $contentPermission) {
             $name = preg_replace('/[^a-zA-Z0-9_.]/', '', $contentPermission->permissions->name);
             if (isset($permissions['permission_' . strtolower($name)])) {

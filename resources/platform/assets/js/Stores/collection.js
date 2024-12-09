@@ -109,11 +109,6 @@ export const useCollectionStore = defineStore({
                     const sort = this.filter?.sort || '';
                     const searchTerm = this.filter?.searchTerm || '';
 
-                    if (!tabData?.key) {
-                        console.error("Invalid tabData or activeTab key is missing.");
-                        return null;
-                    }
-
                     const { fetchLessonData, data } = useLessonHistoryPageData();
 
                     await fetchLessonData(tabData.key, { page, limit, sort, searchTerm });
@@ -262,8 +257,15 @@ export const useCollectionStore = defineStore({
                 return tab.key === this.filter.activeTab;
             });
 
-            this.filter.activeTab = activeTab ? activeTab.value : (this.tabOptions[0]?.value ?? '');
-            this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
+            if(activeTab) {
+                this.filter.activeTab = activeTab.value;
+                this.tabData[this.filter.activeTab] = { ...activeTab };
+            } else {
+                this.filter.activeTab = this.tabOptions[0].value;
+                this.tabData[this.filter.activeTab] = { ...this.tabOptions[0] };
+            }
+
+
         },
 
         getFilterURLParams() {
