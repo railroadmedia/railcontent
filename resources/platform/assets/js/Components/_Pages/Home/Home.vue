@@ -12,7 +12,7 @@
 
             <!-- Join Header: Pack Only -->
             <StaticHeader
-                v-if="isPackOnlyBoolean"
+                v-if="isPackOrChallengeOnlyBoolean"
                 title="JOIN THE COMMUNITY"
                 cta-text="UPGRADE YOUR MEMBERSHIP"
                 description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
@@ -68,7 +68,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                 v-if="(!isPackOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
+                 v-if="(!isPackOrChallengeOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -106,7 +106,7 @@
                 trackingSection="upcoming-events"
             /> -->
 
-            <template v-if="isPackOnlyBoolean">
+            <template v-if="isPackOrChallengeOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->
                 <HomepageCatalog
                     v-if="courseDataObject.data.length"
@@ -120,7 +120,7 @@
 
                 <!-- Your Packs section : Packs Only -->
                 <HomepageCatalog
-                    v-if="isPackOnlyBoolean"
+                    v-if="isChallengeOnlyBoolean"
                     collection-type="challenge"
                     title="Your Challenges"
                     see-all-label="See All Challenges"
@@ -139,7 +139,7 @@
 
             <!-- Popular Conversation : Packs Only -->
             <PopularConversations
-                v-if="isPackOnlyBoolean && conversationData.length"
+                v-if="isPackOrChallengeOnlyBoolean && conversationData.length"
                 :posts="conversationData"
                 class="tw-mb-8"
             />
@@ -155,7 +155,7 @@
 
             <!-- Stats section -->
             <StatsSection
-                v-if="!isPackOnlyBoolean && !isV2User"
+                v-if="!isPackOrChallengeOnlyBoolean && !isV2User"
                 :accountUrl="accountUrl"
                 :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
                 :nextLearningPathLevel="nextLearningPathLevel"
@@ -212,6 +212,7 @@
 
         // Boolean props
         existsCohortBanner: { type: Boolean, default: false },
+        isChallengeOnly: { type: [Number, Boolean], default: 0 },
         isPackOnly: { type: [Number, Boolean], default: 0 },
         trialSectionRedesign: { type: Boolean, default: false },
         isV2User: { type: Boolean, default: false },
@@ -255,13 +256,23 @@
     });
 
     const showTriggerBanner = computed(() => {
-        if (isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        if (isPackOrChallengeOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
         return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {
       return Boolean(props.isPackOnly);
     });
+
+    const isChallengeOnlyBoolean = computed(() => {
+        console.log(props);
+        return Boolean(props.isChallengeOnly);
+    });
+
+    const isPackOrChallengeOnlyBoolean = computed(() => {
+        return Boolean(props.isPackOnly || props.isChallengeOnly);
+
+    })
 
     const courseDataObject = computed(() => {
         if(!JSON.parse(props.courseData)) return;

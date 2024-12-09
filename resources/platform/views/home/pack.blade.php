@@ -11,6 +11,7 @@
 @section('content')
         <home
             :is-pack-only="{{ $isPackOnly }}"
+            :is-challenge-only="{{ $isChallengeOnly }}"
             account-url="{{ user()->getDashboardUrl() }}"
             content-endpoint="/railcontent/content"
             :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
@@ -25,7 +26,7 @@
                     continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
                     :started-content="{{ $startedContentJson }}"
                 @endif
-            @else 
+            @else
                 calendar-id="{{ $calendarId }}"
                 :carousel="{{ json_encode($carousel) }}"
                 :coach-event="{{ $coachEvent }}"

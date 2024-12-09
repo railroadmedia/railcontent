@@ -363,6 +363,8 @@ class HomePageController extends BaseController
         $userMetrics = $this->getUserMetrics();
 
         return view('home.pack', [
+            "isPackOnly" => $member->isPackOnlyOwner(),
+            "isChallengeOnly" => $member->isChallengeOnlyOwner(),
             "packs" => $packs,
             "courses" => $courses,
             "hotForumTopics" => $hotForumTopics,
