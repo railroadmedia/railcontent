@@ -54,7 +54,7 @@ class UserServiceProvider extends EloquentUserProvider
             $this->internalIdentifierCache[$identifier] = $result;
         }
 
-        return $this->internalIdentifierCache[$identifier];
+        return $this->internalIdentifierCache[$identifier] ?? null;
     }
 
     /**
