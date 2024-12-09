@@ -32,70 +32,37 @@ class ChallengesMetaDataController extends Controller
      */
     public function enrollmentPage(Request $request, $slug, $purchased = false): View
     {
-        // TODO TCH-56 this needs to be updated to pull all data from sanity instead of nova (and the cohort table).
-        // this is the just the first pass so we can start testing enrollment
-        $cohort = $this->cohortService->getCohort($slug);
-        if (!$cohort) {
+        $enrollmentPageData = $this->challengesService->getEnrollmentPageData($slug);
+        if (!$enrollmentPageData) {
             abort(404);
         }
-        $challengeId = $cohort['content_id'];
-        $today = now()->startOfDay()->format('Ymd');
-        $registerButtonUrl = url()->route('challenges.set_start_date', ['id' => $challengeId, 'start_date', $today]);
-        $content = $this->challengesService->getChallengeById($challengeId);
+        $challengeId = $enrollmentPageData['id'];
         $nPackOwners = $this->challengesService->getActiveUsersCount($challengeId);
 
-        $isEnrolled = user() ? ChallengeUserProgress::whereChallengeIdAndUser(
-            $challengeId,
-            user()->id
-        )?->is_active ?? false : false;
-        //$productId = $cohort['product_id'];
-        //$hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
-        // below here is where things need to be refactored
+        $isEnrolled = user() && (ChallengeUserProgress::whereChallengeIdAndUser(
+                $challengeId,
+                user()->id
+            )?->is_active ?? false);
 
-        // TODO TCH-56 this needs to be updated to pull all data from sanity instead of nova (and the cohort table).
-        $enrollmentClosedDate = Carbon::parse($content['enrollment_end_time']);
-        $enrollmentClosed = false; // $enrollmentClosedDate >= Carbon::now();
-        $cohort['is_solo'] = $content['is_solo'] ?? false;
 
-        $cohort['conversation_url'] =
-            $cohort['conversation_thread_id'] ?
-                url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
-        $cohort['timeline_image_url'] =
+        $enrollmentClosedDate = Carbon::parse($enrollmentPageData['enrollment_end_time']);
+        $enrollmentClosed = !$enrollmentPageData['is_solo'] && $enrollmentClosedDate < Carbon::now();
+
+        $enrollmentPageData['conversation_url'] =
+            $enrollmentPageData['conversation_thread_id'] ?
+                url()->route('forums.jump-to-thread', ['threadId' => $enrollmentPageData['conversation_thread_id']]) : '';
+        $enrollmentPageData['timeline_image_url'] =
             config('railcontent.cohort_timeline_image_urls')[brand()]
             ??
             config('railcontent.cohort_timeline_image_urls')['pianote'];
 
-        $lists = $cohort->lists;
-        foreach ($lists as $list) {
-            $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
-        }
-        $cohort->lists = $lists;
-
-        if ($cohort['custom_cohort'] == true) {
-            $view = 'content.cohort-template-mk';
-        } else {
-            $view = 'content.cohort-template';
-        }
-
-        $keysToCopy = [
-            'brand' => 'brand',
-            'dark_mode_logo' => 'dark_mode_logo_url',
-            'light_mode_logo' => 'light_mode_logo_url',
-            'web_url_path' => 'web_url_path',
-            'title' => 'title',
-            'published_on' => 'published_on',
-            'id' => 'id',
-        ];
-        foreach ($keysToCopy as $novaKey => $sanityKey) {
-            $cohort[$novaKey] = $content[$sanityKey];
-        }
+        $view = $enrollmentPageData['custom_cohort'] ? 'content.cohort-template-mk' : 'content.cohort-template';
 
         return view($view, [
             'hasProduct' => $isEnrolled,
             'nPackOwners' => $nPackOwners,
-            'registerButtonUrl' => $registerButtonUrl,
             'brand' => brand(),
-            'cohort' => $cohort,
+            'cohort' => $enrollmentPageData,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
             'purchased' => $purchased,

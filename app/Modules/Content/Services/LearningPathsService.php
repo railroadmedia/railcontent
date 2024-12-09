@@ -5,17 +5,18 @@ namespace App\Modules\Content\Services;
 use App\Models\Brand;
 use App\Models\TrialSection;
 use App\Modules\Brand\Enums\Brand as BrandEnum;
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use Railroad\Railcontent\Services\ContentService;
 
 class LearningPathsService
 {
-    private ContentService $contentService;
 
     public function __construct(
-        ContentService $contentService
-    ) {
-        $this->contentService = $contentService;
+        private ContentService $contentService,
+        private SanityGateway $sanityGateway,
+    ) {;
     }
 
     public function getLearningPaths()
@@ -98,6 +99,11 @@ class LearningPathsService
                 ->first()
                 ->experience_level ?? 0
         );
-        return config('learning.v2.' . $brand . '.' . $user->membership_level)[$experienceLevel] ?? [];
+        $difficultyString = OnboardingSkillLevelEnum::tryFrom($experienceLevel)->name;
+        $document = $this->sanityGateway->getOnboardingCard($brand, $user->membership_level, $difficultyString) ?? [];
+        return [
+            $document['first_content'],
+            $document['second_content'],
+        ];
     }
 }

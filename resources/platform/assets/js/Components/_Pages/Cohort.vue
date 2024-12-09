@@ -308,8 +308,8 @@
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
         light_mode_logo_url: cohort['light_mode_logo'],
-        id: cohort['content_id'],
-        title: cohort['cohort_title'],
+        id: cohort['id'],
+        title: cohort['title'],
     }" />
 </template>
 <script setup>
@@ -379,7 +379,7 @@ const challengeType = computed(() => {
 
 const enroll = async() => {
     try {
-        const enrollUser = await postChallengesEnroll(props.cohort.content_id);
+        const enrollUser = await postChallengesEnroll(props.cohort.id);
         isEnrolled.value = true;
         openChallengeNotificationModal.value = true;
     } catch (e){
@@ -411,11 +411,12 @@ const addOrdinal = (day) =>{
 }
 
 const startDateText = computed(() => {
-    return DateTime.fromSQL(props.cohort['cohort_start_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_start_date']).toFormat('d'))}`;
+    let a = new DateTime(props.cohort['cohort_start_date']).toFormat('MMMM') + ` ${addOrdinal(new DateTime(props.cohort['cohort_start_date']).toFormat('d'))}`;
+    return new DateTime(props.cohort['cohort_start_date']).toFormat('MMMM') + ` ${addOrdinal(new DateTime(props.cohort['cohort_start_date']).toFormat('d'))}`;
 })
 
 const endDateText = computed(() => {
-    return DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('d'))}`;
+    return new DateTime(props.cohort['cohort_end_date']).toFormat('MMMM') + ` ${addOrdinal( new DateTime(props.cohort['cohort_end_date']).toFormat('d'))}`;
 })
 
 const handleGoBack = () => {
@@ -445,12 +446,11 @@ const countdown = () => {
         }
     } else {
         countdownText.value = '';
-        hasEnded.value = true;
+        //hasEnded.value = true;
     }
 }
 
 onBeforeMount(() => {
-    console.log(props.cohort)
     if(props.cohort['enrollment_end_date']){
         countdown();
         setInterval(countdown, 1000);

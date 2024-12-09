@@ -445,6 +445,164 @@ class SanityGateway
         return $assignments;
     }
 
+    /**
+     * @param string $slug - Challenge Slug value
+     * @return array | null - matching challenge document or null
+     */
+    public function getChallengeEnrollmentPageData(string $slug): array | null
+    {
+        $fieldsString = $this->getFieldsString('challenge-part');
+        $query = "*[slug.current == '$slug' && _type == 'challenge']{
+                'id': railcontent_id,
+                headline,
+                subheadline,
+                header_description,
+                'header_image_url': header_image_url.asset->url,
+                cohort_trailer,
+                icon1_title,
+                icon1_copy,
+                icon2_title,
+                icon2_copy,
+                icon3_title,
+                icon3_copy,
+                body_title,
+                body_top_description,
+                'body_image_url' : body_image_url.asset->url,
+                body_logo,
+                body_bottom_description,
+                dropdown_title,
+                bottom_title,
+                bottom_description,
+                product_id,
+                cohort_start_date,
+                cohort_end_date,
+                conversation_thread_id,
+                'icon1_url': icon1_url.asset->url,
+                'icon2_url': icon2_url.asset->url,
+                'icon3_url': icon3_url.asset->url,
+                description_trailer_1,
+                'description_trailer_1_thumb_url': description_trailer_1_thumb_url.asset->url,
+                description_trailer_2,
+                'description_trailer_2_thumb_url': description_trailer_2_thumb_url.asset->url,
+                'demo_background_image_url': demo_background_image_url.asset->url,
+                'demo_desktop_center_image_url': demo_desktop_center_image_url.asset->url,
+                'demo_mobile_center_image_url': demo_mobile_center_image_url.asset->url,
+                demo_title_text,
+                demo_description_text,
+                demo_label_text,
+                demo_trailer,
+                first_day_text,
+                last_day_text,
+                benefit_1,
+                benefit_2,
+                benefit_3,
+                is_product,
+                product_description_header,
+                product_description_body,
+                product_original_price,
+                product_sale_price,
+                'product_image': product_image.asset->url,
+                course_description,
+                course_product_description,
+                get_product_badge,
+                product_cart_link,
+                product_name,
+                product_cart_link_description,
+                custom_cohort,
+                railcontent_id,
+                brand,
+                title,
+                'light_mode_logo': light_mode_logo_url.asset->url,
+                'dark_mode_logo': dark_mode_logo_url.asset->url,
+                'logo_image': logo_image_url.asset->url,
+                'slug': slug->current,
+                'course_id': railcontent_id,
+                'brand_id': brand,
+                'cohort_title': title,
+                'course_url': web_url_path,
+                enrollment_end_time,
+                enrollment_start_time,
+                dropdown,
+                is_solo,
+                published_on,
+                'next_lesson': child[0]->{
+                    $fieldsString
+                }
+        } [0 ... 1]";
+        $document = $this->sanity->fetch($query)[0] ?? null;
+        if ($document) {
+            $document['dropdown'] = $document['dropdown'] ?? [];
+        }
+        return $document;
+    }
+
+    public function getOnboardingCard($brand, $access_level, $difficultyString)
+    {
+        $id = strtolower("onboarding_content_card_" . $brand . '_' . $access_level . '_' . $difficultyString);
+        $fieldsString = $this->getFieldsString(null);
+        $query = "*[_id == '$id' && _type == 'onboarding-content-card']{
+                      description,
+                      access_level,
+                      brand,
+                      experience_level,
+                      'first_content' : {
+                        'header' :first_content.header,
+                        'subheader': first_content.subheader,
+                        'squareImg': first_content.squareImg.asset->url,
+                          'wideImg': first_content.wideImg.asset->url,
+                          'bgImg': first_content.bgImg.asset->url,
+                          'logo': first_content.logo.asset->url,
+                          'content': first_content.content->{
+                            _type,
+                            $fieldsString
+                          }
+                        },
+                      'second_content' : {
+                        'header' :second_content.header,
+                        'subheader': second_content.subheader,
+                        'squareImg': second_content.squareImg.asset->url,
+                          'wideImg': second_content.wideImg.asset->url,
+                          'bgImg': second_content.bgImg.asset->url,
+                          'logo': second_content.logo.asset->url,
+                          'content': second_content.content->{
+                            _type,
+                            $fieldsString
+                          }
+                        },
+        } [0 ... 1]";
+        $document = $this->sanity->fetch($query)[0] ?? null;
+        if (is_null($document)) return $document;
+        foreach(['first_content', 'second_content'] as $key) {
+            $content = $document[$key]['content'];
+            $type = $content['_type'];
+            $document[$key]['content_type'] = $type;
+            $document[$key]['id'] = $content['railcontent_id'];
+            $pageType = match($content['_type']) {
+                'challenge' => 'PackOverview',
+                'workout' => 'Lesson',
+                'course' => 'CourseOverview',
+                'quick-tips' => 'Lesson',
+                'song' => 'Song',
+                default => 'Lesson',
+            };
+            $pageParams = ['id' => $content['railcontent_id']];
+
+            $typesToIncludePageType = ['challenge', 'pack'];
+            if (in_array($type, $typesToIncludePageType)) {
+                $pageParams['type'] = 'Lesson';
+            }
+            if ($type == 'challenge') {
+                $pageParams['isChallenge'] = true;
+            }
+            $document[$key]['button'] = [
+                'content_url' => $content['web_url_path'],
+                'page_type' => $pageType,
+                'page_params' => $pageParams,
+            ];
+        }
+        return $document;
+    }
+
     public function countLessonsAndAssignments($id)
     {
         $fieldsString = $this->getFieldsString('playlist-item');

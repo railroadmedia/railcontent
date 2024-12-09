@@ -34,7 +34,7 @@ class Field
         public ?string $description = null,
         public mixed $initialValue = null,
         //TODO can we do something more for $to? Can at least do some validation that there exists a class with that name, that extends BaseSanityModel
-        public ?string $to = null,
+        public mixed $to = null,
         public FormItem|array $of = [],
         public Group|array|null $group = null,
         public ?array $options = null,
@@ -69,7 +69,9 @@ class Field
         }
         if (!is_null($this->to)) {
             if ($this->to instanceof Reference) {
-                $optional['to'] = [$this->to];
+                $optional['to'] = [$this->to->to];
+            } elseif (is_array($this->to)) {
+                $optional['to'] = $this->to;
             } else {
                 $optional['to'] = ['type' => $this->to];
             }

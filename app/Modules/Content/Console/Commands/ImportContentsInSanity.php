@@ -3,6 +3,9 @@
 namespace App\Modules\Content\Console\Commands;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
+use App\Models\Cohort;
+use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Console\Commands\Data\OnboardingCards;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentHierarchy;
 use App\Modules\Content\Models\ContentInstructor;
@@ -11,6 +14,7 @@ use App\Modules\Content\Models\ContentStyle;
 use App\Modules\Content\Models\Permission;
 use App\Modules\Content\Models\Sanity\Enums\FilterType;
 use App\Modules\Content\Models\Vimeo;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use Carbon\Carbon;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
@@ -19,6 +23,7 @@ use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
+use Modules\Content\Services\ChallengesService;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 
@@ -97,6 +102,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         $instructors = $this->getInstructors($extraData);
 
+
         if ($contentType == "all") {
             $contentTypes = array_merge(
                 $this->specficContentTypesPerBrand[$this->argument('brand')] ?? [],
@@ -115,6 +121,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                     'learning-path-course',
                     'learning-path-level',
                     'learning-path',
+                    'onboarding-card',
                 ],
                 config('railcontent.showTypes')[$this->argument('brand')]
             );
@@ -405,10 +412,20 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $vimeoVideoSourcesDecorator,
         $railcontentURLProvider
     ): void {
-        $results = $this->getContentResults($contentType, $railcontentId);
+        if ($contentType == 'onboarding-card') {
+            $sanityDocuments = $this->importOnboardingCards();
+        } else {
+            $results = $this->getContentResults($contentType, $railcontentId);
 
+
+            $sanityDocuments = $this->mapContentToSanityFormat($results, $extraModels, $extraData, $artists, $permissions, $instructors, $railcontentURLProvider, $vimeoVideos);
+        }
+        if (!$sanityDocuments) {
+            $this->info("No data to import for $contentType");
+            return;
+        }
         $vimeoVideos = [];
-        $sanityDocuments = $this->mapContentToSanityFormat($results, $extraModels, $extraData, $artists, $permissions, $instructors, $railcontentURLProvider, $vimeoVideos);
+
 
         $directory = resource_path() . '/sanitystudio';
         if ($deleteOldDocuments == "true") {
@@ -420,27 +437,29 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             $this->syncVimeoData($vimeoVideos, $vimeoVideoSourcesDecorator, $sanityDocuments);
         }
 
-        $filename2 = $directory . '/contents.ndjson';
+        $contentsFileName = "contents.ndjson";
+        $contentsFilePath = $directory . '/' . $contentsFileName;
+        // Remove existing file before importing
+        $_ = $this->runCliCommand("rm -f $contentsFilePath");
+
         foreach ($sanityDocuments as $result) {
             $newline = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
-            file_put_contents($filename2, $newline, FILE_APPEND);
+            file_put_contents($contentsFilePath, $newline, FILE_APPEND);
         }
 
-        $filename = "contents.ndjson";
         // import into the destination
-        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $filename $destination --replace");
+        $resultCode = $this->runCliCommand("cd $directory && yarn sanity dataset import $contentsFileName $destination --replace");
         if ($resultCode !== self::SUCCESS) {
             $this->error("Failed to import $contentType to $destination. Have you built Sanity Studio using the README instructions?");
         } else {
             $this->info("Dataset import $contentType to $destination complete.");
-
-            // clean up the export file
-            $resultCode = $this->runCliCommand("rm $directory/$filename");
-            if ($resultCode !== self::SUCCESS) {
-                $this->error("Failed to delete $filename");
-            } else {
-                $this->info('Generated file deleted from local storage.');
-            }
+        }
+        // clean up the export file
+        $resultCode = $this->runCliCommand("rm $contentsFilePath");
+        if ($resultCode !== self::SUCCESS) {
+            $this->error("Failed to delete $contentsFileName");
+        } else {
+            $this->info('Generated file deleted from local storage.');
         }
     }
 
@@ -642,6 +661,111 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         }
 
         return $songs;
+    }
+
+    /**
+     * @param mixed  $railcontentChallenge
+     * @param array  $sanityChallenge
+     * @return array
+     */
+    private function handleCohortImport(mixed $railcontentChallenge, array &$sanityChallenge): array
+    {
+        $cohort = Cohort::query()
+            ->where('content_id', $railcontentChallenge->id)
+        ->first();
+        if (!$cohort) {
+            return $sanityChallenge;
+        }
+        $fieldsToCopy = [
+            'headline' => 'string',
+            'subheadline' => 'string',
+            'header_description' => 'string',
+            'cohort_trailer' => 'string',
+            'icon1_title' => 'string',
+            'icon1_copy' => 'string',
+            'icon2_title' => 'string',
+            'icon2_copy' => 'string',
+            'icon3_title' => 'string',
+            'icon3_copy' => 'string',
+            'body_title' => 'string',
+            'body_top_description' => 'string',
+            'body_bottom_description' => 'string',
+            'dropdown_title' => 'string',
+            'bottom_title' => 'string',
+            'bottom_description' => 'string',
+            'product_id' => 'string',
+            'cohort_start_date' => 'datetime',
+            'cohort_end_date' => 'datetime',
+            'conversation_thread_id' => 'int',
+            'description_trailer_1' => 'string',
+            'description_trailer_2' => 'string',
+            'demo_title_text' => 'string',
+            'demo_description_text' => 'string',
+            'demo_label_text' => 'string',
+            'demo_trailer' => 'string',
+            'first_day_text' => 'string',
+            'last_day_text' => 'string',
+            'benefit_1' => 'string',
+            'benefit_2' => 'string',
+            'benefit_3' => 'string',
+            'is_product' => 'bool',
+            'product_description_header' => 'string',
+            'product_description_body' => 'string',
+            'product_original_price' => 'float',
+            'product_sale_price' => 'float',
+            'course_description' => 'string',
+            'course_product_description' => 'string',
+            'get_product_badge' => 'string',
+            'product_cart_link' => 'string',
+            'product_name' => 'string',
+            'product_cart_link_description' => 'string',
+            'custom_cohort' => 'bool',
+            // These are already saved under X_url
+            //'light_mode_logo'=> 'image',
+            //'dark_mode_logo'=> 'image',
+            //'body_logo'=> 'image',
+            'header_image_url'=> 'image',
+            'body_image_url'=> 'image',
+            'icon1_url'=> 'image',
+            'icon2_url'=> 'image',
+            'icon3_url'=> 'image',
+            'description_trailer_1_thumb_url'=> 'image',
+            'description_trailer_2_thumb_url'=> 'image',
+            'demo_background_image_url'=> 'image',
+            'demo_desktop_center_image_url'=> 'image',
+            'demo_mobile_center_image_url'=> 'image',
+            'product_image'=> 'image',
+        ];
+
+        foreach($fieldsToCopy as $field => $type) {
+            if ($type == 'bool') {
+                $sanityChallenge[$field] = ($cohort[$field] == 1);
+            } elseif ($type == 'float') {
+                $sanityChallenge[$field] = floatval($cohort[$field] ?? 0.0);
+            } elseif ($type == 'int') {
+                $sanityChallenge[$field] = intval($cohort[$field] ?? 0);
+            } elseif ($type == 'image') {
+                if (!isset($sanityChallenge[$field]) && isset($cohort[$field])) {
+                    $sanityChallenge[$field] = [
+                        '_type' => 'image',
+                        '_sanityAsset' => 'image@' . $cohort[$field]
+                    ];
+                }
+            } elseif ($type == 'string') {
+                $sanityChallenge[$field] = $cohort[$field];
+            } elseif ($type == 'datetime' && !is_null($cohort[$field])) {
+                $sanityChallenge[$field] =  $this->formatDateForImport($cohort[$field]);
+            }
+        }
+        $lists = $cohort->dropdowns()->get();
+        $sanityChallenge['dropdown'] = [];
+        foreach($lists as $list) {
+            $sanityChallenge['dropdown'][] = [
+                'title' => $list->title,
+                'description' => $list->description,
+            ];
+        }
+        return $sanityChallenge;
     }
 
     private function getContentResults($contentType, $railcontentId)
@@ -932,7 +1056,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             ) && $field['value'] != '') {
                 try {
                     // Attempt to parse and format the date
-                    $sanityDocuments[$field['key']] = Carbon::parse($field['value'])->format('Y-m-d\TH:i:s\Z');
+                    $sanityDocuments[$field['key']] = $this->formatDateForImport($field['value']);
                     $imported = true;
                 } catch (\Exception $e) {
                     $imported = true;
@@ -1090,6 +1214,9 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         $this->handleGenre($extraData, $sanityDocuments, $id);
         $this->handleInstructors($result, $instructors, $sanityDocuments, $id);
         $this->handleChildren($result, $sanityDocuments, $id, $type);
+        if ($result->type == 'challenge') {
+            $sanityDocuments = $this->handleCohortImport($result, $sanityDocuments);
+        }
         if (!$result->total_xp || $result->total_xp == 0) {
             $default = $this->getDefaultTotalXp($result->type, $result->difficulty);
             $sanityDocuments['total_xp'] = (($sanityDocuments['xp'] != 0) ? $sanityDocuments['xp'] : $default) + ($sanityDocuments['assignments_total_xp'] ?? 0) + ($sanityDocuments['children_total_xp'] ?? 0);
@@ -1156,5 +1283,100 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
 
         return ($defaultXPperType != 0) ? $defaultXPperType : $difficultyDefaultXP;
 
+    }
+
+    private function  importOnboardingCards()
+    {
+        $structuredCards = [];
+        $contentIds = [];
+        $cards = config('learning.v2');
+        foreach($cards as $brand => $accessLevels) {
+            foreach($accessLevels as $accessLevel => $difficulties) {
+                foreach($difficulties as $difficulty => $contentTuple) {
+                    $contentIds[] = $contentTuple[0]['id'];
+                    $contentIds[] = $contentTuple[1]['id'];
+                }
+            }
+        }
+        $idsString = implode(',', $contentIds);
+        $query = "*[railcontent_id in [{$idsString}] ]{
+          _id,
+          railcontent_id,
+          web_url_path,
+          _type,
+        }";
+        $sanityGateway = app()->make(SanityGateway::class);
+        $documents = $sanityGateway->sanity->fetch($query);
+        foreach($cards as $brand => $accessLevels) {
+            foreach($accessLevels as $accessLevel => $difficulties) {
+                foreach($difficulties as $difficulty => $contentTuple) {
+                    $difficultyString = OnboardingSkillLevelEnum::tryFrom($difficulty)->name;
+                    $content1Document = null;
+                    $content2Document = null;
+                    foreach($documents as $document) {
+                        if (!is_null($content1Document) && !is_null($content2Document)) {
+                            break;
+                        } elseif ($document['railcontent_id'] == $contentTuple[0]['id']) {
+                            $content1Document = $document;
+                        } elseif ($document['railcontent_id'] == $contentTuple[1]['id']) {
+                            $content2Document = $document;
+                        }
+                    }
+                    if (!$content1Document && !$content2Document) {
+                        continue;
+                    }
+
+                    $structuredCards[] = [
+                        '_type' => 'onboarding-content-card',
+                        '_id' => strtolower('onboarding_content_card_' . $brand . '_' . $accessLevel . '_' . $difficultyString),
+                        'description' => ucfirst($brand) . ' - ' . ucfirst($accessLevel) . ' - ' . $difficultyString,
+                        'brand' => $brand,
+                        'access_level' => $accessLevel,
+                        'experience_level' => $difficultyString,
+                        'first_content' => [
+                            ...$this->getOnboardingCardContentFields($contentTuple[0]),
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content1Document['_id'],
+                                "_weak" => false
+                            ],
+                        ],
+                        'second_content' => [
+                            ...$this->getOnboardingCardContentFields($contentTuple[1]),
+                            'content' => [
+                                "_type" => "reference",
+                                "_ref"  => $content2Document['_id'],
+                                "_weak" => false
+                            ],
+                        ],
+                    ];
+                }
+            }
+        }
+        return $structuredCards;
+    }
+
+    private function getOnboardingCardContentFields($cardContent)
+    {
+        $fields = ['header', 'subheader'];
+        $imageFields = ['logo', 'bgImg', 'wideImg', 'squareImg'];
+        $output = [];
+        foreach($fields as $field) {
+            $output[$field] = $cardContent[$field] ?? null;
+        }
+        foreach($imageFields as $imageField) {
+            if (isset($cardContent[$imageField])) {
+                $output[$imageField] = [
+                    '_type' => 'image',
+                    '_sanityAsset' => 'image@' . $cardContent[$imageField]
+                ];
+            }
+        }
+        return $output;
+    }
+
+    private function formatDateForImport($date) : string
+    {
+        return Carbon::parse($date)->toISOString();
     }
 }

@@ -79,6 +79,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Content\Models\Sanity\OnboardingContentCard;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
@@ -94,7 +95,6 @@ class SanityStudioCMSController extends BaseController
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
         $token = env('SANITY_API_TOKEN_RW');
-
         // publishing workspace
         $types = [
             (new Challenge())->toArray(),
@@ -162,7 +162,7 @@ class SanityStudioCMSController extends BaseController
             (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),
-            (new CatalogMetadata())->toArray(),
+            (new OnboardingContentCard())->toArray(),
         ];
 
         $publishing = [

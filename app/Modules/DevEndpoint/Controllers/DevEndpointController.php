@@ -4,12 +4,15 @@ namespace App\Modules\DevEndpoint\Controllers;
 
 use Algolia\AlgoliaSearch\Api\SearchClient;
 use App\Models\Cohort;
+use App\Models\CohortDropdown;
+use App\Models\CohortList;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -49,53 +52,24 @@ class DevEndpointController extends Controller
     ) {
     }
 
+
     public function handleRequest(Request $request, $arg1 = null)
     {
-        // TODO BK NOTE:
-        // testing out the native client
-        $client = SearchClient::create(
-            config('algolia.app_id'),
-            config('algolia.api_key')
-        );
-        $response = $client->searchSingleIndex('staging_sanity_all', ['query' => 'foo']);
-        dd($response);
-
-
-        // $searchClient = SearchClient::create(config('algolia.app_id'),config('algolia.api_key'));
-        //
-        // $searchResponse = $searchClient->searchSingleIndex(
-        //     config('algolia.all_index_name'),
-        //     ['query' => 'nirvana'],
-        // );
-
-        $search = new AlgoliaSearchService();
-        // $searchResponse = $search->search('nirvana -jazz');
-        // $searchResponse = $search->search('nirvana');
-
-        // $searchResponse = $search->search((new SearchParameters($search, 'nirvana -jazz'))->withOptions(advancedSyntax: true)
-        //     ->onlyForType(DocumentType::Song, DocumentType::QuickTips, DocumentType::Challenge));
-        $searchParams = new SearchParameters($search, 'song');
-        $searchParams->withOptions(advancedSyntax: true);
-
-        $searchResponse = $search->search($searchParams);
-
-        // $searchResponse = $searchClient->searchSingleIndex(
-        //     ['requests' => [
-        //         ['indexName' => config('algolia.index_name'), 'query' => 'nirvana']
-        //     ]],
-        // );
-
-//         $test = new SearchParameters($search, 'nirvana');
-//         $test->onlyForType(DocumentType::Song, DocumentType::QuickTips, DocumentType::Challenge);
-//         // $test->filters = ['(_type:song OR _type:quick-tips OR _type:lesson)'];
-//
-// $searchResponse = $search->search($test);
-        dd($searchResponse);
-
         if ($arg1 == 'challenges') {
             return $this->handleChallengesEndpoints($request);
         }
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
+    }
+
+    private function runArtisanCommand()
+    {
+        return 'We did not run anything but you can use this to debug commands';
+        \Artisan::call('sanity:import-content', [
+            '--id' => 402199,
+            'destination' => 'development',
+            'type' => 'challenge',
+        ]);
+        return '';
     }
 
     private function handleChallengesEndpoints($request): string
@@ -202,126 +176,6 @@ class DevEndpointController extends Controller
             );
         }
     }
-
-    private function testStreakData($challengeId)
-    {
-        $userId = 631736;
-        $data = [];
-        $startDate = '20241010';
-        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-        $this->setContentCompleted($challengeId);
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-
-        $progressData = $userProgress->getStreakCurrentData();
-        $data[] = $progressData;
-        for ($i = 0; $i < 8; $i++) {
-            $userProgress = $this->setUserProgressBackDays($userProgress);
-            $progressData = $userProgress->getStreakCurrentData();
-            $data[] = $progressData;
-        }
-
-        //        $startDate = '20241011';
-        //        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-        //        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-        //        $progressData = $userProgress->getStreakCurrentData();
-        //        $data[] = $progressData;
-
-        return $data;
-    }
-
-    private function setUserProgressBackDays($userProgress, int $days = 1)
-    {
-        $oStartDate = Carbon::parse($userProgress->start_date);
-        $oStartDate = $oStartDate->subDays($days);
-        $oLessonData = $userProgress->lessons_meta_data;
-        $userProgress->start_date = $oStartDate->toISOString();
-        foreach ($oLessonData as $index => $lessonDatum) {
-            $oUnlockDate = Carbon::parse($lessonDatum['unlock_date']);
-            $oUnlockDate = $oUnlockDate->subDays($days);
-            $oLessonData[$index]['unlock_date'] = $oUnlockDate->toISOString();
-            if (!is_null($lessonDatum['completed_at'])) {
-                $oCompletedDate = Carbon::parse($lessonDatum['completed_at']);
-                $oCompletedDate = $oCompletedDate->subDays($days);
-                $oLessonData[$index]['completed_at'] = $oCompletedDate->toISOString();
-            }
-        }
-        $userProgress->lessons_meta_data = $oLessonData;
-        $userProgress->save();
-        return $userProgress;
-    }
-
-    private function setContentCompleted($challengeId)
-    {
-        $data = [
-//            755987 => [
-//                '402542' => [
-//                    'is_completed' => true,
-//                    'seconds_practiced' => 8,
-//                ],
-//                '402314' => [
-//                    'is_completed' => true,
-//                    'seconds_practiced' => 3,
-//                ],
-//            ],
-            631736 => [
-                '402542' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 8,
-                ],
-                '402314' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 10,
-                ],
-                '402316' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402318' => [
-                    'is_completed' => false,
-                    'seconds_practiced' => 1000,
-                ],
-                '402320' => [
-                    'is_completed' => false,
-                    'seconds_practiced' => 1000,
-                ],
-                '402322' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402324' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402326' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402328' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-            ],
-        ];
-
-        foreach ($data as $userId => $lessons) {
-            $challengeProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-            foreach ($lessons as $lessonId => $lesson) {
-                $challengeProgress->updateLessonsProgress(
-                    $lessonId,
-                    $lesson['is_completed'],
-                    $lesson['seconds_practiced']
-                );
-            }
-        }
-    }
-
-    private function unlockChallenge($challengeId, $userId)
-    {
-        $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-        $progressData->is_locked = false;
-        $progressData->save();
-    }
-
 
     private function testSanity()
     {

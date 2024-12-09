@@ -3,12 +3,16 @@
 namespace App\Modules\Content\Services\V1;
 
 use App\Modules\Content\ApiGateways\SanityGateway;
+use App\Modules\Content\Enums\ProgressState;
+use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Services\ContentProgressService;
 use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use App\Modules\Content\Services\ChallengesAwardService;
 use App\Modules\Content\Services\ChallengesService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 
 class CarouselServiceV1
 {
@@ -16,7 +20,7 @@ class CarouselServiceV1
         private ChallengesService $challengesService,
         private ChallengesAwardService $challengesAwardService,
         private LearningPathsService $learningPathsService,
-        private SanityGateway $sanity
+        private SanityGateway $sanity,
     ) {
     }
 
@@ -24,20 +28,17 @@ class CarouselServiceV1
     {
         $user = user();
 
-        // TODO: update challenge cards to match schema for Sanity and FE/MA
-
-        // TODO TCH-112 - bundle import for challenges from sanity
-
-        // TODO: fetch onboarding recommendations from Sanity
-        // TODO: remove if the user has started the lesson
         $onboardingCardData = $this->learningPathsService->getNewLearningPaths(boolval(FeatureFlagging::branch('homepage-v2', user())));
+        $unfinishedOnboardingCards = [];
         foreach ($onboardingCardData as $index => $onboardingCardDatum) {
             $onboardingCardData[$index]['show_everywhere'] = false;
             $onboardingCardData[$index]['type'] = 'onboarding';
-            if ($onboardingCardDatum['content_type'] == 'challenge') {
-                $onboardingCardData[$index]['button']['page_params']['isChallenge'] = true;
+            $progress = ContentUserProgress::getState($onboardingCardDatum['id'], $user->id);
+            if ($progress->state == ProgressState::NotStarted) {
+                $unfinishedOnboardingCards[] = $onboardingCardData[$index];
             }
         }
+
 
         // all badges from the last day
         $badges = $user->challengeProgress()
@@ -52,6 +53,7 @@ class CarouselServiceV1
             ->brand($brand)
             ->community()
             ->active()
+            ->locked()
             ->where('updated_at', '>', Carbon::now()->subDays(30))
             ->orderBy('updated_at', 'desc')
             ->take(1)
@@ -62,6 +64,7 @@ class CarouselServiceV1
             ->brand($brand)
             ->active()
             ->solo()
+            ->locked()
             ->where('updated_at', '>', Carbon::now()->subDays(30))
             ->orderBy('updated_at', 'desc')
             ->take(3)
@@ -94,7 +97,7 @@ class CarouselServiceV1
             ... $this->formatChallengeAwardData($badges, $allChallengeMetaData),
             ... $this->formatChallengeData($communityProgresses, $allChallengeMetaData, 'active-community-challenge'),
             ... $this->formatChallengeData($soloProgresses, $allChallengeMetaData, 'active-solo-challenge'),
-            ... $onboardingCardData,
+            ... $unfinishedOnboardingCards,
         ];
         if ($challengeRecommendationCard) {
             $compiledCardData[] = $challengeRecommendationCard;
@@ -107,7 +110,6 @@ class CarouselServiceV1
     {
         $compiledCardData = [];
         foreach($userProgresses as $userProgress) {
-            $id = $userProgress['content_id'] ?? $userProgress['id'];
             $challengeMetaDatum = $challengeMetaData[$userProgress->content_id];
             if ($challengeMetaDatum) {
                 $compiledCardData[] = [

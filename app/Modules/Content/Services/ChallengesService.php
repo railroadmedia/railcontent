@@ -176,7 +176,7 @@ class ChallengesService
                 'start_date' => $startDate,
                 'is_locked' => $isLocked,
                 'lessons_meta_data' => $lessonMetaData,
-                'is_active' => true,
+                'is_active' => $isLocked,
                 'is_solo' => $isSolo,
             ]);
         return $challengeUserProgress;
@@ -492,6 +492,16 @@ class ChallengesService
     public function getChallengeById($challengeId): array|null
     {
         return $this->sanityGateway->getByRailContentId($challengeId, 'challenge');
+    }
+
+    /**
+     * Get enrollment Page information from Sanity by slug
+     * @param $slug
+     * @return array | null
+     */
+    public function getEnrollmentPageData($slug) : array | null
+    {
+        return $this->sanityGateway->getChallengeEnrollmentPageData($slug);
     }
 
     /**
