@@ -133,7 +133,7 @@
                 </template>
                 <div v-else class="tw-text-sm tw-font-bold tw-mb-5">{{ numberOfLessons }} Lessons <span class="tw-mx-1 tw-text-base tw-leading-none">·</span> {{ difficulty }}</div>
                 <!-- CTA -->
-                <MuButton :variant="ctaObj.type" :class="ctaObj.style" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
+                <MuButton :variant="ctaObj.type" :class="`${ctaObj.style} tw-max-w-[320px] tw-w-full`" :is-link="ctaObj.url !== undefined" :href="ctaObj.url || ''" @click="ctaObj.action">
                     <svg v-if="ctaObj.text === 'Learn More'" class="tw-w-4 tw-h-4 tw-mr-1" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
