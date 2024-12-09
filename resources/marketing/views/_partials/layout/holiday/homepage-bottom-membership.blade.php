@@ -9,7 +9,7 @@
                             <div class=" inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
                                 <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                     <div class="front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                        <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $logo }}"></div>
+                                        <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/cdn-cgi/image/width=850,quality=95/{{ $logo }}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                         <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="border-2 border-[#FFAC00] front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-cover bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-cover bg-cover lazyload" data-bg="https://www.musora.com/cdn-cgi/image/width=460,quality=95/{{ $bonus['image'] }}"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -59,9 +59,9 @@
                 @endforeach
                 @if($theme === 'drumeo')
                     <div class="grid md:grid-cols-3 lg:px-16 gap-4">
-                        <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-included.jpg" alt="pianote included" />
-                        <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-included.jpg" alt="guitareo included" />
-                        <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-included.jpg" alt="singeo included" />
+                        <img class="rounded-xl" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-included.jpg" alt="pianote included" />
+                        <img class="rounded-xl" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-included.jpg" alt="guitareo included" />
+                        <img class="rounded-xl" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-included.jpg" alt="singeo included" />
                     </div>
                 @endif
                 {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}

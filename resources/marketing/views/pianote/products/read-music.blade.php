@@ -880,7 +880,7 @@
             <div class="-mt-14 sm:-mt-20 lg:-mt-28 mb-7">
                 <img class="block h-20 sm:h-24 mx-auto animated infinite bounce slower transition-opacity opacity-0"
                     loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Important_Icon.svg"
+                    src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Important_Icon.svg"
                     alt="important icon">
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
@@ -912,7 +912,7 @@
                     loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                     style="width: 130%;transform: translate(-44%, -7%);"
-                    src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
                     alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
 

@@ -20,6 +20,6 @@
         @endif
         <h6 class="leading-tight mb-4">{!! $text !!}</h6>
     </div>
-    <div class="inset-0 inline-block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $bg }}');"></div>
-    <div class="inset-0 hidden sm:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/{{ $bg }}');"></div>
+    <div class="inset-0 inline-block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=800,quality=95/{{ $bg }}');"></div>
+    <div class="inset-0 hidden sm:inline-block absolute bg-center bg-cover z-0" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=2000,quality=95/{{ $bg }}');"></div>
 </header>

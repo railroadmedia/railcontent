@@ -5,7 +5,7 @@
       <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex">
         <div class="tw-relative">
-          <img class="tw-rounded-lg tw-w-full" :src="`https://www.musora.com/musora-cdn/image/fit=cover,width=320,height=180,quality=95/${content.image}`" />
+          <img class="tw-rounded-lg tw-w-full" :src="`https://www.musora.com/cdn-cgi/image/fit=cover,width=320,height=180,quality=95/${content.image}`" />
         </div>
       </a>
 

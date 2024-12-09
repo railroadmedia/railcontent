@@ -7,10 +7,10 @@
 
 @section('final')
     {{-- Guitar Quest: Start Here --}}
-    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/order-background.jpg')">
+    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url('https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/order-background.jpg')">
         <div class="max-w-screen-xl m-auto px-6 flex">
             <div class="w-full m-auto text-white text-center lg:w-2/3">
-                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="400px" class="m-auto block mb-10">
+                <img src="https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="400px" class="m-auto block mb-10">
                 <h2 class="uppercase text-3xl font-bebas sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">

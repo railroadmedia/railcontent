@@ -14,7 +14,7 @@
                 <div
                     :class="`tw-relative tw-overflow-hidden ${isGroupedView ? 'tw-rounded-[9px]' : 'tw-rounded-[5px] sm:tw-rounded-[9px]'} tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-square`">
                     <!-- Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
                         class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-aspect-square" loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')">
 

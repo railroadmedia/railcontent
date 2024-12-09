@@ -1,14 +1,14 @@
 <template>
     <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[360px] tw-flex tw-items-center">
         <!-- BG Image -->
-        <img src="https://www.musora.com/musora-cdn/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png"
+        <img src="https://www.musora.com/cdn-cgi/image/width=1000/https://musora-web-platform.s3.amazonaws.com/stc/SupportHeader.png"
              class="tw-transition-opacity tw-absolute tw-top-0 tw-left-0 tw-object-cover tw-object-top tw-h-full tw-w-full"
              loading="lazy"
              onload="this.classList.remove('tw-opacity-0')"
         >
         <section class="tw-z-10 tw-max-w-screen-lg tw-w-full tw-mx-auto tw-flex tw-flex-col md:tw-flex-row tw-items-center">
             <!-- Instrument Image -->
-            <img src="https://www.musora.com/musora-cdn/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png"
+            <img src="https://www.musora.com/cdn-cgi/image/width=300/https://musora-web-platform.s3.amazonaws.com/stc/instruments.png"
                  title="Image of musical instruments"
                  class="tw-w-[250px] tw-h-[250px] tw-flex-shrink-0 sm:tw-mr-8 tw-mb-4 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
                  loading="lazy"

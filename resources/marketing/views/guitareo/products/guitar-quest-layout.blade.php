@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.guitareo.com/guitar-quest"/>
     <meta property="og:title" content="GuitarQuest | Your Guitar Journey Starts Here"/>
     <meta property="og:description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/share-image.png"/>
+    <meta property="og:image" content="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/share-image.png"/>
 @stop()
 
 @section('styles')
@@ -72,7 +72,7 @@
     {{--    x-data="{ atElement: 'your_quest' }"--}}
     {{--    @scroll.window="atElement = document.querySelector('#your_way').getBoundingClientRect().top <= 70 ? 'your_way' : (document.querySelector('#your_teacher').getBoundingClientRect().top <= 70 ? 'your_teacher': (document.querySelector('#your_skills').getBoundingClientRect().top <= 70 ? 'your_skills' : (document.querySelector('#your_map').getBoundingClientRect().top <= 70 ? 'your_map' : 'your_quest')))">--}}
     {{--    <a class="block mr-3 sm:mr-6 md:mr-0 md:flex-shrink-0" href="/guitar-quest" title="Goes to Guitar Quest homepage">--}}
-    {{--        <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="170" alt="Guitar Quest Logo">--}}
+    {{--        <img src="https://www.musora.com/cdn-cgi/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="170" alt="Guitar Quest Logo">--}}
     {{--    </a>--}}
     {{--    <ul class="flex items-center text-center uppercase m-0 px-3 list-none font-primary font-semibold hidden lg:inline-flex">--}}
     {{--        <li class="px-3">--}}
@@ -152,7 +152,7 @@
                 <div class="max-w-screen-xl mx-auto px-6 flex relative w-full">
                     <!-- Rob Scallon Image -->
                     <div class="lg:w-1/3 hidden lg:inline-flex">
-                        <img src="https://www.musora.com/musora-cdn/image/width=730,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-header.png" width="730px" class="absolute max-w-none" style="top: -435px; left: -120px;" alt="Rob Scallon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=730,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-header.png" width="730px" class="absolute max-w-none" style="top: -435px; left: -120px;" alt="Rob Scallon">
                     </div>
                     <!-- Content -->
                     <div class="w-full lg:w-2/3 z-10">
@@ -255,7 +255,7 @@
 
         <!-- Your Map Section -->
         {{-- Guitar Quest: Your Map --}}
-        <section id="your_map" class="py-24 relative md:py-28" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg'); background-color: #000718;">
+        <section id="your_map" class="py-24 relative md:py-28" style="background-image: url('https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg'); background-color: #000718;">
             <div class="max-w-screen-xl m-auto px-6 flex text-center mb-6">
                 <div class="w-full m-auto text-white sm:w-3/4 lg:w-1/2">
                     <h2 class="uppercase font-bebas text-5xl md:text-6xl">
@@ -280,7 +280,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:serif="http://www.serif.com/" width="100%" height="100%" viewBox="0 0 1287 1125" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <defs>
         <pattern id="levelOneImage" x="0" y="0" patternUnits="userSpaceOnUse" height="1" width="1">
-            <image x="0" y="0" xlinkx-bind:href="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png"></image>
+            <image x="0" y="0" xlinkx-bind:href="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png"></image>
         </pattern>
     </defs>
                         <g transform="matrix(1,0,0,1,-4607.46,-4263.31)">
@@ -2546,13 +2546,13 @@
                                         <div id="desktop-level-1"
                                             x-on:click.prevent="levelModalOpen = 1"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelOneHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelOneStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2574,13 +2574,13 @@
                                         <div id="desktop-level-2"
                                             x-on:click.prevent="levelModalOpen = 2"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelTwoHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelTwoStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2602,13 +2602,13 @@
                                         <div id="desktop-level-3"
                                             x-on:click.prevent="levelModalOpen = 3"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelThreeHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelThreeStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2630,13 +2630,13 @@
                                         <div id="desktop-level-4"
                                             x-on:click.prevent="levelModalOpen = 4"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelFourHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelFourStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2658,13 +2658,13 @@
                                         <div id="desktop-level-5"
                                             x-on:click.prevent="levelModalOpen = 5"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a x-bind:href="levelFiveHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelFiveStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2696,13 +2696,13 @@
                                         <div id="desktop-level-6"
                                             x-on:click.prevent="levelModalOpen = 6"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelSixHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelSixStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2724,13 +2724,13 @@
                                         <div id="desktop-level-7"
                                             x-on:click.prevent="levelModalOpen = 7"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelSevenHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelSevenStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2752,13 +2752,13 @@
                                         <div id="desktop-level-8"
                                             x-on:click.prevent="levelModalOpen = 8"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelEightHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelEightStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -2780,13 +2780,13 @@
                                         <div id="desktop-level-9"
                                             x-on:click.prevent="levelModalOpen = 9"
                                             class="map-badge"
-                                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')">
+                                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')">
                                         </div>
                                         <template x-if="levelMap === true">
                                             <a  x-bind:href="levelNineHref"
                                                 class="soft-block map-badge"
                                                 x-bind:class="{ 'completed-badge': levelNineStatus === 'completed' }"
-                                                style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')"
+                                                style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')"
                                             ></a>
                                         </template>
                                     </foreignObject>
@@ -3896,13 +3896,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 1"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelOneHref"
                             class="block map-badge bg-goldenrod"
                             x-bind:class="{ 'completed-badge': levelOneStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png')"
                         >
                         </a>
                     </template>
@@ -3926,13 +3926,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 2"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelTwoHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelTwoStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png')"
                         >
                         </a>
                     </template>
@@ -4651,13 +4651,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 3"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelThreeHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelThreeStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png')"
                         >
                         </a>
                     </template>
@@ -4681,13 +4681,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 4"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelFourHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelFourStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png')"
                         >
                         </a>
                     </template>
@@ -5271,13 +5271,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 5"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelFiveHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelFiveStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png')"
                         >
                         </a>
                     </template>
@@ -5866,13 +5866,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 6"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelSixHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelSixStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png')"
                         >
                         </a>
                     </template>
@@ -5896,13 +5896,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 7"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelSevenHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelSevenStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png')"
                         >
                         </a>
                     </template>
@@ -6471,13 +6471,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 8"
                         class="block map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelEightHref"
                             class="map-badge"
                             x-bind:class="{ 'completed-badge': levelEightStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png')"
                         >
                         </a>
                     </template>
@@ -6501,13 +6501,13 @@
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 9"
                         class="map-badge"
-                        style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')">
+                        style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelNineHref"
                             class="block map-badge"
                             x-bind:class="{ 'completed-badge': levelNineStatus === 'completed' }"
-                            style="background-image: url('https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')"
+                            style="background-image: url('https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png')"
                         >
                         </a>
                     </template>
@@ -6712,7 +6712,7 @@
                         <div x-show="levelModalOpen === 1"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-1-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-1-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 10 Challenges</h4>
                                 <p class="text-sm">There’s a concert going on RIGHT NOW but the guitarist didn’t show. And they’re turning to you. Just learn these chords… You’ll get a simple crash course so you can fill in for the show (even though you’ve never played guitar before).</p>
@@ -6735,7 +6735,7 @@
                         <div x-show="levelModalOpen === 2"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-2-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-2-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">8 Videos // 9 Challenges</h4>
                                 <p class="text-sm">You don't want the rest of your band to know that you don't play guitar — and there's a music video shoot coming up soon. So you’re going to prepare with a secret guitar lesson in a secret location, where you'll learn the absolute basics and how to make it seem like you've been playing for a long time.</p>
@@ -6757,7 +6757,7 @@
                         <div x-show="levelModalOpen === 3"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-3-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-3-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 13 Challenges</h4>
                                 <p class="text-sm">It's time for the new music video — and if you can quickly learn the song before the band shows up, no one will ever notice that you don't actually play guitar. You've got this — with some basic strumming and easy new chords.</p>
@@ -6783,7 +6783,7 @@
                         <div x-show="levelModalOpen === 4"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-4-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-4-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 12 Challenges</h4>
                                 <p class="text-sm">The label needs more songs, so you’re heading into the mountains with an acoustic guitar to explore your creative side. But when you finally get settled around the campfire, a strange bearded man comes out of the woods and demands you play one of his songs. Oh, and he’s carrying an axe!</p>
@@ -6808,7 +6808,7 @@
                         <div x-show="levelModalOpen === 5"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-5-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-5-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">12 Videos // 6 Challenges</h4>
                                 <p class="text-sm">Your band is exploding in popularity and you've decided to immediately sell out and play commercial jingles while the iron is hot. It's time for you to double-down on basic guitar techniques that'll let you play catchier tunes and add more color to your playing.</p>
@@ -6827,7 +6827,7 @@
                         <div x-show="levelModalOpen === 6"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-6-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-6-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 7 Challenges</h4>
                                 <p class="text-sm">After selling out, the band needs to re-establish itself for the diehard fans — and what better way than a punk show! Your audience will expect something hardcore, so it's time for you to get familiar with the fretboard and play some power chords!</p>
@@ -6847,7 +6847,7 @@
                         <div x-show="levelModalOpen === 7"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-7-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-7-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">7 Videos // 11 Challenges</h4>
                                 <p class="text-sm">You're in the studio recording a song, but your 'Post-Alaskan Indie Folk' band isn't very productive. There are some elements recorded, but you REALLY need to fill in the gaps and finish the song while they’re gone. It needs to be done today. It’s your time to shine!</p>
@@ -6871,7 +6871,7 @@
                         <div x-show="levelModalOpen === 8"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-8-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-8-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 15 Challenges</h4>
                                 <p class="text-sm">The band is growing tired of writing music. “Let’s just play covers!” You’ve got some skills, but a new challenge awaits: how do you learn how to play ANY song on the guitar… fast?</p>
@@ -6899,7 +6899,7 @@
                         <div x-show="levelModalOpen === 9"
                             x-on:click.stop
                             class="container my-auto max-w-xl overflow-hidden rounded-2xl bg-white font-primary text-gray-700">
-                            <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-9-0.png" />
+                            <img src="https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/Guitar-Quest-9-0.png" />
                             <div class="p-6">
                                 <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">10 Videos // 10 Challenges</h4>
                                 <p class="text-sm">Here's the final song. The final boss. It's everything you've learned so far in ONE high energy tune — and it's so satisfying to pull off. If you can muster up the skill and determination to play this, you've completed your GuitarQuest!</p>
@@ -6940,36 +6940,36 @@
 
         <!-- Your Skills Section -->
         {{-- Guitar Quest: Your Skills Section --}}
-        <section id="your_skills" class="py-28 bg-top bg-cover" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/6-bullets-background.jpg')">
+        <section id="your_skills" class="py-28 bg-top bg-cover" style="background-image: url('https://www.musora.com/cdn-cgi/image/width=1280,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/6-bullets-background.jpg')">
             <div class="max-w-screen-xl m-auto px-6 flex text-white flex-wrap md:flex-no-wrap">
                 <div class="text-center flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                        <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-playing-first-song.svg" width="45px" class="m-auto mb-2" alt="Note icon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-playing-first-song.svg" width="45px" class="m-auto mb-2" alt="Note icon">
                         <h3 class="font-bebas uppercase text-3xl" alt="play your first song icon">Play Your First Song</h3>
                         <p class="font-semibold md:text-lg">If you can walk and talk, then you can do this way sooner than you’d think. We promise!</p>
                     </div>
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                        <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-campfire-songs.svg" width="45px" class="m-auto mb-2" alt="play campfire songs icon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-campfire-songs.svg" width="45px" class="m-auto mb-2" alt="play campfire songs icon">
                         <h3 class="font-bebas uppercase text-3xl">Play Campfire Songs</h3>
                         <p class="font-semibold md:text-lg ">Learn all those catchy tunes that’ll make your friends sing and clap late into the night.</p>
                     </div>
                     <div class="mb-10 sm:mb-0 m-auto w-5/6 sm:w-full sm:px-4">
-                        <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-any-song.svg" width="45px" class="m-auto mb-2" alt="play any song icon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-play-any-song.svg" width="45px" class="m-auto mb-2" alt="play any song icon">
                         <h3 class="font-bebas uppercase text-3xl">Play (Almost) Any Song…</h3>
                         <p class="font-semibold md:text-lg">You won’t be Hendrix in three months, but you’ll actually be able to play along to popular songs.</p>
                     </div>
                 </div>
                 <div class="order-first w-9/12 mx-auto items-center inline-flex justify-center mb-12 sm:px-4 md:mb-0 md:order-none md:w-1/3 lg:w-2/4">
-                    <img src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo-stack.png" width="300px" class="" alt="guitar quest logo">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo-stack.png" width="300px" class="" alt="guitar quest logo">
                 </div>
                 <div class="text-center flex-col m-auto w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                        <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-jamming-with-band.svg" width="45px" class="m-auto mb-2" alt="Calendar icon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-jamming-with-band.svg" width="45px" class="m-auto mb-2" alt="Calendar icon">
                         <h3 class="font-bebas uppercase text-3xl" alt="gain insane momentum icon">Gain Insane Momentum</h3>
                         <p class="font-semibold md:text-lg">Practice just became FUN with exciting missions and challenges to keep you motivated. </p>
                     </div>
                     <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                        <img src="https://www.musora.com/musora-cdn/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-write-first-song.svg" width="45px" class="m-auto mb-2" alt="write your own music icon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=45,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-write-first-song.svg" width="45px" class="m-auto mb-2" alt="write your own music icon">
                         <h3 class="font-bebas uppercase text-3xl">Write Your Own Music</h3>
                         <p class="font-semibold md:text-lg">Express yourself by writing a song, adding lyrics, and recording something that makes you smile.</p>
                     </div>
@@ -6986,7 +6986,7 @@
 
         <!-- Your Teacher Section -->
         {{-- Guitar Quest: Your Teacher Section --}}
-        <section id="your_teacher" class="py-28 bg-top bg-contain bg-no-repeat" style="background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide-background.png'); background-color: hsl(222, 100%, 3.92%);">
+        <section id="your_teacher" class="py-28 bg-top bg-contain bg-no-repeat" style="background-image: url('https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide-background.png'); background-color: hsl(222, 100%, 3.92%);">
             <div class="max-w-screen-xl m-auto px-6 pb-6 flex text-white flex-col">
                 <div class="w-full m-auto text-white text-center md:w-3/4 lg:w-1/2">
                     <p class="italic mb-0 text-goldenrod pb-4 text-2xl md:text-3xl md:pb-0">
@@ -6995,7 +6995,7 @@
                     <h2 class="block uppercase -mt-4 text-center font-bebas text-7xl md:text-9xl lg:leading-none">Rob Scallon</h2>
                 </div>
                 <div class="w-full m-auto relative -mt-7 md:-mt-11 md:w-9/12 lg:w-7/12">
-                    <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide.png" alt="frob scallon">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-guide.png" alt="frob scallon">
                     <div class="bottom-0 w-full h-48 absolute gradient"></div>
                 </div>
                 <div class="w-full m-auto text-white relative -mt-24 md:w-3/4 lg:w-1/2">
@@ -7010,9 +7010,9 @@
                     <p>I think you’re going to love it.</p>
                     <!-- Signature -->
                     <div class="flex flex-col items-center mb-6">
-                        <img src="https://www.musora.com/musora-cdn/image/width=65,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-headshot.jpg" width="65px" class="rounded-full mb-2" alt="frob scallon">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=65,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-headshot.jpg" width="65px" class="rounded-full mb-2" alt="frob scallon">
                         <div class="block w-40 mx-auto">
-                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-signature-2.png" alt="rob signature">
+                            <img class="w-full" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-signature-2.png" alt="rob signature">
                         </div>
                     </div>
                     <!-- Social Links -->
@@ -7046,19 +7046,19 @@
 
         <!-- Your Way -->
         {{-- Guitar Quest: Your Way --}}
-        <section id="your_way" class="py-24 bg-top bg-contain bg-no-repeat" style="background-image: url('https://www.musora.com/musora-cdn/image/quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/your-way-background.png?ixlib=php-1.2.1'); background-color: hsl(222, 100%, 3.92%); ">
+        <section id="your_way" class="py-24 bg-top bg-contain bg-no-repeat" style="background-image: url('https://www.musora.com/cdn-cgi/image/quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/your-way-background.png?ixlib=php-1.2.1'); background-color: hsl(222, 100%, 3.92%); ">
             <div class="max-w-screen-xl m-auto px-6 flex flex-col text-white">
                 <div class="w-full m-auto text-white md:w-5/6">
                     <div class="text-center mb-12 w-3/4 m-auto md:w-full">
-                        <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="200px" class="mb-4" alt="Guitar quest logo">
+                        <img src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png" width="200px" class="mb-4" alt="Guitar quest logo">
                         <h2 class="uppercase font-bebas mb-6 text-5xl md:text-6xl">
                             <span class="">Play</span>
                             <span class="text-goldenrod underline">Your Way</span>
                         </h2>
                         <p class="font-semibold md:text-lg">Start today with any computer, laptop, tablet, or smartphone.</p>
                     </div>
-                    <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread.png" class="hidden md:block mb-14" alt="Support devices">
-                    <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread-mobile.png" class="md:hidden mb-14" alt="Support devices">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread.png" class="hidden md:block mb-14" alt="Support devices">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread-mobile.png" class="md:hidden mb-14" alt="Support devices">
                     <div class="mb-12 md:mb-24">
                         <ul class="m-0 grid grid-cols-1 gap-4 list-none md:grid-cols-3">
                             <li class="w-full relative custom-list-style pl-4">
@@ -7102,7 +7102,7 @@
                             </p>
                         </div>
                         <div class="mx-auto w-7/12 order-first pb-12 md:w-full md:pl-4 lg:pb-0 lg:w-2/6 lg:order-none">
-                            <img src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guarantee-badge.png" width="250px" class="m-auto block" alt="Guarantee badge">
+                            <img src="https://www.musora.com/cdn-cgi/image/width=250,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guarantee-badge.png" width="250px" class="m-auto block" alt="Guarantee badge">
                         </div>
                     </div>
                 </div>

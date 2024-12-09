@@ -1,6 +1,6 @@
 <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
     <div class="container max-w-5xl mx-auto">
-        <img class="text-center mx-auto sm:h-20 lg:h-24 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/@php
+        <img class="text-center mx-auto sm:h-20 lg:h-24 hidden sm:inline-block" src="https://www.musora.com/cdn-cgi/image/width=1200,quality=95/@php
                     if($theme === 'drumeo'){
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-give.svg';
                     }
@@ -17,7 +17,7 @@
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/musora-give.svg';
                     }
                 @endphp">
-        <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://www.musora.com/musora-cdn/image/width=700,quality=95/@php
+        <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://www.musora.com/cdn-cgi/image/width=700,quality=95/@php
                     if($theme === 'drumeo'){
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-give-m.svg';
                     }
@@ -36,7 +36,7 @@
                 @endphp">
         <h6 class="text-{{ $theme }} mt-3 mb-10"><strong>Join today to support music instruments for kids!</strong></h6>
         <img class="my-5 h-64 inline sm:hidden"
-            src="https://www.musora.com/musora-cdn/image/width=620,quality=95/@php
+            src="https://www.musora.com/cdn-cgi/image/width=620,quality=95/@php
                     if($theme === 'drumeo'){
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-musicounts-collage.png';
                     }
@@ -87,7 +87,7 @@
             <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=690,quality=95/@php
+                src="https://www.musora.com/cdn-cgi/image/width=690,quality=95/@php
                     if($theme === 'drumeo'){
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-musicounts-collage.png';
                     }
