@@ -338,7 +338,7 @@ const closeMobileDropdown = () => {
 
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
-        const count = countdown(props.challenge.next_lesson?.unlock_date);
+        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
         if(count === '00:00'){
