@@ -264,7 +264,8 @@ const isChallengeCompleted = computed(() => {
 
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
-        const count = countdown(props.completionData?.next_lesson?.unlock_date);
+        // remove UTC iso part of the string. It's already in the users timezone from the BE
+        const count = countdown(props.completionData?.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
         if(count === '00:00'){
