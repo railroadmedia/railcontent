@@ -4,16 +4,14 @@ namespace Modules\FeatureFlagging\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\FeatureFlagging\Models\Branch;
-use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Services\FeatureFlagService;
-
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isNull;
+use Illuminate\Database\Eloquent\Builder;
 
 class EditBranch extends Command
 {
     protected $signature = 'featureFlag:editBranch
                             {name : name of branch to edit}
+                            {experiment : name of the experiment}
                             {--content= : new content value}
                             {--weight= : new weight value}
                             {--priority= : new priority value}
@@ -24,7 +22,10 @@ class EditBranch extends Command
     public function handle(FeatureFlagService $ffService): void
     {
         $name = $this->argument('name');
-        $branch = Branch::whereName($name)->first();
+        $experiment = $this->argument('experiment');
+        $branch = Branch::whereName($name)
+            ->whereHas('experiment', fn (Builder $query) => $query->where('name', $experiment))
+            ->first();
         if (!$branch) {
             $this->error("Invalid branch name. run showExperiments to see all branches");
             return;
