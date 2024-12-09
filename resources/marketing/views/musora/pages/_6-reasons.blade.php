@@ -22,10 +22,10 @@
             </a>
         </div>
         <picture>
-            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1800,quality=95/{{ $header }}">
+            <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=1800,quality=95/{{ $header }}">
             <img
                 class="w-full my-6 lg:my-10 transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $header }}"
+                src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/{{ $header }}"
                 alt="header image"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -36,9 +36,9 @@
         @foreach($points as $point)
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="@if(!empty($point['guarantee'])) w-36 @else w-full @endif sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/{!! $point['image'] !!}">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/{!! $point['image'] !!}">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{!! $point['image'] !!}"
+                        src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/{!! $point['image'] !!}"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">

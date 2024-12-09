@@ -164,7 +164,7 @@
 @endsection
 
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-3xl">
             <div class="mb-2 align-middle flex items-center justify-center w-full">
                 <img class="inline-block h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/headrush-logo.png"
@@ -175,7 +175,7 @@
             </div>
             <h3 class="leading-tight mt-4 mb-3"><strong>Congratulations on your<br class="hidden sm:inline"> purchase of a HeadRush Pedal!</strong></h3>
             <h5 class="leading-tight mt-2 mb-6 sm:mb-8 mx-auto max-w-xl">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
-            <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+            <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
         </div>
     </div>
     <div class="py-8 sm:py-12 px-4 sm:px-6">

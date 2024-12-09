@@ -379,7 +379,7 @@
                             <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img
                                         class="h-8 transition-opacity opacity-0" loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
-                                        src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg"
+                                        src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg"
                                         alt="plus icon"><br>{{ $drummer['title'] }}</strong></h6>
                             <div class="absolute inset-0 z-0"
                                 style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
@@ -486,7 +486,7 @@
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
-                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
                         alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
@@ -506,7 +506,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
                                 alt="tiktok icon">
                             <h3 class="mt-2"><strong>463K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
@@ -514,7 +514,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg"
                                 alt="insta icon">
                             <h3 class="mt-2"><strong>368K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
@@ -522,7 +522,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
                                 alt="youtube icon">
                             <h3 class="mt-2"><strong>218M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>

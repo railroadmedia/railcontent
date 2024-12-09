@@ -205,14 +205,14 @@
 @endsection
 
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-3xl">
             @if(!empty($thomann))
                 <div class="mb-2 align-middle flex items-center justify-center w-full">
                     <img class="inline-block h-6 sm:h-8 lg:h-9 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/thomann-white.png"
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
-                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
+                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
@@ -221,7 +221,7 @@
                     <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/guitarcenter-white.png"
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
-                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
+                    <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
                         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>

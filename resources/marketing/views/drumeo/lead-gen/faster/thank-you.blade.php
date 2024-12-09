@@ -53,12 +53,12 @@
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-12 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg">
+                <img class="h-12 sm:h-14" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg">
                 <h3 class="my-4"><strong>
                         Check your email for<br class="inline sm:hidden"> your free drum lessons.</strong></h3>
                 <p class="leading-normal mb-8">
                     If you’re looking for more, El Estepario  <br class="inline sm:hidden"> & Jared have something for you!</p>
-                <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/jared-el-estepario.png">
+                <img src="https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/jared-el-estepario.png">
             </div>
         </div>
     </div>
@@ -129,7 +129,7 @@
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
-{{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
+{{--                                    <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>

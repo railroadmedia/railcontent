@@ -44,7 +44,7 @@
     <header class="pb-12 md:pb-0 md:pt-20 text-center text-white" style="background-color:#000C17;">
         <img
             class="md:hidden mb-7 @if($page === 'songs') cursor-pointer @endif"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')"
+            src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/@yield('header-img')"
             alt="{{$page}} thumb"
             @if($page === 'songs') x-on:click="soundslice = true" @endif
             fetchpriority="high"
@@ -53,7 +53,7 @@
             <div class="mb-6">
                 <img
                     class="h-6 md:h-9 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
+                    src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
                     alt="{{$theme}} logo"
                     fetchpriority="high"
                 />
@@ -117,10 +117,10 @@
             <a class="join bg-musora text-black smaller sm:mb-10" href="/choose-plan">Start your free trial today</a>
         </div>
         <picture>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/cdn-cgi/image/width=900,quality=95/@yield('header-img')">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block @if($page === 'songs') cursor-pointer @endif"
-                src="https://www.musora.com/musora-cdn/image/width=550,quality=95/@yield('header-img')"
+                src="https://www.musora.com/cdn-cgi/image/width=550,quality=95/@yield('header-img')"
                 alt="{{$page}} thumb"
                 @if($page === 'songs') x-on:click="soundslice = true" @endif
                 fetchpriority="high"

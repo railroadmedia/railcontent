@@ -150,9 +150,12 @@ class ChallengesService
         int $challengeId,
         int $userId,
         $startDate = null,
-        $isLocked = true
+        $isLocked = true,
+        $challenge = null,
     ): ChallengeUserProgress|null {
-        $challenge = $this->getChallengeById($challengeId);
+        if(!$challenge) {
+            $challenge = $this->getChallengeById($challengeId);
+        }
         if (!$challenge) {
             return null;
         }
@@ -186,11 +189,13 @@ class ChallengesService
      * @param int $userId
      * @return array
      */
-    public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true): ?array
+    public function getCurrentLessonData(int $contentId, int $userId, bool $isLesson = true, $lessonDocument = null, $challenge = null): ?array
     {
         if ($isLesson) {
-            $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
-            $challenge = $sanityDocument['parent'];
+            if(!$lessonDocument || !$challenge) {
+                $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($contentId);
+                $challenge = $lessonDocument['parent'];
+            }
             $challengeLessons = $challenge['lessons'];
         } else {
             $challenge = $this->getChallengeById($contentId);
@@ -537,10 +542,12 @@ class ChallengesService
         return $this->sanityGateway->getAllChallengesByBrand($brand);
     }
 
-    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId): array
+    public function completeLessonAndGetCurrentProgressResults($lessonId, $userId, $completedTime = null, $lessonDocument = null, $challenge = null): array
     {
-        $sanityDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
-        $challenge = $sanityDocument['parent'];
+        if (!$lessonDocument || !$challenge) {
+            $lessonDocument = $this->sanityGateway->getChallengeChildAndParentData($lessonId);
+            $challenge = $lessonDocument['parent'];
+        }
         $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challenge['id'], $userId);
         $wasChallengeCompleted = $userProgress->areAllLessonsCompleted();
         $secondsPracticed = $this->mediaPlaybackService->getSecondsWatchedSince(
@@ -551,11 +558,12 @@ class ChallengesService
         $lessonsProgress = $userProgress->updateLessonsProgress(
             $lessonId,
             isCompleted: true,
-            totalSecondsPracticed: $secondsPracticed
+            totalSecondsPracticed: $secondsPracticed,
+            completedTime: $completedTime
         );
         $isChallengeCompleted = $userProgress->areAllLessonsCompleted();
 
-        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true);
+        $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument,challenge: $challenge);
         $active = true;
         $motivationalText = [];
         // TODO fix this!
@@ -606,7 +614,7 @@ class ChallengesService
         );
         return [
             'challenge_id' => $challenge['id'],
-            'current_lesson_thumbnail' => $sanityDocument['thumbnail'],
+            'current_lesson_thumbnail' => $lessonDocument['thumbnail'],
             'show_modal' => $active,
             ...$lessonsProgress,
             ...$motivationalText,

@@ -57,10 +57,10 @@ const { brand } = storeToRefs(userStore);
 
 const defaultThumbnail = computed(() => {
     return {
-        drumeo: "https://www.musora.com/musora-cdn/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/5dc27a49-ce17-4b73-5a35-ac3f19f96f00/public",
-        singeo: "https://www.musora.com/musora-cdn/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1f558634-9b71-4dd8-1a80-12670df39900/public",
-        guitareo: "https://www.musora.com/musora-cdn/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/169b1f03-dc93-4b0f-105f-71921cbc2a00/public",
-        pianote: "https://www.musora.com/musora-cdn/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/6441483e-102a-4e46-6a7b-eae2bdd46400/public",
+        drumeo: "https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/5dc27a49-ce17-4b73-5a35-ac3f19f96f00/public",
+        singeo: "https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1f558634-9b71-4dd8-1a80-12670df39900/public",
+        guitareo: "https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/169b1f03-dc93-4b0f-105f-71921cbc2a00/public",
+        pianote: "https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/6441483e-102a-4e46-6a7b-eae2bdd46400/public",
     }[brand.value];
 });
 

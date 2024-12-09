@@ -1,7 +1,7 @@
 <template>
     <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4" v-if="!isCustom">
         <div class="tw-max-w-5xl tw-mx-auto tw-relative">
-            <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
+            <div v-if="!isFromApp" class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
                 <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="handleGoBack">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
@@ -9,7 +9,7 @@
             <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                 <div class="md:tw-flex-1">
                     <!--  Header logo  -->
-                    <img class="tw-h-20 sm:tw-h-20 lg:tw-h-28 tw-mb-2 tw-inline-block " alt="header logo" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
+                    <img class="tw-h-20 sm:tw-h-20 lg:tw-h-28 tw-mb-2 tw-inline-block " alt="header logo" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                     <!--  Headline  -->
                     <h1 class="tw-font-extrabold tw-text-3xl lg:tw-text-4xl">{{ cohort['headline'] }}</h1>
                     <!--  Subheadline  -->
@@ -30,7 +30,7 @@
                     <div class="tw-relative md:tw-hidden">
                         <img
                             class="tw-rounded-xl tw-mb-6"
-                            :src="`https://www.musora.com/musora-cdn/image/width=850,quality=95/${cohort['header_image_url']}`"
+                            :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                             alt="header thumb"
                         />
                         <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true">
@@ -53,7 +53,7 @@
                         <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start" :class="{ 'md:tw-mt-2': isEnrolled}">
                             <img
                                 class="tw-h-8 md:tw-h-6 tw-mr-1"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
                                 alt="joined student profiles"
                             />
                             <p class="tw-text-xs tw-align-middle tw-max-w-[180px] md:tw-max-w-full tw-text-left">
@@ -67,7 +67,7 @@
                 <div class="md:tw-flex-1 tw-hidden md:tw-block tw-relative">
                     <img
                         class="tw-rounded-xl"
-                        :src="`https://www.musora.com/musora-cdn/image/width=850,quality=95/${cohort['header_image_url']}`"
+                        :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                         alt="header thumb"
                     />
                     <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
@@ -98,7 +98,7 @@
                             <!--                            <img-->
                             <!--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"-->
                             <!--                                alt="icon 1"-->
-                            <!--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon1_url'] }}"-->
+                            <!--                                src="https://www.musora.com/cdn-cgi/image/width=60,quality=95/{{ $cohort['icon1_url'] }}"-->
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
@@ -112,7 +112,7 @@
                             <!--                            <img-->
                             <!--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"-->
                             <!--                                alt="icon 2"-->
-                            <!--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon2_url'] }}"-->
+                            <!--                                src="https://www.musora.com/cdn-cgi/image/width=60,quality=95/{{ $cohort['icon2_url'] }}"-->
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
@@ -126,7 +126,7 @@
                             <!--                            <img-->
                             <!--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"-->
                             <!--                                alt="icon 3"-->
-                            <!--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon3_url'] }}"-->
+                            <!--                                src="https://www.musora.com/cdn-cgi/image/width=60,quality=95/{{ $cohort['icon3_url'] }}"-->
                             <!--                                loading="lazy"-->
                             <!--                                onload="this.classList.remove('tw-opacity-0')"-->
                             <!--                            />-->
@@ -154,7 +154,7 @@
                 <!--  Body Image  -->
                 <img
                     class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
-                    :src="`https://www.musora.com/musora-cdn/image/width=1200,quality=95/${cohort['body_image_url']}`"
+                    :src="`https://www.musora.com/cdn-cgi/image/width=1200,quality=95/${cohort['body_image_url']}`"
                     alt="video thumb"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
@@ -164,7 +164,7 @@
             <img
                 class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
                 alt="just play logo"
-                :src="`https://www.musora.com/musora-cdn/image/width=1220,quality=95/${cohort['body_logo']}`"
+                :src="`https://www.musora.com/cdn-cgi/image/width=1220,quality=95/${cohort['body_logo']}`"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             />
@@ -178,7 +178,7 @@
         <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=600,quality=95/${cohort['product_image']}`" class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" onload="this.classList.remove('tw-opacity-0')" />
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=600,quality=95/${cohort['product_image']}`" class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" onload="this.classList.remove('tw-opacity-0')" />
                 </div>
             </div>
             <div class="lg:tw-w-1/2 lg:tw-pr-4 tw-text-white tw-text-center md:tw-text-left">
@@ -207,7 +207,7 @@
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
             <div class="tw-text-center">
                 <!--  Logo  -->
-                <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/musora-cdn/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
+                <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                 <!--  Bottom title  -->
                 <h3 class="tw-font-extrabold ">{{ cohort['bottom_title'] }}</h3>
                 <p class="uppercase tw-mt-4"
@@ -273,7 +273,7 @@
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
                     class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
                     alt="joined student profiles"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
@@ -363,6 +363,7 @@ const openPurchase = ref(false);
 const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
 const openChallengeActionModal = ref(false);
+const isFromApp = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
@@ -453,6 +454,11 @@ onBeforeMount(() => {
     if(props.cohort['enrollment_end_date']){
         countdown();
         setInterval(countdown, 1000);
+    }
+
+    const url = window.location.href;
+    if(url.includes('mobile-app-web-view')){
+        isFromApp.value = true;
     }
 })
 </script>

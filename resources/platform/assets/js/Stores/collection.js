@@ -102,13 +102,22 @@ export const useCollectionStore = defineStore({
                         searchTerm: this.filter.searchTerm,
                     })
                 },
-                'lessonHistory': async() => {
-                    return  await useLessonHistoryPageData(this.tabData[this.filter.activeTab].key, {
-                        page: this.tabData[this.filter.activeTab].currentPage,
-                        limit: this.filter.limit,
-                        sort: this.filter.sort,
-                        searchTerm: this.filter.searchTerm,
-                    })
+                'lessonHistory': async () => {
+                    const tabData = this.tabData?.[this.filter.activeTab];
+                    const page = tabData?.currentPage || 1; // Default to 1 if undefined
+                    const limit = this.filter?.limit || 10; // Default to 10 if undefined
+                    const sort = this.filter?.sort || '';
+                    const searchTerm = this.filter?.searchTerm || '';
+
+                    if (!tabData?.key) {
+                        console.error("Invalid tabData or activeTab key is missing.");
+                        return null;
+                    }
+
+                    const { fetchLessonData, data } = useLessonHistoryPageData();
+
+                    await fetchLessonData(tabData.key, { page, limit, sort, searchTerm });
+                    return data.value;
                 },
                 'childCollection': async() => {
                     return await useChildCollectionPageData(this.collectionType, this.queryType, {
@@ -251,9 +260,9 @@ export const useCollectionStore = defineStore({
         setActiveTab() {
             const activeTab = this.tabOptions.find((tab) => {
                 return tab.key === this.filter.activeTab;
-            })
+            });
 
-            this.filter.activeTab = activeTab.value;
+            this.filter.activeTab = activeTab ? activeTab.value : (this.tabOptions[0]?.value ?? '');
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
         },
 
@@ -333,7 +342,7 @@ export const useCollectionStore = defineStore({
 
             this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
-        },  
+        },
 
         //THIS RUNS WHEN THE PAGE LOADS!!
         async setDefaults(defaults) {

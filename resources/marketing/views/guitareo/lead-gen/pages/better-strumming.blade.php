@@ -203,99 +203,99 @@
                         @php
                            $lessons = [
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Chord Shapes-1715065612.jpg',
                                     'title' => 'Chord Shapes For The Challenge',
                                     'name' => 'chordShapes',
                                     'videoId' => '944223156',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/1-1715253818.jpg',
                                     'title' => 'Get Into The Groove',
                                     'name' => 'getIntoTheGroove',
                                     'videoId' => '944945269',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/2-1715253863.jpg',
                                     'title' => 'Learning To Miss',
                                     'name' => 'learningToMiss',
                                     'videoId' => '944235965',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/3-1715253902.jpg',
                                     'title' => 'Add In The Bridge',
                                     'name' => 'addInTheBridge',
                                     'videoId' => '944236131',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/4-1715253943.jpg',
                                     'title' => 'The Campfire Strum Pattern',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/5-1715253975.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/5-1715253975.jpg',
                                     'title' => 'Add In A Variation',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/6-1715490929.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/6-1715490929.jpg',
                                     'title' => 'The Reggae Strum Pattern',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/7-1715491118.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/7-1715491118.jpg',
                                     'title' => 'Learn To Push Your Chords',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/8-1715491304.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/8-1715491304.jpg',
                                     'title' => 'The Rock ’N’ Roll Strum Pattern',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/9-1715491483.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/9-1715491483.jpg',
                                     'title' => 'The Too-Many-Ands Strum Pattern',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/10-1715491541.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/10-1715491541.jpg',
                                     'title' => 'Coming Up With Your Own Strum Patterns',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/11-1715495497.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/11-1715495497.jpg',
                                     'title' => 'Add Variations To Your Strums',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/12-1715495568.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/12-1715495568.jpg',
                                     'title' => 'Adding Accents',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/13-1715496223.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/13-1715496223.jpg',
                                     'title' => 'The 3-3-2 Strum Pattern',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/14-1715496361.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/14-1715496361.jpg',
                                     'title' => 'Add Palm Mutes',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/15-1715497833.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/15-1715497833.jpg',
                                     'title' => 'Thinking About Dynamics',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/16-1715496741.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/16-1715496741.jpg',
                                     'title' => 'Let’s Gallop',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/17-1715496918.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/17-1715496918.jpg',
                                     'title' => 'Give It A Smack',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/18-1715497021.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/18-1715497021.jpg',
                                     'title' => 'Double It Up',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/19-1715497134.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/19-1715497134.jpg',
                                     'title' => 'Put It All Together',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/20-1715497295.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/20-1715497295.jpg',
                                     'title' => 'Final Performance',
                                 ],
                                 [
-                                    'thumb' => 'https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Week4 (1)-1715497438.jpg',
+                                    'thumb' => 'https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/Week4 (1)-1715497438.jpg',
                                     'title' => 'Week 4 — Rest & Review',
                                 ],
                             ];
@@ -336,13 +336,13 @@
                 <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/testimonials/kent.png">
+                        src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/testimonials/kent.png">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/testimonials/kent.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=900,quality=95/https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/testimonials/kent.png"
                         loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0"
                         style="width: 130%;transform: translate(-44%, -7%);"
-                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
+                        src="https://www.musora.com/cdn-cgi/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png"
                         alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
@@ -358,7 +358,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg"
                                 alt="youtube icon">
                             <h3 class="mt-2"><strong>1M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Subscribers</p>
@@ -374,7 +374,7 @@
                         <div class="">
                             <img class="h-6 sm:h-8 transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
+                                src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg"
                                 alt="tiktok icon">
                             <h3 class="mt-2"><strong>42K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Likes</p>

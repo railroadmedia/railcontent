@@ -19,8 +19,8 @@
         <!-- Left -->
         <div class="tw-shrink-0 tw-mr-4 2xl:tw-mr-0 2xl:tw-flex-1 tw-flex tw-flex-col tw-justify-center tw-items-start">
             <!-- Challenge Logo -->
-            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
-            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-2 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
+            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-3 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" :alt="`${challengeTitle} light mode logo`" />
+            <img class="lg:tw-w-[111px] 2xl:tw-w-[142px] 4xl:tw-w-[159px] tw-mb-3 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" :alt="`${challengeTitle} dark mode logo`" />
             <div v-if="actionText" class="tw-font-bold tw-text-xs 2xl:tw-text-sm tw-mb-5" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
             <MuButton :is-link="ctaObj?.url !== undefined" :href="ctaObj?.url">
                 <i :class="`${ctaObj?.icon} ${ctaObj.iconLocation === 'left' ? 'tw-mr-2' : 'tw-order-1 tw-ml-2'}`"></i>
@@ -30,14 +30,14 @@
         <!-- Right -->
         <div class=" tw-grow 2xl:tw-flex-1 tw-relative tw-flex tw-items-center tw-justify-center 3xl:tw-justify-end">
             <!-- Musora Logo -->
-            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
-            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-relative">
                 <div class="tw-rounded-[10px] tw-overflow-hidden tw-mb-5 tw-relative" :class="showSquareThumbnail ? 'tw-aspect-square 3xl:tw-aspect-video tw-w-[158px] 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-[44px] 3xl:tw-mx-5' : 'tw-max-w-[255px] 3xl:tw-max-w-none 3xl:tw-w-[255px] 4xl:tw-w-[320px] tw-mx-5'">
                     <!-- Thumbnail (Video ratio) -->
-                    <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challengeThumbnail}`" />
+                    <img :class="showSquareThumbnail ? 'tw-w-full tw-hidden 3xl:tw-block' : ''" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challengeThumbnail}`" />
                     <!-- Thumbnail (Square ratio) -->
-                    <img :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
+                    <img :class="showSquareThumbnail ? 'tw-w-full 3xl:tw-hidden' : 'tw-hidden'" :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${challenge.next_lesson.thumbnail}`" />
                     <!-- Lock Overlay -->
                     <div v-if="hasChallengeStarted && isNextLessonLocked" class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-black/60 tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <i class="fa-solid fa-lock tw-mb-2 tw-text-3xl tw-text-white"></i>
@@ -58,8 +58,8 @@
                     </div>
                     <!-- Rest Days -->
                     <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-1 tw-px-1 4xl:tw-px-4 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
-                        <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
-                        <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
+                        <img class="tw-mr-3 tw-w-4 lg:tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
+                        <img class="tw-mr-3 tw-w-4 lg:tw-w-5 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                         <div class="tw-flex-grow">
                             <div class="tw-font-extrabold">{{ restDays }}</div>
                             <div class="tw-flex tw-items-center tw-justify-between">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-primary-6">
+        <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#E0E0E1] dark:tw-bg-primary-6">
             <div class="tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold" :class="progressPercent > 0 ? `tw-bg-${brand}` : `tw-w-auto tw-pl-2`" :style="`width:${progressPercent}%`">{{ progressPercent }}%</div>
         </div>
     </div>
@@ -96,8 +96,8 @@
 
         <div class="tw-relative tw-w-full tw-mb-[18px]">
             <!-- Musora Logo -->
-            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
-            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-z-0 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/musora-light.png" />
             <div class="tw-flex tw-justify-center tw-items-center tw-relative tw-z-[5]">
                 <svg class="tw-transform -tw-rotate-90 tw-w-[260px] tw-h-[260px]">
                     <circle cx="129" cy="129" :r="radius" stroke="currentColor" stroke-width="20" fill="transparent"
@@ -109,8 +109,8 @@
                 </svg>
                 <div class="tw-absolute tw-text-center tw-flex tw-flex-col tw-items-center">
                     <!-- Challenge Logos -->
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
-                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
+                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.dark_mode_logo_url}`" />
+                    <img class="tw-max-w-[155px] tw-max-h-[64px] tw-mb-1 dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challenge.light_mode_logo_url}`" />
                     <div class="tw-text-[11px] lg:tw-text-[13px] tw-font-bold tw-max-w-[160px]" :class="hasMissedLessons ? 'tw-text-[#F61A30]' : ''">{{ actionText }}</div>
                 </div>
             </div>
@@ -133,8 +133,8 @@
             <!-- Rest Days -->
             <div class="tw-flex-1 tw-rounded-[10px] tw-border tw-border-primary-6 tw-py-2 tw-px-2 tw-flex tw-items-center tw-relative" @click="updateInfoModalType('rest')">
                 <!-- Rest Icon -->
-                <img class="tw-mr-2 tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
-                <img class="tw-mr-2 tw-w-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
+                <img class="tw-mr-2 tw-w-5 tw-hidden dark:tw-block" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon.svg" />
+                <img class="tw-mr-2 tw-w-5 dark:tw-hidden" src="https://www.musora.com/cdn-cgi/image/width=30,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenge-completion-modal/rest_icon_light.svg" />
                 <!-- Rest Text -->
                 <div class="tw-grow">
                     <div class="tw-font-extrabold">{{ restDays }}</div>
@@ -338,7 +338,8 @@ const closeMobileDropdown = () => {
 
 const runCountDown = (stop = false) => {
     const intervalCountdown = setInterval(() => {
-        const count = countdown(props.challenge.next_lesson?.unlock_date);
+        // remove UTC iso part of the string. It's already in the users timezone from the BE
+        const count = countdown(props.challenge.next_lesson?.unlock_date.substring(0, 19));
         countdownString.value = count;
 
         if(count === '00:00'){

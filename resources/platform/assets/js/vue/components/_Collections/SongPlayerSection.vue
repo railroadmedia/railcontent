@@ -4,7 +4,7 @@
             <div class="tw-flex tw-flex-col sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]">
                     <!-- Song Image Background -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${thumbnailUrl}`"
                         class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm"
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"

@@ -42,7 +42,7 @@
                 $contentBreadCrumb->firstLevelTitle = 'Course';
             }
             else if(str_contains($lessonContent['parent']['type'],'challenge')){
-                $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.challenges");
                 $contentBreadCrumb->firstLevelTitle = 'Challenges';
             }
             else if(str_contains($lessonContent['parent']['type'],'unit')){

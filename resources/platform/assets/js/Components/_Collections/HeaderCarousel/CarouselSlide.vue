@@ -166,15 +166,15 @@ const handleCtaClick = (event, url) => {
       <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
         <picture>
           <source media="(min-width:1280px)"
-            :srcset="`https://www.musora.com/musora-cdn/image/width=2500,quality=95/${desktopImg}`">
+            :srcset="`https://www.musora.com/cdn-cgi/image/width=2500,quality=95/${desktopImg}`">
           <source media="(min-width:1024px)"
-            :srcset="`https://www.musora.com/musora-cdn/image/width=1780,quality=95/${desktopImg}`">
+            :srcset="`https://www.musora.com/cdn-cgi/image/width=1780,quality=95/${desktopImg}`">
           <source media="(min-width:768px)"
-            :srcset="`https://www.musora.com/musora-cdn/image/width=1470,quality=95/${tabletImg}`">
+            :srcset="`https://www.musora.com/cdn-cgi/image/width=1470,quality=95/${tabletImg}`">
           <source media="(min-width:640px)"
-            :srcset="`https://www.musora.com/musora-cdn/image/width=1220,quality=95/${tabletImg}`">
+            :srcset="`https://www.musora.com/cdn-cgi/image/width=1220,quality=95/${tabletImg}`">
           <img class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-            :src="`https://www.musora.com/musora-cdn/image/width=790,quality=95/${mobileImg}`"
+            :src="`https://www.musora.com/cdn-cgi/image/width=790,quality=95/${mobileImg}`"
             alt="banner background image" />
         </picture>
       </div>
@@ -198,7 +198,7 @@ const handleCtaClick = (event, url) => {
           </h2>
           <!-- Logo -->
           <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto"
-            :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
+            :src="`https://www.musora.com/cdn-cgi/image/width=800,quality=95/${logo}`" alt="pack logo" />
           <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg"
             :class="`${descriptionColor && `tw-text-${descriptionColor}`}`">
             <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div>

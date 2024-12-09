@@ -13,14 +13,14 @@
             <div class="tw-relative tw-rounded-[10px] tw-overflow-hidden md:tw-h-[276px] tw-w-full">
                 <a :href="guitarQuestUrl" class="tw-w-full tw-h-full">
                     <!-- Desktop Image -->
-                    <img src="https://www.musora.com/musora-cdn/image/width=1600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background.jpg"
+                    <img src="https://www.musora.com/cdn-cgi/image/width=1600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background.jpg"
                          alt="Guitar Quest Lesson Promotional Image"
                          class="tw-w-full tw-hidden md:tw-block tw-transition-opacity tw-opacity-0 tw-h-full tw-object-cover"
                          loading="lazy"
                          onload="this.classList.remove('tw-opacity-0')"
                     >
                     <!-- Mobile Image -->
-                    <img src="https://www.musora.com/musora-cdn/image/width=600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background-mobile.jpg"
+                    <img src="https://www.musora.com/cdn-cgi/image/width=600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background-mobile.jpg"
                          alt="Guitar Quest Lesson Promotional Image"
                          class="gq-small-thumb tw-transition-opacity tw-opacity-0"
                          loading="lazy"
@@ -201,7 +201,7 @@ onBeforeMount( ()=> {
         packs.value = packData.entity;
 
         console.log(packs.value);
-        
+
         platformStore.setLoadingState(false);
     }
 

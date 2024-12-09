@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tw-mb-[60px]">
         <div v-if="showEmptyState" class="dark:tw-text-white">
             We couldn't find what you're looking for. Please try again!
         </div>

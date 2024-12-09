@@ -159,7 +159,7 @@
                     <img class="hidden sm:inline-block h-56 sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=1210,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle.png"
+                            src="https://www.musora.com/cdn-cgi/image/width=1210,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle.png"
                             alt="{{$theme}} collage image"
                     >
                 </div>
@@ -167,7 +167,7 @@
                     <img class="inline-block sm:hidden mb-4 h-64 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle-m.png"
+                            src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle-m.png"
                             alt="{{$theme}} collage image"
                     >
                     <div class="inline-block mx-auto">
@@ -201,7 +201,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -219,7 +219,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/chords-scales.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/chords-scales.jpg">
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
                         <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-horizontal-logo.png">
@@ -356,37 +356,37 @@
                 </div>
                 <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh.jpg">
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
                         <p class="leading-tight">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-poster.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-poster.jpg">
                     </div>
                     <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
                         <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills.jpg">
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills-logo.png">
                         <p class="leading-tight">Take your chords and make something beautiful. Lisa will show you her favorite riffs and fills to add some emotion and beauty to your playing. These are the fills she uses every day. She’ll show you each one, note for note.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/cdn-cgi/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
                     </div>
                     <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
                         <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
                     </div>
                 </div>
@@ -491,7 +491,7 @@ That’s the Play Better Guarantee™.',
                         <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png');"></div>
+                                    <div class="h-full w-full bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png');"></div>
                                 </div>
                             </div>
                         </div>
@@ -523,7 +523,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -604,7 +604,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -645,7 +645,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -686,7 +686,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -728,7 +728,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -769,7 +769,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -810,7 +810,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -851,7 +851,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -892,7 +892,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -933,7 +933,7 @@ That’s the Play Better Guarantee™.',
                         <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg');"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg');"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

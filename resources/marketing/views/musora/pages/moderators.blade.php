@@ -119,7 +119,7 @@
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <img
                 class="h-36 sm:h-40 lg:h-44 mb-3 sm:mb-4 transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/logo.svg"
+                src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/logo.svg"
                 alt="logo"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -140,7 +140,7 @@
                 <strong>Musora<br class="sm:hidden"> Moderator Team</strong>
             </h2>
             <img class="mb-5 h-58 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top-m2.png"
+                src="https://www.musora.com/cdn-cgi/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top-m2.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -153,7 +153,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=910,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top2.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=910,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-top2.png"
                     alt="learn playing image"
                 >
             </div>
@@ -206,9 +206,9 @@
             <h2 class="leading-tight mb-8 sm:mb-10"><strong>What do our funky<br class="sm:hidden"> Mods do?</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap text-left items-center mb-5 sm:mb-7 lg:mb-10">
                 <picture class="w-full sm:w-72 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01-m.jpg"
+                        src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-01-m.jpg"
                     >
                 </picture>
                 <div class="sm:pl-5 lg:pl-8">
@@ -219,9 +219,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap text-left items-center mb-5 sm:mb-7 lg:mb-10">
                 <picture class="w-full sm:w-72 flex-shrink-0 sm:order-1">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03-m.jpg"
+                        src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-03-m.jpg"
                     >
                 </picture>
                 <div class="sm:pr-5 lg:pr-8">
@@ -232,9 +232,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap text-left items-center">
                 <picture class="w-full sm:w-72 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/cdn-cgi/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02-m.jpg"
+                            src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/do-images-02-m.jpg"
                     >
                 </picture>
                 <div class="sm:pl-5 lg:pl-8">
@@ -301,7 +301,7 @@
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <img class="mb-5 h-40 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom-m2.png"
+                src="https://www.musora.com/cdn-cgi/image/width=620,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom-m2.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -309,7 +309,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom2.png"
+                    src="https://www.musora.com/cdn-cgi/image/width=690,quality=95/https://dmmior4id2ysr.cloudfront.net/moderators/collage-bottom2.png"
                     alt="learn playing image"
                 >
                 <p class="leading-normal max-w-xl sm:pl-7 lg:pl-10 mx-0">Want to dive deeper into the world of our maestro Mod team that brings the sweet harmony to our musical community? Don't miss your cue, let's connect and make some magical music together! Fill out the form below and let’s chat!
@@ -333,7 +333,7 @@
                     email-subject="Support Request From Musora"
                     email-type="support-contact"
                     email-endpoint="{{url()->route('mailora.public.send') }}"
-                    email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
+                    email-logo="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
                     input-label="Report your issue here.."
                     recipient="support@musora.com"
                     success-message="Your email has been sent!"
