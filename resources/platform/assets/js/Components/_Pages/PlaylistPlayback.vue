@@ -495,7 +495,7 @@ onMounted(() => {
                         class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4 tw-relative"
                         :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
                         <SoundSlice :key="`${Math.floor(chapterStartTime)}${Math.floor(chapterEndTime)}${startLooping ? 'loop' : 'noloop'}`" :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" />
+                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext" :soundslice-type="lessonType" />
                     </div>
                     <!-- Video Players -->
                     <div class="p-lg-only lean tw-relative">
