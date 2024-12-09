@@ -277,7 +277,7 @@ class ContentPagesController extends BaseController
     }
 
     public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId){
-        return firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
+        return $this->firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
     }
 
     public function challengeSecondLevel(Request $request, $domain, $brand, $firstSlug, $firstId, $secondSlug, $secondId)
