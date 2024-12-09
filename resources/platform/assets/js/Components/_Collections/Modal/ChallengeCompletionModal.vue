@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Finish {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Complete {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
