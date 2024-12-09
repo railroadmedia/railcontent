@@ -276,6 +276,15 @@ class ContentPagesController extends BaseController
         }
     }
 
+    public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId){
+        return firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
+    }
+
+    public function challengeSecondLevel(Request $request, $domain, $brand, $firstSlug, $firstId, $secondSlug, $secondId)
+    {
+        return $this->secondLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId, $secondSlug, $secondId);
+    }
+
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
         $content = Content::findOrFail($firstId);

@@ -992,7 +992,7 @@ return [
                 'sortBy' => 'sort',
             ],
             'backstage-secrets' => [
-                'thumbnailUrl' => 'https://www.musora.com/musora-cdn/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
+                'thumbnailUrl' => 'https://www.musora.com/cdn-cgi/image/width=500,height=500,quality=95,fit=cover/https://d1923uyy6spedc.cloudfront.net/RushDoc-Neil-02.jpg',
                 'name' => 'Backstage Secrets',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',

@@ -30,7 +30,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                         <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                            <div class="h-full w-full bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $topImage }}');"></div>
+                            <div class="h-full w-full bg-top bg-cover" style="background-image:url('https://www.musora.com/cdn-cgi/image/width=850,quality=95/{{ $topImage }}');"></div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                             {{ $bonus['badge'] }}</h6>
                     @endif
                     <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
-                        style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');">
+                        style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/{{ $bonus['image'] }}');">
                     </div>
 
                     <div
@@ -154,7 +154,7 @@ $products = App\Models\Product::whereIn('sku', $productSkus)->get()->sort(functi
                             {{ $badge }}</h6>
                     @endif
                     <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
-                        style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $productItem['thumbnail'] }}');">
+                        style="background-image:url('https://www.musora.com/cdn-cgi/image/width=460,quality=95/{{ $productItem['thumbnail'] }}');">
                     </div>
 
                     <div

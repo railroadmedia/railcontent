@@ -81,11 +81,11 @@
                     <div class="slider-container overflow-hidden w-full mb-5 md:mb-7" style="font-size: 0;">
                         <div class="slider-for overflow-hidden  rounded ">
                             <div style="display: none;">
-                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/6f77a20f-e86a-48e6-80a1-53f01c157288-2023-10-19-Pianote-Christmas-Merch-104.jpg" alt="slide image 1">
+                                <img class="w-full" src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/6f77a20f-e86a-48e6-80a1-53f01c157288-2023-10-19-Pianote-Christmas-Merch-104.jpg" alt="slide image 1">
                             </div>
                         </div>
                     </div>
-                    <img src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/658c8f1b-5bd9-44c7-9108-8342ad9a092b-2023-10-19-Pianote-Christmas-Merch-110.jpg">
+                    <img src="https://www.musora.com/cdn-cgi/image/width=1400,quality=95/https://d1fyshwdvi6fth.cloudfront.net/ImageSlides/658c8f1b-5bd9-44c7-9108-8342ad9a092b-2023-10-19-Pianote-Christmas-Merch-110.jpg">
                 </div>
             </div>
             <div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">

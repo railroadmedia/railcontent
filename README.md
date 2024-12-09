@@ -543,15 +543,15 @@ of our CDN url to serve it from our cloudflare CDN.
 
 URL Structure:  
 ```
-https://www.musora.com/musora-cdn/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
+https://www.musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
 ```
 
 Examples:  
 ```
-https://www.musora.com/musora-cdn/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+https://www.musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
 ```  
 ```
-https://www.musora.com/musora-cdn/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
+https://www.musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
 ```  
 
 
@@ -667,3 +667,108 @@ Steps to build Sanity Studio
 1. `cd /app/musora-web-platform/resources/sanitystudio`
 2. `yarn install`
 3. `yarn build`
+
+
+
+# Testing Platform Time-Based Features
+
+Our platform now supports testing time-dependent features through two new request URL parameters and headers. These allow engineers to manipulate the current time (`testNow`) and user timezone (`timezone`) for testing purposes in non-production environments.
+
+---
+
+## 1. `testNow`
+
+The `testNow` parameter and header enable you to set a mock current datetime for testing. This is useful for scenarios where system behavior is time-dependent, such as unlocking lessons or maintaining streaks.
+
+### How to Use
+- **URL Parameter**: Include the `testNow` parameter in the request URL.
+  ```text
+  https://dev.musora.com:8443/drumeo/challenge/sheet-music-101/410478?testNow=2024-12-10 00:00:02 PST
+  https://dev.musora.com:8443/drumeo/challenge/sheet-music-101/410478/around-the-kit/410480?testNow=2024-12-10 00:00:02 CET&timezone=Europe/Copenhagen
+  ```
+
+OR
+
+- **HTTP Header**: Set the `testNow` header with the desired datetime.
+  ```text
+  testNow: 2024-12-10 00:00:02 PST
+  ```
+
+### Behavior
+- The datetime string specifies:
+    - A date (`2024-12-10`).
+    - A time (`00:00:02`).
+    - A shorthand timezone identifier (`PST`).
+- The server interprets this as:
+  > **"I am a user in the PST timezone, and the current time in my timezone is 2024-12-10 00:00:02."**
+- The server:
+    1. Parses the datetime string using Laravel's `Carbon` library.
+    2. Converts it to UTC for internal processing.
+    3. Adjusts all time-dependent features (e.g., lesson unlocks, streak tracking) relative to the user's provided timezone and datetime.
+- **Front-End Integration**: The web front-end will automatically pass the `testNow` parameter along to all MCS AJAX requests. This means:
+    - If you set the `testNow` parameter in the URL on the enrollment or lesson page, all subsequent actions (e.g., starting or completing a lesson) will be relative to the mocked `testNow` datetime.
+
+---
+
+## 2. `timezone`
+
+The `timezone` parameter and header allow you to test features in different user timezones. This ensures accurate scheduling and streak maintenance for users in diverse locales.
+
+### How to Use
+- **URL Parameter**: Include the `timezone` parameter in the request URL.
+  ```text
+  https://dev.musora.com:8443/drumeo/challenge/sheet-music-101/410478?timezone=America/Vancouver
+  ```
+  
+OR 
+
+- **HTTP Header**: Set the `M-Client-Timezone` header with the desired timezone.
+  ```text
+  M-Client-Timezone: America/Vancouver
+  ```
+
+### Behavior
+- Automatically validates and sets the timezone.
+- Saves this timezone as the default for the current user for all future requests.
+- If none is provided:
+    - Defaults to the user’s stored timezone (if available).
+    - Falls back to `America/Vancouver`.
+
+---
+
+## Use Cases
+
+### Community Challenges
+- **Description**: All participants follow the same schedule, unlocking new lessons at fixed intervals.
+- **Example Test**:
+  ```text
+  https://dev.musora.com:8443/drumeo/challenge/sheet-music-101/410478?testNow=2024-12-10 00:00:02 PST&timezone=America/Vancouver
+  ```
+    - Simulates the platform on December 10, 2024, at 12:00 AM PST.
+    - Tests lesson availability for users in the `America/Vancouver` timezone.
+
+### Solo Challenges
+- **Description**: Students can start anytime, with lessons unlocking daily relative to their start date.
+- **Example Test**:
+  ```text
+  https://dev.musora.com:8443/drumeo/challenge/sheet-music-101/410478?testNow=2024-12-10 00:00:02 PST&timezone=America/New_York
+  ```
+    - Simulates a user in `America/New_York` testing unlock times relative to their start date.
+
+---
+
+## Notes
+- **Non-Production Only**: These features are restricted to non-production environments to avoid interfering with live user experiences.
+- **Validation**: Timezones are validated using PHP’s `DateTimeZone` class. Invalid timezones are ignored.
+- **Persistence**: If a user's timezone differs from the one in the database, it will be updated automatically.
+- **AJAX Requests**: URL parameters (`testNow` and `timezone`) set on the web pages are passed along to all AJAX requests. For example:
+    - If you start a lesson or complete an activity, it will respect the `testNow` datetime and `timezone` settings applied in the URL.
+- This could work for the mobile app, but the app itself doesn't have a way to pass in these params or headers yet.
+  - For testing purposes, you could simulate starting a challenge 15 days in the past, 
+    simulate completing and missing days up until the current real day, then log in to that same user on the app to test.
+---
+
+## Client Side
+To simulate dates on the client side (JS, web), use the Chrome extension Time Travel:
+[Time Travel](https://chromewebstore.google.com/detail/time-travel/jfdbpgcmmenmelcghpbbkldkcfiejcjg)
+---

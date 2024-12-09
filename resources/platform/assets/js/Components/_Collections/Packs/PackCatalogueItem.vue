@@ -6,7 +6,7 @@
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
-                :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.thumbnail}`"
+                :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${pack.thumbnail}`"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
                 :alt="`${title} thumbnail`"
@@ -17,7 +17,7 @@
                     v-if="pack.logo_image_url != null"
                     class="tw-max-h-[70px] sm:tw-max-h-[40px]"
                     :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
-                    :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
+                    :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${pack.logo_image_url}`"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                     :alt="`${title} logo`"

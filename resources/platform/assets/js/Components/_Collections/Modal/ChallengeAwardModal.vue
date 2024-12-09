@@ -5,12 +5,12 @@
             <Vue3Lottie v-if="!hideAnimation && !isModal" class="tw-w-[calc(100% + 200px)] sm:tw-w-[800px] tw-h-[800px] tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2 tw-z-[5]" :animation-link="animations[brand]" width="100%" height="100%" :loop="false" />
 
             <!-- BG image -->
-            <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-hidden dark:tw-block tw-z-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-dark-bg.png" />
-            <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 dark:tw-hidden tw-z-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-bg.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-hidden dark:tw-block tw-z-0" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-dark-bg.png" />
+            <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 dark:tw-hidden tw-z-0" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/challenges/award-light-bg.png" />
 
             <div class="tw-z-[2] tw-relative dark:tw-text-white">
                 <div class="tw-px-10 sm:tw-px-[70px] tw-mb-4 tw-z-[1] tw-relative">
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${challengeBadge}`" alt="Challenge Badge" />
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${challengeBadge}`" alt="Challenge Badge" />
                 </div>
                 <p class="tw-mb-6 tw-text-center tw-text-sm">
                     You practiced for a total of <span class="tw-font-bold">{{ minutesPracticed }} minutes</span> and achieved a <span class="tw-font-bold">{{ streak }}-day streak</span> during {{ challengeTitle }}, which earned you a {{ tier }} certificate.

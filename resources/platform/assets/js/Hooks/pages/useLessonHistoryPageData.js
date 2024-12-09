@@ -1,52 +1,34 @@
 import { ref } from "vue";
-import { storeToRefs } from "pinia/dist/pinia";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "@stores/user";
 import { getAllStarted, getAllCompleted, fetchAll } from 'musora-content-services';
 
-const completedIds = ref([]);
-const inProgressIds = ref([]);
-const data = ref(null)
+export function useLessonHistoryPageData() {
+  const data = ref(null);
+  const ids = ref([]);
+  const userStore = useUserStore();
+  const { brand } = storeToRefs(userStore);
 
-export async function useLessonHistoryPageData(key, { page, limit, sort, searchTerm }) {
-    const userStore = useUserStore();
-    const { brand } = storeToRefs(userStore);
+  const fetchLessonData = async (key, { page = 1, limit = 10, sort = '', searchTerm = '' } = {}) => {
+    try {
+      // Fetch lesson data using the retrieved IDs
+      const lessonsData = await fetchAll(brand.value, '', {
+        page,
+        limit,
+        sort,
+        searchTerm,
+        progress: key,
+      });
 
-    if(key === 'inProgress') {
-        //Get inProgress Ids from MCS
-        getAllStarted().then( ids => {
-            inProgressIds.value = ids;
-        }).catch( error => {
-            console.log(error)
-        })
-        //Take those Ids and get Lesson Data
-        const startedLessonsData = await fetchAll(brand.value, '', {
-            page,
-            limit,
-            sort,
-            searchTerm,
-            includedFields: [`railcontent_id in [${inProgressIds.value.join(',')}]`],
-        });
-        
-        data.value = startedLessonsData;
-    } else {
-        //Get inProgress Ids from MCS
-        getAllCompleted().then( ids => {
-            completedIds.value = ids;
-        }).catch( error => {
-            console.log(error)
-        })
-        //Take those Ids and get Lesson Data
-        const completedLessonsData = await fetchAll(brand.value, '', {
-            page,
-            limit,
-            sort,
-            searchTerm,
-            includedFields: [`railcontent_id in [${completedIds.value.join(',')}]`],
-        });
-        
-        data.value = completedLessonsData;
+      data.value = lessonsData;
+    } catch (error) {
+      console.error(`Error fetching lesson data for key "${key}":`, error);
+      data.value = null; // Reset data on error
     }
-    
-    console.log('data', data.value)
-    return data.value;
+  };
+
+  return {
+    data,
+    fetchLessonData,
+  };
 }

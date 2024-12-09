@@ -132,10 +132,11 @@ class ChallengeUserProgress extends Model
         $bestStreak = 0;
         $currentStreak = 0;
         $missedLessons = 0;
-        $remainingRestDays = $this->current_rest_days; // Use the available rest days
+        $remainingRestDays = $this->current_rest_days; // Start with total rest days
+        $totalShiftDays = 0; // Number of days the lesson schedule has been shifted
+        $previousUnlockDate = null;
 
         // Get today's date in the user's timezone
-        // then make carbon pretend it's a UTC datetime
         $today = Carbon::parse(Carbon::now()->timezone($userTimezone)->startOfDay()->toDateTimeString());
 
         foreach ($this->lessons_meta_data as $lesson) {
@@ -152,34 +153,36 @@ class ChallengeUserProgress extends Model
                 continue;
             }
 
-            if ($completedAt) {
-                // Completion counts toward streak only if completed on the day it was unlocked
-                if ($completedAt->isSameDay($unlockDate)) {
-                    $currentStreak++;
-                } else {
-                    // Use a rest day if available
-                    if ($remainingRestDays > 0) {
-                        $remainingRestDays--; // Consume one rest day
-                        $currentStreak++; // Continue streak as if the day was completed
-                    } else {
-                        // Reset streak if no rest days remain
-                        $currentStreak = 0;
-                    }
-                }
-            } elseif (!$today->isSameDay($unlockDate)) {
-                // Use a rest day for non-completions if it's a passed day
-                if ($remainingRestDays > 0) {
-                    $remainingRestDays--; // Consume one rest day
-                    $currentStreak++; // Count the skipped day toward the streak
-                } else {
-                    // Reset streak if no rest days remain
-                    $currentStreak = 0;
-                    $missedLessons++;
-                }
+            // If this lesson is more than 1 day ahead of the previous unlock date, it means the schedule has been shifted
+            if ($previousUnlockDate && $unlockDate->gt($previousUnlockDate->addDay())) {
+                $totalShiftDays++; // Track shift for this day
             }
 
+            // If the lesson unlock date is today, the user has until the end of the day to complete it
+            if ($unlockDate->isSameDay($today) && !isset($lesson['completed_at'])) {
+                continue;
+            }
+
+            // If the lesson was completed on its unlock date, it does NOT trigger a shift or use a rest day
+            if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                $currentStreak++;
+                $bestStreak = max($bestStreak, $currentStreak);
+                $previousUnlockDate = $unlockDate; // Update previous unlock date
+                continue;
+            }
+
+            // If the lesson is not completed and is a past lesson, consider it missed
+            if (!$lesson['completed'] && !$today->isSameDay($unlockDate)) {
+                $currentStreak = 0; // Reset streak if the lesson was missed
+                $missedLessons++;
+            }
+
+            $previousUnlockDate = $unlockDate; // Update the previous unlock date
             $bestStreak = max($bestStreak, $currentStreak);
         }
+
+        // Calculate the remaining rest days based on how many days the schedule has been shifted
+        $remainingRestDays = max(0, $this->current_rest_days - $totalShiftDays);
 
         return [
             'best' => $bestStreak,
@@ -188,6 +191,7 @@ class ChallengeUserProgress extends Model
             'remaining_rest_days' => $remainingRestDays, // Include remaining rest days in output
         ];
     }
+
     /**
      * @return - the largest streak of lessons in the current challenge
      */
@@ -383,7 +387,95 @@ class ChallengeUserProgress extends Model
                 )
             );
         }
-        return $challengeUserCollection->first();
+        if ($challengeUserCollection->isNotEmpty()) {
+            return self::shiftUnlockDaysIfRestDayUsed($challengeUserCollection->first());
+        }
+
+        return null;
+    }
+
+    /**
+     * @param ChallengeUserProgress $challengeUserProgress
+     * @return ChallengeUserProgress
+     */
+    public static function shiftUnlockDaysIfRestDayUsed(ChallengeUserProgress $challengeUserProgress): ChallengeUserProgress
+    {
+        $remainingRestDays = $challengeUserProgress->current_rest_days;
+        $totalShiftDays = 0; // Total days to shift future unlocks (limited by total rest days)
+        $previousUnlockDate = null;
+        $userTimezone = UserTimezoneService::getUsersCurrentTimezone();
+        $today = Carbon::parse(Carbon::now()->timezone($userTimezone)->startOfDay()->toDateTimeString());
+
+        // Extract lessons_meta_data as a separate variable
+        $lessonsMetaData = $challengeUserProgress->lessons_meta_data;
+
+        foreach ($lessonsMetaData as $index => &$lesson) {
+            $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
+            $completedAt = $lesson['completed_at'] ? Carbon::parse($lesson['completed_at']) : null;
+
+            // If the lesson doesn't have a "days_shifted" field, initialize it
+            $lesson['days_shifted'] = $lesson['days_shifted'] ?? 0;
+
+            // Ignore lessons that have a future unlock date
+            if ($unlockDate->gt($today)) {
+                continue;
+            }
+
+            // If the lesson unlock date is today, the user has until the end of the day to complete it
+            if ($unlockDate->isSameDay($today)) {
+                continue;
+            }
+
+            // If the lesson was completed on its unlock date, it should NOT trigger a shift of future days
+            if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                continue;
+            }
+
+            // Check if the unlock date is more than 1 day from the previous lesson's unlock date
+            if ($previousUnlockDate && $unlockDate->gt($previousUnlockDate->copy()->addDay())) {
+                // The gap is more than 1 day, which means a rest day was used
+                if ($remainingRestDays > 0) {
+                    $remainingRestDays--;
+                    $totalShiftDays++;
+                }
+            } elseif ($previousUnlockDate && $unlockDate->eq($previousUnlockDate->copy()->addDay())) {
+                // If the unlock date is only 1 day ahead of the previous unlock date, it means no shift was applied
+                if (!$lesson['completed'] && !$completedAt && $unlockDate->lt($today)) {
+                    // This day was missed and is locked — no future rest days can be used on this lesson
+                    continue;
+                }
+            }
+
+            // If the lesson is not completed on the unlock date and there are rest days available, use a rest day
+            if (!$lesson['completed'] && !$completedAt?->isSameDay($unlockDate) && $remainingRestDays > 0) {
+                $remainingRestDays--;
+                $totalShiftDays++;
+            }
+
+            // Shift the unlock date for this lesson and all future lessons
+            for ($shiftIndex = $index; $shiftIndex < count($lessonsMetaData); $shiftIndex++) {
+                $lessonToShift = &$lessonsMetaData[$shiftIndex];
+                $currentUnlockDate = Carbon::parse($lessonToShift['unlock_date']);
+
+                // Calculate how many days this lesson should be shifted
+                $daysAlreadyShifted = $lessonToShift['days_shifted'] ?? 0;
+                $newShiftDays = $totalShiftDays - $daysAlreadyShifted;
+
+                if ($newShiftDays > 0) {
+                    $lessonToShift['unlock_date'] = $currentUnlockDate->addDays($newShiftDays)->toISOString();
+                    $lessonToShift['days_shifted'] = $totalShiftDays; // Update the total shift days for this lesson
+                }
+            }
+
+            $previousUnlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
+        }
+
+        // Reassign the updated array to lessons_meta_data
+        $challengeUserProgress->lessons_meta_data = $lessonsMetaData;
+
+        $challengeUserProgress->save();
+
+        return $challengeUserProgress;
     }
 
     /**
@@ -484,7 +576,8 @@ class ChallengeUserProgress extends Model
     public function updateLessonsProgress(
         int $lessonId,
         bool $isCompleted = true,
-        ?int $totalSecondsPracticed = null
+        ?int $totalSecondsPracticed = null,
+        Carbon $completedTime = null
     ): array {
         $previousStreakData = $this->getStreakCurrentData();
         $results = [
@@ -497,9 +590,9 @@ class ChallengeUserProgress extends Model
         foreach ($lessonMetaData as $index => $lessonMetaDatum) {
             if ($lessonMetaDatum['content_id'] == $lessonId) {
                 $lessonMetaData[$index]['completed'] = $isCompleted;
-                $lessonMetaData[$index]['completed_at'] =
+                $lessonMetaData[$index]['completed_at'] = ($completedTime ??
                     Carbon::parse(Carbon::now()->timezone(UserTimezoneService::getUsersCurrentTimezone())
-                        ->toDateTimeString())->toISOString();
+                        ->toDateTimeString())->toISOString());
                 if (!is_null($totalSecondsPracticed)) {
                     $lessonMetaData[$index]['seconds_practiced'] = $totalSecondsPracticed;
                 }

@@ -9,7 +9,7 @@
                 <div class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825] widescreen text-center">
                     <img
                         class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
-                        :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${item.image}`"
+                        :src="`https://www.musora.com/cdn-cgi/image/width=280,height=280,quality=95/${item.image}`"
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
                         :alt="`${item.title} thumbnail`"
