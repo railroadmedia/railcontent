@@ -108,7 +108,7 @@
                 :class="[`${overview && !isNextLesson ? 'tw-mt-4 2xl:tw-hidden' : 'xl:tw-hidden'}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
             >
                 <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
-                  <span v-if="i > 0 && column_data && column_data.length" class="bullet">-</span>
+                  <span v-if="i > 0 && column_data && column_data.length" class="bullet">&nbsp;-</span>
                   {{ column_data }}
                 </span>
                 <!-- Difficulty Label -->
@@ -454,7 +454,7 @@ const openUpgradeModal = () => {
 }
 
 onBeforeMount( ()=> {
-    //console.log('I am in a list catalog item')
+    console.log('props.item', props.item);
 })
 </script>
 
