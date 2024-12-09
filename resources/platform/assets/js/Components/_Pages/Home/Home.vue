@@ -4,14 +4,6 @@
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
 
-            <!-- Challenge Carousel -->
-            <MiniCatalogueSection
-                :title="welcomeMessage"
-                catalogue-type="challenge"
-                page-type="home"
-                :preLoadedContent="data?.carousels"
-            />
-
             <!-- Learning Paths -->
 <!--            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"-->
 <!--                trackingSection="banner" />-->
@@ -27,6 +19,14 @@
                 :cta-url="upgradeMembershipUrl"
                 img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
                 class="tw-mt-4 tw-mb-8"
+            />
+
+            <!-- Challenge Carousel -->
+            <MiniCatalogueSection
+                :title="welcomeMessage"
+                catalogue-type="challenge"
+                page-type="home"
+                :preLoadedContent="data?.carousels"
             />
 
             <!-- Header carousel -->
@@ -68,7 +68,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                 v-if="(!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)"
+                 v-if="(!isPackOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -117,14 +117,23 @@
                     :pre-loaded-content="courseDataObject"
                 />
 
+
                 <!-- Your Packs section : Packs Only -->
                 <HomepageCatalog
-                    v-if="packData.length"
+                    v-if="isPackOnlyBoolean"
+                    collection-type="challenge"
+                    title="Your Challenges"
+                    see-all-label="See All Challenges"
+                    :see-all-url="`${brand}/challenge`"
+                />
+
+                <!-- Your Packs section : Packs Only -->
+                <HomepageCatalog
+                    v-if="isPackOnlyBoolean"
                     collection-type="pack"
                     title="Your Training Packs"
                     see-all-label="See All Packs"
                     :see-all-url="`${brand}/packs`"
-                    :pre-loaded-content="packDataObject"
                 />
             </template>
 
@@ -246,7 +255,7 @@
     });
 
     const showTriggerBanner = computed(() => {
-        if (props.isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        if (isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
         return showOnboardingBanner.value;
     });
 

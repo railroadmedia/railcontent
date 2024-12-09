@@ -260,9 +260,9 @@ export const useCollectionStore = defineStore({
         setActiveTab() {
             const activeTab = this.tabOptions.find((tab) => {
                 return tab.key === this.filter.activeTab;
-            })
+            });
 
-            this.filter.activeTab = activeTab.value;
+            this.filter.activeTab = activeTab ? activeTab.value : (this.tabOptions[0]?.value ?? '');
             this.tabData[this.filter.activeTab] = { ...activeTab };//Get active tab
         },
 
@@ -342,7 +342,7 @@ export const useCollectionStore = defineStore({
 
             this.searching = !!this.filter.searchTerm; // Sets searching to true if there is a search term
             this.loading = false;
-        },  
+        },
 
         //THIS RUNS WHEN THE PAGE LOADS!!
         async setDefaults(defaults) {

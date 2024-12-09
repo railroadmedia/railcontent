@@ -180,9 +180,6 @@ Route::domain('{musoraDomain}')
                         'odd-times',
                     ])
                     ->name('platform.content-type-catalog');
-                Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenge'])
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.challenges');
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
@@ -306,7 +303,6 @@ Route::domain('{musoraDomain}')
                             'drum-fest-international-2022',
                             'workouts',
                             'odd-times',
-                            'challenge'
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -316,7 +312,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges', 'challenge'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials', 'challenges'])
                     ->name('platform.content.second-level');
 
                 Route::get(
@@ -428,6 +424,28 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/search', [ContentPagesController::class, 'search'])
             ->whereIn('brand', all_brands())
             ->name('platform.search');
+
+        /*
+         * Challenges
+         */
+
+        Route::get('/{brand}/challenge', [ContentPagesController::class, 'challenge'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenges');
+
+        Route::get(
+            '/{brand}/challenge/{firstContentSlug}/{firstContentId}',
+            [ContentPagesController::class, 'challengeFirstLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenge.first-level');
+
+        Route::get(
+            '/{brand}/challenge/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+            [ContentPagesController::class, 'challengeSecondLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.challenge.second-level');
 
         /*
          * Packs Sub-Content Hierarchy Pages

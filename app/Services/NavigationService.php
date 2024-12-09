@@ -15,29 +15,27 @@ class NavigationService
         }
         $shopName = brand() == 'drumeo' ? 'drumshop' : 'shop';
         if ($user->isPackOrChallengeOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
-            $menu = [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
-                    ],
-                    [
-                        'name' => 'Shop',
-                        'path' => get_legacy_brand_base_url().'/'.$shopName,
-                        'icon' => 'cart',
-                    ]
-                ]
-            ];
+            $section1 = [[
+                'name' => 'Home',
+                'path' => '/'.brand(),
+                'icon' => 'home',
+            ]];
             if ($user->isChallengeOnlyOwner()) {
-                $menu[] = [ // section
+                $section1[] =
                     [
                         'name' => 'Challenges',
                         'path' => '/'.brand().'/challenge',
                         'icon' => 'challenges',
-                    ],
-                ];
+                    ];
             }
+            $section1[] =
+                [
+                    'name' => 'Shop',
+                    'path' => get_legacy_brand_base_url().'/'.$shopName,
+                    'icon' => 'cart',
+                ];
+            $menu = [$section1];
+
             if ($user->isPackOnlyOwner()) {
                 $menu[] = [ // section
                     [
