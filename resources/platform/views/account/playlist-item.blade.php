@@ -99,6 +99,9 @@
         playlist-id="{{ $playlist['id'] }}"
         soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}"
         content-id="{{ $lessonContent['id'] }}"
+        @if(isset($lessonContent['video']['type']))
+            video-type="{{ $lessonContent['video']['type'] }}"
+        @endif
         youtube-video-id="{{ ($lessonContent['video']['type'] ?? '') == 'youtube-video' ? $lessonContent['video']['external_id'] : '' }}"
         vimeo-video-id="{{ ($lessonContent['video']['type'] ?? '') == 'vimeo-video' ? $lessonContent['video']['external_id'] : '' }}"
         current-second="{{ $playlistItem['start_second'] ?? 0 }}"
