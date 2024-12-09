@@ -7,13 +7,13 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
     const { elementProps, renderDefault, value = '', onChange } = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = useFormValue(["_id"]);
+    const brand = useFormValue(["brand"]);
     const videoType = useFormValue(['video.type']) ?? null;
+    const sanityConfig = window.sanityConfig.find(item => item.name == 'publishing-workspace');
 
     const handleBlur = useCallback(() => {
         if (value && videoType === 'vimeo-video') {
-                const sanityConfig = window.sanityConfig.find(item => item.name === 'publishing-workspace');
                 const url = `${sanityConfig.appUrl}/admin/vimeo/${value}`;
-
                 fetch(url, {
                     method:  'GET',
                     headers: {
@@ -63,7 +63,37 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                     .catch(error => {
                         console.error('Error fetching Vimeo data:', error);
                     });
-            } else {
+            }
+        else if (value && videoType === 'youtube-video') {
+            console.log('rox    ', `youtube-duration?id=${value}&brand=${brand}`);
+            const url = sanityConfig.appUrl +`/admin/youtube-duration?id=${value}&brand=${brand}`;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const newLength = data;
+                    return sanityClient
+                        .patch(docId)
+                        .set({
+                            'length_in_seconds':newLength
+                        })
+                        .commit();
+                })
+                .catch(error => {
+                    console.error('Error fetching data from Youtube API:', error);
+                });
+        }
+        else {
             sanityClient
                 .patch(docId)
                 .unset(['video.hlsManifestUrl', 'video.video_playback_endpoints'])
@@ -76,7 +106,7 @@ const VimeoVideoInput = React.forwardRef((props, ref) => {
                 });
         }
 
-    }, [value, videoType, sanityClient, docId]);
+    }, [value, videoType, sanityClient, docId, brand]);
 
     return (
         <Stack space={3}>
