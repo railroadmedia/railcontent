@@ -7,6 +7,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
@@ -26,6 +27,7 @@ class ChallengesService
         private SanityGateway $sanityGateway,
         private MediaPlaybackService $mediaPlaybackService,
         private ContentUserProgress $contentUserProgress,
+        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
     }
 
@@ -682,5 +684,17 @@ class ChallengesService
         $progress->save();
         return true;
     }
+
+    public function getOwnedChallenges(): \Illuminate\Support\Collection
+    {
+        $ownedProductIds = $this->userAccessPermissionsService->getOwnedChallengeProductIds();
+        if (count($ownedProductIds) == 0) {
+            return collect();
+        }
+        $challenges = collect($this->sanityGateway->getAllByType('challenge', 10000));
+        $ownedChallenges = $challenges->whereNotNull('product_id')->whereIn('product_id', $ownedProductIds);
+        return $ownedChallenges;
+    }
+
 
 }

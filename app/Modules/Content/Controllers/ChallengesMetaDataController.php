@@ -276,10 +276,9 @@ class ChallengesMetaDataController extends Controller
      */
     public function getOwnedChallenges(Request $request)
     {
-        $userId = user()->id;
-        $ownedChallenges = ChallengeUserProgress::whereUserId($userId, limit: 1000);
-        $completedIds = $ownedChallenges->pluck('content_id')->toArray();
-        return response()->json($completedIds);
+        $ownedChallenges = $this->challengesService->getOwnedChallenges();
+        $ownedChallengeIds = $ownedChallenges->pluck('id')->toArray();
+        return response()->json($ownedChallengeIds);
     }
 
     /**

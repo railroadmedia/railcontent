@@ -31,6 +31,13 @@ class ProductService
             ->get();
     }
 
+    public function getAllChallenges(): Collection
+    {
+        return Product::query()
+            ->where('digital_access_type', Product::DIGITAL_ACCESS_TYPE_CHALLENGE_CONTENT_ACCESS)
+            ->get();
+    }
+
     public function getById(int $productId): ?Product
     {
         return Product::query()->find($productId);
