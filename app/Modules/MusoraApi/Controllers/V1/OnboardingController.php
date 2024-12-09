@@ -6,6 +6,7 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Jobs\SetDefaultPlaylistsJob;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Carbon\Carbon;
@@ -398,6 +399,8 @@ class OnboardingController extends Controller
         $user->save();
 
         dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
+
+        SyncOnboardingBrands::dispatchAfterResponse($user->id, $brand);
 
         return response("History data for instrument has been saved.", 200);
     }
