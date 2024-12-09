@@ -367,10 +367,10 @@
                 <div class="sm:mx-0.5 w-full sm:w-56 join outline white smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
             </div>
             <div class="flex justify-center">
-                <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
+                <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/cdn-cgi/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
                 <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
-                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
-                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
+                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
+                <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/cdn-cgi/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
             </div>
         </div>
         @if(!empty($commercialHeader))

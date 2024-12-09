@@ -95,7 +95,7 @@
                 <div class="px-2 sm:px-3">
                     <img
                         class="h-12 sm:h-14 lg:h-16 mb-3 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
+                        src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
                         alt="FWTGF logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -194,17 +194,17 @@
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                         <h3 class="mt-2"><strong>3.7M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                         <h3 class="mt-2"><strong>2.8M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/cdn-cgi/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                         <h3 class="mt-2"><strong>577M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
@@ -220,7 +220,7 @@
 
     <section class="py-14 sm:py-28 text-center text-white bg-cover bg-center" style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/faster/order-bg.jpg');">
         <div class="max-w-3xl mx-auto">
-        <img class="h-16 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+        <img class="h-16 lg:h-24" src="https://www.musora.com/cdn-cgi/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
         <h5 class="my-5 sm:my-7">Enter your email to receive ten free exercises.</h5>
         @include("drumeo.lead-gen.partials.sign-up-form", [
             "recaptchaKey" => $recaptchaKey,

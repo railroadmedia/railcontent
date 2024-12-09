@@ -10,7 +10,7 @@
             <div class="tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-3">
                 <div v-for="coach in upcomingCoaches" class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
                     <!-- Coach Image -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=300,height=436,quality=95/${coach['image']}`"
+                    <img :src="`https://www.musora.com/cdn-cgi/image/width=300,height=436,quality=95/${coach['image']}`"
                          class="tw-w-full tw-flex tw-object-top tw-object-cover tw-filter tw-grayscale tw-transition-opacity tw-opacity-0"
                          :alt="`${coach['name']} Card`"
                          loading="lazy"

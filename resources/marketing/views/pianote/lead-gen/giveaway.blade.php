@@ -7,7 +7,7 @@
     <meta name="description" content="Want a free piano? Simply enter your email address before September 13th to secure your chance to win.">
     <meta property="og:description" content="Want a free piano? Simply enter your email address before September 13th to secure your chance to win.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/cdn-cgi/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <style>
         header {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');
+            background-image:url('https://www.musora.com/cdn-cgi/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');
         }
 
         @media (min-width:768px) {
             header {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header.jpg');
+                background-image:url('https://www.musora.com/cdn-cgi/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header.jpg');
             }
         }
 
@@ -40,7 +40,7 @@
                 </div>
                 <div class="w-full md:w-8/12 lg:w-8/12 mx-auto sm:pl-8 lg:pl-0 text-center md:text-left px-4 sm:px-0">
                     <div class="sm:px-3">
-                        <img class="h-36 md:h-40 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
+                        <img class="h-36 md:h-40 lg:h-44" src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="logo">
 
                         <p class="mx-0 my-4" style="color:#D0E2E7; max-width: 450px;">
                             At Pianote, it’s our mission to help everyone play this beautiful instrument. Simply start a free 7-day trial of Pianote from now until <span class="text-white font-extrabold">September 12th</span> and you’ll automatically be entered to win a Roland FP-30X Digital Piano.
@@ -74,7 +74,7 @@
 
                 </div>
                 <div class="md:w-7/12 md:pr-7">
-                    <img class="md:hidden rounded-xl mb-6" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro-m.jpg" alt="intro image">
+                    <img class="md:hidden rounded-xl mb-6" src="https://www.musora.com/cdn-cgi/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro-m.jpg" alt="intro image">
                     <p>
                         This is not your beginner piano.
                         <br><br>
@@ -88,7 +88,7 @@
                     </p>
                 </div>
                 <div class="w-5/12 justify-center pl-8">
-                    <img class="rounded-xl hidden md:inline-block" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro.jpg" alt="intro image">
+                    <img class="rounded-xl hidden md:inline-block" src="https://www.musora.com/cdn-cgi/image/width=450,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/intro.jpg" alt="intro image">
                 </div>
             </div>
 
@@ -97,13 +97,13 @@
                 <img class="rounded-xl mb-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-feature.jpg" alt="gallery feature">
             </picture>
 
-            <img class="hidden md:inline-block rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
+            <img class="hidden md:inline-block rounded-xl shadow-md" src="https://www.musora.com/cdn-cgi/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery.jpg" alt="gallery">
 
             <div class="md:hidden">
-                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
-                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
-                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
-                <img class="rounded-xl shadow-md" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
+                <img class="rounded-xl shadow-md mb-4" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
+                <img class="rounded-xl shadow-md" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
             </div>
         </div>
     </section>
@@ -111,7 +111,7 @@
     <section class="py-20 px-4 md:px-6" style="background:#FFF7F7;">
         <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center">
             <div class="md:order-1 md:w-5/12 md:pl-12 text-center md:text-left mb-6 md:mb-0">
-                <img class="h-96" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/ui.png" alt="ui image">
+                <img class="h-96" src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/ui.png" alt="ui image">
             </div>
             <div class="md:w-7/12 lg:pr-6">
                 <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
@@ -137,7 +137,7 @@
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #FFF7F7 calc(50% + 1px));"></div>
     <section class="pb-20 px-5 md:px-6" style="background: #010C15;">
         <div class="max-w-md sm:max-w-3xl mx-auto text-center">
-            <img class="h-28 relative z-10 mb-12" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/caution_icon.svg" alt="caution icon">
+            <img class="h-28 relative z-10 mb-12" src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/caution_icon.svg" alt="caution icon">
             <h3 class="text-white font-extrabold leading-normal">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
@@ -166,7 +166,7 @@
     </section>
 
     <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #F61A30 0%, #590C13 100%);">
-        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/piano_qa.png" alt="piano icon" />
+        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/piano_qa.png" alt="piano icon" />
         <div class="container mx-auto max-w-3xl px-6 sm:px-4 py-8 md:py-10 lg:py-12">
             <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
             <p>
@@ -174,13 +174,13 @@
                 On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome piano lessons, and we’d love to show you.” Don’t worry. We won’t send you spam or share your email address with anybody else. You’ll get free ongoing piano lessons and some special offers. And if you don’t like our emails, you can unsubscribe anytime.
             </p>
         </div>
-        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/email_qa.png" alt="email icon" />
+        <img class="w-2/12 hidden md:inline" src="https://www.musora.com/cdn-cgi/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/email_qa.png" alt="email icon" />
     </section>
 
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover"
-        style='background-image:url("https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg");'>
+        style='background-image:url("https://www.musora.com/cdn-cgi/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg");'>
         <div class="mx-auto max-w-md md:max-w-2xl">
-            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-6" src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-6" src="https://www.musora.com/cdn-cgi/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
 
 
             @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 9, 6, 0, 0, 0, 'America/Vancouver'))

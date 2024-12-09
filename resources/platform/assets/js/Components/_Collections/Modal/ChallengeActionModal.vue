@@ -7,7 +7,7 @@
     >
         <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white">
             <div class="tw-px-8">
-                <img v-if="showLogo" class="tw-max-h-[80px] tw-mb-5 -tw-mt-[50px] tw-mx-auto" :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${logo}`" alt="Challenge logo" />
+                <img v-if="showLogo" class="tw-max-h-[80px] tw-mb-5 -tw-mt-[50px] tw-mx-auto" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${logo}`" alt="Challenge logo" />
             </div>
             <h1 class="tw-text-2xl tw-font-bold tw-mb-[10px]">{{ headerText }}</h1>
             <p class="tw-mb-5">{{ descriptionText }}</p>

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="tw-mb-[30px] tw-mt-16 2xl:tw-mt-0 tw-flex tw-justify-center 2xl:tw-flex-none">
-                <img class="tw-ml-8 tw-max-w-[550px] 3xl:tw-max-w-[800px] tw-w-full " :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${images[brand]}`" alt="Student Focus image" />
+                <img class="tw-ml-8 tw-max-w-[550px] 3xl:tw-max-w-[800px] tw-w-full " :src="`https://www.musora.com/cdn-cgi/image/width=800,quality=95/${images[brand]}`" alt="Student Focus image" />
             </div>
         </div>
 

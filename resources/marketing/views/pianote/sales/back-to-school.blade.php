@@ -368,7 +368,7 @@
 
     <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/august/tablet-demo-bg.webp');">
         <div class="mb-3">
-            <img class="h-6 sm:h-7  mr-2 " src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png " alt="pianote logo" fetchpriority="high">
+            <img class="h-6 sm:h-7  mr-2 " src="https://www.musora.com/cdn-cgi/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png " alt="pianote logo" fetchpriority="high">
 
             <div class="inline-block align-middle h-4 sm:h-5" alt="songs logo" fetchpriority="high">
                 <style>.fill-logo {fill:#f61a30}</style>

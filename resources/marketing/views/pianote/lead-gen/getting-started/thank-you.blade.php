@@ -7,7 +7,7 @@
     <meta name="description" content="Start learning piano the easy and fun way.">
     <meta property="og:description" content="Start learning piano the easy and fun way.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/cdn-cgi/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/getting-started">
 @stop
 
@@ -51,7 +51,7 @@
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-10 sm:h-14 filter saturate-0 brightness-0 invert" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
+                <img class="h-10 sm:h-14 filter saturate-0 brightness-0 invert" src="https://www.musora.com/cdn-cgi/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! Your free lessons <br class="hidden sm:inline">
                         will be landing in your inbox soon!</strong></h3>
@@ -144,7 +144,7 @@
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-pianote"></i>
-                                    {{--                                                                        <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
+                                    {{--                                                                        <img alt="point icon" src="https://www.musora.com/cdn-cgi/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>

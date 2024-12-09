@@ -361,14 +361,14 @@
             $bonuses = [
                 [
                     'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
+                    'image' => 'https://www.musora.com/cdn-cgi/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/95dc0c77-a0a5-4f01-b743-cb01d4912042-easy-chords-cart.jpg',
                     'title' => 'Easy Chords',
                     'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
                     'price' => floatval($productPrices['easy-chords']->price),
                 ],
                 [
                     'imageFull' => true,
-                    'image' => 'https://www.musora.com/musora-cdn/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
+                    'image' => 'https://www.musora.com/cdn-cgi/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/d444aa7c-3c5f-4a3e-8d8b-36a98ac99da4-30DBluesPiano_cart.jpg',
                     'title' => '30-Day Blues',
                     'description' => 'Learn the Blues in just 30 days',
                     'price' => floatval($productPrices['30-day-blues-piano']->price),

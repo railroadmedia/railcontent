@@ -227,7 +227,7 @@ export const useUserStore = defineStore({
                               text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
                           });
                           //Reset in Pinia Store
-                          this.user.profile_picture_url = 'https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png';
+                          this.user.profile_picture_url = 'https://www.musora.com/cdn-cgi/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png';
                       }
                   })
                   .catch(error => {

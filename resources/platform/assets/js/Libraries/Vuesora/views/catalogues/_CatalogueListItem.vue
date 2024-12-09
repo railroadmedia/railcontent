@@ -18,7 +18,7 @@
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
+          <img :src="`https://www.musora.com/cdn-cgi/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
             :class="contentModel.list.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="contentModel.list.imageLoaded = true" />
 

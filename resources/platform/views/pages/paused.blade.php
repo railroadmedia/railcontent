@@ -11,7 +11,7 @@
             cta-text="Continue your membership"
             description="Click here to continue your membership and  back access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
             cta-url="{{ url()->route('platform.profile.settings.account') }}"
-            img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Lisa-Witt-Pianote-ACTION.jpg"
+            img="https://www.musora.com/cdn-cgi/image/width=720,quality=95/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Lisa-Witt-Pianote-ACTION.jpg"
         />
     </div>
 @endsection
