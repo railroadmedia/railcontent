@@ -401,7 +401,7 @@ const noAccess = computed(() => {
 })
 
 const isChallenge = computed(() => {
-    return props.lessonType === 'challenge';
+    return props.lessonType === 'challenge' || props.lessonType === 'challenges';
 })
 
 const toggleCompleteContent = () => {
