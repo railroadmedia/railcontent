@@ -14,6 +14,8 @@ import SoundSliceControls from "@collections/SoundSlice/SoundSliceControls.vue";
 import Breadcrumb from '@collections/Breadcrumb/Breadcrumb.vue';
 import ContentInfo from '@collections/ContentInfo/ContentInfo.vue';
 import VideoChapters from '@collections/VideoChapters/VideoChapters.vue';
+import ProgressTracker from "@vuesora/assets/js/classes/progress-tracker";
+import ContentService from "@vuesora/assets/js/Services/content";
 import Comments from '@vuesora/views/comments/Comments.vue';
 import VideoMediaElement from '@vuesora/Components/MediaElement/MediaElement.vue';
 import VideoPlayer from '@vuesora/Components/VideoPlayer/VideoPlayer.vue';
@@ -273,6 +275,7 @@ const state = reactive({
 
 //---------Refs--------------//
 const openSoundslice = ref(false);
+const mediaElementVueInstance = ref(null);
 const chapterStartTime = ref(0);
 const chapterEndTime = ref(props.totalDuration);
 const soundsliceTitle = ref('');
@@ -284,6 +287,9 @@ const likeData = ref({
 })
 const isContentCompleted = ref(false);
     //ref(props.playlistItems.data[props.playlistItemPosition - 1].completed);
+    
+let hasBeenPlayed = false;
+let progressTracker;
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -291,6 +297,8 @@ const playlistsStore = usePlaylistsStore();
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
     const isPlaylistRepeatOn = localStorage.getItem("isPlaybackPlaylistRepeatOn") ? JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn")) : false;
+
+    handleVideoEnd();
 
     if (isShuffleOn) {
         const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
@@ -350,14 +358,64 @@ const showVideoChapters = computed(() => {
     return props.videoChapters && props.videoChapters.length > 0  && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
 });
 
-//--------Methods---------------//
-const handleVideoPause = () => { }; //?
-const handleVideoPlay = () => { }; //?
+//Methods
+const handleVideoPlay = (payload) => {
+    if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
+        ContentService.markContentAsStarted(payload.contentId);
+    }
+    if (progressTracker == null) {
+        progressTracker = new ProgressTracker();
+        if (mediaElementVueInstance.value) {
+            attachVisibilityAndPagehideEvents();
+        }
+    }
+    hasBeenPlayed = true;
+    progressTracker.start();
+};
+
+const sendProgressTrackerEvent = () => {
+
+    // REMOVE VIDEO DATA AND REPLACE PROPERLY
+    if (progressTracker) {
+        progressTracker.send({
+            mediaType: 'video',
+            mediaCategory: videoData.value?.video?.type.split('-')[0],
+            watchPosition: mediaElementVueInstance.value.currentTimeInSeconds
+                || mediaElementVueInstance.value.currentTime,
+            totalDuration: mediaElementVueInstance.value.videoLength
+                || mediaElementVueInstance.value.totalDuration,
+            brand: brand.value,
+            contentId: mediaElementVueInstance.value.contentId
+        });
+    }
+};
+
+const attachVisibilityAndPagehideEvents = () => {
+    document.addEventListener('visibilitychange', () => {
+        sendProgressTrackerEvent();
+    });
+
+    window.addEventListener('pagehide', () => {
+        sendProgressTrackerEvent();
+    });
+};
+
+const handleVideoPause = () => {
+    progressTracker.stop();
+    sendProgressTrackerEvent();
+};
+
+const handleVideoEnd = () => {
+    sendProgressTrackerEvent();
+    ContentService.markContentAsComplete(props.contentId);
+};
 
 const openSlice = (title, index, startAt, loop) => {soundsliceTitle.value = title;
     chapterStartTime.value = startAt;
     chapterEndTime.value = props.totalDuration;
     startLooping.value = loop;
+
+    // TODO FIX THIS VIDEO DATA THINGY
 
     if (loop) {
         chapterEndTime.value =  videoData.value?.chapters.length === index ? videoData.value?.length_in_seconds : videoData.value?.chapters[index]?.chapter_timecode;
