@@ -48,8 +48,12 @@
             <div class="tw-flex tw-flex-col tw-my-[30px]">
                 <div class="tw-flex tw-w-full tw-flex-row">
                     <transition appear name="fade">
+                        <!-- 
+                            Don't change :content="OvervewChildData",
+                            unless you know what you're doing  
+                        -->
                         <ListCatalogue
-                            :content="data?.children"
+                            :content="OverviewChildData" 
                             :content-type-override="contentType"
                             :is-admin="isAdmin"
                             :display-items-as-overview="childContentDisplayItemsAsOverview"
@@ -98,7 +102,7 @@
             />
         </template>
 
-        <SkeletonListCatalogueItem v-else v-for="n in 6" :key="n" :content-type="contentType" :overview="showOverview" :show-numbers="showNumbers" />
+        <SkeletonListCatalogueItem v-else v-for="n in 6" :key="n" :content-type="contentType" :overview="showOverview" />
     </div>
 </template>
 <script setup>
@@ -194,9 +198,6 @@ const isUnlocked = ref(false); //challenge dropdown
 //Computed
 const showOverview = computed(() => {
     return props.contentType === 'learning-path-level' || props.contentType === 'learning-path-course'  || props.contentType === 'unit';
-})
-const showNumbers = computed(() => {
-    return props.contentType === 'learning-path-lesson' || props.contentType === 'unit-part';
 })
 const OverviewChildData = computed( () => {
     if(props.contentType === 'learning-path-level') return data.value.levels;
