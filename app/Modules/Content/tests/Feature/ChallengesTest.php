@@ -1238,6 +1238,78 @@ class ChallengesTest extends TestCase
                 ], $currentStreakData);
             }
 
+            // they complete the 7th lesson on time (5th regular lesson), they earn another rest day (5 day-streak)
+            if ($currentLessonNumberToBeCompleted == 7) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            // they complete the 8th lesson on time, but its a bonus lesson so they dont get anything
+            if ($currentLessonNumberToBeCompleted == 8) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            // they complete the 9th lesson on time, but its a bonus lesson so they dont get anything
+            if ($currentLessonNumberToBeCompleted == 9) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 5,
+                    'current' => 5,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
+            // they complete the 10th lesson on time (6th regular lesson)
+            if ($currentLessonNumberToBeCompleted == 10) {
+                $challengeData = $challengesService->completeLessonAndGetCurrentProgressResults(
+                    $currentLessonMetaData['content_id'],
+                    $userId
+                );
+
+                $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($this->challengeId, $userId);
+                $currentStreakData = $userProgress->getStreakCurrentData();
+
+                $this->assertEquals([
+                    'best' => 6,
+                    'current' => 6,
+                    'missed' => 0,
+                    'remaining_rest_days' => 1,
+                ], $currentStreakData);
+            }
+
             $currentDay->addDay();
         }
     }

@@ -162,7 +162,12 @@ class ChallengeUserProgress extends Model
             }
 
             // If the lesson was completed on its unlock date, it does NOT trigger a shift or use a rest day
+            // EVen if the user completed this day, if its marked as a rest day we still must decrease the rest day count
             if ($completedAt && $completedAt->isSameDay($unlockDate)) {
+                if ($lesson['rest_day_used']) {
+                    $totalRestDaysUsed++; // Track total rest days used
+                }
+
                 $currentStreak++;
                 $bestStreak = max($bestStreak, $currentStreak);
                 continue;
