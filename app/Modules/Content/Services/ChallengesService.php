@@ -314,12 +314,6 @@ class ChallengesService
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
 
-            if ($isCurriculumLesson) {
-                $lockLessonBecausePreviousIncomplete = $previousCurriculumLesson['completed'] ?? false;
-            } else {
-                $lockLessonBecausePreviousIncomplete = false;
-            }
-
             // we must compare based on day without letting Carbon account for timezones
             $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
                 ->startOfDay();
@@ -329,8 +323,7 @@ class ChallengesService
                 Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
             )->startOfDay()->addSecond();
 
-            $shouldLessonBeLocked = $isLocked && ($lockLessonBecausePreviousIncomplete ||
-                $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison));
+            $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
