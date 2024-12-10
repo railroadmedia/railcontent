@@ -38,16 +38,22 @@
                         </div>
                     </div>
                     <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
+                        <!-- Get Notified Button -->
+                        <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
+                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
+                            Get Notified
+                        </button>
+                        <!-- TODO(challenge): add else state for when notification requested -->
                         <!--  Enrolled Buttons  -->
-                        <div v-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                        <div v-else-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                             <a :href="cohort['course_url']" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                         </div>
                         <template v-else>
                             <!-- Enroll now Button-->
-                            <button v-if="!hasEnded" id="topEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                            <button v-if="showEnrollNow" id="topEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                             <!--  Closed Button  -->
-                            <span v-else class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
+                            <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
                         </template>
 
                         <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start" :class="{ 'md:tw-mt-2': isEnrolled}">
@@ -254,11 +260,15 @@
 
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 <!--  Buttons  -->
-                <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">
+                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>
+                    Get Notified
+                </button>
+                <!-- TODO(challenge): add else state for when notification requested -->
+                <span v-else-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
-                    <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                    <button v-else-if="!cohort['is_product'] && !hasEnded" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
-                    <!-- <button @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button> -->
+                    <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
@@ -266,7 +276,7 @@
             <!-- Cart link -->
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
-            <div v-if="isSolo" class="tw-text-center tw-mb-2">
+            <div v-if="isSolo && !isEnrolled.value" class="tw-text-center tw-mb-2">
                 <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
 
@@ -310,18 +320,19 @@
         id: cohort['id'],
         title: cohort['title'],
     }" />
+    <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
-import { inject, ref, computed, onBeforeMount } from 'vue';
-import { DateTime } from 'luxon';
+import { inject, ref, computed, onBeforeMount, onUnmounted } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
-import { postChallengesEnroll } from 'musora-content-services';
+import { postChallengesEnroll, postChallengesEnrollmentNotification } from 'musora-content-services';
 
 import CohortDropdown from '@collections/Dropdown/CohortDropdown';
 import VideoModal from '@collections/Modal/VideoModal';
 import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
 import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
+import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -355,6 +366,8 @@ const props = defineProps({
 
 const token = inject('csrf_token');
 
+const notificationRequested = ref(false);
+const isEnrollmentOpen = ref(false);
 const isEnrolled = ref(props.hasProduct);
 const countdownText = ref('');
 const openTrailer = ref(false);
@@ -363,6 +376,7 @@ const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
 const openChallengeActionModal = ref(false);
 const isFromApp = ref(false);
+const isGetNotifiedModalOpen = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
@@ -378,6 +392,38 @@ const challengeType = computed(() => {
 
 const isSolo = computed(() => {
     return props.cohort.is_solo;
+})
+
+const showEnrollNow = computed(() => {
+    //when user is not enrolled for solo challenge
+    if(isSolo.value && !isEnrolled.value){
+        return true;
+    }
+    //when user is not enrolled and enrollment is still open for community challenge
+    else if(!isSolo.value && !isEnrolled.value && !hasEnded.value){
+        return true;
+    }
+
+    return false;
+
+})
+
+const showClosed = computed(() => {
+    //when community challenge has ended
+    if(!isSolo.value && hasEnded.value){
+        return true;
+    }
+
+    return false;
+})
+
+const showGetNotified = computed(() => {
+    //when community challenge enrollment is not opened
+    if(!isSolo.value && !isEnrollmentOpen.value){
+        return true;
+    }
+
+    return false;
 })
 
 const enroll = async() => {
@@ -436,6 +482,17 @@ const sendPostMessage = () => {
     window.ReactNativeWebView.postMessage(props.cohort);
 }
 
+const handleGetNotified = async () => {
+    const response = await postChallengesEnrollmentNotification(props.cohort.id);
+    notificationRequested.value = true;
+    isGetNotifiedModalOpen.value = true;
+    sendPostMessage();
+}
+
+const closeGetNotifiedModal = () => {
+    isGetNotifiedModalOpen.value = false;
+}
+
 const countdown = () => {
     const start = new Date(props.cohort['enrollment_end_date']);
     const now = Date.now();
@@ -456,19 +513,46 @@ const countdown = () => {
         }
     } else {
         countdownText.value = '';
-        //hasEnded.value = true;
+        hasEnded.value = true;
+        clearInterval(countdown);
+    }
+}
+
+const watchEnrollmentOpen = () => {
+    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const now = new Date();
+
+    if(now <= openDate){
+        isEnrollmentOpen.value = true;
+        clearInterval(watchEnrollmentOpen);
     }
 }
 
 onBeforeMount(() => {
-    if(props.cohort['enrollment_end_date']){
+    console.log('cohort', props.cohort)
+    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const closeDate = new Date(props.cohort['enrollment_end_date']);
+    const now = new Date();
+
+    //Start countdown for unclosed community challenges
+    if(!isSolo.value && now < closeDate){
         countdown();
         setInterval(countdown, 1000);
+    }
+
+    if(!isSolo.value && openDate < now){
+        watchEnrollmentOpen();
+        setInterval(watchEnrollmentOpen, 1000);
     }
 
     const url = window.location.href;
     if(url.includes('mobile-app-web-view')){
         isFromApp.value = true;
     }
+})
+
+onUnmounted(() => {
+    clearInterval(countdown);
+    clearInterval(watchEnrollmentOpen);
 })
 </script>
