@@ -26,7 +26,6 @@
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
         :recommended-content="{{ $recommendedContentJson }}"
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
-        :started-content="{{ $startedContentJson }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
         :users-list="{{ json_encode($usersList->results())  }}"
         :user-metrics="{{ json_encode($userMetrics) }}"

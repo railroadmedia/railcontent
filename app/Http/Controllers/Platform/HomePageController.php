@@ -125,8 +125,6 @@ class HomePageController extends BaseController
             return redirect()->route('platform.onboarding');
         }
 
-        $startedLessons = $this->getUsersStartedContent();
-
         $usersList = $this->getUsersPlaylist();
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
@@ -172,7 +170,6 @@ class HomePageController extends BaseController
         if (!empty($currentEvent)) {
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
-        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
 
@@ -308,7 +305,6 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
             "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
-            "startedContentJson" => $startedLessons->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
             "trialSection" => $trialSection,
@@ -572,27 +568,6 @@ class HomePageController extends BaseController
         );
         ContentRepository::$pullFutureContent = $oldFutureContent;
         return $workouts;
-    }
-
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    public function getUsersStartedContent(): ContentFilterResultsEntity
-    {
-        $contentTypes = ContentTypes::inProgressContentTypes();
-        //TODO ADRIAN this needs to be handled differently as this is uses join on the railcontent_content table
-        $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
-            auth()->id(),
-            $contentTypes,
-            'started',
-            'updated_on',
-            'desc',
-            self::STARTED_CONTENT_COUNT
-        );
-        $ids = array_column($startedProgressRows, 'content_id');
-        $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
-
-        return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
     /**

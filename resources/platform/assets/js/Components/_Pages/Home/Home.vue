@@ -234,10 +234,6 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        startedContent: {
-            type: Object,
-            default: () => ({ data: [] })
-        },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) }
     });
