@@ -70,6 +70,12 @@
 
         @yield('styles')
         {!! \App\Analytics\Tracker::headBottom() !!}
+
+        <script>
+            window.Laravel = {
+                sanityApiToken: @json(config('app.sanity_api_token'))
+            };
+        </script>
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative" @yield('body-data')>
