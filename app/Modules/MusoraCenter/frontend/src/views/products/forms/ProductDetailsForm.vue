@@ -216,7 +216,7 @@
                 ></v-text-field>
                 <v-text-field
                     v-model="$_digital_access_type"
-                    label="Digital acccess type (all content access, basic content access, specific content access)"
+                    label="Digital acccess type (all content access, basic content access, specific content access, challenge content access)"
                     :color="brandColor"
                     :rules="validationRules.digital_access_type"
                     :required="false"

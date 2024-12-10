@@ -1,6 +1,7 @@
 <?php
 
 return [
+    Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
     App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
     App\Modules\Referral\Providers\ReferralServiceProvider::class,
     App\Modules\Brand\Providers\BrandServiceProvider::class,

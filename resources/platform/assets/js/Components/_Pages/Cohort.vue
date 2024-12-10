@@ -38,6 +38,12 @@
                         </div>
                     </div>
                     <div :class="`md:tw-flex ${isEnrolled ? 'md:tw-items-start' : 'md:tw-items-center'}`">
+                        <!-- Get Notified Button -->
+<!--                        <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                            <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                            Get Notified-->
+<!--                        </button>-->
+                        <!-- TODO(challenge): add else state for when notification requested -->
                         <!--  Enrolled Buttons  -->
                         <div v-if="isEnrolled" class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                             <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
@@ -45,9 +51,9 @@
                         </div>
                         <template v-else>
                             <!-- Enroll now Button-->
-                            <button v-if="!hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                            <button v-if="showEnrollNow" id="topEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                             <!--  Closed Button  -->
-                            <span v-else class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
+                            <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
                         </template>
 
                         <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start" :class="{ 'md:tw-mt-2': isEnrolled}">
@@ -70,10 +76,10 @@
                         :src="`https://www.musora.com/cdn-cgi/image/width=850,quality=95/${cohort['header_image_url']}`"
                         alt="header thumb"
                     />
-                    <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
+                    <div v-if="cohort['cohort_trailer']" class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" @click="openTrailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                 </div>
             </div>
-            <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-text-center tw-border tw-rounded-lg tw-border-gray-300 tw-mb-2 lg:tw-mb-4">
+            <div v-if="!isSolo" class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-text-center tw-border tw-rounded-lg tw-border-gray-300 tw-mb-2 lg:tw-mb-4">
                 <div class="tw-w-full sm:tw-w-auto tw-border-b sm:tw-border-b-0 sm:tw-border-r tw-border-gray-300 tw-py-4 sm:tw-py-3 lg:tw-py-4">
                     <p class="tw-tracking-wide tw-opacity-70 tw-text-sm">STARTS ON</p>
                     <h4 class="tw-px-3 lg:tw-px-5"><strong>{{ startDateText }}</strong></h4>
@@ -205,7 +211,7 @@
     <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <div class="tw-text-center">
+            <div v-if="!isSolo" class="tw-text-center">
                 <!--  Logo  -->
                 <img class="tw-h-20 sm:tw-h-28 lg:tw-h-28 tw-mb-4 tw-inline-block " alt="header logo" :src="`https://www.musora.com/cdn-cgi/image/width=440,quality=95/${ cohort['light_mode_logo'] }`" />
                 <!--  Bottom title  -->
@@ -223,7 +229,7 @@
                 <!--  Bottom description  -->
                 <p class="tw-font-bold tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
             </div>
-            <template v-if="cohort['is_product']">
+            <template v-if="cohort['is_product'] && !isSolo">
                 <div v-if="!isEnrolled && !hasEnded" >
                     <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
                         <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
@@ -254,11 +260,15 @@
 
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 <!--  Buttons  -->
+<!--                <button v-if="showGetNotified" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`" @click="handleGetNotified">-->
+<!--                    <i class="fa-solid fa-calendar tw-mr-2 tw-mb-1"></i>-->
+<!--                    Get Notified-->
+<!--                </button>-->
+                <!-- TODO(challenge): add else state for when notification requested -->
                 <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
-                    <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                    <button v-else-if="!cohort['is_product'] && !hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
-                    <!-- <button @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button> -->
+                    <button v-if="showEnrollNow" id="bottomEnrollNow" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <span v-else-if="showClosed" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
@@ -266,8 +276,8 @@
             <!-- Cart link -->
             <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
-            <div v-if="challengeType === 'solo'" class="tw-text-center tw-mb-2">
-                <button @click="openActionModal" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
+            <div v-if="isSolo && !isEnrolled.value" class="tw-text-center tw-mb-2">
+                <button id="noGuideText" @click="handleNoGuide" class="tw-text-black tw-italic tw-underline tw-font-bold tw-text-sm">I don’t want the guided experience.</button>
             </div>
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
@@ -298,7 +308,6 @@
     <!-- Trailer Modal -->
     <VideoModal v-if="openTrailer" :videoUrl="cohort['cohort_trailer']" @onCloseModal="openTrailer = false" />
 
-    //TODO(challenge): updated the field when migrating with MCS
     <ChallengeNotificationModal v-if="openChallengeNotificationModal" :challengeType="challengeType" :challenge="{
         ...cohort,
         dark_mode_logo_url: cohort['dark_mode_logo'],
@@ -308,21 +317,22 @@
       :challenge="{
         dark_mode_logo_url: cohort['dark_mode_logo'],
         light_mode_logo_url: cohort['light_mode_logo'],
-        id: cohort['content_id'],
-        title: cohort['cohort_title'],
+        id: cohort['id'],
+        title: cohort['title'],
     }" />
+    <ChallengeGetNotifiedModal v-if="isGetNotifiedModalOpen" @close-modal="closeGetNotifiedModal" />
 </template>
 <script setup>
-import { inject, ref, computed, onBeforeMount } from 'vue';
-import { DateTime } from 'luxon';
+import { inject, ref, computed, onBeforeMount, onUnmounted } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "@stores/user";
-import { postChallengesEnroll } from 'musora-content-services';
+import { postChallengesEnroll, postChallengesEnrollmentNotification } from 'musora-content-services';
 
 import CohortDropdown from '@collections/Dropdown/CohortDropdown';
 import VideoModal from '@collections/Modal/VideoModal';
 import ChallengeNotificationModal from '@collections/Modal/ChallengeNotificationModal';
 import ChallengeActionModal from '@collections/Modal/ChallengeActionModal';
+import ChallengeGetNotifiedModal from '@collections/Modal/ChallengeGetNotifiedModal';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -356,6 +366,8 @@ const props = defineProps({
 
 const token = inject('csrf_token');
 
+const notificationRequested = ref(false);
+const isEnrollmentOpen = ref(false);
 const isEnrolled = ref(props.hasProduct);
 const countdownText = ref('');
 const openTrailer = ref(false);
@@ -364,24 +376,62 @@ const hasEnded = ref(false);
 const openChallengeNotificationModal = ref(false);
 const openChallengeActionModal = ref(false);
 const isFromApp = ref(false);
+const isGetNotifiedModalOpen = ref(false);
 
 const joinText = computed(() => {
     return brand.value === 'drumeo' ? 'drummers' : brand.value === 'pianote' ? 'piano players' : brand.value === 'guitareo' ? 'guitar players' : brand.value === 'singeo' ? 'singers' : 'students'
 });
 
 const challengeType = computed(() => {
-    if(props.cohort.is_solo){
+    if(isSolo.value){
         return 'solo';
     } else {
         return 'community'
     }
 })
 
+const isSolo = computed(() => {
+    return props.cohort.is_solo;
+})
+
+const showEnrollNow = computed(() => {
+    //when user is not enrolled for solo challenge
+    if(isSolo.value && !isEnrolled.value){
+        return true;
+    }
+    //when user is not enrolled and enrollment is still open for community challenge
+    else if(!isSolo.value && !isEnrolled.value && !hasEnded.value){
+        return true;
+    }
+
+    return false;
+
+})
+
+const showClosed = computed(() => {
+    //when community challenge has ended
+    if(!isSolo.value && hasEnded.value){
+        return true;
+    }
+
+    return false;
+})
+
+const showGetNotified = computed(() => {
+    //when community challenge enrollment is not opened
+    if(!isSolo.value && !isEnrollmentOpen.value){
+        return true;
+    }
+
+    return false;
+})
+
 const enroll = async() => {
     try {
-        const enrollUser = await postChallengesEnroll(props.cohort.content_id);
+        const enrollUser = await postChallengesEnroll(props.cohort.id);
         isEnrolled.value = true;
         openChallengeNotificationModal.value = true;
+        sendPostMessage();
     } catch (e){
         window.shownotification({
             icon: 'error',
@@ -396,33 +446,51 @@ const closeNotificationModal = () => {
     openChallengeNotificationModal.value = false;
 }
 
-const openActionModal = () => {
+const handleNoGuide = () => {
     openChallengeActionModal.value = true;
+    sendPostMessage();
 }
 
 const closeActionModal = () => {
     openChallengeActionModal.value = false;
 }
 
-const addOrdinal = (day) =>{
-    const suffixes = ['th', 'st', 'nd', 'rd'];
-    const v = day % 100;
-    return day + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+const formatDate = (date) =>{
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+
+    // Determine the day suffix
+    const suffix =
+        day % 10 === 1 && day !== 11 ? "st" :
+        day % 10 === 2 && day !== 12 ? "nd" :
+        day % 10 === 3 && day !== 13 ? "rd" :
+        "th";
+
+    return `${month} ${day}${suffix}`;
 }
 
 const startDateText = computed(() => {
-    return DateTime.fromSQL(props.cohort['cohort_start_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_start_date']).toFormat('d'))}`;
-})
-
-const endDateText = computed(() => {
-    return DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('MMMM') + ` ${addOrdinal(DateTime.fromSQL(props.cohort['cohort_end_date']).toFormat('d'))}`;
+    return formatDate(new Date(props.cohort['cohort_start_date']));
 })
 
 const handleGoBack = () => {
     history.back();
-    window.ReactNativeWebView.postMessage('react native');
-    window.postMessage('post message');
+}
 
+const sendPostMessage = () => {
+    window.ReactNativeWebView.postMessage(JSON.stringify(props.cohort));
+}
+
+const handleGetNotified = async () => {
+    const response = await postChallengesEnrollmentNotification(props.cohort.id);
+    notificationRequested.value = true;
+    isGetNotifiedModalOpen.value = true;
+    sendPostMessage();
+}
+
+const closeGetNotifiedModal = () => {
+    isGetNotifiedModalOpen.value = false;
 }
 
 const countdown = () => {
@@ -446,19 +514,45 @@ const countdown = () => {
     } else {
         countdownText.value = '';
         hasEnded.value = true;
+        clearInterval(countdown);
+    }
+}
+
+const watchEnrollmentOpen = () => {
+    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const now = new Date();
+
+    if(now <= openDate){
+        isEnrollmentOpen.value = true;
+        clearInterval(watchEnrollmentOpen);
     }
 }
 
 onBeforeMount(() => {
-    console.log(props.cohort)
-    if(props.cohort['enrollment_end_date']){
+    console.log('cohort', props.cohort)
+    const openDate = new Date(props.cohort['enrollment_start_date']);
+    const closeDate = new Date(props.cohort['enrollment_end_date']);
+    const now = new Date();
+
+    //Start countdown for unclosed community challenges
+    if(!isSolo.value && now < closeDate){
         countdown();
         setInterval(countdown, 1000);
+    }
+
+    if(!isSolo.value && openDate < now){
+        watchEnrollmentOpen();
+        setInterval(watchEnrollmentOpen, 1000);
     }
 
     const url = window.location.href;
     if(url.includes('mobile-app-web-view')){
         isFromApp.value = true;
     }
+})
+
+onUnmounted(() => {
+    clearInterval(countdown);
+    clearInterval(watchEnrollmentOpen);
 })
 </script>

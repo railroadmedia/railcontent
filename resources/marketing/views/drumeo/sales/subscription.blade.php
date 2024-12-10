@@ -1,5 +1,6 @@
 @php
     require_once(resource_path('marketing/views/drumeo/_partials/homepage-data.php'));
+    require_once(resource_path('marketing/views/drumeo/_partials/bonus-data.php'));
 @endphp
 
 @extends('drumeo._partials.global-layout')
@@ -15,8 +16,10 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">
+{{--        <meta property="twitter:image" content="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/twitter-image.webp">--}}
+{{--        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/share-image-drumeo.webp">--}}
+
+        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/2024/home-shop-share-image.jpg">
     @endif
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -125,23 +128,23 @@
             color:transparent
         }
 
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+        .ajax-form ::-webkit-input-placeholder, .ajax-form ::-moz-placeholder, .ajax-form :-ms-input-placeholder, .ajax-form :-moz-placeholder {
             color:#777
         }
 
-        form {
+        .ajax-form {
             position: relative;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
-        @media (min-width: 768px) {
-            form {
-                margin: 0 auto 10px;
-            }
-        }
+        /*@media (min-width: 768px) {*/
+        /*    .ajax-form {*/
+        /*        margin: 0 auto 10px;*/
+        /*    }*/
+        /*}*/
 
-        form input, form button {
+        .ajax-form input, .ajax-form button {
             font: 400 18px/50px 'Open Sans', sans-serif;
             height: 50px;
             color: #999;
@@ -151,18 +154,21 @@
             margin: 0 auto 15px;
         }
         @media (min-width: 768px) {
-            form input, form button {
+            .ajax-form input, .ajax-form button {
                 font-size: 22px;
                 height: 65px;
                 line-height: 65px;
             }
         }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
+        .ajax-form input[type="submit"],
+        .ajax-form button[type="submit"],
+        .ajax-form input button,
+        .ajax-form button button {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             background: #0b76db;
             text-transform: uppercase;
-            margin: 0 auto 15px;
+            /*margin: 0 auto 15px;*/
             display: block;
             cursor: pointer;
             border: none;
@@ -170,7 +176,7 @@
             text-align: center;
             padding: 0;
         }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+        .ajax-form input[type="submit"]:hover, .ajax-form button[type="submit"]:hover, .ajax-form input button:hover, .ajax-form button button:hover {
             background: #258ff4;
         }
         .disclaimer {
@@ -289,15 +295,22 @@
             }
         }
     </style>
+
 @stop
 
 @section('body-data')
     x-data ='{
         soundslice : false,
+        BFwaitlist: false,
         waitlist: false,
         trailer : false,
         lazyLoad: false,
         videoLoaded: false,
+        @foreach($bonuses as $bonus)
+            @if(!empty($bonus['vimeoId']))
+                modal{{ $bonus['vimeoId'] }}: false,
+            @endif
+        @endforeach
     }'
 @endsection
 
@@ -311,9 +324,14 @@
     @elseif(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "hideMenu" => true,
         ])
+{{--        @include("drumeo.sales.partials._nav", [--}}
+{{--            "subscriptionVersion" => true,--}}
+{{--            "scrollToJoin" => true,--}}
+{{--            "hideMenu" => true,--}}
+{{--        ])--}}
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -330,9 +348,33 @@
         ])
     @endif
 
+    @if(!empty($bfVersion))
+        @include('_partials.layout.holiday.homepage-top-banner',[
+            'bg' => "url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/november/2024/xm-banner.webp')",
+            'text' => 'Save up to 65% on <br class="sm:hidden">drum lessons, gear & more!',
+            'text2' => '<span class="text-promo">Save 38%</span> on your Drumeo Membership<br> + get 10 free bonuses worth $1233.94.',
+            'vimeo' => '885338636',
+            'orderUrl' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo,holiday-bundle-shipping&locked=true',
+        ])
+
+
+        <div class="sticky-trigger block"></div>
+        <div href="#customize-anchor"
+            class="promo-banner anchor-slide text-white flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] -mt-20 transition-none"
+            style="    background: linear-gradient(to bottom, #020306, #042c52);">
+            @include($theme.'._partials.holiday-logo', [
+                'styles' => 'w-auto h-10 sm:h-14',
+                'isProductPage' => true,
+                'productPageStyles' => 'w-auto h-10 sm:h-14 p-1'
+            ])
+        </div>
+    @endif
+
+
     @hasSection('top-bar')
         @yield('top-bar')
     @endif
+
 
     @php
        $bubbles =  [
@@ -416,6 +458,7 @@
     @else
         @include('musora.sales.components.header-section', [
             'promoHeader' => true,
+            'BFheader' => 'Join today and get a free practice pad,<br class="inline sm:hidden"> sticks, and 3 digital courses.',
             'header' => 'EVERYTHING<br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> popular songs and unlimited personal support.',
             'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/jan-thumb-no-badge.webp',
@@ -510,30 +553,37 @@
 
     @elseif(!empty($promoVersion))
         @php
-            $bonuses = [
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/cdn-cgi/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/bafe2908-b615-4892-a621-d246828f8cb4-30day-chops-cart.jpg',
-                    'title' => '30-Day Chops',
-                    'description' => 'Boost your creativity in just 30 days',
-                    'price' => floatval($productPrices['30-day-chops']->price),
-                ],
-                [
-                    'imageFull' => true,
-                    'image' => 'https://www.musora.com/cdn-cgi/image/width=520,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/57b58267-17bd-475a-89f7-874185438a7b-30DDs4_cart.jpg',
-                    'title' => '30-Day Drummer',
-                    'description' => 'Learn the drums with daily guided workouts.',
-                    'price' => floatval($productPrices['30-day-drummer-4']->price),
-                ],
-            ];
+            $targetSkus = ['quietpad', 'Drumeo-VaterSticks', '30-day-drummer-4', '30-day-independence', '30-day-double-bass'];
         @endphp
 
-        @include('musora.sales.components.order-section-bonuses', [
+        @include('drumeo._partials.bf-order-section-bonuses-modal', [
+        'bgColor' => 'background:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/marketing/drumeo/promos/november/2024/xm-bg.webp);',
+        'promoLogo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/promos/november/2024/holiday-bundle/holiday-bundle-logo.svg',
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[30-day-drummer-4]=1&locked=true&promo-code=special',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'logoHeight' => 'h-16 sm:h-18',
+        'promoHeader' => '<h3 class="leading-tight mb-4 sm:mb-5"><strong> Get a Drumeo Membership with $452.95 in free bonuses.</strong></h3>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[the-holiday-bundle]=1&promo-code=holiday-bundle-drumeo,holiday-bundle-shipping&locked=true',
+        'belowButton' => true,
+        'bundle' => 'holiday',
         ])
+
+        @php
+            $videoBonuses = [];
+            foreach ($bonuses as $bonus) {
+                if (!empty($bonus['vimeoId']) && in_array($bonus['sku'], $targetSkus)) {
+                    $videoBonuses[] = ['name' => 'modal' . $bonus['vimeoId'], 'video' => $bonus['vimeoId']];
+                }
+            }
+        @endphp
+
+        @foreach ($videoBonuses as $modal)
+            @include('_partials.components.video-modal', [
+                'name' => $modal['name'],
+                'video' => $modal['video'],
+                'vimeo' => true,
+            ])
+        @endforeach
     @else
         @include('musora.sales.components.order-section-collage', [
         'headerLight' => true,
@@ -574,8 +624,30 @@
         @include("drumeo.sales.partials._footer")
     @endif
 
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
+
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            if (!stickyBar) return;
+
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @stop

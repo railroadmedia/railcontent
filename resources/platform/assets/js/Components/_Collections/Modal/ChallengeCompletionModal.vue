@@ -71,7 +71,7 @@
 
                     <!-- Progress Bar -->
                     <div class="tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-5 tw-bg-[#223F57]">
-                        <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-400 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:${progress}%`">{{ progress }}%</div>
+                        <div :class="`tw-absolute tw-left-0 tw-top-0 tw-h-5 tw-transition-all tw-duration-700 tw-bg-${brand} tw-flex tw-justify-end tw-items-center tw-text-[#E3E3E3] tw-text-[11px] tw-font-bold`" :style="`width:${progress}%`">{{ progress }}%</div>
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
@@ -98,12 +98,12 @@
                                 <circle cx="150" cy="142" r="120" stroke="currentColor" stroke-width="20" fill="transparent"
                                         :stroke-dasharray="circumference"
                                         :stroke-dashoffset="circumference - progress / 100 * circumference"
-                                        :class="`tw-text-${brand} tw-transition-all tw-duration-400`" />
+                                        :class="`tw-text-${brand} tw-transition-all tw-duration-700`" />
                             </svg>
                             <div class="tw-absolute tw-text-center tw-max-w-[200px]">
                                 <img class="tw-h-14 tw-mx-auto dark:tw-hidden" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${lightModeLogo}`" alt="Challenge light mode logo" />
                                 <img class="tw-h-14 tw-mx-auto tw-hidden dark:tw-block" :src="`https://www.musora.com/cdn-cgi/image/width=300,quality=95/${darkModeLogo}`" alt="Challenge dark mode logo" />
-                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[5px]">{{ nextLessonTitle }} Unlocks In</div>
+                                <div v-if="isNextLessonLocked" class="tw-text-[13px] tw-font-bold tw-mt-[10px] -tw-mb-1">{{ nextLessonTitle }} Unlocks In</div>
                                 <div v-if="isNextLessonLocked" class="tw-font-bond tw-font-bebas-neue tw-text-[50px] -tw-mb-5">{{ countdownString }}</div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div v-if="!isChallengeCompleted" class="tw-flex tw-justify-center tw-w-full">
-                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Finish {{ currentLessonTitle }}</MuButton>
+                    <MuButton variant="custom" class="tw-bg-white tw-text-[#00101D] hover:tw-bg-[#223F57] hover:tw-text-white tw-px-10" @click="handleCta">Complete {{ currentLessonTitle }}</MuButton>
                 </div>
             </div>
 
@@ -306,7 +306,7 @@ onMounted(() => {
         if(streakBadgeText.value){
             showBadgeAnimation.value = true;
         }
-    }, 2000)
+    }, 1000)
 
     if(isChallengeCompleted.value){
         setTimeout(() => {

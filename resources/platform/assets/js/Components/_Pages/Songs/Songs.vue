@@ -63,6 +63,10 @@ const props = defineProps({
             data: []
         })
     },
+    sort: {
+      type: String,
+      default: '-published_on'
+    },
     showUpgradeModal: {
         type: Boolean,
         default: false
@@ -112,7 +116,7 @@ onBeforeMount(async() => {
         collectionStore.setDefaults({
             tabOptions: tabData.value,
             filter: {
-                sort: '-published_on'
+                sort: props.sort
             },
             queryType: 'song',
         });

@@ -7,9 +7,7 @@ use App\Decorators\Playlist\PlaylistDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\ApiGateways\SanityGateway;
-use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
-use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -60,10 +58,8 @@ class HomePageController extends BaseController
         private readonly PackService $packService,
         private readonly DatabaseManager $databaseManager,
         private readonly UserContentProgressService $userContentProgressService,
-        private readonly CarouselService $carouselService,
         private readonly CohortService $cohortService,
         private readonly OnboardingService $onboardingService,
-        private readonly LearningPathsService $learningPathsService,
         private readonly UserAccessPermissionsService $userAccessPermissionsService,
         private readonly SanityGateway $sanityGateway,
         private readonly ExploreTasksService $exploreTasksService
@@ -125,8 +121,6 @@ class HomePageController extends BaseController
             return redirect()->route('platform.onboarding');
         }
 
-        $startedLessons = $this->getUsersStartedContent();
-
         $usersList = $this->getUsersPlaylist();
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
@@ -172,7 +166,6 @@ class HomePageController extends BaseController
         if (!empty($currentEvent)) {
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
-        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
 
@@ -226,9 +219,6 @@ class HomePageController extends BaseController
             }
         }
 
-        $carousel = $this->carouselService->getCarouselSlides();
-
-
         $brand = brand();
 
         $cohortBanner = [];
@@ -273,29 +263,16 @@ class HomePageController extends BaseController
             }
         }
 
-        $showOldTrialSection = $this->learningPathsService->showLearningPaths($brand);
-        $showNewTrialSection = $this->learningPathsService->showNewLearningPaths();
-        $homepageV2 = boolval(FeatureFlagging::branch('homepage-v2', user()));
-        if ($showNewTrialSection) {
-            $trialSection = $this->learningPathsService->getNewLearningPaths($homepageV2);
-        } else if ($showOldTrialSection) {
-            $trialSection = $this->learningPathsService->getLearningPaths();
-        } else {
-            $trialSection = [];
-        }
-
         $userTasks = $this->exploreTasksService->uncompletedTasksForUser(user());
 
         return view('home.index', [
             "brand" => $brand,
             "calendarId" => $currentEventCalendarId ?? null,
-            "carousel" => $carousel,
             "coachEvent" => content_to_json([$currentEvent]),
             "cohortBanner" => json_encode($cohortBanner),
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
-            'displayTrialSection' => $showOldTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
             "hasExperience" => $hasExperience,
@@ -308,15 +285,12 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
             "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
-            "startedContentJson" => $startedLessons->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
-            "trialSection" => $trialSection,
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
-            "trialSectionRedesign" => $showNewTrialSection,
             "isFirstAccess" => user()->isFirstAccess(),
-            "homepageV2" => $homepageV2,
+            "homepageV2" => boolval(FeatureFlagging::branch('homepage-v2', user())),
             "exploreTasks" => $userTasks,
         ]);
     }
@@ -363,6 +337,8 @@ class HomePageController extends BaseController
         $userMetrics = $this->getUserMetrics();
 
         return view('home.pack', [
+            "isPackOnly" => $member->isPackOnlyOwner(),
+            "isChallengeOnly" => $member->isChallengeOnlyOwner(),
             "packs" => $packs,
             "courses" => $courses,
             "hotForumTopics" => $hotForumTopics,
@@ -570,27 +546,6 @@ class HomePageController extends BaseController
         );
         ContentRepository::$pullFutureContent = $oldFutureContent;
         return $workouts;
-    }
-
-    /**
-     * @return ContentFilterResultsEntity
-     */
-    public function getUsersStartedContent(): ContentFilterResultsEntity
-    {
-        $contentTypes = ContentTypes::inProgressContentTypes();
-        //TODO ADRIAN this needs to be handled differently as this is uses join on the railcontent_content table
-        $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
-            auth()->id(),
-            $contentTypes,
-            'started',
-            'updated_on',
-            'desc',
-            self::STARTED_CONTENT_COUNT
-        );
-        $ids = array_column($startedProgressRows, 'content_id');
-        $lessons = $ids ? $this->sanityGateway->getByRailContentIds($ids) : [];
-
-        return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
     /**

@@ -16,7 +16,7 @@ use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 class ChallengesV2UpdateWebUrlPath extends Command
 {
     protected $name = 'ChallengesV2UpdateWebUrlPath';
-    protected $signature = 'challenges:update-urls';
+    protected $signature = 'challenges:update-urls {--sanity}';
     protected $description = 'Update web url path for all challenge and challenge part content';
 
     public function handle(
@@ -35,28 +35,33 @@ class ChallengesV2UpdateWebUrlPath extends Command
         $dataSyncingService->syncContentIds($challengePartIds);
         $this->info('challenge parts synced');
 
-        $allContentIds = [... $challengeIds, ... $challengePartIds];
-        $allContents = $contentService->getByIds([...$challengeIds, ...$challengePartIds]);
-        $sanityDocuments = $sanityGateway->getByRailContentIds($allContentIds);
-        $missingContents = [];
-        foreach($allContents as $content) {
-            $found = false;
-            foreach($sanityDocuments as $sanityDocument) {
-                if ($sanityDocument['id'] == $content['id'] ) {
-                    $found = true;
-                    break;
+        $sanityFlag = $this->option('sanity');
+        if ($sanityFlag) {
+            $this->info('Patching Sanity Data');
+            $allContentIds = [... $challengeIds, ... $challengePartIds];
+            $allContents = $contentService->getByIds([...$challengeIds, ...$challengePartIds]);
+            $sanityDocuments = $sanityGateway->getByRailContentIds($allContentIds);
+            $missingContents = [];
+            foreach ($allContents as $content) {
+                $found = false;
+                foreach ($sanityDocuments as $sanityDocument) {
+                    if ($sanityDocument['id'] == $content['id']) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if ($found) {
+                    $id = $content['type'] . '_' . $content['id'];
+                    $patches[$id] = [
+                        'web_url_path' => $content['web_url_path'],
+                    ];
+                } else {
+                    $missingContents[] = $content;
                 }
             }
-            if ($found) {
-                $id = $content['type'] . '_' . $content['id'];
-                $patches[$id] = [
-                    'web_url_path' => $content['web_url_path'],
-                ];
-            } else {
-                $missingContents[] = $content;
-            }
+            $sanityGateway->patchSetMany($patches);;
+            $this->info('Sanity Documents patched');
         }
-        $sanityGateway->patchSetMany($patches);;
         $this->info('Processed All Challenge and Challenge Parts for web_url_path');
     }
 }

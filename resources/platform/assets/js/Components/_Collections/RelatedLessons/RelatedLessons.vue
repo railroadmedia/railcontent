@@ -35,20 +35,22 @@
           >
             <div v-for="(item, i) in relatedLessons" :key="i"
               class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
-              <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" :is-challenge="isChallenge" />
+              <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" :is-challenge="isChallenge" @open-challenge-lock-modal="openChallengeLockModal" />
             </div>
           </section>
         </div>
       </div>
     </aside>
-  </template>
 
+    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :date="selectedChallengeDate" @close-modal="closeChallengeLockModal" />
+  </template>
 <script setup>
 import { ref } from 'vue';
 import { usePlatformStore } from "@stores/platform";
 import { storeToRefs } from "pinia/dist/pinia";
 import CatalogueListElement from '@collections/Catalogue/CatalogueListElement.vue';
 import SkeletonRelatedLessons from '@collections/SkeletonLoader/SkeletonRelatedLessons';
+import ChallengeLockedModal from '@collections/Modal/ChallengeLockedModal';
 
 const props = defineProps({
   isRelatedSectionOpen: {
@@ -65,12 +67,23 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['update:isRelatedSectionOpen']);
+
 const platformStore = usePlatformStore();
 const { isLoading } = storeToRefs(platformStore);
 
 const isCollapsed = ref(false);
+const isChallengeLockModalOpen = ref(false);
+const selectedChallengeDate = ref(null);
 
-const emit = defineEmits(['update:isRelatedSectionOpen']);
+const openChallengeLockModal = (date) => {
+    selectedChallengeDate.value = date;
+    isChallengeLockModalOpen.value = true;
+}
+
+const closeChallengeLockModal = () => {
+    isChallengeLockModalOpen.value = false;
+}
 
 const toggleRelatedSection = () => {
 emit('update:isRelatedSectionOpen', !props.isRelatedSectionOpen);

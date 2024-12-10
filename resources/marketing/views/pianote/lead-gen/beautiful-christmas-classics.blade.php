@@ -336,7 +336,7 @@
                             <br><br>
                             He’s worked with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez.
                             <br><br>
-                            His passion is helping people discover the joy of playing piano, and he’ll teach you two beautiful Christmas songs -- for free!
+                            His passion is helping people discover the joy of playing piano, and he’ll teach you two beautiful Christmas songs – for free!
                         </p>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
        :href="renderLink && isReleased ? item.web_url_path : null"
-       @click="openUpgradeModal"
+       @click="openModal"
     >
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
@@ -108,7 +108,7 @@
                 :class="[`${overview && !isNextLesson ? 'tw-mt-4 2xl:tw-hidden' : 'xl:tw-hidden'}`, { 'tw-mt-1 sm:tw-mt-4': isNextLesson }]"
             >
                 <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
-                  <span v-if="i > 0 && column_data && column_data.length" class="bullet">-</span>
+                  <span v-if="i > 0 && column_data && column_data.length" class="bullet">&nbsp;-</span>
                   {{ column_data }}
                 </span>
                 <!-- Difficulty Label -->
@@ -249,7 +249,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -341,6 +341,8 @@ const props = defineProps({
         default: () => false,
     },
 })
+
+const emit = defineEmits(['openChallengeLockModal'])
 
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
@@ -445,16 +447,21 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
+const isChallenge = computed(() => {
+    return props.item.type === "challenge-part";
+})
+
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openUpgradeModal = () => {
-    noAccess.value && platformStore.openMembershipUpgradeModal();
+const openModal = () => {
+    if(isChallenge.value && !isReleased.value){
+        emit('openChallengeLockModal', releaseDate.value);
+    }
+    else if(noAccess.value){
+        platformStore.openMembershipUpgradeModal();
+    }
 }
-
-onBeforeMount( ()=> {
-    //console.log('I am in a list catalog item')
-})
 </script>
 

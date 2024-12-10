@@ -4,12 +4,15 @@ namespace App\Modules\DevEndpoint\Controllers;
 
 use Algolia\AlgoliaSearch\Api\SearchClient;
 use App\Models\Cohort;
+use App\Models\CohortDropdown;
+use App\Models\CohortList;
 use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
 use App\Modules\Content\Services\ChallengesService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
+use App\Modules\UserManagementSystem\Enums\OnboardingSkillLevelEnum;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Google\Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -49,6 +52,7 @@ class DevEndpointController extends Controller
     ) {
     }
 
+
     public function handleRequest(Request $request, $arg1 = null)
     {
         if ($arg1 == 'challenges') {
@@ -57,12 +61,26 @@ class DevEndpointController extends Controller
         return view("pages.devendpoint", ['results' => 'some results here', 'json_results' => ['key1' => 'value1']]);
     }
 
+    private function runArtisanCommand()
+    {
+        return 'We did not run anything but you can use this to debug commands';
+        \Artisan::call('sanity:import-content', [
+            '--id' => 402199,
+            'destination' => 'development',
+            'type' => 'challenge',
+        ]);
+        return '';
+    }
+
     private function handleChallengesEndpoints($request): string
     {
         $action = $request->get('action');
         $userId = $request->get('user_id', user()?->id ?? 631736); // adrian@musora.com
-        $challengeId = $request->get('challenge_id', 402199); // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
-        switch($action) {
+        $challengeId = $request->get(
+            'challenge_id',
+            402199
+        ); // https://web-staging-one.musora.com/admin/studio/publishing/structure/challenge;challenge_402199
+        switch ($action) {
             case ('prep'):
                 $this->prepChallengeData($challengeId, $request->get('start_date', null));
                 return "Prepped Challenge Data $challengeId";
@@ -81,7 +99,7 @@ class DevEndpointController extends Controller
 
                 $newLessonData = ChallengeUserProgress::defineLessonsMetaData($challenge, $newStartDate);
                 $originalProgress = $progress->lessons_meta_data;
-                foreach($progress->lessons_meta_data as $index => $_) {
+                foreach ($progress->lessons_meta_data as $index => $_) {
                     $oCompletedDate = $originalProgress[$index]['completed_at'];
                     if ($oCompletedDate) {
                         $oCompletedDate = Carbon::parse($oCompletedDate);
@@ -116,7 +134,31 @@ class DevEndpointController extends Controller
     {
         $userIds = [
             // "good" users
-            755987,755984,755976,755957,755953,755945,755932,755919,755916,755904,755886,755880,755877,755866,755848,755827,755824,755820,755808,755807,755799,755787,755786,755782,755764,
+            755987,
+            755984,
+            755976,
+            755957,
+            755953,
+            755945,
+            755932,
+            755919,
+            755916,
+            755904,
+            755886,
+            755880,
+            755877,
+            755866,
+            755848,
+            755827,
+            755824,
+            755820,
+            755808,
+            755807,
+            755799,
+            755787,
+            755786,
+            755782,
+            755764,
             755675, // explicitly in block list
             755745, // user with no profile picture
             755406, // musora user
@@ -124,137 +166,20 @@ class DevEndpointController extends Controller
             631736, // me
         ];
         ChallengeUserProgress::truncate();
-        foreach($userIds as $userId) {
+        foreach ($userIds as $userId) {
             $isUnlocked = $userId == 755976 || $userId == 755957;
-            $this->challengesService->startChallenge($challengeId, $userId, startDate: $startdate, isLocked: !$isUnlocked);
+            $this->challengesService->startChallenge(
+                $challengeId,
+                $userId,
+                startDate: $startdate,
+                isLocked: !$isUnlocked
+            );
         }
-
     }
-
-    private function testStreakData($challengeId)
-    {
-        $userId = 631736;
-        $data = [];
-        $startDate = '20241010';
-        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-        $this->setContentCompleted($challengeId);
-        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-
-        $progressData = $userProgress->getStreakCurrentData();
-        $data[] = $progressData;
-        for($i = 0; $i < 8; $i++) {
-            $userProgress = $this->setUserProgressBackDays($userProgress);
-            $progressData = $userProgress->getStreakCurrentData();
-            $data[] = $progressData;
-        }
-
-        //        $startDate = '20241011';
-        //        $this->challengesService->startChallenge($challengeId, $userId, $startDate);
-        //        $userProgress = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-        //        $progressData = $userProgress->getStreakCurrentData();
-        //        $data[] = $progressData;
-
-        return $data;
-    }
-
-    private function setUserProgressBackDays($userProgress, int $days = 1)
-    {
-        $oStartDate = Carbon::parse($userProgress->start_date);
-        $oStartDate = $oStartDate->subDays($days);
-        $oLessonData = $userProgress->lessons_meta_data;
-        $userProgress->start_date = $oStartDate->toISOString();
-        foreach($oLessonData as $index => $lessonDatum) {
-
-
-            $oUnlockDate = Carbon::parse($lessonDatum['unlock_date']);
-            $oUnlockDate = $oUnlockDate->subDays($days);
-            $oLessonData[$index]['unlock_date'] = $oUnlockDate->toISOString();
-            if(!is_null($lessonDatum['completed_at'])) {
-                $oCompletedDate = Carbon::parse($lessonDatum['completed_at']);
-                $oCompletedDate = $oCompletedDate->subDays($days);
-                $oLessonData[$index]['completed_at'] = $oCompletedDate->toISOString();
-            }
-        }
-        $userProgress->lessons_meta_data = $oLessonData;
-        $userProgress->save();
-        return $userProgress;
-    }
-
-    private function setContentCompleted($challengeId)
-    {
-
-        $data = [
-//            755987 => [
-//                '402542' => [
-//                    'is_completed' => true,
-//                    'seconds_practiced' => 8,
-//                ],
-//                '402314' => [
-//                    'is_completed' => true,
-//                    'seconds_practiced' => 3,
-//                ],
-//            ],
-            631736 => [
-                '402542' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 8,
-                ],
-                '402314' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 10,
-                ],
-                '402316' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402318' => [
-                    'is_completed' => false,
-                    'seconds_practiced' => 1000,
-                ],
-                '402320' => [
-                    'is_completed' => false,
-                    'seconds_practiced' => 1000,
-                ],
-                '402322' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402324' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402326' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-                '402328' => [
-                    'is_completed' => true,
-                    'seconds_practiced' => 1000,
-                ],
-            ],
-        ];
-
-        foreach($data as $userId => $lessons) {
-            $challengeProgress =  ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-            foreach($lessons as $lessonId => $lesson) {
-                $challengeProgress->updateLessonsProgress($lessonId, $lesson['is_completed'], $lesson['seconds_practiced']);
-            }
-        }
-
-    }
-
-    private function unlockChallenge($challengeId, $userId)
-    {
-        $progressData = ChallengeUserProgress::whereChallengeIdAndUser($challengeId, $userId);
-        $progressData->is_locked = false;
-        $progressData->save();
-    }
-
-
 
     private function testSanity()
     {
-        $client = new SanityGateway();
+        $client = app()->make(SanityGateway::class);
         return $client->getChildrenByRailcontentID(206303);
         $documents = $client->getByRailContentIds([206303], includeParents: true);
         return 'eehhh';
@@ -263,7 +188,7 @@ class DevEndpointController extends Controller
         $publisherId = 'drafts.9b7840ff-a2ff-4a85-bab3-589d94bda677'; //Disney on development
         $updatedDoc = $client->patchSetSingle('044f865a-5e1d-4477-aa8a-7cc783acc903', ['mlc' => 'new mlc2']);
         $updatedDoc = $client->patchSetSingle($songId, ['popularity' => 200]);
-        $updatedDoc = $client->patchSetSingle($publisherId, ['name'  => 'Disney2']);
+        $updatedDoc = $client->patchSetSingle($publisherId, ['name' => 'Disney2']);
         $updatedDoc = $client->patchAppend($publisherId, 'child', [['name' => 'bananas']]);
         $updatedDoc = $client->patchAppendReferences($songId, 'license', [$licenceId]);
         $patches = [

@@ -61,6 +61,7 @@ const difficultyText = computed(() => {
             case 'beginner':
             case 'intermediate':
             case 'advanced':
+            case 'expert':
                 return difficulty;
             default:
                 return 'all';

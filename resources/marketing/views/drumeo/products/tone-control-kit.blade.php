@@ -516,19 +516,22 @@
                         <a class="join sold-out">SOLD OUT</a>
                     @endif
                 </div>
-
-                <div class="credit-cards">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-amex"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                    <i class="fab fa-cc-discover"></i>
-                </div>
-                <div class="questions">
-                    <p><strong>Any questions?</strong><br class="hide-for-medium"> Call us toll-free at
-                        <a href="tel:+18004398921">1-800-439-8921</a> <br class="hide-for-medium"> or directly at
-                        <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center py-10 text-white" style="background: #000;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5">
+                <p>Call us toll-free at
+                    <a class="text-white underline" href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a class="text-white underline" href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
     </section>

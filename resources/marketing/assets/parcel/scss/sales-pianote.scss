@@ -262,6 +262,17 @@ img {
             }
         }
 
+        &.musora {
+            border-color: $muGold;
+            color: $muGold;
+
+            &:hover,
+            &:focus {
+                background: $muGold;
+                color: #fff;
+            }
+        }
+
         &.promo {
             border-color: $promoColor;
             color: $promoColor;

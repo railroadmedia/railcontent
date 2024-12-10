@@ -113,7 +113,7 @@
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller blue" href="/ecommerce/add-to-cart?products[stickbag]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
@@ -649,11 +649,11 @@
                 <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
+                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >(Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)</p>
                         @endif
                         <a href="/ecommerce/add-to-cart?products[stickbag]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
                             <div class="bg-white px-3 py-5 md:py-7">
-                                <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
+                                <h4 class="mb-2 sm:mb-3"><strong>Drumeo StickBag</strong></h4>
                                 <img class="h-24 transition-opacity opacity-0"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -674,10 +674,10 @@
                                     </strong></h4>
                                 <p class="text-sm"><em>
                                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                            Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%.
+                                           (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
                                         @endif
                                         One-time payment.</em></p>
-                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
+                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">ORDER NOW</div>
                                 <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
                                 <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
                                 <p class="text-sm">1 Premium Drum Key</p>

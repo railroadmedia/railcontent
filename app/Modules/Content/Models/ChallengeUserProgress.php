@@ -76,6 +76,11 @@ class ChallengeUserProgress extends Model
         return $query->whereNotNull('last_completed_date');
     }
 
+    public function scopeLocked(Builder $query): Builder
+    {
+        return $query->where('is_locked', true);
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query

@@ -13,11 +13,11 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Requests\ContentSearchRequest;
 use App\Modules\Content\Resources\Algolia\Enum\DocumentType;
 use App\Modules\Content\Resources\Algolia\SearchParameters;
 use App\Modules\Content\Services\AlgoliaSearchService;
-use App\Modules\Content\Models\Content;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -117,8 +117,7 @@ class ContentPagesController extends BaseController
         }
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
-
-
+        $sort = $sortOverride ?? $request->get('sort', '-published_on');
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
@@ -137,10 +136,11 @@ class ContentPagesController extends BaseController
 
         $defaultLimit = ContentJsonController::getDefaultLimit([$lessonType], brand(), $request->get('tabs', []), 20);
         if ($contentTypeName == 'songs') {
+            $sort = $sortOverride ?? $request->get('sort', '-popularity');
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultLimit),
-                $sortOverride ?? $request->get('sort', '-popularity'),
+                $sort,
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
@@ -161,7 +161,7 @@ class ContentPagesController extends BaseController
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultLimit),
-                $sortOverride ?? $request->get('sort', '-published_on'),
+                $sort,
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
@@ -235,6 +235,7 @@ class ContentPagesController extends BaseController
             $songArtists = $this->contentService->getArtists();
             $artists = count($songArtists ?? []);
             return view('content.songs-catalogue', [
+                "sort" => $sort,
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : json_encode(['data' => []]),
                 "hasStartedLessons" => $hasStartedLessons,
@@ -277,7 +278,7 @@ class ContentPagesController extends BaseController
     }
 
     public function challengeFirstLevel(Request $request, $domain, $brand, $firstSlug, $firstId){
-        return firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
+        return $this->firstLevel($request, $domain, $brand, 'challenge', $firstSlug, $firstId);
     }
 
     public function challengeSecondLevel(Request $request, $domain, $brand, $firstSlug, $firstId, $secondSlug, $secondId)
@@ -1373,7 +1374,7 @@ class ContentPagesController extends BaseController
          *   +published_on:
          */
 
-//        dd($searchResponse->formatToJson());
+        //        dd($searchResponse->formatToJson());
 
         return view('content.search', [
             "lessons" => $searchResponse->formatToJson(),

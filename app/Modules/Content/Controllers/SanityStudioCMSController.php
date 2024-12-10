@@ -79,6 +79,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Content\Models\Sanity\OnboardingContentCard;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
@@ -94,7 +95,6 @@ class SanityStudioCMSController extends BaseController
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
         $token = env('SANITY_API_TOKEN_RW');
-
         // publishing workspace
         $types = [
             (new Challenge())->toArray(),
@@ -162,7 +162,7 @@ class SanityStudioCMSController extends BaseController
             (new Instructor())->toArray(),
             (new License())->toArray(),
             (new Publisher())->toArray(),
-            (new CatalogMetadata())->toArray(),
+            (new OnboardingContentCard())->toArray(),
         ];
 
         $publishing = [
@@ -423,5 +423,47 @@ class SanityStudioCMSController extends BaseController
             }
         }
         return $updatedContents;
+    }
+
+    public function getYoutubeDuration(Request $request): int
+    {
+        $brand = $request->get('brand');
+        $videoId = $request->get('id');
+
+        $client = new \Google_Client();
+        $youtube = new \Google_Service_YouTube($client);
+
+        $client->setClientId(config("railcontent.video_sync.$brand.youtube_client_api.client_id"));
+        $client->setClientSecret(config("railcontent.video_sync.$brand.youtube_client_api.client_secret"));
+
+        $client->setScopes(['https://www.googleapis.com/auth/youtube']);
+        $client->setAccessType("offline");
+        $client->setApprovalPrompt('force');
+
+        $tokenData = $client->refreshToken(
+            config("railcontent.video_sync.$brand.youtube_client_api.refresh_token")
+        );
+        $client->setAccessToken($tokenData['access_token']);
+        $videoParams = array(
+            'id' => $videoId,
+            'fields' => "items(contentDetails(duration))",
+        );
+        $videoDetails = $youtube->videos->listVideos("contentDetails", $videoParams);
+        $duration = $videoDetails->getItems()[0]->getContentDetails()->getDuration();
+
+        return $this->covtime($duration);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function covtime(string $youtube_time): int
+    {
+        $interval = new \DateInterval($youtube_time);
+
+        return ($interval->d * 24 * 60 * 60) +
+            ($interval->h * 60 * 60) +
+            ($interval->i * 60) +
+            $interval->s;
     }
 }

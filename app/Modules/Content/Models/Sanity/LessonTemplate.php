@@ -8,7 +8,6 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
-use App\Modules\Content\Models\Sanity\Structure\Validation\Custom\BlockCharacterLengthMax;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Required;
@@ -33,7 +32,7 @@ abstract class LessonTemplate extends BaseSanityModel
     public function __construct(
         public string $name,
         public string $title,
-        public bool $withResources = false,
+        public bool $withResources = true,
         public bool $withLiveEvent = false,
         public ?string $parentType = null,
         public bool $isChallengeChild = false,
@@ -103,7 +102,7 @@ abstract class LessonTemplate extends BaseSanityModel
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
             new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
-            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup, validation: [new BlockCharacterLengthMax(270)]),
+            new Field(FieldType::Array, 'description', 'Description', of:$blockList, group:$detailsGroup),
             new Field(
                 FieldType::Number,
                 'difficulty',
@@ -166,10 +165,12 @@ abstract class LessonTemplate extends BaseSanityModel
         }
 
         $fields = array_merge($fields, [
+            new Field(FieldType::Date, 'quarter_removed', initialValue:null, group: $detailsGroup),
+            new Field(FieldType::Date, 'quarter_published', initialValue:null, group: $detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
-            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', group: $detailsGroup),
         ]);
         if ($this->parentType) {
             $fields = array_merge($fields, [new ParentTypeField($this->parentType, $detailsGroup)]);

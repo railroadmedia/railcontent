@@ -4,15 +4,9 @@
             <!-- Onboarding banner -->
             <TriggerBanner v-if="showTriggerBanner" />
 
-            <!-- Learning Paths -->
-<!--            <LearningPathContainer :isV2User v-if="learningPaths.length && !trialSectionRedesign" :learning-paths="learningPaths"-->
-<!--                trackingSection="banner" />-->
-<!--            <NewLearningPathContainer :isV2User v-if="learningPaths.length && trialSectionRedesign" :learning-paths="learningPaths"-->
-<!--                trackingSection="banner" />-->
-
             <!-- Join Header: Pack Only -->
             <StaticHeader
-                v-if="isPackOnlyBoolean"
+                v-if="isPackOrChallengeOnlyBoolean"
                 title="JOIN THE COMMUNITY"
                 cta-text="UPGRADE YOUR MEMBERSHIP"
                 description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
@@ -28,9 +22,6 @@
                 page-type="home"
                 :preLoadedContent="data?.carousels"
             />
-
-            <!-- Header carousel -->
-            <HeaderCarousel v-if="!isV2User" :preloadedCarousel="carousel" trackingSection="banner" />
 
             <!-- Cohort banner -->
             <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
@@ -68,7 +59,7 @@
 
             <!-- New Releases -->
             <MiniCatalogueSection
-                 v-if="(!isPackOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
+                 v-if="(!isPackOrChallengeOnlyBoolean && ((!isV2User && data?.newReleases.length) || (isV2User && userHas30Days)))"
                 title="New Releases"
                 seeAllAriaLabel="See All New Releases"
                 :seeAllUrl="`${brand}/lessons/all`"
@@ -106,7 +97,7 @@
                 trackingSection="upcoming-events"
             /> -->
 
-            <template v-if="isPackOnlyBoolean">
+            <template v-if="isPackOrChallengeOnlyBoolean">
                 <!-- Your Courses section : Packs Only -->
                 <HomepageCatalog
                     v-if="courseDataObject.data.length"
@@ -120,7 +111,7 @@
 
                 <!-- Your Packs section : Packs Only -->
                 <HomepageCatalog
-                    v-if="isPackOnlyBoolean"
+                    v-if="isChallengeOnlyBoolean"
                     collection-type="challenge"
                     title="Your Challenges"
                     see-all-label="See All Challenges"
@@ -139,7 +130,7 @@
 
             <!-- Popular Conversation : Packs Only -->
             <PopularConversations
-                v-if="isPackOnlyBoolean && conversationData.length"
+                v-if="isPackOrChallengeOnlyBoolean && conversationData.length"
                 :posts="conversationData"
                 class="tw-mb-8"
             />
@@ -155,7 +146,7 @@
 
             <!-- Stats section -->
             <StatsSection
-                v-if="!isPackOnlyBoolean && !isV2User"
+                v-if="!isPackOrChallengeOnlyBoolean && !isV2User"
                 :accountUrl="accountUrl"
                 :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
                 :nextLearningPathLevel="nextLearningPathLevel"
@@ -176,7 +167,6 @@
 
     import CohortBanner from '@collections/CohortBanner/CohortBanner.vue';
     import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
-    import HeaderCarousel from '@collections/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '@collections/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '@collections/LearningPaths/LearningPathContainer.vue';
     import NewLearningPathContainer from '@collections/NewLearningPaths/NewLearningPathContainer.vue';
@@ -186,7 +176,6 @@
     import TriggerBanner from '@collections/Onboarding/TriggerBanner.vue';
     import HomePageSkeleton from "./HomePageSkeleton";
     import ExploreSection from '@collections/ExploreSection/ExploreSection.vue';
-    import WelcomeMessage from '@collections/WelcomeMessage/WelcomeMessage.vue';
     import DashboardSection from '@collections/DashboardCard/DashboardSection.vue';
     import StatsSection from '@collections/StatsSection/StatsSection.vue';
     import ListSection from '@collections/ListSection/ListSection.vue';
@@ -212,8 +201,8 @@
 
         // Boolean props
         existsCohortBanner: { type: Boolean, default: false },
+        isChallengeOnly: { type: [Number, Boolean], default: 0 },
         isPackOnly: { type: [Number, Boolean], default: 0 },
-        trialSectionRedesign: { type: Boolean, default: false },
         isV2User: { type: Boolean, default: false },
 
         // Number props
@@ -221,10 +210,8 @@
         nextLearningPathProgressPercent: { type: Number, default: 0 },
 
         // Array props
-        carousel: { type: Array, default: () => ([]) },
         cohortBanner: { type: Array, default: () => ([]) },
         conversationData: { type: Array, default: () => ([]) },
-        learningPaths: { type: Array, default: () => ([]) },
         packData: { type: Array, default: () => ([]) },
         exploreTasks: { type: Array, default: () => ([]) },
 
@@ -233,10 +220,6 @@
         courseData: { type: Object, default: () => ({}) },
         newContent: { type: Object, default: () => ({}) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
-        startedContent: {
-            type: Object,
-            default: () => ({ data: [] })
-        },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) }
     });
@@ -255,13 +238,23 @@
     });
 
     const showTriggerBanner = computed(() => {
-        if (isPackOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
+        if (isPackOrChallengeOnlyBoolean || hasCompleteYourAccountTask.value) return false; //hide for packs only
         return showOnboardingBanner.value;
     });
 
     const isPackOnlyBoolean = computed(() => {
       return Boolean(props.isPackOnly);
     });
+
+    const isChallengeOnlyBoolean = computed(() => {
+        console.log(props);
+        return Boolean(props.isChallengeOnly);
+    });
+
+    const isPackOrChallengeOnlyBoolean = computed(() => {
+        return Boolean(props.isPackOnly || props.isChallengeOnly);
+
+    })
 
     const courseDataObject = computed(() => {
         if(!JSON.parse(props.courseData)) return;

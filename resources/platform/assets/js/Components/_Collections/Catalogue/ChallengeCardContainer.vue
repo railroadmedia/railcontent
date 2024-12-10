@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-1 lg:tw-gap-[15px]" :class="rowStyles">
+    <div class="lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-1 lg:tw-gap-[15px]" :class="rowStyles">
         <SkeletonChallengeCard v-if="isLoading || loading" v-for="i in skeletonNum" :key="`skeleton-challenge-card-${i}`" :is-grouped-view="isGroupedView" />
         <ChallengeCard v-else v-for="(item, i) in content" :item="item" :key="`challenge-card-${i}`" :is-grouped-view="isGroupedView" />
     </div>

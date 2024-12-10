@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Events\AccessCodeClaimed;
 use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\UserManagementSystem\Jobs\SyncOnboardingBrands;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Doctrine\ORM\Exception\ORMException;
@@ -96,6 +97,8 @@ class AccessCodeService
         $user->save();
 
         event(new AccessCodeClaimed($accessCode, $user, $context));
+
+        SyncOnboardingBrands::dispatchAfterResponse($user->id, $accessCode->brand);
 
         Log::info('Access code claimed', [
             'access_code' => $accessCode->code,

@@ -2,7 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Content\ApiGateways\SanityGateway;
 use App\Modules\Content\Models\ChallengeUserProgress;
+use App\Modules\Content\Services\ChallengesService;
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
@@ -20,7 +22,6 @@ class UserMembershipFieldsService
         private ContentService $contentService,
         private UserProviderInterface $userProvider,
         private UserAccessPermissionsService $userAccessPermissionsService,
-        private ChallengeUserProgress $challengeUserProgress,
     ) {
     }
 
@@ -46,6 +47,7 @@ class UserMembershipFieldsService
         $isLifetimeMember = $userAccessPermissions->getIsLifetimeMember();
         $isDrumeoLifetimeMember = $userAccessPermissions->getIsDrumeoLifetimeMember();
         $ownsPacks = $this->userAccessPermissionsService->getOwnsPacks($userAccessPermissions);
+        $ownsChallenges = $this->userAccessPermissionsService->getOwnsChallenges($userAccessPermissions);
 
         $membershipLevel = null;
         if ($user->isAdmin() ||
@@ -63,7 +65,7 @@ class UserMembershipFieldsService
             $isLifetimeMember,
             $isAMember,
             $membershipExpirationDate,
-            $user->is_challenge_owner,
+            $ownsChallenges,
             $ownsPacks,
         );
 
@@ -74,6 +76,7 @@ class UserMembershipFieldsService
             $isLifetimeMember,
             $accessLevel,
             $ownsPacks,
+            $ownsChallenges,
             $membershipLevel,
             $isDrumeoLifetimeMember
         );
@@ -86,6 +89,7 @@ class UserMembershipFieldsService
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
+        bool $isChallengeOwner,
         ?string $membershipLevel,
         bool $isDrumeoLifetimeMember
     ): bool {
@@ -107,6 +111,7 @@ class UserMembershipFieldsService
             $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
             $user->access_level = $accessLevel;
             $user->is_pack_owner = $isPackOwner;
+            $user->is_challenge_owner = $isChallengeOwner;
             $user->membership_level = $membershipLevel;
 
             $user->save();
@@ -243,4 +248,5 @@ class UserMembershipFieldsService
 
         return $associatedUsers;
     }
+
 }

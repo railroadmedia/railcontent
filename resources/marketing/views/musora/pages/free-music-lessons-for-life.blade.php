@@ -62,7 +62,7 @@
                         @include("_partials.components.forms.sign-up-form-options", [
                             "recaptchaKey" => $recaptchaKey,
                             "formName" => 'Free Music Lessons For Life',
-                            "formId" => "Musora - Engagement - Trigger - Free Music Lessons For Life - WebForm", 
+                            "formId" => "Musora - Engagement - Trigger - Free Music Lessons For Life - WebForm",
                             "buttonText" => "ENTER NOW",
                             "nameInput" => "Your Name",
                             "stacked" => true,
@@ -78,7 +78,7 @@
                             "checkboxTitle" => "Preferred Instrument"
                         ])
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
             @endforeach
         </div>
     </section>
-    
+
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #ededed calc(50% + 1px));"></div>
         @php
             $infoItems = [
@@ -158,7 +158,7 @@
                 'Song access is valid for 3 years.'
             ];
         @endphp
-    
+
         <section class="px-5 md:px-6" style="background: black;">
         <div class="container max-w-md md:max-w-4xl mx-auto text-center">
             <svg class="inline-block h-20 md:h-28 relative z-10 mb-5 sm:mb-12" xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" fill="none">
@@ -178,7 +178,7 @@
                 @php
                     $timeUnits = [
                         ['condition' => 'timeLeft > 0 && day > 0', 'value' => 'day'],
-                        ['condition' => 'timeLeft > 0 && hour > 0', 'value' => 'hour'],
+                        ['condition' => 'timeLeft > 0', 'value' => 'hour'],
                         ['condition' => 'timeLeft > 0', 'value' => 'minute'],
                         ['condition' => 'timeLeft > 0', 'value' => 'second'],
                     ];
@@ -191,7 +191,7 @@
                                 @foreach ($timeUnits as $index => $unit)
                                     <span x-cloak x-show="{{ $unit['condition'] }}">
                                         <div class="inline-block bg-musora text-black px-2 py-4 mx-1 rounded w-[40px] sm:w-[60px] md:w-[90px] text-center">
-                                            <span x-text="{{ $unit['value'] }}"></span> 
+                                            <span x-text="{{ $unit['value'] }}"></span>
                                         </div>
                                         @if ($index < count($timeUnits) - 1)
                                             <span class="inline-block mx-0.5 text-musora">:</span>
@@ -244,4 +244,4 @@
  @include('_partials.components.countdown',[
         'countdownDate' => '2024-10-10 00:00:00',
         'promoVersion' => false
-    ]) 
+    ])

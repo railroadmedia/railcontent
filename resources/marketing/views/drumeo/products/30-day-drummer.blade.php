@@ -292,7 +292,7 @@ $lessons = [
     ],
     [
         'title' => 'Play Your First Song!',
-        'description' => "In week 4, you'll learn to play your first song by assembling all the parts you've learned so far -- playing the verse, chorus, bridge, and finally the full track!"
+        'description' => "In week 4, you'll learn to play your first song by assembling all the parts you've learned so far – playing the verse, chorus, bridge, and finally the full track!"
     ],
 ];
 

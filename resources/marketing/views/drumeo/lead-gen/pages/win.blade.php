@@ -4,8 +4,8 @@
     <title>Win a Yamaha Stage Custom Drum Set | Drumeo</title>
     <meta property="og:title" content="Win a Yamaha Stage Custom Drum Set | Drumeo">
 
-    <meta name="description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
-    <meta property="og:description" content="Want a free drum set? Simply enter your email address before August 15th to secure your chance to win.">
+    <meta name="description" content="Want a free drum set? Simply enter your email address to secure your chance to win.">
+    <meta property="og:description" content="Want a free drum set? Simply enter your email address to secure your chance to win.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -42,6 +42,12 @@
 @endsection
 
 @section('body-data')
+    x-data ="{
+    giveawayModal: false,
+    }"
+@endsection
+
+@section('body-data')
     x-data ='{
     lazyLoad: false,
     }'
@@ -67,28 +73,23 @@
                     <p class="mb-4">
                         Always wanted to play drums? Ready for a kit upgrade?
                         <br><br>
-                        We’re giving away a fully-loaded Yamaha Stage Custom drum kit (with cymbals & hardware). All you have to do to enter is drop your email address below by <strong>November 22nd</strong>.
+                        We’re giving away a fully-loaded Yamaha Stage Custom drum kit (with cymbals & hardware). All you have to do to enter is drop your email address below by <strong>November 26th</strong>.
                     </p>
 
                     <p class="hidden sm:inline-block mb-3 text-sm">
                         <i class="fas fa-check-circle text-drumeo"></i> No purchase necessary<br class="lg:hidden">
-                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">
+                        <i class="fas fa-check-circle text-drumeo"></i> No sneaky fees<br class="lg:hidden">
+{{--                        <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Cancel anytime<br class="lg:hidden">--}}
                         <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> Worldwide entry</p>
-                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
-                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>
-                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
-                        <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+{{--                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                        <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
+{{--                    @else--}}
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 26, 12, 0, 0, 'America/Vancouver'))
+                        <span class="join smaller drumeo w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                        <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
                     @endif
-{{--                    @include("drumeo.lead-gen.partials.sign-up-form", [--}}
-{{--                        "recaptchaKey" => $recaptchaKey,--}}
-{{--                        "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",--}}
-{{--                        "formName" => 'Drumeo Drumset Giveaway',--}}
-{{--                        "nameInput" => true,--}}
-{{--                        "stacked" => true,--}}
-{{--                        "buttonText" => "I WANT TO WIN!",--}}
-{{--                    ])--}}
                 </div>
             </div>
         </div>
@@ -189,7 +190,7 @@
                                      [
                                          'location' => 'France',
                                          'name' => 'Steph C.',
-                                         'comment' => '',
+                                         'comment' => 'My YAMAHA drumkit is in my band\'s studio, ready to jam...<br><br>It looks like i\'m gonna spend a lot of time behind my new Yamaha kit, working rudiments and technical stuff with Drumeo!!!<br><br>Thanks again to you and all the DRUMEO Team!',
                                          'img' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/winner1.jpg',
                                      ],
                                      [
@@ -264,11 +265,6 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center text-left my-8 md:my-12">
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    <p class="mx-0"><strong>No purchase necessary</strong> <br class="hidden sm:inline">
-                    and there are no age restrictions.</p>
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     <p class="mx-0"><strong>No location restrictions.</strong><br class="hidden sm:inline">
                     We’ll ship it anywhere in the world.</p>
                 </div>
@@ -276,6 +272,11 @@
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     <p class="mx-0"><strong>No sneaky shipping fees.</strong><br class="hidden sm:inline">
                     We’ll take care of it. (VAT may apply)</p>
+                </div>
+                <div class="flex">
+                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    <p class="mx-0"><strong>No purchase necessary.</strong> <br class="hidden sm:inline">
+                        {{--and there are no age restrictions.--}}</p>
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
@@ -288,41 +289,64 @@
         </div>
     </section>
 
-    <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">
-        <div class="container mx-auto max-w-3xl">
-            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to<br class="inline sm:hidden"> start a trial?</strong></h3>
-            <p>We’re on a mission to help people start and STAY playing the drums.
-                <br><br>
-                And we want the winner of this drum set to be someone who’s serious about using the kit. By starting a trial, you’re showing us that you’re actively looking to learn and improve on the drums.
-                <br><br>
-                On top of that, we want to show you the awesome lessons we have inside Drumeo. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.
-                <br><br>
-                And hey, if you like it, we hope you’ll stick around.
-            </p>
-        </div>
-    </section>
+{{--    <section class="text-center px-6 sm:px-6 py-8 md:py-10 lg:py-12">--}}
+{{--        <div class="container mx-auto max-w-3xl">--}}
+{{--            <h3 class="mb-5 sm:mb-7"><strong>Why do I need to<br class="inline sm:hidden"> start a trial?</strong></h3>--}}
+{{--            <p>We’re on a mission to help people start and STAY playing the drums.--}}
+{{--                <br><br>--}}
+{{--                And we want the winner of this drum set to be someone who’s serious about using the kit. By starting a trial, you’re showing us that you’re actively looking to learn and improve on the drums.--}}
+{{--                <br><br>--}}
+{{--                On top of that, we want to show you the awesome lessons we have inside Drumeo. We work super hard to create the BEST online lessons experience, including step-by-step tutorials, play-along workouts, and songs. Starting a free trial lets you see everything we have to offer.--}}
+{{--                <br><br>--}}
+{{--                And hey, if you like it, we hope you’ll stick around.--}}
+{{--            </p>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/order-bg.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
-            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))
-                <span class="join sold-out smaller w-full">Opens Nov 12th</span>
-            @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 22, 0, 0, 0, 'America/Vancouver'))
-                <a class="join smaller w-full" href="/choose-plan">Enter to win »</a>
+{{--            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 12, 0, 0, 0, 'America/Vancouver'))--}}
+{{--                <span class="join sold-out smaller w-full">Opens Nov 12th</span>--}}
+{{--            @elseif--}}
+            @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 11, 26, 12, 0, 0, 'America/Vancouver'))
+                <span class="join smaller drumeo w-full max-w-xs" @click="giveawayModal = true;">JOIN GIVEAWAY</span>
+                <a href="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-t-c.pdf"><p class="text-sm mt-2"><em>View Terms & Conditions</em></p></a>
             @else
                 <span class="join sold-out smaller w-full">this offer has now ended</span>
             @endif
-{{--            @include("drumeo.lead-gen.partials.sign-up-form", [--}}
-{{--                "recaptchaKey" => $recaptchaKey,--}}
-{{--                "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",--}}
-{{--                "formName" => 'Drumeo Drumset Giveaway',--}}
-{{--                "nameInput" => true,--}}
-{{--                "stacked" => true,--}}
-{{--                "buttonText" => "I WANT TO WIN!",--}}
-{{--            ])--}}
         </div>
     </section>
 
+    @component('_partials.components.modal', ['name' => 'giveawayModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-gray-100 mx-auto rounded-xl shadow-lg text-center"
+                x-data="{ answer: '', showForm: false }">
+                <div x-show="!showForm">
+                    <h4 class="leading-tight"><strong>Skill Testing Question:</strong></h4>
+                    <h2 class="leading-tight my-4" style="font-family:Serif">10 + 5 - 3</h2>
+                    <input type="number" x-model="answer" placeholder="Your Answer" class="text-center mb-3 py-2 border border-black rounded-full mx-auto" />
+                    <button class="join smaller drumeo"
+                        x-on:click="showForm = (answer == 12)">
+                        Check Answer
+                    </button>
+                </div>
+
+                <div x-show="showForm">
+                    <h4 class="leading-tight mb-4"><strong>Correct! Now, we just<br> need your details:</strong></h4>
+
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                        "formId" => "Drumeo - Engagement - Trigger - Yamaha Giveaway nov24 - Web Form",
+                        "formName" => 'Yamaha Giveaway nov24',
+                        "nameInput" => true,
+                        "stacked" => true,
+                        "buttonText" => "I WANT TO WIN!",
+                    ])
+                </div>
+            </div>
+        @endslot
+    @endcomponent
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
         ])

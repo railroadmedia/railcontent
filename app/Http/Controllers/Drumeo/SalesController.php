@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true', 'noEverflow' => true]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -74,14 +74,14 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
-    public function practiceAnywhere()
-    {
-        return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
-    }
-    public function backToSchool()
-    {
-        return view('drumeo.sales.back-to-school', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
-    }
+    // public function practiceAnywhere()
+    // {
+    //     return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    // }
+    // public function backToSchool()
+    // {
+    //     return view('drumeo.sales.back-to-school', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
+    // }
     public function guitarcenter()
     {
         return view('drumeo.sales.guitarcenter', ['theme' => 'drumeo', 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
@@ -449,6 +449,6 @@ class SalesController extends BaseController
 
     public function headphones()
     {
-        return view('drumeo.products.headphones', ['theme' => 'drumeo',]);
+        return view('drumeo.products.headphones', ['theme' => 'drumeo']);
     }
 }

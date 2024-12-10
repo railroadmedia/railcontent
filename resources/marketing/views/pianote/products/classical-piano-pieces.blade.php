@@ -92,7 +92,7 @@
 @endphp
 
 
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Classical Piano Pieces",
         "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
         "price" => $discountedPrice,

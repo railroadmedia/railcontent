@@ -2,7 +2,6 @@ const mix = require('laravel-mix');
 const path = require('path');
 const tailwindcss = require('tailwindcss');
 const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
-const Dotenv = require('dotenv-webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -64,7 +63,6 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
                     "__VUE_OPTIONS_API__": JSON.stringify(true),
                     "__VUE_PROD_HYDRATION_MISMATCH_DETAILS__": JSON.stringify(false)
                 }),
-                new Dotenv()
             ],
             resolve: {
                 alias: {

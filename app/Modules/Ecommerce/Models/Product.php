@@ -112,6 +112,7 @@ class Product extends Model
     public const DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS = 'all content access';
     public const DIGITAL_ACCESS_TYPE_BASIC_CONTENT_ACCESS = 'basic content access';
     public const DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS = 'specific content access';
+    public const DIGITAL_ACCESS_TYPE_CHALLENGE_CONTENT_ACCESS = 'challenge content access';
 
     public const DIGITAL_ACCESS_TIME_TYPE_RECURRING = 'recurring';
     public const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';

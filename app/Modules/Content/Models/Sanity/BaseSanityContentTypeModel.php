@@ -7,7 +7,6 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
-use App\Modules\Content\Models\Sanity\Structure\Validation\Custom\BlockCharacterLengthMax;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Integer;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Max;
 use App\Modules\Content\Models\Sanity\Structure\Validation\Min;
@@ -52,7 +51,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
             $defaultFields[] = new Field(FieldType::Array, 'license', 'License Information', of: $licenseReference, group:$group);
         }
         if ($includeDescription) {
-            $defaultFields[] = new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group, validation: [new BlockCharacterLengthMax(270)]);
+            $defaultFields[] = new Field(FieldType::Array, 'description', 'Description', of: new Block(), group:$group);
         }
         return $defaultFields;
     }

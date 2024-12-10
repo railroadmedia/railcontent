@@ -14,26 +14,29 @@ import { initializeService } from 'musora-content-services';
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const perspective = urlParams.has('sanityPreview') ? 'previewDrafts' : 'published';
+
+if(window.Laravel?.sanityApiToken ?? false) {
 // Configuration object
-const config = {
-    sanityConfig: {
-        token: 'skhignhoJViFp4dhFlyE72d7ShYmU9WdDkqJPqLI5jHi0h3FR6haWUnzGus37cpB6woqh4pkMt7qNzEFyPAzZTjOXTranUUF9YFBYBEHQkZREqydD2wVdCiCx96TRJBKCou6FwrO6lr7cA2qDHsxDJG6aHDAWKrbAxy9Humj92NObVzNOeyQ',
-        projectId:'4032r8py',
-        dataset:'staging',
-        version:'2021-06-07',
-        debug: false,
-        useCachedAPI: !perspective,
-        perspective: perspective
-    },
-    railcontentConfig: {
-        token: window.railcontentConfig?.token,
-        userId:  window.railcontentConfig?.userId,
-    },
-    localStorage: window.localStorage
-};
+    const config = {
+        sanityConfig: {
+            token: window.Laravel.sanityApiToken,
+            projectId: window.Laravel.sanityProjectId,
+            dataset: window.Laravel.sanityDataset,
+            version: '2021-06-07',
+            debug: window.Laravel.mcsDebug,
+            useCachedAPI: !perspective,
+            perspective: perspective
+        },
+        railcontentConfig: {
+            token: window.railcontentConfig?.token,
+            userId: window.railcontentConfig?.userId,
+        },
+        localStorage: window.localStorage
+    };
 
 // Initialize the service with the configuration
-initializeService(config);
+    initializeService(config);
+}
 
 //App Pages
 import Profile from '@pages/Settings/Profile.vue';
@@ -249,9 +252,7 @@ app.component('AppContainer', AppContainer)
     .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
     .component('LeavingContentUpdates', LeavingContentUpdates)
     .component('NewMusoraIcon', NewMusoraIcon)
-
     .component('Challenges', Challenges)
-
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

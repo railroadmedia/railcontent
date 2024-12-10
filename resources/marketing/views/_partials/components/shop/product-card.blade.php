@@ -21,7 +21,15 @@ x-data="{ open: false }">
             @endforeach
         </div>
     @endif
-    <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300" style="padding-bottom: 100%;background-image:url('https://www.musora.com/cdn-cgi/image/width=520,quality=95/{{ $thumbnail }}');">
+    <div class="overflow-hidden rounded-lg relative bg-cover bg-top mb-3 border border-gray-300"
+        style="padding-bottom: 100%;
+        @if(!empty($thumbnailFull))
+            background-image:url('{{ $thumbnailFull }}');
+        @else
+            background-image:url('https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $thumbnail }}');
+        @endif
+        "
+    >
         @if (!empty($badge))
             <p class="absolute top-0 left-0 rounded-br-md bg-musora text-black font-black leading-none uppercase py-1 px-2 w-auto inline-block text-xs"
                 @if($theme === 'drumeo') style="background-color: #0a69c2!important;color:#fff!important;" @endif
@@ -48,7 +56,7 @@ x-data="{ open: false }">
 
         @if(!empty($logo))
             <div class="z-20 absolute bottom-0 left-0 right-0 px-4 py-3 text-center">
-                <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/cdn-cgi/image/width=500,quality=95/{{ $logo }}"
+                <img class="w-auto h-auto" style="max-height:55px;" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $logo }}"
                     alt="{{ $title }} logo" @if(!empty($fetch)) fetchpriority="high" @endif >
             </div>
             <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>

@@ -240,7 +240,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo Headphones",
         "fullPrice" => floatval($productPrices['drumeo-headphones']->price),
         "price" => $discountedPrice,
@@ -265,7 +265,7 @@
                     {{-- <div class="sm:w-5/12 join smaller outline red hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline red sm:hidden inline-block"   @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div> --}}
                     @if( $products['drumeo-headphones']->getStockAvailability() > 1 && !empty($products['drumeo-headphones']->getStockAvailability()))
-                        <a class="w-full md:w-6/12 join drumeo smaller anchor-slide ml-2" href="#customize-anchor">Order Now</a>
+                        <a class="w-full md:w-6/12 join drumeo smaller ml-2" href="/ecommerce/add-to-cart?products[drumeo-headphones]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
@@ -349,8 +349,9 @@
    <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl mb-20">
             <div class="container mx-auto max-w-5xl px-2 sm:px-6 lg:px-0">
-                <h2 class="text-black"><strong>Great Sound. Better Price.</strong></h2>
-                <h6 class="leading-normal md:leading-relaxed mb-20 md:mb-12">With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
+                <h2 class="text-black"><strong>The Best Sound For Your Buck.</strong></h2>
+                <h6 class="leading-normal md:leading-relaxed mb-20 md:mb-12">
+                    With a 45mm driver and wide frequency range, the Drumeo Headphones deliver a richer sound across the <br class="hidden lg:inline">spectrum, so you’ll catch every detail from the deep bass to bright cymbals.</h6>
             </div>
 
             <div class="relative">
@@ -414,8 +415,10 @@
                         <tr style="background-color:transparent!important;">
                             <td class="rounded-b-xl">Price</td>
                             <td class="rounded-b-xl text-white">
-                                <s class="opacity-40">$99</s>
-                                <strong >$79</strong>
+                                @if(floatval($productPrices['drumeo-headphones']->price) > floatval($productPrices['drumeo-headphones']->discounted_price))
+                                    <s class="opacity-50 font-extralight">${{ floatval($productPrices['drumeo-headphones']->price) }}</s>
+                                @endif
+                                <strong>${{ floatval($productPrices['drumeo-headphones']->discounted_price) }}</strong>
                             </td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
                             <td class="rounded-b-xl"><strong>$99</strong></td>
@@ -478,7 +481,7 @@
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The Drumeo<br class="inline sm:hidden"> Guarantee.</strong></h2>
 
-            <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important -- playing the drums.</strong>
+            <h6 class="leading-normal"><strong>You’ll be protected for 2 years. So you can focus on what’s most important – playing the drums.</strong>
 
                 <br><br>
                We’ve designed these headphones with your E-Kit practice in mind, and we’re confident you’ll love them.
@@ -523,25 +526,25 @@
                             '6.3mm stereo adapter',
                         ],
                     ])
-                     @include('drumeo.products.partials._order-card', [
-                        'firstOnMobile' => true,
-                        'highlightBorder' => true,
-                        'badge' => 'LAUNCH SPECIAL',
-                        'header' => 'Headphones + 1 Year<br>Drumeo Membership',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order-bundle.webp',
-                        'imageHeight' => 'h-28 lg:h-32',
-                        'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                        'specialText' => 'With Annual Membership of $240/yr',
-                        'cta' => 'SELECT',
-                        'link' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',
-                        'bonuses' => [
-                            '<strong class="tracking-tight">Everything included with the Headphones PLUS:</strong>',
-                            'Step-by-Step Lessons',
-                            'Personalized Support',
-                            'Song Tutorials',
-                            'World-Class Instructors',
-                        ],
-                    ])
+{{--                     @include('drumeo.products.partials._order-card', [--}}
+{{--                        'firstOnMobile' => true,--}}
+{{--                        'highlightBorder' => true,--}}
+{{--                        'badge' => 'LAUNCH SPECIAL',--}}
+{{--                        'header' => 'Headphones + 1 Year<br>Drumeo Membership',--}}
+{{--                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/headphones/order-bundle.webp',--}}
+{{--                        'imageHeight' => 'h-28 lg:h-32',--}}
+{{--                        'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',--}}
+{{--                        'specialText' => 'With Annual Membership of $240/yr',--}}
+{{--                        'cta' => 'SELECT',--}}
+{{--                        'link' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-headphones]=1&promo-code=headphones-annual&locked=true',--}}
+{{--                        'bonuses' => [--}}
+{{--                            '<strong class="tracking-tight">Everything included with the Headphones PLUS:</strong>',--}}
+{{--                            'Step-by-Step Lessons',--}}
+{{--                            'Personalized Support',--}}
+{{--                            'Song Tutorials',--}}
+{{--                            'World-Class Instructors',--}}
+{{--                        ],--}}
+{{--                    ])--}}
                 </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>

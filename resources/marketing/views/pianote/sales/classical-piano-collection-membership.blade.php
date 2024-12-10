@@ -389,7 +389,7 @@
                     <strong>Step 2</strong>
                 </h5>
                 <p class="py-5 leading-normal">
-                    <strong>Press play and follow along.</strong> It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!
+                    <strong>Press play and follow along.</strong> It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all – fun! Each day you’ll unlock a new lesson. Give it a try!
                 </p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" x-on:click="stepTwo = true;">
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
@@ -585,7 +585,7 @@
             ],
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/classical-piano-collection/metronome-card.jpg',
-                'description' => 'The Pianote Metronome will help you keep perfect time -- every time.',
+                'description' => 'The Pianote Metronome will help you keep perfect time – every time.',
                 'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
                 'shipping' => true,
             ],

@@ -7,6 +7,7 @@ use App\Modules\Content\Models\ChallengeUserProgress;
 use App\Modules\Content\Models\ChallengeUserProgressStatus;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\RailTracker\Services\MediaPlaybackService;
 use App\Services\UserTimezoneService;
 use Carbon\Carbon;
@@ -26,6 +27,7 @@ class ChallengesService
         private SanityGateway $sanityGateway,
         private MediaPlaybackService $mediaPlaybackService,
         private ContentUserProgress $contentUserProgress,
+        private UserAccessPermissionsService $userAccessPermissionsService,
     ) {
     }
 
@@ -176,7 +178,7 @@ class ChallengesService
                 'start_date' => $startDate,
                 'is_locked' => $isLocked,
                 'lessons_meta_data' => $lessonMetaData,
-                'is_active' => true,
+                'is_active' => $isLocked,
                 'is_solo' => $isSolo,
             ]);
         return $challengeUserProgress;
@@ -235,7 +237,7 @@ class ChallengesService
                     break;
                 }
             }
-            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug'];
+            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug', 'instructor'];
             foreach($challengeFieldsToCopyToLesson as $toCopy) {
                 $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy];
             }
@@ -305,8 +307,8 @@ class ChallengesService
                 $isCompleted = $lessonDatum['completed'];
             } else  {
                 $unlockDate = $lesson['published_on'];
-                $isLocked = false;
-                $userId = user()->id;
+                $isLocked = true;
+                $userId = user()?->id ?? $challengeUserProgress->user_id;
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
@@ -521,6 +523,16 @@ class ChallengesService
     }
 
     /**
+     * Get enrollment Page information from Sanity by slug
+     * @param $slug
+     * @return array | null
+     */
+    public function getEnrollmentPageData($slug) : array | null
+    {
+        return $this->sanityGateway->getChallengeEnrollmentPageData($slug);
+    }
+
+    /**
      * Get the sanity Documents for listed challenges
      * @param array $challengeIds
      * @param string $brand
@@ -699,5 +711,17 @@ class ChallengesService
         $progress->save();
         return true;
     }
+
+    public function getOwnedChallenges(): \Illuminate\Support\Collection
+    {
+        $ownedProductIds = $this->userAccessPermissionsService->getOwnedChallengeProductIds();
+        if (count($ownedProductIds) == 0) {
+            return collect();
+        }
+        $challenges = collect($this->sanityGateway->getAllByType('challenge', 10000));
+        $ownedChallenges = $challenges->whereNotNull('product_id')->whereIn('product_id', $ownedProductIds);
+        return $ownedChallenges;
+    }
+
 
 }

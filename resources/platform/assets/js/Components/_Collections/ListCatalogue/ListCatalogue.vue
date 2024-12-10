@@ -50,10 +50,10 @@
         <SkeletonListCatalogueItem v-else v-for="i in 8" :key="i" />
     </div>
 
-    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :challenge="lockedChallenge" @close-modal="closeChallengeLockModal" />
+    <ChallengeLockedModal v-if="isChallengeLockModalOpen" :date="selectedChallengeDate" @close-modal="closeChallengeLockModal" />
 </template>
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { ref } from 'vue';
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "@stores/platform";
 import { useCollectionStore } from "@stores/collection";
@@ -145,10 +145,10 @@ const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
 const { isLoading } = storeToRefs(platformStore);
 
 const isChallengeLockModalOpen = ref(false);
-const lockedChallenge = ref(null);
+const selectedChallengeDate = ref(null);
 
-const openChallengeLockModal = (data) => {
-    lockedChallenge.value = data;
+const openChallengeLockModal = (date) => {
+    selectedChallengeDate.value = date;
     isChallengeLockModalOpen.value = true;
 }
 

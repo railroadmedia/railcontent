@@ -24,7 +24,7 @@ class CustomerIoFormRequest extends FormRequest
         $customEventAttributesRules = $forms[$this->input('form_name')]['custom_event_attributes'] ?? [];
 
         $rules = array_merge([
-            'email' => 'required|email',
+            'email' => 'required|email:strict,dns|not_regex:/[ÄäÜüÖö]/|max:255',
             'form_name' => 'required|in:' . implode(',', $allConfiguredFormNames),
             'g-recaptcha-response' => [Rule::requiredIf(function () {
                 return $this->route()->getName() === 'customer-io.submit-email-form-rc';

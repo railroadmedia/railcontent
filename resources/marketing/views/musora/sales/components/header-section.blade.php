@@ -5,6 +5,11 @@
     style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
     @endif
 >
+    @if(!empty($bfVersion) && ($theme == 'singeo'))
+    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto relative" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/singeo-christmas-logo.svg" alt="logo">
+    @elseif(!empty($bfVersion) && ($theme == 'guitareo'))
+    <img class="h-10 sm:h-12 lg:h-16 mb-3 mx-auto" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/promos/december/guitareo-christmas-logo.svg" alt="logo">
+    @endif
     <div class="container max-w-6xl mx-auto relative z-20">
         @if(!empty($testimonialVersion))
             <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
@@ -23,14 +28,25 @@
         @if(!empty($boldText))
             <h5 class="leading-normal mb-5 lg:mb-7 ">{!!  $boldText  !!}</h5>
         @endif
-        @if(empty($noCheck))
-            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
-                <br class="lg:hidden">
-                <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
-                <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
-            </p>
+
+        @if(!empty($bfVersion) && ($theme == 'singeo' || $theme == 'guitareo'))
+        <h5 class="text-[#F61A30] leading-tight pb-1"><strong>START A FREE ANNUAL TRIAL & <br class="sm:hidden">  SAVE 20% ON YOUR FIRST YEAR.</strong></h5>
+        <h6 class="font-light pb-2 md:pb-4">ONLY <span class="opacity-40"><s>$240</s></span> $200 UNTIL DECEMBER 25.</h6>
+        @else
+            @if(empty($noCheck))
+                <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                    <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
+                    <br class="lg:hidden">
+                    <i class="fas fa-check lg:ml-5 text-{{ $theme }}"></i> {!! $pointThree !!}
+                    <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointFour !!}
+                </p>
+            @endif
+        @endif
+        @if(!empty($promoVersion) && empty($trialVersion))
+            @if(!empty($BFheader))
+                <h6 class="leading-tight py-2 px-3 text-white rounded-lg inline-block mb-5 lg:mb-7 @if($theme == 'drumeo') bg-drumeo @else bg-[#00BC75] @endif"><i class="far fa-badge-percent mr-1"></i> {!! $BFheader !!}</h6>
+            @endif
         @endif
         <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"

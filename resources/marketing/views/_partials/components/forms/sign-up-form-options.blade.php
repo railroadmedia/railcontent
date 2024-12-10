@@ -84,14 +84,14 @@
     @endif
 
     <div class="w-full px-2 sm:px-3 {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12 mt-0' }}">
-        <button class="submit g-recaptcha flex w-full justify-center rounded-full px-3 py-2.5 text-lg uppercase font-bebas leading-none tw-tracking-tight shadow-sm hover:opacity-90 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$theme}} @endif @if(!empty($outline)) outline @endif" type="submit"
+        <button class="submit g-recaptcha flex w-full justify-center rounded-full px-3 py-2.5 uppercase font-bebas leading-none tw-tracking-tight shadow-sm hover:opacity-90 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$theme}} @endif @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'
                 data-action='submit'>
-            <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
-            <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
-            <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
-            <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
+            <span class="pre-add py-1">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
+            <span class="pending py-1 hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
+            <span class="success py-1 hidden">Sent <i class="fad fa-thumbs-up"></i></span>
+            <span class="fail py-1 hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
         </button>
     </div>
 
@@ -121,7 +121,7 @@
         <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
     </div>
 
-    <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl hidden shadow-lg p-6">
+    <div class="thank-you-box w-full rounded-lg mx-auto bg-white bg-opacity-40 text-center text-black max-w-2xl hidden shadow-lg p-6">
         <p><strong><i class="fas fa-check"></i> Success!</strong></p>
         <h2 class="text-{{ $theme }} my-2 font-bebas"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
         <p class="leading-normal text-xs"><em>@if(!empty($body)) {{ $body }} @else You should receive an email from {{ 'team@' . $theme . '.com' }} within 10 minutes.
@@ -142,15 +142,14 @@
                 @endphp
 
                 @if(isset($socialLinks[$theme]))
-                    <a href="https://www.youtube.com/{{ $socialLinks[$theme]['yt'] }}/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://facebook.com/{{ $socialLinks[$theme]['fb'] }}/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/{{ $socialLinks[$theme]['ig'] }}/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/{{ $socialLinks[$theme]['yt'] }}/" target="_blank" class="youtube text-2xl px-1"><i class="fab fa-youtube"></i></a>
+                    <a href="https://facebook.com/{{ $socialLinks[$theme]['fb'] }}/" target="_blank" class="facebook text-2xl px-1"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com/{{ $socialLinks[$theme]['ig'] }}/" target="_blank" class="instagram text-2xl px-1"><i class="fab fa-instagram"></i></a>
                 @endif
             </div>
         @endif
     </div>
 @else
-
     <div class="thank-you-box rounded-full w-full mx-auto text-center bg-white bg-opacity-40 text-{{$theme}} max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
         <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
     </div>

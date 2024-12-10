@@ -32,7 +32,7 @@ class SalesController extends BaseController
 
     public function homeBF()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'bfVersion' => 'true', 'noEverflow' => true]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'bfVersion' => 'true', 'noEverflow' => true]);
     }
     public function homeMonth()
     {
@@ -513,6 +513,62 @@ class SalesController extends BaseController
     public function headphones()
     {
         return view('pianote.products.headphones', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function thirtyDayJazzPiano()
+    {
+        return view('pianote.products.30-day-jazz-piano', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function prima()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function primaLTM()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+            'lifetime' => true,
+        ]);
+    }
+    public function primaUlt()
+    {
+        return view('pianote.products.prima', [
+            'theme' => 'pianote',
+            'ultimate' => true,
+        ]);
+    }
+    public function pianoteDeal()
+    {
+        return view('pianote.products.pianote-deal', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function holidayBundle()
+    {
+        return view('pianote.products.holiday-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function bookBundle()
+    {
+        return view('pianote.products.book-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function giftBundle()
+    {
+        return view('pianote.products.gift-bundle', [
+            'theme' => 'pianote',
+        ]);
+    }
+    public function challengesBundle()
+    {
+        return view('pianote.products.challenges-bundle', [
             'theme' => 'pianote',
         ]);
     }

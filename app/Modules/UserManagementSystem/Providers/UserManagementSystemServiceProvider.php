@@ -84,13 +84,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../views', 'user-management-system');
 
         // model policies
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            if ($modelClass === User::class) {
-                return UserPolicy::class;
-            }
-
-            return null;
-        });
+        Gate::policy(User::class, UserPolicy::class);
     }
 
     /**
@@ -98,6 +92,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        parent::register();
         // Laravel auth integration
         $this->app->register(AuthenticationServiceProvider::class);
     }

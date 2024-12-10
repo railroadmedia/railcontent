@@ -10,6 +10,7 @@ use App\Modules\Content\Policies\ContentPolicy;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Sanity\Client as SanityClient;
 
 class ContentServiceProvider extends ServiceProvider
 {
@@ -44,13 +45,7 @@ class ContentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // model policies
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            if ($modelClass === Content::class) {
-                return ContentPolicy::class;
-            }
-
-            return null;
-        });
+        Gate::policy(Content::class, ContentPolicy::class);
     }
 
     /**
@@ -61,5 +56,19 @@ class ContentServiceProvider extends ServiceProvider
     public function register(): void
     {
         parent::register();
+        $this->app->bind(SanityClient::class, function ($app) {
+            $projectId = config('content.project_id');
+            $dataset = config('content.dataset');
+            $accessToken = config('content.api_token_wr');
+            $apiVersion = '2021-06-07';
+            return new SanityClient([
+                'projectId' => $projectId,
+                'dataset' => $dataset,
+                'apiVersion' => $apiVersion,
+                'token' => $accessToken,
+                'perspective' => 'published',
+                'useCdn' => true,
+            ]);
+        });
     }
 }

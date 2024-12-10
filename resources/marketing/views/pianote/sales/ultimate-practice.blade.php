@@ -303,7 +303,7 @@
 
             <div class="bg-white rounded-xl border border-gray p-4 sm:p-6">
                 <h5 class="uppercase text-pianote"><strong>Step 2</strong></h5>
-                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all -- fun! Each day you’ll unlock a new lesson. Give it a try!</p>
+                <p class="leading-tight my-5"><strong>Press play and follow along.</strong>  It’s that easy. You’ll learn by playing WITH a real teacher. The sessions are short, focused, and most of all – fun! Each day you’ll unlock a new lesson. Give it a try!</p>
                 <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                     x-on:click="stepTwo = true;">
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
@@ -451,7 +451,7 @@
 
             <p class="max-w-2xl mx-auto leading-tight mb-10 sm:mb-12">They say practice makes perfect.
             <br><br>
-            It’s a cliche -- and it’s not entirely true. Because if you’re not practicing the RIGHT things -- the RIGHT way...
+            It’s a cliche – and it’s not entirely true. Because if you’re not practicing the RIGHT things – the RIGHT way...
                 <br><br>
             You could be wasting your time.
                 <br><br>
@@ -590,10 +590,10 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @php
-            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[practice-kit]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true';
-            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true'
-    @endphp
+{{--    @php--}}
+{{--            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[practice-kit]=1&products[pianote-practice-planner]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true';--}}
+{{--            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[read-music-in-30-days]=1&products[new-piano-players-start-here]=1&redirect=/order&promo-code=special&locked=true'--}}
+{{--    @endphp--}}
     <div style="background: linear-gradient(0deg, #FFF, #F4F0EB);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-4xl ">

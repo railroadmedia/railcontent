@@ -11,7 +11,7 @@
                     item.type === 'song' ? 'tw-max-w-[121px]' : '',
                     item.type + '-thumbnail'
             	]"
-            	@click="openUpgradeModal"
+            	@click="openModal"
             >
                 <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]"
                     :class="item.type === 'song' ? 'tw-aspect-square' : 'tw-aspect-video'"
@@ -48,7 +48,7 @@
                     <!-- EVERYTHING ELSE -->
                     <div
                         v-else
-                        class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
+                        class="tw-absolute tw-flex tw-flex-col tw-bg-black/60 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
                         :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased && !noAccess && !isCompleted },]"
                     >
                         <musora-icon v-if="noAccess" class="tw-w-[30px]" icon-name="lock-icon"></musora-icon>
@@ -66,7 +66,7 @@
                     <a
                         :href="isReleased && renderLink  && !forceNoLinks ? itemUrl : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1"
-                        @click="openUpgradeModal"
+                        @click="openModal"
                     >
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
@@ -217,6 +217,8 @@ const props = defineProps({
         default: false
     },
 });
+
+const emit = defineEmits(['addToList', 'progressReset', 'openChallengeLockModal']);
 
 const {
     noAccess,
@@ -382,8 +384,13 @@ const handleAddToList = () => {
     window.openplaylistmodal({ modalType: 'addItem', content: { content_id: id, type, name, description, thumbnail_url: thumbnail } })
 };
 
-const openUpgradeModal = () => {
-    noAccess.value && platformStore.openMembershipUpgradeModal();
+const openModal = () => {
+    if(props.isChallenge && !isReleased.value){
+        emit('openChallengeLockModal', releaseDate.value);
+    }
+    else if(noAccess.value){
+        platformStore.openMembershipUpgradeModal();
+    }
 }
 
 onMounted(() => {
@@ -395,6 +402,4 @@ onUnmounted(() => {
     const contentContainer = document.getElementById(props.scrollContainer);
     contentContainer.removeEventListener('scroll', closeDropdown);
 });
-
-const emit = defineEmits(['addToList', 'progressReset']);
 </script>

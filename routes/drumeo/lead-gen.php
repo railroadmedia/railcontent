@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\LeadGenController;
 
 Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
-    Route::prefix('100-songs')->group(function () {
+    Route::group(['prefix' => '100-songs'], function () {
         Route::get('/{page?}', LeadGenController::class . '@oneHundredSongs')->whereIn('page', [
             null, 'unlocked', 'thank-you', 'ty-annual', 'ty-monthly'
         ]);
     });
-    Route::prefix('kristinas-top-25')->group(function () {
+    Route::group(['prefix' => 'kristinas-top-25'], function () {
         Route::get('/{page?}', LeadGenController::class . '@kristinasTop25')->whereIn('page', [
             null, 'unlocked'
         ]);
@@ -19,13 +19,13 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
     Route::get('/fwtgf', [LeadGenController::class, 'faster']);
-    Route::prefix('faster')->group(function () {
+    Route::group(['prefix' => 'faster'], function () {
         Route::get('/{page?}', LeadGenController::class . '@faster')->whereIn('page', [
             null, 'thank-you', 'ty-annual', 'ty-monthly'
         ]);
     });
     Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
-    Route::prefix('getting-started')->group(function () {
+    Route::group(['prefix' => 'getting-started'], function () {
         Route::get('/{page?}', LeadGenController::class . '@gstd')->whereIn('page', [
             null, 'thank-you', '10-practice', 'ty-annual', 'ty-monthly'
         ]);
@@ -44,7 +44,9 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/rock-drumming-masterclass/testimonials', [LeadGenController::class, 'rockDrumming']);
     Route::get('/subdivision-challenge', [LeadGenController::class, 'subdivision']);
     Route::get('/sucherman-sound', [LeadGenController::class, 'sucherman']);
-    Route::prefix('/ultimate-toolbox')->group(function () {
+    Route::get('/groove-coordination', [LeadGenController::class, 'grooveCoordination']);
+
+    Route::group(['prefix' => '/ultimate-toolbox'], function () {
         Route::get('/{page?}', LeadGenController::class . '@toolbox')->whereIn('page', [
             null, 'catalogue'
         ]);
@@ -55,7 +57,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'mcsa', 'urfd', 'htls', 'dodt',
         ]);
     });
-    Route::prefix('shows')->group(function () {
+    Route::group(['prefix' => 'shows' ], function () {
         Route::get('/{page?}', LeadGenController::class . '@shows')->whereIn('page', [
             'behind-the-scenes', 'in-rhythm', 'sonor', 'study-the-greats'
         ]);
