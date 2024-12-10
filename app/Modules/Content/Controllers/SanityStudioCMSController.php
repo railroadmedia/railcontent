@@ -425,7 +425,7 @@ class SanityStudioCMSController extends BaseController
         return $updatedContents;
     }
 
-    public function getYoutubeDuration(Request $request)
+    public function getYoutubeDuration(Request $request): int
     {
         $brand = $request->get('brand');
         $videoId = $request->get('id');
