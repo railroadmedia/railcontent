@@ -249,9 +249,7 @@ app.component('AppContainer', AppContainer)
     .component('ComingSoonContentUpdates', ComingSoonContentUpdates)
     .component('LeavingContentUpdates', LeavingContentUpdates)
     .component('NewMusoraIcon', NewMusoraIcon)
-
     .component('Challenges', Challenges)
-
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

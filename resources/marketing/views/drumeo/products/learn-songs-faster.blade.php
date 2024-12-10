@@ -47,12 +47,8 @@
                         <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h3>
-            @if(auth()->check())
-                <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
-            @else
                 <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
-            @endif
-            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
+{{--            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>--}}
         </div>
     </header>
 
@@ -74,7 +70,7 @@
             <div class="columns medium-6">
                 <i class="far fa-shield-check text-blue"></i>
                 <h3 class="dense"><strong>100% GUARANTEED</strong></h3>
-                <p><em class="text-blue">Try Risk-Free For 90-Days</em><br>
+                <p><em class="text-blue">Try Risk-Free For 90 Days</em><br>
                     The ability to quickly & accurately learn songs is one of the most valuable skills for drummers — for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
                 </p>
             </div>
@@ -211,12 +207,8 @@
                         <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h2>
-            @if(auth()->check())
-                <a href="{{ get_musora_brand_base_url()}}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
-            @else
                 <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
-            @endif
-            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
+{{--            <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>--}}
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

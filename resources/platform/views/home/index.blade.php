@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    {{-- MERGING NOTES: When merging this with sanity branch, manually merge HomeV2.vue changes into Home.vue component --}}
     <home
         :is-pack-only="false"
         account-url="{{ user()->getDashboardUrl() }}"

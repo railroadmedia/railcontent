@@ -392,7 +392,7 @@
                         <br><br>
                         I didn’t have to memorize countless rules and complex theory…
                         <br><br>
-                        And I could play the songs I wanted to play in MINUTES -- not months.
+                        And I could play the songs I wanted to play in MINUTES – not months.
                         <br><br>
                         It was freedom.
                         <br><br>

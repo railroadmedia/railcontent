@@ -45,7 +45,7 @@
             <h3 class="leading-tight">Start A Free Trial To Continue <strong>30 Days To Better<br class="hidden sm:inline"> Strumming</strong> & Get <strong>Unlimited Access</strong> To Guitareo</h3>
 <p class="leading-normal mt-2 md:mt-4 mb-5 text-left mx-auto w-auto inline-block">
 1. Select your membership type to <strong>start a free trial</strong>.<br>
-2. <strong>Get unlimited access</strong> to all Guitero courses, including 30 Days To Better Strumming<br>
+2. <strong>Get unlimited access</strong> to all Guitareo courses, including 30 Days To Better Strumming<br>
 3. Hit Your Guitar Goals.
 </p>',
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",

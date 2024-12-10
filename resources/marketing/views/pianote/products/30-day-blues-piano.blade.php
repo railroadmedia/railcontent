@@ -224,7 +224,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "30-Day Blues Piano",
         "fullPrice" => floatval($productPrices['30-day-blues-piano']->price),
         "price" => floatval($productPrices['30-day-blues-piano']->discounted_price),

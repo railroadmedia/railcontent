@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/play-beautiful-piano.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -182,7 +182,7 @@
         "cartVersion" => true
     ])
 
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Playing Beautiful Piano",
         "fullPrice" => floatval($productPrices['play-beautiful-piano']->price),
         "price" => floatval($productPrices['play-beautiful-piano']->discounted_price),

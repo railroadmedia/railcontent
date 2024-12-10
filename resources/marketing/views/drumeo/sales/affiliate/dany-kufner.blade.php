@@ -6,5 +6,5 @@
 @section('name', 'Dany Kufner')
 
 @section('text')
-    Check out my recommendations for free to see what Drumeo has to offer during your first 30-days!
+    Check out my recommendations for free to see what Drumeo has to offer during your first 30 days!
 @endsection

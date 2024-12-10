@@ -389,6 +389,8 @@ class OnboardingControllerV1 extends Controller
 
         dispatchWithDelay(new CustomerIoSyncUserByUserId($user, ['primary_brand' => $brand]), 3);
 
+        SyncOnboardingBrands::dispatchAfterResponse($user->id, $brand);
+
         return response("History data for instrument has been saved.", 200);
     }
 

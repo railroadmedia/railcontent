@@ -64,7 +64,7 @@
 
 @section('layout-body')
 
-   @include('_partials.components.shop.promo-banner-3', [
+   @include('_partials.components.shop.promo-banner-2', [
         "noBreadcrumb" => true,
         "name" => "The 5-For-3 Bundle",
         "fullPrice" => 1200,

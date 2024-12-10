@@ -12,7 +12,7 @@
 @section('order-link', '/ecommerce/add-to-cart?products[the-power-of-chords]=1')
 
 @section('topbar')
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "The Power of Chords",
         "fullPrice" => floatval($productPrices['the-power-of-chords']->price),
         "price" => floatval($productPrices['the-power-of-chords']->discounted_price),

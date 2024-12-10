@@ -15,7 +15,7 @@ Route::domain('{drumeoDomain}')
         Route::get('/choose-plan', [SalesController::class, 'choosePlan']);
         Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade']);
         Route::get('/lifetime', [SalesController::class, 'salesLifetime']);
-        //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
+        Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
         Route::get('/restart', [SalesController::class, 'restart']);
@@ -52,8 +52,8 @@ Route::domain('{drumeoDomain}')
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
-        Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
-        Route::get('/back-to-school', [SalesController::class, 'backToSchool']);
+        // Route::get('/practice-anywhere', [SalesController::class, 'practiceAnywhere']);
+        // Route::get('/back-to-school', [SalesController::class, 'backToSchool']);
         Route::get('/guitarcenter', [SalesController::class, 'guitarcenter']);
         Route::get('/GuitarCenter', [SalesController::class, 'guitarcenter']);
         Route::get('/welcome-back-discount', [SalesController::class, 'welcomeBackDiscount']);

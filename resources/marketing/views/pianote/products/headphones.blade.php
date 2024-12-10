@@ -216,17 +216,10 @@
     </style>
 
     @php
-        if(!empty($membersVersion)) {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
-             $discountedPrice = 79;
-        }
-        else {
-             $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
-             $discountedPrice = number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2) == intval(floatval($productPrices['pianote-headphones-2024']->discounted_price))
-                ? floatval($productPrices['pianote-headphones-2024']->discounted_price)
-                : number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2);
-                }
-
+        $orderUrl = '/ecommerce/add-to-cart?products[pianote-headphones-2024]=1';
+        $discountedPrice = number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2) == intval(floatval($productPrices['pianote-headphones-2024']->discounted_price))
+           ? floatval($productPrices['pianote-headphones-2024']->discounted_price)
+           : number_format(floatval($productPrices['pianote-headphones-2024']->discounted_price), 2)
     @endphp
 @stop
 
@@ -241,7 +234,7 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Pianote Headphones",
         "fullPrice" => floatval($productPrices['pianote-headphones-2024']->price),
         "price" => $discountedPrice,
@@ -266,7 +259,7 @@
                     <div class="sm:w-5/12 join smaller outline red hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline red sm:hidden inline-block"   @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     @if( $products['pianote-headphones-2024']->getStockAvailability() > 1 && !empty($products['pianote-headphones-2024']->getStockAvailability()))
-                        <a class="w-5/12 join smaller bg-pianote anchor-slide ml-2" href="#customize-anchor">Order Now</a>
+                        <a class="w-5/12 join smaller bg-pianote ml-2" href="/ecommerce/add-to-cart?products[pianote-headphones-2024]=1">Order Now</a>
                     @else
                         <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
@@ -302,7 +295,7 @@
                 'position' => 'right',
                 'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/headphones/practice-in-privacy.webp',
                 'title' => 'Don’t let anyone hear you practice.',
-                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in -- and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
+                'desc' => 'The <strong>closed-back design </strong>of the Pianote Headphones will keep your sound in – and the outside world out. You can <strong>practice in complete privacy</strong> without disturbing others or having them hear you play the same thing over and over again (which is part of the process).',
             ],
             [
                 'position' => 'left',
@@ -359,7 +352,7 @@
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#FFFFFF;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
             <div class="container mx-auto max-w-3xl px-2">
-                <h2 class="text-black"><strong>Great Sound. Better Price </strong></h2>
+                <h2 class="text-black"><strong>The Best Sound For Your Buck.</strong></h2>
                 <h6 class="leading-normal md:leading-relaxed mb-16 md:mb-12 ">With a 45mm driver and wide frequency range, the Pianote Headphones <br class="hidden md:inline"/>deliver a richer sound across the spectrum, so you’ll catch every detail <br class="hidden md:inline"/> from the deep bass to the crisp trebles.</h6>
             </div>
 
@@ -422,10 +415,10 @@
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-white">
                             @if(floatval($productPrices['pianote-headphones-2024']->price) > $discountedPrice)
-                                {{-- <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s> --}}
+                                 <s class="opacity-40">${{ floatval($productPrices['pianote-headphones-2024']->price) }}</s>
                                 <strong>${{ $discountedPrice }}</strong>
                             @else
-                                <strong>${{floatval($productPrices['pianote-headphones-2024']->price)}}</strong>
+                                <strong>${{$discountedPrice}}</strong>
                             @endif
                         </td>
                         <td class="rounded-b-xl"><strong>$99</strong></td>
@@ -618,25 +611,25 @@
                             '6.3mm stereo adapter',
                         ],
                     ])
-                    @include('drumeo.products.partials._order-card', [
-                       'firstOnMobile' => true,
-                       'highlightBorder' => true,
-                       'badge' => 'LAUNCH SPECIAL',
-                       'header' => 'Headphones + 1 Year<br>Pianote Membership',
-                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',
-                       'imageHeight' => 'h-28 lg:h-32',
-                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',
-                       'specialText' => 'With Annual Membership of $240/yr',
-                       'cta' => 'SELECT',
-                       'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',
-                       'bonuses' => [
-                           '<strong>Everything included with the<br>Headphones PLUS:</strong>',
-                           'Step-by-Step Lessons',
-                           'Personalized Support',
-                           'Song Tutorials',
-                           'World-Class Instructors',
-                       ],
-                   ])
+{{--                    @include('drumeo.products.partials._order-card', [--}}
+{{--                       'firstOnMobile' => true,--}}
+{{--                       'highlightBorder' => true,--}}
+{{--                       'badge' => 'LAUNCH SPECIAL',--}}
+{{--                       'header' => 'Headphones + 1 Year<br>Pianote Membership',--}}
+{{--                       'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/pianote/products/headphones/order-bundle.webp',--}}
+{{--                       'imageHeight' => 'h-28 lg:h-32',--}}
+{{--                       'price' => '<span class="text-2xl md:text-3xl">Free Headphones</span>',--}}
+{{--                       'specialText' => 'With Annual Membership of $240/yr',--}}
+{{--                       'cta' => 'SELECT',--}}
+{{--                       'link' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones-2024]=1&promo-code=headphones-annual&locked=true',--}}
+{{--                       'bonuses' => [--}}
+{{--                           '<strong>Everything included with the<br>Headphones PLUS:</strong>',--}}
+{{--                           'Step-by-Step Lessons',--}}
+{{--                           'Personalized Support',--}}
+{{--                           'Song Tutorials',--}}
+{{--                           'World-Class Instructors',--}}
+{{--                       ],--}}
+{{--                   ])--}}
                 </div>
             @else
                 <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
