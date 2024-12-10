@@ -460,7 +460,7 @@ const fetchLessonData = async () => {
 
         console.log('challenge', dataResult)
 
-        videoData.value = dataResult.status === 'fulfilled' ? dataResult.value.lesson : null;
+        videoData.value = dataResult.status === 'fulfilled' ? { ...dataResult.value.lesson, instructor: dataResult?.value?.lesson?.challenge_instructor } : null;
         likeData.value = likeResult.status === 'fulfilled' ? likeResult.value.data : null;
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         isCompleted.value = dataResult.status === 'fulfilled' && dataResult.value.lesson.completed;
