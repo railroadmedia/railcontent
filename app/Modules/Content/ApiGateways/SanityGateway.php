@@ -51,6 +51,15 @@ class SanityGateway
             'xp',
             '"instructors": instructor[]->name',
             '"instructor_signature": instructor[0]->signature.asset->url',
+            '"instructor": instructor[]->{
+                "id":railcontent_id,
+                name,
+                short_bio,
+                "biography": short_bio[0].children[0].text,
+                web_url_path,
+                "coach_card_image": coach_card_image.asset->url,
+                "coach_profile_image":thumbnail_url.asset->url
+              }',
             '"header_image_url": thumbnail.asset->url',
             '"logo_image_url": logo_image_url.asset->url',
             '"award": award.asset->url',
