@@ -166,7 +166,7 @@ class ChallengesService
         $lessonMetaData = ChallengeUserProgress::defineLessonsMetaData(
             $challenge,
             startDate: $startDate,
-            isLocked: $isLocked
+            isChallengeLocked: $isLocked
         );
         $restDays = ChallengeUserProgress::calculateDefaultRestDays($challenge);
         $challengeUserProgress = ChallengeUserProgress::updateOrCreate([
@@ -212,7 +212,7 @@ class ChallengesService
         $isUserActive = $progressData?->is_active ?? false;
         $challengeLessons = $this->combineUserLessonDataWithSanityLessonData($challengeLessons, $progressData);
         if ($isUserActive) {
-            $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson($challengeLessons, $progressData);
+            $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson($challengeLessons, $progressData);
 
             $userData = $progressData->getCompiledMetadata();
             $userData['challenge_state'] = $this->getChallengeState($challenge, $userData['end_date']);
@@ -230,7 +230,7 @@ class ChallengesService
 
 
         // Assign the formatted lesson to the `lesson` object and add relevant challenge data
-        if ($isLesson) {
+        if ($isLesson) { // This is on the lesson's index page
             foreach ($challengeLessons as $lesson) {
                 if ($lesson['id'] == $contentId) {
                     $lessonDocument = $lesson;
@@ -239,13 +239,17 @@ class ChallengesService
             }
             $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug', 'instructor'];
             foreach($challengeFieldsToCopyToLesson as $toCopy) {
-                $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy];
+                $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy] ?? null;
             }
-            // filter lessons to only show incomplete and future lessons.
+
+            // filter related lessons object to contain show incomplete future curriculum lessons.
             if ($isUserActive) {
                 $temp = [];
                 foreach ($challengeLessons as $lesson) {
-                    if (!$lesson['completed']) {
+                    $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
+                    $isCurrentLesson = $lesson['id'] == $contentId;
+                    $isComplete = $lesson['completed'];
+                    if ($isCurriculumLesson && !$isCurrentLesson && !$isComplete) {
                         $temp[] = $lesson;
                     }
                 }
@@ -277,16 +281,19 @@ class ChallengesService
         ?ChallengeUserProgress $challengeUserProgress,
         bool $removeVideoData = false
     ): array {
-        $day = 0;
+        $curriculumDay = 0;
+        $previousCurriculumLesson = null;
         foreach ($lessons as $index => $lesson) {
             $lessons[$index]['is_first_lesson'] = $index == 0;
-            if (!$lesson['is_always_unlocked_for_challenge']) {
-                $day += 1;
-                $lessons[$index]['index'] = $day;
-                $lessons[$index]['short_name'] = "Day {$day}";
+            $isCurriculumLesson = ChallengeUserProgress::isCurriculumSanityLesson($lesson);
+            $dayRexeg = "/Day\s?#?[\d]*\.?[\d]*/";
+            preg_match($dayRexeg, $lesson['title'], $matches);
+            $lessons[$index]['short_name'] = $matches[0] ?? $lesson['title'];
+            if ($isCurriculumLesson) {
+                $curriculumDay += 1;
+                $lessons[$index]['index'] = $curriculumDay;
             } else {
                 $lessons[$index]['index'] = '';
-                $lessons[$index]['short_name'] = $lesson['title'];
             }
             if ($challengeUserProgress?->is_active ?? false) {
                 $lessonDatum = $challengeUserProgress->getMetaDatumForContent($lesson['id']);
@@ -306,10 +313,8 @@ class ChallengesService
             }
 
             $unlockDate = Carbon::parse($unlockDate)->startOfDay();
-            // TODO TCH-117 - Bonus days redesign
-            //$isPreviousLessonCompleted = $lessons[$index-1]['completed'] ?? true;
 
-            // we must compared based on day without letting Carbon account for timezones
+            // we must compare based on day without letting Carbon account for timezones
             $unlockDateForComparison = Carbon::createFromFormat('Y-m-d', $unlockDate->toDateString())
                 ->startOfDay();
             // comparing 00:00:00 dates does weird things
@@ -318,14 +323,16 @@ class ChallengesService
                 Carbon::today(UserTimezoneService::getUsersCurrentTimezone())->toDateString()
             )->startOfDay()->addSecond();
 
-            $shouldLessonBeLocked = $isLocked &&
-                $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
+            $shouldLessonBeLocked = $isLocked && $unlockDateForComparison->greaterThanOrEqualTo($todayForComparison);
 
             $lessons[$index]['is_locked'] = $shouldLessonBeLocked;
             $lessons[$index]['unlock_date'] = $unlockDate->toISOString();
             $lessons[$index]['completed'] = $isCompleted;
             if ($removeVideoData) {
                 unset($lessons[$index]['video']);
+            }
+            if ($isCurriculumLesson) {
+                $previousCurriculumLesson = $lessons[$index];
             }
         }
 
@@ -368,7 +375,7 @@ class ChallengesService
                         removeVideoData: true
                     );
 
-                    $firstIncompleteLesson = $this->getFirstIncompleteUnlockedLesson(
+                    $firstIncompleteLesson = $this->getFirstIncompleteCirriculumLesson(
                         $challenge['lessons'],
                         $userProgress
                     );
@@ -455,15 +462,16 @@ class ChallengesService
      * @param $progressData
      * @return mixed|null
      */
-    private function getFirstIncompleteUnlockedLesson($challengeLessons, $progressData)
+    private function getFirstIncompleteCirriculumLesson($challengeLessons, $progressData)
     {
         foreach ($challengeLessons as $lesson) {
             foreach ($progressData->lessons_meta_data as $userProgressLesson) {
                 if ($lesson['id'] == $userProgressLesson['content_id']) {
-                    if (!$userProgressLesson['is_always_unlocked'] && !$userProgressLesson['completed']) {
+                    $isCurriculumLesson = ChallengeUserProgress::isCurriculumMetadataLesson($userProgressLesson);
+                    $isCompleted = $userProgressLesson['completed'];
+                    if ($isCurriculumLesson && !$isCompleted) {
                         return $lesson;
                     }
-                    break;
                 }
             }
         }
@@ -477,14 +485,25 @@ class ChallengesService
      */
     private function getPreviousAndNextLesson($lessonId, $allLessons): array
     {
-        $index = array_search($lessonId, Arr::pluck($allLessons, 'id'));
-        $nextLesson = $allLessons[$index + 1] ?? null;
-        $previousLesson = $allLessons[$index - 1] ?? null;
+        $index = array_search($lessonId, Arr::pluck($allLessons, 'id')); // index in the lesson array
+        $nextLesson = null;
+        $previousLesson = null;
+        foreach($allLessons as $testLessonIndex => $testLesson) {
+            if ($testLessonIndex < $index && ChallengeUserProgress::isCurriculumSanityLesson($testLesson)) {
+               $previousLesson = $testLesson;
+            }
+            if($testLessonIndex > $index && ChallengeUserProgress::isCurriculumSanityLesson($testLesson)) {
+                $nextLesson = $testLesson;
+                break;
+            }
+        }
         return [
             'previous_lesson' => $previousLesson,
             'next_lesson' => $nextLesson,
         ];
     }
+
+
 
     /**
      * Get the sanity Document for this challenge
@@ -552,7 +571,8 @@ class ChallengesService
         $lessonData = $this->getCurrentLessonData($lessonId, $userId, isLesson: true, lessonDocument: $lessonDocument,challenge: $challenge);
         $active = true;
         $motivationalText = [];
-        // TODO fix this!
+        // TODO this was removed for system test
+        // users that uncomplete and recomplete a previous lesson shouldn't get a popup modal, and $active is the flag that indicates to FEW/MA to not show
         if (!$userProgress->is_locked ) { //|| !$lessonsProgress['added_to_streak']) {
             $active = false;
         } elseif ($lessonsProgress['is_milestone']) {
