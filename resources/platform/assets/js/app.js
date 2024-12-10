@@ -18,10 +18,10 @@ const perspective = urlParams.has('sanityPreview') ? 'previewDrafts' : 'publishe
 const config = {
     sanityConfig: {
         token: window.Laravel.sanityApiToken,
-        projectId:'4032r8py',
-        dataset:'staging',
+        projectId: window.Laravel.sanityProjectId,
+        dataset: window.Laravel.sanityDataset,
         version:'2021-06-07',
-        debug: false,
+        debug: window.Laravel.mcsDebug,
         useCachedAPI: !perspective,
         perspective: perspective
     },

@@ -73,7 +73,10 @@
 
         <script>
             window.Laravel = {
-                sanityApiToken: @json(config('app.sanity_api_token'))
+                sanityProjectId: @json(config('app.sanity_project_id')),
+                sanityApiToken: @json(config('app.sanity_api_token')),
+                sanityDataset: @json(config('app.sanity_dataset')),
+                mcsDebug: @json(config('app.mcs_debug'))
             };
         </script>
     </head>
