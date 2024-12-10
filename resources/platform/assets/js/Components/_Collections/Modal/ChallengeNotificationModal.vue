@@ -36,9 +36,9 @@
                 <div class="tw-mb-[10px] tw-flex tw-justify-center">
                     <!-- Avatars -->
                     <div v-for="(avatar, index) in challengeData.data" class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center" :class="index !== 0 ? '-tw-ml-3' : ''" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/width=40,quality=95/${avatar.profile_picture_url}')`"></div>
-                    <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('https://www.musora.com/cdn-cgi/image/width=40,quality=95/${userProfilePictureUrl}')`"></div>
+                    <div class="tw-w-10 tw-h-10 tw-border tw-border-white tw-rounded-full tw-overflow-hidden tw-bg-cover tw-bg-center -tw-ml-3 tw-transition-all tw-duration-1000" :class="slideIn ? '' : 'tw-absolute tw-opacity-0 tw-translate-x-10'" :style="`background-image: url('${userProfilePictureUrl}')`"></div>
                 </div>
-                <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled!</p>
+                <p class="tw-text-left">You’ve joined <span class="tw-font-bold">{{ userNames }}</span> and <span class="tw-font-bold">{{ challengeData.total }}</span> other {{ otherText }} who have already enrolled! {{ challengeTitle }} runs from {{ durationText }}</p>
                 <div class="tw-flex tw-justify-end tw-mt-[30px]">
                     <MuButton variant="secondary" is-link :href="`${challenge.web_url_path}`" class="tw-mr-[9px]">View Challenge</MuButton>
                     <MuButton is-link :href="`/${brand}`" >Go Home</MuButton>
@@ -126,6 +126,10 @@ const startDate = computed(() => {
     return `${months[converted.getMonth()]} ${converted.getDate()}`;
 })
 
+const durationText = computed(() => {
+    return props.challenge?.duration_text;
+})
+
 const setStartDateButtonText = computed(() => {
     const today = new Date(Date.now());
     if(today.getDate() === selectedDate.value.getDate() && today.getMonth() === selectedDate.value.getMonth() && today.getFullYear() === selectedDate.value.getFullYear()){
@@ -146,19 +150,14 @@ const handleNext = async () => {
                 const setNotification = await postChallengesCommunityNotification(props.challenge.id);
                 const data = await fetchChallengeMetadata(props.challenge.id);
                 challengeData.value = data;
-                step.value = 2;
 
                 setTimeout(() => {
                     slideIn.value = true;
                 },1500)
             }
-            else {
-                step.value = 2;
-            }
         }
-        else{
-            step.value = 2;
-        }
+
+        step.value = 2;
     } catch (e) {
         window.shownotification({
             icon: 'error',
@@ -180,7 +179,7 @@ const setStartDate = async () => {
          const date = new Date();
          if(setStartDateButtonText.value === 'Start Now'){
              //TODO(challenge): need to update url to the first lesson
-            window.location.href = props.challenge.web_url_path;
+            window.location.href = props.challenge?.next_lesson?.web_url_path;
          }
         else{
             //When the modal is opened from challenge carousel
