@@ -59,7 +59,13 @@ export default function useCatalogueItem(props) {
         return getDate(props.item.published_on);
     });
 
-    const isCompleted = computed(() => props.item.completed || progress_percent.value === 100);
+    const isCompleted = computed(() => {
+        if(props.item.type === 'challenge-part'){
+            return props.item.completed;
+        }
+
+        return progress_percent.value === 100;
+    });
 
     const completedIcon = computed(() => props.item.type === 'course' ? 'fa-trophy' : 'fa-check-circle');
 
