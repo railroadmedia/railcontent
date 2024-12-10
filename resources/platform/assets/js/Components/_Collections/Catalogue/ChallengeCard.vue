@@ -20,7 +20,7 @@
             </div>
             <div class="tw-flex tw-flex-col tw-justify-end tw-items-center tw-absolute tw-left-0 tw-bottom-0 tw-w-full tw-h-full">
                 <!-- Logo -->
-                <img class="tw-mb-5 tw-w-full tw-px-5 tw-max-h-[90px] md:tw-max-h-[120px] lg:tw-max-h-[175px]" :src="item.logo_image_url" />
+                <img class="tw-mb-5 tw-w-full tw-px-5 tw-max-h-[90px] md:tw-max-h-[120px]" :src="item.logo_image_url" />
                 <!-- Date Label -->
                 <div v-if="durationText && isSolo" :class="`tw-bg-${brand} tw-rounded-t-md tw-text-white tw-text-[11px] lg:tw-text-sm tw-uppercase tw-font-bold tw-px-2 tw-pb-0.5 tw-pt-1`">{{ durationText }}</div>
                 <!-- Progress Bar -->
