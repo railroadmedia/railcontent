@@ -27,5 +27,11 @@ Route::prefix('admin')
             [SanityStudioCMSController::class, 'getVimeoEndpoints']
         )
             ->name('admin.vimeo');
+
+        Route::get(
+            '/youtube-duration',
+            [SanityStudioCMSController::class, 'getYoutubeDuration']
+        )
+            ->name('admin.vimeo');
         //
     });
