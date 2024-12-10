@@ -1,5 +1,5 @@
 <template>
-    <button :id="id" :data-testid="id" class="tw-text-[#000C17] dark:tw-text-white hover:tw-text-white tw-h-[80px] xl:tw-h-[110px] tw-flex tw-justify-between tw-items-center tw-flex-1 tw-bg-white dark:tw-bg-[#002039] hover:tw-bg-[#081825] tw-py-[20px] tw-px-[20px] tw-rounded-[10px] xl:tw-max-w-[50%]" @click="emit('onCardClick')">
+    <button :id="id" :data-testid="id" class="tw-border-[1px] tw-border-[#CBCBCD80] dark:tw-border-none tw-text-[#000C17] dark:tw-text-white tw-h-[80px] xl:tw-h-[110px] tw-flex tw-justify-between tw-items-center tw-flex-1 tw-bg-white hover:tw-shadow-[0_4px_4px_0px_rgba(0,0,0,0.1)] tw-py-[20px] tw-px-[20px] tw-rounded-[10px] xl:tw-max-w-[50%] dark:tw-bg-[#0020398C] dark:hover:tw-bg-[#002039]" @click="emit('onCardClick')">
         <div class="tw-flex tw-items-center">
             <slot></slot>
             <div class="tw-pl-[15px] xl:tw-pl-[30px] tw-flex tw-flex-col tw-justify-center">
