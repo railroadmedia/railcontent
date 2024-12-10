@@ -863,8 +863,8 @@ class SanityGateway
         if ($isAdmin) {
             return false;
         }
-        $documentPermissions = $document['permission_id'];
-        if (count($documentPermissions) == 0) {
+        $documentPermissions = $document['permission_id'] ?? null;
+        if (!$documentPermissions || count($documentPermissions) == 0) {
             return false;
         }
 
