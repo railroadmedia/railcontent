@@ -237,7 +237,7 @@ class ChallengesService
                     break;
                 }
             }
-            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug'];
+            $challengeFieldsToCopyToLesson = ['dark_mode_logo_url', 'light_mode_logo_url', 'logo_image_url', 'title', 'slug', 'instructor'];
             foreach($challengeFieldsToCopyToLesson as $toCopy) {
                 $lessonDocument["challenge_$toCopy"] = $challenge[$toCopy];
             }
