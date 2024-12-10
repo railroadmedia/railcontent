@@ -182,8 +182,6 @@ class ChallengeUserProgress extends Model
                     $currentStreak++;
                     $bestStreak = max($bestStreak, $currentStreak);
                 }
-
-                continue;
             }
 
             // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
@@ -422,12 +420,26 @@ class ChallengeUserProgress extends Model
     {
         $remainingRestDays = $challengeUserProgress->current_rest_days;
         $totalShiftDays = 0; // Total days to shift future unlocks (limited by total rest days)
-        $previousUnlockDate = null;
         $userTimezone = UserTimezoneService::getUsersCurrentTimezone();
         $today = Carbon::parse(Carbon::now()->timezone($userTimezone)->startOfDay()->toDateTimeString());
 
         // Extract lessons_meta_data as a separate variable
         $lessonsMetaData = $challengeUserProgress->lessons_meta_data;
+
+        // First, find the lesson with the unlock date that is closest to the current time (in the past),
+        // not on the same day. This is the only lesson that can be marked as a rest day if its not complete or already
+        // used a rest day.
+        $lessonClosestToNowEligibleForRestDay = null;
+
+        foreach ($lessonsMetaData as $index => $lesson) {
+            $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
+
+            if ($unlockDate->lte($today) &&
+                !$unlockDate->isSameDay($today) &&
+                self::isCurriculumMetadataLesson($lesson)) {
+                $lessonClosestToNowEligibleForRestDay = $lesson;
+            }
+        }
 
         foreach ($lessonsMetaData as $index => &$lesson) {
             $unlockDate = Carbon::parse($lesson['unlock_date'])->startOfDay();
@@ -460,8 +472,15 @@ class ChallengeUserProgress extends Model
                 continue;
             }
 
-            // If the lesson is not completed on the unlock date and there are rest days available, use a rest day
-            if (!$lesson['completed'] && !$completedAt?->isSameDay($unlockDate) && $remainingRestDays > 0) {
+            // If the lesson is not completed on the unlock date and there are rest days available, use a rest day.
+            // Only use a rest day if this lesson's unlock date is the nearest to the current time compared to all
+            // other lessons where self::isCurriculumMetadataLesson($lesson) is true.
+            // A rest day cannot be used retroactively beyond the most recently passed lesson.
+            if (!$lesson['completed'] &&
+                !$completedAt?->isSameDay($unlockDate) &&
+                !empty($lessonClosestToNowEligibleForRestDay) &&
+                $lessonClosestToNowEligibleForRestDay['content_id'] === $lesson['content_id'] &&
+                $remainingRestDays > 0) {
                 $remainingRestDays--;
                 $totalShiftDays++;
                 $lesson['rest_day_used'] = true; // Explicitly mark that a rest day was used for this lesson
