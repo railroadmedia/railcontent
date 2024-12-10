@@ -64,6 +64,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
             'unit'
         ],
         'guitareo' => [
+            'song-part',
             'play-along-part',
             'play-along',
         ],
@@ -648,7 +649,7 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
                         'assignment_title'             => $hierarchy->child->title,
                         'assignment_soundslice'        => $hierarchy->child->soundslice_slug,
                         'assignment_description'       => $hierarchy->child->data->where('key', '=', 'description')->first()['value'] ?? '',
-                        'assignment_timecode'          => $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? '',
+                        'assignment_timecode'          => $hierarchy->child->data->where('key', '=', 'timecode')->first()['value'] ?? null,
                         'assignment_sheet_music_image' => $assignmentSheetMusicImage,
                         'railcontent_id'               => $hierarchy->child->id,
                     ];
@@ -840,6 +841,12 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         ];
         if ($type == 'song') {
             $sanityDocuments['instrumentless'] = $result->instrumentless == 1;
+        }
+        if($result->quarter_removed){
+            $sanityDocuments['quarter_removed'] = $result->quarter_removed;
+        }
+        if($result->quarter_published){
+            $sanityDocuments['quarter_published'] = $result->quarter_published;
         }
         if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->toISOString();

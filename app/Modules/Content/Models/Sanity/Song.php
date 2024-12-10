@@ -63,6 +63,8 @@ class Song extends BaseSanityContentTypeModel
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group:$detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group:$detailsGroup), //web_url_path
+            new Field(FieldType::Date, 'quarter_removed', initialValue:null, group: $detailsGroup),
+            new Field(FieldType::Date, 'quarter_published', initialValue:null, group: $detailsGroup),
         ];
         $fields = array_merge($defaultFields, $fields);
         parent::__construct(self::getName(), 'Song', fields: $fields, groups: $groups, preview: $this->getDefaultPreview());
