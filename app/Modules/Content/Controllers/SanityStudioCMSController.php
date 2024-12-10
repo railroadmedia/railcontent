@@ -454,7 +454,10 @@ class SanityStudioCMSController extends BaseController
         return $this->covtime($duration);
     }
 
-    function covtime($youtube_time)
+    /**
+     * @throws \Exception
+     */
+    private function covtime(string $youtube_time): int
     {
         $interval = new \DateInterval($youtube_time);
 
