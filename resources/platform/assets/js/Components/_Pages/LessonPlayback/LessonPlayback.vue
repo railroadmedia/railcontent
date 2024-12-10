@@ -465,7 +465,7 @@ const fetchLessonData = async () => {
         isLiked.value = likedResult.status === 'fulfilled' ? likedResult.value : false;
         isCompleted.value = dataResult.status === 'fulfilled' && dataResult.value.lesson.completed;
         nextPreviousLessons.value = dataResult.status === 'fulfilled' ? {
-            nextLesson: new Date(dataResult.value.next_lesson.unlock_date.slice(0, 19)) <= new Date() ? dataResult.value.next_lesson : null,
+            nextLesson: dataResult.value.next_lesson,
             prevLesson: dataResult.value.previous_lesson,
         } : null;
 
