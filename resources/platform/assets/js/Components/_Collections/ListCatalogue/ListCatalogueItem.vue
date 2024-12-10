@@ -249,7 +249,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { usePlatformStore } from "../../../Stores/platform";
 import { useUserStore } from "@stores/user";
@@ -452,9 +452,5 @@ const handleReset = () => {
 const openUpgradeModal = () => {
     noAccess.value && platformStore.openMembershipUpgradeModal();
 }
-
-onBeforeMount( ()=> {
-    console.log('props.item', props.item);
-})
 </script>
 
