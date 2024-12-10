@@ -233,7 +233,6 @@ const challengeThumbnail = computed(() => {
     if(!hasChallengeStarted.value && isNextLessonLocked.value){
         return props.challenge.thumbnail
     } else {
-        //TODO(challenge): need to add conditional when current lesson is not completed
         return props.challenge.next_lesson.thumbnail;
     }
 })
