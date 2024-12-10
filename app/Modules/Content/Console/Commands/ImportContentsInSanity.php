@@ -851,18 +851,26 @@ class ImportContentsInSanity extends \Illuminate\Console\Command
         if ($result->published_on) {
             $sanityDocuments['published_on'] = Carbon::parse($result->published_on)->toISOString();
         }
-        if (!$result->web_url_path) {
-            $contentURLs =
-                $railcontentURLProvider->getContentURLs(
-                    $result->id,
-                    $result->slug,
-                    $result->type,
-                    new ContentEntity($result->toArray())
-                );
+        if($result->type == 'coach-stream'){
 
-            if (!empty($contentURLs)) {
-                $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
+            $instructorField = $result->fields->where('key','=','instructor')->first();
+            if($instructorField) {
+                $instructorId                    = $instructorField->value;
+                $instructor                      = Content::find($instructorId);
+                $sanityDocuments['web_url_path'] = '/'.$result->brand . '/coaches/' . $instructor->slug . '/' . $result->slug . '/' . $result->id;
             }
+        }elseif (!$result->web_url_path) {
+                $contentURLs =
+                    $railcontentURLProvider->getContentURLs(
+                        $result->id,
+                        $result->slug,
+                        $result->type,
+                        new ContentEntity($result->toArray())
+                    );
+
+                if (!empty($contentURLs)) {
+                    $sanityDocuments['web_url_path'] = $contentURLs->getWebURLPath();
+                }
         }
         if ($result->sort != 0) {
             $sanityDocuments['sort'] = $result->sort;
