@@ -98,7 +98,7 @@ onBeforeMount(() => {
 
         if (challengeCarousels) {
             carousels.value = challengeCarousels.filter((carousel) => {
-                return !carousel.show_everywhere;
+                return carousel.show_everywhere;
             });
         }
 
