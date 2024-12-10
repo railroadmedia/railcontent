@@ -186,8 +186,11 @@ class ChallengeUserProgress extends Model
                 continue;
             }
 
-            // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed
-            if (!$lesson['completed'] && !$today->isSameDay($unlockDate)) {
+            // If the lesson is not completed and is a past lesson, and did not use a rest day, consider it missed.
+            // If the lesson was completed, but it was at a later day than the unlock date, it should break the streak,
+            // but it should not count as a missed day.
+            if ((!$lesson['completed'] && !$today->isSameDay($unlockDate)) ||
+                (!empty($lesson['completed']) && !$completedAt->isSameDay($unlockDate))) {
                 $currentStreak = 0; // Reset streak if the lesson was missed
             }
 
@@ -443,6 +446,7 @@ class ChallengeUserProgress extends Model
             // If the lesson has already used a rest day, skip it (do not reapply rest day logic)
             if ($lesson['rest_day_used']) {
                 $remainingRestDays--;
+                $totalShiftDays++;
                 continue;
             }
 
