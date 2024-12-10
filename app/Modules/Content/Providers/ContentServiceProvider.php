@@ -45,13 +45,7 @@ class ContentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // model policies
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            if ($modelClass === Content::class) {
-                return ContentPolicy::class;
-            }
-
-            return null;
-        });
+        Gate::policy(Content::class, ContentPolicy::class);
     }
 
     /**
