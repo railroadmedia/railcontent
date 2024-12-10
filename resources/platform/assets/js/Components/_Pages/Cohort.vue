@@ -479,7 +479,7 @@ const handleGoBack = () => {
 }
 
 const sendPostMessage = () => {
-    window.ReactNativeWebView.postMessage(props.cohort);
+    window.ReactNativeWebView.postMessage(JSON.stringify(props.cohort));
 }
 
 const handleGetNotified = async () => {
