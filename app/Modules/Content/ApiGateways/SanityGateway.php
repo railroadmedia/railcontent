@@ -359,18 +359,23 @@ class SanityGateway
     public function getChallengesWithOpenEnrollment(string $brand): array
     {
         $challengeFields = $this->getFieldsString('challenge');
+        $publishedOnString = $this->getPublishedFilter(false);
         $query = "*[_type == 'challenge'
             && enrollment_start_time <= now()
             && enrollment_end_time >= now()
             && brand == '$brand'
-            ]{
+            $publishedOnString]{
             $challengeFields,
         }";
         $results = $this->sanity->fetch($query);
+        $filtered = [];
         foreach ($results as $document) {
             $this->postProcessDocument($document);
+            if(!$document['need_access']){ //filter out open enrollment challenges if they don't have access
+                $filtered[] = $document;
+            }
         }
-        return $results;
+        return $filtered;
     }
 
     public function getAssignmentsByRailcontentIds(
