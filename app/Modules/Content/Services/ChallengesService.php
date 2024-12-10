@@ -301,7 +301,7 @@ class ChallengesService
             } else  {
                 $unlockDate = $lesson['published_on'];
                 $isLocked = true;
-                $userId = user()->id;
+                $userId = user()?->id ?? $challengeUserProgress->user_id;
                 $isCompleted = $this->contentUserProgress::isCompletedByUser($lesson['id'], $userId);
             }
 
