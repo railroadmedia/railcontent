@@ -51,7 +51,7 @@ class ContentUpdatePopularity extends Command
                 if ($id) {
                     if ($existingIds[$contentId]['popularity'] != $popularity) {
                         $patches[$id] = [
-                            'popularity' => $popularity,
+                            'popularity' => (int) $popularity,
                         ];
                     }
                     $artistId = $existingIds[$contentId]['artistId'];
