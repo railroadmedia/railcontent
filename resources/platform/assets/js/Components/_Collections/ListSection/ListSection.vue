@@ -16,8 +16,9 @@
                     </div>
                 </div>
             </div>
-            <PlaylistCollectionCatalog :mini-catalog="true"
-                :playlist-count="usersList.length" :playlists="data" trackingSection="playlists" :mini-view-page="page" :mini-view-card-num="cardNum" />
+            <PlaylistCollectionCatalog
+                :mini-catalog="true" :playlist-count="usersList.length" :playlists="data" trackingSection="playlists" :mini-view-page="page" :mini-view-card-num="cardNum"
+            />
 
         </div>
     </section>
