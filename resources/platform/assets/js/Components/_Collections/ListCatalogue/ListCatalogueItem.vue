@@ -12,7 +12,7 @@
         "
        :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
        :href="renderLink && isReleased ? item.web_url_path : null"
-       @click="openUpgradeModal"
+       @click="openModal"
     >
         <!-- THUMBNAIL COLUMN -->
         <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
@@ -342,6 +342,8 @@ const props = defineProps({
     },
 })
 
+const emit = defineEmits(['openChallengeLockModal'])
+
 const userStore = useUserStore();
 const platformStore = usePlatformStore();
 const { isAdmin, brand } = storeToRefs(userStore);
@@ -445,12 +447,21 @@ const thumbnailColumnClass = computed(() => {
     };
 })
 
+const isChallenge = computed(() => {
+    return props.item.type === "challenge-part";
+})
+
 const handleReset = () => {
     resetProgress(props.item.id, resetIcon, true);
 }
 
-const openUpgradeModal = () => {
-    noAccess.value && platformStore.openMembershipUpgradeModal();
+const openModal = () => {
+    if(isChallenge.value && !isReleased.value){
+        emit('openChallengeLockModal', releaseDate.value);
+    }
+    else if(noAccess.value){
+        platformStore.openMembershipUpgradeModal();
+    }
 }
 </script>
 

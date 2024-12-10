@@ -1,7 +1,7 @@
 <template>
     <InfoModal
         :selfContained="true"
-        :title="`This lesson will be unlocked on ${unlockedDate}`"
+        :title="`This lesson will be unlocked on ${date}`"
         class-override="tw-max-w-[593px] tw-w-full dark:tw-text-white"
         @onClose="() => $emit('closeModal')"
     >
@@ -17,29 +17,9 @@ import MuButton from '@units/Button/MuButton';
 import {computed} from "vue";
 
 const props = defineProps({
-    challenge: {
-        type: Object,
-        required: true,
+    date: {
+        type: String,
+        default: '',
     },
 });
-
-const unlockedDate = computed(() => {
-    const date = new Date(props.challenge.unlock_date);
-    return `${Months[date.getMonth()]} ${date.getDate()}`;
-})
-
-const Months = {
-    0: 'January',
-    1: 'February',
-    2: 'March',
-    3: 'April',
-    4: 'May',
-    5: 'June',
-    6: 'July',
-    7: 'August',
-    8: 'September',
-    9: 'October',
-    10: 'November',
-    11: 'December',
-};
 </script>
